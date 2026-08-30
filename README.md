@@ -40,7 +40,7 @@ su confianza y su probabilidad, sale por otro camino y con firma.
 colectores/     los programas que traen los datos
   comun.py      funciones compartidas y control de calificación
   geo.py        atribución de una coordenada al padrón de los 33
-  sismos.py     USGS — sismicidad, dentro de desastres naturales
+  focos.py      NASA FIRMS — focos de calor, economías ilícitas
 datos/
   publico/      lo que ve cualquier visitante
     estado/     cómo terminó la última corrida de cada colector
@@ -54,16 +54,15 @@ pestaña **Actions** del repositorio, con el botón *Run workflow*.
 En una máquina con Python 3.12, sin instalar nada:
 
 ```bash
-python colectores/sismos.py
+python colectores/focos.py
 ```
 
 ## Fuentes en uso
 
 | Eje | Materia | Fuente | Clave | Estado |
 |---|---|---|---|---|
-| Seguridad | Desastres naturales | USGS, servicio FDSN | No | `A-2` en servicio |
 | Seguridad | Violencia organizada | ACLED | Sí | Pendiente |
-| Seguridad | Economías ilícitas | NASA FIRMS | Sí | Pendiente |
+| Seguridad | Economías ilícitas | NASA FIRMS | Sí | `A-2` en servicio |
 | Gobernanza | Contratación pública | Portales OCDS | No | Pendiente |
 | Gobernanza | Sanciones e integridad | OpenSanctions, OFAC | No | Pendiente |
 | Gobernanza | Estabilidad institucional | Calendarios oficiales, V-Dem | No | Pendiente |

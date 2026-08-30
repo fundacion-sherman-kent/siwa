@@ -28,11 +28,6 @@ jobs:
 
       # --- Eje seguridad ---
 
-      - name: Desastres naturales - sismicidad (USGS)
-        id: sismos
-        continue-on-error: true
-        run: python colectores/sismos.py
-
       # Solo corre si la clave está cargada. Sin clave no se ejecuta y se deja
       # constancia en el registro de la corrida, en vez de fallar cada hora.
       - name: Economias ilicitas - focos de calor (NASA FIRMS)
@@ -61,6 +56,5 @@ jobs:
         if: always()
         run: |
           fallo=0
-          [ "${{ steps.sismos.outcome }}" = "failure" ] && { echo "Falló el colector de sismicidad."; fallo=1; }
           [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
           exit $fallo

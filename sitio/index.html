@@ -158,11 +158,8 @@
   .leaflet-tooltip.ficha b{color:#fff;font-size:12.5px;display:block;margin-bottom:4px;}
   .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
   .mapa-barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;}
-  .temas{display:flex;gap:6px;flex-wrap:wrap;}
-  .tema{background:transparent;border:1px solid var(--line);color:#9fb2c8;
-    font-family:'Inter',sans-serif;font-size:11px;font-weight:600;padding:6px 12px;
-    border-radius:20px;cursor:pointer;}
-  .tema.activo{border-color:var(--orange);color:#fff;background:rgba(251,101,0,.16);}
+  .capa-activa{font-size:11px;color:#9fb2c8;}
+  .capa-activa b{color:#fff;}
   .seleccion{font-size:11.5px;color:#C7D2E0;}
   .seleccion button{
     background:none;border:none;color:var(--orange);cursor:pointer;font-size:11.5px;
@@ -230,7 +227,6 @@
   <nav class="rail">
     <a href="#mapa-seccion">Mapa de situación</a>
     <div class="grupo">Seguridad</div>
-    <a href="#desastres">Desastres naturales</a>
     <a href="#violencia">Violencia organizada</a>
     <a href="#ilicitas">Economías ilícitas</a>
     <div class="grupo">Gobernanza</div>
@@ -249,10 +245,7 @@
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <div class="mapa-barra">
-        <div class="temas">
-          <button class="tema activo" data-capa="sismos">Desastres naturales</button>
-          <button class="tema" data-capa="focos">Economías ilícitas</button>
-        </div>
+        <div class="capa-activa">Capa activa: <b>Economías ilícitas — focos de calor</b></div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
       <div class="mapa-caja">
@@ -271,16 +264,8 @@
     <div class="eje">
       <h2>Eje · Seguridad</h2>
       <p>Violencia, control territorial y capacidad del Estado para sostener el orden
-         público. Incluye el desastre natural, que no entra como fenómeno físico sino por
-         su efecto: desplaza población, ocupa a las fuerzas y abre vacíos de autoridad.</p>
+         público: quién ejerce el poder efectivo sobre un territorio y con qué medios.</p>
     </div>
-
-    <section class="domain" id="desastres">
-      <div class="domain-head"><h3>Desastres naturales</h3><span class="tag" id="tag-desastres">—</span></div>
-      <div class="procedencia" id="proc-desastres">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-desastres"></div>
-      <div id="vac-desastres"></div>
-    </section>
 
     <section class="domain" id="violencia">
       <div class="domain-head"><h3>Violencia organizada y conflicto</h3><span class="tag">Colector pendiente</span></div>
@@ -511,36 +496,12 @@
 
   // ---- Las capas del mapa ----------------------------------------------
   // Cada capa declara cómo se cuenta por país, qué puntos dibuja y qué dice
-  // al pasar el cursor. El mapa no sabe nada de sismos ni de focos.
+  // al pasar el cursor. El mapa no conoce la materia que dibuja.
   const almacen = {};
-  let capaActiva = 'sismos';
+  let capaActiva = 'focos';
   let paisFiltro = null, paisNombre = null;
 
   const CAPAS = {
-    sismos: {
-      etiqueta: 'Desastres naturales — sismicidad',
-      unidad: 'eventos',
-      cortes: [1, 3, 6],
-      conteo(){
-        const m = {};
-        (almacen.sismos?.registros || []).forEach(e => { if(e.iso) m[e.iso] = (m[e.iso]||0)+1; });
-        return m;
-      },
-      puntos(){
-        return (almacen.sismos?.registros || []).filter(e => e.latitud != null).map(e => ({
-          lat: e.latitud, lon: e.longitud,
-          radio: Math.max(3, (Number(e.magnitud) - 3) * 2.6),
-          ficha: `<b>M${Number(e.magnitud).toFixed(1)} · ${e.lugar || 'sin lugar'}</b>` +
-                 `${momento(e.momento)}<br>Profundidad ${e.profundidad_km} km · USGS` +
-                 (e.pais ? '' : `<span class="nota">Fuera del territorio de los 33 Estados del padrón.</span>`)
-        }));
-      },
-      ficha(iso, nombre, bloque, n){
-        return `<b>${nombre}</b>${bloque}<br>${miles(n)} evento${n===1?'':'s'} sísmico${n===1?'':'s'} M4+ en 7 días · USGS`
-             + `<span class="nota">País obtenido de la coordenada. La fuente no publica desglose por país ni por provincia.</span>`;
-      },
-      leyenda: ['Sin eventos', '1 a 2', '3 a 5', '6 o más', 'Evento con coordenada propia']
-    },
     focos: {
       etiqueta: 'Economías ilícitas — focos de calor',
       unidad: 'focos',
@@ -572,27 +533,6 @@
   };
 
   // ---- Tarjetas ---------------------------------------------------------
-  function tarjetasDesastres(){
-    const d = almacen.sismos; if(!d) return;
-    const meta = d.procedencia;
-    const lista = paisFiltro ? d.registros.filter(e => e.iso === paisFiltro) : d.registros;
-    const eventos = lista.slice().sort((a,b) => b.magnitud - a.magnitud).slice(0,6);
-    document.getElementById('tag-desastres').textContent = paisFiltro
-      ? lista.length + (lista.length === 1 ? ' evento en ' : ' eventos en ') + paisNombre
-      : meta.cantidad + ' eventos en el período';
-    document.getElementById('tarj-desastres').innerHTML = eventos.length
-      ? eventos.map(e => `<div class="card">
-          <h4>${e.lugar || 'Ubicación no consignada'}</h4>
-          <div class="value">M${Number(e.magnitud).toFixed(1)}</div>
-          <div class="sub">${momento(e.momento)} · profundidad ${e.profundidad_km} km · ${e.pais || 'fuera del padrón'}</div>
-          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
-            <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
-        </div>`).join('')
-      : `<div class="card"><h4>Sin eventos en el período</h4><div class="sub">${
-          paisFiltro ? 'La fuente no registró eventos sobre el umbral en ' + paisNombre + '.'
-                     : 'La fuente respondió y no registró eventos sobre el umbral.'} No es una falla.</div></div>`;
-  }
-
   function tarjetasIlicitas(){
     const d = almacen.focos; if(!d) return;
     const meta = d.procedencia;
@@ -658,9 +598,8 @@
       : 'Sin país seleccionado — hacé clic en el mapa para filtrar';
     const q = document.getElementById('quitar');
     if(q) q.addEventListener('click', () => { paisFiltro = null; paisNombre = null; repintar(); });
-    document.querySelectorAll('.tema').forEach(b => b.classList.toggle('activo', b.dataset.capa === capaActiva));
-    leyenda();
-    tarjetasDesastres(); tarjetasIlicitas();
+      leyenda();
+    tarjetasIlicitas();
   }
 
   function seleccionar(iso, nombre){
@@ -694,23 +633,6 @@
         `<div class="falla" style="margin:16px"><h4>No se pudo cargar el mapa</h4>
          <p>${err.message}. No se muestra un mapa de reemplazo.</p></div>`;
     });
-
-  document.querySelectorAll('.tema').forEach(b =>
-    b.addEventListener('click', () => { capaActiva = b.dataset.capa; repintar(); }));
-
-  // ---- Desastres naturales ----
-  Promise.all([traer('sismos.json'), traer('estado/sismos.json').catch(()=>null)])
-    .then(([d, estado]) => {
-      almacen.sismos = d;
-      const meta = d.procedencia;
-      pintarProcedencia('proc-desastres', meta);
-      registros += meta.cantidad; dominios++;
-      vacios += pintarVacios('vac-desastres', meta.vacios_declarados);
-      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-desastres','sismicidad',estado.mensaje,meta); }
-      repintar(); marcador();
-    })
-    .catch(err => { fallas++; pintarFalla('tarj-desastres','sismicidad',err.message,null);
-      document.getElementById('proc-desastres').textContent = 'Sin registro disponible.'; marcador(); });
 
   // ---- Economías ilícitas ----
   Promise.all([traer('focos.json'), traer('estado/focos.json').catch(()=>null)])
