@@ -18,32 +18,33 @@ URL_ULTIMO = "https://api.frankfurter.app/latest?from=USD"
 
 # Monedas de curso legal en los 33 Estados del padrón (fuentes/paises.md).
 MONEDAS_PADRON = {
-    "ARS": "Argentina",
-    "BOB": "Bolivia",
-    "BRL": "Brasil",
-    "BSD": "Bahamas",
-    "BBD": "Barbados",
-    "BZD": "Belice",
-    "CLP": "Chile",
-    "COP": "Colombia",
-    "CRC": "Costa Rica",
-    "CUP": "Cuba",
-    "DOP": "República Dominicana",
-    "GTQ": "Guatemala",
-    "GYD": "Guyana",
-    "HTG": "Haití",
-    "HNL": "Honduras",
-    "JMD": "Jamaica",
-    "MXN": "México",
-    "NIO": "Nicaragua",
-    "PAB": "Panamá",
-    "PEN": "Perú",
-    "PYG": "Paraguay",
-    "SRD": "Surinam",
-    "TTD": "Trinidad y Tobago",
-    "UYU": "Uruguay",
-    "VES": "Venezuela",
-    "XCD": "Caribe oriental (unión monetaria)",
+    "ARS": ("Argentina", ["ARG"]),
+    "BOB": ("Bolivia", ["BOL"]),
+    "BRL": ("Brasil", ["BRA"]),
+    "BSD": ("Bahamas", ["BHS"]),
+    "BBD": ("Barbados", ["BRB"]),
+    "BZD": ("Belice", ["BLZ"]),
+    "CLP": ("Chile", ["CHL"]),
+    "COP": ("Colombia", ["COL"]),
+    "CRC": ("Costa Rica", ["CRI"]),
+    "CUP": ("Cuba", ["CUB"]),
+    "DOP": ("República Dominicana", ["DOM"]),
+    "GTQ": ("Guatemala", ["GTM"]),
+    "GYD": ("Guyana", ["GUY"]),
+    "HTG": ("Haití", ["HTI"]),
+    "HNL": ("Honduras", ["HND"]),
+    "JMD": ("Jamaica", ["JAM"]),
+    "MXN": ("México", ["MEX"]),
+    "NIO": ("Nicaragua", ["NIC"]),
+    "PAB": ("Panamá", ["PAN"]),
+    "PEN": ("Perú", ["PER"]),
+    "PYG": ("Paraguay", ["PRY"]),
+    "SRD": ("Surinam", ["SUR"]),
+    "TTD": ("Trinidad y Tobago", ["TTO"]),
+    "UYU": ("Uruguay", ["URY"]),
+    "VES": ("Venezuela", ["VEN"]),
+    # Unión monetaria del Caribe oriental: una moneda, seis Estados del padrón.
+    "XCD": ("Caribe oriental", ["ATG", "DMA", "GRD", "KNA", "VCT", "LCA"]),
 }
 
 
@@ -61,13 +62,14 @@ def recolectar():
     fecha_referencia = ultimo.get("date")
 
     registros = []
-    for codigo, pais in sorted(MONEDAS_PADRON.items()):
+    for codigo, (ambito, isos) in sorted(MONEDAS_PADRON.items()):
         if codigo in tasas:
             registros.append(
                 {
                     "moneda": codigo,
                     "nombre": catalogo.get(codigo),
-                    "ambito": pais,
+                    "ambito": ambito,
+                    "isos": isos,
                     "unidades_por_dolar": tasas[codigo],
                     "fecha_referencia": fecha_referencia,
                 }

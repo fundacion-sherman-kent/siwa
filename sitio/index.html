@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/leaflet.css">
 <style>
   /* Paleta oficial FUSK — manual de identidad.
      Los valores son los rótulos hexadecimales del manual; donde el manual
@@ -139,6 +140,44 @@
   .panel h4{margin:0 0 12px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#fff;}
   .panel .nota{font-size:11.5px;color:#9fb2c8;line-height:1.6;margin:12px 0 0;}
 
+  /* ---- Mapa de situación ---- */
+  .mapa-caja{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  #mapa{height:520px;background:var(--navy-black);}
+  @media (max-width:820px){#mapa{height:380px;}}
+  .leaflet-container{background:var(--navy-black);font-family:'Inter',sans-serif;outline:none;}
+  .leaflet-control-attribution{background:rgba(0,18,30,.75)!important;color:#7d90a8!important;font-size:9.5px!important;}
+  .leaflet-control-attribution a{color:#9fb2c8!important;}
+  .leaflet-tooltip.ficha{
+    background:#0E2135;border:1px solid var(--line);color:var(--paper);
+    box-shadow:0 6px 24px rgba(0,0,0,.5);border-radius:8px;padding:10px 12px;font-size:11.5px;line-height:1.55;
+  }
+  .leaflet-tooltip.ficha::before{display:none;}
+  .leaflet-tooltip.ficha b{color:#fff;font-size:12.5px;display:block;margin-bottom:4px;}
+  .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
+  .mapa-barra{
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .temas{display:flex;gap:6px;flex-wrap:wrap;}
+  .tema{
+    background:transparent;border:1px solid var(--line);color:#9fb2c8;font-family:'Inter',sans-serif;
+    font-size:11px;font-weight:600;padding:6px 12px;border-radius:20px;cursor:pointer;
+  }
+  .tema.activo{border-color:var(--orange);color:#fff;background:rgba(251,101,0,.16);}
+  .seleccion{font-size:11.5px;color:#C7D2E0;}
+  .seleccion button{
+    background:none;border:none;color:var(--orange);cursor:pointer;font-size:11.5px;
+    font-family:'Inter',sans-serif;text-decoration:underline;padding:0 0 0 8px;
+  }
+  .leyenda{
+    display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;
+    padding:10px 14px;border-top:1px solid var(--line);background:rgba(0,18,30,.6);
+    font-size:10.5px;color:#9fb2c8;
+  }
+  .leyenda i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px;}
+  .leyenda .punto{border-radius:50%;background:var(--orange);}
+  .mapa-pie{margin-top:10px;font-size:11px;color:#7d90a8;line-height:1.6;}
+
   footer{max-width:1180px;margin:0 auto;padding:24px 28px 60px;border-top:1px solid var(--line);color:#7d90a8;font-size:11px;line-height:1.7;}
   footer strong{color:#C7D2E0;}
 </style>
@@ -177,6 +216,7 @@
 
 <div class="shell">
   <nav class="rail">
+    <a href="#mapa-seccion">Mapa</a>
     <a href="#sismos">Riesgo natural</a>
     <a href="#economia">Economía y cambio</a>
     <a href="#seguridad">Crimen organizado</a>
@@ -186,6 +226,28 @@
   </nav>
 
   <main>
+
+    <section class="domain" id="mapa-seccion">
+      <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
+      <div class="mapa-barra">
+        <div class="temas">
+          <button class="tema activo" data-tema="sismos">Sismicidad</button>
+          <button class="tema" data-tema="fx">Tipo de cambio</button>
+        </div>
+        <div class="seleccion" id="seleccion">Sin país seleccionado</div>
+      </div>
+      <div class="mapa-caja">
+        <div id="mapa"></div>
+        <div class="leyenda" id="leyenda"></div>
+      </div>
+      <p class="mapa-pie">
+        Límites de Natural Earth, escala 1:50 m, guardados en este repositorio.
+        <b>El color de un país expresa un dato nacional</b>: ninguna de las fuentes
+        en uso publica desglose provincial, y donde no lo hay el país queda en gris
+        en vez de pintarse con una cifra que no le corresponde. Los puntos sí llevan
+        coordenada propia y se ubican donde ocurrió el hecho.
+      </p>
+    </section>
 
     <section class="domain" id="sismos">
       <div class="domain-head"><h3>Riesgo natural — sismicidad</h3><span class="tag" id="tag-sismos">—</span></div>
@@ -297,6 +359,7 @@
   La Fundación agradece a los especialistas y funcionarios que contribuyeron con su tiempo y criterio.
 </footer>
 
+<script src="vendor/leaflet.js"></script>
 <script>
 (function(){
   const RUTA = '../datos/publico/';
@@ -355,24 +418,179 @@
     });
   }
 
+  // ---- Estado compartido entre el mapa y las tarjetas ----
+  const almacen = { sismos:null, fx:null };
+  let paisFiltro = null;                 // ISO del país seleccionado en el mapa
+  let paisNombre = null;
+  let tema = 'sismos';
+
+  function conteoSismos(){
+    const m = {};
+    if(almacen.sismos) almacen.sismos.registros.forEach(e => { if(e.iso) m[e.iso] = (m[e.iso]||0)+1; });
+    return m;
+  }
+  function fxPorIso(){
+    const m = {};
+    if(almacen.fx) almacen.fx.registros.forEach(r => (r.isos||[]).forEach(i => m[i] = r));
+    return m;
+  }
+
+  // ---- Tarjetas ----
+  function tarjetasSismos(){
+    const d = almacen.sismos; if(!d) return;
+    const meta = d.procedencia;
+    const lista = paisFiltro ? d.registros.filter(e => e.iso === paisFiltro) : d.registros;
+    const eventos = lista.slice().sort((a,b) => b.magnitud - a.magnitud).slice(0,6);
+    document.getElementById('tag-sismos').textContent = paisFiltro
+      ? lista.length + (lista.length === 1 ? ' evento en ' : ' eventos en ') + paisNombre
+      : meta.cantidad + ' eventos en el período';
+    document.getElementById('tarj-sismos').innerHTML = eventos.length
+      ? eventos.map(e => `<div class="card">
+          <h4>${e.lugar || 'Ubicación no consignada'}</h4>
+          <div class="value">M${Number(e.magnitud).toFixed(1)}</div>
+          <div class="sub">${momento(e.momento)} · profundidad ${e.profundidad_km} km · ${e.pais || 'fuera del padrón'}</div>
+          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
+            <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
+        </div>`).join('')
+      : `<div class="card"><h4>Sin eventos en el período</h4><div class="sub">${
+          paisFiltro ? 'La fuente no registró eventos sobre el umbral en ' + paisNombre + '.'
+                     : 'La fuente respondió y no registró eventos sobre el umbral.'} No es una falla.</div></div>`;
+  }
+
+  function tarjetasFx(){
+    const d = almacen.fx; if(!d) return;
+    const meta = d.procedencia;
+    const lista = paisFiltro ? d.registros.filter(r => (r.isos||[]).includes(paisFiltro)) : d.registros;
+    document.getElementById('tag-fx').textContent = paisFiltro
+      ? (lista.length ? 'con cobertura en ' + paisNombre : 'sin cobertura en ' + paisNombre)
+      : meta.cantidad + ' monedas cubiertas del padrón';
+    document.getElementById('tarj-fx').innerHTML = lista.length
+      ? lista.map(r => `<div class="card">
+          <h4>USD → ${r.moneda} · ${r.ambito}</h4>
+          <div class="value">${Number(r.unidades_por_dolar).toFixed(3)}</div>
+          <div class="sub">Fecha de referencia: ${r.fecha_referencia}</div>
+          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
+            <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
+        </div>`).join('')
+      : `<div class="card"><h4>Sin cobertura</h4><div class="sub">El Banco Central Europeo no publica referencia para la moneda de ${paisNombre}. No es una falla: es un vacío de la fuente.</div></div>`;
+  }
+
+  // ---- Mapa de situación ----
+  let mapa=null, capaPaises=null, capaPuntos=null;
+
+  function estiloPais(rasgo){
+    const iso = rasgo.properties.iso;
+    let relleno = '#0E2135';
+    if(tema === 'sismos'){
+      const n = conteoSismos()[iso] || 0;
+      relleno = n === 0 ? '#0E2135'
+              : n < 3   ? 'rgba(251,101,0,.28)'
+              : n < 6   ? 'rgba(251,101,0,.55)'
+                        : 'rgba(251,101,0,.85)';
+    } else {
+      relleno = fxPorIso()[iso] ? 'rgba(251,101,0,.55)' : '#0E2135';
+    }
+    const sel = paisFiltro === iso;
+    return { color: sel ? '#FB6500' : 'rgba(255,255,255,.30)', weight: sel ? 2.4 : .8,
+             fillColor: relleno, fillOpacity: .9 };
+  }
+
+  function ficha(iso, nombre, bloque){
+    if(tema === 'sismos'){
+      const n = conteoSismos()[iso] || 0;
+      return `<b>${nombre}</b>${bloque}<br>${n} evento${n===1?'':'s'} M4+ en 7 días · USGS`
+           + `<span class="nota">País obtenido de la coordenada. La fuente no publica desglose por país ni por provincia.</span>`;
+    }
+    const r = fxPorIso()[iso];
+    return r
+      ? `<b>${nombre}</b>${bloque}<br>USD → ${r.moneda} · ${Number(r.unidades_por_dolar).toFixed(3)}<br>Referencia ${r.fecha_referencia} · BCE`
+      : `<b>${nombre}</b>${bloque}<span class="nota">Sin cobertura en la fuente: el BCE no publica esta moneda.</span>`;
+  }
+
+  function leyenda(){
+    document.getElementById('leyenda').innerHTML = tema === 'sismos'
+      ? `<span><i style="background:#0E2135;border:1px solid rgba(255,255,255,.3)"></i>Sin eventos</span>
+         <span><i style="background:rgba(251,101,0,.28)"></i>1 a 2</span>
+         <span><i style="background:rgba(251,101,0,.55)"></i>3 a 5</span>
+         <span><i style="background:rgba(251,101,0,.85)"></i>6 o más</span>
+         <span><i class="punto"></i>Evento con coordenada propia</span>`
+      : `<span><i style="background:rgba(251,101,0,.55)"></i>Con dato en la fuente</span>
+         <span><i style="background:#0E2135;border:1px solid rgba(255,255,255,.3)"></i>Sin dato en la fuente</span>`;
+  }
+
+  function seleccionar(iso, nombre){
+    if(paisFiltro === iso){ paisFiltro = null; paisNombre = null; }
+    else { paisFiltro = iso; paisNombre = nombre; }
+    repintar();
+  }
+
+  function repintar(){
+    if(capaPaises) capaPaises.setStyle(estiloPais);
+    if(capaPuntos && mapa) (tema === 'sismos' ? capaPuntos.addTo(mapa) : mapa.removeLayer(capaPuntos));
+    document.getElementById('seleccion').innerHTML = paisFiltro
+      ? `Filtrando por <b>${paisNombre}</b><button id="quitar">quitar filtro</button>`
+      : 'Sin país seleccionado — hacé clic en el mapa para filtrar';
+    const q = document.getElementById('quitar');
+    if(q) q.addEventListener('click', () => { paisFiltro = null; paisNombre = null; repintar(); });
+    document.querySelectorAll('.tema').forEach(b => b.classList.toggle('activo', b.dataset.tema === tema));
+    leyenda();
+    tarjetasSismos(); tarjetasFx();
+  }
+
+  function puntosSismos(){
+    if(!almacen.sismos || !mapa) return;
+    if(capaPuntos) mapa.removeLayer(capaPuntos);
+    capaPuntos = L.layerGroup(
+      almacen.sismos.registros.filter(e => e.latitud != null).map(e =>
+        L.circleMarker([e.latitud, e.longitud], {
+          radius: Math.max(3, (Number(e.magnitud) - 3) * 2.6),
+          color: '#FB6500', weight: 1.2, fillColor: '#FB6500', fillOpacity: .35
+        }).bindTooltip(
+          `<b>M${Number(e.magnitud).toFixed(1)} · ${e.lugar || 'sin lugar'}</b>` +
+          `${momento(e.momento)}<br>Profundidad ${e.profundidad_km} km · USGS` +
+          (e.pais ? '' : `<span class="nota">Fuera del territorio de los 33 Estados del padrón.</span>`),
+          {className:'ficha'})
+      ));
+    if(tema === 'sismos') capaPuntos.addTo(mapa);
+  }
+
+  fetch('geo/paises-alc.geojson')
+    .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(geo => {
+      mapa = L.map('mapa', { zoomControl:true, minZoom:2, worldCopyJump:false });
+      mapa.attributionControl.setPrefix('');
+      mapa.attributionControl.addAttribution('Límites: Natural Earth 1:50 m · dominio público');
+      capaPaises = L.geoJSON(geo, {
+        style: estiloPais,
+        onEachFeature: (rasgo, capa) => {
+          const p = rasgo.properties;
+          capa.bindTooltip(() => ficha(p.iso, p.pais, p.bloque), {className:'ficha', sticky:true});
+          capa.on('click', () => seleccionar(p.iso, p.pais));
+        }
+      }).addTo(mapa);
+      mapa.fitBounds(capaPaises.getBounds(), {padding:[12,12]});
+      puntosSismos();
+      repintar();
+    })
+    .catch(err => {
+      document.getElementById('mapa').innerHTML =
+        `<div class="falla" style="margin:16px"><h4>No se pudo cargar el mapa</h4>
+         <p>${err.message}. No se muestra un mapa de reemplazo.</p></div>`;
+    });
+
+  document.querySelectorAll('.tema').forEach(b =>
+    b.addEventListener('click', () => { tema = b.dataset.tema; repintar(); }));
+
   // ---- Sismicidad ----
   Promise.all([traer('sismos.json'), traer('estado/sismos.json').catch(()=>null)])
     .then(([d, estado]) => {
+      almacen.sismos = d;
       const meta = d.procedencia;
       pintarProcedencia('proc-sismos', meta);
-      document.getElementById('tag-sismos').textContent = meta.cantidad + ' eventos en el período';
-
-      const eventos = d.registros.slice().sort((a,b) => b.magnitud - a.magnitud).slice(0,6);
-      document.getElementById('tarj-sismos').innerHTML = eventos.length
-        ? eventos.map(e => `<div class="card">
-            <h4>${e.lugar || 'Ubicación no consignada'}</h4>
-            <div class="value">M${Number(e.magnitud).toFixed(1)}</div>
-            <div class="sub">${momento(e.momento)} · profundidad ${e.profundidad_km} km</div>
-            <div class="foot"><span class="src">${meta.fuente.nombre}</span>
-              <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
-          </div>`).join('')
-        : `<div class="card"><h4>Sin eventos en el período</h4><div class="sub">La fuente respondió y no registró eventos que superen el umbral. No es una falla.</div></div>`;
-
+      tarjetasSismos();
+      puntosSismos();
+      if(capaPaises) capaPaises.setStyle(estiloPais);
+      leyenda();
       registros += meta.cantidad;
       vacios += pintarVacios('vac-sismos', meta.vacios_declarados);
       if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-sismos','sismos',estado.mensaje,meta); }
@@ -384,18 +602,11 @@
   // ---- Tipo de cambio ----
   Promise.all([traer('fx.json'), traer('estado/fx.json').catch(()=>null)])
     .then(([d, estado]) => {
+      almacen.fx = d;
       const meta = d.procedencia;
       pintarProcedencia('proc-fx', meta);
-      document.getElementById('tag-fx').textContent = meta.cantidad + ' monedas cubiertas del padrón';
-
-      document.getElementById('tarj-fx').innerHTML = d.registros.map(r => `<div class="card">
-          <h4>USD → ${r.moneda} · ${r.ambito}</h4>
-          <div class="value">${Number(r.unidades_por_dolar).toFixed(3)}</div>
-          <div class="sub">Fecha de referencia: ${r.fecha_referencia}</div>
-          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
-            <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
-        </div>`).join('');
-
+      tarjetasFx();
+      if(capaPaises) capaPaises.setStyle(estiloPais);
       registros += meta.cantidad;
       vacios += pintarVacios('vac-fx', meta.vacios_declarados);
       if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-fx','fx',estado.mensaje,meta); }
@@ -403,6 +614,7 @@
     })
     .catch(err => { fallas++; pintarFalla('tarj-fx','fx',err.message,null);
       document.getElementById('proc-fx').textContent = 'Sin registro disponible.'; marcador(); });
+
 })();
 </script>
 </body>

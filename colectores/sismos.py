@@ -13,6 +13,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 
 import comun
+import geo
 
 FUENTE = "USGS — United States Geological Survey"
 URL_BASE = "https://earthquake.usgs.gov/fdsnws/event/1/query"
@@ -39,13 +40,20 @@ def recolectar():
     crudo = comun.pedir(url)
 
     registros = []
+    fuera_del_padron = 0
     for rasgo in crudo.get("features", []):
         propiedades = rasgo.get("properties", {})
         coordenadas = rasgo.get("geometry", {}).get("coordinates", [None, None, None])
         milisegundos = propiedades.get("time")
+        ubicacion = geo.pais_de(coordenadas[0], coordenadas[1])
+        if ubicacion is None:
+            fuera_del_padron += 1
         registros.append(
             {
                 "id": rasgo.get("id"),
+                "iso": ubicacion["iso"] if ubicacion else None,
+                "pais": ubicacion["pais"] if ubicacion else None,
+                "bloque": ubicacion["bloque"] if ubicacion else None,
                 "momento": (
                     datetime.fromtimestamp(milisegundos / 1000, tz=timezone.utc).isoformat(
                         timespec="seconds"
@@ -84,8 +92,12 @@ def recolectar():
         vacios=[
             f"Solo eventos de magnitud {MAGNITUD_MINIMA} o mayor.",
             f"Ventana de {DIAS} días corridos.",
-            "El marco es un rectángulo geográfico: puede incluir eventos oceánicos "
-            "fuera de las aguas jurisdiccionales de los 33 Estados del padrón.",
+            (
+                f"{fuera_del_padron} de {len(registros)} eventos caen fuera del "
+                "territorio de los 33 Estados del padrón —mar abierto o países "
+                "limítrofes— y quedan consignados sin país."
+            ),
+            geo.METODO,
         ],
     )
 
