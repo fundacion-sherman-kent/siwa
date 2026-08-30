@@ -10,17 +10,16 @@
 <link rel="stylesheet" href="vendor/leaflet.css">
 <style>
   /* Paleta oficial FUSK — manual de identidad.
-     Los valores son los rótulos hexadecimales del manual; donde el manual
-     rotula un hex y un RGB que no coinciden, manda el hexadecimal. */
+     Donde el manual rotula un hexadecimal y un RGB que no coinciden, manda el
+     hexadecimal. */
   :root{
     --navy-deep:#00121E;   /* azul de la casa */
-    --navy-black:#07131E;  /* azul casi negro */
+    --navy-black:#07131E;
     --grey-blue:#667B89;
     --purple:#8C00E0;      /* violeta del símbolo */
     --purple-light:#BA66EC;
     --orange:#FB6500;      /* naranja de la casa */
     --paper:#F4F2EC;
-    --ink:#0B1420;
     --line:rgba(255,255,255,0.10);
     --ok:#3FA796;
     --alert:#C23B22;
@@ -29,13 +28,12 @@
   body{margin:0;font-family:'Inter',sans-serif;background:var(--navy-deep);color:var(--paper);}
   .mono{font-family:'JetBrains Mono',monospace;}
 
-  /* Banda de marca sobre fondo cálido, con filete naranja. El logotipo se usa
-     tal cual lo entrega el manual: sin recolorear, sin efectos y sin alterar
-     la separación entre sus componentes. */
+  /* Banda de marca sobre fondo cálido, con filete naranja. El logotipo va tal
+     cual lo entrega el manual: sin recolorear y sin efectos. */
   .topbar{
     display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
     padding:12px 28px;background:var(--paper);border-bottom:3px solid var(--orange);
-    position:sticky;top:0;z-index:10;
+    position:sticky;top:0;z-index:600;
   }
   .brand{display:flex;align-items:center;gap:18px;}
   .brand img{height:72px;width:auto;display:block;}      /* mínimo digital del manual */
@@ -57,30 +55,45 @@
     max-width:860px;letter-spacing:-.5px;
   }
   h2.hero-title em{font-style:normal;color:var(--orange);}
-  .hero p{max-width:660px;color:#C7D2E0;font-size:15px;line-height:1.6;margin:0 0 28px;}
-  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;}
+  .hero p{max-width:660px;color:#C7D2E0;font-size:15px;line-height:1.6;margin:0 0 16px;}
+  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;margin-top:28px;}
   .hero-meta div{border-left:2px solid var(--purple);padding-left:12px;}
   .hero-meta strong{display:block;font-size:20px;font-weight:800;}
   .hero-meta span{font-size:11px;color:#9fb2c8;text-transform:uppercase;letter-spacing:.5px;}
 
-  .shell{max-width:1180px;margin:0 auto;padding:36px 28px 80px;display:grid;grid-template-columns:200px 1fr;gap:32px;}
-  nav.rail{position:sticky;top:70px;align-self:start;}
-  /* Lectura en teléfono y tableta: la barra deja de ser columna y no se superpone. */
-  @media (max-width:820px){
-    .shell{grid-template-columns:1fr;padding:24px 20px 60px;}
-    nav.rail{position:static;display:flex;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:4px;}
-    nav.rail a{border-left:none;border-bottom:2px solid transparent;padding:7px 14px 7px 0;}
-    nav.rail a:hover{border-left-color:transparent;border-bottom-color:var(--orange);}
-    .hero{padding:36px 20px 28px;}
-    .topbar{padding:12px 20px;}
-  }
+  .shell{max-width:1180px;margin:0 auto;padding:36px 28px 80px;display:grid;grid-template-columns:210px 1fr;gap:32px;}
+  nav.rail{position:sticky;top:120px;align-self:start;}
   nav.rail a{
     display:block;padding:9px 0;font-size:12.5px;color:#9fb2c8;text-decoration:none;
     border-left:2px solid transparent;padding-left:12px;transition:.15s;
   }
   nav.rail a:hover{color:#fff;border-left-color:var(--orange);}
+  nav.rail .grupo{
+    font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--grey-blue);
+    font-weight:700;margin:16px 0 4px 12px;
+  }
+  /* Lectura en teléfono y tableta: la barra deja de ser columna. */
+  @media (max-width:820px){
+    .shell{grid-template-columns:1fr;padding:24px 20px 60px;}
+    nav.rail{position:static;display:flex;flex-wrap:wrap;align-items:baseline;
+             border-bottom:1px solid var(--line);padding-bottom:4px;}
+    nav.rail a{border-left:none;border-bottom:2px solid transparent;padding:7px 14px 7px 0;}
+    nav.rail a:hover{border-left-color:transparent;border-bottom-color:var(--orange);}
+    nav.rail .grupo{margin:8px 10px 0 0;}
+    .hero{padding:36px 20px 28px;}
+    .topbar{padding:12px 20px;}
+  }
 
-  section.domain{margin-bottom:44px;scroll-margin-top:76px;}
+  /* Eje de trabajo — las tres líneas de la Fundación */
+  .eje{margin:0 0 20px;padding-top:6px;}
+  .eje h2{
+    font-size:11px;text-transform:uppercase;letter-spacing:2.4px;font-weight:800;
+    color:var(--orange);margin:0 0 6px;
+  }
+  .eje p{margin:0;font-size:12.5px;color:#9fb2c8;line-height:1.6;max-width:720px;}
+  .eje::after{content:"";display:block;height:1px;background:var(--line);margin-top:16px;}
+
+  section.domain{margin-bottom:40px;scroll-margin-top:130px;}
   .domain-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:6px;border-bottom:1px solid var(--line);padding-bottom:10px;flex-wrap:wrap;}
   .domain-head h3{font-size:13px;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:#fff;margin:0;}
   .domain-head .tag{font-size:10.5px;color:#7d90a8;}
@@ -93,7 +106,7 @@
   }
   .procedencia b{color:#C7D2E0;font-weight:600;}
   .calif{font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;
-    background:rgba(232,119,34,.18);padding:2px 7px;border-radius:4px;letter-spacing:.5px;}
+    background:rgba(251,101,0,.20);padding:2px 7px;border-radius:4px;letter-spacing:.5px;}
 
   .grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
   .card{
@@ -107,11 +120,11 @@
   .card .src{font-size:10px;color:#7d90a8;}
   .badge{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 8px;border-radius:20px;white-space:nowrap;}
   .badge.corr{background:rgba(63,167,150,.18);color:#6fe0c9;}
-  .badge.unica{background:rgba(232,119,34,.18);color:#ffb27a;}
+  .badge.unica{background:rgba(251,101,0,.18);color:#ffb27a;}
   .badge.pending{background:rgba(124,140,158,.18);color:#a9b9cb;}
 
   /* Vacíos declarados — regla 7 de la casa */
-  .vacios{margin-top:14px;border:1px dashed rgba(232,119,34,.35);border-radius:10px;padding:14px 18px;}
+  .vacios{margin-top:14px;border:1px dashed rgba(251,101,0,.35);border-radius:10px;padding:14px 18px;}
   .vacios h5{margin:0 0 8px;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:700;}
   .vacios ul{margin:0;padding-left:16px;}
   .vacios li{font-size:12px;color:#C7D2E0;line-height:1.6;margin-bottom:4px;}
@@ -127,18 +140,8 @@
     grid-column:1/-1;border:1px dashed var(--line);border-radius:10px;padding:18px 20px;
     display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
   }
-  .placeholder p{margin:0;font-size:12.5px;color:#9fb2c8;max-width:660px;line-height:1.5;}
+  .placeholder p{margin:0;font-size:12.5px;color:#9fb2c8;max-width:680px;line-height:1.5;}
   .placeholder .ptitle{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
-
-  table.escala{width:100%;border-collapse:collapse;font-size:12px;}
-  table.escala td{padding:6px 10px;border-bottom:1px solid var(--line);color:#C7D2E0;vertical-align:top;}
-  table.escala td:first-child{
-    font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;width:34px;text-align:center;
-  }
-  .dos-columnas{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
-  .panel{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
-  .panel h4{margin:0 0 12px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#fff;}
-  .panel .nota{font-size:11.5px;color:#9fb2c8;line-height:1.6;margin:12px 0 0;}
 
   /* ---- Mapa de situación ---- */
   .mapa-caja{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
@@ -154,16 +157,9 @@
   .leaflet-tooltip.ficha::before{display:none;}
   .leaflet-tooltip.ficha b{color:#fff;font-size:12.5px;display:block;margin-bottom:4px;}
   .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
-  .mapa-barra{
-    display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
-    margin-bottom:10px;
-  }
-  .temas{display:flex;gap:6px;flex-wrap:wrap;}
-  .tema{
-    background:transparent;border:1px solid var(--line);color:#9fb2c8;font-family:'Inter',sans-serif;
-    font-size:11px;font-weight:600;padding:6px 12px;border-radius:20px;cursor:pointer;
-  }
-  .tema.activo{border-color:var(--orange);color:#fff;background:rgba(251,101,0,.16);}
+  .mapa-barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .capa-activa{font-size:11px;color:#9fb2c8;}
+  .capa-activa b{color:#fff;}
   .seleccion{font-size:11.5px;color:#C7D2E0;}
   .seleccion button{
     background:none;border:none;color:var(--orange);cursor:pointer;font-size:11.5px;
@@ -177,6 +173,16 @@
   .leyenda i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px;}
   .leyenda .punto{border-radius:50%;background:var(--orange);}
   .mapa-pie{margin-top:10px;font-size:11px;color:#7d90a8;line-height:1.6;}
+
+  table.escala{width:100%;border-collapse:collapse;font-size:12px;}
+  table.escala td{padding:6px 10px;border-bottom:1px solid var(--line);color:#C7D2E0;vertical-align:top;}
+  table.escala td:first-child{
+    font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;width:34px;text-align:center;
+  }
+  .dos-columnas{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+  .panel{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
+  .panel h4{margin:0 0 12px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#fff;}
+  .panel .nota{font-size:11.5px;color:#9fb2c8;line-height:1.6;margin:12px 0 0;}
 
   footer{max-width:1180px;margin:0 auto;padding:24px 28px 60px;border-top:1px solid var(--line);color:#7d90a8;font-size:11px;line-height:1.7;}
   footer strong{color:#C7D2E0;}
@@ -204,10 +210,13 @@
   <h2 class="hero-title">Registro de situación de <em>América Latina y el Caribe</em></h2>
   <p>Datos públicos de los 33 Estados del padrón, recolectados de forma automática y
      calificados con doctrina de inteligencia. Cada cifra declara su fuente, su fecha de
-     referencia, su calificación de fiabilidad y qué es lo que su fuente <em>no</em> cubre.
-     Este registro no emite juicios: publica hechos calificados.</p>
+     referencia, su calificación de fiabilidad y qué es lo que su fuente <em>no</em> cubre.</p>
+  <p>Las materias se ordenan por las tres líneas de trabajo de la Fundación
+     —<b>seguridad</b>, <b>gobernanza</b> e <b>inteligencia estratégica</b>— y no por la
+     disponibilidad de las fuentes. Este registro no emite juicios: publica hechos
+     calificados.</p>
   <div class="hero-meta">
-    <div><strong id="m-dominios">2</strong><span>Dominios con dato</span></div>
+    <div><strong id="m-dominios">1</strong><span>Dominios con dato</span></div>
     <div><strong id="m-registros">—</strong><span>Registros vigentes</span></div>
     <div><strong id="m-vacios">—</strong><span>Vacíos declarados</span></div>
     <div><strong>33</strong><span>Estados del padrón</span></div>
@@ -216,13 +225,20 @@
 
 <div class="shell">
   <nav class="rail">
-    <a href="#mapa-seccion">Mapa</a>
-    <a href="#sismos">Riesgo natural</a>
-    <a href="#economia">Economía y cambio</a>
-    <a href="#seguridad">Crimen organizado</a>
-    <a href="#politico">Riesgo político</a>
-    <a href="#migracion">Migración</a>
-    <a href="#metodo">Calificación</a>
+    <a href="#mapa-seccion">Mapa de situación</a>
+    <div class="grupo">Seguridad</div>
+    <a href="#desastres">Desastres naturales</a>
+    <a href="#violencia">Violencia organizada</a>
+    <a href="#ilicitas">Economías ilícitas</a>
+    <div class="grupo">Gobernanza</div>
+    <a href="#contratacion">Contratación pública</a>
+    <a href="#integridad">Sanciones e integridad</a>
+    <a href="#institucional">Estabilidad institucional</a>
+    <div class="grupo">Inteligencia estratégica</div>
+    <a href="#desplazamiento">Desplazamiento forzado</a>
+    <a href="#contrabando">Contrabando</a>
+    <div class="grupo">Método</div>
+    <a href="#calificacion">Calificación</a>
   </nav>
 
   <main>
@@ -230,10 +246,7 @@
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <div class="mapa-barra">
-        <div class="temas">
-          <button class="tema activo" data-tema="sismos">Sismicidad</button>
-          <button class="tema" data-tema="fx">Tipo de cambio</button>
-        </div>
+        <div class="capa-activa">Capa activa: <b>Desastres naturales — sismicidad</b></div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
       <div class="mapa-caja">
@@ -242,72 +255,151 @@
       </div>
       <p class="mapa-pie">
         Límites de Natural Earth, escala 1:50 m, guardados en este repositorio.
-        <b>El color de un país expresa un dato nacional</b>: ninguna de las fuentes
-        en uso publica desglose provincial, y donde no lo hay el país queda en gris
-        en vez de pintarse con una cifra que no le corresponde. Los puntos sí llevan
-        coordenada propia y se ubican donde ocurrió el hecho.
+        <b>El color de un país expresa un dato nacional</b>: ninguna de las fuentes en uso
+        publica desglose provincial, y donde no lo hay el país queda en gris en vez de
+        pintarse con una cifra que no le corresponde. Los puntos sí llevan coordenada propia.
+        Las capas nuevas aparecen a medida que entran en servicio sus colectores.
       </p>
     </section>
 
-    <section class="domain" id="sismos">
-      <div class="domain-head"><h3>Riesgo natural — sismicidad</h3><span class="tag" id="tag-sismos">—</span></div>
-      <div class="procedencia" id="proc-sismos">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-sismos"></div>
-      <div id="vac-sismos"></div>
+    <div class="eje">
+      <h2>Eje · Seguridad</h2>
+      <p>Violencia, control territorial y capacidad del Estado para sostener el orden
+         público. Incluye el desastre natural, que no entra como fenómeno físico sino por
+         su efecto: desplaza población, ocupa a las fuerzas y abre vacíos de autoridad.</p>
+    </div>
+
+    <section class="domain" id="desastres">
+      <div class="domain-head"><h3>Desastres naturales</h3><span class="tag" id="tag-desastres">—</span></div>
+      <div class="procedencia" id="proc-desastres">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-desastres"></div>
+      <div id="vac-desastres"></div>
     </section>
 
-    <section class="domain" id="economia">
-      <div class="domain-head"><h3>Economía y tipo de cambio</h3><span class="tag" id="tag-fx">—</span></div>
-      <div class="procedencia" id="proc-fx">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-fx"></div>
-      <div id="vac-fx"></div>
-    </section>
-
-    <section class="domain" id="seguridad">
-      <div class="domain-head"><h3>Crimen organizado y seguridad ciudadana</h3><span class="tag">Colector pendiente</span></div>
+    <section class="domain" id="violencia">
+      <div class="domain-head"><h3>Violencia organizada y conflicto</h3><span class="tag">Colector pendiente</span></div>
       <div class="grid-cards">
         <div class="placeholder">
           <div>
-            <div class="ptitle">Homicidios, extorsión, economías ilícitas, gobernanza criminal</div>
-            <p>Fuentes previstas: UNODC, UCDP y ACLED con alta institucional. Ninguna admite
-               consulta desde el navegador: el dato lo traerá el colector programado. No se
-               muestra nada hasta que exista.</p>
+            <div class="ptitle">Hechos de violencia armada, disputa territorial y acción de grupos organizados</div>
+            <p>Fuente prevista: ACLED, con alta institucional. Cada hecho trae coordenada
+               propia, de modo que baja por debajo del nivel nacional. Antes de escribir este
+               colector hay que leer las condiciones de redistribución de esa licencia.</p>
           </div>
           <span class="badge pending">Sin dato</span>
         </div>
       </div>
     </section>
 
-    <section class="domain" id="politico">
-      <div class="domain-head"><h3>Riesgo político e institucional</h3><span class="tag">Colector pendiente</span></div>
+    <section class="domain" id="ilicitas">
+      <div class="domain-head"><h3>Economías ilícitas y control territorial</h3><span class="tag">Colector pendiente</span></div>
       <div class="grid-cards">
         <div class="placeholder">
           <div>
-            <div class="ptitle">Calendario electoral, estabilidad institucional, cobertura cruzada</div>
-            <p>Fuentes previstas: GDELT 2.0 con cruce por idioma y jurisdicción, V-Dem y los
-               calendarios electorales oficiales de cada país. Las fechas de elección se
-               verifican a mano antes de publicarse.</p>
+            <div class="ptitle">Minería ilegal, desmonte y avance sobre tierra fiscal</div>
+            <p>Fuente prevista: focos de calor de NASA FIRMS, con clave gratuita. No miden
+               incendios: leídos contra concesiones y áreas protegidas son el mejor indicador
+               libre de ocupación ilegal del territorio. Esa lectura la hace el analista, no
+               el colector.</p>
           </div>
           <span class="badge pending">Sin dato</span>
         </div>
       </div>
     </section>
 
-    <section class="domain" id="migracion">
-      <div class="domain-head"><h3>Migración y desplazamiento</h3><span class="tag">Colector pendiente</span></div>
+    <div class="eje">
+      <h2>Eje · Gobernanza</h2>
+      <p>Integridad de la administración pública, calidad de las reglas y exposición de los
+         actores que contratan con el Estado o operan bajo su jurisdicción.</p>
+    </div>
+
+    <section class="domain" id="contratacion">
+      <div class="domain-head"><h3>Integridad de la contratación pública</h3><span class="tag">Colector pendiente</span></div>
       <div class="grid-cards">
         <div class="placeholder">
           <div>
-            <div class="ptitle">Desplazamiento forzado, flujos migratorios, presión fronteriza</div>
-            <p>Fuentes previstas: ACNUR, OIM/DTM y la plataforma R4V. Todas publican por
-               interfaz apta para colector programado.</p>
+            <div class="ptitle">Adjudicación directa, oferente único y concentración de proveedores</div>
+            <p>Fuente prevista: los portales de compras abiertas que publican en estándar
+               común. Es economía en negro documentada por el propio Estado, y de las pocas
+               materias que baja hasta el organismo comprador.</p>
           </div>
           <span class="badge pending">Sin dato</span>
         </div>
       </div>
     </section>
 
-    <section class="domain" id="metodo">
+    <section class="domain" id="integridad">
+      <div class="domain-head"><h3>Sanciones e integridad de actores</h3><span class="tag">Colector pendiente</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div>
+            <div class="ptitle">Personas y entidades designadas, y su vínculo con cada jurisdicción</div>
+            <p>Fuentes previstas: OpenSanctions y la lista SDN de la OFAC. Quién está
+               designado, por qué motivo y desde cuándo.</p>
+          </div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="domain" id="institucional">
+      <div class="domain-head"><h3>Estabilidad político-institucional</h3><span class="tag">Colector pendiente</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div>
+            <div class="ptitle">Calendario electoral y calidad institucional</div>
+            <p>Fuentes previstas: calendarios electorales oficiales de cada país y V-Dem. Las
+               fechas de elección se verifican a mano antes de publicarse: una fecha errada en
+               esta materia es una falla grave.</p>
+          </div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="eje">
+      <h2>Eje · Inteligencia estratégica</h2>
+      <p>Materias que cruzan a las dos anteriores y solo se leen en el mediano plazo: cómo se
+         mueve la población y cómo se mueve el dinero por fuera del registro.</p>
+    </div>
+
+    <section class="domain" id="desplazamiento">
+      <div class="domain-head"><h3>Desplazamiento forzado</h3><span class="tag">Colector pendiente</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div>
+            <div class="ptitle">Población desplazada, flujos y presión sobre fronteras</div>
+            <p>Fuentes previstas: ACNUR, el IDMC y la plataforma R4V. El desplazamiento es la
+               consecuencia visible de las materias de los dos ejes anteriores.</p>
+          </div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="domain" id="contrabando">
+      <div class="domain-head"><h3>Contrabando y subfacturación</h3><span class="tag">Colector pendiente</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div>
+            <div class="ptitle">Brecha espejo del comercio declarado</div>
+            <p>Fuente prevista: UN Comtrade. Consiste en comparar lo que un Estado declara
+               exportar a otro contra lo que ese otro declara haber importado: la diferencia
+               es contrabando, subfacturación o triangulación. Método clásico de aduanas, sin
+               publicación viva para la región.</p>
+          </div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="eje">
+      <h2>Método</h2>
+      <p>Cómo se califica lo que se publica, y qué controles hacen cumplir esas reglas dentro
+         del propio programa.</p>
+    </div>
+
+    <section class="domain" id="calificacion">
       <div class="domain-head"><h3>Cómo se califica lo que se publica</h3><span class="tag">Sistema Almirantazgo</span></div>
       <div class="dos-columnas">
         <div class="panel">
@@ -384,12 +476,12 @@
       `<span><b>Corroboración:</b> ${c.corroborado ? 'dos orígenes independientes' : 'fuente única, declarada'}</span>`;
   }
 
-  function pintarVacios(destino, vacios){
-    if(!vacios || !vacios.length){ return 0; }
+  function pintarVacios(destino, lista){
+    if(!lista || !lista.length) return 0;
     document.getElementById(destino).innerHTML =
       `<div class="vacios"><h5>Lo que esta fuente no cubre</h5><ul>` +
-      vacios.map(v => `<li>${v}</li>`).join('') + `</ul></div>`;
-    return vacios.length;
+      lista.map(v => `<li>${v}</li>`).join('') + `</ul></div>`;
+    return lista.length;
   }
 
   function pintarFalla(destino, colector, error, meta){
@@ -419,32 +511,24 @@
   }
 
   // ---- Estado compartido entre el mapa y las tarjetas ----
-  const almacen = { sismos:null, fx:null };
-  let paisFiltro = null;                 // ISO del país seleccionado en el mapa
-  let paisNombre = null;
-  let tema = 'sismos';
+  const almacen = { desastres:null };
+  let paisFiltro = null, paisNombre = null;
 
-  function conteoSismos(){
+  function conteoPorPais(){
     const m = {};
-    if(almacen.sismos) almacen.sismos.registros.forEach(e => { if(e.iso) m[e.iso] = (m[e.iso]||0)+1; });
-    return m;
-  }
-  function fxPorIso(){
-    const m = {};
-    if(almacen.fx) almacen.fx.registros.forEach(r => (r.isos||[]).forEach(i => m[i] = r));
+    if(almacen.desastres) almacen.desastres.registros.forEach(e => { if(e.iso) m[e.iso] = (m[e.iso]||0)+1; });
     return m;
   }
 
-  // ---- Tarjetas ----
-  function tarjetasSismos(){
-    const d = almacen.sismos; if(!d) return;
+  function tarjetasDesastres(){
+    const d = almacen.desastres; if(!d) return;
     const meta = d.procedencia;
     const lista = paisFiltro ? d.registros.filter(e => e.iso === paisFiltro) : d.registros;
     const eventos = lista.slice().sort((a,b) => b.magnitud - a.magnitud).slice(0,6);
-    document.getElementById('tag-sismos').textContent = paisFiltro
+    document.getElementById('tag-desastres').textContent = paisFiltro
       ? lista.length + (lista.length === 1 ? ' evento en ' : ' eventos en ') + paisNombre
       : meta.cantidad + ' eventos en el período';
-    document.getElementById('tarj-sismos').innerHTML = eventos.length
+    document.getElementById('tarj-desastres').innerHTML = eventos.length
       ? eventos.map(e => `<div class="card">
           <h4>${e.lugar || 'Ubicación no consignada'}</h4>
           <div class="value">M${Number(e.magnitud).toFixed(1)}</div>
@@ -457,65 +541,44 @@
                      : 'La fuente respondió y no registró eventos sobre el umbral.'} No es una falla.</div></div>`;
   }
 
-  function tarjetasFx(){
-    const d = almacen.fx; if(!d) return;
-    const meta = d.procedencia;
-    const lista = paisFiltro ? d.registros.filter(r => (r.isos||[]).includes(paisFiltro)) : d.registros;
-    document.getElementById('tag-fx').textContent = paisFiltro
-      ? (lista.length ? 'con cobertura en ' + paisNombre : 'sin cobertura en ' + paisNombre)
-      : meta.cantidad + ' monedas cubiertas del padrón';
-    document.getElementById('tarj-fx').innerHTML = lista.length
-      ? lista.map(r => `<div class="card">
-          <h4>USD → ${r.moneda} · ${r.ambito}</h4>
-          <div class="value">${Number(r.unidades_por_dolar).toFixed(3)}</div>
-          <div class="sub">Fecha de referencia: ${r.fecha_referencia}</div>
-          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
-            <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
-        </div>`).join('')
-      : `<div class="card"><h4>Sin cobertura</h4><div class="sub">El Banco Central Europeo no publica referencia para la moneda de ${paisNombre}. No es una falla: es un vacío de la fuente.</div></div>`;
-  }
-
   // ---- Mapa de situación ----
   let mapa=null, capaPaises=null, capaPuntos=null;
 
   function estiloPais(rasgo){
-    const iso = rasgo.properties.iso;
-    let relleno = '#0E2135';
-    if(tema === 'sismos'){
-      const n = conteoSismos()[iso] || 0;
-      relleno = n === 0 ? '#0E2135'
-              : n < 3   ? 'rgba(251,101,0,.28)'
-              : n < 6   ? 'rgba(251,101,0,.55)'
-                        : 'rgba(251,101,0,.85)';
-    } else {
-      relleno = fxPorIso()[iso] ? 'rgba(251,101,0,.55)' : '#0E2135';
-    }
-    const sel = paisFiltro === iso;
+    const n = conteoPorPais()[rasgo.properties.iso] || 0;
+    const relleno = n === 0 ? '#0E2135'
+                  : n < 3   ? 'rgba(251,101,0,.28)'
+                  : n < 6   ? 'rgba(251,101,0,.55)'
+                            : 'rgba(251,101,0,.85)';
+    const sel = paisFiltro === rasgo.properties.iso;
     return { color: sel ? '#FB6500' : 'rgba(255,255,255,.30)', weight: sel ? 2.4 : .8,
              fillColor: relleno, fillOpacity: .9 };
   }
 
   function ficha(iso, nombre, bloque){
-    if(tema === 'sismos'){
-      const n = conteoSismos()[iso] || 0;
-      return `<b>${nombre}</b>${bloque}<br>${n} evento${n===1?'':'s'} M4+ en 7 días · USGS`
-           + `<span class="nota">País obtenido de la coordenada. La fuente no publica desglose por país ni por provincia.</span>`;
-    }
-    const r = fxPorIso()[iso];
-    return r
-      ? `<b>${nombre}</b>${bloque}<br>USD → ${r.moneda} · ${Number(r.unidades_por_dolar).toFixed(3)}<br>Referencia ${r.fecha_referencia} · BCE`
-      : `<b>${nombre}</b>${bloque}<span class="nota">Sin cobertura en la fuente: el BCE no publica esta moneda.</span>`;
+    const n = conteoPorPais()[iso] || 0;
+    return `<b>${nombre}</b>${bloque}<br>${n} evento${n===1?'':'s'} sísmico${n===1?'':'s'} M4+ en 7 días · USGS`
+         + `<span class="nota">País obtenido de la coordenada. La fuente no publica desglose por país ni por provincia.</span>`;
   }
 
   function leyenda(){
-    document.getElementById('leyenda').innerHTML = tema === 'sismos'
-      ? `<span><i style="background:#0E2135;border:1px solid rgba(255,255,255,.3)"></i>Sin eventos</span>
-         <span><i style="background:rgba(251,101,0,.28)"></i>1 a 2</span>
-         <span><i style="background:rgba(251,101,0,.55)"></i>3 a 5</span>
-         <span><i style="background:rgba(251,101,0,.85)"></i>6 o más</span>
-         <span><i class="punto"></i>Evento con coordenada propia</span>`
-      : `<span><i style="background:rgba(251,101,0,.55)"></i>Con dato en la fuente</span>
-         <span><i style="background:#0E2135;border:1px solid rgba(255,255,255,.3)"></i>Sin dato en la fuente</span>`;
+    document.getElementById('leyenda').innerHTML =
+      `<span><i style="background:#0E2135;border:1px solid rgba(255,255,255,.3)"></i>Sin eventos</span>
+       <span><i style="background:rgba(251,101,0,.28)"></i>1 a 2</span>
+       <span><i style="background:rgba(251,101,0,.55)"></i>3 a 5</span>
+       <span><i style="background:rgba(251,101,0,.85)"></i>6 o más</span>
+       <span><i class="punto"></i>Evento con coordenada propia</span>`;
+  }
+
+  function repintar(){
+    if(capaPaises) capaPaises.setStyle(estiloPais);
+    document.getElementById('seleccion').innerHTML = paisFiltro
+      ? `Filtrando por <b>${paisNombre}</b><button id="quitar">quitar filtro</button>`
+      : 'Sin país seleccionado — hacé clic en el mapa para filtrar';
+    const q = document.getElementById('quitar');
+    if(q) q.addEventListener('click', () => { paisFiltro = null; paisNombre = null; repintar(); });
+    leyenda();
+    tarjetasDesastres();
   }
 
   function seleccionar(iso, nombre){
@@ -524,24 +587,11 @@
     repintar();
   }
 
-  function repintar(){
-    if(capaPaises) capaPaises.setStyle(estiloPais);
-    if(capaPuntos && mapa) (tema === 'sismos' ? capaPuntos.addTo(mapa) : mapa.removeLayer(capaPuntos));
-    document.getElementById('seleccion').innerHTML = paisFiltro
-      ? `Filtrando por <b>${paisNombre}</b><button id="quitar">quitar filtro</button>`
-      : 'Sin país seleccionado — hacé clic en el mapa para filtrar';
-    const q = document.getElementById('quitar');
-    if(q) q.addEventListener('click', () => { paisFiltro = null; paisNombre = null; repintar(); });
-    document.querySelectorAll('.tema').forEach(b => b.classList.toggle('activo', b.dataset.tema === tema));
-    leyenda();
-    tarjetasSismos(); tarjetasFx();
-  }
-
-  function puntosSismos(){
-    if(!almacen.sismos || !mapa) return;
+  function puntos(){
+    if(!almacen.desastres || !mapa) return;
     if(capaPuntos) mapa.removeLayer(capaPuntos);
     capaPuntos = L.layerGroup(
-      almacen.sismos.registros.filter(e => e.latitud != null).map(e =>
+      almacen.desastres.registros.filter(e => e.latitud != null).map(e =>
         L.circleMarker([e.latitud, e.longitud], {
           radius: Math.max(3, (Number(e.magnitud) - 3) * 2.6),
           color: '#FB6500', weight: 1.2, fillColor: '#FB6500', fillOpacity: .35
@@ -550,8 +600,7 @@
           `${momento(e.momento)}<br>Profundidad ${e.profundidad_km} km · USGS` +
           (e.pais ? '' : `<span class="nota">Fuera del territorio de los 33 Estados del padrón.</span>`),
           {className:'ficha'})
-      ));
-    if(tema === 'sismos') capaPuntos.addTo(mapa);
+      )).addTo(mapa);
   }
 
   fetch('geo/paises-alc.geojson')
@@ -569,7 +618,7 @@
         }
       }).addTo(mapa);
       mapa.fitBounds(capaPaises.getBounds(), {padding:[12,12]});
-      puntosSismos();
+      puntos();
       repintar();
     })
     .catch(err => {
@@ -578,43 +627,23 @@
          <p>${err.message}. No se muestra un mapa de reemplazo.</p></div>`;
     });
 
-  document.querySelectorAll('.tema').forEach(b =>
-    b.addEventListener('click', () => { tema = b.dataset.tema; repintar(); }));
-
-  // ---- Sismicidad ----
+  // ---- Desastres naturales ----
   Promise.all([traer('sismos.json'), traer('estado/sismos.json').catch(()=>null)])
     .then(([d, estado]) => {
-      almacen.sismos = d;
+      almacen.desastres = d;
       const meta = d.procedencia;
-      pintarProcedencia('proc-sismos', meta);
-      tarjetasSismos();
-      puntosSismos();
+      pintarProcedencia('proc-desastres', meta);
+      tarjetasDesastres();
+      puntos();
       if(capaPaises) capaPaises.setStyle(estiloPais);
       leyenda();
       registros += meta.cantidad;
-      vacios += pintarVacios('vac-sismos', meta.vacios_declarados);
-      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-sismos','sismos',estado.mensaje,meta); }
+      vacios += pintarVacios('vac-desastres', meta.vacios_declarados);
+      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-desastres','sismos',estado.mensaje,meta); }
       marcador();
     })
-    .catch(err => { fallas++; pintarFalla('tarj-sismos','sismos',err.message,null);
-      document.getElementById('proc-sismos').textContent = 'Sin registro disponible.'; marcador(); });
-
-  // ---- Tipo de cambio ----
-  Promise.all([traer('fx.json'), traer('estado/fx.json').catch(()=>null)])
-    .then(([d, estado]) => {
-      almacen.fx = d;
-      const meta = d.procedencia;
-      pintarProcedencia('proc-fx', meta);
-      tarjetasFx();
-      if(capaPaises) capaPaises.setStyle(estiloPais);
-      registros += meta.cantidad;
-      vacios += pintarVacios('vac-fx', meta.vacios_declarados);
-      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-fx','fx',estado.mensaje,meta); }
-      marcador();
-    })
-    .catch(err => { fallas++; pintarFalla('tarj-fx','fx',err.message,null);
-      document.getElementById('proc-fx').textContent = 'Sin registro disponible.'; marcador(); });
-
+    .catch(err => { fallas++; pintarFalla('tarj-desastres','sismos',err.message,null);
+      document.getElementById('proc-desastres').textContent = 'Sin registro disponible.'; marcador(); });
 })();
 </script>
 </body>

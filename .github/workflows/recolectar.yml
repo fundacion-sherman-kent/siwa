@@ -21,20 +21,15 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Sismos (USGS)
+      - name: Desastres naturales - sismicidad (USGS)
         id: sismos
         continue-on-error: true
         run: python colectores/sismos.py
 
-      - name: Tipos de cambio (BCE)
-        id: fx
-        continue-on-error: true
-        run: python colectores/fx.py
-
       - name: Guardar lo recolectado
         if: always()
         run: |
-          git config user.name "tabularium"
+          git config user.name "siwa"
           git config user.email "actions@users.noreply.github.com"
           git add datos/
           git diff --staged --quiet || git commit -m "Recolección $(date -u +'%Y-%m-%d %H:%M UTC')"
@@ -47,5 +42,4 @@ jobs:
         run: |
           fallo=0
           [ "${{ steps.sismos.outcome }}" = "failure" ] && { echo "Falló el colector de sismos."; fallo=1; }
-          [ "${{ steps.fx.outcome }}" = "failure" ] && { echo "Falló el colector de tipos de cambio."; fallo=1; }
           exit $fallo

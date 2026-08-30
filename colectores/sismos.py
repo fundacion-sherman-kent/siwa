@@ -90,6 +90,9 @@ def recolectar():
         calificacion=calificacion,
         registros=registros,
         vacios=[
+            "El dominio de desastres naturales cubre hoy únicamente sismicidad. "
+            "Ciclones, inundaciones, erupciones y sequía quedan sin cobertura hasta "
+            "que entren en servicio los colectores de GDACS y NASA EONET.",
             f"Solo eventos de magnitud {MAGNITUD_MINIMA} o mayor.",
             f"Ventana de {DIAS} días corridos.",
             (
