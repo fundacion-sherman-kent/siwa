@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIWA — Fundación Sherman Kent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* Paleta oficial FUSK — manual de identidad.
+     Los valores son los rótulos hexadecimales del manual; donde el manual
+     rotula un hex y un RGB que no coinciden, manda el hexadecimal. */
+  :root{
+    --navy-deep:#00121E;   /* azul de la casa */
+    --navy-black:#07131E;  /* azul casi negro */
+    --grey-blue:#667B89;
+    --purple:#8C00E0;      /* violeta del símbolo */
+    --purple-light:#BA66EC;
+    --orange:#FB6500;      /* naranja de la casa */
+    --paper:#F4F2EC;
+    --ink:#0B1420;
+    --line:rgba(255,255,255,0.10);
+    --ok:#3FA796;
+    --alert:#C23B22;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;background:var(--navy-deep);color:var(--paper);}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* Banda de marca sobre fondo cálido, con filete naranja. El logotipo se usa
+     tal cual lo entrega el manual: sin recolorear, sin efectos y sin alterar
+     la separación entre sus componentes. */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+    padding:12px 28px;background:var(--paper);border-bottom:3px solid var(--orange);
+    position:sticky;top:0;z-index:10;
+  }
+  .brand{display:flex;align-items:center;gap:18px;}
+  .brand img{height:72px;width:auto;display:block;}      /* mínimo digital del manual */
+  .brand .sep{width:1px;height:44px;background:rgba(0,18,30,.22);}
+  .brand h1{font-size:17px;margin:0;font-weight:700;letter-spacing:2px;color:var(--navy-deep);}
+  .brand small{display:block;color:var(--grey-blue);font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;}
+  .topbar-right{display:flex;gap:22px;align-items:center;font-size:11px;color:var(--grey-blue);}
+  .status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:6px;box-shadow:0 0 8px var(--ok);}
+  .status-dot.mal{background:var(--alert);box-shadow:0 0 8px var(--alert);}
+
+  .hero{padding:56px 28px 40px;max-width:1180px;margin:0 auto;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1.2px;
+    text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--orange);}
+  h2.hero-title{
+    font-size:clamp(28px,4vw,44px);line-height:1.1;font-weight:800;margin:0 0 18px;
+    max-width:860px;letter-spacing:-.5px;
+  }
+  h2.hero-title em{font-style:normal;color:var(--orange);}
+  .hero p{max-width:660px;color:#C7D2E0;font-size:15px;line-height:1.6;margin:0 0 28px;}
+  .hero-meta{display:flex;gap:32px;flex-wrap:wrap;}
+  .hero-meta div{border-left:2px solid var(--purple);padding-left:12px;}
+  .hero-meta strong{display:block;font-size:20px;font-weight:800;}
+  .hero-meta span{font-size:11px;color:#9fb2c8;text-transform:uppercase;letter-spacing:.5px;}
+
+  .shell{max-width:1180px;margin:0 auto;padding:36px 28px 80px;display:grid;grid-template-columns:200px 1fr;gap:32px;}
+  nav.rail{position:sticky;top:70px;align-self:start;}
+  /* Lectura en teléfono y tableta: la barra deja de ser columna y no se superpone. */
+  @media (max-width:820px){
+    .shell{grid-template-columns:1fr;padding:24px 20px 60px;}
+    nav.rail{position:static;display:flex;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:4px;}
+    nav.rail a{border-left:none;border-bottom:2px solid transparent;padding:7px 14px 7px 0;}
+    nav.rail a:hover{border-left-color:transparent;border-bottom-color:var(--orange);}
+    .hero{padding:36px 20px 28px;}
+    .topbar{padding:12px 20px;}
+  }
+  nav.rail a{
+    display:block;padding:9px 0;font-size:12.5px;color:#9fb2c8;text-decoration:none;
+    border-left:2px solid transparent;padding-left:12px;transition:.15s;
+  }
+  nav.rail a:hover{color:#fff;border-left-color:var(--orange);}
+
+  section.domain{margin-bottom:44px;scroll-margin-top:76px;}
+  .domain-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:6px;border-bottom:1px solid var(--line);padding-bottom:10px;flex-wrap:wrap;}
+  .domain-head h3{font-size:13px;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:#fff;margin:0;}
+  .domain-head .tag{font-size:10.5px;color:#7d90a8;}
+
+  /* Bloque de procedencia — la marca de la casa */
+  .procedencia{
+    display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;
+    font-size:10.5px;color:#9fb2c8;margin:0 0 14px;padding:9px 12px;
+    background:rgba(255,255,255,.03);border-left:2px solid var(--orange);border-radius:0 6px 6px 0;
+  }
+  .procedencia b{color:#C7D2E0;font-weight:600;}
+  .calif{font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;
+    background:rgba(232,119,34,.18);padding:2px 7px;border-radius:4px;letter-spacing:.5px;}
+
+  .grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+  .card{
+    background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 16px 14px;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .card h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
+  .card .value{font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace;}
+  .card .sub{font-size:11px;color:#9fb2c8;min-height:14px;}
+  .card .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px;padding-top:8px;border-top:1px solid var(--line);}
+  .card .src{font-size:10px;color:#7d90a8;}
+  .badge{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 8px;border-radius:20px;white-space:nowrap;}
+  .badge.corr{background:rgba(63,167,150,.18);color:#6fe0c9;}
+  .badge.unica{background:rgba(232,119,34,.18);color:#ffb27a;}
+  .badge.pending{background:rgba(124,140,158,.18);color:#a9b9cb;}
+
+  /* Vacíos declarados — regla 7 de la casa */
+  .vacios{margin-top:14px;border:1px dashed rgba(232,119,34,.35);border-radius:10px;padding:14px 18px;}
+  .vacios h5{margin:0 0 8px;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:700;}
+  .vacios ul{margin:0;padding-left:16px;}
+  .vacios li{font-size:12px;color:#C7D2E0;line-height:1.6;margin-bottom:4px;}
+
+  .falla{
+    grid-column:1/-1;border:1px solid rgba(194,59,34,.5);background:rgba(194,59,34,.10);
+    border-radius:10px;padding:16px 18px;
+  }
+  .falla h4{margin:0 0 6px;font-size:13px;color:#ff9c86;font-weight:700;}
+  .falla p{margin:0;font-size:11.5px;color:#C7D2E0;line-height:1.6;}
+
+  .placeholder{
+    grid-column:1/-1;border:1px dashed var(--line);border-radius:10px;padding:18px 20px;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .placeholder p{margin:0;font-size:12.5px;color:#9fb2c8;max-width:660px;line-height:1.5;}
+  .placeholder .ptitle{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+
+  table.escala{width:100%;border-collapse:collapse;font-size:12px;}
+  table.escala td{padding:6px 10px;border-bottom:1px solid var(--line);color:#C7D2E0;vertical-align:top;}
+  table.escala td:first-child{
+    font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;width:34px;text-align:center;
+  }
+  .dos-columnas{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+  .panel{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
+  .panel h4{margin:0 0 12px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#fff;}
+  .panel .nota{font-size:11.5px;color:#9fb2c8;line-height:1.6;margin:12px 0 0;}
+
+  footer{max-width:1180px;margin:0 auto;padding:24px 28px 60px;border-top:1px solid var(--line);color:#7d90a8;font-size:11px;line-height:1.7;}
+  footer strong{color:#C7D2E0;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <img src="marca/fusk-logo-nombre-color.png" alt="FUSK · Fundación Sherman Kent">
+    <div class="sep"></div>
+    <div>
+      <h1>SIWA</h1>
+      <small>Registro de situación · ALC</small>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span id="estado-general"><span class="status-dot"></span>Verificando estado…</span>
+    <span class="mono" id="reloj">—</span>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="eyebrow">Registro público · versión 0.1</div>
+  <h2 class="hero-title">Registro de situación de <em>América Latina y el Caribe</em></h2>
+  <p>Datos públicos de los 33 Estados del padrón, recolectados de forma automática y
+     calificados con doctrina de inteligencia. Cada cifra declara su fuente, su fecha de
+     referencia, su calificación de fiabilidad y qué es lo que su fuente <em>no</em> cubre.
+     Este registro no emite juicios: publica hechos calificados.</p>
+  <div class="hero-meta">
+    <div><strong id="m-dominios">2</strong><span>Dominios con dato</span></div>
+    <div><strong id="m-registros">—</strong><span>Registros vigentes</span></div>
+    <div><strong id="m-vacios">—</strong><span>Vacíos declarados</span></div>
+    <div><strong>33</strong><span>Estados del padrón</span></div>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="rail">
+    <a href="#sismos">Riesgo natural</a>
+    <a href="#economia">Economía y cambio</a>
+    <a href="#seguridad">Crimen organizado</a>
+    <a href="#politico">Riesgo político</a>
+    <a href="#migracion">Migración</a>
+    <a href="#metodo">Calificación</a>
+  </nav>
+
+  <main>
+
+    <section class="domain" id="sismos">
+      <div class="domain-head"><h3>Riesgo natural — sismicidad</h3><span class="tag" id="tag-sismos">—</span></div>
+      <div class="procedencia" id="proc-sismos">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-sismos"></div>
+      <div id="vac-sismos"></div>
+    </section>
+
+    <section class="domain" id="economia">
+      <div class="domain-head"><h3>Economía y tipo de cambio</h3><span class="tag" id="tag-fx">—</span></div>
+      <div class="procedencia" id="proc-fx">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-fx"></div>
+      <div id="vac-fx"></div>
+    </section>
+
+    <section class="domain" id="seguridad">
+      <div class="domain-head"><h3>Crimen organizado y seguridad ciudadana</h3><span class="tag">Colector pendiente</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div>
+            <div class="ptitle">Homicidios, extorsión, economías ilícitas, gobernanza criminal</div>
+            <p>Fuentes previstas: UNODC, UCDP y ACLED con alta institucional. Ninguna admite
+               consulta desde el navegador: el dato lo traerá el colector programado. No se
+               muestra nada hasta que exista.</p>
+          </div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="domain" id="politico">
+      <div class="domain-head"><h3>Riesgo político e institucional</h3><span class="tag">Colector pendiente</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div>
+            <div class="ptitle">Calendario electoral, estabilidad institucional, cobertura cruzada</div>
+            <p>Fuentes previstas: GDELT 2.0 con cruce por idioma y jurisdicción, V-Dem y los
+               calendarios electorales oficiales de cada país. Las fechas de elección se
+               verifican a mano antes de publicarse.</p>
+          </div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="domain" id="migracion">
+      <div class="domain-head"><h3>Migración y desplazamiento</h3><span class="tag">Colector pendiente</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div>
+            <div class="ptitle">Desplazamiento forzado, flujos migratorios, presión fronteriza</div>
+            <p>Fuentes previstas: ACNUR, OIM/DTM y la plataforma R4V. Todas publican por
+               interfaz apta para colector programado.</p>
+          </div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="domain" id="metodo">
+      <div class="domain-head"><h3>Cómo se califica lo que se publica</h3><span class="tag">Sistema Almirantazgo</span></div>
+      <div class="dos-columnas">
+        <div class="panel">
+          <h4>Letra — fiabilidad de la fuente</h4>
+          <table class="escala">
+            <tr><td>A</td><td>Completamente fiable. Registro oficial, documento primario.</td></tr>
+            <tr><td>B</td><td>Habitualmente fiable. Medio de referencia con estándares editoriales.</td></tr>
+            <tr><td>C</td><td>Bastante fiable. Historial mixto o sesgo conocido pero verificable.</td></tr>
+            <tr><td>D</td><td>Habitualmente no fiable.</td></tr>
+            <tr><td>E</td><td>No fiable. Desinformación documentada.</td></tr>
+            <tr><td>F</td><td>Fiabilidad no evaluable.</td></tr>
+          </table>
+        </div>
+        <div class="panel">
+          <h4>Número — credibilidad de la información</h4>
+          <table class="escala">
+            <tr><td>1</td><td>Confirmada por otras fuentes independientes.</td></tr>
+            <tr><td>2</td><td>Probablemente cierta. Coherente, no confirmada.</td></tr>
+            <tr><td>3</td><td>Posiblemente cierta. Plausible, sin corroboración.</td></tr>
+            <tr><td>4</td><td>Dudosa. Contradice lo conocido sin explicación.</td></tr>
+            <tr><td>5</td><td>Improbable. Contradicha por fuentes sólidas.</td></tr>
+            <tr><td>6</td><td>No evaluable.</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:14px;">
+        <h4>Las dos reglas que el programa hace cumplir</h4>
+        <p class="nota"><b>El grado 1 exige corroboración.</b> La escala lo reserva para el dato
+          confirmado por otras fuentes, de modo que un dato de fuente única no puede calificar 1
+          por definición. Ningún automatismo lo asigna sin ella: el intento detiene la corrida.</p>
+        <p class="nota"><b>Contar dominios no es corroborar.</b> Veinte portales que replican un
+          mismo cable son una sola fuente. Este registro cuenta orígenes, y un hecho no alcanza
+          corroboración plena si sus dos fuentes son del mismo idioma y del mismo país.</p>
+        <p class="nota">La calificación de la fuente y la de la información son independientes: una
+          fuente excelente puede transmitir un dato dudoso.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <strong>SIWA</strong> — Fundación Sherman Kent · Oficina de Generación de Inteligencia.
+  Los dominios marcados «sin dato» describen colectores todavía no construidos y no muestran cifras.
+  Ningún número de esta página fue estimado, completado ni simulado: si una fuente falla, se muestra
+  la falla y la fecha del último dato válido. Este registro publica hechos calificados y no emite
+  juicios; el análisis de la Fundación sale por sus productos, con confianza y probabilidad declaradas.
+  <br><br>
+  La Fundación agradece a los especialistas y funcionarios que contribuyeron con su tiempo y criterio.
+</footer>
+
+<script>
+(function(){
+  const RUTA = '../datos/publico/';
+
+  function reloj(){
+    document.getElementById('reloj').textContent =
+      new Date().toLocaleString('es-AR', {dateStyle:'medium', timeStyle:'short'});
+  }
+  reloj(); setInterval(reloj, 30000);
+
+  function momento(iso){
+    if(!iso) return '—';
+    return new Date(iso).toLocaleString('es-AR', {dateStyle:'medium', timeStyle:'short'});
+  }
+
+  function pintarProcedencia(destino, meta){
+    const c = meta.calificacion;
+    document.getElementById(destino).innerHTML =
+      `<span class="calif">${c.fiabilidad}-${c.credibilidad}</span>` +
+      `<span><b>Fuente:</b> ${meta.fuente.nombre}</span>` +
+      `<span><b>Obtenido:</b> ${momento(meta.obtenido_en)}</span>` +
+      `<span><b>Corroboración:</b> ${c.corroborado ? 'dos orígenes independientes' : 'fuente única, declarada'}</span>`;
+  }
+
+  function pintarVacios(destino, vacios){
+    if(!vacios || !vacios.length){ return 0; }
+    document.getElementById(destino).innerHTML =
+      `<div class="vacios"><h5>Lo que esta fuente no cubre</h5><ul>` +
+      vacios.map(v => `<li>${v}</li>`).join('') + `</ul></div>`;
+    return vacios.length;
+  }
+
+  function pintarFalla(destino, colector, error, meta){
+    const viejo = meta ? `El último dato válido es del ${momento(meta.obtenido_en)} y sigue en pantalla sin modificar.`
+                       : 'Todavía no hay ningún dato válido para este dominio.';
+    document.getElementById(destino).innerHTML =
+      `<div class="falla"><h4>El colector «${colector}» no pudo completar la última corrida</h4>` +
+      `<p>${error}<br>${viejo} No se muestran datos simulados ni estimados.</p></div>`;
+  }
+
+  let registros = 0, vacios = 0, fallas = 0;
+
+  function marcador(){
+    document.getElementById('m-registros').textContent = registros;
+    document.getElementById('m-vacios').textContent = vacios;
+    const e = document.getElementById('estado-general');
+    e.innerHTML = fallas
+      ? `<span class="status-dot mal"></span>${fallas} colector(es) con falla declarada`
+      : `<span class="status-dot"></span>Todos los colectores al día`;
+  }
+
+  function traer(archivo){
+    return fetch(RUTA + archivo).then(r => {
+      if(!r.ok) throw new Error('No se pudo leer ' + archivo + ' (HTTP ' + r.status + ')');
+      return r.json();
+    });
+  }
+
+  // ---- Sismicidad ----
+  Promise.all([traer('sismos.json'), traer('estado/sismos.json').catch(()=>null)])
+    .then(([d, estado]) => {
+      const meta = d.procedencia;
+      pintarProcedencia('proc-sismos', meta);
+      document.getElementById('tag-sismos').textContent = meta.cantidad + ' eventos en el período';
+
+      const eventos = d.registros.slice().sort((a,b) => b.magnitud - a.magnitud).slice(0,6);
+      document.getElementById('tarj-sismos').innerHTML = eventos.length
+        ? eventos.map(e => `<div class="card">
+            <h4>${e.lugar || 'Ubicación no consignada'}</h4>
+            <div class="value">M${Number(e.magnitud).toFixed(1)}</div>
+            <div class="sub">${momento(e.momento)} · profundidad ${e.profundidad_km} km</div>
+            <div class="foot"><span class="src">${meta.fuente.nombre}</span>
+              <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
+          </div>`).join('')
+        : `<div class="card"><h4>Sin eventos en el período</h4><div class="sub">La fuente respondió y no registró eventos que superen el umbral. No es una falla.</div></div>`;
+
+      registros += meta.cantidad;
+      vacios += pintarVacios('vac-sismos', meta.vacios_declarados);
+      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-sismos','sismos',estado.mensaje,meta); }
+      marcador();
+    })
+    .catch(err => { fallas++; pintarFalla('tarj-sismos','sismos',err.message,null);
+      document.getElementById('proc-sismos').textContent = 'Sin registro disponible.'; marcador(); });
+
+  // ---- Tipo de cambio ----
+  Promise.all([traer('fx.json'), traer('estado/fx.json').catch(()=>null)])
+    .then(([d, estado]) => {
+      const meta = d.procedencia;
+      pintarProcedencia('proc-fx', meta);
+      document.getElementById('tag-fx').textContent = meta.cantidad + ' monedas cubiertas del padrón';
+
+      document.getElementById('tarj-fx').innerHTML = d.registros.map(r => `<div class="card">
+          <h4>USD → ${r.moneda} · ${r.ambito}</h4>
+          <div class="value">${Number(r.unidades_por_dolar).toFixed(3)}</div>
+          <div class="sub">Fecha de referencia: ${r.fecha_referencia}</div>
+          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
+            <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
+        </div>`).join('');
+
+      registros += meta.cantidad;
+      vacios += pintarVacios('vac-fx', meta.vacios_declarados);
+      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-fx','fx',estado.mensaje,meta); }
+      marcador();
+    })
+    .catch(err => { fallas++; pintarFalla('tarj-fx','fx',err.message,null);
+      document.getElementById('proc-fx').textContent = 'Sin registro disponible.'; marcador(); });
+})();
+</script>
+</body>
+</html>
