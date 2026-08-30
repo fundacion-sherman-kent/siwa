@@ -158,8 +158,60 @@
   .leaflet-tooltip.ficha b{color:#fff;font-size:12.5px;display:block;margin-bottom:4px;}
   .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
   .mapa-barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;}
-  .capa-activa{font-size:11px;color:#9fb2c8;}
-  .capa-activa b{color:#fff;}
+  .temas{display:flex;gap:6px;flex-wrap:wrap;}
+  .tema{background:transparent;border:1px solid var(--line);color:#9fb2c8;
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:600;padding:6px 12px;
+    border-radius:20px;cursor:pointer;}
+  .tema.activo{border-color:var(--orange);color:#fff;background:rgba(251,101,0,.16);}
+  .leyenda .sin-puntos{color:#7d90a8;font-style:italic;}
+
+  /* ---- Informe descargable ---- */
+  .barra-informe{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .barra-informe select{
+    background:#0E2135;color:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:8px 12px;font-family:'Inter',sans-serif;font-size:12.5px;min-width:230px;
+  }
+  .acciones{display:flex;gap:8px;flex-wrap:wrap;}
+  .boton{
+    background:transparent;border:1px solid var(--orange);color:var(--orange);
+    font-family:'Inter',sans-serif;font-size:11.5px;font-weight:700;padding:8px 16px;
+    border-radius:8px;cursor:pointer;letter-spacing:.3px;
+  }
+  .boton:hover{background:rgba(251,101,0,.14);color:#fff;}
+  .hoja{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:22px 24px;}
+  .hoja h4.titulo{margin:0 0 2px;font-size:17px;color:#fff;font-weight:800;}
+  .hoja .fecha{font-size:11px;color:#7d90a8;margin-bottom:18px;}
+  .hoja h4.sub-informe{margin:24px 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--orange);}
+  table.tabla-informe{width:100%;border-collapse:collapse;font-size:12px;}
+  table.tabla-informe th{
+    text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.8px;
+    color:#7d90a8;font-weight:700;padding:6px 8px;border-bottom:1px solid var(--line);
+  }
+  table.tabla-informe td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.06);color:#C7D2E0;vertical-align:top;}
+  table.tabla-informe .num{text-align:right;}
+  table.tabla-informe .menor{font-size:10.5px;color:#7d90a8;}
+  .informe-pie{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);}
+  .informe-pie p{font-size:11px;color:#9fb2c8;line-height:1.65;margin:0 0 8px;}
+  .sin-dato{font-size:12px;color:#7d90a8;}
+
+  /* Cuarta lectura: papel. Márgenes estándar y solo el informe. */
+  @media print{
+    @page{size:A4;margin:18mm 16mm;}
+    body{background:#fff;color:#111;}
+    .topbar,.hero,nav.rail,.eje,.mapa-caja,.mapa-barra,.mapa-pie,.acciones,footer,
+    section.domain:not(#informe),.barra-informe select{display:none!important;}
+    .shell{display:block;padding:0;max-width:none;}
+    section#informe{margin:0;}
+    .domain-head{border-color:#bbb;}
+    .domain-head h3{color:#111;}
+    .hoja{background:#fff;border:none;padding:0;}
+    .hoja h4.titulo{color:#111;}
+    .hoja h4.sub-informe{color:#c25200;}
+    table.tabla-informe td{color:#222;border-bottom:1px solid #ddd;}
+    table.tabla-informe th{color:#555;border-bottom:1px solid #999;}
+    .informe-pie p{color:#444;}
+    .informe-pie{border-top:1px solid #999;}
+  }
   .seleccion{font-size:11.5px;color:#C7D2E0;}
   .seleccion button{
     background:none;border:none;color:var(--orange);cursor:pointer;font-size:11.5px;
@@ -237,6 +289,8 @@
     <a href="#desplazamiento">Desplazamiento forzado</a>
     <a href="#contrabando">Contrabando</a>
     <div class="grupo">Método</div>
+    <a href="#informe">Informe descargable</a>
+    <div class="grupo">Método</div>
     <a href="#calificacion">Calificación</a>
   </nav>
 
@@ -245,7 +299,10 @@
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <div class="mapa-barra">
-        <div class="capa-activa">Capa activa: <b>Economías ilícitas — focos de calor</b></div>
+        <div class="temas">
+          <button class="tema activo" data-capa="focos">Economías ilícitas</button>
+          <button class="tema" data-capa="desplazamiento">Desplazamiento forzado</button>
+        </div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
       <div class="mapa-caja">
@@ -346,17 +403,10 @@
     </div>
 
     <section class="domain" id="desplazamiento">
-      <div class="domain-head"><h3>Desplazamiento forzado</h3><span class="tag">Colector pendiente</span></div>
-      <div class="grid-cards">
-        <div class="placeholder">
-          <div>
-            <div class="ptitle">Población desplazada, flujos y presión sobre fronteras</div>
-            <p>Fuentes previstas: ACNUR, el IDMC y la plataforma R4V. El desplazamiento es la
-               consecuencia visible de las materias de los dos ejes anteriores.</p>
-          </div>
-          <span class="badge pending">Sin dato</span>
-        </div>
-      </div>
+      <div class="domain-head"><h3>Desplazamiento forzado</h3><span class="tag" id="tag-desplazamiento">—</span></div>
+      <div class="procedencia" id="proc-desplazamiento">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-desplazamiento"></div>
+      <div id="vac-desplazamiento"></div>
     </section>
 
     <section class="domain" id="contrabando">
@@ -372,6 +422,28 @@
           </div>
           <span class="badge pending">Sin dato</span>
         </div>
+      </div>
+    </section>
+
+    <div class="eje">
+      <h2>Informe</h2>
+      <p>Extracto del registro para un país o para toda la región, con su procedencia y su
+         calificación. Se descarga en planilla o se imprime en papel; no lleva juicios.</p>
+    </div>
+
+    <section class="domain" id="informe">
+      <div class="domain-head"><h3>Informe del registro</h3><span class="tag">Público, sin cuenta</span></div>
+      <div class="barra-informe">
+        <select id="pais-informe" aria-label="País del informe"></select>
+        <div class="acciones">
+          <button class="boton" id="btn-csv">Descargar planilla</button>
+          <button class="boton" id="btn-imprimir">Imprimir o guardar en PDF</button>
+        </div>
+      </div>
+      <div class="hoja">
+        <h4 class="titulo" id="informe-titulo">—</h4>
+        <div class="fecha" id="informe-fecha">—</div>
+        <div id="informe-cuerpo"></div>
       </div>
     </section>
 
@@ -437,18 +509,25 @@
 <script>
 (function(){
   const RUTA = '../datos/publico/';
+  const almacen = {};
+  let capaActiva = 'focos', paisFiltro = null, paisNombre = null;
+  let registros = 0, vacios = 0, fallas = 0, dominios = 0;
+
+  const miles = n => Number(n).toLocaleString('es-AR');
+  const momento = iso => iso ? new Date(iso).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}) : '—';
 
   function reloj(){
     document.getElementById('reloj').textContent =
-      new Date().toLocaleString('es-AR', {dateStyle:'medium', timeStyle:'short'});
+      new Date().toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'});
   }
   reloj(); setInterval(reloj, 30000);
 
-  function momento(iso){
-    if(!iso) return '—';
-    return new Date(iso).toLocaleString('es-AR', {dateStyle:'medium', timeStyle:'short'});
+  function traer(archivo){
+    return fetch(RUTA + archivo).then(r => {
+      if(!r.ok) throw new Error('No se pudo leer ' + archivo + ' (HTTP ' + r.status + ')');
+      return r.json();
+    });
   }
-  const miles = n => Number(n).toLocaleString('es-AR');
 
   function pintarProcedencia(destino, meta){
     const c = meta.calificacion;
@@ -475,90 +554,97 @@
       `<p>${error}<br>${viejo} No se muestran datos simulados ni estimados.</p></div>`;
   }
 
-  let registros = 0, vacios = 0, fallas = 0, dominios = 0;
-
   function marcador(){
     document.getElementById('m-dominios').textContent = dominios;
     document.getElementById('m-registros').textContent = miles(registros);
     document.getElementById('m-vacios').textContent = vacios;
-    const e = document.getElementById('estado-general');
-    e.innerHTML = fallas
+    document.getElementById('estado-general').innerHTML = fallas
       ? `<span class="status-dot mal"></span>${fallas} colector(es) con falla declarada`
       : `<span class="status-dot"></span>Todos los colectores al día`;
   }
 
-  function traer(archivo){
-    return fetch(RUTA + archivo).then(r => {
-      if(!r.ok) throw new Error('No se pudo leer ' + archivo + ' (HTTP ' + r.status + ')');
-      return r.json();
-    });
-  }
-
-  // ---- Las capas del mapa ----------------------------------------------
-  // Cada capa declara cómo se cuenta por país, qué puntos dibuja y qué dice
-  // al pasar el cursor. El mapa no conoce la materia que dibuja.
-  const almacen = {};
-  let capaActiva = 'focos';
-  let paisFiltro = null, paisNombre = null;
-
+  // ---- Capas del mapa ---------------------------------------------------
   const CAPAS = {
     focos: {
-      etiqueta: 'Economías ilícitas — focos de calor',
-      unidad: 'focos',
+      etiqueta: 'Economías ilícitas',
       cortes: [1, 50, 500],
-      conteo(){
-        const m = {};
-        (almacen.focos?.registros || []).forEach(r => { m[r.iso] = r.focos; });
-        return m;
-      },
+      conteo(){ const m={}; (almacen.focos?.registros||[]).forEach(r => m[r.iso]=r.focos); return m; },
       puntos(){
-        return (almacen.focos?.muestra_para_mapa || []).map(p => ({
-          lat: p.latitud, lon: p.longitud,
-          radio: Math.max(2.5, Math.min(9, Math.sqrt(p.potencia_radiativa) / 2)),
-          ficha: `<b>Foco de calor · ${p.pais || 'fuera del padrón'}</b>` +
-                 `${p.fecha} ${String(p.hora_utc).padStart(4,'0')} UTC<br>` +
+        return (almacen.focos?.muestra_para_mapa||[]).map(p => ({
+          lat:p.latitud, lon:p.longitud,
+          radio: Math.max(2.5, Math.min(9, Math.sqrt(p.potencia_radiativa)/2)),
+          ficha: `<b>Foco de calor · ${p.pais||'fuera del padrón'}</b>${p.fecha} ${String(p.hora_utc).padStart(4,'0')} UTC<br>` +
                  `Potencia radiativa ${p.potencia_radiativa} MW · confianza ${p.confianza}` +
                  `<span class="nota">Anomalía térmica, no incendio ni actividad ilegal comprobada.</span>`
         }));
       },
-      ficha(iso, nombre, bloque, n){
-        const r = (almacen.focos?.registros || []).find(x => x.iso === iso);
-        if(!r) return `<b>${nombre}</b>${bloque}<span class="nota">Sin focos detectados en la ventana. El sensor no ve bajo nubes: la ausencia no prueba inactividad.</span>`;
-        return `<b>${nombre}</b>${bloque}<br>${miles(r.focos)} focos · ${miles(r.confianza_alta)} de confianza alta<br>`
-             + `Potencia radiativa acumulada ${miles(r.potencia_radiativa_total)} MW`
-             + `<span class="nota">Anomalías térmicas. No son incendios ni actividad ilegal comprobada.</span>`;
+      ficha(iso, nombre, bloque){
+        const r = (almacen.focos?.registros||[]).find(x => x.iso===iso);
+        if(!r) return `<b>${nombre}</b>${bloque}<span class="nota">Sin focos en la ventana. El sensor no ve bajo nubes: la ausencia no prueba inactividad.</span>`;
+        return `<b>${nombre}</b>${bloque}<br>${miles(r.focos)} focos · ${miles(r.confianza_alta)} de confianza alta<br>` +
+               `Potencia radiativa ${miles(r.potencia_radiativa_total)} MW` +
+               `<span class="nota">Anomalías térmicas. No son incendios ni actividad ilegal comprobada.</span>`;
       },
-      leyenda: ['Sin focos', '1 a 49', '50 a 499', '500 o más', 'Foco de la muestra publicada']
+      leyenda: ['Sin focos','1 a 49','50 a 499','500 o más','Foco de la muestra publicada']
+    },
+    desplazamiento: {
+      etiqueta: 'Desplazamiento forzado',
+      cortes: [1, 50000, 300000],
+      conteo(){ const m={}; (almacen.desplazamiento?.registros||[]).forEach(r => m[r.iso]=r.expulsion); return m; },
+      puntos(){ return []; },
+      ficha(iso, nombre, bloque){
+        const r = (almacen.desplazamiento?.registros||[]).find(x => x.iso===iso);
+        if(!r) return `<b>${nombre}</b>${bloque}<span class="nota">Sin registro en la fuente.</span>`;
+        return `<b>${nombre}</b>${bloque}<br>Expulsión ${miles(r.expulsion)} · Recepción ${miles(r.recepcion)}<br>` +
+               `Desplazados internos ${miles(r.desplazados_internos)} · cifra de ${r.anio}` +
+               `<span class="nota">Cifra anual de cierre, no dato en vivo. Sin desglose subnacional.</span>`;
+      },
+      leyenda: ['Sin registro','Menos de 50.000','50.000 a 299.999','300.000 o más','Sin capa de puntos: la fuente no da coordenada']
     }
   };
 
-  // ---- Tarjetas ---------------------------------------------------------
+  // ---- Tarjetas por dominio --------------------------------------------
   function tarjetasIlicitas(){
     const d = almacen.focos; if(!d) return;
     const meta = d.procedencia;
-    const lista = paisFiltro ? d.registros.filter(r => r.iso === paisFiltro) : d.registros;
-    const total = lista.reduce((a,r) => a + r.focos, 0);
+    const lista = paisFiltro ? d.registros.filter(r => r.iso===paisFiltro) : d.registros;
+    const total = lista.reduce((a,r)=>a+r.focos,0);
     document.getElementById('tag-ilicitas').textContent = paisFiltro
-      ? miles(total) + ' focos en ' + paisNombre
-      : miles(total) + ' focos en ' + meta.cantidad + ' países';
+      ? miles(total)+' focos en '+paisNombre : miles(total)+' focos en '+meta.cantidad+' países';
     document.getElementById('tarj-ilicitas').innerHTML = lista.length
       ? lista.slice(0,6).map(r => `<div class="card">
-          <h4>${r.pais}</h4>
-          <div class="value">${miles(r.focos)}</div>
-          <div class="sub">${miles(r.confianza_alta)} de confianza alta · ${miles(r.potencia_radiativa_total)} MW acumulados</div>
+          <h4>${r.pais}</h4><div class="value">${miles(r.focos)}</div>
+          <div class="sub">${miles(r.confianza_alta)} de confianza alta · ${miles(r.potencia_radiativa_total)} MW</div>
           <div class="foot"><span class="src">${meta.fuente.nombre}</span>
-            <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
+            <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
         </div>`).join('')
-      : `<div class="card"><h4>Sin focos detectados</h4><div class="sub">El sensor no registró anomalías térmicas en ${paisNombre} durante la ventana. El sensor no ve bajo nubes: la ausencia no prueba inactividad.</div></div>`;
+      : `<div class="card"><h4>Sin focos detectados</h4><div class="sub">El sensor no registró anomalías térmicas en ${paisNombre} durante la ventana. No ve bajo nubes: la ausencia no prueba inactividad.</div></div>`;
   }
 
-  // ---- Mapa de situación ------------------------------------------------
-  let mapa=null, capaPaises=null, capaPuntos=null;
+  function tarjetasDesplazamiento(){
+    const d = almacen.desplazamiento; if(!d) return;
+    const meta = d.procedencia;
+    const lista = paisFiltro ? d.registros.filter(r => r.iso===paisFiltro) : d.registros;
+    document.getElementById('tag-desplazamiento').textContent = paisFiltro
+      ? 'cifra de '+d.anio_de_la_cifra+' · '+paisNombre
+      : meta.cantidad+' países · cifra de '+d.anio_de_la_cifra;
+    document.getElementById('tarj-desplazamiento').innerHTML = lista.length
+      ? lista.slice(0,6).map(r => `<div class="card">
+          <h4>${r.pais}</h4><div class="value">${miles(r.expulsion)}</div>
+          <div class="sub">expulsión · recepción ${miles(r.recepcion)} · internos ${miles(r.desplazados_internos)}</div>
+          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
+            <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
+        </div>`).join('')
+      : `<div class="card"><h4>Sin registro</h4><div class="sub">La fuente no consigna a ${paisNombre}.</div></div>`;
+  }
 
-  function color(n, cortes){
-    if(n < cortes[0]) return '#0E2135';
-    if(n < cortes[1]) return 'rgba(251,101,0,.28)';
-    if(n < cortes[2]) return 'rgba(251,101,0,.55)';
+  // ---- Mapa -------------------------------------------------------------
+  let mapa=null, capaPaises=null, capaPuntos=null, padron=[];
+
+  function color(n, c){
+    if(n < c[0]) return '#0E2135';
+    if(n < c[1]) return 'rgba(251,101,0,.28)';
+    if(n < c[2]) return 'rgba(251,101,0,.55)';
     return 'rgba(251,101,0,.85)';
   }
 
@@ -566,8 +652,8 @@
     const capa = CAPAS[capaActiva];
     const n = capa.conteo()[rasgo.properties.iso] || 0;
     const sel = paisFiltro === rasgo.properties.iso;
-    return { color: sel ? '#FB6500' : 'rgba(255,255,255,.30)', weight: sel ? 2.4 : .8,
-             fillColor: color(n, capa.cortes), fillOpacity: .9 };
+    return { color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
+             fillColor: color(n, capa.cortes), fillOpacity:.9 };
   }
 
   function leyenda(){
@@ -576,17 +662,16 @@
     document.getElementById('leyenda').innerHTML =
       capa.leyenda.slice(0,4).map((t,i) =>
         `<span><i style="background:${cajas[i]}${i===0?';border:1px solid rgba(255,255,255,.3)':''}"></i>${t}</span>`).join('') +
-      `<span><i class="punto"></i>${capa.leyenda[4]}</span>`;
+      (capa.puntos().length ? `<span><i class="punto"></i>${capa.leyenda[4]}</span>`
+                            : `<span class="sin-puntos">${capa.leyenda[4]}</span>`);
   }
 
   function puntos(){
     if(!mapa) return;
     if(capaPuntos) mapa.removeLayer(capaPuntos);
-    const lista = CAPAS[capaActiva].puntos();
-    capaPuntos = L.layerGroup(lista.map(p =>
-      L.circleMarker([p.lat, p.lon], {
-        radius: p.radio, color: '#FB6500', weight: 1.1, fillColor: '#FB6500', fillOpacity: .35
-      }).bindTooltip(p.ficha, {className:'ficha'})
+    capaPuntos = L.layerGroup(CAPAS[capaActiva].puntos().map(p =>
+      L.circleMarker([p.lat,p.lon],{radius:p.radio,color:'#FB6500',weight:1.1,fillColor:'#FB6500',fillOpacity:.35})
+        .bindTooltip(p.ficha,{className:'ficha'})
     )).addTo(mapa);
   }
 
@@ -597,64 +682,183 @@
       ? `Filtrando por <b>${paisNombre}</b><button id="quitar">quitar filtro</button>`
       : 'Sin país seleccionado — hacé clic en el mapa para filtrar';
     const q = document.getElementById('quitar');
-    if(q) q.addEventListener('click', () => { paisFiltro = null; paisNombre = null; repintar(); });
-      leyenda();
-    tarjetasIlicitas();
+    if(q) q.addEventListener('click', () => { paisFiltro=null; paisNombre=null; sincronizarSelector(); repintar(); });
+    document.querySelectorAll('.tema').forEach(b => b.classList.toggle('activo', b.dataset.capa===capaActiva));
+    leyenda(); tarjetasIlicitas(); tarjetasDesplazamiento(); informe();
   }
 
   function seleccionar(iso, nombre){
-    if(paisFiltro === iso){ paisFiltro = null; paisNombre = null; }
-    else { paisFiltro = iso; paisNombre = nombre; }
-    repintar();
+    if(paisFiltro === iso){ paisFiltro=null; paisNombre=null; }
+    else { paisFiltro=iso; paisNombre=nombre; }
+    sincronizarSelector(); repintar();
+  }
+
+  function sincronizarSelector(){
+    const s = document.getElementById('pais-informe');
+    if(s) s.value = paisFiltro || '';
   }
 
   fetch('geo/paises-alc.geojson')
-    .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(geo => {
-      mapa = L.map('mapa', { zoomControl:true, minZoom:2, worldCopyJump:false });
+      padron = geo.features.map(f => f.properties).sort((a,b)=>a.pais.localeCompare(b.pais,'es'));
+      const sel = document.getElementById('pais-informe');
+      sel.innerHTML = '<option value="">— toda la región —</option>' +
+        padron.map(p => `<option value="${p.iso}">${p.pais}</option>`).join('');
+      sel.addEventListener('change', () => {
+        paisFiltro = sel.value || null;
+        paisNombre = paisFiltro ? padron.find(p=>p.iso===paisFiltro).pais : null;
+        repintar();
+      });
+
+      mapa = L.map('mapa',{zoomControl:true,minZoom:2,worldCopyJump:false});
       mapa.attributionControl.setPrefix('');
       mapa.attributionControl.addAttribution('Límites: Natural Earth 1:50 m · dominio público');
-      capaPaises = L.geoJSON(geo, {
+      capaPaises = L.geoJSON(geo,{
         style: estiloPais,
         onEachFeature: (rasgo, capa) => {
           const p = rasgo.properties;
-          capa.bindTooltip(() => {
-            const n = CAPAS[capaActiva].conteo()[p.iso] || 0;
-            return CAPAS[capaActiva].ficha(p.iso, p.pais, p.bloque, n);
-          }, {className:'ficha', sticky:true});
-          capa.on('click', () => seleccionar(p.iso, p.pais));
+          capa.bindTooltip(() => CAPAS[capaActiva].ficha(p.iso,p.pais,p.bloque),{className:'ficha',sticky:true});
+          capa.on('click', () => seleccionar(p.iso,p.pais));
         }
       }).addTo(mapa);
-      mapa.fitBounds(capaPaises.getBounds(), {padding:[12,12]});
+      mapa.fitBounds(capaPaises.getBounds(),{padding:[12,12]});
       repintar();
     })
     .catch(err => {
       document.getElementById('mapa').innerHTML =
-        `<div class="falla" style="margin:16px"><h4>No se pudo cargar el mapa</h4>
-         <p>${err.message}. No se muestra un mapa de reemplazo.</p></div>`;
+        `<div class="falla" style="margin:16px"><h4>No se pudo cargar el mapa</h4><p>${err.message}. No se muestra un mapa de reemplazo.</p></div>`;
     });
 
-  // ---- Economías ilícitas ----
+  document.querySelectorAll('.tema').forEach(b =>
+    b.addEventListener('click', () => { capaActiva=b.dataset.capa; repintar(); }));
+
+  // ---- Informe ----------------------------------------------------------
+  function filasInforme(){
+    const filas = [];
+    const f = almacen.focos, d = almacen.desplazamiento;
+    if(f){
+      const r = paisFiltro ? f.registros.find(x=>x.iso===paisFiltro) : null;
+      const tot = paisFiltro ? (r?r.focos:0) : f.registros.reduce((a,x)=>a+x.focos,0);
+      const alta = paisFiltro ? (r?r.confianza_alta:0) : f.registros.reduce((a,x)=>a+x.confianza_alta,0);
+      filas.push({materia:'Economías ilícitas', indicador:'Focos de calor detectados', valor:tot,
+        detalle:miles(alta)+' de confianza alta', fuente:f.procedencia.fuente.nombre,
+        calif:f.procedencia.calificacion, momento:f.procedencia.obtenido_en, referencia:'ventana de 1 día'});
+    }
+    if(d){
+      const r = paisFiltro ? d.registros.find(x=>x.iso===paisFiltro) : null;
+      const suma = c => paisFiltro ? (r?r[c]:0) : d.registros.reduce((a,x)=>a+x[c],0);
+      ['expulsion','recepcion','desplazados_internos'].forEach(c => {
+        const rot = {expulsion:'Personas expulsadas', recepcion:'Personas recibidas', desplazados_internos:'Desplazados internos'}[c];
+        filas.push({materia:'Desplazamiento forzado', indicador:rot, valor:suma(c), detalle:'',
+          fuente:d.procedencia.fuente.nombre, calif:d.procedencia.calificacion,
+          momento:d.procedencia.obtenido_en, referencia:'cifra de '+d.anio_de_la_cifra});
+      });
+    }
+    return filas;
+  }
+
+  function serieDelPais(){
+    const s = almacen.serie; if(!s || !paisFiltro) return null;
+    return s.registros.find(p => p.iso===paisFiltro) || null;
+  }
+
+  function informe(){
+    const caja = document.getElementById('informe-cuerpo');
+    if(!caja) return;
+    const filas = filasInforme();
+    document.getElementById('informe-titulo').textContent =
+      paisFiltro ? paisNombre : 'América Latina y el Caribe — los 33 Estados del padrón';
+    document.getElementById('informe-fecha').textContent =
+      'Emitido el ' + new Date().toLocaleString('es-AR',{dateStyle:'long',timeStyle:'short'});
+
+    if(!filas.length){ caja.innerHTML = '<p class="sin-dato">Todavía no hay materias con dato para informar.</p>'; return; }
+
+    let html = `<table class="tabla-informe"><thead><tr>
+        <th>Materia</th><th>Indicador</th><th class="num">Valor</th><th>Referencia</th><th>Fuente</th><th>Calif.</th>
+      </tr></thead><tbody>` +
+      filas.map(f => `<tr>
+        <td>${f.materia}</td><td>${f.indicador}${f.detalle?'<br><span class="menor">'+f.detalle+'</span>':''}</td>
+        <td class="num mono">${miles(f.valor)}</td><td>${f.referencia}</td>
+        <td>${f.fuente}</td><td class="mono">${f.calif.fiabilidad}-${f.calif.credibilidad}</td>
+      </tr>`).join('') + `</tbody></table>`;
+
+    const serie = serieDelPais();
+    if(serie){
+      html += `<h4 class="sub-informe">Serie anual de desplazamiento forzado</h4>
+        <table class="tabla-informe"><thead><tr><th>Año</th>
+          <th class="num">Expulsión</th><th class="num">Recepción</th><th class="num">Desplazados internos</th>
+        </tr></thead><tbody>` +
+        serie.serie.map(a => `<tr><td class="mono">${a.anio}</td>
+          <td class="num mono">${miles(a.origen_refugiados + a.origen_solicitantes)}</td>
+          <td class="num mono">${miles(a.asilo_refugiados + a.asilo_solicitantes)}</td>
+          <td class="num mono">${miles(a.desplazados_internos)}</td></tr>`).join('') + `</tbody></table>`;
+    } else if(!paisFiltro){
+      html += `<p class="sin-dato">Elegí un país para ver además su serie anual completa.</p>`;
+    }
+
+    html += `<div class="informe-pie">
+      <p><b>Calificación.</b> La letra mide la fiabilidad de la fuente y el número la credibilidad
+         de la información; son independientes. Ninguna cifra de este informe alcanza el grado 1,
+         porque el grado 1 exige corroboración por dos orígenes independientes y todas las
+         materias en servicio son hoy de fuente única declarada.</p>
+      <p><b>Este documento no contiene juicios.</b> Es un extracto del registro público SIWA:
+         hechos calificados con su procedencia. El análisis de la Fundación —con confianza y
+         probabilidad declaradas— sale por sus productos, firmado.</p>
+      <p>Los vacíos declarados de cada fuente figuran en la página de la que procede este extracto.</p>
+    </div>`;
+    caja.innerHTML = html;
+  }
+
+  function csv(){
+    const sep = ';';
+    const lineas = [['materia','indicador','valor','referencia','fuente','fiabilidad','credibilidad','obtenido_en'].join(sep)];
+    filasInforme().forEach(f => lineas.push(
+      [f.materia,f.indicador,f.valor,f.referencia,f.fuente,f.calif.fiabilidad,f.calif.credibilidad,f.momento]
+        .map(v => `"${String(v).replace(/"/g,'""')}"`).join(sep)));
+    const serie = serieDelPais();
+    if(serie){
+      lineas.push('');
+      lineas.push(['anio','expulsion','recepcion','desplazados_internos'].join(sep));
+      serie.serie.forEach(a => lineas.push([a.anio,
+        a.origen_refugiados+a.origen_solicitantes, a.asilo_refugiados+a.asilo_solicitantes,
+        a.desplazados_internos].join(sep)));
+    }
+    // El punto y coma y el BOM hacen que la planilla lo abra bien en español.
+    const blob = new Blob(['﻿'+lineas.join('\r\n')],{type:'text/csv;charset=utf-8;'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'siwa-' + (paisFiltro||'region').toLowerCase() + '-' + new Date().toISOString().slice(0,10) + '.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  document.getElementById('btn-csv').addEventListener('click', csv);
+  document.getElementById('btn-imprimir').addEventListener('click', () => window.print());
+
+  // ---- Lectura de los archivos -----------------------------------------
   Promise.all([traer('focos.json'), traer('estado/focos.json').catch(()=>null)])
     .then(([d, estado]) => {
-      almacen.focos = d;
-      const meta = d.procedencia;
-      pintarProcedencia('proc-ilicitas', meta);
-      registros += d.registros.reduce((a,r) => a + r.focos, 0); dominios++;
-      vacios += pintarVacios('vac-ilicitas', meta.vacios_declarados);
-      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-ilicitas','focos de calor',estado.mensaje,meta); }
+      almacen.focos = d; dominios++;
+      pintarProcedencia('proc-ilicitas', d.procedencia);
+      registros += d.registros.reduce((a,r)=>a+r.focos,0);
+      vacios += pintarVacios('vac-ilicitas', d.procedencia.vacios_declarados);
+      if(estado && estado.estado==='error'){ fallas++; pintarFalla('tarj-ilicitas','focos de calor',estado.mensaje,d.procedencia); }
       repintar(); marcador();
     })
-    .catch(err => {
-      document.getElementById('proc-ilicitas').textContent =
-        'Sin registro disponible todavía: el colector corre cuando la clave está cargada.';
-      document.getElementById('tarj-ilicitas').innerHTML =
-        `<div class="placeholder"><div><div class="ptitle">Minería ilegal, desmonte y avance sobre tierra fiscal</div>
-         <p>El colector de focos de calor de NASA FIRMS está escrito y probado, y entra en
-            servicio en cuanto la clave institucional quede cargada en el repositorio.</p></div>
-         <span class="badge pending">Sin dato</span></div>`;
-      marcador();
-    });
+    .catch(err => { fallas++; pintarFalla('tarj-ilicitas','focos de calor',err.message,null);
+      document.getElementById('proc-ilicitas').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('desplazamiento.json'), traer('estado/desplazamiento.json').catch(()=>null), traer('desplazamiento-serie.json').catch(()=>null)])
+    .then(([d, estado, serie]) => {
+      almacen.desplazamiento = d; almacen.serie = serie; dominios++;
+      pintarProcedencia('proc-desplazamiento', d.procedencia);
+      registros += d.registros.reduce((a,r)=>a+r.expulsion+r.recepcion+r.desplazados_internos,0);
+      vacios += pintarVacios('vac-desplazamiento', d.procedencia.vacios_declarados);
+      if(estado && estado.estado==='error'){ fallas++; pintarFalla('tarj-desplazamiento','desplazamiento',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err => { fallas++; pintarFalla('tarj-desplazamiento','desplazamiento',err.message,null);
+      document.getElementById('proc-desplazamiento').textContent='Sin registro disponible.'; marcador(); });
 })();
 </script>
 </body>

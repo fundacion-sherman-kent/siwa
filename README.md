@@ -33,6 +33,9 @@ su confianza y su probabilidad, sale por otro camino y con firma.
    no cubre.
 4. **Sin modelos de lenguaje en la recolección.** Solo biblioteca estándar de
    Python y estadística clásica.
+5. **Todo el registro es público.** No hay capa reservada ni cuenta de acceso:
+   el estado, la serie histórica, la exportación en planilla y el informe
+   descargable están abiertos para cualquiera, sin registro.
 
 ## Estructura
 
@@ -41,9 +44,12 @@ colectores/     los programas que traen los datos
   comun.py      funciones compartidas y control de calificación
   geo.py        atribución de una coordenada al padrón de los 33
   focos.py      NASA FIRMS — focos de calor, economías ilícitas
+  desplazamiento.py  ACNUR — desplazamiento forzado
 datos/
-  publico/      lo que ve cualquier visitante
+  publico/      todo el registro; no hay capa reservada
     estado/     cómo terminó la última corrida de cada colector
+sitio/
+  index.html    registro, mapa e informe descargable
 ```
 
 ## Cómo se ejecuta
@@ -66,7 +72,7 @@ python colectores/focos.py
 | Gobernanza | Contratación pública | Portales OCDS | No | Pendiente |
 | Gobernanza | Sanciones e integridad | OpenSanctions, OFAC | No | Pendiente |
 | Gobernanza | Estabilidad institucional | Calendarios oficiales, V-Dem | No | Pendiente |
-| Inteligencia estratégica | Desplazamiento forzado | ACNUR, IDMC, R4V | No | Pendiente |
+| Inteligencia estratégica | Desplazamiento forzado | ACNUR | No | `A-2` en servicio |
 | Inteligencia estratégica | Contrabando y subfacturación | UN Comtrade | No | Pendiente |
 
 El colector en servicio califica `2` y no `1` porque es fuente única y la materia

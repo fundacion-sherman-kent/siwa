@@ -13,9 +13,9 @@ De cada Estado del padrón se registran dos caras que no deben confundirse:
 Un país puede ser alto en ambas. Presentarlas juntas como «migración» sería
 fundir dos fenómenos distintos.
 
-Escribe dos archivos, conforme a `doctrina/siwa.md` §2:
+Escribe dos archivos, ambos públicos (`doctrina/siwa.md` §2):
 - `datos/publico/desplazamiento.json` — el año más reciente
-- `datos/suscriptor/desplazamiento-serie.json` — la serie anual completa
+- `datos/publico/desplazamiento-serie.json` — la serie anual completa
 """
 
 from __future__ import annotations
@@ -157,15 +157,12 @@ def recolectar():
 
     comun.escribir(
         colector="desplazamiento-serie",
-        capa="suscriptor",
+        capa="publico",
         fuente=FUENTE,
         url_fuente=URL_PUBLICA,
         calificacion=calificacion,
         registros=serie_completa,
-        vacios=vacios + [
-            "Esta serie es la capa de suscriptor. No es material reservado: el "
-            "repositorio es público (doctrina/siwa.md §2.2)."
-        ],
+        vacios=vacios,
     )
 
     return comun.escribir(
