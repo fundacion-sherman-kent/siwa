@@ -1,0 +1,8208 @@
+{
+  "procedencia": {
+    "colector": "focos",
+    "capa": "publico",
+    "obtenido_en": "2026-08-30T20:44:12+00:00",
+    "fuente": {
+      "nombre": "NASA FIRMS — VIIRS S-NPP, procesamiento de tiempo casi real",
+      "url": "https://firms.modaps.eosdis.nasa.gov/api/area/"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 2,
+      "corroborado": false,
+      "nota": "Detección instrumental de un sensor satelital, sin intermediación. Fuente única: la segunda fuente independiente sería otro sensor —VIIRS NOAA-20 o MODIS— todavía no incorporado. Declarado conforme a doctrina/fuentes.md §2 ter."
+    },
+    "vacios_declarados": [
+      "Lo detectado es una ANOMALÍA TÉRMICA, no un incendio ni una actividad ilegal. Incluye quema agrícola, incendio forestal, quema de gas en yacimientos e industria pesada. Atribuirla a minería ilegal o a desmonte exige cruzarla contra concesiones y áreas protegidas, y eso lo hace el analista, no este colector.",
+      "El sensor no ve bajo cobertura de nubes ni de humo denso: la ausencia de focos en una zona no prueba que no haya actividad.",
+      "La actividad ilegal que no quema —dragado fluvial, socavón, tala selectiva— no deja firma térmica y por lo tanto no aparece acá en absoluto.",
+      "Ventana de 1 día. Los focos de días anteriores no se acumulan.",
+      "809 focos de confianza baja fueron descartados por indicación de la propia fuente.",
+      "289 focos caen fuera del territorio de los 33 Estados del padrón y no se computan por país.",
+      "El conteo por país es completo. Para el mapa se publican 800 de 9006 focos, elegidos por mayor potencia radiativa: publicar el total haría inmanejable el archivo.",
+      "Atribución por trazado de rayo sobre los límites de Natural Earth (escala 1:50 m). Un punto a menos de esa resolución de la costa puede quedar sin atribuir."
+    ],
+    "cantidad": 22
+  },
+  "registros": [
+    {
+      "iso": "BRA",
+      "pais": "Brasil",
+      "bloque": "Cono Sur",
+      "focos": 5824,
+      "confianza_alta": 432,
+      "potencia_radiativa_total": 73162.4
+    },
+    {
+      "iso": "PER",
+      "pais": "Perú",
+      "bloque": "Andina",
+      "focos": 1242,
+      "confianza_alta": 17,
+      "potencia_radiativa_total": 14244.6
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "bloque": "Andina",
+      "focos": 740,
+      "confianza_alta": 73,
+      "potencia_radiativa_total": 9751.9
+    },
+    {
+      "iso": "VEN",
+      "pais": "Venezuela",
+      "bloque": "Andina",
+      "focos": 201,
+      "confianza_alta": 4,
+      "potencia_radiativa_total": 1077.7
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "bloque": "México y Centroamérica",
+      "focos": 145,
+      "confianza_alta": 4,
+      "potencia_radiativa_total": 740.7
+    },
+    {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "bloque": "Cono Sur",
+      "focos": 116,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 675.4
+    },
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "bloque": "Andina",
+      "focos": 98,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 939.9
+    },
+    {
+      "iso": "PRY",
+      "pais": "Paraguay",
+      "bloque": "Cono Sur",
+      "focos": 88,
+      "confianza_alta": 5,
+      "potencia_radiativa_total": 952.6
+    },
+    {
+      "iso": "CUB",
+      "pais": "Cuba",
+      "bloque": "Caribe hispano y Haití",
+      "focos": 85,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 647.0
+    },
+    {
+      "iso": "HND",
+      "pais": "Honduras",
+      "bloque": "México y Centroamérica",
+      "focos": 36,
+      "confianza_alta": 4,
+      "potencia_radiativa_total": 171.4
+    },
+    {
+      "iso": "DOM",
+      "pais": "República Dominicana",
+      "bloque": "Caribe hispano y Haití",
+      "focos": 35,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 308.2
+    },
+    {
+      "iso": "JAM",
+      "pais": "Jamaica",
+      "bloque": "Caribe oriental",
+      "focos": 26,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 116.4
+    },
+    {
+      "iso": "NIC",
+      "pais": "Nicaragua",
+      "bloque": "México y Centroamérica",
+      "focos": 20,
+      "confianza_alta": 1,
+      "potencia_radiativa_total": 97.5
+    },
+    {
+      "iso": "GUY",
+      "pais": "Guyana",
+      "bloque": "Guayanas",
+      "focos": 15,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 56.2
+    },
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "focos": 14,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 66.8
+    },
+    {
+      "iso": "SUR",
+      "pais": "Surinam",
+      "bloque": "Guayanas",
+      "focos": 12,
+      "confianza_alta": 1,
+      "potencia_radiativa_total": 66.1
+    },
+    {
+      "iso": "GTM",
+      "pais": "Guatemala",
+      "bloque": "México y Centroamérica",
+      "focos": 9,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 17.8
+    },
+    {
+      "iso": "ECU",
+      "pais": "Ecuador",
+      "bloque": "Andina",
+      "focos": 4,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 16.0
+    },
+    {
+      "iso": "BLZ",
+      "pais": "Belice",
+      "bloque": "México y Centroamérica",
+      "focos": 3,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 20.0
+    },
+    {
+      "iso": "HTI",
+      "pais": "Haití",
+      "bloque": "Caribe hispano y Haití",
+      "focos": 2,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 8.2
+    },
+    {
+      "iso": "CRI",
+      "pais": "Costa Rica",
+      "bloque": "México y Centroamérica",
+      "focos": 1,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 2.7
+    },
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "focos": 1,
+      "confianza_alta": 0,
+      "potencia_radiativa_total": 2.8
+    }
+  ],
+  "muestra_para_mapa": [
+    {
+      "latitud": -11.15606,
+      "longitud": -45.05208,
+      "potencia_radiativa": 453.87,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.15268,
+      "longitud": -45.0526,
+      "potencia_radiativa": 453.87,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.45259,
+      "longitud": -60.74141,
+      "potencia_radiativa": 377.09,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.24667,
+      "longitud": -53.87891,
+      "potencia_radiativa": 254.79,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.22436,
+      "longitud": -45.35616,
+      "potencia_radiativa": 241.61,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.94252,
+      "longitud": -57.68963,
+      "potencia_radiativa": 223.31,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.93617,
+      "longitud": -44.30251,
+      "potencia_radiativa": 211.51,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.93552,
+      "longitud": -44.2984,
+      "potencia_radiativa": 211.51,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.44726,
+      "longitud": -60.75595,
+      "potencia_radiativa": 205.47,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.44639,
+      "longitud": -60.74911,
+      "potencia_radiativa": 205.47,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.75106,
+      "longitud": -45.3601,
+      "potencia_radiativa": 199.11,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.86823,
+      "longitud": -66.77927,
+      "potencia_radiativa": 194.01,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.11483,
+      "longitud": -47.25525,
+      "potencia_radiativa": 190.91,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.11147,
+      "longitud": -47.25577,
+      "potencia_radiativa": 190.91,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.75723,
+      "longitud": -45.35544,
+      "potencia_radiativa": 172.48,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.75443,
+      "longitud": -45.35956,
+      "potencia_radiativa": 172.48,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.75386,
+      "longitud": -45.35598,
+      "potencia_radiativa": 172.48,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.25779,
+      "longitud": -55.90802,
+      "potencia_radiativa": 171.08,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.34227,
+      "longitud": -45.16699,
+      "potencia_radiativa": 170.45,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -16.52301,
+      "longitud": -60.11404,
+      "potencia_radiativa": 169.68,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -7.11364,
+      "longitud": -42.77979,
+      "potencia_radiativa": 160.08,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.10972,
+      "longitud": -42.78039,
+      "potencia_radiativa": 160.08,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.33833,
+      "longitud": -53.79448,
+      "potencia_radiativa": 159.14,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.11445,
+      "longitud": -42.78475,
+      "potencia_radiativa": 158.52,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.11053,
+      "longitud": -42.78537,
+      "potencia_radiativa": 158.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.70426,
+      "longitud": -47.19099,
+      "potencia_radiativa": 158.5,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.72156,
+      "longitud": -64.99786,
+      "potencia_radiativa": 154.23,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.71781,
+      "longitud": -65.00346,
+      "potencia_radiativa": 154.23,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -16.51178,
+      "longitud": -60.11628,
+      "potencia_radiativa": 153.56,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.51096,
+      "longitud": -60.1123,
+      "potencia_radiativa": 153.56,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -10.73747,
+      "longitud": -54.03865,
+      "potencia_radiativa": 151.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.73334,
+      "longitud": -54.04442,
+      "potencia_radiativa": 151.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.23153,
+      "longitud": -71.03084,
+      "potencia_radiativa": 147.63,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.22815,
+      "longitud": -71.03138,
+      "potencia_radiativa": 147.63,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.49667,
+      "longitud": -60.5759,
+      "potencia_radiativa": 144.65,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.71608,
+      "longitud": -64.99384,
+      "potencia_radiativa": 144.06,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.2235,
+      "longitud": -56.3695,
+      "potencia_radiativa": 143.61,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.79651,
+      "longitud": -71.23087,
+      "potencia_radiativa": 143.5,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -16.51904,
+      "longitud": -60.12309,
+      "potencia_radiativa": 135.33,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -10.71537,
+      "longitud": -47.19657,
+      "potencia_radiativa": 131.39,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.39655,
+      "longitud": -44.99604,
+      "potencia_radiativa": 128.3,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.15751,
+      "longitud": -76.42579,
+      "potencia_radiativa": 127.99,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.18984,
+      "longitud": -45.04659,
+      "potencia_radiativa": 127.09,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.13497,
+      "longitud": -45.74696,
+      "potencia_radiativa": 126.67,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.13442,
+      "longitud": -45.74343,
+      "potencia_radiativa": 126.67,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.94276,
+      "longitud": -57.6878,
+      "potencia_radiativa": 126.19,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.29488,
+      "longitud": -75.09721,
+      "potencia_radiativa": 125.08,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -3.91646,
+      "longitud": -71.66256,
+      "potencia_radiativa": 123.37,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -15.2453,
+      "longitud": -53.86705,
+      "potencia_radiativa": 122.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.2409,
+      "longitud": -53.87347,
+      "potencia_radiativa": 122.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.24022,
+      "longitud": -53.86751,
+      "potencia_radiativa": 122.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.23231,
+      "longitud": -71.03027,
+      "potencia_radiativa": 120.57,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.8507,
+      "longitud": -64.98174,
+      "potencia_radiativa": 119.86,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.13667,
+      "longitud": -45.73581,
+      "potencia_radiativa": 119.34,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.40042,
+      "longitud": -45.46302,
+      "potencia_radiativa": 118.48,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.53062,
+      "longitud": -55.33188,
+      "potencia_radiativa": 118.26,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52559,
+      "longitud": -55.33244,
+      "potencia_radiativa": 118.26,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52482,
+      "longitud": -55.32668,
+      "potencia_radiativa": 118.26,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.08848,
+      "longitud": -68.28577,
+      "potencia_radiativa": 116.27,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.84506,
+      "longitud": -41.69843,
+      "potencia_radiativa": 115.51,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -1.86883,
+      "longitud": -55.13926,
+      "potencia_radiativa": 114.93,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.45159,
+      "longitud": -69.28697,
+      "potencia_radiativa": 114.93,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.45096,
+      "longitud": -69.28307,
+      "potencia_radiativa": 114.93,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -9.72369,
+      "longitud": -65.00006,
+      "potencia_radiativa": 113.39,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 32.86964,
+      "longitud": -98.39946,
+      "potencia_radiativa": 112.79,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "2024",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": 32.87014,
+      "longitud": -98.3932,
+      "potencia_radiativa": 112.79,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "2024",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": 32.87458,
+      "longitud": -98.39997,
+      "potencia_radiativa": 112.79,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "2024",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": 32.87509,
+      "longitud": -98.39364,
+      "potencia_radiativa": 112.79,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "2024",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": -9.85241,
+      "longitud": -64.99129,
+      "potencia_radiativa": 110.37,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.46984,
+      "longitud": -70.70055,
+      "potencia_radiativa": 107.9,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.80134,
+      "longitud": -50.67862,
+      "potencia_radiativa": 106.49,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.25607,
+      "longitud": -55.90619,
+      "potencia_radiativa": 106.1,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.25526,
+      "longitud": -55.90037,
+      "potencia_radiativa": 106.1,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.62778,
+      "longitud": -69.30997,
+      "potencia_radiativa": 104.86,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -10.63483,
+      "longitud": -48.66811,
+      "potencia_radiativa": 104.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.87886,
+      "longitud": -56.5041,
+      "potencia_radiativa": 104.5,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 4.65082,
+      "longitud": -74.98975,
+      "potencia_radiativa": 100.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1834",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": -7.52516,
+      "longitud": -55.32296,
+      "potencia_radiativa": 100.8,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52098,
+      "longitud": -55.32948,
+      "potencia_radiativa": 100.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.22397,
+      "longitud": -56.37393,
+      "potencia_radiativa": 100.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.36518,
+      "longitud": -48.20396,
+      "potencia_radiativa": 100.47,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.90539,
+      "longitud": -45.87128,
+      "potencia_radiativa": 99.85,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.90207,
+      "longitud": -45.87181,
+      "potencia_radiativa": 99.85,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.12049,
+      "longitud": -47.24696,
+      "potencia_radiativa": 99.81,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.11767,
+      "longitud": -47.2511,
+      "potencia_radiativa": 99.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.24033,
+      "longitud": -45.12064,
+      "potencia_radiativa": 98.47,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -16.5214,
+      "longitud": -60.10625,
+      "potencia_radiativa": 97.03,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.52058,
+      "longitud": -60.10229,
+      "potencia_radiativa": 97.03,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.51578,
+      "longitud": -60.10734,
+      "potencia_radiativa": 97.03,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.51496,
+      "longitud": -60.10341,
+      "potencia_radiativa": 97.03,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.90699,
+      "longitud": -75.03105,
+      "potencia_radiativa": 96.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -12.11645,
+      "longitud": -47.26613,
+      "potencia_radiativa": 96.22,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.11254,
+      "longitud": -47.26302,
+      "potencia_radiativa": 96.22,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.45636,
+      "longitud": -69.29421,
+      "potencia_radiativa": 94.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.45572,
+      "longitud": -69.2903,
+      "potencia_radiativa": 94.81,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.45223,
+      "longitud": -69.29089,
+      "potencia_radiativa": 94.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -10.74778,
+      "longitud": -54.04253,
+      "potencia_radiativa": 94.09,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.74228,
+      "longitud": -54.03799,
+      "potencia_radiativa": 94.09,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.21167,
+      "longitud": -53.58251,
+      "potencia_radiativa": 94.09,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.55578,
+      "longitud": -70.07703,
+      "potencia_radiativa": 93.71,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -2.96585,
+      "longitud": -43.57195,
+      "potencia_radiativa": 93.39,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.73884,
+      "longitud": -54.04898,
+      "potencia_radiativa": 93.2,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.72616,
+      "longitud": -73.23067,
+      "potencia_radiativa": 92.04,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -10.9073,
+      "longitud": -45.55878,
+      "potencia_radiativa": 90.83,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.9972,
+      "longitud": -48.13564,
+      "potencia_radiativa": 89.22,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.26746,
+      "longitud": -76.64317,
+      "potencia_radiativa": 88.35,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.31449,
+      "longitud": -60.58933,
+      "potencia_radiativa": 87.72,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.30752,
+      "longitud": -60.59045,
+      "potencia_radiativa": 87.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.89937,
+      "longitud": -71.50863,
+      "potencia_radiativa": 87.15,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.349,
+      "longitud": -45.16589,
+      "potencia_radiativa": 85.0,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.34564,
+      "longitud": -45.16644,
+      "potencia_radiativa": 85.0,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.52243,
+      "longitud": -70.48259,
+      "potencia_radiativa": 83.5,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.56911,
+      "longitud": -65.14553,
+      "potencia_radiativa": 82.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.56553,
+      "longitud": -65.15054,
+      "potencia_radiativa": 82.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -7.82632,
+      "longitud": -71.9741,
+      "potencia_radiativa": 81.94,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 0.00888,
+      "longitud": -60.59864,
+      "potencia_radiativa": 81.75,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1834",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.26119,
+      "longitud": -62.75491,
+      "potencia_radiativa": 80.57,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.99313,
+      "longitud": -51.89505,
+      "potencia_radiativa": 78.34,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 20.42218,
+      "longitud": -74.93788,
+      "potencia_radiativa": 78.15,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1839",
+      "pais": "Cuba",
+      "iso": "CUB"
+    },
+    {
+      "latitud": 0.00995,
+      "longitud": -60.59178,
+      "potencia_radiativa": 77.48,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1834",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.85873,
+      "longitud": -41.67625,
+      "potencia_radiativa": 75.97,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.85811,
+      "longitud": -41.67242,
+      "potencia_radiativa": 75.97,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.85389,
+      "longitud": -41.67313,
+      "potencia_radiativa": 75.97,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.34348,
+      "longitud": -45.65487,
+      "potencia_radiativa": 74.77,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.34292,
+      "longitud": -45.65129,
+      "potencia_radiativa": 74.77,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.13387,
+      "longitud": -45.73988,
+      "potencia_radiativa": 73.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.2711,
+      "longitud": -76.64614,
+      "potencia_radiativa": 73.12,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.869,
+      "longitud": -75.33354,
+      "potencia_radiativa": 72.47,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.19646,
+      "longitud": -40.55413,
+      "potencia_radiativa": 72.41,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.91823,
+      "longitud": -67.03501,
+      "potencia_radiativa": 72.1,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.8383,
+      "longitud": -65.7009,
+      "potencia_radiativa": 71.68,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.83476,
+      "longitud": -65.70569,
+      "potencia_radiativa": 71.68,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.91205,
+      "longitud": -45.87022,
+      "potencia_radiativa": 71.5,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.90872,
+      "longitud": -45.87074,
+      "potencia_radiativa": 71.5,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.89291,
+      "longitud": -60.27979,
+      "potencia_radiativa": 71.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.89213,
+      "longitud": -60.27311,
+      "potencia_radiativa": 71.28,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.53102,
+      "longitud": -55.32822,
+      "potencia_radiativa": 71.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.53018,
+      "longitud": -55.32232,
+      "potencia_radiativa": 71.11,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.22547,
+      "longitud": -45.3633,
+      "potencia_radiativa": 71.08,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.82952,
+      "longitud": -45.34746,
+      "potencia_radiativa": 70.6,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.82616,
+      "longitud": -45.34798,
+      "potencia_radiativa": 70.6,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.85384,
+      "longitud": -76.99959,
+      "potencia_radiativa": 70.51,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.13404,
+      "longitud": -65.74922,
+      "potencia_radiativa": 70.21,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.12976,
+      "longitud": -65.75,
+      "potencia_radiativa": 70.21,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -9.84951,
+      "longitud": -46.18871,
+      "potencia_radiativa": 69.75,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.65655,
+      "longitud": -50.86684,
+      "potencia_radiativa": 68.3,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.92937,
+      "longitud": -44.28261,
+      "potencia_radiativa": 68.16,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -16.49732,
+      "longitud": -60.10299,
+      "potencia_radiativa": 67.17,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.4917,
+      "longitud": -60.10415,
+      "potencia_radiativa": 67.17,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.8228,
+      "longitud": -74.85107,
+      "potencia_radiativa": 67.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.41308,
+      "longitud": -54.7555,
+      "potencia_radiativa": 66.85,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.40904,
+      "longitud": -54.76117,
+      "potencia_radiativa": 66.85,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.40834,
+      "longitud": -54.75615,
+      "potencia_radiativa": 66.85,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -18.63181,
+      "longitud": -39.74681,
+      "potencia_radiativa": 66.57,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1645",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.87451,
+      "longitud": -71.78619,
+      "potencia_radiativa": 66.1,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.65632,
+      "longitud": -66.38023,
+      "potencia_radiativa": 66.06,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -4.96413,
+      "longitud": -55.85168,
+      "potencia_radiativa": 65.53,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.96332,
+      "longitud": -55.84603,
+      "potencia_radiativa": 65.53,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.95911,
+      "longitud": -55.85229,
+      "potencia_radiativa": 65.53,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.9583,
+      "longitud": -55.8466,
+      "potencia_radiativa": 65.53,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.78194,
+      "longitud": -73.07601,
+      "potencia_radiativa": 65.53,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.12084,
+      "longitud": -74.2599,
+      "potencia_radiativa": 65.29,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.11686,
+      "longitud": -74.25668,
+      "potencia_radiativa": 65.29,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -5.42291,
+      "longitud": -51.20529,
+      "potencia_radiativa": 64.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.34404,
+      "longitud": -45.65847,
+      "potencia_radiativa": 63.69,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.34065,
+      "longitud": -45.65899,
+      "potencia_radiativa": 63.69,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.82981,
+      "longitud": -65.70244,
+      "potencia_radiativa": 63.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.82627,
+      "longitud": -65.70721,
+      "potencia_radiativa": 63.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.82557,
+      "longitud": -65.7032,
+      "potencia_radiativa": 63.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -7.77302,
+      "longitud": -76.67722,
+      "potencia_radiativa": 63.35,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.97737,
+      "longitud": -76.60461,
+      "potencia_radiativa": 61.92,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.97358,
+      "longitud": -76.60515,
+      "potencia_radiativa": 61.92,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -12.59161,
+      "longitud": -65.14582,
+      "potencia_radiativa": 61.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.59085,
+      "longitud": -65.14159,
+      "potencia_radiativa": 61.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -13.59596,
+      "longitud": -62.19486,
+      "potencia_radiativa": 61.72,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -13.59542,
+      "longitud": -62.19208,
+      "potencia_radiativa": 61.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.94902,
+      "longitud": -45.93329,
+      "potencia_radiativa": 60.52,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.94848,
+      "longitud": -45.92974,
+      "potencia_radiativa": 60.52,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.94515,
+      "longitud": -45.93027,
+      "potencia_radiativa": 60.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.22176,
+      "longitud": -45.11246,
+      "potencia_radiativa": 60.18,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.22926,
+      "longitud": -73.17444,
+      "potencia_radiativa": 60.01,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.15549,
+      "longitud": -45.04844,
+      "potencia_radiativa": 59.85,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.41807,
+      "longitud": -43.3787,
+      "potencia_radiativa": 59.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.77705,
+      "longitud": -50.70172,
+      "potencia_radiativa": 59.39,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.41495,
+      "longitud": -71.10885,
+      "potencia_radiativa": 59.25,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.72285,
+      "longitud": -58.92015,
+      "potencia_radiativa": 58.88,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.93256,
+      "longitud": -45.87058,
+      "potencia_radiativa": 58.6,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.93201,
+      "longitud": -45.86703,
+      "potencia_radiativa": 58.6,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.92869,
+      "longitud": -45.86757,
+      "potencia_radiativa": 58.6,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.06061,
+      "longitud": -70.49902,
+      "potencia_radiativa": 58.53,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.88988,
+      "longitud": -73.79781,
+      "potencia_radiativa": 58.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.0664,
+      "longitud": -69.95548,
+      "potencia_radiativa": 58.4,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.93745,
+      "longitud": -44.31062,
+      "potencia_radiativa": 58.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.93389,
+      "longitud": -44.3112,
+      "potencia_radiativa": 58.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.93325,
+      "longitud": -44.30716,
+      "potencia_radiativa": 58.28,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.36687,
+      "longitud": -71.10191,
+      "potencia_radiativa": 58.18,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -19.34654,
+      "longitud": -39.99617,
+      "potencia_radiativa": 58.12,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1645",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.24754,
+      "longitud": -54.00948,
+      "potencia_radiativa": 57.46,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.24269,
+      "longitud": -54.01003,
+      "potencia_radiativa": 57.46,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.57089,
+      "longitud": -43.50702,
+      "potencia_radiativa": 57.46,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.56782,
+      "longitud": -43.5123,
+      "potencia_radiativa": 57.46,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -14.40453,
+      "longitud": -53.01706,
+      "potencia_radiativa": 57.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.90305,
+      "longitud": -71.74932,
+      "potencia_radiativa": 57.03,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.41158,
+      "longitud": -71.10938,
+      "potencia_radiativa": 56.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -1.75674,
+      "longitud": -55.66079,
+      "potencia_radiativa": 56.78,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.94062,
+      "longitud": -60.51751,
+      "potencia_radiativa": 56.56,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.9397,
+      "longitud": -60.5127,
+      "potencia_radiativa": 56.56,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.97865,
+      "longitud": -76.61336,
+      "potencia_radiativa": 56.39,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.97801,
+      "longitud": -76.60898,
+      "potencia_radiativa": 56.39,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.97485,
+      "longitud": -76.61381,
+      "potencia_radiativa": 56.39,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.97421,
+      "longitud": -76.60946,
+      "potencia_radiativa": 56.39,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -10.83066,
+      "longitud": -45.35468,
+      "potencia_radiativa": 56.24,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.82673,
+      "longitud": -45.35159,
+      "potencia_radiativa": 56.24,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -17.37844,
+      "longitud": -60.43446,
+      "potencia_radiativa": 56.18,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "555",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -17.37779,
+      "longitud": -60.4396,
+      "potencia_radiativa": 56.18,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "555",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.24926,
+      "longitud": -45.3742,
+      "potencia_radiativa": 55.95,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.2487,
+      "longitud": -45.37062,
+      "potencia_radiativa": 55.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.92104,
+      "longitud": -67.02718,
+      "potencia_radiativa": 55.84,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.92045,
+      "longitud": -67.02367,
+      "potencia_radiativa": 55.84,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.91702,
+      "longitud": -67.02789,
+      "potencia_radiativa": 55.84,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.11982,
+      "longitud": -47.26561,
+      "potencia_radiativa": 55.78,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.11928,
+      "longitud": -47.26199,
+      "potencia_radiativa": 55.78,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.53589,
+      "longitud": -59.77002,
+      "potencia_radiativa": 55.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.84694,
+      "longitud": -64.9873,
+      "potencia_radiativa": 55.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.58341,
+      "longitud": -70.6025,
+      "potencia_radiativa": 55.33,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.53609,
+      "longitud": -64.16627,
+      "potencia_radiativa": 55.02,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.53145,
+      "longitud": -64.16713,
+      "potencia_radiativa": 55.02,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -6.01095,
+      "longitud": -45.07808,
+      "potencia_radiativa": 55.0,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.00743,
+      "longitud": -45.0786,
+      "potencia_radiativa": 55.0,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.93978,
+      "longitud": -72.58839,
+      "potencia_radiativa": 54.98,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.20058,
+      "longitud": -45.07104,
+      "potencia_radiativa": 54.91,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.53278,
+      "longitud": -51.44113,
+      "potencia_radiativa": 54.9,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.80631,
+      "longitud": -77.02097,
+      "potencia_radiativa": 54.63,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.86249,
+      "longitud": -71.22707,
+      "potencia_radiativa": 54.61,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.63612,
+      "longitud": -67.47939,
+      "potencia_radiativa": 54.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -21.70164,
+      "longitud": -54.40878,
+      "potencia_radiativa": 54.53,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1826",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.11201,
+      "longitud": -42.76982,
+      "potencia_radiativa": 54.51,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.71983,
+      "longitud": -73.2673,
+      "potencia_radiativa": 54.49,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.41885,
+      "longitud": -70.48795,
+      "potencia_radiativa": 54.46,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.74366,
+      "longitud": -54.04837,
+      "potencia_radiativa": 54.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.93079,
+      "longitud": -55.72374,
+      "potencia_radiativa": 54.34,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.93037,
+      "longitud": -55.7208,
+      "potencia_radiativa": 54.34,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.8664,
+      "longitud": -71.23011,
+      "potencia_radiativa": 54.29,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.35884,
+      "longitud": -70.86133,
+      "potencia_radiativa": 54.16,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.83707,
+      "longitud": -70.08679,
+      "potencia_radiativa": 53.86,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -15.8343,
+      "longitud": -70.09091,
+      "potencia_radiativa": 53.86,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -15.83375,
+      "longitud": -70.08734,
+      "potencia_radiativa": 53.86,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.94859,
+      "longitud": -44.29657,
+      "potencia_radiativa": 53.64,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.74792,
+      "longitud": -71.00682,
+      "potencia_radiativa": 53.49,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.65565,
+      "longitud": -71.78397,
+      "potencia_radiativa": 53.38,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -12.6336,
+      "longitud": -67.48611,
+      "potencia_radiativa": 53.14,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.62984,
+      "longitud": -67.48676,
+      "potencia_radiativa": 53.14,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": 24.43343,
+      "longitud": -98.90292,
+      "potencia_radiativa": 52.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "2022",
+      "pais": "México",
+      "iso": "MEX"
+    },
+    {
+      "latitud": -8.32776,
+      "longitud": -70.09376,
+      "potencia_radiativa": 52.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.86718,
+      "longitud": -59.47673,
+      "potencia_radiativa": 52.58,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.86644,
+      "longitud": -59.47116,
+      "potencia_radiativa": 52.58,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.86067,
+      "longitud": -59.47767,
+      "potencia_radiativa": 52.58,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.85995,
+      "longitud": -59.47216,
+      "potencia_radiativa": 52.58,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.85409,
+      "longitud": -41.70079,
+      "potencia_radiativa": 52.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.85346,
+      "longitud": -41.69695,
+      "potencia_radiativa": 52.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -33.62819,
+      "longitud": -58.90525,
+      "potencia_radiativa": 52.21,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1824",
+      "pais": "Argentina",
+      "iso": "ARG"
+    },
+    {
+      "latitud": -11.1433,
+      "longitud": -65.75176,
+      "potencia_radiativa": 51.82,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -7.61555,
+      "longitud": -44.85509,
+      "potencia_radiativa": 51.79,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "414",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.56586,
+      "longitud": -46.16999,
+      "potencia_radiativa": 51.42,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.56253,
+      "longitud": -46.17052,
+      "potencia_radiativa": 51.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.9193,
+      "longitud": -71.65836,
+      "potencia_radiativa": 51.08,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -5.42371,
+      "longitud": -51.20211,
+      "potencia_radiativa": 51.03,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.12157,
+      "longitud": -47.2542,
+      "potencia_radiativa": 50.48,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.11874,
+      "longitud": -47.25835,
+      "potencia_radiativa": 50.48,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.77638,
+      "longitud": -50.6969,
+      "potencia_radiativa": 50.47,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.77571,
+      "longitud": -50.69209,
+      "potencia_radiativa": 50.47,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.24138,
+      "longitud": -70.18657,
+      "potencia_radiativa": 50.24,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.52486,
+      "longitud": -67.15449,
+      "potencia_radiativa": 50.05,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.88377,
+      "longitud": -70.62626,
+      "potencia_radiativa": 49.97,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.01083,
+      "longitud": -45.07799,
+      "potencia_radiativa": 49.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.00731,
+      "longitud": -45.0785,
+      "potencia_radiativa": 49.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.14518,
+      "longitud": -65.75123,
+      "potencia_radiativa": 49.91,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -17.38028,
+      "longitud": -60.43079,
+      "potencia_radiativa": 49.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "555",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -17.37968,
+      "longitud": -60.43586,
+      "potencia_radiativa": 49.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "555",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -17.37495,
+      "longitud": -60.43539,
+      "potencia_radiativa": 49.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "555",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.95327,
+      "longitud": -71.54724,
+      "potencia_radiativa": 49.75,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -17.39928,
+      "longitud": -59.48103,
+      "potencia_radiativa": 49.7,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.71348,
+      "longitud": -76.38324,
+      "potencia_radiativa": 49.58,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.70905,
+      "longitud": -76.37939,
+      "potencia_radiativa": 49.58,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.20045,
+      "longitud": -43.39396,
+      "potencia_radiativa": 49.45,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.41102,
+      "longitud": -51.66687,
+      "potencia_radiativa": 49.43,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.40785,
+      "longitud": -51.67215,
+      "potencia_radiativa": 49.43,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 31.07691,
+      "longitud": -92.79891,
+      "potencia_radiativa": 49.41,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1843",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": 31.07787,
+      "longitud": -92.79506,
+      "potencia_radiativa": 49.41,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1843",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": -7.41557,
+      "longitud": -45.27546,
+      "potencia_radiativa": 49.34,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.80401,
+      "longitud": -76.65427,
+      "potencia_radiativa": 49.24,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.80333,
+      "longitud": -76.64973,
+      "potencia_radiativa": 49.24,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.89254,
+      "longitud": -75.18283,
+      "potencia_radiativa": 49.0,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -16.22693,
+      "longitud": -61.28811,
+      "potencia_radiativa": 48.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "555",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.22638,
+      "longitud": -61.29242,
+      "potencia_radiativa": 48.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "555",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.22254,
+      "longitud": -61.28746,
+      "potencia_radiativa": 48.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "555",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.222,
+      "longitud": -61.29177,
+      "potencia_radiativa": 48.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "555",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -5.94194,
+      "longitud": -57.68557,
+      "potencia_radiativa": 48.69,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.71382,
+      "longitud": -61.15037,
+      "potencia_radiativa": 48.52,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.71288,
+      "longitud": -61.14296,
+      "potencia_radiativa": 48.52,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.70654,
+      "longitud": -61.15115,
+      "potencia_radiativa": 48.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.46764,
+      "longitud": -70.73102,
+      "potencia_radiativa": 48.31,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 32.86469,
+      "longitud": -98.39909,
+      "potencia_radiativa": 48.01,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "2024",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": 32.86518,
+      "longitud": -98.3928,
+      "potencia_radiativa": 48.01,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "2024",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": -12.12885,
+      "longitud": -47.25681,
+      "potencia_radiativa": 47.9,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.12548,
+      "longitud": -47.25732,
+      "potencia_radiativa": 47.9,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.12494,
+      "longitud": -47.25369,
+      "potencia_radiativa": 47.9,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.20471,
+      "longitud": -45.07045,
+      "potencia_radiativa": 47.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.85815,
+      "longitud": -54.03026,
+      "potencia_radiativa": 47.75,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.85314,
+      "longitud": -54.03094,
+      "potencia_radiativa": 47.75,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.85241,
+      "longitud": -54.02513,
+      "potencia_radiativa": 47.75,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.22043,
+      "longitud": -45.33096,
+      "potencia_radiativa": 47.6,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -2.9619,
+      "longitud": -43.57256,
+      "potencia_radiativa": 47.47,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52762,
+      "longitud": -55.34038,
+      "potencia_radiativa": 47.26,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52256,
+      "longitud": -55.34072,
+      "potencia_radiativa": 47.26,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52175,
+      "longitud": -55.33496,
+      "potencia_radiativa": 47.26,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.13721,
+      "longitud": -60.47505,
+      "potencia_radiativa": 47.25,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.13635,
+      "longitud": -60.46814,
+      "potencia_radiativa": 47.25,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.86572,
+      "longitud": -59.46574,
+      "potencia_radiativa": 47.16,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.0673,
+      "longitud": -76.30511,
+      "potencia_radiativa": 46.98,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.27924,
+      "longitud": -60.64837,
+      "potencia_radiativa": 46.74,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.80866,
+      "longitud": -71.94812,
+      "potencia_radiativa": 46.6,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.23176,
+      "longitud": -68.23789,
+      "potencia_radiativa": 46.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -15.22892,
+      "longitud": -68.24259,
+      "potencia_radiativa": 46.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.79894,
+      "longitud": -47.6629,
+      "potencia_radiativa": 46.41,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.27412,
+      "longitud": -71.09776,
+      "potencia_radiativa": 46.29,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.27131,
+      "longitud": -71.10191,
+      "potencia_radiativa": 46.29,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.29368,
+      "longitud": -59.94578,
+      "potencia_radiativa": 46.21,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.20172,
+      "longitud": -45.07829,
+      "potencia_radiativa": 46.15,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.20115,
+      "longitud": -45.07467,
+      "potencia_radiativa": 46.15,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.19834,
+      "longitud": -45.07882,
+      "potencia_radiativa": 46.15,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.19777,
+      "longitud": -45.07519,
+      "potencia_radiativa": 46.15,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -1.53849,
+      "longitud": -48.23609,
+      "potencia_radiativa": 46.06,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -1.92499,
+      "longitud": -48.3067,
+      "potencia_radiativa": 45.89,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -33.62956,
+      "longitud": -58.90152,
+      "potencia_radiativa": 45.82,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1824",
+      "pais": "Argentina",
+      "iso": "ARG"
+    },
+    {
+      "latitud": -9.30486,
+      "longitud": -71.00137,
+      "potencia_radiativa": 45.79,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.3141,
+      "longitud": -70.57755,
+      "potencia_radiativa": 45.79,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.05125,
+      "longitud": -70.64782,
+      "potencia_radiativa": 45.74,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.26618,
+      "longitud": -73.82581,
+      "potencia_radiativa": 45.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -5.40618,
+      "longitud": -45.87952,
+      "potencia_radiativa": 45.69,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.1214,
+      "longitud": -44.20958,
+      "potencia_radiativa": 45.68,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.14091,
+      "longitud": -76.93529,
+      "potencia_radiativa": 45.49,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.14025,
+      "longitud": -76.93076,
+      "potencia_radiativa": 45.49,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.13705,
+      "longitud": -76.93588,
+      "potencia_radiativa": 45.49,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -5.94852,
+      "longitud": -57.68713,
+      "potencia_radiativa": 45.34,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.96914,
+      "longitud": -55.85107,
+      "potencia_radiativa": 45.14,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.96833,
+      "longitud": -55.84541,
+      "potencia_radiativa": 45.14,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.31625,
+      "longitud": -60.6031,
+      "potencia_radiativa": 44.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.31539,
+      "longitud": -60.59634,
+      "potencia_radiativa": 44.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.30924,
+      "longitud": -60.60394,
+      "potencia_radiativa": 44.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.30839,
+      "longitud": -60.59727,
+      "potencia_radiativa": 44.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.81585,
+      "longitud": -47.21321,
+      "potencia_radiativa": 44.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.94955,
+      "longitud": -57.69477,
+      "potencia_radiativa": 44.74,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.94904,
+      "longitud": -57.69098,
+      "potencia_radiativa": 44.74,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -14.56994,
+      "longitud": -52.33016,
+      "potencia_radiativa": 44.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.41321,
+      "longitud": -44.98963,
+      "potencia_radiativa": 44.53,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.40975,
+      "longitud": -44.99013,
+      "potencia_radiativa": 44.53,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.91688,
+      "longitud": -41.63626,
+      "potencia_radiativa": 44.41,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.63657,
+      "longitud": -67.48088,
+      "potencia_radiativa": 44.33,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.63578,
+      "longitud": -67.47626,
+      "potencia_radiativa": 44.33,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.63122,
+      "longitud": -67.47229,
+      "potencia_radiativa": 44.31,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.62746,
+      "longitud": -67.47294,
+      "potencia_radiativa": 44.31,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.25653,
+      "longitud": -70.51762,
+      "potencia_radiativa": 44.31,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.93321,
+      "longitud": -55.72466,
+      "potencia_radiativa": 44.23,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.92809,
+      "longitud": -55.72523,
+      "potencia_radiativa": 44.23,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.29444,
+      "longitud": -59.95114,
+      "potencia_radiativa": 44.18,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.28797,
+      "longitud": -59.95208,
+      "potencia_radiativa": 44.18,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.65179,
+      "longitud": -71.78111,
+      "potencia_radiativa": 44.16,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -5.85738,
+      "longitud": -76.52357,
+      "potencia_radiativa": 44.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": 11.24142,
+      "longitud": -72.25367,
+      "potencia_radiativa": 43.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1836",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": -8.48525,
+      "longitud": -70.73199,
+      "potencia_radiativa": 43.83,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -23.35217,
+      "longitud": -58.21801,
+      "potencia_radiativa": 43.65,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1826",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -23.3467,
+      "longitud": -58.21945,
+      "potencia_radiativa": 43.65,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1826",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -16.28566,
+      "longitud": -42.58357,
+      "potencia_radiativa": 43.63,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.8913,
+      "longitud": -73.79781,
+      "potencia_radiativa": 43.4,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.57775,
+      "longitud": -44.78835,
+      "potencia_radiativa": 43.14,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.81919,
+      "longitud": -65.69193,
+      "potencia_radiativa": 43.12,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -14.30509,
+      "longitud": -52.88413,
+      "potencia_radiativa": 43.09,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -14.30041,
+      "longitud": -52.88476,
+      "potencia_radiativa": 43.09,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 2.23597,
+      "longitud": -50.75179,
+      "potencia_radiativa": 42.94,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.14795,
+      "longitud": -72.88898,
+      "potencia_radiativa": 42.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.35293,
+      "longitud": -50.55316,
+      "potencia_radiativa": 42.83,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.34902,
+      "longitud": -50.55371,
+      "potencia_radiativa": 42.83,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.5314,
+      "longitud": -55.33767,
+      "potencia_radiativa": 42.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52714,
+      "longitud": -55.34404,
+      "potencia_radiativa": 42.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52635,
+      "longitud": -55.33814,
+      "potencia_radiativa": 42.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.61019,
+      "longitud": -44.92612,
+      "potencia_radiativa": 42.6,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.4636,
+      "longitud": -70.70529,
+      "potencia_radiativa": 42.59,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.05765,
+      "longitud": -76.96546,
+      "potencia_radiativa": 42.59,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.49196,
+      "longitud": -74.9711,
+      "potencia_radiativa": 42.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -10.76695,
+      "longitud": -44.8644,
+      "potencia_radiativa": 42.53,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.76637,
+      "longitud": -44.86072,
+      "potencia_radiativa": 42.53,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.76355,
+      "longitud": -44.86494,
+      "potencia_radiativa": 42.53,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.79566,
+      "longitud": -51.05331,
+      "potencia_radiativa": 42.39,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "414",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.79496,
+      "longitud": -51.05695,
+      "potencia_radiativa": 42.39,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "414",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -18.75043,
+      "longitud": -40.55304,
+      "potencia_radiativa": 42.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1645",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.45608,
+      "longitud": -60.76864,
+      "potencia_radiativa": 42.28,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.45522,
+      "longitud": -60.76189,
+      "potencia_radiativa": 42.28,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.72535,
+      "longitud": -65.0097,
+      "potencia_radiativa": 42.27,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.72452,
+      "longitud": -65.00489,
+      "potencia_radiativa": 42.27,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.01874,
+      "longitud": -75.54675,
+      "potencia_radiativa": 42.27,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -2.02207,
+      "longitud": -44.70229,
+      "potencia_radiativa": 42.18,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.50811,
+      "longitud": -70.4683,
+      "potencia_radiativa": 42.16,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.50412,
+      "longitud": -70.46517,
+      "potencia_radiativa": 42.16,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.17623,
+      "longitud": -75.88206,
+      "potencia_radiativa": 42.16,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -12.63013,
+      "longitud": -67.48989,
+      "potencia_radiativa": 42.04,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.62936,
+      "longitud": -67.48529,
+      "potencia_radiativa": 42.04,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.50205,
+      "longitud": -70.42062,
+      "potencia_radiativa": 41.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.9312,
+      "longitud": -55.72668,
+      "potencia_radiativa": 41.51,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.31514,
+      "longitud": -55.85178,
+      "potencia_radiativa": 41.5,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.3101,
+      "longitud": -55.8524,
+      "potencia_radiativa": 41.5,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.26735,
+      "longitud": -76.64677,
+      "potencia_radiativa": 41.46,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.28819,
+      "longitud": -46.17767,
+      "potencia_radiativa": 41.44,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.94214,
+      "longitud": -44.30182,
+      "potencia_radiativa": 41.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.93791,
+      "longitud": -44.2983,
+      "potencia_radiativa": 41.3,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.14012,
+      "longitud": -45.51233,
+      "potencia_radiativa": 41.12,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.02083,
+      "longitud": -70.0708,
+      "potencia_radiativa": 41.05,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.12608,
+      "longitud": -53.5803,
+      "potencia_radiativa": 40.91,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.37428,
+      "longitud": -45.17298,
+      "potencia_radiativa": 40.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.93282,
+      "longitud": -55.72171,
+      "potencia_radiativa": 40.79,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.9277,
+      "longitud": -55.72232,
+      "potencia_radiativa": 40.79,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.94435,
+      "longitud": -57.69959,
+      "potencia_radiativa": 40.71,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -14.79656,
+      "longitud": -66.22282,
+      "potencia_radiativa": 40.48,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -15.99589,
+      "longitud": -69.84898,
+      "potencia_radiativa": 40.42,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -15.99532,
+      "longitud": -69.84538,
+      "potencia_radiativa": 40.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -15.99256,
+      "longitud": -69.84956,
+      "potencia_radiativa": 40.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -15.99199,
+      "longitud": -69.84595,
+      "potencia_radiativa": 40.42,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.867,
+      "longitud": -72.26125,
+      "potencia_radiativa": 40.33,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.86313,
+      "longitud": -72.25827,
+      "potencia_radiativa": 40.33,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.37851,
+      "longitud": -78.46703,
+      "potencia_radiativa": 40.24,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.03583,
+      "longitud": -75.35398,
+      "potencia_radiativa": 40.14,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.0322,
+      "longitud": -75.3545,
+      "potencia_radiativa": 40.14,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -5.77553,
+      "longitud": -76.19369,
+      "potencia_radiativa": 39.73,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -5.26199,
+      "longitud": -55.91182,
+      "potencia_radiativa": 39.58,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.25688,
+      "longitud": -55.91206,
+      "potencia_radiativa": 39.58,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -16.49895,
+      "longitud": -60.11084,
+      "potencia_radiativa": 39.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.49814,
+      "longitud": -60.10693,
+      "potencia_radiativa": 39.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.49336,
+      "longitud": -60.11208,
+      "potencia_radiativa": 39.54,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.49253,
+      "longitud": -60.10812,
+      "potencia_radiativa": 39.54,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -7.51079,
+      "longitud": -44.34732,
+      "potencia_radiativa": 39.47,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.8311,
+      "longitud": -72.29275,
+      "potencia_radiativa": 39.47,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.91301,
+      "longitud": -67.0286,
+      "potencia_radiativa": 39.44,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.90899,
+      "longitud": -67.02933,
+      "potencia_radiativa": 39.44,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.9084,
+      "longitud": -67.02581,
+      "potencia_radiativa": 39.44,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.14112,
+      "longitud": -45.74238,
+      "potencia_radiativa": 39.4,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.13833,
+      "longitud": -45.74645,
+      "potencia_radiativa": 39.4,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.13778,
+      "longitud": -45.74293,
+      "potencia_radiativa": 39.4,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.8523,
+      "longitud": -46.18467,
+      "potencia_radiativa": 39.38,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.85176,
+      "longitud": -46.18114,
+      "potencia_radiativa": 39.38,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -14.79363,
+      "longitud": -66.2262,
+      "potencia_radiativa": 39.37,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.16282,
+      "longitud": -45.05102,
+      "potencia_radiativa": 39.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.16001,
+      "longitud": -45.05518,
+      "potencia_radiativa": 39.32,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.15944,
+      "longitud": -45.05155,
+      "potencia_radiativa": 39.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.91829,
+      "longitud": -70.55969,
+      "potencia_radiativa": 39.27,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -16.61017,
+      "longitud": -68.88076,
+      "potencia_radiativa": 39.23,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -1.87789,
+      "longitud": -55.13785,
+      "potencia_radiativa": 39.19,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -1.87721,
+      "longitud": -55.13337,
+      "potencia_radiativa": 39.19,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -1.87336,
+      "longitud": -55.13857,
+      "potencia_radiativa": 39.19,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.73791,
+      "longitud": -43.79025,
+      "potencia_radiativa": 39.05,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.83319,
+      "longitud": -70.08375,
+      "potencia_radiativa": 38.97,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.94226,
+      "longitud": -60.51529,
+      "potencia_radiativa": 38.95,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.63083,
+      "longitud": -67.47078,
+      "potencia_radiativa": 38.9,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.62707,
+      "longitud": -67.47144,
+      "potencia_radiativa": 38.9,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -5.86834,
+      "longitud": -52.15878,
+      "potencia_radiativa": 38.73,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.86439,
+      "longitud": -52.15934,
+      "potencia_radiativa": 38.73,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.34176,
+      "longitud": -45.18558,
+      "potencia_radiativa": 38.69,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -17.19855,
+      "longitud": -60.24158,
+      "potencia_radiativa": 38.62,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -9.04785,
+      "longitud": -70.64835,
+      "potencia_radiativa": 38.48,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.01734,
+      "longitud": -70.07136,
+      "potencia_radiativa": 38.4,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.01672,
+      "longitud": -70.06747,
+      "potencia_radiativa": 38.4,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.01384,
+      "longitud": -70.07193,
+      "potencia_radiativa": 38.4,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.01322,
+      "longitud": -70.06804,
+      "potencia_radiativa": 38.4,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.7016,
+      "longitud": -69.97811,
+      "potencia_radiativa": 38.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.70099,
+      "longitud": -69.97424,
+      "potencia_radiativa": 38.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.86949,
+      "longitud": -59.47169,
+      "potencia_radiativa": 38.12,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52808,
+      "longitud": -76.4765,
+      "potencia_radiativa": 37.94,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -1.23028,
+      "longitud": -54.11055,
+      "potencia_radiativa": 37.87,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.13548,
+      "longitud": -60.46113,
+      "potencia_radiativa": 37.82,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.05595,
+      "longitud": -48.66762,
+      "potencia_radiativa": 37.75,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.17554,
+      "longitud": -43.37691,
+      "potencia_radiativa": 37.68,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.65723,
+      "longitud": -66.38538,
+      "potencia_radiativa": 37.59,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -13.65419,
+      "longitud": -66.39124,
+      "potencia_radiativa": 37.59,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -13.65328,
+      "longitud": -66.38609,
+      "potencia_radiativa": 37.59,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -20.65056,
+      "longitud": -58.54067,
+      "potencia_radiativa": 37.54,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -7.95545,
+      "longitud": -44.31627,
+      "potencia_radiativa": 37.51,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.95479,
+      "longitud": -44.31221,
+      "potencia_radiativa": 37.51,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.9634,
+      "longitud": -71.43824,
+      "potencia_radiativa": 37.48,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.75119,
+      "longitud": -54.03144,
+      "potencia_radiativa": 37.45,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.14184,
+      "longitud": -76.25446,
+      "potencia_radiativa": 37.37,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.52393,
+      "longitud": -70.82355,
+      "potencia_radiativa": 37.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.52336,
+      "longitud": -70.81989,
+      "potencia_radiativa": 37.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.52053,
+      "longitud": -70.82408,
+      "potencia_radiativa": 37.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.24438,
+      "longitud": -55.89602,
+      "potencia_radiativa": 37.27,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.24728,
+      "longitud": -45.3709,
+      "potencia_radiativa": 37.25,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.24448,
+      "longitud": -45.37499,
+      "potencia_radiativa": 37.25,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.75515,
+      "longitud": -54.03346,
+      "potencia_radiativa": 37.21,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.75035,
+      "longitud": -54.03416,
+      "potencia_radiativa": 37.21,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.31822,
+      "longitud": -74.79527,
+      "potencia_radiativa": 37.21,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -10.79816,
+      "longitud": -50.68398,
+      "potencia_radiativa": 37.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.79431,
+      "longitud": -50.68452,
+      "potencia_radiativa": 37.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.79364,
+      "longitud": -50.67971,
+      "potencia_radiativa": 37.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.14505,
+      "longitud": -45.72358,
+      "potencia_radiativa": 37.08,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.14449,
+      "longitud": -45.71999,
+      "potencia_radiativa": 37.08,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.14112,
+      "longitud": -45.72043,
+      "potencia_radiativa": 37.08,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.04313,
+      "longitud": -42.19654,
+      "potencia_radiativa": 36.92,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.52447,
+      "longitud": -51.43757,
+      "potencia_radiativa": 36.84,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.52378,
+      "longitud": -51.4329,
+      "potencia_radiativa": 36.84,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.94153,
+      "longitud": -60.5223,
+      "potencia_radiativa": 36.83,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -14.29969,
+      "longitud": -51.7212,
+      "potencia_radiativa": 36.79,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.18407,
+      "longitud": -43.38394,
+      "potencia_radiativa": 36.78,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.17981,
+      "longitud": -43.3804,
+      "potencia_radiativa": 36.78,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -17.39867,
+      "longitud": -59.48108,
+      "potencia_radiativa": 36.73,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.11941,
+      "longitud": -47.2397,
+      "potencia_radiativa": 36.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.11659,
+      "longitud": -47.24385,
+      "potencia_radiativa": 36.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -2.96663,
+      "longitud": -43.57698,
+      "potencia_radiativa": 36.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.62814,
+      "longitud": -60.55537,
+      "potencia_radiativa": 36.62,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.62732,
+      "longitud": -60.54965,
+      "potencia_radiativa": 36.62,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.62066,
+      "longitud": -60.55061,
+      "potencia_radiativa": 36.62,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.0717,
+      "longitud": -74.95129,
+      "potencia_radiativa": 36.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.06818,
+      "longitud": -74.95181,
+      "potencia_radiativa": 36.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.69309,
+      "longitud": -63.32832,
+      "potencia_radiativa": 36.4,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.85268,
+      "longitud": -54.03061,
+      "potencia_radiativa": 36.37,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.80114,
+      "longitud": -51.05444,
+      "potencia_radiativa": 36.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "414",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.08131,
+      "longitud": -75.07329,
+      "potencia_radiativa": 36.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.08072,
+      "longitud": -75.0692,
+      "potencia_radiativa": 36.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.07773,
+      "longitud": -75.07382,
+      "potencia_radiativa": 36.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.07714,
+      "longitud": -75.06975,
+      "potencia_radiativa": 36.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.32862,
+      "longitud": -69.49037,
+      "potencia_radiativa": 36.26,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.32801,
+      "longitud": -69.4865,
+      "potencia_radiativa": 36.26,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.39268,
+      "longitud": -70.76585,
+      "potencia_radiativa": 36.23,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.99377,
+      "longitud": -75.54883,
+      "potencia_radiativa": 36.2,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -2.96179,
+      "longitud": -45.16266,
+      "potencia_radiativa": 36.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.83486,
+      "longitud": -70.09447,
+      "potencia_radiativa": 36.05,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -10.95646,
+      "longitud": -43.03537,
+      "potencia_radiativa": 36.02,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "414",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.95364,
+      "longitud": -43.03101,
+      "potencia_radiativa": 36.02,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "414",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.95302,
+      "longitud": -43.03479,
+      "potencia_radiativa": 36.02,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "414",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.00909,
+      "longitud": -70.0647,
+      "potencia_radiativa": 36.0,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.85749,
+      "longitud": -41.66863,
+      "potencia_radiativa": 35.96,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.85687,
+      "longitud": -41.66485,
+      "potencia_radiativa": 35.96,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.85265,
+      "longitud": -41.66553,
+      "potencia_radiativa": 35.96,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.09132,
+      "longitud": -63.83807,
+      "potencia_radiativa": 35.79,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.83442,
+      "longitud": -72.29223,
+      "potencia_radiativa": 35.78,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.69456,
+      "longitud": -48.12811,
+      "potencia_radiativa": 35.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.69116,
+      "longitud": -48.12861,
+      "potencia_radiativa": 35.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.13122,
+      "longitud": -45.82377,
+      "potencia_radiativa": 35.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.86791,
+      "longitud": -59.48225,
+      "potencia_radiativa": 35.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.1613,
+      "longitud": -75.09502,
+      "potencia_radiativa": 35.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": 4.65467,
+      "longitud": -74.98679,
+      "potencia_radiativa": 35.63,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1834",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": -11.34341,
+      "longitud": -45.1742,
+      "potencia_radiativa": 35.49,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.33947,
+      "longitud": -45.17112,
+      "potencia_radiativa": 35.49,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.51474,
+      "longitud": -76.67786,
+      "potencia_radiativa": 35.43,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.55983,
+      "longitud": -76.56569,
+      "potencia_radiativa": 35.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -5.87188,
+      "longitud": -59.97849,
+      "potencia_radiativa": 35.32,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.87076,
+      "longitud": -59.97236,
+      "potencia_radiativa": 35.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.34713,
+      "longitud": -76.52928,
+      "potencia_radiativa": 35.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -10.90954,
+      "longitud": -45.55109,
+      "potencia_radiativa": 35.17,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.90675,
+      "longitud": -45.55521,
+      "potencia_radiativa": 35.17,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.45968,
+      "longitud": -60.7406,
+      "potencia_radiativa": 35.17,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.63064,
+      "longitud": -69.30547,
+      "potencia_radiativa": 34.99,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.62715,
+      "longitud": -69.30605,
+      "potencia_radiativa": 34.99,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": 11.2373,
+      "longitud": -72.2554,
+      "potencia_radiativa": 34.9,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1836",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": 11.24121,
+      "longitud": -72.25597,
+      "potencia_radiativa": 34.9,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1836",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": -20.73579,
+      "longitud": -59.49412,
+      "potencia_radiativa": 34.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -20.73502,
+      "longitud": -59.49051,
+      "potencia_radiativa": 34.76,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -20.73044,
+      "longitud": -59.4954,
+      "potencia_radiativa": 34.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -20.72967,
+      "longitud": -59.4918,
+      "potencia_radiativa": 34.76,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -9.7174,
+      "longitud": -64.99117,
+      "potencia_radiativa": 34.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.71279,
+      "longitud": -64.99201,
+      "potencia_radiativa": 34.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 11.0794,
+      "longitud": -73.01043,
+      "potencia_radiativa": 34.75,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1836",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": -16.51015,
+      "longitud": -60.10842,
+      "potencia_radiativa": 34.74,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.50935,
+      "longitud": -60.10456,
+      "potencia_radiativa": 34.74,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.50453,
+      "longitud": -60.10953,
+      "potencia_radiativa": 34.74,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -16.50373,
+      "longitud": -60.1057,
+      "potencia_radiativa": 34.74,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.04978,
+      "longitud": -72.51009,
+      "potencia_radiativa": 34.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.17262,
+      "longitud": -75.8826,
+      "potencia_radiativa": 34.69,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -15.37794,
+      "longitud": -53.82647,
+      "potencia_radiativa": 34.68,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.37287,
+      "longitud": -53.82701,
+      "potencia_radiativa": 34.68,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.35157,
+      "longitud": -75.17165,
+      "potencia_radiativa": 34.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -13.64772,
+      "longitud": -66.39024,
+      "potencia_radiativa": 34.63,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.42202,
+      "longitud": -70.14165,
+      "potencia_radiativa": 34.6,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.6296,
+      "longitud": -50.08695,
+      "potencia_radiativa": 34.57,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.79952,
+      "longitud": -50.69361,
+      "potencia_radiativa": 34.56,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.79884,
+      "longitud": -50.68879,
+      "potencia_radiativa": 34.56,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.10268,
+      "longitud": -76.99911,
+      "potencia_radiativa": 34.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.09818,
+      "longitud": -76.99529,
+      "potencia_radiativa": 34.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -12.4279,
+      "longitud": -69.01288,
+      "potencia_radiativa": 34.47,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -16.48856,
+      "longitud": -60.11711,
+      "potencia_radiativa": 34.4,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -7.52905,
+      "longitud": -55.32012,
+      "potencia_radiativa": 34.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52403,
+      "longitud": -55.32075,
+      "potencia_radiativa": 34.32,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52326,
+      "longitud": -55.31498,
+      "potencia_radiativa": 34.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.81009,
+      "longitud": -70.78057,
+      "potencia_radiativa": 34.29,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.32293,
+      "longitud": -76.33323,
+      "potencia_radiativa": 34.25,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.52054,
+      "longitud": -70.84654,
+      "potencia_radiativa": 34.24,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.36887,
+      "longitud": -76.06205,
+      "potencia_radiativa": 34.2,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -20.73121,
+      "longitud": -59.49899,
+      "potencia_radiativa": 34.08,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -8.85227,
+      "longitud": -68.90802,
+      "potencia_radiativa": 33.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.07901,
+      "longitud": -48.11012,
+      "potencia_radiativa": 33.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.28004,
+      "longitud": -60.6548,
+      "potencia_radiativa": 33.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.53838,
+      "longitud": -76.57285,
+      "potencia_radiativa": 33.61,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -13.84195,
+      "longitud": -54.02606,
+      "potencia_radiativa": 33.56,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.81597,
+      "longitud": -71.92904,
+      "potencia_radiativa": 33.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.04372,
+      "longitud": -42.20015,
+      "potencia_radiativa": 33.5,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.04025,
+      "longitud": -42.20444,
+      "potencia_radiativa": 33.5,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.40059,
+      "longitud": -44.99925,
+      "potencia_radiativa": 33.38,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.62637,
+      "longitud": -67.49055,
+      "potencia_radiativa": 33.33,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.36166,
+      "longitud": -70.85712,
+      "potencia_radiativa": 33.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.36108,
+      "longitud": -70.85347,
+      "potencia_radiativa": 33.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.23072,
+      "longitud": -45.10356,
+      "potencia_radiativa": 33.12,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.852,
+      "longitud": -54.02481,
+      "potencia_radiativa": 33.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.84698,
+      "longitud": -54.02545,
+      "potencia_radiativa": 33.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.17285,
+      "longitud": -71.61311,
+      "potencia_radiativa": 33.02,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.46142,
+      "longitud": -60.7542,
+      "potencia_radiativa": 32.91,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.46056,
+      "longitud": -60.74744,
+      "potencia_radiativa": 32.91,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 5.67388,
+      "longitud": -74.54948,
+      "potencia_radiativa": 32.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1836",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": 5.67442,
+      "longitud": -74.54595,
+      "potencia_radiativa": 32.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1836",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": 5.67723,
+      "longitud": -74.54998,
+      "potencia_radiativa": 32.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1836",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": -7.55993,
+      "longitud": -76.2186,
+      "potencia_radiativa": 32.86,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -7.41508,
+      "longitud": -44.25398,
+      "potencia_radiativa": 32.83,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.81173,
+      "longitud": -46.34222,
+      "potencia_radiativa": 32.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.57452,
+      "longitud": -51.10143,
+      "potencia_radiativa": 32.79,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -14.29262,
+      "longitud": -52.86023,
+      "potencia_radiativa": 32.74,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -14.28796,
+      "longitud": -52.86091,
+      "potencia_radiativa": 32.74,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.25693,
+      "longitud": -55.90216,
+      "potencia_radiativa": 32.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.25608,
+      "longitud": -55.89634,
+      "potencia_radiativa": 32.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.25187,
+      "longitud": -55.90275,
+      "potencia_radiativa": 32.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -5.25103,
+      "longitud": -55.89699,
+      "potencia_radiativa": 32.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 9.64767,
+      "longitud": -63.62989,
+      "potencia_radiativa": 32.61,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "550",
+      "pais": "Venezuela",
+      "iso": "VEN"
+    },
+    {
+      "latitud": 9.65109,
+      "longitud": -63.62933,
+      "potencia_radiativa": 32.61,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "550",
+      "pais": "Venezuela",
+      "iso": "VEN"
+    },
+    {
+      "latitud": -10.58106,
+      "longitud": -73.37613,
+      "potencia_radiativa": 32.61,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.62753,
+      "longitud": -50.18671,
+      "potencia_radiativa": 32.59,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.23078,
+      "longitud": -75.21165,
+      "potencia_radiativa": 32.55,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.22717,
+      "longitud": -75.21216,
+      "potencia_radiativa": 32.55,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -10.79094,
+      "longitud": -50.6605,
+      "potencia_radiativa": 32.34,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.63192,
+      "longitud": -48.67246,
+      "potencia_radiativa": 32.34,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.63136,
+      "longitud": -48.66862,
+      "potencia_radiativa": 32.34,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.62843,
+      "longitud": -48.67293,
+      "potencia_radiativa": 32.34,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.62787,
+      "longitud": -48.66911,
+      "potencia_radiativa": 32.34,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.40264,
+      "longitud": -66.25301,
+      "potencia_radiativa": 32.09,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -10.75258,
+      "longitud": -54.04182,
+      "potencia_radiativa": 32.08,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.75188,
+      "longitud": -54.0366,
+      "potencia_radiativa": 32.08,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.84594,
+      "longitud": -70.09998,
+      "potencia_radiativa": 32.07,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -15.84317,
+      "longitud": -70.10413,
+      "potencia_radiativa": 32.07,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -21.7077,
+      "longitud": -54.41282,
+      "potencia_radiativa": 32.03,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1826",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -21.70586,
+      "longitud": -54.40571,
+      "potencia_radiativa": 32.03,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1826",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -21.70068,
+      "longitud": -54.41448,
+      "potencia_radiativa": 32.03,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1826",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.53519,
+      "longitud": -64.16135,
+      "potencia_radiativa": 31.83,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.53055,
+      "longitud": -64.16222,
+      "potencia_radiativa": 31.83,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -4.36952,
+      "longitud": -47.77781,
+      "potencia_radiativa": 31.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "412",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.65025,
+      "longitud": -66.39194,
+      "potencia_radiativa": 31.77,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -13.64934,
+      "longitud": -66.3868,
+      "potencia_radiativa": 31.77,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -13.6463,
+      "longitud": -66.39264,
+      "potencia_radiativa": 31.77,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -9.04552,
+      "longitud": -70.63367,
+      "potencia_radiativa": 31.71,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.93473,
+      "longitud": -55.69724,
+      "potencia_radiativa": 31.7,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 31.07596,
+      "longitud": -92.80277,
+      "potencia_radiativa": 31.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1843",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": -11.19766,
+      "longitud": -53.99128,
+      "potencia_radiativa": 31.67,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.05448,
+      "longitud": -47.13518,
+      "potencia_radiativa": 31.58,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.96925,
+      "longitud": -44.28877,
+      "potencia_radiativa": 31.4,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -13.15782,
+      "longitud": -41.02325,
+      "potencia_radiativa": 31.38,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.1143,
+      "longitud": -47.25162,
+      "potencia_radiativa": 31.37,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.42746,
+      "longitud": -69.41034,
+      "potencia_radiativa": 31.36,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.42684,
+      "longitud": -69.40645,
+      "potencia_radiativa": 31.36,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.71384,
+      "longitud": -69.73612,
+      "potencia_radiativa": 31.35,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.81543,
+      "longitud": -71.92554,
+      "potencia_radiativa": 31.3,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.38698,
+      "longitud": -75.92724,
+      "potencia_radiativa": 31.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.38327,
+      "longitud": -75.92807,
+      "potencia_radiativa": 31.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -3.42521,
+      "longitud": -43.37232,
+      "potencia_radiativa": 31.1,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.5211,
+      "longitud": -70.82774,
+      "potencia_radiativa": 31.05,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.62826,
+      "longitud": -53.17569,
+      "potencia_radiativa": 31.01,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.62401,
+      "longitud": -53.17636,
+      "potencia_radiativa": 31.01,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.6197,
+      "longitud": -74.35793,
+      "potencia_radiativa": 30.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -17.3135,
+      "longitud": -47.71376,
+      "potencia_radiativa": 30.92,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.91753,
+      "longitud": -41.64017,
+      "potencia_radiativa": 30.86,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.91331,
+      "longitud": -41.6409,
+      "potencia_radiativa": 30.86,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -14.38369,
+      "longitud": -49.10135,
+      "potencia_radiativa": 30.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.82203,
+      "longitud": -65.70796,
+      "potencia_radiativa": 30.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.82132,
+      "longitud": -65.70396,
+      "potencia_radiativa": 30.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.81708,
+      "longitud": -65.70473,
+      "potencia_radiativa": 30.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -10.97045,
+      "longitud": -48.39962,
+      "potencia_radiativa": 30.64,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.44682,
+      "longitud": -69.27972,
+      "potencia_radiativa": 30.63,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -11.57988,
+      "longitud": -69.34589,
+      "potencia_radiativa": 30.62,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.52828,
+      "longitud": -51.43702,
+      "potencia_radiativa": 30.61,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.52759,
+      "longitud": -51.43235,
+      "potencia_radiativa": 30.61,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.18394,
+      "longitud": -73.93681,
+      "potencia_radiativa": 30.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.98939,
+      "longitud": -76.05022,
+      "potencia_radiativa": 30.53,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -1.8629,
+      "longitud": -56.55662,
+      "potencia_radiativa": 30.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.0111,
+      "longitud": -60.51257,
+      "potencia_radiativa": 30.37,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.01023,
+      "longitud": -60.50825,
+      "potencia_radiativa": 30.37,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.62407,
+      "longitud": -67.47672,
+      "potencia_radiativa": 30.24,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -12.62031,
+      "longitud": -67.47737,
+      "potencia_radiativa": 30.24,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -8.31753,
+      "longitud": -70.57701,
+      "potencia_radiativa": 30.23,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.37338,
+      "longitud": -71.19638,
+      "potencia_radiativa": 30.21,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.21187,
+      "longitud": -72.02322,
+      "potencia_radiativa": 30.21,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 19.44172,
+      "longitud": -71.60052,
+      "potencia_radiativa": 30.19,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1839",
+      "pais": "República Dominicana",
+      "iso": "DOM"
+    },
+    {
+      "latitud": 19.44226,
+      "longitud": -71.59599,
+      "potencia_radiativa": 30.19,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1839",
+      "pais": "República Dominicana",
+      "iso": "DOM"
+    },
+    {
+      "latitud": -33.64235,
+      "longitud": -58.87759,
+      "potencia_radiativa": 30.12,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1824",
+      "pais": "Argentina",
+      "iso": "ARG"
+    },
+    {
+      "latitud": -8.5379,
+      "longitud": -70.35709,
+      "potencia_radiativa": 30.1,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -17.41762,
+      "longitud": -42.62724,
+      "potencia_radiativa": 30.06,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "417",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.27812,
+      "longitud": -67.51284,
+      "potencia_radiativa": 30.0,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.14115,
+      "longitud": -60.47393,
+      "potencia_radiativa": 29.97,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.13404,
+      "longitud": -60.47469,
+      "potencia_radiativa": 29.97,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.14995,
+      "longitud": -72.82701,
+      "potencia_radiativa": 29.96,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.155,
+      "longitud": -71.63033,
+      "potencia_radiativa": 29.96,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.97172,
+      "longitud": -55.83341,
+      "potencia_radiativa": 29.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.96751,
+      "longitud": -55.83967,
+      "potencia_radiativa": 29.95,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.9667,
+      "longitud": -55.83398,
+      "potencia_radiativa": 29.95,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.13087,
+      "longitud": -74.38474,
+      "potencia_radiativa": 29.92,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.12737,
+      "longitud": -74.38553,
+      "potencia_radiativa": 29.92,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.39631,
+      "longitud": -70.25583,
+      "potencia_radiativa": 29.92,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.07217,
+      "longitud": -48.01164,
+      "potencia_radiativa": 29.87,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.7233,
+      "longitud": -65.00749,
+      "potencia_radiativa": 29.78,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.85158,
+      "longitud": -68.90375,
+      "potencia_radiativa": 29.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.39121,
+      "longitud": -76.08205,
+      "potencia_radiativa": 29.72,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.03476,
+      "longitud": -71.04002,
+      "potencia_radiativa": 29.6,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.5414,
+      "longitud": -55.10654,
+      "potencia_radiativa": 29.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.53652,
+      "longitud": -55.10712,
+      "potencia_radiativa": 29.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -32.70065,
+      "longitud": -68.64935,
+      "potencia_radiativa": 29.54,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1824",
+      "pais": "Argentina",
+      "iso": "ARG"
+    },
+    {
+      "latitud": -9.40044,
+      "longitud": -62.39679,
+      "potencia_radiativa": 29.52,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.39977,
+      "longitud": -62.39319,
+      "potencia_radiativa": 29.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.63197,
+      "longitud": -73.93907,
+      "potencia_radiativa": 29.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -4.28696,
+      "longitud": -59.94479,
+      "potencia_radiativa": 29.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.82279,
+      "longitud": -45.3485,
+      "potencia_radiativa": 29.31,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -4.28814,
+      "longitud": -59.95122,
+      "potencia_radiativa": 29.22,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.4589,
+      "longitud": -45.17067,
+      "potencia_radiativa": 29.2,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -1.94658,
+      "longitud": -47.80986,
+      "potencia_radiativa": 29.19,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.90551,
+      "longitud": -56.2338,
+      "potencia_radiativa": 29.17,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.90388,
+      "longitud": -56.22683,
+      "potencia_radiativa": 29.17,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.22315,
+      "longitud": -59.56937,
+      "potencia_radiativa": 29.12,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.83222,
+      "longitud": -44.82152,
+      "potencia_radiativa": 29.07,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.81848,
+      "longitud": -74.21674,
+      "potencia_radiativa": 28.98,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.95339,
+      "longitud": -76.59908,
+      "potencia_radiativa": 28.9,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.94959,
+      "longitud": -76.59951,
+      "potencia_radiativa": 28.9,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.84609,
+      "longitud": -64.98253,
+      "potencia_radiativa": 28.81,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.84523,
+      "longitud": -64.97774,
+      "potencia_radiativa": 28.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.84148,
+      "longitud": -64.98332,
+      "potencia_radiativa": 28.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.84062,
+      "longitud": -64.97852,
+      "potencia_radiativa": 28.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.91144,
+      "longitud": -60.15095,
+      "potencia_radiativa": 28.78,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.68775,
+      "longitud": -47.61983,
+      "potencia_radiativa": 28.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.79798,
+      "longitud": -46.45219,
+      "potencia_radiativa": 28.73,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.97279,
+      "longitud": -48.39146,
+      "potencia_radiativa": 28.71,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.96989,
+      "longitud": -48.3958,
+      "potencia_radiativa": 28.71,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.96934,
+      "longitud": -48.39198,
+      "potencia_radiativa": 28.71,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.61654,
+      "longitud": -44.9212,
+      "potencia_radiativa": 28.69,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.61368,
+      "longitud": -44.92558,
+      "potencia_radiativa": 28.69,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.61306,
+      "longitud": -44.92175,
+      "potencia_radiativa": 28.69,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.24591,
+      "longitud": -64.36555,
+      "potencia_radiativa": 28.68,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -15.24511,
+      "longitud": -64.36123,
+      "potencia_radiativa": 28.68,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Bolivia",
+      "iso": "BOL"
+    },
+    {
+      "latitud": -3.62897,
+      "longitud": -60.56114,
+      "potencia_radiativa": 28.65,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.62313,
+      "longitud": -60.56779,
+      "potencia_radiativa": 28.65,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1652",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.02002,
+      "longitud": -75.54935,
+      "potencia_radiativa": 28.6,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -9.01939,
+      "longitud": -75.5451,
+      "potencia_radiativa": 28.6,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -8.27049,
+      "longitud": -72.84787,
+      "potencia_radiativa": 28.56,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.46582,
+      "longitud": -68.23775,
+      "potencia_radiativa": 28.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.46507,
+      "longitud": -68.23319,
+      "potencia_radiativa": 28.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.4613,
+      "longitud": -68.23382,
+      "potencia_radiativa": 28.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.89068,
+      "longitud": -59.39918,
+      "potencia_radiativa": 28.52,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.88347,
+      "longitud": -59.40043,
+      "potencia_radiativa": 28.52,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -12.94083,
+      "longitud": -72.63811,
+      "potencia_radiativa": 28.49,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -6.85283,
+      "longitud": -41.6931,
+      "potencia_radiativa": 28.42,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.8522,
+      "longitud": -41.68925,
+      "potencia_radiativa": 28.42,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.84863,
+      "longitud": -41.69387,
+      "potencia_radiativa": 28.42,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.42363,
+      "longitud": -74.33365,
+      "potencia_radiativa": 28.39,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -11.6838,
+      "longitud": -47.61661,
+      "potencia_radiativa": 28.32,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.68324,
+      "longitud": -47.61286,
+      "potencia_radiativa": 28.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.27196,
+      "longitud": -43.08624,
+      "potencia_radiativa": 28.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -3.27139,
+      "longitud": -43.08268,
+      "potencia_radiativa": 28.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -6.72418,
+      "longitud": -58.92716,
+      "potencia_radiativa": 28.32,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.10476,
+      "longitud": -68.40628,
+      "potencia_radiativa": 28.29,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -10.10402,
+      "longitud": -68.40186,
+      "potencia_radiativa": 28.29,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.0416,
+      "longitud": -49.67894,
+      "potencia_radiativa": 28.28,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.11357,
+      "longitud": -76.48647,
+      "potencia_radiativa": 28.2,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": 8.80726,
+      "longitud": -73.58537,
+      "potencia_radiativa": 28.2,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1836",
+      "pais": "Colombia",
+      "iso": "COL"
+    },
+    {
+      "latitud": -6.21153,
+      "longitud": -53.57885,
+      "potencia_radiativa": 28.18,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.52274,
+      "longitud": -73.28865,
+      "potencia_radiativa": 28.15,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.5194,
+      "longitud": -73.28917,
+      "potencia_radiativa": 28.15,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -8.69777,
+      "longitud": -70.97398,
+      "potencia_radiativa": 28.11,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -20.65065,
+      "longitud": -58.54863,
+      "potencia_radiativa": 28.05,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -20.64974,
+      "longitud": -58.54448,
+      "potencia_radiativa": 28.05,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -15.82545,
+      "longitud": -70.09969,
+      "potencia_radiativa": 28.03,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Perú",
+      "iso": "PER"
+    },
+    {
+      "latitud": -19.34753,
+      "longitud": -39.99303,
+      "potencia_radiativa": 27.99,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1645",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -19.34369,
+      "longitud": -39.9938,
+      "potencia_radiativa": 27.99,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1645",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -15.6177,
+      "longitud": -56.39803,
+      "potencia_radiativa": 27.92,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -20.64882,
+      "longitud": -58.54034,
+      "potencia_radiativa": 27.9,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1828",
+      "pais": "Paraguay",
+      "iso": "PRY"
+    },
+    {
+      "latitud": -5.33924,
+      "longitud": -42.67242,
+      "potencia_radiativa": 27.88,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.89369,
+      "longitud": -60.28644,
+      "potencia_radiativa": 27.86,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.94657,
+      "longitud": -44.28418,
+      "potencia_radiativa": 27.84,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": 23.65419,
+      "longitud": -97.88322,
+      "potencia_radiativa": 27.82,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "2021",
+      "pais": "México",
+      "iso": "MEX"
+    },
+    {
+      "latitud": 31.06639,
+      "longitud": -92.79546,
+      "potencia_radiativa": 27.81,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1843",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": 31.07165,
+      "longitud": -92.7972,
+      "potencia_radiativa": 27.81,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1843",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": 31.07261,
+      "longitud": -92.79333,
+      "potencia_radiativa": 27.81,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1843",
+      "pais": null,
+      "iso": null
+    },
+    {
+      "latitud": -11.22742,
+      "longitud": -45.1264,
+      "potencia_radiativa": 27.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.22685,
+      "longitud": -45.1228,
+      "potencia_radiativa": 27.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.22347,
+      "longitud": -45.12333,
+      "potencia_radiativa": 27.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.79725,
+      "longitud": -60.17829,
+      "potencia_radiativa": 27.8,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.79624,
+      "longitud": -60.17315,
+      "potencia_radiativa": 27.8,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1830",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -7.93068,
+      "longitud": -71.55976,
+      "potencia_radiativa": 27.76,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1832",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -17.68498,
+      "longitud": -44.224,
+      "potencia_radiativa": 27.73,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1645",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -9.17229,
+      "longitud": -59.51086,
+      "potencia_radiativa": 27.7,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1650",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.19328,
+      "longitud": -43.39516,
+      "potencia_radiativa": 27.69,
+      "confianza": "alta",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.19038,
+      "longitud": -43.39989,
+      "potencia_radiativa": 27.69,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    },
+    {
+      "latitud": -11.1897,
+      "longitud": -43.39575,
+      "potencia_radiativa": 27.69,
+      "confianza": "nominal",
+      "fecha": "2026-08-30",
+      "hora_utc": "1648",
+      "pais": "Brasil",
+      "iso": "BRA"
+    }
+  ]
+}

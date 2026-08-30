@@ -71,8 +71,13 @@ def escribir(
     calificacion: dict,
     registros: list,
     vacios: list | None = None,
+    extra: dict | None = None,
 ) -> Path:
-    """Escribe el archivo de datos con su bloque de procedencia."""
+    """Escribe el archivo de datos con su bloque de procedencia.
+
+    `extra` permite sumar bloques propios de un colector —por ejemplo una muestra
+    acotada para el mapa— sin alterar la estructura común.
+    """
     destino = DATOS / capa / f"{colector}.json"
     destino.parent.mkdir(parents=True, exist_ok=True)
 
@@ -88,6 +93,8 @@ def escribir(
         },
         "registros": registros,
     }
+    if extra:
+        contenido.update(extra)
 
     destino.write_text(
         json.dumps(contenido, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"

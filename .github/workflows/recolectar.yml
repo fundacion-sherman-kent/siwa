@@ -1,4 +1,4 @@
-name: Recolección sin clave
+name: Recolección
 
 on:
   schedule:
@@ -12,6 +12,11 @@ permissions:
 jobs:
   recolectar:
     runs-on: ubuntu-latest
+    # La clave vive cifrada como secreto del repositorio. Se declara acá, a
+    # nivel del trabajo, para que los pasos puedan preguntar si está cargada.
+    env:
+      NASA_FIRMS_MAP_KEY: ${{ secrets.NASA_FIRMS_MAP_KEY }}
+
     steps:
       - name: Traer el repositorio
         uses: actions/checkout@v4
@@ -21,10 +26,24 @@ jobs:
         with:
           python-version: "3.12"
 
+      # --- Eje seguridad ---
+
       - name: Desastres naturales - sismicidad (USGS)
         id: sismos
         continue-on-error: true
         run: python colectores/sismos.py
+
+      # Solo corre si la clave está cargada. Sin clave no se ejecuta y se deja
+      # constancia en el registro de la corrida, en vez de fallar cada hora.
+      - name: Economias ilicitas - focos de calor (NASA FIRMS)
+        id: focos
+        if: env.NASA_FIRMS_MAP_KEY != ''
+        continue-on-error: true
+        run: python colectores/focos.py
+
+      - name: Aviso si falta la clave de FIRMS
+        if: env.NASA_FIRMS_MAP_KEY == ''
+        run: echo "Sin NASA_FIRMS_MAP_KEY cargada: el colector de focos de calor no se ejecuto."
 
       - name: Guardar lo recolectado
         if: always()
@@ -41,5 +60,6 @@ jobs:
         if: always()
         run: |
           fallo=0
-          [ "${{ steps.sismos.outcome }}" = "failure" ] && { echo "Falló el colector de sismos."; fallo=1; }
+          [ "${{ steps.sismos.outcome }}" = "failure" ] && { echo "Falló el colector de sismicidad."; fallo=1; }
+          [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
           exit $fallo

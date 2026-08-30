@@ -158,8 +158,11 @@
   .leaflet-tooltip.ficha b{color:#fff;font-size:12.5px;display:block;margin-bottom:4px;}
   .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
   .mapa-barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;}
-  .capa-activa{font-size:11px;color:#9fb2c8;}
-  .capa-activa b{color:#fff;}
+  .temas{display:flex;gap:6px;flex-wrap:wrap;}
+  .tema{background:transparent;border:1px solid var(--line);color:#9fb2c8;
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:600;padding:6px 12px;
+    border-radius:20px;cursor:pointer;}
+  .tema.activo{border-color:var(--orange);color:#fff;background:rgba(251,101,0,.16);}
   .seleccion{font-size:11.5px;color:#C7D2E0;}
   .seleccion button{
     background:none;border:none;color:var(--orange);cursor:pointer;font-size:11.5px;
@@ -246,7 +249,10 @@
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <div class="mapa-barra">
-        <div class="capa-activa">Capa activa: <b>Desastres naturales — sismicidad</b></div>
+        <div class="temas">
+          <button class="tema activo" data-capa="sismos">Desastres naturales</button>
+          <button class="tema" data-capa="focos">Economías ilícitas</button>
+        </div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
       <div class="mapa-caja">
@@ -292,19 +298,10 @@
     </section>
 
     <section class="domain" id="ilicitas">
-      <div class="domain-head"><h3>Economías ilícitas y control territorial</h3><span class="tag">Colector pendiente</span></div>
-      <div class="grid-cards">
-        <div class="placeholder">
-          <div>
-            <div class="ptitle">Minería ilegal, desmonte y avance sobre tierra fiscal</div>
-            <p>Fuente prevista: focos de calor de NASA FIRMS, con clave gratuita. No miden
-               incendios: leídos contra concesiones y áreas protegidas son el mejor indicador
-               libre de ocupación ilegal del territorio. Esa lectura la hace el analista, no
-               el colector.</p>
-          </div>
-          <span class="badge pending">Sin dato</span>
-        </div>
-      </div>
+      <div class="domain-head"><h3>Economías ilícitas y control territorial</h3><span class="tag" id="tag-ilicitas">—</span></div>
+      <div class="procedencia" id="proc-ilicitas">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-ilicitas"></div>
+      <div id="vac-ilicitas"></div>
     </section>
 
     <div class="eje">
@@ -466,6 +463,7 @@
     if(!iso) return '—';
     return new Date(iso).toLocaleString('es-AR', {dateStyle:'medium', timeStyle:'short'});
   }
+  const miles = n => Number(n).toLocaleString('es-AR');
 
   function pintarProcedencia(destino, meta){
     const c = meta.calificacion;
@@ -492,10 +490,11 @@
       `<p>${error}<br>${viejo} No se muestran datos simulados ni estimados.</p></div>`;
   }
 
-  let registros = 0, vacios = 0, fallas = 0;
+  let registros = 0, vacios = 0, fallas = 0, dominios = 0;
 
   function marcador(){
-    document.getElementById('m-registros').textContent = registros;
+    document.getElementById('m-dominios').textContent = dominios;
+    document.getElementById('m-registros').textContent = miles(registros);
     document.getElementById('m-vacios').textContent = vacios;
     const e = document.getElementById('estado-general');
     e.innerHTML = fallas
@@ -510,18 +509,71 @@
     });
   }
 
-  // ---- Estado compartido entre el mapa y las tarjetas ----
-  const almacen = { desastres:null };
+  // ---- Las capas del mapa ----------------------------------------------
+  // Cada capa declara cómo se cuenta por país, qué puntos dibuja y qué dice
+  // al pasar el cursor. El mapa no sabe nada de sismos ni de focos.
+  const almacen = {};
+  let capaActiva = 'sismos';
   let paisFiltro = null, paisNombre = null;
 
-  function conteoPorPais(){
-    const m = {};
-    if(almacen.desastres) almacen.desastres.registros.forEach(e => { if(e.iso) m[e.iso] = (m[e.iso]||0)+1; });
-    return m;
-  }
+  const CAPAS = {
+    sismos: {
+      etiqueta: 'Desastres naturales — sismicidad',
+      unidad: 'eventos',
+      cortes: [1, 3, 6],
+      conteo(){
+        const m = {};
+        (almacen.sismos?.registros || []).forEach(e => { if(e.iso) m[e.iso] = (m[e.iso]||0)+1; });
+        return m;
+      },
+      puntos(){
+        return (almacen.sismos?.registros || []).filter(e => e.latitud != null).map(e => ({
+          lat: e.latitud, lon: e.longitud,
+          radio: Math.max(3, (Number(e.magnitud) - 3) * 2.6),
+          ficha: `<b>M${Number(e.magnitud).toFixed(1)} · ${e.lugar || 'sin lugar'}</b>` +
+                 `${momento(e.momento)}<br>Profundidad ${e.profundidad_km} km · USGS` +
+                 (e.pais ? '' : `<span class="nota">Fuera del territorio de los 33 Estados del padrón.</span>`)
+        }));
+      },
+      ficha(iso, nombre, bloque, n){
+        return `<b>${nombre}</b>${bloque}<br>${miles(n)} evento${n===1?'':'s'} sísmico${n===1?'':'s'} M4+ en 7 días · USGS`
+             + `<span class="nota">País obtenido de la coordenada. La fuente no publica desglose por país ni por provincia.</span>`;
+      },
+      leyenda: ['Sin eventos', '1 a 2', '3 a 5', '6 o más', 'Evento con coordenada propia']
+    },
+    focos: {
+      etiqueta: 'Economías ilícitas — focos de calor',
+      unidad: 'focos',
+      cortes: [1, 50, 500],
+      conteo(){
+        const m = {};
+        (almacen.focos?.registros || []).forEach(r => { m[r.iso] = r.focos; });
+        return m;
+      },
+      puntos(){
+        return (almacen.focos?.muestra_para_mapa || []).map(p => ({
+          lat: p.latitud, lon: p.longitud,
+          radio: Math.max(2.5, Math.min(9, Math.sqrt(p.potencia_radiativa) / 2)),
+          ficha: `<b>Foco de calor · ${p.pais || 'fuera del padrón'}</b>` +
+                 `${p.fecha} ${String(p.hora_utc).padStart(4,'0')} UTC<br>` +
+                 `Potencia radiativa ${p.potencia_radiativa} MW · confianza ${p.confianza}` +
+                 `<span class="nota">Anomalía térmica, no incendio ni actividad ilegal comprobada.</span>`
+        }));
+      },
+      ficha(iso, nombre, bloque, n){
+        const r = (almacen.focos?.registros || []).find(x => x.iso === iso);
+        if(!r) return `<b>${nombre}</b>${bloque}<span class="nota">Sin focos detectados en la ventana. El sensor no ve bajo nubes: la ausencia no prueba inactividad.</span>`;
+        return `<b>${nombre}</b>${bloque}<br>${miles(r.focos)} focos · ${miles(r.confianza_alta)} de confianza alta<br>`
+             + `Potencia radiativa acumulada ${miles(r.potencia_radiativa_total)} MW`
+             + `<span class="nota">Anomalías térmicas. No son incendios ni actividad ilegal comprobada.</span>`;
+      },
+      leyenda: ['Sin focos', '1 a 49', '50 a 499', '500 o más', 'Foco de la muestra publicada']
+    }
+  };
 
+  // ---- Tarjetas ---------------------------------------------------------
   function tarjetasDesastres(){
-    const d = almacen.desastres; if(!d) return;
+    const d = almacen.sismos; if(!d) return;
     const meta = d.procedencia;
     const lista = paisFiltro ? d.registros.filter(e => e.iso === paisFiltro) : d.registros;
     const eventos = lista.slice().sort((a,b) => b.magnitud - a.magnitud).slice(0,6);
@@ -541,66 +593,80 @@
                      : 'La fuente respondió y no registró eventos sobre el umbral.'} No es una falla.</div></div>`;
   }
 
-  // ---- Mapa de situación ----
-  let mapa=null, capaPaises=null, capaPuntos=null;
-
-  function estiloPais(rasgo){
-    const n = conteoPorPais()[rasgo.properties.iso] || 0;
-    const relleno = n === 0 ? '#0E2135'
-                  : n < 3   ? 'rgba(251,101,0,.28)'
-                  : n < 6   ? 'rgba(251,101,0,.55)'
-                            : 'rgba(251,101,0,.85)';
-    const sel = paisFiltro === rasgo.properties.iso;
-    return { color: sel ? '#FB6500' : 'rgba(255,255,255,.30)', weight: sel ? 2.4 : .8,
-             fillColor: relleno, fillOpacity: .9 };
+  function tarjetasIlicitas(){
+    const d = almacen.focos; if(!d) return;
+    const meta = d.procedencia;
+    const lista = paisFiltro ? d.registros.filter(r => r.iso === paisFiltro) : d.registros;
+    const total = lista.reduce((a,r) => a + r.focos, 0);
+    document.getElementById('tag-ilicitas').textContent = paisFiltro
+      ? miles(total) + ' focos en ' + paisNombre
+      : miles(total) + ' focos en ' + meta.cantidad + ' países';
+    document.getElementById('tarj-ilicitas').innerHTML = lista.length
+      ? lista.slice(0,6).map(r => `<div class="card">
+          <h4>${r.pais}</h4>
+          <div class="value">${miles(r.focos)}</div>
+          <div class="sub">${miles(r.confianza_alta)} de confianza alta · ${miles(r.potencia_radiativa_total)} MW acumulados</div>
+          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
+            <span class="badge ${meta.calificacion.corroborado?'corr':'unica'}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
+        </div>`).join('')
+      : `<div class="card"><h4>Sin focos detectados</h4><div class="sub">El sensor no registró anomalías térmicas en ${paisNombre} durante la ventana. El sensor no ve bajo nubes: la ausencia no prueba inactividad.</div></div>`;
   }
 
-  function ficha(iso, nombre, bloque){
-    const n = conteoPorPais()[iso] || 0;
-    return `<b>${nombre}</b>${bloque}<br>${n} evento${n===1?'':'s'} sísmico${n===1?'':'s'} M4+ en 7 días · USGS`
-         + `<span class="nota">País obtenido de la coordenada. La fuente no publica desglose por país ni por provincia.</span>`;
+  // ---- Mapa de situación ------------------------------------------------
+  let mapa=null, capaPaises=null, capaPuntos=null;
+
+  function color(n, cortes){
+    if(n < cortes[0]) return '#0E2135';
+    if(n < cortes[1]) return 'rgba(251,101,0,.28)';
+    if(n < cortes[2]) return 'rgba(251,101,0,.55)';
+    return 'rgba(251,101,0,.85)';
+  }
+
+  function estiloPais(rasgo){
+    const capa = CAPAS[capaActiva];
+    const n = capa.conteo()[rasgo.properties.iso] || 0;
+    const sel = paisFiltro === rasgo.properties.iso;
+    return { color: sel ? '#FB6500' : 'rgba(255,255,255,.30)', weight: sel ? 2.4 : .8,
+             fillColor: color(n, capa.cortes), fillOpacity: .9 };
   }
 
   function leyenda(){
+    const capa = CAPAS[capaActiva];
+    const cajas = ['#0E2135','rgba(251,101,0,.28)','rgba(251,101,0,.55)','rgba(251,101,0,.85)'];
     document.getElementById('leyenda').innerHTML =
-      `<span><i style="background:#0E2135;border:1px solid rgba(255,255,255,.3)"></i>Sin eventos</span>
-       <span><i style="background:rgba(251,101,0,.28)"></i>1 a 2</span>
-       <span><i style="background:rgba(251,101,0,.55)"></i>3 a 5</span>
-       <span><i style="background:rgba(251,101,0,.85)"></i>6 o más</span>
-       <span><i class="punto"></i>Evento con coordenada propia</span>`;
+      capa.leyenda.slice(0,4).map((t,i) =>
+        `<span><i style="background:${cajas[i]}${i===0?';border:1px solid rgba(255,255,255,.3)':''}"></i>${t}</span>`).join('') +
+      `<span><i class="punto"></i>${capa.leyenda[4]}</span>`;
+  }
+
+  function puntos(){
+    if(!mapa) return;
+    if(capaPuntos) mapa.removeLayer(capaPuntos);
+    const lista = CAPAS[capaActiva].puntos();
+    capaPuntos = L.layerGroup(lista.map(p =>
+      L.circleMarker([p.lat, p.lon], {
+        radius: p.radio, color: '#FB6500', weight: 1.1, fillColor: '#FB6500', fillOpacity: .35
+      }).bindTooltip(p.ficha, {className:'ficha'})
+    )).addTo(mapa);
   }
 
   function repintar(){
     if(capaPaises) capaPaises.setStyle(estiloPais);
+    puntos();
     document.getElementById('seleccion').innerHTML = paisFiltro
       ? `Filtrando por <b>${paisNombre}</b><button id="quitar">quitar filtro</button>`
       : 'Sin país seleccionado — hacé clic en el mapa para filtrar';
     const q = document.getElementById('quitar');
     if(q) q.addEventListener('click', () => { paisFiltro = null; paisNombre = null; repintar(); });
+    document.querySelectorAll('.tema').forEach(b => b.classList.toggle('activo', b.dataset.capa === capaActiva));
     leyenda();
-    tarjetasDesastres();
+    tarjetasDesastres(); tarjetasIlicitas();
   }
 
   function seleccionar(iso, nombre){
     if(paisFiltro === iso){ paisFiltro = null; paisNombre = null; }
     else { paisFiltro = iso; paisNombre = nombre; }
     repintar();
-  }
-
-  function puntos(){
-    if(!almacen.desastres || !mapa) return;
-    if(capaPuntos) mapa.removeLayer(capaPuntos);
-    capaPuntos = L.layerGroup(
-      almacen.desastres.registros.filter(e => e.latitud != null).map(e =>
-        L.circleMarker([e.latitud, e.longitud], {
-          radius: Math.max(3, (Number(e.magnitud) - 3) * 2.6),
-          color: '#FB6500', weight: 1.2, fillColor: '#FB6500', fillOpacity: .35
-        }).bindTooltip(
-          `<b>M${Number(e.magnitud).toFixed(1)} · ${e.lugar || 'sin lugar'}</b>` +
-          `${momento(e.momento)}<br>Profundidad ${e.profundidad_km} km · USGS` +
-          (e.pais ? '' : `<span class="nota">Fuera del territorio de los 33 Estados del padrón.</span>`),
-          {className:'ficha'})
-      )).addTo(mapa);
   }
 
   fetch('geo/paises-alc.geojson')
@@ -613,12 +679,14 @@
         style: estiloPais,
         onEachFeature: (rasgo, capa) => {
           const p = rasgo.properties;
-          capa.bindTooltip(() => ficha(p.iso, p.pais, p.bloque), {className:'ficha', sticky:true});
+          capa.bindTooltip(() => {
+            const n = CAPAS[capaActiva].conteo()[p.iso] || 0;
+            return CAPAS[capaActiva].ficha(p.iso, p.pais, p.bloque, n);
+          }, {className:'ficha', sticky:true});
           capa.on('click', () => seleccionar(p.iso, p.pais));
         }
       }).addTo(mapa);
       mapa.fitBounds(capaPaises.getBounds(), {padding:[12,12]});
-      puntos();
       repintar();
     })
     .catch(err => {
@@ -627,23 +695,44 @@
          <p>${err.message}. No se muestra un mapa de reemplazo.</p></div>`;
     });
 
+  document.querySelectorAll('.tema').forEach(b =>
+    b.addEventListener('click', () => { capaActiva = b.dataset.capa; repintar(); }));
+
   // ---- Desastres naturales ----
   Promise.all([traer('sismos.json'), traer('estado/sismos.json').catch(()=>null)])
     .then(([d, estado]) => {
-      almacen.desastres = d;
+      almacen.sismos = d;
       const meta = d.procedencia;
       pintarProcedencia('proc-desastres', meta);
-      tarjetasDesastres();
-      puntos();
-      if(capaPaises) capaPaises.setStyle(estiloPais);
-      leyenda();
-      registros += meta.cantidad;
+      registros += meta.cantidad; dominios++;
       vacios += pintarVacios('vac-desastres', meta.vacios_declarados);
-      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-desastres','sismos',estado.mensaje,meta); }
-      marcador();
+      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-desastres','sismicidad',estado.mensaje,meta); }
+      repintar(); marcador();
     })
-    .catch(err => { fallas++; pintarFalla('tarj-desastres','sismos',err.message,null);
+    .catch(err => { fallas++; pintarFalla('tarj-desastres','sismicidad',err.message,null);
       document.getElementById('proc-desastres').textContent = 'Sin registro disponible.'; marcador(); });
+
+  // ---- Economías ilícitas ----
+  Promise.all([traer('focos.json'), traer('estado/focos.json').catch(()=>null)])
+    .then(([d, estado]) => {
+      almacen.focos = d;
+      const meta = d.procedencia;
+      pintarProcedencia('proc-ilicitas', meta);
+      registros += d.registros.reduce((a,r) => a + r.focos, 0); dominios++;
+      vacios += pintarVacios('vac-ilicitas', meta.vacios_declarados);
+      if(estado && estado.estado === 'error'){ fallas++; pintarFalla('tarj-ilicitas','focos de calor',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err => {
+      document.getElementById('proc-ilicitas').textContent =
+        'Sin registro disponible todavía: el colector corre cuando la clave está cargada.';
+      document.getElementById('tarj-ilicitas').innerHTML =
+        `<div class="placeholder"><div><div class="ptitle">Minería ilegal, desmonte y avance sobre tierra fiscal</div>
+         <p>El colector de focos de calor de NASA FIRMS está escrito y probado, y entra en
+            servicio en cuanto la clave institucional quede cargada en el repositorio.</p></div>
+         <span class="badge pending">Sin dato</span></div>`;
+      marcador();
+    });
 })();
 </script>
 </body>
