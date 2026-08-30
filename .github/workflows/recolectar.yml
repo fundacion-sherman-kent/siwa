@@ -41,6 +41,14 @@ jobs:
         run: |
           echo "Sin NASA_FIRMS_MAP_KEY cargada. El colector de focos de calor no se ejecuto."
 
+      # --- Eje inteligencia estrategica ---
+      # ACNUR publica una vez al ano: se consulta a diario, no cada hora.
+      - name: Desplazamiento forzado (ACNUR)
+        id: desplazamiento
+        if: github.event_name == 'workflow_dispatch' || fromJSON(github.run_number) % 24 == 0
+        continue-on-error: true
+        run: python colectores/desplazamiento.py
+
       - name: Guardar lo recolectado
         if: always()
         run: |
@@ -57,4 +65,5 @@ jobs:
         run: |
           fallo=0
           [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
+          [ "${{ steps.desplazamiento.outcome }}" = "failure" ] && { echo "Falló el colector de desplazamiento forzado."; fallo=1; }
           exit $fallo

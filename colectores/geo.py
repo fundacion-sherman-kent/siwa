@@ -87,3 +87,8 @@ def pais_de(lon: float | None, lat: float | None) -> dict | None:
         if any(_dentro(lon, lat, anillo) for anillo in pais["anillos"]):
             return pais["propiedades"]
     return None
+
+
+def padron() -> list:
+    """Los 33 Estados del padrón, con su código, nombre y bloque subregional."""
+    return [p["propiedades"] for p in _cargar()]
