@@ -43,7 +43,8 @@ jobs:
 
       - name: Aviso si falta la clave de FIRMS
         if: env.NASA_FIRMS_MAP_KEY == ''
-        run: echo "Sin NASA_FIRMS_MAP_KEY cargada: el colector de focos de calor no se ejecuto."
+        run: |
+          echo "Sin NASA_FIRMS_MAP_KEY cargada. El colector de focos de calor no se ejecuto."
 
       - name: Guardar lo recolectado
         if: always()
