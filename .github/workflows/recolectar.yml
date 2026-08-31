@@ -2,8 +2,10 @@ name: Recolección
 
 on:
   schedule:
-    # Cada hora, en el minuto 17. Hora UTC.
+    # Cada hora: lo que cambia seguido.
     - cron: "17 * * * *"
+    # Una vez por día: series anuales y catálogos, que cambian despacio.
+    - cron: "40 5 * * *"
   workflow_dispatch:
 
 permissions:
@@ -12,10 +14,9 @@ permissions:
 jobs:
   recolectar:
     runs-on: ubuntu-latest
-    # La clave vive cifrada como secreto del repositorio. Se declara acá, a
-    # nivel del trabajo, para que los pasos puedan preguntar si está cargada.
     env:
-      NASA_FIRMS_MAP_KEY: ${{ secrets.NASA_FIRMS_MAP_KEY }}
+      # A mano o en la corrida diaria se recolecta todo; en las horarias, solo lo que cambia seguido.
+      COMPLETA: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '40 5 * * *' }}
 
     steps:
       - name: Traer el repositorio
@@ -26,41 +27,30 @@ jobs:
         with:
           python-version: "3.12"
 
-      # --- Eje seguridad ---
-
-      # Solo corre si la clave está cargada. Sin clave no se ejecuta y se deja
-      # constancia en el registro de la corrida, en vez de fallar cada hora.
-      - name: Economias ilicitas - focos de calor (NASA FIRMS)
-        id: focos
-        if: env.NASA_FIRMS_MAP_KEY != ''
-        continue-on-error: true
-        run: python colectores/focos.py
-
-      - name: Aviso si falta la clave de FIRMS
-        if: env.NASA_FIRMS_MAP_KEY == ''
-        run: |
-          echo "Sin NASA_FIRMS_MAP_KEY cargada. El colector de focos de calor no se ejecuto."
-
-      # --- Eje inteligencia estrategica ---
-      # ACNUR publica una vez al ano: se consulta a diario, no cada hora.
-      - name: Desplazamiento forzado (ACNUR)
-        id: desplazamiento
-        if: github.event_name == 'workflow_dispatch' || fromJSON(github.run_number) % 24 == 0
-        continue-on-error: true
-        run: python colectores/desplazamiento.py
-
-      # Los catalogos oficiales cambian despacio: una vez al dia alcanza.
-      - name: Padron de fuentes oficiales
-        id: oficiales
-        if: github.event_name == 'workflow_dispatch' || fromJSON(github.run_number) % 24 == 0
-        continue-on-error: true
-        run: python colectores/fuentes_oficiales.py
-
-      # --- Transversal ---
-      - name: Cobertura noticiosa cruzada (padron propio)
+      # --- Transversal, cada hora ---
+      - name: Cobertura noticiosa cruzada
         id: cobertura
         continue-on-error: true
         run: python colectores/cobertura.py
+
+      # --- Series anuales y catalogos, una vez por dia ---
+      - name: Indicadores comparables (Banco Mundial)
+        id: banco
+        if: env.COMPLETA == 'true'
+        continue-on-error: true
+        run: python colectores/banco_mundial.py
+
+      - name: Desplazamiento forzado (ACNUR)
+        id: desplazamiento
+        if: env.COMPLETA == 'true'
+        continue-on-error: true
+        run: python colectores/desplazamiento.py
+
+      - name: Padron de fuentes oficiales
+        id: oficiales
+        if: env.COMPLETA == 'true'
+        continue-on-error: true
+        run: python colectores/fuentes_oficiales.py
 
       - name: Guardar lo recolectado
         if: always()
@@ -71,14 +61,14 @@ jobs:
           git diff --staged --quiet || git commit -m "Recolección $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
 
-      # Si algún colector falló, la corrida queda marcada en rojo. El dato
-      # anterior no se pisa y la falla queda registrada en datos/publico/estado/.
+      # Si algun colector fallo, la corrida queda en rojo. El dato anterior no se pisa
+      # y la falla queda registrada en datos/publico/estado/.
       - name: Declarar las fallas
         if: always()
         run: |
           fallo=0
-          [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
-          [ "${{ steps.desplazamiento.outcome }}" = "failure" ] && { echo "Falló el colector de desplazamiento forzado."; fallo=1; }
           [ "${{ steps.cobertura.outcome }}" = "failure" ] && { echo "Falló el colector de cobertura noticiosa."; fallo=1; }
+          [ "${{ steps.banco.outcome }}" = "failure" ] && { echo "Falló el colector del Banco Mundial."; fallo=1; }
+          [ "${{ steps.desplazamiento.outcome }}" = "failure" ] && { echo "Falló el colector de desplazamiento forzado."; fallo=1; }
           [ "${{ steps.oficiales.outcome }}" = "failure" ] && { echo "Falló el padrón de fuentes oficiales."; fallo=1; }
           exit $fallo
