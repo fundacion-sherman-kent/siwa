@@ -189,6 +189,16 @@
   }
   .aviso-cobertura p{margin:0;font-size:12px;color:#C7D2E0;line-height:1.65;}
   .aviso-cobertura b{color:#ff9c86;}
+  .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+  .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
+  .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
+  .ficha-pais .org{font-size:10.5px;color:#7d90a8;margin:2px 0 12px;}
+  .ficha-pais .org a{color:var(--orange);text-decoration:none;}
+  .materia-linea{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11.5px;}
+  .materia-linea span:first-child{color:#C7D2E0;}
+  .materia-linea .cuenta{font-family:'JetBrains Mono',monospace;color:#fff;font-weight:700;}
+  .ficha-pais .muestra{font-size:10.5px;color:#7d90a8;margin-top:10px;line-height:1.55;}
+  .ficha-pais .muestra b{color:#9fb2c8;font-weight:600;}
   .explica-capa .no-es{display:block;margin-top:5px;color:#ffb27a;}
 
   /* ---- Informe descargable ---- */
@@ -313,6 +323,8 @@
     <div class="grupo">Inteligencia estratégica</div>
     <a href="#desplazamiento">Desplazamiento forzado</a>
     <a href="#contrabando">Contrabando</a>
+    <div class="grupo">Fuentes</div>
+    <a href="#oficiales">Padrón oficial</a>
     <div class="grupo">Verificación</div>
     <a href="#cobertura">Cobertura cruzada</a>
     <div class="grupo">Método</div>
@@ -450,6 +462,26 @@
           <span class="badge pending">Sin dato</span>
         </div>
       </div>
+    </section>
+
+    <div class="eje">
+      <h2>Fuentes oficiales</h2>
+      <p>Qué publica cada Estado del padrón sobre las materias del registro, con nombre,
+         organismo y dirección. No son cifras: es el índice para ir al original.</p>
+    </div>
+
+    <section class="domain" id="oficiales">
+      <div class="domain-head"><h3>Padrón de fuentes oficiales</h3><span class="tag" id="tag-oficiales">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Este padrón no publica datos: publica dónde están.</b>
+           Y las cifras de estos catálogos <b>no son comparables entre países</b>: cada Estado
+           define el delito a su manera, lo publica con su cadencia y lo cuenta desde su año.
+           Sumarlas para armar una serie regional produciría una serie falsa. Por eso el índice
+           manda al original, donde la definición está escrita.</p>
+      </div>
+      <div class="procedencia" id="proc-oficiales">Cargando el registro…</div>
+      <div class="paises-oficiales" id="lista-oficiales"></div>
+      <div id="vac-oficiales"></div>
     </section>
 
     <div class="eje">
@@ -911,6 +943,29 @@
     })
     .catch(err => { fallas++; pintarFalla('tarj-ilicitas','focos de calor',err.message,null);
       document.getElementById('proc-ilicitas').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('oficiales.json'), traer('estado/oficiales.json').catch(()=>null)])
+    .then(([d, estado]) => {
+      almacen.oficiales = d;
+      const meta = d.procedencia, r = d.resumen;
+      pintarProcedencia('proc-oficiales', meta);
+      document.getElementById('tag-oficiales').textContent =
+        r.estados_con_portal + ' de ' + r.estados_del_padron + ' Estados · ' + miles(r.conjuntos_hallados) + ' conjuntos indexados';
+      document.getElementById('lista-oficiales').innerHTML = d.registros.map(f => {
+        const primera = f.materias.find(m => m.ejemplos.length);
+        return `<div class="ficha-pais">
+          <h4>${f.pais}</h4>
+          <div class="org">${f.organismo} · ${f.tipo} · <a href="${f.portal}" target="_blank" rel="noopener">${f.portal.replace(/^https?:\/\//,'')}</a></div>
+          ${f.materias.map(m => `<div class="materia-linea"><span>${m.materia}</span><span class="cuenta">${miles(m.cantidad)}</span></div>`).join('')}
+          ${primera ? `<div class="muestra"><b>Por ejemplo:</b> ${primera.ejemplos[0].titulo}${primera.ejemplos[0].organismo ? ' — ' + primera.ejemplos[0].organismo : ''}</div>` : ''}
+        </div>`;
+      }).join('');
+      vacios += pintarVacios('vac-oficiales', meta.vacios_declarados);
+      if(estado && estado.estado==='error'){ fallas++; pintarFalla('lista-oficiales','fuentes oficiales',estado.mensaje,meta); }
+      marcador();
+    })
+    .catch(err => { fallas++; pintarFalla('lista-oficiales','fuentes oficiales',err.message,null);
+      document.getElementById('proc-oficiales').textContent='Sin registro disponible.'; marcador(); });
 
   const ROTULO = {corroborado_fuerte:['fuerte','Corroborado · dos idiomas'],
                   corroborado:['medio','Corroborado · dos jurisdicciones'],

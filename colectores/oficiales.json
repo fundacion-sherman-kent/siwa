@@ -1,0 +1,33 @@
+{
+  "_nota": "Portales oficiales de datos de los Estados del padron con interfaz de consulta estandar. Cada uno fue probado y respondio el 30 de agosto de 2026. Archivo editable por el equipo analitico; el codigo no lo modifica.",
+  "portales": [
+    { "iso": "ARG", "organismo": "Portal Nacional de Datos Abiertos", "tipo": "CKAN",
+      "base": "https://datos.gob.ar", "verificado": "2026-08-30" },
+    { "iso": "CHL", "organismo": "Portal de Datos Abiertos del Estado", "tipo": "CKAN",
+      "base": "https://datos.gob.cl", "verificado": "2026-08-30" },
+    { "iso": "COL", "organismo": "Datos Abiertos Colombia", "tipo": "Socrata",
+      "base": "https://www.datos.gov.co", "verificado": "2026-08-30" },
+    { "iso": "DOM", "organismo": "Datos Abiertos Republica Dominicana", "tipo": "CKAN",
+      "base": "https://datos.gob.do", "verificado": "2026-08-30" },
+    { "iso": "PAN", "organismo": "Autoridad Nacional de Transparencia", "tipo": "CKAN",
+      "base": "https://www.datosabiertos.gob.pa", "verificado": "2026-08-30" },
+    { "iso": "URY", "organismo": "Catalogo Nacional de Datos Abiertos", "tipo": "CKAN",
+      "base": "https://catalogodatos.gub.uy", "verificado": "2026-08-30" }
+  ],
+  "materias": [
+    { "materia": "Violencia organizada", "eje": "Seguridad", "consulta": "homicidio" },
+    { "materia": "Delito registrado", "eje": "Seguridad", "consulta": "delito" },
+    { "materia": "Contratacion publica", "eje": "Gobernanza", "consulta": "contrataciones" },
+    { "materia": "Integridad", "eje": "Gobernanza", "consulta": "corrupcion" },
+    { "materia": "Presupuesto", "eje": "Gobernanza", "consulta": "presupuesto" },
+    { "materia": "Migracion y desplazamiento", "eje": "Inteligencia estrategica", "consulta": "migracion" }
+  ],
+  "sectoriales_verificados": [
+    { "iso": "BRA", "organismo": "IBGE", "descripcion": "Agregados estadisticos y division territorial",
+      "consulta": "https://servicodados.ibge.gov.br/api/v3/agregados", "clave": false, "verificado": "2026-08-30" },
+    { "iso": "COL", "organismo": "Colombia Compra Eficiente", "descripcion": "SECOP II, contratos electronicos",
+      "consulta": "https://www.datos.gov.co/resource/jbjy-vk9h.json", "clave": false, "verificado": "2026-08-30" },
+    { "iso": "ARG", "organismo": "Banco Central de la Republica Argentina", "descripcion": "Estadisticas cambiarias",
+      "consulta": "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Maestros/Divisas", "clave": false, "verificado": "2026-08-30" }
+  ]
+}

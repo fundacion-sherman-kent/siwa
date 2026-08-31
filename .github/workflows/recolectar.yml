@@ -49,6 +49,13 @@ jobs:
         continue-on-error: true
         run: python colectores/desplazamiento.py
 
+      # Los catalogos oficiales cambian despacio: una vez al dia alcanza.
+      - name: Padron de fuentes oficiales
+        id: oficiales
+        if: github.event_name == 'workflow_dispatch' || fromJSON(github.run_number) % 24 == 0
+        continue-on-error: true
+        run: python colectores/fuentes_oficiales.py
+
       # --- Transversal ---
       - name: Cobertura noticiosa cruzada (padron propio)
         id: cobertura
@@ -73,4 +80,5 @@ jobs:
           [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
           [ "${{ steps.desplazamiento.outcome }}" = "failure" ] && { echo "Falló el colector de desplazamiento forzado."; fallo=1; }
           [ "${{ steps.cobertura.outcome }}" = "failure" ] && { echo "Falló el colector de cobertura noticiosa."; fallo=1; }
+          [ "${{ steps.oficiales.outcome }}" = "failure" ] && { echo "Falló el padrón de fuentes oficiales."; fallo=1; }
           exit $fallo

@@ -1,0 +1,968 @@
+{
+  "procedencia": {
+    "colector": "oficiales",
+    "capa": "publico",
+    "obtenido_en": "2026-08-31T00:39:38+00:00",
+    "fuente": {
+      "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
+      "url": "colectores/oficiales.json"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 2,
+      "corroborado": false,
+      "nota": "Catálogos oficiales de los propios Estados: registro primario. Lo que se consigna es la EXISTENCIA del conjunto de datos y su dirección, no su contenido. Fuente única por naturaleza: solo el Estado publica su catálogo."
+    },
+    "vacios_declarados": [
+      "ESTO NO PUBLICA DATOS, PUBLICA DÓNDE ESTÁN. Es un índice de conjuntos oficiales con su dirección, para que el analista vaya al original.",
+      "**Las cifras de estos catálogos NO son comparables entre países.** Cada Estado define el delito a su manera, lo publica con su cadencia y lo cuenta desde su año. Sumarlas para armar una serie regional produciría una serie falsa.",
+      "Solo 6 de los 33 Estados tienen portal oficial con interfaz de consulta verificada. Sin portal verificado: Venezuela, Trinidad y Tobago, Surinam, San Vicente y las Granadinas, Santa Lucía, San Cristóbal y Nieves, Perú, Paraguay, Nicaragua, México, Jamaica, Honduras, Haití, Guyana, Guatemala, Granada, El Salvador, Ecuador, Dominica, Cuba, Costa Rica, Brasil, Bolivia, Belice, Barbados, Bahamas, Antigua y Barbuda.",
+      "Que un Estado no figure NO prueba que carezca de portal: prueba que no se le encontró uno con interfaz estándar que respondiera. La búsqueda de direcciones alternativas queda pendiente y es trabajo del equipo analítico.",
+      "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
+      "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años."
+    ],
+    "cantidad": 6
+  },
+  "registros": [
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "bloque": "Andina",
+      "organismo": "Datos Abiertos Colombia",
+      "tipo": "Socrata",
+      "portal": "https://www.datos.gov.co",
+      "materias": [
+        {
+          "materia": "Contratacion publica",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 1049,
+          "ejemplos": [
+            {
+              "titulo": "PROCESOS CONTRATACION TAURAMENA",
+              "organismo": "TAURAMENA",
+              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
+            },
+            {
+              "titulo": "Contratacion Emserchia E.S.P.",
+              "organismo": "Emserchia",
+              "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
+            },
+            {
+              "titulo": "SECOP II CONTRATACION ABIERTA",
+              "organismo": "Alcaldía Mayor de Cartagena",
+              "enlace": "https://www.datos.gov.co/d/432e-zwh4"
+            },
+            {
+              "titulo": "Contratacion Alcaldía Chitaraque",
+              "organismo": "Alcaldía de Chitaraque",
+              "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
+            }
+          ]
+        },
+        {
+          "materia": "Presupuesto",
+          "eje": "Gobernanza",
+          "consulta": "presupuesto",
+          "cantidad": 614,
+          "ejemplos": [
+            {
+              "titulo": "Presupuesto de Ingresos",
+              "organismo": "INDUSTRIA MILITAR",
+              "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
+            },
+            {
+              "titulo": "Presupuesto de Gastos",
+              "organismo": "INDUSTRIA MILITAR",
+              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
+            },
+            {
+              "titulo": "Presupuesto DADEP",
+              "organismo": "DEFENSORIA DEL ESPACIO PUBLICO",
+              "enlace": "https://www.datos.gov.co/d/8rih-qmrc"
+            },
+            {
+              "titulo": "PRESUPUESTO AIM-2020",
+              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
+              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 146,
+          "ejemplos": [
+            {
+              "titulo": "DELITOS INFORMÁTICOS",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
+            },
+            {
+              "titulo": "DELITOS SEXUALES",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
+            },
+            {
+              "titulo": "Reporte  Delitos sexuales Policía Nacional",
+              "organismo": "DIJIN",
+              "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
+            },
+            {
+              "titulo": "Delitos Informaticos V1",
+              "organismo": "Damicruz",
+              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
+            }
+          ]
+        },
+        {
+          "materia": "Migracion y desplazamiento",
+          "eje": "Inteligencia estrategica",
+          "consulta": "migracion",
+          "cantidad": 93,
+          "ejemplos": [
+            {
+              "titulo": "Entradas de extranjeros a Colombia",
+              "organismo": "emurillo",
+              "enlace": "https://www.datos.gov.co/d/96sh-4v8d"
+            },
+            {
+              "titulo": "Salidas de colombianos desde el territorio nacional",
+              "organismo": "emurillo",
+              "enlace": "https://www.datos.gov.co/d/efw5-jiej"
+            },
+            {
+              "titulo": "MIGRANTES A COLOMBIA",
+              "organismo": "BERNARDO GUEVARA",
+              "enlace": "https://www.datos.gov.co/d/c4mm-qn8q"
+            },
+            {
+              "titulo": "Entrada de Venezolanos a Colombia por año(2012-2019)",
+              "organismo": "Savine",
+              "enlace": "https://www.datos.gov.co/d/p7hq-8vsm"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 78,
+          "ejemplos": [
+            {
+              "titulo": "HOMICIDIO",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/m8fd-ahd9"
+            },
+            {
+              "titulo": "Homicidio",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/2fxs-6yhd"
+            },
+            {
+              "titulo": "Homicidios accidente de tránsito Policía Nacional",
+              "organismo": "DIJIN",
+              "enlace": "https://www.datos.gov.co/d/ha6j-pa2r"
+            },
+            {
+              "titulo": "Guadalajara de Buga : Homicidios por Accidente de Tránsito",
+              "organismo": "Alcaldía Municipal de Guadalajara de Buga",
+              "enlace": "https://www.datos.gov.co/d/8rme-4s7n"
+            }
+          ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 60,
+          "ejemplos": [
+            {
+              "titulo": "Programa Interamericano de datos abiertos para la lucha contra la corrupción PIDA",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/stories/s/k5ma-yb9b"
+            },
+            {
+              "titulo": "Vista Diagnóstico Conjuntos de Datos Abiertos Programa Interamericano de Lucha Contra la Corrupción PIDA",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/wmwy-ixwz"
+            },
+            {
+              "titulo": "Gráfico de Disponibilidad de Datos Abiertos del PIDA",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/6m24-6wiv"
+            },
+            {
+              "titulo": "Base de Datos Riesgos Alcaldía de Cali",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/tarm-4qgv"
+            }
+          ]
+        }
+      ],
+      "conjuntos_hallados": 2040
+    },
+    {
+      "iso": "PAN",
+      "pais": "Panamá",
+      "bloque": "México y Centroamérica",
+      "organismo": "Autoridad Nacional de Transparencia",
+      "tipo": "CKAN",
+      "portal": "https://www.datosabiertos.gob.pa",
+      "materias": [
+        {
+          "materia": "Migracion y desplazamiento",
+          "eje": "Inteligencia estrategica",
+          "consulta": "migracion",
+          "cantidad": 560,
+          "ejemplos": [
+            {
+              "titulo": "MINGOB - ONPAR - Carné de Residencia Temporal 2022",
+              "organismo": "Ministerio de Gobierno",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/mingob-onpar-carne-de-residencia-temporal-2022"
+            },
+            {
+              "titulo": "MINGOB - ONPAR - Permiso de trabajo indefinidos reconocidos 2022",
+              "organismo": "Ministerio de Gobierno",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/mingob-onpar-permiso-de-trabajo-indefinidos-reconocidos-2022"
+            },
+            {
+              "titulo": "MINGOB - ONPAR Refugiados revocados por CONARE 2025",
+              "organismo": "Ministerio de Gobierno",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/mingob-onpar-refugiados-revocados-por-conare-2025"
+            },
+            {
+              "titulo": "MIGRACIÓN – Planilla 2024",
+              "organismo": "Servicio Nacional de Migración",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/migracion-planilla-2024"
+            }
+          ]
+        },
+        {
+          "materia": "Presupuesto",
+          "eje": "Gobernanza",
+          "consulta": "presupuesto",
+          "cantidad": 451,
+          "ejemplos": [
+            {
+              "titulo": "IFARHU - Ejecución Presupuestaria de Inversión 2024",
+              "organismo": "Instituto para la Formación y Aprovechamiento de Recursos Humanos (IFARHU)",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/presupuesto"
+            },
+            {
+              "titulo": "MIGRACIÓN – Presupuesto 2023",
+              "organismo": "Servicio Nacional de Migración",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/migracion-presupuesto-2023"
+            },
+            {
+              "titulo": "MIGRACIÓN – Presupuesto 2022",
+              "organismo": "Servicio Nacional de Migración",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/migracion-presupuesto-2022"
+            },
+            {
+              "titulo": "MIGRACIÓN – Presupuesto 2021",
+              "organismo": "Servicio Nacional de Migración",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/migracion-presupuesto-2021"
+            }
+          ]
+        },
+        {
+          "materia": "Contratacion publica",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 230,
+          "ejemplos": [
+            {
+              "titulo": "MIDES- Contrataciones 2020",
+              "organismo": "Ministerio de Desarrollo Social (MIDES)",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/https-www-mides-gob-pa-11-1-contrataciones-de-funcionarios"
+            },
+            {
+              "titulo": "AAUD - Contrataciones 2018",
+              "organismo": "Autoridad de Aseo Urbano y Domiciliario AAUD",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/aaud-contrataciones-2018"
+            },
+            {
+              "titulo": "CGR - Contrataciones Mayo 2019",
+              "organismo": "Contraloria General de la República",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/cgr-contrataciones-mayo-2019"
+            },
+            {
+              "titulo": "CGR - Contrataciones Enero 2019",
+              "organismo": "Contraloria General de la República",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/cgr-contrataciones-enero-2019"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 79,
+          "ejemplos": [
+            {
+              "titulo": "CSS – Procesos Penales Por El Delito Contra El Orden Económico",
+              "organismo": "Caja de Seguro Social",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/css-procesos-penales-por-el-delito-contra-el-orden-economico"
+            },
+            {
+              "titulo": "PGN - Informe Estadístico de Delitos Sexuales 2023",
+              "organismo": "Procuraduria General de la Nación",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/pgn-informe-estadistico-de-delitos-sexuales-2023"
+            },
+            {
+              "titulo": "PGN - Informe Estadístico de Delitos de Robo año 2025",
+              "organismo": "Procuraduria General de la Nación",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/pgn-informe-estadistico-de-delitos-de-robo-ano-2025"
+            },
+            {
+              "titulo": "PGN - Informe Estadístico de Delitos de Robo año 2024",
+              "organismo": "Procuraduria General de la Nación",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/pgn-informe-estadistico-de-delitos-de-robo-ano-2024"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 9,
+          "ejemplos": [
+            {
+              "titulo": "PGN - Informe Estadístico de Víctimas de Homicidio año 2025",
+              "organismo": "Procuraduria General de la Nación",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/pgn-informe-estadistico-de-victimas-de-homicidio-ano-2025"
+            },
+            {
+              "titulo": "PGN - Informe Estadístico de Víctimas de Homicidio año 2024",
+              "organismo": "Procuraduria General de la Nación",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/pgn-informe-estadistico-de-victimas-de-homicidio-ano-2024"
+            },
+            {
+              "titulo": "PGN - Informe Estadístico de Victimas de Homicidio año 2023",
+              "organismo": "Procuraduria General de la Nación",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/pgn-informe-estadistico-de-victimas-de-homicidio-ano-2023"
+            },
+            {
+              "titulo": "PGN - Informe Estadístico de Victimas de Homicidio año 2022",
+              "organismo": "Procuraduria General de la Nación",
+              "enlace": "https://www.datosabiertos.gob.pa/dataset/pgn-informe-estadistico-de-victimas-de-homicidio-ano-2022"
+            }
+          ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 0,
+          "ejemplos": []
+        }
+      ],
+      "conjuntos_hallados": 1329
+    },
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "organismo": "Portal de Datos Abiertos del Estado",
+      "tipo": "CKAN",
+      "portal": "https://datos.gob.cl",
+      "materias": [
+        {
+          "materia": "Presupuesto",
+          "eje": "Gobernanza",
+          "consulta": "presupuesto",
+          "cantidad": 558,
+          "ejemplos": [
+            {
+              "titulo": "Presupuestos Historicos",
+              "organismo": "Subsecretaría de Hacienda ",
+              "enlace": "https://datos.gob.cl/dataset/412"
+            },
+            {
+              "titulo": "Presupuestos Historicos",
+              "organismo": "Subsecretaría de Hacienda ",
+              "enlace": "https://datos.gob.cl/dataset/414"
+            },
+            {
+              "titulo": "Ley de Presupuestos",
+              "organismo": "Dirección de Presupuestos",
+              "enlace": "https://datos.gob.cl/dataset/1219"
+            },
+            {
+              "titulo": "Ley de Presupuestos",
+              "organismo": "Dirección de Presupuestos",
+              "enlace": "https://datos.gob.cl/dataset/1214"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 26,
+          "ejemplos": [
+            {
+              "titulo": "Reporte estadistico de Delito Comuna de Maule 2023",
+              "organismo": "Municipalidad de Maule",
+              "enlace": "https://datos.gob.cl/dataset/reporte-estadistico-de-delito-comuna-de-maule"
+            },
+            {
+              "titulo": "Reporte estadistico de Delito Comuna de Maule 2024",
+              "organismo": "Municipalidad de Maule",
+              "enlace": "https://datos.gob.cl/dataset/reporte-estadistico-de-delito-comuna-de-maule-2024"
+            },
+            {
+              "titulo": "Penas de comiso por delitos de lavado de activos",
+              "organismo": "Unidad de Análisis Financiero",
+              "enlace": "https://datos.gob.cl/dataset/4318"
+            },
+            {
+              "titulo": "Penas de comiso por delitos de lavado de activos",
+              "organismo": "Unidad de Análisis Financiero",
+              "enlace": "https://datos.gob.cl/dataset/15244"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 2,
+          "ejemplos": [
+            {
+              "titulo": "Antecedentes de Homicidios ocurridos en Santiago durante el año 2011",
+              "organismo": "Servicio Médico Legal",
+              "enlace": "https://datos.gob.cl/dataset/5176"
+            },
+            {
+              "titulo": "Antecedentes de Homicidios ocurridos en Santiago durante el año 2011",
+              "organismo": "Servicio Médico Legal",
+              "enlace": "https://datos.gob.cl/dataset/6394"
+            }
+          ]
+        },
+        {
+          "materia": "Migracion y desplazamiento",
+          "eje": "Inteligencia estrategica",
+          "consulta": "migracion",
+          "cantidad": 2,
+          "ejemplos": [
+            {
+              "titulo": "Demografía",
+              "organismo": "Instituto Nacional de Estadísticas",
+              "enlace": "https://datos.gob.cl/dataset/demografia"
+            },
+            {
+              "titulo": "Proyecciones de población",
+              "organismo": "Instituto Nacional de Estadísticas",
+              "enlace": "https://datos.gob.cl/dataset/proyecciones-de-poblacion"
+            }
+          ]
+        },
+        {
+          "materia": "Contratacion publica",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 0,
+          "ejemplos": []
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 0,
+          "ejemplos": []
+        }
+      ],
+      "conjuntos_hallados": 588
+    },
+    {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "bloque": "Cono Sur",
+      "organismo": "Portal Nacional de Datos Abiertos",
+      "tipo": "CKAN",
+      "portal": "https://datos.gob.ar",
+      "materias": [
+        {
+          "materia": "Presupuesto",
+          "eje": "Gobernanza",
+          "consulta": "presupuesto",
+          "cantidad": 55,
+          "ejemplos": [
+            {
+              "titulo": "Presupuesto institucional",
+              "organismo": "Instituto Nacional de Servicios Sociales para Jubilados y Pensionados (PAMI)",
+              "enlace": "https://datos.gob.ar/dataset/presupuesto"
+            },
+            {
+              "titulo": "API de Presupuesto Abierto",
+              "organismo": "Subsecretaría de Presupuesto",
+              "enlace": "https://datos.gob.ar/dataset/api-de-presupuesto-abierto"
+            },
+            {
+              "titulo": "Presupuesto de la Administración Pública Nacional .",
+              "organismo": "Subsecretaría de Presupuesto",
+              "enlace": "https://datos.gob.ar/dataset/presupuesto-de-la-administracion-publica-nacional"
+            },
+            {
+              "titulo": "Presupuesto de la Administración Pública Nacional 2025.",
+              "organismo": "Subsecretaría de Presupuesto",
+              "enlace": "https://datos.gob.ar/dataset/presupuesto-de-la-administracion-publica-nacional-2025"
+            }
+          ]
+        },
+        {
+          "materia": "Contratacion publica",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 20,
+          "ejemplos": [
+            {
+              "titulo": "Sistema de Contrataciones Electrónicas",
+              "organismo": "Jefatura de Gabinete de Ministros (JGM)",
+              "enlace": "https://datos.gob.ar/dataset/sistema-de-contrataciones-electronicas"
+            },
+            {
+              "titulo": "Compras y Contrataciones de ACUMAR",
+              "organismo": "Autoridad de Cuenca Matanza Riachuelo (ACUMAR)",
+              "enlace": "https://datos.gob.ar/dataset/listado-de-compras-y-contrataciones-de-acumar"
+            },
+            {
+              "titulo": "Contrataciones, Compras y Licitaciones de la Superintendencia de Servicios de Salud (SSS)",
+              "organismo": "Ministerio de Salud",
+              "enlace": "https://datos.gob.ar/dataset/contrataciones-compras-y-licitaciones-de-la-superintendencia-de-servicios-de-salud-sss"
+            },
+            {
+              "titulo": "Compras y Contrataciones de Nivel Central",
+              "organismo": "Instituto Nacional de Servicios Sociales para Jubilados y Pensionados (PAMI)",
+              "enlace": "https://datos.gob.ar/dataset/compras-y-contrataciones-de-nivel-central"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 17,
+          "ejemplos": [
+            {
+              "titulo": "Codificación de delitos del Código Penal Argentino",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/codificacion-de-delitos-del-codigo-penal-argentino"
+            },
+            {
+              "titulo": "Delitos contra la propiedad. Sistema de Alerta Temprana. Estadísticas criminales",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/delitos-contra-la-propiedad-sistema-de-alerta-temprana-estadisticas-criminales"
+            },
+            {
+              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Orientaciones",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/lucha-contra-la-trata-de-personas-llamados-linea-145-orientaciones"
+            },
+            {
+              "titulo": "SNIC - Departamental. Estadísticas criminales en la República Argentina por departamentos",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/snic-departamental-estadisticas-criminales-en-la-republica-argentina-por-departamentos"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 9,
+          "ejemplos": [
+            {
+              "titulo": "Homicidios dolosos. Sistema de Alerta Temprana. Estadísticas criminales en la República Argentina.",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/homicidios-dolosos-sistema-de-alerta-temprana-estadisticas-criminales-en-la-republica-argentina"
+            },
+            {
+              "titulo": "Registro, sistematización y seguimiento de femicidios y homicidios agravados por el género",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/registro-sistematizacion-y-seguimiento-de-femicidios-y-homicidios-agravados-por-el-genero"
+            },
+            {
+              "titulo": "Estadísticas criminales en la República Argentina. Muertes violentas de mujeres",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/estadisticas-criminales-en-la-republica-argentina-muertes-violentas-de-mujeres"
+            },
+            {
+              "titulo": "Muertes viales. Sistema de Alerta Temprana. Estadísticas criminales en la República Argentina.",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/muertes-viales-sistema-de-alerta-temprana-estadisticas-criminales-en-la-republica-argentina"
+            }
+          ]
+        },
+        {
+          "materia": "Migracion y desplazamiento",
+          "eje": "Inteligencia estrategica",
+          "consulta": "migracion",
+          "cantidad": 3,
+          "ejemplos": [
+            {
+              "titulo": "Crucerismo Marítimo",
+              "organismo": "Subsecretaría de Turismo",
+              "enlace": "https://datos.gob.ar/dataset/crucerismo-maritimo"
+            },
+            {
+              "titulo": "Estructura de poblacion de origen extranjero",
+              "organismo": "Registro Nacional de las Personas (RENAPER)",
+              "enlace": "https://datos.gob.ar/dataset/estructura-de-poblacion-de-origen-extranjero"
+            },
+            {
+              "titulo": "Turismo Internacional - Total País",
+              "organismo": "Subsecretaría de Turismo",
+              "enlace": "https://datos.gob.ar/dataset/turismo-internacional-total-pais"
+            }
+          ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 0,
+          "ejemplos": []
+        }
+      ],
+      "conjuntos_hallados": 104
+    },
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "organismo": "Catalogo Nacional de Datos Abiertos",
+      "tipo": "CKAN",
+      "portal": "https://catalogodatos.gub.uy",
+      "materias": [
+        {
+          "materia": "Migracion y desplazamiento",
+          "eje": "Inteligencia estrategica",
+          "consulta": "migracion",
+          "cantidad": 36,
+          "ejemplos": [
+            {
+              "titulo": "Porcentaje anual de crecimiento poblacional. Países seleccionados",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6647"
+            },
+            {
+              "titulo": "Porcentaje de jóvenes que migraron dentro del país. País urbano",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-9044"
+            },
+            {
+              "titulo": "Porcentaje de personas nacidas en el exterior. Censos 2011",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-10673"
+            },
+            {
+              "titulo": "Porcentaje de jóvenes que tienen familiares en otro país. País urbano",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-9020"
+            }
+          ]
+        },
+        {
+          "materia": "Presupuesto",
+          "eje": "Gobernanza",
+          "consulta": "presupuesto",
+          "cantidad": 28,
+          "ejemplos": [
+            {
+              "titulo": "Presupuesto",
+              "organismo": "ANCAP",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ancap-presupuesto"
+            },
+            {
+              "titulo": "Presupuesto",
+              "organismo": "URSEC",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ursec-presupuesto-ejecucion-presupuestal"
+            },
+            {
+              "titulo": "Presupuesto",
+              "organismo": "INE",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ine-presupuesto_ine"
+            },
+            {
+              "titulo": "Presupuesto",
+              "organismo": "Centro Ceibal",
+              "enlace": "https://catalogodatos.gub.uy/dataset/centro-ceibal-presupuesto"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 18,
+          "ejemplos": [
+            {
+              "titulo": "Delitos sexuales",
+              "organismo": "Ministerio del Interior",
+              "enlace": "https://catalogodatos.gub.uy/dataset/delitos-sexuales"
+            },
+            {
+              "titulo": "Delitos denunciados en el Uruguay",
+              "organismo": "Ministerio del Interior",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-del-interior-delitos_denunciados_en_el_uruguay"
+            },
+            {
+              "titulo": "Cantidad de denuncias policiales por delitos contra las personas. Total país",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6711"
+            },
+            {
+              "titulo": "Información del Nuevo Código de Proceso Penal",
+              "organismo": "Poder Judicial",
+              "enlace": "https://catalogodatos.gub.uy/dataset/suprema-corte-de-justicia-informacion-del-nuevo-codigo-de-proceso-penal"
+            }
+          ]
+        },
+        {
+          "materia": "Contratacion publica",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 6,
+          "ejemplos": [
+            {
+              "titulo": "Llamados publicados para adquisición y contratación de bienes y servicios",
+              "organismo": "Banco Central del Uruguay",
+              "enlace": "https://catalogodatos.gub.uy/dataset/bcu_llamados-publicados-comprasycontrataciones"
+            },
+            {
+              "titulo": "Licitaciones y compras",
+              "organismo": "ANCAP",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ancap-licitaciones-compras"
+            },
+            {
+              "titulo": "Seguimiento Ley de Promoción del Empleo",
+              "organismo": "Ministerio de Trabajo y Seguridad Social de Uruguay",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-de-trabajo-y-seguridad-social-de-uruguay-ley-de-promocion-del-empleo"
+            },
+            {
+              "titulo": "Cantidad de RRHH en EEPP",
+              "organismo": "Oficina de Planeamiento y Presupuesto",
+              "enlace": "https://catalogodatos.gub.uy/dataset/opp-cantidad-de-rrhh-en-eepp"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 5,
+          "ejemplos": [
+            {
+              "titulo": "Homicidios a mujeres",
+              "organismo": "Ministerio del Interior",
+              "enlace": "https://catalogodatos.gub.uy/dataset/homicidios-a-mujeres"
+            },
+            {
+              "titulo": "Tasa de procesamientos por homicidios. Total país",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6707"
+            },
+            {
+              "titulo": "Porcentaje de denuncia de homicidios consumados. Total país",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6703"
+            },
+            {
+              "titulo": "Tasa de denuncia de homicidios consumados. Total país",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-10505"
+            }
+          ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 0,
+          "ejemplos": []
+        }
+      ],
+      "conjuntos_hallados": 93
+    },
+    {
+      "iso": "DOM",
+      "pais": "República Dominicana",
+      "bloque": "Caribe hispano y Haití",
+      "organismo": "Datos Abiertos Republica Dominicana",
+      "tipo": "CKAN",
+      "portal": "https://datos.gob.do",
+      "materias": [
+        {
+          "materia": "Presupuesto",
+          "eje": "Gobernanza",
+          "consulta": "presupuesto",
+          "cantidad": 39,
+          "ejemplos": [
+            {
+              "titulo": "Presupuesto, 2021-2026",
+              "organismo": "Fondo Nacional para el Medio Ambiente y Recursos Naturales (FONDOMARENA)",
+              "enlace": "https://datos.gob.do/dataset/presupuesto-fondo-marena-2019-2023"
+            },
+            {
+              "titulo": "Presupuesto Aprobado, 2021-2026",
+              "organismo": "Suprema Corte de Justicia y Consejo del Poder Judicial",
+              "enlace": "https://datos.gob.do/dataset/presupuesto-poder-judicial"
+            },
+            {
+              "titulo": "Presupuestos aprobados, 2019-2025",
+              "organismo": "Consejo Nacional de Zonas Francas de Exportacion (CNZFE)",
+              "enlace": "https://datos.gob.do/dataset/presupuesto-aprobado-por-ano"
+            },
+            {
+              "titulo": "Presupuesto Aprobado 2022 - 2026",
+              "organismo": "Instituto de Innovación en Biotecnología e Industria (IIBI)",
+              "enlace": "https://datos.gob.do/dataset/presupuesto-aprobado"
+            }
+          ]
+        },
+        {
+          "materia": "Contratacion publica",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 20,
+          "ejemplos": [
+            {
+              "titulo": "Compras y Contrataciones Realizadas, 2021 - 2024.",
+              "organismo": "Instituto Nacional de Educación Física (INEFI)",
+              "enlace": "https://datos.gob.do/dataset/compras-y-contrataciones-realizadas-y-aprobadas-inefi"
+            },
+            {
+              "titulo": "Estadísticas de Compras y Contrataciones, 2018 - 2025",
+              "organismo": "Ministerio de Economía, Planificación y Desarrollo (MEPyD)",
+              "enlace": "https://datos.gob.do/dataset/listado-compras-contratacciones-mepyd-2018-2019"
+            },
+            {
+              "titulo": "Plan Anual de Compra y Contrataciones (PACC), 2021",
+              "organismo": "Ayuntamiento Municipal de San José de las Matas",
+              "enlace": "https://datos.gob.do/dataset/plan-anual-de-compra-y-contrataciones-pacc-aysajoma-2021"
+            },
+            {
+              "titulo": "Compras y Contrataciones Realizadas y Aprobadas, 2017 - 2026",
+              "organismo": "Instituto de Estabilización de Precios (INESPRE)",
+              "enlace": "https://datos.gob.do/dataset/compras-y-contrataciones-realizadas-y-aprobadas-2017-inespre"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 13,
+          "ejemplos": [
+            {
+              "titulo": "Estadísticas de Delitos Registrados, 2021 - 2026.",
+              "organismo": "Cuerpo Especializado de Control de Combustibles (CECCOM)",
+              "enlace": "https://datos.gob.do/dataset/delitos-detectados-por-direccion-regional"
+            },
+            {
+              "titulo": "Estadísticas de Violencia de Género, Intrafamiliar y Delitos Sexuales 2020 - 2025",
+              "organismo": "Procuraduría General de la República (PGR)",
+              "enlace": "https://datos.gob.do/dataset/informes-de-violencia-de-genero-intrafamiliar-y-delitos-sexuales"
+            },
+            {
+              "titulo": "Estadísticas de Casos Sometidos, 2017 – 2022",
+              "organismo": "Procuraduría General de la República (PGR)",
+              "enlace": "https://datos.gob.do/dataset/estadisticas-de-casos-sometidos"
+            },
+            {
+              "titulo": "Estadisticas de feminicidios y homicidios de mujeres, 2017 – 2022",
+              "organismo": "Procuraduría General de la República (PGR)",
+              "enlace": "https://datos.gob.do/dataset/estadisticas-de-feminicidios-y-homicidios-de-mujeres"
+            }
+          ]
+        },
+        {
+          "materia": "Migracion y desplazamiento",
+          "eje": "Inteligencia estrategica",
+          "consulta": "migracion",
+          "cantidad": 10,
+          "ejemplos": [
+            {
+              "titulo": "Servicios Escuela Nacional de Migración, 2018-2026.",
+              "organismo": "Instituto Nacional de Migración (INMRD)",
+              "enlace": "https://datos.gob.do/dataset/estadisticas-servicios-enm"
+            },
+            {
+              "titulo": "Nómina de empleados, 2018-2026",
+              "organismo": "Dirección General de Migración",
+              "enlace": "https://datos.gob.do/dataset/reporte-de-nomina-sueldos-fijos-y-nominal-2018-2026"
+            },
+            {
+              "titulo": "Estadísticas dominicanos deportados, 2024-2026",
+              "organismo": "Dirección General de Migración",
+              "enlace": "https://datos.gob.do/dataset/dominicanos-deportados-2024-2026"
+            },
+            {
+              "titulo": "Estadísticas de residencias otorgadas, 2018-2026",
+              "organismo": "Dirección General de Migración",
+              "enlace": "https://datos.gob.do/dataset/residencias-2018-2026"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 1,
+          "ejemplos": [
+            {
+              "titulo": "Estadisticas de feminicidios y homicidios de mujeres, 2017 – 2022",
+              "organismo": "Procuraduría General de la República (PGR)",
+              "enlace": "https://datos.gob.do/dataset/estadisticas-de-feminicidios-y-homicidios-de-mujeres"
+            }
+          ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 0,
+          "ejemplos": []
+        }
+      ],
+      "conjuntos_hallados": 83
+    }
+  ],
+  "resumen": {
+    "estados_con_portal": 6,
+    "estados_del_padron": 33,
+    "conjuntos_hallados": 4237,
+    "materias_consultadas": 6
+  },
+  "sectoriales_verificados": [
+    {
+      "iso": "BRA",
+      "organismo": "IBGE",
+      "descripcion": "Agregados estadisticos y division territorial",
+      "consulta": "https://servicodados.ibge.gov.br/api/v3/agregados",
+      "clave": false,
+      "verificado": "2026-08-30"
+    },
+    {
+      "iso": "COL",
+      "organismo": "Colombia Compra Eficiente",
+      "descripcion": "SECOP II, contratos electronicos",
+      "consulta": "https://www.datos.gov.co/resource/jbjy-vk9h.json",
+      "clave": false,
+      "verificado": "2026-08-30"
+    },
+    {
+      "iso": "ARG",
+      "organismo": "Banco Central de la Republica Argentina",
+      "descripcion": "Estadisticas cambiarias",
+      "consulta": "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Maestros/Divisas",
+      "clave": false,
+      "verificado": "2026-08-30"
+    }
+  ]
+}
