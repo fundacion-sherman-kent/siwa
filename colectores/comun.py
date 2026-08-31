@@ -29,6 +29,22 @@ ESPERA = 30
 
 FIABILIDAD = ("A", "B", "C", "D", "E", "F")
 
+# La atribucion viaja DENTRO de cada archivo, no solo en la pantalla. Quien se
+# lleve el dato crudo se lleva tambien de quien es el trabajo: es la unica forma
+# de que el credito sobreviva a una descarga.
+ATRIBUCION = {
+    "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
+    "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+    "sitio": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
+    "uso": ("Acceso libre y gratuito. Se permite reproducir, redistribuir y "
+            "derivar esta información CITANDO LA FUENTE de este modo: «SIWA, "
+            "Fundación Sherman Kent». La recolección, la calificación de fuentes "
+            "y la declaración de vacíos son trabajo de la Fundación; los datos "
+            "de base pertenecen a los productores citados en cada indicador."),
+    "no_implica": ("La cita no implica aval de la Fundación sobre el uso que se "
+                   "haga de estos datos, ni sobre las conclusiones ajenas."),
+}
+
 
 def ahora() -> str:
     """Momento actual en ISO 8601, UTC, sin fracciones de segundo."""
@@ -90,6 +106,7 @@ def escribir(
             "calificacion": calificacion,
             "vacios_declarados": vacios or [],
             "cantidad": len(registros),
+            "atribucion": ATRIBUCION,
         },
         "registros": registros,
     }
