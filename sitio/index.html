@@ -495,6 +495,7 @@
     <a href="#grupos-armados">Grupos armados</a>
     <a href="#migraciones">Migraciones</a>
     <a href="#fronteras">Zonas de frontera</a>
+    <a href="#conflictos-territoriales">Conflictos territoriales</a>
     <a href="#mineria-ilegal">Minería ilegal</a>
     <a href="#menores-combatientes">Menores en conflicto</a>
     <div class="grupo">Defensa</div>
@@ -608,19 +609,35 @@
       </div>
     </section>
 
-    <section class="domain" id="mineria-ilegal">
-      <div class="domain-head"><h3>Minería ilegal</h3><span class="tag">Sin dato · declarado</span></div>
-      <div class="grid-cards">
-        <div class="placeholder">
-          <div><div class="ptitle">No hay fuente libre que la mida</div>
-          <p>Las rentas minerales y la exportación de minerales que este registro publica miden
-             extracción <b>legal</b>: usarlas como medida de minería ilegal sería falsear el dato.
-             El método que sí funcionaría —cruzar focos de calor y pérdida de bosque contra áreas
-             protegidas y concesiones— está identificado y es viable con fuentes gratuitas, pero
-             todavía no está construido. <b>Mientras tanto la casilla queda vacía, no rellenada.</b></p></div>
-          <span class="badge pending">Sin dato</span>
-        </div>
+    <section class="domain" id="conflictos-territoriales">
+      <div class="domain-head"><h3>Conflictos territoriales y sociopolíticos</h3><span class="tag" id="tag-conflictos">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Primer dato subnacional del registro</b>: los casos llegan a departamento y
+           municipio. Los levantó y verificó caso por caso el <b>Instituto de Estudios
+           Interculturales de la Pontificia Universidad Javeriana Cali</b>, a quien
+           corresponde la atribución.</p>
+        <p><b>No es un censo de conflictos.</b> Es el corpus de un proyecto académico, con su
+           alcance y su recorte. Un Estado con pocos casos puede tener pocos conflictos
+           <b>o poca cobertura del proyecto</b>, y las dos cosas no se distinguen desde afuera.
+           <b>Las capas no declaran licencia</b>: acá se publican recuentos y agregados, nunca
+           los casos individuales ni las geometrías, y queda pendiente pedir autorización
+           escrita antes de usarlos en productos pagos.</p>
       </div>
+      <div class="procedencia" id="proc-conflictos">Cargando el registro…</div>
+      <div class="cruce" id="lista-conflictos"></div>
+      <div id="vac-conflictos"></div>
+    </section>
+
+    <section class="domain" id="mineria-ilegal">
+      <div class="domain-head"><h3>Minería ilegal</h3><span class="tag" id="tag-mineria">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Mapeada en cuatro Estados, con años distintos</b> —Bolivia y Venezuela 2017,
+           Brasil 2018, Perú sin año declarado—: <b>no son comparables entre sí ni con la
+           situación actual</b>. Y el número de polígonos <b>no es una medida de magnitud</b>:
+           depende de cómo se dibujó cada capa. Venezuela figura con 1.317 y Perú con 3, y eso
+           <b>no significa que en Perú casi no haya minería ilegal</b>.</p>
+      </div>
+      <div class="grid-cards" id="tarj-mineria"></div>
     </section>
 
     <section class="domain" id="menores-combatientes">
@@ -1175,7 +1192,8 @@
                      ['desplazamiento','ACNUR'],['oficiales','Padrón oficial'],
                      ['owd','V-Dem, Terrorismo y UCDP'],
                      ['cobertura','Cobertura noticiosa'],['redes','Circulación en redes'],
-                     ['telegram','Canales de mensajería']]
+                     ['telegram','Canales de mensajería'],
+                     ['conflictos','Conflictos territoriales']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -1681,7 +1699,7 @@
     tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
     fronterasVista();
     tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista();
-    redesVista(); mensajeriaVista();
+    redesVista(); mensajeriaVista(); conflictosVista();
     pintarFuentes(); informe();
   }
   function seleccionar(iso, nombre){
@@ -2309,6 +2327,57 @@
     }).join('');
   }
 
+  function conflictosVista(){
+    const caja=document.getElementById('lista-conflictos'); if(!caja) return;
+    const d=almacen.conflictos; if(!d) return;
+    const r=d.resumen;
+    const tag=document.getElementById('tag-conflictos');
+    if(tag) tag.textContent = `${miles(r.conflictos_registrados)} casos · ${r.estados_con_conflictos} de ${r.estados_del_padron} Estados`;
+
+    let lista = d.registros.filter(x=>x.conflictos);
+    if(paisFiltro) lista = lista.filter(x=>x.iso===paisFiltro);
+    else if(bloqueActivo()) lista = lista.filter(x=>x.bloque===bloqueActivo());
+
+    caja.innerHTML = lista.length ? lista.map(x=>{
+      const c=x.conflictos;
+      return `<div class="asunto"><h4>${esc(x.pais)}</h4>
+        <div class="foot"><span class="porque">
+          <b>${c.total}</b> caso${c.total===1?'':'s'} · ${c.territoriales} territorial${c.territoriales===1?'':'es'},
+          ${c.sociopoliticos} sociopolítico${c.sociopoliticos===1?'':'s'} ·
+          <b>${c.unidades_subnacionales}</b> unidad${c.unidades_subnacionales===1?'':'es'} subnacional${c.unidades_subnacionales===1?'':'es'}${
+          c.mas_antiguo?` · desde ${c.mas_antiguo} hasta ${c.mas_reciente}`:' · sin año fiable'}
+          </span><span class="badge medio">${c.total} casos</span></div>
+        ${c.entre_actores.length?`<div class="lugares">${c.entre_actores.map(a=>
+          `<span class="lugar">${esc(a.actores)} · ${a.casos}</span>`).join('')}</div>`:''}
+        ${c.ejemplo?`<div class="muestra"><b>Por ejemplo:</b> ${esc(c.ejemplo.nombre)}${
+          c.ejemplo.anio?` (${c.ejemplo.anio})`:''}</div>`:''}
+      </div>`;
+    }).join('')
+      : `<div class="card"><h4>Sin casos en este ámbito</h4><div class="sub">El proyecto no
+         registra conflictos para lo elegido. <b>Ausencia en el corpus no es ausencia de
+         conflicto.</b></div></div>`;
+
+    // Minería ilegal
+    const cm=document.getElementById('tarj-mineria');
+    const tm=document.getElementById('tag-mineria');
+    let mins = d.registros.filter(x=>x.mineria_ilegal);
+    if(paisFiltro) mins = mins.filter(x=>x.iso===paisFiltro);
+    else if(bloqueActivo()) mins = mins.filter(x=>x.bloque===bloqueActivo());
+    if(tm) tm.textContent = `${r.estados_con_mineria_mapeada} de ${r.estados_del_padron} Estados mapeados`;
+    if(cm) cm.innerHTML = mins.length ? mins.map(x=>{
+      const m=x.mineria_ilegal;
+      const sus=(m.sustancias||[]).slice(0,3).map(s=>esc(s.valor)).join(', ');
+      return `<div class="card"><h4>${esc(x.pais)}</h4>
+        <div class="value">${miles(m.poligonos)}</div>
+        <div class="sub">polígonos mapeados${sus?` · ${sus}`:''}</div>
+        <div class="foot"><span class="src">Instituto de Estudios Interculturales, Javeriana Cali</span>
+          <span class="badge unica">${d.procedencia.calificacion.fiabilidad}-${d.procedencia.calificacion.credibilidad}</span></div></div>`;
+    }).join('')
+      : `<div class="card"><h4>Sin mapeo</h4><div class="sub">Solo cuatro Estados tienen la
+         minería ilegal mapeada en esta fuente. <b>El resto no está sin minería ilegal: está
+         sin mapear.</b></div></div>`;
+  }
+
   // ---- Graficos, en SVG y sin bibliotecas ---------------------------------
   function grafico(serie, rotulo){
     if(!serie || serie.length < 2) return '';
@@ -2577,6 +2646,18 @@
     })
     .catch(err=>{ fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
       document.getElementById('proc-cobertura').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('conflictos.json'), traer('estado/conflictos.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.conflictos=d; const meta=d.procedencia;
+      pintarProcedencia('proc-conflictos',meta);
+      registros+=d.resumen.conflictos_registrados+d.resumen.poligonos_mineria_ilegal;
+      vacios+=pintarVacios('vac-conflictos',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-conflictos','conflictos',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('lista-conflictos','conflictos',err.message,null);
+      document.getElementById('proc-conflictos').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('telegram.json'), traer('estado/telegram.json').catch(()=>null)])
     .then(([d,estado])=>{
