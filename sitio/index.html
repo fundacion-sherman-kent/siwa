@@ -1394,8 +1394,8 @@
       <div class="barra-informe">
         <select id="pais-informe" aria-label="País del informe"></select>
         <div class="acciones">
-          <button class="boton" id="btn-csv">Descargar planilla</button>
-          <button class="boton" id="btn-imprimir">Imprimir o guardar en PDF</button>
+          <button class="boton" id="btn-csv">Planilla de datos (CSV)</button>
+          <button class="boton" id="btn-imprimir">Informe en PDF, con membrete</button>
         </div>
       </div>
       <div class="hoja">
@@ -1509,7 +1509,9 @@
   // Se puede fijar desde afuera con window.SIWA_ORIGEN antes de cargar el guion.
   const RUTA = (typeof window !== 'undefined' && window.SIWA_ORIGEN) || '../datos/publico/';
   const almacen = {};
-  let capaActiva = 'homicidios', modo = 'nivel', paisFiltro = null, paisNombre = null, padron = [];
+  // Se abre en la situacion general y no en un indicador suelto: quien entra
+  // por primera vez pregunta «como esta la region», no «como estan los homicidios».
+  let capaActiva = 'situacion', modo = 'nivel', paisFiltro = null, paisNombre = null, padron = [];
   // La zona puede elegirse SOLA, sin pasar por un pais: antes solo existia como
   // «el bloque del pais elegido», y no habia forma de mirar una zona entera.
   let bloqueFiltro = null;
@@ -1611,12 +1613,21 @@
     {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false},
     {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales},
   ];
-  const ORDEN_EJES = ['Seguridad','Defensa','Gobernanza','Desarrollo','Fuentes'];
+  const ORDEN_EJES = ['Situación','Seguridad','Defensa','Gobernanza','Desarrollo','Fuentes'];
+
+  const MATERIAS_COMPUESTAS = () => [
+    {clave:'situacion', rotulo:'Situación general — los cuatro ejes juntos',
+     eje:'Situación', unidad:'lugar en la región', disponible:()=>Object.keys(compuesto().general).length>0},
+    ...EJES_COMPUESTOS.map(e=>({
+      clave:'situacion_'+e.toLowerCase(), rotulo:'Situación · '+e, eje:'Situación',
+      unidad:'lugar en la región',
+      disponible:()=>Object.keys(compuesto().ejes[e]||{}).length>0})),
+  ];
 
   function MATERIAS(){
     const deFuentes = fuentesInd().flatMap(f=>(f.indicadores||[]).map(i=>({
       clave:i.clave, eje:i.eje, rotulo:i.rotulo, disponible:()=>true})));
-    return deFuentes.concat(ESTATICAS).sort((a,b)=>
+    return MATERIAS_COMPUESTAS().concat(deFuentes, ESTATICAS).sort((a,b)=>
       ORDEN_EJES.indexOf(a.eje) - ORDEN_EJES.indexOf(b.eje));
   }
 
@@ -1748,6 +1759,119 @@
       rotuloPunto:'Sin capa de puntos: es un índice de fuentes'
     }
   };
+  // --- Situacion general y por eje ---------------------------------------
+  //
+  // Un compuesto es donde mas facil se engaña, asi que las reglas van a la vista:
+  //
+  // 1. NO SE PROMEDIAN UNIDADES. Cada indicador se convierte al LUGAR que el
+  //    Estado ocupa dentro de la region —su percentil— orientado siempre igual:
+  //    0 es el mejor de los 33 y 100 el peor. Promediar homicidios por cien mil
+  //    con porcentaje de bosque no significa nada; promediar posiciones si.
+  // 2. TODOS LOS INDICADORES PESAN IGUAL dentro de su eje, y todos los ejes
+  //    pesan igual en el total. No es que se crea que todo importa lo mismo: es
+  //    que decidir que pesa mas SERIA UN JUICIO, y este registro no los emite.
+  // 3. UN EJE CON POCOS DATOS NO SE PUNTUA. Se exige un minimo de indicadores;
+  //    por debajo se declara incompleto en vez de inventar un numero.
+  // 4. ES UN ORDEN DENTRO DE LA REGION, NO UNA MEDIDA ABSOLUTA. Un Estado en 50
+  //    esta en la mediana de America Latina, no «a mitad de camino» de nada.
+  const MINIMO_POR_EJE = 4;
+  const EJES_COMPUESTOS = ['Seguridad', 'Defensa', 'Gobernanza', 'Desarrollo'];
+
+  let compuestoGuardado = null, selloCompuesto = '';
+  function compuesto(){
+    const sello = selloDeDatos();
+    if(compuestoGuardado && selloCompuesto === sello) return compuestoGuardado;
+
+    // Percentil de cada Estado en cada indicador, siempre orientado a «peor».
+    const porEje = {};
+    EJES_COMPUESTOS.forEach(e => porEje[e] = {});
+    fuentesInd().forEach(f => (f.indicadores||[]).forEach(i => {
+      if(!EJES_COMPUESTOS.includes(i.eje)) return;
+      const filas = filasDe(i.clave).filter(x => isFinite(x.valor));
+      if(filas.length < 8) return;   // con muy pocos Estados el percentil no dice nada
+      const orden = filas.slice().sort((a,b)=>
+        i.mas_es_peor ? a.valor - b.valor : b.valor - a.valor);
+      orden.forEach((fila, k) => {
+        const pct = orden.length > 1 ? (k / (orden.length - 1)) * 100 : 50;
+        (porEje[i.eje][fila.iso] = porEje[i.eje][fila.iso] || []).push(pct);
+      });
+    }));
+
+    const ejes = {}, general = {};
+    EJES_COMPUESTOS.forEach(e => {
+      ejes[e] = {};
+      Object.entries(porEje[e]).forEach(([iso, lista]) => {
+        if(lista.length < MINIMO_POR_EJE) return;
+        ejes[e][iso] = {
+          valor: lista.reduce((a,b)=>a+b,0) / lista.length,
+          indicadores: lista.length,
+        };
+      });
+    });
+    (padron||[]).forEach(pa => {
+      const suyos = EJES_COMPUESTOS.filter(e => ejes[e][pa.iso]);
+      // Se exige el compuesto de al menos tres de los cuatro ejes: con dos, el
+      // total diria mas sobre que falta que sobre el Estado.
+      if(suyos.length < 3) return;
+      general[pa.iso] = {
+        valor: suyos.reduce((a,e)=>a + ejes[e][pa.iso].valor, 0) / suyos.length,
+        ejes: suyos.length,
+        indicadores: suyos.reduce((a,e)=>a + ejes[e][pa.iso].indicadores, 0),
+        detalle: Object.fromEntries(suyos.map(e => [e, ejes[e][pa.iso].valor])),
+      };
+    });
+    compuestoGuardado = {ejes, general};
+    selloCompuesto = sello;
+    return compuestoGuardado;
+  }
+
+  function capaCompuesta(clave, eje){
+    const rotulo = eje ? `Situación · ${eje}` : 'Situación general';
+    const datos = () => eje ? compuesto().ejes[eje] : compuesto().general;
+    return {
+      materia: clave, divergente: false, ceroAparte: false, compuesta: true,
+      // Al promediar percentiles los extremos se acercan al centro: nadie llega
+      // a 0 ni a 100. Con cortes fijos en 25/50/75 quedaba todo el continente en
+      // dos baldes. Los cortes salen de la distribucion real del compuesto.
+      get leyenda(){
+        const v = Object.values(this.conteo()).sort((a,b)=>a-b);
+        if(v.length < 4) return [25, 50, 75];
+        const q = f => Math.round(v[Math.min(v.length-1, Math.floor(v.length*f))]*10)/10;
+        return [q(.25), q(.5), q(.75)];
+      },
+      get unidad(){ return 'lugar en la región, 0 el mejor y 100 el peor'; },
+      get rotulo(){ return rotulo; },
+      get cautela(){
+        return 'ES UN ORDEN DENTRO DE LA REGION, NO UNA MEDIDA ABSOLUTA: un Estado en 50 '
+             + 'esta en la mediana de America Latina y el Caribe, no «a mitad de camino» '
+             + 'de nada. Se arma promediando el LUGAR que el Estado ocupa en cada '
+             + 'indicador, no los valores, que estan en unidades distintas. Todos los '
+             + 'indicadores pesan igual porque decidir que pesa mas seria un juicio.';
+      },
+      conteo(){
+        const m = {};
+        Object.entries(datos()).forEach(([iso, x]) => m[iso] = Math.round(x.valor*10)/10);
+        return m;
+      },
+      color(v){
+        if(v===undefined||v===null) return MAG[0];
+        const c = this.leyenda;
+        const i = v < c[0] ? 0 : v < c[1] ? 1 : v < c[2] ? 2 : 3;
+        return MAG[i];
+      },
+      get subeEsPeor(){ return true; },
+      periodo(){ return 'según el último dato de cada indicador'; },
+      puntos(){ return []; },
+      rotuloPunto: 'Sin capa de puntos: es un compuesto por país',
+      detalle(iso){
+        const x = datos()[iso];
+        if(!x) return null;
+        return {valor: Math.round(x.valor*10)/10, anio: null,
+                indicadores: x.indicadores, ejes: x.ejes, detalle: x.detalle};
+      },
+    };
+  }
+
   // El sello cambia solo cuando llega o cambia una fuente. Sirve para no rehacer
   // trabajo que ya esta hecho.
   function selloDeDatos(){
@@ -1764,7 +1888,11 @@
   function capas(){
     const sello = selloDeDatos();
     if(capasGuardadas && selloCapas === sello) return capasGuardadas;
-    const c = Object.assign({}, ESTATICAS_CAPAS);
+    const c = {};
+    // La situacion general va PRIMERO: es con lo que se abre el registro.
+    c['situacion'] = capaCompuesta('situacion', null);
+    EJES_COMPUESTOS.forEach(e => c['situacion_' + e.toLowerCase()] = capaCompuesta('situacion_' + e.toLowerCase(), e));
+    Object.assign(c, ESTATICAS_CAPAS);
     fuentesInd().forEach(f=>(f.indicadores||[]).forEach(i=>{
       c[i.clave] = capaBanco(i.clave, cortesDe(i), esEscalaEstimacion(i));
     }));
@@ -2173,6 +2301,27 @@
 
   // Explicacion armada con los propios metadatos del indicador.
   function explicaDelDato(clave){
+    // Las capas compuestas no vienen de una fuente: se construyen aca, y por eso
+    // explican su propio metodo en vez de citar un productor.
+    const capa = capas()[clave];
+    if(capa && capa.compuesta){
+      const n = Object.keys(capa.conteo()).length, c = capa.leyenda;
+      return `<b>Qué muestra:</b> el <b>lugar que cada Estado ocupa dentro de la región</b>,
+        de 0 —el mejor de los 33— a 100 —el peor—. <b>${n} de 33 Estados</b> puntuados.
+        <br><b>Cómo se arma:</b> cada indicador se convierte al puesto del Estado entre sus
+        pares, se promedian los puestos dentro de cada eje, y después los ejes entre sí.
+        <b>Todos pesan igual</b>, porque decidir que uno pesa más sería un juicio y este
+        registro no los emite. Un eje con menos de ${MINIMO_POR_EJE} indicadores no se
+        puntúa, y un Estado con menos de tres ejes queda fuera.
+        <span class="no-es"><b>Qué no es:</b> no es una medida absoluta ni una nota. Un Estado
+        en 50 está en la mediana de América Latina y el Caribe, no «a mitad de camino» de nada,
+        y el peor de la región puede ser mejor que el promedio de otro continente.
+        <b>Y promediar esconde el extremo:</b> Colombia aparece mejor que la mediana regional
+        pese a tener de los peores indicadores de conflicto, porque le va mejor en los otros
+        ejes. Para ver el extremo hay que mirar el indicador, no el compuesto.
+        Los tramos del mapa van de ${cifra(c[0])} a ${cifra(c[2])} porque al promediar puestos
+        nadie llega a los bordes.</span>`;
+    }
     const i = metaInd(clave), conjunto = conjuntoDe(clave);
     if(!i || !i.rotulo) return '';
     const filas = filasDe(clave);
@@ -2283,11 +2432,11 @@
      hacer(){ const c = citaDelTema();
        c ? alPortapapeles(c, 'Cita copiada, con fuente y advertencia incluidas.')
          : avisar('Este tema no tiene ficha citable.', true); }},
-    {nivel:2, ico:'⬇', rot:'Descargar la planilla',
-     ayuda:'Todos los indicadores del ámbito elegido, con unidad, año y series.',
+    {nivel:2, ico:'⬇', rot:'Planilla de datos (CSV)',
+     ayuda:'Para trabajar los números en una hoja de cálculo. Abre con el crédito de la Fundación y la condición de cita; no lleva logotipo porque el formato es texto plano.',
      hacer(){ csv(); avisar('Planilla descargada.'); }},
-    {nivel:2, ico:'🖨', rot:'Imprimir o guardar en PDF',
-     ayuda:'Imprime el informe del ámbito elegido, con márgenes de papel.',
+    {nivel:2, ico:'📄', rot:'Informe en PDF, con membrete',
+     ayuda:'El documento para circular: membrete con el logotipo de la Fundación, filete institucional, y colofón con la cita, los vacíos declarados y la condición de uso. Elegí «Guardar como PDF» en el diálogo de impresión.',
      hacer(){ window.print(); }},
   ];
 
