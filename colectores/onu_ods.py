@@ -67,10 +67,35 @@ SERIES = [
      "origen": "OIT, vía la base global de los ODS",
      "cautela": "Es la economía en negro medida sobre el empleo, no sobre el producto. "
                 "No incluye la actividad ilícita, que no aparece en ninguna encuesta laboral."},
+{"clave": "sin_condena", "codigo": "VC_PRS_UNSNT", "eje": "Seguridad",
+     "rotulo": "Detenidos sin condena", "unidad": "% de la poblacion carcelaria",
+     "mas_es_peor": True, "origen": "UNODC, via la base global de los ODS",
+     "cautela": "Personas presas sin sentencia firme. Mide congestion judicial y uso de "
+                "la prision preventiva, no criminalidad."},
+    {"clave": "acceso_informacion", "codigo": "SG_INF_ACCSS", "eje": "Gobernanza",
+     "rotulo": "Garantias de acceso a la informacion", "unidad": "puntaje de 0 a 100",
+     "mas_es_peor": False, "origen": "UNESCO, via la base global de los ODS",
+     "cautela": "Mide la existencia de garantias legales e institucionales, NO su "
+                "cumplimiento efectivo. Un Estado puede tener buena ley y no aplicarla."},
+    {"clave": "registro_nacimientos", "codigo": "SG_REG_BRTH", "eje": "Gobernanza",
+     "rotulo": "Nacimientos registrados", "unidad": "% de los menores de 5 anios",
+     "mas_es_peor": False, "origen": "UNICEF, via la base global de los ODS",
+     "cautela": "Es la capacidad estatal mas basica: saber quien existe. Un registro "
+                "incompleto degrada todas las demas estadisticas de ese Estado."},
+    {"clave": "trabajo_infantil", "codigo": "SL_TLF_CHLDEC", "eje": "Desarrollo",
+     "rotulo": "Trabajo infantil", "unidad": "% de los ninos de 5 a 17",
+     "mas_es_peor": True, "origen": "OIT, via la base global de los ODS",
+     "cautela": "Sale de encuestas de hogares con anios y muestras distintos por Estado."},
+    {"clave": "agua_potable", "codigo": "SH_H2O_SAFE", "eje": "Desarrollo",
+     "rotulo": "Acceso a agua potable gestionada", "unidad": "% de la poblacion",
+     "mas_es_peor": False, "origen": "OMS y UNICEF, via la base global de los ODS",
+     "cautela": "Servicio gestionado de forma segura, definicion mas exigente que "
+                "«acceso a agua». No mide continuidad del servicio."},
 ]
 
 # Dimensiones que se conservan: total, ambos sexos, todas las edades.
-TOTALES = {"BOTHSEX", "ALLAGE", "_T", "ALLAREA", "TOTAL", "15+", "ALLACT", ""}
+TOTALES = {"BOTHSEX", "ALLAGE", "_T", "ALLAREA", "TOTAL", "15+", "5-17",
+            "ALLACT", "ALLTYPE", "<5Y", ""}
 
 
 def _traer(serie: dict, m49: list) -> dict:

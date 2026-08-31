@@ -95,6 +95,66 @@ INDICADORES = [
      "origen": "Banco Mundial",
      "cautela": "Proporción del producto que proviene de extraer recursos. Es el "
                 "indicador clásico de exposición a la maldición de los recursos."},
+{"clave": "gasto_militar", "codigo": "MS.MIL.XPND.GD.ZS", "fuente_id": None,
+     "rotulo": "Gasto militar", "eje": "Seguridad",
+     "unidad": "% del producto", "mas_es_peor": False,
+     "origen": "SIPRI, compilado por el Banco Mundial",
+     "cautela": "Mide lo que el Estado destina a defensa, no su capacidad ni su empleo. "
+                "Un valor alto no indica mas seguridad ni menos."},
+    {"clave": "personal_militar", "codigo": "MS.MIL.TOTL.P1", "fuente_id": None,
+     "rotulo": "Personal de las fuerzas armadas", "eje": "Seguridad",
+     "unidad": "personas", "mas_es_peor": False,
+     "origen": "Banco Mundial",
+     "cautela": "Efectivos declarados. No incluye fuerzas de seguridad interior ni "
+                "policiales, que en varios Estados del padron son el grueso del despliegue."},
+    {"clave": "voz_rendicion", "codigo": "GOV_WGI_VA.EST", "fuente_id": 3,
+     "rotulo": "Voz y rendicion de cuentas", "eje": "Gobernanza",
+     "unidad": "estimacion de -2,5 a 2,5", "mas_es_peor": False,
+     "origen": "Worldwide Governance Indicators, Banco Mundial",
+     "cautela": "Estimacion de percepcion sobre libertad de expresion, asociacion y "
+                "participacion. No cuenta hechos."},
+    {"clave": "calidad_regulatoria", "codigo": "GOV_WGI_RQ.EST", "fuente_id": 3,
+     "rotulo": "Calidad regulatoria", "eje": "Gobernanza",
+     "unidad": "estimacion de -2,5 a 2,5", "mas_es_peor": False,
+     "origen": "Worldwide Governance Indicators, Banco Mundial",
+     "cautela": "Estimacion de percepcion sobre la capacidad del Estado de formular "
+                "reglas razonables. No cuenta hechos."},
+    {"clave": "recaudacion", "codigo": "GC.TAX.TOTL.GD.ZS", "fuente_id": None,
+     "rotulo": "Recaudacion tributaria", "eje": "Gobernanza",
+     "unidad": "% del producto", "mas_es_peor": False,
+     "origen": "FMI y Banco Mundial",
+     "cautela": "Entra como capacidad del Estado de recaudar, no como indicador "
+                "economico. Una recaudacion baja frente a una economia grande senala "
+                "evasion o economia no registrada."},
+    {"clave": "desempleo_joven", "codigo": "SL.UEM.1524.ZS", "fuente_id": None,
+     "rotulo": "Desempleo juvenil", "eje": "Desarrollo",
+     "unidad": "% de la poblacion de 15 a 24", "mas_es_peor": True,
+     "origen": "OIT, compilado por el Banco Mundial",
+     "cautela": "Estimacion modelada de la OIT donde el Estado no publica encuesta propia."},
+    {"clave": "gini", "codigo": "SI.POV.GINI", "fuente_id": None,
+     "rotulo": "Desigualdad — indice de Gini", "eje": "Desarrollo",
+     "unidad": "0 igualdad, 100 desigualdad maxima", "mas_es_peor": True,
+     "origen": "Banco Mundial, sobre encuestas de hogares",
+     "cautela": "Depende de la encuesta de hogares de cada Estado, con anios y "
+                "metodologias distintos. La comparacion entre paises es aproximada."},
+    {"clave": "pobreza", "codigo": "SI.POV.NAHC", "fuente_id": None,
+     "rotulo": "Pobreza segun linea nacional", "eje": "Desarrollo",
+     "unidad": "% de la poblacion", "mas_es_peor": True,
+     "origen": "Banco Mundial, sobre lineas nacionales",
+     "cautela": "CADA ESTADO DEFINE SU PROPIA LINEA DE POBREZA. Las cifras NO son "
+                "comparables entre paises: solo su evolucion dentro de cada uno."},
+    {"clave": "internet", "codigo": "IT.NET.USER.ZS", "fuente_id": None,
+     "rotulo": "Usuarios de internet", "eje": "Desarrollo",
+     "unidad": "% de la poblacion", "mas_es_peor": False,
+     "origen": "UIT, compilado por el Banco Mundial",
+     "cautela": "Es tambien la base de exposicion para la materia de ciberseguridad: "
+                "sin poblacion conectada no hay superficie de ataque."},
+    {"clave": "bosque", "codigo": "AG.LND.FRST.ZS", "fuente_id": None,
+     "rotulo": "Superficie forestal", "eje": "Desarrollo",
+     "unidad": "% del territorio", "mas_es_peor": False,
+     "origen": "FAO, compilado por el Banco Mundial",
+     "cautela": "Superficie total, no su estado de conservacion. Una plantacion cuenta "
+                "igual que un bosque primario."},
 ]
 
 
