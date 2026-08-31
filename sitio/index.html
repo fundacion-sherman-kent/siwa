@@ -505,6 +505,7 @@
     <a href="#desplazamiento">Desplazamiento forzado</a>
     <a href="#contrabando">Contrabando</a>
     <a href="#ciber">Ciberseguridad</a>
+    <a href="#extorsion">Extorsión informática</a>
     <a href="#fuerzas">Fuerzas y defensa</a>
     <a href="#victimizacion">Victimización y denuncia</a>
     <a href="#terrorismo">Terrorismo</a>
@@ -757,6 +758,25 @@
            paz</b>.</p>
       </div>
       <div class="grid-cards" id="tarj-grupos-armados"></div>
+    </section>
+
+    <section class="domain" id="extorsion">
+      <div class="domain-head"><h3>Extorsión informática</h3><span class="tag" id="tag-ransomware">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Acá solo aparece quien no pagó rápido.</b> Los grupos que secuestran sistemas
+           publican a sus víctimas <b>para presionarlas</b>: la empresa que paga enseguida y
+           en silencio <b>nunca aparece en ninguna lista</b>. Esta cifra subestima el
+           fenómeno de manera sistemática y <b>por una magnitud que nadie puede
+           calcular</b>.</p>
+        <p><b>Y es un recuento, no una tasa.</b> Una economía grande tiene más empresas que
+           atacar: que Brasil encabece la lista no significa que esté peor protegido, sino
+           que tiene más objetivos. <b>La fuente es el atacante</b>, que exagera y repite
+           víctimas viejas: lo que se observa con certeza es que <b>el grupo lo publicó</b>,
+           no que el hecho sea como lo cuenta.</p>
+      </div>
+      <div class="procedencia" id="proc-ransomware">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-ransomware"></div>
+      <div id="vac-ransomware"></div>
     </section>
 
     <section class="domain" id="fuerzas">
@@ -1227,7 +1247,8 @@
                      ['cobertura','Cobertura noticiosa'],['redes','Circulación en redes'],
                      ['telegram','Canales de mensajería'],
                      ['conflictos','Conflictos territoriales'],
-                     ['comercio','Comercio · brecha espejo']]
+                     ['comercio','Comercio · brecha espejo'],
+                     ['ransomware','Extorsión informática']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -1815,7 +1836,7 @@
     tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
     fronterasVista();
     tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista();
-    redesVista(); mensajeriaVista(); conflictosVista(); comercioVista();
+    redesVista(); mensajeriaVista(); conflictosVista(); comercioVista(); ransomwareVista();
     pintarFuentes(); informe();
   }
   function seleccionar(iso, nombre){
@@ -2470,6 +2491,35 @@
     }).join('');
   }
 
+  function ransomwareVista(){
+    const caja=document.getElementById('tarj-ransomware'); if(!caja) return;
+    const d=almacen.ransomware; if(!d) return;
+    const r=d.resumen, meta=d.procedencia;
+    const tag=document.getElementById('tag-ransomware');
+    if(tag) tag.textContent = `${miles(r.victimas_registradas)} víctimas publicadas · ${r.estados_con_caso} de ${r.estados_del_padron} Estados · ${r.grupos_distintos_en_la_region} grupos`;
+
+    let lista = d.registros.slice();
+    if(paisFiltro) lista = lista.filter(x=>x.iso===paisFiltro);
+    else if(bloqueActivo()) lista = lista.filter(x=>x.bloque===bloqueActivo());
+    if(!lista.length){
+      caja.innerHTML = `<div class="card"><h4>Sin caso registrado</h4><div class="sub">
+        Ninguna víctima publicada para este ámbito. <b>Ausencia de registro no es ausencia
+        de ataques</b>: quien paga rápido no aparece.</div></div>`;
+      return;
+    }
+    caja.innerHTML = lista.slice(0, paisFiltro?1:12).map(x=>`
+      <div class="card"><h4>${esc(x.pais)}</h4>
+        <div class="value">${miles(x.victimas)}</div>
+        <div class="sub">víctimas publicadas · <b>${miles(x.victimas_ultimos_dos_anios)}</b>
+          en los últimos dos años · ${x.grupos_distintos} grupos distintos${
+          x.primer_anio?` · desde ${x.primer_anio}`:''}</div>
+        ${x.sectores.length?`<div class="nube chica">${x.sectores.slice(0,4).map(s=>
+          `<span class="term" title="${s.victimas} víctimas"><b>${esc(s.sector)}</b></span>`).join('')}</div>`:''}
+        <div class="foot"><span class="src">${esc(meta.fuente.nombre)}</span>
+          <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
+      </div>`).join('');
+  }
+
   function comercioVista(){
     const caja=document.getElementById('lista-comercio'); if(!caja) return;
     const d=almacen.comercio; if(!d) return;
@@ -2848,6 +2898,18 @@
     })
     .catch(err=>{ fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
       document.getElementById('proc-cobertura').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('ransomware.json'), traer('estado/ransomware.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.ransomware=d; const meta=d.procedencia;
+      pintarProcedencia('proc-ransomware',meta);
+      registros+=d.resumen.victimas_registradas;
+      vacios+=pintarVacios('vac-ransomware',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-ransomware','extorsión informática',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('tarj-ransomware','extorsión informática',err.message,null);
+      document.getElementById('proc-ransomware').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('comercio.json'), traer('estado/comercio.json').catch(()=>null)])
     .then(([d,estado])=>{
