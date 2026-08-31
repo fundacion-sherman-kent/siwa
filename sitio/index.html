@@ -164,6 +164,32 @@
     border-radius:20px;cursor:pointer;}
   .tema.activo{border-color:var(--orange);color:#fff;background:rgba(251,101,0,.16);}
   .leyenda .sin-puntos{color:#7d90a8;font-style:italic;}
+  .explica-capa{
+    margin:0 0 12px;padding:10px 14px;font-size:12px;line-height:1.6;color:#C7D2E0;
+    background:rgba(255,255,255,.03);border-left:2px solid var(--purple);border-radius:0 6px 6px 0;
+  }
+  .explica-capa b{color:#fff;}
+  .cruce{display:flex;flex-direction:column;gap:10px;}
+  .asunto{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+  .asunto h4{margin:0 0 8px;font-size:13px;font-weight:700;color:#fff;line-height:1.45;}
+  .asunto .origenes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
+  .origen{
+    font-size:10px;color:#9fb2c8;border:1px solid var(--line);border-radius:20px;
+    padding:3px 9px;text-decoration:none;
+  }
+  .origen:hover{border-color:var(--orange);color:#fff;}
+  .origen .jur{color:#7d90a8;font-family:'JetBrains Mono',monospace;}
+  .asunto .porque{font-size:10.5px;color:#7d90a8;line-height:1.55;}
+  .badge.fuerte{background:rgba(63,167,150,.20);color:#6fe0c9;}
+  .badge.medio{background:rgba(251,101,0,.18);color:#ffb27a;}
+  .badge.solo{background:rgba(194,59,34,.18);color:#ff9c86;}
+  .aviso-cobertura{
+    border:1px solid rgba(194,59,34,.45);background:rgba(194,59,34,.08);
+    border-radius:10px;padding:14px 18px;margin-bottom:14px;
+  }
+  .aviso-cobertura p{margin:0;font-size:12px;color:#C7D2E0;line-height:1.65;}
+  .aviso-cobertura b{color:#ff9c86;}
+  .explica-capa .no-es{display:block;margin-top:5px;color:#ffb27a;}
 
   /* ---- Informe descargable ---- */
   .barra-informe{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;}
@@ -248,7 +274,7 @@
     <div class="sep"></div>
     <div>
       <h1>SIWA</h1>
-      <small>Registro de situación · ALC</small>
+      <small>Reporte de situación · ALC</small>
     </div>
   </div>
   <div class="topbar-right">
@@ -258,8 +284,7 @@
 </div>
 
 <div class="hero">
-  <div class="eyebrow">Registro público · versión 0.1</div>
-  <h2 class="hero-title">Registro de situación de <em>América Latina y el Caribe</em></h2>
+  <h2 class="hero-title">Reporte de situación en <em>América Latina y Caribe</em></h2>
   <p>Datos públicos de los 33 Estados del padrón, recolectados de forma automática y
      calificados con doctrina de inteligencia. Cada cifra declara su fuente, su fecha de
      referencia, su calificación de fiabilidad y qué es lo que su fuente <em>no</em> cubre.</p>
@@ -288,9 +313,10 @@
     <div class="grupo">Inteligencia estratégica</div>
     <a href="#desplazamiento">Desplazamiento forzado</a>
     <a href="#contrabando">Contrabando</a>
+    <div class="grupo">Verificación</div>
+    <a href="#cobertura">Cobertura cruzada</a>
     <div class="grupo">Método</div>
     <a href="#informe">Informe descargable</a>
-    <div class="grupo">Método</div>
     <a href="#calificacion">Calificación</a>
   </nav>
 
@@ -300,11 +326,12 @@
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <div class="mapa-barra">
         <div class="temas">
-          <button class="tema activo" data-capa="focos">Economías ilícitas</button>
+          <button class="tema activo" data-capa="focos">Economías ilícitas · focos de calor</button>
           <button class="tema" data-capa="desplazamiento">Desplazamiento forzado</button>
         </div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
+      <p class="explica-capa" id="explica-capa">—</p>
       <div class="mapa-caja">
         <div id="mapa"></div>
         <div class="leyenda" id="leyenda"></div>
@@ -423,6 +450,26 @@
           <span class="badge pending">Sin dato</span>
         </div>
       </div>
+    </section>
+
+    <div class="eje">
+      <h2>Verificación cruzada</h2>
+      <p>Qué se está publicando sobre la región y en cuántos orígenes independientes.
+         No es una materia del registro: es el segundo factor de veracidad con el que se
+         contrastan las materias.</p>
+    </div>
+
+    <section class="domain" id="cobertura">
+      <div class="domain-head"><h3>Cobertura noticiosa cruzada</h3><span class="tag" id="tag-cobertura">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Esto no registra hechos: registra que algo se está publicando.</b>
+           Que diez portales cubran un asunto no prueba que haya ocurrido. Y veinte medios
+           del mismo país repitiendo un cable son <b>un solo origen</b>, no veinte. Acá se
+           cuentan orígenes independientes por idioma y por jurisdicción, no portales.</p>
+      </div>
+      <div class="procedencia" id="proc-cobertura">Cargando el registro…</div>
+      <div class="cruce" id="lista-cobertura"></div>
+      <div id="vac-cobertura"></div>
     </section>
 
     <div class="eje">
@@ -585,7 +632,15 @@
                `Potencia radiativa ${miles(r.potencia_radiativa_total)} MW` +
                `<span class="nota">Anomalías térmicas. No son incendios ni actividad ilegal comprobada.</span>`;
       },
-      leyenda: ['Sin focos','1 a 49','50 a 499','500 o más','Foco de la muestra publicada']
+      leyenda: ['Sin focos','1 a 49','50 a 499','500 o más','Foco de la muestra publicada'],
+      explica(){
+        const d = almacen.focos;
+        return `<b>Qué muestra:</b> anomalías térmicas detectadas por satélite en la última ventana de un día. ` +
+               `El color del país es la cantidad; los puntos son los ${d ? miles(d.muestra_para_mapa.length) : '—'} focos de mayor energía, en su coordenada exacta.` +
+               `<span class="no-es"><b>Qué no es:</b> no son incendios ni actividad ilegal comprobada. La detección incluye quema agrícola, ` +
+               `incendio forestal, quema de gas en yacimientos e industria. Leerla como minería ilegal o desmonte exige cruzarla contra ` +
+               `concesiones y áreas protegidas, y esa lectura la hace el analista, no este registro.</span>`;
+      }
     },
     desplazamiento: {
       etiqueta: 'Desplazamiento forzado',
@@ -599,7 +654,14 @@
                `Desplazados internos ${miles(r.desplazados_internos)} · cifra de ${r.anio}` +
                `<span class="nota">Cifra anual de cierre, no dato en vivo. Sin desglose subnacional.</span>`;
       },
-      leyenda: ['Sin registro','Menos de 50.000','50.000 a 299.999','300.000 o más','Sin capa de puntos: la fuente no da coordenada']
+      leyenda: ['Sin registro','Menos de 50.000','50.000 a 299.999','300.000 o más','Sin capa de puntos: la fuente no da coordenada'],
+      explica(){
+        const d = almacen.desplazamiento;
+        return `<b>Qué muestra:</b> personas expulsadas de cada país —refugiadas o solicitando asilo fuera de él—, ` +
+               `cifra anual de cierre de ${d ? d.anio_de_la_cifra : '—'}. El país que recibe y los desplazados internos se leen en la ficha.` +
+               `<span class="no-es"><b>Qué no es:</b> no es un dato en vivo, y no incluye la migración irregular no registrada, que en varios ` +
+               `corredores de la región es la mayoría del flujo. La fuente no publica coordenada: por eso esta capa no tiene puntos.</span>`;
+      }
     }
   };
 
@@ -684,6 +746,8 @@
     const q = document.getElementById('quitar');
     if(q) q.addEventListener('click', () => { paisFiltro=null; paisNombre=null; sincronizarSelector(); repintar(); });
     document.querySelectorAll('.tema').forEach(b => b.classList.toggle('activo', b.dataset.capa===capaActiva));
+    const cajaExplica = document.getElementById('explica-capa');
+    if(cajaExplica) cajaExplica.innerHTML = CAPAS[capaActiva].explica();
     leyenda(); tarjetasIlicitas(); tarjetasDesplazamiento(); informe();
   }
 
@@ -847,6 +911,38 @@
     })
     .catch(err => { fallas++; pintarFalla('tarj-ilicitas','focos de calor',err.message,null);
       document.getElementById('proc-ilicitas').textContent='Sin registro disponible.'; marcador(); });
+
+  const ROTULO = {corroborado_fuerte:['fuerte','Corroborado · dos idiomas'],
+                  corroborado:['medio','Corroborado · dos jurisdicciones'],
+                  origen_unico:['solo','Un solo origen']};
+
+  Promise.all([traer('cobertura.json'), traer('estado/cobertura.json').catch(()=>null)])
+    .then(([d, estado]) => {
+      almacen.cobertura = d;
+      const meta = d.procedencia, r = d.resumen;
+      pintarProcedencia('proc-cobertura', meta);
+      document.getElementById('tag-cobertura').textContent =
+        r.asuntos_con_cruce + ' asuntos · ' + r.medios_que_respondieron + ' de ' +
+        r.medios_consultados + ' medios · ' + miles(r.notas_en_ventana) + ' notas';
+      document.getElementById('lista-cobertura').innerHTML = d.registros.length
+        ? d.registros.slice(0,14).map(e => {
+            const c = e.corroboracion, [clase, texto] = ROTULO[c.estado];
+            return `<div class="asunto">
+              <h4>${e.asunto}</h4>
+              <div class="origenes">${e.notas.map(n =>
+                `<a class="origen" href="${n.enlace}" target="_blank" rel="noopener">${n.medio}
+                   <span class="jur">${n.pais}·${n.idioma}</span></a>`).join('')}</div>
+              <div class="foot"><span class="porque">${c.origenes_independientes} origen${c.origenes_independientes===1?'':'es'} en ${c.portales} portales · ${c.nota}</span>
+                <span class="badge ${clase}">${texto}</span></div>
+            </div>`;
+          }).join('')
+        : `<div class="card"><h4>Sin cruces en la ventana</h4><div class="sub">Ningún asunto fue cubierto por dos medios distintos del padrón. No es una falla.</div></div>`;
+      vacios += pintarVacios('vac-cobertura', meta.vacios_declarados);
+      if(estado && estado.estado==='error'){ fallas++; pintarFalla('lista-cobertura','cobertura',estado.mensaje,meta); }
+      marcador();
+    })
+    .catch(err => { fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
+      document.getElementById('proc-cobertura').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('desplazamiento.json'), traer('estado/desplazamiento.json').catch(()=>null), traer('desplazamiento-serie.json').catch(()=>null)])
     .then(([d, estado, serie]) => {

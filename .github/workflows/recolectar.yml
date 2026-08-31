@@ -49,6 +49,12 @@ jobs:
         continue-on-error: true
         run: python colectores/desplazamiento.py
 
+      # --- Transversal ---
+      - name: Cobertura noticiosa cruzada (padron propio)
+        id: cobertura
+        continue-on-error: true
+        run: python colectores/cobertura.py
+
       - name: Guardar lo recolectado
         if: always()
         run: |
@@ -66,4 +72,5 @@ jobs:
           fallo=0
           [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
           [ "${{ steps.desplazamiento.outcome }}" = "failure" ] && { echo "Falló el colector de desplazamiento forzado."; fallo=1; }
+          [ "${{ steps.cobertura.outcome }}" = "failure" ] && { echo "Falló el colector de cobertura noticiosa."; fallo=1; }
           exit $fallo
