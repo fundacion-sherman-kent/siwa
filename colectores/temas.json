@@ -1,0 +1,133 @@
+{
+  "_nota": "Lexico tematico para detectar SENAL RECIENTE en el corpus de prensa, redes y mensajeria. NO produce indicadores: produce indicios fechados que se muestran AL LADO del dato estructural, nunca fundidos con el. Cada tema declara con que indicador estructural se lee en paralelo. Los terminos se comparan sobre texto normalizado sin tildes, en los seis idiomas del padron.",
+  "_regla": "Un tema se atribuye a una nota solo si aparece al menos un termino NUCLEO. Los terminos de apoyo no bastan por si solos: sirven para elevar la confianza cuando ya hay un nucleo.",
+  "temas": [
+    {
+      "clave": "terrorismo",
+      "rotulo": "Terrorismo",
+      "indicador": "terrorismo_atentados",
+      "cautela": "«Terrorismo» es una calificacion disputada. Varios Estados de la region llaman terrorista a la protesta social, y la prensa reproduce esa calificacion. Que una nota use la palabra NO significa que el hecho sea terrorismo: significa que alguien lo llamo asi.",
+      "nucleo": ["terrorismo", "terrorista", "terroristas", "atentado", "atentados",
+                 "coche bomba", "carro bomba", "terrorism", "terrorist", "bombing",
+                 "terrorismo", "atentado", "terrorista", "attentat", "terrorisme"],
+      "apoyo": ["explosivo", "explosion", "artefacto", "detonacion", "reivindico"]
+    },
+    {
+      "clave": "homicidios",
+      "rotulo": "Homicidios y violencia letal",
+      "indicador": "homicidios",
+      "cautela": "La prensa cubre el hecho singular y espectacular; la estadistica cuenta todos. Mas notas NO significa mas homicidios: puede significar mas atencion.",
+      "nucleo": ["homicidio", "homicidios", "asesinato", "asesinatos", "masacre",
+                 "masacres", "sicariato", "feminicidio", "femicidio", "homicide",
+                 "murder", "massacre", "assassinato", "chacina", "homicidio"],
+      "apoyo": ["cuerpo sin vida", "balacera", "tiroteo", "victima fatal"]
+    },
+    {
+      "clave": "crimen_organizado",
+      "rotulo": "Crimen organizado",
+      "indicador": "conflicto_no_estatal",
+      "cautela": "Los nombres de las organizaciones cambian, se fragmentan y se reciclan. Que un grupo sea nombrado no prueba su existencia actual ni su control territorial.",
+      "nucleo": ["crimen organizado", "narcotrafico", "narcotrafico", "cartel", "carteles",
+                 "banda criminal", "bandas criminales", "organizacion criminal",
+                 "organized crime", "drug trafficking", "gang", "gangs",
+                 "crime organizado", "faccao", "traficantes", "narco"],
+      "apoyo": ["extorsion", "sicarios", "plaza", "cobro de piso", "vacuna"]
+    },
+    {
+      "clave": "protesta",
+      "rotulo": "Protesta y conflicto social",
+      "indicador": "libertad_asociacion",
+      "cautela": "Se cuenta la cobertura de la protesta, no la protesta. Un pais con prensa libre publica mas conflicto que uno donde no se puede publicar.",
+      "nucleo": ["protesta", "protestas", "manifestacion", "manifestaciones", "paro",
+                 "huelga", "movilizacion", "bloqueo de rutas", "cacerolazo",
+                 "protest", "strike", "demonstration", "protesto", "greve",
+                 "manifestacao", "manifestation", "greve"],
+      "apoyo": ["represion", "gases lacrimogenos", "detenidos", "marcha"]
+    },
+    {
+      "clave": "corrupcion",
+      "rotulo": "Corrupcion y contratacion publica",
+      "indicador": "corrupcion",
+      "cautela": "La denuncia no es la condena. Una nota sobre una investigacion abierta no acredita el hecho: acredita que hay una investigacion.",
+      "nucleo": ["corrupcion", "soborno", "coima", "peculado", "malversacion",
+                 "licitacion irregular", "sobreprecio", "lavado de activos",
+                 "lavado de dinero", "corruption", "bribery", "money laundering",
+                 "corrupcao", "propina", "lavagem de dinheiro", "desvio de recursos"],
+      "apoyo": ["fiscalia", "imputado", "allanamiento", "contraloria", "auditoria"]
+    },
+    {
+      "clave": "ciberataque",
+      "rotulo": "Ataques informaticos",
+      "indicador": "servidores_seguros",
+      "cautela": "Muchos ataques no se publican nunca. La cobertura mide lo que se supo, no lo que ocurrio.",
+      "nucleo": ["ciberataque", "ciberataques", "ransomware", "hackeo", "hackearon",
+                 "secuestro de datos", "filtracion de datos", "brecha de seguridad",
+                 "cyberattack", "data breach", "hacked", "ataque hacker",
+                 "vazamento de dados", "cyberattaque"],
+      "apoyo": ["servidores", "sistemas caidos", "rescate", "datos personales"]
+    },
+    {
+      "clave": "migracion",
+      "rotulo": "Migracion y desplazamiento",
+      "indicador": "migracion_neta",
+      "cautela": "El movimiento de personas se cubre por episodios —una caravana, un naufragio, una deportacion— y no de forma continua.",
+      "nucleo": ["migrantes", "migracion", "migratoria", "deportacion", "deportados",
+                 "desplazados", "desplazamiento forzado", "refugiados", "solicitantes de asilo",
+                 "caravana migrante", "migrants", "migration", "deportation", "refugees",
+                 "migrantes", "refugiados", "deportacao", "migrants", "refugies"],
+      "apoyo": ["frontera", "albergue", "acnur", "vulnerables"]
+    },
+    {
+      "clave": "contrabando",
+      "rotulo": "Contrabando e incautaciones",
+      "indicador": "regalo_contrato",
+      "cautela": "Una incautacion grande puede indicar mas trafico o mejor control: el mismo hecho admite las dos lecturas y este registro no elige una.",
+      "nucleo": ["contrabando", "incautacion", "incautaron", "decomiso", "decomisaron",
+                 "cargamento", "aduana", "smuggling", "seizure", "seized",
+                 "contrabando", "apreensao", "apreendidos", "contrebande", "saisie"],
+      "apoyo": ["cocaina", "toneladas", "kilos", "operativo", "puerto"]
+    },
+    {
+      "clave": "mineria_ilegal",
+      "rotulo": "Mineria ilegal",
+      "indicador": "rentas_naturales",
+      "cautela": "Se cubre cuando hay operativo o cuando hay muertos. La actividad sostenida rara vez es noticia.",
+      "nucleo": ["mineria ilegal", "minería ilegal", "garimpo", "garimpeiros",
+                 "dragas", "extraccion ilicita", "illegal mining",
+                 "mineracao ilegal", "mineria informal"],
+      "apoyo": ["mercurio", "oro", "amazonia", "rio", "deforestacion"]
+    },
+    {
+      "clave": "conflicto_politico",
+      "rotulo": "Conflicto politico e institucional",
+      "indicador": "democracia_electoral",
+      "cautela": "Es cobertura de la disputa politica, no medicion de la calidad democratica. Un pais con mas conflicto publicado puede tener mas prensa, no menos democracia.",
+      "nucleo": ["juicio politico", "impeachment", "golpe de estado", "estado de excepcion",
+                 "estado de sitio", "crisis politica", "destitucion", "fraude electoral",
+                 "coup", "political crisis", "state of emergency",
+                 "crise politica", "golpe", "impeachment", "crise politique"],
+      "apoyo": ["congreso", "corte suprema", "oposicion", "renuncia"]
+    },
+    {
+      "clave": "fuerzas_armadas",
+      "rotulo": "Fuerzas armadas y seguridad interior",
+      "indicador": "gasto_militar",
+      "cautela": "El despliegue militar en tareas de seguridad interior es materia disputada. La cobertura no distingue la legalidad del uso.",
+      "nucleo": ["militarizacion", "despliegue militar", "fuerzas armadas", "ejercito",
+                 "militares", "operativo militar", "military deployment", "armed forces",
+                 "forcas armadas", "exercito", "militares", "armee"],
+      "apoyo": ["frontera", "seguridad interior", "estado de excepcion", "patrullaje"]
+    },
+    {
+      "clave": "derechos_humanos",
+      "rotulo": "Derechos humanos",
+      "indicador": "institucion_ddhh",
+      "cautela": "Se cubre la denuncia. La ausencia de cobertura puede indicar que no hay violaciones o que no se pueden publicar.",
+      "nucleo": ["derechos humanos", "tortura", "desaparicion forzada", "desaparecidos",
+                 "ejecucion extrajudicial", "presos politicos", "human rights",
+                 "enforced disappearance", "direitos humanos", "tortura",
+                 "droits humains", "desaparecidos"],
+      "apoyo": ["cidh", "onu", "denuncia", "informe"]
+    }
+  ]
+}

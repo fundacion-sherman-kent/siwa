@@ -231,6 +231,41 @@
     padding:20px 0 8px;font-size:13.5px;color:#9fb0c4;line-height:1.6;max-width:68ch;
   }
   .elige-pais b{color:#fff;}
+  .edad{
+    display:inline-block;padding:1px 7px;border-radius:999px;font-size:9.5px;
+    font-weight:700;letter-spacing:.3px;vertical-align:1px;
+  }
+  .edad.fresco{background:rgba(63,167,150,.22);color:#7fd3c4;}
+  .edad.reciente{background:rgba(255,255,255,.09);color:#9fb0c4;}
+  .edad.viejo{background:rgba(251,101,0,.20);color:#ffb37a;}
+  .edad.muy-viejo{background:rgba(251,101,0,.34);color:#ffd0b0;}
+  .senal{
+    border:1px solid rgba(251,101,0,.42);border-radius:9px;padding:13px 15px;
+    margin-top:14px;background:rgba(251,101,0,.07);
+  }
+  .senal h5{
+    margin:0 0 7px;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;
+    color:var(--orange);font-weight:700;
+  }
+  .senal p{margin:0 0 8px;font-size:12px;line-height:1.55;color:#C7D2E0;}
+  .senal p b{color:#fff;}
+  .senal .titulares{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+  .senal .titulares a{
+    color:#C7D2E0;font-size:11.5px;line-height:1.4;text-decoration:none;
+    border-left:2px solid rgba(251,101,0,.5);padding-left:9px;
+  }
+  .senal .titulares a:hover{color:#fff;}
+  .senal .titulares .quien{color:#7d90a8;font-size:10px;}
+  .senal .aclara{
+    margin-top:9px;padding-top:8px;border-top:1px solid rgba(255,255,255,.08);
+    font-size:10.5px;line-height:1.5;color:#9fb0c4;
+  }
+  .vigencia{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px;}
+  .vigencia span{
+    font-size:11px;color:#9fb0c4;background:rgba(255,255,255,.03);
+    border:1px solid var(--line);border-radius:7px;padding:6px 11px;
+  }
+  .vigencia span b{color:#E8EEF5;}
   .cambio{border-left:3px solid var(--line);}
   .cambio.empeora{border-left-color:var(--orange);}
   .cambio.mejora{border-left-color:#3FA796;}
@@ -415,6 +450,23 @@
   .modo:disabled{opacity:.4;cursor:not-allowed;}
   .cruzar{display:flex;align-items:center;gap:8px;margin:10px 0 4px;}
   .cruzar label{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--grey-blue);font-weight:700;}
+  .grafico .fondo-cuadro{fill:rgba(255,255,255,.015);}
+  .grafico .mediana-rot{font-size:8.5px;fill:#6b7f96;letter-spacing:.2px;}
+  .cuadrantes{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:7px;margin-top:10px;
+  }
+  @media (max-width:720px){ .cuadrantes{grid-template-columns:1fr;} }
+  .cuad{
+    border:1px solid var(--line);border-left-width:3px;border-radius:8px;
+    padding:9px 12px;font-size:11px;line-height:1.45;
+  }
+  .cuad b{display:block;color:#E8EEF5;font-size:10.5px;text-transform:uppercase;
+          letter-spacing:.5px;margin-bottom:4px;}
+  .cuad span{color:#9fb0c4;}
+  .cuad.malmal{border-left-color:#FB6500;}
+  .cuad.mixto{border-left-color:#7d90a8;}
+  .cuad.bienbien{border-left-color:#3FA796;}
   .grafico .rejilla{stroke:rgba(255,255,255,.06);stroke-width:1;}
   .grafico .mediana{stroke:rgba(255,255,255,.20);stroke-width:1;stroke-dasharray:3 4;}
   .grafico .recta{stroke:#8C00E0;stroke-width:2.5;opacity:.9;}
@@ -714,6 +766,7 @@
         </div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
+      <div id="senal-tema"></div>
       <p class="pendientes" id="pendientes"></p>
       <p class="explica-capa" id="explica-capa">—</p>
       <div id="panel-cruce"></div>
@@ -2335,6 +2388,48 @@
        atraso—. Para ver todos los temas, cambiá el nivel de lectura arriba.`;
   }
 
+  // Que se esta publicando AHORA sobre el tema elegido. Va AL LADO del dato
+  // estructural y nunca fundido con el: la serie cuenta hechos verificados y
+  // llega con anios de rezago; esto cuenta menciones de las ultimas horas.
+  function senalDelTema(){
+    const caja = document.getElementById('senal-tema');
+    if(!caja) return;
+    const d = almacen.cobertura, sr = d && d.senal_reciente;
+    if(!sr){ caja.innerHTML = ''; return; }
+
+    // Se busca el tema del lexico atado al indicador que se esta mirando.
+    const tema = Object.values(sr.temas).find(t => t.indicador === capaActiva);
+    if(!tema || !tema.notas){ caja.innerHTML = ''; return; }
+
+    const zona = bloqueActivo();
+    let estados = tema.estados;
+    if(paisFiltro) estados = estados.filter(e => e.iso === paisFiltro);
+    else if(zona) estados = estados.filter(e => e.bloque === zona);
+    if(!estados.length){ caja.innerHTML = ''; return; }
+
+    const total = estados.reduce((a, e) => a + e.notas, 0);
+    const donde = paisFiltro ? paisNombre : (zona ? 'el bloque ' + zona : 'la región');
+    const ejemplos = estados.flatMap(e => e.ejemplos.map(x => ({...x, pais:e.pais}))).slice(0, 4);
+    const fuerte = estados.filter(e => e.fuerza !== 'origen_unico').length;
+    const porMedio = estados.reduce((a, e) => a + e.por_medio, 0);
+
+    caja.innerHTML = `<div class="senal">
+      <h5>Se está publicando ahora · ventana de ${sr.ventana_horas} horas</h5>
+      <p><b>${total} nota${total===1?'':'s'}</b> sobre <b>${esc(tema.rotulo.toLowerCase())}</b>
+         en ${esc(donde)}${estados.length>1?`, repartidas en ${estados.length} Estados`:''}.
+         ${fuerte?`<b>${fuerte}</b> con más de un origen independiente.`:'Ninguna con más de un origen independiente.'}</p>
+      <div class="titulares">${ejemplos.map(x=>
+        `<a href="${esc(x.enlace)}" target="_blank" rel="noopener">${esc(x.titulo)}
+          <span class="quien">${esc(x.medio)} · ${esc(x.pais)}${x.publicada?' · '+x.publicada.slice(0,10):''}</span></a>`).join('')}</div>
+      <p class="aclara"><b>Esto no actualiza la cifra de arriba.</b> La serie cuenta hechos
+        verificados por su fuente y llega con años de retraso; esto cuenta <b>menciones</b> de
+        las últimas ${sr.ventana_horas} horas. Sirve para saber que hay actividad que la serie
+        todavía no contó — <b>no para reemplazarla</b>.
+        ${porMedio?`<br>${porMedio} de estas notas se atribuyen por el medio y no por el título: un diario nacional rara vez nombra a su propio país.`:''}
+        ${tema.cautela?`<br><b>Ojo:</b> ${esc(tema.cautela)}`:''}</p>
+    </div>`;
+  }
+
   function repintarAhora(){
     paso('estilo del mapa', ()=>{ if(capaPaises) capaPaises.setStyle(estiloPais); });
     // armarAmbito() va aca y no solo en sincronizar(): el padron de paises llega
@@ -2344,6 +2439,7 @@
     paso('desplegables de tema', solapas);
     paso('leyenda', leyenda);
     paso('panel de cruce', panelCruce);
+    paso('señal reciente', senalDelTema);
     paso('herramientas', pintarHerramientas);
     paso('dirección compartible', guardarEnLaDireccion);
     paso('ficha ciudadana', fichaCiudadana);
@@ -2591,12 +2687,26 @@
       + `dato ${CREDIBILIDAD[c.credibilidad]||'—'}.`
     : '';
 
+  // La antiguedad del dato deja de ser letra chica. La direccion lo dijo asi:
+  // «muchas categorias no muestran los datos actualizados». Es cierto, y el
+  // rezago no es de un pais sino DE CADA FUENTE: las encuestas llegan con siete
+  // a diez anios, la evaluacion experta con uno. Ahora se ve en cada cifra.
+  function edad(anio){
+    if(!anio) return null;
+    const a = ANIO_HOY - anio;
+    if(a <= 1) return {anios:a, clase:'fresco', texto:a===0?'de este año':'del año pasado'};
+    if(a <= 3) return {anios:a, clase:'reciente', texto:`hace ${a} años`};
+    if(a <= 6) return {anios:a, clase:'viejo', texto:`hace ${a} años`};
+    return {anios:a, clase:'muy-viejo', texto:`hace ${a} años`};
+  }
+
   function tarjeta(f, info, nombre, meta){
     const tv=f.tendencia_ventana_pct;
     const m = magnitud(f.valor, info.unidad);
     return `<div class="card"><h4>${esc(paisFiltro ? (info.rotulo||nombre) : nombre)}</h4>
       <div class="value">${m.texto}</div>
       <div class="sub">${esc(m.unidad)} · dato de ${f.anio}${
+        edad(f.anio) ? ` <span class="edad ${edad(f.anio).clase}">${edad(f.anio).texto}</span>` : ''}${
         (tv!==null&&tv!==undefined)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
       <div class="foot"><span class="src">${esc(info.origen||meta.fuente.nombre)}</span>
         <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
@@ -2827,38 +2937,85 @@
     const marcasY = [ey.lo, (ey.lo+ey.hi)/2, ey.hi];
     const inv = (e,v) => e.log ? Math.pow(10,v) : v;
 
+    // --- Rotulos que no se pisan -----------------------------------------
+    // Se rotula lo que se entiende: el pais elegido, los cuatro extremos y los
+    // que caen en el cuadrante peor. Y si dos rotulos se superponen, el segundo
+    // se corre: un grafico con nombres encimados no se lee.
+    const puestos = [];
+    const cabe = (x, y) => {
+      const alto = 11, ancho = 62;
+      for(const q of puestos){
+        if(Math.abs(q.x - x) < ancho && Math.abs(q.y - y) < alto) return false;
+      }
+      puestos.push({x, y}); return true;
+    };
+    const rotular = p => {
+      const base = py(p.b) - 11;
+      for(const dy of [0, -11, 11, -22, 22]){
+        if(cabe(px(p.a), base + dy)) return base + dy;
+      }
+      return null;
+    };
+
+    const conRotulo = puntos
+      .slice()
+      .sort((u, v) => (v.iso === paisFiltro) - (u.iso === paisFiltro)
+                   || (extremos.has(v.iso) - extremos.has(u.iso))
+                   || (malA(v) && malB(v)) - (malA(u) && malB(u)))
+      .map(p => ({p, y: (p.iso === paisFiltro || extremos.has(p.iso) || (malA(p) && malB(p)))
+                        ? rotular(p) : null}))
+      .filter(x => x.y !== null);
+
+    const cx0 = cx(ex.t(medA)), cy0 = cy(ey.t(medB));
+    const nomA = (mA.rotulo || '').toLowerCase(), nomB = (mB.rotulo || '').toLowerCase();
+    // Cada cuadrante dice QUE SIGNIFICA estar ahi, en palabras.
+    const cuadrante = (malEnA, malEnB) =>
+      `${malEnA ? 'peor' : 'mejor'} en ${nomA}, ${malEnB ? 'peor' : 'mejor'} en ${nomB}`;
+    const arribaMalA = mA.mas_es_peor, arribaMalB = mB.mas_es_peor;
+
     return `<figure class="grafico dispersion"><figcaption>${esc(mA.rotulo)} contra ${esc(mB.rotulo)} · ${puntos.length} Estados</figcaption>
-      <svg viewBox="0 0 ${A} ${H}" role="img">
+      <svg viewBox="0 0 ${A} ${H}" role="img"
+           aria-label="Nube de puntos: ${esc(mA.rotulo)} contra ${esc(mB.rotulo)}, ${puntos.length} Estados">
+        <rect x="${mi}" y="${ms}" width="${(A-md-mi).toFixed(1)}" height="${(H-mb-ms).toFixed(1)}" class="fondo-cuadro"/>
         ${marcasY.map(v=>`<line x1="${mi}" y1="${cy(v).toFixed(1)}" x2="${A-md}" y2="${cy(v).toFixed(1)}" class="rejilla"/>`).join('')}
-        <line x1="${cx(ex.t(medA)).toFixed(1)}" y1="${ms}" x2="${cx(ex.t(medA)).toFixed(1)}" y2="${H-mb}" class="mediana"/>
-        <line x1="${mi}" y1="${cy(ey.t(medB)).toFixed(1)}" x2="${A-md}" y2="${cy(ey.t(medB)).toFixed(1)}" class="mediana"/>
+        ${marcasX.map(v=>`<line x1="${cx(v).toFixed(1)}" y1="${ms}" x2="${cx(v).toFixed(1)}" y2="${H-mb}" class="rejilla"/>`).join('')}
+        <line x1="${cx0.toFixed(1)}" y1="${ms}" x2="${cx0.toFixed(1)}" y2="${H-mb}" class="mediana"/>
+        <line x1="${mi}" y1="${cy0.toFixed(1)}" x2="${A-md}" y2="${cy0.toFixed(1)}" class="mediana"/>
+        <text x="${cx0+5}" y="${ms+11}" class="rotg mediana-rot">mediana de ${esc(nomA)}</text>
+        <text x="${mi+5}" y="${cy0-5}" class="rotg mediana-rot">mediana de ${esc(nomB)}</text>
         ${ajusta ? `<line x1="${mi}" y1="${cy(rectaY(ex.lo)).toFixed(1)}" x2="${(A-md)}" y2="${cy(rectaY(ex.hi)).toFixed(1)}" class="recta"/>` : ''}
         <line x1="${mi}" y1="${H-mb}" x2="${A-md}" y2="${H-mb}" class="ejeg"/>
         <line x1="${mi}" y1="${ms}" x2="${mi}" y2="${H-mb}" class="ejeg"/>
         ${puntos.map(p=>{
-          const sel = p.iso===paisFiltro, rot = extremos.has(p.iso);
+          const sel = p.iso===paisFiltro;
           const X=px(p.a).toFixed(1), Y=py(p.b).toFixed(1);
-          return `<circle cx="${X}" cy="${Y}" r="${sel?7:4.5}" class="puntog ${clase(p)}${sel?' destacada':''}">
-                    <title>${esc(p.pais)} — ${esc(mA.rotulo)}: ${cifra(p.a)} · ${esc(mB.rotulo)}: ${cifra(p.b)}</title></circle>`
-              + (rot?`<text x="${X}" y="${(py(p.b)-11).toFixed(1)}" class="rotg etiqueta${sel?' destacada':''}" text-anchor="middle">${esc(p.pais)}</text>`:'');
+          return `<circle cx="${X}" cy="${Y}" r="${sel?7.5:5}" class="puntog ${clase(p)}${sel?' destacada':''}">
+                    <title>${esc(p.pais)}
+${esc(mA.rotulo)}: ${cifra(p.a)} ${esc(mA.unidad||'')}
+${esc(mB.rotulo)}: ${cifra(p.b)} ${esc(mB.unidad||'')}
+${cuadrante(malA(p), malB(p))}</title></circle>`;
+        }).join('')}
+        ${conRotulo.map(({p,y})=>{
+          const sel = p.iso===paisFiltro;
+          return `<text x="${px(p.a).toFixed(1)}" y="${y.toFixed(1)}" class="rotg etiqueta${sel?' destacada':''}" text-anchor="middle">${esc(p.pais)}</text>`;
         }).join('')}
         ${marcasX.map((v,k)=>`<text x="${cx(v).toFixed(1)}" y="${H-mb+16}" class="rotg" text-anchor="${k===0?'start':k===2?'end':'middle'}">${cifra(inv(ex,v))}</text>`).join('')}
         ${marcasY.map(v=>`<text x="${mi-8}" y="${(cy(v)+4).toFixed(1)}" class="rotg" text-anchor="end">${cifra(inv(ey,v))}</text>`).join('')}
-        <text x="${(mi+(A-md))/2}" y="${H-8}" class="rotg eje-rotulo" text-anchor="middle">${esc(mA.rotulo)}${ex.log?' · escala logarítmica':''}</text>
-        <text x="14" y="${(ms+(H-mb))/2}" class="rotg eje-rotulo" text-anchor="middle" transform="rotate(-90 14 ${((ms+(H-mb))/2).toFixed(1)})">${esc(mB.rotulo)}${ey.log?' · escala log.':''}</text>
+        <text x="${(mi+(A-md))/2}" y="${H-8}" class="rotg eje-rotulo" text-anchor="middle">${esc(mA.rotulo)}${mA.unidad?` · ${esc(mA.unidad)}`:''}${ex.log?' · escala logarítmica':''}</text>
+        <text x="14" y="${(ms+(H-mb))/2}" class="rotg eje-rotulo" text-anchor="middle" transform="rotate(-90 14 ${((ms+(H-mb))/2).toFixed(1)})">${esc(mB.rotulo)}${mB.unidad?` · ${esc(mB.unidad)}`:''}${ey.log?' · escala log.':''}</text>
       </svg></figure>
-      <div class="leyenda-cruce">
-        <span><i class="pt malmal"></i> peor en los dos temas</span>
-        <span><i class="pt mixto"></i> peor en uno solo</span>
-        <span><i class="pt bienbien"></i> mejor en los dos</span>
-        <span><i class="pt linea-mediana"></i> mediana de cada tema</span>
-        ${ajusta?'<span><i class="pt linea-recta"></i> recta de ajuste</span>':''}
+      <div class="cuadrantes">
+        <div class="cuad malmal"><b>${cuadrante(true, true)}</b><span>${puntos.filter(p=>malA(p)&&malB(p)).map(p=>esc(p.pais)).join(' · ')||'ninguno'}</span></div>
+        <div class="cuad mixto"><b>${cuadrante(true, false)}</b><span>${puntos.filter(p=>malA(p)&&!malB(p)).map(p=>esc(p.pais)).join(' · ')||'ninguno'}</span></div>
+        <div class="cuad mixto"><b>${cuadrante(false, true)}</b><span>${puntos.filter(p=>!malA(p)&&malB(p)).map(p=>esc(p.pais)).join(' · ')||'ninguno'}</span></div>
+        <div class="cuad bienbien"><b>${cuadrante(false, false)}</b><span>${puntos.filter(p=>!malA(p)&&!malB(p)).map(p=>esc(p.pais)).join(' · ')||'ninguno'}</span></div>
       </div>
       <p class="sin-dato">
          ${ajusta
            ? `Los dos temas se mueven juntos: la recta explica el <b>${cifra(r2*100)} %</b> de la dispersión (R²&nbsp;${cifra(r2)}), y la pendiente es ${pend>0?'positiva':'negativa'}.`
            : `<b>No se dibuja recta.</b> El ajuste es de apenas R²&nbsp;${cifra(r2)}: estos dos temas <b>no se mueven juntos</b> en la región, y trazar una línea sugeriría una relación que el dato no muestra.`}
          ${(ex.log||ey.log)?` <b>Escala logarítmica</b> en ${ex.log&&ey.log?'los dos ejes':(ex.log?'el eje horizontal':'el eje vertical')}: el mayor valor supera cien veces al menor y en escala común todos los puntos quedarían amontonados contra el borde.`:''}
+         Las líneas punteadas son la <b>mediana de cada tema</b>: parten el gráfico en cuatro cuadrantes, y cada uno dice en palabras qué significa caer ahí.
          Se muestra la <b>coincidencia</b> entre dos cifras, no una relación de causa. Establecer que una explica a la otra
          es análisis, y el registro no lo hace.</p>`;
   }

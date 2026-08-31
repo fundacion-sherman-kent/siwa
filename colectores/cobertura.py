@@ -39,6 +39,7 @@ import geo
 TOPE_PALABRAS = 40   # términos por ámbito en el mapa de palabras
 PADRON_MEDIOS = Path(__file__).resolve().parent / "medios.json"
 PADRON_FRONTERAS = Path(__file__).resolve().parent / "fronteras.json"
+PADRON_TEMAS = Path(__file__).resolve().parent / "temas.json"
 PADRON_GENTILICIOS = Path(__file__).resolve().parent / "gentilicios.json"
 NAVEGADOR = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -249,6 +250,108 @@ def _fronteras(notas: list, zonas: list, gentilicios: dict) -> list:
     return salida
 
 
+def _senal_reciente(notas: list, temas: list, gentilicios: dict,
+                    nombres: dict, bloques: dict, isos: set) -> dict:
+    """Qué se está publicando AHORA sobre cada materia, y en qué Estado.
+
+    NO es un indicador y no se mezcla con ninguno. El registro publica series
+    estructurales —UNODC, V-Dem, Bertelsmann— que llegan con años de rezago; esto
+    dice, al lado y con su propia calificación, **que hay actividad reciente que
+    esas series todavía no contaron**.
+
+    Es exactamente la distinción de la casa entre el hecho acreditado y la
+    indicación: la serie cuenta hechos verificados; esto cuenta menciones.
+
+    La atribución por Estado se hace de dos maneras, y se declara cuál:
+
+    - **Por mención**, cuando el título nombra al país. Es la fuerte.
+    - **Por medio**, cuando el título no nombra ningún país y el medio es
+      nacional. Un diario colombiano no escribe «en Colombia hubo un atentado»:
+      escribe «atentado en Cali». Sin esta regla, la mayoría de la cobertura
+      local quedaba sin atribuir. Es más débil y por eso va marcada aparte.
+    """
+    preparados = []
+    for t in temas:
+        preparados.append({
+            **t,
+            "_nucleo": [" ".join(_normalizar_crudo(x)) for x in t.get("nucleo", [])],
+        })
+
+    por_tema = {}
+    for t in preparados:
+        por_tema[t["clave"]] = {
+            "clave": t["clave"], "rotulo": t["rotulo"],
+            "indicador": t.get("indicador"), "cautela": t.get("cautela", ""),
+            "notas": 0, "por_mencion": 0, "por_medio": 0,
+            "estados": {},
+        }
+
+    for n in notas:
+        plano = " " + " ".join(_normalizar_crudo(n["titulo"])) + " "
+        mencionados = [i for i, formas in gentilicios.items()
+                       if any(f" {f} " in plano for f in formas if f)]
+        if mencionados:
+            destinos, modo = mencionados, "mencion"
+        elif n["pais"] in isos:
+            destinos, modo = [n["pais"]], "medio"
+        else:
+            destinos, modo = [], None
+
+        for t in preparados:
+            if not any(f" {x} " in plano for x in t["_nucleo"] if x):
+                continue
+            reg = por_tema[t["clave"]]
+            reg["notas"] += 1
+            for iso in destinos:
+                e = reg["estados"].setdefault(iso, {
+                    "iso": iso, "pais": nombres.get(iso, iso),
+                    "bloque": bloques.get(iso, "—"),
+                    "notas": 0, "por_mencion": 0, "por_medio": 0,
+                    "portales": set(), "jurisdicciones": set(), "idiomas": set(),
+                    "ejemplos": [],
+                })
+                e["notas"] += 1
+                e["por_mencion" if modo == "mencion" else "por_medio"] += 1
+                reg["por_mencion" if modo == "mencion" else "por_medio"] += 1
+                e["portales"].add(n["dominio"])
+                e["jurisdicciones"].add(n["pais"])
+                e["idiomas"].add(n["idioma"])
+                if len(e["ejemplos"]) < 4:
+                    e["ejemplos"].append({
+                        "titulo": n["titulo"][:190], "enlace": n["enlace"],
+                        "medio": n["medio"], "pais": n["pais"],
+                        "publicada": n.get("publicada"),
+                        "atribucion": "el título nombra al país" if modo == "mencion"
+                                      else "medio nacional, el título no nombra país",
+                    })
+
+    # Se cierra: los conjuntos pasan a cuenta, y cada Estado declara su fuerza.
+    for reg in por_tema.values():
+        lista = []
+        for e in reg["estados"].values():
+            portales, juris, idiomas = len(e["portales"]), len(e["jurisdicciones"]), len(e["idiomas"])
+            if idiomas >= 2:
+                fuerza, nota = "corroborado_fuerte", "Publicado en dos o más idiomas."
+            elif juris >= 2:
+                fuerza, nota = "corroborado", "Publicado desde dos o más jurisdicciones."
+            elif e["por_mencion"] == 0:
+                fuerza, nota = "origen_unico", (
+                    "Atribuido por el medio y no por el título: la nota no nombra al "
+                    "país. Es la atribución más débil.")
+            else:
+                fuerza, nota = "origen_unico", (
+                    "Un solo origen: por más portales que sean, si son de la misma "
+                    "jurisdicción y el mismo idioma cuentan como uno.")
+            lista.append({k: e[k] for k in ("iso", "pais", "bloque", "notas",
+                                            "por_mencion", "por_medio", "ejemplos")}
+                         | {"portales": portales, "jurisdicciones": juris,
+                            "idiomas": idiomas, "fuerza": fuerza, "nota_fuerza": nota})
+        lista.sort(key=lambda x: -x["notas"])
+        reg["estados"] = lista
+        reg["estados_con_senal"] = len(lista)
+    return por_tema
+
+
 def _corroboracion(notas: list) -> dict:
     """Cuenta orígenes, no portales, y aplica la regla de cruce del §4.
 
@@ -378,6 +481,10 @@ def recolectar():
     for n in recientes:
         n.pop("_isos", None)
 
+    temas_lexico = json.loads(PADRON_TEMAS.read_text(encoding="utf-8"))["temas"]
+    senal = _senal_reciente(recientes, temas_lexico, gentilicios, nombres_pais,
+                            bloques, set(bloques))
+
     grupos = _agrupar(recientes)
     eventos = []
     for grupo in grupos:
@@ -494,6 +601,29 @@ def recolectar():
             "por_pais": [{"iso": i, "pais": nombres_pais.get(i, i), "asuntos": n}
                          for i, n in por_pais.most_common()],
             "mapa_palabras": mapa_palabras,
+            "senal_reciente": {
+                "temas": senal,
+                "ventana_horas": HORAS,
+                "estados_con_alguna_senal": len({e["iso"] for t in senal.values()
+                                                 for e in t["estados"]}),
+                "que_es": (
+                    "Que se esta publicando AHORA sobre cada materia. NO ES UN "
+                    "INDICADOR y no se mezcla con ninguno: las series estructurales "
+                    "cuentan hechos verificados y llegan con anios de rezago; esto "
+                    "cuenta MENCIONES de las ultimas horas. Se muestra al lado del "
+                    "dato estructural para decir que hay actividad que esa serie "
+                    "todavia no conto."),
+                "que_no_es": (
+                    "Mas notas NO significa mas hechos: puede significar mas "
+                    "atencion, o un solo hecho cubierto por muchos portales. Y menos "
+                    "notas puede significar menos prensa libre, no menos hechos."),
+                "atribucion": (
+                    "Por MENCION cuando el titulo nombra al pais —la fuerte— y por "
+                    "MEDIO cuando el titulo no nombra ninguno y el medio es nacional. "
+                    "Un diario colombiano no escribe «en Colombia hubo un atentado»: "
+                    "escribe «atentado en Cali». Cada Estado declara cuantas notas "
+                    "tiene de cada clase."),
+            },
             "fronteras": {
                 "zonas": fronteras,
                 "con_mencion": sum(1 for z in fronteras if z["notas"]),
