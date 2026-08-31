@@ -33,6 +33,7 @@ Ningún juicio de la Fundación puede apoyarse solo en esto.
 
 from __future__ import annotations
 
+import html as entidades
 import json
 import re
 import unicodedata
@@ -65,7 +66,17 @@ VACIAS = {
     "will", "they", "their", "what", "about", "which", "were", "been", "more",
     "para", "mais", "como", "pelo", "pela", "isso", "esse", "essa", "dos", "das",
     "muito", "quando", "sobre", "ainda", "apos", "seus", "suas", "nao", "por",
+    # Restos del marcado y de los reenviadores automaticos. No son conceptos:
+    # son la maquinaria del canal asomando en el texto.
+    "html", "quot", "nbsp", "amp", "youtube", "twitter", "video", "foto", "fotos",
+    "noticias", "noticia", "news", "nachrichten", "notizie", "leia", "read",
+    "mais", "more", "link", "post", "feed", "rss",
 }
+
+# Mastodon expone si una cuenta se declara automatizada. Se aprovecha esa
+# declaracion en lugar de adivinar: un reenviador de titulares no es
+# conversacion social, es la misma prensa contada dos veces.
+ETIQUETAS_ROBOT = ("bot", "rss", "news")
 
 
 def _sin_marcas(texto: str) -> str:
@@ -73,10 +84,28 @@ def _sin_marcas(texto: str) -> str:
                    if unicodedata.category(c) != "Mn")
 
 
-def _palabras(html: str) -> list:
-    """Texto plano de una publicación, normalizado a minúsculas sin tildes."""
-    texto = re.sub(r"<[^>]+>", " ", html or "")
-    texto = re.sub(r"https?://\S+", " ", texto)
+def _palabras(marcado: str) -> list:
+    """Texto plano de una publicación, normalizado a minúsculas sin tildes.
+
+    Se limpia DOS VECES, y no es redundancia. Varias publicaciones traen el
+    marcado escapado adentro —«&lt;a href=…»—, de modo que al traducir las
+    entidades reaparecen etiquetas cuando la limpieza ya pasó. Sin la segunda
+    vuelta esas etiquetas dejan tirados pedazos de dirección web —«brid» de
+    «fed.brid.gy», «cional» de «elnacional.com» partido en dos— que después
+    figuran en la nube como si fueran conceptos.
+    """
+    texto = marcado or ""
+    for _ in range(2):
+        # Los enlaces se quitan ENTEROS, con su contenido: Mastodon parte cada
+        # dirección en varios <span> para poder acortarla en pantalla.
+        texto = re.sub(r"<a\b.*?</a>", " ", texto, flags=re.S | re.I)
+        texto = re.sub(r"<[^>]+>", " ", texto)
+        texto = entidades.unescape(texto)
+    texto = re.sub(r"https?://\S+|www\.\S+", " ", texto)
+    texto = re.sub(r"[#@]\s*\w+", " ", texto)   # etiquetas y menciones no son concepto
+    # Lo que quede con un punto pegado sigue siendo una dirección partida.
+    texto = re.sub(r"\S*\.(gy|com|net|org|ly|co|io|gl|me|info|news)\b\S*", " ",
+                   texto, flags=re.I)
     return re.findall(r"[a-z0-9]{4,}", _sin_marcas(texto).lower())
 
 
@@ -136,8 +165,12 @@ def recolectar():
             if momento and momento < corte:
                 continue
             cuenta = (pub.get("account") or {})
+            acct = (cuenta.get("acct") or "").lower()
+            # Primero la declaracion de la propia cuenta; el nombre solo si no la hay.
+            robot = bool(cuenta.get("bot")) or any(t in acct for t in ETIQUETAS_ROBOT)
             por_iso[iso].append({
                 "instancia": instancia,
+                "robot": robot,
                 "cuenta": cuenta.get("acct", ""),
                 "idioma": pub.get("language") or "?",
                 "texto": pub.get("content", ""),
@@ -148,8 +181,9 @@ def recolectar():
     for iso, pubs in sorted(por_iso.items()):
         if not pubs:
             sin_circulacion.append(nombres[iso])
+        personas = [p for p in pubs if not p["robot"]]
         contador, instancias_de = Counter(), {}
-        for p in pubs:
+        for p in personas:
             for palabra in set(_palabras(p["texto"])):
                 if palabra in VACIAS or palabra == etiquetas[iso] or palabra.isdigit():
                     continue
@@ -163,15 +197,52 @@ def recolectar():
             "pais": nombres[iso],
             "bloque": bloques[iso],
             "etiqueta": "#" + etiquetas[iso],
-            "publicaciones": len(pubs),
-            "cuentas_distintas": len({p["cuenta"] for p in pubs}),
+            "publicaciones": len(personas),
+            "publicaciones_automatizadas": len(pubs) - len(personas),
+            "cuentas_distintas": len({p["cuenta"] for p in personas}),
             "instancias_que_lo_vieron": len({p["instancia"] for p in pubs}),
             "idiomas": sorted({p["idioma"] for p in pubs}),
             "palabras": palabras,
         })
 
+    # --- Nube de conceptos: los mismos terminos agregados por bloque y para la
+    # region entera. Se recuenta sobre las publicaciones, no se suman los mapas
+    # de cada pais: sumar rankings no da un ranking.
+    def nube(pubs, etiquetas_propias):
+        contador, instancias_de = Counter(), {}
+        for p in pubs:
+            for palabra in set(_palabras(p["texto"])):
+                if (palabra in VACIAS or palabra in etiquetas_propias
+                        or palabra.isdigit()):
+                    continue
+                contador[palabra] += 1
+                instancias_de.setdefault(palabra, set()).add(p["instancia"])
+        return [{"palabra": t, "publicaciones": n, "instancias": len(instancias_de[t])}
+                for t, n in contador.most_common(TOPE_PALABRAS * 6)
+                if n >= 2 and len(instancias_de[t]) >= MINIMO_PORTALES][:TOPE_PALABRAS]
+
+    propias = set(etiquetas.values())
+    por_bloque = {}
+    for iso, pubs in por_iso.items():
+        humanas = [p for p in pubs if not p["robot"]]
+        if humanas:
+            por_bloque.setdefault(bloques[iso], []).extend(humanas)
+    todas = [p for pubs in por_iso.values() for p in pubs if not p["robot"]]
+    nube_conceptos = {
+        "region": nube(todas, propias),
+        "bloques": {b: nube(l, propias) for b, l in sorted(por_bloque.items())},
+        "publicaciones_region": len(todas),
+        "publicaciones_por_bloque": {b: len(l) for b, l in sorted(por_bloque.items())},
+    }
+
     con_dato = sum(1 for r in registros if r["publicaciones"])
+    robots = sum(r["publicaciones_automatizadas"] for r in registros)
     vacios = [
+        f"Se descartaron {robots} publicaciones de cuentas automatizadas, que en su "
+        "mayoria reenvian titulares de prensa. Contarlas como conversacion social "
+        "seria contar dos veces la misma noticia, que este registro ya recoge por su "
+        "propio canal. La deteccion usa la declaracion de la propia cuenta y, si no la "
+        "hay, su nombre: una cuenta automatizada que no se declare puede pasar.",
         "Mastodon NO es representativo de la conversación pública de la región: su "
         "base de usuarios es pequeña, mayoritariamente europea y norteamericana y de "
         "perfil técnico. Lo que se observa es una muestra sesgada y no probabilística. "
@@ -215,6 +286,8 @@ def recolectar():
                 "instancias_consultadas": len(INSTANCIAS),
                 "estados_con_circulacion": con_dato,
                 "estados_del_padron": len(registros),
+                "publicaciones_de_personas": sum(r["publicaciones"] for r in registros),
+                "publicaciones_automatizadas": robots,
                 "publicaciones_unicas": len(vistos),
                 "ventana_horas": HORAS,
             },
@@ -226,6 +299,7 @@ def recolectar():
                 "instancias distintas: lo que sale de una sola instancia es eco, no "
                 "circulación."
             ),
+            "nube_conceptos": nube_conceptos,
             "que_no_mide": (
                 "No mide qué ocurre, ni con qué signo, ni si lo que circula es cierto. "
                 "No es una encuesta ni una medición de opinión pública."

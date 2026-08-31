@@ -249,6 +249,10 @@
   .term.media{border-color:rgba(251,101,0,.28);}
   .card.ancha{grid-column:span 2;}
   @media (max-width:720px){ .card.ancha{grid-column:span 1;} }
+  .sub-seccion{
+    font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:#7d90a8;
+    font-weight:700;margin:20px 0 2px;
+  }
   .nube.chica{padding:10px 0 2px;gap:5px;}
   .nube.chica .term{font-size:11px;padding:3px 10px;}
   .nube .vacio{color:#7d90a8;font-size:12px;line-height:1.6;max-width:62ch;}
@@ -276,6 +280,28 @@
   .modo:disabled{opacity:.4;cursor:not-allowed;}
   .cruzar{display:flex;align-items:center;gap:8px;margin:10px 0 4px;}
   .cruzar label{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--grey-blue);font-weight:700;}
+  .grafico .rejilla{stroke:rgba(255,255,255,.06);stroke-width:1;}
+  .grafico .mediana{stroke:rgba(255,255,255,.20);stroke-width:1;stroke-dasharray:3 4;}
+  .grafico .recta{stroke:#8C00E0;stroke-width:2.5;opacity:.9;}
+  .grafico .puntog{stroke:rgba(0,18,30,.85);stroke-width:1;}
+  .grafico .puntog.malmal{fill:#FB6500;}
+  .grafico .puntog.mixto{fill:#7d90a8;}
+  .grafico .puntog.bienbien{fill:#3FA796;}
+  .grafico .puntog.destacada{stroke:#fff;stroke-width:2;}
+  .grafico .etiqueta{font-size:9px;fill:#9fb0c4;}
+  .grafico .etiqueta.destacada{fill:#fff;font-weight:700;font-size:10px;}
+  .grafico .eje-rotulo{font-size:10px;fill:#7d90a8;letter-spacing:.4px;}
+  .leyenda-cruce{
+    display:flex;flex-wrap:wrap;gap:6px 18px;padding:8px 0 2px;
+    font-size:10.5px;color:#7d90a8;
+  }
+  .leyenda-cruce span{display:inline-flex;align-items:center;gap:6px;}
+  .leyenda-cruce .pt{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .leyenda-cruce .pt.malmal{background:#FB6500;}
+  .leyenda-cruce .pt.mixto{background:#7d90a8;}
+  .leyenda-cruce .pt.bienbien{background:#3FA796;}
+  .leyenda-cruce .pt.linea-mediana{width:16px;height:0;border-radius:0;border-top:1px dashed rgba(255,255,255,.45);}
+  .leyenda-cruce .pt.linea-recta{width:16px;height:0;border-radius:0;border-top:2.5px solid #8C00E0;}
   .cruzar{align-items:flex-start;flex-wrap:wrap;}
   .boton.chico{font-size:10.5px;padding:5px 12px;}
   .ficha-mapa .margen{font-size:9.5px;color:#7d90a8;font-weight:400;}
@@ -450,10 +476,14 @@
     <a href="#ciber">Ciberseguridad</a>
     <a href="#fuerzas">Fuerzas y defensa</a>
     <a href="#victimizacion">Victimización y denuncia</a>
+    <a href="#terrorismo">Terrorismo</a>
+    <a href="#grupos-armados">Grupos armados</a>
     <div class="grupo">Gobernanza</div>
     <a href="#institucional">Indicadores de gobernanza</a>
     <a href="#contratacion">Contratación pública</a>
     <a href="#capacidad">Capacidad del Estado</a>
+    <a href="#democracia">Nivel democrático</a>
+    <a href="#libertades">Libertades</a>
     <a href="#soborno">Soborno declarado</a>
     <a href="#desinformacion">Desinformación</a>
     <a href="#palabras">Mapa de palabras</a>
@@ -558,6 +588,35 @@
       <div id="vac-ciber"></div>
     </section>
 
+    <section class="domain" id="terrorismo">
+      <div class="domain-head"><h3>Terrorismo</h3><span class="tag" id="tag-terrorismo">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>La serie termina en 2021 y no hay reemplazo gratuito</b>: la Base Global de
+           Terrorismo dejó de actualizarse. No se estima ningún valor posterior.
+           <b>Y «terrorismo» es una definición disputada</b>: varios Estados de la región
+           califican de terrorista a la protesta social, y esa calificación entra en las
+           bases que se nutren de prensa. El dato se publica con esa advertencia y no
+           sostiene por sí solo ningún juicio.</p>
+      </div>
+      <div class="procedencia" id="proc-terrorismo">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-terrorismo"></div>
+      <div id="vac-terrorismo"></div>
+    </section>
+
+    <section class="domain" id="grupos-armados">
+      <div class="domain-head"><h3>Grupos armados y conflicto entre organizaciones</h3><span class="tag" id="tag-grupos-armados">—</span></div>
+      <div class="aviso-cobertura">
+        <p>Enfrentamientos armados <b>entre grupos, sin el Estado como parte</b>. En esta
+           región eso es, en buena medida, disputa entre organizaciones criminales por
+           territorio o por renta: es el indicador de <b>presencia de grupos criminales
+           organizados</b> que más se acerca. <b>Y aun así no mide presencia ni control
+           territorial</b>, solo muertes en enfrentamiento. El umbral de registro exige
+           25 muertes al año: por debajo de eso <b>un Estado figura en cero sin estar en
+           paz</b>.</p>
+      </div>
+      <div class="grid-cards" id="tarj-grupos-armados"></div>
+    </section>
+
     <section class="domain" id="fuerzas">
       <div class="domain-head"><h3>Fuerzas y capacidad de defensa</h3><span class="tag" id="tag-fuerzas">—</span></div>
       <div class="grid-cards" id="tarj-fuerzas"></div>
@@ -605,6 +664,35 @@
       <div class="procedencia" id="proc-contratacion">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-contratacion"></div>
       <div id="vac-contratacion"></div>
+    </section>
+
+    <section class="domain" id="democracia">
+      <div class="domain-head"><h3>Nivel democrático y libertades</h3><span class="tag" id="tag-democracia">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Es medición experta codificada, no recuento de hechos</b>: varios
+           especialistas por país y por año. Mide <b>cómo funciona el sistema, no qué
+           piensa la gente de él</b> — la percepción democrática y la confianza en las
+           instituciones se miden por encuesta y no están acá: quienes las levantan
+           exigen registro para entregar los datos, y el vacío queda declarado.
+           <b>La brecha entre democracia electoral y liberal</b> es lo más revelador:
+           señala Estados que votan pero no controlan a quien gobierna.</p>
+      </div>
+      <div class="procedencia" id="proc-democracia">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-democracia"></div>
+      <div id="vac-democracia"></div>
+    </section>
+
+    <section class="domain" id="libertades">
+      <div class="domain-head"><h3>Libertad de expresión y de asociación</h3><span class="tag" id="tag-libertades">—</span></div>
+      <div class="aviso-cobertura">
+        <p>Censura estatal, represalia contra periodistas, y espacio disponible para
+           partidos y organizaciones civiles — que es la materia de <b>conflicto
+           político</b> leída por el lado de lo que la oposición puede hacer.
+           <b>Se lee junto con la cobertura noticiosa de este mismo registro</b>: donde
+           la libertad de expresión cae, la corroboración cruzada entre jurisdicciones
+           vale más, porque la prensa local pesa menos.</p>
+      </div>
+      <div class="grid-cards" id="tarj-libertades"></div>
     </section>
 
     <section class="domain" id="capacidad">
@@ -758,6 +846,10 @@
            puede apoyarse solo en esto.</p>
       </div>
       <div class="procedencia" id="proc-redes">Cargando el registro…</div>
+      <h4 class="sub-seccion">Nube de conceptos</h4>
+      <p class="nota-filtro" id="nota-nube">—</p>
+      <div class="nube" id="nube-redes"></div>
+      <h4 class="sub-seccion">Circulación por Estado</h4>
       <div class="grid-cards" id="tarj-redes"></div>
       <div id="vac-redes"></div>
     </section>
@@ -901,6 +993,7 @@
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
     const conjuntos=[['banco','Banco Mundial'],['ods','Naciones Unidas — ODS'],
                      ['desplazamiento','ACNUR'],['oficiales','Padrón oficial'],
+                     ['owd','V-Dem, Terrorismo y UCDP'],
                      ['cobertura','Cobertura noticiosa'],['redes','Circulación en redes']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
@@ -967,7 +1060,7 @@
 
   // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
   // agregar un colector nuevo no obligue a tocar el resto de la página.
-  const fuentesInd = () => [almacen.banco, almacen.ods].filter(Boolean);
+  const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -1388,6 +1481,11 @@
     tarjetasBanco(['gini','pobreza','desempleo_joven','trabajo_infantil','agua_potable'],'condiciones');
     tarjetasBanco(['internet','banda_ancha'],'conectividad');
     tarjetasBanco('bosque','ambiente');
+    tarjetasBanco(['terrorismo_muertes','terrorismo_atentados'],'terrorismo');
+    tarjetasBanco('conflicto_no_estatal','grupos-armados');
+    tarjetasBanco(['democracia_electoral','democracia_liberal','democracia_participativa',
+                   'corrupcion_politica'],'democracia');
+    tarjetasBanco(['libertad_expresion','libertad_asociacion'],'libertades');
     tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista(); redesVista();
     pintarFuentes(); informe();
   }
@@ -1629,29 +1727,94 @@
       .map(([iso,v])=>({iso, ...v}));
     if(puntos.length < 4) return `<p class="sin-dato">Solo ${puntos.length} Estados tienen las dos cifras: muy pocos para cruzarlas.</p>`;
     const mA=metaInd(claveA), mB=metaInd(claveB);
-    const xs=puntos.map(p=>p.a), ys=puntos.map(p=>p.b);
-    const x0=Math.min(...xs), x1=Math.max(...xs), y0=Math.min(...ys), y1=Math.max(...ys);
-    const A=620, H=300, m=54;
-    const px=v=>m+((v-x0)/((x1-x0)||1))*(A-m-18);
-    const py=v=>H-m-((v-y0)/((y1-y0)||1))*(H-m-18);
-    return `<figure class="grafico"><figcaption>${esc(mA.rotulo)} contra ${esc(mB.rotulo)} · ${puntos.length} Estados</figcaption>
+
+    // --- Escala. Una serie donde el mayor vale cien veces el menor aplasta todo
+    // contra el borde: el grafico queda ilegible aunque el dato este bien. En ese
+    // caso se pasa a escala logaritmica Y SE DICE en el pie, porque una escala
+    // que no se declara engania mas que un grafico feo.
+    function escala(vals){
+      const pos = vals.filter(v=>v>0);
+      const max = Math.max(...vals), min = Math.min(...vals);
+      const log = pos.length===vals.length && min>0 && max/min > 100;
+      const t = log ? (v=>Math.log10(v)) : (v=>v);
+      const lo = log ? t(min) : Math.min(0, min), hi = t(max);
+      return {log, t, lo, hi: hi===lo ? lo+1 : hi};
+    }
+    const ex = escala(puntos.map(p=>p.a)), ey = escala(puntos.map(p=>p.b));
+
+    const A=620, H=330, mi=62, md=20, ms=22, mb=62;
+    const px=v=>mi+((ex.t(v)-ex.lo)/((ex.hi-ex.lo)||1))*(A-mi-md);
+    const py=v=>H-mb-((ey.t(v)-ey.lo)/((ey.hi-ey.lo)||1))*(H-mb-ms);
+
+    // --- Recta de minimos cuadrados sobre los valores efectivamente dibujados.
+    const N=puntos.length;
+    const X=puntos.map(p=>ex.t(p.a)), Y=puntos.map(p=>ey.t(p.b));
+    const mx=X.reduce((a,b)=>a+b,0)/N, my=Y.reduce((a,b)=>a+b,0)/N;
+    let sxy=0, sxx=0, syy=0;
+    for(let k=0;k<N;k++){ sxy+=(X[k]-mx)*(Y[k]-my); sxx+=(X[k]-mx)**2; syy+=(Y[k]-my)**2; }
+    const pend = sxx ? sxy/sxx : 0;
+    const r2 = (sxx&&syy) ? (sxy*sxy)/(sxx*syy) : 0;
+    const ordn = my - pend*mx;
+    const rectaY = xv => ordn + pend*xv;
+    const ajusta = r2 >= 0.25 && N >= 6;
+    const cx = v => mi+((v-ex.lo)/((ex.hi-ex.lo)||1))*(A-mi-md);
+    const cy = v => H-mb-((v-ey.lo)/((ey.hi-ey.lo)||1))*(H-mb-ms);
+
+    // --- Color con sentido: cada eje se parte por su mediana y se mira de que
+    // lado cae el Estado SEGUN SI EN ESE TEMA MAS ES PEOR. Naranja, mal en los
+    // dos; verde, bien en los dos; gris, contradictorio.
+    const mediana = arr => { const o=arr.slice().sort((a,b)=>a-b), h=o.length>>1;
+      return o.length%2 ? o[h] : (o[h-1]+o[h])/2; };
+    const medA = mediana(puntos.map(p=>p.a)), medB = mediana(puntos.map(p=>p.b));
+    const malA = p => mA.mas_es_peor ? p.a > medA : p.a < medA;
+    const malB = p => mB.mas_es_peor ? p.b > medB : p.b < medB;
+    const clase = p => { const a=malA(p), b=malB(p);
+      return a&&b ? 'malmal' : (!a&&!b ? 'bienbien' : 'mixto'); };
+
+    // --- Se rotula lo que se entiende: el pais elegido y los cuatro extremos.
+    const extremos = new Set();
+    const porA = puntos.slice().sort((u,v)=>v.a-u.a);
+    const porB = puntos.slice().sort((u,v)=>v.b-u.b);
+    [porA[0], porA[porA.length-1], porB[0], porB[porB.length-1]].forEach(p=>p&&extremos.add(p.iso));
+    if(paisFiltro) extremos.add(paisFiltro);
+
+    const marcasX = [ex.lo, (ex.lo+ex.hi)/2, ex.hi];
+    const marcasY = [ey.lo, (ey.lo+ey.hi)/2, ey.hi];
+    const inv = (e,v) => e.log ? Math.pow(10,v) : v;
+
+    return `<figure class="grafico dispersion"><figcaption>${esc(mA.rotulo)} contra ${esc(mB.rotulo)} · ${puntos.length} Estados</figcaption>
       <svg viewBox="0 0 ${A} ${H}" role="img">
-        <line x1="${m}" y1="${H-m}" x2="${A-18}" y2="${H-m}" class="ejeg"/>
-        <line x1="${m}" y1="18" x2="${m}" y2="${H-m}" class="ejeg"/>
+        ${marcasY.map(v=>`<line x1="${mi}" y1="${cy(v).toFixed(1)}" x2="${A-md}" y2="${cy(v).toFixed(1)}" class="rejilla"/>`).join('')}
+        <line x1="${cx(ex.t(medA)).toFixed(1)}" y1="${ms}" x2="${cx(ex.t(medA)).toFixed(1)}" y2="${H-mb}" class="mediana"/>
+        <line x1="${mi}" y1="${cy(ey.t(medB)).toFixed(1)}" x2="${A-md}" y2="${cy(ey.t(medB)).toFixed(1)}" class="mediana"/>
+        ${ajusta ? `<line x1="${mi}" y1="${cy(rectaY(ex.lo)).toFixed(1)}" x2="${(A-md)}" y2="${cy(rectaY(ex.hi)).toFixed(1)}" class="recta"/>` : ''}
+        <line x1="${mi}" y1="${H-mb}" x2="${A-md}" y2="${H-mb}" class="ejeg"/>
+        <line x1="${mi}" y1="${ms}" x2="${mi}" y2="${H-mb}" class="ejeg"/>
         ${puntos.map(p=>{
-          const sel = p.iso===paisFiltro;
-          return `<circle cx="${px(p.a).toFixed(1)}" cy="${py(p.b).toFixed(1)}" r="${sel?6:4}"
-                   class="${sel?'puntog destacada':'puntog'}" opacity="${sel?1:.65}"><title>${esc(p.pais)}: ${cifra(p.a)} / ${cifra(p.b)}</title></circle>` +
-                 (sel?`<text x="${(px(p.a)+9).toFixed(1)}" y="${(py(p.b)+4).toFixed(1)}" class="rotg">${esc(p.pais)}</text>`:'');
+          const sel = p.iso===paisFiltro, rot = extremos.has(p.iso);
+          const X=px(p.a).toFixed(1), Y=py(p.b).toFixed(1);
+          return `<circle cx="${X}" cy="${Y}" r="${sel?7:4.5}" class="puntog ${clase(p)}${sel?' destacada':''}">
+                    <title>${esc(p.pais)} — ${esc(mA.rotulo)}: ${cifra(p.a)} · ${esc(mB.rotulo)}: ${cifra(p.b)}</title></circle>`
+              + (rot?`<text x="${X}" y="${(py(p.b)-11).toFixed(1)}" class="rotg etiqueta${sel?' destacada':''}" text-anchor="middle">${esc(p.pais)}</text>`:'');
         }).join('')}
-        <text x="${m}" y="${H-16}" class="rotg">${cifra(x0)}</text>
-        <text x="${A-18}" y="${H-16}" class="rotg" text-anchor="end">${cifra(x1)}</text>
-        <text x="6" y="24" class="rotg">${cifra(y1)}</text>
-        <text x="6" y="${H-m}" class="rotg">${cifra(y0)}</text>
-        <text x="${A/2}" y="${H-2}" class="rotg" text-anchor="middle">${esc(mA.rotulo)}</text>
+        ${marcasX.map((v,k)=>`<text x="${cx(v).toFixed(1)}" y="${H-mb+16}" class="rotg" text-anchor="${k===0?'start':k===2?'end':'middle'}">${cifra(inv(ex,v))}</text>`).join('')}
+        ${marcasY.map(v=>`<text x="${mi-8}" y="${(cy(v)+4).toFixed(1)}" class="rotg" text-anchor="end">${cifra(inv(ey,v))}</text>`).join('')}
+        <text x="${(mi+(A-md))/2}" y="${H-8}" class="rotg eje-rotulo" text-anchor="middle">${esc(mA.rotulo)}${ex.log?' · escala logarítmica':''}</text>
+        <text x="14" y="${(ms+(H-mb))/2}" class="rotg eje-rotulo" text-anchor="middle" transform="rotate(-90 14 ${((ms+(H-mb))/2).toFixed(1)})">${esc(mB.rotulo)}${ey.log?' · escala log.':''}</text>
       </svg></figure>
-      <p class="sin-dato"><b>Eje horizontal:</b> ${esc(mA.rotulo)} · <b>vertical:</b> ${esc(mB.rotulo)}.
-         Se muestra la coincidencia entre dos cifras, no una relación de causa. Establecer que una explica a la otra
+      <div class="leyenda-cruce">
+        <span><i class="pt malmal"></i> peor en los dos temas</span>
+        <span><i class="pt mixto"></i> peor en uno solo</span>
+        <span><i class="pt bienbien"></i> mejor en los dos</span>
+        <span><i class="pt linea-mediana"></i> mediana de cada tema</span>
+        ${ajusta?'<span><i class="pt linea-recta"></i> recta de ajuste</span>':''}
+      </div>
+      <p class="sin-dato">
+         ${ajusta
+           ? `Los dos temas se mueven juntos: la recta explica el <b>${cifra(r2*100)} %</b> de la dispersión (R²&nbsp;${cifra(r2)}), y la pendiente es ${pend>0?'positiva':'negativa'}.`
+           : `<b>No se dibuja recta.</b> El ajuste es de apenas R²&nbsp;${cifra(r2)}: estos dos temas <b>no se mueven juntos</b> en la región, y trazar una línea sugeriría una relación que el dato no muestra.`}
+         ${(ex.log||ey.log)?` <b>Escala logarítmica</b> en ${ex.log&&ey.log?'los dos ejes':(ex.log?'el eje horizontal':'el eje vertical')}: el mayor valor supera cien veces al menor y en escala común todos los puntos quedarían amontonados contra el borde.`:''}
+         Se muestra la <b>coincidencia</b> entre dos cifras, no una relación de causa. Establecer que una explica a la otra
          es análisis, y el registro no lo hace.</p>`;
   }
 
@@ -1779,7 +1942,44 @@
     }).join('');
   }
 
+  function nubeRedes(){
+    const caja=document.getElementById('nube-redes'); if(!caja) return;
+    const d=almacen.redes, nc=d && d.nube_conceptos;
+    const nota=document.getElementById('nota-nube');
+    if(!nc){ caja.innerHTML=''; return; }
+    const bloqueDelPais = paisFiltro && padron.length
+      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
+    // El ámbito es el mismo de la cobertura: región, bloque o país.
+    let lista, donde, pubs;
+    if(ambitoCobertura==='pais' && paisFiltro){
+      const r=(d.registros||[]).find(x=>x.iso===paisFiltro);
+      lista = r ? r.palabras : []; donde = paisNombre; pubs = r ? r.publicaciones : 0;
+    } else if(ambitoCobertura==='bloque' && bloqueDelPais){
+      lista = nc.bloques[bloqueDelPais] || []; donde = 'el bloque '+bloqueDelPais;
+      pubs = nc.publicaciones_por_bloque[bloqueDelPais] || 0;
+    } else {
+      lista = nc.region; donde = 'toda la región'; pubs = nc.publicaciones_region;
+    }
+    if(nota) nota.textContent =
+      `${lista.length} concepto${lista.length===1?'':'s'} sobre ${miles(pubs)} ${pubs===1?'publicación':'publicaciones'} de personas en ${donde}. `
+      + `Se descartaron ${miles(d.resumen.publicaciones_automatizadas)} publicaciones de cuentas automatizadas en toda la región: reenvían titulares de prensa, que este registro ya recoge por su propio canal.`;
+    if(!lista.length){
+      caja.innerHTML = `<div class="vacio"><b>Ningún concepto de ${esc(donde)} llega a dos instancias distintas.</b><br>
+        No es un error: es el resultado. Se declara el vacío en lugar de mostrar términos de origen único.</div>`;
+      return;
+    }
+    const tope=lista[0].publicaciones;
+    caja.innerHTML = lista.map(t=>{
+      const q=t.publicaciones/tope;
+      const cl = q>=.6?'alta' : q>=.3?'media' : '';
+      return `<span class="term ${cl}" style="font-size:${(12+q*8).toFixed(1)}px"
+        title="${t.publicaciones} publicaciones en ${t.instancias} instancias distintas"><b>${esc(t.palabra)}</b>
+        <span class="n">${t.publicaciones}</span></span>`;
+    }).join('');
+  }
+
   function redesVista(){
+    nubeRedes();
     const caja=document.getElementById('tarj-redes'); if(!caja) return;
     const d=almacen.redes; if(!d) return;
     const tag=document.getElementById('tag-redes');
@@ -1806,8 +2006,9 @@
         : `<div class="sub">Ningún término llega a dos instancias distintas: lo que hay es eco de un solo origen.</div>`;
       return `<div class="card ancha"><h4>${esc(r.pais)}</h4>
         <div class="value">${miles(r.publicaciones)}</div>
-        <div class="sub">publicaciones de ${r.cuentas_distintas} cuenta${r.cuentas_distintas===1?'':'s'}
-          distintas · ${r.idiomas.filter(i=>i!=='?').join(', ')||'idioma sin declarar'} · ${esc(r.etiqueta)}</div>
+        <div class="sub">de personas, en ${r.cuentas_distintas} cuenta${r.cuentas_distintas===1?'':'s'}
+          distintas${r.publicaciones_automatizadas?` · <b>${r.publicaciones_automatizadas} automatizadas descartadas</b>`:''}
+          · ${r.idiomas.filter(i=>i!=='?').join(', ')||'idioma sin declarar'} · ${esc(r.etiqueta)}</div>
         ${pal}
         <div class="foot"><span class="src">${esc(d.procedencia.fuente.nombre)}</span>
           <span class="badge unica">${d.procedencia.calificacion.fiabilidad}-${d.procedencia.calificacion.credibilidad}</span></div></div>`;
@@ -2076,23 +2277,37 @@
       pintarProcedencia('proc-cobertura',meta);
       document.getElementById('tag-cobertura').textContent =
         r.asuntos_con_cruce+' asuntos · '+r.medios_que_respondieron+' de '+r.medios_consultados+' medios · '+miles(r.notas_en_ventana)+' notas';
-      coberturaVista(); palabrasVista();
       vacios+=pintarVacios('vac-cobertura',meta.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-cobertura','cobertura',estado.mensaje,meta); }
-      informe(); marcador();
+      // repintar() y no solo coberturaVista(): de este registro dependen tambien
+      // el panel de desinformacion, el mapa de palabras y la lista de fuentes.
+      // Pintar solo la cobertura los dejaba colgados en «Cargando el registro».
+      repintar(); marcador();
     })
     .catch(err=>{ fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
       document.getElementById('proc-cobertura').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('owd.json'), traer('estado/owd.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.owd=d; dominios+=Object.keys(d.cobertura||{}).length;
+      ['terrorismo','democracia'].forEach(x=>pintarProcedencia('proc-'+x, d.procedencia));
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-terrorismo',d.procedencia.vacios_declarados);
+      pintarVacios('vac-democracia',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-democracia','V-Dem y UCDP',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('tarj-democracia','V-Dem y UCDP',err.message,null);
+      document.getElementById('proc-democracia').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('redes.json'), traer('estado/redes.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.redes=d; const meta=d.procedencia;
       pintarProcedencia('proc-redes',meta);
       registros+=d.resumen.publicaciones_unicas;
-      redesVista();
       vacios+=pintarVacios('vac-redes',meta.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-redes','redes',estado.mensaje,meta); }
-      marcador();
+      repintar(); marcador();
     })
     .catch(err=>{ fallas++; pintarFalla('tarj-redes','redes',err.message,null);
       document.getElementById('proc-redes').textContent='Sin registro disponible.'; marcador(); });
