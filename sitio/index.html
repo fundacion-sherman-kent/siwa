@@ -258,9 +258,9 @@
   .pendientes b{color:#9fb2c8;font-weight:600;}
   .tema .sin{font-size:9px;text-transform:uppercase;letter-spacing:.4px;color:#7d90a8;}
   .leaflet-tooltip.ficha .cifra{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:800;color:#fff;}
-  .grafico{margin:14px 0 18px;}
+  .grafico{margin:14px 0 18px;overflow:hidden;}
   .grafico figcaption{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:#7d90a8;margin-bottom:6px;}
-  .grafico svg{width:100%;height:auto;overflow:visible;}
+  .grafico svg{display:block;width:100%;height:auto;overflow:hidden;}
   .grafico .ejeg{stroke:rgba(255,255,255,.18);stroke-width:1;}
   .grafico .lineag{fill:none;stroke:var(--orange);stroke-width:2;}
   .grafico .areag{fill:rgba(251,101,0,.14);stroke:none;}
@@ -1252,7 +1252,7 @@
   // ---- Graficos, en SVG y sin bibliotecas ---------------------------------
   function grafico(serie, rotulo){
     if(!serie || serie.length < 2) return '';
-    const A=620, H=170, mx=46, my=22;
+    const A=620, H=182, mx=52, my=24;   // margen propio: nada pinta fuera de la caja
     const ys = serie.map(p=>p.y), max = Math.max(...ys), min = 0;
     const px = i => mx + i*(A-mx-14)/(serie.length-1);
     const py = v => H-my - (v-min)/((max-min)||1)*(H-my*2);
@@ -1264,19 +1264,20 @@
         <line x1="${mx}" y1="${my}" x2="${mx}" y2="${H-my}" class="ejeg"/>
         <path d="${area}" class="areag"/><path d="${linea}" class="lineag"/>
         ${serie.map((p,i)=>`<circle cx="${px(i).toFixed(1)}" cy="${py(p.y).toFixed(1)}" r="2.6" class="puntog"/>`).join('')}
-        <text x="4" y="${my+4}" class="rotg">${miles(max)}</text>
-        <text x="4" y="${H-my}" class="rotg">0</text>
-        ${serie.map((p,i)=> i%2===0 ? `<text x="${px(i).toFixed(1)}" y="${H-6}" class="rotg" text-anchor="middle">${p.x}</text>`:'').join('')}
+        <text x="6" y="${my+4}" class="rotg">${miles(max)}</text>
+        <text x="6" y="${H-my}" class="rotg">0</text>
+        ${serie.map((p,i)=> i%2===0 ? `<text x="${px(i).toFixed(1)}" y="${H-8}" class="rotg" text-anchor="middle">${p.x}</text>`:'').join('')}
       </svg></figure>`;
   }
 
   function barras(filas, rotulo){
     if(!filas.length) return '';
     const max = Math.max(...filas.map(f=>f.valor))||1, A=620, alto=filas.length*24+30;
+    const ANCHO_BARRA = A-260;   // deja lugar al rotulo y al numero, adentro de la caja
     return `<figure class="grafico"><figcaption>${esc(rotulo)}</figcaption>
       <svg viewBox="0 0 ${A} ${alto}" role="img" aria-label="${esc(rotulo)}">
         ${filas.map((f,i)=>{
-          const y=i*24+16, an=(f.valor/max)*(A-220);
+          const y=i*24+16, an=(f.valor/max)*ANCHO_BARRA;
           return `<text x="0" y="${y+11}" class="rotg">${esc(f.rotulo.slice(0,22))}</text>
                   <rect x="150" y="${y}" width="${an.toFixed(1)}" height="15" class="${f.destacado?'barrag destacada':'barrag'}"/>
                   <text x="${(154+an).toFixed(1)}" y="${y+11}" class="rotg">${miles(f.valor)}</text>`;
