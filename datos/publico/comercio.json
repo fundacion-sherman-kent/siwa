@@ -1,0 +1,177 @@
+{
+  "procedencia": {
+    "colector": "comercio",
+    "capa": "publico",
+    "obtenido_en": "2026-08-31T12:31:45+00:00",
+    "fuente": {
+      "nombre": "Comtrade de Naciones Unidas — vista publica",
+      "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 2,
+      "corroborado": false,
+      "nota": "Declaraciones aduaneras oficiales de cada Estado, compiladas por Naciones Unidas. La fuente es de primer orden; lo que NO es de primer orden es la interpretacion: la brecha es un indicio, no una medicion de contrabando."
+    },
+    "vacios_declarados": [
+      "UNA BRECHA DE POCOS PUNTOS NO ES CONTRABANDO: ES CONTABILIDAD. El exportador declara en valor FOB —la mercaderia puesta en el barco— y el importador en CIF, que ademas incluye FLETE Y SEGURO. Solo por eso el importador registra de rutina entre 3 % y 10 % mas. A eso se suman los envios que cruzan el anio calendario y las diferencias de clasificacion aduanera.",
+      "LO QUE SI LLAMA LA ATENCION ES LA BRECHA NEGATIVA: que el importador declare MENOS de lo que el exportador dice haberle mandado no tiene explicacion contable inocente, porque el flete y el seguro empujan en el sentido contrario. Aun asi es un INDICIO que abre una linea de averiguacion, NO una prueba de delito.",
+      "Se comparan 37 corredores —los que comparten frontera y los de mayor volumen regional—, no los 1.056 pares posibles: la mayoria no tiene comercio significativo y solo agregaria ruido. Un corredor ausente no esta limpio: no esta mirado.",
+      "LA MEDICION ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, empezando por los que nunca se midieron, y CADA CORREDOR DECLARA CUANDO SE MIDIO. Van 6 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
+      "El anio es 2023, el ultimo con cobertura amplia en la vista publica. NO es el anio corriente y no se estima ninguno posterior.",
+      "Se compara el TOTAL de comercio, no producto por producto. La subfacturacion suele concentrarse en unas pocas partidas y se diluye en el total: este registro sirve para senalar el corredor, no la mercaderia.",
+      "Un Estado que no reporta a Comtrade no genera brecha con nadie, y por lo tanto NO APARECE. La ausencia mide la calidad de su estadistica aduanera, no su honestidad comercial.",
+      "Se descartaron 49 filas de apertura por modo de transporte. Sumarlas al total duplica el comercio: en la primera prueba la brecha Argentina-Brasil dio +109 %, que es absurdo; con la fila total sola da +4,7 %. Queda anotado porque es un error facil de cometer."
+    ],
+    "cantidad": 6
+  },
+  "registros": [
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "corredores": 2,
+      "corredores_que_llaman_la_atencion": 1,
+      "peor_brecha_pct": -9.8,
+      "brecha_negativa_en": [
+        "Argentina → Uruguay"
+      ]
+    },
+    {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "bloque": "Cono Sur",
+      "corredores": 5,
+      "corredores_que_llaman_la_atencion": 2,
+      "peor_brecha_pct": -9.8,
+      "brecha_negativa_en": [
+        "Argentina → Uruguay"
+      ]
+    },
+    {
+      "iso": "PRY",
+      "pais": "Paraguay",
+      "bloque": "Cono Sur",
+      "corredores": 2,
+      "corredores_que_llaman_la_atencion": 0,
+      "peor_brecha_pct": -3.2,
+      "brecha_negativa_en": []
+    },
+    {
+      "iso": "BRA",
+      "pais": "Brasil",
+      "bloque": "Cono Sur",
+      "corredores": 1,
+      "corredores_que_llaman_la_atencion": 0,
+      "peor_brecha_pct": 4.7,
+      "brecha_negativa_en": []
+    },
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "corredores": 1,
+      "corredores_que_llaman_la_atencion": 0,
+      "peor_brecha_pct": 12.0,
+      "brecha_negativa_en": []
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "bloque": "Andina",
+      "corredores": 1,
+      "corredores_que_llaman_la_atencion": 1,
+      "peor_brecha_pct": 129.9,
+      "brecha_negativa_en": []
+    }
+  ],
+  "resumen": {
+    "corredores_comparados": 6,
+    "corredores_pedidos": 37,
+    "corredores_que_llaman_la_atencion": 2,
+    "estados_con_dato": 6,
+    "estados_del_padron": 33,
+    "anio": 2023,
+    "filas_descartadas_por_transporte": 49
+  },
+  "corredores": [
+    {
+      "origen": "ARG",
+      "pais_origen": "Argentina",
+      "destino": "URY",
+      "pais_destino": "Uruguay",
+      "exportador_declara": 1658956907,
+      "importador_declara": 1497203764,
+      "brecha": -161753143,
+      "brecha_pct": -9.8,
+      "sentido": "el importador declara menos",
+      "llama_la_atencion": true,
+      "medido_en": "2026-08-31T12:31:45+00:00"
+    },
+    {
+      "origen": "URY",
+      "pais_origen": "Uruguay",
+      "destino": "PRY",
+      "pais_destino": "Paraguay",
+      "exportador_declara": 121046235,
+      "importador_declara": 117220244,
+      "brecha": -3825991,
+      "brecha_pct": -3.2,
+      "sentido": "el importador declara menos",
+      "llama_la_atencion": false
+    },
+    {
+      "origen": "ARG",
+      "pais_origen": "Argentina",
+      "destino": "BRA",
+      "pais_destino": "Brasil",
+      "exportador_declara": 11856694695,
+      "importador_declara": 12419263153,
+      "brecha": 562568458,
+      "brecha_pct": 4.7,
+      "sentido": "el importador declara más",
+      "llama_la_atencion": false,
+      "medido_en": "2026-08-31T12:31:45+00:00"
+    },
+    {
+      "origen": "ARG",
+      "pais_origen": "Argentina",
+      "destino": "PRY",
+      "pais_destino": "Paraguay",
+      "exportador_declara": 1205406358,
+      "importador_declara": 1272243197,
+      "brecha": 66836839,
+      "brecha_pct": 5.5,
+      "sentido": "el importador declara más",
+      "llama_la_atencion": false,
+      "medido_en": "2026-08-31T12:31:45+00:00"
+    },
+    {
+      "origen": "ARG",
+      "pais_origen": "Argentina",
+      "destino": "CHL",
+      "pais_destino": "Chile",
+      "exportador_declara": 4940161146,
+      "importador_declara": 5531698507,
+      "brecha": 591537362,
+      "brecha_pct": 12.0,
+      "sentido": "el importador declara más",
+      "llama_la_atencion": false,
+      "medido_en": "2026-08-31T12:31:45+00:00"
+    },
+    {
+      "origen": "ARG",
+      "pais_origen": "Argentina",
+      "destino": "BOL",
+      "pais_destino": "Bolivia",
+      "exportador_declara": 472074184,
+      "importador_declara": 1085480310,
+      "brecha": 613406126,
+      "brecha_pct": 129.9,
+      "sentido": "el importador declara más",
+      "llama_la_atencion": true,
+      "medido_en": "2026-08-31T12:31:45+00:00"
+    }
+  ],
+  "metodo": "Para cada corredor se pide lo que el origen declara EXPORTAR al destino y lo que el destino declara IMPORTAR del origen, en el mismo anio y sobre el total de mercaderias. Se toma UNICAMENTE la fila total —motCode 0, customsCode C00, partner2Code 0— y se descartan las aperturas por modo de transporte, que repiten el mismo comercio."
+}

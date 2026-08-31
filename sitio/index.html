@@ -624,13 +624,22 @@
     </section>
 
     <section class="domain" id="contrabando">
-      <div class="domain-head"><h3>Contrabando y subfacturación</h3><span class="tag">Colector pendiente</span></div>
-      <div class="grid-cards">
-        <div class="placeholder">
-          <div><div class="ptitle">Brecha espejo del comercio declarado</div><p>Fuente prevista: UN Comtrade. Comparar lo que un Estado declara exportar a otro contra lo que ese otro declara haber importado. La diferencia es contrabando, subfacturación o triangulación. Requiere tramitar la clave gratuita.</p></div>
-          <span class="badge pending">Sin dato</span>
-        </div>
+      <div class="domain-head"><h3>Contrabando y subfacturación · brecha espejo</h3><span class="tag" id="tag-comercio">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Cuando A declara que exportó cien a B, y B declara que importó sesenta de A,
+           esos cuarenta se fueron por algún lado.</b> Esa diferencia es el indicio estándar
+           de contrabando, subfacturación y triangulación.</p>
+        <p><b>Pero una brecha de pocos puntos no es contrabando: es contabilidad.</b> El
+           exportador declara el valor de la mercadería puesta en el barco; el importador
+           declara ese valor <b>más el flete y el seguro</b>. Solo por eso el importador
+           registra de rutina entre 3 % y 10 % más. <b>Lo que sí llama la atención es la
+           brecha negativa</b> —que el importador declare <b>menos</b>—, porque el flete
+           empuja en el sentido contrario y no hay explicación contable inocente. Aun así
+           es un <b>indicio que abre una averiguación, no una prueba de delito</b>.</p>
       </div>
+      <div class="procedencia" id="proc-comercio">Cargando el registro…</div>
+      <div class="cruce" id="lista-comercio"></div>
+      <div id="vac-comercio"></div>
     </section>
 
     <section class="domain" id="conflictos-territoriales">
@@ -1217,7 +1226,8 @@
                      ['owd','V-Dem, Terrorismo y UCDP'],
                      ['cobertura','Cobertura noticiosa'],['redes','Circulación en redes'],
                      ['telegram','Canales de mensajería'],
-                     ['conflictos','Conflictos territoriales']]
+                     ['conflictos','Conflictos territoriales'],
+                     ['comercio','Comercio · brecha espejo']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -1805,7 +1815,7 @@
     tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
     fronterasVista();
     tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista();
-    redesVista(); mensajeriaVista(); conflictosVista();
+    redesVista(); mensajeriaVista(); conflictosVista(); comercioVista();
     pintarFuentes(); informe();
   }
   function seleccionar(iso, nombre){
@@ -2460,6 +2470,45 @@
     }).join('');
   }
 
+  function comercioVista(){
+    const caja=document.getElementById('lista-comercio'); if(!caja) return;
+    const d=almacen.comercio; if(!d) return;
+    const r=d.resumen;
+    const tag=document.getElementById('tag-comercio');
+    if(tag) tag.textContent = `${r.corredores_comparados} de ${r.corredores_pedidos} corredores medidos · año ${r.anio}`;
+
+    let lista = (d.corredores||[]).slice();
+    if(paisFiltro) lista = lista.filter(c=>c.origen===paisFiltro||c.destino===paisFiltro);
+    else if(bloqueActivo()){
+      const dela = padron.filter(p=>p.bloque===bloqueActivo()).map(p=>p.iso);
+      lista = lista.filter(c=>dela.includes(c.origen)||dela.includes(c.destino));
+    }
+    if(!lista.length){
+      caja.innerHTML = `<div class="card"><h4>Sin corredor medido</h4><div class="sub">
+        Todavía no se midió ningún corredor de este ámbito. La medición es <b>acumulativa</b>:
+        la fuente pública admite pocas consultas por día, así que el registro suma unos pocos
+        corredores por corrida en lugar de forzarla. <b>Un corredor ausente no está limpio:
+        no está mirado.</b></div></div>`;
+      return;
+    }
+    caja.innerHTML = lista.map(c=>{
+      const neg = c.brecha_pct < 0, alerta = c.llama_la_atencion;
+      const clase = alerta ? (neg?'solo':'medio') : 'fuerte';
+      const lectura = neg
+        ? 'El importador declara <b>menos</b> de lo que el exportador dice haber mandado. El flete y el seguro empujan al revés: la diferencia no tiene explicación contable inocente.'
+        : (c.brecha_pct > 25
+           ? 'El importador declara <b>mucho más</b>. El flete explica entre 3 % y 10 %, no esto: puede haber triangulación, reexportación o un problema de registro en el origen.'
+           : 'Diferencia dentro de lo que explican el flete, el seguro y los envíos que cruzan el año. <b>Sin señal.</b>');
+      return `<div class="asunto"><h4>${esc(c.pais_origen)} → ${esc(c.pais_destino)}</h4>
+        <div class="foot"><span class="porque">
+          El exportador declara <b>${miles(Math.round(c.exportador_declara/1e6))} millones</b> ·
+          el importador, <b>${miles(Math.round(c.importador_declara/1e6))} millones</b><br>${lectura}
+          ${c.medido_en?`<br><span class="menor">medido el ${c.medido_en.slice(0,10)}</span>`:''}
+        </span><span class="badge ${clase}">${c.brecha_pct>0?'+':''}${cifra(c.brecha_pct)} %</span></div>
+      </div>`;
+    }).join('');
+  }
+
   function conflictosVista(){
     const caja=document.getElementById('lista-conflictos'); if(!caja) return;
     const d=almacen.conflictos; if(!d) return;
@@ -2799,6 +2848,18 @@
     })
     .catch(err=>{ fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
       document.getElementById('proc-cobertura').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('comercio.json'), traer('estado/comercio.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.comercio=d; const meta=d.procedencia;
+      pintarProcedencia('proc-comercio',meta);
+      registros+=(d.corredores||[]).length;
+      vacios+=pintarVacios('vac-comercio',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-comercio','comercio',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('lista-comercio','comercio',err.message,null);
+      document.getElementById('proc-comercio').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('conflictos.json'), traer('estado/conflictos.json').catch(()=>null)])
     .then(([d,estado])=>{

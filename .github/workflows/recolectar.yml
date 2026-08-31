@@ -49,6 +49,12 @@ jobs:
         continue-on-error: true
         run: python colectores/conflictos.py
 
+      - name: Brecha espejo del comercio declarado
+        id: comercio
+        if: env.COMPLETA == 'true'
+        continue-on-error: true
+        run: python colectores/comercio.py
+
       # --- Series anuales y catalogos, una vez por dia ---
       - name: Indicadores comparables (Banco Mundial)
         id: banco
@@ -112,4 +118,5 @@ jobs:
           [ "${{ steps.owd.outcome }}" = "failure" ] && { echo "Falló el colector de democracia y conflicto."; fallo=1; }
           [ "${{ steps.telegram.outcome }}" = "failure" ] && { echo "Falló el colector de canales de mensajería."; fallo=1; }
           [ "${{ steps.conflictos.outcome }}" = "failure" ] && { echo "Falló el colector de conflictos territoriales."; fallo=1; }
+          [ "${{ steps.comercio.outcome }}" = "failure" ] && { echo "Falló el colector de brecha espejo."; fallo=1; }
           exit $fallo
