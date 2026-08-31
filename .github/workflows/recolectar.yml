@@ -68,9 +68,17 @@ jobs:
         run: |
           git config user.name "siwa"
           git config user.email "actions@users.noreply.github.com"
+          # La regla de .gitattributes necesita que el controlador exista.
+          git config merge.ours.driver true
           git add datos/
           git diff --staged --quiet || git commit -m "Recolección $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git push
+          # Si alguien subio algo mientras corria la recoleccion, se trae y se
+          # reintenta en lugar de fallar. Los datos se resuelven solos por la
+          # regla de .gitattributes; el codigo ajeno se conserva intacto.
+          for intento in 1 2 3; do
+            git push && break
+            git pull --no-rebase --no-edit origin main || exit 1
+          done
 
       # Si algun colector fallo, la corrida queda en rojo. El dato anterior no se pisa
       # y la falla queda registrada en datos/publico/estado/.

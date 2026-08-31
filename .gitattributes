@@ -1,2 +1,14 @@
-# Auto detect text files and perform LF normalization
+# Los archivos de datos los reescribe entera cada corrida del colector.
+# Cuando la recoleccion automatica de GitHub y una corrida local coinciden en la
+# misma hora, las dos reescriben el mismo archivo y git no tiene forma de
+# fusionarlos: no hay «mitad de un dato». Se resuelve quedandose con la version
+# de quien esta fusionando, y la corrida siguiente del colector reconcilia todo
+# en menos de una hora.
+#
+# ALCANCE ESTRICTO: solo datos generados. NUNCA codigo, doctrina ni padrones
+# escritos a mano, donde descartar el cambio ajeno en silencio si seria grave.
+datos/**/*.json merge=ours
+
+# Los .py y .html llevan fin de linea propio del sistema en la copia de trabajo
+# y LF en el repositorio, para que Windows y Linux no ensucien el historial.
 * text=auto
