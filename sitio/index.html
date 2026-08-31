@@ -188,8 +188,31 @@
   .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
   .mapa-barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;}
   .niveles{
-    display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:22px 0 6px;
+    display:flex;flex-direction:column;gap:6px;margin:22px 0 6px;max-width:640px;
   }
+  .niveles select{
+    background:#04202f;color:#E8EEF5;border:1px solid var(--orange);border-radius:8px;
+    padding:11px 13px;font-family:inherit;font-size:13px;width:100%;
+  }
+  .niveles select:focus{outline:2px solid var(--orange);outline-offset:1px;}
+  .niveles-pie{
+    margin:0;font-size:11.5px;line-height:1.5;color:#7d90a8;
+  }
+  .niveles-pie b{color:#E8EEF5;}
+  .herramientas{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px;}
+  .herram{
+    display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);
+    border:1px solid var(--line);border-radius:7px;padding:7px 12px;cursor:pointer;
+    font-family:inherit;font-size:11.5px;color:#C7D2E0;
+  }
+  .herram:hover{background:rgba(251,101,0,.14);border-color:var(--orange);color:#fff;}
+  .herram:disabled{opacity:.4;cursor:default;}
+  .herram:disabled:hover{background:rgba(255,255,255,.04);border-color:var(--line);color:#C7D2E0;}
+  .herram .ico{font-size:13px;line-height:1;}
+  .aviso-herram{
+    margin-top:6px;font-size:11.5px;color:#3FA796;min-height:1.1em;line-height:1.5;
+  }
+  .aviso-herram.malo{color:var(--orange);}
   .niveles-rotulo{
     width:100%;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;
     color:#7d90a8;font-weight:700;margin-bottom:2px;
@@ -222,8 +245,10 @@
   }
   .pie-ficha{font-size:11.5px;color:#7d90a8;line-height:1.6;margin:14px 0 0;max-width:76ch;}
   /* Niveles: cada seccion declara desde que nivel se muestra. */
-  body[data-nivel="1"] [data-nivel="2"], body[data-nivel="1"] [data-nivel="3"],
-  body[data-nivel="2"] [data-nivel="3"]{display:none;}
+  body[data-nivel="1"] [data-nivel="2"],
+  body[data-nivel="1"] [data-nivel="3"], body[data-nivel="1"] [data-nivel="4"],
+  body[data-nivel="2"] [data-nivel="3"], body[data-nivel="2"] [data-nivel="4"],
+  body[data-nivel="3"] [data-nivel="4"]{display:none;}
   .pasos{
     display:flex;flex-wrap:wrap;gap:10px;list-style:none;counter-reset:paso;
     padding:0;margin:0 0 16px;width:100%;
@@ -562,14 +587,17 @@
      —<b>seguridad</b>, <b>defensa</b>, <b>gobernanza</b> y <b>desarrollo</b>— y no por la
      disponibilidad de las fuentes. Este registro no emite juicios: publica hechos
      calificados.</p>
-  <div class="niveles" role="group" aria-label="Nivel de lectura">
-    <span class="niveles-rotulo">¿Cómo querés leerlo?</span>
-    <button class="nivel activo" data-nivel="1">
-      <b>Ciudadanía</b><span>Qué pasa en mi país, en pocas palabras</span></button>
-    <button class="nivel" data-nivel="2">
-      <b>Prensa y decisión</b><span>Todos los temas, el mapa y los informes</span></button>
-    <button class="nivel" data-nivel="3">
-      <b>Análisis</b><span>Fuentes, método, vacíos y datos crudos</span></button>
+  <div class="niveles">
+    <label class="niveles-rotulo" for="nivel-lectura">¿Cómo querés leerlo?</label>
+    <select id="nivel-lectura">
+      <option value="1">Ciudadano — qué pasa en mi país, en pocas palabras</option>
+      <option value="2">Periodista — lo que circula hoy, con su fuente y su corroboración</option>
+      <option value="3">Profesional — los 65 indicadores, el mapa y los informes</option>
+      <option value="4">Análisis — fuentes, método, vacíos y datos crudos</option>
+    </select>
+    <p class="niveles-pie" id="niveles-pie"></p>
+    <div class="herramientas" id="herramientas"></div>
+    <p class="aviso-herram" id="aviso-herram"></p>
   </div>
   <div class="hero-meta">
     <div><strong id="m-dominios">1</strong><span>Dominios con dato</span></div>
@@ -636,7 +664,7 @@
 
   <main>
 
-    <section class="domain" id="ficha-pais" data-nivel="1">
+    <section class="domain" id="ficha-pais">
       <div class="domain-head"><h3>Qué cambió en tu país</h3><span class="tag" id="tag-ficha">—</span></div>
       <div class="elige-pais" id="elige-pais"></div>
       <div class="grid-cards" id="tarj-ficha"></div>
@@ -699,7 +727,7 @@
       </p>
     </section>
 
-    <div class="eje" data-nivel="2">
+    <div class="eje" data-nivel="3">
       <h2>Eje · Seguridad</h2>
       <p>Violencia, control territorial y capacidad del Estado para sostener el orden público, más los movimientos de población y de mercancías que ese control produce o no logra impedir.</p>
     </div>
@@ -712,7 +740,7 @@
       <div id="vac-violencia"></div>
     </section>
 
-    <section class="domain" id="desplazamiento" data-nivel="2">
+    <section class="domain" id="desplazamiento" data-nivel="3">
       <div class="domain-head"><h3>Desplazamiento forzado</h3><span class="tag" id="tag-desplazamiento">—</span></div>
       <div class="procedencia" id="proc-desplazamiento">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-desplazamiento"></div>
@@ -758,7 +786,7 @@
       <div id="vac-conflictos"></div>
     </section>
 
-    <section class="domain" id="mineria-ilegal" data-nivel="2">
+    <section class="domain" id="mineria-ilegal" data-nivel="3">
       <div class="domain-head"><h3>Minería ilegal</h3><span class="tag" id="tag-mineria">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mapeada en cuatro Estados, con años distintos</b> —Bolivia y Venezuela 2017,
@@ -786,7 +814,7 @@
       </div>
     </section>
 
-    <section class="domain" id="ciber" data-nivel="2">
+    <section class="domain" id="ciber" data-nivel="3">
       <div class="domain-head"><h3>Ciberseguridad</h3><span class="tag" id="tag-ciber">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mide superficie e infraestructura, no ataques.</b> No se encontró ninguna fuente
@@ -858,7 +886,7 @@
       <div id="vac-terrorismo"></div>
     </section>
 
-    <section class="domain" id="grupos-armados" data-nivel="2">
+    <section class="domain" id="grupos-armados" data-nivel="3">
       <div class="domain-head"><h3>Grupos armados y conflicto entre organizaciones</h3><span class="tag" id="tag-grupos-armados">—</span></div>
       <div class="aviso-cobertura">
         <p>Enfrentamientos armados <b>entre grupos, sin el Estado como parte</b>. En esta
@@ -891,12 +919,12 @@
       <div id="vac-ransomware"></div>
     </section>
 
-    <section class="domain" id="fuerzas" data-nivel="2">
+    <section class="domain" id="fuerzas" data-nivel="3">
       <div class="domain-head"><h3>Fuerzas y capacidad de defensa</h3><span class="tag" id="tag-fuerzas">—</span></div>
       <div class="grid-cards" id="tarj-fuerzas"></div>
     </section>
 
-    <section class="domain" id="victimizacion" data-nivel="2">
+    <section class="domain" id="victimizacion" data-nivel="3">
       <div class="domain-head"><h3>Victimización y confianza en la policía</h3><span class="tag" id="tag-victimizacion">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Acá está la percepción de inseguridad y el delito que la estadística policial no ve.</b>
@@ -908,19 +936,19 @@
       <div class="grid-cards" id="tarj-victimizacion"></div>
     </section>
 
-    <section class="domain" id="trata" data-nivel="2">
+    <section class="domain" id="trata" data-nivel="3">
       <div class="domain-head"><h3>Trata de personas</h3>
         <span class="tag" id="tag-trata">—</span></div>
       <div class="grid-cards" id="tarj-trata"></div>
     </section>
 
-    <div class="eje" data-nivel="2">
+    <div class="eje" data-nivel="3">
       <h2>Eje · Defensa</h2>
       <p>Lo que cada Estado destina y sostiene como instrumento militar: presupuesto,
          efectivos, adquisición de material y capacidad aeroespacial.</p>
     </div>
 
-    <section class="domain" id="presupuesto-defensa" data-nivel="2">
+    <section class="domain" id="presupuesto-defensa" data-nivel="3">
       <div class="domain-head"><h3>Presupuesto de defensa</h3><span class="tag" id="tag-presupuesto-defensa">—</span></div>
       <div class="aviso-cobertura">
         <p>Las tres medidas se leen juntas porque separan cosas distintas: <b>un Estado chico
@@ -933,7 +961,7 @@
       <div id="vac-presupuesto-defensa"></div>
     </section>
 
-    <section class="domain" id="efectivos" data-nivel="2">
+    <section class="domain" id="efectivos" data-nivel="3">
       <div class="domain-head"><h3>Efectivos</h3><span class="tag" id="tag-efectivos">—</span></div>
       <div class="aviso-cobertura">
         <p><b>No hay desagregación por arma, y no es un olvido.</b> No existe fuente gratuita
@@ -976,19 +1004,19 @@
       <div id="vac-aeroespacial"></div>
     </section>
 
-    <div class="eje" data-nivel="2">
+    <div class="eje" data-nivel="3">
       <h2>Eje · Gobernanza</h2>
       <p>Integridad de la administración pública, calidad de las reglas y salud del espacio informativo en que esas reglas se discuten.</p>
     </div>
 
-    <section class="domain" id="institucional" data-nivel="2">
+    <section class="domain" id="institucional" data-nivel="3">
       <div class="domain-head"><h3>Indicadores de gobernanza</h3><span class="tag" id="tag-institucional">—</span></div>
       <div class="procedencia" id="proc-institucional">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-institucional"></div>
       <div id="vac-institucional"></div>
     </section>
 
-    <section class="domain" id="contratacion" data-nivel="2">
+    <section class="domain" id="contratacion" data-nivel="3">
       <div class="domain-head"><h3>Integridad de la contratación pública</h3><span class="tag" id="tag-contratacion">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Es lo que la empresa declara esperar, no un soborno comprobado.</b> Sale de las
@@ -1018,7 +1046,7 @@
       <div id="vac-democracia"></div>
     </section>
 
-    <section class="domain" id="libertades" data-nivel="2">
+    <section class="domain" id="libertades" data-nivel="3">
       <div class="domain-head"><h3>Libertad de expresión y de asociación</h3><span class="tag" id="tag-libertades">—</span></div>
       <div class="aviso-cobertura">
         <p>Censura estatal, represalia contra periodistas, y espacio disponible para
@@ -1031,7 +1059,7 @@
       <div class="grid-cards" id="tarj-libertades"></div>
     </section>
 
-    <section class="domain" id="integridad" data-nivel="2">
+    <section class="domain" id="integridad" data-nivel="3">
       <div class="domain-head"><h3>Integridad y aprobación democrática</h3><span class="tag" id="tag-integridad">—</span></div>
       <div class="aviso-cobertura">
         <p><b>La aprobación de la democracia no es una encuesta.</b> Es la evaluación de un
@@ -1046,7 +1074,7 @@
       <div class="grid-cards" id="tarj-integridad"></div>
     </section>
 
-    <section class="domain" id="capacidad" data-nivel="2">
+    <section class="domain" id="capacidad" data-nivel="3">
       <div class="domain-head"><h3>Capacidad del Estado</h3><span class="tag" id="tag-capacidad">—</span></div>
       <div class="aviso-cobertura">
         <p>El registro de nacimientos es la capacidad estatal más básica: <b>saber quién existe</b>.
@@ -1058,39 +1086,39 @@
       <div class="grid-cards" id="tarj-capacidad"></div>
     </section>
 
-    <section class="domain" id="desinformacion" data-nivel="3">
+    <section class="domain" id="desinformacion" data-nivel="2">
       <div class="domain-head"><h3>Desinformación e infoxicación</h3><span class="tag" id="tag-desinformacion">—</span></div>
       <div class="procedencia" id="proc-desinformacion">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-desinformacion"></div>
       <div id="vac-desinformacion"></div>
     </section>
 
-    <section class="domain" id="soborno" data-nivel="2">
+    <section class="domain" id="soborno" data-nivel="3">
       <div class="domain-head"><h3>Soborno declarado</h3>
         <span class="tag" id="tag-soborno">—</span></div>
       <div class="grid-cards" id="tarj-soborno"></div>
     </section>
 
-    <div class="eje" data-nivel="2">
+    <div class="eje" data-nivel="3">
       <h2>Eje · Desarrollo</h2>
       <p>Estructura material del territorio y de la economía, por sector. No es análisis económico: es la base sobre la que se leen las otras dos —dónde vive la gente, de qué vive y qué exporta—.</p>
     </div>
 
-    <section class="domain" id="urbano" data-nivel="2">
+    <section class="domain" id="urbano" data-nivel="3">
       <div class="domain-head"><h3>Urbano</h3><span class="tag" id="tag-urbano">—</span></div>
       <div class="procedencia" id="proc-urbano">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-urbano"></div>
       <div id="vac-urbano"></div>
     </section>
 
-    <section class="domain" id="industrial" data-nivel="2">
+    <section class="domain" id="industrial" data-nivel="3">
       <div class="domain-head"><h3>Industrial</h3><span class="tag" id="tag-industrial">—</span></div>
       <div class="procedencia" id="proc-industrial">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-industrial"></div>
       <div id="vac-industrial"></div>
     </section>
 
-    <section class="domain" id="condiciones" data-nivel="2">
+    <section class="domain" id="condiciones" data-nivel="3">
       <div class="domain-head"><h3>Condiciones de vida y desigualdad</h3><span class="tag" id="tag-condiciones">—</span></div>
       <div class="aviso-cobertura">
         <p><b>La pobreza según línea nacional no es comparable entre países</b>: cada Estado define
@@ -1100,24 +1128,24 @@
       <div class="grid-cards" id="tarj-condiciones"></div>
     </section>
 
-    <section class="domain" id="conectividad" data-nivel="2">
+    <section class="domain" id="conectividad" data-nivel="3">
       <div class="domain-head"><h3>Conectividad</h3><span class="tag" id="tag-conectividad">—</span></div>
       <div class="grid-cards" id="tarj-conectividad"></div>
     </section>
 
-    <section class="domain" id="ambiente" data-nivel="2">
+    <section class="domain" id="ambiente" data-nivel="3">
       <div class="domain-head"><h3>Superficie forestal</h3><span class="tag" id="tag-ambiente">—</span></div>
       <div class="grid-cards" id="tarj-ambiente"></div>
     </section>
 
-    <section class="domain" id="materias" data-nivel="2">
+    <section class="domain" id="materias" data-nivel="3">
       <div class="domain-head"><h3>Materias primas</h3><span class="tag" id="tag-materias">—</span></div>
       <div class="procedencia" id="proc-materias">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-materias"></div>
       <div id="vac-materias"></div>
     </section>
 
-    <section class="domain" id="informalidad" data-nivel="2">
+    <section class="domain" id="informalidad" data-nivel="3">
       <div class="domain-head"><h3>Empleo informal</h3>
         <span class="tag" id="tag-informalidad">—</span></div>
       <div class="grid-cards" id="tarj-informalidad"></div>
@@ -1129,7 +1157,7 @@
          organismo y dirección. No son cifras: es el índice para ir al original.</p>
     </div>
 
-    <section class="domain" id="oficiales" data-nivel="3">
+    <section class="domain" id="oficiales" data-nivel="4">
       <div class="domain-head"><h3>Padrón de fuentes oficiales</h3><span class="tag" id="tag-oficiales">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Este padrón no publica datos: publica dónde están.</b>
@@ -1166,7 +1194,7 @@
       <div id="vac-cobertura"></div>
     </section>
 
-    <section class="domain" id="palabras" data-nivel="3">
+    <section class="domain" id="palabras" data-nivel="2">
       <div class="domain-head"><h3>Mapa de palabras</h3><span class="tag" id="tag-palabras">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Qué términos circulan ahora mismo, no qué está ocurriendo.</b>
@@ -1182,7 +1210,7 @@
       <div class="nube" id="nube-palabras"></div>
     </section>
 
-    <section class="domain" id="redes" data-nivel="3">
+    <section class="domain" id="redes" data-nivel="2">
       <div class="domain-head"><h3>Circulación en red social abierta</h3><span class="tag" id="tag-redes">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mide cuánto se habla, no qué ocurre.</b> Una publicación en una red no es una
@@ -1208,7 +1236,7 @@
          calificación. Se descarga en planilla o se imprime en papel; no lleva juicios.</p>
     </div>
 
-    <section class="domain" id="mensajeria" data-nivel="3">
+    <section class="domain" id="mensajeria" data-nivel="2">
       <div class="domain-head"><h3>Difusión en canales de mensajería</h3><span class="tag" id="tag-mensajeria">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Esto NO corrobora nada de la cobertura noticiosa, y no se mezcla con ella.</b>
@@ -1255,7 +1283,7 @@
          Cada materia tiene un enlace que trae hasta acá.</p>
     </div>
 
-    <section class="domain" id="fuentes-limites" data-nivel="3">
+    <section class="domain" id="fuentes-limites" data-nivel="4">
       <div class="domain-head"><h3>Procedencia y vacíos declarados</h3>
         <span class="tag" id="tag-fuentes">—</span></div>
       <div id="lista-fuentes"></div>
@@ -1267,7 +1295,7 @@
          del propio programa.</p>
     </div>
 
-    <section class="domain" id="calificacion" data-nivel="3">
+    <section class="domain" id="calificacion" data-nivel="4">
       <div class="domain-head"><h3>Cómo se califica lo que se publica</h3><span class="tag">Sistema Almirantazgo</span></div>
       <div class="dos-columnas">
         <div class="panel">
@@ -1965,10 +1993,129 @@
   let nivel = 1;
   try{ const g = localStorage.getItem('siwa-nivel'); if(g) nivel = +g || 1; }catch(e){}
 
+  const PIE_NIVEL = {
+    1: 'Estás viendo <b>lo esencial de un país</b>: qué cambió y cuánto. Cada cifra trae quién la produce y qué es lo que <b>no</b> dice.',
+    2: 'Sumás <b>lo que se está publicando ahora</b> —qué cubre la prensa de la región, con cuántos orígenes independientes— y el informe descargable para citar.',
+    3: 'Sumás <b>los 65 indicadores</b> de las doce fuentes, repartidos en los cuatro ejes, con el mapa y los cruces entre temas.',
+    4: 'Sumás <b>el método</b>: de dónde sale cada dato, cómo se lo califica, qué vacíos se declaran y qué fuentes oficiales existen en cada Estado.',
+  };
+
+  // --- Enlaces que se pueden compartir -----------------------------------
+  // Hasta ahora todo el estado vivia solo en la pantalla: quien compartia el
+  // enlace mandaba a la portada, no a lo que estaba mirando. Ahora el pais, el
+  // tema y el nivel viajan en la direccion.
+  function guardarEnLaDireccion(){
+    try{
+      const u = new URL(location.href);
+      paisFiltro ? u.searchParams.set('pais', paisFiltro) : u.searchParams.delete('pais');
+      bloqueFiltro ? u.searchParams.set('zona', bloqueFiltro) : u.searchParams.delete('zona');
+      u.searchParams.set('tema', capaActiva);
+      u.searchParams.set('nivel', String(nivel));
+      history.replaceState(null, '', u);
+    }catch(e){}
+  }
+
+  function leerDeLaDireccion(){
+    try{
+      const q = new URL(location.href).searchParams;
+      const n = +q.get('nivel'); if(n >= 1 && n <= 4) nivel = n;
+      const t = q.get('tema'); if(t) capaActiva = t;
+      const z = q.get('zona'); if(z) bloqueFiltro = z;
+      const pa = q.get('pais');
+      if(pa && padron.length){
+        const p = padron.find(x => x.iso === pa);
+        if(p){ paisFiltro = p.iso; paisNombre = p.pais; bloqueFiltro = null; }
+      }
+      ambitoCobertura = paisFiltro ? 'pais' : (bloqueFiltro ? 'bloque' : 'todo');
+    }catch(e){}
+  }
+
+  function avisar(texto, malo){
+    const a = document.getElementById('aviso-herram');
+    if(!a) return;
+    a.textContent = texto;
+    a.classList.toggle('malo', !!malo);
+    clearTimeout(avisar._t);
+    avisar._t = setTimeout(()=>{ a.textContent=''; }, 6000);
+  }
+
+  function alPortapapeles(texto, exito){
+    const listo = () => avisar(exito);
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(texto).then(listo,
+        ()=>avisar('El navegador no dejó copiar. Seleccioná el texto a mano.', true));
+    } else {
+      // Sin portapapeles moderno no se falla en silencio: se muestra el texto.
+      window.prompt('Copiá este texto:', texto);
+    }
+  }
+
+  // La cita lista para pegar es lo que un periodista necesita y casi nadie da:
+  // dato, unidad, año, quién lo produce, cómo está calificado y de dónde salió.
+  function citaDelTema(){
+    const i = metaInd(capaActiva), conjunto = conjuntoDe(capaActiva);
+    if(!i || !i.rotulo || !conjunto) return null;
+    const meta = conjunto.procedencia;
+    const filas = filasDe(capaActiva);
+    const mio = paisFiltro ? filas.find(f=>f.iso===paisFiltro) : null;
+    const m = mio ? magnitud(mio.valor, i.unidad) : null;
+    const partes = [];
+    if(mio) partes.push(`${mio.pais}: ${i.rotulo}, ${m.texto} ${m.unidad} (${mio.anio}).`);
+    else partes.push(`${i.rotulo} — ${filas.length} de 33 Estados de América Latina y el Caribe.`);
+    partes.push(`Fuente: ${i.origen || meta.fuente.nombre}.`);
+    partes.push(`Calificación de fiabilidad ${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad} (sistema Almirantazgo).`);
+    if(i.cautela) partes.push(`Advertencia de la fuente: ${i.cautela}`);
+    partes.push(`Consultado el ${new Date().toLocaleDateString('es-AR')} en SIWA, Fundación Sherman Kent — ${location.href}`);
+    return partes.join(' ');
+  }
+
+  const HERRAMIENTAS = [
+    {nivel:1, ico:'🔗', rot:'Copiar el enlace de esta vista',
+     ayuda:'Manda a lo que estás viendo ahora: el país, el tema y el nivel.',
+     hacer(){ guardarEnLaDireccion();
+       alPortapapeles(location.href, 'Enlace copiado. Lleva al país y al tema que estás viendo.'); }},
+    {nivel:2, ico:'❝', rot:'Copiar la cita del tema',
+     ayuda:'Texto listo para pegar, con fuente, calificación y advertencia.',
+     activo(){ return !!citaDelTema(); },
+     hacer(){ const c = citaDelTema();
+       c ? alPortapapeles(c, 'Cita copiada, con fuente y advertencia incluidas.')
+         : avisar('Este tema no tiene ficha citable.', true); }},
+    {nivel:2, ico:'⬇', rot:'Descargar la planilla',
+     ayuda:'Todos los indicadores del ámbito elegido, con unidad, año y series.',
+     hacer(){ csv(); avisar('Planilla descargada.'); }},
+    {nivel:2, ico:'🖨', rot:'Imprimir o guardar en PDF',
+     ayuda:'Imprime el informe del ámbito elegido, con márgenes de papel.',
+     hacer(){ window.print(); }},
+    {nivel:4, ico:'{ }', rot:'Descargar los datos crudos',
+     ayuda:'Los archivos tal cual los deja cada colector, con su procedencia.',
+     hacer(){
+       const nombres = ['banco-mundial','onu-ods','owd','bti','desplazamiento','conflictos',
+                        'comercio','ransomware','cobertura','redes','telegram','oficiales'];
+       const lista = nombres.map(n=>`${location.origin}${location.pathname.replace(/sitio\/.*$/,'')}datos/publico/${n}.json`).join('\n');
+       alPortapapeles(lista, 'Se copiaron las 12 direcciones de los archivos de datos.'); }},
+  ];
+
+  function pintarHerramientas(){
+    const caja = document.getElementById('herramientas');
+    if(!caja) return;
+    const hay = HERRAMIENTAS.filter(h => h.nivel <= nivel);
+    caja.innerHTML = hay.map((h,i)=>{
+      const ok = h.activo ? h.activo() : true;
+      return `<button class="herram" data-h="${i}" title="${esc(h.ayuda)}" ${ok?'':'disabled'}>
+        <span class="ico">${h.ico}</span>${esc(h.rot)}</button>`;
+    }).join('');
+    caja.querySelectorAll('[data-h]').forEach(b =>
+      b.addEventListener('click', ()=>hay[+b.dataset.h].hacer()));
+  }
+
   function aplicarNivel(){
     document.body.dataset.nivel = String(nivel);
-    document.querySelectorAll('.nivel').forEach(b=>
-      b.classList.toggle('activo', +b.dataset.nivel === nivel));
+    const sel = document.getElementById('nivel-lectura');
+    if(sel && +sel.value !== nivel) sel.value = String(nivel);
+    const pie = document.getElementById('niveles-pie');
+    if(pie) pie.innerHTML = PIE_NIVEL[nivel] || '';
+    pintarHerramientas();
+    guardarEnLaDireccion();
     // La barra lateral solo lista lo que en este nivel existe.
     document.querySelectorAll('nav.rail a[href^="#"]').forEach(a=>{
       const destino = document.getElementById(a.getAttribute('href').slice(1));
@@ -1985,12 +2132,16 @@
     });
   }
 
-  document.querySelectorAll('.nivel').forEach(b =>
-    b.addEventListener('click', ()=>{
-      nivel = +b.dataset.nivel;
+  (function(){
+    const sel = document.getElementById('nivel-lectura');
+    if(!sel) return;
+    sel.value = String(nivel);
+    sel.addEventListener('change', ()=>{
+      nivel = +sel.value || 1;
       try{ localStorage.setItem('siwa-nivel', String(nivel)); }catch(e){}
       aplicarNivel(); repintar();
-    }));
+    });
+  })();
 
   // --- Ficha ciudadana: lo que mas cambio en el pais elegido --------------
   function fichaCiudadana(){
@@ -2138,6 +2289,8 @@
     paso('desplegables de tema', solapas);
     paso('leyenda', leyenda);
     paso('panel de cruce', panelCruce);
+    paso('herramientas', pintarHerramientas);
+    paso('dirección compartible', guardarEnLaDireccion);
     paso('ficha ciudadana', fichaCiudadana);
     paso('nivel de lectura', aplicarNivel);
     paso('ficha del mapa', ()=>pintarFichaMapa(paisFiltro, paisNombre,
@@ -3288,6 +3441,8 @@
   fetch('geo/paises-alc.geojson').then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(geo => {
       padron = geo.features.map(f=>f.properties).sort((a,b)=>a.pais.localeCompare(b.pais,'es'));
+      // Recien ahora se puede resolver un pais pedido por la direccion.
+      leerDeLaDireccion();
       const sel=document.getElementById('pais-informe');
       sel.innerHTML='<option value="">— toda la región —</option>'+
         padron.map(p=>`<option value="${p.iso}">${esc(p.pais)}</option>`).join('');
