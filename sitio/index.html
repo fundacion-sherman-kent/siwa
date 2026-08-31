@@ -545,6 +545,7 @@
     <a href="#extorsion">Extorsión informática</a>
     <a href="#fuerzas">Fuerzas y defensa</a>
     <a href="#victimizacion">Victimización y denuncia</a>
+    <a href="#control-territorial">Control territorial</a>
     <a href="#terrorismo">Terrorismo</a>
     <a href="#grupos-armados">Grupos armados</a>
     <a href="#migraciones">Migraciones</a>
@@ -560,6 +561,7 @@
     <div class="grupo">Gobernanza</div>
     <a href="#institucional">Indicadores de gobernanza</a>
     <a href="#contratacion">Contratación pública</a>
+    <a href="#integridad">Integridad y democracia</a>
     <a href="#capacidad">Capacidad del Estado</a>
     <a href="#democracia">Nivel democrático</a>
     <a href="#libertades">Libertades</a>
@@ -772,6 +774,22 @@
       <div class="cruce" id="lista-fronteras"></div>
     </section>
 
+    <section class="domain" id="control-territorial">
+      <div class="domain-head"><h3>Control territorial del Estado</h3><span class="tag" id="tag-control">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Si el Estado manda en todo su territorio, o si hay zonas donde no manda.</b>
+           Es lo más cercano al control territorial que se encontró gratuito y comparable:
+           el conflicto entre grupos armados cuenta muertes, no territorio.</p>
+        <p><b>Es evaluación experta, no medición de campo</b>: dos especialistas por país
+           —uno del país, uno de fuera— puntúan de 1 a 10, y el resultado se armoniza en
+           revisión regional. <b>Y es una foto, no una serie</b>: el proyecto publica cada
+           dos años, de modo que <b>estos temas no se pueden proyectar</b>.</p>
+      </div>
+      <div class="procedencia" id="proc-control">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-control"></div>
+      <div id="vac-control"></div>
+    </section>
+
     <section class="domain" id="terrorismo">
       <div class="domain-head"><h3>Terrorismo</h3><span class="tag" id="tag-terrorismo">—</span></div>
       <div class="aviso-cobertura">
@@ -958,6 +976,21 @@
            vale más, porque la prensa local pesa menos.</p>
       </div>
       <div class="grid-cards" id="tarj-libertades"></div>
+    </section>
+
+    <section class="domain" id="integridad">
+      <div class="domain-head"><h3>Integridad y aprobación democrática</h3><span class="tag" id="tag-integridad">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>La aprobación de la democracia no es una encuesta.</b> Es la evaluación de un
+           especialista sobre cuánto respaldo social tiene el régimen democrático. Se acerca
+           a la <b>percepción democrática</b> que este registro declaraba como vacío, pero
+           <b>no la reemplaza</b>: Latinobarómetro y el Barómetro de las Américas le
+           preguntan a la gente; esto no.</p>
+        <p><b>La persecución del abuso de función mide impunidad</b>, que es distinto de la
+           percepción de corrupción: un país puede tener mala fama y buena persecución, o al
+           revés. Y la política anticorrupción mide <b>el andamiaje, no el resultado</b>.</p>
+      </div>
+      <div class="grid-cards" id="tarj-integridad"></div>
     </section>
 
     <section class="domain" id="capacidad">
@@ -1289,7 +1322,8 @@
                      ['telegram','Canales de mensajería'],
                      ['conflictos','Conflictos territoriales'],
                      ['comercio','Comercio · brecha espejo'],
-                     ['ransomware','Extorsión informática']]
+                     ['ransomware','Extorsión informática'],
+                     ['bti','Índice Bertelsmann']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -1355,7 +1389,7 @@
 
   // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
   // agregar un colector nuevo no obligue a tocar el resto de la página.
-  const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd].filter(Boolean);
+  const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -1891,6 +1925,9 @@
     tarjetasBanco(['democracia_electoral','democracia_liberal','democracia_participativa',
                    'corrupcion_politica'],'democracia');
     tarjetasBanco(['libertad_expresion','libertad_asociacion'],'libertades');
+    tarjetasBanco(['monopolio_fuerza','intensidad_conflicto'],'control');
+    tarjetasBanco(['aprobacion_democracia','persecucion_abuso','politica_anticorrupcion',
+                   'actores_antidemocraticos','administracion_basica','indice_gobernanza'],'integridad');
     tarjetasBanco(['migracion_neta','migrantes','migrantes_pct','remesas'],'migraciones');
     tarjetasBanco(['gasto_militar','gasto_militar_publico','gasto_militar_dolares'],'presupuesto-defensa');
     tarjetasBanco(['personal_militar','militares_fuerza_laboral'],'efectivos');
@@ -3074,6 +3111,18 @@
     })
     .catch(err=>{ fallas++; pintarFalla('lista-mensajeria','mensajería',err.message,null);
       document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('bti.json'), traer('estado/bti.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.bti=d; dominios+=Object.keys(d.cobertura||{}).length;
+      pintarProcedencia('proc-control', d.procedencia);
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-control',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-control','índice Bertelsmann',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('tarj-control','índice Bertelsmann',err.message,null);
+      document.getElementById('proc-control').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('owd.json'), traer('estado/owd.json').catch(()=>null)])
     .then(([d,estado])=>{

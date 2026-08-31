@@ -61,6 +61,12 @@ jobs:
         continue-on-error: true
         run: python colectores/ransomware.py
 
+      - name: Indice de Transformacion Bertelsmann
+        id: bti
+        if: env.COMPLETA == 'true'
+        continue-on-error: true
+        run: python colectores/bti.py
+
       # --- Series anuales y catalogos, una vez por dia ---
       - name: Indicadores comparables (Banco Mundial)
         id: banco
@@ -126,4 +132,5 @@ jobs:
           [ "${{ steps.conflictos.outcome }}" = "failure" ] && { echo "Falló el colector de conflictos territoriales."; fallo=1; }
           [ "${{ steps.comercio.outcome }}" = "failure" ] && { echo "Falló el colector de brecha espejo."; fallo=1; }
           [ "${{ steps.ransomware.outcome }}" = "failure" ] && { echo "Falló el colector de extorsión informática."; fallo=1; }
+          [ "${{ steps.bti.outcome }}" = "failure" ] && { echo "Falló el colector del índice Bertelsmann."; fallo=1; }
           exit $fallo
