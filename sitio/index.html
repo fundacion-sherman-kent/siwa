@@ -254,6 +254,19 @@
     font-size:11px;font-weight:700;padding:7px 16px;cursor:pointer;letter-spacing:.3px;}
   .modo.activo{background:var(--purple);color:#fff;}
   .modo:disabled{opacity:.4;cursor:not-allowed;}
+  .cruzar{display:flex;align-items:center;gap:8px;margin:10px 0 4px;}
+  .cruzar label{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--grey-blue);font-weight:700;}
+  .cruzar select{
+    background:#0E2135;color:var(--paper);border:1px solid var(--line);border-radius:8px;
+    padding:6px 10px;font-family:'Inter',sans-serif;font-size:11.5px;max-width:320px;
+  }
+  .limites-enlace{font-size:10px;color:var(--orange);text-decoration:none;border-bottom:1px dotted var(--orange);margin-left:10px;}
+  .limites-enlace:hover{color:#fff;border-color:#fff;}
+  .ficha-fuente{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:12px;}
+  .ficha-fuente h4{margin:0 0 4px;font-size:13px;color:#fff;font-weight:700;}
+  .ficha-fuente .meta{font-size:10.5px;color:#7d90a8;margin-bottom:10px;}
+  .ficha-fuente ul{margin:0;padding-left:16px;}
+  .ficha-fuente li{font-size:11.5px;color:#C7D2E0;line-height:1.6;margin-bottom:5px;}
   .pendientes{margin:0 0 10px;font-size:11px;color:#7d90a8;line-height:1.6;}
   .pendientes b{color:#9fb2c8;font-weight:600;}
   .tema .sin{font-size:9px;text-transform:uppercase;letter-spacing:.4px;color:#7d90a8;}
@@ -391,21 +404,26 @@
     <a href="#mapa-seccion">Mapa de situación</a>
     <div class="grupo">Seguridad</div>
     <a href="#violencia">Homicidios</a>
+    <a href="#trata">Trata de personas</a>
     <a href="#desplazamiento">Desplazamiento forzado</a>
     <a href="#contrabando">Contrabando</a>
     <a href="#ciber">Ciberseguridad</a>
     <div class="grupo">Gobernanza</div>
     <a href="#institucional">Indicadores de gobernanza</a>
     <a href="#contratacion">Contratación pública</a>
+    <a href="#soborno">Soborno declarado</a>
     <a href="#desinformacion">Desinformación</a>
     <div class="grupo">Desarrollo</div>
     <a href="#urbano">Urbano</a>
     <a href="#industrial">Industrial</a>
+    <a href="#informalidad">Empleo informal</a>
     <a href="#materias">Materias primas</a>
     <div class="grupo">Fuentes</div>
     <a href="#oficiales">Padrón oficial</a>
     <div class="grupo">Verificación</div>
     <a href="#cobertura">Cobertura cruzada</a>
+    <div class="grupo">Fuentes</div>
+    <a href="#fuentes-limites">Fuentes y límites</a>
     <div class="grupo">Método</div>
     <a href="#informe">Informe descargable</a>
     <a href="#calificacion">Calificación</a>
@@ -417,6 +435,10 @@
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <div class="mapa-barra">
         <div class="temas" id="temas"></div>
+        <div class="cruzar">
+          <label for="cruce">Cruzar con</label>
+          <select id="cruce"><option value="">— sin cruce —</option></select>
+        </div>
         <div class="modos">
           <button class="modo activo" data-modo="nivel">Nivel actual</button>
           <button class="modo" data-modo="1">Tendencia 1 año</button>
@@ -427,6 +449,7 @@
       </div>
       <p class="pendientes" id="pendientes"></p>
       <p class="explica-capa" id="explica-capa">—</p>
+      <div id="panel-cruce"></div>
       <div class="mapa-caja">
         <div id="mapa"></div>
         <div class="ficha-mapa" id="ficha-mapa"></div>
@@ -482,6 +505,12 @@
       </div>
     </section>
 
+    <section class="domain" id="trata">
+      <div class="domain-head"><h3>Trata de personas</h3>
+        <span class="tag" id="tag-trata">—</span></div>
+      <div class="grid-cards" id="tarj-trata"></div>
+    </section>
+
     <div class="eje">
       <h2>Eje · Gobernanza</h2>
       <p>Integridad de la administración pública, calidad de las reglas y salud del espacio informativo en que esas reglas se discuten.</p>
@@ -511,6 +540,12 @@
       <div id="vac-desinformacion"></div>
     </section>
 
+    <section class="domain" id="soborno">
+      <div class="domain-head"><h3>Soborno declarado</h3>
+        <span class="tag" id="tag-soborno">—</span></div>
+      <div class="grid-cards" id="tarj-soborno"></div>
+    </section>
+
     <div class="eje">
       <h2>Eje · Desarrollo</h2>
       <p>Estructura material del territorio y de la economía, por sector. No es análisis económico: es la base sobre la que se leen las otras dos —dónde vive la gente, de qué vive y qué exporta—.</p>
@@ -535,6 +570,12 @@
       <div class="procedencia" id="proc-materias">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-materias"></div>
       <div id="vac-materias"></div>
+    </section>
+
+    <section class="domain" id="informalidad">
+      <div class="domain-head"><h3>Empleo informal</h3>
+        <span class="tag" id="tag-informalidad">—</span></div>
+      <div class="grid-cards" id="tarj-informalidad"></div>
     </section>
 
     <div class="eje">
@@ -603,6 +644,19 @@
         <div class="fecha" id="informe-fecha">—</div>
         <div id="informe-cuerpo"></div>
       </div>
+    </section>
+
+    <div class="eje">
+      <h2>Fuentes y límites</h2>
+      <p>De dónde sale cada cifra, cómo se construyó y qué no cubre. Está al pie a
+         propósito: las advertencias son largas y, puestas junto al dato, lo tapan.
+         Cada materia tiene un enlace que trae hasta acá.</p>
+    </div>
+
+    <section class="domain" id="fuentes-limites">
+      <div class="domain-head"><h3>Procedencia y vacíos declarados</h3>
+        <span class="tag" id="tag-fuentes">—</span></div>
+      <div id="lista-fuentes"></div>
     </section>
 
     <div class="eje">
@@ -686,6 +740,15 @@
     return r.json();
   });
 
+  function enlaceLimites(destino, colector){
+    const cab=document.querySelector('#'+destino+' .domain-head');
+    if(!cab || cab.querySelector('.limites-enlace')) return;
+    const a=document.createElement('a');
+    a.className='limites-enlace'; a.href='#limites-'+colector;
+    a.textContent='límites y construcción';
+    cab.appendChild(a);
+  }
+
   function pintarProcedencia(destino, meta){
     const c = meta.calificacion;
     document.getElementById(destino).innerHTML =
@@ -694,12 +757,29 @@
       `<span><b>Obtenido:</b> ${momento(meta.obtenido_en)}</span>`+
       `<span><b>Corroboración:</b> ${c.corroborado?'dos orígenes independientes':'fuente única, declarada'}</span>`;
   }
+  // Los vacíos ya no se pintan junto al dato: van todos al pie, y cada materia
+  // enlaza hasta allá. Puestos al lado de la cifra, la tapaban.
+  function pintarFuentes(){
+    const caja=document.getElementById('lista-fuentes'); if(!caja) return;
+    const conjuntos=[['banco','Banco Mundial'],['ods','Naciones Unidas — ODS'],
+                     ['desplazamiento','ACNUR'],['oficiales','Padrón oficial'],
+                     ['cobertura','Cobertura noticiosa']]
+      .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
+    document.getElementById('tag-fuentes').textContent =
+      conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
+    caja.innerHTML = conjuntos.map(({rot,d})=>{
+      const m=d.procedencia, c=m.calificacion;
+      return `<div class="ficha-fuente" id="limites-${d.procedencia.colector}">
+        <h4>${esc(rot)} <span class="calif">${c.fiabilidad}-${c.credibilidad}</span></h4>
+        <div class="meta">${esc(m.fuente.nombre)} · obtenido ${momento(m.obtenido_en)} ·
+          ${c.corroborado?'dos orígenes independientes':'fuente única, declarada'}</div>
+        <ul>${m.vacios_declarados.map(v=>`<li>${esc(v)}</li>`).join('')}</ul></div>`;
+    }).join('');
+  }
+
   function pintarVacios(destino, lista){
-    if(!lista||!lista.length) return 0;
-    document.getElementById(destino).innerHTML =
-      `<div class="vacios"><h5>Lo que esta fuente no cubre</h5><ul>`+
-      lista.map(v=>`<li>${esc(v)}</li>`).join('')+`</ul></div>`;
-    return lista.length;
+    // Ya no se pinta junto al dato: solo se cuenta para el marcador.
+    return (lista||[]).length;
   }
   function pintarFalla(destino, colector, error, meta){
     const viejo = meta ? `El último dato válido es del ${momento(meta.obtenido_en)} y sigue en pantalla sin modificar.`
@@ -735,9 +815,9 @@
   const ORDEN_EJES = ['Seguridad','Gobernanza','Desarrollo','Fuentes'];
 
   function MATERIAS(){
-    const delBanco = (almacen.banco && almacen.banco.indicadores || []).map(i=>({
-      clave:i.clave, eje:i.eje, rotulo:i.rotulo, disponible:()=>true}));
-    return delBanco.concat(ESTATICAS).sort((a,b)=>
+    const deFuentes = fuentesInd().flatMap(f=>(f.indicadores||[]).map(i=>({
+      clave:i.clave, eje:i.eje, rotulo:i.rotulo, disponible:()=>true})));
+    return deFuentes.concat(ESTATICAS).sort((a,b)=>
       ORDEN_EJES.indexOf(a.eje) - ORDEN_EJES.indexOf(b.eje));
   }
 
@@ -747,15 +827,42 @@
   const MAG = ['#0E2135','rgba(251,101,0,.28)','rgba(251,101,0,.55)','rgba(251,101,0,.85)'];
   const DIV = ['rgba(251,101,0,.85)','rgba(251,101,0,.40)','rgba(63,167,150,.40)','rgba(63,167,150,.75)'];
 
+  // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
+  // agregar un colector nuevo no obligue a tocar el resto de la página.
+  const fuentesInd = () => [almacen.banco, almacen.ods].filter(Boolean);
+
+  function metaInd(clave){
+    for(const f of fuentesInd()){
+      const i=(f.indicadores||[]).find(x=>x.clave===clave);
+      if(i) return i;
+    }
+    return {};
+  }
+  function conjuntoDe(clave){
+    for(const f of fuentesInd())
+      if((f.indicadores||[]).some(i=>i.clave===clave)) return f;
+    return null;
+  }
+  function filasDe(clave){
+    const f=conjuntoDe(clave);
+    return f ? (f.registros||[]).filter(r=>r.indicadores[clave])
+                 .map(r=>({pais:r.pais, iso:r.iso, ...r.indicadores[clave]})) : [];
+  }
+  const datoDe = (clave, iso) => {
+    const f=conjuntoDe(clave);
+    const r=f&&(f.registros||[]).find(x=>x.iso===iso);
+    return r ? r.indicadores[clave] : null;
+  };
+
   function capaBanco(clave, cortes, divergente){
-    const meta = () => (almacen.banco?.indicadores||[]).find(i=>i.clave===clave) || {};
+    const meta = () => metaInd(clave);
     return {
       materia: clave, divergente, leyenda: cortes,
       get unidad(){ return meta().unidad || ''; },
       get cautela(){ return meta().cautela || ''; },
       conteo(){
         const m={};
-        (almacen.banco?.registros||[]).forEach(r=>{ const i=r.indicadores[clave]; if(i) m[r.iso]=i.valor; });
+        filasDe(clave).forEach(f=>{ m[f.iso]=f.valor; });
         return m;
       },
       tendencia(){
@@ -768,8 +875,7 @@
       },
       get subeEsPeor(){ return !!meta().mas_es_peor; },
       serieDe(iso){
-        const r=((almacen.banco && almacen.banco.registros)||[]).find(x=>x.iso===iso);
-        const i=r&&r.indicadores[clave];
+        const i=datoDe(clave, iso);
         return (i&&i.serie)?i.serie.map(a=>({anio:a.anio, valor:a.valor})):[];
       },
       get rotulo(){ return meta().rotulo || clave; },
@@ -785,7 +891,7 @@
         return divergente ? DIV[i] : MAG[i];
       },
       detalle(iso){
-        const r=(almacen.banco?.registros||[]).find(x=>x.iso===iso), i=r&&r.indicadores[clave];
+        const i=datoDe(clave, iso);
         if(!i) return null;
         const v=i.variacion_pct;
         return `Dato de ${i.anio}`+(v!==null&&v!==undefined?` · ${v>0?'+':''}${v} % contra ${i.anio_anterior}`:'');
@@ -838,9 +944,9 @@
   };
   function capas(){
     const c = Object.assign({}, ESTATICAS_CAPAS);
-    ((almacen.banco && almacen.banco.indicadores) || []).forEach(i=>{
+    fuentesInd().forEach(f=>(f.indicadores||[]).forEach(i=>{
       c[i.clave] = capaBanco(i.clave, cortesDe(i), esEscalaEstimacion(i));
-    });
+    }));
     return c;
   }
 
@@ -850,8 +956,7 @@
   // demás salen de los cuartiles de lo que hay hoy, para que la escala discrimine.
   function cortesDe(indicador){
     if(esEscalaEstimacion(indicador)) return [-1, -0.5, 0.25];
-    const vals = ((almacen.banco && almacen.banco.registros) || [])
-      .map(r=>r.indicadores[indicador.clave]).filter(Boolean).map(x=>x.valor).sort((a,b)=>a-b);
+    const vals = filasDe(indicador.clave).map(x=>x.valor).sort((a,b)=>a-b);
     if(!vals.length) return [1,2,3];
     const q = f => vals[Math.min(vals.length-1, Math.floor(vals.length*f))];
     const c = [q(.25), q(.5), q(.75)].map(v=>Math.round(v*100)/100);
@@ -1022,7 +1127,7 @@
   }
   function repintar(){
     if(capaPaises) capaPaises.setStyle(estiloPais);
-    puntos(); solapas(); leyenda();
+    puntos(); solapas(); leyenda(); panelCruce();
     pintarFichaMapa(paisFiltro, paisNombre,
       paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:'');
     const ex = document.getElementById('explica-capa');
@@ -1046,7 +1151,10 @@
     tarjetasBanco(['urbanizacion','asentamientos'],'urbano');
     tarjetasBanco('industria','industrial');
     tarjetasBanco(['minerales','rentas_naturales'],'materias');
-    tarjetasDesplazamiento(); desinformacion(); coberturaVista(); informe();
+    tarjetasBanco(['trata_victimas','trata_sexual','trata_trabajo'],'trata');
+    tarjetasBanco(['soborno_personas','soborno_empresas'],'soborno');
+    tarjetasBanco('empleo_informal','informalidad');
+    tarjetasDesplazamiento(); desinformacion(); coberturaVista(); pintarFuentes(); informe();
   }
   function seleccionar(iso, nombre){
     if(paisFiltro===iso){ paisFiltro=null; paisNombre=null; } else { paisFiltro=iso; paisNombre=nombre; }
@@ -1120,16 +1228,15 @@
   const TOPE = 6;
 
   function tarjetasBanco(claves, destino){
-    const d=almacen.banco; if(!d) return;
     claves = [].concat(claves);
-    const meta=d.procedencia;
-    const info = c => (d.indicadores||[]).find(x=>x.clave===c) || {};
+    const conjunto = conjuntoDe(claves[0]); if(!conjunto) return;
+    const meta = conjunto.procedencia;
+    const info = c => metaInd(c);
     const tag=document.getElementById('tag-'+destino), caja=document.getElementById('tarj-'+destino);
     if(!caja) return;
 
     if(paisFiltro){
-      const r=d.registros.find(x=>x.iso===paisFiltro);
-      const fichas=claves.map(c=>({i:r&&r.indicadores[c], meta:info(c)})).filter(x=>x.i);
+      const fichas=claves.map(c=>({i:datoDe(c, paisFiltro), meta:info(c)})).filter(x=>x.i);
       if(tag) tag.textContent = fichas.length
         ? `${paisNombre} · ${fichas.length} indicador${fichas.length===1?'':'es'}`
         : `sin dato en ${paisNombre}`;
@@ -1140,8 +1247,7 @@
     }
 
     const principal = info(claves[0]);
-    const filas=d.registros.filter(r=>r.indicadores[claves[0]])
-      .map(r=>({pais:r.pais, iso:r.iso, ...r.indicadores[claves[0]]}));
+    const filas = filasDe(claves[0]);
     const orden = principal.mas_es_peor ? (a,b)=>b.valor-a.valor : (a,b)=>a.valor-b.valor;
     const ordenadas = filas.slice().sort(orden);
     const todos = verTodos[destino];
@@ -1181,6 +1287,65 @@
           <div class="foot"><span class="src">${esc(meta.fuente.nombre)}</span>
             <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`).join('')
       : `<div class="card"><h4>Sin registro</h4><div class="sub">La fuente no consigna a ${esc(paisNombre)}.</div></div>`;
+  }
+
+  // ---- Cruce de dos temas ------------------------------------------------
+  // Dos indicadores en un mismo gráfico, cada país un punto. Se muestra la
+  // coincidencia, no se afirma causa: correlacionar es analizar, y eso sale por
+  // los productos de la Fundación, no por el registro.
+  let cruce = '';
+
+  function armarSelectorCruce(){
+    const sel=document.getElementById('cruce'); if(!sel) return;
+    const opciones = MATERIAS().filter(m=>m.disponible());
+    if(sel.options.length === opciones.length + 1) return;
+    sel.innerHTML = '<option value="">— sin cruce —</option>' +
+      opciones.map(m=>`<option value="${m.clave}">${esc(m.eje)} · ${esc(m.rotulo)}</option>`).join('');
+    sel.value = cruce;
+    sel.addEventListener('change', ()=>{ cruce = sel.value; repintar(); });
+  }
+
+  function dispersion(claveA, claveB){
+    const filasA = filasDe(claveA), filasB = filasDe(claveB);
+    if(!filasA.length || !filasB.length) return '';
+    const porIso = {};
+    filasA.forEach(f=>porIso[f.iso]={pais:f.pais, a:f.valor});
+    filasB.forEach(f=>{ if(porIso[f.iso]) porIso[f.iso].b=f.valor; });
+    const puntos = Object.entries(porIso).filter(([,v])=>v.b!==undefined)
+      .map(([iso,v])=>({iso, ...v}));
+    if(puntos.length < 4) return `<p class="sin-dato">Solo ${puntos.length} Estados tienen las dos cifras: muy pocos para cruzarlas.</p>`;
+    const mA=metaInd(claveA), mB=metaInd(claveB);
+    const xs=puntos.map(p=>p.a), ys=puntos.map(p=>p.b);
+    const x0=Math.min(...xs), x1=Math.max(...xs), y0=Math.min(...ys), y1=Math.max(...ys);
+    const A=620, H=300, m=54;
+    const px=v=>m+((v-x0)/((x1-x0)||1))*(A-m-18);
+    const py=v=>H-m-((v-y0)/((y1-y0)||1))*(H-m-18);
+    return `<figure class="grafico"><figcaption>${esc(mA.rotulo)} contra ${esc(mB.rotulo)} · ${puntos.length} Estados</figcaption>
+      <svg viewBox="0 0 ${A} ${H}" role="img">
+        <line x1="${m}" y1="${H-m}" x2="${A-18}" y2="${H-m}" class="ejeg"/>
+        <line x1="${m}" y1="18" x2="${m}" y2="${H-m}" class="ejeg"/>
+        ${puntos.map(p=>{
+          const sel = p.iso===paisFiltro;
+          return `<circle cx="${px(p.a).toFixed(1)}" cy="${py(p.b).toFixed(1)}" r="${sel?6:4}"
+                   class="${sel?'puntog destacada':'puntog'}" opacity="${sel?1:.65}"><title>${esc(p.pais)}: ${cifra(p.a)} / ${cifra(p.b)}</title></circle>` +
+                 (sel?`<text x="${(px(p.a)+9).toFixed(1)}" y="${(py(p.b)+4).toFixed(1)}" class="rotg">${esc(p.pais)}</text>`:'');
+        }).join('')}
+        <text x="${m}" y="${H-16}" class="rotg">${cifra(x0)}</text>
+        <text x="${A-18}" y="${H-16}" class="rotg" text-anchor="end">${cifra(x1)}</text>
+        <text x="6" y="24" class="rotg">${cifra(y1)}</text>
+        <text x="6" y="${H-m}" class="rotg">${cifra(y0)}</text>
+        <text x="${A/2}" y="${H-2}" class="rotg" text-anchor="middle">${esc(mA.rotulo)}</text>
+      </svg></figure>
+      <p class="sin-dato"><b>Eje horizontal:</b> ${esc(mA.rotulo)} · <b>vertical:</b> ${esc(mB.rotulo)}.
+         Se muestra la coincidencia entre dos cifras, no una relación de causa. Establecer que una explica a la otra
+         es análisis, y el registro no lo hace.</p>`;
+  }
+
+  function panelCruce(){
+    const caja=document.getElementById('panel-cruce'); if(!caja) return;
+    armarSelectorCruce();
+    if(!cruce || cruce===capaActiva){ caja.innerHTML=''; return; }
+    caja.innerHTML = dispersion(capaActiva, cruce);
   }
 
   // ---- Desinformacion e infoxicacion -------------------------------------
@@ -1528,11 +1693,22 @@
     .catch(err=>{ fallas++; pintarFalla('lista-oficiales','fuentes oficiales',err.message,null);
       document.getElementById('proc-oficiales').textContent='Sin registro disponible.'; marcador(); });
 
+  Promise.all([traer('onu-ods.json'), traer('estado/onu-ods.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.ods=d; dominios+=Object.keys(d.cobertura||{}).length;
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=d.procedencia.vacios_declarados.length;
+      ['trata','soborno','informalidad'].forEach(x=>enlaceLimites(x,'onu-ods'));
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-trata','ONU ODS',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('tarj-trata','ONU ODS',err.message,null); marcador(); });
+
   Promise.all([traer('banco-mundial.json'), traer('estado/banco-mundial.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.banco=d; dominios+=Object.keys(d.cobertura||{}).length;
       ['violencia','institucional','urbano','industrial','materias']
-        .forEach(x=>pintarProcedencia('proc-'+x, d.procedencia));
+        .forEach(x=>{ pintarProcedencia('proc-'+x, d.procedencia); enlaceLimites(x,'banco-mundial'); });
       registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
       vacios+=pintarVacios('vac-violencia',d.procedencia.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-violencia','banco mundial',estado.mensaje,d.procedencia); }

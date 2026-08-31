@@ -96,9 +96,19 @@ def escribir(
     if extra:
         contenido.update(extra)
 
-    destino.write_text(
-        json.dumps(contenido, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    # allow_nan=False es deliberado: NaN e Infinity NO son JSON valido y el
+    # navegador rechaza el archivo entero, no solo el valor. Si un colector
+    # produce uno, la corrida falla aca y se ve, en lugar de escribir un
+    # archivo que nadie puede leer.
+    try:
+        texto = json.dumps(contenido, ensure_ascii=False, indent=2, allow_nan=False)
+    except ValueError as error:
+        raise ValueError(
+            f"El colector «{colector}» produjo un valor no representable en JSON "
+            f"(NaN o infinito): {error}. Un dato ausente se omite, no se escribe."
+        ) from error
+
+    destino.write_text(texto + "\n", encoding="utf-8")
     return destino
 
 
