@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "cobertura",
     "capa": "publico",
-    "obtenido_en": "2026-08-31T16:45:15+00:00",
+    "obtenido_en": "2026-08-31T17:19:04+00:00",
     "fuente": {
       "nombre": "Padrón de medios de la Fundación Sherman Kent",
       "url": "colectores/medios.json"
@@ -19,27 +19,254 @@
       "El agrupamiento es por similitud de texto y falla en los dos sentidos: puede unir dos asuntos distintos que comparten palabras, y puede separar el mismo asunto contado con vocabulario diferente.",
       "El padrón tiene 91 medios verificados en 38 jurisdicciones. **-5 Estados del padrón no tienen medio propio en el registro**, y el Caribe angloparlante es el bloque peor cubierto.",
       "Idiomas presentes: en (33), es (47), fr (2), nl (1), pt (7), ru (1). Faltan el neerlandés de Surinam y el criollo haitiano, exigidos por doctrina/siwa.md §4.1.",
-      "Ventana de 48 horas. 161 notas llegaron sin fecha de publicación y se conservaron sin poder verificar su antigüedad.",
+      "Ventana de 48 horas. 162 notas llegaron sin fecha de publicación y se conservaron sin poder verificar su antigüedad.",
       "Un grupo de una sola nota no se publica: sin cruce no hay cobertura cruzada.",
       "La atribución de un asunto a un país es por DICCIONARIO de nombres y gentilicios, no por comprensión del texto. Un asunto que nombre al país con un giro que no figure en la lista queda sin atribuir; uno que lo nombre al pasar queda atribuido igual. La lista es editable por el equipo analítico.",
-      "70 de 70 asuntos no pudieron atribuirse a ningún Estado del padrón: en su mayoría son noticias internacionales sin mención regional.",
+      "60 de 60 asuntos no pudieron atribuirse a ningún Estado del padrón: en su mayoría son noticias internacionales sin mención regional.",
       "El índice de infoxicación mide la proporción de asuntos repetidos por tres o más portales que NINGÚN segundo origen independiente corrobora. Es amplificación sin verificación, no desinformación probada: no dice que el asunto sea falso, dice que se repite sin que nadie de otra jurisdicción o idioma lo confirme.",
-      "11 canales no respondieron en esta corrida: AlterPresse (HTI): ParseError; La Tercera (CHL): ParseError; Semana (COL): ParseError; La Nacion CR (CRI): ParseError; OnCuba (CUB): ParseError; Prensa Libre (GTM): ParseError; La Prensa PA (PAN): ParseError; Amandala (BLZ): TimeoutError; Intercept Brasil (BRA): ParseError; InfoAmazonia (BRA): ParseError; Americas Quarterly (INT): ParseError."
+      "14 canales no respondieron en esta corrida: AlterPresse (HTI): ParseError; TalCual (VEN): HTTPError; Real Instituto Elcano (ESP): HTTPError; Elcano · analisis (ESP): HTTPError; La Tercera (CHL): ParseError; Semana (COL): ParseError; La Nacion CR (CRI): ParseError; OnCuba (CUB): ParseError; Prensa Libre (GTM): ParseError; La Prensa PA (PAN): ParseError; Amandala (BLZ): TimeoutError; Intercept Brasil (BRA): ParseError; InfoAmazonia (BRA): ParseError; Americas Quarterly (INT): ParseError."
     ],
-    "cantidad": 70
+    "cantidad": 60
   },
   "registros": [
     {
-      "asunto": "Lionel Messi se retira de la selección de Argentina: ‘Hoy, después de lo de mi papá, estoy más convencido que antes’",
+      "asunto": "El Gran Cañón se prepara para más tormentas tras una inundación que dejó dos personas muertas y 15 desaparecidas",
       "paises": [],
       "bloques": [],
       "corroboracion": {
         "estado": "corroborado_fuerte",
         "nota": "Dos o más idiomas distintos.",
+        "origenes_independientes": 4,
+        "portales": 4,
+        "idiomas": [
+          "es",
+          "ru"
+        ],
+        "paises": [
+          "DEU",
+          "DOM",
+          "ESP",
+          "REG"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Inundación repentina en el Gran Cañón deja al menos un muerto y desaparecidos",
+          "enlace": "https://www.dw.com/es/inundación-repentina-en-el-gran-cañón-deja-al-menos-un-muerto-y-desaparecidos/a-78572378?maca=spa-rss-sp-all-1122-xml-mrss",
+          "medio": "Deutsche Welle",
+          "dominio": "dw.com",
+          "pais": "DEU",
+          "idioma": "es",
+          "publicada": "2026-08-31T10:16:00+00:00"
+        },
+        {
+          "titulo": "El Gran Cañón se prepara para más tormentas tras una inundación que dejó dos personas muertas y 15 desaparecidas",
+          "enlace": "https://elpais.com/us/2026-08-31/el-gran-canon-se-prepara-para-mas-tormentas-tras-una-inundacion-que-dejo-al-menos-una-persona-muerta-y-15-desaparecidas.html",
+          "medio": "El País — América",
+          "dominio": "elpais.com",
+          "pais": "ESP",
+          "idioma": "es",
+          "publicada": "2026-08-31T15:04:22+00:00"
+        },
+        {
+          "titulo": "Inundaciones repentinas en el Gran Cañón dejan unos 15 desaparecidos",
+          "enlace": "https://www.diariolibre.com/usa/actualidad/2026/08/30/inundaciones-repentinas-en-el-gran-canon-dejan-unos-15-desaparecidos/3644009",
+          "medio": "Diario Libre",
+          "dominio": "diariolibre.com",
+          "pais": "DOM",
+          "idioma": "es",
+          "publicada": null
+        },
+        {
+          "titulo": "VIDEO: Una repentina inundación sacude el Gran Cañón y deja un muerto, desaparecidos y daños severos",
+          "enlace": "https://actualidad.rt.com/actualidad/625149-repentina-inundacion-sacude-gran-canon?utm_source=rss&utm_medium=rss&utm_campaign=all",
+          "medio": "RT en espanol",
+          "dominio": "actualidad.rt.com",
+          "pais": "REG",
+          "idioma": "ru",
+          "publicada": "2026-08-31T15:59:47+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Dois casos de feminicídio são registrados em São Paulo em um dia; vítimas já tinham denunciado agressões",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado_fuerte",
+        "nota": "Dos o más idiomas distintos.",
+        "origenes_independientes": 2,
+        "portales": 2,
+        "idiomas": [
+          "en",
+          "pt"
+        ],
+        "paises": [
+          "BRA"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Dois casos de feminicídio são registrados em São Paulo em um dia; vítimas já tinham denunciado agressões",
+          "enlace": "https://g1.globo.com/sp/sao-paulo/noticia/2026/08/31/dois-casos-de-feminicidio-sao-registrados-em-sao-paulo-em-um-dia-vitimas-ja-tinham-denunciado-agressoes.ghtml",
+          "medio": "G1 Globo",
+          "dominio": "g1.globo.com",
+          "pais": "BRA",
+          "idioma": "pt",
+          "publicada": "2026-08-31T16:30:42+00:00"
+        },
+        {
+          "titulo": "São Paulo Nightlife Tonight — August 31, 2026",
+          "enlace": "https://www.riotimesonline.com/sao-paulo-nightlife-tonight-august-31-2026/",
+          "medio": "The Rio Times",
+          "dominio": "riotimesonline.com",
+          "pais": "BRA",
+          "idioma": "en",
+          "publicada": "2026-08-31T15:52:35+00:00"
+        },
+        {
+          "titulo": "Rio de Janeiro Nightlife Tonight — August 31, 2026",
+          "enlace": "https://www.riotimesonline.com/rio-de-janeiro-nightlife-tonight-august-31-2026/",
+          "medio": "The Rio Times",
+          "dominio": "riotimesonline.com",
+          "pais": "BRA",
+          "idioma": "en",
+          "publicada": "2026-08-31T15:50:03+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Ousmane Dembélé renovará contrato con el Paris Saint-Germain hasta 2030",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado_fuerte",
+        "nota": "Dos o más idiomas distintos.",
+        "origenes_independientes": 2,
+        "portales": 2,
+        "idiomas": [
+          "en",
+          "es"
+        ],
+        "paises": [
+          "ECU",
+          "QAT"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Liverpool sign Bradley Barcola from Paris Saint-Germain",
+          "enlace": "https://www.aljazeera.com/sports/2026/8/31/liverpool-sign-bradley-barcola-from-paris-saint-germain?traffic_source=rss",
+          "medio": "Al Jazeera",
+          "dominio": "aljazeera.com",
+          "pais": "QAT",
+          "idioma": "en",
+          "publicada": "2026-08-31T13:40:28+00:00"
+        },
+        {
+          "titulo": "Ousmane Dembélé renovará contrato con el Paris Saint-Germain hasta 2030",
+          "enlace": "https://eluniverso.com/deportes/futbol/ousmane-dembele-renovara-contrato-con-el-paris-saint-germain-hasta-2030-nota/",
+          "medio": "El Universo",
+          "dominio": "eluniverso.com",
+          "pais": "ECU",
+          "idioma": "es",
+          "publicada": "2026-08-31T14:45:39+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Ataque EE. UU. a Irán alcanzó objetivos iraníes en estrecho de Ormuz",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado_fuerte",
+        "nota": "Dos o más idiomas distintos.",
+        "origenes_independientes": 2,
+        "portales": 2,
+        "idiomas": [
+          "es",
+          "ru"
+        ],
+        "paises": [
+          "DOM",
+          "REG"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Ataque EE. UU. a Irán alcanzó objetivos iraníes en estrecho de Ormuz",
+          "enlace": "https://www.diariolibre.com/mundo/estados-unidos/2026/08/30/ataque-ee-uu-a-iran-alcanzo-objetivos-iranies-en-estrecho-de-ormuz/3644127",
+          "medio": "Diario Libre",
+          "dominio": "diariolibre.com",
+          "pais": "DOM",
+          "idioma": "es",
+          "publicada": null
+        },
+        {
+          "titulo": "Irán derriba un dron estadounidense MQ-9 en el estrecho de Ormuz",
+          "enlace": "https://actualidad.rt.com/actualidad/625174-iran-derribar-dron-estadounidense-mq9-ormuz?utm_source=rss&utm_medium=rss&utm_campaign=all",
+          "medio": "RT en espanol",
+          "dominio": "actualidad.rt.com",
+          "pais": "REG",
+          "idioma": "ru",
+          "publicada": "2026-08-31T17:16:31+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "El polémico asesor de la derecha que desata una crisis política en Perú (y no es Cerimedo)",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado_fuerte",
+        "nota": "Dos o más idiomas distintos.",
+        "origenes_independientes": 2,
+        "portales": 2,
+        "idiomas": [
+          "es",
+          "ru"
+        ],
+        "paises": [
+          "CHL",
+          "REG"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "El polémico asesor de la derecha que desata una crisis política en Perú (y no es Cerimedo)",
+          "enlace": "https://actualidad.rt.com/actualidad/625140-polemico-asesor-derecha-desatar-crisis-peru?utm_source=rss&utm_medium=rss&utm_campaign=all",
+          "medio": "RT en espanol",
+          "dominio": "actualidad.rt.com",
+          "pais": "REG",
+          "idioma": "ru",
+          "publicada": "2026-08-31T16:54:46+00:00"
+        },
+        {
+          "titulo": "Cerimedo y la sombra de la extrema derecha en Chile",
+          "enlace": "https://www.ciperchile.cl/2026/08/30/cerimedo-y-la-sombra-de-la-extrema-derecha-en-chile/?utm_source=rss&utm_medium=rss&utm_campaign=cerimedo-y-la-sombra-de-la-extrema-derecha-en-chile",
+          "medio": "CIPER",
+          "dominio": "ciperchile.cl",
+          "pais": "CHL",
+          "idioma": "es",
+          "publicada": "2026-08-30T08:00:14+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Lionel Messi se retira de la selección de Argentina: ‘Hoy, después de lo de mi papá, estoy más convencido que antes’",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado",
+        "nota": "Dos o más jurisdicciones, un solo idioma.",
         "origenes_independientes": 10,
         "portales": 10,
         "idiomas": [
-          "en",
           "es"
         ],
         "paises": [
@@ -50,8 +277,8 @@
           "ESP",
           "FRA",
           "GBR",
-          "QAT",
           "REG",
+          "URY",
           "VEN"
         ],
         "centros_de_estudio": []
@@ -103,22 +330,13 @@
           "publicada": "2026-08-31T15:18:55+00:00"
         },
         {
-          "titulo": "\"Duele en el alma\": Messi anuncia su retirada de la selección argentina",
+          "titulo": "\"Me vacié, ya no tengo más para dar\": Messi anuncia su retirada de la selección argentina",
           "enlace": "https://www.bbc.com/mundo/articles/cp8dkw2z2wyo?at_medium=RSS&at_campaign=rss",
           "medio": "BBC Mundo",
           "dominio": "bbc.com",
           "pais": "GBR",
           "idioma": "es",
           "publicada": "2026-08-31T16:13:10+00:00"
-        },
-        {
-          "titulo": "Argentina legend Lionel Messi retires from international football",
-          "enlace": "https://www.aljazeera.com/sports/2026/8/31/argentina-legend-lionel-messi-retires-from-international-football?traffic_source=rss",
-          "medio": "Al Jazeera",
-          "dominio": "aljazeera.com",
-          "pais": "QAT",
-          "idioma": "en",
-          "publicada": "2026-08-31T15:47:38+00:00"
         },
         {
           "titulo": "Messi anuncia su retiro de la Selección Argentina: “Me vacié, ya no tengo más para dar”",
@@ -139,6 +357,33 @@
           "publicada": null
         },
         {
+          "titulo": "Los récords de Lionel Messi con la selección de Argentina: estos son los números de su legado con la Albiceleste",
+          "enlace": "https://eluniverso.com/deportes/futbol/los-records-de-lionel-messi-con-la-seleccion-de-argentina-estos-son-los-numeros-de-su-legado-con-la-albiceleste-nota/",
+          "medio": "El Universo",
+          "dominio": "eluniverso.com",
+          "pais": "ECU",
+          "idioma": "es",
+          "publicada": "2026-08-31T17:07:35+00:00"
+        },
+        {
+          "titulo": "Así fue el debut de Messi en la selección argentina: expulsado en menos de un minuto",
+          "enlace": "https://eluniverso.com/deportes/futbol/asi-fue-el-debut-de-messi-en-la-seleccion-argentina-expulsado-en-menos-de-un-minuto-nota/",
+          "medio": "El Universo",
+          "dominio": "eluniverso.com",
+          "pais": "ECU",
+          "idioma": "es",
+          "publicada": "2026-08-31T16:51:10+00:00"
+        },
+        {
+          "titulo": "Lionel Messi se retira de Argentina: 21 años de historia, 207 partidos y un Mundial que cambió todo",
+          "enlace": "https://eluniverso.com/deportes/futbol/lionel-messi-se-retira-de-argentina-21-anos-de-historia-207-partidos-y-un-mundial-que-cambio-todo-nota/",
+          "medio": "El Universo",
+          "dominio": "eluniverso.com",
+          "pais": "ECU",
+          "idioma": "es",
+          "publicada": "2026-08-31T16:51:45+00:00"
+        },
+        {
           "titulo": "Lionel Messi se retira de la selección de Argentina: ‘Hoy, después de lo de mi papá, estoy más convencido que antes’",
           "enlace": "https://eluniverso.com/deportes/futbol/lionel-messi-se-retira-de-la-seleccion-de-argentina-nota/",
           "medio": "El Universo",
@@ -148,113 +393,22 @@
           "publicada": "2026-08-31T15:16:57+00:00"
         },
         {
-          "titulo": "\"Duele en el alma\": Messi anuncia su retirada de la selección argentina",
+          "titulo": "Lionel Messi confirmó su retiro de la selección de Argentina",
+          "enlace": "https://ladiaria.com.uy/deporte/articulo/2026/8/lionel-messi-confirmo-su-retiro-de-la-seleccion-de-argentina/",
+          "medio": "La Diaria",
+          "dominio": "ladiaria.com.uy",
+          "pais": "URY",
+          "idioma": "es",
+          "publicada": "2026-08-31T14:05:09-03:00"
+        },
+        {
+          "titulo": "\"Me vacié, ya no tengo más para dar\": Messi anuncia su retirada de la selección argentina",
           "enlace": "https://www.bbc.com/mundo/articles/cp8dkw2z2wyo?at_medium=RSS&at_campaign=rss",
           "medio": "BBC Mundo",
           "dominio": "bbc.com/mundo",
           "pais": "REG",
           "idioma": "es",
           "publicada": "2026-08-31T16:13:10+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "El Gran Cañón se prepara para más tormentas tras una inundación que dejó al menos una persona muerta y 15 desaparecidas",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "corroborado_fuerte",
-        "nota": "Dos o más idiomas distintos.",
-        "origenes_independientes": 4,
-        "portales": 4,
-        "idiomas": [
-          "es",
-          "ru"
-        ],
-        "paises": [
-          "DEU",
-          "DOM",
-          "ESP",
-          "REG"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Inundación repentina en el Gran Cañón deja al menos un muerto y desaparecidos",
-          "enlace": "https://www.dw.com/es/inundación-repentina-en-el-gran-cañón-deja-al-menos-un-muerto-y-desaparecidos/a-78572378?maca=spa-rss-sp-all-1122-xml-mrss",
-          "medio": "Deutsche Welle",
-          "dominio": "dw.com",
-          "pais": "DEU",
-          "idioma": "es",
-          "publicada": "2026-08-31T10:16:00+00:00"
-        },
-        {
-          "titulo": "El Gran Cañón se prepara para más tormentas tras una inundación que dejó al menos una persona muerta y 15 desaparecidas",
-          "enlace": "https://elpais.com/us/2026-08-31/el-gran-canon-se-prepara-para-mas-tormentas-tras-una-inundacion-que-dejo-al-menos-una-persona-muerta-y-15-desaparecidas.html",
-          "medio": "El País — América",
-          "dominio": "elpais.com",
-          "pais": "ESP",
-          "idioma": "es",
-          "publicada": "2026-08-31T15:04:22+00:00"
-        },
-        {
-          "titulo": "Inundaciones repentinas en el Gran Cañón dejan unos 15 desaparecidos",
-          "enlace": "https://www.diariolibre.com/usa/actualidad/2026/08/30/inundaciones-repentinas-en-el-gran-canon-dejan-unos-15-desaparecidos/3644009",
-          "medio": "Diario Libre",
-          "dominio": "diariolibre.com",
-          "pais": "DOM",
-          "idioma": "es",
-          "publicada": null
-        },
-        {
-          "titulo": "VIDEO: Una repentina inundación sacude el Gran Cañón y deja un muerto, desaparecidos y daños severos",
-          "enlace": "https://actualidad.rt.com/actualidad/625149-repentina-inundacion-sacude-gran-canon?utm_source=rss&utm_medium=rss&utm_campaign=all",
-          "medio": "RT en espanol",
-          "dominio": "actualidad.rt.com",
-          "pais": "REG",
-          "idioma": "ru",
-          "publicada": "2026-08-31T15:59:47+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Ousmane Dembélé renovará contrato con el Paris Saint-Germain hasta 2030",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "corroborado_fuerte",
-        "nota": "Dos o más idiomas distintos.",
-        "origenes_independientes": 2,
-        "portales": 2,
-        "idiomas": [
-          "en",
-          "es"
-        ],
-        "paises": [
-          "ECU",
-          "QAT"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Liverpool sign Bradley Barcola from Paris Saint-Germain",
-          "enlace": "https://www.aljazeera.com/sports/2026/8/31/liverpool-sign-bradley-barcola-from-paris-saint-germain?traffic_source=rss",
-          "medio": "Al Jazeera",
-          "dominio": "aljazeera.com",
-          "pais": "QAT",
-          "idioma": "en",
-          "publicada": "2026-08-31T13:40:28+00:00"
-        },
-        {
-          "titulo": "Ousmane Dembélé renovará contrato con el Paris Saint-Germain hasta 2030",
-          "enlace": "https://eluniverso.com/deportes/futbol/ousmane-dembele-renovara-contrato-con-el-paris-saint-germain-hasta-2030-nota/",
-          "medio": "El Universo",
-          "dominio": "eluniverso.com",
-          "pais": "ECU",
-          "idioma": "es",
-          "publicada": "2026-08-31T14:45:39+00:00"
         }
       ]
     },
@@ -323,6 +477,55 @@
           "pais": "REG",
           "idioma": "es",
           "publicada": "2026-08-30T21:23:03+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Argentina legend Lionel Messi retires from international football",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado",
+        "nota": "Dos o más jurisdicciones, un solo idioma.",
+        "origenes_independientes": 3,
+        "portales": 3,
+        "idiomas": [
+          "en"
+        ],
+        "paises": [
+          "BRB",
+          "JAM",
+          "QAT"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Messi retires from international football",
+          "enlace": "https://nationnews.com/2026/08/31/messi-retires-from-international-football/?utm_source=rss&utm_medium=rss&utm_campaign=messi-retires-from-international-football",
+          "medio": "The Nation",
+          "dominio": "nationnews.com",
+          "pais": "BRB",
+          "idioma": "en",
+          "publicada": "2026-08-31T15:56:18+00:00"
+        },
+        {
+          "titulo": "Lionel Messi says he’s retiring from international football",
+          "enlace": "https://www.jamaicaobserver.com/2026/08/31/lionel-messi-says-retiring-international-football/",
+          "medio": "Jamaica Observer",
+          "dominio": "jamaicaobserver.com",
+          "pais": "JAM",
+          "idioma": "en",
+          "publicada": "2026-08-31T15:43:27+00:00"
+        },
+        {
+          "titulo": "Argentina legend Lionel Messi retires from international football",
+          "enlace": "https://www.aljazeera.com/sports/2026/8/31/argentina-legend-lionel-messi-retires-from-international-football?traffic_source=rss",
+          "medio": "Al Jazeera",
+          "dominio": "aljazeera.com",
+          "pais": "QAT",
+          "idioma": "en",
+          "publicada": "2026-08-31T15:47:38+00:00"
         }
       ]
     },
@@ -411,7 +614,7 @@
           "dominio": "elpais.com",
           "pais": "ESP",
           "idioma": "es",
-          "publicada": "2026-08-31T14:19:30+00:00"
+          "publicada": "2026-08-31T16:56:55+00:00"
         },
         {
           "titulo": "Sánchez niega implicación de Marruecos en la crisis migratoria de Ceuta y apunta a Rusia e Israel",
@@ -581,45 +784,6 @@
       ]
     },
     {
-      "asunto": "Lionel Messi says he’s retiring from international football",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "corroborado",
-        "nota": "Dos o más jurisdicciones, un solo idioma.",
-        "origenes_independientes": 2,
-        "portales": 2,
-        "idiomas": [
-          "en"
-        ],
-        "paises": [
-          "BRB",
-          "JAM"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Messi retires from international football",
-          "enlace": "https://nationnews.com/2026/08/31/messi-retires-from-international-football/?utm_source=rss&utm_medium=rss&utm_campaign=messi-retires-from-international-football",
-          "medio": "The Nation",
-          "dominio": "nationnews.com",
-          "pais": "BRB",
-          "idioma": "en",
-          "publicada": "2026-08-31T15:56:18+00:00"
-        },
-        {
-          "titulo": "Lionel Messi says he’s retiring from international football",
-          "enlace": "https://www.jamaicaobserver.com/2026/08/31/lionel-messi-says-retiring-international-football/",
-          "medio": "Jamaica Observer",
-          "dominio": "jamaicaobserver.com",
-          "pais": "JAM",
-          "idioma": "en",
-          "publicada": "2026-08-31T15:43:27+00:00"
-        }
-      ]
-    },
-    {
       "asunto": "Kingsmen skipper hails ‘massive’ victory over Knight Riders",
       "paises": [],
       "bloques": [],
@@ -659,84 +823,6 @@
       ]
     },
     {
-      "asunto": "Trump publica un vídeo generado con IA en el que celebra la supuesta destrucción del gran centro exportador del petróleo de Irán",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "corroborado",
-        "nota": "Dos o más jurisdicciones, un solo idioma.",
-        "origenes_independientes": 2,
-        "portales": 2,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
-          "DEU",
-          "ESP"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Trump publica video IA con destrucción de isla iraní de Jarg",
-          "enlace": "https://www.dw.com/es/trump-publica-video-ia-con-destrucción-de-isla-iraní-de-jarg/a-78568214?maca=spa-rss-sp-all-1122-xml-mrss",
-          "medio": "Deutsche Welle",
-          "dominio": "dw.com",
-          "pais": "DEU",
-          "idioma": "es",
-          "publicada": "2026-08-31T04:29:00+00:00"
-        },
-        {
-          "titulo": "Trump publica un vídeo generado con IA en el que celebra la supuesta destrucción del gran centro exportador del petróleo de Irán",
-          "enlace": "https://elpais.com/internacional/2026-08-31/trump-publica-un-video-generado-con-ia-en-el-que-celebra-la-destruccion-del-gran-centro-exportador-del-petroleo-de-iran.html",
-          "medio": "El País — América",
-          "dominio": "elpais.com",
-          "pais": "ESP",
-          "idioma": "es",
-          "publicada": "2026-08-31T12:19:40+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Guerra en Irán: EE. UU. ataca la isla de Larak, cerca de Ormuz; Teherán emprende ofensiva a bases en Jordania",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "corroborado",
-        "nota": "Dos o más jurisdicciones, un solo idioma.",
-        "origenes_independientes": 2,
-        "portales": 2,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
-          "DEU",
-          "FRA"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Irán ataca bases EEUU en Jordania en represalia al bombardeo",
-          "enlace": "https://www.dw.com/es/irán-ataca-bases-eeuu-en-jordania-en-represalia-al-bombardeo/a-78567599?maca=spa-rss-sp-all-1122-xml-mrss",
-          "medio": "Deutsche Welle",
-          "dominio": "dw.com",
-          "pais": "DEU",
-          "idioma": "es",
-          "publicada": "2026-08-31T00:45:00+00:00"
-        },
-        {
-          "titulo": "Guerra en Irán: EE. UU. ataca la isla de Larak, cerca de Ormuz; Teherán emprende ofensiva a bases en Jordania",
-          "enlace": "https://www.france24.com/es/medio-oriente/20260830-guerra-en-ir%C3%A1n-ee-uu-lanza-ataques-contra-la-isla-de-larak-teher%C3%A1n-advierte-que-responder%C3%A1",
-          "medio": "France 24",
-          "dominio": "france24.com",
-          "pais": "FRA",
-          "idioma": "es",
-          "publicada": "2026-08-30T22:14:25+00:00"
-        }
-      ]
-    },
-    {
       "asunto": "Las 9 preguntas de Francisco Rodríguez para Delcy Rodríguez sobre el acuerdo petrolero",
       "paises": [],
       "bloques": [],
@@ -744,7 +830,7 @@
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
         "origenes_independientes": 2,
-        "portales": 4,
+        "portales": 3,
         "idiomas": [
           "es"
         ],
@@ -774,15 +860,6 @@
           "publicada": "2026-08-30T21:45:16+00:00"
         },
         {
-          "titulo": "Delcy Rodríguez: «Acuerdo petrolero con EEUU tendrá vigencia de 25 años»",
-          "enlace": "https://talcualdigital.com/delcy-rodriguez-acuerdo-petrolero-con-eeuu-tendra-vigencia-de-25-anos/",
-          "medio": "TalCual",
-          "dominio": "talcualdigital.com",
-          "pais": "VEN",
-          "idioma": "es",
-          "publicada": "2026-08-30T09:00:16+00:00"
-        },
-        {
           "titulo": "Las perlas de Delcy Rodríguez sobre el nuevo acuerdo petrolero con EE. UU.",
           "enlace": "https://runrun.es/noticias/618705/las-perlas-de-delcy-rodriguez-sobre-el-nuevo-acuerdo-petrolero-con-ee-uu/",
           "medio": "Runrunes",
@@ -790,45 +867,6 @@
           "pais": "VEN",
           "idioma": "es",
           "publicada": "2026-08-30T03:11:04+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "¿Cómo avanzan los primeros acuerdos del nuevo diálogo entre chavismo y oposición?",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "corroborado",
-        "nota": "Dos o más jurisdicciones, un solo idioma.",
-        "origenes_independientes": 2,
-        "portales": 2,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
-          "ESP",
-          "VEN"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Los diálogos con el chavismo fracturan a la oposición venezolana",
-          "enlace": "https://elpais.com/america/2026-08-31/los-dialogos-con-el-chavismo-fracturan-a-la-oposicion-venezolana.html",
-          "medio": "El País — América",
-          "dominio": "elpais.com",
-          "pais": "ESP",
-          "idioma": "es",
-          "publicada": "2026-08-31T04:00:00+00:00"
-        },
-        {
-          "titulo": "¿Cómo avanzan los primeros acuerdos del nuevo diálogo entre chavismo y oposición?",
-          "enlace": "https://talcualdigital.com/como-avanzan-los-primeros-acuerdos-del-nuevo-dialogo-entre-chavismo-y-oposicion/",
-          "medio": "TalCual",
-          "dominio": "talcualdigital.com",
-          "pais": "VEN",
-          "idioma": "es",
-          "publicada": "2026-08-31T13:00:53+00:00"
         }
       ]
     },
@@ -989,7 +1027,7 @@
       ]
     },
     {
-      "asunto": "La carrera contrarreloj para salvar a más de 900 obreros de hidroeléctricas que se cree están atrapados en túneles tras la avalancha en Nepal y el Tíbet",
+      "asunto": "La carrera contrarreloj para rescatar a más de 600 obreros de hidroeléctricas que se cree están atrapados en túneles tras la avalancha en Nepal y el Tíbet",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -1008,22 +1046,22 @@
       },
       "notas": [
         {
-          "titulo": "La carrera contrarreloj para salvar a más de 900 obreros de hidroeléctricas que se cree están atrapados en túneles tras la avalancha en Nepal y el Tíbet",
+          "titulo": "La carrera contrarreloj para rescatar a más de 600 obreros de hidroeléctricas que se cree están atrapados en túneles tras la avalancha en Nepal y el Tíbet",
           "enlace": "https://www.bbc.com/mundo/articles/c07lkdn73zyo?at_medium=RSS&at_campaign=rss",
           "medio": "BBC Mundo",
           "dominio": "bbc.com",
           "pais": "GBR",
           "idioma": "es",
-          "publicada": "2026-08-31T13:04:47+00:00"
+          "publicada": "2026-08-31T17:02:44+00:00"
         },
         {
-          "titulo": "La carrera contrarreloj para salvar a más de 900 obreros de hidroeléctricas que se cree están atrapados en túneles tras la avalancha en Nepal y el Tíbet",
+          "titulo": "La carrera contrarreloj para rescatar a más de 600 obreros de hidroeléctricas que se cree están atrapados en túneles tras la avalancha en Nepal y el Tíbet",
           "enlace": "https://www.bbc.com/mundo/articles/c07lkdn73zyo?at_medium=RSS&at_campaign=rss",
           "medio": "BBC Mundo",
           "dominio": "bbc.com/mundo",
           "pais": "REG",
           "idioma": "es",
-          "publicada": "2026-08-31T13:04:47+00:00"
+          "publicada": "2026-08-31T17:02:44+00:00"
         }
       ]
     },
@@ -1503,7 +1541,7 @@
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
         "origenes_independientes": 2,
-        "portales": 3,
+        "portales": 2,
         "idiomas": [
           "es"
         ],
@@ -1522,15 +1560,6 @@
           "pais": "VEN",
           "idioma": "es",
           "publicada": "2026-08-30T23:54:35+00:00"
-        },
-        {
-          "titulo": "González sobre ingresos petroleros: ¿Va a mejorar la vida de todos o solo de algunos?",
-          "enlace": "https://talcualdigital.com/gonzalez-sobre-ingresos-petroleros-va-a-mejorar-la-vida-de-todos-o-solo-de-algunos/",
-          "medio": "TalCual",
-          "dominio": "talcualdigital.com",
-          "pais": "VEN",
-          "idioma": "es",
-          "publicada": "2026-08-31T12:16:50+00:00"
         },
         {
           "titulo": "González Urrutia: la recuperación de Venezuela no puede medirse solo en barriles de petróleo",
@@ -1735,7 +1764,16 @@
           "dominio": "perfil.com",
           "pais": "ARG",
           "idioma": "es",
-          "publicada": "2026-08-31T15:34:00+00:00"
+          "publicada": "2026-08-31T16:44:00+00:00"
+        },
+        {
+          "titulo": "A cuánto cotiza el euro blue hoy, lunes 31 de agosto",
+          "enlace": "https://www.perfil.com/noticias/economia/a-cuanto-cotiza-el-euro-blue-hoy-lunes-31-de-agosto.phtml",
+          "medio": "Perfil",
+          "dominio": "perfil.com",
+          "pais": "ARG",
+          "idioma": "es",
+          "publicada": "2026-08-31T16:39:00+00:00"
         },
         {
           "titulo": "El dólar en Córdoba: a cuánto cotiza este lunes 31 de agosto",
@@ -1745,53 +1783,6 @@
           "pais": "ARG",
           "idioma": "es",
           "publicada": "2026-08-31T15:22:00+00:00"
-        },
-        {
-          "titulo": "A cuánto cotiza el euro blue hoy, lunes 31 de agosto",
-          "enlace": "https://www.perfil.com/noticias/economia/a-cuanto-cotiza-el-euro-blue-hoy-lunes-31-de-agosto.phtml",
-          "medio": "Perfil",
-          "dominio": "perfil.com",
-          "pais": "ARG",
-          "idioma": "es",
-          "publicada": "2026-08-31T15:03:00+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Persecución, marcha atrás y fuga: qué dijo la Municipalidad sobre el video viral de la “cacería de Uber” en Córdoba",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
-          "ARG"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "\"Cacería de Uber\" en Córdoba: qué puede y qué no puede hacer la Municipalidad según la ley",
-          "enlace": "https://www.perfil.com/noticias/cordoba/caceria-de-uber-en-cordoba-que-puede-y-que-no-pude-hacer-la-municipalidad-segun-la-ley.phtml",
-          "medio": "Perfil",
-          "dominio": "perfil.com",
-          "pais": "ARG",
-          "idioma": "es",
-          "publicada": "2026-08-31T14:31:19+00:00"
-        },
-        {
-          "titulo": "Persecución, marcha atrás y fuga: qué dijo la Municipalidad sobre el video viral de la “cacería de Uber” en Córdoba",
-          "enlace": "https://www.perfil.com/noticias/cordoba/se-filtro-un-video-de-la-caceria-de-uber-en-cordoba-la-explicacion-de-la-municipalidad.phtml",
-          "medio": "Perfil",
-          "dominio": "perfil.com",
-          "pais": "ARG",
-          "idioma": "es",
-          "publicada": "2026-08-31T13:33:36+00:00"
         }
       ]
     },
@@ -1834,45 +1825,7 @@
       ]
     },
     {
-      "asunto": "'Tomava morfina para a dor até que os médicos descobriram que eu tinha endometriose aos 13 anos'",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 2,
-        "idiomas": [
-          "pt"
-        ],
-        "paises": [
-          "BRA"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "'Tomava morfina para a dor até que os médicos descobriram que eu tinha endometriose aos 13 anos'",
-          "enlace": "https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/equilibrioesaude/2026/08/tomava-morfina-para-a-dor-ate-que-os-medicos-descobriram-que-eu-tinha-endometriose-aos-13-anos.shtml",
-          "medio": "Folha de S.Paulo",
-          "dominio": "folha.uol.com.br",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": null
-        },
-        {
-          "titulo": "'Tomava morfina para a dor até que os médicos descobriram que eu tinha endometriose aos 13 anos'",
-          "enlace": "https://g1.globo.com/saude/noticia/2026/08/31/tomava-morfina-para-a-dor-ate-que-os-medicos-descobriram-que-eu-tinha-endometriose-aos-13-anos.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-08-31T16:03:12+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Candidatos ao governo do Paraná cumprem agendas com entrevistas e presenças em eventos",
+      "asunto": "Eleições 2026: veja todos os candidatos ao governo do Rio Grande do Norte",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -1890,36 +1843,63 @@
       },
       "notas": [
         {
-          "titulo": "Candidatos ao governo do Paraná cumprem agendas com entrevistas e presenças em eventos",
-          "enlace": "https://g1.globo.com/pr/parana/eleicoes/2026/noticia/2026/08/31/agenda-cadidatos-gover-parana-31-agosto.ghtml",
+          "titulo": "Eleições 2026: veja todos os candidatos ao governo do Tocantins",
+          "enlace": "https://g1.globo.com/to/tocantins/eleicoes/2026/noticia/2026/08/31/eleicoes-2026-veja-todos-os-candidatos-ao-governo-do-tocantins.ghtml",
           "medio": "G1 Globo",
           "dominio": "g1.globo.com",
           "pais": "BRA",
           "idioma": "pt",
-          "publicada": "2026-08-31T16:30:01+00:00"
+          "publicada": "2026-08-31T17:00:00+00:00"
         },
         {
-          "titulo": "Jornal da EPTV 1 realiza série de entrevistas com candidatos ao Governo de São Paulo",
-          "enlace": "https://g1.globo.com/sp/campinas-regiao/eleicoes/2026/noticia/2026/08/31/eptv-realiza-entrevistas-com-candidatos-ao-governo-de-sao-paulo.ghtml",
+          "titulo": "Eleições 2026: veja todos os candidatos ao governo de Santa Catarina",
+          "enlace": "https://g1.globo.com/sc/santa-catarina/eleicoes/2026/noticia/2026/08/31/eleicoes-2026-veja-todos-os-candidatos-ao-governo-de-santa-catarina.ghtml",
           "medio": "G1 Globo",
           "dominio": "g1.globo.com",
           "pais": "BRA",
           "idioma": "pt",
-          "publicada": "2026-08-31T15:55:11+00:00"
+          "publicada": "2026-08-31T16:57:04+00:00"
         },
         {
-          "titulo": "Eleições 2026: veja todos os candidatos ao governo do Paraná",
-          "enlace": "https://g1.globo.com/pr/parana/eleicoes/2026/noticia/2026/08/31/eleicoes-2026-veja-todos-os-candidatos-ao-governo-do-parana.ghtml",
+          "titulo": "Eleições 2026: veja todos os candidatos ao governo do Rio Grande do Sul",
+          "enlace": "https://g1.globo.com/rs/rio-grande-do-sul/eleicoes/2026/noticia/2026/08/31/eleicoes-2026-veja-todos-os-candidatos-ao-governo-do-rio-grande-do-sul.ghtml",
           "medio": "G1 Globo",
           "dominio": "g1.globo.com",
           "pais": "BRA",
           "idioma": "pt",
-          "publicada": "2026-08-31T15:47:44+00:00"
+          "publicada": "2026-08-31T16:53:01+00:00"
+        },
+        {
+          "titulo": "Eleições 2026: veja todos os candidatos ao governo de Roraima",
+          "enlace": "https://g1.globo.com/rr/roraima/eleicoes/2026/noticia/2026/08/31/eleicoes-2026-veja-todos-os-candidatos-ao-governo-de-roraima.ghtml",
+          "medio": "G1 Globo",
+          "dominio": "g1.globo.com",
+          "pais": "BRA",
+          "idioma": "pt",
+          "publicada": "2026-08-31T16:47:23+00:00"
+        },
+        {
+          "titulo": "Eleições 2026: veja todos os candidatos ao governo de Rondônia",
+          "enlace": "https://g1.globo.com/ro/rondonia/eleicoes/2026/noticia/2026/08/31/eleicoes-2026-veja-todos-os-candidatos-ao-governo-de-rondonia.ghtml",
+          "medio": "G1 Globo",
+          "dominio": "g1.globo.com",
+          "pais": "BRA",
+          "idioma": "pt",
+          "publicada": "2026-08-31T16:36:21+00:00"
+        },
+        {
+          "titulo": "Eleições 2026: veja todos os candidatos ao governo do Rio Grande do Norte",
+          "enlace": "https://g1.globo.com/rn/rio-grande-do-norte/eleicoes/2026/noticia/2026/08/31/eleicoes-2026-veja-todos-os-candidatos-ao-governo-do-rio-grande-do-norte.ghtml",
+          "medio": "G1 Globo",
+          "dominio": "g1.globo.com",
+          "pais": "BRA",
+          "idioma": "pt",
+          "publicada": "2026-08-31T16:30:34+00:00"
         }
       ]
     },
     {
-      "asunto": "EPTV 1 Piracicaba ao vivo",
+      "asunto": "Assista aos telejornais da TV Liberal",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -1937,27 +1917,36 @@
       },
       "notas": [
         {
-          "titulo": "EPTV 1 Piracicaba ao vivo",
-          "enlace": "https://g1.globo.com/sp/piracicaba-regiao/ao-vivo/eptv-1-piracicaba-ao-vivo.ghtml",
+          "titulo": "Assista aos telejornais da TV Subaé",
+          "enlace": "https://g1.globo.com/ba/feira-de-santana-regiao/ao-vivo/assista-aos-telejornais-da-tv-subae.ghtml",
           "medio": "G1 Globo",
           "dominio": "g1.globo.com",
           "pais": "BRA",
           "idioma": "pt",
-          "publicada": "2026-08-31T16:27:58+00:00"
+          "publicada": "2026-08-31T16:36:56+00:00"
         },
         {
-          "titulo": "EPTV 1 Campinas ao vivo",
-          "enlace": "https://g1.globo.com/sp/campinas-regiao/ao-vivo/eptv-1-campinas-ao-vivo.ghtml",
+          "titulo": "Assista aos telejornais da TV Bahia",
+          "enlace": "https://g1.globo.com/ba/bahia/ao-vivo/assista-aos-telejornais-da-tv-bahia.ghtml",
           "medio": "G1 Globo",
           "dominio": "g1.globo.com",
           "pais": "BRA",
           "idioma": "pt",
-          "publicada": "2026-08-31T16:25:53+00:00"
+          "publicada": "2026-08-31T16:36:25+00:00"
+        },
+        {
+          "titulo": "Assista aos telejornais da TV Liberal",
+          "enlace": "https://g1.globo.com/pa/para/ao-vivo/assista-aos-telejornais-da-tv-liberal.ghtml",
+          "medio": "G1 Globo",
+          "dominio": "g1.globo.com",
+          "pais": "BRA",
+          "idioma": "pt",
+          "publicada": "2026-08-31T16:36:02+00:00"
         }
       ]
     },
     {
-      "asunto": "AO VIVO: Assista ao JAC1 com Quésia Melo",
+      "asunto": "Assista ao Gazeta Meio Dia - edição regional",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -1975,69 +1964,22 @@
       },
       "notas": [
         {
-          "titulo": "Assista ao Link Vanguarda ao vivo no g1",
-          "enlace": "https://g1.globo.com/sp/vale-do-paraiba-regiao/ao-vivo/assista-ao-link-vanguarda-ao-vivo-no-g1.ghtml",
+          "titulo": "Assista ao Gazeta Meio Dia - edição regional",
+          "enlace": "https://g1.globo.com/es/espirito-santo/ao-vivo/ao-vivo-assista-ao-gazeta-meio-dia-edicao-regional.ghtml",
           "medio": "G1 Globo",
           "dominio": "g1.globo.com",
           "pais": "BRA",
           "idioma": "pt",
-          "publicada": "2026-08-31T16:25:25+00:00"
+          "publicada": "2026-08-31T16:36:01+00:00"
         },
         {
-          "titulo": "AO VIVO: Assista ao JAC1 com Quésia Melo",
-          "enlace": "https://g1.globo.com/ac/acre/ao-vivo/ao-vivo-assista-ao-jac1-com-quesia-melo.ghtml",
+          "titulo": "Assista ao Gazeta Meio Dia",
+          "enlace": "https://g1.globo.com/es/espirito-santo/ao-vivo/ao-vivo-assista-gazeta-meio-dia.ghtml",
           "medio": "G1 Globo",
           "dominio": "g1.globo.com",
           "pais": "BRA",
           "idioma": "pt",
-          "publicada": "2026-08-31T16:23:54+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "VÍDEOS: DF1 de segunda-feira, 31 de agosto de 2026",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "pt"
-        ],
-        "paises": [
-          "BRA"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "VÍDEOS: DF1 de segunda-feira, 31 de agosto de 2026",
-          "enlace": "https://g1.globo.com/df/distrito-federal/videos-df1/playlist/videos-df1-de-segunda-feira-31-de-agosto-de-2026.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-08-31T16:14:47+00:00"
-        },
-        {
-          "titulo": "Assista ao JRO1 desta segunda-feira, 31",
-          "enlace": "https://g1.globo.com/ro/rondonia/ao-vivo/assista-ao-jro1-desta-segunda-feira-31.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-08-31T16:05:25+00:00"
-        },
-        {
-          "titulo": "VÍDEOS: NE1 de segunda-feira, 31 de agosto de 2026",
-          "enlace": "https://g1.globo.com/pe/pernambuco/videos-ne1/playlist/videos-ne1-de-segunda-feira-31-de-agosto-de-2026.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-08-31T15:54:16+00:00"
+          "publicada": "2026-08-31T16:35:12+00:00"
         }
       ]
     },
@@ -2194,44 +2136,6 @@
       ]
     },
     {
-      "asunto": "Slow movement on Spring Mount road repairs",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "en"
-        ],
-        "paises": [
-          "JAM"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Slow movement on Spring Mount road repairs",
-          "enlace": "https://www.jamaicaobserver.com/2026/08/31/slow-movement-spring-mount-road-repairs/",
-          "medio": "Jamaica Observer",
-          "dominio": "jamaicaobserver.com",
-          "pais": "JAM",
-          "idioma": "en",
-          "publicada": "2026-08-31T05:28:00+00:00"
-        },
-        {
-          "titulo": "Slow movement on Spring Mount road repairs",
-          "enlace": "https://www.jamaicaobserver.com/2026/08/31/slow-movement-spring-mount-road-repairs/",
-          "medio": "Jamaica Observer",
-          "dominio": "jamaicaobserver.com",
-          "pais": "JAM",
-          "idioma": "en",
-          "publicada": "2026-08-31T05:28:00+00:00"
-        }
-      ]
-    },
-    {
       "asunto": "Why has Greece signed a $3.5bn missile deal with Israel?",
       "paises": [],
       "bloques": [],
@@ -2266,82 +2170,6 @@
           "pais": "QAT",
           "idioma": "en",
           "publicada": "2026-08-31T13:52:40+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Pakistan, Saudi Arabia, Turkiye meet: What’s next for their defence pact?",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "en"
-        ],
-        "paises": [
-          "QAT"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Pakistan, Saudi Arabia, Turkiye meet: What’s next for their defence pact?",
-          "enlace": "https://www.aljazeera.com/news/2026/8/31/pakistan-saudi-arabia-turkiye-meet-whats-next-for-their-defence-pact?traffic_source=rss",
-          "medio": "Al Jazeera",
-          "dominio": "aljazeera.com",
-          "pais": "QAT",
-          "idioma": "en",
-          "publicada": "2026-08-31T12:57:49+00:00"
-        },
-        {
-          "titulo": "Turkiye, Saudi Arabia, Pakistan hold first Mecca defence pact meeting",
-          "enlace": "https://www.aljazeera.com/video/newsfeed/2026/8/31/turkiye-saudi-arabia-pakistan-hold-first-mecca-defence-pact-meeting?traffic_source=rss",
-          "medio": "Al Jazeera",
-          "dominio": "aljazeera.com",
-          "pais": "QAT",
-          "idioma": "en",
-          "publicada": "2026-08-31T11:49:03+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "OPSU amplía plazo a bachilleres para modificar opciones en el Sistema Nacional de Ingreso",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 2,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
-          "VEN"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "OPSU da nueva fecha límite para cambiar opciones en el Sistema Nacional de Ingreso 2026",
-          "enlace": "https://talcualdigital.com/opsu-da-nueva-fecha-limite-para-cambiar-opciones-en-el-sistema-nacional-de-ingreso-2026/",
-          "medio": "TalCual",
-          "dominio": "talcualdigital.com",
-          "pais": "VEN",
-          "idioma": "es",
-          "publicada": "2026-08-30T19:04:40+00:00"
-        },
-        {
-          "titulo": "OPSU amplía plazo a bachilleres para modificar opciones en el Sistema Nacional de Ingreso",
-          "enlace": "https://runrun.es/noticias/618716/opsu-amplia-plazo-a-bachilleres-para-modificar-opciones-en-el-sistema-nacional-de-ingreso/",
-          "medio": "Runrunes",
-          "dominio": "runrun.es",
-          "pais": "VEN",
-          "idioma": "es",
-          "publicada": "2026-08-30T15:53:29+00:00"
         }
       ]
     },
@@ -2418,44 +2246,6 @@
           "pais": "DOM",
           "idioma": "es",
           "publicada": null
-        }
-      ]
-    },
-    {
-      "asunto": "Guayaquil tendrá temperaturas superiores a los 32 °C y radiación UV muy alta este lunes, 31 de agosto",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
-          "ECU"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Guayaquil tendrá una marea de 4,56 metros este lunes, 31 de agosto",
-          "enlace": "https://eluniverso.com/guayaquil/comunidad/guayaquil-tendra-una-marea-de-456-metros-este-lunes-31-de-agosto-nota/",
-          "medio": "El Universo",
-          "dominio": "eluniverso.com",
-          "pais": "ECU",
-          "idioma": "es",
-          "publicada": "2026-08-31T12:31:37+00:00"
-        },
-        {
-          "titulo": "Guayaquil tendrá temperaturas superiores a los 32 °C y radiación UV muy alta este lunes, 31 de agosto",
-          "enlace": "https://eluniverso.com/guayaquil/comunidad/guayaquil-tendra-temperaturas-superiores-a-los-32-c-y-radiacion-uv-muy-alta-este-lunes-31-de-agosto-nota/",
-          "medio": "El Universo",
-          "dominio": "eluniverso.com",
-          "pais": "ECU",
-          "idioma": "es",
-          "publicada": "2026-08-31T12:19:27+00:00"
         }
       ]
     },
@@ -2650,82 +2440,6 @@
       ]
     },
     {
-      "asunto": "Cerimedo y la sombra de la extrema derecha en Chile",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
-          "CHL"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Granjas de bots y la extrema derecha",
-          "enlace": "https://www.ciperchile.cl/2026/08/30/granjas-de-bots-y-la-extrema-derecha/?utm_source=rss&utm_medium=rss&utm_campaign=granjas-de-bots-y-la-extrema-derecha",
-          "medio": "CIPER",
-          "dominio": "ciperchile.cl",
-          "pais": "CHL",
-          "idioma": "es",
-          "publicada": "2026-08-30T08:00:33+00:00"
-        },
-        {
-          "titulo": "Cerimedo y la sombra de la extrema derecha en Chile",
-          "enlace": "https://www.ciperchile.cl/2026/08/30/cerimedo-y-la-sombra-de-la-extrema-derecha-en-chile/?utm_source=rss&utm_medium=rss&utm_campaign=cerimedo-y-la-sombra-de-la-extrema-derecha-en-chile",
-          "medio": "CIPER",
-          "dominio": "ciperchile.cl",
-          "pais": "CHL",
-          "idioma": "es",
-          "publicada": "2026-08-30T08:00:14+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Rio de Janeiro Nightlife Tonight — August 31, 2026",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "en"
-        ],
-        "paises": [
-          "BRA"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "São Paulo Nightlife Tonight — August 31, 2026",
-          "enlace": "https://www.riotimesonline.com/sao-paulo-nightlife-tonight-august-31-2026/",
-          "medio": "The Rio Times",
-          "dominio": "riotimesonline.com",
-          "pais": "BRA",
-          "idioma": "en",
-          "publicada": "2026-08-31T15:52:35+00:00"
-        },
-        {
-          "titulo": "Rio de Janeiro Nightlife Tonight — August 31, 2026",
-          "enlace": "https://www.riotimesonline.com/rio-de-janeiro-nightlife-tonight-august-31-2026/",
-          "medio": "The Rio Times",
-          "dominio": "riotimesonline.com",
-          "pais": "BRA",
-          "idioma": "en",
-          "publicada": "2026-08-31T15:50:03+00:00"
-        }
-      ]
-    },
-    {
       "asunto": "Las Leonas win third World Cup after beating the Netherlands on penalties",
       "paises": [],
       "bloques": [],
@@ -2760,43 +2474,6 @@
           "pais": "ARG",
           "idioma": "en",
           "publicada": "2026-08-29T18:14:45+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Italia y España a propósito de Ceuta: los “movimientos secundarios” de migrantes irregulares ponen a prueba Schengen. ¿De la excepción a la reciprocidad?",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Solo lo trataron centros de estudio. Es análisis, no cobertura: no corrobora que el hecho haya ocurrido.",
-        "origenes_independientes": 0,
-        "portales": 2,
-        "idiomas": [],
-        "paises": [],
-        "centros_de_estudio": [
-          "Elcano · analisis",
-          "Real Instituto Elcano"
-        ]
-      },
-      "notas": [
-        {
-          "titulo": "Italia y España a propósito de Ceuta: los “movimientos secundarios” de migrantes irregulares ponen a prueba Schengen. ¿De la excepción a la reciprocidad?",
-          "enlace": "https://www.realinstitutoelcano.org/analisis/italia-y-espana-a-proposito-de-ceuta-los-movimientos-secundarios-de-migrantes-irregulares-ponen-a-prueba-schengen/",
-          "medio": "Real Instituto Elcano",
-          "dominio": "realinstitutoelcano.org",
-          "pais": "ESP",
-          "idioma": "es",
-          "publicada": "2026-08-31T08:00:00+00:00"
-        },
-        {
-          "titulo": "Italia y España a propósito de Ceuta: los “movimientos secundarios” de migrantes irregulares ponen a prueba Schengen. ¿De la excepción a la reciprocidad?",
-          "enlace": "https://www.realinstitutoelcano.org/analisis/italia-y-espana-a-proposito-de-ceuta-los-movimientos-secundarios-de-migrantes-irregulares-ponen-a-prueba-schengen/",
-          "medio": "Elcano · analisis",
-          "dominio": "blog.realinstitutoelcano.org",
-          "pais": "ESP",
-          "idioma": "es",
-          "publicada": "2026-08-31T08:00:00+00:00"
         }
       ]
     },
@@ -3038,14 +2715,14 @@
   ],
   "resumen": {
     "medios_consultados": 91,
-    "medios_que_respondieron": 80,
-    "notas_leidas": 1527,
-    "notas_en_ventana": 888,
-    "asuntos_con_cruce": 70,
-    "corroborado_fuerte": 3,
-    "corroborado": 34,
-    "origen_unico": 33,
-    "asuntos_sin_pais": 70,
+    "medios_que_respondieron": 77,
+    "notas_leidas": 1479,
+    "notas_en_ventana": 872,
+    "asuntos_con_cruce": 60,
+    "corroborado_fuerte": 5,
+    "corroborado": 32,
+    "origen_unico": 23,
+    "asuntos_sin_pais": 60,
     "indice_infoxicacion_pct": 0.0,
     "asuntos_amplificados_sin_corroborar": 0
   },
@@ -3053,24 +2730,24 @@
   "mapa_palabras": {
     "region": [
       {
-        "palabra": "trump",
-        "notas": 23,
-        "portales": 15
-      },
-      {
         "palabra": "nepal",
-        "notas": 22,
+        "notas": 23,
         "portales": 14
       },
       {
-        "palabra": "iran",
+        "palabra": "trump",
         "notas": 21,
-        "portales": 11
+        "portales": 13
       },
       {
         "palabra": "contra",
-        "notas": 20,
+        "notas": 21,
         "portales": 13
+      },
+      {
+        "palabra": "messi",
+        "notas": 20,
+        "portales": 16
       },
       {
         "palabra": "security",
@@ -3079,23 +2756,28 @@
       },
       {
         "palabra": "anos",
-        "notas": 17,
+        "notas": 19,
         "portales": 10
       },
       {
-        "palabra": "messi",
-        "notas": 16,
-        "portales": 15
+        "palabra": "iran",
+        "notas": 18,
+        "portales": 10
+      },
+      {
+        "palabra": "nueva",
+        "notas": 15,
+        "portales": 10
+      },
+      {
+        "palabra": "seleccion",
+        "notas": 15,
+        "portales": 10
       },
       {
         "palabra": "after",
-        "notas": 15,
-        "portales": 8
-      },
-      {
-        "palabra": "acuerdo",
-        "notas": 15,
-        "portales": 10
+        "notas": 14,
+        "portales": 9
       },
       {
         "palabra": "sector",
@@ -3103,29 +2785,9 @@
         "portales": 2
       },
       {
-        "palabra": "nueva",
+        "palabra": "acuerdo",
         "notas": 13,
-        "portales": 11
-      },
-      {
-        "palabra": "quien",
-        "notas": 13,
-        "portales": 7
-      },
-      {
-        "palabra": "agosto",
-        "notas": 12,
-        "portales": 5
-      },
-      {
-        "palabra": "seleccion",
-        "notas": 12,
         "portales": 9
-      },
-      {
-        "palabra": "video",
-        "notas": 12,
-        "portales": 7
       },
       {
         "palabra": "apos",
@@ -3133,24 +2795,39 @@
         "portales": 2
       },
       {
-        "palabra": "gobierno",
-        "notas": 11,
-        "portales": 7
+        "palabra": "todos",
+        "notas": 12,
+        "portales": 6
       },
       {
         "palabra": "millones",
-        "notas": 10,
-        "portales": 7
-      },
-      {
-        "palabra": "desaparecidos",
-        "notas": 10,
-        "portales": 7
-      },
-      {
-        "palabra": "petrolero",
-        "notas": 10,
+        "notas": 11,
         "portales": 6
+      },
+      {
+        "palabra": "quien",
+        "notas": 11,
+        "portales": 6
+      },
+      {
+        "palabra": "governo",
+        "notas": 11,
+        "portales": 2
+      },
+      {
+        "palabra": "mundial",
+        "notas": 10,
+        "portales": 7
+      },
+      {
+        "palabra": "lionel",
+        "notas": 10,
+        "portales": 7
+      },
+      {
+        "palabra": "candidatos",
+        "notas": 10,
+        "portales": 3
       },
       {
         "palabra": "post",
@@ -3158,9 +2835,14 @@
         "portales": 2
       },
       {
-        "palabra": "reform",
-        "notas": 10,
-        "portales": 2
+        "palabra": "agosto",
+        "notas": 9,
+        "portales": 5
+      },
+      {
+        "palabra": "gobierno",
+        "notas": 9,
+        "portales": 7
       },
       {
         "palabra": "ataque",
@@ -3173,9 +2855,24 @@
         "portales": 7
       },
       {
-        "palabra": "lunes",
+        "palabra": "crisis",
+        "notas": 9,
+        "portales": 7
+      },
+      {
+        "palabra": "petrolero",
+        "notas": 9,
+        "portales": 5
+      },
+      {
+        "palabra": "estan",
         "notas": 8,
-        "portales": 3
+        "portales": 5
+      },
+      {
+        "palabra": "empresas",
+        "notas": 8,
+        "portales": 6
       },
       {
         "palabra": "cuando",
@@ -3188,49 +2885,14 @@
         "portales": 7
       },
       {
-        "palabra": "mundial",
-        "notas": 8,
-        "portales": 7
-      },
-      {
-        "palabra": "nuevo",
-        "notas": 8,
-        "portales": 7
-      },
-      {
-        "palabra": "petroleo",
-        "notas": 8,
-        "portales": 7
-      },
-      {
-        "palabra": "sanchez",
-        "notas": 8,
-        "portales": 6
-      },
-      {
-        "palabra": "ceuta",
-        "notas": 8,
-        "portales": 6
-      },
-      {
-        "palabra": "crisis",
-        "notas": 8,
-        "portales": 6
-      },
-      {
         "palabra": "republic",
         "notas": 8,
         "portales": 2
       },
       {
-        "palabra": "mayor",
+        "palabra": "mientras",
         "notas": 8,
-        "portales": 7
-      },
-      {
-        "palabra": "estan",
-        "notas": 8,
-        "portales": 5
+        "portales": 6
       },
       {
         "palabra": "gender",
@@ -3238,19 +2900,34 @@
         "portales": 2
       },
       {
-        "palabra": "nacional",
+        "palabra": "petroleo",
         "notas": 7,
-        "portales": 5
-      },
-      {
-        "palabra": "lionel",
-        "notas": 7,
-        "portales": 6
+        "portales": 7
       },
       {
         "palabra": "estados",
         "notas": 7,
         "portales": 7
+      },
+      {
+        "palabra": "pais",
+        "notas": 7,
+        "portales": 7
+      },
+      {
+        "palabra": "mundo",
+        "notas": 7,
+        "portales": 6
+      },
+      {
+        "palabra": "estado",
+        "notas": 7,
+        "portales": 6
+      },
+      {
+        "palabra": "video",
+        "notas": 7,
+        "portales": 4
       }
     ],
     "bloques": {
@@ -3261,13 +2938,13 @@
           "portales": 6
         },
         {
-          "palabra": "trump",
-          "notas": 7,
-          "portales": 6
-        },
-        {
           "palabra": "petrolero",
           "notas": 7,
+          "portales": 5
+        },
+        {
+          "palabra": "trump",
+          "notas": 6,
           "portales": 5
         },
         {
@@ -3281,19 +2958,14 @@
           "portales": 2
         },
         {
-          "palabra": "historia",
+          "palabra": "polemico",
           "notas": 4,
           "portales": 4
         },
         {
-          "palabra": "anunciado",
+          "palabra": "nueva",
           "notas": 4,
-          "portales": 4
-        },
-        {
-          "palabra": "eeuu",
-          "notas": 4,
-          "portales": 2
+          "portales": 3
         },
         {
           "palabra": "farc",
@@ -3311,12 +2983,17 @@
           "portales": 2
         },
         {
+          "palabra": "anunciado",
+          "notas": 3,
+          "portales": 3
+        },
+        {
           "palabra": "consiste",
           "notas": 3,
           "portales": 3
         },
         {
-          "palabra": "polemico",
+          "palabra": "historia",
           "notas": 3,
           "portales": 3
         },
@@ -3329,21 +3006,6 @@
           "palabra": "fotos",
           "notas": 3,
           "portales": 3
-        },
-        {
-          "palabra": "desaparecidos",
-          "notas": 3,
-          "portales": 2
-        },
-        {
-          "palabra": "nueva",
-          "notas": 3,
-          "portales": 3
-        },
-        {
-          "palabra": "agosto",
-          "notas": 3,
-          "portales": 2
         },
         {
           "palabra": "security",
@@ -3371,12 +3033,12 @@
           "portales": 2
         },
         {
-          "palabra": "secuestro",
+          "palabra": "extranjera",
           "notas": 2,
           "portales": 2
         },
         {
-          "palabra": "extranjera",
+          "palabra": "secuestro",
           "notas": 2,
           "portales": 2
         },
@@ -3386,37 +3048,7 @@
           "portales": 2
         },
         {
-          "palabra": "alerta",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "crudo",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "casi",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "lluvias",
-          "notas": 2,
-          "portales": 2
-        },
-        {
           "palabra": "regalo",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "reservas",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "terremoto",
           "notas": 2,
           "portales": 2
         },
@@ -3454,6 +3086,11 @@
           "palabra": "deal",
           "notas": 2,
           "portales": 2
+        },
+        {
+          "palabra": "crisis",
+          "notas": 2,
+          "portales": 2
         }
       ],
       "Caribe hispano y Haití": [
@@ -3483,13 +3120,23 @@
       "Cono Sur": [
         {
           "palabra": "messi",
-          "notas": 12,
-          "portales": 11
+          "notas": 16,
+          "portales": 12
         },
         {
           "palabra": "seleccion",
-          "notas": 10,
-          "portales": 8
+          "notas": 13,
+          "portales": 9
+        },
+        {
+          "palabra": "lionel",
+          "notas": 7,
+          "portales": 4
+        },
+        {
+          "palabra": "retira",
+          "notas": 6,
+          "portales": 4
         },
         {
           "palabra": "anuncia",
@@ -3497,39 +3144,29 @@
           "portales": 5
         },
         {
-          "palabra": "retira",
+          "palabra": "vacie",
           "notas": 5,
+          "portales": 5
+        },
+        {
+          "palabra": "tengo",
+          "notas": 4,
           "portales": 4
         },
         {
-          "palabra": "lionel",
-          "notas": 4,
+          "palabra": "anos",
+          "notas": 3,
           "portales": 3
         },
         {
-          "palabra": "flavio",
+          "palabra": "retiro",
+          "notas": 3,
+          "portales": 3
+        },
+        {
+          "palabra": "mundial",
           "notas": 3,
           "portales": 2
-        },
-        {
-          "palabra": "bolsonaro",
-          "notas": 3,
-          "portales": 2
-        },
-        {
-          "palabra": "alma",
-          "notas": 3,
-          "portales": 3
-        },
-        {
-          "palabra": "duele",
-          "notas": 3,
-          "portales": 3
-        },
-        {
-          "palabra": "vacie",
-          "notas": 3,
-          "portales": 3
         },
         {
           "palabra": "semana",
@@ -3557,12 +3194,17 @@
           "portales": 2
         },
         {
-          "palabra": "anos",
+          "palabra": "todo",
           "notas": 2,
           "portales": 2
         },
         {
-          "palabra": "retiro",
+          "palabra": "flavio",
+          "notas": 2,
+          "portales": 2
+        },
+        {
+          "palabra": "bolsonaro",
           "notas": 2,
           "portales": 2
         },
@@ -3573,11 +3215,6 @@
         },
         {
           "palabra": "presunto",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "tengo",
           "notas": 2,
           "portales": 2
         },
@@ -3595,22 +3232,22 @@
           "palabra": "international",
           "notas": 2,
           "portales": 2
+        },
+        {
+          "palabra": "aragua",
+          "notas": 2,
+          "portales": 2
+        },
+        {
+          "palabra": "tren",
+          "notas": 2,
+          "portales": 2
         }
       ],
       "Guayanas": [],
       "México y Centroamérica": [
         {
           "palabra": "desaparecidos",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "zacatecas",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "fascinantes",
           "notas": 2,
           "portales": 2
         },
@@ -3625,17 +3262,22 @@
           "portales": 2
         },
         {
-          "palabra": "profundas",
-          "notas": 2,
-          "portales": 2
-        },
-        {
           "palabra": "picante",
           "notas": 2,
           "portales": 2
         },
         {
+          "palabra": "fascinantes",
+          "notas": 2,
+          "portales": 2
+        },
+        {
           "palabra": "conexiones",
+          "notas": 2,
+          "portales": 2
+        },
+        {
+          "palabra": "profundas",
           "notas": 2,
           "portales": 2
         },
@@ -3660,17 +3302,27 @@
       "ARG": {
         "pais": "Argentina",
         "bloque": "Cono Sur",
-        "notas": 30,
+        "notas": 32,
         "palabras": [
           {
             "palabra": "messi",
-            "notas": 12,
-            "portales": 11
+            "notas": 16,
+            "portales": 12
           },
           {
             "palabra": "seleccion",
-            "notas": 10,
-            "portales": 8
+            "notas": 13,
+            "portales": 9
+          },
+          {
+            "palabra": "lionel",
+            "notas": 7,
+            "portales": 4
+          },
+          {
+            "palabra": "retira",
+            "notas": 6,
+            "portales": 4
           },
           {
             "palabra": "anuncia",
@@ -3678,27 +3330,17 @@
             "portales": 5
           },
           {
-            "palabra": "retira",
+            "palabra": "vacie",
             "notas": 5,
+            "portales": 5
+          },
+          {
+            "palabra": "tengo",
+            "notas": 4,
             "portales": 4
           },
           {
-            "palabra": "lionel",
-            "notas": 4,
-            "portales": 3
-          },
-          {
-            "palabra": "alma",
-            "notas": 3,
-            "portales": 3
-          },
-          {
-            "palabra": "duele",
-            "notas": 3,
-            "portales": 3
-          },
-          {
-            "palabra": "vacie",
+            "palabra": "retiro",
             "notas": 3,
             "portales": 3
           },
@@ -3713,12 +3355,12 @@
             "portales": 2
           },
           {
-            "palabra": "retiro",
+            "palabra": "todo",
             "notas": 2,
             "portales": 2
           },
           {
-            "palabra": "tengo",
+            "palabra": "anos",
             "notas": 2,
             "portales": 2
           },
@@ -3743,7 +3385,7 @@
       "BLZ": {
         "pais": "Belice",
         "bloque": "México y Centroamérica",
-        "notas": 2,
+        "notas": 4,
         "palabras": []
       },
       "BOL": {
@@ -3755,16 +3397,16 @@
       "BRA": {
         "pais": "Brasil",
         "bloque": "Cono Sur",
-        "notas": 19,
+        "notas": 21,
         "palabras": [
           {
             "palabra": "flavio",
-            "notas": 3,
+            "notas": 2,
             "portales": 2
           },
           {
             "palabra": "bolsonaro",
-            "notas": 3,
+            "notas": 2,
             "portales": 2
           }
         ]
@@ -3778,13 +3420,13 @@
       "CHL": {
         "pais": "Chile",
         "bloque": "Cono Sur",
-        "notas": 3,
+        "notas": 4,
         "palabras": []
       },
       "COL": {
         "pais": "Colombia",
         "bloque": "Andina",
-        "notas": 18,
+        "notas": 16,
         "palabras": [
           {
             "palabra": "farc",
@@ -3807,12 +3449,12 @@
             "portales": 2
           },
           {
-            "palabra": "secuestro",
+            "palabra": "extranjera",
             "notas": 2,
             "portales": 2
           },
           {
-            "palabra": "extranjera",
+            "palabra": "secuestro",
             "notas": 2,
             "portales": 2
           },
@@ -3823,11 +3465,6 @@
           },
           {
             "palabra": "militar",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "desaparecidos",
             "notas": 2,
             "portales": 2
           },
@@ -3847,7 +3484,7 @@
       "CUB": {
         "pais": "Cuba",
         "bloque": "Caribe hispano y Haití",
-        "notas": 13,
+        "notas": 12,
         "palabras": []
       },
       "DMA": {
@@ -3859,13 +3496,13 @@
       "DOM": {
         "pais": "República Dominicana",
         "bloque": "Caribe hispano y Haití",
-        "notas": 4,
+        "notas": 3,
         "palabras": []
       },
       "ECU": {
         "pais": "Ecuador",
         "bloque": "Andina",
-        "notas": 14,
+        "notas": 13,
         "palabras": [
           {
             "palabra": "security",
@@ -3877,12 +3514,6 @@
       "GRD": {
         "pais": "Granada",
         "bloque": "Caribe oriental",
-        "notas": 1,
-        "palabras": []
-      },
-      "GTM": {
-        "pais": "Guatemala",
-        "bloque": "México y Centroamérica",
         "notas": 1,
         "palabras": []
       },
@@ -3907,26 +3538,16 @@
       "JAM": {
         "pais": "Jamaica",
         "bloque": "Caribe oriental",
-        "notas": 1,
+        "notas": 3,
         "palabras": []
       },
       "MEX": {
         "pais": "México",
         "bloque": "México y Centroamérica",
-        "notas": 13,
+        "notas": 11,
         "palabras": [
           {
             "palabra": "desaparecidos",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "zacatecas",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "fascinantes",
             "notas": 2,
             "portales": 2
           },
@@ -3941,17 +3562,22 @@
             "portales": 2
           },
           {
-            "palabra": "profundas",
-            "notas": 2,
-            "portales": 2
-          },
-          {
             "palabra": "picante",
             "notas": 2,
             "portales": 2
           },
           {
+            "palabra": "fascinantes",
+            "notas": 2,
+            "portales": 2
+          },
+          {
             "palabra": "conexiones",
+            "notas": 2,
+            "portales": 2
+          },
+          {
+            "palabra": "profundas",
             "notas": 2,
             "portales": 2
           },
@@ -3965,7 +3591,7 @@
       "NIC": {
         "pais": "Nicaragua",
         "bloque": "México y Centroamérica",
-        "notas": 4,
+        "notas": 3,
         "palabras": []
       },
       "PAN": {
@@ -4001,16 +3627,11 @@
       "VEN": {
         "pais": "Venezuela",
         "bloque": "Andina",
-        "notas": 28,
+        "notas": 21,
         "palabras": [
           {
             "palabra": "acuerdo",
             "notas": 8,
-            "portales": 6
-          },
-          {
-            "palabra": "trump",
-            "notas": 7,
             "portales": 6
           },
           {
@@ -4019,19 +3640,14 @@
             "portales": 5
           },
           {
-            "palabra": "historia",
-            "notas": 4,
-            "portales": 4
+            "palabra": "trump",
+            "notas": 6,
+            "portales": 5
           },
           {
             "palabra": "anunciado",
-            "notas": 4,
-            "portales": 4
-          },
-          {
-            "palabra": "eeuu",
-            "notas": 4,
-            "portales": 2
+            "notas": 3,
+            "portales": 3
           },
           {
             "palabra": "consiste",
@@ -4039,12 +3655,17 @@
             "portales": 3
           },
           {
-            "palabra": "polemico",
+            "palabra": "historia",
             "notas": 3,
             "portales": 3
           },
           {
             "palabra": "mayor",
+            "notas": 3,
+            "portales": 3
+          },
+          {
+            "palabra": "polemico",
             "notas": 3,
             "portales": 3
           },
@@ -4059,22 +3680,7 @@
             "portales": 3
           },
           {
-            "palabra": "crudo",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "lluvias",
-            "notas": 2,
-            "portales": 2
-          },
-          {
             "palabra": "regalo",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "reservas",
             "notas": 2,
             "portales": 2
           },
@@ -4103,66 +3709,6 @@
   "fronteras": {
     "zonas": [
       {
-        "clave": "frontera_col_ven",
-        "nombre": "Frontera Colombia-Venezuela",
-        "estados": [
-          "COL",
-          "VEN"
-        ],
-        "descripcion": "Cucuta, Tachira, Arauca y Apure.",
-        "notas": 2,
-        "por_toponimo": 1,
-        "portales": 1,
-        "jurisdicciones": [
-          "VEN"
-        ],
-        "idiomas": [
-          "es"
-        ],
-        "ambos_lados": false,
-        "ejemplos": [
-          {
-            "titulo": "Táchira | Colapso en Puente de Oro sepulta la movilidad entre Rubio y San Cristóbal",
-            "enlace": "https://talcualdigital.com/tachira-colapso-en-puente-de-oro-sepulta-la-movilidad-entre-rubio-y-san-cristobal/",
-            "medio": "TalCual",
-            "pais": "VEN"
-          },
-          {
-            "titulo": "Familiares claman por los miles de desaparecidos en la frontera de Colombia con Venezuela",
-            "enlace": "https://talcualdigital.com/familiares-claman-por-los-miles-de-desaparecidos-en-la-frontera-de-colombia-con-venezuela/",
-            "medio": "TalCual",
-            "pais": "VEN"
-          }
-        ]
-      },
-      {
-        "clave": "frontera_sur_mex",
-        "nombre": "Frontera Mexico-Guatemala",
-        "estados": [
-          "MEX",
-          "GTM"
-        ],
-        "descripcion": "Tapachula, Suchiate, Peten.",
-        "notas": 1,
-        "por_toponimo": 0,
-        "portales": 1,
-        "jurisdicciones": [
-          "ESP"
-        ],
-        "idiomas": [
-          "es"
-        ],
-        "ambos_lados": false,
-        "ejemplos": [
-          {
-            "titulo": "Lanchas, armas y cocaína: las mafias pisan el acelerador en la frontera de México con Guatemala",
-            "enlace": "https://elpais.com/mexico/2026-08-31/lanchas-armas-y-cocaina-las-mafias-pisan-el-acelerador-en-la-frontera-de-mexico-con-guatemala.html",
-            "medio": "El País — América",
-            "pais": "ESP"
-          }
-        ]
-      },
-      {
         "clave": "triple_frontera_sur",
         "nombre": "Triple Frontera del Parana",
         "estados": [
@@ -4171,6 +3717,22 @@
           "PRY"
         ],
         "descripcion": "Puerto Iguazu, Foz do Iguacu y Ciudad del Este.",
+        "notas": 0,
+        "portales": 0,
+        "jurisdicciones": [],
+        "idiomas": [],
+        "por_toponimo": 0,
+        "ambos_lados": false,
+        "ejemplos": []
+      },
+      {
+        "clave": "frontera_col_ven",
+        "nombre": "Frontera Colombia-Venezuela",
+        "estados": [
+          "COL",
+          "VEN"
+        ],
+        "descripcion": "Cucuta, Tachira, Arauca y Apure.",
         "notas": 0,
         "portales": 0,
         "jurisdicciones": [],
@@ -4202,6 +3764,22 @@
           "MEX"
         ],
         "descripcion": "Ciudad Juarez, Tijuana, Matamoros, Reynosa.",
+        "notas": 0,
+        "portales": 0,
+        "jurisdicciones": [],
+        "idiomas": [],
+        "por_toponimo": 0,
+        "ambos_lados": false,
+        "ejemplos": []
+      },
+      {
+        "clave": "frontera_sur_mex",
+        "nombre": "Frontera Mexico-Guatemala",
+        "estados": [
+          "MEX",
+          "GTM"
+        ],
+        "descripcion": "Tapachula, Suchiate, Peten.",
         "notas": 0,
         "portales": 0,
         "jurisdicciones": [],
@@ -4277,7 +3855,7 @@
         "ejemplos": []
       }
     ],
-    "con_mencion": 2,
+    "con_mencion": 0,
     "total": 9,
     "nota": "Zonas de frontera y focos transfronterizos. NO son indicadores: son lugares, y ninguna fuente publica estadistica comparable a esa escala. Se cuenta cuantas notas del corpus las nombran, de cuantos portales y de cuantas jurisdicciones. Que la nombren medios de los DOS LADOS de la frontera es el dato fuerte: una sola jurisdiccion puede estar contando su propia version."
   },
