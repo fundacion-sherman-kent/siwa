@@ -38,6 +38,11 @@ jobs:
         continue-on-error: true
         run: python colectores/redes.py
 
+      - name: Difusion en canales de mensajeria
+        id: telegram
+        continue-on-error: true
+        run: python colectores/telegram.py
+
       # --- Series anuales y catalogos, una vez por dia ---
       - name: Indicadores comparables (Banco Mundial)
         id: banco
@@ -99,4 +104,5 @@ jobs:
           [ "${{ steps.oficiales.outcome }}" = "failure" ] && { echo "Falló el padrón de fuentes oficiales."; fallo=1; }
           [ "${{ steps.redes.outcome }}" = "failure" ] && { echo "Falló el colector de circulación en redes."; fallo=1; }
           [ "${{ steps.owd.outcome }}" = "failure" ] && { echo "Falló el colector de democracia y conflicto."; fallo=1; }
+          [ "${{ steps.telegram.outcome }}" = "failure" ] && { echo "Falló el colector de canales de mensajería."; fallo=1; }
           exit $fallo

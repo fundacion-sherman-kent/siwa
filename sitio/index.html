@@ -488,6 +488,7 @@
     <a href="#desinformacion">Desinformación</a>
     <a href="#palabras">Mapa de palabras</a>
     <a href="#redes">Circulación en redes</a>
+    <a href="#mensajeria">Canales de mensajería</a>
     <div class="grupo">Desarrollo</div>
     <a href="#urbano">Urbano</a>
     <a href="#industrial">Industrial</a>
@@ -860,6 +861,30 @@
          calificación. Se descarga en planilla o se imprime en papel; no lleva juicios.</p>
     </div>
 
+    <section class="domain" id="mensajeria">
+      <div class="domain-head"><h3>Difusión en canales de mensajería</h3><span class="tag" id="tag-mensajeria">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Esto NO corrobora nada de la cobertura noticiosa, y no se mezcla con ella.</b>
+           El canal de mensajería de un diario que ya está en el padrón de prensa es
+           <b>el mismo medio por otra puerta</b>, no un segundo origen. Contarlo como
+           corroboración independiente inflaría la verificación cruzada, que es lo único
+           que separa un hecho de un rumor.</p>
+        <p><b>Lo que sí aporta</b> son los canales oficiales de gobierno y de organismos
+           internacionales —fuente primaria, sin intermediar— y los medios de Estados de
+           fuera de la región que cuentan América Latina a su público. <b>Quién narra la
+           región desde afuera es materia de estudio</b>, y por eso cada canal declara a
+           quién responde. Su presencia acá no implica que la Fundación avale lo que
+           publican.</p>
+      </div>
+      <div class="procedencia" id="proc-mensajeria">Cargando el registro…</div>
+      <h4 class="sub-seccion">Nube de conceptos</h4>
+      <p class="nota-filtro" id="nota-mensajeria">—</p>
+      <div class="nube" id="nube-mensajeria"></div>
+      <h4 class="sub-seccion">Canales del padrón</h4>
+      <div class="cruce" id="lista-mensajeria"></div>
+      <div id="vac-mensajeria"></div>
+    </section>
+
     <section class="domain" id="informe">
       <div class="domain-head"><h3>Informe del registro</h3><span class="tag">Público, sin cuenta</span></div>
       <div class="barra-informe">
@@ -994,7 +1019,8 @@
     const conjuntos=[['banco','Banco Mundial'],['ods','Naciones Unidas — ODS'],
                      ['desplazamiento','ACNUR'],['oficiales','Padrón oficial'],
                      ['owd','V-Dem, Terrorismo y UCDP'],
-                     ['cobertura','Cobertura noticiosa'],['redes','Circulación en redes']]
+                     ['cobertura','Cobertura noticiosa'],['redes','Circulación en redes'],
+                     ['telegram','Canales de mensajería']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -1486,7 +1512,8 @@
     tarjetasBanco(['democracia_electoral','democracia_liberal','democracia_participativa',
                    'corrupcion_politica'],'democracia');
     tarjetasBanco(['libertad_expresion','libertad_asociacion'],'libertades');
-    tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista(); redesVista();
+    tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista();
+    redesVista(); mensajeriaVista();
     pintarFuentes(); informe();
   }
   function seleccionar(iso, nombre){
@@ -2015,6 +2042,58 @@
     }).join('');
   }
 
+  function mensajeriaVista(){
+    const caja=document.getElementById('lista-mensajeria'); if(!caja) return;
+    const d=almacen.telegram; if(!d) return;
+    const r=d.resumen, nc=d.nube_conceptos;
+    const tag=document.getElementById('tag-mensajeria');
+    if(tag) tag.textContent = `${r.canales_del_padron} canales · ${r.jurisdicciones_con_canal} jurisdicciones · ventana de ${r.ventana_horas} h`;
+
+    // Nube, con el mismo ámbito que el resto del bloque de verificación.
+    const bloqueDelPais = paisFiltro && padron.length
+      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
+    let lista, donde, msgs;
+    if(ambitoCobertura==='pais' && paisFiltro){
+      const e=(d.estados||[]).find(x=>x.iso===paisFiltro);
+      lista = e ? e.palabras : []; donde = paisNombre; msgs = e ? e.mensajes : 0;
+    } else if(ambitoCobertura==='bloque' && bloqueDelPais){
+      lista = nc.bloques[bloqueDelPais] || []; donde = 'el bloque '+bloqueDelPais;
+      msgs = nc.mensajes_por_bloque[bloqueDelPais] || 0;
+    } else { lista = nc.region; donde = 'toda la región'; msgs = nc.mensajes_region; }
+
+    const nube=document.getElementById('nube-mensajeria');
+    const nota=document.getElementById('nota-mensajeria');
+    if(nota) nota.textContent =
+      `${lista.length} concepto${lista.length===1?'':'s'} sobre ${miles(msgs)} ${msgs===1?'mensaje':'mensajes'} en ${donde}. Un concepto figura solo si aparece en dos canales distintos: lo que dice un solo canal es su línea editorial, no circulación.`;
+    if(nube) nube.innerHTML = lista.length
+      ? lista.map(t=>{
+          const q=t.mensajes/lista[0].mensajes;
+          return `<span class="term ${q>=.6?'alta':q>=.3?'media':''}" style="font-size:${(12+q*8).toFixed(1)}px"
+            title="${t.mensajes} mensajes en ${t.canales} canales distintos"><b>${esc(t.palabra)}</b>
+            <span class="n">${t.mensajes}</span></span>`;
+        }).join('')
+      : `<div class="vacio"><b>Ningún concepto de ${esc(donde)} llega a dos canales distintos.</b><br>
+         El padrón cubre ${r.jurisdicciones_con_canal} jurisdicciones de ${r.estados_del_padron}: la mayoría de los
+         Estados no tiene medios ni organismos con canal público verificable. <b>No es que no se hable de
+         ellos: es que no hay canal propio que leer.</b></div>`;
+
+    const orden = d.registros.slice().sort((a,b)=>b.mensajes-a.mensajes);
+    caja.innerHTML = orden.map(c=>{
+      const dormido = c.mensajes_visibles && !c.mensajes;
+      const fecha = c.ultimo_mensaje ? c.ultimo_mensaje.slice(0,10) : null;
+      return `<div class="asunto"><h4>${esc(c.nombre)} <span class="jur">@${esc(c.canal)}</span></h4>
+        <div class="foot"><span class="porque">
+          <b>${c.mensajes}</b> mensaje${c.mensajes===1?'':'s'} en la ventana${
+            fecha?` · último ${fecha}`:' · sin mensajes con texto'}${
+            c.responde_a?` · <b>${esc(c.responde_a)}</b>`:''}${
+            c.tambien_en_prensa?' · <b>ya está en el padrón de prensa: no corrobora</b>':''}
+          · identidad por ${esc(c.identidad)}</span>
+          <span class="badge ${c.mensajes?'medio':'unica'}">${dormido?'sin publicar':(c.mensajes?'activo':'sin texto')}</span></div>
+        ${c.estados_mencionados.length?`<div class="lugares">${c.estados_mencionados.slice(0,6).map(x=>`<span class="lugar">${esc(x.pais)} ${x.menciones}</span>`).join('')}</div>`:''}
+      </div>`;
+    }).join('');
+  }
+
   // ---- Graficos, en SVG y sin bibliotecas ---------------------------------
   function grafico(serie, rotulo){
     if(!serie || serie.length < 2) return '';
@@ -2234,7 +2313,8 @@
     b.addEventListener('click',()=>{ if(!b.disabled){ modo=b.dataset.modo; repintar(); } }));
 
   document.querySelectorAll('.filtro').forEach(b=>
-    b.addEventListener('click',()=>{ if(!b.disabled){ ambitoCobertura=b.dataset.ambito; coberturaVista(); palabrasVista(); redesVista(); } }));
+    b.addEventListener('click',()=>{ if(!b.disabled){ ambitoCobertura=b.dataset.ambito;
+      coberturaVista(); palabrasVista(); redesVista(); mensajeriaVista(); } }));
 
   document.getElementById('btn-csv').addEventListener('click', csv);
   document.getElementById('btn-imprimir').addEventListener('click', ()=>window.print());
@@ -2286,6 +2366,18 @@
     })
     .catch(err=>{ fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
       document.getElementById('proc-cobertura').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('telegram.json'), traer('estado/telegram.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.telegram=d; const meta=d.procedencia;
+      pintarProcedencia('proc-mensajeria',meta);
+      registros+=d.resumen.mensajes_en_ventana;
+      vacios+=pintarVacios('vac-mensajeria',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-mensajeria','mensajería',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('lista-mensajeria','mensajería',err.message,null);
+      document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('owd.json'), traer('estado/owd.json').catch(()=>null)])
     .then(([d,estado])=>{
