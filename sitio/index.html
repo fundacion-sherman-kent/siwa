@@ -153,6 +153,7 @@
   .leaflet-tooltip.ficha{
     background:#0E2135;border:1px solid var(--line);color:var(--paper);
     box-shadow:0 6px 24px rgba(0,0,0,.5);border-radius:8px;padding:10px 12px;font-size:11.5px;line-height:1.55;
+    max-width:280px;white-space:normal;                 /* antes se salía del mapa */
   }
   .leaflet-tooltip.ficha::before{display:none;}
   .leaflet-tooltip.ficha b{color:#fff;font-size:12.5px;display:block;margin-bottom:4px;}
@@ -200,6 +201,11 @@
   .ficha-pais .muestra{font-size:10.5px;color:#7d90a8;margin-top:10px;line-height:1.55;}
   .ficha-pais .muestra b{color:#9fb2c8;font-weight:600;}
   .explica-capa .no-es{display:block;margin-top:5px;color:#ffb27a;}
+  .modos{display:flex;gap:0;margin:10px 0 4px;border:1px solid var(--line);border-radius:20px;overflow:hidden;width:max-content;}
+  .modo{background:transparent;border:none;color:#9fb2c8;font-family:'Inter',sans-serif;
+    font-size:11px;font-weight:700;padding:7px 16px;cursor:pointer;letter-spacing:.3px;}
+  .modo.activo{background:var(--purple);color:#fff;}
+  .modo:disabled{opacity:.4;cursor:not-allowed;}
   .pendientes{margin:0 0 10px;font-size:11px;color:#7d90a8;line-height:1.6;}
   .pendientes b{color:#9fb2c8;font-weight:600;}
   .tema .sin{font-size:9px;text-transform:uppercase;letter-spacing:.4px;color:#7d90a8;}
@@ -359,6 +365,10 @@
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <div class="mapa-barra">
         <div class="temas" id="temas"></div>
+        <div class="modos">
+          <button class="modo activo" data-modo="nivel">Nivel actual</button>
+          <button class="modo" data-modo="tendencia">Tendencia 10 años</button>
+        </div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
       <p class="pendientes" id="pendientes"></p>
@@ -386,6 +396,7 @@
       <div class="domain-head"><h3>Violencia organizada — homicidios</h3><span class="tag" id="tag-violencia">—</span></div>
       <div class="procedencia" id="proc-violencia">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-violencia"></div>
+      <div id="serie-violencia"></div>
       <div id="vac-violencia"></div>
     </section>
 
@@ -440,6 +451,7 @@
       <div class="domain-head"><h3>Desplazamiento forzado</h3><span class="tag" id="tag-desplazamiento">—</span></div>
       <div class="procedencia" id="proc-desplazamiento">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-desplazamiento"></div>
+      <div id="serie-desplazamiento"></div>
       <div id="vac-desplazamiento"></div>
     </section>
 
@@ -584,7 +596,7 @@
 (function(){
   const RUTA = '../datos/publico/';
   const almacen = {};
-  let capaActiva = 'homicidios', paisFiltro = null, paisNombre = null, padron = [];
+  let capaActiva = 'homicidios', modo = 'nivel', paisFiltro = null, paisNombre = null, padron = [];
   let registros = 0, vacios = 0, fallas = 0, dominios = 0;
 
   const miles = n => Number(n).toLocaleString('es-AR');
@@ -645,7 +657,6 @@
     {clave:'estabilidad',   eje:'Gobernanza',  rotulo:'Estabilidad política',      disponible:()=>!!almacen.banco},
     {clave:'contratacion',  eje:'Gobernanza',  rotulo:'Contratación pública',      disponible:()=>false},
     {clave:'desplazamiento',eje:'Inteligencia',rotulo:'Desplazamiento forzado',    disponible:()=>!!almacen.desplazamiento},
-    {clave:'tendencia',     eje:'Inteligencia',rotulo:'Tendencia del desplazamiento', disponible:()=>!!almacen.serie},
     {clave:'contrabando',   eje:'Inteligencia',rotulo:'Contrabando',               disponible:()=>false},
     {clave:'oficiales',     eje:'Fuentes',     rotulo:'Padrón oficial',            disponible:()=>!!almacen.oficiales},
   ];
@@ -666,6 +677,20 @@
         const m={};
         (almacen.banco?.registros||[]).forEach(r=>{ const i=r.indicadores[clave]; if(i) m[r.iso]=i.valor; });
         return m;
+      },
+      tendencia(){
+        const m={};
+        (almacen.banco?.registros||[]).forEach(r=>{
+          const i=r.indicadores[clave];
+          if(i && i.tendencia_ventana_pct!==null && i.tendencia_ventana_pct!==undefined) m[r.iso]=i.tendencia_ventana_pct;
+        });
+        return m;
+      },
+      get subeEsPeor(){ return !!meta().mas_es_peor; },
+      periodo(){
+        const r=(almacen.banco?.registros||[]).find(x=>x.indicadores[clave]);
+        const i=r&&r.indicadores[clave];
+        return i ? `${i.anio_inicial}–${i.anio}` : '';
       },
       puntos(){ return []; },
       color(v){
@@ -691,6 +716,18 @@
     desplazamiento: {
       materia:'desplazamiento', unidad:'personas expulsadas', leyenda:[1000,50000,300000],
       color(v){ return v===undefined?MAG[0] : v<1000?MAG[0] : v<50000?MAG[1] : v<300000?MAG[2] : MAG[3]; },
+      subeEsPeor: true,
+      tendencia(){
+        const m={};
+        (almacen.desplazamiento?.registros||[]).forEach(r=>{
+          if(r.tendencia_ventana_pct!==null && r.tendencia_ventana_pct!==undefined) m[r.iso]=r.tendencia_ventana_pct;
+        });
+        return m;
+      },
+      periodo(){
+        const r=(almacen.desplazamiento?.registros||[])[0];
+        return r ? `${r.anio_inicial}–${r.anio}` : '';
+      },
       conteo(){ const m={}; (almacen.desplazamiento?.registros||[]).forEach(r=>m[r.iso]=r.expulsion); return m; },
       puntos(){ return []; },
       detalle(iso){
@@ -699,31 +736,6 @@
       },
       cautela:'Cifra anual de cierre, no dato en vivo. Sin desglose subnacional.',
       rotuloPunto:'Sin capa de puntos: la fuente no publica coordenada'
-    },
-    tendencia: {
-      materia:'tendencia', unidad:'variación anual', divergente:true, leyenda:[-15,0,15],
-      color(v){ return v===undefined?MAG[0] : v<=-15?DIV[3] : v<0?DIV[2] : v<15?DIV[1] : DIV[0]; },
-      // Variación del último año contra el anterior, calculada de la serie propia.
-      // Es aritmética sobre un dato publicado, no una proyección.
-      conteo(){
-        const m={};
-        (almacen.serie?.registros||[]).forEach(p=>{
-          const s=p.serie; if(!s || s.length<2) return;
-          const u=s[s.length-1], a=s[s.length-2];
-          const vu=u.origen_refugiados+u.origen_solicitantes, va=a.origen_refugiados+a.origen_solicitantes;
-          if(va>0) m[p.iso]=((vu-va)/va)*100;
-        });
-        return m;
-      },
-      puntos(){ return []; },
-      detalle(iso){
-        const p=(almacen.serie?.registros||[]).find(x=>x.iso===iso);
-        if(!p||p.serie.length<2) return null;
-        const s=p.serie, u=s[s.length-1], a=s[s.length-2];
-        return `${a.anio}: ${miles(a.origen_refugiados+a.origen_solicitantes)} → ${u.anio}: ${miles(u.origen_refugiados+u.origen_solicitantes)}`;
-      },
-      cautela:'Variación entre los dos últimos años publicados. Es aritmética sobre el dato, no una proyección ni un pronóstico.',
-      rotuloPunto:'Sin capa de puntos: es una variación, no un hecho ubicable'
     },
     oficiales: {
       materia:'oficiales', unidad:'conjuntos oficiales', leyenda:[1,100,1000],
@@ -740,33 +752,72 @@
   };
   const claveDeCapa = m => Object.keys(CAPAS).find(k => CAPAS[k].materia === m);
 
+  const hayTendencia = () => typeof CAPAS[capaActiva].tendencia === 'function';
+  const valores = () => (modo==='tendencia' && hayTendencia())
+    ? CAPAS[capaActiva].tendencia() : CAPAS[capaActiva].conteo();
+
+  // En modo tendencia la escala es divergente y depende de si subir es bueno o malo.
+  function colorTendencia(v, subeEsPeor){
+    if(v===undefined||v===null) return MAG[0];
+    const fuerte = Math.abs(v)>=25;
+    const malo = subeEsPeor ? v>0 : v<0;
+    if(Math.abs(v)<5) return 'rgba(255,255,255,.10)';
+    return malo ? (fuerte?DIV[0]:DIV[1]) : (fuerte?DIV[3]:DIV[2]);
+  }
+
   function posicion(iso){
-    const orden = Object.entries(CAPAS[capaActiva].conteo()).sort((a,b)=>b[1]-a[1]);
+    const orden = Object.entries(valores()).sort((a,b)=>b[1]-a[1]);
     const i = orden.findIndex(([k])=>k===iso);
     return i<0 ? null : {puesto:i+1, de:orden.length, valor:orden[i][1]};
   }
 
   function estiloPais(rasgo){
-    const capa=CAPAS[capaActiva], iso=rasgo.properties.iso;
-    const sel = paisFiltro === iso;
+    const capa=CAPAS[capaActiva], iso=rasgo.properties.iso, sel = paisFiltro === iso;
+    const v = valores()[iso];
+    const relleno = (modo==='tendencia' && hayTendencia())
+      ? colorTendencia(v, capa.subeEsPeor) : capa.color(v);
     return {color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
-            fillColor: capa.color(capa.conteo()[iso]), fillOpacity:.9};
+            fillColor: relleno, fillOpacity:.9};
   }
 
   const cifra = v => Math.abs(v)<1000 ? (Math.round(v*100)/100).toLocaleString('es-AR') : miles(Math.round(v));
 
+  const recorte = (t,n=110) => t && t.length>n ? esc(t.slice(0,n).trim())+'…' : esc(t||'');
+
   function ficha(iso, nombre, bloque){
-    const capa=CAPAS[capaActiva], v=capa.conteo()[iso];
-    if(v===undefined||v===null)
+    const capa=CAPAS[capaActiva], nivel=capa.conteo()[iso];
+    const tend = hayTendencia() ? capa.tendencia()[iso] : undefined;
+    if(nivel===undefined && tend===undefined)
       return `<b>${esc(nombre)}</b>${esc(bloque)}<span class="nota">Sin dato en esta capa.</span>`;
-    const p=posicion(iso), det=capa.detalle(iso);
-    return `<b>${esc(nombre)}</b>${esc(bloque)}<br><span class="cifra">${cifra(v)}</span> ${esc(capa.unidad)}`+
-           (p?`<br>${p.puesto}.º de ${p.de} en la región`:'')+(det?`<br>${det}`:'')+
-           `<span class="nota">${esc(capa.cautela)}</span>`;
+    const p=posicion(iso);
+    const enTendencia = modo==='tendencia' && hayTendencia();
+    const principal = enTendencia
+      ? (tend===undefined ? '—' : `${tend>0?'+':''}${cifra(tend)} %`)
+      : (nivel===undefined ? '—' : cifra(nivel));
+    const unidad = enTendencia ? `en ${capa.periodo?capa.periodo():'la ventana'}` : esc(capa.unidad);
+    const secundaria = enTendencia
+      ? (nivel!==undefined ? `Hoy: ${cifra(nivel)} ${esc(capa.unidad)}` : '')
+      : (tend!==undefined ? `Tendencia ${capa.periodo?capa.periodo():''}: ${tend>0?'+':''}${cifra(tend)} %` : '');
+    return `<b>${esc(nombre)}</b>${esc(bloque)}<br><span class="cifra">${principal}</span> ${unidad}`+
+           (secundaria?`<br>${secundaria}`:'')+
+           (p?`<br>${p.puesto}.º de ${p.de} en la región`:'')+
+           `<span class="nota">${recorte(capa.cautela)}</span>`;
   }
 
   function leyenda(){
-    const capa=CAPAS[capaActiva], c=capa.leyenda, paleta = capa.divergente ? DIV : MAG;
+    const capa=CAPAS[capaActiva];
+    if(modo==='tendencia' && hayTendencia()){
+      const peor = capa.subeEsPeor ? 'Sube' : 'Baja', mejor = capa.subeEsPeor ? 'Baja' : 'Sube';
+      document.getElementById('leyenda').innerHTML =
+        [[DIV[0],`${peor} más de 25 %`],[DIV[1],`${peor} hasta 25 %`],
+         ['rgba(255,255,255,.10)','Estable, menos de 5 %'],
+         [DIV[2],`${mejor} hasta 25 %`],[DIV[3],`${mejor} más de 25 %`],
+         [MAG[0],'Sin serie suficiente']]
+        .map(([col,tx])=>`<span><i style="background:${col};border:1px solid rgba(255,255,255,.18)"></i>${tx}</span>`).join('')+
+        `<span class="sin-puntos">Variación entre el primer y el último año disponibles de la ventana</span>`;
+      return;
+    }
+    const c=capa.leyenda, paleta = capa.divergente ? DIV : MAG;
     const rot = capa.divergente
       ? [`Peor que ${c[0]}`, `${c[0]} a ${c[1]}`, `${c[1]} a ${c[2]}`, `Mejor que ${c[2]}`]
       : [`Menos de ${miles(c[0])}`, `${miles(c[0])} a ${miles(c[1])}`, `${miles(c[1])} a ${miles(c[2])}`, `${miles(c[2])} o más`];
@@ -783,6 +834,13 @@
     }).join('');
     document.querySelectorAll('#temas .tema').forEach(b=>
       b.addEventListener('click',()=>{ capaActiva=b.dataset.capa; repintar(); }));
+    const bt=document.querySelector('[data-modo="tendencia"]');
+    if(bt){
+      bt.disabled = !hayTendencia();
+      bt.title = hayTendencia() ? '' : 'Esta capa no tiene serie histórica';
+      if(!hayTendencia() && modo==='tendencia') modo='nivel';
+    }
+    document.querySelectorAll('.modo').forEach(b=>b.classList.toggle('activo', b.dataset.modo===modo));
     const pend=document.getElementById('pendientes');
     if(pend) pend.innerHTML = faltan.length
       ? `<b>${faltan.length} materias sin colector todavía:</b> ${faltan.map(m=>esc(m.rotulo)).join(' · ')}.`
@@ -802,12 +860,21 @@
     if(capaPaises) capaPaises.setStyle(estiloPais);
     puntos(); solapas(); leyenda();
     const ex = document.getElementById('explica-capa');
-    if(ex) ex.innerHTML = EXPLICA[capaActiva] ? EXPLICA[capaActiva]() : '';
+    if(ex){
+      const base = EXPLICA[capaActiva] ? EXPLICA[capaActiva]() : '';
+      ex.innerHTML = (modo==='tendencia' && hayTendencia())
+        ? `<b>Modo tendencia.</b> Se muestra cuánto varió el indicador entre el primer y el último año `+
+          `disponibles de la ventana de diez años, no su nivel actual. El nivel sigue en la ficha de cada país.`+
+          `<span class="no-es"><b>Qué no es:</b> no es una proyección. Es la variación entre dos cifras publicadas. `+
+          `SIWA no estima el futuro.</span>` + base
+        : base;
+    }
     document.getElementById('seleccion').innerHTML = paisFiltro
       ? `Filtrando por <b>${esc(paisNombre)}</b><button id="quitar">quitar filtro</button>`
       : 'Sin país seleccionado — hacé clic en el mapa para filtrar';
     const q = document.getElementById('quitar');
     if(q) q.addEventListener('click', ()=>{ paisFiltro=null; paisNombre=null; sincronizar(); repintar(); });
+    seriesEnSeccion();
     tarjetasBanco('homicidios','tag-violencia','tarj-violencia');
     tarjetasBanco('corrupcion','tag-institucional','tarj-institucional');
     tarjetasDesplazamiento(); informe();
@@ -855,6 +922,34 @@
   };
 
   // ---- Tarjetas -----------------------------------------------------------
+  // La serie histórica se ve en la propia sección, sin ir hasta el informe.
+  function seriesEnSeccion(){
+    const cajaV=document.getElementById('serie-violencia');
+    if(cajaV){
+      const r = paisFiltro && almacen.banco ? almacen.banco.registros.find(x=>x.iso===paisFiltro) : null;
+      const i = r && r.indicadores.homicidios;
+      cajaV.innerHTML = (i && i.serie && i.serie.length>2)
+        ? grafico(i.serie.map(a=>({x:a.anio,y:a.valor})),
+            `${paisNombre} · homicidios por 100.000 · ${i.anio_inicial}–${i.anio}` +
+            (i.tendencia_ventana_pct!==null&&i.tendencia_ventana_pct!==undefined
+              ? ` · ${i.tendencia_ventana_pct>0?'+':''}${i.tendencia_ventana_pct} % en la ventana` : ''))
+        : (paisFiltro ? '<p class="sin-dato">Sin serie suficiente para graficar.</p>'
+                      : '<p class="sin-dato">Elegí un país en el mapa para ver su serie de diez años.</p>');
+    }
+    const cajaD=document.getElementById('serie-desplazamiento');
+    if(cajaD){
+      const p = paisFiltro && almacen.serie ? almacen.serie.registros.find(x=>x.iso===paisFiltro) : null;
+      const r = paisFiltro && almacen.desplazamiento ? almacen.desplazamiento.registros.find(x=>x.iso===paisFiltro) : null;
+      cajaD.innerHTML = (p && p.serie && p.serie.length>2)
+        ? grafico(p.serie.map(a=>({x:a.anio,y:a.origen_refugiados+a.origen_solicitantes})),
+            `${paisNombre} · personas expulsadas · ${p.serie[0].anio}–${p.serie[p.serie.length-1].anio}` +
+            (r && r.tendencia_ventana_pct!==null && r.tendencia_ventana_pct!==undefined
+              ? ` · ${r.tendencia_ventana_pct>0?'+':''}${r.tendencia_ventana_pct} % en la ventana` : ''))
+        : (paisFiltro ? '<p class="sin-dato">Sin serie suficiente para graficar.</p>'
+                      : '<p class="sin-dato">Elegí un país en el mapa para ver su serie de diez años.</p>');
+    }
+  }
+
   function tarjetasBanco(clave, destinoTag, destinoTarj){
     const d=almacen.banco; if(!d) return;
     const meta=d.procedencia, info=(d.indicadores||[]).find(i=>i.clave===clave)||{};
@@ -1094,6 +1189,9 @@
     a.download='siwa-'+(paisFiltro||'region').toLowerCase()+'-'+new Date().toISOString().slice(0,10)+'.csv';
     document.body.appendChild(a); a.click(); a.remove();
   }
+  document.querySelectorAll('.modo').forEach(b=>
+    b.addEventListener('click',()=>{ if(!b.disabled){ modo=b.dataset.modo; repintar(); } }));
+
   document.getElementById('btn-csv').addEventListener('click', csv);
   document.getElementById('btn-imprimir').addEventListener('click', ()=>window.print());
 

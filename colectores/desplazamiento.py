@@ -30,7 +30,8 @@ FUENTE = "ACNUR — Refugee Data Finder"
 BASE = "https://api.unhcr.org/population/v1/population/"
 URL_PUBLICA = "https://www.unhcr.org/refugee-statistics/"
 
-DESDE = 2015
+VENTANA = 10
+DESDE = datetime.now(timezone.utc).year - VENTANA
 PAUSA = 0.25          # cortesía con una interfaz pública y gratuita
 
 
@@ -103,7 +104,13 @@ def recolectar():
             )
 
         serie_completa.append({**pais, "serie": filas})
-        ultima = filas[-1]
+        ultima, primera = filas[-1], filas[0]
+        exp_ult = ultima["origen_refugiados"] + ultima["origen_solicitantes"]
+        exp_ini = primera["origen_refugiados"] + primera["origen_solicitantes"]
+        tendencia = round((exp_ult - exp_ini) / exp_ini * 100, 1) if exp_ini else None
+        anterior = filas[-2] if len(filas) >= 2 else None
+        exp_ant = (anterior["origen_refugiados"] + anterior["origen_solicitantes"]) if anterior else None
+        interanual = round((exp_ult - exp_ant) / exp_ant * 100, 1) if exp_ant else None
         registros.append(
             {
                 **pais,
@@ -111,6 +118,10 @@ def recolectar():
                 "expulsion": ultima["origen_refugiados"] + ultima["origen_solicitantes"],
                 "recepcion": ultima["asilo_refugiados"] + ultima["asilo_solicitantes"],
                 "desplazados_internos": ultima["desplazados_internos"],
+                "anio_inicial": primera["anio"],
+                "expulsion_inicial": exp_ini,
+                "tendencia_ventana_pct": tendencia,
+                "variacion_pct": interanual,
                 "detalle": ultima,
             }
         )
@@ -132,6 +143,9 @@ def recolectar():
     )
 
     vacios = [
+        f"VENTANA MÓVIL DE {VENTANA} AÑOS (desde {DESDE}). La tendencia compara el primer "
+        "año disponible contra el último, no el interanual: el interanual es ruido y la "
+        "ventana muestra el movimiento de fondo.",
         "La cifra es ANUAL y de cierre de año. No es un dato en vivo: entre "
         "publicaciones, la situación puede haber cambiado por completo.",
         "ACNUR cuenta a quien está bajo su mandato o registrado ante autoridades. "

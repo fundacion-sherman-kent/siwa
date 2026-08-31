@@ -25,12 +25,17 @@ from __future__ import annotations
 import json
 import urllib.request
 from collections import defaultdict
+from datetime import datetime, timezone
 
 import comun
 import geo
 
 BASE = "https://api.worldbank.org/v2"
-DESDE, HASTA = 2010, 2026
+
+# Ventana móvil de diez años: la que la dirección fijó para leer tendencia.
+VENTANA = 10
+HASTA = datetime.now(timezone.utc).year
+DESDE = HASTA - VENTANA
 
 INDICADORES = [
     {"clave": "homicidios", "codigo": "VC.IHR.PSRC.P5", "fuente_id": None,
@@ -114,12 +119,20 @@ def recolectar():
             variacion = None
             if len(serie) >= 2 and serie[-2][1] not in (0, None):
                 variacion = round((valor - serie[-2][1]) / abs(serie[-2][1]) * 100, 1)
+            # Tendencia de la ventana: primer año disponible contra el último.
+            # Es más robusta que la variación interanual, que es puro ruido.
+            decada = None
+            if len(serie) >= 3 and serie[0][1] not in (0, None):
+                decada = round((valor - serie[0][1]) / abs(serie[0][1]) * 100, 1)
             ficha["indicadores"][indicador["clave"]] = {
                 "valor": valor,
                 "anio": anio,
                 "anio_anterior": serie[-2][0] if len(serie) >= 2 else None,
                 "valor_anterior": serie[-2][1] if len(serie) >= 2 else None,
                 "variacion_pct": variacion,
+                "anio_inicial": serie[0][0],
+                "valor_inicial": serie[0][1],
+                "tendencia_ventana_pct": decada,
                 "serie": [{"anio": a, "valor": v} for a, v in serie],
             }
         if ficha["indicadores"]:
@@ -143,6 +156,9 @@ def recolectar():
 
     faltan = [p["pais"] for p in padron if p["iso"] not in {r["iso"] for r in registros}]
     vacios = [
+        f"Ventana móvil de {VENTANA} años ({DESDE}-{HASTA}). La tendencia se calcula "
+        "entre el primer y el último año DISPONIBLES dentro de esa ventana, que pueden "
+        "no ser los extremos de la ventana misma.",
         "Serie ANUAL con rezago: el último año disponible suele ir dos o tres años "
         "atrás del corriente. No es un dato en vivo.",
         "Los tres indicadores de gobernanza son ESTIMACIONES DE PERCEPCIÓN en escala "
@@ -183,6 +199,7 @@ def recolectar():
             ],
             "cobertura": cobertura,
             "serie_desde": DESDE,
+            "ventana_anios": VENTANA,
         },
     )
 
