@@ -278,6 +278,9 @@
   .grafico .lineag{fill:none;stroke:var(--orange);stroke-width:2;}
   .grafico .areag{fill:rgba(251,101,0,.14);stroke:none;}
   .grafico .puntog{fill:var(--orange);}
+  .grafico .lineag.proyectada{stroke-dasharray:5 4;opacity:.85;}
+  .grafico .puntog.proyectada{fill:none;stroke:var(--orange);stroke-width:1.6;}
+  .ficha-mapa .fila.sin-ajuste b{color:var(--purple-light);}
   .grafico .rotg{fill:#7d90a8;font-size:9.5px;font-family:'Inter',sans-serif;}
   .grafico .barrag{fill:rgba(251,101,0,.45);}
   .grafico .barrag.destacada{fill:var(--orange);}
@@ -441,9 +444,9 @@
         </div>
         <div class="modos">
           <button class="modo activo" data-modo="nivel">Nivel actual</button>
-          <button class="modo" data-modo="1">Tendencia 1 año</button>
-          <button class="modo" data-modo="2">Tendencia 2 años</button>
-          <button class="modo" data-modo="4">Tendencia 4 años</button>
+          <button class="modo" data-modo="1">Proyección 1 año</button>
+          <button class="modo" data-modo="2">Proyección 2 años</button>
+          <button class="modo" data-modo="4">Proyección 4 años</button>
         </div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
@@ -982,6 +985,46 @@
   const hayTendencia = () => typeof capaActual().serieDe === 'function';
   const anios = () => modo === 'nivel' ? 0 : parseInt(modo, 10);
 
+  // ---- Proyección -------------------------------------------------------
+  // Recta de mínimos cuadrados sobre la serie de diez años, prolongada N años.
+  // NO es un pronóstico de la Fundación: es la prolongación aritmética de la
+  // serie, con su método a la vista y su calidad de ajuste declarada.
+  //
+  // R² mide cuánto de la serie explica esa recta. Por debajo de AJUSTE_MINIMO
+  // la serie no describe una recta y la proyección NO se publica: se dice que
+  // no se puede proyectar, que es un resultado y no una falla.
+  const AJUSTE_MINIMO = 0.5;
+
+  function proyectar(serie, n){
+    if(!serie || serie.length < 4) return null;
+    const N = serie.length;
+    const mx = serie.reduce((a,p)=>a+p.anio,0)/N;
+    const my = serie.reduce((a,p)=>a+p.valor,0)/N;
+    let sxy=0, sxx=0, syy=0;
+    serie.forEach(p=>{ const dx=p.anio-mx, dy=p.valor-my; sxy+=dx*dy; sxx+=dx*dx; syy+=dy*dy; });
+    if(!sxx) return null;
+    const pendiente = sxy/sxx, ordenada = my - pendiente*mx;
+    const r2 = syy ? (sxy*sxy)/(sxx*syy) : 0;
+    const residuos = serie.map(p=>p.valor-(ordenada+pendiente*p.anio));
+    const ee = Math.sqrt(residuos.reduce((a,r)=>a+r*r,0)/Math.max(1,N-2));
+    const ultimo = serie[serie.length-1];
+    const anio = ultimo.anio + n;
+    const valor = ordenada + pendiente*anio;
+    return {
+      anio, valor, pendiente, r2, banda: ee*2,
+      ajusta: r2 >= AJUSTE_MINIMO,
+      desdeAnio: serie[0].anio, hastaAnio: ultimo.anio, base: ultimo.valor,
+      puntos: N,
+      cambio: ultimo.valor ? (valor-ultimo.valor)/Math.abs(ultimo.valor)*100 : null
+    };
+  }
+
+  function proyeccionDe(iso, n){
+    const capa = capaActual();
+    if(typeof capa.serieDe !== 'function') return null;
+    return proyectar(capa.serieDe(iso), n);
+  }
+
   // Variación a N años sobre la serie propia. Declara siempre qué dos años
   // comparó, porque el año objetivo puede no existir en la serie.
   function variacion(serie, n){
@@ -1000,15 +1043,24 @@
     if(typeof capa.serieDe !== 'function') return null;
     return variacion(capa.serieDe(iso), n);
   }
+  // En modo proyección el mapa muestra el VALOR PROYECTADO, en la misma escala
+  // que el nivel, para que se puedan comparar de un vistazo. Los Estados cuya
+  // serie no se deja ajustar quedan fuera y se pintan aparte.
   function valores(){
     if(modo === 'nivel' || !hayTendencia()) return capaActual().conteo();
     const m = {}, n = anios();
     Object.keys(capaActual().conteo()).forEach(iso=>{
-      const v = variacionDe(iso, n);
-      if(v) m[iso] = v.pct;
+      const pr = proyeccionDe(iso, n);
+      if(pr && pr.ajusta) m[iso] = pr.valor;
     });
     return m;
   }
+
+  const sinAjuste = iso => {
+    if(modo === 'nivel' || !hayTendencia()) return false;
+    const pr = proyeccionDe(iso, anios());
+    return !pr || !pr.ajusta;
+  };
 
   // En modo tendencia la escala es divergente y depende de si subir es bueno o malo.
   function colorTendencia(v, subeEsPeor){
@@ -1027,11 +1079,11 @@
 
   function estiloPais(rasgo){
     const capa=capaActual(), iso=rasgo.properties.iso, sel = paisFiltro === iso;
-    const v = valores()[iso];
-    const relleno = (modo!=='nivel' && hayTendencia())
-      ? colorTendencia(v, capa.subeEsPeor) : capa.color(v);
+    if(sinAjuste(iso))
+      return {color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
+              fillColor:'rgba(140,0,224,.22)', fillOpacity:.9};
     return {color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
-            fillColor: relleno, fillOpacity:.9};
+            fillColor: capa.color(valores()[iso]), fillOpacity:.9};
   }
 
   const cifra = v => Math.abs(v)<1000 ? (Math.round(v*100)/100).toLocaleString('es-AR') : miles(Math.round(v));
@@ -1044,29 +1096,55 @@
       return;
     }
     const capa = capaActual(), nivel = capa.conteo()[iso];
-    const horizontes = [1,2,4].map(n=>({n, v:variacionDe(iso, n)})).filter(x=>x.v);
-    if(nivel === undefined && !horizontes.length){
+    const proys = [1,2,4].map(n=>({n, pr:proyeccionDe(iso, n)})).filter(x=>x.pr);
+    if(nivel === undefined && !proys.length){
       caja.innerHTML = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>
         <span class="vacia">Sin dato en esta capa.</span>`;
       return;
     }
     const p = posicion(iso);
-    caja.innerHTML =
-      `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>` +
+    const ajusta = proys.length && proys[0].pr.ajusta;
+    let html = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>` +
       (nivel!==undefined ? `<span class="cifra">${cifra(nivel)}</span>
-        <span class="unidad">${esc(capa.unidad)}${p?` · ${p.puesto}.º de ${p.de}`:''}</span>` : '') +
-      horizontes.map(({n,v})=>{
-        const sube = v.pct > 0;
+        <span class="unidad">${esc(capa.unidad)}${proys.length?` · último dato, ${proys[0].pr.hastaAnio}`:''}${
+          p&&modo==='nivel'?` · ${p.puesto}.º de ${p.de}`:''}</span>` : '');
+
+    if(proys.length && ajusta){
+      html += proys.map(({n,pr})=>{
+        const sube = pr.cambio > 0;
         const clase = (sube === !!capa.subeEsPeor) ? 'sube' : 'baja';
-        return `<div class="fila"><span>${n} año${n===1?'':'s'} · ${v.desde}–${v.hasta}</span>
-                <b class="${clase}">${sube?'+':''}${cifra(v.pct)} %</b></div>`;
+        return `<div class="fila"><span>${pr.anio} · a ${n} año${n===1?'':'s'}</span>
+          <b class="${clase}">${cifra(pr.valor)}</b></div>`;
       }).join('') +
-      `<span class="nota">${esc(capa.cautela)}</span>`;
+      `<span class="nota">Prolongación de la recta ajustada a ${proys[0].pr.puntos} años
+        (${proys[0].pr.desdeAnio}–${proys[0].pr.hastaAnio}). Ajuste R²&nbsp;${cifra(proys[0].pr.r2)}.
+        Margen ±${cifra(proys[0].pr.banda)}. La recta resume la serie entera, así que no parte del último
+        dato sino de la tendencia de fondo. <b>No es un pronóstico de la Fundación.</b></span>`;
+    } else if(proys.length){
+      html += `<div class="fila sin-ajuste"><span>Proyección</span><b>no utilizable</b></div>
+        <span class="nota">La serie de ${proys[0].pr.desdeAnio}–${proys[0].pr.hastaAnio} no describe una recta
+        (R²&nbsp;${cifra(proys[0].pr.r2)}, por debajo de 0,5). Prolongarla daría una cifra sin sustento,
+        así que <b>no se publica</b>.</span>`;
+    } else {
+      html += `<span class="nota">${esc(capa.cautela)}</span>`;
+    }
+    caja.innerHTML = html;
   }
 
   function leyenda(){
     const capa=capaActual();
     if(modo!=='nivel' && hayTendencia()){
+      const n = anios(), c = capa.leyenda, paleta = capa.divergente ? DIV : MAG;
+      const rot = capa.divergente
+        ? [`Peor que ${c[0]}`, `${c[0]} a ${c[1]}`, `${c[1]} a ${c[2]}`, `Mejor que ${c[2]}`]
+        : [`Menos de ${miles(c[0])}`, `${miles(c[0])} a ${miles(c[1])}`, `${miles(c[1])} a ${miles(c[2])}`, `${miles(c[2])} o más`];
+      document.getElementById('leyenda').innerHTML =
+        rot.map((t,i)=>`<span><i style="background:${paleta[i]}"></i>${t}</span>`).join('')+
+        `<span><i style="background:rgba(140,0,224,.22)"></i>Serie que no se deja proyectar</span>`+
+        `<span class="sin-puntos">Valor proyectado a ${n} año${n===1?'':'s'}, en la misma escala que el nivel</span>`;
+      return;
+    }
+    if(false){
       const peor = capa.subeEsPeor ? 'Sube' : 'Baja', mejor = capa.subeEsPeor ? 'Baja' : 'Sube';
       const n = anios();
       document.getElementById('leyenda').innerHTML =
@@ -1134,10 +1212,12 @@
     if(ex){
       const base = EXPLICA[capaActiva] ? EXPLICA[capaActiva]() : '';
       ex.innerHTML = (modo!=='nivel' && hayTendencia())
-        ? `<b>Modo tendencia.</b> Se muestra cuánto varió el indicador entre el primer y el último año `+
-          `disponibles de la ventana de diez años, no su nivel actual. El nivel sigue en la ficha de cada país.`+
-          `<span class="no-es"><b>Qué no es:</b> no es una proyección. Es la variación entre dos cifras publicadas. `+
-          `SIWA no estima el futuro.</span>` + base
+        ? `<b>Modo proyección, a ${anios()} año${anios()===1?'':'s'}.</b> El mapa muestra el valor al que llegaría `+
+          `cada Estado si la serie de los últimos diez años siguiera la misma recta. El método es mínimos cuadrados `+
+          `sobre esa serie, y cada ficha declara su calidad de ajuste.`+
+          `<span class="no-es"><b>Qué no es:</b> no es un pronóstico de la Fundación ni incorpora ningún hecho `+
+          `posterior al último dato. Es la prolongación aritmética de una serie, y las series se quiebran. `+
+          `Donde la serie no describe una recta, la proyección <b>no se publica</b> y el país queda en violeta.</span>` + base
         : base;
     }
     document.getElementById('seleccion').innerHTML = paisFiltro
@@ -1218,9 +1298,23 @@
       const pie = [v1&&`1 año ${v1.pct>0?'+':''}${cifra(v1.pct)} %`,
                    v2&&`2 años ${v2.pct>0?'+':''}${cifra(v2.pct)} %`,
                    v4&&`4 años ${v4.pct>0?'+':''}${cifra(v4.pct)} %`].filter(Boolean).join(' · ');
-      caja.innerHTML = grafico(serie.map(a=>({x:a.anio,y:a.valor})),
-        `${paisNombre} · ${esc(capa.unidad||'')} · ${serie[0].anio}–${serie[serie.length-1].anio}`) +
-        (pie?`<p class="sin-dato">Variación: ${pie}</p>`:'');
+      const pr4 = proyectar(serie, 4);
+      const proyectada = (pr4 && pr4.ajusta)
+        ? serie.map(a=>({x:a.anio,y:a.valor}))
+            .concat([1,2,4].map(n=>proyectar(serie,n)).filter(Boolean)
+              .map(pp=>({x:pp.anio, y:pp.valor, proyectado:true})))
+        : serie.map(a=>({x:a.anio,y:a.valor}));
+      caja.innerHTML = grafico(proyectada,
+        `${paisNombre} · ${esc(capa.unidad||'')} · ${serie[0].anio}–${serie[serie.length-1].anio}` +
+        (pr4&&pr4.ajusta?` y proyección a ${pr4.anio}`:'')) +
+        (pie?`<p class="sin-dato">Variación observada: ${pie}</p>`:'') +
+        (pr4 ? (pr4.ajusta
+          ? `<p class="sin-dato"><b>Proyección:</b> ${cifra(proyectar(serie,1).valor)} en ${proyectar(serie,1).anio} ·
+             ${cifra(proyectar(serie,2).valor)} en ${proyectar(serie,2).anio} ·
+             ${cifra(pr4.valor)} en ${pr4.anio}. Recta de mínimos cuadrados, ajuste R² ${cifra(pr4.r2)}, margen ±${cifra(pr4.banda)}.
+             No es un pronóstico de la Fundación.</p>`
+          : `<p class="sin-dato"><b>No se proyecta:</b> la serie no describe una recta (R² ${cifra(pr4.r2)}).
+             Prolongarla daría una cifra sin sustento.</p>`) : '');
     });
   }
 
@@ -1421,14 +1515,20 @@
     const ys = serie.map(p=>p.y), max = Math.max(...ys), min = 0;
     const px = i => mx + i*(A-mx-14)/(serie.length-1);
     const py = v => H-my - (v-min)/((max-min)||1)*(H-my*2);
-    const linea = serie.map((p,i)=>`${i?'L':'M'}${px(i).toFixed(1)},${py(p.y).toFixed(1)}`).join(' ');
-    const area = linea+` L${px(serie.length-1).toFixed(1)},${(H-my).toFixed(1)} L${px(0).toFixed(1)},${(H-my).toFixed(1)} Z`;
+    const corte = serie.findIndex(p=>p.proyectado);
+    const finObs = corte < 0 ? serie.length : corte;
+    const trazo = ps => ps.map((q,i)=>`${i?'L':'M'}${px(q.i).toFixed(1)},${py(q.y).toFixed(1)}`).join(' ');
+    const conIndice = serie.map((p,i)=>({...p, i}));
+    const linea = trazo(conIndice.slice(0, finObs));
+    const lineaProy = corte < 0 ? '' : trazo(conIndice.slice(finObs-1));
+    const area = linea+` L${px(finObs-1).toFixed(1)},${(H-my).toFixed(1)} L${px(0).toFixed(1)},${(H-my).toFixed(1)} Z`;
     return `<figure class="grafico"><figcaption>${esc(rotulo)}</figcaption>
       <svg viewBox="0 0 ${A} ${H}" role="img" aria-label="${esc(rotulo)}">
         <line x1="${mx}" y1="${H-my}" x2="${A-14}" y2="${H-my}" class="ejeg"/>
         <line x1="${mx}" y1="${my}" x2="${mx}" y2="${H-my}" class="ejeg"/>
         <path d="${area}" class="areag"/><path d="${linea}" class="lineag"/>
-        ${serie.map((p,i)=>`<circle cx="${px(i).toFixed(1)}" cy="${py(p.y).toFixed(1)}" r="2.6" class="puntog"/>`).join('')}
+        ${lineaProy?`<path d="${lineaProy}" class="lineag proyectada"/>`:''}
+        ${serie.map((p,i)=>`<circle cx="${px(i).toFixed(1)}" cy="${py(p.y).toFixed(1)}" r="2.6" class="puntog${p.proyectado?' proyectada':''}"/>`).join('')}
         <text x="6" y="${my+4}" class="rotg">${miles(max)}</text>
         <text x="6" y="${H-my}" class="rotg">0</text>
         ${serie.map((p,i)=> i%2===0 ? `<text x="${px(i).toFixed(1)}" y="${H-8}" class="rotg" text-anchor="middle">${p.x}</text>`:'').join('')}
