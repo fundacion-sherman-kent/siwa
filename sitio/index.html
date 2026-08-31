@@ -187,6 +187,43 @@
   .leaflet-tooltip.ficha b{color:#fff;font-size:12.5px;display:block;margin-bottom:4px;}
   .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
   .mapa-barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .niveles{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:22px 0 6px;
+  }
+  .niveles-rotulo{
+    width:100%;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;
+    color:#7d90a8;font-weight:700;margin-bottom:2px;
+  }
+  .nivel{
+    flex:1 1 200px;text-align:left;background:rgba(255,255,255,.03);
+    border:1px solid var(--line);border-radius:9px;padding:11px 14px;cursor:pointer;
+    font-family:inherit;color:#9fb0c4;transition:border-color .12s,background .12s;
+  }
+  .nivel:hover{background:rgba(255,255,255,.06);color:#fff;}
+  .nivel b{display:block;font-size:13px;color:#E8EEF5;font-weight:700;margin-bottom:2px;}
+  .nivel span{display:block;font-size:11px;line-height:1.35;}
+  .nivel.activo{border-color:var(--orange);background:rgba(251,101,0,.12);}
+  .nivel.activo b{color:#fff;}
+  .elige-pais{
+    padding:20px 0 8px;font-size:13.5px;color:#9fb0c4;line-height:1.6;max-width:68ch;
+  }
+  .elige-pais b{color:#fff;}
+  .cambio{border-left:3px solid var(--line);}
+  .cambio.empeora{border-left-color:var(--orange);}
+  .cambio.mejora{border-left-color:#3FA796;}
+  .cambio .flecha{font-size:16px;line-height:1;margin-right:5px;}
+  .cambio .lectura{
+    font-size:11.5px;line-height:1.45;color:#9fb0c4;margin:7px 0 0;
+  }
+  .cambio .lectura b{color:#E8EEF5;}
+  .cambio .ojo{
+    display:block;margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.07);
+    font-size:10.5px;line-height:1.45;color:#7d90a8;
+  }
+  .pie-ficha{font-size:11.5px;color:#7d90a8;line-height:1.6;margin:14px 0 0;max-width:76ch;}
+  /* Niveles: cada seccion declara desde que nivel se muestra. */
+  body[data-nivel="1"] [data-nivel="2"], body[data-nivel="1"] [data-nivel="3"],
+  body[data-nivel="2"] [data-nivel="3"]{display:none;}
   .pasos{
     display:flex;flex-wrap:wrap;gap:10px;list-style:none;counter-reset:paso;
     padding:0;margin:0 0 16px;width:100%;
@@ -521,10 +558,19 @@
   <p>Datos públicos de los 33 Estados del padrón, recolectados de forma automática y
      calificados con doctrina de inteligencia. Cada cifra declara su fuente, su fecha de
      referencia, su calificación de fiabilidad y qué es lo que su fuente <em>no</em> cubre.</p>
-  <p>Las materias se ordenan por las tres líneas de trabajo de la Fundación
-     —<b>seguridad</b>, <b>gobernanza</b> e <b>inteligencia estratégica</b>— y no por la
+  <p>Las materias se ordenan por las cuatro líneas de trabajo de la Fundación
+     —<b>seguridad</b>, <b>defensa</b>, <b>gobernanza</b> y <b>desarrollo</b>— y no por la
      disponibilidad de las fuentes. Este registro no emite juicios: publica hechos
      calificados.</p>
+  <div class="niveles" role="group" aria-label="Nivel de lectura">
+    <span class="niveles-rotulo">¿Cómo querés leerlo?</span>
+    <button class="nivel activo" data-nivel="1">
+      <b>Ciudadanía</b><span>Qué pasa en mi país, en pocas palabras</span></button>
+    <button class="nivel" data-nivel="2">
+      <b>Prensa y decisión</b><span>Todos los temas, el mapa y los informes</span></button>
+    <button class="nivel" data-nivel="3">
+      <b>Análisis</b><span>Fuentes, método, vacíos y datos crudos</span></button>
+  </div>
   <div class="hero-meta">
     <div><strong id="m-dominios">1</strong><span>Dominios con dato</span></div>
     <div><strong id="m-registros">—</strong><span>Registros vigentes</span></div>
@@ -590,6 +636,13 @@
 
   <main>
 
+    <section class="domain" id="ficha-pais" data-nivel="1">
+      <div class="domain-head"><h3>Qué cambió en tu país</h3><span class="tag" id="tag-ficha">—</span></div>
+      <div class="elige-pais" id="elige-pais"></div>
+      <div class="grid-cards" id="tarj-ficha"></div>
+      <p class="pie-ficha" id="pie-ficha"></p>
+    </section>
+
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <ol class="pasos">
@@ -646,12 +699,12 @@
       </p>
     </section>
 
-    <div class="eje">
+    <div class="eje" data-nivel="2">
       <h2>Eje · Seguridad</h2>
       <p>Violencia, control territorial y capacidad del Estado para sostener el orden público, más los movimientos de población y de mercancías que ese control produce o no logra impedir.</p>
     </div>
 
-    <section class="domain" id="violencia">
+    <section class="domain" id="violencia" data-nivel="2">
       <div class="domain-head"><h3>Homicidios</h3><span class="tag" id="tag-violencia">—</span></div>
       <div class="procedencia" id="proc-violencia">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-violencia"></div>
@@ -659,7 +712,7 @@
       <div id="vac-violencia"></div>
     </section>
 
-    <section class="domain" id="desplazamiento">
+    <section class="domain" id="desplazamiento" data-nivel="2">
       <div class="domain-head"><h3>Desplazamiento forzado</h3><span class="tag" id="tag-desplazamiento">—</span></div>
       <div class="procedencia" id="proc-desplazamiento">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-desplazamiento"></div>
@@ -667,7 +720,7 @@
       <div id="vac-desplazamiento"></div>
     </section>
 
-    <section class="domain" id="contrabando">
+    <section class="domain" id="contrabando" data-nivel="3">
       <div class="domain-head"><h3>Contrabando y subfacturación · brecha espejo</h3><span class="tag" id="tag-comercio">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Cuando A declara que exportó cien a B, y B declara que importó sesenta de A,
@@ -686,7 +739,7 @@
       <div id="vac-comercio"></div>
     </section>
 
-    <section class="domain" id="conflictos-territoriales">
+    <section class="domain" id="conflictos-territoriales" data-nivel="2">
       <div class="domain-head"><h3>Conflictos territoriales y sociopolíticos</h3><span class="tag" id="tag-conflictos">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Primer dato subnacional del registro</b>: los casos llegan a departamento y
@@ -705,7 +758,7 @@
       <div id="vac-conflictos"></div>
     </section>
 
-    <section class="domain" id="mineria-ilegal">
+    <section class="domain" id="mineria-ilegal" data-nivel="2">
       <div class="domain-head"><h3>Minería ilegal</h3><span class="tag" id="tag-mineria">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mapeada en cuatro Estados, con años distintos</b> —Bolivia y Venezuela 2017,
@@ -717,7 +770,7 @@
       <div class="grid-cards" id="tarj-mineria"></div>
     </section>
 
-    <section class="domain" id="menores-combatientes">
+    <section class="domain" id="menores-combatientes" data-nivel="3">
       <div class="domain-head"><h3>Menores reclutados y utilizados en conflicto</h3><span class="tag">Sin dato · declarado</span></div>
       <div class="grid-cards">
         <div class="placeholder">
@@ -733,7 +786,7 @@
       </div>
     </section>
 
-    <section class="domain" id="ciber">
+    <section class="domain" id="ciber" data-nivel="2">
       <div class="domain-head"><h3>Ciberseguridad</h3><span class="tag" id="tag-ciber">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mide superficie e infraestructura, no ataques.</b> No se encontró ninguna fuente
@@ -747,7 +800,7 @@
       <div id="vac-ciber"></div>
     </section>
 
-    <section class="domain" id="migraciones">
+    <section class="domain" id="migraciones" data-nivel="2">
       <div class="domain-head"><h3>Migraciones</h3><span class="tag" id="tag-migraciones">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Estas cifras no dicen nada sobre delito.</b> Asociar migración con inseguridad
@@ -761,7 +814,7 @@
       <div class="grid-cards" id="tarj-migraciones"></div>
     </section>
 
-    <section class="domain" id="fronteras">
+    <section class="domain" id="fronteras" data-nivel="3">
       <div class="domain-head"><h3>Zonas de frontera y focos transfronterizos</h3><span class="tag" id="tag-fronteras">—</span></div>
       <div class="aviso-cobertura">
         <p><b>No son indicadores: son lugares</b>, y ninguna fuente publica estadística
@@ -774,7 +827,7 @@
       <div class="cruce" id="lista-fronteras"></div>
     </section>
 
-    <section class="domain" id="control-territorial">
+    <section class="domain" id="control-territorial" data-nivel="2">
       <div class="domain-head"><h3>Control territorial del Estado</h3><span class="tag" id="tag-control">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Si el Estado manda en todo su territorio, o si hay zonas donde no manda.</b>
@@ -790,7 +843,7 @@
       <div id="vac-control"></div>
     </section>
 
-    <section class="domain" id="terrorismo">
+    <section class="domain" id="terrorismo" data-nivel="2">
       <div class="domain-head"><h3>Terrorismo</h3><span class="tag" id="tag-terrorismo">—</span></div>
       <div class="aviso-cobertura">
         <p><b>La serie termina en 2021 y no hay reemplazo gratuito</b>: la Base Global de
@@ -805,7 +858,7 @@
       <div id="vac-terrorismo"></div>
     </section>
 
-    <section class="domain" id="grupos-armados">
+    <section class="domain" id="grupos-armados" data-nivel="2">
       <div class="domain-head"><h3>Grupos armados y conflicto entre organizaciones</h3><span class="tag" id="tag-grupos-armados">—</span></div>
       <div class="aviso-cobertura">
         <p>Enfrentamientos armados <b>entre grupos, sin el Estado como parte</b>. En esta
@@ -819,7 +872,7 @@
       <div class="grid-cards" id="tarj-grupos-armados"></div>
     </section>
 
-    <section class="domain" id="extorsion">
+    <section class="domain" id="extorsion" data-nivel="2">
       <div class="domain-head"><h3>Extorsión informática</h3><span class="tag" id="tag-ransomware">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Acá solo aparece quien no pagó rápido.</b> Los grupos que secuestran sistemas
@@ -838,12 +891,12 @@
       <div id="vac-ransomware"></div>
     </section>
 
-    <section class="domain" id="fuerzas">
+    <section class="domain" id="fuerzas" data-nivel="2">
       <div class="domain-head"><h3>Fuerzas y capacidad de defensa</h3><span class="tag" id="tag-fuerzas">—</span></div>
       <div class="grid-cards" id="tarj-fuerzas"></div>
     </section>
 
-    <section class="domain" id="victimizacion">
+    <section class="domain" id="victimizacion" data-nivel="2">
       <div class="domain-head"><h3>Victimización y confianza en la policía</h3><span class="tag" id="tag-victimizacion">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Acá está la percepción de inseguridad y el delito que la estadística policial no ve.</b>
@@ -855,19 +908,19 @@
       <div class="grid-cards" id="tarj-victimizacion"></div>
     </section>
 
-    <section class="domain" id="trata">
+    <section class="domain" id="trata" data-nivel="2">
       <div class="domain-head"><h3>Trata de personas</h3>
         <span class="tag" id="tag-trata">—</span></div>
       <div class="grid-cards" id="tarj-trata"></div>
     </section>
 
-    <div class="eje">
+    <div class="eje" data-nivel="2">
       <h2>Eje · Defensa</h2>
       <p>Lo que cada Estado destina y sostiene como instrumento militar: presupuesto,
          efectivos, adquisición de material y capacidad aeroespacial.</p>
     </div>
 
-    <section class="domain" id="presupuesto-defensa">
+    <section class="domain" id="presupuesto-defensa" data-nivel="2">
       <div class="domain-head"><h3>Presupuesto de defensa</h3><span class="tag" id="tag-presupuesto-defensa">—</span></div>
       <div class="aviso-cobertura">
         <p>Las tres medidas se leen juntas porque separan cosas distintas: <b>un Estado chico
@@ -880,7 +933,7 @@
       <div id="vac-presupuesto-defensa"></div>
     </section>
 
-    <section class="domain" id="efectivos">
+    <section class="domain" id="efectivos" data-nivel="2">
       <div class="domain-head"><h3>Efectivos</h3><span class="tag" id="tag-efectivos">—</span></div>
       <div class="aviso-cobertura">
         <p><b>No hay desagregación por arma, y no es un olvido.</b> No existe fuente gratuita
@@ -893,7 +946,7 @@
       <div class="grid-cards" id="tarj-efectivos"></div>
     </section>
 
-    <section class="domain" id="material">
+    <section class="domain" id="material" data-nivel="3">
       <div class="domain-head"><h3>Material — adquisición de armamento mayor</h3><span class="tag" id="tag-material">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mide lo que se compra, no lo que se tiene.</b> Es la aproximación más cercana al
@@ -909,7 +962,7 @@
       <div class="grid-cards" id="tarj-material"></div>
     </section>
 
-    <section class="domain" id="aeroespacial">
+    <section class="domain" id="aeroespacial" data-nivel="3">
       <div class="domain-head"><h3>Capacidad aeroespacial</h3><span class="tag" id="tag-aeroespacial">—</span></div>
       <div class="aviso-cobertura">
         <p>Objetos que cada Estado registra ante Naciones Unidas: <b>satélites propios, no
@@ -923,19 +976,19 @@
       <div id="vac-aeroespacial"></div>
     </section>
 
-    <div class="eje">
+    <div class="eje" data-nivel="2">
       <h2>Eje · Gobernanza</h2>
       <p>Integridad de la administración pública, calidad de las reglas y salud del espacio informativo en que esas reglas se discuten.</p>
     </div>
 
-    <section class="domain" id="institucional">
+    <section class="domain" id="institucional" data-nivel="2">
       <div class="domain-head"><h3>Indicadores de gobernanza</h3><span class="tag" id="tag-institucional">—</span></div>
       <div class="procedencia" id="proc-institucional">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-institucional"></div>
       <div id="vac-institucional"></div>
     </section>
 
-    <section class="domain" id="contratacion">
+    <section class="domain" id="contratacion" data-nivel="2">
       <div class="domain-head"><h3>Integridad de la contratación pública</h3><span class="tag" id="tag-contratacion">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Es lo que la empresa declara esperar, no un soborno comprobado.</b> Sale de las
@@ -949,7 +1002,7 @@
       <div id="vac-contratacion"></div>
     </section>
 
-    <section class="domain" id="democracia">
+    <section class="domain" id="democracia" data-nivel="2">
       <div class="domain-head"><h3>Nivel democrático y libertades</h3><span class="tag" id="tag-democracia">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Es medición experta codificada, no recuento de hechos</b>: varios
@@ -965,7 +1018,7 @@
       <div id="vac-democracia"></div>
     </section>
 
-    <section class="domain" id="libertades">
+    <section class="domain" id="libertades" data-nivel="2">
       <div class="domain-head"><h3>Libertad de expresión y de asociación</h3><span class="tag" id="tag-libertades">—</span></div>
       <div class="aviso-cobertura">
         <p>Censura estatal, represalia contra periodistas, y espacio disponible para
@@ -978,7 +1031,7 @@
       <div class="grid-cards" id="tarj-libertades"></div>
     </section>
 
-    <section class="domain" id="integridad">
+    <section class="domain" id="integridad" data-nivel="2">
       <div class="domain-head"><h3>Integridad y aprobación democrática</h3><span class="tag" id="tag-integridad">—</span></div>
       <div class="aviso-cobertura">
         <p><b>La aprobación de la democracia no es una encuesta.</b> Es la evaluación de un
@@ -993,7 +1046,7 @@
       <div class="grid-cards" id="tarj-integridad"></div>
     </section>
 
-    <section class="domain" id="capacidad">
+    <section class="domain" id="capacidad" data-nivel="2">
       <div class="domain-head"><h3>Capacidad del Estado</h3><span class="tag" id="tag-capacidad">—</span></div>
       <div class="aviso-cobertura">
         <p>El registro de nacimientos es la capacidad estatal más básica: <b>saber quién existe</b>.
@@ -1005,39 +1058,39 @@
       <div class="grid-cards" id="tarj-capacidad"></div>
     </section>
 
-    <section class="domain" id="desinformacion">
+    <section class="domain" id="desinformacion" data-nivel="3">
       <div class="domain-head"><h3>Desinformación e infoxicación</h3><span class="tag" id="tag-desinformacion">—</span></div>
       <div class="procedencia" id="proc-desinformacion">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-desinformacion"></div>
       <div id="vac-desinformacion"></div>
     </section>
 
-    <section class="domain" id="soborno">
+    <section class="domain" id="soborno" data-nivel="2">
       <div class="domain-head"><h3>Soborno declarado</h3>
         <span class="tag" id="tag-soborno">—</span></div>
       <div class="grid-cards" id="tarj-soborno"></div>
     </section>
 
-    <div class="eje">
+    <div class="eje" data-nivel="2">
       <h2>Eje · Desarrollo</h2>
       <p>Estructura material del territorio y de la economía, por sector. No es análisis económico: es la base sobre la que se leen las otras dos —dónde vive la gente, de qué vive y qué exporta—.</p>
     </div>
 
-    <section class="domain" id="urbano">
+    <section class="domain" id="urbano" data-nivel="2">
       <div class="domain-head"><h3>Urbano</h3><span class="tag" id="tag-urbano">—</span></div>
       <div class="procedencia" id="proc-urbano">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-urbano"></div>
       <div id="vac-urbano"></div>
     </section>
 
-    <section class="domain" id="industrial">
+    <section class="domain" id="industrial" data-nivel="2">
       <div class="domain-head"><h3>Industrial</h3><span class="tag" id="tag-industrial">—</span></div>
       <div class="procedencia" id="proc-industrial">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-industrial"></div>
       <div id="vac-industrial"></div>
     </section>
 
-    <section class="domain" id="condiciones">
+    <section class="domain" id="condiciones" data-nivel="2">
       <div class="domain-head"><h3>Condiciones de vida y desigualdad</h3><span class="tag" id="tag-condiciones">—</span></div>
       <div class="aviso-cobertura">
         <p><b>La pobreza según línea nacional no es comparable entre países</b>: cada Estado define
@@ -1047,24 +1100,24 @@
       <div class="grid-cards" id="tarj-condiciones"></div>
     </section>
 
-    <section class="domain" id="conectividad">
+    <section class="domain" id="conectividad" data-nivel="2">
       <div class="domain-head"><h3>Conectividad</h3><span class="tag" id="tag-conectividad">—</span></div>
       <div class="grid-cards" id="tarj-conectividad"></div>
     </section>
 
-    <section class="domain" id="ambiente">
+    <section class="domain" id="ambiente" data-nivel="2">
       <div class="domain-head"><h3>Superficie forestal</h3><span class="tag" id="tag-ambiente">—</span></div>
       <div class="grid-cards" id="tarj-ambiente"></div>
     </section>
 
-    <section class="domain" id="materias">
+    <section class="domain" id="materias" data-nivel="2">
       <div class="domain-head"><h3>Materias primas</h3><span class="tag" id="tag-materias">—</span></div>
       <div class="procedencia" id="proc-materias">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-materias"></div>
       <div id="vac-materias"></div>
     </section>
 
-    <section class="domain" id="informalidad">
+    <section class="domain" id="informalidad" data-nivel="2">
       <div class="domain-head"><h3>Empleo informal</h3>
         <span class="tag" id="tag-informalidad">—</span></div>
       <div class="grid-cards" id="tarj-informalidad"></div>
@@ -1076,7 +1129,7 @@
          organismo y dirección. No son cifras: es el índice para ir al original.</p>
     </div>
 
-    <section class="domain" id="oficiales">
+    <section class="domain" id="oficiales" data-nivel="3">
       <div class="domain-head"><h3>Padrón de fuentes oficiales</h3><span class="tag" id="tag-oficiales">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Este padrón no publica datos: publica dónde están.</b>
@@ -1097,7 +1150,7 @@
          contrastan las materias.</p>
     </div>
 
-    <section class="domain" id="cobertura">
+    <section class="domain" id="cobertura" data-nivel="2">
       <div class="domain-head"><h3>Cobertura noticiosa cruzada</h3><span class="tag" id="tag-cobertura">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Esto no registra hechos: registra que algo se está publicando.</b>
@@ -1113,7 +1166,7 @@
       <div id="vac-cobertura"></div>
     </section>
 
-    <section class="domain" id="palabras">
+    <section class="domain" id="palabras" data-nivel="3">
       <div class="domain-head"><h3>Mapa de palabras</h3><span class="tag" id="tag-palabras">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Qué términos circulan ahora mismo, no qué está ocurriendo.</b>
@@ -1129,7 +1182,7 @@
       <div class="nube" id="nube-palabras"></div>
     </section>
 
-    <section class="domain" id="redes">
+    <section class="domain" id="redes" data-nivel="3">
       <div class="domain-head"><h3>Circulación en red social abierta</h3><span class="tag" id="tag-redes">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mide cuánto se habla, no qué ocurre.</b> Una publicación en una red no es una
@@ -1155,7 +1208,7 @@
          calificación. Se descarga en planilla o se imprime en papel; no lleva juicios.</p>
     </div>
 
-    <section class="domain" id="mensajeria">
+    <section class="domain" id="mensajeria" data-nivel="3">
       <div class="domain-head"><h3>Difusión en canales de mensajería</h3><span class="tag" id="tag-mensajeria">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Esto NO corrobora nada de la cobertura noticiosa, y no se mezcla con ella.</b>
@@ -1179,7 +1232,7 @@
       <div id="vac-mensajeria"></div>
     </section>
 
-    <section class="domain" id="informe">
+    <section class="domain" id="informe" data-nivel="2">
       <div class="domain-head"><h3>Informe del registro</h3><span class="tag">Público, sin cuenta</span></div>
       <div class="barra-informe">
         <select id="pais-informe" aria-label="País del informe"></select>
@@ -1202,7 +1255,7 @@
          Cada materia tiene un enlace que trae hasta acá.</p>
     </div>
 
-    <section class="domain" id="fuentes-limites">
+    <section class="domain" id="fuentes-limites" data-nivel="3">
       <div class="domain-head"><h3>Procedencia y vacíos declarados</h3>
         <span class="tag" id="tag-fuentes">—</span></div>
       <div id="lista-fuentes"></div>
@@ -1214,7 +1267,7 @@
          del propio programa.</p>
     </div>
 
-    <section class="domain" id="calificacion">
+    <section class="domain" id="calificacion" data-nivel="3">
       <div class="domain-head"><h3>Cómo se califica lo que se publica</h3><span class="tag">Sistema Almirantazgo</span></div>
       <div class="dos-columnas">
         <div class="panel">
@@ -1680,6 +1733,41 @@
 
   const cifra = v => Math.abs(v)<1000 ? (Math.round(v*100)/100).toLocaleString('es-AR') : miles(Math.round(v));
 
+  // --- Unidades normalizadas ---------------------------------------------
+  // El dinero va SIEMPRE en dólares estadounidenses y con escala legible: nadie
+  // lee «26000000». Las cantidades grandes tambien se escalan. Lo que NO se
+  // convierte es lo que no es dinero ni cantidad: un porcentaje, una tasa por
+  // cien mil habitantes o un indice de 0 a 10 pierden su sentido si se los
+  // fuerza a otra unidad, y aca no se fuerza nada.
+  const esDinero = u => /d[oó]lar|usd|dollar/i.test(u || '');
+  const esCantidad = u => /^(personas|objetos|hechos|efectivos)/i.test((u || '').trim());
+
+  function escala(v){
+    const a = Math.abs(v);
+    if(a >= 1e12) return [v/1e12, ' billones'];
+    if(a >= 1e9)  return [v/1e9,  ' mil millones'];
+    if(a >= 1e6)  return [v/1e6,  ' millones'];
+    if(a >= 1e4)  return [v,      ''];
+    return [v, ''];
+  }
+
+  // Devuelve {texto, unidad} ya listos para mostrar.
+  function magnitud(v, unidad){
+    if(v === null || v === undefined || !isFinite(v)) return {texto:'—', unidad:''};
+    if(esDinero(unidad)){
+      const [n, suf] = escala(v);
+      return {texto: (Math.abs(n) < 100 ? cifra(n) : miles(Math.round(n))) + suf,
+              unidad: 'USD'};
+    }
+    // La escala depende del TAMANO del numero, no de la unidad: «117.000.000»
+    // es igual de ilegible sea lo que sea que mida. La unidad no se toca, solo
+    // se abrevia la cifra. Los porcentajes y las tasas quedan intactos porque
+    // nunca llegan a ese orden de magnitud.
+    const [n, suf] = escala(v);
+    if(suf) return {texto: cifra(n) + suf, unidad: unidad || ''};
+    return {texto: cifra(v), unidad: unidad || ''};
+  }
+
   function pintarFichaMapa(iso, nombre, bloque){
     const caja = document.getElementById('ficha-mapa');
     if(!caja) return;
@@ -1870,6 +1958,177 @@
       + (i.cautela ? `<span class="no-es"><b>Qué no es:</b> ${esc(i.cautela)}</span>` : '');
   }
 
+  // --- Tres niveles de lectura -------------------------------------------
+  // La misma pagina servida a quien pregunta «como esta mi pais» y a quien
+  // audita el metodo. Lo que cambia es CUANTO se despliega, nunca el dato ni
+  // las cautelas: una cifra sin su advertencia no se muestra en ningun nivel.
+  let nivel = 1;
+  try{ const g = localStorage.getItem('siwa-nivel'); if(g) nivel = +g || 1; }catch(e){}
+
+  function aplicarNivel(){
+    document.body.dataset.nivel = String(nivel);
+    document.querySelectorAll('.nivel').forEach(b=>
+      b.classList.toggle('activo', +b.dataset.nivel === nivel));
+    // La barra lateral solo lista lo que en este nivel existe.
+    document.querySelectorAll('nav.rail a[href^="#"]').forEach(a=>{
+      const destino = document.getElementById(a.getAttribute('href').slice(1));
+      const oculto = destino && destino.offsetParent === null && destino.dataset.nivel;
+      a.style.display = oculto ? 'none' : '';
+    });
+    document.querySelectorAll('nav.rail .grupo').forEach(g=>{
+      let hay = false, n = g.nextElementSibling;
+      while(n && !n.classList.contains('grupo')){
+        if(n.tagName === 'A' && n.style.display !== 'none') hay = true;
+        n = n.nextElementSibling;
+      }
+      g.style.display = hay ? '' : 'none';
+    });
+  }
+
+  document.querySelectorAll('.nivel').forEach(b =>
+    b.addEventListener('click', ()=>{
+      nivel = +b.dataset.nivel;
+      try{ localStorage.setItem('siwa-nivel', String(nivel)); }catch(e){}
+      aplicarNivel(); repintar();
+    }));
+
+  // --- Ficha ciudadana: lo que mas cambio en el pais elegido --------------
+  function fichaCiudadana(){
+    const caja = document.getElementById('tarj-ficha');
+    const aviso = document.getElementById('elige-pais');
+    const tag = document.getElementById('tag-ficha');
+    const pie = document.getElementById('pie-ficha');
+    if(!caja) return;
+
+    if(!paisFiltro){
+      caja.innerHTML = '';
+      if(pie) pie.textContent = '';
+      if(tag) tag.textContent = 'elegí un país';
+      if(aviso) aviso.innerHTML =
+        `<b>Elegí un país arriba, en «País o zona», o hacé clic en el mapa.</b><br>
+         Vas a ver los datos que más se movieron en los últimos años: qué mejoró, qué
+         empeoró, de dónde sale cada cifra y qué es lo que esa cifra <b>no</b> dice.`;
+      return;
+    }
+    if(aviso) aviso.innerHTML = '';
+
+    // ¿La variacion porcentual significa algo en este indicador?
+    //
+    // Hay DOS casos donde no significa nada, y los dos aparecieron probando:
+    //
+    // 1. Indices construidos de recorrido corto. En una escala de -2,5 a 2,5,
+    //    pasar de 0,1 a -0,2 da «-300 %»: eso no es un dato, es una division por
+    //    un numero chico. Se informa la diferencia en PUNTOS.
+    //    Ojo: no alcanza con mirar la unidad. El valor indicativo del armamento
+    //    tambien dice «valor indicativo» y esta en millones: tratarlo como indice
+    //    daba «-1.000.000 pts», que es absurdo. Por eso ademas se exige que los
+    //    valores sean chicos.
+    //
+    // 2. Cantidades con signo que cruzan el cero, como la migracion neta: pasar
+    //    de +1.000 a -500 no es «-150 %» de nada. Se informa la DIFERENCIA en la
+    //    unidad del propio indicador.
+    const RECORRIDO_CORTO = 120;
+    const modoDeCambio = (i, d) => {
+      const u = (i.unidad || '').toLowerCase();
+      const suenaIndice = /indice|índice|escala|puntaje|estimacion|estimación|cumplimiento/.test(u);
+      const chicos = Math.max(Math.abs(d.valor), Math.abs(d.valor_inicial)) <= RECORRIDO_CORTO;
+      if(suenaIndice && chicos) return 'puntos';
+      const cruzaCero = (d.valor > 0) !== (d.valor_inicial > 0);
+      if(cruzaCero || !d.valor_inicial) return 'diferencia';
+      return 'porcentaje';
+    };
+
+    // Se juntan todos los indicadores del pais que declaran variacion en su ventana.
+    const cambios = [];
+    fuentesInd().forEach(f=>{
+      const reg = (f.registros||[]).find(r=>r.iso===paisFiltro);
+      if(!reg) return;
+      (f.indicadores||[]).forEach(i=>{
+        const d = reg.indicadores[i.clave];
+        if(!d || d.valor === undefined || d.valor_inicial === undefined) return;
+        if(!isFinite(d.valor) || !isFinite(d.valor_inicial)) return;
+        const modo = modoDeCambio(i, d);
+        const dif = d.valor - d.valor_inicial;
+        const pct = d.tendencia_ventana_pct;
+        let magnitud;
+        if(modo === 'porcentaje'){
+          if(pct === null || pct === undefined || !isFinite(pct) || Math.abs(pct) < 1) return;
+          magnitud = Math.abs(pct);
+        } else if(modo === 'puntos'){
+          if(Math.abs(dif) < 0.05) return;
+          // Se ordena por cuanto se movio respecto del recorrido del indice.
+          const recorrido = Math.max(Math.abs(d.valor), Math.abs(d.valor_inicial), 1);
+          magnitud = Math.abs(dif) / recorrido * 100;
+        } else {
+          if(!dif) return;
+          // Una cantidad que cruza el cero se ordena por el peso del cambio.
+          const base = Math.max(Math.abs(d.valor), Math.abs(d.valor_inicial), 1);
+          magnitud = Math.abs(dif) / base * 100;
+        }
+        cambios.push({info:i, dato:d, proc:f.procedencia, modo, dif, magnitud});
+      });
+    });
+    cambios.sort((a,b)=>b.magnitud-a.magnitud);
+    const muestra = cambios.slice(0,6);
+
+    if(tag) tag.textContent = muestra.length
+      ? `${paisNombre} · ${muestra.length} de ${cambios.length} cambios`
+      : `${paisNombre} · sin serie comparable`;
+
+    if(!muestra.length){
+      caja.innerHTML = `<div class="card"><h4>Sin cambios que mostrar</h4><div class="sub">
+        Para ${esc(paisNombre)} las fuentes no publican series con dos años comparables.
+        <b>No significa que no haya pasado nada</b>: significa que nadie lo mide de forma
+        comparable. Podés ver igual el resto del registro cambiando de nivel arriba.</div></div>`;
+      if(pie) pie.textContent = '';
+      return;
+    }
+
+    caja.innerHTML = muestra.map(c=>{
+      const subio = c.dif > 0;
+      const desde = c.dato.anio_inicial, hasta = c.dato.anio;
+      const anios = hasta - desde;
+      // La direccion es la CONVENCION DE LA FUENTE, no un veredicto de la casa.
+      // Decir «mejoró» sobre la exportación de minerales seria emitir un juicio, y
+      // este registro no los emite: dice para donde se movio y como lo lee la fuente.
+      const haciaPeor = subio === !!c.info.mas_es_peor;
+      const cifraCambio =
+          c.modo === 'porcentaje' ? `${subio?'+':''}${cifra(c.dato.tendencia_ventana_pct)} %`
+        : c.modo === 'puntos'     ? `${subio?'+':''}${cifra(c.dif)} pts`
+        :                           `${subio?'+':''}${magnitud(c.dif, c.info.unidad).texto}`;
+      const dice =
+          c.modo === 'porcentaje' ? `${subio?'Subió':'Bajó'} ${cifra(Math.abs(c.dato.tendencia_ventana_pct))} % en ${anios} año${anios===1?'':'s'}.`
+        : `Pasó de ${magnitud(c.dato.valor_inicial, c.info.unidad).texto} a ${magnitud(c.dato.valor, c.info.unidad).texto} en ${anios} año${anios===1?'':'s'}.`;
+      return `<div class="card cambio ${haciaPeor?'empeora':'mejora'}">
+        <h4>${esc(c.info.rotulo)}</h4>
+        <div class="value"><span class="flecha">${subio?'▲':'▼'}</span>${cifraCambio}</div>
+        <div class="sub">de ${magnitud(c.dato.valor_inicial, c.info.unidad).texto}
+          a <b>${magnitud(c.dato.valor, c.info.unidad).texto}</b>
+          ${esc(magnitud(c.dato.valor, c.info.unidad).unidad)} · entre ${desde} y ${hasta}</div>
+        <p class="lectura">${dice}
+          <b>Para la fuente, en esta materia ${c.info.mas_es_peor?'cuanto más alto, peor':'cuanto más alto, mejor'}</b>,
+          así que este movimiento va hacia ${haciaPeor?'el lado malo':'el lado bueno'} <b>según ese criterio</b>.
+          ${c.modo==='puntos'?'<span class="ojo"><b>Se informa en puntos y no en porcentaje:</b> es un índice construido de recorrido corto, y un porcentaje sobre una escala así puede dar cifras enormes sin significado.</span>':''}
+          ${c.modo==='diferencia'?'<span class="ojo"><b>Se informa la diferencia y no un porcentaje:</b> esta cifra cambia de signo, y un porcentaje entre un valor positivo y uno negativo no significa nada.</span>':''}
+          ${c.info.cautela?`<span class="ojo"><b>Ojo:</b> ${esc(c.info.cautela)}</span>`:''}</p>
+        <div class="foot"><span class="src">${esc(c.info.origen||c.proc.fuente.nombre)}</span>
+          <span class="badge unica" title="${esc(explicaCalif(c.proc.calificacion))}">${c.proc.calificacion.fiabilidad}-${c.proc.calificacion.credibilidad}</span></div>
+      </div>`;
+    }).join('');
+
+    const peores = muestra.filter(c => (c.dif > 0) === !!c.info.mas_es_peor).length;
+    if(pie) pie.innerHTML =
+      `Se muestran los <b>${muestra.length} cambios más grandes</b> de ${cambios.length} que
+       las fuentes publican para ${esc(paisNombre)}: <b>${peores}</b> hacia el lado que la
+       fuente considera malo y <b>${muestra.length-peores}</b> hacia el bueno. <b>El orden lo decide el tamaño del cambio,
+       no su importancia</b>: un salto grande en algo menor aparece antes que un movimiento chico
+       en algo grave. Y <b>«bueno» o «malo» es el criterio de la fuente, no un juicio de la
+       Fundación</b>: este registro no emite juicios.
+       Cada cifra es de la fuente que se nombra, no de la Fundación, y compara los dos años
+       que se indican —que no siempre son los últimos dos, porque las fuentes publican con
+       atraso—. Para ver todos los temas, cambiá el nivel de lectura arriba.`;
+  }
+
   function repintarAhora(){
     paso('estilo del mapa', ()=>{ if(capaPaises) capaPaises.setStyle(estiloPais); });
     // armarAmbito() va aca y no solo en sincronizar(): el padron de paises llega
@@ -1879,6 +2138,8 @@
     paso('desplegables de tema', solapas);
     paso('leyenda', leyenda);
     paso('panel de cruce', panelCruce);
+    paso('ficha ciudadana', fichaCiudadana);
+    paso('nivel de lectura', aplicarNivel);
     paso('ficha del mapa', ()=>pintarFichaMapa(paisFiltro, paisNombre,
       paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:''));
     const ex = document.getElementById('explica-capa');
@@ -2124,9 +2385,10 @@
 
   function tarjeta(f, info, nombre, meta){
     const tv=f.tendencia_ventana_pct;
+    const m = magnitud(f.valor, info.unidad);
     return `<div class="card"><h4>${esc(paisFiltro ? (info.rotulo||nombre) : nombre)}</h4>
-      <div class="value">${cifra(f.valor)}</div>
-      <div class="sub">${esc(info.unidad||'')} · dato de ${f.anio}${
+      <div class="value">${m.texto}</div>
+      <div class="sub">${esc(m.unidad)} · dato de ${f.anio}${
         (tv!==null&&tv!==undefined)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
       <div class="foot"><span class="src">${esc(info.origen||meta.fuente.nombre)}</span>
         <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
@@ -2716,8 +2978,8 @@
            : 'Diferencia dentro de lo que explican el flete, el seguro y los envíos que cruzan el año. <b>Sin señal.</b>');
       return `<div class="asunto"><h4>${esc(c.pais_origen)} → ${esc(c.pais_destino)}</h4>
         <div class="foot"><span class="porque">
-          El exportador declara <b>${miles(Math.round(c.exportador_declara/1e6))} millones</b> ·
-          el importador, <b>${miles(Math.round(c.importador_declara/1e6))} millones</b><br>${lectura}
+          El exportador declara <b>${miles(Math.round(c.exportador_declara/1e6))} millones de USD</b> ·
+          el importador, <b>${miles(Math.round(c.importador_declara/1e6))} millones de USD</b><br>${lectura}
           ${c.medido_en?`<br><span class="menor">medido el ${c.medido_en.slice(0,10)}</span>`:''}
         </span><span class="badge ${clase}">${c.brecha_pct>0?'+':''}${cifra(c.brecha_pct)} %</span></div>
       </div>`;

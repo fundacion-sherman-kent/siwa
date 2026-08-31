@@ -215,7 +215,7 @@ INDICADORES = [
                 "mucho."},
     {"clave": "gasto_militar_dolares", "codigo": "MS.MIL.XPND.CD", "fuente_id": None,
      "rotulo": "Gasto militar en dolares", "eje": "Defensa",
-     "unidad": "dolares corrientes", "mas_es_peor": False,
+     "unidad": "dolares estadounidenses corrientes", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "El tamano absoluto del presupuesto. En dolares corrientes: la "
                 "comparacion entre anios distintos arrastra inflacion y tipo de cambio."},
@@ -227,7 +227,7 @@ INDICADORES = [
                 "peso relativo del instrumento militar en la sociedad."},
     {"clave": "armas_importadas", "codigo": "MS.MIL.MPRT.KD", "fuente_id": None,
      "rotulo": "Importacion de armamento mayor", "eje": "Defensa",
-     "unidad": "valor indicativo de tendencia, SIPRI", "mas_es_peor": False,
+     "unidad": "valor indicativo SIPRI, NO son dolares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Es el indicador de MATERIAL disponible al que se puede llegar sin "
                 "pagar: mide la ADQUISICION de armamento mayor —aeronaves, buques, "
@@ -237,7 +237,7 @@ INDICADORES = [
                 "no significa que el pais no tenga material."},
     {"clave": "armas_exportadas", "codigo": "MS.MIL.XPRT.KD", "fuente_id": None,
      "rotulo": "Exportacion de armamento mayor", "eje": "Defensa",
-     "unidad": "valor indicativo de tendencia, SIPRI", "mas_es_peor": False,
+     "unidad": "valor indicativo SIPRI, NO son dolares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Muy pocos Estados de la region exportan armamento mayor: la mayoria "
                 "figura sin dato, y eso es el dato. Misma unidad indicativa que la "
