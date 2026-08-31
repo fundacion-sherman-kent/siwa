@@ -200,6 +200,27 @@
   .ficha-pais .muestra{font-size:10.5px;color:#7d90a8;margin-top:10px;line-height:1.55;}
   .ficha-pais .muestra b{color:#9fb2c8;font-weight:600;}
   .explica-capa .no-es{display:block;margin-top:5px;color:#ffb27a;}
+  .tema.apagado{opacity:.45;cursor:not-allowed;border-style:dashed;}
+  .tema .sin{font-size:9px;text-transform:uppercase;letter-spacing:.4px;color:#7d90a8;}
+  .leaflet-tooltip.ficha .cifra{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:800;color:#fff;}
+  .grafico{margin:14px 0 18px;}
+  .grafico figcaption{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:#7d90a8;margin-bottom:6px;}
+  .grafico svg{width:100%;height:auto;overflow:visible;}
+  .grafico .ejeg{stroke:rgba(255,255,255,.18);stroke-width:1;}
+  .grafico .lineag{fill:none;stroke:var(--orange);stroke-width:2;}
+  .grafico .areag{fill:rgba(251,101,0,.14);stroke:none;}
+  .grafico .puntog{fill:var(--orange);}
+  .grafico .rotg{fill:#7d90a8;font-size:9.5px;font-family:'Inter',sans-serif;}
+  .grafico .barrag{fill:rgba(251,101,0,.45);}
+  .grafico .barrag.destacada{fill:var(--orange);}
+  @media print{
+    .grafico .rotg{fill:#555;}
+    .grafico .lineag{stroke:#c25200;}
+    .grafico .areag{fill:rgba(194,82,0,.12);}
+    .grafico .puntog,.grafico .barrag.destacada{fill:#c25200;}
+    .grafico .barrag{fill:#e0a878;}
+    .grafico .ejeg{stroke:#bbb;}
+  }
 
   /* ---- Informe descargable ---- */
   .barra-informe{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;}
@@ -337,10 +358,7 @@
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <div class="mapa-barra">
-        <div class="temas">
-          <button class="tema activo" data-capa="focos">Economías ilícitas · focos de calor</button>
-          <button class="tema" data-capa="desplazamiento">Desplazamiento forzado</button>
-        </div>
+        <div class="temas" id="temas"></div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
       <p class="explica-capa" id="explica-capa">—</p>
@@ -589,11 +607,12 @@
 (function(){
   const RUTA = '../datos/publico/';
   const almacen = {};
-  let capaActiva = 'focos', paisFiltro = null, paisNombre = null;
+  let capaActiva = 'focos', paisFiltro = null, paisNombre = null, padron = [];
   let registros = 0, vacios = 0, fallas = 0, dominios = 0;
 
   const miles = n => Number(n).toLocaleString('es-AR');
   const momento = iso => iso ? new Date(iso).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}) : '—';
+  const esc = t => String(t??'').replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
 
   function reloj(){
     document.getElementById('reloj').textContent =
@@ -601,38 +620,33 @@
   }
   reloj(); setInterval(reloj, 30000);
 
-  function traer(archivo){
-    return fetch(RUTA + archivo).then(r => {
-      if(!r.ok) throw new Error('No se pudo leer ' + archivo + ' (HTTP ' + r.status + ')');
-      return r.json();
-    });
-  }
+  const traer = a => fetch(RUTA+a).then(r => {
+    if(!r.ok) throw new Error('No se pudo leer '+a+' (HTTP '+r.status+')');
+    return r.json();
+  });
 
   function pintarProcedencia(destino, meta){
     const c = meta.calificacion;
     document.getElementById(destino).innerHTML =
-      `<span class="calif">${c.fiabilidad}-${c.credibilidad}</span>` +
-      `<span><b>Fuente:</b> ${meta.fuente.nombre}</span>` +
-      `<span><b>Obtenido:</b> ${momento(meta.obtenido_en)}</span>` +
-      `<span><b>Corroboración:</b> ${c.corroborado ? 'dos orígenes independientes' : 'fuente única, declarada'}</span>`;
+      `<span class="calif">${c.fiabilidad}-${c.credibilidad}</span>`+
+      `<span><b>Fuente:</b> ${esc(meta.fuente.nombre)}</span>`+
+      `<span><b>Obtenido:</b> ${momento(meta.obtenido_en)}</span>`+
+      `<span><b>Corroboración:</b> ${c.corroborado?'dos orígenes independientes':'fuente única, declarada'}</span>`;
   }
-
   function pintarVacios(destino, lista){
-    if(!lista || !lista.length) return 0;
+    if(!lista||!lista.length) return 0;
     document.getElementById(destino).innerHTML =
-      `<div class="vacios"><h5>Lo que esta fuente no cubre</h5><ul>` +
-      lista.map(v => `<li>${v}</li>`).join('') + `</ul></div>`;
+      `<div class="vacios"><h5>Lo que esta fuente no cubre</h5><ul>`+
+      lista.map(v=>`<li>${esc(v)}</li>`).join('')+`</ul></div>`;
     return lista.length;
   }
-
   function pintarFalla(destino, colector, error, meta){
     const viejo = meta ? `El último dato válido es del ${momento(meta.obtenido_en)} y sigue en pantalla sin modificar.`
                        : 'Todavía no hay ningún dato válido para este dominio.';
     document.getElementById(destino).innerHTML =
-      `<div class="falla"><h4>El colector «${colector}» no pudo completar la última corrida</h4>` +
-      `<p>${error}<br>${viejo} No se muestran datos simulados ni estimados.</p></div>`;
+      `<div class="falla"><h4>El colector «${esc(colector)}» no pudo completar la última corrida</h4>`+
+      `<p>${esc(error)}<br>${viejo} No se muestran datos simulados ni estimados.</p></div>`;
   }
-
   function marcador(){
     document.getElementById('m-dominios').textContent = dominios;
     document.getElementById('m-registros').textContent = miles(registros);
@@ -642,373 +656,560 @@
       : `<span class="status-dot"></span>Todos los colectores al día`;
   }
 
-  // ---- Capas del mapa ---------------------------------------------------
+  // ---- Las materias del registro, en el orden de los tres ejes --------------
+  // Las que no tienen colector figuran igual, apagadas: el mapa muestra la
+  // arquitectura completa y dónde están los huecos.
+  const MATERIAS = [
+    {clave:'termicas',      eje:'Seguridad',   rotulo:'Anomalías térmicas',      disponible:()=>!!almacen.focos},
+    {clave:'violencia',     eje:'Seguridad',   rotulo:'Violencia organizada',    disponible:()=>false},
+    {clave:'contratacion',  eje:'Gobernanza',  rotulo:'Contratación pública',    disponible:()=>false},
+    {clave:'sanciones',     eje:'Gobernanza',  rotulo:'Sanciones e integridad',  disponible:()=>false},
+    {clave:'institucional', eje:'Gobernanza',  rotulo:'Estabilidad institucional',disponible:()=>false},
+    {clave:'desplazamiento',eje:'Inteligencia',rotulo:'Desplazamiento forzado',  disponible:()=>!!almacen.desplazamiento},
+    {clave:'tendencia',     eje:'Inteligencia',rotulo:'Tendencia del desplazamiento',disponible:()=>!!almacen.serie},
+    {clave:'contrabando',   eje:'Inteligencia',rotulo:'Contrabando',             disponible:()=>false},
+    {clave:'oficiales',     eje:'Fuentes',     rotulo:'Fuentes oficiales',       disponible:()=>!!almacen.oficiales},
+  ];
+
   const CAPAS = {
     focos: {
-      etiqueta: 'Economías ilícitas',
-      cortes: [1, 50, 500],
-      conteo(){ const m={}; (almacen.focos?.registros||[]).forEach(r => m[r.iso]=r.focos); return m; },
+      materia:'termicas', unidad:'focos',
+      conteo(){ const m={}; (almacen.focos?.registros||[]).forEach(r=>m[r.iso]=r.focos); return m; },
       puntos(){
-        return (almacen.focos?.muestra_para_mapa||[]).map(p => ({
+        return (almacen.focos?.muestra_para_mapa||[]).map(p=>({
           lat:p.latitud, lon:p.longitud,
           radio: Math.max(2.5, Math.min(9, Math.sqrt(p.potencia_radiativa)/2)),
-          ficha: `<b>Foco de calor · ${p.pais||'fuera del padrón'}</b>${p.fecha} ${String(p.hora_utc).padStart(4,'0')} UTC<br>` +
-                 `Potencia radiativa ${p.potencia_radiativa} MW · confianza ${p.confianza}` +
-                 `<span class="nota">Anomalía térmica, no incendio ni actividad ilegal comprobada.</span>`
+          ficha:`<b>Anomalía térmica · ${esc(p.pais||'fuera del padrón')}</b>${p.fecha} ${String(p.hora_utc).padStart(4,'0')} UTC<br>`+
+                `Potencia radiativa ${p.potencia_radiativa} MW · confianza ${p.confianza}`+
+                `<span class="nota">Calor detectado por satélite. No es un incendio ni actividad ilegal comprobada.</span>`
         }));
       },
-      ficha(iso, nombre, bloque){
-        const r = (almacen.focos?.registros||[]).find(x => x.iso===iso);
-        if(!r) return `<b>${nombre}</b>${bloque}<span class="nota">Sin focos en la ventana. El sensor no ve bajo nubes: la ausencia no prueba inactividad.</span>`;
-        return `<b>${nombre}</b>${bloque}<br>${miles(r.focos)} focos · ${miles(r.confianza_alta)} de confianza alta<br>` +
-               `Potencia radiativa ${miles(r.potencia_radiativa_total)} MW` +
-               `<span class="nota">Anomalías térmicas. No son incendios ni actividad ilegal comprobada.</span>`;
+      detalle(iso){
+        const r=(almacen.focos?.registros||[]).find(x=>x.iso===iso);
+        return r ? `${miles(r.confianza_alta)} de confianza alta · ${miles(r.potencia_radiativa_total)} MW acumulados` : null;
       },
-      leyenda: ['Sin focos','1 a 49','50 a 499','500 o más','Foco de la muestra publicada'],
-      explica(){
-        const d = almacen.focos;
-        return `<b>Qué muestra:</b> anomalías térmicas detectadas por satélite en la última ventana de un día. ` +
-               `El color del país es la cantidad; los puntos son los ${d ? miles(d.muestra_para_mapa.length) : '—'} focos de mayor energía, en su coordenada exacta.` +
-               `<span class="no-es"><b>Qué no es:</b> no son incendios ni actividad ilegal comprobada. La detección incluye quema agrícola, ` +
-               `incendio forestal, quema de gas en yacimientos e industria. Leerla como minería ilegal o desmonte exige cruzarla contra ` +
-               `concesiones y áreas protegidas, y esa lectura la hace el analista, no este registro.</span>`;
-      }
+      cautela:'Calor detectado por satélite. No mide actividad ilegal: la lectura la hace el analista.',
+      rotuloPunto:'Anomalía de la muestra publicada'
     },
     desplazamiento: {
-      etiqueta: 'Desplazamiento forzado',
-      cortes: [1, 50000, 300000],
-      conteo(){ const m={}; (almacen.desplazamiento?.registros||[]).forEach(r => m[r.iso]=r.expulsion); return m; },
+      materia:'desplazamiento', unidad:'personas expulsadas',
+      conteo(){ const m={}; (almacen.desplazamiento?.registros||[]).forEach(r=>m[r.iso]=r.expulsion); return m; },
       puntos(){ return []; },
-      ficha(iso, nombre, bloque){
-        const r = (almacen.desplazamiento?.registros||[]).find(x => x.iso===iso);
-        if(!r) return `<b>${nombre}</b>${bloque}<span class="nota">Sin registro en la fuente.</span>`;
-        return `<b>${nombre}</b>${bloque}<br>Expulsión ${miles(r.expulsion)} · Recepción ${miles(r.recepcion)}<br>` +
-               `Desplazados internos ${miles(r.desplazados_internos)} · cifra de ${r.anio}` +
-               `<span class="nota">Cifra anual de cierre, no dato en vivo. Sin desglose subnacional.</span>`;
+      detalle(iso){
+        const r=(almacen.desplazamiento?.registros||[]).find(x=>x.iso===iso);
+        return r ? `Recibe ${miles(r.recepcion)} · ${miles(r.desplazados_internos)} desplazados internos · cifra de ${r.anio}` : null;
       },
-      leyenda: ['Sin registro','Menos de 50.000','50.000 a 299.999','300.000 o más','Sin capa de puntos: la fuente no da coordenada'],
-      explica(){
-        const d = almacen.desplazamiento;
-        return `<b>Qué muestra:</b> personas expulsadas de cada país —refugiadas o solicitando asilo fuera de él—, ` +
-               `cifra anual de cierre de ${d ? d.anio_de_la_cifra : '—'}. El país que recibe y los desplazados internos se leen en la ficha.` +
-               `<span class="no-es"><b>Qué no es:</b> no es un dato en vivo, y no incluye la migración irregular no registrada, que en varios ` +
-               `corredores de la región es la mayoría del flujo. La fuente no publica coordenada: por eso esta capa no tiene puntos.</span>`;
-      }
+      cautela:'Cifra anual de cierre, no dato en vivo. Sin desglose subnacional.',
+      rotuloPunto:'Sin capa de puntos: la fuente no publica coordenada'
+    },
+    tendencia: {
+      materia:'tendencia', unidad:'variación anual', divergente:true,
+      // Variación del último año contra el anterior, calculada de la serie propia.
+      // Es aritmética sobre un dato publicado, no una proyección.
+      conteo(){
+        const m={};
+        (almacen.serie?.registros||[]).forEach(p=>{
+          const s=p.serie; if(!s || s.length<2) return;
+          const u=s[s.length-1], a=s[s.length-2];
+          const vu=u.origen_refugiados+u.origen_solicitantes, va=a.origen_refugiados+a.origen_solicitantes;
+          if(va>0) m[p.iso]=((vu-va)/va)*100;
+        });
+        return m;
+      },
+      puntos(){ return []; },
+      detalle(iso){
+        const p=(almacen.serie?.registros||[]).find(x=>x.iso===iso);
+        if(!p||p.serie.length<2) return null;
+        const s=p.serie, u=s[s.length-1], a=s[s.length-2];
+        return `${a.anio}: ${miles(a.origen_refugiados+a.origen_solicitantes)} → ${u.anio}: ${miles(u.origen_refugiados+u.origen_solicitantes)}`;
+      },
+      cautela:'Variación entre los dos últimos años publicados. Es aritmética sobre el dato, no una proyección ni un pronóstico.',
+      rotuloPunto:'Sin capa de puntos: es una variación, no un hecho ubicable'
+    },
+    oficiales: {
+      materia:'oficiales', unidad:'conjuntos oficiales',
+      conteo(){ const m={}; (almacen.oficiales?.registros||[]).forEach(r=>m[r.iso]=r.conjuntos_hallados); return m; },
+      puntos(){ return []; },
+      detalle(iso){
+        const r=(almacen.oficiales?.registros||[]).find(x=>x.iso===iso);
+        return r ? `${r.organismo} · ${r.tipo}` : null;
+      },
+      cautela:'Cantidad de conjuntos publicados por el Estado, no su calidad ni su vigencia.',
+      rotuloPunto:'Sin capa de puntos: es un índice de fuentes'
     }
   };
+  const claveDeCapa = m => Object.keys(CAPAS).find(k => CAPAS[k].materia === m);
 
-  // ---- Tarjetas por dominio --------------------------------------------
-  function tarjetasIlicitas(){
-    const d = almacen.focos; if(!d) return;
-    const meta = d.procedencia;
-    const lista = paisFiltro ? d.registros.filter(r => r.iso===paisFiltro) : d.registros;
-    const total = lista.reduce((a,r)=>a+r.focos,0);
-    document.getElementById('tag-ilicitas').textContent = paisFiltro
-      ? miles(total)+' focos en '+paisNombre : miles(total)+' focos en '+meta.cantidad+' países';
-    document.getElementById('tarj-ilicitas').innerHTML = lista.length
-      ? lista.slice(0,6).map(r => `<div class="card">
-          <h4>${r.pais}</h4><div class="value">${miles(r.focos)}</div>
-          <div class="sub">${miles(r.confianza_alta)} de confianza alta · ${miles(r.potencia_radiativa_total)} MW</div>
-          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
-            <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
-        </div>`).join('')
-      : `<div class="card"><h4>Sin focos detectados</h4><div class="sub">El sensor no registró anomalías térmicas en ${paisNombre} durante la ventana. No ve bajo nubes: la ausencia no prueba inactividad.</div></div>`;
+  // ---- Escala de color, calculada de los datos de cada corrida -------------
+  // Con cortes fijos el tramo superior se traga todo y el mapa deja de
+  // discriminar. Los cortes salen de los cuartiles de lo que hay hoy.
+  function escala(){
+    const valores = Object.values(CAPAS[capaActiva].conteo()).filter(v=>v>0).sort((a,b)=>a-b);
+    if(!valores.length) return [1,2,3];
+    const q = p => valores[Math.min(valores.length-1, Math.floor(valores.length*p))];
+    const cortes = [1, q(.34), q(.67)];
+    return cortes[1] <= cortes[0] ? [1, cortes[0]+1, Math.max(cortes[2], cortes[0]+2)] : cortes;
+  }
+  const TONOS = ['#0E2135','rgba(251,101,0,.28)','rgba(251,101,0,.55)','rgba(251,101,0,.85)'];
+  function tono(n, c){ return n < c[0] ? TONOS[0] : n < c[1] ? TONOS[1] : n < c[2] ? TONOS[2] : TONOS[3]; }
+
+  function posicion(iso){
+    const c = CAPAS[capaActiva].conteo();
+    const orden = Object.entries(c).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+    const total = orden.reduce((a,[,v])=>a+v,0) || 1;
+    const i = orden.findIndex(([k])=>k===iso);
+    if(i < 0) return null;
+    return {puesto:i+1, de:orden.length, valor:orden[i][1], parte:(orden[i][1]/total*100)};
   }
 
-  function tarjetasDesplazamiento(){
-    const d = almacen.desplazamiento; if(!d) return;
-    const meta = d.procedencia;
-    const lista = paisFiltro ? d.registros.filter(r => r.iso===paisFiltro) : d.registros;
-    document.getElementById('tag-desplazamiento').textContent = paisFiltro
-      ? 'cifra de '+d.anio_de_la_cifra+' · '+paisNombre
-      : meta.cantidad+' países · cifra de '+d.anio_de_la_cifra;
-    document.getElementById('tarj-desplazamiento').innerHTML = lista.length
-      ? lista.slice(0,6).map(r => `<div class="card">
-          <h4>${r.pais}</h4><div class="value">${miles(r.expulsion)}</div>
-          <div class="sub">expulsión · recepción ${miles(r.recepcion)} · internos ${miles(r.desplazados_internos)}</div>
-          <div class="foot"><span class="src">${meta.fuente.nombre}</span>
-            <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>
-        </div>`).join('')
-      : `<div class="card"><h4>Sin registro</h4><div class="sub">La fuente no consigna a ${paisNombre}.</div></div>`;
+  // Escala divergente: baja de un lado, sube del otro, con el cero en el medio.
+  const BAJA=['rgba(63,167,150,.75)','rgba(63,167,150,.40)'];
+  const SUBE=['rgba(251,101,0,.40)','rgba(251,101,0,.85)'];
+  function tonoDivergente(v){
+    if(v===undefined||v===null) return TONOS[0];
+    if(v<=-15) return BAJA[0];
+    if(v<0)   return BAJA[1];
+    if(v<15)  return SUBE[0];
+    return SUBE[1];
   }
-
-  // ---- Mapa -------------------------------------------------------------
-  let mapa=null, capaPaises=null, capaPuntos=null, padron=[];
-
-  function color(n, c){
-    if(n < c[0]) return '#0E2135';
-    if(n < c[1]) return 'rgba(251,101,0,.28)';
-    if(n < c[2]) return 'rgba(251,101,0,.55)';
-    return 'rgba(251,101,0,.85)';
-  }
-
   function estiloPais(rasgo){
+    const capa=CAPAS[capaActiva], iso=rasgo.properties.iso;
+    const v = capa.conteo()[iso];
+    const relleno = capa.divergente ? tonoDivergente(v) : tono(v||0, escala());
+    const sel = paisFiltro === iso;
+    return {color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
+            fillColor: relleno, fillOpacity:.9};
+  }
+
+  function ficha(iso, nombre, bloque){
     const capa = CAPAS[capaActiva];
-    const n = capa.conteo()[rasgo.properties.iso] || 0;
-    const sel = paisFiltro === rasgo.properties.iso;
-    return { color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
-             fillColor: color(n, capa.cortes), fillOpacity:.9 };
+    if(capa.divergente){
+      const v = capa.conteo()[iso], det = capa.detalle(iso);
+      if(v===undefined) return `<b>${esc(nombre)}</b>${esc(bloque)}<span class="nota">Sin serie suficiente para calcular la variación.</span>`;
+      const signo = v>0?'+':'';
+      return `<b>${esc(nombre)}</b>${esc(bloque)}<br><span class="cifra">${signo}${v.toFixed(1)} %</span> ${capa.unidad}`+
+             (det?`<br>${det}`:'')+`<span class="nota">${capa.cautela}</span>`;
+    }
+    const p = posicion(iso);
+    if(!p) return `<b>${esc(nombre)}</b>${esc(bloque)}<span class="nota">Sin registro en esta capa.</span>`;
+    const det = capa.detalle(iso);
+    return `<b>${esc(nombre)}</b>${esc(bloque)}<br>`+
+           `<span class="cifra">${miles(p.valor)}</span> ${capa.unidad}<br>`+
+           `${p.puesto}.º de ${p.de} · ${p.parte.toFixed(1)} % del total regional`+
+           (det?`<br>${det}`:'')+
+           `<span class="nota">${capa.cautela}</span>`;
   }
 
   function leyenda(){
     const capa = CAPAS[capaActiva];
-    const cajas = ['#0E2135','rgba(251,101,0,.28)','rgba(251,101,0,.55)','rgba(251,101,0,.85)'];
+    if(capa.divergente){
+      const pares=[[BAJA[0],'Baja más de 15 %'],[BAJA[1],'Baja hasta 15 %'],
+                   [SUBE[0],'Sube hasta 15 %'],[SUBE[1],'Sube más de 15 %'],
+                   [TONOS[0],'Sin serie suficiente']];
+      document.getElementById('leyenda').innerHTML =
+        pares.map(([col,tx])=>`<span><i style="background:${col}${col===TONOS[0]?';border:1px solid rgba(255,255,255,.3)':''}"></i>${tx}</span>`).join('')+
+        `<span class="sin-puntos">${capa.rotuloPunto}</span>`;
+      return;
+    }
+    const c = escala();
+    const rotulos = [`Sin ${capa.unidad.split(' ')[0]}`,
+                     `1 a ${miles(c[1]-1)}`,
+                     `${miles(c[1])} a ${miles(c[2]-1)}`,
+                     `${miles(c[2])} o más`];
     document.getElementById('leyenda').innerHTML =
-      capa.leyenda.slice(0,4).map((t,i) =>
-        `<span><i style="background:${cajas[i]}${i===0?';border:1px solid rgba(255,255,255,.3)':''}"></i>${t}</span>`).join('') +
-      (capa.puntos().length ? `<span><i class="punto"></i>${capa.leyenda[4]}</span>`
-                            : `<span class="sin-puntos">${capa.leyenda[4]}</span>`);
+      rotulos.map((t,i)=>`<span><i style="background:${TONOS[i]}${i===0?';border:1px solid rgba(255,255,255,.3)':''}"></i>${t}</span>`).join('')+
+      (capa.puntos().length ? `<span><i class="punto"></i>${capa.rotuloPunto}</span>`
+                            : `<span class="sin-puntos">${capa.rotuloPunto}</span>`)+
+      `<span class="sin-puntos">Cortes calculados de los datos de esta corrida</span>`;
   }
 
+  function solapas(){
+    document.getElementById('temas').innerHTML = MATERIAS.map(m => {
+      const hay = m.disponible(), clave = claveDeCapa(m.clave);
+      return `<button class="tema${hay?'':' apagado'}${hay&&clave===capaActiva?' activo':''}" `+
+             `${hay?`data-capa="${clave}"`:'disabled title="Sin colector en servicio"'}>`+
+             `${m.rotulo}${hay?'':' <span class="sin">sin colector</span>'}</button>`;
+    }).join('');
+    document.querySelectorAll('#temas .tema[data-capa]').forEach(b =>
+      b.addEventListener('click', () => { capaActiva = b.dataset.capa; repintar(); }));
+  }
+
+  // ---- Mapa ---------------------------------------------------------------
+  let mapa=null, capaPaises=null, capaPuntos=null;
   function puntos(){
     if(!mapa) return;
     if(capaPuntos) mapa.removeLayer(capaPuntos);
     capaPuntos = L.layerGroup(CAPAS[capaActiva].puntos().map(p =>
       L.circleMarker([p.lat,p.lon],{radius:p.radio,color:'#FB6500',weight:1.1,fillColor:'#FB6500',fillOpacity:.35})
-        .bindTooltip(p.ficha,{className:'ficha'})
-    )).addTo(mapa);
+        .bindTooltip(p.ficha,{className:'ficha'}))).addTo(mapa);
   }
-
   function repintar(){
     if(capaPaises) capaPaises.setStyle(estiloPais);
-    puntos();
+    puntos(); solapas(); leyenda();
+    const ex = document.getElementById('explica-capa');
+    if(ex) ex.innerHTML = EXPLICA[capaActiva] ? EXPLICA[capaActiva]() : '';
     document.getElementById('seleccion').innerHTML = paisFiltro
-      ? `Filtrando por <b>${paisNombre}</b><button id="quitar">quitar filtro</button>`
+      ? `Filtrando por <b>${esc(paisNombre)}</b><button id="quitar">quitar filtro</button>`
       : 'Sin país seleccionado — hacé clic en el mapa para filtrar';
     const q = document.getElementById('quitar');
-    if(q) q.addEventListener('click', () => { paisFiltro=null; paisNombre=null; sincronizarSelector(); repintar(); });
-    document.querySelectorAll('.tema').forEach(b => b.classList.toggle('activo', b.dataset.capa===capaActiva));
-    const cajaExplica = document.getElementById('explica-capa');
-    if(cajaExplica) cajaExplica.innerHTML = CAPAS[capaActiva].explica();
-    leyenda(); tarjetasIlicitas(); tarjetasDesplazamiento(); informe();
+    if(q) q.addEventListener('click', ()=>{ paisFiltro=null; paisNombre=null; sincronizar(); repintar(); });
+    tarjetasIlicitas(); tarjetasDesplazamiento(); informe();
   }
-
   function seleccionar(iso, nombre){
-    if(paisFiltro === iso){ paisFiltro=null; paisNombre=null; }
-    else { paisFiltro=iso; paisNombre=nombre; }
-    sincronizarSelector(); repintar();
+    if(paisFiltro===iso){ paisFiltro=null; paisNombre=null; } else { paisFiltro=iso; paisNombre=nombre; }
+    sincronizar(); repintar();
+  }
+  function sincronizar(){
+    const s=document.getElementById('pais-informe'); if(s) s.value = paisFiltro||'';
   }
 
-  function sincronizarSelector(){
-    const s = document.getElementById('pais-informe');
-    if(s) s.value = paisFiltro || '';
+  const EXPLICA = {
+    focos: () => {
+      const d = almacen.focos;
+      return `<b>Qué muestra:</b> anomalías térmicas detectadas por satélite en la última ventana de un día. `+
+        `El color es la cantidad por país; los puntos son los ${d?miles(d.muestra_para_mapa.length):'—'} focos de mayor energía.`+
+        `<span class="no-es"><b>Qué no es:</b> no mide economías ilícitas. Mide calor, y el calor incluye quema agrícola, `+
+        `incendio forestal, quema de gas en yacimientos e industria. Convertirlo en indicio de minería ilegal exige cruzarlo `+
+        `contra áreas protegidas y concesiones, cruce que todavía no está hecho. Hasta que lo esté, esta capa es una señal, no una materia.</span>`;
+    },
+    desplazamiento: () => {
+      const d = almacen.desplazamiento;
+      return `<b>Qué muestra:</b> personas expulsadas de cada país —refugiadas o solicitando asilo fuera de él—, `+
+        `cifra anual de cierre de ${d?d.anio_de_la_cifra:'—'}.`+
+        `<span class="no-es"><b>Qué no es:</b> no es un dato en vivo y no incluye la migración irregular no registrada, `+
+        `que en varios corredores de la región es la mayoría del flujo. La fuente no publica coordenada: por eso no hay puntos.</span>`;
+    },
+    tendencia: () => {
+      const d=almacen.serie;
+      const anios = d?.registros?.[0]?.serie || [];
+      const par = anios.length>1 ? `${anios[anios.length-2].anio} contra ${anios[anios.length-1].anio}` : '—';
+      return `<b>Qué muestra:</b> cuánto varió la expulsión de personas de cada país entre los dos últimos años publicados (${par}). `+
+        `Verde baja, naranja sube. Es lo que el nivel absoluto no dice: un país chico que sube 40 % importa más que uno grande que se mantiene.`+
+        `<span class="no-es"><b>Qué no es:</b> no es una proyección ni un pronóstico. Es aritmética sobre dos cifras publicadas. `+
+        `SIWA no estima el futuro; eso sale por los productos de la Fundación, firmado y con probabilidad declarada.</span>`;
+    },
+    oficiales: () => `<b>Qué muestra:</b> cuántos conjuntos de datos oficiales publica cada Estado sobre las materias del registro.`+
+      `<span class="no-es"><b>Qué no es:</b> no son cifras de esas materias, es el recuento del catálogo. `+
+      `Y no mide calidad: un catálogo puede listar conjuntos abandonados hace años.</span>`
+  };
+
+  // ---- Tarjetas -----------------------------------------------------------
+  function tarjetasIlicitas(){
+    const d=almacen.focos; if(!d) return;
+    const meta=d.procedencia;
+    const lista = paisFiltro ? d.registros.filter(r=>r.iso===paisFiltro) : d.registros;
+    const total = lista.reduce((a,r)=>a+r.focos,0);
+    document.getElementById('tag-ilicitas').textContent = paisFiltro
+      ? miles(total)+' anomalías en '+paisNombre : miles(total)+' anomalías en '+meta.cantidad+' países';
+    document.getElementById('tarj-ilicitas').innerHTML = lista.length
+      ? lista.slice(0,6).map(r=>`<div class="card"><h4>${esc(r.pais)}</h4>
+          <div class="value">${miles(r.focos)}</div>
+          <div class="sub">${miles(r.confianza_alta)} de confianza alta · ${miles(r.potencia_radiativa_total)} MW</div>
+          <div class="foot"><span class="src">${esc(meta.fuente.nombre)}</span>
+            <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`).join('')
+      : `<div class="card"><h4>Sin anomalías detectadas</h4><div class="sub">El sensor no registró calor sobre el umbral en ${esc(paisNombre)}. No ve bajo nubes: la ausencia no prueba inactividad.</div></div>`;
+  }
+  function tarjetasDesplazamiento(){
+    const d=almacen.desplazamiento; if(!d) return;
+    const meta=d.procedencia;
+    const lista = paisFiltro ? d.registros.filter(r=>r.iso===paisFiltro) : d.registros;
+    document.getElementById('tag-desplazamiento').textContent = paisFiltro
+      ? 'cifra de '+d.anio_de_la_cifra+' · '+paisNombre
+      : meta.cantidad+' países · cifra de '+d.anio_de_la_cifra;
+    document.getElementById('tarj-desplazamiento').innerHTML = lista.length
+      ? lista.slice(0,6).map(r=>`<div class="card"><h4>${esc(r.pais)}</h4>
+          <div class="value">${miles(r.expulsion)}</div>
+          <div class="sub">expulsión · recibe ${miles(r.recepcion)} · internos ${miles(r.desplazados_internos)}</div>
+          <div class="foot"><span class="src">${esc(meta.fuente.nombre)}</span>
+            <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`).join('')
+      : `<div class="card"><h4>Sin registro</h4><div class="sub">La fuente no consigna a ${esc(paisNombre)}.</div></div>`;
   }
 
-  fetch('geo/paises-alc.geojson')
-    .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-    .then(geo => {
-      padron = geo.features.map(f => f.properties).sort((a,b)=>a.pais.localeCompare(b.pais,'es'));
-      const sel = document.getElementById('pais-informe');
-      sel.innerHTML = '<option value="">— toda la región —</option>' +
-        padron.map(p => `<option value="${p.iso}">${p.pais}</option>`).join('');
-      sel.addEventListener('change', () => {
-        paisFiltro = sel.value || null;
-        paisNombre = paisFiltro ? padron.find(p=>p.iso===paisFiltro).pais : null;
-        repintar();
-      });
+  // ---- Gráficos, en SVG y sin bibliotecas ---------------------------------
+  function grafico(serie, rotulo){
+    if(!serie || serie.length < 2) return '';
+    const A=620, H=170, mx=46, my=22;
+    const ys = serie.map(p=>p.y), max = Math.max(...ys), min = 0;
+    const px = i => mx + i*(A-mx-14)/(serie.length-1);
+    const py = v => H-my - (v-min)/((max-min)||1)*(H-my*2);
+    const linea = serie.map((p,i)=>`${i?'L':'M'}${px(i).toFixed(1)},${py(p.y).toFixed(1)}`).join(' ');
+    const area = linea+` L${px(serie.length-1).toFixed(1)},${(H-my).toFixed(1)} L${px(0).toFixed(1)},${(H-my).toFixed(1)} Z`;
+    return `<figure class="grafico"><figcaption>${esc(rotulo)}</figcaption>
+      <svg viewBox="0 0 ${A} ${H}" role="img" aria-label="${esc(rotulo)}">
+        <line x1="${mx}" y1="${H-my}" x2="${A-14}" y2="${H-my}" class="ejeg"/>
+        <line x1="${mx}" y1="${my}" x2="${mx}" y2="${H-my}" class="ejeg"/>
+        <path d="${area}" class="areag"/><path d="${linea}" class="lineag"/>
+        ${serie.map((p,i)=>`<circle cx="${px(i).toFixed(1)}" cy="${py(p.y).toFixed(1)}" r="2.6" class="puntog"/>`).join('')}
+        <text x="4" y="${my+4}" class="rotg">${miles(max)}</text>
+        <text x="4" y="${H-my}" class="rotg">0</text>
+        ${serie.map((p,i)=> i%2===0 ? `<text x="${px(i).toFixed(1)}" y="${H-6}" class="rotg" text-anchor="middle">${p.x}</text>`:'').join('')}
+      </svg></figure>`;
+  }
 
-      mapa = L.map('mapa',{zoomControl:true,minZoom:2,worldCopyJump:false});
-      mapa.attributionControl.setPrefix('');
-      mapa.attributionControl.addAttribution('Límites: Natural Earth 1:50 m · dominio público');
-      capaPaises = L.geoJSON(geo,{
-        style: estiloPais,
-        onEachFeature: (rasgo, capa) => {
-          const p = rasgo.properties;
-          capa.bindTooltip(() => CAPAS[capaActiva].ficha(p.iso,p.pais,p.bloque),{className:'ficha',sticky:true});
-          capa.on('click', () => seleccionar(p.iso,p.pais));
-        }
-      }).addTo(mapa);
-      mapa.fitBounds(capaPaises.getBounds(),{padding:[12,12]});
-      repintar();
-    })
-    .catch(err => {
-      document.getElementById('mapa').innerHTML =
-        `<div class="falla" style="margin:16px"><h4>No se pudo cargar el mapa</h4><p>${err.message}. No se muestra un mapa de reemplazo.</p></div>`;
-    });
+  function barras(filas, rotulo){
+    if(!filas.length) return '';
+    const max = Math.max(...filas.map(f=>f.valor))||1, A=620, alto=filas.length*24+30;
+    return `<figure class="grafico"><figcaption>${esc(rotulo)}</figcaption>
+      <svg viewBox="0 0 ${A} ${alto}" role="img" aria-label="${esc(rotulo)}">
+        ${filas.map((f,i)=>{
+          const y=i*24+16, an=(f.valor/max)*(A-220);
+          return `<text x="0" y="${y+11}" class="rotg">${esc(f.rotulo.slice(0,22))}</text>
+                  <rect x="150" y="${y}" width="${an.toFixed(1)}" height="15" class="${f.destacado?'barrag destacada':'barrag'}"/>
+                  <text x="${(154+an).toFixed(1)}" y="${y+11}" class="rotg">${miles(f.valor)}</text>`;
+        }).join('')}
+      </svg></figure>`;
+  }
 
-  document.querySelectorAll('.tema').forEach(b =>
-    b.addEventListener('click', () => { capaActiva=b.dataset.capa; repintar(); }));
-
-  // ---- Informe ----------------------------------------------------------
+  // ---- Informe ------------------------------------------------------------
   function filasInforme(){
-    const filas = [];
-    const f = almacen.focos, d = almacen.desplazamiento;
+    const filas=[], f=almacen.focos, d=almacen.desplazamiento, o=almacen.oficiales;
     if(f){
       const r = paisFiltro ? f.registros.find(x=>x.iso===paisFiltro) : null;
       const tot = paisFiltro ? (r?r.focos:0) : f.registros.reduce((a,x)=>a+x.focos,0);
       const alta = paisFiltro ? (r?r.confianza_alta:0) : f.registros.reduce((a,x)=>a+x.confianza_alta,0);
-      filas.push({materia:'Economías ilícitas', indicador:'Focos de calor detectados', valor:tot,
+      filas.push({materia:'Anomalías térmicas', indicador:'Focos de calor detectados', valor:tot,
         detalle:miles(alta)+' de confianza alta', fuente:f.procedencia.fuente.nombre,
         calif:f.procedencia.calificacion, momento:f.procedencia.obtenido_en, referencia:'ventana de 1 día'});
     }
     if(d){
       const r = paisFiltro ? d.registros.find(x=>x.iso===paisFiltro) : null;
       const suma = c => paisFiltro ? (r?r[c]:0) : d.registros.reduce((a,x)=>a+x[c],0);
-      ['expulsion','recepcion','desplazados_internos'].forEach(c => {
-        const rot = {expulsion:'Personas expulsadas', recepcion:'Personas recibidas', desplazados_internos:'Desplazados internos'}[c];
+      [['expulsion','Personas expulsadas'],['recepcion','Personas recibidas'],
+       ['desplazados_internos','Desplazados internos']].forEach(([c,rot])=>{
         filas.push({materia:'Desplazamiento forzado', indicador:rot, valor:suma(c), detalle:'',
           fuente:d.procedencia.fuente.nombre, calif:d.procedencia.calificacion,
           momento:d.procedencia.obtenido_en, referencia:'cifra de '+d.anio_de_la_cifra});
       });
     }
+    if(o){
+      const r = paisFiltro ? o.registros.find(x=>x.iso===paisFiltro) : null;
+      const tot = paisFiltro ? (r?r.conjuntos_hallados:0) : o.registros.reduce((a,x)=>a+x.conjuntos_hallados,0);
+      filas.push({materia:'Fuentes oficiales', indicador:'Conjuntos oficiales indexados', valor:tot,
+        detalle: r?r.organismo:'', fuente:o.procedencia.fuente.nombre, calif:o.procedencia.calificacion,
+        momento:o.procedencia.obtenido_en, referencia:'catálogo vigente'});
+    }
     return filas;
   }
-
-  function serieDelPais(){
-    const s = almacen.serie; if(!s || !paisFiltro) return null;
-    return s.registros.find(p => p.iso===paisFiltro) || null;
-  }
+  const serieDelPais = () => (almacen.serie && paisFiltro)
+    ? almacen.serie.registros.find(p=>p.iso===paisFiltro) : null;
 
   function informe(){
-    const caja = document.getElementById('informe-cuerpo');
-    if(!caja) return;
-    const filas = filasInforme();
-    document.getElementById('informe-titulo').textContent =
-      paisFiltro ? paisNombre : 'América Latina y el Caribe — los 33 Estados del padrón';
+    const caja=document.getElementById('informe-cuerpo'); if(!caja) return;
+    const filas=filasInforme();
+    document.getElementById('informe-titulo').textContent = paisFiltro ? paisNombre
+      : 'América Latina y Caribe — los 33 Estados del padrón';
     document.getElementById('informe-fecha').textContent =
-      'Emitido el ' + new Date().toLocaleString('es-AR',{dateStyle:'long',timeStyle:'short'});
+      'Emitido el '+new Date().toLocaleString('es-AR',{dateStyle:'long',timeStyle:'short'});
+    if(!filas.length){ caja.innerHTML='<p class="sin-dato">Todavía no hay materias con dato para informar.</p>'; return; }
 
-    if(!filas.length){ caja.innerHTML = '<p class="sin-dato">Todavía no hay materias con dato para informar.</p>'; return; }
-
-    let html = `<table class="tabla-informe"><thead><tr>
-        <th>Materia</th><th>Indicador</th><th class="num">Valor</th><th>Referencia</th><th>Fuente</th><th>Calif.</th>
-      </tr></thead><tbody>` +
-      filas.map(f => `<tr>
-        <td>${f.materia}</td><td>${f.indicador}${f.detalle?'<br><span class="menor">'+f.detalle+'</span>':''}</td>
-        <td class="num mono">${miles(f.valor)}</td><td>${f.referencia}</td>
-        <td>${f.fuente}</td><td class="mono">${f.calif.fiabilidad}-${f.calif.credibilidad}</td>
-      </tr>`).join('') + `</tbody></table>`;
+    let html = `<table class="tabla-informe"><thead><tr><th>Materia</th><th>Indicador</th>
+      <th class="num">Valor</th><th>Referencia</th><th>Fuente</th><th>Calif.</th></tr></thead><tbody>`+
+      filas.map(f=>`<tr><td>${esc(f.materia)}</td>
+        <td>${esc(f.indicador)}${f.detalle?'<br><span class="menor">'+esc(f.detalle)+'</span>':''}</td>
+        <td class="num mono">${miles(f.valor)}</td><td>${esc(f.referencia)}</td>
+        <td>${esc(f.fuente)}</td><td class="mono">${f.calif.fiabilidad}-${f.calif.credibilidad}</td></tr>`).join('')+
+      `</tbody></table>`;
 
     const serie = serieDelPais();
     if(serie){
-      html += `<h4 class="sub-informe">Serie anual de desplazamiento forzado</h4>
-        <table class="tabla-informe"><thead><tr><th>Año</th>
-          <th class="num">Expulsión</th><th class="num">Recepción</th><th class="num">Desplazados internos</th>
-        </tr></thead><tbody>` +
-        serie.serie.map(a => `<tr><td class="mono">${a.anio}</td>
-          <td class="num mono">${miles(a.origen_refugiados + a.origen_solicitantes)}</td>
-          <td class="num mono">${miles(a.asilo_refugiados + a.asilo_solicitantes)}</td>
-          <td class="num mono">${miles(a.desplazados_internos)}</td></tr>`).join('') + `</tbody></table>`;
-    } else if(!paisFiltro){
-      html += `<p class="sin-dato">Elegí un país para ver además su serie anual completa.</p>`;
+      html += `<h4 class="sub-informe">Desplazamiento forzado — serie anual</h4>`+
+        grafico(serie.serie.map(a=>({x:a.anio, y:a.origen_refugiados+a.origen_solicitantes})),
+                'Personas expulsadas por año');
+      const internos = serie.serie.filter(a=>a.desplazados_internos>0);
+      if(internos.length>1) html += grafico(internos.map(a=>({x:a.anio,y:a.desplazados_internos})),
+                                            'Desplazados internos por año');
+      html += `<table class="tabla-informe"><thead><tr><th>Año</th><th class="num">Expulsión</th>
+        <th class="num">Recepción</th><th class="num">Desplazados internos</th></tr></thead><tbody>`+
+        serie.serie.map(a=>`<tr><td class="mono">${a.anio}</td>
+          <td class="num mono">${miles(a.origen_refugiados+a.origen_solicitantes)}</td>
+          <td class="num mono">${miles(a.asilo_refugiados+a.asilo_solicitantes)}</td>
+          <td class="num mono">${miles(a.desplazados_internos)}</td></tr>`).join('')+`</tbody></table>`;
+    }
+
+    // Comparación regional de la capa activa
+    const c = CAPAS[capaActiva].conteo();
+    const orden = Object.entries(c).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
+    if(orden.length>1){
+      const nombre = i => (padron.find(p=>p.iso===i)||{}).pais||i;
+      let elegidas = orden.slice(0,8);
+      if(paisFiltro && !elegidas.some(([i])=>i===paisFiltro)){
+        const propia = orden.find(([i])=>i===paisFiltro);
+        if(propia) elegidas = elegidas.slice(0,7).concat([propia]);
+      }
+      html += `<h4 class="sub-informe">Posición regional — ${esc(CAPAS[capaActiva].unidad)}</h4>`+
+        barras(elegidas.map(([i,v])=>({rotulo:nombre(i), valor:v, destacado:i===paisFiltro})),
+               'Comparación con los demás Estados del padrón');
+    }
+
+    // Fuentes oficiales del país
+    const o = almacen.oficiales;
+    if(o){
+      const ficha = paisFiltro ? o.registros.find(r=>r.iso===paisFiltro) : null;
+      if(ficha){
+        html += `<h4 class="sub-informe">Fuentes oficiales de ${esc(ficha.pais)}</h4>
+          <p class="menor">${esc(ficha.organismo)} · ${esc(ficha.tipo)} · ${esc(ficha.portal)}</p>
+          <table class="tabla-informe"><thead><tr><th>Materia</th><th class="num">Conjuntos</th><th>Ejemplo publicado</th></tr></thead><tbody>`+
+          ficha.materias.map(m=>`<tr><td>${esc(m.materia)}</td><td class="num mono">${miles(m.cantidad)}</td>
+            <td>${m.ejemplos.length?esc(m.ejemplos[0].titulo):'—'}</td></tr>`).join('')+`</tbody></table>`;
+      } else if(!paisFiltro){
+        html += `<h4 class="sub-informe">Fuentes oficiales por Estado</h4>
+          <table class="tabla-informe"><thead><tr><th>Estado</th><th>Organismo</th><th class="num">Conjuntos</th></tr></thead><tbody>`+
+          o.registros.map(r=>`<tr><td>${esc(r.pais)}</td><td>${esc(r.organismo)}</td>
+            <td class="num mono">${miles(r.conjuntos_hallados)}</td></tr>`).join('')+`</tbody></table>`;
+      }
+    }
+
+    // Cobertura cruzada
+    const cob = almacen.cobertura;
+    if(cob && cob.registros.length){
+      html += `<h4 class="sub-informe">Verificación cruzada de la cobertura</h4>
+        <p class="menor">${cob.resumen.asuntos_con_cruce} asuntos con cruce sobre ${miles(cob.resumen.notas_en_ventana)} notas de ${cob.resumen.medios_que_respondieron} medios. Es cobertura, no hechos.</p>
+        <table class="tabla-informe"><thead><tr><th>Asunto</th><th class="num">Orígenes</th><th>Estado</th></tr></thead><tbody>`+
+        cob.registros.slice(0,6).map(e=>`<tr><td>${esc(e.asunto.slice(0,88))}</td>
+          <td class="num mono">${e.corroboracion.origenes_independientes}</td>
+          <td>${e.corroboracion.estado.replace(/_/g,' ')}</td></tr>`).join('')+`</tbody></table>`;
+    }
+
+    // Vacíos de todas las fuentes que entraron
+    const conVacios = [['Anomalías térmicas',almacen.focos],['Desplazamiento forzado',almacen.desplazamiento],
+                       ['Fuentes oficiales',almacen.oficiales],['Cobertura cruzada',almacen.cobertura]]
+      .filter(([,d])=>d && d.procedencia.vacios_declarados.length);
+    if(conVacios.length){
+      html += `<h4 class="sub-informe">Vacíos declarados de las fuentes empleadas</h4>`+
+        conVacios.map(([rot,d])=>`<p class="menor"><b>${esc(rot)}:</b> ${d.procedencia.vacios_declarados.map(esc).join(' · ')}</p>`).join('');
     }
 
     html += `<div class="informe-pie">
       <p><b>Calificación.</b> La letra mide la fiabilidad de la fuente y el número la credibilidad
          de la información; son independientes. Ninguna cifra de este informe alcanza el grado 1,
-         porque el grado 1 exige corroboración por dos orígenes independientes y todas las
-         materias en servicio son hoy de fuente única declarada.</p>
+         porque ese grado exige corroboración por dos orígenes independientes y todas las materias
+         en servicio son hoy de fuente única declarada.</p>
       <p><b>Este documento no contiene juicios.</b> Es un extracto del registro público SIWA:
          hechos calificados con su procedencia. El análisis de la Fundación —con confianza y
          probabilidad declaradas— sale por sus productos, firmado.</p>
-      <p>Los vacíos declarados de cada fuente figuran en la página de la que procede este extracto.</p>
     </div>`;
     caja.innerHTML = html;
   }
 
   function csv(){
-    const sep = ';';
-    const lineas = [['materia','indicador','valor','referencia','fuente','fiabilidad','credibilidad','obtenido_en'].join(sep)];
-    filasInforme().forEach(f => lineas.push(
-      [f.materia,f.indicador,f.valor,f.referencia,f.fuente,f.calif.fiabilidad,f.calif.credibilidad,f.momento]
-        .map(v => `"${String(v).replace(/"/g,'""')}"`).join(sep)));
-    const serie = serieDelPais();
+    const sep=';', lineas=[['materia','indicador','valor','referencia','fuente','fiabilidad','credibilidad','obtenido_en'].join(sep)];
+    filasInforme().forEach(f=>lineas.push([f.materia,f.indicador,f.valor,f.referencia,f.fuente,
+      f.calif.fiabilidad,f.calif.credibilidad,f.momento].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(sep)));
+    const serie=serieDelPais();
     if(serie){
-      lineas.push('');
-      lineas.push(['anio','expulsion','recepcion','desplazados_internos'].join(sep));
-      serie.serie.forEach(a => lineas.push([a.anio,
-        a.origen_refugiados+a.origen_solicitantes, a.asilo_refugiados+a.asilo_solicitantes,
-        a.desplazados_internos].join(sep)));
+      lineas.push('', ['anio','expulsion','recepcion','desplazados_internos'].join(sep));
+      serie.serie.forEach(a=>lineas.push([a.anio,a.origen_refugiados+a.origen_solicitantes,
+        a.asilo_refugiados+a.asilo_solicitantes,a.desplazados_internos].join(sep)));
     }
-    // El punto y coma y el BOM hacen que la planilla lo abra bien en español.
-    const blob = new Blob(['﻿'+lineas.join('\r\n')],{type:'text/csv;charset=utf-8;'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'siwa-' + (paisFiltro||'region').toLowerCase() + '-' + new Date().toISOString().slice(0,10) + '.csv';
+    const o=almacen.oficiales, ficha=paisFiltro&&o?o.registros.find(r=>r.iso===paisFiltro):null;
+    if(ficha){
+      lineas.push('', ['materia_oficial','conjuntos','ejemplo'].join(sep));
+      ficha.materias.forEach(m=>lineas.push([m.materia,m.cantidad,
+        (m.ejemplos[0]?.titulo||'')].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(sep)));
+    }
+    const blob=new Blob(['﻿'+lineas.join('\r\n')],{type:'text/csv;charset=utf-8;'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='siwa-'+(paisFiltro||'region').toLowerCase()+'-'+new Date().toISOString().slice(0,10)+'.csv';
     document.body.appendChild(a); a.click(); a.remove();
   }
-
   document.getElementById('btn-csv').addEventListener('click', csv);
-  document.getElementById('btn-imprimir').addEventListener('click', () => window.print());
+  document.getElementById('btn-imprimir').addEventListener('click', ()=>window.print());
 
-  // ---- Lectura de los archivos -----------------------------------------
-  Promise.all([traer('focos.json'), traer('estado/focos.json').catch(()=>null)])
-    .then(([d, estado]) => {
-      almacen.focos = d; dominios++;
-      pintarProcedencia('proc-ilicitas', d.procedencia);
-      registros += d.registros.reduce((a,r)=>a+r.focos,0);
-      vacios += pintarVacios('vac-ilicitas', d.procedencia.vacios_declarados);
-      if(estado && estado.estado==='error'){ fallas++; pintarFalla('tarj-ilicitas','focos de calor',estado.mensaje,d.procedencia); }
-      repintar(); marcador();
+  // ---- Carga --------------------------------------------------------------
+  fetch('geo/paises-alc.geojson').then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(geo => {
+      padron = geo.features.map(f=>f.properties).sort((a,b)=>a.pais.localeCompare(b.pais,'es'));
+      const sel=document.getElementById('pais-informe');
+      sel.innerHTML='<option value="">— toda la región —</option>'+
+        padron.map(p=>`<option value="${p.iso}">${esc(p.pais)}</option>`).join('');
+      sel.addEventListener('change', ()=>{
+        paisFiltro=sel.value||null;
+        paisNombre=paisFiltro?padron.find(p=>p.iso===paisFiltro).pais:null;
+        repintar();
+      });
+      mapa=L.map('mapa',{zoomControl:true,minZoom:2,worldCopyJump:false});
+      mapa.attributionControl.setPrefix('');
+      mapa.attributionControl.addAttribution('Límites: Natural Earth 1:50 m · dominio público');
+      capaPaises=L.geoJSON(geo,{style:estiloPais, onEachFeature:(rasgo,capa)=>{
+        const p=rasgo.properties;
+        capa.bindTooltip(()=>ficha(p.iso,p.pais,p.bloque),{className:'ficha',sticky:true});
+        capa.on('click',()=>seleccionar(p.iso,p.pais));
+      }}).addTo(mapa);
+      mapa.fitBounds(capaPaises.getBounds(),{padding:[12,12]});
+      repintar();
     })
-    .catch(err => { fallas++; pintarFalla('tarj-ilicitas','focos de calor',err.message,null);
-      document.getElementById('proc-ilicitas').textContent='Sin registro disponible.'; marcador(); });
+    .catch(err=>{ document.getElementById('mapa').innerHTML =
+      `<div class="falla" style="margin:16px"><h4>No se pudo cargar el mapa</h4><p>${esc(err.message)}. No se muestra un mapa de reemplazo.</p></div>`; });
 
-  Promise.all([traer('oficiales.json'), traer('estado/oficiales.json').catch(()=>null)])
-    .then(([d, estado]) => {
-      almacen.oficiales = d;
-      const meta = d.procedencia, r = d.resumen;
-      pintarProcedencia('proc-oficiales', meta);
-      document.getElementById('tag-oficiales').textContent =
-        r.estados_con_portal + ' de ' + r.estados_del_padron + ' Estados · ' + miles(r.conjuntos_hallados) + ' conjuntos indexados';
-      document.getElementById('lista-oficiales').innerHTML = d.registros.map(f => {
-        const primera = f.materias.find(m => m.ejemplos.length);
-        return `<div class="ficha-pais">
-          <h4>${f.pais}</h4>
-          <div class="org">${f.organismo} · ${f.tipo} · <a href="${f.portal}" target="_blank" rel="noopener">${f.portal.replace(/^https?:\/\//,'')}</a></div>
-          ${f.materias.map(m => `<div class="materia-linea"><span>${m.materia}</span><span class="cuenta">${miles(m.cantidad)}</span></div>`).join('')}
-          ${primera ? `<div class="muestra"><b>Por ejemplo:</b> ${primera.ejemplos[0].titulo}${primera.ejemplos[0].organismo ? ' — ' + primera.ejemplos[0].organismo : ''}</div>` : ''}
-        </div>`;
-      }).join('');
-      vacios += pintarVacios('vac-oficiales', meta.vacios_declarados);
-      if(estado && estado.estado==='error'){ fallas++; pintarFalla('lista-oficiales','fuentes oficiales',estado.mensaje,meta); }
-      marcador();
-    })
-    .catch(err => { fallas++; pintarFalla('lista-oficiales','fuentes oficiales',err.message,null);
-      document.getElementById('proc-oficiales').textContent='Sin registro disponible.'; marcador(); });
-
-  const ROTULO = {corroborado_fuerte:['fuerte','Corroborado · dos idiomas'],
-                  corroborado:['medio','Corroborado · dos jurisdicciones'],
-                  origen_unico:['solo','Un solo origen']};
+  const ROTULO={corroborado_fuerte:['fuerte','Corroborado · dos idiomas'],
+                corroborado:['medio','Corroborado · dos jurisdicciones'],
+                origen_unico:['solo','Un solo origen']};
 
   Promise.all([traer('cobertura.json'), traer('estado/cobertura.json').catch(()=>null)])
-    .then(([d, estado]) => {
-      almacen.cobertura = d;
-      const meta = d.procedencia, r = d.resumen;
-      pintarProcedencia('proc-cobertura', meta);
+    .then(([d,estado])=>{
+      almacen.cobertura=d; const meta=d.procedencia, r=d.resumen;
+      pintarProcedencia('proc-cobertura',meta);
       document.getElementById('tag-cobertura').textContent =
-        r.asuntos_con_cruce + ' asuntos · ' + r.medios_que_respondieron + ' de ' +
-        r.medios_consultados + ' medios · ' + miles(r.notas_en_ventana) + ' notas';
+        r.asuntos_con_cruce+' asuntos · '+r.medios_que_respondieron+' de '+r.medios_consultados+' medios · '+miles(r.notas_en_ventana)+' notas';
       document.getElementById('lista-cobertura').innerHTML = d.registros.length
-        ? d.registros.slice(0,14).map(e => {
-            const c = e.corroboracion, [clase, texto] = ROTULO[c.estado];
-            return `<div class="asunto">
-              <h4>${e.asunto}</h4>
-              <div class="origenes">${e.notas.map(n =>
-                `<a class="origen" href="${n.enlace}" target="_blank" rel="noopener">${n.medio}
-                   <span class="jur">${n.pais}·${n.idioma}</span></a>`).join('')}</div>
-              <div class="foot"><span class="porque">${c.origenes_independientes} origen${c.origenes_independientes===1?'':'es'} en ${c.portales} portales · ${c.nota}</span>
-                <span class="badge ${clase}">${texto}</span></div>
-            </div>`;
+        ? d.registros.slice(0,14).map(e=>{
+            const c=e.corroboracion,[cl,tx]=ROTULO[c.estado];
+            return `<div class="asunto"><h4>${esc(e.asunto)}</h4>
+              <div class="origenes">${e.notas.map(n=>`<a class="origen" href="${esc(n.enlace)}" target="_blank" rel="noopener">${esc(n.medio)} <span class="jur">${n.pais}·${n.idioma}</span></a>`).join('')}</div>
+              <div class="foot"><span class="porque">${c.origenes_independientes} origen${c.origenes_independientes===1?'':'es'} en ${c.portales} portales · ${esc(c.nota)}</span>
+                <span class="badge ${cl}">${tx}</span></div></div>`;
           }).join('')
         : `<div class="card"><h4>Sin cruces en la ventana</h4><div class="sub">Ningún asunto fue cubierto por dos medios distintos del padrón. No es una falla.</div></div>`;
-      vacios += pintarVacios('vac-cobertura', meta.vacios_declarados);
-      if(estado && estado.estado==='error'){ fallas++; pintarFalla('lista-cobertura','cobertura',estado.mensaje,meta); }
-      marcador();
+      vacios+=pintarVacios('vac-cobertura',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-cobertura','cobertura',estado.mensaje,meta); }
+      informe(); marcador();
     })
-    .catch(err => { fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
+    .catch(err=>{ fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
       document.getElementById('proc-cobertura').textContent='Sin registro disponible.'; marcador(); });
 
-  Promise.all([traer('desplazamiento.json'), traer('estado/desplazamiento.json').catch(()=>null), traer('desplazamiento-serie.json').catch(()=>null)])
-    .then(([d, estado, serie]) => {
-      almacen.desplazamiento = d; almacen.serie = serie; dominios++;
-      pintarProcedencia('proc-desplazamiento', d.procedencia);
-      registros += d.registros.reduce((a,r)=>a+r.expulsion+r.recepcion+r.desplazados_internos,0);
-      vacios += pintarVacios('vac-desplazamiento', d.procedencia.vacios_declarados);
-      if(estado && estado.estado==='error'){ fallas++; pintarFalla('tarj-desplazamiento','desplazamiento',estado.mensaje,d.procedencia); }
+  Promise.all([traer('oficiales.json'), traer('estado/oficiales.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.oficiales=d; const meta=d.procedencia, r=d.resumen;
+      pintarProcedencia('proc-oficiales',meta);
+      document.getElementById('tag-oficiales').textContent =
+        r.estados_con_portal+' de '+r.estados_del_padron+' Estados · '+miles(r.conjuntos_hallados)+' conjuntos indexados';
+      document.getElementById('lista-oficiales').innerHTML = d.registros.map(f=>{
+        const primera=f.materias.find(m=>m.ejemplos.length);
+        return `<div class="ficha-pais"><h4>${esc(f.pais)}</h4>
+          <div class="org">${esc(f.organismo)} · ${esc(f.tipo)} · <a href="${esc(f.portal)}" target="_blank" rel="noopener">${esc(f.portal.replace(/^https?:\/\//,''))}</a></div>
+          ${f.materias.map(m=>`<div class="materia-linea"><span>${esc(m.materia)}</span><span class="cuenta">${miles(m.cantidad)}</span></div>`).join('')}
+          ${primera?`<div class="muestra"><b>Por ejemplo:</b> ${esc(primera.ejemplos[0].titulo)}${primera.ejemplos[0].organismo?' — '+esc(primera.ejemplos[0].organismo):''}</div>`:''}</div>`;
+      }).join('');
+      vacios+=pintarVacios('vac-oficiales',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-oficiales','fuentes oficiales',estado.mensaje,meta); }
       repintar(); marcador();
     })
-    .catch(err => { fallas++; pintarFalla('tarj-desplazamiento','desplazamiento',err.message,null);
+    .catch(err=>{ fallas++; pintarFalla('lista-oficiales','fuentes oficiales',err.message,null);
+      document.getElementById('proc-oficiales').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('focos.json'), traer('estado/focos.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.focos=d; dominios++;
+      pintarProcedencia('proc-ilicitas',d.procedencia);
+      registros+=d.registros.reduce((a,r)=>a+r.focos,0);
+      vacios+=pintarVacios('vac-ilicitas',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-ilicitas','focos de calor',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('tarj-ilicitas','focos de calor',err.message,null);
+      document.getElementById('proc-ilicitas').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('desplazamiento.json'), traer('estado/desplazamiento.json').catch(()=>null), traer('desplazamiento-serie.json').catch(()=>null)])
+    .then(([d,estado,serie])=>{
+      almacen.desplazamiento=d; almacen.serie=serie; dominios++;
+      pintarProcedencia('proc-desplazamiento',d.procedencia);
+      registros+=d.registros.reduce((a,r)=>a+r.expulsion+r.recepcion+r.desplazados_internos,0);
+      vacios+=pintarVacios('vac-desplazamiento',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-desplazamiento','desplazamiento',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('tarj-desplazamiento','desplazamiento',err.message,null);
       document.getElementById('proc-desplazamiento').textContent='Sin registro disponible.'; marcador(); });
 })();
 </script>
