@@ -133,9 +133,11 @@ def recolectar():
             f"Solo {len(con_portal)} de los 33 Estados tienen portal oficial con interfaz "
             f"de consulta verificada. Sin portal verificado: {', '.join(sin_portal)}."
         ),
-        "Que un Estado no figure NO prueba que carezca de portal: prueba que no se le "
-        "encontró uno con interfaz estándar que respondiera. La búsqueda de direcciones "
-        "alternativas queda pendiente y es trabajo del equipo analítico.",
+        "Que un Estado no figure NO prueba que carezca de portal. De los que no figuran: "
+        "Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador "
+        "interponen protección contra acceso automatizado, que NO se esquiva por decisión "
+        "de doctrina (limites.md) y se gestiona por vía oficial; Perú y Jamaica tienen "
+        "portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
         "La búsqueda es por palabra en el título y la descripción del conjunto. Un "
         "conjunto rotulado con otro vocabulario no aparece, y uno que menciona la "
         "palabra al pasar aparece sin corresponder.",
@@ -161,6 +163,7 @@ def recolectar():
                 "materias_consultadas": len(materias),
             },
             "sectoriales_verificados": padron.get("sectoriales_verificados", []),
+            "sin_acceso_automatizado": padron.get("_bloqueados", {}),
         },
     )
 

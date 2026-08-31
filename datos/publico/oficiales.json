@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-08-31T00:39:38+00:00",
+    "obtenido_en": "2026-08-31T00:49:15+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "colectores/oficiales.json"
@@ -16,12 +16,12 @@
     "vacios_declarados": [
       "ESTO NO PUBLICA DATOS, PUBLICA DÓNDE ESTÁN. Es un índice de conjuntos oficiales con su dirección, para que el analista vaya al original.",
       "**Las cifras de estos catálogos NO son comparables entre países.** Cada Estado define el delito a su manera, lo publica con su cadencia y lo cuenta desde su año. Sumarlas para armar una serie regional produciría una serie falsa.",
-      "Solo 6 de los 33 Estados tienen portal oficial con interfaz de consulta verificada. Sin portal verificado: Venezuela, Trinidad y Tobago, Surinam, San Vicente y las Granadinas, Santa Lucía, San Cristóbal y Nieves, Perú, Paraguay, Nicaragua, México, Jamaica, Honduras, Haití, Guyana, Guatemala, Granada, El Salvador, Ecuador, Dominica, Cuba, Costa Rica, Brasil, Bolivia, Belice, Barbados, Bahamas, Antigua y Barbuda.",
-      "Que un Estado no figure NO prueba que carezca de portal: prueba que no se le encontró uno con interfaz estándar que respondiera. La búsqueda de direcciones alternativas queda pendiente y es trabajo del equipo analítico.",
+      "Solo 7 de los 33 Estados tienen portal oficial con interfaz de consulta verificada. Sin portal verificado: Venezuela, Trinidad y Tobago, Surinam, San Vicente y las Granadinas, Santa Lucía, San Cristóbal y Nieves, Perú, Paraguay, Nicaragua, Jamaica, Honduras, Haití, Guyana, Guatemala, Granada, El Salvador, Ecuador, Dominica, Cuba, Costa Rica, Brasil, Bolivia, Belice, Barbados, Bahamas, Antigua y Barbuda.",
+      "Que un Estado no figure NO prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que NO se esquiva por decisión de doctrina (limites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años."
     ],
-    "cantidad": 6
+    "cantidad": 7
   },
   "registros": [
     {
@@ -39,11 +39,6 @@
           "cantidad": 1049,
           "ejemplos": [
             {
-              "titulo": "PROCESOS CONTRATACION TAURAMENA",
-              "organismo": "TAURAMENA",
-              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
-            },
-            {
               "titulo": "Contratacion Emserchia E.S.P.",
               "organismo": "Emserchia",
               "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
@@ -52,6 +47,11 @@
               "titulo": "SECOP II CONTRATACION ABIERTA",
               "organismo": "Alcaldía Mayor de Cartagena",
               "enlace": "https://www.datos.gov.co/d/432e-zwh4"
+            },
+            {
+              "titulo": "PROCESOS CONTRATACION TAURAMENA",
+              "organismo": "TAURAMENA",
+              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             },
             {
               "titulo": "Contratacion Alcaldía Chitaraque",
@@ -105,14 +105,14 @@
               "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
             },
             {
-              "titulo": "Reporte  Delitos sexuales Policía Nacional",
-              "organismo": "DIJIN",
-              "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
-            },
-            {
               "titulo": "Delitos Informaticos V1",
               "organismo": "Damicruz",
               "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
+            },
+            {
+              "titulo": "Reporte  Delitos sexuales Policía Nacional",
+              "organismo": "DIJIN",
+              "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
             }
           ]
         },
@@ -133,14 +133,14 @@
               "enlace": "https://www.datos.gov.co/d/efw5-jiej"
             },
             {
-              "titulo": "MIGRANTES A COLOMBIA",
-              "organismo": "BERNARDO GUEVARA",
-              "enlace": "https://www.datos.gov.co/d/c4mm-qn8q"
-            },
-            {
               "titulo": "Entrada de Venezolanos a Colombia por año(2012-2019)",
               "organismo": "Savine",
               "enlace": "https://www.datos.gov.co/d/p7hq-8vsm"
+            },
+            {
+              "titulo": "MIGRANTES A COLOMBIA",
+              "organismo": "BERNARDO GUEVARA",
+              "enlace": "https://www.datos.gov.co/d/c4mm-qn8q"
             }
           ]
         },
@@ -166,9 +166,9 @@
               "enlace": "https://www.datos.gov.co/d/ha6j-pa2r"
             },
             {
-              "titulo": "Guadalajara de Buga : Homicidios por Accidente de Tránsito",
-              "organismo": "Alcaldía Municipal de Guadalajara de Buga",
-              "enlace": "https://www.datos.gov.co/d/8rme-4s7n"
+              "titulo": "Homicidios en el municipio de Neiva",
+              "organismo": "Alcaldía Neiva",
+              "enlace": "https://www.datos.gov.co/d/hk7a-5ix3"
             }
           ]
         },
@@ -477,6 +477,185 @@
         }
       ],
       "conjuntos_hallados": 588
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "bloque": "México y Centroamérica",
+      "organismo": "datos.gob.mx",
+      "tipo": "CKAN",
+      "portal": "https://datos.gob.mx",
+      "materias": [
+        {
+          "materia": "Presupuesto",
+          "eje": "Gobernanza",
+          "consulta": "presupuesto",
+          "cantidad": 166,
+          "ejemplos": [
+            {
+              "titulo": "Presupuesto del Banco del bienestar",
+              "organismo": "Banco del Bienestar, S.N.C. (BABIEN)",
+              "enlace": "https://datos.gob.mx/dataset/presupuesto"
+            },
+            {
+              "titulo": "Presupuesto USICAMM",
+              "organismo": "Unidad del Sistema para la Carrera de las Maestras y los Maestros (USICAMM)",
+              "enlace": "https://datos.gob.mx/dataset/presupuesto_usicamm"
+            },
+            {
+              "titulo": "Presupuesto asignado anual",
+              "organismo": "Alimentación para el Bienestar S.A. de C.V. (ALIMENTACION BIENESTAR)",
+              "enlace": "https://datos.gob.mx/dataset/presupuesto_asignado_anual"
+            },
+            {
+              "titulo": "Presupuesto anual modificado",
+              "organismo": "Diconsa, S.A de C.V (DICONSA)",
+              "enlace": "https://datos.gob.mx/dataset/presupuesto_anual_modificado"
+            }
+          ]
+        },
+        {
+          "materia": "Contratacion publica",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 29,
+          "ejemplos": [
+            {
+              "titulo": "Procedimientos de contratación",
+              "organismo": "Tecnológico Nacional de México (TecNM)",
+              "enlace": "https://datos.gob.mx/dataset/procedimientos_contratacion"
+            },
+            {
+              "titulo": "Contratación de bienes y servicios",
+              "organismo": "Comisión Nacional de Acuacultura y Pesca (CONAPESCA)",
+              "enlace": "https://datos.gob.mx/dataset/contratacion_bienes_servicios"
+            },
+            {
+              "titulo": "Procedimientos de contratación de obra pública. Red Propia",
+              "organismo": "Caminos y Puentes Federales de Ingresos y Servicios Conexos (CAPUFE)",
+              "enlace": "https://datos.gob.mx/dataset/procedimientos_contratacion_obra_publica_red_propia"
+            },
+            {
+              "titulo": "Contratos de AGROASEMEX",
+              "organismo": "AGROASEMEX, S.A",
+              "enlace": "https://datos.gob.mx/dataset/contratos_agroasemex"
+            }
+          ]
+        },
+        {
+          "materia": "Migracion y desplazamiento",
+          "eje": "Inteligencia estrategica",
+          "consulta": "migracion",
+          "cantidad": 27,
+          "ejemplos": [
+            {
+              "titulo": "Personas extranjeras víctimas de delito",
+              "organismo": "Instituto Nacional de Migración (INM)",
+              "enlace": "https://datos.gob.mx/dataset/personas_extranjeras_victimas_delito"
+            },
+            {
+              "titulo": "Estadísticas de regulación migratoria",
+              "organismo": "Instituto Nacional de Migración (INM)",
+              "enlace": "https://datos.gob.mx/dataset/estadisticas_regulacion_migratoria"
+            },
+            {
+              "titulo": "Población mexicana en el exterior",
+              "organismo": "Instituto de Mexicanas y Mexicanos en el Exterior (IMME)",
+              "enlace": "https://datos.gob.mx/dataset/poblacion_mexicana_exterior"
+            },
+            {
+              "titulo": "Migrantes atendidos por los Grupos Beta de Protección a Migrantes",
+              "organismo": "Instituto Nacional de Migración (INM)",
+              "enlace": "https://datos.gob.mx/dataset/migrantes_atendidos_grupos_beta_proteccion_migrantes"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 25,
+          "ejemplos": [
+            {
+              "titulo": "Personas extranjeras víctimas de delito",
+              "organismo": "Instituto Nacional de Migración (INM)",
+              "enlace": "https://datos.gob.mx/dataset/personas_extranjeras_victimas_delito"
+            },
+            {
+              "titulo": "Entrega de Cartilla de Prevención de Delitos en Materia de Trata de Personas",
+              "organismo": "Comisión Ejecutiva de Atención a Víctimas (CEAV)",
+              "enlace": "https://datos.gob.mx/dataset/entrega_cartilla_prevencion_delitos_materia_trata_personas"
+            },
+            {
+              "titulo": "Información estadística penitenciaria nacional (febrero, 2025)",
+              "organismo": "Prevención y Reinserción Social (PRS)",
+              "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional"
+            },
+            {
+              "titulo": "Información estadística penitenciaria nacional (junio, 2025)",
+              "organismo": "Prevención y Reinserción Social (PRS)",
+              "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional_junio_2025"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 15,
+          "ejemplos": [
+            {
+              "titulo": "Incidencia delictiva",
+              "organismo": "Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública (SESNSP)",
+              "enlace": "https://datos.gob.mx/dataset/incidencia_delictiva"
+            },
+            {
+              "titulo": "Información estadística penitenciaria nacional (febrero, 2025)",
+              "organismo": "Prevención y Reinserción Social (PRS)",
+              "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional"
+            },
+            {
+              "titulo": "Información estadística penitenciaria nacional (junio, 2025)",
+              "organismo": "Prevención y Reinserción Social (PRS)",
+              "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional_junio_2025"
+            },
+            {
+              "titulo": "Información estadística penitenciaria nacional (mayo, 2025)",
+              "organismo": "Prevención y Reinserción Social (PRS)",
+              "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional_mayo_2025"
+            }
+          ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 5,
+          "ejemplos": [
+            {
+              "titulo": "Sesiones de la Comisión Ejecutiva",
+              "organismo": "Secretaría Ejecutiva del Sistema Nacional Anticorrupción (SESNA)",
+              "enlace": "https://datos.gob.mx/dataset/sesiones_comision_ejecutiva"
+            },
+            {
+              "titulo": "Sesiones del Órgano de Gobierno",
+              "organismo": "Secretaría Ejecutiva del Sistema Nacional Anticorrupción (SESNA)",
+              "enlace": "https://datos.gob.mx/dataset/sesiones_organo_gobierno"
+            },
+            {
+              "titulo": "Sesiones del Comité Coordinador del SNA",
+              "organismo": "Secretaría Ejecutiva del Sistema Nacional Anticorrupción (SESNA)",
+              "enlace": "https://datos.gob.mx/dataset/sesiones_comite_coordinador_sna"
+            },
+            {
+              "titulo": "Instrumentos jurídicos consensuales registrados",
+              "organismo": "Secretaría Ejecutiva del Sistema Nacional Anticorrupción (SESNA)",
+              "enlace": "https://datos.gob.mx/dataset/instrumentos_juridicos_consensuales_registrados"
+            }
+          ]
+        }
+      ],
+      "conjuntos_hallados": 267
     },
     {
       "iso": "ARG",
@@ -934,9 +1113,9 @@
     }
   ],
   "resumen": {
-    "estados_con_portal": 6,
+    "estados_con_portal": 7,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4237,
+    "conjuntos_hallados": 4504,
     "materias_consultadas": 6
   },
   "sectoriales_verificados": [
@@ -964,5 +1143,54 @@
       "clave": false,
       "verificado": "2026-08-30"
     }
-  ]
+  ],
+  "sin_acceso_automatizado": {
+    "_nota": "Estados con portal identificado que no admite consulta automatizada. NO se esquiva ninguna proteccion: se declara y se gestiona la via oficial (doctrina/limites.md).",
+    "requiere_clave_gratuita": [
+      {
+        "iso": "BRA",
+        "portal": "https://dados.gov.br",
+        "detalle": "HTTP 401. Clave gratuita con registro."
+      },
+      {
+        "iso": "BRA",
+        "portal": "https://api.portaldatransparencia.gov.br",
+        "detalle": "HTTP 401. Chave de API no informada."
+      }
+    ],
+    "proteccion_contra_robots": [
+      {
+        "iso": "GTM",
+        "portal": "https://www.datos.gob.gt",
+        "detalle": "Cloudflare interpone verificacion."
+      },
+      {
+        "iso": "CRI",
+        "portal": "https://api.hacienda.go.cr",
+        "detalle": "HTTP 403 con verificacion interpuesta."
+      },
+      {
+        "iso": "BOL",
+        "portal": "https://datos.gob.bo",
+        "detalle": "HTTP 403 del servidor."
+      },
+      {
+        "iso": "ECU",
+        "portal": "https://www.datosabiertos.gob.ec",
+        "detalle": "HTTP 403 del servidor."
+      }
+    ],
+    "plataforma_no_identificada": [
+      {
+        "iso": "PER",
+        "portal": "https://www.datosabiertos.gob.pe",
+        "detalle": "La raiz responde 200; la ruta CKAN devuelve 404."
+      },
+      {
+        "iso": "JAM",
+        "portal": "https://data.gov.jm",
+        "detalle": "El servidor cierra la conexion sin responder."
+      }
+    ]
+  }
 }
