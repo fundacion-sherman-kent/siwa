@@ -190,11 +190,19 @@
   .niveles{
     display:flex;flex-direction:column;gap:6px;margin:22px 0 6px;max-width:640px;
   }
-  .niveles select{
-    background:#04202f;color:#E8EEF5;border:1px solid var(--orange);border-radius:8px;
-    padding:11px 13px;font-family:inherit;font-size:13px;width:100%;
+  .botonera-nivel{display:flex;flex-wrap:wrap;gap:8px;}
+  .nivel{
+    flex:1 1 190px;text-align:left;background:rgba(255,255,255,.03);
+    border:1px solid var(--line);border-radius:9px;padding:11px 14px;cursor:pointer;
+    font-family:inherit;color:#9fb0c4;transition:border-color .12s,background .12s;
   }
-  .niveles select:focus{outline:2px solid var(--orange);outline-offset:1px;}
+  .nivel:hover{background:rgba(255,255,255,.07);color:#fff;}
+  .nivel:focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
+  .nivel b{display:block;font-size:13.5px;color:#E8EEF5;font-weight:700;margin-bottom:3px;}
+  .nivel span{display:block;font-size:11px;line-height:1.35;}
+  .nivel.activo{border-color:var(--orange);background:rgba(251,101,0,.13);}
+  .nivel.activo b{color:#fff;}
+  @media (max-width:720px){ .nivel{flex:1 1 100%;} }
   .niveles-pie{
     margin:0;font-size:11.5px;line-height:1.5;color:#7d90a8;
   }
@@ -704,12 +712,15 @@
      disponibilidad de las fuentes. Este registro no emite juicios: publica hechos
      calificados.</p>
   <div class="niveles">
-    <label class="niveles-rotulo" for="nivel-lectura">¿Cómo querés leerlo?</label>
-    <select id="nivel-lectura">
-      <option value="1">Ciudadano — qué pasa en mi país, en pocas palabras</option>
-      <option value="2">Periodista — lo que circula hoy, con su fuente y su corroboración</option>
-      <option value="3">Profesional — los 65 indicadores, el mapa y los informes</option>
-    </select>
+    <span class="niveles-rotulo">¿Cómo querés leerlo?</span>
+    <div class="botonera-nivel" role="group" aria-label="Nivel de lectura">
+      <button class="nivel activo" data-nivel="1" aria-pressed="true">
+        <b>Ciudadano</b><span>Qué pasa en mi país, en pocas palabras</span></button>
+      <button class="nivel" data-nivel="2" aria-pressed="false">
+        <b>Periodista</b><span>Lo que circula hoy, con su fuente y su corroboración</span></button>
+      <button class="nivel" data-nivel="3" aria-pressed="false">
+        <b>Analista</b><span>Los 65 indicadores, el método y los vacíos</span></button>
+    </div>
     <p class="niveles-pie" id="niveles-pie"></p>
     <div class="herramientas" id="herramientas"></div>
     <p class="aviso-herram" id="aviso-herram"></p>
@@ -2349,7 +2360,7 @@
   const PIE_NIVEL = {
     1: 'Estás viendo <b>lo esencial de un país</b>: qué cambió y cuánto. Cada cifra trae quién la produce y qué es lo que <b>no</b> dice.',
     2: 'Sumás <b>lo que se está publicando ahora</b> —qué cubre la prensa de la región, con cuántos orígenes independientes— y el informe descargable para citar.',
-    3: 'Sumás <b>los 65 indicadores</b> de las doce fuentes con el mapa y los cruces entre temas, y además <b>el método</b>: de dónde sale cada dato, cómo se lo califica, qué vacíos se declaran y qué fuentes oficiales existen en cada Estado.',
+    3: 'Sumás <b>los 65 indicadores</b> de las trece fuentes con el mapa y los cruces entre temas, y además <b>el método</b>: de dónde sale cada dato, cómo se lo califica, qué vacíos se declaran y qué fuentes oficiales existen en cada Estado.',
   };
 
   // --- Enlaces que se pueden compartir -----------------------------------
@@ -2455,8 +2466,11 @@
 
   function aplicarNivel(){
     document.body.dataset.nivel = String(nivel);
-    const sel = document.getElementById('nivel-lectura');
-    if(sel && +sel.value !== nivel) sel.value = String(nivel);
+    document.querySelectorAll('.nivel').forEach(b=>{
+      const suyo = +b.dataset.nivel === nivel;
+      b.classList.toggle('activo', suyo);
+      b.setAttribute('aria-pressed', suyo ? 'true' : 'false');
+    });
     const pie = document.getElementById('niveles-pie');
     if(pie) pie.innerHTML = PIE_NIVEL[nivel] || '';
     pintarHerramientas();
@@ -2480,16 +2494,12 @@
   document.querySelectorAll('.fuente-nube').forEach(b =>
     b.addEventListener('click', ()=>{ origenNube = b.dataset.origen; palabrasVista(); }));
 
-  (function(){
-    const sel = document.getElementById('nivel-lectura');
-    if(!sel) return;
-    sel.value = String(nivel);
-    sel.addEventListener('change', ()=>{
-      nivel = Math.min(+sel.value || 1, NIVEL_MAXIMO);
+  document.querySelectorAll('.nivel').forEach(b =>
+    b.addEventListener('click', ()=>{
+      nivel = Math.min(+b.dataset.nivel || 1, NIVEL_MAXIMO);
       try{ localStorage.setItem('siwa-nivel', String(nivel)); }catch(e){}
       aplicarNivel(); repintar();
-    });
-  })();
+    }));
 
   // --- Ficha ciudadana: lo que mas cambio en el pais elegido --------------
   function fichaCiudadana(){
