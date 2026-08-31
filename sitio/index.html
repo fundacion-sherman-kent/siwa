@@ -190,18 +190,32 @@
   .niveles{
     display:flex;flex-direction:column;gap:6px;margin:22px 0 6px;max-width:640px;
   }
-  .botonera-nivel{display:flex;flex-wrap:wrap;gap:8px;}
+  .botonera-nivel{display:flex;flex-wrap:wrap;gap:9px;}
+  /* Cada boton lleva su propia marca redonda: se ve cual esta elegido sin tener
+     que comparar tonos de fondo, que es lo que no se distingue de un vistazo. */
   .nivel{
-    flex:1 1 190px;text-align:left;background:rgba(255,255,255,.03);
-    border:1px solid var(--line);border-radius:9px;padding:11px 14px;cursor:pointer;
+    flex:1 1 195px;display:grid;grid-template-columns:15px 1fr;column-gap:11px;
+    align-items:start;text-align:left;background:rgba(255,255,255,.04);
+    border:1px solid var(--line);border-radius:10px;padding:13px 15px;cursor:pointer;
     font-family:inherit;color:#9fb0c4;transition:border-color .12s,background .12s;
   }
-  .nivel:hover{background:rgba(255,255,255,.07);color:#fff;}
+  .nivel::before{
+    content:'';grid-column:1;grid-row:1 / span 2;align-self:start;
+    width:15px;height:15px;margin-top:2px;border-radius:50%;
+    border:2px solid #46586e;box-sizing:border-box;transition:.12s;
+  }
+  .nivel b{grid-column:2;display:block;font-size:14px;color:#E8EEF5;font-weight:700;margin-bottom:3px;}
+  .nivel span{grid-column:2;display:block;font-size:11.5px;line-height:1.4;}
+  .nivel:hover{background:rgba(255,255,255,.08);color:#fff;border-color:#3c5065;}
+  .nivel:hover::before{border-color:#7d90a8;}
   .nivel:focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
-  .nivel b{display:block;font-size:13.5px;color:#E8EEF5;font-weight:700;margin-bottom:3px;}
-  .nivel span{display:block;font-size:11px;line-height:1.35;}
-  .nivel.activo{border-color:var(--orange);background:rgba(251,101,0,.13);}
+  .nivel.activo{border-color:var(--orange);background:rgba(251,101,0,.14);}
   .nivel.activo b{color:#fff;}
+  .nivel.activo span{color:#C7D2E0;}
+  .nivel.activo::before{
+    border-color:var(--orange);background:var(--orange);
+    box-shadow:inset 0 0 0 3px #0B1B27;
+  }
   @media (max-width:720px){ .nivel{flex:1 1 100%;} }
   .niveles-pie{
     margin:0;font-size:11.5px;line-height:1.5;color:#7d90a8;
@@ -225,16 +239,6 @@
     width:100%;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;
     color:#7d90a8;font-weight:700;margin-bottom:2px;
   }
-  .nivel{
-    flex:1 1 200px;text-align:left;background:rgba(255,255,255,.03);
-    border:1px solid var(--line);border-radius:9px;padding:11px 14px;cursor:pointer;
-    font-family:inherit;color:#9fb0c4;transition:border-color .12s,background .12s;
-  }
-  .nivel:hover{background:rgba(255,255,255,.06);color:#fff;}
-  .nivel b{display:block;font-size:13px;color:#E8EEF5;font-weight:700;margin-bottom:2px;}
-  .nivel span{display:block;font-size:11px;line-height:1.35;}
-  .nivel.activo{border-color:var(--orange);background:rgba(251,101,0,.12);}
-  .nivel.activo b{color:#fff;}
   .elige-pais{
     padding:20px 0 8px;font-size:13.5px;color:#9fb0c4;line-height:1.6;max-width:68ch;
   }
@@ -288,6 +292,9 @@
   }
   .pie-ficha{font-size:11.5px;color:#7d90a8;line-height:1.6;margin:14px 0 0;max-width:76ch;}
   /* Niveles: cada seccion declara desde que nivel se muestra. */
+  /* Esconde el CONTENIDO que sobra en cada nivel. Los tres botones que eligen el
+     nivel NO pueden llevar data-nivel —quedarian escondidos por esta misma regla
+     y no habria como volver—: llevan data-lee. */
   body[data-nivel="1"] [data-nivel="2"], body[data-nivel="1"] [data-nivel="3"],
   body[data-nivel="2"] [data-nivel="3"]{display:none;}
   .pasos{
@@ -712,13 +719,13 @@
      disponibilidad de las fuentes. Este registro no emite juicios: publica hechos
      calificados.</p>
   <div class="niveles">
-    <span class="niveles-rotulo">¿Cómo querés leerlo?</span>
+    <span class="niveles-rotulo">¿Cómo querés leerlo? Elegí uno de los tres</span>
     <div class="botonera-nivel" role="group" aria-label="Nivel de lectura">
-      <button class="nivel activo" data-nivel="1" aria-pressed="true">
+      <button class="nivel activo" data-lee="1" aria-pressed="true">
         <b>Ciudadano</b><span>Qué pasa en mi país, en pocas palabras</span></button>
-      <button class="nivel" data-nivel="2" aria-pressed="false">
+      <button class="nivel" data-lee="2" aria-pressed="false">
         <b>Periodista</b><span>Lo que circula hoy, con su fuente y su corroboración</span></button>
-      <button class="nivel" data-nivel="3" aria-pressed="false">
+      <button class="nivel" data-lee="3" aria-pressed="false">
         <b>Analista</b><span>Los 65 indicadores, el método y los vacíos</span></button>
     </div>
     <p class="niveles-pie" id="niveles-pie"></p>
@@ -2467,7 +2474,7 @@
   function aplicarNivel(){
     document.body.dataset.nivel = String(nivel);
     document.querySelectorAll('.nivel').forEach(b=>{
-      const suyo = +b.dataset.nivel === nivel;
+      const suyo = +b.dataset.lee === nivel;
       b.classList.toggle('activo', suyo);
       b.setAttribute('aria-pressed', suyo ? 'true' : 'false');
     });
@@ -2496,7 +2503,7 @@
 
   document.querySelectorAll('.nivel').forEach(b =>
     b.addEventListener('click', ()=>{
-      nivel = Math.min(+b.dataset.nivel || 1, NIVEL_MAXIMO);
+      nivel = Math.min(+b.dataset.lee || 1, NIVEL_MAXIMO);
       try{ localStorage.setItem('siwa-nivel', String(nivel)); }catch(e){}
       aplicarNivel(); repintar();
     }));
