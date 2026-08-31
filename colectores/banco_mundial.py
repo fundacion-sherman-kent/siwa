@@ -96,13 +96,13 @@ INDICADORES = [
      "cautela": "Proporción del producto que proviene de extraer recursos. Es el "
                 "indicador clásico de exposición a la maldición de los recursos."},
 {"clave": "gasto_militar", "codigo": "MS.MIL.XPND.GD.ZS", "fuente_id": None,
-     "rotulo": "Gasto militar", "eje": "Seguridad",
+     "rotulo": "Gasto militar sobre el producto", "eje": "Defensa",
      "unidad": "% del producto", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Mide lo que el Estado destina a defensa, no su capacidad ni su empleo. "
                 "Un valor alto no indica mas seguridad ni menos."},
     {"clave": "personal_militar", "codigo": "MS.MIL.TOTL.P1", "fuente_id": None,
-     "rotulo": "Personal de las fuerzas armadas", "eje": "Seguridad",
+     "rotulo": "Efectivos de las fuerzas armadas", "eje": "Defensa",
      "unidad": "personas", "mas_es_peor": False,
      "origen": "Banco Mundial",
      "cautela": "Efectivos declarados. No incluye fuerzas de seguridad interior ni "
@@ -177,6 +177,71 @@ INDICADORES = [
      "origen": "UIT, compilado por el Banco Mundial",
      "cautela": "Junto con los usuarios de internet, delimita la superficie expuesta a "
                 "ataque informatico. No mide calidad ni continuidad del servicio."},
+    {"clave": "migrantes", "codigo": "SM.POP.TOTL", "fuente_id": None,
+     "rotulo": "Poblacion migrante que el pais aloja", "eje": "Seguridad",
+     "unidad": "personas", "mas_es_peor": False,
+     "origen": "Naciones Unidas, compilado por el Banco Mundial",
+     "cautela": "Personas nacidas en otro pais que residen en este. NO mide flujo ni "
+                "irregularidad: es el acervo acumulado. Y no dice nada sobre delito: "
+                "asociar migracion con inseguridad es un juicio, y el registro no lo hace."},
+    {"clave": "migrantes_pct", "codigo": "SM.POP.TOTL.ZS", "fuente_id": None,
+     "rotulo": "Peso de la poblacion migrante", "eje": "Seguridad",
+     "unidad": "% de la poblacion", "mas_es_peor": False,
+     "origen": "Naciones Unidas, compilado por el Banco Mundial",
+     "cautela": "El mismo acervo medido contra el tamano del pais. Un Estado chico con "
+                "recepcion alta aparece arriba sin que el numero absoluto sea grande."},
+    {"clave": "migracion_neta", "codigo": "SM.POP.NETM", "fuente_id": None,
+     "rotulo": "Migracion neta", "eje": "Seguridad",
+     "unidad": "personas por quinquenio", "mas_es_peor": False,
+     "origen": "Naciones Unidas, compilado por el Banco Mundial",
+     "cautela": "Entradas menos salidas. NEGATIVO significa que se fue mas gente de la "
+                "que llego: es el indicador de EXPULSION de poblacion. Se estima por "
+                "quinquenios, de modo que no capta una crisis de un solo anio."},
+    {"clave": "remesas", "codigo": "BX.TRF.PWKR.DT.GD.ZS", "fuente_id": None,
+     "rotulo": "Remesas recibidas", "eje": "Seguridad",
+     "unidad": "% del producto", "mas_es_peor": False,
+     "origen": "Banco Mundial",
+     "cautela": "Entra como medida de MIGRACION, no como indicador economico: es cuanto "
+                "pesa el dinero que mandan quienes se fueron. Un valor alto senala una "
+                "diaspora grande y una economia dependiente de ella. Solo cuenta los "
+                "envios por via formal: lo que viaja por fuera del sistema no aparece."},
+    {"clave": "gasto_militar_publico", "codigo": "MS.MIL.XPND.ZS", "fuente_id": None,
+     "rotulo": "Gasto militar sobre el gasto del Estado", "eje": "Defensa",
+     "unidad": "% del gasto publico", "mas_es_peor": False,
+     "origen": "SIPRI, compilado por el Banco Mundial",
+     "cautela": "Cuanto de lo que gasta el Estado va a defensa. Leido junto al gasto "
+                "sobre el producto separa dos cosas distintas: un Estado chico que "
+                "dedica mucho de lo poco que tiene, de uno grande que dedica poco de "
+                "mucho."},
+    {"clave": "gasto_militar_dolares", "codigo": "MS.MIL.XPND.CD", "fuente_id": None,
+     "rotulo": "Gasto militar en dolares", "eje": "Defensa",
+     "unidad": "dolares corrientes", "mas_es_peor": False,
+     "origen": "SIPRI, compilado por el Banco Mundial",
+     "cautela": "El tamano absoluto del presupuesto. En dolares corrientes: la "
+                "comparacion entre anios distintos arrastra inflacion y tipo de cambio."},
+    {"clave": "militares_fuerza_laboral", "codigo": "MS.MIL.TOTL.TF.ZS", "fuente_id": None,
+     "rotulo": "Efectivos sobre la fuerza laboral", "eje": "Defensa",
+     "unidad": "% de la fuerza laboral", "mas_es_peor": False,
+     "origen": "Banco Mundial",
+     "cautela": "Que proporcion de quienes trabajan esta bajo bandera. Es la medida de "
+                "peso relativo del instrumento militar en la sociedad."},
+    {"clave": "armas_importadas", "codigo": "MS.MIL.MPRT.KD", "fuente_id": None,
+     "rotulo": "Importacion de armamento mayor", "eje": "Defensa",
+     "unidad": "valor indicativo de tendencia, SIPRI", "mas_es_peor": False,
+     "origen": "SIPRI, compilado por el Banco Mundial",
+     "cautela": "Es el indicador de MATERIAL disponible al que se puede llegar sin "
+                "pagar: mide la ADQUISICION de armamento mayor —aeronaves, buques, "
+                "blindados, misiles— no el inventario. La unidad NO es dinero: es un "
+                "valor indicativo que SIPRI asigna segun capacidad militar, para poder "
+                "comparar sistemas de precios distintos. Un anio sin compras da cero y "
+                "no significa que el pais no tenga material."},
+    {"clave": "armas_exportadas", "codigo": "MS.MIL.XPRT.KD", "fuente_id": None,
+     "rotulo": "Exportacion de armamento mayor", "eje": "Defensa",
+     "unidad": "valor indicativo de tendencia, SIPRI", "mas_es_peor": False,
+     "origen": "SIPRI, compilado por el Banco Mundial",
+     "cautela": "Muy pocos Estados de la region exportan armamento mayor: la mayoria "
+                "figura sin dato, y eso es el dato. Misma unidad indicativa que la "
+                "importacion."},
 ]
 
 

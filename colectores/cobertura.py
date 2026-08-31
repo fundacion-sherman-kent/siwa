@@ -38,6 +38,7 @@ import geo
 
 TOPE_PALABRAS = 40   # términos por ámbito en el mapa de palabras
 PADRON_MEDIOS = Path(__file__).resolve().parent / "medios.json"
+PADRON_FRONTERAS = Path(__file__).resolve().parent / "fronteras.json"
 PADRON_GENTILICIOS = Path(__file__).resolve().parent / "gentilicios.json"
 NAVEGADOR = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -191,6 +192,63 @@ def _agrupar(notas: list) -> list:
     return grupos
 
 
+def _fronteras(notas: list, zonas: list, gentilicios: dict) -> list:
+    """Cuánto se habla de cada zona de frontera, y con qué corroboración.
+
+    NO mide qué ocurre en la zona: ninguna fuente publica estadística comparable
+    a esa escala. Mide cuántas notas del corpus la nombran.
+
+    Una nota entra a una zona por dos caminos. **Por topónimo** —Darién, Cúcuta,
+    Ciudad del Este—, que es el reconocimiento preciso. O **por palabra de
+    frontera más dos de los Estados que la comparten**: la primera versión solo
+    miraba topónimos y dejaba afuera titulares como *«Entre fronteiras e Estados:
+    mineração ilegal na Amazônia»*, que es exactamente lo que hay que ver.
+    """
+    FRONTERA = ("frontera", "fronteras", "fronteira", "fronteiras", "border",
+                "borders", "frontiere", "transfronteriza", "transfronterizo",
+                "trifronteriza", "triple frontera")
+    salida = []
+    for zona in zonas:
+        terminos = [" ".join(_normalizar_crudo(t)) for t in zona["terminos"]]
+        formas = {iso: [" ".join(_normalizar_crudo(f)) for f in gentilicios.get(iso, [])]
+                  for iso in zona["estados"]}
+        halladas, por_toponimo = [], 0
+        for n in notas:
+            plano = " " + " ".join(_normalizar_crudo(n["titulo"])) + " "
+            toponimo = any(f" {t} " in plano for t in terminos if t)
+            if toponimo:
+                halladas.append(n)
+                por_toponimo += 1
+                continue
+            if any(f" {f} " in plano for f in FRONTERA):
+                nombrados = sum(1 for iso, fs in formas.items()
+                                if any(f" {f} " in plano for f in fs if f))
+                if nombrados >= 2:
+                    halladas.append(n)
+        base = {k: zona[k] for k in ("clave", "nombre", "estados", "descripcion")}
+        if not halladas:
+            salida.append({**base, "notas": 0, "portales": 0, "jurisdicciones": [],
+                           "idiomas": [], "por_toponimo": 0, "ambos_lados": False,
+                           "ejemplos": []})
+            continue
+        paises = sorted({n["pais"] for n in halladas})
+        salida.append({
+            **base,
+            "notas": len(halladas),
+            "por_toponimo": por_toponimo,
+            "portales": len({n["dominio"] for n in halladas}),
+            "jurisdicciones": paises,
+            "idiomas": sorted({n["idioma"] for n in halladas}),
+            # Que la nombren medios de los dos lados es el dato fuerte: una sola
+            # jurisdiccion puede estar contando su propia version.
+            "ambos_lados": len([p for p in paises if p in zona["estados"]]) >= 2,
+            "ejemplos": [{k: n[k] for k in ("titulo", "enlace", "medio", "pais")}
+                         for n in halladas[:3]],
+        })
+    salida.sort(key=lambda z: -z["notas"])
+    return salida
+
+
 def _corroboracion(notas: list) -> dict:
     """Cuenta orígenes, no portales, y aplica la regla de cruce del §4.
 
@@ -315,6 +373,8 @@ def recolectar():
     for n in recientes:
         n["_isos"] = _paises_mencionados(n["titulo"], gentilicios)
     mapa_palabras = _palabras_clave(recientes, gentilicios, bloques, nombres_pais)
+    zonas = json.loads(PADRON_FRONTERAS.read_text(encoding="utf-8"))["zonas"]
+    fronteras = _fronteras(recientes, zonas, gentilicios)
     for n in recientes:
         n.pop("_isos", None)
 
@@ -434,6 +494,18 @@ def recolectar():
             "por_pais": [{"iso": i, "pais": nombres_pais.get(i, i), "asuntos": n}
                          for i, n in por_pais.most_common()],
             "mapa_palabras": mapa_palabras,
+            "fronteras": {
+                "zonas": fronteras,
+                "con_mencion": sum(1 for z in fronteras if z["notas"]),
+                "total": len(fronteras),
+                "nota": ("Zonas de frontera y focos transfronterizos. NO son "
+                         "indicadores: son lugares, y ninguna fuente publica "
+                         "estadistica comparable a esa escala. Se cuenta cuantas notas "
+                         "del corpus las nombran, de cuantos portales y de cuantas "
+                         "jurisdicciones. Que la nombren medios de los DOS LADOS de la "
+                         "frontera es el dato fuerte: una sola jurisdiccion puede estar "
+                         "contando su propia version."),
+            },
             "padron_medios": {
                 "prensa": sum(1 for m in padron if m.get("tipo", "prensa") == "prensa"),
                 "centros_de_estudio": sum(1 for m in padron if m.get("tipo") == "centro de estudio"),

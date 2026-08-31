@@ -187,6 +187,21 @@
   .leaflet-tooltip.ficha b{color:#fff;font-size:12.5px;display:block;margin-bottom:4px;}
   .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
   .mapa-barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .controles{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;width:100%;}
+  .control{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1 1 230px;}
+  .control label{
+    font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#7d90a8;font-weight:700;
+  }
+  .control select{
+    width:100%;background:#04202f;color:#E8EEF5;border:1px solid var(--line);
+    border-radius:7px;padding:9px 11px;font-family:inherit;font-size:12.5px;
+  }
+  .control select:focus{outline:2px solid var(--orange);outline-offset:1px;}
+  .control select[multiple]{padding:6px 8px;min-height:40px;}
+  .control select optgroup{background:#00121E;color:#7d90a8;font-style:normal;font-weight:700;}
+  .control select option{background:#04202f;color:#E8EEF5;padding:3px 0;}
+  #nota-controles{margin:2px 0 0;}
+  @media (max-width:720px){ .control{flex:1 1 100%;} }
   .temas{display:flex;gap:6px;flex-wrap:wrap;}
   .tema{background:transparent;border:1px solid var(--line);color:#9fb2c8;
     font-family:'Inter',sans-serif;font-size:11px;font-weight:600;padding:6px 12px;
@@ -478,6 +493,15 @@
     <a href="#victimizacion">Victimización y denuncia</a>
     <a href="#terrorismo">Terrorismo</a>
     <a href="#grupos-armados">Grupos armados</a>
+    <a href="#migraciones">Migraciones</a>
+    <a href="#fronteras">Zonas de frontera</a>
+    <a href="#mineria-ilegal">Minería ilegal</a>
+    <a href="#menores-combatientes">Menores en conflicto</a>
+    <div class="grupo">Defensa</div>
+    <a href="#presupuesto-defensa">Presupuesto</a>
+    <a href="#efectivos">Efectivos</a>
+    <a href="#material">Material</a>
+    <a href="#aeroespacial">Aeroespacial</a>
     <div class="grupo">Gobernanza</div>
     <a href="#institucional">Indicadores de gobernanza</a>
     <a href="#contratacion">Contratación pública</a>
@@ -512,13 +536,22 @@
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <div class="mapa-barra">
-        <div class="temas" id="temas"></div>
-        <div class="cruzar">
-          <label for="cruce">Cruzar con</label>
-          <select id="cruce" multiple size="4"></select>
+        <div class="controles">
+          <div class="control">
+            <label for="tema-principal">Tema</label>
+            <select id="tema-principal"></select>
+          </div>
+          <div class="control">
+            <label for="cruce">Cruzar con</label>
+            <select id="cruce" multiple size="1"></select>
+          </div>
+          <div class="control">
+            <label for="ambito">País o zona</label>
+            <select id="ambito"></select>
+          </div>
           <button class="boton chico" id="limpiar-cruce">quitar cruce</button>
-          <span class="nota-filtro">Con Ctrl o Mayúsculas se eligen varios. Dos temas dan dispersión; tres o más, una tabla comparada.</span>
         </div>
+        <p class="nota-filtro" id="nota-controles">Con Ctrl o Mayúsculas se eligen varios temas para cruzar: dos dan dispersión, tres o más una tabla comparada. El país o zona rige todo el registro, incluidas la cobertura, el mapa de palabras y las redes.</p>
         <div class="modos">
           <button class="modo activo" data-modo="nivel">Nivel actual</button>
           <button class="modo" data-modo="1">Proyección 1 año</button>
@@ -575,6 +608,37 @@
       </div>
     </section>
 
+    <section class="domain" id="mineria-ilegal">
+      <div class="domain-head"><h3>Minería ilegal</h3><span class="tag">Sin dato · declarado</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div><div class="ptitle">No hay fuente libre que la mida</div>
+          <p>Las rentas minerales y la exportación de minerales que este registro publica miden
+             extracción <b>legal</b>: usarlas como medida de minería ilegal sería falsear el dato.
+             El método que sí funcionaría —cruzar focos de calor y pérdida de bosque contra áreas
+             protegidas y concesiones— está identificado y es viable con fuentes gratuitas, pero
+             todavía no está construido. <b>Mientras tanto la casilla queda vacía, no rellenada.</b></p></div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="domain" id="menores-combatientes">
+      <div class="domain-head"><h3>Menores reclutados y utilizados en conflicto</h3><span class="tag">Sin dato · declarado</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div><div class="ptitle">Existe el registro, pero no en formato consultable</div>
+          <p>El informe anual del Secretario General de Naciones Unidas sobre los niños y los
+             conflictos armados verifica y lista estos hechos, e incluye Estados de la región.
+             <b>Se publica en documento, no en base de datos</b>, y no hay interfaz de consulta.
+             Se buscó en el catálogo completo de los Objetivos de Desarrollo Sostenible —713
+             series— y <b>no existe ninguna sobre reclutamiento de menores</b>. El trabajo
+             infantil, que sí está en este registro, es otra cosa y no lo reemplaza.</p></div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
     <section class="domain" id="ciber">
       <div class="domain-head"><h3>Ciberseguridad</h3><span class="tag" id="tag-ciber">—</span></div>
       <div class="aviso-cobertura">
@@ -587,6 +651,33 @@
       <div class="procedencia" id="proc-ciber">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-ciber"></div>
       <div id="vac-ciber"></div>
+    </section>
+
+    <section class="domain" id="migraciones">
+      <div class="domain-head"><h3>Migraciones</h3><span class="tag" id="tag-migraciones">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Estas cifras no dicen nada sobre delito.</b> Asociar migración con inseguridad
+           es un juicio, y el registro no lo hace: la materia entra en Seguridad porque el
+           movimiento de personas es objeto de política de seguridad, no porque quien migra
+           sea un riesgo. <b>La migración neta negativa señala expulsión de población</b>, que
+           suele ser el dato más revelador de los tres. Las remesas entran como medida de
+           migración —cuánto pesa el dinero que mandan quienes se fueron—, no como indicador
+           económico.</p>
+      </div>
+      <div class="grid-cards" id="tarj-migraciones"></div>
+    </section>
+
+    <section class="domain" id="fronteras">
+      <div class="domain-head"><h3>Zonas de frontera y focos transfronterizos</h3><span class="tag" id="tag-fronteras">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>No son indicadores: son lugares</b>, y ninguna fuente publica estadística
+           comparable a esa escala. Lo que se cuenta es <b>cuántas notas del corpus nombran
+           cada zona</b>, de cuántos portales y de cuántas jurisdicciones. <b>Que la nombren
+           medios de los dos lados de la frontera es el dato fuerte</b>: una sola jurisdicción
+           puede estar contando su propia versión. La zona se reconoce por su topónimo, o por
+           una palabra de frontera más dos de los Estados que la comparten.</p>
+      </div>
+      <div class="cruce" id="lista-fronteras"></div>
     </section>
 
     <section class="domain" id="terrorismo">
@@ -639,6 +730,68 @@
       <div class="domain-head"><h3>Trata de personas</h3>
         <span class="tag" id="tag-trata">—</span></div>
       <div class="grid-cards" id="tarj-trata"></div>
+    </section>
+
+    <div class="eje">
+      <h2>Eje · Defensa</h2>
+      <p>Lo que cada Estado destina y sostiene como instrumento militar: presupuesto,
+         efectivos, adquisición de material y capacidad aeroespacial.</p>
+    </div>
+
+    <section class="domain" id="presupuesto-defensa">
+      <div class="domain-head"><h3>Presupuesto de defensa</h3><span class="tag" id="tag-presupuesto-defensa">—</span></div>
+      <div class="aviso-cobertura">
+        <p>Las tres medidas se leen juntas porque separan cosas distintas: <b>un Estado chico
+           que dedica mucho de lo poco que tiene</b> no es lo mismo que uno grande que dedica
+           poco de mucho. El monto en dólares corrientes arrastra inflación y tipo de cambio:
+           sirve para el orden de magnitud, no para comparar años lejanos.</p>
+      </div>
+      <div class="procedencia" id="proc-presupuesto-defensa">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-presupuesto-defensa"></div>
+      <div id="vac-presupuesto-defensa"></div>
+    </section>
+
+    <section class="domain" id="efectivos">
+      <div class="domain-head"><h3>Efectivos</h3><span class="tag" id="tag-efectivos">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>No hay desagregación por arma, y no es un olvido.</b> No existe fuente gratuita
+           que publique los efectivos separados en ejército, armada y aviación para los 33
+           Estados. El registro de referencia es el <b>Balance Militar</b> del Instituto
+           Internacional de Estudios Estratégicos, que es <b>de pago y no admite
+           redifusión</b>. Lo que se publica acá es el total, y el peso que ese total tiene
+           sobre quienes trabajan.</p>
+      </div>
+      <div class="grid-cards" id="tarj-efectivos"></div>
+    </section>
+
+    <section class="domain" id="material">
+      <div class="domain-head"><h3>Material — adquisición de armamento mayor</h3><span class="tag" id="tag-material">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Mide lo que se compra, no lo que se tiene.</b> Es la aproximación más cercana al
+           inventario a la que se puede llegar sin pagar: aeronaves, buques, blindados y
+           misiles adquiridos. <b>Un año sin compras da cero y no significa que el país no
+           tenga material.</b></p>
+        <p>La unidad <b>no es dinero</b>: es un valor indicativo que el instituto sueco asigna
+           según capacidad militar, para poder comparar sistemas con precios muy distintos.
+           <b>El inventario por tipo —cuántos vehículos, cuántos aviones, cuántas
+           embarcaciones— no está disponible en ninguna fuente libre</b>, y el vacío queda
+           declarado.</p>
+      </div>
+      <div class="grid-cards" id="tarj-material"></div>
+    </section>
+
+    <section class="domain" id="aeroespacial">
+      <div class="domain-head"><h3>Capacidad aeroespacial</h3><span class="tag" id="tag-aeroespacial">—</span></div>
+      <div class="aviso-cobertura">
+        <p>Objetos que cada Estado registra ante Naciones Unidas: <b>satélites propios, no
+           necesariamente lanzados por él</b>. Es la única medida de capacidad aeroespacial
+           comparable y gratuita que se encontró. <b>No mide capacidad de lanzamiento, ni
+           satélites militares, ni aviación</b>. Solo 13 de los 33 Estados registran alguno,
+           y ese reparto es en sí mismo el hallazgo.</p>
+      </div>
+      <div class="procedencia" id="proc-aeroespacial">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-aeroespacial"></div>
+      <div id="vac-aeroespacial"></div>
     </section>
 
     <div class="eje">
@@ -809,9 +962,6 @@
            cuentan orígenes independientes por idioma y por jurisdicción, no portales.</p>
       </div>
       <div class="filtros-cobertura">
-        <button class="filtro activo" data-ambito="todo">Toda la región</button>
-        <button class="filtro" data-ambito="bloque">Bloque del país elegido</button>
-        <button class="filtro" data-ambito="pais">Solo el país elegido</button>
         <span class="nota-filtro" id="nota-cobertura"></span>
       </div>
       <div class="procedencia" id="proc-cobertura">Cargando el registro…</div>
@@ -830,7 +980,7 @@
            ningún canal del padrón lo cubre.</p>
       </div>
       <div class="filtros-cobertura">
-        <span class="nota-filtro" id="nota-palabras">Usa el mismo ámbito que la cobertura: región, bloque o país.</span>
+        <span class="nota-filtro" id="nota-palabras">El ámbito se elige arriba, en el mapa de situación.</span>
       </div>
       <div class="nube" id="nube-palabras"></div>
     </section>
@@ -978,6 +1128,11 @@
   const RUTA = '../datos/publico/';
   const almacen = {};
   let capaActiva = 'homicidios', modo = 'nivel', paisFiltro = null, paisNombre = null, padron = [];
+  // La zona puede elegirse SOLA, sin pasar por un pais: antes solo existia como
+  // «el bloque del pais elegido», y no habia forma de mirar una zona entera.
+  let bloqueFiltro = null;
+  const bloqueDe = iso => (padron.find(x=>x.iso===iso)||{}).bloque || null;
+  const bloqueActivo = () => bloqueFiltro || (paisFiltro ? bloqueDe(paisFiltro) : null);
   let registros = 0, vacios = 0, fallas = 0, dominios = 0;
 
   const miles = n => Number(n).toLocaleString('es-AR');
@@ -1069,7 +1224,7 @@
     {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false},
     {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales},
   ];
-  const ORDEN_EJES = ['Seguridad','Gobernanza','Desarrollo','Fuentes'];
+  const ORDEN_EJES = ['Seguridad','Defensa','Gobernanza','Desarrollo','Fuentes'];
 
   function MATERIAS(){
     const deFuentes = fuentesInd().flatMap(f=>(f.indicadores||[]).map(i=>({
@@ -1435,14 +1590,18 @@
     ORDEN_EJES.forEach(eje=>{
       const dele = hay.filter(m=>m.eje===eje);
       if(!dele.length) return;
-      html += `<span class="eje-solapa">${eje}</span>` + dele.map(m=>{
+      html += `<optgroup label="${esc(eje)}">` + dele.map(m=>{
         const clave = claveDeCapa(m.clave) || m.clave;
-        return `<button class="tema${clave===capaActiva?' activo':''}" data-capa="${clave}">${esc(m.rotulo)}</button>`;
-      }).join('');
+        return `<option value="${clave}">${esc(m.rotulo)}</option>`;
+      }).join('') + '</optgroup>';
     });
-    document.getElementById('temas').innerHTML = html;
-    document.querySelectorAll('#temas .tema').forEach(b=>
-      b.addEventListener('click',()=>{ capaActiva=b.dataset.capa; repintar(); }));
+    const sel = document.getElementById('tema-principal');
+    if(sel && sel.dataset.firma !== html.length+':'+hay.length){
+      sel.dataset.firma = html.length+':'+hay.length;
+      sel.innerHTML = html;
+      sel.addEventListener('change', ()=>{ capaActiva = sel.value; repintar(); });
+    }
+    if(sel) sel.value = capaActiva;
 
     const bt=document.querySelector('[data-modo="tendencia"]');
     if(bt){
@@ -1469,6 +1628,9 @@
   }
   function repintar(){
     if(capaPaises) capaPaises.setStyle(estiloPais);
+    // armarAmbito() va aca y no solo en sincronizar(): el padron de paises llega
+    // con el mapa, despues del primer pintado, y el desplegable quedaba vacio.
+    armarAmbito();
     puntos(); solapas(); leyenda(); panelCruce();
     pintarFichaMapa(paisFiltro, paisNombre,
       paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:'');
@@ -1512,15 +1674,54 @@
     tarjetasBanco(['democracia_electoral','democracia_liberal','democracia_participativa',
                    'corrupcion_politica'],'democracia');
     tarjetasBanco(['libertad_expresion','libertad_asociacion'],'libertades');
+    tarjetasBanco(['migracion_neta','migrantes','migrantes_pct','remesas'],'migraciones');
+    tarjetasBanco(['gasto_militar','gasto_militar_publico','gasto_militar_dolares'],'presupuesto-defensa');
+    tarjetasBanco(['personal_militar','militares_fuerza_laboral'],'efectivos');
+    tarjetasBanco(['armas_importadas','armas_exportadas'],'material');
+    tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
+    fronterasVista();
     tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista();
     redesVista(); mensajeriaVista();
     pintarFuentes(); informe();
   }
   function seleccionar(iso, nombre){
     if(paisFiltro===iso){ paisFiltro=null; paisNombre=null; } else { paisFiltro=iso; paisNombre=nombre; }
+    bloqueFiltro = null;
+    ambitoCobertura = paisFiltro ? 'pais' : 'todo';
     sincronizar(); repintar();
   }
+  function armarAmbito(){
+    const sel=document.getElementById('ambito'); if(!sel || !padron.length) return;
+    const bloques = [...new Set(padron.map(p=>p.bloque))].sort((a,b)=>a.localeCompare(b,'es'));
+    const firma = padron.length+':'+bloques.length;
+    if(sel.dataset.firma !== firma){
+      sel.dataset.firma = firma;
+      sel.innerHTML =
+        '<option value="">América Latina y Caribe · los 33</option>'
+        + `<optgroup label="Zonas">${bloques.map(b=>
+            `<option value="b:${esc(b)}">${esc(b)}</option>`).join('')}</optgroup>`
+        + `<optgroup label="Estados">${padron.slice()
+            .sort((a,b)=>a.pais.localeCompare(b.pais,'es'))
+            .map(p=>`<option value="p:${p.iso}">${esc(p.pais)}</option>`).join('')}</optgroup>`;
+      sel.addEventListener('change', ()=>{
+        const v = sel.value;
+        if(!v){ paisFiltro=null; paisNombre=null; bloqueFiltro=null; }
+        else if(v.startsWith('b:')){ paisFiltro=null; paisNombre=null; bloqueFiltro=v.slice(2); }
+        else {
+          const iso=v.slice(2), p=padron.find(x=>x.iso===iso);
+          paisFiltro=iso; paisNombre=p?p.pais:iso; bloqueFiltro=null;
+        }
+        // El ambito de las secciones de verificacion se deriva de esta unica
+        // eleccion: antes habia dos controles que podian contradecirse.
+        ambitoCobertura = paisFiltro ? 'pais' : (bloqueFiltro ? 'bloque' : 'todo');
+        sincronizar(); repintar();
+      });
+    }
+    sel.value = paisFiltro ? 'p:'+paisFiltro : (bloqueFiltro ? 'b:'+bloqueFiltro : '');
+  }
+
   function sincronizar(){
+    armarAmbito();
     const s=document.getElementById('pais-informe'); if(s) s.value = paisFiltro||'';
   }
 
@@ -1891,15 +2092,7 @@
     const d=almacen.cobertura, caja=document.getElementById('lista-cobertura');
     if(!d || !caja) return;
     const r=d.resumen;
-    const bloqueDelPais = paisFiltro && padron.length
-      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
-
-    document.querySelectorAll('.filtro').forEach(b=>{
-      const necesitaPais = b.dataset.ambito !== 'todo';
-      b.disabled = necesitaPais && !paisFiltro;
-      if(b.disabled && ambitoCobertura===b.dataset.ambito) ambitoCobertura='todo';
-      b.classList.toggle('activo', b.dataset.ambito===ambitoCobertura);
-    });
+    const bloqueDelPais = bloqueActivo();
 
     let lista = d.registros;
     if(ambitoCobertura==='pais' && paisFiltro)
@@ -1933,8 +2126,7 @@
       return;
     }
     // El ámbito es el mismo que el de la cobertura: no se duplica el control.
-    const bloqueDelPais = paisFiltro && padron.length
-      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
+    const bloqueDelPais = bloqueActivo();
     let lista, donde, notas=null;
     if(ambitoCobertura==='pais' && paisFiltro && mp.paises[paisFiltro]){
       lista = mp.paises[paisFiltro].palabras; notas = mp.paises[paisFiltro].notas;
@@ -1948,8 +2140,8 @@
     }
     if(tag) tag.textContent = `${lista.length} término${lista.length===1?'':'s'} · ventana de ${mp.ventana_horas} h`;
     if(nota) nota.textContent = notas!==null
-      ? `${notas} nota${notas===1?'':'s'} atribuidas a ${donde} en la ventana. El ámbito se elige arriba, en la cobertura.`
-      : `Ámbito: ${donde}. Se elige arriba, en la cobertura.`;
+      ? `${notas} nota${notas===1?'':'s'} atribuidas a ${donde} en la ventana. El ámbito se elige arriba, en el mapa de situación.`
+      : `Ámbito: ${donde}. Se elige arriba, en el mapa de situación.`;
 
     if(!lista.length){
       caja.innerHTML = `<div class="vacio"><b>Ningún término de ${esc(donde)} llega a dos portales distintos en esta ventana.</b><br>
@@ -1974,8 +2166,7 @@
     const d=almacen.redes, nc=d && d.nube_conceptos;
     const nota=document.getElementById('nota-nube');
     if(!nc){ caja.innerHTML=''; return; }
-    const bloqueDelPais = paisFiltro && padron.length
-      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
+    const bloqueDelPais = bloqueActivo();
     // El ámbito es el mismo de la cobertura: región, bloque o país.
     let lista, donde, pubs;
     if(ambitoCobertura==='pais' && paisFiltro){
@@ -2010,8 +2201,7 @@
     const caja=document.getElementById('tarj-redes'); if(!caja) return;
     const d=almacen.redes; if(!d) return;
     const tag=document.getElementById('tag-redes');
-    const bloqueDelPais = paisFiltro && padron.length
-      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
+    const bloqueDelPais = bloqueActivo();
     // Mismo ámbito que la cobertura y el mapa de palabras: un solo control.
     let lista = d.registros.filter(r=>r.publicaciones);
     if(ambitoCobertura==='pais' && paisFiltro) lista = lista.filter(r=>r.iso===paisFiltro);
@@ -2050,8 +2240,7 @@
     if(tag) tag.textContent = `${r.canales_del_padron} canales · ${r.jurisdicciones_con_canal} jurisdicciones · ventana de ${r.ventana_horas} h`;
 
     // Nube, con el mismo ámbito que el resto del bloque de verificación.
-    const bloqueDelPais = paisFiltro && padron.length
-      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
+    const bloqueDelPais = bloqueActivo();
     let lista, donde, msgs;
     if(ambitoCobertura==='pais' && paisFiltro){
       const e=(d.estados||[]).find(x=>x.iso===paisFiltro);
@@ -2091,6 +2280,32 @@
           <span class="badge ${c.mensajes?'medio':'unica'}">${dormido?'sin publicar':(c.mensajes?'activo':'sin texto')}</span></div>
         ${c.estados_mencionados.length?`<div class="lugares">${c.estados_mencionados.slice(0,6).map(x=>`<span class="lugar">${esc(x.pais)} ${x.menciones}</span>`).join('')}</div>`:''}
       </div>`;
+    }).join('');
+  }
+
+  function fronterasVista(){
+    const caja=document.getElementById('lista-fronteras'); if(!caja) return;
+    const d=almacen.cobertura, f=d && d.fronteras; if(!f) return;
+    const tag=document.getElementById('tag-fronteras');
+    if(tag) tag.textContent = `${f.con_mencion} de ${f.total} zonas con mención en la ventana`;
+    caja.innerHTML = f.zonas.map(z=>{
+      const estados = z.estados.map(i=>{
+        const p=padron.find(x=>x.iso===i); return p?p.pais:i;
+      }).join(' · ');
+      if(!z.notas) return `<div class="asunto"><h4>${esc(z.nombre)}</h4>
+        <div class="foot"><span class="porque">${esc(estados)} — ${esc(z.descripcion)}<br>
+          <b>Sin mención en la ventana.</b> No es ausencia de hechos: es ausencia de cobertura
+          en el corpus recolectado.</span><span class="badge unica">sin mención</span></div></div>`;
+      return `<div class="asunto"><h4>${esc(z.nombre)}</h4>
+        <div class="lugares">${z.estados.map(i=>{
+          const p=padron.find(x=>x.iso===i); return `<span class="lugar">${esc(p?p.pais:i)}</span>`;
+        }).join('')}</div>
+        <div class="origenes">${z.ejemplos.map(e=>
+          `<a class="origen" href="${esc(e.enlace)}" target="_blank" rel="noopener">${esc(e.titulo.slice(0,90))} <span class="jur">${esc(e.medio)}</span></a>`).join('')}</div>
+        <div class="foot"><span class="porque"><b>${z.notas}</b> nota${z.notas===1?'':'s'}
+          (${z.por_toponimo} por topónimo) · ${z.portales} portal${z.portales===1?'':'es'} ·
+          ${z.jurisdicciones.join(', ')}</span>
+          <span class="badge ${z.ambos_lados?'fuerte':'medio'}">${z.ambos_lados?'de los dos lados':'un solo lado'}</span></div></div>`;
     }).join('');
   }
 
@@ -2312,10 +2527,6 @@
   document.querySelectorAll('.modo').forEach(b=>
     b.addEventListener('click',()=>{ if(!b.disabled){ modo=b.dataset.modo; repintar(); } }));
 
-  document.querySelectorAll('.filtro').forEach(b=>
-    b.addEventListener('click',()=>{ if(!b.disabled){ ambitoCobertura=b.dataset.ambito;
-      coberturaVista(); palabrasVista(); redesVista(); mensajeriaVista(); } }));
-
   document.getElementById('btn-csv').addEventListener('click', csv);
   document.getElementById('btn-imprimir').addEventListener('click', ()=>window.print());
 
@@ -2382,7 +2593,8 @@
   Promise.all([traer('owd.json'), traer('estado/owd.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.owd=d; dominios+=Object.keys(d.cobertura||{}).length;
-      ['terrorismo','democracia'].forEach(x=>pintarProcedencia('proc-'+x, d.procedencia));
+      ['terrorismo','democracia','aeroespacial'].forEach(x=>pintarProcedencia('proc-'+x, d.procedencia));
+      pintarVacios('vac-aeroespacial',d.procedencia.vacios_declarados);
       registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
       vacios+=pintarVacios('vac-terrorismo',d.procedencia.vacios_declarados);
       pintarVacios('vac-democracia',d.procedencia.vacios_declarados);
@@ -2438,10 +2650,12 @@
   Promise.all([traer('banco-mundial.json'), traer('estado/banco-mundial.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.banco=d; dominios+=Object.keys(d.cobertura||{}).length;
-      ['violencia','institucional','urbano','industrial','materias','ciber','contratacion']
+      ['violencia','institucional','urbano','industrial','materias','ciber','contratacion',
+       'presupuesto-defensa']
         .forEach(x=>{ pintarProcedencia('proc-'+x, d.procedencia); enlaceLimites(x,'banco-mundial'); });
       registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
       vacios+=pintarVacios('vac-violencia',d.procedencia.vacios_declarados);
+      pintarVacios('vac-presupuesto-defensa',d.procedencia.vacios_declarados);
       pintarVacios('vac-ciber',d.procedencia.vacios_declarados);
       pintarVacios('vac-contratacion',d.procedencia.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-violencia','banco mundial',estado.mensaje,d.procedencia); }

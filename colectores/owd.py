@@ -124,6 +124,25 @@ SERIES = [
                 "muertes en enfrentamiento, no presencia ni control territorial. El "
                 "umbral de UCDP exige 25 muertes anuales para registrar un conflicto: "
                 "por debajo de eso el pais figura en cero sin estar en paz."},
+    {"clave": "objetos_espacio", "slug": "cumulative-number-of-objects-launched-into-outer-space",
+     "columna": None,
+     "rotulo": "Objetos puestos en orbita, acumulado", "eje": "Defensa",
+     "unidad": "objetos", "mas_es_peor": False,
+     "origen": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, "
+               "via Our World in Data",
+     "cautela": "Es la unica medida de CAPACIDAD AEROESPACIAL comparable y gratuita que "
+                "se encontro para la region. Cuenta objetos registrados ante Naciones "
+                "Unidas por cada Estado: satelites propios, no necesariamente lanzados "
+                "por el. NO mide capacidad de lanzamiento, ni satelites militares, ni "
+                "aviacion. Solo 13 de los 33 Estados registran alguno."},
+    {"clave": "lanzamientos_anuales", "slug": "yearly-number-of-objects-launched-into-outer-space",
+     "columna": None,
+     "rotulo": "Objetos puestos en orbita por anio", "eje": "Defensa",
+     "unidad": "objetos por anio", "mas_es_peor": False,
+     "origen": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, "
+               "via Our World in Data",
+     "cautela": "El movimiento anual detras del acumulado. Un anio en cero es lo normal "
+                "para casi todos los Estados del padron y no indica retroceso."},
 ]
 
 
@@ -244,6 +263,13 @@ def recolectar():
         "el Barometro de las Americas la miden, pero exigen registro para descargar los "
         "microdatos. Lo que se publica aca es el nivel democratico segun especialistas, "
         "que es otra cosa: mide como funciona el sistema, no que piensa la gente de el.",
+        "DEFENSA, LO QUE NO HAY: no existe fuente gratuita que publique los efectivos "
+        "DESAGREGADOS POR ARMA —ejercito, armada, aviacion— ni el inventario de "
+        "material: vehiculos blindados, aeronaves y buques por tipo. El registro de "
+        "referencia es el Balance Militar del Instituto Internacional de Estudios "
+        "Estrategicos, que es de pago y no admite redifusion. Lo que se publica aca es "
+        "el gasto, los efectivos totales y la ADQUISICION de armamento mayor, que es la "
+        "aproximacion mas cercana al material y no lo reemplaza.",
         "CONFLICTO URBANO: no hay fuente gratuita comparable para los 33. Lo que mas se "
         "acerca es el conflicto entre grupos armados, que no distingue campo de ciudad.",
     ]
