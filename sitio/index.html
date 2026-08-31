@@ -187,6 +187,22 @@
   .leaflet-tooltip.ficha b{color:#fff;font-size:12.5px;display:block;margin-bottom:4px;}
   .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
   .mapa-barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .pasos{
+    display:flex;flex-wrap:wrap;gap:10px;list-style:none;counter-reset:paso;
+    padding:0;margin:0 0 16px;width:100%;
+  }
+  .pasos li{
+    counter-increment:paso;flex:1 1 240px;position:relative;
+    background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:9px;
+    padding:12px 14px 12px 40px;font-size:12px;line-height:1.5;color:#9fb0c4;
+  }
+  .pasos li::before{
+    content:counter(paso);position:absolute;left:12px;top:11px;
+    width:19px;height:19px;border-radius:50%;background:var(--orange);color:#00121E;
+    font-weight:700;font-size:11px;display:grid;place-items:center;
+  }
+  .pasos li b{color:#fff;font-weight:700;}
+  .badge[title]{cursor:help;}
   .controles{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;width:100%;}
   .control{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1 1 230px;}
   .control label{
@@ -536,6 +552,14 @@
 
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
+      <ol class="pasos">
+        <li><b>Elegí un tema.</b> Son 59, agrupados en cuatro ejes: seguridad, defensa,
+            gobernanza y desarrollo. El mapa se pinta con ese tema.</li>
+        <li><b>Elegí un país o una zona</b>, o dejá toda la región. Lo que elijas acá manda
+            sobre <b>todo</b> lo que sigue más abajo, incluidas las noticias y las redes.</li>
+        <li><b>Si querés, cruzá con otro tema</b> para ver si se mueven juntos. No hace falta
+            para usar el registro.</li>
+      </ol>
       <div class="mapa-barra">
         <div class="controles">
           <div class="control">
@@ -544,7 +568,7 @@
           </div>
           <div class="control">
             <label for="cruce">Cruzar con</label>
-            <select id="cruce" multiple size="1"></select>
+            <select id="cruce" multiple size="3" aria-describedby="ayuda-cruce"></select>
           </div>
           <div class="control">
             <label for="ambito">País o zona</label>
@@ -552,7 +576,7 @@
           </div>
           <button class="boton chico" id="limpiar-cruce">quitar cruce</button>
         </div>
-        <p class="nota-filtro" id="nota-controles">Con Ctrl o Mayúsculas se eligen varios temas para cruzar: dos dan dispersión, tres o más una tabla comparada. El país o zona rige todo el registro, incluidas la cobertura, el mapa de palabras y las redes.</p>
+        <p class="nota-filtro" id="ayuda-cruce"><b>Para cruzar, hacé clic en uno o más temas de la lista del medio</b> —un clic agrega, otro quita, no hace falta ninguna tecla—. Con <b>un</b> tema cruzado se dibuja una nube de puntos; con <b>dos o más</b>, una tabla comparada. El <b>país o zona</b> rige todo el registro, incluidas las noticias, el mapa de palabras y las redes.</p>
         <div class="modos">
           <button class="modo activo" data-modo="nivel">Nivel actual</button>
           <button class="modo" data-modo="1">Proyección 1 año</button>
@@ -1372,11 +1396,27 @@
       rotuloPunto:'Sin capa de puntos: es un índice de fuentes'
     }
   };
+  // El sello cambia solo cuando llega o cambia una fuente. Sirve para no rehacer
+  // trabajo que ya esta hecho.
+  function selloDeDatos(){
+    const f = fuentesInd();
+    return f.length + ':' + f.reduce((a,x)=>a + (x.indicadores||[]).length
+                                       + (x.registros||[]).length, 0);
+  }
+
+  // capas() construye 57 objetos de capa y cada uno calcula sus cuartiles sobre
+  // los 33 Estados. Se la llamaba UNA VEZ POR PAIS al pintar el mapa —33 veces
+  // por repintado— y eso bloqueaba el navegador tres segundos: es la traba que
+  // reporto la direccion. Ahora el catalogo se arma una vez por sello.
+  let capasGuardadas = null, selloCapas = '';
   function capas(){
+    const sello = selloDeDatos();
+    if(capasGuardadas && selloCapas === sello) return capasGuardadas;
     const c = Object.assign({}, ESTATICAS_CAPAS);
     fuentesInd().forEach(f=>(f.indicadores||[]).forEach(i=>{
       c[i.clave] = capaBanco(i.clave, cortesDe(i), esEscalaEstimacion(i));
     }));
+    capasGuardadas = c; selloCapas = sello;
     return c;
   }
 
@@ -1482,13 +1522,23 @@
   // En modo proyección el mapa muestra el VALOR PROYECTADO, en la misma escala
   // que el nivel, para que se puedan comparar de un vistazo. Los Estados cuya
   // serie no se deja ajustar quedan fuera y se pintan aparte.
+  // Mismo caso: valores() se pedia una vez por pais al pintar. Se guarda por
+  // tema, modo y sello de datos.
+  let valoresGuardados = null, claveValores = '';
   function valores(){
-    if(modo === 'nivel' || !hayTendencia()) return capaActual().conteo();
-    const m = {}, n = anios();
-    Object.keys(capaActual().conteo()).forEach(iso=>{
-      const pr = proyeccionDe(iso, n);
-      if(pr && pr.ajusta) m[iso] = pr.valor;
-    });
+    const clave = capaActiva + '|' + modo + '|' + selloDeDatos();
+    if(valoresGuardados && claveValores === clave) return valoresGuardados;
+    let m;
+    if(modo === 'nivel' || !hayTendencia()) m = capaActual().conteo();
+    else {
+      m = {};
+      const n = anios();
+      Object.keys(capaActual().conteo()).forEach(iso=>{
+        const pr = proyeccionDe(iso, n);
+        if(pr && pr.ajusta) m[iso] = pr.valor;
+      });
+    }
+    valoresGuardados = m; claveValores = clave;
     return m;
   }
 
@@ -1597,7 +1647,8 @@
     const rot = capa.divergente
       ? [`Peor que ${c[0]}`, `${c[0]} a ${c[1]}`, `${c[1]} a ${c[2]}`, `Mejor que ${c[2]}`]
       : [`Menos de ${miles(c[0])}`, `${miles(c[0])} a ${miles(c[1])}`, `${miles(c[1])} a ${miles(c[2])}`, `${miles(c[2])} o más`];
-    document.getElementById('leyenda').innerHTML =
+    const cajaLeyenda = document.getElementById('leyenda');
+    if(cajaLeyenda) cajaLeyenda.innerHTML =
       rot.map((t,i)=>`<span><i style="background:${paleta[i]}"></i>${t}</span>`).join('')+
       `<span class="sin-puntos">${capa.rotuloPunto}</span>`;
   }
@@ -1637,6 +1688,27 @@
 
   // ---- Mapa ---------------------------------------------------------------
   let mapa=null, capaPaises=null, capaPuntos=null;
+  function encuadrar(){
+    // Se valida el encuadre ANTES de aplicarlo. Si no sirve, queda la vista fija
+    // de la region: un mapa mal centrado se corrige mirando; un mapa que lanza
+    // excepcion se lleva puesta la pagina entera.
+    if(!mapa || !capaPaises) return false;
+    try{
+      const b = capaPaises.getBounds();
+      if(!b || !b.isValid()) return false;
+      const so = b.getSouthWest(), ne = b.getNorthEast();
+      if(![so.lat, so.lng, ne.lat, ne.lng].every(Number.isFinite)) return false;
+      const caja = document.getElementById('mapa');
+      if(!caja || caja.clientHeight < 40 || caja.clientWidth < 40) return false;
+      mapa.fitBounds(b, {padding:[12,12]});
+      return true;
+    }catch(error){
+      // Se deja constancia en la consola y se sigue: no se detiene el registro.
+      console.warn('No se pudo encuadrar el mapa:', error && error.message);
+      return false;
+    }
+  }
+
   function puntos(){
     if(!mapa) return;
     if(capaPuntos) mapa.removeLayer(capaPuntos);
@@ -1644,14 +1716,48 @@
       L.circleMarker([p.lat,p.lon],{radius:p.radio,color:'#FB6500',weight:1.1,fillColor:'#FB6500',fillOpacity:.35})
         .bindTooltip(p.ficha,{className:'ficha'}))).addTo(mapa);
   }
+  // Nueve fuentes llegan por separado y cada una pedia un repintado completo:
+  // 33 poligonos reestilados y 41 secciones rearmadas, nueve veces seguidas. En
+  // una maquina modesta eso traba el navegador justo mientras carga el mapa.
+  // Ahora los pedidos se juntan y se atiende UNO por cuadro de pantalla.
+  // OJO: agrupar no es descartar. La primera version DESCARTABA los pedidos que
+  // llegaban mientras habia uno en curso, y como las nueve fuentes llegan casi
+  // juntas, la ultima en llegar no se dibujaba nunca: la pagina quedaba a medio
+  // armar. Aca cada pedido que entra durante un pintado deja marca y fuerza otro.
+  let repintadoPendiente = false, repintadoPedidoDeNuevo = false;
   function repintar(){
-    if(capaPaises) capaPaises.setStyle(estiloPais);
+    if(repintadoPendiente){ repintadoPedidoDeNuevo = true; return; }
+    repintadoPendiente = true;
+    const pintar = () => {
+      repintadoPendiente = false;
+      repintarAhora();
+      if(repintadoPedidoDeNuevo){ repintadoPedidoDeNuevo = false; repintar(); }
+    };
+    // setTimeout y NO requestAnimationFrame: este ultimo NO se dispara mientras la
+    // pestania esta oculta, de modo que quien abriera el registro en una pestania
+    // de fondo lo encontraba en blanco al volver. El temporizador corre siempre.
+    setTimeout(pintar, 0);
+  }
+
+  // Cada pintor corre aislado: si uno falla se anota en la consola y los demas
+  // siguen. Una excepcion en un panel NO puede dejar la pagina a medias, que es
+  // exactamente lo que pasaba y no se veia.
+  function paso(nombre, fn){
+    try{ fn(); }
+    catch(error){ console.error('SIWA · falló el paso «'+nombre+'»:', error && (error.stack||error.message||error)); }
+  }
+
+  function repintarAhora(){
+    paso('estilo del mapa', ()=>{ if(capaPaises) capaPaises.setStyle(estiloPais); });
     // armarAmbito() va aca y no solo en sincronizar(): el padron de paises llega
     // con el mapa, despues del primer pintado, y el desplegable quedaba vacio.
-    armarAmbito();
-    puntos(); solapas(); leyenda(); panelCruce();
-    pintarFichaMapa(paisFiltro, paisNombre,
-      paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:'');
+    paso('desplegable de ámbito', armarAmbito);
+    paso('puntos del mapa', puntos);
+    paso('desplegables de tema', solapas);
+    paso('leyenda', leyenda);
+    paso('panel de cruce', panelCruce);
+    paso('ficha del mapa', ()=>pintarFichaMapa(paisFiltro, paisNombre,
+      paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:''));
     const ex = document.getElementById('explica-capa');
     if(ex){
       const base = EXPLICA[capaActiva] ? EXPLICA[capaActiva]() : '';
@@ -1869,6 +1975,23 @@
       + 'publica todavía esta materia para el padrón. El vacío se declara; no se rellena.</div></div>';
   }
 
+  // La calificacion del Almirantazgo es jerga: se explica al pasar el puntero,
+  // ahi donde aparece, y no solo en la seccion del final que nadie abre.
+  const FIABILIDAD = {
+    A:'fuente totalmente confiable', B:'fuente habitualmente confiable',
+    C:'fuente bastante confiable', D:'fuente no siempre confiable',
+    E:'fuente no confiable', F:'fiabilidad todavía no evaluada por el equipo'
+  };
+  const CREDIBILIDAD = {
+    1:'confirmado por otras fuentes', 2:'probablemente cierto',
+    3:'posiblemente cierto', 4:'de veracidad dudosa',
+    5:'improbable', 6:'no se puede juzgar'
+  };
+  const explicaCalif = c => c
+    ? `Calificación ${c.fiabilidad}-${c.credibilidad}: ${FIABILIDAD[c.fiabilidad]||'—'}; `
+      + `dato ${CREDIBILIDAD[c.credibilidad]||'—'}.`
+    : '';
+
   function tarjeta(f, info, nombre, meta){
     const tv=f.tendencia_ventana_pct;
     return `<div class="card"><h4>${esc(paisFiltro ? (info.rotulo||nombre) : nombre)}</h4>
@@ -1876,7 +1999,7 @@
       <div class="sub">${esc(info.unidad||'')} · dato de ${f.anio}${
         (tv!==null&&tv!==undefined)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
       <div class="foot"><span class="src">${esc(info.origen||meta.fuente.nombre)}</span>
-        <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
+        <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
   }
 
   function tarjetasDesplazamiento(){
@@ -1910,6 +2033,16 @@
       sel.addEventListener('change', ()=>{
         cruce = [...sel.selectedOptions].map(o=>o.value);
         repintar();
+      });
+      // Pedirle Ctrl a alguien que no lo sabe es pedirle que no lo use. Un clic
+      // agrega o quita, como una lista de tildes.
+      sel.addEventListener('mousedown', ev=>{
+        const o = ev.target;
+        if(!o || o.tagName !== 'OPTION') return;
+        ev.preventDefault();
+        o.selected = !o.selected;
+        sel.dispatchEvent(new Event('change'));
+        sel.focus();
       });
       const limpiar=document.getElementById('limpiar-cruce');
       if(limpiar) limpiar.addEventListener('click', ()=>{
@@ -2611,7 +2744,13 @@
         paisNombre=paisFiltro?padron.find(p=>p.iso===paisFiltro).pais:null;
         repintar();
       });
-      mapa=L.map('mapa',{zoomControl:true,minZoom:2,worldCopyJump:false});
+      // Vista inicial fija ANTES de cualquier ajuste automatico. Si el contenedor
+      // todavia no tiene alto —tipografia que llega tarde, pestania en segundo
+      // plano, ventana angosta—, calcular el encuadre da coordenadas invalidas,
+      // Leaflet lanza «Invalid LatLng» y esa excepcion CORTA EL RESTO DEL GUION:
+      // el mapa queda trabado y los desplegables vacios, sin decir por que.
+      mapa=L.map('mapa',{zoomControl:true,minZoom:2,worldCopyJump:false})
+             .setView([-15, -65], 3);
       mapa.attributionControl.setPrefix('');
       mapa.attributionControl.addAttribution('Límites: Natural Earth 1:50 m · dominio público');
       capaPaises=L.geoJSON(geo,{style:estiloPais, onEachFeature:(rasgo,capa)=>{
@@ -2621,7 +2760,19 @@
           paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:''));
         capa.on('click',()=>seleccionar(p.iso,p.pais));
       }}).addTo(mapa);
-      mapa.fitBounds(capaPaises.getBounds(),{padding:[12,12]});
+      // El encuadre automatico se intenta, pero NUNCA a costa de la pagina.
+      encuadrar();
+      // Y se vuelve a intentar cuando el contenedor ya tiene tamano de verdad.
+      if(typeof ResizeObserver === 'function'){
+        let hecho = false;
+        const ro = new ResizeObserver(()=>{
+          const caja = document.getElementById('mapa');
+          if(hecho || !caja || caja.clientHeight < 40) return;
+          hecho = true; mapa.invalidateSize(); encuadrar(); ro.disconnect();
+        });
+        ro.observe(document.getElementById('mapa'));
+      }
+      window.addEventListener('resize', ()=>{ try{ mapa.invalidateSize(); }catch(e){} });
       repintar();
     })
     .catch(err=>{ document.getElementById('mapa').innerHTML =
@@ -2634,7 +2785,9 @@
   Promise.all([traer('cobertura.json'), traer('estado/cobertura.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.cobertura=d; const meta=d.procedencia, r=d.resumen;
-      pintarProcedencia('proc-cobertura',meta);
+      // La desinformacion sale de este mismo registro: se le pinta la procedencia
+      // aca y no se depende de que su funcion haya corrido despues del dato.
+      ['cobertura','desinformacion'].forEach(x=>pintarProcedencia('proc-'+x,meta));
       document.getElementById('tag-cobertura').textContent =
         r.asuntos_con_cruce+' asuntos · '+r.medios_que_respondieron+' de '+r.medios_consultados+' medios · '+miles(r.notas_en_ventana)+' notas';
       vacios+=pintarVacios('vac-cobertura',meta.vacios_declarados);
