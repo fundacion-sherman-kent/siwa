@@ -36,6 +36,7 @@ from pathlib import Path
 import comun
 import geo
 
+TOPE_PALABRAS = 40   # términos por ámbito en el mapa de palabras
 PADRON_MEDIOS = Path(__file__).resolve().parent / "medios.json"
 PADRON_GENTILICIOS = Path(__file__).resolve().parent / "gentilicios.json"
 NAVEGADOR = (
@@ -117,6 +118,7 @@ def _traer_canal(medio: dict) -> tuple:
             "pais": medio["pais"],
             "idioma": medio["idioma"],
             "fiabilidad": medio.get("fiabilidad", "F"),
+            "tipo": medio.get("tipo", "prensa"),
         })
     return (medio, notas, None)
 
@@ -190,20 +192,35 @@ def _agrupar(notas: list) -> list:
 
 
 def _corroboracion(notas: list) -> dict:
-    """Cuenta orígenes, no portales, y aplica la regla de cruce del §4."""
-    idiomas = {n["idioma"] for n in notas}
-    paises = {n["pais"] for n in notas}
-    origenes = {(n["pais"], n["idioma"]) for n in notas}
+    """Cuenta orígenes, no portales, y aplica la regla de cruce del §4.
+
+    Un centro de estudio NO corrobora un hecho. Publica análisis sobre hechos que
+    ya circulan, de modo que contarlo como jurisdicción independiente sería contar
+    dos veces la misma noticia. Se registra aparte, como respaldo analítico.
+    """
+    prensa = [n for n in notas if n.get("tipo", "prensa") == "prensa"]
+    centros = [n for n in notas if n.get("tipo") == "centro de estudio"]
+
+    idiomas = {n["idioma"] for n in prensa}
+    paises = {n["pais"] for n in prensa}
+    origenes = {(n["pais"], n["idioma"]) for n in prensa}
 
     if len(idiomas) >= 2:
         estado, nota = "corroborado_fuerte", "Dos o más idiomas distintos."
     elif len(paises) >= 2:
         estado, nota = "corroborado", "Dos o más jurisdicciones, un solo idioma."
+    elif not prensa:
+        estado, nota = "origen_unico", (
+            "Solo lo trataron centros de estudio. Es análisis, no cobertura: "
+            "no corrobora que el hecho haya ocurrido."
+        )
     else:
         estado, nota = "origen_unico", (
             "Todos los medios son del mismo país y del mismo idioma: cuentan como "
             "un solo origen, por más portales que sean."
         )
+    if centros and estado != "origen_unico":
+        nota += f" Con respaldo analítico de {len(centros)} centro(s) de estudio."
     return {
         "estado": estado,
         "nota": nota,
@@ -211,6 +228,64 @@ def _corroboracion(notas: list) -> dict:
         "portales": len({n["dominio"] for n in notas}),
         "idiomas": sorted(idiomas),
         "paises": sorted(paises),
+        "centros_de_estudio": sorted({n["medio"] for n in centros}),
+    }
+
+
+def _palabras_clave(notas: list, gentilicios: dict, bloques: dict,
+                    nombres: dict) -> dict:
+    """Mapa de palabras: qué términos circulan hoy, por Estado, bloque y región.
+
+    No es análisis de sentimiento ni de tendencia: es el recuento de los términos
+    que efectivamente aparecen en los títulos recolectados en la ventana vigente.
+    Se descartan las palabras vacías y los propios nombres de país, que aparecerían
+    primeros y no dirían nada.
+    """
+    propios = set()
+    for formas in gentilicios.values():
+        for f in formas:
+            propios.update(f.split())
+
+    def cuenta(lista):
+        c, dominios = Counter(), {}
+        for n in lista:
+            # Cada término se cuenta UNA VEZ por nota: si un título repite una
+            # palabra, no vale por dos. Lo que se mide es en cuántas notas aparece.
+            for palabra in set(_normalizar(n["titulo"])):
+                if len(palabra) < 4 or palabra in propios or palabra.isdigit():
+                    continue
+                c[palabra] += 1
+                dominios.setdefault(palabra, set()).add(n["dominio"])
+        # Un término que sale de un solo portal NO es lo que circula: es lo que ese
+        # portal repite. El pronóstico del tiempo de un diario, publicado a diario,
+        # encabezaría el mapa de la región entera. Es la misma regla de corroboración
+        # que rige el resto de la casa: dos orígenes o no entra.
+        return [{"palabra": t, "notas": v, "portales": len(dominios[t])}
+                for t, v in c.most_common(TOPE_PALABRAS * 3)
+                if v >= 2 and len(dominios[t]) >= 2][:TOPE_PALABRAS]
+
+    por_pais, por_bloque = {}, {}
+    for n in notas:
+        for iso in n.get("_isos", []):
+            por_pais.setdefault(iso, []).append(n)
+            b = bloques.get(iso)
+            if b:
+                por_bloque.setdefault(b, []).append(n)
+
+    return {
+        "region": cuenta(notas),
+        "bloques": {b: cuenta(l) for b, l in sorted(por_bloque.items())},
+        "paises": {i: {"pais": nombres.get(i, i), "bloque": bloques.get(i, "—"),
+                       "notas": len(l), "palabras": cuenta(l)}
+                   for i, l in sorted(por_pais.items())},
+        "nota": ("Recuento de términos en los títulos recolectados en la ventana "
+                 "vigente. Mide DE QUÉ SE HABLA, no qué ocurre ni con qué signo. "
+                 "Un término ausente puede significar que el asunto no circula, o "
+                 "que ningún canal del padrón lo cubre. Para figurar, un término "
+                 "debe aparecer en dos notas de dos portales distintos: lo que "
+                 "publica un solo portal no es circulación, es repetición."),
+        "ventana_horas": HORAS,
+        "minimo_para_figurar": "aparecer en 2 notas y en 2 portales distintos",
     }
 
 
@@ -235,6 +310,14 @@ def recolectar():
     for n in recientes:
         n.pop("momento", None)
 
+    # La atribución por país se calcula una vez por nota y se reutiliza: la usan
+    # tanto los asuntos agrupados como el mapa de palabras.
+    for n in recientes:
+        n["_isos"] = _paises_mencionados(n["titulo"], gentilicios)
+    mapa_palabras = _palabras_clave(recientes, gentilicios, bloques, nombres_pais)
+    for n in recientes:
+        n.pop("_isos", None)
+
     grupos = _agrupar(recientes)
     eventos = []
     for grupo in grupos:
@@ -244,7 +327,7 @@ def recolectar():
         corr = _corroboracion(lista)
         asunto = max((n["titulo"] for n in lista), key=len)
         # Se buscan menciones en todos los títulos del grupo, no solo en el más largo.
-        isos = sorted({i for n in lista for i in _paises_mencionados(n["titulo"], gentilicios)})
+        isos = sorted({i for n in lista for i in n.get("_isos", [])})
         eventos.append({
             "asunto": asunto,
             "paises": [{"iso": i, "pais": nombres_pais.get(i, i), "bloque": bloques.get(i, "—")} for i in isos],
@@ -350,6 +433,11 @@ def recolectar():
             },
             "por_pais": [{"iso": i, "pais": nombres_pais.get(i, i), "asuntos": n}
                          for i, n in por_pais.most_common()],
+            "mapa_palabras": mapa_palabras,
+            "padron_medios": {
+                "prensa": sum(1 for m in padron if m.get("tipo", "prensa") == "prensa"),
+                "centros_de_estudio": sum(1 for m in padron if m.get("tipo") == "centro de estudio"),
+            },
             "umbral_similitud": UMBRAL,
             "metodo": (
                 "Frecuencia de término por frecuencia inversa de documento y similitud "

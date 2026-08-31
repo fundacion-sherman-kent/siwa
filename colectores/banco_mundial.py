@@ -155,6 +155,28 @@ INDICADORES = [
      "origen": "FAO, compilado por el Banco Mundial",
      "cautela": "Superficie total, no su estado de conservacion. Una plantacion cuenta "
                 "igual que un bosque primario."},
+    {"clave": "regalo_contrato", "codigo": "IC.FRM.CORR.ZS", "fuente_id": None,
+     "rotulo": "Empresas que esperan pagar por un contrato publico", "eje": "Gobernanza",
+     "unidad": "% de las empresas consultadas", "mas_es_peor": True,
+     "origen": "Encuestas de Empresas del Banco Mundial",
+     "cautela": "Es la materia de INTEGRIDAD DE LA CONTRATACION PUBLICA. Mide lo que la "
+                "empresa declara esperar, no un soborno comprobado. La encuesta no se "
+                "levanta todos los anios en todos los Estados: el dato de cada pais es "
+                "de la ultima ronda disponible y las rondas no coinciden entre si."},
+    {"clave": "servidores_seguros", "codigo": "IT.NET.SECR.P6", "fuente_id": None,
+     "rotulo": "Servidores de internet cifrados", "eje": "Seguridad",
+     "unidad": "por millon de habitantes", "mas_es_peor": False,
+     "origen": "Netcraft, compilado por el Banco Mundial",
+     "cautela": "Es el unico indicador de CIBERSEGURIDAD comparable y gratuito que se "
+                "encontro para los 33. Mide infraestructura de cifrado desplegada, NO "
+                "mide ataques, ni defensa estatal, ni incidentes. Un valor alto indica "
+                "una economia digital mas madura, no un Estado mas protegido."},
+    {"clave": "banda_ancha", "codigo": "IT.NET.BBND.P2", "fuente_id": None,
+     "rotulo": "Suscripciones a banda ancha fija", "eje": "Desarrollo",
+     "unidad": "por 100 habitantes", "mas_es_peor": False,
+     "origen": "UIT, compilado por el Banco Mundial",
+     "cautela": "Junto con los usuarios de internet, delimita la superficie expuesta a "
+                "ataque informatico. No mide calidad ni continuidad del servicio."},
 ]
 
 

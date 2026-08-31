@@ -81,8 +81,13 @@
   /* Lectura en teléfono y tableta: la barra deja de ser columna. */
   @media (max-width:820px){
     .shell{grid-template-columns:1fr;padding:24px 20px 60px;}
+    /* min-width:0 es indispensable: un elemento de rejilla no baja por debajo del
+       ancho minimo de su contenido salvo que se lo permita, y sin esto la barra
+       de ejes ensancha la pagina entera en la lectura de telefono. */
     nav.rail{position:static;display:flex;flex-wrap:wrap;align-items:baseline;
+             min-width:0;max-width:100%;
              border-bottom:1px solid var(--line);padding-bottom:4px;}
+    .shell > main{min-width:0;}
     nav.rail a{border-left:none;border-bottom:2px solid transparent;padding:7px 14px 7px 0;}
     nav.rail a:hover{border-left-color:transparent;border-bottom-color:var(--orange);}
     nav.rail .grupo{margin:8px 10px 0 0;}
@@ -232,6 +237,21 @@
   .badge.fuerte{background:rgba(63,167,150,.20);color:#6fe0c9;}
   .badge.medio{background:rgba(251,101,0,.18);color:#ffb27a;}
   .badge.solo{background:rgba(194,59,34,.18);color:#ff9c86;}
+  .nube{display:flex;flex-wrap:wrap;gap:7px;align-items:baseline;padding:16px 0 6px;}
+  .term{
+    display:inline-flex;align-items:baseline;gap:6px;border:1px solid var(--line);
+    border-radius:999px;padding:5px 13px;color:#C7D2E0;background:rgba(255,255,255,.02);
+    line-height:1.25;
+  }
+  .term b{font-weight:700;color:#fff;}
+  .term .n{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#7d90a8;}
+  .term.alta{border-color:rgba(251,101,0,.55);background:rgba(251,101,0,.12);}
+  .term.media{border-color:rgba(251,101,0,.28);}
+  .card.ancha{grid-column:span 2;}
+  @media (max-width:720px){ .card.ancha{grid-column:span 1;} }
+  .nube.chica{padding:10px 0 2px;gap:5px;}
+  .nube.chica .term{font-size:11px;padding:3px 10px;}
+  .nube .vacio{color:#7d90a8;font-size:12px;line-height:1.6;max-width:62ch;}
   .aviso-cobertura{
     border:1px solid rgba(194,59,34,.45);background:rgba(194,59,34,.08);
     border-radius:10px;padding:14px 18px;margin-bottom:14px;
@@ -330,6 +350,11 @@
   table.tabla-informe td{padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.06);color:#C7D2E0;vertical-align:top;}
   table.tabla-informe .num{text-align:right;}
   table.tabla-informe .menor{font-size:10.5px;color:#7d90a8;}
+  /* Lectura de telefono: la tabla no ensancha la pagina, se desplaza dentro de su
+     propia caja. En papel no rige: alli la hoja es mas ancha que cualquier telefono. */
+  @media (max-width:720px){
+    table.tabla-informe{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  }
   .informe-pie{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);}
   .informe-pie p{font-size:11px;color:#9fb2c8;line-height:1.65;margin:0 0 8px;}
   .sin-dato{font-size:12px;color:#7d90a8;}
@@ -423,21 +448,28 @@
     <a href="#desplazamiento">Desplazamiento forzado</a>
     <a href="#contrabando">Contrabando</a>
     <a href="#ciber">Ciberseguridad</a>
+    <a href="#fuerzas">Fuerzas y defensa</a>
+    <a href="#victimizacion">Victimización y denuncia</a>
     <div class="grupo">Gobernanza</div>
     <a href="#institucional">Indicadores de gobernanza</a>
     <a href="#contratacion">Contratación pública</a>
+    <a href="#capacidad">Capacidad del Estado</a>
     <a href="#soborno">Soborno declarado</a>
     <a href="#desinformacion">Desinformación</a>
+    <a href="#palabras">Mapa de palabras</a>
+    <a href="#redes">Circulación en redes</a>
     <div class="grupo">Desarrollo</div>
     <a href="#urbano">Urbano</a>
     <a href="#industrial">Industrial</a>
     <a href="#informalidad">Empleo informal</a>
     <a href="#materias">Materias primas</a>
-    <div class="grupo">Fuentes</div>
-    <a href="#oficiales">Padrón oficial</a>
+    <a href="#condiciones">Condiciones de vida</a>
+    <a href="#conectividad">Conectividad</a>
+    <a href="#ambiente">Superficie forestal</a>
     <div class="grupo">Verificación</div>
     <a href="#cobertura">Cobertura cruzada</a>
     <div class="grupo">Fuentes</div>
+    <a href="#oficiales">Padrón oficial</a>
     <a href="#fuentes-limites">Fuentes y límites</a>
     <div class="grupo">Método</div>
     <a href="#informe">Informe descargable</a>
@@ -513,13 +545,34 @@
     </section>
 
     <section class="domain" id="ciber">
-      <div class="domain-head"><h3>Ciberseguridad</h3><span class="tag">Colector pendiente</span></div>
-      <div class="grid-cards">
-        <div class="placeholder">
-          <div><div class="ptitle">Infraestructura comprometida y cortes de conectividad</div><p>Fuentes previstas: abuse.ch —URLhaus y Feodotracker, sin clave— para servidores comprometidos con atribución de país, e IODA del Georgia Tech para cortes de internet. Ninguna verificada todavía.</p></div>
-          <span class="badge pending">Sin dato</span>
-        </div>
+      <div class="domain-head"><h3>Ciberseguridad</h3><span class="tag" id="tag-ciber">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Mide superficie e infraestructura, no ataques.</b> No se encontró ninguna fuente
+           gratuita que publique incidentes informáticos comparables para los 33 Estados. Lo que
+           sí existe es la infraestructura de cifrado desplegada y la población conectada: un país
+           con muchos usuarios y pocos servidores cifrados está más expuesto que uno con la
+           relación inversa. <b>Un valor alto no significa un Estado más protegido.</b></p>
       </div>
+      <div class="procedencia" id="proc-ciber">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-ciber"></div>
+      <div id="vac-ciber"></div>
+    </section>
+
+    <section class="domain" id="fuerzas">
+      <div class="domain-head"><h3>Fuerzas y capacidad de defensa</h3><span class="tag" id="tag-fuerzas">—</span></div>
+      <div class="grid-cards" id="tarj-fuerzas"></div>
+    </section>
+
+    <section class="domain" id="victimizacion">
+      <div class="domain-head"><h3>Victimización y confianza en la policía</h3><span class="tag" id="tag-victimizacion">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Acá está la percepción de inseguridad y el delito que la estadística policial no ve.</b>
+           La víctima que no denuncia no aparece en ningún parte. Cuando la tasa de denuncia es baja,
+           las cifras oficiales de ese Estado <b>subestiman el delito</b>, y la comparación con un
+           país que denuncia más se vuelve engañosa. Los detenidos sin condena miden congestión
+           judicial y prisión preventiva, no criminalidad.</p>
+      </div>
+      <div class="grid-cards" id="tarj-victimizacion"></div>
     </section>
 
     <section class="domain" id="trata">
@@ -541,13 +594,29 @@
     </section>
 
     <section class="domain" id="contratacion">
-      <div class="domain-head"><h3>Integridad de la contratación pública</h3><span class="tag">Colector pendiente</span></div>
-      <div class="grid-cards">
-        <div class="placeholder">
-          <div><div class="ptitle">Adjudicación directa, oferente único y concentración</div><p>Fuentes previstas: los portales de compras abiertas que publican en estándar común, empezando por Chile y Colombia, que están documentados. Es la materia con mejor desagregación del catálogo: baja hasta el organismo comprador.</p></div>
-          <span class="badge pending">Sin dato</span>
-        </div>
+      <div class="domain-head"><h3>Integridad de la contratación pública</h3><span class="tag" id="tag-contratacion">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Es lo que la empresa declara esperar, no un soborno comprobado.</b> Sale de las
+           Encuestas de Empresas del Banco Mundial, que no se levantan el mismo año en todos los
+           Estados: el dato de cada país es de su última ronda disponible y <b>las rondas no
+           coinciden entre sí</b>. Sirve para ver el orden de magnitud, no para rankear con
+           precisión de decimales.</p>
       </div>
+      <div class="procedencia" id="proc-contratacion">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-contratacion"></div>
+      <div id="vac-contratacion"></div>
+    </section>
+
+    <section class="domain" id="capacidad">
+      <div class="domain-head"><h3>Capacidad del Estado</h3><span class="tag" id="tag-capacidad">—</span></div>
+      <div class="aviso-cobertura">
+        <p>El registro de nacimientos es la capacidad estatal más básica: <b>saber quién existe</b>.
+           Un registro incompleto degrada todas las demás estadísticas de ese Estado, incluidas las
+           que este registro publica. La recaudación entra como capacidad de recaudar, no como
+           indicador económico: baja frente a una economía grande, señala evasión o economía no
+           registrada.</p>
+      </div>
+      <div class="grid-cards" id="tarj-capacidad"></div>
     </section>
 
     <section class="domain" id="desinformacion">
@@ -580,6 +649,26 @@
       <div class="procedencia" id="proc-industrial">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-industrial"></div>
       <div id="vac-industrial"></div>
+    </section>
+
+    <section class="domain" id="condiciones">
+      <div class="domain-head"><h3>Condiciones de vida y desigualdad</h3><span class="tag" id="tag-condiciones">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>La pobreza según línea nacional no es comparable entre países</b>: cada Estado define
+           su propia línea. Solo sirve su evolución dentro de cada uno. El Gini depende de la
+           encuesta de hogares de cada Estado, con años y metodologías distintos.</p>
+      </div>
+      <div class="grid-cards" id="tarj-condiciones"></div>
+    </section>
+
+    <section class="domain" id="conectividad">
+      <div class="domain-head"><h3>Conectividad</h3><span class="tag" id="tag-conectividad">—</span></div>
+      <div class="grid-cards" id="tarj-conectividad"></div>
+    </section>
+
+    <section class="domain" id="ambiente">
+      <div class="domain-head"><h3>Superficie forestal</h3><span class="tag" id="tag-ambiente">—</span></div>
+      <div class="grid-cards" id="tarj-ambiente"></div>
     </section>
 
     <section class="domain" id="materias">
@@ -639,6 +728,38 @@
       <div class="procedencia" id="proc-cobertura">Cargando el registro…</div>
       <div class="cruce" id="lista-cobertura"></div>
       <div id="vac-cobertura"></div>
+    </section>
+
+    <section class="domain" id="palabras">
+      <div class="domain-head"><h3>Mapa de palabras</h3><span class="tag" id="tag-palabras">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Qué términos circulan ahora mismo, no qué está ocurriendo.</b>
+           Es el recuento de las palabras que aparecen en los títulos recolectados en la
+           ventana vigente. Para figurar, un término debe aparecer en <b>dos notas de dos
+           portales distintos</b>: lo que publica un solo portal no es circulación, es
+           repetición. Un término ausente puede significar que el asunto no circula —o que
+           ningún canal del padrón lo cubre.</p>
+      </div>
+      <div class="filtros-cobertura">
+        <span class="nota-filtro" id="nota-palabras">Usa el mismo ámbito que la cobertura: región, bloque o país.</span>
+      </div>
+      <div class="nube" id="nube-palabras"></div>
+    </section>
+
+    <section class="domain" id="redes">
+      <div class="domain-head"><h3>Circulación en red social abierta</h3><span class="tag" id="tag-redes">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Mide cuánto se habla, no qué ocurre.</b> Una publicación en una red no es una
+           fuente: es un indicio de circulación. <b>Y el sesgo es grande y se declara</b>: la
+           única red que permite consulta pública sin credencial tiene una base de usuarios
+           pequeña, mayoritariamente europea y norteamericana y de perfil técnico. Es una
+           muestra sesgada y no probabilística. Sirve para detectar que un asunto empezó a
+           circular; <b>no sirve para medir cuánto importa</b>, y ningún juicio de la Fundación
+           puede apoyarse solo en esto.</p>
+      </div>
+      <div class="procedencia" id="proc-redes">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-redes"></div>
+      <div id="vac-redes"></div>
     </section>
 
     <div class="eje">
@@ -780,7 +901,7 @@
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
     const conjuntos=[['banco','Banco Mundial'],['ods','Naciones Unidas — ODS'],
                      ['desplazamiento','ACNUR'],['oficiales','Padrón oficial'],
-                     ['cobertura','Cobertura noticiosa']]
+                     ['cobertura','Cobertura noticiosa'],['redes','Circulación en redes']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -1251,14 +1372,24 @@
     if(q) q.addEventListener('click', ()=>{ paisFiltro=null; paisNombre=null; sincronizar(); repintar(); });
     seriesEnSeccion();
     tarjetasBanco('homicidios','violencia');
-    tarjetasBanco(['corrupcion','estado_derecho','estabilidad'],'institucional');
+    tarjetasBanco(['corrupcion','estado_derecho','estabilidad','voz_rendicion',
+                   'calidad_regulatoria'],'institucional');
     tarjetasBanco(['urbanizacion','asentamientos'],'urbano');
     tarjetasBanco('industria','industrial');
     tarjetasBanco(['minerales','rentas_naturales'],'materias');
     tarjetasBanco(['trata_victimas','trata_sexual','trata_trabajo'],'trata');
     tarjetasBanco(['soborno_personas','soborno_empresas'],'soborno');
     tarjetasBanco('empleo_informal','informalidad');
-    tarjetasDesplazamiento(); desinformacion(); coberturaVista(); pintarFuentes(); informe();
+    tarjetasBanco(['gasto_militar','personal_militar'],'fuerzas');
+    tarjetasBanco(['victimas_robo','denuncia_robo','denuncia_agresion','sin_condena'],'victimizacion');
+    tarjetasBanco(['servidores_seguros','internet'],'ciber');
+    tarjetasBanco('regalo_contrato','contratacion');
+    tarjetasBanco(['recaudacion','registro_nacimientos','acceso_informacion','institucion_ddhh'],'capacidad');
+    tarjetasBanco(['gini','pobreza','desempleo_joven','trabajo_infantil','agua_potable'],'condiciones');
+    tarjetasBanco(['internet','banda_ancha'],'conectividad');
+    tarjetasBanco('bosque','ambiente');
+    tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista(); redesVista();
+    pintarFuentes(); informe();
   }
   function seleccionar(iso, nombre){
     if(paisFiltro===iso){ paisFiltro=null; paisNombre=null; } else { paisFiltro=iso; paisNombre=nombre; }
@@ -1346,20 +1477,24 @@
   const TOPE = 6;
 
   function tarjetasBanco(claves, destino){
-    claves = [].concat(claves);
-    const conjunto = conjuntoDe(claves[0]); if(!conjunto) return;
-    const meta = conjunto.procedencia;
+    claves = [].concat(claves).filter(c=>conjuntoDe(c));
+    if(!claves.length){ seccionSinDato(destino); return; }
+    // Una sección puede mezclar indicadores del Banco Mundial y de la ONU. La
+    // procedencia y la calificación se resuelven POR INDICADOR, nunca por sección:
+    // atribuirle a un dato la fuente del vecino sería falsear la trazabilidad.
+    const metaDe = c => conjuntoDe(c).procedencia;
+    const meta = metaDe(claves[0]);
     const info = c => metaInd(c);
     const tag=document.getElementById('tag-'+destino), caja=document.getElementById('tarj-'+destino);
     if(!caja) return;
 
     if(paisFiltro){
-      const fichas=claves.map(c=>({i:datoDe(c, paisFiltro), meta:info(c)})).filter(x=>x.i);
+      const fichas=claves.map(c=>({i:datoDe(c, paisFiltro), meta:info(c), proc:metaDe(c)})).filter(x=>x.i);
       if(tag) tag.textContent = fichas.length
         ? `${paisNombre} · ${fichas.length} indicador${fichas.length===1?'':'es'}`
         : `sin dato en ${paisNombre}`;
       caja.innerHTML = fichas.length
-        ? fichas.map(({i,meta:mi})=>tarjeta(i,mi,paisNombre,meta)).join('')
+        ? fichas.map(({i,meta:mi,proc})=>tarjeta(i,mi,paisNombre,proc)).join('')
         : `<div class="card"><h4>Sin dato</h4><div class="sub">La fuente no consigna a ${esc(paisNombre)} en esta materia.</div></div>`;
       return;
     }
@@ -1372,13 +1507,22 @@
     const lista = todos ? ordenadas : ordenadas.slice(0,TOPE);
     const extremo = principal.mas_es_peor ? 'más altos' : 'más bajos';
     if(tag) tag.textContent = `${filas.length} de 33 Estados · ${esc(principal.unidad||'')}`;
-    caja.innerHTML = lista.map(f=>tarjeta(f,principal,f.pais,meta)).join('') +
+    caja.innerHTML = lista.map(f=>tarjeta(f,principal,f.pais,metaDe(claves[0]))).join('') +
       `<div class="criterio"><span>${todos
           ? `Los ${filas.length} Estados con dato, ordenados de peor a mejor.`
           : `Criterio: los <b>${lista.length} valores ${extremo}</b> de ${filas.length} Estados con dato. El resto está en el mapa y en el informe.`}
         </span><button class="ver-todos" data-destino="${destino}">${todos?'ver solo los '+TOPE:'ver los '+filas.length}</button></div>`;
     caja.querySelectorAll('.ver-todos').forEach(b=>
       b.addEventListener('click',()=>{ verTodos[b.dataset.destino]=!verTodos[b.dataset.destino]; repintar(); }));
+  }
+
+  function seccionSinDato(destino){
+    const caja=document.getElementById('tarj-'+destino);
+    const tag=document.getElementById('tag-'+destino);
+    if(tag) tag.textContent = 'sin dato';
+    if(caja) caja.innerHTML =
+      '<div class="card"><h4>Sin dato</h4><div class="sub">Ninguna fuente del catálogo '
+      + 'publica todavía esta materia para el padrón. El vacío se declara; no se rellena.</div></div>';
   }
 
   function tarjeta(f, info, nombre, meta){
@@ -1589,6 +1733,87 @@
       : `<div class="card"><h4>Sin asuntos en este ámbito</h4><div class="sub">Ningún asunto de la ventana menciona ${ambitoCobertura==='pais'?esc(paisNombre):'ese bloque'}. La atribución es por diccionario de gentilicios: puede faltar.</div></div>`;
   }
 
+  function palabrasVista(){
+    const caja=document.getElementById('nube-palabras'); if(!caja) return;
+    const d=almacen.cobertura, mp=d && d.mapa_palabras;
+    const tag=document.getElementById('tag-palabras');
+    const nota=document.getElementById('nota-palabras');
+    if(!mp){
+      caja.innerHTML='<div class="vacio">El registro de cobertura todavía no se cargó.</div>';
+      return;
+    }
+    // El ámbito es el mismo que el de la cobertura: no se duplica el control.
+    const bloqueDelPais = paisFiltro && padron.length
+      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
+    let lista, donde, notas=null;
+    if(ambitoCobertura==='pais' && paisFiltro && mp.paises[paisFiltro]){
+      lista = mp.paises[paisFiltro].palabras; notas = mp.paises[paisFiltro].notas;
+      donde = paisNombre;
+    } else if(ambitoCobertura==='pais' && paisFiltro){
+      lista = []; donde = paisNombre;
+    } else if(ambitoCobertura==='bloque' && bloqueDelPais){
+      lista = mp.bloques[bloqueDelPais] || []; donde = 'el bloque '+bloqueDelPais;
+    } else {
+      lista = mp.region; donde = 'toda la región';
+    }
+    if(tag) tag.textContent = `${lista.length} término${lista.length===1?'':'s'} · ventana de ${mp.ventana_horas} h`;
+    if(nota) nota.textContent = notas!==null
+      ? `${notas} nota${notas===1?'':'s'} atribuidas a ${donde} en la ventana. El ámbito se elige arriba, en la cobertura.`
+      : `Ámbito: ${donde}. Se elige arriba, en la cobertura.`;
+
+    if(!lista.length){
+      caja.innerHTML = `<div class="vacio"><b>Ningún término de ${esc(donde)} llega a dos portales distintos en esta ventana.</b><br>
+        No es un error: es el resultado. Con ${mp.ventana_horas} horas de recolección, la mayoría de los
+        Estados del padrón no acumula cobertura suficiente para que una palabra se repita en dos
+        portales. Se declara el vacío en lugar de mostrar términos de un origen único.</div>`;
+      return;
+    }
+    const tope = lista[0].notas;
+    caja.innerHTML = lista.map(t=>{
+      const q = t.notas/tope;
+      const cl = q>=.6 ? 'alta' : q>=.3 ? 'media' : '';
+      const tam = (12 + q*7).toFixed(1);
+      return `<span class="term ${cl}" style="font-size:${tam}px"
+        title="${t.notas} nota${t.notas===1?'':'s'} en ${t.portales} portales distintos"><b>${esc(t.palabra)}</b>
+        <span class="n">${t.notas}·${t.portales}p</span></span>`;
+    }).join('');
+  }
+
+  function redesVista(){
+    const caja=document.getElementById('tarj-redes'); if(!caja) return;
+    const d=almacen.redes; if(!d) return;
+    const tag=document.getElementById('tag-redes');
+    const bloqueDelPais = paisFiltro && padron.length
+      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
+    // Mismo ámbito que la cobertura y el mapa de palabras: un solo control.
+    let lista = d.registros.filter(r=>r.publicaciones);
+    if(ambitoCobertura==='pais' && paisFiltro) lista = lista.filter(r=>r.iso===paisFiltro);
+    else if(ambitoCobertura==='bloque' && bloqueDelPais) lista = lista.filter(r=>r.bloque===bloqueDelPais);
+    lista = lista.slice().sort((a,b)=>b.publicaciones-a.publicaciones);
+
+    if(tag) tag.textContent = `${d.resumen.estados_con_circulacion} de ${d.resumen.estados_del_padron} Estados · ventana de ${d.resumen.ventana_horas} h`;
+    if(!lista.length){
+      caja.innerHTML = `<div class="card"><h4>Sin circulación</h4><div class="sub">Ninguna
+        publicación en la ventana para este ámbito. <b>Ausencia de publicaciones no es
+        ausencia de hechos</b>: es ausencia de esta red, que además no es representativa
+        de la región.</div></div>`;
+      return;
+    }
+    caja.innerHTML = lista.map(r=>{
+      const pal = r.palabras.length
+        ? `<div class="nube chica">${r.palabras.slice(0,8).map(t=>
+            `<span class="term" title="${t.publicaciones} publicaciones en ${t.instancias} instancias"><b>${esc(t.palabra)}</b></span>`).join('')}</div>`
+        : `<div class="sub">Ningún término llega a dos instancias distintas: lo que hay es eco de un solo origen.</div>`;
+      return `<div class="card ancha"><h4>${esc(r.pais)}</h4>
+        <div class="value">${miles(r.publicaciones)}</div>
+        <div class="sub">publicaciones de ${r.cuentas_distintas} cuenta${r.cuentas_distintas===1?'':'s'}
+          distintas · ${r.idiomas.filter(i=>i!=='?').join(', ')||'idioma sin declarar'} · ${esc(r.etiqueta)}</div>
+        ${pal}
+        <div class="foot"><span class="src">${esc(d.procedencia.fuente.nombre)}</span>
+          <span class="badge unica">${d.procedencia.calificacion.fiabilidad}-${d.procedencia.calificacion.credibilidad}</span></div></div>`;
+    }).join('');
+  }
+
   // ---- Graficos, en SVG y sin bibliotecas ---------------------------------
   function grafico(serie, rotulo){
     if(!serie || serie.length < 2) return '';
@@ -1686,13 +1911,18 @@
         <td>${esc(f.fuente)}</td><td class="mono">${f.calif.fiabilidad}-${f.calif.credibilidad}</td></tr>`).join('')+
       `</tbody></table>`;
 
-    const bm = paisFiltro && almacen.banco
-      ? almacen.banco.registros.find(r=>r.iso===paisFiltro) : null;
-    if(bm){
-      (almacen.banco.indicadores||[]).forEach(i=>{
-        const x=bm.indicadores[i.clave];
-        if(x && x.serie && x.serie.length>2)
-          html += grafico(x.serie.map(a=>({x:a.anio,y:a.valor})), i.rotulo+' — '+i.unidad);
+    // Las series se grafican de TODAS las fuentes de indicadores, no solo del
+    // Banco Mundial: un informe que omitiera las de Naciones Unidas mostraria
+    // menos de lo que el registro tiene.
+    if(paisFiltro){
+      fuentesInd().filter(Boolean).forEach(fuente=>{
+        const reg = fuente.registros.find(r=>r.iso===paisFiltro);
+        if(!reg) return;
+        (fuente.indicadores||[]).forEach(i=>{
+          const x=reg.indicadores[i.clave];
+          if(x && x.serie && x.serie.length>2)
+            html += grafico(x.serie.map(a=>({x:a.anio,y:a.valor})), i.rotulo+' — '+i.unidad);
+        });
       });
     }
 
@@ -1803,7 +2033,7 @@
     b.addEventListener('click',()=>{ if(!b.disabled){ modo=b.dataset.modo; repintar(); } }));
 
   document.querySelectorAll('.filtro').forEach(b=>
-    b.addEventListener('click',()=>{ if(!b.disabled){ ambitoCobertura=b.dataset.ambito; coberturaVista(); } }));
+    b.addEventListener('click',()=>{ if(!b.disabled){ ambitoCobertura=b.dataset.ambito; coberturaVista(); palabrasVista(); redesVista(); } }));
 
   document.getElementById('btn-csv').addEventListener('click', csv);
   document.getElementById('btn-imprimir').addEventListener('click', ()=>window.print());
@@ -1846,13 +2076,26 @@
       pintarProcedencia('proc-cobertura',meta);
       document.getElementById('tag-cobertura').textContent =
         r.asuntos_con_cruce+' asuntos · '+r.medios_que_respondieron+' de '+r.medios_consultados+' medios · '+miles(r.notas_en_ventana)+' notas';
-      coberturaVista();
+      coberturaVista(); palabrasVista();
       vacios+=pintarVacios('vac-cobertura',meta.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-cobertura','cobertura',estado.mensaje,meta); }
       informe(); marcador();
     })
     .catch(err=>{ fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
       document.getElementById('proc-cobertura').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('redes.json'), traer('estado/redes.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.redes=d; const meta=d.procedencia;
+      pintarProcedencia('proc-redes',meta);
+      registros+=d.resumen.publicaciones_unicas;
+      redesVista();
+      vacios+=pintarVacios('vac-redes',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-redes','redes',estado.mensaje,meta); }
+      marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('tarj-redes','redes',err.message,null);
+      document.getElementById('proc-redes').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('oficiales.json'), traer('estado/oficiales.json').catch(()=>null)])
     .then(([d,estado])=>{
@@ -1888,10 +2131,12 @@
   Promise.all([traer('banco-mundial.json'), traer('estado/banco-mundial.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.banco=d; dominios+=Object.keys(d.cobertura||{}).length;
-      ['violencia','institucional','urbano','industrial','materias']
+      ['violencia','institucional','urbano','industrial','materias','ciber','contratacion']
         .forEach(x=>{ pintarProcedencia('proc-'+x, d.procedencia); enlaceLimites(x,'banco-mundial'); });
       registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
       vacios+=pintarVacios('vac-violencia',d.procedencia.vacios_declarados);
+      pintarVacios('vac-ciber',d.procedencia.vacios_declarados);
+      pintarVacios('vac-contratacion',d.procedencia.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-violencia','banco mundial',estado.mensaje,d.procedencia); }
       repintar(); marcador();
     })
