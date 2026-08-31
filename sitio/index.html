@@ -256,6 +256,18 @@
   .modo:disabled{opacity:.4;cursor:not-allowed;}
   .cruzar{display:flex;align-items:center;gap:8px;margin:10px 0 4px;}
   .cruzar label{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--grey-blue);font-weight:700;}
+  .cruzar{align-items:flex-start;flex-wrap:wrap;}
+  .boton.chico{font-size:10.5px;padding:5px 12px;}
+  .ficha-mapa .margen{font-size:9.5px;color:#7d90a8;font-weight:400;}
+  table.comparada{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:8px;}
+  table.comparada th{
+    text-align:left;font-size:9.5px;text-transform:uppercase;letter-spacing:.5px;color:#7d90a8;
+    font-weight:700;padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:bottom;
+  }
+  table.comparada td{padding:5px 6px;border-bottom:1px solid rgba(255,255,255,.06);color:#C7D2E0;}
+  table.comparada td.celda{text-align:right;font-family:'JetBrains Mono',monospace;}
+  table.comparada tr.destacada td{background:rgba(251,101,0,.10);}
+  table.comparada tr.destacada td:first-child{color:#fff;font-weight:700;}
   .cruzar select{
     background:#0E2135;color:var(--paper);border:1px solid var(--line);border-radius:8px;
     padding:6px 10px;font-family:'Inter',sans-serif;font-size:11.5px;max-width:320px;
@@ -440,7 +452,9 @@
         <div class="temas" id="temas"></div>
         <div class="cruzar">
           <label for="cruce">Cruzar con</label>
-          <select id="cruce"><option value="">— sin cruce —</option></select>
+          <select id="cruce" multiple size="4"></select>
+          <button class="boton chico" id="limpiar-cruce">quitar cruce</button>
+          <span class="nota-filtro">Con Ctrl o Mayúsculas se eligen varios. Dos temas dan dispersión; tres o más, una tabla comparada.</span>
         </div>
         <div class="modos">
           <button class="modo activo" data-modo="nivel">Nivel actual</button>
@@ -995,6 +1009,8 @@
   // no se puede proyectar, que es un resultado y no una falla.
   const AJUSTE_MINIMO = 0.5;
 
+  const ANIO_HOY = new Date().getFullYear();
+
   function proyectar(serie, n){
     if(!serie || serie.length < 4) return null;
     const N = serie.length;
@@ -1007,14 +1023,21 @@
     const r2 = syy ? (sxy*sxy)/(sxx*syy) : 0;
     const residuos = serie.map(p=>p.valor-(ordenada+pendiente*p.anio));
     const ee = Math.sqrt(residuos.reduce((a,r)=>a+r*r,0)/Math.max(1,N-2));
+    // El horizonte se cuenta desde el año corriente, no desde el último dato.
+    // Como las series vienen con rezago, la prolongación real suele ser más
+    // larga que el horizonte pedido, y eso se declara.
     const ultimo = serie[serie.length-1];
-    const anio = ultimo.anio + n;
+    const anio = ANIO_HOY + n;
     const valor = ordenada + pendiente*anio;
+    const aniosProlongados = anio - ultimo.anio;
+    // La banda se ensancha con la distancia al último dato: proyectar siete
+    // años no tiene la misma incertidumbre que proyectar uno.
+    const banda = ee * 2 * Math.sqrt(1 + aniosProlongados / Math.max(1, N));
     return {
-      anio, valor, pendiente, r2, banda: ee*2,
+      anio, valor, pendiente, r2, banda,
       ajusta: r2 >= AJUSTE_MINIMO,
       desdeAnio: serie[0].anio, hastaAnio: ultimo.anio, base: ultimo.valor,
-      puntos: N,
+      puntos: N, aniosProlongados,
       cambio: ultimo.valor ? (valor-ultimo.valor)/Math.abs(ultimo.valor)*100 : null
     };
   }
@@ -1113,13 +1136,14 @@
       html += proys.map(({n,pr})=>{
         const sube = pr.cambio > 0;
         const clase = (sube === !!capa.subeEsPeor) ? 'sube' : 'baja';
-        return `<div class="fila"><span>${pr.anio} · a ${n} año${n===1?'':'s'}</span>
-          <b class="${clase}">${cifra(pr.valor)}</b></div>`;
+        return `<div class="fila"><span>${pr.anio}</span>
+          <b class="${clase}">${cifra(pr.valor)} <span class="margen">±${cifra(pr.banda)}</span></b></div>`;
       }).join('') +
-      `<span class="nota">Prolongación de la recta ajustada a ${proys[0].pr.puntos} años
-        (${proys[0].pr.desdeAnio}–${proys[0].pr.hastaAnio}). Ajuste R²&nbsp;${cifra(proys[0].pr.r2)}.
-        Margen ±${cifra(proys[0].pr.banda)}. La recta resume la serie entera, así que no parte del último
-        dato sino de la tendencia de fondo. <b>No es un pronóstico de la Fundación.</b></span>`;
+      `<span class="nota">Recta ajustada a ${proys[0].pr.puntos} años
+        (${proys[0].pr.desdeAnio}–${proys[0].pr.hastaAnio}), ajuste R²&nbsp;${cifra(proys[0].pr.r2)}.
+        <b>El último dato es de ${proys[0].pr.hastaAnio}</b>, así que llegar a ${proys[proys.length-1].pr.anio}
+        exige prolongar ${proys[proys.length-1].pr.aniosProlongados} años, no ${proys[proys.length-1].n}.
+        <b>No es un pronóstico de la Fundación.</b></span>`;
     } else if(proys.length){
       html += `<div class="fila sin-ajuste"><span>Proyección</span><b>no utilizable</b></div>
         <span class="nota">La serie de ${proys[0].pr.desdeAnio}–${proys[0].pr.hastaAnio} no describe una recta
@@ -1387,16 +1411,68 @@
   // Dos indicadores en un mismo gráfico, cada país un punto. Se muestra la
   // coincidencia, no se afirma causa: correlacionar es analizar, y eso sale por
   // los productos de la Fundación, no por el registro.
-  let cruce = '';
+  let cruce = [];
 
   function armarSelectorCruce(){
     const sel=document.getElementById('cruce'); if(!sel) return;
     const opciones = MATERIAS().filter(m=>m.disponible());
-    if(sel.options.length === opciones.length + 1) return;
-    sel.innerHTML = '<option value="">— sin cruce —</option>' +
-      opciones.map(m=>`<option value="${m.clave}">${esc(m.eje)} · ${esc(m.rotulo)}</option>`).join('');
-    sel.value = cruce;
-    sel.addEventListener('change', ()=>{ cruce = sel.value; repintar(); });
+    if(sel.options.length !== opciones.length){
+      sel.innerHTML = opciones.map(m=>
+        `<option value="${m.clave}">${esc(m.eje)} · ${esc(m.rotulo)}</option>`).join('');
+      sel.addEventListener('change', ()=>{
+        cruce = [...sel.selectedOptions].map(o=>o.value);
+        repintar();
+      });
+      const limpiar=document.getElementById('limpiar-cruce');
+      if(limpiar) limpiar.addEventListener('click', ()=>{
+        cruce=[]; [...sel.options].forEach(o=>o.selected=false); repintar();
+      });
+    }
+    [...sel.options].forEach(o=>o.selected = cruce.includes(o.value));
+  }
+
+  // Tabla comparada: cada indicador en su propia escala, expresado como el
+  // lugar que ocupa el Estado dentro de la región. No se promedian unidades
+  // distintas: promediar homicidios con porcentaje de bosque no significa nada.
+  function tablaComparada(claves){
+    const cols = claves.map(c=>({clave:c, meta:metaInd(c), filas:filasDe(c)}))
+                       .filter(c=>c.filas.length);
+    if(cols.length < 2) return '';
+    const isos = {};
+    cols.forEach(c=>c.filas.forEach(f=>{ isos[f.iso] = f.pais; }));
+    const orden = cols.map(c=>{
+      const ord = c.filas.slice().sort((a,b)=> c.meta.mas_es_peor ? b.valor-a.valor : a.valor-b.valor);
+      const puesto = {}; ord.forEach((f,i)=>puesto[f.iso]=i+1);
+      return {...c, puesto, total:ord.length,
+              valor:Object.fromEntries(c.filas.map(f=>[f.iso,f.valor]))};
+    });
+    const filas = Object.entries(isos).map(([iso,pais])=>{
+      const cubiertos = orden.filter(c=>c.valor[iso]!==undefined).length;
+      return {iso, pais, cubiertos};
+    }).filter(f=>f.cubiertos >= 2)
+      .sort((a,b)=> a.pais.localeCompare(b.pais,'es'));
+
+    const tono = (c, iso) => {
+      const pu = c.puesto[iso]; if(!pu) return '';
+      const q = pu / c.total;
+      const col = q<=.25 ? 'rgba(251,101,0,.55)' : q<=.5 ? 'rgba(251,101,0,.28)'
+                : q<=.75 ? 'rgba(63,167,150,.20)' : 'rgba(63,167,150,.38)';
+      return `background:${col}`;
+    };
+    return `<figure class="grafico"><figcaption>${cols.length} temas comparados · ${filas.length} Estados con al menos dos</figcaption>
+      <div style="overflow-x:auto"><table class="comparada"><thead><tr><th>Estado</th>
+        ${orden.map(c=>`<th>${esc(c.meta.rotulo)}<br><span style="font-weight:400;text-transform:none">${esc(c.meta.unidad||'')}</span></th>`).join('')}
+      </tr></thead><tbody>
+        ${filas.map(f=>`<tr class="${f.iso===paisFiltro?'destacada':''}"><td>${esc(f.pais)}</td>
+          ${orden.map(c=>{
+            const v=c.valor[f.iso];
+            return `<td class="celda" style="${tono(c,f.iso)}" title="${v===undefined?'sin dato':c.puesto[f.iso]+'.º de '+c.total}">${
+              v===undefined?'—':cifra(v)}</td>`;
+          }).join('')}</tr>`).join('')}
+      </tbody></table></div></figure>
+      <p class="sin-dato">El color indica el <b>lugar que ocupa cada Estado dentro de la región</b> en ese tema:
+         naranja el cuarto peor, verde el cuarto mejor. <b>No se promedian los temas entre sí</b>: son unidades
+         distintas y un promedio no significaría nada. Se muestra coincidencia, no causa.</p>`;
   }
 
   function dispersion(claveA, claveB){
@@ -1438,8 +1514,13 @@
   function panelCruce(){
     const caja=document.getElementById('panel-cruce'); if(!caja) return;
     armarSelectorCruce();
-    if(!cruce || cruce===capaActiva){ caja.innerHTML=''; return; }
-    caja.innerHTML = dispersion(capaActiva, cruce);
+    const elegidos = cruce.filter(c=>c!==capaActiva);
+    if(!elegidos.length){ caja.innerHTML=''; return; }
+    // Con un solo tema elegido se cruza contra la capa activa: dos ejes, dispersión.
+    // Con dos o más, la dispersión ya no alcanza y va la tabla comparada.
+    caja.innerHTML = elegidos.length === 1
+      ? dispersion(capaActiva, elegidos[0])
+      : tablaComparada([capaActiva].concat(elegidos));
   }
 
   // ---- Desinformacion e infoxicacion -------------------------------------

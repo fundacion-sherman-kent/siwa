@@ -91,6 +91,35 @@ SERIES = [
      "mas_es_peor": False, "origen": "OMS y UNICEF, via la base global de los ODS",
      "cautela": "Servicio gestionado de forma segura, definicion mas exigente que "
                 "«acceso a agua». No mide continuidad del servicio."},
+{"clave": "victimas_robo", "codigo": "VC_VOV_ROBB", "eje": "Seguridad",
+     "rotulo": "Victimas de robo en los ultimos 12 meses", "unidad": "% de la poblacion",
+     "mas_es_peor": True, "origen": "UNODC, via la base global de los ODS",
+     "cautela": "Sale de encuestas de victimizacion, no de denuncias: mide el delito "
+                "sufrido, incluido el que nunca se denuncio. Es la medida mas cercana a "
+                "la delincuencia real que existe con cobertura regional."},
+    {"clave": "denuncia_robo", "codigo": "VC_PRR_ROBB", "eje": "Seguridad",
+     "rotulo": "Robos que la victima denuncio a la policia", "unidad": "% de los robos sufridos",
+     "mas_es_peor": False, "origen": "UNODC, via la base global de los ODS",
+     "cautela": "Es una medida indirecta de CONFIANZA EN LA POLICIA: cuando la gente no "
+                "denuncia, o no espera respuesta o teme represalia. Una tasa baja de "
+                "denuncia hace que las estadisticas policiales de ese Estado subestimen "
+                "el delito."},
+    {"clave": "denuncia_agresion", "codigo": "VC_PRR_PHYV", "eje": "Seguridad",
+     "rotulo": "Agresiones que la victima denuncio", "unidad": "% de las agresiones sufridas",
+     "mas_es_peor": False, "origen": "UNODC, via la base global de los ODS",
+     "cautela": "Misma lectura que la denuncia del robo: mide confianza en la respuesta "
+                "institucional, no criminalidad."},
+# RETIRADAS el 31 de agosto de 2026, probadas y descartadas:
+#   VC_DTH_TOCVN «muertes civiles por conflicto» — 1 de los 33 Estados.
+#   VC_VOV_GDSD  «poblacion que se sintio discriminada» — 0 de los 33.
+# Las dos series existen en la base global de los ODS y estan pobladas para otras
+# regiones, pero para este padron no hay dato. Publicarlas habria mostrado una
+# materia vacia con apariencia de materia cubierta. Quedan declaradas como vacio.
+    {"clave": "institucion_ddhh", "codigo": "SG_NHR_IMPL", "eje": "Gobernanza",
+     "rotulo": "Institucion de derechos humanos independiente", "unidad": "cumplimiento de 0 a 1",
+     "mas_es_peor": False, "origen": "ACNUDH, via la base global de los ODS",
+     "cautela": "Mide la existencia y el grado de conformidad con los Principios de "
+                "Paris, NO la eficacia de esa institucion."},
 ]
 
 # Dimensiones que se conservan: total, ambos sexos, todas las edades.
