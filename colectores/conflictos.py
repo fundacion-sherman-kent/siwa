@@ -208,10 +208,14 @@ def recolectar():
     vacios = [
         "LICENCIA NO DECLARADA. Las capas estan abiertas al publico y no llevan texto "
         "de derechos ni condiciones de uso. Que un dato sea accesible no significa que "
-        "sea redistribuible. Por eso este registro publica RECUENTOS Y AGREGADOS y NO "
-        "vuelca los registros individuales ni las geometrias: es trabajo derivado, no "
-        "redifusion. PENDIENTE: solicitar autorizacion escrita al Instituto antes de "
-        "usar estos datos en productos pagos de la Fundacion.",
+        "sea redistribuible. Este registro es de ACCESO LIBRE Y GRATUITO y la Fundacion "
+        "no comercializa datos, de modo que el uso aqui es el que la licencia no "
+        "comercial admite. Aun asi se publican RECUENTOS Y AGREGADOS y no los registros "
+        "individuales ni las geometrias, y PENDIENTE queda pedir autorizacion escrita al "
+        "Instituto: no por licencia sino por cortesia entre instituciones, y porque con "
+        "permiso podria publicarse el detalle caso por caso. Un dato de licencia no "
+        "comercial NO puede entrar a un informe pago de la Fundacion aunque sea gratuito "
+        "en este registro: la licencia mira el uso, no el sitio.",
         "NO ES UN CENSO DE CONFLICTOS. Es el corpus que un equipo academico levanto y "
         "verifico caso por caso, con el alcance y el recorte de ese proyecto. Un Estado "
         "con pocos casos puede tener pocos conflictos O poca cobertura del proyecto, y "
