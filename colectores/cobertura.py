@@ -281,7 +281,8 @@ def _senal_reciente(notas: list, temas: list, gentilicios: dict,
     for t in preparados:
         por_tema[t["clave"]] = {
             "clave": t["clave"], "rotulo": t["rotulo"],
-            "indicador": t.get("indicador"), "cautela": t.get("cautela", ""),
+            "indicadores": t.get("indicadores", []), "seccion": t.get("seccion"),
+            "cautela": t.get("cautela", ""),
             "notas": 0, "por_mencion": 0, "por_medio": 0,
             "estados": {},
         }

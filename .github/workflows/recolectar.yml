@@ -67,6 +67,11 @@ jobs:
         continue-on-error: true
         run: python colectores/bti.py
 
+      - name: Informes de la Fundacion
+        id: fundacion
+        continue-on-error: true
+        run: python colectores/fundacion.py
+
       # --- Series anuales y catalogos, una vez por dia ---
       - name: Indicadores comparables (Banco Mundial)
         id: banco
@@ -133,4 +138,5 @@ jobs:
           [ "${{ steps.comercio.outcome }}" = "failure" ] && { echo "Falló el colector de brecha espejo."; fallo=1; }
           [ "${{ steps.ransomware.outcome }}" = "failure" ] && { echo "Falló el colector de extorsión informática."; fallo=1; }
           [ "${{ steps.bti.outcome }}" = "failure" ] && { echo "Falló el colector del índice Bertelsmann."; fallo=1; }
+          [ "${{ steps.fundacion.outcome }}" = "failure" ] && { echo "Falló el colector de informes de la Fundación."; fallo=1; }
           exit $fallo

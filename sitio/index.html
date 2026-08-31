@@ -573,8 +573,65 @@
   .sin-dato{font-size:12px;color:#7d90a8;}
 
   /* Cuarta lectura: papel. Márgenes estándar y solo el informe. */
+  .marca-enlace{display:inline-flex;text-decoration:none;}
+  .marca-enlace:hover img{opacity:.82;}
+  .informe-fusk{
+    border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:9px;
+    padding:13px 16px;background:rgba(255,255,255,.02);
+  }
+  .informe-fusk:hover{background:rgba(251,101,0,.07);}
+  .informe-fusk a.tit{
+    color:#E8EEF5;font-size:13.5px;font-weight:700;line-height:1.4;
+    text-decoration:none;display:block;
+  }
+  .informe-fusk a.tit:hover{color:#fff;}
+  .informe-fusk .meta{
+    margin-top:7px;font-size:10.5px;color:#7d90a8;display:flex;flex-wrap:wrap;
+    gap:6px 12px;align-items:center;
+  }
+  .sello{
+    display:inline-block;padding:2px 9px;border-radius:999px;font-size:9.5px;
+    font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  }
+  .sello.libre{background:rgba(63,167,150,.22);color:#7fd3c4;}
+  .sello.reservado{background:rgba(140,0,224,.22);color:#c79bf0;}
+  .secciones-fusk{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:8px;margin-top:10px;
+  }
+  .secciones-fusk a{
+    display:block;border:1px solid var(--line);border-radius:8px;padding:11px 13px;
+    text-decoration:none;color:#C7D2E0;
+  }
+  .secciones-fusk a:hover{border-color:var(--orange);background:rgba(251,101,0,.08);color:#fff;}
+  .secciones-fusk b{display:block;font-size:12.5px;color:#E8EEF5;margin-bottom:3px;}
+  .secciones-fusk span{font-size:11px;line-height:1.45;color:#7d90a8;}
+  .membrete{display:none;}
+  .colofon{display:none;}
+
   @media print{
     @page{size:A4;margin:18mm 16mm;}
+    /* Identidad de la casa en papel: navy para el texto, filete naranja. */
+    .membrete{
+      display:flex;align-items:center;gap:14px;
+      border-bottom:2.5px solid #FB6500;padding-bottom:10px;margin-bottom:16px;
+    }
+    .membrete img{height:34px;width:auto;}
+    .membrete-txt{display:flex;flex-direction:column;line-height:1.25;}
+    .membrete-txt strong{
+      font-size:17px;letter-spacing:4px;color:#00121E;font-weight:700;
+    }
+    .membrete-txt span{font-size:9.5px;color:#33475c;letter-spacing:.3px;}
+    .membrete-txt .oficina{font-size:8.5px;color:#5b6f84;margin-top:2px;}
+    .colofon{
+      display:block;margin-top:22px;padding-top:12px;
+      border-top:1.5px solid #00121E;font-size:8.5px;line-height:1.55;color:#33475c;
+    }
+    .colofon b{color:#00121E;}
+    .colofon .cita{
+      background:#f4f6f8;border-left:2.5px solid #FB6500;
+      padding:8px 10px;margin:8px 0;font-size:8.5px;
+    }
+    .colofon .autoridades{margin-top:8px;font-size:8px;color:#5b6f84;}
     body{background:#fff;color:#111;}
     .topbar,.hero,nav.rail,.eje,.mapa-caja,.mapa-barra,.mapa-pie,.acciones,footer,
     section.domain:not(#informe),.barra-informe select{display:none!important;}
@@ -622,7 +679,9 @@
 
 <div class="topbar">
   <div class="brand">
-    <img src="marca/fusk-logo-nombre-color.png" alt="FUSK · Fundación Sherman Kent">
+    <a href="https://fundacionkent.org/" target="_blank" rel="noopener" class="marca-enlace"
+       title="Ir a la web de la Fundación Sherman Kent">
+      <img src="marca/fusk-logo-nombre-color.png" alt="FUSK · Fundación Sherman Kent"></a>
     <div class="sep"></div>
     <div>
       <h1>SIWA</h1>
@@ -714,6 +773,7 @@
     <a href="#oficiales">Padrón oficial</a>
     <a href="#fuentes-limites">Fuentes y límites</a>
     <div class="grupo">Método</div>
+    <a href="#fundacion">De la Fundación</a>
     <a href="#informe">Informe descargable</a>
     <a href="#calificacion">Calificación</a>
   </nav>
@@ -1314,6 +1374,21 @@
       <div id="vac-mensajeria"></div>
     </section>
 
+    <section class="domain" id="fundacion" data-nivel="1">
+      <div class="domain-head"><h3>De la Fundación</h3><span class="tag" id="tag-fundacion">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Acá termina el dato y empieza el análisis.</b> Este registro publica hechos
+           calificados y <b>no emite juicios</b>. Los informes de la Fundación sí los emiten,
+           firmados y con su confianza y probabilidad declaradas. <b>Son dos productos
+           distintos y no deben leerse como uno solo.</b></p>
+      </div>
+      <div class="procedencia" id="proc-fundacion">Cargando el registro…</div>
+      <div class="cruce" id="lista-fundacion"></div>
+      <h4 class="sub-seccion">La Fundación</h4>
+      <div class="secciones-fusk" id="secciones-fusk"></div>
+      <div id="vac-fundacion"></div>
+    </section>
+
     <section class="domain" id="informe" data-nivel="2">
       <div class="domain-head"><h3>Informe del registro</h3><span class="tag">Público, sin cuenta</span></div>
       <div class="barra-informe">
@@ -1324,9 +1399,18 @@
         </div>
       </div>
       <div class="hoja">
+        <div class="membrete">
+          <img src="marca/fusk-logo-nombre-color.png" alt="Fundación Sherman Kent">
+          <div class="membrete-txt">
+            <strong>SIWA</strong>
+            <span>Reporte de situación de América Latina y el Caribe</span>
+            <span class="oficina">Fundación Sherman Kent · Oficina de Generación de Inteligencia</span>
+          </div>
+        </div>
         <h4 class="titulo" id="informe-titulo">—</h4>
         <div class="fecha" id="informe-fecha">—</div>
         <div id="informe-cuerpo"></div>
+        <div class="colofon" id="colofon"></div>
       </div>
     </section>
 
@@ -1400,6 +1484,12 @@
   <br><br>
   La Fundación agradece a los especialistas y funcionarios que contribuyeron con su tiempo y criterio.
   <br><br>
+  <b>Este registro es la capa de datos de la Fundación Sherman Kent.</b> El análisis —con
+  juicios, confianza y probabilidad declaradas— se publica en
+  <a href="https://fundacionkent.org/articulos/" target="_blank" rel="noopener">fundacionkent.org</a>,
+  junto con la <a href="https://fundacionkent.org/nosotros/metodo-de-analisis/" target="_blank" rel="noopener">explicación
+  del método</a> y la <a href="https://fundacionkent.org/formacion/" target="_blank" rel="noopener">oferta de formación</a>.
+  <br><br>
   <b>Uso libre y gratuito, citando la fuente.</b> Este registro se publica sin costo y sin
   registro de usuario. Se permite reproducirlo, redistribuirlo y derivar trabajos de él
   <b>citando así: «SIWA, Fundación Sherman Kent»</b> y enlazando a esta página. La recolección,
@@ -1471,7 +1561,8 @@
                      ['conflictos','Conflictos territoriales'],
                      ['comercio','Comercio · brecha espejo'],
                      ['ransomware','Extorsión informática'],
-                     ['bti','Índice Bertelsmann']]
+                     ['bti','Índice Bertelsmann'],
+                     ['fundacion','Informes de la Fundación']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -2397,8 +2488,9 @@
     const d = almacen.cobertura, sr = d && d.senal_reciente;
     if(!sr){ caja.innerHTML = ''; return; }
 
-    // Se busca el tema del lexico atado al indicador que se esta mirando.
-    const tema = Object.values(sr.temas).find(t => t.indicador === capaActiva);
+    // Un tema puede leerse junto a VARIOS indicadores.
+    const tema = Object.values(sr.temas).find(
+      t => (t.indicadores||[]).includes(capaActiva));
     if(!tema || !tema.notas){ caja.innerHTML = ''; return; }
 
     const zona = bloqueActivo();
@@ -2430,6 +2522,71 @@
     </div>`;
   }
 
+  // La senal tambien va DENTRO de la seccion tematica que le corresponde. Asi
+  // aparece aunque el lector no tenga ese indicador elegido en el mapa, y sirve
+  // para los dos temas que no tienen indicador propio —contrabando y mineria
+  // ilegal—, que viven solo en su seccion.
+  function senalEnSecciones(){
+    const d = almacen.cobertura, sr = d && d.senal_reciente;
+    if(!sr) return;
+    const zona = bloqueActivo();
+    Object.values(sr.temas).forEach(tema => {
+      if(!tema.seccion) return;
+      const sec = document.getElementById(tema.seccion);
+      if(!sec) return;
+      let caja = sec.querySelector('.senal-seccion');
+      if(!caja){
+        caja = document.createElement('div');
+        caja.className = 'senal-seccion';
+        sec.appendChild(caja);
+      }
+      let estados = tema.estados || [];
+      if(paisFiltro) estados = estados.filter(e => e.iso === paisFiltro);
+      else if(zona) estados = estados.filter(e => e.bloque === zona);
+      if(!estados.length){ caja.innerHTML = ''; return; }
+      const total = estados.reduce((a,e)=>a+e.notas,0);
+      const donde = paisFiltro ? paisNombre : (zona ? 'el bloque '+zona : 'la región');
+      const ej = estados.flatMap(e => e.ejemplos.map(x=>({...x, pais:e.pais}))).slice(0,3);
+      caja.innerHTML = `<div class="senal">
+        <h5>Se está publicando ahora · ventana de ${sr.ventana_horas} horas</h5>
+        <p><b>${total} nota${total===1?'':'s'}</b> sobre <b>${esc(tema.rotulo.toLowerCase())}</b> en ${esc(donde)}.</p>
+        <div class="titulares">${ej.map(x=>
+          `<a href="${esc(x.enlace)}" target="_blank" rel="noopener">${esc(x.titulo)}
+            <span class="quien">${esc(x.medio)} · ${esc(x.pais)}</span></a>`).join('')}</div>
+        <p class="aclara"><b>Esto no actualiza las cifras de esta sección.</b> Son menciones de
+          las últimas ${sr.ventana_horas} horas, no hechos verificados por una fuente estadística.
+          ${tema.cautela?`<br><b>Ojo:</b> ${esc(tema.cautela)}`:''}</p>
+      </div>`;
+    });
+  }
+
+  function fundacionVista(){
+    const caja = document.getElementById('lista-fundacion');
+    const secs = document.getElementById('secciones-fusk');
+    const tag  = document.getElementById('tag-fundacion');
+    const d = almacen.fundacion;
+    if(!caja || !d) return;
+    const r = d.resumen;
+    if(tag) tag.textContent = `${r.informes} informes · ${r.libres} de acceso libre`;
+
+    caja.innerHTML = d.registros.map(x=>{
+      const libre = x.difusion === 'libre';
+      const fecha = x.publicado ? new Date(x.publicado).toLocaleDateString('es-AR',
+        {day:'numeric', month:'long', year:'numeric'}) : '';
+      return `<div class="informe-fusk">
+        <a class="tit" href="${esc(x.enlace)}" target="_blank" rel="noopener">${esc(x.titulo)}</a>
+        <div class="meta">
+          <span class="sello ${libre?'libre':'reservado'}">${libre?'acceso libre':'reservado'}</span>
+          ${fecha?`<span>${fecha}</span>`:''}
+          ${x.categorias.length?`<span>${esc(x.categorias.join(' · '))}</span>`:''}
+        </div></div>`;
+    }).join('');
+
+    if(secs) secs.innerHTML = (d.secciones||[]).map(x=>
+      `<a href="${esc(x.url)}" target="_blank" rel="noopener">
+        <b>${esc(x.rotulo)}</b><span>${esc(x.detalle)}</span></a>`).join('');
+  }
+
   function repintarAhora(){
     paso('estilo del mapa', ()=>{ if(capaPaises) capaPaises.setStyle(estiloPais); });
     // armarAmbito() va aca y no solo en sincronizar(): el padron de paises llega
@@ -2439,7 +2596,10 @@
     paso('desplegables de tema', solapas);
     paso('leyenda', leyenda);
     paso('panel de cruce', panelCruce);
+    paso('de la Fundación', fundacionVista);
+    paso('colofón del informe', pintarColofon);
     paso('señal reciente', senalDelTema);
+    paso('señal en secciones', senalEnSecciones);
     paso('herramientas', pintarHerramientas);
     paso('dirección compartible', guardarEnLaDireccion);
     paso('ficha ciudadana', fichaCiudadana);
@@ -3625,6 +3785,43 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     caja.innerHTML = html;
   }
 
+  // El colofon se arma con lo que el lector tiene delante: ambito, fecha, cuantas
+  // cifras, y la cita exacta. Va en el papel, que es lo que circula fuera del sitio.
+  function pintarColofon(){
+    const caja = document.getElementById('colofon');
+    if(!caja) return;
+    const donde = paisFiltro ? paisNombre
+                : (bloqueActivo() || 'los 33 Estados de América Latina y el Caribe');
+    const filas = filasInforme().length;
+    const fuentes = [almacen.banco, almacen.ods, almacen.owd, almacen.bti,
+                     almacen.desplazamiento, almacen.conflictos, almacen.comercio,
+                     almacen.ransomware, almacen.cobertura, almacen.redes,
+                     almacen.telegram, almacen.oficiales].filter(Boolean);
+    const vacios = fuentes.reduce((a,f)=>a+f.procedencia.vacios_declarados.length, 0);
+    const hoy = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'long', year:'numeric'});
+    caja.innerHTML = `
+      <div class="cita"><b>Cómo citar este documento:</b><br>
+        Fundación Sherman Kent, Oficina de Generación de Inteligencia (${ANIO_HOY}).
+        <i>SIWA — Reporte de situación de América Latina y el Caribe: ${esc(donde)}</i>.
+        Consultado el ${hoy}. Disponible en ${location.origin}${location.pathname}</div>
+      <b>Qué contiene.</b> ${filas} cifras sobre ${esc(donde)}, de ${fuentes.length} fuentes,
+      con <b>${vacios} vacíos declarados</b>. Cada cifra lleva su fuente, su año de referencia y
+      su calificación de fiabilidad en el sistema Almirantazgo —letra para la fuente, número para
+      el dato—.
+      <br><br>
+      <b>Qué no contiene.</b> Ningún número fue estimado, completado ni simulado. Cuando una fuente
+      falla se muestra la falla y la fecha del último dato válido. <b>Este registro publica hechos
+      calificados y no emite juicios</b>: el análisis de la Fundación sale por sus productos, con
+      confianza y probabilidad declaradas.
+      <br><br>
+      <b>Uso.</b> Acceso libre y gratuito. Se permite reproducir y derivar citando
+      <b>«SIWA, Fundación Sherman Kent»</b>. Los datos de base pertenecen a los productores citados
+      en cada fila, con sus propias condiciones. La cita no implica aval de la Fundación sobre el
+      uso que se haga de estos datos ni sobre conclusiones ajenas.
+      <div class="autoridades">La Fundación agradece a los especialistas y funcionarios que
+        contribuyeron con su tiempo y criterio.</div>`;
+  }
+
   function csv(){
     // La planilla lleva UNIDAD y AÑO: un valor como 20947723265 sin unidad no se
     // puede usar. Y lleva las series completas, que es lo que necesita quien
@@ -3798,6 +3995,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ fallas++; pintarFalla('lista-mensajeria','mensajería',err.message,null);
       document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('fundacion.json'), traer('estado/fundacion.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.fundacion=d; const meta=d.procedencia;
+      pintarProcedencia('proc-fundacion',meta);
+      vacios+=pintarVacios('vac-fundacion',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-fundacion','informes de la Fundación',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('lista-fundacion','informes de la Fundación',err.message,null);
+      document.getElementById('proc-fundacion').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('bti.json'), traer('estado/bti.json').catch(()=>null)])
     .then(([d,estado])=>{
