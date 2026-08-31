@@ -156,6 +156,23 @@
   .leaflet-container{background:var(--navy-black);font-family:'Inter',sans-serif;outline:none;}
   .leaflet-control-attribution{background:rgba(0,18,30,.75)!important;color:#7d90a8!important;font-size:9.5px!important;}
   .leaflet-control-attribution a{color:#9fb2c8!important;}
+  .ficha-mapa{
+    position:absolute;top:12px;right:12px;width:262px;z-index:500;
+    background:rgba(14,33,53,.96);border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;font-size:12px;line-height:1.55;color:#C7D2E0;
+    box-shadow:0 8px 28px rgba(0,0,0,.45);pointer-events:none;
+  }
+  .ficha-mapa h4{margin:0;font-size:14px;color:#fff;font-weight:700;}
+  .ficha-mapa .bloque{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#7d90a8;margin-bottom:10px;}
+  .ficha-mapa .cifra{display:block;font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:800;color:#fff;line-height:1.15;}
+  .ficha-mapa .unidad{display:block;font-size:10.5px;color:#9fb2c8;margin-bottom:10px;}
+  .ficha-mapa .fila{display:flex;justify-content:space-between;gap:8px;padding:3px 0;font-size:11px;border-top:1px solid rgba(255,255,255,.07);}
+  .ficha-mapa .fila b{color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;}
+  .ficha-mapa .sube{color:#ffb27a;}
+  .ficha-mapa .baja{color:#6fe0c9;}
+  .ficha-mapa .nota{display:block;margin-top:10px;font-size:10px;color:#7d90a8;line-height:1.5;}
+  .ficha-mapa .vacia{color:#7d90a8;font-size:11.5px;}
+  @media (max-width:820px){ .ficha-mapa{position:static;width:auto;margin:10px;} }
   .leaflet-tooltip.ficha{
     background:#0E2135;border:1px solid var(--line);color:var(--paper);
     box-shadow:0 6px 24px rgba(0,0,0,.5);border-radius:8px;padding:10px 12px;font-size:11.5px;line-height:1.55;
@@ -402,7 +419,9 @@
         <div class="temas" id="temas"></div>
         <div class="modos">
           <button class="modo activo" data-modo="nivel">Nivel actual</button>
-          <button class="modo" data-modo="tendencia">Tendencia 10 años</button>
+          <button class="modo" data-modo="1">Tendencia 1 año</button>
+          <button class="modo" data-modo="2">Tendencia 2 años</button>
+          <button class="modo" data-modo="4">Tendencia 4 años</button>
         </div>
         <div class="seleccion" id="seleccion">Sin país seleccionado</div>
       </div>
@@ -410,6 +429,7 @@
       <p class="explica-capa" id="explica-capa">—</p>
       <div class="mapa-caja">
         <div id="mapa"></div>
+        <div class="ficha-mapa" id="ficha-mapa"></div>
         <div class="leyenda" id="leyenda"></div>
       </div>
       <p class="mapa-pie">
@@ -747,6 +767,11 @@
         return m;
       },
       get subeEsPeor(){ return !!meta().mas_es_peor; },
+      serieDe(iso){
+        const r=((almacen.banco && almacen.banco.registros)||[]).find(x=>x.iso===iso);
+        const i=r&&r.indicadores[clave];
+        return (i&&i.serie)?i.serie.map(a=>({anio:a.anio, valor:a.valor})):[];
+      },
       get rotulo(){ return meta().rotulo || clave; },
       periodo(){
         const r=(almacen.banco?.registros||[]).find(x=>x.indicadores[clave]);
@@ -774,6 +799,10 @@
       materia:'desplazamiento', unidad:'personas expulsadas', leyenda:[1000,50000,300000],
       color(v){ return v===undefined?MAG[0] : v<1000?MAG[0] : v<50000?MAG[1] : v<300000?MAG[2] : MAG[3]; },
       subeEsPeor: true,
+      serieDe(iso){
+        const p=((almacen.serie && almacen.serie.registros)||[]).find(x=>x.iso===iso);
+        return p ? p.serie.map(a=>({anio:a.anio, valor:a.origen_refugiados+a.origen_solicitantes})) : [];
+      },
       tendencia(){
         const m={};
         (almacen.desplazamiento?.registros||[]).forEach(r=>{
@@ -845,9 +874,36 @@
     return primera ? c[primera] : CAPA_VACIA;
   }
 
-  const hayTendencia = () => typeof capaActual().tendencia === 'function';
-  const valores = () => (modo==='tendencia' && hayTendencia())
-    ? capaActual().tendencia() : capaActual().conteo();
+  const hayTendencia = () => typeof capaActual().serieDe === 'function';
+  const anios = () => modo === 'nivel' ? 0 : parseInt(modo, 10);
+
+  // Variación a N años sobre la serie propia. Declara siempre qué dos años
+  // comparó, porque el año objetivo puede no existir en la serie.
+  function variacion(serie, n){
+    if(!serie || serie.length < 2) return null;
+    const ultimo = serie[serie.length-1];
+    const objetivo = ultimo.anio - n;
+    const previos = serie.filter(x=>x.anio <= objetivo);
+    const base = previos.length ? previos[previos.length-1] : serie[0];
+    if(base.anio === ultimo.anio || !base.valor) return null;
+    return {pct:(ultimo.valor - base.valor) / Math.abs(base.valor) * 100,
+            desde:base.anio, hasta:ultimo.anio, valorBase:base.valor, valorFin:ultimo.valor};
+  }
+
+  function variacionDe(iso, n){
+    const capa = capaActual();
+    if(typeof capa.serieDe !== 'function') return null;
+    return variacion(capa.serieDe(iso), n);
+  }
+  function valores(){
+    if(modo === 'nivel' || !hayTendencia()) return capaActual().conteo();
+    const m = {}, n = anios();
+    Object.keys(capaActual().conteo()).forEach(iso=>{
+      const v = variacionDe(iso, n);
+      if(v) m[iso] = v.pct;
+    });
+    return m;
+  }
 
   // En modo tendencia la escala es divergente y depende de si subir es bueno o malo.
   function colorTendencia(v, subeEsPeor){
@@ -867,7 +923,7 @@
   function estiloPais(rasgo){
     const capa=capaActual(), iso=rasgo.properties.iso, sel = paisFiltro === iso;
     const v = valores()[iso];
-    const relleno = (modo==='tendencia' && hayTendencia())
+    const relleno = (modo!=='nivel' && hayTendencia())
       ? colorTendencia(v, capa.subeEsPeor) : capa.color(v);
     return {color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
             fillColor: relleno, fillOpacity:.9};
@@ -875,39 +931,46 @@
 
   const cifra = v => Math.abs(v)<1000 ? (Math.round(v*100)/100).toLocaleString('es-AR') : miles(Math.round(v));
 
-  const recorte = (t,n=110) => t && t.length>n ? esc(t.slice(0,n).trim())+'…' : esc(t||'');
-
-  function ficha(iso, nombre, bloque){
-    const capa=capaActual(), nivel=capa.conteo()[iso];
-    const tend = hayTendencia() ? capa.tendencia()[iso] : undefined;
-    if(nivel===undefined && tend===undefined)
-      return `<b>${esc(nombre)}</b>${esc(bloque)}<span class="nota">Sin dato en esta capa.</span>`;
-    const p=posicion(iso);
-    const enTendencia = modo==='tendencia' && hayTendencia();
-    const principal = enTendencia
-      ? (tend===undefined ? '—' : `${tend>0?'+':''}${cifra(tend)} %`)
-      : (nivel===undefined ? '—' : cifra(nivel));
-    const unidad = enTendencia ? `en ${capa.periodo?capa.periodo():'la ventana'}` : esc(capa.unidad);
-    const secundaria = enTendencia
-      ? (nivel!==undefined ? `Hoy: ${cifra(nivel)} ${esc(capa.unidad)}` : '')
-      : (tend!==undefined ? `Tendencia ${capa.periodo?capa.periodo():''}: ${tend>0?'+':''}${cifra(tend)} %` : '');
-    return `<b>${esc(nombre)}</b>${esc(bloque)}<br><span class="cifra">${principal}</span> ${unidad}`+
-           (secundaria?`<br>${secundaria}`:'')+
-           (p?`<br>${p.puesto}.º de ${p.de} en la región`:'')+
-           `<span class="nota">${recorte(capa.cautela)}</span>`;
+  function pintarFichaMapa(iso, nombre, bloque){
+    const caja = document.getElementById('ficha-mapa');
+    if(!caja) return;
+    if(!iso){
+      caja.innerHTML = `<span class="vacia">Pasá el cursor por un país para ver su ficha, o hacé clic para filtrar todo el registro por él.</span>`;
+      return;
+    }
+    const capa = capaActual(), nivel = capa.conteo()[iso];
+    const horizontes = [1,2,4].map(n=>({n, v:variacionDe(iso, n)})).filter(x=>x.v);
+    if(nivel === undefined && !horizontes.length){
+      caja.innerHTML = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>
+        <span class="vacia">Sin dato en esta capa.</span>`;
+      return;
+    }
+    const p = posicion(iso);
+    caja.innerHTML =
+      `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>` +
+      (nivel!==undefined ? `<span class="cifra">${cifra(nivel)}</span>
+        <span class="unidad">${esc(capa.unidad)}${p?` · ${p.puesto}.º de ${p.de}`:''}</span>` : '') +
+      horizontes.map(({n,v})=>{
+        const sube = v.pct > 0;
+        const clase = (sube === !!capa.subeEsPeor) ? 'sube' : 'baja';
+        return `<div class="fila"><span>${n} año${n===1?'':'s'} · ${v.desde}–${v.hasta}</span>
+                <b class="${clase}">${sube?'+':''}${cifra(v.pct)} %</b></div>`;
+      }).join('') +
+      `<span class="nota">${esc(capa.cautela)}</span>`;
   }
 
   function leyenda(){
     const capa=capaActual();
-    if(modo==='tendencia' && hayTendencia()){
+    if(modo!=='nivel' && hayTendencia()){
       const peor = capa.subeEsPeor ? 'Sube' : 'Baja', mejor = capa.subeEsPeor ? 'Baja' : 'Sube';
+      const n = anios();
       document.getElementById('leyenda').innerHTML =
         [[DIV[0],`${peor} más de 25 %`],[DIV[1],`${peor} hasta 25 %`],
          ['rgba(255,255,255,.10)','Estable, menos de 5 %'],
          [DIV[2],`${mejor} hasta 25 %`],[DIV[3],`${mejor} más de 25 %`],
          [MAG[0],'Sin serie suficiente']]
         .map(([col,tx])=>`<span><i style="background:${col};border:1px solid rgba(255,255,255,.18)"></i>${tx}</span>`).join('')+
-        `<span class="sin-puntos">Variación entre el primer y el último año disponibles de la ventana</span>`;
+        `<span class="sin-puntos">Variación a ${n} año${n===1?'':'s'}, sobre los años disponibles más cercanos</span>`;
       return;
     }
     const c=capa.leyenda, paleta = capa.divergente ? DIV : MAG;
@@ -960,10 +1023,12 @@
   function repintar(){
     if(capaPaises) capaPaises.setStyle(estiloPais);
     puntos(); solapas(); leyenda();
+    pintarFichaMapa(paisFiltro, paisNombre,
+      paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:'');
     const ex = document.getElementById('explica-capa');
     if(ex){
       const base = EXPLICA[capaActiva] ? EXPLICA[capaActiva]() : '';
-      ex.innerHTML = (modo==='tendencia' && hayTendencia())
+      ex.innerHTML = (modo!=='nivel' && hayTendencia())
         ? `<b>Modo tendencia.</b> Se muestra cuánto varió el indicador entre el primer y el último año `+
           `disponibles de la ventana de diez años, no su nivel actual. El nivel sigue en la ficha de cada país.`+
           `<span class="no-es"><b>Qué no es:</b> no es una proyección. Es la variación entre dos cifras publicadas. `+
@@ -1027,38 +1092,33 @@
 
   // ---- Tarjetas -----------------------------------------------------------
   // La serie histórica se ve en la propia sección, sin ir hasta el informe.
+  // Serie de diez años de la capa activa, en la propia sección. Es lo que
+  // permite comprobar que la tendencia declarada existe de verdad.
   function seriesEnSeccion(){
-    const cajaV=document.getElementById('serie-violencia');
-    if(cajaV){
-      const r = paisFiltro && almacen.banco ? almacen.banco.registros.find(x=>x.iso===paisFiltro) : null;
-      const i = r && r.indicadores.homicidios;
-      cajaV.innerHTML = (i && i.serie && i.serie.length>2)
-        ? grafico(i.serie.map(a=>({x:a.anio,y:a.valor})),
-            `${paisNombre} · homicidios por 100.000 · ${i.anio_inicial}–${i.anio}` +
-            (i.tendencia_ventana_pct!==null&&i.tendencia_ventana_pct!==undefined
-              ? ` · ${i.tendencia_ventana_pct>0?'+':''}${i.tendencia_ventana_pct} % en la ventana` : ''))
-        : (paisFiltro ? '<p class="sin-dato">Sin serie suficiente para graficar.</p>'
-                      : '<p class="sin-dato">Elegí un país en el mapa para ver su serie de diez años.</p>');
-    }
-    const cajaD=document.getElementById('serie-desplazamiento');
-    if(cajaD){
-      const p = paisFiltro && almacen.serie ? almacen.serie.registros.find(x=>x.iso===paisFiltro) : null;
-      const r = paisFiltro && almacen.desplazamiento ? almacen.desplazamiento.registros.find(x=>x.iso===paisFiltro) : null;
-      cajaD.innerHTML = (p && p.serie && p.serie.length>2)
-        ? grafico(p.serie.map(a=>({x:a.anio,y:a.origen_refugiados+a.origen_solicitantes})),
-            `${paisNombre} · personas expulsadas · ${p.serie[0].anio}–${p.serie[p.serie.length-1].anio}` +
-            (r && r.tendencia_ventana_pct!==null && r.tendencia_ventana_pct!==undefined
-              ? ` · ${r.tendencia_ventana_pct>0?'+':''}${r.tendencia_ventana_pct} % en la ventana` : ''))
-        : (paisFiltro ? '<p class="sin-dato">Sin serie suficiente para graficar.</p>'
-                      : '<p class="sin-dato">Elegí un país en el mapa para ver su serie de diez años.</p>');
-    }
+    const destinos = {violencia:'homicidios', desplazamiento:'desplazamiento'};
+    Object.entries(destinos).forEach(([seccion, clave])=>{
+      const caja=document.getElementById('serie-'+seccion);
+      if(!caja) return;
+      if(!paisFiltro){
+        caja.innerHTML = '<p class="sin-dato">Elegí un país en el mapa para ver su serie de diez años y comprobar la tendencia.</p>';
+        return;
+      }
+      const capa = capas()[clave];
+      const serie = capa && typeof capa.serieDe === 'function' ? capa.serieDe(paisFiltro) : [];
+      if(serie.length < 3){ caja.innerHTML='<p class="sin-dato">Sin serie suficiente para graficar.</p>'; return; }
+      const v1=variacion(serie,1), v2=variacion(serie,2), v4=variacion(serie,4);
+      const pie = [v1&&`1 año ${v1.pct>0?'+':''}${cifra(v1.pct)} %`,
+                   v2&&`2 años ${v2.pct>0?'+':''}${cifra(v2.pct)} %`,
+                   v4&&`4 años ${v4.pct>0?'+':''}${cifra(v4.pct)} %`].filter(Boolean).join(' · ');
+      caja.innerHTML = grafico(serie.map(a=>({x:a.anio,y:a.valor})),
+        `${paisNombre} · ${esc(capa.unidad||'')} · ${serie[0].anio}–${serie[serie.length-1].anio}`) +
+        (pie?`<p class="sin-dato">Variación: ${pie}</p>`:'');
+    });
   }
 
   const verTodos = {};
   const TOPE = 6;
 
-  // Cuántos países se muestran y por qué. El criterio se escribe en pantalla:
-  // no son los primeros seis del alfabeto, son los seis valores extremos.
   function tarjetasBanco(claves, destino){
     const d=almacen.banco; if(!d) return;
     claves = [].concat(claves);
@@ -1418,7 +1478,9 @@
       mapa.attributionControl.addAttribution('Límites: Natural Earth 1:50 m · dominio público');
       capaPaises=L.geoJSON(geo,{style:estiloPais, onEachFeature:(rasgo,capa)=>{
         const p=rasgo.properties;
-        capa.bindTooltip(()=>ficha(p.iso,p.pais,p.bloque),{className:'ficha',sticky:true});
+        capa.on('mouseover',()=>pintarFichaMapa(p.iso,p.pais,p.bloque));
+        capa.on('mouseout',()=>pintarFichaMapa(paisFiltro, paisNombre,
+          paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:''));
         capa.on('click',()=>seleccionar(p.iso,p.pais));
       }}).addTo(mapa);
       mapa.fitBounds(capaPaises.getBounds(),{padding:[12,12]});
