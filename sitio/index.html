@@ -213,6 +213,43 @@
     border-radius:7px;padding:9px 11px;font-family:inherit;font-size:12.5px;
   }
   .control select:focus{outline:2px solid var(--orange);outline-offset:1px;}
+  .control.ancho{flex:1 1 100%;}
+  .buscar-tema{
+    width:100%;background:#04202f;color:#E8EEF5;border:1px solid var(--line);
+    border-radius:7px;padding:8px 11px;font-family:inherit;font-size:12.5px;
+  }
+  .buscar-tema:focus{outline:2px solid var(--orange);outline-offset:1px;}
+  .lista-temas{
+    max-height:224px;overflow-y:auto;margin-top:7px;
+    border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.18);
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));
+    align-content:start;padding:6px;gap:1px;
+  }
+  @media (max-width:720px){ .lista-temas{grid-template-columns:1fr;max-height:260px;} }
+  .lista-temas .eje-titulo{
+    grid-column:1/-1;font-size:9.5px;text-transform:uppercase;letter-spacing:1px;
+    color:var(--orange);font-weight:700;padding:9px 8px 4px;
+  }
+  .lista-temas label{
+    display:flex;align-items:flex-start;gap:9px;padding:7px 9px;border-radius:6px;
+    font-size:12px;line-height:1.35;color:#C7D2E0;cursor:pointer;
+  }
+  .lista-temas label:hover{background:rgba(255,255,255,.05);color:#fff;}
+  .lista-temas input{
+    accent-color:var(--orange);width:15px;height:15px;margin:1px 0 0;flex:none;cursor:pointer;
+  }
+  .lista-temas label.puesto{background:rgba(251,101,0,.13);color:#fff;}
+  .lista-temas .nada{grid-column:1/-1;padding:14px 10px;color:#7d90a8;font-size:12px;}
+  .elegidos{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+  .elegidos .quita{
+    display:inline-flex;align-items:center;gap:7px;background:rgba(251,101,0,.16);
+    border:1px solid rgba(251,101,0,.5);color:#fff;border-radius:999px;
+    padding:4px 8px 4px 12px;font-size:11px;cursor:pointer;font-family:inherit;
+  }
+  .elegidos .quita:hover{background:rgba(251,101,0,.3);}
+  .elegidos .quita b{font-weight:700;}
+  .elegidos .quita span{font-size:13px;line-height:1;opacity:.75;}
+  .elegidos .ninguno{color:#7d90a8;font-size:11.5px;padding:3px 0;}
   .control select[multiple]{padding:6px 8px;min-height:40px;}
   .control select optgroup{background:#00121E;color:#7d90a8;font-style:normal;font-weight:700;}
   .control select option{background:#04202f;color:#E8EEF5;padding:3px 0;}
@@ -567,9 +604,13 @@
             <label for="tema-principal">Tema</label>
             <select id="tema-principal"></select>
           </div>
-          <div class="control">
-            <label for="cruce">Cruzar con</label>
-            <select id="cruce" multiple size="3" aria-describedby="ayuda-cruce"></select>
+          <div class="control ancho">
+            <label for="buscar-cruce">Cruzar con otros temas</label>
+            <input type="search" id="buscar-cruce" class="buscar-tema"
+                   placeholder="Escribí para buscar entre los 59 temas…"
+                   aria-describedby="ayuda-cruce" autocomplete="off">
+            <div class="lista-temas" id="cruce-lista" role="group" aria-label="Temas para cruzar"></div>
+            <div class="elegidos" id="cruce-elegidos"></div>
           </div>
           <div class="control">
             <label for="ambito">País o zona</label>
@@ -577,7 +618,7 @@
           </div>
           <button class="boton chico" id="limpiar-cruce">quitar cruce</button>
         </div>
-        <p class="nota-filtro" id="ayuda-cruce"><b>Para cruzar, hacé clic en uno o más temas de la lista del medio</b> —un clic agrega, otro quita, no hace falta ninguna tecla—. Con <b>un</b> tema cruzado se dibuja una nube de puntos; con <b>dos o más</b>, una tabla comparada. El <b>país o zona</b> rige todo el registro, incluidas las noticias, el mapa de palabras y las redes.</p>
+        <p class="nota-filtro" id="ayuda-cruce"><b>Para cruzar, tildá uno o más temas de la lista.</b> Podés escribir en el buscador para encontrarlos, y quitar cualquiera con la ✕ de su ficha. Con <b>un</b> tema tildado se dibuja una nube de puntos; con <b>dos o más</b>, una tabla comparada. El <b>país o zona</b> rige todo el registro, incluidas las noticias, el mapa de palabras y las redes.</p>
         <div class="modos">
           <button class="modo activo" data-modo="nivel">Nivel actual</button>
           <button class="modo" data-modo="1">Proyección 1 año</button>
@@ -1778,6 +1819,23 @@
     catch(error){ console.error('SIWA · falló el paso «'+nombre+'»:', error && (error.stack||error.message||error)); }
   }
 
+  // Explicacion armada con los propios metadatos del indicador.
+  function explicaDelDato(clave){
+    const i = metaInd(clave), conjunto = conjuntoDe(clave);
+    if(!i || !i.rotulo) return '';
+    const filas = filasDe(clave);
+    const meta = conjunto ? conjunto.procedencia : null;
+    const anios = filas.map(f=>f.anio).filter(Boolean);
+    return `<b>Qué muestra:</b> ${esc(i.rotulo.toLowerCase())}`
+      + (i.unidad ? `, en ${esc(i.unidad)}` : '')
+      + `. <b>${filas.length} de 33 Estados</b> con dato`
+      + (anios.length ? `, entre ${Math.min(...anios)} y ${Math.max(...anios)}` : '')
+      + `.<br><b>Quién lo produce:</b> ${esc(i.origen || (meta && meta.fuente.nombre) || 'sin declarar')}`
+      + (meta ? ` · calificación <b>${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</b>` : '')
+      + '.'
+      + (i.cautela ? `<span class="no-es"><b>Qué no es:</b> ${esc(i.cautela)}</span>` : '');
+  }
+
   function repintarAhora(){
     paso('estilo del mapa', ()=>{ if(capaPaises) capaPaises.setStyle(estiloPais); });
     // armarAmbito() va aca y no solo en sincronizar(): el padron de paises llega
@@ -1791,7 +1849,11 @@
       paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:''));
     const ex = document.getElementById('explica-capa');
     if(ex){
-      const base = EXPLICA[capaActiva] ? EXPLICA[capaActiva]() : '';
+      // Solo 7 de los 59 temas tenian explicacion escrita a mano: los otros 52
+      // dejaban el recuadro EN BLANCO. Cada indicador trae su propia unidad, su
+      // origen y su cautela, escritas al construir el colector: se arma con eso.
+      // Un tema sin explicar es un tema que el lector no puede usar.
+      const base = EXPLICA[capaActiva] ? EXPLICA[capaActiva]() : explicaDelDato(capaActiva);
       ex.innerHTML = (modo!=='nivel' && hayTendencia())
         ? `<b>Modo proyección, a ${anios()} año${anios()===1?'':'s'}.</b> El mapa muestra el valor al que llegaría `+
           `cada Estado si la serie de los últimos diez años siguiera la misma recta. El método es mínimos cuadrados `+
@@ -2055,32 +2117,98 @@
   // los productos de la Fundación, no por el registro.
   let cruce = [];
 
+  // El cuadro anterior era una lista desplegable de tres renglones para SESENTA
+  // temas: habia que recorrerlos por una ventanita de 77 pixeles, y encima el
+  // manejador de clic estorbaba en ese espacio. La direccion lo reporto asi: «no
+  // se ve todo y no se puede hacer click sobre el tema». Ahora es una lista de
+  // casillas, agrupada por eje, con buscador y con lo elegido a la vista.
   function armarSelectorCruce(){
-    const sel=document.getElementById('cruce'); if(!sel) return;
-    const opciones = MATERIAS().filter(m=>m.disponible());
-    if(sel.options.length !== opciones.length){
-      sel.innerHTML = opciones.map(m=>
-        `<option value="${m.clave}">${esc(m.eje)} · ${esc(m.rotulo)}</option>`).join('');
-      sel.addEventListener('change', ()=>{
-        cruce = [...sel.selectedOptions].map(o=>o.value);
+    const caja = document.getElementById('cruce-lista');
+    const buscador = document.getElementById('buscar-cruce');
+    const puestos = document.getElementById('cruce-elegidos');
+    if(!caja) return;
+
+    const disponibles = MATERIAS().filter(m => m.disponible());
+    const firma = disponibles.length + ':' + disponibles.map(m=>m.clave).join(',').length;
+
+    if(caja.dataset.firma !== firma){
+      caja.dataset.firma = firma;
+      let html = '';
+      ORDEN_EJES.forEach(eje => {
+        const dele = disponibles.filter(m => m.eje === eje);
+        if(!dele.length) return;
+        html += `<div class="eje-titulo">${esc(eje)}</div>`;
+        html += dele.map(m => {
+          const clave = claveDeCapa(m.clave) || m.clave;
+          return `<label data-clave="${clave}" data-busca="${esc((m.eje+' '+m.rotulo).toLowerCase())}">
+            <input type="checkbox" value="${clave}"><span>${esc(m.rotulo)}</span></label>`;
+        }).join('');
+      });
+      caja.innerHTML = html;
+
+      // Un clic en cualquier parte del renglon agrega o quita. Sin teclas.
+      caja.addEventListener('change', ev => {
+        const cas = ev.target;
+        if(!cas || cas.type !== 'checkbox') return;
+        cruce = cas.checked
+          ? cruce.concat([cas.value]).filter((v,i,a)=>a.indexOf(v)===i)
+          : cruce.filter(v => v !== cas.value);
         repintar();
       });
-      // Pedirle Ctrl a alguien que no lo sabe es pedirle que no lo use. Un clic
-      // agrega o quita, como una lista de tildes.
-      sel.addEventListener('mousedown', ev=>{
-        const o = ev.target;
-        if(!o || o.tagName !== 'OPTION') return;
-        ev.preventDefault();
-        o.selected = !o.selected;
-        sel.dispatchEvent(new Event('change'));
-        sel.focus();
+
+      if(buscador) buscador.addEventListener('input', () => {
+        const q = buscador.value.trim().toLowerCase();
+        let visibles = 0;
+        caja.querySelectorAll('label').forEach(l => {
+          const entra = !q || (l.dataset.busca || '').includes(q);
+          l.style.display = entra ? '' : 'none';
+          if(entra) visibles++;
+        });
+        // Un encabezado de eje sin temas visibles no tiene por que quedar.
+        caja.querySelectorAll('.eje-titulo').forEach(t => {
+          let hay = false, n = t.nextElementSibling;
+          while(n && !n.classList.contains('eje-titulo')){
+            if(n.tagName === 'LABEL' && n.style.display !== 'none') hay = true;
+            n = n.nextElementSibling;
+          }
+          t.style.display = hay ? '' : 'none';
+        });
+        const vacio = caja.querySelector('.nada');
+        if(!visibles && !vacio){
+          const aviso = document.createElement('div');
+          aviso.className = 'nada';
+          aviso.textContent = 'Ningún tema coincide con esa búsqueda.';
+          caja.appendChild(aviso);
+        } else if(visibles && vacio){ vacio.remove(); }
       });
-      const limpiar=document.getElementById('limpiar-cruce');
-      if(limpiar) limpiar.addEventListener('click', ()=>{
-        cruce=[]; [...sel.options].forEach(o=>o.selected=false); repintar();
-      });
+
+      const limpiar = document.getElementById('limpiar-cruce');
+      if(limpiar) limpiar.addEventListener('click', () => { cruce = []; repintar(); });
     }
-    [...sel.options].forEach(o=>o.selected = cruce.includes(o.value));
+
+    // Estado: casillas, resaltado del renglon y fichas de lo elegido.
+    caja.querySelectorAll('label').forEach(l => {
+      const puesto = cruce.includes(l.dataset.clave);
+      l.classList.toggle('puesto', puesto);
+      const cas = l.querySelector('input');
+      if(cas) cas.checked = puesto;
+    });
+
+    if(puestos){
+      const elegidos = cruce.filter(c => c !== capaActiva);
+      puestos.innerHTML = elegidos.length
+        ? elegidos.map(c => {
+            const m = metaInd(c);
+            return `<button class="quita" data-quita="${c}" title="Quitar del cruce">
+              <b>${esc(m.rotulo || c)}</b><span>×</span></button>`;
+          }).join('')
+        : '<span class="ninguno">Ningún tema cruzado todavía. Tildá uno o más de la lista.</span>';
+      puestos.querySelectorAll('[data-quita]').forEach(b =>
+        b.addEventListener('click', () => {
+          cruce = cruce.filter(v => v !== b.dataset.quita);
+          repintar();
+        }));
+    }
   }
 
   // Tabla comparada: cada indicador en su propia escala, expresado como el
