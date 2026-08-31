@@ -365,6 +365,13 @@
   .badge.fuerte{background:rgba(63,167,150,.20);color:#6fe0c9;}
   .badge.medio{background:rgba(251,101,0,.18);color:#ffb27a;}
   .badge.solo{background:rgba(194,59,34,.18);color:#ff9c86;}
+  .origenes-nube{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 8px;}
+  .fuente-nube{
+    background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:999px;
+    padding:7px 15px;font-family:inherit;font-size:11.5px;color:#9fb0c4;cursor:pointer;
+  }
+  .fuente-nube:hover{color:#fff;background:rgba(255,255,255,.07);}
+  .fuente-nube.activo{background:rgba(251,101,0,.16);border-color:var(--orange);color:#fff;font-weight:700;}
   .nube{display:flex;flex-wrap:wrap;gap:7px;align-items:baseline;padding:16px 0 6px;}
   .term{
     display:inline-flex;align-items:baseline;gap:6px;border:1px solid var(--line);
@@ -638,7 +645,7 @@
     <a href="#libertades">Libertades</a>
     <a href="#soborno">Soborno declarado</a>
     <a href="#desinformacion">Desinformación</a>
-    <a href="#palabras">Mapa de palabras</a>
+    <a href="#palabras">Nube de conceptos</a>
     <a href="#redes">Circulación en redes</a>
     <a href="#mensajeria">Canales de mensajería</a>
     <div class="grupo">Desarrollo</div>
@@ -1192,7 +1199,7 @@
     </section>
 
     <section class="domain" id="palabras" data-nivel="2">
-      <div class="domain-head"><h3>Mapa de palabras</h3><span class="tag" id="tag-palabras">—</span></div>
+      <div class="domain-head"><h3>Nube de conceptos</h3><span class="tag" id="tag-palabras">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Qué términos circulan ahora mismo, no qué está ocurriendo.</b>
            Es el recuento de las palabras que aparecen en los títulos recolectados en la
@@ -1201,9 +1208,12 @@
            repetición. Un término ausente puede significar que el asunto no circula —o que
            ningún canal del padrón lo cubre.</p>
       </div>
-      <div class="filtros-cobertura">
-        <span class="nota-filtro" id="nota-palabras">El ámbito se elige arriba, en el mapa de situación.</span>
+      <div class="origenes-nube" role="group" aria-label="Origen de los conceptos">
+        <button class="fuente-nube activo" data-origen="prensa">Prensa</button>
+        <button class="fuente-nube" data-origen="redes">Redes sociales</button>
+        <button class="fuente-nube" data-origen="mensajeria">Canales de mensajería</button>
       </div>
+      <p class="nota-filtro" id="nota-palabras">El ámbito se elige arriba, en el mapa de situación.</p>
       <div class="nube" id="nube-palabras"></div>
     </section>
 
@@ -1219,9 +1229,6 @@
            puede apoyarse solo en esto.</p>
       </div>
       <div class="procedencia" id="proc-redes">Cargando el registro…</div>
-      <h4 class="sub-seccion">Nube de conceptos</h4>
-      <p class="nota-filtro" id="nota-nube">—</p>
-      <div class="nube" id="nube-redes"></div>
       <h4 class="sub-seccion">Circulación por Estado</h4>
       <div class="grid-cards" id="tarj-redes"></div>
       <div id="vac-redes"></div>
@@ -1249,9 +1256,6 @@
            publican.</p>
       </div>
       <div class="procedencia" id="proc-mensajeria">Cargando el registro…</div>
-      <h4 class="sub-seccion">Nube de conceptos</h4>
-      <p class="nota-filtro" id="nota-mensajeria">—</p>
-      <div class="nube" id="nube-mensajeria"></div>
       <h4 class="sub-seccion">Canales del padrón</h4>
       <div class="cruce" id="lista-mensajeria"></div>
       <div id="vac-mensajeria"></div>
@@ -1505,10 +1509,13 @@
     return r ? r.indicadores[clave] : null;
   };
 
-  function capaBanco(clave, cortes, divergente){
+  const COLOR_CERO = 'rgba(125,144,168,.30)';   // ni naranja ni verde: sin casos
+
+  function capaBanco(clave, escala, divergente){
     const meta = () => metaInd(clave);
+    const cortes = escala.cortes, ceroAparte = escala.ceroAparte;
     return {
-      materia: clave, divergente, leyenda: cortes,
+      materia: clave, divergente, leyenda: cortes, ceroAparte,
       get unidad(){ return meta().unidad || ''; },
       get cautela(){ return meta().cautela || ''; },
       conteo(){
@@ -1538,6 +1545,10 @@
       puntos(){ return []; },
       color(v){
         if(v===undefined||v===null) return MAG[0];
+        // El cero se pinta aparte y NO se lo llama bueno ni malo: en atentados
+        // cero es alivio, en satelites en orbita cero es ausencia de capacidad.
+        // El mapa muestra que no hay casos; el juicio no le corresponde.
+        if(ceroAparte && v === 0) return COLOR_CERO;
         const i = v < cortes[0] ? 0 : v < cortes[1] ? 1 : v < cortes[2] ? 2 : 3;
         return divergente ? DIV[i] : MAG[i];
       },
@@ -1621,13 +1632,44 @@
 
   // Cortes por indicador: los de escala -2,5 a 2,5 son divergentes y fijos; los
   // demás salen de los cuartiles de lo que hay hoy, para que la escala discrimine.
+  // Devuelve {cortes, ceroAparte}.
+  //
+  // EL CERO ES UNA CATEGORIA PROPIA cuando muchos Estados estan en cero.
+  // «Sin casos registrados» no es «pocos casos», y tratarlos igual arruina el
+  // mapa: en atentados terroristas 22 de 32 Estados estan en cero, los cuartiles
+  // daban [0, 0, 76] y TODO el continente se pintaba naranja —Uruguay, que no
+  // tuvo ningun caso, igual que Colombia, que tuvo 76—. Lo reporto la direccion.
+  //
+  // Con el cero aparte, los cortes se calculan SOLO sobre los Estados que si
+  // tienen casos, y ahi la escala vuelve a discriminar.
   function cortesDe(indicador){
-    if(esEscalaEstimacion(indicador)) return [-1, -0.5, 0.25];
-    const vals = filasDe(indicador.clave).map(x=>x.valor).sort((a,b)=>a-b);
-    if(!vals.length) return [1,2,3];
-    const q = f => vals[Math.min(vals.length-1, Math.floor(vals.length*f))];
-    const c = [q(.25), q(.5), q(.75)].map(v=>Math.round(v*100)/100);
-    return (c[0]===c[1]||c[1]===c[2]) ? [vals[0], vals[Math.floor(vals.length/2)], vals[vals.length-1]] : c;
+    if(esEscalaEstimacion(indicador)) return {cortes:[-1, -0.5, 0.25], ceroAparte:false};
+    const todos = filasDe(indicador.clave).map(x=>x.valor).sort((a,b)=>a-b);
+    if(!todos.length) return {cortes:[1,2,3], ceroAparte:false};
+
+    const ceros = todos.filter(v => v === 0).length;
+    const ceroAparte = ceros >= Math.max(3, Math.round(todos.length * 0.15))
+                       && todos[todos.length-1] > 0;
+    const base = ceroAparte ? todos.filter(v => v > 0) : todos;
+    if(base.length < 4) return {cortes:[base[0], base[Math.floor(base.length/2)],
+                                        base[base.length-1]], ceroAparte};
+
+    const q = f => base[Math.min(base.length-1, Math.floor(base.length*f))];
+    let c = [q(.25), q(.5), q(.75)].map(v => Math.round(v*100)/100);
+    if(c[0] === c[1] || c[1] === c[2]){
+      // Cuando el reparto es muy desparejo, se corta por VALORES DISTINTOS y no
+      // por cantidad de Estados: asi la escala separa magnitudes, que es lo que
+      // el lector mira, en vez de amontonar a todos en el mismo balde.
+      const unicos = [...new Set(base)].sort((a,b)=>a-b);
+      if(unicos.length >= 4){
+        c = [unicos[Math.floor(unicos.length*.25)],
+             unicos[Math.floor(unicos.length*.5)],
+             unicos[Math.floor(unicos.length*.75)]].map(v=>Math.round(v*100)/100);
+      } else {
+        c = [base[0], base[Math.floor(base.length/2)], base[base.length-1]];
+      }
+    }
+    return {cortes:c, ceroAparte};
   }
 
   const claveDeCapa = m => Object.keys(capas()).find(k => capas()[k].materia === m);
@@ -1878,10 +1920,16 @@
     const c=capa.leyenda, paleta = capa.divergente ? DIV : MAG;
     const rot = capa.divergente
       ? [`Peor que ${c[0]}`, `${c[0]} a ${c[1]}`, `${c[1]} a ${c[2]}`, `Mejor que ${c[2]}`]
-      : [`Menos de ${miles(c[0])}`, `${miles(c[0])} a ${miles(c[1])}`, `${miles(c[1])} a ${miles(c[2])}`, `${miles(c[2])} o más`];
+      : [`Hasta ${miles(c[0])}`, `${miles(c[0])} a ${miles(c[1])}`, `${miles(c[1])} a ${miles(c[2])}`, `${miles(c[2])} o más`];
     const cajaLeyenda = document.getElementById('leyenda');
     if(cajaLeyenda) cajaLeyenda.innerHTML =
+      (capa.ceroAparte
+        ? `<span><i style="background:${COLOR_CERO}"></i>En cero — ningún caso registrado</span>`
+        : '') +
       rot.map((t,i)=>`<span><i style="background:${paleta[i]}"></i>${t}</span>`).join('')+
+      (capa.ceroAparte
+        ? `<span class="sin-puntos">Los tramos de color se calculan solo entre los Estados que sí registran casos: si no, el cero se llevaría medio mapa.</span>`
+        : '') +
       `<span class="sin-puntos">${capa.rotuloPunto}</span>`;
   }
 
@@ -2135,6 +2183,9 @@
       g.style.display = hay ? '' : 'none';
     });
   }
+
+  document.querySelectorAll('.fuente-nube').forEach(b =>
+    b.addEventListener('click', ()=>{ origenNube = b.dataset.origen; palabrasVista(); }));
 
   (function(){
     const sel = document.getElementById('nivel-lectura');
@@ -2882,88 +2933,108 @@
       : `<div class="card"><h4>Sin asuntos en este ámbito</h4><div class="sub">Ningún asunto de la ventana menciona ${ambitoCobertura==='pais'?esc(paisNombre):'ese bloque'}. La atribución es por diccionario de gentilicios: puede faltar.</div></div>`;
   }
 
+  // Una sola nube para los tres corpus. Antes habia TRES secciones repitiendo el
+  // mismo instrumento sobre distinto material —la direccion lo reporto como «hay
+  // dos nubes de conceptos»—: es el mismo recuento de terminos y lo unico que
+  // cambia es de donde salen. Ahora el origen se elige.
+  let origenNube = 'prensa';
+
   function palabrasVista(){
-    const caja=document.getElementById('nube-palabras'); if(!caja) return;
-    const d=almacen.cobertura, mp=d && d.mapa_palabras;
-    const tag=document.getElementById('tag-palabras');
-    const nota=document.getElementById('nota-palabras');
-    if(!mp){
-      caja.innerHTML='<div class="vacio">El registro de cobertura todavía no se cargó.</div>';
+    const caja = document.getElementById('nube-palabras');
+    const nota = document.getElementById('nota-palabras');
+    const tag  = document.getElementById('tag-palabras');
+    if(!caja) return;
+
+    document.querySelectorAll('.fuente-nube').forEach(b=>
+      b.classList.toggle('activo', b.dataset.origen === origenNube));
+
+    const zona = bloqueActivo();
+    const ambito = paisFiltro ? 'pais' : (zona ? 'bloque' : 'todo');
+
+    // Cada origen entrega la misma forma: la lista, cuantos textos hay detras,
+    // como se llama esa unidad y con que advertencia se lee.
+    const ORIGENES = {
+      prensa(){
+        const d = almacen.cobertura, mp = d && d.mapa_palabras;
+        if(!mp) return null;
+        let lista, cuantos = null;
+        if(ambito === 'pais'){ const e = mp.paises[paisFiltro];
+          lista = e ? e.palabras : []; cuantos = e ? e.notas : 0; }
+        else if(ambito === 'bloque') lista = mp.bloques[zona] || [];
+        else lista = mp.region || [];
+        return {lista, cuantos, clave:'notas', unidad:'nota', unidades:'notas',
+                ventana: mp.ventana_horas,
+                minimo:'dos notas de dos portales distintos',
+                aviso:'Sale de los títulos que publica la prensa del padrón.'};
+      },
+      redes(){
+        const d = almacen.redes; if(!d) return null;
+        const nc = d.nube_conceptos || {};
+        let lista, cuantos = null;
+        if(ambito === 'pais'){ const e = (d.registros||[]).find(x=>x.iso===paisFiltro);
+          lista = e ? e.palabras : []; cuantos = e ? e.publicaciones : 0; }
+        else if(ambito === 'bloque'){ lista = (nc.bloques||{})[zona] || [];
+          cuantos = (nc.publicaciones_por_bloque||{})[zona] ?? null; }
+        else { lista = nc.region || []; cuantos = nc.publicaciones_region ?? null; }
+        return {lista, cuantos, clave:'publicaciones', unidad:'publicación',
+                unidades:'publicaciones', ventana: d.resumen.ventana_horas,
+                minimo:'dos publicaciones de dos instancias distintas',
+                aviso:'Sale de una red social abierta, con base de usuarios pequeña y no representativa de la región.'};
+      },
+      mensajeria(){
+        const d = almacen.telegram; if(!d) return null;
+        const nc = d.nube_conceptos || {};
+        let lista, cuantos = null;
+        if(ambito === 'pais'){ const e = (d.estados||[]).find(x=>x.iso===paisFiltro);
+          lista = e ? e.palabras : []; cuantos = e ? e.mensajes : 0; }
+        else if(ambito === 'bloque'){ lista = (nc.bloques||{})[zona] || [];
+          cuantos = (nc.mensajes_por_bloque||{})[zona] ?? null; }
+        else { lista = nc.region || []; cuantos = nc.mensajes_region ?? null; }
+        return {lista, cuantos, clave:'mensajes', unidad:'mensaje', unidades:'mensajes',
+                ventana: d.resumen.ventana_horas,
+                minimo:'dos mensajes de dos canales distintos',
+                aviso:'Sale de canales públicos de mensajería, varios de ellos de medios que ya están en la prensa: no corrobora nada.'};
+      },
+    };
+
+    const o = ORIGENES[origenNube] ? ORIGENES[origenNube]() : null;
+    if(!o){
+      caja.innerHTML = '<div class="vacio">Ese registro todavía no se cargó.</div>';
+      if(tag) tag.textContent = '—';
       return;
     }
-    // El ámbito es el mismo que el de la cobertura: no se duplica el control.
-    const bloqueDelPais = bloqueActivo();
-    let lista, donde, notas=null;
-    if(ambitoCobertura==='pais' && paisFiltro && mp.paises[paisFiltro]){
-      lista = mp.paises[paisFiltro].palabras; notas = mp.paises[paisFiltro].notas;
-      donde = paisNombre;
-    } else if(ambitoCobertura==='pais' && paisFiltro){
-      lista = []; donde = paisNombre;
-    } else if(ambitoCobertura==='bloque' && bloqueDelPais){
-      lista = mp.bloques[bloqueDelPais] || []; donde = 'el bloque '+bloqueDelPais;
-    } else {
-      lista = mp.region; donde = 'toda la región';
-    }
-    if(tag) tag.textContent = `${lista.length} término${lista.length===1?'':'s'} · ventana de ${mp.ventana_horas} h`;
-    if(nota) nota.textContent = notas!==null
-      ? `${notas} nota${notas===1?'':'s'} atribuidas a ${donde} en la ventana. El ámbito se elige arriba, en el mapa de situación.`
-      : `Ámbito: ${donde}. Se elige arriba, en el mapa de situación.`;
+
+    const donde = ambito === 'pais' ? paisNombre
+                : ambito === 'bloque' ? ('el bloque ' + zona) : 'toda la región';
+    const lista = o.lista || [];
+    if(tag) tag.textContent = `${lista.length} concepto${lista.length===1?'':'s'} · ventana de ${o.ventana} h`;
+    if(nota) nota.innerHTML =
+      (o.cuantos !== null && o.cuantos !== undefined
+        ? `<b>${miles(o.cuantos)}</b> ${o.cuantos===1?o.unidad:o.unidades} sobre <b>${esc(donde)}</b>. `
+        : `Ámbito: <b>${esc(donde)}</b>. `)
+      + `${esc(o.aviso)} Para figurar, un concepto tiene que aparecer en ${esc(o.minimo)}. `
+      + `El ámbito se elige arriba, en el mapa de situación.`;
 
     if(!lista.length){
-      caja.innerHTML = `<div class="vacio"><b>Ningún término de ${esc(donde)} llega a dos portales distintos en esta ventana.</b><br>
-        No es un error: es el resultado. Con ${mp.ventana_horas} horas de recolección, la mayoría de los
-        Estados del padrón no acumula cobertura suficiente para que una palabra se repita en dos
-        portales. Se declara el vacío en lugar de mostrar términos de un origen único.</div>`;
+      caja.innerHTML = `<div class="vacio"><b>Ningún concepto de ${esc(donde)} llega al mínimo en esta ventana.</b><br>
+        No es un error: es el resultado. Se declara el vacío en lugar de mostrar términos de un solo
+        origen, que serían la línea de quien publica y no lo que circula.</div>`;
       return;
     }
-    const tope = lista[0].notas;
+    const tope = lista[0][o.clave] || 1;
     caja.innerHTML = lista.map(t=>{
-      const q = t.notas/tope;
+      const n = t[o.clave] || 0, q = n/tope;
       const cl = q>=.6 ? 'alta' : q>=.3 ? 'media' : '';
-      const tam = (12 + q*7).toFixed(1);
-      return `<span class="term ${cl}" style="font-size:${tam}px"
-        title="${t.notas} nota${t.notas===1?'':'s'} en ${t.portales} portales distintos"><b>${esc(t.palabra)}</b>
-        <span class="n">${t.notas}·${t.portales}p</span></span>`;
+      const segundo = t.portales ?? t.instancias ?? t.canales;
+      return `<span class="term ${cl}" style="font-size:${(12+q*8).toFixed(1)}px"
+        title="${n} ${n===1?o.unidad:o.unidades}${segundo?` en ${segundo} orígenes distintos`:''}"><b>${esc(t.palabra)}</b>
+        <span class="n">${n}</span></span>`;
     }).join('');
   }
 
-  function nubeRedes(){
-    const caja=document.getElementById('nube-redes'); if(!caja) return;
-    const d=almacen.redes, nc=d && d.nube_conceptos;
-    const nota=document.getElementById('nota-nube');
-    if(!nc){ caja.innerHTML=''; return; }
-    const bloqueDelPais = bloqueActivo();
-    // El ámbito es el mismo de la cobertura: región, bloque o país.
-    let lista, donde, pubs;
-    if(ambitoCobertura==='pais' && paisFiltro){
-      const r=(d.registros||[]).find(x=>x.iso===paisFiltro);
-      lista = r ? r.palabras : []; donde = paisNombre; pubs = r ? r.publicaciones : 0;
-    } else if(ambitoCobertura==='bloque' && bloqueDelPais){
-      lista = nc.bloques[bloqueDelPais] || []; donde = 'el bloque '+bloqueDelPais;
-      pubs = nc.publicaciones_por_bloque[bloqueDelPais] || 0;
-    } else {
-      lista = nc.region; donde = 'toda la región'; pubs = nc.publicaciones_region;
-    }
-    if(nota) nota.textContent =
-      `${lista.length} concepto${lista.length===1?'':'s'} sobre ${miles(pubs)} ${pubs===1?'publicación':'publicaciones'} de personas en ${donde}. `
-      + `Se descartaron ${miles(d.resumen.publicaciones_automatizadas)} publicaciones de cuentas automatizadas en toda la región: reenvían titulares de prensa, que este registro ya recoge por su propio canal.`;
-    if(!lista.length){
-      caja.innerHTML = `<div class="vacio"><b>Ningún concepto de ${esc(donde)} llega a dos instancias distintas.</b><br>
-        No es un error: es el resultado. Se declara el vacío en lugar de mostrar términos de origen único.</div>`;
-      return;
-    }
-    const tope=lista[0].publicaciones;
-    caja.innerHTML = lista.map(t=>{
-      const q=t.publicaciones/tope;
-      const cl = q>=.6?'alta' : q>=.3?'media' : '';
-      return `<span class="term ${cl}" style="font-size:${(12+q*8).toFixed(1)}px"
-        title="${t.publicaciones} publicaciones en ${t.instancias} instancias distintas"><b>${esc(t.palabra)}</b>
-        <span class="n">${t.publicaciones}</span></span>`;
-    }).join('');
-  }
 
   function redesVista(){
-    nubeRedes();
+   
     const caja=document.getElementById('tarj-redes'); if(!caja) return;
     const d=almacen.redes; if(!d) return;
     const tag=document.getElementById('tag-redes');
