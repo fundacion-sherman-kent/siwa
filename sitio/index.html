@@ -3081,20 +3081,26 @@
 
   // ---- Informe ------------------------------------------------------------
   function filasInforme(){
-    const filas=[], f=almacen.banco, d=almacen.desplazamiento, o=almacen.oficiales;
-    if(f){
+    const filas=[], d=almacen.desplazamiento, o=almacen.oficiales;
+    // Recorre TODAS las fuentes de indicadores. Antes solo miraba el Banco
+    // Mundial, de modo que el informe descargable y la planilla dejaban afuera
+    // 43 de los 65 indicadores —Naciones Unidas, V-Dem, terrorismo, UCDP y
+    // Bertelsmann—. Es lo que la gente se lleva: no puede estar incompleto.
+    fuentesInd().forEach(f=>{
       const info=f.indicadores||[];
-      (paisFiltro ? f.registros.filter(r=>r.iso===paisFiltro) : f.registros).forEach(r=>{
+      (paisFiltro ? (f.registros||[]).filter(r=>r.iso===paisFiltro) : (f.registros||[])).forEach(r=>{
         info.forEach(i=>{
           const x=r.indicadores[i.clave]; if(!x) return;
           if(!paisFiltro && i.clave!=='homicidios') return;
           filas.push({materia:i.eje, indicador:i.rotulo+(paisFiltro?'':' — '+r.pais), valor:x.valor,
+            unidad:i.unidad||'', anio:x.anio, clave:i.clave,
+            serie:Array.isArray(x.serie)?x.serie:null,
             detalle:(x.variacion_pct!==null&&x.variacion_pct!==undefined)?`${x.variacion_pct>0?'+':''}${x.variacion_pct} % contra ${x.anio_anterior}`:'',
-            fuente:i.origen, calif:f.procedencia.calificacion, momento:f.procedencia.obtenido_en,
-            referencia:'dato de '+x.anio});
+            fuente:i.origen||f.procedencia.fuente.nombre, calif:f.procedencia.calificacion,
+            momento:f.procedencia.obtenido_en, referencia:'dato de '+x.anio});
         });
       });
-    }
+    });
     if(d){
       const r = paisFiltro ? d.registros.find(x=>x.iso===paisFiltro) : null;
       const suma = c => paisFiltro ? (r?r[c]:0) : d.registros.reduce((a,x)=>a+x[c],0);
@@ -3127,11 +3133,15 @@
     if(!filas.length){ caja.innerHTML='<p class="sin-dato">Todavía no hay materias con dato para informar.</p>'; return; }
 
     let html = `<table class="tabla-informe"><thead><tr><th>Materia</th><th>Indicador</th>
-      <th class="num">Valor</th><th>Referencia</th><th>Fuente</th><th>Calif.</th></tr></thead><tbody>`+
-      filas.map(f=>`<tr><td>${esc(f.materia)}</td>
+      <th class="num">Valor</th><th>Unidad</th><th>Referencia</th><th>Fuente</th><th>Calif.</th></tr></thead><tbody>`+
+      filas.map(f=>{
+        const m = magnitud(f.valor, f.unidad);
+        return `<tr><td>${esc(f.materia)}</td>
         <td>${esc(f.indicador)}${f.detalle?'<br><span class="menor">'+esc(f.detalle)+'</span>':''}</td>
-        <td class="num mono">${miles(f.valor)}</td><td>${esc(f.referencia)}</td>
-        <td>${esc(f.fuente)}</td><td class="mono">${f.calif.fiabilidad}-${f.calif.credibilidad}</td></tr>`).join('')+
+        <td class="num mono">${m.texto}</td><td class="menor">${esc(m.unidad||f.unidad||'')}</td>
+        <td>${esc(f.referencia)}</td>
+        <td>${esc(f.fuente)}</td><td class="mono">${f.calif.fiabilidad}-${f.calif.credibilidad}</td></tr>`;
+      }).join('')+
       `</tbody></table>`;
 
     // Las series se grafican de TODAS las fuentes de indicadores, no solo del
@@ -3231,18 +3241,34 @@
   }
 
   function csv(){
-    const sep=';', lineas=[['materia','indicador','valor','referencia','fuente','fiabilidad','credibilidad','obtenido_en'].join(sep)];
-    filasInforme().forEach(f=>lineas.push([f.materia,f.indicador,f.valor,f.referencia,f.fuente,
-      f.calif.fiabilidad,f.calif.credibilidad,f.momento].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(sep)));
+    // La planilla lleva UNIDAD y AÑO: un valor como 20947723265 sin unidad no se
+    // puede usar. Y lleva las series completas, que es lo que necesita quien
+    // quiere rehacer una cuenta en vez de creerle a la pantalla.
+    const sep=';', esc2 = v => `"${String(v ?? '').replace(/"/g,'""')}"`;
+    const filas = filasInforme();
+    const lineas=[['materia','indicador','valor','unidad','anio','variacion','fuente',
+                   'fiabilidad','credibilidad','obtenido_en'].join(sep)];
+    filas.forEach(f=>lineas.push([f.materia,f.indicador,f.valor,f.unidad,f.anio,f.detalle,
+      f.fuente,f.calif.fiabilidad,f.calif.credibilidad,f.momento].map(esc2).join(sep)));
+
+    const conSerie = filas.filter(f=>f.serie && f.serie.length>1);
+    if(conSerie.length){
+      lineas.push('', ['SERIES HISTORICAS'].join(sep));
+      lineas.push(['indicador','unidad','anio','valor'].join(sep));
+      conSerie.forEach(f=>f.serie.forEach(a=>
+        lineas.push([f.indicador,f.unidad,a.anio,a.valor].map(esc2).join(sep))));
+    }
     const serie=serieDelPais();
     if(serie){
-      lineas.push('', ['anio','expulsion','recepcion','desplazados_internos'].join(sep));
+      lineas.push('', ['DESPLAZAMIENTO FORZADO'].join(sep));
+      lineas.push(['anio','expulsion','recepcion','desplazados_internos'].join(sep));
       serie.serie.forEach(a=>lineas.push([a.anio,a.origen_refugiados+a.origen_solicitantes,
         a.asilo_refugiados+a.asilo_solicitantes,a.desplazados_internos].join(sep)));
     }
     const o=almacen.oficiales, ficha=paisFiltro&&o?o.registros.find(r=>r.iso===paisFiltro):null;
     if(ficha){
-      lineas.push('', ['materia_oficial','conjuntos','ejemplo'].join(sep));
+      lineas.push('', ['FUENTES OFICIALES DEL ESTADO'].join(sep));
+      lineas.push(['materia_oficial','conjuntos','ejemplo'].join(sep));
       ficha.materias.forEach(m=>lineas.push([m.materia,m.cantidad,
         (m.ejemplos[0]?.titulo||'')].map(v=>`"${String(v).replace(/"/g,'""')}"`).join(sep)));
     }
