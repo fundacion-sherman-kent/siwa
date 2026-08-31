@@ -62,7 +62,13 @@
   .hero-meta span{font-size:11px;color:#9fb2c8;text-transform:uppercase;letter-spacing:.5px;}
 
   .shell{max-width:1180px;margin:0 auto;padding:36px 28px 80px;display:grid;grid-template-columns:210px 1fr;gap:32px;}
-  nav.rail{position:sticky;top:120px;align-self:start;}
+  nav.rail{
+    position:sticky;top:118px;align-self:start;
+    max-height:calc(100vh - 132px);overflow-y:auto;padding-right:6px;
+    scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.18) transparent;
+  }
+  nav.rail::-webkit-scrollbar{width:6px;}
+  nav.rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:3px;}
   nav.rail a{
     display:block;padding:9px 0;font-size:12.5px;color:#9fb2c8;text-decoration:none;
     border-left:2px solid transparent;padding-left:12px;transition:.15s;
@@ -170,6 +176,31 @@
     background:rgba(255,255,255,.03);border-left:2px solid var(--purple);border-radius:0 6px 6px 0;
   }
   .explica-capa b{color:#fff;}
+  .eje-solapa{
+    font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--grey-blue);
+    font-weight:700;align-self:center;margin:0 2px 0 8px;
+  }
+  .eje-solapa:first-child{margin-left:0;}
+  .criterio{
+    grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+    font-size:10.5px;color:#7d90a8;line-height:1.55;padding-top:4px;
+  }
+  .criterio b{color:#9fb2c8;}
+  .ver-todos{
+    background:none;border:1px solid var(--line);color:var(--orange);border-radius:20px;
+    font-family:'Inter',sans-serif;font-size:10.5px;font-weight:700;padding:5px 12px;cursor:pointer;
+  }
+  .ver-todos:hover{border-color:var(--orange);}
+  .filtros-cobertura{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px;}
+  .filtro{background:transparent;border:1px solid var(--line);color:#9fb2c8;
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:600;padding:6px 12px;
+    border-radius:20px;cursor:pointer;}
+  .filtro.activo{border-color:var(--purple);color:#fff;background:rgba(140,0,224,.20);}
+  .filtro:disabled{opacity:.4;cursor:not-allowed;}
+  .nota-filtro{font-size:10.5px;color:#7d90a8;margin-left:6px;}
+  .asunto .lugares{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px;}
+  .lugar{font-size:9.5px;text-transform:uppercase;letter-spacing:.4px;color:#ffb27a;
+    background:rgba(251,101,0,.14);border-radius:4px;padding:2px 7px;}
   .cruce{display:flex;flex-direction:column;gap:10px;}
   .asunto{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
   .asunto h4{margin:0 0 8px;font-size:13px;font-weight:700;color:#fff;line-height:1.45;}
@@ -342,14 +373,18 @@
   <nav class="rail">
     <a href="#mapa-seccion">Mapa de situación</a>
     <div class="grupo">Seguridad</div>
-    <a href="#violencia">Violencia organizada</a>
-    <div class="grupo">Gobernanza</div>
-    <a href="#contratacion">Contratación pública</a>
-    <a href="#integridad">Sanciones e integridad</a>
-    <a href="#institucional">Estabilidad institucional</a>
-    <div class="grupo">Inteligencia estratégica</div>
+    <a href="#violencia">Homicidios</a>
     <a href="#desplazamiento">Desplazamiento forzado</a>
     <a href="#contrabando">Contrabando</a>
+    <a href="#ciber">Ciberseguridad</a>
+    <div class="grupo">Gobernanza</div>
+    <a href="#institucional">Indicadores de gobernanza</a>
+    <a href="#contratacion">Contratación pública</a>
+    <a href="#desinformacion">Desinformación</a>
+    <div class="grupo">Desarrollo</div>
+    <a href="#urbano">Urbano</a>
+    <a href="#industrial">Industrial</a>
+    <a href="#materias">Materias primas</a>
     <div class="grupo">Fuentes</div>
     <a href="#oficiales">Padrón oficial</a>
     <div class="grupo">Verificación</div>
@@ -388,64 +423,16 @@
 
     <div class="eje">
       <h2>Eje · Seguridad</h2>
-      <p>Violencia, control territorial y capacidad del Estado para sostener el orden
-         público: quién ejerce el poder efectivo sobre un territorio y con qué medios.</p>
+      <p>Violencia, control territorial y capacidad del Estado para sostener el orden público, más los movimientos de población y de mercancías que ese control produce o no logra impedir.</p>
     </div>
 
     <section class="domain" id="violencia">
-      <div class="domain-head"><h3>Violencia organizada — homicidios</h3><span class="tag" id="tag-violencia">—</span></div>
+      <div class="domain-head"><h3>Homicidios</h3><span class="tag" id="tag-violencia">—</span></div>
       <div class="procedencia" id="proc-violencia">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-violencia"></div>
       <div id="serie-violencia"></div>
       <div id="vac-violencia"></div>
     </section>
-
-    <div class="eje">
-      <h2>Eje · Gobernanza</h2>
-      <p>Integridad de la administración pública, calidad de las reglas y exposición de los
-         actores que contratan con el Estado o operan bajo su jurisdicción.</p>
-    </div>
-
-    <section class="domain" id="contratacion">
-      <div class="domain-head"><h3>Integridad de la contratación pública</h3><span class="tag">Colector pendiente</span></div>
-      <div class="grid-cards">
-        <div class="placeholder">
-          <div>
-            <div class="ptitle">Adjudicación directa, oferente único y concentración de proveedores</div>
-            <p>Fuente prevista: los portales de compras abiertas que publican en estándar
-               común. Es economía en negro documentada por el propio Estado, y de las pocas
-               materias que baja hasta el organismo comprador.</p>
-          </div>
-          <span class="badge pending">Sin dato</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="domain" id="integridad">
-      <div class="domain-head"><h3>Sanciones e integridad de actores</h3><span class="tag">Colector pendiente</span></div>
-      <div class="grid-cards">
-        <div class="placeholder">
-          <div>
-            <div class="ptitle">Personas y entidades designadas, y su vínculo con cada jurisdicción</div>
-            <p>Fuentes previstas: OpenSanctions y la lista SDN de la OFAC. Quién está
-               designado, por qué motivo y desde cuándo.</p>
-          </div>
-          <span class="badge pending">Sin dato</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="domain" id="institucional">
-      <div class="domain-head"><h3>Gobernanza — indicadores comparables</h3><span class="tag" id="tag-institucional">—</span></div>
-      <div class="procedencia" id="proc-institucional">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-institucional"></div>
-    </section>
-
-    <div class="eje">
-      <h2>Eje · Inteligencia estratégica</h2>
-      <p>Materias que cruzan a las dos anteriores y solo se leen en el mediano plazo: cómo se
-         mueve la población y cómo se mueve el dinero por fuera del registro.</p>
-    </div>
 
     <section class="domain" id="desplazamiento">
       <div class="domain-head"><h3>Desplazamiento forzado</h3><span class="tag" id="tag-desplazamiento">—</span></div>
@@ -459,16 +446,75 @@
       <div class="domain-head"><h3>Contrabando y subfacturación</h3><span class="tag">Colector pendiente</span></div>
       <div class="grid-cards">
         <div class="placeholder">
-          <div>
-            <div class="ptitle">Brecha espejo del comercio declarado</div>
-            <p>Fuente prevista: UN Comtrade. Consiste en comparar lo que un Estado declara
-               exportar a otro contra lo que ese otro declara haber importado: la diferencia
-               es contrabando, subfacturación o triangulación. Método clásico de aduanas, sin
-               publicación viva para la región.</p>
-          </div>
+          <div><div class="ptitle">Brecha espejo del comercio declarado</div><p>Fuente prevista: UN Comtrade. Comparar lo que un Estado declara exportar a otro contra lo que ese otro declara haber importado. La diferencia es contrabando, subfacturación o triangulación. Requiere tramitar la clave gratuita.</p></div>
           <span class="badge pending">Sin dato</span>
         </div>
       </div>
+    </section>
+
+    <section class="domain" id="ciber">
+      <div class="domain-head"><h3>Ciberseguridad</h3><span class="tag">Colector pendiente</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div><div class="ptitle">Infraestructura comprometida y cortes de conectividad</div><p>Fuentes previstas: abuse.ch —URLhaus y Feodotracker, sin clave— para servidores comprometidos con atribución de país, e IODA del Georgia Tech para cortes de internet. Ninguna verificada todavía.</p></div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="eje">
+      <h2>Eje · Gobernanza</h2>
+      <p>Integridad de la administración pública, calidad de las reglas y salud del espacio informativo en que esas reglas se discuten.</p>
+    </div>
+
+    <section class="domain" id="institucional">
+      <div class="domain-head"><h3>Indicadores de gobernanza</h3><span class="tag" id="tag-institucional">—</span></div>
+      <div class="procedencia" id="proc-institucional">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-institucional"></div>
+      <div id="vac-institucional"></div>
+    </section>
+
+    <section class="domain" id="contratacion">
+      <div class="domain-head"><h3>Integridad de la contratación pública</h3><span class="tag">Colector pendiente</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div><div class="ptitle">Adjudicación directa, oferente único y concentración</div><p>Fuentes previstas: los portales de compras abiertas que publican en estándar común, empezando por Chile y Colombia, que están documentados. Es la materia con mejor desagregación del catálogo: baja hasta el organismo comprador.</p></div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="domain" id="desinformacion">
+      <div class="domain-head"><h3>Desinformación e infoxicación</h3><span class="tag" id="tag-desinformacion">—</span></div>
+      <div class="procedencia" id="proc-desinformacion">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-desinformacion"></div>
+      <div id="vac-desinformacion"></div>
+    </section>
+
+    <div class="eje">
+      <h2>Eje · Desarrollo</h2>
+      <p>Estructura material del territorio y de la economía, por sector. No es análisis económico: es la base sobre la que se leen las otras dos —dónde vive la gente, de qué vive y qué exporta—.</p>
+    </div>
+
+    <section class="domain" id="urbano">
+      <div class="domain-head"><h3>Urbano</h3><span class="tag" id="tag-urbano">—</span></div>
+      <div class="procedencia" id="proc-urbano">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-urbano"></div>
+      <div id="vac-urbano"></div>
+    </section>
+
+    <section class="domain" id="industrial">
+      <div class="domain-head"><h3>Industrial</h3><span class="tag" id="tag-industrial">—</span></div>
+      <div class="procedencia" id="proc-industrial">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-industrial"></div>
+      <div id="vac-industrial"></div>
+    </section>
+
+    <section class="domain" id="materias">
+      <div class="domain-head"><h3>Materias primas</h3><span class="tag" id="tag-materias">—</span></div>
+      <div class="procedencia" id="proc-materias">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-materias"></div>
+      <div id="vac-materias"></div>
     </section>
 
     <div class="eje">
@@ -505,6 +551,12 @@
            Que diez portales cubran un asunto no prueba que haya ocurrido. Y veinte medios
            del mismo país repitiendo un cable son <b>un solo origen</b>, no veinte. Acá se
            cuentan orígenes independientes por idioma y por jurisdicción, no portales.</p>
+      </div>
+      <div class="filtros-cobertura">
+        <button class="filtro activo" data-ambito="todo">Toda la región</button>
+        <button class="filtro" data-ambito="bloque">Bloque del país elegido</button>
+        <button class="filtro" data-ambito="pais">Solo el país elegido</button>
+        <span class="nota-filtro" id="nota-cobertura"></span>
       </div>
       <div class="procedencia" id="proc-cobertura">Cargando el registro…</div>
       <div class="cruce" id="lista-cobertura"></div>
@@ -648,18 +700,26 @@
   // ---- Las materias del registro, en el orden de los tres ejes --------------
   // Las que no tienen colector figuran igual, apagadas: el mapa muestra la
   // arquitectura completa y dónde están los huecos.
-  const MATERIAS = [
-    {clave:'homicidios',    eje:'Seguridad',   rotulo:'Homicidios',                disponible:()=>!!almacen.banco},
-    {clave:'violencia',     eje:'Seguridad',   rotulo:'Violencia organizada · eventos', disponible:()=>false},
-    {clave:'ilicitas',      eje:'Seguridad',   rotulo:'Economías ilícitas',        disponible:()=>false},
-    {clave:'corrupcion',    eje:'Gobernanza',  rotulo:'Control de la corrupción',  disponible:()=>!!almacen.banco},
-    {clave:'estado_derecho',eje:'Gobernanza',  rotulo:'Estado de derecho',         disponible:()=>!!almacen.banco},
-    {clave:'estabilidad',   eje:'Gobernanza',  rotulo:'Estabilidad política',      disponible:()=>!!almacen.banco},
-    {clave:'contratacion',  eje:'Gobernanza',  rotulo:'Contratación pública',      disponible:()=>false},
-    {clave:'desplazamiento',eje:'Inteligencia',rotulo:'Desplazamiento forzado',    disponible:()=>!!almacen.desplazamiento},
-    {clave:'contrabando',   eje:'Inteligencia',rotulo:'Contrabando',               disponible:()=>false},
-    {clave:'oficiales',     eje:'Fuentes',     rotulo:'Padrón oficial',            disponible:()=>!!almacen.oficiales},
+  // Las materias del Banco Mundial salen del propio archivo de datos: agregar un
+  // indicador al colector lo hace aparecer acá sin tocar la página.
+  const ESTATICAS = [
+    {clave:'violencia_eventos', eje:'Seguridad',  rotulo:'Violencia organizada · eventos', disponible:()=>false},
+    {clave:'ilicitas',          eje:'Seguridad',  rotulo:'Economías ilícitas',   disponible:()=>false},
+    {clave:'desplazamiento',    eje:'Seguridad',  rotulo:'Desplazamiento forzado', disponible:()=>!!almacen.desplazamiento},
+    {clave:'contrabando',       eje:'Seguridad',  rotulo:'Contrabando',          disponible:()=>false},
+    {clave:'ciber',             eje:'Seguridad',  rotulo:'Ciberseguridad',       disponible:()=>false},
+    {clave:'contratacion',      eje:'Gobernanza', rotulo:'Contratación pública', disponible:()=>false},
+    {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false},
+    {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales},
   ];
+  const ORDEN_EJES = ['Seguridad','Gobernanza','Desarrollo','Fuentes'];
+
+  function MATERIAS(){
+    const delBanco = (almacen.banco && almacen.banco.indicadores || []).map(i=>({
+      clave:i.clave, eje:i.eje, rotulo:i.rotulo, disponible:()=>true}));
+    return delBanco.concat(ESTATICAS).sort((a,b)=>
+      ORDEN_EJES.indexOf(a.eje) - ORDEN_EJES.indexOf(b.eje));
+  }
 
 
 
@@ -687,6 +747,7 @@
         return m;
       },
       get subeEsPeor(){ return !!meta().mas_es_peor; },
+      get rotulo(){ return meta().rotulo || clave; },
       periodo(){
         const r=(almacen.banco?.registros||[]).find(x=>x.indicadores[clave]);
         const i=r&&r.indicadores[clave];
@@ -708,11 +769,7 @@
     };
   }
 
-  const CAPAS = {
-    homicidios:     capaBanco('homicidios',     [10, 20, 35], false),
-    corrupcion:     capaBanco('corrupcion',     [-1, -0.5, 0.25], true),
-    estado_derecho: capaBanco('estado_derecho', [-1, -0.5, 0.25], true),
-    estabilidad:    capaBanco('estabilidad',    [-1, -0.5, 0.25], true),
+  const ESTATICAS_CAPAS = {
     desplazamiento: {
       materia:'desplazamiento', unidad:'personas expulsadas', leyenda:[1000,50000,300000],
       color(v){ return v===undefined?MAG[0] : v<1000?MAG[0] : v<50000?MAG[1] : v<300000?MAG[2] : MAG[3]; },
@@ -750,11 +807,47 @@
       rotuloPunto:'Sin capa de puntos: es un índice de fuentes'
     }
   };
-  const claveDeCapa = m => Object.keys(CAPAS).find(k => CAPAS[k].materia === m);
+  function capas(){
+    const c = Object.assign({}, ESTATICAS_CAPAS);
+    ((almacen.banco && almacen.banco.indicadores) || []).forEach(i=>{
+      c[i.clave] = capaBanco(i.clave, cortesDe(i), esEscalaEstimacion(i));
+    });
+    return c;
+  }
 
-  const hayTendencia = () => typeof CAPAS[capaActiva].tendencia === 'function';
+  const esEscalaEstimacion = i => !!(i.unidad && i.unidad.indexOf('-2,5') >= 0);
+
+  // Cortes por indicador: los de escala -2,5 a 2,5 son divergentes y fijos; los
+  // demás salen de los cuartiles de lo que hay hoy, para que la escala discrimine.
+  function cortesDe(indicador){
+    if(esEscalaEstimacion(indicador)) return [-1, -0.5, 0.25];
+    const vals = ((almacen.banco && almacen.banco.registros) || [])
+      .map(r=>r.indicadores[indicador.clave]).filter(Boolean).map(x=>x.valor).sort((a,b)=>a-b);
+    if(!vals.length) return [1,2,3];
+    const q = f => vals[Math.min(vals.length-1, Math.floor(vals.length*f))];
+    const c = [q(.25), q(.5), q(.75)].map(v=>Math.round(v*100)/100);
+    return (c[0]===c[1]||c[1]===c[2]) ? [vals[0], vals[Math.floor(vals.length/2)], vals[vals.length-1]] : c;
+  }
+
+  const claveDeCapa = m => Object.keys(capas()).find(k => capas()[k].materia === m);
+
+  // El mapa se dibuja antes de que lleguen los indicadores. Hasta entonces la
+  // capa pedida no existe todavía: se usa la primera disponible, y si no hay
+  // ninguna, una capa vacía que no rompe nada y no inventa nada.
+  const CAPA_VACIA = {
+    materia:'—', unidad:'', cautela:'', leyenda:[0,1,2], rotuloPunto:'Sin datos cargados',
+    conteo:()=>({}), puntos:()=>[], color:()=>'#0E2135', detalle:()=>null
+  };
+  function capaActual(){
+    const c = capas();
+    if(c[capaActiva]) return c[capaActiva];
+    const primera = Object.keys(c)[0];
+    return primera ? c[primera] : CAPA_VACIA;
+  }
+
+  const hayTendencia = () => typeof capaActual().tendencia === 'function';
   const valores = () => (modo==='tendencia' && hayTendencia())
-    ? CAPAS[capaActiva].tendencia() : CAPAS[capaActiva].conteo();
+    ? capaActual().tendencia() : capaActual().conteo();
 
   // En modo tendencia la escala es divergente y depende de si subir es bueno o malo.
   function colorTendencia(v, subeEsPeor){
@@ -772,7 +865,7 @@
   }
 
   function estiloPais(rasgo){
-    const capa=CAPAS[capaActiva], iso=rasgo.properties.iso, sel = paisFiltro === iso;
+    const capa=capaActual(), iso=rasgo.properties.iso, sel = paisFiltro === iso;
     const v = valores()[iso];
     const relleno = (modo==='tendencia' && hayTendencia())
       ? colorTendencia(v, capa.subeEsPeor) : capa.color(v);
@@ -785,7 +878,7 @@
   const recorte = (t,n=110) => t && t.length>n ? esc(t.slice(0,n).trim())+'…' : esc(t||'');
 
   function ficha(iso, nombre, bloque){
-    const capa=CAPAS[capaActiva], nivel=capa.conteo()[iso];
+    const capa=capaActual(), nivel=capa.conteo()[iso];
     const tend = hayTendencia() ? capa.tendencia()[iso] : undefined;
     if(nivel===undefined && tend===undefined)
       return `<b>${esc(nombre)}</b>${esc(bloque)}<span class="nota">Sin dato en esta capa.</span>`;
@@ -805,7 +898,7 @@
   }
 
   function leyenda(){
-    const capa=CAPAS[capaActiva];
+    const capa=capaActual();
     if(modo==='tendencia' && hayTendencia()){
       const peor = capa.subeEsPeor ? 'Sube' : 'Baja', mejor = capa.subeEsPeor ? 'Baja' : 'Sube';
       document.getElementById('leyenda').innerHTML =
@@ -827,13 +920,20 @@
   }
 
   function solapas(){
-    const hay = MATERIAS.filter(m=>m.disponible()), faltan = MATERIAS.filter(m=>!m.disponible());
-    document.getElementById('temas').innerHTML = hay.map(m=>{
-      const clave = claveDeCapa(m.clave);
-      return `<button class="tema${clave===capaActiva?' activo':''}" data-capa="${clave}">${m.rotulo}</button>`;
-    }).join('');
+    const todas = MATERIAS(), hay = todas.filter(m=>m.disponible()), faltan = todas.filter(m=>!m.disponible());
+    let html = '';
+    ORDEN_EJES.forEach(eje=>{
+      const dele = hay.filter(m=>m.eje===eje);
+      if(!dele.length) return;
+      html += `<span class="eje-solapa">${eje}</span>` + dele.map(m=>{
+        const clave = claveDeCapa(m.clave) || m.clave;
+        return `<button class="tema${clave===capaActiva?' activo':''}" data-capa="${clave}">${esc(m.rotulo)}</button>`;
+      }).join('');
+    });
+    document.getElementById('temas').innerHTML = html;
     document.querySelectorAll('#temas .tema').forEach(b=>
       b.addEventListener('click',()=>{ capaActiva=b.dataset.capa; repintar(); }));
+
     const bt=document.querySelector('[data-modo="tendencia"]');
     if(bt){
       bt.disabled = !hayTendencia();
@@ -841,6 +941,7 @@
       if(!hayTendencia() && modo==='tendencia') modo='nivel';
     }
     document.querySelectorAll('.modo').forEach(b=>b.classList.toggle('activo', b.dataset.modo===modo));
+
     const pend=document.getElementById('pendientes');
     if(pend) pend.innerHTML = faltan.length
       ? `<b>${faltan.length} materias sin colector todavía:</b> ${faltan.map(m=>esc(m.rotulo)).join(' · ')}.`
@@ -852,7 +953,7 @@
   function puntos(){
     if(!mapa) return;
     if(capaPuntos) mapa.removeLayer(capaPuntos);
-    capaPuntos = L.layerGroup(CAPAS[capaActiva].puntos().map(p =>
+    capaPuntos = L.layerGroup(capaActual().puntos().map(p =>
       L.circleMarker([p.lat,p.lon],{radius:p.radio,color:'#FB6500',weight:1.1,fillColor:'#FB6500',fillOpacity:.35})
         .bindTooltip(p.ficha,{className:'ficha'}))).addTo(mapa);
   }
@@ -875,9 +976,12 @@
     const q = document.getElementById('quitar');
     if(q) q.addEventListener('click', ()=>{ paisFiltro=null; paisNombre=null; sincronizar(); repintar(); });
     seriesEnSeccion();
-    tarjetasBanco('homicidios','tag-violencia','tarj-violencia');
-    tarjetasBanco('corrupcion','tag-institucional','tarj-institucional');
-    tarjetasDesplazamiento(); informe();
+    tarjetasBanco('homicidios','violencia');
+    tarjetasBanco(['corrupcion','estado_derecho','estabilidad'],'institucional');
+    tarjetasBanco(['urbanizacion','asentamientos'],'urbano');
+    tarjetasBanco('industria','industrial');
+    tarjetasBanco(['minerales','rentas_naturales'],'materias');
+    tarjetasDesplazamiento(); desinformacion(); coberturaVista(); informe();
   }
   function seleccionar(iso, nombre){
     if(paisFiltro===iso){ paisFiltro=null; paisNombre=null; } else { paisFiltro=iso; paisNombre=nombre; }
@@ -950,24 +1054,57 @@
     }
   }
 
-  function tarjetasBanco(clave, destinoTag, destinoTarj){
+  const verTodos = {};
+  const TOPE = 6;
+
+  // Cuántos países se muestran y por qué. El criterio se escribe en pantalla:
+  // no son los primeros seis del alfabeto, son los seis valores extremos.
+  function tarjetasBanco(claves, destino){
     const d=almacen.banco; if(!d) return;
-    const meta=d.procedencia, info=(d.indicadores||[]).find(i=>i.clave===clave)||{};
-    const filas=d.registros.filter(r=>r.indicadores[clave]).map(r=>({pais:r.pais,iso:r.iso,...r.indicadores[clave]}));
-    const orden = info.mas_es_peor ? (a,b)=>b.valor-a.valor : (a,b)=>a.valor-b.valor;
-    const lista = paisFiltro ? filas.filter(f=>f.iso===paisFiltro) : filas.slice().sort(orden);
-    const tag=document.getElementById(destinoTag);
-    if(tag) tag.textContent = paisFiltro
-      ? (lista.length?`${info.rotulo} · ${paisNombre}`:`sin dato en ${paisNombre}`)
-      : `${filas.length} de 33 Estados · ${info.unidad}`;
-    const caja=document.getElementById(destinoTarj); if(!caja) return;
-    caja.innerHTML = lista.length ? lista.slice(0,6).map(f=>{
-      const va=f.variacion_pct;
-      return `<div class="card"><h4>${esc(f.pais)}</h4><div class="value">${cifra(f.valor)}</div>
-        <div class="sub">${esc(info.unidad)} · dato de ${f.anio}${va!==null&&va!==undefined?` · ${va>0?'+':''}${va} %`:''}</div>
-        <div class="foot"><span class="src">${esc(info.origen||meta.fuente.nombre)}</span>
-          <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
-    }).join('') : `<div class="card"><h4>Sin dato</h4><div class="sub">La fuente no consigna a ${esc(paisNombre)} en este indicador.</div></div>`;
+    claves = [].concat(claves);
+    const meta=d.procedencia;
+    const info = c => (d.indicadores||[]).find(x=>x.clave===c) || {};
+    const tag=document.getElementById('tag-'+destino), caja=document.getElementById('tarj-'+destino);
+    if(!caja) return;
+
+    if(paisFiltro){
+      const r=d.registros.find(x=>x.iso===paisFiltro);
+      const fichas=claves.map(c=>({i:r&&r.indicadores[c], meta:info(c)})).filter(x=>x.i);
+      if(tag) tag.textContent = fichas.length
+        ? `${paisNombre} · ${fichas.length} indicador${fichas.length===1?'':'es'}`
+        : `sin dato en ${paisNombre}`;
+      caja.innerHTML = fichas.length
+        ? fichas.map(({i,meta:mi})=>tarjeta(i,mi,paisNombre,meta)).join('')
+        : `<div class="card"><h4>Sin dato</h4><div class="sub">La fuente no consigna a ${esc(paisNombre)} en esta materia.</div></div>`;
+      return;
+    }
+
+    const principal = info(claves[0]);
+    const filas=d.registros.filter(r=>r.indicadores[claves[0]])
+      .map(r=>({pais:r.pais, iso:r.iso, ...r.indicadores[claves[0]]}));
+    const orden = principal.mas_es_peor ? (a,b)=>b.valor-a.valor : (a,b)=>a.valor-b.valor;
+    const ordenadas = filas.slice().sort(orden);
+    const todos = verTodos[destino];
+    const lista = todos ? ordenadas : ordenadas.slice(0,TOPE);
+    const extremo = principal.mas_es_peor ? 'más altos' : 'más bajos';
+    if(tag) tag.textContent = `${filas.length} de 33 Estados · ${esc(principal.unidad||'')}`;
+    caja.innerHTML = lista.map(f=>tarjeta(f,principal,f.pais,meta)).join('') +
+      `<div class="criterio"><span>${todos
+          ? `Los ${filas.length} Estados con dato, ordenados de peor a mejor.`
+          : `Criterio: los <b>${lista.length} valores ${extremo}</b> de ${filas.length} Estados con dato. El resto está en el mapa y en el informe.`}
+        </span><button class="ver-todos" data-destino="${destino}">${todos?'ver solo los '+TOPE:'ver los '+filas.length}</button></div>`;
+    caja.querySelectorAll('.ver-todos').forEach(b=>
+      b.addEventListener('click',()=>{ verTodos[b.dataset.destino]=!verTodos[b.dataset.destino]; repintar(); }));
+  }
+
+  function tarjeta(f, info, nombre, meta){
+    const tv=f.tendencia_ventana_pct;
+    return `<div class="card"><h4>${esc(paisFiltro ? (info.rotulo||nombre) : nombre)}</h4>
+      <div class="value">${cifra(f.valor)}</div>
+      <div class="sub">${esc(info.unidad||'')} · dato de ${f.anio}${
+        (tv!==null&&tv!==undefined)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
+      <div class="foot"><span class="src">${esc(info.origen||meta.fuente.nombre)}</span>
+        <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
   }
 
   function tarjetasDesplazamiento(){
@@ -986,7 +1123,73 @@
       : `<div class="card"><h4>Sin registro</h4><div class="sub">La fuente no consigna a ${esc(paisNombre)}.</div></div>`;
   }
 
-  // ---- Gráficos, en SVG y sin bibliotecas ---------------------------------
+  // ---- Desinformacion e infoxicacion -------------------------------------
+  // No mide desinformacion probada: mide amplificacion sin corroboracion, que
+  // es lo unico que se puede medir con lo que el registro ya recolecta.
+  function desinformacion(){
+    const d=almacen.cobertura, caja=document.getElementById('tarj-desinformacion');
+    if(!caja) return;
+    if(!d){ caja.innerHTML='<div class="card"><h4>Sin registro</h4><div class="sub">La cobertura no está disponible.</div></div>'; return; }
+    const r=d.resumen, meta=d.procedencia;
+    const tag=document.getElementById('tag-desinformacion');
+    if(tag) tag.textContent = `${r.indice_infoxicacion_pct} % de los asuntos amplificados sin corroborar`;
+    pintarProcedencia('proc-desinformacion', meta);
+    const tarjeta=(rot,val,sub)=>`<div class="card"><h4>${esc(rot)}</h4><div class="value">${val}</div>
+      <div class="sub">${esc(sub)}</div><div class="foot"><span class="src">${esc(meta.fuente.nombre)}</span>
+      <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
+    caja.innerHTML =
+      tarjeta('Índice de infoxicación', r.indice_infoxicacion_pct+' %',
+              'asuntos repetidos por tres o más portales que ningún segundo origen corrobora') +
+      tarjeta('Asuntos amplificados sin corroborar', miles(r.asuntos_amplificados_sin_corroborar),
+              'sobre '+miles(r.asuntos_con_cruce)+' asuntos con cruce') +
+      tarjeta('Asuntos de un solo origen', miles(r.origen_unico),
+              'cubiertos solo dentro de una jurisdicción y un idioma') +
+      tarjeta('Corroborados en dos idiomas', miles(r.corroborado_fuerte),
+              'la corroboración más fuerte que el registro reconoce');
+    const v=document.getElementById('vac-desinformacion');
+    if(v && !v.innerHTML) pintarVacios('vac-desinformacion', meta.vacios_declarados);
+  }
+
+  // ---- Cobertura, con ambito ---------------------------------------------
+  let ambitoCobertura = 'todo';
+
+  function coberturaVista(){
+    const d=almacen.cobertura, caja=document.getElementById('lista-cobertura');
+    if(!d || !caja) return;
+    const r=d.resumen;
+    const bloqueDelPais = paisFiltro && padron.length
+      ? (padron.find(x=>x.iso===paisFiltro)||{}).bloque : null;
+
+    document.querySelectorAll('.filtro').forEach(b=>{
+      const necesitaPais = b.dataset.ambito !== 'todo';
+      b.disabled = necesitaPais && !paisFiltro;
+      if(b.disabled && ambitoCobertura===b.dataset.ambito) ambitoCobertura='todo';
+      b.classList.toggle('activo', b.dataset.ambito===ambitoCobertura);
+    });
+
+    let lista = d.registros;
+    if(ambitoCobertura==='pais' && paisFiltro)
+      lista = lista.filter(e=>e.paises.some(x=>x.iso===paisFiltro));
+    else if(ambitoCobertura==='bloque' && bloqueDelPais)
+      lista = lista.filter(e=>e.bloques.includes(bloqueDelPais));
+
+    const nota=document.getElementById('nota-cobertura');
+    if(nota) nota.textContent = ambitoCobertura==='todo'
+      ? `${d.registros.length} asuntos · ${r.asuntos_sin_pais} sin país atribuido`
+      : `${lista.length} de ${d.registros.length} asuntos mencionan ${ambitoCobertura==='pais'?paisNombre:'el bloque '+bloqueDelPais}`;
+
+    caja.innerHTML = lista.length ? lista.slice(0,14).map(e=>{
+      const c=e.corroboracion, par=ROTULO[c.estado];
+      return `<div class="asunto"><h4>${esc(e.asunto)}</h4>
+        ${e.paises.length?`<div class="lugares">${e.paises.map(x=>`<span class="lugar">${esc(x.pais)}</span>`).join('')}</div>`:''}
+        <div class="origenes">${e.notas.map(n=>`<a class="origen" href="${esc(n.enlace)}" target="_blank" rel="noopener">${esc(n.medio)} <span class="jur">${n.pais}·${n.idioma}</span></a>`).join('')}</div>
+        <div class="foot"><span class="porque">${c.origenes_independientes} origen${c.origenes_independientes===1?'':'es'} en ${c.portales} portales · ${esc(c.nota)}</span>
+          <span class="badge ${par[0]}">${par[1]}</span></div></div>`;
+    }).join('')
+      : `<div class="card"><h4>Sin asuntos en este ámbito</h4><div class="sub">Ningún asunto de la ventana menciona ${ambitoCobertura==='pais'?esc(paisNombre):'ese bloque'}. La atribución es por diccionario de gentilicios: puede faltar.</div></div>`;
+  }
+
+  // ---- Graficos, en SVG y sin bibliotecas ---------------------------------
   function grafico(serie, rotulo){
     if(!serie || serie.length < 2) return '';
     const A=620, H=170, mx=46, my=22;
@@ -1103,7 +1306,7 @@
     }
 
     // Comparación regional de la capa activa
-    const c = CAPAS[capaActiva].conteo();
+    const c = capaActual().conteo();
     const orden = Object.entries(c).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]);
     if(orden.length>1){
       const nombre = i => (padron.find(p=>p.iso===i)||{}).pais||i;
@@ -1112,7 +1315,7 @@
         const propia = orden.find(([i])=>i===paisFiltro);
         if(propia) elegidas = elegidas.slice(0,7).concat([propia]);
       }
-      html += `<h4 class="sub-informe">Posición regional — ${esc(CAPAS[capaActiva].unidad)}</h4>`+
+      html += `<h4 class="sub-informe">Posición regional — ${esc(capaActual().unidad)}</h4>`+
         barras(elegidas.map(([i,v])=>({rotulo:nombre(i), valor:v, destacado:i===paisFiltro})),
                'Comparación con los demás Estados del padrón');
     }
@@ -1192,6 +1395,9 @@
   document.querySelectorAll('.modo').forEach(b=>
     b.addEventListener('click',()=>{ if(!b.disabled){ modo=b.dataset.modo; repintar(); } }));
 
+  document.querySelectorAll('.filtro').forEach(b=>
+    b.addEventListener('click',()=>{ if(!b.disabled){ ambitoCobertura=b.dataset.ambito; coberturaVista(); } }));
+
   document.getElementById('btn-csv').addEventListener('click', csv);
   document.getElementById('btn-imprimir').addEventListener('click', ()=>window.print());
 
@@ -1221,7 +1427,7 @@
     .catch(err=>{ document.getElementById('mapa').innerHTML =
       `<div class="falla" style="margin:16px"><h4>No se pudo cargar el mapa</h4><p>${esc(err.message)}. No se muestra un mapa de reemplazo.</p></div>`; });
 
-  const ROTULO={corroborado_fuerte:['fuerte','Corroborado · dos idiomas'],
+  window.__rotulo = ROTULO={corroborado_fuerte:['fuerte','Corroborado · dos idiomas'],
                 corroborado:['medio','Corroborado · dos jurisdicciones'],
                 origen_unico:['solo','Un solo origen']};
 
@@ -1231,15 +1437,7 @@
       pintarProcedencia('proc-cobertura',meta);
       document.getElementById('tag-cobertura').textContent =
         r.asuntos_con_cruce+' asuntos · '+r.medios_que_respondieron+' de '+r.medios_consultados+' medios · '+miles(r.notas_en_ventana)+' notas';
-      document.getElementById('lista-cobertura').innerHTML = d.registros.length
-        ? d.registros.slice(0,14).map(e=>{
-            const c=e.corroboracion,[cl,tx]=ROTULO[c.estado];
-            return `<div class="asunto"><h4>${esc(e.asunto)}</h4>
-              <div class="origenes">${e.notas.map(n=>`<a class="origen" href="${esc(n.enlace)}" target="_blank" rel="noopener">${esc(n.medio)} <span class="jur">${n.pais}·${n.idioma}</span></a>`).join('')}</div>
-              <div class="foot"><span class="porque">${c.origenes_independientes} origen${c.origenes_independientes===1?'':'es'} en ${c.portales} portales · ${esc(c.nota)}</span>
-                <span class="badge ${cl}">${tx}</span></div></div>`;
-          }).join('')
-        : `<div class="card"><h4>Sin cruces en la ventana</h4><div class="sub">Ningún asunto fue cubierto por dos medios distintos del padrón. No es una falla.</div></div>`;
+      coberturaVista();
       vacios+=pintarVacios('vac-cobertura',meta.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-cobertura','cobertura',estado.mensaje,meta); }
       informe(); marcador();
@@ -1270,8 +1468,8 @@
   Promise.all([traer('banco-mundial.json'), traer('estado/banco-mundial.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.banco=d; dominios+=Object.keys(d.cobertura||{}).length;
-      pintarProcedencia('proc-violencia',d.procedencia);
-      pintarProcedencia('proc-institucional',d.procedencia);
+      ['violencia','institucional','urbano','industrial','materias']
+        .forEach(x=>pintarProcedencia('proc-'+x, d.procedencia));
       registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
       vacios+=pintarVacios('vac-violencia',d.procedencia.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-violencia','banco mundial',estado.mensaje,d.procedencia); }

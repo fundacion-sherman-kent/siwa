@@ -34,8 +34,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import comun
+import geo
 
 PADRON_MEDIOS = Path(__file__).resolve().parent / "medios.json"
+PADRON_GENTILICIOS = Path(__file__).resolve().parent / "gentilicios.json"
 NAVEGADOR = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
@@ -119,6 +121,29 @@ def _traer_canal(medio: dict) -> tuple:
     return (medio, notas, None)
 
 
+def _paises_mencionados(texto: str, mapa: dict) -> list:
+    """Estados del padrón nombrados en el título.
+
+    Se busca el nombre y sus gentilicios sobre el texto normalizado. Es un
+    reconocimiento por diccionario, no por comprensión: un asunto que nombre al
+    país con un giro que no figure en la lista queda sin atribuir, y uno que lo
+    nombre al pasar queda atribuido igual. Ambas fallas se declaran.
+    """
+    plano = " " + " ".join(_normalizar_crudo(texto)) + " "
+    hallados = []
+    for iso, formas in mapa.items():
+        if any(f" {f} " in plano for f in formas):
+            hallados.append(iso)
+    return hallados
+
+
+def _normalizar_crudo(texto: str) -> list:
+    """Como _normalizar pero conserva las palabras vacías: los nombres las usan."""
+    t = unicodedata.normalize("NFKD", texto or "")
+    t = "".join(c for c in t if not unicodedata.combining(c)).lower()
+    return re.findall(r"[a-z0-9]+", t)
+
+
 def _vectores(notas: list) -> list:
     """Frecuencia de término por frecuencia inversa de documento, normalizada."""
     documentos = [_normalizar(n["titulo"]) for n in notas]
@@ -191,6 +216,12 @@ def _corroboracion(notas: list) -> dict:
 
 def recolectar():
     padron = json.loads(PADRON_MEDIOS.read_text(encoding="utf-8"))["medios"]
+    gentilicios = json.loads(PADRON_GENTILICIOS.read_text(encoding="utf-8"))["paises"]
+    # Los gentilicios se comparan sobre texto ya normalizado, sin tildes.
+    gentilicios = {iso: [" ".join(_normalizar_crudo(f)) for f in formas]
+                   for iso, formas in gentilicios.items()}
+    bloques = {p["iso"]: p["bloque"] for p in geo.padron()}
+    nombres_pais = {p["iso"]: p["pais"] for p in geo.padron()}
 
     with ThreadPoolExecutor(max_workers=8) as ejecutor:
         resultados = list(ejecutor.map(_traer_canal, padron))
@@ -211,8 +242,13 @@ def recolectar():
         if len(lista) < 2:
             continue                      # una sola nota no es cobertura cruzada
         corr = _corroboracion(lista)
+        asunto = max((n["titulo"] for n in lista), key=len)
+        # Se buscan menciones en todos los títulos del grupo, no solo en el más largo.
+        isos = sorted({i for n in lista for i in _paises_mencionados(n["titulo"], gentilicios)})
         eventos.append({
-            "asunto": max((n["titulo"] for n in lista), key=len),
+            "asunto": asunto,
+            "paises": [{"iso": i, "pais": nombres_pais.get(i, i), "bloque": bloques.get(i, "—")} for i in isos],
+            "bloques": sorted({bloques[i] for i in isos if i in bloques}),
             "corroboracion": corr,
             "notas": [
                 {k: n[k] for k in ("titulo", "enlace", "medio", "dominio", "pais", "idioma", "publicada")}
@@ -225,6 +261,15 @@ def recolectar():
                                 -e["corroboracion"]["origenes_independientes"]))
 
     conteo = Counter(e["corroboracion"]["estado"] for e in eventos)
+    sin_pais = sum(1 for e in eventos if not e["paises"])
+    por_pais = Counter(p["iso"] for e in eventos for p in e["paises"])
+
+    # Infoxicación: asuntos muy repetidos que ningún segundo origen corrobora.
+    # Es amplificación sin verificación, y se mide sobre lo que ya se recolectó.
+    amplificados = [e for e in eventos
+                    if e["corroboracion"]["estado"] == "origen_unico"
+                    and e["corroboracion"]["portales"] >= 3]
+    indice_infoxicacion = round(len(amplificados) / len(eventos) * 100, 1) if eventos else 0.0
     idiomas_padron = Counter(m["idioma"] for m in padron)
     paises_padron = {m["pais"] for m in padron}
 
@@ -265,6 +310,16 @@ def recolectar():
         f"Ventana de {HORAS} horas. {sin_fecha} notas llegaron sin fecha de publicación "
         "y se conservaron sin poder verificar su antigüedad.",
         "Un grupo de una sola nota no se publica: sin cruce no hay cobertura cruzada.",
+        "La atribución de un asunto a un país es por DICCIONARIO de nombres y "
+        "gentilicios, no por comprensión del texto. Un asunto que nombre al país con un "
+        "giro que no figure en la lista queda sin atribuir; uno que lo nombre al pasar "
+        "queda atribuido igual. La lista es editable por el equipo analítico.",
+        f"{sin_pais} de {len(eventos)} asuntos no pudieron atribuirse a ningún Estado del "
+        "padrón: en su mayoría son noticias internacionales sin mención regional.",
+        "El índice de infoxicación mide la proporción de asuntos repetidos por tres o más "
+        "portales que NINGÚN segundo origen independiente corrobora. Es amplificación sin "
+        "verificación, no desinformación probada: no dice que el asunto sea falso, dice "
+        "que se repite sin que nadie de otra jurisdicción o idioma lo confirme.",
     ]
     if caidos:
         vacios.append(
@@ -289,7 +344,12 @@ def recolectar():
                 "corroborado_fuerte": conteo.get("corroborado_fuerte", 0),
                 "corroborado": conteo.get("corroborado", 0),
                 "origen_unico": conteo.get("origen_unico", 0),
+                "asuntos_sin_pais": sin_pais,
+                "indice_infoxicacion_pct": indice_infoxicacion,
+                "asuntos_amplificados_sin_corroborar": len(amplificados),
             },
+            "por_pais": [{"iso": i, "pais": nombres_pais.get(i, i), "asuntos": n}
+                         for i, n in por_pais.most_common()],
             "umbral_similitud": UMBRAL,
             "metodo": (
                 "Frecuencia de término por frecuencia inversa de documento y similitud "

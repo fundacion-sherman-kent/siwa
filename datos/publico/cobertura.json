@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "cobertura",
     "capa": "publico",
-    "obtenido_en": "2026-08-31T00:32:34+00:00",
+    "obtenido_en": "2026-08-31T01:43:33+00:00",
     "fuente": {
       "nombre": "Padrón de medios de la Fundación Sherman Kent",
       "url": "colectores/medios.json"
@@ -21,27 +21,78 @@
       "Idiomas presentes: en (6), es (12), fr (2), pt (3). Faltan el neerlandés de Surinam y el criollo haitiano, exigidos por doctrina/siwa.md §4.1.",
       "Ventana de 48 horas. 40 notas llegaron sin fecha de publicación y se conservaron sin poder verificar su antigüedad.",
       "Un grupo de una sola nota no se publica: sin cruce no hay cobertura cruzada.",
+      "La atribución de un asunto a un país es por DICCIONARIO de nombres y gentilicios, no por comprensión del texto. Un asunto que nombre al país con un giro que no figure en la lista queda sin atribuir; uno que lo nombre al pasar queda atribuido igual. La lista es editable por el equipo analítico.",
+      "17 de 20 asuntos no pudieron atribuirse a ningún Estado del padrón: en su mayoría son noticias internacionales sin mención regional.",
+      "El índice de infoxicación mide la proporción de asuntos repetidos por tres o más portales que NINGÚN segundo origen independiente corrobora. Es amplificación sin verificación, no desinformación probada: no dice que el asunto sea falso, dice que se repite sin que nadie de otra jurisdicción o idioma lo confirme.",
       "1 canales no respondieron en esta corrida: AlterPresse (HTI): ParseError."
     ],
-    "cantidad": 19
+    "cantidad": 20
   },
   "registros": [
     {
-      "asunto": "Google se pliega ante Trump y cambia el nombre del lago Ontario por el de América",
+      "asunto": "Irán atacó bases de Estados Unidos en Jordania tras un bombardeo contra una isla estratégica en el estrecho de Ormuz",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
-        "estado": "corroborado_fuerte",
-        "nota": "Dos o más idiomas distintos.",
-        "origenes_independientes": 4,
-        "portales": 4,
+        "estado": "corroborado",
+        "nota": "Dos o más jurisdicciones, un solo idioma.",
+        "origenes_independientes": 3,
+        "portales": 3,
         "idiomas": [
-          "en",
           "es"
         ],
         "paises": [
           "ARG",
           "DEU",
-          "ESP",
-          "QAT"
+          "FRA"
+        ]
+      },
+      "notas": [
+        {
+          "titulo": "Irán atacó bases de Estados Unidos en Jordania tras un bombardeo contra una isla estratégica en el estrecho de Ormuz",
+          "enlace": "https://www.perfil.com/noticias/internacional/iran-ataco-bases-de-estados-unidos-en-jordania-tras-un-bombardeo-contra-una-isla-estrategica-en-el-estrecho-de-ormuz.phtml",
+          "medio": "Perfil",
+          "dominio": "perfil.com",
+          "pais": "ARG",
+          "idioma": "es",
+          "publicada": "2026-08-31T00:15:53+00:00"
+        },
+        {
+          "titulo": "Irán ataca bases EEUU en Jordania en represalia al bombardeo",
+          "enlace": "https://www.dw.com/es/irán-ataca-bases-eeuu-en-jordania-en-represalia-al-bombardeo/a-78567599?maca=spa-rss-sp-all-1122-xml-mrss",
+          "medio": "Deutsche Welle",
+          "dominio": "dw.com",
+          "pais": "DEU",
+          "idioma": "es",
+          "publicada": "2026-08-31T00:45:00+00:00"
+        },
+        {
+          "titulo": "Guerra en Irán: EE. UU. ataca la isla de Larak, cerca de Ormuz; Teherán emprende ofensiva a bases en Jordania",
+          "enlace": "https://www.france24.com/es/medio-oriente/20260830-guerra-en-ir%C3%A1n-ee-uu-lanza-ataques-contra-la-isla-de-larak-teher%C3%A1n-advierte-que-responder%C3%A1",
+          "medio": "France 24",
+          "dominio": "france24.com",
+          "pais": "FRA",
+          "idioma": "es",
+          "publicada": "2026-08-30T22:14:25+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Google se pliega ante Trump y cambia el nombre del lago Ontario por el de América",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado",
+        "nota": "Dos o más jurisdicciones, un solo idioma.",
+        "origenes_independientes": 3,
+        "portales": 3,
+        "idiomas": [
+          "es"
+        ],
+        "paises": [
+          "ARG",
+          "DEU",
+          "ESP"
         ]
       },
       "notas": [
@@ -71,20 +122,21 @@
           "pais": "ESP",
           "idioma": "es",
           "publicada": "2026-08-30T17:16:31+00:00"
-        },
-        {
-          "titulo": "Google Maps renames Lake Ontario after Trump’s decree on ‘Lake America’",
-          "enlace": "https://www.aljazeera.com/news/2026/8/30/google-maps-renames-lake-ontario-after-trumps-decree-on-lake-america?traffic_source=rss",
-          "medio": "Al Jazeera",
-          "dominio": "aljazeera.com",
-          "pais": "QAT",
-          "idioma": "en",
-          "publicada": "2026-08-30T16:57:21+00:00"
         }
       ]
     },
     {
       "asunto": "Donald Trump y Delcy Rodríguez anuncian un acuerdo que otorga a EE.UU. el control de más del 20% de las reservas de petróleo de Venezuela",
+      "paises": [
+        {
+          "iso": "VEN",
+          "pais": "Venezuela",
+          "bloque": "Andina"
+        }
+      ],
+      "bloques": [
+        "Andina"
+      ],
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
@@ -140,6 +192,8 @@
     },
     {
       "asunto": "Naufragio frente a Chipre: hay ocho muertos y 17 desaparecidos tras el vuelco de un barco con 267 personas a bordo",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
@@ -174,6 +228,15 @@
           "publicada": "2026-08-30T18:01:00+00:00"
         },
         {
+          "titulo": "Naufraga un ferri con 267 personas a bordo frente a la costa norte de Chipre y deja varios muertos",
+          "enlace": "https://www.france24.com/es/video/20260831-naufraga-un-ferri-con-267-personas-a-bordo-frente-a-la-costa-norte-de-chipre-y-deja-varios-muertos",
+          "medio": "France 24",
+          "dominio": "france24.com",
+          "pais": "FRA",
+          "idioma": "es",
+          "publicada": "2026-08-31T00:50:36+00:00"
+        },
+        {
           "titulo": "Informe desde Estambul: naufragio en costas del norte de Chipre deja al menos ocho muertos",
           "enlace": "https://www.france24.com/es/video/20260830-informe-desde-estambul-naufragio-en-costas-del-norte-de-chipre-deja-al-menos-ocho-muertos",
           "medio": "France 24",
@@ -204,6 +267,8 @@
     },
     {
       "asunto": "\"¿Estamos solos en el universo?\": el enigma existencial que quiere resolver la NASA con el ultrapotente telescopio Roman",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
@@ -229,13 +294,13 @@
           "publicada": "2026-08-30T13:28:00+00:00"
         },
         {
-          "titulo": "Roman, el nuevo telescopio de la NASA que pondrá a prueba el modelo del universo",
-          "enlace": "https://www.france24.com/es/ee-uu-y-canad%C3%A1/20260830-roman-el-nuevo-telescopio-de-la-nasa-que-pondr%C3%A1-a-prueba-el-modelo-del-universo",
+          "titulo": "NASA lanza el telescopio Roman para explorar los mayores enigmas del universo",
+          "enlace": "https://www.france24.com/es/video/20260831-nasa-lanza-el-telescopio-roman-para-explorar-los-mayores-enigmas-del-universo",
           "medio": "France 24",
           "dominio": "france24.com",
           "pais": "FRA",
           "idioma": "es",
-          "publicada": "2026-08-30T02:37:11+00:00"
+          "publicada": "2026-08-31T00:51:26+00:00"
         },
         {
           "titulo": "La NASA lanza su nuevo telescopio Roman para mapear los secretos del cosmos",
@@ -259,6 +324,16 @@
     },
     {
       "asunto": "Difunden las primeras fotografías de Nicolás Maduro desde su prisión en Estados Unidos",
+      "paises": [
+        {
+          "iso": "VEN",
+          "pais": "Venezuela",
+          "bloque": "Andina"
+        }
+      ],
+      "bloques": [
+        "Andina"
+      ],
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
@@ -295,6 +370,8 @@
     },
     {
       "asunto": "Justicia social: dejen de sorprenderse, está en la Constitución",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
@@ -330,52 +407,9 @@
       ]
     },
     {
-      "asunto": "Rusia agudiza ofensiva aérea contra Ucrania: ataque contra depósito de municiones deja 37 muertos",
-      "corroboracion": {
-        "estado": "corroborado",
-        "nota": "Dos o más jurisdicciones, un solo idioma.",
-        "origenes_independientes": 2,
-        "portales": 3,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
-          "DEU",
-          "FRA"
-        ]
-      },
-      "notas": [
-        {
-          "titulo": "Rusia anuncia ataques masivos contra sistema energético de Ucrania",
-          "enlace": "https://www.dw.com/es/rusia-anuncia-ataques-masivos-contra-sistema-energético-de-ucrania/a-78562348?maca=spa-rss-sp-all-1122-xml-mrss",
-          "medio": "Deutsche Welle",
-          "dominio": "dw.com",
-          "pais": "DEU",
-          "idioma": "es",
-          "publicada": "2026-08-30T10:06:00+00:00"
-        },
-        {
-          "titulo": "Rusia agudiza ofensiva aérea contra Ucrania: ataque contra depósito de municiones deja 37 muertos",
-          "enlace": "https://www.france24.com/es/video/20260830-rusia-agudiza-ofensiva-a%C3%A9rea-contra-ucrania-ataque-contra-dep%C3%B3sito-de-municiones-deja-37-muertos",
-          "medio": "France 24",
-          "dominio": "france24.com",
-          "pais": "FRA",
-          "idioma": "es",
-          "publicada": "2026-08-30T23:10:19+00:00"
-        },
-        {
-          "titulo": "Ucrania: al menos 38 muertos en un ataque ruso contra un almacén cerca de Kiev",
-          "enlace": "https://www.rfi.fr/es/europa/20260829-ucrania-al-menos-38-muertos-en-un-ataque-ruso-contra-un-almac%C3%A9n-cerca-de-kiev",
-          "medio": "RFI",
-          "dominio": "rfi.fr",
-          "pais": "FRA",
-          "idioma": "es",
-          "publicada": "2026-08-29T11:47:32+00:00"
-        }
-      ]
-    },
-    {
       "asunto": "Tropical wave will generate downpours this afternoon; Tropical Storm Dolly Watch",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
@@ -412,6 +446,21 @@
     },
     {
       "asunto": "De la Espriella derriba la 'Paz Total' de Petro: ¿Es un retroceso para la paz en Colombia?",
+      "paises": [
+        {
+          "iso": "BOL",
+          "pais": "Bolivia",
+          "bloque": "Andina"
+        },
+        {
+          "iso": "COL",
+          "pais": "Colombia",
+          "bloque": "Andina"
+        }
+      ],
+      "bloques": [
+        "Andina"
+      ],
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
@@ -448,6 +497,8 @@
     },
     {
       "asunto": "Decenas de colonos israelíes  atacan aldea en Cisjordania; van 3 semanas de violencia",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
@@ -484,6 +535,8 @@
     },
     {
       "asunto": "\"No me apetece beber ni una gota más\": cómo las nuevas inyecciones para perder peso afectan al consumo de alcohol",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
@@ -519,7 +572,93 @@
       ]
     },
     {
+      "asunto": "Dozens evacuated and about 15 missing after Grand Canyon flash flood",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado",
+        "nota": "Dos o más jurisdicciones, un solo idioma.",
+        "origenes_independientes": 2,
+        "portales": 2,
+        "idiomas": [
+          "en"
+        ],
+        "paises": [
+          "JAM",
+          "QAT"
+        ]
+      },
+      "notas": [
+        {
+          "titulo": "More than 20 people may be missing after Grand Canyon flash flood",
+          "enlace": "https://www.jamaicaobserver.com/2026/08/30/20-people-may-missing-grand-canyon-flash-flood/",
+          "medio": "Jamaica Observer",
+          "dominio": "jamaicaobserver.com",
+          "pais": "JAM",
+          "idioma": "en",
+          "publicada": "2026-08-30T22:17:32+00:00"
+        },
+        {
+          "titulo": "Dozens evacuated and about 15 missing after Grand Canyon flash flood",
+          "enlace": "https://www.aljazeera.com/news/2026/8/31/dozens-evacuated-and-about-15-missing-after-grand-canyon-flash-flood?traffic_source=rss",
+          "medio": "Al Jazeera",
+          "dominio": "aljazeera.com",
+          "pais": "QAT",
+          "idioma": "en",
+          "publicada": "2026-08-31T00:31:51+00:00"
+        },
+        {
+          "titulo": "Flash flooding in Grand Canyon leaves more than 20 people missing",
+          "enlace": "https://www.aljazeera.com/video/newsfeed/2026/8/31/08-31-26-arizona-flash-floods-sv?traffic_source=rss",
+          "medio": "Al Jazeera",
+          "dominio": "aljazeera.com",
+          "pais": "QAT",
+          "idioma": "en",
+          "publicada": "2026-08-31T00:19:04+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Chitãozinho & Xororó são anunciados embaixadores de Barretos 2027, e trecho de 'Evidências' vira tema da festa pela 1ª vez",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "origen_unico",
+        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
+        "origenes_independientes": 1,
+        "portales": 2,
+        "idiomas": [
+          "pt"
+        ],
+        "paises": [
+          "BRA"
+        ]
+      },
+      "notas": [
+        {
+          "titulo": "Barretos adota trecho de 'Evidências' como slogan da Festa do Peão de 2027",
+          "enlace": "https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/cotidiano/2026/08/barretos-adota-trecho-de-evidencias-como-slogan-da-festa-do-peao-de-2027.shtml",
+          "medio": "Folha de S.Paulo",
+          "dominio": "folha.uol.com.br",
+          "pais": "BRA",
+          "idioma": "pt",
+          "publicada": null
+        },
+        {
+          "titulo": "Chitãozinho & Xororó são anunciados embaixadores de Barretos 2027, e trecho de 'Evidências' vira tema da festa pela 1ª vez",
+          "enlace": "https://g1.globo.com/sp/ribeirao-preto-franca/festa-do-peao-de-barretos/noticia/2026/08/30/chitaozinho-and-xororo-sao-anunciados-embaixadores-de-barretos-2027-e-trecho-de-evidencias-vira-tema-da-festa-pela-1a-vez.ghtml",
+          "medio": "G1 Globo",
+          "dominio": "g1.globo.com",
+          "pais": "BRA",
+          "idioma": "pt",
+          "publicada": "2026-08-30T23:34:35+00:00"
+        }
+      ]
+    },
+    {
       "asunto": "Vazamento de gás provoca incêndio na casa de presidente do TSE, ministro Nunes Marques",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "origen_unico",
         "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
@@ -554,42 +693,9 @@
       ]
     },
     {
-      "asunto": "Confusão entre manifestante e adolescente em protesto na Avenida Paulista termina na delegacia",
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 2,
-        "idiomas": [
-          "pt"
-        ],
-        "paises": [
-          "BRA"
-        ]
-      },
-      "notas": [
-        {
-          "titulo": "Confusão entre direita e esquerda em ato na Paulista acaba na delegacia",
-          "enlace": "https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/poder/2026/08/confusao-entre-direita-e-esquerda-em-ato-na-paulista-acaba-na-delegacia.shtml",
-          "medio": "Folha de S.Paulo",
-          "dominio": "folha.uol.com.br",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": null
-        },
-        {
-          "titulo": "Confusão entre manifestante e adolescente em protesto na Avenida Paulista termina na delegacia",
-          "enlace": "https://g1.globo.com/sp/sao-paulo/noticia/2026/08/30/confusao-entre-manifestante-e-adolescente-em-protesto-na-avenida-paulista-termina-na-delegacia.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-08-30T21:14:57+00:00"
-        }
-      ]
-    },
-    {
       "asunto": "Eleições 2026: veja como foi o dia dos candidatos ao governo do Piauí neste domingo (30)",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "origen_unico",
         "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
@@ -603,6 +709,24 @@
         ]
       },
       "notas": [
+        {
+          "titulo": "Eleições 2026: veja como foi o 15º dia de campanha dos candidatos ao governo do Amapá",
+          "enlace": "https://g1.globo.com/ap/amapa/eleicoes/2026/noticia/2026/08/30/eleicoes-2026-veja-como-foi-o-15o-dia-de-campanha-dos-candidatos-ao-governo-do-amapa.ghtml",
+          "medio": "G1 Globo",
+          "dominio": "g1.globo.com",
+          "pais": "BRA",
+          "idioma": "pt",
+          "publicada": "2026-08-31T01:17:09+00:00"
+        },
+        {
+          "titulo": "Eleições 2026: veja como foi o dia dos candidatos ao governo da Bahia neste domingo",
+          "enlace": "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/08/30/veja-como-foi-o-dia-dos-candidatos-ao-governo-da-bahia-neste-domingo.ghtml",
+          "medio": "G1 Globo",
+          "dominio": "g1.globo.com",
+          "pais": "BRA",
+          "idioma": "pt",
+          "publicada": "2026-08-31T00:46:30+00:00"
+        },
         {
           "titulo": "Eleições 2026: veja como foi o dia dos candidatos ao governo do Piauí neste domingo (30)",
           "enlace": "https://g1.globo.com/pi/piaui/eleicoes/2026/noticia/2026/08/30/agenda-candidatos-domingo-30.ghtml",
@@ -634,6 +758,8 @@
     },
     {
       "asunto": "David Estwick gets the nod as new DLP president",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "origen_unico",
         "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
@@ -668,12 +794,14 @@
       ]
     },
     {
-      "asunto": "Informe desde Bidur: cuatro días después de la riada en Nepal, siguen las labores de rescate",
+      "asunto": "Rusia agudiza ofensiva aérea contra Ucrania: ataque contra depósito de municiones deja 37 muertos",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "origen_unico",
         "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
         "origenes_independientes": 1,
-        "portales": 1,
+        "portales": 2,
         "idiomas": [
           "es"
         ],
@@ -683,27 +811,29 @@
       },
       "notas": [
         {
-          "titulo": "Informe desde Bidur: 933 trabajadores siguen sin rastro tras la avalancha glaciar en Nepal",
-          "enlace": "https://www.france24.com/es/video/20260830-informe-desde-bidur-933-trabajadores-siguen-sin-rastro-tras-la-avalancha-glaciar-en-nepal",
+          "titulo": "Rusia agudiza ofensiva aérea contra Ucrania: ataque contra depósito de municiones deja 37 muertos",
+          "enlace": "https://www.france24.com/es/video/20260830-rusia-agudiza-ofensiva-a%C3%A9rea-contra-ucrania-ataque-contra-dep%C3%B3sito-de-municiones-deja-37-muertos",
           "medio": "France 24",
           "dominio": "france24.com",
           "pais": "FRA",
           "idioma": "es",
-          "publicada": "2026-08-30T23:04:14+00:00"
+          "publicada": "2026-08-30T23:10:19+00:00"
         },
         {
-          "titulo": "Informe desde Bidur: cuatro días después de la riada en Nepal, siguen las labores de rescate",
-          "enlace": "https://www.france24.com/es/video/20260830-informe-desde-bidur-cuatro-d%C3%ADas-despu%C3%A9s-de-la-riada-en-nepal-siguen-las-labores-de-rescate",
-          "medio": "France 24",
-          "dominio": "france24.com",
+          "titulo": "Ucrania: al menos 38 muertos en un ataque ruso contra un almacén cerca de Kiev",
+          "enlace": "https://www.rfi.fr/es/europa/20260829-ucrania-al-menos-38-muertos-en-un-ataque-ruso-contra-un-almac%C3%A9n-cerca-de-kiev",
+          "medio": "RFI",
+          "dominio": "rfi.fr",
           "pais": "FRA",
           "idioma": "es",
-          "publicada": "2026-08-30T13:08:57+00:00"
+          "publicada": "2026-08-29T11:47:32+00:00"
         }
       ]
     },
     {
       "asunto": "En directo: Nepal y China mantienen las labores de rescate para localizar a más de 3.000 desaparecidos",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "origen_unico",
         "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
@@ -739,6 +869,8 @@
     },
     {
       "asunto": "10 subjects we think Jamaican schools must add",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "origen_unico",
         "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
@@ -774,6 +906,8 @@
     },
     {
       "asunto": "Iran war live: IRGC attacks US bases in Jordan after US bombs Larak Island",
+      "paises": [],
+      "bloques": [],
       "corroboracion": {
         "estado": "origen_unico",
         "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
@@ -813,11 +947,31 @@
     "medios_que_respondieron": 22,
     "notas_leidas": 530,
     "notas_en_ventana": 396,
-    "asuntos_con_cruce": 19,
-    "corroborado_fuerte": 1,
-    "corroborado": 10,
-    "origen_unico": 8
+    "asuntos_con_cruce": 20,
+    "corroborado_fuerte": 0,
+    "corroborado": 12,
+    "origen_unico": 8,
+    "asuntos_sin_pais": 17,
+    "indice_infoxicacion_pct": 0.0,
+    "asuntos_amplificados_sin_corroborar": 0
   },
+  "por_pais": [
+    {
+      "iso": "VEN",
+      "pais": "Venezuela",
+      "asuntos": 2
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "asuntos": 1
+    },
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "asuntos": 1
+    }
+  ],
   "umbral_similitud": 0.32,
   "metodo": "Frecuencia de término por frecuencia inversa de documento y similitud del coseno sobre los títulos, con enlace simple. Sin modelos de lenguaje."
 }

@@ -10,6 +10,9 @@ nacionales no dan.
 | Gobernanza | Control de la corrupción | Worldwide Governance Indicators |
 | Gobernanza | Estado de derecho | Worldwide Governance Indicators |
 | Gobernanza | Estabilidad política y ausencia de violencia | Worldwide Governance Indicators |
+| Desarrollo | Población urbana y asentamientos precarios | Banco Mundial y ONU-Hábitat |
+| Desarrollo | Industria — valor agregado | Cuentas nacionales |
+| Desarrollo | Minerales y rentas de recursos naturales | UN Comtrade y Banco Mundial |
 
 Sin clave y sin registro. Los datos del Banco Mundial se publican bajo licencia
 abierta con atribución, que **no restringe el uso comercial**: a diferencia de
@@ -62,6 +65,36 @@ INDICADORES = [
      "origen": "Worldwide Governance Indicators, Banco Mundial",
      "cautela": "Estimación de percepción sobre la probabilidad de inestabilidad o "
                 "violencia por motivos políticos. No es un pronóstico."},
+    {"clave": "urbanizacion", "codigo": "SP.URB.TOTL.IN.ZS", "fuente_id": None,
+     "rotulo": "Población urbana", "eje": "Desarrollo",
+     "unidad": "% de la población", "mas_es_peor": False,
+     "origen": "Banco Mundial, sobre censos nacionales",
+     "cautela": "Mide concentración urbana, no calidad de vida urbana. Un valor alto "
+                "no es bueno ni malo por sí mismo."},
+    {"clave": "asentamientos", "codigo": "EN.POP.SLUM.UR.ZS", "fuente_id": None,
+     "rotulo": "Población en asentamientos precarios", "eje": "Desarrollo",
+     "unidad": "% de la población urbana", "mas_es_peor": True,
+     "origen": "ONU-Hábitat, compilado por el Banco Mundial",
+     "cautela": "Serie con cobertura irregular: varios Estados no la reportan todos los "
+                "años y el último dato puede ser viejo."},
+    {"clave": "industria", "codigo": "NV.IND.TOTL.ZS", "fuente_id": None,
+     "rotulo": "Industria — valor agregado", "eje": "Desarrollo",
+     "unidad": "% del producto", "mas_es_peor": False,
+     "origen": "Cuentas nacionales, compiladas por el Banco Mundial",
+     "cautela": "Peso del sector industrial en el producto. No mide su complejidad ni "
+                "su valor agregado tecnológico."},
+    {"clave": "minerales", "codigo": "TX.VAL.MMTL.ZS.UN", "fuente_id": None,
+     "rotulo": "Exportación de minerales y metales", "eje": "Desarrollo",
+     "unidad": "% de las exportaciones", "mas_es_peor": False,
+     "origen": "UN Comtrade, compilado por el Banco Mundial",
+     "cautela": "Mide dependencia exportadora de materias primas minerales. Un valor "
+                "alto señala exposición al precio internacional, no riqueza."},
+    {"clave": "rentas_naturales", "codigo": "NY.GDP.TOTL.RT.ZS", "fuente_id": None,
+     "rotulo": "Rentas de recursos naturales", "eje": "Desarrollo",
+     "unidad": "% del producto", "mas_es_peor": True,
+     "origen": "Banco Mundial",
+     "cautela": "Proporción del producto que proviene de extraer recursos. Es el "
+                "indicador clásico de exposición a la maldición de los recursos."},
 ]
 
 
