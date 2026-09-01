@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "cobertura",
     "capa": "publico",
-    "obtenido_en": "2026-09-01T07:25:44+00:00",
+    "obtenido_en": "2026-09-01T08:27:33+00:00",
     "fuente": {
       "nombre": "Padrón de medios de la Fundación Sherman Kent",
       "url": "colectores/medios.json"
@@ -19,14 +19,14 @@
       "El agrupamiento es por similitud de texto y falla en los dos sentidos: puede unir dos asuntos distintos que comparten palabras, y puede separar el mismo asunto contado con vocabulario diferente.",
       "El padrón tiene 153 medios verificados en 40 jurisdicciones. **-7 Estados del padrón no tienen medio propio en el registro**, y el Caribe angloparlante es el bloque peor cubierto.",
       "Idiomas presentes: en (54), es (82), fr (4), nl (3), pt (9), ru (1). Faltan el neerlandés de Surinam y el criollo haitiano, exigidos por doctrina/siwa.md §4.1.",
-      "Ventana de 48 horas. 162 notas llegaron sin fecha de publicación y se conservaron sin poder verificar su antigüedad.",
+      "Ventana de 48 horas. 160 notas llegaron sin fecha de publicación y se conservaron sin poder verificar su antigüedad.",
       "Un grupo de una sola nota no se publica: sin cruce no hay cobertura cruzada.",
       "La atribución de un asunto a un país es por DICCIONARIO de nombres y gentilicios, no por comprensión del texto. Un asunto que nombre al país con un giro que no figure en la lista queda sin atribuir; uno que lo nombre al pasar queda atribuido igual. La lista es editable por el equipo analítico.",
-      "101 de 101 asuntos no pudieron atribuirse a ningún Estado del padrón: en su mayoría son noticias internacionales sin mención regional.",
+      "105 de 105 asuntos no pudieron atribuirse a ningún Estado del padrón: en su mayoría son noticias internacionales sin mención regional.",
       "El índice de infoxicación mide la proporción de asuntos repetidos por tres o más portales que NINGÚN segundo origen independiente corrobora. Es amplificación sin verificación, no desinformación probada: no dice que el asunto sea falso, dice que se repite sin que nadie de otra jurisdicción o idioma lo confirme.",
-      "25 canales no respondieron en esta corrida: AlterPresse (HTI): ParseError; TalCual (VEN): HTTPError; Real Instituto Elcano (ESP): HTTPError; Elcano · analisis (ESP): HTTPError; CELAG (REG): ParseError; La Tercera (CHL): ParseError; Semana (COL): ParseError; La Nacion CR (CRI): ParseError; OnCuba (CUB): ParseError; Prensa Libre (GTM): ParseError; La Prensa PA (PAN): ParseError; Intercept Brasil (BRA): ParseError; InfoAmazonia (BRA): ParseError; Americas Quarterly (INT): ParseError; The St Kitts Nevis Observer (KNA): ParseError; St Kitts Nevis Times (KNA): HTTPError; El Comercio (PER): ParseError; Expreso (ECU): ParseError; Brecha (URY): ParseError; elDiarioAR (ARG): ParseError; Gazette Haiti (HTI): ParseError; Fundación Myrna Mack (GTM): HTTPError; OCCRP en español (REG): ParseError; WINN FM (KNA): ParseError; Grenada Broadcasting (GRD): ParseError."
+      "23 canales no respondieron en esta corrida: Granma (CUB): URLError; AlterPresse (HTI): ParseError; TalCual (VEN): HTTPError; Real Instituto Elcano (ESP): HTTPError; Elcano · analisis (ESP): HTTPError; La Tercera (CHL): ParseError; Semana (COL): ParseError; La Nacion CR (CRI): ParseError; OnCuba (CUB): ParseError; Prensa Libre (GTM): ParseError; La Prensa PA (PAN): ParseError; Intercept Brasil (BRA): ParseError; InfoAmazonia (BRA): ParseError; Americas Quarterly (INT): ParseError; St Kitts Nevis Times (KNA): HTTPError; El Comercio (PER): ParseError; Expreso (ECU): ParseError; Brecha (URY): ParseError; elDiarioAR (ARG): ParseError; Eye Witness News (BHS): HTTPError; Gazette Haiti (HTI): ParseError; Fundación Myrna Mack (GTM): HTTPError; OCCRP en español (REG): ParseError."
     ],
-    "cantidad": 101,
+    "cantidad": 105,
     "atribucion": {
       "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
       "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
@@ -154,52 +154,101 @@
       ]
     },
     {
-      "asunto": "Trump presiona a Apple para que cambie en sus mapas el nombre del lago Ontario por lago América",
+      "asunto": "Rusia e Israel negaron la acusación de Pedro Sánchez sobre la difusión de noticias falsas que desencadenaron la crisis de Ceuta",
       "paises": [],
       "bloques": [],
       "corroboracion": {
         "estado": "corroborado_fuerte",
         "nota": "Dos o más idiomas distintos.",
         "origenes_independientes": 3,
-        "portales": 3,
+        "portales": 4,
+        "idiomas": [
+          "en",
+          "es"
+        ],
+        "paises": [
+          "FRA",
+          "KNA",
+          "URY"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "¿Qué papel atribuye Pedro Sánchez a Israel y Rusia en la crisis migratoria de Ceuta?",
+          "enlace": "https://www.france24.com/es/video/20260831-qu%C3%A9-papel-atribuye-pedro-s%C3%A1nchez-a-israel-y-rusia-en-la-crisis-migratoria-de-ceuta",
+          "medio": "France 24",
+          "dominio": "france24.com",
+          "pais": "FRA",
+          "idioma": "es",
+          "publicada": "2026-08-31T20:58:41+00:00"
+        },
+        {
+          "titulo": "Ceuta: Sánchez acusa a “la internacional ultraderechista” por la ola migratoria marroquí",
+          "enlace": "https://www.rfi.fr/es/europa/20260831-ceuta-s%C3%A1nchez-acusa-a-la-internacional-ultraderechista-por-la-ola-migratoria-marroqu%C3%AD",
+          "medio": "RFI",
+          "dominio": "rfi.fr",
+          "pais": "FRA",
+          "idioma": "es",
+          "publicada": "2026-08-31T12:10:52+00:00"
+        },
+        {
+          "titulo": "Rusia e Israel negaron la acusación de Pedro Sánchez sobre la difusión de noticias falsas que desencadenaron la crisis de Ceuta",
+          "enlace": "https://ladiaria.com.uy/mundo/articulo/2026/8/rusia-e-israel-negaron-la-acusacion-de-pedro-sanchez-sobre-la-difusion-de-noticias-falsas-que-desencadenaron-la-crisis-de-ceuta/",
+          "medio": "La Diaria",
+          "dominio": "ladiaria.com.uy",
+          "pais": "URY",
+          "idioma": "es",
+          "publicada": "2026-08-31T20:10:42-03:00"
+        },
+        {
+          "titulo": "Spain’s Sanchez says Russia, Israel spread disinformation on Ceuta crisis",
+          "enlace": "https://www.winnmediaskn.com/spains-sanchez-says-russia-israel-spread-disinformation-on-ceuta-crisis/",
+          "medio": "WINN FM",
+          "dominio": "winnmediaskn.com",
+          "pais": "KNA",
+          "idioma": "en",
+          "publicada": "2026-08-31T21:10:46+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Nepal y China superan los 1.000 muertos por la avalancha, mientras casi 4.500 personas siguen desaparecidas",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado_fuerte",
+        "nota": "Dos o más idiomas distintos.",
+        "origenes_independientes": 2,
+        "portales": 2,
         "idiomas": [
           "es",
           "ru"
         ],
         "paises": [
           "FRA",
-          "NIC",
           "REG"
         ],
         "centros_de_estudio": []
       },
       "notas": [
         {
-          "titulo": "En adelante es Lago América, no Lago Ontario, al menos en Google Maps",
-          "enlace": "https://www.rfi.fr/es/am%C3%A9ricas/20260831-en-adelante-es-lago-am%C3%A9rica-no-lago-ontario-al-menos-en-google-maps",
-          "medio": "RFI",
-          "dominio": "rfi.fr",
+          "titulo": "Nepal y China superan los 1.000 muertos por la avalancha, mientras casi 4.500 personas siguen desaparecidas",
+          "enlace": "https://www.france24.com/es/asia-pac%C3%ADfico/20260901-nepal-y-china-superan-los-1-000-muertos-por-la-avalancha-mientras-casi-4-500-personas-siguen-desaparecidas",
+          "medio": "France 24",
+          "dominio": "france24.com",
           "pais": "FRA",
           "idioma": "es",
-          "publicada": "2026-08-31T14:12:22+00:00"
+          "publicada": "2026-09-01T08:06:08+00:00"
         },
         {
-          "titulo": "Google Maps cambia nombre de lago Ontario a “lago América” en Estados Unidos",
-          "enlace": "https://confidencial.digital/revista-niu/google-maps-cambia-nombre-de-lago-ontario-a-lago-america-en-estados-unidos/",
-          "medio": "Confidencial",
-          "dominio": "confidencial.digital",
-          "pais": "NIC",
-          "idioma": "es",
-          "publicada": "2026-08-30T20:54:50+00:00"
-        },
-        {
-          "titulo": "Trump presiona a Apple para que cambie en sus mapas el nombre del lago Ontario por lago América",
-          "enlace": "https://actualidad.rt.com/actualidad/625258-trump-presiona-apple-cambie-mapas?utm_source=rss&utm_medium=rss&utm_campaign=all",
+          "titulo": "Ya son más de 1.000 los muertos por las inundaciones repentinas en Nepal y China",
+          "enlace": "https://actualidad.rt.com/actualidad/625261-son-1000-muertos-inundaciones-repentinas-china-nepal?utm_source=rss&utm_medium=rss&utm_campaign=all",
           "medio": "RT en espanol",
           "dominio": "actualidad.rt.com",
           "pais": "REG",
           "idioma": "ru",
-          "publicada": "2026-09-01T07:20:54+00:00"
+          "publicada": "2026-09-01T07:55:43+00:00"
         }
       ]
     },
@@ -210,8 +259,8 @@
       "corroboracion": {
         "estado": "corroborado",
         "nota": "Dos o más jurisdicciones, un solo idioma.",
-        "origenes_independientes": 9,
-        "portales": 10,
+        "origenes_independientes": 10,
+        "portales": 11,
         "idiomas": [
           "es"
         ],
@@ -224,7 +273,8 @@
           "GBR",
           "MEX",
           "NIC",
-          "REG"
+          "REG",
+          "URY"
         ],
         "centros_de_estudio": []
       },
@@ -327,6 +377,15 @@
           "pais": "NIC",
           "idioma": "es",
           "publicada": "2026-08-31T19:15:00+00:00"
+        },
+        {
+          "titulo": "Lionel Messi confirmó su retiro de la selección de Argentina",
+          "enlace": "https://ladiaria.com.uy/deporte/articulo/2026/8/lionel-messi-confirmo-su-retiro-de-la-seleccion-de-argentina/",
+          "medio": "La Diaria",
+          "dominio": "ladiaria.com.uy",
+          "pais": "URY",
+          "idioma": "es",
+          "publicada": "2026-08-31T14:05:09-03:00"
         },
         {
           "titulo": "\"Me vacié, ya no tengo más para dar\": Messi anuncia su retirada de la selección argentina",
@@ -622,7 +681,7 @@
       ]
     },
     {
-      "asunto": "Cómo es el potente cohete Falcon Heavy con el que la NASA lanzó el telescopio Roman",
+      "asunto": "Dolly Parton laid to rest alongside husband in Nashville",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -631,32 +690,32 @@
         "origenes_independientes": 2,
         "portales": 2,
         "idiomas": [
-          "es"
+          "en"
         ],
         "paises": [
-          "ARG",
-          "FRA"
+          "BRB",
+          "KNA"
         ],
         "centros_de_estudio": []
       },
       "notas": [
         {
-          "titulo": "Cómo es el potente cohete Falcon Heavy con el que la NASA lanzó el telescopio Roman",
-          "enlace": "https://www.perfil.com/noticias/ciencia/como-es-el-potente-cohete-falcon-heavy-con-el-que-la-nasa-lanzo-el-telescopio-roman.phtml",
-          "medio": "Perfil",
-          "dominio": "perfil.com",
-          "pais": "ARG",
-          "idioma": "es",
-          "publicada": "2026-08-31T23:30:00+00:00"
+          "titulo": "Dolly Parton laid to rest alongside husband in Nashville",
+          "enlace": "https://nationnews.com/2026/08/31/dolly-parton-laid-to-rest-alongside-husband-in-nashville/?utm_source=rss&utm_medium=rss&utm_campaign=dolly-parton-laid-to-rest-alongside-husband-in-nashville",
+          "medio": "The Nation",
+          "dominio": "nationnews.com",
+          "pais": "BRB",
+          "idioma": "en",
+          "publicada": "2026-08-31T17:47:02+00:00"
         },
         {
-          "titulo": "La NASA lanza su nuevo telescopio Roman para mapear los secretos del cosmos",
-          "enlace": "https://www.rfi.fr/es/ciencia/20260830-la-nasa-lanza-su-nuevo-telescopio-roman-para-mapear-los-secretos-del-cosmos",
-          "medio": "RFI",
-          "dominio": "rfi.fr",
-          "pais": "FRA",
-          "idioma": "es",
-          "publicada": "2026-08-30T07:32:06+00:00"
+          "titulo": "Dolly Parton laid to rest alongside husband in Nashville",
+          "enlace": "https://www.winnmediaskn.com/dolly-parton-laid-to-rest-alongside-husband-in-nashville/",
+          "medio": "WINN FM",
+          "dominio": "winnmediaskn.com",
+          "pais": "KNA",
+          "idioma": "en",
+          "publicada": "2026-08-31T17:32:02+00:00"
         }
       ]
     },
@@ -700,6 +759,45 @@
       ]
     },
     {
+      "asunto": "Kingsmen skipper hails ‘massive’ victory over Knight Riders",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado",
+        "nota": "Dos o más jurisdicciones, un solo idioma.",
+        "origenes_independientes": 2,
+        "portales": 2,
+        "idiomas": [
+          "en"
+        ],
+        "paises": [
+          "BRB",
+          "JAM"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Rain has final say as Kingsmen conquer Knight Riders",
+          "enlace": "https://nationnews.com/2026/08/30/rain-has-final-say-as-kingsmen-conquer-knight-riders/?utm_source=rss&utm_medium=rss&utm_campaign=rain-has-final-say-as-kingsmen-conquer-knight-riders",
+          "medio": "The Nation",
+          "dominio": "nationnews.com",
+          "pais": "BRB",
+          "idioma": "en",
+          "publicada": "2026-08-30T16:42:39+00:00"
+        },
+        {
+          "titulo": "Kingsmen skipper hails ‘massive’ victory over Knight Riders",
+          "enlace": "https://www.jamaicaobserver.com/2026/08/31/kingsmen-skipper-hails-massive-victory-knight-riders/",
+          "medio": "Jamaica Observer",
+          "dominio": "jamaicaobserver.com",
+          "pais": "JAM",
+          "idioma": "en",
+          "publicada": "2026-08-31T05:20:00+00:00"
+        }
+      ]
+    },
+    {
       "asunto": "Atentado con carro bomba contra la estación de Policía en Los Patios, en Cúcuta, Norte de Santander: esto se sabe",
       "paises": [],
       "bloques": [],
@@ -735,6 +833,45 @@
           "pais": "FRA",
           "idioma": "es",
           "publicada": "2026-08-31T09:44:14+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Sexto día consecutivo de ataques rusos contra Kiev deja al menos 12 muertos y decenas de heridos",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado",
+        "nota": "Dos o más jurisdicciones, un solo idioma.",
+        "origenes_independientes": 2,
+        "portales": 2,
+        "idiomas": [
+          "es"
+        ],
+        "paises": [
+          "DEU",
+          "FRA"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Un ataque ruso contra Kiev y sus alrededores deja al menos 12 muertos",
+          "enlace": "https://www.dw.com/es/un-ataque-ruso-contra-kiev-y-sus-alrededores-deja-al-menos-12-muertos/a-78583127?maca=spa-rss-sp-all-1122-xml-mrss",
+          "medio": "Deutsche Welle",
+          "dominio": "dw.com",
+          "pais": "DEU",
+          "idioma": "es",
+          "publicada": "2026-09-01T07:11:00+00:00"
+        },
+        {
+          "titulo": "Sexto día consecutivo de ataques rusos contra Kiev deja al menos 12 muertos y decenas de heridos",
+          "enlace": "https://www.france24.com/es/europa/20260901-sexto-d%C3%ADa-consecutivo-de-ataques-rusos-contra-kiev-deja-nueve-muertos-y-decenas-de-heridos",
+          "medio": "France 24",
+          "dominio": "france24.com",
+          "pais": "FRA",
+          "idioma": "es",
+          "publicada": "2026-09-01T06:22:30+00:00"
         }
       ]
     },
@@ -982,7 +1119,7 @@
       ]
     },
     {
-      "asunto": "Fernando Cerimedo, el polémico asesor que tejió vínculos en la sombra con la derecha latinoamericana",
+      "asunto": "Google Maps cambia nombre de lago Ontario a “lago América” en Estados Unidos",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -994,77 +1131,29 @@
           "es"
         ],
         "paises": [
-          "CHL",
-          "FRA"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Fernando Cerimedo, el polémico asesor que tejió vínculos en la sombra con la derecha latinoamericana",
-          "enlace": "https://www.france24.com/es/am%C3%A9rica-latina/20260901-fernando-cerimedo-el-pol%C3%A9mico-asesor-que-teji%C3%B3-v%C3%ADnculos-en-la-sombra-con-la-derecha-latinoamericana",
-          "medio": "France 24",
-          "dominio": "france24.com",
-          "pais": "FRA",
-          "idioma": "es",
-          "publicada": "2026-09-01T01:15:18+00:00"
-        },
-        {
-          "titulo": "Cerimedo y la sombra de la extrema derecha en Chile",
-          "enlace": "https://www.ciperchile.cl/2026/08/30/cerimedo-y-la-sombra-de-la-extrema-derecha-en-chile/?utm_source=rss&utm_medium=rss&utm_campaign=cerimedo-y-la-sombra-de-la-extrema-derecha-en-chile",
-          "medio": "CIPER",
-          "dominio": "ciperchile.cl",
-          "pais": "CHL",
-          "idioma": "es",
-          "publicada": "2026-08-30T08:00:14+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Rusia e Israel negaron la acusación de Pedro Sánchez sobre la difusión de noticias falsas que desencadenaron la crisis de Ceuta",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "corroborado",
-        "nota": "Dos o más jurisdicciones, un solo idioma.",
-        "origenes_independientes": 2,
-        "portales": 3,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
           "FRA",
-          "URY"
+          "NIC"
         ],
         "centros_de_estudio": []
       },
       "notas": [
         {
-          "titulo": "¿Qué papel atribuye Pedro Sánchez a Israel y Rusia en la crisis migratoria de Ceuta?",
-          "enlace": "https://www.france24.com/es/video/20260831-qu%C3%A9-papel-atribuye-pedro-s%C3%A1nchez-a-israel-y-rusia-en-la-crisis-migratoria-de-ceuta",
-          "medio": "France 24",
-          "dominio": "france24.com",
-          "pais": "FRA",
-          "idioma": "es",
-          "publicada": "2026-08-31T20:58:41+00:00"
-        },
-        {
-          "titulo": "Ceuta: Sánchez acusa a “la internacional ultraderechista” por la ola migratoria marroquí",
-          "enlace": "https://www.rfi.fr/es/europa/20260831-ceuta-s%C3%A1nchez-acusa-a-la-internacional-ultraderechista-por-la-ola-migratoria-marroqu%C3%AD",
+          "titulo": "En adelante es Lago América, no Lago Ontario, al menos en Google Maps",
+          "enlace": "https://www.rfi.fr/es/am%C3%A9ricas/20260831-en-adelante-es-lago-am%C3%A9rica-no-lago-ontario-al-menos-en-google-maps",
           "medio": "RFI",
           "dominio": "rfi.fr",
           "pais": "FRA",
           "idioma": "es",
-          "publicada": "2026-08-31T12:10:52+00:00"
+          "publicada": "2026-08-31T14:12:22+00:00"
         },
         {
-          "titulo": "Rusia e Israel negaron la acusación de Pedro Sánchez sobre la difusión de noticias falsas que desencadenaron la crisis de Ceuta",
-          "enlace": "https://ladiaria.com.uy/mundo/articulo/2026/8/rusia-e-israel-negaron-la-acusacion-de-pedro-sanchez-sobre-la-difusion-de-noticias-falsas-que-desencadenaron-la-crisis-de-ceuta/",
-          "medio": "La Diaria",
-          "dominio": "ladiaria.com.uy",
-          "pais": "URY",
+          "titulo": "Google Maps cambia nombre de lago Ontario a “lago América” en Estados Unidos",
+          "enlace": "https://confidencial.digital/revista-niu/google-maps-cambia-nombre-de-lago-ontario-a-lago-america-en-estados-unidos/",
+          "medio": "Confidencial",
+          "dominio": "confidencial.digital",
+          "pais": "NIC",
           "idioma": "es",
-          "publicada": "2026-08-31T20:10:42-03:00"
+          "publicada": "2026-08-30T20:54:50+00:00"
         }
       ]
     },
@@ -1663,6 +1752,45 @@
       ]
     },
     {
+      "asunto": "Jamaicans loud and proud! T&T envoy lauds citizens for their open display of patriotism",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "corroborado",
+        "nota": "Dos o más jurisdicciones, un solo idioma.",
+        "origenes_independientes": 2,
+        "portales": 2,
+        "idiomas": [
+          "en"
+        ],
+        "paises": [
+          "JAM",
+          "KNA"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Jamaicans loud and proud!",
+          "enlace": "https://www.jamaicaobserver.com/2026/08/31/jamaicans-loud-proud/",
+          "medio": "Jamaica Observer",
+          "dominio": "jamaicaobserver.com",
+          "pais": "JAM",
+          "idioma": "en",
+          "publicada": "2026-08-31T05:29:00+00:00"
+        },
+        {
+          "titulo": "Jamaicans loud and proud! T&T envoy lauds citizens for their open display of patriotism",
+          "enlace": "https://www.winnmediaskn.com/jamaicans-loud-and-proud-tt-envoy-lauds-citizens-for-their-open-display-of-patriotism/",
+          "medio": "WINN FM",
+          "dominio": "winnmediaskn.com",
+          "pais": "KNA",
+          "idioma": "en",
+          "publicada": "2026-08-31T20:56:19+00:00"
+        }
+      ]
+    },
+    {
       "asunto": "New York police kill knife-wielding woman in Times Square",
       "paises": [],
       "bloques": [],
@@ -1702,7 +1830,7 @@
       ]
     },
     {
-      "asunto": "Argentinian footballer Lionel Messi announces his retirement",
+      "asunto": "White House Publishes Venezuela Oil Deal Terms as Trump Says Exxon Is Going In",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -1714,29 +1842,29 @@
           "en"
         ],
         "paises": [
-          "ARG",
+          "BRA",
           "QAT"
         ],
         "centros_de_estudio": []
       },
       "notas": [
         {
-          "titulo": "Argentinian footballer Lionel Messi announces his retirement",
-          "enlace": "https://www.aljazeera.com/video/newsfeed/2026/8/31/argentinian-footballer-lionel-messi-announces-his-retirement?traffic_source=rss",
+          "titulo": "White House unveils more details of Trump’s Venezuela oil deal",
+          "enlace": "https://www.aljazeera.com/news/2026/9/1/white-house-unveils-more-details-of-trumps-venezuela-oil-deal?traffic_source=rss",
           "medio": "Al Jazeera",
           "dominio": "aljazeera.com",
           "pais": "QAT",
           "idioma": "en",
-          "publicada": "2026-08-31T20:50:47+00:00"
+          "publicada": "2026-09-01T07:39:52+00:00"
         },
         {
-          "titulo": "Lionel Messi announces retirement from national team",
-          "enlace": "https://buenosairesherald.com/sports/stars/messi/lionel-messi-announces-retirement-from-national-team",
-          "medio": "Buenos Aires Herald",
-          "dominio": "buenosairesherald.com",
-          "pais": "ARG",
+          "titulo": "White House Publishes Venezuela Oil Deal Terms as Trump Says Exxon Is Going In",
+          "enlace": "https://www.riotimesonline.com/venezuela-oil-deal-terms-exxon-blue-energy-2026/",
+          "medio": "The Rio Times",
+          "dominio": "riotimesonline.com",
+          "pais": "BRA",
           "idioma": "en",
-          "publicada": "2026-08-31T15:49:00+00:00"
+          "publicada": "2026-09-01T07:27:01+00:00"
         }
       ]
     },
@@ -1780,7 +1908,7 @@
       ]
     },
     {
-      "asunto": "Seis estados de Venezuela reportan vías inundadas durante la Onda Tropical 43",
+      "asunto": "Dakota Johnson y Robert Pattinson, entre los actores de las películas más esperadas de la Mostra de Venecia",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -1792,38 +1920,29 @@
           "es"
         ],
         "paises": [
-          "DOM",
-          "VEN"
+          "ECU",
+          "PRY"
         ],
         "centros_de_estudio": []
       },
       "notas": [
         {
-          "titulo": "Inundaciones en Santo Domingo por lluvias intensas",
-          "enlace": "https://www.diariolibre.com/planeta/clima/2026/08/31/inundaciones-en-santo-domingo-por-lluvias-intensas/3645239",
-          "medio": "Diario Libre",
-          "dominio": "diariolibre.com",
-          "pais": "DOM",
+          "titulo": "Dakota Johnson y Robert Pattinson, entre los actores de las películas más esperadas de la Mostra de Venecia",
+          "enlace": "https://eluniverso.com/entretenimiento/cine/dakota-johnson-y-robert-pattinson-entre-los-actores-de-las-peliculas-mas-esperadas-de-la-mostra-de-venecia-nota/",
+          "medio": "El Universo",
+          "dominio": "eluniverso.com",
+          "pais": "ECU",
           "idioma": "es",
-          "publicada": null
+          "publicada": "2026-08-31T23:40:11+00:00"
         },
         {
-          "titulo": "Inundaciones Gran Santo Domingo por onda tropical",
-          "enlace": "https://www.diariolibre.com/planeta/clima/2026/08/31/inundaciones-gran-santo-domingo-por-onda-tropical/3645013",
-          "medio": "Diario Libre",
-          "dominio": "diariolibre.com",
-          "pais": "DOM",
+          "titulo": "De Pattinson a Bardem y Cruz, las películas más esperadas de la Mostra de Venecia",
+          "enlace": "https://elnacional.com.py/agenda-cultural/de-pattinson-bardem-cruz-peliculas-mas-esperadas-mostra-venecia-n111315",
+          "medio": "El Nacional PY",
+          "dominio": "elnacional.com.py",
+          "pais": "PRY",
           "idioma": "es",
-          "publicada": null
-        },
-        {
-          "titulo": "Seis estados de Venezuela reportan vías inundadas durante la Onda Tropical 43",
-          "enlace": "https://runrun.es/noticias/618770/seis-estados-de-venezuela-reportan-vias-inundadas-durante-la-onda-tropical-43/",
-          "medio": "Runrunes",
-          "dominio": "runrun.es",
-          "pais": "VEN",
-          "idioma": "es",
-          "publicada": "2026-08-31T21:42:15+00:00"
+          "publicada": "2026-09-01T05:10:00-03:00"
         }
       ]
     },
@@ -1906,14 +2025,14 @@
       ]
     },
     {
-      "asunto": "USA & Canada Intelligence Brief — Monday, August 31, 2026",
+      "asunto": "International News Briefs for Monday, August 31, 2026",
       "paises": [],
       "bloques": [],
       "corroboracion": {
         "estado": "corroborado",
-        "nota": "Dos o más jurisdicciones, un solo idioma. Con respaldo analítico de 1 centro(s) de estudio.",
+        "nota": "Dos o más jurisdicciones, un solo idioma.",
         "origenes_independientes": 2,
-        "portales": 3,
+        "portales": 2,
         "idiomas": [
           "en"
         ],
@@ -1921,9 +2040,7 @@
           "BRA",
           "CUB"
         ],
-        "centros_de_estudio": [
-          "Small Wars Journal"
-        ]
+        "centros_de_estudio": []
       },
       "notas": [
         {
@@ -1936,49 +2053,13 @@
           "publicada": "2026-08-31T14:34:18+00:00"
         },
         {
-          "titulo": "USA & Canada Intelligence Brief — Monday, August 31, 2026",
-          "enlace": "https://www.riotimesonline.com/usa-canada-intelligence-brief-monday-august-31-2026/",
+          "titulo": "Gold & Silver Daily Wrap — Monday, August 31, 2026",
+          "enlace": "https://www.riotimesonline.com/gold-silver-daily-wrap-monday-august-31-2026/",
           "medio": "The Rio Times",
           "dominio": "riotimesonline.com",
           "pais": "BRA",
           "idioma": "en",
-          "publicada": null
-        },
-        {
-          "titulo": "Europe Intelligence Brief — Monday, August 31, 2026",
-          "enlace": "https://www.riotimesonline.com/europe-intelligence-brief-monday-august-31-2026/",
-          "medio": "The Rio Times",
-          "dominio": "riotimesonline.com",
-          "pais": "BRA",
-          "idioma": "en",
-          "publicada": "2026-08-31T19:14:23+00:00"
-        },
-        {
-          "titulo": "Asia Intelligence Brief — Monday, August 31, 2026",
-          "enlace": "https://www.riotimesonline.com/asia-intelligence-brief-monday-august-31-2026/",
-          "medio": "The Rio Times",
-          "dominio": "riotimesonline.com",
-          "pais": "BRA",
-          "idioma": "en",
-          "publicada": null
-        },
-        {
-          "titulo": "Africa Intelligence Brief — Monday, August 31, 2026",
-          "enlace": "https://www.riotimesonline.com/africa-intelligence-brief-monday-august-31-2026/",
-          "medio": "The Rio Times",
-          "dominio": "riotimesonline.com",
-          "pais": "BRA",
-          "idioma": "en",
-          "publicada": "2026-08-31T18:34:32+00:00"
-        },
-        {
-          "titulo": "SOF Weekly Brief – August 31, 2026",
-          "enlace": "https://smallwarsjournal.com/2026/08/31/sof-weekly-brief-august-31-2026/",
-          "medio": "Small Wars Journal",
-          "dominio": "smallwarsjournal.com",
-          "pais": "INT",
-          "idioma": "en",
-          "publicada": "2026-08-31T10:27:12+00:00"
+          "publicada": "2026-09-01T07:41:25+00:00"
         }
       ]
     },
@@ -2021,144 +2102,7 @@
       ]
     },
     {
-      "asunto": "Previsão do tempo hoje para São Bernardo do Campo (SP): sol com muitas nuvens a nublado com chuva de manhã; tarde com temporal e noite chuvosa",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "pt"
-        ],
-        "paises": [
-          "BRA"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Previsão do tempo hoje para Brasília (DF): dia de sol com algumas nuvens e névoa ao amanhecer; noite com poucas nuvens",
-          "enlace": "https://g1.globo.com/df/distrito-federal/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-brasilia-df-dia-de-sol-com-algumas-nuvens-e-nevoa-ao-amanhecer-noite-com-poucas-nuvens.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:07:17+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para São Paulo (SP): sol com muitas nuvens a nublado com chuva no fim da manhã; tarde e noite chuvosas",
-          "enlace": "https://g1.globo.com/sp/sao-paulo/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-sao-paulo-sp-sol-com-muitas-nuvens-a-nublado-com-chuva-no-fim-da-manha-tarde-e-noite-chuvosas.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:07:01+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para São Bernardo do Campo (SP): sol com muitas nuvens a nublado com chuva de manhã; tarde com temporal e noite chuvosa",
-          "enlace": "https://g1.globo.com/sp/sao-paulo/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-sao-bernardo-do-campo-sp-sol-com-muitas-nuvens-a-nublado-com-chuva-de-manha-tarde-com-temporal-e-noite-chuvosa.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:06:44+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para Santo André (SP): sol com muitas nuvens a nublado com chuva de manhã; tarde com temporal e noite chuvosa",
-          "enlace": "https://g1.globo.com/sp/sao-paulo/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-santo-andre-sp-sol-com-muitas-nuvens-a-nublado-com-chuva-de-manha-tarde-com-temporal-e-noite-chuvosa.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:06:27+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para Osasco (SP): sol com muitas nuvens a nublado com chuva de manhã; tarde com temporal e noite chuvosa",
-          "enlace": "https://g1.globo.com/sp/sao-paulo/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-osasco-sp-sol-com-muitas-nuvens-a-nublado-com-chuva-de-manha-tarde-com-temporal-e-noite-chuvosa.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:06:10+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para Guarulhos (SP): sol com muitas nuvens a nublado com chuva de manhã; tarde com temporal e noite chuvosa",
-          "enlace": "https://g1.globo.com/sp/sao-paulo/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-guarulhos-sp-sol-com-muitas-nuvens-a-nublado-com-chuva-de-manha-tarde-com-temporal-e-noite-chuvosa.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:05:51+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para São Gonçalo (RJ): sol com muitas nuvens e períodos de céu nublado; noite com pancadas de chuva",
-          "enlace": "https://g1.globo.com/rj/rio-de-janeiro/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-sao-goncalo-rj-sol-com-muitas-nuvens-e-periodos-de-ceu-nublado-noite-com-pancadas-de-chuva.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:05:33+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para o Rio de Janeiro (RJ): sol com muitas nuvens; pancadas de chuva à tarde e à noite",
-          "enlace": "https://g1.globo.com/rj/rio-de-janeiro/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-o-rio-de-janeiro-rj-sol-com-muitas-nuvens-pancadas-de-chuva-a-tarde-e-a-noite.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:05:09+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para Nova Iguaçu (RJ): sol com muitas nuvens e períodos de céu nublado; noite com pancadas de chuva",
-          "enlace": "https://g1.globo.com/rj/rio-de-janeiro/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-nova-iguacu-rj-sol-com-muitas-nuvens-e-periodos-de-ceu-nublado-noite-com-pancadas-de-chuva.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:04:52+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para Niterói (RJ): sol com muitas nuvens e períodos de céu nublado; noite com pancadas de chuva",
-          "enlace": "https://g1.globo.com/rj/rio-de-janeiro/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-niteroi-rj-sol-com-muitas-nuvens-e-periodos-de-ceu-nublado-noite-com-pancadas-de-chuva.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:04:33+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para Duque de Caxias (RJ): sol com muitas nuvens e períodos de céu nublado; noite com pancadas de chuva",
-          "enlace": "https://g1.globo.com/rj/rio-de-janeiro/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-duque-de-caxias-rj-sol-com-muitas-nuvens-e-periodos-de-ceu-nublado-noite-com-pancadas-de-chuva.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:04:17+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para Sete Lagoas (MG): sol o dia todo sem nuvens no céu, com aumento de nebulosidade à noite; não chove",
-          "enlace": "https://g1.globo.com/mg/minas-gerais/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-sete-lagoas-mg-sol-o-dia-todo-sem-nuvens-no-ceu-com-aumento-de-nebulosidade-a-noite-nao-chove.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:03:51+00:00"
-        },
-        {
-          "titulo": "Previsão do tempo hoje para Ribeirão das Neves (MG): dia de sol com algumas nuvens e névoa ao amanhecer; noite com poucas nuvens",
-          "enlace": "https://g1.globo.com/mg/minas-gerais/previsao-do-tempo/noticia/2026/09/01/previsao-do-tempo-hoje-para-ribeirao-das-neves-mg-dia-de-sol-com-algumas-nuvens-e-nevoa-ao-amanhecer-noite-com-poucas-nuvens.ghtml",
-          "medio": "G1 Globo",
-          "dominio": "g1.globo.com",
-          "pais": "BRA",
-          "idioma": "pt",
-          "publicada": "2026-09-01T04:03:34+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Estwick vows to rebuild DLP as ‘govt-in-waiting’",
+      "asunto": "New DLP president ‘must reconcile factions, rebuild party’",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -2176,13 +2120,13 @@
       },
       "notas": [
         {
-          "titulo": "Estwick vows to rebuild DLP as ‘govt-in-waiting’",
-          "enlace": "https://barbadostoday.bb/2026/08/31/estwick-vows-to-rebuild-dlp-as-govt-in-waiting/",
+          "titulo": "New DLP president ‘must reconcile factions, rebuild party’",
+          "enlace": "https://barbadostoday.bb/2026/08/31/new-dlp-president-must-reconcile-factions-rebuild-party/",
           "medio": "Barbados Today",
           "dominio": "barbadostoday.bb",
           "pais": "BRB",
           "idioma": "en",
-          "publicada": "2026-08-31T22:45:06+00:00"
+          "publicada": "2026-09-01T00:45:41+00:00"
         },
         {
           "titulo": "Estwick elected DLP president",
@@ -2319,7 +2263,7 @@
       ]
     },
     {
-      "asunto": "Última pista de Michelle Dayana, menor de seis años reportada como desaparecida, antes de ser hallada muerta en Antioquia: un video es clave",
+      "asunto": "¡Pilas! Cali retoma la rotación habitual del pico y placa este martes 1 de septiembre: estas son las placas con restricción",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -2337,60 +2281,22 @@
       },
       "notas": [
         {
-          "titulo": "Última pista de Michelle Dayana, menor de seis años reportada como desaparecida, antes de ser hallada muerta en Antioquia: un video es clave",
-          "enlace": "https://www.eltiempo.com/colombia/medellin/ultima-pista-de-michelle-dayana-menor-de-seis-anos-reportada-como-desaparecida-antes-de-ser-hallada-muerta-en-antioquia-un-video-clave-3582564",
+          "titulo": "¡Pilas! Cali retoma la rotación habitual del pico y placa este martes 1 de septiembre: estas son las placas con restricción",
+          "enlace": "https://www.eltiempo.com/colombia/cali/pilas-cali-retoma-la-rotacion-habitual-del-pico-y-placa-este-martes-1-de-septiembre-estas-son-las-placas-con-restriccion-3582436",
           "medio": "El Tiempo",
           "dominio": "eltiempo.com",
           "pais": "COL",
           "idioma": "es",
-          "publicada": "2026-08-31T23:30:00-05:00"
+          "publicada": "2026-09-01T03:01:00-05:00"
         },
         {
-          "titulo": "Tras una semana de búsqueda, Michelle Dayana Henao, de seis años, fue encontrada sin vida en zona rural de Buriticá, Antioquia",
-          "enlace": "https://www.eltiempo.com/colombia/medellin/tras-una-semana-de-busqueda-michelle-dayana-henao-de-10-anos-fue-encontrada-sin-vida-en-zona-rural-de-buritica-antioquia-3582526",
+          "titulo": "¡Ojo! Así regirá el pico y placa en Bucaramanga este martes 1 de septiembre de 2026: consulte las placas restringidas",
+          "enlace": "https://www.eltiempo.com/colombia/santander/ojo-asi-regira-el-pico-y-placa-en-bucaramanga-este-martes-1-de-septiembre-de-2026-consulte-las-placas-restringidas-3582430",
           "medio": "El Tiempo",
           "dominio": "eltiempo.com",
           "pais": "COL",
           "idioma": "es",
-          "publicada": "2026-08-31T22:32:57-05:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Velero Open Arms regresa con más de siete toneladas de ayuda humanitaria a Cuba",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 2,
-        "idiomas": [
-          "es"
-        ],
-        "paises": [
-          "CUB"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Velero Open Arms regresa con más de siete toneladas de ayuda humanitaria a Cuba",
-          "enlace": "http://www.granma.cu/cuba/2026-08-31/velero-open-arms-regresa-con-mas-de-siete-toneladas-de-ayuda-humanitaria-a-cuba-31-08-2026-19-08-46",
-          "medio": "Granma",
-          "dominio": "granma.cu",
-          "pais": "CUB",
-          "idioma": "es",
-          "publicada": "2026-08-31T19:08:46-04:00"
-        },
-        {
-          "titulo": "El velero 'Astral' de Open Arms vuelve a La Habana con siete toneladas de ayuda",
-          "enlace": "https://www.14ymedio.com/cuba/velero-astral-open-arms-vuelve_1_1130300.html",
-          "medio": "14ymedio",
-          "dominio": "14ymedio.com",
-          "pais": "CUB",
-          "idioma": "es",
-          "publicada": "2026-08-31T10:54:46+00:00"
+          "publicada": "2026-09-01T02:35:00-05:00"
         }
       ]
     },
@@ -2710,44 +2616,6 @@
       ]
     },
     {
-      "asunto": "Jamaica secures Tottori training base",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "en"
-        ],
-        "paises": [
-          "JAM"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Jamaica secures Tottori training base",
-          "enlace": "https://www.jamaicaobserver.com/2026/09/01/jamaica-secures-tottori-training-base/",
-          "medio": "Jamaica Observer",
-          "dominio": "jamaicaobserver.com",
-          "pais": "JAM",
-          "idioma": "en",
-          "publicada": "2026-09-01T05:14:00+00:00"
-        },
-        {
-          "titulo": "Jamaica secures Tottori training base",
-          "enlace": "https://www.jamaicaobserver.com/2026/09/01/jamaica-secures-tottori-training-base/",
-          "medio": "Jamaica Observer",
-          "dominio": "jamaicaobserver.com",
-          "pais": "JAM",
-          "idioma": "en",
-          "publicada": "2026-09-01T05:14:00+00:00"
-        }
-      ]
-    },
-    {
       "asunto": "Former gang member found guilty of murdering Tupac Shakur",
       "paises": [],
       "bloques": [],
@@ -2782,6 +2650,44 @@
           "pais": "JAM",
           "idioma": "en",
           "publicada": "2026-09-01T00:43:12+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Nepal-Tibet floods live: Rescue efforts under way, death toll crosses 1,000",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "origen_unico",
+        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
+        "origenes_independientes": 1,
+        "portales": 1,
+        "idiomas": [
+          "en"
+        ],
+        "paises": [
+          "QAT"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Death toll from devastating floods in China and Nepal surpasses 1,000",
+          "enlace": "https://www.aljazeera.com/news/2026/9/1/death-toll-from-devastating-floods-in-china-and-nepal-surpasses-1000?traffic_source=rss",
+          "medio": "Al Jazeera",
+          "dominio": "aljazeera.com",
+          "pais": "QAT",
+          "idioma": "en",
+          "publicada": "2026-09-01T07:49:57+00:00"
+        },
+        {
+          "titulo": "Nepal-Tibet floods live: Rescue efforts under way, death toll crosses 1,000",
+          "enlace": "https://www.aljazeera.com/news/liveblog/2026/9/1/nepal-tibet-floods-live-rescue-efforts-under-way-death-toll-crosses-1000?traffic_source=rss",
+          "medio": "Al Jazeera",
+          "dominio": "aljazeera.com",
+          "pais": "QAT",
+          "idioma": "en",
+          "publicada": "2026-09-01T07:44:35+00:00"
         }
       ]
     },
@@ -2822,6 +2728,84 @@
           "pais": "NIC",
           "idioma": "es",
           "publicada": "2026-08-30T20:07:29+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Madres y Familiares conmemoró el Día de las Víctimas de Desapariciones Forzadas: “Ya no es tiempo de pedir paciencia”",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "origen_unico",
+        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
+        "origenes_independientes": 1,
+        "portales": 2,
+        "idiomas": [
+          "es"
+        ],
+        "paises": [
+          "URY"
+        ],
+        "centros_de_estudio": [
+          "CLACSO"
+        ]
+      },
+      "notas": [
+        {
+          "titulo": "Día Internacional de las Víctimas de las Desapariciones Forzadas",
+          "enlace": "https://www.clacso.org/dia-internacional-de-las-victimas-de-las-desapariciones-forzadas/",
+          "medio": "CLACSO",
+          "dominio": "clacso.org",
+          "pais": "REG",
+          "idioma": "es",
+          "publicada": "2026-08-30T13:53:28+00:00"
+        },
+        {
+          "titulo": "Madres y Familiares conmemoró el Día de las Víctimas de Desapariciones Forzadas: “Ya no es tiempo de pedir paciencia”",
+          "enlace": "https://ladiaria.com.uy/politica/articulo/2026/8/madres-y-familiares-conmemoro-el-dia-de-las-victimas-de-desapariciones-forzadas-ya-no-es-tiempo-de-pedir-paciencia/",
+          "medio": "La Diaria",
+          "dominio": "ladiaria.com.uy",
+          "pais": "URY",
+          "idioma": "es",
+          "publicada": "2026-08-30T22:41:38-03:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Inundaciones en Santo Domingo por lluvias intensas",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "origen_unico",
+        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
+        "origenes_independientes": 1,
+        "portales": 1,
+        "idiomas": [
+          "es"
+        ],
+        "paises": [
+          "DOM"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Inundaciones en Santo Domingo por lluvias intensas",
+          "enlace": "https://www.diariolibre.com/planeta/clima/2026/08/31/inundaciones-en-santo-domingo-por-lluvias-intensas/3645239",
+          "medio": "Diario Libre",
+          "dominio": "diariolibre.com",
+          "pais": "DOM",
+          "idioma": "es",
+          "publicada": null
+        },
+        {
+          "titulo": "Inundaciones Gran Santo Domingo por onda tropical",
+          "enlace": "https://www.diariolibre.com/planeta/clima/2026/08/31/inundaciones-gran-santo-domingo-por-onda-tropical/3645013",
+          "medio": "Diario Libre",
+          "dominio": "diariolibre.com",
+          "pais": "DOM",
+          "idioma": "es",
+          "publicada": null
         }
       ]
     },
@@ -2978,6 +2962,44 @@
       ]
     },
     {
+      "asunto": "VIDS wil beschermingswet niet afgekondigd zien en eist stop op concessies in inheemse gebieden",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "origen_unico",
+        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
+        "origenes_independientes": 1,
+        "portales": 2,
+        "idiomas": [
+          "nl"
+        ],
+        "paises": [
+          "SUR"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "VIDS wijst beschermingswet af",
+          "enlace": "https://dwtonline.com/vids-wijst-beschermingswet-af/",
+          "medio": "De Ware Tijd",
+          "dominio": "dwtonline.com",
+          "pais": "SUR",
+          "idioma": "nl",
+          "publicada": "2026-09-01T05:13:24+00:00"
+        },
+        {
+          "titulo": "VIDS wil beschermingswet niet afgekondigd zien en eist stop op concessies in inheemse gebieden",
+          "enlace": "https://www.waterkant.net/suriname/2026/09/01/vids-wil-beschermingswet-niet-afgekondigd-zien-en-eist-stop-op-concessies-in-inheemse-gebieden/#utm_source=rss&utm_medium=rss&utm_campaign=vids-wil-beschermingswet-niet-afgekondigd-zien-en-eist-stop-op-concessies-in-inheemse-gebieden",
+          "medio": "Waterkant",
+          "dominio": "waterkant.net",
+          "pais": "SUR",
+          "idioma": "nl",
+          "publicada": "2026-09-01T08:00:00+00:00"
+        }
+      ]
+    },
+    {
       "asunto": "Fence removed as MP says CAbbage Beach must remain accessible to Bahamians",
       "paises": [],
       "bloques": [],
@@ -3012,82 +3034,6 @@
           "pais": "BHS",
           "idioma": "en",
           "publicada": "2026-08-31T06:00:00-04:00"
-        }
-      ]
-    },
-    {
-      "asunto": "20th Annual Abaco Business Outlook to examine infrastructure, investment and long-term prosperity",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 2,
-        "idiomas": [
-          "en"
-        ],
-        "paises": [
-          "BHS"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Investment prospects and needs among key issues at Abaco Business Outlook",
-          "enlace": "https://tribune242.com/news/2026/aug/31/investment-prospects-and-needs-among-key-issues-at-abaco-business-outlook/",
-          "medio": "Tribune 242",
-          "dominio": "tribune242.com",
-          "pais": "BHS",
-          "idioma": "en",
-          "publicada": "2026-08-31T06:00:00-04:00"
-        },
-        {
-          "titulo": "20th Annual Abaco Business Outlook to examine infrastructure, investment and long-term prosperity",
-          "enlace": "https://ewnews.com/20th-annual-abaco-business-outlook-to-examine-infrastructure-investment-and-long-term-prosperity/?utm_source=rss&utm_medium=rss&utm_campaign=20th-annual-abaco-business-outlook-to-examine-infrastructure-investment-and-long-term-prosperity",
-          "medio": "Eye Witness News",
-          "dominio": "ewnews.com",
-          "pais": "BHS",
-          "idioma": "en",
-          "publicada": "2026-08-31T08:07:07+00:00"
-        }
-      ]
-    },
-    {
-      "asunto": "Pringle calls for bipartisan review of child protection system",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
-        "origenes_independientes": 1,
-        "portales": 1,
-        "idiomas": [
-          "en"
-        ],
-        "paises": [
-          "ATG"
-        ],
-        "centros_de_estudio": []
-      },
-      "notas": [
-        {
-          "titulo": "Pringle calls for urgent audit of child protection resources",
-          "enlace": "https://antiguaobserver.com/pringle-calls-for-urgent-audit-of-child-protection-resources/",
-          "medio": "Antigua Observer",
-          "dominio": "antiguaobserver.com",
-          "pais": "ATG",
-          "idioma": "en",
-          "publicada": "2026-08-31T08:00:00+00:00"
-        },
-        {
-          "titulo": "Pringle calls for bipartisan review of child protection system",
-          "enlace": "https://antiguaobserver.com/pringle-calls-for-bipartisan-review-of-child-protection-system/",
-          "medio": "Antigua Observer",
-          "dominio": "antiguaobserver.com",
-          "pais": "ATG",
-          "idioma": "en",
-          "publicada": "2026-08-31T08:00:00+00:00"
         }
       ]
     },
@@ -3785,7 +3731,7 @@
       ]
     },
     {
-      "asunto": "Rio de Janeiro Nightlife Tonight — August 31, 2026",
+      "asunto": "Argentina Markets: Merval & the Peso — September 1, 2026",
       "paises": [],
       "bloques": [],
       "corroboracion": {
@@ -3803,22 +3749,136 @@
       },
       "notas": [
         {
-          "titulo": "São Paulo Nightlife Tonight — August 31, 2026",
-          "enlace": "https://www.riotimesonline.com/sao-paulo-nightlife-tonight-august-31-2026/",
+          "titulo": "Colombia Markets: COLCAP & the Peso — September 1, 2026",
+          "enlace": "https://www.riotimesonline.com/colombia-markets-colcap-peso-tuesday-september-1-2026/",
           "medio": "The Rio Times",
           "dominio": "riotimesonline.com",
           "pais": "BRA",
           "idioma": "en",
-          "publicada": "2026-08-31T15:52:35+00:00"
+          "publicada": "2026-09-01T07:34:27+00:00"
         },
         {
-          "titulo": "Rio de Janeiro Nightlife Tonight — August 31, 2026",
-          "enlace": "https://www.riotimesonline.com/rio-de-janeiro-nightlife-tonight-august-31-2026/",
+          "titulo": "Argentina Markets: Merval & the Peso — September 1, 2026",
+          "enlace": "https://www.riotimesonline.com/argentina-markets-merval-peso-tuesday-september-1-2026/",
           "medio": "The Rio Times",
           "dominio": "riotimesonline.com",
           "pais": "BRA",
           "idioma": "en",
-          "publicada": "2026-08-31T15:50:03+00:00"
+          "publicada": "2026-09-01T07:30:22+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Grenada: Government and teachers union at odds over date for re-opening of schools",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "origen_unico",
+        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
+        "origenes_independientes": 1,
+        "portales": 1,
+        "idiomas": [
+          "en"
+        ],
+        "paises": [
+          "KNA"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "St. Vincent: Government and opposition at odds over sale of lands",
+          "enlace": "https://www.thestkittsnevisobserver.com/st-vincent-government-and-opposition-at-odds-over-sale-of-lands/",
+          "medio": "The St Kitts Nevis Observer",
+          "dominio": "thestkittsnevisobserver.com",
+          "pais": "KNA",
+          "idioma": "en",
+          "publicada": "2026-09-01T03:33:52+00:00"
+        },
+        {
+          "titulo": "Grenada: Government and teachers union at odds over date for re-opening of schools",
+          "enlace": "https://www.thestkittsnevisobserver.com/grenada-government-and-teachers-union-at-odds-over-date-for-re-opening-of-schools/",
+          "medio": "The St Kitts Nevis Observer",
+          "dominio": "thestkittsnevisobserver.com",
+          "pais": "KNA",
+          "idioma": "en",
+          "publicada": "2026-08-31T17:40:08+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Well wishes pour in for Prime Minister Drew following news of his hospitalisation",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "origen_unico",
+        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
+        "origenes_independientes": 1,
+        "portales": 2,
+        "idiomas": [
+          "en"
+        ],
+        "paises": [
+          "KNA"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Dr Harris Extends Prayers and Well Wishes to PM Drew",
+          "enlace": "https://www.thestkittsnevisobserver.com/dr-harris-extends-prayers-and-well-wishes-to-pm-drew/",
+          "medio": "The St Kitts Nevis Observer",
+          "dominio": "thestkittsnevisobserver.com",
+          "pais": "KNA",
+          "idioma": "en",
+          "publicada": "2026-08-31T22:00:58+00:00"
+        },
+        {
+          "titulo": "Well wishes pour in for Prime Minister Drew following news of his hospitalisation",
+          "enlace": "https://www.winnmediaskn.com/well-wishes-pour-in-for-prime-minister-drew-following-news-of-his-hospitalisation/",
+          "medio": "WINN FM",
+          "dominio": "winnmediaskn.com",
+          "pais": "KNA",
+          "idioma": "en",
+          "publicada": "2026-08-31T22:10:58+00:00"
+        }
+      ]
+    },
+    {
+      "asunto": "Trinidad: Top cop issues warning as Trinidad and Tobago celebrates 64th anniversary of Independence",
+      "paises": [],
+      "bloques": [],
+      "corroboracion": {
+        "estado": "origen_unico",
+        "nota": "Todos los medios son del mismo país y del mismo idioma: cuentan como un solo origen, por más portales que sean.",
+        "origenes_independientes": 1,
+        "portales": 1,
+        "idiomas": [
+          "en"
+        ],
+        "paises": [
+          "KNA"
+        ],
+        "centros_de_estudio": []
+      },
+      "notas": [
+        {
+          "titulo": "Trinidad: Top cop issues warning as Trinidad and Tobago celebrates 64th anniversary of Independence",
+          "enlace": "https://www.thestkittsnevisobserver.com/trinidad-top-cop-issues-warning-as-trinidad-and-tobago-celebrates-64th-anniversary-of-independence/",
+          "medio": "The St Kitts Nevis Observer",
+          "dominio": "thestkittsnevisobserver.com",
+          "pais": "KNA",
+          "idioma": "en",
+          "publicada": "2026-08-31T17:38:53+00:00"
+        },
+        {
+          "titulo": "St. Kitts and Nevis Congratulates Trinidad and Tobago on 64th Independence Anniversary",
+          "enlace": "https://www.thestkittsnevisobserver.com/st-kitts-and-nevis-congratulates-trinidad-and-tobago-on-64th-independence-anniversary/",
+          "medio": "The St Kitts Nevis Observer",
+          "dominio": "thestkittsnevisobserver.com",
+          "pais": "KNA",
+          "idioma": "en",
+          "publicada": "2026-08-31T17:33:07+00:00"
         }
       ]
     },
@@ -4165,43 +4225,6 @@
       ]
     },
     {
-      "asunto": "El acuerdo entre Estados Unidos y Venezuela: del petróleo ¿al fin de la soberanía?",
-      "paises": [],
-      "bloques": [],
-      "corroboracion": {
-        "estado": "origen_unico",
-        "nota": "Solo lo trataron centros de estudio. Es análisis, no cobertura: no corrobora que el hecho haya ocurrido.",
-        "origenes_independientes": 0,
-        "portales": 2,
-        "idiomas": [],
-        "paises": [],
-        "centros_de_estudio": [
-          "CLACSO",
-          "El Orden Mundial"
-        ]
-      },
-      "notas": [
-        {
-          "titulo": "El fin del petróleo y el Sur Global",
-          "enlace": "https://www.clacso.org/el-fin-del-petroleo-y-el-sur-global/",
-          "medio": "CLACSO",
-          "dominio": "clacso.org",
-          "pais": "REG",
-          "idioma": "es",
-          "publicada": "2026-08-31T14:19:53+00:00"
-        },
-        {
-          "titulo": "El acuerdo entre Estados Unidos y Venezuela: del petróleo ¿al fin de la soberanía?",
-          "enlace": "https://elordenmundial.com/acuerdo-estados-unidos-venezuela-petroleo-soberania/",
-          "medio": "El Orden Mundial",
-          "dominio": "elordenmundial.com",
-          "pais": "ESP",
-          "idioma": "es",
-          "publicada": "2026-08-30T07:53:15+00:00"
-        }
-      ]
-    },
-    {
       "asunto": "Quick reference guide: Entry points for addressing trauma in police reform programmes",
       "paises": [],
       "bloques": [],
@@ -4438,14 +4461,14 @@
   ],
   "resumen": {
     "medios_consultados": 153,
-    "medios_que_respondieron": 128,
-    "notas_leidas": 2167,
-    "notas_en_ventana": 1216,
-    "asuntos_con_cruce": 101,
-    "corroborado_fuerte": 2,
-    "corroborado": 39,
-    "origen_unico": 60,
-    "asuntos_sin_pais": 101,
+    "medios_que_respondieron": 130,
+    "notas_leidas": 2184,
+    "notas_en_ventana": 1225,
+    "asuntos_con_cruce": 105,
+    "corroborado_fuerte": 3,
+    "corroborado": 41,
+    "origen_unico": 61,
+    "asuntos_sin_pais": 105,
     "indice_infoxicacion_pct": 1.0,
     "asuntos_amplificados_sin_corroborar": 1
   },
@@ -4458,39 +4481,49 @@
         "portales": 15
       },
       {
-        "palabra": "messi",
-        "notas": 29,
-        "portales": 20
-      },
-      {
         "palabra": "contra",
-        "notas": 27,
+        "notas": 28,
         "portales": 20
       },
       {
         "palabra": "trump",
-        "notas": 25,
-        "portales": 14
-      },
-      {
-        "palabra": "security",
-        "notas": 22,
-        "portales": 6
-      },
-      {
-        "palabra": "nueva",
-        "notas": 18,
+        "notas": 27,
         "portales": 15
       },
       {
-        "palabra": "after",
-        "notas": 17,
-        "portales": 9
+        "palabra": "messi",
+        "notas": 27,
+        "portales": 19
       },
       {
-        "palabra": "gobierno",
-        "notas": 16,
-        "portales": 11
+        "palabra": "security",
+        "notas": 23,
+        "portales": 7
+      },
+      {
+        "palabra": "after",
+        "notas": 20,
+        "portales": 12
+      },
+      {
+        "palabra": "china",
+        "notas": 17,
+        "portales": 13
+      },
+      {
+        "palabra": "nepal",
+        "notas": 17,
+        "portales": 13
+      },
+      {
+        "palabra": "iran",
+        "notas": 17,
+        "portales": 13
+      },
+      {
+        "palabra": "nueva",
+        "notas": 17,
+        "portales": 14
       },
       {
         "palabra": "quien",
@@ -4498,28 +4531,23 @@
         "portales": 7
       },
       {
-        "palabra": "acuerdo",
-        "notas": 16,
-        "portales": 10
-      },
-      {
         "palabra": "sector",
         "notas": 16,
         "portales": 4
       },
       {
-        "palabra": "iran",
+        "palabra": "gobierno",
         "notas": 15,
-        "portales": 12
+        "portales": 11
       },
       {
-        "palabra": "august",
+        "palabra": "acuerdo",
         "notas": 15,
-        "portales": 6
+        "portales": 9
       },
       {
-        "palabra": "tupac",
-        "notas": 14,
+        "palabra": "seleccion",
+        "notas": 15,
         "portales": 10
       },
       {
@@ -4528,29 +4556,14 @@
         "portales": 9
       },
       {
-        "palabra": "seleccion",
-        "notas": 14,
-        "portales": 9
-      },
-      {
-        "palabra": "petroleo",
-        "notas": 13,
-        "portales": 12
-      },
-      {
-        "palabra": "estados",
-        "notas": 13,
-        "portales": 10
-      },
-      {
-        "palabra": "shakur",
+        "palabra": "tupac",
         "notas": 13,
         "portales": 9
       },
       {
-        "palabra": "china",
+        "palabra": "year",
         "notas": 13,
-        "portales": 10
+        "portales": 8
       },
       {
         "palabra": "tres",
@@ -4558,9 +4571,14 @@
         "portales": 8
       },
       {
-        "palabra": "apos",
+        "palabra": "petroleo",
         "notas": 12,
-        "portales": 2
+        "portales": 10
+      },
+      {
+        "palabra": "estados",
+        "notas": 12,
+        "portales": 10
       },
       {
         "palabra": "antes",
@@ -4568,9 +4586,14 @@
         "portales": 10
       },
       {
-        "palabra": "nepal",
+        "palabra": "shakur",
         "notas": 12,
-        "portales": 10
+        "portales": 8
+      },
+      {
+        "palabra": "mundial",
+        "notas": 12,
+        "portales": 11
       },
       {
         "palabra": "video",
@@ -4578,19 +4601,9 @@
         "portales": 5
       },
       {
-        "palabra": "year",
-        "notas": 11,
-        "portales": 7
-      },
-      {
         "palabra": "petrolero",
         "notas": 11,
         "portales": 7
-      },
-      {
-        "palabra": "mundial",
-        "notas": 11,
-        "portales": 10
       },
       {
         "palabra": "lionel",
@@ -4598,9 +4611,19 @@
         "portales": 8
       },
       {
-        "palabra": "millones",
-        "notas": 10,
+        "palabra": "power",
+        "notas": 11,
         "portales": 9
+      },
+      {
+        "palabra": "national",
+        "notas": 11,
+        "portales": 10
+      },
+      {
+        "palabra": "nino",
+        "notas": 10,
+        "portales": 7
       },
       {
         "palabra": "agosto",
@@ -4608,14 +4631,39 @@
         "portales": 8
       },
       {
-        "palabra": "nuevo",
+        "palabra": "nacional",
+        "notas": 10,
+        "portales": 7
+      },
+      {
+        "palabra": "frente",
         "notas": 10,
         "portales": 9
       },
       {
-        "palabra": "rusia",
+        "palabra": "alerta",
+        "notas": 10,
+        "portales": 8
+      },
+      {
+        "palabra": "mundo",
         "notas": 10,
         "portales": 7
+      },
+      {
+        "palabra": "anuncia",
+        "notas": 10,
+        "portales": 9
+      },
+      {
+        "palabra": "deja",
+        "notas": 10,
+        "portales": 8
+      },
+      {
+        "palabra": "muertos",
+        "notas": 10,
+        "portales": 8
       },
       {
         "palabra": "nuevos",
@@ -4623,47 +4671,27 @@
         "portales": 5
       },
       {
-        "palabra": "national",
+        "palabra": "personas",
         "notas": 10,
         "portales": 9
-      },
-      {
-        "palabra": "caso",
-        "notas": 10,
-        "portales": 9
-      },
-      {
-        "palabra": "power",
-        "notas": 10,
-        "portales": 8
-      },
-      {
-        "palabra": "reform",
-        "notas": 10,
-        "portales": 2
-      },
-      {
-        "palabra": "nacional",
-        "notas": 9,
-        "portales": 6
-      },
-      {
-        "palabra": "aumento",
-        "notas": 9,
-        "portales": 7
       }
     ],
     "bloques": {
       "Andina": [
         {
-          "palabra": "petroleo",
+          "palabra": "nino",
           "notas": 9,
-          "portales": 8
+          "portales": 5
         },
         {
-          "palabra": "nino",
+          "palabra": "petroleo",
           "notas": 8,
-          "portales": 4
+          "portales": 6
+        },
+        {
+          "palabra": "trump",
+          "notas": 8,
+          "portales": 7
         },
         {
           "palabra": "petrolero",
@@ -4672,16 +4700,16 @@
         },
         {
           "palabra": "acuerdo",
-          "notas": 7,
-          "portales": 5
-        },
-        {
-          "palabra": "trump",
-          "notas": 5,
+          "notas": 6,
           "portales": 4
         },
         {
           "palabra": "reserva",
+          "notas": 4,
+          "portales": 4
+        },
+        {
+          "palabra": "mayor",
           "notas": 4,
           "portales": 4
         },
@@ -4691,7 +4719,7 @@
           "portales": 2
         },
         {
-          "palabra": "mayor",
+          "palabra": "deal",
           "notas": 4,
           "portales": 4
         },
@@ -4741,12 +4769,12 @@
           "portales": 2
         },
         {
-          "palabra": "historia",
+          "palabra": "anunciado",
           "notas": 2,
           "portales": 2
         },
         {
-          "palabra": "anunciado",
+          "palabra": "historia",
           "notas": 2,
           "portales": 2
         },
@@ -4771,7 +4799,12 @@
           "portales": 2
         },
         {
-          "palabra": "soberania",
+          "palabra": "white",
+          "notas": 2,
+          "portales": 2
+        },
+        {
+          "palabra": "house",
           "notas": 2,
           "portales": 2
         },
@@ -4782,16 +4815,6 @@
         },
         {
           "palabra": "nuevo",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "solo",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "gonzalez",
           "notas": 2,
           "portales": 2
         },
@@ -4831,11 +4854,6 @@
           "portales": 2
         },
         {
-          "palabra": "estados",
-          "notas": 2,
-          "portales": 2
-        },
-        {
           "palabra": "seis",
           "notas": 2,
           "portales": 2
@@ -4846,12 +4864,17 @@
           "portales": 2
         },
         {
-          "palabra": "deal",
+          "palabra": "says",
           "notas": 2,
           "portales": 2
         },
         {
           "palabra": "security",
+          "notas": 2,
+          "portales": 2
+        },
+        {
+          "palabra": "deja",
           "notas": 2,
           "portales": 2
         }
@@ -4863,36 +4886,6 @@
           "portales": 2
         },
         {
-          "palabra": "siete",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "velero",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "ayuda",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "open",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "toneladas",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "arms",
-          "notas": 2,
-          "portales": 2
-        },
-        {
           "palabra": "security",
           "notas": 2,
           "portales": 2
@@ -4900,9 +4893,24 @@
       ],
       "Caribe oriental": [
         {
+          "palabra": "nevis",
+          "notas": 4,
+          "portales": 3
+        },
+        {
+          "palabra": "seek",
+          "notas": 3,
+          "portales": 2
+        },
+        {
           "palabra": "august",
           "notas": 3,
           "portales": 3
+        },
+        {
+          "palabra": "tennis",
+          "notas": 2,
+          "portales": 2
         },
         {
           "palabra": "school",
@@ -4910,12 +4918,12 @@
           "portales": 2
         },
         {
-          "palabra": "nevis",
+          "palabra": "september",
           "notas": 2,
           "portales": 2
         },
         {
-          "palabra": "september",
+          "palabra": "labour",
           "notas": 2,
           "portales": 2
         },
@@ -4928,23 +4936,23 @@
       "Cono Sur": [
         {
           "palabra": "messi",
-          "notas": 18,
-          "portales": 12
+          "notas": 19,
+          "portales": 13
         },
         {
           "palabra": "seleccion",
-          "notas": 14,
-          "portales": 9
+          "notas": 15,
+          "portales": 10
         },
         {
           "palabra": "lionel",
-          "notas": 7,
-          "portales": 4
+          "notas": 8,
+          "portales": 5
         },
         {
           "palabra": "retiro",
-          "notas": 6,
-          "portales": 5
+          "notas": 7,
+          "portales": 6
         },
         {
           "palabra": "anuncia",
@@ -4982,6 +4990,16 @@
           "portales": 3
         },
         {
+          "palabra": "mundial",
+          "notas": 3,
+          "portales": 3
+        },
+        {
+          "palabra": "final",
+          "notas": 3,
+          "portales": 3
+        },
+        {
           "palabra": "tengo",
           "notas": 3,
           "portales": 3
@@ -4992,7 +5010,7 @@
           "portales": 3
         },
         {
-          "palabra": "derecha",
+          "palabra": "mundo",
           "notas": 3,
           "portales": 2
         },
@@ -5003,6 +5021,16 @@
         },
         {
           "palabra": "busca",
+          "notas": 2,
+          "portales": 2
+        },
+        {
+          "palabra": "llego",
+          "notas": 2,
+          "portales": 2
+        },
+        {
+          "palabra": "directo",
           "notas": 2,
           "portales": 2
         },
@@ -5037,11 +5065,6 @@
           "portales": 2
         },
         {
-          "palabra": "primera",
-          "notas": 2,
-          "portales": 2
-        },
-        {
           "palabra": "alaba",
           "notas": 2,
           "portales": 2
@@ -5062,22 +5085,7 @@
           "portales": 2
         },
         {
-          "palabra": "mundial",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "final",
-          "notas": 2,
-          "portales": 2
-        },
-        {
           "palabra": "retirada",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "aragua",
           "notas": 2,
           "portales": 2
         },
@@ -5087,17 +5095,7 @@
           "portales": 2
         },
         {
-          "palabra": "mundo",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "cerimedo",
-          "notas": 2,
-          "portales": 2
-        },
-        {
-          "palabra": "cine",
+          "palabra": "aragua",
           "notas": 2,
           "portales": 2
         }
@@ -5105,22 +5103,22 @@
       "Guayanas": [],
       "México y Centroamérica": [
         {
-          "palabra": "contra",
-          "notas": 2,
-          "portales": 2
-        },
-        {
           "palabra": "lucha",
           "notas": 2,
           "portales": 2
         },
         {
-          "palabra": "judicial",
+          "palabra": "contra",
           "notas": 2,
           "portales": 2
         },
         {
           "palabra": "poder",
+          "notas": 2,
+          "portales": 2
+        },
+        {
+          "palabra": "judicial",
           "notas": 2,
           "portales": 2
         },
@@ -5170,27 +5168,27 @@
       "ARG": {
         "pais": "Argentina",
         "bloque": "Cono Sur",
-        "notas": 37,
+        "notas": 40,
         "palabras": [
           {
             "palabra": "messi",
-            "notas": 17,
-            "portales": 12
+            "notas": 18,
+            "portales": 13
           },
           {
             "palabra": "seleccion",
-            "notas": 14,
-            "portales": 9
+            "notas": 15,
+            "portales": 10
           },
           {
             "palabra": "lionel",
-            "notas": 7,
-            "portales": 4
+            "notas": 8,
+            "portales": 5
           },
           {
             "palabra": "retiro",
-            "notas": 6,
-            "portales": 5
+            "notas": 7,
+            "portales": 6
           },
           {
             "palabra": "anuncia",
@@ -5237,7 +5235,7 @@
       "BHS": {
         "pais": "Bahamas",
         "bloque": "Caribe oriental",
-        "notas": 4,
+        "notas": 6,
         "palabras": []
       },
       "BLZ": {
@@ -5255,7 +5253,7 @@
       "BRA": {
         "pais": "Brasil",
         "bloque": "Cono Sur",
-        "notas": 27,
+        "notas": 24,
         "palabras": [
           {
             "palabra": "bolsonaro",
@@ -5313,19 +5311,13 @@
       "CHL": {
         "pais": "Chile",
         "bloque": "Cono Sur",
-        "notas": 6,
-        "palabras": [
-          {
-            "palabra": "cerimedo",
-            "notas": 2,
-            "portales": 2
-          }
-        ]
+        "notas": 5,
+        "palabras": []
       },
       "COL": {
         "pais": "Colombia",
         "bloque": "Andina",
-        "notas": 14,
+        "notas": 16,
         "palabras": [
           {
             "palabra": "terremoto",
@@ -5343,39 +5335,8 @@
       "CUB": {
         "pais": "Cuba",
         "bloque": "Caribe hispano y Haití",
-        "notas": 16,
-        "palabras": [
-          {
-            "palabra": "siete",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "velero",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "ayuda",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "open",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "toneladas",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "arms",
-            "notas": 2,
-            "portales": 2
-          }
-        ]
+        "notas": 13,
+        "palabras": []
       },
       "DMA": {
         "pais": "Dominica",
@@ -5450,7 +5411,7 @@
       "GRD": {
         "pais": "Granada",
         "bloque": "Caribe oriental",
-        "notas": 2,
+        "notas": 3,
         "palabras": []
       },
       "GTM": {
@@ -5468,7 +5429,7 @@
       "HND": {
         "pais": "Honduras",
         "bloque": "México y Centroamérica",
-        "notas": 6,
+        "notas": 5,
         "palabras": [
           {
             "palabra": "racismo",
@@ -5492,18 +5453,18 @@
       "JAM": {
         "pais": "Jamaica",
         "bloque": "Caribe oriental",
-        "notas": 4,
+        "notas": 3,
         "palabras": []
       },
       "KNA": {
         "pais": "San Cristóbal y Nieves",
         "bloque": "Caribe oriental",
-        "notas": 3,
+        "notas": 4,
         "palabras": [
           {
             "palabra": "nevis",
-            "notas": 2,
-            "portales": 2
+            "notas": 3,
+            "portales": 3
           }
         ]
       },
@@ -5534,19 +5495,19 @@
       "PER": {
         "pais": "Perú",
         "bloque": "Andina",
-        "notas": 11,
+        "notas": 12,
         "palabras": [
           {
             "palabra": "nino",
-            "notas": 2,
-            "portales": 2
+            "notas": 3,
+            "portales": 3
           }
         ]
       },
       "PRY": {
         "pais": "Paraguay",
         "bloque": "Cono Sur",
-        "notas": 3,
+        "notas": 2,
         "palabras": []
       },
       "SLV": {
@@ -5571,27 +5532,38 @@
           }
         ]
       },
-      "SUR": {
-        "pais": "Surinam",
-        "bloque": "Guayanas",
-        "notas": 1,
+      "TTO": {
+        "pais": "Trinidad y Tobago",
+        "bloque": "Caribe oriental",
+        "notas": 3,
         "palabras": []
       },
       "URY": {
         "pais": "Uruguay",
         "bloque": "Cono Sur",
-        "notas": 5,
+        "notas": 6,
+        "palabras": []
+      },
+      "VCT": {
+        "pais": "San Vicente y las Granadinas",
+        "bloque": "Caribe oriental",
+        "notas": 1,
         "palabras": []
       },
       "VEN": {
         "pais": "Venezuela",
         "bloque": "Andina",
-        "notas": 29,
+        "notas": 30,
         "palabras": [
           {
             "palabra": "petroleo",
-            "notas": 9,
-            "portales": 8
+            "notas": 8,
+            "portales": 6
+          },
+          {
+            "palabra": "trump",
+            "notas": 8,
+            "portales": 7
           },
           {
             "palabra": "petrolero",
@@ -5600,12 +5572,7 @@
           },
           {
             "palabra": "acuerdo",
-            "notas": 7,
-            "portales": 5
-          },
-          {
-            "palabra": "trump",
-            "notas": 5,
+            "notas": 6,
             "portales": 4
           },
           {
@@ -5617,6 +5584,11 @@
             "palabra": "polemico",
             "notas": 4,
             "portales": 2
+          },
+          {
+            "palabra": "deal",
+            "notas": 4,
+            "portales": 4
           },
           {
             "palabra": "estrategica",
@@ -5634,12 +5606,12 @@
             "portales": 2
           },
           {
-            "palabra": "historia",
+            "palabra": "anunciado",
             "notas": 2,
             "portales": 2
           },
           {
-            "palabra": "anunciado",
+            "palabra": "historia",
             "notas": 2,
             "portales": 2
           },
@@ -5664,22 +5636,17 @@
             "portales": 2
           },
           {
-            "palabra": "soberania",
+            "palabra": "white",
+            "notas": 2,
+            "portales": 2
+          },
+          {
+            "palabra": "house",
             "notas": 2,
             "portales": 2
           },
           {
             "palabra": "barriles",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "solo",
-            "notas": 2,
-            "portales": 2
-          },
-          {
-            "palabra": "gonzalez",
             "notas": 2,
             "portales": 2
           },
@@ -5694,17 +5661,12 @@
             "portales": 2
           },
           {
-            "palabra": "estados",
-            "notas": 2,
-            "portales": 2
-          },
-          {
             "palabra": "pacto",
             "notas": 2,
             "portales": 2
           },
           {
-            "palabra": "deal",
+            "palabra": "says",
             "notas": 2,
             "portales": 2
           }
@@ -5872,9 +5834,9 @@
         ],
         "seccion": "violencia",
         "cautela": "La prensa cubre el hecho singular y espectacular; la estadistica cuenta todos. Mas notas NO significa mas homicidios: puede significar mas atencion.",
-        "notas": 18,
+        "notas": 17,
         "por_mencion": 0,
-        "por_medio": 12,
+        "por_medio": 11,
         "estados": [
           {
             "iso": "HND",
@@ -5929,29 +5891,6 @@
                 "medio": "Perfil",
                 "pais": "ARG",
                 "publicada": "2026-08-31T21:05:00+00:00",
-                "atribucion": "medio nacional, el título no nombra país"
-              }
-            ],
-            "portales": 1,
-            "jurisdicciones": 1,
-            "idiomas": 1,
-            "fuerza": "origen_unico",
-            "nota_fuerza": "Atribuido por el medio y no por el título: la nota no nombra al país. Es la atribución más débil."
-          },
-          {
-            "iso": "BRA",
-            "pais": "Brasil",
-            "bloque": "Cono Sur",
-            "notas": 1,
-            "por_mencion": 0,
-            "por_medio": 1,
-            "ejemplos": [
-              {
-                "titulo": "Júri declara culpado do assassinato do rapper Tupac Shakur 30 anos após crime",
-                "enlace": "https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/ilustrada/2026/08/juri-declara-duane-keith-davis-culpado-do-assassinato-do-rapper-tupac-shakur.shtml",
-                "medio": "Folha de S.Paulo",
-                "pais": "BRA",
-                "publicada": null,
                 "atribucion": "medio nacional, el título no nombra país"
               }
             ],
@@ -6123,7 +6062,7 @@
             "nota_fuerza": "Atribuido por el medio y no por el título: la nota no nombra al país. Es la atribución más débil."
           }
         ],
-        "estados_con_senal": 10
+        "estados_con_senal": 9
       },
       "crimen_organizado": {
         "clave": "crimen_organizado",
@@ -6296,7 +6235,7 @@
         ],
         "seccion": "libertades",
         "cautela": "Se cuenta la cobertura de la protesta, no la protesta. Un pais con prensa libre publica mas conflicto que uno donde no se puede publicar.",
-        "notas": 3,
+        "notas": 2,
         "por_mencion": 0,
         "por_medio": 2,
         "estados": [
@@ -6441,7 +6380,7 @@
         "seccion": "migraciones",
         "cautela": "El movimiento de personas se cubre por episodios —una caravana, un naufragio, una deportacion— y no de forma continua.",
         "notas": 9,
-        "por_mencion": 2,
+        "por_mencion": 3,
         "por_medio": 2,
         "estados": [
           {
@@ -6467,6 +6406,29 @@
                 "pais": "ECU",
                 "publicada": "2026-08-31T22:00:34+00:00",
                 "atribucion": "medio nacional, el título no nombra país"
+              }
+            ],
+            "portales": 1,
+            "jurisdicciones": 1,
+            "idiomas": 1,
+            "fuerza": "origen_unico",
+            "nota_fuerza": "Un solo origen: por más portales que sean, si son de la misma jurisdicción y el mismo idioma cuentan como uno."
+          },
+          {
+            "iso": "BHS",
+            "pais": "Bahamas",
+            "bloque": "Caribe oriental",
+            "notas": 1,
+            "por_mencion": 1,
+            "por_medio": 0,
+            "ejemplos": [
+              {
+                "titulo": "US Coast Guard transfers 15 migrants to the Bahamas",
+                "enlace": "https://www.thestkittsnevisobserver.com/us-coast-guard-transfers-15-migrants-to-the-bahamas/",
+                "medio": "The St Kitts Nevis Observer",
+                "pais": "KNA",
+                "publicada": "2026-08-31T03:20:37+00:00",
+                "atribucion": "el título nombra al país"
               }
             ],
             "portales": 1,
@@ -6522,7 +6484,7 @@
             "nota_fuerza": "Un solo origen: por más portales que sean, si son de la misma jurisdicción y el mismo idioma cuentan como uno."
           }
         ],
-        "estados_con_senal": 3
+        "estados_con_senal": 4
       },
       "contrabando": {
         "clave": "contrabando",
@@ -6645,33 +6607,10 @@
         ],
         "seccion": "presupuesto-defensa",
         "cautela": "El despliegue militar en tareas de seguridad interior es materia disputada. La cobertura no distingue la legalidad del uso.",
-        "notas": 3,
+        "notas": 2,
         "por_mencion": 0,
-        "por_medio": 2,
+        "por_medio": 1,
         "estados": [
-          {
-            "iso": "BRA",
-            "pais": "Brasil",
-            "bloque": "Cono Sur",
-            "notas": 1,
-            "por_mencion": 0,
-            "por_medio": 1,
-            "ejemplos": [
-              {
-                "titulo": "Secretário do Exército dos EUA renuncia após atritos com chefe do Pentágono",
-                "enlace": "https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/mundo/2026/08/secretario-do-exercito-dos-eua-renuncia-apos-atritos-com-chefe-do-pentagono.shtml",
-                "medio": "Folha de S.Paulo",
-                "pais": "BRA",
-                "publicada": null,
-                "atribucion": "medio nacional, el título no nombra país"
-              }
-            ],
-            "portales": 1,
-            "jurisdicciones": 1,
-            "idiomas": 1,
-            "fuerza": "origen_unico",
-            "nota_fuerza": "Atribuido por el medio y no por el título: la nota no nombra al país. Es la atribución más débil."
-          },
           {
             "iso": "DOM",
             "pais": "República Dominicana",
@@ -6696,7 +6635,7 @@
             "nota_fuerza": "Atribuido por el medio y no por el título: la nota no nombra al país. Es la atribución más débil."
           }
         ],
-        "estados_con_senal": 2
+        "estados_con_senal": 1
       },
       "derechos_humanos": {
         "clave": "derechos_humanos",
@@ -6800,7 +6739,7 @@
       }
     },
     "ventana_horas": 48,
-    "estados_con_alguna_senal": 17,
+    "estados_con_alguna_senal": 18,
     "que_es": "Que se esta publicando AHORA sobre cada materia. NO ES UN INDICADOR y no se mezcla con ninguno: las series estructurales cuentan hechos verificados y llegan con anios de rezago; esto cuenta MENCIONES de las ultimas horas. Se muestra al lado del dato estructural para decir que hay actividad que esa serie todavia no conto.",
     "que_no_es": "Mas notas NO significa mas hechos: puede significar mas atencion, o un solo hecho cubierto por muchos portales. Y menos notas puede significar menos prensa libre, no menos hechos.",
     "atribucion": "Por MENCION cuando el titulo nombra al pais —la fuerte— y por MEDIO cuando el titulo no nombra ninguno y el medio es nacional. Un diario colombiano no escribe «en Colombia hubo un atentado»: escribe «atentado en Cali». Cada Estado declara cuantas notas tiene de cada clase."
@@ -6831,34 +6770,6 @@
             "enlace": "https://www.eltiempo.com/colombia/otras-ciudades/atentado-con-carro-bomba-contra-la-estacion-de-policia-en-los-patios-en-cucuta-norte-de-santander-esto-se-sabe-3582569",
             "medio": "El Tiempo",
             "pais": "COL"
-          }
-        ]
-      },
-      {
-        "clave": "amazonia_trifronteriza",
-        "nombre": "Amazonia trifronteriza",
-        "estados": [
-          "BRA",
-          "COL",
-          "PER"
-        ],
-        "descripcion": "Leticia, Tabatinga y Santa Rosa.",
-        "notas": 1,
-        "por_toponimo": 1,
-        "portales": 1,
-        "jurisdicciones": [
-          "BRA"
-        ],
-        "idiomas": [
-          "pt"
-        ],
-        "ambos_lados": false,
-        "ejemplos": [
-          {
-            "titulo": "Letícia Sabatella e Daniel Dantas reencontram cachorro após mais de um ano de disputa judicial",
-            "enlace": "https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://f5.folha.uol.com.br/celebridades/2026/08/leticia-sabatella-e-daniel-dantas-reencontram-cachorro-apos-mais-de-um-ano-de-disputa-judicial.shtml",
-            "medio": "Folha de S.Paulo",
-            "pais": "BRA"
           }
         ]
       },
@@ -6955,6 +6866,23 @@
         "ejemplos": []
       },
       {
+        "clave": "amazonia_trifronteriza",
+        "nombre": "Amazonia trifronteriza",
+        "estados": [
+          "BRA",
+          "COL",
+          "PER"
+        ],
+        "descripcion": "Leticia, Tabatinga y Santa Rosa.",
+        "notas": 0,
+        "portales": 0,
+        "jurisdicciones": [],
+        "idiomas": [],
+        "por_toponimo": 0,
+        "ambos_lados": false,
+        "ejemplos": []
+      },
+      {
         "clave": "frontera_hti_dom",
         "nombre": "Frontera Haiti-Republica Dominicana",
         "estados": [
@@ -6987,7 +6915,7 @@
         "ejemplos": []
       }
     ],
-    "con_mencion": 3,
+    "con_mencion": 2,
     "total": 9,
     "nota": "Zonas de frontera y focos transfronterizos. NO son indicadores: son lugares, y ninguna fuente publica estadistica comparable a esa escala. Se cuenta cuantas notas del corpus las nombran, de cuantos portales y de cuantas jurisdicciones. Que la nombren medios de los DOS LADOS de la frontera es el dato fuerte: una sola jurisdiccion puede estar contando su propia version."
   },
