@@ -7,8 +7,8 @@ Datos públicos de los 33 Estados del padrón, recolectados de forma automática
 calificados con doctrina de inteligencia: cada cifra sale con su fuente, su
 fecha de referencia, su calificación de fiabilidad y su estado de corroboración.
 
-Las materias se ordenan por las tres líneas de trabajo de la Fundación
-—**seguridad**, **gobernanza** e **inteligencia estratégica**— y no por la
+Las materias se ordenan por los cuatro ejes de trabajo de la Fundación
+—**seguridad**, **defensa**, **gobernanza** y **desarrollo**— y no por la
 disponibilidad de las fuentes.
 
 > **Siwa** es el oasis del desierto occidental de Egipto adonde Alejandro marchó
