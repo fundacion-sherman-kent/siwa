@@ -220,7 +220,7 @@ def recolectar():
         "del pais y uno de fuera— puntuan de 1 a 10, y el resultado se armoniza en "
         "revision regional. Es un juicio informado y metodico, no una medicion de campo.",
         f"ES UNA FOTO, NO UNA SERIE. El proyecto publica cada dos anios; este registro "
-        f"toma la edicion {EDICION}. NO hay linea de tiempo y por lo tanto NO se puede "
+        f"toma la edición {EDICION}. NO hay linea de tiempo y por lo tanto NO se puede "
         "proyectar sobre estos indicadores.",
         "SOLO CUBRE ESTADOS «EN DESARROLLO O EN TRANSICION». Los Estados chicos del "
         "Caribe y los de renta alta quedan fuera DEL PROYECTO, no del registro. Sin "
@@ -256,7 +256,7 @@ def recolectar():
     return comun.escribir(
         colector="bti",
         capa="publico",
-        fuente=f"Indice de Transformacion Bertelsmann (BTI), edicion {EDICION}",
+        fuente=f"Índice de Transformación Bertelsmann (BTI), edición {EDICION}",
         url_fuente="https://bti-project.org/en/downloads",
         calificacion=calificacion,
         registros=registros,

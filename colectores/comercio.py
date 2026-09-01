@@ -255,7 +255,7 @@ def recolectar():
     return comun.escribir(
         colector="comercio",
         capa="publico",
-        fuente="Comtrade de Naciones Unidas — vista publica",
+        fuente="Comtrade de Naciones Unidas — vista pública",
         url_fuente="https://comtradeapi.un.org/public/v1/preview/C/A/HS",
         calificacion=calificacion,
         registros=registros,

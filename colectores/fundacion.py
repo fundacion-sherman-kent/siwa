@@ -57,12 +57,30 @@ def _limpiar(texto: str) -> str:
 
 
 def recolectar():
+    TOPE_BYTES = 4_000_000
     try:
         peticion = urllib.request.Request(CANAL, headers={"User-Agent": NAVEGADOR})
         with urllib.request.urlopen(peticion, timeout=45) as r:
-            raiz = ET.fromstring(r.read(600_000))
+            crudo = r.read(TOPE_BYTES + 1)
     except urllib.error.HTTPError as e:
         raise RuntimeError(f"El canal de la Fundacion respondio HTTP {e.code}") from e
+
+    # Un XML CORTADO A LA MITAD nunca parsea, y el error que devuelve —«not
+    # well-formed»— hace creer que el canal esta roto cuando lo unico que pasa es
+    # que el tope de lectura quedo corto. Se distingue una cosa de la otra.
+    if len(crudo) > TOPE_BYTES:
+        raise RuntimeError(
+            f"El canal de la Fundacion supera los {TOPE_BYTES // 1_000_000} MB: no se lo "
+            "leyo entero y por eso no parsea. Hay que subir el tope, no culpar al canal.")
+    try:
+        raiz = ET.fromstring(crudo)
+    except ET.ParseError as e:
+        # Pasa cuando el sitio devuelve una pagina de error o un desafio del
+        # cortafuegos con codigo 200. Se dice QUE llego, no solo que no parseo.
+        cabeza = " ".join(crudo[:120].decode("utf-8", "replace").split())
+        raise RuntimeError(
+            f"El canal de la Fundacion respondio 200 pero no es XML valido ({e}). "
+            f"Empieza con: {cabeza}") from e
 
     registros = []
     for item in raiz.findall(".//item")[:TOPE]:
@@ -116,7 +134,7 @@ def recolectar():
     return comun.escribir(
         colector="fundacion",
         capa="publico",
-        fuente="Fundacion Sherman Kent — canal institucional",
+        fuente="Fundación Sherman Kent — canal institucional",
         url_fuente=SITIO,
         calificacion=calificacion,
         registros=registros,

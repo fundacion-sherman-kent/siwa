@@ -150,7 +150,7 @@
   .calif{font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;
     background:rgba(251,101,0,.20);padding:2px 7px;border-radius:4px;letter-spacing:.5px;}
 
-  .grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+  .grid-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px, 100%), 1fr));gap:14px;}
   .card{
     background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 16px 14px;
     display:flex;flex-direction:column;gap:8px;
@@ -363,7 +363,7 @@
   .lista-temas{
     max-height:224px;overflow-y:auto;margin-top:7px;
     border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.18);
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(min(258px, 100%), 1fr));
     align-content:start;padding:6px;gap:1px;
   }
   @media (max-width:720px){ .lista-temas{grid-template-columns:1fr;max-height:260px;} }
@@ -478,7 +478,7 @@
   }
   .aviso-cobertura p{margin:0;font-size:12px;color:#C7D2E0;line-height:1.65;}
   .aviso-cobertura b{color:#ff9c86;}
-  .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+  .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
   .ficha-pais .org{font-size:10.5px;color:#7d90a8;margin:2px 0 12px;}
@@ -489,9 +489,15 @@
   .ficha-pais .muestra{font-size:10.5px;color:#7d90a8;margin-top:10px;line-height:1.55;}
   .ficha-pais .muestra b{color:#9fb2c8;font-weight:600;}
   .explica-capa .no-es{display:block;margin-top:5px;color:#ffb27a;}
-  .modos{display:flex;gap:0;margin:10px 0 4px;border:1px solid var(--line);border-radius:20px;overflow:hidden;width:max-content;}
+  .modos{
+    display:flex;gap:0;margin:10px 0 4px;border:1px solid var(--line);border-radius:20px;
+    width:max-content;max-width:100%;overflow-x:auto;overflow-y:hidden;
+    scrollbar-width:none;
+  }
+  .modos::-webkit-scrollbar{display:none;}
   .modo{background:transparent;border:none;color:#9fb2c8;font-family:'Inter',sans-serif;
-    font-size:11px;font-weight:700;padding:7px 16px;cursor:pointer;letter-spacing:.3px;}
+    font-size:11px;font-weight:700;padding:7px 16px;cursor:pointer;letter-spacing:.3px;
+    flex:0 0 auto;white-space:nowrap;}
   .modo.activo{background:var(--purple);color:#fff;}
   .modo:disabled{opacity:.4;cursor:not-allowed;}
   .cruzar{display:flex;align-items:center;gap:8px;margin:10px 0 4px;}
@@ -499,7 +505,7 @@
   .grafico .fondo-cuadro{fill:rgba(255,255,255,.015);}
   .grafico .mediana-rot{font-size:8.5px;fill:#6b7f96;letter-spacing:.2px;}
   .cuadrantes{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px, 100%), 1fr));
     gap:7px;margin-top:10px;
   }
   @media (max-width:720px){ .cuadrantes{grid-template-columns:1fr;} }
@@ -624,7 +630,7 @@
     font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#7d90a8;
     font-weight:700;margin-bottom:8px;
   }
-  .ejes-fila{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;}
+  .ejes-fila{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px, 100%), 1fr));gap:9px;}
   .eje-caja{
     border:1px solid var(--line);border-radius:9px;padding:11px 13px;
     background:rgba(255,255,255,.02);
@@ -680,7 +686,7 @@
   .op-refuta{
     margin-top:8px;font-size:10.5px;color:#ffb27a;
   }
-  .materias{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px;margin-top:12px;}
+  .materias{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px, 100%), 1fr));gap:12px;margin-top:12px;}
   .materia{
     border:1px solid var(--line);border-radius:10px;padding:15px 17px;
     background:rgba(255,255,255,.02);display:flex;flex-direction:column;gap:10px;
@@ -699,13 +705,19 @@
     margin-bottom:5px;
   }
   .mide-fila{
-    display:flex;gap:8px;align-items:baseline;justify-content:space-between;
+    display:flex;flex-wrap:wrap;gap:1px 10px;align-items:baseline;
+    justify-content:space-between;
     padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:11.5px;
   }
   .mide-fila:last-child{border-bottom:none;}
-  .mide-fila .que{color:#C7D2E0;min-width:0;}
-  .mide-fila .cuanto{flex:0 0 auto;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;}
-  .mide-fila .cuando{flex:0 0 auto;color:#5f7286;font-size:10px;margin-left:6px;}
+  .mide-fila > *{min-width:0;}
+  .mide-fila .que{color:#C7D2E0;flex:1 1 130px;}
+  .mide-fila > span:last-child{flex:0 1 auto;text-align:right;}
+  .mide-fila .cuanto{
+    color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;
+    overflow-wrap:anywhere;
+  }
+  .mide-fila .cuando{color:#5f7286;font-size:10px;margin-left:6px;white-space:nowrap;}
   .materia .ahora{
     font-size:11px;line-height:1.5;color:#9fb0c4;border-left:2px solid var(--orange);
     padding-left:10px;
@@ -752,7 +764,7 @@
   .sello.libre{background:rgba(63,167,150,.22);color:#7fd3c4;}
   .sello.reservado{background:rgba(140,0,224,.22);color:#c79bf0;}
   .secciones-fusk{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:8px;margin-top:10px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(min(232px, 100%), 1fr));gap:8px;margin-top:10px;
   }
   .secciones-fusk a{
     display:block;border:1px solid var(--line);border-radius:8px;padding:11px 13px;
@@ -761,6 +773,14 @@
   .secciones-fusk a:hover{border-color:var(--orange);background:rgba(251,101,0,.08);color:#fff;}
   .secciones-fusk b{display:block;font-size:12.5px;color:#E8EEF5;margin-bottom:3px;}
   .secciones-fusk span{font-size:11px;line-height:1.45;color:#7d90a8;}
+  /* Ningun dibujo ni imagen se sale de su caja, en ningun ancho. */
+  img, svg, canvas{max-width:100%;}
+  /* NINGUN ENLACE SALE EN AZUL DE NAVEGADOR. Seis quedaron sin estilo —los tres
+     del pie hacia la web institucional entre ellos— y se veian en el azul que
+     trae el navegador de fabrica, que no es un color de la casa. Esta regla es
+     de base: cualquier enlace con estilo propio la pisa por especificidad. */
+  a{color:var(--orange);}
+  a:hover{color:#ff8a3d;}
   .membrete{display:none;}
   .colofon{display:none;}
 
@@ -822,7 +842,7 @@
   table.escala td:first-child{
     font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;width:34px;text-align:center;
   }
-  .dos-columnas{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;}
+  .dos-columnas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .panel{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .panel h4{margin:0 0 12px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#fff;}
   .panel .nota{font-size:11.5px;color:#9fb2c8;line-height:1.6;margin:12px 0 0;}
@@ -2730,6 +2750,25 @@
   // La cita lista para pegar es lo que un periodista necesita y casi nadie da:
   // dato, unidad, año, quién lo produce, cómo está calificado y de dónde salió.
   function citaDelTema(){
+    // Los compuestos no salen de ningun archivo: los construye la Fundacion. Sin
+    // este caso, la herramienta quedaba APAGADA justo en el tema con el que abre
+    // el sitio, y quien quisiera citar la situacion general no podia.
+    const compuesta = capas()[capaActiva];
+    if(compuesta && compuesta.compuesta){
+      const c = compuesta.conteo();
+      const mio = paisFiltro && c[paisFiltro] !== undefined ? c[paisFiltro] : null;
+      const partes = [];
+      partes.push(mio !== null
+        ? `${paisNombre}: ${compuesta.rotulo}, ${cifra(mio)} (${compuesta.unidad}).`
+        : `${compuesta.rotulo} — ${Object.keys(c).length} de 33 Estados de América Latina y el Caribe.`);
+      partes.push('Fuente: elaboración propia de la Fundación Sherman Kent sobre los indicadores '
+                + 'públicos del registro; no es una cifra de un tercero.');
+      partes.push('Calificación de fiabilidad A-2 (sistema Almirantazgo): construcción propia con '
+                + 'método declarado, sobre fuentes calificadas.');
+      partes.push('Advertencia: ' + compuesta.cautela);
+      partes.push(`Consultado el ${new Date().toLocaleDateString('es-AR')} en SIWA, Fundación Sherman Kent — ${location.href}`);
+      return partes.join(' ');
+    }
     const i = metaInd(capaActiva), conjunto = conjuntoDe(capaActiva);
     if(!i || !i.rotulo || !conjunto) return null;
     const meta = conjunto.procedencia;
@@ -3641,7 +3680,12 @@
     const puestos = document.getElementById('cruce-elegidos');
     if(!caja) return;
 
-    const disponibles = MATERIAS().filter(m => m.disponible());
+    // LOS COMPUESTOS NO SE OFRECEN PARA CRUZAR. «Situación general» y los ejes son
+    // un PUESTO dentro de la región, no una serie medida: no tienen capa de puntos
+    // y cruzarlos daba un panel EN BLANCO, sin siquiera decir por qué. Cruzar un
+    // orden contra otro orden tampoco significaría nada. Siguen estando en el
+    // desplegable de tema principal, que es donde corresponden.
+    const disponibles = MATERIAS().filter(m => m.disponible() && m.eje !== 'Situación');
     const firma = disponibles.length + ':' + disponibles.map(m=>m.clave).join(',').length;
 
     if(caja.dataset.firma !== firma){
@@ -3728,9 +3772,15 @@
   // lugar que ocupa el Estado dentro de la región. No se promedian unidades
   // distintas: promediar homicidios con porcentaje de bosque no significa nada.
   function tablaComparada(claves){
-    const cols = claves.map(c=>({clave:c, meta:metaInd(c), filas:filasDe(c)}))
+    const cols = claves.map(c=>({clave:c, meta:metaParaCruce(c), filas:filasParaCruce(c)}))
                        .filter(c=>c.filas.length);
-    if(cols.length < 2) return '';
+    // Tampoco acá se devuelve el vacío: si no hay dos columnas con cifra, se dice.
+    if(cols.length < 2){
+      const sin = claves.filter(c => !filasParaCruce(c).length)
+                        .map(c => metaParaCruce(c).rotulo || c);
+      return `<p class="sin-dato">No alcanza para comparar: hacen falta al menos dos temas
+        con una cifra por Estado${sin.length ? ', y <b>'+esc(sin.join('</b>, <b>'))+'</b> no la tiene'+(sin.length>1?'n':'') : ''}.</p>`;
+    }
     const isos = {};
     cols.forEach(c=>c.filas.forEach(f=>{ isos[f.iso] = f.pais; }));
     const orden = cols.map(c=>{
@@ -3768,16 +3818,42 @@
          distintas y un promedio no significaría nada. Se muestra coincidencia, no causa.</p>`;
   }
 
+  // Un compuesto NO esta en los archivos de datos: se calcula. Para cruzarlo hay
+  // que ir a buscarlo a su capa, que si tiene un valor por Estado. Sin esto,
+  // cruzar con la situacion general —que es el tema con el que ABRE el sitio—
+  // devolvia una cadena vacia y el panel quedaba en blanco sin decir por que.
+  function filasParaCruce(clave){
+    const propias = filasDe(clave);
+    if(propias.length) return propias;
+    const capa = capas()[clave];
+    if(!capa || !capa.compuesta) return [];
+    const conteo = capa.conteo();
+    return (padron||[]).filter(p => conteo[p.iso] !== undefined)
+      .map(p => ({iso: p.iso, pais: p.pais, valor: conteo[p.iso], anio: null}));
+  }
+  function metaParaCruce(clave){
+    const m = metaInd(clave);
+    if(m.clave) return m;
+    const capa = capas()[clave];
+    return capa ? {clave, rotulo: capa.rotulo, unidad: capa.unidad,
+                   mas_es_peor: !!capa.subeEsPeor} : {};
+  }
+
   function dispersion(claveA, claveB){
-    const filasA = filasDe(claveA), filasB = filasDe(claveB);
-    if(!filasA.length || !filasB.length) return '';
+    const filasA = filasParaCruce(claveA), filasB = filasParaCruce(claveB);
+    // Nunca se devuelve el vacio: si no se puede cruzar, se dice por que.
+    if(!filasA.length || !filasB.length){
+      const falta = !filasA.length ? metaParaCruce(claveA) : metaParaCruce(claveB);
+      return `<p class="sin-dato">No se puede cruzar: <b>${esc(falta.rotulo || 'el tema elegido')}</b>
+        no tiene una cifra por Estado con la que armar los ejes.</p>`;
+    }
     const porIso = {};
     filasA.forEach(f=>porIso[f.iso]={pais:f.pais, a:f.valor});
     filasB.forEach(f=>{ if(porIso[f.iso]) porIso[f.iso].b=f.valor; });
     const puntos = Object.entries(porIso).filter(([,v])=>v.b!==undefined)
       .map(([iso,v])=>({iso, ...v}));
     if(puntos.length < 4) return `<p class="sin-dato">Solo ${puntos.length} Estados tienen las dos cifras: muy pocos para cruzarlas.</p>`;
-    const mA=metaInd(claveA), mB=metaInd(claveB);
+    const mA=metaParaCruce(claveA), mB=metaParaCruce(claveB);
 
     // --- Escala. Una serie donde el mayor vale cien veces el menor aplasta todo
     // contra el borde: el grafico queda ilegible aunque el dato este bien. En ese

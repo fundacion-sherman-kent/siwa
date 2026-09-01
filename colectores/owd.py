@@ -352,7 +352,7 @@ def recolectar():
     return comun.escribir(
         colector="owd",
         capa="publico",
-        fuente="V-Dem, Base Global de Terrorismo y UCDP, via Our World in Data",
+        fuente="V-Dem, Base Global de Terrorismo y UCDP, vía Our World in Data",
         url_fuente="https://ourworldindata.org/grapher/electoral-democracy-index",
         calificacion=calificacion,
         registros=registros,

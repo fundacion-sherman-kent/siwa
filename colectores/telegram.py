@@ -311,7 +311,7 @@ def recolectar():
     return comun.escribir(
         colector="telegram",
         capa="publico",
-        fuente="Canales publicos de Telegram, vista sin cuenta",
+        fuente="Canales públicos de Telegram, vista sin cuenta",
         url_fuente="colectores/telegram.json",
         calificacion=calificacion,
         registros=registros,

@@ -175,7 +175,7 @@ def recolectar():
     return comun.escribir(
         colector="ransomware",
         capa="publico",
-        fuente="ransomware.live — recopilacion de sitios de extorsion informatica",
+        fuente="ransomware.live — recopilación de sitios de extorsión informática",
         url_fuente="https://api.ransomware.live/v2/",
         calificacion=calificacion,
         registros=registros,

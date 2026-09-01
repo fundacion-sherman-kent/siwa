@@ -207,7 +207,7 @@ def recolectar():
     return comun.escribir(
         colector="opacidad",
         capa="publico",
-        fuente="Fundacion Sherman Kent — Indice de Opacidad, edicion cero",
+        fuente="Fundación Sherman Kent — Índice de Opacidad, edición cero",
         url_fuente="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#opacidad",
         calificacion=calificacion,
         registros=registros,
