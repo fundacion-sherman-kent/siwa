@@ -2,17 +2,99 @@
 <html lang="es-AR">
 <head>
 <meta charset="utf-8">
-<title>SIWA — Fundación Sherman Kent</title>
-<meta http-equiv="refresh" content="0; url=sitio/index.html">
-<link rel="canonical" href="sitio/index.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ESTA ES LA DIRECCIÓN QUE LA GENTE COMPARTE. Antes era una redirección pelada
+     de 638 bytes, sin imagen ni descripción: compartir el enlace corto daba una
+     tarjeta vacía y Google no tenía qué indexar. Ahora lleva el juego completo,
+     y el canonical manda la señal al registro para no competir consigo mismo. -->
+<title>SIWA — Reporte de situación de América Latina y el Caribe</title>
+<meta name="description" content="Registro público y gratuito de la situación de América Latina y el Caribe: 71 indicadores sobre 33 Estados, con la fuente y la fecha de cada cifra.">
+<link rel="canonical" href="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
+<meta name="author" content="Fundación Sherman Kent — Oficina de Generación de Inteligencia">
+<meta name="theme-color" content="#00121E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fundación Sherman Kent">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/">
+<meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
+<meta property="og:description" content="33 Estados, 71 indicadores, 13 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="SIWA — Reporte de situación de América Latina y el Caribe. Fundación Sherman Kent.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
+<meta name="twitter:description" content="33 Estados, 71 indicadores, 13 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
+
+<link rel="icon" href="sitio/marca/fusk-icono-color.png" type="image/png">
+
+<!-- El visitante entra al registro solo. La espera es de un segundo y no de
+     cero: con cero, el rastreador que sí ejecuta la redirección no alcanza a
+     leer la página, y el lector no llega a ver de qué se trata. -->
+<meta http-equiv="refresh" content="1; url=sitio/index.html">
+
 <style>
-  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
-       background:#00121E;color:#F4F2EC;font-family:system-ui,sans-serif;text-align:center;}
-  a{color:#FB6500;}
+  :root{ --navy:#00121E; --orange:#FB6500; --crema:#F4F2EC; --gris:#9fb0c4; --linea:#1d3346; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;min-height:100vh;background:var(--navy);color:var(--crema);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    display:flex;align-items:center;justify-content:center;padding:28px 20px;
+    line-height:1.6;
+  }
+  main{max-width:640px;}
+  .filete{height:4px;background:var(--orange);border-radius:2px;width:74px;margin-bottom:22px;}
+  h1{font-size:clamp(30px,7vw,44px);line-height:1.12;margin:0 0 6px;letter-spacing:-.5px;}
+  /* El nombre manda; la bajada acompaña. Al mismo cuerpo competían. */
+  h1 span{display:block;color:var(--orange);font-size:.58em;line-height:1.18;margin-top:6px;}
+  .bajada{font-size:clamp(15px,3.6vw,17px);color:var(--gris);margin:0 0 20px;}
+  p{font-size:14.5px;color:#C7D2E0;margin:0 0 14px;}
+  b{color:#fff;}
+  ul{margin:0 0 20px;padding-left:20px;font-size:14px;color:#C7D2E0;}
+  li{margin-bottom:6px;}
+  .entrar{
+    display:inline-block;background:var(--orange);color:#fff;text-decoration:none;
+    font-weight:700;font-size:15px;padding:13px 26px;border-radius:8px;
+  }
+  .entrar:hover{background:#ff7d24;}
+  .pie{
+    margin-top:26px;padding-top:16px;border-top:1px solid var(--linea);
+    font-size:12px;color:#7d90a8;
+  }
+  .pie a{color:var(--orange);}
 </style>
 </head>
 <body>
-  <p>SIWA — Registro de situación de América Latina y el Caribe.<br>
-     Si el navegador no continúa solo, <a href="sitio/index.html">entrá por acá</a>.</p>
+<main>
+  <div class="filete"></div>
+  <h1>SIWA<br><span>Reporte de situación de América Latina y el Caribe</span></h1>
+  <p class="bajada">Fundación Sherman Kent · Oficina de Generación de Inteligencia</p>
+
+  <p><b>Un registro público, libre y gratuito de datos de seguridad, defensa,
+     gobernanza y desarrollo</b> sobre los 33 Estados de América Latina y el
+     Caribe. Se recolecta solo, todos los días, de trece fuentes públicas.</p>
+
+  <ul>
+    <li><b>Cada cifra declara su fuente</b>, su fecha de referencia y su
+        calificación de fiabilidad.</li>
+    <li><b>Y declara qué es lo que su fuente no cubre.</b> Los vacíos se dicen;
+        no se rellenan.</li>
+    <li><b>No emite juicios:</b> publica hechos calificados. El análisis de la
+        Fundación se firma aparte.</li>
+  </ul>
+
+  <a class="entrar" href="sitio/index.html">Entrar al registro</a>
+
+  <p class="pie">
+    Si el navegador no continúa solo, entrá por el botón.<br>
+    Acceso libre citando «SIWA, Fundación Sherman Kent» ·
+    <a href="https://fundacionkent.org/?utm_source=siwa&amp;utm_medium=registro&amp;utm_campaign=portada&amp;utm_content=portada">fundacionkent.org</a>
+  </p>
+</main>
 </body>
 </html>

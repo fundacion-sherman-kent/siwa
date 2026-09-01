@@ -10,7 +10,7 @@
      tarjeta vacía con la dirección cruda, y el registro parece abandonado.
      Las direcciones van ABSOLUTAS a propósito: las redes no resuelven rutas
      relativas cuando leen la etiqueta. -->
-<meta name="description" content="Datos públicos de los 33 Estados de América Latina y el Caribe, recolectados de forma automática y calificados con doctrina de inteligencia: cada cifra declara su fuente, su fecha de referencia y qué es lo que su fuente no cubre. Acceso libre y gratuito.">
+<meta name="description" content="Registro público y gratuito de América Latina y el Caribe: 71 indicadores sobre 33 Estados. Cada cifra con su fuente, su fecha y sus vacíos declarados.">
 <link rel="canonical" href="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta name="author" content="Fundación Sherman Kent — Oficina de Generación de Inteligencia">
 <meta name="theme-color" content="#00121E">
@@ -34,6 +34,77 @@
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Dataset",
+      "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
+      "name": "SIWA — Reporte de situación de América Latina y el Caribe",
+      "alternateName": "SIWA",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 71 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de trece fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
+      "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
+      "isAccessibleForFree": true,
+      "inLanguage": "es",
+      "keywords": [
+        "América Latina", "Caribe", "seguridad", "defensa", "gobernanza",
+        "desarrollo", "homicidios", "crimen organizado", "corrupción",
+        "transparencia", "desinformación", "libertad de prensa",
+        "datos abiertos", "inteligencia de fuentes abiertas", "OSINT"
+      ],
+      "spatialCoverage": {
+        "@type": "Place",
+        "name": "América Latina y el Caribe — 33 Estados"
+      },
+      "creator": { "@id": "https://fundacionkent.org/#organizacion" },
+      "publisher": { "@id": "https://fundacionkent.org/#organizacion" },
+      "conditionsOfAccess": "Acceso libre y gratuito, sin registro de usuario.",
+      "usageInfo": "Se permite reproducir, redistribuir y derivar citando «SIWA, Fundación Sherman Kent» y enlazando a la página. Los datos de base pertenecen a los productores citados en cada indicador, con sus propias condiciones.",
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "name": "Indicadores comparables del Banco Mundial",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://fundacion-sherman-kent.github.io/siwa/datos/publico/banco-mundial.json"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "Indicadores de los Objetivos de Desarrollo Sostenible",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://fundacion-sherman-kent.github.io/siwa/datos/publico/onu-ods.json"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "Democracia, terrorismo, conflicto y entorno informativo",
+          "encodingFormat": "application/json",
+          "contentUrl": "https://fundacion-sherman-kent.github.io/siwa/datos/publico/owd.json"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://fundacionkent.org/#organizacion",
+      "name": "Fundación Sherman Kent",
+      "alternateName": "FUSK",
+      "url": "https://fundacionkent.org/",
+      "logo": "https://fundacion-sherman-kent.github.io/siwa/sitio/marca/fusk-logo-nombre-color.png",
+      "description": "Fundación privada de análisis. Su Oficina de Generación de Inteligencia produce inteligencia estratégica de fuentes abiertas con metodología Kent-Kendall. No es, ni simula ser, un organismo estatal.",
+      "email": "direjecutiva@fundacionkent.org"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://fundacion-sherman-kent.github.io/siwa/#sitio",
+      "name": "SIWA",
+      "url": "https://fundacion-sherman-kent.github.io/siwa/",
+      "inLanguage": "es-AR",
+      "publisher": { "@id": "https://fundacionkent.org/#organizacion" }
+    }
+  ]
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
