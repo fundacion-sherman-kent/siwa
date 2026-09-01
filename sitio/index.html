@@ -3359,6 +3359,56 @@
         <b>${esc(x.rotulo)}</b><span>${esc(x.detalle)}</span></a>`).join('');
   }
 
+  // --- Etiquetado de los enlaces hacia la web institucional ----------------
+  //
+  // El embudo existia pero no se podia medir: once enlaces salian hacia
+  // fundacionkent.org y NINGUNO decia de donde venia, de modo que la analitica
+  // de la web los contaba como visita directa. No se podia saber cuantos
+  // suscriptores del boletin salieron del registro, que es justamente la
+  // pregunta que el embudo existe para responder.
+  //
+  // QUE ES Y QUE NO ES. Una etiqueta UTM NO rastrea a nadie en SIWA: es una
+  // anotacion en la direccion que lee la analitica DE DESTINO. No pone cookies,
+  // no guarda datos personales, no necesita servidor y no habilita a un tercero
+  // a mirar a los visitantes de este registro. Poner analitica ADENTRO de SIWA
+  // seria otra cosa, y esa decision no se tomo.
+  //
+  // SOLO SE ETIQUETAN LOS ENLACES PROPIOS. Un enlace a un portal oficial, a un
+  // medio o a una fuente ajena se deja intacto: modificar la direccion de un
+  // tercero para medir trafico propio no corresponde.
+  //
+  // Y SE ETIQUETA AL MOSTRAR, NO AL GUARDAR. Los archivos de datos, la planilla
+  // y el informe descargable conservan la direccion LIMPIA, que es la que hay
+  // que citar. La etiqueta es cosa de la pantalla.
+  const UTM_PROPIO = 'fundacionkent.org';
+  const UTM_CAMPANA = [
+    ['.marca-enlace',   'marca'],      // el logotipo de la barra superior
+    ['.boletin-btn',    'boletin'],
+    ['.informe-fusk',   'informe'],    // cada informe publicado por la Fundacion
+    ['.secciones-fusk', 'seccion'],
+    ['footer',          'pie'],
+  ];
+
+  function etiquetarSalientes(){
+    document.querySelectorAll('a[href]').forEach(a => {
+      let u;
+      try{ u = new URL(a.getAttribute('href'), location.href); }
+      catch(e){ return; }                       // ancla, correo o direccion rota
+      if(!u.hostname.endsWith(UTM_PROPIO)) return;
+      if(u.searchParams.has('utm_source')) return;   // ya etiquetado: no se repite
+
+      const par = UTM_CAMPANA.find(([sel]) => a.closest(sel));
+      u.searchParams.set('utm_source', 'siwa');
+      u.searchParams.set('utm_medium', 'registro');
+      u.searchParams.set('utm_campaign', par ? par[1] : 'registro');
+      // El contenido es la RUTA de destino, que es estable: el rotulo del enlace
+      // cambia con la edicion y ensuciaria la comparacion entre meses.
+      const ruta = u.pathname.replace(/^\/|\/$/g, '') || 'portada';
+      u.searchParams.set('utm_content', ruta.slice(0, 60));
+      a.setAttribute('href', u.toString());
+    });
+  }
+
   function repintarAhora(){
     paso('estilo del mapa', ()=>{ if(capaPaises) capaPaises.setStyle(estiloPais); });
     // armarAmbito() va aca y no solo en sincronizar(): el padron de paises llega
@@ -3372,6 +3422,9 @@
     paso('índice de opacidad', opacidadVista);
     paso('las seis materias', materiasVista);
     paso('de la Fundación', fundacionVista);
+    // Va DESPUES de todo lo que dibuja enlaces, para alcanzar tambien a los
+    // que se acaban de crear —los informes y las secciones institucionales—.
+    paso('etiquetar los enlaces propios', etiquetarSalientes);
     paso('colofón del informe', pintarColofon);
     paso('señal reciente', senalDelTema);
     paso('señal en secciones', senalEnSecciones);
