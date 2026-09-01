@@ -1,0 +1,566 @@
+{
+  "procedencia": {
+    "colector": "opacidad",
+    "capa": "publico",
+    "obtenido_en": "2026-09-01T16:15:19+00:00",
+    "fuente": {
+      "nombre": "Fundacion Sherman Kent — Indice de Opacidad, edicion cero",
+      "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#opacidad"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 3,
+      "corroborado": false,
+      "nota": "Produccion propia con metodo declarado y rastro publicado: la consulta automatica la puede repetir cualquiera pegando la direccion. Credibilidad 3 y no 2 porque hasta ahora cada Estado se verifico por UNA sola via —el portal de datos abiertos—. Una ausencia hallada por un solo camino es un indicio, no un hecho: con dos vias independientes que coincidan sube a 2."
+    },
+    "vacios_declarados": [
+      "LA PRESENCIA SE PRUEBA CON UNA FUENTE; LA AUSENCIA EXIGE LAS CUATRO. Por eso ningun Estado figura como «no publica»: para afirmarlo hay que haber revisado organismo productor, portal de datos abiertos, portal de transparencia activa y memoria institucional. Mientras falte uno, dice SIN VERIFICAR.",
+      "SIN VERIFICAR NO ES OPACO. Es la Oficina diciendo que todavia no miro. Contarlo como opacidad seria cometer, en el propio indice, el error que el indice existe para señalar.",
+      "Solo el paso 2 —portal de datos abiertos— tiene interfaz de consulta, y solo 7 de los 33 Estados tienen portal verificado. Los pasos 1, 3 y 4 son paginas para navegar: se comprobo que las autoridades de transparencia responden pero no exponen sus estadisticas de forma automatizable. El indice es irreduciblemente manual mas alla del paso 2.",
+      "EL CONTEO DEL PORTAL NO ES UNA MEDIDA y no se publica como cifra. Colombia lo topa en 10.000 y los demas cuentan coincidencias de palabra: se hallaron escuelas de «dificil acceso» entre los resultados de «acceso a la informacion». Va en el rastro para que la consulta se pueda repetir, nada mas.",
+      "NO SE PUBLICA PUNTAJE DE 0 A 100. Las siete dimensiones del metodo —accesibilidad, actualidad, periodicidad, desagregacion, formato y continuidad— exigen abrir cada conjunto y mirar sus columnas. Esta edicion publica el ESTADO DE PUBLICACION con su rastro; el puntaje es la edicion siguiente.",
+      "NO SE VERIFICO, Estado por Estado, que la ley nacional de acceso este vigente y exija publicar estas estadisticas. La exigencia se apoya en el ODS 16.10.2, que es universal; la obligacion legal concreta de cada Estado esta pendiente de comprobar.",
+      "De los conjuntos hallados NO se verifico el contenido de las columnas: que se publique «solicitudes de acceso» no prueba que desagregue las denegadas ni su motivo. Es la verificacion de la edicion siguiente.",
+      "TODA CELDA ES REFUTABLE. Si el dato existe y la Oficina no lo encontro, la correccion se recibe, se verifica, se publica con fecha y se acredita a quien la aporto. El registro de correcciones es publico y permanente."
+    ],
+    "cantidad": 33,
+    "atribucion": {
+      "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
+      "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+      "sitio": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información CITANDO LA FUENTE de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
+    }
+  },
+  "registros": [
+    {
+      "iso": "VEN",
+      "pais": "Venezuela",
+      "bloque": "Andina",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "estado": "publicado",
+      "organismo": "Unidad de Acceso a la Información Pública (UAIP)",
+      "conjunto": "Solicitudes de información a Organismos",
+      "enlace": "https://catalogodatos.gub.uy/dataset/uaip-solicitud-informacion",
+      "formatos": [
+        "CSV",
+        "JSON",
+        "PDF",
+        "XLSX"
+      ],
+      "ultima_actualizacion": "2026-07-24",
+      "pasos_revisados": [
+        2
+      ],
+      "verificado": "2026-09-01",
+      "nota": "Lo publica el organismo rector, en cuatro formatos incluido JSON, y actualizado dentro de los seis meses. Es el caso más abierto de los verificados. NO se verificó el contenido de las columnas.",
+      "rastro": [
+        {
+          "termino": "solicitudes de acceso a la informacion",
+          "consulta": "https://catalogodatos.gub.uy/api/3/action/package_search?q=solicitudes%20de%20acceso%20a%20la%20informacion&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 5,
+          "falla": null
+        },
+        {
+          "termino": "acceso a la informacion publica estadisticas",
+          "consulta": "https://catalogodatos.gub.uy/api/3/action/package_search?q=acceso%20a%20la%20informacion%20publica%20estadisticas&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 3,
+          "falla": null
+        },
+        {
+          "termino": "solicitudes de informacion publica",
+          "consulta": "https://catalogodatos.gub.uy/api/3/action/package_search?q=solicitudes%20de%20informacion%20publica&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 6,
+          "falla": null
+        }
+      ]
+    },
+    {
+      "iso": "TTO",
+      "pais": "Trinidad y Tobago",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "SUR",
+      "pais": "Surinam",
+      "bloque": "Guayanas",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "VCT",
+      "pais": "San Vicente y las Granadinas",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "LCA",
+      "pais": "Santa Lucía",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "KNA",
+      "pais": "San Cristóbal y Nieves",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "PER",
+      "pais": "Perú",
+      "bloque": "Andina",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "PRY",
+      "pais": "Paraguay",
+      "bloque": "Cono Sur",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "PAN",
+      "pais": "Panamá",
+      "bloque": "México y Centroamérica",
+      "estado": "parcial",
+      "organismo": "Autoridad Nacional de Transparencia y Acceso a la Información (ANTAI)",
+      "conjunto": "ANTAI — Solicitudes de Acceso a la Información, 2016 y 2017",
+      "enlace": "https://www.datosabiertos.gob.pa/dataset/antai-solicitudes-de-acceso-a-la-informacion-2017",
+      "formatos": [
+        "CSV",
+        "PDF",
+        "XLSX"
+      ],
+      "ultima_actualizacion": "2017-11-15",
+      "pasos_revisados": [
+        2
+      ],
+      "verificado": "2026-09-01",
+      "nota": "SERIE INTERRUMPIDA. El organismo rector publicó el consolidado nacional de 2016 y de 2017 y después dejó de hacerlo: nueve años sin actualizar. ANTAI NO desapareció —sigue publicando reclamos por incumplimiento del derecho de acceso, con datos de 2022, y solicitudes dirigidas a sus propias direcciones—, pero eso no es el consolidado del Estado.",
+      "rastro": [
+        {
+          "termino": "solicitudes de acceso a la informacion",
+          "consulta": "https://www.datosabiertos.gob.pa/api/3/action/package_search?q=solicitudes%20de%20acceso%20a%20la%20informacion&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 8,
+          "falla": null
+        },
+        {
+          "termino": "acceso a la informacion publica estadisticas",
+          "consulta": "https://www.datosabiertos.gob.pa/api/3/action/package_search?q=acceso%20a%20la%20informacion%20publica%20estadisticas&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 4,
+          "falla": null
+        },
+        {
+          "termino": "solicitudes de informacion publica",
+          "consulta": "https://www.datosabiertos.gob.pa/api/3/action/package_search?q=solicitudes%20de%20informacion%20publica&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 12,
+          "falla": null
+        }
+      ]
+    },
+    {
+      "iso": "NIC",
+      "pais": "Nicaragua",
+      "bloque": "México y Centroamérica",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "bloque": "México y Centroamérica",
+      "estado": "parcial",
+      "organismo": "Múltiples sujetos obligados",
+      "conjunto": "Solicitudes de acceso a la información y protección de datos personales — Secretaría de la Función Pública (ejemplo de la serie por organismo)",
+      "enlace": "https://datos.gob.mx/dataset/solicitudes_acceso_informacion_proteccion_datos_personales_sfp",
+      "formatos": [
+        "CSV"
+      ],
+      "ultima_actualizacion": "2026-07-17",
+      "pasos_revisados": [
+        2
+      ],
+      "verificado": "2026-09-01",
+      "nota": "Publican por organismo —Comisión Federal de Electricidad, Secretaría de la Función Pública, ASEA y otros—, con datos recientes, pero en el portal de datos abiertos NO se halló un consolidado nacional. México opera la Plataforma Nacional de Transparencia, que corresponde al paso 3 y NO se pudo verificar de forma automatizada: exige navegación. La calificación puede subir.",
+      "rastro": [
+        {
+          "termino": "solicitudes de acceso a la informacion",
+          "consulta": "https://datos.gob.mx/api/3/action/package_search?q=solicitudes%20de%20acceso%20a%20la%20informacion&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 12,
+          "falla": null
+        },
+        {
+          "termino": "acceso a la informacion publica estadisticas",
+          "consulta": "https://datos.gob.mx/api/3/action/package_search?q=acceso%20a%20la%20informacion%20publica%20estadisticas&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 10,
+          "falla": null
+        },
+        {
+          "termino": "solicitudes de informacion publica",
+          "consulta": "https://datos.gob.mx/api/3/action/package_search?q=solicitudes%20de%20informacion%20publica&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 12,
+          "falla": null
+        }
+      ]
+    },
+    {
+      "iso": "JAM",
+      "pais": "Jamaica",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "HND",
+      "pais": "Honduras",
+      "bloque": "México y Centroamérica",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "HTI",
+      "pais": "Haití",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "GUY",
+      "pais": "Guyana",
+      "bloque": "Guayanas",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "GTM",
+      "pais": "Guatemala",
+      "bloque": "México y Centroamérica",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "GRD",
+      "pais": "Granada",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "SLV",
+      "pais": "El Salvador",
+      "bloque": "México y Centroamérica",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "ECU",
+      "pais": "Ecuador",
+      "bloque": "Andina",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "DOM",
+      "pais": "República Dominicana",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "parcial",
+      "organismo": "Múltiples organismos y ayuntamientos",
+      "conjunto": "Estadísticas Oficina Acceso a la Información (OAI) — Oficina Nacional de la Propiedad Industrial (ejemplo de la serie por organismo)",
+      "enlace": "https://datos.gob.do/dataset/estadisticas-oai-2020",
+      "formatos": [
+        "CSV",
+        "ODS",
+        "XLSX"
+      ],
+      "ultima_actualizacion": "2026-05-12",
+      "pasos_revisados": [
+        2
+      ],
+      "verificado": "2026-09-01",
+      "nota": "Cada organismo publica el suyo —Propiedad Industrial 2018-2026, Población y Familia 2018-2024, ayuntamientos de San Cristóbal 2018 y de Mella 2019—, en tres formatos. NO se halló consolidado nacional, y la actualidad va de 2018 a 2026 según a cuál se mire.",
+      "rastro": [
+        {
+          "termino": "solicitudes de acceso a la informacion",
+          "consulta": "https://datos.gob.do/api/3/action/package_search?q=solicitudes%20de%20acceso%20a%20la%20informacion&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 0,
+          "falla": null
+        },
+        {
+          "termino": "acceso a la informacion publica estadisticas",
+          "consulta": "https://datos.gob.do/api/3/action/package_search?q=acceso%20a%20la%20informacion%20publica%20estadisticas&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 0,
+          "falla": null
+        },
+        {
+          "termino": "solicitudes de informacion publica",
+          "consulta": "https://datos.gob.do/api/3/action/package_search?q=solicitudes%20de%20informacion%20publica&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 10,
+          "falla": null
+        }
+      ]
+    },
+    {
+      "iso": "DMA",
+      "pais": "Dominica",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "CUB",
+      "pais": "Cuba",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "CRI",
+      "pais": "Costa Rica",
+      "bloque": "México y Centroamérica",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "bloque": "Andina",
+      "estado": "sin_verificar",
+      "nota": "El portal de datos abiertos no devolvió ningún conjunto pertinente: lo hallado coincide por la palabra «acceso» o por «solicitudes» de otra materia. Los pasos 1, 3 y 4 quedan pendientes. SIN VERIFICAR, no opaco.",
+      "rastro": [
+        {
+          "termino": "solicitudes de acceso a la informacion",
+          "consulta": "https://www.datos.gov.co/api/catalog/v1?q=solicitudes%20de%20acceso%20a%20la%20informacion&limit=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 1,
+          "falla": null
+        },
+        {
+          "termino": "acceso a la informacion publica estadisticas",
+          "consulta": "https://www.datos.gov.co/api/catalog/v1?q=acceso%20a%20la%20informacion%20publica%20estadisticas&limit=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 0,
+          "falla": null
+        },
+        {
+          "termino": "solicitudes de informacion publica",
+          "consulta": "https://www.datos.gov.co/api/catalog/v1?q=solicitudes%20de%20informacion%20publica&limit=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 1,
+          "falla": null
+        }
+      ]
+    },
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "estado": "sin_verificar",
+      "nota": "El portal de datos abiertos no devolvió ningún conjunto de solicitudes de acceso: lo hallado es ruido —solicitudes de mediación, certificados municipales—. El Consejo para la Transparencia responde y publica estadísticas, pero exige navegación y NO se pudo verificar de forma automatizada. SIN VERIFICAR, no opaco.",
+      "rastro": [
+        {
+          "termino": "solicitudes de acceso a la informacion",
+          "consulta": "https://datos.gob.cl/api/3/action/package_search?q=solicitudes%20de%20acceso%20a%20la%20informacion&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 7,
+          "falla": null
+        },
+        {
+          "termino": "acceso a la informacion publica estadisticas",
+          "consulta": "https://datos.gob.cl/api/3/action/package_search?q=acceso%20a%20la%20informacion%20publica%20estadisticas&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 1,
+          "falla": null
+        },
+        {
+          "termino": "solicitudes de informacion publica",
+          "consulta": "https://datos.gob.cl/api/3/action/package_search?q=solicitudes%20de%20informacion%20publica&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 6,
+          "falla": null
+        }
+      ]
+    },
+    {
+      "iso": "BRA",
+      "pais": "Brasil",
+      "bloque": "Cono Sur",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "bloque": "Andina",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "BLZ",
+      "pais": "Belice",
+      "bloque": "México y Centroamérica",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "BRB",
+      "pais": "Barbados",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "BHS",
+      "pais": "Bahamas",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    },
+    {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "bloque": "Cono Sur",
+      "estado": "publicado",
+      "organismo": "Agencia de Acceso a la Información Pública (AAIP)",
+      "conjunto": "Solicitudes de acceso a la información pública",
+      "enlace": "https://datos.gob.ar/dataset/solicitudes-de-acceso-a-la-informacion-publica",
+      "formatos": [
+        "CSV"
+      ],
+      "ultima_actualizacion": "2026-08-03",
+      "pasos_revisados": [
+        2
+      ],
+      "verificado": "2026-09-01",
+      "nota": "Lo publica el organismo RECTOR de transparencia, no un ministerio suelto: es la cifra del Estado. Actualizado dentro de los seis meses. Publica además una serie de reclamos sobre esas solicitudes. NO se verificó si desagrega el motivo de denegación ni si tiene desagregación territorial.",
+      "rastro": [
+        {
+          "termino": "solicitudes de acceso a la informacion",
+          "consulta": "https://datos.gob.ar/api/3/action/package_search?q=solicitudes%20de%20acceso%20a%20la%20informacion&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 5,
+          "falla": null
+        },
+        {
+          "termino": "acceso a la informacion publica estadisticas",
+          "consulta": "https://datos.gob.ar/api/3/action/package_search?q=acceso%20a%20la%20informacion%20publica%20estadisticas&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 5,
+          "falla": null
+        },
+        {
+          "termino": "solicitudes de informacion publica",
+          "consulta": "https://datos.gob.ar/api/3/action/package_search?q=solicitudes%20de%20informacion%20publica&rows=12",
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 5,
+          "falla": null
+        }
+      ]
+    },
+    {
+      "iso": "ATG",
+      "pais": "Antigua y Barbuda",
+      "bloque": "Caribe oriental",
+      "estado": "sin_verificar",
+      "nota": "Todavia no se verifico. NO cuenta como opaco: significa que la Oficina aun no reviso los cuatro pasos en este Estado.",
+      "rastro": []
+    }
+  ],
+  "materia": {
+    "materia": "M6",
+    "rotulo": "Solicitudes de acceso a la información pública",
+    "objeto_exacto": "UN CONJUNTO NACIONAL CONSOLIDADO de solicitudes recibidas, respondidas y denegadas, con el motivo de la denegación. Que cada organismo publique el suyo NO satisface la exigencia: sin consolidado no hay cifra del Estado.",
+    "compromiso_que_la_exige": "Objetivo de Desarrollo Sostenible 16.10.2 —adopción y aplicación de garantías constitucionales, legales o normativas de acceso a la información— y la ley nacional de acceso a la información de cada Estado.",
+    "advertencia": "NO se verificó Estado por Estado que la ley nacional de acceso esté vigente y exija la publicación de estas estadísticas. Es trabajo previo pendiente y está declarado como vacío."
+  },
+  "pasos": [
+    "1 · Organismo productor primario (autoridad de transparencia, ministerio, defensoría)",
+    "2 · Portal de datos abiertos nacional",
+    "3 · Portal de transparencia activa",
+    "4 · Informe anual o memoria institucional"
+  ],
+  "regla_de_asimetria": "LA PRESENCIA SE PRUEBA CON UNA FUENTE; LA AUSENCIA EXIGE LAS CUATRO. Encontrar el dato en un solo lugar alcanza para decir que se publica. Para decir que NO se publica hay que haber revisado los cuatro pasos del procedimiento: organismo productor, portal de datos abiertos, portal de transparencia activa y memoria institucional. Mientras falte uno, el Estado queda SIN VERIFICAR.",
+  "terminos_de_busqueda": [
+    "solicitudes de acceso a la informacion",
+    "acceso a la informacion publica estadisticas",
+    "solicitudes de informacion publica"
+  ],
+  "resumen": {
+    "publican_consolidado": 2,
+    "publican_parcial": 3,
+    "sin_verificar": 28,
+    "estados_del_padron": 33,
+    "estados_con_portal_consultable": 7,
+    "consultado": "2026-09-01T16:15:19+00:00"
+  },
+  "caidas": []
+}

@@ -619,6 +619,67 @@
   .sin-dato{font-size:12px;color:#7d90a8;}
 
   /* Cuarta lectura: papel. Márgenes estándar y solo el informe. */
+  .ejes-resumen{margin:2px 0 16px;}
+  .ejes-resumen .rot{
+    font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#7d90a8;
+    font-weight:700;margin-bottom:8px;
+  }
+  .ejes-fila{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;}
+  .eje-caja{
+    border:1px solid var(--line);border-radius:9px;padding:11px 13px;
+    background:rgba(255,255,255,.02);
+  }
+  .eje-caja.general{border-left:3px solid var(--orange);background:rgba(251,101,0,.06);}
+  .eje-caja .nombre{font-size:10.5px;color:#9fb0c4;letter-spacing:.3px;}
+  .eje-caja .valor{
+    font-size:23px;font-weight:800;color:#fff;line-height:1.15;margin:3px 0 2px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .eje-caja .puesto{font-size:10.5px;color:#7d90a8;}
+  .eje-caja .barra{
+    height:4px;border-radius:2px;background:rgba(255,255,255,.07);margin-top:7px;overflow:hidden;
+  }
+  .eje-caja .barra i{display:block;height:100%;border-radius:2px;background:var(--orange);}
+  .eje-caja.sin-orientar{border-left:3px solid rgba(140,0,224,.55);}
+  .eje-caja .aviso-eje{margin-top:7px;font-size:9.5px;line-height:1.45;color:#c79bf0;}
+  .eje-caja.incompleto .valor{font-size:14px;color:#7d90a8;font-weight:600;}
+  .ejes-pie{margin:9px 0 0;font-size:10.5px;line-height:1.55;color:#7d90a8;}
+  .ejes-pie b{color:#C7D2E0;}
+  .ficha-mapa .ejes-mini{
+    display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;
+    padding-top:8px;border-top:1px solid rgba(255,255,255,.08);
+  }
+  .ficha-mapa .ejes-mini span{
+    font-size:9.5px;padding:2px 7px;border-radius:999px;
+    background:rgba(255,255,255,.06);color:#C7D2E0;
+  }
+  .ficha-mapa .ejes-mini span b{color:#fff;font-weight:700;}
+  .ficha-mapa .ejes-mini span.general{background:rgba(251,101,0,.20);color:#ffb27a;}
+  .opacidad-titular{
+    border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:10px;
+    padding:16px 18px;margin:12px 0;background:rgba(251,101,0,.06);
+  }
+  .opacidad-titular .cifra{
+    font-size:26px;font-weight:800;color:#fff;line-height:1.25;display:block;margin-bottom:6px;
+  }
+  .opacidad-titular .cifra b{color:var(--orange);}
+  .opacidad-titular .denominador{font-size:11.5px;line-height:1.55;color:#9fb0c4;}
+  .op-estado{
+    display:inline-block;padding:2px 9px;border-radius:999px;font-size:9.5px;
+    font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  }
+  .op-estado.publicado{background:rgba(63,167,150,.22);color:#7fd3c4;}
+  .op-estado.parcial{background:rgba(251,101,0,.22);color:#ffb27a;}
+  .op-estado.sin_verificar{background:rgba(125,144,168,.18);color:#9fb0c4;}
+  .op-rastro{
+    margin-top:9px;font-size:10.5px;line-height:1.5;color:#7d90a8;
+    background:rgba(255,255,255,.03);border-radius:7px;padding:9px 11px;
+  }
+  .op-rastro a{color:#9fb0c4;word-break:break-all;}
+  .op-rastro summary{cursor:pointer;color:#C7D2E0;font-weight:600;}
+  .op-refuta{
+    margin-top:8px;font-size:10.5px;color:#ffb27a;
+  }
   .materias{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px;margin-top:12px;}
   .materia{
     border:1px solid var(--line);border-radius:10px;padding:15px 17px;
@@ -871,6 +932,7 @@
     <a href="#oficiales">Padrón oficial</a>
     <a href="#fuentes-limites">Fuentes y límites</a>
     <div class="grupo">Método</div>
+    <a href="#opacidad">Índice de Opacidad</a>
     <a href="#seis-materias">Las seis materias</a>
     <a href="#fundacion">De la Fundación</a>
     <a href="#informe">Informe descargable</a>
@@ -882,6 +944,7 @@
     <section class="domain" id="ficha-pais">
       <div class="domain-head"><h3>Qué cambió en tu país</h3><span class="tag" id="tag-ficha">—</span></div>
       <div class="elige-pais" id="elige-pais"></div>
+      <div class="ejes-resumen" id="ejes-resumen"></div>
       <div class="grid-cards" id="tarj-ficha"></div>
       <p class="pie-ficha" id="pie-ficha"></p>
     </section>
@@ -1473,6 +1536,21 @@
       <div id="vac-mensajeria"></div>
     </section>
 
+    <section class="domain" id="opacidad" data-nivel="1">
+      <div class="domain-head"><h3>Índice de Opacidad</h3><span class="tag" id="tag-opacidad">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Mide la ausencia, no la presencia.</b> Un puntaje de apertura no se puede
+           refutar mostrando una dirección; una afirmación de ausencia sí, y por eso vale.
+           <b>La presencia se prueba con una fuente; la ausencia exige las cuatro.</b> Mientras
+           falte un paso, el Estado dice <b>sin verificar</b>, que no es lo mismo que opaco y
+           <b>no cuenta como opacidad</b>.</p>
+      </div>
+      <div class="procedencia" id="proc-opacidad">Cargando el registro…</div>
+      <div class="opacidad-titular" id="titular-opacidad"></div>
+      <div class="materias" id="lista-opacidad"></div>
+      <div id="vac-opacidad"></div>
+    </section>
+
     <section class="domain" id="seis-materias" data-nivel="1">
       <div class="domain-head"><h3>Las seis materias</h3><span class="tag" id="tag-seis-materias">—</span></div>
       <div class="aviso-cobertura">
@@ -1691,7 +1769,8 @@
                      ['comercio','Comercio · brecha espejo'],
                      ['ransomware','Extorsión informática'],
                      ['bti','Índice Bertelsmann'],
-                     ['fundacion','Informes de la Fundación']]
+                     ['fundacion','Informes de la Fundación'],
+                     ['opacidad','Índice de Opacidad']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -1902,7 +1981,22 @@
   // 4. ES UN ORDEN DENTRO DE LA REGION, NO UNA MEDIDA ABSOLUTA. Un Estado en 50
   //    esta en la mediana de America Latina, no «a mitad de camino» de nada.
   const MINIMO_POR_EJE = 4;
-  const EJES_COMPUESTOS = ['Seguridad', 'Defensa', 'Gobernanza', 'Desarrollo'];
+
+  // DEFENSA NO ENTRA EN EL COMPUESTO, y la razon es de doctrina, no de calculo.
+  // Sus nueve indicadores —gasto militar, efectivos, aviones, buques, objetos en
+  // orbita— son MAGNITUDES, no virtudes ni defectos. Ponerlos en una escala de
+  // «0 el mejor, 100 el peor» obliga a decidir si mas capacidad militar es mejor
+  // o peor, Y ESO ES UN JUICIO que este registro no emite.
+  //
+  // No es teorico: con Defensa adentro, COSTA RICA —que no tiene ejercito desde
+  // 1949— figuraba entre los peores de la region, y Venezuela, Mexico y Colombia
+  // mejoraban unos siete puntos por el tamaño de sus fuerzas armadas. Sacarla
+  // mueve a Costa Rica 10,9 puntos hacia el lado bueno. El eje sigue existiendo,
+  // sus nueve indicadores se pintan en el mapa igual que antes, y en el resumen
+  // por pais se muestra APARTE y declarado como magnitud sin orientar.
+  const EJES_COMPUESTOS = ['Seguridad', 'Gobernanza', 'Desarrollo'];
+  const EJE_SIN_ORIENTAR = 'Defensa';
+  const EJES_DEL_RESUMEN = EJES_COMPUESTOS.concat([EJE_SIN_ORIENTAR]);
 
   let compuestoGuardado = null, selloCompuesto = '';
   function compuesto(){
@@ -1911,9 +2005,9 @@
 
     // Percentil de cada Estado en cada indicador, siempre orientado a «peor».
     const porEje = {};
-    EJES_COMPUESTOS.forEach(e => porEje[e] = {});
+    EJES_DEL_RESUMEN.forEach(e => porEje[e] = {});
     fuentesInd().forEach(f => (f.indicadores||[]).forEach(i => {
-      if(!EJES_COMPUESTOS.includes(i.eje)) return;
+      if(!EJES_DEL_RESUMEN.includes(i.eje)) return;
       const filas = filasDe(i.clave).filter(x => isFinite(x.valor));
       if(filas.length < 8) return;   // con muy pocos Estados el percentil no dice nada
       const orden = filas.slice().sort((a,b)=>
@@ -1925,7 +2019,7 @@
     }));
 
     const ejes = {}, general = {};
-    EJES_COMPUESTOS.forEach(e => {
+    EJES_DEL_RESUMEN.forEach(e => {
       ejes[e] = {};
       Object.entries(porEje[e]).forEach(([iso, lista]) => {
         if(lista.length < MINIMO_POR_EJE) return;
@@ -1937,9 +2031,9 @@
     });
     (padron||[]).forEach(pa => {
       const suyos = EJES_COMPUESTOS.filter(e => ejes[e][pa.iso]);
-      // Se exige el compuesto de al menos tres de los cuatro ejes: con dos, el
-      // total diria mas sobre que falta que sobre el Estado.
-      if(suyos.length < 3) return;
+      // Se exige el compuesto de al menos dos de los TRES ejes orientables: con
+      // uno, el total diria mas sobre que falta que sobre el Estado.
+      if(suyos.length < 2) return;
       general[pa.iso] = {
         valor: suyos.reduce((a,e)=>a + ejes[e][pa.iso].valor, 0) / suyos.length,
         ejes: suyos.length,
@@ -1973,7 +2067,11 @@
              + 'esta en la mediana de America Latina y el Caribe, no «a mitad de camino» '
              + 'de nada. Se arma promediando el LUGAR que el Estado ocupa en cada '
              + 'indicador, no los valores, que estan en unidades distintas. Todos los '
-             + 'indicadores pesan igual porque decidir que pesa mas seria un juicio.';
+             + 'indicadores pesan igual porque decidir que pesa mas seria un juicio. '
+             + 'NO INCLUYE EL EJE DEFENSA: gasto militar, efectivos y material son '
+             + 'magnitudes, no virtudes ni defectos, y orientarlos exigiria decidir si '
+             + 'mas capacidad militar es mejor o peor. Con Defensa adentro, Costa Rica '
+             + '—que no tiene ejercito desde 1949— figuraba entre los peores de la region.';
       },
       conteo(){
         const m = {};
@@ -2247,6 +2345,103 @@
     return {texto: cifra(v), unidad: unidad || ''};
   }
 
+  // RESUMEN POR EJE. No se inventa una cifra nueva: es el MISMO compuesto con el
+  // que se pinta el mapa —el promedio del lugar que el Estado ocupa en cada
+  // indicador del eje, 0 el mejor de la region y 100 el peor—. Que la ficha y el
+  // mapa digan lo mismo no es un detalle: dos cifras distintas para lo mismo es
+  // el modo mas rapido de perder la confianza del lector.
+  function resumenEjes(iso){
+    if(!iso) return null;
+    const c = compuesto();
+    const filas = EJES_DEL_RESUMEN.map(eje => {
+      const x = c.ejes[eje] && c.ejes[eje][iso];
+      return x ? {eje, valor: x.valor, indicadores: x.indicadores}
+               : {eje, valor: null, indicadores: 0};
+    });
+    const g = c.general[iso] || null;
+    return {ejes: filas, general: g};
+  }
+
+  // El puesto se cuenta entre los Estados que TIENEN dato en ese eje, no sobre
+  // 33: decir «5.º de 33» cuando solo 22 tienen medida seria falso.
+  function puestoEnEje(iso, eje){
+    const c = compuesto();
+    const m = eje ? c.ejes[eje] : c.general;
+    if(!m || !m[iso]) return null;
+    const valor = eje ? m[iso].valor : m[iso].valor;
+    const todos = Object.values(m).map(x => x.valor).sort((a,b)=>a-b);
+    return {puesto: todos.findIndex(v => v >= valor) + 1, de: todos.length};
+  }
+
+  function ejesVista(){
+    const caja = document.getElementById('ejes-resumen');
+    if(!caja) return;
+    if(!paisFiltro){ caja.innerHTML = ''; return; }
+    const r = resumenEjes(paisFiltro);
+    if(!r){ caja.innerHTML = ''; return; }
+
+    const cajita = (nombre, valor, ind, esGeneral) => {
+      if(valor === null || valor === undefined){
+        return '<div class="eje-caja incompleto"><div class="nombre">' + esc(nombre) + '</div>'
+             + '<div class="valor">sin puntuar</div>'
+             + '<div class="puesto">menos de ' + MINIMO_POR_EJE + ' indicadores con dato</div></div>';
+      }
+      const sinOrientar = nombre === EJE_SIN_ORIENTAR;
+      const p = puestoEnEje(paisFiltro, esGeneral ? null : nombre);
+      return '<div class="eje-caja' + (esGeneral ? ' general' : '')
+        + (sinOrientar ? ' sin-orientar' : '') + '">'
+        + '<div class="nombre">' + esc(esGeneral ? 'Situación general' : nombre)
+        + (sinOrientar ? ' · magnitud' : '') + '</div>'
+        + '<div class="valor">' + cifra(Math.round(valor * 10) / 10) + '</div>'
+        + '<div class="puesto">'
+        + (sinOrientar
+            ? (p ? p.puesto + '.º en tamaño, de ' + p.de : '')
+            : (p ? p.puesto + '.º de ' + p.de : ''))
+        + ' · ' + ind + ' indicador' + (ind === 1 ? '' : 'es') + '</div>'
+        + '<div class="barra"><i style="width:' + Math.max(2, Math.min(100, valor)) + '%"></i></div>'
+        + (sinOrientar ? '<div class="aviso-eje">No entra en la situación general: '
+            + 'es tamaño, no mejor ni peor.</div>' : '')
+        + '</div>';
+    };
+
+    caja.innerHTML =
+      '<div class="rot">Resumen por eje — ' + esc(paisNombre) + '</div>'
+      + '<div class="ejes-fila">'
+      + (r.general ? cajita('Situación general', r.general.valor, r.general.indicadores, true) : '')
+      + r.ejes.map(x => cajita(x.eje, x.valor, x.indicadores, false)).join('')
+      + '</div>'
+      + '<p class="ejes-pie"><b>Es un lugar dentro de la región, no una nota.</b> 0 es el mejor '
+      + 'de los 33 Estados y 100 el peor; 50 es la mediana de América Latina y el Caribe, no «la '
+      + 'mitad» de nada. Se arma promediando el <b>puesto</b> que el Estado ocupa en cada indicador '
+      + 'del eje, nunca los valores, que están en unidades distintas. <b>Todos los indicadores pesan '
+      + 'igual</b>, porque decidir que uno pesa más sería un juicio y este registro no los emite. '
+      + 'Un eje con menos de ' + MINIMO_POR_EJE + ' indicadores <b>no se puntúa</b>: se declara '
+      + 'incompleto en lugar de inventar un número.</p>'
+      + '<p class="ejes-pie"><b>Defensa no entra en la situación general.</b> Gasto militar, '
+      + 'efectivos y material son <b>magnitudes</b>: decir que más capacidad militar es mejor '
+      + '—o peor— sería un juicio, y este registro no los emite. Su cifra se muestra igual, '
+      + 'como <b>lugar por tamaño</b>. Con Defensa adentro del promedio, Costa Rica, que no '
+      + 'tiene ejército desde 1949, figuraba entre los peores de la región.</p>';
+  }
+
+  // Los mismos números, en dos renglones, para el mapa.
+  function ejesMini(iso){
+    const r = resumenEjes(iso);
+    if(!r) return '';
+    const chip = (rot, valor, gen) => valor === null || valor === undefined ? ''
+      : '<span class="' + (gen ? 'general' : '') + '">' + esc(rot) + ' <b>'
+        + cifra(Math.round(valor * 10) / 10) + '</b></span>';
+    // En el mapa se muestran solo los ejes orientados: una etiqueta de cuatro
+    // letras no tiene lugar para aclarar que Defensa es tamaño y no calidad, y
+    // una cifra sin esa aclaracion se lee como nota.
+    const trozos = [r.general ? chip('General', r.general.valor, true) : '']
+      .concat(r.ejes.filter(x => x.eje !== EJE_SIN_ORIENTAR)
+                    .map(x => chip(x.eje.slice(0, 4), x.valor, false)))
+      .filter(Boolean);
+    if(!trozos.length) return '';
+    return '<div class="ejes-mini">' + trozos.join('') + '</div>';
+  }
+
   function pintarFichaMapa(iso, nombre, bloque){
     const caja = document.getElementById('ficha-mapa');
     if(!caja) return;
@@ -2256,9 +2451,12 @@
     }
     const capa = capaActual(), nivel = capa.conteo()[iso];
     const proys = [1,2,4].map(n=>({n, pr:proyeccionDe(iso, n)})).filter(x=>x.pr);
+    // El resumen por eje se muestra IGUAL sin dato en la capa elegida: que
+    // Uruguay no tenga cifra de terrorismo no quita que tenga situacion general.
+    const mini = ejesMini(iso);
     if(nivel === undefined && !proys.length){
       caja.innerHTML = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>
-        <span class="vacia">Sin dato en esta capa.</span>`;
+        <span class="vacia">Sin dato en esta capa.</span>` + mini;
       return;
     }
     const p = posicion(iso);
@@ -2288,7 +2486,7 @@
     } else {
       html += `<span class="nota">${esc(capa.cautela)}</span>`;
     }
-    caja.innerHTML = html;
+    caja.innerHTML = html + mini;
   }
 
   function leyenda(){
@@ -2941,6 +3139,81 @@
     return null;
   }
 
+  // INDICE DE OPACIDAD. Se muestra el ESTADO DE PUBLICACION con su rastro, no un
+  // puntaje: las siete dimensiones del metodo exigen abrir cada conjunto y mirar
+  // sus columnas, y eso es la edicion siguiente. Ningun Estado figura como «no
+  // publica»: para afirmarlo hay que haber revisado los cuatro pasos.
+  const OP_ROTULO = {publicado:'Publica', parcial:'Parcial', sin_verificar:'Sin verificar'};
+
+  function opacidadVista(){
+    const caja = document.getElementById('lista-opacidad');
+    const tit  = document.getElementById('titular-opacidad');
+    const tag  = document.getElementById('tag-opacidad');
+    const d = almacen.opacidad;
+    if(!caja || !d) return;
+    const r = d.resumen;
+
+    // El denominador va en la MISMA frase que la cifra. Abrir con un numero que
+    // esconde cuantos se miraron seria cometer, en el primer renglon, el error
+    // que este indice existe para señalar.
+    const verificados = r.publican_consolidado + r.publican_parcial;
+    if(tit) tit.innerHTML =
+      '<span class="cifra">De los 33 Estados, solo <b>' + r.publican_consolidado
+      + '</b> publican un consolidado nacional de solicitudes de acceso a la información.</span>'
+      + '<span class="denominador">Otros <b>' + r.publican_parcial + '</b> lo publican de forma '
+      + 'parcial —por organismo, o con la serie interrumpida—. Los <b>' + r.sin_verificar
+      + '</b> restantes están <b>sin verificar</b>: la Oficina todavía no revisó los cuatro pasos '
+      + 'en esos Estados, y eso <b>no los cuenta como opacos</b>. Solo ' + r.estados_con_portal_consultable
+      + ' de los 33 tienen portal con interfaz de consulta; los demás pasos se revisan a mano.</span>';
+    if(tag) tag.textContent = verificados + ' de 33 verificados · materia M6';
+
+    // Con un pais elegido se muestra su celda; sin pais, los verificados.
+    let filas = d.registros;
+    if(paisFiltro) filas = filas.filter(x => x.iso === paisFiltro);
+    else {
+      const zona = bloqueActivo();
+      if(zona) filas = filas.filter(x => x.bloque === zona);
+      const conDato = filas.filter(x => x.estado !== 'sin_verificar');
+      if(conDato.length) filas = conDato;
+      else filas = filas.slice(0, 6);
+    }
+
+    caja.innerHTML = filas.map(x => {
+      const rastro = (x.rastro || []).filter(c => c.consulta);
+      const detalle = [];
+      if(x.organismo) detalle.push('<div class="mide-fila"><span class="que">Organismo</span>'
+        + '<span class="cuanto">' + esc(x.organismo) + '</span></div>');
+      if(x.ultima_actualizacion) detalle.push('<div class="mide-fila"><span class="que">Última actualización</span>'
+        + '<span class="cuanto">' + esc(x.ultima_actualizacion) + '</span></div>');
+      if(x.formatos && x.formatos.length) detalle.push('<div class="mide-fila"><span class="que">Formatos</span>'
+        + '<span class="cuanto">' + esc(x.formatos.join(', ')) + '</span></div>');
+      if(x.pasos_revisados) detalle.push('<div class="mide-fila"><span class="que">Pasos revisados</span>'
+        + '<span class="cuanto">' + esc(x.pasos_revisados.join(', ')) + ' de 4</span></div>');
+
+      return '<article class="materia">'
+        + '<header><h5>' + esc(x.pais) + '</h5>'
+        + '<span class="op-estado ' + x.estado + '">' + (OP_ROTULO[x.estado] || x.estado) + '</span></header>'
+        + (x.conjunto ? '<p class="porque">' + esc(x.conjunto)
+            + (x.enlace ? ' — <a href="' + esc(x.enlace) + '" target="_blank" rel="noopener">ver el conjunto</a>' : '')
+            + '</p>' : '')
+        + (detalle.length ? '<div>' + detalle.join('') + '</div>' : '')
+        + (x.nota ? '<div class="ahora">' + esc(x.nota) + '</div>' : '')
+        + (rastro.length
+            ? '<details class="op-rastro"><summary>Ver dónde se buscó — ' + rastro.length
+              + ' consultas, repetibles</summary>'
+              + rastro.map(c => '<div style="margin-top:6px">HTTP ' + (c.http === null ? 'sin respuesta' : c.http)
+                  + ' · ' + c.devueltos + ' conjuntos devueltos, ' + c.pertinentes + ' pertinentes<br>'
+                  + '<a href="' + esc(c.consulta) + '" target="_blank" rel="noopener">' + esc(c.consulta) + '</a></div>').join('')
+              + '</details>'
+            : '')
+        + '<div class="op-refuta">¿Existe y no lo vimos? Escribí a '
+        + '<a href="mailto:direjecutiva@fundacionkent.org?subject=' + encodeURIComponent('SIWA — Índice de Opacidad: corrección ' + x.pais)
+        + '">direjecutiva@fundacionkent.org</a> con la dirección. Se verifica, se corrige y '
+        + 'se publica la corrección con fecha y con quién la aportó.</div>'
+        + '</article>';
+    }).join('');
+  }
+
   function materiasVista(){
     const caja = document.getElementById('lista-seis-materias');
     if(!caja) return;
@@ -3056,6 +3329,8 @@
     paso('desplegables de tema', solapas);
     paso('leyenda', leyenda);
     paso('panel de cruce', panelCruce);
+    paso('resumen por eje', ejesVista);
+    paso('índice de opacidad', opacidadVista);
     paso('las seis materias', materiasVista);
     paso('de la Fundación', fundacionVista);
     paso('colofón del informe', pintarColofon);
@@ -4456,6 +4731,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ fallas++; pintarFalla('lista-mensajeria','mensajería',err.message,null);
       document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('opacidad.json'), traer('estado/opacidad.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.opacidad=d; const meta=d.procedencia;
+      pintarProcedencia('proc-opacidad',meta);
+      vacios+=pintarVacios('vac-opacidad',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-opacidad','índice de opacidad',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ fallas++; pintarFalla('lista-opacidad','índice de opacidad',err.message,null);
+      document.getElementById('proc-opacidad').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('fundacion.json'), traer('estado/fundacion.json').catch(()=>null)])
     .then(([d,estado])=>{

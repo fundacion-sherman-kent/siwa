@@ -1,0 +1,90 @@
+{
+  "_nota": "PADRÓN VERIFICADO A MANO del Índice de Opacidad. El código NO modifica este archivo: lo mantiene el equipo analítico. Cada entrada es una afirmación de la Oficina y lleva su fecha, sus pasos revisados y su rastro. Un Estado que no figura acá está SIN VERIFICAR, que NO es lo mismo que opaco.",
+
+  "_regla_de_asimetria": "LA PRESENCIA SE PRUEBA CON UNA FUENTE; LA AUSENCIA EXIGE LAS CUATRO. Encontrar el dato en un solo lugar alcanza para decir que se publica. Para decir que NO se publica hay que haber revisado los cuatro pasos del procedimiento: organismo productor, portal de datos abiertos, portal de transparencia activa y memoria institucional. Mientras falte uno, el Estado queda SIN VERIFICAR.",
+
+  "_enlaces": "Toda dirección de este padrón fue pedida y respondió HTTP 200 el 1 de septiembre de 2026. Las direcciones NO se construyen por analogía con el título: se toman del catálogo. Los identificadores reales no coincidían con los previsibles.",
+
+  "_lo_que_se_busca": {
+    "materia": "M6",
+    "rotulo": "Solicitudes de acceso a la información pública",
+    "objeto_exacto": "UN CONJUNTO NACIONAL CONSOLIDADO de solicitudes recibidas, respondidas y denegadas, con el motivo de la denegación. Que cada organismo publique el suyo NO satisface la exigencia: sin consolidado no hay cifra del Estado.",
+    "compromiso_que_la_exige": "Objetivo de Desarrollo Sostenible 16.10.2 —adopción y aplicación de garantías constitucionales, legales o normativas de acceso a la información— y la ley nacional de acceso a la información de cada Estado.",
+    "advertencia": "NO se verificó Estado por Estado que la ley nacional de acceso esté vigente y exija la publicación de estas estadísticas. Es trabajo previo pendiente y está declarado como vacío."
+  },
+
+  "_pasos": [
+    "1 · Organismo productor primario (autoridad de transparencia, ministerio, defensoría)",
+    "2 · Portal de datos abiertos nacional",
+    "3 · Portal de transparencia activa",
+    "4 · Informe anual o memoria institucional"
+  ],
+
+  "estados": [
+    {
+      "iso": "ARG",
+      "estado": "publicado",
+      "organismo": "Agencia de Acceso a la Información Pública (AAIP)",
+      "conjunto": "Solicitudes de acceso a la información pública",
+      "enlace": "https://datos.gob.ar/dataset/solicitudes-de-acceso-a-la-informacion-publica",
+      "formatos": ["CSV"],
+      "ultima_actualizacion": "2026-08-03",
+      "pasos_revisados": [2],
+      "verificado": "2026-09-01",
+      "nota": "Lo publica el organismo RECTOR de transparencia, no un ministerio suelto: es la cifra del Estado. Actualizado dentro de los seis meses. Publica además una serie de reclamos sobre esas solicitudes. NO se verificó si desagrega el motivo de denegación ni si tiene desagregación territorial."
+    },
+    {
+      "iso": "URY",
+      "estado": "publicado",
+      "organismo": "Unidad de Acceso a la Información Pública (UAIP)",
+      "conjunto": "Solicitudes de información a Organismos",
+      "enlace": "https://catalogodatos.gub.uy/dataset/uaip-solicitud-informacion",
+      "formatos": ["CSV", "JSON", "PDF", "XLSX"],
+      "ultima_actualizacion": "2026-07-24",
+      "pasos_revisados": [2],
+      "verificado": "2026-09-01",
+      "nota": "Lo publica el organismo rector, en cuatro formatos incluido JSON, y actualizado dentro de los seis meses. Es el caso más abierto de los verificados. NO se verificó el contenido de las columnas."
+    },
+    {
+      "iso": "PAN",
+      "estado": "parcial",
+      "organismo": "Autoridad Nacional de Transparencia y Acceso a la Información (ANTAI)",
+      "conjunto": "ANTAI — Solicitudes de Acceso a la Información, 2016 y 2017",
+      "enlace": "https://www.datosabiertos.gob.pa/dataset/antai-solicitudes-de-acceso-a-la-informacion-2017",
+      "formatos": ["CSV", "PDF", "XLSX"],
+      "ultima_actualizacion": "2017-11-15",
+      "pasos_revisados": [2],
+      "verificado": "2026-09-01",
+      "nota": "SERIE INTERRUMPIDA. El organismo rector publicó el consolidado nacional de 2016 y de 2017 y después dejó de hacerlo: nueve años sin actualizar. ANTAI NO desapareció —sigue publicando reclamos por incumplimiento del derecho de acceso, con datos de 2022, y solicitudes dirigidas a sus propias direcciones—, pero eso no es el consolidado del Estado."
+    },
+    {
+      "iso": "MEX",
+      "estado": "parcial",
+      "organismo": "Múltiples sujetos obligados",
+      "conjunto": "Solicitudes de acceso a la información y protección de datos personales — Secretaría de la Función Pública (ejemplo de la serie por organismo)",
+      "enlace": "https://datos.gob.mx/dataset/solicitudes_acceso_informacion_proteccion_datos_personales_sfp",
+      "formatos": ["CSV"],
+      "ultima_actualizacion": "2026-07-17",
+      "pasos_revisados": [2],
+      "verificado": "2026-09-01",
+      "nota": "Publican por organismo —Comisión Federal de Electricidad, Secretaría de la Función Pública, ASEA y otros—, con datos recientes, pero en el portal de datos abiertos NO se halló un consolidado nacional. México opera la Plataforma Nacional de Transparencia, que corresponde al paso 3 y NO se pudo verificar de forma automatizada: exige navegación. La calificación puede subir."
+    },
+    {
+      "iso": "DOM",
+      "estado": "parcial",
+      "organismo": "Múltiples organismos y ayuntamientos",
+      "conjunto": "Estadísticas Oficina Acceso a la Información (OAI) — Oficina Nacional de la Propiedad Industrial (ejemplo de la serie por organismo)",
+      "enlace": "https://datos.gob.do/dataset/estadisticas-oai-2020",
+      "formatos": ["CSV", "ODS", "XLSX"],
+      "ultima_actualizacion": "2026-05-12",
+      "pasos_revisados": [2],
+      "verificado": "2026-09-01",
+      "nota": "Cada organismo publica el suyo —Propiedad Industrial 2018-2026, Población y Familia 2018-2024, ayuntamientos de San Cristóbal 2018 y de Mella 2019—, en tres formatos. NO se halló consolidado nacional, y la actualidad va de 2018 a 2026 según a cuál se mire."
+    }
+  ],
+
+  "_no_verificados_con_portal": {
+    "CHL": "El portal de datos abiertos no devolvió ningún conjunto de solicitudes de acceso: lo hallado es ruido —solicitudes de mediación, certificados municipales—. El Consejo para la Transparencia responde y publica estadísticas, pero exige navegación y NO se pudo verificar de forma automatizada. SIN VERIFICAR, no opaco.",
+    "COL": "El portal de datos abiertos no devolvió ningún conjunto pertinente: lo hallado coincide por la palabra «acceso» o por «solicitudes» de otra materia. Los pasos 1, 3 y 4 quedan pendientes. SIN VERIFICAR, no opaco."
+  }
+}

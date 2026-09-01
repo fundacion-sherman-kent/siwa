@@ -72,6 +72,12 @@ jobs:
         continue-on-error: true
         run: python colectores/fundacion.py
 
+      - name: Indice de Opacidad
+        id: opacidad
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/opacidad.py
+
       # --- Series anuales y catalogos, una vez por dia ---
       - name: Indicadores comparables (Banco Mundial)
         id: banco
@@ -139,4 +145,5 @@ jobs:
           [ "${{ steps.ransomware.outcome }}" = "failure" ] && { echo "Falló el colector de extorsión informática."; fallo=1; }
           [ "${{ steps.bti.outcome }}" = "failure" ] && { echo "Falló el colector del índice Bertelsmann."; fallo=1; }
           [ "${{ steps.fundacion.outcome }}" = "failure" ] && { echo "Falló el colector de informes de la Fundación."; fallo=1; }
+          [ "${{ steps.opacidad.outcome }}" = "failure" ] && { echo "Falló el colector del índice de opacidad."; fallo=1; }
           exit $fallo
