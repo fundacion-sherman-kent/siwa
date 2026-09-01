@@ -24,7 +24,7 @@ lo señala.
 ## 1. Qué es SIWA
 
 Un **registro público, libre y gratuito de la situación de América Latina y el
-Caribe**: 65 indicadores sobre los 33 Estados del padrón, recolectados de forma
+Caribe**: 71 indicadores sobre los 33 Estados del padrón, recolectados de forma
 automática de trece fuentes y calificados con doctrina de inteligencia.
 
 Tres cosas lo definen, y las tres son decisiones tomadas, no accidentes:
@@ -91,7 +91,7 @@ Vas a asistir en el mantenimiento de SIWA, el registro público de situación de
 América Latina y el Caribe de la Fundación Sherman Kent.
 
 QUÉ ES
-Una página HTML y trece colectores en Python que publican 65 indicadores sobre
+Una página HTML y trece colectores en Python que publican 71 indicadores sobre
 33 Estados, calificados con doctrina de inteligencia. Repositorio público:
 https://github.com/fundacion-sherman-kent/siwa
 Sitio: https://fundacion-sherman-kent.github.io/siwa/sitio/index.html
@@ -205,6 +205,25 @@ código para que no se puedan saltear.
   **sin pisar el dato anterior**. Que una fuente falle no borra lo que ya se
   sabía: lo deja envejecer a la vista.
 
+**Las seis materias.** La sección `#seis-materias` reúne, por materia, lo que
+está repartido entre colectores: violencia organizada, economías ilícitas,
+contrabando, ciberseguridad, contratación pública y desinformación. Cada ficha
+declara **qué se mide, qué se publica ahora y qué no se mide**. La tercera parte
+es la que importa: es la diferencia entre un registro de inteligencia y un
+tablero. La lista vive en `MATERIAS_FUSK`, dentro de `index.html`.
+
+**El boletín se enlaza, no se recolecta.** La página es estática y el
+repositorio es público: **una dirección de correo no puede pasar por acá**. El
+padrón lo administra la Fundación en `fundacionkent.org/newsletter/`, que ya
+tiene el alta y la baja. Si alguien propone un formulario en SIWA, esta es la
+razón por la que no lo hay.
+
+**La tarjeta para compartir.** `sitio/marca/siwa-compartir.png`, declarada en
+`og:image` con dirección **absoluta** —las redes no resuelven rutas relativas—.
+Se regenera con `herramientas/tarjeta-compartir.py`, que necesita Pillow y **no
+corre en el robot**: es local, a mano, y solo cuando cambian la identidad o las
+cifras.
+
 **La segunda pieza es `sitio/index.html`.** Una sola página, 245 KB, sin
 compilación y sin una sola petición a un servidor ajeno. Se edita el archivo, se
 sube, y queda publicada. Adentro, tres mecanismos vale la pena conocer:
@@ -231,7 +250,7 @@ sube, y queda publicada. Adentro, tres mecanismos vale la pena conocer:
 | `comercio` | Comtrade (ONU) | **A-2** | Brecha espejo del comercio declarado |
 | `fuentes_oficiales` | Catálogos abiertos de los Estados | **A-2** | Qué publica cada Estado |
 | `fundacion` | Canal institucional FUSK | **A-1** | Informes propios; cierra el circuito |
-| `owd` | V-Dem, GTD, UCDP vía Our World in Data | **B-2** | Democracia, terrorismo, conflicto, capacidad aeroespacial |
+| `owd` | V-Dem, GTD, UCDP vía Our World in Data | **B-2** | Democracia, terrorismo, conflicto, entorno informativo, capacidad aeroespacial |
 | `bti` | Índice Bertelsmann | **B-3** | 8 indicadores, 22 de 33 Estados |
 | `conflictos` | Instituto Javeriana Cali | **B-3** | 460 conflictos, 3.567 polígonos de minería ilegal |
 | `ransomware` | ransomware.live | **D-4** | 1.648 víctimas en 31 Estados — **solo agregados** |
@@ -239,7 +258,7 @@ sube, y queda publicada. Adentro, tres mecanismos vale la pena conocer:
 | `telegram` | 20 canales públicos verificados | **F-4** | Difusión en mensajería |
 | `redes` | Mastodon, 4 instancias | **F-4** | Circulación en red social abierta |
 
-**65 indicadores** repartidos en cuatro ejes: Gobernanza 24, Seguridad 18,
+**71 indicadores** repartidos en cuatro ejes: Gobernanza 30, Seguridad 18,
 Desarrollo 14, Defensa 9.
 
 **Por qué conviven una fuente A-1 y una F-4.** No es descuido. Una cuenta anual
@@ -332,7 +351,7 @@ Un colector escrito contra una fuente no probada es trabajo perdido en el mejor
 caso, y un dato inventado en el peor.
 
 Y un diagnóstico que ordenó buena parte del trabajo, por si ahorra tiempo: **el
-retraso de los datos es por fuente, no por país**. Medido sobre los 65
+retraso de los datos es por fuente, no por país**. Medido sobre los 71
 indicadores × 33 Estados, la mediana es de 2 años para todos los países por
 igual. Las encuestas llegan con 7 a 10 años de atraso; la evaluación de
 expertos, con 1. No tiene sentido buscar «el país que actualiza mal».
@@ -426,6 +445,14 @@ indicadores**: 43 faltaban en lo que la gente se llevaba.
 
 - Exportación a planilla `.xlsx` con logotipo. Hoy el descargable es CSV con
   cabecera de atribución, y el PDF sí lleva membrete y colofón.
+- **Contratación pública** es la brecha más grande y la más remontable de las
+  seis materias: el expediente de cada licitación existe en los portales de
+  compras de cada Estado, pero en 33 formatos distintos. Hoy solo se mide
+  percepción y experiencia declarada.
+- La tarjeta para compartir se dibuja con **Segoe UI** porque Inter, la
+  tipografía de la casa, no está instalada en la máquina de la Dirección.
+  Instalarla y volver a correr `herramientas/tarjeta-compartir.py` la deja
+  con la tipografía correcta.
 
 ---
 

@@ -75,7 +75,7 @@ INDICADORES = [
                 "muertes, no territorio. Es evaluacion experta, no medicion de campo."},
     {"clave": "intensidad_conflicto", "rotulo_origen": "Q13.3 | Conflict intensity",
      "rotulo": "Intensidad del conflicto interno", "eje": "Seguridad",
-     "unidad": "escala de 1 a 10, mas alto es menos conflicto", "mas_es_peor": False,
+     "unidad": "escala de 1 a 10, más alto es menos conflicto", "mas_es_peor": False,
      "cautela": "ATENCION A LA ESCALA: en este indicador un valor ALTO significa MENOS "
                 "conflicto. Mide cuanto pesan las divisiones etnicas, religiosas o "
                 "sociales en la vida politica."},
@@ -94,7 +94,7 @@ INDICADORES = [
                 "la reemplaza: Latinobarometro y el Barometro de las Americas preguntan a "
                 "la gente, esto no."},
     {"clave": "persecucion_abuso", "rotulo_origen": "Q3.3 | Prosecution of office abuse",
-     "rotulo": "Persecucion del abuso de funcion publica", "eje": "Gobernanza",
+     "rotulo": "Persecución del abuso de función pública", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Si los funcionarios que abusan de su cargo son efectivamente procesados. "
                 "Mide IMPUNIDAD, que es distinto de percepcion de corrupcion: un pais "

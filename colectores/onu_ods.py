@@ -68,7 +68,7 @@ SERIES = [
      "cautela": "Es la economía en negro medida sobre el empleo, no sobre el producto. "
                 "No incluye la actividad ilícita, que no aparece en ninguna encuesta laboral."},
 {"clave": "sin_condena", "codigo": "VC_PRS_UNSNT", "eje": "Seguridad",
-     "rotulo": "Detenidos sin condena", "unidad": "% de la poblacion carcelaria",
+     "rotulo": "Detenidos sin condena", "unidad": "% de la población carcelaria",
      "mas_es_peor": True, "origen": "UNODC, via la base global de los ODS",
      "cautela": "Personas presas sin sentencia firme. Mide congestion judicial y uso de "
                 "la prision preventiva, no criminalidad."},
@@ -78,7 +78,7 @@ SERIES = [
      "cautela": "Mide la existencia de garantias legales e institucionales, NO su "
                 "cumplimiento efectivo. Un Estado puede tener buena ley y no aplicarla."},
     {"clave": "registro_nacimientos", "codigo": "SG_REG_BRTH", "eje": "Gobernanza",
-     "rotulo": "Nacimientos registrados", "unidad": "% de los menores de 5 anios",
+     "rotulo": "Nacimientos registrados", "unidad": "% de los menores de 5 años",
      "mas_es_peor": False, "origen": "UNICEF, via la base global de los ODS",
      "cautela": "Es la capacidad estatal mas basica: saber quien existe. Un registro "
                 "incompleto degrada todas las demas estadisticas de ese Estado."},
@@ -87,12 +87,12 @@ SERIES = [
      "mas_es_peor": True, "origen": "OIT, via la base global de los ODS",
      "cautela": "Sale de encuestas de hogares con anios y muestras distintos por Estado."},
     {"clave": "agua_potable", "codigo": "SH_H2O_SAFE", "eje": "Desarrollo",
-     "rotulo": "Acceso a agua potable gestionada", "unidad": "% de la poblacion",
+     "rotulo": "Acceso a agua potable gestionada", "unidad": "% de la población",
      "mas_es_peor": False, "origen": "OMS y UNICEF, via la base global de los ODS",
      "cautela": "Servicio gestionado de forma segura, definicion mas exigente que "
                 "«acceso a agua». No mide continuidad del servicio."},
 {"clave": "victimas_robo", "codigo": "VC_VOV_ROBB", "eje": "Seguridad",
-     "rotulo": "Victimas de robo en los ultimos 12 meses", "unidad": "% de la poblacion",
+     "rotulo": "Victimas de robo en los ultimos 12 meses", "unidad": "% de la población",
      "mas_es_peor": True, "origen": "UNODC, via la base global de los ODS",
      "cautela": "Sale de encuestas de victimizacion, no de denuncias: mide el delito "
                 "sufrido, incluido el que nunca se denuncio. Es la medida mas cercana a "

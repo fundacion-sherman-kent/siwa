@@ -3,7 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIWA — Fundación Sherman Kent</title>
+<title>SIWA — Reporte de situación de América Latina y el Caribe</title>
+
+<!-- Lo que ven LinkedIn, X, WhatsApp, Telegram y los buscadores cuando alguien
+     comparte el enlace. Sin esto no aparece ni imagen ni descripción: sale una
+     tarjeta vacía con la dirección cruda, y el registro parece abandonado.
+     Las direcciones van ABSOLUTAS a propósito: las redes no resuelven rutas
+     relativas cuando leen la etiqueta. -->
+<meta name="description" content="Datos públicos de los 33 Estados de América Latina y el Caribe, recolectados de forma automática y calificados con doctrina de inteligencia: cada cifra declara su fuente, su fecha de referencia y qué es lo que su fuente no cubre. Acceso libre y gratuito.">
+<link rel="canonical" href="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
+<meta name="author" content="Fundación Sherman Kent — Oficina de Generación de Inteligencia">
+<meta name="theme-color" content="#00121E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fundación Sherman Kent">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
+<meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
+<meta property="og:description" content="33 Estados, 71 indicadores, 13 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="SIWA — Reporte de situación de América Latina y el Caribe. Fundación Sherman Kent.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
+<meta name="twitter:description" content="33 Estados, 71 indicadores, 13 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
+
+<link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+<link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -588,6 +619,55 @@
   .sin-dato{font-size:12px;color:#7d90a8;}
 
   /* Cuarta lectura: papel. Márgenes estándar y solo el informe. */
+  .materias{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:12px;margin-top:12px;}
+  .materia{
+    border:1px solid var(--line);border-radius:10px;padding:15px 17px;
+    background:rgba(255,255,255,.02);display:flex;flex-direction:column;gap:10px;
+  }
+  .materia > header{display:flex;gap:10px;align-items:baseline;justify-content:space-between;}
+  .materia h5{margin:0;font-size:14px;color:#E8EEF5;font-weight:700;letter-spacing:.2px;}
+  .materia .grado{
+    flex:0 0 auto;font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+    padding:3px 9px;border-radius:999px;background:rgba(125,144,168,.18);color:#9fb0c4;
+  }
+  .materia .grado.hay{background:rgba(63,167,150,.20);color:#7fd3c4;}
+  .materia .grado.poco{background:rgba(251,101,0,.20);color:#ffb27a;}
+  .materia .porque{margin:0;font-size:11.5px;line-height:1.55;color:#9fb0c4;}
+  .rotulo-bloque{
+    font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#5f7286;font-weight:700;
+    margin-bottom:5px;
+  }
+  .mide-fila{
+    display:flex;gap:8px;align-items:baseline;justify-content:space-between;
+    padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:11.5px;
+  }
+  .mide-fila:last-child{border-bottom:none;}
+  .mide-fila .que{color:#C7D2E0;min-width:0;}
+  .mide-fila .cuanto{flex:0 0 auto;color:#fff;font-weight:700;font-family:'JetBrains Mono',monospace;}
+  .mide-fila .cuando{flex:0 0 auto;color:#5f7286;font-size:10px;margin-left:6px;}
+  .materia .ahora{
+    font-size:11px;line-height:1.5;color:#9fb0c4;border-left:2px solid var(--orange);
+    padding-left:10px;
+  }
+  .materia .ahora b{color:#E8EEF5;}
+  .materia .falta{
+    font-size:10.5px;line-height:1.5;color:#7d90a8;background:rgba(255,255,255,.03);
+    border-radius:7px;padding:9px 11px;
+  }
+  .materia .falta b{color:#ffb27a;}
+  .boletin{
+    display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+    margin-top:14px;padding:15px 18px;border:1px solid var(--line);border-radius:10px;
+    border-left:3px solid var(--orange);background:rgba(251,101,0,.06);
+  }
+  .boletin-txt{min-width:0;flex:1 1 300px;}
+  .boletin-txt b{display:block;font-size:13.5px;color:#E8EEF5;margin-bottom:4px;}
+  .boletin-txt span{display:block;font-size:11.5px;line-height:1.5;color:#7d90a8;}
+  .boletin-btn{
+    flex:0 0 auto;display:inline-block;background:var(--orange);color:#fff;
+    text-decoration:none;font-size:12.5px;font-weight:700;padding:10px 18px;border-radius:7px;
+  }
+  .boletin-btn:hover{background:#ff7d24;}
   .marca-enlace{display:inline-flex;text-decoration:none;}
   .marca-enlace:hover img{opacity:.82;}
   .informe-fusk{
@@ -726,7 +806,7 @@
       <button class="nivel" data-lee="2" aria-pressed="false">
         <b>Periodista</b><span>Lo que circula hoy, con su fuente y su corroboración</span></button>
       <button class="nivel" data-lee="3" aria-pressed="false">
-        <b>Analista</b><span>Los 65 indicadores, el método y los vacíos</span></button>
+        <b>Analista</b><span id="rot-analista">Todos los indicadores, el método y los vacíos</span></button>
     </div>
     <p class="niveles-pie" id="niveles-pie"></p>
     <div class="herramientas" id="herramientas"></div>
@@ -791,6 +871,7 @@
     <a href="#oficiales">Padrón oficial</a>
     <a href="#fuentes-limites">Fuentes y límites</a>
     <div class="grupo">Método</div>
+    <a href="#seis-materias">Las seis materias</a>
     <a href="#fundacion">De la Fundación</a>
     <a href="#informe">Informe descargable</a>
     <a href="#calificacion">Calificación</a>
@@ -1392,6 +1473,18 @@
       <div id="vac-mensajeria"></div>
     </section>
 
+    <section class="domain" id="seis-materias" data-nivel="1">
+      <div class="domain-head"><h3>Las seis materias</h3><span class="tag" id="tag-seis-materias">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Son las seis materias en las que trabaja la Fundación</b> —y son, justamente,
+           las que ninguna base pública mide de frente. Acá se dice, materia por materia,
+           <b>qué se puede medir hoy, con qué fuente y de qué año</b>, qué se está publicando
+           en este momento, y <b>qué no se mide y por qué</b>. Un vacío declarado vale más que
+           una cifra inventada.</p>
+      </div>
+      <div class="materias" id="lista-seis-materias"></div>
+    </section>
+
     <section class="domain" id="fundacion" data-nivel="1">
       <div class="domain-head"><h3>De la Fundación</h3><span class="tag" id="tag-fundacion">—</span></div>
       <div class="aviso-cobertura">
@@ -1402,6 +1495,22 @@
       </div>
       <div class="procedencia" id="proc-fundacion">Cargando el registro…</div>
       <div class="cruce" id="lista-fundacion"></div>
+
+      <!-- El alta al boletín NO se toma acá. Esta página es un archivo estático
+           sin servidor: no puede recibir un correo sin exponerlo, y una dirección
+           de correo es dato personal que no tiene por qué pasar por un repositorio
+           público. El padrón lo administra la Fundación en su propio sitio, que ya
+           tiene el formulario y la baja. Acá va el enlace, no el formulario. -->
+      <div class="boletin">
+        <div class="boletin-txt">
+          <b>Recibí los informes de la Fundación por correo</b>
+          <span>El alta se hace en el sitio de la Fundación, que administra el padrón
+                y la baja. Este registro no pide ni guarda datos de nadie.</span>
+        </div>
+        <a class="boletin-btn" href="https://fundacionkent.org/newsletter/"
+           target="_blank" rel="noopener">Suscribirme al boletín</a>
+      </div>
+
       <h4 class="sub-seccion">La Fundación</h4>
       <div class="secciones-fusk" id="secciones-fusk"></div>
       <div id="vac-fundacion"></div>
@@ -2367,7 +2476,7 @@
   const PIE_NIVEL = {
     1: 'Estás viendo <b>lo esencial de un país</b>: qué cambió y cuánto. Cada cifra trae quién la produce y qué es lo que <b>no</b> dice.',
     2: 'Sumás <b>lo que se está publicando ahora</b> —qué cubre la prensa de la región, con cuántos orígenes independientes— y el informe descargable para citar.',
-    3: 'Sumás <b>los 65 indicadores</b> de las trece fuentes con el mapa y los cruces entre temas, y además <b>el método</b>: de dónde sale cada dato, cómo se lo califica, qué vacíos se declaran y qué fuentes oficiales existen en cada Estado.',
+    3: 'Sumás <b>los {IND} indicadores</b> de las trece fuentes con el mapa y los cruces entre temas, y además <b>el método</b>: de dónde sale cada dato, cómo se lo califica, qué vacíos se declaran y qué fuentes oficiales existen en cada Estado.',
   };
 
   // --- Enlaces que se pueden compartir -----------------------------------
@@ -2478,8 +2587,15 @@
       b.classList.toggle('activo', suyo);
       b.setAttribute('aria-pressed', suyo ? 'true' : 'false');
     });
+    // La cantidad de indicadores se cuenta de los datos: escrita a mano quedaba
+    // vieja cada vez que entraba una serie nueva, y era de las primeras cosas
+    // que leia el visitante.
+    const cuantos = fuentesInd().reduce((a,f)=>a+(f.indicadores||[]).length, 0);
     const pie = document.getElementById('niveles-pie');
-    if(pie) pie.innerHTML = PIE_NIVEL[nivel] || '';
+    if(pie) pie.innerHTML = (PIE_NIVEL[nivel] || '').replace('{IND}', cuantos || '');
+    const rotAnalista = document.getElementById('rot-analista');
+    if(rotAnalista && cuantos)
+      rotAnalista.textContent = 'Los ' + cuantos + ' indicadores, el método y los vacíos';
     pintarHerramientas();
     guardarEnLaDireccion();
     // La barra lateral solo lista lo que en este nivel existe.
@@ -2726,6 +2842,184 @@
     });
   }
 
+  // Las seis materias de la casa. Cada ficha declara TRES cosas y en este orden:
+  // que se mide hoy, que se esta publicando ahora, y que NO se mide. La tercera
+  // no es un descargo: es la que distingue un registro de inteligencia de un
+  // tablero, y la que le dice al lector hasta donde puede apoyarse.
+  const MATERIAS_FUSK = [
+    {clave:'violencia_organizada', rotulo:'Violencia organizada', tema:'crimen_organizado',
+     porque:'Grupos armados que disputan territorio y renta, con el Estado como parte o sin él.',
+     indicadores:['homicidios','conflicto_no_estatal','monopolio_fuerza','intensidad_conflicto'],
+     extra:'conflictos',
+     falta:'No existe recuento público y comparable de <b>integrantes, territorios ni ingresos</b> '
+          +'de las organizaciones criminales de la región. Lo que se mide es su <b>efecto</b> '
+          +'&mdash;muertes, control del territorio, intensidad del conflicto&mdash;, no su tamaño.'},
+
+    {clave:'economias_ilicitas', rotulo:'Economías ilícitas', tema:'mineria_ilegal',
+     porque:'La renta que sostiene a esos grupos: minería, tala, tráfico, extorsión.',
+     indicadores:['rentas_naturales','minerales','empleo_informal'],
+     extra:'mineria',
+     falta:'<b>Ningún Estado publica el volumen de su economía ilícita</b>, por definición. '
+          +'Los indicadores de arriba son <b>aproximaciones de contexto</b>, no medidas del '
+          +'delito: miden la economía legal en la que la ilegal se esconde. La única medición '
+          +'directa que entró es la <b>huella física de la minería ilegal</b>, y solo en 4 Estados.'},
+
+    {clave:'contrabando', rotulo:'Contrabando', tema:'contrabando',
+     porque:'Mercadería que cruza sin declararse, o que se declara distinto de los dos lados.',
+     indicadores:[], extra:'comercio',
+     falta:'<b>No hay indicador de contrabando</b> y no lo va a haber: nadie declara lo que '
+          +'oculta. Lo que sí se puede medir es la <b>brecha espejo</b>: lo que un Estado dice '
+          +'haber exportado contra lo que el otro dice haber importado. Una brecha no prueba '
+          +'contrabando &mdash;el flete y el seguro explican buena parte&mdash;, pero <b>señala '
+          +'dónde mirar</b>. Las incautaciones en kilos exigen la UNODC, que hoy no responde.'},
+
+    {clave:'ciberseguridad', rotulo:'Ciberseguridad', tema:'ciberataque',
+     porque:'Extorsión informática contra empresas y organismos, y exposición del terreno digital.',
+     indicadores:['servidores_seguros','banda_ancha','internet'], extra:'ransomware',
+     falta:'Solo se ve <b>el ataque que el atacante publicó</b> para presionar el pago. El que '
+          +'se pagó en silencio no aparece en ninguna parte, y es la mayoría. Los nombres de '
+          +'las víctimas <b>no se republican</b>: se publican agregados.'},
+
+    {clave:'contratacion_publica', rotulo:'Contratación pública', tema:'corrupcion',
+     porque:'Dónde el Estado compra, y con qué controles.',
+     indicadores:['corrupcion','regalo_contrato','soborno_empresas','corrupcion_politica','politica_anticorrupcion'],
+     extra:null,
+     falta:'Se mide la <b>percepción y la experiencia declarada</b> &mdash;cuántas empresas '
+          +'esperan tener que pagar por un contrato&mdash;, no los contratos. <b>El expediente '
+          +'de cada licitación existe</b> en los portales de compras de cada Estado, pero en 33 '
+          +'formatos distintos: es la brecha más grande y la más remontable de las seis.'},
+
+    {clave:'desinformacion', rotulo:'Desinformación', tema:'desinformacion',
+     porque:'El clima en que circula la información: qué se puede decir y quién lo dice.',
+     indicadores:['censura_medios','hostigamiento_periodistas','autocensura','sesgo_medios','medios_corruptos','polarizacion'],
+     extra:null,
+     falta:'<b>Nadie cuenta el contenido falso</b> de forma comparable entre países. Lo que se '
+          +'mide es el terreno en que prospera &mdash;censura, hostigamiento, autocensura, sesgo, '
+          +'medios comprados y polarización&mdash;, con evaluación experta de V-Dem. Es la '
+          +'medición <b>más reciente del registro</b>, y aun así no dice cuánta desinformación '
+          +'circula.'},
+  ];
+
+  // Tres materias se apoyan en fuentes que NO producen indicadores sino registros
+  // —victimas, corredores, poligonos—. Se los trae aparte y se los muestra con la
+  // misma forma, para que el lector no tenga que saber de donde sale cada cosa.
+  function extraMateria(cual, iso){
+    const uno = (d, i) => d && (d.registros||[]).find(r => r.iso === i);
+    if(cual === 'ransomware'){
+      const d = almacen.ransomware; if(!d) return null;
+      if(iso){ const r = uno(d, iso);
+        return r ? {q:'Víctimas de extorsión informática publicadas', v: miles(r.victimas),
+                    c: r.primer_anio + '\u2013' + r.ultimo_anio} : null; }
+      return {q:'Víctimas publicadas en la región', v: miles(d.resumen.victimas_registradas),
+              c: d.resumen.estados_con_caso + ' de 33'};
+    }
+    if(cual === 'comercio'){
+      const d = almacen.comercio; if(!d) return null;
+      if(iso){ const r = uno(d, iso);
+        return r ? {q:'Peor brecha espejo del comercio declarado', v: cifra(r.peor_brecha_pct) + ' %',
+                    c: r.corredores + (r.corredores === 1 ? ' corredor' : ' corredores')} : null; }
+      return {q:'Corredores comerciales comparados', v: miles(d.resumen.corredores_comparados),
+              c: d.resumen.estados_con_dato + ' de 33'};
+    }
+    if(cual === 'conflictos'){
+      const d = almacen.conflictos; if(!d) return null;
+      if(iso){ const r = uno(d, iso);
+        return r && r.conflictos ? {q:'Conflictos territoriales mapeados', v: miles(r.conflictos.total),
+          c: r.conflictos.mas_antiguo + '\u2013' + r.conflictos.mas_reciente} : null; }
+      return {q:'Conflictos territoriales mapeados', v: miles(d.resumen.conflictos_registrados),
+              c: d.resumen.estados_con_conflictos + ' de 33'};
+    }
+    if(cual === 'mineria'){
+      const d = almacen.conflictos; if(!d) return null;
+      if(iso){ const r = uno(d, iso);
+        const m = r && r.mineria_ilegal;
+        const n = m && (m.poligonos !== undefined ? m.poligonos : m.total);
+        return n ? {q:'Polígonos de minería ilegal mapeados', v: miles(n), c:'huella física'} : null; }
+      return {q:'Polígonos de minería ilegal mapeados', v: miles(d.resumen.poligonos_mineria_ilegal),
+              c: d.resumen.estados_con_mineria_mapeada + ' de 33'};
+    }
+    return null;
+  }
+
+  function materiasVista(){
+    const caja = document.getElementById('lista-seis-materias');
+    if(!caja) return;
+    const iso = paisFiltro;
+    const donde = iso ? paisNombre : 'la región';
+    const sr = almacen.cobertura && almacen.cobertura.senal_reciente;
+    const zona = bloqueActivo();
+    let conMedida = 0;
+
+    caja.innerHTML = MATERIAS_FUSK.map(m => {
+      // 1. Lo que se mide.
+      const filas = [];
+      m.indicadores.forEach(clave => {
+        const meta = metaInd(clave);
+        if(!meta.clave) return;                 // el indicador todavia no llego
+        if(iso){
+          const d = datoDe(clave, iso);
+          if(!d) return;
+          const mag = magnitud(d.valor, meta.unidad);
+          filas.push({q: meta.rotulo,
+                      v: mag.texto + (mag.unidad ? ' ' + mag.unidad : ''),
+                      c: d.anio});
+        } else {
+          const n = filasDe(clave).length;
+          if(n) filas.push({q: meta.rotulo, v: String(n), c: 'de 33'});
+        }
+      });
+      const ex = extraMateria(m.extra, iso);
+      if(ex) filas.push(ex);
+      if(filas.length) conMedida++;
+
+      // 2. Lo que se esta publicando ahora.
+      let ahora = '';
+      const tema = sr && sr.temas && sr.temas[m.tema];
+      if(tema){
+        let estados = tema.estados || [];
+        if(iso) estados = estados.filter(e => e.iso === iso);
+        else if(zona) estados = estados.filter(e => e.bloque === zona);
+        const total = estados.reduce((a, e) => a + e.notas, 0);
+        if(total){
+          const ej = estados.flatMap(e => (e.ejemplos||[]).map(x => Object.assign({}, x, {pais: e.pais})))[0];
+          ahora = '<b>' + total + '</b> ' + (total === 1 ? 'mención' : 'menciones')
+                + ' en la prensa y los canales seguidos de ' + esc(donde) + ' en la última pasada.'
+                + (ej ? ' Por ejemplo: \u00ab' + esc((ej.titulo||'').slice(0,110)) + '\u00bb ('
+                        + esc(ej.pais) + ').' : '');
+        }
+      }
+      if(!ahora){
+        ahora = 'Sin menciones de esta materia en ' + esc(donde) + ' en la última pasada. '
+              + '<b>No significa que no ocurra: significa que no se publicó.</b>';
+      }
+
+      // 3. Cuanta medida hay, dicho sin adornos.
+      const grado = !filas.length ? ['poco', 'sin medida directa']
+                  : filas.length <= 2 ? ['poco', filas.length + (filas.length === 1 ? ' medida' : ' medidas')]
+                  : ['hay', filas.length + ' medidas'];
+
+      const mide = filas.length
+        ? '<div><div class="rotulo-bloque">Lo que se mide en ' + esc(donde) + '</div>'
+          + filas.map(f => '<div class="mide-fila"><span class="que">' + esc(f.q) + '</span>'
+              + '<span><span class="cuanto">' + esc(String(f.v)) + '</span>'
+              + '<span class="cuando">' + esc(String(f.c)) + '</span></span></div>').join('')
+          + '</div>'
+        : '';
+
+      return '<article class="materia">'
+           + '<header><h5>' + esc(m.rotulo) + '</h5>'
+           + '<span class="grado ' + grado[0] + '">' + grado[1] + '</span></header>'
+           + '<p class="porque">' + esc(m.porque) + '</p>'
+           + mide
+           + '<div class="ahora">' + ahora + '</div>'
+           + '<div class="falta"><b>Lo que no se mide.</b> ' + m.falta + '</div>'
+           + '</article>';
+    }).join('');
+
+    const tag = document.getElementById('tag-seis-materias');
+    if(tag) tag.textContent = conMedida + ' de 6 con medida en ' + donde;
+  }
+
   function fundacionVista(){
     const caja = document.getElementById('lista-fundacion');
     const secs = document.getElementById('secciones-fusk');
@@ -2762,6 +3056,7 @@
     paso('desplegables de tema', solapas);
     paso('leyenda', leyenda);
     paso('panel de cruce', panelCruce);
+    paso('las seis materias', materiasVista);
     paso('de la Fundación', fundacionVista);
     paso('colofón del informe', pintarColofon);
     paso('señal reciente', senalDelTema);
@@ -3795,8 +4090,8 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     const filas=[], d=almacen.desplazamiento, o=almacen.oficiales;
     // Recorre TODAS las fuentes de indicadores. Antes solo miraba el Banco
     // Mundial, de modo que el informe descargable y la planilla dejaban afuera
-    // 43 de los 65 indicadores —Naciones Unidas, V-Dem, terrorismo, UCDP y
-    // Bertelsmann—. Es lo que la gente se lleva: no puede estar incompleto.
+    // dos tercios de los indicadores —Naciones Unidas, V-Dem, terrorismo, UCDP
+    // y Bertelsmann—. Es lo que la gente se lleva: no puede estar incompleto.
     fuentesInd().forEach(f=>{
       const info=f.indicadores||[];
       (paisFiltro ? (f.registros||[]).filter(r=>r.iso===paisFiltro) : (f.registros||[])).forEach(r=>{

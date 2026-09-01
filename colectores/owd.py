@@ -46,7 +46,7 @@ SERIES = [
     {"clave": "democracia_electoral", "slug": "electoral-democracy-index",
      "columna": "electdem_vdem__estimate_best",
      "rotulo": "Nivel democratico — democracia electoral", "eje": "Gobernanza",
-     "unidad": "indice de 0 a 1", "mas_es_peor": False,
+     "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Es el NIVEL DEMOCRATICO medido por elecciones limpias, sufragio, "
                 "libertad de expresion y asociacion. Se construye con el juicio "
@@ -56,7 +56,7 @@ SERIES = [
     {"clave": "democracia_liberal", "slug": "liberal-democracy-index",
      "columna": "libdem_vdem__estimate_best",
      "rotulo": "Democracia liberal — limites al poder", "eje": "Gobernanza",
-     "unidad": "indice de 0 a 1", "mas_es_peor": False,
+     "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Agrega a lo electoral los limites efectivos al poder ejecutivo: "
                 "control judicial y legislativo, y proteccion de las libertades "
@@ -65,14 +65,14 @@ SERIES = [
     {"clave": "democracia_participativa", "slug": "participatory-democracy-index",
      "columna": "participdem_vdem__estimate_best",
      "rotulo": "Democracia participativa", "eje": "Gobernanza",
-     "unidad": "indice de 0 a 1", "mas_es_peor": False,
+     "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Mide participacion mas alla del voto: sociedad civil organizada, "
                 "gobierno local electo y mecanismos de democracia directa."},
     {"clave": "corrupcion_politica", "slug": "political-corruption-index",
      "columna": "corruption_vdem__estimate_best",
      "rotulo": "Corrupcion politica", "eje": "Gobernanza",
-     "unidad": "indice de 0 a 1", "mas_es_peor": True,
+     "unidad": "índice de 0 a 1", "mas_es_peor": True,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Abarca al ejecutivo, al legislativo, a la administracion y a la "
                 "justicia. ATENCION: en este indice el valor ALTO es el peor, al reves "
@@ -80,7 +80,7 @@ SERIES = [
     {"clave": "libertad_expresion", "slug": "freedom-of-expression-index",
      "columna": "freeexpr_vdem__estimate_best",
      "rotulo": "Libertad de expresion y de prensa", "eje": "Gobernanza",
-     "unidad": "indice de 0 a 1", "mas_es_peor": False,
+     "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Censura estatal a los medios, represalia contra periodistas y "
                 "libertad academica. Se lee junto con la cobertura noticiosa de este "
@@ -88,7 +88,7 @@ SERIES = [
     {"clave": "libertad_asociacion", "slug": "freedom-of-association-index",
      "columna": "freeassoc_vdem__estimate_best",
      "rotulo": "Libertad de asociacion y partidos", "eje": "Gobernanza",
-     "unidad": "indice de 0 a 1", "mas_es_peor": False,
+     "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Libertad para formar partidos y organizaciones civiles, y grado de "
                 "represion sobre ellas. Es la materia de CONFLICTO POLITICO leida por "
@@ -96,7 +96,7 @@ SERIES = [
     {"clave": "terrorismo_muertes", "slug": "terrorism-deaths",
      "columna": "total_killed",
      "rotulo": "Muertes por atentados terroristas", "eje": "Seguridad",
-     "unidad": "personas por anio", "mas_es_peor": True,
+     "unidad": "personas por año", "mas_es_peor": True,
      "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
                "via Our World in Data",
      "cautela": "LA SERIE TERMINA EN 2021: la Base Global de Terrorismo dejo de "
@@ -106,7 +106,7 @@ SERIES = [
     {"clave": "terrorismo_atentados", "slug": "terrorist-attacks",
      "columna": "total_incident_counts",
      "rotulo": "Atentados terroristas registrados", "eje": "Seguridad",
-     "unidad": "hechos por anio", "mas_es_peor": True,
+     "unidad": "hechos por año", "mas_es_peor": True,
      "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
                "via Our World in Data",
      "cautela": "Misma advertencia: LA SERIE TERMINA EN 2021. Cuenta hechos "
@@ -115,7 +115,7 @@ SERIES = [
     {"clave": "conflicto_no_estatal", "slug": "deaths-in-non-state-conflicts",
      "columna": None,   # se resuelve sola: es la unica columna de valor
      "rotulo": "Muertes en conflicto entre grupos armados", "eje": "Seguridad",
-     "unidad": "personas por anio", "mas_es_peor": True,
+     "unidad": "personas por año", "mas_es_peor": True,
      "origen": "UCDP, Programa de Datos de Conflicto de Upsala, via Our World in Data",
      "cautela": "Enfrentamientos armados ENTRE GRUPOS, sin el Estado como parte. En "
                 "esta region eso es, en buena medida, disputa entre organizaciones "
@@ -126,7 +126,7 @@ SERIES = [
                 "por debajo de eso el pais figura en cero sin estar en paz."},
     {"clave": "objetos_espacio", "slug": "cumulative-number-of-objects-launched-into-outer-space",
      "columna": None,
-     "rotulo": "Objetos puestos en orbita, acumulado", "eje": "Defensa",
+     "rotulo": "Objetos puestos en órbita, acumulado", "eje": "Defensa",
      "unidad": "objetos", "mas_es_peor": False,
      "origen": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, "
                "via Our World in Data",
@@ -137,36 +137,98 @@ SERIES = [
                 "aviacion. Solo 13 de los 33 Estados registran alguno."},
     {"clave": "lanzamientos_anuales", "slug": "yearly-number-of-objects-launched-into-outer-space",
      "columna": None,
-     "rotulo": "Objetos puestos en orbita por anio", "eje": "Defensa",
-     "unidad": "objetos por anio", "mas_es_peor": False,
+     "rotulo": "Objetos puestos en órbita por año", "eje": "Defensa",
+     "unidad": "objetos por año", "mas_es_peor": False,
      "origen": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, "
                "via Our World in Data",
      "cautela": "El movimiento anual detras del acumulado. Un anio en cero es lo normal "
                 "para casi todos los Estados del padron y no indica retroceso."},
+    # --- El entorno informativo -------------------------------------------
+    #
+    # Las cinco primeras se nombran «ausencia de»: en la escala de V-Dem el valor
+    # ALTO es el bueno, y llamarlas «censura» o «sesgo» invitaria a leerlas al
+    # reves. Verificado contra controles conocidos con el dato de 2025 —Uruguay
+    # 1,90 y Chile 2,65 contra Nicaragua -2,21 y Venezuela -2,04 en censura—, de
+    # modo que la orientacion no queda supuesta.
+    {"clave": "censura_medios", "slug": "key-media-freedoms",
+     "columna": "v2mecenefm__estimate_best",
+     "rotulo": "Ausencia de censura estatal a los medios", "eje": "Gobernanza",
+     "unidad": "índice de -4 a 4", "mas_es_peor": False,
+     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "cautela": "Mide el esfuerzo del gobierno por censurar a los medios: cuanto MAS "
+                "ALTO, MENOS censura. No cuenta episodios: es evaluacion experta "
+                "codificada por varios especialistas por pais y anio."},
+    {"clave": "hostigamiento_periodistas", "slug": "key-media-freedoms",
+     "columna": "v2meharjrn__estimate_best",
+     "rotulo": "Ausencia de hostigamiento a periodistas", "eje": "Gobernanza",
+     "unidad": "índice de -4 a 4", "mas_es_peor": False,
+     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "cautela": "Cuanto MAS ALTO, menos hostigamiento —amenazas, detenciones, "
+                "agresiones— a periodistas por su trabajo. Mide el clima, NO la "
+                "cantidad de agresiones: para el recuento de hechos no hay fuente "
+                "regional que responda de forma automatizada."},
+    {"clave": "autocensura", "slug": "key-media-freedoms",
+     "columna": "v2meslfcen__estimate_best",
+     "rotulo": "Ausencia de autocensura periodistica", "eje": "Gobernanza",
+     "unidad": "índice de -4 a 4", "mas_es_peor": False,
+     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "cautela": "Cuanto MAS ALTO, menos se callan los medios por temor. Es la medida "
+                "del efecto que la censura y el hostigamiento dejan cuando ya no hace "
+                "falta ejercerlos."},
+    {"clave": "sesgo_medios", "slug": "key-media-freedoms",
+     "columna": "v2mebias__estimate_best",
+     "rotulo": "Ausencia de sesgo en la cobertura", "eje": "Gobernanza",
+     "unidad": "índice de -4 a 4", "mas_es_peor": False,
+     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "cautela": "Cuanto MAS ALTO, mas parejo el trato de los medios a oficialismo y "
+                "oposicion. Un valor bajo no dice quien esta favorecido: dice que la "
+                "cobertura no es pareja."},
+    {"clave": "medios_corruptos", "slug": "media-corruption-score",
+     "columna": "v2mecorrpt__estimate_best",
+     "rotulo": "Ausencia de corrupcion en los medios", "eje": "Gobernanza",
+     "unidad": "índice de -4 a 4", "mas_es_peor": False,
+     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "cautela": "Cuanto MAS ALTO, menos frecuente que los medios reciban pagos para "
+                "publicar, silenciar o torcer una nota. Es la puerta de entrada de la "
+                "desinformacion pagada."},
+    {"clave": "polarizacion", "slug": "political-polarization-score",
+     "columna": "v2cacamps__estimate_best",
+     "rotulo": "Polarizacion politica", "eje": "Gobernanza",
+     "unidad": "índice de -4 a 4", "mas_es_peor": True,
+     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "cautela": "ATENCION: en esta el valor ALTO es el PEOR, al reves que las cinco "
+                "anteriores. Mide hasta que punto la sociedad esta partida en campos "
+                "irreconciliables. Nicaragua 3,14 y Venezuela 2,23 contra Uruguay -1,81 "
+                "con el dato de 2025."},
 ]
 
 
-def _traer(serie: dict) -> tuple:
-    """Trae una planilla. Devuelve (serie, filas, falla)."""
-    url = (f"https://ourworldindata.org/grapher/{serie['slug']}.csv"
+def _traer(slug: str) -> tuple:
+    """Trae una planilla. Devuelve (slug, filas, falla)."""
+    url = (f"https://ourworldindata.org/grapher/{slug}.csv"
            f"?csvType=full&useColumnShortNames=true")
     try:
         peticion = urllib.request.Request(url, headers={"User-Agent": NAVEGADOR})
         with urllib.request.urlopen(peticion, timeout=180) as respuesta:
             texto = respuesta.read().decode("utf-8", "replace")
     except urllib.error.HTTPError as error:
-        return serie, [], f"HTTP {error.code}"
+        return slug, [], f"HTTP {error.code}"
     except Exception as error:  # noqa: BLE001 — la falla se declara, no se oculta
-        return serie, [], type(error).__name__
-    return serie, list(csv.DictReader(io.StringIO(texto))), None
+        return slug, [], type(error).__name__
+    return slug, list(csv.DictReader(io.StringIO(texto))), None
 
 
 def recolectar():
     padron = geo.padron()
     isos = {p["iso"] for p in padron}
 
+    # Cuatro indicadores del entorno informativo salen de la MISMA planilla:
+    # se la pide una sola vez y se reparte, en lugar de bajarla cuatro veces.
+    planillas = sorted({s["slug"] for s in SERIES})
     with ThreadPoolExecutor(max_workers=4) as ejecutor:
-        crudo = list(ejecutor.map(_traer, SERIES))
+        traidas = {slug: (filas, falla)
+                   for slug, filas, falla in ejecutor.map(_traer, planillas)}
+    crudo = [(s, *traidas[s["slug"]]) for s in SERIES]
 
     caidas = [f"{s['rotulo']}: {f}" for s, _, f in crudo if f]
     datos = {p["iso"]: {} for p in padron}

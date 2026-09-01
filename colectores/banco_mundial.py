@@ -109,13 +109,13 @@ INDICADORES = [
                 "policiales, que en varios Estados del padron son el grueso del despliegue."},
     {"clave": "voz_rendicion", "codigo": "GOV_WGI_VA.EST", "fuente_id": 3,
      "rotulo": "Voz y rendicion de cuentas", "eje": "Gobernanza",
-     "unidad": "estimacion de -2,5 a 2,5", "mas_es_peor": False,
+     "unidad": "estimación de -2,5 a 2,5", "mas_es_peor": False,
      "origen": "Worldwide Governance Indicators, Banco Mundial",
      "cautela": "Estimacion de percepcion sobre libertad de expresion, asociacion y "
                 "participacion. No cuenta hechos."},
     {"clave": "calidad_regulatoria", "codigo": "GOV_WGI_RQ.EST", "fuente_id": 3,
      "rotulo": "Calidad regulatoria", "eje": "Gobernanza",
-     "unidad": "estimacion de -2,5 a 2,5", "mas_es_peor": False,
+     "unidad": "estimación de -2,5 a 2,5", "mas_es_peor": False,
      "origen": "Worldwide Governance Indicators, Banco Mundial",
      "cautela": "Estimacion de percepcion sobre la capacidad del Estado de formular "
                 "reglas razonables. No cuenta hechos."},
@@ -128,24 +128,24 @@ INDICADORES = [
                 "evasion o economia no registrada."},
     {"clave": "desempleo_joven", "codigo": "SL.UEM.1524.ZS", "fuente_id": None,
      "rotulo": "Desempleo juvenil", "eje": "Desarrollo",
-     "unidad": "% de la poblacion de 15 a 24", "mas_es_peor": True,
+     "unidad": "% de la población de 15 a 24", "mas_es_peor": True,
      "origen": "OIT, compilado por el Banco Mundial",
      "cautela": "Estimacion modelada de la OIT donde el Estado no publica encuesta propia."},
     {"clave": "gini", "codigo": "SI.POV.GINI", "fuente_id": None,
-     "rotulo": "Desigualdad — indice de Gini", "eje": "Desarrollo",
+     "rotulo": "Desigualdad — índice de Gini", "eje": "Desarrollo",
      "unidad": "0 igualdad, 100 desigualdad maxima", "mas_es_peor": True,
      "origen": "Banco Mundial, sobre encuestas de hogares",
      "cautela": "Depende de la encuesta de hogares de cada Estado, con anios y "
                 "metodologias distintos. La comparacion entre paises es aproximada."},
     {"clave": "pobreza", "codigo": "SI.POV.NAHC", "fuente_id": None,
      "rotulo": "Pobreza segun linea nacional", "eje": "Desarrollo",
-     "unidad": "% de la poblacion", "mas_es_peor": True,
+     "unidad": "% de la población", "mas_es_peor": True,
      "origen": "Banco Mundial, sobre lineas nacionales",
      "cautela": "CADA ESTADO DEFINE SU PROPIA LINEA DE POBREZA. Las cifras NO son "
                 "comparables entre paises: solo su evolucion dentro de cada uno."},
     {"clave": "internet", "codigo": "IT.NET.USER.ZS", "fuente_id": None,
      "rotulo": "Usuarios de internet", "eje": "Desarrollo",
-     "unidad": "% de la poblacion", "mas_es_peor": False,
+     "unidad": "% de la población", "mas_es_peor": False,
      "origen": "UIT, compilado por el Banco Mundial",
      "cautela": "Es tambien la base de exposicion para la materia de ciberseguridad: "
                 "sin poblacion conectada no hay superficie de ataque."},
@@ -156,7 +156,7 @@ INDICADORES = [
      "cautela": "Superficie total, no su estado de conservacion. Una plantacion cuenta "
                 "igual que un bosque primario."},
     {"clave": "regalo_contrato", "codigo": "IC.FRM.CORR.ZS", "fuente_id": None,
-     "rotulo": "Empresas que esperan pagar por un contrato publico", "eje": "Gobernanza",
+     "rotulo": "Empresas que esperan pagar por un contrato público", "eje": "Gobernanza",
      "unidad": "% de las empresas consultadas", "mas_es_peor": True,
      "origen": "Encuestas de Empresas del Banco Mundial",
      "cautela": "Es la materia de INTEGRIDAD DE LA CONTRATACION PUBLICA. Mide lo que la "
@@ -165,7 +165,7 @@ INDICADORES = [
                 "de la ultima ronda disponible y las rondas no coinciden entre si."},
     {"clave": "servidores_seguros", "codigo": "IT.NET.SECR.P6", "fuente_id": None,
      "rotulo": "Servidores de internet cifrados", "eje": "Seguridad",
-     "unidad": "por millon de habitantes", "mas_es_peor": False,
+     "unidad": "por millón de habitantes", "mas_es_peor": False,
      "origen": "Netcraft, compilado por el Banco Mundial",
      "cautela": "Es el unico indicador de CIBERSEGURIDAD comparable y gratuito que se "
                 "encontro para los 33. Mide infraestructura de cifrado desplegada, NO "
@@ -185,8 +185,8 @@ INDICADORES = [
                 "irregularidad: es el acervo acumulado. Y no dice nada sobre delito: "
                 "asociar migracion con inseguridad es un juicio, y el registro no lo hace."},
     {"clave": "migrantes_pct", "codigo": "SM.POP.TOTL.ZS", "fuente_id": None,
-     "rotulo": "Peso de la poblacion migrante", "eje": "Seguridad",
-     "unidad": "% de la poblacion", "mas_es_peor": False,
+     "rotulo": "Peso de la población migrante", "eje": "Seguridad",
+     "unidad": "% de la población", "mas_es_peor": False,
      "origen": "Naciones Unidas, compilado por el Banco Mundial",
      "cautela": "El mismo acervo medido contra el tamano del pais. Un Estado chico con "
                 "recepcion alta aparece arriba sin que el numero absoluto sea grande."},
@@ -207,15 +207,15 @@ INDICADORES = [
                 "envios por via formal: lo que viaja por fuera del sistema no aparece."},
     {"clave": "gasto_militar_publico", "codigo": "MS.MIL.XPND.ZS", "fuente_id": None,
      "rotulo": "Gasto militar sobre el gasto del Estado", "eje": "Defensa",
-     "unidad": "% del gasto publico", "mas_es_peor": False,
+     "unidad": "% del gasto público", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Cuanto de lo que gasta el Estado va a defensa. Leido junto al gasto "
                 "sobre el producto separa dos cosas distintas: un Estado chico que "
                 "dedica mucho de lo poco que tiene, de uno grande que dedica poco de "
                 "mucho."},
     {"clave": "gasto_militar_dolares", "codigo": "MS.MIL.XPND.CD", "fuente_id": None,
-     "rotulo": "Gasto militar en dolares", "eje": "Defensa",
-     "unidad": "dolares estadounidenses corrientes", "mas_es_peor": False,
+     "rotulo": "Gasto militar en dólares", "eje": "Defensa",
+     "unidad": "dólares estadounidenses corrientes", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "El tamano absoluto del presupuesto. En dolares corrientes: la "
                 "comparacion entre anios distintos arrastra inflacion y tipo de cambio."},
@@ -227,7 +227,7 @@ INDICADORES = [
                 "peso relativo del instrumento militar en la sociedad."},
     {"clave": "armas_importadas", "codigo": "MS.MIL.MPRT.KD", "fuente_id": None,
      "rotulo": "Importacion de armamento mayor", "eje": "Defensa",
-     "unidad": "valor indicativo SIPRI, NO son dolares", "mas_es_peor": False,
+     "unidad": "valor indicativo SIPRI, NO son dólares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Es el indicador de MATERIAL disponible al que se puede llegar sin "
                 "pagar: mide la ADQUISICION de armamento mayor —aeronaves, buques, "
@@ -237,7 +237,7 @@ INDICADORES = [
                 "no significa que el pais no tenga material."},
     {"clave": "armas_exportadas", "codigo": "MS.MIL.XPRT.KD", "fuente_id": None,
      "rotulo": "Exportacion de armamento mayor", "eje": "Defensa",
-     "unidad": "valor indicativo SIPRI, NO son dolares", "mas_es_peor": False,
+     "unidad": "valor indicativo SIPRI, NO son dólares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Muy pocos Estados de la region exportan armamento mayor: la mayoria "
                 "figura sin dato, y eso es el dato. Misma unidad indicativa que la "
