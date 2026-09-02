@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "onu-ods",
     "capa": "publico",
-    "obtenido_en": "2026-09-02T05:54:17+00:00",
+    "obtenido_en": "2026-09-02T13:50:02+00:00",
     "fuente": {
       "nombre": "Naciones Unidas — base global de indicadores de los ODS",
       "url": "https://unstats.un.org/sdgs/dataportal"
@@ -215,6 +215,7 @@
       "iso": "ARG",
       "pais": "Argentina",
       "bloque": "Cono Sur",
+      "incluye_malvinas": true,
       "indicadores": {
         "trata_victimas": {
           "valor": 3.0,
@@ -12861,7 +12862,9 @@
       "unidad": "por cada 100.000 habitantes",
       "mas_es_peor": true,
       "origen": "UNODC, vía la base global de los ODS",
-      "cautela": "MIDE DETECCIÓN, NO MAGNITUD. Un Estado que investiga más detecta más y aparece peor; uno que no busca aparece limpio. La cifra baja puede significar poco delito o poca capacidad de detectarlo."
+      "cautela": "MIDE DETECCIÓN, NO MAGNITUD. Un Estado que investiga más detecta más y aparece peor; uno que no busca aparece limpio. La cifra baja puede significar poco delito o poca capacidad de detectarlo.",
+      "seccion": "trata",
+      "seccion_rotulo": "Trata de personas"
     },
     {
       "clave": "trata_sexual",
@@ -12871,7 +12874,9 @@
       "unidad": "por cada 100.000 habitantes",
       "mas_es_peor": true,
       "origen": "UNODC, vía la base global de los ODS",
-      "cautela": "Misma advertencia: mide víctimas detectadas, no víctimas existentes."
+      "cautela": "Misma advertencia: mide víctimas detectadas, no víctimas existentes.",
+      "seccion": "trata",
+      "seccion_rotulo": "Trata de personas"
     },
     {
       "clave": "trata_trabajo",
@@ -12881,7 +12886,9 @@
       "unidad": "por cada 100.000 habitantes",
       "mas_es_peor": true,
       "origen": "UNODC, vía la base global de los ODS",
-      "cautela": "Misma advertencia que el resto de la trata: mide víctimas detectadas."
+      "cautela": "Misma advertencia que el resto de la trata: mide víctimas detectadas.",
+      "seccion": "trata",
+      "seccion_rotulo": "Trata de personas"
     },
     {
       "clave": "soborno_personas",
@@ -12891,7 +12898,9 @@
       "unidad": "% de la población",
       "mas_es_peor": true,
       "origen": "UNODC, vía la base global de los ODS",
-      "cautela": "Sale de encuestas de victimización: mide lo que la gente declara haber pagado, no lo que se pagó."
+      "cautela": "Sale de encuestas de victimización: mide lo que la gente declara haber pagado, no lo que se pagó.",
+      "seccion": "soborno",
+      "seccion_rotulo": "Soborno declarado"
     },
     {
       "clave": "soborno_empresas",
@@ -12901,7 +12910,9 @@
       "unidad": "% de las empresas",
       "mas_es_peor": true,
       "origen": "Banco Mundial, vía la base global de los ODS",
-      "cautela": "Encuesta a empresas, con muestra y año propios de cada Estado."
+      "cautela": "Encuesta a empresas, con muestra y año propios de cada Estado.",
+      "seccion": "soborno",
+      "seccion_rotulo": "Soborno declarado"
     },
     {
       "clave": "empleo_informal",
@@ -12911,7 +12922,9 @@
       "unidad": "% del empleo total",
       "mas_es_peor": true,
       "origen": "OIT, vía la base global de los ODS",
-      "cautela": "Es la economía en negro medida sobre el empleo, no sobre el producto. No incluye la actividad ilícita, que no aparece en ninguna encuesta laboral."
+      "cautela": "Es la economía en negro medida sobre el empleo, no sobre el producto. No incluye la actividad ilícita, que no aparece en ninguna encuesta laboral.",
+      "seccion": "informalidad",
+      "seccion_rotulo": "Empleo informal"
     },
     {
       "clave": "sin_condena",
@@ -12921,7 +12934,9 @@
       "unidad": "% de la población carcelaria",
       "mas_es_peor": true,
       "origen": "UNODC, via la base global de los ODS",
-      "cautela": "Personas presas sin sentencia firme. Mide congestion judicial y uso de la prision preventiva, no criminalidad."
+      "cautela": "Personas presas sin sentencia firme. Mide congestion judicial y uso de la prision preventiva, no criminalidad.",
+      "seccion": "victimizacion",
+      "seccion_rotulo": "Victimización y denuncia"
     },
     {
       "clave": "acceso_informacion",
@@ -12931,7 +12946,9 @@
       "unidad": "puntaje de 0 a 100",
       "mas_es_peor": false,
       "origen": "UNESCO, via la base global de los ODS",
-      "cautela": "Mide la existencia de garantias legales e institucionales, NO su cumplimiento efectivo. Un Estado puede tener buena ley y no aplicarla."
+      "cautela": "Mide la existencia de garantias legales e institucionales, NO su cumplimiento efectivo. Un Estado puede tener buena ley y no aplicarla.",
+      "seccion": "capacidad",
+      "seccion_rotulo": "Capacidad del Estado"
     },
     {
       "clave": "registro_nacimientos",
@@ -12941,7 +12958,9 @@
       "unidad": "% de los menores de 5 años",
       "mas_es_peor": false,
       "origen": "UNICEF, via la base global de los ODS",
-      "cautela": "Es la capacidad estatal mas basica: saber quien existe. Un registro incompleto degrada todas las demas estadisticas de ese Estado."
+      "cautela": "Es la capacidad estatal mas basica: saber quien existe. Un registro incompleto degrada todas las demas estadisticas de ese Estado.",
+      "seccion": "capacidad",
+      "seccion_rotulo": "Capacidad del Estado"
     },
     {
       "clave": "trabajo_infantil",
@@ -12951,7 +12970,9 @@
       "unidad": "% de los ninos de 5 a 17",
       "mas_es_peor": true,
       "origen": "OIT, via la base global de los ODS",
-      "cautela": "Sale de encuestas de hogares con anios y muestras distintos por Estado."
+      "cautela": "Sale de encuestas de hogares con anios y muestras distintos por Estado.",
+      "seccion": "condiciones",
+      "seccion_rotulo": "Condiciones de vida y desigualdad"
     },
     {
       "clave": "agua_potable",
@@ -12961,7 +12982,9 @@
       "unidad": "% de la población",
       "mas_es_peor": false,
       "origen": "OMS y UNICEF, via la base global de los ODS",
-      "cautela": "Servicio gestionado de forma segura, definicion mas exigente que «acceso a agua». No mide continuidad del servicio."
+      "cautela": "Servicio gestionado de forma segura, definicion mas exigente que «acceso a agua». No mide continuidad del servicio.",
+      "seccion": "condiciones",
+      "seccion_rotulo": "Condiciones de vida y desigualdad"
     },
     {
       "clave": "victimas_robo",
@@ -12971,7 +12994,9 @@
       "unidad": "% de la población",
       "mas_es_peor": true,
       "origen": "UNODC, via la base global de los ODS",
-      "cautela": "Sale de encuestas de victimizacion, no de denuncias: mide el delito sufrido, incluido el que nunca se denuncio. Es la medida mas cercana a la delincuencia real que existe con cobertura regional."
+      "cautela": "Sale de encuestas de victimizacion, no de denuncias: mide el delito sufrido, incluido el que nunca se denuncio. Es la medida mas cercana a la delincuencia real que existe con cobertura regional.",
+      "seccion": "victimizacion",
+      "seccion_rotulo": "Victimización y denuncia"
     },
     {
       "clave": "denuncia_robo",
@@ -12981,7 +13006,9 @@
       "unidad": "% de los robos sufridos",
       "mas_es_peor": false,
       "origen": "UNODC, via la base global de los ODS",
-      "cautela": "Es una medida indirecta de CONFIANZA EN LA POLICIA: cuando la gente no denuncia, o no espera respuesta o teme represalia. Una tasa baja de denuncia hace que las estadisticas policiales de ese Estado subestimen el delito."
+      "cautela": "Es una medida indirecta de CONFIANZA EN LA POLICIA: cuando la gente no denuncia, o no espera respuesta o teme represalia. Una tasa baja de denuncia hace que las estadisticas policiales de ese Estado subestimen el delito.",
+      "seccion": "victimizacion",
+      "seccion_rotulo": "Victimización y denuncia"
     },
     {
       "clave": "denuncia_agresion",
@@ -12991,7 +13018,9 @@
       "unidad": "% de las agresiones sufridas",
       "mas_es_peor": false,
       "origen": "UNODC, via la base global de los ODS",
-      "cautela": "Misma lectura que la denuncia del robo: mide confianza en la respuesta institucional, no criminalidad."
+      "cautela": "Misma lectura que la denuncia del robo: mide confianza en la respuesta institucional, no criminalidad.",
+      "seccion": "victimizacion",
+      "seccion_rotulo": "Victimización y denuncia"
     },
     {
       "clave": "institucion_ddhh",
@@ -13001,7 +13030,9 @@
       "unidad": "cumplimiento de 0 a 1",
       "mas_es_peor": false,
       "origen": "ACNUDH, via la base global de los ODS",
-      "cautela": "Mide la existencia y el grado de conformidad con los Principios de Paris, NO la eficacia de esa institucion."
+      "cautela": "Mide la existencia y el grado de conformidad con los Principios de Paris, NO la eficacia de esa institucion.",
+      "seccion": "capacidad",
+      "seccion_rotulo": "Capacidad del Estado"
     }
   ],
   "cobertura": {

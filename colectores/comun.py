@@ -46,6 +46,129 @@ ATRIBUCION = {
 }
 
 
+# ---------------------------------------------------------------------------
+# LA CATEGORIA DE CADA INDICADOR
+#
+# Hasta ahora la categoria existia SOLO como «en que parte del HTML esta escrito
+# el indicador». Eso no es un dato: es un accidente de maquetacion, y se nota en
+# que los seis indicadores del entorno informativo —los mas recientes del
+# registro, con dato de 2025— NO APARECIAN EN NINGUNA SECCION porque nadie los
+# habia asignado, y nada lo advertia.
+#
+# Aca la categoria pasa a ser un HECHO DEL REGISTRO: viaja en el archivo de
+# datos, entra en la planilla que se descarga, llega al buscador de cruces y
+# sobrevive a cualquier rediseño de la pagina. Y un indicador sin categoria deja
+# de pasar inadvertido: `escribir` lo dice.
+#
+# El eje agrupa por linea de trabajo —seguridad, defensa, gobernanza,
+# desarrollo—; la categoria agrupa DENTRO del eje. Un indicador tiene
+# exactamente uno de cada uno.
+# ---------------------------------------------------------------------------
+CATEGORIAS = {
+    "acceso_informacion": "capacidad",
+    "actores_antidemocraticos": "integridad",
+    "administracion_basica": "integridad",
+    "agua_potable": "condiciones",
+    "aprobacion_democracia": "integridad",
+    "armas_exportadas": "material",
+    "armas_importadas": "material",
+    "asentamientos": "urbano",
+    "autocensura": "entorno-informativo",
+    "banda_ancha": "conectividad",
+    "bosque": "ambiente",
+    "calidad_regulatoria": "institucional",
+    "censura_medios": "entorno-informativo",
+    "conflicto_no_estatal": "grupos-armados",
+    "corrupcion": "institucional",
+    "corrupcion_politica": "democracia",
+    "democracia_electoral": "democracia",
+    "democracia_liberal": "democracia",
+    "democracia_participativa": "democracia",
+    "denuncia_agresion": "victimizacion",
+    "denuncia_robo": "victimizacion",
+    "desempleo_joven": "condiciones",
+    "empleo_informal": "informalidad",
+    "estabilidad": "institucional",
+    "estado_derecho": "institucional",
+    "gasto_militar": "presupuesto-defensa",
+    "gasto_militar_dolares": "presupuesto-defensa",
+    "gasto_militar_publico": "presupuesto-defensa",
+    "gini": "condiciones",
+    "homicidios": "violencia",
+    "hostigamiento_periodistas": "entorno-informativo",
+    "indice_gobernanza": "integridad",
+    "industria": "industrial",
+    "institucion_ddhh": "capacidad",
+    "intensidad_conflicto": "control",
+    "internet": "conectividad",
+    "lanzamientos_anuales": "aeroespacial",
+    "libertad_asociacion": "libertades",
+    "libertad_expresion": "libertades",
+    "medios_corruptos": "entorno-informativo",
+    "migracion_neta": "migraciones",
+    "migrantes": "migraciones",
+    "migrantes_pct": "migraciones",
+    "militares_fuerza_laboral": "efectivos",
+    "minerales": "materias",
+    "monopolio_fuerza": "control",
+    "objetos_espacio": "aeroespacial",
+    "persecucion_abuso": "integridad",
+    "personal_militar": "efectivos",
+    "pobreza": "condiciones",
+    "polarizacion": "entorno-informativo",
+    "politica_anticorrupcion": "integridad",
+    "recaudacion": "capacidad",
+    "regalo_contrato": "contratacion",
+    "registro_nacimientos": "capacidad",
+    "remesas": "migraciones",
+    "rentas_naturales": "materias",
+    "servidores_seguros": "ciber",
+    "sesgo_medios": "entorno-informativo",
+    "sin_condena": "victimizacion",
+    "soborno_empresas": "soborno",
+    "soborno_personas": "soborno",
+    "terrorismo_atentados": "terrorismo",
+    "terrorismo_muertes": "terrorismo",
+    "trabajo_infantil": "condiciones",
+    "trata_sexual": "trata",
+    "trata_trabajo": "trata",
+    "trata_victimas": "trata",
+    "urbanizacion": "urbano",
+    "victimas_robo": "victimizacion",
+    "voz_rendicion": "institucional",
+}
+
+ROTULO_CATEGORIA = {
+    "aeroespacial": "Capacidad aeroespacial",
+    "ambiente": "Superficie forestal",
+    "capacidad": "Capacidad del Estado",
+    "ciber": "Ciberseguridad",
+    "condiciones": "Condiciones de vida y desigualdad",
+    "conectividad": "Conectividad",
+    "contratacion": "Contratación pública",
+    "control": "Control territorial del Estado",
+    "democracia": "Nivel democrático",
+    "efectivos": "Efectivos",
+    "entorno-informativo": "Entorno informativo",
+    "grupos-armados": "Grupos armados",
+    "industrial": "Industrial",
+    "informalidad": "Empleo informal",
+    "institucional": "Indicadores de gobernanza",
+    "integridad": "Integridad y aprobación democrática",
+    "libertades": "Libertades",
+    "material": "Material y armamento",
+    "materias": "Exportaciones y recursos",
+    "migraciones": "Migraciones",
+    "presupuesto-defensa": "Presupuesto de defensa",
+    "soborno": "Soborno declarado",
+    "terrorismo": "Terrorismo",
+    "trata": "Trata de personas",
+    "urbano": "Urbano",
+    "victimizacion": "Victimización y denuncia",
+    "violencia": "Homicidios",
+}
+
+
 def ahora() -> str:
     """Momento actual en ISO 8601, UTC, sin fracciones de segundo."""
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -112,6 +235,21 @@ def escribir(
     }
     if extra:
         contenido.update(extra)
+
+    # La categoria se adjunta acá y no en cada colector: en un solo lugar no
+    # puede desincronizarse, y el indicador nuevo que no la tenga SE ANUNCIA en
+    # vez de perderse, que es como se perdieron los seis del entorno informativo.
+    sin_categoria = []
+    for indicador in contenido.get("indicadores") or []:
+        categoria = CATEGORIAS.get(indicador.get("clave"))
+        if categoria:
+            indicador["seccion"] = categoria
+            indicador["seccion_rotulo"] = ROTULO_CATEGORIA.get(categoria, categoria)
+        else:
+            sin_categoria.append(indicador.get("clave"))
+    if sin_categoria:
+        print(f"[{colector}] AVISO: sin categoria declarada -> "
+              f"{', '.join(sin_categoria)}. Se agregan a comun.CATEGORIAS.")
 
     # allow_nan=False es deliberado: NaN e Infinity NO son JSON valido y el
     # navegador rechaza el archivo entero, no solo el valor. Si un colector

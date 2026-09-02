@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "banco-mundial",
     "capa": "publico",
-    "obtenido_en": "2026-09-02T05:52:32+00:00",
+    "obtenido_en": "2026-09-02T13:48:13+00:00",
     "fuente": {
       "nombre": "Banco Mundial — indicadores de desarrollo y gobernanza",
       "url": "https://data.worldbank.org"
@@ -927,6 +927,7 @@
       "iso": "ARG",
       "pais": "Argentina",
       "bloque": "Cono Sur",
+      "incluye_malvinas": true,
       "indicadores": {
         "homicidios": {
           "valor": 4.4929,
@@ -37041,7 +37042,9 @@
       "unidad": "por cada 100.000 habitantes",
       "mas_es_peor": true,
       "origen": "UNODC, compilado por el Banco Mundial",
-      "cautela": "Recuento de hechos registrados por cada Estado y homologado por UNODC. Un Estado con peor registro puede aparecer con menos homicidios."
+      "cautela": "Recuento de hechos registrados por cada Estado y homologado por UNODC. Un Estado con peor registro puede aparecer con menos homicidios.",
+      "seccion": "violencia",
+      "seccion_rotulo": "Homicidios"
     },
     {
       "clave": "corrupcion",
@@ -37051,7 +37054,9 @@
       "unidad": "estimación de -2,5 a 2,5",
       "mas_es_peor": false,
       "origen": "Worldwide Governance Indicators, Banco Mundial",
-      "cautela": "Estimación de percepción agregada de encuestas y evaluaciones de expertos. No cuenta hechos de corrupción: mide cómo se la percibe."
+      "cautela": "Estimación de percepción agregada de encuestas y evaluaciones de expertos. No cuenta hechos de corrupción: mide cómo se la percibe.",
+      "seccion": "institucional",
+      "seccion_rotulo": "Indicadores de gobernanza"
     },
     {
       "clave": "estado_derecho",
@@ -37061,7 +37066,9 @@
       "unidad": "estimación de -2,5 a 2,5",
       "mas_es_peor": false,
       "origen": "Worldwide Governance Indicators, Banco Mundial",
-      "cautela": "Estimación de percepción, no medición directa del funcionamiento judicial."
+      "cautela": "Estimación de percepción, no medición directa del funcionamiento judicial.",
+      "seccion": "institucional",
+      "seccion_rotulo": "Indicadores de gobernanza"
     },
     {
       "clave": "estabilidad",
@@ -37071,7 +37078,9 @@
       "unidad": "estimación de -2,5 a 2,5",
       "mas_es_peor": false,
       "origen": "Worldwide Governance Indicators, Banco Mundial",
-      "cautela": "Estimación de percepción sobre la probabilidad de inestabilidad o violencia por motivos políticos. No es un pronóstico."
+      "cautela": "Estimación de percepción sobre la probabilidad de inestabilidad o violencia por motivos políticos. No es un pronóstico.",
+      "seccion": "institucional",
+      "seccion_rotulo": "Indicadores de gobernanza"
     },
     {
       "clave": "urbanizacion",
@@ -37081,7 +37090,9 @@
       "unidad": "% de la población",
       "mas_es_peor": false,
       "origen": "Banco Mundial, sobre censos nacionales",
-      "cautela": "Mide concentración urbana, no calidad de vida urbana. Un valor alto no es bueno ni malo por sí mismo."
+      "cautela": "Mide concentración urbana, no calidad de vida urbana. Un valor alto no es bueno ni malo por sí mismo.",
+      "seccion": "urbano",
+      "seccion_rotulo": "Urbano"
     },
     {
       "clave": "asentamientos",
@@ -37091,7 +37102,9 @@
       "unidad": "% de la población urbana",
       "mas_es_peor": true,
       "origen": "ONU-Hábitat, compilado por el Banco Mundial",
-      "cautela": "Serie con cobertura irregular: varios Estados no la reportan todos los años y el último dato puede ser viejo."
+      "cautela": "Serie con cobertura irregular: varios Estados no la reportan todos los años y el último dato puede ser viejo.",
+      "seccion": "urbano",
+      "seccion_rotulo": "Urbano"
     },
     {
       "clave": "industria",
@@ -37101,7 +37114,9 @@
       "unidad": "% del producto",
       "mas_es_peor": false,
       "origen": "Cuentas nacionales, compiladas por el Banco Mundial",
-      "cautela": "Peso del sector industrial en el producto. No mide su complejidad ni su valor agregado tecnológico."
+      "cautela": "Peso del sector industrial en el producto. No mide su complejidad ni su valor agregado tecnológico.",
+      "seccion": "industrial",
+      "seccion_rotulo": "Industrial"
     },
     {
       "clave": "minerales",
@@ -37111,7 +37126,9 @@
       "unidad": "% de las exportaciones",
       "mas_es_peor": false,
       "origen": "UN Comtrade, compilado por el Banco Mundial",
-      "cautela": "Mide dependencia exportadora de materias primas minerales. Un valor alto señala exposición al precio internacional, no riqueza."
+      "cautela": "Mide dependencia exportadora de materias primas minerales. Un valor alto señala exposición al precio internacional, no riqueza.",
+      "seccion": "materias",
+      "seccion_rotulo": "Exportaciones y recursos"
     },
     {
       "clave": "rentas_naturales",
@@ -37121,7 +37138,9 @@
       "unidad": "% del producto",
       "mas_es_peor": true,
       "origen": "Banco Mundial",
-      "cautela": "Proporción del producto que proviene de extraer recursos. Es el indicador clásico de exposición a la maldición de los recursos."
+      "cautela": "Proporción del producto que proviene de extraer recursos. Es el indicador clásico de exposición a la maldición de los recursos.",
+      "seccion": "materias",
+      "seccion_rotulo": "Exportaciones y recursos"
     },
     {
       "clave": "gasto_militar",
@@ -37131,7 +37150,9 @@
       "unidad": "% del producto",
       "mas_es_peor": false,
       "origen": "SIPRI, compilado por el Banco Mundial",
-      "cautela": "Mide lo que el Estado destina a defensa, no su capacidad ni su empleo. Un valor alto no indica mas seguridad ni menos."
+      "cautela": "Mide lo que el Estado destina a defensa, no su capacidad ni su empleo. Un valor alto no indica mas seguridad ni menos.",
+      "seccion": "presupuesto-defensa",
+      "seccion_rotulo": "Presupuesto de defensa"
     },
     {
       "clave": "personal_militar",
@@ -37141,7 +37162,9 @@
       "unidad": "personas",
       "mas_es_peor": false,
       "origen": "Banco Mundial",
-      "cautela": "Efectivos declarados. No incluye fuerzas de seguridad interior ni policiales, que en varios Estados del padron son el grueso del despliegue."
+      "cautela": "Efectivos declarados. No incluye fuerzas de seguridad interior ni policiales, que en varios Estados del padron son el grueso del despliegue.",
+      "seccion": "efectivos",
+      "seccion_rotulo": "Efectivos"
     },
     {
       "clave": "voz_rendicion",
@@ -37151,7 +37174,9 @@
       "unidad": "estimación de -2,5 a 2,5",
       "mas_es_peor": false,
       "origen": "Worldwide Governance Indicators, Banco Mundial",
-      "cautela": "Estimacion de percepcion sobre libertad de expresion, asociacion y participacion. No cuenta hechos."
+      "cautela": "Estimacion de percepcion sobre libertad de expresion, asociacion y participacion. No cuenta hechos.",
+      "seccion": "institucional",
+      "seccion_rotulo": "Indicadores de gobernanza"
     },
     {
       "clave": "calidad_regulatoria",
@@ -37161,7 +37186,9 @@
       "unidad": "estimación de -2,5 a 2,5",
       "mas_es_peor": false,
       "origen": "Worldwide Governance Indicators, Banco Mundial",
-      "cautela": "Estimacion de percepcion sobre la capacidad del Estado de formular reglas razonables. No cuenta hechos."
+      "cautela": "Estimacion de percepcion sobre la capacidad del Estado de formular reglas razonables. No cuenta hechos.",
+      "seccion": "institucional",
+      "seccion_rotulo": "Indicadores de gobernanza"
     },
     {
       "clave": "recaudacion",
@@ -37171,7 +37198,9 @@
       "unidad": "% del producto",
       "mas_es_peor": false,
       "origen": "FMI y Banco Mundial",
-      "cautela": "Entra como capacidad del Estado de recaudar, no como indicador economico. Una recaudacion baja frente a una economia grande senala evasion o economia no registrada."
+      "cautela": "Entra como capacidad del Estado de recaudar, no como indicador economico. Una recaudacion baja frente a una economia grande senala evasion o economia no registrada.",
+      "seccion": "capacidad",
+      "seccion_rotulo": "Capacidad del Estado"
     },
     {
       "clave": "desempleo_joven",
@@ -37181,7 +37210,9 @@
       "unidad": "% de la población de 15 a 24",
       "mas_es_peor": true,
       "origen": "OIT, compilado por el Banco Mundial",
-      "cautela": "Estimacion modelada de la OIT donde el Estado no publica encuesta propia."
+      "cautela": "Estimacion modelada de la OIT donde el Estado no publica encuesta propia.",
+      "seccion": "condiciones",
+      "seccion_rotulo": "Condiciones de vida y desigualdad"
     },
     {
       "clave": "gini",
@@ -37191,7 +37222,9 @@
       "unidad": "0 igualdad, 100 desigualdad maxima",
       "mas_es_peor": true,
       "origen": "Banco Mundial, sobre encuestas de hogares",
-      "cautela": "Depende de la encuesta de hogares de cada Estado, con anios y metodologias distintos. La comparacion entre paises es aproximada."
+      "cautela": "Depende de la encuesta de hogares de cada Estado, con anios y metodologias distintos. La comparacion entre paises es aproximada.",
+      "seccion": "condiciones",
+      "seccion_rotulo": "Condiciones de vida y desigualdad"
     },
     {
       "clave": "pobreza",
@@ -37201,7 +37234,9 @@
       "unidad": "% de la población",
       "mas_es_peor": true,
       "origen": "Banco Mundial, sobre lineas nacionales",
-      "cautela": "CADA ESTADO DEFINE SU PROPIA LINEA DE POBREZA. Las cifras NO son comparables entre paises: solo su evolucion dentro de cada uno."
+      "cautela": "CADA ESTADO DEFINE SU PROPIA LINEA DE POBREZA. Las cifras NO son comparables entre paises: solo su evolucion dentro de cada uno.",
+      "seccion": "condiciones",
+      "seccion_rotulo": "Condiciones de vida y desigualdad"
     },
     {
       "clave": "internet",
@@ -37211,7 +37246,9 @@
       "unidad": "% de la población",
       "mas_es_peor": false,
       "origen": "UIT, compilado por el Banco Mundial",
-      "cautela": "Es tambien la base de exposicion para la materia de ciberseguridad: sin poblacion conectada no hay superficie de ataque."
+      "cautela": "Es tambien la base de exposicion para la materia de ciberseguridad: sin poblacion conectada no hay superficie de ataque.",
+      "seccion": "conectividad",
+      "seccion_rotulo": "Conectividad"
     },
     {
       "clave": "bosque",
@@ -37221,7 +37258,9 @@
       "unidad": "% del territorio",
       "mas_es_peor": false,
       "origen": "FAO, compilado por el Banco Mundial",
-      "cautela": "Superficie total, no su estado de conservacion. Una plantacion cuenta igual que un bosque primario."
+      "cautela": "Superficie total, no su estado de conservacion. Una plantacion cuenta igual que un bosque primario.",
+      "seccion": "ambiente",
+      "seccion_rotulo": "Superficie forestal"
     },
     {
       "clave": "regalo_contrato",
@@ -37231,7 +37270,9 @@
       "unidad": "% de las empresas consultadas",
       "mas_es_peor": true,
       "origen": "Encuestas de Empresas del Banco Mundial",
-      "cautela": "Es la materia de INTEGRIDAD DE LA CONTRATACION PUBLICA. Mide lo que la empresa declara esperar, no un soborno comprobado. La encuesta no se levanta todos los anios en todos los Estados: el dato de cada pais es de la ultima ronda disponible y las rondas no coinciden entre si."
+      "cautela": "Es la materia de INTEGRIDAD DE LA CONTRATACION PUBLICA. Mide lo que la empresa declara esperar, no un soborno comprobado. La encuesta no se levanta todos los anios en todos los Estados: el dato de cada pais es de la ultima ronda disponible y las rondas no coinciden entre si.",
+      "seccion": "contratacion",
+      "seccion_rotulo": "Contratación pública"
     },
     {
       "clave": "servidores_seguros",
@@ -37241,7 +37282,9 @@
       "unidad": "por millón de habitantes",
       "mas_es_peor": false,
       "origen": "Netcraft, compilado por el Banco Mundial",
-      "cautela": "Es el unico indicador de CIBERSEGURIDAD comparable y gratuito que se encontro para los 33. Mide infraestructura de cifrado desplegada, NO mide ataques, ni defensa estatal, ni incidentes. Un valor alto indica una economia digital mas madura, no un Estado mas protegido."
+      "cautela": "Es el unico indicador de CIBERSEGURIDAD comparable y gratuito que se encontro para los 33. Mide infraestructura de cifrado desplegada, NO mide ataques, ni defensa estatal, ni incidentes. Un valor alto indica una economia digital mas madura, no un Estado mas protegido.",
+      "seccion": "ciber",
+      "seccion_rotulo": "Ciberseguridad"
     },
     {
       "clave": "banda_ancha",
@@ -37251,7 +37294,9 @@
       "unidad": "por 100 habitantes",
       "mas_es_peor": false,
       "origen": "UIT, compilado por el Banco Mundial",
-      "cautela": "Junto con los usuarios de internet, delimita la superficie expuesta a ataque informatico. No mide calidad ni continuidad del servicio."
+      "cautela": "Junto con los usuarios de internet, delimita la superficie expuesta a ataque informatico. No mide calidad ni continuidad del servicio.",
+      "seccion": "conectividad",
+      "seccion_rotulo": "Conectividad"
     },
     {
       "clave": "migrantes",
@@ -37261,7 +37306,9 @@
       "unidad": "personas",
       "mas_es_peor": false,
       "origen": "Naciones Unidas, compilado por el Banco Mundial",
-      "cautela": "Personas nacidas en otro pais que residen en este. NO mide flujo ni irregularidad: es el acervo acumulado. Y no dice nada sobre delito: asociar migracion con inseguridad es un juicio, y el registro no lo hace."
+      "cautela": "Personas nacidas en otro pais que residen en este. NO mide flujo ni irregularidad: es el acervo acumulado. Y no dice nada sobre delito: asociar migracion con inseguridad es un juicio, y el registro no lo hace.",
+      "seccion": "migraciones",
+      "seccion_rotulo": "Migraciones"
     },
     {
       "clave": "migrantes_pct",
@@ -37271,7 +37318,9 @@
       "unidad": "% de la población",
       "mas_es_peor": false,
       "origen": "Naciones Unidas, compilado por el Banco Mundial",
-      "cautela": "El mismo acervo medido contra el tamano del pais. Un Estado chico con recepcion alta aparece arriba sin que el numero absoluto sea grande."
+      "cautela": "El mismo acervo medido contra el tamano del pais. Un Estado chico con recepcion alta aparece arriba sin que el numero absoluto sea grande.",
+      "seccion": "migraciones",
+      "seccion_rotulo": "Migraciones"
     },
     {
       "clave": "migracion_neta",
@@ -37281,7 +37330,9 @@
       "unidad": "personas por quinquenio",
       "mas_es_peor": false,
       "origen": "Naciones Unidas, compilado por el Banco Mundial",
-      "cautela": "Entradas menos salidas. NEGATIVO significa que se fue mas gente de la que llego: es el indicador de EXPULSION de poblacion. Se estima por quinquenios, de modo que no capta una crisis de un solo anio."
+      "cautela": "Entradas menos salidas. NEGATIVO significa que se fue mas gente de la que llego: es el indicador de EXPULSION de poblacion. Se estima por quinquenios, de modo que no capta una crisis de un solo anio.",
+      "seccion": "migraciones",
+      "seccion_rotulo": "Migraciones"
     },
     {
       "clave": "remesas",
@@ -37291,7 +37342,9 @@
       "unidad": "% del producto",
       "mas_es_peor": false,
       "origen": "Banco Mundial",
-      "cautela": "Entra como medida de MIGRACION, no como indicador economico: es cuanto pesa el dinero que mandan quienes se fueron. Un valor alto senala una diaspora grande y una economia dependiente de ella. Solo cuenta los envios por via formal: lo que viaja por fuera del sistema no aparece."
+      "cautela": "Entra como medida de MIGRACION, no como indicador economico: es cuanto pesa el dinero que mandan quienes se fueron. Un valor alto senala una diaspora grande y una economia dependiente de ella. Solo cuenta los envios por via formal: lo que viaja por fuera del sistema no aparece.",
+      "seccion": "migraciones",
+      "seccion_rotulo": "Migraciones"
     },
     {
       "clave": "gasto_militar_publico",
@@ -37301,7 +37354,9 @@
       "unidad": "% del gasto público",
       "mas_es_peor": false,
       "origen": "SIPRI, compilado por el Banco Mundial",
-      "cautela": "Cuanto de lo que gasta el Estado va a defensa. Leido junto al gasto sobre el producto separa dos cosas distintas: un Estado chico que dedica mucho de lo poco que tiene, de uno grande que dedica poco de mucho."
+      "cautela": "Cuanto de lo que gasta el Estado va a defensa. Leido junto al gasto sobre el producto separa dos cosas distintas: un Estado chico que dedica mucho de lo poco que tiene, de uno grande que dedica poco de mucho.",
+      "seccion": "presupuesto-defensa",
+      "seccion_rotulo": "Presupuesto de defensa"
     },
     {
       "clave": "gasto_militar_dolares",
@@ -37311,7 +37366,9 @@
       "unidad": "dólares estadounidenses corrientes",
       "mas_es_peor": false,
       "origen": "SIPRI, compilado por el Banco Mundial",
-      "cautela": "El tamano absoluto del presupuesto. En dolares corrientes: la comparacion entre anios distintos arrastra inflacion y tipo de cambio."
+      "cautela": "El tamano absoluto del presupuesto. En dolares corrientes: la comparacion entre anios distintos arrastra inflacion y tipo de cambio.",
+      "seccion": "presupuesto-defensa",
+      "seccion_rotulo": "Presupuesto de defensa"
     },
     {
       "clave": "militares_fuerza_laboral",
@@ -37321,7 +37378,9 @@
       "unidad": "% de la fuerza laboral",
       "mas_es_peor": false,
       "origen": "Banco Mundial",
-      "cautela": "Que proporcion de quienes trabajan esta bajo bandera. Es la medida de peso relativo del instrumento militar en la sociedad."
+      "cautela": "Que proporcion de quienes trabajan esta bajo bandera. Es la medida de peso relativo del instrumento militar en la sociedad.",
+      "seccion": "efectivos",
+      "seccion_rotulo": "Efectivos"
     },
     {
       "clave": "armas_importadas",
@@ -37331,7 +37390,9 @@
       "unidad": "valor indicativo SIPRI, NO son dólares",
       "mas_es_peor": false,
       "origen": "SIPRI, compilado por el Banco Mundial",
-      "cautela": "Es el indicador de MATERIAL disponible al que se puede llegar sin pagar: mide la ADQUISICION de armamento mayor —aeronaves, buques, blindados, misiles— no el inventario. La unidad NO es dinero: es un valor indicativo que SIPRI asigna segun capacidad militar, para poder comparar sistemas de precios distintos. Un anio sin compras da cero y no significa que el pais no tenga material."
+      "cautela": "Es el indicador de MATERIAL disponible al que se puede llegar sin pagar: mide la ADQUISICION de armamento mayor —aeronaves, buques, blindados, misiles— no el inventario. La unidad NO es dinero: es un valor indicativo que SIPRI asigna segun capacidad militar, para poder comparar sistemas de precios distintos. Un anio sin compras da cero y no significa que el pais no tenga material.",
+      "seccion": "material",
+      "seccion_rotulo": "Material y armamento"
     },
     {
       "clave": "armas_exportadas",
@@ -37341,7 +37402,9 @@
       "unidad": "valor indicativo SIPRI, NO son dólares",
       "mas_es_peor": false,
       "origen": "SIPRI, compilado por el Banco Mundial",
-      "cautela": "Muy pocos Estados de la region exportan armamento mayor: la mayoria figura sin dato, y eso es el dato. Misma unidad indicativa que la importacion."
+      "cautela": "Muy pocos Estados de la region exportan armamento mayor: la mayoria figura sin dato, y eso es el dato. Misma unidad indicativa que la importacion.",
+      "seccion": "material",
+      "seccion_rotulo": "Material y armamento"
     }
   ],
   "cobertura": {
