@@ -207,6 +207,36 @@
   .eje::after{content:"";display:block;height:1px;background:var(--line);margin-top:16px;}
 
   section.domain{margin-bottom:40px;scroll-margin-top:130px;}
+  /* DOS NIVELES A LA VISTA. El bloque es el eje —grande, con su bajada—; la
+     categoria es lo que antes era una seccion entera y ahora vive adentro, con
+     un encabezado menor. Que la jerarquia se VEA es lo que evita que once
+     bloques se lean como cuarenta y ocho. */
+  .bloque-head{
+    display:flex;align-items:baseline;gap:14px;
+    border-bottom:2px solid var(--orange);padding-bottom:9px;margin-bottom:8px;
+  }
+  .bloque-head h3{
+    font-size:16px;text-transform:uppercase;letter-spacing:1.6px;font-weight:800;
+    color:#fff;margin:0;
+  }
+  .bloque-bajada{
+    margin:0 0 20px;font-size:13px;line-height:1.6;color:#9fb0c4;max-width:74ch;
+  }
+  .bloque-bajada b{color:#C7D2E0;}
+  .categoria{
+    margin:0 0 26px;padding-left:15px;border-left:2px solid var(--line);
+  }
+  .categoria:last-child{margin-bottom:0;}
+  .categoria-head{
+    display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+    flex-wrap:wrap;margin-bottom:9px;
+  }
+  .categoria-head h4{
+    font-size:12px;text-transform:uppercase;letter-spacing:1.1px;font-weight:700;
+    color:#E8EEF5;margin:0;
+  }
+  .categoria-head .tag{font-size:10.5px;color:#7d90a8;}
+  @media (max-width:720px){ .categoria{padding-left:11px;} }
   .domain-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:6px;border-bottom:1px solid var(--line);padding-bottom:10px;flex-wrap:wrap;}
   .domain-head h3{font-size:13px;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:#fff;margin:0;}
   .domain-head .tag{font-size:10.5px;color:#7d90a8;}
@@ -987,73 +1017,31 @@
 </div>
 
 <div class="shell">
-  <nav class="rail">
+  <nav class="rail" aria-label="Secciones del registro">
+    <div class="grupo">Empezar</div>
+    <a href="#ficha-pais">Mi país</a>
     <a href="#mapa-seccion">Mapa de situación</a>
-    <div class="grupo">Seguridad</div>
-    <a href="#violencia">Homicidios</a>
-    <a href="#trata">Trata de personas</a>
-    <a href="#desplazamiento">Desplazamiento forzado</a>
-    <a href="#contrabando">Contrabando</a>
-    <a href="#ciber">Ciberseguridad</a>
-    <a href="#extorsion">Extorsión informática</a>
-    <a href="#fuerzas">Fuerzas y defensa</a>
-    <a href="#victimizacion">Victimización y denuncia</a>
-    <a href="#control-territorial">Control territorial</a>
-    <a href="#terrorismo">Terrorismo</a>
-    <a href="#grupos-armados">Grupos armados</a>
-    <a href="#migraciones">Migraciones</a>
-    <a href="#fronteras">Zonas de frontera</a>
-    <a href="#conflictos-territoriales">Conflictos territoriales</a>
-    <a href="#mineria-ilegal">Minería ilegal</a>
-    <a href="#menores-combatientes">Menores en conflicto</a>
-    <div class="grupo">Defensa</div>
-    <a href="#presupuesto-defensa">Presupuesto</a>
-    <a href="#efectivos">Efectivos</a>
-    <a href="#material">Material</a>
-    <a href="#aeroespacial">Aeroespacial</a>
-    <div class="grupo">Gobernanza</div>
-    <a href="#institucional">Indicadores de gobernanza</a>
-    <a href="#contratacion">Contratación pública</a>
-    <a href="#integridad">Integridad y democracia</a>
-    <a href="#capacidad">Capacidad del Estado</a>
-    <a href="#democracia">Nivel democrático</a>
-    <a href="#libertades">Libertades</a>
-    <a href="#soborno">Soborno declarado</a>
-    <a href="#desinformacion">Desinformación</a>
-    <a href="#palabras">Nube de conceptos</a>
-    <a href="#redes">Circulación en redes</a>
-    <a href="#mensajeria">Canales de mensajería</a>
-    <div class="grupo">Desarrollo</div>
-    <a href="#urbano">Urbano</a>
-    <a href="#industrial">Industrial</a>
-    <a href="#informalidad">Empleo informal</a>
-    <a href="#materias">Materias primas</a>
-    <a href="#condiciones">Condiciones de vida</a>
-    <a href="#conectividad">Conectividad</a>
-    <a href="#ambiente">Superficie forestal</a>
-    <div class="grupo">Verificación</div>
-    <a href="#cobertura">Cobertura cruzada</a>
-    <div class="grupo">Fuentes</div>
-    <a href="#oficiales">Padrón oficial</a>
-    <a href="#fuentes-limites">Fuentes y límites</a>
-    <div class="grupo">Método</div>
-    <a href="#opacidad">Índice de Opacidad</a>
     <a href="#seis-materias">Las seis materias</a>
-    <a href="#fundacion">De la Fundación</a>
-    <a href="#informe">Informe descargable</a>
-    <a href="#calificacion">Calificación</a>
+    <div class="grupo">Los cuatro ejes</div>
+    <a href="#seguridad-violencia">Violencia y víctimas</a>
+    <a href="#seguridad-territorio">Grupos y territorio</a>
+    <a href="#seguridad-flujos">Flujos y ciberseguridad</a>
+    <a href="#defensa">Defensa</a>
+    <a href="#gobernanza">Gobernanza</a>
+    <a href="#desarrollo">Desarrollo</a>
+    <div class="grupo">Verificación y método</div>
+    <a href="#que-se-publica">Qué se publica hoy</a>
+    <a href="#de-donde-sale">De dónde sale y qué falta</a>
   </nav>
 
   <main>
-
     <section class="domain" id="ficha-pais">
       <div class="domain-head"><h3>Qué cambió en tu país</h3><span class="tag" id="tag-ficha">—</span></div>
       <div class="elige-pais" id="elige-pais"></div>
       <div class="ejes-resumen" id="ejes-resumen"></div>
       <div class="grid-cards" id="tarj-ficha"></div>
       <p class="pie-ficha" id="pie-ficha"></p>
-    </section>
-
+        </section>
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <ol class="pasos">
@@ -1122,50 +1110,109 @@
         fuente publica dato del archipiélago, de modo que se pinta con el color de la
         Argentina pero no aporta ni altera ninguna medición.
       </p>
-    </section>
+        </section>
+    <section class="domain" id="seis-materias" data-nivel="1">
+      <div class="domain-head"><h3>Las seis materias</h3><span class="tag" id="tag-seis-materias">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Son las seis materias en las que trabaja la Fundación</b> —y son, justamente,
+           las que ninguna base pública mide de frente. Acá se dice, materia por materia,
+           <b>qué se puede medir hoy, con qué fuente y de qué año</b>, qué se está publicando
+           en este momento, y <b>qué no se mide y por qué</b>. Un vacío declarado vale más que
+           una cifra inventada.</p>
+      </div>
+      <div class="materias" id="lista-seis-materias"></div>
+        </section>
 
-    <div class="eje" data-nivel="3">
-      <h2>Eje · Seguridad</h2>
-      <p>Violencia, control territorial y capacidad del Estado para sostener el orden público, más los movimientos de población y de mercancías que ese control produce o no logra impedir.</p>
-    </div>
-
-    <section class="domain" id="violencia" data-nivel="2">
-      <div class="domain-head"><h3>Homicidios</h3><span class="tag" id="tag-violencia">—</span></div>
+    <section class="domain bloque" id="seguridad-violencia" data-nivel="2">
+      <div class="bloque-head"><h3>Seguridad · violencia y víctimas</h3></div>
+      <p class="bloque-bajada">Lo que le pasa a las personas: muertes, delitos denunciados y las materias donde el Estado registra víctimas.</p>
+    <div class="categoria" id="violencia" data-nivel="2">
+      <div class="categoria-head"><h4>Homicidios</h4><span class="tag" id="tag-violencia">—</span></div>
       <div class="procedencia" id="proc-violencia">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-violencia"></div>
       <div id="serie-violencia"></div>
       <div id="vac-violencia"></div>
-    </section>
-
-    <section class="domain" id="desplazamiento" data-nivel="3">
-      <div class="domain-head"><h3>Desplazamiento forzado</h3><span class="tag" id="tag-desplazamiento">—</span></div>
-      <div class="procedencia" id="proc-desplazamiento">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-desplazamiento"></div>
-      <div id="serie-desplazamiento"></div>
-      <div id="vac-desplazamiento"></div>
-    </section>
-
-    <section class="domain" id="contrabando" data-nivel="3">
-      <div class="domain-head"><h3>Contrabando y subfacturación · brecha espejo</h3><span class="tag" id="tag-comercio">—</span></div>
+        </div>
+    <div class="categoria" id="terrorismo" data-nivel="2">
+      <div class="categoria-head"><h4>Terrorismo</h4><span class="tag" id="tag-terrorismo">—</span></div>
       <div class="aviso-cobertura">
-        <p><b>Cuando A declara que exportó cien a B, y B declara que importó sesenta de A,
-           esos cuarenta se fueron por algún lado.</b> Esa diferencia es el indicio estándar
-           de contrabando, subfacturación y triangulación.</p>
-        <p><b>Pero una brecha de pocos puntos no es contrabando: es contabilidad.</b> El
-           exportador declara el valor de la mercadería puesta en el barco; el importador
-           declara ese valor <b>más el flete y el seguro</b>. Solo por eso el importador
-           registra de rutina entre 3 % y 10 % más. <b>Lo que sí llama la atención es la
-           brecha negativa</b> —que el importador declare <b>menos</b>—, porque el flete
-           empuja en el sentido contrario y no hay explicación contable inocente. Aun así
-           es un <b>indicio que abre una averiguación, no una prueba de delito</b>.</p>
+        <p><b>La serie termina en 2021 y no hay reemplazo gratuito</b>: la Base Global de
+           Terrorismo dejó de actualizarse. No se estima ningún valor posterior.
+           <b>Y «terrorismo» es una definición disputada</b>: varios Estados de la región
+           califican de terrorista a la protesta social, y esa calificación entra en las
+           bases que se nutren de prensa. El dato se publica con esa advertencia y no
+           sostiene por sí solo ningún juicio.</p>
       </div>
-      <div class="procedencia" id="proc-comercio">Cargando el registro…</div>
-      <div class="cruce" id="lista-comercio"></div>
-      <div id="vac-comercio"></div>
+      <div class="procedencia" id="proc-terrorismo">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-terrorismo"></div>
+      <div id="vac-terrorismo"></div>
+        </div>
+    <div class="categoria" id="victimizacion" data-nivel="3">
+      <div class="categoria-head"><h4>Victimización y confianza en la policía</h4><span class="tag" id="tag-victimizacion">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Acá está la percepción de inseguridad y el delito que la estadística policial no ve.</b>
+           La víctima que no denuncia no aparece en ningún parte. Cuando la tasa de denuncia es baja,
+           las cifras oficiales de ese Estado <b>subestiman el delito</b>, y la comparación con un
+           país que denuncia más se vuelve engañosa. Los detenidos sin condena miden congestión
+           judicial y prisión preventiva, no criminalidad.</p>
+      </div>
+      <div class="grid-cards" id="tarj-victimizacion"></div>
+        </div>
+    <div class="categoria" id="trata" data-nivel="3">
+      <div class="categoria-head"><h4>Trata de personas</h4>
+        <span class="tag" id="tag-trata">—</span></div>
+      <div class="grid-cards" id="tarj-trata"></div>
+        </div>
+    <div class="categoria" id="menores-combatientes" data-nivel="3">
+      <div class="categoria-head"><h4>Menores reclutados y utilizados en conflicto</h4><span class="tag">Sin dato · declarado</span></div>
+      <div class="grid-cards">
+        <div class="placeholder">
+          <div><div class="ptitle">Existe el registro, pero no en formato consultable</div>
+          <p>El informe anual del Secretario General de Naciones Unidas sobre los niños y los
+             conflictos armados verifica y lista estos hechos, e incluye Estados de la región.
+             <b>Se publica en documento, no en base de datos</b>, y no hay interfaz de consulta.
+             Se buscó en el catálogo completo de los Objetivos de Desarrollo Sostenible —713
+             series— y <b>no existe ninguna sobre reclutamiento de menores</b>. El trabajo
+             infantil, que sí está en este registro, es otra cosa y no lo reemplaza.</p></div>
+          <span class="badge pending">Sin dato</span>
+        </div>
+      </div>
+        </div>
     </section>
 
-    <section class="domain" id="conflictos-territoriales" data-nivel="2">
-      <div class="domain-head"><h3>Conflictos territoriales y sociopolíticos</h3><span class="tag" id="tag-conflictos">—</span></div>
+    <section class="domain bloque" id="seguridad-territorio" data-nivel="2">
+      <div class="bloque-head"><h3>Seguridad · grupos, territorio y fronteras</h3></div>
+      <p class="bloque-bajada">Quién controla qué: organizaciones armadas, disputa territorial, zonas de frontera y explotación ilegal del suelo.</p>
+    <div class="categoria" id="grupos-armados" data-nivel="3">
+      <div class="categoria-head"><h4>Grupos armados y conflicto entre organizaciones</h4><span class="tag" id="tag-grupos-armados">—</span></div>
+      <div class="aviso-cobertura">
+        <p>Enfrentamientos armados <b>entre grupos, sin el Estado como parte</b>. En esta
+           región eso es, en buena medida, disputa entre organizaciones criminales por
+           territorio o por renta: es el indicador de <b>presencia de grupos criminales
+           organizados</b> que más se acerca. <b>Y aun así no mide presencia ni control
+           territorial</b>, solo muertes en enfrentamiento. El umbral de registro exige
+           25 muertes al año: por debajo de eso <b>un Estado figura en cero sin estar en
+           paz</b>.</p>
+      </div>
+      <div class="grid-cards" id="tarj-grupos-armados"></div>
+        </div>
+    <div class="categoria" id="control-territorial" data-nivel="2">
+      <div class="categoria-head"><h4>Control territorial del Estado</h4><span class="tag" id="tag-control">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Si el Estado manda en todo su territorio, o si hay zonas donde no manda.</b>
+           Es lo más cercano al control territorial que se encontró gratuito y comparable:
+           el conflicto entre grupos armados cuenta muertes, no territorio.</p>
+        <p><b>Es evaluación experta, no medición de campo</b>: dos especialistas por país
+           —uno del país, uno de fuera— puntúan de 1 a 10, y el resultado se armoniza en
+           revisión regional. <b>Y es una foto, no una serie</b>: el proyecto publica cada
+           dos años, de modo que <b>estos temas no se pueden proyectar</b>.</p>
+      </div>
+      <div class="procedencia" id="proc-control">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-control"></div>
+      <div id="vac-control"></div>
+        </div>
+    <div class="categoria" id="conflictos-territoriales" data-nivel="2">
+      <div class="categoria-head"><h4>Conflictos territoriales y sociopolíticos</h4><span class="tag" id="tag-conflictos">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Primer dato subnacional del registro</b>: los casos llegan a departamento y
            municipio. Los levantó y verificó caso por caso el <b>Instituto de Estudios
@@ -1181,10 +1228,21 @@
       <div class="procedencia" id="proc-conflictos">Cargando el registro…</div>
       <div class="cruce" id="lista-conflictos"></div>
       <div id="vac-conflictos"></div>
-    </section>
-
-    <section class="domain" id="mineria-ilegal" data-nivel="3">
-      <div class="domain-head"><h3>Minería ilegal</h3><span class="tag" id="tag-mineria">—</span></div>
+        </div>
+    <div class="categoria" id="fronteras" data-nivel="3">
+      <div class="categoria-head"><h4>Zonas de frontera y focos transfronterizos</h4><span class="tag" id="tag-fronteras">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>No son indicadores: son lugares</b>, y ninguna fuente publica estadística
+           comparable a esa escala. Lo que se cuenta es <b>cuántas notas del corpus nombran
+           cada zona</b>, de cuántos portales y de cuántas jurisdicciones. <b>Que la nombren
+           medios de los dos lados de la frontera es el dato fuerte</b>: una sola jurisdicción
+           puede estar contando su propia versión. La zona se reconoce por su topónimo, o por
+           una palabra de frontera más dos de los Estados que la comparten.</p>
+      </div>
+      <div class="cruce" id="lista-fronteras"></div>
+        </div>
+    <div class="categoria" id="mineria-ilegal" data-nivel="3">
+      <div class="categoria-head"><h4>Minería ilegal</h4><span class="tag" id="tag-mineria">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mapeada en cuatro Estados, con años distintos</b> —Bolivia y Venezuela 2017,
            Brasil 2018, Perú sin año declarado—: <b>no son comparables entre sí ni con la
@@ -1193,40 +1251,32 @@
            <b>no significa que en Perú casi no haya minería ilegal</b>.</p>
       </div>
       <div class="grid-cards" id="tarj-mineria"></div>
-    </section>
-
-    <section class="domain" id="menores-combatientes" data-nivel="3">
-      <div class="domain-head"><h3>Menores reclutados y utilizados en conflicto</h3><span class="tag">Sin dato · declarado</span></div>
-      <div class="grid-cards">
-        <div class="placeholder">
-          <div><div class="ptitle">Existe el registro, pero no en formato consultable</div>
-          <p>El informe anual del Secretario General de Naciones Unidas sobre los niños y los
-             conflictos armados verifica y lista estos hechos, e incluye Estados de la región.
-             <b>Se publica en documento, no en base de datos</b>, y no hay interfaz de consulta.
-             Se buscó en el catálogo completo de los Objetivos de Desarrollo Sostenible —713
-             series— y <b>no existe ninguna sobre reclutamiento de menores</b>. El trabajo
-             infantil, que sí está en este registro, es otra cosa y no lo reemplaza.</p></div>
-          <span class="badge pending">Sin dato</span>
         </div>
-      </div>
     </section>
 
-    <section class="domain" id="ciber" data-nivel="3">
-      <div class="domain-head"><h3>Ciberseguridad</h3><span class="tag" id="tag-ciber">—</span></div>
+    <section class="domain bloque" id="seguridad-flujos" data-nivel="2">
+      <div class="bloque-head"><h3>Seguridad · flujos y ciberseguridad</h3></div>
+      <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
+    <div class="categoria" id="contrabando" data-nivel="3">
+      <div class="categoria-head"><h4>Contrabando y subfacturación · brecha espejo</h4><span class="tag" id="tag-comercio">—</span></div>
       <div class="aviso-cobertura">
-        <p><b>Mide superficie e infraestructura, no ataques.</b> No se encontró ninguna fuente
-           gratuita que publique incidentes informáticos comparables para los 33 Estados. Lo que
-           sí existe es la infraestructura de cifrado desplegada y la población conectada: un país
-           con muchos usuarios y pocos servidores cifrados está más expuesto que uno con la
-           relación inversa. <b>Un valor alto no significa un Estado más protegido.</b></p>
+        <p><b>Cuando A declara que exportó cien a B, y B declara que importó sesenta de A,
+           esos cuarenta se fueron por algún lado.</b> Esa diferencia es el indicio estándar
+           de contrabando, subfacturación y triangulación.</p>
+        <p><b>Pero una brecha de pocos puntos no es contrabando: es contabilidad.</b> El
+           exportador declara el valor de la mercadería puesta en el barco; el importador
+           declara ese valor <b>más el flete y el seguro</b>. Solo por eso el importador
+           registra de rutina entre 3 % y 10 % más. <b>Lo que sí llama la atención es la
+           brecha negativa</b> —que el importador declare <b>menos</b>—, porque el flete
+           empuja en el sentido contrario y no hay explicación contable inocente. Aun así
+           es un <b>indicio que abre una averiguación, no una prueba de delito</b>.</p>
       </div>
-      <div class="procedencia" id="proc-ciber">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-ciber"></div>
-      <div id="vac-ciber"></div>
-    </section>
-
-    <section class="domain" id="migraciones" data-nivel="2">
-      <div class="domain-head"><h3>Migraciones</h3><span class="tag" id="tag-migraciones">—</span></div>
+      <div class="procedencia" id="proc-comercio">Cargando el registro…</div>
+      <div class="cruce" id="lista-comercio"></div>
+      <div id="vac-comercio"></div>
+        </div>
+    <div class="categoria" id="migraciones" data-nivel="2">
+      <div class="categoria-head"><h4>Migraciones</h4><span class="tag" id="tag-migraciones">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Estas cifras no dicen nada sobre delito.</b> Asociar migración con inseguridad
            es un juicio, y el registro no lo hace: la materia entra en Seguridad porque el
@@ -1237,68 +1287,29 @@
            económico.</p>
       </div>
       <div class="grid-cards" id="tarj-migraciones"></div>
-    </section>
-
-    <section class="domain" id="fronteras" data-nivel="3">
-      <div class="domain-head"><h3>Zonas de frontera y focos transfronterizos</h3><span class="tag" id="tag-fronteras">—</span></div>
+        </div>
+    <div class="categoria" id="desplazamiento" data-nivel="3">
+      <div class="categoria-head"><h4>Desplazamiento forzado</h4><span class="tag" id="tag-desplazamiento">—</span></div>
+      <div class="procedencia" id="proc-desplazamiento">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-desplazamiento"></div>
+      <div id="serie-desplazamiento"></div>
+      <div id="vac-desplazamiento"></div>
+        </div>
+    <div class="categoria" id="ciber" data-nivel="3">
+      <div class="categoria-head"><h4>Ciberseguridad</h4><span class="tag" id="tag-ciber">—</span></div>
       <div class="aviso-cobertura">
-        <p><b>No son indicadores: son lugares</b>, y ninguna fuente publica estadística
-           comparable a esa escala. Lo que se cuenta es <b>cuántas notas del corpus nombran
-           cada zona</b>, de cuántos portales y de cuántas jurisdicciones. <b>Que la nombren
-           medios de los dos lados de la frontera es el dato fuerte</b>: una sola jurisdicción
-           puede estar contando su propia versión. La zona se reconoce por su topónimo, o por
-           una palabra de frontera más dos de los Estados que la comparten.</p>
+        <p><b>Mide superficie e infraestructura, no ataques.</b> No se encontró ninguna fuente
+           gratuita que publique incidentes informáticos comparables para los 33 Estados. Lo que
+           sí existe es la infraestructura de cifrado desplegada y la población conectada: un país
+           con muchos usuarios y pocos servidores cifrados está más expuesto que uno con la
+           relación inversa. <b>Un valor alto no significa un Estado más protegido.</b></p>
       </div>
-      <div class="cruce" id="lista-fronteras"></div>
-    </section>
-
-    <section class="domain" id="control-territorial" data-nivel="2">
-      <div class="domain-head"><h3>Control territorial del Estado</h3><span class="tag" id="tag-control">—</span></div>
-      <div class="aviso-cobertura">
-        <p><b>Si el Estado manda en todo su territorio, o si hay zonas donde no manda.</b>
-           Es lo más cercano al control territorial que se encontró gratuito y comparable:
-           el conflicto entre grupos armados cuenta muertes, no territorio.</p>
-        <p><b>Es evaluación experta, no medición de campo</b>: dos especialistas por país
-           —uno del país, uno de fuera— puntúan de 1 a 10, y el resultado se armoniza en
-           revisión regional. <b>Y es una foto, no una serie</b>: el proyecto publica cada
-           dos años, de modo que <b>estos temas no se pueden proyectar</b>.</p>
-      </div>
-      <div class="procedencia" id="proc-control">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-control"></div>
-      <div id="vac-control"></div>
-    </section>
-
-    <section class="domain" id="terrorismo" data-nivel="2">
-      <div class="domain-head"><h3>Terrorismo</h3><span class="tag" id="tag-terrorismo">—</span></div>
-      <div class="aviso-cobertura">
-        <p><b>La serie termina en 2021 y no hay reemplazo gratuito</b>: la Base Global de
-           Terrorismo dejó de actualizarse. No se estima ningún valor posterior.
-           <b>Y «terrorismo» es una definición disputada</b>: varios Estados de la región
-           califican de terrorista a la protesta social, y esa calificación entra en las
-           bases que se nutren de prensa. El dato se publica con esa advertencia y no
-           sostiene por sí solo ningún juicio.</p>
-      </div>
-      <div class="procedencia" id="proc-terrorismo">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-terrorismo"></div>
-      <div id="vac-terrorismo"></div>
-    </section>
-
-    <section class="domain" id="grupos-armados" data-nivel="3">
-      <div class="domain-head"><h3>Grupos armados y conflicto entre organizaciones</h3><span class="tag" id="tag-grupos-armados">—</span></div>
-      <div class="aviso-cobertura">
-        <p>Enfrentamientos armados <b>entre grupos, sin el Estado como parte</b>. En esta
-           región eso es, en buena medida, disputa entre organizaciones criminales por
-           territorio o por renta: es el indicador de <b>presencia de grupos criminales
-           organizados</b> que más se acerca. <b>Y aun así no mide presencia ni control
-           territorial</b>, solo muertes en enfrentamiento. El umbral de registro exige
-           25 muertes al año: por debajo de eso <b>un Estado figura en cero sin estar en
-           paz</b>.</p>
-      </div>
-      <div class="grid-cards" id="tarj-grupos-armados"></div>
-    </section>
-
-    <section class="domain" id="extorsion" data-nivel="2">
-      <div class="domain-head"><h3>Extorsión informática</h3><span class="tag" id="tag-ransomware">—</span></div>
+      <div class="procedencia" id="proc-ciber">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-ciber"></div>
+      <div id="vac-ciber"></div>
+        </div>
+    <div class="categoria" id="extorsion" data-nivel="2">
+      <div class="categoria-head"><h4>Extorsión informática</h4><span class="tag" id="tag-ransomware">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Acá solo aparece quien no pagó rápido.</b> Los grupos que secuestran sistemas
            publican a sus víctimas <b>para presionarlas</b>: la empresa que paga enseguida y
@@ -1314,39 +1325,14 @@
       <div class="procedencia" id="proc-ransomware">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-ransomware"></div>
       <div id="vac-ransomware"></div>
+        </div>
     </section>
 
-    <section class="domain" id="fuerzas" data-nivel="3">
-      <div class="domain-head"><h3>Fuerzas y capacidad de defensa</h3><span class="tag" id="tag-fuerzas">—</span></div>
-      <div class="grid-cards" id="tarj-fuerzas"></div>
-    </section>
-
-    <section class="domain" id="victimizacion" data-nivel="3">
-      <div class="domain-head"><h3>Victimización y confianza en la policía</h3><span class="tag" id="tag-victimizacion">—</span></div>
-      <div class="aviso-cobertura">
-        <p><b>Acá está la percepción de inseguridad y el delito que la estadística policial no ve.</b>
-           La víctima que no denuncia no aparece en ningún parte. Cuando la tasa de denuncia es baja,
-           las cifras oficiales de ese Estado <b>subestiman el delito</b>, y la comparación con un
-           país que denuncia más se vuelve engañosa. Los detenidos sin condena miden congestión
-           judicial y prisión preventiva, no criminalidad.</p>
-      </div>
-      <div class="grid-cards" id="tarj-victimizacion"></div>
-    </section>
-
-    <section class="domain" id="trata" data-nivel="3">
-      <div class="domain-head"><h3>Trata de personas</h3>
-        <span class="tag" id="tag-trata">—</span></div>
-      <div class="grid-cards" id="tarj-trata"></div>
-    </section>
-
-    <div class="eje" data-nivel="3">
-      <h2>Eje · Defensa</h2>
-      <p>Lo que cada Estado destina y sostiene como instrumento militar: presupuesto,
-         efectivos, adquisición de material y capacidad aeroespacial.</p>
-    </div>
-
-    <section class="domain" id="presupuesto-defensa" data-nivel="3">
-      <div class="domain-head"><h3>Presupuesto de defensa</h3><span class="tag" id="tag-presupuesto-defensa">—</span></div>
+    <section class="domain bloque" id="defensa" data-nivel="3">
+      <div class="bloque-head"><h3>Defensa</h3></div>
+      <p class="bloque-bajada">Lo que cada Estado destina y sostiene como instrumento militar. Son MAGNITUDES, no virtudes: no entran en la situación general.</p>
+    <div class="categoria" id="presupuesto-defensa" data-nivel="3">
+      <div class="categoria-head"><h4>Presupuesto de defensa</h4><span class="tag" id="tag-presupuesto-defensa">—</span></div>
       <div class="aviso-cobertura">
         <p>Las tres medidas se leen juntas porque separan cosas distintas: <b>un Estado chico
            que dedica mucho de lo poco que tiene</b> no es lo mismo que uno grande que dedica
@@ -1356,10 +1342,9 @@
       <div class="procedencia" id="proc-presupuesto-defensa">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-presupuesto-defensa"></div>
       <div id="vac-presupuesto-defensa"></div>
-    </section>
-
-    <section class="domain" id="efectivos" data-nivel="3">
-      <div class="domain-head"><h3>Efectivos</h3><span class="tag" id="tag-efectivos">—</span></div>
+        </div>
+    <div class="categoria" id="efectivos" data-nivel="3">
+      <div class="categoria-head"><h4>Efectivos</h4><span class="tag" id="tag-efectivos">—</span></div>
       <div class="aviso-cobertura">
         <p><b>No hay desagregación por arma, y no es un olvido.</b> No existe fuente gratuita
            que publique los efectivos separados en ejército, armada y aviación para los 33
@@ -1369,10 +1354,9 @@
            sobre quienes trabajan.</p>
       </div>
       <div class="grid-cards" id="tarj-efectivos"></div>
-    </section>
-
-    <section class="domain" id="material" data-nivel="3">
-      <div class="domain-head"><h3>Material — adquisición de armamento mayor</h3><span class="tag" id="tag-material">—</span></div>
+        </div>
+    <div class="categoria" id="material" data-nivel="3">
+      <div class="categoria-head"><h4>Material — adquisición de armamento mayor</h4><span class="tag" id="tag-material">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mide lo que se compra, no lo que se tiene.</b> Es la aproximación más cercana al
            inventario a la que se puede llegar sin pagar: aeronaves, buques, blindados y
@@ -1385,10 +1369,9 @@
            declarado.</p>
       </div>
       <div class="grid-cards" id="tarj-material"></div>
-    </section>
-
-    <section class="domain" id="aeroespacial" data-nivel="3">
-      <div class="domain-head"><h3>Capacidad aeroespacial</h3><span class="tag" id="tag-aeroespacial">—</span></div>
+        </div>
+    <div class="categoria" id="aeroespacial" data-nivel="3">
+      <div class="categoria-head"><h4>Capacidad aeroespacial</h4><span class="tag" id="tag-aeroespacial">—</span></div>
       <div class="aviso-cobertura">
         <p>Objetos que cada Estado registra ante Naciones Unidas: <b>satélites propios, no
            necesariamente lanzados por él</b>. Es la única medida de capacidad aeroespacial
@@ -1399,36 +1382,24 @@
       <div class="procedencia" id="proc-aeroespacial">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-aeroespacial"></div>
       <div id="vac-aeroespacial"></div>
+        </div>
+    <div class="categoria" id="fuerzas" data-nivel="3">
+      <div class="categoria-head"><h4>Fuerzas y capacidad de defensa</h4><span class="tag" id="tag-fuerzas">—</span></div>
+      <div class="grid-cards" id="tarj-fuerzas"></div>
+        </div>
     </section>
 
-    <div class="eje" data-nivel="3">
-      <h2>Eje · Gobernanza</h2>
-      <p>Integridad de la administración pública, calidad de las reglas y salud del espacio informativo en que esas reglas se discuten.</p>
-    </div>
-
-    <section class="domain" id="institucional" data-nivel="3">
-      <div class="domain-head"><h3>Indicadores de gobernanza</h3><span class="tag" id="tag-institucional">—</span></div>
+    <section class="domain bloque" id="gobernanza" data-nivel="2">
+      <div class="bloque-head"><h3>Gobernanza</h3></div>
+      <p class="bloque-bajada">Integridad de la administración pública, calidad de las reglas y salud del espacio informativo en que esas reglas se discuten.</p>
+    <div class="categoria" id="institucional" data-nivel="3">
+      <div class="categoria-head"><h4>Indicadores de gobernanza</h4><span class="tag" id="tag-institucional">—</span></div>
       <div class="procedencia" id="proc-institucional">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-institucional"></div>
       <div id="vac-institucional"></div>
-    </section>
-
-    <section class="domain" id="contratacion" data-nivel="3">
-      <div class="domain-head"><h3>Integridad de la contratación pública</h3><span class="tag" id="tag-contratacion">—</span></div>
-      <div class="aviso-cobertura">
-        <p><b>Es lo que la empresa declara esperar, no un soborno comprobado.</b> Sale de las
-           Encuestas de Empresas del Banco Mundial, que no se levantan el mismo año en todos los
-           Estados: el dato de cada país es de su última ronda disponible y <b>las rondas no
-           coinciden entre sí</b>. Sirve para ver el orden de magnitud, no para rankear con
-           precisión de decimales.</p>
-      </div>
-      <div class="procedencia" id="proc-contratacion">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-contratacion"></div>
-      <div id="vac-contratacion"></div>
-    </section>
-
-    <section class="domain" id="democracia" data-nivel="2">
-      <div class="domain-head"><h3>Nivel democrático y libertades</h3><span class="tag" id="tag-democracia">—</span></div>
+        </div>
+    <div class="categoria" id="democracia" data-nivel="2">
+      <div class="categoria-head"><h4>Nivel democrático y libertades</h4><span class="tag" id="tag-democracia">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Es medición experta codificada, no recuento de hechos</b>: varios
            especialistas por país y por año. Mide <b>cómo funciona el sistema, no qué
@@ -1441,10 +1412,9 @@
       <div class="procedencia" id="proc-democracia">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-democracia"></div>
       <div id="vac-democracia"></div>
-    </section>
-
-    <section class="domain" id="libertades" data-nivel="3">
-      <div class="domain-head"><h3>Libertad de expresión y de asociación</h3><span class="tag" id="tag-libertades">—</span></div>
+        </div>
+    <div class="categoria" id="libertades" data-nivel="3">
+      <div class="categoria-head"><h4>Libertad de expresión y de asociación</h4><span class="tag" id="tag-libertades">—</span></div>
       <div class="aviso-cobertura">
         <p>Censura estatal, represalia contra periodistas, y espacio disponible para
            partidos y organizaciones civiles — que es la materia de <b>conflicto
@@ -1454,10 +1424,9 @@
            vale más, porque la prensa local pesa menos.</p>
       </div>
       <div class="grid-cards" id="tarj-libertades"></div>
-    </section>
-
-    <section class="domain" id="integridad" data-nivel="3">
-      <div class="domain-head"><h3>Integridad y aprobación democrática</h3><span class="tag" id="tag-integridad">—</span></div>
+        </div>
+    <div class="categoria" id="integridad" data-nivel="3">
+      <div class="categoria-head"><h4>Integridad y aprobación democrática</h4><span class="tag" id="tag-integridad">—</span></div>
       <div class="aviso-cobertura">
         <p><b>La aprobación de la democracia no es una encuesta.</b> Es la evaluación de un
            especialista sobre cuánto respaldo social tiene el régimen democrático. Se acerca
@@ -1469,10 +1438,37 @@
            revés. Y la política anticorrupción mide <b>el andamiaje, no el resultado</b>.</p>
       </div>
       <div class="grid-cards" id="tarj-integridad"></div>
-    </section>
-
-    <section class="domain" id="capacidad" data-nivel="3">
-      <div class="domain-head"><h3>Capacidad del Estado</h3><span class="tag" id="tag-capacidad">—</span></div>
+        </div>
+    <div class="categoria" id="entorno-informativo" data-nivel="3">
+      <div class="categoria-head"><h4>Entorno informativo</h4><span class="tag" id="tag-entorno-informativo">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Mide el clima en que circula la información, no la cantidad de contenido falso</b>,
+           que ninguna fuente regional cuenta de forma comparable. Cinco de los seis se nombran
+           «ausencia de» porque en la escala de V-Dem el valor alto es el bueno; la polarización
+           va al revés y así se declara en su ficha.</p>
+      </div>
+      <div class="grid-cards" id="tarj-entorno-informativo"></div>
+    </div>
+    <div class="categoria" id="contratacion" data-nivel="3">
+      <div class="categoria-head"><h4>Integridad de la contratación pública</h4><span class="tag" id="tag-contratacion">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Es lo que la empresa declara esperar, no un soborno comprobado.</b> Sale de las
+           Encuestas de Empresas del Banco Mundial, que no se levantan el mismo año en todos los
+           Estados: el dato de cada país es de su última ronda disponible y <b>las rondas no
+           coinciden entre sí</b>. Sirve para ver el orden de magnitud, no para rankear con
+           precisión de decimales.</p>
+      </div>
+      <div class="procedencia" id="proc-contratacion">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-contratacion"></div>
+      <div id="vac-contratacion"></div>
+        </div>
+    <div class="categoria" id="soborno" data-nivel="3">
+      <div class="categoria-head"><h4>Soborno declarado</h4>
+        <span class="tag" id="tag-soborno">—</span></div>
+      <div class="grid-cards" id="tarj-soborno"></div>
+        </div>
+    <div class="categoria" id="capacidad" data-nivel="3">
+      <div class="categoria-head"><h4>Capacidad del Estado</h4><span class="tag" id="tag-capacidad">—</span></div>
       <div class="aviso-cobertura">
         <p>El registro de nacimientos es la capacidad estatal más básica: <b>saber quién existe</b>.
            Un registro incompleto degrada todas las demás estadísticas de ese Estado, incluidas las
@@ -1481,102 +1477,59 @@
            registrada.</p>
       </div>
       <div class="grid-cards" id="tarj-capacidad"></div>
+        </div>
     </section>
 
-    <section class="domain" id="desinformacion" data-nivel="2">
-      <div class="domain-head"><h3>Desinformación e infoxicación</h3><span class="tag" id="tag-desinformacion">—</span></div>
-      <div class="procedencia" id="proc-desinformacion">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-desinformacion"></div>
-      <div id="vac-desinformacion"></div>
-    </section>
-
-    <section class="domain" id="soborno" data-nivel="3">
-      <div class="domain-head"><h3>Soborno declarado</h3>
-        <span class="tag" id="tag-soborno">—</span></div>
-      <div class="grid-cards" id="tarj-soborno"></div>
-    </section>
-
-    <div class="eje" data-nivel="3">
-      <h2>Eje · Desarrollo</h2>
-      <p>Estructura material del territorio y de la economía, por sector. No es análisis económico: es la base sobre la que se leen las otras dos —dónde vive la gente, de qué vive y qué exporta—.</p>
-    </div>
-
-    <section class="domain" id="urbano" data-nivel="3">
-      <div class="domain-head"><h3>Urbano</h3><span class="tag" id="tag-urbano">—</span></div>
+    <section class="domain bloque" id="desarrollo" data-nivel="3">
+      <div class="bloque-head"><h3>Desarrollo</h3></div>
+      <p class="bloque-bajada">Estructura material del territorio y de la economía. No es análisis económico: es la base sobre la que se leen las otras tres.</p>
+    <div class="categoria" id="urbano" data-nivel="3">
+      <div class="categoria-head"><h4>Urbano</h4><span class="tag" id="tag-urbano">—</span></div>
       <div class="procedencia" id="proc-urbano">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-urbano"></div>
       <div id="vac-urbano"></div>
-    </section>
-
-    <section class="domain" id="industrial" data-nivel="3">
-      <div class="domain-head"><h3>Industrial</h3><span class="tag" id="tag-industrial">—</span></div>
+        </div>
+    <div class="categoria" id="industrial" data-nivel="3">
+      <div class="categoria-head"><h4>Industrial</h4><span class="tag" id="tag-industrial">—</span></div>
       <div class="procedencia" id="proc-industrial">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-industrial"></div>
       <div id="vac-industrial"></div>
-    </section>
-
-    <section class="domain" id="condiciones" data-nivel="3">
-      <div class="domain-head"><h3>Condiciones de vida y desigualdad</h3><span class="tag" id="tag-condiciones">—</span></div>
+        </div>
+    <div class="categoria" id="materias" data-nivel="3">
+      <div class="categoria-head"><h4>Materias primas</h4><span class="tag" id="tag-materias">—</span></div>
+      <div class="procedencia" id="proc-materias">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-materias"></div>
+      <div id="vac-materias"></div>
+        </div>
+    <div class="categoria" id="condiciones" data-nivel="3">
+      <div class="categoria-head"><h4>Condiciones de vida y desigualdad</h4><span class="tag" id="tag-condiciones">—</span></div>
       <div class="aviso-cobertura">
         <p><b>La pobreza según línea nacional no es comparable entre países</b>: cada Estado define
            su propia línea. Solo sirve su evolución dentro de cada uno. El Gini depende de la
            encuesta de hogares de cada Estado, con años y metodologías distintos.</p>
       </div>
       <div class="grid-cards" id="tarj-condiciones"></div>
-    </section>
-
-    <section class="domain" id="conectividad" data-nivel="3">
-      <div class="domain-head"><h3>Conectividad</h3><span class="tag" id="tag-conectividad">—</span></div>
+        </div>
+    <div class="categoria" id="conectividad" data-nivel="3">
+      <div class="categoria-head"><h4>Conectividad</h4><span class="tag" id="tag-conectividad">—</span></div>
       <div class="grid-cards" id="tarj-conectividad"></div>
-    </section>
-
-    <section class="domain" id="ambiente" data-nivel="3">
-      <div class="domain-head"><h3>Superficie forestal</h3><span class="tag" id="tag-ambiente">—</span></div>
+        </div>
+    <div class="categoria" id="ambiente" data-nivel="3">
+      <div class="categoria-head"><h4>Superficie forestal</h4><span class="tag" id="tag-ambiente">—</span></div>
       <div class="grid-cards" id="tarj-ambiente"></div>
-    </section>
-
-    <section class="domain" id="materias" data-nivel="3">
-      <div class="domain-head"><h3>Materias primas</h3><span class="tag" id="tag-materias">—</span></div>
-      <div class="procedencia" id="proc-materias">Cargando el registro…</div>
-      <div class="grid-cards" id="tarj-materias"></div>
-      <div id="vac-materias"></div>
-    </section>
-
-    <section class="domain" id="informalidad" data-nivel="3">
-      <div class="domain-head"><h3>Empleo informal</h3>
+        </div>
+    <div class="categoria" id="informalidad" data-nivel="3">
+      <div class="categoria-head"><h4>Empleo informal</h4>
         <span class="tag" id="tag-informalidad">—</span></div>
       <div class="grid-cards" id="tarj-informalidad"></div>
+        </div>
     </section>
 
-    <div class="eje">
-      <h2>Fuentes oficiales</h2>
-      <p>Qué publica cada Estado del padrón sobre las materias del registro, con nombre,
-         organismo y dirección. No son cifras: es el índice para ir al original.</p>
-    </div>
-
-    <section class="domain" id="oficiales" data-nivel="3">
-      <div class="domain-head"><h3>Padrón de fuentes oficiales</h3><span class="tag" id="tag-oficiales">—</span></div>
-      <div class="aviso-cobertura">
-        <p><b>Este padrón no publica datos: publica dónde están.</b>
-           Y las cifras de estos catálogos <b>no son comparables entre países</b>: cada Estado
-           define el delito a su manera, lo publica con su cadencia y lo cuenta desde su año.
-           Sumarlas para armar una serie regional produciría una serie falsa. Por eso el índice
-           manda al original, donde la definición está escrita.</p>
-      </div>
-      <div class="procedencia" id="proc-oficiales">Cargando el registro…</div>
-      <div class="paises-oficiales" id="lista-oficiales"></div>
-      <div id="vac-oficiales"></div>
-    </section>
-
-    <div class="eje">
-      <h2>Verificación cruzada</h2>
-      <p>Qué se está publicando sobre la región y en cuántos orígenes independientes.
-         No es una materia del registro: es el segundo factor de veracidad con el que se
-         contrastan las materias.</p>
-    </div>
-
-    <section class="domain" id="cobertura" data-nivel="2">
-      <div class="domain-head"><h3>Cobertura noticiosa cruzada</h3><span class="tag" id="tag-cobertura">—</span></div>
+    <section class="domain bloque" id="que-se-publica" data-nivel="2">
+      <div class="bloque-head"><h3>Qué se publica hoy</h3></div>
+      <p class="bloque-bajada">Qué se está diciendo sobre la región en este momento, y en cuántos orígenes independientes. <b>No es una materia del registro:</b> es el segundo factor de veracidad con el que se contrastan las materias.</p>
+    <div class="categoria" id="cobertura" data-nivel="2">
+      <div class="categoria-head"><h4>Cobertura noticiosa cruzada</h4><span class="tag" id="tag-cobertura">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Esto no registra hechos: registra que algo se está publicando.</b>
            Que diez portales cubran un asunto no prueba que haya ocurrido. Y veinte medios
@@ -1589,10 +1542,9 @@
       <div class="procedencia" id="proc-cobertura">Cargando el registro…</div>
       <div class="cruce" id="lista-cobertura"></div>
       <div id="vac-cobertura"></div>
-    </section>
-
-    <section class="domain" id="palabras" data-nivel="2">
-      <div class="domain-head"><h3>Nube de conceptos</h3><span class="tag" id="tag-palabras">—</span></div>
+        </div>
+    <div class="categoria" id="palabras" data-nivel="2">
+      <div class="categoria-head"><h4>Nube de conceptos</h4><span class="tag" id="tag-palabras">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Qué términos circulan ahora mismo, no qué está ocurriendo.</b>
            Es el recuento de las palabras que aparecen en los títulos recolectados en la
@@ -1608,10 +1560,9 @@
       </div>
       <p class="nota-filtro" id="nota-palabras">El ámbito se elige arriba, en el mapa de situación.</p>
       <div class="nube" id="nube-palabras"></div>
-    </section>
-
-    <section class="domain" id="redes" data-nivel="2">
-      <div class="domain-head"><h3>Circulación en red social abierta</h3><span class="tag" id="tag-redes">—</span></div>
+        </div>
+    <div class="categoria" id="redes" data-nivel="2">
+      <div class="categoria-head"><h4>Circulación en red social abierta</h4><span class="tag" id="tag-redes">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mide cuánto se habla, no qué ocurre.</b> Una publicación en una red no es una
            fuente: es un indicio de circulación. <b>Y el sesgo es grande y se declara</b>: la
@@ -1625,16 +1576,9 @@
       <h4 class="sub-seccion">Circulación por Estado</h4>
       <div class="grid-cards" id="tarj-redes"></div>
       <div id="vac-redes"></div>
-    </section>
-
-    <div class="eje">
-      <h2>Informe</h2>
-      <p>Extracto del registro para un país o para toda la región, con su procedencia y su
-         calificación. Se descarga en planilla o se imprime en papel; no lleva juicios.</p>
-    </div>
-
-    <section class="domain" id="mensajeria" data-nivel="2">
-      <div class="domain-head"><h3>Difusión en canales de mensajería</h3><span class="tag" id="tag-mensajeria">—</span></div>
+        </div>
+    <div class="categoria" id="mensajeria" data-nivel="2">
+      <div class="categoria-head"><h4>Difusión en canales de mensajería</h4><span class="tag" id="tag-mensajeria">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Esto NO corrobora nada de la cobertura noticiosa, y no se mezcla con ella.</b>
            El canal de mensajería de un diario que ya está en el padrón de prensa es
@@ -1652,10 +1596,33 @@
       <h4 class="sub-seccion">Canales del padrón</h4>
       <div class="cruce" id="lista-mensajeria"></div>
       <div id="vac-mensajeria"></div>
+        </div>
+    <div class="categoria" id="desinformacion" data-nivel="2">
+      <div class="categoria-head"><h4>Desinformación e infoxicación</h4><span class="tag" id="tag-desinformacion">—</span></div>
+      <div class="procedencia" id="proc-desinformacion">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-desinformacion"></div>
+      <div id="vac-desinformacion"></div>
+        </div>
     </section>
 
-    <section class="domain" id="opacidad" data-nivel="1">
-      <div class="domain-head"><h3>Índice de Opacidad</h3><span class="tag" id="tag-opacidad">—</span></div>
+    <section class="domain bloque" id="de-donde-sale" data-nivel="1">
+      <div class="bloque-head"><h3>De dónde sale y qué falta</h3></div>
+      <p class="bloque-bajada">La trazabilidad completa: qué publica cada Estado, qué no publica, de dónde sale cada cifra, cómo se la califica y qué se puede descargar.</p>
+    <div class="categoria" id="oficiales" data-nivel="3">
+      <div class="categoria-head"><h4>Padrón de fuentes oficiales</h4><span class="tag" id="tag-oficiales">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Este padrón no publica datos: publica dónde están.</b>
+           Y las cifras de estos catálogos <b>no son comparables entre países</b>: cada Estado
+           define el delito a su manera, lo publica con su cadencia y lo cuenta desde su año.
+           Sumarlas para armar una serie regional produciría una serie falsa. Por eso el índice
+           manda al original, donde la definición está escrita.</p>
+      </div>
+      <div class="procedencia" id="proc-oficiales">Cargando el registro…</div>
+      <div class="paises-oficiales" id="lista-oficiales"></div>
+      <div id="vac-oficiales"></div>
+        </div>
+    <div class="categoria" id="opacidad" data-nivel="3">
+      <div class="categoria-head"><h4>Índice de Opacidad</h4><span class="tag" id="tag-opacidad">—</span></div>
       <div class="aviso-cobertura">
         <p><b>Mide la ausencia, no la presencia.</b> Un puntaje de apertura no se puede
            refutar mostrando una dirección; una afirmación de ausencia sí, y por eso vale.
@@ -1667,97 +1634,14 @@
       <div class="opacidad-titular" id="titular-opacidad"></div>
       <div class="materias" id="lista-opacidad"></div>
       <div id="vac-opacidad"></div>
-    </section>
-
-    <section class="domain" id="seis-materias" data-nivel="1">
-      <div class="domain-head"><h3>Las seis materias</h3><span class="tag" id="tag-seis-materias">—</span></div>
-      <div class="aviso-cobertura">
-        <p><b>Son las seis materias en las que trabaja la Fundación</b> —y son, justamente,
-           las que ninguna base pública mide de frente. Acá se dice, materia por materia,
-           <b>qué se puede medir hoy, con qué fuente y de qué año</b>, qué se está publicando
-           en este momento, y <b>qué no se mide y por qué</b>. Un vacío declarado vale más que
-           una cifra inventada.</p>
-      </div>
-      <div class="materias" id="lista-seis-materias"></div>
-    </section>
-
-    <section class="domain" id="fundacion" data-nivel="1">
-      <div class="domain-head"><h3>De la Fundación</h3><span class="tag" id="tag-fundacion">—</span></div>
-      <div class="aviso-cobertura">
-        <p><b>Acá termina el dato y empieza el análisis.</b> Este registro publica hechos
-           calificados y <b>no emite juicios</b>. Los informes de la Fundación sí los emiten,
-           firmados y con su confianza y probabilidad declaradas. <b>Son dos productos
-           distintos y no deben leerse como uno solo.</b></p>
-      </div>
-      <div class="procedencia" id="proc-fundacion">Cargando el registro…</div>
-      <div class="cruce" id="lista-fundacion"></div>
-
-      <!-- El alta al boletín NO se toma acá. Esta página es un archivo estático
-           sin servidor: no puede recibir un correo sin exponerlo, y una dirección
-           de correo es dato personal que no tiene por qué pasar por un repositorio
-           público. El padrón lo administra la Fundación en su propio sitio, que ya
-           tiene el formulario y la baja. Acá va el enlace, no el formulario. -->
-      <div class="boletin">
-        <div class="boletin-txt">
-          <b>Recibí los informes de la Fundación por correo</b>
-          <span>El alta se hace en el sitio de la Fundación, que administra el padrón
-                y la baja. Este registro no pide ni guarda datos de nadie.</span>
         </div>
-        <a class="boletin-btn" href="https://fundacionkent.org/newsletter/"
-           target="_blank" rel="noopener">Suscribirme al boletín</a>
-      </div>
-
-      <h4 class="sub-seccion">La Fundación</h4>
-      <div class="secciones-fusk" id="secciones-fusk"></div>
-      <div id="vac-fundacion"></div>
-    </section>
-
-    <section class="domain" id="informe" data-nivel="2">
-      <div class="domain-head"><h3>Informe del registro</h3><span class="tag">Público, sin cuenta</span></div>
-      <div class="barra-informe">
-        <span class="ambito-informe" id="ambito-informe">—</span>
-        <div class="acciones">
-          <button class="boton" id="btn-csv">Planilla de datos (CSV)</button>
-          <button class="boton" id="btn-imprimir">Informe en PDF, con membrete</button>
-        </div>
-      </div>
-      <div class="hoja">
-        <div class="membrete">
-          <img src="marca/fusk-logo-nombre-color.png" alt="Fundación Sherman Kent">
-          <div class="membrete-txt">
-            <strong>SIWA</strong>
-            <span>Reporte de situación de América Latina y el Caribe</span>
-            <span class="oficina">Fundación Sherman Kent · Oficina de Generación de Inteligencia</span>
-          </div>
-        </div>
-        <h4 class="titulo" id="informe-titulo">—</h4>
-        <div class="fecha" id="informe-fecha">—</div>
-        <div id="informe-cuerpo"></div>
-        <div class="colofon" id="colofon"></div>
-      </div>
-    </section>
-
-    <div class="eje">
-      <h2>Fuentes y límites</h2>
-      <p>De dónde sale cada cifra, cómo se construyó y qué no cubre. Está al pie a
-         propósito: las advertencias son largas y, puestas junto al dato, lo tapan.
-         Cada materia tiene un enlace que trae hasta acá.</p>
-    </div>
-
-    <section class="domain" id="fuentes-limites" data-nivel="3">
-      <div class="domain-head"><h3>Procedencia y vacíos declarados</h3>
+    <div class="categoria" id="fuentes-limites" data-nivel="3">
+      <div class="categoria-head"><h4>Procedencia y vacíos declarados</h4>
         <span class="tag" id="tag-fuentes">—</span></div>
       <div id="lista-fuentes"></div>
-    </section>
-
-    <div class="eje">
-      <h2>Método</h2>
-      <p>Cómo se califica lo que se publica, y qué controles hacen cumplir esas reglas dentro
-         del propio programa.</p>
-    </div>
-
-    <section class="domain" id="calificacion" data-nivel="3">
-      <div class="domain-head"><h3>Cómo se califica lo que se publica</h3><span class="tag">Sistema Almirantazgo</span></div>
+        </div>
+    <div class="categoria" id="calificacion" data-nivel="3">
+      <div class="categoria-head"><h4>Cómo se califica lo que se publica</h4><span class="tag">Sistema Almirantazgo</span></div>
       <div class="dos-columnas">
         <div class="panel">
           <h4>Letra — fiabilidad de la fuente</h4>
@@ -1793,6 +1677,61 @@
         <p class="nota">La calificación de la fuente y la de la información son independientes: una
           fuente excelente puede transmitir un dato dudoso.</p>
       </div>
+        </div>
+    <div class="categoria" id="informe" data-nivel="2">
+      <div class="categoria-head"><h4>Informe del registro</h4><span class="tag">Público, sin cuenta</span></div>
+      <div class="barra-informe">
+        <span class="ambito-informe" id="ambito-informe">—</span>
+        <div class="acciones">
+          <button class="boton" id="btn-csv">Planilla de datos (CSV)</button>
+          <button class="boton" id="btn-imprimir">Informe en PDF, con membrete</button>
+        </div>
+      </div>
+      <div class="hoja">
+        <div class="membrete">
+          <img src="marca/fusk-logo-nombre-color.png" alt="Fundación Sherman Kent">
+          <div class="membrete-txt">
+            <strong>SIWA</strong>
+            <span>Reporte de situación de América Latina y el Caribe</span>
+            <span class="oficina">Fundación Sherman Kent · Oficina de Generación de Inteligencia</span>
+          </div>
+        </div>
+        <h4 class="titulo" id="informe-titulo">—</h4>
+        <div class="fecha" id="informe-fecha">—</div>
+        <div id="informe-cuerpo"></div>
+        <div class="colofon" id="colofon"></div>
+      </div>
+        </div>
+    <div class="categoria" id="fundacion" data-nivel="1">
+      <div class="categoria-head"><h4>De la Fundación</h4><span class="tag" id="tag-fundacion">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Acá termina el dato y empieza el análisis.</b> Este registro publica hechos
+           calificados y <b>no emite juicios</b>. Los informes de la Fundación sí los emiten,
+           firmados y con su confianza y probabilidad declaradas. <b>Son dos productos
+           distintos y no deben leerse como uno solo.</b></p>
+      </div>
+      <div class="procedencia" id="proc-fundacion">Cargando el registro…</div>
+      <div class="cruce" id="lista-fundacion"></div>
+
+      <!-- El alta al boletín NO se toma acá. Esta página es un archivo estático
+           sin servidor: no puede recibir un correo sin exponerlo, y una dirección
+           de correo es dato personal que no tiene por qué pasar por un repositorio
+           público. El padrón lo administra la Fundación en su propio sitio, que ya
+           tiene el formulario y la baja. Acá va el enlace, no el formulario. -->
+      <div class="boletin">
+        <div class="boletin-txt">
+          <b>Recibí los informes de la Fundación por correo</b>
+          <span>El alta se hace en el sitio de la Fundación, que administra el padrón
+                y la baja. Este registro no pide ni guarda datos de nadie.</span>
+        </div>
+        <a class="boletin-btn" href="https://fundacionkent.org/newsletter/"
+           target="_blank" rel="noopener">Suscribirme al boletín</a>
+      </div>
+
+      <h4 class="sub-seccion">La Fundación</h4>
+      <div class="secciones-fusk" id="secciones-fusk"></div>
+      <div id="vac-fundacion"></div>
+        </div>
     </section>
 
   </main>
@@ -1910,12 +1849,28 @@
     // Ya no se pinta junto al dato: solo se cuenta para el marcador.
     return (lista||[]).length;
   }
+  // La caja va como HERMANA del contenedor, nunca adentro: adentro, el repintado
+  // siguiente la borraba y quedaba el contador diciendo «1 colector con falla»
+  // sin que el lector pudiera encontrar cuál ni por qué.
+  function ponerCaja(destino, html){
+    const caja = document.getElementById(destino);
+    if(!caja) return;
+    const id = 'aviso-' + destino;
+    let aviso = document.getElementById(id);
+    if(!aviso){
+      aviso = document.createElement('div');
+      aviso.id = id;
+      caja.parentNode.insertBefore(aviso, caja);
+    }
+    aviso.innerHTML = html;
+  }
+
   function pintarFalla(destino, colector, error, meta){
     const viejo = meta ? `El último dato válido es del ${momento(meta.obtenido_en)} y sigue en pantalla sin modificar.`
                        : 'Todavía no hay ningún dato válido para este dominio.';
-    document.getElementById(destino).innerHTML =
+    ponerCaja(destino,
       `<div class="falla"><h4>El colector «${esc(colector)}» no pudo completar la última corrida</h4>`+
-      `<p>${esc(error)}<br>${viejo} No se muestran datos simulados ni estimados.</p></div>`;
+      `<p>${esc(error)}<br>${viejo} No se muestran datos simulados ni estimados.</p></div>`);
   }
   // NO ES LO MISMO que el colector haya fallado a que el archivo no haya llegado.
   // Lo primero lo sabemos: el colector deja su parte escrito. Lo segundo puede ser
@@ -1923,14 +1878,12 @@
   // y decir «el colector no pudo completar la corrida» cuando en realidad no
   // pudimos traer el archivo ES AFIRMAR ALGO QUE NO SABEMOS. Se separan.
   function pintarNoLlego(destino, colector, error){
-    const caja = document.getElementById(destino);
-    if(!caja) return;
-    caja.innerHTML =
+    ponerCaja(destino,
       `<div class="falla leve"><h4>No se pudo traer «${esc(colector)}»</h4>`+
       `<p>El navegador no pudo descargar este archivo de datos (${esc(error)}). `+
       `<b>No significa que la fuente haya fallado</b>: puede ser la conexión, o una `+
       `recolección en curso. Volvé a cargar la página en un minuto. `+
-      `<b>No se muestran datos simulados ni estimados.</b></p></div>`;
+      `<b>No se muestran datos simulados ni estimados.</b></p></div>`);
   }
 
   function marcador(){
@@ -3606,6 +3559,11 @@
     tarjetasBanco(['democracia_electoral','democracia_liberal','democracia_participativa',
                    'corrupcion_politica'],'democracia');
     tarjetasBanco(['libertad_expresion','libertad_asociacion'],'libertades');
+    // Los seis del entorno informativo no se pintaban en ninguna seccion: la
+    // categoria no existia y nada lo advertia. Son los datos MAS RECIENTES
+    // del registro, de 2025.
+    tarjetasBanco(['censura_medios','hostigamiento_periodistas','autocensura',
+                   'sesgo_medios','medios_corruptos','polarizacion'],'entorno-informativo');
     tarjetasBanco(['monopolio_fuerza','intensidad_conflicto'],'control');
     tarjetasBanco(['aprobacion_democracia','persecucion_abuso','politica_anticorrupcion',
                    'actores_antidemocraticos','administracion_basica','indice_gobernanza'],'integridad');
