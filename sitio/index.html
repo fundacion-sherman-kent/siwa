@@ -371,6 +371,24 @@
     width:100%;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;
     color:#7d90a8;font-weight:700;margin-bottom:2px;
   }
+  .hoy{margin:0 0 20px;}
+  .hoy-rot{
+    font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#7fd3c4;
+    font-weight:700;margin-bottom:8px;
+  }
+  .hoy-rot span{color:#5f7286;letter-spacing:.6px;margin-left:6px;}
+  .hoy-fila{display:flex;flex-wrap:wrap;gap:8px;}
+  .hoy-dato{
+    display:inline-flex;align-items:baseline;gap:6px;flex-wrap:wrap;
+    border:1px solid var(--line);border-left:3px solid #3FA796;border-radius:9px;
+    padding:9px 13px;font-size:11.5px;color:#C7D2E0;text-decoration:none;
+    background:rgba(63,167,150,.06);
+  }
+  .hoy-dato:hover{border-color:#3FA796;background:rgba(63,167,150,.13);color:#fff;}
+  .hoy-dato b{font-size:17px;font-weight:800;color:#fff;font-family:'JetBrains Mono',monospace;}
+  .hoy-dato i{font-style:normal;color:#7fd3c4;font-size:10.5px;}
+  .hoy-pie{margin:9px 0 0;font-size:10.5px;line-height:1.55;color:#7d90a8;}
+  .hoy-pie b{color:#C7D2E0;}
   .elegir-ambito{
     display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
     margin:14px 0 18px;padding:14px 16px;
@@ -1087,6 +1105,7 @@
       </div>
       <div class="elige-pais" id="elige-pais"></div>
       <div class="ejes-resumen" id="ejes-resumen"></div>
+      <div class="hoy" id="hoy"></div>
       <div class="grid-cards" id="tarj-ficha"></div>
       <p class="pie-ficha" id="pie-ficha"></p>
         </section>
@@ -2167,6 +2186,11 @@
   // 4. ES UN ORDEN DENTRO DE LA REGION, NO UNA MEDIDA ABSOLUTA. Un Estado en 50
   //    esta en la mediana de America Latina, no «a mitad de camino» de nada.
   const MINIMO_POR_EJE = 4;
+  // Cinco años es el ancho maximo de la ventana dentro de un mismo indicador.
+  // Mas que eso ya no es el mismo fenomeno: son dos fotos distintas puestas en
+  // la misma fila. Descarta 97 celdas de las 1.400 y ningun Estado pierde su
+  // puntaje, porque el minimo por eje sigue vigilando.
+  const REZAGO_COMPARABLE = 5;
 
   // DEFENSA NO ENTRA EN EL COMPUESTO, y la razon es de doctrina, no de calculo.
   // Sus nueve indicadores —gasto militar, efectivos, aviones, buques, objetos en
@@ -2194,7 +2218,23 @@
     EJES_DEL_RESUMEN.forEach(e => porEje[e] = {});
     fuentesInd().forEach(f => (f.indicadores||[]).forEach(i => {
       if(!EJES_DEL_RESUMEN.includes(i.eje)) return;
-      const filas = filasDe(i.clave).filter(x => isFinite(x.valor));
+      let filas = filasDe(i.clave).filter(x => isFinite(x.valor));
+
+      // NO SE COMPARAN EPOCAS DISTINTAS. Veinticinco indicadores mezclan años
+      // entre países —«empresas a las que se pidió un soborno» va de 2010 a
+      // 2025—, de modo que el percentil ordenaba el dato de un Estado de 2010
+      // contra el de otro de 2025 COMO SI FUERAN EL MISMO MOMENTO. Eso no es
+      // dato viejo: es una comparación falsa.
+      //
+      // La regla es RELATIVA a cada indicador, no absoluta: un indicador cuyos
+      // 33 valores sean de 2010 sigue siendo internamente comparable —ordena
+      // 2010, y lo declara—; lo que se descarta es el Estado que quedó cinco
+      // años detrás de la frontera de SU PROPIO indicador.
+      const conAnio = filas.filter(x => x.anio);
+      if(conAnio.length){
+        const frontera = Math.max(...conAnio.map(x => x.anio));
+        filas = filas.filter(x => !x.anio || frontera - x.anio <= REZAGO_COMPARABLE);
+      }
       if(filas.length < 8) return;   // con muy pocos Estados el percentil no dice nada
       const orden = filas.slice().sort((a,b)=>
         i.mas_es_peor ? a.valor - b.valor : b.valor - a.valor);
@@ -2257,7 +2297,11 @@
              + 'NO INCLUYE EL EJE DEFENSA: gasto militar, efectivos y material son '
              + 'magnitudes, no virtudes ni defectos, y orientarlos exigiria decidir si '
              + 'mas capacidad militar es mejor o peor. Con Defensa adentro, Costa Rica '
-             + '—que no tiene ejercito desde 1949— figuraba entre los peores de la region.';
+             + '—que no tiene ejercito desde 1949— figuraba entre los peores de la region. '
+             + 'TAMPOCO SE COMPARAN EPOCAS DISTINTAS: dentro de cada indicador, el Estado '
+             + 'cuyo dato quedo mas de cinco años detras del mas reciente NO entra en ese '
+             + 'orden. Comparar un valor de 2010 con uno de 2025 no es un dato viejo: es '
+             + 'una comparacion falsa.';
       },
       conteo(){
         const m = {};
@@ -2660,6 +2704,58 @@
       + 'dos extremos. <b>Elegirlo es una decisión y por eso se dice cuál es</b>: la alternativa '
       + '—promediar indicadores en unidades distintas— no sería más prolija, sería un número sin '
       + 'sentido. <b>Elegí un país o una zona arriba</b> para ver sus cifras y su puesto.</p>';
+  }
+
+  // La capa de hoy estaba repartida en cuatro secciones al final de la pagina.
+  // Es la fortaleza que distingue al registro —los 71 indicadores tienen dos
+  // años de mediana— y no se veia hasta el final. Va arriba, en una linea.
+  function hoyVista(){
+    const caja = document.getElementById('hoy');
+    if(!caja) return;
+    const zona = bloqueActivo();
+    const donde = paisFiltro ? paisNombre : (zona || 'la región');
+    const trozos = [];
+
+    const cob = almacen.cobertura;
+    if(cob && cob.senal_reciente){
+      let est = Object.values(cob.senal_reciente.temas).flatMap(t => (t.estados||[]));
+      if(paisFiltro) est = est.filter(e => e.iso === paisFiltro);
+      else if(zona) est = est.filter(e => e.bloque === zona);
+      const notas = est.reduce((a,e)=>a+e.notas, 0);
+      if(notas) trozos.push({n: miles(notas), q: notas===1?'nota de prensa':'notas de prensa', a:'#cobertura'});
+    }
+    const rec = almacen.reciente;
+    if(rec){
+      let l = rec.registros.filter(x => x.conjuntos.length);
+      if(paisFiltro) l = l.filter(x => x.iso === paisFiltro);
+      else if(zona) l = l.filter(x => x.bloque === zona);
+      const mas = l.map(x=>x.conjuntos[0].dias).filter(d=>d!==null).sort((a,b)=>a-b)[0];
+      if(l.length) trozos.push({n: l.length,
+        q: l.length===1?'Estado publicó lo suyo':'Estados publicaron lo suyo',
+        extra: mas===0?'el último, hoy':mas===1?'el último, ayer':'el último, hace '+mas+' días',
+        a:'#publicacion-oficial'});
+    }
+    const tg = almacen.telegram;
+    if(tg && tg.registros){
+      const isos = paisFiltro ? [paisFiltro]
+        : (zona ? padron.filter(x=>x.bloque===zona).map(x=>x.iso) : null);
+      const n = isos ? tg.registros.filter(c => isos.includes(c.pais)
+                 || (c.estados_mencionados||[]).some(x => isos.includes(x.iso||x))).length
+               : tg.registros.length;
+      if(n) trozos.push({n, q: n===1?'canal de mensajería':'canales de mensajería', a:'#mensajeria'});
+    }
+
+    if(!trozos.length){ caja.innerHTML = ''; return; }
+    caja.innerHTML = '<div class="hoy-rot">Lo de hoy en ' + esc(donde)
+      + ' <span>ventana de 48 horas</span></div>'
+      + '<div class="hoy-fila">' + trozos.map(t =>
+          '<a class="hoy-dato" href="' + t.a + '"><b>' + esc(String(t.n)) + '</b> '
+          + esc(t.q) + (t.extra ? '<i>' + esc(t.extra) + '</i>' : '') + '</a>').join('')
+      + '</div>'
+      + '<p class="hoy-pie"><b>Esto es lo único verdaderamente al día.</b> Los indicadores '
+      + 'comparables tienen dos años de mediana porque así los publican sus productores; '
+      + 'esta capa se recolecta cada hora. <b>No actualiza las cifras de arriba</b>: dice qué '
+      + 'se está publicando ahora.</p>';
   }
 
   function ejesVista(){
@@ -3472,23 +3568,33 @@
     const tag  = document.getElementById('tag-opacidad');
     const d = almacen.opacidad;
     if(!caja || !d) return;
-    const r = d.resumen;
 
-    // El denominador va en la MISMA frase que la cifra. Abrir con un numero que
-    // esconde cuantos se miraron seria cometer, en el primer renglon, el error
-    // que este indice existe para señalar.
-    const verificados = r.publican_consolidado + r.publican_parcial;
-    if(tit) tit.innerHTML =
-      '<span class="cifra">De los 33 Estados, solo <b>' + r.publican_consolidado
-      + '</b> publican un consolidado nacional de solicitudes de acceso a la información.</span>'
-      + '<span class="denominador">Otros <b>' + r.publican_parcial + '</b> lo publican de forma '
-      + 'parcial —por organismo, o con la serie interrumpida—. Los <b>' + r.sin_verificar
-      + '</b> restantes están <b>sin verificar</b>: la Oficina todavía no revisó los cuatro pasos '
-      + 'en esos Estados, y eso <b>no los cuenta como opacos</b>. Solo ' + r.estados_con_portal_consultable
-      + ' de los 33 tienen portal con interfaz de consulta; los demás pasos se revisan a mano.</span>';
-    if(tag) tag.textContent = verificados + ' de 33 verificados · materia M6';
 
-    // Con un pais elegido se muestra su celda; sin pais, los verificados.
+    // El recuento del ambito va PRIMERO: es la cifra que se cita, y la que
+    // faltaba. «De los 33 Estados, N publican» no se podia leer por zona.
+    const zonaOp = bloqueActivo();
+    const delAmbito = d.registros.filter(x =>
+      paisFiltro ? x.iso === paisFiltro : (zonaOp ? x.bloque === zonaOp : true));
+    const cuenta = {publicado:0, parcial:0, sin_verificar:0};
+    delAmbito.forEach(x => { cuenta[x.estado] = (cuenta[x.estado]||0) + 1; });
+    const verificados = cuenta.publicado + cuenta.parcial;
+    const dondeOp = paisFiltro ? paisNombre : (zonaOp || 'América Latina y el Caribe');
+    if(tag) tag.textContent = verificados + ' de ' + delAmbito.length
+      + ' verificados en ' + dondeOp + ' · materia M6';
+
+    const titular = document.getElementById('titular-opacidad');
+    if(titular && !paisFiltro){
+      titular.innerHTML =
+        '<span class="cifra">En ' + esc(dondeOp) + ', <b>' + cuenta.publicado + '</b> de '
+        + delAmbito.length + ' Estados publican un consolidado nacional de solicitudes de '
+        + 'acceso a la información.</span>'
+        + '<span class="denominador">Otros <b>' + cuenta.parcial + '</b> lo publican de forma '
+        + 'parcial —por organismo, o con la serie interrumpida—. Los <b>' + cuenta.sin_verificar
+        + '</b> restantes están <b>sin verificar</b>: la Oficina todavía no revisó los cuatro '
+        + 'pasos en esos Estados, y eso <b>no los cuenta como opacos</b>. '
+        + '<b>' + verificados + ' de ' + delAmbito.length + ' verificados hasta hoy.</b></span>';
+    }
+
     let filas = d.registros;
     if(paisFiltro) filas = filas.filter(x => x.iso === paisFiltro);
     else {
@@ -3702,6 +3808,7 @@
     paso('leyenda', leyenda);
     paso('panel de cruce', panelCruce);
     paso('resumen por eje', ejesVista);
+    paso('lo de hoy', hoyVista);
     paso('ámbito del informe', ecoDelAmbito);
     paso('publicación oficial reciente', recienteVista);
     paso('padrón de fuentes oficiales', oficialesVista);
