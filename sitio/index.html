@@ -759,6 +759,10 @@
     font-size:23px;font-weight:800;color:#fff;line-height:1.15;margin:3px 0 2px;
     font-family:'JetBrains Mono',monospace;
   }
+  .eje-caja .unidad-eje{
+    font-size:10.5px;line-height:1.35;color:#9fb0c4;margin:1px 0 5px;
+  }
+  .eje-caja .puesto b{color:#C7D2E0;font-weight:600;}
   .eje-caja .puesto{font-size:10.5px;color:#7d90a8;}
   .eje-caja .barra{
     height:4px;border-radius:2px;background:rgba(255,255,255,.07);margin-top:7px;overflow:hidden;
@@ -789,6 +793,7 @@
     padding-top:7px;border-top:1px solid rgba(255,255,255,.07);font-size:10.5px;
   }
   .eje-caja .extremos b{color:#E8EEF5;font-weight:600;}
+  .eje-caja .extremos i{font-style:normal;opacity:.62;font-size:9.5px;text-transform:uppercase;letter-spacing:.5px;margin-right:3px;}
   .eje-caja .extremos .mejor{color:#7fd3c4;}
   .eje-caja .extremos .peor{color:#ffb27a;}
   /* En Defensa los extremos son el mas chico y el mas grande, no el mejor y el
@@ -841,6 +846,13 @@
     font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#5f7286;font-weight:700;
     margin-bottom:5px;
   }
+  .mide-lista{display:flex;flex-wrap:wrap;gap:6px;}
+  .mide-chip{
+    display:inline-block;font-size:11px;line-height:1.35;padding:5px 10px;
+    border:1px solid var(--line);border-radius:999px;color:#C7D2E0;text-decoration:none;
+  }
+  a.mide-chip:hover{border-color:var(--orange);background:rgba(251,101,0,.10);color:#fff;}
+  .mide-chip.suelto{color:#9fb0c4;border-style:dashed;}
   .mide-fila{
     display:flex;flex-wrap:wrap;gap:1px 10px;align-items:baseline;
     justify-content:space-between;
@@ -1413,10 +1425,6 @@
       <div class="procedencia" id="proc-aeroespacial">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-aeroespacial"></div>
       <div id="vac-aeroespacial"></div>
-        </div>
-    <div class="categoria" id="fuerzas" data-nivel="3">
-      <div class="categoria-head"><h4>Fuerzas y capacidad de defensa</h4><span class="tag" id="tag-fuerzas">—</span></div>
-      <div class="grid-cards" id="tarj-fuerzas"></div>
         </div>
     </section>
 
@@ -2504,44 +2512,94 @@
   // un dato sino una tautología. Lo que la región sí puede declarar son sus
   // EXTREMOS —quién está mejor y quién peor en cada eje— y cuántos Estados
   // llegan a puntuar. Eso es información, y es verificable.
+  // Resumir un eje con un indicador es una eleccion, y por eso se declara acá y
+  // se dice en pantalla cuál es. La alternativa —promediar cosas en unidades
+  // distintas— no seria una eleccion mas prolija: seria un numero sin sentido.
+  const RESUMEN_DEL_EJE = {
+    Seguridad:  {clave:'homicidios',     porque:'la muerte violenta es el hecho que todos los Estados registran'},
+    Gobernanza: {clave:'estado_derecho', porque:'resume si las reglas se cumplen, más allá de cómo se votó'},
+    Desarrollo: {clave:'pobreza',        porque:'es la condición material que ordena a todas las demás'},
+    Defensa:    {clave:'gasto_militar',  porque:'es la magnitud comparable: lo que cada Estado destina'},
+  };
+
+  function medianaDe(nums){
+    const o = nums.slice().sort((a,b)=>a-b);
+    const m = Math.floor(o.length/2);
+    return o.length % 2 ? o[m] : (o[m-1]+o[m])/2;
+  }
+
   function resumenDelAmbito(){
     const c = compuesto();
     const zona = bloqueFiltro;
     const enAmbito = iso => !zona || (padron.find(x=>x.iso===iso)||{}).bloque === zona;
     const donde = zona || 'América Latina y el Caribe';
 
-    const fila = (rot, mapa, clase) => {
-      const pares = Object.entries(mapa||{}).filter(([iso])=>enAmbito(iso))
-        .map(([iso,x])=>({iso, v:x.valor, ind:x.indicadores}))
-        .sort((a,b)=>a.v-b.v);
+    const nom = i => (padron.find(x=>x.iso===i)||{}).pais || i;
+
+    // La situación general SÍ se resume con el compuesto: es un orden, y de un
+    // ámbito lo que se puede decir es quién está en cada punta.
+    const cajaGeneral = () => {
+      const pares = Object.entries(c.general||{}).filter(([iso])=>enAmbito(iso))
+        .map(([iso,x])=>({iso, v:x.valor})).sort((a,b)=>a.v-b.v);
       if(!pares.length) return '';
-      const nom = i => (padron.find(x=>x.iso===i)||{}).pais || i;
       const mejor = pares[0], peor = pares[pares.length-1];
-      const sinOrientar = clase === 'magnitud';
-      return '<div class="eje-caja' + (clase ? ' '+clase : '') + '">'
-        + '<div class="nombre">' + esc(rot) + (sinOrientar ? ' · magnitud' : '') + '</div>'
+      return '<div class="eje-caja general">'
+        + '<div class="nombre">Situación general</div>'
         + '<div class="valor">' + pares.length + '</div>'
-        + '<div class="puesto">Estados puntuados' + (zona ? '' : ' de 33') + '</div>'
+        + '<div class="unidad-eje">de ' + (zona ? pares.length : 33) + ' Estados</div>'
+        + '<div class="puesto">con puesto en la región</div>'
         + '<div class="extremos">'
-        + '<span class="mejor"><b>' + esc(nom(mejor.iso)) + '</b> ' + cifra(Math.round(mejor.v*10)/10) + '</span>'
-        + '<span class="peor"><b>' + esc(nom(peor.iso)) + '</b> ' + cifra(Math.round(peor.v*10)/10) + '</span>'
+        + '<span class="mejor"><i>mejor</i> <b>' + esc(nom(mejor.iso)) + '</b> ' + cifra(Math.round(mejor.v*10)/10) + '</span>'
+        + '<span class="peor"><i>peor</i> <b>' + esc(nom(peor.iso)) + '</b> ' + cifra(Math.round(peor.v*10)/10) + '</span>'
+        + '</div></div>';
+    };
+
+    // Cada eje se resume con SU indicador, en su unidad, y con la mediana del
+    // ámbito: una cifra que se entiende sin explicación y que se puede comparar
+    // entre un país, una zona y la región.
+    const cajaEje = eje => {
+      const conf = RESUMEN_DEL_EJE[eje];
+      if(!conf) return '';
+      const meta = metaInd(conf.clave);
+      const filas = filasDe(conf.clave).filter(f => enAmbito(f.iso));
+      if(!filas.length || !meta.clave) return '';
+      const ordenadas = filas.slice().sort((a,b)=>
+        meta.mas_es_peor ? a.valor - b.valor : b.valor - a.valor);
+      const mediana = medianaDe(filas.map(f=>f.valor));
+      const mag = magnitud(mediana, meta.unidad);
+      const bien = ordenadas[0], mal = ordenadas[ordenadas.length-1];
+      const cifraDe = f => magnitud(f.valor, meta.unidad).texto;
+      const sinOrientar = eje === EJE_SIN_ORIENTAR;
+      return '<div class="eje-caja' + (sinOrientar ? ' magnitud' : '') + '">'
+        + '<div class="nombre">' + esc(eje) + (sinOrientar ? ' · magnitud' : '') + '</div>'
+        + '<div class="valor">' + esc(mag.texto) + '</div>'
+        + '<div class="unidad-eje">' + esc(mag.unidad || meta.unidad) + '</div>'
+        + '<div class="puesto">mediana de <b>' + esc(meta.rotulo.toLowerCase()) + '</b>'
+        + ' · ' + filas.length + ' de 33 Estados</div>'
+        + '<div class="extremos">'
+        + '<span class="' + (sinOrientar ? '' : 'mejor') + '"><i>' + (sinOrientar ? 'más alto' : 'mejor') + '</i> '
+        + '<b>' + esc(nom(bien.iso)) + '</b> ' + esc(cifraDe(bien)) + '</span>'
+        + '<span class="' + (sinOrientar ? '' : 'peor') + '"><i>' + (sinOrientar ? 'más bajo' : 'peor') + '</i> '
+        + '<b>' + esc(nom(mal.iso)) + '</b> ' + esc(cifraDe(mal)) + '</span>'
         + '</div>'
-        + (sinOrientar ? '<div class="aviso-eje">Es tamaño, no mejor ni peor: los extremos son el más chico y el más grande.</div>' : '')
+        + (sinOrientar ? '<div class="aviso-eje">Es tamaño, no mejor ni peor.</div>' : '')
         + '</div>';
     };
 
-    const filas = [fila('Situación general', c.general, 'general')]
-      .concat(EJES_DEL_RESUMEN.map(e =>
-        fila(e, c.ejes[e], e === EJE_SIN_ORIENTAR ? 'magnitud' : '')))
-      .filter(Boolean);
+    const filas = [cajaGeneral()].concat(EJES_DEL_RESUMEN.map(cajaEje)).filter(Boolean);
     if(!filas.length) return '';
 
-    return '<div class="rot">' + esc(donde) + ' — dónde está cada eje</div>'
+    const cuales = EJES_DEL_RESUMEN.map(e => RESUMEN_DEL_EJE[e]
+      ? '<b>' + esc(e.toLowerCase()) + '</b> con ' + esc((metaInd(RESUMEN_DEL_EJE[e].clave).rotulo||'').toLowerCase())
+      : '').filter(Boolean).join('; ');
+
+    return '<div class="rot">' + esc(donde) + ' — una cifra por eje</div>'
       + '<div class="ejes-fila">' + filas.join('') + '</div>'
-      + '<p class="ejes-pie">La cifra grande es <b>cuántos Estados llegan a puntuar</b> en ese eje; '
-      + 'debajo, <b>el mejor y el peor</b> del ámbito. No se muestra un promedio regional porque '
-      + 'el compuesto es un <b>orden dentro de la región</b>: promediarlo daría 50 por construcción '
-      + 'y no diría nada. <b>Elegí un país o una zona arriba</b> para ver sus cifras y su puesto.</p>';
+      + '<p class="ejes-pie"><b>Cada eje se resume con un indicador declarado</b>, en su propia '
+      + 'unidad, y la cifra grande es <b>la mediana del ámbito</b>: ' + cuales + '. Debajo van los '
+      + 'dos extremos. <b>Elegirlo es una decisión y por eso se dice cuál es</b>: la alternativa '
+      + '—promediar indicadores en unidades distintas— no sería más prolija, sería un número sin '
+      + 'sentido. <b>Elegí un país o una zona arriba</b> para ver sus cifras y su puesto.</p>';
   }
 
   function ejesVista(){
@@ -2636,7 +2694,9 @@
     const proys = [1,2,4].map(n=>({n, pr:proyeccionDe(iso, n)})).filter(x=>x.pr);
     // El resumen por eje se muestra IGUAL sin dato en la capa elegida: que
     // Uruguay no tenga cifra de terrorismo no quita que tenga situacion general.
-    const mini = ejesMini(iso);
+    // Repetir la ficha de arriba no informa: los ejes van solo si el país
+    // bajo el cursor es OTRO, que es cuando la cifra sirve para comparar.
+    const mini = (iso === paisFiltro) ? '' : ejesMini(iso);
     if(nivel === undefined && !proys.length){
       caja.innerHTML = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>
         <span class="vacia">Sin dato en esta capa.</span>` + mini;
@@ -3034,7 +3094,7 @@
     if(!paisFiltro){
       caja.innerHTML = '';
       if(pie) pie.textContent = '';
-      if(tag) tag.textContent = 'elegí un país';
+      if(tag) tag.textContent = 'toda la región';
       if(aviso) aviso.innerHTML =
         `<b>Elegí un país o una zona en «Empezá acá», o hacé clic en el mapa.</b><br>
          Vas a ver los datos que más se movieron en los últimos años: qué mejoró, qué
@@ -3434,16 +3494,13 @@
           const d = datoDe(clave, iso);
           if(!d) return;
           const mag = magnitud(d.valor, meta.unidad);
-          filas.push({q: meta.rotulo,
-                      v: mag.texto + (mag.unidad ? ' ' + mag.unidad : ''),
-                      c: d.anio});
+          filas.push({q: meta.rotulo, ancla: meta.seccion || ''});
         } else {
-          const n = filasDe(clave).length;
-          if(n) filas.push({q: meta.rotulo, v: String(n), c: 'de 33'});
+          if(filasDe(clave).length) filas.push({q: meta.rotulo, ancla: meta.seccion || ''});
         }
       });
       const ex = extraMateria(m.extra, iso);
-      if(ex) filas.push(ex);
+      if(ex) filas.push({q: ex.q, ancla: ''});
       if(filas.length) conMedida++;
 
       // 2. Lo que se esta publicando ahora.
@@ -3472,12 +3529,16 @@
                   : filas.length <= 2 ? ['poco', filas.length + (filas.length === 1 ? ' medida' : ' medidas')]
                   : ['hay', filas.length + ' medidas'];
 
+      // La materia NO repite la cifra: la nombra y manda a donde vive. Repetir
+      // veinte valores que ya estan mas abajo no agrega informacion, agrega
+      // ruido, y es lo que hacia que la pagina se leyera dos veces.
       const mide = filas.length
-        ? '<div><div class="rotulo-bloque">Lo que se mide en ' + esc(donde) + '</div>'
-          + filas.map(f => '<div class="mide-fila"><span class="que">' + esc(f.q) + '</span>'
-              + '<span><span class="cuanto">' + esc(String(f.v)) + '</span>'
-              + '<span class="cuando">' + esc(String(f.c)) + '</span></span></div>').join('')
-          + '</div>'
+        ? '<div><div class="rotulo-bloque">Lo que se puede medir en ' + esc(donde) + '</div>'
+          + '<div class="mide-lista">'
+          + filas.map(f => f.ancla
+              ? '<a class="mide-chip" href="#' + esc(f.ancla) + '">' + esc(f.q) + '</a>'
+              : '<span class="mide-chip suelto">' + esc(f.q) + '</span>').join('')
+          + '</div></div>'
         : '';
 
       return '<article class="materia">'
@@ -3629,9 +3690,10 @@
     tarjetasBanco(['trata_victimas','trata_sexual','trata_trabajo'],'trata');
     tarjetasBanco(['soborno_personas','soborno_empresas'],'soborno');
     tarjetasBanco('empleo_informal','informalidad');
-    tarjetasBanco(['gasto_militar','personal_militar'],'fuerzas');
     tarjetasBanco(['victimas_robo','denuncia_robo','denuncia_agresion','sin_condena'],'victimizacion');
-    tarjetasBanco(['servidores_seguros','internet'],'ciber');
+    // `internet` pertenece a «conectividad» por categoría declarada: ponerlo
+    // también acá lo mostraba dos veces en la misma página.
+    tarjetasBanco(['servidores_seguros'],'ciber');
     tarjetasBanco('regalo_contrato','contratacion');
     tarjetasBanco(['recaudacion','registro_nacimientos','acceso_informacion','institucion_ddhh'],'capacidad');
     tarjetasBanco(['gini','pobreza','desempleo_joven','trabajo_infantil','agua_potable'],'condiciones');

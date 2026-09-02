@@ -193,7 +193,7 @@ SERIES = [
                 "desinformacion pagada."},
     {"clave": "polarizacion", "slug": "political-polarization-score",
      "columna": "v2cacamps__estimate_best",
-     "rotulo": "Polarizacion politica", "eje": "Gobernanza",
+     "rotulo": "Polarización política", "eje": "Gobernanza",
      "unidad": "índice de -4 a 4", "mas_es_peor": True,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "ATENCION: en esta el valor ALTO es el PEOR, al reves que las cinco "

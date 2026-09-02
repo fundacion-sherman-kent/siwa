@@ -138,7 +138,7 @@ INDICADORES = [
      "cautela": "Depende de la encuesta de hogares de cada Estado, con anios y "
                 "metodologias distintos. La comparacion entre paises es aproximada."},
     {"clave": "pobreza", "codigo": "SI.POV.NAHC", "fuente_id": None,
-     "rotulo": "Pobreza segun linea nacional", "eje": "Desarrollo",
+     "rotulo": "Pobreza según línea nacional", "eje": "Desarrollo",
      "unidad": "% de la población", "mas_es_peor": True,
      "origen": "Banco Mundial, sobre lineas nacionales",
      "cautela": "CADA ESTADO DEFINE SU PROPIA LINEA DE POBREZA. Las cifras NO son "
@@ -226,7 +226,7 @@ INDICADORES = [
      "cautela": "Que proporcion de quienes trabajan esta bajo bandera. Es la medida de "
                 "peso relativo del instrumento militar en la sociedad."},
     {"clave": "armas_importadas", "codigo": "MS.MIL.MPRT.KD", "fuente_id": None,
-     "rotulo": "Importacion de armamento mayor", "eje": "Defensa",
+     "rotulo": "Importación de armamento mayor", "eje": "Defensa",
      "unidad": "valor indicativo SIPRI, NO son dólares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Es el indicador de MATERIAL disponible al que se puede llegar sin "
@@ -236,7 +236,7 @@ INDICADORES = [
                 "comparar sistemas de precios distintos. Un anio sin compras da cero y "
                 "no significa que el pais no tenga material."},
     {"clave": "armas_exportadas", "codigo": "MS.MIL.XPRT.KD", "fuente_id": None,
-     "rotulo": "Exportacion de armamento mayor", "eje": "Defensa",
+     "rotulo": "Exportación de armamento mayor", "eje": "Defensa",
      "unidad": "valor indicativo SIPRI, NO son dólares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Muy pocos Estados de la region exportan armamento mayor: la mayoria "
