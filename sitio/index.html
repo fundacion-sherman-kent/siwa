@@ -371,6 +371,23 @@
     width:100%;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;
     color:#7d90a8;font-weight:700;margin-bottom:2px;
   }
+  .elegir-ambito{
+    display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;
+    margin:14px 0 18px;padding:14px 16px;
+    border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:10px;
+    background:rgba(251,101,0,.06);
+  }
+  .elegir-ambito label{
+    font-size:10.5px;text-transform:uppercase;letter-spacing:1px;
+    color:var(--orange);font-weight:700;
+  }
+  .elegir-ambito select{
+    flex:0 1 260px;min-width:0;background:#0E2135;color:#E8EEF5;
+    border:1px solid var(--line);border-radius:7px;padding:9px 11px;
+    font-family:inherit;font-size:13px;
+  }
+  .elegir-nota{flex:1 1 260px;min-width:0;font-size:11.5px;line-height:1.5;color:#9fb0c4;}
+  .elegir-nota b{color:#C7D2E0;}
   .elige-pais{
     padding:20px 0 8px;font-size:13.5px;color:#9fb0c4;line-height:1.6;max-width:68ch;
   }
@@ -767,6 +784,18 @@
   .eje-linea.general .e{color:#ffb27a;font-weight:700;}
   .eje-linea.general .v{color:#fff;font-size:15px;}
   .eje-linea.magnitud .e{color:#c79bf0;}
+  .eje-caja .extremos{
+    display:flex;flex-direction:column;gap:2px;margin-top:8px;
+    padding-top:7px;border-top:1px solid rgba(255,255,255,.07);font-size:10.5px;
+  }
+  .eje-caja .extremos b{color:#E8EEF5;font-weight:600;}
+  .eje-caja .extremos .mejor{color:#7fd3c4;}
+  .eje-caja .extremos .peor{color:#ffb27a;}
+  /* En Defensa los extremos son el mas chico y el mas grande, no el mejor y el
+     peor: pintarlos de verde y naranja seria emitir el juicio que el eje se
+     saco de encima. Van en gris. */
+  .eje-caja.magnitud .extremos .mejor,
+  .eje-caja.magnitud .extremos .peor{color:#9fb0c4;}
   .eje-pie{margin-top:7px;font-size:9px;line-height:1.4;color:#5f7286;}
   .eje-pie i{color:#c79bf0;font-style:normal;}
   .opacidad-titular{
@@ -1036,7 +1065,13 @@
 
   <main>
     <section class="domain" id="ficha-pais">
-      <div class="domain-head"><h3>Qué cambió en tu país</h3><span class="tag" id="tag-ficha">—</span></div>
+      <div class="domain-head"><h3 id="titulo-ficha">La región en cifras</h3><span class="tag" id="tag-ficha">—</span></div>
+      <div class="elegir-ambito">
+        <label for="ambito">Empezá acá</label>
+        <select id="ambito"></select>
+        <span class="elegir-nota">Un país, una zona o toda la región. <b>Lo que elijas manda
+          sobre todo el registro</b>: el mapa, las cifras, las noticias y las redes.</span>
+      </div>
       <div class="elige-pais" id="elige-pais"></div>
       <div class="ejes-resumen" id="ejes-resumen"></div>
       <div class="grid-cards" id="tarj-ficha"></div>
@@ -1065,10 +1100,6 @@
                    aria-describedby="ayuda-cruce" autocomplete="off">
             <div class="lista-temas" id="cruce-lista" role="group" aria-label="Temas para cruzar"></div>
             <div class="elegidos" id="cruce-elegidos"></div>
-          </div>
-          <div class="control">
-            <label for="ambito">País o zona</label>
-            <select id="ambito"></select>
           </div>
           <button class="boton chico" id="limpiar-cruce">quitar cruce</button>
         </div>
@@ -2468,10 +2499,62 @@
     return {puesto: todos.findIndex(v => v >= valor) + 1, de: todos.length};
   }
 
+  // Sin país elegido, el eje no puede dar un promedio: el compuesto es un ORDEN
+  // dentro de la región y su promedio regional da 50 POR CONSTRUCCIÓN, que no es
+  // un dato sino una tautología. Lo que la región sí puede declarar son sus
+  // EXTREMOS —quién está mejor y quién peor en cada eje— y cuántos Estados
+  // llegan a puntuar. Eso es información, y es verificable.
+  function resumenDelAmbito(){
+    const c = compuesto();
+    const zona = bloqueFiltro;
+    const enAmbito = iso => !zona || (padron.find(x=>x.iso===iso)||{}).bloque === zona;
+    const donde = zona || 'América Latina y el Caribe';
+
+    const fila = (rot, mapa, clase) => {
+      const pares = Object.entries(mapa||{}).filter(([iso])=>enAmbito(iso))
+        .map(([iso,x])=>({iso, v:x.valor, ind:x.indicadores}))
+        .sort((a,b)=>a.v-b.v);
+      if(!pares.length) return '';
+      const nom = i => (padron.find(x=>x.iso===i)||{}).pais || i;
+      const mejor = pares[0], peor = pares[pares.length-1];
+      const sinOrientar = clase === 'magnitud';
+      return '<div class="eje-caja' + (clase ? ' '+clase : '') + '">'
+        + '<div class="nombre">' + esc(rot) + (sinOrientar ? ' · magnitud' : '') + '</div>'
+        + '<div class="valor">' + pares.length + '</div>'
+        + '<div class="puesto">Estados puntuados' + (zona ? '' : ' de 33') + '</div>'
+        + '<div class="extremos">'
+        + '<span class="mejor"><b>' + esc(nom(mejor.iso)) + '</b> ' + cifra(Math.round(mejor.v*10)/10) + '</span>'
+        + '<span class="peor"><b>' + esc(nom(peor.iso)) + '</b> ' + cifra(Math.round(peor.v*10)/10) + '</span>'
+        + '</div>'
+        + (sinOrientar ? '<div class="aviso-eje">Es tamaño, no mejor ni peor: los extremos son el más chico y el más grande.</div>' : '')
+        + '</div>';
+    };
+
+    const filas = [fila('Situación general', c.general, 'general')]
+      .concat(EJES_DEL_RESUMEN.map(e =>
+        fila(e, c.ejes[e], e === EJE_SIN_ORIENTAR ? 'magnitud' : '')))
+      .filter(Boolean);
+    if(!filas.length) return '';
+
+    return '<div class="rot">' + esc(donde) + ' — dónde está cada eje</div>'
+      + '<div class="ejes-fila">' + filas.join('') + '</div>'
+      + '<p class="ejes-pie">La cifra grande es <b>cuántos Estados llegan a puntuar</b> en ese eje; '
+      + 'debajo, <b>el mejor y el peor</b> del ámbito. No se muestra un promedio regional porque '
+      + 'el compuesto es un <b>orden dentro de la región</b>: promediarlo daría 50 por construcción '
+      + 'y no diría nada. <b>Elegí un país o una zona arriba</b> para ver sus cifras y su puesto.</p>';
+  }
+
   function ejesVista(){
     const caja = document.getElementById('ejes-resumen');
     if(!caja) return;
-    if(!paisFiltro){ caja.innerHTML = ''; return; }
+    const titulo = document.getElementById('titulo-ficha');
+    if(!paisFiltro){
+      if(titulo) titulo.textContent = bloqueFiltro ? bloqueFiltro + ' en cifras'
+                                                   : 'La región en cifras';
+      caja.innerHTML = resumenDelAmbito();
+      return;
+    }
+    if(titulo) titulo.textContent = 'Qué cambió en ' + paisNombre;
     const r = resumenEjes(paisFiltro);
     if(!r){ caja.innerHTML = ''; return; }
 
@@ -2953,7 +3036,7 @@
       if(pie) pie.textContent = '';
       if(tag) tag.textContent = 'elegí un país';
       if(aviso) aviso.innerHTML =
-        `<b>Elegí un país arriba, en «País o zona», o hacé clic en el mapa.</b><br>
+        `<b>Elegí un país o una zona en «Empezá acá», o hacé clic en el mapa.</b><br>
          Vas a ver los datos que más se movieron en los últimos años: qué mejoró, qué
          empeoró, de dónde sale cada cifra y qué es lo que esa cifra <b>no</b> dice.`;
       return;
