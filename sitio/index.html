@@ -1568,6 +1568,24 @@
     <section class="domain bloque" id="que-se-publica" data-nivel="2">
       <div class="bloque-head"><h3>Qué se publica hoy</h3></div>
       <p class="bloque-bajada">Qué se está diciendo sobre la región en este momento, y en cuántos orígenes independientes. <b>No es una materia del registro:</b> es el segundo factor de veracidad con el que se contrastan las materias.</p>
+    <div class="categoria" id="publicacion-oficial" data-nivel="2">
+      <div class="categoria-head"><h4>Lo que cada Estado publicó de sí mismo</h4><span class="tag" id="tag-reciente">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>La serie comparable llega tarde y no hay forma de acelerarla.</b> La UNODC
+           recibe de los Estados, valida y recién entonces publica: nuestra cifra de
+           homicidios es de 2023. <b>Pero los Estados sí publican lo suyo, y rápido.</b>
+           Acá está lo último que cada uno subió a su propio catálogo oficial.</p>
+        <p><b>No es comparable entre países y no se suma.</b> Cada Estado define el delito
+           a su manera, lo cuenta con su método y lo publica con su cadencia: una serie
+           regional armada con estas cifras sería una serie falsa. <b>Va al lado de la serie
+           comparable, no adentro, y no la actualiza.</b> El enlace lleva al original, que es
+           donde la definición está escrita.</p>
+      </div>
+      <div class="procedencia" id="proc-reciente">Cargando el registro…</div>
+      <div class="cruce" id="lista-reciente"></div>
+      <div id="vac-reciente"></div>
+    </div>
+
     <div class="categoria" id="cobertura" data-nivel="2">
       <div class="categoria-head"><h4>Cobertura noticiosa cruzada</h4><span class="tag" id="tag-cobertura">—</span></div>
       <div class="aviso-cobertura">
@@ -1871,7 +1889,8 @@
                      ['ransomware','Extorsión informática'],
                      ['bti','Índice Bertelsmann'],
                      ['fundacion','Informes de la Fundación'],
-                     ['opacidad','Índice de Opacidad']]
+                     ['opacidad','Índice de Opacidad'],
+                     ['reciente','Publicación oficial reciente']]
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -3684,6 +3703,7 @@
     paso('panel de cruce', panelCruce);
     paso('resumen por eje', ejesVista);
     paso('ámbito del informe', ecoDelAmbito);
+    paso('publicación oficial reciente', recienteVista);
     paso('padrón de fuentes oficiales', oficialesVista);
     paso('índice de opacidad', opacidadVista);
     paso('las seis materias', materiasVista);
@@ -4655,6 +4675,59 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
 
   // Estaba fuera del ciclo de repintado —se pintaba al cargar y nunca mas—, y
   // por eso mostraba los siete portales con cualquier pais elegido.
+  const ROTULO_RECIENTE = {
+    al_dia: 'publicó hace poco', atrasado: 'sin novedad reciente',
+    sin_conjunto: 'sin conjunto de criminalidad', sin_portal: 'sin portal consultable',
+  };
+
+  function recienteVista(){
+    const caja = document.getElementById('lista-reciente');
+    const d = almacen.reciente; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+    const conDato = lista.filter(x => x.conjuntos.length);
+
+    const tag = document.getElementById('tag-reciente');
+    if(tag) tag.textContent = (paisFiltro || zona)
+      ? `${conDato.length} de ${lista.length} Estados con publicación propia`
+      : `${d.resumen.estados_con_publicacion_reciente} de ${d.resumen.estados_con_portal} portales con publicación reciente`;
+
+    if(!conDato.length){
+      const x = lista[0];
+      caja.innerHTML = `<div class="asunto"><h4>Sin publicación oficial que mostrar</h4>
+        <div class="foot"><span class="porque">${esc(paisFiltro ? paisNombre : (zona||'El ámbito'))}
+          ${x && x.estado === 'sin_portal'
+            ? 'no tiene portal de datos abiertos consultable. <b>No prueba que no publique</b>: puede exigir registro o publicar sin interfaz.'
+            : 'tiene portal, pero no se halló en él ningún conjunto de criminalidad.'}
+          </span><span class="badge unica">sin dato</span></div></div>`;
+      return;
+    }
+
+    // Se ordena por lo mas fresco: la pregunta es «quien publico ultimo».
+    caja.innerHTML = conDato.slice().sort((a,b)=>a.conjuntos[0].dias - b.conjuntos[0].dias)
+      .map(x => {
+        const c = x.conjuntos[0];
+        const dias = c.dias;
+        const clase = dias === null ? 'unica' : dias <= 45 ? 'fresco' : dias <= 200 ? 'reciente' : 'viejo';
+        const cuando = dias === null ? 'sin fecha'
+          : dias === 0 ? 'hoy' : dias === 1 ? 'ayer'
+          : dias < 60 ? `hace ${dias} días`
+          : `hace ${Math.round(dias/30)} meses`;
+        const otros = x.conjuntos.slice(1, 4);
+        return `<div class="asunto"><h4>${esc(x.pais)}
+            <span class="edad ${clase}">${esc(cuando)}</span></h4>
+          <div class="foot"><span class="porque">
+            <a href="${esc(c.enlace)}" target="_blank" rel="noopener">${esc(c.titulo)}</a>
+            · <b>${esc(c.organismo)}</b> · actualizado ${esc(c.actualizado)}${
+              c.formatos && c.formatos.length ? ' · '+esc(c.formatos.slice(0,4).join(', ')) : ''}
+            ${otros.length ? '<br>También publicó: '+otros.map(o=>
+               `<a href="${esc(o.enlace)}" target="_blank" rel="noopener">${esc(o.titulo.slice(0,44))}</a>`).join(' · ') : ''}
+          </span><span class="badge medio">oficial</span></div></div>`;
+      }).join('');
+  }
+
   function oficialesVista(){
     const caja=document.getElementById('lista-oficiales'); if(!caja) return;
     const d=almacen.oficiales; if(!d) return;
@@ -5255,6 +5328,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-mensajeria','mensajería',err.message);
       document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('reciente_oficial.json'), traer('estado/reciente_oficial.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.reciente=d; const meta=d.procedencia;
+      pintarProcedencia('proc-reciente',meta);
+      vacios+=pintarVacios('vac-reciente',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-reciente','publicación oficial reciente',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-reciente','publicación oficial reciente',err.message);
+      document.getElementById('proc-reciente').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('opacidad.json'), traer('estado/opacidad.json').catch(()=>null)])
     .then(([d,estado])=>{
