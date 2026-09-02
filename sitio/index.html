@@ -722,16 +722,23 @@
   .eje-caja.incompleto .valor{font-size:14px;color:#7d90a8;font-weight:600;}
   .ejes-pie{margin:9px 0 0;font-size:10.5px;line-height:1.55;color:#7d90a8;}
   .ejes-pie b{color:#C7D2E0;}
-  .ficha-mapa .ejes-mini{
-    display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;
-    padding-top:8px;border-top:1px solid rgba(255,255,255,.08);
+  .ejes-linea-caja{margin-top:9px;padding-top:8px;border-top:1px solid rgba(255,255,255,.10);}
+  .eje-linea{
+    display:grid;grid-template-columns:1fr auto auto;gap:9px;align-items:baseline;
+    padding:3px 0;font-size:11px;color:#9fb0c4;
   }
-  .ficha-mapa .ejes-mini span{
-    font-size:9.5px;padding:2px 7px;border-radius:999px;
-    background:rgba(255,255,255,.06);color:#C7D2E0;
+  .eje-linea .v{
+    font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;font-size:12.5px;
   }
-  .ficha-mapa .ejes-mini span b{color:#fff;font-weight:700;}
-  .ficha-mapa .ejes-mini span.general{background:rgba(251,101,0,.20);color:#ffb27a;}
+  .eje-linea .p{font-size:9.5px;color:#5f7286;min-width:38px;text-align:right;}
+  .eje-linea.general{
+    border-bottom:1px solid rgba(255,255,255,.10);padding-bottom:5px;margin-bottom:3px;
+  }
+  .eje-linea.general .e{color:#ffb27a;font-weight:700;}
+  .eje-linea.general .v{color:#fff;font-size:15px;}
+  .eje-linea.magnitud .e{color:#c79bf0;}
+  .eje-pie{margin-top:7px;font-size:9px;line-height:1.4;color:#5f7286;}
+  .eje-pie i{color:#c79bf0;font-style:normal;}
   .opacidad-titular{
     border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:10px;
     padding:16px 18px;margin:12px 0;background:rgba(251,101,0,.06);
@@ -852,6 +859,8 @@
      de base: cualquier enlace con estilo propio la pisa por especificidad. */
   a{color:var(--orange);}
   a:hover{color:#ff8a3d;}
+  .ambito-informe{font-size:12px;color:#9fb0c4;}
+  .ambito-informe b{color:#fff;}
   .membrete{display:none;}
   .colofon{display:none;}
 
@@ -1094,6 +1103,19 @@
         publica desglose provincial, y donde no lo hay el país queda en gris en vez de
         pintarse con una cifra que no le corresponde. Los puntos sí llevan coordenada propia.
         Las capas nuevas aparecen a medida que entran en servicio sus colectores.
+      </p>
+      <p class="mapa-pie">
+        <b>Islas Malvinas.</b> El mapa las dibuja como territorio argentino, siguiendo la
+        posición de la Argentina, donde la Fundación tiene su sede. <b>Se declara porque
+        ningún mapa es neutral en un territorio en disputa</b>: o lo dibuja de un lado, o
+        del otro, o lo omite —que también es una posición—. Lo que corresponde no es fingir
+        neutralidad, sino decir cuál se toma. La propia fuente de los contornos, Natural
+        Earth, clasifica el archipiélago como <b>territorio en disputa</b> y atribuye su
+        administración al Reino Unido; las Naciones Unidas lo tienen inscripto como
+        territorio no autónomo con una <b>disputa de soberanía pendiente de negociación</b>
+        entre ambos Estados. <b>Las cifras del registro no cambian por esto:</b> ninguna
+        fuente publica dato del archipiélago, de modo que se pinta con el color de la
+        Argentina pero no aporta ni altera ninguna medición.
       </p>
     </section>
 
@@ -1688,7 +1710,7 @@
     <section class="domain" id="informe" data-nivel="2">
       <div class="domain-head"><h3>Informe del registro</h3><span class="tag">Público, sin cuenta</span></div>
       <div class="barra-informe">
-        <select id="pais-informe" aria-label="País del informe"></select>
+        <span class="ambito-informe" id="ambito-informe">—</span>
         <div class="acciones">
           <button class="boton" id="btn-csv">Planilla de datos (CSV)</button>
           <button class="boton" id="btn-imprimir">Informe en PDF, con membrete</button>
@@ -2515,22 +2537,27 @@
       + 'tiene ejército desde 1949, figuraba entre los peores de la región.</p>';
   }
 
-  // Los mismos números, en dos renglones, para el mapa.
+  // La ficha del mapa es un RESUMEN DE DATOS: la cifra por eje, no el discurso.
+  // La advertencia de la capa ya vive debajo del mapa, donde hay lugar para
+  // leerla; repetirla acá tapaba las cifras, que es lo que se viene a ver.
   function ejesMini(iso){
     const r = resumenEjes(iso);
     if(!r) return '';
-    const chip = (rot, valor, gen) => valor === null || valor === undefined ? ''
-      : '<span class="' + (gen ? 'general' : '') + '">' + esc(rot) + ' <b>'
-        + cifra(Math.round(valor * 10) / 10) + '</b></span>';
-    // En el mapa se muestran solo los ejes orientados: una etiqueta de cuatro
-    // letras no tiene lugar para aclarar que Defensa es tamaño y no calidad, y
-    // una cifra sin esa aclaracion se lee como nota.
-    const trozos = [r.general ? chip('General', r.general.valor, true) : '']
-      .concat(r.ejes.filter(x => x.eje !== EJE_SIN_ORIENTAR)
-                    .map(x => chip(x.eje.slice(0, 4), x.valor, false)))
+    const fila = (rot, valor, ind, clase) => {
+      if(valor === null || valor === undefined) return '';
+      const p = puestoEnEje(iso, clase === 'general' ? null : rot);
+      return '<div class="eje-linea ' + clase + '"><span class="e">' + esc(rot) + '</span>'
+        + '<span class="v">' + cifra(Math.round(valor * 10) / 10) + '</span>'
+        + '<span class="p">' + (p ? p.puesto + '.º/' + p.de : '') + '</span></div>';
+    };
+    const filas = [r.general ? fila('Situación general', r.general.valor, r.general.indicadores, 'general') : '']
+      .concat(r.ejes.map(x => fila(x.eje, x.valor, x.indicadores,
+                                   x.eje === EJE_SIN_ORIENTAR ? 'magnitud' : '')))
       .filter(Boolean);
-    if(!trozos.length) return '';
-    return '<div class="ejes-mini">' + trozos.join('') + '</div>';
+    if(!filas.length) return '';
+    return '<div class="ejes-linea-caja">' + filas.join('')
+      + '<div class="eje-pie">0 el mejor de la región · 100 el peor'
+      + ' · <i>Defensa es tamaño, no calidad</i></div></div>';
   }
 
   function pintarFichaMapa(iso, nombre, bloque){
@@ -2574,9 +2601,8 @@
         <span class="nota">La serie de ${proys[0].pr.desdeAnio}–${proys[0].pr.hastaAnio} no describe una recta
         (R²&nbsp;${cifra(proys[0].pr.r2)}, por debajo de 0,5). Prolongarla daría una cifra sin sustento,
         así que <b>no se publica</b>.</span>`;
-    } else {
-      html += `<span class="nota">${esc(capa.cautela)}</span>`;
     }
+    // La cautela de la capa NO se repite acá: vive completa bajo el mapa.
     caja.innerHTML = html + mini;
   }
 
@@ -3490,6 +3516,8 @@
     paso('leyenda', leyenda);
     paso('panel de cruce', panelCruce);
     paso('resumen por eje', ejesVista);
+    paso('ámbito del informe', ecoDelAmbito);
+    paso('padrón de fuentes oficiales', oficialesVista);
     paso('índice de opacidad', opacidadVista);
     paso('las seis materias', materiasVista);
     paso('de la Fundación', fundacionVista);
@@ -3562,12 +3590,51 @@
     redesVista(); mensajeriaVista(); conflictosVista(); comercioVista(); ransomwareVista();
     pintarFuentes(); informe();
   }
+  function acercarA(iso){
+    if(!mapa || !capaPaises){ console.warn('[mapa] sin mapa o sin capa', !!mapa, !!capaPaises); return; }
+    try{
+      let objetivo = null;
+      capaPaises.eachLayer(c => {
+        if(c.feature && c.feature.properties && c.feature.properties.iso === iso) objetivo = c;
+      });
+      if(!objetivo){ console.warn('[mapa] no hay capa para', iso); return encuadrar(); }
+      const b = objetivo.getBounds && objetivo.getBounds();
+      // Un encuadre invalido no puede llevarse la pagina: si no sirve, no se usa.
+      if(b && b.isValid()) mapa.fitBounds(b, {padding:[46,46], maxZoom:6, animate:true, duration:.5});
+      else encuadrar();
+    }catch(error){ console.warn('[mapa] no se pudo acercar a '+iso+':', error); }
+  }
+
   function seleccionar(iso, nombre){
     if(paisFiltro===iso){ paisFiltro=null; paisNombre=null; } else { paisFiltro=iso; paisNombre=nombre; }
     bloqueFiltro = null;
     ambitoCobertura = paisFiltro ? 'pais' : 'todo';
+    // Elegir un pais lo acerca; soltarlo devuelve la region.
+    if(paisFiltro) acercarA(paisFiltro); else encuadrar();
     sincronizar(); repintar();
   }
+  // El desplegable y el clic en el mapa son dos caminos a lo mismo: los dos
+  // tienen que dejar el mapa igual, o el lector cree que hacen cosas distintas.
+  function encuadrarAmbito(){
+    if(paisFiltro){ acercarA(paisFiltro); return; }
+    // Una zona encuadra la zona entera, no un pais suelto de ella.
+    if(bloqueFiltro && mapa && capaPaises){
+      try{
+        let caja = null;
+        capaPaises.eachLayer(c => {
+          const q = c.feature && c.feature.properties;
+          if(q && q.bloque === bloqueFiltro && c.getBounds)
+            caja = caja ? caja.extend(c.getBounds()) : c.getBounds();
+        });
+        if(caja && caja.isValid()){
+          mapa.fitBounds(caja, {padding:[40,40], maxZoom:5, animate:true, duration:.5});
+          return;
+        }
+      }catch(error){ console.warn('[mapa] no se pudo encuadrar la zona:', error); }
+    }
+    encuadrar();
+  }
+
   function armarAmbito(){
     const sel=document.getElementById('ambito'); if(!sel || !padron.length) return;
     const bloques = [...new Set(padron.map(p=>p.bloque))].sort((a,b)=>a.localeCompare(b,'es'));
@@ -3592,16 +3659,25 @@
         // El ambito de las secciones de verificacion se deriva de esta unica
         // eleccion: antes habia dos controles que podian contradecirse.
         ambitoCobertura = paisFiltro ? 'pais' : (bloqueFiltro ? 'bloque' : 'todo');
+        // Elegir por el desplegable tiene que mover el mapa igual que elegir
+        // haciendo clic: si no, el lector cree que son dos cosas distintas.
+        encuadrarAmbito();
         sincronizar(); repintar();
       });
     }
     sel.value = paisFiltro ? 'p:'+paisFiltro : (bloqueFiltro ? 'b:'+bloqueFiltro : '');
   }
 
-  function sincronizar(){
-    armarAmbito();
-    const s=document.getElementById('pais-informe'); if(s) s.value = paisFiltro||'';
+  // Un solo control manda. Acá se dice qué ámbito rige y desde dónde cambiarlo.
+  function ecoDelAmbito(){
+    const eco = document.getElementById('ambito-informe');
+    if(!eco) return;
+    const donde = paisFiltro ? paisNombre : (bloqueFiltro || 'toda la región');
+    eco.innerHTML = 'Informe de <b>' + esc(donde) + '</b> · '
+      + '<a href="#mapa-seccion">cambiar el ámbito</a>';
   }
+
+  function sincronizar(){ armarAmbito(); ecoDelAmbito(); }
 
   const EXPLICA = {
     _wgi: q => `<b>Qué muestra:</b> la estimación de ${q} del Banco Mundial, en escala aproximada de -2,5 a 2,5. `+
@@ -4327,7 +4403,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     const d=almacen.telegram; if(!d) return;
     const r=d.resumen, nc=d.nube_conceptos;
     const tag=document.getElementById('tag-mensajeria');
-    if(tag) tag.textContent = `${r.canales_del_padron} canales · ${r.jurisdicciones_con_canal} jurisdicciones · ventana de ${r.ventana_horas} h`;
+    const zonaMens = bloqueActivo();
 
     // Nube, con el mismo ámbito que el resto del bloque de verificación.
     const bloqueDelPais = bloqueActivo();
@@ -4356,7 +4432,37 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
          Estados no tiene medios ni organismos con canal público verificable. <b>No es que no se hable de
          ellos: es que no hay canal propio que leer.</b></div>`;
 
-    const orden = d.registros.slice().sort((a,b)=>b.mensajes-a.mensajes);
+    // Un canal entra de dos maneras y NO son equivalentes: o responde a la
+    // jurisdicción elegida, o la menciona desde afuera. Confundirlas sería decir
+    // que un canal francés es una fuente hondureña; y «quién narra la región
+    // desde afuera» es justamente lo que esta sección declara querer observar.
+    const isosAmbito = paisFiltro ? [paisFiltro]
+      : (zonaMens ? padron.filter(x=>x.bloque===zonaMens).map(x=>x.iso) : null);
+    let canales = d.registros.map(c => ({...c, via:'padrón'}));
+    if(isosAmbito){
+      canales = d.registros.map(c => {
+        if(isosAmbito.includes(c.pais)) return {...c, via:'jurisdicción'};
+        if((c.estados_mencionados||[]).some(x => isosAmbito.includes(x.iso || x)))
+          return {...c, via:'lo menciona desde afuera'};
+        return null;
+      }).filter(Boolean);
+    }
+
+    if(tag) tag.textContent = (paisFiltro || zonaMens)
+      ? `${canales.length} de ${r.canales_del_padron} canales para ${esc(paisFiltro ? paisNombre : zonaMens)}`
+      : `${r.canales_del_padron} canales · ${r.jurisdicciones_con_canal} jurisdicciones · ventana de ${r.ventana_horas} h`;
+
+    if(!canales.length){
+      caja.innerHTML = `<div class="asunto"><h4>Ningún canal para este ámbito</h4>
+        <div class="foot"><span class="porque">Ni hay canal público verificado con jurisdicción en
+          <b>${esc(paisFiltro ? paisNombre : (zonaMens||'el ámbito'))}</b>, ni ninguno de los
+          ${r.canales_del_padron} del padrón lo mencionó en la ventana.
+          <b>No es que no se hable del Estado: es que no hay canal propio que leer.</b></span>
+        <span class="badge unica">sin canal</span></div></div>`;
+      return;
+    }
+
+    const orden = canales.slice().sort((a,b)=>b.mensajes-a.mensajes);
     caja.innerHTML = orden.map(c=>{
       const dormido = c.mensajes_visibles && !c.mensajes;
       const fecha = c.ultimo_mensaje ? c.ultimo_mensaje.slice(0,10) : null;
@@ -4366,19 +4472,72 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
             fecha?` · último ${fecha}`:' · sin mensajes con texto'}${
             c.responde_a?` · <b>${esc(c.responde_a)}</b>`:''}${
             c.tambien_en_prensa?' · <b>ya está en el padrón de prensa: no corrobora</b>':''}
-          · identidad por ${esc(c.identidad)}</span>
+          · identidad por ${esc(c.identidad)}${
+            c.via && c.via!=='padrón' ? ` · <b>${esc(c.via)}</b>` : ''}</span>
           <span class="badge ${c.mensajes?'medio':'unica'}">${dormido?'sin publicar':(c.mensajes?'activo':'sin texto')}</span></div>
         ${c.estados_mencionados.length?`<div class="lugares">${c.estados_mencionados.slice(0,6).map(x=>`<span class="lugar">${esc(x.pais)} ${x.menciones}</span>`).join('')}</div>`:''}
       </div>`;
     }).join('');
   }
 
+  // Estaba fuera del ciclo de repintado —se pintaba al cargar y nunca mas—, y
+  // por eso mostraba los siete portales con cualquier pais elegido.
+  function oficialesVista(){
+    const caja=document.getElementById('lista-oficiales'); if(!caja) return;
+    const d=almacen.oficiales; if(!d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const tag=document.getElementById('tag-oficiales');
+    if(tag) tag.textContent = (paisFiltro || zona)
+      ? `${lista.length} portal${lista.length===1?'':'es'} verificado${lista.length===1?'':'s'} en ${esc(paisFiltro?paisNombre:zona)}`
+      : `${d.resumen.estados_con_portal} de ${d.resumen.estados_del_padron} Estados · ${miles(d.resumen.conjuntos_hallados)} conjuntos indexados`;
+
+    if(!lista.length){
+      caja.innerHTML = `<div class="ficha-pais"><h4>Sin portal verificado</h4>
+        <div class="org">${esc(paisFiltro ? paisNombre : (zona||'El ámbito'))}</div>
+        <div class="muestra"><b>La Oficina no verificó un portal de datos abiertos con interfaz
+          de consulta en este ámbito.</b> No prueba que no exista: puede exigir registro, interponer
+          un obstáculo automático o publicar sin interfaz. Los ${d.resumen.estados_con_portal}
+          verificados están en la vista regional.</div></div>`;
+      return;
+    }
+    caja.innerHTML = lista.map(f=>{
+      const primera=f.materias.find(m=>m.ejemplos.length);
+      return `<div class="ficha-pais"><h4>${esc(f.pais)}</h4>
+        <div class="org">${esc(f.organismo)} · ${esc(f.tipo)} · <a href="${esc(f.portal)}" target="_blank" rel="noopener">${esc(f.portal.replace(/^https?:\/\//,''))}</a></div>
+        ${f.materias.map(m=>`<div class="materia-linea"><span>${esc(m.materia)}</span><span class="cuenta">${miles(m.cantidad)}</span></div>`).join('')}
+        ${primera?`<div class="muestra"><b>Por ejemplo:</b> ${esc(primera.ejemplos[0].titulo)}${primera.ejemplos[0].organismo?' — '+esc(primera.ejemplos[0].organismo):''}</div>`:''}</div>`;
+    }).join('');
+  }
+
   function fronterasVista(){
     const caja=document.getElementById('lista-fronteras'); if(!caja) return;
     const d=almacen.cobertura, f=d && d.fronteras; if(!f) return;
+    const zonaEleg = bloqueActivo();
+    let zonas = f.zonas;
+    if(paisFiltro) zonas = zonas.filter(z => (z.estados||[]).includes(paisFiltro));
+    else if(zonaEleg) zonas = zonas.filter(z => (z.estados||[]).some(i => {
+      const q = padron.find(x => x.iso === i); return q && q.bloque === zonaEleg;
+    }));
+
     const tag=document.getElementById('tag-fronteras');
-    if(tag) tag.textContent = `${f.con_mencion} de ${f.total} zonas con mención en la ventana`;
-    caja.innerHTML = f.zonas.map(z=>{
+    if(tag) tag.textContent = (paisFiltro || zonaEleg)
+      ? `${zonas.length} de ${f.total} zonas involucran a ${esc(paisFiltro ? paisNombre : zonaEleg)}`
+      : `${f.con_mencion} de ${f.total} zonas con mención en la ventana`;
+
+    // No tener zona no es lo mismo que no haber mirado, y se dice cuál es el caso.
+    if(!zonas.length){
+      caja.innerHTML = `<div class="asunto"><h4>Sin zona de frontera en este ámbito</h4>
+        <div class="foot"><span class="porque"><b>${esc(paisFiltro ? paisNombre : (zonaEleg||'El ámbito'))}</b>
+          no integra ninguna de las ${f.total} zonas del padrón de focos transfronterizos.
+          <b>No es un vacío de datos: la materia no aplica acá.</b></span>
+        <span class="badge unica">no aplica</span></div></div>`;
+      return;
+    }
+    caja.innerHTML = zonas.map(z=>{
       const estados = z.estados.map(i=>{
         const p=padron.find(x=>x.iso===i); return p?p.pais:i;
       }).join(' · ');
@@ -4820,20 +4979,12 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       padron = geo.features.map(f=>f.properties).sort((a,b)=>a.pais.localeCompare(b.pais,'es'));
       // Recien ahora se puede resolver un pais pedido por la direccion.
       leerDeLaDireccion();
-      const sel=document.getElementById('pais-informe');
-      sel.innerHTML='<option value="">— toda la región —</option>'+
-        padron.map(p=>`<option value="${p.iso}">${esc(p.pais)}</option>`).join('');
-      sel.addEventListener('change', ()=>{
-        paisFiltro=sel.value||null;
-        paisNombre=paisFiltro?padron.find(p=>p.iso===paisFiltro).pais:null;
-        repintar();
-      });
       // Vista inicial fija ANTES de cualquier ajuste automatico. Si el contenedor
       // todavia no tiene alto —tipografia que llega tarde, pestania en segundo
       // plano, ventana angosta—, calcular el encuadre da coordenadas invalidas,
       // Leaflet lanza «Invalid LatLng» y esa excepcion CORTA EL RESTO DEL GUION:
       // el mapa queda trabado y los desplegables vacios, sin decir por que.
-      mapa=L.map('mapa',{zoomControl:true,minZoom:2,worldCopyJump:false})
+      mapa=L.map('mapa',{zoomControl:true,minZoom:2,maxZoom:8,worldCopyJump:false})
              .setView([-15, -65], 3);
       mapa.attributionControl.setPrefix('');
       mapa.attributionControl.addAttribution('Límites: Natural Earth 1:50 m · dominio público');
@@ -4998,13 +5149,6 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       pintarProcedencia('proc-oficiales',meta);
       document.getElementById('tag-oficiales').textContent =
         r.estados_con_portal+' de '+r.estados_del_padron+' Estados · '+miles(r.conjuntos_hallados)+' conjuntos indexados';
-      document.getElementById('lista-oficiales').innerHTML = d.registros.map(f=>{
-        const primera=f.materias.find(m=>m.ejemplos.length);
-        return `<div class="ficha-pais"><h4>${esc(f.pais)}</h4>
-          <div class="org">${esc(f.organismo)} · ${esc(f.tipo)} · <a href="${esc(f.portal)}" target="_blank" rel="noopener">${esc(f.portal.replace(/^https?:\/\//,''))}</a></div>
-          ${f.materias.map(m=>`<div class="materia-linea"><span>${esc(m.materia)}</span><span class="cuenta">${miles(m.cantidad)}</span></div>`).join('')}
-          ${primera?`<div class="muestra"><b>Por ejemplo:</b> ${esc(primera.ejemplos[0].titulo)}${primera.ejemplos[0].organismo?' — '+esc(primera.ejemplos[0].organismo):''}</div>`:''}</div>`;
-      }).join('');
       vacios+=pintarVacios('vac-oficiales',meta.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-oficiales','fuentes oficiales',estado.mensaje,meta); }
       repintar(); marcador();
