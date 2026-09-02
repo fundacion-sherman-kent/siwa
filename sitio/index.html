@@ -861,6 +861,8 @@
   a:hover{color:#ff8a3d;}
   .ambito-informe{font-size:12px;color:#9fb0c4;}
   .ambito-informe b{color:#fff;}
+  .falla.leve{border-left-color:#9fb0c4;background:rgba(125,144,168,.07);}
+  .falla.leve h4{color:#C7D2E0;}
   .membrete{display:none;}
   .colofon{display:none;}
 
@@ -1835,7 +1837,7 @@
   let bloqueFiltro = null;
   const bloqueDe = iso => (padron.find(x=>x.iso===iso)||{}).bloque || null;
   const bloqueActivo = () => bloqueFiltro || (paisFiltro ? bloqueDe(paisFiltro) : null);
-  let registros = 0, vacios = 0, fallas = 0, dominios = 0;
+  let registros = 0, vacios = 0, fallas = 0, dominios = 0, noLlego = 0;
 
   const miles = n => Number(n).toLocaleString('es-AR');
   const momento = iso => iso ? new Date(iso).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}) : '—';
@@ -1847,7 +1849,11 @@
   }
   reloj(); setInterval(reloj, 30000);
 
-  const traer = a => fetch(RUTA+a).then(r => {
+  // «no-cache» NO es «no-store»: pide igual, pero PREGUNTANDO si cambió. Sin
+  // esto el navegador servía el archivo guardado hasta diez minutos —es lo que
+  // dice GitHub Pages en su cabecera—, y este registro se actualiza cada hora:
+  // el lector podía estar viendo dato viejo mientras la página decía «al día».
+  const traer = a => fetch(RUTA+a, {cache:'no-cache'}).then(r => {
     if(!r.ok) throw new Error('No se pudo leer '+a+' (HTTP '+r.status+')');
     return r.json();
   });
@@ -1908,12 +1914,32 @@
       `<div class="falla"><h4>El colector «${esc(colector)}» no pudo completar la última corrida</h4>`+
       `<p>${esc(error)}<br>${viejo} No se muestran datos simulados ni estimados.</p></div>`;
   }
+  // NO ES LO MISMO que el colector haya fallado a que el archivo no haya llegado.
+  // Lo primero lo sabemos: el colector deja su parte escrito. Lo segundo puede ser
+  // la red del lector, una recoleccion a mitad de camino o un corte de un minuto,
+  // y decir «el colector no pudo completar la corrida» cuando en realidad no
+  // pudimos traer el archivo ES AFIRMAR ALGO QUE NO SABEMOS. Se separan.
+  function pintarNoLlego(destino, colector, error){
+    const caja = document.getElementById(destino);
+    if(!caja) return;
+    caja.innerHTML =
+      `<div class="falla leve"><h4>No se pudo traer «${esc(colector)}»</h4>`+
+      `<p>El navegador no pudo descargar este archivo de datos (${esc(error)}). `+
+      `<b>No significa que la fuente haya fallado</b>: puede ser la conexión, o una `+
+      `recolección en curso. Volvé a cargar la página en un minuto. `+
+      `<b>No se muestran datos simulados ni estimados.</b></p></div>`;
+  }
+
   function marcador(){
     document.getElementById('m-dominios').textContent = dominios;
     document.getElementById('m-registros').textContent = miles(registros);
     document.getElementById('m-vacios').textContent = vacios;
-    document.getElementById('estado-general').innerHTML = fallas
-      ? `<span class="status-dot mal"></span>${fallas} colector(es) con falla declarada`
+    // Se dicen por separado, y con el verbo que corresponde a cada uno.
+    const partes = [];
+    if(fallas) partes.push(`${fallas} colector${fallas===1?'':'es'} con falla declarada`);
+    if(noLlego) partes.push(`${noLlego} archivo${noLlego===1?'':'s'} que no llegó al navegador`);
+    document.getElementById('estado-general').innerHTML = partes.length
+      ? `<span class="status-dot mal"></span>${partes.join(' · ')}`
       : `<span class="status-dot"></span>Todos los colectores al día`;
   }
 
@@ -5032,7 +5058,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       // Pintar solo la cobertura los dejaba colgados en «Cargando el registro».
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('lista-cobertura','cobertura',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-cobertura','cobertura',err.message);
       document.getElementById('proc-cobertura').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('ransomware.json'), traer('estado/ransomware.json').catch(()=>null)])
@@ -5044,7 +5070,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-ransomware','extorsión informática',estado.mensaje,meta); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('tarj-ransomware','extorsión informática',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-ransomware','extorsión informática',err.message);
       document.getElementById('proc-ransomware').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('comercio.json'), traer('estado/comercio.json').catch(()=>null)])
@@ -5056,7 +5082,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-comercio','comercio',estado.mensaje,meta); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('lista-comercio','comercio',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-comercio','comercio',err.message);
       document.getElementById('proc-comercio').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('conflictos.json'), traer('estado/conflictos.json').catch(()=>null)])
@@ -5068,7 +5094,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-conflictos','conflictos',estado.mensaje,meta); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('lista-conflictos','conflictos',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-conflictos','conflictos',err.message);
       document.getElementById('proc-conflictos').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('telegram.json'), traer('estado/telegram.json').catch(()=>null)])
@@ -5080,7 +5106,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-mensajeria','mensajería',estado.mensaje,meta); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('lista-mensajeria','mensajería',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-mensajeria','mensajería',err.message);
       document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('opacidad.json'), traer('estado/opacidad.json').catch(()=>null)])
@@ -5091,7 +5117,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-opacidad','índice de opacidad',estado.mensaje,meta); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('lista-opacidad','índice de opacidad',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-opacidad','índice de opacidad',err.message);
       document.getElementById('proc-opacidad').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('fundacion.json'), traer('estado/fundacion.json').catch(()=>null)])
@@ -5102,7 +5128,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-fundacion','informes de la Fundación',estado.mensaje,meta); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('lista-fundacion','informes de la Fundación',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-fundacion','informes de la Fundación',err.message);
       document.getElementById('proc-fundacion').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('bti.json'), traer('estado/bti.json').catch(()=>null)])
@@ -5114,7 +5140,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-control','índice Bertelsmann',estado.mensaje,d.procedencia); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('tarj-control','índice Bertelsmann',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-control','índice Bertelsmann',err.message);
       document.getElementById('proc-control').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('owd.json'), traer('estado/owd.json').catch(()=>null)])
@@ -5128,7 +5154,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-democracia','V-Dem y UCDP',estado.mensaje,d.procedencia); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('tarj-democracia','V-Dem y UCDP',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-democracia','V-Dem y UCDP',err.message);
       document.getElementById('proc-democracia').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('redes.json'), traer('estado/redes.json').catch(()=>null)])
@@ -5140,7 +5166,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-redes','redes',estado.mensaje,meta); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('tarj-redes','redes',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-redes','redes',err.message);
       document.getElementById('proc-redes').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('oficiales.json'), traer('estado/oficiales.json').catch(()=>null)])
@@ -5153,7 +5179,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-oficiales','fuentes oficiales',estado.mensaje,meta); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('lista-oficiales','fuentes oficiales',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-oficiales','fuentes oficiales',err.message);
       document.getElementById('proc-oficiales').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('onu-ods.json'), traer('estado/onu-ods.json').catch(()=>null)])
@@ -5165,7 +5191,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-trata','ONU ODS',estado.mensaje,d.procedencia); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('tarj-trata','ONU ODS',err.message,null); marcador(); });
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-trata','ONU ODS',err.message); marcador(); });
 
   Promise.all([traer('banco-mundial.json'), traer('estado/banco-mundial.json').catch(()=>null)])
     .then(([d,estado])=>{
@@ -5181,7 +5207,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-violencia','banco mundial',estado.mensaje,d.procedencia); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('tarj-violencia','banco mundial',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-violencia','banco mundial',err.message);
       document.getElementById('proc-violencia').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('desplazamiento.json'), traer('estado/desplazamiento.json').catch(()=>null), traer('desplazamiento-serie.json').catch(()=>null)])
@@ -5193,7 +5219,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-desplazamiento','desplazamiento',estado.mensaje,d.procedencia); }
       repintar(); marcador();
     })
-    .catch(err=>{ fallas++; pintarFalla('tarj-desplazamiento','desplazamiento',err.message,null);
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-desplazamiento','desplazamiento',err.message);
       document.getElementById('proc-desplazamiento').textContent='Sin registro disponible.'; marcador(); });
 })();
 </script>
