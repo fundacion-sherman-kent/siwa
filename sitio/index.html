@@ -1053,6 +1053,7 @@
     <div><strong id="m-dominios">1</strong><span>Dominios con dato</span></div>
     <div><strong id="m-registros">—</strong><span>Registros vigentes</span></div>
     <div><strong id="m-vacios">—</strong><span>Vacíos declarados</span></div>
+    <div><strong id="m-edad">—</strong><span>Antigüedad mediana</span></div>
     <div><strong>33</strong><span>Estados del padrón</span></div>
   </div>
 </div>
@@ -1925,10 +1926,42 @@
       `<b>No se muestran datos simulados ni estimados.</b></p></div>`);
   }
 
+  // El rezago NO ES DEL REGISTRO: es de cada productor. Las encuestas llegan con
+  // siete a diez años, la evaluacion experta con uno. Publicarlo de conjunto es
+  // la unica forma de que el lector sepa que esta mirando, y de que la Oficina
+  // sepa donde buscar una fuente mas rapida.
+  function edadDelRegistro(){
+    const anios = [];
+    fuentesInd().forEach(f => (f.indicadores||[]).forEach(i => {
+      const suyos = (f.registros||[]).map(r => (r.indicadores||{})[i.clave])
+        .filter(x => x && x.anio).map(x => x.anio);
+      if(suyos.length) anios.push(ANIO_HOY - Math.max(...suyos));
+    }));
+    if(!anios.length) return null;
+    const o = anios.slice().sort((a,b)=>a-b);
+    const mediana = o.length % 2 ? o[(o.length-1)/2]
+                                 : (o[o.length/2-1] + o[o.length/2]) / 2;
+    return {
+      total: anios.length,
+      mediana,
+      alDia: anios.filter(a => a <= 1).length,
+      viejos: anios.filter(a => a >= 3).length,
+      muyViejos: anios.filter(a => a >= 5).length,
+    };
+  }
+
   function marcador(){
     document.getElementById('m-dominios').textContent = dominios;
     document.getElementById('m-registros').textContent = miles(registros);
     document.getElementById('m-vacios').textContent = vacios;
+    const ed = edadDelRegistro();
+    const cajaEdad = document.getElementById('m-edad');
+    if(cajaEdad && ed){
+      cajaEdad.textContent = ed.mediana + (ed.mediana === 1 ? ' año' : ' años');
+      cajaEdad.title = `${ed.alDia} indicadores del último año · ${ed.viejos} de tres años o más`
+                     + ` · ${ed.muyViejos} de cinco o más. El rezago es de cada productor, no del registro.`;
+      cajaEdad.className = ed.mediana >= 3 ? 'mal' : '';
+    }
     // Se dicen por separado, y con el verbo que corresponde a cada uno.
     const partes = [];
     if(fallas) partes.push(`${fallas} colector${fallas===1?'':'es'} con falla declarada`);
@@ -2566,6 +2599,11 @@
       const ordenadas = filas.slice().sort((a,b)=>
         meta.mas_es_peor ? a.valor - b.valor : b.valor - a.valor);
       const mediana = medianaDe(filas.map(f=>f.valor));
+      // Los Estados no publican todos el mismo año: se declara el mas reciente
+      // que entro en la mediana, y ademas cuantos anios tiene.
+      const anios = filas.map(f=>f.anio).filter(Boolean);
+      const anioUlt = anios.length ? Math.max(...anios) : null;
+      const ed = edad(anioUlt);
       const mag = magnitud(mediana, meta.unidad);
       const bien = ordenadas[0], mal = ordenadas[ordenadas.length-1];
       const cifraDe = f => magnitud(f.valor, meta.unidad).texto;
@@ -2575,7 +2613,10 @@
         + '<div class="valor">' + esc(mag.texto) + '</div>'
         + '<div class="unidad-eje">' + esc(mag.unidad || meta.unidad) + '</div>'
         + '<div class="puesto">mediana de <b>' + esc(meta.rotulo.toLowerCase()) + '</b>'
-        + ' · ' + filas.length + ' de 33 Estados</div>'
+        + ' · ' + filas.length + ' de 33 Estados'
+        + (anioUlt ? '<br>dato de ' + anioUlt
+            + (ed ? ' <span class="edad ' + ed.clase + '">' + esc(ed.texto) + '</span>' : '') : '')
+        + '</div>'
         + '<div class="extremos">'
         + '<span class="' + (sinOrientar ? '' : 'mejor') + '"><i>' + (sinOrientar ? 'más alto' : 'mejor') + '</i> '
         + '<b>' + esc(nom(bien.iso)) + '</b> ' + esc(cifraDe(bien)) + '</span>'
@@ -3962,9 +4003,9 @@
     if(!anio) return null;
     const a = ANIO_HOY - anio;
     if(a <= 1) return {anios:a, clase:'fresco', texto:a===0?'de este año':'del año pasado'};
-    if(a <= 3) return {anios:a, clase:'reciente', texto:`hace ${a} años`};
-    if(a <= 6) return {anios:a, clase:'viejo', texto:`hace ${a} años`};
-    return {anios:a, clase:'muy-viejo', texto:`hace ${a} años`};
+    if(a === 2) return {anios:a, clase:'reciente', texto:'hace 2 años'};
+    if(a <= 4) return {anios:a, clase:'viejo', texto:`hace ${a} años`};
+    return {anios:a, clase:'muy-viejo', texto:`hace ${a} años · revisar si sigue sirviendo`};
   }
 
   function tarjeta(f, info, nombre, meta){
