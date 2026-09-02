@@ -185,7 +185,7 @@ SERIES = [
                 "cobertura no es pareja."},
     {"clave": "medios_corruptos", "slug": "media-corruption-score",
      "columna": "v2mecorrpt__estimate_best",
-     "rotulo": "Ausencia de corrupcion en los medios", "eje": "Gobernanza",
+     "rotulo": "Ausencia de corrupción en los medios", "eje": "Gobernanza",
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Cuanto MAS ALTO, menos frecuente que los medios reciban pagos para "

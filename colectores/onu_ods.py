@@ -73,7 +73,7 @@ SERIES = [
      "cautela": "Personas presas sin sentencia firme. Mide congestion judicial y uso de "
                 "la prision preventiva, no criminalidad."},
     {"clave": "acceso_informacion", "codigo": "SG_INF_ACCSS", "eje": "Gobernanza",
-     "rotulo": "Garantias de acceso a la informacion", "unidad": "puntaje de 0 a 100",
+     "rotulo": "Garantías de acceso a la información", "unidad": "puntaje de 0 a 100",
      "mas_es_peor": False, "origen": "UNESCO, via la base global de los ODS",
      "cautela": "Mide la existencia de garantias legales e institucionales, NO su "
                 "cumplimiento efectivo. Un Estado puede tener buena ley y no aplicarla."},

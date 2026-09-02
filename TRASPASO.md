@@ -25,7 +25,7 @@ lo señala.
 
 Un **registro público, libre y gratuito de la situación de América Latina y el
 Caribe**: 71 indicadores sobre los 33 Estados del padrón, recolectados de forma
-automática de trece fuentes y calificados con doctrina de inteligencia.
+automática de quince fuentes y calificados con doctrina de inteligencia.
 
 Tres cosas lo definen, y las tres son decisiones tomadas, no accidentes:
 
@@ -91,7 +91,7 @@ Vas a asistir en el mantenimiento de SIWA, el registro público de situación de
 América Latina y el Caribe de la Fundación Sherman Kent.
 
 QUÉ ES
-Una página HTML y trece colectores en Python que publican 71 indicadores sobre
+Una página HTML y quince colectores en Python que publican 71 indicadores sobre
 33 Estados, calificados con doctrina de inteligencia. Repositorio público:
 https://github.com/fundacion-sherman-kent/siwa
 Sitio: https://fundacion-sherman-kent.github.io/siwa/sitio/index.html
@@ -240,7 +240,7 @@ sube, y queda publicada. Adentro, tres mecanismos vale la pena conocer:
 
 ---
 
-## 5. Las trece fuentes
+## 5. Las quince fuentes
 
 | Colector | Fuente | Nota | Qué aporta |
 |---|---|---|---|

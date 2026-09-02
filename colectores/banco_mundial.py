@@ -108,7 +108,7 @@ INDICADORES = [
      "cautela": "Efectivos declarados. No incluye fuerzas de seguridad interior ni "
                 "policiales, que en varios Estados del padron son el grueso del despliegue."},
     {"clave": "voz_rendicion", "codigo": "GOV_WGI_VA.EST", "fuente_id": 3,
-     "rotulo": "Voz y rendicion de cuentas", "eje": "Gobernanza",
+     "rotulo": "Voz y rendición de cuentas", "eje": "Gobernanza",
      "unidad": "estimación de -2,5 a 2,5", "mas_es_peor": False,
      "origen": "Worldwide Governance Indicators, Banco Mundial",
      "cautela": "Estimacion de percepcion sobre libertad de expresion, asociacion y "

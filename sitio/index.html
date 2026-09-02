@@ -20,7 +20,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 71 indicadores, 13 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:description" content="33 Estados, 71 indicadores, 15 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 71 indicadores, 13 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:description" content="33 Estados, 71 indicadores, 15 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
@@ -44,7 +44,7 @@
       "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 71 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de trece fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 71 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de quince fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1896,6 +1896,23 @@
   }
   // Los vacíos ya no se pintan junto al dato: van todos al pie, y cada materia
   // enlaza hasta allá. Puestos al lado de la cifra, la tapaban.
+  // UNA SOLA LISTA DE FUENTES, y es esta: la que el lector puede contar con el
+  // dedo en «De donde sale y que falta». Contar las claves del almacen daba uno
+  // mas, porque incluye archivos auxiliares —la serie historica de ACNUR— que
+  // no son una fuente distinta.
+  const FUENTES_DEL_REGISTRO = [['banco','Banco Mundial'],['ods','Naciones Unidas — ODS'],
+                     ['desplazamiento','ACNUR'],['oficiales','Padrón oficial'],
+                     ['owd','V-Dem, Terrorismo y UCDP'],
+                     ['cobertura','Cobertura noticiosa'],['redes','Circulación en redes'],
+                     ['telegram','Canales de mensajería'],
+                     ['conflictos','Conflictos territoriales'],
+                     ['comercio','Comercio · brecha espejo'],
+                     ['ransomware','Extorsión informática'],
+                     ['bti','Índice Bertelsmann'],
+                     ['fundacion','Informes de la Fundación'],
+                     ['opacidad','Índice de Opacidad'],
+                     ['reciente','Publicación oficial reciente']];
+
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
     const conjuntos=[['banco','Banco Mundial'],['ods','Naciones Unidas — ODS'],
@@ -3072,7 +3089,7 @@
   const PIE_NIVEL = {
     1: 'Estás viendo <b>lo esencial de un país</b>: qué cambió y cuánto. Cada cifra trae quién la produce y qué es lo que <b>no</b> dice.',
     2: 'Sumás <b>lo que se está publicando ahora</b> —qué cubre la prensa de la región, con cuántos orígenes independientes— y el informe descargable para citar.',
-    3: 'Sumás <b>los {IND} indicadores</b> de las trece fuentes con el mapa y los cruces entre temas, y además <b>el método</b>: de dónde sale cada dato, cómo se lo califica, qué vacíos se declaran y qué fuentes oficiales existen en cada Estado.',
+    3: 'Sumás <b>los {IND} indicadores</b> de las {FUE} fuentes con el mapa y los cruces entre temas, y además <b>el método</b>: de dónde sale cada dato, cómo se lo califica, qué vacíos se declaran y qué fuentes oficiales existen en cada Estado.',
   };
 
   // --- Enlaces que se pueden compartir -----------------------------------
@@ -3206,8 +3223,13 @@
     // vieja cada vez que entraba una serie nueva, y era de las primeras cosas
     // que leia el visitante.
     const cuantos = fuentesInd().reduce((a,f)=>a+(f.indicadores||[]).length, 0);
+    // La cantidad de FUENTES tambien se cuenta: escrita a mano decia trece
+    // cuando ya eran quince, y esa cifra viajaba hasta la descripcion social.
+    const cuantasFuentes = FUENTES_DEL_REGISTRO.filter(([k]) => almacen[k]).length;
     const pie = document.getElementById('niveles-pie');
-    if(pie) pie.innerHTML = (PIE_NIVEL[nivel] || '').replace('{IND}', cuantos || '');
+    if(pie) pie.innerHTML = (PIE_NIVEL[nivel] || '')
+      .replace('{IND}', cuantos || '')
+      .replace('{FUE}', cuantasFuentes || '');
     const rotAnalista = document.getElementById('rot-analista');
     if(rotAnalista && cuantos)
       rotAnalista.textContent = 'Los ' + cuantos + ' indicadores, el método y los vacíos';
@@ -3809,6 +3831,7 @@
     paso('panel de cruce', panelCruce);
     paso('resumen por eje', ejesVista);
     paso('lo de hoy', hoyVista);
+    paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
     paso('publicación oficial reciente', recienteVista);
     paso('padrón de fuentes oficiales', oficialesVista);

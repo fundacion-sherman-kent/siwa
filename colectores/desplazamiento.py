@@ -28,7 +28,7 @@ import geo
 
 FUENTE = "ACNUR — Refugee Data Finder"
 BASE = "https://api.unhcr.org/population/v1/population/"
-URL_PUBLICA = "https://www.unhcr.org/refugee-statistics/"
+URL_PUBLICA = "https://data.unhcr.org/"
 
 VENTANA = 10
 DESDE = datetime.now(timezone.utc).year - VENTANA
