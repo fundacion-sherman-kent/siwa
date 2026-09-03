@@ -20,7 +20,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 19 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:description" content="33 Estados, 69 indicadores, 20 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 19 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 20 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
@@ -44,7 +44,7 @@
       "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 19 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 20 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1648,6 +1648,22 @@
     <section class="domain bloque" id="que-se-publica" data-nivel="2">
       <div class="bloque-head"><h3>Qué se publica hoy</h3></div>
       <p class="bloque-bajada">Qué se está diciendo sobre la región en este momento, y en cuántos orígenes independientes. <b>No es una materia del registro:</b> es el segundo factor de veracidad con el que se contrastan las materias.</p>
+    <div class="categoria" id="copernicus" data-nivel="2">
+      <div class="categoria-head"><h4>Qué se puede mirar desde arriba</h4><span class="tag" id="tag-copernicus">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>El registro no mira la imagen: dice que existe, de cuándo es y dónde está.</b>
+           Minería ilegal, deforestación, puertos y pasos fronterizos son cuatro materias
+           sin serie comparable; lo que sí hay es imagen satelital libre y reciente.</p>
+        <p><b>El recuento de escenas no se compara entre Estados</b> —depende del tamaño
+           del territorio y de por dónde pasa el satélite: Brasil tiene más que Granada por
+           geometría—. <b>Lo comparable es la frescura</b>: cuántos días hace de la última.
+           Y <b>una imagen no acredita un hecho</b>: prueba que había algo el día que pasó
+           el satélite, no qué era ni de quién.</p>
+      </div>
+      <div class="procedencia" id="proc-copernicus">Cargando el registro…</div>
+      <div class="cruce" id="lista-copernicus"></div>
+      <div id="vac-copernicus"></div>
+        </div>
     <div class="categoria" id="consulta" data-nivel="2">
       <div class="categoria-head"><h4>Ir a la fuente primaria</h4><span class="tag" id="tag-consulta">—</span></div>
       <div class="aviso-cobertura">
@@ -2017,7 +2033,8 @@
                      ['consulta','Consulta dirigida'],
                      ['contratacion','Contrataciones abiertas'],
                      ['ciber','Medición de red — OONI, IODA y FIRST'],
-                     ['archivo','Archivo de la web — lo retirado']];
+                     ['archivo','Archivo de la web — lo retirado'],
+                     ['copernicus','Copernicus — imagen satelital']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -2129,13 +2146,16 @@
   // Las materias del Banco Mundial salen del propio archivo de datos: agregar un
   // indicador al colector lo hace aparecer acá sin tocar la página.
   const ESTATICAS = [
-    {clave:'violencia_eventos', eje:'Seguridad',  rotulo:'Violencia organizada · eventos', disponible:()=>false},
-    {clave:'ilicitas',          eje:'Seguridad',  rotulo:'Economías ilícitas',   disponible:()=>false},
+    // `sinCapa` dice POR QUE no hay capa de mapa, y no son la misma razón:
+    // «falta» es que no hay fuente; «no comparable» es que SÍ hay colector y
+    // pintar un mapa con esa cifra ordenaría Estados por algo que no los ordena.
+    {clave:'violencia_eventos', eje:'Seguridad',  rotulo:'Violencia organizada · eventos', disponible:()=>false, sinCapa:'falta'},
+    {clave:'ilicitas',          eje:'Seguridad',  rotulo:'Economías ilícitas',   disponible:()=>false, sinCapa:'falta'},
     {clave:'desplazamiento',    eje:'Seguridad',  rotulo:'Desplazamiento forzado', disponible:()=>!!almacen.desplazamiento},
-    {clave:'contrabando',       eje:'Seguridad',  rotulo:'Contrabando',          disponible:()=>false},
-    {clave:'ciber',             eje:'Seguridad',  rotulo:'Ciberseguridad',       disponible:()=>false},
-    {clave:'contratacion',      eje:'Gobernanza', rotulo:'Contratación pública', disponible:()=>false},
-    {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false},
+    {clave:'contrabando',       eje:'Seguridad',  rotulo:'Contrabando',          disponible:()=>false, sinCapa:'falta'},
+    {clave:'ciber',             eje:'Seguridad',  rotulo:'Ciberseguridad',       disponible:()=>false, sinCapa:'no_comparable'},
+    {clave:'contratacion',      eje:'Gobernanza', rotulo:'Contratación pública', disponible:()=>false, sinCapa:'no_comparable'},
+    {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false, sinCapa:'falta'},
     {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales},
   ];
   const ORDEN_EJES = ['Situación','Seguridad','Defensa','Gobernanza','Desarrollo','Fuentes'];
@@ -2386,11 +2406,78 @@
     return compuestoGuardado;
   }
 
+  let proyectadoGuardado = {}, selloProyectado = '';
+  function compuestoProyectado(n){
+    const sello = selloDeDatos() + '|' + n;
+    if(selloProyectado === sello && proyectadoGuardado[n]) return proyectadoGuardado[n];
+    if(selloProyectado !== sello){ proyectadoGuardado = {}; selloProyectado = sello; }
+
+    // Mismas reglas que el compuesto de hoy, con UNA condicion mas: el Estado
+    // entra al indicador solo si SU PROPIA SERIE se deja ajustar. Un indicador
+    // que no se puede prolongar no aporta un valor inventado: no aporta nada.
+    const porEje = {}, aportan = {};
+    EJES_DEL_RESUMEN.forEach(e => { porEje[e] = {}; aportan[e] = new Set(); });
+
+    fuentesInd().forEach(f => (f.indicadores||[]).forEach(i => {
+      if(!EJES_DEL_RESUMEN.includes(i.eje)) return;
+      const filas = [];
+      (padron||[]).forEach(pa => {
+        const d = datoDe(i.clave, pa.iso);
+        if(!d || !d.serie || d.serie.length < 4) return;
+        const pr = proyectar(d.serie.map(a => ({anio:a.anio, valor:a.valor})), n);
+        if(pr && pr.ajusta && isFinite(pr.valor)) filas.push({iso: pa.iso, valor: pr.valor});
+      });
+      // El mismo minimo que rige el orden de hoy: con menos de ocho Estados el
+      // percentil no dice nada.
+      if(filas.length < 8) return;
+      aportan[i.eje].add(i.clave);
+      const orden = filas.slice().sort((a,b) =>
+        i.mas_es_peor ? a.valor - b.valor : b.valor - a.valor);
+      orden.forEach((fila, k) => {
+        const pct = orden.length > 1 ? (k / (orden.length - 1)) * 100 : 50;
+        (porEje[i.eje][fila.iso] = porEje[i.eje][fila.iso] || []).push(pct);
+      });
+    }));
+
+    const ejes = {}, general = {};
+    EJES_DEL_RESUMEN.forEach(e => {
+      ejes[e] = {};
+      Object.entries(porEje[e]).forEach(([iso, lista]) => {
+        if(lista.length < MINIMO_POR_EJE) return;
+        ejes[e][iso] = {valor: lista.reduce((a,b)=>a+b,0) / lista.length,
+                        indicadores: lista.length};
+      });
+    });
+    (padron||[]).forEach(pa => {
+      const suyos = EJES_COMPUESTOS.filter(e => ejes[e][pa.iso]);
+      if(suyos.length < 2) return;
+      general[pa.iso] = {
+        valor: suyos.reduce((a,e)=>a + ejes[e][pa.iso].valor, 0) / suyos.length,
+        ejes: suyos.length,
+        indicadores: suyos.reduce((a,e)=>a + ejes[e][pa.iso].indicadores, 0),
+      };
+    });
+
+    const total = EJES_COMPUESTOS.reduce((a,e)=>a + aportan[e].size, 0);
+    proyectadoGuardado[n] = {ejes, general, indicadoresQueSostienen: total,
+                             anio: ANIO_HOY + n, horizonte: n};
+    return proyectadoGuardado[n];
+  }
+
   function capaCompuesta(clave, eje){
     const rotulo = eje ? `Situación · ${eje}` : 'Situación general';
     const datos = () => eje ? compuesto().ejes[eje] : compuesto().general;
     return {
       materia: clave, divergente: false, ceroAparte: false, compuesta: true,
+      // Un compuesto no tiene serie propia, de modo que no puede tener
+      // `serieDe`. Lo que ofrece es el compuesto REARMADO en el horizonte.
+      proyectados(n){
+        const c = compuestoProyectado(n);
+        const datos = eje ? c.ejes[eje] : c.general;
+        const m = {};
+        Object.entries(datos || {}).forEach(([iso, x]) => m[iso] = x.valor);
+        return {valores: m, indicadores: c.indicadoresQueSostienen, anio: c.anio};
+      },
       // Al promediar percentiles los extremos se acercan al centro: nadie llega
       // a 0 ni a 100. Con cortes fijos en 25/50/75 quedaba todo el continente en
       // dos baldes. Los cortes salen de la distribucion real del compuesto.
@@ -2609,7 +2696,12 @@
     const clave = capaActiva + '|' + modo + '|' + selloDeDatos();
     if(valoresGuardados && claveValores === clave) return valoresGuardados;
     let m;
-    if(modo === 'nivel' || !hayTendencia()) m = capaActual().conteo();
+    const capaP = capaActual();
+    if(modo !== 'nivel' && typeof capaP.proyectados === 'function'){
+      // El compuesto se rearma en el horizonte con sus propios indicadores.
+      m = capaP.proyectados(anios()).valores;
+    }
+    else if(modo === 'nivel' || !hayTendencia()) m = capaP.conteo();
     else {
       m = {};
       const n = anios();
@@ -2623,7 +2715,15 @@
   }
 
   const sinAjuste = iso => {
-    if(modo === 'nivel' || !hayTendencia()) return false;
+    if(modo === 'nivel') return false;
+    // En el compuesto el Estado queda afuera cuando NO PUDO PROLONGARSE, y eso
+    // hay que pintarlo distinto: hasta hoy caia en el mismo tono que el mejor
+    // cuartil, de modo que «va a mejorar» y «no se pudo calcular» se veian
+    // exactamente igual. La leyenda ya prometia un color y el mapa no lo usaba.
+    const capa = capaActual();
+    if(typeof capa.proyectados === 'function')
+      return !(anios() && capa.proyectados(anios()).valores[iso] !== undefined);
+    if(!hayTendencia()) return false;
     const pr = proyeccionDe(iso, anios());
     return !pr || !pr.ajusta;
   };
@@ -3085,6 +3185,12 @@
       return;
     }
     const capa = capaActual(), nivel = capa.conteo()[iso];
+    // Con el mapa en modo proyección, la ficha mostraba el NIVEL ACTUAL: el
+    // lector veía 44,4 creyendo que era la cifra del horizonte. Si la capa se
+    // proyecta, la ficha declara las dos, y dice de qué año es cada una.
+    const proyCompuesta = (modo !== 'nivel' && typeof capa.proyectados === 'function')
+      ? capa.proyectados(anios()) : null;
+    const valorProyectado = proyCompuesta ? proyCompuesta.valores[iso] : undefined;
     const proys = [1,2,4].map(n=>({n, pr:proyeccionDe(iso, n)})).filter(x=>x.pr);
     // El resumen por eje se muestra IGUAL sin dato en la capa elegida: que
     // Uruguay no tenga cifra de terrorismo no quita que tenga situacion general.
@@ -3099,7 +3205,18 @@
     const p = posicion(iso);
     const ajusta = proys.length && proys[0].pr.ajusta;
     let html = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>` +
-      (nivel!==undefined ? `<span class="cifra">${cifra(nivel)}</span>
+      (proyCompuesta
+        ? (valorProyectado !== undefined
+            ? `<span class="cifra">${cifra(Math.round(valorProyectado*10)/10)}</span>`
+              + `<div class="bloque">proyectado a ${proyCompuesta.anio}`
+              + (nivel!==undefined ? ` · hoy ${cifra(Math.round(nivel*10)/10)}` : '')
+              + `</div>`
+            : `<span class="vacia">Su serie <b>no se deja prolongar</b>: no se le `
+              + `inventa una cifra para ${proyCompuesta.anio}.`
+              + (nivel!==undefined ? ` Hoy está en ${cifra(Math.round(nivel*10)/10)}.` : '')
+              + `</span>`)
+        : '') +
+      (!proyCompuesta && nivel!==undefined ? `<span class="cifra">${cifra(nivel)}</span>
         <span class="unidad">${esc(capa.unidad)}${proys.length?` · último dato, ${proys[0].pr.hastaAnio}`:''}${
           p&&modo==='nivel'?` · ${p.puesto}.º de ${p.de}`:''}</span>` : '');
 
@@ -3127,15 +3244,36 @@
 
   function leyenda(){
     const capa=capaActual();
-    if(modo!=='nivel' && hayTendencia()){
+    // El compuesto TAMBIEN se proyecta, y hasta hoy esta condicion lo dejaba
+    // afuera: exigia `hayTendencia()`, que un compuesto no puede tener porque no
+    // tiene serie propia. Resultado: los tres botones pintaban lo mismo y la
+    // leyenda seguia diciendo «nivel».
+    const compuestaProyectable = typeof capa.proyectados === 'function';
+    if(modo!=='nivel' && (hayTendencia() || compuestaProyectable)){
       const n = anios(), c = capa.leyenda, paleta = capa.divergente ? DIV : MAG;
       const rot = capa.divergente
         ? [`Peor que ${c[0]}`, `${c[0]} a ${c[1]}`, `${c[1]} a ${c[2]}`, `Mejor que ${c[2]}`]
         : [`Menos de ${miles(c[0])}`, `${miles(c[0])} a ${miles(c[1])}`, `${miles(c[1])} a ${miles(c[2])}`, `${miles(c[2])} o más`];
+
+      // Cuando es el compuesto, se declara CON QUE se sostiene: cuantos Estados
+      // se pudieron prolongar y cuantos indicadores lo sostienen. Un Estado en
+      // gris no vale cero: es un Estado cuya serie no se deja prolongar.
+      let sostiene = '';
+      if(compuestaProyectable){
+        const pr = capa.proyectados(n);
+        const cuantos = Object.keys(pr.valores || {}).length;
+        sostiene = `<span class="sin-puntos"><b>Proyección a ${pr.anio}.</b> Se pudo `
+          + `prolongar en <b>${cuantos} de ${(padron||[]).length}</b> Estados, con `
+          + `<b>${pr.indicadores}</b> indicadores que sostienen el cálculo. Los que `
+          + `quedan en gris <b>no valen cero</b>: su serie no se deja prolongar, y `
+          + `antes que inventarles una cifra se los deja afuera.</span>`;
+      }
+
       document.getElementById('leyenda').innerHTML =
         rot.map((t,i)=>`<span><i style="background:${paleta[i]}"></i>${t}</span>`).join('')+
         `<span><i style="background:rgba(140,0,224,.22)"></i>Serie que no se deja proyectar</span>`+
-        `<span class="sin-puntos">Valor proyectado a ${n} año${n===1?'':'s'}, en la misma escala que el nivel</span>`;
+        `<span class="sin-puntos">Valor proyectado a ${n} año${n===1?'':'s'}, en la misma escala que el nivel</span>`
+        + sostiene;
       return;
     }
     if(false){
@@ -3189,14 +3327,34 @@
     if(bt){
       bt.disabled = !hayTendencia();
       bt.title = hayTendencia() ? '' : 'Esta capa no tiene serie histórica';
+      // Si la capa no se puede prolongar, el boton no se deja apretar. Antes
+      // quedaba activo y pintaba el NIVEL ACTUAL: el lector creia estar viendo
+      // el horizonte y estaba viendo hoy.
+      const sePuede = hayTendencia() || typeof capaActual().proyectados === 'function';
+      if(!sePuede && modo !== 'nivel') modo = 'nivel';
       if(!hayTendencia() && modo==='tendencia') modo='nivel';
     }
     document.querySelectorAll('.modo').forEach(b=>b.classList.toggle('activo', b.dataset.modo===modo));
 
+    // Decia «N materias sin colector» y METIA EN LA MISMA BOLSA dos cosas
+    // distintas: la que no tiene fuente y la que tiene colector pero no puede
+    // pintarse en un mapa. Ciberseguridad y contratacion publica YA tienen
+    // colector, y seguian figurando como si no existieran.
     const pend=document.getElementById('pendientes');
-    if(pend) pend.innerHTML = faltan.length
-      ? `<b>${faltan.length} materias sin colector todavía:</b> ${faltan.map(m=>esc(m.rotulo)).join(' · ')}.`
-      : '';
+    if(pend){
+      const sinFuente = faltan.filter(m=>m.sinCapa === 'falta');
+      const noComparable = faltan.filter(m=>m.sinCapa === 'no_comparable');
+      let t = '';
+      if(sinFuente.length)
+        t += `<b>${sinFuente.length} materias sin fuente comparable todavía:</b> `
+           + sinFuente.map(m=>esc(m.rotulo)).join(' · ') + '. ';
+      if(noComparable.length)
+        t += `<b>${noComparable.length} tienen colector pero no capa de mapa</b> `
+           + `—${noComparable.map(m=>esc(m.rotulo)).join(' y ')}—: sus cifras `
+           + `<b>no se comparan entre Estados</b>, y pintarlas ordenaría países por `
+           + `algo que no los ordena. Se leen en su sección, no en el mapa.`;
+      pend.innerHTML = t;
+    }
   }
 
   // ---- Mapa ---------------------------------------------------------------
@@ -4096,6 +4254,7 @@
     paso('ciberseguridad', ciberVista);
     paso('lo que dejó de publicarse', archivoVista);
     paso('opacidad en la ficha', opacidadFicha);
+    paso('imagen satelital disponible', copernicusVista);
     paso('consulta dirigida', consultaVista);
     paso('publicación oficial reciente', recienteVista);
     paso('padrón de fuentes oficiales', oficialesVista);
@@ -5224,6 +5383,44 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       + '</span><span class="badge medio">medición</span></div></div>').join('');
   }
 
+  function copernicusVista(){
+    const caja = document.getElementById('lista-copernicus');
+    const d = almacen.copernicus; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const con = lista.filter(x => x.escenas);
+    const tag = document.getElementById('tag-copernicus');
+    if(tag) tag.textContent = con.length + ' de ' + lista.length
+      + ' con imagen · ventana de ' + d.resumen.ventana_dias + ' días';
+
+    if(!con.length){ caja.innerHTML = '<div class="asunto"><h4>Sin imagen en la ventana</h4>'
+      + '<div class="foot"><span class="porque">Ninguna escena sobre '
+      + esc(paisFiltro ? paisNombre : (zona || 'la región')) + ' en los últimos '
+      + d.resumen.ventana_dias + ' días.</span><span class="badge unica">sin dato</span></div></div>';
+      return; }
+
+    // Se ordena por FRESCURA, que es lo comparable, no por cantidad de escenas.
+    caja.innerHTML = con.slice().sort((a,b)=>
+        (a.dias_desde_la_ultima ?? 999) - (b.dias_desde_la_ultima ?? 999))
+      .map(x => {
+        const dd = x.dias_desde_la_ultima;
+        const clase = dd === null ? 'unica' : dd <= 3 ? 'fresco' : dd <= 10 ? 'reciente' : 'viejo';
+        const cuando = dd === null ? 'sin fecha' : dd === 0 ? 'de hoy'
+          : dd === 1 ? 'de ayer' : 'hace ' + dd + ' días';
+        return '<div class="asunto"><h4>' + esc(x.pais)
+          + ' <span class="edad ' + clase + '">' + esc(cuando) + '</span></h4>'
+          + '<div class="foot"><span class="porque">'
+          + '<b>' + miles(x.escenas) + '</b> escenas disponibles · última el <b>'
+          + esc(x.mas_reciente || 'sin fecha') + '</b>'
+          + ' · <a href="' + esc(x.mirador) + '" target="_blank" rel="noopener noreferrer">abrir el mirador</a>'
+          + '<br><i>El recuento depende del tamaño del territorio: no ordena Estados.</i>'
+          + '</span><span class="badge medio">catálogo</span></div></div>';
+      }).join('');
+  }
+
   function consultaVista(){
     const caja = document.getElementById('lista-consulta');
     const d = almacen.consulta; if(!caja || !d) return;
@@ -5928,6 +6125,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-mensajeria','mensajería',err.message);
       document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('copernicus.json'), traer('estado/copernicus.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.copernicus=d; const meta=d.procedencia;
+      pintarProcedencia('proc-copernicus',meta);
+      vacios+=pintarVacios('vac-copernicus',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-copernicus','imagen satelital',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-copernicus','imagen satelital',err.message);
+      document.getElementById('proc-copernicus').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('archivo.json'), traer('estado/archivo.json').catch(()=>null)])
     .then(([d,estado])=>{

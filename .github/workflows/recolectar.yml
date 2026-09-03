@@ -106,6 +106,12 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/archivo.py
 
+      - name: Imagen satelital disponible (Copernicus)
+        id: copernicus
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/copernicus.py
+
       # --- Series anuales y catalogos, una vez por dia ---
       - name: Indicadores comparables (Banco Mundial)
         id: banco
@@ -187,4 +193,5 @@ jobs:
           [ "${{ steps.ciber.outcome }}" = "failure" ] && { echo "Falló el colector de medición de red."; fallo=1; }
           [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }
           [ "${{ steps.archivo.outcome }}" = "failure" ] && { echo "Falló el colector del archivo de la web."; fallo=1; }
+          [ "${{ steps.copernicus.outcome }}" = "failure" ] && { echo "Falló el colector de imagen satelital."; fallo=1; }
           exit $fallo
