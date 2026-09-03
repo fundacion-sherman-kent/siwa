@@ -22,7 +22,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 24 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:description" content="33 Estados, 69 indicadores, 25 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 24 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 25 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
@@ -46,7 +46,7 @@
       "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 24 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 25 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1368,6 +1368,23 @@
     <section class="domain bloque" id="seguridad-flujos" data-nivel="2">
       <div class="bloque-head"><h3>Seguridad · flujos y ciberseguridad</h3></div>
       <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
+    <div class="categoria" id="prensa-libre" data-nivel="2">
+      <div class="categoria-head"><h4>En qué condiciones se puede publicar</h4><span class="tag" id="tag-prensa">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Mide las condiciones para ejercer el periodismo, no cuánta desinformación
+           circula.</b> Son cosas distintas, y la relación suele ser inversa a la
+           intuición: <b>donde la prensa está más cercada, menos desinformación se
+           detecta</b> —porque detectarla también es publicar—.</p>
+        <p><b>Es evaluación experta, no medición instrumental.</b> El puntaje sale de una
+           encuesta a periodistas, académicos y defensores de derechos humanos, combinada
+           con un recuento de abusos: dos personas informadas pueden puntuar distinto el
+           mismo país. Y el puesto ordena contra <b>180 países</b>, no contra los 33 del
+           padrón.</p>
+      </div>
+      <div class="procedencia" id="proc-prensa">Cargando el registro…</div>
+      <div class="cruce" id="lista-prensa"></div>
+      <div id="vac-prensa"></div>
+        </div>
     <div class="categoria" id="sanciones" data-nivel="2">
       <div class="categoria-head"><h4>Sanciones y personas expuestas</h4><span class="tag" id="tag-sanciones">—</span></div>
       <div class="aviso-cobertura">
@@ -2127,7 +2144,8 @@
                      ['memoria','Bitácora propia de observación'],
                      ['sanciones','OpenSanctions — sanciones y personas expuestas'],
                      ['brecha','Brecha entre lo registrado y lo publicado'],
-                     ['sondeo','Banco de pruebas de fuentes candidatas']];
+                     ['sondeo','Banco de pruebas de fuentes candidatas'],
+                     ['prensa','RSF — libertad de prensa']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -2258,7 +2276,7 @@
     {clave:'contrabando',       eje:'Seguridad',  rotulo:'Contrabando',          disponible:()=>false, sinCapa:'falta'},
     {clave:'ciber',             eje:'Seguridad',  rotulo:'Ciberseguridad',       disponible:()=>false, sinCapa:'no_comparable'},
     {clave:'contratacion',      eje:'Gobernanza', rotulo:'Contratación pública', disponible:()=>false, sinCapa:'no_comparable'},
-    {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false, sinCapa:'falta'},
+    {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false, sinCapa:'no_comparable'},
     {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales},
   ];
   const ORDEN_EJES = ['Situación','Seguridad','Defensa','Gobernanza','Desarrollo','Fuentes'];
@@ -4181,6 +4199,7 @@
     {clave:'desinformacion', rotulo:'Desinformación', tema:'desinformacion',
      porque:'El clima en que circula la información: qué se puede decir y quién lo dice.',
      indicadores:['censura_medios','hostigamiento_periodistas','autocensura','sesgo_medios','medios_corruptos','polarizacion'],
+     extra:'prensa',
      extra:null,
      falta:'<b>Nadie cuenta el contenido falso</b> de forma comparable entre países. Lo que se '
           +'mide es el terreno en que prospera &mdash;censura, hostigamiento, autocensura, sesgo, '
@@ -4194,6 +4213,15 @@
   // misma forma, para que el lector no tenga que saber de donde sale cada cosa.
   function extraMateria(cual, iso){
     const uno = (d, i) => d && (d.registros||[]).find(r => r.iso === i);
+    if(cual === 'prensa'){
+      const d = almacen.prensa; if(!d) return null;
+      if(iso){ const r = uno(d, iso);
+        return r && r.puntaje !== undefined && r.puntaje !== null
+          ? {q:'Libertad de prensa · puesto entre 180 países',
+             v: Math.round(r.puesto_mundial) + '.º', c:'edición ' + d.resumen.edicion} : null; }
+      return {q:'Estados evaluados en libertad de prensa',
+              v: d.resumen.estados_evaluados + ' de 33', c:'edición ' + d.resumen.edicion};
+    }
     if(cual === 'contratacion'){
       const d = almacen.contratacion; if(!d) return null;
       if(iso){ const r = uno(d, iso);
@@ -4524,6 +4552,7 @@
     paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
     paso('contratación pública', contratacionVista);
+    paso('libertad de prensa', prensaVista);
     paso('sanciones y personas expuestas', sancionesVista);
     paso('ciberseguridad', ciberVista);
     paso('banco de pruebas', sondeoVista);
@@ -5675,6 +5704,48 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       }).join('');
   }
 
+  function prensaVista(){
+    const caja = document.getElementById('lista-prensa');
+    const d = almacen.prensa; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const ev = lista.filter(x => x.estado === 'evaluado');
+    const tag = document.getElementById('tag-prensa');
+    if(tag) tag.textContent = ev.length + ' de ' + lista.length
+      + ' evaluados · edición ' + d.resumen.edicion;
+
+    const rotDim = Object.fromEntries((d.dimensiones||[]).map(x => [x.clave, x.rotulo]));
+    // Peor puntaje primero: es el orden en que se lee una alerta.
+    let html = ev.slice().sort((a,b) => a.puntaje - b.puntaje).map(x => {
+      const dims = Object.entries(x.dimensiones || {})
+        .sort((a,b) => a[1] - b[1])
+        .map(([k,v]) => esc(rotDim[k] || k) + ' ' + cifra(Math.round(v*10)/10))
+        .join(' · ');
+      const clase = x.puntaje < 40 ? 'muy-viejo' : x.puntaje < 55 ? 'viejo'
+                  : x.puntaje < 70 ? 'reciente' : 'fresco';
+      return '<div class="asunto"><h4>' + esc(x.pais)
+        + ' <span class="edad ' + clase + '">' + cifra(Math.round(x.puntaje*10)/10) + '</span></h4>'
+        + '<div class="foot"><span class="porque">'
+        + 'Puesto <b>' + Math.round(x.puesto_mundial) + '.º</b> entre 180 países'
+        + (dims ? '<br>' + dims : '')
+        + '</span><span class="badge unica">evaluación</span></div></div>';
+    }).join('');
+
+    // Los que la fuente no evalúa se declaran: dejarlos en blanco haría creer
+    // que no hay problema donde en realidad no hay medición.
+    const sin = lista.filter(x => x.estado === 'sin_evaluar');
+    if(sin.length){
+      html += '<div class="asunto"><h4>' + sin.length + ' sin evaluar</h4>'
+        + '<div class="foot"><span class="porque">' + esc(sin.map(x=>x.pais).join(', '))
+        + '. <b>No significa que tengan prensa libre ni que no la tengan</b>: la fuente '
+        + 'no los evalúa.</span><span class="badge unica">sin dato</span></div></div>';
+    }
+    caja.innerHTML = html;
+  }
+
   function sancionesVista(){
     const caja = document.getElementById('lista-sanciones');
     const d = almacen.sanciones; if(!caja || !d) return;
@@ -6546,6 +6617,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-contratacion-abierta','contratación pública',err.message);
       document.getElementById('proc-contratacion-abierta').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('prensa_libre.json'), traer('estado/prensa_libre.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.prensa=d; const meta=d.procedencia;
+      pintarProcedencia('proc-prensa',meta);
+      vacios+=pintarVacios('vac-prensa',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-prensa','libertad de prensa',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-prensa','libertad de prensa',err.message);
+      document.getElementById('proc-prensa').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('sanciones.json'), traer('estado/sanciones.json').catch(()=>null)])
     .then(([d,estado])=>{
