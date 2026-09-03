@@ -75,23 +75,53 @@ NOMBRE_EN_LA_FUENTE = {
 
 
 def _pedirTestigo(usuario: str, clave: str) -> str:
-    cuerpo = json.dumps({
-        "username": usuario, "password": clave,
-        "grant_type": "password", "client_id": "acled", "scope": "authenticated",
-    }).encode()
-    peticion = urllib.request.Request(
-        TESTIGO, data=cuerpo, method="POST",
-        headers={"User-Agent": NAVEGADOR, "Content-Type": "application/json",
-                 "Accept": "application/json"})
-    with urllib.request.urlopen(peticion, timeout=45) as respuesta:
-        d = json.loads(respuesta.read(200_000).decode("utf-8", "replace"))
-    t = d.get("access_token")
-    if not t:
-        raise RuntimeError(
-            "La fuente respondió sin entregar testigo. NO se continúa a ciegas: "
-            "seguir sin testigo daría cero eventos en todos los Estados, y eso se "
-            "leería como «no pasa nada» cuando en realidad es «no pudimos mirar».")
-    return t
+    """Pide el testigo. Prueba las dos formas y declara lo que la fuente contesta.
+
+    La primera version mandaba JSON y la fuente devolvia 400. El estandar OAuth
+    para pedir un testigo es FORMULARIO CODIFICADO, no JSON: se prueba esa
+    primero. La otra queda como respaldo porque no todas las implementaciones
+    siguen el estandar, y probar las dos cuesta una consulta.
+    """
+    campos = {"username": usuario, "password": clave,
+              "grant_type": "password", "client_id": "acled",
+              "scope": "authenticated"}
+    intentos = [
+        ("formulario", urllib.parse.urlencode(campos).encode(),
+         "application/x-www-form-urlencoded"),
+        ("JSON", json.dumps(campos).encode(), "application/json"),
+    ]
+
+    dichos = []
+    for comoSeLlama, cuerpo, tipo in intentos:
+        peticion = urllib.request.Request(
+            TESTIGO, data=cuerpo, method="POST",
+            headers={"User-Agent": NAVEGADOR, "Content-Type": tipo,
+                     "Accept": "application/json"})
+        try:
+            with urllib.request.urlopen(peticion, timeout=45) as respuesta:
+                d = json.loads(respuesta.read(200_000).decode("utf-8", "replace"))
+        except urllib.error.HTTPError as error:
+            # LO QUE LA FUENTE DICE, no lo que uno supone. Un 400 puede ser la
+            # forma de la peticion o la credencial, y la unica manera de saberlo
+            # es leer su respuesta. NUNCA se registra el usuario ni la clave.
+            crudo = error.read(2_000).decode("utf-8", "replace")
+            detalle = " ".join(crudo.split())[:300]
+            dichos.append(f"{comoSeLlama}: HTTP {error.code} · {detalle}")
+            continue
+        except Exception as error:  # noqa: BLE001
+            dichos.append(f"{comoSeLlama}: {type(error).__name__}")
+            continue
+
+        t = d.get("access_token")
+        if t:
+            return t
+        dichos.append(f"{comoSeLlama}: respondió 200 sin entregar testigo")
+
+    raise RuntimeError(
+        "No se obtuvo testigo de la fuente. NO se continúa a ciegas: seguir sin "
+        "testigo daría cero en los 33 Estados, y eso se leería como «no pasa nada» "
+        "cuando en realidad es «no pudimos mirar». Lo que contestó la fuente, "
+        "textual y sin credenciales: " + " | ".join(dichos))
 
 
 def _hayRegistro(testigo: str, pais: str, desde: str) -> bool | None:
