@@ -162,6 +162,14 @@ jobs:
         continue-on-error: true
         run: python herramientas/puertas.py
 
+      # El canal de novedades sale DESPUES de la memoria: anuncia lo que ella
+      # acaba de observar. Es la unica forma de aviso que no exige lista de
+      # correo, servicio de envio ni credenciales.
+      - name: Escribir el canal de novedades
+        if: always()
+        continue-on-error: true
+        run: python herramientas/novedades.py
+
       - name: Sellar las cifras de la portada
         if: always()
         continue-on-error: true
@@ -174,7 +182,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           # La regla de .gitattributes necesita que el controlador exista.
           git config merge.ours.driver true
-          git add datos/ sitio/index.html sitio/pais sitio/zona index.html sitemap.xml
+          git add datos/ sitio/index.html sitio/pais sitio/zona index.html sitemap.xml novedades.xml
           git diff --staged --quiet || git commit -m "Recolección $(date -u +'%Y-%m-%d %H:%M UTC')"
           # Si alguien subio algo mientras corria la recoleccion, se trae y se
           # reintenta en lugar de fallar. Los datos se resuelven solos por la

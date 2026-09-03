@@ -150,6 +150,7 @@ def cabeza(titulo: str, descripcion: str, ruta: str, ld: dict) -> str:
 <title>{esc(titulo)}</title>
 <meta name="description" content="{esc(descripcion)}">
 <link rel="canonical" href="{BASE}/{ruta}">
+<link rel="alternate" type="application/rss+xml" title="SIWA — lo que cambió" href="{BASE}/novedades.xml">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{esc(titulo)}">
 <meta property="og:description" content="{esc(descripcion)}">
@@ -166,6 +167,7 @@ def cabeza(titulo: str, descripcion: str, ruta: str, ld: dict) -> str:
 <body>
 <div class="banda"><div class="dentro">
   <a href="{BASE}/sitio/index.html">SIWA · <span>Fundación Sherman Kent</span></a>
+  <a class="vuelta" href="{BASE}/novedades.xml">Seguir lo que cambia</a>
   <a class="vuelta" href="{BASE}/sitio/index.html">Registro completo →</a>
 </div></div>
 <main>
