@@ -130,8 +130,8 @@ def _hayRegistro(testigo: str, pais: str, desde: str) -> bool | None:
     Devuelve un SÍ o un NO, nunca un número. El recuento se usa acá y se tira:
     no vuelve de esta función y por lo tanto no puede llegar al archivo.
     """
-    p = {"country": pais, "event_date": desde, "event_date_where": ">=",
-         "limit": "1", "_format": "json"}
+    p = {"country": pais, "event_date": f"{desde}|{date.today().isoformat()}",
+         "event_date_where": "BETWEEN", "limit": "1", "_format": "json"}
     url = DATOS + "?" + urllib.parse.urlencode(p)
     peticion = urllib.request.Request(
         url, headers={"User-Agent": NAVEGADOR, "Accept": "application/json",
@@ -179,8 +179,21 @@ def recolectar():
     desde = (date.today() - timedelta(days=DIAS)).isoformat()
     conCredencial = bool(usuario and clave)
     testigo = None
+    instrumentoSano = None
     if conCredencial:
         testigo = _pedirTestigo(usuario, clave)
+        # SE PRUEBA EL INSTRUMENTO CONTRA UN CASO QUE TIENE QUE DAR ALGO, antes
+        # de creerle un cero a nadie. La primera version dio CERO EN LOS 33
+        # ESTADOS —imposible— porque el filtro de fecha estaba mal escrito, y sin
+        # este control eso se habria publicado como «no pasa nada en la region».
+        instrumentoSano = _hayRegistro(testigo, "Colombia", desde)
+        if instrumentoSano is not True:
+            raise RuntimeError(
+                "La prueba del instrumento falló: la consulta de control sobre Colombia "
+                "—que en cualquier ventana de treinta días tiene registros— no devolvió "
+                "ninguno. Eso NO significa que no haya pasado nada: significa que la "
+                "consulta está mal armada o que la cuenta no ve datos. NO se publica un "
+                "cero que no se puede sostener.")
 
     registros, cuenta = [], {"brecha": 0, "publica_y_hay": 0, "sin_registro": 0,
                              "sin_mirar": 0}
@@ -230,6 +243,11 @@ def recolectar():
         "clasificacion de tres estados lo es, y se lo consulto. Mientras no haya "
         "respuesta, esta lectura queda declarada COMO LECTURA PROPIA de un contrato "
         "ajeno, no como permiso obtenido.",
+        "ANTES DE CREERLE UN CERO A NADIE SE PRUEBA EL INSTRUMENTO. Se consulta un caso "
+        "que tiene que dar algo —Colombia, que en cualquier ventana de treinta dias tiene "
+        "registros— y si ESE da cero, la corrida se detiene entera. La primera version "
+        "devolvio cero en los 33 Estados porque el filtro de fecha estaba mal escrito, y "
+        "sin este control se habria publicado como «no pasa nada en la region».",
         "SIN CREDENCIAL NO SE MIRA, Y SE DICE. Este es el unico colector del registro que "
         "necesita un secreto. Si no esta, los 33 Estados quedan en «sin credencial»: NO "
         "en cero, porque no saber no es saber que no.",
@@ -259,6 +277,7 @@ def recolectar():
             "resumen": {
                 "con_credencial": conCredencial,
                 "variables_que_faltan": falta,
+                "instrumento_probado": instrumentoSano,
                 "ventana_dias": DIAS,
                 "desde": desde,
                 "estados_con_brecha": cuenta["brecha"],
