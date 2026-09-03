@@ -148,3 +148,92 @@ interna, para que el lector sepa qué se buscó y qué no.
 - Escribir a **CEPALSTAT** por el error 500 en la descarga de indicadores: el
   catálogo responde y la serie no, y es la única fuente estadística de este
   sondeo que es nativa de la región.
+
+---
+
+# Segundo sondeo — 3 de septiembre de 2026
+
+Nueve enlaces aportados por la Dirección. **Cuatro son proveedores comerciales y
+uno es una nota de marketing.** Conviene sostener la distinción que ordena todo
+este catálogo: SIWA necesita **fuentes** —series con cobertura, licencia y
+dirección estable—; la mesa analítica puede necesitar **herramientas**, que es
+otra decisión, otro presupuesto y otro expediente.
+
+## 1 · Entra
+
+### Copernicus Data Space Ecosystem
+`catalogue.dataspace.copernicus.eu`
+
+| Prueba | Resultado |
+|---|---|
+| Catálogo STAC | **200 · JSON · 59 KB** · sin credencial |
+| Catálogo OData | **200 · JSON** · sin credencial |
+
+El catálogo es abierto; **la descarga de la imagen exige registro**. Eso no lo
+descarta: habilita la misma arquitectura que ya usa el colector de publicación
+oficial —**se publica que la imagen existe, de cuándo es y dónde está**, y el
+enlace lleva al original—. Es material para minería ilegal, deforestación,
+puertos y pasos fronterizos, que son cuatro materias donde hoy no hay serie.
+
+**Advertencia que va con la fuente:** una imagen satelital **no es un hecho
+acreditado**. Prueba que había algo el día que pasó el satélite; no prueba qué
+era ni de quién. Entra como material de recolección, nunca como cifra.
+
+### OpenSanctions — con una condición que la Fundación tiene que decidir
+Ya estaba probada (200 · JSON · 1,7 MB). Lo que faltaba era la licencia, y
+**importa**: es **Creative Commons Atribución–NoComercial 4.0**. La descarga
+masiva es libre y gratuita.
+
+SIWA es público y gratuito, de modo que **para SIWA la licencia alcanza**. Pero
+SIWA **alimenta los productos de la Fundación**, y los productos reservados y a
+pedido de cliente se cobran: ese uso **es comercial y esta licencia no lo
+cubre**. Antes de que un dato de OpenSanctions viaje a un producto pago hay que
+tomar la licencia comercial o dejarlo afuera. **Es una decisión de la Dirección,
+no del colector**, y queda anotada acá para que no se resuelva por omisión.
+
+## 2 · Trabadas, no descartadas
+
+### GDELT — la mejor pieza posible, y hoy no se puede construir encima
+| Prueba | Resultado |
+|---|---|
+| Consulta simple, primera hora | **200 · JSON con artículos** |
+| 8 intentos seguidos con `curl` | **0 de 8** |
+| 6 intentos con `urllib` (la biblioteca de los colectores) | **0 de 6**, agotan el tiempo de espera |
+| Repetición de la consulta que sí había andado | **falla también** |
+
+Devuelve exactamente lo que haría falta —noticias del día, multilingües,
+acotables por país y por lengua, sin credencial— pero **respondió 2 de unas 20
+consultas en una misma jornada**, y la que funcionó hace media hora ya no
+funciona. No es formato de consulta: es intermitencia del servicio.
+
+**No se construye un colector sobre esto todavía.** El registro toleraría la
+falla —cada colector declara la suya y el dato anterior queda intacto—, pero una
+capa de hoy que aparece dos de cada veinte veces no es una capa de hoy. Se mide
+durante varios días y se decide con el número, no con la expectativa.
+
+### OCCRP Aleph — **vale la gestión**
+`401 · "You are not authorized to do this"` en las dos rutas probadas. Exige
+credencial, y **la da gratis a periodistas e investigadores**. Es un archivo de
+documentos filtrados y registros societarios con presencia real en la región.
+De todo este sondeo, **es la gestión que más rinde por el trabajo que cuesta**.
+
+## 3 · No entran
+
+| Herramienta | Prueba | Motivo |
+|---|---|---|
+| **Shodan** | 403 de Cloudflare, y exige clave | El nivel gratuito no admite consulta sostenida. Además busca **dispositivos expuestos**: usarlo sobre infraestructura de terceros roza el límite de `doctrina/limites.md`, que manda reconocimiento **estrictamente pasivo** |
+| **Sentinel Hub** | La página de precios redirige a Planet | Pasó a un proveedor comercial. **Copernicus da lo mismo gratis** |
+| **Maltego** | 200 | Gratuito con **200 consultas por mes** (1.000 con correo institucional); de ahí, **3.000 a 7.500 euros al año**. Es una aplicación de escritorio para analizar vínculos, **no una fuente**: no puede alimentar un registro automático. Puede servirle a la mesa analítica en un caso concreto, y esa es otra decisión |
+| **Intel471** | 200 | Proveedor comercial cerrado de inteligencia de amenazas. Sin acceso, sin precio público, sin licencia de redistribución |
+| **ShadowDragon** | 200 | El enlace es **una nota explicativa de qué es OSINT**, publicada por un proveedor para captar clientes. No es fuente ni herramienta: es material de difusión |
+
+## 4 · Lo que este segundo sondeo deja para hacer
+
+1. **Decidir la licencia de OpenSanctions** antes de que su dato entre a un
+   producto que se cobra. Es lo único de esta lista que puede generar un
+   problema si se resuelve por descuido.
+2. **Pedir credencial a OCCRP Aleph.** Gratuita, y abre un archivo que ninguna
+   de las otras fuentes cubre.
+3. **Medir GDELT durante una semana** y decidir con la cifra de disponibilidad.
+4. **Escribir el colector de catálogo de Copernicus**, con la advertencia de que
+   la imagen no acredita el hecho.
