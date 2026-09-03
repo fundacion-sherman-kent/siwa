@@ -53,6 +53,7 @@ import csv
 import io
 import os
 import sys
+import time
 import urllib.error
 import urllib.request
 from datetime import datetime, timezone
@@ -78,22 +79,47 @@ CONTROL = "BRA"
 # Si la respuesta llega justo en el tope, es que se cortó: publicar la mitad de
 # los focos como si fueran todos sería peor que no publicar ninguno.
 TOPE_LECTURA = 80_000_000
+# Un parpadeo de red del servidor que corre el robot no es una respuesta de la
+# fuente: se reintenta. Si igual falla, se detiene la corrida; nunca se anota cero.
+INTENTOS = 3
+ESPERA_ENTRE_INTENTOS = 4  # segundos, y crece con cada intento
 
 
 def _pedir(clave: str, dias: int) -> list:
-    """Una sola consulta: el recuadro entero. La fuente NO admite pedir por país."""
+    """Una sola consulta: el recuadro entero. La fuente NO admite pedir por país.
+
+    Se reintenta ante fallas de RED, no ante rechazos de la fuente. Un «Network is
+    unreachable» del servidor que corre el robot es un parpadeo y se pasa solo; un
+    HTTP 400 es una respuesta, y repetirla da lo mismo dos veces.
+
+    El reintento NO afloja la regla: si los tres intentos fallan, la corrida se
+    detiene igual. Lo que no se hace nunca es tapar la falla con un cero.
+    """
     url = f"{BASE}/area/csv/{clave}/{SENSOR}/{RECUADRO}/{dias}"
-    try:
-        peticion = urllib.request.Request(url, headers={"User-Agent": NAVEGADOR})
-        with urllib.request.urlopen(peticion, timeout=180) as respuesta:
-            crudo = respuesta.read(TOPE_LECTURA)
-    except urllib.error.HTTPError as error:
-        cuerpo = error.read(400).decode("utf-8", "replace").strip()
+    ultima = None
+    for numero in range(INTENTOS):
+        try:
+            peticion = urllib.request.Request(url, headers={"User-Agent": NAVEGADOR})
+            with urllib.request.urlopen(peticion, timeout=180) as respuesta:
+                crudo = respuesta.read(TOPE_LECTURA)
+            break
+        except urllib.error.HTTPError as error:
+            cuerpo = error.read(400).decode("utf-8", "replace").strip()
+            raise RuntimeError(
+                f"La fuente rechazó la consulta: HTTP {error.code} · {cuerpo}. "
+                "NO se anota cero: no poder mirar no es haber mirado. Si dice «Invalid "
+                "MAP_KEY» el problema es la credencial; si dice «Invalid API call», la "
+                "dirección.") from error
+        except Exception as error:  # noqa: BLE001 — falla de red: se reintenta
+            ultima = error
+            print(f"[focos] intento {numero + 1} de {INTENTOS}: {type(error).__name__}: "
+                  f"{error}", file=sys.stderr)
+            time.sleep(ESPERA_ENTRE_INTENTOS * (numero + 1))
+    else:
         raise RuntimeError(
-            f"La fuente rechazó la consulta: HTTP {error.code} · {cuerpo}. "
-            "NO se anota cero: no poder mirar no es haber mirado. Si dice «Invalid "
-            "MAP_KEY» el problema es la credencial; si dice «Invalid API call», la "
-            "dirección.") from error
+            f"No se pudo llegar a la fuente en {INTENTOS} intentos: "
+            f"{type(ultima).__name__}: {ultima}. Es una falla de RED, no una respuesta "
+            "de la fuente. NO se anota cero: no poder mirar no es haber mirado.")
 
     if len(crudo) >= TOPE_LECTURA:
         raise RuntimeError(
