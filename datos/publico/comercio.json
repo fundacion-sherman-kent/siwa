@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "comercio",
     "capa": "publico",
-    "obtenido_en": "2026-09-03T16:39:17+00:00",
+    "obtenido_en": "2026-09-03T16:58:02+00:00",
     "fuente": {
       "nombre": "Comtrade de Naciones Unidas — vista pública",
       "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
@@ -17,12 +17,12 @@
       "UNA BRECHA DE POCOS PUNTOS NO ES CONTRABANDO: ES CONTABILIDAD. El exportador declara en valor FOB —la mercaderia puesta en el barco— y el importador en CIF, que además incluye FLETE Y SEGURO. Solo por eso el importador registra de rutina entre 3 % y 10 % mas. A eso se suman los envios que cruzan el año calendario y las diferencias de clasificación aduanera.",
       "LO QUE SI LLAMA LA ATENCIÓN ES LA BRECHA NEGATIVA: que el importador declare MENOS de lo que el exportador dice haberle mandado no tiene explicación contable inocente, porque el flete y el seguro empujan en el sentido contrario. Aun así es un INDICIO que abre una línea de averiguación, NO una prueba de delito.",
       "Se comparan 37 corredores —los que comparten frontera y los de mayor volumen regional—, no los 1.056 pares posibles: la mayoria no tiene comercio significativo y solo agregaria ruido. Un corredor ausente no esta limpio: no esta mirado.",
-      "LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, empezando por los que nunca se midieron, y CADA CORREDOR DECLARA CUANDO SE MIDIO. Van 31 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
+      "LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, empezando por los que nunca se midieron, y CADA CORREDOR DECLARA CUANDO SE MIDIO. Van 32 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
       "El año es 2023, el último con cobertura amplia en la vista publica. NO es el año corriente y no se estima ninguno posterior.",
       "Se compara el TOTAL de comercio, no producto por producto. La subfacturación suele concentrarse en unas pocas partidas y se diluye en el total: este registro sirve para señalar el corredor, no la mercaderia.",
       "Un Estado que no reporta a Comtrade no genera brecha con nadie, y por lo tanto NO APARECE. La ausencia mide la calidad de su estadística aduanera, no su honestidad comercial.",
-      "Se descartaron 25 filas de apertura por modo de transporte. Sumarlas al total duplica el comercio: en la primera prueba la brecha Argentina-Brasil dio +109 %, que es absurdo; con la fila total sola da +4,7 %. Queda anotado porque es un error facil de cometer.",
-      "Consultas que fallaron: BRA-VEN: sin fila total; COL-VEN: sin fila total; DOM-HTI: HTTP 429"
+      "Se descartaron 46 filas de apertura por modo de transporte. Sumarlas al total duplica el comercio: en la primera prueba la brecha Argentina-Brasil dio +109 %, que es absurdo; con la fila total sola da +4,7 %. Queda anotado porque es un error facil de cometer.",
+      "Consultas que fallaron: BRA-VEN: HTTP 429; COL-VEN: sin fila total; DOM-HTI: sin fila total; VEN-GUY: sin fila total"
     ],
     "restriccion_de_uso": null,
     "cantidad": 19,
@@ -43,8 +43,8 @@
       "corredores_que_llaman_la_atencion": 2,
       "peor_brecha_pct": -91.0,
       "brecha_negativa_en": [
-        "Costa Rica → Panamá",
-        "Colombia → Panamá"
+        "Colombia → Panamá",
+        "Costa Rica → Panamá"
       ]
     },
     {
@@ -56,6 +56,30 @@
       "peor_brecha_pct": -91.0,
       "brecha_negativa_en": [
         "Colombia → Panamá"
+      ]
+    },
+    {
+      "iso": "SUR",
+      "pais": "Surinam",
+      "bloque": "Guayanas",
+      "corredores": 2,
+      "corredores_que_llaman_la_atencion": 2,
+      "peor_brecha_pct": -87.4,
+      "brecha_negativa_en": [
+        "Guyana → Surinam",
+        "Brasil → Surinam"
+      ]
+    },
+    {
+      "iso": "GUY",
+      "pais": "Guyana",
+      "bloque": "Guayanas",
+      "corredores": 2,
+      "corredores_que_llaman_la_atencion": 2,
+      "peor_brecha_pct": -87.4,
+      "brecha_negativa_en": [
+        "Guyana → Surinam",
+        "Brasil → Guyana"
       ]
     },
     {
@@ -106,17 +130,6 @@
       ]
     },
     {
-      "iso": "GUY",
-      "pais": "Guyana",
-      "bloque": "Guayanas",
-      "corredores": 1,
-      "corredores_que_llaman_la_atencion": 1,
-      "peor_brecha_pct": -37.6,
-      "brecha_negativa_en": [
-        "Brasil → Guyana"
-      ]
-    },
-    {
       "iso": "BRA",
       "pais": "Brasil",
       "bloque": "Cono Sur",
@@ -138,17 +151,6 @@
       "peor_brecha_pct": -20.4,
       "brecha_negativa_en": [
         "Costa Rica → Panamá"
-      ]
-    },
-    {
-      "iso": "SUR",
-      "pais": "Surinam",
-      "bloque": "Guayanas",
-      "corredores": 1,
-      "corredores_que_llaman_la_atencion": 1,
-      "peor_brecha_pct": -17.5,
-      "brecha_negativa_en": [
-        "Brasil → Surinam"
       ]
     },
     {
@@ -248,13 +250,13 @@
     }
   ],
   "resumen": {
-    "corredores_comparados": 31,
+    "corredores_comparados": 32,
     "corredores_pedidos": 37,
-    "corredores_que_llaman_la_atencion": 17,
+    "corredores_que_llaman_la_atencion": 18,
     "estados_con_dato": 19,
     "estados_del_padron": 33,
     "anio": 2023,
-    "filas_descartadas_por_transporte": 25
+    "filas_descartadas_por_transporte": 46
   },
   "corredores": [
     {
@@ -269,6 +271,19 @@
       "sentido": "el importador declara menos",
       "llama_la_atencion": true,
       "medido_en": "2026-09-01T16:50:38+00:00"
+    },
+    {
+      "origen": "GUY",
+      "pais_origen": "Guyana",
+      "destino": "SUR",
+      "pais_destino": "Surinam",
+      "exportador_declara": 166634174,
+      "importador_declara": 21025208,
+      "brecha": -145608967,
+      "brecha_pct": -87.4,
+      "sentido": "el importador declara menos",
+      "llama_la_atencion": true,
+      "medido_en": "2026-09-03T16:58:02+00:00"
     },
     {
       "origen": "GTM",
