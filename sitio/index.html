@@ -864,6 +864,12 @@
     font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#5f7286;font-weight:700;
     margin-bottom:5px;
   }
+  .detenida{
+    margin:8px 0 0;padding:8px 10px;border-radius:8px;font-size:11px;line-height:1.45;
+    color:#E8D7C3;background:rgba(251,101,0,.09);border:1px solid rgba(251,101,0,.28);
+  }
+  .detenida .cuando{color:#9fb0c4;}
+  .detenidas-pie{border-left:3px solid var(--orange);padding-left:10px;}
   .opacidad-ficha{margin-top:18px;}
   .op-fila{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;}
   .op-caja{
@@ -2922,6 +2928,7 @@
       + (r.general ? cajita('Situación general', r.general.valor, r.general.indicadores, true) : '')
       + r.ejes.map(x => cajita(x.eje, x.valor, x.indicadores, false)).join('')
       + '</div>'
+      + avisoDetenidasEje()
       + '<p class="ejes-pie"><b>Es un lugar dentro de la región, no una nota.</b> 0 es el mejor '
       + 'de los 33 Estados y 100 el peor; 50 es la mediana de América Latina y el Caribe, no «la '
       + 'mitad» de nada. Se arma promediando el <b>puesto</b> que el Estado ocupa en cada indicador '
@@ -4254,6 +4261,25 @@
   // «muchas categorias no muestran los datos actualizados». Es cierto, y el
   // rezago no es de un pais sino DE CADA FUENTE: las encuestas llegan con siete
   // a diez anios, la evaluacion experta con uno. Ahora se ve en cada cifra.
+  // Cuantos de los indicadores que ordenan un eje tienen la serie detenida.
+  // No cambia el calculo: cambia lo que el lector sabe del calculo.
+  function detenidasDelEje(eje){
+    // Se separan porque NO son lo mismo: los ejes compuestos ORDENAN —el
+    // indicador detenido pesa en el puesto de cada Estado—; Defensa no ordena,
+    // se muestra como magnitud. Decir que los cinco «ordenan» seria falso.
+    let total = 0, quietas = [], quietasSinOrden = [];
+    fuentesInd().forEach(f => (f.indicadores||[]).forEach(i => {
+      if(eje && i.eje !== eje) return;
+      const ordena = EJES_COMPUESTOS.includes(i.eje);
+      if(!ordena && i.eje !== EJE_SIN_ORIENTAR) return;
+      if(ordena) total++;
+      if(i.serie_detenida){
+        (ordena ? quietas : quietasSinOrden).push(i.rotulo + ' (' + i.hasta_anio + ')');
+      }
+    }));
+    return {total, quietas, quietasSinOrden};
+  }
+
   function edad(anio){
     if(!anio) return null;
     const a = ANIO_HOY - anio;
@@ -4261,6 +4287,25 @@
     if(a === 2) return {anios:a, clase:'reciente', texto:'hace 2 años'};
     if(a <= 4) return {anios:a, clase:'viejo', texto:`hace ${a} años`};
     return {anios:a, clase:'muy-viejo', texto:`hace ${a} años · revisar si sigue sirviendo`};
+  }
+
+  function avisoDetenidasEje(){
+    const d = detenidasDelEje(null);
+    if(!d.quietas.length && !d.quietasSinOrden.length) return '';
+    let t = '<p class="ejes-pie detenidas-pie">';
+    if(d.quietas.length){
+      t += '<b>' + d.quietas.length + ' de los ' + d.total + ' indicadores que ordenan '
+        + 'la situación general tienen la serie detenida</b> —el productor dejó de '
+        + 'publicar, y se le preguntó—: ' + esc(d.quietas.join('; '))
+        + '. Siguen ordenando porque ordenan su propio año, y el registro lo dice '
+        + 'en lugar de disimularlo. ';
+    }
+    if(d.quietasSinOrden.length){
+      t += '<b>Otros ' + d.quietasSinOrden.length + ' están detenidos en Defensa</b> '
+        + '(' + esc(d.quietasSinOrden.join('; ')) + '), que <b>no ordena nada</b>: '
+        + 'se muestra como magnitud, no como mejor ni peor.';
+    }
+    return t + '</p>';
   }
 
   function tarjeta(f, info, nombre, meta){
@@ -4271,8 +4316,29 @@
       <div class="sub">${esc(m.unidad)} · dato de ${f.anio}${
         edad(f.anio) ? ` <span class="edad ${edad(f.anio).clase}">${edad(f.anio).texto}</span>` : ''}${
         (tv!==null&&tv!==undefined)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
+      ${avisoDetenida(info)}
       <div class="foot"><span class="src">${esc(info.origen||meta.fuente.nombre)}</span>
         <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
+  }
+
+  // «Hace cinco años» y «el productor dejó de publicar» se leen igual y no son
+  // lo mismo. Lo primero se corrige esperando; lo segundo, no. Solo se afirma
+  // cuando se le PREGUNTO a la fuente, y se dice cuándo se le preguntó.
+  function avisoDetenida(info){
+    const d = info && info.serie_detenida;
+    if(!d) return '';
+    return '<div class="detenida"><b>Serie detenida en ' + info.hasta_anio + '.</b> '
+      + esc(d.detalle)
+      + ' <span class="cuando">Comprobado el ' + esc(fechaCorta(d.consultado)) + '.</span>'
+      + (d.reemplazo ? '<br><b>Reemplazo posible:</b> ' + esc(d.reemplazo) : '')
+      + '</div>';
+  }
+
+  function fechaCorta(iso){
+    try{
+      const f = new Date(iso + 'T00:00:00Z');
+      return f.toLocaleDateString('es-AR', {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'});
+    }catch(e){ return iso; }
   }
 
   function tarjetasDesplazamiento(){

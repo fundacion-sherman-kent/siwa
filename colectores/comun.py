@@ -202,6 +202,55 @@ def calificar(fiabilidad: str, credibilidad: int, corroborado: bool, nota: str) 
     }
 
 
+
+# SERIES DETENIDAS — comprobadas contra la fuente, no supuestas
+# ------------------------------------------------------------
+# Un indicador viejo puede serlo por dos razones distintas, y no se parecen: o
+# la encuesta que lo produce se levanta cada diez años, o EL PRODUCTOR DEJO DE
+# PUBLICAR. Lo segundo no se arregla esperando.
+#
+# Cada entrada de acá se comprobó preguntandole a la fuente cuál es su año más
+# nuevo, y lleva la fecha de esa consulta. NO se infiere de la antigüedad: el
+# gasto militar del Banco Mundial trae 2024, de modo que el colector funciona y
+# el hueco es de la fuente.
+#
+# Se declaran, NO se borran. Borrarlas escondería que la región no tiene medida
+# vigente de estas materias, que es en sí mismo lo que hay que decir.
+SERIES_DETENIDAS = {
+    "personal_militar": {
+        "ultimo_en_la_fuente": 2020, "consultado": "2026-09-03",
+        "detalle": "Se consultó al Banco Mundial y su dato más nuevo para el mundo "
+                   "es de 2020, en 216 países. La serie no avanza desde entonces.",
+        "reemplazo": None,
+    },
+    "militares_fuerza_laboral": {
+        "ultimo_en_la_fuente": 2020, "consultado": "2026-09-03",
+        "detalle": "Se consultó al Banco Mundial y su dato más nuevo es de 2020, "
+                   "en 214 países. Depende de la misma fuente que los efectivos.",
+        "reemplazo": None,
+    },
+    "rentas_naturales": {
+        "ultimo_en_la_fuente": 2021, "consultado": "2026-09-03",
+        "detalle": "Se consultó al Banco Mundial y su dato más nuevo es de 2021, "
+                   "en 244 países.",
+        "reemplazo": None,
+    },
+    "terrorismo_muertes": {
+        "ultimo_en_la_fuente": 2021, "consultado": "2026-09-03",
+        "detalle": "La serie que publica Our World in Data termina en 2021: la Base "
+                   "Global de Terrorismo dejó de actualizarse de forma pública.",
+        "reemplazo": "ACLED cubre el mismo fenómeno con cadencia semanal y exige "
+                     "credencial gratuita, todavía no gestionada.",
+    },
+    "terrorismo_atentados": {
+        "ultimo_en_la_fuente": 2021, "consultado": "2026-09-03",
+        "detalle": "La serie que publica Our World in Data termina en 2021, por la "
+                   "misma razón que las muertes por atentado.",
+        "reemplazo": "ACLED cubre el mismo fenómeno con cadencia semanal y exige "
+                     "credencial gratuita, todavía no gestionada.",
+    },
+}
+
 def escribir(
     colector: str,
     capa: str,
@@ -235,6 +284,43 @@ def escribir(
     }
     if extra:
         contenido.update(extra)
+
+    # LA ANTIGUEDAD DE CADA SERIE, CALCULADA ACA Y NO DECLARADA A MANO. Una nota
+    # escrita a mano envejece sin que nadie se entere; un calculo no. Lo que se
+    # adjunta es un HECHO —hasta que año llega la serie y cuantos años hace de
+    # eso—, no una interpretación de por qué.
+    hoy = datetime.now(timezone.utc).year
+    for indicador in contenido.get("indicadores") or []:
+        clave = indicador.get("clave")
+        anios = [
+            ((registro.get("indicadores") or {}).get(clave) or {}).get("anio")
+            for registro in contenido.get("registros") or []
+        ]
+        anios = [a for a in anios if a]
+        if not anios:
+            continue
+        indicador["hasta_anio"] = max(anios)
+        indicador["rezago_anios"] = hoy - max(anios)
+        # Y si ADEMAS se le pregunto a la fuente y no tiene nada mas nuevo, eso
+        # es una afirmacion mas fuerte y lleva su fecha de comprobación.
+        detenida = SERIES_DETENIDAS.get(clave)
+        if detenida and max(anios) <= detenida["ultimo_en_la_fuente"]:
+            indicador["serie_detenida"] = dict(detenida)
+
+    # Y SE DECLARA COMO VACIO, sin que el colector tenga que acordarse. Una serie
+    # detenida es un vacío del registro aunque el dato esté: lo que falta no es
+    # el número, es el presente.
+    quietas = [i for i in (contenido.get("indicadores") or []) if i.get("serie_detenida")]
+    if quietas:
+        detalle = "; ".join(
+            f"«{i.get('rotulo', i['clave'])}» hasta {i['hasta_anio']}" for i in quietas)
+        contenido["procedencia"]["vacios_declarados"].append(
+            f"SERIE DETENIDA EN {len(quietas)} INDICADOR"
+            f"{'ES' if len(quietas) > 1 else ''}: {detalle}. No es dato viejo que se "
+            "vaya a poner al día: SE LE PREGUNTO A LA FUENTE y no tiene nada más "
+            "nuevo. Se declara y no se borra, porque borrarlo escondería que la "
+            "región no tiene medida vigente de esas materias."
+        )
 
     # La categoria se adjunta acá y no en cada colector: en un solo lugar no
     # puede desincronizarse, y el indicador nuevo que no la tenga SE ANUNCIA en
