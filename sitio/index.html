@@ -864,6 +864,19 @@
     font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#5f7286;font-weight:700;
     margin-bottom:5px;
   }
+  .prensa-viva{
+    margin:8px 0 0;padding:9px 11px;border-radius:8px;font-size:11px;line-height:1.5;
+    color:#C7D2E0;background:rgba(63,167,150,.08);border:1px solid rgba(63,167,150,.30);
+  }
+  .prensa-viva b{color:#fff;}
+  .prensa-viva .titulares{display:flex;flex-direction:column;gap:4px;margin:7px 0 0;}
+  .prensa-viva .titulares a{
+    color:#9fd8cd;text-decoration:none;font-size:11px;line-height:1.35;
+    border-left:2px solid rgba(63,167,150,.45);padding-left:7px;
+  }
+  .prensa-viva .titulares a:hover{color:#fff;}
+  .prensa-viva .titulares .quien{display:block;color:#7d90a8;font-size:10px;}
+  .prensa-viva .aclara{margin:8px 0 0;color:#9fb0c4;font-size:10.5px;line-height:1.5;}
   .restriccion{
     margin:6px 0 0;padding:7px 9px;border-radius:7px;font-size:11px;line-height:1.45;
     color:#E3D4F5;background:rgba(140,0,224,.12);border:1px solid rgba(140,0,224,.32);
@@ -4640,14 +4653,67 @@
   // «Hace cinco años» y «el productor dejó de publicar» se leen igual y no son
   // lo mismo. Lo primero se corrige esperando; lo segundo, no. Solo se afirma
   // cuando se le PREGUNTO a la fuente, y se dice cuándo se le preguntó.
+  // Lo que la PRENSA publica sobre un indicador cuya serie se detuvo. No lo
+  // reemplaza —una nota no es una estadistica— pero es lo unico vivo que hay, y
+  // el origen va declarado en la primera palabra: se dice MEDIO y se enlaza al
+  // titular, para que el lector juzgue la fuente y no nuestra sintesis de ella.
+  function prensaDelIndicador(clave){
+    const d = almacen.cobertura, sr = d && d.senal_reciente;
+    if(!sr) return null;
+    const tema = Object.values(sr.temas).find(t => (t.indicadores||[]).includes(clave));
+    if(!tema || !tema.notas) return null;
+    const zona = bloqueActivo();
+    let estados = tema.estados || [];
+    if(paisFiltro) estados = estados.filter(e => e.iso === paisFiltro);
+    else if(zona) estados = estados.filter(e => e.bloque === zona);
+    if(!estados.length) return null;
+    return {
+      rotulo: tema.rotulo,
+      cautela: tema.cautela || '',
+      horas: sr.ventana_horas,
+      notas: estados.reduce((a,e)=>a+e.notas, 0),
+      estados: estados.length,
+      corroboradas: estados.filter(e => e.fuerza !== 'origen_unico').length,
+      titulares: estados.flatMap(e => (e.ejemplos||[]).map(x => ({...x, pais:e.pais}))).slice(0,3),
+    };
+  }
+
   function avisoDetenida(info){
     const d = info && info.serie_detenida;
     if(!d) return '';
-    return '<div class="detenida"><b>Serie detenida en ' + info.hasta_anio + '.</b> '
+    let t = '<div class="detenida"><b>Serie detenida en ' + info.hasta_anio + '.</b> '
       + esc(d.detalle)
       + ' <span class="cuando">Comprobado el ' + esc(fechaCorta(d.consultado)) + '.</span>'
       + (d.reemplazo ? '<br><b>Reemplazo posible:</b> ' + esc(d.reemplazo) : '')
       + '</div>';
+
+    // Si la estadistica se detuvo pero la prensa sigue publicando, se muestra
+    // acá mismo: es donde el lector se está preguntando «¿y entonces?».
+    const pr = prensaDelIndicador(info.clave);
+    if(pr){
+      t += '<div class="prensa-viva">'
+        + '<b>La estadística se detuvo; la prensa no.</b> '
+        + '<b>' + miles(pr.notas) + '</b> nota' + (pr.notas===1?'':'s')
+        + ' sobre <b>' + esc(pr.rotulo.toLowerCase()) + '</b> en las últimas '
+        + pr.horas + ' horas'
+        + (pr.estados>1 ? ', en ' + pr.estados + ' Estados' : '') + '. '
+        + (pr.corroboradas
+            ? '<b>' + pr.corroboradas + '</b> con más de un origen independiente.'
+            : 'Ninguna con más de un origen independiente.')
+        + '<div class="titulares">' + pr.titulares.map(x =>
+            '<a href="' + esc(x.enlace) + '" target="_blank" rel="noopener noreferrer">'
+            + esc(x.titulo) + '<span class="quien">' + esc(x.medio) + ' · ' + esc(x.pais)
+            + (x.publicada ? ' · ' + esc(x.publicada.slice(0,10)) : '') + '</span></a>').join('')
+        + '</div>'
+        + '<p class="aclara"><b>Esto es cobertura de prensa, no estadística.</b> '
+        + 'Cuenta <b>notas publicadas</b>, no hechos ocurridos: un Estado con prensa libre '
+        + 'aparece con más notas que uno donde no se puede publicar. <b>No reemplaza la '
+        + 'serie detenida ni se suma a ella</b>, y el enlace lleva al medio para que la '
+        + 'fuente se juzgue sola.'
+        + (pr.cautela ? ' ' + esc(pr.cautela) : '')
+        + '</p></div>';
+    }
+    return t;
   }
 
   function fechaCorta(iso){

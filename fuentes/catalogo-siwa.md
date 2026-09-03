@@ -284,3 +284,49 @@ De paso, el padrón de sitios oficiales verificados pasó de 13 Estados a **29**
 6. **Los 4 Estados sin sitio verificado** y las cuatro materias que siguen sin
    colector: violencia organizada, economías ilícitas, contrabando y
    desinformación.
+
+---
+
+# ACLED — no entra, y el motivo no es el que parecía
+
+Se gestionó la cuenta (gratuita, ya obtenida). **No se conecta a SIWA**, por dos
+razones que aparecieron al leer los términos, no al probar la interfaz.
+
+**1 · La licencia excluye exactamente lo que SIWA es.** Los términos exigen que
+todo lo publicado afuera sea *transformativo, de modo que no se pueda
+reconstruir el contenido original*, y aclaran que **no basta** con que el
+contenido sea «suplementado, adjuntado, extractado, reorganizado **o puesto a
+disposición a través del propio tablero del licenciatario**». SIWA es un tablero
+público que muestra la cifra por Estado: es el caso excluido con todas las
+letras. No es zona gris.
+
+**2 · No hay clave: hay contraseña.** ACLED autentica con correo y contraseña
+—testigo de 24 horas, renovación de 14 días—, de modo que automatizarlo exigiría
+guardar la contraseña personal en el repositorio. Y SIWA hoy **no usa ni una
+sola credencial**: cero secretos en el robot, cero variables de entorno en los 20
+colectores. ACLED sería la primera excepción, y con lo peor de las dos formas.
+
+**Para qué sí sirve la cuenta:** consulta de la mesa analítica durante un caso, y
+producto **gratuito** de la Fundación que *analice* el fenómeno en lugar de
+republicar la tabla. En un producto que se cobra tampoco entra: ahí se suma el
+problema de uso comercial.
+
+**UCDP, el reemplazo natural, también pide credencial ahora** (`401 · API token
+required`). La diferencia importa: su licencia es de atribución y **sí permite
+redistribuir**, y lo que pide es un testigo revocable, no una contraseña
+personal. Queda por averiguar si es gratuito.
+
+## Lo que se hizo en su lugar
+
+Las dos series de terrorismo **siguen declaradas como detenidas** —es lo
+honesto— y ahora **el aviso de serie detenida trae la señal de prensa**: cuántas
+notas se publicaron en las últimas 48 horas sobre esa materia, con titular, medio,
+país, fecha y enlace al original.
+
+Con el origen declarado en la primera línea: **es cobertura de prensa, no
+estadística.** Cuenta notas publicadas, no hechos ocurridos —un Estado con prensa
+libre aparece con más notas que uno donde no se puede publicar—, no reemplaza la
+serie ni se suma a ella, y arrastra la cautela del tema. La de terrorismo dice
+que la palabra es una calificación disputada y que varios Estados llaman
+terrorista a la protesta social; el primer titular que apareció al probarlo era
+un decreto sobre «terrorismo medioambiental», que es precisamente el caso.
