@@ -1044,9 +1044,28 @@
     .colofon .autoridades{margin-top:8px;font-size:8px;color:#5b6f84;}
     body{background:#fff;color:#111;}
     .topbar,.hero,nav.rail,.eje,.mapa-caja,.mapa-barra,.mapa-pie,.acciones,footer,
-    section.domain:not(#informe),.barra-informe select{display:none!important;}
+    .barra-informe select{display:none!important;}
+    /* EL INFORME NO ES UNA SECCION: es un div DENTRO de una. La regla anterior
+       decia `section.domain:not(#informe)`, y como la seccion que lo contiene NO
+       es #informe, se ocultaba ella y se llevaba el informe adentro: EL PDF SALIA
+       EN BLANCO. La regla se escribio cuando el informe era seccion propia; al
+       moverlo a un div nadie volvio a mirar el papel, porque el papel no se mira
+       en pantalla. Ahora se esconde por seccion y se vuelve a mostrar la que lo
+       contiene, sin nombrarla: si manana lo mueven de sitio, sigue andando. */
+    section.domain:not(#de-donde-sale){display:none!important;}
+    #de-donde-sale > *:not(#informe){display:none!important;}
+    /* Las dos de arriba andan en cualquier navegador. Las dos de abajo dicen lo
+       mismo SIN nombrar la seccion, de modo que si el informe se muda solo, la
+       hoja lo sigue. Van despues a proposito: a igual peso, gana la ultima. Y si
+       un navegador viejo no entendiera `:has()`, descarta SOLO estas dos y las
+       de arriba sostienen la hoja: nunca se vuelve a imprimir en blanco. */
+    section.domain:has(#informe){display:block!important;}
+    section.domain:has(#informe) > *:not(#informe){display:none!important;}
+    /* Y EL NIVEL DE LECTURA TAMPOCO PUEDE ESCONDERLO: en papel no hay niveles.
+       El informe lleva data-nivel="2", de modo que a quien leia como «Ciudadano»
+       el navegador le imprimia una hoja vacia aunque la tabla estuviera armada. */
+    #informe{display:block!important;margin:0;}
     .shell{display:block;padding:0;max-width:none;}
-    section#informe{margin:0;}
     .domain-head{border-color:#bbb;}
     .domain-head h3{color:#111;}
     .hoja{background:#fff;border:none;padding:0;}
