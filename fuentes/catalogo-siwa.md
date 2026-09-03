@@ -380,3 +380,46 @@ ministro.
 
 **Ninguna bloquea el registro.** Las cuatro son mejoras; SIWA funciona sin las
 cuatro y lo declara cuando falta alguna.
+
+---
+
+# Yale — no entra a SIWA, pero sirve para otra línea
+
+Tres direcciones aportadas por la Dirección el 3 de septiembre de 2026.
+
+| Dirección | Qué es | Prueba |
+|---|---|---|
+| `geospatial.yale.edu` | **Centro de servicios**, no editor de datos | 200 · HTML |
+| `/request-services` | Pedido de consultoría | — |
+| Mapa de islas de calor | **Sí es un conjunto real**: 10.000+ aglomeraciones urbanas | Servidor viejo muerto (`000`); vive en NASA Earthdata, 200 |
+
+**El instrumento se validó** antes de anotar el `000`: una fuente de control
+respondió 200 en la misma consulta, de modo que el servidor viejo está caído de
+verdad.
+
+## Por qué no entra
+
+**1 · Llega detenido.** La serie va de 2003 a **2018**. Entraría el primer día
+con ocho años de rezago, y el propio registro lo declararía como serie detenida
+—la maquinaria que se construyó esta misma semana—. Sumar un indicador que nace
+detenido es sumar trabajo, no información.
+
+**2 · No es de ninguna de las cuatro materias.** Islas de calor urbanas es
+clima urbano. Los ejes son seguridad, defensa, gobernanza y desarrollo, y las
+seis materias tampoco lo cubren. Meterlo forzaría la arquitectura.
+
+**3 · Rompe la regla de cero credenciales.** Se obtiene por Google Earth Engine
+—que exige cuenta y plataforma entera— o por NASA Earthdata, que exige registro.
+Todo eso por una serie congelada en 2018.
+
+La licencia, en cambio, es buena: **abierta y sin restricción**. El problema no
+es el permiso.
+
+## Para qué sí sirve
+
+**Para la línea EERT** —Evaluación Estratégica de Riesgo Territorial, que es
+municipal—. Ahí una medición de isla de calor de la ciudad evaluada es
+pertinente, el rezago pesa menos porque describe una condición estructural, y la
+descarga se hace una vez a mano en vez de todas las noches.
+
+No es una fuente de SIWA: es material de un producto.
