@@ -41,6 +41,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -126,6 +127,15 @@ def _hayRegistro(testigo: str, pais: str, desde: str) -> bool | None:
 def recolectar():
     usuario = os.environ.get("ACLED_USUARIO", "").strip()
     clave = os.environ.get("ACLED_CLAVE", "").strip()
+
+    # QUE FALTA, SIN DECIR QUE VALE. Decir «sin credencial» a secas obliga a
+    # adivinar si el problema es el nombre del secreto, uno de los dos o los dos.
+    # Se declara la AUSENCIA de cada variable, nunca su contenido.
+    falta = [n for n, v in (("ACLED_USUARIO", usuario), ("ACLED_CLAVE", clave)) if not v]
+    if falta:
+        print(f"[brecha] sin credencial. Variables vacias o no definidas: "
+              f"{', '.join(falta)}. Si el secreto se cargo con OTRO NOMBRE, el robot no "
+              f"lo ve: el nombre tiene que coincidir exactamente.", file=sys.stderr)
 
     padron = geo.padron()
     publica = {}
@@ -218,6 +228,7 @@ def recolectar():
         extra={
             "resumen": {
                 "con_credencial": conCredencial,
+                "variables_que_faltan": falta,
                 "ventana_dias": DIAS,
                 "desde": desde,
                 "estados_con_brecha": cuenta["brecha"],
