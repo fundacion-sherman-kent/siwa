@@ -161,6 +161,12 @@ def _hayRegistro(testigo: str, pais: str, desde: str) -> bool | None:
         "success": d.get("success"),
         "error": d.get("error") or d.get("message"),
         "count": d.get("count"),
+        "total_count": d.get("total_count"),
+        # LOS DOS CAMPOS QUE EXPLICAN EL CERO. La fuente respondio 200 con
+        # success true y cero filas: no entendio mal la consulta, decidio no
+        # entregar. Estos dos campos son donde lo dice.
+        "restricciones": str(d.get("data_query_restrictions"))[:400],
+        "mensajes": str(d.get("messages"))[:400],
         "filas": len(d.get("data") or []) if isinstance(d.get("data"), list) else None,
     }
     datos = d.get("data")
