@@ -1348,6 +1348,23 @@
     <section class="domain bloque" id="seguridad-flujos" data-nivel="2">
       <div class="bloque-head"><h3>Seguridad · flujos y ciberseguridad</h3></div>
       <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
+    <div class="categoria" id="ciber-red" data-nivel="2">
+      <div class="categoria-head"><h4>Ciberseguridad · medición de red</h4><span class="tag" id="tag-ciber-red">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Ninguna de estas tres cifras ordena Estados, y no es un descuido.</b>
+           La muestra de anomalías <b>la hacen voluntarios</b>: un Estado con pocas sondas
+           muestra pocas anomalías, y eso no significa que tenga menos censura sino que
+           hay menos gente midiendo. Por eso se publica la tasa y aun así no se compara.</p>
+        <p><b>Anomalía no es bloqueo</b> —el bloqueo confirmado se cuenta aparte y es una
+           cifra mucho más chica—, <b>un corte no declara su causa</b> —un cable cortado,
+           una tormenta y un apagón deliberado dan la misma curva— y <b>contar equipos de
+           respuesta premia al Estado grande</b>. Van al lado del dato comparable, nunca
+           adentro, como Defensa.</p>
+      </div>
+      <div class="procedencia" id="proc-ciber-red">Cargando el registro…</div>
+      <div class="cruce" id="lista-ciber-red"></div>
+      <div id="vac-ciber-red"></div>
+        </div>
     <div class="categoria" id="contrabando" data-nivel="3">
       <div class="categoria-head"><h4>Contrabando y subfacturación · brecha espejo</h4><span class="tag" id="tag-comercio">—</span></div>
       <div class="aviso-cobertura">
@@ -1479,6 +1496,22 @@
     <section class="domain bloque" id="gobernanza" data-nivel="2">
       <div class="bloque-head"><h3>Gobernanza</h3></div>
       <p class="bloque-bajada">Integridad de la administración pública, calidad de las reglas y salud del espacio informativo en que esas reglas se discuten.</p>
+    <div class="categoria" id="contratacion-abierta" data-nivel="2">
+      <div class="categoria-head"><h4>Contratación pública</h4><span class="tag" id="tag-contratacion-abierta">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Mide la publicación, no la contratación.</b> Un Estado que compra mucho y
+           publica poco aparece con poca cobertura; uno que compra poco y publica todo,
+           con mucha. <b>No es una medida de volumen de compra ni de limpieza.</b></p>
+        <p><b>La ausencia es el dato.</b> No figurar acá no prueba que el Estado no
+           publique: prueba que <b>no publica en el formato que permite compararlo</b>,
+           que es una afirmación más chica y verdadera. Y el recuento <b>mezcla
+           publicadores nacionales con subnacionales</b>, porque la fuente no los
+           distingue y clasificarlos por el título sería inventarlo.</p>
+      </div>
+      <div class="procedencia" id="proc-contratacion-abierta">Cargando el registro…</div>
+      <div class="cruce" id="lista-contratacion-abierta"></div>
+      <div id="vac-contratacion-abierta"></div>
+        </div>
     <div class="categoria" id="institucional" data-nivel="3">
       <div class="categoria-head"><h4>Indicadores de gobernanza</h4><span class="tag" id="tag-institucional">—</span></div>
       <div class="procedencia" id="proc-institucional">Cargando el registro…</div>
@@ -1963,7 +1996,9 @@
                      ['fundacion','Informes de la Fundación'],
                      ['opacidad','Índice de Opacidad'],
                      ['reciente','Publicación oficial reciente'],
-                     ['consulta','Consulta dirigida']];
+                     ['consulta','Consulta dirigida'],
+                     ['contratacion','Contrataciones abiertas'],
+                     ['ciber','Medición de red — OONI, IODA y FIRST']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -3943,6 +3978,8 @@
     paso('lo de hoy', hoyVista);
     paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
+    paso('contratación pública', contratacionVista);
+    paso('ciberseguridad', ciberVista);
     paso('opacidad en la ficha', opacidadFicha);
     paso('consulta dirigida', consultaVista);
     paso('publicación oficial reciente', recienteVista);
@@ -4988,6 +5025,90 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     {rot:'Bing',   url:q => 'https://www.bing.com/search?q=' + encodeURIComponent(q)},
   ];
 
+  const ROTULO_CONTRATACION = {
+    vigente: {rot:'serie vigente', clase:'fresco'},
+    publica_pero_atrasado: {rot:'publica, pero atrasado', clase:'viejo'},
+    sin_publicador: {rot:'sin publicador', clase:'muy-viejo'},
+  };
+
+  function contratacionVista(){
+    const caja = document.getElementById('lista-contratacion-abierta');
+    const d = almacen.contratacion; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const conPub = lista.filter(x => x.publicadores > 0);
+    const tag = document.getElementById('tag-contratacion-abierta');
+    if(tag) tag.textContent = conPub.length + ' de ' + lista.length + ' Estados publican';
+
+    // Los que NO publican son el hallazgo, asi que van PRIMERO cuando son varios.
+    const sinPub = lista.filter(x => !x.publicadores);
+    const cabeza = (!paisFiltro && sinPub.length)
+      ? '<div class="asunto"><h4>' + sinPub.length + ' de ' + lista.length
+        + ' Estados sin ningún publicador</h4><div class="foot"><span class="porque">'
+        + esc(sinPub.map(x => x.pais).join(', ')) + '. <b>No prueba que no publiquen</b>: '
+        + 'prueba que no publican en el formato que permite compararlo.'
+        + '</span><span class="badge unica">ausencia</span></div></div>'
+      : '';
+
+    caja.innerHTML = cabeza + conPub.slice().sort((a,b)=>
+        (b.detalle[0]?.hasta || '').localeCompare(a.detalle[0]?.hasta || ''))
+      .map(x => {
+        const r = ROTULO_CONTRATACION[x.estado] || ROTULO_CONTRATACION.sin_publicador;
+        const f = x.detalle[0] || {};
+        return '<div class="asunto"><h4>' + esc(x.pais)
+          + ' <span class="edad ' + r.clase + '">' + esc(r.rot) + '</span></h4>'
+          + '<div class="foot"><span class="porque">'
+          + '<b>' + x.publicadores + '</b> publicador' + (x.publicadores === 1 ? '' : 'es')
+          + (f.hasta ? ' · serie hasta <b>' + esc(f.hasta) + '</b>' : '')
+          + (f.frecuencia ? ' · se actualiza <b>' + esc(f.frecuencia) + '</b>' : '')
+          + (x.detenidos ? ' · <b>' + x.detenidos + ' detenido(s)</b>' : '')
+          + (f.enlace ? '<br><a href="' + esc(f.enlace) + '" target="_blank" rel="noopener noreferrer">'
+              + esc((f.titulo || f.enlace).slice(0, 76)) + '</a>' : '')
+          + '</span><span class="badge medio">abierto</span></div></div>';
+      }).join('');
+  }
+
+  function ciberVista(){
+    const caja = document.getElementById('lista-ciber-red');
+    const d = almacen.ciber; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const conMed = lista.filter(x => x.mediciones > 0);
+    const tag = document.getElementById('tag-ciber-red');
+    if(tag) tag.textContent = conMed.length + ' de ' + lista.length
+      + ' Estados con medición · ventana de ' + d.resumen.ventana_dias + ' días';
+
+    if(!conMed.length){
+      caja.innerHTML = '<div class="asunto"><h4>Sin mediciones en la ventana</h4>'
+        + '<div class="foot"><span class="porque">Nadie corrió una sonda en '
+        + esc(paisFiltro ? paisNombre : (zona || 'la región')) + ' en los últimos '
+        + d.resumen.ventana_dias + ' días. <b>Es ausencia de medición, no ausencia de '
+        + 'problema.</b></span><span class="badge unica">sin dato</span></div></div>';
+      return;
+    }
+
+    caja.innerHTML = conMed.slice().sort((a,b)=>b.mediciones - a.mediciones).map(x =>
+      '<div class="asunto"><h4>' + esc(x.pais) + '</h4><div class="foot"><span class="porque">'
+      + '<b>' + cifra(x.anomalias_pct) + ' %</b> de anomalías sobre ' + miles(x.mediciones)
+      + ' mediciones · <b>' + miles(x.bloqueos_confirmados) + '</b> bloqueo'
+      + (x.bloqueos_confirmados === 1 ? '' : 's') + ' confirmado'
+      + (x.bloqueos_confirmados === 1 ? '' : 's')
+      + (x.cortes_sin_dato ? ' · cortes sin dato'
+          : ' · <b>' + x.cortes + '</b> corte' + (x.cortes === 1 ? '' : 's')
+            + (x.cortes_criticos ? ' (' + x.cortes_criticos + ' crítico'
+                + (x.cortes_criticos === 1 ? '' : 's') + ')' : ''))
+      + (x.equipos_sin_dato ? ' · equipos sin dato'
+          : ' · <b>' + x.equipos_respuesta + '</b> equipo'
+            + (x.equipos_respuesta === 1 ? '' : 's') + ' de respuesta')
+      + '</span><span class="badge medio">medición</span></div></div>').join('');
+  }
+
   function consultaVista(){
     const caja = document.getElementById('lista-consulta');
     const d = almacen.consulta; if(!caja || !d) return;
@@ -5692,6 +5813,28 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-mensajeria','mensajería',err.message);
       document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('contratacion.json'), traer('estado/contratacion.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.contratacion=d; const meta=d.procedencia;
+      pintarProcedencia('proc-contratacion-abierta',meta);
+      vacios+=pintarVacios('vac-contratacion-abierta',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-contratacion-abierta','contratación pública',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-contratacion-abierta','contratación pública',err.message);
+      document.getElementById('proc-contratacion-abierta').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('ciber.json'), traer('estado/ciber.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.ciber=d; const meta=d.procedencia;
+      pintarProcedencia('proc-ciber-red',meta);
+      vacios+=pintarVacios('vac-ciber-red',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-ciber-red','ciberseguridad',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-ciber-red','ciberseguridad',err.message);
+      document.getElementById('proc-ciber-red').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('consulta.json'), traer('estado/consulta.json').catch(()=>null)])
     .then(([d,estado])=>{

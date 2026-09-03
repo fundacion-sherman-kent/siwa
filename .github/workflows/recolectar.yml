@@ -89,6 +89,17 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/consulta.py
 
+      - name: Medicion de red (OONI, IODA y FIRST)
+        id: ciber
+        continue-on-error: true
+        run: python colectores/ciber.py
+
+      - name: Contrataciones abiertas
+        id: contratacion
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/contratacion.py
+
       # --- Series anuales y catalogos, una vez por dia ---
       - name: Indicadores comparables (Banco Mundial)
         id: banco
@@ -159,4 +170,6 @@ jobs:
           [ "${{ steps.opacidad.outcome }}" = "failure" ] && { echo "Falló el colector del índice de opacidad."; fallo=1; }
           [ "${{ steps.reciente.outcome }}" = "failure" ] && { echo "Falló el colector de publicación oficial reciente."; fallo=1; }
           [ "${{ steps.consulta.outcome }}" = "failure" ] && { echo "Falló el colector de consulta dirigida."; fallo=1; }
+          [ "${{ steps.ciber.outcome }}" = "failure" ] && { echo "Falló el colector de medición de red."; fallo=1; }
+          [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }
           exit $fallo
