@@ -83,6 +83,12 @@ jobs:
         continue-on-error: true
         run: python colectores/reciente_oficial.py
 
+      - name: Consulta dirigida a la fuente primaria
+        id: consulta
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/consulta.py
+
       # --- Series anuales y catalogos, una vez por dia ---
       - name: Indicadores comparables (Banco Mundial)
         id: banco
@@ -152,4 +158,5 @@ jobs:
           [ "${{ steps.fundacion.outcome }}" = "failure" ] && { echo "Falló el colector de informes de la Fundación."; fallo=1; }
           [ "${{ steps.opacidad.outcome }}" = "failure" ] && { echo "Falló el colector del índice de opacidad."; fallo=1; }
           [ "${{ steps.reciente.outcome }}" = "failure" ] && { echo "Falló el colector de publicación oficial reciente."; fallo=1; }
+          [ "${{ steps.consulta.outcome }}" = "failure" ] && { echo "Falló el colector de consulta dirigida."; fallo=1; }
           exit $fallo

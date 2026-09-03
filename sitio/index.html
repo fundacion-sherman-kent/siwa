@@ -865,6 +865,12 @@
     margin-bottom:5px;
   }
   .mide-lista{display:flex;flex-wrap:wrap;gap:6px;}
+  .consulta-txt{
+    display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;
+    line-height:1.5;color:#C7D2E0;background:rgba(255,255,255,.04);
+    border:1px solid var(--line);border-radius:6px;padding:6px 8px;margin:6px 0 4px;
+    white-space:pre-wrap;overflow-wrap:anywhere;
+  }
   .mide-chip{
     display:inline-block;font-size:11px;line-height:1.35;padding:5px 10px;
     border:1px solid var(--line);border-radius:999px;color:#C7D2E0;text-decoration:none;
@@ -1587,6 +1593,24 @@
     <section class="domain bloque" id="que-se-publica" data-nivel="2">
       <div class="bloque-head"><h3>Qué se publica hoy</h3></div>
       <p class="bloque-bajada">Qué se está diciendo sobre la región en este momento, y en cuántos orígenes independientes. <b>No es una materia del registro:</b> es el segundo factor de veracidad con el que se contrastan las materias.</p>
+    <div class="categoria" id="consulta" data-nivel="2">
+      <div class="categoria-head"><h4>Ir a la fuente primaria</h4><span class="tag" id="tag-consulta">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>El registro dice qué se sabe; esto dice dónde buscar lo que sigue.</b>
+           Cada consulta combina el término que usa el propio Estado con el dominio
+           de su portal oficial, el tipo de archivo donde suele estar el dato duro y
+           la resta del ruido administrativo. Se abre en el buscador y devuelve
+           documentos del organismo, no notas que hablan del organismo.</p>
+        <p><b>No es un dato: es una consulta armada.</b> La Oficina no ejecuta ninguna
+           búsqueda ni cuenta resultados —lo que un buscador devuelve cambia según el
+           país, la sesión y el idioma de quien pregunta, y no es comparable entre
+           Estados—. Acotar por dominio oficial acota <b>el origen, no la calidad</b>.</p>
+      </div>
+      <div class="procedencia" id="proc-consulta">Cargando el registro…</div>
+      <div class="cruce" id="lista-consulta"></div>
+      <div id="vac-consulta"></div>
+    </div>
+
     <div class="categoria" id="publicacion-oficial" data-nivel="2">
       <div class="categoria-head"><h4>Lo que cada Estado publicó de sí mismo</h4><span class="tag" id="tag-reciente">—</span></div>
       <div class="aviso-cobertura">
@@ -1911,22 +1935,14 @@
                      ['bti','Índice Bertelsmann'],
                      ['fundacion','Informes de la Fundación'],
                      ['opacidad','Índice de Opacidad'],
-                     ['reciente','Publicación oficial reciente']];
+                     ['reciente','Publicación oficial reciente'],
+                     ['consulta','Consulta dirigida']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
-    const conjuntos=[['banco','Banco Mundial'],['ods','Naciones Unidas — ODS'],
-                     ['desplazamiento','ACNUR'],['oficiales','Padrón oficial'],
-                     ['owd','V-Dem, Terrorismo y UCDP'],
-                     ['cobertura','Cobertura noticiosa'],['redes','Circulación en redes'],
-                     ['telegram','Canales de mensajería'],
-                     ['conflictos','Conflictos territoriales'],
-                     ['comercio','Comercio · brecha espejo'],
-                     ['ransomware','Extorsión informática'],
-                     ['bti','Índice Bertelsmann'],
-                     ['fundacion','Informes de la Fundación'],
-                     ['opacidad','Índice de Opacidad'],
-                     ['reciente','Publicación oficial reciente']]
+    // UNA SOLA LISTA. Dos listas con el mismo contenido no son un duplicado
+    // inofensivo: son dos verdades que empiezan iguales y se separan solas.
+    const conjuntos = FUENTES_DEL_REGISTRO
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
@@ -3833,6 +3849,7 @@
     paso('lo de hoy', hoyVista);
     paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
+    paso('consulta dirigida', consultaVista);
     paso('publicación oficial reciente', recienteVista);
     paso('padrón de fuentes oficiales', oficialesVista);
     paso('índice de opacidad', opacidadVista);
@@ -4810,6 +4827,69 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     sin_conjunto: 'sin conjunto de criminalidad', sin_portal: 'sin portal consultable',
   };
 
+  // Los dos motores se ofrecen a proposito: ninguno indexa lo mismo, y en varios
+  // Estados del Caribe el segundo encuentra lo que el primero no.
+  const MOTORES = [
+    {rot:'Google', url:q => 'https://www.google.com/search?q=' + encodeURIComponent(q)},
+    {rot:'Bing',   url:q => 'https://www.bing.com/search?q=' + encodeURIComponent(q)},
+  ];
+
+  function consultaVista(){
+    const caja = document.getElementById('lista-consulta');
+    const d = almacen.consulta; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const conDominio = lista.filter(x => x.dominios_oficiales.length);
+    const tag = document.getElementById('tag-consulta');
+    if(tag) tag.textContent = conDominio.length + ' de ' + lista.length
+      + ' con dominio oficial probado';
+
+    // Sin un pais elegido serian 561 consultas juntas: no se lee. Se pide elegir.
+    if(!paisFiltro){
+      caja.innerHTML = '<div class="asunto"><h4>Elegí un Estado para armar la consulta</h4>'
+        + '<div class="foot"><span class="porque">En ' + esc(zona || 'la región')
+        + ', <b>' + conDominio.length + ' de ' + lista.length + '</b> Estados tienen un dominio '
+        + 'oficial ya probado por la Oficina. La consulta se acota a ese dominio; en los '
+        + 'demás se acota por el nombre del Estado y <b>no llega a la fuente oficial</b>.'
+        + '</span><span class="badge medio">' + lista.length + ' Estados</span></div></div>';
+      return;
+    }
+
+    const x = lista[0];
+    if(!x){ caja.innerHTML = ''; return; }
+    const acotada = x.dominios_oficiales.length > 0;
+
+    // Se agrupa por materia: son nueve materias y hasta dos formas de nombrar
+    // cada una. Sin agrupar, el lector ve dieciocho renglones sueltos.
+    const porMateria = {};
+    x.consultas.forEach(c => (porMateria[c.materia] = porMateria[c.materia] || []).push(c));
+
+    const aviso = acotada
+      ? '<div class="foot"><span class="porque">Acotada a <b>' + esc(x.dominios_oficiales[0])
+        + '</b>, dominio oficial probado por la Oficina. Consulta en <b>'
+        + esc(({es:'castellano',pt:'portugués',en:'inglés',fr:'francés',nl:'neerlandés'})[x.lengua])
+        + '</b>, que es la lengua en que publica el Estado.'
+        + '</span><span class="badge medio">fuente oficial</span></div>'
+      : '<div class="foot"><span class="porque"><b>Sin dominio oficial probado.</b> '
+        + 'La consulta se acota por el nombre del Estado y <b>puede devolver fuentes que no '
+        + 'son oficiales</b>. La Oficina no inventa la dirección: suponer un dominio por '
+        + 'analogía con el de otro Estado mandaría a una página inexistente.'
+        + '</span><span class="badge unica">sin acotar</span></div>';
+
+    caja.innerHTML = '<div class="asunto"><h4>' + esc(x.pais) + '</h4>' + aviso + '</div>'
+      + Object.keys(porMateria).map(m =>
+          '<div class="asunto"><h4>' + esc(m) + '</h4><div class="foot"><span class="porque">'
+          + porMateria[m].map(c =>
+              '<code class="consulta-txt">' + esc(c.consulta) + '</code>'
+              + MOTORES.map(mo => '<a class="mide-chip" target="_blank" rel="noopener noreferrer"'
+                  + ' href="' + esc(mo.url(c.consulta)) + '">' + esc(mo.rot) + '</a>').join('')
+            ).join('<br>')
+          + '</span></div></div>').join('');
+  }
+
   function recienteVista(){
     const caja = document.getElementById('lista-reciente');
     const d = almacen.reciente; if(!caja || !d) return;
@@ -5458,6 +5538,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-mensajeria','mensajería',err.message);
       document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('consulta.json'), traer('estado/consulta.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.consulta=d; const meta=d.procedencia;
+      pintarProcedencia('proc-consulta',meta);
+      vacios+=pintarVacios('vac-consulta',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-consulta','consulta dirigida',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-consulta','consulta dirigida',err.message);
+      document.getElementById('proc-consulta').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('reciente_oficial.json'), traer('estado/reciente_oficial.json').catch(()=>null)])
     .then(([d,estado])=>{
