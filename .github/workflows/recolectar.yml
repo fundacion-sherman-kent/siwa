@@ -137,6 +137,14 @@ jobs:
         continue-on-error: true
         run: python colectores/fuentes_oficiales.py
 
+      # Las cifras de la portada —las que ve quien comparte el enlace y las que
+      # lee un buscador— se recalculan acá. Escritas a mano envejecen solas: en
+      # dos dias seguidos quedaron diciendo «15 fuentes» cuando eran 16 y 19.
+      - name: Sellar las cifras de la portada
+        if: always()
+        continue-on-error: true
+        run: python herramientas/sellar-portada.py
+
       - name: Guardar lo recolectado
         if: always()
         run: |
@@ -144,7 +152,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           # La regla de .gitattributes necesita que el controlador exista.
           git config merge.ours.driver true
-          git add datos/
+          git add datos/ sitio/index.html index.html sitemap.xml
           git diff --staged --quiet || git commit -m "Recolección $(date -u +'%Y-%m-%d %H:%M UTC')"
           # Si alguien subio algo mientras corria la recoleccion, se trae y se
           # reintenta en lugar de fallar. Los datos se resuelven solos por la

@@ -175,12 +175,12 @@ exactamente el error que este registro existe para no cometer.
 
 ```
 observatorio-fusk/
-├── colectores/            13 colectores + comun.py + geo.py
+├── colectores/            18 colectores + comun.py + geo.py
 │   ├── comun.py           ← LAS REGLAS. Único camino de salida.
 │   ├── geo.py             atribución de un hecho a un país por coordenadas
 │   ├── *.json             padrones a mano: medios, canales, temas, fronteras
 │   └── <fuente>.py        un archivo por fuente
-├── datos/publico/         la salida: 14 archivos JSON
+├── datos/publico/         la salida: 20 archivos JSON
 │   └── estado/            el parte de fallas, uno por colector
 ├── sitio/
 │   ├── index.html         LA PÁGINA ENTERA — 245 KB, sin dependencias
@@ -240,7 +240,7 @@ sube, y queda publicada. Adentro, tres mecanismos vale la pena conocer:
 
 ---
 
-## 5. Las quince fuentes
+## 5. Las diecinueve fuentes
 
 | Colector | Fuente | Nota | Qué aporta |
 |---|---|---|---|
@@ -257,9 +257,21 @@ sube, y queda publicada. Adentro, tres mecanismos vale la pena conocer:
 | `cobertura` | 153 medios del padrón propio | **F-3** | Qué se está publicando hoy |
 | `telegram` | 20 canales públicos verificados | **F-4** | Difusión en mensajería |
 | `redes` | Mastodon, 4 instancias | **F-4** | Circulación en red social abierta |
+| `opacidad` | Índice propio de la Oficina | **A-2** | Qué NO publica cada Estado, con los cuatro pasos revisados |
+| `reciente_oficial` | Catálogos oficiales de los Estados | **A-2** | Lo último que cada Estado publicó de sí mismo |
+| `consulta` | Padrones propios ya probados | **A-2** | La consulta armada contra la fuente primaria de cada Estado |
+| `contratacion` | Registro de contrataciones abiertas | **B-2** | Quién publica sus compras, y quién no |
+| `ciber` | OONI, IODA y FIRST | **B-2** | Anomalías de red, cortes de conectividad y equipos de respuesta |
+| `archivo` | Archivo público de la web | **B-2** | **Lo que dejó de publicarse**, con fecha |
 
-**71 indicadores** repartidos en cuatro ejes: Gobernanza 30, Seguridad 18,
-Desarrollo 14, Defensa 9.
+**69 indicadores** repartidos en cuatro ejes. La cuenta exacta la calcula el
+propio sitio, y `herramientas/sellar-portada.py` la sella en cada recolección:
+**escrita a mano envejece sola**, y quedó vieja dos veces en dos días.
+
+Seis de estos colectores no producen indicadores comparables sino **medición o
+padrón**, y por eso no entran al compuesto: `opacidad`, `reciente_oficial`,
+`consulta`, `contratacion`, `ciber` y `archivo`. Van al lado del dato
+comparable, nunca adentro, con la misma arquitectura que Defensa.
 
 **Por qué conviven una fuente A-1 y una F-4.** No es descuido. Una cuenta anual
 de la UNODC y una mención de prensa **no son el mismo dato**, y mezclarlos
