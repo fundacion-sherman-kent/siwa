@@ -20,7 +20,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 20 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:description" content="33 Estados, 69 indicadores, 21 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 20 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 21 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
@@ -44,7 +44,7 @@
       "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 20 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 21 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1114,6 +1114,7 @@
     <div><strong id="m-dominios">1</strong><span>Dominios con dato</span></div>
     <div><strong id="m-registros">—</strong><span>Registros vigentes</span></div>
     <div><strong id="m-vacios">—</strong><span>Vacíos declarados</span></div>
+    <div><strong id="m-memoria">—</strong><span>Días de memoria</span></div>
     <div><strong id="m-edad">—</strong><span>Antigüedad mediana</span></div>
     <div><strong>33</strong><span>Estados del padrón</span></div>
   </div>
@@ -1797,6 +1798,23 @@
     <section class="domain bloque" id="opacidad-seccion" data-nivel="1">
       <div class="bloque-head"><h3>Índice de Opacidad</h3></div>
       <p class="bloque-bajada">Qué no publica cada Estado, y qué se revisó para poder afirmarlo. Es una medición propia de la Oficina: no la publica ningún organismo.</p>
+    <div class="categoria" id="memoria" data-nivel="1">
+      <div class="categoria-head"><h4>Lo que cambió desde que miramos</h4><span class="tag" id="tag-memoria">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>El registro guarda lo que observa, no solo lo que ve hoy.</b> Cada vez que un
+           Estado cambia de estado —un portal que vuelve, un conjunto que desaparece, una
+           serie que se detiene— queda anotado con su fecha. Es la única parte del registro
+           que <b>nadie más está guardando</b>: la cifra de un organismo internacional va a
+           seguir estando; que un sitio se apagó existe porque alguien lo miró.</p>
+        <p><b>La fecha es cuándo lo observamos, no cuándo ocurrió.</b> Un portal pudo caerse
+           el martes y ser visto el jueves. Y la primera vez que se ve a un Estado
+           <b>no dice desde cuándo está así</b>: dice desde cuándo lo miramos. Esas líneas
+           van marcadas.</p>
+      </div>
+      <div class="procedencia" id="proc-memoria">Cargando el registro…</div>
+      <div class="cruce" id="lista-memoria"></div>
+      <div id="vac-memoria"></div>
+        </div>
     <div class="categoria" id="retirada" data-nivel="1">
       <div class="categoria-head"><h4>Lo que dejó de publicarse</h4><span class="tag" id="tag-archivo">—</span></div>
       <div class="aviso-cobertura">
@@ -2051,7 +2069,8 @@
                      ['contratacion','Contrataciones abiertas'],
                      ['ciber','Medición de red — OONI, IODA y FIRST'],
                      ['archivo','Archivo de la web — lo retirado'],
-                     ['copernicus','Copernicus — imagen satelital']];
+                     ['copernicus','Copernicus — imagen satelital'],
+                     ['memoria','Bitácora propia de observación']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -2141,6 +2160,15 @@
     document.getElementById('m-dominios').textContent = dominios;
     document.getElementById('m-registros').textContent = miles(registros);
     document.getElementById('m-vacios').textContent = vacios;
+    const mem = almacen.memoria;
+    const cajaMem = document.getElementById('m-memoria');
+    if(cajaMem && mem){
+      cajaMem.textContent = mem.resumen.dias_de_memoria;
+      cajaMem.title = 'La Oficina guarda lo que observa desde el '
+        + mem.resumen.memoria_empieza + '. ' + mem.resumen.transiciones_guardadas
+        + ' transiciones anotadas. Antes de esa fecha el registro sobrescribía cada hora '
+        + 'y no guardaba nada de lo suyo.';
+    }
     const ed = edadDelRegistro();
     const cajaEdad = document.getElementById('m-edad');
     if(cajaEdad && ed){
@@ -3007,6 +3035,81 @@
     vivo:                {rot:'vivo',                  clase:'fresco'},
     sin_dominio_probado: {rot:'sin sitio verificado',  clase:'unica'},
   };
+
+  function memoriaVista(){
+    const caja = document.getElementById('lista-memoria');
+    const d = almacen.memoria; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    const nombre = iso => (d.estados||{})[iso] || iso;
+    const deZona = iso => {
+      const p = (padron||[]).find(x => x.iso === iso);
+      return p ? p.bloque : null;
+    };
+
+    let cambios = (d.registros||[]).filter(c => !c.primera_vez);
+    if(paisFiltro) cambios = cambios.filter(c => c.iso === paisFiltro);
+    else if(zona) cambios = cambios.filter(c => deZona(c.iso) === zona);
+    cambios = cambios.slice().reverse();
+
+    const tag = document.getElementById('tag-memoria');
+    if(tag) tag.textContent = d.resumen.dias_de_memoria + ' día'
+      + (d.resumen.dias_de_memoria === 1 ? '' : 's') + ' de memoria · '
+      + cambios.length + ' cambio' + (cambios.length === 1 ? '' : 's');
+
+    const rot = (materia, valor) =>
+      ((d.materias||{})[materia]||{}).significa?.[valor] || valor || 'sin dato';
+
+    // Primero lo que cambio. Si no cambio nada, se dice —no se deja en blanco—
+    // y se muestra desde cuando estan como estan, que es la otra mitad.
+    let html = '';
+    if(cambios.length){
+      html += cambios.slice(0, 12).map(c =>
+        '<div class="asunto"><h4>' + esc(nombre(c.iso))
+        + ' <span class="edad ' + (c.a === 'vivo' || c.a === 'al_dia' || c.a === 'publicado'
+            ? 'fresco' : 'viejo') + '">' + esc(c.observado) + '</span></h4>'
+        + '<div class="foot"><span class="porque">'
+        + '<b>' + esc(((d.materias||{})[c.materia]||{}).rotulo || c.materia) + '</b>: '
+        + esc(rot(c.materia, c.de)) + ' <b>→</b> ' + esc(rot(c.materia, c.a))
+        + '</span><span class="badge medio">observado</span></div></div>').join('');
+    } else {
+      html += '<div class="asunto"><h4>Sin cambios registrados</h4><div class="foot">'
+        + '<span class="porque">Nada cambió en ' + esc(paisFiltro ? paisNombre : (zona || 'la región'))
+        + ' desde que la Oficina empezó a mirar, el <b>' + esc(d.resumen.memoria_empieza)
+        + '</b>. <b>No es que no se haya mirado</b>: se miró y sigue igual.'
+        + '</span><span class="badge unica">sin cambios</span></div></div>';
+    }
+
+    // «Desde cuando» de cada materia, para el ambito elegido.
+    const desde = d.desde || {};
+    const isos = paisFiltro ? [paisFiltro]
+      : (padron||[]).filter(x => !zona || x.bloque === zona).map(x => x.iso);
+    const filas = [];
+    Object.keys(desde).forEach(materia => {
+      isos.forEach(iso => {
+        const x = desde[materia][iso];
+        if(!x) return;
+        filas.push({materia, iso, ...x});
+      });
+    });
+    // Lo mas viejo primero: un Estado que hace semanas que no responde importa
+    // mas que uno que cambio ayer.
+    filas.sort((a,b) => (b.dias||0) - (a.dias||0));
+
+    if(filas.length){
+      html += '<div class="asunto"><h4>Desde cuándo está así</h4><div class="foot">'
+        + '<span class="porque">'
+        + filas.slice(0, paisFiltro ? 8 : 10).map(f =>
+            '<b>' + esc(nombre(f.iso)) + '</b> · '
+            + esc(((d.materias||{})[f.materia]||{}).rotulo || f.materia) + ': '
+            + esc(f.significa) + ' desde el <b>' + esc(f.desde) + '</b>'
+            + (f.solo_desde_que_miramos
+                ? ' <i>(desde que lo miramos, no desde que está así)</i>'
+                : (f.venia_de ? ' <i>(venía de: ' + esc(rot(f.materia, f.venia_de)) + ')</i>' : ''))
+          ).join('<br>')
+        + '</span><span class="badge unica">bitácora</span></div></div>';
+    }
+    caja.innerHTML = html;
+  }
 
   function archivoVista(){
     const caja = document.getElementById('lista-archivo');
@@ -4270,6 +4373,7 @@
     paso('ámbito del informe', ecoDelAmbito);
     paso('contratación pública', contratacionVista);
     paso('ciberseguridad', ciberVista);
+    paso('lo que cambió', memoriaVista);
     paso('lo que dejó de publicarse', archivoVista);
     paso('opacidad en la ficha', opacidadFicha);
     paso('imagen satelital disponible', copernicusVista);
@@ -6207,6 +6311,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-copernicus','imagen satelital',err.message);
       document.getElementById('proc-copernicus').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('memoria.json'), traer('estado/memoria.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.memoria=d; const meta=d.procedencia;
+      pintarProcedencia('proc-memoria',meta);
+      vacios+=pintarVacios('vac-memoria',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-memoria','lo que cambió',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-memoria','lo que cambió',err.message);
+      document.getElementById('proc-memoria').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('archivo.json'), traer('estado/archivo.json').catch(()=>null)])
     .then(([d,estado])=>{
