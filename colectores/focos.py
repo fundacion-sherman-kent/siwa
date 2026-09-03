@@ -29,6 +29,22 @@ tendrá siempre más focos que Granada por superficie, no por conducta.
 
 Se publica el recuento por Estado **como magnitud**, con la misma arquitectura
 que Defensa y la medición de red: al lado del dato comparable, nunca adentro.
+
+POR QUÉ SE REESCRIBIÓ, Y LA LECCIÓN ES LA DE SIEMPRE
+-----------------------------------------------------
+La primera versión pedía los focos **país por país**, contra una dirección que
+no existe. El robot devolvía `HTTP 400 · Invalid API call.` y se detenía. Era
+fácil culpar a la credencial recién cargada.
+
+Se probó con una clave **deliberadamente falsa**: contra el recuadro geográfico
+la fuente contestó *«Invalid MAP_KEY»* —ruta correcta, clave mala— y contra el
+país, *«Invalid API call»* —la ruta no existe, con clave o sin ella—. La clave
+estaba bien desde el principio. **El instrumento falló antes que la fuente.**
+
+Esta fuente **no tiene consulta por país**: solo por recuadro. Así que se pide
+una vez el recuadro entero de América Latina y el Caribe y se atribuye cada
+detección a su Estado con `geo.pais_de`, que existe para exactamente esto. Sale
+más barato —una consulta en lugar de treinta y tres— y usa lo que ya estaba.
 """
 
 from __future__ import annotations
@@ -39,7 +55,6 @@ import os
 import sys
 import urllib.error
 import urllib.request
-from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
 import comun
@@ -52,40 +67,44 @@ NAVEGADOR = (
 )
 # El sensor de mayor resolución disponible sin costo.
 SENSOR = "VIIRS_SNPP_NRT"
-DIAS = 3          # la ventana; la interfaz admite hasta diez
+DIAS = 3          # la ventana; la interfaz admite de uno a cinco días
+# El recuadro de América Latina y el Caribe, en el orden que pide la fuente:
+# oeste, sur, este, norte. Va holgado a propósito: recortar de menos deja focos
+# afuera, y recortar de más solo cuesta unos puntos que caen fuera del padrón.
+RECUADRO = "-118,-56,-34,33"
 # Brasil tiene focos TODOS los dias del anio. Si el control da cero, el que
 # fallo es el instrumento, no el mundo.
 CONTROL = "BRA"
+# Si la respuesta llega justo en el tope, es que se cortó: publicar la mitad de
+# los focos como si fueran todos sería peor que no publicar ninguno.
+TOPE_LECTURA = 80_000_000
 
 
-def _pedir(clave: str, iso: str, dias: int) -> list | None:
-    url = f"{BASE}/country/csv/{clave}/{SENSOR}/{iso}/{dias}"
+def _pedir(clave: str, dias: int) -> list:
+    """Una sola consulta: el recuadro entero. La fuente NO admite pedir por país."""
+    url = f"{BASE}/area/csv/{clave}/{SENSOR}/{RECUADRO}/{dias}"
     try:
         peticion = urllib.request.Request(url, headers={"User-Agent": NAVEGADOR})
-        with urllib.request.urlopen(peticion, timeout=90) as respuesta:
-            crudo = respuesta.read(20_000_000).decode("utf-8", "replace")
+        with urllib.request.urlopen(peticion, timeout=180) as respuesta:
+            crudo = respuesta.read(TOPE_LECTURA)
     except urllib.error.HTTPError as error:
         cuerpo = error.read(400).decode("utf-8", "replace").strip()
         raise RuntimeError(
-            f"La fuente rechazó la consulta de {iso}: HTTP {error.code} · {cuerpo}. "
-            "NO se anota cero: no poder mirar no es haber mirado.") from error
-    except Exception:  # noqa: BLE001 — la falla de un Estado no tumba la corrida
-        return None
+            f"La fuente rechazó la consulta: HTTP {error.code} · {cuerpo}. "
+            "NO se anota cero: no poder mirar no es haber mirado. Si dice «Invalid "
+            "MAP_KEY» el problema es la credencial; si dice «Invalid API call», la "
+            "dirección.") from error
 
-    texto = crudo.strip()
+    if len(crudo) >= TOPE_LECTURA:
+        raise RuntimeError(
+            f"La respuesta llegó al tope de lectura ({TOPE_LECTURA} bytes), así que "
+            "está cortada. NO se publica una parte de los focos como si fueran todos.")
+
+    texto = crudo.decode("utf-8", "replace").strip()
     if not texto or texto.lower().startswith("invalid"):
-        return None
-    filas = list(csv.DictReader(io.StringIO(texto)))
-    return filas
-
-
-def _delEstado(par: tuple) -> tuple:
-    clave, iso = par
-    try:
-        filas = _pedir(clave, iso, DIAS)
-    except RuntimeError:
-        return iso, None
-    return iso, filas
+        raise RuntimeError(
+            f"La fuente contestó «{texto[:120]}» en lugar de datos. NO se anota cero.")
+    return list(csv.DictReader(io.StringIO(texto)))
 
 
 def recolectar():
@@ -96,52 +115,62 @@ def recolectar():
 
     registros, conFoco, sinMirar = [], 0, 0
     instrumentoSano = None
+    porIso: dict = {}
+    fueraDelPadron = 0
 
     if clave:
+        filas = _pedir(clave, DIAS)
+
+        # Cada deteccion es un punto: se le pregunta al padron de que Estado es.
+        for f in filas:
+            try:
+                lon, lat = float(f["longitude"]), float(f["latitude"])
+            except (KeyError, TypeError, ValueError):
+                continue
+            pais = geo.pais_de(lon, lat)
+            if not pais:
+                fueraDelPadron += 1
+                continue
+            caja = porIso.setdefault(pais["iso"], {"total": 0, "alta": 0, "noche": 0})
+            caja["total"] += 1
+            confianza = str(f.get("confidence", "")).strip()
+            if confianza.lower() in ("h", "high") or (
+                    confianza.isdigit() and int(confianza) >= 80):
+                caja["alta"] += 1
+            if str(f.get("daynight", "")).upper() == "N":
+                caja["noche"] += 1
+
         # SE PRUEBA EL INSTRUMENTO ANTES DE CREERLE UN CERO A NADIE. La brecha
-        # publico cero en 33 Estados por un filtro mal escrito; acá no se repite.
-        control = _pedir(clave, CONTROL, DIAS)
-        instrumentoSano = bool(control)
+        # publico cero en 33 Estados por un filtro mal escrito; aca no se repite.
+        instrumentoSano = porIso.get(CONTROL, {}).get("total", 0) > 0
         if not instrumentoSano:
             raise RuntimeError(
-                f"La prueba del instrumento falló: la consulta de control sobre {CONTROL} "
-                f"—que tiene focos todos los días del año— no devolvió ninguno en "
-                f"{DIAS} días. Eso NO significa que no haya ardido nada: significa que la "
-                "consulta o la clave no sirven. NO se publica un cero que no se puede "
-                "sostener.")
-
-        pares = [(clave, p["iso"]) for p in geo.padron()]
-        with ThreadPoolExecutor(max_workers=4) as ejecutor:
-            hallado = dict(ejecutor.map(_delEstado, pares))
-    else:
-        hallado = {}
+                f"La prueba del instrumento falló: {CONTROL} —que tiene focos todos los "
+                f"días del año— no quedó con ninguno tras atribuir {len(filas)} "
+                f"detecciones del recuadro. Eso NO significa que no haya ardido nada: "
+                "significa que la consulta, la clave o la atribución al padrón no "
+                "sirven. NO se publica un cero que no se puede sostener.")
 
     for pais in geo.padron():
-        filas = hallado.get(pais["iso"]) if clave else None
-        if filas is None:
+        caja = porIso.get(pais["iso"]) if clave else None
+        if not clave:
             sinMirar += 1
             registros.append({
                 "iso": pais["iso"], "pais": pais["pais"], "bloque": pais["bloque"],
-                "estado": "sin_clave" if not clave else "no_se_pudo_mirar",
-                "focos": None,
+                "estado": "sin_clave", "focos": None,
             })
             continue
-
-        # La confianza la declara el propio sensor. Se cuenta aparte la alta,
-        # porque un foco de confianza baja no sostiene ninguna afirmacion.
-        alta = sum(1 for f in filas
-                   if str(f.get("confidence", "")).lower() in ("h", "high")
-                   or (str(f.get("confidence", "")).isdigit()
-                       and int(f["confidence"]) >= 80))
-        nocturnos = sum(1 for f in filas if str(f.get("daynight", "")).upper() == "N")
-        if filas:
+        # Con la consulta hecha y el instrumento probado, un Estado sin puntos SI
+        # es un cero legitimo: se lo miro y no habia nada.
+        caja = caja or {"total": 0, "alta": 0, "noche": 0}
+        if caja["total"]:
             conFoco += 1
         registros.append({
             "iso": pais["iso"], "pais": pais["pais"], "bloque": pais["bloque"],
-            "estado": "con_focos" if filas else "sin_focos_en_la_ventana",
-            "focos": len(filas),
-            "confianza_alta": alta,
-            "nocturnos": nocturnos,
+            "estado": "con_focos" if caja["total"] else "sin_focos_en_la_ventana",
+            "focos": caja["total"],
+            "confianza_alta": caja["alta"],
+            "nocturnos": caja["noche"],
         })
 
     vacios = [
@@ -159,9 +188,18 @@ def recolectar():
         "LA CONFIANZA LA DECLARA EL SENSOR y se cuenta aparte: un foco de confianza baja "
         "no sostiene ninguna afirmacion. El recuento total incluye todos; el de confianza "
         "alta es el unico que se puede citar.",
+        "LA FUENTE NO ADMITE CONSULTA POR PAIS: solo por recuadro geografico. Se pide "
+        "una vez el recuadro de America Latina y el Caribe y se ATRIBUYE CADA DETECCION "
+        "a su Estado por la coordenada. Un punto que cae en el mar, en un pais vecino "
+        "fuera del padron o en aguas internacionales NO se cuenta, y se declara cuantos "
+        "fueron.",
         "ANTES DE CREERLE UN CERO A NADIE SE PRUEBA EL INSTRUMENTO contra Brasil, que "
         "tiene focos todos los dias del anio. Si ESE da cero, la corrida se detiene "
-        "entera en lugar de publicar treinta y tres ceros.",
+        "entera en lugar de publicar treinta y tres ceros. La primera version de este "
+        "colector pedia por pais contra una direccion QUE NO EXISTE, y era facil culpar "
+        "a la credencial: se probo con una clave deliberadamente falsa y la fuente "
+        "distinguio «clave invalida» de «direccion invalida». El instrumento habia "
+        "fallado antes que la fuente.",
     ]
 
     calificacion = comun.calificar(
@@ -187,7 +225,9 @@ def recolectar():
                 "con_clave": bool(clave),
                 "instrumento_probado": instrumentoSano,
                 "sensor": SENSOR,
+                "recuadro": RECUADRO,
                 "ventana_dias": DIAS,
+                "detecciones_fuera_del_padron": fueraDelPadron,
                 "estados_con_focos": conFoco,
                 "estados_sin_mirar": sinMirar,
                 "estados_del_padron": len(registros),
