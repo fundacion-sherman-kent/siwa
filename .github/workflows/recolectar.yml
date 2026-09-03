@@ -134,6 +134,13 @@ jobs:
       # VA ULTIMO A PROPOSITO: la memoria compara lo que los demas colectores
       # acaban de escribir contra lo que ya sabia. Si corriera antes, anotaria
       # el estado de ayer como si fuera el de hoy.
+      # Seis consultas baratas por vuelta. Mide si las fuentes TRABADAS volvieron,
+      # sin depender de que alguien se acuerde de reintentar —y nadie se acuerda—.
+      - name: Banco de pruebas de fuentes candidatas
+        id: sondeo
+        continue-on-error: true
+        run: python colectores/sondeo.py
+
       - name: Memoria del registro (que cambio)
         id: memoria
         continue-on-error: true
@@ -240,4 +247,5 @@ jobs:
           [ "${{ steps.archivo.outcome }}" = "failure" ] && { echo "Falló el colector del archivo de la web."; fallo=1; }
           [ "${{ steps.copernicus.outcome }}" = "failure" ] && { echo "Falló el colector de imagen satelital."; fallo=1; }
           [ "${{ steps.memoria.outcome }}" = "failure" ] && { echo "Falló la memoria del registro."; fallo=1; }
+          [ "${{ steps.sondeo.outcome }}" = "failure" ] && { echo "Falló el banco de pruebas."; fallo=1; }
           exit $fallo

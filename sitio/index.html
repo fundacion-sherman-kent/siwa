@@ -22,7 +22,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 23 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:description" content="33 Estados, 69 indicadores, 24 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 23 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 24 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
@@ -46,7 +46,7 @@
       "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 23 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 24 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1901,6 +1901,24 @@
       <div class="paises-oficiales" id="lista-oficiales"></div>
       <div id="vac-oficiales"></div>
         </div>
+    <div class="categoria" id="sondeo" data-nivel="3">
+      <div class="categoria-head"><h4>Fuentes que todavía no entraron</h4><span class="tag" id="tag-sondeo">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Antes de construir sobre una fuente hay que saber cuántas veces contesta.</b>
+           El robot prueba en cada vuelta las que quedaron trabadas y guarda el resultado
+           de cada intento. Así una fuente que volvió no queda figurando como caída
+           durante semanas, que es lo que pasa cuando reintentar depende de que alguien
+           se acuerde.</p>
+        <p><b>Esto no mide la calidad de una fuente: mide si contesta.</b> Una que
+           contesta siempre y publica mal sigue publicando mal; una que contesta la mitad
+           de las veces puede ser excelente y estar sobrecargada. Y se mide <b>desde una
+           sola máquina</b>: dice cuánto pudo usarla este registro, que es justamente lo
+           que hay que saber.</p>
+      </div>
+      <div class="procedencia" id="proc-sondeo">Cargando el registro…</div>
+      <div class="cruce" id="lista-sondeo"></div>
+      <div id="vac-sondeo"></div>
+        </div>
     <div class="categoria" id="fuentes-limites" data-nivel="3">
       <div class="categoria-head"><h4>Procedencia y vacíos declarados</h4>
         <span class="tag" id="tag-fuentes">—</span></div>
@@ -2108,7 +2126,8 @@
                      ['copernicus','Copernicus — imagen satelital'],
                      ['memoria','Bitácora propia de observación'],
                      ['sanciones','OpenSanctions — sanciones y personas expuestas'],
-                     ['brecha','Brecha entre lo registrado y lo publicado']];
+                     ['brecha','Brecha entre lo registrado y lo publicado'],
+                     ['sondeo','Banco de pruebas de fuentes candidatas']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -3082,6 +3101,42 @@
     no_se_pudo_mirar:          {rot:'no se pudo mirar',          clase:'unica'},
     sin_nombre_en_la_fuente:   {rot:'sin equivalencia en la fuente', clase:'unica'},
   };
+
+  const ROTULO_SONDEO = {
+    sirve_siempre:   {rot:'responde siempre',  clase:'fresco'},
+    intermitente:    {rot:'intermitente',      clase:'viejo'},
+    nunca_respondio: {rot:'no respondió',      clase:'muy-viejo'},
+    pocos_intentos:  {rot:'pocos intentos aún', clase:'unica'},
+  };
+
+  function sondeoVista(){
+    const caja = document.getElementById('lista-sondeo');
+    const d = almacen.sondeo; if(!caja || !d) return;
+
+    const tag = document.getElementById('tag-sondeo');
+    if(tag) tag.textContent = d.resumen.candidatas + ' candidatas · '
+      + miles(d.resumen.intentos_guardados) + ' intentos guardados';
+
+    const orden = ['sirve_siempre','intermitente','pocos_intentos','nunca_respondio'];
+    caja.innerHTML = (d.registros||[]).slice()
+      .sort((a,b) => orden.indexOf(a.veredicto) - orden.indexOf(b.veredicto))
+      .map(x => {
+        const r = ROTULO_SONDEO[x.veredicto] || ROTULO_SONDEO.pocos_intentos;
+        const u = x.ultimo_intento || {};
+        return '<div class="asunto"><h4>' + esc(x.rotulo)
+          + ' <span class="edad ' + r.clase + '">' + esc(r.rot) + '</span></h4>'
+          + '<div class="foot"><span class="porque">'
+          + '<b>' + x.respondio_bien + ' de ' + x.intentos + '</b> intentos con respuesta útil'
+          + (x.disponibilidad_pct !== null ? ' · <b>' + cifra(x.disponibilidad_pct) + ' %</b>' : '')
+          + ' · último: ' + esc(String(u.estado)) + (u.bytes ? ' con ' + miles(u.bytes) + ' bytes' : ' sin contenido')
+          + (x.ultimo_dia_que_sirvio ? ' · sirvió por última vez el <b>'
+              + esc(x.ultimo_dia_que_sirvio) + '</b>' : '')
+          + '<br><b>Para qué la queremos:</b> ' + esc(x.porque)
+          + '<br><b>Qué la traba:</b> ' + esc(x.traba_declarada)
+          + '</span><span class="badge ' + (x.veredicto === 'sirve_siempre' ? 'medio' : 'unica')
+          + '">candidata</span></div></div>';
+      }).join('');
+  }
 
   function brechaVista(){
     const caja = document.getElementById('lista-brecha');
@@ -4471,6 +4526,7 @@
     paso('contratación pública', contratacionVista);
     paso('sanciones y personas expuestas', sancionesVista);
     paso('ciberseguridad', ciberVista);
+    paso('banco de pruebas', sondeoVista);
     paso('la brecha', brechaVista);
     paso('lo que cambió', memoriaVista);
     paso('lo que dejó de publicarse', archivoVista);
@@ -6435,6 +6491,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-copernicus','imagen satelital',err.message);
       document.getElementById('proc-copernicus').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('sondeo.json'), traer('estado/sondeo.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.sondeo=d; const meta=d.procedencia;
+      pintarProcedencia('proc-sondeo',meta);
+      vacios+=pintarVacios('vac-sondeo',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-sondeo','banco de pruebas',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-sondeo','banco de pruebas',err.message);
+      document.getElementById('proc-sondeo').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('brecha.json'), traer('estado/brecha.json').catch(()=>null)])
     .then(([d,estado])=>{
