@@ -910,6 +910,24 @@
     border:1px solid var(--line);border-radius:6px;padding:6px 8px;margin:6px 0 4px;
     white-space:pre-wrap;overflow-wrap:anywhere;
   }
+  .consulta-abrir{
+    margin-top:10px;border:1px solid var(--line);border-radius:9px;
+    background:rgba(255,255,255,.02);padding:11px 13px;
+  }
+  .consulta-abrir > summary{
+    cursor:pointer;color:#E8EEF5;font-weight:700;font-size:12.5px;letter-spacing:.2px;
+    list-style:none;display:flex;gap:9px;align-items:baseline;justify-content:space-between;
+  }
+  .consulta-abrir > summary::-webkit-details-marker{display:none;}
+  .consulta-abrir > summary::after{
+    content:'abrir';font-weight:600;font-size:10.5px;color:var(--orange);
+    border:1px solid var(--orange);border-radius:999px;padding:2px 9px;white-space:nowrap;
+  }
+  .consulta-abrir[open] > summary::after{content:'cerrar';}
+  .consulta-abrir > summary small{
+    display:block;font-weight:400;font-size:10.5px;color:#7d90a8;margin-top:3px;
+  }
+  .consulta-abrir .asunto:first-of-type{margin-top:11px;}
   .mide-chip{
     display:inline-block;font-size:11px;line-height:1.35;padding:5px 10px;
     border:1px solid var(--line);border-radius:999px;color:#C7D2E0;text-decoration:none;
@@ -6067,7 +6085,18 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
         + 'analogía con el de otro Estado mandaría a una página inexistente.'
         + '</span><span class="badge unica">sin acotar</span></div>';
 
+    // PLEGADO POR DEFECTO. Abierto son diecisiete consultas en nueve materias
+    // —unas tres pantallas de operadores de busqueda— cayendo en medio de la
+    // ficha del pais. El lector que llega scrolleando ve texto tecnico bajo
+    // titulos que se parecen a los de las secciones de datos, y no puede saber
+    // si esta ante una herramienta o ante una falla. Se pregunto, y esa pregunta
+    // ES el hallazgo: lo que no se entiende sin explicacion, se pide.
     caja.innerHTML = '<div class="asunto"><h4>' + esc(x.pais) + '</h4>' + aviso + '</div>'
+      + '<details class="consulta-abrir"><summary><span>'
+      + '<b>' + x.consultas.length + '</b> consultas armadas para ' + esc(x.pais)
+      + '<small>' + Object.keys(porMateria).length + ' materias · no son datos del '
+      + 'registro: son búsquedas listas para ejecutar en el buscador que elijas.</small>'
+      + '</span></summary>'
       + Object.keys(porMateria).map(m =>
           '<div class="asunto"><h4>' + esc(m) + '</h4><div class="foot"><span class="porque">'
           + porMateria[m].map(c =>
@@ -6075,7 +6104,8 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
               + MOTORES.map(mo => '<a class="mide-chip" target="_blank" rel="noopener noreferrer"'
                   + ' href="' + esc(mo.url(c.consulta)) + '">' + esc(mo.rot) + '</a>').join('')
             ).join('<br>')
-          + '</span></div></div>').join('');
+          + '</span><span class="badge medio">consulta</span></div></div>').join('')
+      + '</details>';
   }
 
   function recienteVista(){
