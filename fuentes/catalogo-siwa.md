@@ -237,3 +237,50 @@ De todo este sondeo, **es la gestión que más rinde por el trabajo que cuesta**
 3. **Medir GDELT durante una semana** y decidir con la cifra de disponibilidad.
 4. **Escribir el colector de catálogo de Copernicus**, con la advertencia de que
    la imagen no acredita el hecho.
+
+---
+
+# Tercer tramo — 3 de septiembre de 2026 · lo que se construyó
+
+De todo lo probado en los dos sondeos anteriores, esto es lo que dejó de ser
+candidato y pasó a ser colector.
+
+| Colector | Fuente | Qué mide | Cadencia |
+|---|---|---|---|
+| `contratacion` | Registro de contrataciones abiertas | Qué publica cada Estado de sus compras | diaria |
+| `ciber` | OONI, IODA y FIRST | Anomalías de red, cortes de conectividad y equipos de respuesta | **cada hora** |
+| `archivo` | Archivo público de la web | **Lo que dejó de publicarse**, con fecha | diaria |
+
+## Lo que apareció al construirlos
+
+**Contratación pública.** 15 de los 33 Estados publican en formato comparable y
+11 tienen serie vigente. Paraguay actualiza **por hora**; Uruguay y Chile, en
+tiempo real. Y 18 Estados no tienen un solo publicador —Venezuela, Cuba,
+Nicaragua y Haití entre ellos—, que es la medición de opacidad en compras.
+
+**Ciberseguridad.** 27 de 33 Estados con medición en la ventana de treinta días.
+Venezuela tiene **13,06 % de anomalías** cuando el resto ronda el 2 %, diez
+cortes de conectividad y **ningún equipo de respuesta declarado** — y cero
+bloqueos confirmados, que es exactamente por qué la distinción entre *anomalía* y
+*bloqueo* no es un tecnicismo. México, en cambio, registra 939 bloqueos
+confirmados.
+
+**El archivo.** Una sola retirada confirmada en los 29 Estados mirados:
+**Venezuela — Instituto Nacional de Estadística**, visto vivo por última vez en
+2024 y sin responder hoy, con 228 copias fechadas que cualquiera puede revisar.
+Nicaragua y Jamaica tienen sitios que hoy no responden pero que el archivo vio
+vivos este año: **no se los declara retirados**, y esa distinción es el colector.
+
+De paso, el padrón de sitios oficiales verificados pasó de 13 Estados a **29**.
+
+## Lo que sigue abierto
+
+1. **Licencia de OpenSanctions** — decisión de la Dirección, no técnica.
+2. **Credencial de OCCRP Aleph** — gratuita, y abre lo que ninguna otra cubre.
+3. **Credencial de ACLED** — es el reemplazo declarado de las dos series de
+   terrorismo, detenidas en 2021.
+4. **Medir GDELT una semana** y decidir con la cifra de disponibilidad.
+5. **Copernicus** — catálogo probado, colector sin escribir.
+6. **Los 4 Estados sin sitio verificado** y las cuatro materias que siguen sin
+   colector: violencia organizada, economías ilícitas, contrabando y
+   desinformación.

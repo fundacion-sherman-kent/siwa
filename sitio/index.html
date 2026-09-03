@@ -1764,6 +1764,24 @@
     <section class="domain bloque" id="opacidad-seccion" data-nivel="1">
       <div class="bloque-head"><h3>Índice de Opacidad</h3></div>
       <p class="bloque-bajada">Qué no publica cada Estado, y qué se revisó para poder afirmarlo. Es una medición propia de la Oficina: no la publica ningún organismo.</p>
+    <div class="categoria" id="retirada" data-nivel="1">
+      <div class="categoria-head"><h4>Lo que dejó de publicarse</h4><span class="tag" id="tag-archivo">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>No publicar y dejar de publicar no son lo mismo.</b> Lo segundo es más
+           grave: hubo dato y se retiró. El archivo público de la web guarda copias
+           fechadas de los sitios oficiales, y comparar la última vez que un portal
+           respondió bien con lo que responde hoy da <b>la retirada con fecha</b>.</p>
+        <p><b>La afirmación exige las dos mitades y ninguna alcanza sola.</b> Que el
+           archivo no tenga capturas recientes no prueba que el sitio murió —prueba que
+           el rastreador no pasó—; que el portal no nos responda hoy no prueba que esté
+           caído. Solo se dice <b>retirado</b> cuando el archivo lo vio vivo en el pasado
+           <b>y</b> hoy no responde. <b>Y no se interpreta la causa</b>: presupuesto,
+           mudanza de sistema o decisión dan la misma caída.</p>
+      </div>
+      <div class="procedencia" id="proc-archivo">Cargando el registro…</div>
+      <div class="cruce" id="lista-archivo"></div>
+      <div id="vac-archivo"></div>
+        </div>
     <div class="categoria" id="opacidad" data-nivel="1">
       <div class="categoria-head"><h4>Índice de Opacidad</h4><span class="tag" id="tag-opacidad">—</span></div>
       <div class="aviso-cobertura">
@@ -1998,7 +2016,8 @@
                      ['reciente','Publicación oficial reciente'],
                      ['consulta','Consulta dirigida'],
                      ['contratacion','Contrataciones abiertas'],
-                     ['ciber','Medición de red — OONI, IODA y FIRST']];
+                     ['ciber','Medición de red — OONI, IODA y FIRST'],
+                     ['archivo','Archivo de la web — lo retirado']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -2862,6 +2881,63 @@
   // La opacidad se lee en los TRES ambitos, que es como se pregunta: «¿cómo está
   // la región?», «¿y mi zona?», «¿y mi país?». Estaba solo por Estado y al final
   // de todo, de modo que la pregunta mas frecuente no tenia respuesta a la vista.
+  const ROTULO_ARCHIVO = {
+    retirado:            {rot:'retirado',              clase:'muy-viejo'},
+    no_responde_hoy:     {rot:'no responde hoy',       clase:'viejo'},
+    sin_rastro_vivo:     {rot:'sin rastro vivo',       clase:'viejo'},
+    archivo_no_respondio:{rot:'el archivo no respondió', clase:'unica'},
+    vivo:                {rot:'vivo',                  clase:'fresco'},
+    sin_dominio_probado: {rot:'sin sitio verificado',  clase:'unica'},
+  };
+
+  function archivoVista(){
+    const caja = document.getElementById('lista-archivo');
+    const d = almacen.archivo; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const conSitio = lista.filter(x => (x.sitios||[]).length);
+    const retirados = lista.filter(x => x.estado === 'retirado');
+    const tag = document.getElementById('tag-archivo');
+    if(tag) tag.textContent = retirados.length
+      ? retirados.length + ' con sitio retirado · ' + conSitio.length + ' de ' + lista.length + ' mirados'
+      : conSitio.length + ' de ' + lista.length + ' Estados con sitio verificado';
+
+    if(!conSitio.length){
+      caja.innerHTML = '<div class="asunto"><h4>Sin sitio oficial verificado</h4>'
+        + '<div class="foot"><span class="porque">La Oficina todavía no verificó dónde '
+        + 'publica ' + esc(paisFiltro ? paisNombre : (zona || 'este ámbito'))
+        + '. <b>Eso no dice nada del Estado</b>: dice que falta trabajo nuestro.'
+        + '</span><span class="badge unica">sin verificar</span></div></div>';
+      return;
+    }
+
+    // Lo retirado va primero: es el hallazgo, no un renglón más de la lista.
+    const orden = ['retirado','no_responde_hoy','sin_rastro_vivo','archivo_no_respondio','vivo'];
+    caja.innerHTML = conSitio.slice()
+      .sort((a,b)=> orden.indexOf(a.estado) - orden.indexOf(b.estado))
+      .map(x => {
+        const r = ROTULO_ARCHIVO[x.estado] || ROTULO_ARCHIVO.vivo;
+        return '<div class="asunto"><h4>' + esc(x.pais)
+          + ' <span class="edad ' + r.clase + '">' + esc(r.rot) + '</span></h4>'
+          + '<div class="foot"><span class="porque">'
+          + x.sitios.map(si => {
+              const a = si.archivo || {};
+              const e = ROTULO_ARCHIVO[si.estado] || ROTULO_ARCHIVO.vivo;
+              return '<b>' + esc(si.organismo || si.dominio) + '</b> — '
+                + esc(si.dominio) + ' · <b>' + esc(e.rot) + '</b>'
+                + (a.ultima_viva ? ' · el archivo lo vio vivo por última vez en <b>'
+                    + esc(a.ultima_viva) + '</b>' : '')
+                + (a.capturas ? ' · ' + miles(a.capturas) + ' copias guardadas' : '')
+                + ' · <a href="' + esc(si.enlace_archivo) + '" target="_blank" rel="noopener noreferrer">ver el archivo</a>';
+            }).join('<br>')
+          + '</span><span class="badge ' + (x.estado === 'retirado' ? 'unica' : 'medio') + '">'
+          + (x.estado === 'retirado' ? 'retirada' : 'comprobado') + '</span></div></div>';
+      }).join('');
+  }
+
   function opacidadFicha(){
     const caja = document.getElementById('opacidad-ficha');
     const d = almacen.opacidad; if(!caja || !d) return;
@@ -3980,6 +4056,7 @@
     paso('ámbito del informe', ecoDelAmbito);
     paso('contratación pública', contratacionVista);
     paso('ciberseguridad', ciberVista);
+    paso('lo que dejó de publicarse', archivoVista);
     paso('opacidad en la ficha', opacidadFicha);
     paso('consulta dirigida', consultaVista);
     paso('publicación oficial reciente', recienteVista);
@@ -5813,6 +5890,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-mensajeria','mensajería',err.message);
       document.getElementById('proc-mensajeria').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('archivo.json'), traer('estado/archivo.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.archivo=d; const meta=d.procedencia;
+      pintarProcedencia('proc-archivo',meta);
+      vacios+=pintarVacios('vac-archivo',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-archivo','lo que dejó de publicarse',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-archivo','lo que dejó de publicarse',err.message);
+      document.getElementById('proc-archivo').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('contratacion.json'), traer('estado/contratacion.json').catch(()=>null)])
     .then(([d,estado])=>{
