@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "comercio",
     "capa": "publico",
-    "obtenido_en": "2026-09-03T16:58:02+00:00",
+    "obtenido_en": "2026-09-03T17:32:36+00:00",
     "fuente": {
       "nombre": "Comtrade de Naciones Unidas — vista pública",
       "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
@@ -17,12 +17,12 @@
       "UNA BRECHA DE POCOS PUNTOS NO ES CONTRABANDO: ES CONTABILIDAD. El exportador declara en valor FOB —la mercaderia puesta en el barco— y el importador en CIF, que además incluye FLETE Y SEGURO. Solo por eso el importador registra de rutina entre 3 % y 10 % mas. A eso se suman los envios que cruzan el año calendario y las diferencias de clasificación aduanera.",
       "LO QUE SI LLAMA LA ATENCIÓN ES LA BRECHA NEGATIVA: que el importador declare MENOS de lo que el exportador dice haberle mandado no tiene explicación contable inocente, porque el flete y el seguro empujan en el sentido contrario. Aun así es un INDICIO que abre una línea de averiguación, NO una prueba de delito.",
       "Se comparan 37 corredores —los que comparten frontera y los de mayor volumen regional—, no los 1.056 pares posibles: la mayoria no tiene comercio significativo y solo agregaria ruido. Un corredor ausente no esta limpio: no esta mirado.",
-      "LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, empezando por los que nunca se midieron, y CADA CORREDOR DECLARA CUANDO SE MIDIO. Van 32 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
+      "LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, empezando por los que nunca se midieron, y CADA CORREDOR DECLARA CUANDO SE MIDIO. Van 33 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
       "El año es 2023, el último con cobertura amplia en la vista publica. NO es el año corriente y no se estima ninguno posterior.",
       "Se compara el TOTAL de comercio, no producto por producto. La subfacturación suele concentrarse en unas pocas partidas y se diluye en el total: este registro sirve para señalar el corredor, no la mercaderia.",
       "Un Estado que no reporta a Comtrade no genera brecha con nadie, y por lo tanto NO APARECE. La ausencia mide la calidad de su estadística aduanera, no su honestidad comercial.",
-      "Se descartaron 46 filas de apertura por modo de transporte. Sumarlas al total duplica el comercio: en la primera prueba la brecha Argentina-Brasil dio +109 %, que es absurdo; con la fila total sola da +4,7 %. Queda anotado porque es un error facil de cometer.",
-      "Consultas que fallaron: BRA-VEN: HTTP 429; COL-VEN: sin fila total; DOM-HTI: sin fila total; VEN-GUY: sin fila total"
+      "Se descartaron 53 filas de apertura por modo de transporte. Sumarlas al total duplica el comercio: en la primera prueba la brecha Argentina-Brasil dio +109 %, que es absurdo; con la fila total sola da +4,7 %. Queda anotado porque es un error facil de cometer.",
+      "Consultas que fallaron: BRA-VEN: sin fila total; COL-VEN: sin fila total; DOM-HTI: sin fila total; VEN-GUY: sin fila total"
     ],
     "restriccion_de_uso": null,
     "cantidad": 19,
@@ -80,6 +80,29 @@
       "brecha_negativa_en": [
         "Guyana → Surinam",
         "Brasil → Guyana"
+      ]
+    },
+    {
+      "iso": "PRY",
+      "pais": "Paraguay",
+      "bloque": "Cono Sur",
+      "corredores": 5,
+      "corredores_que_llaman_la_atencion": 1,
+      "peor_brecha_pct": -75.7,
+      "brecha_negativa_en": [
+        "Chile → Paraguay"
+      ]
+    },
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "corredores": 4,
+      "corredores_que_llaman_la_atencion": 2,
+      "peor_brecha_pct": -75.7,
+      "brecha_negativa_en": [
+        "Chile → Paraguay",
+        "Perú → Chile"
       ]
     },
     {
@@ -200,17 +223,6 @@
       ]
     },
     {
-      "iso": "CHL",
-      "pais": "Chile",
-      "bloque": "Cono Sur",
-      "corredores": 3,
-      "corredores_que_llaman_la_atencion": 1,
-      "peor_brecha_pct": -9.1,
-      "brecha_negativa_en": [
-        "Perú → Chile"
-      ]
-    },
-    {
       "iso": "ECU",
       "pais": "Ecuador",
       "bloque": "Andina",
@@ -220,15 +232,6 @@
       "brecha_negativa_en": [
         "Perú → Ecuador"
       ]
-    },
-    {
-      "iso": "PRY",
-      "pais": "Paraguay",
-      "bloque": "Cono Sur",
-      "corredores": 4,
-      "corredores_que_llaman_la_atencion": 0,
-      "peor_brecha_pct": -3.2,
-      "brecha_negativa_en": []
     },
     {
       "iso": "NIC",
@@ -250,13 +253,13 @@
     }
   ],
   "resumen": {
-    "corredores_comparados": 32,
+    "corredores_comparados": 33,
     "corredores_pedidos": 37,
-    "corredores_que_llaman_la_atencion": 18,
+    "corredores_que_llaman_la_atencion": 19,
     "estados_con_dato": 19,
     "estados_del_padron": 33,
     "anio": 2023,
-    "filas_descartadas_por_transporte": 46
+    "filas_descartadas_por_transporte": 53
   },
   "corredores": [
     {
@@ -284,6 +287,19 @@
       "sentido": "el importador declara menos",
       "llama_la_atencion": true,
       "medido_en": "2026-09-03T16:58:02+00:00"
+    },
+    {
+      "origen": "CHL",
+      "pais_origen": "Chile",
+      "destino": "PRY",
+      "pais_destino": "Paraguay",
+      "exportador_declara": 560471624,
+      "importador_declara": 136219863,
+      "brecha": -424251761,
+      "brecha_pct": -75.7,
+      "sentido": "el importador declara menos",
+      "llama_la_atencion": true,
+      "medido_en": "2026-09-03T17:32:36+00:00"
     },
     {
       "origen": "GTM",
