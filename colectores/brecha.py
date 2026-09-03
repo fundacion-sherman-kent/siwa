@@ -58,6 +58,9 @@ NAVEGADOR = (
 )
 DIAS = 30   # la ventana de observación
 
+# Lo ultimo que contesto la fuente, para poder decir POR QUE fallo el control.
+ULTIMA_RESPUESTA: dict = {}
+
 # El nombre con que la fuente conoce a cada Estado. Se declara a mano porque
 # adivinarlo por parecido de cadena confunde «Dominica» con «Dominican Republic».
 NOMBRE_EN_LA_FUENTE = {
@@ -148,6 +151,18 @@ def _hayRegistro(testigo: str, pais: str, desde: str) -> bool | None:
         return None
     except Exception:  # noqa: BLE001 — la falla de un Estado no tumba la corrida
         return None
+    # Se guarda lo que la fuente contesta para el control, sin cifras ni contenido:
+    # solo las CLAVES que devolvio y su estado. Es lo que permite distinguir «no
+    # hay nada» de «pregunte mal» de «la cuenta no ve datos».
+    global ULTIMA_RESPUESTA
+    ULTIMA_RESPUESTA = {
+        "claves": sorted(d.keys())[:12],
+        "status": d.get("status"),
+        "success": d.get("success"),
+        "error": d.get("error") or d.get("message"),
+        "count": d.get("count"),
+        "filas": len(d.get("data") or []) if isinstance(d.get("data"), list) else None,
+    }
     datos = d.get("data")
     if datos is None:
         return None
@@ -193,7 +208,8 @@ def recolectar():
                 "—que en cualquier ventana de treinta días tiene registros— no devolvió "
                 "ninguno. Eso NO significa que no haya pasado nada: significa que la "
                 "consulta está mal armada o que la cuenta no ve datos. NO se publica un "
-                "cero que no se puede sostener.")
+                "cero que no se puede sostener. Lo que contestó la fuente, sin contenido: "
+                + json.dumps(ULTIMA_RESPUESTA, ensure_ascii=False))
 
     registros, cuenta = [], {"brecha": 0, "publica_y_hay": 0, "sin_registro": 0,
                              "sin_mirar": 0}
