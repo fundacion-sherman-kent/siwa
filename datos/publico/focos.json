@@ -1,0 +1,346 @@
+{
+  "procedencia": {
+    "colector": "focos",
+    "capa": "publico",
+    "obtenido_en": "2026-09-03T21:47:53+00:00",
+    "fuente": {
+      "nombre": "NASA FIRMS — focos de calor detectados por satélite",
+      "url": "https://firms.modaps.eosdis.nasa.gov/"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 2,
+      "corroborado": false,
+      "nota": "Sistema de deteccion de la agencia espacial estadounidense, con sensor y metodo publicados. Fiabilidad A porque el productor opera el satelite. Credibilidad 2 porque se verifica LA DETECCION —hubo una anomalia termica en esa coordenada— y NO su causa, que el sensor no puede establecer."
+    },
+    "vacios_declarados": [
+      "EL SATELITE DETECTA ANOMALIAS TERMICAS, NO INCENDIOS NI DELITOS. Un foco puede ser una quema agricola legal, un incendio forestal, una antorcha industrial, un basural o una operacion minera. LA IMAGEN NO DISTINGUE LA CAUSA, y el registro no la inventa: decir «tantos focos, tanta mineria ilegal» seria un salto que esta casa no da.",
+      "NO ORDENA ESTADOS. El recuento depende del tamanio del pais, de la estacion, de la nubosidad —una semana nublada esconde todo— y de cuantas veces paso el satelite. Brasil tendra siempre mas focos que Granada por superficie, no por conducta. Se publica como MAGNITUD, al lado del dato comparable y nunca adentro.",
+      "LA VENTANA ES DE 3 DIAS y se mueve con cada corrida: sirve para ver que esta ardiendo ahora, NO para comparar contra el mes pasado.",
+      "LA CONFIANZA LA DECLARA EL SENSOR y se cuenta aparte: un foco de confianza baja no sostiene ninguna afirmacion. El recuento total incluye todos; el de confianza alta es el unico que se puede citar.",
+      "LA FUENTE NO ADMITE CONSULTA POR PAIS: solo por recuadro geografico. Se pide una vez el recuadro de America Latina y el Caribe y se ATRIBUYE CADA DETECCION a su Estado por la coordenada. Un punto que cae en el mar, en un pais vecino fuera del padron o en aguas internacionales NO se cuenta, y se declara cuantos fueron.",
+      "ANTES DE CREERLE UN CERO A NADIE SE PRUEBA EL INSTRUMENTO contra Brasil, que tiene focos todos los dias del anio. Si ESE da cero, la corrida se detiene entera en lugar de publicar treinta y tres ceros. La primera version de este colector pedia por pais contra una direccion QUE NO EXISTE, y era facil culpar a la credencial: se probo con una clave deliberadamente falsa y la fuente distinguio «clave invalida» de «direccion invalida». El instrumento habia fallado antes que la fuente."
+    ],
+    "restriccion_de_uso": null,
+    "cantidad": 33,
+    "atribucion": {
+      "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
+      "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+      "sitio": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información CITANDO LA FUENTE de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
+    }
+  },
+  "registros": [
+    {
+      "iso": "VEN",
+      "pais": "Venezuela",
+      "bloque": "Andina",
+      "estado": "con_focos",
+      "focos": 743,
+      "confianza_alta": 14,
+      "nocturnos": 242
+    },
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "estado": "con_focos",
+      "focos": 69,
+      "confianza_alta": 0,
+      "nocturnos": 6
+    },
+    {
+      "iso": "TTO",
+      "pais": "Trinidad y Tobago",
+      "bloque": "Caribe oriental",
+      "estado": "sin_focos_en_la_ventana",
+      "focos": 0,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "SUR",
+      "pais": "Surinam",
+      "bloque": "Guayanas",
+      "estado": "con_focos",
+      "focos": 31,
+      "confianza_alta": 0,
+      "nocturnos": 3
+    },
+    {
+      "iso": "VCT",
+      "pais": "San Vicente y las Granadinas",
+      "bloque": "Caribe oriental",
+      "estado": "sin_focos_en_la_ventana",
+      "focos": 0,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "LCA",
+      "pais": "Santa Lucía",
+      "bloque": "Caribe oriental",
+      "estado": "sin_focos_en_la_ventana",
+      "focos": 0,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "KNA",
+      "pais": "San Cristóbal y Nieves",
+      "bloque": "Caribe oriental",
+      "estado": "sin_focos_en_la_ventana",
+      "focos": 0,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "PER",
+      "pais": "Perú",
+      "bloque": "Andina",
+      "estado": "con_focos",
+      "focos": 1986,
+      "confianza_alta": 161,
+      "nocturnos": 217
+    },
+    {
+      "iso": "PRY",
+      "pais": "Paraguay",
+      "bloque": "Cono Sur",
+      "estado": "con_focos",
+      "focos": 991,
+      "confianza_alta": 51,
+      "nocturnos": 285
+    },
+    {
+      "iso": "PAN",
+      "pais": "Panamá",
+      "bloque": "México y Centroamérica",
+      "estado": "con_focos",
+      "focos": 2,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "NIC",
+      "pais": "Nicaragua",
+      "bloque": "México y Centroamérica",
+      "estado": "con_focos",
+      "focos": 47,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "bloque": "México y Centroamérica",
+      "estado": "con_focos",
+      "focos": 1142,
+      "confianza_alta": 37,
+      "nocturnos": 446
+    },
+    {
+      "iso": "JAM",
+      "pais": "Jamaica",
+      "bloque": "Caribe oriental",
+      "estado": "con_focos",
+      "focos": 13,
+      "confianza_alta": 0,
+      "nocturnos": 5
+    },
+    {
+      "iso": "HND",
+      "pais": "Honduras",
+      "bloque": "México y Centroamérica",
+      "estado": "con_focos",
+      "focos": 91,
+      "confianza_alta": 1,
+      "nocturnos": 2
+    },
+    {
+      "iso": "HTI",
+      "pais": "Haití",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "con_focos",
+      "focos": 1,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "GUY",
+      "pais": "Guyana",
+      "bloque": "Guayanas",
+      "estado": "con_focos",
+      "focos": 138,
+      "confianza_alta": 1,
+      "nocturnos": 1
+    },
+    {
+      "iso": "GTM",
+      "pais": "Guatemala",
+      "bloque": "México y Centroamérica",
+      "estado": "con_focos",
+      "focos": 70,
+      "confianza_alta": 0,
+      "nocturnos": 12
+    },
+    {
+      "iso": "GRD",
+      "pais": "Granada",
+      "bloque": "Caribe oriental",
+      "estado": "sin_focos_en_la_ventana",
+      "focos": 0,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "SLV",
+      "pais": "El Salvador",
+      "bloque": "México y Centroamérica",
+      "estado": "con_focos",
+      "focos": 2,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "ECU",
+      "pais": "Ecuador",
+      "bloque": "Andina",
+      "estado": "con_focos",
+      "focos": 169,
+      "confianza_alta": 8,
+      "nocturnos": 55
+    },
+    {
+      "iso": "DOM",
+      "pais": "República Dominicana",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "con_focos",
+      "focos": 33,
+      "confianza_alta": 0,
+      "nocturnos": 7
+    },
+    {
+      "iso": "DMA",
+      "pais": "Dominica",
+      "bloque": "Caribe oriental",
+      "estado": "sin_focos_en_la_ventana",
+      "focos": 0,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "CUB",
+      "pais": "Cuba",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "con_focos",
+      "focos": 72,
+      "confianza_alta": 1,
+      "nocturnos": 51
+    },
+    {
+      "iso": "CRI",
+      "pais": "Costa Rica",
+      "bloque": "México y Centroamérica",
+      "estado": "con_focos",
+      "focos": 7,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "bloque": "Andina",
+      "estado": "con_focos",
+      "focos": 287,
+      "confianza_alta": 6,
+      "nocturnos": 32
+    },
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "estado": "con_focos",
+      "focos": 26,
+      "confianza_alta": 1,
+      "nocturnos": 4
+    },
+    {
+      "iso": "BRA",
+      "pais": "Brasil",
+      "bloque": "Cono Sur",
+      "estado": "con_focos",
+      "focos": 16702,
+      "confianza_alta": 1165,
+      "nocturnos": 5184
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "bloque": "Andina",
+      "estado": "con_focos",
+      "focos": 2497,
+      "confianza_alta": 243,
+      "nocturnos": 724
+    },
+    {
+      "iso": "BLZ",
+      "pais": "Belice",
+      "bloque": "México y Centroamérica",
+      "estado": "con_focos",
+      "focos": 56,
+      "confianza_alta": 0,
+      "nocturnos": 2
+    },
+    {
+      "iso": "BRB",
+      "pais": "Barbados",
+      "bloque": "Caribe oriental",
+      "estado": "sin_focos_en_la_ventana",
+      "focos": 0,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "BHS",
+      "pais": "Bahamas",
+      "bloque": "Caribe oriental",
+      "estado": "sin_focos_en_la_ventana",
+      "focos": 0,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    },
+    {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "bloque": "Cono Sur",
+      "estado": "con_focos",
+      "focos": 3151,
+      "confianza_alta": 450,
+      "nocturnos": 575
+    },
+    {
+      "iso": "ATG",
+      "pais": "Antigua y Barbuda",
+      "bloque": "Caribe oriental",
+      "estado": "sin_focos_en_la_ventana",
+      "focos": 0,
+      "confianza_alta": 0,
+      "nocturnos": 0
+    }
+  ],
+  "resumen": {
+    "con_clave": true,
+    "instrumento_probado": true,
+    "sensor": "VIIRS_SNPP_NRT",
+    "recuadro": "-118,-56,-34,33",
+    "ventana_dias": 3,
+    "detecciones_fuera_del_padron": 1005,
+    "estados_con_focos": 24,
+    "estados_sin_mirar": 0,
+    "estados_del_padron": 33,
+    "focos_en_la_region": 28326,
+    "consultado": "2026-09-03T21:47:53+00:00"
+  }
+}
