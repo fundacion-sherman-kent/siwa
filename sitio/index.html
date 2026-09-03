@@ -3733,7 +3733,7 @@
 
     {clave:'ciberseguridad', rotulo:'Ciberseguridad', tema:'ciberataque',
      porque:'Extorsión informática contra empresas y organismos, y exposición del terreno digital.',
-     indicadores:['servidores_seguros','banda_ancha','internet'], extra:'ransomware',
+     indicadores:['servidores_seguros','banda_ancha','internet'], extra:['ransomware','ciber'],
      falta:'Solo se ve <b>el ataque que el atacante publicó</b> para presionar el pago. El que '
           +'se pagó en silencio no aparece en ninguna parte, y es la mayoría. Los nombres de '
           +'las víctimas <b>no se republican</b>: se publican agregados.'},
@@ -3741,7 +3741,7 @@
     {clave:'contratacion_publica', rotulo:'Contratación pública', tema:'corrupcion',
      porque:'Dónde el Estado compra, y con qué controles.',
      indicadores:['corrupcion','regalo_contrato','soborno_empresas','corrupcion_politica','politica_anticorrupcion'],
-     extra:null,
+     extra:'contratacion',
      falta:'Se mide la <b>percepción y la experiencia declarada</b> &mdash;cuántas empresas '
           +'esperan tener que pagar por un contrato&mdash;, no los contratos. <b>El expediente '
           +'de cada licitación existe</b> en los portales de compras de cada Estado, pero en 33 '
@@ -3763,6 +3763,40 @@
   // misma forma, para que el lector no tenga que saber de donde sale cada cosa.
   function extraMateria(cual, iso){
     const uno = (d, i) => d && (d.registros||[]).find(r => r.iso === i);
+    if(cual === 'contratacion'){
+      const d = almacen.contratacion; if(!d) return null;
+      if(iso){ const r = uno(d, iso);
+        if(!r) return null;
+        return r.publicadores
+          ? {q:'Publicadores de compras en formato abierto', v: miles(r.publicadores),
+             c: (r.detalle[0]||{}).hasta ? 'serie hasta ' + r.detalle[0].hasta : 'sin fecha'}
+          : {q:'Sin publicador de compras en formato comparable', v:'0', c:'la ausencia es el dato'};
+      }
+      return {q:'Estados que publican sus compras', v: d.resumen.estados_con_publicador + ' de 33',
+              c: d.resumen.estados_con_serie_vigente + ' con serie vigente'};
+    }
+    if(cual === 'ciber'){
+      const d = almacen.ciber; if(!d) return null;
+      if(iso){ const r = uno(d, iso);
+        return r && r.mediciones
+          ? {q:'Anomalías de red sobre las mediciones del mes', v: cifra(r.anomalias_pct) + ' %',
+             c: miles(r.bloqueos_confirmados) + ' confirmados'} : null; }
+      return {q:'Bloqueos confirmados en la región', v: miles(d.resumen.bloqueos_confirmados_en_la_region),
+              c: 'ventana de ' + d.resumen.ventana_dias + ' días'};
+    }
+    if(cual === 'archivo'){
+      const d = almacen.archivo; if(!d) return null;
+      if(iso){ const r = uno(d, iso);
+        if(!r || !(r.sitios||[]).length) return null;
+        const ret = r.sitios.filter(x => x.estado === 'retirado');
+        return ret.length
+          ? {q:'Sitio oficial retirado', v: String(ret.length),
+             c: 'visto vivo hasta ' + ((ret[0].archivo||{}).ultima_viva || 'sin fecha')}
+          : {q:'Sitios oficiales que siguen en pie', v: String(r.sitios.length), c:'comprobado hoy'};
+      }
+      return {q:'Sitios oficiales retirados', v: String(d.resumen.portales_retirados),
+              c: d.resumen.estados_mirados + ' Estados mirados'};
+    }
     if(cual === 'ransomware'){
       const d = almacen.ransomware; if(!d) return null;
       if(iso){ const r = uno(d, iso);
@@ -3908,8 +3942,12 @@
           if(filasDe(clave).length) filas.push({q: meta.rotulo, ancla: meta.seccion || ''});
         }
       });
-      const ex = extraMateria(m.extra, iso);
-      if(ex) filas.push({q: ex.q, ancla: ''});
+      // Una materia puede apoyarse en varias fuentes: ciberseguridad tiene la
+      // extorsión informática Y la medición de red, y son cosas distintas.
+      [].concat(m.extra || []).forEach(cual => {
+        const ex = extraMateria(cual, iso);
+        if(ex) filas.push({q: ex.q, ancla: ''});
+      });
       if(filas.length) conMedida++;
 
       // 2. Lo que se esta publicando ahora.
