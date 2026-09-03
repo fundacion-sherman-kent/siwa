@@ -70,8 +70,8 @@ SERIES = [
 {"clave": "sin_condena", "codigo": "VC_PRS_UNSNT", "eje": "Seguridad",
      "rotulo": "Detenidos sin condena", "unidad": "% de la población carcelaria",
      "mas_es_peor": True, "origen": "UNODC, via la base global de los ODS",
-     "cautela": "Personas presas sin sentencia firme. Mide congestion judicial y uso de "
-                "la prision preventiva, no criminalidad."},
+     "cautela": "Personas presas sin sentencia firme. Mide congestión judicial y uso de "
+                "la prisión preventiva, no criminalidad."},
     {"clave": "acceso_informacion", "codigo": "SG_INF_ACCSS", "eje": "Gobernanza",
      "rotulo": "Garantías de acceso a la información", "unidad": "puntaje de 0 a 100",
      "mas_es_peor": False, "origen": "UNESCO, via la base global de los ODS",
@@ -80,32 +80,32 @@ SERIES = [
     {"clave": "registro_nacimientos", "codigo": "SG_REG_BRTH", "eje": "Gobernanza",
      "rotulo": "Nacimientos registrados", "unidad": "% de los menores de 5 años",
      "mas_es_peor": False, "origen": "UNICEF, via la base global de los ODS",
-     "cautela": "Es la capacidad estatal mas basica: saber quien existe. Un registro "
-                "incompleto degrada todas las demas estadisticas de ese Estado."},
+     "cautela": "Es la capacidad estatal mas básica: saber quien existe. Un registro "
+                "incompleto degrada todas las demas estadísticas de ese Estado."},
     {"clave": "trabajo_infantil", "codigo": "SL_TLF_CHLDEC", "eje": "Desarrollo",
      "rotulo": "Trabajo infantil", "unidad": "% de los ninos de 5 a 17",
      "mas_es_peor": True, "origen": "OIT, via la base global de los ODS",
-     "cautela": "Sale de encuestas de hogares con anios y muestras distintos por Estado."},
+     "cautela": "Sale de encuestas de hogares con años y muestras distintos por Estado."},
     {"clave": "agua_potable", "codigo": "SH_H2O_SAFE", "eje": "Desarrollo",
      "rotulo": "Acceso a agua potable gestionada", "unidad": "% de la población",
      "mas_es_peor": False, "origen": "OMS y UNICEF, via la base global de los ODS",
-     "cautela": "Servicio gestionado de forma segura, definicion mas exigente que "
+     "cautela": "Servicio gestionado de forma segura, definición mas exigente que "
                 "«acceso a agua». No mide continuidad del servicio."},
 {"clave": "victimas_robo", "codigo": "VC_VOV_ROBB", "eje": "Seguridad",
-     "rotulo": "Victimas de robo en los ultimos 12 meses", "unidad": "% de la población",
+     "rotulo": "Víctimas de robo en los últimos 12 meses", "unidad": "% de la población",
      "mas_es_peor": True, "origen": "UNODC, via la base global de los ODS",
-     "cautela": "Sale de encuestas de victimizacion, no de denuncias: mide el delito "
+     "cautela": "Sale de encuestas de victimización, no de denuncias: mide el delito "
                 "sufrido, incluido el que nunca se denuncio. Es la medida mas cercana a "
                 "la delincuencia real que existe con cobertura regional."},
     {"clave": "denuncia_robo", "codigo": "VC_PRR_ROBB", "eje": "Seguridad",
-     "rotulo": "Robos que la victima denuncio a la policia", "unidad": "% de los robos sufridos",
+     "rotulo": "Robos que la víctima denuncio a la policia", "unidad": "% de los robos sufridos",
      "mas_es_peor": False, "origen": "UNODC, via la base global de los ODS",
      "cautela": "Es una medida indirecta de CONFIANZA EN LA POLICIA: cuando la gente no "
                 "denuncia, o no espera respuesta o teme represalia. Una tasa baja de "
-                "denuncia hace que las estadisticas policiales de ese Estado subestimen "
+                "denuncia hace que las estadísticas policiales de ese Estado subestimen "
                 "el delito."},
     {"clave": "denuncia_agresion", "codigo": "VC_PRR_PHYV", "eje": "Seguridad",
-     "rotulo": "Agresiones que la victima denuncio", "unidad": "% de las agresiones sufridas",
+     "rotulo": "Agresiones que la víctima denuncio", "unidad": "% de las agresiones sufridas",
      "mas_es_peor": False, "origen": "UNODC, via la base global de los ODS",
      "cautela": "Misma lectura que la denuncia del robo: mide confianza en la respuesta "
                 "institucional, no criminalidad."},
@@ -116,10 +116,10 @@ SERIES = [
 # regiones, pero para este padron no hay dato. Publicarlas habria mostrado una
 # materia vacia con apariencia de materia cubierta. Quedan declaradas como vacio.
     {"clave": "institucion_ddhh", "codigo": "SG_NHR_IMPL", "eje": "Gobernanza",
-     "rotulo": "Institucion de derechos humanos independiente", "unidad": "cumplimiento de 0 a 1",
+     "rotulo": "Institución de derechos humanos independiente", "unidad": "cumplimiento de 0 a 1",
      "mas_es_peor": False, "origen": "ACNUDH, via la base global de los ODS",
      "cautela": "Mide la existencia y el grado de conformidad con los Principios de "
-                "Paris, NO la eficacia de esa institucion."},
+                "Paris, NO la eficacia de esa institución."},
 ]
 
 # Dimensiones que se conservan: total, ambos sexos, todas las edades.
@@ -128,7 +128,7 @@ TOTALES = {"BOTHSEX", "ALLAGE", "_T", "ALLAREA", "TOTAL", "15+", "5-17",
 
 
 def _traer(serie: dict, m49: list) -> dict:
-    """Serie anual por país. Devuelve {m49: [(anio, valor)]}."""
+    """Serie anual por país. Devuelve {m49: [(año, valor)]}."""
     parametros = urllib.parse.urlencode({
         "seriesCode": serie["codigo"],
         "areaCode": ",".join(str(c) for c in m49),
@@ -206,7 +206,7 @@ def recolectar():
         "LA TRATA DE PERSONAS SE MIDE POR VÍCTIMAS DETECTADAS. Un Estado que investiga "
         "más detecta más y aparece peor; uno que no busca aparece limpio. La cifra mide "
         "capacidad de detección tanto como magnitud del delito, y no debe leerse como "
-        "un ranking de gravedad.",
+        "un orden de gravedad.",
         "Serie ANUAL con rezago y con huecos: los Estados reportan con distinta "
         "frecuencia y varios no reportan algunas series en absoluto.",
         "Se descartan los cortes por sexo, edad y sector: solo entra el total. Los "

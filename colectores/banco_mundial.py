@@ -111,49 +111,49 @@ INDICADORES = [
      "rotulo": "Voz y rendición de cuentas", "eje": "Gobernanza",
      "unidad": "estimación de -2,5 a 2,5", "mas_es_peor": False,
      "origen": "Worldwide Governance Indicators, Banco Mundial",
-     "cautela": "Estimacion de percepcion sobre libertad de expresion, asociacion y "
-                "participacion. No cuenta hechos."},
+     "cautela": "Estimación de percepción sobre libertad de expresión, asociación y "
+                "participación. No cuenta hechos."},
     {"clave": "calidad_regulatoria", "codigo": "GOV_WGI_RQ.EST", "fuente_id": 3,
      "rotulo": "Calidad regulatoria", "eje": "Gobernanza",
      "unidad": "estimación de -2,5 a 2,5", "mas_es_peor": False,
      "origen": "Worldwide Governance Indicators, Banco Mundial",
-     "cautela": "Estimacion de percepcion sobre la capacidad del Estado de formular "
+     "cautela": "Estimación de percepción sobre la capacidad del Estado de formular "
                 "reglas razonables. No cuenta hechos."},
     {"clave": "recaudacion", "codigo": "GC.TAX.TOTL.GD.ZS", "fuente_id": None,
-     "rotulo": "Recaudacion tributaria", "eje": "Gobernanza",
+     "rotulo": "Recaudación tributaria", "eje": "Gobernanza",
      "unidad": "% del producto", "mas_es_peor": False,
      "origen": "FMI y Banco Mundial",
      "cautela": "Entra como capacidad del Estado de recaudar, no como indicador "
-                "economico. Una recaudacion baja frente a una economia grande senala "
-                "evasion o economia no registrada."},
+                "económico. Una recaudación baja frente a una economía grande señala "
+                "evasión o economía no registrada."},
     {"clave": "desempleo_joven", "codigo": "SL.UEM.1524.ZS", "fuente_id": None,
      "rotulo": "Desempleo juvenil", "eje": "Desarrollo",
      "unidad": "% de la población de 15 a 24", "mas_es_peor": True,
      "origen": "OIT, compilado por el Banco Mundial",
-     "cautela": "Estimacion modelada de la OIT donde el Estado no publica encuesta propia."},
+     "cautela": "Estimación modelada de la OIT donde el Estado no pública encuesta propia."},
     {"clave": "gini", "codigo": "SI.POV.GINI", "fuente_id": None,
      "rotulo": "Desigualdad — índice de Gini", "eje": "Desarrollo",
-     "unidad": "0 igualdad, 100 desigualdad maxima", "mas_es_peor": True,
+     "unidad": "0 igualdad, 100 desigualdad máxima", "mas_es_peor": True,
      "origen": "Banco Mundial, sobre encuestas de hogares",
-     "cautela": "Depende de la encuesta de hogares de cada Estado, con anios y "
-                "metodologias distintos. La comparacion entre paises es aproximada."},
+     "cautela": "Depende de la encuesta de hogares de cada Estado, con años y "
+                "metodologías distintos. La comparación entre países es aproximada."},
     {"clave": "pobreza", "codigo": "SI.POV.NAHC", "fuente_id": None,
      "rotulo": "Pobreza según línea nacional", "eje": "Desarrollo",
      "unidad": "% de la población", "mas_es_peor": True,
-     "origen": "Banco Mundial, sobre lineas nacionales",
+     "origen": "Banco Mundial, sobre líneas nacionales",
      "cautela": "CADA ESTADO DEFINE SU PROPIA LINEA DE POBREZA. Las cifras NO son "
-                "comparables entre paises: solo su evolucion dentro de cada uno."},
+                "comparables entre países: solo su evolución dentro de cada uno."},
     {"clave": "internet", "codigo": "IT.NET.USER.ZS", "fuente_id": None,
      "rotulo": "Usuarios de internet", "eje": "Desarrollo",
      "unidad": "% de la población", "mas_es_peor": False,
      "origen": "UIT, compilado por el Banco Mundial",
-     "cautela": "Es tambien la base de exposicion para la materia de ciberseguridad: "
-                "sin poblacion conectada no hay superficie de ataque."},
+     "cautela": "Es también la base de exposición para la materia de ciberseguridad: "
+                "sin población conectada no hay superficie de ataque."},
     {"clave": "bosque", "codigo": "AG.LND.FRST.ZS", "fuente_id": None,
      "rotulo": "Superficie forestal", "eje": "Desarrollo",
      "unidad": "% del territorio", "mas_es_peor": False,
      "origen": "FAO, compilado por el Banco Mundial",
-     "cautela": "Superficie total, no su estado de conservacion. Una plantacion cuenta "
+     "cautela": "Superficie total, no su estado de conservación. Una plantación cuenta "
                 "igual que un bosque primario."},
     {"clave": "regalo_contrato", "codigo": "IC.FRM.CORR.ZS", "fuente_id": None,
      "rotulo": "Empresas que esperan pagar por un contrato público", "eje": "Gobernanza",
@@ -161,16 +161,16 @@ INDICADORES = [
      "origen": "Encuestas de Empresas del Banco Mundial",
      "cautela": "Es la materia de INTEGRIDAD DE LA CONTRATACION PUBLICA. Mide lo que la "
                 "empresa declara esperar, no un soborno comprobado. La encuesta no se "
-                "levanta todos los anios en todos los Estados: el dato de cada pais es "
-                "de la ultima ronda disponible y las rondas no coinciden entre si."},
+                "levanta todos los años en todos los Estados: el dato de cada país es "
+                "de la última ronda disponible y las rondas no coinciden entre si."},
     {"clave": "servidores_seguros", "codigo": "IT.NET.SECR.P6", "fuente_id": None,
      "rotulo": "Servidores de internet cifrados", "eje": "Seguridad",
      "unidad": "por millón de habitantes", "mas_es_peor": False,
      "origen": "Netcraft, compilado por el Banco Mundial",
-     "cautela": "Es el unico indicador de CIBERSEGURIDAD comparable y gratuito que se "
+     "cautela": "Es el único indicador de CIBERSEGURIDAD comparable y gratuito que se "
                 "encontro para los 33. Mide infraestructura de cifrado desplegada, NO "
                 "mide ataques, ni defensa estatal, ni incidentes. Un valor alto indica "
-                "una economia digital mas madura, no un Estado mas protegido."},
+                "una economía digital mas madura, no un Estado mas protegido."},
     {"clave": "banda_ancha", "codigo": "IT.NET.BBND.P2", "fuente_id": None,
      "rotulo": "Suscripciones a banda ancha fija", "eje": "Desarrollo",
      "unidad": "por 100 habitantes", "mas_es_peor": False,
@@ -178,32 +178,32 @@ INDICADORES = [
      "cautela": "Junto con los usuarios de internet, delimita la superficie expuesta a "
                 "ataque informatico. No mide calidad ni continuidad del servicio."},
     {"clave": "migrantes", "codigo": "SM.POP.TOTL", "fuente_id": None,
-     "rotulo": "Poblacion migrante que el pais aloja", "eje": "Seguridad",
+     "rotulo": "Población migrante que el país aloja", "eje": "Seguridad",
      "unidad": "personas", "mas_es_peor": False,
      "origen": "Naciones Unidas, compilado por el Banco Mundial",
-     "cautela": "Personas nacidas en otro pais que residen en este. NO mide flujo ni "
+     "cautela": "Personas nacidas en otro país que residen en este. NO mide flujo ni "
                 "irregularidad: es el acervo acumulado. Y no dice nada sobre delito: "
-                "asociar migracion con inseguridad es un juicio, y el registro no lo hace."},
+                "asociar migración con inseguridad es un juicio, y el registro no lo hace."},
     {"clave": "migrantes_pct", "codigo": "SM.POP.TOTL.ZS", "fuente_id": None,
      "rotulo": "Peso de la población migrante", "eje": "Seguridad",
      "unidad": "% de la población", "mas_es_peor": False,
      "origen": "Naciones Unidas, compilado por el Banco Mundial",
-     "cautela": "El mismo acervo medido contra el tamano del pais. Un Estado chico con "
-                "recepcion alta aparece arriba sin que el numero absoluto sea grande."},
+     "cautela": "El mismo acervo medido contra el tamaño del país. Un Estado chico con "
+                "recepción alta aparece arriba sin que el número absoluto sea grande."},
     {"clave": "migracion_neta", "codigo": "SM.POP.NETM", "fuente_id": None,
-     "rotulo": "Migracion neta", "eje": "Seguridad",
+     "rotulo": "Migración neta", "eje": "Seguridad",
      "unidad": "personas por quinquenio", "mas_es_peor": False,
      "origen": "Naciones Unidas, compilado por el Banco Mundial",
      "cautela": "Entradas menos salidas. NEGATIVO significa que se fue mas gente de la "
-                "que llego: es el indicador de EXPULSION de poblacion. Se estima por "
-                "quinquenios, de modo que no capta una crisis de un solo anio."},
+                "que llego: es el indicador de EXPULSION de población. Se estima por "
+                "quinquenios, de modo que no capta una crisis de un solo año."},
     {"clave": "remesas", "codigo": "BX.TRF.PWKR.DT.GD.ZS", "fuente_id": None,
      "rotulo": "Remesas recibidas", "eje": "Seguridad",
      "unidad": "% del producto", "mas_es_peor": False,
      "origen": "Banco Mundial",
-     "cautela": "Entra como medida de MIGRACION, no como indicador economico: es cuanto "
-                "pesa el dinero que mandan quienes se fueron. Un valor alto senala una "
-                "diaspora grande y una economia dependiente de ella. Solo cuenta los "
+     "cautela": "Entra como medida de MIGRACIÓN, no como indicador económico: es cuanto "
+                "pesa el dinero que mandan quienes se fueron. Un valor alto señala una "
+                "diaspora grande y una economía dependiente de ella. Solo cuenta los "
                 "envios por via formal: lo que viaja por fuera del sistema no aparece."},
     {"clave": "gasto_militar_publico", "codigo": "MS.MIL.XPND.ZS", "fuente_id": None,
      "rotulo": "Gasto militar sobre el gasto del Estado", "eje": "Defensa",
@@ -217,13 +217,13 @@ INDICADORES = [
      "rotulo": "Gasto militar en dólares", "eje": "Defensa",
      "unidad": "dólares estadounidenses corrientes", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
-     "cautela": "El tamano absoluto del presupuesto. En dolares corrientes: la "
-                "comparacion entre anios distintos arrastra inflacion y tipo de cambio."},
+     "cautela": "El tamaño absoluto del presupuesto. En dolares corrientes: la "
+                "comparación entre años distintos arrastra inflación y tipo de cambio."},
     {"clave": "militares_fuerza_laboral", "codigo": "MS.MIL.TOTL.TF.ZS", "fuente_id": None,
      "rotulo": "Efectivos sobre la fuerza laboral", "eje": "Defensa",
      "unidad": "% de la fuerza laboral", "mas_es_peor": False,
      "origen": "Banco Mundial",
-     "cautela": "Que proporcion de quienes trabajan esta bajo bandera. Es la medida de "
+     "cautela": "Que proporción de quienes trabajan esta bajo bandera. Es la medida de "
                 "peso relativo del instrumento militar en la sociedad."},
     {"clave": "armas_importadas", "codigo": "MS.MIL.MPRT.KD", "fuente_id": None,
      "rotulo": "Importación de armamento mayor", "eje": "Defensa",
@@ -232,21 +232,21 @@ INDICADORES = [
      "cautela": "Es el indicador de MATERIAL disponible al que se puede llegar sin "
                 "pagar: mide la ADQUISICION de armamento mayor —aeronaves, buques, "
                 "blindados, misiles— no el inventario. La unidad NO es dinero: es un "
-                "valor indicativo que SIPRI asigna segun capacidad militar, para poder "
-                "comparar sistemas de precios distintos. Un anio sin compras da cero y "
-                "no significa que el pais no tenga material."},
+                "valor indicativo que SIPRI asigna según capacidad militar, para poder "
+                "comparar sistemas de precios distintos. Un año sin compras da cero y "
+                "no significa que el país no tenga material."},
     {"clave": "armas_exportadas", "codigo": "MS.MIL.XPRT.KD", "fuente_id": None,
      "rotulo": "Exportación de armamento mayor", "eje": "Defensa",
      "unidad": "valor indicativo SIPRI, NO son dólares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
-     "cautela": "Muy pocos Estados de la region exportan armamento mayor: la mayoria "
+     "cautela": "Muy pocos Estados de la región exportan armamento mayor: la mayoria "
                 "figura sin dato, y eso es el dato. Misma unidad indicativa que la "
-                "importacion."},
+                "importación."},
 ]
 
 
 def _traer(indicador: dict, isos: list) -> dict:
-    """Serie anual por país de un indicador. Devuelve {iso: [(anio, valor)]}."""
+    """Serie anual por país de un indicador. Devuelve {iso: [(año, valor)]}."""
     partes = [
         f"{BASE}/country/{';'.join(isos)}/indicator/{indicador['codigo']}",
         f"?format=json&per_page=20000&date={DESDE}:{HASTA}",

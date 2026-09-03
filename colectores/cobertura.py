@@ -92,7 +92,7 @@ def _traer_canal(medio: dict) -> tuple:
         peticion = urllib.request.Request(
             medio["canal"],
             headers={"User-Agent": NAVEGADOR,
-                     "Accept": "application/rss+xml, application/xml, text/xml, */*"},
+                     "Accept": "applicatión/rss+xml, applicatión/xml, text/xml, */*"},
         )
         with urllib.request.urlopen(peticion, timeout=30) as respuesta:
             raiz = ET.fromstring(respuesta.read(600_000))
@@ -322,7 +322,7 @@ def _senal_reciente(notas: list, temas: list, gentilicios: dict,
                         "titulo": n["titulo"][:190], "enlace": n["enlace"],
                         "medio": n["medio"], "pais": n["pais"],
                         "publicada": n.get("publicada"),
-                        "atribucion": "el título nombra al país" if modo == "mencion"
+                        "atribución": "el título nombra al país" if modo == "mención"
                                       else "medio nacional, el título no nombra país",
                     })
 
@@ -610,16 +610,16 @@ def recolectar():
                 "que_es": (
                     "Que se esta publicando AHORA sobre cada materia. NO ES UN "
                     "INDICADOR y no se mezcla con ninguno: las series estructurales "
-                    "cuentan hechos verificados y llegan con anios de rezago; esto "
-                    "cuenta MENCIONES de las ultimas horas. Se muestra al lado del "
+                    "cuentan hechos verificados y llegan con años de rezago; esto "
+                    "cuenta MENCIONES de las últimas horas. Se muestra al lado del "
                     "dato estructural para decir que hay actividad que esa serie "
                     "todavia no conto."),
                 "que_no_es": (
                     "Mas notas NO significa mas hechos: puede significar mas "
-                    "atencion, o un solo hecho cubierto por muchos portales. Y menos "
+                    "atención, o un solo hecho cubierto por muchos portales. Y menos "
                     "notas puede significar menos prensa libre, no menos hechos."),
                 "atribucion": (
-                    "Por MENCION cuando el titulo nombra al pais —la fuerte— y por "
+                    "Por MENCION cuando el titulo nombra al país —la fuerte— y por "
                     "MEDIO cuando el titulo no nombra ninguno y el medio es nacional. "
                     "Un diario colombiano no escribe «en Colombia hubo un atentado»: "
                     "escribe «atentado en Cali». Cada Estado declara cuantas notas "
@@ -631,11 +631,11 @@ def recolectar():
                 "total": len(fronteras),
                 "nota": ("Zonas de frontera y focos transfronterizos. NO son "
                          "indicadores: son lugares, y ninguna fuente publica "
-                         "estadistica comparable a esa escala. Se cuenta cuantas notas "
+                         "estadística comparable a esa escala. Se cuenta cuantas notas "
                          "del corpus las nombran, de cuantos portales y de cuantas "
                          "jurisdicciones. Que la nombren medios de los DOS LADOS de la "
-                         "frontera es el dato fuerte: una sola jurisdiccion puede estar "
-                         "contando su propia version."),
+                         "frontera es el dato fuerte: una sola jurisdicción puede estar "
+                         "contando su propia versión."),
             },
             "padron_medios": {
                 "prensa": sum(1 for m in padron if m.get("tipo", "prensa") == "prensa"),

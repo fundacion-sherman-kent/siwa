@@ -65,9 +65,9 @@ NAVEGADOR = (
 # Una ausencia hallada con UNA sola palabra mide nuestro vocabulario, no el del
 # Estado. Se busca con varios términos, y los tres se publican en el rastro.
 TERMINOS = [
-    "solicitudes de acceso a la informacion",
-    "acceso a la informacion publica estadisticas",
-    "solicitudes de informacion publica",
+    "solicitudes de acceso a la información",
+    "acceso a la información publica estadísticas",
+    "solicitudes de información publica",
 ]
 
 # Descarta el ruido: en estos portales «acceso» aparece en escuelas de difícil
@@ -163,33 +163,33 @@ def recolectar():
 
     vacios = [
         "LA PRESENCIA SE PRUEBA CON UNA FUENTE; LA AUSENCIA EXIGE LAS CUATRO. Por eso "
-        "ningun Estado figura como «no publica»: para afirmarlo hay que haber revisado "
+        "ningún Estado figura como «no publica»: para afirmarlo hay que haber revisado "
         "organismo productor, portal de datos abiertos, portal de transparencia activa y "
         "memoria institucional. Mientras falte uno, dice SIN VERIFICAR.",
         "SIN VERIFICAR NO ES OPACO. Es la Oficina diciendo que todavia no miro. Contarlo "
-        "como opacidad seria cometer, en el propio indice, el error que el indice existe "
+        "como opacidad seria cometer, en el propio índice, el error que el índice existe "
         "para señalar.",
         f"Solo el paso 2 —portal de datos abiertos— tiene interfaz de consulta, y solo "
         f"{len(portales)} de los 33 Estados tienen portal verificado. Los pasos 1, 3 y 4 son "
         "paginas para navegar: se comprobo que las autoridades de transparencia responden "
-        "pero no exponen sus estadisticas de forma automatizable. El indice es "
-        "irreduciblemente manual mas alla del paso 2.",
+        "pero no exponen sus estadísticas de forma automatizable. El índice es "
+        "irreduciblemente manual mas allá del paso 2.",
         "EL CONTEO DEL PORTAL NO ES UNA MEDIDA y no se publica como cifra. Colombia lo topa "
         "en 10.000 y los demas cuentan coincidencias de palabra: se hallaron escuelas de "
-        "«dificil acceso» entre los resultados de «acceso a la informacion». Va en el rastro "
+        "«dificil acceso» entre los resultados de «acceso a la información». Va en el rastro "
         "para que la consulta se pueda repetir, nada mas.",
-        "NO SE PUBLICA PUNTAJE DE 0 A 100. Las siete dimensiones del metodo —accesibilidad, "
-        "actualidad, periodicidad, desagregacion, formato y continuidad— exigen abrir cada "
-        "conjunto y mirar sus columnas. Esta edicion publica el ESTADO DE PUBLICACION con su "
-        "rastro; el puntaje es la edicion siguiente.",
+        "NO SE PUBLICA PUNTAJE DE 0 A 100. Las siete dimensiones del método —accesibilidad, "
+        "actualidad, periodicidad, desagregación, formato y continuidad— exigen abrir cada "
+        "conjunto y mirar sus columnas. Esta edición publica el ESTADO DE PUBLICACIÓN con su "
+        "rastro; el puntaje es la edición siguiente.",
         "NO SE VERIFICO, Estado por Estado, que la ley nacional de acceso este vigente y "
-        "exija publicar estas estadisticas. La exigencia se apoya en el ODS 16.10.2, que es "
-        "universal; la obligacion legal concreta de cada Estado esta pendiente de comprobar.",
+        "exija publicar estas estadísticas. La exigencia se apoya en el ODS 16.10.2, que es "
+        "universal; la obligación legal concreta de cada Estado esta pendiente de comprobar.",
         "De los conjuntos hallados NO se verifico el contenido de las columnas: que se "
         "publique «solicitudes de acceso» no prueba que desagregue las denegadas ni su "
-        "motivo. Es la verificacion de la edicion siguiente.",
+        "motivo. Es la verificación de la edición siguiente.",
         "TODA CELDA ES REFUTABLE. Si el dato existe y la Oficina no lo encontro, la "
-        "correccion se recibe, se verifica, se publica con fecha y se acredita a quien la "
+        "corrección se recibe, se verifica, se publica con fecha y se acredita a quien la "
         "aporto. El registro de correcciones es publico y permanente.",
     ]
 
@@ -197,8 +197,8 @@ def recolectar():
         fiabilidad="A",
         credibilidad=3,
         corroborado=False,
-        nota=("Produccion propia con metodo declarado y rastro publicado: la consulta "
-              "automatica la puede repetir cualquiera pegando la direccion. Credibilidad 3 "
+        nota=("Producción propia con método declarado y rastro publicado: la consulta "
+              "automática la puede repetir cualquiera pegando la dirección. Credibilidad 3 "
               "y no 2 porque hasta ahora cada Estado se verifico por UNA sola via —el portal "
               "de datos abiertos—. Una ausencia hallada por un solo camino es un indicio, no "
               "un hecho: con dos vias independientes que coincidan sube a 2."),

@@ -122,14 +122,14 @@ MATERIAS = [
     {"materia": "Integridad", "eje": "Gobernanza", "formato": "pdf", "terminos": {
         "es": ["corrupción", "\"declaración jurada\""],
         "pt": ["corrupção", "\"declaração de bens\""],
-        "en": ["corruption", "\"asset declaration\""],
-        "fr": ["corruption", "\"déclaration de patrimoine\""],
+        "en": ["corruptión", "\"asset declaratión\""],
+        "fr": ["corruptión", "\"déclaration de patrimoine\""],
         "nl": ["corruptie", "vermogensverklaring"]}},
     {"materia": "Acceso a la información", "eje": "Gobernanza", "formato": "pdf", "terminos": {
         "es": ["\"acceso a la información\" solicitudes"],
         "pt": ["\"acesso à informação\" pedidos"],
-        "en": ["\"freedom of information\" requests"],
-        "fr": ["\"accès à l'information\" demandes"],
+        "en": ["\"freedom of informatión\" requests"],
+        "fr": ["\"accès à l'informatión\" demandes"],
         "nl": ["\"toegang tot informatie\" verzoeken"]}},
     {"materia": "Ciberseguridad", "eje": "Gobernanza", "formato": "pdf", "terminos": {
         "es": ["ciberseguridad incidentes", "CSIRT"],
@@ -140,7 +140,7 @@ MATERIAS = [
     {"materia": "Desinformación", "eje": "Gobernanza", "formato": "pdf", "terminos": {
         "es": ["desinformación", "\"alfabetización mediática\""],
         "pt": ["desinformação", "\"educação midiática\""],
-        "en": ["disinformation", "\"media literacy\""],
+        "en": ["disinformatión", "\"media literacy\""],
         "fr": ["désinformation", "\"éducation aux médias\""],
         "nl": ["desinformatie", "mediawijsheid"]}},
 ]
@@ -157,7 +157,7 @@ OPERADORES = [
     {"operador": "comillas", "hace": "busca la frase exacta y en ese orden",
      "ejemplo": "\"muertes violentas\""},
     {"operador": "signo menos", "hace": "resta el ruido que ensucia el resultado",
-     "ejemplo": "homicidios -nomina -licitacion"},
+     "ejemplo": "homicidios -nomina -licitación"},
     {"operador": "AAAA..AAAA", "hace": "acota a un rango de años",
      "ejemplo": "homicidios 2024..2026"},
     {"operador": "OR", "hace": "acepta cualquiera de dos formas de nombrar lo mismo",
@@ -269,26 +269,26 @@ def recolectar():
         })
 
     vacios = [
-        "ESTO NO ES UN DATO: ES UNA CONSULTA ARMADA. No se ejecuta ningun motor de "
-        "busqueda ni se trae ningun resultado. El lector la ejecuta y ve lo que hay, "
-        "sin intermediacion de la Oficina.",
+        "ESTO NO ES UN DATO: ES UNA CONSULTA ARMADA. No se ejecuta ningún motor de "
+        "búsqueda ni se trae ningún resultado. El lector la ejecuta y ve lo que hay, "
+        "sin intermediación de la Oficina.",
         f"SOLO {conDominio} DE 33 ESTADOS tienen dominio oficial ya probado. Para los "
         f"{len(registros) - conDominio} restantes la consulta NO esta acotada a la fuente "
         "oficial: se acota por el nombre del Estado, y el producto lo declara en cada "
         "ficha. NINGUN DOMINIO SE CONSTRUYE POR ANALOGIA: suponer 'datos.gob.ni' porque "
-        "existe 'datos.gob.ar' mandaria al lector a una direccion inexistente.",
+        "existe 'datos.gob.ar' mandaria al lector a una dirección inexistente.",
         "UN RECUENTO DE RESULTADOS NO SE PUBLICA COMO CIFRA. Lo que un motor devuelve "
-        "varia por pais, por sesion, por idioma y por historial: no es comparable entre "
-        "Estados y no sostiene ningun juicio.",
+        "varia por país, por sesión, por idioma y por historial: no es comparable entre "
+        "Estados y no sostiene ningún juicio.",
         "LOS OPERADORES NO GARANTIZAN QUE LA FUENTE SEA FIABLE. Acotar por dominio "
         "oficial acota el ORIGEN, no la calidad: un documento oficial puede estar "
         "desactualizado, incompleto o ser el objeto mismo de la controversia.",
         "EL TERMINO ES EL QUE USA EL ESTADO, no el nuestro. Un conjunto rotulado con "
-        "otro vocabulario no aparece en estas consultas, y esa es la limitacion "
-        "principal: la busqueda alcanza hasta donde llega el vocabulario elegido.",
-        "LA CONSULTA VA EN LA LENGUA DEL ESTADO —castellano, portugues, ingles, frances "
-        "o neerlandes segun el caso—, porque ningun Estado rotula en la nuestra. Queda "
-        "un vacio conocido: HAITI publica en frances pero buena parte de su vida "
+        "otro vocabulario no aparece en estas consultas, y esa es la limitación "
+        "principal: la búsqueda alcanza hasta donde llega el vocabulario elegido.",
+        "LA CONSULTA VA EN LA LENGUA DEL ESTADO —castellano, portugues, inglés, francés "
+        "o neerlandes según el caso—, porque ningún Estado rotula en la nuestra. Queda "
+        "un vacio conocido: HAITI publica en francés pero buena parte de su vida "
         "administrativa transcurre en criollo haitiano, y SURINAM tiene el neerlandes "
         "como lengua oficial con el sranan tongo de uso corriente. En esos dos casos la "
         "consulta alcanza la lengua oficial y no necesariamente la de la fuente.",
@@ -299,10 +299,10 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Los dominios provienen de los padrones verificados a mano de la Oficina "
-              "—portales oficiales e Indice de Opacidad—, donde cada direccion "
+              "—portales oficiales e Índice de Opacidad—, donde cada dirección "
               "respondio cuando se la pidio. Fiabilidad A por eso. Credibilidad 2 y no "
               "1 porque LA COMBINACION DE OPERADORES ES UNA CONSTRUCCION DE LA "
-              "FUNDACION, no un dato de la fuente: dice donde buscar, no que se va a "
+              "FUNDACIÓN, no un dato de la fuente: dice donde buscar, no que se va a "
               "encontrar."),
     )
 

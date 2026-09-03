@@ -1,7 +1,7 @@
 """Atribución geográfica de un punto al padrón de los 33 Estados.
 
 Resuelve a qué país del padrón pertenece una coordenada, usando los límites de
-Natural Earth que el repositorio guarda en `sitio/geo/paises-alc.geojson`.
+Natural Earth que el repositorio guarda en `sitio/geo/países-alc.geojson`.
 
 Se hace acá, en la recolección, y no en la página: la salida no genera datos
 propios (`doctrina/siwa.md` §2). El método —trazado de rayo sobre el anillo

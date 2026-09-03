@@ -63,14 +63,14 @@ def recolectar():
         with urllib.request.urlopen(peticion, timeout=45) as r:
             crudo = r.read(TOPE_BYTES + 1)
     except urllib.error.HTTPError as e:
-        raise RuntimeError(f"El canal de la Fundacion respondio HTTP {e.code}") from e
+        raise RuntimeError(f"El canal de la Fundación respondio HTTP {e.code}") from e
 
     # Un XML CORTADO A LA MITAD nunca parsea, y el error que devuelve —«not
     # well-formed»— hace creer que el canal esta roto cuando lo unico que pasa es
     # que el tope de lectura quedo corto. Se distingue una cosa de la otra.
     if len(crudo) > TOPE_BYTES:
         raise RuntimeError(
-            f"El canal de la Fundacion supera los {TOPE_BYTES // 1_000_000} MB: no se lo "
+            f"El canal de la Fundación supera los {TOPE_BYTES // 1_000_000} MB: no se lo "
             "leyo entero y por eso no parsea. Hay que subir el tope, no culpar al canal.")
     try:
         raiz = ET.fromstring(crudo)
@@ -79,7 +79,7 @@ def recolectar():
         # cortafuegos con codigo 200. Se dice QUE llego, no solo que no parseo.
         cabeza = " ".join(crudo[:120].decode("utf-8", "replace").split())
         raise RuntimeError(
-            f"El canal de la Fundacion respondio 200 pero no es XML valido ({e}). "
+            f"El canal de la Fundación respondio 200 pero no es XML valido ({e}). "
             f"Empieza con: {cabeza}") from e
 
     registros = []
@@ -109,14 +109,14 @@ def recolectar():
     libres = sum(1 for r in registros if r["difusion"] == "libre")
     vacios = [
         "Este colector NO copia el contenido de los informes: trae titulo, fecha, "
-        "categoria y direccion. El analisis vive en la web de la Fundacion, con su firma "
-        "y sus autoridades; aca vive el dato.",
-        "La distincion entre informe LIBRE y RESERVADO la declara el propio sitio en la "
-        "categoria de cada pieza. El registro la respeta y la muestra: NO decide por su "
+        "categoría y dirección. El análisis vive en la web de la Fundación, con su firma "
+        "y sus autoridades; acá vive el dato.",
+        "La distinción entre informe LIBRE y RESERVADO la declara el propio sitio en la "
+        "categoría de cada pieza. El registro la respeta y la muestra: NO decide por su "
         "cuenta que se publica en abierto.",
-        f"Se traen los {TOPE} mas recientes del canal. Los anteriores estan en la web de "
-        "la Fundacion y no se replican aca.",
-        "Un informe de la Fundacion es ANALISIS, no dato: lleva juicios con confianza y "
+        f"Se traen los {TOPE} mas recientes del canal. Los anteriores están en la web de "
+        "la Fundación y no se replican acá.",
+        "Un informe de la Fundación es ANÁLISIS, no dato: lleva juicios con confianza y "
         "probabilidad declaradas. Este registro publica hechos calificados y no emite "
         "juicios. Son dos productos distintos y no deben leerse como uno solo.",
     ]
@@ -125,10 +125,10 @@ def recolectar():
         fiabilidad="A",
         credibilidad=1,
         corroborado=True,
-        nota=("Publicaciones de la propia Fundacion, tomadas de su canal oficial. "
+        nota=("Publicaciones de la propia Fundación, tomadas de su canal oficial. "
               "Credibilidad 1 porque lo que se registra es que la pieza existe y donde "
               "esta, hecho verificable en dos lugares —el canal y la pagina—, no el "
-              "contenido de su analisis."),
+              "contenido de su análisis."),
     )
 
     return comun.escribir(

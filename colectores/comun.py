@@ -145,7 +145,7 @@ ROTULO_CATEGORIA = {
     "ciber": "Ciberseguridad",
     "condiciones": "Condiciones de vida y desigualdad",
     "conectividad": "Conectividad",
-    "contratacion": "Contratación pública",
+    "contratación": "Contratación pública",
     "control": "Control territorial del Estado",
     "democracia": "Nivel democrático",
     "efectivos": "Efectivos",
@@ -164,7 +164,7 @@ ROTULO_CATEGORIA = {
     "terrorismo": "Terrorismo",
     "trata": "Trata de personas",
     "urbano": "Urbano",
-    "victimizacion": "Victimización y denuncia",
+    "victimización": "Victimización y denuncia",
     "violencia": "Homicidios",
 }
 
@@ -248,8 +248,8 @@ def escribir(
         else:
             sin_categoria.append(indicador.get("clave"))
     if sin_categoria:
-        print(f"[{colector}] AVISO: sin categoria declarada -> "
-              f"{', '.join(sin_categoria)}. Se agregan a comun.CATEGORIAS.")
+        print(f"[{colector}] AVISO: sin categoría declarada -> "
+              f"{', '.join(sin_categoria)}. Se agregan a común.CATEGORIAS.")
 
     # allow_nan=False es deliberado: NaN e Infinity NO son JSON valido y el
     # navegador rechaza el archivo entero, no solo el valor. Si un colector

@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "comercio",
     "capa": "publico",
-    "obtenido_en": "2026-09-02T05:51:38+00:00",
+    "obtenido_en": "2026-09-03T01:52:01+00:00",
     "fuente": {
       "nombre": "Comtrade de Naciones Unidas — vista pública",
       "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
@@ -11,20 +11,20 @@
       "fiabilidad": "A",
       "credibilidad": 2,
       "corroborado": false,
-      "nota": "Declaraciones aduaneras oficiales de cada Estado, compiladas por Naciones Unidas. La fuente es de primer orden; lo que NO es de primer orden es la interpretacion: la brecha es un indicio, no una medicion de contrabando."
+      "nota": "Declaraciones aduaneras oficiales de cada Estado, compiladas por Naciones Unidas. La fuente es de primer orden; lo que NO es de primer orden es la interpretación: la brecha es un indicio, no una medición de contrabando."
     },
     "vacios_declarados": [
-      "UNA BRECHA DE POCOS PUNTOS NO ES CONTRABANDO: ES CONTABILIDAD. El exportador declara en valor FOB —la mercaderia puesta en el barco— y el importador en CIF, que ademas incluye FLETE Y SEGURO. Solo por eso el importador registra de rutina entre 3 % y 10 % mas. A eso se suman los envios que cruzan el anio calendario y las diferencias de clasificacion aduanera.",
-      "LO QUE SI LLAMA LA ATENCION ES LA BRECHA NEGATIVA: que el importador declare MENOS de lo que el exportador dice haberle mandado no tiene explicacion contable inocente, porque el flete y el seguro empujan en el sentido contrario. Aun asi es un INDICIO que abre una linea de averiguacion, NO una prueba de delito.",
+      "UNA BRECHA DE POCOS PUNTOS NO ES CONTRABANDO: ES CONTABILIDAD. El exportador declara en valor FOB —la mercaderia puesta en el barco— y el importador en CIF, que además incluye FLETE Y SEGURO. Solo por eso el importador registra de rutina entre 3 % y 10 % mas. A eso se suman los envios que cruzan el año calendario y las diferencias de clasificación aduanera.",
+      "LO QUE SI LLAMA LA ATENCIÓN ES LA BRECHA NEGATIVA: que el importador declare MENOS de lo que el exportador dice haberle mandado no tiene explicación contable inocente, porque el flete y el seguro empujan en el sentido contrario. Aun así es un INDICIO que abre una línea de averiguación, NO una prueba de delito.",
       "Se comparan 37 corredores —los que comparten frontera y los de mayor volumen regional—, no los 1.056 pares posibles: la mayoria no tiene comercio significativo y solo agregaria ruido. Un corredor ausente no esta limpio: no esta mirado.",
-      "LA MEDICION ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, empezando por los que nunca se midieron, y CADA CORREDOR DECLARA CUANDO SE MIDIO. Van 20 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
-      "El anio es 2023, el ultimo con cobertura amplia en la vista publica. NO es el anio corriente y no se estima ninguno posterior.",
-      "Se compara el TOTAL de comercio, no producto por producto. La subfacturacion suele concentrarse en unas pocas partidas y se diluye en el total: este registro sirve para senalar el corredor, no la mercaderia.",
-      "Un Estado que no reporta a Comtrade no genera brecha con nadie, y por lo tanto NO APARECE. La ausencia mide la calidad de su estadistica aduanera, no su honestidad comercial.",
-      "Se descartaron 28 filas de apertura por modo de transporte. Sumarlas al total duplica el comercio: en la primera prueba la brecha Argentina-Brasil dio +109 %, que es absurdo; con la fila total sola da +4,7 %. Queda anotado porque es un error facil de cometer.",
+      "LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, empezando por los que nunca se midieron, y CADA CORREDOR DECLARA CUANDO SE MIDIO. Van 26 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
+      "El año es 2023, el último con cobertura amplia en la vista publica. NO es el año corriente y no se estima ninguno posterior.",
+      "Se compara el TOTAL de comercio, no producto por producto. La subfacturación suele concentrarse en unas pocas partidas y se diluye en el total: este registro sirve para señalar el corredor, no la mercaderia.",
+      "Un Estado que no reporta a Comtrade no genera brecha con nadie, y por lo tanto NO APARECE. La ausencia mide la calidad de su estadística aduanera, no su honestidad comercial.",
+      "Se descartaron 51 filas de apertura por modo de transporte. Sumarlas al total duplica el comercio: en la primera prueba la brecha Argentina-Brasil dio +109 %, que es absurdo; con la fila total sola da +4,7 %. Queda anotado porque es un error facil de cometer.",
       "Consultas que fallaron: BRA-VEN: sin fila total; COL-VEN: sin fila total"
     ],
-    "cantidad": 12,
+    "cantidad": 17,
     "atribucion": {
       "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
       "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
@@ -54,6 +54,51 @@
       "peor_brecha_pct": -91.0,
       "brecha_negativa_en": [
         "Colombia → Panamá"
+      ]
+    },
+    {
+      "iso": "HND",
+      "pais": "Honduras",
+      "bloque": "México y Centroamérica",
+      "corredores": 1,
+      "corredores_que_llaman_la_atencion": 1,
+      "peor_brecha_pct": -53.5,
+      "brecha_negativa_en": [
+        "Guatemala → Honduras"
+      ]
+    },
+    {
+      "iso": "GTM",
+      "pais": "Guatemala",
+      "bloque": "México y Centroamérica",
+      "corredores": 3,
+      "corredores_que_llaman_la_atencion": 2,
+      "peor_brecha_pct": -53.5,
+      "brecha_negativa_en": [
+        "Guatemala → Honduras",
+        "Guatemala → El Salvador"
+      ]
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "bloque": "México y Centroamérica",
+      "corredores": 2,
+      "corredores_que_llaman_la_atencion": 1,
+      "peor_brecha_pct": -39.9,
+      "brecha_negativa_en": [
+        "México → Belice"
+      ]
+    },
+    {
+      "iso": "BLZ",
+      "pais": "Belice",
+      "bloque": "México y Centroamérica",
+      "corredores": 1,
+      "corredores_que_llaman_la_atencion": 1,
+      "peor_brecha_pct": -39.9,
+      "brecha_negativa_en": [
+        "México → Belice"
       ]
     },
     {
@@ -92,6 +137,17 @@
       ]
     },
     {
+      "iso": "SLV",
+      "pais": "El Salvador",
+      "bloque": "México y Centroamérica",
+      "corredores": 1,
+      "corredores_que_llaman_la_atencion": 1,
+      "peor_brecha_pct": -15.5,
+      "brecha_negativa_en": [
+        "Guatemala → El Salvador"
+      ]
+    },
+    {
       "iso": "URY",
       "pais": "Uruguay",
       "bloque": "Cono Sur",
@@ -122,15 +178,15 @@
       "corredores_que_llaman_la_atencion": 3,
       "peor_brecha_pct": -9.1,
       "brecha_negativa_en": [
-        "Perú → Ecuador",
-        "Perú → Chile"
+        "Perú → Chile",
+        "Perú → Ecuador"
       ]
     },
     {
       "iso": "CHL",
       "pais": "Chile",
       "bloque": "Cono Sur",
-      "corredores": 2,
+      "corredores": 3,
       "corredores_que_llaman_la_atencion": 1,
       "peor_brecha_pct": -9.1,
       "brecha_negativa_en": [
@@ -152,7 +208,7 @@
       "iso": "PRY",
       "pais": "Paraguay",
       "bloque": "Cono Sur",
-      "corredores": 3,
+      "corredores": 4,
       "corredores_que_llaman_la_atencion": 0,
       "peor_brecha_pct": -3.2,
       "brecha_negativa_en": []
@@ -161,20 +217,20 @@
       "iso": "BOL",
       "pais": "Bolivia",
       "bloque": "Andina",
-      "corredores": 3,
+      "corredores": 5,
       "corredores_que_llaman_la_atencion": 2,
       "peor_brecha_pct": 6.4,
       "brecha_negativa_en": []
     }
   ],
   "resumen": {
-    "corredores_comparados": 20,
+    "corredores_comparados": 26,
     "corredores_pedidos": 37,
-    "corredores_que_llaman_la_atencion": 10,
-    "estados_con_dato": 12,
+    "corredores_que_llaman_la_atencion": 13,
+    "estados_con_dato": 17,
     "estados_del_padron": 33,
     "anio": 2023,
-    "filas_descartadas_por_transporte": 28
+    "filas_descartadas_por_transporte": 51
   },
   "corredores": [
     {
@@ -189,6 +245,32 @@
       "sentido": "el importador declara menos",
       "llama_la_atencion": true,
       "medido_en": "2026-09-01T16:50:38+00:00"
+    },
+    {
+      "origen": "GTM",
+      "pais_origen": "Guatemala",
+      "destino": "HND",
+      "pais_destino": "Honduras",
+      "exportador_declara": 1629132577,
+      "importador_declara": 757829357,
+      "brecha": -871303220,
+      "brecha_pct": -53.5,
+      "sentido": "el importador declara menos",
+      "llama_la_atencion": true,
+      "medido_en": "2026-09-03T01:52:01+00:00"
+    },
+    {
+      "origen": "MEX",
+      "pais_origen": "México",
+      "destino": "BLZ",
+      "pais_destino": "Belice",
+      "exportador_declara": 212620258,
+      "importador_declara": 127699427,
+      "brecha": -84920831,
+      "brecha_pct": -39.9,
+      "sentido": "el importador declara menos",
+      "llama_la_atencion": true,
+      "medido_en": "2026-09-03T01:52:01+00:00"
     },
     {
       "origen": "BRA",
@@ -215,6 +297,19 @@
       "sentido": "el importador declara menos",
       "llama_la_atencion": true,
       "medido_en": "2026-09-01T05:50:36+00:00"
+    },
+    {
+      "origen": "GTM",
+      "pais_origen": "Guatemala",
+      "destino": "SLV",
+      "pais_destino": "El Salvador",
+      "exportador_declara": 1874544953,
+      "importador_declara": 1583850573,
+      "brecha": -290694380,
+      "brecha_pct": -15.5,
+      "sentido": "el importador declara menos",
+      "llama_la_atencion": true,
+      "medido_en": "2026-09-03T01:52:01+00:00"
     },
     {
       "origen": "BRA",
@@ -359,6 +454,19 @@
       "medido_en": "2026-09-01T16:50:38+00:00"
     },
     {
+      "origen": "MEX",
+      "pais_origen": "México",
+      "destino": "GTM",
+      "pais_destino": "Guatemala",
+      "exportador_declara": 2915309267,
+      "importador_declara": 3241209688,
+      "brecha": 325900421,
+      "brecha_pct": 11.2,
+      "sentido": "el importador declara más",
+      "llama_la_atencion": false,
+      "medido_en": "2026-09-03T01:37:07+00:00"
+    },
+    {
       "origen": "ARG",
       "pais_origen": "Argentina",
       "destino": "CHL",
@@ -385,6 +493,19 @@
       "medido_en": "2026-09-01T05:50:36+00:00"
     },
     {
+      "origen": "BOL",
+      "pais_origen": "Bolivia",
+      "destino": "PRY",
+      "pais_destino": "Paraguay",
+      "exportador_declara": 49225933,
+      "importador_declara": 57237068,
+      "brecha": 8011135,
+      "brecha_pct": 16.3,
+      "sentido": "el importador declara más",
+      "llama_la_atencion": false,
+      "medido_en": "2026-09-03T01:37:07+00:00"
+    },
+    {
       "origen": "BRA",
       "pais_origen": "Brasil",
       "destino": "PER",
@@ -396,6 +517,19 @@
       "sentido": "el importador declara más",
       "llama_la_atencion": false,
       "medido_en": "2026-08-31T18:45:21+00:00"
+    },
+    {
+      "origen": "BOL",
+      "pais_origen": "Bolivia",
+      "destino": "CHL",
+      "pais_destino": "Chile",
+      "exportador_declara": 179299790,
+      "importador_declara": 221514810,
+      "brecha": 42215020,
+      "brecha_pct": 23.5,
+      "sentido": "el importador declara más",
+      "llama_la_atencion": false,
+      "medido_en": "2026-09-03T01:37:07+00:00"
     },
     {
       "origen": "COL",
@@ -437,5 +571,5 @@
       "medido_en": "2026-08-31T12:31:45+00:00"
     }
   ],
-  "metodo": "Para cada corredor se pide lo que el origen declara EXPORTAR al destino y lo que el destino declara IMPORTAR del origen, en el mismo anio y sobre el total de mercaderias. Se toma UNICAMENTE la fila total —motCode 0, customsCode C00, partner2Code 0— y se descartan las aperturas por modo de transporte, que repiten el mismo comercio."
+  "metodo": "Para cada corredor se pide lo que el origen declara EXPORTAR al destino y lo que el destino declara IMPORTAR del origen, en el mismo año y sobre el total de mercaderias. Se toma UNICAMENTE la fila total —motCode 0, customsCode C00, partner2Code 0— y se descartan las aperturas por modo de transporte, que repiten el mismo comercio."
 }

@@ -19,7 +19,7 @@ automatizado:
 - **Reddit** — devuelve 403 al acceso automatizado anónimo. Exige registrar una
   aplicación y firmar condiciones de uso.
 - **Telegram** — la vista web de canal público responde, pero leerla de forma
-  sistemática es raspado y `doctrina/limites.md` lo condiciona a dictamen legal
+  sistemática es raspado y `doctrina/límites.md` lo condiciona a dictamen legal
   previo, que todavía no se emitió.
 - **Bluesky** — la búsqueda pública devolvió 403 sin sesión.
 
@@ -207,7 +207,7 @@ def recolectar():
 
     # --- Nube de conceptos: los mismos terminos agregados por bloque y para la
     # region entera. Se recuenta sobre las publicaciones, no se suman los mapas
-    # de cada pais: sumar rankings no da un ranking.
+    # de cada país: sumar ordenamientos no da un ordenamiento.
     def nube(pubs, etiquetas_propias):
         contador, instancias_de = Counter(), {}
         for p in pubs:
@@ -239,9 +239,9 @@ def recolectar():
     robots = sum(r["publicaciones_automatizadas"] for r in registros)
     vacios = [
         f"Se descartaron {robots} publicaciones de cuentas automatizadas, que en su "
-        "mayoria reenvian titulares de prensa. Contarlas como conversacion social "
+        "mayoria reenvian titulares de prensa. Contarlas como conversación social "
         "seria contar dos veces la misma noticia, que este registro ya recoge por su "
-        "propio canal. La deteccion usa la declaracion de la propia cuenta y, si no la "
+        "propio canal. La detección usa la declaración de la propia cuenta y, si no la "
         "hay, su nombre: una cuenta automatizada que no se declare puede pasar.",
         "Mastodon NO es representativo de la conversación pública de la región: su "
         "base de usuarios es pequeña, mayoritariamente europea y norteamericana y de "
@@ -256,7 +256,7 @@ def recolectar():
         "Reddit queda fuera: devuelve 403 al acceso anónimo automatizado y exige "
         "registrar una aplicación y aceptar sus condiciones de uso.",
         "Telegram queda fuera: la vista web de canal público responde, pero leerla de "
-        "forma sistemática es raspado y doctrina/limites.md lo condiciona a dictamen "
+        "forma sistemática es raspado y doctrina/límites.md lo condiciona a dictamen "
         "legal previo, que no se emitió.",
         "Bluesky queda fuera: la búsqueda pública devolvió 403 sin sesión iniciada.",
     ]

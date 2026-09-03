@@ -91,7 +91,7 @@ def _traer_conflictos(tarea: tuple) -> tuple:
 
 
 def _contar_mineria(tarea: tuple) -> tuple:
-    """Solo el recuento y el reparto por metodo: ninguna geometria sale de aca."""
+    """Solo el recuento y el reparto por método: ninguna geometria sale de acá."""
     iso, url = tarea
     try:
         cnt = _pedir(f"{url}/query?where=1%3D1&returnCountOnly=true&f=json")
@@ -206,39 +206,39 @@ def recolectar():
                            if p["iso"] not in por_iso)
 
     vacios = [
-        "LICENCIA NO DECLARADA. Las capas estan abiertas al publico y no llevan texto "
+        "LICENCIA NO DECLARADA. Las capas están abiertas al publico y no llevan texto "
         "de derechos ni condiciones de uso. Que un dato sea accesible no significa que "
-        "sea redistribuible. Este registro es de ACCESO LIBRE Y GRATUITO y la Fundacion "
-        "no comercializa datos, de modo que el uso aqui es el que la licencia no "
-        "comercial admite. Aun asi se publican RECUENTOS Y AGREGADOS y no los registros "
-        "individuales ni las geometrias, y PENDIENTE queda pedir autorizacion escrita al "
+        "sea redistribuible. Este registro es de ACCESO LIBRE Y GRATUITO y la Fundación "
+        "no comercializa datos, de modo que el uso aquí es el que la licencia no "
+        "comercial admite. Aun así se publican RECUENTOS Y AGREGADOS y no los registros "
+        "individuales ni las geometrias, y PENDIENTE queda pedir autorización escrita al "
         "Instituto: no por licencia sino por cortesia entre instituciones, y porque con "
-        "permiso podria publicarse el detalle caso por caso. Un dato de licencia no "
-        "comercial NO puede entrar a un informe pago de la Fundacion aunque sea gratuito "
+        "permiso podría publicarse el detalle caso por caso. Un dato de licencia no "
+        "comercial NO puede entrar a un informe pago de la Fundación aunque sea gratuito "
         "en este registro: la licencia mira el uso, no el sitio.",
         "NO ES UN CENSO DE CONFLICTOS. Es el corpus que un equipo academico levanto y "
         "verifico caso por caso, con el alcance y el recorte de ese proyecto. Un Estado "
         "con pocos casos puede tener pocos conflictos O poca cobertura del proyecto, y "
         "las dos cosas NO se distinguen desde afuera.",
-        "Sin ningun conflicto registrado por el proyecto: "
+        "Sin ningún conflicto registrado por el proyecto: "
         + (", ".join(sin_conflicto) if sin_conflicto else "ninguno")
         + ". Ausencia en el corpus no es ausencia de conflicto.",
-        "La mineria ilegal esta mapeada en solo cuatro Estados y con anios distintos "
-        "—Bolivia y Venezuela 2017, Brasil 2018, Peru sin anio declarado—: NO son "
-        "comparables entre si ni con la situacion actual. Y el numero de poligonos no "
+        "La minería ilegal esta mapeada en solo cuatro Estados y con años distintos "
+        "—Bolivia y Venezuela 2017, Brasil 2018, Peru sin año declarado—: NO son "
+        "comparables entre si ni con la situación actual. Y el número de poligonos no "
         "es una medida de magnitud: depende de como se dibujo cada capa. Venezuela "
         "figura con 1.317 poligonos y Peru con 3, y eso NO significa que en Peru casi "
-        "no haya mineria ilegal.",
+        "no haya minería ilegal.",
         "La fecha registrada es la de INICIO del conflicto, no la de su registro. "
         "Muchos casos siguen abiertos y el corpus no declara cuales se cerraron.",
-        f"EL ANIO {ANIO_RELLENO} SE DESCARTA: aparece 70 veces en un corpus de 443 y no "
-        "hay ningun otro anio anterior a 1950 salvo uno. Es un valor de relleno del "
+        f"EL AÑO {ANIO_RELLENO} SE DESCARTA: aparece 70 veces en un corpus de 443 y no "
+        "hay ningún otro año anterior a 1950 salvo uno. Es un valor de relleno del "
         "origen, no una fecha. Publicarlo como «el conflicto mas antiguo» de seis "
         "Estados habria sido inventar un hecho. Esos 70 casos entran al recuento pero "
-        "no al rango de anios. Otros 21 registros no traen anio legible.",
+        "no al rango de años. Otros 21 registros no traen año legible.",
     ]
     if sin_atribuir:
-        vacios.append("Nombres de pais que no se pudieron atribuir al padron: "
+        vacios.append("Nombres de país que no se pudieron atribuir al padron: "
                       + ", ".join(sorted(set(sin_atribuir))[:12]))
     if caidos:
         vacios.append("Capas que fallaron en esta corrida: " + "; ".join(caidos))
@@ -270,11 +270,11 @@ def recolectar():
                 "poligonos_mineria_ilegal": total_min,
                 "estados_con_mineria_mapeada": len(min_por_iso),
             },
-            "atribucion": ("Instituto de Estudios Interculturales, Pontificia "
+            "atribución": ("Instituto de Estudios Interculturales, Pontificia "
                            "Universidad Javeriana Cali. Visor original: " + VISOR),
-            "metodo": ("Se consultan las capas publicas SIN pedir geometria y se "
-                       "publican unicamente recuentos y repartos por Estado, tipo, "
-                       "categoria y actores. Los registros individuales no se "
+            "método": ("Se consultan las capas publicas SIN pedir geometria y se "
+                       "publican únicamente recuentos y repartos por Estado, tipo, "
+                       "categoría y actores. Los registros individuales no se "
                        "republican."),
         },
     )

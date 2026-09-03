@@ -864,6 +864,20 @@
     font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#5f7286;font-weight:700;
     margin-bottom:5px;
   }
+  .opacidad-ficha{margin-top:18px;}
+  .op-fila{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;}
+  .op-caja{
+    border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+    background:rgba(255,255,255,.02);border-left-width:3px;
+  }
+  .op-caja.bien{border-left-color:var(--ok);}
+  .op-caja.medio{border-left-color:var(--orange);}
+  .op-caja.neutro{border-left-color:var(--grey-blue);}
+  .op-caja .nombre{font-size:11px;color:#9fb0c4;letter-spacing:.2px;}
+  .op-caja .valor{font-size:26px;font-weight:700;color:#F4F2EC;line-height:1.15;margin:4px 0 2px;}
+  .op-caja .valor .de{font-size:12px;font-weight:400;color:#9fb0c4;margin-left:6px;}
+  .op-caja .puesto{font-size:11px;color:#8ea0b4;line-height:1.4;}
+  .rastro-op{margin:8px 0 0;padding-left:16px;font-size:11px;color:#8ea0b4;line-height:1.5;}
   .mide-lista{display:flex;flex-wrap:wrap;gap:6px;}
   .consulta-txt{
     display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;
@@ -1097,6 +1111,7 @@
     <a href="#desarrollo">Desarrollo</a>
     <div class="grupo">Verificación y método</div>
     <a href="#que-se-publica">Qué se publica hoy</a>
+    <a href="#opacidad-seccion">Índice de Opacidad</a>
     <a href="#de-donde-sale">De dónde sale y qué falta</a>
   </nav>
 
@@ -1111,6 +1126,7 @@
       </div>
       <div class="elige-pais" id="elige-pais"></div>
       <div class="ejes-resumen" id="ejes-resumen"></div>
+      <div class="opacidad-ficha" id="opacidad-ficha"></div>
       <div class="hoy" id="hoy"></div>
       <div class="grid-cards" id="tarj-ficha"></div>
       <p class="pie-ficha" id="pie-ficha"></p>
@@ -1706,6 +1722,25 @@
         </div>
     </section>
 
+    <section class="domain bloque" id="opacidad-seccion" data-nivel="1">
+      <div class="bloque-head"><h3>Índice de Opacidad</h3></div>
+      <p class="bloque-bajada">Qué no publica cada Estado, y qué se revisó para poder afirmarlo. Es una medición propia de la Oficina: no la publica ningún organismo.</p>
+    <div class="categoria" id="opacidad" data-nivel="1">
+      <div class="categoria-head"><h4>Índice de Opacidad</h4><span class="tag" id="tag-opacidad">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Mide la ausencia, no la presencia.</b> Un puntaje de apertura no se puede
+           refutar mostrando una dirección; una afirmación de ausencia sí, y por eso vale.
+           <b>La presencia se prueba con una fuente; la ausencia exige las cuatro.</b> Mientras
+           falte un paso, el Estado dice <b>sin verificar</b>, que no es lo mismo que opaco y
+           <b>no cuenta como opacidad</b>.</p>
+      </div>
+      <div class="procedencia" id="proc-opacidad">Cargando el registro…</div>
+      <div class="opacidad-titular" id="titular-opacidad"></div>
+      <div class="materias" id="lista-opacidad"></div>
+      <div id="vac-opacidad"></div>
+        </div>
+    </section>
+
     <section class="domain bloque" id="de-donde-sale" data-nivel="1">
       <div class="bloque-head"><h3>De dónde sale y qué falta</h3></div>
       <p class="bloque-bajada">La trazabilidad completa: qué publica cada Estado, qué no publica, de dónde sale cada cifra, cómo se la califica y qué se puede descargar.</p>
@@ -1721,20 +1756,6 @@
       <div class="procedencia" id="proc-oficiales">Cargando el registro…</div>
       <div class="paises-oficiales" id="lista-oficiales"></div>
       <div id="vac-oficiales"></div>
-        </div>
-    <div class="categoria" id="opacidad" data-nivel="3">
-      <div class="categoria-head"><h4>Índice de Opacidad</h4><span class="tag" id="tag-opacidad">—</span></div>
-      <div class="aviso-cobertura">
-        <p><b>Mide la ausencia, no la presencia.</b> Un puntaje de apertura no se puede
-           refutar mostrando una dirección; una afirmación de ausencia sí, y por eso vale.
-           <b>La presencia se prueba con una fuente; la ausencia exige las cuatro.</b> Mientras
-           falte un paso, el Estado dice <b>sin verificar</b>, que no es lo mismo que opaco y
-           <b>no cuenta como opacidad</b>.</p>
-      </div>
-      <div class="procedencia" id="proc-opacidad">Cargando el registro…</div>
-      <div class="opacidad-titular" id="titular-opacidad"></div>
-      <div class="materias" id="lista-opacidad"></div>
-      <div id="vac-opacidad"></div>
         </div>
     <div class="categoria" id="fuentes-limites" data-nivel="3">
       <div class="categoria-head"><h4>Procedencia y vacíos declarados</h4>
@@ -1785,7 +1806,7 @@
         <span class="ambito-informe" id="ambito-informe">—</span>
         <div class="acciones">
           <button class="boton" id="btn-csv">Planilla de datos (CSV)</button>
-          <button class="boton" id="btn-imprimir">Informe en PDF, con membrete</button>
+          <button class="boton" id="btn-imprimir">Descargar el informe en PDF</button>
         </div>
       </div>
       <div class="hoja">
@@ -2791,6 +2812,72 @@
       + 'se está publicando ahora.</p>';
   }
 
+  const ROTULO_OPACIDAD = {
+    publicado:  {rot:'Publica el consolidado', clase:'bien'},
+    parcial:    {rot:'Publica de forma parcial', clase:'medio'},
+    sin_verificar:{rot:'Sin verificar', clase:'neutro'},
+  };
+
+  // La opacidad se lee en los TRES ambitos, que es como se pregunta: «¿cómo está
+  // la región?», «¿y mi zona?», «¿y mi país?». Estaba solo por Estado y al final
+  // de todo, de modo que la pregunta mas frecuente no tenia respuesta a la vista.
+  function opacidadFicha(){
+    const caja = document.getElementById('opacidad-ficha');
+    const d = almacen.opacidad; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+    if(!lista.length){ caja.innerHTML = ''; return; }
+
+    const donde = paisFiltro ? paisNombre : (zona || 'América Latina y el Caribe');
+    const cuenta = {publicado:0, parcial:0, sin_verificar:0};
+    lista.forEach(x => { cuenta[x.estado] = (cuenta[x.estado]||0) + 1; });
+    const revisados = cuenta.publicado + cuenta.parcial;
+
+    // Con un solo Estado no se cuenta: se dice en qué estado está.
+    if(paisFiltro){
+      const x = lista[0], r = ROTULO_OPACIDAD[x.estado] || ROTULO_OPACIDAD.sin_verificar;
+      const rastro = (x.rastro||[]).length
+        ? '<ul class="rastro-op">' + x.rastro.slice(0,4).map(p =>
+            '<li>' + esc(typeof p === 'string' ? p : (p.paso || p.detalle || ''))
+            + (p && p.enlace ? ' · <a href="'+esc(p.enlace)+'" target="_blank" rel="noopener noreferrer">ver</a>' : '')
+            + '</li>').join('') + '</ul>'
+        : '';
+      caja.innerHTML =
+        '<div class="rot">Índice de Opacidad — ' + esc(paisNombre) + '</div>'
+        + '<div class="op-fila"><div class="op-caja ' + r.clase + '">'
+        + '<div class="nombre">Acceso a la información</div>'
+        + '<div class="valor">' + esc(r.rot) + '</div>'
+        + '<div class="puesto">' + esc(x.nota || '') + '</div>'
+        + rastro + '</div></div>'
+        + '<p class="ejes-pie"><b>«Sin verificar» no es «opaco».</b> Significa que la Oficina '
+        + 'todavía no revisó los cuatro pasos en este Estado. La presencia se prueba con una '
+        + 'fuente; <b>la ausencia exige las cuatro</b>, y mientras falte una no se afirma.</p>';
+      return;
+    }
+
+    const cajita = (rot, n, clase, pie) =>
+      '<div class="op-caja ' + clase + '"><div class="nombre">' + esc(rot) + '</div>'
+      + '<div class="valor">' + n + '<span class="de">de ' + lista.length + '</span></div>'
+      + '<div class="puesto">' + esc(pie) + '</div></div>';
+
+    caja.innerHTML =
+      '<div class="rot">Índice de Opacidad — ' + esc(donde) + '</div>'
+      + '<div class="op-fila">'
+      + cajita('Publican el consolidado', cuenta.publicado, 'bien',
+               'serie nacional de solicitudes de acceso a la información')
+      + cajita('Publican de forma parcial', cuenta.parcial, 'medio',
+               'por organismo, o con la serie interrumpida')
+      + cajita('Sin verificar', cuenta.sin_verificar, 'neutro',
+               'la Oficina aún no revisó los cuatro pasos')
+      + '</div>'
+      + '<p class="ejes-pie"><b>' + revisados + ' de ' + lista.length + ' revisados hasta hoy.</b> '
+      + 'Los que faltan <b>no cuentan como opacos</b>: cuentan como no revisados, que es distinto. '
+      + 'Esta es una medición propia de la Oficina —<b>ningún organismo la publica</b>— y por eso '
+      + 'avanza al ritmo en que se revisa Estado por Estado.</p>';
+  }
+
   function ejesVista(){
     const caja = document.getElementById('ejes-resumen');
     if(!caja) return;
@@ -3210,8 +3297,8 @@
     {nivel:2, ico:'⬇', rot:'Planilla de datos (CSV)',
      ayuda:'Para trabajar los números en una hoja de cálculo. Abre con el crédito de la Fundación y la condición de cita; no lleva logotipo porque el formato es texto plano.',
      hacer(){ csv(); avisar('Planilla descargada.'); }},
-    {nivel:2, ico:'📄', rot:'Informe en PDF, con membrete',
-     ayuda:'El documento para circular: membrete con el logotipo de la Fundación, filete institucional, y colofón con la cita, los vacíos declarados y la condición de uso. Elegí «Guardar como PDF» en el diálogo de impresión.',
+    {nivel:2, ico:'📄', rot:'Descargar el informe en PDF',
+     ayuda:'El documento para hacer circular: sale con el logotipo de la Fundación, el filete institucional y el colofón con la cita, los vacíos declarados y la condición de uso. Elegí «Guardar como PDF» en el diálogo de impresión.',
      hacer(){ window.print(); }},
   ];
 
@@ -3849,6 +3936,7 @@
     paso('lo de hoy', hoyVista);
     paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
+    paso('opacidad en la ficha', opacidadFicha);
     paso('consulta dirigida', consultaVista);
     paso('publicación oficial reciente', recienteVista);
     paso('padrón de fuentes oficiales', oficialesVista);

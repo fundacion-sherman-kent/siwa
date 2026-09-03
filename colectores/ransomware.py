@@ -135,27 +135,27 @@ def recolectar():
     registros.sort(key=lambda r: -r["victimas"])
 
     vacios = [
-        "ACA SOLO APARECE QUIEN NO PAGO RAPIDO. El atacante publica a la victima PARA "
+        "ACA SOLO APARECE QUIEN NO PAGO RAPIDO. El atacante publica a la víctima PARA "
         "PRESIONARLA: la empresa que paga enseguida y en silencio nunca aparece en "
-        "ninguna lista. Esta cifra SUBESTIMA el fenomeno de manera sistematica y por "
+        "ninguna lista. Esta cifra SUBESTIMA el fenómeno de manera sistematica y por "
         "una magnitud que nadie puede calcular. Un Estado con pocos casos puede tener "
-        "pocos ataques, o victimas que pagan mas rapido.",
-        "ES UN RECUENTO, NO UNA TASA. Una economia grande tiene mas empresas que atacar. "
+        "pocos ataques, o víctimas que pagan mas rápido.",
+        "ES UN RECUENTO, NO UNA TASA. Una economía grande tiene mas empresas que atacar. "
         "Que Brasil encabece la lista NO significa que este peor protegido: significa "
-        "que tiene mas objetivos. Para comparar hay que leer esto junto con el tamano "
-        "de cada economia y con los usuarios de internet, que este registro publica.",
-        "LA FUENTE ES EL ATACANTE. Los grupos exageran, repiten victimas viejas y a "
+        "que tiene mas objetivos. Para comparar hay que leer esto junto con el tamaño "
+        "de cada economía y con los usuarios de internet, que este registro publica.",
+        "LA FUENTE ES EL ATACANTE. Los grupos exageran, repiten víctimas viejas y a "
         "veces publican ataques que no ocurrieron. Lo que se observa CON CERTEZA es que "
         "el grupo lo publico, no que el hecho sea como lo cuenta. Por eso la "
         "credibilidad es 4 y no mejor.",
-        "EL PAIS ES EL DE LA SEDE DE LA VICTIMA, no necesariamente donde ocurrio el "
+        "EL PAÍS ES EL DE LA SEDE DE LA VÍCTIMA, no necesariamente donde ocurrio el "
         "ataque ni donde estaban los sistemas comprometidos. Una filial atacada puede "
-        "figurar en el pais de la casa matriz.",
-        "El sector lo clasifica la fuente, no la Fundacion, y su criterio no esta "
+        "figurar en el país de la casa matriz.",
+        "El sector lo clasifica la fuente, no la Fundación, y su criterio no esta "
         "publicado en detalle.",
     ]
     if sin_caso:
-        vacios.append("Sin ninguna victima registrada: " + ", ".join(sin_caso)
+        vacios.append("Sin ninguna víctima registrada: " + ", ".join(sin_caso)
                       + ". Ausencia de registro no es ausencia de ataques.")
     if caidos:
         vacios.append("Estados que no se pudieron consultar en esta corrida: "
@@ -166,10 +166,10 @@ def recolectar():
         fiabilidad="D",
         credibilidad=4,
         corroborado=False,
-        nota=("Recopilacion de los sitios de extorsion de los propios grupos atacantes. "
-              "La recopilacion es metodica y publica; el CONTENIDO lo declara el "
+        nota=("Recopilación de los sitios de extorsión de los propios grupos atacantes. "
+              "La recopilación es metodica y publica; el CONTENIDO lo declara el "
               "delincuente y no se puede corroborar de forma independiente. Se registra "
-              "que la publicacion existe, no que el hecho sea como se cuenta."),
+              "que la publicación existe, no que el hecho sea como se cuenta."),
     )
 
     return comun.escribir(
@@ -193,10 +193,10 @@ def recolectar():
             "sectores_mas_golpeados": [{"sector": s, "victimas": n}
                                        for s, n in sectores_region.most_common(12)],
             "metodo": (
-                "Se consulta el listado de victimas por pais y se cuentan casos, grupos "
-                "y sectores. NO se republica el nombre de ninguna victima: son empresas "
+                "Se consulta el listado de víctimas por país y se cuentan casos, grupos "
+                "y sectores. NO se republica el nombre de ninguna víctima: son empresas "
                 "y organismos identificables, muchos de ellos damnificados, y nombrarlos "
-                "aqui repetiria la presion que el atacante buscaba. Se publican "
+                "aquí repetiria la presión que el atacante buscaba. Se publican "
                 "recuentos y repartos."
             ),
         },

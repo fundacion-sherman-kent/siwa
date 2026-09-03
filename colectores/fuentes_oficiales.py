@@ -136,7 +136,7 @@ def recolectar():
         "Que un Estado no figure NO prueba que carezca de portal. De los que no figuran: "
         "Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador "
         "interponen protección contra acceso automatizado, que NO se esquiva por decisión "
-        "de doctrina (limites.md) y se gestiona por vía oficial; Perú y Jamaica tienen "
+        "de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen "
         "portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
         "La búsqueda es por palabra en el título y la descripción del conjunto. Un "
         "conjunto rotulado con otro vocabulario no aparece, y uno que menciona la "
