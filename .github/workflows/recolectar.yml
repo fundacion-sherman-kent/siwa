@@ -94,6 +94,12 @@ jobs:
         continue-on-error: true
         run: python colectores/ciber.py
 
+      - name: Sanciones y personas expuestas (OpenSanctions)
+        id: sanciones
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/sanciones.py
+
       - name: Contrataciones abiertas
         id: contratacion
         continue-on-error: true
@@ -215,6 +221,7 @@ jobs:
           [ "${{ steps.reciente.outcome }}" = "failure" ] && { echo "Falló el colector de publicación oficial reciente."; fallo=1; }
           [ "${{ steps.consulta.outcome }}" = "failure" ] && { echo "Falló el colector de consulta dirigida."; fallo=1; }
           [ "${{ steps.ciber.outcome }}" = "failure" ] && { echo "Falló el colector de medición de red."; fallo=1; }
+          [ "${{ steps.sanciones.outcome }}" = "failure" ] && { echo "Falló el colector de sanciones."; fallo=1; }
           [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }
           [ "${{ steps.archivo.outcome }}" = "failure" ] && { echo "Falló el colector del archivo de la web."; fallo=1; }
           [ "${{ steps.copernicus.outcome }}" = "failure" ] && { echo "Falló el colector de imagen satelital."; fallo=1; }

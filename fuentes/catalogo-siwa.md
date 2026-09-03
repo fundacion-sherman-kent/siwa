@@ -330,3 +330,39 @@ serie ni se suma a ella, y arrastra la cautela del tema. La de terrorismo dice
 que la palabra es una calificación disputada y que varios Estados llaman
 terrorista a la protesta social; el primer titular que apareció al probarlo era
 un decreto sobre «terrorismo medioambiental», que es precisamente el caso.
+
+---
+
+# OpenSanctions entra — decisión de la Dirección, 3 de septiembre de 2026
+
+**Resuelto:** el dato entra a SIWA, que es libre y gratuito, y **no viaja a
+ningún producto que la Fundación cobre**. No se toma licencia comercial.
+
+La restricción **no vive en la cabeza de nadie**: viaja pegada al dato. El
+colector la declara, el archivo la lleva y el panel de fuentes la muestra.
+
+## Cómo entra, y por qué no por donde parecía
+
+Los archivos masivos son **inviables para un robot gratuito**: 2,5 GB las
+entidades, 455 MB el resumen. La vía es la **estadística por país**, 87 KB, que
+la fuente publica en cada entrega.
+
+Con un cuidado de método: **la dirección de esa estadística lleva la versión
+adentro** y cambia con cada publicación. El colector lee el índice y sigue el
+puntero, en lugar de fijar una ruta que se rompe sola.
+
+## La trampa, que decide cómo se publica
+
+La lista de la región la encabeza **Brasil con 132.652 registros**. Venezuela
+está **novena, con 1.406**; Nicaragua, decimonovena.
+
+Leerlo como «más listados, peor» llevaría a concluir que Brasil está noventa
+veces peor que Venezuela. **Brasil aparece primero porque publica mejor quiénes
+son sus funcionarios.** La cifra se mueve por quién sanciona a quién, por cuán
+completo es el registro público de cada Estado y por el tamaño del país — tres
+cosas ajenas a la conducta del Estado medido.
+
+Por eso entra **como hecho y nunca como orden**, con la misma arquitectura que
+Defensa, la medición de red y la contratación pública. Y se declara además que
+**persona expuesta no es persona sospechada**: un ministro figura por ser
+ministro.

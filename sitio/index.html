@@ -22,7 +22,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 21 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:description" content="33 Estados, 69 indicadores, 22 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 21 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 22 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
@@ -46,7 +46,7 @@
       "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 21 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 22 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1368,6 +1368,24 @@
     <section class="domain bloque" id="seguridad-flujos" data-nivel="2">
       <div class="bloque-head"><h3>Seguridad · flujos y ciberseguridad</h3></div>
       <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
+    <div class="categoria" id="sanciones" data-nivel="2">
+      <div class="categoria-head"><h4>Sanciones y personas expuestas</h4><span class="tag" id="tag-sanciones">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Esto no ordena Estados y no mide corrupción.</b> La lista de la región la
+           encabeza <b>Brasil con 132.652 registros</b>; Venezuela está novena, con 1.406.
+           Leerlo como «más listados, peor» llevaría a concluir que Brasil está noventa
+           veces peor que Venezuela, que es absurdo. <b>Brasil aparece primero porque
+           publica mejor quiénes son sus funcionarios.</b></p>
+        <p>La cifra se mueve por tres cosas ajenas a la conducta del Estado medido:
+           <b>quién sanciona a quién</b> —un acto geopolítico de terceros—, <b>qué tan
+           completo es su registro público de funcionarios</b> y <b>el tamaño del país</b>.
+           Y <b>persona expuesta no es persona sospechada</b>: un ministro figura por ser
+           ministro.</p>
+      </div>
+      <div class="procedencia" id="proc-sanciones">Cargando el registro…</div>
+      <div class="cruce" id="lista-sanciones"></div>
+      <div id="vac-sanciones"></div>
+        </div>
     <div class="categoria" id="ciber-red" data-nivel="2">
       <div class="categoria-head"><h4>Ciberseguridad · medición de red</h4><span class="tag" id="tag-ciber-red">—</span></div>
       <div class="aviso-cobertura">
@@ -2072,7 +2090,8 @@
                      ['ciber','Medición de red — OONI, IODA y FIRST'],
                      ['archivo','Archivo de la web — lo retirado'],
                      ['copernicus','Copernicus — imagen satelital'],
-                     ['memoria','Bitácora propia de observación']];
+                     ['memoria','Bitácora propia de observación'],
+                     ['sanciones','OpenSanctions — sanciones y personas expuestas']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -4374,6 +4393,7 @@
     paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
     paso('contratación pública', contratacionVista);
+    paso('sanciones y personas expuestas', sancionesVista);
     paso('ciberseguridad', ciberVista);
     paso('lo que cambió', memoriaVista);
     paso('lo que dejó de publicarse', archivoVista);
@@ -5522,6 +5542,31 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       }).join('');
   }
 
+  function sancionesVista(){
+    const caja = document.getElementById('lista-sanciones');
+    const d = almacen.sanciones; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const tag = document.getElementById('tag-sanciones');
+    const total = lista.reduce((a,x)=>a+x.listados, 0);
+    if(tag) tag.textContent = miles(total) + ' registros · ' + lista.length
+      + (lista.length === 1 ? ' Estado' : ' Estados');
+
+    // Se ordena por cantidad porque es como se lee una lista, PERO el aviso de
+    // arriba dice que ese orden no es un ranking de nada. Sin ese aviso, el
+    // orden solo miente.
+    caja.innerHTML = lista.slice().sort((a,b)=>b.listados - a.listados).map(x =>
+      '<div class="asunto"><h4>' + esc(x.pais) + '</h4><div class="foot"><span class="porque">'
+      + '<b>' + miles(x.listados) + '</b> registro' + (x.listados === 1 ? '' : 's')
+      + ' de sanción o de persona expuesta · ' + miles(x.entidades) + ' entidades asociadas'
+      + '<br><i>No es un orden de gravedad: depende de quién sanciona y de cuán completo '
+      + 'sea el registro público de funcionarios de ese Estado.</i>'
+      + '</span><span class="badge medio">recuento</span></div></div>').join('');
+  }
+
   function ciberVista(){
     const caja = document.getElementById('lista-ciber-red');
     const d = almacen.ciber; if(!caja || !d) return;
@@ -6346,6 +6391,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-contratacion-abierta','contratación pública',err.message);
       document.getElementById('proc-contratacion-abierta').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('sanciones.json'), traer('estado/sanciones.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.sanciones=d; const meta=d.procedencia;
+      pintarProcedencia('proc-sanciones',meta);
+      vacios+=pintarVacios('vac-sanciones',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-sanciones','sanciones',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-sanciones','sanciones',err.message);
+      document.getElementById('proc-sanciones').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('ciber.json'), traer('estado/ciber.json').catch(()=>null)])
     .then(([d,estado])=>{
