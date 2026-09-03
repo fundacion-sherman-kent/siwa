@@ -175,6 +175,65 @@ def _hayRegistro(testigo: str, pais: str, desde: str) -> bool | None:
     return len(datos) > 0
 
 
+def _conEmbargo(padron, publica, desde, restriccion):
+    """La cuenta funciona, pero solo ve el pasado. Se dice, y no se falla.
+
+    Fallar cada noche por una condicion que no va a cambiar convierte el parte de
+    fallas en ruido, y entonces deja de mirarse. Un limite conocido se declara.
+    """
+    registros = [{
+        "iso": p["iso"], "pais": p["pais"], "bloque": p["bloque"],
+        "estado": "fuente_con_embargo",
+        "el_estado_publica_lo_suyo": publica.get(p["iso"]) in ("al_dia",),
+    } for p in padron]
+
+    vacios = [
+        "LA CUENTA TIENE UN EMBARGO DE DOCE MESES Y NO ES UNA FALLA: la fuente solo "
+        "entrega datos con mas de un anio de antiguedad. Lo declara ella misma en su "
+        "respuesta, y por eso una ventana de treinta dias devuelve cero CON RAZON.",
+        "POR ESO LA BRECHA NO SE PUEDE CALCULAR TODAVIA, y no se calcula. Medir «lo que "
+        "ocurrio y el Estado no publico» exige que las dos observaciones sean del MISMO "
+        "MOMENTO. Cruzar sucesos de hace un anio contra lo que el Estado publica hoy "
+        "seria una comparacion falsa, que es exactamente lo que este registro no hace.",
+        "EL COLECTOR QUEDA CONSTRUIDO Y A LA ESPERA. El dia que la cuenta vea datos "
+        "recientes, funciona sin tocar una linea. Mientras tanto los 33 Estados figuran "
+        "con la fuente en embargo, que NO es lo mismo que en cero.",
+        "HAY UN CAMINO, Y ES EL TIEMPO. La bitacora propia empezo el 1 de septiembre de "
+        "2026: dentro de un anio el registro va a tener su propia memoria de que publico "
+        "cada Estado en las fechas que la fuente SI deja ver, y entonces las dos "
+        "observaciones vuelven a ser del mismo momento.",
+        "LO QUE LA FUENTE DECLARA sobre esta cuenta, textual: " + restriccion[:300],
+    ]
+
+    return comun.escribir(
+        colector="brecha",
+        capa="publico",
+        fuente="Fundación Sherman Kent — brecha entre lo registrado y lo publicado",
+        url_fuente="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#brecha",
+        calificacion=comun.calificar(
+            fiabilidad="B", credibilidad=2, corroborado=False,
+            nota=("La credencial funciona y la consulta es correcta; lo que la cuenta no "
+                  "tiene es acceso a datos recientes. Se declara la condicion en lugar "
+                  "de publicar un cero o de fallar todas las noches.")),
+        registros=registros,
+        vacios=vacios,
+        extra={"resumen": {
+            "con_credencial": True,
+            "variables_que_faltan": [],
+            "instrumento_probado": False,
+            "embargo_de_la_fuente": True,
+            "ventana_dias": DIAS,
+            "desde": desde,
+            "estados_con_brecha": 0,
+            "estados_que_publican_y_hay_registro": 0,
+            "estados_sin_registro_en_la_ventana": 0,
+            "estados_sin_mirar": len(registros),
+            "estados_del_padron": len(registros),
+            "consultado": comun.ahora(),
+        }},
+    )
+
+
 def recolectar():
     usuario = os.environ.get("ACLED_USUARIO", "").strip()
     clave = os.environ.get("ACLED_CLAVE", "").strip()
@@ -208,6 +267,14 @@ def recolectar():
         # ESTADOS —imposible— porque el filtro de fecha estaba mal escrito, y sin
         # este control eso se habria publicado como «no pasa nada en la region».
         instrumentoSano = _hayRegistro(testigo, "Colombia", desde)
+        # EL EMBARGO NO ES UNA FALLA: ES UNA CONDICION DE LA CUENTA, y se declara
+        # en vez de repetirse como error todas las noches. La fuente lo dice en
+        # `data_query_restrictions`: esta cuenta solo ve datos con mas de doce
+        # meses de antiguedad, de modo que una ventana de treinta dias cae
+        # entera adentro del embargo y devuelve cero CON RAZON.
+        r = (ULTIMA_RESPUESTA.get("restricciones") or "")
+        if instrumentoSano is not True and "date_recency" in r and "Months" in r:
+            return _conEmbargo(padron, publica, desde, r)
         if instrumentoSano is not True:
             raise RuntimeError(
                 "La prueba del instrumento falló: la consulta de control sobre Colombia "

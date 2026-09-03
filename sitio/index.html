@@ -22,7 +22,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 25 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:description" content="33 Estados, 69 indicadores, 26 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 25 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 26 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
@@ -46,7 +46,7 @@
       "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 25 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 26 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1368,6 +1368,23 @@
     <section class="domain bloque" id="seguridad-flujos" data-nivel="2">
       <div class="bloque-head"><h3>Seguridad · flujos y ciberseguridad</h3></div>
       <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
+    <div class="categoria" id="focos" data-nivel="2">
+      <div class="categoria-head"><h4>Qué está ardiendo ahora</h4><span class="tag" id="tag-focos">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>El satélite detecta anomalías térmicas, no incendios ni delitos.</b> Un foco
+           puede ser una quema agrícola legal, un incendio forestal, una antorcha
+           industrial, un basural o una operación minera. <b>La imagen no distingue la
+           causa, y el registro no la inventa</b>: decir «tantos focos, tanta minería
+           ilegal» sería un salto que esta casa no da.</p>
+        <p><b>No ordena Estados.</b> El recuento depende del tamaño del país, de la
+           estación, de la nubosidad —una semana nublada esconde todo— y de cuántas veces
+           pasó el satélite. Brasil tendrá siempre más focos que Granada por superficie,
+           no por conducta.</p>
+      </div>
+      <div class="procedencia" id="proc-focos">Cargando el registro…</div>
+      <div class="cruce" id="lista-focos"></div>
+      <div id="vac-focos"></div>
+        </div>
     <div class="categoria" id="prensa-libre" data-nivel="2">
       <div class="categoria-head"><h4>En qué condiciones se puede publicar</h4><span class="tag" id="tag-prensa">—</span></div>
       <div class="aviso-cobertura">
@@ -2145,7 +2162,8 @@
                      ['sanciones','OpenSanctions — sanciones y personas expuestas'],
                      ['brecha','Brecha entre lo registrado y lo publicado'],
                      ['sondeo','Banco de pruebas de fuentes candidatas'],
-                     ['prensa','RSF — libertad de prensa']];
+                     ['prensa','RSF — libertad de prensa'],
+                     ['focos','NASA FIRMS — focos de calor']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -3112,6 +3130,7 @@
   };
 
   const ROTULO_BRECHA = {
+    fuente_con_embargo:        {rot:'la fuente no deja ver lo reciente', clase:'unica'},
     hay_registro_y_no_publica: {rot:'hay registro y no publica', clase:'muy-viejo'},
     hay_registro_y_publica:    {rot:'hay registro y publica',    clase:'fresco'},
     sin_registro_en_la_ventana:{rot:'sin registro en la ventana', clase:'unica'},
@@ -3165,6 +3184,22 @@
     else if(zona) lista = lista.filter(x => x.bloque === zona);
 
     const tag = document.getElementById('tag-brecha');
+
+    // La fuente FUNCIONA pero solo entrega datos viejos. No es una falla y no es
+    // un cero: es una condicion de la cuenta, y se dice.
+    if(d.resumen.embargo_de_la_fuente){
+      if(tag) tag.textContent = 'la fuente no deja ver lo reciente';
+      caja.innerHTML = '<div class="asunto"><h4>La fuente externa tiene embargo</h4>'
+        + '<div class="foot"><span class="porque">La credencial funciona y la consulta es '
+        + 'correcta, pero <b>esa cuenta solo ve datos con más de un año de antigüedad</b>. '
+        + '<b>La brecha no se calcula</b>: cruzar sucesos de hace un año contra lo que el '
+        + 'Estado publica hoy sería una comparación falsa. El colector queda construido y '
+        + 'a la espera.<br><b>Hay un camino, y es el tiempo</b>: la bitácora propia empezó '
+        + 'el 1 de septiembre de 2026, y dentro de un año el registro va a tener memoria '
+        + 'de qué publicó cada Estado en las fechas que la fuente sí deja ver.'
+        + '</span><span class="badge unica">en espera</span></div></div>';
+      return;
+    }
 
     // Sin credencial NO se pinta una lista de ceros: se dice que no se miro.
     if(!d.resumen.con_credencial){
@@ -4552,6 +4587,7 @@
     paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
     paso('contratación pública', contratacionVista);
+    paso('focos de calor', focosVista);
     paso('libertad de prensa', prensaVista);
     paso('sanciones y personas expuestas', sancionesVista);
     paso('ciberseguridad', ciberVista);
@@ -5704,6 +5740,42 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       }).join('');
   }
 
+  function focosVista(){
+    const caja = document.getElementById('lista-focos');
+    const d = almacen.focos; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const tag = document.getElementById('tag-focos');
+    if(!d.resumen.con_clave){
+      if(tag) tag.textContent = 'sin clave';
+      caja.innerHTML = '<div class="asunto"><h4>Sin clave para mirar</h4><div class="foot">'
+        + '<span class="porque">La fuente exige una clave que el registro todavía no tiene '
+        + 'conectada. Los Estados quedan <b>sin mirar</b>, que no es lo mismo que sin focos.'
+        + '</span><span class="badge unica">sin mirar</span></div></div>';
+      return;
+    }
+
+    const con = lista.filter(x => x.focos);
+    if(tag) tag.textContent = miles(lista.reduce((a,x)=>a+(x.focos||0),0))
+      + ' focos · ventana de ' + d.resumen.ventana_dias + ' días';
+
+    caja.innerHTML = con.slice().sort((a,b)=>b.focos - a.focos).map(x =>
+      '<div class="asunto"><h4>' + esc(x.pais) + '</h4><div class="foot"><span class="porque">'
+      + '<b>' + miles(x.focos) + '</b> foco' + (x.focos === 1 ? '' : 's') + ' detectado'
+      + (x.focos === 1 ? '' : 's') + ' · <b>' + miles(x.confianza_alta) + '</b> de confianza alta'
+      + (x.nocturnos ? ' · ' + miles(x.nocturnos) + ' nocturnos' : '')
+      + '<br><i>Anomalía térmica, no causa: puede ser quema agrícola, incendio, antorcha '
+      + 'industrial o minería. El recuento no ordena Estados.</i>'
+      + '</span><span class="badge medio">detección</span></div></div>').join('')
+      || '<div class="asunto"><h4>Sin focos en la ventana</h4><div class="foot">'
+       + '<span class="porque">Ninguna detección en '
+       + esc(paisFiltro ? paisNombre : (zona || 'la región')) + ' en los últimos '
+       + d.resumen.ventana_dias + ' días.</span><span class="badge unica">sin dato</span></div></div>';
+  }
+
   function prensaVista(){
     const caja = document.getElementById('lista-prensa');
     const d = almacen.prensa; if(!caja || !d) return;
@@ -6617,6 +6689,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-contratacion-abierta','contratación pública',err.message);
       document.getElementById('proc-contratacion-abierta').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('focos.json'), traer('estado/focos.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.focos=d; const meta=d.procedencia;
+      pintarProcedencia('proc-focos',meta);
+      vacios+=pintarVacios('vac-focos',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-focos','focos de calor',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-focos','focos de calor',err.message);
+      document.getElementById('proc-focos').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('prensa_libre.json'), traer('estado/prensa_libre.json').catch(()=>null)])
     .then(([d,estado])=>{

@@ -43,7 +43,7 @@ su confianza y su probabilidad, sale por otro camino y con firma.
 colectores/     los programas que traen los datos
   comun.py      funciones compartidas y control de calificación
   geo.py        atribución de una coordenada al padrón de los 33
-  focos.py      NASA FIRMS — focos de calor, economías ilícitas
+  focos.py      NASA FIRMS — focos de calor, señal de economías ilícitas
   desplazamiento.py  ACNUR — desplazamiento forzado
 datos/
   publico/      todo el registro; no hay capa reservada

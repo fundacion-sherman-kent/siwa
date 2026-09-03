@@ -423,3 +423,39 @@ pertinente, el rezago pesa menos porque describe una condición estructural, y l
 descarga se hace una vez a mano en vez de todas las noches.
 
 No es una fuente de SIWA: es material de un producto.
+
+---
+
+# ACLED — resuelto: no es un rechazo, es un embargo de doce meses
+
+La cuenta **funciona**. La consulta **es correcta**. Lo que la cuenta no tiene es
+acceso a datos recientes, y la fuente lo declara ella misma:
+
+```
+date_recency: 12 Months old · hasta 2025-09-03
+```
+
+**Solo entrega datos con más de un año de antigüedad.** Una ventana de treinta
+días cae entera adentro del embargo y devuelve cero **con razón**.
+
+## Por qué eso impide la brecha, y no es un detalle
+
+Medir «lo que ocurrió y el Estado no publicó» exige que **las dos observaciones
+sean del mismo momento**. Cruzar sucesos de hace un año contra lo que el Estado
+publica hoy sería una comparación falsa — la misma clase de error que el
+registro ya corrigió en el compuesto con la ventana de comparabilidad.
+
+Así que **la brecha no se calcula**, y el sitio lo dice con esas palabras.
+
+## Hay un camino, y es el tiempo
+
+La bitácora propia empezó el **1 de septiembre de 2026**. Dentro de un año el
+registro va a tener su propia memoria de qué publicó cada Estado **en las fechas
+que la fuente sí deja ver**, y entonces las dos observaciones vuelven a ser del
+mismo momento.
+
+**La memoria que se construyó el primer día del plan es lo que hace posible esto
+más adelante.** No estaba previsto así, pero es el resultado.
+
+El colector queda construido y a la espera: el día que la cuenta vea datos
+recientes, funciona sin tocar una línea.
