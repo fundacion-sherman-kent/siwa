@@ -100,6 +100,19 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/sanciones.py
 
+      # UNICO COLECTOR CON SECRETO DE TODO EL REGISTRO. Si el secreto no esta NO
+      # falla: declara «sin credencial» y los 33 Estados quedan SIN MIRAR, que no
+      # es lo mismo que en cero. Corre una vez por dia porque cada corrida cuesta
+      # un inicio de sesion.
+      - name: Brecha entre lo registrado y lo publicado
+        id: brecha
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        env:
+          ACLED_USUARIO: ${{ secrets.ACLED_USUARIO }}
+          ACLED_CLAVE: ${{ secrets.ACLED_CLAVE }}
+        run: python colectores/brecha.py
+
       - name: Contrataciones abiertas
         id: contratacion
         continue-on-error: true
@@ -222,6 +235,7 @@ jobs:
           [ "${{ steps.consulta.outcome }}" = "failure" ] && { echo "Falló el colector de consulta dirigida."; fallo=1; }
           [ "${{ steps.ciber.outcome }}" = "failure" ] && { echo "Falló el colector de medición de red."; fallo=1; }
           [ "${{ steps.sanciones.outcome }}" = "failure" ] && { echo "Falló el colector de sanciones."; fallo=1; }
+          [ "${{ steps.brecha.outcome }}" = "failure" ] && { echo "Falló el colector de la brecha."; fallo=1; }
           [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }
           [ "${{ steps.archivo.outcome }}" = "failure" ] && { echo "Falló el colector del archivo de la web."; fallo=1; }
           [ "${{ steps.copernicus.outcome }}" = "failure" ] && { echo "Falló el colector de imagen satelital."; fallo=1; }

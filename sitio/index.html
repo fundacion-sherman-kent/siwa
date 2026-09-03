@@ -22,7 +22,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 22 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:description" content="33 Estados, 69 indicadores, 23 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 22 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 23 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
@@ -46,7 +46,7 @@
       "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 22 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 23 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1818,6 +1818,22 @@
     <section class="domain bloque" id="opacidad-seccion" data-nivel="1">
       <div class="bloque-head"><h3>Índice de Opacidad</h3></div>
       <p class="bloque-bajada">Qué no publica cada Estado, y qué se revisó para poder afirmarlo. Es una medición propia de la Oficina: no la publica ningún organismo.</p>
+    <div class="categoria" id="brecha" data-nivel="1">
+      <div class="categoria-head"><h4>Lo que ocurre y el Estado no publica</h4><span class="tag" id="tag-brecha">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Esto no mide violencia: mide transparencia.</b> Cruza dos observaciones
+           independientes —un observatorio externo de sucesos y el propio catálogo del
+           Estado— y publica <b>una sola cosa</b>: si hay actividad registrada y el Estado
+           no publicó nada de sí mismo. Esa distancia es un hecho sobre su publicación.</p>
+        <p><b>No se publica ni un número de la fuente externa</b> —ni sucesos, ni recuentos,
+           ni fechas—: sale una clasificación de tres estados y nada más. Y
+           <b>«sin registro» no es «no pasó nada»</b>: es que esa fuente no anotó nada, y
+           la cobertura de cualquier observatorio es despareja.</p>
+      </div>
+      <div class="procedencia" id="proc-brecha">Cargando el registro…</div>
+      <div class="cruce" id="lista-brecha"></div>
+      <div id="vac-brecha"></div>
+        </div>
     <div class="categoria" id="memoria" data-nivel="1">
       <div class="categoria-head"><h4>Lo que cambió desde que miramos</h4><span class="tag" id="tag-memoria">—</span></div>
       <div class="aviso-cobertura">
@@ -2091,7 +2107,8 @@
                      ['archivo','Archivo de la web — lo retirado'],
                      ['copernicus','Copernicus — imagen satelital'],
                      ['memoria','Bitácora propia de observación'],
-                     ['sanciones','OpenSanctions — sanciones y personas expuestas']];
+                     ['sanciones','OpenSanctions — sanciones y personas expuestas'],
+                     ['brecha','Brecha entre lo registrado y lo publicado']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -3056,6 +3073,65 @@
     vivo:                {rot:'vivo',                  clase:'fresco'},
     sin_dominio_probado: {rot:'sin sitio verificado',  clase:'unica'},
   };
+
+  const ROTULO_BRECHA = {
+    hay_registro_y_no_publica: {rot:'hay registro y no publica', clase:'muy-viejo'},
+    hay_registro_y_publica:    {rot:'hay registro y publica',    clase:'fresco'},
+    sin_registro_en_la_ventana:{rot:'sin registro en la ventana', clase:'unica'},
+    sin_credencial:            {rot:'sin credencial para mirar', clase:'unica'},
+    no_se_pudo_mirar:          {rot:'no se pudo mirar',          clase:'unica'},
+    sin_nombre_en_la_fuente:   {rot:'sin equivalencia en la fuente', clase:'unica'},
+  };
+
+  function brechaVista(){
+    const caja = document.getElementById('lista-brecha');
+    const d = almacen.brecha; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const tag = document.getElementById('tag-brecha');
+
+    // Sin credencial NO se pinta una lista de ceros: se dice que no se miro.
+    if(!d.resumen.con_credencial){
+      if(tag) tag.textContent = 'sin credencial';
+      caja.innerHTML = '<div class="asunto"><h4>Todavía sin credencial para mirar</h4>'
+        + '<div class="foot"><span class="porque">La fuente externa exige una credencial '
+        + 'que la Oficina aún no cargó. Los <b>' + lista.length + '</b> Estados quedan '
+        + '<b>sin mirar</b>, que <b>no es lo mismo que en cero</b>: no saber no es saber '
+        + 'que no.</span><span class="badge unica">sin mirar</span></div></div>';
+      return;
+    }
+
+    const conBrecha = lista.filter(x => x.estado === 'hay_registro_y_no_publica');
+    if(tag) tag.textContent = conBrecha.length + ' de ' + lista.length
+      + ' con brecha · ventana de ' + d.resumen.ventana_dias + ' días';
+
+    const orden = ['hay_registro_y_no_publica','hay_registro_y_publica',
+                   'sin_registro_en_la_ventana','no_se_pudo_mirar',
+                   'sin_nombre_en_la_fuente','sin_credencial'];
+    caja.innerHTML = lista.slice()
+      .sort((a,b) => orden.indexOf(a.estado) - orden.indexOf(b.estado))
+      .map(x => {
+        const r = ROTULO_BRECHA[x.estado] || ROTULO_BRECHA.no_se_pudo_mirar;
+        const porque =
+          x.estado === 'hay_registro_y_no_publica'
+            ? 'Un observatorio independiente anotó actividad en la ventana y <b>el Estado '
+              + 'no publicó nada de sí mismo</b> en su propio catálogo. <b>No dice cuánta '
+              + 'actividad hubo ni que la oculte a propósito</b>: dice que la distancia existe.'
+          : x.estado === 'hay_registro_y_publica'
+            ? 'Hay actividad registrada y el Estado publica lo suyo. Sin brecha.'
+            : 'La fuente externa no anotó nada en la ventana. <b>No significa que no haya '
+              + 'pasado nada</b>: la cobertura de cualquier observatorio es despareja.';
+        return '<div class="asunto"><h4>' + esc(x.pais)
+          + ' <span class="edad ' + r.clase + '">' + esc(r.rot) + '</span></h4>'
+          + '<div class="foot"><span class="porque">' + porque + '</span>'
+          + '<span class="badge ' + (x.estado === 'hay_registro_y_no_publica' ? 'unica' : 'medio')
+          + '">' + (x.estado === 'hay_registro_y_no_publica' ? 'brecha' : 'comprobado')
+          + '</span></div></div>';
+      }).join('');
+  }
 
   function memoriaVista(){
     const caja = document.getElementById('lista-memoria');
@@ -4395,6 +4471,7 @@
     paso('contratación pública', contratacionVista);
     paso('sanciones y personas expuestas', sancionesVista);
     paso('ciberseguridad', ciberVista);
+    paso('la brecha', brechaVista);
     paso('lo que cambió', memoriaVista);
     paso('lo que dejó de publicarse', archivoVista);
     paso('opacidad en la ficha', opacidadFicha);
@@ -6358,6 +6435,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-copernicus','imagen satelital',err.message);
       document.getElementById('proc-copernicus').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('brecha.json'), traer('estado/brecha.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.brecha=d; const meta=d.procedencia;
+      pintarProcedencia('proc-brecha',meta);
+      vacios+=pintarVacios('vac-brecha',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-brecha','la brecha',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-brecha','la brecha',err.message);
+      document.getElementById('proc-brecha').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('memoria.json'), traer('estado/memoria.json').catch(()=>null)])
     .then(([d,estado])=>{
