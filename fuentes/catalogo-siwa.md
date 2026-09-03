@@ -366,3 +366,17 @@ Por eso entra **como hecho y nunca como orden**, con la misma arquitectura que
 Defensa, la medición de red y la contratación pública. Y se declara además que
 **persona expuesta no es persona sospechada**: un ministro figura por ser
 ministro.
+
+---
+
+# Gestiones — estado al 3 de septiembre de 2026
+
+| Gestión | Estado | Qué falta |
+|---|---|---|
+| **OpenSanctions** | **Resuelta.** Entra a SIWA; no viaja a producto pago | Nada. La restricción viaja pegada al dato |
+| **ACLED** | Credencial cargada por la Dirección | Correr el robot a mano y ver el desenlace |
+| **Aleph (OCCRP)** | **Pedido enviado.** Acuse automático el 3 de septiembre: *«our team will be reviewing submissions in the coming weeks»* | Esperar. Es revisión por tandas, no individual |
+| **GDELT** | Medición automatizada en curso | Una semana de corridas y se decide con la cifra |
+
+**Ninguna bloquea el registro.** Las cuatro son mejoras; SIWA funciona sin las
+cuatro y lo declara cuando falta alguna.
