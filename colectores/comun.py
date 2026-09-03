@@ -251,6 +251,24 @@ SERIES_DETENIDAS = {
     },
 }
 
+# LICENCIAS QUE LIMITAN EL USO
+# ----------------------------
+# Algunas fuentes son gratuitas para un registro publico y NO para un producto
+# que se cobra. OpenSanctions es el caso: Atribucion-NoComercial, y su propia
+# documentacion dice que usar el dato en un informe que la organizacion VENDE es
+# uso comercial aunque la organizacion sea sin fines de lucro.
+#
+# La restriccion viaja PEGADA AL DATO, no en la cabeza de nadie: el colector la
+# declara, el archivo la lleva y el sitio la muestra. Asi no puede olvidarse
+# dentro de seis meses, cuando quien la conocia no este mirando.
+RESTRICCIONES = {
+    "solo_registro_publico":
+        "GRATUITA PARA ESTE REGISTRO, QUE ES PUBLICO Y NO SE COBRA. La licencia de "
+        "la fuente es de atribucion NO COMERCIAL: este dato NO PUEDE VIAJAR A UN "
+        "PRODUCTO QUE LA FUNDACION VENDA sin tomar antes una licencia comercial.",
+}
+
+
 def escribir(
     colector: str,
     capa: str,
@@ -260,6 +278,7 @@ def escribir(
     registros: list,
     vacios: list | None = None,
     extra: dict | None = None,
+    restriccion: str | None = None,
 ) -> Path:
     """Escribe el archivo de datos con su bloque de procedencia.
 
@@ -277,6 +296,7 @@ def escribir(
             "fuente": {"nombre": fuente, "url": url_fuente},
             "calificacion": calificacion,
             "vacios_declarados": vacios or [],
+            "restriccion_de_uso": RESTRICCIONES.get(restriccion) if restriccion else None,
             "cantidad": len(registros),
             "atribucion": ATRIBUCION,
         },

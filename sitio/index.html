@@ -864,6 +864,10 @@
     font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#5f7286;font-weight:700;
     margin-bottom:5px;
   }
+  .restriccion{
+    margin:6px 0 0;padding:7px 9px;border-radius:7px;font-size:11px;line-height:1.45;
+    color:#E3D4F5;background:rgba(140,0,224,.12);border:1px solid rgba(140,0,224,.32);
+  }
   .detenida{
     margin:8px 0 0;padding:8px 10px;border-radius:8px;font-size:11px;line-height:1.45;
     color:#E8D7C3;background:rgba(251,101,0,.09);border:1px solid rgba(251,101,0,.28);
@@ -2050,6 +2054,7 @@
         <h4>${esc(rot)} <span class="calif">${c.fiabilidad}-${c.credibilidad}</span></h4>
         <div class="meta">${esc(m.fuente.nombre)} · obtenido ${momento(m.obtenido_en)} ·
           ${c.corroborado?'dos orígenes independientes':'fuente única, declarada'}</div>
+        ${m.restriccion_de_uso ? `<div class="restriccion">${esc(m.restriccion_de_uso)}</div>` : ''}
         <ul>${m.vacios_declarados.map(v=>`<li>${esc(v)}</li>`).join('')}</ul></div>`;
     }).join('');
   }
