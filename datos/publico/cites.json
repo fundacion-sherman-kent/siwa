@@ -1,0 +1,427 @@
+{
+  "procedencia": {
+    "colector": "cites",
+    "capa": "publico",
+    "obtenido_en": "2026-09-03T21:30:22+00:00",
+    "fuente": {
+      "nombre": "CITES — base de datos de comercio de especies protegidas (secretaría CITES / UNEP-WCMC)",
+      "url": "https://trade.cites.org/"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 3,
+      "corroborado": false,
+      "nota": "Registro administrativo de la secretaria de un tratado internacional, compilado por el centro de vigilancia de la conservacion del programa ambiental de las Naciones Unidas. Fiabilidad A porque el productor administra el propio tratado. Credibilidad 3 porque lo que se verifica es QUE UNA PARTE PRESENTO ESE INFORME, no que el informe recoja todo el comercio: la base tiene discrepancias conocidas entre lo que declara el exportador y lo que declara el importador."
+    },
+    "vacios_declarados": [
+      "LO QUE ESTA BASE REGISTRA ES COMERCIO LEGAL, NO TRAFICO. Cada asiento nace de un permiso o de un informe anual que una Parte del tratado presento. El trafico ilegal, por definicion, NO TIENE PERMISO Y NO ENTRA ACA. Este colector NO mide contrabando de fauna, y la materia de contrabando SIGUE SIN FUENTE PROPIA.",
+      "«ORIGEN EN DECOMISO» NO ES «CANTIDAD DE DECOMISOS». El codigo marca especimenes cuyo ORIGEN DECLARADO es una incautacion, y el asiento aparece cuando ese especimen SE MUEVE DESPUES —a un centro de rescate, a un zoologico, a investigacion—. Un Estado con muchos asientos de ese tipo puede tener mas control, mas delito, o mas movimiento posterior de lo incautado: son tres explicaciones distintas y esta fuente NO ELIGE ENTRE ELLAS.",
+      "MAS DECOMISO PUEDE SER MAS CONTROL, NO MAS DELITO. Es el mismo sesgo de deteccion que el registro ya declara en trata de personas: se cuenta lo que se detecta y se informa, no lo que ocurre. Un Estado sin capacidad de fiscalizar no incauta, y por eso aparece limpio.",
+      "NO ORDENA ESTADOS Y NO ENTRA AL COMPUESTO. El volumen depende de la biodiversidad del pais, del tamanio de su economia y de su papel en el comercio de cueros, madera o mascotas. Y la proporcion de decomiso NO ESTA ORIENTADA: no se sabe si mas es mejor o peor. Entra como MAGNITUD, al lado del dato comparable y nunca adentro.",
+      "NO SE PUEDE SABER QUIEN INFORMO. En esta consulta la base no distingue si el asiento lo declaro el exportador o el importador. Por eso el registro dice «no hay asientos de comercio con este Estado despues de tal anio» y NO dice «el Estado dejo de informar»: son dos afirmaciones distintas y solo la primera esta probada.",
+      "LA FUENTE LLEVA UN ANIO Y MEDIO DE REZAGO, y es del tratado, no de la fuente: los informes anuales vencen el 31 de octubre del anio siguiente. El ultimo anio completo es 2024 y la ventana publicada va de 2020 a 2024. Esto NO sirve para seguir una crisis: sirve para ver un patron de cinco anios.",
+      "UNA PROPORCION SOBRE TRES ASIENTOS NO ES UNA PROPORCION. Los Estados con menos de 100 asientos en la ventana llevan su porcentaje MARCADO COMO NO COMPARABLE: sin ese minimo, Granada quedaba segunda de la region con 4 asientos sobre 6 y Santa Lucia tercera con 1 sobre 3, por delante de Bahamas, que tiene 151 sobre 589. El numero se publica igual —esconderlo seria peor—, pero NO SE ORDENA CONTRA LOS DEMAS.",
+      "ANTES DE CREER UN NUMERO SE PRUEBA EL INSTRUMENTO Y SE PRUEBA EL FILTRO. Esta fuente IGNORA EN SILENCIO los parametros que no conoce y devuelve el total sin filtrar: un filtro renombrado rio arriba haria publicar «todo es decomiso» en los 33 Estados sin advertirlo. Se comprueba que BRA tenga comercio y que su recuento de decomiso sea ESTRICTAMENTE MENOR que su total. Si alguna de las dos falla, la corrida se detiene entera."
+    ],
+    "restriccion_de_uso": null,
+    "cantidad": 33,
+    "atribucion": {
+      "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
+      "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+      "sitio": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información CITANDO LA FUENTE de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
+    }
+  },
+  "registros": [
+    {
+      "iso": "VEN",
+      "pais": "Venezuela",
+      "bloque": "Andina",
+      "estado": "con_registro",
+      "comercio_registrado": 454,
+      "con_origen_decomiso": 13,
+      "proporcion_decomiso_pct": 2.86,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "estado": "con_registro",
+      "comercio_registrado": 2092,
+      "con_origen_decomiso": 4,
+      "proporcion_decomiso_pct": 0.19,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "TTO",
+      "pais": "Trinidad y Tobago",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 62,
+      "con_origen_decomiso": 6,
+      "proporcion_decomiso_pct": 9.68,
+      "proporcion_comparable": false,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "SUR",
+      "pais": "Surinam",
+      "bloque": "Guayanas",
+      "estado": "con_registro",
+      "comercio_registrado": 4492,
+      "con_origen_decomiso": 8,
+      "proporcion_decomiso_pct": 0.18,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "VCT",
+      "pais": "San Vicente y las Granadinas",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 994,
+      "con_origen_decomiso": 4,
+      "proporcion_decomiso_pct": 0.4,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "LCA",
+      "pais": "Santa Lucía",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 3,
+      "con_origen_decomiso": 1,
+      "proporcion_decomiso_pct": 33.33,
+      "proporcion_comparable": false,
+      "ultimo_anio_con_asiento": 2022
+    },
+    {
+      "iso": "KNA",
+      "pais": "San Cristóbal y Nieves",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 4024,
+      "con_origen_decomiso": 4,
+      "proporcion_decomiso_pct": 0.1,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "PER",
+      "pais": "Perú",
+      "bloque": "Andina",
+      "estado": "con_registro",
+      "comercio_registrado": 21872,
+      "con_origen_decomiso": 83,
+      "proporcion_decomiso_pct": 0.38,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "PRY",
+      "pais": "Paraguay",
+      "bloque": "Cono Sur",
+      "estado": "con_registro",
+      "comercio_registrado": 1590,
+      "con_origen_decomiso": 0,
+      "proporcion_decomiso_pct": 0.0,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "PAN",
+      "pais": "Panamá",
+      "bloque": "México y Centroamérica",
+      "estado": "con_registro",
+      "comercio_registrado": 916,
+      "con_origen_decomiso": 24,
+      "proporcion_decomiso_pct": 2.62,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "NIC",
+      "pais": "Nicaragua",
+      "bloque": "México y Centroamérica",
+      "estado": "con_registro",
+      "comercio_registrado": 4595,
+      "con_origen_decomiso": 22,
+      "proporcion_decomiso_pct": 0.48,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "bloque": "México y Centroamérica",
+      "estado": "con_registro",
+      "comercio_registrado": 65283,
+      "con_origen_decomiso": 2517,
+      "proporcion_decomiso_pct": 3.86,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "JAM",
+      "pais": "Jamaica",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 1527,
+      "con_origen_decomiso": 8,
+      "proporcion_decomiso_pct": 0.52,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "HND",
+      "pais": "Honduras",
+      "bloque": "México y Centroamérica",
+      "estado": "con_registro",
+      "comercio_registrado": 1801,
+      "con_origen_decomiso": 58,
+      "proporcion_decomiso_pct": 3.22,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "HTI",
+      "pais": "Haití",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "con_registro",
+      "comercio_registrado": 389,
+      "con_origen_decomiso": 385,
+      "proporcion_decomiso_pct": 98.97,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "GUY",
+      "pais": "Guyana",
+      "bloque": "Guayanas",
+      "estado": "con_registro",
+      "comercio_registrado": 7676,
+      "con_origen_decomiso": 29,
+      "proporcion_decomiso_pct": 0.38,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "GTM",
+      "pais": "Guatemala",
+      "bloque": "México y Centroamérica",
+      "estado": "con_registro",
+      "comercio_registrado": 12584,
+      "con_origen_decomiso": 137,
+      "proporcion_decomiso_pct": 1.09,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "GRD",
+      "pais": "Granada",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 6,
+      "con_origen_decomiso": 4,
+      "proporcion_decomiso_pct": 66.67,
+      "proporcion_comparable": false,
+      "ultimo_anio_con_asiento": 2023
+    },
+    {
+      "iso": "SLV",
+      "pais": "El Salvador",
+      "bloque": "México y Centroamérica",
+      "estado": "con_registro",
+      "comercio_registrado": 2073,
+      "con_origen_decomiso": 87,
+      "proporcion_decomiso_pct": 4.2,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "ECU",
+      "pais": "Ecuador",
+      "bloque": "Andina",
+      "estado": "con_registro",
+      "comercio_registrado": 82916,
+      "con_origen_decomiso": 20,
+      "proporcion_decomiso_pct": 0.02,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "DOM",
+      "pais": "República Dominicana",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "con_registro",
+      "comercio_registrado": 7156,
+      "con_origen_decomiso": 35,
+      "proporcion_decomiso_pct": 0.49,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "DMA",
+      "pais": "Dominica",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 9,
+      "con_origen_decomiso": 2,
+      "proporcion_decomiso_pct": 22.22,
+      "proporcion_comparable": false,
+      "ultimo_anio_con_asiento": 2022
+    },
+    {
+      "iso": "CUB",
+      "pais": "Cuba",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "con_registro",
+      "comercio_registrado": 1193,
+      "con_origen_decomiso": 120,
+      "proporcion_decomiso_pct": 10.06,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "CRI",
+      "pais": "Costa Rica",
+      "bloque": "México y Centroamérica",
+      "estado": "con_registro",
+      "comercio_registrado": 3259,
+      "con_origen_decomiso": 15,
+      "proporcion_decomiso_pct": 0.46,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "bloque": "Andina",
+      "estado": "con_registro",
+      "comercio_registrado": 32102,
+      "con_origen_decomiso": 112,
+      "proporcion_decomiso_pct": 0.35,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "estado": "con_registro",
+      "comercio_registrado": 657,
+      "con_origen_decomiso": 15,
+      "proporcion_decomiso_pct": 2.28,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "BRA",
+      "pais": "Brasil",
+      "bloque": "Cono Sur",
+      "estado": "con_registro",
+      "comercio_registrado": 20104,
+      "con_origen_decomiso": 99,
+      "proporcion_decomiso_pct": 0.49,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "bloque": "Andina",
+      "estado": "con_registro",
+      "comercio_registrado": 1609,
+      "con_origen_decomiso": 16,
+      "proporcion_decomiso_pct": 0.99,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "BLZ",
+      "pais": "Belice",
+      "bloque": "México y Centroamérica",
+      "estado": "con_registro",
+      "comercio_registrado": 4465,
+      "con_origen_decomiso": 71,
+      "proporcion_decomiso_pct": 1.59,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "BRB",
+      "pais": "Barbados",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 239,
+      "con_origen_decomiso": 5,
+      "proporcion_decomiso_pct": 2.09,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "BHS",
+      "pais": "Bahamas",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 589,
+      "con_origen_decomiso": 151,
+      "proporcion_decomiso_pct": 25.64,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "bloque": "Cono Sur",
+      "estado": "con_registro",
+      "comercio_registrado": 4700,
+      "con_origen_decomiso": 19,
+      "proporcion_decomiso_pct": 0.4,
+      "proporcion_comparable": true,
+      "ultimo_anio_con_asiento": 2024
+    },
+    {
+      "iso": "ATG",
+      "pais": "Antigua y Barbuda",
+      "bloque": "Caribe oriental",
+      "estado": "con_registro",
+      "comercio_registrado": 32,
+      "con_origen_decomiso": 4,
+      "proporcion_decomiso_pct": 12.5,
+      "proporcion_comparable": false,
+      "ultimo_anio_con_asiento": 2024
+    }
+  ],
+  "resumen": {
+    "ventana_desde": 2020,
+    "ventana_hasta": 2024,
+    "ultimo_anio_completo": 2024,
+    "estados_con_registro": 33,
+    "estados_del_padron": 33,
+    "asientos_en_la_region": 291463,
+    "asientos_con_origen_decomiso": 4078,
+    "instrumento_probado": true,
+    "filtro_probado": true,
+    "consultado": "2026-09-03T21:30:22+00:00"
+  },
+  "sin_asiento_reciente": [
+    {
+      "pais": "Santa Lucía",
+      "ultimo_anio": 2022
+    },
+    {
+      "pais": "Dominica",
+      "ultimo_anio": 2022
+    },
+    {
+      "pais": "Granada",
+      "ultimo_anio": 2023
+    }
+  ]
+}

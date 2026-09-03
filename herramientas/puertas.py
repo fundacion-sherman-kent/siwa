@@ -203,6 +203,7 @@ def construir():
     re_ = porIso(leer("reciente_oficial.json"))
     cop = porIso(leer("copernicus.json"))
     cib = porIso(leer("ciber.json"))
+    cit = porIso(leer("cites.json"))
     mem = leer("memoria.json")
     desde = mem.get("desde", {})
     materias = mem.get("materias", {})
@@ -300,6 +301,21 @@ def construir():
                                + ("" if cb["bloqueos_confirmados"] == 1 else "s") + " confirmado"
                                + ("" if cb["bloqueos_confirmados"] == 1 else "s"),
                                "La muestra la hacen voluntarios: no ordena Estados."))
+        ct = cit.get(iso)
+        if ct and ct.get("comercio_registrado"):
+            # LA SALVEDAD VA PEGADA AL NUMERO, no en otra pagina. Una puerta es
+            # corta y la indexa un buscador: si el dato viaja solo, se lee como
+            # «trafico de fauna», que es exactamente lo contrario de lo que dice.
+            salvedad = ("Registra comercio CON permiso: el tráfico ilegal no figura acá. "
+                        "Y «origen en decomiso» no es «cantidad de decomisos».")
+            if not ct.get("proporcion_comparable"):
+                salvedad += " Base demasiado chica para sacar una proporción."
+            hechos.append(fila(
+                "Especies protegidas",
+                f'<b>{ct["con_origen_decomiso"]:,}</b>'.replace(",", ".")
+                + f' de <b>{ct["comercio_registrado"]:,}</b>'.replace(",", ".")
+                + " asientos, con origen en decomiso",
+                salvedad))
 
         vecinos = "".join(
             f'<a href="{BASE}/sitio/pais/{sello(x["pais"])}.html">{esc(x["pais"])}</a>'

@@ -22,7 +22,7 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 26 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:description" content="33 Estados, 69 indicadores, 27 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta property="og:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,7 +31,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 26 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 27 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
 <meta name="twitter:image" content="https://fundacion-sherman-kent.github.io/siwa/sitio/marca/siwa-compartir.png">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
@@ -46,7 +46,7 @@
       "@id": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 26 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 27 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1368,6 +1368,28 @@
     <section class="domain bloque" id="seguridad-flujos" data-nivel="2">
       <div class="bloque-head"><h3>Seguridad · flujos y ciberseguridad</h3></div>
       <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
+    <div class="categoria" id="cites" data-nivel="2">
+      <div class="categoria-head"><h4>Especies protegidas · comercio registrado</h4><span class="tag" id="tag-cites">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Lo que esta base registra es comercio legal, no tráfico.</b> Cada asiento nace
+           de un permiso o de un informe anual que un Estado presentó ante el tratado. El
+           tráfico ilegal, por definición, no tiene permiso y <b>no entra acá</b>: quien lea
+           estas cifras como «tráfico de fauna» va a leerlas exactamente al revés.</p>
+        <p><b>«Origen en decomiso» no es «cantidad de decomisos».</b> Ese código marca
+           especímenes cuyo origen declarado es una incautación, y el asiento aparece cuando
+           ese espécimen <b>se mueve después</b> —a un centro de rescate, a un zoológico, a
+           investigación—. Más decomiso puede significar más control, más delito o más
+           movimiento posterior de lo incautado: <b>son tres explicaciones y la fuente no
+           elige entre ellas</b>.</p>
+        <p><b>No ordena Estados y no entra al compuesto.</b> El volumen depende de la
+           biodiversidad, del tamaño de la economía y del papel de cada país en el comercio
+           de cueros, madera o mascotas. Y la proporción de decomiso <b>no está orientada</b>:
+           no se sabe si más es mejor o peor.</p>
+      </div>
+      <div class="procedencia" id="proc-cites">Cargando el registro…</div>
+      <div class="cruce" id="lista-cites"></div>
+      <div id="vac-cites"></div>
+        </div>
     <div class="categoria" id="focos" data-nivel="2">
       <div class="categoria-head"><h4>Qué está ardiendo ahora</h4><span class="tag" id="tag-focos">—</span></div>
       <div class="aviso-cobertura">
@@ -2163,7 +2185,8 @@
                      ['brecha','Brecha entre lo registrado y lo publicado'],
                      ['sondeo','Banco de pruebas de fuentes candidatas'],
                      ['prensa','RSF — libertad de prensa'],
-                     ['focos','NASA FIRMS — focos de calor']];
+                     ['focos','NASA FIRMS — focos de calor'],
+                     ['cites','CITES — comercio de especies protegidas']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -4208,12 +4231,15 @@
 
     {clave:'contrabando', rotulo:'Contrabando', tema:'contrabando',
      porque:'Mercadería que cruza sin declararse, o que se declara distinto de los dos lados.',
-     indicadores:[], extra:'comercio',
+     indicadores:[], extra:['comercio','cites'],
      falta:'<b>No hay indicador de contrabando</b> y no lo va a haber: nadie declara lo que '
           +'oculta. Lo que sí se puede medir es la <b>brecha espejo</b>: lo que un Estado dice '
           +'haber exportado contra lo que el otro dice haber importado. Una brecha no prueba '
           +'contrabando &mdash;el flete y el seguro explican buena parte&mdash;, pero <b>señala '
-          +'dónde mirar</b>. Las incautaciones en kilos exigen la UNODC, que hoy no responde.'},
+          +'dónde mirar</b>. Las incautaciones en kilos exigen la UNODC, que hoy no responde. '
+          +'Entró además el comercio registrado de <b>especies protegidas</b>, que <b>no es '
+          +'una medida de contrabando</b> &mdash;registra lo que sí tuvo permiso&mdash; pero '
+          +'muestra dónde el único movimiento anotado viene de decomisos.'},
 
     {clave:'ciberseguridad', rotulo:'Ciberseguridad', tema:'ciberataque',
      porque:'Extorsión informática contra empresas y organismos, y exposición del terreno digital.',
@@ -4248,6 +4274,20 @@
   // misma forma, para que el lector no tenga que saber de donde sale cada cosa.
   function extraMateria(cual, iso){
     const uno = (d, i) => d && (d.registros||[]).find(r => r.iso === i);
+    if(cual === 'cites'){
+      const d = almacen.cites; if(!d) return null;
+      if(iso){ const r = uno(d, iso);
+        return r && r.comercio_registrado
+          ? {q:'Especies protegidas · asientos con origen en decomiso',
+             v: miles(r.con_origen_decomiso) + ' de ' + miles(r.comercio_registrado),
+             c: d.resumen.ventana_desde + '–' + d.resumen.ventana_hasta
+                + ' · comercio registrado, no tráfico'} : null; }
+      return {q:'Asientos con origen en decomiso en la región',
+              v: miles(d.resumen.asientos_con_origen_decomiso) + ' de '
+                 + miles(d.resumen.asientos_en_la_region),
+              c: d.resumen.ventana_desde + '–' + d.resumen.ventana_hasta
+                 + ' · comercio registrado, no tráfico'};
+    }
     if(cual === 'prensa'){
       const d = almacen.prensa; if(!d) return null;
       if(iso){ const r = uno(d, iso);
@@ -4587,6 +4627,7 @@
     paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
     paso('contratación pública', contratacionVista);
+    paso('especies protegidas', citesVista);
     paso('focos de calor', focosVista);
     paso('libertad de prensa', prensaVista);
     paso('sanciones y personas expuestas', sancionesVista);
@@ -5740,6 +5781,68 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       }).join('');
   }
 
+  function citesVista(){
+    const caja = document.getElementById('lista-cites');
+    const d = almacen.cites; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const con = lista.filter(x => x.comercio_registrado);
+    const tag = document.getElementById('tag-cites');
+    if(tag) tag.textContent = miles(con.reduce((a,x)=>a+x.comercio_registrado,0))
+      + ' asientos · ' + d.resumen.ventana_desde + '–' + d.resumen.ventana_hasta;
+
+    // Los comparables primero y ordenados; los de base chica DESPUES y sin
+    // orden, porque un 66 % sobre seis asientos no compite con nada.
+    const comp = con.filter(x => x.proporcion_comparable)
+                    .sort((a,b) => b.proporcion_decomiso_pct - a.proporcion_decomiso_pct);
+    const chico = con.filter(x => !x.proporcion_comparable);
+
+    let html = comp.map(x => {
+      const q = x.proporcion_decomiso_pct;
+      const clase = q >= 20 ? 'muy-viejo' : q >= 5 ? 'viejo' : 'fresco';
+      return '<div class="asunto"><h4>' + esc(x.pais)
+        + ' <span class="edad ' + clase + '">' + cifra(q) + ' %</span></h4>'
+        + '<div class="foot"><span class="porque"><b>' + miles(x.comercio_registrado)
+        + '</b> asientos de comercio registrado · <b>' + miles(x.con_origen_decomiso)
+        + '</b> con origen declarado en decomiso'
+        + (x.ultimo_anio_con_asiento && x.ultimo_anio_con_asiento < d.resumen.ventana_hasta
+           ? '<br><i>Sin asientos después de ' + x.ultimo_anio_con_asiento + '.</i>' : '')
+        + '</span><span class="badge medio">magnitud</span></div></div>';
+    }).join('');
+
+    if(chico.length){
+      html += '<div class="asunto"><h4>' + chico.length
+        + ' con base demasiado chica para una proporción</h4><div class="foot">'
+        + '<span class="porque">'
+        + esc(chico.map(x => x.pais + ' (' + x.comercio_registrado + ')').join(', '))
+        + '. <b>Una proporción sobre tres asientos no es una proporción</b>: sin este '
+        + 'mínimo, Granada quedaba segunda de la región con 4 sobre 6. El número está '
+        + 'en la descarga, pero <b>no se ordena contra los demás</b>.'
+        + '</span><span class="badge unica">no comparable</span></div></div>';
+    }
+
+    const viejos = (d.sin_asiento_reciente || []).filter(v =>
+      lista.some(x => x.pais === v.pais));
+    if(viejos.length){
+      html += '<div class="asunto"><h4>' + viejos.length
+        + ' sin asientos recientes</h4><div class="foot"><span class="porque">'
+        + esc(viejos.map(v => v.pais + ', hasta ' + v.ultimo_anio).join('; '))
+        + '. La base <b>no distingue si el asiento lo declaró el exportador o el '
+        + 'importador</b>, así que esto dice que no hay comercio registrado con ese '
+        + 'Estado después de ese año, y <b>no</b> que el Estado haya dejado de informar.'
+        + '</span><span class="badge unica">sin dato reciente</span></div></div>';
+    }
+
+    caja.innerHTML = html || '<div class="asunto"><h4>Sin asientos en la ventana</h4>'
+      + '<div class="foot"><span class="porque">Ningún comercio registrado en '
+      + esc(paisFiltro ? paisNombre : (zona || 'la región')) + ' entre '
+      + d.resumen.ventana_desde + ' y ' + d.resumen.ventana_hasta
+      + '.</span><span class="badge unica">sin dato</span></div></div>';
+  }
+
   function focosVista(){
     const caja = document.getElementById('lista-focos');
     const d = almacen.focos; if(!caja || !d) return;
@@ -6689,6 +6792,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-contratacion-abierta','contratación pública',err.message);
       document.getElementById('proc-contratacion-abierta').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('cites.json'), traer('estado/cites.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.cites=d; const meta=d.procedencia;
+      pintarProcedencia('proc-cites',meta);
+      vacios+=pintarVacios('vac-cites',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-cites','especies protegidas',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-cites','especies protegidas',err.message);
+      document.getElementById('proc-cites').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('focos.json'), traer('estado/focos.json').catch(()=>null)])
     .then(([d,estado])=>{

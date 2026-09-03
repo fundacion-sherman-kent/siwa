@@ -459,3 +459,81 @@ más adelante.** No estaba previsto así, pero es el resultado.
 
 El colector queda construido y a la espera: el día que la cuenta vea datos
 recientes, funciona sin tocar una línea.
+
+---
+
+# CITES entra — 3 de septiembre de 2026
+
+La descarga completa de la base de comercio de especies protegidas pesa
+**261 MB**, sin credencial pero imposible de bajar todas las noches. Adivinar
+rutas de consulta dio tres 404 seguidos, que es lo que pasa cuando se adivina.
+
+Se abrió el sitio, se apretó su propio botón de búsqueda y **se leyó qué
+consulta hace él**. La respuesta era mejor que la buscada:
+
+```
+GET https://trade.cites.org/en/cites_trade/exports/download.json?filters[...]
+    → {"total": 6886, "csv_limit": 1000000, "web_limit": 50000}
+```
+
+Devuelve **el recuento sin descargar los asientos**. La consulta que el sitio
+usa para avisarle al usuario el peso de su descarga es, acá, todo el dato.
+
+## Lo que se obtuvo
+
+| | |
+|---|---|
+| Cobertura | **33 de 33 Estados** — la primera fuente del registro que alcanza el padrón entero |
+| Ventana | 2020–2024, cinco años |
+| Volumen | 291.463 asientos en la región; 4.078 con origen declarado en decomiso |
+| Rezago | Año y medio, y es **del tratado**: los informes anuales vencen el 31 de octubre del año siguiente |
+| Credencial | Ninguna |
+
+## Lo que NO se obtuvo, y es lo más importante
+
+**Esta base registra comercio legal.** Cada asiento nace de un permiso o de un
+informe que una Parte presentó. El tráfico ilegal no tiene permiso y no entra.
+**La materia de contrabando sigue sin fuente propia**, y el sitio lo dice con
+esas palabras en vez de dar por cubierto lo que no lo está.
+
+El código de origen `I` —«confiscaciones y decomisos»— se le acerca, pero marca
+**especímenes cuyo origen declarado es una incautación**, y el asiento aparece
+cuando ese espécimen se mueve después. Más decomiso puede ser más control, más
+delito o más movimiento posterior de lo incautado: tres explicaciones, y la
+fuente no elige.
+
+Tampoco se puede saber **quién informó**: la consulta no distingue exportador de
+importador. Por eso el registro dice «no hay asientos después de tal año» y no
+dice «el Estado dejó de informar».
+
+## Dos trampas que costaron dos guardas
+
+**Primera: la fuente ignora en silencio los parámetros que no conoce.** Se probó
+mandándole cuatro nombres de filtro inventados: los cuatro devolvieron el total
+sin filtrar, sin un solo error. Si mañana renombran el filtro de origen, el
+registro publicaría **«todo es decomiso» en los 33 Estados** sin enterarse. El
+colector no corre sin comprobar que en Brasil el recuento filtrado sea
+**estrictamente menor** que el total.
+
+**Segunda: una proporción sobre tres asientos no es una proporción.** Ordenada
+cruda, Granada quedaba **segunda de la región** con 4 asientos sobre 6 y Santa
+Lucía tercera con 1 sobre 3, por delante de Bahamas, que tiene 151 sobre 589.
+Se fijó un mínimo de 100 asientos: por debajo, el número se publica igual
+—esconderlo sería peor— pero **marcado como no comparable**.
+
+## Lo que quedó a la vista una vez ordenado bien
+
+| Estado | Origen en decomiso | Sobre |
+|---|---:|---:|
+| **Haití** | **98,97 %** | 385 de 389 |
+| Bahamas | 25,64 % | 151 de 589 |
+| Cuba | 10,06 % | 120 de 1.193 |
+| El Salvador | 4,20 % | 87 de 2.073 |
+| México | 3,86 % | 2.517 de 65.283 |
+
+Haití no tiene prácticamente comercio legal registrado de especies protegidas:
+**lo único que se anota es lo incautado**. El registro publica el hecho y no la
+explicación, porque no la tiene.
+
+Y tres Estados sin asientos recientes: **Santa Lucía y Dominica hasta 2022,
+Granada hasta 2023**.

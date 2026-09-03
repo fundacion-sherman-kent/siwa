@@ -42,6 +42,14 @@ PORTADA = RAIZ / "index.html"
 # recolectando cada hora.
 MAPA = RAIZ / "sitemap.xml"
 DATOS = RAIZ / "datos" / "publico"
+# El README es la primera pagina que ve quien llega al repositorio, y su tabla de
+# fuentes estaba escrita a mano: decia «Pendiente» de OpenSanctions y de la
+# contratacion abierta cuando ambas llevaban dias en servicio, y enumeraba siete
+# fuentes cuando ya eran veintisiete. Es el mismo error que el de la portada, en
+# el otro sentido: aquella prometia de mas y esta declaraba de menos. Se calcula.
+LEEME = RAIZ / "README.md"
+MARCA_INICIO = "<!-- fuentes:calculado -->"
+MARCA_FIN = "<!-- fuentes:fin -->"
 
 
 def _cifras() -> dict:
@@ -137,6 +145,67 @@ def _sellarMapa() -> int:
     return n
 
 
+def _sellarLeeme() -> int:
+    """Rehace la tabla de fuentes del README desde los archivos que existen.
+
+    No pregunta qué colectores hay escritos: pregunta **cuáles dejaron dato**. Un
+    colector que nunca corrió no figura, y uno que corrió no puede figurar como
+    pendiente.
+    """
+    if not LEEME.exists():
+        return 0
+    texto = LEEME.read_text(encoding="utf-8")
+    if MARCA_INICIO not in texto or MARCA_FIN not in texto:
+        print("[sellar-portada] AVISO: el README no tiene las marcas de la tabla de "
+              "fuentes; NO se tocó nada.", file=sys.stderr)
+        return 0
+
+    filas = []
+    for archivo in sorted(DATOS.glob("*.json")):
+        try:
+            d = json.loads(archivo.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001 — un archivo ilegible no entra a la tabla
+            continue
+        p = d.get("procedencia") or {}
+        if not p.get("fuente"):
+            continue
+        cal = p.get("calificacion") or {}
+        codigo = f'{cal.get("fiabilidad", "?")}-{cal.get("credibilidad", "?")}'
+        estados = len({r.get("iso") for r in (d.get("registros") or []) if r.get("iso")})
+        vacios = len(p.get("vacios_declarados") or [])
+        filas.append((archivo.stem, p["fuente"].get("nombre", ""), codigo, estados, vacios))
+
+    cuerpo = [
+        f"{MARCA_INICIO}",
+        "",
+        f"**{len(filas)} fuentes en servicio.** Esta tabla no se escribe: la calcula "
+        "`herramientas/sellar-portada.py` desde los archivos de datos, después de cada "
+        "recolección. Un colector que no dejó dato no aparece acá.",
+        "",
+        "| Colector | Fuente | Calificación | Estados | Vacíos declarados |",
+        "|---|---|:---:|---:|---:|",
+    ]
+    for nombre, fuente, codigo, estados, vacios in filas:
+        cuerpo.append(f"| `{nombre}` | {fuente} | `{codigo}` | "
+                      f"{estados if estados else '—'} | {vacios} |")
+    cuerpo += [
+        "",
+        "La calificación es la del Almirantazgo: la letra mide **de quién viene** y el "
+        "número, **qué tan verificado está lo que dice**. Ninguna fuente única puede "
+        "calificar `1`; la circunstancia viaja declarada dentro de cada archivo.",
+        "",
+        f"{MARCA_FIN}",
+    ]
+
+    inicio = texto.index(MARCA_INICIO)
+    fin = texto.index(MARCA_FIN) + len(MARCA_FIN)
+    nuevo = texto[:inicio] + "\n".join(cuerpo) + texto[fin:]
+    if nuevo != texto:
+        LEEME.write_text(nuevo, encoding="utf-8")
+        print(f"[sellar-portada] README.md: tabla rehecha con {len(filas)} fuentes")
+    return len(filas)
+
+
 def sellar() -> int:
     c = _cifras()
     total, faltantes = 0, []
@@ -162,6 +231,7 @@ def sellar() -> int:
             print(f"  · {x}", file=sys.stderr)
 
     _sellarMapa()
+    _sellarLeeme()
     print(f"[sellar-portada] {c['indicadores']} indicadores · {c['fuentes']} fuentes · "
           f"{c['estados']} Estados · {total} lugares en total")
     return 1 if enTodas else 0
