@@ -67,9 +67,13 @@ jobs:
         continue-on-error: true
         run: python colectores/bti.py
 
+      # DIARIO, NO CADA HORA. El canal propio no cambia cada hora, y cada llamada
+      # desde un centro de datos es otra tirada contra la verificacion anti-robot
+      # del alojamiento: era la causa de la MITAD de las corridas en rojo.
       - name: Informes de la Fundacion
         id: fundacion
         continue-on-error: true
+        if: env.COMPLETA == 'true'
         run: python colectores/fundacion.py
 
       - name: Indice de Opacidad

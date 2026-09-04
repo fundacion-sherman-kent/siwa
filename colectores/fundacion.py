@@ -22,6 +22,8 @@ vive el dato.
 from __future__ import annotations
 
 import re
+import time
+import sys
 import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -33,6 +35,11 @@ import comun
 CANAL = "https://fundacionkent.org/feed"
 SITIO = "https://fundacionkent.org/"
 NAVEGADOR = comun.AGENTE
+# El desafio anti-robot del alojamiento es probabilistico: se reintenta. Su firma
+# es literal y por eso se la puede reconocer sin adivinar.
+SENAL_DESAFIO = b"sgcaptcha"
+INTENTOS = 3
+ESPERA = 5  # segundos, y crece con cada intento
 TOPE = 12
 
 # Secciones de la web institucional, verificadas el 31 de agosto de 2026.
@@ -56,14 +63,52 @@ def _limpiar(texto: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", texto or "")).strip()
 
 
+def _traer(tope: int) -> bytes:
+    """Pide el canal, y reintenta cuando el que contesta es el cortafuegos.
+
+    EL SITIO DE LA FUNDACION LE PONE UNA VERIFICACION ANTI-ROBOT A SU PROPIO
+    ROBOT. No es por como se identifica —se probaron cuatro identificaciones
+    distintas y desde una maquina comun las cuatro reciben XML correcto—: es por
+    DONDE llama. El servicio de alojamiento desafia a las direcciones de centro
+    de datos, y las del servidor que corre el robot lo son.
+
+    El desafio es probabilistico, asi que se reintenta. Y si igual persiste, se
+    dice exactamente eso en vez de dejar creer que el canal esta roto.
+    """
+    ultimo = None
+    for numero in range(INTENTOS):
+        try:
+            peticion = urllib.request.Request(
+                CANAL, headers={"User-Agent": NAVEGADOR,
+                                "Accept": "application/rss+xml, application/xml, text/xml"})
+            with urllib.request.urlopen(peticion, timeout=45) as r:
+                crudo = r.read(tope + 1)
+        except urllib.error.HTTPError as e:
+            raise RuntimeError(f"El canal de la Fundación respondio HTTP {e.code}") from e
+        except Exception as e:  # noqa: BLE001 — falla de red: se reintenta
+            ultimo = f"{type(e).__name__}: {e}"
+            print(f"[fundacion] intento {numero + 1} de {INTENTOS}: {ultimo}", file=sys.stderr)
+            time.sleep(ESPERA * (numero + 1))
+            continue
+
+        if SENAL_DESAFIO not in crudo[:600]:
+            return crudo
+        ultimo = "el cortafuegos del alojamiento devolvió su verificación anti-robot"
+        print(f"[fundacion] intento {numero + 1} de {INTENTOS}: {ultimo}", file=sys.stderr)
+        time.sleep(ESPERA * (numero + 1))
+
+    raise RuntimeError(
+        f"En {INTENTOS} intentos el canal de la Fundación no entregó su contenido: "
+        f"{ultimo}. NO es que el canal esté roto ni que no haya publicaciones: el "
+        "servicio de alojamiento del sitio propio le pone una verificación anti-robot a "
+        "quien llama desde un centro de datos, y el servidor que corre este registro "
+        "llama desde uno. Desde una máquina común el mismo pedido devuelve XML "
+        "correcto. NO se publica una lista vacía: la anterior queda intacta.")
+
+
 def recolectar():
     TOPE_BYTES = 4_000_000
-    try:
-        peticion = urllib.request.Request(CANAL, headers={"User-Agent": NAVEGADOR})
-        with urllib.request.urlopen(peticion, timeout=45) as r:
-            crudo = r.read(TOPE_BYTES + 1)
-    except urllib.error.HTTPError as e:
-        raise RuntimeError(f"El canal de la Fundación respondio HTTP {e.code}") from e
+    crudo = _traer(TOPE_BYTES)
 
     # Un XML CORTADO A LA MITAD nunca parsea, y el error que devuelve —«not
     # well-formed»— hace creer que el canal esta roto cuando lo unico que pasa es

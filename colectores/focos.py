@@ -81,8 +81,10 @@ CONTROL = "BRA"
 TOPE_LECTURA = 80_000_000
 # Un parpadeo de red del servidor que corre el robot no es una respuesta de la
 # fuente: se reintenta. Si igual falla, se detiene la corrida; nunca se anota cero.
-INTENTOS = 3
-ESPERA_ENTRE_INTENTOS = 4  # segundos, y crece con cada intento
+# Tres intentos en veinticuatro segundos NO alcanzaron: volvio a fallar dos veces
+# despues de ponerlos. Se estira la espera, que es gratis en una tarea horaria.
+INTENTOS = 4
+ESPERA_ENTRE_INTENTOS = 10  # segundos, y crece con cada intento
 
 
 def _pedir(clave: str, dias: int) -> list:
