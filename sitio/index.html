@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 29 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-29">
+<meta property="og:description" content="33 Estados, 69 indicadores, 30 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-30">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 29 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-29">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 30 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-30">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 29 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 30 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1427,6 +1427,25 @@
     <section class="domain bloque" id="seguridad-flujos" data-nivel="2">
       <div class="bloque-head"><h3>Seguridad · flujos y ciberseguridad</h3></div>
       <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
+    <div class="categoria" id="armas" data-nivel="2">
+      <div class="categoria-head"><h4>Armas · quién le vende a quién, declarado en la aduana</h4><span class="tag" id="tag-armas">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Es comercio declarado en la aduana.</b> El tráfico ilegal —que es lo que
+           preocupa— no pasa por una aduana y <b>no está acá</b>. Sirve para ver el flujo
+           legal y para señalar dónde ese flujo no cierra.</p>
+        <p><b>Y es menos de lo que suena:</b> el capítulo arancelario es «armas y
+           municiones; sus partes». <b>No incluye aviones, buques ni vehículos
+           militares</b>, que viajan en otros capítulos. Son valores en dólares, no
+           cantidades: un lote de municiones baratas y uno de fusiles caros pueden dar la
+           misma cifra.</p>
+        <p><b>No ordena Estados.</b> El volumen depende del tamaño de la economía y de
+           tener o no industria propia: Brasil exporta más que Uruguay por industria, no
+           por conducta.</p>
+      </div>
+      <div class="procedencia" id="proc-armas">Cargando el registro…</div>
+      <div class="cruce" id="lista-armas"></div>
+      <div id="vac-armas"></div>
+        </div>
     <div class="categoria" id="crimen" data-nivel="1">
       <div class="categoria-head"><h4>Crimen organizado · mercados, actores y resistencia del Estado</h4><span class="tag" id="tag-crimen">—</span></div>
       <div class="aviso-cobertura">
@@ -2284,7 +2303,8 @@
                      ['focos','NASA FIRMS — focos de calor'],
                      ['cites','CITES — comercio de especies protegidas'],
                      ['crimen','Índice Global de Crimen Organizado'],
-                     ['designados','ONU — lista consolidada de sanciones']];
+                     ['designados','ONU — lista consolidada de sanciones'],
+                     ['armas','Comtrade — comercio de armas y municiones']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -4749,6 +4769,7 @@
     paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
     paso('contratación pública', contratacionVista);
+    paso('comercio de armas', armasVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
     paso('especies protegidas', citesVista);
@@ -5905,6 +5926,49 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       }).join('');
   }
 
+  function armasVista(){
+    const caja = document.getElementById('lista-armas');
+    const d = almacen.armas; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const con = lista.filter(x => x.estado === 'declarado');
+    const tag = document.getElementById('tag-armas');
+    if(tag) tag.textContent = con.length + ' Estados declaran · ' + d.resumen.anio;
+
+    const usd = n => 'USD ' + miles(Math.round(n));
+    let html = con.slice().sort((a,b) =>
+      (b.exporta_usd + b.importa_usd) - (a.exporta_usd + a.importa_usd)).map(x => {
+      const q = x.pct_compra_sin_origen;
+      const clase = q >= 50 ? 'muy-viejo' : q >= 20 ? 'viejo' : q ? 'reciente' : 'fresco';
+      return '<div class="asunto"><h4>' + esc(x.pais)
+        + (q ? ' <span class="edad ' + clase + '">' + cifra(q) + ' % sin origen</span>' : '')
+        + '</h4><div class="foot"><span class="porque">'
+        + 'Compró ' + usd(x.importa_usd) + ' de <b>' + x.socios_de_compra + '</b> orígenes'
+        + ' · vendió ' + usd(x.exporta_usd) + ' a <b>' + x.socios_de_venta + '</b> destinos'
+        + (x.mayores_proveedores.length
+            ? '<br>Proveedores: ' + esc(x.mayores_proveedores.map(s=>s.socio).join(', ')) : '')
+        + (x.mayores_clientes.length
+            ? '<br>Clientes: ' + esc(x.mayores_clientes.map(s=>s.socio).join(', ')) : '')
+        + (q ? '<br><b>' + cifra(q) + ' % de lo que compró no declara de dónde vino</b> ('
+             + usd(x.importa_sin_declarar_origen_usd) + '). No significa que sea ilegal: '
+             + 'significa que la aduana no dijo con quién.' : '')
+        + '</span><span class="badge medio">aduana</span></div></div>';
+    }).join('');
+
+    const sin = lista.filter(x => x.estado !== 'declarado');
+    if(sin.length){
+      html += '<div class="asunto"><h4>' + sin.length + ' sin declaración</h4>'
+        + '<div class="foot"><span class="porque">' + esc(sin.map(x=>x.pais).join(', '))
+        + '. <b>No significa que no comercien armas</b>: significa que no declararon este '
+        + 'capítulo a la base de Naciones Unidas para ' + d.resumen.anio + '.'
+        + '</span><span class="badge unica">sin declarar</span></div></div>';
+    }
+    caja.innerHTML = html;
+  }
+
   function crimenVista(){
     const caja = document.getElementById('lista-crimen');
     const d = almacen.crimen; if(!caja || !d) return;
@@ -7028,6 +7092,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-contratacion-abierta','contratación pública',err.message);
       document.getElementById('proc-contratacion-abierta').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('armas.json'), traer('estado/armas.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.armas=d; const meta=d.procedencia;
+      pintarProcedencia('proc-armas',meta);
+      vacios+=pintarVacios('vac-armas',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-armas','comercio de armas',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-armas','comercio de armas',err.message);
+      document.getElementById('proc-armas').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('crimen_organizado.json'), traer('estado/crimen_organizado.json').catch(()=>null)])
     .then(([d,estado])=>{
