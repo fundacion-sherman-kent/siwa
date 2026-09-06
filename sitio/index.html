@@ -140,7 +140,15 @@
     position:sticky;top:0;z-index:600;
   }
   .brand{display:flex;align-items:center;gap:18px;}
-  .brand img{height:72px;width:auto;display:block;}      /* mínimo digital del manual */
+  /* EL LOGOTIPO NO SE ACHICA NI SE DEFORMA. Es un elemento flexible dentro de la
+     marca, y por defecto CEDE ANCHO para que entren el separador y el texto: en un
+     teléfono de 375 px quedaba pintado a 155x72 contra una proporción natural de
+     2134x839, o sea ACHATADO UN 15,6 %. Un logotipo deformado incumple el manual
+     de identidad tanto como un color equivocado.
+       · flex:0 0 auto  — no cede ancho: que ceda el texto, que sí puede.
+       · object-fit:contain — red de seguridad: si algo lo recortara igual, la
+         imagen se ajusta DENTRO de la caja en vez de estirarse para llenarla. */
+  .brand img{height:72px;width:auto;flex:0 0 auto;object-fit:contain;display:block;}  /* mínimo digital del manual */
   .brand .sep{width:1px;height:44px;background:rgba(0,18,30,.22);}
   .brand h1{font-size:17px;margin:0;font-weight:700;letter-spacing:2px;color:var(--navy-deep);}
   .brand small{display:block;color:var(--grey-blue);font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;}
@@ -197,6 +205,15 @@
     nav.rail .grupo{margin:8px 10px 0 0;}
     .hero{padding:36px 20px 28px;}
     .topbar{padding:12px 20px;}
+    /* Si no entra en un renglón, que SALTE, no que apriete: el logotipo conserva
+       su tamaño mínimo de manual y el nombre baja debajo. Medido: la marca
+       necesita 418 px de ventana para entrar en un renglón, así que en teléfono
+       salta siempre. */
+    .brand{flex-wrap:wrap;gap:12px;}
+    /* Y la rayita separadora se va: cuando el nombre baja de renglón, queda
+       colgando sola a la derecha del logotipo como una marca perdida. Es un
+       refinamiento de escritorio, no de teléfono. */
+    .brand .sep{display:none;}
   }
 
   /* Eje de trabajo — las tres líneas de la Fundación */
