@@ -155,6 +155,11 @@
   .topbar-right{display:flex;gap:22px;align-items:center;font-size:11px;color:var(--grey-blue);}
   .status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:6px;box-shadow:0 0 8px var(--ok);}
   .status-dot.mal{background:var(--alert);box-shadow:0 0 8px var(--alert);}
+  /* A los dos días sin recolectar, el aviso deja de ser discreto. */
+  #estado-general.detenido{
+    background:var(--alert);color:#fff;padding:4px 10px;border-radius:6px;font-weight:600;
+  }
+  #estado-general.detenido .status-dot{background:#fff;box-shadow:none;}
 
   .hero{padding:56px 28px 40px;max-width:1180px;margin:0 auto;border-bottom:1px solid var(--line);}
   .eyebrow{
@@ -2411,13 +2416,40 @@
                      + ` · ${ed.muyViejos} de cinco o más. El rezago es de cada productor, no del registro.`;
       cajaEdad.className = ed.mediana >= 3 ? 'mal' : '';
     }
+    // ¿SIGUE VIVO EL ROBOT? Hasta acá la página sabía decir «falló un colector» y
+    // «no llegó un archivo», pero NO sabía decir la falla más grave de todas: que
+    // el robot dejó de correr. Si se detuviera hoy, cada colector conservaría su
+    // último estado «correcto» y esta línea seguiría diciendo «todos al día»
+    // durante meses. Una foto vieja presentada como actual es peor que un error
+    // declarado, y este registro existe justamente para no hacer eso.
+    //
+    // Se mide sobre el archivo MÁS NUEVO de todos: el robot recolecta cada hora,
+    // así que si el más nuevo tiene muchas horas, es que el robot no corrió.
+    const ahora = Date.now();
+    let masNuevo = 0;
+    Object.values(almacen).forEach(d => {
+      const t = d && d.procedencia && Date.parse(d.procedencia.obtenido_en);
+      if(t && t > masNuevo) masNuevo = t;
+    });
+    const horas = masNuevo ? (ahora - masNuevo) / 3600000 : null;
+    const comoSeDice = h =>
+      h < 48 ? `hace ${Math.round(h)} horas`
+             : `hace ${Math.round(h / 24)} días`;
+
     // Se dicen por separado, y con el verbo que corresponde a cada uno.
     const partes = [];
+    if(horas !== null && horas >= 6){
+      partes.push(`<b>el robot no recolecta ${comoSeDice(horas)}</b>`
+        + ` — lo que se ve es la última foto, no el estado de hoy`);
+    }
     if(fallas) partes.push(`${fallas} colector${fallas===1?'':'es'} con falla declarada`);
     if(noLlego) partes.push(`${noLlego} archivo${noLlego===1?'':'s'} que no llegó al navegador`);
-    document.getElementById('estado-general').innerHTML = partes.length
+    const caja = document.getElementById('estado-general');
+    caja.innerHTML = partes.length
       ? `<span class="status-dot mal"></span>${partes.join(' · ')}`
       : `<span class="status-dot"></span>Todos los colectores al día`;
+    // A los dos días sin recolectar ya no es un aviso: es una alarma, y se ve.
+    caja.classList.toggle('detenido', horas !== null && horas >= 48);
   }
 
   // ---- Las materias del registro, en el orden de los tres ejes --------------

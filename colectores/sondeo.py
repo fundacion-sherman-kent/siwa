@@ -95,6 +95,52 @@ CANDIDATAS = [
         "porque": "Flujos de desplazamiento casi en vivo, que la serie anual de ACNUR no da.",
         "traba": "404 en tres rutas distintas.",
     },
+
+    # ── Portales oficiales que existen y le cierran la puerta a las maquinas ──
+    # Hallados en la auditoria del 6 de septiembre de 2026: los cinco publican
+    # para personas y devuelven 403, 500 o nada a un programa. NO son fuentes
+    # descartadas: son fuentes CERRADAS HOY. El banco las prueba todos los dias
+    # para que el registro se entere EL MISMO DIA en que abran, sin que nadie
+    # tenga que acordarse de volver a mirar.
+    {
+        "clave": "datos_ecuador",
+        "rotulo": "Ecuador — portal de datos abiertos",
+        "url": "https://www.datosabiertos.gob.ec/api/3/action/package_search?rows=1",
+        "porque": "Ecuador tiene dominio oficial probado y catálogo publicado: sumarlo "
+                  "cerraría uno de los huecos de datos de gobierno.",
+        "traba": "403 · bloquea incluso identificándose como navegador.",
+    },
+    {
+        "clave": "datos_guatemala",
+        "rotulo": "Guatemala — portal de datos abiertos",
+        "url": "https://www.datos.gob.gt/api/3/action/package_search?rows=1",
+        "porque": "Mismo caso que Ecuador: el portal existe y responde a personas.",
+        "traba": "403 · bloquea incluso identificándose como navegador.",
+    },
+    {
+        "clave": "datos_bolivia",
+        "rotulo": "Bolivia — portal de datos abiertos",
+        "url": "https://datos.gob.bo/api/3/action/package_search?rows=1",
+        "porque": "Mismo caso: dominio oficial probado, catálogo cerrado a los programas.",
+        "traba": "403 · bloquea incluso identificándose como navegador.",
+    },
+    {
+        "clave": "estadistica_costarica",
+        "rotulo": "Costa Rica — instituto de estadística",
+        "url": "https://www.inec.cr/",
+        "porque": "Costa Rica es un Estado de alta transparencia y sin embargo NO tiene "
+                  "ninguna fuente oficial en el registro: su instituto bloquea y su "
+                  "portal de datos no responde. El hueco es técnico, no político.",
+        "traba": "403 en el instituto; el portal de datos no resuelve.",
+    },
+    {
+        "clave": "estadistica_cuba",
+        "rotulo": "Cuba — oficina nacional de estadística",
+        "url": "https://www.onei.gob.cu/",
+        "porque": "Es la única vía oficial de cifras cubanas. Sin ella, Cuba queda "
+                  "descrita sólo por fuentes de terceros.",
+        "traba": "HTTP 500 · el sitio está fallando, no bloqueando.",
+    },
 ]
 
 
