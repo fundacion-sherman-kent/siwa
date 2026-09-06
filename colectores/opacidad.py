@@ -208,7 +208,7 @@ def recolectar():
         colector="opacidad",
         capa="publico",
         fuente="Fundación Sherman Kent — Índice de Opacidad, edición cero",
-        url_fuente="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#opacidad",
+        url_fuente=f"{comun.BASE}/sitio/index.html#opacidad",
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,

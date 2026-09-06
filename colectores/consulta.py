@@ -310,7 +310,7 @@ def recolectar():
         colector="consulta",
         capa="publico",
         fuente="Fundación Sherman Kent — consulta dirigida a la fuente primaria",
-        url_fuente="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#consulta",
+        url_fuente=f"{comun.BASE}/sitio/index.html#consulta",
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,

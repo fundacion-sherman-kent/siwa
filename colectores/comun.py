@@ -32,10 +32,17 @@ FIABILIDAD = ("A", "B", "C", "D", "E", "F")
 # La atribucion viaja DENTRO de cada archivo, no solo en la pantalla. Quien se
 # lleve el dato crudo se lleva tambien de quien es el trabajo: es la unica forma
 # de que el credito sobreviva a una descarga.
+# LA DIRECCION DEL REGISTRO, EN UN SOLO LUGAR. Hasta la mudanza a dominio propio
+# —6 de septiembre de 2026— estuvo escrita a mano en DOCE archivos, y encontrarlas
+# todas fue trabajo de arqueologia. Si el registro vuelve a mudarse se cambia aca,
+# se corren `herramientas/puertas.py` y `herramientas/novedades.py`, y listo.
+BASE = "https://siwa.fundacionkent.org"
+SITIO_URL = f"{BASE}/sitio/index.html"
+
 ATRIBUCION = {
     "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
     "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
-    "sitio": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
+    "sitio": SITIO_URL,
     "uso": ("Acceso libre y gratuito. Se permite reproducir, redistribuir y "
             "derivar esta información CITANDO LA FUENTE de este modo: «SIWA, "
             "Fundación Sherman Kent». La recolección, la calificación de fuentes "

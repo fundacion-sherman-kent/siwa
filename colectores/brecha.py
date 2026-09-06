@@ -209,7 +209,7 @@ def _conEmbargo(padron, publica, desde, restriccion):
         colector="brecha",
         capa="publico",
         fuente="Fundación Sherman Kent — brecha entre lo registrado y lo publicado",
-        url_fuente="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#brecha",
+        url_fuente=f"{comun.BASE}/sitio/index.html#brecha",
         calificacion=comun.calificar(
             fiabilidad="B", credibilidad=2, corroborado=False,
             nota=("La credencial funciona y la consulta es correcta; lo que la cuenta no "
@@ -358,7 +358,7 @@ def recolectar():
         colector="brecha",
         capa="publico",
         fuente="Fundación Sherman Kent — brecha entre lo registrado y lo publicado",
-        url_fuente="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#brecha",
+        url_fuente=f"{comun.BASE}/sitio/index.html#brecha",
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,

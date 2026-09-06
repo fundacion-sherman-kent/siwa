@@ -300,7 +300,7 @@ def recolectar():
         colector="memoria",
         capa="publico",
         fuente="Fundación Sherman Kent — bitácora de observación de SIWA",
-        url_fuente="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#memoria",
+        url_fuente=f"{comun.BASE}/sitio/index.html#memoria",
         calificacion=calificacion,
         registros=memoria["cambios"][-400:],
         vacios=vacios,

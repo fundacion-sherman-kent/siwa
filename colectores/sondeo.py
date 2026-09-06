@@ -194,7 +194,7 @@ def recolectar():
         colector="sondeo",
         capa="publico",
         fuente="Fundación Sherman Kent — banco de pruebas de fuentes candidatas",
-        url_fuente="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#sondeo",
+        url_fuente=f"{comun.BASE}/sitio/index.html#sondeo",
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,

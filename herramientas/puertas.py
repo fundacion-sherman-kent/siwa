@@ -39,10 +39,33 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "datos" / "publico"
 SITIO = RAIZ / "sitio"
-BASE = "https://fundacion-sherman-kent.github.io/siwa"
 
 sys.path.insert(0, str(RAIZ / "colectores"))
+import comun  # noqa: E402
 import geo  # noqa: E402
+
+# La direccion vive en comun.py y se toma de ahi: no se vuelve a escribir.
+BASE = comun.BASE
+
+
+def _tarjeta() -> str:
+    """La miniatura de las puertas, con la version que le pone el sellador.
+
+    LAS TREINTA Y NUEVE PUERTAS APUNTABAN A `sitio/tarjeta.png`, QUE NO EXISTE.
+    Compartir la pagina de cualquier pais no mostraba miniatura: ninguna. Se
+    descubrio al mudar el dominio, revisando una por una las direcciones
+    generadas —que es la unica forma de encontrar un enlace roto que nadie
+    sigue—.
+    """
+    version = ""
+    testigo = SITIO / "marca" / "siwa-compartir.json"
+    if testigo.exists():
+        try:
+            d = json.loads(testigo.read_text(encoding="utf-8"))
+            version = f'?v={d["estados"]}-{d["indicadores"]}-{d["fuentes"]}'
+        except Exception:  # noqa: BLE001 — sin version igual sirve
+            pass
+    return f"{BASE}/sitio/marca/siwa-compartir.png{version}"
 
 
 def esc(t) -> str:
@@ -155,8 +178,9 @@ def cabeza(titulo: str, descripcion: str, ruta: str, ld: dict) -> str:
 <meta property="og:title" content="{esc(titulo)}">
 <meta property="og:description" content="{esc(descripcion)}">
 <meta property="og:url" content="{BASE}/{ruta}">
-<meta property="og:image" content="{BASE}/sitio/tarjeta.png">
+<meta property="og:image" content="{_tarjeta()}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{_tarjeta()}">
 <meta name="twitter:title" content="{esc(titulo)}">
 <meta name="twitter:description" content="{esc(descripcion)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">

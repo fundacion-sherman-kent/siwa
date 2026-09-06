@@ -38,7 +38,10 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "datos" / "publico"
 SALIDA = RAIZ / "novedades.xml"
-BASE = "https://fundacion-sherman-kent.github.io/siwa"
+sys.path.insert(0, str(RAIZ / "colectores"))
+import comun  # noqa: E402
+
+BASE = comun.BASE
 
 # Cuántos avisos lleva el canal. Más que esto no lo lee nadie y engorda el
 # archivo; menos, y quien lo revisa una vez por semana se pierde cosas.

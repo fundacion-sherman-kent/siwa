@@ -61,7 +61,7 @@ independientes, y el código lo verifica.
 | Qué | Dónde |
 |---|---|
 | **Repositorio (público)** | `https://github.com/fundacion-sherman-kent/siwa` — rama `main` |
-| **Sitio publicado** | `https://fundacion-sherman-kent.github.io/siwa/sitio/index.html` |
+| **Sitio publicado** | `https://siwa.fundacionkent.org/sitio/index.html` |
 | **Copia local en la máquina de la Dirección** | `C:\Users\edgar\OneDrive\Documentos\observatorio-fusk` |
 | **Bitácora y doctrina** | `C:\Users\edgar\OneDrive\Documentos\ClaudeGral\doctrina\siwa.md` (92 KB) |
 | **Catálogo de fuentes probadas y descartadas** | `ClaudeGral\fuentes\catalogo-siwa.md` |
@@ -94,7 +94,7 @@ QUÉ ES
 Una página HTML y quince colectores en Python que publican 71 indicadores sobre
 33 Estados, calificados con doctrina de inteligencia. Repositorio público:
 https://github.com/fundacion-sherman-kent/siwa
-Sitio: https://fundacion-sherman-kent.github.io/siwa/sitio/index.html
+Sitio: https://siwa.fundacionkent.org/sitio/index.html
 Leé el repositorio antes de proponer nada. El archivo sitio/index.html es la
 página entera (245 KB, sin dependencias); colectores/comun.py fija las reglas.
 

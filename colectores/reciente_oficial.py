@@ -193,7 +193,7 @@ def recolectar():
         colector="reciente_oficial",
         capa="publico",
         fuente="Catalogos oficiales de los Estados — lo mas reciente publicado",
-        url_fuente="https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
+        url_fuente=comun.SITIO_URL,
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,
