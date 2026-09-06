@@ -668,3 +668,52 @@ valor**.
 **Cidades Frágeis** es un trabajo real y su formato es el único obstáculo. Siendo
 la Fundación una casa de la región, pedir el archivo de origen es razonable. Pero
 conviene saber antes de pedir que **la serie termina en 2015**.
+
+---
+
+# SIPRI — sondeo del 6 de septiembre de 2026
+
+## Lo primero: buena parte ya está adentro
+
+El gasto militar que SIWA publica **viene del Banco Mundial, que lo toma de
+SIPRI**. Ya está en el registro y llega a **2024**: gasto sobre el producto,
+sobre el gasto del Estado, en dólares, y —lo que importa— **importación y
+exportación de armamento mayor**, que es justamente lo que el capítulo aduanero
+del colector de armas NO cubre.
+
+## Qué agrega ir a la fuente directa
+
+El archivo se descarga **sin credencial**: `SIPRI-Milex-data-1949-2025_v1.2.xlsx`,
+901 KB, diez hojas.
+
+| Agrega | Ya lo teníamos |
+|---|---|
+| **2025** (un año más que el Banco Mundial) | gasto sobre el producto |
+| **Gasto militar por habitante** | gasto en dólares |
+| Dólares constantes de 2024 | gasto sobre el gasto del Estado |
+| Totales regionales | armamento mayor importado y exportado |
+
+## La licencia, que es una condición cuantitativa
+
+> *Fair use = non-commercial **AND** the reproduction of less than 10 per cent
+> of a published data set. **Both** the above conditions must apply.*
+
+SIWA cumple lo primero. Lo segundo se cumple **si se publica una foto reciente y
+no la serie entera**: el conjunto cubre unos 170 países desde 1949, de modo que
+33 Estados en un año son el 0,3 %, y una serie de cinco años, el 1,3 %. Publicar
+todos los años de los 33 rondaría el 19 % y **quedaría fuera**.
+
+## El premio mayor está en otra base, y resistió
+
+La **base de transferencias de armas** —armamento mayor, bilateral: quién le
+vendió qué a quién— es la que llenaría el hueco que el colector de armas declara.
+Su interfaz no respondió a la automatización: el formulario exige selección de
+una lista y no acepta texto libre. Habría que insistir con la interfaz o pedirle
+a SIPRI el archivo.
+
+## Recomendación
+
+Ir a SIPRI directo por MILEX **rinde poco**: un año más y el gasto por habitante,
+a cambio de asumir una restricción de licencia donde hoy no hay ninguna —el
+Banco Mundial redistribuye con licencia abierta—. **Lo que sí vale la pena es la
+base de transferencias**, que no tenemos por ningún lado.
