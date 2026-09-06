@@ -537,3 +537,83 @@ explicación, porque no la tiene.
 
 Y tres Estados sin asientos recientes: **Santa Lucía y Dominica hasta 2022,
 Granada hasta 2023**.
+
+---
+
+# Sondeo de cobertura oficial y de bienes culturales — 6 de septiembre de 2026
+
+## 1 · Brasil: el portal central exige identidad brasileña
+
+`dados.gov.br` responde **401** sin clave, y la clave sale de «Minha Conta» tras
+entrar con cuenta **gov.br**. El propio portal lo dice: *«Para acessar o novo
+Portal de Dados Abertos é preciso ter cadastro no gov.br»*. Para un extranjero
+sin CPF eso es un muro, no un trámite.
+
+**La vuelta, probada:** el **IBGE** —el instituto de estadística— sirve sin
+credencial en `servicodados.ibge.gov.br`. Devolvía lo que parecía HTML porque
+**viene comprimido**, no porque fallara. La API está documentada y es abierta.
+
+El esquema de la clave, para cuando haga falta: encabezado
+`chave-api-dados-abertos`, endpoint `GET /dados/api/publico/conjuntos-dados`.
+
+## 2 · Perú: sirve, con una salvedad
+
+`package_list` devuelve **4.684 conjuntos de datos**. Pero `package_search` da
+404: ese portal expone unos endpoints de CKAN y no otros. Se puede sumar, leyendo
+por la puerta que sí abre.
+
+## 3 · Auditoría de organismos oficiales: 47 de 60 responden
+
+Se probaron tres familias por Estado —**estadística**, **transparencia** y
+**acceso a la información**—, 60 organismos en los 33 Estados.
+
+**Sólo tres Estados no tienen ningún organismo que responda:**
+
+| Estado | Qué pasa |
+|---|---|
+| **Costa Rica** | INEC devuelve 403 y el portal de datos no responde. Es un país de alta transparencia: esto es **bloqueo a máquinas**, no opacidad |
+| **Cuba** | ONEI devuelve HTTP 500: el sitio está fallando |
+| **Venezuela** | INE no responde, coherente con lo que ya halló el colector de archivo |
+
+**Y el hallazgo de mayor rendimiento:** los **doce Estados chicos del Caribe**
+tienen oficina de estadística que responde —Belice, Guyana, Surinam, Antigua,
+Bahamas, Barbados, Dominica, Granada, Jamaica, San Cristóbal, Santa Lucía, San
+Vicente, Trinidad— y SIWA no tiene **ninguna** fuente oficial de ellos.
+
+**Paraguay era un falso vacío:** responde en las tres familias —estadística,
+datos abiertos y acceso a la información—.
+
+### Una categoría nueva para el Índice de Opacidad
+
+Bolivia, Ecuador, Guatemala, Honduras, Costa Rica y República Dominicana
+devuelven **403 incluso identificándose como navegador**. Publican para
+personas y **le cierran la puerta a las máquinas**. Eso no es lo mismo que no
+publicar, y merece su propio estado: **«publica, pero no deja recolectar»**.
+
+## 4 · Bienes culturales: se buscó en cinco idiomas y no hay volúmenes
+
+Rastreado en español, inglés, francés, alemán, italiano y portugués: UNESCO,
+UNODC (SHERLOC), UNIDROIT, ICOM, Organización Mundial de Aduanas, INTERPOL,
+Carabinieri TPC, Kulturgutschutz Deutschland, POP del Ministerio de Cultura
+francés, IBRAM, ARCA y Trafficking Culture.
+
+**No existe fuente libre con volúmenes de tráfico por país.** INTERPOL exige
+convenio; la Aduana publica agregados regionales en PDF; SHERLOC da
+jurisprudencia y legislación, no cantidades.
+
+**Lo que sí hay, y es comparable en los 33:** el estado de ratificación de los
+convenios de **1970 (UNESCO)** y **1995 (UNIDROIT)** —tablas legibles, 124
+filas—. No mide tráfico: mide **qué está tipificado y qué no**, que es una
+pregunta distinta y contestable.
+
+## 5 · Instituto Igarapé
+
+Cuatro plataformas de alcance regional: **Monitor de Homicidios** (mundial),
+**Monitor de Política de Drogas en las Américas**, **Cidades Frágeis** (2.100
+ciudades de más de 250.000 habitantes) y **EcoCrime Data** (acaparamiento de
+tierras, tala ilegal, minería ilegal y comercio de fauna).
+
+**El problema es técnico, no de permiso:** son aplicaciones que arman el
+contenido en el navegador y sirven una cáscara de 0 a 10 KB. El robot no tiene
+navegador. Habría que hallar el archivo de datos que cada una consume, o pedirlo
+—y siendo la Fundación una casa de la región, pedirlo es razonable—.
