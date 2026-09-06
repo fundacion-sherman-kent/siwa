@@ -33,10 +33,23 @@
 
 <link rel="icon" href="sitio/marca/fusk-icono-color.png" type="image/png">
 
-<!-- El visitante entra al registro solo. La espera es de un segundo y no de
-     cero: con cero, el rastreador que sí ejecuta la redirección no alcanza a
-     leer la página, y el lector no llega a ver de qué se trata. -->
-<meta http-equiv="refresh" content="1; url=sitio/index.html">
+<!-- EL VISITANTE NO DEBE VER ESTA PÁGINA. Antes había una espera de un segundo
+     para que el rastreador alcanzara a leer las etiquetas, y el precio lo pagaba
+     el lector: un segundo entero mirando una pantalla intermedia con un botón
+     que nadie pidió.
+
+     Y había algo peor, que no se veía: al volver atrás desde el registro, el
+     navegador caía acá y la espera lo empujaba de nuevo hacia adelante. El botón
+     de retroceso quedaba inutilizado.
+
+     Se resuelve con `replace`, que salta ANTES de que se pinte nada y NO deja
+     rastro en el historial, de modo que retroceder funciona. El rastreador no
+     pierde nada: las etiquetas están arriba de este guion y se leen igual, y el
+     `canonical` ya manda la señal al registro. El `noscript` cubre a quien tenga
+     el guion apagado. Se conserva la consulta y el ancla: quien comparta
+     «…/?pais=ARG» llega a Argentina, no a la portada. -->
+<script>location.replace('sitio/index.html' + location.search + location.hash);</script>
+<noscript><meta http-equiv="refresh" content="0; url=sitio/index.html"></noscript>
 
 <style>
   :root{ --navy:#00121E; --orange:#FB6500; --crema:#F4F2EC; --gris:#9fb0c4; --linea:#1d3346; }
@@ -91,7 +104,7 @@
   <a class="entrar" href="sitio/index.html">Entrar al registro</a>
 
   <p class="pie">
-    Si el navegador no continúa solo, entrá por el botón.<br>
+    Si tenés el guion apagado, entrá por el botón.<br>
     Acceso libre citando «SIWA, Fundación Sherman Kent» ·
     <a href="https://fundacionkent.org/?utm_source=siwa&amp;utm_medium=registro&amp;utm_campaign=portada&amp;utm_content=portada">fundacionkent.org</a>
   </p>
