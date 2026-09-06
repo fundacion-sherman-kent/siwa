@@ -819,6 +819,10 @@
     font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;font-size:12.5px;
   }
   .eje-linea .p{font-size:9.5px;color:#5f7286;min-width:38px;text-align:right;}
+  .eje-linea.opacidad{border-top:1px solid rgba(255,255,255,.10);margin-top:5px;padding-top:6px;}
+  .eje-linea.opacidad .e{color:#c9a6ff;font-weight:600;}
+  .eje-linea.opacidad .v{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;
+    letter-spacing:.2px;text-align:right;min-width:auto;}
   .eje-linea.general{
     border-bottom:1px solid rgba(255,255,255,.10);padding-bottom:5px;margin-bottom:3px;
   }
@@ -3614,10 +3618,30 @@
       .concat(r.ejes.map(x => fila(x.eje, x.valor, x.indicadores,
                                    x.eje === EJE_SIN_ORIENTAR ? 'magnitud' : '')))
       .filter(Boolean);
+
+    // LA OPACIDAD VA EN LA FICHA, junto a los ejes. Es una de las medidas
+    // propias de la casa y estaba solo en su seccion: quien miraba el mapa no
+    // la veia nunca. NO es una cifra sino un ESTADO, y «sin verificar» no
+    // significa opaco: significa que la Oficina todavia no revisó los cuatro
+    // pasos. Se dice con esas palabras para que nadie lo lea al reves.
+    const OPACO = {
+      publicado:     {rot:'publica',        nota:'publica el consolidado'},
+      parcial:       {rot:'parcial',        nota:'publica, pero incompleto'},
+      sin_verificar: {rot:'sin verificar',  nota:'la Oficina todavía no lo revisó: NO quiere decir opaco'},
+    };
+    let pieOpacidad = '';
+    const op = (almacen.opacidad && almacen.opacidad.registros || []).find(x => x.iso === iso);
+    if(op){
+      const q = OPACO[op.estado] || {rot: op.estado, nota: ''};
+      filas.push('<div class="eje-linea opacidad"><span class="e">Índice de Opacidad</span>'
+        + '<span class="v">' + esc(q.rot) + '</span><span class="p"></span></div>');
+      if(q.nota) pieOpacidad = ' · <i>' + esc(q.nota) + '</i>';
+    }
+
     if(!filas.length) return '';
     return '<div class="ejes-linea-caja">' + filas.join('')
       + '<div class="eje-pie">0 el mejor de la región · 100 el peor'
-      + ' · <i>Defensa es tamaño, no calidad</i></div></div>';
+      + ' · <i>Defensa es tamaño, no calidad</i>' + pieOpacidad + '</div></div>';
   }
 
   function pintarFichaMapa(iso, nombre, bloque){
@@ -3637,9 +3661,13 @@
     const proys = [1,2,4].map(n=>({n, pr:proyeccionDe(iso, n)})).filter(x=>x.pr);
     // El resumen por eje se muestra IGUAL sin dato en la capa elegida: que
     // Uruguay no tenga cifra de terrorismo no quita que tenga situacion general.
-    // Repetir la ficha de arriba no informa: los ejes van solo si el país
-    // bajo el cursor es OTRO, que es cuando la cifra sirve para comparar.
-    const mini = (iso === paisFiltro) ? '' : ejesMini(iso);
+    //
+    // Y SE MUESTRA TAMBIEN EN EL PAIS YA ELEGIDO. Antes se lo ocultaba por no
+    // repetir lo de arriba, pero el efecto era el contrario del buscado: quien
+    // filtraba por su pais y despues lo señalaba en el mapa —que es lo que hace
+    // cualquiera— se quedaba SIN los ejes y sin la opacidad, justo en el Estado
+    // que mas le importa. La ficha del mapa se lee sola.
+    const mini = ejesMini(iso);
     if(nivel === undefined && !proys.length){
       caja.innerHTML = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>
         <span class="vacia">Sin dato en esta capa.</span>` + mini;
