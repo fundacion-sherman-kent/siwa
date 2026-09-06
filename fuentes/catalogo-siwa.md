@@ -617,3 +617,54 @@ tierras, tala ilegal, minería ilegal y comercio de fauna).
 contenido en el navegador y sirven una cáscara de 0 a 10 KB. El robot no tiene
 navegador. Habría que hallar el archivo de datos que cada una consume, o pedirlo
 —y siendo la Fundación una casa de la región, pedirlo es razonable—.
+
+---
+
+# Igarapé: la técnica, y por qué el dato no está donde parecía
+
+La Dirección pidió investigar la técnica y buscar los datos, «deben ser
+públicos». Lo son. El problema es otro.
+
+## Cómo sirven los datos
+
+Sus plataformas son aplicaciones que arman todo en el navegador y traen los
+datos como **archivos estáticos**, sin credencial. Se los halla mirando qué pide
+la propia página —la misma técnica que abrió CITES y el índice de crimen
+organizado—:
+
+```
+/resources/datasets.json                          el catálogo
+/resources/data/<conjunto>/metadata/<...>.json    las columnas
+/resources/data/<conjunto>/data/t20/...           los datos, en mosaicos
+```
+
+## Qué se encontró, plataforma por plataforma
+
+| Plataforma | Estado | Datos |
+|---|---|---|
+| **Monitor de Homicidios** | **muerta** | cáscara de 836 bytes con sólo el medidor de visitas |
+| **EcoCrime Data** | cáscara de 1,1 KB | ninguno |
+| **Cidades Frágeis** | viva | 33.601 registros, 2.100 ciudades, 23 columnas… en **formato binario propietario** de su visor, y la serie **termina en 2015** |
+| **urbanradar** (GitHub) | vivo | pilotos municipales de Brasil y Tanzania: no es regional |
+| **armsglobe** (GitHub) | archivo abierto | **81.638 registros de comercio bilateral de armas, 31 de 33 Estados** |
+
+## El hallazgo que cambia la decisión
+
+El conjunto de armas trae una categoría llamada **`930330`**. Eso es un **código
+arancelario de Naciones Unidas**. Igarapé no produjo ese dato: **lo derivó de UN
+Comtrade**, y su copia va de **1992 a 2010**.
+
+**SIWA ya le habla a Comtrade.** El colector de comercio consulta
+`comtradeapi.un.org` para la brecha espejo. Se probó pedirle el capítulo 93
+—armas y municiones— para Argentina en 2023: **102 socios comerciales con su
+valor**.
+
+> **Conclusión: no hay que importar el archivo de Igarapé.** Hay que pedirle a la
+> fuente original lo mismo, trece años más nuevo, con un colector que ya existe y
+> una consulta que ya funciona. Copiar la copia vieja habría sido el error.
+
+## Lo que sí valdría pedirles
+
+**Cidades Frágeis** es un trabajo real y su formato es el único obstáculo. Siendo
+la Fundación una casa de la región, pedir el archivo de origen es razonable. Pero
+conviene saber antes de pedir que **la serie termina en 2015**.
