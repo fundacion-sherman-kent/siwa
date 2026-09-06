@@ -206,6 +206,66 @@ def _sellarLeeme() -> int:
     return len(filas)
 
 
+def _versionarTarjeta(ruta: Path, c: dict) -> int:
+    """Le pone version a la direccion de la tarjeta, para que las redes la relean.
+
+    LinkedIn, X, Facebook y WhatsApp GUARDAN la miniatura la primera vez que
+    alguien comparte el enlace y no vuelven a pedirla. Se puede rehacer la imagen
+    y seguir mostrandose la vieja durante semanas.
+
+    La version no es un numero inventado: son LAS PROPIAS CIFRAS de la tarjeta.
+    Cuando entra un colector, la direccion cambia sola y las redes van a buscar
+    la imagen nueva. Cuando no cambia nada, la direccion tampoco: no se fuerza
+    una recarga porque si.
+    """
+    texto = ruta.read_text(encoding="utf-8")
+    version = f'{c["estados"]}-{c["indicadores"]}-{c["fuentes"]}'
+    nuevo, n = re.subn(
+        r'(siwa-compartir\.png)(\?v=[0-9-]+)?"',
+        rf'\g<1>?v={version}"', texto)
+    if n and nuevo != texto:
+        ruta.write_text(nuevo, encoding="utf-8")
+        print(f"[sellar-portada] {ruta.relative_to(RAIZ)}: tarjeta versionada como "
+              f"v={version} "
+              f"({n} direcciones)")
+    return n
+
+
+def _revisarTarjeta(c: dict) -> bool:
+    """Avisa cuando la tarjeta de compartir quedó con cifras viejas.
+
+    LA TARJETA NO SE PUEDE REDIBUJAR ACA. Es un PNG y hace falta Pillow, que el
+    robot no tiene ni va a tener: el registro se sostiene sobre biblioteca
+    estándar. Pero SI se puede comprobar que está al día, porque quien la dibuja
+    deja al lado un archivo con las cifras que usó.
+
+    Es exactamente el problema de la portada, un escalón más lejos: la tarjeta
+    decía «71 indicadores · 15 fuentes» cuando ya eran 69 y 27, y es LA PRIMERA
+    COSA que ve quien recibe el enlace compartido. Nadie lo notó porque una
+    imagen no se relee.
+    """
+    testigo = RAIZ / "sitio" / "marca" / "siwa-compartir.json"
+    if not testigo.exists():
+        print("[sellar-portada] AVISO: la tarjeta de compartir no dejó testigo de "
+              "sus cifras; no se puede saber si está al día.", file=sys.stderr)
+        return False
+    try:
+        d = json.loads(testigo.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001 — un testigo ilegible es un testigo ausente
+        return False
+
+    viejas = {k: d.get(k) for k in ("estados", "indicadores", "fuentes")}
+    nuevas = {k: c[k] for k in ("estados", "indicadores", "fuentes")}
+    if viejas == nuevas:
+        return True
+    difiere = ", ".join(f"{k}: la tarjeta dice {viejas[k]} y son {nuevas[k]}"
+                        for k in nuevas if viejas[k] != nuevas[k])
+    print(f"[sellar-portada] AVISO: LA TARJETA DE COMPARTIR QUEDO VIEJA ({difiere}). "
+          "Es la primera imagen que ve quien recibe el enlace. Se rehace con: "
+          "python herramientas/tarjeta-compartir.py", file=sys.stderr)
+    return False
+
+
 def sellar() -> int:
     c = _cifras()
     total, faltantes = 0, []
@@ -232,6 +292,10 @@ def sellar() -> int:
 
     _sellarMapa()
     _sellarLeeme()
+    for ruta in (SITIO, PORTADA):
+        if ruta.exists():
+            _versionarTarjeta(ruta, c)
+    _revisarTarjeta(c)
     print(f"[sellar-portada] {c['indicadores']} indicadores · {c['fuentes']} fuentes · "
           f"{c['estados']} Estados · {total} lugares en total")
     return 1 if enTodas else 0
