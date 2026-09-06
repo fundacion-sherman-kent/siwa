@@ -1,0 +1,87 @@
+# EL LATIDO — para que el robot no se apague solo a los sesenta días.
+#
+# POR QUÉ EXISTE
+# --------------
+# GitHub declara: «en un repositorio público, los flujos programados se
+# desactivan automáticamente cuando no hay actividad en el repositorio durante
+# 60 días». La documentación NO define qué cuenta como «actividad», y ahí está
+# el riesgo: el robot de SIWA empuja cada hora, pero lo hace con la identidad de
+# máquina que le da GitHub, no con la de una persona.
+#
+# Y hay un hecho documentado que hace sospechar lo peor: GitHub NO dispara
+# flujos con los commits hechos con esa identidad, justamente para evitar
+# bucles. Si no los considera suficientes para disparar, es muy probable que
+# tampoco los considere «actividad».
+#
+# No se puede confirmar sin esperar sesenta días a que pase —o no pase—. Así que
+# no se apuesta: se late.
+#
+# CÓMO FUNCIONA
+# -------------
+# Dos veces por mes, este flujo escribe un archivo con la fecha y lo empuja
+# usando una credencial DE PERSONA, no la de máquina. Eso es actividad de
+# usuario sin ninguna duda, y reinicia el reloj de los sesenta días mucho antes
+# de que se acerque.
+#
+# Se late cada quince días y no cada cincuenta y nueve a propósito: si un latido
+# falla —la credencial venció, GitHub estaba caído—, quedan tres oportunidades
+# más antes de que el plazo se cumpla.
+#
+# QUÉ HACE FALTA, UNA SOLA VEZ
+# -----------------------------
+# Un secreto llamado `TOKEN_LATIDO` con una credencial personal que tenga
+# permiso de escritura sobre este repositorio. Si falta, este flujo FALLA A
+# PROPÓSITO y GitHub avisa por correo: es preferible una alarma hoy a un
+# apagón silencioso en dos meses.
+
+name: Latido
+
+on:
+  schedule:
+    # Los días 1 y 15 de cada mes. Cuatro latidos por cada plazo de sesenta días.
+    - cron: "0 6 1,15 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  latir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comprobar que la credencial está cargada
+        run: |
+          if [ -z "${{ secrets.TOKEN_LATIDO }}" ]; then
+            echo "::error::Falta el secreto TOKEN_LATIDO. Sin él, el latido empuja"
+            echo "::error::con identidad de máquina y NO sirve para el propósito."
+            echo "::error::Se crea en Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
+      - name: Traer el repositorio con la credencial de persona
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.TOKEN_LATIDO }}
+
+      - name: Dejar constancia del latido
+        run: |
+          mkdir -p datos/publico/estado
+          cat > datos/publico/estado/latido.json <<FIN
+          {
+            "que_es": "Señal de vida del repositorio. Existe para que GitHub no desactive el robot por inactividad a los 60 días.",
+            "latido": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
+            "proximo_aproximado": "el día 1 o 15 siguiente",
+            "por_que": "Los commits del robot llevan identidad de máquina y GitHub no los trata como actividad de usuario. Este los lleva de persona."
+          }
+          FIN
+
+      - name: Empujar el latido
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git add datos/publico/estado/latido.json
+          git commit -m "Latido $(date -u +'%Y-%m-%d') — señal de vida para que el robot no se apague"
+          for intento in 1 2 3; do
+            git push && break
+            git pull --no-rebase --no-edit origin main || exit 1
+          done
