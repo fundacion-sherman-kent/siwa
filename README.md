@@ -68,7 +68,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**28 fuentes en servicio.** Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**30 fuentes en servicio.** Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -84,6 +84,8 @@ python colectores/focos.py
 | `consulta` | Fundación Sherman Kent — consulta dirigida a la fuente primaria | `A-2` | 33 | 6 |
 | `contratacion` | Registro de publicadores de contrataciones abiertas | `B-2` | 33 | 5 |
 | `copernicus` | Copernicus — catálogo de observación de la Tierra de la Unión Europea | `A-2` | 33 | 6 |
+| `crimen_organizado` | Índice Global de Crimen Organizado — Global Initiative Against Transnational Organized Crime | `B-3` | 33 | 7 |
+| `designados` | Consejo de Seguridad de las Naciones Unidas — lista consolidada de sanciones | `A-2` | 33 | 6 |
 | `desplazamiento-serie` | ACNUR — Refugee Data Finder | `A-2` | 33 | 7 |
 | `desplazamiento` | ACNUR — Refugee Data Finder | `A-2` | 33 | 7 |
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |

@@ -118,6 +118,19 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/cites.py
 
+      # Indice bienal: no cambia de una hora a otra. Va en la corrida diaria.
+      - name: Crimen organizado (Global Initiative)
+        id: crimen
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/crimen_organizado.py
+
+      - name: Designados por el Consejo de Seguridad
+        id: designados
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/designados.py
+
       # Cada hora: es la unica capa que ve lo que esta ardiendo AHORA.
       - name: Focos de calor (NASA FIRMS)
         id: focos
@@ -270,6 +283,8 @@ jobs:
           [ "${{ steps.sanciones.outcome }}" = "failure" ] && { echo "Falló el colector de sanciones."; fallo=1; }
           [ "${{ steps.prensa.outcome }}" = "failure" ] && { echo "Falló el colector de libertad de prensa."; fallo=1; }
           [ "${{ steps.cites.outcome }}" = "failure" ] && { echo "Falló el colector de especies protegidas."; fallo=1; }
+          [ "${{ steps.crimen.outcome }}" = "failure" ] && { echo "Falló el colector de crimen organizado."; fallo=1; }
+          [ "${{ steps.designados.outcome }}" = "failure" ] && { echo "Falló el colector de designados."; fallo=1; }
           [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
           [ "${{ steps.brecha.outcome }}" = "failure" ] && { echo "Falló el colector de la brecha."; fallo=1; }
           [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }
