@@ -89,6 +89,11 @@ def _reglas(c: dict) -> list:
         (r'(<meta name="twitter:description" content=")\d+( Estados, )\d+'
          r'( indicadores, )\d+( fuentes)',
          rf'\g<1>{e}\g<2>{i}\g<3>{f}\g<4>'),
+        # La portada corta lo dice con OTRA redaccion, y por eso se le escapaba:
+        # decia «de quince fuentes publicas» cuando ya eran veintisiete. Escrito
+        # ademas con LETRAS, que envejece igual y encima no se puede sellar.
+        (r'(Se recolecta solo, todos los días, de )\d+( fuentes públicas)',
+         rf'\g<1>{f}\g<2>'),
         (r'(los )\d+( Estados de América Latina y el Caribe: )\d+( indicadores de '
          r'seguridad, defensa, gobernanza y desarrollo, recolectados de forma '
          r'automática de )[a-zñáéíóú]+|(\d+)( fuentes públicas)',
