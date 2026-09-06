@@ -68,11 +68,12 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**30 fuentes en servicio.** Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**31 fuentes en servicio.** Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
 | `archivo` | Archivo público de la web — copias fechadas de los portales oficiales | `B-2` | 33 | 6 |
+| `armas` | Comtrade de Naciones Unidas — capítulo 93: armas, municiones y sus partes | `A-2` | 33 | 8 |
 | `banco-mundial` | Banco Mundial — indicadores de desarrollo y gobernanza | `A-2` | 33 | 8 |
 | `brecha` | Fundación Sherman Kent — brecha entre lo registrado y lo publicado | `B-2` | 33 | 5 |
 | `bti` | Índice de Transformación Bertelsmann (BTI), edición 2024 | `B-3` | 22 | 7 |
