@@ -234,6 +234,16 @@ jobs:
       # Las cifras de la portada —las que ve quien comparte el enlace y las que
       # lee un buscador— se recalculan acá. Escritas a mano envejecen solas: en
       # dos dias seguidos quedaron diciendo «15 fuentes» cuando eran 16 y 19.
+      # EL INDICE DE OPACIDAD VA ULTIMO ENTRE LOS COLECTORES, y no es un capricho
+      # de orden: se DERIVA de otros seis —explorador, archivo, contratacion,
+      # armas, cites y oficiales—. Si corriera antes, calcularia con los datos de
+      # ayer y nadie lo notaria.
+      - name: Indice de Opacidad (edicion uno, el puntaje)
+        id: indice_opacidad
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/indice_opacidad.py
+
       # Las cuarenta puertas se GENERAN del padrón: una por región, zona y
       # Estado. Escribirlas a mano seria mantener cuarenta copias, que es la
       # duplicacion que este registro ya pago dos veces.
@@ -302,6 +312,7 @@ jobs:
           [ "${{ steps.designados.outcome }}" = "failure" ] && { echo "Falló el colector de designados."; fallo=1; }
           [ "${{ steps.armas.outcome }}" = "failure" ] && { echo "Falló el colector de comercio de armas."; fallo=1; }
           [ "${{ steps.explorador.outcome }}" = "failure" ] && { echo "Falló el explorador de puertas."; fallo=1; }
+          [ "${{ steps.indice_opacidad.outcome }}" = "failure" ] && { echo "Falló el Índice de Opacidad."; fallo=1; }
           [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
           [ "${{ steps.brecha.outcome }}" = "failure" ] && { echo "Falló el colector de la brecha."; fallo=1; }
           [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }

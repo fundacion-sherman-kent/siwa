@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 31 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-31">
+<meta property="og:description" content="33 Estados, 69 indicadores, 32 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-32">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 31 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-31">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 32 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-32">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 31 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 32 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -829,6 +829,18 @@
     font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;font-size:12.5px;
   }
   .eje-linea .p{font-size:9.5px;color:#5f7286;min-width:38px;text-align:right;}
+  .indice-caja{margin:14px 0 6px;border:1px solid var(--line);border-radius:10px;
+    background:rgba(255,255,255,.02);padding:16px 18px;}
+  .indice-caja .escala{font-size:11px;color:#7d90a8;margin:0 0 12px;}
+  .indice-fila{display:grid;grid-template-columns:26px 1fr 62px;gap:10px;align-items:center;
+    padding:5px 0;border-top:1px solid rgba(255,255,255,.06);font-size:12.5px;}
+  .indice-fila:first-of-type{border-top:none;}
+  .indice-fila .pu{color:#5f7286;font-size:10.5px;text-align:right;}
+  .indice-fila .pa{color:#E8EEF5;}
+  .indice-fila .va{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right;}
+  .indice-barra{height:5px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden;
+    grid-column:2 / 4;margin:-2px 0 3px;}
+  .indice-barra i{display:block;height:100%;background:var(--orange);}
   .eje-linea.opacidad{border-top:1px solid rgba(255,255,255,.10);margin-top:5px;padding-top:6px;}
   .eje-linea.opacidad .e{color:#c9a6ff;font-weight:600;}
   .eje-linea.opacidad .v{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;
@@ -2080,6 +2092,7 @@
            <b>no cuenta como opacidad</b>.</p>
       </div>
       <div class="procedencia" id="proc-opacidad">Cargando el registro…</div>
+      <div class="indice-caja" id="indice-opacidad">Cargando el puntaje…</div>
       <div class="opacidad-titular" id="titular-opacidad"></div>
       <div class="materias" id="lista-opacidad"></div>
       <div id="vac-opacidad"></div>
@@ -2335,7 +2348,8 @@
                      ['crimen','Índice Global de Crimen Organizado'],
                      ['designados','ONU — lista consolidada de sanciones'],
                      ['armas','Comtrade — comercio de armas y municiones'],
-                     ['explorador','Oficina — exploración de puertas oficiales']];
+                     ['explorador','Oficina — exploración de puertas oficiales'],
+                     ['indice','Oficina — Índice de Opacidad, edición uno']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -3708,12 +3722,25 @@
       sin_verificar: {rot:'sin verificar',  nota:'la Oficina todavía no lo revisó: NO quiere decir opaco'},
     };
     let pieOpacidad = '';
+    // EL PUNTAJE PRIMERO, que es lo que la Dirección pidió: 0 a 100 con su
+    // puesto. La verificación manual de los cuatro pasos va debajo, porque es
+    // otra cosa —un juicio del equipo— y no debe confundirse con la medición.
+    const ind = (almacen.indice && almacen.indice.registros || []).find(x => x.iso === iso);
+    if(ind && ind.estado === 'medido'){
+      filas.push('<div class="eje-linea opacidad"><span class="e">Índice de Opacidad</span>'
+        + '<span class="v">' + cifra(ind.opacidad) + '</span>'
+        + '<span class="p">' + ind.puesto + '.º/' + ind.de + '</span></div>');
+      pieOpacidad = ' · <i>opacidad: 0 el más transparente, 100 el más opaco</i>';
+    } else if(ind){
+      filas.push('<div class="eje-linea opacidad"><span class="e">Índice de Opacidad</span>'
+        + '<span class="v">sin medir</span><span class="p"></span></div>');
+      pieOpacidad = ' · <i>sin medir NO quiere decir opaco: faltan actos con evidencia</i>';
+    }
     const op = (almacen.opacidad && almacen.opacidad.registros || []).find(x => x.iso === iso);
     if(op){
       const q = OPACO[op.estado] || {rot: op.estado, nota: ''};
-      filas.push('<div class="eje-linea opacidad"><span class="e">Índice de Opacidad</span>'
+      filas.push('<div class="eje-linea opacidad"><span class="e">Verificación de los 4 pasos</span>'
         + '<span class="v">' + esc(q.rot) + '</span><span class="p"></span></div>');
-      if(q.nota) pieOpacidad = ' · <i>' + esc(q.nota) + '</i>';
     }
 
     if(!filas.length) return '';
@@ -4573,6 +4600,35 @@
   // publica»: para afirmarlo hay que haber revisado los cuatro pasos.
   const OP_ROTULO = {publicado:'Publica', parcial:'Parcial', sin_verificar:'Sin verificar'};
 
+  function indiceOpacidadVista(){
+    const caja = document.getElementById('indice-opacidad');
+    const d = almacen.indice; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros.filter(x => x.estado === 'medido');
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+    if(!lista.length){ caja.innerHTML = '<p class="escala">Sin Estados medidos en este ámbito.</p>'; return; }
+
+    const orden = lista.slice().sort((a,b) => b.opacidad - a.opacidad);
+    const actos = (d.formula && d.formula.actos) || [];
+
+    caja.innerHTML =
+      '<p class="escala"><b>0 el más transparente · 100 el más opaco.</b> Promedio simple de '
+      + actos.length + ' actos observables, con pesos iguales —una elección, y por eso se dice—. '
+      + 'Un acto sin evidencia <b>no puntúa</b>: no suma ni resta.</p>'
+      + orden.map(x =>
+          '<div class="indice-fila"><span class="pu">' + x.puesto + '.º</span>'
+          + '<span class="pa">' + esc(x.pais) + '</span>'
+          + '<span class="va">' + cifra(x.opacidad) + '</span></div>'
+          + '<div class="indice-barra"><i style="width:' + Math.max(1, x.opacidad) + '%"></i></div>'
+        ).join('')
+      + '<p class="escala" style="margin:12px 0 0">Los ' + actos.length + ' actos: '
+      + esc(actos.map(a => a.rotulo).join(' · ')) + '.<br>'
+      + '<b>No se compara con el índice de percepción de corrupción</b>: aquél promedia '
+      + 'encuestas a expertos y éste mide actos que cualquiera comprueba repitiendo la '
+      + 'consulta. Contestan preguntas distintas.</p>';
+  }
+
   function opacidadVista(){
     const caja = document.getElementById('lista-opacidad');
     const tit  = document.getElementById('titular-opacidad');
@@ -4845,6 +4901,7 @@
     paso('consulta dirigida', consultaVista);
     paso('publicación oficial reciente', recienteVista);
     paso('padrón de fuentes oficiales', oficialesVista);
+    paso('puntaje de opacidad', indiceOpacidadVista);
     paso('índice de opacidad', opacidadVista);
     paso('las seis materias', materiasVista);
     paso('de la Fundación', fundacionVista);
@@ -7317,6 +7374,15 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-reciente','publicación oficial reciente',err.message);
       document.getElementById('proc-reciente').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('indice_opacidad.json'), traer('estado/indice_opacidad.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.indice=d; const meta=d.procedencia;
+      vacios+=pintarVacios('vac-opacidad',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('indice-opacidad','puntaje de opacidad',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('indice-opacidad','puntaje de opacidad',err.message); marcador(); });
 
   Promise.all([traer('opacidad.json'), traer('estado/opacidad.json').catch(()=>null)])
     .then(([d,estado])=>{

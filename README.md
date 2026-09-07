@@ -68,7 +68,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**32 fuentes en servicio.** Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**33 fuentes en servicio.** Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -92,6 +92,7 @@ python colectores/focos.py
 | `explorador` | Fundación Sherman Kent — exploración de puertas de datos oficiales | `A-1` | 33 | 6 |
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
+| `indice_opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición uno | `A-1` | 33 | 10 |
 | `memoria` | Fundación Sherman Kent — bitácora de observación de SIWA | `A-2` | 33 | 5 |
 | `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 7 |
 | `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 7 |
