@@ -1,0 +1,949 @@
+{
+  "procedencia": {
+    "colector": "sismos",
+    "capa": "publico",
+    "obtenido_en": "2026-09-07T04:37:38+00:00",
+    "fuente": {
+      "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
+      "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 1,
+      "corroborado": true,
+      "nota": "Servicio geológico estatal con red instrumental propia y catálogo público revisado. Credibilidad 1 con corroboración porque el sismo es un hecho físico medido por múltiples estaciones independientes y publicado en paralelo por otros servicios sismológicos nacionales."
+    },
+    "vacios_declarados": [
+      "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
+      "**195 de los 299 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
+      "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece sólo en la ficha del primero.",
+      "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
+      "La marca de tsunami del catálogo indica que el evento **cumplió los criterios para evaluar** una alerta, no que haya habido tsunami ni daño."
+    ],
+    "restriccion_de_uso": null,
+    "cantidad": 33,
+    "atribucion": {
+      "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
+      "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+      "sitio": "https://siwa.fundacionkent.org/sitio/index.html",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información citando la fuente de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes Y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
+    }
+  },
+  "registros": [
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "bloque": "Andina",
+      "sismos": 13,
+      "mayor_magnitud": 7.4,
+      "mayor": {
+        "magnitud": 7.4,
+        "lugar": "2 km SE of San José del Palmar, Colombia",
+        "cuando": "2026-08-10T12:34:28+00:00",
+        "profundidad_km": 108.174,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjl2",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.5,
+        "lugar": "11 km N of Jordán, Colombia",
+        "cuando": "2026-09-03T16:58:46+00:00",
+        "profundidad_km": 144.678,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000te20",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.5,
+          "lugar": "11 km N of Jordán, Colombia",
+          "cuando": "2026-09-03T16:58:46+00:00",
+          "profundidad_km": 144.678,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000te20",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "30 km S of Sipí, Colombia",
+          "cuando": "2026-09-03T05:17:16+00:00",
+          "profundidad_km": 81.358,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tdu1",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "24 km WSW of Sipí, Colombia",
+          "cuando": "2026-08-29T10:50:24+00:00",
+          "profundidad_km": 58.147,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tcth",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "11 km SSW of Sipí, Colombia",
+          "cuando": "2026-08-27T16:21:22+00:00",
+          "profundidad_km": 63.685,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tca5",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.7,
+          "lugar": "19 km SW of Sipí, Colombia",
+          "cuando": "2026-08-27T15:25:29+00:00",
+          "profundidad_km": 61.381,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tc9s",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "VEN",
+      "pais": "Venezuela",
+      "bloque": "Andina",
+      "sismos": 8,
+      "mayor_magnitud": 7.2,
+      "mayor": {
+        "magnitud": 7.2,
+        "lugar": "20 km E of San Felipe, Venezuela",
+        "cuando": "2026-06-24T22:04:31+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t7zc",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.5,
+        "lugar": "30 km ENE of Yaguaraparo, Venezuela",
+        "cuando": "2026-08-12T08:14:47+00:00",
+        "profundidad_km": 99.27,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tl9r",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.5,
+          "lugar": "30 km ENE of Yaguaraparo, Venezuela",
+          "cuando": "2026-08-12T08:14:47+00:00",
+          "profundidad_km": 99.27,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tl9r",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "1 km SW of Yumare, Venezuela",
+          "cuando": "2026-08-02T03:16:44+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thk4",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "26 km NE of Yaguaraparo, Venezuela",
+          "cuando": "2026-07-13T19:59:53+00:00",
+          "profundidad_km": 88.024,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t06y",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "15 km SE of Yumare, Venezuela",
+          "cuando": "2026-07-08T23:56:00+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t0qk",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "20 km NNE of Yaguaraparo, Venezuela",
+          "cuando": "2026-07-07T08:41:36+00:00",
+          "profundidad_km": 117.121,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000talr",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "PER",
+      "pais": "Perú",
+      "bloque": "Andina",
+      "sismos": 20,
+      "mayor_magnitud": 6.7,
+      "mayor": {
+        "magnitud": 6.7,
+        "lugar": "37 km NE of Tambo, Peru",
+        "cuando": "2026-08-20T18:00:18+00:00",
+        "profundidad_km": 99.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tm81",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.7,
+        "lugar": "3 km NW of Yanacancha, Peru",
+        "cuando": "2026-08-31T11:53:26+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000td3y",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.7,
+          "lugar": "3 km NW of Yanacancha, Peru",
+          "cuando": "2026-08-31T11:53:26+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000td3y",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "42 km E of Estique, Peru",
+          "cuando": "2026-08-27T17:40:41+00:00",
+          "profundidad_km": 141.956,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tcc3",
+          "tsunami": false
+        },
+        {
+          "magnitud": 6.7,
+          "lugar": "37 km NE of Tambo, Peru",
+          "cuando": "2026-08-20T18:00:18+00:00",
+          "profundidad_km": 99.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tm81",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.6,
+          "lugar": "43 km SSW of Sechura, Peru",
+          "cuando": "2026-08-11T08:00:34+00:00",
+          "profundidad_km": 38.255,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjwd",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.6,
+          "lugar": "27 km NW of Puerto Ocopa, Peru",
+          "cuando": "2026-08-09T15:40:04+00:00",
+          "profundidad_km": 87.264,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjfr",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "bloque": "Cono Sur",
+      "sismos": 22,
+      "mayor_magnitud": 5.3,
+      "mayor": {
+        "magnitud": 5.3,
+        "lugar": "43 km NW of San Antonio de los Cobres, Argentina",
+        "cuando": "2026-07-24T19:38:41+00:00",
+        "profundidad_km": 189.718,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t36n",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 5.1,
+        "lugar": "69 km E of Antofagasta de la Sierra, Argentina",
+        "cuando": "2026-09-05T11:37:12+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tej2",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 5.1,
+          "lugar": "69 km E of Antofagasta de la Sierra, Argentina",
+          "cuando": "2026-09-05T11:37:12+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tej2",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "41 km ESE of Tinogasta, Argentina",
+          "cuando": "2026-08-24T05:04:04+00:00",
+          "profundidad_km": 129.457,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tn29",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "77 km WNW of El Aguilar, Argentina",
+          "cuando": "2026-08-23T17:56:30+00:00",
+          "profundidad_km": 223.201,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tmzy",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.7,
+          "lugar": "81 km W of San Antonio de los Cobres, Argentina",
+          "cuando": "2026-08-20T03:09:06+00:00",
+          "profundidad_km": 166.707,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tm1m",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "99 km W of San Antonio de los Cobres, Argentina",
+          "cuando": "2026-08-16T21:06:07+00:00",
+          "profundidad_km": 174.627,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/usd0015ea6",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "NIC",
+      "pais": "Nicaragua",
+      "bloque": "México y Centroamérica",
+      "sismos": 2,
+      "mayor_magnitud": 5.2,
+      "mayor": {
+        "magnitud": 5.2,
+        "lugar": "9 km WSW of El Crucero, Nicaragua",
+        "cuando": "2026-06-26T11:57:24+00:00",
+        "profundidad_km": 120.132,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t8ey",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.6,
+        "lugar": "7 km NW of Belén, Nicaragua",
+        "cuando": "2026-08-02T16:09:30+00:00",
+        "profundidad_km": 135.313,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thmh",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.6,
+          "lugar": "7 km NW of Belén, Nicaragua",
+          "cuando": "2026-08-02T16:09:30+00:00",
+          "profundidad_km": 135.313,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thmh",
+          "tsunami": false
+        },
+        {
+          "magnitud": 5.2,
+          "lugar": "9 km WSW of El Crucero, Nicaragua",
+          "cuando": "2026-06-26T11:57:24+00:00",
+          "profundidad_km": 120.132,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t8ey",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "sismos": 27,
+      "mayor_magnitud": 5.1,
+      "mayor": {
+        "magnitud": 5.1,
+        "lugar": "78 km SW of San Pedro de Atacama, Chile",
+        "cuando": "2026-07-27T08:57:44+00:00",
+        "profundidad_km": 104.251,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t3m7",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.8,
+        "lugar": "33 km NE of Calama, Chile",
+        "cuando": "2026-09-06T10:39:32+00:00",
+        "profundidad_km": 115.537,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tep0",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.8,
+          "lugar": "33 km NE of Calama, Chile",
+          "cuando": "2026-09-06T10:39:32+00:00",
+          "profundidad_km": 115.537,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tep0",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "36 km WSW of Ollagüe, Chile",
+          "cuando": "2026-09-04T06:48:06+00:00",
+          "profundidad_km": 130.651,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000te8p",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.8,
+          "lugar": "29 km WSW of Salamanca, Chile",
+          "cuando": "2026-09-03T21:18:21+00:00",
+          "profundidad_km": 81.851,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000te5e",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.7,
+          "lugar": "62 km SSE of Palca, Peru",
+          "cuando": "2026-08-30T16:04:07+00:00",
+          "profundidad_km": 102.036,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tczt",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "38 km NNE of Cuya, Chile",
+          "cuando": "2026-08-28T20:44:36+00:00",
+          "profundidad_km": 87.955,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tcpf",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "bloque": "México y Centroamérica",
+      "sismos": 4,
+      "mayor_magnitud": 5.1,
+      "mayor": {
+        "magnitud": 5.1,
+        "lugar": "2 km S of Cerro de Piedra, Mexico",
+        "cuando": "2026-06-13T18:20:42+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000ssq9",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.8,
+        "lugar": "12 km E of Venustiano Carranza (Peña Blanca), Mexico",
+        "cuando": "2026-09-03T11:33:52+00:00",
+        "profundidad_km": 158.984,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tdw2",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.8,
+          "lugar": "12 km E of Venustiano Carranza (Peña Blanca), Mexico",
+          "cuando": "2026-09-03T11:33:52+00:00",
+          "profundidad_km": 158.984,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tdw2",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.6,
+          "lugar": "28 km NE of Niños Héroes, Mexico",
+          "cuando": "2026-08-19T20:06:29+00:00",
+          "profundidad_km": 178.278,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tlzp",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "26 km SSW of Las Choapas, Mexico",
+          "cuando": "2026-07-24T17:33:33+00:00",
+          "profundidad_km": 183.546,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t35u",
+          "tsunami": false
+        },
+        {
+          "magnitud": 5.1,
+          "lugar": "2 km S of Cerro de Piedra, Mexico",
+          "cuando": "2026-06-13T18:20:42+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000ssq9",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "GTM",
+      "pais": "Guatemala",
+      "bloque": "México y Centroamérica",
+      "sismos": 1,
+      "mayor_magnitud": 5,
+      "mayor": {
+        "magnitud": 5,
+        "lugar": "11 km W of La Democracia, Guatemala",
+        "cuando": "2026-07-30T06:58:55+00:00",
+        "profundidad_km": 91.052,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tgwd",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 5,
+        "lugar": "11 km W of La Democracia, Guatemala",
+        "cuando": "2026-07-30T06:58:55+00:00",
+        "profundidad_km": 91.052,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tgwd",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 5,
+          "lugar": "11 km W of La Democracia, Guatemala",
+          "cuando": "2026-07-30T06:58:55+00:00",
+          "profundidad_km": 91.052,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tgwd",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "CRI",
+      "pais": "Costa Rica",
+      "bloque": "México y Centroamérica",
+      "sismos": 1,
+      "mayor_magnitud": 4.9,
+      "mayor": {
+        "magnitud": 4.9,
+        "lugar": "10 km NNW of Cot, Costa Rica",
+        "cuando": "2026-08-24T07:37:17+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tn2j",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.9,
+        "lugar": "10 km NNW of Cot, Costa Rica",
+        "cuando": "2026-08-24T07:37:17+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tn2j",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.9,
+          "lugar": "10 km NNW of Cot, Costa Rica",
+          "cuando": "2026-08-24T07:37:17+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tn2j",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "bloque": "Andina",
+      "sismos": 4,
+      "mayor_magnitud": 4.5,
+      "mayor": {
+        "magnitud": 4.5,
+        "lugar": "70 km ENE of San Pedro de Atacama, Chile",
+        "cuando": "2026-08-29T23:26:17+00:00",
+        "profundidad_km": 158.92,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tcvp",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.5,
+        "lugar": "70 km ENE of San Pedro de Atacama, Chile",
+        "cuando": "2026-08-29T23:26:17+00:00",
+        "profundidad_km": 158.92,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tcvp",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.5,
+          "lugar": "70 km ENE of San Pedro de Atacama, Chile",
+          "cuando": "2026-08-29T23:26:17+00:00",
+          "profundidad_km": 158.92,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tcvp",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "115 km ESE of Ollagüe, Chile",
+          "cuando": "2026-07-17T22:59:11+00:00",
+          "profundidad_km": 200.042,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t1hp",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "80 km NNE of Ollagüe, Chile",
+          "cuando": "2026-07-01T08:00:50+00:00",
+          "profundidad_km": 172.608,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t9d9",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "130 km SE of Ollagüe, Chile",
+          "cuando": "2026-06-15T05:24:51+00:00",
+          "profundidad_km": 185.505,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000st08",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "PAN",
+      "pais": "Panamá",
+      "bloque": "México y Centroamérica",
+      "sismos": 1,
+      "mayor_magnitud": 4.5,
+      "mayor": {
+        "magnitud": 4.5,
+        "lugar": "3 km ENE of Santa Cruz, Panama",
+        "cuando": "2026-07-16T10:33:30+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t0xy",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.5,
+        "lugar": "3 km ENE of Santa Cruz, Panama",
+        "cuando": "2026-07-16T10:33:30+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t0xy",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.5,
+          "lugar": "3 km ENE of Santa Cruz, Panama",
+          "cuando": "2026-07-16T10:33:30+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t0xy",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "DOM",
+      "pais": "República Dominicana",
+      "bloque": "Caribe hispano y Haití",
+      "sismos": 1,
+      "mayor_magnitud": 4.5,
+      "mayor": {
+        "magnitud": 4.5,
+        "lugar": "3 km S of Sánchez, Dominican Republic",
+        "cuando": "2026-08-03T05:01:20+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thqe",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.5,
+        "lugar": "3 km S of Sánchez, Dominican Republic",
+        "cuando": "2026-08-03T05:01:20+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thqe",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.5,
+          "lugar": "3 km S of Sánchez, Dominican Republic",
+          "cuando": "2026-08-03T05:01:20+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thqe",
+          "tsunami": false
+        }
+      ]
+    },
+    {
+      "iso": "ATG",
+      "pais": "Antigua y Barbuda",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "BHS",
+      "pais": "Bahamas",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "BRB",
+      "pais": "Barbados",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "BLZ",
+      "pais": "Belice",
+      "bloque": "México y Centroamérica",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "BRA",
+      "pais": "Brasil",
+      "bloque": "Cono Sur",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "CUB",
+      "pais": "Cuba",
+      "bloque": "Caribe hispano y Haití",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "DMA",
+      "pais": "Dominica",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "ECU",
+      "pais": "Ecuador",
+      "bloque": "Andina",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "SLV",
+      "pais": "El Salvador",
+      "bloque": "México y Centroamérica",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "GRD",
+      "pais": "Granada",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "GUY",
+      "pais": "Guyana",
+      "bloque": "Guayanas",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "HTI",
+      "pais": "Haití",
+      "bloque": "Caribe hispano y Haití",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "HND",
+      "pais": "Honduras",
+      "bloque": "México y Centroamérica",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "JAM",
+      "pais": "Jamaica",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "PRY",
+      "pais": "Paraguay",
+      "bloque": "Cono Sur",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "KNA",
+      "pais": "San Cristóbal y Nieves",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "VCT",
+      "pais": "San Vicente y las Granadinas",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "LCA",
+      "pais": "Santa Lucía",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "SUR",
+      "pais": "Surinam",
+      "bloque": "Guayanas",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "TTO",
+      "pais": "Trinidad y Tobago",
+      "bloque": "Caribe oriental",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    },
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "sismos": 0,
+      "mayor_magnitud": null,
+      "mayor": null,
+      "ultimo": null,
+      "recientes": []
+    }
+  ],
+  "resumen": {
+    "ventana_dias": 90,
+    "desde": "2026-06-09",
+    "magnitud_minima": 4.5,
+    "sismos": 299,
+    "en_tierra": 104,
+    "mar_adentro": 195,
+    "estados_con_sismo": 12,
+    "estados_del_padron": 33,
+    "por_magnitud": {
+      "4,5 a 4,9": 206,
+      "5 a 5,9": 86,
+      "6 o mayor": 7
+    },
+    "consultado": "2026-09-07T04:37:38+00:00"
+  },
+  "mar": {
+    "cantidad": 195,
+    "mayores": [
+      {
+        "magnitud": 7.5,
+        "lugar": "20 km W of Catia La Mar, Venezuela",
+        "cuando": "2026-06-24T22:05:04+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t7zp",
+        "tsunami": false
+      },
+      {
+        "magnitud": 7.3,
+        "lugar": "60 km WSW of Puerto Madero, Mexico",
+        "cuando": "2026-07-17T14:48:39+00:00",
+        "profundidad_km": 22.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t1bu",
+        "tsunami": false
+      },
+      {
+        "magnitud": 6.4,
+        "lugar": "96 km SW of Puerto Madero, Mexico",
+        "cuando": "2026-07-17T15:20:06+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t1cc",
+        "tsunami": false
+      },
+      {
+        "magnitud": 6,
+        "lugar": "75 km SSW of El Progreso, Mexico",
+        "cuando": "2026-06-30T19:45:39+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000t99j",
+        "tsunami": false
+      },
+      {
+        "magnitud": 5.9,
+        "lugar": "southern East Pacific Rise",
+        "cuando": "2026-09-02T12:35:56+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tdms",
+        "tsunami": false
+      },
+      {
+        "magnitud": 5.9,
+        "lugar": "54 km SW of Brisas Barra de Suchiate, Mexico",
+        "cuando": "2026-07-28T05:35:14+00:00",
+        "profundidad_km": 13.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tgau",
+        "tsunami": false
+      },
+      {
+        "magnitud": 5.8,
+        "lugar": "71 km SW of Puerto Madero, Mexico",
+        "cuando": "2026-07-18T17:26:26+00:00",
+        "profundidad_km": 13.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t1n5",
+        "tsunami": false
+      },
+      {
+        "magnitud": 5.7,
+        "lugar": "95 km SW of Puerto Madero, Mexico",
+        "cuando": "2026-08-18T05:02:32+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tlkl",
+        "tsunami": false
+      }
+    ],
+    "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
+  },
+  "recuadro_comprobado": {
+    "mundo": 2084,
+    "recuadro": 299,
+    "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
+  }
+}

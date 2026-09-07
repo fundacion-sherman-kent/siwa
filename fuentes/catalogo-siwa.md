@@ -944,3 +944,76 @@ Va como secreto del repositorio, con el nombre `UCDP_TOKEN`. **Es el segundo
 secreto del registro**, después de la clave de NASA FIRMS. El valor lo carga la
 Dirección y no se escribe en ningún archivo, registro de corrida ni mensaje de
 error.
+
+---
+
+# Dos capas que faltaban enteras — 7 de septiembre de 2026
+
+El registro no tenía **ninguna** capa de desastres ni de sismicidad. En esta
+región eso es un hueco grande: inundación, ciclón, sequía, terremoto y erupción
+condicionan la situación de un Estado tanto como la violencia o la economía.
+
+## Desastres y emergencias — IFRC GO
+
+El sistema operativo de la Federación Internacional de la Cruz Roja y la Media
+Luna Roja. Abierto, sin credencial. **438 emergencias en cinco años, 32 de los
+33 Estados** —sólo Dominica sin registro—. Tipo, fecha, gravedad operativa y
+Estados alcanzados.
+
+**La advertencia que manda:** registra las emergencias ante las que la red
+responde o sobre las que informa, **no todos los desastres que ocurren**. Un
+Estado con sociedad nacional grande deja más asientos que uno con sociedad
+chica. **Más emergencias registradas puede significar más capacidad de
+respuesta.**
+
+### El filtro que no filtra
+
+`countries__iso3` **se ignora en silencio**: pedirle los eventos de Colombia
+devuelve los 6.065 del mundo, exactamente igual que pedirle un parámetro
+inventado. Se probó con valores cuyo resultado se conoce de antemano:
+
+| Consulta | Devuelve | Veredicto |
+|---|---|---|
+| sin filtro | 6.065 | — |
+| `regions__in=1` (Américas) | 1.300 | **filtra** |
+| `regions__in=3` (Europa) | 857 | **filtra** |
+| `regions__in=99` (inexistente) | 0 | **filtra** |
+| `countries__iso3=COL` | 6.065 | **NO filtra** |
+| `countries__iso3=ZZZ` | 6.065 | **NO filtra** |
+| `parametro_inventado=1` | 6.065 | — |
+
+Un colector que le hubiera creído al filtro por país habría publicado los
+desastres del planeta como si fueran de un solo Estado. **Se filtra por región y
+el país se cruza acá**, y la comprobación de que el filtro filtra corre en cada
+corrida: las Américas tienen que ser menos que el total y una región inexistente
+tiene que dar cero.
+
+## Sismicidad — Servicio Geológico de los Estados Unidos
+
+Servicio FDSN, abierto, sin credencial. **299 sismos de magnitud 4,5 o mayor en
+noventa días.**
+
+### La decisión de diseño que se justificó sola
+
+**195 de los 299 ocurrieron en el mar** —incluidos los dos mayores: magnitud 7,5
+frente a Venezuela y 7,3 frente a México—. Un colector que asignara cada sismo a
+un Estado y descartara lo que cae fuera de tierra firme **habría borrado
+justamente los más grandes**, que son además los que pueden generar tsunami. El
+mar es una categoría declarada, no un descarte. Y se aclara que el rótulo del
+lugar nombra la **costa más cercana**, no el Estado donde ocurrió.
+
+**No mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez
+kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros
+mar adentro. **No entra a ningún índice compuesto.**
+
+## Probadas y descartadas, con su motivo
+
+**ReliefWeb (OCHA).** Su interfaz v1 fue dada de baja —410— y la v2 **exige un
+nombre de aplicación aprobado**, que se pide por formulario. Queda como gestión.
+
+**WFP HungerMap**, **EM-DAT** y **datos de la OPS**: no se halló dirección
+pública que responda. La OPS devuelve 502.
+
+**OMS — indicadores globales (`ghoapi`).** Abierta y funciona. Queda como
+candidata: falta decidir qué indicadores de salud son comparables en los 33 sin
+repetir lo que ya entra por el Banco Mundial.

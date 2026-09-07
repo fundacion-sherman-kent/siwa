@@ -110,6 +110,12 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/prensa_libre.py
 
+      - name: Desastres y emergencias (IFRC GO)
+        id: desastres
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/desastres.py
+
       # SEGUNDO COLECTOR CON SECRETO. La tabla de pais-ano de UCDP cambia una vez
       # al ano, asi que corre en la diaria: no tiene sentido gastar peticiones del
       # tope de 5.000 diarias en preguntar cada hora por un dato anual. Si el
@@ -182,6 +188,11 @@ jobs:
         continue-on-error: true
         if: env.COMPLETA == 'true'
         run: python colectores/explorador.py
+
+      - name: Sismicidad (USGS)
+        id: sismos
+        continue-on-error: true
+        run: python colectores/sismos.py
 
       # Cada hora: es la unica capa que ve lo que esta ardiendo AHORA.
       - name: Focos de calor (NASA FIRMS)
@@ -344,6 +355,8 @@ jobs:
           [ "${{ steps.ciber.outcome }}" = "failure" ] && { echo "Falló el colector de medición de red."; fallo=1; }
           [ "${{ steps.sanciones.outcome }}" = "failure" ] && { echo "Falló el colector de sanciones."; fallo=1; }
           [ "${{ steps.prensa.outcome }}" = "failure" ] && { echo "Falló el colector de libertad de prensa."; fallo=1; }
+          [ "${{ steps.sismos.outcome }}" = "failure" ] && { echo "Falló el colector de sismicidad."; fallo=1; }
+          [ "${{ steps.desastres.outcome }}" = "failure" ] && { echo "Falló el colector de desastres y emergencias."; fallo=1; }
           [ "${{ steps.ucdp.outcome }}" = "failure" ] && { echo "Falló el colector de violencia organizada (UCDP)."; fallo=1; }
           [ "${{ steps.regimen.outcome }}" = "failure" ] && { echo "Falló el colector de régimen político."; fallo=1; }
           [ "${{ steps.trata.outcome }}" = "failure" ] && { echo "Falló el colector de trata de personas."; fallo=1; }
