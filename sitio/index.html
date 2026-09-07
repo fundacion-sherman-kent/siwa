@@ -1566,6 +1566,27 @@
       <div class="cruce" id="lista-designados"></div>
       <div id="vac-designados"></div>
         </div>
+    <div class="categoria" id="ucdp" data-nivel="2">
+      <div class="categoria-head"><h4>Violencia organizada · qué tipo hay en cada Estado</h4><span class="tag" id="tag-ucdp">—</span></div>
+      <details class="aviso-cobertura"><summary>Un cero acá no dice «no hay violencia»: dice «no llegó a 25 muertes en el año»</summary>
+        <p><b>UCDP exige 25 muertes relacionadas en un año para registrar un conflicto.</b>
+           Un Estado con violencia real por debajo de ese umbral aparece en cero. Es la
+           advertencia más importante de esta capa: <b>buena parte de la violencia de la
+           región —homicidio común, extorsión, violencia intrafamiliar— nunca entra acá</b>
+           porque no es conflicto armado organizado. Para eso están las otras capas.</p>
+        <p><b>Los tres tipos no significan lo mismo y no se suman.</b> La violencia
+           <b>estatal</b> tiene al Estado como parte; la <b>no estatal</b> ocurre entre
+           grupos armados sin el Estado, y en esta región es en buena medida disputa entre
+           organizaciones criminales; la <b>unilateral</b> es contra civiles que no se
+           defienden. Contarlas juntas produce un número que no quiere decir nada.</p>
+        <p><b>Presencia, no intensidad.</b> Esta tabla dice si hubo, no cuánto: dos Estados
+           marcados igual pueden estar a un orden de magnitud de distancia.</p>
+      </details>
+      <div class="procedencia" id="proc-ucdp">Cargando el registro…</div>
+      <div class="cruce" id="lista-ucdp"></div>
+      <div id="vac-ucdp"></div>
+        </div>
+
     <div class="categoria" id="regimen" data-nivel="1">
       <div class="categoria-head"><h4>Régimen político · qué clase de régimen es</h4><span class="tag" id="tag-regimen">—</span></div>
       <details class="aviso-cobertura"><summary>Es una casilla, no un puntaje, y ocho Estados quedan fuera</summary>
@@ -2449,6 +2470,7 @@
                      ['sondeo','Banco de pruebas de fuentes candidatas'],
                      ['prensa','RSF — libertad de prensa'],
                      ['focos','NASA FIRMS — focos de calor'],
+                     ['ucdp','UCDP — violencia organizada por Estado'],
                      ['regimen','V-Dem — Regímenes del Mundo'],
                      ['trata','Departamento de Estado — trata de personas'],
                      ['bienes','UNIDROIT — bienes culturales, convenio de 1995'],
@@ -5065,6 +5087,7 @@
     paso('comercio de armas', armasVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
+    paso('violencia organizada', ucdpVista);
     paso('régimen político', regimenVista);
     paso('trata de personas', trataVista);
     paso('bienes culturales', bienesVista);
@@ -6460,6 +6483,56 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     caja.innerHTML = html;
   }
 
+  function ucdpVista(){
+    const caja = document.getElementById('lista-ucdp');
+    const d = almacen.ucdp; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const tag = document.getElementById('tag-ucdp');
+    if(tag) tag.textContent = Object.entries(d.resumen.por_tipo || {})
+      .filter(([,n]) => n > 0).map(([r,n]) => n + ' con ' + r.toLowerCase()).join(' · ')
+      + ' · ' + d.resumen.anio;
+
+    // Se agrupa POR TIPO y no por Estado: la pregunta que esta capa contesta es
+    // que clase de violencia hay, no cuanta. Y el Estado sin ninguna marca NO se
+    // muestra como Estado en paz, porque el umbral de 25 muertes deja afuera
+    // mucho de lo que pasa en la region.
+    const conAlgo = lista.filter(x => (x.tipos_activos || []).length);
+    const sinMarca = lista.filter(x => x.en_la_fuente && !(x.tipos_activos || []).length);
+    const fuera = lista.filter(x => !x.en_la_fuente);
+
+    let html = (d.tipos || []).map(t => {
+      const paises = conAlgo.filter(x => x[t.clave]);
+      if(!paises.length) return '';
+      return '<div class="asunto"><h4>' + esc(t.rotulo)
+        + ' <span class="edad ' + (t.clave === 'unilateral' ? 'muy-viejo' : 'viejo') + '">'
+        + paises.length + '</span></h4>'
+        + '<div class="lugares">' + paises.map(x =>
+            '<span class="lugar">' + esc(x.pais) + '</span>').join('') + '</div>'
+        + '<div class="foot"><span class="porque">' + esc(t.dice)
+        + '</span><span class="badge medio">presencia</span></div></div>';
+    }).join('');
+
+    if(sinMarca.length){
+      html += '<div class="asunto"><h4>' + sinMarca.length
+        + ' sin conflicto registrado en ' + esc(String(d.resumen.anio)) + '</h4>'
+        + '<div class="foot"><span class="porque">' + esc(sinMarca.map(x => x.pais).join(', '))
+        + '. <b>No significa que no haya violencia:</b> significa que ninguna alcanzó las '
+        + '25 muertes anuales que UCDP exige para registrar un conflicto armado.'
+        + '</span><span class="badge unica">bajo el umbral</span></div></div>';
+    }
+    if(fuera.length){
+      html += '<div class="asunto"><h4>' + fuera.length + ' sin correspondencia de nombre</h4>'
+        + '<div class="foot"><span class="porque">' + esc(fuera.map(x => x.pais).join(', '))
+        + '. <b>No es que no tengan dato:</b> el rótulo de la fuente no coincide con el del '
+        + 'padrón y hay que revisarlo.</span><span class="badge unica">a revisar</span></div></div>';
+    }
+    caja.innerHTML = html;
+  }
+
   function regimenVista(){
     porCasillas('regimen', almacen.regimen_politico, 'clasificado',
       'V-Dem no codifica a estos Estados: la brecha es del proyecto, no de ellos, y no '
@@ -7679,6 +7752,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-designados','designados',err.message);
       document.getElementById('proc-designados').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('ucdp.json'), traer('estado/ucdp.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.ucdp=d; const meta=d.procedencia;
+      pintarProcedencia('proc-ucdp',meta);
+      vacios+=pintarVacios('vac-ucdp',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-ucdp','violencia organizada',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-ucdp','violencia organizada',err.message);
+      document.getElementById('proc-ucdp').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('regimen_politico.json'), traer('estado/regimen_politico.json').catch(()=>null)])
     .then(([d,estado])=>{

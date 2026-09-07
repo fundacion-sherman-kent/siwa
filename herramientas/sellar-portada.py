@@ -65,7 +65,27 @@ def _cifras() -> dict:
     lista = re.search(r"const FUENTES_DEL_REGISTRO = \[(.*?)\];", html, re.S)
     if not lista:
         raise SystemExit("No se halló FUENTES_DEL_REGISTRO: la portada no se selló.")
-    fuentes = lista.group(1).count("['")
+
+    # EL NUMERO SE CUENTA DE LOS ARCHIVOS, NO DE LA LISTA DE LA PAGINA. La lista
+    # se escribe a mano y lleva tambien las fuentes que estan conectadas pero
+    # todavia no entregaron dato —UCDP mientras espera su credencial—. Contar
+    # renglones anunciaba fuentes que el lector no puede consultar. Se cuentan
+    # las fuentes DISTINTAS que dejaron archivo, que es la misma cuenta que hace
+    # la tabla del README: un solo numero, calculado en un solo lugar.
+    nombres = set()
+    for archivo in sorted(DATOS.glob("*.json")):
+        try:
+            d = json.loads(archivo.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001 — un archivo ilegible no infla la cuenta
+            continue
+        fuente = (d.get("procedencia") or {}).get("fuente")
+        if fuente:
+            nombres.add(fuente if isinstance(fuente, str) else fuente.get("nombre", ""))
+    fuentes = len({n for n in nombres if n})
+    renglones = lista.group(1).count("['")
+    if renglones != fuentes:
+        print(f"[sellar-portada] la lista de la página tiene {renglones} renglones y "
+              f"hay {fuentes} fuentes con dato: se sella con {fuentes}.", file=sys.stderr)
 
     estados = json.loads((RAIZ / "colectores" / "m49.json").read_text(encoding="utf-8")) \
         if (RAIZ / "colectores" / "m49.json").exists() else None

@@ -890,3 +890,57 @@ prevé justamente para esto. Disfrazarse de Chrome habría funcionado igual y
 habría sido una mentira innecesaria. **Dos colectores viejos —el padrón oficial
 y el explorador— todavía se identifican como Chrome y convendría pasarlos a esta
 forma.**
+
+---
+
+# UCDP entra — 7 de septiembre de 2026
+
+Llegó la credencial que se venía gestionando. **Cierra el vacío que el registro
+declaraba desde el principio**: la interfaz de UCDP devuelve 401 sin token, y las
+muertes en conflicto entraban sólo por Our World in Data, con la serie detenida
+donde ese intermediario la corta.
+
+## Qué tabla, y por qué esa
+
+De las siete que la interfaz expone se usa **`organizedviolencecy`** —país-año
+sobre violencia organizada dentro de fronteras—. No es la más grande: es la
+**comparable**. Una fila por Estado y año con la presencia de los tres tipos que
+UCDP distingue —estatal (interna e interestatal), no estatal y unilateral—.
+
+El conjunto georreferenciado `gedevents` tiene **417.968 filas** y obliga a
+paginar. Traerlo entero para contar muertes por país gastaría cientos de las
+5.000 peticiones diarias por un resultado que esta tabla ya entrega agregado.
+
+## La advertencia que manda
+
+**UCDP exige 25 muertes relacionadas en un año para registrar un conflicto.** Un
+cero no dice «no hay violencia»: dice «no alcanzó el umbral». Buena parte de la
+violencia de la región —homicidio común, extorsión, violencia intrafamiliar— no
+entra acá porque no es conflicto armado organizado. La ficha lo dice arriba de
+todo y la vista muestra a los Estados sin marca como **«bajo el umbral»**, nunca
+como Estados en paz.
+
+## Guardas
+
+**Control: Colombia**, con violencia estatal registrada desde hace décadas. Si la
+lectura no la encuentra, lo que falló es la lectura —la tabla, el rótulo o el
+campo— y no la historia de Colombia: se detiene y no publica.
+
+**Mínimo de 25 Estados con correspondencia de nombre.** La correspondencia se
+hace por nombre porque el código numérico de UCDP es el de Gleditsch y Ward, que
+no es el ISO y no se adivina. Un Estado sin correspondencia aparece declarado
+como tal, no en cero.
+
+**El 401 no se reintenta**: reintentar una credencial rechazada gasta peticiones
+del tope diario sin ninguna posibilidad de éxito. El 429 —tope agotado— tampoco:
+se espera a la corrida siguiente y el dato anterior queda intacto.
+
+**Sin credencial el colector falla a propósito** en vez de publicar una tabla de
+ceros. Treinta y tres Estados sin mirar no son treinta y tres Estados en paz.
+
+## El token
+
+Va como secreto del repositorio, con el nombre `UCDP_TOKEN`. **Es el segundo
+secreto del registro**, después de la clave de NASA FIRMS. El valor lo carga la
+Dirección y no se escribe en ningún archivo, registro de corrida ni mensaje de
+error.
