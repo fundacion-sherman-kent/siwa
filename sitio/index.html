@@ -841,6 +841,13 @@
   .indice-barra{height:5px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden;
     grid-column:2 / 4;margin:-2px 0 3px;}
   .indice-barra i{display:block;height:100%;background:var(--orange);}
+  .indice-extremos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+  .indice-extremos .rot{font-size:10px;text-transform:uppercase;letter-spacing:.9px;
+    color:var(--orange);font-weight:700;margin:0 0 6px;}
+  .indice-solo{display:flex;align-items:baseline;gap:14px;margin:4px 0 8px;}
+  .indice-solo .n{font-family:'JetBrains Mono',monospace;font-size:40px;font-weight:800;
+    color:#fff;line-height:1;}
+  .indice-solo .q{font-size:12.5px;color:#9fb2c8;}
   .eje-linea.opacidad{border-top:1px solid rgba(255,255,255,.10);margin-top:5px;padding-top:6px;}
   .eje-linea.opacidad .e{color:#c9a6ff;font-weight:600;}
   .eje-linea.opacidad .v{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;
@@ -953,6 +960,36 @@
     border:1px solid var(--line);border-radius:6px;padding:6px 8px;margin:6px 0 4px;
     white-space:pre-wrap;overflow-wrap:anywhere;
   }
+  /* LAS ADVERTENCIAS SE PLIEGAN, NO SE BORRAN. Sumaban 5.564 px —seis pantallas
+     de texto— empujando el dato hacia abajo en cada sección. Cerradas ocupan un
+     renglón y DICEN DE QUÉ ADVIERTEN, con la idea principal del propio bloque
+     como rótulo: quien lee de corrido se entera igual; quien quiere el desarrollo
+     lo abre. Ninguna se perdió. */
+  details.aviso-cobertura{
+    /* `border:none` primero: la regla vieja del bloque abierto pone borde en los
+       cuatro lados y dejaria tres colgando alrededor del renglon plegado. */
+    margin:8px 0 12px;border:none;border-left:2px solid var(--orange);
+    background:rgba(251,101,0,.05);border-radius:0 7px 7px 0;padding:0;
+  }
+  details.aviso-cobertura > summary{
+    cursor:pointer;list-style:none;padding:9px 13px;font-size:12px;line-height:1.5;
+    color:#C7D2E0;font-weight:600;display:flex;gap:9px;align-items:baseline;
+  }
+  details.aviso-cobertura > summary::-webkit-details-marker{display:none;}
+  details.aviso-cobertura > summary::before{
+    content:'!';flex:none;width:15px;height:15px;border-radius:50%;
+    background:var(--orange);color:#fff;font-size:10px;font-weight:800;
+    display:inline-flex;align-items:center;justify-content:center;
+  }
+  details.aviso-cobertura > summary::after{
+    content:'ver';margin-left:auto;flex:none;font-size:10px;font-weight:600;
+    color:var(--orange);letter-spacing:.4px;
+  }
+  details.aviso-cobertura[open] > summary::after{content:'ocultar';}
+  details.aviso-cobertura[open] > summary{border-bottom:1px solid rgba(255,255,255,.07);}
+  details.aviso-cobertura p{margin:9px 13px;font-size:12.5px;line-height:1.62;color:#9fb2c8;}
+  details.aviso-cobertura p:last-child{margin-bottom:12px;}
+
   .consulta-abrir{
     margin-top:10px;border:1px solid var(--line);border-radius:9px;
     background:rgba(255,255,255,.02);padding:11px 13px;
@@ -1171,7 +1208,11 @@
   <p>Datos públicos de los 33 Estados del padrón, recolectados de forma automática y
      calificados con doctrina de inteligencia. Cada cifra declara su fuente, su fecha de
      referencia, su calificación de fiabilidad y qué es lo que su fuente <em>no</em> cubre.</p>
-  <p><b>El registro se ordena por cuatro ejes</b> —<b>seguridad</b>, <b>defensa</b>,
+  <!-- LA ARQUITECTURA ES METODO, Y EL METODO NO ABRE LA PAGINA. Explicar los
+       cuatro ejes y las seis materias es indispensable para quien va a navegar
+       el registro, e innecesario para quien entra a saber como esta su pais.
+       Vive del nivel Periodista para arriba; el Ciudadano ve el resto. -->
+  <p data-nivel="2"><b>El registro se ordena por cuatro ejes</b> —<b>seguridad</b>, <b>defensa</b>,
      <b>gobernanza</b> y <b>desarrollo</b>—, porque así se produce: cada cifra pertenece a
      uno y a uno solo. <b>Y se consulta por seis materias</b> —violencia organizada,
      economías ilícitas, contrabando, ciberseguridad, contratación pública y
@@ -1305,13 +1346,13 @@
         </section>
     <section class="domain" id="seis-materias" data-nivel="1">
       <div class="domain-head"><h3>Las seis materias</h3><span class="tag" id="tag-seis-materias">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Son las seis materias en las que trabaja la Fundación</summary>
         <p><b>Son las seis materias en las que trabaja la Fundación</b> —y son, justamente,
            las que ninguna base pública mide de frente. Acá se dice, materia por materia,
            <b>qué se puede medir hoy, con qué fuente y de qué año</b>, qué se está publicando
            en este momento, y <b>qué no se mide y por qué</b>. Un vacío declarado vale más que
            una cifra inventada.</p>
-      </div>
+      </details>
       <div class="materias" id="lista-seis-materias"></div>
         </section>
 
@@ -1327,27 +1368,27 @@
         </div>
     <div class="categoria" id="terrorismo" data-nivel="2">
       <div class="categoria-head"><h4>Terrorismo</h4><span class="tag" id="tag-terrorismo">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>La serie termina en 2021 y no hay reemplazo gratuito</summary>
         <p><b>La serie termina en 2021 y no hay reemplazo gratuito</b>: la Base Global de
            Terrorismo dejó de actualizarse. No se estima ningún valor posterior.
            <b>Y «terrorismo» es una definición disputada</b>: varios Estados de la región
            califican de terrorista a la protesta social, y esa calificación entra en las
            bases que se nutren de prensa. El dato se publica con esa advertencia y no
            sostiene por sí solo ningún juicio.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-terrorismo">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-terrorismo"></div>
       <div id="vac-terrorismo"></div>
         </div>
     <div class="categoria" id="victimizacion" data-nivel="3">
       <div class="categoria-head"><h4>Victimización y confianza en la policía</h4><span class="tag" id="tag-victimizacion">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Acá está la percepción de inseguridad y el delito que la estadística policial no ve</summary>
         <p><b>Acá está la percepción de inseguridad y el delito que la estadística policial no ve.</b>
            La víctima que no denuncia no aparece en ningún parte. Cuando la tasa de denuncia es baja,
            las cifras oficiales de ese Estado <b>subestiman el delito</b>, y la comparación con un
            país que denuncia más se vuelve engañosa. Los detenidos sin condena miden congestión
            judicial y prisión preventiva, no criminalidad.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-victimizacion"></div>
         </div>
     <div class="categoria" id="trata" data-nivel="3">
@@ -1377,7 +1418,7 @@
       <p class="bloque-bajada">Quién controla qué: organizaciones armadas, disputa territorial, zonas de frontera y explotación ilegal del suelo.</p>
     <div class="categoria" id="grupos-armados" data-nivel="3">
       <div class="categoria-head"><h4>Grupos armados y conflicto entre organizaciones</h4><span class="tag" id="tag-grupos-armados">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>entre grupos, sin el Estado como parte</summary>
         <p>Enfrentamientos armados <b>entre grupos, sin el Estado como parte</b>. En esta
            región eso es, en buena medida, disputa entre organizaciones criminales por
            territorio o por renta: es el indicador de <b>presencia de grupos criminales
@@ -1385,12 +1426,12 @@
            territorial</b>, solo muertes en enfrentamiento. El umbral de registro exige
            25 muertes al año: por debajo de eso <b>un Estado figura en cero sin estar en
            paz</b>.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-grupos-armados"></div>
         </div>
     <div class="categoria" id="control-territorial" data-nivel="2">
       <div class="categoria-head"><h4>Control territorial del Estado</h4><span class="tag" id="tag-control">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Si el Estado manda en todo su territorio, o si hay zonas donde no manda</summary>
         <p><b>Si el Estado manda en todo su territorio, o si hay zonas donde no manda.</b>
            Es lo más cercano al control territorial que se encontró gratuito y comparable:
            el conflicto entre grupos armados cuenta muertes, no territorio.</p>
@@ -1398,14 +1439,14 @@
            —uno del país, uno de fuera— puntúan de 1 a 10, y el resultado se armoniza en
            revisión regional. <b>Y es una foto, no una serie</b>: el proyecto publica cada
            dos años, de modo que <b>estos temas no se pueden proyectar</b>.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-control">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-control"></div>
       <div id="vac-control"></div>
         </div>
     <div class="categoria" id="conflictos-territoriales" data-nivel="2">
       <div class="categoria-head"><h4>Conflictos territoriales y sociopolíticos</h4><span class="tag" id="tag-conflictos">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Primer dato subnacional del registro</summary>
         <p><b>Primer dato subnacional del registro</b>: los casos llegan a departamento y
            municipio. Los levantó y verificó caso por caso el <b>Instituto de Estudios
            Interculturales de la Pontificia Universidad Javeriana Cali</b>, a quien
@@ -1416,32 +1457,32 @@
            <b>Las capas no declaran licencia</b>: acá se publican recuentos y agregados, nunca
            los casos individuales ni las geometrías, y queda pendiente pedir autorización
            escrita antes de usarlos en productos pagos.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-conflictos">Cargando el registro…</div>
       <div class="cruce" id="lista-conflictos"></div>
       <div id="vac-conflictos"></div>
         </div>
     <div class="categoria" id="fronteras" data-nivel="3">
       <div class="categoria-head"><h4>Zonas de frontera y focos transfronterizos</h4><span class="tag" id="tag-fronteras">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>No son indicadores: son lugares</summary>
         <p><b>No son indicadores: son lugares</b>, y ninguna fuente publica estadística
            comparable a esa escala. Lo que se cuenta es <b>cuántas notas del corpus nombran
            cada zona</b>, de cuántos portales y de cuántas jurisdicciones. <b>Que la nombren
            medios de los dos lados de la frontera es el dato fuerte</b>: una sola jurisdicción
            puede estar contando su propia versión. La zona se reconoce por su topónimo, o por
            una palabra de frontera más dos de los Estados que la comparten.</p>
-      </div>
+      </details>
       <div class="cruce" id="lista-fronteras"></div>
         </div>
     <div class="categoria" id="mineria-ilegal" data-nivel="3">
       <div class="categoria-head"><h4>Minería ilegal</h4><span class="tag" id="tag-mineria">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Mapeada en cuatro Estados, con años distintos</summary>
         <p><b>Mapeada en cuatro Estados, con años distintos</b> —Bolivia y Venezuela 2017,
            Brasil 2018, Perú sin año declarado—: <b>no son comparables entre sí ni con la
            situación actual</b>. Y el número de polígonos <b>no es una medida de magnitud</b>:
            depende de cómo se dibujó cada capa. Venezuela figura con 1.317 y Perú con 3, y eso
            <b>no significa que en Perú casi no haya minería ilegal</b>.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-mineria"></div>
         </div>
     </section>
@@ -1451,7 +1492,7 @@
       <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
     <div class="categoria" id="explorador" data-nivel="2">
       <div class="categoria-head"><h4>Qué Estados dejan leer sus datos a una máquina</h4><span class="tag" id="tag-explorador">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Publicar para personas y publicar para máquinas no es lo mismo</summary>
         <p><b>Publicar para personas y publicar para máquinas no es lo mismo.</b> Un
            Estado puede tener su portal impecable y devolverle un portazo a cualquier
            programa que intente leerlo. Eso no es opacidad, pero tampoco es dato abierto:
@@ -1464,14 +1505,14 @@
         <p><b>Esto propone, no publica.</b> Lo que el explorador encuentra no entra solo
            al registro: queda declarado para que una persona lo verifique. Un registro que
            se autoalimentara rompería la regla que lo hace confiable.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-explorador">Cargando el registro…</div>
       <div class="cruce" id="lista-explorador"></div>
       <div id="vac-explorador"></div>
         </div>
     <div class="categoria" id="armas" data-nivel="2">
       <div class="categoria-head"><h4>Armas · quién le vende a quién, declarado en la aduana</h4><span class="tag" id="tag-armas">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Es comercio declarado en la aduana</summary>
         <p><b>Es comercio declarado en la aduana.</b> El tráfico ilegal —que es lo que
            preocupa— no pasa por una aduana y <b>no está acá</b>. Sirve para ver el flujo
            legal y para señalar dónde ese flujo no cierra.</p>
@@ -1483,14 +1524,14 @@
         <p><b>No ordena Estados.</b> El volumen depende del tamaño de la economía y de
            tener o no industria propia: Brasil exporta más que Uruguay por industria, no
            por conducta.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-armas">Cargando el registro…</div>
       <div class="cruce" id="lista-armas"></div>
       <div id="vac-armas"></div>
         </div>
     <div class="categoria" id="crimen" data-nivel="1">
       <div class="categoria-head"><h4>Crimen organizado · mercados, actores y resistencia del Estado</h4><span class="tag" id="tag-crimen">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Es evaluación experta, no recuento de hechos</summary>
         <p><b>Es evaluación experta, no recuento de hechos.</b> Cada puntaje va de 1 a 10
            y lo fija un panel de especialistas con evidencia documental, revisado por
            pares. <b>Un puntaje alto de mercado no dice cuánto</b>: no hay tonelaje ni
@@ -1501,14 +1542,14 @@
         <p><b>No es tiempo real y no pretende serlo.</b> La edición es bienal y describe
            <b>estructura, no coyuntura</b>: sirve para saber qué opera en un Estado y con
            qué fuerza, no qué pasó anoche.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-crimen">Cargando el registro…</div>
       <div class="cruce" id="lista-crimen"></div>
       <div id="vac-crimen"></div>
         </div>
     <div class="categoria" id="designados" data-nivel="2">
       <div class="categoria-head"><h4>Designados por el Consejo de Seguridad</h4><span class="tag" id="tag-designados">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Que un Estado no tenga designados no significa que no tenga crimen organizado ni…</summary>
         <p><b>Que un Estado no tenga designados no significa que no tenga crimen
            organizado ni terrorismo.</b> Los regímenes de sanciones del Consejo son
            <b>geográficos y políticos</b>, no un termómetro de amenaza: existen para
@@ -1520,14 +1561,14 @@
            pública y está en la fuente, pero este registro no es un buscador de personas.
            De las <b>entidades</b> sí se publica el nombre: son organizaciones, y
            publicarlas es el propósito de la lista.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-designados">Cargando el registro…</div>
       <div class="cruce" id="lista-designados"></div>
       <div id="vac-designados"></div>
         </div>
     <div class="categoria" id="cites" data-nivel="2">
       <div class="categoria-head"><h4>Especies protegidas · comercio registrado</h4><span class="tag" id="tag-cites">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Lo que esta base registra es comercio legal, no tráfico</summary>
         <p><b>Lo que esta base registra es comercio legal, no tráfico.</b> Cada asiento nace
            de un permiso o de un informe anual que un Estado presentó ante el tratado. El
            tráfico ilegal, por definición, no tiene permiso y <b>no entra acá</b>: quien lea
@@ -1542,14 +1583,14 @@
            biodiversidad, del tamaño de la economía y del papel de cada país en el comercio
            de cueros, madera o mascotas. Y la proporción de decomiso <b>no está orientada</b>:
            no se sabe si más es mejor o peor.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-cites">Cargando el registro…</div>
       <div class="cruce" id="lista-cites"></div>
       <div id="vac-cites"></div>
         </div>
     <div class="categoria" id="focos" data-nivel="2">
       <div class="categoria-head"><h4>Qué está ardiendo ahora</h4><span class="tag" id="tag-focos">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>El satélite detecta anomalías térmicas, no incendios ni delitos</summary>
         <p><b>El satélite detecta anomalías térmicas, no incendios ni delitos.</b> Un foco
            puede ser una quema agrícola legal, un incendio forestal, una antorcha
            industrial, un basural o una operación minera. <b>La imagen no distingue la
@@ -1559,14 +1600,14 @@
            estación, de la nubosidad —una semana nublada esconde todo— y de cuántas veces
            pasó el satélite. Brasil tendrá siempre más focos que Granada por superficie,
            no por conducta.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-focos">Cargando el registro…</div>
       <div class="cruce" id="lista-focos"></div>
       <div id="vac-focos"></div>
         </div>
     <div class="categoria" id="prensa-libre" data-nivel="2">
       <div class="categoria-head"><h4>En qué condiciones se puede publicar</h4><span class="tag" id="tag-prensa">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Mide las condiciones para ejercer el periodismo, no cuánta desinformación circula</summary>
         <p><b>Mide las condiciones para ejercer el periodismo, no cuánta desinformación
            circula.</b> Son cosas distintas, y la relación suele ser inversa a la
            intuición: <b>donde la prensa está más cercada, menos desinformación se
@@ -1576,14 +1617,14 @@
            con un recuento de abusos: dos personas informadas pueden puntuar distinto el
            mismo país. Y el puesto ordena contra <b>180 países</b>, no contra los 33 del
            padrón.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-prensa">Cargando el registro…</div>
       <div class="cruce" id="lista-prensa"></div>
       <div id="vac-prensa"></div>
         </div>
     <div class="categoria" id="sanciones" data-nivel="2">
       <div class="categoria-head"><h4>Sanciones y personas expuestas</h4><span class="tag" id="tag-sanciones">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Esto no ordena Estados y no mide corrupción</summary>
         <p><b>Esto no ordena Estados y no mide corrupción.</b> La lista de la región la
            encabeza <b>Brasil con 132.652 registros</b>; Venezuela está novena, con 1.406.
            Leerlo como «más listados, peor» llevaría a concluir que Brasil está noventa
@@ -1594,14 +1635,14 @@
            completo es su registro público de funcionarios</b> y <b>el tamaño del país</b>.
            Y <b>persona expuesta no es persona sospechada</b>: un ministro figura por ser
            ministro.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-sanciones">Cargando el registro…</div>
       <div class="cruce" id="lista-sanciones"></div>
       <div id="vac-sanciones"></div>
         </div>
     <div class="categoria" id="ciber-red" data-nivel="2">
       <div class="categoria-head"><h4>Ciberseguridad · medición de red</h4><span class="tag" id="tag-ciber-red">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Ninguna de estas tres cifras ordena Estados, y no es un descuido</summary>
         <p><b>Ninguna de estas tres cifras ordena Estados, y no es un descuido.</b>
            La muestra de anomalías <b>la hacen voluntarios</b>: un Estado con pocas sondas
            muestra pocas anomalías, y eso no significa que tenga menos censura sino que
@@ -1611,14 +1652,14 @@
            una tormenta y un apagón deliberado dan la misma curva— y <b>contar equipos de
            respuesta premia al Estado grande</b>. Van al lado del dato comparable, nunca
            adentro, como Defensa.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-ciber-red">Cargando el registro…</div>
       <div class="cruce" id="lista-ciber-red"></div>
       <div id="vac-ciber-red"></div>
         </div>
     <div class="categoria" id="contrabando" data-nivel="3">
       <div class="categoria-head"><h4>Contrabando y subfacturación · brecha espejo</h4><span class="tag" id="tag-comercio">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Cuando A declara que exportó cien a B, y B declara que importó sesenta de A, esos…</summary>
         <p><b>Cuando A declara que exportó cien a B, y B declara que importó sesenta de A,
            esos cuarenta se fueron por algún lado.</b> Esa diferencia es el indicio estándar
            de contrabando, subfacturación y triangulación.</p>
@@ -1629,14 +1670,14 @@
            brecha negativa</b> —que el importador declare <b>menos</b>—, porque el flete
            empuja en el sentido contrario y no hay explicación contable inocente. Aun así
            es un <b>indicio que abre una averiguación, no una prueba de delito</b>.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-comercio">Cargando el registro…</div>
       <div class="cruce" id="lista-comercio"></div>
       <div id="vac-comercio"></div>
         </div>
     <div class="categoria" id="migraciones" data-nivel="2">
       <div class="categoria-head"><h4>Migraciones</h4><span class="tag" id="tag-migraciones">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Estas cifras no dicen nada sobre delito</summary>
         <p><b>Estas cifras no dicen nada sobre delito.</b> Asociar migración con inseguridad
            es un juicio, y el registro no lo hace: la materia entra en Seguridad porque el
            movimiento de personas es objeto de política de seguridad, no porque quien migra
@@ -1644,7 +1685,7 @@
            suele ser el dato más revelador de los tres. Las remesas entran como medida de
            migración —cuánto pesa el dinero que mandan quienes se fueron—, no como indicador
            económico.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-migraciones"></div>
         </div>
     <div class="categoria" id="desplazamiento" data-nivel="3">
@@ -1656,20 +1697,20 @@
         </div>
     <div class="categoria" id="ciber" data-nivel="3">
       <div class="categoria-head"><h4>Ciberseguridad</h4><span class="tag" id="tag-ciber">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Mide superficie e infraestructura, no ataques</summary>
         <p><b>Mide superficie e infraestructura, no ataques.</b> No se encontró ninguna fuente
            gratuita que publique incidentes informáticos comparables para los 33 Estados. Lo que
            sí existe es la infraestructura de cifrado desplegada y la población conectada: un país
            con muchos usuarios y pocos servidores cifrados está más expuesto que uno con la
            relación inversa. <b>Un valor alto no significa un Estado más protegido.</b></p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-ciber">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-ciber"></div>
       <div id="vac-ciber"></div>
         </div>
     <div class="categoria" id="extorsion" data-nivel="2">
       <div class="categoria-head"><h4>Extorsión informática</h4><span class="tag" id="tag-ransomware">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Acá solo aparece quien no pagó rápido</summary>
         <p><b>Acá solo aparece quien no pagó rápido.</b> Los grupos que secuestran sistemas
            publican a sus víctimas <b>para presionarlas</b>: la empresa que paga enseguida y
            en silencio <b>nunca aparece en ninguna lista</b>. Esta cifra subestima el
@@ -1680,7 +1721,7 @@
            que tiene más objetivos. <b>La fuente es el atacante</b>, que exagera y repite
            víctimas viejas: lo que se observa con certeza es que <b>el grupo lo publicó</b>,
            no que el hecho sea como lo cuenta.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-ransomware">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-ransomware"></div>
       <div id="vac-ransomware"></div>
@@ -1692,31 +1733,31 @@
       <p class="bloque-bajada">Lo que cada Estado destina y sostiene como instrumento militar. Son MAGNITUDES, no virtudes: no entran en la situación general.</p>
     <div class="categoria" id="presupuesto-defensa" data-nivel="3">
       <div class="categoria-head"><h4>Presupuesto de defensa</h4><span class="tag" id="tag-presupuesto-defensa">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>un Estado chico que dedica mucho de lo poco que tiene</summary>
         <p>Las tres medidas se leen juntas porque separan cosas distintas: <b>un Estado chico
            que dedica mucho de lo poco que tiene</b> no es lo mismo que uno grande que dedica
            poco de mucho. El monto en dólares corrientes arrastra inflación y tipo de cambio:
            sirve para el orden de magnitud, no para comparar años lejanos.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-presupuesto-defensa">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-presupuesto-defensa"></div>
       <div id="vac-presupuesto-defensa"></div>
         </div>
     <div class="categoria" id="efectivos" data-nivel="3">
       <div class="categoria-head"><h4>Efectivos</h4><span class="tag" id="tag-efectivos">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>No hay desagregación por arma, y no es un olvido</summary>
         <p><b>No hay desagregación por arma, y no es un olvido.</b> No existe fuente gratuita
            que publique los efectivos separados en ejército, armada y aviación para los 33
            Estados. El registro de referencia es el <b>Balance Militar</b> del Instituto
            Internacional de Estudios Estratégicos, que es <b>de pago y no admite
            redifusión</b>. Lo que se publica acá es el total, y el peso que ese total tiene
            sobre quienes trabajan.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-efectivos"></div>
         </div>
     <div class="categoria" id="material" data-nivel="3">
       <div class="categoria-head"><h4>Material — adquisición de armamento mayor</h4><span class="tag" id="tag-material">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Mide lo que se compra, no lo que se tiene</summary>
         <p><b>Mide lo que se compra, no lo que se tiene.</b> Es la aproximación más cercana al
            inventario a la que se puede llegar sin pagar: aeronaves, buques, blindados y
            misiles adquiridos. <b>Un año sin compras da cero y no significa que el país no
@@ -1726,18 +1767,18 @@
            <b>El inventario por tipo —cuántos vehículos, cuántos aviones, cuántas
            embarcaciones— no está disponible en ninguna fuente libre</b>, y el vacío queda
            declarado.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-material"></div>
         </div>
     <div class="categoria" id="aeroespacial" data-nivel="3">
       <div class="categoria-head"><h4>Capacidad aeroespacial</h4><span class="tag" id="tag-aeroespacial">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>satélites propios, no necesariamente lanzados por él</summary>
         <p>Objetos que cada Estado registra ante Naciones Unidas: <b>satélites propios, no
            necesariamente lanzados por él</b>. Es la única medida de capacidad aeroespacial
            comparable y gratuita que se encontró. <b>No mide capacidad de lanzamiento, ni
            satélites militares, ni aviación</b>. Solo 13 de los 33 Estados registran alguno,
            y ese reparto es en sí mismo el hallazgo.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-aeroespacial">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-aeroespacial"></div>
       <div id="vac-aeroespacial"></div>
@@ -1749,7 +1790,7 @@
       <p class="bloque-bajada">Integridad de la administración pública, calidad de las reglas y salud del espacio informativo en que esas reglas se discuten.</p>
     <div class="categoria" id="contratacion-abierta" data-nivel="2">
       <div class="categoria-head"><h4>Contratación pública</h4><span class="tag" id="tag-contratacion-abierta">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Mide la publicación, no la contratación</summary>
         <p><b>Mide la publicación, no la contratación.</b> Un Estado que compra mucho y
            publica poco aparece con poca cobertura; uno que compra poco y publica todo,
            con mucha. <b>No es una medida de volumen de compra ni de limpieza.</b></p>
@@ -1758,7 +1799,7 @@
            que es una afirmación más chica y verdadera. Y el recuento <b>mezcla
            publicadores nacionales con subnacionales</b>, porque la fuente no los
            distingue y clasificarlos por el título sería inventarlo.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-contratacion-abierta">Cargando el registro…</div>
       <div class="cruce" id="lista-contratacion-abierta"></div>
       <div id="vac-contratacion-abierta"></div>
@@ -1771,7 +1812,7 @@
         </div>
     <div class="categoria" id="democracia" data-nivel="2">
       <div class="categoria-head"><h4>Nivel democrático y libertades</h4><span class="tag" id="tag-democracia">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Es medición experta codificada, no recuento de hechos</summary>
         <p><b>Es medición experta codificada, no recuento de hechos</b>: varios
            especialistas por país y por año. Mide <b>cómo funciona el sistema, no qué
            piensa la gente de él</b> — la percepción democrática y la confianza en las
@@ -1779,26 +1820,26 @@
            exigen registro para entregar los datos, y el vacío queda declarado.
            <b>La brecha entre democracia electoral y liberal</b> es lo más revelador:
            señala Estados que votan pero no controlan a quien gobierna.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-democracia">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-democracia"></div>
       <div id="vac-democracia"></div>
         </div>
     <div class="categoria" id="libertades" data-nivel="3">
       <div class="categoria-head"><h4>Libertad de expresión y de asociación</h4><span class="tag" id="tag-libertades">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>conflicto político</summary>
         <p>Censura estatal, represalia contra periodistas, y espacio disponible para
            partidos y organizaciones civiles — que es la materia de <b>conflicto
            político</b> leída por el lado de lo que la oposición puede hacer.
            <b>Se lee junto con la cobertura noticiosa de este mismo registro</b>: donde
            la libertad de expresión cae, la corroboración cruzada entre jurisdicciones
            vale más, porque la prensa local pesa menos.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-libertades"></div>
         </div>
     <div class="categoria" id="integridad" data-nivel="3">
       <div class="categoria-head"><h4>Integridad y aprobación democrática</h4><span class="tag" id="tag-integridad">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>La aprobación de la democracia no es una encuesta</summary>
         <p><b>La aprobación de la democracia no es una encuesta.</b> Es la evaluación de un
            especialista sobre cuánto respaldo social tiene el régimen democrático. Se acerca
            a la <b>percepción democrática</b> que este registro declaraba como vacío, pero
@@ -1807,28 +1848,28 @@
         <p><b>La persecución del abuso de función mide impunidad</b>, que es distinto de la
            percepción de corrupción: un país puede tener mala fama y buena persecución, o al
            revés. Y la política anticorrupción mide <b>el andamiaje, no el resultado</b>.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-integridad"></div>
         </div>
     <div class="categoria" id="entorno-informativo" data-nivel="3">
       <div class="categoria-head"><h4>Entorno informativo</h4><span class="tag" id="tag-entorno-informativo">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Mide el clima en que circula la información, no la cantidad de contenido falso</summary>
         <p><b>Mide el clima en que circula la información, no la cantidad de contenido falso</b>,
            que ninguna fuente regional cuenta de forma comparable. Cinco de los seis se nombran
            «ausencia de» porque en la escala de V-Dem el valor alto es el bueno; la polarización
            va al revés y así se declara en su ficha.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-entorno-informativo"></div>
     </div>
     <div class="categoria" id="contratacion" data-nivel="3">
       <div class="categoria-head"><h4>Integridad de la contratación pública</h4><span class="tag" id="tag-contratacion">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Es lo que la empresa declara esperar, no un soborno comprobado</summary>
         <p><b>Es lo que la empresa declara esperar, no un soborno comprobado.</b> Sale de las
            Encuestas de Empresas del Banco Mundial, que no se levantan el mismo año en todos los
            Estados: el dato de cada país es de su última ronda disponible y <b>las rondas no
            coinciden entre sí</b>. Sirve para ver el orden de magnitud, no para rankear con
            precisión de decimales.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-contratacion">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-contratacion"></div>
       <div id="vac-contratacion"></div>
@@ -1840,13 +1881,13 @@
         </div>
     <div class="categoria" id="capacidad" data-nivel="3">
       <div class="categoria-head"><h4>Capacidad del Estado</h4><span class="tag" id="tag-capacidad">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>saber quién existe</summary>
         <p>El registro de nacimientos es la capacidad estatal más básica: <b>saber quién existe</b>.
            Un registro incompleto degrada todas las demás estadísticas de ese Estado, incluidas las
            que este registro publica. La recaudación entra como capacidad de recaudar, no como
            indicador económico: baja frente a una economía grande, señala evasión o economía no
            registrada.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-capacidad"></div>
         </div>
     </section>
@@ -1874,11 +1915,11 @@
         </div>
     <div class="categoria" id="condiciones" data-nivel="3">
       <div class="categoria-head"><h4>Condiciones de vida y desigualdad</h4><span class="tag" id="tag-condiciones">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>La pobreza según línea nacional no es comparable entre países</summary>
         <p><b>La pobreza según línea nacional no es comparable entre países</b>: cada Estado define
            su propia línea. Solo sirve su evolución dentro de cada uno. El Gini depende de la
            encuesta de hogares de cada Estado, con años y metodologías distintos.</p>
-      </div>
+      </details>
       <div class="grid-cards" id="tarj-condiciones"></div>
         </div>
     <div class="categoria" id="conectividad" data-nivel="3">
@@ -1901,7 +1942,7 @@
       <p class="bloque-bajada">Qué se está diciendo sobre la región en este momento, y en cuántos orígenes independientes. <b>No es una materia del registro:</b> es el segundo factor de veracidad con el que se contrastan las materias.</p>
     <div class="categoria" id="copernicus" data-nivel="2">
       <div class="categoria-head"><h4>Qué se puede mirar desde arriba</h4><span class="tag" id="tag-copernicus">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>El registro no mira la imagen: dice que existe, de cuándo es y dónde está</summary>
         <p><b>El registro no mira la imagen: dice que existe, de cuándo es y dónde está.</b>
            Minería ilegal, deforestación, puertos y pasos fronterizos son cuatro materias
            sin serie comparable; lo que sí hay es imagen satelital libre y reciente.</p>
@@ -1910,14 +1951,14 @@
            geometría—. <b>Lo comparable es la frescura</b>: cuántos días hace de la última.
            Y <b>una imagen no acredita un hecho</b>: prueba que había algo el día que pasó
            el satélite, no qué era ni de quién.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-copernicus">Cargando el registro…</div>
       <div class="cruce" id="lista-copernicus"></div>
       <div id="vac-copernicus"></div>
         </div>
     <div class="categoria" id="consulta" data-nivel="2">
       <div class="categoria-head"><h4>Ir a la fuente primaria</h4><span class="tag" id="tag-consulta">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>El registro dice qué se sabe; esto dice dónde buscar lo que sigue</summary>
         <p><b>El registro dice qué se sabe; esto dice dónde buscar lo que sigue.</b>
            Cada consulta combina el término que usa el propio Estado con el dominio
            de su portal oficial, el tipo de archivo donde suele estar el dato duro y
@@ -1927,7 +1968,7 @@
            búsqueda ni cuenta resultados —lo que un buscador devuelve cambia según el
            país, la sesión y el idioma de quien pregunta, y no es comparable entre
            Estados—. Acotar por dominio oficial acota <b>el origen, no la calidad</b>.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-consulta">Cargando el registro…</div>
       <div class="cruce" id="lista-consulta"></div>
       <div id="vac-consulta"></div>
@@ -1935,7 +1976,7 @@
 
     <div class="categoria" id="publicacion-oficial" data-nivel="2">
       <div class="categoria-head"><h4>Lo que cada Estado publicó de sí mismo</h4><span class="tag" id="tag-reciente">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>La serie comparable llega tarde y no hay forma de acelerarla</summary>
         <p><b>La serie comparable llega tarde y no hay forma de acelerarla.</b> La UNODC
            recibe de los Estados, valida y recién entonces publica: nuestra cifra de
            homicidios es de 2023. <b>Pero los Estados sí publican lo suyo, y rápido.</b>
@@ -1945,7 +1986,7 @@
            regional armada con estas cifras sería una serie falsa. <b>Va al lado de la serie
            comparable, no adentro, y no la actualiza.</b> El enlace lleva al original, que es
            donde la definición está escrita.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-reciente">Cargando el registro…</div>
       <div class="cruce" id="lista-reciente"></div>
       <div id="vac-reciente"></div>
@@ -1953,12 +1994,12 @@
 
     <div class="categoria" id="cobertura" data-nivel="2">
       <div class="categoria-head"><h4>Cobertura noticiosa cruzada</h4><span class="tag" id="tag-cobertura">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Esto no registra hechos: registra que algo se está publicando</summary>
         <p><b>Esto no registra hechos: registra que algo se está publicando.</b>
            Que diez portales cubran un asunto no prueba que haya ocurrido. Y veinte medios
            del mismo país repitiendo un cable son <b>un solo origen</b>, no veinte. Acá se
            cuentan orígenes independientes por idioma y por jurisdicción, no portales.</p>
-      </div>
+      </details>
       <div class="filtros-cobertura">
         <span class="nota-filtro" id="nota-cobertura"></span>
       </div>
@@ -1968,14 +2009,14 @@
         </div>
     <div class="categoria" id="palabras" data-nivel="2">
       <div class="categoria-head"><h4>Nube de conceptos</h4><span class="tag" id="tag-palabras">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Qué términos circulan ahora mismo, no qué está ocurriendo</summary>
         <p><b>Qué términos circulan ahora mismo, no qué está ocurriendo.</b>
            Es el recuento de las palabras que aparecen en los títulos recolectados en la
            ventana vigente. Para figurar, un término debe aparecer en <b>dos notas de dos
            portales distintos</b>: lo que publica un solo portal no es circulación, es
            repetición. Un término ausente puede significar que el asunto no circula —o que
            ningún canal del padrón lo cubre.</p>
-      </div>
+      </details>
       <div class="origenes-nube" role="group" aria-label="Origen de los conceptos">
         <button class="fuente-nube activo" data-origen="prensa">Prensa</button>
         <button class="fuente-nube" data-origen="redes">Redes sociales</button>
@@ -1986,7 +2027,7 @@
         </div>
     <div class="categoria" id="redes" data-nivel="2">
       <div class="categoria-head"><h4>Circulación en red social abierta</h4><span class="tag" id="tag-redes">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Mide cuánto se habla, no qué ocurre</summary>
         <p><b>Mide cuánto se habla, no qué ocurre.</b> Una publicación en una red no es una
            fuente: es un indicio de circulación. <b>Y el sesgo es grande y se declara</b>: la
            única red que permite consulta pública sin credencial tiene una base de usuarios
@@ -1994,7 +2035,7 @@
            muestra sesgada y no probabilística. Sirve para detectar que un asunto empezó a
            circular; <b>no sirve para medir cuánto importa</b>, y ningún juicio de la Fundación
            puede apoyarse solo en esto.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-redes">Cargando el registro…</div>
       <h4 class="sub-seccion">Circulación por Estado</h4>
       <div class="grid-cards" id="tarj-redes"></div>
@@ -2002,7 +2043,7 @@
         </div>
     <div class="categoria" id="mensajeria" data-nivel="2">
       <div class="categoria-head"><h4>Difusión en canales de mensajería</h4><span class="tag" id="tag-mensajeria">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Esto NO corrobora nada de la cobertura noticiosa, y no se mezcla con ella</summary>
         <p><b>Esto NO corrobora nada de la cobertura noticiosa, y no se mezcla con ella.</b>
            El canal de mensajería de un diario que ya está en el padrón de prensa es
            <b>el mismo medio por otra puerta</b>, no un segundo origen. Contarlo como
@@ -2014,7 +2055,7 @@
            región desde afuera es materia de estudio</b>, y por eso cada canal declara a
            quién responde. Su presencia acá no implica que la Fundación avale lo que
            publican.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-mensajeria">Cargando el registro…</div>
       <h4 class="sub-seccion">Canales del padrón</h4>
       <div class="cruce" id="lista-mensajeria"></div>
@@ -2031,9 +2072,9 @@
     <section class="domain bloque" id="opacidad-seccion" data-nivel="1">
       <div class="bloque-head"><h3>Índice de Opacidad</h3></div>
       <p class="bloque-bajada">Qué no publica cada Estado, y qué se revisó para poder afirmarlo. Es una medición propia de la Oficina: no la publica ningún organismo.</p>
-    <div class="categoria" id="brecha" data-nivel="1">
+    <div class="categoria" id="brecha" data-nivel="2">
       <div class="categoria-head"><h4>Lo que ocurre y el Estado no publica</h4><span class="tag" id="tag-brecha">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Esto no mide violencia: mide transparencia</summary>
         <p><b>Esto no mide violencia: mide transparencia.</b> Cruza dos observaciones
            independientes —un observatorio externo de sucesos y el propio catálogo del
            Estado— y publica <b>una sola cosa</b>: si hay actividad registrada y el Estado
@@ -2042,14 +2083,14 @@
            ni fechas—: sale una clasificación de tres estados y nada más. Y
            <b>«sin registro» no es «no pasó nada»</b>: es que esa fuente no anotó nada, y
            la cobertura de cualquier observatorio es despareja.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-brecha">Cargando el registro…</div>
       <div class="cruce" id="lista-brecha"></div>
       <div id="vac-brecha"></div>
         </div>
-    <div class="categoria" id="memoria" data-nivel="1">
+    <div class="categoria" id="memoria" data-nivel="2">
       <div class="categoria-head"><h4>Lo que cambió desde que miramos</h4><span class="tag" id="tag-memoria">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>El registro guarda lo que observa, no solo lo que ve hoy</summary>
         <p><b>El registro guarda lo que observa, no solo lo que ve hoy.</b> Cada vez que un
            Estado cambia de estado —un portal que vuelve, un conjunto que desaparece, una
            serie que se detiene— queda anotado con su fecha. Es la única parte del registro
@@ -2059,14 +2100,14 @@
            el martes y ser visto el jueves. Y la primera vez que se ve a un Estado
            <b>no dice desde cuándo está así</b>: dice desde cuándo lo miramos. Esas líneas
            van marcadas.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-memoria">Cargando el registro…</div>
       <div class="cruce" id="lista-memoria"></div>
       <div id="vac-memoria"></div>
         </div>
-    <div class="categoria" id="retirada" data-nivel="1">
+    <div class="categoria" id="retirada" data-nivel="2">
       <div class="categoria-head"><h4>Lo que dejó de publicarse</h4><span class="tag" id="tag-archivo">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>No publicar y dejar de publicar no son lo mismo</summary>
         <p><b>No publicar y dejar de publicar no son lo mismo.</b> Lo segundo es más
            grave: hubo dato y se retiró. El archivo público de la web guarda copias
            fechadas de los sitios oficiales, y comparar la última vez que un portal
@@ -2077,20 +2118,20 @@
            caído. Solo se dice <b>retirado</b> cuando el archivo lo vio vivo en el pasado
            <b>y</b> hoy no responde. <b>Y no se interpreta la causa</b>: presupuesto,
            mudanza de sistema o decisión dan la misma caída.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-archivo">Cargando el registro…</div>
       <div class="cruce" id="lista-archivo"></div>
       <div id="vac-archivo"></div>
         </div>
-    <div class="categoria" id="opacidad" data-nivel="1">
+    <div class="categoria" id="opacidad" data-nivel="2">
       <div class="categoria-head"><h4>Índice de Opacidad</h4><span class="tag" id="tag-opacidad">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Mide la ausencia, no la presencia</summary>
         <p><b>Mide la ausencia, no la presencia.</b> Un puntaje de apertura no se puede
            refutar mostrando una dirección; una afirmación de ausencia sí, y por eso vale.
            <b>La presencia se prueba con una fuente; la ausencia exige las cuatro.</b> Mientras
            falte un paso, el Estado dice <b>sin verificar</b>, que no es lo mismo que opaco y
            <b>no cuenta como opacidad</b>.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-opacidad">Cargando el registro…</div>
       <div class="indice-caja" id="indice-opacidad">Cargando el puntaje…</div>
       <div class="opacidad-titular" id="titular-opacidad"></div>
@@ -2104,20 +2145,20 @@
       <p class="bloque-bajada">La trazabilidad completa: qué publica cada Estado, qué no publica, de dónde sale cada cifra, cómo se la califica y qué se puede descargar.</p>
     <div class="categoria" id="oficiales" data-nivel="3">
       <div class="categoria-head"><h4>Padrón de fuentes oficiales</h4><span class="tag" id="tag-oficiales">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Este padrón no publica datos: publica dónde están</summary>
         <p><b>Este padrón no publica datos: publica dónde están.</b>
            Y las cifras de estos catálogos <b>no son comparables entre países</b>: cada Estado
            define el delito a su manera, lo publica con su cadencia y lo cuenta desde su año.
            Sumarlas para armar una serie regional produciría una serie falsa. Por eso el índice
            manda al original, donde la definición está escrita.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-oficiales">Cargando el registro…</div>
       <div class="paises-oficiales" id="lista-oficiales"></div>
       <div id="vac-oficiales"></div>
         </div>
     <div class="categoria" id="sondeo" data-nivel="3">
       <div class="categoria-head"><h4>Fuentes que todavía no entraron</h4><span class="tag" id="tag-sondeo">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Antes de construir sobre una fuente hay que saber cuántas veces contesta</summary>
         <p><b>Antes de construir sobre una fuente hay que saber cuántas veces contesta.</b>
            El robot prueba en cada vuelta las que quedaron trabadas y guarda el resultado
            de cada intento. Así una fuente que volvió no queda figurando como caída
@@ -2128,7 +2169,7 @@
            de las veces puede ser excelente y estar sobrecargada. Y se mide <b>desde una
            sola máquina</b>: dice cuánto pudo usarla este registro, que es justamente lo
            que hay que saber.</p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-sondeo">Cargando el registro…</div>
       <div class="cruce" id="lista-sondeo"></div>
       <div id="vac-sondeo"></div>
@@ -2202,12 +2243,12 @@
         </div>
     <div class="categoria" id="fundacion" data-nivel="1">
       <div class="categoria-head"><h4>De la Fundación</h4><span class="tag" id="tag-fundacion">—</span></div>
-      <div class="aviso-cobertura">
+      <details class="aviso-cobertura"><summary>Acá termina el dato y empieza el análisis</summary>
         <p><b>Acá termina el dato y empieza el análisis.</b> Este registro publica hechos
            calificados y <b>no emite juicios</b>. Los informes de la Fundación sí los emiten,
            firmados y con su confianza y probabilidad declaradas. <b>Son dos productos
            distintos y no deben leerse como uno solo.</b></p>
-      </div>
+      </details>
       <div class="procedencia" id="proc-fundacion">Cargando el registro…</div>
       <div class="cruce" id="lista-fundacion"></div>
 
@@ -4167,8 +4208,32 @@
       b.addEventListener('click', ()=>hay[+b.dataset.h].hacer()));
   }
 
+  // EL PANEL OFRECE SOLO LO QUE EXISTE EN ESTE NIVEL. Ofrecia catorce destinos
+  // siempre, y en lectura de Ciudadano la mayoria estaba oculta: el lector
+  // clickeaba y no pasaba nada. Un menu que promete lo que no entrega es peor
+  // que un menu corto. No se decide a mano cual va en cual: se le PREGUNTA al
+  // destino, de modo que mover una seccion de nivel arregla el panel solo.
+  function panelDelNivel(){
+    document.querySelectorAll('nav.rail a[href^="#"]').forEach(a => {
+      const destino = document.getElementById(a.getAttribute('href').slice(1));
+      const visible = destino && destino.getBoundingClientRect().height > 0;
+      a.hidden = !visible;
+    });
+    // Un rotulo de grupo sin ningun destino debajo tampoco tiene sentido.
+    document.querySelectorAll('nav.rail .grupo').forEach(g => {
+      let n = g.nextElementSibling, hay = false;
+      while(n && !n.classList.contains('grupo')){
+        if(n.tagName === 'A' && !n.hidden) hay = true;
+        n = n.nextElementSibling;
+      }
+      g.hidden = !hay;
+    });
+  }
+
   function aplicarNivel(){
     document.body.dataset.nivel = String(nivel);
+    // Despues de repintar, porque la visibilidad se mide del elemento ya pintado.
+    setTimeout(panelDelNivel, 0);
     document.querySelectorAll('.nivel').forEach(b=>{
       const suyo = +b.dataset.lee === nivel;
       b.classList.toggle('activo', suyo);
@@ -4611,6 +4676,44 @@
 
     const orden = lista.slice().sort((a,b) => b.opacidad - a.opacidad);
     const actos = (d.formula && d.formula.actos) || [];
+
+    // EN NIVEL CIUDADANO NO VA LA TABLA DE 33. Quien entra a saber cómo está su
+    // país no necesita el ranking entero: necesita su cifra y una referencia
+    // para entenderla. La tabla completa vive del nivel Periodista para arriba,
+    // que es donde comparar es el trabajo. Esta sección ocupaba 8,9 de las 16,4
+    // pantallas del nivel Ciudadano, y era el mayor obstáculo para leerlo.
+    const ciudadano = document.body.dataset.nivel === '1';
+    if(ciudadano && !paisFiltro){
+      const peores = orden.slice(0,3), mejores = orden.slice(-3).reverse();
+      caja.innerHTML =
+        '<p class="escala"><b>0 el más transparente · 100 el más opaco.</b> '
+        + 'Promedio de ' + actos.length + ' actos observables. '
+        + '<b>Elegí tu país en el mapa</b> para ver el suyo.</p>'
+        + '<div class="indice-extremos"><div>'
+        + '<p class="rot">Los que menos dejan ver</p>'
+        + peores.map(x => '<div class="indice-fila"><span class="pu">' + x.puesto
+            + '.º</span><span class="pa">' + esc(x.pais) + '</span>'
+            + '<span class="va">' + cifra(x.opacidad) + '</span></div>').join('')
+        + '</div><div><p class="rot">Los que más dejan ver</p>'
+        + mejores.map(x => '<div class="indice-fila"><span class="pu">' + x.puesto
+            + '.º</span><span class="pa">' + esc(x.pais) + '</span>'
+            + '<span class="va">' + cifra(x.opacidad) + '</span></div>').join('')
+        + '</div></div>';
+      return;
+    }
+    if(ciudadano && paisFiltro && orden.length === 1){
+      const x = orden[0];
+      caja.innerHTML =
+        '<p class="escala"><b>0 el más transparente · 100 el más opaco.</b> '
+        + 'Promedio de ' + actos.length + ' actos observables.</p>'
+        + '<div class="indice-solo"><span class="n">' + cifra(x.opacidad) + '</span>'
+        + '<span class="q">' + esc(x.pais) + ' · puesto <b>' + x.puesto + '.º</b> de '
+        + x.de + ' en opacidad</span></div>'
+        + '<div class="indice-barra"><i style="width:' + Math.max(1,x.opacidad) + '%"></i></div>'
+        + '<p class="escala" style="margin-top:10px">Los ' + actos.length + ' actos: '
+        + esc(actos.map(a => a.rotulo).join(' · ')) + '.</p>';
+      return;
+    }
 
     caja.innerHTML =
       '<p class="escala"><b>0 el más transparente · 100 el más opaco.</b> Promedio simple de '
