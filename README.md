@@ -68,7 +68,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**31 fuentes en servicio.** Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**32 fuentes en servicio.** Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -89,6 +89,7 @@ python colectores/focos.py
 | `designados` | Consejo de Seguridad de las Naciones Unidas — lista consolidada de sanciones | `A-2` | 33 | 6 |
 | `desplazamiento-serie` | ACNUR — Refugee Data Finder | `A-2` | 33 | 7 |
 | `desplazamiento` | ACNUR — Refugee Data Finder | `A-2` | 33 | 7 |
+| `explorador` | Fundación Sherman Kent — exploración de puertas de datos oficiales | `A-1` | 33 | 6 |
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
 | `memoria` | Fundación Sherman Kent — bitácora de observación de SIWA | `A-2` | 33 | 5 |

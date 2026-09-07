@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 30 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-30">
+<meta property="og:description" content="33 Estados, 69 indicadores, 31 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-31">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 30 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-30">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 31 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-31">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 30 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 31 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1432,6 +1432,26 @@
     <section class="domain bloque" id="seguridad-flujos" data-nivel="2">
       <div class="bloque-head"><h3>Seguridad · flujos y ciberseguridad</h3></div>
       <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
+    <div class="categoria" id="explorador" data-nivel="2">
+      <div class="categoria-head"><h4>Qué Estados dejan leer sus datos a una máquina</h4><span class="tag" id="tag-explorador">—</span></div>
+      <div class="aviso-cobertura">
+        <p><b>Publicar para personas y publicar para máquinas no es lo mismo.</b> Un
+           Estado puede tener su portal impecable y devolverle un portazo a cualquier
+           programa que intente leerlo. Eso no es opacidad, pero tampoco es dato abierto:
+           es una tercera cosa, y acá se la nombra.</p>
+        <p><b>Tres estados, y no son intercambiables.</b> <b>Abre</b>: responde y entrega
+           catálogo. <b>Cierra</b>: el portal existe y rechaza a los programas.
+           <b>Sin puerta hallada</b>: no se encontró catálogo legible en los dominios
+           probados —puede publicar en PDF, en otra dirección, o en un dialecto que este
+           registro todavía no conoce—.</p>
+        <p><b>Esto propone, no publica.</b> Lo que el explorador encuentra no entra solo
+           al registro: queda declarado para que una persona lo verifique. Un registro que
+           se autoalimentara rompería la regla que lo hace confiable.</p>
+      </div>
+      <div class="procedencia" id="proc-explorador">Cargando el registro…</div>
+      <div class="cruce" id="lista-explorador"></div>
+      <div id="vac-explorador"></div>
+        </div>
     <div class="categoria" id="armas" data-nivel="2">
       <div class="categoria-head"><h4>Armas · quién le vende a quién, declarado en la aduana</h4><span class="tag" id="tag-armas">—</span></div>
       <div class="aviso-cobertura">
@@ -2309,7 +2329,8 @@
                      ['cites','CITES — comercio de especies protegidas'],
                      ['crimen','Índice Global de Crimen Organizado'],
                      ['designados','ONU — lista consolidada de sanciones'],
-                     ['armas','Comtrade — comercio de armas y municiones']];
+                     ['armas','Comtrade — comercio de armas y municiones'],
+                     ['explorador','Oficina — exploración de puertas oficiales']];
 
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
@@ -4801,6 +4822,7 @@
     paso('estado de las herramientas', pintarHerramientas);
     paso('ámbito del informe', ecoDelAmbito);
     paso('contratación pública', contratacionVista);
+    paso('explorador de puertas', exploradorVista);
     paso('comercio de armas', armasVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
@@ -5956,6 +5978,51 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
               + esc((f.titulo || f.enlace).slice(0, 76)) + '</a>' : '')
           + '</span><span class="badge medio">abierto</span></div></div>';
       }).join('');
+  }
+
+  function exploradorVista(){
+    const caja = document.getElementById('lista-explorador');
+    const d = almacen.explorador; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const tag = document.getElementById('tag-explorador');
+    if(tag) tag.textContent = d.resumen.estados_que_abren + ' abren · '
+      + d.resumen.estados_que_cierran + ' cierran · '
+      + d.resumen.estados_sin_puerta_hallada + ' sin puerta';
+
+    const abre = lista.filter(x => x.estado === 'abre');
+    const cierra = lista.filter(x => x.estado === 'cierra');
+    const nada = lista.filter(x => x.estado === 'sin_puerta_hallada');
+
+    let html = abre.map(x =>
+      '<div class="asunto"><h4>' + esc(x.pais) + '</h4><div class="foot">'
+      + '<span class="porque">' + x.puertas_abiertas.map(p =>
+          '<b>' + esc(p.dialecto) + '</b> · ' + esc(p.dominio)
+          + (p.conjuntos ? ' · <b>' + miles(p.conjuntos) + '</b> conjuntos declarados' : '')
+        ).join('<br>')
+      + '</span><span class="badge medio">abre</span></div></div>').join('');
+
+    if(cierra.length){
+      html += '<div class="asunto"><h4>' + cierra.length
+        + ' publican para personas y le cierran la puerta a las máquinas</h4>'
+        + '<div class="foot"><span class="porque">'
+        + cierra.map(x => '<b>' + esc(x.pais) + '</b> — '
+            + esc((x.puertas_cerradas[0]||'').split(' · ').join(', '))).join('<br>')
+        + '<br><i>El portal existe y responde a una persona. No es opacidad, pero el dato '
+        + 'no se puede recolectar.</i>'
+        + '</span><span class="badge unica">cierra</span></div></div>';
+    }
+    if(nada.length){
+      html += '<div class="asunto"><h4>' + nada.length + ' sin puerta hallada</h4>'
+        + '<div class="foot"><span class="porque">' + esc(nada.map(x=>x.pais).join(', '))
+        + '. <b>No significa que no publiquen datos</b>: significa que no se halló un '
+        + 'catálogo legible por máquina en los dominios probados y en los dialectos '
+        + 'conocidos.</span><span class="badge unica">sin puerta</span></div></div>';
+    }
+    caja.innerHTML = html;
   }
 
   function armasVista(){
@@ -7124,6 +7191,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-contratacion-abierta','contratación pública',err.message);
       document.getElementById('proc-contratacion-abierta').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('explorador.json'), traer('estado/explorador.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.explorador=d; const meta=d.procedencia;
+      pintarProcedencia('proc-explorador',meta);
+      vacios+=pintarVacios('vac-explorador',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-explorador','explorador de puertas',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-explorador','explorador de puertas',err.message);
+      document.getElementById('proc-explorador').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('armas.json'), traer('estado/armas.json').catch(()=>null)])
     .then(([d,estado])=>{

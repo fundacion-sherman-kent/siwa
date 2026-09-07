@@ -138,6 +138,14 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/armas.py
 
+      # El explorador PROPONE, no publica: toca puertas y deja el hallazgo
+      # declarado para que una persona decida.
+      - name: Explorador de puertas de datos oficiales
+        id: explorador
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/explorador.py
+
       # Cada hora: es la unica capa que ve lo que esta ardiendo AHORA.
       - name: Focos de calor (NASA FIRMS)
         id: focos
@@ -293,6 +301,7 @@ jobs:
           [ "${{ steps.crimen.outcome }}" = "failure" ] && { echo "Falló el colector de crimen organizado."; fallo=1; }
           [ "${{ steps.designados.outcome }}" = "failure" ] && { echo "Falló el colector de designados."; fallo=1; }
           [ "${{ steps.armas.outcome }}" = "failure" ] && { echo "Falló el colector de comercio de armas."; fallo=1; }
+          [ "${{ steps.explorador.outcome }}" = "failure" ] && { echo "Falló el explorador de puertas."; fallo=1; }
           [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
           [ "${{ steps.brecha.outcome }}" = "failure" ] && { echo "Falló el colector de la brecha."; fallo=1; }
           [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }
