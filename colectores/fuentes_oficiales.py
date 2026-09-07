@@ -162,40 +162,40 @@ def recolectar():
         corroborado=False,
         nota=(
             "Catálogos oficiales de los propios Estados: registro primario. Lo que se "
-            "consigna es la EXISTENCIA del conjunto de datos y su dirección, no su "
+            "consigna es la existencia del conjunto de datos y su dirección, no su "
             "contenido. Fuente única por naturaleza: solo el Estado publica su catálogo."
         ),
     )
 
     vacios = [
 
-        "DOS PORTALES SE LEEN DE OTRA MANERA, Y SUS CIFRAS NO SON COMPARABLES CON LAS "
+        "Dos portales se leen de otra manera, y sus cifras no son comparables con las "
 
-        "DEMAS. Peru y Paraguay publican catalogo —4.684 y 434 conjuntos— pero NO "
+        "Demás. Perú y Paraguay publican catálogo —4.684 y 434 conjuntos— pero no "
 
-        "tienen buscador: package_search devuelve 404 en uno y algo que no es JSON en "
+        "Tienen buscador: package_search devuelve 404 en uno y algo que no es JSON en "
 
-        "el otro. Con ellos se lee la lista completa de nombres y se filtra por NOMBRE, "
+        "El otro. Con ellos se lee la lista completa de nombres y se filtra por nombre, "
 
-        "no por texto completo. Un conjunto llamado «serie 3.4.1» sobre homicidios NO "
+        "No por texto completo. Un conjunto llamado «serie 3.4.1» sobre homicidios no "
 
-        "aparece, de modo que sus cantidades salen MAS BAJAS por como se los consulta y "
+        "Aparece, de modo que sus cantidades salen más bajas por como se los consulta y "
 
-        "no por lo que publican. Se los suma igual: tenerlos mal contados es mejor que "
+        "No por lo que publican. Se los suma igual: tenerlos mal contados es mejor que "
 
-        "no tenerlos, siempre que se diga.",
-        "ESTO NO PUBLICA DATOS, PUBLICA DÓNDE ESTÁN. Es un índice de conjuntos "
+        "No tenerlos, siempre que se diga.",
+        "Esto no publica datos, publica dónde están. Es un índice de conjuntos "
         "oficiales con su dirección, para que el analista vaya al original.",
-        "**Las cifras de estos catálogos NO son comparables entre países.** Cada Estado "
+        "**Las cifras de estos catálogos no son comparables entre países.** Cada Estado "
         "define el delito a su manera, lo publica con su cadencia y lo cuenta desde su "
         "año. Sumarlas para armar una serie regional produciría una serie falsa.",
         (
             f"Solo {len(con_portal)} de los 33 Estados tienen portal oficial con interfaz "
             f"de consulta verificada. Sin portal verificado: {', '.join(sin_portal)}."
         ),
-        "Que un Estado no figure NO prueba que carezca de portal. De los que no figuran: "
+        "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: "
         "Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador "
-        "interponen protección contra acceso automatizado, que NO se esquiva por decisión "
+        "interponen protección contra acceso automatizado, que no se esquiva por decisión "
         "de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen "
         "portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
         "La búsqueda es por palabra en el título y la descripción del conjunto. Un "

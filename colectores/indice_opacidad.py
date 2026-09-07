@@ -199,7 +199,7 @@ def recolectar():
     if faltan:
         raise RuntimeError(
             f"Faltan los archivos de {', '.join(faltan)}. El índice se DERIVA de otros "
-            "colectores y no puede calcularse sin ellos: se detiene en lugar de publicar "
+            "Colectores y no puede calcularse sin ellos: se detiene en lugar de publicar "
             "un puntaje armado con la mitad de los actos.")
 
     porColector = {c: _porIso(d) for c, d in fuentes.items()}
@@ -260,43 +260,43 @@ def recolectar():
         r["de"] = len(orden)
 
     vacios = [
-        "CERO ES EL MAS TRANSPARENTE Y CIEN EL MAS OPACO. La direccion importa: este "
-        "indice mide la AUSENCIA, no la presencia. Un puntaje de apertura no se puede "
-        "refutar mostrando una direccion; una afirmacion de ausencia si, y eso es lo que "
+        "Cero es el más transparente y cien el más opaco. La dirección importa: este "
+        "índice mide la ausencia, no la presencia. Un puntaje de apertura no se puede "
+        "refutar mostrando una dirección; una afirmación de ausencia si, y eso es lo que "
         "la vuelve seria.",
-        "NO SE COPIA LA FORMULA DE TRANSPARENCIA INTERNACIONAL, Y NO POR DESCUIDO. Su "
-        "indice de percepcion de corrupcion es un PROMEDIO DE ENCUESTAS A EXPERTOS: mide "
-        "lo que un panel CREE sobre un pais. Este mide ACTOS OBSERVABLES que cualquiera "
-        "comprueba repitiendo la consulta. Contestan preguntas distintas y NO DEBEN "
-        "COMPARARSE: ordenarian distinto con toda razon.",
+        "No se copia la fórmula de transparencia internacional, y no por descuido. Su "
+        "índice de percepción de corrupción es un promedio de encuestas a expertos: mide "
+        "Lo que un panel cree sobre un país. Este mide actos observables que cualquiera "
+        "comprueba repitiendo la consulta. Contestan preguntas distintas y no deben "
+        "compararse: ordenarian distinto con toda razón.",
         f"NO SE CASTIGA LO QUE NO SE MIRO. Si a un Estado le falta la evidencia de un "
         f"acto, ese acto NO PUNTUA: no suma ni resta, y el indice se calcula sobre los "
         f"que si tienen evidencia. Con menos de {MINIMO_ACTOS} actos medidos el Estado "
-        "queda SIN MEDIR, que no es lo mismo que opaco.",
-        "CUANDO EL ARCHIVO PUBLICO DE LA WEB NO RESPONDE, EL QUE FALLO ES EL ARCHIVO Y NO "
-        "EL ESTADO. Ese acto se descarta en lugar de contarse en contra. Es la clase de "
-        "confusion que convierte una falla propia en una acusacion ajena.",
-        "LOS SEIS ACTOS PESAN LO MISMO, Y ES UNA ELECCION. Podria argumentarse que la "
-        "puerta a los datos vale mas que el informe de especies —y seria razonable—, pero "
-        "CUALQUIER REPARTO DE PESOS ES UN JUICIO, y un juicio metido adentro de una "
-        "formula deja de verse. Pesos iguales es la unica eleccion que no esconde una "
+        "Queda sin medir, que no es lo mismo que opaco.",
+        "Cuando el archivo público de la web no responde, el que fallo es el archivo y no "
+        "El Estado. Ese acto se descarta en lugar de contarse en contra. Es la clase de "
+        "confusión que convierte una falla propia en una acusación ajena.",
+        "Los seis actos pesan lo mismo, y es una elección. Podría argumentarse que la "
+        "puerta a los datos vale más que el informe de especies —y sería razonable—, pero "
+        "cualquier reparto de pesos es un juicio, y un juicio metido adentro de una "
+        "fórmula deja de verse. Pesos iguales es la única elección que no esconde una "
         "preferencia.",
-        "«CIERRA» VALE 60 Y NO 100 A PROPOSITO. El portal EXISTE y responde a una persona: "
-        "publica, y lo que no hace es dejarse recolectar. Es peor que abrir y mejor que no "
+        "«cierra» vale 60 Y no 100 A propósito. El portal existe y responde a una persona: "
+        "Publica, y lo que no hace es dejarse recolectar. Es peor que abrir y mejor que no "
         "tener puerta, y la cifra tiene que decir eso.",
-        "EL SEXTO ACTO SOLO PUNTUA DONDE HAY PORTAL, y es a proposito. Sin el, seis "
-        "Estados empataban en cero: el indice sabia decir «cumple todo» y no sabia "
-        "distinguir entre los que cumplen. En los Estados SIN portal no se anota cien: la "
-        "ausencia de portal ya la mide el primer acto, y contarla dos veces seria castigar "
-        "el mismo hecho dos veces.",
-        "ES UN INDICE DERIVADO, NO UNA MEDICION NUEVA. Los seis actos los midieron otros "
+        "El sexto acto solo puntua donde hay portal, y es a propósito. Sin el, seis "
+        "Estados empataban en cero: el índice sabia decir «cumple todo» y no sabia "
+        "distinguir entre los que cumplen. En los Estados sin portal no se anota cien: la "
+        "ausencia de portal ya la mide el primer acto, y contarla dos veces sería castigar "
+        "El mismo hecho dos veces.",
+        "Es un índice derivado, no una medición nueva. Los seis actos los midieron otros "
         "colectores de esta misma casa, cada uno con su fecha y su rastro. Si uno de ellos "
-        "falla, este indice NO SE PUBLICA en lugar de calcularse con la mitad.",
+        "falla, este índice no se publica en lugar de calcularse con la mitad.",
         f"ANTES DE CREERLE UN PUNTAJE A NADIE SE PRUEBA EL CALCULO contra {CONTROL}, que "
         f"cumple los actos medibles: si diera mas de {TOPE_CONTROL}, alguna senial se estaria "
-        "leyendo al reves y la corrida se detiene entera.",
-        "NO MIDE CORRUPCION NI CALIDAD DE GOBIERNO. Mide si el Estado deja ver lo que "
-        "hace. Un Estado puede ser transparente y estar mal gobernado, y al reves.",
+        "Leyendo al revés y la corrida se detiene entera.",
+        "No mide corrupción ni calidad de gobierno. Mide si el Estado deja ver lo que "
+        "hace. Un Estado puede ser transparente y estar mal gobernado, y al revés.",
     ]
 
     calificacion = comun.calificar(
@@ -304,9 +304,9 @@ def recolectar():
         credibilidad=1,
         corroborado=True,
         nota=("Indice propio de la Oficina, derivado de cinco mediciones de esta misma "
-              "casa. Fiabilidad A porque el productor es la Fundacion y el metodo esta "
+              "Casa. Fiabilidad a porque el productor es la Fundación y el método esta "
               "escrito entero. Credibilidad 1 porque cada acto es un hecho verificable "
-              "por repeticion —cualquiera pega la direccion y obtiene lo mismo—: la "
+              "por repetición —cualquiera pega la dirección y obtiene lo mismo—: la "
               "corroboracion es la reproducibilidad, y la formula esta publicada."),
     )
 

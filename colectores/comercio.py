@@ -206,32 +206,32 @@ def recolectar():
 
     llamativos = [c for c in corredores if c["llama_la_atencion"]]
     vacios = [
-        "UNA BRECHA DE POCOS PUNTOS NO ES CONTRABANDO: ES CONTABILIDAD. El exportador "
+        "Una brecha de pocos puntos no es contrabando: es contabilidad. El exportador "
         "declara en valor FOB —la mercaderia puesta en el barco— y el importador en CIF, "
-        "que además incluye FLETE Y SEGURO. Solo por eso el importador registra de rutina "
-        "entre 3 % y 10 % mas. A eso se suman los envios que cruzan el año calendario y "
-        "las diferencias de clasificación aduanera.",
-        "LO QUE SI LLAMA LA ATENCIÓN ES LA BRECHA NEGATIVA: que el importador declare "
-        "MENOS de lo que el exportador dice haberle mandado no tiene explicación contable "
-        "inocente, porque el flete y el seguro empujan en el sentido contrario. Aun así "
-        "es un INDICIO que abre una línea de averiguación, NO una prueba de delito.",
+        "que además incluye flete y seguro. Solo por eso el importador registra de rutina "
+        "entre 3 % y 10 % más. A eso se suman los envios que cruzan el año calendario y "
+        "Las diferencias de clasificación aduanera.",
+        "Lo que si llama la atención es la brecha negativa: que el importador declare "
+        "menos de lo que el exportador dice haberle mandado no tiene explicación contable "
+        "inocente, porque el flete y el seguro empujan en el sentido contrario. Aún así "
+        "es un indicio que abre una línea de averiguación, no una prueba de delito.",
         f"Se comparan {len(PARES)} corredores —los que comparten frontera y los de mayor "
-        "volumen regional—, no los 1.056 pares posibles: la mayoria no tiene comercio "
-        "significativo y solo agregaria ruido. Un corredor ausente no esta limpio: no "
+        "Volumen regional—, no los 1.056 pares posibles: la mayoría no tiene comercio "
+        "significativo y solo agregaria ruido. Un corredor ausente no está limpio: no "
         "esta mirado.",
         f"LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas "
         f"por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de "
         f"37 pedidos. No se la fuerza. Cada corrida mide {POR_CORRIDA} corredores, "
-        "empezando por los que nunca se midieron, y CADA CORREDOR DECLARA CUANDO SE "
+        "Empezando por los que nunca se midieron, y cada corredor declara cuando se "
         f"MIDIO. Van {len(corredores)} de {len(PARES)} medidos al menos una vez. Es "
-        "preferible un dato fechado que un barrido que el servidor rechaza.",
+        "Preferible un dato fechado que un barrido que el servidor rechaza.",
         f"El año es {ANIO}, el último con cobertura amplia en la vista publica. NO es el "
-        "año corriente y no se estima ninguno posterior.",
-        "Se compara el TOTAL de comercio, no producto por producto. La subfacturación "
+        "Año corriente y no se estima ninguno posterior.",
+        "Se compara el total de comercio, no producto por producto. La subfacturación "
         "suele concentrarse en unas pocas partidas y se diluye en el total: este registro "
         "sirve para señalar el corredor, no la mercaderia.",
         "Un Estado que no reporta a Comtrade no genera brecha con nadie, y por lo tanto "
-        "NO APARECE. La ausencia mide la calidad de su estadística aduanera, no su "
+        "no aparece. La ausencia mide la calidad de su estadística aduanera, no su "
         "honestidad comercial.",
     ]
     if descartadas:
@@ -248,7 +248,7 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Declaraciones aduaneras oficiales de cada Estado, compiladas por Naciones "
-              "Unidas. La fuente es de primer orden; lo que NO es de primer orden es la "
+              "Unidas. La fuente es de primer orden; lo que no es de primer orden es la "
               "interpretación: la brecha es un indicio, no una medición de contrabando."),
     )
 
@@ -272,9 +272,9 @@ def recolectar():
             },
             "corredores": corredores,
             "metodo": (
-                "Para cada corredor se pide lo que el origen declara EXPORTAR al destino "
-                "y lo que el destino declara IMPORTAR del origen, en el mismo año y "
-                "sobre el total de mercaderias. Se toma UNICAMENTE la fila total "
+                "Para cada corredor se pide lo que el origen declara exportar al destino "
+                "Y lo que el destino declara importar del origen, en el mismo año y "
+                "sobre el total de mercaderias. Se toma unicamente la fila total "
                 "—motCode 0, customsCode C00, partner2Code 0— y se descartan las "
                 "aperturas por modo de transporte, que repiten el mismo comercio."
             ),

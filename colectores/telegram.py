@@ -260,39 +260,39 @@ def recolectar():
     sin_mencion = sorted(p["pais"] for p in lugares if p["iso"] not in por_iso)
 
     vacios = [
-        "ESTE REGISTRO NO CORROBORA NADA DE LA COBERTURA NOTICIOSA, Y NO SE MEZCLA "
-        "CON ELLA. Un canal de mensajeria de un medio que ya esta en el padron de "
-        "prensa es EL MISMO MEDIO POR OTRA PUERTA, no un segundo origen. Contarlo "
+        "Este registro no corrobora nada de la cobertura noticiosa, y no se mezcla "
+        "con ella. Un canal de mensajeria de un medio que ya está en el padrón de "
+        "prensa es el mismo medio por otra puerta, no un segundo origen. Contarlo "
         "como corroboración independiente inflaria la verificación cruzada, que es lo "
         "único que separa un hecho de un rumor. Canales que se superponen con el "
         "padron de prensa: " + (", ".join(superpuestos) if superpuestos else "ninguno") + ".",
-        "Solo se lee la VISTA PUBLICA que el propio servicio ofrece sin cuenta. No se "
+        "Solo se lee la vista pública que el propio servicio ofrece sin cuenta. No se "
         "lee ningún canal privado, ningún grupo, ninguna conversación y ningún mensaje "
         "que exija iniciar sesión. No se sortea protección alguna.",
-        "UN NOMBRE DE USUARIO NO PRUEBA IDENTIDAD: en esta plataforma los nombres se "
+        "Un nombre de usuario no prueba identidad: en esta plataforma los nombres se "
         "compran, se venden y se transfieren. Durante la prueba, el canal «@blu_radio» "
         "—que por su nombre pareceria la emisora colombiana— resulto ser otro canal sin "
         "relación con ella. Solo entran canales que enlazan a su propio dominio "
         "institucional o llevan el sello de verificado de la plataforma. De 43 "
         "candidatos probados entraron 20.",
-        "Canales del padron SIN PUBLICAR HACE MAS DE NOVENTA DÍAS, con la fecha de su "
+        "Canales del padrón sin publicar hace más de noventa días, con la fecha de su "
         "último mensaje: "
         + ("; ".join(f"{n} ({f})" for n, f in dormidos) if dormidos else "ninguno")
         + ". No es una falla de lectura: el canal responde y su contenido esta a la "
-          "vista. Es que ese emisor dejo de usar esta via, y conviene saberlo antes de "
+          "Vista. Es que ese emisor dejó de usar esta vía, y conviene saberlo antes de "
           "buscar ahi lo que ya no se publica.",
-        "El padron cubre 8 jurisdicciones de las 33 del registro. La mayoria de los "
-        "Estados de la región no tiene medios ni organismos con canal publico "
-        "verificable en esta plataforma. NO es que no se hable de ellos: es que no hay "
+        "El padrón cubre 8 jurisdicciones de las 33 del registro. La mayoría de los "
+        "Estados de la región no tiene medios ni organismos con canal público "
+        "verificable en esta plataforma. No es que no se hable de ellos: es que no hay "
         "canal propio que leer.",
         "Los medios de Estados de fuera de la región —Rusia, Alemania, Francia— entran "
-        "a proposito y con su atribución declarada: quien narra America Latina desde "
-        "afuera es materia de estudio, no ruido. Su presencia en este registro NO "
+        "a propósito y con su atribución declarada: quien narra América Latina desde "
+        "afuera es materia de estudio, no ruido. Su presencia en este registro no "
         "implica que la Fundación avale lo que publican.",
         f"Sin una sola mención en la ventana de {HORAS} h: "
         + (", ".join(sin_mencion) if sin_mencion else "ninguno")
         + ". Ausencia de mención no es ausencia de hechos.",
-        "El recuento de vistas lo publica la propia plataforma y NO es verificable de "
+        "El recuento de vistas lo publica la propia plataforma y no es verificable de "
         "forma independiente. Se transcribe tal como viene, sin tratarlo como medida.",
     ]
     if caidos:
@@ -303,7 +303,7 @@ def recolectar():
         credibilidad=4,
         corroborado=False,
         nota=("Difusión declarada por el propio emisor en su canal. Se registra QUE "
-              "se publico y CON QUE palabras, que se observa directamente; no que lo "
+              "Se publico y con que palabras, que se observa directamente; no que lo "
               "publicado sea cierto. La identidad del canal esta verificada; el "
               "contenido no."),
     )
@@ -335,10 +335,10 @@ def recolectar():
                 "mensajes_por_bloque": {b: len(l) for b, l in sorted(por_bloque.items())},
             },
             "metodo": (
-                "Se lee la vista publica de cada canal y se toman los mensajes de la "
+                "Se lee la vista pública de cada canal y se toman los mensajes de la "
                 "ventana vigente. La atribución por Estado usa el diccionario de "
                 "gentilicios del registro. Un concepto figura en la nube solo si "
-                "aparece en dos mensajes de DOS CANALES distintos: lo que dice un solo "
+                "aparece en dos mensajes de dos canales distintos: lo que dice un solo "
                 "canal es su línea editorial, no circulación."
             ),
         },

@@ -55,7 +55,7 @@ CANDIDATAS = [
         "url": ("https://api.gdeltproject.org/api/v2/doc/doc"
                 "?query=homicidio&mode=artlist&format=json&maxrecords=1"),
         "porque": "Sería la mejor pieza de la capa de hoy: noticias del día, en varias "
-                  "lenguas, acotables por país y sin credencial.",
+                  "Lenguas, acotables por país y sin credencial.",
         "traba": "Respondió 2 de unas 20 consultas el 3 de septiembre de 2026.",
     },
     {
@@ -78,7 +78,7 @@ CANDIDATAS = [
         "rotulo": "UCDP — conflicto armado",
         "url": "https://ucdpapi.pcr.uu.se/api/gedevents/24_1?pagesize=1",
         "porque": "Reemplazo posible de las dos series de terrorismo detenidas en 2021, y "
-                  "con licencia de atribución que SÍ permite redistribuir.",
+                  "Con licencia de atribución que sí permite redistribuir.",
         "traba": "401 · pide un testigo. Falta averiguar si es gratuito.",
     },
     {
@@ -107,7 +107,7 @@ CANDIDATAS = [
         "rotulo": "Ecuador — portal de datos abiertos",
         "url": "https://www.datosabiertos.gob.ec/api/3/action/package_search?rows=1",
         "porque": "Ecuador tiene dominio oficial probado y catálogo publicado: sumarlo "
-                  "cerraría uno de los huecos de datos de gobierno.",
+                  "Cerraría uno de los huecos de datos de gobierno.",
         "traba": "403 · bloquea incluso identificándose como navegador.",
     },
     {
@@ -129,7 +129,7 @@ CANDIDATAS = [
         "rotulo": "Costa Rica — instituto de estadística",
         "url": "https://www.inec.cr/",
         "porque": "Costa Rica es un Estado de alta transparencia y sin embargo NO tiene "
-                  "ninguna fuente oficial en el registro: su instituto bloquea y su "
+                  "Ninguna fuente oficial en el registro: su instituto bloquea y su "
                   "portal de datos no responde. El hueco es técnico, no político.",
         "traba": "403 en el instituto; el portal de datos no resuelve.",
     },
@@ -138,7 +138,7 @@ CANDIDATAS = [
         "rotulo": "Cuba — oficina nacional de estadística",
         "url": "https://www.onei.gob.cu/",
         "porque": "Es la única vía oficial de cifras cubanas. Sin ella, Cuba queda "
-                  "descrita sólo por fuentes de terceros.",
+                  "Descrita sólo por fuentes de terceros.",
         "traba": "HTTP 500 · el sitio está fallando, no bloqueando.",
     },
 ]
@@ -210,18 +210,18 @@ def recolectar():
                         encoding="utf-8")
 
     vacios = [
-        "ESTO NO MIDE LA CALIDAD DE UNA FUENTE: MIDE SI CONTESTA. Una fuente que contesta "
+        "Esto no mide la calidad de una fuente: mide si contesta. Una fuente que contesta "
         "siempre y publica basura sigue siendo basura; una que contesta la mitad de las "
         "veces puede ser excelente y estar sobrecargada.",
-        "RESPONDER NO ES SERVIR. Un 200 con cero bytes no sirve para nada, de modo que un "
-        "intento cuenta como bueno solo si ademas devolvio contenido.",
-        "LA MEDICION ES DESDE UNA SOLA MAQUINA Y UNA SOLA RED. Una fuente puede estar viva "
-        "para el mundo y caida para el robot: la cifra dice cuanto pudo usarla ESTE "
+        "Responder no es servir. Un 200 con cero bytes no sirve para nada, de modo que un "
+        "intento cuenta como bueno solo si además devolvió contenido.",
+        "La medición es desde una sola maquina y una sola red. Una fuente puede estar viva "
+        "para el mundo y caída para el robot: la cifra dice cuánto pudo usarla este "
         "registro, que es justamente lo que hay que saber antes de construir encima.",
         f"SE CONSERVAN LOS ULTIMOS {MEMORIA} INTENTOS por candidata. Mas atras no se "
-        "guarda, de modo que la disponibilidad describe el periodo reciente y no toda la "
+        "Guarda, de modo que la disponibilidad describe el periodo reciente y no toda la "
         "historia.",
-        "UNA CANDIDATA QUE NO FIGURA ACA NO FUE DESCARTADA: es que nadie la puso en la "
+        "Una candidata que no figura acá no fue descartada: es que nadie la puso en la "
         "lista. El banco prueba lo que se le declara, no todo lo que existe.",
     ]
 
@@ -230,7 +230,7 @@ def recolectar():
         credibilidad=1,
         corroborado=True,
         nota=("Medicion propia del robot sobre su propia capacidad de alcanzar cada "
-              "fuente. Fiabilidad A y credibilidad 1 porque el hecho medido es la "
+              "Fuente. Fiabilidad a y credibilidad 1 porque el hecho medido es la "
               "respuesta que el registro recibio: no hay intermediario entre la "
               "observacion y quien la publica, y cada intento queda con su fecha."),
     )

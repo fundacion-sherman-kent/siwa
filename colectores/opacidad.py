@@ -65,7 +65,7 @@ NAVEGADOR = (
 # Una ausencia hallada con UNA sola palabra mide nuestro vocabulario, no el del
 # Estado. Se busca con varios términos, y los tres se publican en el rastro.
 TERMINOS = [
-    "solicitudes de acceso a la información",
+    "Solicitudes de acceso a la información",
     "acceso a la información publica estadísticas",
     "solicitudes de información publica",
 ]
@@ -148,7 +148,7 @@ def recolectar():
             estado = "sin_verificar"
             detalle = {"nota": sin_hallar.get(
                 iso,
-                "Todavia no se verifico. NO cuenta como opaco: significa que la "
+                "Todavía no se verificó. No cuenta como opaco: significa que la "
                 "Oficina aun no reviso los cuatro pasos en este Estado.")}
         registros.append({
             "iso": iso, "pais": pais["pais"], "bloque": pais["bloque"],
@@ -162,35 +162,35 @@ def recolectar():
         cuenta[r["estado"]] = cuenta.get(r["estado"], 0) + 1
 
     vacios = [
-        "LA PRESENCIA SE PRUEBA CON UNA FUENTE; LA AUSENCIA EXIGE LAS CUATRO. Por eso "
+        "La presencia se prueba con una fuente; la ausencia exige las cuatro. Por eso "
         "ningún Estado figura como «no publica»: para afirmarlo hay que haber revisado "
         "organismo productor, portal de datos abiertos, portal de transparencia activa y "
-        "memoria institucional. Mientras falte uno, dice SIN VERIFICAR.",
-        "SIN VERIFICAR NO ES OPACO. Es la Oficina diciendo que todavia no miro. Contarlo "
-        "como opacidad seria cometer, en el propio índice, el error que el índice existe "
+        "memoria institucional. Mientras falte uno, dice sin verificar.",
+        "Sin verificar no es opaco. Es la Oficina diciendo que todavía no miro. Contarlo "
+        "como opacidad sería cometer, en el propio índice, el error que el índice existe "
         "para señalar.",
         f"Solo el paso 2 —portal de datos abiertos— tiene interfaz de consulta, y solo "
         f"{len(portales)} de los 33 Estados tienen portal verificado. Los pasos 1, 3 y 4 son "
-        "paginas para navegar: se comprobo que las autoridades de transparencia responden "
+        "Paginas para navegar: se comprobo que las autoridades de transparencia responden "
         "pero no exponen sus estadísticas de forma automatizable. El índice es "
-        "irreduciblemente manual mas allá del paso 2.",
-        "EL CONTEO DEL PORTAL NO ES UNA MEDIDA y no se publica como cifra. Colombia lo topa "
-        "en 10.000 y los demas cuentan coincidencias de palabra: se hallaron escuelas de "
+        "irreduciblemente manual más allá del pasó 2.",
+        "El conteo del portal no es una medida y no se publica como cifra. Colombia lo topa "
+        "en 10.000 y los demás cuentan coincidencias de palabra: se hallaron escuelas de "
         "«dificil acceso» entre los resultados de «acceso a la información». Va en el rastro "
-        "para que la consulta se pueda repetir, nada mas.",
-        "NO SE PUBLICA PUNTAJE DE 0 A 100. Las siete dimensiones del método —accesibilidad, "
+        "para que la consulta se pueda repetir, nada más.",
+        "No se publica puntaje de 0 A 100. Las siete dimensiones del método —accesibilidad, "
         "actualidad, periodicidad, desagregación, formato y continuidad— exigen abrir cada "
-        "conjunto y mirar sus columnas. Esta edición publica el ESTADO DE PUBLICACIÓN con su "
+        "conjunto y mirar sus columnas. Esta edición publica el Estado de publicación con su "
         "rastro; el puntaje es la edición siguiente.",
-        "NO SE VERIFICO, Estado por Estado, que la ley nacional de acceso este vigente y "
+        "No se verificó, Estado por Estado, que la ley nacional de acceso este vigente y "
         "exija publicar estas estadísticas. La exigencia se apoya en el ODS 16.10.2, que es "
         "universal; la obligación legal concreta de cada Estado esta pendiente de comprobar.",
-        "De los conjuntos hallados NO se verifico el contenido de las columnas: que se "
+        "De los conjuntos hallados no se verificó el contenido de las columnas: que se "
         "publique «solicitudes de acceso» no prueba que desagregue las denegadas ni su "
         "motivo. Es la verificación de la edición siguiente.",
-        "TODA CELDA ES REFUTABLE. Si el dato existe y la Oficina no lo encontro, la "
+        "Toda celda es refutable. Si el dato existe y la Oficina no lo encontro, la "
         "corrección se recibe, se verifica, se publica con fecha y se acredita a quien la "
-        "aporto. El registro de correcciones es publico y permanente.",
+        "aportó. El registro de correcciones es público y permanente.",
     ]
 
     calificacion = comun.calificar(
@@ -198,8 +198,8 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=("Producción propia con método declarado y rastro publicado: la consulta "
-              "automática la puede repetir cualquiera pegando la dirección. Credibilidad 3 "
-              "y no 2 porque hasta ahora cada Estado se verifico por UNA sola via —el portal "
+              "Automática la puede repetir cualquiera pegando la dirección. Credibilidad 3 "
+              "Y no 2 porque hasta ahora cada Estado se verificó por una sola vía —el portal "
               "de datos abiertos—. Una ausencia hallada por un solo camino es un indicio, no "
               "un hecho: con dos vias independientes que coincidan sube a 2."),
     )

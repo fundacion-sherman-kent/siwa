@@ -151,25 +151,25 @@ def recolectar():
         })
 
     vacios = [
-        "EL RECUENTO DE ESCENAS NO SE COMPARA ENTRE ESTADOS. Depende del tamanio del "
-        "territorio, de la latitud y de por donde pasa el satelite: Brasil tiene mas "
+        "El recuento de escenas no se compara entre Estados. Depende del tamaño del "
+        "territorio, de la latitud y de por donde pasa el satelite: Brasil tiene más "
         "escenas que Granada por geometria, no por nada que se pueda decir de ninguno "
-        "de los dos. Ordenar Estados por esa cifra seria ordenarlos por superficie. LO "
-        "QUE SI ES COMPARABLE ES LA FRESCURA: cuantos dias hace de la ultima escena.",
-        "UNA IMAGEN NO ACREDITA UN HECHO. Prueba que habia algo el dia que paso el "
-        "satelite; NO prueba que era ni de quien. Entra como material de recoleccion, "
-        "jamas como cifra, y ningun juicio del registro se apoya en ella.",
-        "SE CUENTAN ESCENAS DISPONIBLES, NO UTILIZABLES. La nube manda en el tropico: "
-        "buena parte de America Central y de la Amazonia esta cubierta buena parte del "
-        "anio. Una escena existente puede no dejar ver nada.",
-        "SE CONSULTA POR UN RECTANGULO, NO POR LA FORMA DEL PAIS. El rectangulo de "
+        "de los dos. Ordenar Estados por esa cifra sería ordenarlos por superficie. Lo "
+        "que si es comparable es la frescura: cuántos días hace de la ultima escena.",
+        "Una imagen no acredita un hecho. Prueba que habia algo el día que pasó el "
+        "satelite; no prueba que era ni de quien. Entra como material de recolección, "
+        "jamas como cifra, y ningún juicio del registro se apoya en ella.",
+        "Se cuentan escenas disponibles, no utilizables. La nube manda en el tropico: "
+        "Buena parte de América Central y de la Amazonia está cubierta buena parte del "
+        "año. Una escena existente puede no dejar ver nada.",
+        "Se consulta por un rectángulo, no por la forma del país. El rectángulo de "
         "Chile abarca medio oceano Pacifico y parte de la Argentina, de modo que "
-        "escenas contadas para un Estado pueden caer fuera de el.",
-        "NO SE DESCARGA NI SE SIRVE NINGUNA IMAGEN: se publica que existe, de cuando es "
-        "y el enlace al mirador oficial, que es donde vive. Descargarla exige registro "
+        "escenas contadas para un Estado pueden caer fuera de él.",
+        "No se descarga ni se sirve ninguna imagen: se publica que existe, de cuando es "
+        "Y el enlace al mirador oficial, que es donde vive. Descargarla exige registro "
         "gratuito, y ese tramite no lo hace el robot.",
         f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver que "
-        "hay ahora, NO para comparar contra el mes pasado.",
+        "Hay ahora, no para comparar contra el mes pasado.",
     ]
 
     calificacion = comun.calificar(
@@ -177,9 +177,9 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Catalogo del programa de observacion de la Tierra de la Union Europea, "
-              "consultado por su interfaz publica y sin credencial. Fiabilidad A porque "
+              "Consultado por su interfaz publica y sin credencial. Fiabilidad a porque "
               "publica el organismo que opera los satelites. Credibilidad 2 porque se "
-              "verifico QUE LA ESCENA EXISTE y de cuando es, NO su contenido: nadie "
+              "verificó que la escena existe y de cuando es, no su contenido: nadie "
               "miro la imagen."),
     )
 

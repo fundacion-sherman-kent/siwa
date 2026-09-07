@@ -208,7 +208,7 @@ def recolectar():
     if not crudo.get(CONTROL, ({}, {}, []))[1]:
         raise RuntimeError(
             f"La prueba del lector falló: en {CONTROL} no se leyó ningún puesto. La "
-            "página escribe el ordinal DENTRO de una etiqueta —«85<sup>th</sup>»— y eso "
+            "Página escribe el ordinal dentro de una etiqueta —«85<sup>th</sup>»— y eso "
             "ya rompió el patrón una vez. NO se publica una lectura a ciegas.")
     if len(control) < 20:
         raise RuntimeError(
@@ -237,29 +237,29 @@ def recolectar():
         })
 
     vacios = [
-        "ES EVALUACION EXPERTA, NO RECUENTO DE HECHOS. Cada puntaje va de 1 a 10 y lo fija "
-        "un panel de especialistas con evidencia documental, revisado por pares. Dos "
-        "personas informadas pueden puntuar distinto el mismo pais.",
-        "UN PUNTAJE ALTO DE MERCADO NO DICE CUANTO. No hay tonelaje, no hay recuento de "
-        "operaciones ni de animales: dice cuan extendido y arraigado esta ese mercado "
-        "segun el panel. El registro NO inventa una cantidad que la fuente no da.",
-        "NO ES TIEMPO REAL Y NO PRETENDE SERLO. La edicion es BIENAL —2019, 2021, 2023, "
-        "2025— y describe ESTRUCTURA, no coyuntura: sirve para saber que opera en un "
-        "Estado y con que fuerza, no que paso anoche. Para lo reciente no hay fuente "
+        "Es evaluación experta, no recuento de hechos. Cada puntaje va de 1 a 10 y lo fija "
+        "Un panel de especialistas con evidencia documental, revisado por pares. Dos "
+        "personas informadas pueden puntuar distinto el mismo país.",
+        "Un puntaje alto de mercado no dice cuánto. No hay tonelaje, no hay recuento de "
+        "operaciones ni de animales: dice cuan extendido y arraigado está ese mercado "
+        "según el panel. El registro no inventa una cantidad que la fuente no da.",
+        "No es tiempo real y no pretende serlo. La edición es bienal —2019, 2021, 2023, "
+        "2025— y describe estructura, no coyuntura: sirve para saber que opera en un "
+        "Estado y con que fuerza, no que pasó anoche. Para lo reciente no hay fuente "
         "libre, y el registro lo dice en vez de simularlo.",
-        "LA RESILIENCIA NO ES LO CONTRARIO DE LA CRIMINALIDAD. Son dos medidas "
-        "independientes: un Estado puede tener mucha capacidad Y crimen arraigado a la "
-        "vez. Restarlas o tratarlas como una sola escala seria un error de lectura.",
-        "NO ENTRA AL COMPUESTO DEL REGISTRO. Son treinta y seis medidas nuevas sobre un "
+        "La resiliencia no es lo contrario de la criminalidad. Son dos medidas "
+        "independientes: un Estado puede tener mucha capacidad y crimen arraigado a la "
+        "vez. Restarlas o tratarlas como una sola escala sería un error de lectura.",
+        "No entra al compuesto del registro. Son treinta y seis medidas nuevas sobre un "
         "compuesto armado con cuatro ejes: sumarlas de golpe cambiaria el orden de los "
-        "Estados sin que nadie pueda explicar por que. Entran como CAPA PROPIA y "
+        "Estados sin que nadie pueda explicar por que. Entran como capa propia y "
         "comparable, con su puesto mundial.",
-        "EL PUESTO ORDENA CONTRA 193 PAISES, no contra los 33 del padron. Un Estado de la "
-        "region puede estar bien situado en el mundo y mal en su zona: son dos preguntas "
+        "El puesto ordena contra 193 países, no contra los 33 del padrón. Un Estado de la "
+        "región puede estar bien situado en el mundo y mal en su zona: son dos preguntas "
         "distintas y esta cifra contesta la primera.",
         f"ANTES DE CREER UN VACIO SE PRUEBA EL LECTOR contra {CONTROL}, que tiene puntaje "
-        "en las 36 medidas. Si la pagina cambia de forma, el patron deja de encontrar y "
-        "TODOS los Estados quedarian en blanco: eso no es «no hay datos», es «no supimos "
+        "En las 36 medidas. Si la pagina cambia de forma, el patron deja de encontrar y "
+        "todos los Estados quedarian en blanco: eso no es «no hay datos», es «no supimos "
         "leer», y la corrida se detiene entera.",
     ]
 
@@ -268,11 +268,11 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=("Iniciativa global contra el crimen organizado transnacional, red de "
-              "expertos con sede en Ginebra y metodologia publicada. La Fundacion es "
-              "MIEMBRO PERMANENTE de la organizacion que produce el indice. Fiabilidad B "
-              "porque es una organizacion con posicion tomada sobre la materia que mide "
-              "—lo cual no la invalida, pero se declara—. Credibilidad 3 porque el "
-              "puntaje es EVALUACION EXPERTA agregada, no un hecho verificable de forma "
+              "Expertos con sede en Ginebra y metodologia publicada. La Fundación es "
+              "miembro permanente de la organización que produce el índice. Fiabilidad B "
+              "porque es una organización con posición tomada sobre la materia que mide "
+              "—lo cuál no la invalida, pero se declara—. Credibilidad 3 porque el "
+              "puntaje es evaluación experta agregada, no un hecho verificable de forma "
               "independiente."),
     )
 

@@ -89,7 +89,7 @@ def _traer() -> tuple:
                 continue
     raise RuntimeError(
         "No se halló ninguna edición de la clasificación en los últimos tres años. "
-        "NO se publica la anterior como si fuera la vigente: si la fuente cambió de "
+        "No se publica la anterior como si fuera la vigente: si la fuente cambió de "
         "dirección, el registro se queda sin el dato y lo dice.")
 
 
@@ -124,25 +124,25 @@ def recolectar():
     sinEvaluar = [r["pais"] for r in registros if r["estado"] == "sin_evaluar"]
 
     vacios = [
-        "MIDE LAS CONDICIONES PARA EJERCER EL PERIODISMO, NO CUANTA DESINFORMACION "
-        "CIRCULA. Son cosas distintas: un Estado puede tener prensa libre y mucha "
-        "desinformacion, y otro puede tener poca desinformacion VISIBLE porque nadie "
-        "puede publicar nada. La relacion suele ser inversa a la intuicion: donde la "
-        "prensa esta mas cercada, menos desinformacion se detecta, porque detectarla "
+        "Mide las condiciones para ejercer el periodismo, no cuánta desinformación "
+        "circula. Son cosas distintas: un Estado puede tener prensa libre y mucha "
+        "desinformación, y otro puede tener poca desinformación visible porque nadie "
+        "puede publicar nada. La relación suele ser inversa a la intuición: donde la "
+        "prensa está más cercada, menos desinformación se detecta, porque detectarla "
         "tambien es publicar.",
-        "ES EVALUACION EXPERTA, NO MEDICION INSTRUMENTAL. El puntaje sale de una "
+        "Es evaluación experta, no medición instrumental. El puntaje sale de una "
         "encuesta a periodistas, academicos y defensores de derechos humanos, combinada "
         "con un recuento de abusos. Dos personas informadas pueden puntuar distinto el "
-        "mismo pais, y por eso entra calificada como evaluacion y no como registro.",
+        "mismo país, y por eso entra calificada como evaluación y no como registro.",
         f"NO EVALUA A LOS {len(sinEvaluar)} ESTADOS MAS CHICOS DEL CARIBE: "
         f"{', '.join(sinEvaluar)}. Eso NO significa que tengan prensa libre ni que no la "
-        "tengan: significa que la fuente no los evalua, y el registro lo dice en lugar "
+        "Tengan: significa que la fuente no los evalua, y el registro lo dice en lugar "
         "de dejarlos en blanco.",
-        "EL PUESTO MUNDIAL ORDENA CONTRA 180 PAISES, no contra los 33 del padron. Un "
-        "Estado de la region puede estar bien situado en el mundo y mal en su zona, o al "
-        "reves: son dos preguntas distintas y esta cifra contesta la primera.",
-        "UNA EDICION POR ANIO. Entre ediciones la cifra NO se mueve aunque el pais si: "
-        "sirve para comparar Estados en un momento, no para seguir una crisis.",
+        "El puesto Mundial ordena contra 180 países, no contra los 33 del padrón. Un "
+        "Estado de la región puede estar bien situado en el mundo y mal en su zona, o al "
+        "revés: son dos preguntas distintas y esta cifra contesta la primera.",
+        "Una edición por año. Entre ediciones la cifra no se mueve aunque el país si: "
+        "Sirve para comparar Estados en un momento, no para seguir una crisis.",
     ]
 
     calificacion = comun.calificar(
@@ -150,10 +150,10 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=("Organizacion internacional de defensa de la libertad de prensa, con "
-              "metodologia publicada y serie anual. Fiabilidad B porque es una "
-              "organizacion con posicion tomada sobre la materia que mide —lo cual no la "
+              "Metodologia publicada y serie anual. Fiabilidad B porque es una "
+              "organización con posición tomada sobre la materia que mide —lo cuál no la "
               "invalida, pero se declara—. Credibilidad 3 porque el puntaje es "
-              "EVALUACION EXPERTA agregada, no un hecho verificable de forma "
+              "evaluación experta agregada, no un hecho verificable de forma "
               "independiente."),
     )
 

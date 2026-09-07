@@ -49,7 +49,7 @@ SERIES = [
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Es el NIVEL DEMOCRATICO medido por elecciones limpias, sufragio, "
-                "libertad de expresión y asociación. Se construye con el juicio "
+                "Libertad de expresión y asociación. Se construye con el juicio "
                 "codificado de varios especialistas por país y año: es una medición "
                 "experta, no un recuento de hechos. V-Dem publica un intervalo de "
                 "incertidumbre propio; acá se toma la estimación central."},
@@ -59,7 +59,7 @@ SERIES = [
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Agrega a lo electoral los límites efectivos al poder ejecutivo: "
-                "control judicial y legislativo, y protección de las libertades "
+                "Control judicial y legislativo, y protección de las libertades "
                 "individuales. La brecha con el índice electoral muestra Estados que "
                 "votan pero no controlan a quien gobierna."},
     {"clave": "democracia_participativa", "slug": "participatory-democracy-index",
@@ -75,7 +75,7 @@ SERIES = [
      "unidad": "índice de 0 a 1", "mas_es_peor": True,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Abarca al ejecutivo, al legislativo, a la administración y a la "
-                "justicia. ATENCIÓN: en este índice el valor ALTO es el peor, al revés "
+                "Justicia. Atención: en este índice el valor alto es el peor, al revés "
                 "que en los demas índices de V-Dem."},
     {"clave": "libertad_expresion", "slug": "freedom-of-expression-index",
      "columna": "freeexpr_vdem__estimate_best",
@@ -83,7 +83,7 @@ SERIES = [
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Censura estatal a los medios, represalia contra periodistas y "
-                "libertad academica. Se lee junto con la cobertura noticiosa de este "
+                "Libertad academica. Se lee junto con la cobertura noticiosa de este "
                 "mismo registro: donde la libertad cae, la corroboración cruzada vale mas."},
     {"clave": "libertad_asociacion", "slug": "freedom-of-association-index",
      "columna": "freeassoc_vdem__estimate_best",
@@ -91,7 +91,7 @@ SERIES = [
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Libertad para formar partidos y organizaciones civiles, y grado de "
-                "represión sobre ellas. Es la materia de CONFLICTO POLÍTICO leida por "
+                "Represión sobre ellas. Es la materia de conflicto político leida por "
                 "el lado del espacio disponible para la oposición."},
     {"clave": "terrorismo_muertes", "slug": "terrorism-deaths",
      "columna": "total_killed",
@@ -100,8 +100,8 @@ SERIES = [
      "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
                "via Our World in Data",
      "cautela": "LA SERIE TERMINA EN 2021: la Base Global de Terrorismo dejo de "
-                "actualizarse. No hay dato posterior y no se estima ninguno. Además, "
-                "la definición de terrorismo es disputada y varios Estados de la región "
+                "Actualizarse. No hay dato posterior y no se estima ninguno. Además, "
+                "La definición de terrorismo es disputada y varios Estados de la región "
                 "califican como terrorista a la protesta social."},
     {"clave": "terrorismo_atentados", "slug": "terrorist-attacks",
      "columna": "total_incident_counts",
@@ -110,7 +110,7 @@ SERIES = [
      "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
                "via Our World in Data",
      "cautela": "Misma advertencia: LA SERIE TERMINA EN 2021. Cuenta hechos "
-                "registrados, de modo que un Estado con mejor registro puede aparecer "
+                "Registrados, de modo que un Estado con mejor registro puede aparecer "
                 "peor que uno que no lleva la cuenta."},
     {"clave": "conflicto_no_estatal", "slug": "deaths-in-non-state-conflicts",
      "columna": None,   # se resuelve sola: es la unica columna de valor
@@ -118,9 +118,9 @@ SERIES = [
      "unidad": "personas por año", "mas_es_peor": True,
      "origen": "UCDP, Programa de Datos de Conflicto de Upsala, via Our World in Data",
      "cautela": "Enfrentamientos armados ENTRE GRUPOS, sin el Estado como parte. En "
-                "esta región eso es, en buena medida, disputa entre organizaciones "
-                "criminales por territorio o por renta: es el indicador de PRESENCIA DE "
-                "GRUPOS CRIMINALES ORGANIZADOS que mas se acerca, y aun así solo cuenta "
+                "Esta región eso es, en buena medida, disputa entre organizaciones "
+                "criminales por territorio o por renta: es el indicador de presencia de "
+                "grupos criminales organizados que más se acerca, y aún así solo cuenta "
                 "muertes en enfrentamiento, no presencia ni control territorial. El "
                 "umbral de UCDP exige 25 muertes anuales para registrar un conflicto: "
                 "por debajo de eso el país figura en cero sin estar en paz."},
@@ -131,9 +131,9 @@ SERIES = [
      "origen": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, "
                "via Our World in Data",
      "cautela": "Es la única medida de CAPACIDAD AEROESPACIAL comparable y gratuita que "
-                "se encontro para la región. Cuenta objetos registrados ante Naciones "
-                "Unidas por cada Estado: satelites propios, no necesariamente lanzados "
-                "por el. NO mide capacidad de lanzamiento, ni satelites militares, ni "
+                "Se encontro para la región. Cuenta objetos registrados ante Naciones "
+                "unidas por cada Estado: satelites propios, no necesariamente lanzados "
+                "por el. No mide capacidad de lanzamiento, ni satelites militares, ni "
                 "aviación. Solo 13 de los 33 Estados registran alguno."},
     {"clave": "lanzamientos_anuales", "slug": "yearly-number-of-objects-launched-into-outer-space",
      "columna": None,
@@ -156,7 +156,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Mide el esfuerzo del gobierno por censurar a los medios: cuanto MAS "
-                "ALTO, MENOS censura. No cuenta episodios: es evaluación experta "
+                "Alto, menos censura. No cuenta episodios: es evaluación experta "
                 "codificada por varios especialistas por país y año."},
     {"clave": "hostigamiento_periodistas", "slug": "key-media-freedoms",
      "columna": "v2meharjrn__estimate_best",
@@ -164,7 +164,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Cuanto MAS ALTO, menos hostigamiento —amenazas, detenciones, "
-                "agresiones— a periodistas por su trabajo. Mide el clima, NO la "
+                "Agresiones— a periodistas por su trabajo. Mide el clima, no la "
                 "cantidad de agresiones: para el recuento de hechos no hay fuente "
                 "regional que responda de forma automatizada."},
     {"clave": "autocensura", "slug": "key-media-freedoms",
@@ -173,7 +173,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Cuanto MAS ALTO, menos se callan los medios por temor. Es la medida "
-                "del efecto que la censura y el hostigamiento dejan cuando ya no hace "
+                "Del efecto que la censura y el hostigamiento dejan cuando ya no hace "
                 "falta ejercerlos."},
     {"clave": "sesgo_medios", "slug": "key-media-freedoms",
      "columna": "v2mebias__estimate_best",
@@ -181,7 +181,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Cuanto MAS ALTO, mas parejo el trato de los medios a oficialismo y "
-                "oposición. Un valor bajo no dice quien esta favorecido: dice que la "
+                "Oposición. Un valor bajo no dice quien esta favorecido: dice que la "
                 "cobertura no es pareja."},
     {"clave": "medios_corruptos", "slug": "media-corruption-score",
      "columna": "v2mecorrpt__estimate_best",
@@ -189,7 +189,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Cuanto MAS ALTO, menos frecuente que los medios reciban pagos para "
-                "publicar, silenciar o torcer una nota. Es la puerta de entrada de la "
+                "Publicar, silenciar o torcer una nota. Es la puerta de entrada de la "
                 "desinformación pagada."},
     {"clave": "polarizacion", "slug": "political-polarization-score",
      "columna": "v2cacamps__estimate_best",
@@ -197,7 +197,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": True,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "ATENCIÓN: en esta el valor ALTO es el PEOR, al revés que las cinco "
-                "anteriores. Mide hasta que punto la sociedad esta partida en campos "
+                "Anteriores. Mide hasta que punto la sociedad esta partida en campos "
                 "irreconciliables. Nicaragua 3,14 y Venezuela 2,23 contra Uruguay -1,81 "
                 "con el dato de 2025."},
 ]
@@ -307,32 +307,32 @@ def recolectar():
         "V-Dem no cubre a los Estados chicos del Caribe: "
         + (", ".join(sin_vdem) if sin_vdem else "ninguno")
         + ". Sin dato no significa sin democracia ni sin problema: significa que el "
-          "proyecto no los codifica.",
-        "LA SERIE DE TERRORISMO TERMINA EN 2021. La Base Global de Terrorismo dejo de "
+          "Proyecto no los codifica.",
+        "La serie de terrorismo termina en 2021. La Base Global de Terrorismo dejó de "
         "actualizarse y no hay reemplazo gratuito. No se estima ningún valor posterior.",
         "«Terrorismo» es una definición disputada. Varios Estados de la región califican "
         "de terrorista a la protesta social, y esa calificación entra en las bases que "
-        "se nutren de prensa. El dato se publica con esa advertencia y no sostiene por "
+        "Se nutren de prensa. El dato se publica con esa advertencia y no sostiene por "
         "si solo ningún juicio.",
         "El conflicto entre grupos armados exige 25 muertes anuales para que UCDP lo "
-        "registre. Por debajo de ese umbral el Estado figura en cero SIN ESTAR EN PAZ. "
-        "Y cuenta muertes en enfrentamiento, no presencia ni control territorial: NO es "
-        "una medida de cuanto territorio dominan los grupos criminales.",
+        "registre. Por debajo de ese umbral el Estado figura en cero sin estar en paz. "
+        "Y cuenta muertes en enfrentamiento, no presencia ni control territorial: no es "
+        "Una medida de cuánto territorio dominan los grupos criminales.",
         "Los índices de V-Dem son medición experta codificada, no recuento de hechos. "
         "El proyecto publica un intervalo de incertidumbre por dato; acá se toma la "
         "estimación central y el intervalo no se muestra.",
-        "PERCEPCION democrática y de las instituciones: NO HAY DATO. Latinobarometro y "
-        "el Barometro de las Americas la miden, pero exigen registro para descargar los "
+        "Percepción democrática y de las instituciones: no hay dato. Latinobarometro y "
+        "El Barometro de las Américas la miden, pero exigen registro para descargar los "
         "microdatos. Lo que se publica acá es el nivel democratico según especialistas, "
-        "que es otra cosa: mide como funciona el sistema, no que piensa la gente de el.",
-        "DEFENSA, LO QUE NO HAY: no existe fuente gratuita que publique los efectivos "
-        "DESAGREGADOS POR ARMA —ejercito, armada, aviación— ni el inventario de "
-        "material: vehiculos blindados, aeronaves y buques por tipo. El registro de "
+        "que es otra cosa: mide como funciona el sistema, no que piensa la gente de él.",
+        "Defensa, lo que no hay: no existe fuente gratuita que publique los efectivos "
+        "desagregados por arma —ejercito, armada, aviación— ni el inventario de "
+        "material: vehículos blindados, aeronaves y buques por tipo. El registro de "
         "referencia es el Balance Militar del Instituto Internacional de Estudios "
-        "Estrategicos, que es de pago y no admite redifusión. Lo que se publica acá es "
-        "el gasto, los efectivos totales y la ADQUISICION de armamento mayor, que es la "
-        "aproximación mas cercana al material y no lo reemplaza.",
-        "CONFLICTO URBANO: no hay fuente gratuita comparable para los 33. Lo que mas se "
+        "estrategicos, que es de pagó y no admite redifusión. Lo que se publica acá es "
+        "El gasto, los efectivos totales y la adquisición de armamento mayor, que es la "
+        "aproximación más cercana al material y no lo reemplaza.",
+        "Conflicto urbano: no hay fuente gratuita comparable para los 33. Lo que más se "
         "acerca es el conflicto entre grupos armados, que no distingue campo de ciudad.",
     ]
     if caidas:
@@ -343,7 +343,7 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Proyectos academicos con método publicado y revisión por pares. Se "
-              "consultan por medio de Our World in Data, que republica con licencia "
+              "Consultan por medio de Our World in Data, que república con licencia "
               "abierta lo que los productores entregan en formatos no consultables. "
               "La responsabilidad por el dato es del productor original, citado en "
               "cada indicador."),

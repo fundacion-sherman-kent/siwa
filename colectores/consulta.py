@@ -269,27 +269,27 @@ def recolectar():
         })
 
     vacios = [
-        "ESTO NO ES UN DATO: ES UNA CONSULTA ARMADA. No se ejecuta ningún motor de "
+        "Esto no es un dato: es una consulta armada. No se ejecuta ningún motor de "
         "búsqueda ni se trae ningún resultado. El lector la ejecuta y ve lo que hay, "
         "sin intermediación de la Oficina.",
         f"SOLO {conDominio} DE 33 ESTADOS tienen dominio oficial ya probado. Para los "
         f"{len(registros) - conDominio} restantes la consulta NO esta acotada a la fuente "
-        "oficial: se acota por el nombre del Estado, y el producto lo declara en cada "
-        "ficha. NINGUN DOMINIO SE CONSTRUYE POR ANALOGIA: suponer 'datos.gob.ni' porque "
+        "Oficial: se acota por el nombre del Estado, y el producto lo declara en cada "
+        "ficha. Ningún dominio se construye por analogia: suponer 'datos.gob.ni' porque "
         "existe 'datos.gob.ar' mandaria al lector a una dirección inexistente.",
-        "UN RECUENTO DE RESULTADOS NO SE PUBLICA COMO CIFRA. Lo que un motor devuelve "
+        "Un recuento de resultados no se publica como cifra. Lo que un motor devuelve "
         "varia por país, por sesión, por idioma y por historial: no es comparable entre "
         "Estados y no sostiene ningún juicio.",
-        "LOS OPERADORES NO GARANTIZAN QUE LA FUENTE SEA FIABLE. Acotar por dominio "
-        "oficial acota el ORIGEN, no la calidad: un documento oficial puede estar "
+        "Los operadores no garantizan que la fuente sea fiable. Acotar por dominio "
+        "oficial acota el origen, no la calidad: un documento oficial puede estar "
         "desactualizado, incompleto o ser el objeto mismo de la controversia.",
-        "EL TERMINO ES EL QUE USA EL ESTADO, no el nuestro. Un conjunto rotulado con "
+        "El termino es el que USA el Estado, no el nuestro. Un conjunto rotulado con "
         "otro vocabulario no aparece en estas consultas, y esa es la limitación "
         "principal: la búsqueda alcanza hasta donde llega el vocabulario elegido.",
-        "LA CONSULTA VA EN LA LENGUA DEL ESTADO —castellano, portugues, inglés, francés "
-        "o neerlandes según el caso—, porque ningún Estado rotula en la nuestra. Queda "
-        "un vacio conocido: HAITI publica en francés pero buena parte de su vida "
-        "administrativa transcurre en criollo haitiano, y SURINAM tiene el neerlandes "
+        "La consulta va en la lengua del Estado —castellano, portugues, inglés, francés "
+        "O neerlandés según el caso—, porque ningún Estado rotula en la nuestra. Queda "
+        "Un vacio conocido: Haití publica en francés pero buena parte de su vida "
+        "administrativa transcurre en criollo haitiano, y surinam tiene el neerlandés "
         "como lengua oficial con el sranan tongo de uso corriente. En esos dos casos la "
         "consulta alcanza la lengua oficial y no necesariamente la de la fuente.",
     ]
@@ -300,9 +300,9 @@ def recolectar():
         corroborado=False,
         nota=("Los dominios provienen de los padrones verificados a mano de la Oficina "
               "—portales oficiales e Índice de Opacidad—, donde cada dirección "
-              "respondio cuando se la pidio. Fiabilidad A por eso. Credibilidad 2 y no "
-              "1 porque LA COMBINACION DE OPERADORES ES UNA CONSTRUCCION DE LA "
-              "FUNDACIÓN, no un dato de la fuente: dice donde buscar, no que se va a "
+              "respondio cuando se la pidio. Fiabilidad a por eso. Credibilidad 2 y no "
+              "1 porque la combinación de operadores es una construcción de la "
+              "Fundación, no un dato de la fuente: dice donde buscar, no que se va a "
               "encontrar."),
     )
 

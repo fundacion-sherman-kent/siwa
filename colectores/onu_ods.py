@@ -43,7 +43,7 @@ SERIES = [
      "unidad": "por cada 100.000 habitantes", "mas_es_peor": True,
      "origen": "UNODC, vía la base global de los ODS",
      "cautela": "MIDE DETECCIÓN, NO MAGNITUD. Un Estado que investiga más detecta más y "
-                "aparece peor; uno que no busca aparece limpio. La cifra baja puede "
+                "Aparece peor; uno que no busca aparece limpio. La cifra baja puede "
                 "significar poco delito o poca capacidad de detectarlo."},
     {"clave": "trata_sexual", "codigo": "VC_HTF_DETVSXR", "eje": "Seguridad",
      "rotulo": "Trata para explotación sexual", "unidad": "por cada 100.000 habitantes",
@@ -95,13 +95,13 @@ SERIES = [
      "rotulo": "Víctimas de robo en los últimos 12 meses", "unidad": "% de la población",
      "mas_es_peor": True, "origen": "UNODC, via la base global de los ODS",
      "cautela": "Sale de encuestas de victimización, no de denuncias: mide el delito "
-                "sufrido, incluido el que nunca se denuncio. Es la medida mas cercana a "
+                "Sufrido, incluido el que nunca se denuncio. Es la medida más cercana a "
                 "la delincuencia real que existe con cobertura regional."},
     {"clave": "denuncia_robo", "codigo": "VC_PRR_ROBB", "eje": "Seguridad",
      "rotulo": "Robos que la víctima denuncio a la policia", "unidad": "% de los robos sufridos",
      "mas_es_peor": False, "origen": "UNODC, via la base global de los ODS",
      "cautela": "Es una medida indirecta de CONFIANZA EN LA POLICIA: cuando la gente no "
-                "denuncia, o no espera respuesta o teme represalia. Una tasa baja de "
+                "Denuncia, o no espera respuesta o teme represalia. Una tasa baja de "
                 "denuncia hace que las estadísticas policiales de ese Estado subestimen "
                 "el delito."},
     {"clave": "denuncia_agresion", "codigo": "VC_PRR_PHYV", "eje": "Seguridad",
@@ -198,22 +198,22 @@ def recolectar():
     calificacion = comun.calificar(
         fiabilidad="A", credibilidad=2, corroborado=False,
         nota=("Serie reportada por cada Estado y validada por el organismo custodio del "
-              "indicador. Fuente única: el reporte nacional. Declarado conforme a "
+              "Indicador. Fuente única: el reporte nacional. Declarado conforme a "
               "doctrina/fuentes.md §2 ter."),
     )
 
     vacios = [
-        "LA TRATA DE PERSONAS SE MIDE POR VÍCTIMAS DETECTADAS. Un Estado que investiga "
+        "La trata de personas se mide por víctimas detectadas. Un Estado que investiga "
         "más detecta más y aparece peor; uno que no busca aparece limpio. La cifra mide "
         "capacidad de detección tanto como magnitud del delito, y no debe leerse como "
         "un orden de gravedad.",
-        "Serie ANUAL con rezago y con huecos: los Estados reportan con distinta "
+        "Serie anual con rezago y con huecos: los Estados reportan con distinta "
         "frecuencia y varios no reportan algunas series en absoluto.",
         "Se descartan los cortes por sexo, edad y sector: solo entra el total. Los "
         "desgloses existen en la fuente y pueden incorporarse cuando el equipo los pida.",
         "El soborno sale de encuestas de victimización: mide lo declarado, no lo ocurrido.",
-        "Los flujos financieros ilícitos NO se publican. La serie existe en la base de "
-        "la ONU pero tiene 35 observaciones en todo el mundo: no alcanza para una serie "
+        "Los flujos financieros ilícitos no se publican. La serie existe en la base de "
+        "La ONU pero tiene 35 observaciones en todo el mundo: no alcanza para una serie "
         "regional, y publicarla sería dar apariencia de medición a cuatro datos sueltos.",
         ("Cobertura por serie: " + ", ".join(
             f"{s['rotulo']} en {cobertura.get(s['clave'], 0)} de 33" for s in SERIES) + "."),

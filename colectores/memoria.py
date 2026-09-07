@@ -266,22 +266,22 @@ def recolectar():
     primeraFecha = memoria["cambios"][0]["observado"] if memoria["cambios"] else hoy
 
     vacios = [
-        "LA FECHA ES CUANDO LA OFICINA LO OBSERVO, NO CUANDO OCURRIO. Un portal pudo "
+        "La fecha es cuando la Oficina lo observo, no cuando ocurrió. Un portal pudo "
         "caerse el martes y ser visto el jueves. Confundir las dos fechas convertiria "
-        "una bitacora de observacion en una cronica de hechos, y este registro no puede "
+        "Una bitacora de observación en una crónica de hechos, y este registro no puede "
         "sostener lo segundo.",
-        "LA PRIMERA VEZ QUE SE VE UN ESTADO NO DICE DESDE CUANDO ESTA ASI: dice desde "
-        "cuando lo miramos. Esas lineas van marcadas y NO deben leerse como antiguedad "
+        "La primera vez que se ve un Estado no dice desde cuando esta así: dice desde "
+        "cuando lo miramos. Esas lineas van marcadas y no deben leerse como antigüedad "
         "del hecho.",
         f"LA MEMORIA EMPIEZA EL {primeraFecha} y no antes. Lo anterior a esa fecha no se "
-        "perdio: nunca se guardo, porque el registro sobrescribia cada hora. Se "
+        "Perdio: nunca se guardo, porque el registro sobrescribia cada hora. Se "
         "reconstruyo lo que el historial del repositorio permitia, que es poco: varios "
-        "de los colectores vigilados nacieron hace dias.",
-        "SE GUARDAN CAMBIOS, NO FOTOS. Si un Estado no figura con transicion es porque "
+        "de los colectores vigilados nacieron hace días.",
+        "Se guardan cambios, no fotos. Si un Estado no figura con transición es porque "
         "no cambio desde que se lo mira, no porque no se lo haya mirado.",
-        "ESTO NO MIDE AL ESTADO: MIDE LO QUE LA OFICINA PUDO VER DEL ESTADO. Una "
-        "transicion a «no responde» puede ser del portal, de la red o de nuestra propia "
-        "consulta, y por eso la retirada exige ademas la prueba del archivo publico.",
+        "Esto no mide al Estado: mide lo que la Oficina pudo ver del Estado. Una "
+        "transición a «no responde» puede ser del portal, de la red o de nuestra propia "
+        "consulta, y por eso la retirada exige además la prueba del archivo público.",
     ]
 
     calificacion = comun.calificar(
@@ -289,9 +289,9 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Observacion propia de la Oficina, registrada por su propio robot con fecha "
-              "y conservada en un repositorio publico que no admite reescritura hacia "
-              "atras. Fiabilidad A porque el productor del dato es quien lo publica. "
-              "Credibilidad 2 porque se verifico QUE SE OBSERVO ESO ESE DIA, no que el "
+              "Y conservada en un repositorio publico que no admite reescritura hacia "
+              "atrás. Fiabilidad a porque el productor del dato es quien lo publica. "
+              "Credibilidad 2 porque se verificó que se observo eso ese día, no que el "
               "hecho haya ocurrido ese dia."),
     )
 

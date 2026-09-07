@@ -72,7 +72,7 @@ def recolectar():
     if not url:
         raise RuntimeError(
             "El índice de la fuente no declara «statistics_url». No se inventa la "
-            "dirección: la versión va adentro de la ruta y adivinarla daría un 404 "
+            "Dirección: la versión va adentro de la ruta y adivinarla daría un 404 "
             "o, peor, una estadística de otra fecha.")
     est = _json(url, 2_000_000)
 
@@ -98,21 +98,21 @@ def recolectar():
     enLaRegion = sum(r["listados"] for r in registros)
 
     vacios = [
-        "ESTO NO ORDENA ESTADOS Y NO ES UNA MEDIDA DE CORRUPCION. La lista mundial la "
-        "encabeza ESTADOS UNIDOS con mas de doscientos sesenta mil registros, y no es el "
-        "pais mas sancionado del mundo: es el que mejor publica quienes son sus "
-        "funcionarios. APARECER MUCHO PUEDE INDICAR TRANSPARENCIA, no lo contrario.",
-        "LA CIFRA SE MUEVE POR TRES COSAS AJENAS A LA CONDUCTA DEL ESTADO MEDIDO: quien "
+        "Esto no ordena Estados y no es una medida de corrupción. La lista mundial la "
+        "encabeza Estados unidos con más de doscientos sesenta mil registros, y no es el "
+        "país más sancionado del mundo: es el que mejor publica quienes son sus "
+        "funcionarios. Aparecer mucho puede indicar transparencia, no lo contrario.",
+        "La cifra se mueve por tres cosas ajenas a la conducta del Estado medido: quien "
         "sanciona a quien —que es un acto geopolitico de terceros—, que tan completo es "
-        "el registro publico de funcionarios de ese Estado, y el tamanio del pais.",
-        "PERSONA EXPUESTA NO ES PERSONA SOSPECHADA. La categoria incluye a funcionarios "
+        "El registro público de funcionarios de ese Estado, y el tamaño del país.",
+        "Persona expuesta no es persona sospechada. La categoría incluye a funcionarios "
         "en ejercicio por el solo hecho de serlo: un ministro figura por ser ministro. "
-        "Leer estas cifras como recuento de delincuentes seria un error grave.",
-        "SE PUBLICA EL RECUENTO, NO LOS NOMBRES. El registro no reproduce identidades: "
-        "publica cuantos registros hay y manda a la fuente, que es donde cada caso tiene "
+        "Leer estas cifras como recuento de delincuentes sería un error grave.",
+        "Se publica el recuento, no los nombres. El registro no reproduce identidades: "
+        "Publica cuántos registros hay y manda a la fuente, que es donde cada caso tiene "
         "su rastro y su fecha.",
-        "UN ESTADO EN CERO NO ESTA LIMPIO: puede no tener registro publico de "
-        "funcionarios que la fuente haya podido incorporar. La ausencia acá dice mas "
+        "Un Estado en cero no está limpio: puede no tener registro público de "
+        "funcionarios que la fuente haya podido incorporar. La ausencia acá dice más "
         "sobre el registro que sobre el Estado.",
     ]
 
@@ -121,9 +121,9 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Consolidador que reune listas oficiales de sanciones y registros de "
-              "personas politicamente expuestas de multiples jurisdicciones. Fiabilidad B "
+              "Personas politicamente expuestas de multiples jurisdicciones. Fiabilidad B "
               "porque es un tercero que agrega, no el organismo que sanciona. "
-              "Credibilidad 2 porque se verifico el recuento que la fuente publica, NO "
+              "Credibilidad 2 porque se verificó el recuento que la fuente publica, no "
               "cada registro individual."),
     )
 

@@ -135,20 +135,20 @@ def recolectar():
     registros.sort(key=lambda r: -r["victimas"])
 
     vacios = [
-        "ACA SOLO APARECE QUIEN NO PAGO RAPIDO. El atacante publica a la víctima PARA "
-        "PRESIONARLA: la empresa que paga enseguida y en silencio nunca aparece en "
-        "ninguna lista. Esta cifra SUBESTIMA el fenómeno de manera sistematica y por "
-        "una magnitud que nadie puede calcular. Un Estado con pocos casos puede tener "
-        "pocos ataques, o víctimas que pagan mas rápido.",
-        "ES UN RECUENTO, NO UNA TASA. Una economía grande tiene mas empresas que atacar. "
-        "Que Brasil encabece la lista NO significa que este peor protegido: significa "
-        "que tiene mas objetivos. Para comparar hay que leer esto junto con el tamaño "
+        "Acá solo aparece quien no pagó rápido. El atacante publica a la víctima para "
+        "presionarla: la empresa que paga enseguida y en silencio nunca aparece en "
+        "ninguna lista. Esta cifra subestima el fenómeno de manera sistemática y por "
+        "Una magnitud que nadie puede calcular. Un Estado con pocos casos puede tener "
+        "pocos ataques, o víctimas que pagan más rápido.",
+        "Es un recuento, no una tasa. Una economía grande tiene más empresas que atacar. "
+        "Que Brasil encabece la lista no significa que este peor protegido: significa "
+        "que tiene más objetivos. Para comparar hay que leer esto junto con el tamaño "
         "de cada economía y con los usuarios de internet, que este registro publica.",
-        "LA FUENTE ES EL ATACANTE. Los grupos exageran, repiten víctimas viejas y a "
-        "veces publican ataques que no ocurrieron. Lo que se observa CON CERTEZA es que "
-        "el grupo lo publico, no que el hecho sea como lo cuenta. Por eso la "
+        "La fuente es el atacante. Los grupos exageran, repiten víctimas viejas y a "
+        "veces publican ataques que no ocurrieron. Lo que se observa con certeza es que "
+        "El grupo lo publico, no que el hecho sea como lo cuenta. Por eso la "
         "credibilidad es 4 y no mejor.",
-        "EL PAÍS ES EL DE LA SEDE DE LA VÍCTIMA, no necesariamente donde ocurrio el "
+        "El país es el de la sede de la víctima, no necesariamente donde ocurrió el "
         "ataque ni donde estaban los sistemas comprometidos. Una filial atacada puede "
         "figurar en el país de la casa matriz.",
         "El sector lo clasifica la fuente, no la Fundación, y su criterio no esta "
@@ -167,7 +167,7 @@ def recolectar():
         credibilidad=4,
         corroborado=False,
         nota=("Recopilación de los sitios de extorsión de los propios grupos atacantes. "
-              "La recopilación es metodica y publica; el CONTENIDO lo declara el "
+              "La recopilación es metodica y publica; el contenido lo declara el "
               "delincuente y no se puede corroborar de forma independiente. Se registra "
               "que la publicación existe, no que el hecho sea como se cuenta."),
     )
@@ -194,8 +194,8 @@ def recolectar():
                                        for s, n in sectores_region.most_common(12)],
             "metodo": (
                 "Se consulta el listado de víctimas por país y se cuentan casos, grupos "
-                "y sectores. NO se republica el nombre de ninguna víctima: son empresas "
-                "y organismos identificables, muchos de ellos damnificados, y nombrarlos "
+                "Y sectores. No se república el nombre de ninguna víctima: son empresas "
+                "Y organismos identificables, muchos de ellos damnificados, y nombrarlos "
                 "aquí repetiria la presión que el atacante buscaba. Se publican "
                 "recuentos y repartos."
             ),

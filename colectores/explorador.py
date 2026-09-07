@@ -175,8 +175,8 @@ def recolectar():
     if not abreControl:
         raise RuntimeError(
             f"La prueba del explorador falló: {CONTROL} —que publica un catálogo abierto y "
-            "responde— no abrió en ninguna de las puertas probadas. El que falló es el "
-            "explorador, no el mundo. NO se publica un mapa de puertas cerradas que en "
+            "Responde— no abrió en ninguna de las puertas probadas. El que falló es el "
+            "explorador, no el mundo. No se publica un mapa de puertas cerradas que en "
             "realidad son un error propio.")
 
     porIso: dict = {}
@@ -214,30 +214,30 @@ def recolectar():
         })
 
     vacios = [
-        "ESTE COLECTOR PROPONE, NO PUBLICA. No agrega nada al registro: toca puertas, "
-        "anota cual abrio y con que forma, y DEJA EL HALLAZGO DECLARADO para que una "
+        "Este colector propone, no publica. No agrega nada al registro: toca puertas, "
+        "anota cuál abrió y con que forma, y deja el hallazgo declarado para que una "
         "persona decida. Un colector que se autoalimentara con lo que encuentra romperia "
-        "la unica regla que hace confiable a este registro: que todo lo que se afirma, se "
+        "La única regla que hace confiable a este registro: que todo lo que se afirma, se "
         "probo.",
-        "«CIERRA» NO ES «NO ESTA», Y NINGUNO DE LOS DOS ES «NO PUBLICA». Un 403 o un 401 "
-        "significan que el portal EXISTE y rechaza a los programas —publica para personas "
-        "y no para maquinas—. Un 404 significa que no hay nada en esa direccion, que "
-        "puede ser porque el portal esta en otra. Confundirlos fue lo que dejo a seis "
+        "«cierra» no es «no esta», y ninguno de los dos es «no publica». Un 403 o un 401 "
+        "significan que el portal existe y rechaza a los programas —publica para personas "
+        "Y no para maquinas—. Un 404 significa que no hay nada en esa dirección, que "
+        "puede ser porque el portal está en otra. Confundirlos fue lo que dejó a seis "
         "Estados mal descritos.",
-        "SOLO SE PRUEBAN DOMINIOS OFICIALES YA VERIFICADOS, nunca direcciones deducidas "
-        "por analogia. Suponer que «si Peru usa datos.gob.pe entonces Bolivia usara "
-        "datos.gob.bo» es exactamente como se llega a una direccion inexistente y se la "
+        "Solo se prueban dominios oficiales ya verificados, nunca direcciones deducidas "
+        "por analogia. Suponer que «si Perú usa datos.gob.pe entonces Bolivia usara "
+        "datos.gob.bo» es exactamente como se llega a una dirección inexistente y se la "
         "anota como Estado opaco.",
-        "QUE UN ESTADO NO ABRA NINGUNA PUERTA NO SIGNIFICA QUE NO PUBLIQUE DATOS. "
-        "Significa que no se hallo un catalogo legible por maquina en los dominios "
-        "probados y en los dialectos conocidos. Puede publicar en PDF, en otra direccion "
-        "o con un dialecto que este colector todavia no conoce.",
+        "Que un Estado no abra ninguna puerta no significa que no publique datos. "
+        "Significa que no se halló un catálogo legible por maquina en los dominios "
+        "probados y en los dialectos conocidos. Puede publicar en PDF, en otra dirección "
+        "O con un dialecto que este colector todavía no conoce.",
         f"ANTES DE CREER UN VACIO SE PRUEBA EL EXPLORADOR contra {CONTROL}, que publica "
-        "catalogo abierto. Si ESE no abre, la corrida se detiene entera en lugar de "
+        "Catálogo abierto. Si ese no abre, la corrida se detiene entera en lugar de "
         "publicar un mapa de puertas cerradas que en realidad son un error propio.",
-        "LA CANTIDAD DE CONJUNTOS ES LA QUE DECLARA EL PORTAL, no un recuento propio, y "
+        "La cantidad de conjuntos es la que declara el portal, no un recuento propio, y "
         "no dice nada sobre su calidad ni su actualidad: un portal con diez mil conjuntos "
-        "viejos no publica mas que uno con cien al dia.",
+        "viejos no publica más que uno con cien al día.",
     ]
 
     calificacion = comun.calificar(
@@ -245,9 +245,9 @@ def recolectar():
         credibilidad=1,
         corroborado=True,
         nota=("Medicion propia de la Oficina: se consulta cada dominio oficial y se "
-              "registra lo que contesta. Fiabilidad A porque el productor es esta casa y "
-              "el metodo esta escrito. Credibilidad 1 porque el hecho registrado —que una "
-              "direccion respondio de tal modo en tal momento— se verifica por si mismo y "
+              "Registra lo que contesta. Fiabilidad a porque el productor es esta casa y "
+              "El método esta escrito. Credibilidad 1 porque el hecho registrado —que una "
+              "Dirección respondio de tal modo en tal momento— se verifica por si mismo y "
               "cualquiera puede repetir la consulta: la corroboracion es la reproducibilidad."),
     )
 

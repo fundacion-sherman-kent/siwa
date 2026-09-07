@@ -160,20 +160,20 @@ def recolectar():
         })
 
     vacios = [
-        "ESTO NO ES COMPARABLE ENTRE PAÍSES Y NO SE SUMA. Cada Estado define el delito a "
+        "Esto no es comparable entre países y no se suma. Cada Estado define el delito a "
         "su manera, lo cuenta con su método y lo publica con su cadencia. Una serie "
-        "regional armada sumando estas cifras seria UNA SERIE FALSA. Va AL LADO de la "
-        "serie comparable de la UNODC, nunca adentro, y NO la actualiza.",
-        "NO SE DESCARGAN LAS CIFRAS: se publica que el conjunto existe, de cuando es y "
+        "regional armada sumando estas cifras sería una serie falsa. Va al lado de la "
+        "serie comparable de la UNODC, nunca adentro, y no la actualiza.",
+        "No se descargan las cifras: se publica que el conjunto existe, de cuando es y "
         "donde esta. Siete portales tienen siete esquemas distintos, y homologarlos a mano "
-        "seria inventar una comparabilidad que los propios Estados no ofrecen.",
-        "LA FECHA ES LA DE ACTUALIZACION DEL CATALOGO, no la del hecho. Un conjunto puede "
+        "sería inventar una comparabilidad que los propios Estados no ofrecen.",
+        "La fecha es la de actualización del catálogo, no la del hecho. Un conjunto puede "
         "actualizarse hoy y contener datos del año pasado: dice cuando el Estado toco el "
         "archivo, no hasta cuando llega la serie.",
-        "Solo alcanza a los Estados con portal de datos abiertos consultable. Los demas "
-        "quedan como SIN PORTAL, que no prueba que no publiquen: puede exigir registro, "
+        "Solo alcanza a los Estados con portal de datos abiertos consultable. Los demás "
+        "quedan como sin portal, que no prueba que no publiquen: puede exigir registro, "
         "interponer un obstáculo automático o publicar sin interfaz.",
-        "Un conjunto entra si su titulo habla del hecho delictivo. Uno rotulado con otro "
+        "Un conjunto entra si su título habla del hecho delictivo. Uno rotulado con otro "
         "vocabulario no aparece; y se descartan las piezas administrativas del organismo "
         "—nominas, presupuestos, directorios— que se actualizan seguido y no dicen nada "
         "del delito.",
@@ -184,8 +184,8 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Catalogos oficiales de los propios Estados, consultados por su interfaz "
-              "publica. Fiabilidad A porque publica el organismo responsable. Credibilidad "
-              "2 y no 1 porque NO se verifico el contenido de cada conjunto: se verifico "
+              "Publica. Fiabilidad a porque publica el organismo responsable. Credibilidad "
+              "2 y no 1 porque no se verificó el contenido de cada conjunto: se verificó "
               "que existe, de cuando es y donde esta."),
     )
 

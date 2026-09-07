@@ -151,28 +151,28 @@ def recolectar():
         })
 
     vacios = [
-        "LA MUESTRA DE OONI LA HACEN VOLUNTARIOS Y NO ES REPRESENTATIVA. Venezuela "
+        "La muestra de OONI la hacen voluntarios y no es representativa. Venezuela "
         "tuvo 2.392.574 mediciones en esta ventana; un Estado del Caribe puede tener "
-        "unas pocas. UN ESTADO CON POCAS SONDAS MUESTRA POCAS ANOMALIAS, y eso NO "
+        "Unas pocas. Un Estado con pocas sondas muestra pocas anomalias, y eso no "
         "significa que tenga menos censura: significa que hay menos gente midiendo. "
-        "Por eso se publica la TASA y no el recuento, y aun asi NO SE ORDENAN ESTADOS "
+        "Por eso se publica la tasa y no el recuento, y aún así no se ordenan Estados "
         "con esta cifra.",
-        "ANOMALIA NO ES BLOQUEO. Una anomalia es una medicion que no salio como se "
-        "esperaba, y puede deberse a una caida del sitio, a un problema de la red o al "
-        "propio metodo. El bloqueo CONFIRMADO se cuenta aparte y es una cifra mucho mas "
-        "chica: es la unica que sostiene la palabra «bloqueo».",
-        "UN CORTE DE CONECTIVIDAD NO DECLARA SU CAUSA. Un cable cortado, una tormenta, "
-        "un apagon electrico y un apagon deliberado producen la misma curva de trafico. "
-        "La curva es el hecho; la intencion es un juicio, y este registro no emite "
+        "Anomalia no es bloqueo. Una anomalia es una medición que no salió como se "
+        "esperaba, y puede deberse a una caída del sitio, a un problema de la red o al "
+        "propio método. El bloqueo confirmado se cuenta aparte y es una cifra mucho más "
+        "chica: es la única que sostiene la palabra «bloqueo».",
+        "Un corte de conectividad no declara su causa. Un cable cortado, una tormenta, "
+        "Un apagon electrico y un apagon deliberado producen la misma curva de tráfico. "
+        "La curva es el hecho; la intención es un juicio, y este registro no emite "
         "juicios.",
-        "CONTAR EQUIPOS DE RESPUESTA PREMIA AL ESTADO GRANDE. Brasil tiene muchos "
+        "Contar equipos de respuesta premia al Estado grande. Brasil tiene muchos "
         "porque es grande, no porque este mejor protegido. Es el mismo error por el que "
-        "Costa Rica, sin ejercito desde 1949, aparecia entre las peores en Defensa. Es "
-        "un recuento de organismos, NO una medida de capacidad.",
+        "costa Rica, sin ejercito desde 1949, aparecia entre las peores en Defensa. Es "
+        "Un recuento de organismos, no una medida de capacidad.",
         f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver el "
-        "presente, NO para comparar contra el mes pasado. Una serie historica exigiria "
+        "Presente, no para comparar contra el mes pasado. Una serie historica exigiria "
         "guardar cada ventana, y este colector no lo hace.",
-        "NINGUNA DE LAS TRES ENTRA AL COMPUESTO. Se publican al lado del dato "
+        "Ninguna de las tres entra al compuesto. Se publican al lado del dato "
         "comparable y nunca adentro, con la misma arquitectura que Defensa.",
     ]
 
@@ -181,8 +181,8 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Tres mediciones tecnicas independientes entre si: OONI mide desde sondas "
-              "de voluntarios, IODA mide trafico agregado desde la academia y FIRST "
-              "publica su propio padron de miembros. Fiabilidad B porque ninguna es el "
+              "De voluntarios, IODA mide tráfico agregado desde la academia y FIRST "
+              "publica su propio padrón de miembros. Fiabilidad B porque ninguna es el "
               "organismo responsable del Estado medido. Credibilidad 2 porque se "
               "verifico la cifra que cada una publica, NO el hecho que la produjo."),
     )

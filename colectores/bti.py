@@ -70,52 +70,52 @@ INDICADORES = [
      "rotulo": "Monopolio del Estado en el uso de la fuerza", "eje": "Seguridad",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Mide si el Estado controla efectivamente TODO su territorio, o si hay "
-                "zonas donde no manda. Es lo mas cercano al CONTROL TERRITORIAL que se "
+                "Zonas donde no manda. Es lo más cercano al control territorial que se "
                 "encontro gratuito y comparable: el conflicto entre grupos armados cuenta "
                 "muertes, no territorio. Es evaluación experta, no medición de campo."},
     {"clave": "intensidad_conflicto", "rotulo_origen": "Q13.3 | Conflict intensity",
      "rotulo": "Intensidad del conflicto interno", "eje": "Seguridad",
      "unidad": "escala de 1 a 10, más alto es menos conflicto", "mas_es_peor": False,
      "cautela": "ATENCIÓN A LA ESCALA: en este indicador un valor ALTO significa MENOS "
-                "conflicto. Mide cuanto pesan las divisiones etnicas, religiosas o "
+                "Conflicto. Mide cuánto pesan las divisiones etnicas, religiosas o "
                 "sociales en la vida política."},
     {"clave": "administracion_basica", "rotulo_origen": "Q1.4 | Basic administratión",
      "rotulo": "Administración básica del Estado", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Si existe una estructura administrativa que funcione en todo el "
-                "territorio: no si las leyes son buenas, sino si hay quien las aplique "
+                "Territorio: no si las leyes son buenas, sino si hay quien las aplique "
                 "donde tiene que aplicarlas."},
     {"clave": "aprobacion_democracia", "rotulo_origen": "Q5.3 | Approval of democracy",
      "rotulo": "Aprobación social de la democracia", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "NO ES UNA ENCUESTA. Es la evaluación de un especialista sobre cuanto "
-                "respaldo social tiene el régimen democratico en ese país. Se acerca a la "
-                "PERCEPCION DEMOCRÁTICA que este registro declaraba como vacio, pero NO "
-                "la reemplaza: Latinobarometro y el Barometro de las Americas preguntan a "
+                "Respaldo social tiene el régimen democratico en ese país. Se acerca a la "
+                "percepción democrática que este registro declaraba como vacio, pero no "
+                "La reemplaza: Latinobarometro y el Barometro de las Américas preguntan a "
                 "la gente, esto no."},
     {"clave": "persecucion_abuso", "rotulo_origen": "Q3.3 | Prosecution of office abuse",
      "rotulo": "Persecución del abuso de función pública", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Si los funcionarios que abusan de su cargo son efectivamente procesados. "
-                "Mide IMPUNIDAD, que es distinto de percepción de corrupción: un país "
+                "Mide impunidad, que es distinto de percepción de corrupción: un país "
                 "puede tener mala fama y buena persecución, o al revés."},
     {"clave": "politica_anticorrupcion", "rotulo_origen": "Q15.3 | Anti-corruptión policy",
      "rotulo": "Política anticorrupción", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Si existen y funcionan los mecanismos de integridad: declaraciones "
-                "patrimoniales, auditoria, contrataciones abiertas. Mide el andamiaje, no "
+                "Patrimoniales, auditoria, contrataciones abiertas. Mide el andamiaje, no "
                 "el resultado."},
     {"clave": "actores_antidemocraticos", "rotulo_origen": "Q16.2 | Anti-democratic actors",
      "rotulo": "Control sobre actores antidemocraticos", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Capacidad del gobierno de contener a quienes buscan bloquear o revertir "
-                "el orden democratico. Un valor bajo indica actores con poder de veto "
+                "El orden democratico. Un valor bajo indica actores con poder de veto "
                 "fuera de las urnas."},
     {"clave": "indice_gobernanza", "rotulo_origen": "G | Governance Index",
      "rotulo": "Índice de gobernanza", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Resumen de conducción, uso de recursos, construcción de consensos y "
-                "cooperación internacional. Es un promedio de evaluaciones expertas: "
+                "Cooperación internacional. Es un promedio de evaluaciones expertas: "
                 "sirve para ordenar, no para medir con precisión de decimales."},
 ]
 
@@ -216,28 +216,28 @@ def recolectar():
                  for i in INDICADORES if i["clave"] in columna}
 
     vacios = [
-        "ES EVALUACION EXPERTA, NO RECUENTO DE HECHOS. Dos especialistas por país —uno "
+        "Es evaluación experta, no recuento de hechos. Dos especialistas por país —uno "
         "del país y uno de fuera— puntuan de 1 a 10, y el resultado se armoniza en "
         "revisión regional. Es un juicio informado y metodico, no una medición de campo.",
         f"ES UNA FOTO, NO UNA SERIE. El proyecto publica cada dos años; este registro "
         f"toma la edición {EDICION}. NO hay línea de tiempo y por lo tanto NO se puede "
-        "proyectar sobre estos indicadores.",
-        "SOLO CUBRE ESTADOS «EN DESARROLLO O EN TRANSICION». Los Estados chicos del "
-        "Caribe y los de renta alta quedan fuera DEL PROYECTO, no del registro. Sin "
+        "Proyectar sobre estos indicadores.",
+        "Solo cubre Estados «en desarrollo o en transición». Los Estados chicos del "
+        "Caribe y los de renta alta quedan fuera del proyecto, no del registro. Sin "
         "cobertura: " + (", ".join(sin_cubrir) if sin_cubrir else "ninguno") + ".",
-        "LA APROBACION DE LA DEMOCRACIA NO ES UNA ENCUESTA. Es la evaluación de un "
-        "especialista sobre cuanto respaldo social tiene el régimen. Se acerca a la "
-        "percepción democrática que este registro declara como vacio, pero NO la "
-        "reemplaza: Latinobarometro y el Barometro de las Americas preguntan a la gente; "
+        "La aprobación de la democracia no es una encuesta. Es la evaluación de un "
+        "especialista sobre cuánto respaldo social tiene el régimen. Se acerca a la "
+        "percepción democrática que este registro declara como vacio, pero no la "
+        "reemplaza: Latinobarometro y el Barometro de las Américas preguntan a la gente; "
         "esto no.",
-        "EN «INTENSIDAD DEL CONFLICTO» UN VALOR ALTO SIGNIFICA MENOS CONFLICTO, al revés "
+        "En «intensidad del conflicto» un valor alto significa menos conflicto, al revés "
         "que en la intuición. La escala es la del proyecto y no se altera.",
-        "ERROR PROPIO, DOCUMENTADO: la planilla guarda los textos en una tabla compartida "
-        "y una cadena con formato se parte en fragmentos. Al contarlos como cadenas "
-        "distintas TODOS los nombres y rotulos quedaban corridos: Cuba aparecia con 8,55 "
-        "de democracia y Chile con 2,37. Se detecto porque los números eran IMPOSIBLES, "
+        "Error propio, documentado: la planilla guarda los textos en una tabla compartida "
+        "Y una cadena con formato se parte en fragmentos. Al contarlos como cadenas "
+        "distintas todos los nombres y rótulos quedaban corridos: Cuba aparecia con 8,55 "
+        "de democracia y Chile con 2,37. Se detecto porque los números eran imposibles, "
         "no porque el programa fallara. El colector ahora junta los fragmentos y ata cada "
-        "indicador a su ROTULO y no a la letra de columna.",
+        "indicador a su rótulo y no a la letra de columna.",
     ]
     if faltantes:
         vacios.append("Indicadores cuyo rotulo ya no aparece en la planilla —el proyecto "
@@ -248,7 +248,7 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=("Proyecto academico de la Fundación Bertelsmann con método publicado y "
-              "revisión cruzada entre especialistas. Credibilidad 3 porque el dato es un "
+              "Revisión cruzada entre especialistas. Credibilidad 3 porque el dato es un "
               "juicio experto: no puede corroborarse contra una medición independiente "
               "porque no existe una."),
     )
@@ -270,8 +270,8 @@ def recolectar():
             "edicion": EDICION,
             "estados_cubiertos": len(registros),
             "método": ("Se descarga la planilla oficial y se lee con biblioteca estándar. "
-                       "Cada indicador se ata a su ROTULO en la fila de encabezados, no a "
-                       "la letra de columna: si el proyecto reordena la planilla el "
+                       "Cada indicador se ata a su rótulo en la fila de encabezados, no a "
+                       "La letra de columna: si el proyecto reordena la planilla el "
                        "colector lo declara en lugar de leer otra cosa."),
         },
     )

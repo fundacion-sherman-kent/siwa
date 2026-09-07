@@ -171,31 +171,31 @@ def recolectar():
         })
 
     vacios = [
-        "QUE UN ESTADO NO TENGA DESIGNADOS NO SIGNIFICA QUE NO TENGA CRIMEN ORGANIZADO NI "
-        "TERRORISMO. Los regimenes de sanciones del Consejo son GEOGRAFICOS Y POLITICOS, "
+        "Que un Estado no tenga designados no significa que no tenga crimen organizado ni "
+        "terrorismo. Los regimenes de sanciones del Consejo son geograficos y politicos, "
         "no un termometro de amenaza: existen para Al-Qaida, Corea del Norte, Iran, Irak, "
-        "Libia, Somalia, Yemen, la Republica Democratica del Congo, la Republica "
-        "Centroafricana, los talibanes y —desde 2022— Haiti. NO HAY REGIMEN PARA AMERICA "
-        "LATINA, y por eso la region casi no figura. Leer esta lista como un ranking de "
-        "peligrosidad seria exactamente al reves.",
-        "DE LAS PERSONAS SE PUBLICA EL RECUENTO, NO LOS NOMBRES. La lista es publica y "
-        "cualquiera puede consultarla en la fuente, pero este registro NO ES UN BUSCADOR "
-        "DE PERSONAS: republicar nominas de individuos no agrega nada que la cifra no "
-        "diga. De las ENTIDADES si se publica el nombre: son organizaciones y la "
-        "publicacion es el proposito de la lista.",
-        "EL VINCULO CON UN ESTADO PUEDE SER DOMICILIO, NACIONALIDAD O LUGAR DE NACIMIENTO, "
-        "y no todos significan lo mismo. Que una persona designada haya nacido en un pais "
-        "no dice que opere ahi. El registro cuenta el vinculo declarado por la fuente y NO "
+        "libia, Somalia, Yemen, la República Democrática del Congo, la República "
+        "centroafricana, los talibanes y —desde 2022— Haití. No hay régimen para América "
+        "latina, y por eso la región casi no figura. Leer esta lista como un ranking de "
+        "peligrosidad sería exactamente al revés.",
+        "De las personas se publica el recuento, no los nombres. La lista es pública y "
+        "cualquiera puede consultarla en la fuente, pero este registro no es un buscador "
+        "de personas: republicar nominas de individuos no agrega nada que la cifra no "
+        "diga. De las entidades si se publica el nombre: son organizaciones y la "
+        "publicación es el propósito de la lista.",
+        "El vínculo con un Estado puede ser domicilio, nacionalidad o lugar de nacimiento, "
+        "Y no todos significan lo mismo. Que una persona designada haya nacido en un país "
+        "no dice que opere ahi. El registro cuenta el vínculo declarado por la fuente y no "
         "interpreta cual es.",
-        "UNA DESIGNACION ES UNA DECISION POLITICA CON EFECTOS JURIDICOS, no una condena. "
+        "Una designación es una decisión política con efectos juridicos, no una condena. "
         "El Consejo la adopta por consenso de sus miembros y existe un procedimiento de "
-        "exclusion. El registro publica QUE esta designado y desde cuando; no afirma que "
+        "exclusión. El registro publica que está designado y desde cuando; no afirma que "
         "sea culpable de nada.",
-        "LA LISTA CAMBIA SIN AVISO: se agregan y se quitan nombres a lo largo del anio. "
-        "Lo que se publica es la foto del dia de la consulta, con su fecha.",
+        "La lista cambia sin aviso: se agregan y se quitan nombres a lo largo del año. "
+        "Lo que se publica es la foto del día de la consulta, con su fecha.",
         f"ANTES DE CREERLE UN CERO A NADIE SE PRUEBA EL LECTOR contra el regimen «{CONTROL}», "
         f"el mas numeroso del mundo: si devuelve menos de {MINIMO_CONTROL} designados, la "
-        "corrida se detiene entera en lugar de publicar treinta y tres ceros que en "
+        "Corrida se detiene entera en lugar de publicar treinta y tres ceros que en "
         "realidad significan «no supimos leer».",
     ]
 
@@ -204,10 +204,10 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Lista consolidada del Consejo de Seguridad de las Naciones Unidas, "
-              "publicada por su Secretaria. Fiabilidad A porque el productor ES el organo "
-              "que adopta la designacion: no informa sobre un hecho ajeno, informa sobre "
-              "su propia decision. Credibilidad 2 porque lo que se verifica es LA "
-              "DESIGNACION —que consta— y no los hechos que la motivaron, que el registro "
+              "Publicada por su Secretaria. Fiabilidad a porque el productor es el organo "
+              "que adopta la designación: no informa sobre un hecho ajeno, informa sobre "
+              "su propia decisión. Credibilidad 2 porque lo que se verifica es la "
+              "designación —que consta— y no los hechos que la motivaron, que el registro "
               "no puede comprobar."),
     )
 

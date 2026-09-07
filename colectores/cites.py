@@ -152,7 +152,7 @@ def _ultimoAnioCompleto(tabla: dict) -> int:
             f"El año {candidato} debería estar completo según el plazo del tratado "
             f"—31 de octubre del año siguiente— y sin embargo los tres Estados "
             f"testigo suman {actual} asientos contra {anterior} del año anterior. "
-            "La regla o la fuente cambiaron. NO se publica un año casi vacío como "
+            "La regla o la fuente cambiaron. No se publica un año casi vacío como "
             "si fuera el último completo.")
     return candidato
 
@@ -193,7 +193,7 @@ def recolectar():
             f"La prueba del filtro falló: en {CONTROL} el recuento con origen en "
             f"decomiso ({controlDecomiso}) no es menor que el total ({controlTotal}). "
             "Esta fuente ignora en silencio los parámetros que no conoce, así que "
-            "eso significa que el filtro de origen dejó de aplicarse. NO se publica "
+            "eso significa que el filtro de origen dejó de aplicarse. No se publica "
             "un total disfrazado de decomiso.")
 
     faenas = [(pais["iso"], tabla[DOS_LETRAS[pais["iso"]]], desde, hasta)
@@ -231,45 +231,45 @@ def recolectar():
         })
 
     vacios = [
-        "LO QUE ESTA BASE REGISTRA ES COMERCIO LEGAL, NO TRAFICO. Cada asiento nace de "
-        "un permiso o de un informe anual que una Parte del tratado presento. El trafico "
-        "ilegal, por definicion, NO TIENE PERMISO Y NO ENTRA ACA. Este colector NO mide "
-        "contrabando de fauna, y la materia de contrabando SIGUE SIN FUENTE PROPIA.",
-        "«ORIGEN EN DECOMISO» NO ES «CANTIDAD DE DECOMISOS». El codigo marca especimenes "
-        "cuyo ORIGEN DECLARADO es una incautacion, y el asiento aparece cuando ese "
-        "especimen SE MUEVE DESPUES —a un centro de rescate, a un zoologico, a "
-        "investigacion—. Un Estado con muchos asientos de ese tipo puede tener mas "
-        "control, mas delito, o mas movimiento posterior de lo incautado: son tres "
-        "explicaciones distintas y esta fuente NO ELIGE ENTRE ELLAS.",
-        "MAS DECOMISO PUEDE SER MAS CONTROL, NO MAS DELITO. Es el mismo sesgo de "
-        "deteccion que el registro ya declara en trata de personas: se cuenta lo que se "
+        "Lo que esta base registra es comercio legal, no tráfico. Cada asiento nace de "
+        "Un permiso o de un informe anual que una Parte del tratado presento. El tráfico "
+        "ilegal, por definición, no tiene permiso y no entra acá. Este colector no mide "
+        "contrabando de fauna, y la materia de contrabando sigue sin fuente propia.",
+        "«origen en decomiso» no es «cantidad de decomisos». El codigo marca especimenes "
+        "cuyo origen declarado es una incautación, y el asiento aparece cuando ese "
+        "especimen se mueve después —a un centro de rescate, a un zoologico, a "
+        "investigación—. Un Estado con muchos asientos de ese tipo puede tener más "
+        "control, más delito, o más movimiento posterior de lo incautado: son tres "
+        "explicaciones distintas y esta fuente no elige entre ellas.",
+        "Más decomiso puede ser más control, no más delito. Es el mismo sesgo de "
+        "detección que el registro ya declara en trata de personas: se cuenta lo que se "
         "detecta y se informa, no lo que ocurre. Un Estado sin capacidad de fiscalizar "
         "no incauta, y por eso aparece limpio.",
-        "NO ORDENA ESTADOS Y NO ENTRA AL COMPUESTO. El volumen depende de la "
-        "biodiversidad del pais, del tamanio de su economia y de su papel en el comercio "
-        "de cueros, madera o mascotas. Y la proporcion de decomiso NO ESTA ORIENTADA: no "
-        "se sabe si mas es mejor o peor. Entra como MAGNITUD, al lado del dato "
+        "No ordena Estados y no entra al compuesto. El volumen depende de la "
+        "biodiversidad del país, del tamaño de su economía y de su papel en el comercio "
+        "de cueros, madera o mascotas. Y la proporción de decomiso no está orientada: no "
+        "Se sabe si más es mejor o peor. Entra como magnitud, al lado del dato "
         "comparable y nunca adentro.",
-        "NO SE PUEDE SABER QUIEN INFORMO. En esta consulta la base no distingue si el "
+        "No se puede saber quién informó. En esta consulta la base no distingue si el "
         "asiento lo declaro el exportador o el importador. Por eso el registro dice «no "
-        "hay asientos de comercio con este Estado despues de tal anio» y NO dice «el "
-        "Estado dejo de informar»: son dos afirmaciones distintas y solo la primera esta "
+        "hay asientos de comercio con este Estado después de tal año» y no dice «el "
+        "Estado dejó de informar»: son dos afirmaciones distintas y solo la primera esta "
         "probada.",
         f"LA FUENTE LLEVA UN ANIO Y MEDIO DE REZAGO, y es del tratado, no de la fuente: "
         f"los informes anuales vencen el 31 de octubre del anio siguiente. El ultimo "
         f"anio completo es {hasta} y la ventana publicada va de {desde} a {hasta}. Esto "
-        "NO sirve para seguir una crisis: sirve para ver un patron de cinco anios.",
+        "No sirve para seguir una crisis: sirve para ver un patron de cinco años.",
         f"UNA PROPORCION SOBRE TRES ASIENTOS NO ES UNA PROPORCION. Los Estados con menos "
         f"de {MINIMO_PARA_PROPORCION} asientos en la ventana llevan su porcentaje MARCADO "
-        "COMO NO COMPARABLE: sin ese minimo, Granada quedaba segunda de la region con 4 "
-        "asientos sobre 6 y Santa Lucia tercera con 1 sobre 3, por delante de Bahamas, "
-        "que tiene 151 sobre 589. El numero se publica igual —esconderlo seria peor—, "
-        "pero NO SE ORDENA CONTRA LOS DEMAS.",
-        "ANTES DE CREER UN NUMERO SE PRUEBA EL INSTRUMENTO Y SE PRUEBA EL FILTRO. Esta "
-        "fuente IGNORA EN SILENCIO los parametros que no conoce y devuelve el total sin "
+        "Como no comparable: sin ese minimo, Granada quedaba segunda de la región con 4 "
+        "asientos sobre 6 y Santa Lucía tercera con 1 sobre 3, por delante de Bahamas, "
+        "que tiene 151 sobre 589. El número se publica igual —esconderlo sería peor—, "
+        "pero no se ordena contra los demás.",
+        "Antes de creer un número se prueba el instrumento y se prueba el filtro. Esta "
+        "fuente ignora en silencio los parametros que no conoce y devuelve el total sin "
         "filtrar: un filtro renombrado rio arriba haria publicar «todo es decomiso» en "
         f"los 33 Estados sin advertirlo. Se comprueba que {CONTROL} tenga comercio y que "
-        "su recuento de decomiso sea ESTRICTAMENTE MENOR que su total. Si alguna de las "
+        "Su recuento de decomiso sea estrictamente menor que su total. Si alguna de las "
         "dos falla, la corrida se detiene entera.",
     ]
 
@@ -278,10 +278,10 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=("Registro administrativo de la secretaria de un tratado internacional, "
-              "compilado por el centro de vigilancia de la conservacion del programa "
-              "ambiental de las Naciones Unidas. Fiabilidad A porque el productor "
+              "Compilado por el centro de vigilancia de la conservación del programa "
+              "ambiental de las Naciones Unidas. Fiabilidad a porque el productor "
               "administra el propio tratado. Credibilidad 3 porque lo que se verifica es "
-              "QUE UNA PARTE PRESENTO ESE INFORME, no que el informe recoja todo el "
+              "que una parte presento ese informe, no que el informe recoja todo el "
               "comercio: la base tiene discrepancias conocidas entre lo que declara el "
               "exportador y lo que declara el importador."),
     )

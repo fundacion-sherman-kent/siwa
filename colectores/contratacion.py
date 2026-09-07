@@ -142,20 +142,20 @@ def recolectar():
     sinNinguno = [r["pais"] for r in registros if r["estado"] == "sin_publicador"]
 
     vacios = [
-        "MIDE LA PUBLICACION, NO LA CONTRATACION. Un Estado que compra mucho y publica "
+        "Mide la publicación, no la contratación. Un Estado que compra mucho y publica "
         "poco aparece con poca cobertura, y uno que compra poco y publica todo aparece "
-        "con mucha. NO ES UNA MEDIDA DE VOLUMEN DE COMPRA NI DE LIMPIEZA.",
-        "NO SE DISTINGUE EL PUBLICADOR NACIONAL DEL SUBNACIONAL, porque el registro no "
-        "lo declara. Mexico tiene dieciocho publicadores y la mayoria son de un estado "
-        "o de un organismo: leer ese numero como cobertura nacional seria falso. "
-        "Clasificarlos por el titulo seria inventar una distincion que la fuente no trae.",
+        "con mucha. No es una medida de volumen de compra ni de limpieza.",
+        "No se distingue el publicador nacional del subnacional, porque el registro no "
+        "Lo declara. México tiene dieciocho publicadores y la mayoría son de un estado "
+        "O de un organismo: leer ese número como cobertura nacional sería falso. "
+        "Clasificarlos por el título sería inventar una distinción que la fuente no trae.",
         f"NO FIGURAR ACA NO PRUEBA QUE EL ESTADO NO PUBLIQUE. Prueba que no publica EN EL "
         f"FORMATO QUE PERMITE COMPARARLO, que es una afirmacion mas chica y verdadera. "
         f"Los {len(sinNinguno)} Estados sin publicador son: {', '.join(sinNinguno)}.",
-        "LA FECHA ES HASTA DONDE LLEGA LA SERIE PUBLICADA, no cuando se toco el archivo. "
+        "La fecha es hasta donde llega la serie publicada, no cuando se toco el archivo. "
         "Un publicador puede haberse leido ayer y contener contratos que terminan en "
         "2021; el registro declara las dos fechas por separado.",
-        "EL RECUENTO DE PUBLICADORES NO SE SUMA ENTRE ESTADOS ni se promedia: dieciocho "
+        "El recuento de publicadores no se suma entre Estados ni se promedia: dieciocho "
         "publicadores subnacionales no son mejores que uno nacional que cubra todo.",
     ]
 
@@ -164,9 +164,9 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Registro de publicadores del estandar de contrataciones abiertas, "
-              "mantenido por la organizacion que define ese estandar. Fiabilidad B "
+              "Mantenido por la organización que define ese estandar. Fiabilidad B "
               "porque es un tercero con criterio propio, no el organismo que contrata. "
-              "Credibilidad 2 porque se verifico que el publicador figura y hasta "
+              "Credibilidad 2 porque se verificó que el publicador figura y hasta "
               "cuando llega su serie, NO el contenido de los contratos."),
     )
 

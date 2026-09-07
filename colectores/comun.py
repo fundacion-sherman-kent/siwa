@@ -44,9 +44,9 @@ ATRIBUCION = {
     "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
     "sitio": SITIO_URL,
     "uso": ("Acceso libre y gratuito. Se permite reproducir, redistribuir y "
-            "derivar esta información CITANDO LA FUENTE de este modo: «SIWA, "
+            "Derivar esta información citando la fuente de este modo: «SIWA, "
             "Fundación Sherman Kent». La recolección, la calificación de fuentes "
-            "y la declaración de vacíos son trabajo de la Fundación; los datos "
+            "Y la declaración de vacíos son trabajo de la Fundación; los datos "
             "de base pertenecen a los productores citados en cada indicador."),
     "no_implica": ("La cita no implica aval de la Fundación sobre el uso que se "
                    "haga de estos datos, ni sobre las conclusiones ajenas."),
@@ -227,13 +227,13 @@ SERIES_DETENIDAS = {
     "personal_militar": {
         "ultimo_en_la_fuente": 2020, "consultado": "2026-09-03",
         "detalle": "Se consultó al Banco Mundial y su dato más nuevo para el mundo "
-                   "es de 2020, en 216 países. La serie no avanza desde entonces.",
+                   "Es de 2020, en 216 países. La serie no avanza desde entonces.",
         "reemplazo": None,
     },
     "militares_fuerza_laboral": {
         "ultimo_en_la_fuente": 2020, "consultado": "2026-09-03",
         "detalle": "Se consultó al Banco Mundial y su dato más nuevo es de 2020, "
-                   "en 214 países. Depende de la misma fuente que los efectivos.",
+                   "En 214 países. Depende de la misma fuente que los efectivos.",
         "reemplazo": None,
     },
     "rentas_naturales": {
@@ -247,14 +247,14 @@ SERIES_DETENIDAS = {
         "detalle": "La serie que publica Our World in Data termina en 2021: la Base "
                    "Global de Terrorismo dejó de actualizarse de forma pública.",
         "reemplazo": "ACLED cubre el mismo fenómeno con cadencia semanal y exige "
-                     "credencial gratuita, todavía no gestionada.",
+                     "Credencial gratuita, todavía no gestionada.",
     },
     "terrorismo_atentados": {
         "ultimo_en_la_fuente": 2021, "consultado": "2026-09-03",
         "detalle": "La serie que publica Our World in Data termina en 2021, por la "
-                   "misma razón que las muertes por atentado.",
+                   "Misma razón que las muertes por atentado.",
         "reemplazo": "ACLED cubre el mismo fenómeno con cadencia semanal y exige "
-                     "credencial gratuita, todavía no gestionada.",
+                     "Credencial gratuita, todavía no gestionada.",
     },
 }
 
@@ -270,9 +270,9 @@ SERIES_DETENIDAS = {
 # dentro de seis meses, cuando quien la conocia no este mirando.
 RESTRICCIONES = {
     "solo_registro_publico":
-        "GRATUITA PARA ESTE REGISTRO, QUE ES PUBLICO Y NO SE COBRA. La licencia de "
-        "la fuente es de atribucion NO COMERCIAL: este dato NO PUEDE VIAJAR A UN "
-        "PRODUCTO QUE LA FUNDACION VENDA sin tomar antes una licencia comercial.",
+        "Gratuita para este registro, que es público y no se cobra. La licencia de "
+        "La fuente es de atribución no comercial: este dato no puede viajar a un "
+        "producto que la Fundación venda sin tomar antes una licencia comercial.",
 }
 
 
@@ -344,7 +344,7 @@ def escribir(
         contenido["procedencia"]["vacios_declarados"].append(
             f"SERIE DETENIDA EN {len(quietas)} INDICADOR"
             f"{'ES' if len(quietas) > 1 else ''}: {detalle}. No es dato viejo que se "
-            "vaya a poner al día: SE LE PREGUNTO A LA FUENTE y no tiene nada más "
+            "Vaya a poner al día: se le pregunto a la fuente y no tiene nada más "
             "nuevo. Se declara y no se borra, porque borrarlo escondería que la "
             "región no tiene medida vigente de esas materias."
         )

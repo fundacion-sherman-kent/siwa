@@ -109,8 +109,8 @@ def _pedir(clave: str, dias: int) -> list:
             cuerpo = error.read(400).decode("utf-8", "replace").strip()
             raise RuntimeError(
                 f"La fuente rechazó la consulta: HTTP {error.code} · {cuerpo}. "
-                "NO se anota cero: no poder mirar no es haber mirado. Si dice «Invalid "
-                "MAP_KEY» el problema es la credencial; si dice «Invalid API call», la "
+                "No se anota cero: no poder mirar no es haber mirado. Si dice «Invalid "
+                "mAP_KEY» el problema es la credencial; si dice «Invalid API call», la "
                 "dirección.") from error
         except Exception as error:  # noqa: BLE001 — falla de red: se reintenta
             ultima = error
@@ -176,7 +176,7 @@ def recolectar():
                 f"La prueba del instrumento falló: {CONTROL} —que tiene focos todos los "
                 f"días del año— no quedó con ninguno tras atribuir {len(filas)} "
                 f"detecciones del recuadro. Eso NO significa que no haya ardido nada: "
-                "significa que la consulta, la clave o la atribución al padrón no "
+                "Significa que la consulta, la clave o la atribución al padrón no "
                 "sirven. NO se publica un cero que no se puede sostener.")
 
     for pais in geo.padron():
@@ -202,31 +202,31 @@ def recolectar():
         })
 
     vacios = [
-        "EL SATELITE DETECTA ANOMALIAS TERMICAS, NO INCENDIOS NI DELITOS. Un foco puede "
+        "El satelite detecta anomalias termicas, no incendios ni delitos. Un foco puede "
         "ser una quema agricola legal, un incendio forestal, una antorcha industrial, un "
-        "basural o una operacion minera. LA IMAGEN NO DISTINGUE LA CAUSA, y el registro "
-        "no la inventa: decir «tantos focos, tanta mineria ilegal» seria un salto que "
+        "basural o una operación minera. La imagen no distingue la causa, y el registro "
+        "no la inventa: decir «tantos focos, tanta minería ilegal» sería un salto que "
         "esta casa no da.",
-        "NO ORDENA ESTADOS. El recuento depende del tamanio del pais, de la estacion, de "
-        "la nubosidad —una semana nublada esconde todo— y de cuantas veces paso el "
-        "satelite. Brasil tendra siempre mas focos que Granada por superficie, no por "
-        "conducta. Se publica como MAGNITUD, al lado del dato comparable y nunca adentro.",
+        "No ordena Estados. El recuento depende del tamaño del país, de la estación, de "
+        "La nubosidad —una semana nublada esconde todo— y de cuántas veces pasó el "
+        "satelite. Brasil tendra siempre más focos que Granada por superficie, no por "
+        "conducta. Se publica como magnitud, al lado del dato comparable y nunca adentro.",
         f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver que "
-        "esta ardiendo ahora, NO para comparar contra el mes pasado.",
-        "LA CONFIANZA LA DECLARA EL SENSOR y se cuenta aparte: un foco de confianza baja "
-        "no sostiene ninguna afirmacion. El recuento total incluye todos; el de confianza "
-        "alta es el unico que se puede citar.",
-        "LA FUENTE NO ADMITE CONSULTA POR PAIS: solo por recuadro geografico. Se pide "
-        "una vez el recuadro de America Latina y el Caribe y se ATRIBUYE CADA DETECCION "
-        "a su Estado por la coordenada. Un punto que cae en el mar, en un pais vecino "
-        "fuera del padron o en aguas internacionales NO se cuenta, y se declara cuantos "
+        "Esta ardiendo ahora, no para comparar contra el mes pasado.",
+        "La confianza la declara el sensor y se cuenta aparte: un foco de confianza baja "
+        "no sostiene ninguna afirmación. El recuento total incluye todos; el de confianza "
+        "alta es el único que se puede citar.",
+        "La fuente no admite consulta por país: solo por recuadro geografico. Se pide "
+        "Una vez el recuadro de América Latina y el Caribe y se atribuye cada detección "
+        "a su Estado por la coordenada. Un punto que cae en el mar, en un país vecino "
+        "fuera del padrón o en aguas internacionales no se cuenta, y se declara cuántos "
         "fueron.",
-        "ANTES DE CREERLE UN CERO A NADIE SE PRUEBA EL INSTRUMENTO contra Brasil, que "
-        "tiene focos todos los dias del anio. Si ESE da cero, la corrida se detiene "
-        "entera en lugar de publicar treinta y tres ceros. La primera version de este "
-        "colector pedia por pais contra una direccion QUE NO EXISTE, y era facil culpar "
-        "a la credencial: se probo con una clave deliberadamente falsa y la fuente "
-        "distinguio «clave invalida» de «direccion invalida». El instrumento habia "
+        "Antes de creerle un cero a nadie se prueba el instrumento contra Brasil, que "
+        "tiene focos todos los días del año. Si ese da cero, la corrida se detiene "
+        "entera en lugar de publicar treinta y tres ceros. La primera versión de este "
+        "colector pedia por país contra una dirección que no existe, y era facil culpar "
+        "a la credencial: se probó con una clave deliberadamente falsa y la fuente "
+        "distinguio «clave invalida» de «dirección invalida». El instrumento habia "
         "fallado antes que la fuente.",
     ]
 
@@ -235,8 +235,8 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Sistema de deteccion de la agencia espacial estadounidense, con sensor y "
-              "metodo publicados. Fiabilidad A porque el productor opera el satelite. "
-              "Credibilidad 2 porque se verifica LA DETECCION —hubo una anomalia termica "
+              "Método publicados. Fiabilidad a porque el productor opera el satelite. "
+              "Credibilidad 2 porque se verifica la detección —hubo una anomalia termica "
               "en esa coordenada— y NO su causa, que el sensor no puede establecer."),
     )
 

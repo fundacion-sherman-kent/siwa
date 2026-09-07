@@ -144,13 +144,13 @@ def recolectar():
 
     vacios = [
         f"VENTANA MÓVIL DE {VENTANA} AÑOS (desde {DESDE}). La tendencia compara el primer "
-        "año disponible contra el último, no el interanual: el interanual es ruido y la "
+        "Año disponible contra el último, no el interanual: el interanual es ruido y la "
         "ventana muestra el movimiento de fondo.",
-        "La cifra es ANUAL y de cierre de año. No es un dato en vivo: entre "
+        "La cifra es anual y de cierre de año. No es un dato en vivo: entre "
         "publicaciones, la situación puede haber cambiado por completo.",
         "ACNUR cuenta a quien está bajo su mandato o registrado ante autoridades. "
         "La migración irregular no registrada no aparece, y en varios corredores de "
-        "la región es la mayoría del flujo.",
+        "La región es la mayoría del flujo.",
         "Sin desglose subnacional: la cifra es nacional y el mapa la muestra como tal.",
         "«Expulsión» y «recepción» son dos fenómenos distintos y no se suman: un "
         "mismo Estado puede ser alto en ambos.",

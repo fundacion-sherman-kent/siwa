@@ -206,34 +206,34 @@ def recolectar():
                            if p["iso"] not in por_iso)
 
     vacios = [
-        "LICENCIA NO DECLARADA. Las capas están abiertas al publico y no llevan texto "
+        "Licencia no declarada. Las capas están abiertas al público y no llevan texto "
         "de derechos ni condiciones de uso. Que un dato sea accesible no significa que "
-        "sea redistribuible. Este registro es de ACCESO LIBRE Y GRATUITO y la Fundación "
+        "sea redistribuible. Este registro es de acceso libre y gratuito y la Fundación "
         "no comercializa datos, de modo que el uso aquí es el que la licencia no "
-        "comercial admite. Aun así se publican RECUENTOS Y AGREGADOS y no los registros "
-        "individuales ni las geometrias, y PENDIENTE queda pedir autorización escrita al "
-        "Instituto: no por licencia sino por cortesia entre instituciones, y porque con "
+        "comercial admite. Aún así se publican recuentos y agregados y no los registros "
+        "individuales ni las geometrias, y pendiente queda pedir autorización escrita al "
+        "instituto: no por licencia sino por cortesia entre instituciones, y porque con "
         "permiso podría publicarse el detalle caso por caso. Un dato de licencia no "
-        "comercial NO puede entrar a un informe pago de la Fundación aunque sea gratuito "
+        "comercial no puede entrar a un informe pagó de la Fundación aunque sea gratuito "
         "en este registro: la licencia mira el uso, no el sitio.",
-        "NO ES UN CENSO DE CONFLICTOS. Es el corpus que un equipo academico levanto y "
-        "verifico caso por caso, con el alcance y el recorte de ese proyecto. Un Estado "
-        "con pocos casos puede tener pocos conflictos O poca cobertura del proyecto, y "
-        "las dos cosas NO se distinguen desde afuera.",
+        "No es un censo de conflictos. Es el corpus que un equipo academico levanto y "
+        "verificó caso por caso, con el alcance y el recorte de ese proyecto. Un Estado "
+        "con pocos casos puede tener pocos conflictos o poca cobertura del proyecto, y "
+        "Las dos cosas no se distinguen desde afuera.",
         "Sin ningún conflicto registrado por el proyecto: "
         + (", ".join(sin_conflicto) if sin_conflicto else "ninguno")
         + ". Ausencia en el corpus no es ausencia de conflicto.",
-        "La minería ilegal esta mapeada en solo cuatro Estados y con años distintos "
-        "—Bolivia y Venezuela 2017, Brasil 2018, Peru sin año declarado—: NO son "
+        "La minería ilegal está mapeada en solo cuatro Estados y con años distintos "
+        "—Bolivia y Venezuela 2017, Brasil 2018, Perú sin año declarado—: no son "
         "comparables entre si ni con la situación actual. Y el número de poligonos no "
         "es una medida de magnitud: depende de como se dibujo cada capa. Venezuela "
-        "figura con 1.317 poligonos y Peru con 3, y eso NO significa que en Peru casi "
+        "figura con 1.317 poligonos y Perú con 3, y eso no significa que en Perú casi "
         "no haya minería ilegal.",
-        "La fecha registrada es la de INICIO del conflicto, no la de su registro. "
+        "La fecha registrada es la de inicio del conflicto, no la de su registro. "
         "Muchos casos siguen abiertos y el corpus no declara cuales se cerraron.",
         f"EL AÑO {ANIO_RELLENO} SE DESCARTA: aparece 70 veces en un corpus de 443 y no "
-        "hay ningún otro año anterior a 1950 salvo uno. Es un valor de relleno del "
-        "origen, no una fecha. Publicarlo como «el conflicto mas antiguo» de seis "
+        "Hay ningún otro año anterior a 1950 salvo uno. Es un valor de relleno del "
+        "origen, no una fecha. Publicarlo como «el conflicto más antiguo» de seis "
         "Estados habria sido inventar un hecho. Esos 70 casos entran al recuento pero "
         "no al rango de años. Otros 21 registros no traen año legible.",
     ]
@@ -273,7 +273,7 @@ def recolectar():
             "atribución": ("Instituto de Estudios Interculturales, Pontificia "
                            "Universidad Javeriana Cali. Visor original: " + VISOR),
             "método": ("Se consultan las capas publicas SIN pedir geometria y se "
-                       "publican únicamente recuentos y repartos por Estado, tipo, "
+                       "Publican únicamente recuentos y repartos por Estado, tipo, "
                        "categoría y actores. Los registros individuales no se "
                        "republican."),
         },

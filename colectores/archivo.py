@@ -186,29 +186,29 @@ def recolectar():
         })
 
     vacios = [
-        "LA RETIRADA EXIGE LAS DOS MITADES Y NINGUNA ALCANZA SOLA. Que el archivo no "
-        "tenga capturas recientes NO prueba que el sitio murio: prueba que el rastreador "
-        "no paso. Y que el portal no nos responda hoy NO prueba que este caido: pudo "
-        "rechazar nuestra consulta o estar caido un rato. Solo se afirma RETIRADO cuando "
-        "el archivo lo vio vivo en el pasado Y hoy no responde, y aun asi se publican "
-        "las dos fechas por separado para que cualquiera pueda rehacer la comprobacion.",
-        "NO SE INTERPRETA LA CAUSA. Un portal puede caerse por presupuesto, por una "
-        "migracion de sistema o por decision. La caida es el hecho; el motivo es un "
+        "La retirada exige las dos mitades y ninguna alcanza sola. Que el archivo no "
+        "tenga capturas recientes no prueba que el sitio murió: prueba que el rastreador "
+        "no pasó. Y que el portal no nos responda hoy no prueba que esté caído: pudo "
+        "rechazar nuestra consulta o estar caído un rato. Solo se afirma retirado cuando "
+        "El archivo lo vio vivo en el pasado y hoy no responde, y aún así se publican "
+        "Las dos fechas por separado para que cualquiera pueda rehacer la comprobación.",
+        "No se interpreta la causa. Un portal puede caerse por presupuesto, por una "
+        "migración de sistema o por decisión. La caída es el hecho; el motivo es un "
         "juicio, y este registro no emite juicios.",
-        "LA RETIRADA ES DEL SITIO, NO DEL ESTADO. Un organismo puede haber mudado su "
-        "publicacion a otra direccion que este colector no conoce. Por eso se nombra el "
-        "organismo y el dominio, y no se dice que el Estado dejo de publicar.",
-        "LA IDENTIFICACION DEL ORGANISMO ES DE LA OFICINA. La consulta prueba que el "
-        "dominio existe y que el archivo tiene copias fechadas de el; NO prueba que sea "
-        "el instituto que decimos. Va declarado como afirmacion nuestra, y se corrige en "
-        "el padron si resultara equivocada.",
+        "La retirada es del sitio, no del Estado. Un organismo puede haber mudado su "
+        "publicación a otra dirección que este colector no conoce. Por eso se nombra el "
+        "organismo y el dominio, y no se dice que el Estado dejó de publicar.",
+        "La identificación del organismo es de la Oficina. La consulta prueba que el "
+        "dominio existe y que el archivo tiene copias fechadas de él; no prueba que sea "
+        "El instituto que decimos. Va declarado como afirmación nuestra, y se corrige en "
+        "El padrón si resultara equivocada.",
         f"ALCANZA A {len(tareas)} SITIOS OFICIALES EN "
         f"{len({t[0] for t in tareas})} ESTADOS, todos probados antes de entrar. Los demas "
-        "quedan como SIN DOMINIO PROBADO, que no dice nada de ellos: dice que la Oficina "
-        "todavia no verifico donde publican.",
-        "LA COBERTURA DEL ARCHIVO ES DESPAREJA. Un portal muy visitado se captura seguido "
-        "y uno del Caribe oriental puede tener pocas capturas en anios: comparar la "
-        "CANTIDAD de capturas entre Estados no dice nada de ellos, dice cuanto los mira "
+        "Quedan como sin dominio probado, que no dice nada de ellos: dice que la Oficina "
+        "todavía no verificó dónde publican.",
+        "La cobertura del archivo es despareja. Un portal muy visitado se captura seguido "
+        "Y uno del Caribe oriental puede tener pocas capturas en años: comparar la "
+        "cantidad de capturas entre Estados no dice nada de ellos, dice cuánto los mira "
         "el rastreador.",
     ]
 
@@ -218,8 +218,8 @@ def recolectar():
         corroborado=True,
         nota=("Archivo publico de la web, consultado por su interfaz abierta. Fiabilidad "
               "B porque es un tercero que guarda copias, no el organismo que publica. "
-              "Credibilidad 2 y corroborado porque cada afirmacion de retirada se apoya "
-              "en DOS observaciones independientes: la copia fechada del archivo y una "
+              "Credibilidad 2 y corroborado porque cada afirmación de retirada se apoya "
+              "en dos observaciones independientes: la copia fechada del archivo y una "
               "consulta propia al portal en el dia de la corrida."),
     )
 

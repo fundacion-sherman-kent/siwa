@@ -239,11 +239,11 @@ def recolectar():
     robots = sum(r["publicaciones_automatizadas"] for r in registros)
     vacios = [
         f"Se descartaron {robots} publicaciones de cuentas automatizadas, que en su "
-        "mayoria reenvian titulares de prensa. Contarlas como conversación social "
-        "seria contar dos veces la misma noticia, que este registro ya recoge por su "
+        "Mayoría reenvian titulares de prensa. Contarlas como conversación social "
+        "sería contar dos veces la misma noticia, que este registro ya recoge por su "
         "propio canal. La detección usa la declaración de la propia cuenta y, si no la "
         "hay, su nombre: una cuenta automatizada que no se declare puede pasar.",
-        "Mastodon NO es representativo de la conversación pública de la región: su "
+        "Mastodon no es representativo de la conversación pública de la región: su "
         "base de usuarios es pequeña, mayoritariamente europea y norteamericana y de "
         "perfil técnico. Lo que se observa es una muestra sesgada y no probabilística. "
         "Ningún juicio de la Fundación puede apoyarse solo en este registro.",
@@ -251,7 +251,7 @@ def recolectar():
         + (", ".join(sin_circulacion) if sin_circulacion else "ninguno")
         + ". Ausencia de publicaciones no es ausencia de hechos.",
         "X (Twitter) queda fuera: la interfaz devuelve 401 sin clave y no existe nivel "
-        "gratuito de búsqueda. Incorporarlo exige contratar el servicio, que es pago y "
+        "gratuito de búsqueda. Incorporarlo exige contratar el servicio, que es pagó y "
         "mensual: es una decisión de la Dirección, no un problema técnico.",
         "Reddit queda fuera: devuelve 403 al acceso anónimo automatizado y exige "
         "registrar una aplicación y aceptar sus condiciones de uso.",
@@ -269,7 +269,7 @@ def recolectar():
         credibilidad=4,
         corroborado=False,
         nota=("Publicaciones de personas sin identidad verificada. Se registra la "
-              "CIRCULACIÓN, que sí se observa directamente, no el contenido, que no "
+              "Circulación, que sí se observa directamente, no el contenido, que no "
               "está verificado. Un término que circula mucho no es un hecho."),
     )
 
@@ -294,7 +294,7 @@ def recolectar():
             "metodo": (
                 "Se consulta la línea pública de la etiqueta de cada Estado en cuatro "
                 "instancias independientes. Las instancias federan entre sí, de modo que "
-                "cada publicación se cuenta UNA sola vez por su dirección única. Un "
+                "cada publicación se cuenta una sola vez por su dirección única. Un "
                 "término figura en el mapa solo si aparece en dos publicaciones y en dos "
                 "instancias distintas: lo que sale de una sola instancia es eco, no "
                 "circulación."

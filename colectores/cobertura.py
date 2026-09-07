@@ -374,12 +374,12 @@ def _corroboracion(notas: list) -> dict:
     elif not prensa:
         estado, nota = "origen_unico", (
             "Solo lo trataron centros de estudio. Es análisis, no cobertura: "
-            "no corrobora que el hecho haya ocurrido."
+            "No corrobora que el hecho haya ocurrido."
         )
     else:
         estado, nota = "origen_unico", (
             "Todos los medios son del mismo país y del mismo idioma: cuentan como "
-            "un solo origen, por más portales que sean."
+            "Un solo origen, por más portales que sean."
         )
     if centros and estado != "origen_unico":
         nota += f" Con respaldo analítico de {len(centros)} centro(s) de estudio."
@@ -441,7 +441,7 @@ def _palabras_clave(notas: list, gentilicios: dict, bloques: dict,
                        "notas": len(l), "palabras": cuenta(l)}
                    for i, l in sorted(por_pais.items())},
         "nota": ("Recuento de términos en los títulos recolectados en la ventana "
-                 "vigente. Mide DE QUÉ SE HABLA, no qué ocurre ni con qué signo. "
+                 "Vigente. Mide de qué se habla, no qué ocurre ni con qué signo. "
                  "Un término ausente puede significar que el asunto no circula, o "
                  "que ningún canal del padrón lo cubre. Para figurar, un término "
                  "debe aparecer en dos notas de dos portales distintos: lo que "
@@ -529,7 +529,7 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=(
-            "Fiabilidad NO EVALUADA: ningún medio del padrón tiene todavía calificación "
+            "Fiabilidad no evaluada: ningún medio del padrón tiene todavía calificación "
             "asignada por el equipo analítico. Credibilidad 3 —posiblemente cierta, sin "
             "corroboración— porque lo registrado es la existencia de cobertura, no el "
             "hecho cubierto. Este material no sostiene juicio alguno."
@@ -537,7 +537,7 @@ def recolectar():
     )
 
     vacios = [
-        "LO REGISTRADO ES COBERTURA, NO HECHOS. Que diez portales publiquen algo no "
+        "Lo registrado es cobertura, no hechos. Que diez portales publiquen algo no "
         "prueba que haya ocurrido: prueba que se está publicando. Sirve como señal de "
         "atención y como segundo origen, nunca como dato acreditado.",
         "La fiabilidad de cada medio está sin evaluar. Hasta que el equipo analítico "
@@ -559,16 +559,16 @@ def recolectar():
             "doctrina/siwa.md §4.1."
         ),
         f"Ventana de {HORAS} horas. {sin_fecha} notas llegaron sin fecha de publicación "
-        "y se conservaron sin poder verificar su antigüedad.",
+        "Y se conservaron sin poder verificar su antigüedad.",
         "Un grupo de una sola nota no se publica: sin cruce no hay cobertura cruzada.",
-        "La atribución de un asunto a un país es por DICCIONARIO de nombres y "
+        "La atribución de un asunto a un país es por diccionario de nombres y "
         "gentilicios, no por comprensión del texto. Un asunto que nombre al país con un "
         "giro que no figure en la lista queda sin atribuir; uno que lo nombre al pasar "
         "queda atribuido igual. La lista es editable por el equipo analítico.",
         f"{sin_pais} de {len(eventos)} asuntos no pudieron atribuirse a ningún Estado del "
-        "padrón: en su mayoría son noticias internacionales sin mención regional.",
+        "Padrón: en su mayoría son noticias internacionales sin mención regional.",
         "El índice de infoxicación mide la proporción de asuntos repetidos por tres o más "
-        "portales que NINGÚN segundo origen independiente corrobora. Es amplificación sin "
+        "portales que ningún segundo origen independiente corrobora. Es amplificación sin "
         "verificación, no desinformación probada: no dice que el asunto sea falso, dice "
         "que se repite sin que nadie de otra jurisdicción o idioma lo confirme.",
     ]
@@ -608,21 +608,21 @@ def recolectar():
                 "estados_con_alguna_senal": len({e["iso"] for t in senal.values()
                                                  for e in t["estados"]}),
                 "que_es": (
-                    "Que se esta publicando AHORA sobre cada materia. NO ES UN "
-                    "INDICADOR y no se mezcla con ninguno: las series estructurales "
+                    "Que se esta publicando ahora sobre cada materia. No es un "
+                    "indicador y no se mezcla con ninguno: las series estructurales "
                     "cuentan hechos verificados y llegan con años de rezago; esto "
-                    "cuenta MENCIONES de las últimas horas. Se muestra al lado del "
+                    "cuenta menciones de las últimas horas. Se muestra al lado del "
                     "dato estructural para decir que hay actividad que esa serie "
                     "todavia no conto."),
                 "que_no_es": (
-                    "Mas notas NO significa mas hechos: puede significar mas "
+                    "Más notas no significa más hechos: puede significar más "
                     "atención, o un solo hecho cubierto por muchos portales. Y menos "
                     "notas puede significar menos prensa libre, no menos hechos."),
                 "atribucion": (
-                    "Por MENCION cuando el titulo nombra al país —la fuerte— y por "
-                    "MEDIO cuando el titulo no nombra ninguno y el medio es nacional. "
+                    "Por mención cuando el título nombra al país —la fuerte— y por "
+                    "medio cuando el título no nombra ninguno y el medio es nacional. "
                     "Un diario colombiano no escribe «en Colombia hubo un atentado»: "
-                    "escribe «atentado en Cali». Cada Estado declara cuantas notas "
+                    "Escribe «atentado en Cali». Cada Estado declara cuántas notas "
                     "tiene de cada clase."),
             },
             "fronteras": {
@@ -630,10 +630,10 @@ def recolectar():
                 "con_mencion": sum(1 for z in fronteras if z["notas"]),
                 "total": len(fronteras),
                 "nota": ("Zonas de frontera y focos transfronterizos. NO son "
-                         "indicadores: son lugares, y ninguna fuente publica "
-                         "estadística comparable a esa escala. Se cuenta cuantas notas "
-                         "del corpus las nombran, de cuantos portales y de cuantas "
-                         "jurisdicciones. Que la nombren medios de los DOS LADOS de la "
+                         "Indicadores: son lugares, y ninguna fuente publica "
+                         "estadística comparable a esa escala. Se cuenta cuántas notas "
+                         "del corpus las nombran, de cuántos portales y de cuántas "
+                         "jurisdicciones. Que la nombren medios de los dos lados de la "
                          "frontera es el dato fuerte: una sola jurisdicción puede estar "
                          "contando su propia versión."),
             },

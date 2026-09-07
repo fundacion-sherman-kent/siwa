@@ -182,40 +182,40 @@ def recolectar():
     if control.get("estado") == "declarado" and not control.get("exporta_usd"):
         raise RuntimeError(
             f"La prueba del lector falló: {CONTROL} —exportador de armas conocido— quedó "
-            "con exportación cero. El filtro de filas o la consulta cambiaron. NO se "
+            "Con exportación cero. El filtro de filas o la consulta cambiaron. No se "
             "publica una lectura a ciegas.")
 
     vacios = [
-        "EL CAPITULO 93 ES «ARMAS Y MUNICIONES; SUS PARTES Y ACCESORIOS»: armas de fuego, "
-        "municiones y componentes. NO INCLUYE AVIONES, BUQUES NI VEHICULOS MILITARES, que "
-        "viajan en otros capitulos del arancel. Quien lea esto como «el comercio de armas "
-        "de un pais» va a leer DE MENOS, y bastante.",
-        "ES COMERCIO DECLARADO EN LA ADUANA. El trafico ilegal —que es justamente lo que "
-        "preocupa— NO PASA POR UNA ADUANA Y NO ESTA ACA. Esta cifra sirve para ver el "
-        "flujo legal y, cruzada con la brecha espejo, para señalar donde el flujo legal no "
+        "El capítulo 93 es «armas y municiones; sus partes y accesorios»: armas de fuego, "
+        "municiones y componentes. No incluye aviones, buques ni vehículos militares, que "
+        "viajan en otros capítulos del arancel. Quien lea esto como «el comercio de armas "
+        "de un país» va a leer de menos, y bastante.",
+        "Es comercio declarado en la aduana. El tráfico ilegal —que es justamente lo que "
+        "preocupa— no pasa por una aduana y no está acá. Esta cifra sirve para ver el "
+        "flujo legal y, cruzada con la brecha espejo, para señalar dónde el flujo legal no "
         "cierra.",
-        "SON VALORES DE ADUANA EN DOLARES, NO CANTIDADES. No dice cuantas armas: dice "
-        "cuanto dinero. Un lote de municiones baratas y uno de fusiles caros pueden dar la "
+        "Son valores de aduana en dólares, no cantidades. No dice cuántas armas: dice "
+        "cuánto dinero. Un lote de municiones baratas y uno de fusiles caros pueden dar la "
         "misma cifra.",
-        "LO QUE A DICE QUE VENDIO NO ES LO QUE B DICE QUE COMPRO. Cada Estado declara por "
+        "Lo que a dice que vendio no es lo que B dice que compro. Cada Estado declara por "
         "su cuenta y las cifras no cierran entre si: el exportador declara el valor puesto "
-        "en el barco y el importador ese valor MAS flete y seguro. La diferencia se mide "
+        "en el barco y el importador ese valor más flete y seguro. La diferencia se mide "
         "aparte, en la brecha espejo.",
-        "NO ORDENA ESTADOS Y NO ENTRA AL COMPUESTO. El volumen depende del tamanio de la "
-        "economia, de tener o no industria propia y del papel de cada pais en la cadena. "
-        "Brasil exporta mas que Uruguay por industria, no por conducta. Entra como "
-        "MAGNITUD, igual que Defensa.",
+        "No ordena Estados y no entra al compuesto. El volumen depende del tamaño de la "
+        "economía, de tener o no industria propia y del papel de cada país en la cadena. "
+        "Brasil exporta más que Uruguay por industria, no por conducta. Entra como "
+        "magnitud, igual que Defensa.",
         f"LA FILA TOTAL ES LA UNICA QUE SE SUMA. La respuesta trae una fila por modo de "
         f"transporte y por regimen aduanero ademas de la total, y sumarlas MULTIPLICA el "
         f"comercio: Brasil daba 768 millones de importacion cuando son 192, cuatro veces "
         f"de mas. En esta corrida se descartaron {descartadas} filas por ese motivo.",
-        "HAY COMERCIO DE ARMAS CON CONTRAPARTE NO DECLARADA, y se cuenta aparte. La "
+        "Hay comercio de armas con contraparte no declarada, y se cuenta aparte. La "
         "fuente usa codigos especiales cuando el Estado no especifica el origen o el "
-        "destino. NO significa que sea ilegal: significa que la aduana no dijo con quien. "
+        "destino. No significa que sea ilegal: significa que la aduana no dijo con quien. "
         "Se publica el monto y su porcentaje porque es un dato de transparencia, no una "
         "acusacion.",
         f"EL ANIO ES {ANIO}, que es el ultimo con cobertura amplia en la vista publica y "
-        "gratuita de la fuente. No es el ultimo anio calendario, y se dice.",
+        "Gratuita de la fuente. No es el último año calendario, y se dice.",
     ]
     if sinConsultar:
         vacios.append(
@@ -228,9 +228,9 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Base de comercio de Naciones Unidas, alimentada por las aduanas de cada "
-              "Estado. Fiabilidad A porque el productor compila declaraciones oficiales "
-              "con metodo publicado. Credibilidad 2 porque se verifica LA DECLARACION "
-              "ADUANERA —que consta— y no que refleje todo el comercio: lo que un Estado "
+              "Estado. Fiabilidad a porque el productor compila declaraciones oficiales "
+              "con método publicado. Credibilidad 2 porque se verifica la declaración "
+              "aduanera —que consta— y no que refleje todo el comercio: lo que un Estado "
               "declara haber vendido no coincide con lo que el otro declara haber "
               "comprado, y el trafico ilegal no aparece."),
     )
