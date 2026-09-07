@@ -2,32 +2,32 @@
   "procedencia": {
     "colector": "consulta",
     "capa": "publico",
-    "obtenido_en": "2026-09-06T05:49:49+00:00",
+    "obtenido_en": "2026-09-07T05:53:51+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — consulta dirigida a la fuente primaria",
-      "url": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html#consulta"
+      "url": "https://siwa.fundacionkent.org/sitio/index.html#consulta"
     },
     "calificacion": {
       "fiabilidad": "A",
       "credibilidad": 2,
       "corroborado": false,
-      "nota": "Los dominios provienen de los padrones verificados a mano de la Oficina —portales oficiales e Índice de Opacidad—, donde cada dirección respondio cuando se la pidio. Fiabilidad A por eso. Credibilidad 2 y no 1 porque LA COMBINACION DE OPERADORES ES UNA CONSTRUCCION DE LA FUNDACIÓN, no un dato de la fuente: dice donde buscar, no que se va a encontrar."
+      "nota": "Los dominios provienen de los padrones verificados a mano de la Oficina —portales oficiales e Índice de Opacidad—, donde cada dirección respondio cuando se la pidio. Fiabilidad a por eso. Credibilidad 2 y no 1 porque la combinación de operadores es una construcción de la Fundación, no un dato de la fuente: dice donde buscar, no que se va a encontrar."
     },
     "vacios_declarados": [
       "Esto no es un dato: es una consulta armada. No se ejecuta ningún motor de búsqueda ni se trae ningún resultado. El lector la ejecuta y ve lo que hay, sin intermediación de la Oficina.",
-      "Solo 13 de 33 Estados tienen dominio oficial ya probado. Para los 20 restantes la consulta no está acotada a la fuente oficial: se acota por el nombre del Estado, y el producto lo declara en cada ficha. Ningún dominio se construye por analogia: suponer 'datos.gob.ni' porque existe 'datos.gob.ar' mandaria al lector a una dirección inexistente.",
+      "SOLO 14 DE 33 ESTADOS tienen dominio oficial ya probado. Para los 19 restantes la consulta NO esta acotada a la fuente oficial: se acota por el nombre del Estado, y el producto lo declara en cada ficha. Ningún dominio se construye por analogia: suponer 'datos.gob.ni' porque existe 'datos.gob.ar' mandaria al lector a una dirección inexistente.",
       "Un recuento de resultados no se publica como cifra. Lo que un motor devuelve varia por país, por sesión, por idioma y por historial: no es comparable entre Estados y no sostiene ningún juicio.",
       "Los operadores no garantizan que la fuente sea fiable. Acotar por dominio oficial acota el origen, no la calidad: un documento oficial puede estar desactualizado, incompleto o ser el objeto mismo de la controversia.",
       "El termino es el que USA el Estado, no el nuestro. Un conjunto rotulado con otro vocabulario no aparece en estas consultas, y esa es la limitación principal: la búsqueda alcanza hasta donde llega el vocabulario elegido.",
-      "La consulta va en la lengua del Estado —castellano, portugues, inglés, francés o neerlandés según el caso—, porque ningún Estado rotula en la nuestra. Queda un vacio conocido: Haití publica en francés pero buena parte de su vida administrativa transcurre en criollo haitiano, y surinam tiene el neerlandés como lengua oficial con el sranan tongo de uso corriente. En esos dos casos la consulta alcanza la lengua oficial y no necesariamente la de la fuente."
+      "La consulta va en la lengua del Estado —castellano, portugues, inglés, francés O neerlandés según el caso—, porque ningún Estado rotula en la nuestra. Queda un vacio conocido: Haití publica en francés pero buena parte de su vida administrativa transcurre en criollo haitiano, y surinam tiene el neerlandés como lengua oficial con el sranan tongo de uso corriente. En esos dos casos la consulta alcanza la lengua oficial y no necesariamente la de la fuente."
     ],
     "restriccion_de_uso": null,
     "cantidad": 33,
     "atribucion": {
       "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
       "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
-      "sitio": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
-      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información CITANDO LA FUENTE de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "sitio": "https://siwa.fundacionkent.org/sitio/index.html",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información citando la fuente de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes Y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
       "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
     }
   },
@@ -937,110 +937,112 @@
       "pais": "Paraguay",
       "bloque": "Cono Sur",
       "lengua": "es",
-      "dominios_oficiales": [],
-      "estado": "sin_dominio_probado",
+      "dominios_oficiales": [
+        "www.datos.gov.py"
+      ],
+      "estado": "con_dominio_probado",
       "consultas": [
         {
           "materia": "Violencia organizada",
           "eje": "Seguridad",
-          "consulta": "homicidios \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "homicidios site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Violencia organizada",
           "eje": "Seguridad",
-          "consulta": "\"muertes violentas\" \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "\"muertes violentas\" site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Delito registrado",
           "eje": "Seguridad",
-          "consulta": "\"hechos delictivos\" \"Paraguay\" filetype:xlsx -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "\"hechos delictivos\" site:www.datos.gov.py filetype:xlsx -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Delito registrado",
           "eje": "Seguridad",
-          "consulta": "denuncias \"Paraguay\" filetype:xlsx -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "denuncias site:www.datos.gov.py filetype:xlsx -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Economías ilícitas",
           "eje": "Seguridad",
-          "consulta": "\"lavado de activos\" \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "\"lavado de activos\" site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Economías ilícitas",
           "eje": "Seguridad",
-          "consulta": "incautaciones \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "incautaciones site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Contrabando",
           "eje": "Seguridad",
-          "consulta": "contrabando \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "contrabando site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Contrabando",
           "eje": "Seguridad",
-          "consulta": "aduana decomiso \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "aduana decomiso site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Contratación pública",
           "eje": "Gobernanza",
-          "consulta": "contrataciones \"Paraguay\" filetype:csv -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "contrataciones site:www.datos.gov.py filetype:csv -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Contratación pública",
           "eje": "Gobernanza",
-          "consulta": "\"compras públicas\" \"Paraguay\" filetype:csv -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "\"compras públicas\" site:www.datos.gov.py filetype:csv -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Integridad",
           "eje": "Gobernanza",
-          "consulta": "corrupción \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "corrupción site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Integridad",
           "eje": "Gobernanza",
-          "consulta": "\"declaración jurada\" \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "\"declaración jurada\" site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Acceso a la información",
           "eje": "Gobernanza",
-          "consulta": "\"acceso a la información\" solicitudes \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "\"acceso a la información\" solicitudes site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Ciberseguridad",
           "eje": "Gobernanza",
-          "consulta": "ciberseguridad incidentes \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "ciberseguridad incidentes site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Ciberseguridad",
           "eje": "Gobernanza",
-          "consulta": "CSIRT \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "CSIRT site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Desinformación",
           "eje": "Gobernanza",
-          "consulta": "desinformación \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "desinformación site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         },
         {
           "materia": "Desinformación",
           "eje": "Gobernanza",
-          "consulta": "\"alfabetización mediática\" \"Paraguay\" filetype:pdf -nomina -organigrama",
-          "acotada_a_fuente_oficial": false
+          "consulta": "\"alfabetización mediática\" site:www.datos.gov.py filetype:pdf -nomina -organigrama",
+          "acotada_a_fuente_oficial": true
         }
       ]
     },
@@ -3793,8 +3795,8 @@
     }
   ],
   "resumen": {
-    "estados_con_dominio_probado": 13,
-    "estados_sin_dominio_probado": 20,
+    "estados_con_dominio_probado": 14,
+    "estados_sin_dominio_probado": 19,
     "estados_del_padron": 33,
     "materias_cubiertas": 9,
     "ruido_restado": {

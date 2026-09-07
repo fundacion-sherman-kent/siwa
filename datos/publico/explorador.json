@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "explorador",
     "capa": "publico",
-    "obtenido_en": "2026-09-07T00:16:42+00:00",
+    "obtenido_en": "2026-09-07T06:02:04+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — exploración de puertas de datos oficiales",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#explorador"
@@ -11,14 +11,14 @@
       "fiabilidad": "A",
       "credibilidad": 1,
       "corroborado": true,
-      "nota": "Medicion propia de la Oficina: se consulta cada dominio oficial y se registra lo que contesta. Fiabilidad A porque el productor es esta casa y el metodo esta escrito. Credibilidad 1 porque el hecho registrado —que una direccion respondio de tal modo en tal momento— se verifica por si mismo y cualquiera puede repetir la consulta: la corroboracion es la reproducibilidad."
+      "nota": "Medicion propia de la Oficina: se consulta cada dominio oficial y se registra lo que contesta. Fiabilidad a porque el productor es esta casa y el método esta escrito. Credibilidad 1 porque el hecho registrado —que una dirección respondio de tal modo en tal momento— se verifica por si mismo y cualquiera puede repetir la consulta: la corroboracion es la reproducibilidad."
     },
     "vacios_declarados": [
-      "Este colector propone, no publica. No agrega nada al registro: toca puertas, anota cuál abrió y con que forma, y deja el hallazgo declarado para que una persona decida. Un colector que se autoalimentara con lo que encuentra romperia la única regla que hace confiable a este registro: que todo lo que se afirma, se probó.",
-      "«cierra» no es «no esta», y ninguno de los dos es «no publica». Un 403 o un 401 significan que el portal existe y rechaza a los programas —publica para personas y no para maquinas—. Un 404 significa que no hay nada en esa dirección, que puede ser porque el portal está en otra. Confundirlos fue lo que dejó a seis Estados mal descritos.",
+      "Este colector propone, no publica. No agrega nada al registro: toca puertas, anota cuál abrió y con que forma, y deja el hallazgo declarado para que una persona decida. Un colector que se autoalimentara con lo que encuentra romperia la única regla que hace confiable a este registro: que todo lo que se afirma, se probo.",
+      "«cierra» no es «no esta», y ninguno de los dos es «no publica». Un 403 o un 401 significan que el portal existe y rechaza a los programas —publica para personas Y no para maquinas—. Un 404 significa que no hay nada en esa dirección, que puede ser porque el portal está en otra. Confundirlos fue lo que dejó a seis Estados mal descritos.",
       "Solo se prueban dominios oficiales ya verificados, nunca direcciones deducidas por analogia. Suponer que «si Perú usa datos.gob.pe entonces Bolivia usara datos.gob.bo» es exactamente como se llega a una dirección inexistente y se la anota como Estado opaco.",
-      "Que un Estado no abra ninguna puerta no significa que no publique datos. Significa que no se halló un catálogo legible por maquina en los dominios probados y en los dialectos conocidos. Puede publicar en PDF, en otra dirección o con un dialecto que este colector todavía no conoce.",
-      "Antes de creer un vacio se prueba el explorador contra ARG, que publica catálogo abierto. Si ese no abre, la corrida se detiene entera en lugar de publicar un mapa de puertas cerradas que en realidad son un error propio.",
+      "Que un Estado no abra ninguna puerta no significa que no publique datos. Significa que no se halló un catálogo legible por maquina en los dominios probados y en los dialectos conocidos. Puede publicar en PDF, en otra dirección O con un dialecto que este colector todavía no conoce.",
+      "ANTES DE CREER UN VACIO SE PRUEBA EL EXPLORADOR contra ARG, que publica catálogo abierto. Si ese no abre, la corrida se detiene entera en lugar de publicar un mapa de puertas cerradas que en realidad son un error propio.",
       "La cantidad de conjuntos es la que declara el portal, no un recuento propio, y no dice nada sobre su calidad ni su actualidad: un portal con diez mil conjuntos viejos no publica más que uno con cien al día."
     ],
     "restriccion_de_uso": null,
@@ -27,7 +27,7 @@
       "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
       "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
       "sitio": "https://siwa.fundacionkent.org/sitio/index.html",
-      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información CITANDO LA FUENTE de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información citando la fuente de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes Y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
       "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
     }
   },
@@ -229,7 +229,8 @@
       "estado": "cierra",
       "puertas_abiertas": [],
       "puertas_cerradas": [
-        "portalunico.iaip.gob.hn · HTTP 403"
+        "portalunico.iaip.gob.hn · HTTP 403",
+        "www.ine.gob.hn · HTTP 403"
       ],
       "dominios_probados": [
         "portalunico.iaip.gob.hn",
@@ -373,12 +374,6 @@
       "puertas_abiertas": [
         {
           "dominio": "www.datos.gov.co",
-          "dialecto": "DCAT",
-          "conjuntos": null,
-          "url": "https://www.datos.gov.co/data.json"
-        },
-        {
-          "dominio": "www.datos.gov.co",
           "dialecto": "Socrata",
           "conjuntos": null,
           "url": "https://www.datos.gov.co/api/views.json?limit=1"
@@ -467,6 +462,7 @@
       "puertas_abiertas": [],
       "puertas_cerradas": [],
       "dominios_probados": [
+        "stats.gov.bs",
         "www.bahamas.gov.bs"
       ]
     },
@@ -506,11 +502,11 @@
     "estados_que_cierran": 6,
     "estados_sin_puerta_hallada": 18,
     "estados_del_padron": 33,
-    "dominios_probados": 49,
+    "dominios_probados": 50,
     "dialectos_probados": 6,
-    "toques_realizados": 343,
+    "toques_realizados": 350,
     "explorador_probado": true,
-    "consultado": "2026-09-07T00:16:42+00:00"
+    "consultado": "2026-09-07T06:02:04+00:00"
   },
   "dialectos": [
     "ArcGIS Hub",

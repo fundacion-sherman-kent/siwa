@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "comercio",
     "capa": "publico",
-    "obtenido_en": "2026-09-06T05:48:59+00:00",
+    "obtenido_en": "2026-09-07T05:52:18+00:00",
     "fuente": {
       "nombre": "Comtrade de Naciones Unidas — vista pública",
       "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
@@ -11,17 +11,17 @@
       "fiabilidad": "A",
       "credibilidad": 2,
       "corroborado": false,
-      "nota": "Declaraciones aduaneras oficiales de cada Estado, compiladas por Naciones Unidas. La fuente es de primer orden; lo que NO es de primer orden es la interpretación: la brecha es un indicio, no una medición de contrabando."
+      "nota": "Declaraciones aduaneras oficiales de cada Estado, compiladas por Naciones Unidas. La fuente es de primer orden; lo que no es de primer orden es la interpretación: la brecha es un indicio, no una medición de contrabando."
     },
     "vacios_declarados": [
       "Una brecha de pocos puntos no es contrabando: es contabilidad. El exportador declara en valor FOB —la mercaderia puesta en el barco— y el importador en CIF, que además incluye flete y seguro. Solo por eso el importador registra de rutina entre 3 % y 10 % más. A eso se suman los envios que cruzan el año calendario y las diferencias de clasificación aduanera.",
       "Lo que si llama la atención es la brecha negativa: que el importador declare menos de lo que el exportador dice haberle mandado no tiene explicación contable inocente, porque el flete y el seguro empujan en el sentido contrario. Aún así es un indicio que abre una línea de averiguación, no una prueba de delito.",
-      "Se comparan 37 corredores —los que comparten frontera y los de mayor volumen regional—, no los 1.056 pares posibles: la mayoría no tiene comercio significativo y solo agregaria ruido. Un corredor ausente no está limpio: no está mirado.",
-      "La medición es acumulativa. La vista pública de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvió HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, empezando por los que nunca se midieron, y cada corredor declara cuando se midio. Van 33 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
-      "El año es 2023, el último con cobertura amplia en la vista pública. No es el año corriente y no se estima ninguno posterior.",
+      "Se comparan 37 corredores —los que comparten frontera y los de mayor volumen regional—, no los 1.056 pares posibles: la mayoría no tiene comercio significativo y solo agregaria ruido. Un corredor ausente no está limpio: no esta mirado.",
+      "LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, Empezando por los que nunca se midieron, y cada corredor declara cuando se MIDIO. Van 33 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
+      "El año es 2023, el último con cobertura amplia en la vista publica. NO es el año corriente y no se estima ninguno posterior.",
       "Se compara el total de comercio, no producto por producto. La subfacturación suele concentrarse en unas pocas partidas y se diluye en el total: este registro sirve para señalar el corredor, no la mercaderia.",
       "Un Estado que no reporta a Comtrade no genera brecha con nadie, y por lo tanto no aparece. La ausencia mide la calidad de su estadística aduanera, no su honestidad comercial.",
-      "Se descartaron 71 filas de apertura por modo de transporte. Sumarlas al total duplica el comercio: en la primera prueba la brecha Argentina-Brasil dio +109 %, que es absurdo; con la fila total sola da +4,7 %. Queda anotado porque es un error facil de cometer.",
+      "Se descartaron 42 filas de apertura por modo de transporte. Sumarlas al total duplica el comercio: en la primera prueba la brecha Argentina-Brasil dio +109 %, que es absurdo; con la fila total sola da +4,7 %. Queda anotado porque es un error facil de cometer.",
       "Consultas que fallaron: BRA-VEN: sin fila total; COL-VEN: sin fila total; DOM-HTI: sin fila total; VEN-GUY: sin fila total"
     ],
     "restriccion_de_uso": null,
@@ -29,8 +29,8 @@
     "atribucion": {
       "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
       "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
-      "sitio": "https://fundacion-sherman-kent.github.io/siwa/sitio/index.html",
-      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información CITANDO LA FUENTE de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "sitio": "https://siwa.fundacionkent.org/sitio/index.html",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información citando la fuente de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes Y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
       "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
     }
   },
@@ -259,7 +259,7 @@
     "estados_con_dato": 19,
     "estados_del_padron": 33,
     "anio": 2023,
-    "filas_descartadas_por_transporte": 71
+    "filas_descartadas_por_transporte": 42
   },
   "corredores": [
     {
@@ -520,7 +520,7 @@
       "brecha_pct": 6.4,
       "sentido": "el importador declara más",
       "llama_la_atencion": false,
-      "medido_en": "2026-08-31T18:45:21+00:00"
+      "medido_en": "2026-09-07T05:52:18+00:00"
     },
     {
       "origen": "BRA",
@@ -692,5 +692,5 @@
       "medido_en": "2026-09-03T05:58:24+00:00"
     }
   ],
-  "metodo": "Para cada corredor se pide lo que el origen declara EXPORTAR al destino y lo que el destino declara IMPORTAR del origen, en el mismo año y sobre el total de mercaderias. Se toma UNICAMENTE la fila total —motCode 0, customsCode C00, partner2Code 0— y se descartan las aperturas por modo de transporte, que repiten el mismo comercio."
+  "metodo": "Para cada corredor se pide lo que el origen declara exportar al destino Y lo que el destino declara importar del origen, en el mismo año y sobre el total de mercaderias. Se toma unicamente la fila total —motCode 0, customsCode C00, partner2Code 0— y se descartan las aperturas por modo de transporte, que repiten el mismo comercio."
 }
