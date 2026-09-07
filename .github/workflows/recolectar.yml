@@ -110,6 +110,14 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/prensa_libre.py
 
+      # Tabla de ratificaciones de un tratado: cambia unas pocas veces por año.
+      # Va en la corrida diaria.
+      - name: Bienes culturales (UNIDROIT 1995)
+        id: bienes
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/bienes_culturales.py
+
       # Una consulta de RECUENTO por Estado: la descarga completa pesa 261 MB y
       # no hace falta bajarla para saber cuantos asientos hay.
       - name: Especies protegidas (CITES)
@@ -307,6 +315,7 @@ jobs:
           [ "${{ steps.ciber.outcome }}" = "failure" ] && { echo "Falló el colector de medición de red."; fallo=1; }
           [ "${{ steps.sanciones.outcome }}" = "failure" ] && { echo "Falló el colector de sanciones."; fallo=1; }
           [ "${{ steps.prensa.outcome }}" = "failure" ] && { echo "Falló el colector de libertad de prensa."; fallo=1; }
+          [ "${{ steps.bienes.outcome }}" = "failure" ] && { echo "Falló el colector de bienes culturales."; fallo=1; }
           [ "${{ steps.cites.outcome }}" = "failure" ] && { echo "Falló el colector de especies protegidas."; fallo=1; }
           [ "${{ steps.crimen.outcome }}" = "failure" ] && { echo "Falló el colector de crimen organizado."; fallo=1; }
           [ "${{ steps.designados.outcome }}" = "failure" ] && { echo "Falló el colector de designados."; fallo=1; }
