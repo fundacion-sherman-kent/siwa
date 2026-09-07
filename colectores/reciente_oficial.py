@@ -184,7 +184,7 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Catalogos oficiales de los propios Estados, consultados por su interfaz "
-              "Publica. Fiabilidad a porque publica el organismo responsable. Credibilidad "
+              "publica. Fiabilidad a porque publica el organismo responsable. Credibilidad "
               "2 y no 1 porque no se verificó el contenido de cada conjunto: se verificó "
               "que existe, de cuando es y donde esta."),
     )

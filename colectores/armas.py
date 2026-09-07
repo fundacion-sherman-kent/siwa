@@ -182,7 +182,7 @@ def recolectar():
     if control.get("estado") == "declarado" and not control.get("exporta_usd"):
         raise RuntimeError(
             f"La prueba del lector falló: {CONTROL} —exportador de armas conocido— quedó "
-            "Con exportación cero. El filtro de filas o la consulta cambiaron. No se "
+            "con exportación cero. El filtro de filas o la consulta cambiaron. No se "
             "publica una lectura a ciegas.")
 
     vacios = [
@@ -215,7 +215,7 @@ def recolectar():
         "Se publica el monto y su porcentaje porque es un dato de transparencia, no una "
         "acusacion.",
         f"EL ANIO ES {ANIO}, que es el ultimo con cobertura amplia en la vista publica y "
-        "Gratuita de la fuente. No es el último año calendario, y se dice.",
+        "gratuita de la fuente. No es el último año calendario, y se dice.",
     ]
     if sinConsultar:
         vacios.append(

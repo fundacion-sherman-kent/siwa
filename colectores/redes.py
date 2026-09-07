@@ -239,7 +239,7 @@ def recolectar():
     robots = sum(r["publicaciones_automatizadas"] for r in registros)
     vacios = [
         f"Se descartaron {robots} publicaciones de cuentas automatizadas, que en su "
-        "Mayoría reenvian titulares de prensa. Contarlas como conversación social "
+        "mayoría reenvian titulares de prensa. Contarlas como conversación social "
         "sería contar dos veces la misma noticia, que este registro ya recoge por su "
         "propio canal. La detección usa la declaración de la propia cuenta y, si no la "
         "hay, su nombre: una cuenta automatizada que no se declare puede pasar.",
@@ -269,7 +269,7 @@ def recolectar():
         credibilidad=4,
         corroborado=False,
         nota=("Publicaciones de personas sin identidad verificada. Se registra la "
-              "Circulación, que sí se observa directamente, no el contenido, que no "
+              "circulación, que sí se observa directamente, no el contenido, que no "
               "está verificado. Un término que circula mucho no es un hecho."),
     )
 

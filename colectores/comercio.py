@@ -216,7 +216,7 @@ def recolectar():
         "inocente, porque el flete y el seguro empujan en el sentido contrario. Aún así "
         "es un indicio que abre una línea de averiguación, no una prueba de delito.",
         f"Se comparan {len(PARES)} corredores —los que comparten frontera y los de mayor "
-        "Volumen regional—, no los 1.056 pares posibles: la mayoría no tiene comercio "
+        "volumen regional—, no los 1.056 pares posibles: la mayoría no tiene comercio "
         "significativo y solo agregaria ruido. Un corredor ausente no está limpio: no "
         "esta mirado.",
         f"LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas "
@@ -224,9 +224,9 @@ def recolectar():
         f"37 pedidos. No se la fuerza. Cada corrida mide {POR_CORRIDA} corredores, "
         "Empezando por los que nunca se midieron, y cada corredor declara cuando se "
         f"MIDIO. Van {len(corredores)} de {len(PARES)} medidos al menos una vez. Es "
-        "Preferible un dato fechado que un barrido que el servidor rechaza.",
+        "preferible un dato fechado que un barrido que el servidor rechaza.",
         f"El año es {ANIO}, el último con cobertura amplia en la vista publica. NO es el "
-        "Año corriente y no se estima ninguno posterior.",
+        "año corriente y no se estima ninguno posterior.",
         "Se compara el total de comercio, no producto por producto. La subfacturación "
         "suele concentrarse en unas pocas partidas y se diluye en el total: este registro "
         "sirve para señalar el corredor, no la mercaderia.",

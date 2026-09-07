@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 33 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-33">
+<meta property="og:description" content="33 Estados, 69 indicadores, 35 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-35">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 33 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-33">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 35 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-35">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 33 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 35 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1566,6 +1566,47 @@
       <div class="cruce" id="lista-designados"></div>
       <div id="vac-designados"></div>
         </div>
+    <div class="categoria" id="regimen" data-nivel="1">
+      <div class="categoria-head"><h4>Régimen político · qué clase de régimen es</h4><span class="tag" id="tag-regimen">—</span></div>
+      <details class="aviso-cobertura"><summary>Es una casilla, no un puntaje, y ocho Estados quedan fuera</summary>
+        <p><b>Es una clasificación, no un ranking.</b> Dos democracias electorales no están
+           empatadas: están en la misma casilla. Para el matiz están los índices continuos
+           que el registro publica en el eje de gobernanza.</p>
+        <p><b>Es evaluación de especialistas, no un recuento de hechos.</b> V-Dem arma la
+           categoría con índices que promedian el juicio de varios codificadores por país,
+           con intervalo de incertidumbre declarado. Un cambio de casilla es una decisión
+           de método tanto como un cambio del mundo.</p>
+        <p><b>Ocho Estados no están clasificados</b>, todos del Caribe chico. <b>La brecha es
+           del proyecto, no de esos Estados</b>: no significa que no tengan régimen
+           clasificable, significa que nadie los codificó.</p>
+      </details>
+      <div class="procedencia" id="proc-regimen">Cargando el registro…</div>
+      <div class="cruce" id="lista-regimen"></div>
+      <div id="vac-regimen"></div>
+        </div>
+
+    <div class="categoria" id="trata-esfuerzo" data-nivel="2">
+      <div class="categoria-head"><h4>Trata de personas · el esfuerzo de cada gobierno</h4><span class="tag" id="tag-trata-esfuerzo">—</span></div>
+      <details class="aviso-cobertura"><summary>Mide esfuerzo de gobierno, no cantidad de víctimas — y lo emite un Estado sobre otros</summary>
+        <p><b>Mide esfuerzo de gobierno, no cantidad de víctimas.</b> Un Estado puede tener
+           mucha trata y estar en el Nivel 1 porque su gobierno la persigue, y otro puede
+           tener poca y caer al Nivel 3. <b>Leerlo como un recuento de trata es leerlo
+           exactamente al revés.</b></p>
+        <p><b>Lo emite un Estado sobre otros Estados.</b> Es la evaluación del gobierno de
+           los Estados Unidos, con método declarado y consecuencias legales propias —el
+           Nivel 3 habilita restricciones de asistencia—, no una medición neutral. Entra al
+           registro como la posición de un tercero, calificada como tal, y <b>no sostiene por
+           sí sola ningún juicio de la Fundación</b>.</p>
+        <p><b>«Caso especial» no es una nota mala ni buena: es la ausencia de nota.</b>
+           Significa que la situación del país impide evaluar los esfuerzos del gobierno.
+           Ordenarlo como peor o mejor que el Nivel 3 sería inventar una escala que el
+           informe no tiene.</p>
+      </details>
+      <div class="procedencia" id="proc-trata-esfuerzo">Cargando el registro…</div>
+      <div class="cruce" id="lista-trata-esfuerzo"></div>
+      <div id="vac-trata-esfuerzo"></div>
+        </div>
+
     <div class="categoria" id="bienes" data-nivel="2">
       <div class="categoria-head"><h4>Bienes culturales · qué está tipificado</h4><span class="tag" id="tag-bienes">—</span></div>
       <details class="aviso-cobertura"><summary>Esto no mide tráfico: mide qué se obligó a restituir cada Estado</summary>
@@ -2408,6 +2449,8 @@
                      ['sondeo','Banco de pruebas de fuentes candidatas'],
                      ['prensa','RSF — libertad de prensa'],
                      ['focos','NASA FIRMS — focos de calor'],
+                     ['regimen','V-Dem — Regímenes del Mundo'],
+                     ['trata','Departamento de Estado — trata de personas'],
                      ['bienes','UNIDROIT — bienes culturales, convenio de 1995'],
                      ['cites','CITES — comercio de especies protegidas'],
                      ['crimen','Índice Global de Crimen Organizado'],
@@ -5022,6 +5065,8 @@
     paso('comercio de armas', armasVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
+    paso('régimen político', regimenVista);
+    paso('trata de personas', trataVista);
     paso('bienes culturales', bienesVista);
     paso('especies protegidas', citesVista);
     paso('focos de calor', focosVista);
@@ -6366,6 +6411,67 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     caja.innerHTML = html;
   }
 
+  // Dos registros que clasifican en casillas en vez de puntuar. Se dibujan igual
+  // y con el mismo cuidado: la casilla se muestra con lo que la fuente dice que
+  // significa, y quien no esta clasificado NO aparece como si le hubiera ido
+  // mal, sino con el motivo por el que no esta.
+  function porCasillas(clave, dato, campoSi, motivo, insignia){
+    const caja = document.getElementById('lista-' + clave);
+    if(!caja || !dato) return;
+    const zona = bloqueActivo();
+    let lista = dato.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const con = lista.filter(x => x[campoSi]);
+    const sin = lista.filter(x => !x[campoSi]);
+
+    const tag = document.getElementById('tag-' + clave);
+    if(tag) tag.textContent = (paisFiltro || zona)
+      ? (con.length ? con.map(x => x.rotulo).join(' · ') : 'sin clasificar en el ámbito')
+      : Object.entries(dato.resumen.por_categoria || {})
+          .map(([r,n]) => n + ' ' + r.toLowerCase()).join(' · ');
+
+    // Se agrupan por casilla: la lista suelta de treinta y tres fichas no deja
+    // ver el reparto, que es justo lo que esta clasificacion aporta.
+    const grupos = new Map();
+    con.forEach(x => {
+      if(!grupos.has(x.rotulo)) grupos.set(x.rotulo, {orden:x.orden, dice:x.dice, paises:[]});
+      grupos.get(x.rotulo).paises.push(x);
+    });
+    const ordenadas = [...grupos.entries()].sort((a,b) => a[1].orden - b[1].orden);
+
+    let html = ordenadas.map(([rotulo, g]) =>
+      '<div class="asunto"><h4>' + esc(rotulo)
+      + ' <span class="edad ' + (g.orden <= 1 ? 'muy-viejo' : g.orden === 2 ? 'viejo' : 'fresco')
+      + '">' + g.paises.length + '</span></h4>'
+      + '<div class="lugares">' + g.paises.map(x =>
+          x.enlace ? '<a class="lugar" href="' + esc(x.enlace) + '" target="_blank" rel="noopener">'
+                     + esc(x.pais) + '</a>'
+                   : '<span class="lugar">' + esc(x.pais) + '</span>').join('')
+      + '</div><div class="foot"><span class="porque">' + esc(g.dice)
+      + '</span><span class="badge medio">' + esc(insignia) + '</span></div></div>').join('');
+
+    if(sin.length){
+      html += '<div class="asunto"><h4>' + sin.length + ' sin clasificar</h4>'
+        + '<div class="foot"><span class="porque">' + esc(sin.map(x => x.pais).join(', '))
+        + '. <b>' + esc(motivo) + '</b></span><span class="badge unica">sin clasificar</span></div></div>';
+    }
+    caja.innerHTML = html;
+  }
+
+  function regimenVista(){
+    porCasillas('regimen', almacen.regimen_politico, 'clasificado',
+      'V-Dem no codifica a estos Estados: la brecha es del proyecto, no de ellos, y no '
+      + 'dice nada sobre su régimen.', 'clasificación');
+  }
+
+  function trataVista(){
+    porCasillas('trata-esfuerzo', almacen.trata_personas, 'evaluado',
+      'El informe no los evalúa en esta edición. Que no figuren no dice nada sobre su '
+      + 'situación: dice que el informe no los incluye.', 'esfuerzo de gobierno');
+  }
+
   function bienesVista(){
     const caja = document.getElementById('lista-bienes');
     const d = almacen.bienes_culturales; if(!caja || !d) return;
@@ -7573,6 +7679,28 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-designados','designados',err.message);
       document.getElementById('proc-designados').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('regimen_politico.json'), traer('estado/regimen_politico.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.regimen_politico=d; const meta=d.procedencia;
+      pintarProcedencia('proc-regimen',meta);
+      vacios+=pintarVacios('vac-regimen',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-regimen','régimen político',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-regimen','régimen político',err.message);
+      document.getElementById('proc-regimen').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('trata_personas.json'), traer('estado/trata_personas.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.trata_personas=d; const meta=d.procedencia;
+      pintarProcedencia('proc-trata-esfuerzo',meta);
+      vacios+=pintarVacios('vac-trata-esfuerzo',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-trata-esfuerzo','trata de personas',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-trata-esfuerzo','trata de personas',err.message);
+      document.getElementById('proc-trata-esfuerzo').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('bienes_culturales.json'), traer('estado/bienes_culturales.json').catch(()=>null)])
     .then(([d,estado])=>{

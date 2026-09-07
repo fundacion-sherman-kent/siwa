@@ -208,7 +208,7 @@ def recolectar():
     if not crudo.get(CONTROL, ({}, {}, []))[1]:
         raise RuntimeError(
             f"La prueba del lector falló: en {CONTROL} no se leyó ningún puesto. La "
-            "Página escribe el ordinal dentro de una etiqueta —«85<sup>th</sup>»— y eso "
+            "página escribe el ordinal dentro de una etiqueta —«85<sup>th</sup>»— y eso "
             "ya rompió el patrón una vez. NO se publica una lectura a ciegas.")
     if len(control) < 20:
         raise RuntimeError(
@@ -258,7 +258,7 @@ def recolectar():
         "región puede estar bien situado en el mundo y mal en su zona: son dos preguntas "
         "distintas y esta cifra contesta la primera.",
         f"ANTES DE CREER UN VACIO SE PRUEBA EL LECTOR contra {CONTROL}, que tiene puntaje "
-        "En las 36 medidas. Si la pagina cambia de forma, el patron deja de encontrar y "
+        "en las 36 medidas. Si la pagina cambia de forma, el patron deja de encontrar y "
         "todos los Estados quedarian en blanco: eso no es «no hay datos», es «no supimos "
         "leer», y la corrida se detiene entera.",
     ]
@@ -268,7 +268,7 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=("Iniciativa global contra el crimen organizado transnacional, red de "
-              "Expertos con sede en Ginebra y metodologia publicada. La Fundación es "
+              "expertos con sede en Ginebra y metodologia publicada. La Fundación es "
               "miembro permanente de la organización que produce el índice. Fiabilidad B "
               "porque es una organización con posición tomada sobre la materia que mide "
               "—lo cuál no la invalida, pero se declara—. Credibilidad 3 porque el "

@@ -144,7 +144,7 @@ def recolectar():
 
     vacios = [
         f"VENTANA MÓVIL DE {VENTANA} AÑOS (desde {DESDE}). La tendencia compara el primer "
-        "Año disponible contra el último, no el interanual: el interanual es ruido y la "
+        "año disponible contra el último, no el interanual: el interanual es ruido y la "
         "ventana muestra el movimiento de fondo.",
         "La cifra es anual y de cierre de año. No es un dato en vivo: entre "
         "publicaciones, la situación puede haber cambiado por completo.",

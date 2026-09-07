@@ -175,7 +175,7 @@ def recolectar():
     if not abreControl:
         raise RuntimeError(
             f"La prueba del explorador falló: {CONTROL} —que publica un catálogo abierto y "
-            "Responde— no abrió en ninguna de las puertas probadas. El que falló es el "
+            "responde— no abrió en ninguna de las puertas probadas. El que falló es el "
             "explorador, no el mundo. No se publica un mapa de puertas cerradas que en "
             "realidad son un error propio.")
 
@@ -233,7 +233,7 @@ def recolectar():
         "probados y en los dialectos conocidos. Puede publicar en PDF, en otra dirección "
         "O con un dialecto que este colector todavía no conoce.",
         f"ANTES DE CREER UN VACIO SE PRUEBA EL EXPLORADOR contra {CONTROL}, que publica "
-        "Catálogo abierto. Si ese no abre, la corrida se detiene entera en lugar de "
+        "catálogo abierto. Si ese no abre, la corrida se detiene entera en lugar de "
         "publicar un mapa de puertas cerradas que en realidad son un error propio.",
         "La cantidad de conjuntos es la que declara el portal, no un recuento propio, y "
         "no dice nada sobre su calidad ni su actualidad: un portal con diez mil conjuntos "
@@ -245,7 +245,7 @@ def recolectar():
         credibilidad=1,
         corroborado=True,
         nota=("Medicion propia de la Oficina: se consulta cada dominio oficial y se "
-              "Registra lo que contesta. Fiabilidad a porque el productor es esta casa y "
+              "registra lo que contesta. Fiabilidad a porque el productor es esta casa y "
               "el método esta escrito. Credibilidad 1 porque el hecho registrado —que una "
               "dirección respondio de tal modo en tal momento— se verifica por si mismo y "
               "cualquiera puede repetir la consulta: la corroboracion es la reproducibilidad."),

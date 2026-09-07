@@ -124,7 +124,7 @@ INDICADORES = [
      "unidad": "% del producto", "mas_es_peor": False,
      "origen": "FMI y Banco Mundial",
      "cautela": "Entra como capacidad del Estado de recaudar, no como indicador "
-                "Económico. Una recaudación baja frente a una economía grande señala "
+                "económico. Una recaudación baja frente a una economía grande señala "
                 "evasión o economía no registrada."},
     {"clave": "desempleo_joven", "codigo": "SL.UEM.1524.ZS", "fuente_id": None,
      "rotulo": "Desempleo juvenil", "eje": "Desarrollo",
@@ -160,7 +160,7 @@ INDICADORES = [
      "unidad": "% de las empresas consultadas", "mas_es_peor": True,
      "origen": "Encuestas de Empresas del Banco Mundial",
      "cautela": "Es la materia de INTEGRIDAD DE LA CONTRATACION PUBLICA. Mide lo que la "
-                "Empresa declara esperar, no un soborno comprobado. La encuesta no se "
+                "empresa declara esperar, no un soborno comprobado. La encuesta no se "
                 "levanta todos los años en todos los Estados: el dato de cada país es "
                 "de la última ronda disponible y las rondas no coinciden entre si."},
     {"clave": "servidores_seguros", "codigo": "IT.NET.SECR.P6", "fuente_id": None,
@@ -168,7 +168,7 @@ INDICADORES = [
      "unidad": "por millón de habitantes", "mas_es_peor": False,
      "origen": "Netcraft, compilado por el Banco Mundial",
      "cautela": "Es el único indicador de CIBERSEGURIDAD comparable y gratuito que se "
-                "Encontro para los 33. Mide infraestructura de cifrado desplegada, no "
+                "encontro para los 33. Mide infraestructura de cifrado desplegada, no "
                 "mide ataques, ni defensa estatal, ni incidentes. Un valor alto indica "
                 "una economía digital mas madura, no un Estado mas protegido."},
     {"clave": "banda_ancha", "codigo": "IT.NET.BBND.P2", "fuente_id": None,
@@ -182,7 +182,7 @@ INDICADORES = [
      "unidad": "personas", "mas_es_peor": False,
      "origen": "Naciones Unidas, compilado por el Banco Mundial",
      "cautela": "Personas nacidas en otro país que residen en este. NO mide flujo ni "
-                "Irregularidad: es el acervo acumulado. Y no dice nada sobre delito: "
+                "irregularidad: es el acervo acumulado. Y no dice nada sobre delito: "
                 "asociar migración con inseguridad es un juicio, y el registro no lo hace."},
     {"clave": "migrantes_pct", "codigo": "SM.POP.TOTL.ZS", "fuente_id": None,
      "rotulo": "Peso de la población migrante", "eje": "Seguridad",
@@ -195,14 +195,14 @@ INDICADORES = [
      "unidad": "personas por quinquenio", "mas_es_peor": False,
      "origen": "Naciones Unidas, compilado por el Banco Mundial",
      "cautela": "Entradas menos salidas. NEGATIVO significa que se fue mas gente de la "
-                "Que llegó: es el indicador de expulsión de población. Se estima por "
+                "que llegó: es el indicador de expulsión de población. Se estima por "
                 "quinquenios, de modo que no capta una crisis de un solo año."},
     {"clave": "remesas", "codigo": "BX.TRF.PWKR.DT.GD.ZS", "fuente_id": None,
      "rotulo": "Remesas recibidas", "eje": "Seguridad",
      "unidad": "% del producto", "mas_es_peor": False,
      "origen": "Banco Mundial",
      "cautela": "Entra como medida de MIGRACIÓN, no como indicador económico: es cuanto "
-                "Pesa el dinero que mandan quienes se fueron. Un valor alto señala una "
+                "pesa el dinero que mandan quienes se fueron. Un valor alto señala una "
                 "diaspora grande y una economía dependiente de ella. Solo cuenta los "
                 "envios por via formal: lo que viaja por fuera del sistema no aparece."},
     {"clave": "gasto_militar_publico", "codigo": "MS.MIL.XPND.ZS", "fuente_id": None,
@@ -210,7 +210,7 @@ INDICADORES = [
      "unidad": "% del gasto público", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Cuanto de lo que gasta el Estado va a defensa. Leido junto al gasto "
-                "Sobre el producto separa dos cosas distintas: un Estado chico que "
+                "sobre el producto separa dos cosas distintas: un Estado chico que "
                 "dedica mucho de lo poco que tiene, de uno grande que dedica poco de "
                 "mucho."},
     {"clave": "gasto_militar_dolares", "codigo": "MS.MIL.XPND.CD", "fuente_id": None,
@@ -230,7 +230,7 @@ INDICADORES = [
      "unidad": "valor indicativo SIPRI, NO son dólares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Es el indicador de MATERIAL disponible al que se puede llegar sin "
-                "Pagar: mide la adquisición de armamento mayor —aeronaves, buques, "
+                "pagar: mide la adquisición de armamento mayor —aeronaves, buques, "
                 "blindados, misiles— no el inventario. La unidad no es dinero: es un "
                 "valor indicativo que SIPRI asigna según capacidad militar, para poder "
                 "comparar sistemas de precios distintos. Un año sin compras da cero y "
@@ -240,7 +240,7 @@ INDICADORES = [
      "unidad": "valor indicativo SIPRI, NO son dólares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Muy pocos Estados de la región exportan armamento mayor: la mayoria "
-                "Figura sin dato, y eso es el dato. Misma unidad indicativa que la "
+                "figura sin dato, y eso es el dato. Misma unidad indicativa que la "
                 "importación."},
 ]
 
@@ -337,7 +337,7 @@ def recolectar():
     faltan = [p["pais"] for p in padron if p["iso"] not in {r["iso"] for r in registros}]
     vacios = [
         f"Ventana móvil de {VENTANA} años ({DESDE}-{HASTA}). La tendencia se calcula "
-        "Entre el primer y el último año disponibles dentro de esa ventana, que pueden "
+        "entre el primer y el último año disponibles dentro de esa ventana, que pueden "
         "no ser los extremos de la ventana misma.",
         "Serie anual con rezago: el último año disponible suele ir dos o tres años "
         "atrás del corriente. No es un dato en vivo.",

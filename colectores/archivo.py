@@ -204,7 +204,7 @@ def recolectar():
         "el padrón si resultara equivocada.",
         f"ALCANZA A {len(tareas)} SITIOS OFICIALES EN "
         f"{len({t[0] for t in tareas})} ESTADOS, todos probados antes de entrar. Los demas "
-        "Quedan como sin dominio probado, que no dice nada de ellos: dice que la Oficina "
+        "quedan como sin dominio probado, que no dice nada de ellos: dice que la Oficina "
         "todavía no verificó dónde publican.",
         "La cobertura del archivo es despareja. Un portal muy visitado se captura seguido "
         "Y uno del Caribe oriental puede tener pocas capturas en años: comparar la "

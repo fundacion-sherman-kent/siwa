@@ -121,7 +121,7 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Consolidador que reune listas oficiales de sanciones y registros de "
-              "Personas politicamente expuestas de multiples jurisdicciones. Fiabilidad B "
+              "personas politicamente expuestas de multiples jurisdicciones. Fiabilidad B "
               "porque es un tercero que agrega, no el organismo que sanciona. "
               "Credibilidad 2 porque se verificó el recuento que la fuente publica, no "
               "cada registro individual."),

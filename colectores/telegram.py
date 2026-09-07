@@ -279,7 +279,7 @@ def recolectar():
         "último mensaje: "
         + ("; ".join(f"{n} ({f})" for n, f in dormidos) if dormidos else "ninguno")
         + ". No es una falla de lectura: el canal responde y su contenido esta a la "
-          "Vista. Es que ese emisor dejó de usar esta vía, y conviene saberlo antes de "
+          "vista. Es que ese emisor dejó de usar esta vía, y conviene saberlo antes de "
           "buscar ahi lo que ya no se publica.",
         "El padrón cubre 8 jurisdicciones de las 33 del registro. La mayoría de los "
         "Estados de la región no tiene medios ni organismos con canal público "
@@ -303,7 +303,7 @@ def recolectar():
         credibilidad=4,
         corroborado=False,
         nota=("Difusión declarada por el propio emisor en su canal. Se registra QUE "
-              "Se publico y con que palabras, que se observa directamente; no que lo "
+              "se publico y con que palabras, que se observa directamente; no que lo "
               "publicado sea cierto. La identidad del canal esta verificada; el "
               "contenido no."),
     )

@@ -75,7 +75,7 @@ SERIES = [
      "unidad": "índice de 0 a 1", "mas_es_peor": True,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Abarca al ejecutivo, al legislativo, a la administración y a la "
-                "Justicia. Atención: en este índice el valor alto es el peor, al revés "
+                "justicia. Atención: en este índice el valor alto es el peor, al revés "
                 "que en los demas índices de V-Dem."},
     {"clave": "libertad_expresion", "slug": "freedom-of-expression-index",
      "columna": "freeexpr_vdem__estimate_best",
@@ -83,7 +83,7 @@ SERIES = [
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Censura estatal a los medios, represalia contra periodistas y "
-                "Libertad academica. Se lee junto con la cobertura noticiosa de este "
+                "libertad academica. Se lee junto con la cobertura noticiosa de este "
                 "mismo registro: donde la libertad cae, la corroboración cruzada vale mas."},
     {"clave": "libertad_asociacion", "slug": "freedom-of-association-index",
      "columna": "freeassoc_vdem__estimate_best",
@@ -91,7 +91,7 @@ SERIES = [
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Libertad para formar partidos y organizaciones civiles, y grado de "
-                "Represión sobre ellas. Es la materia de conflicto político leida por "
+                "represión sobre ellas. Es la materia de conflicto político leida por "
                 "el lado del espacio disponible para la oposición."},
     {"clave": "terrorismo_muertes", "slug": "terrorism-deaths",
      "columna": "total_killed",
@@ -100,7 +100,7 @@ SERIES = [
      "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
                "via Our World in Data",
      "cautela": "LA SERIE TERMINA EN 2021: la Base Global de Terrorismo dejo de "
-                "Actualizarse. No hay dato posterior y no se estima ninguno. Además, "
+                "actualizarse. No hay dato posterior y no se estima ninguno. Además, "
                 "la definición de terrorismo es disputada y varios Estados de la región "
                 "califican como terrorista a la protesta social."},
     {"clave": "terrorismo_atentados", "slug": "terrorist-attacks",
@@ -110,7 +110,7 @@ SERIES = [
      "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
                "via Our World in Data",
      "cautela": "Misma advertencia: LA SERIE TERMINA EN 2021. Cuenta hechos "
-                "Registrados, de modo que un Estado con mejor registro puede aparecer "
+                "registrados, de modo que un Estado con mejor registro puede aparecer "
                 "peor que uno que no lleva la cuenta."},
     {"clave": "conflicto_no_estatal", "slug": "deaths-in-non-state-conflicts",
      "columna": None,   # se resuelve sola: es la unica columna de valor
@@ -118,7 +118,7 @@ SERIES = [
      "unidad": "personas por año", "mas_es_peor": True,
      "origen": "UCDP, Programa de Datos de Conflicto de Upsala, via Our World in Data",
      "cautela": "Enfrentamientos armados ENTRE GRUPOS, sin el Estado como parte. En "
-                "Esta región eso es, en buena medida, disputa entre organizaciones "
+                "esta región eso es, en buena medida, disputa entre organizaciones "
                 "criminales por territorio o por renta: es el indicador de presencia de "
                 "grupos criminales organizados que más se acerca, y aún así solo cuenta "
                 "muertes en enfrentamiento, no presencia ni control territorial. El "
@@ -131,7 +131,7 @@ SERIES = [
      "origen": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, "
                "via Our World in Data",
      "cautela": "Es la única medida de CAPACIDAD AEROESPACIAL comparable y gratuita que "
-                "Se encontro para la región. Cuenta objetos registrados ante Naciones "
+                "se encontro para la región. Cuenta objetos registrados ante Naciones "
                 "unidas por cada Estado: satelites propios, no necesariamente lanzados "
                 "por el. No mide capacidad de lanzamiento, ni satelites militares, ni "
                 "aviación. Solo 13 de los 33 Estados registran alguno."},
@@ -156,7 +156,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Mide el esfuerzo del gobierno por censurar a los medios: cuanto MAS "
-                "Alto, menos censura. No cuenta episodios: es evaluación experta "
+                "alto, menos censura. No cuenta episodios: es evaluación experta "
                 "codificada por varios especialistas por país y año."},
     {"clave": "hostigamiento_periodistas", "slug": "key-media-freedoms",
      "columna": "v2meharjrn__estimate_best",
@@ -173,7 +173,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Cuanto MAS ALTO, menos se callan los medios por temor. Es la medida "
-                "Del efecto que la censura y el hostigamiento dejan cuando ya no hace "
+                "del efecto que la censura y el hostigamiento dejan cuando ya no hace "
                 "falta ejercerlos."},
     {"clave": "sesgo_medios", "slug": "key-media-freedoms",
      "columna": "v2mebias__estimate_best",
@@ -181,7 +181,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Cuanto MAS ALTO, mas parejo el trato de los medios a oficialismo y "
-                "Oposición. Un valor bajo no dice quien esta favorecido: dice que la "
+                "oposición. Un valor bajo no dice quien esta favorecido: dice que la "
                 "cobertura no es pareja."},
     {"clave": "medios_corruptos", "slug": "media-corruption-score",
      "columna": "v2mecorrpt__estimate_best",
@@ -189,7 +189,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "Cuanto MAS ALTO, menos frecuente que los medios reciban pagos para "
-                "Publicar, silenciar o torcer una nota. Es la puerta de entrada de la "
+                "publicar, silenciar o torcer una nota. Es la puerta de entrada de la "
                 "desinformación pagada."},
     {"clave": "polarizacion", "slug": "political-polarization-score",
      "columna": "v2cacamps__estimate_best",
@@ -197,7 +197,7 @@ SERIES = [
      "unidad": "índice de -4 a 4", "mas_es_peor": True,
      "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
      "cautela": "ATENCIÓN: en esta el valor ALTO es el PEOR, al revés que las cinco "
-                "Anteriores. Mide hasta que punto la sociedad esta partida en campos "
+                "anteriores. Mide hasta que punto la sociedad esta partida en campos "
                 "irreconciliables. Nicaragua 3,14 y Venezuela 2,23 contra Uruguay -1,81 "
                 "con el dato de 2025."},
 ]
@@ -307,7 +307,7 @@ def recolectar():
         "V-Dem no cubre a los Estados chicos del Caribe: "
         + (", ".join(sin_vdem) if sin_vdem else "ninguno")
         + ". Sin dato no significa sin democracia ni sin problema: significa que el "
-          "Proyecto no los codifica.",
+          "proyecto no los codifica.",
         "La serie de terrorismo termina en 2021. La Base Global de Terrorismo dejó de "
         "actualizarse y no hay reemplazo gratuito. No se estima ningún valor posterior.",
         "«Terrorismo» es una definición disputada. Varios Estados de la región califican "
@@ -343,7 +343,7 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Proyectos academicos con método publicado y revisión por pares. Se "
-              "Consultan por medio de Our World in Data, que república con licencia "
+              "consultan por medio de Our World in Data, que republica con licencia "
               "abierta lo que los productores entregan en formatos no consultables. "
               "La responsabilidad por el dato es del productor original, citado en "
               "cada indicador."),

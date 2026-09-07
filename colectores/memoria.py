@@ -274,7 +274,7 @@ def recolectar():
         "cuando lo miramos. Esas lineas van marcadas y no deben leerse como antigüedad "
         "del hecho.",
         f"LA MEMORIA EMPIEZA EL {primeraFecha} y no antes. Lo anterior a esa fecha no se "
-        "Perdio: nunca se guardo, porque el registro sobrescribia cada hora. Se "
+        "perdio: nunca se guardo, porque el registro sobrescribia cada hora. Se "
         "reconstruyo lo que el historial del repositorio permitia, que es poco: varios "
         "de los colectores vigilados nacieron hace días.",
         "Se guardan cambios, no fotos. Si un Estado no figura con transición es porque "

@@ -258,10 +258,10 @@ def recolectar():
         f"LA FUENTE LLEVA UN ANIO Y MEDIO DE REZAGO, y es del tratado, no de la fuente: "
         f"los informes anuales vencen el 31 de octubre del anio siguiente. El ultimo "
         f"anio completo es {hasta} y la ventana publicada va de {desde} a {hasta}. Esto "
-        "No sirve para seguir una crisis: sirve para ver un patron de cinco años.",
+        "no sirve para seguir una crisis: sirve para ver un patron de cinco años.",
         f"UNA PROPORCION SOBRE TRES ASIENTOS NO ES UNA PROPORCION. Los Estados con menos "
         f"de {MINIMO_PARA_PROPORCION} asientos en la ventana llevan su porcentaje MARCADO "
-        "Como no comparable: sin ese minimo, Granada quedaba segunda de la región con 4 "
+        "como no comparable: sin ese minimo, Granada quedaba segunda de la región con 4 "
         "asientos sobre 6 y Santa Lucía tercera con 1 sobre 3, por delante de Bahamas, "
         "que tiene 151 sobre 589. El número se publica igual —esconderlo sería peor—, "
         "pero no se ordena contra los demás.",
@@ -269,7 +269,7 @@ def recolectar():
         "fuente ignora en silencio los parametros que no conoce y devuelve el total sin "
         "filtrar: un filtro renombrado rio arriba haria publicar «todo es decomiso» en "
         f"los 33 Estados sin advertirlo. Se comprueba que {CONTROL} tenga comercio y que "
-        "Su recuento de decomiso sea estrictamente menor que su total. Si alguna de las "
+        "su recuento de decomiso sea estrictamente menor que su total. Si alguna de las "
         "dos falla, la corrida se detiene entera.",
     ]
 

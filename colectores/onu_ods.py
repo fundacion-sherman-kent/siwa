@@ -43,7 +43,7 @@ SERIES = [
      "unidad": "por cada 100.000 habitantes", "mas_es_peor": True,
      "origen": "UNODC, vía la base global de los ODS",
      "cautela": "MIDE DETECCIÓN, NO MAGNITUD. Un Estado que investiga más detecta más y "
-                "Aparece peor; uno que no busca aparece limpio. La cifra baja puede "
+                "aparece peor; uno que no busca aparece limpio. La cifra baja puede "
                 "significar poco delito o poca capacidad de detectarlo."},
     {"clave": "trata_sexual", "codigo": "VC_HTF_DETVSXR", "eje": "Seguridad",
      "rotulo": "Trata para explotación sexual", "unidad": "por cada 100.000 habitantes",
@@ -95,13 +95,13 @@ SERIES = [
      "rotulo": "Víctimas de robo en los últimos 12 meses", "unidad": "% de la población",
      "mas_es_peor": True, "origen": "UNODC, via la base global de los ODS",
      "cautela": "Sale de encuestas de victimización, no de denuncias: mide el delito "
-                "Sufrido, incluido el que nunca se denuncio. Es la medida más cercana a "
+                "sufrido, incluido el que nunca se denuncio. Es la medida más cercana a "
                 "la delincuencia real que existe con cobertura regional."},
     {"clave": "denuncia_robo", "codigo": "VC_PRR_ROBB", "eje": "Seguridad",
      "rotulo": "Robos que la víctima denuncio a la policia", "unidad": "% de los robos sufridos",
      "mas_es_peor": False, "origen": "UNODC, via la base global de los ODS",
      "cautela": "Es una medida indirecta de CONFIANZA EN LA POLICIA: cuando la gente no "
-                "Denuncia, o no espera respuesta o teme represalia. Una tasa baja de "
+                "denuncia, o no espera respuesta o teme represalia. Una tasa baja de "
                 "denuncia hace que las estadísticas policiales de ese Estado subestimen "
                 "el delito."},
     {"clave": "denuncia_agresion", "codigo": "VC_PRR_PHYV", "eje": "Seguridad",
@@ -198,7 +198,7 @@ def recolectar():
     calificacion = comun.calificar(
         fiabilidad="A", credibilidad=2, corroborado=False,
         nota=("Serie reportada por cada Estado y validada por el organismo custodio del "
-              "Indicador. Fuente única: el reporte nacional. Declarado conforme a "
+              "indicador. Fuente única: el reporte nacional. Declarado conforme a "
               "doctrina/fuentes.md §2 ter."),
     )
 

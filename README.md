@@ -68,7 +68,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**33 fuentes en servicio**, en 34 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**35 fuentes en servicio**, en 36 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -103,9 +103,11 @@ python colectores/focos.py
 | `ransomware` | ransomware.live — recopilación de sitios de extorsión informática | `D-4` | 31 | 6 |
 | `reciente_oficial` | Catalogos oficiales de los Estados — lo mas reciente publicado | `A-2` | 33 | 5 |
 | `redes` | Mastodon — instancias mastodon.social, mstdn.social, masto.ai, mas.to | `F-4` | 33 | 7 |
+| `regimen_politico` | V-Dem, Universidad de Gotemburgo — «Regímenes del Mundo», vía Our World in Data | `B-2` | 33 | 5 |
 | `sanciones` | OpenSanctions — registros de sanciones y personas expuestas | `B-2` | 33 | 5 |
 | `sondeo` | Fundación Sherman Kent — banco de pruebas de fuentes candidatas | `A-1` | — | 5 |
 | `telegram` | Canales públicos de Telegram, vista sin cuenta | `F-4` | — | 8 |
+| `trata_personas` | Departamento de Estado de los Estados Unidos — Informe sobre la Trata de Personas, edición 2025 | `B-2` | 33 | 6 |
 
 La calificación es la del Almirantazgo: la letra mide **de quién viene** y el número, **qué tan verificado está lo que dice**. Ninguna fuente única puede calificar `1`; la circunstancia viaja declarada dentro de cada archivo.
 

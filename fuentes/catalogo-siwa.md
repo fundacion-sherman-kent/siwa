@@ -824,3 +824,69 @@ la automatización: el formulario exige selección de una lista y no acepta text
 libre. Hay que insistir con la interfaz o pedirle el archivo a SIPRI. El gasto
 militar ya está en el registro por vía del Banco Mundial, que lo toma de SIPRI y
 lo redistribuye con licencia abierta.
+
+---
+
+# Sondeo de diez direcciones propuestas — 7 de septiembre de 2026
+
+La Dirección propuso diez direcciones. Se probaron todas. **Entran dos, una ya
+estaba, cinco no sirven como fuente de datos y dos cierran la puerta.**
+
+## Entran
+
+**Departamento de Estado — Informe sobre la Trata de Personas.** Clasifica cada
+Estado en Nivel 1, 2, 2 con lista de vigilancia, 3 o caso especial. **30 de los
+33** del padrón; Dominica, Granada y San Cristóbal y Nieves **no están en el
+informe** —verificado contra la lista de 186 fichas del propio informe, no
+supuesto—. Haití es «caso especial» por segundo año. Obra del gobierno de los
+Estados Unidos: sin restricción de licencia. Se califica **B-2**, no A: es un
+Estado evaluando a otros Estados, con consecuencias legales propias, y eso lo
+hace parte y no observador.
+
+**V-Dem — «Regímenes del Mundo».** Cuatro casillas: autocracia cerrada,
+autocracia electoral, democracia electoral, democracia liberal. **25 de 33**; los
+ocho del Caribe chico quedan fuera del proyecto. Es la pregunta previa a todas
+las del eje de gobernanza y el registro no la tenía. Va al nivel Ciudadano.
+
+## Ya estaba
+
+**V-Dem.** El registro publica **trece indicadores** suyos desde antes, por medio
+de Our World in Data. Ir al productor directo **exige registro** y su libro de
+códigos reserva los derechos; Our World in Data redistribuye con licencia
+abierta. Se sigue por la puerta que está abierta.
+
+## Cierran la puerta
+
+**INTERPOL.** Su propia página declara el servicio público
+`ws-public.interpol.int/notices/v1/red`, y el borde (Akamai) devuelve **403
+Access Denied** a este llamador. Es el caso «publica y no deja recolectar». **No
+se esquiva**: se declara y se gestiona la vía oficial.
+
+**OEA.** Los tres caminos probados —Estados miembros, base de misiones
+electorales y la raíz del sitio— devuelven **403 en todo el dominio**. La base de
+observación electoral sería valiosa y queda como gestión.
+
+## No son fuente de datos
+
+**El PAcCTO (FIIAPP y Comisión Europea).** Es un programa de cooperación:
+publica noticias y documentos, no series por país. Sirve como referencia
+institucional y como posible contraparte, no como capa del registro.
+
+**USA.gov y su ficha del Departamento de Estado.** Es un directorio de
+organismos. La fuente útil está detrás: los informes anuales del Departamento,
+que es de donde se tomó la trata de personas.
+
+**Datosmacro (Expansión).** Republica cifras del Banco Mundial y del Fondo
+Monetario que el registro **ya toma del original**. Doctrina de la casa: una
+copia debe mandarte al original. Y el contenido es de un editor privado con
+derechos reservados. **No entra.**
+
+## Un hallazgo de método
+
+`state.gov` devuelve **403 a quien no antepone «Mozilla/5.0»**. No es un desafío
+anti-robot: es una convención heredada. Se la respeta **sin mentir**, con la
+forma `Mozilla/5.0 (compatible; SIWA/0.1; +fundacionkent.org)`, que el estándar
+prevé justamente para esto. Disfrazarse de Chrome habría funcionado igual y
+habría sido una mentira innecesaria. **Dos colectores viejos —el padrón oficial
+y el explorador— todavía se identifican como Chrome y convendría pasarlos a esta
+forma.**

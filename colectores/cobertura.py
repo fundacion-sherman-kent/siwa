@@ -441,7 +441,7 @@ def _palabras_clave(notas: list, gentilicios: dict, bloques: dict,
                        "notas": len(l), "palabras": cuenta(l)}
                    for i, l in sorted(por_pais.items())},
         "nota": ("Recuento de términos en los títulos recolectados en la ventana "
-                 "Vigente. Mide de qué se habla, no qué ocurre ni con qué signo. "
+                 "vigente. Mide de qué se habla, no qué ocurre ni con qué signo. "
                  "Un término ausente puede significar que el asunto no circula, o "
                  "que ningún canal del padrón lo cubre. Para figurar, un término "
                  "debe aparecer en dos notas de dos portales distintos: lo que "
@@ -566,7 +566,7 @@ def recolectar():
         "giro que no figure en la lista queda sin atribuir; uno que lo nombre al pasar "
         "queda atribuido igual. La lista es editable por el equipo analítico.",
         f"{sin_pais} de {len(eventos)} asuntos no pudieron atribuirse a ningún Estado del "
-        "Padrón: en su mayoría son noticias internacionales sin mención regional.",
+        "padrón: en su mayoría son noticias internacionales sin mención regional.",
         "El índice de infoxicación mide la proporción de asuntos repetidos por tres o más "
         "portales que ningún segundo origen independiente corrobora. Es amplificación sin "
         "verificación, no desinformación probada: no dice que el asunto sea falso, dice "
@@ -630,7 +630,7 @@ def recolectar():
                 "con_mencion": sum(1 for z in fronteras if z["notas"]),
                 "total": len(fronteras),
                 "nota": ("Zonas de frontera y focos transfronterizos. NO son "
-                         "Indicadores: son lugares, y ninguna fuente publica "
+                         "indicadores: son lugares, y ninguna fuente publica "
                          "estadística comparable a esa escala. Se cuenta cuántas notas "
                          "del corpus las nombran, de cuántos portales y de cuántas "
                          "jurisdicciones. Que la nombren medios de los dos lados de la "

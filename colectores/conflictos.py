@@ -232,7 +232,7 @@ def recolectar():
         "La fecha registrada es la de inicio del conflicto, no la de su registro. "
         "Muchos casos siguen abiertos y el corpus no declara cuales se cerraron.",
         f"EL AÑO {ANIO_RELLENO} SE DESCARTA: aparece 70 veces en un corpus de 443 y no "
-        "Hay ningún otro año anterior a 1950 salvo uno. Es un valor de relleno del "
+        "hay ningún otro año anterior a 1950 salvo uno. Es un valor de relleno del "
         "origen, no una fecha. Publicarlo como «el conflicto más antiguo» de seis "
         "Estados habria sido inventar un hecho. Esos 70 casos entran al recuento pero "
         "no al rango de años. Otros 21 registros no traen año legible.",
@@ -273,7 +273,7 @@ def recolectar():
             "atribución": ("Instituto de Estudios Interculturales, Pontificia "
                            "Universidad Javeriana Cali. Visor original: " + VISOR),
             "método": ("Se consultan las capas publicas SIN pedir geometria y se "
-                       "Publican únicamente recuentos y repartos por Estado, tipo, "
+                       "publican únicamente recuentos y repartos por Estado, tipo, "
                        "categoría y actores. Los registros individuales no se "
                        "republican."),
         },

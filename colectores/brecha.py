@@ -146,7 +146,7 @@ def _hayRegistro(testigo: str, pais: str, desde: str) -> bool | None:
         if error.code in (401, 403):
             raise RuntimeError(
                 f"La fuente rechazó la consulta ({error.code}). Puede ser el testigo "
-                "Vencido o un permiso que la cuenta no tiene. No se anota «sin "
+                "vencido o un permiso que la cuenta no tiene. No se anota «sin "
                 "registro»: no saber no es saber que no.") from error
         return None
     except Exception:  # noqa: BLE001 — la falla de un Estado no tumba la corrida
@@ -213,7 +213,7 @@ def _conEmbargo(padron, publica, desde, restriccion):
         calificacion=comun.calificar(
             fiabilidad="B", credibilidad=2, corroborado=False,
             nota=("La credencial funciona y la consulta es correcta; lo que la cuenta no "
-                  "Tiene es acceso a datos recientes. Se declara la condición en lugar "
+                  "tiene es acceso a datos recientes. Se declara la condición en lugar "
                   "de publicar un cero o de fallar todas las noches.")),
         registros=registros,
         vacios=vacios,
@@ -347,7 +347,7 @@ def recolectar():
         credibilidad=2,
         corroborado=True,
         nota=("Variable propia de la Oficina construida cruzando DOS observaciones "
-              "Independientes: un observatorio externo de eventos y el propio catálogo "
+              "independientes: un observatorio externo de eventos y el propio catálogo "
               "del Estado. Fiabilidad B porque ninguno de los dos es el organismo "
               "responsable de declarar transparencia. Credibilidad 2 y corroborado "
               "porque la clasificación exige que las dos observaciones coincidan en el "

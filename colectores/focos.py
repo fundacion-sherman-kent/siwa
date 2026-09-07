@@ -212,7 +212,7 @@ def recolectar():
         "satelite. Brasil tendra siempre más focos que Granada por superficie, no por "
         "conducta. Se publica como magnitud, al lado del dato comparable y nunca adentro.",
         f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver que "
-        "Esta ardiendo ahora, no para comparar contra el mes pasado.",
+        "esta ardiendo ahora, no para comparar contra el mes pasado.",
         "La confianza la declara el sensor y se cuenta aparte: un foco de confianza baja "
         "no sostiene ninguna afirmación. El recuento total incluye todos; el de confianza "
         "alta es el único que se puede citar.",
@@ -235,7 +235,7 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Sistema de deteccion de la agencia espacial estadounidense, con sensor y "
-              "Método publicados. Fiabilidad a porque el productor opera el satelite. "
+              "método publicados. Fiabilidad a porque el productor opera el satelite. "
               "Credibilidad 2 porque se verifica la detección —hubo una anomalia termica "
               "en esa coordenada— y NO su causa, que el sensor no puede establecer."),
     )

@@ -100,7 +100,7 @@ def _traer(tope: int) -> bytes:
     raise RuntimeError(
         f"En {INTENTOS} intentos el canal de la Fundación no entregó su contenido: "
         f"{ultimo}. NO es que el canal esté roto ni que no haya publicaciones: el "
-        "Servicio de alojamiento del sitio propio le pone una verificación anti-robot a "
+        "servicio de alojamiento del sitio propio le pone una verificación anti-robot a "
         "quien llama desde un centro de datos, y el servidor que corre este registro "
         "llama desde uno. Desde una máquina común el mismo pedido devuelve XML "
         "correcto. NO se publica una lista vacía: la anterior queda intacta.")
@@ -160,7 +160,7 @@ def recolectar():
         "categoría de cada pieza. El registro la respeta y la muestra: no decide por su "
         "cuenta que se publica en abierto.",
         f"Se traen los {TOPE} mas recientes del canal. Los anteriores están en la web de "
-        "La Fundación y no se replican acá.",
+        "la Fundación y no se replican acá.",
         "Un informe de la Fundación es análisis, no dato: lleva juicios con confianza y "
         "probabilidad declaradas. Este registro publica hechos calificados y no emite "
         "juicios. Son dos productos distintos y no deben leerse como uno solo.",

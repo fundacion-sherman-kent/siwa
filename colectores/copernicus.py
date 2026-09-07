@@ -169,7 +169,7 @@ def recolectar():
         "Y el enlace al mirador oficial, que es donde vive. Descargarla exige registro "
         "gratuito, y ese tramite no lo hace el robot.",
         f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver que "
-        "Hay ahora, no para comparar contra el mes pasado.",
+        "hay ahora, no para comparar contra el mes pasado.",
     ]
 
     calificacion = comun.calificar(

@@ -199,7 +199,7 @@ def recolectar():
     if faltan:
         raise RuntimeError(
             f"Faltan los archivos de {', '.join(faltan)}. El índice se DERIVA de otros "
-            "Colectores y no puede calcularse sin ellos: se detiene en lugar de publicar "
+            "colectores y no puede calcularse sin ellos: se detiene en lugar de publicar "
             "un puntaje armado con la mitad de los actos.")
 
     porColector = {c: _porIso(d) for c, d in fuentes.items()}
@@ -272,7 +272,7 @@ def recolectar():
         f"NO SE CASTIGA LO QUE NO SE MIRO. Si a un Estado le falta la evidencia de un "
         f"acto, ese acto NO PUNTUA: no suma ni resta, y el indice se calcula sobre los "
         f"que si tienen evidencia. Con menos de {MINIMO_ACTOS} actos medidos el Estado "
-        "Queda sin medir, que no es lo mismo que opaco.",
+        "queda sin medir, que no es lo mismo que opaco.",
         "Cuando el archivo público de la web no responde, el que fallo es el archivo y no "
         "el Estado. Ese acto se descarta en lugar de contarse en contra. Es la clase de "
         "confusión que convierte una falla propia en una acusación ajena.",
@@ -294,7 +294,7 @@ def recolectar():
         "falla, este índice no se publica en lugar de calcularse con la mitad.",
         f"ANTES DE CREERLE UN PUNTAJE A NADIE SE PRUEBA EL CALCULO contra {CONTROL}, que "
         f"cumple los actos medibles: si diera mas de {TOPE_CONTROL}, alguna senial se estaria "
-        "Leyendo al revés y la corrida se detiene entera.",
+        "leyendo al revés y la corrida se detiene entera.",
         "No mide corrupción ni calidad de gobierno. Mide si el Estado deja ver lo que "
         "hace. Un Estado puede ser transparente y estar mal gobernado, y al revés.",
     ]
@@ -304,7 +304,7 @@ def recolectar():
         credibilidad=1,
         corroborado=True,
         nota=("Indice propio de la Oficina, derivado de cinco mediciones de esta misma "
-              "Casa. Fiabilidad a porque el productor es la Fundación y el método esta "
+              "casa. Fiabilidad a porque el productor es la Fundación y el método esta "
               "escrito entero. Credibilidad 1 porque cada acto es un hecho verificable "
               "por repetición —cualquiera pega la dirección y obtiene lo mismo—: la "
               "corroboracion es la reproducibilidad, y la formula esta publicada."),

@@ -170,7 +170,7 @@ def recolectar():
         "costa Rica, sin ejercito desde 1949, aparecia entre las peores en Defensa. Es "
         "un recuento de organismos, no una medida de capacidad.",
         f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver el "
-        "Presente, no para comparar contra el mes pasado. Una serie historica exigiria "
+        "presente, no para comparar contra el mes pasado. Una serie historica exigiria "
         "guardar cada ventana, y este colector no lo hace.",
         "Ninguna de las tres entra al compuesto. Se publican al lado del dato "
         "comparable y nunca adentro, con la misma arquitectura que Defensa.",
@@ -181,7 +181,7 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Tres mediciones tecnicas independientes entre si: OONI mide desde sondas "
-              "De voluntarios, IODA mide tráfico agregado desde la academia y FIRST "
+              "de voluntarios, IODA mide tráfico agregado desde la academia y FIRST "
               "publica su propio padrón de miembros. Fiabilidad B porque ninguna es el "
               "organismo responsable del Estado medido. Credibilidad 2 porque se "
               "verifico la cifra que cada una publica, NO el hecho que la produjo."),

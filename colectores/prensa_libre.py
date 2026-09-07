@@ -136,7 +136,7 @@ def recolectar():
         "mismo país, y por eso entra calificada como evaluación y no como registro.",
         f"NO EVALUA A LOS {len(sinEvaluar)} ESTADOS MAS CHICOS DEL CARIBE: "
         f"{', '.join(sinEvaluar)}. Eso NO significa que tengan prensa libre ni que no la "
-        "Tengan: significa que la fuente no los evalua, y el registro lo dice en lugar "
+        "tengan: significa que la fuente no los evalua, y el registro lo dice en lugar "
         "de dejarlos en blanco.",
         "El puesto Mundial ordena contra 180 países, no contra los 33 del padrón. Un "
         "Estado de la región puede estar bien situado en el mundo y mal en su zona, o al "
@@ -150,7 +150,7 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=("Organizacion internacional de defensa de la libertad de prensa, con "
-              "Metodologia publicada y serie anual. Fiabilidad B porque es una "
+              "metodologia publicada y serie anual. Fiabilidad B porque es una "
               "organización con posición tomada sobre la materia que mide —lo cuál no la "
               "invalida, pero se declara—. Credibilidad 3 porque el puntaje es "
               "evaluación experta agregada, no un hecho verificable de forma "

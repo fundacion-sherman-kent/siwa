@@ -195,7 +195,7 @@ def recolectar():
         "Lo que se publica es la foto del día de la consulta, con su fecha.",
         f"ANTES DE CREERLE UN CERO A NADIE SE PRUEBA EL LECTOR contra el regimen «{CONTROL}», "
         f"el mas numeroso del mundo: si devuelve menos de {MINIMO_CONTROL} designados, la "
-        "Corrida se detiene entera en lugar de publicar treinta y tres ceros que en "
+        "corrida se detiene entera en lugar de publicar treinta y tres ceros que en "
         "realidad significan «no supimos leer».",
     ]
 

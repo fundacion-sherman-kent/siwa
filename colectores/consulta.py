@@ -274,7 +274,7 @@ def recolectar():
         "sin intermediación de la Oficina.",
         f"SOLO {conDominio} DE 33 ESTADOS tienen dominio oficial ya probado. Para los "
         f"{len(registros) - conDominio} restantes la consulta NO esta acotada a la fuente "
-        "Oficial: se acota por el nombre del Estado, y el producto lo declara en cada "
+        "oficial: se acota por el nombre del Estado, y el producto lo declara en cada "
         "ficha. Ningún dominio se construye por analogia: suponer 'datos.gob.ni' porque "
         "existe 'datos.gob.ar' mandaria al lector a una dirección inexistente.",
         "Un recuento de resultados no se publica como cifra. Lo que un motor devuelve "

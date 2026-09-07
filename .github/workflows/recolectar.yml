@@ -110,6 +110,22 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/prensa_libre.py
 
+      # Clasificacion anual de un proyecto academico: no cambia de una hora a
+      # otra. Va en la corrida diaria.
+      - name: Regimen politico (V-Dem via Our World in Data)
+        id: regimen
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/regimen_politico.py
+
+      # Informe anual: se lo mira cada dia solo para no perderse la edicion nueva
+      # el dia que salga. Son 34 paginas por corrida.
+      - name: Trata de personas (Departamento de Estado)
+        id: trata
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/trata_personas.py
+
       # Tabla de ratificaciones de un tratado: cambia unas pocas veces por año.
       # Va en la corrida diaria.
       - name: Bienes culturales (UNIDROIT 1995)
@@ -315,6 +331,8 @@ jobs:
           [ "${{ steps.ciber.outcome }}" = "failure" ] && { echo "Falló el colector de medición de red."; fallo=1; }
           [ "${{ steps.sanciones.outcome }}" = "failure" ] && { echo "Falló el colector de sanciones."; fallo=1; }
           [ "${{ steps.prensa.outcome }}" = "failure" ] && { echo "Falló el colector de libertad de prensa."; fallo=1; }
+          [ "${{ steps.regimen.outcome }}" = "failure" ] && { echo "Falló el colector de régimen político."; fallo=1; }
+          [ "${{ steps.trata.outcome }}" = "failure" ] && { echo "Falló el colector de trata de personas."; fallo=1; }
           [ "${{ steps.bienes.outcome }}" = "failure" ] && { echo "Falló el colector de bienes culturales."; fallo=1; }
           [ "${{ steps.cites.outcome }}" = "failure" ] && { echo "Falló el colector de especies protegidas."; fallo=1; }
           [ "${{ steps.crimen.outcome }}" = "failure" ] && { echo "Falló el colector de crimen organizado."; fallo=1; }

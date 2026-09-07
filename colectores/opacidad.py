@@ -171,7 +171,7 @@ def recolectar():
         "para señalar.",
         f"Solo el paso 2 —portal de datos abiertos— tiene interfaz de consulta, y solo "
         f"{len(portales)} de los 33 Estados tienen portal verificado. Los pasos 1, 3 y 4 son "
-        "Paginas para navegar: se comprobo que las autoridades de transparencia responden "
+        "paginas para navegar: se comprobo que las autoridades de transparencia responden "
         "pero no exponen sus estadísticas de forma automatizable. El índice es "
         "irreduciblemente manual más allá del pasó 2.",
         "El conteo del portal no es una medida y no se publica como cifra. Colombia lo topa "
@@ -198,7 +198,7 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=("Producción propia con método declarado y rastro publicado: la consulta "
-              "Automática la puede repetir cualquiera pegando la dirección. Credibilidad 3 "
+              "automática la puede repetir cualquiera pegando la dirección. Credibilidad 3 "
               "Y no 2 porque hasta ahora cada Estado se verificó por una sola vía —el portal "
               "de datos abiertos—. Una ausencia hallada por un solo camino es un indicio, no "
               "un hecho: con dos vias independientes que coincidan sube a 2."),
