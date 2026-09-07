@@ -1207,3 +1207,56 @@ autorizado—, **OPS** —su ruta publicada no responde; la interfaz de indicado
 de la OMS sí, y queda como reemplazo posible—, **OIM DTM** —404 en todas las
 rutas probadas— y los portales de **Ecuador, Guatemala, Bolivia y Costa Rica**,
 que bloquean incluso a quien se identifica como navegador.
+
+---
+
+# Narcotráfico — 7 de septiembre de 2026
+
+La Dirección observó que el registro no tenía datos de narcotráfico. **Los tenía,
+y no se podían ver.**
+
+## Lo que estaba pasando
+
+El Índice Global de Crimen Organizado, que el registro recolecta desde hace
+semanas, puntúa **cuatro mercados de drogas** —cocaína, heroína, cannabis y
+drogas sintéticas— de 1 a 10 en los 33 Estados. Pero:
+
+1. Los treinta y seis rótulos del índice **estaban en inglés**. Un lector de la
+   región veía «Cocaine trade 9,5» y **la palabra narcotráfico no aparecía en
+   ninguna parte del sitio**.
+2. Las medidas se mostraban **sólo al elegir un país**. Mirando la región, nadie
+   podía ver quién encabeza el mercado de cocaína.
+
+**Un dato que no se puede encontrar es, para el lector, un dato que no existe.**
+
+## Lo que se hizo
+
+**Los 36 rótulos, en castellano**, con traducción literal y el nombre original al
+lado en cada ficha para contrastar. Y **las cuatro definiciones de los mercados
+de drogas traducidas** —sólo esas cuatro: son las que aparecen en una sección de
+nivel Ciudadano, donde una definición en inglés no sirve. Las otras treinta y dos
+quedan como las publica la fuente, porque traducir sin necesidad agrega una capa
+de interpretación que nadie pidió.
+
+**Sección propia en el eje Seguridad**, que en la vista regional muestra cada
+mercado con los Estados que lo encabezan y el promedio del ámbito, y en la ficha
+de un país sus cuatro puntajes.
+
+Así queda a la vista lo que antes estaba enterrado: en cocaína, **Colombia 9,5;
+Venezuela, Perú, México, Ecuador y Brasil, 9**.
+
+## Lo que NO se agregó, y por qué
+
+**Cantidades.** No hay toneladas incautadas, hectáreas cultivadas ni precios. Se
+buscó en la Oficina de Naciones Unidas contra la Droga y el Delito: su **informe
+mundial sale en PDF**, su portal de datos **devuelve la misma cáscara para
+cualquier ruta** —arma todo en el navegador— y la dirección que su propia página
+declara, `dataportal.unodc.org`, **ni siquiera resuelve**. La CICAD de la OEA
+devuelve 403, como todo ese dominio.
+
+Queda declarado en la ficha con esas palabras, y se gestiona por vía oficial.
+
+**Y se dice qué mide y qué no:** es la evaluación de un panel de especialistas
+sobre cuán extendido y estructurado está cada mercado, **no un volumen**. Dos
+países con el mismo puntaje no mueven la misma cantidad. Tampoco distingue
+producción de tránsito ni de consumo: mide el mercado, no el eslabón.

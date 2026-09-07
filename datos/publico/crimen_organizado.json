@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "crimen_organizado",
     "capa": "publico",
-    "obtenido_en": "2026-09-07T05:56:19+00:00",
+    "obtenido_en": "2026-09-07T16:19:37+00:00",
     "fuente": {
       "nombre": "Índice Global de Crimen Organizado — Global Initiative Against Transnational Organized Crime",
       "url": "https://ocindex.net/"
@@ -3275,13 +3275,20 @@
     "paises_en_el_indice": 193,
     "medidas_por_estado": 36,
     "lector_probado": true,
-    "consultado": "2026-09-07T05:56:19+00:00"
+    "consultado": "2026-09-07T16:19:37+00:00"
   },
+  "drogas": [
+    "1.1.11",
+    "1.1.10",
+    "1.1.12",
+    "1.1.13"
+  ],
   "catalogo": [
     {
       "codigo": "1",
       "nombre": "Criminality",
       "rotulo": "Criminalidad",
+      "es_droga": false,
       "padre": null,
       "descripcion": "Assessment of overall organized crime levels in a country, derived by averaging the scores for criminal markets and criminal actors."
     },
@@ -3289,111 +3296,131 @@
       "codigo": "1.1",
       "nombre": "Criminal markets",
       "rotulo": "Mercados criminales",
+      "es_droga": false,
       "padre": "1",
       "descripcion": "An assessment of the value, prevalence and non-monetary\nimpacts of a specific crime type."
     },
     {
       "codigo": "1.1.1",
       "nombre": "Human trafficking",
-      "rotulo": "Human trafficking",
+      "rotulo": "Trata de personas",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "Illicit activity involving coercion, deception, abduction or fraud for the purpose of exploitation, regardless of the victim’s consent."
     },
     {
       "codigo": "1.1.2",
       "nombre": "Human smuggling",
-      "rotulo": "Human smuggling",
+      "rotulo": "Tráfico de migrantes",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "Activities by an organized crime group involving the illegal entry, transit or residence of migrants for a financial or material benefit."
     },
     {
       "codigo": "1.1.3",
       "nombre": "Extortion and protection racketeering",
-      "rotulo": "Extortion and protection racketeering",
+      "rotulo": "Extorsión y cobro de protección",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "Crimes linked to exerting control over a territory/market including as a mediator and/or requesting a benefit in exchange for protection."
     },
     {
       "codigo": "1.1.4",
       "nombre": "Arms trafficking",
-      "rotulo": "Arms trafficking",
+      "rotulo": "Tráfico de armas",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "The sale, acquisition, movement, and diversion of arms, their parts and ammunition from legal to illegal commerce and/or across borders."
     },
     {
       "codigo": "1.1.5",
       "nombre": "Trade in counterfeit goods",
-      "rotulo": "Trade in counterfeit goods",
+      "rotulo": "Comercio de mercadería falsificada",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "The production, transport, storage and sale of goods that are fraudulently mislabeled or fraudulent imitations of registered brands."
     },
     {
       "codigo": "1.1.6",
       "nombre": "Illicit trade in excisable goods",
-      "rotulo": "Illicit trade in excisable goods",
+      "rotulo": "Comercio ilícito de bienes gravados",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "The illicit transport, handling and sale of excise consumer goods despite a ban or outside a legal market. Excludes oil and counterfeits."
     },
     {
       "codigo": "1.1.7",
       "nombre": "Flora crimes",
-      "rotulo": "Flora crimes",
+      "rotulo": "Delitos contra la flora",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "The illicit trade and possession of species covered by CITES convention, and other species protected under national law."
     },
     {
       "codigo": "1.1.8",
       "nombre": "Fauna crimes",
-      "rotulo": "Fauna crimes",
+      "rotulo": "Delitos contra la fauna",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "The poaching, illicit trade in and possession of species covered by CITES and other species protected by national law. Includes IUU fishing."
     },
     {
       "codigo": "1.1.9",
       "nombre": "Non-renewable resource crimes",
-      "rotulo": "Non-renewable resource crimes",
+      "rotulo": "Delitos contra recursos no renovables",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "The illicit extraction, smuggling, mingling, bunkering or mining of natural resources and the illicit trade of such commodities."
     },
     {
       "codigo": "1.1.10",
       "nombre": "Heroin trade",
-      "rotulo": "Heroin trade",
+      "rotulo": "Mercado de heroína",
+      "es_droga": true,
       "padre": "1.1",
-      "descripcion": "The production, distribution and sale of heroin. Consumption of the drug is considered in determining the reach of the criminal market."
+      "descripcion": "The production, distribution and sale of heroin. Consumption of the drug is considered in determining the reach of the criminal market.",
+      "descripcion_es": "La producción, la distribución y la venta de heroína. El consumo se tiene en cuenta para determinar el alcance del mercado criminal."
     },
     {
       "codigo": "1.1.11",
       "nombre": "Cocaine trade",
-      "rotulo": "Cocaine trade",
+      "rotulo": "Mercado de cocaína",
+      "es_droga": true,
       "padre": "1.1",
-      "descripcion": "The production, distribution and sale of cocaine and its derivatives. Consumption is considered in determining the reach of the market."
+      "descripcion": "The production, distribution and sale of cocaine and its derivatives. Consumption is considered in determining the reach of the market.",
+      "descripcion_es": "La producción, la distribución y la venta de cocaína y sus derivados. El consumo se tiene en cuenta para determinar el alcance del mercado."
     },
     {
       "codigo": "1.1.12",
       "nombre": "Cannabis trade",
-      "rotulo": "Cannabis trade",
+      "rotulo": "Mercado de cannabis",
+      "es_droga": true,
       "padre": "1.1",
-      "descripcion": "The illicit cultivation, distribution and sale of cannabis oil, resin, herb or leaves. Consumption is used to determine the market's reach."
+      "descripcion": "The illicit cultivation, distribution and sale of cannabis oil, resin, herb or leaves. Consumption is used to determine the market's reach.",
+      "descripcion_es": "El cultivo ilícito, la distribución y la venta de aceite, resina, hierba u hojas de cannabis. El consumo se usa para determinar el alcance del mercado."
     },
     {
       "codigo": "1.1.13",
       "nombre": "Synthetic drug trade",
-      "rotulo": "Synthetic drug trade",
+      "rotulo": "Mercado de drogas sintéticas",
+      "es_droga": true,
       "padre": "1.1",
-      "descripcion": "The production, distribution and sale of synthetic drugs. Consumption is considered in determining the reach of the market."
+      "descripcion": "The production, distribution and sale of synthetic drugs. Consumption is considered in determining the reach of the market.",
+      "descripcion_es": "La producción, la distribución y la venta de drogas sintéticas. El consumo se tiene en cuenta para determinar el alcance del mercado."
     },
     {
       "codigo": "1.1.14",
       "nombre": "Cyber-dependent crimes",
-      "rotulo": "Cyber-dependent crimes",
+      "rotulo": "Delitos informáticos",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "Organized crimes that rely solely on using information communications technology with the aim of obtaining a monetary/material benefit."
     },
     {
       "codigo": "1.1.15",
       "nombre": "Financial crimes",
-      "rotulo": "Financial crimes",
+      "rotulo": "Delitos financieros",
+      "es_droga": false,
       "padre": "1.1",
       "descripcion": "Organized crime that results in a monetary loss via financial fraud, embezzlement, misuse of funds, tax evasion and abusive tax avoidance."
     },
@@ -3401,41 +3428,47 @@
       "codigo": "1.2",
       "nombre": "Criminal actors",
       "rotulo": "Actores criminales",
+      "es_droga": false,
       "padre": "1",
       "descripcion": "An assessment of the impact and influence of a specific criminal actor type on society."
     },
     {
       "codigo": "1.2.1",
       "nombre": "Mafia-style groups",
-      "rotulo": "Mafia-style groups",
+      "rotulo": "Grupos de tipo mafioso",
+      "es_droga": false,
       "padre": "1.2",
       "descripcion": "Clearly defined organized crime groups that usually have a known name, defined leadership, territorial control and identifiable membership."
     },
     {
       "codigo": "1.2.2",
       "nombre": "Criminal networks",
-      "rotulo": "Criminal networks",
+      "rotulo": "Redes criminales",
+      "es_droga": false,
       "padre": "1.2",
       "descripcion": "Loose networks of criminal associates engaging in criminal activities who fail to meet the defining characteristics of mafia-style groups."
     },
     {
       "codigo": "1.2.3",
       "nombre": "State-embedded actors",
-      "rotulo": "State-embedded actors",
+      "rotulo": "Actores incrustados en el Estado",
+      "es_droga": false,
       "padre": "1.2",
       "descripcion": "Criminal actors that are embedded in, and act from within, the state’s apparatus."
     },
     {
       "codigo": "1.2.4",
       "nombre": "Foreign actors",
-      "rotulo": "Foreign actors",
+      "rotulo": "Actores extranjeros",
+      "es_droga": false,
       "padre": "1.2",
       "descripcion": "State and/or non-state criminal actors operating outside their home country. Includes foreign nationals and diaspora groups."
     },
     {
       "codigo": "1.2.5",
       "nombre": "Private sector actors",
-      "rotulo": "Private sector actors",
+      "rotulo": "Actores del sector privado",
+      "es_droga": false,
       "padre": "1.2",
       "descripcion": "Profit-seeking individuals/entities who own/control a part of the legal economy free from the state, that collaborate with criminal actors."
     },
@@ -3443,90 +3476,103 @@
       "codigo": "2",
       "nombre": "Resilience",
       "rotulo": "Resiliencia del Estado",
+      "es_droga": false,
       "padre": null,
       "descripcion": "Assessment of the mechanisms countries have in\nplace to combat organized crime, and the effectiveness of these measures."
     },
     {
       "codigo": "2.1",
       "nombre": "Political leadership and governance",
-      "rotulo": "Political leadership and governance",
+      "rotulo": "Liderazgo y gobernanza políticos",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "The State's role in responding to organized crime and its effectiveness. Strong political leadership/governance suggests higher resilience."
     },
     {
       "codigo": "2.2",
       "nombre": "Government transparency and accountability",
-      "rotulo": "Government transparency and accountability",
+      "rotulo": "Transparencia y rendición de cuentas del Estado",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "The degree to which states have put oversight mechanisms in place to ensure against state collusion in illicit activities."
     },
     {
       "codigo": "2.3",
       "nombre": "International cooperation",
-      "rotulo": "International cooperation",
+      "rotulo": "Cooperación internacional",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "A country's supranational structures and processes of interaction, policy making and concrete implementation to respond to organized crime."
     },
     {
       "codigo": "2.4",
       "nombre": "National policies and laws",
-      "rotulo": "National policies and laws",
+      "rotulo": "Políticas y leyes nacionales",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "A state's legal action and structures put in place to respond to organized crime."
     },
     {
       "codigo": "2.5",
       "nombre": "Judicial system and detention",
-      "rotulo": "Judicial system and detention",
+      "rotulo": "Sistema judicial y detención",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "Refers to a state’s judiciary’s power to effectively and independently enforce judgments on organized crime-related cases."
     },
     {
       "codigo": "2.6",
       "nombre": "Law enforcement",
-      "rotulo": "Law enforcement",
+      "rotulo": "Fuerzas del orden",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "The state’s ability to investigate, gather intelligence, protect and enforce adherence to its rules and procedures against organized crime."
     },
     {
       "codigo": "2.7",
       "nombre": "Territorial integrity",
-      "rotulo": "Territorial integrity",
+      "rotulo": "Integridad territorial",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "The degree to which states are able to control their physical and cyber territory and infrastructure against organized criminal activities."
     },
     {
       "codigo": "2.8",
       "nombre": "Anti-money laundering",
-      "rotulo": "Anti-money laundering",
+      "rotulo": "Regulación contra el lavado de dinero",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "A state’s ability to implement measures to combat money laundering and other related threats to the integrity of its financial system."
     },
     {
       "codigo": "2.9",
       "nombre": "Economic regulatory capacity",
-      "rotulo": "Economic regulatory capacity",
+      "rotulo": "Capacidad de regulación económica",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "The ability to control/manage the economy and regulate transactions (national and international) for trade to thrive within the rule of law."
     },
     {
       "codigo": "2.10",
       "nombre": "Victim and witness support",
-      "rotulo": "Victim and witness support",
+      "rotulo": "Apoyo y protección a las víctimas",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "Assistance provided to victims of various forms of organized crime, including initiatives such as witness protection programs."
     },
     {
       "codigo": "2.11",
       "nombre": "Prevention",
-      "rotulo": "Prevention",
+      "rotulo": "Prevención",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "Refers to the existence of strategies, measures, resource allocation, programmes and processes that are aimed to inhibit organized crime."
     },
     {
       "codigo": "2.12",
       "nombre": "Non-state actors",
-      "rotulo": "Non-state actors",
+      "rotulo": "Actores no estatales",
+      "es_droga": false,
       "padre": "2",
       "descripcion": "The degree non-state actors are allowed to engage in OC responses and their roles in supporting State efforts/ as watchdogs to governments."
     }

@@ -1529,6 +1529,28 @@
       <div class="cruce" id="lista-armas"></div>
       <div id="vac-armas"></div>
         </div>
+    <div class="categoria" id="narcotrafico" data-nivel="1">
+      <div class="categoria-head"><h4>Narcotráfico · los cuatro mercados</h4><span class="tag" id="tag-narcotrafico">—</span></div>
+      <details class="aviso-cobertura"><summary>Son puntajes de especialistas de 1 a 10, no toneladas incautadas</summary>
+        <p><b>Esto no mide cantidades.</b> No hay toneladas, ni hectáreas cultivadas, ni
+           incautaciones: es la evaluación de un panel de especialistas sobre <b>cuán
+           extendido y estructurado está cada mercado</b> en cada Estado, en una escala de
+           1 a 10. Dos países con el mismo puntaje no mueven el mismo volumen.</p>
+        <p><b>Y no mide consumo.</b> Un puntaje alto en cocaína puede corresponder a un
+           Estado productor, a uno de tránsito o a uno de destino: el índice mide el
+           mercado, no en qué eslabón está el país. Para eso hay que leer el resto de la
+           ficha —quién opera, con qué fuerza— y las demás capas del registro.</p>
+        <p><b>Las cantidades no están en el registro y se dice por qué.</b> La Oficina de
+           Naciones Unidas contra la Droga y el Delito publica incautaciones y cultivo,
+           pero su informe mundial sale en PDF y su portal de datos no responde a los
+           programas: la dirección que publica ni siquiera resuelve. Queda declarado y se
+           gestiona por vía oficial.</p>
+      </details>
+      <div class="procedencia" id="proc-narcotrafico">Cargando el registro…</div>
+      <div class="cruce" id="lista-narcotrafico"></div>
+      <div id="vac-narcotrafico"></div>
+        </div>
+
     <div class="categoria" id="crimen" data-nivel="1">
       <div class="categoria-head"><h4>Crimen organizado · mercados, actores y resistencia del Estado</h4><span class="tag" id="tag-crimen">—</span></div>
       <details class="aviso-cobertura"><summary>Es evaluación experta, no recuento de hechos</summary>
@@ -5176,6 +5198,7 @@
     paso('contratación pública', contratacionVista);
     paso('explorador de puertas', exploradorVista);
     paso('comercio de armas', armasVista);
+    paso('narcotráfico', narcotraficoVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
     paso('pobreza por ingresos', pobrezaVista);
@@ -6427,6 +6450,60 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
         + '</span><span class="badge unica">sin declarar</span></div></div>';
     }
     caja.innerHTML = html;
+  }
+
+  function narcotraficoVista(){
+    const caja = document.getElementById('lista-narcotrafico');
+    const d = almacen.crimen; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros.filter(x => x.estado === 'evaluado');
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const codigos = d.drogas || [];
+    const ficha = c => (d.catalogo || []).find(x => x.codigo === c) || {};
+    const nota = v => v >= 7.5 ? 'muy-viejo' : v >= 5.5 ? 'viejo' : v >= 3.5 ? 'reciente' : 'fresco';
+
+    const tag = document.getElementById('tag-narcotrafico');
+    if(tag) tag.textContent = lista.length + (lista.length===1 ? ' Estado evaluado' : ' Estados evaluados') + ' · escala de 1 a 10 · edición '
+      + d.resumen.edicion;
+
+    if(!lista.length){ caja.innerHTML = ''; return; }
+
+    // Con un pais elegido, sus cuatro mercados. Sin el, cada mercado con los
+    // Estados que lo encabezan: es la lectura que faltaba, porque mirando la
+    // region nadie podia ver quien esta arriba en cocaina.
+    if(paisFiltro && lista.length === 1){
+      const x = lista[0];
+      caja.innerHTML = codigos.map(c => {
+        const v = x.medidas[c];
+        if(v === undefined) return '';
+        const f = ficha(c);
+        return '<div class="asunto"><h4>' + esc(f.rotulo || c)
+          + ' <span class="edad ' + nota(v) + '">' + cifra(v) + '</span></h4>'
+          + '<div class="foot"><span class="porque">' + esc(f.descripcion_es || f.descripcion || '')
+          + '<br><i>' + esc(f.nombre || '') + '</i>, en la escala de 1 a 10 del índice.'
+          + '</span><span class="badge medio">evaluación experta</span></div></div>';
+      }).join('');
+      return;
+    }
+
+    caja.innerHTML = codigos.map(c => {
+      const f = ficha(c);
+      const conDato = lista.filter(x => x.medidas[c] !== undefined)
+                           .sort((a,b) => b.medidas[c] - a.medidas[c]);
+      if(!conDato.length) return '';
+      const promedio = conDato.reduce((a,x) => a + x.medidas[c], 0) / conDato.length;
+      return '<div class="asunto"><h4>' + esc(f.rotulo || c)
+        + ' <span class="edad ' + nota(promedio) + '">' + cifra(promedio) + '</span></h4>'
+        + '<div class="lugares">' + conDato.slice(0,8).map(x =>
+            '<span class="lugar">' + esc(x.pais) + ' · ' + cifra(x.medidas[c]) + '</span>').join('')
+        + '</div><div class="foot"><span class="porque">'
+        + '<b>Promedio del ámbito: ' + cifra(promedio) + '</b> sobre 10. Se muestran los '
+        + Math.min(8, conDato.length) + ' Estados con el puntaje más alto, de '
+        + conDato.length + ' evaluados. ' + esc(f.descripcion_es || f.descripcion || '')
+        + '</span><span class="badge medio">evaluación experta</span></div></div>';
+    }).join('');
   }
 
   function crimenVista(){
@@ -8065,6 +8142,8 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   Promise.all([traer('crimen_organizado.json'), traer('estado/crimen_organizado.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.crimen=d; const meta=d.procedencia;
+      pintarProcedencia('proc-narcotrafico',meta);
+      pintarVacios('vac-narcotrafico',meta.vacios_declarados);
       pintarProcedencia('proc-crimen',meta);
       vacios+=pintarVacios('vac-crimen',meta.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-crimen','crimen organizado',estado.mensaje,meta); }

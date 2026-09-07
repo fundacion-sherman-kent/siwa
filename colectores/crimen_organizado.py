@@ -68,11 +68,71 @@ CONTROL = "ARG"
 # Los cuatro rotulos que la casa quiere en castellano. El resto viaja como lo
 # publica la fuente: traducir treinta y seis nombres a mano es otra cosa que
 # envejece, y el nombre original es el que permite volver a la fuente.
+# LOS TREINTA Y SEIS ROTULOS, EN CASTELLANO. Estaban en ingles y el registro los
+# mostraba asi: un lector de la region veia «Cocaine trade 9,5» y no encontraba la
+# palabra narcotrafico en ninguna parte del sitio. La traduccion es LITERAL, no
+# interpretativa, y el nombre original viaja al lado en cada ficha para que
+# cualquiera pueda contrastarla.
 ROTULOS = {
     "1": "Criminalidad",
     "2": "Resiliencia del Estado",
     "1.1": "Mercados criminales",
     "1.2": "Actores criminales",
+    # Los quince mercados criminales
+    "1.1.1": "Trata de personas",
+    "1.1.2": "Tráfico de migrantes",
+    "1.1.3": "Extorsión y cobro de protección",
+    "1.1.4": "Tráfico de armas",
+    "1.1.5": "Comercio de mercadería falsificada",
+    "1.1.6": "Comercio ilícito de bienes gravados",
+    "1.1.7": "Delitos contra la flora",
+    "1.1.8": "Delitos contra la fauna",
+    "1.1.9": "Delitos contra recursos no renovables",
+    "1.1.10": "Mercado de heroína",
+    "1.1.11": "Mercado de cocaína",
+    "1.1.12": "Mercado de cannabis",
+    "1.1.13": "Mercado de drogas sintéticas",
+    "1.1.14": "Delitos informáticos",
+    "1.1.15": "Delitos financieros",
+    # Los cinco tipos de actor
+    "1.2.1": "Grupos de tipo mafioso",
+    "1.2.2": "Redes criminales",
+    "1.2.3": "Actores incrustados en el Estado",
+    "1.2.4": "Actores extranjeros",
+    "1.2.5": "Actores del sector privado",
+    # Las doce medidas de resiliencia
+    "2.1": "Liderazgo y gobernanza políticos",
+    "2.2": "Transparencia y rendición de cuentas del Estado",
+    "2.3": "Cooperación internacional",
+    "2.4": "Políticas y leyes nacionales",
+    "2.5": "Sistema judicial y detención",
+    "2.6": "Fuerzas del orden",
+    "2.7": "Integridad territorial",
+    "2.8": "Regulación contra el lavado de dinero",
+    "2.9": "Capacidad de regulación económica",
+    "2.10": "Apoyo y protección a las víctimas",
+    "2.11": "Prevención",
+    "2.12": "Actores no estatales",
+}
+
+# Los cuatro mercados de drogas, agrupados aparte: el registro los muestra juntos
+# en el eje de Seguridad porque «narcotrafico» es una pregunta que la gente hace,
+# y estaban repartidos entre otros once mercados sin que se los pudiera ver.
+DROGAS = ["1.1.11", "1.1.10", "1.1.12", "1.1.13"]
+
+# Y sus definiciones, traducidas. Solo estas cuatro: son las que el registro
+# muestra en una seccion de nivel Ciudadano, donde una definicion en ingles no
+# sirve. La original viaja al lado en el mismo archivo, para contrastar.
+DEFINICIONES = {
+    "1.1.10": ("La producción, la distribución y la venta de heroína. El consumo se "
+               "tiene en cuenta para determinar el alcance del mercado criminal."),
+    "1.1.11": ("La producción, la distribución y la venta de cocaína y sus derivados. "
+               "El consumo se tiene en cuenta para determinar el alcance del mercado."),
+    "1.1.12": ("El cultivo ilícito, la distribución y la venta de aceite, resina, hierba "
+               "u hojas de cannabis. El consumo se usa para determinar el alcance del "
+               "mercado."),
+    "1.1.13": ("La producción, la distribución y la venta de drogas sintéticas. El "
+               "consumo se tiene en cuenta para determinar el alcance del mercado."),
 }
 
 
@@ -294,9 +354,12 @@ def recolectar():
                 "lector_probado": True,
                 "consultado": comun.ahora(),
             },
+            "drogas": DROGAS,
             "catalogo": [{"codigo": c, "nombre": d["nombre"],
                           "rotulo": ROTULOS.get(c, d["nombre"]),
-                          "padre": d["padre"], "descripcion": d["descripcion"]}
+                          "es_droga": c in DROGAS,
+                          "padre": d["padre"], "descripcion": d["descripcion"],
+                          **({"descripcion_es": DEFINICIONES[c]} if c in DEFINICIONES else {})}
                          for c, d in sorted(arbol.items(),
                                             key=lambda x: [int(p) for p in x[0].split(".")])],
         },
