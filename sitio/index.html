@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 38 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-38">
+<meta property="og:description" content="33 Estados, 69 indicadores, 39 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-39">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 38 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-38">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 39 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-39">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 38 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 39 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -6717,16 +6717,36 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     const sinMarca = lista.filter(x => x.en_la_fuente && !(x.tipos_activos || []).length);
     const fuera = lista.filter(x => !x.en_la_fuente);
 
+    // Las muertes van CON SU RANGO. UCDP publica una estimacion baja, una mejor
+    // y una alta; mostrar solo la del medio esconderia lo que el propio productor
+    // declara no saber.
+    const rango = (a) => (a.muertes_baja != null && a.muertes_alta != null
+        && a.muertes_baja !== a.muertes_alta)
+      ? ' <i>(entre ' + miles(a.muertes_baja) + ' y ' + miles(a.muertes_alta) + ')</i>' : '';
+
     let html = (d.tipos || []).map(t => {
       const paises = conAlgo.filter(x => x[t.clave]);
       if(!paises.length) return '';
       return '<div class="asunto"><h4>' + esc(t.rotulo)
         + ' <span class="edad ' + (t.clave === 'unilateral' ? 'muy-viejo' : 'viejo') + '">'
         + paises.length + '</span></h4>'
-        + '<div class="lugares">' + paises.map(x =>
-            '<span class="lugar">' + esc(x.pais) + '</span>').join('') + '</div>'
+        + '<div class="lugares">' + paises.map(x => {
+            const a = (x.tipos_activos || []).find(y => y.clave === t.clave);
+            return '<span class="lugar">' + esc(x.pais)
+              + (a && a.muertes != null ? ' · ' + miles(a.muertes) : '') + '</span>';
+          }).join('') + '</div>'
         + '<div class="foot"><span class="porque">' + esc(t.dice)
-        + '</span><span class="badge medio">presencia</span></div></div>';
+        + ' <b>La cifra que acompaña a cada Estado son las muertes que UCDP contabiliza '
+        + 'en ' + esc(String(d.resumen.anio)) + '</b>, no la cantidad de hechos.'
+        + (paisFiltro && paises.length === 1
+           ? (() => { const a = (paises[0].tipos_activos || []).find(y => y.clave === t.clave);
+                      return a ? '<br>' + miles(a.muertes) + ' muertes' + rango(a)
+                        + (a.partes && a.partes.length
+                           ? '.<br><b>Partes:</b> ' + esc(a.partes.slice(0,4).join(' · '))
+                             + (a.partes_total > 4 ? ' y ' + (a.partes_total - 4) + ' más' : '')
+                           : '') : ''; })()
+           : '')
+        + '</span><span class="badge medio">presencia y muertes</span></div></div>';
     }).join('');
 
     if(sinMarca.length){

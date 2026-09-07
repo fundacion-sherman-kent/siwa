@@ -1049,3 +1049,59 @@ Están las tres por separado, a propósito. Se construyen distinto y a veces
 ordenan distinto a los mismos Estados. **Cuando coinciden, el juicio se apoya
 mejor; cuando discrepan, el analista tiene que ir a ver por qué.** Promediarlas
 borraría exactamente la información útil.
+
+---
+
+# UCDP resuelto — 7 de septiembre de 2026
+
+## Qué pasó
+
+La credencial llegó y **funciona**: el colector entró, leyó y falló en **la guarda
+de control** —Colombia no aparecía con violencia estatal—. La guarda hizo lo que
+tenía que hacer: frenó en vez de publicar treinta y tres ceros.
+
+Pero el diagnóstico era imposible desde acá: **la credencial vive en el
+repositorio y no se ve**, así que no había forma de consultar la fuente para
+averiguar qué fallaba. Antes de armar un ida y vuelta de corridas a ciegas, se
+probó otra puerta.
+
+## La puerta que estaba abierta
+
+**El mismo conjunto se descarga como archivo, sin credencial**:
+`organizedviolencecy-261-csv.zip`. Y es mejor por cuatro razones:
+
+1. No depende de un secreto.
+2. No gasta la cuota de 5.000 consultas diarias.
+3. **Se puede verificar antes de publicar** —que es la razón de fondo—.
+4. **Trae mucho más**: 7.132 filas desde 1989, y no sólo la presencia de
+   violencia sino **las muertes con su estimación baja, mejor y alta**, y **los
+   nombres de las partes en conflicto**.
+
+Nunca se estableció por qué falló la interfaz con credencial. **No se inventa una
+causa**: se cambió de puerta y se dejó constancia.
+
+## Qué publica ahora
+
+**32 de 33 Estados** —Antigua y Barbuda no está en el conjunto—. En 2025: dos
+Estados con violencia estatal, ocho con violencia no estatal y siete con
+violencia unilateral; **12.627 muertes contabilizadas en la región**, encabezadas
+por México (7.904), Haití (2.448) y Colombia (986).
+
+Las muertes van **con su rango**: quedarse con la cifra del medio escondería lo
+que el propio productor declara no saber.
+
+## Dos errores propios, corregidos
+
+**El separador de las partes.** Se partía por coma, y los nombres de los grupos
+llevan comas adentro: cortaba un nombre al medio y pegaba dos grupos en uno. Es
+punto y coma.
+
+**El corte silencioso de páginas.** La versión con credencial leía hasta un tope
+y seguía como si nada si la tabla tenía más. Una lectura cortada sin aviso deja
+Estados en cero, y un cero por lectura corta no se distingue de un cero real.
+
+## El token no se descarta
+
+Queda cargado y sirve para lo que el archivo no da: **consultas filtradas del
+conjunto georreferenciado de eventos**, evento por evento, con 417.968 registros
+y filtros de fecha, país y tipo de violencia. Ese es su lugar.

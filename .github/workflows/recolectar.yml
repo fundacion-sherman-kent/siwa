@@ -122,17 +122,16 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/desastres.py
 
-      # SEGUNDO COLECTOR CON SECRETO. La tabla de pais-ano de UCDP cambia una vez
-      # al ano, asi que corre en la diaria: no tiene sentido gastar peticiones del
-      # tope de 5.000 diarias en preguntar cada hora por un dato anual. Si el
-      # secreto no esta, el colector FALLA a proposito en vez de publicar ceros:
-      # treinta y tres Estados sin mirar no son treinta y tres Estados en paz.
+      # YA NO USA SECRETO. Se gestiono la credencial de la interfaz de UCDP y
+      # funciona, pero el MISMO conjunto se descarga como archivo, sin credencial
+      # y sin tope diario, y esa puerta es mejor: no depende de un secreto, no
+      # gasta cuota y se puede probar antes de publicar. El secreto UCDP_TOKEN
+      # queda cargado para lo que el archivo no da —consultas filtradas del
+      # conjunto georreferenciado, evento por evento—.
       - name: Violencia organizada (UCDP)
         id: ucdp
         continue-on-error: true
         if: env.COMPLETA == 'true'
-        env:
-          UCDP_TOKEN: ${{ secrets.UCDP_TOKEN }}
         run: python colectores/ucdp.py
 
       # Clasificacion anual de un proyecto academico: no cambia de una hora a
