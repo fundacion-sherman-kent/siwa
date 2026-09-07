@@ -93,7 +93,7 @@ python colectores/focos.py
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
 | `memoria` | Fundación Sherman Kent — bitácora de observación de SIWA | `A-2` | 33 | 5 |
-| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 7 | 6 |
+| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 7 |
 | `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 7 |
 | `opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición cero | `A-3` | 33 | 8 |
 | `owd` | V-Dem, Base Global de Terrorismo y UCDP, vía Our World in Data | `B-2` | 33 | 9 |

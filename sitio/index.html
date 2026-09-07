@@ -136,7 +136,12 @@
      cual lo entrega el manual: sin recolorear y sin efectos. */
   .topbar{
     display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
-    padding:12px 28px;background:var(--paper);border-bottom:3px solid var(--orange);
+    /* BLANCO PURO, como la web institucional. Antes era el crema de la casa
+       —#F4F2EC—, que sirve para el papel y para el fondo cálido de un informe,
+       pero hacía que la franja del sitio y la de fundacionkent.org no fueran la
+       misma. Verificado en la web institucional: su cuerpo y su encabezado son
+       rgb(255,255,255). El filete naranja se conserva: es lo que las une. */
+    padding:12px 28px;background:#FFFFFF;border-bottom:3px solid var(--orange);
     position:sticky;top:0;z-index:600;
   }
   .brand{display:flex;align-items:center;gap:18px;}

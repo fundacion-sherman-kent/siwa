@@ -32,11 +32,55 @@ NAVEGADOR = (
 )
 EJEMPLOS = 4
 
+# HAY PORTALES QUE HABLAN MEDIO DIALECTO. Paraguay y Perú publican catálogo
+# —434 y 4.684 conjuntos— pero NO tienen buscador: `package_search` devuelve 404
+# en Perú y algo que no es JSON en Paraguay. Sumarlos sin más habría dado cero en
+# las seis materias, y el registro habría dicho que no publican nada.
+#
+# Con esos se lee la LISTA COMPLETA de nombres una sola vez y se filtra acá.
+# Es una busqueda POR NOMBRE, no por texto completo, y por eso NO es comparable
+# con la de los portales que sí buscan: un conjunto llamado «serie 3.4.1» sobre
+# homicidios no aparece. Se declara.
+_LISTAS: dict = {}
+
+
+def _lista(base: str) -> list:
+    """La lista completa de nombres de un portal, pedida una sola vez."""
+    if base in _LISTAS:
+        return _LISTAS[base]
+    try:
+        peticion = urllib.request.Request(
+            f"{base}/api/3/action/package_list",
+            headers={"User-Agent": NAVEGADOR, "Accept": "application/json"})
+        with urllib.request.urlopen(peticion, timeout=60) as respuesta:
+            d = json.loads(respuesta.read(8_000_000).decode("utf-8", "replace"))
+        _LISTAS[base] = d.get("result") or []
+    except Exception:  # noqa: BLE001 — la falla se declara arriba
+        _LISTAS[base] = []
+    return _LISTAS[base]
+
 
 def _consultar(portal: dict, consulta: str) -> tuple:
     """Devuelve (cantidad, ejemplos, falla) para una materia en un portal."""
     base = portal["base"].rstrip("/")
     termino = urllib.parse.quote(consulta)
+
+    if portal["tipo"] == "CKAN-lista":
+        nombres = _lista(base)
+        if not nombres:
+            return (0, [], "no se pudo leer la lista de conjuntos")
+        # Se compara sin tildes: los nombres vienen normalizados y la consulta no.
+        import unicodedata
+        def pelar(t):
+            t = unicodedata.normalize("NFKD", t.lower())
+            return "".join(c for c in t if not unicodedata.combining(c))
+        aguja = pelar(consulta)
+        hallados = [n for n in nombres if aguja in pelar(n)]
+        ejemplos = [{"titulo": n.replace("-", " ").strip(),
+                     "organismo": "",
+                     "enlace": f"{base}/dataset/{n}"} for n in hallados[:EJEMPLOS]]
+        return (len(hallados), ejemplos, None)
+
     if portal["tipo"] == "CKAN":
         url = f"{base}/api/3/action/package_search?q={termino}&rows={EJEMPLOS}"
     else:
@@ -124,6 +168,22 @@ def recolectar():
     )
 
     vacios = [
+
+        "DOS PORTALES SE LEEN DE OTRA MANERA, Y SUS CIFRAS NO SON COMPARABLES CON LAS "
+
+        "DEMAS. Peru y Paraguay publican catalogo —4.684 y 434 conjuntos— pero NO "
+
+        "tienen buscador: package_search devuelve 404 en uno y algo que no es JSON en "
+
+        "el otro. Con ellos se lee la lista completa de nombres y se filtra por NOMBRE, "
+
+        "no por texto completo. Un conjunto llamado «serie 3.4.1» sobre homicidios NO "
+
+        "aparece, de modo que sus cantidades salen MAS BAJAS por como se los consulta y "
+
+        "no por lo que publican. Se los suma igual: tenerlos mal contados es mejor que "
+
+        "no tenerlos, siempre que se diga.",
         "ESTO NO PUBLICA DATOS, PUBLICA DÓNDE ESTÁN. Es un índice de conjuntos "
         "oficiales con su dirección, para que el analista vaya al original.",
         "**Las cifras de estos catálogos NO son comparables entre países.** Cada Estado "
