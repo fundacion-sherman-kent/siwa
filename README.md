@@ -68,7 +68,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**39 fuentes en servicio**, en 40 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**40 fuentes en servicio**, en 41 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -101,6 +101,7 @@ python colectores/focos.py
 | `opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición cero | `A-3` | 33 | 8 |
 | `owd` | V-Dem, Base Global de Terrorismo y UCDP, vía Our World in Data | `B-2` | 33 | 9 |
 | `percepcion_corrupcion` | Transparency International — Índice de Percepción de la Corrupción | `B-2` | 33 | 7 |
+| `pobreza` | CEPALSTAT — Comisión Económica para América Latina y el Caribe (Naciones Unidas) | `A-2` | 33 | 5 |
 | `prensa_libre` | Reporteros Sin Fronteras — clasificación mundial de la libertad de prensa | `B-3` | 33 | 5 |
 | `ransomware` | ransomware.live — recopilación de sitios de extorsión informática | `D-4` | 31 | 6 |
 | `reciente_oficial` | Catalogos oficiales de los Estados — lo mas reciente publicado | `A-2` | 33 | 5 |

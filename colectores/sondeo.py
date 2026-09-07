@@ -48,6 +48,17 @@ MEMORIA = 200
 # Cada candidata declara QUE se le pide y QUE cuenta como respuesta buena. El
 # «porque» dice para qué la queremos, de modo que quien lea esto dentro de seis
 # meses no tenga que reconstruirlo.
+# DOS CANDIDATAS SALIERON DE ESTA LISTA PORQUE SE RESOLVIERON, el 7 de septiembre
+# de 2026, y conviene recordar como:
+#
+# UCDP pedia un testigo. Se gestiono y se obtuvo, pero resulto que EL MISMO
+# CONJUNTO se descarga como archivo sin credencial: la puerta con llave no era la
+# unica. Antes de gestionar un permiso conviene mirar si hay otra puerta.
+#
+# CEPALSTAT figuraba como «nunca respondio» por un 500. La interfaz estaba SANA:
+# lo que estaba roto era EL INDICADOR CON EL QUE SE LA PROBABA. Probar una fuente
+# con un solo indicador y concluir que la fuente esta muerta es el mismo error que
+# probar un pais y concluir que no publica.
 CANDIDATAS = [
     {
         "clave": "gdelt",
@@ -59,27 +70,11 @@ CANDIDATAS = [
         "traba": "Respondió 2 de unas 20 consultas el 3 de septiembre de 2026.",
     },
     {
-        "clave": "cepalstat",
-        "rotulo": "CEPALSTAT — serie de un indicador",
-        "url": "https://api-cepalstat.cepal.org/cepalstat/api/v1/indicator/2246/data?lang=es&format=json",
-        "porque": "Es la única fuente estadística probada que es NATIVA de la región. "
-                  "Su árbol temático responde; la descarga del dato, no.",
-        "traba": "500 · Internal Server Error.",
-    },
-    {
         "clave": "reliefweb",
         "rotulo": "ReliefWeb — desastres y crisis",
         "url": "https://api.reliefweb.int/v2/disasters?appname=fusk-siwa&limit=1",
         "porque": "Capa de hoy: desastres y crisis con fecha y país.",
         "traba": "403 · exige un nombre de aplicación autorizado, que hay que pedir.",
-    },
-    {
-        "clave": "ucdp",
-        "rotulo": "UCDP — conflicto armado",
-        "url": "https://ucdpapi.pcr.uu.se/api/gedevents/24_1?pagesize=1",
-        "porque": "Reemplazo posible de las dos series de terrorismo detenidas en 2021, y "
-                  "con licencia de atribución que sí permite redistribuir.",
-        "traba": "401 · pide un testigo. Falta averiguar si es gratuito.",
     },
     {
         "clave": "ops",
@@ -136,10 +131,12 @@ CANDIDATAS = [
     {
         "clave": "estadistica_cuba",
         "rotulo": "Cuba — oficina nacional de estadística",
-        "url": "https://www.onei.gob.cu/",
+        "url": "https://onei.gob.cu/",
         "porque": "Es la única vía oficial de cifras cubanas. Sin ella, Cuba queda "
-                  "descrita sólo por fuentes de terceros.",
-        "traba": "HTTP 500 · el sitio está fallando, no bloqueando.",
+                  "descrita sólo por fuentes de terceros. Su sitio YA RESPONDE y está "
+                  "en el padrón de oficinas de estadística; lo que falta es que "
+                  "publique algo consultable por máquina.",
+        "traba": "Responde como sitio para personas: no expone catálogo ni interfaz.",
     },
 ]
 

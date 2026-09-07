@@ -110,6 +110,12 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/prensa_libre.py
 
+      - name: Pobreza por ingresos (CEPALSTAT)
+        id: pobreza
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/pobreza.py
+
       - name: Percepcion de corrupcion (Transparency International)
         id: ipc
         continue-on-error: true
@@ -361,6 +367,7 @@ jobs:
           [ "${{ steps.sanciones.outcome }}" = "failure" ] && { echo "Falló el colector de sanciones."; fallo=1; }
           [ "${{ steps.prensa.outcome }}" = "failure" ] && { echo "Falló el colector de libertad de prensa."; fallo=1; }
           [ "${{ steps.sismos.outcome }}" = "failure" ] && { echo "Falló el colector de sismicidad."; fallo=1; }
+          [ "${{ steps.pobreza.outcome }}" = "failure" ] && { echo "Falló el colector de pobreza."; fallo=1; }
           [ "${{ steps.ipc.outcome }}" = "failure" ] && { echo "Falló el colector de percepción de corrupción."; fallo=1; }
           [ "${{ steps.desastres.outcome }}" = "failure" ] && { echo "Falló el colector de desastres y emergencias."; fallo=1; }
           [ "${{ steps.ucdp.outcome }}" = "failure" ] && { echo "Falló el colector de violencia organizada (UCDP)."; fallo=1; }

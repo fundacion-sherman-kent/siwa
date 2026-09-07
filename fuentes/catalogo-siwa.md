@@ -1156,3 +1156,54 @@ mostraba**. Direcciones verificadas una por una que ningún lector podía ver.
 Ahora aparecen en la ficha de cada país, con dos cosas que importan: **si el
 organismo es del Estado o de la sociedad civil**, y **la prueba de que se lo
 tocó**.
+
+---
+
+# Lo que el robot tenía anotado — 7 de septiembre de 2026
+
+Revisión del banco de pruebas de fuentes candidatas. **Tres de las once trabas
+declaradas ya no existían.**
+
+## CEPALSTAT entra, y la lección es dura
+
+Figuraba como «nunca respondió», con un error 500. **La interfaz estaba sana: lo
+que estaba roto era el indicador con el que se la probaba** —el 2246—. Probada
+con otro, contesta perfecto.
+
+**Probar una fuente con un solo indicador y concluir que la fuente está muerta es
+el mismo error que probar un país y concluir que no publica.** Quedó escrito en el
+propio archivo del banco de pruebas.
+
+De ahí sale un colector nuevo: **pobreza por ingresos**, en los tres umbrales de
+la CEPAL —3,0, 4,1 y 8,3 dólares de paridad por día—, para **27 de los 33
+Estados**. Es la primera vez que el registro mide pobreza, y lo hace con **la
+única fuente estadística nativa de la región**: la comisión de las Naciones
+Unidas para América Latina y el Caribe, que no mira desde afuera.
+
+### El peligro de esta capa, y cómo se resolvió
+
+Los años **no coinciden**: Haití es de 2012 y Honduras de 2024. Ordenados por
+pobreza quedan uno al lado del otro, y eso no es una comparación. **El año va en
+el título de cada ficha**, y las que tienen más de cinco años quedan marcadas con
+la advertencia expresa de que no se las puede comparar con las recientes.
+
+## UCDP sale de la lista
+
+Pedía un testigo. Se gestionó y se obtuvo —y funciona—, pero **el mismo conjunto
+se descarga como archivo sin credencial**. La puerta con llave no era la única.
+**Antes de gestionar un permiso conviene mirar si hay otra puerta.**
+
+## Cuba tenía mal la dirección
+
+Se la probaba en `www.onei.gob.cu`, que devuelve 500. **Sin el prefijo `www`
+responde.** Su oficina ya está en el padrón; lo que sigue faltando es que
+publique algo consultable por máquina, y así queda anotado.
+
+## Las que siguen abiertas
+
+Ocho candidatas, con su traba verificada de nuevo hoy: **GDELT** —intermitente,
+respondió ayer y hoy devolvió 429—, **ReliefWeb** —exige nombre de aplicación
+autorizado—, **OPS** —su ruta publicada no responde; la interfaz de indicadores
+de la OMS sí, y queda como reemplazo posible—, **OIM DTM** —404 en todas las
+rutas probadas— y los portales de **Ecuador, Guatemala, Bolivia y Costa Rica**,
+que bloquean incluso a quien se identifica como navegador.

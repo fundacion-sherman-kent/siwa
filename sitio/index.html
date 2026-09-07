@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 39 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-39">
+<meta property="og:description" content="33 Estados, 69 indicadores, 40 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-40">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 39 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-39">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 40 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-40">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 39 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 40 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1566,6 +1566,28 @@
       <div class="cruce" id="lista-designados"></div>
       <div id="vac-designados"></div>
         </div>
+    <div class="categoria" id="pobreza" data-nivel="1">
+      <div class="categoria-head"><h4>Pobreza por ingresos · la medida de la propia región</h4><span class="tag" id="tag-pobreza">—</span></div>
+      <details class="aviso-cobertura"><summary>Cada Estado tiene su propio año: hay treinta años de distancia entre el dato más viejo y el más nuevo</summary>
+        <p><b>Sale de encuestas de hogares, no de un censo ni de un registro.</b> Cada Estado
+           levanta la suya con su propia periodicidad, y por eso <b>el último año disponible
+           no es el mismo para todos</b>. Comparar el dato de un Estado con el de otro puede
+           ser comparar dos momentos muy distintos del mundo: <b>en esta capa hay fichas de
+           los años noventa junto a fichas del año pasado</b>. El año va escrito en cada
+           una, y las que tienen más de cinco años quedan marcadas.</p>
+        <p><b>El umbral en dólares de paridad no es lo que cuesta vivir en cada país.</b> Es
+           una vara común para poder comparar. La línea de pobreza que cada Estado usa para
+           su política social es otra y suele ser distinta.</p>
+        <p><b>Los tres umbrales no se suman.</b> Quien está por debajo de 3,0 dólares
+           también está por debajo de 4,1 y de 8,3: son tres cortes de la misma
+           distribución, no tres grupos distintos. Y esto <b>mide ingresos, no
+           privación</b>: alguien por encima del umbral puede no tener agua ni cloaca.</p>
+      </details>
+      <div class="procedencia" id="proc-pobreza">Cargando el registro…</div>
+      <div class="cruce" id="lista-pobreza"></div>
+      <div id="vac-pobreza"></div>
+        </div>
+
     <div class="categoria" id="ipc" data-nivel="2">
       <div class="categoria-head"><h4>Percepción de corrupción · el índice más citado</h4><span class="tag" id="tag-ipc">—</span></div>
       <details class="aviso-cobertura"><summary>Mide percepción, no hechos — y dos Estados con intervalos superpuestos no están ordenados</summary>
@@ -2535,6 +2557,7 @@
                      ['sondeo','Banco de pruebas de fuentes candidatas'],
                      ['prensa','RSF — libertad de prensa'],
                      ['focos','NASA FIRMS — focos de calor'],
+                     ['pobreza','CEPALSTAT — pobreza por ingresos'],
                      ['ipc','Transparency International — percepción de corrupción'],
                      ['desastres','IFRC — desastres y emergencias'],
                      ['sismos','USGS — sismicidad'],
@@ -5155,6 +5178,7 @@
     paso('comercio de armas', armasVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
+    paso('pobreza por ingresos', pobrezaVista);
     paso('percepción de corrupción', ipcVista);
     paso('desastres y emergencias', desastresVista);
     paso('sismicidad', sismosVista);
@@ -6550,6 +6574,57 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       html += '<div class="asunto"><h4>' + sin.length + ' sin clasificar</h4>'
         + '<div class="foot"><span class="porque">' + esc(sin.map(x => x.pais).join(', '))
         + '. <b>' + esc(motivo) + '</b></span><span class="badge unica">sin clasificar</span></div></div>';
+    }
+    caja.innerHTML = html;
+  }
+
+  function pobrezaVista(){
+    const caja = document.getElementById('lista-pobreza');
+    const d = almacen.pobreza; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const con = lista.filter(x => x.medido);
+    const tag = document.getElementById('tag-pobreza');
+    if(tag) tag.textContent = con.length + ' de ' + lista.length + ' Estados medidos · '
+      + 'datos de ' + d.resumen.anio_mas_viejo + ' a ' + d.resumen.anio_mas_nuevo;
+
+    // EL AÑO MANDA. Un dato de 2012 al lado de uno de 2024 no es una comparacion,
+    // y el lector tiene que verlo sin leer la letra chica: el año va en el titulo
+    // y los datos viejos se marcan por su antiguedad, no por su valor.
+    const ahora = new Date().getFullYear();
+    let html = con.map(x => {
+      const edad = ahora - x.anio;
+      const clase = edad > 10 ? 'muy-viejo' : edad > 5 ? 'viejo' : 'fresco';
+      return '<div class="asunto"><h4>' + esc(x.pais)
+        + ' <span class="edad ' + clase + '">' + x.anio + '</span></h4>'
+        + '<div class="foot"><span class="porque">'
+        + '<b>' + String(x.pobreza).replace('.',',') + ' %</b> por debajo de 4,1 dólares '
+        + 'de paridad por día · <b>' + String(x.extrema).replace('.',',') + ' %</b> por '
+        + 'debajo de 3,0 · <b>' + String(x.vulnerabilidad).replace('.',',') + ' %</b> por '
+        + 'debajo de 8,3'
+        + (x.variacion != null
+           ? '.<br>Desde ' + x.desde + ': <b>' + (x.variacion > 0 ? '+' : '')
+             + String(x.variacion).replace('.',',') + '</b> puntos de pobreza' : '.')
+        + (edad > 5
+           ? '<br><b>Atención: el dato es de ' + x.anio + '.</b> Este Estado no publicó '
+             + 'encuesta comparable después, de modo que <b>no se lo puede comparar con '
+             + 'los que tienen datos recientes</b>.'
+           : '')
+        + '</span><span class="badge ' + (edad > 5 ? 'unica' : 'medio') + '">'
+        + (edad > 5 ? 'dato de hace ' + edad + ' años' : 'ingresos') + '</span></div></div>';
+    }).join('');
+
+    const sin = lista.filter(x => !x.medido);
+    if(sin.length){
+      html += '<div class="asunto"><h4>' + sin.length + ' sin medición</h4>'
+        + '<div class="foot"><span class="porque">' + esc(sin.map(x=>x.pais).join(', '))
+        + '. Son en su mayoría Estados del Caribe chico, que no levantan la encuesta de '
+        + 'hogares con la que se construye este indicador. <b>No significa que no tengan '
+        + 'pobreza: significa que no se la mide así.</b>'
+        + '</span><span class="badge unica">sin encuesta</span></div></div>';
     }
     caja.innerHTML = html;
   }
@@ -8008,6 +8083,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-designados','designados',err.message);
       document.getElementById('proc-designados').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('pobreza.json'), traer('estado/pobreza.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.pobreza=d; const meta=d.procedencia;
+      pintarProcedencia('proc-pobreza',meta);
+      vacios+=pintarVacios('vac-pobreza',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-pobreza','pobreza por ingresos',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-pobreza','pobreza por ingresos',err.message);
+      document.getElementById('proc-pobreza').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('percepcion_corrupcion.json'), traer('estado/percepcion_corrupcion.json').catch(()=>null)])
     .then(([d,estado])=>{
