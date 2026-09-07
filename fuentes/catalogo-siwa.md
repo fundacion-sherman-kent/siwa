@@ -1313,3 +1313,45 @@ cincuenta materias, además de las veinte nuevas.
 **Nada de esto suma una fuente.** Hace encontrable lo que el registro ya tenía y
 nadie podía hallar. Un dato que no se puede buscar es, para el lector, un dato
 que no existe.
+
+---
+
+# Las tres gestiones, verificadas de nuevo — 7 de septiembre de 2026, tarde
+
+## UNESCO — se halló la ruta con el dato, y la puerta se cierra al usarla
+
+**Novedad de fondo:** por la tarde la página del convenio de 1970 **abrió sin
+verificación anti-robot** —398 KB de contenido real— y se halló **la ruta exacta
+donde vive el dato**:
+
+`/en/legal-affairs/country-overview?country=<ISO2>&hub=66535`
+
+Devuelve, por Estado, el bloque del convenio de 1970 con su **fecha de
+depósito**. Verificado: la Argentina depositó el **11 de enero de 1973** y
+Colombia el **24 de mayo de 1988**.
+
+**Pero la puerta se cierra en cuanto se la usa.** Al pedir ocho fichas de país
+seguidas, con tres segundos entre una y otra, **las ocho fallaron**: el servidor
+corta la conexión sin responder. No es un muro permanente ni una página rota: es
+un escudo que deja pasar unas pocas visitas y se cierra ante el uso sostenido.
+
+Un colector necesita 33 peticiones. **No se construye sobre eso**, y ahora se
+sabe exactamente qué pedirle a UNESCO: acceso a esa ruta, que ya se identificó.
+
+## ReliefWeb — sigue igual, y dice dónde pedirlo
+
+`403 · AccessDeniedHttpException: You are not using an approved appname.` El
+propio error indica el formulario: `apidoc.reliefweb.int/parameters#appname`.
+Es el trámite más simple de los tres.
+
+## SIPRI — la distinción se confirma
+
+**La base de transferencias de armamento no tiene archivo de descarga**:
+verificado hoy, la página sólo ofrece su interfaz de consulta, que exige un
+navegador. Es lo que falta y hay que pedirlo.
+
+**El gasto militar sí tiene archivo** —`SIPRI-Milex-data-1949-2025_v1.2.xlsx`—
+pero eso el registro **ya lo tiene** por vía del Banco Mundial, que lo toma de
+SIPRI y lo redistribuye con licencia abierta. Ir directo agregaría un año y el
+gasto por habitante a cambio de asumir una restricción de licencia donde hoy no
+hay ninguna. **No conviene.**
