@@ -180,10 +180,17 @@ def _sellarLeeme() -> int:
         vacios = len(p.get("vacios_declarados") or [])
         filas.append((archivo.stem, p["fuente"].get("nombre", ""), codigo, estados, vacios))
 
+    # LA TABLA CUENTA ARCHIVOS; EL TITULO TIENE QUE CONTAR FUENTES. ACNUR deja
+    # dos archivos —el corte del ano y la serie historica— y la tabla decia «34
+    # fuentes» cuando eran 33. Sobrestimar la cantidad de fuentes en un registro
+    # cuya promesa es la trazabilidad es el peor lado para equivocarse.
+    distintas = len({f for _, f, _, _, _ in filas if f})
+
     cuerpo = [
         f"{MARCA_INICIO}",
         "",
-        f"**{len(filas)} fuentes en servicio.** Esta tabla no se escribe: la calcula "
+        f"**{distintas} fuentes en servicio**, en {len(filas)} archivos de datos: hay "
+        "fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula "
         "`herramientas/sellar-portada.py` desde los archivos de datos, después de cada "
         "recolección. Un colector que no dejó dato no aparece acá.",
         "",
@@ -207,7 +214,8 @@ def _sellarLeeme() -> int:
     nuevo = texto[:inicio] + "\n".join(cuerpo) + texto[fin:]
     if nuevo != texto:
         LEEME.write_text(nuevo, encoding="utf-8")
-        print(f"[sellar-portada] README.md: tabla rehecha con {len(filas)} fuentes")
+        print(f"[sellar-portada] README.md: tabla rehecha con {distintas} fuentes "
+              f"en {len(filas)} archivos")
     return len(filas)
 
 

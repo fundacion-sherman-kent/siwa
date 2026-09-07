@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 32 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-32">
+<meta property="og:description" content="33 Estados, 69 indicadores, 33 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-33">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 32 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-32">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 33 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-33">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 32 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 33 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1566,6 +1566,29 @@
       <div class="cruce" id="lista-designados"></div>
       <div id="vac-designados"></div>
         </div>
+    <div class="categoria" id="bienes" data-nivel="2">
+      <div class="categoria-head"><h4>Bienes culturales · qué está tipificado</h4><span class="tag" id="tag-bienes">—</span></div>
+      <details class="aviso-cobertura"><summary>Esto no mide tráfico: mide qué se obligó a restituir cada Estado</summary>
+        <p><b>No existe fuente libre con volúmenes de tráfico de bienes culturales por
+           país.</b> Se buscó en seis idiomas —español, inglés, francés, alemán, italiano y
+           portugués— en UNESCO, UNODC, UNIDROIT, ICOM, la Organización Mundial de Aduanas,
+           INTERPOL, los Carabinieri, Kulturgutschutz Deutschland, la base POP francesa, el
+           IBRAM, ARCA y Trafficking Culture. INTERPOL exige convenio; la Aduana publica
+           agregados regionales en PDF; SHERLOC da jurisprudencia y legislación, no
+           cantidades. <b>El vacío es del mundo, no de este registro.</b></p>
+        <p><b>Lo que sí es comparable en los 33 es la obligación asumida.</b> El Convenio de
+           UNIDROIT de 1995 obliga al Estado parte a restituir el bien robado y a admitir la
+           acción de devolución. Que un Estado no figure <b>no dice</b> que trafique más ni
+           que proteja menos: puede tener ley interna y no haber ratificado.</p>
+        <p><b>Falta el convenio principal, y se dice por qué.</b> El de la UNESCO de 1970 lo
+           ratificaron muchos más Estados y no se pudo recolectar: UNESCO devuelve una
+           verificación anti-robot en las cuatro direcciones probadas. El dato es público; el
+           sitio del organismo rechaza a los programas. Se gestiona por vía oficial.</p>
+      </details>
+      <div class="procedencia" id="proc-bienes">Cargando el registro…</div>
+      <div class="cruce" id="lista-bienes"></div>
+      <div id="vac-bienes"></div>
+        </div>
     <div class="categoria" id="cites" data-nivel="2">
       <div class="categoria-head"><h4>Especies protegidas · comercio registrado</h4><span class="tag" id="tag-cites">—</span></div>
       <details class="aviso-cobertura"><summary>Lo que esta base registra es comercio legal, no tráfico</summary>
@@ -2385,6 +2408,7 @@
                      ['sondeo','Banco de pruebas de fuentes candidatas'],
                      ['prensa','RSF — libertad de prensa'],
                      ['focos','NASA FIRMS — focos de calor'],
+                     ['bienes','UNIDROIT — bienes culturales, convenio de 1995'],
                      ['cites','CITES — comercio de especies protegidas'],
                      ['crimen','Índice Global de Crimen Organizado'],
                      ['designados','ONU — lista consolidada de sanciones'],
@@ -4998,6 +5022,7 @@
     paso('comercio de armas', armasVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
+    paso('bienes culturales', bienesVista);
     paso('especies protegidas', citesVista);
     paso('focos de calor', focosVista);
     paso('libertad de prensa', prensaVista);
@@ -6341,6 +6366,43 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     caja.innerHTML = html;
   }
 
+  function bienesVista(){
+    const caja = document.getElementById('lista-bienes');
+    const d = almacen.bienes_culturales; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const obligados = lista.filter(x => x.unidroit_1995);
+    const tag = document.getElementById('tag-bienes');
+    if(tag) tag.textContent = obligados.length + ' de ' + lista.length
+      + (paisFiltro || zona ? ' en el ámbito' : ' Estados') + ' obligados por el convenio de 1995';
+
+    let html = obligados.map(x =>
+      '<div class="asunto"><h4>' + esc(x.pais) + '</h4>'
+      + '<div class="foot"><span class="porque">Obligado por el <b>Convenio de UNIDROIT de '
+      + '1995</b> sobre bienes culturales robados o exportados ilícitamente, por '
+      + esc(x.via) + ' del ' + esc(x.fecha_del_acto) + '. <b>En vigor desde el '
+      + esc(x.en_vigor_desde) + '</b>, que es la fecha que cuenta: la del acto es anterior.'
+      + '</span><span class="badge medio">obligación asumida</span></div></div>').join('');
+
+    const fuera = lista.filter(x => !x.unidroit_1995);
+    if(fuera.length){
+      // «No figura» NO es «no protege». Decirlo de otro modo seria convertir una
+      // ausencia de ratificacion en una acusacion, que es justo lo contrario de
+      // lo que el dato sostiene.
+      html += '<div class="asunto"><h4>' + fuera.length
+        + ' sin ratificar el convenio de 1995</h4><div class="foot"><span class="porque">'
+        + esc(fuera.map(x => x.pais).join(', '))
+        + '. <b>No prueba que protejan menos:</b> pueden tener ley interna, y muchos son '
+        + 'parte del convenio de la UNESCO de 1970, que no se pudo recolectar porque el '
+        + 'sitio del organismo rechaza a los programas.'
+        + '</span><span class="badge unica">sin ratificar</span></div></div>';
+    }
+    caja.innerHTML = html;
+  }
+
   function citesVista(){
     const caja = document.getElementById('lista-cites');
     const d = almacen.cites; if(!caja || !d) return;
@@ -7511,6 +7573,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-designados','designados',err.message);
       document.getElementById('proc-designados').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('bienes_culturales.json'), traer('estado/bienes_culturales.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.bienes_culturales=d; const meta=d.procedencia;
+      pintarProcedencia('proc-bienes',meta);
+      vacios+=pintarVacios('vac-bienes',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-bienes','bienes culturales',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-bienes','bienes culturales',err.message);
+      document.getElementById('proc-bienes').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('cites.json'), traer('estado/cites.json').catch(()=>null)])
     .then(([d,estado])=>{

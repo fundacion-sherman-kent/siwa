@@ -773,3 +773,54 @@ lo dice en cada ficha.
 
 El INDEC responde. Si no responde, el que falló es el sondeo y el mapa de
 silencio se declara no confiable en vez de publicarse.
+
+---
+
+# Bienes culturales entran — 7 de septiembre de 2026
+
+Estaba propuesto desde el sondeo del 6 y no se había sumado.
+
+## Lo que se pudo, y lo que no
+
+**Entra el Convenio de UNIDROIT de 1995** sobre bienes culturales robados o
+exportados ilícitamente. La tabla del depositario abre sin credencial: 65 Estados
+en el mundo, **13 de los 33 del padrón**. Uruguay ratificó en julio de 2024 y el
+convenio le rige desde enero de 2025, lo que confirma que la fuente está al día.
+
+**No entra el Convenio de la UNESCO de 1970**, que es el principal. No por
+licencia ni por reserva: **UNESCO interpone una verificación anti-robot**
+(F5/TrafficShield) en las cuatro direcciones probadas —la página del convenio, la
+vía antigua `eri/la/convention.asp`, el portal heredado y los subdominios de
+datos—. El dato es público; el sitio del organismo rechaza a los programas. Queda
+declarado en el registro con la dirección exacta, para que cualquiera repita la
+prueba, y se gestiona por vía oficial.
+
+Se probaron además, sin resultado para esta materia: la colección de tratados de
+Naciones Unidas (el 1970 se deposita en UNESCO, no ahí), SHERLOC (da
+jurisprudencia y legislación, no ratificaciones) y los subdominios de datos de
+UNESCO.
+
+## Lo que el registro dice, y lo que se cuidó de no decir
+
+Mide **qué está tipificado**, no cuánto se trafica. Un Estado que no figura
+**puede tener ley interna**: la ficha lo dice con esas palabras, porque convertir
+una ausencia de ratificación en una acusación es exactamente el error que este
+registro existe para no cometer.
+
+## Dos guardas del colector
+
+**La tabla se reconoce por su encabezado, no por su lugar.** La página trae nueve
+tablas y varias son declaraciones territoriales: tomar «la primera» sin mirar qué
+dice haría publicar las provincias del Canadá como Estados soberanos el día que
+UNIDROIT rediseñe la página.
+
+**Control: Perú.** Es parte desde 1998. Si no aparece en la lectura, lo que falló
+es el lector y no la ratificación de nadie: no se publica.
+
+## Sigue pendiente de gestión
+
+**SIPRI — base de transferencias de armamento mayor.** Su interfaz no responde a
+la automatización: el formulario exige selección de una lista y no acepta texto
+libre. Hay que insistir con la interfaz o pedirle el archivo a SIPRI. El gasto
+militar ya está en el registro por vía del Banco Mundial, que lo toma de SIPRI y
+lo redistribuye con licencia abierta.
