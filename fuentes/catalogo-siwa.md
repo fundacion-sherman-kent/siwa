@@ -1105,3 +1105,54 @@ Estados en cero, y un cero por lectura corta no se distingue de un cero real.
 Queda cargado y sirve para lo que el archivo no da: **consultas filtradas del
 conjunto georreferenciado de eventos**, evento por evento, con 417.968 registros
 y filtros de fecha, país y tipo de violencia. Ese es su lugar.
+
+---
+
+# Las tres direcciones de Brasil — 7 de septiembre de 2026
+
+Brasil era uno de los huecos del padrón: su portal federal exige cuenta gov.br
+—inalcanzable para un extranjero sin CPF— y sólo teníamos el IBGE. La Dirección
+propuso tres direcciones. Se probaron todas.
+
+## Entra
+
+**Fórum Brasileiro de Segurança Pública.** El **Anuário Brasileiro de Segurança
+Pública** se descarga directo, sin credencial: **1,4 MB, 134 hojas**, y la
+primera es «Mortes violentas intencionais». Es la referencia de hecho para la
+seguridad en el Brasil.
+
+**Y se consigna lo que es: una asociación civil, no un organismo del Estado.** La
+ficha lo dice con esas palabras. Se lo incluye por su calidad y su uso
+establecido, no por un carácter oficial que no tiene.
+
+**Ministerio de Justicia y Seguridad Pública.** Sus datos nacionales de seguridad
+responden, pero la página arma el contenido en el navegador: queda como dirección
+verificada, no como archivo recolectable.
+
+## Cierran la puerta, y se declara con la prueba
+
+**Central de Paneles de la CGU.** Redirige a `/signin`: **exige cuenta**. Mismo
+muro que el portal federal.
+
+**Portal da Transparência.** Este es el caso más engañoso y el más útil de
+declarar: **la página lista decenas de conjuntos abiertos** —empresas
+inhabilitadas, funcionarios expulsados, acuerdos de lenidad— **y se lee sin
+problema, pero las descargas devuelven 403** a quien no es un navegador. Y su
+interfaz de consulta exige credencial (401). **Publica para personas y cierra a
+los programas.** Quien mire sólo la página concluiría que Brasil publica todo eso
+en abierto; quien intente tomarlo, no puede.
+
+## No entra
+
+**Contas Abertas.** Es una agencia de noticias y una asociación civil de
+seguimiento del gasto: publica análisis, no conjuntos de datos. No hay archivo
+que recolectar.
+
+## Y algo que estaba mal desde antes
+
+Las **fuentes sectoriales verificadas** —el Banco Central argentino, SECOP de
+Colombia, el IBGE— **estaban en el archivo de datos y la página no las
+mostraba**. Direcciones verificadas una por una que ningún lector podía ver.
+Ahora aparecen en la ficha de cada país, con dos cosas que importan: **si el
+organismo es del Estado o de la sociedad civil**, y **la prueba de que se lo
+tocó**.

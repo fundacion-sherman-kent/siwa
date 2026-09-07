@@ -7232,12 +7232,35 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     const conPortal = new Set(lista.map(x => x.iso));
     const soloOficina = oficinas.filter(o => !conPortal.has(o.iso));
 
+    const nombreDe = iso => { const q = padron.find(x => x.iso === iso); return q ? q.pais : iso; };
+
+    // Las fuentes SECTORIALES verificadas: organismos que publican una materia
+    // concreta y que no son el catalogo general del Estado. Estaban en el archivo
+    // y no se mostraban, de modo que nadie podia usarlas.
+    const sectoriales = (d.sectoriales_verificados || []).filter(x =>
+      paisFiltro ? x.iso === paisFiltro
+                 : (zona ? (padron.find(q => q.iso === x.iso) || {}).bloque === zona : true));
+    const tarjetasSectoriales = sectoriales.map(x => {
+      const dom = String(x.consulta || '').replace(/^https?:\/\//,'').split('/')[0];
+      const civil = (x.caracter || 'oficial') !== 'oficial';
+      return `<div class="ficha-pais"><h4>${esc(nombreDe(x.iso))}</h4>
+        <div class="org">${esc(x.organismo)} ·
+          <a href="${esc(x.consulta)}" target="_blank" rel="noopener">${esc(dom)}</a></div>
+        <div class="materia-linea"><span>Fuente sectorial verificada</span>
+          <span class="cuenta">${civil ? 'sociedad civil' : 'organismo del Estado'}</span></div>
+        <div class="muestra">${esc(x.descripcion || '')}${
+          x.prueba ? ' <b>' + esc(x.prueba) + '</b>' : ''}${
+          x.archivo ? ' <a href="' + esc(x.archivo) + '" target="_blank" rel="noopener">Archivo de datos</a>.' : ''}${
+          civil ? ' <b>No es un organismo del Estado:</b> se lo consigna por su calidad y su uso establecido, no por su carácter oficial.' : ''}</div></div>`;
+    }).join('');
+
     const tag=document.getElementById('tag-oficiales');
     if(tag) tag.textContent = (paisFiltro || zona)
-      ? `${lista.length} portal${lista.length===1?'':'es'} y ${oficinas.length} oficina${oficinas.length===1?'':'s'} de estadística en ${esc(paisFiltro?paisNombre:zona)}`
+      ? `${lista.length} portal${lista.length===1?'':'es'}, ${oficinas.length} oficina${oficinas.length===1?'':'s'} de estadística y ${sectoriales.length} fuente${sectoriales.length===1?'':'s'} sectorial${sectoriales.length===1?'':'es'} en ${esc(paisFiltro?paisNombre:zona)}`
       : `${d.resumen.estados_con_alguna_fuente_oficial} de ${d.resumen.estados_del_padron} Estados con fuente oficial verificada · ${miles(d.resumen.conjuntos_hallados)} conjuntos indexados`;
 
-    const nombreDe = iso => { const q = padron.find(x => x.iso === iso); return q ? q.pais : iso; };
+
+
     // En la vista de un pais se muestran las dos cosas: su portal y su oficina de
     // estadistica, que son organismos distintos y direcciones distintas. En la
     // vista regional solo las oficinas de los Estados que no tienen portal, para
@@ -7250,7 +7273,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       // Antes esto decia «sin portal verificado» y nada mas, y el lector se
       // llevaba la idea de que el Estado no publicaba. Publica: tiene oficina
       // de estadistica. Lo que no tiene es interfaz para programas.
-      caja.innerHTML = (tarjetasOficina || `<div class="ficha-pais"><h4>Sin fuente verificada</h4>
+      caja.innerHTML = tarjetasSectoriales + (tarjetasOficina || `<div class="ficha-pais"><h4>Sin fuente verificada</h4>
         <div class="org">${esc(paisFiltro ? paisNombre : (zona||'El ámbito'))}</div>
         <div class="muestra">La Oficina no verificó portal ni oficina de estadística en este
           ámbito.</div></div>`)
@@ -7263,7 +7286,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
           regional.</div></div>`;
       return;
     }
-    caja.innerHTML = tarjetasOficina + lista.map(f=>{
+    caja.innerHTML = tarjetasSectoriales + tarjetasOficina + lista.map(f=>{
       const primera=f.materias.find(m=>m.ejemplos.length);
       return `<div class="ficha-pais"><h4>${esc(f.pais)}</h4>
         <div class="org">${esc(f.organismo)} · ${esc(f.tipo)} · <a href="${esc(f.portal)}" target="_blank" rel="noopener">${esc(f.portal.replace(/^https?:\/\//,''))}</a></div>

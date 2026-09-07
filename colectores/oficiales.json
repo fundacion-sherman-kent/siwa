@@ -123,6 +123,27 @@
    "consulta": "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Maestros/Divisas",
    "clave": false,
    "verificado": "2026-08-30"
+  },
+  {
+   "iso": "BRA",
+   "organismo": "Fórum Brasileiro de Segurança Pública",
+   "caracter": "sociedad civil",
+   "descripcion": "Anuário Brasileiro de Segurança Pública, 20.ª edición: 134 tablas con las muertes violentas intencionales, la serie histórica y el resto de las estadísticas criminales por unidad federativa. Es la referencia de hecho para la seguridad en el Brasil, y NO es un organismo del Estado: es una asociación civil.",
+   "consulta": "https://forumseguranca.org.br/publicacoes/anuario-brasileiro-de-seguranca-publica/",
+   "archivo": "https://forumseguranca.org.br/wp-content/uploads/2026/07/anuario-2026.xlsx",
+   "clave": false,
+   "verificado": "2026-09-07",
+   "prueba": "Se descargó: 1,4 MB, 134 hojas, la primera es «Mortes violentas intencionais»."
+  },
+  {
+   "iso": "BRA",
+   "organismo": "Ministerio de Justicia y Seguridad Pública — Datos Nacionales de Seguridad Pública",
+   "caracter": "oficial",
+   "descripcion": "Estadísticas oficiales de seguridad pública del Estado brasileño. La página responde, pero arma su contenido en el navegador: el dato no se toma sin un navegador de verdad.",
+   "consulta": "https://www.gov.br/mj/pt-br/assuntos/sua-seguranca/seguranca-publica/estatistica",
+   "clave": false,
+   "verificado": "2026-09-07",
+   "prueba": "Responde 200; el contenido se arma en el navegador."
   }
  ],
  "_bloqueados": {
@@ -159,6 +180,11 @@
     "iso": "ECU",
     "portal": "https://www.datosabiertos.gob.ec",
     "detalle": "HTTP 403 del servidor."
+   },
+   {
+    "iso": "BRA",
+    "portal": "https://portaldatransparencia.gov.br/download-de-dados",
+    "detalle": "El Portal de la Transparencia LISTA decenas de conjuntos abiertos —empresas inhabilitadas, funcionarios expulsados, acuerdos de lenidad— y su página se lee sin problema, pero LAS DESCARGAS devuelven 403 a quien no es un navegador. Publica para personas y cierra a los programas. Su interfaz de consulta, además, exige credencial (401). Verificado el 7 de septiembre de 2026."
    }
   ],
   "plataforma_no_identificada": [
@@ -171,6 +197,13 @@
     "iso": "JAM",
     "portal": "https://data.gov.jm",
     "detalle": "El servidor cierra la conexión sin responder."
+   }
+  ],
+  "requiere_cuenta_nominal": [
+   {
+    "iso": "BRA",
+    "portal": "https://centralpaineis.cgu.gov.br/visualizar/dadosabertos",
+    "detalle": "La Central de Paneles de la Contraloría General de la Unión redirige a «/signin»: exige cuenta. Es el mismo muro que el portal federal de datos abiertos, que pide cuenta gov.br —inalcanzable para un extranjero sin CPF—. Verificado el 7 de septiembre de 2026."
    }
   ]
  },
