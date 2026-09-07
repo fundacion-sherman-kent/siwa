@@ -1260,3 +1260,56 @@ Queda declarado en la ficha con esas palabras, y se gestiona por vía oficial.
 sobre cuán extendido y estructurado está cada mercado, **no un volumen**. Dos
 países con el mismo puntaje no mueven la misma cantidad. Tampoco distingue
 producción de tránsito ni de consumo: mide el mercado, no el eslabón.
+
+---
+
+# Buscar por delito, no por rótulo — 7 de septiembre de 2026
+
+La Dirección escribió «narcotráfico» en el buscador y no salió nada. **Dos fallas
+distintas, y las dos de fondo.**
+
+## 1 · La búsqueda exigía las tildes
+
+Escribir «cocaina» o «narcotrafico» sin tilde no encontraba nada. **En un sitio en
+castellano eso es una falla de base: nadie pone las tildes al buscar.** Ahora se
+comparan las dos puntas sin ellas.
+
+## 2 · Se podía buscar por rótulo, no por delito
+
+Y es peor que un problema de palabras. Los **veinte mercados y actores** del
+Índice Global de Crimen Organizado estaban enterrados dentro de una sola capa:
+**no se los podía buscar, ni cruzar, ni poner en el mapa**, aunque el registro
+tuviera el dato para los 33 Estados desde hacía semanas.
+
+Ahora cada uno es una **materia propia**, con su capa de mapa y su lugar en el
+cruce de temas. El registro pasó de **75 a 91 materias**, y se volvió consultable
+por tipo de delito: extorsión, lavado, contrabando, tráfico de migrantes, minería
+ilegal, tala ilegal, tráfico de fauna, falsificación, ciberdelito, trata,
+mafias, redes criminales, actores incrustados en el Estado.
+
+Se arman **del catálogo que publica la fuente**: si el índice agrega un mercado,
+aparece solo.
+
+## 3 · Un mapa de palabras por actividad
+
+Nadie escribe «Control de la corrupción»: escribe **coima**, **soborno** o
+**cohecho**. Nadie escribe «Homicidios intencionales»: escribe **asesinato** o
+**muerte violenta**. Se agregaron las palabras con que la gente pregunta a
+cincuenta materias, además de las veinte nuevas.
+
+| Se escribe | Encuentra |
+|---|---|
+| narcotráfico · droga · coca | los cuatro mercados de drogas |
+| extorsión · vacuna · cobro de piso | Extorsión y cobro de protección |
+| lavado · lavado de activos · fraude | Delitos financieros |
+| minería ilegal · oro | Delitos contra recursos no renovables |
+| coima · soborno · cohecho | las cinco medidas de corrupción |
+| asesinato · muerte violenta | Homicidios intencionales |
+| villas · favelas | Población en asentamientos precarios |
+| refugiados · exilio · asilo | Desplazamiento forzado |
+| ciberdelito · hackeo | Delitos informáticos |
+| maras · carteles · pandillas | Grupos de tipo mafioso |
+
+**Nada de esto suma una fuente.** Hace encontrable lo que el registro ya tenía y
+nadie podía hallar. Un dato que no se puede buscar es, para el lector, un dato
+que no existe.

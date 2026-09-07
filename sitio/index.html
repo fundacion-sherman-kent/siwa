@@ -2753,6 +2753,95 @@
     {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false, sinCapa:'no_comparable'},
     {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales},
   ];
+
+  // LOS VEINTE MERCADOS Y ACTORES del índice de crimen organizado, como materias
+  // propias. Estaban enterrados dentro de una sola capa y no se los podía buscar
+  // ni cruzar: quien escribía «extorsión», «lavado» o «minería ilegal» no
+  // encontraba nada, aunque el registro tuviera el dato para los 33 Estados.
+  //
+  // El rótulo sale del catálogo que publica la fuente —traducido en el colector—
+  // y acá sólo se agregan LAS PALABRAS CON QUE LA GENTE PREGUNTA, que casi nunca
+  // son las del rótulo oficial.
+  const CRIMEN_MATERIAS = {
+    '1.1.1':  ['trata_personas',      'trata personas explotacion sexual esclavitud servidumbre'],
+    '1.1.2':  ['trafico_migrantes',   'trafico migrantes coyotes polleros contrabando personas frontera'],
+    '1.1.3':  ['extorsion',           'extorsion protección vacuna cobro piso secuestro rescate mafia'],
+    '1.1.4':  ['trafico_armas',       'trafico armas fusiles municiones armamento ilegal'],
+    '1.1.5':  ['falsificacion',       'falsificacion piratería mercaderia falsa contrabando marcas'],
+    '1.1.6':  ['contrabando',         'contrabando bienes gravados cigarrillos combustible alcohol evasion'],
+    '1.1.7':  ['delitos_flora',       'flora tala ilegal madera deforestacion bosque plantas'],
+    '1.1.8':  ['delitos_fauna',       'fauna animales especies caza furtiva trafico vida silvestre'],
+    '1.1.9':  ['recursos_no_renovables','mineria ilegal oro petroleo recursos minerales extraccion'],
+    '1.1.10': ['droga_heroina',       'narcotrafico droga drogas heroina opio opiaceos'],
+    '1.1.11': ['droga_cocaina',       'narcotrafico droga drogas coca cocaina'],
+    '1.1.12': ['droga_cannabis',      'narcotrafico droga drogas cannabis marihuana'],
+    '1.1.13': ['droga_sinteticas',    'narcotrafico droga drogas sinteticas metanfetamina fentanilo'],
+    '1.1.14': ['delitos_informaticos','ciberdelito hackeo ciberataque informatico digital'],
+    '1.1.15': ['delitos_financieros', 'lavado dinero activos financiero fraude estafa evasion'],
+    '1.2.1':  ['grupos_mafiosos',     'mafia carteles pandillas maras bandas grupo criminal'],
+    '1.2.2':  ['redes_criminales',    'redes criminales organizacion crimen organizado'],
+    '1.2.3':  ['actores_del_estado',  'corrupcion policia militares funcionarios complicidad estado'],
+    '1.2.4':  ['actores_extranjeros', 'extranjeros transnacional foraneos'],
+    '1.2.5':  ['actores_privados',    'empresas sector privado empresarios'],
+  };
+  const CODIGO_DE_MATERIA = Object.fromEntries(
+    Object.entries(CRIMEN_MATERIAS).map(([c, [clave]]) => [clave, c]));
+
+  // Y las palabras por delito o actividad para las materias QUE YA EXISTIAN.
+  // Nadie escribe «Control de la corrupcion»: escribe «coima» o «soborno».
+  const PALABRAS = {
+    homicidios: 'asesinato homicidio muerte violenta crimen violencia letal',
+    conflicto_no_estatal: 'conflicto armado guerra grupos armados enfrentamiento',
+    terrorismo_muertes: 'terrorismo atentado bomba',
+    terrorismo_atentados: 'terrorismo atentado bomba',
+    victimas_robo: 'robo hurto arrebato inseguridad delito comun',
+    denuncia_robo: 'robo denuncia policia cifra negra subregistro',
+    denuncia_agresion: 'agresion violencia denuncia policia',
+    trata_victimas: 'trata personas explotacion sexual esclavitud',
+    trata_sexual: 'trata explotacion sexual prostitucion forzada',
+    trata_trabajo: 'trata trabajo forzoso esclavitud laboral',
+    sin_condena: 'presos carcel prision preventiva detenidos justicia',
+    desplazamiento: 'refugiados desplazados migracion forzada exilio asilo',
+    migrantes: 'migracion migrantes extranjeros inmigracion',
+    migrantes_pct: 'migracion migrantes extranjeros inmigracion',
+    migracion_neta: 'migracion emigracion exodo salida de gente',
+    remesas: 'remesas envio dinero migrantes',
+    corrupcion: 'corrupcion coima soborno cohecho peculado transparencia',
+    corrupcion_politica: 'corrupcion politica coima soborno cohecho',
+    soborno_personas: 'soborno coima cohecho mordida',
+    soborno_empresas: 'soborno coima cohecho empresas negocios',
+    regalo_contrato: 'soborno coima licitacion contratacion compras publicas',
+    persecucion_abuso: 'impunidad justicia abuso funcion publica sancion',
+    estado_derecho: 'justicia impunidad tribunales ley',
+    acceso_informacion: 'transparencia acceso informacion publica datos',
+    estabilidad: 'estabilidad golpe crisis politica violencia politica',
+    libertad_expresion: 'prensa periodistas censura libertad expresion',
+    censura_medios: 'censura prensa medios periodistas',
+    hostigamiento_periodistas: 'periodistas amenazas prensa agresion',
+    autocensura: 'autocensura prensa periodistas miedo',
+    polarizacion: 'polarizacion grieta division politica',
+    gini: 'desigualdad inequidad brecha ricos pobres',
+    pobreza: 'pobreza indigencia carencia',
+    empleo_informal: 'informalidad trabajo negro empleo informal',
+    trabajo_infantil: 'trabajo infantil niños explotacion laboral',
+    desempleo_joven: 'desempleo desocupacion jovenes trabajo',
+    asentamientos: 'villas favelas asentamientos precarios hacinamiento',
+    agua_potable: 'agua potable saneamiento servicios',
+    internet: 'internet conectividad brecha digital',
+    banda_ancha: 'internet banda ancha conectividad',
+    servidores_seguros: 'ciberseguridad cifrado internet seguridad informatica',
+    minerales: 'mineria minerales metales extraccion recursos',
+    rentas_naturales: 'recursos naturales petroleo mineria rentas',
+    bosque: 'bosque deforestacion selva amazonia ambiente',
+    gasto_militar: 'defensa militar fuerzas armadas presupuesto',
+    gasto_militar_dolares: 'defensa militar fuerzas armadas presupuesto',
+    gasto_militar_publico: 'defensa militar fuerzas armadas presupuesto',
+    personal_militar: 'militares soldados fuerzas armadas efectivos',
+    militares_fuerza_laboral: 'militares soldados fuerzas armadas efectivos',
+    armas_importadas: 'armas armamento compra importacion defensa',
+    armas_exportadas: 'armas armamento venta exportacion defensa',
+    oficiales: 'transparencia datos abiertos gobierno fuentes oficiales',
+  };
   const ORDEN_EJES = ['Situación','Seguridad','Defensa','Gobernanza','Desarrollo','Fuentes'];
 
   const MATERIAS_COMPUESTAS = () => [
@@ -2764,10 +2853,27 @@
       disponible:()=>Object.keys(compuesto().ejes[e]||{}).length>0})),
   ];
 
+  // NADIE PONE LAS TILDES AL BUSCAR. Se comparan las dos puntas sin ellas, de
+  // modo que «cocaina» encuentre «cocaína» y «narcotrafico», «narcotráfico».
+  const sinTilde = t => String(t||'').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+
+  // Las materias del indice de crimen organizado se arman DEL CATALOGO que
+  // publica la fuente: si el indice agrega un mercado, aparece solo.
+  function MATERIAS_CRIMEN(){
+    const cat = almacen.crimen?.catalogo || [];
+    return cat.filter(c => CRIMEN_MATERIAS[c.codigo]).map(c => ({
+      clave: CRIMEN_MATERIAS[c.codigo][0], eje: 'Seguridad', rotulo: c.rotulo,
+      busca: CRIMEN_MATERIAS[c.codigo][1],
+      disponible: () => !!almacen.crimen,
+    }));
+  }
+
   function MATERIAS(){
     const deFuentes = fuentesInd().flatMap(f=>(f.indicadores||[]).map(i=>({
-      clave:i.clave, eje:i.eje, rotulo:i.rotulo, disponible:()=>true})));
-    return MATERIAS_COMPUESTAS().concat(deFuentes, ESTATICAS).sort((a,b)=>
+      clave:i.clave, eje:i.eje, rotulo:i.rotulo,
+      busca:PALABRAS[i.clave]||'', disponible:()=>true})));
+    return MATERIAS_COMPUESTAS().concat(deFuentes, ESTATICAS, MATERIAS_CRIMEN()).sort((a,b)=>
       ORDEN_EJES.indexOf(a.eje) - ORDEN_EJES.indexOf(b.eje));
   }
 
@@ -3144,6 +3250,36 @@
     c['situacion'] = capaCompuesta('situacion', null);
     EJES_COMPUESTOS.forEach(e => c['situacion_' + e.toLowerCase()] = capaCompuesta('situacion_' + e.toLowerCase(), e));
     Object.assign(c, ESTATICAS_CAPAS);
+    // Una capa por cada mercado o actor del indice de crimen organizado. Se arman
+    // del catalogo, de modo que un mercado nuevo aparece sin tocar la pagina.
+    (almacen.crimen?.catalogo || []).forEach(m => {
+      const par = CRIMEN_MATERIAS[m.codigo];
+      if(!par) return;
+      c[par[0]] = {
+        materia: par[0], unidad: 'puntaje de 1 a 10', leyenda: [3.5, 5.5, 7.5],
+        color(v){ return v===undefined?MAG[0] : v<3.5?MAG[0] : v<5.5?MAG[1] : v<7.5?MAG[2] : MAG[3]; },
+        subeEsPeor: true,
+        conteo(){
+          const m2 = {};
+          (almacen.crimen?.registros||[]).forEach(r=>{
+            if(r.estado==='evaluado' && r.medidas && r.medidas[m.codigo]!==undefined)
+              m2[r.iso] = r.medidas[m.codigo];
+          });
+          return m2;
+        },
+        puntos(){ return []; },
+        detalle(iso){
+          const r = (almacen.crimen?.registros||[]).find(x=>x.iso===iso);
+          const v = r && r.medidas && r.medidas[m.codigo];
+          return v===undefined ? null
+            : `${m.rotulo}: ${cifra(v)} sobre 10 · evaluación de especialistas, no volumen`;
+        },
+        cautela: 'Evaluación de un panel de especialistas sobre cuán extendido y '
+               + 'estructurado está esto en el Estado, de 1 a 10. NO es un recuento de '
+               + 'hechos, ni un volumen, ni una cifra de la justicia.',
+        rotuloPunto: 'Sin capa de puntos: es una evaluación por Estado'
+      };
+    });
     fuentesInd().forEach(f=>(f.indicadores||[]).forEach(i=>{
       c[i.clave] = capaBanco(i.clave, cortesDe(i), esEscalaEstimacion(i));
     }));
@@ -5721,7 +5857,8 @@
         html += `<div class="eje-titulo">${esc(eje)}</div>`;
         html += dele.map(m => {
           const clave = claveDeCapa(m.clave) || m.clave;
-          return `<label data-clave="${clave}" data-busca="${esc((m.eje+' '+m.rotulo).toLowerCase())}">
+          const extra = m.busca || PALABRAS[m.clave] || '';
+          return `<label data-clave="${clave}" data-busca="${esc(sinTilde(m.eje+' '+m.rotulo+' '+extra))}">
             <input type="checkbox" value="${clave}"><span>${esc(m.rotulo)}</span></label>`;
         }).join('');
       });
@@ -5738,7 +5875,7 @@
       });
 
       if(buscador) buscador.addEventListener('input', () => {
-        const q = buscador.value.trim().toLowerCase();
+        const q = sinTilde(buscador.value.trim());
         let visibles = 0;
         caja.querySelectorAll('label').forEach(l => {
           const entra = !q || (l.dataset.busca || '').includes(q);
