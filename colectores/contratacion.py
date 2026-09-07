@@ -146,7 +146,7 @@ def recolectar():
         "poco aparece con poca cobertura, y uno que compra poco y publica todo aparece "
         "con mucha. No es una medida de volumen de compra ni de limpieza.",
         "No se distingue el publicador nacional del subnacional, porque el registro no "
-        "Lo declara. México tiene dieciocho publicadores y la mayoría son de un estado "
+        "lo declara. México tiene dieciocho publicadores y la mayoría son de un estado "
         "O de un organismo: leer ese número como cobertura nacional sería falso. "
         "Clasificarlos por el título sería inventar una distinción que la fuente no trae.",
         f"NO FIGURAR ACA NO PRUEBA QUE EL ESTADO NO PUBLIQUE. Prueba que no publica EN EL "

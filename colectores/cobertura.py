@@ -379,7 +379,7 @@ def _corroboracion(notas: list) -> dict:
     else:
         estado, nota = "origen_unico", (
             "Todos los medios son del mismo país y del mismo idioma: cuentan como "
-            "Un solo origen, por más portales que sean."
+            "un solo origen, por más portales que sean."
         )
     if centros and estado != "origen_unico":
         nota += f" Con respaldo analítico de {len(centros)} centro(s) de estudio."

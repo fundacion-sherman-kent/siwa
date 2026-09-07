@@ -91,7 +91,7 @@ INDICADORES = [
      "cautela": "NO ES UNA ENCUESTA. Es la evaluación de un especialista sobre cuanto "
                 "Respaldo social tiene el régimen democratico en ese país. Se acerca a la "
                 "percepción democrática que este registro declaraba como vacio, pero no "
-                "La reemplaza: Latinobarometro y el Barometro de las Américas preguntan a "
+                "la reemplaza: Latinobarometro y el Barometro de las Américas preguntan a "
                 "la gente, esto no."},
     {"clave": "persecucion_abuso", "rotulo_origen": "Q3.3 | Prosecution of office abuse",
      "rotulo": "Persecución del abuso de función pública", "eje": "Gobernanza",
@@ -271,7 +271,7 @@ def recolectar():
             "estados_cubiertos": len(registros),
             "método": ("Se descarga la planilla oficial y se lee con biblioteca estándar. "
                        "Cada indicador se ata a su rótulo en la fila de encabezados, no a "
-                       "La letra de columna: si el proyecto reordena la planilla el "
+                       "la letra de columna: si el proyecto reordena la planilla el "
                        "colector lo declara en lugar de leer otra cosa."),
         },
     )

@@ -288,7 +288,7 @@ def recolectar():
         "principal: la búsqueda alcanza hasta donde llega el vocabulario elegido.",
         "La consulta va en la lengua del Estado —castellano, portugues, inglés, francés "
         "O neerlandés según el caso—, porque ningún Estado rotula en la nuestra. Queda "
-        "Un vacio conocido: Haití publica en francés pero buena parte de su vida "
+        "un vacio conocido: Haití publica en francés pero buena parte de su vida "
         "administrativa transcurre en criollo haitiano, y surinam tiene el neerlandés "
         "como lengua oficial con el sranan tongo de uso corriente. En esos dos casos la "
         "consulta alcanza la lengua oficial y no necesariamente la de la fuente.",

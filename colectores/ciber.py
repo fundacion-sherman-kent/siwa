@@ -153,7 +153,7 @@ def recolectar():
     vacios = [
         "La muestra de OONI la hacen voluntarios y no es representativa. Venezuela "
         "tuvo 2.392.574 mediciones en esta ventana; un Estado del Caribe puede tener "
-        "Unas pocas. Un Estado con pocas sondas muestra pocas anomalias, y eso no "
+        "unas pocas. Un Estado con pocas sondas muestra pocas anomalias, y eso no "
         "significa que tenga menos censura: significa que hay menos gente midiendo. "
         "Por eso se publica la tasa y no el recuento, y aún así no se ordenan Estados "
         "con esta cifra.",
@@ -162,13 +162,13 @@ def recolectar():
         "propio método. El bloqueo confirmado se cuenta aparte y es una cifra mucho más "
         "chica: es la única que sostiene la palabra «bloqueo».",
         "Un corte de conectividad no declara su causa. Un cable cortado, una tormenta, "
-        "Un apagon electrico y un apagon deliberado producen la misma curva de tráfico. "
+        "un apagon electrico y un apagon deliberado producen la misma curva de tráfico. "
         "La curva es el hecho; la intención es un juicio, y este registro no emite "
         "juicios.",
         "Contar equipos de respuesta premia al Estado grande. Brasil tiene muchos "
         "porque es grande, no porque este mejor protegido. Es el mismo error por el que "
         "costa Rica, sin ejercito desde 1949, aparecia entre las peores en Defensa. Es "
-        "Un recuento de organismos, no una medida de capacidad.",
+        "un recuento de organismos, no una medida de capacidad.",
         f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver el "
         "Presente, no para comparar contra el mes pasado. Una serie historica exigiria "
         "guardar cada ventana, y este colector no lo hace.",

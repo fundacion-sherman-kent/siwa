@@ -319,10 +319,10 @@ def recolectar():
         "No se publica ni un solo número de la fuente: ni eventos, ni recuentos, ni "
         "fechas, ni actores. Sale una clasificación de tres Estados, que nadie puede "
         "revertir para reconstruir el conjunto original. El recuento entra al calculo y "
-        "Se descarta antes de escribir el archivo.",
+        "se descarta antes de escribir el archivo.",
         "Esto no mide violencia: mide transparencia. Que un Estado figure en «hay "
         "registro y no publica» dice que un observatorio independiente anoto actividad y "
-        "El Estado no publico nada de si mismo en su propio catálogo. No dice cuánta "
+        "el Estado no publico nada de si mismo en su propio catálogo. No dice cuánta "
         "actividad hubo, ni que sea grave, ni que el Estado la oculte a propósito.",
         "«sin registro en la ventana» no es «no pasó nada». Es que la fuente no anoto "
         "nada, y la cobertura de cualquier observatorio es despareja: los Estados chicos "

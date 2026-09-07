@@ -271,7 +271,7 @@ SERIES_DETENIDAS = {
 RESTRICCIONES = {
     "solo_registro_publico":
         "Gratuita para este registro, que es público y no se cobra. La licencia de "
-        "La fuente es de atribución no comercial: este dato no puede viajar a un "
+        "la fuente es de atribución no comercial: este dato no puede viajar a un "
         "producto que la Fundación venda sin tomar antes una licencia comercial.",
 }
 

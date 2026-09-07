@@ -1,177 +1,386 @@
 {
-  "_nota": "Portales oficiales de datos de los Estados del padron con interfaz de consulta estandar. Cada uno fue probado y respondio el 30 de agosto de 2026. Archivo editable por el equipo analitico; el codigo no lo modifica.",
-  "portales": [
-    {
-      "iso": "ARG",
-      "organismo": "Portal Nacional de Datos Abiertos",
-      "tipo": "CKAN",
-      "base": "https://datos.gob.ar",
-      "verificado": "2026-08-30"
-    },
-    {
-      "iso": "CHL",
-      "organismo": "Portal de Datos Abiertos del Estado",
-      "tipo": "CKAN",
-      "base": "https://datos.gob.cl",
-      "verificado": "2026-08-30"
-    },
-    {
-      "iso": "COL",
-      "organismo": "Datos Abiertos Colombia",
-      "tipo": "Socrata",
-      "base": "https://www.datos.gov.co",
-      "verificado": "2026-08-30"
-    },
-    {
-      "iso": "DOM",
-      "organismo": "Datos Abiertos Republica Dominicana",
-      "tipo": "CKAN",
-      "base": "https://datos.gob.do",
-      "verificado": "2026-08-30"
-    },
-    {
-      "iso": "MEX",
-      "organismo": "datos.gob.mx",
-      "tipo": "CKAN",
-      "base": "https://datos.gob.mx",
-      "verificado": "2026-08-30"
-    },
-    {
-      "iso": "PAN",
-      "organismo": "Autoridad Nacional de Transparencia",
-      "tipo": "CKAN",
-      "base": "https://www.datosabiertos.gob.pa",
-      "verificado": "2026-08-30"
-    },
-    {
-      "iso": "PER",
-      "organismo": "Plataforma Nacional de Datos Abiertos",
-      "tipo": "CKAN-lista",
-      "base": "https://www.datosabiertos.gob.pe",
-      "verificado": "2026-09-07",
-      "_nota": "Publica catalogo (4.684 conjuntos) pero NO tiene buscador: package_search da 404. Se lee la lista y se filtra por nombre."
-    },
-    {
-      "iso": "PRY",
-      "organismo": "Portal Nacional de Datos Abiertos",
-      "tipo": "CKAN-lista",
-      "base": "https://www.datos.gov.py",
-      "verificado": "2026-09-07",
-      "_nota": "Publica catalogo (434 conjuntos) pero package_search no devuelve JSON. Se lee la lista y se filtra por nombre."
-    },
-    {
-      "iso": "URY",
-      "organismo": "Catalogo Nacional de Datos Abiertos",
-      "tipo": "CKAN",
-      "base": "https://catalogodatos.gub.uy",
-      "verificado": "2026-08-30"
-    }
-  ],
-  "materias": [
-    {
-      "materia": "Violencia organizada",
-      "eje": "Seguridad",
-      "consulta": "homicidio"
-    },
-    {
-      "materia": "Delito registrado",
-      "eje": "Seguridad",
-      "consulta": "delito"
-    },
-    {
-      "materia": "Contratación pública",
-      "eje": "Gobernanza",
-      "consulta": "contrataciones"
-    },
-    {
-      "materia": "Integridad",
-      "eje": "Gobernanza",
-      "consulta": "corrupcion"
-    },
-    {
-      "materia": "Presupuesto",
-      "eje": "Gobernanza",
-      "consulta": "presupuesto"
-    },
-    {
-      "materia": "Migración y desplazamiento",
-      "eje": "Inteligencia estratégica",
-      "consulta": "migracion"
-    }
-  ],
-  "sectoriales_verificados": [
-    {
-      "iso": "BRA",
-      "organismo": "IBGE",
-      "descripcion": "Agregados estadisticos y división territorial",
-      "consulta": "https://servicodados.ibge.gov.br/api/v3/agregados",
-      "clave": false,
-      "verificado": "2026-08-30"
-    },
-    {
-      "iso": "COL",
-      "organismo": "Colombia Compra Eficiente",
-      "descripcion": "SECOP II, contratos electronicos",
-      "consulta": "https://www.datos.gov.co/resource/jbjy-vk9h.json",
-      "clave": false,
-      "verificado": "2026-08-30"
-    },
-    {
-      "iso": "ARG",
-      "organismo": "Banco Central de la Republica Argentina",
-      "descripcion": "Estadisticas cambiarias",
-      "consulta": "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Maestros/Divisas",
-      "clave": false,
-      "verificado": "2026-08-30"
-    }
-  ],
-  "_bloqueados": {
-    "_nota": "Estados con portal identificado que no admite consulta automatizada. NO se esquiva ninguna protección: se declara y se gestiona la via oficial (doctrina/limites.md).",
-    "requiere_clave_gratuita": [
-      {
-        "iso": "BRA",
-        "portal": "https://dados.gov.br",
-        "detalle": "HTTP 401. Clave gratuita con registro."
-      },
-      {
-        "iso": "BRA",
-        "portal": "https://api.portaldatransparencia.gov.br",
-        "detalle": "HTTP 401. Chave de API no informada."
-      }
-    ],
-    "proteccion_contra_robots": [
-      {
-        "iso": "GTM",
-        "portal": "https://www.datos.gob.gt",
-        "detalle": "Cloudflare interpone verificación."
-      },
-      {
-        "iso": "CRI",
-        "portal": "https://api.hacienda.go.cr",
-        "detalle": "HTTP 403 con verificación interpuesta."
-      },
-      {
-        "iso": "BOL",
-        "portal": "https://datos.gob.bo",
-        "detalle": "HTTP 403 del servidor."
-      },
-      {
-        "iso": "ECU",
-        "portal": "https://www.datosabiertos.gob.ec",
-        "detalle": "HTTP 403 del servidor."
-      }
-    ],
-    "plataforma_no_identificada": [
-      {
-        "iso": "PER",
-        "portal": "https://www.datosabiertos.gob.pe",
-        "detalle": "La raiz responde 200; la ruta CKAN devuelve 404."
-      },
-      {
-        "iso": "JAM",
-        "portal": "https://data.gov.jm",
-        "detalle": "El servidor cierra la conexión sin responder."
-      }
-    ]
+ "_nota": "Portales oficiales de datos de los Estados del padron con interfaz de consulta estandar. Cada uno fue probado y respondio el 30 de agosto de 2026. Archivo editable por el equipo analitico; el codigo no lo modifica.",
+ "portales": [
+  {
+   "iso": "ARG",
+   "organismo": "Portal Nacional de Datos Abiertos",
+   "tipo": "CKAN",
+   "base": "https://datos.gob.ar",
+   "verificado": "2026-08-30"
+  },
+  {
+   "iso": "CHL",
+   "organismo": "Portal de Datos Abiertos del Estado",
+   "tipo": "CKAN",
+   "base": "https://datos.gob.cl",
+   "verificado": "2026-08-30"
+  },
+  {
+   "iso": "COL",
+   "organismo": "Datos Abiertos Colombia",
+   "tipo": "Socrata",
+   "base": "https://www.datos.gov.co",
+   "verificado": "2026-08-30"
+  },
+  {
+   "iso": "DOM",
+   "organismo": "Datos Abiertos Republica Dominicana",
+   "tipo": "CKAN",
+   "base": "https://datos.gob.do",
+   "verificado": "2026-08-30"
+  },
+  {
+   "iso": "MEX",
+   "organismo": "datos.gob.mx",
+   "tipo": "CKAN",
+   "base": "https://datos.gob.mx",
+   "verificado": "2026-08-30"
+  },
+  {
+   "iso": "PAN",
+   "organismo": "Autoridad Nacional de Transparencia",
+   "tipo": "CKAN",
+   "base": "https://www.datosabiertos.gob.pa",
+   "verificado": "2026-08-30"
+  },
+  {
+   "iso": "PER",
+   "organismo": "Plataforma Nacional de Datos Abiertos",
+   "tipo": "CKAN-lista",
+   "base": "https://www.datosabiertos.gob.pe",
+   "verificado": "2026-09-07",
+   "_nota": "Publica catalogo (4.684 conjuntos) pero NO tiene buscador: package_search da 404. Se lee la lista y se filtra por nombre."
+  },
+  {
+   "iso": "PRY",
+   "organismo": "Portal Nacional de Datos Abiertos",
+   "tipo": "CKAN-lista",
+   "base": "https://www.datos.gov.py",
+   "verificado": "2026-09-07",
+   "_nota": "Publica catalogo (434 conjuntos) pero package_search no devuelve JSON. Se lee la lista y se filtra por nombre."
+  },
+  {
+   "iso": "URY",
+   "organismo": "Catalogo Nacional de Datos Abiertos",
+   "tipo": "CKAN",
+   "base": "https://catalogodatos.gub.uy",
+   "verificado": "2026-08-30"
   }
+ ],
+ "materias": [
+  {
+   "materia": "Violencia organizada",
+   "eje": "Seguridad",
+   "consulta": "homicidio"
+  },
+  {
+   "materia": "Delito registrado",
+   "eje": "Seguridad",
+   "consulta": "delito"
+  },
+  {
+   "materia": "Contratación pública",
+   "eje": "Gobernanza",
+   "consulta": "contrataciones"
+  },
+  {
+   "materia": "Integridad",
+   "eje": "Gobernanza",
+   "consulta": "corrupcion"
+  },
+  {
+   "materia": "Presupuesto",
+   "eje": "Gobernanza",
+   "consulta": "presupuesto"
+  },
+  {
+   "materia": "Migración y desplazamiento",
+   "eje": "Inteligencia estratégica",
+   "consulta": "migracion"
+  }
+ ],
+ "sectoriales_verificados": [
+  {
+   "iso": "BRA",
+   "organismo": "IBGE",
+   "descripcion": "Agregados estadisticos y división territorial",
+   "consulta": "https://servicodados.ibge.gov.br/api/v3/agregados",
+   "clave": false,
+   "verificado": "2026-08-30"
+  },
+  {
+   "iso": "COL",
+   "organismo": "Colombia Compra Eficiente",
+   "descripcion": "SECOP II, contratos electronicos",
+   "consulta": "https://www.datos.gov.co/resource/jbjy-vk9h.json",
+   "clave": false,
+   "verificado": "2026-08-30"
+  },
+  {
+   "iso": "ARG",
+   "organismo": "Banco Central de la Republica Argentina",
+   "descripcion": "Estadisticas cambiarias",
+   "consulta": "https://api.bcra.gob.ar/estadisticascambiarias/v1.0/Maestros/Divisas",
+   "clave": false,
+   "verificado": "2026-08-30"
+  }
+ ],
+ "_bloqueados": {
+  "_nota": "Estados con portal identificado que no admite consulta automatizada. NO se esquiva ninguna protección: se declara y se gestiona la via oficial (doctrina/limites.md).",
+  "requiere_clave_gratuita": [
+   {
+    "iso": "BRA",
+    "portal": "https://dados.gov.br",
+    "detalle": "HTTP 401. Clave gratuita con registro."
+   },
+   {
+    "iso": "BRA",
+    "portal": "https://api.portaldatransparencia.gov.br",
+    "detalle": "HTTP 401. Chave de API no informada."
+   }
+  ],
+  "proteccion_contra_robots": [
+   {
+    "iso": "GTM",
+    "portal": "https://www.datos.gob.gt",
+    "detalle": "Cloudflare interpone verificación."
+   },
+   {
+    "iso": "CRI",
+    "portal": "https://api.hacienda.go.cr",
+    "detalle": "HTTP 403 con verificación interpuesta."
+   },
+   {
+    "iso": "BOL",
+    "portal": "https://datos.gob.bo",
+    "detalle": "HTTP 403 del servidor."
+   },
+   {
+    "iso": "ECU",
+    "portal": "https://www.datosabiertos.gob.ec",
+    "detalle": "HTTP 403 del servidor."
+   }
+  ],
+  "plataforma_no_identificada": [
+   {
+    "iso": "PER",
+    "portal": "https://www.datosabiertos.gob.pe",
+    "detalle": "La raiz responde 200; la ruta CKAN devuelve 404."
+   },
+   {
+    "iso": "JAM",
+    "portal": "https://data.gov.jm",
+    "detalle": "El servidor cierra la conexión sin responder."
+   }
+  ]
+ },
+ "oficinas_estadistica": {
+  "_nota": "Oficina nacional de estadistica de cada uno de los 33 Estados del padron. NO publica cifras: publica DONDE estan, con la direccion verificada, para los 24 Estados que no tienen catalogo de datos abiertos consultable por maquina y que hasta hoy figuraban en el registro sin ninguna fuente oficial. Cada direccion fue tocada y el nombre de cada organismo sale de lo que el propio sitio declara, no de la memoria de quien escribe. Sondeo del 7 de septiembre de 2026. Archivo editable por el equipo analitico.",
+  "oficinas": [
+   {
+    "iso": "ARG",
+    "sigla": "INDEC",
+    "organismo": "Instituto Nacional de Estadística y Censos",
+    "url": "https://www.indec.gob.ar/"
+   },
+   {
+    "iso": "BOL",
+    "sigla": "INE",
+    "organismo": "Instituto Nacional de Estadística",
+    "url": "https://www.ine.gob.bo/"
+   },
+   {
+    "iso": "BRA",
+    "sigla": "IBGE",
+    "organismo": "Instituto Brasileiro de Geografia e Estatística",
+    "url": "https://www.ibge.gov.br/"
+   },
+   {
+    "iso": "CHL",
+    "sigla": "INE",
+    "organismo": "Instituto Nacional de Estadísticas",
+    "url": "https://www.ine.gob.cl/"
+   },
+   {
+    "iso": "COL",
+    "sigla": "DANE",
+    "organismo": "Departamento Administrativo Nacional de Estadística",
+    "url": "https://www.dane.gov.co/"
+   },
+   {
+    "iso": "CRI",
+    "sigla": "INEC",
+    "organismo": "Instituto Nacional de Estadística y Censos",
+    "url": "https://www.inec.cr/"
+   },
+   {
+    "iso": "CUB",
+    "sigla": "ONEI",
+    "organismo": "Oficina Nacional de Estadística e Información",
+    "url": "https://onei.gob.cu/",
+    "nota": "Sin el prefijo «www». Con él, el servidor devuelve error 500. La diferencia entre un Estado que no publica y un prefijo de más es un carácter, y decide lo que el registro afirma."
+   },
+   {
+    "iso": "DOM",
+    "sigla": "ONE",
+    "organismo": "Oficina Nacional de Estadística",
+    "url": "https://www.one.gob.do/"
+   },
+   {
+    "iso": "ECU",
+    "sigla": "INEC",
+    "organismo": "Instituto Nacional de Estadística y Censos",
+    "url": "https://www.ecuadorencifras.gob.ec/institucional/home/",
+    "nota": "La raíz del dominio sólo redirige; la dirección útil es la de la sección institucional."
+   },
+   {
+    "iso": "SLV",
+    "sigla": "ONEC",
+    "organismo": "Oficina Nacional de Estadística y Censos",
+    "url": "https://onec.bcr.gob.sv/",
+    "nota": "La ONEC reemplazó a la DIGESTYC y vive dentro del Banco Central de Reserva. El dominio propio no existe: buscarlo ahí da la falsa impresión de que El Salvador no publica estadística."
+   },
+   {
+    "iso": "GTM",
+    "sigla": "INE",
+    "organismo": "Instituto Nacional de Estadística",
+    "url": "https://www.ine.gob.gt/"
+   },
+   {
+    "iso": "HTI",
+    "sigla": "IHSI",
+    "organismo": "Institut Haïtien de Statistique et d'Informatique",
+    "url": "https://www.ihsi.ht/"
+   },
+   {
+    "iso": "HND",
+    "sigla": "INE",
+    "organismo": "Instituto Nacional de Estadística",
+    "url": "https://www.ine.gob.hn/"
+   },
+   {
+    "iso": "MEX",
+    "sigla": "INEGI",
+    "organismo": "Instituto Nacional de Estadística y Geografía",
+    "url": "https://www.inegi.org.mx/"
+   },
+   {
+    "iso": "NIC",
+    "sigla": "INIDE",
+    "organismo": "Instituto Nacional de Información de Desarrollo",
+    "url": "https://www.inide.gob.ni/"
+   },
+   {
+    "iso": "PAN",
+    "sigla": "INEC",
+    "organismo": "Instituto Nacional de Estadística y Censo",
+    "url": "https://www.inec.gob.pa/"
+   },
+   {
+    "iso": "PRY",
+    "sigla": "INE",
+    "organismo": "Instituto Nacional de Estadística",
+    "url": "https://www.ine.gov.py/"
+   },
+   {
+    "iso": "PER",
+    "sigla": "INEI",
+    "organismo": "Instituto Nacional de Estadística e Informática",
+    "url": "https://www.inei.gob.pe/"
+   },
+   {
+    "iso": "URY",
+    "sigla": "INE",
+    "organismo": "Instituto Nacional de Estadística",
+    "url": "https://www.ine.gub.uy/"
+   },
+   {
+    "iso": "VEN",
+    "sigla": "INE",
+    "organismo": "Instituto Nacional de Estadística",
+    "url": "https://www.ine.gob.ve/",
+    "nota": "El dominio no resuelve: los resolutores de Google y de Cloudflare devuelven SERVFAIL, que significa que los servidores de nombres del dominio fallan, no que la dirección esté mal escrita."
+   },
+   {
+    "iso": "BLZ",
+    "sigla": "SIB",
+    "organismo": "Statistical Institute of Belize",
+    "url": "https://sib.org.bz/"
+   },
+   {
+    "iso": "GUY",
+    "sigla": "BoS",
+    "organismo": "Bureau of Statistics",
+    "url": "https://statisticsguyana.gov.gy/"
+   },
+   {
+    "iso": "SUR",
+    "sigla": "ABS",
+    "organismo": "Algemeen Bureau voor de Statistiek",
+    "url": "https://statistics-suriname.org/"
+   },
+   {
+    "iso": "ATG",
+    "sigla": "NBS",
+    "organismo": "National Bureau of Statistics",
+    "url": "https://statistics.gov.ag/",
+    "nota": "El sitio nombra dos organismos: la División de Estadística hizo el censo anterior y el Bureau Nacional de Estadística conduce el de 2025. Se toma el segundo, que es el que el propio sitio declara vigente."
+   },
+   {
+    "iso": "BHS",
+    "sigla": "BNSI",
+    "organismo": "Bahamas National Statistical Institute",
+    "url": "https://stats.gov.bs/",
+    "nota": "La oficina de estadística es el BNSI, en dominio propio. El portal general de gobierno —bahamas.gov.bs— no es la oficina de estadística."
+   },
+   {
+    "iso": "BRB",
+    "sigla": "BSS",
+    "organismo": "Barbados Statistical Service",
+    "url": "https://stats.gov.bb/"
+   },
+   {
+    "iso": "DMA",
+    "sigla": "CSO",
+    "organismo": "Central Statistics Office",
+    "url": "https://stats.gov.dm/"
+   },
+   {
+    "iso": "GRD",
+    "sigla": "CSO",
+    "organismo": "Central Statistical Office",
+    "url": "https://stats.gov.gd/"
+   },
+   {
+    "iso": "JAM",
+    "sigla": "STATIN",
+    "organismo": "Statistical Institute of Jamaica",
+    "url": "https://statinja.gov.jm/"
+   },
+   {
+    "iso": "KNA",
+    "sigla": "DoS",
+    "organismo": "Department of Statistics",
+    "url": "https://www.stats.gov.kn/"
+   },
+   {
+    "iso": "LCA",
+    "sigla": "CSO",
+    "organismo": "Central Statistical Office",
+    "url": "https://www.stats.gov.lc/"
+   },
+   {
+    "iso": "VCT",
+    "sigla": "SO",
+    "organismo": "Statistical Office",
+    "url": "https://stats.gov.vc/"
+   },
+   {
+    "iso": "TTO",
+    "sigla": "CSO",
+    "organismo": "Central Statistical Office",
+    "url": "https://cso.gov.tt/"
+   }
+  ]
+ }
 }

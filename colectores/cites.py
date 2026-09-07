@@ -232,7 +232,7 @@ def recolectar():
 
     vacios = [
         "Lo que esta base registra es comercio legal, no tráfico. Cada asiento nace de "
-        "Un permiso o de un informe anual que una Parte del tratado presento. El tráfico "
+        "un permiso o de un informe anual que una Parte del tratado presento. El tráfico "
         "ilegal, por definición, no tiene permiso y no entra acá. Este colector no mide "
         "contrabando de fauna, y la materia de contrabando sigue sin fuente propia.",
         "«origen en decomiso» no es «cantidad de decomisos». El codigo marca especimenes "
@@ -248,7 +248,7 @@ def recolectar():
         "No ordena Estados y no entra al compuesto. El volumen depende de la "
         "biodiversidad del país, del tamaño de su economía y de su papel en el comercio "
         "de cueros, madera o mascotas. Y la proporción de decomiso no está orientada: no "
-        "Se sabe si más es mejor o peor. Entra como magnitud, al lado del dato "
+        "se sabe si más es mejor o peor. Entra como magnitud, al lado del dato "
         "comparable y nunca adentro.",
         "No se puede saber quién informó. En esta consulta la base no distingue si el "
         "asiento lo declaro el exportador o el importador. Por eso el registro dice «no "

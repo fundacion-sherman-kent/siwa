@@ -238,7 +238,7 @@ def recolectar():
 
     vacios = [
         "Es evaluación experta, no recuento de hechos. Cada puntaje va de 1 a 10 y lo fija "
-        "Un panel de especialistas con evidencia documental, revisado por pares. Dos "
+        "un panel de especialistas con evidencia documental, revisado por pares. Dos "
         "personas informadas pueden puntuar distinto el mismo país.",
         "Un puntaje alto de mercado no dice cuánto. No hay tonelaje, no hay recuento de "
         "operaciones ni de animales: dice cuan extendido y arraigado está ese mercado "

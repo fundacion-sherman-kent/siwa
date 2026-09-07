@@ -101,7 +101,7 @@ SERIES = [
                "via Our World in Data",
      "cautela": "LA SERIE TERMINA EN 2021: la Base Global de Terrorismo dejo de "
                 "Actualizarse. No hay dato posterior y no se estima ninguno. Además, "
-                "La definición de terrorismo es disputada y varios Estados de la región "
+                "la definición de terrorismo es disputada y varios Estados de la región "
                 "califican como terrorista a la protesta social."},
     {"clave": "terrorismo_atentados", "slug": "terrorist-attacks",
      "columna": "total_incident_counts",
@@ -312,17 +312,17 @@ def recolectar():
         "actualizarse y no hay reemplazo gratuito. No se estima ningún valor posterior.",
         "«Terrorismo» es una definición disputada. Varios Estados de la región califican "
         "de terrorista a la protesta social, y esa calificación entra en las bases que "
-        "Se nutren de prensa. El dato se publica con esa advertencia y no sostiene por "
+        "se nutren de prensa. El dato se publica con esa advertencia y no sostiene por "
         "si solo ningún juicio.",
         "El conflicto entre grupos armados exige 25 muertes anuales para que UCDP lo "
         "registre. Por debajo de ese umbral el Estado figura en cero sin estar en paz. "
         "Y cuenta muertes en enfrentamiento, no presencia ni control territorial: no es "
-        "Una medida de cuánto territorio dominan los grupos criminales.",
+        "una medida de cuánto territorio dominan los grupos criminales.",
         "Los índices de V-Dem son medición experta codificada, no recuento de hechos. "
         "El proyecto publica un intervalo de incertidumbre por dato; acá se toma la "
         "estimación central y el intervalo no se muestra.",
         "Percepción democrática y de las instituciones: no hay dato. Latinobarometro y "
-        "El Barometro de las Américas la miden, pero exigen registro para descargar los "
+        "el Barometro de las Américas la miden, pero exigen registro para descargar los "
         "microdatos. Lo que se publica acá es el nivel democratico según especialistas, "
         "que es otra cosa: mide como funciona el sistema, no que piensa la gente de él.",
         "Defensa, lo que no hay: no existe fuente gratuita que publique los efectivos "
@@ -330,7 +330,7 @@ def recolectar():
         "material: vehículos blindados, aeronaves y buques por tipo. El registro de "
         "referencia es el Balance Militar del Instituto Internacional de Estudios "
         "estrategicos, que es de pagó y no admite redifusión. Lo que se publica acá es "
-        "El gasto, los efectivos totales y la adquisición de armamento mayor, que es la "
+        "el gasto, los efectivos totales y la adquisición de armamento mayor, que es la "
         "aproximación más cercana al material y no lo reemplaza.",
         "Conflicto urbano: no hay fuente gratuita comparable para los 33. Lo que más se "
         "acerca es el conflicto entre grupos armados, que no distingue campo de ciudad.",

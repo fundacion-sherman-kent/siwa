@@ -213,7 +213,7 @@ def recolectar():
         "desgloses existen en la fuente y pueden incorporarse cuando el equipo los pida.",
         "El soborno sale de encuestas de victimización: mide lo declarado, no lo ocurrido.",
         "Los flujos financieros ilícitos no se publican. La serie existe en la base de "
-        "La ONU pero tiene 35 observaciones en todo el mundo: no alcanza para una serie "
+        "la ONU pero tiene 35 observaciones en todo el mundo: no alcanza para una serie "
         "regional, y publicarla sería dar apariencia de medición a cuatro datos sueltos.",
         ("Cobertura por serie: " + ", ".join(
             f"{s['rotulo']} en {cobertura.get(s['clave'], 0)} de 33" for s in SERIES) + "."),

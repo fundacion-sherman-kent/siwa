@@ -150,7 +150,7 @@ def recolectar():
         "publicaciones, la situación puede haber cambiado por completo.",
         "ACNUR cuenta a quien está bajo su mandato o registrado ante autoridades. "
         "La migración irregular no registrada no aparece, y en varios corredores de "
-        "La región es la mayoría del flujo.",
+        "la región es la mayoría del flujo.",
         "Sin desglose subnacional: la cifra es nacional y el mapa la muestra como tal.",
         "«Expulsión» y «recepción» son dos fenómenos distintos y no se suman: un "
         "mismo Estado puede ser alto en ambos.",

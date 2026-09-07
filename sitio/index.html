@@ -6698,6 +6698,49 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       }).join('');
   }
 
+  // Que un Estado no tenga catalogo de datos abiertos NO significa que no
+  // publique. Veinticuatro de los 33 no lo tienen, y hasta hoy el registro los
+  // mostraba sin ninguna fuente oficial, que se lee como si no publicaran.
+  // Todos tienen oficina nacional de estadistica. Aca se dice cual es, donde
+  // esta y que contesto, con las palabras justas para que no se confunda «me
+  // cierra la puerta» con «no publica».
+  const PUERTA_OFICINA = {
+    responde: {rotulo:'la oficina responde', clase:'ok',
+      dice:'La dirección fue tocada y devolvió su sitio.'},
+    certificado_invalido: {rotulo:'responde, con certificado que no valida', clase:'aviso',
+      dice:'El sitio contesta y entrega contenido, pero su certificado de seguridad no '
+          +'validó desde donde se lo consultó. Un visitante puede ver una advertencia. '
+          +'No es opacidad: es una cadena de certificados mal armada o vencida.'},
+    cierra_a_maquinas: {rotulo:'publica para personas, cierra a los programas', clase:'aviso',
+      dice:'La oficina devuelve un rechazo a quien no es una persona con navegador. '
+          +'Publica: lo que no admite es la consulta automática. La Oficina no esquiva '
+          +'esa protección; la declara y gestiona la vía oficial.'},
+    verificacion_anti_robot: {rotulo:'interpone verificación anti-robot', clase:'aviso',
+      dice:'La dirección contesta con normalidad aparente pero lo que entrega es una '
+          +'página de verificación, no el instituto. Un código 200 puede mentir.'},
+    falla_el_servidor: {rotulo:'su servidor devuelve error', clase:'malo',
+      dice:'La avería es del servidor, no del registro. Se vuelve a mirar en cada corrida.'},
+    responde_con_error: {rotulo:'contesta con error', clase:'malo',
+      dice:'La dirección existe y contesta, pero con un código de error.'},
+    no_resuelve: {rotulo:'su dominio no resuelve', clase:'malo',
+      dice:'El nombre no llega a ninguna máquina. Se comprobó contra dos resolutores '
+          +'ajenos a esta casa antes de decirlo.'},
+    sin_respuesta: {rotulo:'no respondió', clase:'malo',
+      dice:'No hubo respuesta en el tiempo de espera. Puede ser la oficina o puede ser '
+          +'el camino: no se afirma cuál.'},
+  };
+
+  function fichaOficina(o, pais){
+    const p = PUERTA_OFICINA[o.estado] || {rotulo:o.estado, clase:'aviso', dice:''};
+    const dom = o.url.replace(/^https?:\/\//,'').replace(/\/$/,'');
+    return `<div class="ficha-pais"><h4>${esc(pais)}</h4>
+      <div class="org">${esc(o.sigla)} — ${esc(o.organismo)} ·
+        <a href="${esc(o.url)}" target="_blank" rel="noopener">${esc(dom)}</a></div>
+      <div class="materia-linea"><span>Oficina nacional de estadística</span>
+        <span class="cuenta">${esc(p.rotulo)}</span></div>
+      <div class="muestra">${p.dice}${o.nota?' <b>'+esc(o.nota)+'</b>':''}</div></div>`;
+  }
+
   function oficialesVista(){
     const caja=document.getElementById('lista-oficiales'); if(!caja) return;
     const d=almacen.oficiales; if(!d) return;
@@ -6706,21 +6749,47 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
     else if(zona) lista = lista.filter(x => x.bloque === zona);
 
+    // Las oficinas de estadistica del ambito, para los Estados sin portal.
+    const oficinas = (d.oficinas_estadistica || []).filter(o => {
+      if(paisFiltro) return o.iso === paisFiltro;
+      if(zona){ const q = padron.find(x => x.iso === o.iso); return q && q.bloque === zona; }
+      return true;
+    });
+    const conPortal = new Set(lista.map(x => x.iso));
+    const soloOficina = oficinas.filter(o => !conPortal.has(o.iso));
+
     const tag=document.getElementById('tag-oficiales');
     if(tag) tag.textContent = (paisFiltro || zona)
-      ? `${lista.length} portal${lista.length===1?'':'es'} verificado${lista.length===1?'':'s'} en ${esc(paisFiltro?paisNombre:zona)}`
-      : `${d.resumen.estados_con_portal} de ${d.resumen.estados_del_padron} Estados · ${miles(d.resumen.conjuntos_hallados)} conjuntos indexados`;
+      ? `${lista.length} portal${lista.length===1?'':'es'} y ${oficinas.length} oficina${oficinas.length===1?'':'s'} de estadística en ${esc(paisFiltro?paisNombre:zona)}`
+      : `${d.resumen.estados_con_alguna_fuente_oficial} de ${d.resumen.estados_del_padron} Estados con fuente oficial verificada · ${miles(d.resumen.conjuntos_hallados)} conjuntos indexados`;
+
+    const nombreDe = iso => { const q = padron.find(x => x.iso === iso); return q ? q.pais : iso; };
+    // En la vista de un pais se muestran las dos cosas: su portal y su oficina de
+    // estadistica, que son organismos distintos y direcciones distintas. En la
+    // vista regional solo las oficinas de los Estados que no tienen portal, para
+    // no repetir treinta y tres fichas que el lector ya vio.
+    const paraMostrar = paisFiltro ? oficinas : soloOficina;
+    const tarjetasOficina = paraMostrar
+      .map(o => fichaOficina(o, nombreDe(o.iso))).join('');
 
     if(!lista.length){
-      caja.innerHTML = `<div class="ficha-pais"><h4>Sin portal verificado</h4>
+      // Antes esto decia «sin portal verificado» y nada mas, y el lector se
+      // llevaba la idea de que el Estado no publicaba. Publica: tiene oficina
+      // de estadistica. Lo que no tiene es interfaz para programas.
+      caja.innerHTML = (tarjetasOficina || `<div class="ficha-pais"><h4>Sin fuente verificada</h4>
         <div class="org">${esc(paisFiltro ? paisNombre : (zona||'El ámbito'))}</div>
-        <div class="muestra"><b>La Oficina no verificó un portal de datos abiertos con interfaz
-          de consulta en este ámbito.</b> No prueba que no exista: puede exigir registro, interponer
-          un obstáculo automático o publicar sin interfaz. Los ${d.resumen.estados_con_portal}
-          verificados están en la vista regional.</div></div>`;
+        <div class="muestra">La Oficina no verificó portal ni oficina de estadística en este
+          ámbito.</div></div>`)
+        + `<div class="ficha-pais"><h4>Por qué no hay portal de datos abiertos</h4>
+        <div class="org">${esc(paisFiltro ? paisNombre : (zona||'El ámbito'))}</div>
+        <div class="muestra"><b>Sin catálogo de datos abiertos con interfaz de consulta
+          automática.</b> No prueba que no exista: puede exigir registro, interponer un
+          obstáculo automático o publicar sin interfaz. Los
+          ${d.resumen.estados_con_portal} Estados que sí lo tienen están en la vista
+          regional.</div></div>`;
       return;
     }
-    caja.innerHTML = lista.map(f=>{
+    caja.innerHTML = tarjetasOficina + lista.map(f=>{
       const primera=f.materias.find(m=>m.ejemplos.length);
       return `<div class="ficha-pais"><h4>${esc(f.pais)}</h4>
         <div class="org">${esc(f.organismo)} · ${esc(f.tipo)} · <a href="${esc(f.portal)}" target="_blank" rel="noopener">${esc(f.portal.replace(/^https?:\/\//,''))}</a></div>
@@ -7188,6 +7257,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       lineas.push(['anio','expulsion','recepcion','desplazados_internos'].join(sep));
       serie.serie.forEach(a=>lineas.push([a.anio,a.origen_refugiados+a.origen_solicitantes,
         a.asilo_refugiados+a.asilo_solicitantes,a.desplazados_internos].join(sep)));
+    }
+    // La oficina de estadistica va a la planilla aunque el Estado no tenga
+    // portal: para veinticuatro de los 33 es la unica fuente oficial que hay,
+    // y una planilla que la omita repite el error que veniamos de corregir.
+    const of=paisFiltro&&almacen.oficiales
+      ? (almacen.oficiales.oficinas_estadistica||[]).find(x=>x.iso===paisFiltro) : null;
+    if(of){
+      lineas.push('', ['OFICINA NACIONAL DE ESTADISTICA'].join(sep));
+      lineas.push(['sigla','organismo','direccion','que_contesto'].join(sep));
+      lineas.push([of.sigla,of.organismo,of.url,
+        (PUERTA_OFICINA[of.estado]||{rotulo:of.estado}).rotulo].map(esc2).join(sep));
     }
     const o=almacen.oficiales, ficha=paisFiltro&&o?o.registros.find(r=>r.iso===paisFiltro):null;
     if(ficha){

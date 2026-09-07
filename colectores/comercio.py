@@ -210,7 +210,7 @@ def recolectar():
         "declara en valor FOB —la mercaderia puesta en el barco— y el importador en CIF, "
         "que además incluye flete y seguro. Solo por eso el importador registra de rutina "
         "entre 3 % y 10 % más. A eso se suman los envios que cruzan el año calendario y "
-        "Las diferencias de clasificación aduanera.",
+        "las diferencias de clasificación aduanera.",
         "Lo que si llama la atención es la brecha negativa: que el importador declare "
         "menos de lo que el exportador dice haberle mandado no tiene explicación contable "
         "inocente, porque el flete y el seguro empujan en el sentido contrario. Aún así "

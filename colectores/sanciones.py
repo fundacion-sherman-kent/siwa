@@ -72,7 +72,7 @@ def recolectar():
     if not url:
         raise RuntimeError(
             "El índice de la fuente no declara «statistics_url». No se inventa la "
-            "Dirección: la versión va adentro de la ruta y adivinarla daría un 404 "
+            "dirección: la versión va adentro de la ruta y adivinarla daría un 404 "
             "o, peor, una estadística de otra fecha.")
     est = _json(url, 2_000_000)
 
@@ -104,7 +104,7 @@ def recolectar():
         "funcionarios. Aparecer mucho puede indicar transparencia, no lo contrario.",
         "La cifra se mueve por tres cosas ajenas a la conducta del Estado medido: quien "
         "sanciona a quien —que es un acto geopolitico de terceros—, que tan completo es "
-        "El registro público de funcionarios de ese Estado, y el tamaño del país.",
+        "el registro público de funcionarios de ese Estado, y el tamaño del país.",
         "Persona expuesta no es persona sospechada. La categoría incluye a funcionarios "
         "en ejercicio por el solo hecho de serlo: un ministro figura por ser ministro. "
         "Leer estas cifras como recuento de delincuentes sería un error grave.",

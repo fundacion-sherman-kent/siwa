@@ -190,8 +190,8 @@ def recolectar():
         "tenga capturas recientes no prueba que el sitio murió: prueba que el rastreador "
         "no pasó. Y que el portal no nos responda hoy no prueba que esté caído: pudo "
         "rechazar nuestra consulta o estar caído un rato. Solo se afirma retirado cuando "
-        "El archivo lo vio vivo en el pasado y hoy no responde, y aún así se publican "
-        "Las dos fechas por separado para que cualquiera pueda rehacer la comprobación.",
+        "el archivo lo vio vivo en el pasado y hoy no responde, y aún así se publican "
+        "las dos fechas por separado para que cualquiera pueda rehacer la comprobación.",
         "No se interpreta la causa. Un portal puede caerse por presupuesto, por una "
         "migración de sistema o por decisión. La caída es el hecho; el motivo es un "
         "juicio, y este registro no emite juicios.",
@@ -200,8 +200,8 @@ def recolectar():
         "organismo y el dominio, y no se dice que el Estado dejó de publicar.",
         "La identificación del organismo es de la Oficina. La consulta prueba que el "
         "dominio existe y que el archivo tiene copias fechadas de él; no prueba que sea "
-        "El instituto que decimos. Va declarado como afirmación nuestra, y se corrige en "
-        "El padrón si resultara equivocada.",
+        "el instituto que decimos. Va declarado como afirmación nuestra, y se corrige en "
+        "el padrón si resultara equivocada.",
         f"ALCANZA A {len(tareas)} SITIOS OFICIALES EN "
         f"{len({t[0] for t in tareas})} ESTADOS, todos probados antes de entrar. Los demas "
         "Quedan como sin dominio probado, que no dice nada de ellos: dice que la Oficina "

@@ -138,7 +138,7 @@ def recolectar():
         "Acá solo aparece quien no pagó rápido. El atacante publica a la víctima para "
         "presionarla: la empresa que paga enseguida y en silencio nunca aparece en "
         "ninguna lista. Esta cifra subestima el fenómeno de manera sistemática y por "
-        "Una magnitud que nadie puede calcular. Un Estado con pocos casos puede tener "
+        "una magnitud que nadie puede calcular. Un Estado con pocos casos puede tener "
         "pocos ataques, o víctimas que pagan más rápido.",
         "Es un recuento, no una tasa. Una economía grande tiene más empresas que atacar. "
         "Que Brasil encabece la lista no significa que este peor protegido: significa "
@@ -146,7 +146,7 @@ def recolectar():
         "de cada economía y con los usuarios de internet, que este registro publica.",
         "La fuente es el atacante. Los grupos exageran, repiten víctimas viejas y a "
         "veces publican ataques que no ocurrieron. Lo que se observa con certeza es que "
-        "El grupo lo publico, no que el hecho sea como lo cuenta. Por eso la "
+        "el grupo lo publico, no que el hecho sea como lo cuenta. Por eso la "
         "credibilidad es 4 y no mejor.",
         "El país es el de la sede de la víctima, no necesariamente donde ocurrió el "
         "ataque ni donde estaban los sistemas comprometidos. Una filial atacada puede "
@@ -194,7 +194,7 @@ def recolectar():
                                        for s, n in sectores_region.most_common(12)],
             "metodo": (
                 "Se consulta el listado de víctimas por país y se cuentan casos, grupos "
-                "Y sectores. No se república el nombre de ninguna víctima: son empresas "
+                "Y sectores. no se republica el nombre de ninguna víctima: son empresas "
                 "Y organismos identificables, muchos de ellos damnificados, y nombrarlos "
                 "aquí repetiria la presión que el atacante buscaba. Se publican "
                 "recuentos y repartos."

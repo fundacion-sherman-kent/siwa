@@ -266,7 +266,7 @@ def recolectar():
         "la vuelve seria.",
         "No se copia la fórmula de transparencia internacional, y no por descuido. Su "
         "índice de percepción de corrupción es un promedio de encuestas a expertos: mide "
-        "Lo que un panel cree sobre un país. Este mide actos observables que cualquiera "
+        "lo que un panel cree sobre un país. Este mide actos observables que cualquiera "
         "comprueba repitiendo la consulta. Contestan preguntas distintas y no deben "
         "compararse: ordenarian distinto con toda razón.",
         f"NO SE CASTIGA LO QUE NO SE MIRO. Si a un Estado le falta la evidencia de un "
@@ -274,7 +274,7 @@ def recolectar():
         f"que si tienen evidencia. Con menos de {MINIMO_ACTOS} actos medidos el Estado "
         "Queda sin medir, que no es lo mismo que opaco.",
         "Cuando el archivo público de la web no responde, el que fallo es el archivo y no "
-        "El Estado. Ese acto se descarta en lugar de contarse en contra. Es la clase de "
+        "el Estado. Ese acto se descarta en lugar de contarse en contra. Es la clase de "
         "confusión que convierte una falla propia en una acusación ajena.",
         "Los seis actos pesan lo mismo, y es una elección. Podría argumentarse que la "
         "puerta a los datos vale más que el informe de especies —y sería razonable—, pero "
@@ -288,7 +288,7 @@ def recolectar():
         "Estados empataban en cero: el índice sabia decir «cumple todo» y no sabia "
         "distinguir entre los que cumplen. En los Estados sin portal no se anota cien: la "
         "ausencia de portal ya la mide el primer acto, y contarla dos veces sería castigar "
-        "El mismo hecho dos veces.",
+        "el mismo hecho dos veces.",
         "Es un índice derivado, no una medición nueva. Los seis actos los midieron otros "
         "colectores de esta misma casa, cada uno con su fecha y su rastro. Si uno de ellos "
         "falla, este índice no se publica en lugar de calcularse con la mitad.",

@@ -104,7 +104,7 @@ PUERTAS = {
     "GUY": ["statisticsguyana.gov.gy"],
     "SUR": ["statistics-suriname.org"],
     "ATG": ["statistics.gov.ag"],
-    "BHS": ["www.bahamas.gov.bs"],
+    "BHS": ["stats.gov.bs", "www.bahamas.gov.bs"],
     "BRB": ["stats.gov.bb"],
     "DMA": ["stats.gov.dm"],
     "GRD": ["stats.gov.gd"],
@@ -217,7 +217,7 @@ def recolectar():
         "Este colector propone, no publica. No agrega nada al registro: toca puertas, "
         "anota cuál abrió y con que forma, y deja el hallazgo declarado para que una "
         "persona decida. Un colector que se autoalimentara con lo que encuentra romperia "
-        "La única regla que hace confiable a este registro: que todo lo que se afirma, se "
+        "la única regla que hace confiable a este registro: que todo lo que se afirma, se "
         "probo.",
         "«cierra» no es «no esta», y ninguno de los dos es «no publica». Un 403 o un 401 "
         "significan que el portal existe y rechaza a los programas —publica para personas "
@@ -246,8 +246,8 @@ def recolectar():
         corroborado=True,
         nota=("Medicion propia de la Oficina: se consulta cada dominio oficial y se "
               "Registra lo que contesta. Fiabilidad a porque el productor es esta casa y "
-              "El método esta escrito. Credibilidad 1 porque el hecho registrado —que una "
-              "Dirección respondio de tal modo en tal momento— se verifica por si mismo y "
+              "el método esta escrito. Credibilidad 1 porque el hecho registrado —que una "
+              "dirección respondio de tal modo en tal momento— se verifica por si mismo y "
               "cualquiera puede repetir la consulta: la corroboracion es la reproducibilidad."),
     )
 

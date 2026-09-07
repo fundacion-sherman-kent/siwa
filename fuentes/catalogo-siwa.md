@@ -717,3 +717,59 @@ Ir a SIPRI directo por MILEX **rinde poco**: un año más y el gasto por habitan
 a cambio de asumir una restricción de licencia donde hoy no hay ninguna —el
 Banco Mundial redistribuye con licencia abierta—. **Lo que sí vale la pena es la
 base de transferencias**, que no tenemos por ningún lado.
+
+---
+
+# Las 33 oficinas de estadística entran — 7 de septiembre de 2026
+
+Estaba propuesto desde el sondeo del 6 y no se había sumado. Por el método de la
+casa —lo propuesto se verifica y se suma—, se verificó y se sumó.
+
+## El problema que resolvía
+
+SIWA tenía **9 de 33 Estados** con fuente oficial: los nueve con catálogo de
+datos abiertos consultable por máquina. Los otros veinticuatro figuraban sin
+ninguna, y una ficha vacía se lee como un Estado que no publica. **Publican
+todos**: los 33 tienen oficina nacional de estadística. Lo que veinticuatro no
+tienen es interfaz para programas, que es una afirmación distinta.
+
+**Cobertura después: 28 de 33.**
+
+## Tres correcciones que sólo aparecieron probando
+
+| Estado | Lo que se creía | Lo que hay |
+|---|---|---|
+| **El Salvador** | sin oficina que responda | la **ONEC** responde en `onec.bcr.gob.sv`. Reemplazó a la DIGESTYC y vive dentro del Banco Central de Reserva. La dirección que se había supuesto no existe |
+| **Cuba** | HTTP 500, oficina caída | la **ONEI** responde en `onei.gob.cu`. Es el prefijo `www.` el que devuelve 500. Un prefijo de más decidía lo que el registro afirmaba |
+| **Bahamas** | `bahamas.gov.bs`, portal general | la oficina es el **BNSI**, en `stats.gov.bs`. El portal de gobierno no es la oficina de estadística |
+
+Y una precisión sobre **Venezuela**: el dominio del INE no resuelve, pero los
+resolutores de Google y de Cloudflare devuelven **SERVFAIL**, no «nombre
+inexistente». Fallan los servidores de nombres del dominio estatal; la dirección
+no está mal escrita. Se consultó fuera de esta casa antes de afirmarlo.
+
+## Y dos fallas del instrumento, antes que de las fuentes
+
+**La primera firma de «verificación anti-robot» buscaba la palabra «captcha» en
+el cuerpo de la página.** Esa palabra aparece en cualquier formulario de
+contacto: marcó como bloqueadas a seis oficinas que sirven su sitio entero,
+Chile entre ellas. Un rótulo falso de bloqueo es peor que no tener rótulo. La
+firma ahora exige que el viaje **termine** en un servicio de desafío o que el
+título de la página sea el del desafío. Con eso queda **una sola**: Guatemala.
+
+**Tres oficinas quedaron como «sin respuesta» y en realidad contestan**: su
+certificado no valida. Uruguay y Antigua sirven contenido; Cuba falla aun sin
+validar. «Certificado que no valida» tiene ahora su propio estado y no se lee
+como silencio.
+
+## Los seis estados de respuesta, que no significan lo mismo
+
+`responde` · `certificado_invalido` · `cierra_a_maquinas` (401/403: publica para
+personas) · `verificacion_anti_robot` (un 200 que miente) · `falla_el_servidor`
+· `no_resuelve`. **Ninguno de los cinco últimos prueba opacidad**, y el registro
+lo dice en cada ficha.
+
+## Control
+
+El INDEC responde. Si no responde, el que falló es el sondeo y el mapa de
+silencio se declara no confiable en vez de publicarse.

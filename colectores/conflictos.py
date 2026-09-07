@@ -219,7 +219,7 @@ def recolectar():
         "No es un censo de conflictos. Es el corpus que un equipo academico levanto y "
         "verificó caso por caso, con el alcance y el recorte de ese proyecto. Un Estado "
         "con pocos casos puede tener pocos conflictos o poca cobertura del proyecto, y "
-        "Las dos cosas no se distinguen desde afuera.",
+        "las dos cosas no se distinguen desde afuera.",
         "Sin ningún conflicto registrado por el proyecto: "
         + (", ".join(sin_conflicto) if sin_conflicto else "ninguno")
         + ". Ausencia en el corpus no es ausencia de conflicto.",

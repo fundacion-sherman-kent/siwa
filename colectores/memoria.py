@@ -268,7 +268,7 @@ def recolectar():
     vacios = [
         "La fecha es cuando la Oficina lo observo, no cuando ocurrió. Un portal pudo "
         "caerse el martes y ser visto el jueves. Confundir las dos fechas convertiria "
-        "Una bitacora de observación en una crónica de hechos, y este registro no puede "
+        "una bitacora de observación en una crónica de hechos, y este registro no puede "
         "sostener lo segundo.",
         "La primera vez que se ve un Estado no dice desde cuando esta así: dice desde "
         "cuando lo miramos. Esas lineas van marcadas y no deben leerse como antigüedad "

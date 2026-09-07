@@ -208,7 +208,7 @@ def recolectar():
         "no la inventa: decir «tantos focos, tanta minería ilegal» sería un salto que "
         "esta casa no da.",
         "No ordena Estados. El recuento depende del tamaño del país, de la estación, de "
-        "La nubosidad —una semana nublada esconde todo— y de cuántas veces pasó el "
+        "la nubosidad —una semana nublada esconde todo— y de cuántas veces pasó el "
         "satelite. Brasil tendra siempre más focos que Granada por superficie, no por "
         "conducta. Se publica como magnitud, al lado del dato comparable y nunca adentro.",
         f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver que "
@@ -217,7 +217,7 @@ def recolectar():
         "no sostiene ninguna afirmación. El recuento total incluye todos; el de confianza "
         "alta es el único que se puede citar.",
         "La fuente no admite consulta por país: solo por recuadro geografico. Se pide "
-        "Una vez el recuadro de América Latina y el Caribe y se atribuye cada detección "
+        "una vez el recuadro de América Latina y el Caribe y se atribuye cada detección "
         "a su Estado por la coordenada. Un punto que cae en el mar, en un país vecino "
         "fuera del padrón o en aguas internacionales no se cuenta, y se declara cuántos "
         "fueron.",
