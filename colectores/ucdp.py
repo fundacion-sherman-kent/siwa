@@ -64,7 +64,7 @@ NAVEGADOR = comun.AGENTE
 
 VENTANA = 15             # años de serie que se publican por Estado
 TAMANO_PAGINA = 1000
-TOPE_PAGINAS = 40        # con 190 países y ~35 años alcanza de sobra
+TOPE_PAGINAS = 400       # techo de seguridad; si la tabla lo supera, se avisa
 ESPERA = 90
 INTENTOS = 3
 DESCANSO = 8
@@ -171,21 +171,46 @@ def recolectar():
             "ceros: treinta y tres Estados sin mirar no son treinta y tres Estados "
             "en paz.")
 
-    filas, pagina, total_paginas = [], 1, None
+    filas, pagina = [], 1
+    total_paginas = total_filas = None
     while pagina <= TOPE_PAGINAS:
         cuerpo = _pedir(token, pagina)
         if not isinstance(cuerpo, dict) or "Result" not in cuerpo:
             raise RuntimeError(
                 "La respuesta no tiene la forma documentada —un objeto con «Result»—. "
                 "La interfaz cambió y no se publica una lectura a ciegas.")
+        if total_paginas is None:
+            total_paginas = int(cuerpo.get("TotalPages") or 1)
+            total_filas = cuerpo.get("TotalCount")
+            # UNA LECTURA CORTADA SIN AVISO ES PEOR QUE UNA QUE FALLA. Si la tabla
+            # tiene mas paginas que el tope, faltarian Estados enteros y nadie se
+            # enteraria: los que caigan en las paginas no leidas apareceran en cero.
+            if total_paginas > TOPE_PAGINAS:
+                raise RuntimeError(
+                    f"La tabla tiene {total_paginas} páginas y el tope de este colector "
+                    f"es {TOPE_PAGINAS}: la lectura vendría cortada y los Estados de las "
+                    "páginas no leídas aparecerían en cero sin que nadie lo note. Hay "
+                    "que subir el tope, no publicar así.")
         filas.extend(cuerpo.get("Result") or [])
-        total_paginas = cuerpo.get("TotalPages") or 1
-        if pagina >= int(total_paginas):
+        if pagina >= total_paginas:
             break
         pagina += 1
 
     if not filas:
         raise RuntimeError("UCDP contestó sin filas. No se publica.")
+
+    # SE LEYO TODO, O NO SE PUBLICA. La respuesta declara cuantas filas tiene la
+    # tabla; si llegaron menos, la lectura vino cortada —el servidor puede
+    # entregar menos por pagina de lo que se le pide, sin avisar— y los Estados
+    # que caen en lo no leido apareceran en cero. Un cero por lectura corta es
+    # indistinguible de un cero real, y por eso no se publica ninguno de los dos.
+    if isinstance(total_filas, int) and len(filas) < total_filas:
+        raise RuntimeError(
+            f"Llegaron {len(filas)} filas y la fuente declara {total_filas} en "
+            f"{total_paginas} páginas: la lectura vino CORTADA. El servidor entregó "
+            f"menos de las {TAMANO_PAGINA} filas por página que se le pidieron. Los "
+            "Estados de las filas no leídas aparecerían en cero, y un cero por lectura "
+            "corta no se distingue de un cero real. No se publica.")
     faltantes = [c for c in CAMPOS + ["country", "year"] if c not in filas[0]]
     if faltantes:
         raise RuntimeError(
@@ -210,13 +235,38 @@ def recolectar():
         ficha["serie"].append({"anio": anio, **marca})
 
     # PROBAR ANTES DE AFIRMAR: sin el control, lo que falló es la lectura.
+    #
+    # Y cuando falla, el colector CUENTA QUE VIO. La credencial vive en el
+    # repositorio y no se puede consultar la fuente desde afuera para averiguarlo:
+    # si el mensaje dijera solo «falló», no habría manera de arreglarlo. Así que
+    # el diagnóstico viaja en el propio mensaje, que queda en el archivo de estado.
     control_iso = NOMBRES.get(CONTROL)
     controlado = porIso.get(control_iso)
     if not controlado or not any(a["estatal"] for a in controlado["serie"]):
+        parecidos = sorted(n for n in vistos if "colomb" in _plano(n))
+        muestra = sorted(vistos)[:14]
+        campos = sorted(filas[0]) if filas else []
+        detalle = ""
+        if parecidos:
+            filas_control = [f for f in filas if str(f.get("country")) in parecidos]
+            anios_vistos = sorted({str(f.get("year")) for f in filas_control})[-6:]
+            crudos = [{c: f.get(c) for c in CAMPOS + ["year"]}
+                      for f in filas_control[:3]]
+            detalle = (f" El nombre SÍ está en la tabla como {parecidos}, con "
+                       f"{len(filas_control)} filas y años {anios_vistos}. Las banderas "
+                       f"crudas de las primeras filas son {crudos}.")
+        else:
+            detalle = (" El nombre NO aparece en la tabla: ningún rótulo contiene "
+                       "«colomb».")
         raise RuntimeError(
-            f"El control ({CONTROL}) no aparece con violencia estatal en ninguna año "
-            "de la serie. Eso no describe a Colombia: describe una lectura fallida "
-            "—la tabla, el rótulo del país o el campo—. No se publica.")
+            f"El control ({CONTROL}) no aparece con violencia estatal en ningún año de "
+            f"la serie. Eso no describe a Colombia: describe una lectura fallida. "
+            f"DIAGNÓSTICO: se leyeron {len(filas)} filas en {pagina} de "
+            f"{total_paginas} páginas (la fuente declara {total_filas} filas); "
+            f"{len(vistos)} rótulos de país distintos; {len(porIso)} Estados del padrón "
+            f"con correspondencia.{detalle} Los campos de la primera fila son {campos}. "
+            f"Una muestra de rótulos: {muestra}. No se publica."
+        )
     if len(porIso) < MINIMO_ESTADOS:
         raise RuntimeError(
             f"Sólo {len(porIso)} de los 33 Estados encontraron correspondencia de "
