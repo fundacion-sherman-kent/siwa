@@ -33,6 +33,7 @@ import json
 import re
 import sys
 import unicodedata
+from urllib.parse import quote
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -419,7 +420,11 @@ def construir():
         cuerpo += ('<h2>Sus Estados</h2>\n<div class="vecinos">' + "".join(
             f'<a href="{BASE}/sitio/pais/{sello(x["pais"])}.html">{esc(x["pais"])}</a>'
             for x in estados) + "</div>\n")
-        cuerpo += (f'<a class="ir" href="{BASE}/sitio/index.html?zona={esc(zona)}">'
+        # `esc` escapa para HTML, NO para una direccion: el nombre de la zona
+        # viajaba con espacios y tildes sin codificar y cinco de las seis puertas
+        # quedaban con un enlace invalido. Solo «Andina» funcionaba, por ser una
+        # palabra sin tilde. Lo encontro la auditoria de enlaces.
+        cuerpo += (f'<a class="ir" href="{BASE}/sitio/index.html?zona={quote(zona)}">'
                    f'Ver el registro completo de {esc(zona)} →</a>\n')
         cuerpo += pie(cuando)
         (SITIO / "zona" / f"{s}.html").write_text(cuerpo, encoding="utf-8")

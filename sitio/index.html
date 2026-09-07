@@ -4129,12 +4129,20 @@
 
   function alPortapapeles(texto, exito){
     const listo = () => avisar(exito);
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(texto).then(listo,
-        ()=>avisar('El navegador no dejó copiar. Seleccioná el texto a mano.', true));
-    } else {
-      // Sin portapapeles moderno no se falla en silencio: se muestra el texto.
+    // Si no se puede copiar, SE MUESTRA EL TEXTO. Antes había dos caminos y solo
+    // uno lo hacía: cuando el navegador NO tiene portapapeles se abría el cuadro
+    // con el texto, pero cuando lo tiene y lo RECHAZA —que es el caso común: sin
+    // permiso, sin gesto del usuario, en conexión no cifrada— el aviso decía
+    // «seleccioná el texto a mano» y no había ningún texto que seleccionar. Lo
+    // halló la auditoría del sitio.
+    const aMano = () => {
+      avisar('El navegador no dejó copiar. Copiá el texto del cuadro.', true);
       window.prompt('Copiá este texto:', texto);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(texto).then(listo, aMano);
+    } else {
+      aMano();
     }
   }
 
@@ -7129,7 +7137,26 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     // La planilla lleva UNIDAD y AÑO: un valor como 20947723265 sin unidad no se
     // puede usar. Y lleva las series completas, que es lo que necesita quien
     // quiere rehacer una cuenta en vez de creerle a la pantalla.
-    const sep=';', esc2 = v => `"${String(v ?? '').replace(/"/g,'""')}"`;
+    const sep=';';
+    // Una celda que arranca con =, +, - o @ NO la lee la planilla de calculo como
+    // texto: la ejecuta como formula. Y aca hay texto de terceros —los titulos de
+    // los conjuntos de datos de los portales oficiales de 33 Estados—, que el
+    // registro copia tal cual. Se le antepone un apostrofo, que es la marca que
+    // Excel y Calc entienden como «esto es texto», y la celda se lee igual.
+    const esc2 = v => {
+      let t = String(v ?? '');
+      // 61 es =, 64 es @, 9 el tabulador y 13 el retorno de carro: cuatro
+      // arranques que la planilla lee como formula y ninguno empieza un
+      // numero, asi que se marcan siempre. El + y el - (43 y 45) SI empiezan
+      // numeros: -0,3257 es el control de la corrupcion de la Argentina, y
+      // marcarlo lo convertiria en texto y arruinaria la columna. Por eso
+      // esos dos se marcan solo cuando lo que sigue no es un numero.
+      const c = t.charCodeAt(0);
+      const arranqueDeFormula = c===61||c===64||c===9||c===13 ||
+        ((c===43||c===45) && !isFinite(Number(t)));
+      if(arranqueDeFormula) t = "'" + t;
+      return `"${t.replace(/"/g,'""')}"`;
+    };
     const filas = filasInforme();
     // La planilla se abre con el credito: quien la reenvie por correo o la
     // suba a otro lado se lleva de quien es el trabajo. Va antes de los datos,
@@ -7171,9 +7198,13 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     }
     const blob=new Blob(['﻿'+lineas.join('\r\n')],{type:'text/csv;charset=utf-8;'});
     const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
+    const direccion=URL.createObjectURL(blob);
+    a.href=direccion;
     a.download='siwa-'+(paisFiltro||'region').toLowerCase()+'-'+new Date().toISOString().slice(0,10)+'.csv';
     document.body.appendChild(a); a.click(); a.remove();
+    // El enlace temporal se suelta: si no, cada descarga deja la planilla
+    // entera retenida en memoria hasta que se cierre la pestaña.
+    setTimeout(()=>URL.revokeObjectURL(direccion), 60000);
   }
   document.querySelectorAll('.modo').forEach(b=>
     b.addEventListener('click',()=>{ if(!b.disabled){ modo=b.dataset.modo; repintar(); } }));
