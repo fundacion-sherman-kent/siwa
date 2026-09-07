@@ -1017,3 +1017,35 @@ pública que responda. La OPS devuelve 502.
 **OMS — indicadores globales (`ghoapi`).** Abierta y funciona. Queda como
 candidata: falta decidir qué indicadores de salud son comparables en los 33 sin
 repetir lo que ya entra por el Banco Mundial.
+
+---
+
+# Percepción de corrupción entra — 7 de septiembre de 2026
+
+El registro medía corrupción de dos maneras —control de la corrupción del Banco
+Mundial y corrupción política de V-Dem— y le faltaba **la más citada del mundo**:
+el Índice de Percepción de la Corrupción de Transparency International. **30 de
+los 33 Estados**; quedan afuera Antigua y Barbuda, Belice y San Cristóbal y
+Nieves, que no alcanzan el mínimo de fuentes independientes que el método exige.
+
+## Lo que aporta y no teníamos
+
+La planilla trae **ISO3** —de modo que no hay que emparejar nombres— y, sobre
+todo, **el error estándar, el intervalo de confianza y la cantidad de fuentes**
+de cada puntaje. Eso permite mostrar algo que casi ninguna publicación muestra:
+**cuándo un puesto no significa nada.** Las Bahamas figuran 28.ª con un intervalo
+de 54,8 a 75,2 construido sobre tres fuentes; la ficha lo dice con esas palabras
+—«muy ancho, el puesto dice poco»— en vez de presentar el puesto como un hecho.
+
+## La licencia fija una regla
+
+Transparency International publica bajo **CC BY-ND 4.0**: permite reproducir y
+redistribuir, **no derivar**. Por eso los valores van **tal cual**, con su
+atribución, y **este índice NO entra a ningún cálculo compuesto** del registro.
+
+## Tres medidas de lo mismo, y no se promedian
+
+Están las tres por separado, a propósito. Se construyen distinto y a veces
+ordenan distinto a los mismos Estados. **Cuando coinciden, el juicio se apoya
+mejor; cuando discrepan, el analista tiene que ir a ver por qué.** Promediarlas
+borraría exactamente la información útil.

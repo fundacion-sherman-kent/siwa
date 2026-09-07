@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 69 indicadores, 37 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-37">
+<meta property="og:description" content="33 Estados, 69 indicadores, 38 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-38">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 69 indicadores, 37 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-37">
+<meta name="twitter:description" content="33 Estados, 69 indicadores, 38 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-69-38">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 37 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 69 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 38 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -1566,6 +1566,31 @@
       <div class="cruce" id="lista-designados"></div>
       <div id="vac-designados"></div>
         </div>
+    <div class="categoria" id="ipc" data-nivel="2">
+      <div class="categoria-head"><h4>Percepción de corrupción · el índice más citado</h4><span class="tag" id="tag-ipc">—</span></div>
+      <details class="aviso-cobertura"><summary>Mide percepción, no hechos — y dos Estados con intervalos superpuestos no están ordenados</summary>
+        <p><b>Mide percepción, no hechos.</b> Es un promedio de evaluaciones de
+           especialistas y de encuestas a empresarios sobre cuánta corrupción creen que hay
+           en el sector público. <b>No cuenta casos, ni condenas, ni dinero.</b> Un país que
+           empieza a perseguir la corrupción puede empeorar su puntaje porque se habla más
+           del tema.</p>
+        <p><b>Dos Estados cuyos intervalos de confianza se superponen no están ordenados
+           entre sí</b>, por más que la tabla los muestre uno arriba del otro. Cada ficha
+           publica el intervalo y la cantidad de fuentes: un puntaje construido con tres
+           fuentes es más frágil que uno construido con nueve.</p>
+        <p><b>El registro mide corrupción de tres maneras y no las promedia:</b> este
+           índice, el control de la corrupción del Banco Mundial y la corrupción política
+           de V-Dem. Se construyen distinto y a veces ordenan distinto a los mismos
+           Estados. <b>Cuando coinciden, el juicio se apoya mejor; cuando discrepan, hay
+           que ir a ver por qué.</b> Y por la licencia del productor —que permite
+           reproducir pero no derivar— <b>este índice no entra a ningún cálculo
+           compuesto</b>.</p>
+      </details>
+      <div class="procedencia" id="proc-ipc">Cargando el registro…</div>
+      <div class="cruce" id="lista-ipc"></div>
+      <div id="vac-ipc"></div>
+        </div>
+
     <div class="categoria" id="desastres" data-nivel="1">
       <div class="categoria-head"><h4>Desastres y emergencias · los últimos cinco años</h4><span class="tag" id="tag-desastres">—</span></div>
       <details class="aviso-cobertura"><summary>Más emergencias registradas puede significar más capacidad de respuesta, no más desastres</summary>
@@ -2510,6 +2535,7 @@
                      ['sondeo','Banco de pruebas de fuentes candidatas'],
                      ['prensa','RSF — libertad de prensa'],
                      ['focos','NASA FIRMS — focos de calor'],
+                     ['ipc','Transparency International — percepción de corrupción'],
                      ['desastres','IFRC — desastres y emergencias'],
                      ['sismos','USGS — sismicidad'],
                      ['ucdp','UCDP — violencia organizada por Estado'],
@@ -5129,6 +5155,7 @@
     paso('comercio de armas', armasVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
+    paso('percepción de corrupción', ipcVista);
     paso('desastres y emergencias', desastresVista);
     paso('sismicidad', sismosVista);
     paso('violencia organizada', ucdpVista);
@@ -6527,6 +6554,53 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     caja.innerHTML = html;
   }
 
+  function ipcVista(){
+    const caja = document.getElementById('lista-ipc');
+    const d = almacen.percepcion_corrupcion; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+
+    const con = lista.filter(x => x.en_el_indice);
+    const tag = document.getElementById('tag-ipc');
+    if(tag) tag.textContent = con.length + ' de ' + lista.length
+      + ' Estados en el índice · edición ' + d.resumen.anio + ' · escala de 0 a 100';
+
+    let html = con.map(x => {
+      // El ancho del intervalo se muestra SIEMPRE: es la unica forma de que se
+      // vea cuando un puesto no significa nada.
+      const ancho = (x.intervalo_alto != null && x.intervalo_bajo != null)
+        ? Math.round((x.intervalo_alto - x.intervalo_bajo) * 10) / 10 : null;
+      const clase = x.puntaje >= 60 ? 'fresco' : x.puntaje >= 40 ? 'viejo' : 'muy-viejo';
+      return '<div class="asunto"><h4>' + esc(x.pais)
+        + ' <span class="edad ' + clase + '">' + x.puntaje + '</span></h4>'
+        + '<div class="foot"><span class="porque">Puesto <b>' + x.puesto
+        + '</b> entre ' + d.resumen.paises_en_el_indice + ' países'
+        + (ancho != null
+           ? '. Intervalo de confianza <b>' + String(x.intervalo_bajo.toFixed(1)).replace('.',',')
+             + ' a ' + String(x.intervalo_alto.toFixed(1)).replace('.',',') + '</b>'
+             + (ancho >= 12 ? ' — <b>muy ancho</b>, el puesto dice poco' : '')
+           : '')
+        + (x.fuentes_del_indice ? '. Construido con <b>' + x.fuentes_del_indice
+           + '</b> fuente' + (x.fuentes_del_indice===1?'':'s') : '')
+        + (x.variacion != null
+           ? '.<br>Desde ' + x.desde + ': <b>' + (x.variacion > 0 ? '+' : '')
+             + String(x.variacion).replace('.',',') + '</b> puntos' : '.')
+        + '</span><span class="badge medio">percepción</span></div></div>';
+    }).join('');
+
+    const sin = lista.filter(x => !x.en_el_indice);
+    if(sin.length){
+      html += '<div class="asunto"><h4>' + sin.length + ' fuera del índice</h4>'
+        + '<div class="foot"><span class="porque">' + esc(sin.map(x=>x.pais).join(', '))
+        + '. <b>No dice nada sobre su corrupción:</b> dice que no alcanzan la cantidad '
+        + 'mínima de fuentes independientes que el método exige.'
+        + '</span><span class="badge unica">sin evaluar</span></div></div>';
+    }
+    caja.innerHTML = html;
+  }
+
   function desastresVista(){
     const caja = document.getElementById('lista-desastres');
     const d = almacen.desastres; if(!caja || !d) return;
@@ -7891,6 +7965,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-designados','designados',err.message);
       document.getElementById('proc-designados').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('percepcion_corrupcion.json'), traer('estado/percepcion_corrupcion.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.percepcion_corrupcion=d; const meta=d.procedencia;
+      pintarProcedencia('proc-ipc',meta);
+      vacios+=pintarVacios('vac-ipc',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-ipc','percepción de corrupción',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-ipc','percepción de corrupción',err.message);
+      document.getElementById('proc-ipc').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('desastres.json'), traer('estado/desastres.json').catch(()=>null)])
     .then(([d,estado])=>{
