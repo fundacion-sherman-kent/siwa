@@ -1362,8 +1362,9 @@
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
       <ol class="pasos">
-        <li><b>Elegí un tema.</b> Son 59, agrupados en cuatro ejes: seguridad, defensa,
-            gobernanza y desarrollo. El mapa se pinta con ese tema.</li>
+        <li><b>Elegí un tema.</b> Son <span id="cuantos-temas">—</span>, agrupados por eje:
+            seguridad, defensa, gobernanza, desarrollo y fuentes. El mapa se pinta con ese
+            tema. Podés buscarlos por delito o actividad: cocaína, extorsión, coima.</li>
         <li><b>Elegí un país o una zona</b>, o dejá toda la región. Lo que elijas acá manda
             sobre <b>todo</b> lo que sigue más abajo, incluidas las noticias y las redes.</li>
         <li><b>Si querés, cruzá con otro tema</b> para ver si se mueven juntos. No hace falta
@@ -3261,7 +3262,8 @@
       + (detalle ? '<br>' + esc(detalle) : '')
       + (meta.origen ? '<br><b>Fuente:</b> ' + esc(meta.origen) : '')
       + (serie.length > 1 ? '<br><b>Serie:</b> ' + serie.length + ' años, de '
-          + serie[0].anio + ' a ' + serie[serie.length-1].anio : '')
+          + serie[0].anio + ' a ' + serie[serie.length-1].anio
+          + figuraSerie(clave, iso) : '')
       + (d.cap.cautela ? '<br><b>Cuidado:</b> ' + esc(d.cap.cautela) : '')
       + '</span><button class="boton chico" data-al-mapa="' + esc(clave)
       + '">Ver en el mapa</button></div></div>';
@@ -3726,6 +3728,51 @@
       + (sin ? ' · <span class="falta">' + sin + ' sin dato</span>' : '')
       + '. El detalle está en <b>Explorar</b>, más abajo.</p>'
       + '</div>';
+  }
+
+  // EL NUMERO SE CUENTA, NO SE ESCRIBE. Decia «Son 59» cuando ya eran 91: un
+  // numero escrito a mano envejece solo, y este instructivo es lo primero que
+  // lee alguien que no conoce el registro.
+  function contarTemas(){
+    const e = document.getElementById('cuantos-temas');
+    if(!e) return;
+    const n = MATERIAS().filter(m => !m.disponible || m.disponible()).length;
+    e.textContent = n + (n === 1 ? ' tema' : ' temas');
+  }
+
+  // La serie de una materia, dibujada. Sin ejes ni grilla: una linea, sus
+  // extremos rotulados y los puntos marcados. Lo que hace falta para ver la
+  // forma; lo que sobra confunde en un telefono.
+  function figuraSerie(clave, iso){
+    const cap = (capas() || {})[clave];
+    if(!cap || !cap.serieDe) return '';
+    const serie = (cap.serieDe(iso) || []).filter(a => isFinite(a.valor));
+    if(serie.length < 3) return '';
+    const disponible = (document.getElementById('panel-navegador')?.clientWidth || 520);
+    const ancho = Math.max(280, Math.min(520, disponible - 8));
+    const alto = 108, mIzq = 8, mDer = 8, mArr = 16, mAba = 22;
+    const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
+    const vals = serie.map(a => a.valor);
+    const min = Math.min(...vals), max = Math.max(...vals), rango = (max - min) || 1;
+    const x = i => mIzq + (i / (serie.length - 1)) * util;
+    const y = v => mArr + (1 - (v - min) / rango) * utilY;
+    const linea = serie.map((a,i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(a.valor).toFixed(1)).join(' ');
+    const puntos = serie.map((a,i) =>
+      '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(a.valor).toFixed(1)
+      + '" r="2.4" fill="var(--orange)"></circle>').join('');
+    const p = serie[0], u = serie[serie.length-1];
+    return '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto
+      + '" style="max-width:100%;height:auto" role="img" aria-label="Serie de '
+      + esc(rotuloDeMateria(clave)) + ', ' + serie.length + ' años, de ' + p.anio
+      + ' a ' + u.anio + '">'
+      + '<path d="' + linea + '" fill="none" stroke="var(--orange)" stroke-width="2" '
+      + 'stroke-linejoin="round" stroke-linecap="round" opacity=".85"></path>'
+      + puntos
+      + '<text x="' + mIzq + '" y="' + (alto - 6) + '" fill="#7d90a8" font-size="10">'
+      + p.anio + ' · ' + cifra(p.valor) + '</text>'
+      + '<text x="' + (ancho - mDer) + '" y="' + (alto - 6) + '" text-anchor="end" '
+      + 'fill="#fff" font-size="10" font-weight="700">' + u.anio + ' · ' + cifra(u.valor) + '</text>'
+      + '</svg>';
   }
 
   function MATERIAS(){
@@ -6197,6 +6244,7 @@
     plegarMetodo();
     llenarComparador();
     armarNavegador();
+    paso('cuántos temas', contarTemas);
     paso('perfil del país', perfilPais);
     paso('explorador', navegadorVista);
     paso('narcotráfico', narcotraficoVista);
@@ -8840,10 +8888,16 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     const vacios = fuentes.reduce((a,f)=>a+f.procedencia.vacios_declarados.length, 0);
     const hoy = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'long', year:'numeric'});
     caja.innerHTML = `
-      <div class="cita"><b>Cómo citar este documento:</b><br>
-        Fundación Sherman Kent, Oficina de Generación de Inteligencia (${ANIO_HOY}).
-        <i>SIWA — Reporte de situación de América Latina y el Caribe: ${esc(donde)}</i>.
-        Consultado el ${hoy}. Disponible en ${location.origin}${location.pathname}</div>
+      <div class="cita"><b>Cómo citar este documento — norma APA 7:</b><br>
+        Fundación Sherman Kent, Oficina de Generación de Inteligencia. (${ANIO_HOY}).
+        <i>SIWA — Reporte de situación de América Latina y el Caribe: ${esc(donde)}</i>
+        [Conjunto de datos]. Fundación Sherman Kent.
+        Recuperado el ${hoy} de ${location.origin}${location.pathname}
+        <br><br><b>Y los productores del dato</b>, que hay que citar junto con este
+        registro: ${fuentes.map(f => esc(f.procedencia.fuente.nombre || f.procedencia.fuente)).join('; ')}.
+        <br><small>Este registro redistribuye datos de terceros. Citar sólo a SIWA sería
+        atribuirse trabajo ajeno; citar sólo al productor impediría hallar la versión
+        consultada.</small></div>
       <b>Qué contiene.</b> ${filas} cifras sobre ${esc(donde)}, de ${fuentes.length} fuentes,
       con <b>${vacios} vacíos declarados</b>. Cada cifra lleva su fuente, su año de referencia y
       su calificación de fiabilidad en el sistema Almirantazgo —letra para la fuente, número para
