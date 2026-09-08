@@ -86,17 +86,47 @@ def _fecha(texto: str):
     return None
 
 
+def _cerrar_a_la_fuerza(crudo: bytes) -> bytes:
+    """Un canal cortado a la mitad, cerrado hasta su última nota completa.
+
+    Pasa cuando el servidor corta la respuesta. El XML queda sin cerrar y no
+    parsea, y hasta ahora eso se declaraba como falla del canal entero: cero
+    notas. Rescatar las que llegaron completas no inventa nada —son las que el
+    medio publicó— y evita perder un diario por un corte de red.
+    """
+    for etiqueta, cierre in ((b"</item>", b"</channel></rss>"),
+                             (b"</entry>", b"</feed>")):
+        corte = crudo.rfind(etiqueta)
+        if corte != -1:
+            return crudo[:corte + len(etiqueta)] + cierre
+    return crudo
+
+
 def _traer_canal(medio: dict) -> tuple:
     """Lee un canal. Devuelve (medio, notas, falla)."""
     ATOM = "{http://www.w3.org/2005/Atom}"
     try:
         peticion = urllib.request.Request(
             medio["canal"],
+            # El tipo MIME iba escrito «applicatión», con tilde: no existe. Un
+            # servidor que mira el Accept no encontraba nada aceptable.
             headers={"User-Agent": NAVEGADOR,
-                     "Accept": "applicatión/rss+xml, applicatión/xml, text/xml, */*"},
+                     "Accept": "application/rss+xml, application/xml, text/xml, */*"},
         )
+        # SE LEE EL CANAL ENTERO. El tope estaba en 600 kB y los canales de los
+        # diarios grandes lo pasan: Infobae pesa 782 kB y La Nación 812 kB. El
+        # XML cortado no parsea, la excepción se declaraba como falla del canal,
+        # y el resultado era que los dos diarios de mayor circulación de
+        # Argentina no entraban NUNCA — sin que nada dijera por qué.
         with urllib.request.urlopen(peticion, timeout=30) as respuesta:
-            raiz = ET.fromstring(respuesta.read(600_000))
+            crudo = respuesta.read(4_000_000)
+        try:
+            raiz = ET.fromstring(crudo)
+        except ET.ParseError:
+            # Si aun así viene cortado, se rescata hasta la última nota completa
+            # y se cierra el documento. Media docena de notas es mejor que cero,
+            # y perder las que estaban cortadas no inventa nada.
+            raiz = ET.fromstring(_cerrar_a_la_fuerza(crudo))
     except Exception as error:  # noqa: BLE001 — la falla del canal se declara, no se oculta
         return (medio, [], f"{type(error).__name__}")
 
