@@ -681,6 +681,47 @@
     padding:8px 10px;margin:6px 0;font-size:11px;line-height:1.6;color:#C7D2E0;}
   .cita-apa i{color:#fff;font-style:italic;}
 
+  /* EL PERFIL DEL PAIS. Lo primero que se ve: quien es y como esta. */
+  .perfil{background:#0E2135;border:1px solid var(--line);border-radius:12px;
+    padding:18px 20px;margin:14px 0;}
+  .perfil-cab{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .perfil-cab h2{margin:0;font-size:26px;color:#fff;letter-spacing:.4px;}
+  .perfil-bloque{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;
+    color:var(--grey-blue);font-weight:700;}
+  .perfil-puntaje{display:flex;align-items:center;gap:18px;margin:14px 0 6px;flex-wrap:wrap;}
+  .perfil-puntaje .grande{font-size:46px;line-height:1;font-weight:700;color:var(--orange);
+    font-family:'JetBrains Mono',monospace;}
+  .perfil-detalle{font-size:12px;color:#C7D2E0;line-height:1.6;}
+  .perfil-detalle small{color:#7d90a8;font-size:10.5px;display:block;margin-top:4px;}
+  .perfil-ejes{margin-top:12px;border-top:1px solid rgba(255,255,255,.08);padding-top:10px;}
+  .eje-fila{display:grid;grid-template-columns:minmax(90px,1.2fr) minmax(60px,2fr) auto auto;
+    gap:10px;align-items:center;padding:5px 0;font-size:12px;}
+  .eje-nombre{color:#C7D2E0;}
+  .barrita{display:block;height:8px;background:rgba(255,255,255,.07);border-radius:4px;
+    overflow:hidden;}
+  .barrita i{display:block;height:100%;background:var(--orange);opacity:.75;}
+  .eje-cifra{font-family:'JetBrains Mono',monospace;color:#fff;font-weight:700;
+    text-align:right;min-width:44px;}
+  .eje-puesto{color:#7d90a8;font-size:10.5px;text-align:right;min-width:66px;}
+  .perfil-pie{margin:12px 0 0;font-size:11.5px;color:#9fb2c8;}
+  @media (max-width:520px){
+    .perfil-cab h2{font-size:21px;}
+    .perfil-puntaje .grande{font-size:36px;}
+    /* En telefono la barra sale: no se lee y roba el ancho del nombre. */
+    .eje-fila{grid-template-columns:1fr auto auto;}
+    .eje-fila .barrita{display:none;}
+  }
+
+  /* La cautela de cada tarjeta, a un clic. El rotulo AVISA que hay algo que leer:
+     plegarla en silencio seria esconderla, y este registro no esconde. */
+  .ojo-plegado{display:block;margin-top:8px;font-size:10.5px;color:#ffb27a;
+    border-left:2px solid rgba(251,101,0,.5);padding-left:8px;}
+  .ojo-plegado summary{cursor:pointer;font-weight:700;list-style:none;}
+  .ojo-plegado summary::-webkit-details-marker{display:none;}
+  .ojo-plegado summary::before{content:'▸ ';}
+  .ojo-plegado[open] summary::before{content:'▾ ';}
+  .ojo-plegado[open]{color:#C7D2E0;padding-bottom:4px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1303,6 +1344,7 @@
 
   <main>
     <section class="domain" id="ficha-pais">
+      <div id="perfil-pais"></div>
       <div class="domain-head"><h3 id="titulo-ficha">La región en cifras</h3><span class="tag" id="tag-ficha">—</span></div>
       <div class="elegir-ambito">
         <label for="ambito">Empezá acá</label>
@@ -3049,6 +3091,7 @@
   const PLEGABLES = [
     ['seis-materias', 'Cómo se agrupan las materias y qué mide cada una'],
     ['de-donde-sale', 'De dónde sale cada dato, cómo se lo califica y qué falta'],
+    ['ejes-resumen', 'El detalle por eje, indicador por indicador'],
   ];
   function plegarMetodo(){
     PLEGABLES.forEach(([id, rotulo]) => {
@@ -3066,6 +3109,11 @@
       }
       if(caja) return;
       const titulo = sec.querySelector(':scope > h2, :scope > .domain-head');
+      // La seccion puede estar todavia VACIA: se llena con JavaScript y el
+      // plegado corre antes. Sin esto, `.after()` explotaba sobre null. Se sale
+      // y se reintenta en el repintado siguiente: plegar una caja vacia no sirve.
+      if(!titulo && !sec.firstElementChild) return;
+      if(!sec.children.length || (titulo && sec.children.length < 2)) return;
       caja = document.createElement('details');
       caja.className = 'aviso-cobertura plegado-metodo';
       caja.innerHTML = '<summary>' + esc(rotulo) + '</summary>';
@@ -3590,6 +3638,94 @@
       + 'height="' + alto + '" style="max-width:100%;height:auto" role="img" aria-label="'
       + esc(rotuloDeMateria(clave)) + ', comparación entre ' + datos.length + ' Estados">'
       + barras + '</svg>' + pie + '</div>';
+  }
+
+  // ============ EL PERFIL DEL PAIS ============
+  //
+  // Lo primero que ve el lector tiene que ser el Estado y su situacion, no un
+  // menu. Es como abre GI-TOC: identidad, puntaje, y el puesto en varias
+  // escalas. Un numero solo no dice nada; un numero con su lugar, si.
+  function perfilPais(){
+    const caja = document.getElementById('perfil-pais');
+    if(!caja) return;
+    const iso = paisFiltro;
+    if(!iso){ caja.innerHTML = ''; return; }
+    const p = padron.find(x => x.iso === iso) || {};
+    const comp = compuesto();
+
+    // El puesto en las dos escalas que este registro tiene: la region y el bloque.
+    const puestos = (mapa) => {
+      const orden = Object.entries(mapa).sort((a,b) => b[1] - a[1]);
+      const enRegion = orden.findIndex(x => x[0] === iso) + 1;
+      const delBloque = orden.filter(([i]) => bloqueDe(i) === p.bloque);
+      return {enRegion, deCuantos: orden.length,
+              enBloque: delBloque.findIndex(x => x[0] === iso) + 1,
+              cuantosBloque: delBloque.length};
+    };
+
+    const general = comp.general || {};
+    const valores = Object.fromEntries(Object.entries(general).map(([i,v]) => [i, v.valor]));
+    const mio = general[iso];
+    const pg = mio ? puestos(valores) : null;
+
+    // Cuanto se sabe y cuanto falta de este Estado: el vacio va arriba, no
+    // enterrado. Es la regla de la casa aplicada al encabezado.
+    let con = 0, sin = 0;
+    MATERIAS().forEach(m => {
+      if(!m.disponible || !m.disponible()) return;
+      const d = datoDeMateria(claveDeCapa(m.clave) || m.clave, iso);
+      if(d && !d.sinDato) con++; else if(d) sin++;
+    });
+
+    const barra = (v, max) => {
+      const w = Math.max(2, Math.min(100, (v / (max || 1)) * 100));
+      return '<span class="barrita"><i style="width:' + w.toFixed(0) + '%"></i></span>';
+    };
+
+    const ejes = EJES_COMPUESTOS.map(e => {
+      const m = (comp.ejes || {})[e] || {};
+      if(!m[iso]) return '';
+      const vals = Object.fromEntries(Object.entries(m).map(([i,v]) => [i, v.valor]));
+      const orden = Object.entries(vals).sort((a,b) => b[1] - a[1]);
+      const pos = orden.findIndex(x => x[0] === iso) + 1;
+      const v = m[iso].valor;
+      const n = m[iso].indicadores;
+      return '<div class="eje-fila">'
+        + '<span class="eje-nombre">' + esc(e) + '</span>'
+        + barra(v, 100)
+        + '<span class="eje-cifra">' + cifra(v) + '</span>'
+        + '<span class="eje-puesto">' + pos + '.º de ' + orden.length
+        + (n ? ' · ' + n + ' ind.' : '') + '</span>'
+        + '</div>';
+    }).join('');
+
+    caja.innerHTML =
+      '<div class="perfil">'
+      + '<div class="perfil-cab">'
+      +   '<h2>' + esc(p.pais || iso) + '</h2>'
+      +   '<span class="perfil-bloque">' + esc(p.bloque || '') + '</span>'
+      + '</div>'
+      + (mio && pg
+         ? '<div class="perfil-puntaje">'
+           + '<div class="grande">' + cifra(mio.valor) + '</div>'
+           + '<div class="perfil-detalle"><b>Situación general</b>'
+           + '<br>lugar <b>' + pg.enRegion + '</b> de ' + pg.deCuantos + ' en la región'
+           + (pg.cuantosBloque > 1
+              ? '<br><b>' + pg.enBloque + '.º</b> de ' + pg.cuantosBloque + ' en '
+                + esc(p.bloque) : '')
+           + '<br><small>Es un orden dentro de la región, no una nota: 0 el mejor '
+           + 'situado, 100 el peor. Construido con ' + mio.indicadores + ' indicadores '
+           + 'de ' + mio.ejes + ' ejes.</small>'
+           + '</div></div>'
+         : '<p class="nota-filtro">Sin situación general: este Estado no alcanza el '
+           + 'mínimo de dos ejes con dato que el compuesto exige, y el registro no '
+           + 'inventa un puesto con menos.</p>')
+      + (ejes ? '<div class="perfil-ejes">' + ejes + '</div>' : '')
+      + '<p class="perfil-pie"><b>' + con + '</b> materias con dato para '
+      + esc(p.pais || iso)
+      + (sin ? ' · <span class="falta">' + sin + ' sin dato</span>' : '')
+      + '. El detalle está en <b>Explorar</b>, más abajo.</p>'
+      + '</div>';
   }
 
   function MATERIAS(){
@@ -5468,7 +5604,7 @@
           así que este movimiento va hacia ${haciaPeor?'el lado malo':'el lado bueno'} <b>según ese criterio</b>.
           ${c.modo==='puntos'?'<span class="ojo"><b>Se informa en puntos y no en porcentaje:</b> es un índice construido de recorrido corto, y un porcentaje sobre una escala así puede dar cifras enormes sin significado.</span>':''}
           ${c.modo==='diferencia'?'<span class="ojo"><b>Se informa la diferencia y no un porcentaje:</b> esta cifra cambia de signo, y un porcentaje entre un valor positivo y uno negativo no significa nada.</span>':''}
-          ${c.info.cautela?`<span class="ojo"><b>Ojo:</b> ${esc(c.info.cautela)}</span>`:''}</p>
+          ${c.info.cautela?`<details class="ojo-plegado"><summary><b>Ojo:</b> hay una advertencia sobre esta cifra</summary>${esc(c.info.cautela)}</details>`:''}</p>
         <div class="foot"><span class="src">${esc(c.info.origen||c.proc.fuente.nombre)}</span>
           <span class="badge unica" title="${esc(explicaCalif(c.proc.calificacion))}">${c.proc.calificacion.fiabilidad}-${c.proc.calificacion.credibilidad}</span></div>
       </div>`;
@@ -6061,6 +6197,7 @@
     plegarMetodo();
     llenarComparador();
     armarNavegador();
+    paso('perfil del país', perfilPais);
     paso('explorador', navegadorVista);
     paso('narcotráfico', narcotraficoVista);
     paso('crimen organizado', crimenVista);
