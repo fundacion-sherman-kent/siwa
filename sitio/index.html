@@ -757,6 +757,29 @@
 
   .acciones-ficha{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-start;}
 
+  /* LO QUE MAS SE MOVIO. Mismo renglón angosto que el orden de los 33: son dos
+     listas de la misma pantalla y tienen que leerse con el mismo golpe de vista. */
+  .novedades{margin-top:12px;}
+  .fila-nov{display:grid;grid-template-columns:minmax(78px,1fr) minmax(110px,2fr) 92px 70px;
+    gap:8px;align-items:center;width:100%;text-align:left;background:none;border:0;
+    padding:4px;border-radius:5px;cursor:pointer;font:inherit;color:inherit;}
+  .fila-nov:hover,.fila-nov:focus-visible{background:rgba(255,255,255,.06);outline:none;}
+  .fila-nov .quien{font-size:11.5px;color:#fff;font-weight:600;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;}
+  .fila-nov .qué{font-size:11.5px;color:#C7D2E0;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis;}
+  .fila-nov .cuánto{font-size:11.5px;font-weight:700;text-align:right;
+    font-family:'JetBrains Mono',monospace;}
+  .fila-nov .cuánto.peor{color:var(--orange);}
+  .fila-nov .cuánto.mejor{color:#3FA796;}
+  .fila-nov .cuándo{font-size:10px;color:#7d90a8;text-align:right;}
+  @media (max-width:520px){
+    .fila-nov{grid-template-columns:1fr 84px;grid-template-areas:'quien cuanto' 'que cuando';
+      row-gap:1px;padding:6px 4px;}
+    .fila-nov .quien{grid-area:quien;} .fila-nov .qué{grid-area:que;font-size:11px;}
+    .fila-nov .cuánto{grid-area:cuanto;} .fila-nov .cuándo{grid-area:cuando;}
+  }
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -4025,6 +4048,184 @@
   // menús y ninguna cifra en la primera pantalla y media. El que llega de un
   // buscador mira cuarenta segundos. Acá van los Estados ORDENADOS por su
   // situación general, que es la pregunta con la que llega casi todo el mundo.
+  // LOS CAMBIOS DE UN ESTADO. Estaba adentro de la funcion que dibuja las
+  // tarjetas del pais, y por eso la region no lo podia usar. Se muda tal cual:
+  // reescribir estas reglas seria reescribir el trabajo de afinarlas, que ya
+  // costo dos vueltas y dos casos raros —los indices de recorrido corto y las
+  // cantidades que cruzan el cero—. Una segunda implementacion de la misma regla
+  // es la duplicacion que este registro ya pago dos veces.
+  function cambiosDelEstado(iso){
+      // ¿La variacion porcentual significa algo en este indicador?
+      //
+      // Hay DOS casos donde no significa nada, y los dos aparecieron probando:
+      //
+      // 1. Indices construidos de recorrido corto. En una escala de -2,5 a 2,5,
+      //    pasar de 0,1 a -0,2 da «-300 %»: eso no es un dato, es una division por
+      //    un numero chico. Se informa la diferencia en PUNTOS.
+      //    Ojo: no alcanza con mirar la unidad. El valor indicativo del armamento
+      //    tambien dice «valor indicativo» y esta en millones: tratarlo como indice
+      //    daba «-1.000.000 pts», que es absurdo. Por eso ademas se exige que los
+      //    valores sean chicos.
+      //
+      // 2. Cantidades con signo que cruzan el cero, como la migracion neta: pasar
+      //    de +1.000 a -500 no es «-150 %» de nada. Se informa la DIFERENCIA en la
+      //    unidad del propio indicador.
+      const RECORRIDO_CORTO = 120;
+      const modoDeCambio = (i, d) => {
+        const u = (i.unidad || '').toLowerCase();
+        const suenaIndice = /indice|índice|escala|puntaje|estimacion|estimación|cumplimiento/.test(u);
+        const chicos = Math.max(Math.abs(d.valor), Math.abs(d.valor_inicial)) <= RECORRIDO_CORTO;
+        if(suenaIndice && chicos) return 'puntos';
+        const cruzaCero = (d.valor > 0) !== (d.valor_inicial > 0);
+        if(cruzaCero || !d.valor_inicial) return 'diferencia';
+        return 'porcentaje';
+      };
+
+      // Se juntan todos los indicadores del pais que declaran variacion en su ventana.
+      const cambios = [];
+      fuentesInd().forEach(f=>{
+        const reg = (f.registros||[]).find(r=>r.iso===iso);
+        if(!reg) return;
+        (f.indicadores||[]).forEach(i=>{
+          const d = reg.indicadores[i.clave];
+          if(!d || d.valor === undefined || d.valor_inicial === undefined) return;
+          if(!isFinite(d.valor) || !isFinite(d.valor_inicial)) return;
+          const modo = modoDeCambio(i, d);
+          const dif = d.valor - d.valor_inicial;
+          const pct = d.tendencia_ventana_pct;
+          let magnitud;
+          if(modo === 'porcentaje'){
+            if(pct === null || pct === undefined || !isFinite(pct) || Math.abs(pct) < 1) return;
+            magnitud = Math.abs(pct);
+          } else if(modo === 'puntos'){
+            if(Math.abs(dif) < 0.05) return;
+            // Se ordena por cuanto se movio respecto del recorrido del indice.
+            const recorrido = Math.max(Math.abs(d.valor), Math.abs(d.valor_inicial), 1);
+            magnitud = Math.abs(dif) / recorrido * 100;
+          } else {
+            if(!dif) return;
+            // Una cantidad que cruza el cero se ordena por el peso del cambio.
+            const base = Math.max(Math.abs(d.valor), Math.abs(d.valor_inicial), 1);
+            magnitud = Math.abs(dif) / base * 100;
+          }
+          cambios.push({info:i, dato:d, proc:f.procedencia, modo, dif, magnitud});
+        });
+      });
+      cambios.sort((a,b)=>b.magnitud-a.magnitud);
+    return cambios;
+  }
+
+  // ============ QUÉ SE MOVIÓ EN LA REGIÓN ============
+  //
+  // Nada traía al lector por su cuenta: el registro nunca le decía «esto se
+  // movió». La ficha de un país sí muestra sus cambios, pero hay que elegir el
+  // país primero, y el que no sabe dónde mirar no encuentra nada.
+  //
+  // Usa cambiosDelEstado(), la misma regla de las tarjetas del país. No hay una
+  // segunda implementación: si mañana se afina la regla, se afina en un solo
+  // lugar y las dos pantallas cambian juntas.
+  function novedadesRegionales(){
+    const dentro = i => !bloqueFiltro || bloqueDe(i) === bloqueFiltro;
+    const isos = (padron || []).map(p => p.iso).filter(dentro);
+    if(isos.length < 2) return '';
+    // NO ENTRAN LOS SALTOS QUE ARRANCAN DE CASI NADA. La primera versión de esta
+    // lista salió con ocho filas y las ocho eran lo mismo: «servidores cifrados
+    // +30.209 %», «remesas +8.552 %», «objetos en órbita +5.200 %». Un porcentaje
+    // sobre una base minúscula es enorme sin ser importante, y ocho filas de eso
+    // no son una portada: son ruido con formato de dato.
+    //
+    // La regla, declarada y en la pantalla: para entrar por porcentaje, el valor
+    // de partida tiene que llegar al menos a un cuarto de la mediana regional de
+    // ese mismo indicador. No es un juicio sobre la importancia del hecho —eso el
+    // registro no lo emite—: es descartar la aritmética de una división por poco.
+    const medianaDe = {};
+    fuentesInd().forEach(f => (f.indicadores || []).forEach(i => {
+      const v = (f.registros || []).map(r => (r.indicadores || {})[i.clave])
+        .filter(d => d && isFinite(d.valor)).map(d => Math.abs(d.valor)).sort((a, b) => a - b);
+      if(v.length) medianaDe[i.clave] = v[Math.floor(v.length / 2)];
+    }));
+    const baseSuficiente = c => {
+      if(c.modo !== 'porcentaje') return true;
+      const med = medianaDe[c.info.clave];
+      if(!med) return true;
+      return Math.abs(c.dato.valor_inicial) >= med * 0.25;
+    };
+
+    const todos = [];
+    isos.forEach(iso => (cambiosDelEstado(iso) || []).filter(baseSuficiente).slice(0, 3)
+      .forEach(c => todos.push({iso, c})));
+    if(!todos.length) return '';
+
+    // UN INDICADOR QUE CRECIO EN TODOS LADOS NO ES NOTICIA EN NINGUNO. La segunda
+    // version de esta lista salio con cinco de ocho filas diciendo «servidores de
+    // internet cifrados»: crecen en los treinta y tres, porque crecen en el mundo.
+    // Ordenar por porcentaje crudo compara indicadores con ritmos naturales
+    // distintos, que es comparar cosas que no se comparan.
+    //
+    // Se ordena por cuanto se APARTA cada Estado del movimiento tipico de ESE
+    // indicador en la region. Un pais que crecio 1.099 % donde la mediana crecio
+    // 1.000 % no se movio; uno que crecio 30.209 % si.
+    const tipico = {};
+    todos.forEach(({c}) => {
+      (tipico[c.info.clave] = tipico[c.info.clave] || []).push(c.magnitud);
+    });
+    Object.keys(tipico).forEach(k => {
+      const v = tipico[k].slice().sort((a, b) => a - b);
+      tipico[k] = v[Math.floor(v.length / 2)] || 1;
+    });
+    todos.forEach(x => { x.aparte = x.c.magnitud / (tipico[x.c.info.clave] || 1); });
+    todos.sort((a, b) => b.aparte - a.aparte);
+
+    // Y ningun indicador ocupa mas de dos renglones: la portada tiene que mostrar
+    // que se movio en la region, no que se movio en una sola materia.
+    const cuenta = {};
+    const muestra = todos.filter(x => {
+      const k = x.c.info.clave;
+      cuenta[k] = (cuenta[k] || 0) + 1;
+      return cuenta[k] <= 2;
+    }).slice(0, 8);
+    const nom = i => (padron.find(x => x.iso === i) || {}).pais || i;
+
+    const filas = muestra.map(({iso, c}) => {
+      const subio = c.dif > 0;
+      // La dirección es la CONVENCIÓN DE LA FUENTE, no un veredicto de la casa.
+      const haciaPeor = subio === !!c.info.mas_es_peor;
+      const cif = c.modo === 'porcentaje'
+          ? (subio ? '+' : '') + cifra(c.dato.tendencia_ventana_pct) + ' %'
+        : c.modo === 'puntos'
+          ? (subio ? '+' : '') + cifra(c.dif) + ' pts'
+          : (subio ? '+' : '') + magnitud(c.dif, c.info.unidad).texto;
+      return '<button class="fila-nov" data-va-a="' + esc(iso) + '" '
+        + 'title="Ver la ficha de ' + esc(nom(iso)) + '">'
+        + '<span class="quien">' + esc(nom(iso)) + '</span>'
+        + '<span class="qué">' + esc(c.info.rotulo) + '</span>'
+        + '<span class="cuánto ' + (haciaPeor ? 'peor' : 'mejor') + '">'
+        + (subio ? '▲' : '▼') + ' ' + cif + '</span>'
+        + '<span class="cuándo">' + c.dato.anio_inicial + '–' + c.dato.anio + '</span>'
+        + '</button>';
+    }).join('');
+
+    return '<div class="perfil panorama novedades">'
+      + '<div class="perfil-cab"><h2>Lo que más se movió</h2>'
+      + '<span class="perfil-bloque">' + muestra.length + ' de ' + todos.length
+      + ' cambios</span></div>'
+      + '<div class="orden-paises">' + filas + '</div>'
+      + '<p class="perfil-pie"><b>El orden lo decide el tamaño del cambio, no su '
+      + 'importancia:</b> un salto grande en algo menor aparece antes que un '
+      + 'movimiento chico en algo grave. Y <b>«hacia el lado peor» es el criterio '
+      + 'de la fuente</b>, no un juicio de la Fundación: este registro no emite '
+      + 'juicios.<br><b>Se ordena por cuánto se apartó cada Estado del movimiento '
+      + 'típico de ese mismo indicador en la región:</b> un indicador que creció en '
+      + 'los treinta y tres no es noticia en ninguno. Cada Estado aporta a lo sumo '
+      + 'tres cambios y cada materia ocupa a lo sumo dos renglones, para que una '
+      + 'sola no se lleve la lista.<br><b>No entran los saltos que '
+      + 'arrancan de casi nada:</b> para figurar por porcentaje, el valor de partida '
+      + 'tiene que llegar a un cuarto de la mediana regional de ese indicador. Un '
+      + 'porcentaje sobre una base minúscula es enorme sin ser importante. El cambio '
+      + 'igual está, en la ficha del Estado.</p>'
+      + '</div>';
+  }
+
   function panoramaRegional(){
     const comp = compuesto();
     const general = comp.general || {};
@@ -4065,7 +4266,7 @@
     const caja = document.getElementById('perfil-pais');
     if(!caja) return;
     const iso = paisFiltro;
-    if(!iso){ caja.innerHTML = panoramaRegional(); return; }
+    if(!iso){ caja.innerHTML = panoramaRegional() + novedadesRegionales(); return; }
     const p = padron.find(x => x.iso === iso) || {};
     const comp = compuesto();
 
@@ -6107,63 +6308,7 @@
     }
     if(aviso) aviso.innerHTML = '';
 
-    // ¿La variacion porcentual significa algo en este indicador?
-    //
-    // Hay DOS casos donde no significa nada, y los dos aparecieron probando:
-    //
-    // 1. Indices construidos de recorrido corto. En una escala de -2,5 a 2,5,
-    //    pasar de 0,1 a -0,2 da «-300 %»: eso no es un dato, es una division por
-    //    un numero chico. Se informa la diferencia en PUNTOS.
-    //    Ojo: no alcanza con mirar la unidad. El valor indicativo del armamento
-    //    tambien dice «valor indicativo» y esta en millones: tratarlo como indice
-    //    daba «-1.000.000 pts», que es absurdo. Por eso ademas se exige que los
-    //    valores sean chicos.
-    //
-    // 2. Cantidades con signo que cruzan el cero, como la migracion neta: pasar
-    //    de +1.000 a -500 no es «-150 %» de nada. Se informa la DIFERENCIA en la
-    //    unidad del propio indicador.
-    const RECORRIDO_CORTO = 120;
-    const modoDeCambio = (i, d) => {
-      const u = (i.unidad || '').toLowerCase();
-      const suenaIndice = /indice|índice|escala|puntaje|estimacion|estimación|cumplimiento/.test(u);
-      const chicos = Math.max(Math.abs(d.valor), Math.abs(d.valor_inicial)) <= RECORRIDO_CORTO;
-      if(suenaIndice && chicos) return 'puntos';
-      const cruzaCero = (d.valor > 0) !== (d.valor_inicial > 0);
-      if(cruzaCero || !d.valor_inicial) return 'diferencia';
-      return 'porcentaje';
-    };
-
-    // Se juntan todos los indicadores del pais que declaran variacion en su ventana.
-    const cambios = [];
-    fuentesInd().forEach(f=>{
-      const reg = (f.registros||[]).find(r=>r.iso===paisFiltro);
-      if(!reg) return;
-      (f.indicadores||[]).forEach(i=>{
-        const d = reg.indicadores[i.clave];
-        if(!d || d.valor === undefined || d.valor_inicial === undefined) return;
-        if(!isFinite(d.valor) || !isFinite(d.valor_inicial)) return;
-        const modo = modoDeCambio(i, d);
-        const dif = d.valor - d.valor_inicial;
-        const pct = d.tendencia_ventana_pct;
-        let magnitud;
-        if(modo === 'porcentaje'){
-          if(pct === null || pct === undefined || !isFinite(pct) || Math.abs(pct) < 1) return;
-          magnitud = Math.abs(pct);
-        } else if(modo === 'puntos'){
-          if(Math.abs(dif) < 0.05) return;
-          // Se ordena por cuanto se movio respecto del recorrido del indice.
-          const recorrido = Math.max(Math.abs(d.valor), Math.abs(d.valor_inicial), 1);
-          magnitud = Math.abs(dif) / recorrido * 100;
-        } else {
-          if(!dif) return;
-          // Una cantidad que cruza el cero se ordena por el peso del cambio.
-          const base = Math.max(Math.abs(d.valor), Math.abs(d.valor_inicial), 1);
-          magnitud = Math.abs(dif) / base * 100;
-        }
-        cambios.push({info:i, dato:d, proc:f.procedencia, modo, dif, magnitud});
-      });
-    });
-    cambios.sort((a,b)=>b.magnitud-a.magnitud);
+    const cambios = cambiosDelEstado(paisFiltro);
     const muestra = cambios.slice(0,6);
 
     if(tag) tag.textContent = muestra.length
