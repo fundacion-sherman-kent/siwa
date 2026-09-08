@@ -894,6 +894,18 @@
   .grafico-seleccion > div:empty{display:none;}
   .sobre-el-tema{margin-top:10px;}
 
+  /* CUANDO: el deslizador de anio, debajo del mapa. Hacia atras sobre lo
+     publicado; los botones de proyeccion, al lado, hacia adelante. */
+  .cuando{display:flex;flex-direction:column;gap:4px;margin:10px 0 6px;padding:8px 10px;
+    background:#0E2135;border:1px solid var(--line);border-radius:8px;}
+  .cuando label{font-size:11px;color:#C7D2E0;}
+  .cuando label b{color:var(--orange);}
+  .cuando input[type=range]{width:100%;accent-color:var(--orange);margin:2px 0;}
+  .cuando input[type=range]:disabled{opacity:.35;}
+  .anio-extremos{display:flex;justify-content:space-between;font-size:10px;color:#7d90a8;
+    font-family:'JetBrains Mono',monospace;}
+  .tablero-mapa .modos{margin-top:6px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1583,6 +1595,12 @@
           <button class="boton chico" id="limpiar-cruce">quitar cruce</button>
         </div>
 
+        <div class="cuando" id="cuando">
+          <label for="anio-mapa"><span id="anio-rotulo">Último dato</span></label>
+          <input type="range" id="anio-mapa" min="0" max="0" value="0" disabled
+                 aria-label="Año que muestra el mapa">
+          <span class="anio-extremos"><span id="anio-desde"></span><span id="anio-hasta"></span></span>
+        </div>
         <div class="modos">
           <button class="modo activo" data-modo="nivel">Nivel actual</button>
           <button class="modo" data-modo="1">Proyección 1 año</button>
@@ -2853,6 +2871,10 @@
   // Se abre en la situacion general y no en un indicador suelto: quien entra
   // por primera vez pregunta «como esta la region», no «como estan los homicidios».
   let capaActiva = 'situacion', modo = 'nivel', paisFiltro = null, paisNombre = null, padron = [];
+  // EL ANIO ELEGIDO PARA EL MAPA. null es «el ultimo dato de cada Estado», que
+  // es lo que siempre se mostro. Un anio concreto repinta el mapa con lo que la
+  // fuente publico para ese anio: no se calcula ni se proyecta nada.
+  let anioElegido = null;
   // La zona puede elegirse SOLA, sin pasar por un pais: antes solo existia como
   // «el bloque del pais elegido», y no habia forma de mirar una zona entera.
   let bloqueFiltro = null;
@@ -3982,6 +4004,56 @@
   // desincronizan y el lector no sabría cuál le contesta. Si el hueco no existe
   // —una versión vieja en caché, por ejemplo— el explorador se queda donde
   // estaba y el registro sigue funcionando.
+  // ============ EL ANIO DEL MAPA ============
+  //
+  // Vision of Humanity tiene tres selectores: pais, indicador y ANIO. SIWA tenia
+  // los dos primeros. Con series de ocho y diez anios, el mapa solo mostraba el
+  // ultimo dato; para ver 2016 habia que abrir la ficha de cada pais.
+  //
+  // El deslizador recorre los anios de la serie de la capa activa y el mapa se
+  // repinta con lo que la fuente publico ese anio. Cuando la capa no tiene
+  // serie, se apaga y lo dice.
+  function armarAnio(){
+    const r = document.getElementById('anio-mapa');
+    if(!r || r.dataset.armado) return;
+    r.dataset.armado = '1';
+    r.addEventListener('input', () => {
+      const anios = aniosDeLaCapa();
+      const i = +r.value;
+      // La ultima posicion es «ultimo dato», que es lo de siempre.
+      anioElegido = (i >= anios.length) ? null : anios[i];
+      if(modo !== 'nivel') modo = 'nivel';
+      repintar();
+    });
+  }
+
+  function pintarAnio(){
+    const r = document.getElementById('anio-mapa');
+    const rot = document.getElementById('anio-rotulo');
+    const d = document.getElementById('anio-desde'), h = document.getElementById('anio-hasta');
+    if(!r) return;
+    const anios = aniosDeLaCapa();
+    if(anios.length < 2){
+      r.disabled = true; r.min = 0; r.max = 0; r.value = 0;
+      if(rot) rot.textContent = 'Este tema no tiene serie: se muestra el último dato';
+      if(d) d.textContent = ''; if(h) h.textContent = '';
+      // NO se borra el anio elegido aca. La primera pasada corre antes de que
+      // llegue el archivo, la serie esta vacia, y borrar el anio en ese momento
+      // hacia que ?anio=2016 en el enlace se perdiera antes de poder aplicarse.
+      // Si la capa de verdad no tiene serie, valores() ya lo ignora.
+      return;
+    }
+    // Si el anio elegido no existe en esta capa, se vuelve al ultimo dato en vez
+    // de dejar el mapa vacio en silencio.
+    if(anioElegido && !anios.includes(anioElegido)) anioElegido = null;
+    r.disabled = false; r.min = 0; r.max = anios.length;
+    r.value = anioElegido ? anios.indexOf(anioElegido) : anios.length;
+    if(rot) rot.innerHTML = anioElegido
+      ? 'El mapa muestra <b>' + anioElegido + '</b>'
+      : '<b>Último dato</b> de cada Estado';
+    if(d) d.textContent = anios[0]; if(h) h.textContent = 'último';
+  }
+
   // ============ EL TABLERO ============
   //
   // Las piezas existen y funcionan; lo que estaba mal era DONDE estaban. Se
@@ -4009,6 +4081,14 @@
     mover('#limpiar-cruce', 'slot-cruce');
     // El mapa con su tarjeta y el explorador al lado.
     mover('.tablero', 'slot-tablero');
+    // Y debajo del mapa, CUANDO: el deslizador de anio y las proyecciones.
+    const colMapa = document.querySelector('.tablero-mapa');
+    if(colMapa){
+      ['#cuando', '.modos', '#seleccion'].forEach(q => {
+        const el = document.querySelector(q);
+        if(el && !colMapa.contains(el)) colMapa.appendChild(el);
+      });
+    }
     // El grafico de lo elegido o cruzado, debajo del mapa.
     mover('#ficha-busqueda', 'slot-cruce-resultado');
     mover('#tabla-comparacion', 'slot-comparacion');
@@ -5143,7 +5223,13 @@
   // no hay puntero que preguntar.
   function figuraLeyenda(capa, paleta){
     if(!capa || !capa.conteo || !capa.leyenda) return '';
-    const valores = capa.conteo() || {};
+    // LA TIRA MUESTRA LO QUE EL MAPA MUESTRA. Con un anio elegido, las marcas
+    // son las cifras de ese anio; los cortes de color siguen siendo los del
+    // ultimo dato a proposito, para que dos anios se comparen con la misma
+    // escala. Una leyenda que dijera «ultimo dato» debajo de un mapa de 2016
+    // seria una leyenda que miente.
+    const valores = (typeof window.__valoresDelMapa === 'function' ? window.__valoresDelMapa() : null)
+      || capa.conteo() || {};
     const pares = Object.entries(valores).filter(([, v]) => isFinite(v));
     if(pares.length < 6) return '';
     const vals = pares.map(x => x[1]).sort((a, b) => a - b);
@@ -5855,12 +5941,42 @@
   // Mismo caso: valores() se pedia una vez por pais al pintar. Se guarda por
   // tema, modo y sello de datos.
   let valoresGuardados = null, claveValores = '';
+  // Los anios que cubre la serie de la capa activa, para armar el deslizador.
+  function aniosDeLaCapa(){
+    const capaP = capaActual();
+    if(typeof capaP.serieDe !== 'function' || typeof capaP.conteo !== 'function') return [];
+    const anios = new Set();
+    Object.keys(capaP.conteo() || {}).forEach(iso => {
+      (capaP.serieDe(iso) || []).forEach(a => { if(isFinite(a.valor)) anios.add(+a.anio); });
+    });
+    return [...anios].sort((a, b) => a - b);
+  }
+
+  // Las cifras de un anio concreto: lo que la fuente publico para ese anio en
+  // cada Estado, ni mas ni menos. El Estado sin dato ese anio queda sin pintar.
+  function valoresEnAnio(anio){
+    const capaP = capaActual();
+    const m = {};
+    Object.keys(capaP.conteo() || {}).forEach(iso => {
+      const a = (capaP.serieDe(iso) || []).find(x => +x.anio === anio);
+      if(a && isFinite(a.valor)) m[iso] = a.valor;
+    });
+    return m;
+  }
+
+  window.__valoresDelMapa = () => valores();
   function valores(){
-    const clave = capaActiva + '|' + modo + '|' + selloDeDatos();
+    const clave = capaActiva + '|' + modo + '|' + (anioElegido || 'ultimo') + '|' + selloDeDatos();
     if(valoresGuardados && claveValores === clave) return valoresGuardados;
     let m;
     const capaP = capaActual();
-    if(modo !== 'nivel' && typeof capaP.proyectados === 'function'){
+    // EL ANIO ELEGIDO MANDA sobre el nivel actual, y solo sobre el: la proyeccion
+    // parte siempre del ultimo dato, y un anio del pasado con proyeccion encima
+    // seria mezclar lo publicado con lo prolongado.
+    if(anioElegido && modo === 'nivel' && typeof capaP.serieDe === 'function'){
+      m = valoresEnAnio(anioElegido);
+    }
+    else if(modo !== 'nivel' && typeof capaP.proyectados === 'function'){
       // El compuesto se rearma en el horizonte con sus propios indicadores.
       m = capaP.proyectados(anios()).valores;
     }
@@ -6696,6 +6812,8 @@
       ? [`Peor que ${c[0]}`, `${c[0]} a ${c[1]}`, `${c[1]} a ${c[2]}`, `Mejor que ${c[2]}`]
       : [`Hasta ${miles(c[0])}`, `${miles(c[0])} a ${miles(c[1])}`, `${miles(c[1])} a ${miles(c[2])}`, `${miles(c[2])} o más`];
     const cajaLeyenda = document.getElementById('leyenda');
+    const rotuloAnio = document.getElementById('anio-rotulo');
+    if(rotuloAnio && anioElegido) rotuloAnio.innerHTML = 'El mapa muestra <b>' + anioElegido + '</b>';
     // EL MAPA NO SE QUEDA VACIO EN SILENCIO. Si la capa activa no tiene ni un
     // valor, hasta ahora se pintaban los treinta y tres Estados del color de
     // fondo y la leyenda inventaba cortes de reserva: el lector veia un mapa en
@@ -6918,6 +7036,7 @@
                  : u.searchParams.delete('materia');
       navComparar.length ? u.searchParams.set('comparar', navComparar.join(','))
                          : u.searchParams.delete('comparar');
+      anioElegido ? u.searchParams.set('anio', String(anioElegido)) : u.searchParams.delete('anio');
       history.replaceState(null, '', u);
     }catch(e){}
   }
@@ -6935,6 +7054,8 @@
       const ma = q.get('materia'); if(ma){ navMateria = ma; }
       const cp = q.get('comparar');
       if(cp) navComparar = cp.split(',').filter(x => /^[A-Z]{3}$/.test(x)).slice(0, 4);
+      const an = parseInt(q.get('anio'), 10);
+      if(an >= 1990 && an <= 2100) anioElegido = an;
       const pa = q.get('pais');
       if(pa && padron.length){
         const p = padron.find(x => x.iso === pa);
@@ -7786,6 +7907,7 @@
     ordenarCautelas();
     plegarMetodo();
     armarTableroSiwa();
+    armarAnio();
     mudarElExplorador();
     llenarComparador();
     armarNavegador();
@@ -7795,6 +7917,7 @@
     paso('solapas', armarSolapas);
     paso('para publicar hoy', paraPublicarHoy);
     paso('figuras vivas', armarFigurasVivas);
+    paso('año del mapa', pintarAnio);
     paso('explorador', navegadorVista);
     paso('narcotráfico', narcotraficoVista);
     paso('crimen organizado', crimenVista);
