@@ -1355,3 +1355,49 @@ pero eso el registro **ya lo tiene** por vía del Banco Mundial, que lo toma de
 SIPRI y lo redistribuye con licencia abierta. Ir directo agregaría un año y el
 gasto por habitante a cambio de asumir una restricción de licencia donde hoy no
 hay ninguna. **No conviene.**
+
+---
+
+# Paz, terrorismo y la red de la OEA — 7 de septiembre de 2026
+
+## Índice de Paz e Índice de Terrorismo (IEP) — se pueden, gratis, pidiéndolos
+
+El Instituto para la Economía y la Paz publica el **Índice de Paz Global** (163
+Estados) y el **Índice Global de Terrorismo** (163 países, 99,7 % de la
+población mundial). Su mapa es una aplicación que no expone datos, y la única
+dirección de datos que menciona es su página de licenciamiento.
+
+**Pero la frase que decide está escrita en su propia página:** *«Download IEP's
+data for free with our non-commercial license»*. Se descarga **gratis con
+licencia no comercial**, previa solicitud en
+`economicsandpeace.org/consulting/data-licensing`.
+
+**SIWA califica sin discusión**: es gratuito, abierto, sin publicidad y sin
+botón de donaciones —decisión de doctrina que se tomó justamente para no
+comprometer las licencias no comerciales—.
+
+### Por qué importa el de terrorismo
+
+**Reemplazaría una serie muerta.** El registro publica muertes y atentados
+terroristas desde la Base Global de Terrorismo, **detenida en 2021**, y lo
+declara en cada ficha. El Índice Global de Terrorismo está vivo y cubre a los
+33. Es el mejor candidato que apareció para cerrar ese vacío.
+
+## OEA — RedPPol confirma lo ya sabido
+
+`403`. Es el cuarto camino de `oas.org` que se prueba y el cuarto que devuelve lo
+mismo: **el dominio entero rechaza a los programas**. Nada que hacer sin gestión
+institucional.
+
+## Las gestiones abiertas quedan en cuatro
+
+| Organización | Qué falta | Cómo se pide |
+|---|---|---|
+| **ReliefWeb** (OCHA) | nombre de aplicación autorizado | formulario |
+| **IEP** | los dos índices, licencia no comercial | formulario |
+| **SIPRI** | base de transferencias de armamento | correo |
+| **UNESCO** | acceso a una ruta ya identificada | carta institucional |
+
+Tres de las cuatro son trámites simples, y en las cuatro el perfil de la
+Fundación —casa de análisis de la región, registro gratuito y abierto— es
+exactamente lo que esas organizaciones piden ver.
