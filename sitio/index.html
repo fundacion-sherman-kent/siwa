@@ -868,6 +868,32 @@
     margin:2px 0 6px;}
   .leyenda .tira-leyenda{display:block;width:100%;margin-bottom:4px;}
 
+  /* EL TABLERO. Dos elecciones y dos modificadores en una fila; debajo el mapa
+     con su tarjeta; debajo el grafico de lo elegido. Todo lo demas, despues. */
+  .tablero-siwa{margin-top:6px;}
+  .fila-selectores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;
+    align-items:start;margin:0 0 14px;}
+  @media (max-width:1100px){ .fila-selectores{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media (max-width:600px){ .fila-selectores{grid-template-columns:1fr;} }
+  .sel-slot{min-width:0;background:#0E2135;border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;}
+  .sel-slot.eleccion{border-color:rgba(251,101,0,.45);}
+  .sel-slot label{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;
+    color:#7d90a8;margin-bottom:6px;}
+  .sel-slot.eleccion label{color:var(--orange);}
+  .sel-slot select,.sel-slot input{width:100%;}
+  .sel-slot .elegir-nota{display:none;}                 /* la nota larga no va en una fila */
+  .sel-slot .control{margin:0;}
+  .sel-slot .boton.chico{margin-top:8px;}
+  /* La lista del cruce se abre a pedido: con foco o con texto escrito. */
+  #slot-cruce .lista-temas,#slot-cruce .elegidos{display:none;}
+  #slot-cruce:focus-within .lista-temas,#slot-cruce.con-texto .lista-temas,
+  #slot-cruce.con-texto .elegidos{display:block;}
+  #slot-cruce .lista-temas{max-height:260px;overflow-y:auto;margin-top:8px;}
+  .grafico-seleccion{margin-top:14px;}
+  .grafico-seleccion > div:empty{display:none;}
+  .sobre-el-tema{margin-top:10px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1482,8 +1508,8 @@
 <div class="shell">
   <nav class="rail" aria-label="Secciones del registro">
     <div class="grupo">Empezar</div>
+    <a href="#tablero-siwa">Tablero</a>
     <a href="#ficha-pais">Mi país</a>
-    <a href="#mapa-seccion">Mapa de situación</a>
     <a href="#seis-materias">Las seis materias</a>
     <div class="grupo">Los cuatro ejes</div>
     <a href="#seguridad-violencia">Violencia y víctimas</a>
@@ -1500,6 +1526,25 @@
   </nav>
 
   <main>
+    <!-- EL TABLERO. Esqueleto vacio: las piezas que ya existen se mudan aca al
+         cargar (armarTableroSiwa). Es el mismo elemento, no una copia. -->
+    <section class="domain tablero-siwa" id="tablero-siwa">
+      <div class="fila-selectores" id="fila-selectores">
+        <div class="sel-slot eleccion" id="slot-ambito"></div>
+        <div class="sel-slot eleccion" id="slot-tema"></div>
+        <div class="sel-slot modificador" id="slot-comparar"></div>
+        <div class="sel-slot modificador" id="slot-cruce"></div>
+      </div>
+      <div id="slot-tablero"></div>
+      <div class="grafico-seleccion" id="grafico-seleccion">
+        <div id="slot-cruce-resultado"></div>
+        <div id="slot-comparacion"></div>
+        <details class="aviso-cobertura sobre-el-tema" id="sobre-el-tema">
+          <summary>Sobre el tema elegido: qué muestra, qué no es y qué falta</summary>
+          <div id="slot-explica"></div>
+        </details>
+      </div>
+    </section>
     <section class="domain" id="ficha-pais">
       <div id="perfil-pais"></div>
       <div class="domain-head"><h3 id="titulo-ficha">La región en cifras</h3><span class="tag" id="tag-ficha">—</span></div>
@@ -3937,6 +3982,55 @@
   // desincronizan y el lector no sabría cuál le contesta. Si el hueco no existe
   // —una versión vieja en caché, por ejemplo— el explorador se queda donde
   // estaba y el registro sigue funcionando.
+  // ============ EL TABLERO ============
+  //
+  // Las piezas existen y funcionan; lo que estaba mal era DONDE estaban. Se
+  // mudan al esqueleto del principio: el mismo elemento, con sus escuchas y sus
+  // identificadores. Ninguna funcion que las busca por id tiene que enterarse.
+  function armarTableroSiwa(){
+    const tab = document.getElementById('tablero-siwa');
+    if(!tab || tab.dataset.armado) return;
+    const mover = (sel, destinoId) => {
+      const el = typeof sel === 'string' ? document.querySelector(sel) : sel;
+      const destino = document.getElementById(destinoId);
+      if(el && destino && !destino.contains(el)) destino.appendChild(el);
+      return el;
+    };
+    // Las dos elecciones.
+    mover('.elegir-ambito', 'slot-ambito');
+    const tema = document.getElementById('tema-principal');
+    if(tema) mover(tema.closest('.control'), 'slot-tema');
+    // Los dos modificadores.
+    const comp = document.getElementById('comparar-pais');
+    if(comp) mover(comp.closest('.control'), 'slot-comparar');
+    mover('#limpiar-comparacion', 'slot-comparar');
+    const cruce = document.getElementById('buscar-cruce');
+    if(cruce) mover(cruce.closest('.control'), 'slot-cruce');
+    mover('#limpiar-cruce', 'slot-cruce');
+    // El mapa con su tarjeta y el explorador al lado.
+    mover('.tablero', 'slot-tablero');
+    // El grafico de lo elegido o cruzado, debajo del mapa.
+    mover('#ficha-busqueda', 'slot-cruce-resultado');
+    mover('#tabla-comparacion', 'slot-comparacion');
+    mover('#caja-consulta', 'slot-comparacion');
+    // Lo que explica el tema, plegado bajo el grafico.
+    ['#senal-tema', '#pendientes', '#explica-capa', '#panel-cruce'].forEach(q => mover(q, 'slot-explica'));
+
+    // El encabezado «Mapa de situacion» queda sin mapa: se lo saca. Lo que resta
+    // en esa seccion —los modos de proyeccion, el instructivo plegado y las
+    // notas de pie— sigue ahi, debajo de todo, como material de consulta.
+    const cab = document.querySelector('#mapa-seccion > .domain-head');
+    if(cab) cab.remove();
+
+    // LA LISTA DE 95 TEMAS SE ABRE SOLO CUANDO SE LA PIDE: al escribir o al
+    // poner el foco. Cerrada, el selector es una linea.
+    const slotCruce = document.getElementById('slot-cruce');
+    const marcarTexto = () => slotCruce.classList.toggle('con-texto', !!(cruce && cruce.value.trim()));
+    if(cruce){ cruce.addEventListener('input', marcarTexto); marcarTexto(); }
+
+    tab.dataset.armado = '1';
+  }
+
   function mudarElExplorador(){
     const hueco = document.getElementById('tablero-respuesta');
     const nav = document.getElementById('navegador');
@@ -7691,6 +7785,7 @@
     paso('comercio de armas', armasVista);
     ordenarCautelas();
     plegarMetodo();
+    armarTableroSiwa();
     mudarElExplorador();
     llenarComparador();
     armarNavegador();
