@@ -859,6 +859,10 @@
   #globo-figura .ir{color:#7d90a8;font-size:10.5px;}
   @media (prefers-reduced-motion:reduce){ #globo-figura{transition:none;} }
 
+  .pie-leyenda{display:block;color:#7d90a8;font-size:10px;line-height:1.5;
+    margin:2px 0 6px;}
+  .leyenda .tira-leyenda{display:block;width:100%;margin-bottom:4px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -5027,6 +5031,68 @@
       + '" data-rot="' + esc(rotulo || '') + '" data-val="' + esc(valor) + '"';
   }
 
+  // ============ LA LEYENDA COMO REPARTO ============
+  //
+  // Cuatro cuadrados dicen qué significa cada color. No dicen lo único que hace
+  // falta para leer un mapa de coropletas: dónde caen los países en esa escala.
+  // Un mapa donde casi todos quedan en el mismo tramo se ve parejo, y el lector
+  // no puede saber si la región es pareja o si los cortes están mal elegidos.
+  //
+  // La rampa con los casos encima es como lo resuelven GI-TOC y el Foro. Los
+  // cuadrados no se borran: quedan debajo. La tira dice dónde cae cada uno; los
+  // cuadrados dicen qué significa cada color, y eso hace falta en papel, donde
+  // no hay puntero que preguntar.
+  function figuraLeyenda(capa, paleta){
+    if(!capa || !capa.conteo || !capa.leyenda) return '';
+    const valores = capa.conteo() || {};
+    const pares = Object.entries(valores).filter(([, v]) => isFinite(v));
+    if(pares.length < 6) return '';
+    const vals = pares.map(x => x[1]).sort((a, b) => a - b);
+    const min = vals[0], max = vals[vals.length - 1];
+    if(!(max > min)) return '';
+    const cortes = capa.leyenda.filter(c => isFinite(c) && c > min && c < max);
+    const rot = capa.rotulo || '';
+
+    const an = Math.max(280, Math.min(560, anchoDeFigura('mapa-seccion')));
+    const al = 52, m = 10, util = an - m * 2, yR = 16, hR = 13;
+    const x = v => m + ((v - min) / (max - min)) * util;
+
+    // La rampa se dibuja por tramos, con el color exacto que usa el mapa: si el
+    // color de la leyenda no es el del mapa, la leyenda miente.
+    const bordes = [min].concat(cortes, [max]);
+    const tramos = bordes.slice(0, -1).map((b, i) =>
+      '<rect x="' + x(b).toFixed(1) + '" y="' + yR + '" width="'
+      + Math.max(1, x(bordes[i+1]) - x(b)).toFixed(1) + '" height="' + hR
+      + '" fill="' + (paleta[i] || paleta[paleta.length-1]) + '"></rect>').join('');
+
+    const marcas = pares.map(([i, v]) => {
+      const propio = i === paisFiltro;
+      return '<line x1="' + x(v).toFixed(1) + '" y1="' + (yR - 4) + '" x2="'
+        + x(v).toFixed(1) + '" y2="' + (yR + hR + 4) + '" stroke="'
+        + (propio ? '#fff' : 'rgba(255,255,255,.45)') + '" stroke-width="'
+        + (propio ? 2.5 : 1) + '"></line>'
+        + '<rect' + marcaViva(i, rot, cifra(v)) + ' x="' + (x(v) - 6).toFixed(1)
+        + '" y="' + (yR - 6) + '" width="12" height="' + (hR + 12) + '" fill="transparent"></rect>';
+    }).join('');
+
+    const rotulos = cortes.map(c =>
+      '<text x="' + x(c).toFixed(1) + '" y="' + (al - 4) + '" text-anchor="middle" '
+      + 'fill="#7d90a8" font-size="9">' + miles(c) + '</text>').join('');
+
+    return '<svg viewBox="0 0 ' + an + ' ' + al + '" width="' + an + '" height="' + al
+      + '" style="max-width:100%;height:auto" role="img" aria-label="Reparto de los '
+      + pares.length + ' Estados en la escala del mapa, de ' + cifra(min) + ' a '
+      + cifra(max) + '">'
+      + tramos + marcas + rotulos
+      + '<text x="' + m + '" y="10" fill="#7d90a8" font-size="9">' + miles(min) + '</text>'
+      + '<text x="' + (an - m) + '" y="10" text-anchor="end" fill="#7d90a8" '
+      + 'font-size="9">' + miles(max) + '</text>'
+      + '</svg>'
+      + '<small class="pie-leyenda">Cada marca es un Estado sobre la escala del mapa; '
+      + 'son ' + pares.length + '. Donde se amontonan, el mapa se ve parejo porque la '
+      + 'región lo es.</small>';
+  }
+
   // ============ LA TIRA REGIONAL ============
   //
   // «Lugar 13 de 33» ordena pero no muestra distancia: no dice si el 13 esta
@@ -5165,9 +5231,24 @@
 
   function capaBanco(clave, escala, divergente){
     const meta = () => metaInd(clave);
-    const cortes = escala.cortes, ceroAparte = escala.ceroAparte;
+    // LOS CORTES SE RECALCULAN CUANDO CAMBIA EL DATO. Se calculaban una sola vez,
+    // al construir la capa; si la capa se construia antes de que llegara el
+    // archivo, cortesDe() devolvia su valor de reserva —[1, 2, 3]— y ese quedaba
+    // pegado a la capa para siempre. De ahi la leyenda «hasta 1 · 1 a 2 · 2 a 3»
+    // sobre una serie de homicidios que llega a 64,16.
+    let cortes = escala.cortes, ceroAparte = escala.ceroAparte;
+    let selloCortes = selloDeDatos();
+    const alDia = () => {
+      const ahora = selloDeDatos();
+      if(ahora !== selloCortes){
+        const e = cortesDe(meta() || {clave});
+        cortes = e.cortes; ceroAparte = e.ceroAparte; selloCortes = ahora;
+      }
+      return cortes;
+    };
     return {
-      materia: clave, divergente, leyenda: cortes, ceroAparte,
+      materia: clave, divergente, ceroAparte,
+      get leyenda(){ return alDia(); },
       get unidad(){ return meta().unidad || ''; },
       get cautela(){ return meta().cautela || ''; },
       conteo(){
@@ -5201,7 +5282,8 @@
         // cero es alivio, en satelites en orbita cero es ausencia de capacidad.
         // El mapa muestra que no hay casos; el juicio no le corresponde.
         if(ceroAparte && v === 0) return COLOR_CERO;
-        const i = v < cortes[0] ? 0 : v < cortes[1] ? 1 : v < cortes[2] ? 2 : 3;
+        const q = alDia();
+        const i = v < q[0] ? 0 : v < q[1] ? 1 : v < q[2] ? 2 : 3;
         return divergente ? DIV[i] : MAG[i];
       },
       detalle(iso){
@@ -5692,8 +5774,15 @@
         if(pr && pr.ajusta) m[iso] = pr.valor;
       });
     }
-    valoresGuardados = m; claveValores = clave;
-    return m;
+    // NO SE MEMORIZA UN VACIO. Si esto se calcula antes de que llegue el archivo
+    // —pasa cuando el tema viene en el enlace y la pagina carga en frio— el
+    // resultado es un objeto vacio, y guardarlo dejaba el mapa pintando los 33
+    // Estados del color de fondo para el resto de la sesion, sin un aviso y sin
+    // un error en consola. Un resultado vacio casi nunca es una respuesta: es
+    // una carrera perdida contra la descarga.
+    if(m && Object.keys(m).length){ valoresGuardados = m; claveValores = clave; }
+    else { valoresGuardados = null; claveValores = null; }
+    return m || {};
   }
 
   const sinAjuste = iso => {
@@ -6499,7 +6588,21 @@
       ? [`Peor que ${c[0]}`, `${c[0]} a ${c[1]}`, `${c[1]} a ${c[2]}`, `Mejor que ${c[2]}`]
       : [`Hasta ${miles(c[0])}`, `${miles(c[0])} a ${miles(c[1])}`, `${miles(c[1])} a ${miles(c[2])}`, `${miles(c[2])} o más`];
     const cajaLeyenda = document.getElementById('leyenda');
+    // EL MAPA NO SE QUEDA VACIO EN SILENCIO. Si la capa activa no tiene ni un
+    // valor, hasta ahora se pintaban los treinta y tres Estados del color de
+    // fondo y la leyenda inventaba cortes de reserva: el lector veia un mapa en
+    // blanco y ninguna explicacion. La regla de la casa es vieja —sin novedades
+    // se dice, no se omite— y aca no se estaba cumpliendo.
+    const hayAlgo = Object.keys((typeof capa.conteo === 'function' ? capa.conteo() : {}) || {}).length;
+    if(cajaLeyenda && !hayAlgo){
+      cajaLeyenda.innerHTML = '<span class="sin-puntos"><b>Este tema no tiene ningún '
+        + 'dato cargado en esta vuelta del robot.</b> El mapa queda sin pintar a '
+        + 'propósito: no es que todos los Estados valgan lo mismo, es que no hay '
+        + 'cifras para comparar. Si la fuente vuelve, el tema vuelve solo.</span>';
+      return;
+    }
     if(cajaLeyenda) cajaLeyenda.innerHTML =
+      `<span class="tira-leyenda">${figuraLeyenda(capa, paleta)}</span>` +
       (capa.ceroAparte
         ? `<span><i style="background:${COLOR_CERO}"></i>En cero — ningún caso registrado</span>`
         : '') +

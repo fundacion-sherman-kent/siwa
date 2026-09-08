@@ -26,6 +26,7 @@ de expertos. No son recuentos de hechos y no pueden presentarse como tales.
 from __future__ import annotations
 
 import json
+import time
 import urllib.request
 from collections import defaultdict
 from datetime import datetime, timezone
@@ -253,13 +254,27 @@ def _traer(indicador: dict, isos: list) -> dict:
     ]
     if indicador["fuente_id"]:
         partes.append(f"&source={indicador['fuente_id']}")
+    # SE REINTENTA ANTES DE DAR UN INDICADOR POR CAIDO. La fuente contesta a
+    # unos indicadores y a otros no, y cambia en cada vuelta: son treinta y
+    # cuatro pedidos seguidos y corta unos cuantos. La mayoria de esos cortes se
+    # resuelven en el segundo intento.
     peticion = urllib.request.Request("".join(partes), headers={"User-Agent": comun.AGENTE})
-    with urllib.request.urlopen(peticion, timeout=120) as respuesta:
-        crudo = json.loads(respuesta.read().decode("utf-8", "replace"))
+    crudo, ultimo = None, None
+    for intento in range(3):
+        if intento:
+            time.sleep(2 * intento)
+        try:
+            with urllib.request.urlopen(peticion, timeout=120) as respuesta:
+                crudo = json.loads(respuesta.read().decode("utf-8", "replace"))
+        except Exception as error:  # noqa: BLE001 — se reintenta y, si no, se declara
+            ultimo, crudo = error, None
+            continue
+        if isinstance(crudo, list) and len(crudo) >= 2 and crudo[1]:
+            break
+        ultimo, crudo = crudo, None
 
     if not isinstance(crudo, list) or len(crudo) < 2 or crudo[1] is None:
-        mensaje = crudo[0] if isinstance(crudo, list) and crudo else crudo
-        raise RuntimeError(f"El Banco Mundial no devolvió serie para {indicador['codigo']}: {mensaje}")
+        raise RuntimeError(f"El Banco Mundial no devolvió serie para {indicador['codigo']}: {ultimo}")
 
     series = defaultdict(list)
     for fila in crudo[1]:
@@ -287,6 +302,19 @@ def recolectar():
 
     if all(not v for v in datos.values()):
         raise RuntimeError("Ningún indicador devolvió serie. No se escribe nada.")
+
+    # UN INDICADOR CON CERO ESTADOS NO ES UN RESULTADO: ES UNA FALLA.
+    #
+    # Pasó, y pasó con homicidios, que es la única cifra de seguridad comparable
+    # entre los 33. La API respondió sin excepción y devolvió vacío; el
+    # indicador se publicó igual, declarado en el catálogo y sin un solo valor.
+    # Río abajo el mapa pintaba los treinta y tres Estados del color de fondo,
+    # la leyenda inventaba cortes de reserva —«hasta 1 · 1 a 2 · 2 a 3» sobre
+    # una serie que llega a 64— y el selector seguía ofreciendo el tema.
+    #
+    # Se lo saca de todo: del catálogo, de la cobertura y de los registros. El
+    # sitio no puede ofrecer lo que no existe, y la falla queda declarada donde
+    # se declaran las demás.
 
     registros, cobertura = [], {}
     for pais in padron:
@@ -320,6 +348,67 @@ def recolectar():
         for clave in ficha["indicadores"]:
             cobertura[clave] = cobertura.get(clave, 0) + 1
 
+    # UN INDICADOR CON CERO ESTADOS NO ES UN RESULTADO: ES UNA FALLA.
+    #
+    # Paso, y paso con homicidios, que es la unica cifra de seguridad comparable
+    # entre los 33. La fuente respondio sin excepcion y no dejo un solo valor en
+    # el padron; el indicador se publico igual, declarado en el catalogo y
+    # vacio. Rio abajo el mapa pintaba los treinta y tres Estados del color de
+    # fondo, la leyenda inventaba cortes de reserva y el selector seguia
+    # ofreciendo el tema.
+    #
+    # El filtro va DESPUES de contar la cobertura y no antes: que la API
+    # devuelva algo no significa que ese algo caiga en los Estados del padron, y
+    # mirar lo que devolvio en vez de lo que quedo fue justamente el error de la
+    # primera version de este control.
+    # LO QUE NO VINO ESTA VUELTA SE CONSERVA DE LA ANTERIOR, Y SE DICE.
+    #
+    # El valor viejo no es una invencion: es el ultimo dato que la fuente
+    # publico, y viaja con su anio como todos los demas. Perder un indicador
+    # porque la fuente tosio es peor que mostrarlo con la fecha que tiene,
+    # siempre que la fecha este dicha. Lo que sigue prohibido es publicar un
+    # indicador VACIO como si existiera: eso es lo que dejaba el mapa en blanco.
+    heredados = []
+    previo = comun.DATOS / "publico" / "banco-mundial.json"
+    if previo.exists():
+        try:
+            anterior = json.loads(previo.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001 — sin archivo previo no hay nada que heredar
+            anterior = {}
+        antes = {r["iso"]: r.get("indicadores", {}) for r in anterior.get("registros", [])}
+        porIso = {r["iso"]: r for r in registros}
+        for i in INDICADORES:
+            clave = i["clave"]
+            if cobertura.get(clave, 0):
+                continue
+            recuperados = 0
+            for iso, viejos in antes.items():
+                dato = viejos.get(clave)
+                if not dato:
+                    continue
+                ficha = porIso.get(iso)
+                if ficha is None:
+                    continue
+                ficha["indicadores"][clave] = dato
+                recuperados += 1
+            if recuperados:
+                cobertura[clave] = recuperados
+                heredados.append(f"{i['rotulo']}: no se pudo actualizar en esta vuelta; "
+                                 f"se conserva el dato anterior en {recuperados} Estados")
+
+    publicables = [i for i in INDICADORES if cobertura.get(i["clave"], 0) > 0]
+    for i in INDICADORES:
+        if cobertura.get(i["clave"], 0):
+            continue
+        if not any(f.startswith(i["rotulo"] + ":") for f in fallidos):
+            fallidos.append(f"{i['rotulo']}: la fuente no dejo un solo Estado del padron")
+    fallidos.extend(heredados)
+    fuera = {i["clave"] for i in INDICADORES} - {i["clave"] for i in publicables}
+    for ficha in registros:
+        for clave in fuera:
+            ficha["indicadores"].pop(clave, None)
+    registros = [r for r in registros if r["indicadores"]]
+
     registros.sort(key=lambda r: r["pais"])
 
     calificacion = comun.calificar(
@@ -350,7 +439,7 @@ def recolectar():
         "Sin desglose subnacional: la cifra es nacional.",
         (
             "Cobertura por indicador: "
-            + ", ".join(f"{i['rotulo']} en {cobertura.get(i['clave'], 0)} de 33" for i in INDICADORES)
+            + ", ".join(f"{i['rotulo']} en {cobertura.get(i['clave'], 0)} de 33" for i in publicables)
             + "."
         ),
     ]
@@ -375,7 +464,7 @@ def recolectar():
             "indicadores": [
                 {k: i[k] for k in ("clave", "codigo", "rotulo", "eje", "unidad",
                                    "mas_es_peor", "origen", "cautela")}
-                for i in INDICADORES
+                for i in publicables
             ],
             "cobertura": cobertura,
             "serie_desde": DESDE,
