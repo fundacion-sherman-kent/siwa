@@ -794,6 +794,15 @@
   .como-se-usa{margin-top:12px;}
   .como-se-usa .pasos{margin:8px 0 0;}
 
+  /* LOS TRES GRUPOS DEL INDICE DE CRIMEN, uno al lado del otro: son la misma
+     escala de 1 a 10 y se leen comparandolos. Apilados obligan a recordar. */
+  .tres-grupos{display:grid;grid-template-columns:1fr;gap:12px;align-items:start;}
+  @media (min-width:900px){ .tres-grupos{grid-template-columns:repeat(3,1fr);} }
+  .tres-grupos .asunto{margin:0;}
+  .medida-crimen{display:flex;align-items:baseline;gap:7px;padding:2px 0;
+    line-height:1.45;cursor:help;}
+  .medida-crimen .edad{flex:0 0 auto;min-width:34px;text-align:center;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1757,7 +1766,7 @@
         </div>
 
     <div class="categoria" id="crimen" data-nivel="1">
-      <div class="categoria-head"><h4>Crimen organizado · mercados, actores y resistencia del Estado</h4><span class="tag" id="tag-crimen">—</span></div>
+      <div class="categoria-head"><h4>Crimen organizado · mercados, actores y resiliencia del Estado</h4><span class="tag" id="tag-crimen">—</span></div>
       <details class="aviso-cobertura"><summary>Es evaluación experta, no recuento de hechos</summary>
         <p><b>Es evaluación experta, no recuento de hechos.</b> Cada puntaje va de 1 a 10
            y lo fija un panel de especialistas con evidencia documental, revisado por
@@ -8400,15 +8409,22 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     // Con un pais elegido se muestran TODAS las medidas; sin el, el panorama.
     if(paisFiltro && lista.length === 1){
       const x = lista[0];
+      // El rótulo va EN CASTELLANO. Este bloque dibujaba `c.nombre`, que es el
+      // nombre original de GI-TOC, teniendo `c.rotulo` traducido al lado desde
+      // hace tiempo. El original queda en el atributo del renglón: quien quiera
+      // contrastar contra la fuente lo tiene a un toque, y quien lee en
+      // castellano lee en castellano.
       const grupo = (titulo, desde) => {
         const hijos = (d.catalogo||[]).filter(c => c.padre === desde);
-        return '<div class="asunto"><h4>' + esc(titulo) + '</h4><div class="foot">'
+        return '<div class="asunto grupo-crimen"><h4>' + esc(titulo) + '</h4><div class="foot">'
           + '<span class="porque">' + hijos.map(c => {
               const v = x.medidas[c.codigo];
               if(v === undefined) return '';
               const clase = v >= 7.5 ? 'muy-viejo' : v >= 5.5 ? 'viejo' : v >= 3.5 ? 'reciente' : 'fresco';
-              return '<span class="edad ' + clase + '" style="margin:2px 6px 2px 0;display:inline-block">'
-                + cifra(v) + '</span>' + esc(c.nombre) + '<br>';
+              return '<span class="medida-crimen" title="' + esc(c.nombre || '')
+                + (c.descripcion_es ? ' — ' + esc(c.descripcion_es) : '') + '">'
+                + '<span class="edad ' + clase + '">' + cifra(v) + '</span>'
+                + esc(c.rotulo || c.nombre) + '</span>';
             }).join('') + '</span></div></div>';
       };
       caja.innerHTML =
@@ -8422,9 +8438,11 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
             ? x.puestos.resiliencia.map(p => 'Resiliencia: <b>' + p.puesto + '.º</b> de '
                 + p.sobre + ' en ' + esc(p.ambito)).join(' · ') : '')
         + '</span><span class="badge medio">evaluación</span></div></div>'
+        + '<div class="tres-grupos">'
         + grupo('Mercados criminales', '1.1')
         + grupo('Actores criminales', '1.2')
-        + grupo('Resistencia del Estado', '2');
+        + grupo('Resiliencia del Estado', '2')
+        + '</div>';
       return;
     }
 
@@ -8435,7 +8453,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       return '<div class="asunto"><h4>' + esc(x.pais)
         + ' <span class="edad ' + clase + '">' + cifra(c) + '</span></h4>'
         + '<div class="foot"><span class="porque">'
-        + 'Criminalidad <b>' + cifra(c) + '</b> · resistencia del Estado <b>' + cifra(r) + '</b>'
+        + 'Criminalidad <b>' + cifra(c) + '</b> · resiliencia del Estado <b>' + cifra(r) + '</b>'
         + (mundo ? ' · <b>' + mundo.puesto + '.º</b> de 193 en el mundo' : '')
         + '<br>Fauna <b>' + cifra(x.medidas['1.1.8']) + '</b> · flora <b>'
         + cifra(x.medidas['1.1.7']) + '</b> · actores incrustados en el Estado <b>'
