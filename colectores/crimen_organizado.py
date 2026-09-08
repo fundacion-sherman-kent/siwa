@@ -304,10 +304,36 @@ def _serie(html: str, cual: str) -> list:
     return []
 
 
+# LA SERIE DE CADA MEDIDA. La pagina adjunta un grafico de linea a cada una,
+# con las tres ediciones. Se lee por codigo, igual que el valor: el bloque
+# «data-crime="1.1.11"» contiene su propio grafico y termina donde empieza el
+# siguiente bloque.
+_BLOQUE = re.compile(r'data-crime="([\d.]+)"(.*?)(?=data-crime="|\Z)', re.S)
+_GRAFICO = re.compile(r'class="line-chart"\s+data-data=(\[[^\]]*\])')
+
+
+def _series(html: str) -> dict:
+    series = {}
+    for m in _BLOQUE.finditer(html):
+        codigo, cuerpo = m.group(1), m.group(2)
+        g = _GRAFICO.search(cuerpo)
+        if not g:
+            continue
+        try:
+            datos = json.loads(g.group(1))
+        except Exception:  # noqa: BLE001 — un grafico ilegible no tumba la medida
+            continue
+        puntos = [{"anio": int(d["year"]), "valor": float(d["value"])}
+                  for d in datos if d.get("year") is not None and d.get("value") is not None]
+        if len(puntos) >= 2:
+            series.setdefault(codigo, sorted(puntos, key=lambda x: x["anio"]))
+    return series
+
+
 def _delEstado(faena: tuple) -> tuple:
     iso, slug = faena
     html = _pedir(f"{BASE}/country/{slug}")
-    return iso, _valores(html), _puestos(html), _serie(html, "1")
+    return iso, _valores(html), _puestos(html), _serie(html, "1"), _series(html)
 
 
 def recolectar():
@@ -324,13 +350,13 @@ def recolectar():
 
     faenas = [(p["iso"], slugs[p["iso"]]) for p in geo.padron()]
     with ThreadPoolExecutor(max_workers=4) as ejecutor:
-        crudo = {iso: (v, p, s) for iso, v, p, s in ejecutor.map(_delEstado, faenas)}
+        crudo = {iso: (v, p, s, ss) for iso, v, p, s, ss in ejecutor.map(_delEstado, faenas)}
 
     # SE PRUEBA EL LECTOR ANTES DE CREERLE UN VACIO A NADIE. Si la pagina cambia
     # de forma, el patron deja de encontrar y todos los Estados quedan en blanco:
     # eso NO es «no hay datos», es «no supimos leer».
-    control = crudo.get(CONTROL, ({}, {}, []))[0]
-    if not crudo.get(CONTROL, ({}, {}, []))[1]:
+    control = crudo.get(CONTROL, ({}, {}, [], {}))[0]
+    if not crudo.get(CONTROL, ({}, {}, [], {}))[1]:
         raise RuntimeError(
             f"La prueba del lector falló: en {CONTROL} no se leyó ningún puesto. La "
             "página escribe el ordinal dentro de una etiqueta —«85<sup>th</sup>»— y eso "
@@ -340,10 +366,16 @@ def recolectar():
             f"La prueba del lector falló: en {CONTROL} —que tiene puntaje en las 36 "
             f"medidas— sólo se leyeron {len(control)}. La página cambió de forma. NO se "
             "publica una lectura a ciegas.")
+    # Y LA SERIE TAMBIEN SE PRUEBA: Argentina tiene tres ediciones en cada
+    # medida. Si no se leyo ninguna, el que fallo es el lector.
+    if len(crudo.get(CONTROL, ({}, {}, [], {}))[3]) < 20:
+        raise RuntimeError(
+            f"La prueba del lector falló: en {CONTROL} no se leyó la serie por medida. "
+            "La página cambió de forma. NO se publica una lectura a ciegas.")
 
     registros, conDato = [], 0
     for pais in geo.padron():
-        valores, puestos, serie = crudo.get(pais["iso"], ({}, {}, []))
+        valores, puestos, serie, series = crudo.get(pais["iso"], ({}, {}, [], {}))
         if not valores:
             registros.append({"iso": pais["iso"], "pais": pais["pais"],
                               "bloque": pais["bloque"], "estado": "no_se_pudo_leer"})
@@ -359,6 +391,8 @@ def recolectar():
             "medidas": {c: v for c, v in sorted(valores.items())},
             "puestos": puestos,
             "serie_criminalidad": serie,
+            # La serie de cada medida, por codigo: tres ediciones bienales.
+            "series": series,
         })
 
     vacios = [
@@ -412,6 +446,8 @@ def recolectar():
         extra={
             "resumen": {
                 "edicion": 2025,
+                "ediciones_con_serie": sorted({a["anio"] for r in registros
+                                               for ss in r.get("series", {}).values() for a in ss}),
                 "estados_evaluados": conDato,
                 "estados_del_padron": len(registros),
                 "paises_en_el_indice": 193,

@@ -285,7 +285,7 @@
     background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 16px 14px;
     display:flex;flex-direction:column;gap:8px;
   }
-  .card h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
+  .card h4,.card h3{margin:0;font-size:13px;font-weight:700;color:#fff;}
   .card .value{font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace;}
   .card .sub{font-size:11px;color:#9fb2c8;min-height:14px;}
   .card .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px;padding-top:8px;border-top:1px solid var(--line);}
@@ -297,7 +297,7 @@
 
   /* Vacíos declarados — regla 7 de la casa */
   .vacios{margin-top:14px;border:1px dashed rgba(251,101,0,.35);border-radius:10px;padding:14px 18px;}
-  .vacios h5{margin:0 0 8px;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:700;}
+  .vacios h5,.vacios h4{margin:0 0 8px;font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:700;}
   .vacios ul{margin:0;padding-left:16px;}
   .vacios li{font-size:12px;color:#C7D2E0;line-height:1.6;margin-bottom:4px;}
 
@@ -305,7 +305,7 @@
     grid-column:1/-1;border:1px solid rgba(194,59,34,.5);background:rgba(194,59,34,.10);
     border-radius:10px;padding:16px 18px;
   }
-  .falla h4{margin:0 0 6px;font-size:13px;color:#ff9c86;font-weight:700;}
+  .falla h4,.falla h3{margin:0 0 6px;font-size:13px;color:#ff9c86;font-weight:700;}
   .falla p{margin:0;font-size:11.5px;color:#C7D2E0;line-height:1.6;}
 
   .placeholder{
@@ -333,7 +333,7 @@
   }
   .ficha-mapa .remite{font-size:10.5px;color:#7d90a8;line-height:1.5;
     border-top:1px solid rgba(255,255,255,.07);margin-top:8px;padding-top:8px;}
-  .ficha-mapa h4{margin:0;font-size:14px;color:#fff;font-weight:700;}
+  .ficha-mapa h3{margin:0;font-size:14px;color:#fff;font-weight:700;}
   .ficha-mapa .bloque{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#7d90a8;margin-bottom:10px;}
   .ficha-mapa .cifra{display:block;font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:800;color:#fff;line-height:1.15;}
   .ficha-mapa .unidad{display:block;font-size:10.5px;color:#9fb2c8;margin-bottom:10px;}
@@ -604,7 +604,7 @@
     background:rgba(251,101,0,.14);border-radius:4px;padding:2px 7px;}
   .cruce{display:flex;flex-direction:column;gap:10px;}
   .asunto{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
-  .asunto h4{margin:0 0 8px;font-size:13px;font-weight:700;color:#fff;line-height:1.45;}
+  .asunto h4,.asunto h3{margin:0 0 8px;font-size:13px;font-weight:700;color:#fff;line-height:1.45;}
   .asunto .origenes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
   .origen{
     font-size:10px;color:#9fb2c8;border:1px solid var(--line);border-radius:20px;
@@ -964,9 +964,20 @@
   .llevar-mapa{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:10.5px;
     color:#7d90a8;}
 
+  .evolucion{margin:14px 0 4px;background:#0E2135;border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;}
+  .evolucion-cab{font-size:12px;color:#C7D2E0;line-height:1.5;margin-bottom:8px;}
+  .evolucion-cab b{color:#fff;}
+  .evolucion svg{display:block;}
+  .mide-chip{font:inherit;}
+  button.mide-chip{cursor:pointer;}
+
+  .oculto-visual{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
+    white-space:nowrap;margin:-1px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
-  .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
+  .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:#fff;}
   .ficha-pais .org{font-size:10.5px;color:#7d90a8;margin:2px 0 12px;}
   .ficha-pais .org a{color:var(--orange);text-decoration:none;}
   .materia-linea{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:11.5px;}
@@ -1046,7 +1057,7 @@
   .limites-enlace{font-size:10px;color:var(--orange);text-decoration:none;border-bottom:1px dotted var(--orange);margin-left:10px;}
   .limites-enlace:hover{color:#fff;border-color:#fff;}
   .ficha-fuente{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:12px;}
-  .ficha-fuente h4{margin:0 0 4px;font-size:13px;color:#fff;font-weight:700;}
+  .ficha-fuente h4,.ficha-fuente h3{margin:0 0 4px;font-size:13px;color:#fff;font-weight:700;}
   .ficha-fuente .meta{font-size:10.5px;color:#7d90a8;margin-bottom:10px;}
   .ficha-fuente ul{margin:0;padding-left:16px;}
   .ficha-fuente li{font-size:11.5px;color:#C7D2E0;line-height:1.6;margin-bottom:5px;}
@@ -1225,7 +1236,7 @@
     background:rgba(255,255,255,.02);display:flex;flex-direction:column;gap:10px;
   }
   .materia > header{display:flex;gap:10px;align-items:baseline;justify-content:space-between;}
-  .materia h5{margin:0;font-size:14px;color:#E8EEF5;font-weight:700;letter-spacing:.2px;}
+  .materia h5,.materia h4,.materia h3{margin:0;font-size:14px;color:#E8EEF5;font-weight:700;letter-spacing:.2px;}
   .materia .grado{
     flex:0 0 auto;font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
     padding:3px 9px;border-radius:999px;background:rgba(125,144,168,.18);color:#9fb0c4;
@@ -1415,7 +1426,7 @@
   .ambito-informe{font-size:12px;color:#9fb0c4;}
   .ambito-informe b{color:#fff;}
   .falla.leve{border-left-color:#9fb0c4;background:rgba(125,144,168,.07);}
-  .falla.leve h4{color:#C7D2E0;}
+  .falla.leve h4,.falla.leve h3{color:#C7D2E0;}
   .membrete{display:none;}
   .colofon{display:none;}
 
@@ -1503,7 +1514,7 @@
   }
   .dos-columnas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .panel{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
-  .panel h4{margin:0 0 12px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#fff;}
+  .panel h4,.panel h3{margin:0 0 12px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:#fff;}
   .panel .nota{font-size:11.5px;color:#9fb2c8;line-height:1.6;margin:12px 0 0;}
 
   footer{max-width:1180px;margin:0 auto;padding:24px 28px 60px;border-top:1px solid var(--line);color:#7d90a8;font-size:11px;line-height:1.7;}
@@ -1599,6 +1610,7 @@
     <!-- EL TABLERO. Esqueleto vacio: las piezas que ya existen se mudan aca al
          cargar (armarTableroSiwa). Es el mismo elemento, no una copia. -->
     <section class="domain tablero-siwa" id="tablero-siwa">
+      <h2 class="oculto-visual">Tablero</h2>
       <div class="fila-selectores" id="fila-selectores">
         <div class="sel-slot eleccion" id="slot-ambito"></div>
         <div class="sel-slot eleccion" id="slot-tema"></div>
@@ -1609,6 +1621,7 @@
       <div class="grafico-seleccion" id="grafico-seleccion">
         <div id="slot-cruce-resultado"></div>
         <div id="slot-comparacion"></div>
+        <div class="evolucion" id="slot-evolucion"></div>
         <div class="relaciones" id="relaciones"></div>
         <details class="aviso-cobertura sobre-el-tema" id="sobre-el-tema">
           <summary>Sobre el tema elegido: qué muestra, qué no es y qué falta</summary>
@@ -3202,7 +3215,6 @@
     // entero no figuran en ningun catalogo de indicadores, y sin esto la ficha
     // mostraba la cifra sin decir de donde venia.
     {clave:'desplazamiento',    eje:'Seguridad',  rotulo:'Desplazamiento forzado', disponible:()=>!!almacen.desplazamiento, archivo:'desplazamiento'},
-    {clave:'contrabando',       eje:'Seguridad',  rotulo:'Contrabando',          disponible:()=>false, sinCapa:'falta'},
     {clave:'ciber',             eje:'Seguridad',  rotulo:'Ciberseguridad',       disponible:()=>false, sinCapa:'no_comparable'},
     {clave:'contratacion',      eje:'Gobernanza', rotulo:'Contratación pública', disponible:()=>false, sinCapa:'no_comparable'},
     {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false, sinCapa:'no_comparable'},
@@ -4336,7 +4348,38 @@
   const PROPIEDADES_SVG = ['fill', 'stroke', 'stroke-width', 'stroke-opacity', 'fill-opacity',
     'opacity', 'font-size', 'font-weight', 'text-anchor', 'dominant-baseline', 'stroke-dasharray',
     'letter-spacing', 'stroke-linecap', 'stroke-linejoin', 'visibility'];
-  function svgAutonomo(svg, ancho, alto){
+  // LA TIPOGRAFIA DE LA CASA, INCRUSTADA. Un SVG convertido a imagen no puede
+  // cargar fuentes externas; se bajan una vez por sesion los woff2 latinos de
+  // Inter y JetBrains Mono (licencia SIL OFL, que permite incrustar) y se los
+  // escribe como @font-face en base64. Si no se pueden bajar, la figura sale
+  // con la fuente del sistema y la imagen sale igual.
+  let fuentesSvgPromesa = null;
+  function fuentesParaSvg(){
+    if(fuentesSvgPromesa) return fuentesSvgPromesa;
+    fuentesSvgPromesa = (async () => {
+      try{
+        const enlace = document.querySelector('link[href*="fonts.googleapis.com/css2"]');
+        if(!enlace) return '';
+        const css = await fetch(enlace.href).then(r => r.ok ? r.text() : '');
+        const bloques = css.split('@font-face').slice(1).map(b => '@font-face' + b);
+        const elegidos = bloques.filter(b => /\/\* latin \*\//.test(b) && /font-weight: ?(400|700|800)\b/.test(b));
+        const salida = [];
+        for(const b of elegidos){
+          const m = b.match(/url\((https:\/\/fonts\.gstatic\.com[^)]+)\)/);
+          if(!m) continue;
+          const buf = await fetch(m[1]).then(r => r.ok ? r.arrayBuffer() : null);
+          if(!buf) continue;
+          let bin = ''; const u = new Uint8Array(buf);
+          for(let i = 0; i < u.length; i += 0x8000) bin += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000));
+          salida.push(b.replace(m[1], 'data:font/woff2;base64,' + btoa(bin)).replace(/unicode-range:[^;]+;/, ''));
+        }
+        return salida.join('\n');
+      }catch(e){ return ''; }
+    })();
+    return fuentesSvgPromesa;
+  }
+
+  function svgAutonomo(svg, ancho, alto, cssFuentes){
     const clon = svg.cloneNode(true);
     const orig = svg.querySelectorAll('*'), copia = clon.querySelectorAll('*');
     orig.forEach((el, i) => {
@@ -4345,12 +4388,20 @@
       let estilo = '';
       PROPIEDADES_SVG.forEach(pr => { const v = cs.getPropertyValue(pr); if(v) estilo += pr + ':' + v + ';'; });
       const ff = cs.fontFamily || '';
-      estilo += 'font-family:' + (/mono/i.test(ff) ? 'ui-monospace,Consolas,monospace' : 'system-ui,Segoe UI,Roboto,Arial,sans-serif') + ';';
+      const mono = /mono/i.test(ff);
+      estilo += 'font-family:' + (cssFuentes
+        ? (mono ? "'JetBrains Mono',ui-monospace,monospace" : "'Inter',system-ui,sans-serif")
+        : (mono ? 'ui-monospace,Consolas,monospace' : 'system-ui,Segoe UI,Roboto,Arial,sans-serif')) + ';';
       copia[i].setAttribute('style', estilo);
     });
     clon.querySelectorAll('title').forEach(t => t.remove());
     clon.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     clon.setAttribute('width', ancho); clon.setAttribute('height', alto);
+    if(cssFuentes){
+      const st = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+      st.textContent = cssFuentes;
+      clon.insertBefore(st, clon.firstChild);
+    }
     return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(clon));
   }
   const cargarImagen = src => new Promise((res, rej) => {
@@ -4379,6 +4430,7 @@
     avisar('Armando la imagen…');
     try{
       const K = 2;                                   // nitidez: se dibuja al doble
+      const cssFuentes = await fuentesParaSvg();
       const W = 1200, MARGEN = 28, COL = 620, SEP = 24;
       const fuente = getComputedStyle(document.body).fontFamily || 'sans-serif';
       const cita = citaAPA();
@@ -4394,7 +4446,7 @@
       const cr = cont.getBoundingClientRect(), sr = svgMapa.getBoundingClientRect();
       const escala = COL / cr.width;
       const altoMapa = Math.round(cr.height * escala);
-      const imMapa = await cargarImagen(svgAutonomo(svgMapa, Math.round(sr.width), Math.round(sr.height)));
+      const imMapa = await cargarImagen(svgAutonomo(svgMapa, Math.round(sr.width), Math.round(sr.height), cssFuentes));
 
       // La leyenda y el grafico de lo elegido: los SVG de la casa que esten.
       const svgLeyenda = document.querySelector('#leyenda svg');
@@ -4407,7 +4459,7 @@
         const r = svg.getBoundingClientRect();
         if(!r.width || !r.height) return null;
         const alto = Math.round(r.height * anchoDer / r.width);
-        return {im: await cargarImagen(svgAutonomo(svg, Math.round(r.width), Math.round(r.height))), alto};
+        return {im: await cargarImagen(svgAutonomo(svg, Math.round(r.width), Math.round(r.height), cssFuentes)), alto};
       };
       const leyenda = await traer(svgLeyenda);
       const grafico = await traer(svgGrafico);
@@ -4636,11 +4688,22 @@
   function planillaDeLaConsulta(){
     const q = loQueSeMiro();
     const sep = ';';
+    // LOS NUMEROS VAN SIN COMILLAS Y CON COMA DECIMAL: es lo que Excel en
+    // castellano y pandas (decimal=',') leen como numero. El texto va entre
+    // comillas y con la formula desactivada, como siempre.
     const esc2 = v => {
+      if(typeof v === 'number' && isFinite(v)) return String(v).replace('.', ',');
       let t = String(v ?? '');
       const c = t.charCodeAt(0);
       if(c===61||c===64||c===9||c===13||((c===43||c===45)&&!isFinite(Number(t)))) t = "'" + t;
       return '"' + t.replace(/"/g,'""') + '"';
+    };
+    // La variacion del compuesto, la misma flecha del perfil.
+    const variacionDe = (c, iso) => {
+      if(c !== 'situacion') return '';
+      const par = compuestosPareados();
+      const a = (par.ahora.general || {})[iso], b = (par.antes.general || {})[iso];
+      return (a && b) ? Math.round((a.valor - b.valor) * 10) / 10 : '';
     };
     const nombre = i => (padron.find(x=>x.iso===i)||{}).pais || i;
     const cita = citaAPA();
@@ -4649,14 +4712,16 @@
     // para quien la copie.
     const sinEtiquetas = h => String(h).replace(/<[^>]+>/g, '')
       .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    // Las lineas de cabecera llevan «# » adelante: Excel las muestra como texto
+    // y pandas las salta con comment='#'.
     const lineas = [
-      [ 'SIWA — Fundación Sherman Kent' ].map(esc2).join(sep),
-      [ 'Consulta: ' + q.titulo + ' · ' + q.ambito ].map(esc2).join(sep),
-      [ location.href ].map(esc2).join(sep),
-      [ 'Cómo citar (APA 7): ' + sinEtiquetas(cita.propia) ].map(esc2).join(sep),
-      '',
+      [ '# SIWA — Fundación Sherman Kent' ].map(esc2).join(sep),
+      [ '# Consulta: ' + q.titulo + ' · ' + q.ambito ].map(esc2).join(sep),
+      [ '# ' + location.href ].map(esc2).join(sep),
+      [ '# Cómo citar (APA 7): ' + sinEtiquetas(cita.propia) ].map(esc2).join(sep),
+      [ "# Para leerla: pandas.read_csv(archivo, sep=';', decimal=',', comment='#')" ].map(esc2).join(sep),
       ['estado','materia','valor','unidad','lugar_entre_los_que_tienen_dato','de_cuantos',
-       'lugar_en_su_bloque','bloque','cautela'].join(sep),
+       'lugar_en_su_bloque','bloque','variacion_respecto_dato_anterior','cautela'].join(sep),
     ];
     q.estados.forEach(iso => q.claves.forEach(c => {
       const d = datoDeMateria(c, iso);
@@ -4667,6 +4732,7 @@
         d.cap && d.cap.unidad ? d.cap.unidad : '',
         d.sinDato ? '' : d.puesto, d.sinDato ? '' : d.deCuantos,
         d.sinDato ? '' : d.puestoBloque, d.sinDato ? '' : d.bloque,
+        d.sinDato ? '' : variacionDe(c, iso),
         d.cap && d.cap.cautela ? d.cap.cautela : '',
       ].map(esc2).join(sep));
     }));
@@ -4686,7 +4752,7 @@
       });
     }));
     if(conSerie.length){
-      lineas.push('', ['Serie histórica de los temas que la tienen'].map(esc2).join(sep));
+      lineas.push('', ['# Serie histórica de los temas que la tienen'].map(esc2).join(sep));
       lineas.push(['estado','materia','anio','valor','unidad'].join(sep));
       conSerie.forEach(l => lineas.push(l));
     }
@@ -6105,6 +6171,12 @@
           return m2;
         },
         puntos(){ return []; },
+        // Las tres ediciones —2021, 2023, 2025— de esta medida, tal como las
+        // publica la fuente. Alcanzan para ver el movimiento, no para proyectar.
+        serieDe(iso){
+          const r = (almacen.crimen?.registros||[]).find(x=>x.iso===iso);
+          return (r && r.series && r.series[m.codigo]) || [];
+        },
         detalle(iso){
           const r = (almacen.crimen?.registros||[]).find(x=>x.iso===iso);
           const v = r && r.medidas && r.medidas[m.codigo];
@@ -7036,13 +7108,13 @@
         + 'debajo del tablero, en la ficha de ' + esc(nombre) + '.</div>'
       : ejesMini(iso);
     if(nivel === undefined && !proys.length){
-      caja.innerHTML = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>
+      caja.innerHTML = `<h3>${esc(nombre)}</h3><div class="bloque">${esc(bloque)}</div>
         <span class="vacia">Sin dato en esta capa.</span>` + mini;
       return;
     }
     const p = posicion(iso);
     const ajusta = proys.length && proys[0].pr.ajusta;
-    let html = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>` +
+    let html = `<h3>${esc(nombre)}</h3><div class="bloque">${esc(bloque)}</div>` +
       (proyCompuesta
         ? (valorProyectado !== undefined
             ? `<span class="cifra">${cifra(Math.round(valorProyectado*10)/10)}</span>`
@@ -7504,6 +7576,30 @@
     });
   }
 
+  // ============ LOS ENCABEZADOS NO SALTAN ============
+  //
+  // Se generan en cuarenta lugares. Se corrigen en uno: al final de cada
+  // repintado se recorren en orden y el que salta mas de un nivel se baja al
+  // que corresponde. El estilo admite el nivel vecino, asi que nada cambia de
+  // aspecto; lo que cambia es el esquema que leen el lector de pantalla y el
+  // PDF.
+  function nivelarEncabezados(){
+    const raiz = document.querySelector('main');
+    if(!raiz) return;
+    let previo = 1;
+    raiz.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(h => {
+      if(h.closest('.leaflet-container')) return;
+      const nivel = +h.tagName[1];
+      if(nivel > previo + 1){
+        const nuevo = document.createElement('h' + (previo + 1));
+        [...h.attributes].forEach(a => nuevo.setAttribute(a.name, a.value));
+        while(h.firstChild) nuevo.appendChild(h.firstChild);
+        h.replaceWith(nuevo);
+        previo = previo + 1;
+      } else previo = nivel;
+    });
+  }
+
   // ============ EL PLEGADO POR NIVEL ============
   //
   // Medido antes: 36 pantallas en el nivel Analista, 13 en Periodista, 7 en
@@ -7822,6 +7918,7 @@
     {clave:'violencia_organizada', rotulo:'Violencia organizada', tema:'crimen_organizado',
      porque:'Grupos armados que disputan territorio y renta, con el Estado como parte o sin él.',
      indicadores:['homicidios','conflicto_no_estatal','monopolio_fuerza','intensidad_conflicto'],
+     medidas:['grupos_mafiosos','redes_criminales','actores_del_estado'],
      extra:'conflictos',
      falta:'No existe recuento público y comparable de <b>integrantes, territorios ni ingresos</b> '
           +'de las organizaciones criminales de la región. Lo que se mide es su <b>efecto</b> '
@@ -7830,6 +7927,7 @@
     {clave:'economias_ilicitas', rotulo:'Economías ilícitas', tema:'mineria_ilegal',
      porque:'La renta que sostiene a esos grupos: minería, tala, tráfico, extorsión.',
      indicadores:['rentas_naturales','minerales','empleo_informal'],
+     medidas:['recursos_no_renovables','delitos_flora','delitos_fauna'],
      extra:'mineria',
      falta:'<b>Ningún Estado publica el volumen de su economía ilícita</b>, por definición. '
           +'Los indicadores de arriba son <b>aproximaciones de contexto</b>, no medidas del '
@@ -7838,9 +7936,12 @@
 
     {clave:'contrabando', rotulo:'Contrabando', tema:'contrabando',
      porque:'Mercadería que cruza sin declararse, o que se declara distinto de los dos lados.',
-     indicadores:[], extra:['comercio','cites'],
-     falta:'<b>No hay indicador de contrabando</b> y no lo va a haber: nadie declara lo que '
-          +'oculta. Lo que sí se puede medir es la <b>brecha espejo</b>: lo que un Estado dice '
+     indicadores:[], medidas:['contrabando','falsificacion'], extra:['comercio','cites'],
+     falta:'<b>No hay recuento de contrabando</b> y no lo va a haber: nadie declara lo que '
+          +'oculta. Lo que hay es la <b>evaluación de especialistas</b> del Índice Global de '
+          +'Crimen Organizado sobre el comercio ilícito de bienes gravados y de mercadería '
+          +'falsificada, de 1 a 10, en tres ediciones: dice cuán extendido está, no cuánto '
+          +'mueve. Y se puede medir la <b>brecha espejo</b>: lo que un Estado dice '
           +'haber exportado contra lo que el otro dice haber importado. Una brecha no prueba '
           +'contrabando &mdash;el flete y el seguro explican buena parte&mdash;, pero <b>señala '
           +'dónde mirar</b>. Las incautaciones en kilos exigen la UNODC, que hoy no responde. '
@@ -7850,8 +7951,11 @@
 
     {clave:'ciberseguridad', rotulo:'Ciberseguridad', tema:'ciberataque',
      porque:'Extorsión informática contra empresas y organismos, y exposición del terreno digital.',
-     indicadores:['servidores_seguros','banda_ancha','internet'], extra:['ransomware','ciber'],
-     falta:'Solo se ve <b>el ataque que el atacante publicó</b> para presionar el pago. El que '
+     indicadores:['servidores_seguros','banda_ancha','internet'], medidas:['delitos_informaticos'],
+     extra:['ransomware','ciber'],
+     falta:'La única medida comparable es la <b>evaluación de especialistas</b> del Índice '
+          +'Global de Crimen Organizado sobre delitos informáticos, de 1 a 10. De los ataques, '
+          +'solo se ve <b>el que el atacante publicó</b> para presionar el pago. El que '
           +'se pagó en silencio no aparece en ninguna parte, y es la mayoría. Los nombres de '
           +'las víctimas <b>no se republican</b>: se publican agregados.'},
 
@@ -8126,6 +8230,110 @@
     }).join('');
   }
 
+  // ============ LA EVOLUCION DE LA REGION ============
+  //
+  // Todas las figuras de serie eran de UN Estado; con el ambito en «los 33» el
+  // tablero no tenia nada que dibujar. Esta es la mediana de los Estados por
+  // anio con la banda de la mitad central, el Estado elegido encima si lo hay,
+  // y la recta prolongada SOLO con cinco anios o mas y R² ≥ 0,5: la misma regla
+  // de las series por Estado.
+  function cuantil(lista, q){
+    if(!lista.length) return NaN;
+    const o = lista.slice().sort((a, b) => a - b);
+    const pos = (o.length - 1) * q, i = Math.floor(pos), f = pos - i;
+    return o[i + 1] !== undefined ? o[i] + (o[i + 1] - o[i]) * f : o[i];
+  }
+
+  function seriesDelAmbito(clave){
+    const cap = (capas() || {})[clave];
+    if(!cap || typeof cap.serieDe !== 'function') return null;
+    const zona = bloqueActivo();
+    const estados = (padron || []).filter(p => !zona || p.bloque === zona);
+    const porAnio = {};
+    estados.forEach(p => (cap.serieDe(p.iso) || []).forEach(a => {
+      if(!isFinite(a.valor)) return;
+      (porAnio[+a.anio] = porAnio[+a.anio] || []).push(a.valor);
+    }));
+    const anios = Object.keys(porAnio).map(Number).sort((a, b) => a - b)
+      .filter(a => porAnio[a].length >= Math.min(8, Math.max(3, Math.floor(estados.length / 2))));
+    return {cap, estados, anios, porAnio, zona};
+  }
+
+  function figuraEvolucionRegional(clave, ancho){
+    const s = seriesDelAmbito(clave);
+    if(!s || s.anios.length < 2) return '';
+    const {cap, anios, porAnio, zona} = s;
+    const med = anios.map(a => cuantil(porAnio[a], .5));
+    const q1 = anios.map(a => cuantil(porAnio[a], .25));
+    const q3 = anios.map(a => cuantil(porAnio[a], .75));
+    const propia = paisFiltro ? (cap.serieDe(paisFiltro) || []).filter(a => isFinite(a.valor)
+                     && anios.includes(+a.anio)) : [];
+
+    // La recta sobre la mediana, con la regla de siempre.
+    const n = anios.length;
+    const mx = anios.reduce((a, b) => a + b, 0) / n, my = med.reduce((a, b) => a + b, 0) / n;
+    let sxy = 0, sxx = 0, syy = 0;
+    anios.forEach((x, i) => { sxy += (x - mx) * (med[i] - my); sxx += (x - mx) ** 2; syy += (med[i] - my) ** 2; });
+    const pend = sxx ? sxy / sxx : 0, orden = my - pend * mx;
+    const r2 = (sxx && syy) ? (sxy * sxy) / (sxx * syy) : 0;
+    const prolonga = n >= 5 && r2 >= 0.5 && sxx > 0;
+    const anioFin = prolonga ? anios[n - 1] + 3 : anios[n - 1];
+    const valorFin = pend * anioFin + orden;
+
+    const alto = 150, mIzq = 8, mDer = prolonga ? 56 : 8, mArr = 14, mAba = 22;
+    const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
+    const todos = q1.concat(q3, propia.map(a => a.valor), prolonga ? [valorFin] : []);
+    const min = Math.min(...todos), max = Math.max(...todos), rango = (max - min) || 1;
+    const a0 = anios[0], span = (anioFin - a0) || 1;
+    const x = a => mIzq + ((a - a0) / span) * util;
+    const y = v => mArr + (1 - (v - min) / rango) * utilY;
+    const camino = (xs, ys) => xs.map((a, i) => (i ? 'L' : 'M') + x(a).toFixed(1) + ' ' + y(ys[i]).toFixed(1)).join(' ');
+
+    const banda = '<path d="' + camino(anios, q3) + ' ' + anios.slice().reverse().map((a, i) =>
+        'L' + x(a).toFixed(1) + ' ' + y(q1[n - 1 - i]).toFixed(1)).join(' ') + ' Z" fill="rgba(255,255,255,.10)"/>';
+    const lineaMed = '<path d="' + camino(anios, med) + '" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>'
+      + anios.map((a, i) => '<circle cx="' + x(a).toFixed(1) + '" cy="' + y(med[i]).toFixed(1) + '" r="2.6" fill="#fff"/>').join('');
+    const lineaPropia = propia.length
+      ? '<path d="' + camino(propia.map(a => +a.anio), propia.map(a => a.valor)) + '" fill="none" stroke="var(--orange)" stroke-width="2.2" stroke-linejoin="round"/>'
+        + propia.map(a => '<circle cx="' + x(+a.anio).toFixed(1) + '" cy="' + y(a.valor).toFixed(1) + '" r="2.8" fill="var(--orange)"/>').join('')
+      : '';
+    const trazo = prolonga
+      ? '<path d="M' + x(anios[n - 1]).toFixed(1) + ' ' + y(pend * anios[n - 1] + orden).toFixed(1) + ' L' + x(anioFin).toFixed(1)
+        + ' ' + y(valorFin).toFixed(1) + '" fill="none" stroke="#7d90a8" stroke-width="1.6" stroke-dasharray="4 3"/>'
+        + '<text x="' + (ancho - mDer + 5) + '" y="' + (y(valorFin) + 3).toFixed(1) + '" fill="#7d90a8" font-size="10">' + anioFin
+        + '<tspan x="' + (ancho - mDer + 5) + '" dy="12" font-weight="700">' + cifra(valorFin) + '</tspan></text>'
+      : '';
+    const rotulos = '<text x="' + mIzq + '" y="' + (alto - 6) + '" fill="#7d90a8" font-size="10">' + anios[0] + ' · mediana ' + cifra(med[0]) + '</text>'
+      + '<text x="' + (ancho - mDer) + '" y="' + (alto - 6) + '" text-anchor="end" fill="#fff" font-size="10" font-weight="700">'
+      + anios[n - 1] + ' · mediana ' + cifra(med[n - 1]) + '</text>';
+    const cuantos = Math.round(anios.reduce((a, b) => a + porAnio[b].length, 0) / n);
+    const donde = zona || 'los 33 Estados';
+    const svg = '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto
+      + '" style="max-width:100%;height:auto" role="img" aria-label="Evolución de ' + esc(rotuloDeMateria(clave))
+      + ' en ' + esc(donde) + ', ' + n + ' años, mediana y mitad central">' + banda + lineaMed + lineaPropia + trazo + rotulos + '</svg>';
+
+    const pie = prolonga
+      ? '<b>La línea punteada no es un pronóstico.</b> Prolonga tres años la recta que mejor ajusta a la mediana de estos '
+        + n + ' años (R² = ' + cifra(r2) + '): dice a dónde llegaría <b>si el movimiento continuara igual</b>.'
+      : n >= 5
+      ? 'Estos ' + n + ' años <b>no siguen una línea</b> (R² = ' + cifra(r2) + '): el registro no los prolonga.'
+      : 'Son <b>' + n + ' ediciones</b>: alcanzan para ver el movimiento, <b>no para proyectar</b>. '
+        + 'Una recta sobre ' + n + ' puntos no es un cálculo, es una convicción; el registro exige cinco.';
+    return '<div class="evolucion-cab"><b>Cómo se movió ' + esc(rotuloDeMateria(clave)) + ' en ' + esc(donde) + '.</b> '
+      + 'La línea blanca es la mediana de unos ' + cuantos + ' Estados por año; la banda, la mitad central'
+      + (propia.length ? '; la naranja, ' + esc(paisNombre) : '') + '.'
+      + (cap.unidad ? ' Unidad: ' + esc(cap.unidad) + '.' : '') + '</div>' + svg
+      + '<small class="pie-tira">' + pie + '</small>';
+  }
+
+  function evolucionVista(){
+    const caja = document.getElementById('slot-evolucion');
+    if(!caja) return;
+    const w = Math.max(320, Math.min(760, (caja.clientWidth || 600) - 28));
+    caja.innerHTML = figuraEvolucionRegional(capaActiva, w);
+    caja.hidden = !caja.innerHTML;
+  }
+
   // ============ EL MAPA DE RELACIONES ============
   //
   // La figura del Foro Economico Mundial: el tema en el centro, sus asuntos en
@@ -8144,6 +8352,14 @@
       const hay = iso ? !!datoDe(clave, iso) : filasDe(clave).length > 0;
       nodos.push({tipo:'indicador', clave, rotulo: meta.rotulo || clave,
                   eje: meta.eje || 'Fuentes', hay, seccion: meta.seccion || ''});
+    });
+    [].concat(m.medidas || []).forEach(k => {
+      const cap = (capas() || {})[k];
+      if(!cap || !cap.conteo) return;
+      const vals = cap.conteo() || {};
+      if(!Object.keys(vals).length) return;
+      nodos.push({tipo:'indice', clave: k, rotulo: rotuloDeMateria(k), eje: 'Seguridad',
+                  hay: iso ? vals[iso] !== undefined : true, seccion: '', capa: k});
     });
     [].concat(m.extra || []).forEach(cual => {
       const region = extraMateria(cual, null);
@@ -8198,12 +8414,14 @@
         const forma = n.tipo === 'registro'
           ? '<rect x="' + (x - 4).toFixed(1) + '" y="' + (y - 4).toFixed(1) + '" width="8" height="8"'
           : '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="4.2"';
-        const titulo = n.rotulo + ' · ' + (n.tipo === 'registro' ? 'registro' : 'indicador · eje ' + n.eje)
+        const titulo = n.rotulo + ' · ' + (n.tipo === 'registro' ? 'registro'
+                       : n.tipo === 'indice' ? 'índice de 1 a 10, evaluación experta'
+                       : 'indicador · eje ' + n.eje)
           + (iso ? (n.hay ? ' · con dato para ' + paisNombre : ' · sin dato para ' + paisNombre) : '');
         return '<path class="lazo" d="M' + mx.toFixed(1) + ',' + my.toFixed(1) + ' Q' + cx.toFixed(1) + ','
              + cy.toFixed(1) + ' ' + x.toFixed(1) + ',' + y.toFixed(1) + '" stroke="' + tinta + '"/>'
              + '<g class="nodo ' + (n.hay ? 'con' : 'sin') + '" data-ir-seccion="' + esc(n.seccion)
-             + '" tabindex="0" role="link">' + forma + ' fill="' + relleno + '" stroke="' + tinta
+             + '"' + (n.capa ? ' data-capa="' + esc(n.capa) + '"' : '') + ' tabindex="0" role="link">' + forma + ' fill="' + relleno + '" stroke="' + tinta
              + '"><title>' + esc(titulo) + '</title></' + (n.tipo === 'registro' ? 'rect' : 'circle') + '>'
              + (conRotulos ? rotuloRadial(a, rTexto, n.rotulo.length > 24 ? n.rotulo.slice(0, 23) + '…' : n.rotulo,
                                           'hoja' + (n.hay ? '' : ' vacia'), titulo) : '')
@@ -8266,6 +8484,9 @@
     const activar = t => {
       const mat = t.closest('[data-ir-materia]');
       if(mat){ revelar('seis-materias'); ir('materia-' + mat.dataset.irMateria); return; }
+      const cap = t.closest('[data-capa]');
+      if(cap){ capaActiva = cap.dataset.capa; repintar();
+               document.getElementById('mapa')?.scrollIntoView({behavior:'smooth', block:'center'}); return; }
       const sec = t.closest('[data-ir-seccion]');
       if(sec && sec.dataset.irSeccion) ir(sec.dataset.irSeccion);
     };
@@ -8298,6 +8519,15 @@
         } else {
           if(filasDe(clave).length) filas.push({q: meta.rotulo, ancla: meta.seccion || ''});
         }
+      });
+      // Las medidas del indice de crimen organizado: evaluacion experta de 1 a
+      // 10, dicha asi para que nadie la lea como volumen.
+      [].concat(m.medidas || []).forEach(k => {
+        const cap = (capas() || {})[k];
+        if(!cap || !cap.conteo) return;
+        const vals = cap.conteo() || {};
+        if(iso ? vals[iso] !== undefined : Object.keys(vals).length)
+          filas.push({q: rotuloDeMateria(k) + ' · índice 1–10', ancla: '', capa: k});
       });
       // Una materia puede apoyarse en varias fuentes: ciberseguridad tiene la
       // extorsión informática Y la medición de red, y son cosas distintas.
@@ -8341,6 +8571,8 @@
           + '<div class="mide-lista">'
           + filas.map(f => f.ancla
               ? '<a class="mide-chip" href="#' + esc(f.ancla) + '">' + esc(f.q) + '</a>'
+              : f.capa
+              ? '<button class="mide-chip" data-al-mapa="' + esc(f.capa) + '">' + esc(f.q) + '</button>'
               : '<span class="mide-chip suelto">' + esc(f.q) + '</span>').join('')
           + '</div></div>'
         : '';
@@ -8465,7 +8697,9 @@
     paso('panorama', armarPanorama);
     paso('solapas', armarSolapas);
     paso('para publicar hoy', paraPublicarHoy);
+    paso('evolución de la región', evolucionVista);
     paso('mapa de relaciones', relacionesVista);
+    paso('encabezados', () => setTimeout(nivelarEncabezados, 0));
     paso('figuras vivas', armarFigurasVivas);
     paso('año del mapa', pintarAnio);
     paso('explorador', navegadorVista);
