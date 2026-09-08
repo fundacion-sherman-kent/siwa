@@ -755,6 +755,8 @@
     .fila-orden .quien{font-size:11px;}
   }
 
+  .acciones-ficha{display:flex;gap:6px;flex-wrap:wrap;align-items:flex-start;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -3348,6 +3350,40 @@
       + '</span></div></div>';
   }
 
+  // EL DATO EN UNA LÍNEA, PARA PEGAR. El periodista tiene la cifra, la fuente y el
+  // año, y arma la frase a mano en el cierre, que es cuando se cita mal. Esto no
+  // le ahorra tipeo: le evita el error de atribución. Lo que no se sabe no se
+  // pone: no se rellena un hueco para que la línea quede prolija.
+  function lineaDelDato(clave, iso){
+    const d = datoDeMateria(clave, iso);
+    if(!d || d.sinDato) return '';
+    const pais = (padron.find(x => x.iso === iso) || {}).pais || iso;
+    const rot = rotuloDeMateria(clave);
+    const serie = d.cap.serieDe ? (d.cap.serieDe(iso) || []) : [];
+    const anio = serie.length ? serie[serie.length - 1].anio : null;
+    const meta = metaInd(clave) || {};
+    const proc = procedenciaDe(clave);
+    const c = proc && proc.calificacion;
+    const fuente = meta.origen || (proc && proc.fuente
+      ? (proc.fuente.nombre || proc.fuente) : null);
+
+    const u = new URL(location.href);
+    u.searchParams.set('pais', iso);
+    u.searchParams.set('eje', (MATERIAS().find(m =>
+      (claveDeCapa(m.clave) || m.clave) === clave) || {}).eje || '');
+    u.searchParams.set('materia', clave);
+
+    return pais + ' — ' + rot + ': ' + cifra(d.valor)
+      + (d.cap.unidad ? ' ' + d.cap.unidad : '')
+      + (anio ? ' (' + anio + ')' : '')
+      + '. Lugar ' + d.puesto + ' de ' + d.deCuantos
+      + ' entre los Estados de América Latina y el Caribe con dato.'
+      + (fuente ? ' Fuente: ' + fuente
+          + (c && c.fiabilidad ? ', calificación ' + c.fiabilidad + '-' + c.credibilidad : '')
+          + '.' : '')
+      + ' Consultado en SIWA, Fundación Sherman Kent: ' + u.toString();
+  }
+
   // ---- Nivel 3: la ficha de una materia ------------------------------------
   function panelFicha(iso, clave){
     const nombre = (padron.find(x => x.iso === iso) || {}).pais || iso;
@@ -3379,8 +3415,11 @@
           + serie[0].anio + ' a ' + serie[serie.length-1].anio
           + figuraSerie(clave, iso) : '')
       + (d.cap.cautela ? '<br><b>Cuidado:</b> ' + esc(d.cap.cautela) : '')
-      + '</span><button class="boton chico" data-al-mapa="' + esc(clave)
-      + '">Ver en el mapa</button></div></div>';
+      + '</span><span class="acciones-ficha">'
+      + '<button class="boton chico" data-copiar-dato="' + esc(clave)
+      + '">Copiar el dato con su fuente</button>'
+      + '<button class="boton chico" data-al-mapa="' + esc(clave)
+      + '">Ver en el mapa</button></span></div></div>';
   }
 
   // ---- La comparación entre Estados ----------------------------------------
@@ -3552,6 +3591,12 @@
     panel.addEventListener('click', ev => {
       const eje = ev.target.closest('[data-eje]');
       const mat = ev.target.closest('[data-materia]');
+      const copia = ev.target.closest('[data-copiar-dato]');
+      if(copia){
+        const t = lineaDelDato(copia.dataset.copiarDato, paisFiltro);
+        alPortapapeles(t, 'Dato copiado, con su fuente y su enlace.');
+        return;
+      }
       const mapa = ev.target.closest('[data-al-mapa]');
       if(mapa){
         capaActiva = mapa.dataset.alMapa; repintar();
