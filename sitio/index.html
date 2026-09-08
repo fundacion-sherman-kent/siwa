@@ -724,6 +724,8 @@
 
   .pie-tira{display:block;color:#7d90a8;font-size:10px;line-height:1.5;margin:2px 0 6px;}
 
+  .sin-enlace{display:block;color:#9fb2c8;cursor:help;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -2886,12 +2888,15 @@
     // pintar un mapa con esa cifra ordenaría Estados por algo que no los ordena.
     {clave:'violencia_eventos', eje:'Seguridad',  rotulo:'Violencia organizada · eventos', disponible:()=>false, sinCapa:'falta'},
     {clave:'ilicitas',          eje:'Seguridad',  rotulo:'Economías ilícitas',   disponible:()=>false, sinCapa:'falta'},
-    {clave:'desplazamiento',    eje:'Seguridad',  rotulo:'Desplazamiento forzado', disponible:()=>!!almacen.desplazamiento},
+    // `archivo` dice de que archivo sale la materia. Las que salen de un colector
+    // entero no figuran en ningun catalogo de indicadores, y sin esto la ficha
+    // mostraba la cifra sin decir de donde venia.
+    {clave:'desplazamiento',    eje:'Seguridad',  rotulo:'Desplazamiento forzado', disponible:()=>!!almacen.desplazamiento, archivo:'desplazamiento'},
     {clave:'contrabando',       eje:'Seguridad',  rotulo:'Contrabando',          disponible:()=>false, sinCapa:'falta'},
     {clave:'ciber',             eje:'Seguridad',  rotulo:'Ciberseguridad',       disponible:()=>false, sinCapa:'no_comparable'},
     {clave:'contratacion',      eje:'Gobernanza', rotulo:'Contratación pública', disponible:()=>false, sinCapa:'no_comparable'},
     {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false, sinCapa:'no_comparable'},
-    {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales},
+    {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales, archivo:'oficiales'},
   ];
 
   // LOS VEINTE MERCADOS Y ACTORES del índice de crimen organizado, como materias
@@ -3264,7 +3269,7 @@
           + esc(d.bloque) : '')
       + figuraTira(clave, iso)
       + (detalle ? '<br>' + esc(detalle) : '')
-      + (meta.origen ? '<br><b>Fuente:</b> ' + esc(meta.origen) : '')
+      + (fuenteDeMateria(clave) ? '<br><b>Fuente:</b> ' + fuenteDeMateria(clave) : '')
       + (serie.length > 1 ? '<br><b>Serie:</b> ' + serie.length + ' años, de '
           + serie[0].anio + ' a ' + serie[serie.length-1].anio
           + figuraSerie(clave, iso) : '')
@@ -3475,18 +3480,48 @@
   }
 
   // De donde viene cada materia, buscando en todos los archivos cargados.
+  //
+  // Se busca en LAS TRES FORMAS en que los archivos guardan sus materias: el
+  // catálogo de indicadores, el catálogo de medidas, y las claves que cuelgan de
+  // cada registro. Antes se miraba sólo la primera, y las materias que salen de
+  // un colector entero —las veinte de crimen organizado, desplazamiento— se
+  // quedaban sin fuente: la ficha mostraba la cifra y se callaba de dónde salía.
+  // Un mapa escrito a mano habría tapado el agujero de hoy y envejecido con la
+  // fuente siguiente; esto reconoce la forma, no la lista.
   function procedenciaDe(clave){
     for(const k of Object.keys(almacen)){
       const d = almacen[k];
       if(!d || !d.procedencia) continue;
       if((d.indicadores || []).some(i => i.clave === clave)) return d.procedencia;
+      if((d.catalogo || []).some(i => i && (i.clave === clave || i.codigo === clave)))
+        return d.procedencia;
+      const primero = (d.registros || [])[0];
+      if(primero && primero.indicadores
+         && Object.prototype.hasOwnProperty.call(primero.indicadores, clave))
+        return d.procedencia;
     }
-    // Las materias que salen de un colector entero —crimen, pobreza, sismos—
-    // se reconocen por el archivo que las alimenta.
-    const dueño = {crimen:['1.1','1.2'], pobreza:['pobreza'], sismos:['sismos']};
     if(CODIGO_DE_MATERIA && CODIGO_DE_MATERIA[clave] && almacen.crimen)
       return almacen.crimen.procedencia;
+    // Y si la materia declara de que archivo sale, se le cree: hay archivos que
+    // no nombran la materia en ningun lado —desplazamiento guarda «expulsion» y
+    // «recepcion», no «desplazamiento»— y ninguna forma generica los alcanza.
+    const est = ESTATICAS.find(m => m.clave === clave);
+    if(est && est.archivo && almacen[est.archivo])
+      return almacen[est.archivo].procedencia || null;
     return null;
+  }
+
+  // La fuente de una materia, dicha como corresponde: con su nombre y, cuando el
+  // archivo la trae, su calificación del Almirantazgo. Sin esto la ficha era una
+  // cifra huérfana, que es lo único que este registro no puede publicar.
+  function fuenteDeMateria(clave){
+    const meta = metaInd(clave) || {};
+    if(meta.origen) return esc(meta.origen);
+    const p = procedenciaDe(clave);
+    if(!p || !p.fuente) return '';
+    const c = p.calificacion;
+    return esc(p.fuente.nombre || p.fuente)
+      + (c && c.fiabilidad ? ' · calificación ' + esc(c.fiabilidad + '-' + c.credibilidad) : '');
   }
 
   // La planilla de lo consultado: las materias miradas por los Estados mirados.
@@ -3877,6 +3912,19 @@
   }
 
   const nombreDe = i => (padron.find(x => x.iso === i) || {}).pais || i;
+
+  // UN TITULAR SIN ADONDE IR NO SE DISFRAZA DE ENLACE. Un href vacío recarga la
+  // página: para el lector es peor que no tener enlace, porque no entiende qué
+  // pasó. Si el canal no dio una dirección utilizable, el título va como texto y
+  // se dice por qué.
+  function titularConEnlace(x, clase){
+    const c = clase ? ' class="' + clase + '"' : '';
+    const dentro = esc(x.titulo);
+    if(!x.enlace) return '<span' + c + ' title="El canal publicó esta nota sin una '
+      + 'dirección utilizable, así que el registro no inventa una">' + dentro + '</span>';
+    return '<a' + c + ' href="' + esc(x.enlace) + '" target="_blank" rel="noopener">'
+      + dentro + '</a>';
+  }
 
   function MATERIAS(){
     const deFuentes = fuentesInd().flatMap(f=>(f.indicadores||[]).map(i=>({
@@ -5809,8 +5857,11 @@
          en ${esc(donde)}${estados.length>1?`, repartidas en ${estados.length} Estados`:''}.
          ${fuerte?`<b>${fuerte}</b> con más de un origen independiente.`:'Ninguna con más de un origen independiente.'}</p>
       <div class="titulares">${ejemplos.map(x=>
-        `<a href="${esc(x.enlace)}" target="_blank" rel="noopener">${esc(x.titulo)}
-          <span class="quien">${esc(x.medio)} · ${esc(x.pais)}${x.publicada?' · '+x.publicada.slice(0,10):''}</span></a>`).join('')}</div>
+        (x.enlace
+           ? `<a href="${esc(x.enlace)}" target="_blank" rel="noopener">${esc(x.titulo)}
+          <span class="quien">${esc(x.medio)} · ${esc(x.pais)}${x.publicada?' · '+x.publicada.slice(0,10):''}</span></a>`
+           : `<span class="sin-enlace" title="El canal publicó esta nota sin una dirección utilizable, así que el registro no inventa una">${esc(x.titulo)}
+          <span class="quien">${esc(x.medio)} · ${esc(x.pais)}${x.publicada?' · '+x.publicada.slice(0,10):''} · sin enlace</span></span>`)).join('')}</div>
       <p class="aclara"><b>Esto no actualiza la cifra de arriba.</b> La serie cuenta hechos
         verificados por su fuente y llega con años de retraso; esto cuenta <b>menciones</b> de
         las últimas ${sr.ventana_horas} horas. Sirve para saber que hay actividad que la serie
@@ -6268,7 +6319,7 @@
       const fecha = x.publicado ? new Date(x.publicado).toLocaleDateString('es-AR',
         {day:'numeric', month:'long', year:'numeric'}) : '';
       return `<div class="informe-fusk">
-        <a class="tit" href="${esc(x.enlace)}" target="_blank" rel="noopener">${esc(x.titulo)}</a>
+        ${titularConEnlace(x, 'tit')}
         <div class="meta">
           <span class="sello ${libre?'libre':'reservado'}">${libre?'acceso libre':'reservado'}</span>
           ${fecha?`<span>${fecha}</span>`:''}

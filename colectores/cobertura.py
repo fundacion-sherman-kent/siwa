@@ -26,6 +26,7 @@ import json
 import math
 import re
 import unicodedata
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
@@ -112,7 +113,7 @@ def _traer_canal(medio: dict) -> tuple:
             continue
         notas.append({
             "titulo": titulo.strip(),
-            "enlace": enlace.strip(),
+            "enlace": _enlace_limpio(enlace),
             "publicada": publicada.isoformat() if publicada else None,
             "momento": publicada,
             "dominio": medio["dominio"],
@@ -123,6 +124,29 @@ def _traer_canal(medio: dict) -> tuple:
             "tipo": medio.get("tipo", "prensa"),
         })
     return (medio, notas, None)
+
+
+def _enlace_limpio(crudo: str) -> str:
+    """El enlace de una nota, o nada.
+
+    Un canal publicó dentro de <link> una etiqueta <a> entera; pegada al dominio
+    salió una dirección que ningún servidor resuelve. Se prefiere una nota sin
+    enlace —y contada como tal— antes que un enlace que manda a la nada con el
+    nombre de este registro puesto.
+    """
+    u = (crudo or "").strip()
+    if not u.lower().startswith(("http://", "https://")):
+        return ""
+    if any(c in u for c in '<>" '):
+        return ""
+    partes = urllib.parse.urlsplit(u)
+    if not partes.netloc:
+        return ""
+    # El marcado puede venir escapado: se desescapa antes de mirar.
+    crudo_legible = urllib.parse.unquote(partes.path + partes.query)
+    if "<" in crudo_legible or ">" in crudo_legible:
+        return ""
+    return u
 
 
 def _paises_mencionados(texto: str, mapa: dict) -> list:
