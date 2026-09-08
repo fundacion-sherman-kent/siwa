@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import html
 import json
+import pathlib
 import re
 import sys
 import unicodedata
@@ -49,7 +50,7 @@ import geo  # noqa: E402
 BASE = comun.BASE
 
 
-def _tarjeta() -> str:
+def _tarjeta(ruta: str = "") -> str:
     """La miniatura de las puertas, con la version que le pone el sellador.
 
     LAS TREINTA Y NUEVE PUERTAS APUNTABAN A `sitio/tarjeta.png`, QUE NO EXISTE.
@@ -66,6 +67,13 @@ def _tarjeta() -> str:
             version = f'?v={d["estados"]}-{d["indicadores"]}-{d["fuentes"]}'
         except Exception:  # noqa: BLE001 — sin version igual sirve
             pass
+    # La tarjeta propia del ambito, si la herramienta local la dibujo. El robot
+    # no tiene Pillow: solo mira si el archivo existe.
+    if ruta:
+        nombre = pathlib.Path(ruta).stem
+        propia = SITIO / "marca" / "tarjetas" / f"{nombre}.png"
+        if propia.exists():
+            return f"{BASE}/sitio/marca/tarjetas/{nombre}.png{version}"
     return f"{BASE}/sitio/marca/siwa-compartir.png{version}"
 
 
@@ -179,9 +187,9 @@ def cabeza(titulo: str, descripcion: str, ruta: str, ld: dict) -> str:
 <meta property="og:title" content="{esc(titulo)}">
 <meta property="og:description" content="{esc(descripcion)}">
 <meta property="og:url" content="{BASE}/{ruta}">
-<meta property="og:image" content="{_tarjeta()}">
+<meta property="og:image" content="{_tarjeta(ruta)}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{_tarjeta()}">
+<meta name="twitter:image" content="{_tarjeta(ruta)}">
 <meta name="twitter:title" content="{esc(titulo)}">
 <meta name="twitter:description" content="{esc(descripcion)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">

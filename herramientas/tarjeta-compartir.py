@@ -185,6 +185,7 @@ def dibujar() -> pathlib.Path:
 
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
     lienzo.save(SALIDA, "PNG", optimize=True)
+    dibujarAmbitos(c)
 
     # El testigo, para que el sellador pueda avisar cuando esto quede viejo.
     TESTIGO.write_text(json.dumps(
@@ -193,6 +194,97 @@ def dibujar() -> pathlib.Path:
          "como_se_rehace": "python herramientas/tarjeta-compartir.py"},
         ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return SALIDA
+
+
+# ---- Una tarjeta por pais y por zona ----------------------------------------
+#
+# Las cuarenta puertas compartian la tarjeta generica: quien recibia el enlace
+# de Paraguay veia «SIWA» y tres cifras de la region. Cada ambito tiene ahora la
+# suya, con su nombre grande y su zona. puertas.py, que corre en el robot y no
+# tiene Pillow, solo mira si el archivo existe.
+TARJETAS = RAIZ / "sitio" / "marca" / "tarjetas"
+
+
+def _sello(t: str) -> str:
+    import re
+    import unicodedata
+    t = unicodedata.normalize("NFKD", str(t))
+    t = "".join(ch for ch in t if not unicodedata.combining(ch))
+    return re.sub(r"[^a-zA-Z0-9]+", "-", t).strip("-").lower()
+
+
+def _ajustar(pincel, texto: str, peso: float, maximo: int, ancho_util: int, minimo: int = 56):
+    """La letra mas grande con la que el nombre entra en el ancho util."""
+    tamanio = maximo
+    while tamanio > minimo:
+        fuente = _letra(tamanio, peso)
+        if pincel.textlength(texto, font=fuente) <= ancho_util:
+            return fuente
+        tamanio -= 4
+    return _letra(minimo, peso)
+
+
+def dibujarUna(nombre: str, bajada: str, salida: pathlib.Path, c: dict) -> None:
+    lienzo = Image.new("RGB", (ANCHO, ALTO), NAVY)
+    pincel = ImageDraw.Draw(lienzo)
+    for x in range(0, ANCHO, 60):
+        pincel.line([(x, 10), (x, ALTO)], fill=RETICULA, width=1)
+    for y in range(10, ALTO, 60):
+        pincel.line([(0, y), (ANCHO, y)], fill=RETICULA, width=1)
+    pincel.rectangle([0, 0, ANCHO, 9], fill=NARANJA)
+    if LOGO.exists():
+        alto_logo = 62
+        logo = _logoRecortado(alto_logo)
+        aire = 18
+        placa = (MARGEN, 40, MARGEN + logo.width + aire * 2, 40 + alto_logo + aire * 2)
+        pincel.rounded_rectangle(placa, radius=12, fill=BLANCO)
+        lienzo.paste(logo, (MARGEN + aire, 40 + aire), logo)
+    _texto(pincel, (ANCHO - MARGEN - 190, 60), "SIWA", _letra(58, 800), BLANCO, espaciado=9)
+
+    # El nombre del ambito es lo unico que tiene que sobrevivir a la miniatura.
+    util = ANCHO - MARGEN * 2
+    fuente = _ajustar(pincel, nombre, 800, 116, util)
+    _texto(pincel, (MARGEN, 196), nombre, fuente, BLANCO)
+    _texto(pincel, (MARGEN + 4, 342), bajada, _letra(32, 400), CLARO)
+    _texto(pincel, (MARGEN + 4, 392),
+           "Reporte de situación de América Latina y el Caribe  ·  cada cifra con su fuente y su fecha",
+           _letra(21, 400), TENUE)
+    pincel.rectangle([MARGEN + 4, 444, MARGEN + 160, 448], fill=NARANJA)
+
+    columnas = [(str(c["estados"]), "ESTADOS"), (str(c["indicadores"]), "INDICADORES"),
+                (str(c["fuentes"]), "FUENTES")]
+    numero, rotulo = _letra(60, 800), _letra(20, 600)
+    anchos = [max(pincel.textlength(ci, font=numero),
+                  pincel.textlength(no, font=rotulo) + 2.2 * (len(no) - 1)) for ci, no in columnas]
+    hueco = (util - 8 - sum(anchos)) / (len(columnas) - 1)
+    x = MARGEN + 4
+    for (ci, no), an in zip(columnas, anchos):
+        _texto(pincel, (x, 476), ci, numero, BLANCO)
+        _texto(pincel, (x, 548), no, rotulo, TENUE, espaciado=2.2)
+        x += an + hueco
+    salida.parent.mkdir(parents=True, exist_ok=True)
+    lienzo.save(salida, "PNG", optimize=True)
+
+
+def dibujarAmbitos(c: dict) -> None:
+    geo_ruta = RAIZ / "colectores" / "geo.py"
+    esp = importlib.util.spec_from_file_location("geo", geo_ruta)
+    geo = importlib.util.module_from_spec(esp)
+    sys_path_antes = list(__import__("sys").path)
+    __import__("sys").path.insert(0, str(geo_ruta.parent))
+    try:
+        esp.loader.exec_module(geo)
+    finally:
+        __import__("sys").path[:] = sys_path_antes
+    padron = geo.padron()
+    zonas = sorted({p["bloque"] for p in padron})
+    for p in padron:
+        dibujarUna(p["pais"], f"Zona {p['bloque']}  ·  uno de los 33 Estados del padrón",
+                   TARJETAS / f"{_sello(p['pais'])}.png", c)
+    for z in zonas:
+        cuantos = sum(1 for p in padron if p["bloque"] == z)
+        dibujarUna(z, f"Zona de {cuantos} Estados del padrón de 33", TARJETAS / f"{_sello(z)}.png", c)
+    print(f"[tarjetas] {len(padron)} países y {len(zonas)} zonas en {TARJETAS}")
 
 
 if __name__ == "__main__":

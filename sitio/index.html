@@ -4782,7 +4782,9 @@
       + '</span>'
       + '<span><button class="boton chico" id="bajar-consulta">Descargar la planilla</button> '
       + '<button class="boton chico" id="bajar-imagen">Descargar la imagen</button> '
-      + '<button class="boton chico" id="copiar-cita">Copiar la cita</button></span>'
+      + '<button class="boton chico" id="copiar-cita">Copiar la cita</button>'
+      + (puertaDeLaVista() ? ' <button class="boton chico" id="copiar-puerta">Enlace para redes</button>' : '')
+      + '</span>'
       + '</div></div>';
 
     document.getElementById('bajar-consulta')?.addEventListener('click', () => {
@@ -4796,6 +4798,11 @@
       avisar('Planilla de la consulta descargada.');
     });
     document.getElementById('bajar-imagen')?.addEventListener('click', () => imagenDelTablero());
+    document.getElementById('copiar-puerta')?.addEventListener('click', () => {
+      const u = puertaDeLaVista();
+      u ? alPortapapeles(u, 'Enlace para redes copiado: lleva a la página propia del ámbito, con su tarjeta.')
+        : avisar('Elegí un país o una zona: la región completa se comparte con el enlace de la vista.', true);
+    });
     document.getElementById('copiar-cita')?.addEventListener('click', () => {
       const t = document.getElementById('cita-propia');
       alPortapapeles(t ? t.textContent : '', 'Cita copiada.');
@@ -7522,11 +7529,44 @@
     return partes.join(' ');
   }
 
+  // ============ LA PUERTA DEL AMBITO ============
+  //
+  // La misma regla de nombre de archivo que herramientas/puertas.py: sin
+  // tildes ni enies, todo lo que no es letra o numero pasa a guion.
+  const RAIZ_PUERTAS = 'https://siwa.fundacionkent.org/sitio/';
+  const selloDeNombre = t => String(t || '').normalize('NFKD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+  function puertaDeLaVista(){
+    if(paisFiltro && paisNombre) return RAIZ_PUERTAS + 'pais/' + selloDeNombre(paisNombre) + '.html';
+    const zona = bloqueActivo();
+    if(zona) return RAIZ_PUERTAS + 'zona/' + selloDeNombre(zona) + '.html';
+    return null;
+  }
+
+  // La pestania y el canonico dicen que se esta mirando.
+  function rotularLaPestania(){
+    const base = 'SIWA — Reporte de situación de América Latina y el Caribe';
+    const partes = [];
+    if(paisFiltro && paisNombre) partes.push(paisNombre);
+    else if(bloqueActivo()) partes.push(bloqueActivo());
+    const tema = capaActiva && capaActiva !== 'situacion' ? rotuloDeMateria(capaActiva) : '';
+    if(tema) partes.push(tema);
+    document.title = partes.length ? partes.join(' · ') + ' — SIWA' : base;
+    const can = document.querySelector('link[rel="canonical"]');
+    if(can) can.setAttribute('href', puertaDeLaVista() || 'https://siwa.fundacionkent.org/sitio/index.html');
+  }
+
   const HERRAMIENTAS = [
     {nivel:1, ico:'🔗', rot:'Copiar el enlace de esta vista',
      ayuda:'Manda a lo que estás viendo ahora: el país, el tema y el nivel.',
      hacer(){ guardarEnLaDireccion();
        alPortapapeles(location.href, 'Enlace copiado. Lleva al país y al tema que estás viendo.'); }},
+    {nivel:1, ico:'📣', rot:'Copiar el enlace para redes',
+     ayuda:'La página propia de este país o zona: con su título y su tarjeta al compartir en WhatsApp, X o LinkedIn.',
+     activo(){ return !!puertaDeLaVista(); },
+     hacer(){ const u = puertaDeLaVista();
+       u ? alPortapapeles(u, 'Enlace para redes copiado: lleva a la página propia del ámbito, con su tarjeta.')
+         : avisar('Elegí un país o una zona: la región completa se comparte con el enlace de la vista.', true); }},
     {nivel:2, ico:'❝', rot:'Copiar la cita del tema',
      ayuda:'Texto listo para pegar, con fuente, calificación y advertencia.',
      activo(){ return !!citaDelTema(); },
@@ -8700,6 +8740,7 @@
     paso('evolución de la región', evolucionVista);
     paso('mapa de relaciones', relacionesVista);
     paso('encabezados', () => setTimeout(nivelarEncabezados, 0));
+    paso('pestaña', rotularLaPestania);
     paso('figuras vivas', armarFigurasVivas);
     paso('año del mapa', pintarAnio);
     paso('explorador', navegadorVista);
