@@ -4434,38 +4434,96 @@
       + 'solas.</p></details>';
   }
 
-  // La serie de una materia, dibujada. Sin ejes ni grilla: una linea, sus
-  // extremos rotulados y los puntos marcados. Lo que hace falta para ver la
-  // forma; lo que sobra confunde en un telefono.
+  // La serie de una materia, dibujada, con su prolongación aritmética cuando la
+  // serie tiene forma de recta. Sin ejes ni grilla: una línea, sus extremos
+  // rotulados y los puntos marcados. Lo que hace falta para ver la forma; lo que
+  // sobra confunde en un teléfono.
   function figuraSerie(clave, iso){
     const cap = (capas() || {})[clave];
     if(!cap || !cap.serieDe) return '';
     const serie = (cap.serieDe(iso) || []).filter(a => isFinite(a.valor));
     if(serie.length < 3) return '';
     const ancho = Math.min(520, anchoDeFigura('panel-navegador'));
-    const alto = 108, mIzq = 8, mDer = 8, mArr = 16, mAba = 22;
+
+    // ---- La recta que mejor ajusta, y si vale la pena dibujarla -------------
+    //
+    // Se calcula por mínimos cuadrados sobre (año, valor) y se mide R²: cuánto
+    // del movimiento explica esa recta. Por debajo de 0,5 la serie no tiene
+    // forma de recta y prolongarla sería dibujar una convicción, no un cálculo.
+    const n = serie.length;
+    const xs = serie.map(a => +a.anio), ys = serie.map(a => a.valor);
+    const mx = xs.reduce((a,b) => a+b, 0) / n, my = ys.reduce((a,b) => a+b, 0) / n;
+    let sxy = 0, sxx = 0, syy = 0;
+    for(let i = 0; i < n; i++){
+      sxy += (xs[i]-mx) * (ys[i]-my);
+      sxx += (xs[i]-mx) ** 2;
+      syy += (ys[i]-my) ** 2;
+    }
+    const pend = sxx ? sxy / sxx : 0;
+    const orden = my - pend * mx;
+    const r2 = (sxx && syy) ? (sxy * sxy) / (sxx * syy) : 0;
+    const ANIOS_ADELANTE = 3;
+    const prolonga = n >= 5 && r2 >= 0.5 && sxx > 0;
+    const ultimoAnio = xs[n-1];
+    const anioFin = prolonga ? ultimoAnio + ANIOS_ADELANTE : ultimoAnio;
+    const valorFin = pend * anioFin + orden;
+
+    // ---- La geometría, ya sabiendo hasta dónde llega el dibujo --------------
+    const alto = 118, mIzq = 8, mDer = prolonga ? 54 : 8, mArr = 16, mAba = 22;
     const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
-    const vals = serie.map(a => a.valor);
-    const min = Math.min(...vals), max = Math.max(...vals), rango = (max - min) || 1;
-    const x = i => mIzq + (i / (serie.length - 1)) * util;
+    const todosY = prolonga ? ys.concat([valorFin, pend * ultimoAnio + orden]) : ys;
+    const min = Math.min(...todosY), max = Math.max(...todosY), rango = (max - min) || 1;
+    const a0 = xs[0], span = (anioFin - a0) || 1;
+    const x = a => mIzq + ((+a - a0) / span) * util;
     const y = v => mArr + (1 - (v - min) / rango) * utilY;
-    const linea = serie.map((a,i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(a.valor).toFixed(1)).join(' ');
-    const puntos = serie.map((a,i) =>
-      '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(a.valor).toFixed(1)
+
+    const linea = serie.map((a,i) => (i ? 'L' : 'M') + x(a.anio).toFixed(1)
+      + ' ' + y(a.valor).toFixed(1)).join(' ');
+    const puntos = serie.map(a =>
+      '<circle cx="' + x(a.anio).toFixed(1) + '" cy="' + y(a.valor).toFixed(1)
       + '" r="2.4" fill="var(--orange)"></circle>').join('');
-    const p = serie[0], u = serie[serie.length-1];
-    return '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto
-      + '" style="max-width:100%;height:auto" role="img" aria-label="Serie de '
-      + esc(rotuloDeMateria(clave)) + ', ' + serie.length + ' años, de ' + p.anio
-      + ' a ' + u.anio + '">'
+
+    const trazo = prolonga
+      ? '<path d="M' + x(ultimoAnio).toFixed(1) + ' ' + y(pend*ultimoAnio+orden).toFixed(1)
+        + ' L' + x(anioFin).toFixed(1) + ' ' + y(valorFin).toFixed(1) + '" fill="none" '
+        + 'stroke="#7d90a8" stroke-width="1.6" stroke-dasharray="4 3"></path>'
+        + '<circle cx="' + x(anioFin).toFixed(1) + '" cy="' + y(valorFin).toFixed(1)
+        + '" r="2.6" fill="none" stroke="#7d90a8" stroke-width="1.4"></circle>'
+        + '<text x="' + (ancho - mDer + 5) + '" y="' + (y(valorFin) + 3).toFixed(1)
+        + '" fill="#7d90a8" font-size="10">' + anioFin + '<tspan x="'
+        + (ancho - mDer + 5) + '" dy="12" font-weight="700">' + cifra(valorFin)
+        + '</tspan></text>'
+      : '';
+
+    const p = serie[0], u = serie[n-1];
+    const dibujo = '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho
+      + '" height="' + alto + '" style="max-width:100%;height:auto" role="img" '
+      + 'aria-label="Serie de ' + esc(rotuloDeMateria(clave)) + ', ' + n + ' años, de '
+      + p.anio + ' a ' + u.anio + (prolonga ? ', con prolongación hasta ' + anioFin : '') + '">'
       + '<path d="' + linea + '" fill="none" stroke="var(--orange)" stroke-width="2" '
       + 'stroke-linejoin="round" stroke-linecap="round" opacity=".85"></path>'
-      + puntos
+      + trazo + puntos
       + '<text x="' + mIzq + '" y="' + (alto - 6) + '" fill="#7d90a8" font-size="10">'
       + p.anio + ' · ' + cifra(p.valor) + '</text>'
       + '<text x="' + (ancho - mDer) + '" y="' + (alto - 6) + '" text-anchor="end" '
-      + 'fill="#fff" font-size="10" font-weight="700">' + u.anio + ' · ' + cifra(u.valor) + '</text>'
-      + '</svg>';
+      + 'fill="#fff" font-size="10" font-weight="700">' + u.anio + ' · ' + cifra(u.valor)
+      + '</text></svg>';
+
+    // El pie NO es decoración: una línea punteada que sale de un gráfico se lee
+    // como una promesa, y hay que decir que no lo es.
+    const pie = prolonga
+      ? '<small class="pie-tira"><b>La línea punteada no es un pronóstico.</b> Prolonga '
+        + 'tres años la recta que mejor ajusta a estos ' + n + ' años (R² = '
+        + cifra(r2) + '): dice a dónde llegaría la cifra <b>si el movimiento de estos '
+        + 'años continuara igual</b>, y en estas materias rara vez continúa igual.</small>'
+      : (n >= 5
+         ? '<small class="pie-tira">Estos ' + n + ' años <b>no siguen una línea</b> '
+           + '(R² = ' + cifra(r2) + '), así que el registro no los prolonga: extender '
+           + 'una nube de puntos sería dibujar una convicción, no un cálculo.</small>'
+         : '<small class="pie-tira">Con ' + n + ' años el registro no prolonga la serie: '
+           + 'por tan pocos puntos pasa casi cualquier recta.</small>');
+
+    return dibujo + pie;
   }
 
   // ============ LA TIRA REGIONAL ============
