@@ -836,6 +836,29 @@
 
   .pie-escala{display:block;color:#7d90a8;font-size:10.5px;line-height:1.5;margin:0 0 4px;}
 
+  /* LAS FIGURAS VIVAS. El resaltado no cambia el color —el color ya significa
+     algo en estas figuras— sino el grosor del borde y la opacidad: así se puede
+     resaltar sin mentir sobre el dato. */
+  .viva{cursor:pointer;}
+  .viva:focus{outline:none;}
+  .viva.resaltada, .viva:focus-visible{
+    stroke:#fff!important;stroke-width:2!important;opacity:1!important;}
+  /* El círculo de toque es transparente: si se lo resalta no se ve nada. Se
+     resalta el punto visible que tiene al lado. */
+  .viva.resaltada[fill="transparent"]{stroke:#fff!important;stroke-width:1.5!important;
+    fill:rgba(255,255,255,.10)!important;}
+  #globo-figura{position:fixed;z-index:60;pointer-events:none;opacity:0;
+    transition:opacity .12s ease;background:#0E2135;border:1px solid var(--line);
+    border-radius:8px;padding:8px 11px;font-size:12px;line-height:1.5;color:#C7D2E0;
+    box-shadow:0 8px 24px rgba(0,0,0,.45);max-width:240px;}
+  #globo-figura.visible{opacity:1;}
+  #globo-figura b{color:#fff;}
+  #globo-figura .cifra{font-family:'JetBrains Mono',monospace;color:var(--orange);
+    font-weight:700;}
+  #globo-figura .que{color:#9fb2c8;font-size:11px;}
+  #globo-figura .ir{color:#7d90a8;font-size:10.5px;}
+  @media (prefers-reduced-motion:reduce){ #globo-figura{transition:none;} }
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -3214,8 +3237,9 @@
         + '<text x="' + (mIzq - 7) + '" y="' + (y + 13) + '" text-anchor="end" fill="'
         + (propio ? '#fff' : '#C7D2E0') + '" font-size="' + (angosto ? 10 : 11) + '"'
         + (propio ? ' font-weight="700"' : '') + '>' + esc(nombre(iso)) + '</text>'
-        + '<rect x="' + mIzq + '" y="' + y + '" width="' + w.toFixed(1) + '" height="17" '
-        + 'rx="3" fill="' + (propio ? 'var(--orange)' : 'rgba(251,101,0,.45)') + '"></rect>'
+        + '<rect' + marcaViva(iso, rotuloDeMateria(clave), cifra(v)) + ' x="' + mIzq
+        + '" y="' + y + '" width="' + w.toFixed(1) + '" height="17" rx="3" fill="'
+        + (propio ? 'var(--orange)' : 'rgba(251,101,0,.45)') + '"></rect>'
         + '<text x="' + (mIzq + w + 6) + '" y="' + (y + 13) + '" fill="#fff" font-size="'
         + (angosto ? 10 : 11) + '" font-weight="700">' + cifra(v) + '</text>'
         + '</g>';
@@ -4386,7 +4410,8 @@
       return '<g>'
         + '<text x="' + (margenIzq - 8) + '" y="' + (y + 15) + '" text-anchor="end" '
         + 'fill="#C7D2E0" font-size="11">' + esc(nombre(x.iso)) + '</text>'
-        + '<rect x="' + margenIzq + '" y="' + y + '" width="' + w.toFixed(1)
+        + '<rect' + marcaViva(x.iso, rotuloDeMateria(clave), cifra(x.d.valor))
+        + ' x="' + margenIzq + '" y="' + y + '" width="' + w.toFixed(1)
         + '" height="20" rx="3" fill="' + color + '"></rect>'
         + '<text x="' + (margenIzq + w + 6) + '" y="' + (y + 15) + '" '
         + 'fill="#fff" font-size="11" font-weight="700">' + cifra(x.d.valor) + '</text>'
@@ -4660,7 +4685,9 @@
 
     const otros = pares.filter(([i]) => i !== iso).map(([i, v]) =>
       '<circle cx="' + x(v).toFixed(1) + '" cy="' + y + '" r="4" fill="#7d90a8" '
-      + 'opacity=".38"><title>' + esc(nom(i)) + ' · ' + cifra(v) + '</title></circle>').join('');
+      + 'opacity=".38"></circle>'
+      + '<circle' + marcaViva(i, 'Situación general', cifra(v)) + ' cx="' + x(v).toFixed(1)
+      + '" cy="' + y + '" r="11" fill="transparent"></circle>').join('');
 
     return '<svg viewBox="0 0 ' + an + ' ' + al + '" width="' + an + '" height="' + al
       + '" style="max-width:100%;height:auto;margin:6px 0 2px" role="img" aria-label="'
@@ -4673,8 +4700,9 @@
       + '<text x="' + x(med).toFixed(1) + '" y="' + (y + 24) + '" text-anchor="middle" '
       + 'fill="#7d90a8" font-size="9">mediana ' + cifra(med) + '</text>'
       + otros
-      + '<circle cx="' + x(propio).toFixed(1) + '" cy="' + y + '" r="6.5" '
-      + 'fill="var(--orange)" stroke="#00121E" stroke-width="1.5"></circle>'
+      + '<circle' + marcaViva(iso, 'Situación general', cifra(propio)) + ' cx="'
+      + x(propio).toFixed(1) + '" cy="' + y + '" r="6.5" fill="var(--orange)" '
+      + 'stroke="#00121E" stroke-width="1.5"></circle>'
       + '<text x="' + m + '" y="14" fill="#3FA796" font-size="9.5">'
       + esc(nom(elMejor[0])) + ' ' + cifra(elMejor[1]) + '</text>'
       + '<text x="' + (an - m) + '" y="14" text-anchor="end" fill="var(--orange)" '
@@ -4901,6 +4929,104 @@
     return dibujo + pie;
   }
 
+  // ============ LAS FIGURAS RESPONDEN ============
+  //
+  // Un punto entre treinta y tres no sirve si no se puede preguntar cuál es, y
+  // una barra no sirve si para ir a ese Estado hay que buscarlo en otro lado.
+  //
+  // Una sola pieza para todas las figuras. Cada elemento que representa a un
+  // Estado lleva data-iso, data-rot y data-val; de ahí salen el resaltado, el
+  // globo y el salto al Estado. Agregar una figura nueva no pide código nuevo:
+  // pide esos tres atributos.
+  function armarFigurasVivas(){
+    if(document.getElementById('globo-figura')) return;
+    const globo = document.createElement('div');
+    globo.id = 'globo-figura';
+    globo.setAttribute('role', 'status');
+    document.body.appendChild(globo);
+
+    // Se dibuja UNA vez y se mueve. Crear y destruir un nodo en cada movimiento
+    // del puntero es lo que hace que un gráfico se sienta pesado.
+    const mostrar = (el, x, y) => {
+      const iso = el.dataset.iso;
+      const nom = (padron.find(p => p.iso === iso) || {}).pais || iso;
+      globo.innerHTML = '<b>' + esc(nom) + '</b>'
+        + (el.dataset.val ? ' · <span class="cifra">' + esc(el.dataset.val) + '</span>' : '')
+        + (el.dataset.rot ? '<br><span class="que">' + esc(el.dataset.rot) + '</span>' : '')
+        + '<br><span class="ir">Tocá para ver este Estado</span>';
+      globo.classList.add('visible');
+      const c = globo.getBoundingClientRect();
+      // El globo se corre para no salirse por el borde: en un teléfono, un globo
+      // que se sale es un globo que no se lee.
+      const izq = Math.max(8, Math.min(innerWidth - c.width - 8, x - c.width / 2));
+      const arr = (y - c.height - 14 < 8) ? y + 18 : y - c.height - 14;
+      globo.style.left = izq + 'px';
+      globo.style.top = arr + 'px';
+    };
+    const ocultar = () => globo.classList.remove('visible');
+
+    const marcar = el => {
+      document.querySelectorAll('.viva.resaltada').forEach(x => x.classList.remove('resaltada'));
+      if(el) el.classList.add('resaltada');
+    };
+
+    document.addEventListener('pointermove', ev => {
+      const el = ev.target.closest && ev.target.closest('.viva[data-iso]');
+      if(!el){ if(globo.classList.contains('visible')){ ocultar(); marcar(null); } return; }
+      marcar(el);
+      mostrar(el, ev.clientX, ev.clientY);
+    }, {passive: true});
+
+    document.addEventListener('pointerleave', ocultar, true);
+    window.addEventListener('scroll', ocultar, {passive: true});
+
+    document.addEventListener('click', ev => {
+      const el = ev.target.closest && ev.target.closest('.viva[data-iso]');
+      if(!el) return;
+      const sel = document.getElementById('ambito');
+      if(!sel) return;
+      ocultar();
+      sel.value = 'p:' + el.dataset.iso;
+      sel.dispatchEvent(new Event('change'));
+      document.getElementById('ficha-pais')?.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+
+    // Con el teclado responde igual: un gráfico que sólo obedece al mouse deja
+    // afuera a quien no lo usa.
+    // EL TECLADO NO PASA POR LOS EVENTOS DE FOCO. Este motor no dispara `focusin`
+    // ni `focus` —ni siquiera en captura— sobre un elemento de SVG: se comprobó
+    // enfocando una marca por guion, activeElement era el círculo y el evento no
+    // llegaba nunca. Así que no se escucha el foco: se mira quién quedó
+    // enfocado después de cada tecla, que es lo que un Tab real produce y no
+    // depende de una particularidad del navegador.
+    const seguirAlFoco = () => {
+      const el = document.activeElement;
+      if(el && el.closest && el.closest('.viva[data-iso]')){
+        marcar(el);
+        const r = el.getBoundingClientRect();
+        mostrar(el, r.left + r.width / 2, r.top);
+      } else if(globo.classList.contains('visible')){
+        ocultar(); marcar(null);
+      }
+    };
+    document.addEventListener('keyup', seguirAlFoco);
+    document.addEventListener('keydown', ev => {
+      if(ev.key !== 'Enter' && ev.key !== ' ') return;
+      const el = ev.target.closest && ev.target.closest('.viva[data-iso]');
+      if(!el) return;
+      ev.preventDefault();
+      el.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+    });
+  }
+
+  // Los atributos que vuelven viva a una marca. Se arman acá y no a mano en
+  // cada figura para que agregar una figura sea agregar una llamada, no
+  // recordar tres nombres de atributo.
+  function marcaViva(iso, rotulo, valor){
+    return ' class="viva" tabindex="0" role="button" data-iso="' + esc(iso)
+      + '" data-rot="' + esc(rotulo || '') + '" data-val="' + esc(valor) + '"';
+  }
+
   // ============ LA TIRA REGIONAL ============
   //
   // «Lugar 13 de 33» ordena pero no muestra distancia: no dice si el 13 esta
@@ -4938,10 +5064,14 @@
 
     // Los demas Estados, translucidos. Se superponen a proposito: donde el color
     // se satura hay muchos juntos, y eso es informacion.
+    const rotulo = rotuloDeMateria(clave);
+    // El área de toque se separa del dibujo: en un teléfono un punto de 8 píxeles
+    // es un blanco imposible, y errarle significa saltar a otro Estado.
     const otros = pares.filter(([i]) => i !== iso).map(([i, v]) =>
-      '<circle cx="' + x(v).toFixed(1) + '" cy="' + yEje + '" r="4" '
-      + 'fill="#7d90a8" opacity=".38"><title>' + esc(nombreDe(i)) + ' · '
-      + cifra(v) + '</title></circle>').join('');
+      '<circle cx="' + x(v).toFixed(1) + '" cy="' + yEje + '" r="4" fill="#7d90a8" '
+      + 'opacity=".38"></circle>'
+      + '<circle' + marcaViva(i, rotulo, cifra(v)) + ' cx="' + x(v).toFixed(1)
+      + '" cy="' + yEje + '" r="11" fill="transparent"></circle>').join('');
 
     const xm = x(todos[iso]);
     const nom = nombreDe(iso);
@@ -4962,8 +5092,9 @@
       + '<text x="' + x(med).toFixed(1) + '" y="' + (yEje + 22) + '" text-anchor="middle" '
       + 'fill="#7d90a8" font-size="9">mediana ' + cifra(med) + '</text>'
       + otros
-      + '<circle cx="' + xm.toFixed(1) + '" cy="' + yEje + '" r="6" fill="var(--orange)" '
-      + 'stroke="#00121E" stroke-width="1.5"></circle>'
+      + '<circle' + marcaViva(iso, rotulo, cifra(todos[iso])) + ' cx="' + xm.toFixed(1)
+      + '" cy="' + yEje + '" r="6" fill="var(--orange)" stroke="#00121E" '
+      + 'stroke-width="1.5"></circle>'
       + '<text x="' + xr.toFixed(1) + '" y="' + (yEje - 13) + '" text-anchor="' + anclaje
       + '" fill="#fff" font-size="10" font-weight="700">' + esc(nom) + '</text>'
       + '<text x="' + mIzq + '" y="12" fill="#7d90a8" font-size="9">' + cifra(min) + '</text>'
@@ -7451,6 +7582,7 @@
     paso('panorama', armarPanorama);
     paso('solapas', armarSolapas);
     paso('para publicar hoy', paraPublicarHoy);
+    paso('figuras vivas', armarFigurasVivas);
     paso('explorador', navegadorVista);
     paso('narcotráfico', narcotraficoVista);
     paso('crimen organizado', crimenVista);
