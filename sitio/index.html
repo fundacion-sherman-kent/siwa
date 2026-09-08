@@ -2928,6 +2928,60 @@
       + '</span>' + boton + '</div></div>';
   }
 
+  // EL NUMERO PRIMERO, LA EXPLICACION DESPUES. En las 56 secciones el aviso de
+  // cobertura estaba ARRIBA de los datos: habia que leer un parrafo antes de
+  // llegar a la cifra. Se lo mueve debajo, donde sirve de nota al pie y no de
+  // peaje. No se borra: se reordena.
+  //
+  // Se hace acá y no en el HTML porque son 56 bloques: una funcion de diez
+  // lineas no puede romperlos, y cincuenta y seis ediciones a mano si.
+  let cautelasOrdenadas = false;
+  function ordenarCautelas(){
+    if(cautelasOrdenadas) return;
+    cautelasOrdenadas = true;
+    document.querySelectorAll('.categoria').forEach(c => {
+      const aviso = c.querySelector(':scope > details.aviso-cobertura');
+      if(!aviso) return;
+      const datos = c.querySelector(':scope > .cruce, :scope > .paises-oficiales, '
+                                  + ':scope > .lista, :scope > [id^="lista-"]');
+      if(datos && (aviso.compareDocumentPosition(datos) & Node.DOCUMENT_POSITION_FOLLOWING)){
+        datos.after(aviso);
+      }
+    });
+  }
+
+  // LO METODOLOGICO SE PLIEGA EN EL NIVEL CIUDADANO. Son 3,8 pantallas de metodo
+  // que el ciudadano no vino a leer y el analista si: se pliega para uno y queda
+  // abierto para el otro. Nada se borra.
+  const PLEGABLES = [
+    ['seis-materias', 'Cómo se agrupan las materias y qué mide cada una'],
+    ['de-donde-sale', 'De dónde sale cada dato, cómo se lo califica y qué falta'],
+  ];
+  function plegarMetodo(){
+    PLEGABLES.forEach(([id, rotulo]) => {
+      const sec = document.getElementById(id);
+      if(!sec) return;
+      let caja = sec.querySelector(':scope > details.plegado-metodo');
+      if(nivel > 1){
+        // En los niveles de analista se devuelve todo a su lugar.
+        if(caja){
+          while(caja.lastElementChild && caja.lastElementChild.tagName !== 'SUMMARY')
+            caja.after(caja.lastElementChild);
+          caja.remove();
+        }
+        return;
+      }
+      if(caja) return;
+      const titulo = sec.querySelector(':scope > h2, :scope > .domain-head');
+      caja = document.createElement('details');
+      caja.className = 'aviso-cobertura plegado-metodo';
+      caja.innerHTML = '<summary>' + esc(rotulo) + '</summary>';
+      (titulo || sec.firstElementChild).after(caja);
+      let n = caja.nextElementSibling;
+      while(n){ const sig = n.nextElementSibling; caja.appendChild(n); n = sig; }
+    });
+  }
+
   function MATERIAS(){
     const deFuentes = fuentesInd().flatMap(f=>(f.indicadores||[]).map(i=>({
       clave:i.clave, eje:i.eje, rotulo:i.rotulo,
@@ -5393,6 +5447,8 @@
     paso('contratación pública', contratacionVista);
     paso('explorador de puertas', exploradorVista);
     paso('comercio de armas', armasVista);
+    ordenarCautelas();
+    plegarMetodo();
     paso('narcotráfico', narcotraficoVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
