@@ -1372,6 +1372,7 @@
         <li><b>Si querés, cruzá con otro tema</b> para ver si se mueven juntos. No hace falta
             para usar el registro.</li>
       </ol>
+      <div id="composicion-temas"></div>
       <div class="mapa-barra">
         <div class="controles">
           <div class="control">
@@ -3736,10 +3737,36 @@
   // numero escrito a mano envejece solo, y este instructivo es lo primero que
   // lee alguien que no conoce el registro.
   function contarTemas(){
+    const vive = m => !m.disponible || m.disponible();
+    const M = MATERIAS().filter(vive);
     const e = document.getElementById('cuantos-temas');
-    if(!e) return;
-    const n = MATERIAS().filter(m => !m.disponible || m.disponible()).length;
-    e.textContent = n + (n === 1 ? ' tema' : ' temas');
+    if(e) e.textContent = M.length + (M.length === 1 ? ' tema' : ' temas');
+
+    // DOS CUENTAS EN LA MISMA PAGINA. La portada dice «69 indicadores» y esta
+    // pantalla dice «95 temas». Ninguna esta mal: son cuentas distintas. Pero
+    // el lector que compara las dos no tiene como saberlo, y una contradiccion
+    // aparente le cuesta caro a un registro que se ofrece como trazable. Se
+    // explica con las cuatro cifras contadas, no escritas a mano.
+    const c = document.getElementById('composicion-temas');
+    if(!c) return;
+    const ind = fuentesInd().reduce((a,f) => a + (f.indicadores || []).length, 0);
+    const comp = MATERIAS_COMPUESTAS().filter(vive).length;
+    const crim = MATERIAS_CRIMEN().filter(vive).length;
+    const est = ESTATICAS.filter(vive).length;
+    if(!ind) return;
+    c.innerHTML = '<details class="aviso-cobertura"><summary>La portada dice «'
+      + ind + ' indicadores» y acá dice «' + M.length + ' temas»: por qué</summary>'
+      + '<p>Son dos cuentas distintas y ninguna está mal. Los <b>' + ind + '</b> '
+      + 'indicadores son los que el registro toma tal cual de una fuente, cada uno '
+      + 'con su serie y su calificación. A eso se suman <b>' + comp + '</b> compuestos '
+      + 'que arma el propio registro con esos mismos indicadores, <b>' + crim + '</b> '
+      + 'medidas de crimen organizado y <b>' + est + '</b> clasificaciones, que no son '
+      + 'cifras sino categorías. Todo junto da los <b>' + M.length + '</b> temas que se '
+      + 'pueden abrir acá.</p>'
+      + '<p>La portada cuenta lo primero porque es lo que el registro <b>recolecta</b>; '
+      + 'esta pantalla cuenta todo lo que se puede <b>consultar</b>. Las cuatro cifras '
+      + 'salen de contar los datos cargados: si mañana entra una fuente nueva, cambian '
+      + 'solas.</p></details>';
   }
 
   // La serie de una materia, dibujada. Sin ejes ni grilla: una linea, sus
@@ -5579,8 +5606,12 @@
       .replace('{IND}', cuantos || '')
       .replace('{FUE}', cuantasFuentes || '');
     const rotAnalista = document.getElementById('rot-analista');
-    if(rotAnalista && cuantos)
-      rotAnalista.textContent = 'Los ' + cuantos + ' indicadores, el método y los vacíos';
+    // El boton decia «Los 69 indicadores» mientras el mapa decia «95 temas». Se
+    // unifica en temas: es lo que el lector abre, y la diferencia entre las dos
+    // cuentas queda explicada en el instructivo del mapa.
+    const cuantosTemas = MATERIAS().filter(m => !m.disponible || m.disponible()).length;
+    if(rotAnalista && cuantosTemas)
+      rotAnalista.textContent = 'Los ' + cuantosTemas + ' temas, el método y los vacíos';
     pintarHerramientas();
     guardarEnLaDireccion();
     // La barra lateral solo lista lo que en este nivel existe.
