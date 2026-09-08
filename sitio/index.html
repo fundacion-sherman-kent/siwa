@@ -803,6 +803,23 @@
     line-height:1.45;cursor:help;}
   .medida-crimen .edad{flex:0 0 auto;min-width:34px;text-align:center;}
 
+  /* LAS SOLAPAS de «De dónde sale y qué falta». El panel cerrado se oculta con
+     una clase propia y no con el atributo `hidden`, justamente para que la regla
+     de impresión pueda volver a mostrarlo: el PDF lleva los cinco paneles. */
+  .barra-solapas{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px;
+    border-bottom:1px solid var(--line);padding-bottom:10px;}
+  .solapa{background:none;border:1px solid var(--line);color:#9fb2c8;font:inherit;
+    font-size:12px;padding:6px 12px;border-radius:6px;cursor:pointer;}
+  .solapa:hover{color:#fff;border-color:#7d90a8;}
+  .solapa.activa{background:var(--orange);border-color:var(--orange);color:#00121E;
+    font-weight:700;}
+  .panel-cerrado{display:none;}
+  /* No hay regla de impresión para estos paneles, y conviene decir por qué: el
+     PDF de este registro es #informe y nada más —la hoja de impresión oculta
+     todo lo demás desde antes de que existieran las solapas— y ese informe trae
+     su propia sección de procedencia y vacíos. Se comprobó contra el sitio
+     publicado: los cinco paneles quedaban fuera del PDF también sin solapas. */
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -2550,7 +2567,8 @@
 
     <section class="domain bloque" id="de-donde-sale" data-nivel="1">
       <div class="bloque-head"><h3>De dónde sale y qué falta</h3></div>
-      <p class="bloque-bajada">La trazabilidad completa: qué publica cada Estado, qué no publica, de dónde sale cada cifra, cómo se la califica y qué se puede descargar.</p>
+      <p class="bloque-bajada">La trazabilidad completa: qué publica cada Estado, qué no publica, de dónde sale cada cifra, cómo se la califica y qué se puede descargar. <b>Elegí una solapa.</b> El informe en PDF no lleva estos paneles: lleva su propia sección de procedencia y de vacíos declarados, armada para el ámbito que estés mirando.</p>
+      <div class="barra-solapas" id="barra-solapas" role="tablist" aria-label="Secciones de trazabilidad"></div>
     <div class="categoria" id="oficiales" data-nivel="3">
       <div class="categoria-head"><h4>Padrón de fuentes oficiales</h4><span class="tag" id="tag-oficiales">—</span></div>
       <details class="aviso-cobertura"><summary>Este padrón no publica datos: publica dónde están</summary>
@@ -3657,6 +3675,50 @@
     const nav = document.getElementById('navegador');
     if(!hueco || !nav || hueco.contains(nav)) return;
     hueco.appendChild(nav);
+  }
+
+  // ============ «DE DONDE SALE Y QUE FALTA», EN SOLAPAS ============
+  //
+  // Esa sección ocupaba diez pantallas al final del registro. Es material que
+  // hay que tener —es la trazabilidad entera— pero que se consulta por partes,
+  // no de corrido. Una barra arriba y un panel por vez.
+  //
+  // La regla que no se negocia: EN IMPRESIÓN SE MUESTRAN TODOS. Una solapa
+  // cerrada es contenido oculto, y el PDF no puede perder la trazabilidad
+  // porque el lector estaba mirando otra pestaña.
+  function armarSolapas(){
+    const sec = document.getElementById('de-donde-sale');
+    if(!sec) return;
+    // Se recomponen en cada pintado porque el nivel de lectura cambia cuáles
+    // existen: una solapa que abre un panel que el nivel oculta no sirve.
+    const cats = [...sec.children].filter(c => c.classList.contains('categoria')
+      && c.id !== 'informe');
+    cats.forEach(c => c.classList.remove('panel-cerrado'));
+    const vivas = cats.filter(c => getComputedStyle(c).display !== 'none');
+    const barra = document.getElementById('barra-solapas');
+    if(!barra) return;
+    if(vivas.length < 2){ barra.innerHTML = ''; return; }
+
+    const rot = c => (c.querySelector('.categoria-head h4') || {}).textContent || c.id;
+    const guardada = barra.dataset.abierta;
+    const abierta = vivas.some(c => c.id === guardada) ? guardada : vivas[0].id;
+
+    barra.innerHTML = vivas.map(c =>
+      '<button class="solapa' + (c.id === abierta ? ' activa' : '') + '" data-solapa="'
+      + esc(c.id) + '" role="tab" aria-selected="' + (c.id === abierta) + '">'
+      + esc(rot(c).trim()) + '</button>').join('');
+    barra.dataset.abierta = abierta;
+    vivas.forEach(c => c.classList.toggle('panel-cerrado', c.id !== abierta));
+
+    if(!barra.dataset.armada){
+      barra.dataset.armada = '1';
+      barra.addEventListener('click', ev => {
+        const b = ev.target.closest('[data-solapa]');
+        if(!b) return;
+        barra.dataset.abierta = b.dataset.solapa;
+        armarSolapas();
+      });
+    }
   }
 
   function armarNavegador(){
@@ -7073,6 +7135,7 @@
     paso('cuántos temas', contarTemas);
     paso('perfil del país', perfilPais);
     paso('panorama', armarPanorama);
+    paso('solapas', armarSolapas);
     paso('explorador', navegadorVista);
     paso('narcotráfico', narcotraficoVista);
     paso('crimen organizado', crimenVista);
