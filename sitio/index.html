@@ -653,7 +653,11 @@
   .eje-tarjeta{cursor:pointer;}
   .eje-tarjeta:hover{outline:2px solid rgba(251,101,0,.45);outline-offset:1px;}
   .falta{color:var(--orange);font-weight:700;}
-  .comparacion{width:100%;border-collapse:collapse;margin-top:10px;font-size:.94em;}
+  /* La tabla no se aprieta: se desplaza dentro de su caja. En un telefono, con
+     cuatro paises, la primera columna quedaba en 110 pixeles y el nombre de la
+     materia se partia en cuatro renglones. */
+  .caja-tabla{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px;}
+  .comparacion{width:100%;min-width:520px;border-collapse:collapse;font-size:.94em;}
   .comparacion th,.comparacion td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.10);
     text-align:right;}
   .comparacion th:first-child,.comparacion td:first-child{text-align:left;}
@@ -3236,7 +3240,7 @@
     claves = claves.filter((v,i,a) => v && a.indexOf(v) === i).slice(0, 14);
 
     const nombre = iso => (padron.find(x => x.iso === iso) || {}).pais || iso;
-    let html = '<table class="comparacion"><thead><tr><th>Materia</th>'
+    let html = '<div class="caja-tabla"><table class="comparacion"><thead><tr><th>Materia</th>'
       + navComparar.map(i => '<th>' + esc(nombre(i)) + '</th>').join('')
       + '</tr></thead><tbody>';
     claves.forEach(c => {
@@ -3258,7 +3262,7 @@
               + ' <small>' + v.puesto + '.º</small></td>';
           }).join('') + '</tr>';
     });
-    html += '</tbody></table>'
+    html += '</tbody></table></div>'
       + '<p class="nota-filtro"><b>El número chico es el lugar entre los 33.</b> El color '
       + 'marca el mejor y el peor de los comparados, y sólo aparece en las materias que '
       + 'tienen una dirección declarada: hay materias donde «más» no es ni mejor ni peor.</p>';
@@ -3528,9 +3532,17 @@
     const maximo = Math.max(...datos.map(x => x.d.valor));
     const minimo = Math.min(0, ...datos.map(x => x.d.valor));
     const rango = (maximo - minimo) || 1;
-    const altoFila = 34, ancho = 560, margenIzq = 132, margenDer = 76;
+    // EL DIBUJO SE HACE DEL ANCHO QUE HAY. Antes se dibujaba siempre de 560 y el
+    // navegador lo achicaba: en un telefono las letras quedaban en 7 pixeles,
+    // ilegibles. Si el dibujo no se achica, la letra conserva su tamaño.
+    const disponible = (document.getElementById('tabla-comparacion')?.clientWidth || 560);
+    const ancho = Math.max(300, Math.min(560, disponible - 8));
+    const angosto = ancho < 420;
+    const altoFila = angosto ? 40 : 34;
+    const margenIzq = angosto ? 96 : 132;
+    const margenDer = angosto ? 58 : 76;
     const util = ancho - margenIzq - margenDer;
-    const alto = datos.length * altoFila + 16;
+    const alto = datos.length * altoFila + (angosto ? 22 : 16);
 
     const barras = datos.map((x, i) => {
       const y = i * altoFila + 8;
@@ -3550,9 +3562,12 @@
         + '" height="20" rx="3" fill="' + color + '"></rect>'
         + '<text x="' + (margenIzq + w + 6) + '" y="' + (y + 15) + '" '
         + 'fill="#fff" font-size="11" font-weight="700">' + cifra(x.d.valor) + '</text>'
-        + '<text x="' + (margenIzq + w + 6) + '" y="' + (y + 15) + '" '
-        + 'fill="#7d90a8" font-size="9" dx="' + (String(cifra(x.d.valor)).length * 7 + 6)
-        + '">' + x.d.puesto + '.º de ' + x.d.deCuantos + '</text>'
+        + (angosto
+           ? '<text x="' + (margenIzq + w + 6) + '" y="' + (y + 27) + '" '
+             + 'fill="#7d90a8" font-size="10">' + x.d.puesto + '.º de ' + x.d.deCuantos + '</text>'
+           : '<text x="' + (margenIzq + w + 6) + '" y="' + (y + 15) + '" '
+             + 'fill="#7d90a8" font-size="9" dx="' + (String(cifra(x.d.valor)).length * 7 + 6)
+             + '">' + x.d.puesto + '.º de ' + x.d.deCuantos + '</text>')
         + '</g>';
     }).join('');
 
@@ -3571,8 +3586,8 @@
       + '</span><span class="badge medio">figura</span></div>';
 
     return '<div class="asunto"><h4>' + esc(rotuloDeMateria(clave)) + '</h4>'
-      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="100%" '
-      + 'style="max-width:' + ancho + 'px;height:auto" role="img" aria-label="'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" '
+      + 'height="' + alto + '" style="max-width:100%;height:auto" role="img" aria-label="'
       + esc(rotuloDeMateria(clave)) + ', comparación entre ' + datos.length + ' Estados">'
       + barras + '</svg>' + pie + '</div>';
   }
