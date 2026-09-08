@@ -906,6 +906,10 @@
     font-family:'JetBrains Mono',monospace;}
   .tablero-mapa .modos{margin-top:6px;}
 
+  .delta{display:inline-block;margin-left:10px;font-size:15px;font-weight:700;
+    vertical-align:middle;font-family:'JetBrains Mono',monospace;cursor:help;}
+  .delta.peor{color:var(--orange);} .delta.mejor{color:#3FA796;} .delta.igual{color:#7d90a8;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -4895,6 +4899,23 @@
       + 'el orden va del mejor situado al peor, dentro de la región.</small>';
   }
 
+  // LA FLECHA AL LADO DE LA CIFRA GRANDE. Como GI-TOC: «5,67 −0,29». En este
+  // compuesto más alto es peor, así que subir se pinta en naranja y bajar en
+  // verde, y eso no es un juicio de la casa: es la orientación declarada del
+  // compuesto, que dice «0 el mejor situado, 100 el peor».
+  function variacionDelCompuesto(iso){
+    const par = compuestosPareados();
+    const ahora = (par.ahora.general || {})[iso];
+    const antes = (par.antes.general || {})[iso];
+    if(!ahora || !antes) return '';
+    const d = ahora.valor - antes.valor;
+    const base = 'sobre los ' + ahora.indicadores + ' indicadores que tienen dato actual y anterior';
+    if(Math.abs(d) < 0.05) return '<span class="delta igual" title="Sin cambio ' + base + '">= 0</span>';
+    return '<span class="delta ' + (d > 0 ? 'peor' : 'mejor') + '" title="Variación ' + base
+      + ', con el mismo compuesto en los dos momentos">'
+      + (d > 0 ? '▲ +' : '▼ ') + cifra(Math.round(d * 10) / 10) + '</span>';
+  }
+
   function perfilPais(){
     const caja = document.getElementById('perfil-pais');
     if(!caja) return;
@@ -4957,7 +4978,7 @@
       + '</div>'
       + (mio && pg
          ? '<div class="perfil-puntaje">'
-           + '<div class="grande">' + cifra(mio.valor) + '</div>'
+           + '<div class="grande">' + cifra(mio.valor) + variacionDelCompuesto(iso) + '</div>'
            + '<div class="perfil-detalle"><b>Situación general</b>'
            + '<br>lugar <b>' + pg.enRegion + '</b> de ' + pg.deCuantos + ' en la región'
            + ' <span class="aclara-puesto">(se cuenta del peor al mejor: '
@@ -4970,7 +4991,9 @@
               ? '<br><b>' + pg.enBloque + '.º</b> de ' + pg.cuantosBloque + ' en '
                 + esc(p.bloque) : '')
            + '<br><small>Construido con ' + mio.indicadores + ' indicadores de '
-           + mio.ejes + ' ejes.</small>'
+           + mio.ejes + ' ejes. La flecha compara el mismo compuesto en dos momentos, sobre '
+           + 'los indicadores que tienen dato actual y anterior: no es «hace un año», '
+           + 'porque los indicadores no comparten calendario.</small>'
            + '</div></div>'
          + figuraEscala(valores, iso)
          : '<p class="nota-filtro">Sin situación general: este Estado no alcanza el '
@@ -5562,16 +5585,25 @@
   const EJES_DEL_RESUMEN = EJES_COMPUESTOS.concat([EJE_SIN_ORIENTAR]);
 
   let compuestoGuardado = null, selloCompuesto = '';
-  function compuesto(){
-    const sello = selloDeDatos();
-    if(compuestoGuardado && selloCompuesto === sello) return compuestoGuardado;
-
+  // EL COMPUESTO SE ARMA UNA SOLA VEZ, con el campo que se le pida. Con «valor»
+  // es el de siempre; con «valor_anterior» es el mismo compuesto tal como
+  // estaba con el dato anterior de cada indicador, y la diferencia entre los
+  // dos es la variacion que se muestra al lado de la cifra grande. Una segunda
+  // implementacion de la regla habria sido una segunda definicion del compuesto.
+  function armarCompuesto(campoValor, campoAnio, soloPareados){
     // Percentil de cada Estado en cada indicador, siempre orientado a «peor».
     const porEje = {};
     EJES_DEL_RESUMEN.forEach(e => porEje[e] = {});
     fuentesInd().forEach(f => (f.indicadores||[]).forEach(i => {
       if(!EJES_DEL_RESUMEN.includes(i.eje)) return;
-      let filas = filasDe(i.clave).filter(x => isFinite(x.valor));
+      // LA FLECHA COMPARA SOBRE LA MISMA BASE: con soloPareados entran solo las
+      // filas que tienen los dos valores. Si no, la diferencia entre dos
+      // compuestos de distinta base diria tanto sobre que falta como sobre
+      // que cambio: medido, a Haiti le daba -12,9 por eso.
+      let filas = filasDe(i.clave)
+        .filter(x => !soloPareados || (isFinite(x.valor) && isFinite(x.valor_anterior)))
+        .map(x => ({...x, valor: x[campoValor], anio: x[campoAnio]}))
+        .filter(x => isFinite(x.valor));
 
       // NO SE COMPARAN EPOCAS DISTINTAS. Veinticinco indicadores mezclan años
       // entre países —«empresas a las que se pidió un soborno» va de 2010 a
@@ -5620,9 +5652,28 @@
         detalle: Object.fromEntries(suyos.map(e => [e, ejes[e][pa.iso].valor])),
       };
     });
-    compuestoGuardado = {ejes, general};
+    return {ejes, general};
+  }
+
+  function compuesto(){
+    const sello = selloDeDatos();
+    if(compuestoGuardado && selloCompuesto === sello) return compuestoGuardado;
+    compuestoGuardado = armarCompuesto('valor', 'anio');
     selloCompuesto = sello;
     return compuestoGuardado;
+  }
+
+  // Los dos compuestos PAREADOS: misma base, dos momentos. De aca sale la flecha.
+  let pareadosGuardados = null, selloPareados = '';
+  function compuestosPareados(){
+    const sello = selloDeDatos();
+    if(pareadosGuardados && selloPareados === sello) return pareadosGuardados;
+    pareadosGuardados = {
+      ahora: armarCompuesto('valor', 'anio', true),
+      antes: armarCompuesto('valor_anterior', 'anio_anterior', true),
+    };
+    selloPareados = sello;
+    return pareadosGuardados;
   }
 
   let proyectadoGuardado = {}, selloProyectado = '';
