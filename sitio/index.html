@@ -2935,7 +2935,7 @@
   // Y las palabras por delito o actividad para las materias QUE YA EXISTIAN.
   // Nadie escribe «Control de la corrupcion»: escribe «coima» o «soborno».
   const PALABRAS = {
-    homicidios: 'asesinato homicidio muerte violenta crimen violencia letal',
+    homicidios: 'asesinato homicidio muerte violenta crimen violencia letal sicariato ajuste de cuentas',
     conflicto_no_estatal: 'conflicto armado guerra grupos armados enfrentamiento',
     terrorismo_muertes: 'terrorismo atentado bomba',
     terrorismo_atentados: 'terrorismo atentado bomba',
@@ -3333,6 +3333,46 @@
   }
 
   // ---- El pintado del navegador --------------------------------------------
+  // UNA BUSQUEDA NO CONTESTA CON UNA PANTALLA EN BLANCO. Buscar «sicariato»
+  // dejaba el panel vacio, sin una linea: el lector no sabia si el registro no
+  // lo mide, si escribio mal o si el sitio se rompio. Y buscar «coima» dentro
+  // del eje Seguridad tampoco mostraba nada, aunque hay cuatro materias de
+  // corrupcion en Gobernanza — eso no es una ausencia, es una ausencia falsa, y
+  // el lector se iba creyendo que el registro no tiene lo que si tiene.
+  function sinResultados(){
+    const vive = m => !m.disponible || m.disponible();
+    const todas = MATERIAS().filter(vive);
+    const hallan = todas.filter(m => sinTilde(m.eje + ' ' + m.rotulo + ' '
+        + (m.busca || PALABRAS[m.clave] || '')).includes(navBusca));
+    const q = esc((document.getElementById('buscar-navegador') || {}).value || navBusca);
+
+    if(!hallan.length)
+      return '<div class="asunto"><h4>Nada con «' + q + '»</h4><div class="foot">'
+        + '<span class="porque">Ninguna de las <b>' + todas.length + '</b> materias del '
+        + 'registro responde a esa palabra. <b>Que no figure acá no significa que no '
+        + 'exista</b>: significa que este registro todavía no lo mide, y eso se declara '
+        + 'en vez de disimularse.<br>Probá con el hecho antes que con el nombre: '
+        + '«homicidio» además de «sicariato», «cocaína» además de «narco», «corrupción» '
+        + 'además de «coima».</span><span class="badge unica">sin resultados</span>'
+        + '</div></div>';
+
+    // Hay materias con esa palabra, pero no en el eje abierto.
+    const porEje = {};
+    hallan.forEach(m => { (porEje[m.eje] = porEje[m.eje] || []).push(m); });
+    return '<div class="asunto"><h4>Nada con «' + q + '» dentro de '
+      + esc(navEje || 'este ámbito') + '</h4><div class="foot"><span class="porque">'
+      + 'El registro sí tiene <b>' + hallan.length + '</b> materia'
+      + (hallan.length === 1 ? '' : 's') + ' con esa palabra, en otro eje. Tocá para ir.'
+      + '</span><span class="badge medio">está en otro eje</span></div></div>'
+      + Object.entries(porEje).map(([eje, ms]) =>
+          '<div class="asunto eje-tarjeta" data-eje="' + esc(eje) + '">'
+          + '<h4>' + esc(eje) + ' <span class="edad fresco">' + ms.length + '</span></h4>'
+          + '<div class="foot"><span class="porque">'
+          + ms.slice(0, 6).map(m => esc(m.rotulo)).join(' · ')
+          + (ms.length > 6 ? ' y ' + (ms.length - 6) + ' más' : '')
+          + '</span><span class="badge medio">eje</span></div></div>').join('');
+  }
+
   function navegadorVista(){
     const panel = document.getElementById('panel-navegador');
     const ruta = document.getElementById('ruta-navegador');
@@ -3362,6 +3402,10 @@
     if(navMateria) panel.innerHTML = panelFicha(iso, navMateria);
     else if(navEje) panel.innerHTML = panelMaterias(iso, navEje);
     else panel.innerHTML = panelEjes(iso);
+
+    // Si la búsqueda dejó el panel sin nada que tocar, el registro contesta igual.
+    if(navBusca && !navMateria && !panel.querySelector('[data-eje],[data-materia]'))
+      panel.innerHTML = sinResultados();
 
     if(tag) tag.textContent = navMateria ? 'ficha de la materia'
       : navEje ? navEje + ' · ' + esc(nombre)
