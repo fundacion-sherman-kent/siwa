@@ -3161,6 +3161,59 @@
   // LA FICHA DE RESULTADO. El filtro tiene que devolver el dato: un periodista
   // que escribe «cocaina» y elige Argentina quiere EL NUMERO, no una lista de
   // temas para tildar y despues buscar por la pagina.
+  // ============ EL RANKING DE UN TEMA, EN BARRAS ============
+  //
+  // Los ocho Estados con el valor más alto se mostraban como pastillas de texto.
+  // Ocho cifras en fila se comparan de a pares y a mano; ocho barras se comparan
+  // de una mirada. Va la mediana de TODOS los Estados con dato, no la de los
+  // ocho mostrados: sin esa referencia el ranking dice cuál es el más alto y no
+  // dice si el más alto está lejos o al lado del resto.
+  function figuraRanking(clave, cuantos){
+    const cap = (capas() || {})[clave];
+    if(!cap || !cap.conteo) return '';
+    const todos = Object.entries(cap.conteo() || {}).filter(([, v]) => isFinite(v));
+    if(todos.length < 3) return '';
+    const orden = todos.slice().sort((a, b) => b[1] - a[1]).slice(0, cuantos || 8);
+    const vals = todos.map(x => x[1]).sort((a, b) => a - b);
+    const med = vals.length % 2 ? vals[(vals.length - 1) / 2]
+              : (vals[vals.length/2 - 1] + vals[vals.length/2]) / 2;
+    const nombre = i => (padron.find(x => x.iso === i) || {}).pais || i;
+
+    const ancho = anchoDeFigura('panel-cruce');
+    const angosto = ancho < 420;
+    const mIzq = angosto ? 92 : 130, mDer = angosto ? 46 : 60;
+    const alto = orden.length * (angosto ? 26 : 24) + 26;
+    const util = ancho - mIzq - mDer;
+    const max = Math.max(...orden.map(x => x[1]), med);
+    const min = Math.min(0, ...orden.map(x => x[1]));
+    const rango = (max - min) || 1;
+    const x = v => mIzq + ((v - min) / rango) * util;
+
+    const barras = orden.map(([iso, v], i) => {
+      const y = i * (angosto ? 26 : 24) + 6;
+      const w = Math.max(2, x(v) - mIzq);
+      const propio = iso === paisFiltro;
+      return '<g>'
+        + '<text x="' + (mIzq - 7) + '" y="' + (y + 13) + '" text-anchor="end" fill="'
+        + (propio ? '#fff' : '#C7D2E0') + '" font-size="' + (angosto ? 10 : 11) + '"'
+        + (propio ? ' font-weight="700"' : '') + '>' + esc(nombre(iso)) + '</text>'
+        + '<rect x="' + mIzq + '" y="' + y + '" width="' + w.toFixed(1) + '" height="17" '
+        + 'rx="3" fill="' + (propio ? 'var(--orange)' : 'rgba(251,101,0,.45)') + '"></rect>'
+        + '<text x="' + (mIzq + w + 6) + '" y="' + (y + 13) + '" fill="#fff" font-size="'
+        + (angosto ? 10 : 11) + '" font-weight="700">' + cifra(v) + '</text>'
+        + '</g>';
+    }).join('');
+
+    return '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="'
+      + alto + '" style="max-width:100%;height:auto;margin:8px 0" role="img" aria-label="'
+      + esc(rotuloDeMateria(clave)) + ', los ' + orden.length + ' Estados con el valor más alto">'
+      + '<line x1="' + x(med).toFixed(1) + '" y1="2" x2="' + x(med).toFixed(1) + '" y2="'
+      + (alto - 20) + '" stroke="#7d90a8" stroke-width="1" stroke-dasharray="3 3"></line>'
+      + '<text x="' + x(med).toFixed(1) + '" y="' + (alto - 7) + '" text-anchor="middle" '
+      + 'fill="#7d90a8" font-size="9">mediana de los ' + todos.length + ' · ' + cifra(med)
+      + '</text>' + barras + '</svg>';
+  }
+
   function fichaDeMateria(clave){
     const cap = (capas() || {})[clave];
     const rot = rotuloDeMateria(clave);
@@ -3192,6 +3245,8 @@
         + (puesto ? ' · lugar <b>' + puesto + '</b> de ' + todos.length
                     + ' Estados con dato' : '')
         + (detalle ? '<br>' + esc(detalle) : '')
+        + figuraTira(clave, paisFiltro)
+        + figuraSerie(clave, paisFiltro)
         + cautela + '</span>' + boton + '</div></div>';
     }
 
@@ -3199,6 +3254,7 @@
     if(!todos.length) return '';
     const nombre = iso => (padron.find(x => x.iso === iso) || {}).pais || iso;
     return '<div class="asunto"><h4>' + esc(rot) + '</h4>'
+      + figuraRanking(clave, 8)
       + '<div class="lugares">' + todos.map(([iso, v]) =>
           '<span class="lugar">' + esc(nombre(iso)) + ' · ' + cifra(v) + '</span>').join('')
       + '</div><div class="foot"><span class="porque">Los ' + todos.length
@@ -3326,11 +3382,39 @@
         if(d && !d.sinDato) con++; else sin++;
       });
       const comp = (compuesto().ejes || {})[eje];
-      let posicion = '';
+      let posicion = '', dibujo = '';
       if(comp && comp[iso]){
         const orden = Object.entries(comp).sort((a,b) => b[1].valor - a[1].valor);
         const p = orden.findIndex(x => x[0] === iso) + 1;
         posicion = ' · <b>lugar ' + p + ' de ' + orden.length + '</b> en la región';
+        // EL PRIMER NIVEL DEL EXPLORADOR TAMBIÉN DIBUJA. Era la última pantalla
+        // del recorrido que seguía siendo sólo texto: había que entrar a un eje
+        // para ver la primera figura. La barra muestra dónde cae este Estado en
+        // la escala del eje y dónde está la mediana de la región, con la misma
+        // gramática que las miniaturas de las listas.
+        const vals = Object.values(comp).map(x => x.valor).filter(isFinite).sort((a,b)=>a-b);
+        if(vals.length >= 4){
+          const min = vals[0], max = vals[vals.length-1];
+          const med = vals.length % 2 ? vals[(vals.length-1)/2]
+                    : (vals[vals.length/2-1] + vals[vals.length/2]) / 2;
+          if(max > min){
+            const an = 150, al = 22, m = 6, util = an - m*2;
+            const x = v => m + ((v - min) / (max - min)) * util;
+            const v = comp[iso].valor;
+            // El compuesto va de 0 —el mejor situado— a 100: más alto es peor,
+            // y por eso el color se decide contra la mediana sin preguntar nada.
+            dibujo = '<svg class="mini" viewBox="0 0 ' + an + ' ' + al + '" width="' + an
+              + '" height="' + al + '" role="img" aria-label="Posición de ' + esc(nombre)
+              + ' en la escala de ' + esc(eje) + '">'
+              + '<line x1="' + m + '" y1="11" x2="' + (an-m) + '" y2="11" '
+              + 'stroke="rgba(255,255,255,.14)" stroke-width="3" stroke-linecap="round"></line>'
+              + '<line x1="' + x(med).toFixed(1) + '" y1="4" x2="' + x(med).toFixed(1)
+              + '" y2="18" stroke="#7d90a8" stroke-width="1" stroke-dasharray="2 2"></line>'
+              + '<circle cx="' + x(v).toFixed(1) + '" cy="11" r="4.2" fill="'
+              + (v > med ? 'var(--orange)' : '#3FA796') + '" stroke="#00121E" '
+              + 'stroke-width="1.2"></circle></svg>';
+          }
+        }
       }
       return '<div class="asunto eje-tarjeta" data-eje="' + esc(eje) + '">'
         + '<h4>' + esc(eje) + ' <span class="edad ' + (sin ? 'viejo' : 'fresco') + '">'
@@ -3339,7 +3423,8 @@
         + (con === 1 ? '' : 's') + ' con dato para ' + esc(nombre)
         + (sin ? ' · <span class="falta">' + sin + ' sin dato</span>' : '')
         + posicion
-        + '<br>Tocá para ver el detalle.</span>'
+        + (dibujo ? '<span class="minis">' + dibujo + '</span>' : '<br>')
+        + 'Tocá para ver el detalle.</span>'
         + '<span class="badge medio">eje</span></div></div>';
     }).join('');
   }
@@ -6680,6 +6765,16 @@
         <div class="sub">de ${magnitud(c.dato.valor_inicial, c.info.unidad).texto}
           a <b>${magnitud(c.dato.valor, c.info.unidad).texto}</b>
           ${esc(magnitud(c.dato.valor, c.info.unidad).unidad)} · entre ${desde} y ${hasta}</div>
+        ${(() => {
+          // LA TARJETA DIBUJA. Medido: en nivel Ciudadano, con un pais elegido, la
+          // ficha del pais tenia 855 palabras y CERO figuras. Las figuras existian
+          // —la tira, la serie— pero ninguna aparecia sin hacer clic antes, y esta
+          // es la primera pantalla util del registro. Se usan las mismas dos
+          // miniaturas de las listas del explorador: donde esta y hacia donde va.
+          const k = claveDeCapa(c.info.clave) || c.info.clave;
+          const pos = miniPosicion(k, paisFiltro), ser = miniSerie(k, paisFiltro);
+          return (pos || ser) ? `<span class="minis">${pos}${ser}</span>` : '';
+        })()}
         <p class="lectura">${dice}
           <b>Para la fuente, en este tema ${c.info.mas_es_peor?'cuanto más alto, peor':'cuanto más alto, mejor'}</b>,
           así que este movimiento va hacia ${haciaPeor?'el lado malo':'el lado bueno'} <b>según ese criterio</b>.
