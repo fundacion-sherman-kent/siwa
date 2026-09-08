@@ -3472,7 +3472,8 @@
       + 'tienen una dirección declarada: hay materias donde «más» no es ni mejor ni peor.</p>';
     // La figura va PRIMERO: se ve el reparto antes que la grilla. La tabla
     // queda debajo, porque el numero exacto tambien hace falta.
-    const figuras = claves.slice(0, 6).map(c => figuraComparacion(c, conQuienes))
+    const figuras = claves.slice(0, 6).map(c =>
+        figuraComparacion(c, conQuienes) + figuraSeriesComparadas(c, conQuienes))
       .filter(Boolean).join('');
     caja.innerHTML = figuras + html;
   }
@@ -3849,6 +3850,93 @@
       const t = document.getElementById('cita-propia');
       alPortapapeles(t ? t.textContent : '', 'Cita copiada.');
     });
+  }
+
+  // ============ LA MISMA MATERIA EN EL TIEMPO, PARA VARIOS ESTADOS ============
+  //
+  // La comparación era una foto. Y en casi todo lo que mide este registro la
+  // pregunta no es quién está peor —eso lo contesta la barra— sino quién viene
+  // mejorando: dos Estados pueden estar hoy en la misma cifra viniendo de
+  // lugares opuestos, y la barra los muestra iguales.
+  //
+  // El nombre va pegado al final de cada línea y no en una leyenda aparte: una
+  // leyenda obliga al ojo a ir y volver entre el color y el nombre.
+  const TINTAS = ['var(--orange)', '#3FA796', '#8C00E0', '#9fb2c8'];
+
+  function figuraSeriesComparadas(clave, estados){
+    const cap = (capas() || {})[clave];
+    if(!cap || !cap.serieDe || estados.length < 2) return '';
+    const nom = i => (padron.find(x => x.iso === i) || {}).pais || i;
+    const datos = estados.map(iso => ({iso, s: (cap.serieDe(iso) || [])
+      .filter(a => isFinite(a.valor))})).filter(x => x.s.length >= 3);
+    if(datos.length < 2) return '';
+
+    const anios = [...new Set(datos.flatMap(x => x.s.map(a => +a.anio)))].sort((a,b) => a - b);
+    const vals = datos.flatMap(x => x.s.map(a => a.valor));
+    const min = Math.min(...vals), max = Math.max(...vals), rango = (max - min) || 1;
+    const a0 = anios[0], a1 = anios[anios.length - 1], span = (a1 - a0) || 1;
+
+    const ancho = anchoDeFigura('tabla-comparacion');
+    const angosto = ancho < 420;
+    // El margen derecho aloja el rótulo de cada línea. Si no se reserva, el
+    // nombre se corta y la figura queda mintiendo sobre dónde termina la serie.
+    const mIzq = angosto ? 34 : 44, mDer = angosto ? 62 : 92, mArr = 14, mAba = 26;
+    const alto = angosto ? 170 : 190;
+    const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
+    const x = a => mIzq + ((+a - a0) / span) * util;
+    const y = v => mArr + (1 - (v - min) / rango) * utilY;
+
+    const rejilla = [min, min + rango / 2, max].map(v =>
+      '<line x1="' + mIzq + '" y1="' + y(v).toFixed(1) + '" x2="' + (ancho - mDer)
+      + '" y2="' + y(v).toFixed(1) + '" stroke="rgba(255,255,255,.07)" stroke-width="1"></line>'
+      + '<text x="' + (mIzq - 5) + '" y="' + (y(v) + 3).toFixed(1) + '" text-anchor="end" '
+      + 'fill="#7d90a8" font-size="9">' + cifra(v) + '</text>').join('');
+
+    // Los rótulos se separan si dos series terminan pegadas: superpuestos no se
+    // leen ni uno ni otro.
+    const finales = datos.map((d, n) => ({n, iso: d.iso,
+      v: d.s[d.s.length - 1].valor, yy: y(d.s[d.s.length - 1].valor)}))
+      .sort((a, b) => a.yy - b.yy);
+    for(let k = 1; k < finales.length; k++)
+      if(finales[k].yy - finales[k-1].yy < 12) finales[k].yy = finales[k-1].yy + 12;
+
+    const lineas = datos.map((d, n) => {
+      const c = TINTAS[n % TINTAS.length];
+      const p = d.s.map((a, i) => (i ? 'L' : 'M') + x(a.anio).toFixed(1) + ' '
+        + y(a.valor).toFixed(1)).join(' ');
+      const f = finales.find(z => z.n === n);
+      return '<path d="' + p + '" fill="none" stroke="' + c + '" stroke-width="2" '
+        + 'stroke-linejoin="round" stroke-linecap="round" opacity=".9"></path>'
+        + '<circle cx="' + x(d.s[d.s.length-1].anio).toFixed(1) + '" cy="'
+        + y(f.v).toFixed(1) + '" r="3" fill="' + c + '"></circle>'
+        + '<text x="' + (ancho - mDer + 6) + '" y="' + (f.yy + 3).toFixed(1) + '" fill="' + c
+        + '" font-size="' + (angosto ? 9 : 10) + '" font-weight="700">'
+        + esc(angosto ? d.iso : nom(d.iso)) + '</text>';
+    }).join('');
+
+    const proc = procedenciaDe(clave);
+    const c = proc && proc.calificacion;
+    const pie = '<div class="foot"><span class="porque">'
+      + '<b>Cómo evolucionó, no cómo está hoy.</b> '
+      + (cap.unidad ? esc(cap.unidad) + '. ' : '')
+      + (proc ? '<b>Fuente:</b> ' + esc(proc.fuente.nombre || proc.fuente)
+          + ' · obtenido ' + momento(proc.obtenido_en)
+          + (c ? ' · calificación ' + c.fiabilidad + '-' + c.credibilidad : '') + '. ' : '')
+      + 'Cada Estado empieza donde empieza <b>su</b> serie: no todos tienen los mismos años.'
+      + (cap.cautela ? '<br><b>Cuidado:</b> ' + esc(cap.cautela) : '')
+      + '</span><span class="badge medio">serie</span></div>';
+
+    return '<div class="asunto"><h4>' + esc(rotuloDeMateria(clave)) + ' · '
+      + a0 + '–' + a1 + '</h4>'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto
+      + '" style="max-width:100%;height:auto" role="img" aria-label="Series comparadas de '
+      + esc(rotuloDeMateria(clave)) + ' entre ' + datos.length + ' Estados, de ' + a0
+      + ' a ' + a1 + '">'
+      + rejilla + lineas
+      + '<text x="' + mIzq + '" y="' + (alto - 8) + '" fill="#7d90a8" font-size="9">' + a0 + '</text>'
+      + '<text x="' + (ancho - mDer) + '" y="' + (alto - 8) + '" text-anchor="end" '
+      + 'fill="#7d90a8" font-size="9">' + a1 + '</text>'
+      + '</svg>' + pie + '</div>';
   }
 
   // ============ LA FIGURA DE LA COMPARACION ============
