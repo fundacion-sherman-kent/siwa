@@ -3787,6 +3787,27 @@
         d.cap && d.cap.cautela ? d.cap.cautela : '',
       ].map(esc2).join(sep));
     }));
+
+    // LA SERIE TAMBIEN SE LLEVA. La planilla se iba con el valor de hoy: para
+    // mirar una tendencia habia que bajar el archivo crudo, que es pedirle al
+    // lector que resuelva por su cuenta algo que el registro ya tiene cargado.
+    // Va como segundo bloque, con su propio encabezado, porque una serie no
+    // entra en la misma grilla que una foto sin ensuciar las dos.
+    const conSerie = [];
+    q.estados.forEach(iso => q.claves.forEach(c => {
+      const cap = (capas() || {})[c];
+      if(!cap || !cap.serieDe) return;
+      (cap.serieDe(iso) || []).filter(a => isFinite(a.valor)).forEach(a => {
+        conSerie.push([nombre(iso), rotuloDeMateria(c), a.anio, a.valor,
+                       cap.unidad || ''].map(esc2).join(sep));
+      });
+    }));
+    if(conSerie.length){
+      lineas.push('', ['Serie histórica de las materias que la tienen'].map(esc2).join(sep));
+      lineas.push(['estado','materia','anio','valor','unidad'].join(sep));
+      conSerie.forEach(l => lineas.push(l));
+    }
+
     return {texto: '﻿' + lineas.join('\r\n'),
             nombre: 'siwa-' + (q.titulo||'consulta').toLowerCase()
               .normalize('NFD').replace(/[̀-ͯ]/g,'')
