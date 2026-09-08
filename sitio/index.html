@@ -1298,10 +1298,11 @@
           <div class="control ancho">
             <label for="buscar-cruce">Cruzar con otros temas</label>
             <input type="search" id="buscar-cruce" class="buscar-tema"
-                   placeholder="Escribí para buscar entre los 59 temas…"
+                   placeholder="Buscá por tema o por delito: cocaína, extorsión, lavado, coima…"
                    aria-describedby="ayuda-cruce" autocomplete="off">
             <div class="lista-temas" id="cruce-lista" role="group" aria-label="Temas para cruzar"></div>
             <div class="elegidos" id="cruce-elegidos"></div>
+            <div class="cruce" id="ficha-busqueda"></div>
           </div>
           <button class="boton chico" id="limpiar-cruce">quitar cruce</button>
         </div>
@@ -2867,6 +2868,64 @@
       busca: CRIMEN_MATERIAS[c.codigo][1],
       disponible: () => !!almacen.crimen,
     }));
+  }
+
+  // EL ROTULO SE BUSCA EN TODAS LAS MATERIAS. Antes se lo buscaba solo entre los
+  // indicadores de las cuatro fuentes viejas, de modo que un tema nuevo aparecia
+  // con su clave en crudo —«droga_cocaina»— en la ficha del elegido.
+  function rotuloDeMateria(clave){
+    const m = MATERIAS().find(x => (claveDeCapa(x.clave) || x.clave) === clave
+                                || x.clave === clave);
+    return (m && m.rotulo) || (metaInd(clave) || {}).rotulo || clave;
+  }
+
+  // LA FICHA DE RESULTADO. El filtro tiene que devolver el dato: un periodista
+  // que escribe «cocaina» y elige Argentina quiere EL NUMERO, no una lista de
+  // temas para tildar y despues buscar por la pagina.
+  function fichaDeMateria(clave){
+    const cap = (capas() || {})[clave];
+    const rot = rotuloDeMateria(clave);
+    if(!cap || !cap.conteo) return '';
+    const valores = cap.conteo() || {};
+    const unidad = cap.unidad ? ' ' + esc(cap.unidad) : '';
+    const cautela = cap.cautela ? '<br><b>Cuidado:</b> ' + esc(cap.cautela) : '';
+    const boton = '<button class="boton chico" data-al-mapa="' + esc(clave)
+                + '">Ver en el mapa</button>';
+
+    if(paisFiltro){
+      const v = valores[paisFiltro];
+      if(v === undefined){
+        return '<div class="asunto"><h4>' + esc(rot) + ' · ' + esc(paisNombre) + '</h4>'
+          + '<div class="foot"><span class="porque"><b>La fuente no publica este dato '
+          + 'para ' + esc(paisNombre) + '.</b> No es que valga cero: es que no está '
+          + 'medido. ' + (cap.rotuloPunto ? esc(cap.rotuloPunto) + '. ' : '')
+          + '</span><span class="badge unica">sin dato</span></div></div>';
+      }
+      const detalle = cap.detalle ? cap.detalle(paisFiltro) : null;
+      // Donde queda el Estado entre los que SI tienen dato: un numero suelto no
+      // dice nada si no se sabe contra que se lo compara.
+      const todos = Object.entries(valores).sort((a,b) => b[1] - a[1]);
+      const puesto = todos.findIndex(x => x[0] === paisFiltro) + 1;
+      return '<div class="asunto"><h4>' + esc(rot) + ' · ' + esc(paisNombre)
+        + ' <span class="edad ' + (cap.subeEsPeor ? 'viejo' : 'fresco') + '">'
+        + cifra(v) + '</span></h4>'
+        + '<div class="foot"><span class="porque"><b>' + cifra(v) + unidad + '</b>'
+        + (puesto ? ' · lugar <b>' + puesto + '</b> de ' + todos.length
+                    + ' Estados con dato' : '')
+        + (detalle ? '<br>' + esc(detalle) : '')
+        + cautela + '</span>' + boton + '</div></div>';
+    }
+
+    const todos = Object.entries(valores).sort((a,b) => b[1] - a[1]).slice(0, 8);
+    if(!todos.length) return '';
+    const nombre = iso => (padron.find(x => x.iso === iso) || {}).pais || iso;
+    return '<div class="asunto"><h4>' + esc(rot) + '</h4>'
+      + '<div class="lugares">' + todos.map(([iso, v]) =>
+          '<span class="lugar">' + esc(nombre(iso)) + ' · ' + cifra(v) + '</span>').join('')
+      + '</div><div class="foot"><span class="porque">Los ' + todos.length
+      + ' Estados con el valor más alto' + (unidad ? ', en' + unidad : '')
+      + '. <b>Elegí un país arriba para ver su ficha.</b>' + cautela
+      + '</span>' + boton + '</div></div>';
   }
 
   function MATERIAS(){
@@ -5915,17 +5974,26 @@
     if(puestos){
       const elegidos = cruce.filter(c => c !== capaActiva);
       puestos.innerHTML = elegidos.length
-        ? elegidos.map(c => {
-            const m = metaInd(c);
-            return `<button class="quita" data-quita="${c}" title="Quitar del cruce">
-              <b>${esc(m.rotulo || c)}</b><span>×</span></button>`;
-          }).join('')
+        ? elegidos.map(c => `<button class="quita" data-quita="${c}" title="Quitar del cruce">
+              <b>${esc(rotuloDeMateria(c))}</b><span>×</span></button>`).join('')
         : '<span class="ninguno">Ningún tema cruzado todavía. Tildá uno o más de la lista.</span>';
       puestos.querySelectorAll('[data-quita]').forEach(b =>
         b.addEventListener('click', () => {
           cruce = cruce.filter(v => v !== b.dataset.quita);
           repintar();
         }));
+
+      // LA FICHA, debajo de lo elegido. Es lo que el periodista vino a buscar.
+      const hueco = document.getElementById('ficha-busqueda');
+      if(hueco){
+        hueco.innerHTML = elegidos.map(fichaDeMateria).join('');
+        hueco.querySelectorAll('[data-al-mapa]').forEach(bt =>
+          bt.addEventListener('click', () => {
+            capaActiva = bt.dataset.alMapa;
+            repintar();
+            document.getElementById('mapa')?.scrollIntoView({behavior:'smooth', block:'center'});
+          }));
+      }
     }
   }
 
