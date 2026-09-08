@@ -820,6 +820,9 @@
      su propia sección de procedencia y vacíos. Se comprobó contra el sitio
      publicado: los cinco paneles quedaban fuera del PDF también sin solapas. */
 
+  .calif{font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;
+    background:rgba(255,255,255,.07);padding:1px 5px;border-radius:3px;cursor:help;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1542,14 +1545,14 @@
     <section class="domain" id="navegador">
       <div class="domain-head"><h3>Explorar</h3><span class="tag" id="tag-navegador">—</span></div>
       <p class="nota-filtro" id="ayuda-navegador"><b>Elegí un país en el mapa y bajá por sus ejes
-        hasta el dato.</b> Cada nivel dice cuántas materias tiene y cuántas están sin dato para ese
+        hasta el dato.</b> Cada nivel dice cuántos temas tiene y cuántos están sin dato para ese
         Estado: lo que falta se declara acá arriba y no queda enterrado. Podés comparar hasta cuatro
         países a la vez.</p>
 
       <div class="mapa-barra">
         <div class="controles">
           <div class="control ancho">
-            <label for="buscar-navegador">Buscar una materia</label>
+            <label for="buscar-navegador">Buscar un tema</label>
             <input type="search" id="buscar-navegador" class="buscar-tema"
                    placeholder="Buscá por tema o por delito: cocaína, extorsión, coima…"
                    autocomplete="off">
@@ -3316,7 +3319,7 @@
       return '<div class="asunto eje-tarjeta" data-eje="' + esc(eje) + '">'
         + '<h4>' + esc(eje) + ' <span class="edad ' + (sin ? 'viejo' : 'fresco') + '">'
         + con + '</span></h4>'
-        + '<div class="foot"><span class="porque"><b>' + con + '</b> materia'
+        + '<div class="foot"><span class="porque"><b>' + con + '</b> tema'
         + (con === 1 ? '' : 's') + ' con dato para ' + esc(nombre)
         + (sin ? ' · <span class="falta">' + sin + ' sin dato</span>' : '')
         + posicion
@@ -3414,14 +3417,14 @@
       + '<b>lugar ' + d.puesto + ' de ' + d.deCuantos + '</b> entre los Estados con dato'
       + (d.enBloque > 1 ? ' · <b>' + d.puestoBloque + '.º de ' + d.enBloque + '</b> en '
           + esc(d.bloque) : '')
-      + '</span><span class="badge medio">materia</span></div></div>').join('');
+      + '</span><span class="badge medio">tema</span></div></div>').join('');
     // La leyenda va UNA VEZ, arriba. Repetida en los treinta y seis renglones no
     // aclaraba nada: alargaba la lista y tapaba lo que había que mirar.
     if(con.length) html = '<p class="leyenda-minis">'
       + '<b>Cada renglón trae dos dibujos.</b> El primero dice <b>dónde está</b> este '
       + 'Estado en la escala de la región —la marca cortada es la mediana—; el segundo, '
-      + 'cuando la materia tiene serie, <b>hacia dónde va</b>. En naranja, el lado que '
-      + 'la fuente considera peor; en violeta, las materias donde la fuente no declara '
+      + 'cuando el tema tiene serie, <b>hacia dónde va</b>. En naranja, el lado que '
+      + 'la fuente considera peor; en violeta, los temas donde la fuente no declara '
       + 'un lado. Tocá cualquiera para la ficha completa.</p>' + html;
     if(sin.length){
       html += '<div class="asunto"><h4>' + sin.length + ' sin dato para ' + esc(nombre) + '</h4>'
@@ -3430,8 +3433,8 @@
         + '. <b>No valen cero: no están medidas para este Estado.</b> Cada una dice por qué '
         + 'en su propia sección.</span><span class="badge unica">sin dato</span></div></div>';
     }
-    return html || '<div class="asunto"><h4>Sin materias</h4><div class="foot">'
-      + '<span class="porque">Ninguna materia de este eje coincide con la búsqueda.'
+    return html || '<div class="asunto"><h4>Sin temas</h4><div class="foot">'
+      + '<span class="porque">Ningún tema de este eje coincide con la búsqueda.'
       + '</span></div></div>';
   }
 
@@ -3529,7 +3532,7 @@
     claves = claves.filter((v,i,a) => v && a.indexOf(v) === i).slice(0, 14);
 
     const nombre = iso => (padron.find(x => x.iso === iso) || {}).pais || iso;
-    let html = '<div class="caja-tabla"><table class="comparacion"><thead><tr><th>Materia</th>'
+    let html = '<div class="caja-tabla"><table class="comparacion"><thead><tr><th>Tema</th>'
       + conQuienes.map(i => '<th>' + esc(nombre(i)) + '</th>').join('')
       + '</tr></thead><tbody>';
     claves.forEach(c => {
@@ -3553,8 +3556,8 @@
     });
     html += '</tbody></table></div>'
       + '<p class="nota-filtro"><b>El número chico es el lugar entre los 33.</b> El color '
-      + 'marca el mejor y el peor de los comparados, y sólo aparece en las materias que '
-      + 'tienen una dirección declarada: hay materias donde «más» no es ni mejor ni peor.</p>';
+      + 'marca el mejor y el peor de los comparados, y sólo aparece en los temas que '
+      + 'tienen una dirección declarada: hay temas donde «más» no es ni mejor ni peor.</p>';
     // La figura va PRIMERO: se ve el reparto antes que la grilla. La tabla
     // queda debajo, porque el numero exacto tambien hace falta.
     const figuras = claves.slice(0, 6).map(c =>
@@ -3579,7 +3582,7 @@
 
     if(!hallan.length)
       return '<div class="asunto"><h4>Nada con «' + q + '»</h4><div class="foot">'
-        + '<span class="porque">Ninguna de las <b>' + todas.length + '</b> materias del '
+        + '<span class="porque">Ninguno de los <b>' + todas.length + '</b> temas del '
         + 'registro responde a esa palabra. <b>Que no figure acá no significa que no '
         + 'exista</b>: significa que este registro todavía no lo mide, y eso se declara '
         + 'en vez de disimularse.<br>Probá con el hecho antes que con el nombre: '
@@ -3592,7 +3595,7 @@
     hallan.forEach(m => { (porEje[m.eje] = porEje[m.eje] || []).push(m); });
     return '<div class="asunto"><h4>Nada con «' + q + '» dentro de '
       + esc(navEje || 'este ámbito') + '</h4><div class="foot"><span class="porque">'
-      + 'El registro sí tiene <b>' + hallan.length + '</b> materia'
+      + 'El registro sí tiene <b>' + hallan.length + '</b> tema'
       + (hallan.length === 1 ? '' : 's') + ' con esa palabra, en otro eje. Tocá para ir.'
       + '</span><span class="badge medio">está en otro eje</span></div></div>'
       + Object.entries(porEje).map(([eje, ms]) =>
@@ -3638,7 +3641,7 @@
     if(navBusca && !navMateria && !panel.querySelector('[data-eje],[data-materia]'))
       panel.innerHTML = sinResultados();
 
-    if(tag) tag.textContent = navMateria ? 'ficha de la materia'
+    if(tag) tag.textContent = navMateria ? 'ficha del tema'
       : navEje ? navEje + ' · ' + esc(nombre)
       : esc(nombre) + ' · ' + ORDEN_EJES.length + ' ejes';
 
@@ -3878,17 +3881,48 @@
     return null;
   }
 
+  // ============ LA CALIFICACION, DICHA EN CASTELLANO ============
+  //
+  // «A-2» es preciso para quien conoce el sistema Almirantazgo y una matrícula
+  // para todos los demás. La tabla que lo explica está en otra sección y en
+  // nivel Analista: nadie la va a buscar en el medio de una ficha.
+  //
+  // Se usan LAS TABLAS QUE YA EXISTEN —FIABILIDAD y CREDIBILIDAD, más abajo en
+  // este mismo guion, las mismas que alimentan la explicación al pasar el
+  // puntero—. La primera versión de esto declaraba su propio par de tablas y
+  // rompió la página entera: «Identifier 'FIABILIDAD' has already been
+  // declared». Dos tablas del mismo sistema son, además, dos definiciones que
+  // con el tiempo se contradicen.
+  //
+  // Lo nuevo no es la traducción: es que se VEA. Estaba disponible al pasar el
+  // puntero, y un dato que hay que descubrir con el mouse no está dicho en un
+  // teléfono, donde no hay puntero.
+  function calificacionEnCastellano(c){
+    if(!c || !c.fiabilidad) return '';
+    const f = FIABILIDAD[String(c.fiabilidad).toUpperCase()];
+    const cr = CREDIBILIDAD[c.credibilidad];
+    const sigla = esc(c.fiabilidad + '-' + c.credibilidad);
+    if(!f && !cr) return 'calificación ' + sigla;
+    return '<span class="calif" title="Sistema Almirantazgo: la letra califica a la '
+      + 'fuente, el número a la información">' + sigla + '</span> · '
+      + (f ? esc(f) : '') + (f && cr ? ', ' : '') + (cr ? 'dato ' + esc(cr) : '');
+  }
+
   // La fuente de una materia, dicha como corresponde: con su nombre y, cuando el
   // archivo la trae, su calificación del Almirantazgo. Sin esto la ficha era una
   // cifra huérfana, que es lo único que este registro no puede publicar.
   function fuenteDeMateria(clave){
     const meta = metaInd(clave) || {};
-    if(meta.origen) return esc(meta.origen);
     const p = procedenciaDe(clave);
-    if(!p || !p.fuente) return '';
-    const c = p.calificacion;
-    return esc(p.fuente.nombre || p.fuente)
-      + (c && c.fiabilidad ? ' · calificación ' + esc(c.fiabilidad + '-' + c.credibilidad) : '');
+    const c = p && p.calificacion;
+    // LA CALIFICACION VA SIEMPRE QUE EXISTA, venga la fuente por el camino que
+    // venga. Antes se mostraba solo cuando el tema no traia `origen` propio: el
+    // resultado era que homicidios decia la fuente y se callaba la calificacion,
+    // y las medidas de crimen organizado la decian. La misma ficha, dos reglas.
+    const nombre = meta.origen ? esc(meta.origen)
+      : (p && p.fuente) ? esc(p.fuente.nombre || p.fuente) : '';
+    if(!nombre) return '';
+    return nombre + (c && c.fiabilidad ? ' · ' + calificacionEnCastellano(c) : '');
   }
 
   // La planilla de lo consultado: las materias miradas por los Estados mirados.
@@ -3945,7 +3979,7 @@
       });
     }));
     if(conSerie.length){
-      lineas.push('', ['Serie histórica de las materias que la tienen'].map(esc2).join(sep));
+      lineas.push('', ['Serie histórica de los temas que la tienen'].map(esc2).join(sep));
       lineas.push(['estado','materia','anio','valor','unidad'].join(sep));
       conSerie.forEach(l => lineas.push(l));
     }
@@ -4062,7 +4096,7 @@
       + (cap.unidad ? esc(cap.unidad) + '. ' : '')
       + (proc ? '<b>Fuente:</b> ' + esc(proc.fuente.nombre || proc.fuente)
           + ' · obtenido ' + momento(proc.obtenido_en)
-          + (c ? ' · calificación ' + c.fiabilidad + '-' + c.credibilidad : '') + '. ' : '')
+          + (c ? ' · ' + calificacionEnCastellano(c) : '') + '. ' : '')
       + 'Cada Estado empieza donde empieza <b>su</b> serie: no todos tienen los mismos años.'
       + (cap.cautela ? '<br><b>Cuidado:</b> ' + esc(cap.cautela) : '')
       + '</span><span class="badge medio">serie</span></div>';
@@ -4140,9 +4174,9 @@
       + (cap.unidad ? '<b>Unidad:</b> ' + esc(cap.unidad) + '. ' : '')
       + (proc ? '<b>Fuente:</b> ' + esc(proc.fuente.nombre || proc.fuente)
                 + ' · obtenido ' + momento(proc.obtenido_en)
-                + (c ? ' · calificación ' + c.fiabilidad + '-' + c.credibilidad : '') + '. ' : '')
+                + (c ? ' · ' + calificacionEnCastellano(c) : '') + '. ' : '')
       + (cap.subeEsPeor === undefined
-         ? '<b>Esta materia no tiene una dirección declarada:</b> el color no dice cuál es '
+         ? '<b>Este tema no tiene una dirección declarada:</b> el color no dice cuál es '
            + 'mejor, sólo separa las barras. '
          : '')
       + (cap.cautela ? '<br><b>Cuidado:</b> ' + esc(cap.cautela) : '')
@@ -4335,8 +4369,8 @@
       + 'juicios.<br><b>Se ordena por cuánto se apartó cada Estado del movimiento '
       + 'típico de ese mismo indicador en la región:</b> un indicador que creció en '
       + 'los treinta y tres no es noticia en ninguno. Cada Estado aporta a lo sumo '
-      + 'tres cambios y cada materia ocupa a lo sumo dos renglones, para que una '
-      + 'sola no se lleve la lista.<br><b>No entran los saltos que '
+      + 'tres cambios y cada tema ocupa a lo sumo dos renglones, para que uno '
+      + 'solo no se lleve la lista.<br><b>No entran los saltos que '
       + 'arrancan de casi nada:</b> para figurar por porcentaje, el valor de partida '
       + 'tiene que llegar a un cuarto de la mediana regional de ese indicador. Un '
       + 'porcentaje sobre una base minúscula es enorme sin ser importante. El cambio '
@@ -4462,7 +4496,7 @@
            + 'mínimo de dos ejes con dato que el compuesto exige, y el registro no '
            + 'inventa un puesto con menos.</p>')
       + (ejes ? '<div class="perfil-ejes">' + ejes + '</div>' : '')
-      + '<p class="perfil-pie"><b>' + con + '</b> materias con dato para '
+      + '<p class="perfil-pie"><b>' + con + '</b> temas con dato para '
       + esc(p.pais || iso)
       + (sin ? ' · <span class="falta">' + sin + ' sin dato</span>' : '')
       + '. El detalle está en <b>Explorar</b>, más abajo.</p>'
@@ -4586,7 +4620,7 @@
       ? '<small class="pie-tira"><b>La línea punteada no es un pronóstico.</b> Prolonga '
         + 'tres años la recta que mejor ajusta a estos ' + n + ' años (R² = '
         + cifra(r2) + '): dice a dónde llegaría la cifra <b>si el movimiento de estos '
-        + 'años continuara igual</b>, y en estas materias rara vez continúa igual.</small>'
+        + 'años continuara igual</b>, y en estos temas rara vez continúa igual.</small>'
       : (n >= 5
          ? '<small class="pie-tira">Estos ' + n + ' años <b>no siguen una línea</b> '
            + '(R² = ' + cifra(r2) + '), así que el registro no los prolonga: extender '
@@ -4666,7 +4700,7 @@
       + '<text x="' + (ancho - mDer) + '" y="12" text-anchor="end" fill="#7d90a8" '
       + 'font-size="9">' + cifra(max) + '</text>'
       + '</svg>'
-      + '<small class="pie-tira">Cada punto es un Estado con dato en esta materia; '
+      + '<small class="pie-tira">Cada punto es un Estado con dato en este tema; '
       + 'son ' + pares.length + '. Donde el gris se satura hay varios superpuestos.</small>';
   }
 
@@ -6117,7 +6151,7 @@
       const noComparable = faltan.filter(m=>m.sinCapa === 'no_comparable');
       let t = '';
       if(sinFuente.length)
-        t += `<b>${sinFuente.length} materias sin fuente comparable todavía:</b> `
+        t += `<b>${sinFuente.length} temas sin fuente comparable todavía:</b> `
            + sinFuente.map(m=>esc(m.rotulo)).join(' · ') + '. ';
       if(noComparable.length)
         t += `<b>${noComparable.length} tienen colector pero no capa de mapa</b> `
@@ -6531,7 +6565,7 @@
           a <b>${magnitud(c.dato.valor, c.info.unidad).texto}</b>
           ${esc(magnitud(c.dato.valor, c.info.unidad).unidad)} · entre ${desde} y ${hasta}</div>
         <p class="lectura">${dice}
-          <b>Para la fuente, en esta materia ${c.info.mas_es_peor?'cuanto más alto, peor':'cuanto más alto, mejor'}</b>,
+          <b>Para la fuente, en este tema ${c.info.mas_es_peor?'cuanto más alto, peor':'cuanto más alto, mejor'}</b>,
           así que este movimiento va hacia ${haciaPeor?'el lado malo':'el lado bueno'} <b>según ese criterio</b>.
           ${c.modo==='puntos'?'<span class="ojo"><b>Se informa en puntos y no en porcentaje:</b> es un índice construido de recorrido corto, y un porcentaje sobre una escala así puede dar cifras enormes sin significado.</span>':''}
           ${c.modo==='diferencia'?'<span class="ojo"><b>Se informa la diferencia y no un porcentaje:</b> esta cifra cambia de signo, y un porcentaje entre un valor positivo y uno negativo no significa nada.</span>':''}
@@ -7453,7 +7487,7 @@
     if(tag) tag.textContent = 'sin dato';
     if(caja) caja.innerHTML =
       '<div class="card"><h4>Sin dato</h4><div class="sub">Ninguna fuente del catálogo '
-      + 'publica todavía esta materia para el padrón. El vacío se declara; no se rellena.</div></div>';
+      + 'publica todavía este tema para el padrón. El vacío se declara; no se rellena.</div></div>';
   }
 
   // La calificacion del Almirantazgo es jerga: se explica al pasar el puntero,
@@ -9425,7 +9459,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       caja.innerHTML = `<div class="asunto"><h4>Sin zona de frontera en este ámbito</h4>
         <div class="foot"><span class="porque"><b>${esc(paisFiltro ? paisNombre : (zonaEleg||'El ámbito'))}</b>
           no integra ninguna de las ${f.total} zonas del padrón de focos transfronterizos.
-          <b>No es un vacío de datos: la materia no aplica acá.</b></span>
+          <b>No es un vacío de datos: el tema no aplica acá.</b></span>
         <span class="badge unica">no aplica</span></div></div>`;
       return;
     }
@@ -9662,7 +9696,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       : 'América Latina y Caribe — los 33 Estados del padrón';
     document.getElementById('informe-fecha').textContent =
       'Emitido el '+new Date().toLocaleString('es-AR',{dateStyle:'long',timeStyle:'short'});
-    if(!filas.length){ caja.innerHTML='<p class="sin-dato">Todavía no hay materias con dato para informar.</p>'; return; }
+    if(!filas.length){ caja.innerHTML='<p class="sin-dato">Todavía no hay temas con dato para informar.</p>'; return; }
 
     let html = `<table class="tabla-informe"><thead><tr><th>Materia</th><th>Indicador</th>
       <th class="num">Valor</th><th>Unidad</th><th>Referencia</th><th>Fuente</th><th>Calif.</th></tr></thead><tbody>`+
