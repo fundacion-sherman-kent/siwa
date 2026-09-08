@@ -910,6 +910,25 @@
     vertical-align:middle;font-family:'JetBrains Mono',monospace;cursor:help;}
   .delta.peor{color:var(--orange);} .delta.mejor{color:#3FA796;} .delta.igual{color:#7d90a8;}
 
+  /* EL PLEGADO. La seccion plegada es su encabezado; el chevron dice que se
+     abre con un clic. */
+  section[data-plegable] > .domain-head, section[data-plegable] > .bloque-head{
+    cursor:pointer;user-select:none;position:relative;padding-right:28px;}
+  section[data-plegable] > .domain-head::after, section[data-plegable] > .bloque-head::after{
+    content:'';position:absolute;right:8px;top:4px;width:9px;height:9px;
+    border-right:2px solid var(--orange);border-bottom:2px solid var(--orange);
+    transform:rotate(45deg);transition:transform .15s;}
+  section[data-plegado="1"] > .domain-head::after, section[data-plegado="1"] > .bloque-head::after{
+    transform:rotate(-45deg);top:8px;}
+  section[data-plegable] > .domain-head:hover h2, section[data-plegable] > .bloque-head:hover h2{
+    color:var(--orange);}
+  section[data-plegable] > .domain-head:focus-visible, section[data-plegable] > .bloque-head:focus-visible{
+    outline:2px solid var(--orange);outline-offset:4px;}
+  section[data-plegado="1"] > :not(.domain-head):not(.bloque-head){display:none;}
+  section[data-plegado="1"]{padding-bottom:6px;}
+  section[data-plegado="1"] > .domain-head, section[data-plegado="1"] > .bloque-head{
+    border-bottom-color:transparent;margin-bottom:0;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -3999,6 +4018,7 @@
       if(!sel) return;
       sel.value = 'p:' + b.dataset.vaA;
       sel.dispatchEvent(new Event('change'));
+      revelar('ficha-pais');
       document.getElementById('ficha-pais')?.scrollIntoView({behavior:'smooth', block:'start'});
     });
   }
@@ -4105,6 +4125,22 @@
     // notas de pie— sigue ahi, debajo de todo, como material de consulta.
     const cab = document.querySelector('#mapa-seccion > .domain-head');
     if(cab) cab.remove();
+    // El instructivo del mapa y sus notas de pie —limites, Malvinas— van a un
+    // desplegable bajo el grafico, junto al del tema. Sueltos entre el perfil
+    // y las secciones eran 210 pixeles de texto que nadie pidio.
+    const seccionMapa = document.getElementById('mapa-seccion');
+    const sobreTema = document.getElementById('sobre-el-tema');
+    if(seccionMapa && sobreTema){
+      const det = document.createElement('details');
+      det.className = 'aviso-cobertura sobre-el-mapa';
+      det.id = 'sobre-el-mapa';
+      det.innerHTML = '<summary>Sobre el mapa: cómo se usa, los límites y las Malvinas</summary>';
+      const usa = seccionMapa.querySelector(':scope > details.como-se-usa');
+      if(usa){ [...usa.children].forEach(h => { if(h.tagName !== 'SUMMARY') det.appendChild(h); }); usa.remove(); }
+      seccionMapa.querySelectorAll(':scope > .mapa-pie').forEach(n => det.appendChild(n));
+      sobreTema.after(det);
+      if(!seccionMapa.textContent.trim()) seccionMapa.hidden = true;
+    }
 
     // LA LISTA DE 95 TEMAS SE ABRE SOLO CUANDO SE LA PIDE: al escribir o al
     // poner el foco. Cerrada, el selector es una linea.
@@ -5194,6 +5230,7 @@
       ocultar();
       sel.value = 'p:' + el.dataset.iso;
       sel.dispatchEvent(new Event('change'));
+      revelar('ficha-pais');
       document.getElementById('ficha-pais')?.scrollIntoView({behavior:'smooth', block:'start'});
     });
 
@@ -5261,7 +5298,7 @@
     const cortes = capa.leyenda.filter(c => isFinite(c) && c > min && c < max);
     const rot = capa.rotulo || '';
 
-    const an = Math.max(280, Math.min(560, anchoDeFigura('mapa-seccion')));
+    const an = Math.max(280, Math.min(560, anchoDeFigura('tablero-siwa')));
     const al = 52, m = 10, util = an - m * 2, yR = 16, hR = 13;
     const x = v => m + ((v - min) / (max - min)) * util;
 
@@ -6765,7 +6802,7 @@
     const esElElegido = iso === paisFiltro;
     const mini = esElElegido
       ? '<div class="remite">Los cuatro ejes, la opacidad y la verificación, '
-        + 'arriba en la ficha de ' + esc(nombre) + '.</div>'
+        + 'debajo del tablero, en la ficha de ' + esc(nombre) + '.</div>'
       : ejesMini(iso);
     if(nivel === undefined && !proys.length){
       caja.innerHTML = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>
@@ -7236,8 +7273,88 @@
     });
   }
 
+  // ============ EL PLEGADO POR NIVEL ============
+  //
+  // Medido antes: 36 pantallas en el nivel Analista, 13 en Periodista, 7 en
+  // Ciudadano. Todo lo que queda debajo del grafico se reduce a su encabezado
+  // y se abre con un clic; el nivel decide cuales arrancan abiertas. Lo que el
+  // usuario abrio o cerro a mano se respeta al cambiar de nivel.
+  const NO_SE_PLIEGAN = ['tablero-siwa', 'ficha-pais', 'mapa-seccion'];
+  const ABIERTAS_POR_NIVEL = {1: [], 2: ['publicar'], 3: ['publicar', 'seis-materias']};
+  const tocadasAMano = new Set();
+
+  function seccionesPlegables(){
+    return [...document.querySelectorAll('main > section.domain')]
+      .filter(sec => sec.id && !NO_SE_PLIEGAN.includes(sec.id)
+                     && sec.querySelector(':scope > .domain-head, :scope > .bloque-head'));
+  }
+
+  function plegar(sec, plegada){
+    sec.dataset.plegado = plegada ? '1' : '0';
+    const cab = sec.querySelector(':scope > .domain-head, :scope > .bloque-head');
+    if(cab) cab.setAttribute('aria-expanded', plegada ? 'false' : 'true');
+  }
+
+  function armarPlegado(){
+    seccionesPlegables().forEach(sec => {
+      if(sec.dataset.plegable) return;
+      sec.dataset.plegable = '1';
+      const cab = sec.querySelector(':scope > .domain-head, :scope > .bloque-head');
+      cab.setAttribute('role', 'button');
+      cab.setAttribute('tabindex', '0');
+      const alternar = () => { tocadasAMano.add(sec.id); plegar(sec, sec.dataset.plegado !== '1'); };
+      cab.addEventListener('click', e => {
+        if(e.target.closest('a, button, input, select, details')) return;
+        alternar();
+      });
+      cab.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); alternar(); }
+      });
+    });
+    // Las escuchas de documento y ventana, UNA SOLA VEZ: esta funcion corre en
+    // cada repintado, y una segunda escucha de beforeprint tomaba la foto
+    // despues de que la primera abrio todo, y no restauraba nada.
+    if(document.body.dataset.plegadoArmado) return;
+    document.body.dataset.plegadoArmado = '1';
+    // NADA QUEDA INALCANZABLE: cualquier salto dentro de la pagina abre la
+    // seccion que contiene el destino antes de que el navegador se desplace.
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="#"]');
+      if(a) revelar(a.getAttribute('href').slice(1));
+    });
+    window.addEventListener('hashchange', () => revelar(location.hash.slice(1)));
+    if(location.hash) revelar(location.hash.slice(1));
+    // Al imprimir se abre todo, y despues se restaura tal como estaba.
+    let antesDeImprimir = null;
+    window.addEventListener('beforeprint', () => {
+      antesDeImprimir = seccionesPlegables().map(sec => [sec, sec.dataset.plegado]);
+      antesDeImprimir.forEach(([sec]) => plegar(sec, false));
+    });
+    window.addEventListener('afterprint', () => {
+      (antesDeImprimir || []).forEach(([sec, v]) => plegar(sec, v === '1'));
+      antesDeImprimir = null;
+    });
+  }
+
+  function revelar(id){
+    const el = id && document.getElementById(id);
+    if(!el) return;
+    const sec = el.closest('section[data-plegable]');
+    if(sec && sec.dataset.plegado === '1'){ tocadasAMano.add(sec.id); plegar(sec, false); }
+  }
+
+  // El nivel decide por las secciones que nadie toco.
+  function plegarPorNivel(){
+    const abiertas = ABIERTAS_POR_NIVEL[nivel] || [];
+    seccionesPlegables().forEach(sec => {
+      if(tocadasAMano.has(sec.id)) return;
+      plegar(sec, !abiertas.includes(sec.id));
+    });
+  }
+
   function aplicarNivel(){
     document.body.dataset.nivel = String(nivel);
+    plegarPorNivel();
     // Despues de repintar, porque la visibilidad se mide del elemento ya pintado.
     setTimeout(panelDelNivel, 0);
     document.querySelectorAll('.nivel').forEach(b=>{
@@ -7960,6 +8077,7 @@
     armarTableroSiwa();
     armarAnio();
     mudarElExplorador();
+    armarPlegado();
     llenarComparador();
     armarNavegador();
     paso('cuántos temas', contarTemas);
@@ -8158,7 +8276,7 @@
     if(!eco) return;
     const donde = paisFiltro ? paisNombre : (bloqueFiltro || 'toda la región');
     eco.innerHTML = 'Informe de <b>' + esc(donde) + '</b> · '
-      + '<a href="#mapa-seccion">cambiar el ámbito</a>';
+      + '<a href="#tablero-siwa">cambiar el ámbito</a>';
   }
 
   function sincronizar(){ armarAmbito(); ecoDelAmbito(); }
