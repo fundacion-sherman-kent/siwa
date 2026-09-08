@@ -961,6 +961,9 @@
   .relaciones-pie .cuenta b{color:var(--orange);}
   @media (max-width:640px){ .relaciones .hoja{font-size:8px;} }
 
+  .llevar-mapa{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:10.5px;
+    color:#7d90a8;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -4145,6 +4148,15 @@
         const el = document.querySelector(q);
         if(el && !colMapa.contains(el)) colMapa.appendChild(el);
       });
+      // Y el boton que se lleva el tablero como imagen, donde esta el mapa.
+      if(!document.getElementById('bajar-imagen-mapa')){
+        const b = document.createElement('div');
+        b.className = 'llevar-mapa';
+        b.innerHTML = '<button class="boton chico" id="bajar-imagen-mapa">Descargar el tablero '
+                    + 'como imagen</button><span>Mapa, tarjeta, gráfico, fuente y fecha, en un PNG.</span>';
+        colMapa.appendChild(b);
+        b.querySelector('button').addEventListener('click', () => imagenDelTablero());
+      }
     }
     // El grafico de lo elegido o cruzado, debajo del mapa.
     mover('#ficha-busqueda', 'slot-cruce-resultado');
@@ -4311,6 +4323,190 @@
           .map(p => '<option value="' + p.iso + '">' + esc(p.pais) + '</option>').join('');
   }
 
+  // ============ LA IMAGEN DEL TABLERO ============
+  //
+  // Las personas comparten imagenes, no planillas. Sale una tarjeta de 1200 de
+  // ancho con el mapa tal como esta pintado, la tarjeta del Estado, la leyenda,
+  // el grafico de lo elegido y, al pie, la fuente y la fecha. Nada que la
+  // pantalla no muestre; nada sin su fuente. Sin codigo de terceros: los SVG
+  // de la pagina se dibujan en un lienzo y el lienzo se baja como PNG.
+
+  // Un SVG que se sostiene solo: con su estilo calculado escrito en linea,
+  // porque dentro de una imagen la hoja de estilo de la pagina no existe.
+  const PROPIEDADES_SVG = ['fill', 'stroke', 'stroke-width', 'stroke-opacity', 'fill-opacity',
+    'opacity', 'font-size', 'font-weight', 'text-anchor', 'dominant-baseline', 'stroke-dasharray',
+    'letter-spacing', 'stroke-linecap', 'stroke-linejoin', 'visibility'];
+  function svgAutonomo(svg, ancho, alto){
+    const clon = svg.cloneNode(true);
+    const orig = svg.querySelectorAll('*'), copia = clon.querySelectorAll('*');
+    orig.forEach((el, i) => {
+      const cs = getComputedStyle(el);
+      if(cs.display === 'none'){ copia[i].remove(); return; }
+      let estilo = '';
+      PROPIEDADES_SVG.forEach(pr => { const v = cs.getPropertyValue(pr); if(v) estilo += pr + ':' + v + ';'; });
+      const ff = cs.fontFamily || '';
+      estilo += 'font-family:' + (/mono/i.test(ff) ? 'ui-monospace,Consolas,monospace' : 'system-ui,Segoe UI,Roboto,Arial,sans-serif') + ';';
+      copia[i].setAttribute('style', estilo);
+    });
+    clon.querySelectorAll('title').forEach(t => t.remove());
+    clon.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    clon.setAttribute('width', ancho); clon.setAttribute('height', alto);
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(clon));
+  }
+  const cargarImagen = src => new Promise((res, rej) => {
+    const im = new Image(); im.onload = () => res(im); im.onerror = () => rej(new Error('svg')); im.src = src;
+  });
+
+  // Texto con corte de linea, devuelve la altura usada.
+  function escribir(ctx, texto, x, y, maxAncho, fuente, color, interlinea){
+    ctx.font = fuente; ctx.fillStyle = color; ctx.textBaseline = 'top';
+    const palabras = String(texto || '').split(/\s+/);
+    let linea = '', filas = 0;
+    palabras.forEach(pal => {
+      const prueba = linea ? linea + ' ' + pal : pal;
+      if(ctx.measureText(prueba).width > maxAncho && linea){
+        ctx.fillText(linea, x, y + filas * interlinea); filas++; linea = pal;
+      } else linea = prueba;
+    });
+    if(linea){ ctx.fillText(linea, x, y + filas * interlinea); filas++; }
+    return filas * interlinea;
+  }
+
+  async function imagenDelTablero(){
+    const cont = document.getElementById('mapa');
+    const svgMapa = cont && cont.querySelector('.leaflet-overlay-pane svg');
+    if(!svgMapa){ avisar('El mapa todavía no está dibujado.', true); return; }
+    avisar('Armando la imagen…');
+    try{
+      const K = 2;                                   // nitidez: se dibuja al doble
+      const W = 1200, MARGEN = 28, COL = 620, SEP = 24;
+      const fuente = getComputedStyle(document.body).fontFamily || 'sans-serif';
+      const cita = citaAPA();
+      const q = cita.q;
+      const hoy = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'long', year:'numeric'});
+      const modoBoton = document.querySelector('.modo.activo');
+      const rotAnio = document.getElementById('anio-rotulo');
+      let cuando = (modoBoton && modoBoton.dataset.modo !== 'nivel') ? modoBoton.textContent.trim()
+                   : (rotAnio ? rotAnio.textContent.replace(/\s+/g, ' ').trim() : '');
+      if(/no tiene serie/.test(cuando)) cuando = 'último dato de cada Estado';
+
+      // El mapa: el SVG de Leaflet, con su desplazamiento dentro del cuadro.
+      const cr = cont.getBoundingClientRect(), sr = svgMapa.getBoundingClientRect();
+      const escala = COL / cr.width;
+      const altoMapa = Math.round(cr.height * escala);
+      const imMapa = await cargarImagen(svgAutonomo(svgMapa, Math.round(sr.width), Math.round(sr.height)));
+
+      // La leyenda y el grafico de lo elegido: los SVG de la casa que esten.
+      const svgLeyenda = document.querySelector('#leyenda svg');
+      const svgGrafico = document.querySelector('#slot-cruce-resultado svg, #slot-comparacion svg')
+                      || document.querySelector('#perfil-pais svg')
+                      || document.querySelector('#ficha-pais svg');
+      const anchoDer = W - MARGEN * 2 - COL - SEP;
+      const traer = async svg => {
+        if(!svg) return null;
+        const r = svg.getBoundingClientRect();
+        if(!r.width || !r.height) return null;
+        const alto = Math.round(r.height * anchoDer / r.width);
+        return {im: await cargarImagen(svgAutonomo(svg, Math.round(r.width), Math.round(r.height))), alto};
+      };
+      const leyenda = await traer(svgLeyenda);
+      const grafico = await traer(svgGrafico);
+
+      // La tarjeta: lo que dice la ficha del mapa, o el tema y el ambito.
+      const ficha = document.getElementById('ficha-mapa');
+      // Sin la frase que remite a otra parte de la pantalla: en una imagen no
+      // hay «debajo del tablero».
+      const fichaLimpia = ficha ? ficha.cloneNode(true) : null;
+      if(fichaLimpia){ fichaLimpia.querySelectorAll('.remite').forEach(r => r.remove());
+                       document.body.appendChild(fichaLimpia); }
+      const textoFicha = fichaLimpia ? fichaLimpia.innerText.trim() : '';
+      if(fichaLimpia) fichaLimpia.remove();
+      const lineasFicha = textoFicha
+        ? textoFicha.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 5)
+        : [q.ambito, 'Sin Estado señalado: el mapa muestra los 33.'];
+
+      // La altura se calcula antes de dibujar, para que nada quede cortado.
+      const ALTO_CAB = 64, ALTO_TIT = 74, ALTO_PIE = 78;
+      let altoDer = 0;
+      altoDer += 26 + 20 * (lineasFicha.length - 1) + 18;
+      if(leyenda) altoDer += leyenda.alto + 14;
+      if(grafico) altoDer += grafico.alto + 14;
+      const altoCuerpo = Math.max(altoMapa, altoDer);
+      const H = ALTO_CAB + ALTO_TIT + altoCuerpo + MARGEN + ALTO_PIE;
+
+      const lienzo = document.createElement('canvas');
+      lienzo.width = W * K; lienzo.height = H * K;
+      const ctx = lienzo.getContext('2d');
+      ctx.scale(K, K);
+      ctx.fillStyle = '#0E2135'; ctx.fillRect(0, 0, W, H);
+
+      // Cabecera: la casa.
+      ctx.fillStyle = '#00121E'; ctx.fillRect(0, 0, W, ALTO_CAB);
+      ctx.fillStyle = '#FB6500'; ctx.fillRect(0, ALTO_CAB - 3, W, 3);
+      escribir(ctx, 'SIWA · Reporte de situación de América Latina y el Caribe', MARGEN, 22, 800,
+               '700 17px ' + fuente, '#ffffff', 22);
+      ctx.font = '500 12px ' + fuente; ctx.fillStyle = '#C7D2E0'; ctx.textAlign = 'right';
+      ctx.fillText('Fundación Sherman Kent', W - MARGEN, 26); ctx.textAlign = 'left';
+
+      // Titulo: que se mira, donde y cuando.
+      let y = ALTO_CAB + 18;
+      y += escribir(ctx, q.titulo, MARGEN, y, W - MARGEN * 2, '800 24px ' + fuente, '#ffffff', 28);
+      escribir(ctx, q.ambito + (cuando ? ' · ' + cuando : ''), MARGEN, y + 2, W - MARGEN * 2,
+               '500 13px ' + fuente, '#C7D2E0', 18);
+      y = ALTO_CAB + ALTO_TIT;
+
+      // El mapa, recortado a su cuadro.
+      ctx.save();
+      ctx.beginPath(); ctx.rect(MARGEN, y, COL, altoMapa); ctx.clip();
+      ctx.fillStyle = '#07131E'; ctx.fillRect(MARGEN, y, COL, altoMapa);
+      ctx.drawImage(imMapa, MARGEN + (sr.left - cr.left) * escala, y + (sr.top - cr.top) * escala,
+                    sr.width * escala, sr.height * escala);
+      ctx.restore();
+      ctx.strokeStyle = 'rgba(255,255,255,.14)'; ctx.lineWidth = 1;
+      ctx.strokeRect(MARGEN + .5, y + .5, COL - 1, altoMapa - 1);
+
+      // La columna derecha: tarjeta, leyenda, grafico.
+      const xd = MARGEN + COL + SEP;
+      let yd = y;
+      escribir(ctx, lineasFicha[0], xd, yd, anchoDer, '800 20px ' + fuente, '#ffffff', 26); yd += 26;
+      lineasFicha.slice(1).forEach((l, i) => {
+        escribir(ctx, l, xd, yd, anchoDer, (i === 1 ? '800 20px ' : '500 12.5px ') + fuente,
+                 i === 1 ? '#FB6500' : '#C7D2E0', 20); yd += 20;
+      });
+      yd += 18;
+      if(leyenda){ ctx.drawImage(leyenda.im, xd, yd, anchoDer, leyenda.alto); yd += leyenda.alto + 14; }
+      if(grafico){ ctx.drawImage(grafico.im, xd, yd, anchoDer, grafico.alto); yd += grafico.alto + 14; }
+
+      // El pie: la fuente, la fecha y la direccion. Sin esto la imagen no sale.
+      const yp = H - ALTO_PIE;
+      ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(MARGEN, yp, W - MARGEN * 2, 1);
+      const fuenteDato = (cita.productores || []).length
+        ? 'Fuente del dato: ' + cita.productores.join(' · ')
+        : 'Fuente del dato: la declarada en cada tema del registro';
+      let ypp = yp + 12;
+      ypp += escribir(ctx, fuenteDato + '. Los valores son los publicados por la fuente; SIWA no los altera.',
+                      MARGEN, ypp, W - MARGEN * 2, '500 11.5px ' + fuente, '#C7D2E0', 16);
+      escribir(ctx, 'Descargado el ' + hoy + ' de siwa.fundacionkent.org · Fundación Sherman Kent, '
+               + 'Oficina de Generación de Inteligencia · acceso libre', MARGEN, ypp + 4,
+               W - MARGEN * 2, '500 11px ' + fuente, '#7d90a8', 15);
+
+      const nombre = ('siwa-' + q.titulo + '-' + q.ambito + '-' + new Date().toISOString().slice(0, 10))
+        .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.png';
+      lienzo.toBlob(blob => {
+        if(!blob){ avisar('No se pudo armar la imagen.', true); return; }
+        const dir = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = dir; a.download = nombre;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(dir), 60000);
+        avisar('Imagen del tablero descargada: ' + nombre);
+      }, 'image/png');
+    }catch(e){
+      avisar('No se pudo armar la imagen: ' + (e && e.message ? e.message : e), true);
+    }
+  }
+
   // ============ LA CONSULTA SE LLEVA: PLANILLA Y CITA EN APA 7 ============
   //
   // Un informe completo del pais no le sirve a quien busco UNA cosa. Lo que se
@@ -4357,7 +4553,7 @@
     const deTerceros = productores.map(p =>
       esc(p) + '. (' + anio + '). <i>' + esc(q.titulo) + '</i> [Conjunto de datos]. '
       + 'Citado en SIWA, Fundación Sherman Kent.');
-    return {propia, deTerceros, q};
+    return {propia, deTerceros, q, productores};
   }
 
   // De donde viene cada materia, buscando en todos los archivos cargados.
@@ -4519,6 +4715,7 @@
          : '')
       + '</span>'
       + '<span><button class="boton chico" id="bajar-consulta">Descargar la planilla</button> '
+      + '<button class="boton chico" id="bajar-imagen">Descargar la imagen</button> '
       + '<button class="boton chico" id="copiar-cita">Copiar la cita</button></span>'
       + '</div></div>';
 
@@ -4532,6 +4729,7 @@
       setTimeout(() => URL.revokeObjectURL(dir), 60000);
       avisar('Planilla de la consulta descargada.');
     });
+    document.getElementById('bajar-imagen')?.addEventListener('click', () => imagenDelTablero());
     document.getElementById('copiar-cita')?.addEventListener('click', () => {
       const t = document.getElementById('cita-propia');
       alPortapapeles(t ? t.textContent : '', 'Cita copiada.');
