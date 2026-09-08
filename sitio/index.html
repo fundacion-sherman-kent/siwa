@@ -726,6 +726,15 @@
 
   .sin-enlace{display:block;color:#9fb2c8;cursor:help;}
 
+  /* LAS MINIATURAS DE LA LISTA. Se alinean con el texto y no se estiran: una
+     miniatura estirada deja de ser comparable con la de al lado, que es lo único
+     para lo que sirve una miniatura. */
+  .minis{display:flex;align-items:center;gap:10px;margin:2px 0 6px;flex-wrap:wrap;}
+  .mini{flex:0 0 auto;display:block;}
+  .leyenda-minis{font-size:11px;color:#9fb2c8;line-height:1.6;margin:0 0 10px;
+    padding:8px 10px;background:rgba(255,255,255,.03);border-left:2px solid var(--orange);}
+  @media (max-width:380px){ .minis{gap:6px;} }
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -3210,6 +3219,71 @@
   }
 
   // ---- Nivel 2: las materias de un eje -------------------------------------
+  // ============ LAS MINIATURAS DE LA LISTA ============
+  //
+  // Un eje son hasta treinta y seis renglones de texto. Para saber cuáles están
+  // mal el lector tenía que leerlos todos y ordenarlos en la cabeza. Con una
+  // miniatura por renglón la lista se recorre con el ojo. No reemplaza al texto:
+  // se suma, porque la cifra exacta y el puesto siguen haciendo falta.
+
+  // DÓNDE ESTÁ PARADO, en 110 píxeles. La barra es la escala de la materia; el
+  // punto, el Estado; la marca cortada, la mediana. Sin mediana el punto no dice
+  // nada: un lugar no se lee sin una referencia.
+  function miniPosicion(clave, iso){
+    const cap = (capas() || {})[clave];
+    if(!cap || !cap.conteo) return '';
+    const todos = cap.conteo() || {};
+    if(todos[iso] === undefined) return '';
+    const vals = Object.values(todos).filter(v => isFinite(v)).sort((a,b) => a - b);
+    if(vals.length < 4) return '';
+    const min = vals[0], max = vals[vals.length - 1];
+    if(!(max > min)) return '';
+    const med = vals.length % 2 ? vals[(vals.length - 1) / 2]
+              : (vals[vals.length/2 - 1] + vals[vals.length/2]) / 2;
+    const an = 110, al = 22, m = 6, util = an - m * 2;
+    const x = v => m + ((v - min) / (max - min)) * util;
+    // El color sigue la orientación DECLARADA de la materia. Donde la fuente no
+    // declara dirección, el punto va en el color neutro: pintar de naranja lo que
+    // no está orientado sería emitir un juicio que la fuente no emite.
+    const orientada = cap.subeEsPeor !== undefined;
+    const propio = todos[iso];
+    const mal = orientada && (cap.subeEsPeor ? propio > med : propio < med);
+    const color = !orientada ? '#8C00E0' : mal ? 'var(--orange)' : '#3FA796';
+    return '<svg class="mini" viewBox="0 0 ' + an + ' ' + al + '" width="' + an
+      + '" height="' + al + '" role="img" aria-label="Posición en la escala de la región">'
+      + '<line x1="' + m + '" y1="11" x2="' + (an - m) + '" y2="11" '
+      + 'stroke="rgba(255,255,255,.14)" stroke-width="3" stroke-linecap="round"></line>'
+      + '<line x1="' + x(med).toFixed(1) + '" y1="4" x2="' + x(med).toFixed(1) + '" y2="18" '
+      + 'stroke="#7d90a8" stroke-width="1" stroke-dasharray="2 2"></line>'
+      + '<circle cx="' + x(propio).toFixed(1) + '" cy="11" r="4.2" fill="' + color + '" '
+      + 'stroke="#00121E" stroke-width="1.2"></circle></svg>';
+  }
+
+  // HACIA DÓNDE VA, en 64 píxeles. Sólo la forma: sin ejes, sin cifras. Para el
+  // detalle está la ficha; acá lo único que se pregunta es si sube o baja.
+  function miniSerie(clave, iso){
+    const cap = (capas() || {})[clave];
+    if(!cap || !cap.serieDe) return '';
+    const s = (cap.serieDe(iso) || []).filter(a => isFinite(a.valor));
+    if(s.length < 3) return '';
+    const v = s.map(a => a.valor);
+    const min = Math.min(...v), max = Math.max(...v), r = (max - min) || 1;
+    const an = 64, al = 22, m = 3;
+    const x = i => m + (i / (s.length - 1)) * (an - m * 2);
+    const y = k => 4 + (1 - (k - min) / r) * (al - 8);
+    const d = s.map((a,i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(a.valor).toFixed(1)).join(' ');
+    const sube = v[v.length - 1] > v[0];
+    const peor = cap.subeEsPeor === undefined ? null : (cap.subeEsPeor ? sube : !sube);
+    const color = peor === null ? '#9fb2c8' : peor ? 'var(--orange)' : '#3FA796';
+    return '<svg class="mini" viewBox="0 0 ' + an + ' ' + al + '" width="' + an + '" height="' + al
+      + '" role="img" aria-label="Serie de ' + s.length + ' años, de ' + s[0].anio
+      + ' a ' + s[s.length-1].anio + '">'
+      + '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="1.6" '
+      + 'stroke-linejoin="round" stroke-linecap="round"></path>'
+      + '<circle cx="' + x(s.length-1).toFixed(1) + '" cy="' + y(v[v.length-1]).toFixed(1)
+      + '" r="2.2" fill="' + color + '"></circle></svg>';
+  }
+
   function panelMaterias(iso, eje){
     const nombre = (padron.find(x => x.iso === iso) || {}).pais || iso;
     const ms = materiasDelEje(eje);
@@ -3225,12 +3299,23 @@
       + (d.cap.subeEsPeor && d.puesto <= Math.ceil(d.deCuantos / 3) ? 'muy-viejo' : 'fresco')
       + '">' + cifra(d.valor) + '</span></h4>'
       + '<div class="foot"><span class="porque">'
+      + (function(){
+          const pos = miniPosicion(clave, iso), ser = miniSerie(clave, iso);
+          return (pos || ser) ? '<span class="minis">' + pos + ser + '</span>' : '';
+        })()
       + (d.cap.unidad ? esc(d.cap.unidad) + ' · ' : '')
       + '<b>lugar ' + d.puesto + ' de ' + d.deCuantos + '</b> entre los Estados con dato'
       + (d.enBloque > 1 ? ' · <b>' + d.puestoBloque + '.º de ' + d.enBloque + '</b> en '
           + esc(d.bloque) : '')
-      + '<br>Tocá para la ficha completa.</span>'
-      + '<span class="badge medio">materia</span></div></div>').join('');
+      + '</span><span class="badge medio">materia</span></div></div>').join('');
+    // La leyenda va UNA VEZ, arriba. Repetida en los treinta y seis renglones no
+    // aclaraba nada: alargaba la lista y tapaba lo que había que mirar.
+    if(con.length) html = '<p class="leyenda-minis">'
+      + '<b>Cada renglón trae dos dibujos.</b> El primero dice <b>dónde está</b> este '
+      + 'Estado en la escala de la región —la marca cortada es la mediana—; el segundo, '
+      + 'cuando la materia tiene serie, <b>hacia dónde va</b>. En naranja, el lado que '
+      + 'la fuente considera peor; en violeta, las materias donde la fuente no declara '
+      + 'un lado. Tocá cualquiera para la ficha completa.</p>' + html;
     if(sin.length){
       html += '<div class="asunto"><h4>' + sin.length + ' sin dato para ' + esc(nombre) + '</h4>'
         + '<div class="foot"><span class="porque">'
