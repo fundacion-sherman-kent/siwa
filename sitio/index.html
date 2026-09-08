@@ -322,12 +322,17 @@
   .leaflet-container{background:var(--navy-black);font-family:'Inter',sans-serif;outline:none;}
   .leaflet-control-attribution{background:rgba(0,18,30,.75)!important;color:#7d90a8!important;font-size:9.5px!important;}
   .leaflet-control-attribution a{color:#9fb2c8!important;}
+  /* LA FICHA NO SE COME EL MAPA. Tope de la mitad del alto y desplazamiento
+     adentro suyo: un mapa que no se ve no es un mapa. */
   .ficha-mapa{
-    position:absolute;top:12px;right:12px;width:262px;z-index:500;
+    position:absolute;top:12px;right:12px;width:238px;z-index:500;
+    max-height:calc(50% - 24px);overflow-y:auto;
     background:rgba(14,33,53,.96);border:1px solid var(--line);border-radius:10px;
-    padding:14px 16px;font-size:12px;line-height:1.55;color:#C7D2E0;
+    padding:12px 14px;font-size:11.5px;line-height:1.45;color:#C7D2E0;
     box-shadow:0 8px 28px rgba(0,0,0,.45);pointer-events:none;
   }
+  .ficha-mapa .remite{font-size:10.5px;color:#7d90a8;line-height:1.5;
+    border-top:1px solid rgba(255,255,255,.07);margin-top:8px;padding-top:8px;}
   .ficha-mapa h4{margin:0;font-size:14px;color:#fff;font-weight:700;}
   .ficha-mapa .bloque{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:#7d90a8;margin-bottom:10px;}
   .ficha-mapa .cifra{display:block;font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:800;color:#fff;line-height:1.15;}
@@ -6486,12 +6491,21 @@
     // El resumen por eje se muestra IGUAL sin dato en la capa elegida: que
     // Uruguay no tenga cifra de terrorismo no quita que tenga situacion general.
     //
-    // Y SE MUESTRA TAMBIEN EN EL PAIS YA ELEGIDO. Antes se lo ocultaba por no
-    // repetir lo de arriba, pero el efecto era el contrario del buscado: quien
-    // filtraba por su pais y despues lo señalaba en el mapa —que es lo que hace
-    // cualquiera— se quedaba SIN los ejes y sin la opacidad, justo en el Estado
-    // que mas le importa. La ficha del mapa se lee sola.
-    const mini = ejesMini(iso);
+    // PERO NO EN EL ESTADO YA ELEGIDO. Se mostraba tambien ahi, y por una razon
+    // buena: quien filtraba por su pais y despues lo señalaba en el mapa se
+    // quedaba sin los ejes y sin la opacidad, justo en el Estado que mas le
+    // importa. Eso era cierto cuando se decidio y dejo de serlo: el perfil del
+    // pais, que va arriba del mapa, muestra siempre esos mismos ejes con sus
+    // barras y sus puestos.
+    //
+    // Repetirlos encima del mapa no agregaba nada y TAPABA EL MAPA: la ficha
+    // ocupaba 262 x 422 sobre un mapa de 445 x 588, el cuarenta y dos por
+    // ciento, y de punta a punta en vertical.
+    const esElElegido = iso === paisFiltro;
+    const mini = esElElegido
+      ? '<div class="remite">Los cuatro ejes, la opacidad y la verificación, '
+        + 'arriba en la ficha de ' + esc(nombre) + '.</div>'
+      : ejesMini(iso);
     if(nivel === undefined && !proys.length){
       caja.innerHTML = `<h4>${esc(nombre)}</h4><div class="bloque">${esc(bloque)}</div>
         <span class="vacia">Sin dato en esta capa.</span>` + mini;
