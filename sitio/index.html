@@ -722,6 +722,8 @@
   .ojo-plegado[open] summary::before{content:'▾ ';}
   .ojo-plegado[open]{color:#C7D2E0;padding-bottom:4px;}
 
+  .pie-tira{display:block;color:#7d90a8;font-size:10px;line-height:1.5;margin:2px 0 6px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -3259,6 +3261,7 @@
       + ' · lugar <b>' + d.puesto + ' de ' + d.deCuantos + '</b> entre los Estados con dato'
       + (d.enBloque > 1 ? ' · <b>' + d.puestoBloque + '.º de ' + d.enBloque + '</b> en '
           + esc(d.bloque) : '')
+      + figuraTira(clave, iso)
       + (detalle ? '<br>' + esc(detalle) : '')
       + (meta.origen ? '<br><b>Fuente:</b> ' + esc(meta.origen) : '')
       + (serie.length > 1 ? '<br><b>Serie:</b> ' + serie.length + ' años, de '
@@ -3585,8 +3588,7 @@
     // EL DIBUJO SE HACE DEL ANCHO QUE HAY. Antes se dibujaba siempre de 560 y el
     // navegador lo achicaba: en un telefono las letras quedaban en 7 pixeles,
     // ilegibles. Si el dibujo no se achica, la letra conserva su tamaño.
-    const disponible = (document.getElementById('tabla-comparacion')?.clientWidth || 560);
-    const ancho = Math.max(300, Math.min(560, disponible - 8));
+    const ancho = anchoDeFigura('tabla-comparacion');
     const angosto = ancho < 420;
     const altoFila = angosto ? 40 : 34;
     const margenIzq = angosto ? 96 : 132;
@@ -3748,8 +3750,7 @@
     if(!cap || !cap.serieDe) return '';
     const serie = (cap.serieDe(iso) || []).filter(a => isFinite(a.valor));
     if(serie.length < 3) return '';
-    const disponible = (document.getElementById('panel-navegador')?.clientWidth || 520);
-    const ancho = Math.max(280, Math.min(520, disponible - 8));
+    const ancho = Math.min(520, anchoDeFigura('panel-navegador'));
     const alto = 108, mIzq = 8, mDer = 8, mArr = 16, mAba = 22;
     const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
     const vals = serie.map(a => a.valor);
@@ -3774,6 +3775,81 @@
       + 'fill="#fff" font-size="10" font-weight="700">' + u.anio + ' · ' + cifra(u.valor) + '</text>'
       + '</svg>';
   }
+
+  // ============ LA TIRA REGIONAL ============
+  //
+  // «Lugar 13 de 33» ordena pero no muestra distancia: no dice si el 13 esta
+  // pegado al 12 o a mitad de camino del ultimo. La tira pone UN PUNTO POR
+  // ESTADO sobre la escala de la materia y resalta el propio. De un golpe se ve
+  // si esta en el monton o despegado, y de que lado de la mediana cae.
+  // El ancho REAL del que dispone una figura. No es el del panel: la figura vive
+  // dentro de una caja con relleno, y medir el contenedor equivocado obliga al
+  // navegador a achicar el dibujo. Cuando el dibujo se achica, la letra se achica
+  // con él —en teléfono quedaba en 8,3 pixeles— y una figura ilegible no informa.
+  function anchoDeFigura(idContenedor){
+    const c = document.getElementById(idContenedor);
+    if(!c) return 520;
+    const caja = c.querySelector('.asunto .porque') || c.querySelector('.asunto');
+    const w = caja && caja.clientWidth ? caja.clientWidth : c.clientWidth - 34;
+    return Math.max(280, Math.min(560, w - 4));
+  }
+
+  function figuraTira(clave, iso){
+    const cap = (capas() || {})[clave];
+    if(!cap || !cap.conteo) return '';
+    const todos = cap.conteo() || {};
+    const pares = Object.entries(todos).filter(([,v]) => isFinite(v));
+    if(pares.length < 6 || todos[iso] === undefined) return '';
+    const vals = pares.map(x => x[1]).sort((a,b) => a - b);
+    const min = vals[0], max = vals[vals.length - 1];
+    if(!(max > min)) return '';
+    const med = vals.length % 2 ? vals[(vals.length - 1) / 2]
+              : (vals[vals.length/2 - 1] + vals[vals.length/2]) / 2;
+    const ancho = Math.min(520, anchoDeFigura('panel-navegador'));
+    const alto = 62, mIzq = 10, mDer = 10;
+    const util = ancho - mIzq - mDer;
+    const x = v => mIzq + ((v - min) / (max - min)) * util;
+    const yEje = 30;
+
+    // Los demas Estados, translucidos. Se superponen a proposito: donde el color
+    // se satura hay muchos juntos, y eso es informacion.
+    const otros = pares.filter(([i]) => i !== iso).map(([i, v]) =>
+      '<circle cx="' + x(v).toFixed(1) + '" cy="' + yEje + '" r="4" '
+      + 'fill="#7d90a8" opacity=".38"><title>' + esc(nombreDe(i)) + ' · '
+      + cifra(v) + '</title></circle>').join('');
+
+    const xm = x(todos[iso]);
+    const nom = nombreDe(iso);
+    // El rotulo propio se corre si esta pegado a un borde, para que no se corte.
+    const anclaje = xm < 46 ? 'start' : xm > ancho - 46 ? 'end' : 'middle';
+    const xr = xm < 46 ? mIzq : xm > ancho - 46 ? ancho - mDer : xm;
+
+    return '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho
+      + '" height="' + alto + '" style="max-width:100%;height:auto;margin-top:8px" '
+      + 'role="img" aria-label="' + esc(nom) + ' entre los ' + pares.length
+      + ' Estados con dato en ' + esc(rotuloDeMateria(clave)) + '">'
+      + '<line x1="' + mIzq + '" y1="' + yEje + '" x2="' + (ancho - mDer) + '" y2="'
+      + yEje + '" stroke="rgba(255,255,255,.12)" stroke-width="1"></line>'
+      // La mediana: la referencia que un puesto solo no da.
+      + '<line x1="' + x(med).toFixed(1) + '" y1="' + (yEje - 11) + '" x2="'
+      + x(med).toFixed(1) + '" y2="' + (yEje + 11) + '" stroke="#7d90a8" '
+      + 'stroke-width="1" stroke-dasharray="2 2"></line>'
+      + '<text x="' + x(med).toFixed(1) + '" y="' + (yEje + 22) + '" text-anchor="middle" '
+      + 'fill="#7d90a8" font-size="9">mediana ' + cifra(med) + '</text>'
+      + otros
+      + '<circle cx="' + xm.toFixed(1) + '" cy="' + yEje + '" r="6" fill="var(--orange)" '
+      + 'stroke="#00121E" stroke-width="1.5"></circle>'
+      + '<text x="' + xr.toFixed(1) + '" y="' + (yEje - 13) + '" text-anchor="' + anclaje
+      + '" fill="#fff" font-size="10" font-weight="700">' + esc(nom) + '</text>'
+      + '<text x="' + mIzq + '" y="12" fill="#7d90a8" font-size="9">' + cifra(min) + '</text>'
+      + '<text x="' + (ancho - mDer) + '" y="12" text-anchor="end" fill="#7d90a8" '
+      + 'font-size="9">' + cifra(max) + '</text>'
+      + '</svg>'
+      + '<small class="pie-tira">Cada punto es un Estado con dato en esta materia; '
+      + 'son ' + pares.length + '. Donde el gris se satura hay varios superpuestos.</small>';
+  }
+
+  const nombreDe = i => (padron.find(x => x.iso === i) || {}).pais || i;
 
   function MATERIAS(){
     const deFuentes = fuentesInd().flatMap(f=>(f.indicadores||[]).map(i=>({
