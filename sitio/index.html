@@ -823,6 +823,8 @@
   .calif{font-family:'JetBrains Mono',monospace;font-weight:700;color:#fff;
     background:rgba(255,255,255,.07);padding:1px 5px;border-radius:3px;cursor:help;}
 
+  .publicable .edad{font-size:13px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1407,7 +1409,7 @@
       <button class="nivel" data-lee="2" aria-pressed="false">
         <b>Periodista</b><span>Lo que circula hoy, con su fuente y su corroboración</span></button>
       <button class="nivel" data-lee="3" aria-pressed="false">
-        <b>Analista</b><span id="rot-analista">Todos los indicadores, el método y los vacíos</span></button>
+        <b>Analista</b><span id="rot-analista">El registro completo, el método y los vacíos</span></button>
     </div>
     <p class="niveles-pie" id="niveles-pie"></p>
     <div class="herramientas" id="herramientas"></div>
@@ -1571,6 +1573,15 @@
       <div id="caja-consulta"></div>
         </section>
 
+    <section class="domain" id="publicar" data-nivel="2">
+      <div class="domain-head"><h3>Para publicar hoy</h3><span class="tag">cinco datos con su fuente</span></div>
+      <p class="bloque-bajada">Cinco cifras del Estado elegido, listas para citar: los tres
+        movimientos más grandes que publican las fuentes y los dos temas donde ese Estado está
+        en el extremo de la escala regional —con el criterio de la fuente, no de la Fundación—. Cada una con su fuente, su calificación y el botón que
+        devuelve la línea entera. <b>No reemplaza al registro</b>: es la puerta rápida, y el
+        detalle completo está en Explorar, más arriba.</p>
+      <div class="grid-cards" id="publicar-hoy"></div>
+    </section>
     <section class="domain" id="seis-materias" data-nivel="1">
       <div class="domain-head"><h3>Las seis materias</h3><span class="tag" id="tag-seis-materias">—</span></div>
       <details class="aviso-cobertura"><summary>Son las seis materias en las que trabaja la Fundación</summary>
@@ -1583,7 +1594,7 @@
       <div class="materias" id="lista-seis-materias"></div>
         </section>
 
-    <section class="domain bloque" id="seguridad-violencia" data-nivel="2">
+    <section class="domain bloque" id="seguridad-violencia" data-nivel="3">
       <div class="bloque-head"><h3>Seguridad · violencia y víctimas</h3></div>
       <p class="bloque-bajada">Lo que le pasa a las personas: muertes, delitos denunciados y las materias donde el Estado registra víctimas.</p>
     <div class="categoria" id="violencia" data-nivel="2">
@@ -1640,7 +1651,7 @@
         </div>
     </section>
 
-    <section class="domain bloque" id="seguridad-territorio" data-nivel="2">
+    <section class="domain bloque" id="seguridad-territorio" data-nivel="3">
       <div class="bloque-head"><h3>Seguridad · grupos, territorio y fronteras</h3></div>
       <p class="bloque-bajada">Quién controla qué: organizaciones armadas, disputa territorial, zonas de frontera y explotación ilegal del suelo.</p>
     <div class="categoria" id="grupos-armados" data-nivel="3">
@@ -1721,7 +1732,7 @@
         </div>
     </section>
 
-    <section class="domain bloque" id="seguridad-flujos" data-nivel="2">
+    <section class="domain bloque" id="seguridad-flujos" data-nivel="3">
       <div class="bloque-head"><h3>Seguridad · flujos y ciberseguridad</h3></div>
       <p class="bloque-bajada">Lo que cruza: mercadería, personas y ataques. Tres materias distintas que comparten una característica —se miden por el rastro, no por el hecho—.</p>
     <div class="categoria" id="explorador" data-nivel="2">
@@ -2213,7 +2224,7 @@
         </div>
     </section>
 
-    <section class="domain bloque" id="gobernanza" data-nivel="2">
+    <section class="domain bloque" id="gobernanza" data-nivel="3">
       <div class="bloque-head"><h3>Gobernanza</h3></div>
       <p class="bloque-bajada">Integridad de la administración pública, calidad de las reglas y salud del espacio informativo en que esas reglas se discuten.</p>
     <div class="categoria" id="contratacion-abierta" data-nivel="2">
@@ -2365,7 +2376,7 @@
         </div>
     </section>
 
-    <section class="domain bloque" id="que-se-publica" data-nivel="2">
+    <section class="domain bloque" id="que-se-publica" data-nivel="3">
       <div class="bloque-head"><h3>Qué se publica hoy</h3></div>
       <p class="bloque-bajada">Qué se está diciendo sobre la región en este momento, y en cuántos orígenes independientes. <b>No es una materia del registro:</b> es el segundo factor de veracidad con el que se contrastan las materias.</p>
     <div class="categoria" id="copernicus" data-nivel="2">
@@ -3329,6 +3340,119 @@
   }
 
   // ---- Nivel 2: las materias de un eje -------------------------------------
+  // ¿EL CAMBIO ARRANCA DE ALGO O DE CASI NADA? Un porcentaje sobre una base
+  // minúscula es enorme sin ser importante: «servidores cifrados +30.209 %» no
+  // es una noticia, es una división por poco. Para entrar por porcentaje, el
+  // valor de partida tiene que llegar a un cuarto de la mediana regional de ese
+  // mismo indicador.
+  //
+  // Vive acá y no adentro de una pantalla porque la usan dos —las novedades de
+  // la región y los datos para publicar—, y dos implementaciones de la misma
+  // regla son dos definiciones que con el tiempo se separan.
+  function baseSuficiente(c){
+    if(!c || c.modo !== 'porcentaje') return true;
+    const clave = c.info && c.info.clave;
+    if(!clave) return true;
+    let med = null;
+    fuentesInd().forEach(f => (f.indicadores || []).forEach(i => {
+      if(i.clave !== clave) return;
+      const v = (f.registros || []).map(r => (r.indicadores || {})[clave])
+        .filter(d => d && isFinite(d.valor)).map(d => Math.abs(d.valor)).sort((a, b) => a - b);
+      if(v.length) med = v[Math.floor(v.length / 2)];
+    }));
+    if(!med) return true;
+    return Math.abs(c.dato.valor_inicial) >= med * 0.25;
+  }
+
+  // ============ PARA PUBLICAR HOY ============
+  //
+  // Lo que un periodista necesita del registro no es todo el registro: son unos
+  // pocos datos del país que esté mirando, con la fuente al lado y la línea lista
+  // para pegar. Eso estaba disperso —el cambio en una tarjeta, el puesto en otra,
+  // la cita en un botón dentro de una ficha— y había que armarlo a mano.
+  //
+  // Cinco, no diez: si son diez hay que elegir, y elegir es trabajo.
+  function paraPublicarHoy(){
+    const caja = document.getElementById('publicar-hoy');
+    if(!caja) return;
+    const iso = paisFiltro;
+    if(!iso){
+      caja.innerHTML = '<p class="nota-filtro">Elegí un país y acá van cinco datos '
+        + 'suyos listos para citar.</p>';
+      return;
+    }
+    const pais = (padron.find(x => x.iso === iso) || {}).pais || iso;
+    const vive = m => !m.disponible || m.disponible();
+    const filas = [];
+
+    // 1 · Lo que mas se movio. Se usa la misma regla que las tarjetas del pais:
+    // una segunda implementacion seria una segunda definicion de «cambio».
+    (cambiosDelEstado(iso) || []).filter(baseSuficiente).slice(0, 3).forEach(c => {
+      const subio = c.dif > 0;
+      const cifraCambio = c.modo === 'porcentaje'
+          ? (subio ? '+' : '') + cifra(c.dato.tendencia_ventana_pct) + ' %'
+        : c.modo === 'puntos' ? (subio ? '+' : '') + cifra(c.dif) + ' pts'
+        : (subio ? '+' : '') + magnitud(c.dif, c.info.unidad).texto;
+      filas.push({clave: c.info.clave, rotulo: c.info.rotulo,
+        gancho: cifraCambio + ' entre ' + c.dato.anio_inicial + ' y ' + c.dato.anio,
+        porque: 'Es uno de los tres movimientos más grandes que las fuentes '
+          + 'publican para ' + esc(pais) + '.',
+        haciaPeor: subio === !!c.info.mas_es_peor});
+    });
+
+    // 2 · Donde el pais esta peor parado de la region. Solo en temas ORIENTADOS:
+    // en los demas «peor» no existe, y decirlo seria un juicio de la casa.
+    const puestos = [];
+    MATERIAS().filter(vive).forEach(m => {
+      const clave = claveDeCapa(m.clave) || m.clave;
+      if(filas.some(f => f.clave === clave)) return;
+      const d = datoDeMateria(clave, iso);
+      if(!d || d.sinDato || !d.cap || d.cap.subeEsPeor === undefined) return;
+      // SE EXIGEN QUINCE ESTADOS CON DATO. La primera versión sacó «Argentina
+      // está entre los 1 peores de la región, sobre 1 Estados»: en un tema que
+      // mide un solo Estado, ser el peor no dice nada. Un puesto necesita
+      // competencia para significar algo.
+      if(d.deCuantos < 15) return;
+      const lugar = d.cap.subeEsPeor ? d.puesto : d.deCuantos - d.puesto + 1;
+      if(lugar <= 3) puestos.push({d, m, clave, lugar});
+    });
+    puestos.sort((a, b) => a.lugar - b.lugar).slice(0, 2).forEach(x => {
+      filas.push({clave: x.clave, rotulo: rotuloDeMateria(x.clave),
+        gancho: cifra(x.d.valor) + (x.d.cap.unidad ? ' ' + x.d.cap.unidad : ''),
+        // SE DICE LO QUE DICE LA FUENTE, no lo que interpretaría la casa. La
+        // primera versión sacó «Argentina es el 2.º peor de la región en remesas
+        // recibidas»: recibir pocas remesas no es estar peor, es no depender del
+        // ingreso de los emigrados. La orientación es de la fuente y el extremo
+        // es un hecho; llamarlo «peor» era un juicio, y este registro no los
+        // emite. Se nombra el extremo y se dice de quién es el criterio.
+        porque: esc(pais) + ' tiene <b>'
+          + (x.lugar === 1 ? 'el valor más ' : 'el ' + x.lugar + '.º valor más ')
+          + (x.d.cap.subeEsPeor ? 'alto' : 'bajo') + ' de la región</b> en este tema, '
+          + 'sobre ' + x.d.deCuantos + ' Estados con dato. Para la fuente, en este tema '
+          + 'cuanto más alto, ' + (x.d.cap.subeEsPeor ? 'peor' : 'mejor') + '.',
+        haciaPeor: true});
+    });
+
+    if(!filas.length){
+      caja.innerHTML = '<p class="nota-filtro">Para ' + esc(pais) + ' las fuentes no '
+        + 'publican todavía series con dos años comparables. <b>No significa que no '
+        + 'haya pasado nada</b>: significa que nadie lo mide de forma comparable.</p>';
+      return;
+    }
+
+    caja.innerHTML = filas.map(f =>
+      '<div class="asunto publicable">'
+      + '<h4>' + esc(f.rotulo) + ' <span class="edad '
+      + (f.haciaPeor ? 'muy-viejo' : 'fresco') + '">' + esc(f.gancho) + '</span></h4>'
+      + '<div class="foot"><span class="porque">' + f.porque
+      + (fuenteDeMateria(f.clave) ? '<br><b>Fuente:</b> ' + fuenteDeMateria(f.clave) : '')
+      + '</span><span class="acciones-ficha">'
+      + '<button class="boton chico" data-copiar-dato="' + esc(f.clave)
+      + '">Copiar con su fuente</button>'
+      + '<button class="boton chico" data-materia="' + esc(f.clave) + '">Ver el tema</button>'
+      + '</span></div></div>').join('');
+  }
+
   // ============ LAS MINIATURAS DE LA LISTA ============
   //
   // Un eje son hasta treinta y seis renglones de texto. Para saber cuáles están
@@ -4290,19 +4414,6 @@
     // de partida tiene que llegar al menos a un cuarto de la mediana regional de
     // ese mismo indicador. No es un juicio sobre la importancia del hecho —eso el
     // registro no lo emite—: es descartar la aritmética de una división por poco.
-    const medianaDe = {};
-    fuentesInd().forEach(f => (f.indicadores || []).forEach(i => {
-      const v = (f.registros || []).map(r => (r.indicadores || {})[i.clave])
-        .filter(d => d && isFinite(d.valor)).map(d => Math.abs(d.valor)).sort((a, b) => a - b);
-      if(v.length) medianaDe[i.clave] = v[Math.floor(v.length / 2)];
-    }));
-    const baseSuficiente = c => {
-      if(c.modo !== 'porcentaje') return true;
-      const med = medianaDe[c.info.clave];
-      if(!med) return true;
-      return Math.abs(c.dato.valor_inicial) >= med * 0.25;
-    };
-
     const todos = [];
     isos.forEach(iso => (cambiosDelEstado(iso) || []).filter(baseSuficiente).slice(0, 3)
       .forEach(c => todos.push({iso, c})));
@@ -6280,9 +6391,9 @@
   if(!(nivel >= 1 && nivel <= NIVEL_MAXIMO)) nivel = 1;
 
   const PIE_NIVEL = {
-    1: 'Estás viendo <b>lo esencial de un país</b>: qué cambió y cuánto. Cada cifra trae quién la produce y qué es lo que <b>no</b> dice.',
-    2: 'Sumás <b>lo que se está publicando ahora</b> —qué cubre la prensa de la región, con cuántos orígenes independientes— y el informe descargable para citar.',
-    3: 'Sumás <b>los {IND} indicadores</b> de las {FUE} fuentes con el mapa y los cruces entre temas, y además <b>el método</b>: de dónde sale cada dato, cómo se lo califica, qué vacíos se declaran y qué fuentes oficiales existen en cada Estado.',
+    1: 'Estás viendo <b>lo esencial de un país</b>: cómo está, qué cambió y cuánto. Cada cifra trae quién la produce y qué es lo que <b>no</b> dice.',
+    2: '<b>Cinco datos listos para citar</b> del Estado elegido, con su fuente y su calificación, más <b>lo que se está publicando ahora</b> y el informe descargable. Los 95 temas siguen a mano en Explorar.',
+    3: '<b>El registro completo y el método</b>: los {IND} indicadores de las {FUE} fuentes, las secciones por eje, los cruces, de dónde sale cada dato, cómo se lo califica y qué vacíos se declaran.',
   };
 
   // --- Enlaces que se pueden compartir -----------------------------------
@@ -7170,6 +7281,7 @@
     paso('perfil del país', perfilPais);
     paso('panorama', armarPanorama);
     paso('solapas', armarSolapas);
+    paso('para publicar hoy', paraPublicarHoy);
     paso('explorador', navegadorVista);
     paso('narcotráfico', narcotraficoVista);
     paso('crimen organizado', crimenVista);
