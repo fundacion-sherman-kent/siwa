@@ -317,7 +317,7 @@
 
   /* ---- Mapa de situación ---- */
   .mapa-caja{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
-  #mapa{height:520px;background:var(--navy-black);}
+  #mapa{height:440px;background:var(--navy-black);}
   @media (max-width:820px){#mapa{height:380px;}}
   .leaflet-container{background:var(--navy-black);font-family:'Inter',sans-serif;outline:none;}
   .leaflet-control-attribution{background:rgba(0,18,30,.75)!important;color:#7d90a8!important;font-size:9.5px!important;}
@@ -779,6 +779,20 @@
     .fila-nov .quien{grid-area:quien;} .fila-nov .qué{grid-area:que;font-size:11px;}
     .fila-nov .cuánto{grid-area:cuanto;} .fila-nov .cuándo{grid-area:cuando;}
   }
+
+  /* EL TABLERO: el mapa y la respuesta a la vista al mismo tiempo. Debajo de
+     1.100 pixeles se apilan, con el mapa primero: en un telefono dos columnas de
+     media pantalla no son dos columnas, son dos tiras ilegibles. */
+  .tablero{display:grid;grid-template-columns:1fr;gap:14px;align-items:start;}
+  @media (min-width:1100px){
+    .tablero{grid-template-columns:minmax(430px,1.05fr) minmax(400px,1fr);}
+    /* El mapa acompaña mientras se lee la respuesta, que puede ser larga. */
+    .tablero-mapa{position:sticky;top:12px;}
+  }
+  .tablero-respuesta{min-width:0;}
+  .tablero-respuesta > section.domain{margin:0;}
+  .como-se-usa{margin-top:12px;}
+  .como-se-usa .pasos{margin:8px 0 0;}
 
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
@@ -1419,16 +1433,8 @@
         </section>
     <section class="domain" id="mapa-seccion">
       <div class="domain-head"><h3>Mapa de situación</h3><span class="tag">33 Estados del padrón</span></div>
-      <ol class="pasos">
-        <li><b>Elegí un tema.</b> Son <span id="cuantos-temas">—</span>, agrupados por eje:
-            seguridad, defensa, gobernanza, desarrollo y fuentes. El mapa se pinta con ese
-            tema. Podés buscarlos por delito o actividad: cocaína, extorsión, coima.</li>
-        <li><b>Elegí un país o una zona</b>, o dejá toda la región. Lo que elijas acá manda
-            sobre <b>todo</b> lo que sigue más abajo, incluidas las noticias y las redes.</li>
-        <li><b>Si querés, cruzá con otro tema</b> para ver si se mueven juntos. No hace falta
-            para usar el registro.</li>
-      </ol>
-      <div id="composicion-temas"></div>
+
+
       <div class="mapa-barra">
         <div class="controles">
           <div class="control">
@@ -1446,7 +1452,7 @@
           </div>
           <button class="boton chico" id="limpiar-cruce">quitar cruce</button>
         </div>
-        <p class="nota-filtro" id="ayuda-cruce"><b>Para cruzar, tildá uno o más temas de la lista.</b> Podés escribir en el buscador para encontrarlos, y quitar cualquiera con la ✕ de su ficha. Con <b>un</b> tema tildado se dibuja una nube de puntos; con <b>dos o más</b>, una tabla comparada. El <b>país o zona</b> rige todo el registro, incluidas las noticias, el mapa de palabras y las redes.</p>
+
         <div class="modos">
           <button class="modo activo" data-modo="nivel">Nivel actual</button>
           <button class="modo" data-modo="1">Proyección 1 año</button>
@@ -1459,11 +1465,33 @@
       <p class="pendientes" id="pendientes"></p>
       <p class="explica-capa" id="explica-capa">—</p>
       <div id="panel-cruce"></div>
-      <div class="mapa-caja">
-        <div id="mapa"></div>
-        <div class="ficha-mapa" id="ficha-mapa"></div>
-        <div class="leyenda" id="leyenda"></div>
+      <div class="tablero">
+        <div class="tablero-mapa">
+          <div class="mapa-caja">
+            <div id="mapa"></div>
+            <div class="ficha-mapa" id="ficha-mapa"></div>
+            <div class="leyenda" id="leyenda"></div>
+          </div>
+        </div>
+        <!-- Acá se muda el explorador al cargar la página: el mismo elemento, no
+             una copia. Dos paneles iguales serían dos paneles que se
+             desincronizan, y el lector no sabría cuál le está contestando. -->
+        <div class="tablero-respuesta" id="tablero-respuesta"></div>
       </div>
+      <details class="aviso-cobertura como-se-usa">
+        <summary>Cómo se usa este mapa</summary>
+      <ol class="pasos">
+        <li><b>Elegí un tema.</b> Son <span id="cuantos-temas">—</span>, agrupados por eje:
+            seguridad, defensa, gobernanza, desarrollo y fuentes. El mapa se pinta con ese
+            tema. Podés buscarlos por delito o actividad: cocaína, extorsión, coima.</li>
+        <li><b>Elegí un país o una zona</b>, o dejá toda la región. Lo que elijas acá manda
+            sobre <b>todo</b> lo que sigue más abajo, incluidas las noticias y las redes.</li>
+        <li><b>Si querés, cruzá con otro tema</b> para ver si se mueven juntos. No hace falta
+            para usar el registro.</li>
+      </ol>
+      <div id="composicion-temas"></div>
+        <p class="nota-filtro" id="ayuda-cruce"><b>Para cruzar, tildá uno o más temas de la lista.</b> Podés escribir en el buscador para encontrarlos, y quitar cualquiera con la ✕ de su ficha. Con <b>un</b> tema tildado se dibuja una nube de puntos; con <b>dos o más</b>, una tabla comparada. El <b>país o zona</b> rige todo el registro, incluidas las noticias, el mapa de palabras y las redes.</p>
+      </details>
       <p class="mapa-pie">
         Límites de Natural Earth, escala 1:50 m, guardados en este repositorio.
         <b>El color de un país expresa un dato nacional</b>: ninguna de las fuentes en uso
@@ -3608,6 +3636,18 @@
       sel.dispatchEvent(new Event('change'));
       document.getElementById('ficha-pais')?.scrollIntoView({behavior:'smooth', block:'start'});
     });
+  }
+
+  // EL EXPLORADOR SE MUDA AL LADO DEL MAPA. Se mueve el MISMO elemento, con sus
+  // escuchas y sus identificadores: copiarlo habría dejado dos paneles que se
+  // desincronizan y el lector no sabría cuál le contesta. Si el hueco no existe
+  // —una versión vieja en caché, por ejemplo— el explorador se queda donde
+  // estaba y el registro sigue funcionando.
+  function mudarElExplorador(){
+    const hueco = document.getElementById('tablero-respuesta');
+    const nav = document.getElementById('navegador');
+    if(!hueco || !nav || hueco.contains(nav)) return;
+    hueco.appendChild(nav);
   }
 
   function armarNavegador(){
@@ -6960,6 +7000,7 @@
     paso('comercio de armas', armasVista);
     ordenarCautelas();
     plegarMetodo();
+    mudarElExplorador();
     llenarComparador();
     armarNavegador();
     paso('cuántos temas', contarTemas);
