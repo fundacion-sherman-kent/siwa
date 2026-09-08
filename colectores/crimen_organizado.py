@@ -120,10 +120,75 @@ ROTULOS = {
 # y estaban repartidos entre otros once mercados sin que se los pudiera ver.
 DROGAS = ["1.1.11", "1.1.10", "1.1.12", "1.1.13"]
 
-# Y sus definiciones, traducidas. Solo estas cuatro: son las que el registro
-# muestra en una seccion de nivel Ciudadano, donde una definicion en ingles no
-# sirve. La original viaja al lado en el mismo archivo, para contrastar.
+# Y las definiciones de LAS TREINTA Y SEIS medidas, en castellano. Eran cuatro
+# —las de drogas— y las otras treinta y dos se mostraban en ingles: un registro
+# que se publica para America Latina no puede explicar en ingles que es la
+# extorsion. No son traducciones literales sino definiciones propias de lo que
+# cada medida cubre; la original de GI-TOC viaja al lado, en el mismo archivo y
+# en el campo de siempre, para que cualquiera contraste.
 DEFINICIONES = {
+    "1": ("Nivel general del crimen organizado en el Estado. Sale de "
+              "promediar los mercados criminales y los actores criminales."),
+    "1.1": ("Valor, extensión y daño —monetario y no monetario— de los mercados "
+              "ilícitos que operan en el Estado."),
+    "1.1.1": ("Captación, traslado o retención de personas mediante coacción, "
+              "engaño, secuestro o fraude, con fines de explotación."),
+    "1.1.2": ("Facilitación del ingreso o del tránsito irregular de personas a "
+              "cambio de un beneficio, por parte de un grupo organizado."),
+    "1.1.3": ("Cobro forzado sobre un territorio o un mercado, incluida la "
+              "protección impuesta a comercios y vecinos."),
+    "1.1.4": ("Venta, adquisición, traslado y desvío de armas, sus partes y sus "
+              "municiones fuera del circuito legal."),
+    "1.1.5": ("Producción, transporte, depósito y venta de mercadería que se hace "
+              "pasar por original."),
+    "1.1.6": ("Transporte, manipulación y venta de bienes gravados —tabaco, "
+              "alcohol, combustible— evadiendo el impuesto."),
+    "1.1.7": ("Comercio y tenencia ilícita de especies vegetales protegidas, "
+              "incluida la tala y el tráfico de madera."),
+    "1.1.8": ("Caza furtiva, comercio y tenencia ilícita de especies animales "
+              "protegidas."),
+    "1.1.9": ("Extracción, contrabando, adulteración y minería ilegal de recursos "
+              "que no se reponen: minerales, hidrocarburos, piedras."),
+    "1.1.14": ("Delitos que dependen enteramente de la tecnología informática: "
+              "intrusión, secuestro de datos, ataque a sistemas."),
+    "1.1.15": ("Delitos que producen una pérdida de dinero por fraude, estafa o "
+              "manipulación financiera."),
+    "1.2": ("Peso e influencia de cada tipo de actor dentro del crimen "
+              "organizado del Estado."),
+    "1.2.1": ("Grupos con estructura definida, jerarquía reconocible y control "
+              "sobre un territorio o un mercado."),
+    "1.2.2": ("Asociaciones flexibles, sin estructura fija, que se juntan para "
+              "una actividad y se dispersan."),
+    "1.2.3": ("Actores criminales que operan desde adentro del aparato del "
+              "Estado."),
+    "1.2.4": ("Actores criminales, estatales o no, que operan fuera de su país de "
+              "origen."),
+    "1.2.5": ("Personas o empresas que, buscando ganancia, controlan parte de una "
+              "cadena legal y la usan para actividad ilícita."),
+    "2": ("Mecanismos que el Estado tiene en pie para enfrentar al crimen "
+              "organizado."),
+    "2.1": ("Papel del Estado frente al crimen organizado, y eficacia de esa "
+              "respuesta en el nivel más alto de decisión."),
+    "2.2": ("Mecanismos de control sobre el propio Estado, y grado en que rinde "
+              "cuentas de lo que hace."),
+    "2.3": ("Estructuras y procesos de trabajo con otros Estados y con "
+              "organismos internacionales."),
+    "2.4": ("Marco legal y estructuras que el Estado creó para responder al "
+              "crimen organizado."),
+    "2.5": ("Capacidad de la justicia para actuar con independencia, y del "
+              "sistema penitenciario para sostener esa acción."),
+    "2.6": ("Capacidad del Estado para investigar, reunir inteligencia y "
+              "proteger a la población."),
+    "2.7": ("Grado de control efectivo sobre el territorio propio y sobre las "
+              "fronteras."),
+    "2.8": "Capacidad de aplicar medidas contra el lavado de activos.",
+    "2.9": ("Capacidad de administrar la economía y de regular las "
+              "transacciones."),
+    "2.10": "Asistencia que se presta a las víctimas del crimen organizado.",
+    "2.11": ("Estrategias, medidas y recursos asignados a prevenir, antes de que "
+              "el hecho ocurra."),
+    "2.12": ("Grado en que la sociedad civil y otros actores no estatales pueden "
+              "intervenir en la respuesta."),
     "1.1.10": ("La producción, la distribución y la venta de heroína. El consumo se "
                "tiene en cuenta para determinar el alcance del mercado criminal."),
     "1.1.11": ("La producción, la distribución y la venta de cocaína y sus derivados. "
