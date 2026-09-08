@@ -643,6 +643,40 @@
   }
   .aviso-cobertura p{margin:0;font-size:12px;color:#C7D2E0;line-height:1.65;}
   .aviso-cobertura b{color:#ff9c86;}
+  /* El navegador: la ruta que se recorre y las fichas de cada nivel. */
+  .ruta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 6px;}
+  .ruta button{background:none;border:0;color:var(--orange);cursor:pointer;
+    font:inherit;font-weight:700;padding:2px 4px;border-radius:4px;}
+  .ruta button:hover{background:rgba(251,101,0,.12);}
+  .ruta span.sep{opacity:.5;}
+  .ruta span.aqui{font-weight:700;}
+  .eje-tarjeta{cursor:pointer;}
+  .eje-tarjeta:hover{outline:2px solid rgba(251,101,0,.45);outline-offset:1px;}
+  .falta{color:var(--orange);font-weight:700;}
+  .comparacion{width:100%;border-collapse:collapse;margin-top:10px;font-size:.94em;}
+  .comparacion th,.comparacion td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.10);
+    text-align:right;}
+  .comparacion th:first-child,.comparacion td:first-child{text-align:left;}
+  .comparacion thead th{position:sticky;top:0;background:#0E2135;}
+  .comparacion td.mejor{color:#3FA796;font-weight:700;}
+  .comparacion td.peor{color:var(--orange);font-weight:700;}
+
+  /* EL INFORME IMPRIMIBLE, PLEGADO EN PANTALLA. Ocupaba 65 pantallas repitiendo
+     lo que el lector ya recorrio. En PAPEL sale entero: la regla de impresion
+     anula el plegado. No se uso <details> justamente por eso: un <details>
+     cerrado no imprime su contenido, y el PDF saldria vacio. */
+  #informe{display:none;}
+  #informe.desplegado{display:block;}
+  #ver-informe{margin:8px 0;}
+  /* En PAPEL el informe sale entero: la regla que lo garantiza vive en el bloque
+     de impresion de mas abajo —#informe{display:block!important}— y esa gana por
+     ir despues. Aca NO se repite: dos lugares afirmando lo mismo se separan solos
+     el dia que alguien toque uno. El boton lo esconde la regla que ya oculta a
+     todos los hermanos del informe en papel. */
+  .cita-apa{display:block;background:rgba(255,255,255,.04);border-left:3px solid var(--orange);
+    padding:8px 10px;margin:6px 0;font-size:11px;line-height:1.6;color:#C7D2E0;}
+  .cita-apa i{color:#fff;font-style:italic;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1345,6 +1379,35 @@
         Argentina pero no aporta ni altera ninguna medición.
       </p>
         </section>
+    <section class="domain" id="navegador">
+      <div class="domain-head"><h3>Explorar</h3><span class="tag" id="tag-navegador">—</span></div>
+      <p class="nota-filtro" id="ayuda-navegador"><b>Elegí un país en el mapa y bajá por sus ejes
+        hasta el dato.</b> Cada nivel dice cuántas materias tiene y cuántas están sin dato para ese
+        Estado: lo que falta se declara acá arriba y no queda enterrado. Podés comparar hasta cuatro
+        países a la vez.</p>
+
+      <div class="mapa-barra">
+        <div class="controles">
+          <div class="control ancho">
+            <label for="buscar-navegador">Buscar una materia</label>
+            <input type="search" id="buscar-navegador" class="buscar-tema"
+                   placeholder="Buscá por tema o por delito: cocaína, extorsión, coima…"
+                   autocomplete="off">
+          </div>
+          <div class="control ancho">
+            <label for="comparar-pais">Comparar países</label>
+            <select id="comparar-pais"><option value="">Agregar un país…</option></select>
+          </div>
+          <button class="boton chico" id="limpiar-comparacion">quitar comparación</button>
+        </div>
+      </div>
+
+      <div class="ruta" id="ruta-navegador"></div>
+      <div class="cruce" id="panel-navegador"></div>
+      <div id="tabla-comparacion"></div>
+      <div id="caja-consulta"></div>
+        </section>
+
     <section class="domain" id="seis-materias" data-nivel="1">
       <div class="domain-head"><h3>Las seis materias</h3><span class="tag" id="tag-seis-materias">—</span></div>
       <details class="aviso-cobertura"><summary>Son las seis materias en las que trabaja la Fundación</summary>
@@ -2412,7 +2475,8 @@
           fuente excelente puede transmitir un dato dudoso.</p>
       </div>
         </div>
-    <div class="categoria" id="informe" data-nivel="2">
+    <button class="boton chico" id="ver-informe" aria-expanded="false" aria-controls="informe">Ver el informe completo</button>
+      <div class="categoria" id="informe" data-nivel="2">
       <div class="categoria-head"><h4>Informe del registro</h4><span class="tag">Público, sin cuenta</span></div>
       <div class="barra-informe">
         <span class="ambito-informe" id="ambito-informe">—</span>
@@ -2595,6 +2659,20 @@
                      ['explorador','Oficina — exploración de puertas oficiales'],
                      ['indice','Oficina — Índice de Opacidad, edición uno']];
 
+  // El informe imprimible se abre a pedido. En papel sale siempre entero: la
+  // regla de impresion anula el plegado, de modo que el PDF no cambia.
+  (function(){
+    const bt = document.getElementById('ver-informe');
+    const inf = document.getElementById('informe');
+    if(!bt || !inf) return;
+    bt.addEventListener('click', () => {
+      const abierto = inf.classList.toggle('desplegado');
+      bt.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      bt.textContent = abierto ? 'Ocultar el informe' : 'Ver el informe completo';
+      if(abierto) inf.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  })();
+
   function pintarFuentes(){
     const caja=document.getElementById('lista-fuentes'); if(!caja) return;
     // UNA SOLA LISTA. Dos listas con el mismo contenido no son un duplicado
@@ -2603,14 +2681,25 @@
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
     document.getElementById('tag-fuentes').textContent =
       conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
+    // LOS VACIOS SE PLIEGAN, NO SE QUITAN. Esta lista ocupaba 221.088 pixeles
+    // —unas 307 pantallas, el 47 % de la pagina en el nivel de analista— porque
+    // dibujaba las 36 fichas con todos sus vacios abiertos.
+    //
+    // La cabecera de cada fuente queda SIEMPRE visible: nombre, calificacion,
+    // fecha, si esta corroborada y CUANTOS vacios declara. Asi el lector ve que
+    // hay siete vacios sin abrir nada, y los lee si quiere. Lo declarado sigue
+    // declarado; lo que cambia es que no obliga a recorrer trescientas pantallas.
     caja.innerHTML = conjuntos.map(({rot,d})=>{
       const m=d.procedencia, c=m.calificacion;
+      const n = (m.vacios_declarados||[]).length;
       return `<div class="ficha-fuente" id="limites-${d.procedencia.colector}">
         <h4>${esc(rot)} <span class="calif">${c.fiabilidad}-${c.credibilidad}</span></h4>
         <div class="meta">${esc(m.fuente.nombre)} · obtenido ${momento(m.obtenido_en)} ·
           ${c.corroborado?'dos orígenes independientes':'fuente única, declarada'}</div>
         ${m.restriccion_de_uso ? `<div class="restriccion">${esc(m.restriccion_de_uso)}</div>` : ''}
-        <ul>${m.vacios_declarados.map(v=>`<li>${esc(v)}</li>`).join('')}</ul></div>`;
+        ${n ? `<details class="aviso-cobertura"><summary>${n} vacío${n===1?'':'s'} declarado${n===1?'':'s'}</summary>
+          <ul>${m.vacios_declarados.map(v=>`<li>${esc(v)}</li>`).join('')}</ul></details>`
+            : '<div class="meta">Sin vacíos declarados.</div>'}</div>`;
     }).join('');
   }
 
@@ -2977,9 +3066,515 @@
       caja.className = 'aviso-cobertura plegado-metodo';
       caja.innerHTML = '<summary>' + esc(rotulo) + '</summary>';
       (titulo || sec.firstElementChild).after(caja);
+      // EL INFORME IMPRIMIBLE NO ENTRA AL PLIEGUE, ni su boton. Un <details>
+      // cerrado puede llevarse su contenido al imprimir y dejar el PDF EN BLANCO
+      // —ya paso una vez en este sitio—. Que hoy Chrome lo imprima igual no es
+      // garantia: se lo deja afuera y se acabo la dependencia del navegador.
       let n = caja.nextElementSibling;
-      while(n){ const sig = n.nextElementSibling; caja.appendChild(n); n = sig; }
+      while(n){
+        const sig = n.nextElementSibling;
+        if(n.id !== 'informe' && n.id !== 'ver-informe') caja.appendChild(n);
+        n = sig;
+      }
     });
+  }
+
+  // ===================== EL NAVEGADOR =====================
+  //
+  // El registro llego a 99 pantallas en el nivel de analista porque mostraba las
+  // 91 materias juntas. El remedio no es recortar texto: es no mostrarlo todo a
+  // la vez. Se baja por niveles —pais, eje, materia— y en cada uno se puede
+  // buscar y comparar.
+  //
+  // LA REGLA QUE NO SE ROMPE: al plegar, lo que falta NO puede quedar enterrado.
+  // Cada nivel lleva el recuento de sus materias Y de cuantas estan sin dato para
+  // ese Estado, de modo que el vacio viaja hacia arriba.
+  let navEje = null, navMateria = null, navBusca = '', navComparar = [];
+  const TOPE_COMPARAR = 4;
+
+  // El valor de una materia para un Estado, con su lugar en dos escalas. Un
+  // numero solo no dice nada; un numero con su lugar, si. Es la leccion del
+  // indice de crimen organizado, que da el puesto en tres escalas.
+  function datoDeMateria(clave, iso){
+    const cap = (capas() || {})[clave];
+    if(!cap || !cap.conteo) return null;
+    const todos = cap.conteo() || {};
+    const v = todos[iso];
+    if(v === undefined) return {sinDato: true, cap};
+    const orden = Object.entries(todos).sort((a,b) => b[1] - a[1]);
+    const puesto = orden.findIndex(x => x[0] === iso) + 1;
+    const bloque = bloqueDe(iso);
+    const enBloque = orden.filter(([i]) => bloqueDe(i) === bloque);
+    return {
+      valor: v, cap, sinDato: false,
+      puesto, deCuantos: orden.length,
+      puestoBloque: enBloque.findIndex(x => x[0] === iso) + 1,
+      enBloque: enBloque.length, bloque,
+    };
+  }
+
+  const materiasDelEje = eje => MATERIAS()
+    .filter(m => m.eje === eje && (!m.disponible || m.disponible()))
+    .filter(m => !navBusca || sinTilde(m.eje + ' ' + m.rotulo + ' '
+        + (m.busca || PALABRAS[m.clave] || '')).includes(navBusca));
+
+  // ---- Nivel 1: los ejes de un Estado --------------------------------------
+  function panelEjes(iso){
+    const nombre = (padron.find(x => x.iso === iso) || {}).pais || iso;
+    return ORDEN_EJES.map(eje => {
+      const ms = materiasDelEje(eje);
+      if(!ms.length) return '';
+      let con = 0, sin = 0;
+      ms.forEach(m => {
+        const d = datoDeMateria(claveDeCapa(m.clave) || m.clave, iso);
+        if(d && !d.sinDato) con++; else sin++;
+      });
+      const comp = (compuesto().ejes || {})[eje];
+      let posicion = '';
+      if(comp && comp[iso]){
+        const orden = Object.entries(comp).sort((a,b) => b[1].valor - a[1].valor);
+        const p = orden.findIndex(x => x[0] === iso) + 1;
+        posicion = ' · <b>lugar ' + p + ' de ' + orden.length + '</b> en la región';
+      }
+      return '<div class="asunto eje-tarjeta" data-eje="' + esc(eje) + '">'
+        + '<h4>' + esc(eje) + ' <span class="edad ' + (sin ? 'viejo' : 'fresco') + '">'
+        + con + '</span></h4>'
+        + '<div class="foot"><span class="porque"><b>' + con + '</b> materia'
+        + (con === 1 ? '' : 's') + ' con dato para ' + esc(nombre)
+        + (sin ? ' · <span class="falta">' + sin + ' sin dato</span>' : '')
+        + posicion
+        + '<br>Tocá para ver el detalle.</span>'
+        + '<span class="badge medio">eje</span></div></div>';
+    }).join('');
+  }
+
+  // ---- Nivel 2: las materias de un eje -------------------------------------
+  function panelMaterias(iso, eje){
+    const nombre = (padron.find(x => x.iso === iso) || {}).pais || iso;
+    const ms = materiasDelEje(eje);
+    const con = [], sin = [];
+    ms.forEach(m => {
+      const clave = claveDeCapa(m.clave) || m.clave;
+      const d = datoDeMateria(clave, iso);
+      (d && !d.sinDato ? con : sin).push({m, clave, d});
+    });
+    let html = con.map(({m, clave, d}) =>
+      '<div class="asunto eje-tarjeta" data-materia="' + esc(clave) + '">'
+      + '<h4>' + esc(m.rotulo) + ' <span class="edad '
+      + (d.cap.subeEsPeor && d.puesto <= Math.ceil(d.deCuantos / 3) ? 'muy-viejo' : 'fresco')
+      + '">' + cifra(d.valor) + '</span></h4>'
+      + '<div class="foot"><span class="porque">'
+      + (d.cap.unidad ? esc(d.cap.unidad) + ' · ' : '')
+      + '<b>lugar ' + d.puesto + ' de ' + d.deCuantos + '</b> entre los Estados con dato'
+      + (d.enBloque > 1 ? ' · <b>' + d.puestoBloque + '.º de ' + d.enBloque + '</b> en '
+          + esc(d.bloque) : '')
+      + '<br>Tocá para la ficha completa.</span>'
+      + '<span class="badge medio">materia</span></div></div>').join('');
+    if(sin.length){
+      html += '<div class="asunto"><h4>' + sin.length + ' sin dato para ' + esc(nombre) + '</h4>'
+        + '<div class="foot"><span class="porque">'
+        + esc(sin.map(x => x.m.rotulo).join(' · '))
+        + '. <b>No valen cero: no están medidas para este Estado.</b> Cada una dice por qué '
+        + 'en su propia sección.</span><span class="badge unica">sin dato</span></div></div>';
+    }
+    return html || '<div class="asunto"><h4>Sin materias</h4><div class="foot">'
+      + '<span class="porque">Ninguna materia de este eje coincide con la búsqueda.'
+      + '</span></div></div>';
+  }
+
+  // ---- Nivel 3: la ficha de una materia ------------------------------------
+  function panelFicha(iso, clave){
+    const nombre = (padron.find(x => x.iso === iso) || {}).pais || iso;
+    const m = MATERIAS().find(x => (claveDeCapa(x.clave) || x.clave) === clave) || {};
+    const d = datoDeMateria(clave, iso);
+    const rot = m.rotulo || rotuloDeMateria(clave);
+    if(!d) return '';
+    if(d.sinDato){
+      return '<div class="asunto"><h4>' + esc(rot) + ' · ' + esc(nombre) + '</h4>'
+        + '<div class="foot"><span class="porque"><b>La fuente no publica este dato para '
+        + esc(nombre) + '.</b> No es que valga cero: es que no está medido.'
+        + (d.cap && d.cap.cautela ? '<br>' + esc(d.cap.cautela) : '')
+        + '</span><span class="badge unica">sin dato</span></div></div>';
+    }
+    const meta = metaInd(clave) || {};
+    const detalle = d.cap.detalle ? d.cap.detalle(iso) : null;
+    const serie = d.cap.serieDe ? (d.cap.serieDe(iso) || []) : [];
+    return '<div class="asunto"><h4>' + esc(rot) + ' · ' + esc(nombre)
+      + ' <span class="edad fresco">' + cifra(d.valor) + '</span></h4>'
+      + '<div class="foot"><span class="porque">'
+      + '<b>' + cifra(d.valor) + (d.cap.unidad ? ' ' + esc(d.cap.unidad) : '') + '</b>'
+      + ' · lugar <b>' + d.puesto + ' de ' + d.deCuantos + '</b> entre los Estados con dato'
+      + (d.enBloque > 1 ? ' · <b>' + d.puestoBloque + '.º de ' + d.enBloque + '</b> en '
+          + esc(d.bloque) : '')
+      + (detalle ? '<br>' + esc(detalle) : '')
+      + (meta.origen ? '<br><b>Fuente:</b> ' + esc(meta.origen) : '')
+      + (serie.length > 1 ? '<br><b>Serie:</b> ' + serie.length + ' años, de '
+          + serie[0].anio + ' a ' + serie[serie.length-1].anio : '')
+      + (d.cap.cautela ? '<br><b>Cuidado:</b> ' + esc(d.cap.cautela) : '')
+      + '</span><button class="boton chico" data-al-mapa="' + esc(clave)
+      + '">Ver en el mapa</button></div></div>';
+  }
+
+  // ---- La comparación entre Estados ----------------------------------------
+  //
+  // Era el hueco mas grande del registro: se podia mirar UN pais por vez. La
+  // pregunta de un periodista casi nunca es «cuanto tiene Mexico», es «como esta
+  // Mexico comparado con Colombia».
+  function tablaComparacion(){
+    const caja = document.getElementById('tabla-comparacion');
+    if(!caja) return;
+    if(navComparar.length < 2){
+      caja.innerHTML = navComparar.length === 1
+        ? '<p class="nota-filtro">Agregá al menos un país más para comparar.</p>' : '';
+      return;
+    }
+    // Que materias: las del eje abierto, o las del cruce, o las del eje del
+    // tema principal. Nunca las 91 juntas.
+    let claves = navMateria ? [navMateria]
+      : navEje ? materiasDelEje(navEje).map(m => claveDeCapa(m.clave) || m.clave)
+      : [capaActiva].concat(cruce);
+    claves = claves.filter((v,i,a) => v && a.indexOf(v) === i).slice(0, 14);
+
+    const nombre = iso => (padron.find(x => x.iso === iso) || {}).pais || iso;
+    let html = '<table class="comparacion"><thead><tr><th>Materia</th>'
+      + navComparar.map(i => '<th>' + esc(nombre(i)) + '</th>').join('')
+      + '</tr></thead><tbody>';
+    claves.forEach(c => {
+      const cap = (capas() || {})[c];
+      if(!cap || !cap.conteo) return;
+      const vals = navComparar.map(i => datoDeMateria(c, i));
+      const nums = vals.filter(v => v && !v.sinDato).map(v => v.valor);
+      if(!nums.length) return;
+      const alto = Math.max(...nums), bajo = Math.min(...nums);
+      html += '<tr><td>' + esc(rotuloDeMateria(c))
+        + (cap.unidad ? ' <small>(' + esc(cap.unidad) + ')</small>' : '') + '</td>'
+        + vals.map(v => {
+            if(!v || v.sinDato) return '<td><small>sin dato</small></td>';
+            // El color dice CUAL es peor solo cuando la materia esta orientada.
+            const clase = (cap.subeEsPeor === undefined || nums.length < 2) ? ''
+              : v.valor === alto ? (cap.subeEsPeor ? 'peor' : 'mejor')
+              : v.valor === bajo ? (cap.subeEsPeor ? 'mejor' : 'peor') : '';
+            return '<td class="' + clase + '">' + cifra(v.valor)
+              + ' <small>' + v.puesto + '.º</small></td>';
+          }).join('') + '</tr>';
+    });
+    html += '</tbody></table>'
+      + '<p class="nota-filtro"><b>El número chico es el lugar entre los 33.</b> El color '
+      + 'marca el mejor y el peor de los comparados, y sólo aparece en las materias que '
+      + 'tienen una dirección declarada: hay materias donde «más» no es ni mejor ni peor.</p>';
+    // La figura va PRIMERO: se ve el reparto antes que la grilla. La tabla
+    // queda debajo, porque el numero exacto tambien hace falta.
+    const figuras = claves.slice(0, 6).map(c => figuraComparacion(c, navComparar))
+      .filter(Boolean).join('');
+    caja.innerHTML = figuras + html;
+  }
+
+  // ---- El pintado del navegador --------------------------------------------
+  function navegadorVista(){
+    const panel = document.getElementById('panel-navegador');
+    const ruta = document.getElementById('ruta-navegador');
+    const tag = document.getElementById('tag-navegador');
+    if(!panel || !ruta) return;
+
+    const iso = paisFiltro;
+    if(!iso){
+      ruta.innerHTML = '';
+      panel.innerHTML = '<div class="asunto"><h4>Elegí un país</h4><div class="foot">'
+        + '<span class="porque">Tocá un Estado en el mapa, o elegilo en la lista de arriba. '
+        + 'Desde acá se baja por sus ejes hasta el dato, y se puede comparar con otros.'
+        + '</span></div></div>';
+      if(tag) tag.textContent = 'sin país elegido';
+      tablaComparacion();
+      return;
+    }
+    const nombre = (padron.find(x => x.iso === iso) || {}).pais || iso;
+
+    // La ruta recorrida, siempre visible: se sabe donde se esta y como volver.
+    let r = '<button data-ir="pais">' + esc(nombre) + '</button>';
+    if(navEje) r += '<span class="sep">›</span><button data-ir="eje">' + esc(navEje) + '</button>';
+    if(navMateria) r += '<span class="sep">›</span><span class="aqui">'
+      + esc(rotuloDeMateria(navMateria)) + '</span>';
+    ruta.innerHTML = r;
+
+    if(navMateria) panel.innerHTML = panelFicha(iso, navMateria);
+    else if(navEje) panel.innerHTML = panelMaterias(iso, navEje);
+    else panel.innerHTML = panelEjes(iso);
+
+    if(tag) tag.textContent = navMateria ? 'ficha de la materia'
+      : navEje ? navEje + ' · ' + esc(nombre)
+      : esc(nombre) + ' · ' + ORDEN_EJES.length + ' ejes';
+
+    tablaComparacion();
+    pintarCajaConsulta();
+  }
+
+  // ---- Los clics -----------------------------------------------------------
+  function armarNavegador(){
+    const panel = document.getElementById('panel-navegador');
+    const ruta = document.getElementById('ruta-navegador');
+    const busca = document.getElementById('buscar-navegador');
+    const sel = document.getElementById('comparar-pais');
+    const limpiar = document.getElementById('limpiar-comparacion');
+    if(!panel || panel.dataset.armado) return;
+    panel.dataset.armado = '1';
+
+    panel.addEventListener('click', ev => {
+      const eje = ev.target.closest('[data-eje]');
+      const mat = ev.target.closest('[data-materia]');
+      const mapa = ev.target.closest('[data-al-mapa]');
+      if(mapa){
+        capaActiva = mapa.dataset.alMapa; repintar();
+        document.getElementById('mapa')?.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+      }
+      if(mat){ navMateria = mat.dataset.materia; repintar(); return; }
+      if(eje){ navEje = eje.dataset.eje; navMateria = null; repintar(); }
+    });
+
+    ruta.addEventListener('click', ev => {
+      const b = ev.target.closest('[data-ir]');
+      if(!b) return;
+      if(b.dataset.ir === 'pais'){ navEje = null; navMateria = null; }
+      if(b.dataset.ir === 'eje'){ navMateria = null; }
+      repintar();
+    });
+
+    if(busca) busca.addEventListener('input', () => {
+      navBusca = sinTilde(busca.value.trim());
+      // Buscar desde la ficha no tiene sentido: se vuelve al eje.
+      if(navBusca && navMateria) navMateria = null;
+      repintar();
+    });
+
+    if(sel) sel.addEventListener('change', () => {
+      const v = sel.value;
+      if(v && !navComparar.includes(v) && navComparar.length < TOPE_COMPARAR){
+        navComparar.push(v);
+      }
+      sel.value = '';
+      repintar();
+    });
+
+    if(limpiar) limpiar.addEventListener('click', () => { navComparar = []; repintar(); });
+  }
+
+  // El desplegable de comparacion se llena con el padron, una sola vez.
+  function llenarComparador(){
+    const sel = document.getElementById('comparar-pais');
+    if(!sel || sel.dataset.lleno || !padron.length) return;
+    sel.dataset.lleno = '1';
+    sel.innerHTML = '<option value="">Agregar un país…</option>'
+      + [...padron].sort((a,b) => a.pais.localeCompare(b.pais,'es'))
+          .map(p => '<option value="' + p.iso + '">' + esc(p.pais) + '</option>').join('');
+  }
+
+  // ============ LA CONSULTA SE LLEVA: PLANILLA Y CITA EN APA 7 ============
+  //
+  // Un informe completo del pais no le sirve a quien busco UNA cosa. Lo que se
+  // descarga es LO QUE SE MIRO.
+  function loQueSeMiro(){
+    const iso = paisFiltro;
+    let claves;
+    if(navMateria) claves = [navMateria];
+    else if(navEje) claves = materiasDelEje(navEje).map(m => claveDeCapa(m.clave) || m.clave);
+    else claves = [capaActiva].concat(cruce);
+    claves = claves.filter((v,i,a) => v && a.indexOf(v) === i);
+    const estados = navComparar.length ? navComparar.slice()
+      : iso ? [iso]
+      : (padron || []).map(p => p.iso);
+    const ambito = navComparar.length ? navComparar.length + ' Estados comparados'
+      : iso ? ((padron.find(x=>x.iso===iso)||{}).pais || iso)
+      : (bloqueActivo() || 'América Latina y el Caribe');
+    return {claves, estados, ambito,
+            titulo: navMateria ? rotuloDeMateria(navMateria)
+                  : navEje ? 'Eje ' + navEje
+                  : claves.map(rotuloDeMateria).join(' y ')};
+  }
+
+  // LA CITA. Nombra al productor del dato Y al registro: omitir al primero seria
+  // atribuirse trabajo ajeno; omitir al segundo, impedir que el lector encuentre
+  // la version consultada.
+  function citaAPA(){
+    const q = loQueSeMiro();
+    const hoy = new Date();
+    const anio = hoy.getFullYear();
+    const consulta = hoy.toLocaleDateString('es-AR', {day:'numeric', month:'long', year:'numeric'});
+    const productores = [...new Set(q.claves.map(c => {
+      const m = metaInd(c) || {};
+      if(m.origen) return m.origen;
+      const p = procedenciaDe(c);
+      return p && p.fuente ? (p.fuente.nombre || p.fuente) : null;
+    }).filter(Boolean))];
+    const url = location.href;
+    const propia = 'Fundación Sherman Kent, Oficina de Generación de Inteligencia. '
+      + '(' + anio + '). <i>SIWA — Reporte de situación de América Latina y el Caribe: '
+      + esc(q.titulo) + ' (' + esc(q.ambito) + ')</i> [Conjunto de datos]. '
+      + 'Recuperado el ' + consulta + ' de ' + esc(url);
+    const deTerceros = productores.map(p =>
+      esc(p) + '. (' + anio + '). <i>' + esc(q.titulo) + '</i> [Conjunto de datos]. '
+      + 'Citado en SIWA, Fundación Sherman Kent.');
+    return {propia, deTerceros, q};
+  }
+
+  // De donde viene cada materia, buscando en todos los archivos cargados.
+  function procedenciaDe(clave){
+    for(const k of Object.keys(almacen)){
+      const d = almacen[k];
+      if(!d || !d.procedencia) continue;
+      if((d.indicadores || []).some(i => i.clave === clave)) return d.procedencia;
+    }
+    // Las materias que salen de un colector entero —crimen, pobreza, sismos—
+    // se reconocen por el archivo que las alimenta.
+    const dueño = {crimen:['1.1','1.2'], pobreza:['pobreza'], sismos:['sismos']};
+    if(CODIGO_DE_MATERIA && CODIGO_DE_MATERIA[clave] && almacen.crimen)
+      return almacen.crimen.procedencia;
+    return null;
+  }
+
+  // La planilla de lo consultado: las materias miradas por los Estados mirados.
+  function planillaDeLaConsulta(){
+    const q = loQueSeMiro();
+    const sep = ';';
+    const esc2 = v => {
+      let t = String(v ?? '');
+      const c = t.charCodeAt(0);
+      if(c===61||c===64||c===9||c===13||((c===43||c===45)&&!isFinite(Number(t)))) t = "'" + t;
+      return '"' + t.replace(/"/g,'""') + '"';
+    };
+    const nombre = i => (padron.find(x=>x.iso===i)||{}).pais || i;
+    const cita = citaAPA();
+    // La cita en la planilla va en texto llano: se le quitan las etiquetas Y las
+    // entidades, porque «&amp;» en medio de una direccion la vuelve inservible
+    // para quien la copie.
+    const sinEtiquetas = h => String(h).replace(/<[^>]+>/g, '')
+      .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    const lineas = [
+      [ 'SIWA — Fundación Sherman Kent' ].map(esc2).join(sep),
+      [ 'Consulta: ' + q.titulo + ' · ' + q.ambito ].map(esc2).join(sep),
+      [ location.href ].map(esc2).join(sep),
+      [ 'Cómo citar (APA 7): ' + sinEtiquetas(cita.propia) ].map(esc2).join(sep),
+      '',
+      ['estado','materia','valor','unidad','lugar_entre_los_que_tienen_dato','de_cuantos',
+       'lugar_en_su_bloque','bloque','cautela'].join(sep),
+    ];
+    q.estados.forEach(iso => q.claves.forEach(c => {
+      const d = datoDeMateria(c, iso);
+      if(!d) return;
+      lineas.push([
+        nombre(iso), rotuloDeMateria(c),
+        d.sinDato ? '' : d.valor,
+        d.cap && d.cap.unidad ? d.cap.unidad : '',
+        d.sinDato ? '' : d.puesto, d.sinDato ? '' : d.deCuantos,
+        d.sinDato ? '' : d.puestoBloque, d.sinDato ? '' : d.bloque,
+        d.cap && d.cap.cautela ? d.cap.cautela : '',
+      ].map(esc2).join(sep));
+    }));
+    return {texto: '﻿' + lineas.join('\r\n'),
+            nombre: 'siwa-' + (q.titulo||'consulta').toLowerCase()
+              .normalize('NFD').replace(/[̀-ͯ]/g,'')
+              .replace(/[^a-z0-9]+/g,'-').slice(0,50)
+              + '-' + new Date().toISOString().slice(0,10) + '.csv'};
+  }
+
+  function pintarCajaConsulta(){
+    const caja = document.getElementById('caja-consulta');
+    if(!caja) return;
+    const cita = citaAPA();
+    caja.innerHTML =
+      '<div class="asunto"><h4>Llevarse esta consulta</h4>'
+      + '<div class="foot"><span class="porque">'
+      + '<b>Se descarga lo que estás mirando</b> —' + esc(cita.q.titulo) + ' · '
+      + esc(cita.q.ambito) + '—, no el informe completo del país.'
+      + '<br><br><b>Cómo citar, norma APA 7:</b>'
+      + '<br><span class="cita-apa" id="cita-propia">' + cita.propia + '</span>'
+      + (cita.deTerceros.length
+         ? '<br><br><b>Y el productor del dato:</b><br>'
+           + cita.deTerceros.map(x => '<span class="cita-apa">' + x + '</span>').join('<br>')
+         : '')
+      + '</span>'
+      + '<span><button class="boton chico" id="bajar-consulta">Descargar la planilla</button> '
+      + '<button class="boton chico" id="copiar-cita">Copiar la cita</button></span>'
+      + '</div></div>';
+
+    document.getElementById('bajar-consulta')?.addEventListener('click', () => {
+      const p = planillaDeLaConsulta();
+      const blob = new Blob([p.texto], {type:'text/csv;charset=utf-8;'});
+      const dir = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = dir; a.download = p.nombre;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(dir), 60000);
+      avisar('Planilla de la consulta descargada.');
+    });
+    document.getElementById('copiar-cita')?.addEventListener('click', () => {
+      const t = document.getElementById('cita-propia');
+      alPortapapeles(t ? t.textContent : '', 'Cita copiada.');
+    });
+  }
+
+  // ============ LA FIGURA DE LA COMPARACION ============
+  //
+  // Una figura que no dice de donde sale es peor que una tabla: convence sin
+  // permitir comprobar. Por eso cada barra lleva su cifra escrita y el pie lleva
+  // fuente, fecha, calificacion y cautela. Se dibuja en SVG, sin biblioteca
+  // ajena: el registro no carga codigo de terceros.
+  function figuraComparacion(clave, estados){
+    const cap = (capas() || {})[clave];
+    if(!cap || !cap.conteo || estados.length < 2) return '';
+    const datos = estados.map(iso => ({iso, d: datoDeMateria(clave, iso)}))
+      .filter(x => x.d && !x.d.sinDato);
+    if(datos.length < 2) return '';
+    const nombre = i => (padron.find(x => x.iso === i) || {}).pais || i;
+    const maximo = Math.max(...datos.map(x => x.d.valor));
+    const minimo = Math.min(0, ...datos.map(x => x.d.valor));
+    const rango = (maximo - minimo) || 1;
+    const altoFila = 34, ancho = 560, margenIzq = 132, margenDer = 76;
+    const util = ancho - margenIzq - margenDer;
+    const alto = datos.length * altoFila + 16;
+
+    const barras = datos.map((x, i) => {
+      const y = i * altoFila + 8;
+      const w = Math.max(2, (x.d.valor - minimo) / rango * util);
+      // El color sigue la orientacion DECLARADA de la materia. Si la materia no
+      // tiene direccion —hay muchas donde «mas» no es ni mejor ni peor— se pinta
+      // todo del mismo tono: pintar de rojo lo que no esta orientado seria emitir
+      // un juicio que la fuente no emite.
+      const orientada = cap.subeEsPeor !== undefined;
+      const peor = orientada && (cap.subeEsPeor ? x.d.valor === maximo : x.d.valor === minimo);
+      const color = !orientada ? 'rgba(140,0,224,.75)'
+                  : peor ? 'rgba(251,101,0,.85)' : 'rgba(63,167,150,.7)';
+      return '<g>'
+        + '<text x="' + (margenIzq - 8) + '" y="' + (y + 15) + '" text-anchor="end" '
+        + 'fill="#C7D2E0" font-size="11">' + esc(nombre(x.iso)) + '</text>'
+        + '<rect x="' + margenIzq + '" y="' + y + '" width="' + w.toFixed(1)
+        + '" height="20" rx="3" fill="' + color + '"></rect>'
+        + '<text x="' + (margenIzq + w + 6) + '" y="' + (y + 15) + '" '
+        + 'fill="#fff" font-size="11" font-weight="700">' + cifra(x.d.valor) + '</text>'
+        + '<text x="' + (margenIzq + w + 6) + '" y="' + (y + 15) + '" '
+        + 'fill="#7d90a8" font-size="9" dx="' + (String(cifra(x.d.valor)).length * 7 + 6)
+        + '">' + x.d.puesto + '.º de ' + x.d.deCuantos + '</text>'
+        + '</g>';
+    }).join('');
+
+    const proc = procedenciaDe(clave);
+    const c = proc && proc.calificacion;
+    const pie = '<div class="foot"><span class="porque">'
+      + (cap.unidad ? '<b>Unidad:</b> ' + esc(cap.unidad) + '. ' : '')
+      + (proc ? '<b>Fuente:</b> ' + esc(proc.fuente.nombre || proc.fuente)
+                + ' · obtenido ' + momento(proc.obtenido_en)
+                + (c ? ' · calificación ' + c.fiabilidad + '-' + c.credibilidad : '') + '. ' : '')
+      + (cap.subeEsPeor === undefined
+         ? '<b>Esta materia no tiene una dirección declarada:</b> el color no dice cuál es '
+           + 'mejor, sólo separa las barras. '
+         : '')
+      + (cap.cautela ? '<br><b>Cuidado:</b> ' + esc(cap.cautela) : '')
+      + '</span><span class="badge medio">figura</span></div>';
+
+    return '<div class="asunto"><h4>' + esc(rotuloDeMateria(clave)) + '</h4>'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="100%" '
+      + 'style="max-width:' + ancho + 'px;height:auto" role="img" aria-label="'
+      + esc(rotuloDeMateria(clave)) + ', comparación entre ' + datos.length + ' Estados">'
+      + barras + '</svg>' + pie + '</div>';
   }
 
   function MATERIAS(){
@@ -5449,6 +6044,9 @@
     paso('comercio de armas', armasVista);
     ordenarCautelas();
     plegarMetodo();
+    llenarComparador();
+    armarNavegador();
+    paso('explorador', navegadorVista);
     paso('narcotráfico', narcotraficoVista);
     paso('crimen organizado', crimenVista);
     paso('designados por el Consejo', designadosVista);
