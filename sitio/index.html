@@ -5974,6 +5974,15 @@
       const caja = document.getElementById('mapa');
       if(!caja || caja.clientHeight < 40 || caja.clientWidth < 40) return false;
       mapa.fitBounds(b, {padding:[12,12]});
+      // EL MAPA QUEDA ENCERRADO EN LA REGION. Sin esto se podia arrastrar América
+      // Latina fuera del recuadro y quedaba un rectángulo vacío —y el arrastre
+      // empujaba el ancho de la página, que es lo que corría el encabezado—.
+      // El margen es holgado: encierra sin que se sienta un corral.
+      mapa.setMaxBounds(b.pad(0.35));
+      // Y no se aleja más allá de la región: alejarse más sólo servía para
+      // perder de vista los 33 Estados que este registro mira.
+      const z = mapa.getZoom();
+      if(Number.isFinite(z)) mapa.setMinZoom(Math.max(2, z - 1));
       return true;
     }catch(error){
       // Se deja constancia en la consola y se sigue: no se detiene el registro.
@@ -9727,7 +9736,13 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       // plano, ventana angosta—, calcular el encuadre da coordenadas invalidas,
       // Leaflet lanza «Invalid LatLng» y esa excepcion CORTA EL RESTO DEL GUION:
       // el mapa queda trabado y los desplegables vacios, sin decir por que.
-      mapa=L.map('mapa',{zoomControl:true,minZoom:2,maxZoom:8,worldCopyJump:false})
+      // scrollWheelZoom apagado: en una pagina larga, pasar el mouse por el mapa y
+      // girar la rueda trababa el desplazamiento de la pagina y encima cambiaba
+      // el encuadre sin que nadie lo pidiera. Se acerca con los botones + y −,
+      // con dos dedos en un tactil, y tocando un pais, que es lo que se hace.
+      // maxBoundsViscosity en 1 hace que el borde sea un tope y no un elastico.
+      mapa=L.map('mapa',{zoomControl:true,minZoom:2,maxZoom:8,worldCopyJump:false,
+                         scrollWheelZoom:false, maxBoundsViscosity:1.0})
              .setView([-15, -65], 3);
       mapa.attributionControl.setPrefix('');
       mapa.attributionControl.addAttribution('Límites: Natural Earth 1:50 m · dominio público');
