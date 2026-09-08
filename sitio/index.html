@@ -3286,9 +3286,10 @@
   function tablaComparacion(){
     const caja = document.getElementById('tabla-comparacion');
     if(!caja) return;
-    if(navComparar.length < 2){
-      caja.innerHTML = navComparar.length === 1
-        ? '<p class="nota-filtro">Agregá al menos un país más para comparar.</p>' : '';
+    const conQuienes = estadosComparados();
+    if(conQuienes.length < 2){
+      caja.innerHTML = conQuienes.length === 1
+        ? '<p class="nota-filtro">Agregá otro Estado y se compara con éste.</p>' : '';
       return;
     }
     // Que materias: las del eje abierto, o las del cruce, o las del eje del
@@ -3300,12 +3301,12 @@
 
     const nombre = iso => (padron.find(x => x.iso === iso) || {}).pais || iso;
     let html = '<div class="caja-tabla"><table class="comparacion"><thead><tr><th>Materia</th>'
-      + navComparar.map(i => '<th>' + esc(nombre(i)) + '</th>').join('')
+      + conQuienes.map(i => '<th>' + esc(nombre(i)) + '</th>').join('')
       + '</tr></thead><tbody>';
     claves.forEach(c => {
       const cap = (capas() || {})[c];
       if(!cap || !cap.conteo) return;
-      const vals = navComparar.map(i => datoDeMateria(c, i));
+      const vals = conQuienes.map(i => datoDeMateria(c, i));
       const nums = vals.filter(v => v && !v.sinDato).map(v => v.valor);
       if(!nums.length) return;
       const alto = Math.max(...nums), bajo = Math.min(...nums);
@@ -3327,7 +3328,7 @@
       + 'tienen una dirección declarada: hay materias donde «más» no es ni mejor ni peor.</p>';
     // La figura va PRIMERO: se ve el reparto antes que la grilla. La tabla
     // queda debajo, porque el numero exacto tambien hace falta.
-    const figuras = claves.slice(0, 6).map(c => figuraComparacion(c, navComparar))
+    const figuras = claves.slice(0, 6).map(c => figuraComparacion(c, conQuienes))
       .filter(Boolean).join('');
     caja.innerHTML = figuras + html;
   }
@@ -3455,7 +3456,8 @@
 
     if(sel) sel.addEventListener('change', () => {
       const v = sel.value;
-      if(v && !navComparar.includes(v) && navComparar.length < TOPE_COMPARAR){
+      if(v && !navComparar.includes(v) && v !== paisFiltro
+         && estadosComparados().length < TOPE_COMPARAR){
         navComparar.push(v);
       }
       sel.value = '';
@@ -3466,6 +3468,16 @@
   }
 
   // El desplegable de comparacion se llena con el padron, una sola vez.
+  // LOS ESTADOS DE LA COMPARACIÓN: el que se está mirando, primero, y los que el
+  // lector agregó. Antes la comparación dejaba afuera al país cuya ficha estaba
+  // abierta: se agregaba Colombia estando en Brasil y el registro pedía «al menos
+  // un país más», o comparaba a los agregados entre sí y a Brasil ni lo nombraba.
+  function estadosComparados(){
+    const l = paisFiltro ? [paisFiltro] : [];
+    navComparar.forEach(i => { if(!l.includes(i)) l.push(i); });
+    return l;
+  }
+
   function llenarComparador(){
     const sel = document.getElementById('comparar-pais');
     if(!sel || sel.dataset.lleno || !padron.length) return;
@@ -3486,10 +3498,11 @@
     else if(navEje) claves = materiasDelEje(navEje).map(m => claveDeCapa(m.clave) || m.clave);
     else claves = [capaActiva].concat(cruce);
     claves = claves.filter((v,i,a) => v && a.indexOf(v) === i);
-    const estados = navComparar.length ? navComparar.slice()
+    const comp = estadosComparados();
+    const estados = comp.length > 1 ? comp.slice()
       : iso ? [iso]
       : (padron || []).map(p => p.iso);
-    const ambito = navComparar.length ? navComparar.length + ' Estados comparados'
+    const ambito = comp.length > 1 ? comp.length + ' Estados comparados'
       : iso ? ((padron.find(x=>x.iso===iso)||{}).pais || iso)
       : (bloqueActivo() || 'América Latina y el Caribe');
     return {claves, estados, ambito,
@@ -5538,6 +5551,16 @@
       bloqueFiltro ? u.searchParams.set('zona', bloqueFiltro) : u.searchParams.delete('zona');
       u.searchParams.set('tema', capaActiva);
       u.searchParams.set('nivel', String(nivel));
+      // EL EJE Y LA MATERIA ABIERTOS TAMBIÉN VAN EN LA DIRECCIÓN. Sin esto el
+      // lector que llegaba al dato no podía mandarlo: copiaba la dirección y el
+      // que la abría caía en la portada. Y la cita APA que este registro genera
+      // toma location.href, así que apuntaba a una página que no mostraba lo
+      // citado — una cita que no lleva a la fuente no es una cita.
+      navEje ? u.searchParams.set('eje', navEje) : u.searchParams.delete('eje');
+      navMateria ? u.searchParams.set('materia', navMateria)
+                 : u.searchParams.delete('materia');
+      navComparar.length ? u.searchParams.set('comparar', navComparar.join(','))
+                         : u.searchParams.delete('comparar');
       history.replaceState(null, '', u);
     }catch(e){}
   }
@@ -5548,6 +5571,13 @@
       const n = +q.get('nivel'); if(n >= 1 && n <= NIVEL_MAXIMO) nivel = n;
       const t = q.get('tema'); if(t) capaActiva = t;
       const z = q.get('zona'); if(z) bloqueFiltro = z;
+      // Se restaura donde estaba el lector: el eje, la materia y con quién
+      // estaba comparando. Un enlace que no devuelve a lo mismo no sirve para
+      // mandar ni para citar.
+      const ej = q.get('eje'); if(ej) navEje = ej;
+      const ma = q.get('materia'); if(ma){ navMateria = ma; }
+      const cp = q.get('comparar');
+      if(cp) navComparar = cp.split(',').filter(x => /^[A-Z]{3}$/.test(x)).slice(0, 4);
       const pa = q.get('pais');
       if(pa && padron.length){
         const p = padron.find(x => x.iso === pa);
