@@ -166,7 +166,12 @@
   }
   #estado-general.detenido .status-dot{background:#fff;box-shadow:none;}
 
-  .hero{padding:56px 28px 40px;max-width:1180px;margin:0 auto;border-bottom:1px solid var(--line);}
+  .hero{padding:56px 28px 40px;max-width:1180px;margin:0 auto;border-bottom:1px solid var(--line);
+    /* EL PRIMER PANEL, con dos colores del manual: del navy al violeta
+       profundo. No es un degradado inventado: son #00121E y #460070. */
+    background:linear-gradient(135deg, var(--navy-hondo) 0%, var(--navy) 42%, #2C0248 100%);
+    color:#C7D2E0;
+  }
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1.2px;
     text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:18px;
@@ -538,13 +543,13 @@
     font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--tenue);font-weight:700;
   }
   .control select{
-    width:100%;background:#04202f;color:var(--texto-alto);border:1px solid var(--line);
+    width:100%;background:var(--campo);color:var(--texto-alto);border:1px solid var(--line);
     border-radius:7px;padding:9px 11px;font-family:inherit;font-size:12.5px;
   }
   .control select:focus{outline:2px solid var(--orange);outline-offset:1px;}
   .control.ancho{flex:1 1 100%;}
   .buscar-tema{
-    width:100%;background:#04202f;color:var(--texto-alto);border:1px solid var(--line);
+    width:100%;background:var(--campo);color:var(--texto-alto);border:1px solid var(--line);
     border-radius:7px;padding:8px 11px;font-family:inherit;font-size:12.5px;
   }
   .buscar-tema:focus{outline:2px solid var(--orange);outline-offset:1px;}
@@ -581,7 +586,7 @@
   .elegidos .ninguno{color:var(--tenue);font-size:11.5px;padding:3px 0;}
   .control select[multiple]{padding:6px 8px;min-height:40px;}
   .control select optgroup{background:#00121E;color:var(--tenue);font-style:normal;font-weight:700;}
-  .control select option{background:#04202f;color:var(--texto-alto);padding:3px 0;}
+  .control select option{background:var(--campo);color:var(--texto-alto);padding:3px 0;}
   #nota-controles{margin:2px 0 0;}
   @media (max-width:720px){ .control{flex:1 1 100%;} }
   .temas{display:flex;gap:6px;flex-wrap:wrap;}
@@ -1030,7 +1035,7 @@
      el manual tiene siete y los otros cuatro no aparecían en ninguna parte. */
   :root{
     /* LAS NUEVE DE LA ESTRUCTURA. El tema claro redefine solo estas. */
-    --fondo:#00121E; --panel:#0E2135; --texto:#C7D2E0; --texto-2:#9fb0c4;
+    --fondo:#00121E; --panel:#0E2135; --campo:#04202f; --texto:#C7D2E0; --texto-2:#9fb0c4;
     --texto-alto:#E8EEF5; --texto-max:#ffffff; --tenue:#7d90a8;
     --velo-1:rgba(255,255,255,.03); --velo-2:rgba(255,255,255,.07);
     --velo-3:rgba(255,255,255,.10);
@@ -1748,7 +1753,7 @@
      texto. Solo redefine la estructura: el naranja de «peor», el verde de
      «mejor» y el punteado de «sin dato» NO cambian, porque son significado. */
   body.claro{
-    --fondo:#F7F7F5; --panel:#FFFFFF; --texto:#2A3440; --texto-2:#46566A;
+    --fondo:#F7F7F5; --panel:#FFFFFF; --campo:#FFFFFF; --texto:#2A3440; --texto-2:#46566A;
     --texto-alto:#10161E; --texto-max:#00121E; --tenue:#5A6B7D;
     --velo-1:rgba(0,18,30,.035); --velo-2:rgba(0,18,30,.08); --velo-3:rgba(0,18,30,.12);
     --line:#E3DCD0;
@@ -1758,10 +1763,13 @@
      Sin esto, en tema claro el hero conservaba el fondo navy y los textos se
      volvían oscuros: el título, los tres niveles y la bajada quedaban
      ilegibles. Medido en pantalla. */
+  /* `color` SE HEREDA COMO VALOR, no como referencia a la variable: sin esta
+     línea el hero heredaba el gris oscuro del body y el título desaparecía
+     sobre el navy. Medido en pantalla. */
   body.claro .hero,
   body.claro .banda-superior,
   body.claro .ventana-analisis .va-barra{
-    background:var(--navy);
+    color:var(--texto);
     --texto:#C7D2E0; --texto-2:#9fb0c4; --texto-alto:#E8EEF5; --texto-max:#ffffff;
     --tenue:#8FA0B4; --panel:#0E2135;
     --velo-1:rgba(255,255,255,.04); --velo-2:rgba(255,255,255,.09);
@@ -1777,6 +1785,41 @@
     border-radius:999px;padding:6px 14px;font:inherit;font-size:11.5px;cursor:pointer;
     display:inline-flex;align-items:center;gap:7px;min-height:34px;}
   .cambia-tema:hover{border-color:var(--tinta);color:var(--texto-max);}
+
+  /* El título del primer panel, en blanco: era el gris del cuerpo y competía
+     con el naranja en vez de acompañarlo. */
+  h2.hero-title{color:#ffffff;}
+  body.claro h2.hero-title{color:#ffffff;}
+
+  /* EL NOMBRE DEL SITIO. Estaba en el mismo gris tenue que el resto de la
+     barra y se perdía: es el nombre, y tiene que leerse primero. */
+  .topbar .brand h1{color:var(--texto-max);font-weight:800;letter-spacing:1.8px;}
+  .topbar .brand small{color:var(--texto-2);}
+  body.claro .topbar .brand h1{color:var(--navy);}
+  body.claro .topbar .brand small{color:var(--texto-2);}
+
+  /* LOS TRES NIVELES, cada uno con su color, siempre: así se ven los tres a la
+     vez y se entiende que son tres registros distintos, no un botón encendido
+     y dos apagados. */
+  .nivel[data-lee="1"]{--suya:#FB6500;}
+  .nivel[data-lee="2"]{--suya:#BA66EC;}
+  .nivel[data-lee="3"]{--suya:#8FA6B8;}
+  .nivel{border:1px solid color-mix(in srgb, var(--suya) 45%, transparent);}
+  .nivel b,.nivel strong,.nivel .rot{color:var(--suya);}
+  .nivel .marca-punto,.nivel .ico{color:var(--suya);}
+  .nivel:hover{border-color:var(--suya);}
+  .nivel.activo{border-color:var(--suya)!important;box-shadow:inset 0 0 0 1px var(--suya);
+    background:color-mix(in srgb, var(--suya) 16%, transparent);}
+  .nivel.activo b,.nivel.activo strong{color:var(--suya);}
+
+  /* Las cajas de búsqueda y selección, legibles en los dos temas. */
+  .control select,.control input,.sel-slot select,.sel-slot input,.buscar-tema{
+    background:var(--campo);color:var(--texto-alto);border:1px solid var(--line);}
+  body.claro .control select,body.claro .control input,
+  body.claro .sel-slot select,body.claro .sel-slot input,
+  body.claro .buscar-tema{background:#fff;color:var(--texto-alto);}
+  body.claro .control select option,body.claro .sel-slot select option{background:#fff;color:var(--texto-alto);}
+  body.claro .control select optgroup,body.claro .sel-slot select optgroup{background:#fff;color:var(--tenue);}
 </style>
 </head>
 <body>
