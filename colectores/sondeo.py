@@ -138,6 +138,46 @@ CANDIDATAS = [
                   "publique algo consultable por máquina.",
         "traba": "Responde como sitio para personas: no expone catálogo ni interfaz.",
     },
+    # ---- Halladas en la busqueda del 8 de septiembre de 2026 ----------------
+    {
+        "clave": "hdx_hapi",
+        "rotulo": "HDX HAPI (OCHA) — interfaz humanitaria",
+        "url": "https://hapi.humdata.org/docs",
+        "porque": "La alternativa real a ReliefWeb: desastres, crisis, desplazados internos y "
+                  "seguridad alimentaria por país, con licencia CC BY 4.0. No pide "
+                  "autorización: pide un identificador de aplicación que se genera con un "
+                  "nombre y un correo institucional. Es una decisión de la Dirección, no "
+                  "una carta.",
+        "traba": "Sin identificador de aplicación las consultas devuelven 403; la "
+                 "documentación responde.",
+    },
+    {
+        "clave": "itu_gci",
+        "rotulo": "UIT — Índice Global de Ciberseguridad",
+        "url": "https://datahub.itu.int/api/v1/data?indicator=90014",
+        "porque": "La única medida comparable de ciberseguridad para los 33 Estados: cinco "
+                  "pilares, puntaje de 0 a 100, edición 2024.",
+        "traba": "La interfaz contesta 202 sin cuerpo a un programa, y la reproducción de "
+                 "datos de la UIT exige permiso escrito (jur@itu.int). Es una carta.",
+    },
+    {
+        "clave": "ncsi",
+        "rotulo": "NCSI — Índice Nacional de Ciberseguridad (e-Governance Academy)",
+        "url": "https://ncsi.ega.ee/country/ar/",
+        "porque": "Índice vivo de preparación en ciberseguridad, 160 países, con evidencia "
+                  "pública por país; cubre 15 de los 33 Estados con puntaje.",
+        "traba": "Sus condiciones prohíben reproducir sin acuerdo con el aviso de derechos. "
+                 "Es una carta (ncsi@ega.ee). La página responde.",
+    },
+    {
+        "clave": "uis_unesco",
+        "rotulo": "UNESCO — Instituto de Estadística (interfaz abierta)",
+        "url": "https://api.uis.unesco.org/api/public/data/indicators?indicator=CR.1&geoUnit=ARG",
+        "porque": "Educación y ciencia para los 33, con licencia CC BY-SA 3.0 IGO. No es la "
+                  "ruta del convenio de 1970 que se le pide a UNESCO por carta: es otra "
+                  "puerta, abierta, para el eje de Desarrollo.",
+        "traba": "Ninguna medida: contesta JSON. Falta decidir qué indicadores entran.",
+    },
 ]
 
 
