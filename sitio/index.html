@@ -329,6 +329,13 @@
   @media (max-width:820px){
     .nivel,.solapa,.boton,.modo,.mas-opciones,.mide-chip,button.mide-chip{min-height:40px;}
     .sel-slot select,.sel-slot input{min-height:42px;font-size:16px;}
+    /* Medido en marco de 320: 33 filas de ranking de 21 px de alto y dos
+       controles nativos de 13 y 16. Con el dedo eso no se acierta. Las filas
+       van a 34 —no a 40: son treinta y tres, y el alto se paga en pantalla—,
+       la casilla se agranda y el deslizador de año recibe su area de toque. */
+    .fila-orden{min-height:34px;align-items:center;}
+    .tocar-comparar input[type=checkbox]{width:20px;height:20px;}
+    .cuando input[type=range]{height:34px;}
   }
   .leaflet-container{background:var(--navy-black);font-family:'Inter',sans-serif;outline:none;}
   .leaflet-control-attribution{background:rgba(0,18,30,.75)!important;color:#7d90a8!important;font-size:9.5px!important;}
@@ -756,7 +763,14 @@
      todos en una pantalla, porque el orden se lee de una sola mirada o no se lee. */
   .panorama-bajada{font-size:12px;color:#C7D2E0;line-height:1.6;margin:10px 0 12px;}
   .orden-paises{display:flex;flex-direction:column;gap:2px;}
-  .fila-orden{display:grid;grid-template-columns:26px minmax(96px,1.4fr) minmax(60px,3fr) 46px;
+  /* AREAS DE TOQUE. Medido con el sitio adentro de un marco de 1366: doce
+     resumenes de desplegable de 14 px, el deslizador de anio de 16 y la casilla
+     de 13. Por debajo de 24 px no se acierta con el dedo ni con un raton torpe. */
+  main summary{min-height:24px;padding:3px 0;}
+  input[type=range]{height:24px;}
+  input[type=checkbox]{width:16px;height:16px;}
+  /* 26 px de alto minimo: por debajo de 24 el area de toque no cumple. */
+  .fila-orden{min-height:26px;align-items:center;display:grid;grid-template-columns:26px minmax(96px,1.4fr) minmax(60px,3fr) 46px;
     gap:8px;align-items:center;width:100%;text-align:left;background:none;border:0;
     padding:3px 4px;border-radius:5px;cursor:pointer;font:inherit;color:inherit;}
   .fila-orden:hover,.fila-orden:focus-visible{background:rgba(255,255,255,.06);outline:none;}
@@ -805,6 +819,12 @@
     /* El mapa acompaña mientras se lee la respuesta, que puede ser larga. */
     .tablero-mapa{position:sticky;top:12px;}
   }
+  /* min-width:0 EN LAS DOS COLUMNAS, no en una. Sin esto la columna del mapa no
+     baja del ancho minimo de su contenido —el mapa de Leaflet con sus controles—
+     y en un telefono de 320 px empujaba el documento a 520: la pagina entera se
+     desplazaba de costado. Medido en marco de 320 y de 375. */
+  .tablero-mapa{min-width:0;}
+  .mapa-caja{max-width:100%;}
   .tablero-respuesta{min-width:0;}
   .tablero-respuesta > section.domain{margin:0;}
   .como-se-usa{margin-top:12px;}
@@ -882,10 +902,20 @@
   /* EL TABLERO. Dos elecciones y dos modificadores en una fila; debajo el mapa
      con su tarjeta; debajo el grafico de lo elegido. Todo lo demas, despues. */
   .tablero-siwa{margin-top:6px;}
-  .fila-selectores{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;
-    align-items:start;margin:0 0 14px;}
-  @media (max-width:1100px){ .fila-selectores{grid-template-columns:repeat(2,minmax(0,1fr));} }
-  @media (max-width:600px){ .fila-selectores{grid-template-columns:1fr;} }
+  /* LA FILA ES RESPONSIVA POR CONSTRUCCION. Dos grupos que se apilan cuando no
+     entran, y adentro de cada uno columnas que se acomodan solas: no hay un
+     ancho magico donde se rompe, y por eso no hace falta un salto por medida. */
+  .fila-selectores{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:flex-start;margin:0 0 14px;}
+  /* Cada grupo pide el ancho de sus ranuras: «Qué mirás» tiene tres y pide 420,
+     «Comparar» tiene dos y pide 300. Cuando los dos no entran, se apilan y cada
+     uno usa el ancho entero —medido en 1024: apilados dan tres columnas de 237
+     en vez de una sola de 190 con la mitad del renglón vacía—. */
+  .grupo-sel{flex:1 1 420px;min-width:0;display:grid;gap:10px;
+    grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));align-items:start;}
+  .grupo-sel.comparar{flex:1 1 300px;}
+  .grupo-rotulo{grid-column:1/-1;font-size:10px;letter-spacing:1.6px;text-transform:uppercase;
+    color:#7d90a8;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:5px;}
+  .grupo-sel.comparar .grupo-rotulo{color:var(--orange);border-bottom-color:rgba(251,101,0,.35);}
   .sel-slot{min-width:0;background:#0E2135;border:1px solid var(--line);border-radius:10px;
     padding:10px 12px;}
   .sel-slot.eleccion{border-color:rgba(251,101,0,.45);}
@@ -900,7 +930,10 @@
   #slot-cruce .lista-temas,#slot-cruce .elegidos{display:none;}
   #slot-cruce:focus-within .lista-temas,#slot-cruce.con-texto .lista-temas,
   #slot-cruce.con-texto .elegidos{display:block;}
-  #slot-cruce .lista-temas{max-height:260px;overflow-y:auto;margin-top:8px;}
+  #slot-cruce{position:relative;}
+  #slot-cruce .lista-temas{max-height:min(260px,50vh);overflow-y:auto;margin-top:8px;
+    position:absolute;left:0;right:0;z-index:600;background:#0E2135;border:1px solid var(--line);
+    border-radius:8px;padding:8px 10px;box-shadow:0 12px 30px rgba(0,0,0,.5);}
   .grafico-seleccion{margin-top:14px;}
   .grafico-seleccion > div:empty{display:none;}
   .sobre-el-tema{margin-top:10px;}
@@ -1001,15 +1034,13 @@
     color:#C7D2E0;border-radius:8px;padding:9px 14px;font:inherit;font-size:12.5px;cursor:pointer;}
   .mas-opciones:hover{border-color:var(--orange);color:#fff;}
   body[data-nivel="3"] .mas-opciones{display:none;}
+  /* El nivel decide CUANTOS controles se ven, no como se acomodan: el Ciudadano
+     ve el ambito, el Periodista ve tambien tema y palabra, el Analista todo. */
   body[data-nivel="1"] .fila-selectores:not(.abierta) #slot-tema,
-  body[data-nivel="1"] .fila-selectores:not(.abierta) .modificador,
-  body[data-nivel="2"] .fila-selectores:not(.abierta) .modificador{display:none;}
-  body[data-nivel="1"] .fila-selectores:not(.abierta){grid-template-columns:minmax(0,2fr) auto;}
-  body[data-nivel="2"] .fila-selectores:not(.abierta){grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;}
-  .fila-selectores.abierta{grid-template-columns:repeat(4,minmax(0,1fr)) auto;}
-  @media (max-width:1100px){ .fila-selectores.abierta{grid-template-columns:repeat(2,minmax(0,1fr));} }
-  @media (max-width:600px){ .fila-selectores.abierta, body[data-nivel="1"] .fila-selectores:not(.abierta),
-    body[data-nivel="2"] .fila-selectores:not(.abierta){grid-template-columns:1fr;} }
+  body[data-nivel="1"] .fila-selectores:not(.abierta) #slot-palabra,
+  body[data-nivel="1"] .fila-selectores:not(.abierta) #grupo-comparar,
+  body[data-nivel="2"] .fila-selectores:not(.abierta) #grupo-comparar{display:none;}
+  body[data-nivel="1"] .fila-selectores:not(.abierta) .grupo-rotulo{display:none;}
   body[data-nivel="1"] #slot-ambito select{font-size:17px;padding:12px 14px;}
   body[data-nivel="1"] #slot-ambito label{font-size:12px;}
 
@@ -1674,10 +1705,17 @@
     <section class="domain tablero-siwa" id="tablero-siwa">
       <h2 class="oculto-visual">Tablero</h2>
       <div class="fila-selectores" id="fila-selectores">
-        <div class="sel-slot eleccion" id="slot-ambito"></div>
-        <div class="sel-slot eleccion" id="slot-tema"></div>
-        <div class="sel-slot modificador" id="slot-comparar"></div>
-        <div class="sel-slot modificador" id="slot-cruce"></div>
+        <div class="grupo-sel" id="grupo-mirar">
+          <span class="grupo-rotulo">Qué mirás</span>
+          <div class="sel-slot eleccion" id="slot-ambito"></div>
+          <div class="sel-slot eleccion" id="slot-tema"></div>
+          <div class="sel-slot eleccion" id="slot-palabra"></div>
+        </div>
+        <div class="grupo-sel comparar" id="grupo-comparar">
+          <span class="grupo-rotulo">Comparar</span>
+          <div class="sel-slot modificador" id="slot-comparar"></div>
+          <div class="sel-slot modificador" id="slot-cruce"></div>
+        </div>
         <button class="mas-opciones" id="mas-opciones" type="button" aria-expanded="false">Más opciones</button>
       </div>
       <div id="slot-tablero"></div>
@@ -1716,11 +1754,11 @@
       <div class="mapa-barra">
         <div class="controles">
           <div class="control">
-            <label for="tema-principal">Tema</label>
+            <label for="tema-principal">Tema, por eje</label>
             <select id="tema-principal"></select>
           </div>
           <div class="control ancho">
-            <label for="buscar-cruce">Cruzar con otros temas</label>
+            <label for="buscar-cruce">Con otro tema</label>
             <input type="search" id="buscar-cruce" class="buscar-tema"
                    placeholder="Buscá por tema o por delito: cocaína, extorsión, lavado, coima…"
                    aria-describedby="ayuda-cruce" autocomplete="off">
@@ -1807,13 +1845,13 @@
       <div class="mapa-barra">
         <div class="controles">
           <div class="control ancho">
-            <label for="buscar-navegador">Buscar un tema</label>
+            <label for="buscar-navegador">Buscar por palabra</label>
             <input type="search" id="buscar-navegador" class="buscar-tema"
                    placeholder="Buscá por tema o por delito: cocaína, extorsión, coima…"
                    autocomplete="off">
           </div>
           <div class="control ancho">
-            <label for="comparar-pais">Comparar países</label>
+            <label for="comparar-pais">Con otro país</label>
             <select id="comparar-pais"><option value="">Agregar un país…</option></select>
           </div>
           <button class="boton chico" id="limpiar-comparacion">quitar comparación</button>
@@ -4220,6 +4258,10 @@
     const comp = document.getElementById('comparar-pais');
     if(comp) mover(comp.closest('.control'), 'slot-comparar');
     mover('#limpiar-comparacion', 'slot-comparar');
+    // El buscador por palabra estaba enterrado en el explorador: sube a la fila.
+    // Es el mismo elemento, con su escucha; copiarlo habria dejado dos cajas.
+    const palabra = document.getElementById('buscar-navegador');
+    if(palabra) mover(palabra.closest('.control'), 'slot-palabra');
     const cruce = document.getElementById('buscar-cruce');
     if(cruce) mover(cruce.closest('.control'), 'slot-cruce');
     mover('#limpiar-cruce', 'slot-cruce');
@@ -11839,10 +11881,15 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       // Y se vuelve a intentar cuando el contenedor ya tiene tamano de verdad.
       if(typeof ResizeObserver === 'function'){
         let hecho = false;
+        // EL OBSERVADOR NO SE DESCONECTA: el contenedor no solo cambia al cargar,
+        // tambien al plegar una seccion, al cambiar de solapa o al girar el
+        // telefono, y un mapa que no se entera queda dibujado con la medida
+        // vieja. El encuadre se rehace una sola vez; el tamano, siempre.
         const ro = new ResizeObserver(()=>{
           const caja = document.getElementById('mapa');
-          if(hecho || !caja || caja.clientHeight < 40) return;
-          hecho = true; mapa.invalidateSize(); encuadrar(); ro.disconnect();
+          if(!caja || caja.clientHeight < 40) return;
+          try{ mapa.invalidateSize(); }catch(e){ return; }
+          if(!hecho){ hecho = true; encuadrar(); }
         });
         ro.observe(document.getElementById('mapa'));
       }
