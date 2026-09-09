@@ -301,9 +301,9 @@
   .card .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px;padding-top:8px;border-top:1px solid var(--line);}
   .card .src{font-size:10px;color:var(--tenue);}
   .badge{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 8px;border-radius:20px;white-space:nowrap;}
-  .badge.corr{background:rgba(63,167,150,.18);color:#6fe0c9;}
-  .badge.unica{background:rgba(251,101,0,.18);color:#ffb27a;}
-  .badge.pending{background:rgba(124,140,158,.18);color:#a9b9cb;}
+  .badge.corr{background:rgba(63,167,150,.18);color:var(--t-ok);}
+  .badge.unica{background:rgba(251,101,0,.18);color:var(--t-aviso);}
+  .badge.pending{background:rgba(124,140,158,.18);color:var(--texto-2);}
 
   /* Vacíos declarados — regla 7 de la casa */
   .vacios{margin-top:14px;border:1px dashed rgba(251,101,0,.35);border-radius:10px;padding:14px 18px;}
@@ -315,7 +315,7 @@
     grid-column:1/-1;border:1px solid rgba(194,59,34,.5);background:rgba(194,59,34,.10);
     border-radius:10px;padding:16px 18px;
   }
-  .falla h4,.falla h3{margin:0 0 6px;font-size:13px;color:#ff9c86;font-weight:700;}
+  .falla h4,.falla h3{margin:0 0 6px;font-size:13px;color:var(--t-falla);font-weight:700;}
   .falla p{margin:0;font-size:11.5px;color:var(--texto);line-height:1.6;}
 
   .placeholder{
@@ -367,8 +367,8 @@
   .ficha-mapa .unidad{display:block;font-size:10.5px;color:var(--texto-2);margin-bottom:10px;}
   .ficha-mapa .fila{display:flex;justify-content:space-between;gap:8px;padding:3px 0;font-size:11px;border-top:1px solid var(--velo-2);}
   .ficha-mapa .fila b{color:var(--texto-max);font-family:'JetBrains Mono',monospace;font-weight:700;}
-  .ficha-mapa .sube{color:#ffb27a;}
-  .ficha-mapa .baja{color:#6fe0c9;}
+  .ficha-mapa .sube{color:var(--t-aviso);}
+  .ficha-mapa .baja{color:var(--t-ok);}
   .ficha-mapa .nota{display:block;margin-top:10px;font-size:10px;color:var(--tenue);line-height:1.5;}
   .ficha-mapa .vacia{color:var(--tenue);font-size:11.5px;}
   @media (max-width:820px){ .ficha-mapa{position:static;width:auto;margin:10px;} }
@@ -379,7 +379,7 @@
   }
   .leaflet-tooltip.ficha::before{display:none;}
   .leaflet-tooltip.ficha b{color:var(--texto-max);font-size:12.5px;display:block;margin-bottom:4px;}
-  .leaflet-tooltip.ficha .nota{color:#ffb27a;display:block;margin-top:5px;}
+  .leaflet-tooltip.ficha .nota{color:var(--t-aviso);display:block;margin-top:5px;}
   .mapa-barra{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px;}
   .niveles{
     display:flex;flex-direction:column;gap:6px;margin:22px 0 6px;max-width:640px;
@@ -435,7 +435,7 @@
   }
   .hoy{margin:0 0 20px;}
   .hoy-rot{
-    font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#7fd3c4;
+    font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:var(--t-ok);
     font-weight:700;margin-bottom:8px;
   }
   .hoy-rot span{color:#5f7286;letter-spacing:.6px;margin-left:6px;}
@@ -448,7 +448,7 @@
   }
   .hoy-dato:hover{border-color:#3FA796;background:rgba(63,167,150,.13);color:var(--texto-max);}
   .hoy-dato b{font-size:17px;font-weight:800;color:var(--texto-max);font-family:'JetBrains Mono',monospace;}
-  .hoy-dato i{font-style:normal;color:#7fd3c4;font-size:10.5px;}
+  .hoy-dato i{font-style:normal;color:var(--t-ok);font-size:10.5px;}
   .hoy-pie{margin:9px 0 0;font-size:10.5px;line-height:1.55;color:var(--tenue);}
   .hoy-pie b{color:var(--texto);}
   /* SIN MARCO ADENTRO DEL MARCO. Esta caja traía el suyo de cuando vivía sola
@@ -476,10 +476,10 @@
     display:inline-block;padding:1px 7px;border-radius:999px;font-size:9.5px;
     font-weight:700;letter-spacing:.3px;vertical-align:1px;
   }
-  .edad.fresco{background:rgba(63,167,150,.22);color:#7fd3c4;}
+  .edad.fresco{background:rgba(63,167,150,.22);color:var(--t-ok);}
   .edad.reciente{background:rgba(255,255,255,.09);color:var(--texto-2);}
-  .edad.viejo{background:rgba(251,101,0,.20);color:#ffb37a;}
-  .edad.muy-viejo{background:rgba(251,101,0,.34);color:#ffd0b0;}
+  .edad.viejo{background:rgba(251,101,0,.20);color:var(--t-aviso);}
+  .edad.muy-viejo{background:rgba(251,101,0,.34);color:var(--t-aviso);}
   .senal{
     border:1px solid rgba(251,101,0,.42);border-radius:9px;padding:13px 15px;
     margin-top:14px;background:rgba(251,101,0,.07);
@@ -628,7 +628,7 @@
   .filtro:disabled{opacity:.4;cursor:not-allowed;}
   .nota-filtro{font-size:10.5px;color:var(--tenue);margin-left:6px;}
   .asunto .lugares{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px;}
-  .lugar{font-size:9.5px;text-transform:uppercase;letter-spacing:.4px;color:#ffb27a;
+  .lugar{font-size:9.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--t-aviso);
     background:rgba(251,101,0,.14);border-radius:4px;padding:2px 7px;}
   .cruce{display:flex;flex-direction:column;gap:10px;}
   .asunto{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
@@ -641,9 +641,9 @@
   .origen:hover{border-color:var(--orange);color:var(--texto-max);}
   .origen .jur{color:var(--tenue);font-family:'JetBrains Mono',monospace;}
   .asunto .porque{font-size:10.5px;color:var(--tenue);line-height:1.55;}
-  .badge.fuerte{background:rgba(63,167,150,.20);color:#6fe0c9;}
-  .badge.medio{background:rgba(251,101,0,.18);color:#ffb27a;}
-  .badge.solo{background:rgba(194,59,34,.18);color:#ff9c86;}
+  .badge.fuerte{background:rgba(63,167,150,.20);color:var(--t-ok);}
+  .badge.medio{background:rgba(251,101,0,.18);color:var(--t-aviso);}
+  .badge.solo{background:rgba(194,59,34,.18);color:var(--t-falla);}
   .origenes-nube{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 8px;}
   .fuente-nube{
     background:var(--velo-1);border:1px solid var(--line);border-radius:999px;
@@ -675,7 +675,7 @@
     border-radius:10px;padding:14px 18px;margin-bottom:14px;
   }
   .aviso-cobertura p{margin:0;font-size:12px;color:var(--texto);line-height:1.65;}
-  .aviso-cobertura b{color:#ff9c86;}
+  .aviso-cobertura b{color:var(--t-falla);}
   /* El navegador: la ruta que se recorre y las fichas de cada nivel. */
   .ruta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 6px;}
   .ruta button{background:none;border:0;color:var(--orange);cursor:pointer;
@@ -748,7 +748,7 @@
 
   /* La cautela de cada tarjeta, a un clic. El rotulo AVISA que hay algo que leer:
      plegarla en silencio seria esconderla, y este registro no esconde. */
-  .ojo-plegado{display:block;margin-top:8px;font-size:10.5px;color:#ffb27a;
+  .ojo-plegado{display:block;margin-top:8px;font-size:10.5px;color:var(--t-aviso);
     border-left:2px solid rgba(251,101,0,.5);padding-left:8px;}
   .ojo-plegado summary{cursor:pointer;font-weight:700;list-style:none;}
   .ojo-plegado summary::-webkit-details-marker{display:none;}
@@ -1058,6 +1058,9 @@
     --texto-alto:#E8EEF5; --texto-max:#ffffff; --tenue:#7d90a8;
     --velo-1:rgba(255,255,255,.03); --velo-2:rgba(255,255,255,.07);
     --velo-3:rgba(255,255,255,.10);
+    /* Los colores que SIGNIFICAN algo, con su versión para cada fondo: aviso,
+       correcto, serie que no se deja proyectar y falla. No se apagan a gris. */
+    --t-aviso:#ffb27a; --t-ok:#7fd3c4; --t-violeta:#c79bf0; --t-falla:#ff9c86;
     --navy-hondo:#07131E; --navy:#00121E; --gris-azul:#667B89;
     --violeta:#8C00E0; --violeta-hondo:#460070; --violeta-claro:#BA66EC;
     --naranja:#FB6500;
@@ -1197,8 +1200,8 @@
   .dc-leer{font-size:11px;color:var(--texto-2);margin-top:4px;}
   .cuando-dato{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
     padding:1px 6px;border-radius:999px;margin-left:4px;vertical-align:middle;}
-  .cuando-dato.fresco{background:rgba(63,167,150,.18);color:#7fd3c4;}
-  .cuando-dato.medio{background:rgba(251,101,0,.14);color:#ffb27a;}
+  .cuando-dato.fresco{background:rgba(63,167,150,.18);color:var(--t-ok);}
+  .cuando-dato.medio{background:rgba(251,101,0,.14);color:var(--t-aviso);}
   .cuando-dato.viejo{background:var(--velo-2);color:var(--texto-2);}
   .fc-nota{font-size:11px;color:var(--tenue);line-height:1.5;margin:8px 0 0;}
   .fc-pie{font-size:11.5px;color:var(--tenue);border-top:1px solid var(--line);padding-top:12px;margin:4px 0 0;}
@@ -1233,7 +1236,7 @@
   .materia-linea .cuenta{font-family:'JetBrains Mono',monospace;color:var(--texto-max);font-weight:700;}
   .ficha-pais .muestra{font-size:10.5px;color:var(--tenue);margin-top:10px;line-height:1.55;}
   .ficha-pais .muestra b{color:var(--texto-2);font-weight:600;}
-  .explica-capa .no-es{display:block;margin-top:5px;color:#ffb27a;}
+  .explica-capa .no-es{display:block;margin-top:5px;color:var(--t-aviso);}
   .modos{
     display:flex;gap:0;margin:10px 0 4px;border:1px solid var(--line);border-radius:20px;
     width:max-content;max-width:100%;overflow-x:auto;overflow-y:hidden;
@@ -1396,7 +1399,7 @@
   }
   .eje-caja .barra i{display:block;height:100%;border-radius:2px;background:var(--orange);}
   .eje-caja.sin-orientar{border-left:3px solid rgba(140,0,224,.55);}
-  .eje-caja .aviso-eje{margin-top:7px;font-size:9.5px;line-height:1.45;color:#c79bf0;}
+  .eje-caja .aviso-eje{margin-top:7px;font-size:9.5px;line-height:1.45;color:var(--t-violeta);}
   .eje-caja.incompleto .valor{font-size:14px;color:var(--tenue);font-weight:600;}
   .ejes-pie{margin:9px 0 0;font-size:10.5px;line-height:1.55;color:var(--tenue);}
   .ejes-pie b{color:var(--texto);}
@@ -1429,30 +1432,30 @@
     color:var(--texto-max);line-height:1;}
   .indice-solo .q{font-size:12.5px;color:var(--texto-2);}
   .eje-linea.opacidad{border-top:1px solid var(--velo-3);margin-top:5px;padding-top:6px;}
-  .eje-linea.opacidad .e{color:#c9a6ff;font-weight:600;}
+  .eje-linea.opacidad .e{color:var(--t-violeta);font-weight:600;}
   .eje-linea.opacidad .v{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;
     letter-spacing:.2px;text-align:right;min-width:auto;}
   .eje-linea.general{
     border-bottom:1px solid var(--velo-3);padding-bottom:5px;margin-bottom:3px;
   }
-  .eje-linea.general .e{color:#ffb27a;font-weight:700;}
+  .eje-linea.general .e{color:var(--t-aviso);font-weight:700;}
   .eje-linea.general .v{color:var(--texto-max);font-size:15px;}
-  .eje-linea.magnitud .e{color:#c79bf0;}
+  .eje-linea.magnitud .e{color:var(--t-violeta);}
   .eje-caja .extremos{
     display:flex;flex-direction:column;gap:2px;margin-top:8px;
     padding-top:7px;border-top:1px solid var(--velo-2);font-size:10.5px;
   }
   .eje-caja .extremos b{color:var(--texto-alto);font-weight:600;}
   .eje-caja .extremos i{font-style:normal;opacity:.62;font-size:9.5px;text-transform:uppercase;letter-spacing:.5px;margin-right:3px;}
-  .eje-caja .extremos .mejor{color:#7fd3c4;}
-  .eje-caja .extremos .peor{color:#ffb27a;}
+  .eje-caja .extremos .mejor{color:var(--t-ok);}
+  .eje-caja .extremos .peor{color:var(--t-aviso);}
   /* En Defensa los extremos son el mas chico y el mas grande, no el mejor y el
      peor: pintarlos de verde y naranja seria emitir el juicio que el eje se
      saco de encima. Van en gris. */
   .eje-caja.magnitud .extremos .mejor,
   .eje-caja.magnitud .extremos .peor{color:var(--texto-2);}
   .eje-pie{margin-top:7px;font-size:9px;line-height:1.4;color:#5f7286;}
-  .eje-pie i{color:#c79bf0;font-style:normal;}
+  .eje-pie i{color:var(--t-violeta);font-style:normal;}
   .opacidad-titular{
     border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:10px;
     padding:16px 18px;margin:12px 0;background:rgba(251,101,0,.06);
@@ -1466,8 +1469,8 @@
     display:inline-block;padding:2px 9px;border-radius:999px;font-size:9.5px;
     font-weight:700;letter-spacing:.4px;text-transform:uppercase;
   }
-  .op-estado.publicado{background:rgba(63,167,150,.22);color:#7fd3c4;}
-  .op-estado.parcial{background:rgba(251,101,0,.22);color:#ffb27a;}
+  .op-estado.publicado{background:rgba(63,167,150,.22);color:var(--t-ok);}
+  .op-estado.parcial{background:rgba(251,101,0,.22);color:var(--t-aviso);}
   .op-estado.sin_verificar{background:rgba(125,144,168,.18);color:var(--texto-2);}
   .op-rastro{
     margin-top:9px;font-size:10.5px;line-height:1.5;color:var(--tenue);
@@ -1476,7 +1479,7 @@
   .op-rastro a{color:var(--texto-2);word-break:break-all;}
   .op-rastro summary{cursor:pointer;color:var(--texto);font-weight:600;}
   .op-refuta{
-    margin-top:8px;font-size:10.5px;color:#ffb27a;
+    margin-top:8px;font-size:10.5px;color:var(--t-aviso);
   }
   .materias{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(330px, 100%), 1fr));gap:12px;margin-top:12px;}
   .materia{
@@ -1489,8 +1492,8 @@
     flex:0 0 auto;font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
     padding:3px 9px;border-radius:999px;background:rgba(125,144,168,.18);color:var(--texto-2);
   }
-  .materia .grado.hay{background:rgba(63,167,150,.20);color:#7fd3c4;}
-  .materia .grado.poco{background:rgba(251,101,0,.20);color:#ffb27a;}
+  .materia .grado.hay{background:rgba(63,167,150,.20);color:var(--t-ok);}
+  .materia .grado.poco{background:rgba(251,101,0,.20);color:var(--t-aviso);}
   .materia .porque{margin:0;font-size:11.5px;line-height:1.55;color:var(--texto-2);}
   .rotulo-bloque{
     font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:#5f7286;font-weight:700;
@@ -1503,7 +1506,7 @@
   .prensa-viva b{color:var(--texto-max);}
   .prensa-viva .titulares{display:flex;flex-direction:column;gap:4px;margin:7px 0 0;}
   .prensa-viva .titulares a{
-    color:#9fd8cd;text-decoration:none;font-size:11px;line-height:1.35;
+    color:var(--t-ok);text-decoration:none;font-size:11px;line-height:1.35;
     border-left:2px solid rgba(63,167,150,.45);padding-left:7px;
   }
   .prensa-viva .titulares a:hover{color:var(--texto-max);}
@@ -1511,11 +1514,11 @@
   .prensa-viva .aclara{margin:8px 0 0;color:var(--texto-2);font-size:10.5px;line-height:1.5;}
   .restriccion{
     margin:6px 0 0;padding:7px 9px;border-radius:7px;font-size:11px;line-height:1.45;
-    color:#E3D4F5;background:rgba(140,0,224,.12);border:1px solid rgba(140,0,224,.32);
+    color:var(--t-violeta);background:rgba(140,0,224,.12);border:1px solid rgba(140,0,224,.32);
   }
   .detenida{
     margin:8px 0 0;padding:8px 10px;border-radius:8px;font-size:11px;line-height:1.45;
-    color:#E8D7C3;background:rgba(251,101,0,.09);border:1px solid rgba(251,101,0,.28);
+    color:var(--texto-alto);background:rgba(251,101,0,.09);border:1px solid rgba(251,101,0,.28);
   }
   .detenida .cuando{color:var(--texto-2);}
   .detenidas-pie{border-left:3px solid var(--orange);padding-left:10px;}
@@ -1529,7 +1532,7 @@
   .op-caja.medio{border-left-color:var(--orange);}
   .op-caja.neutro{border-left-color:var(--grey-blue);}
   .op-caja .nombre{font-size:11px;color:var(--texto-2);letter-spacing:.2px;}
-  .op-caja .valor{font-size:26px;font-weight:700;color:#F4F2EC;line-height:1.15;margin:4px 0 2px;}
+  .op-caja .valor{font-size:26px;font-weight:700;color:var(--texto-alto);line-height:1.15;margin:4px 0 2px;}
   .op-caja .valor .de{font-size:12px;font-weight:400;color:var(--texto-2);margin-left:6px;}
   .op-caja .puesto{font-size:11px;color:#8ea0b4;line-height:1.4;}
   .rastro-op{margin:8px 0 0;padding-left:16px;font-size:11px;color:#8ea0b4;line-height:1.5;}
@@ -1617,7 +1620,7 @@
     font-size:10.5px;line-height:1.5;color:var(--tenue);background:var(--velo-1);
     border-radius:7px;padding:9px 11px;
   }
-  .materia .falta b{color:#ffb27a;}
+  .materia .falta b{color:var(--t-aviso);}
   .boletin{
     display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
     margin-top:14px;padding:15px 18px;border:1px solid var(--line);border-radius:10px;
@@ -1651,8 +1654,8 @@
     display:inline-block;padding:2px 9px;border-radius:999px;font-size:9.5px;
     font-weight:700;letter-spacing:.4px;text-transform:uppercase;
   }
-  .sello.libre{background:rgba(63,167,150,.22);color:#7fd3c4;}
-  .sello.reservado{background:rgba(140,0,224,.22);color:#c79bf0;}
+  .sello.libre{background:rgba(63,167,150,.22);color:var(--t-ok);}
+  .sello.reservado{background:rgba(140,0,224,.22);color:var(--t-violeta);}
   .secciones-fusk{
     display:grid;grid-template-columns:repeat(auto-fit,minmax(min(232px, 100%), 1fr));gap:8px;margin-top:10px;
   }
@@ -1776,6 +1779,7 @@
     --texto-alto:#10161E; --texto-max:#00121E; --tenue:#5A6B7D;
     --velo-1:rgba(0,18,30,.035); --velo-2:rgba(0,18,30,.08); --velo-3:rgba(0,18,30,.12);
     --line:#E3DCD0;
+    --t-aviso:#A34700; --t-ok:#166B5E; --t-violeta:#5B1E8C; --t-falla:#A3231B;
     background:var(--fondo); color:var(--texto);
   }
   /* LAS SUPERFICIES QUE SIGUEN SIENDO OSCURAS LLEVAN SU PROPIA PALETA DE TEXTO.
