@@ -300,7 +300,10 @@ def _serie(html: str, cual: str) -> list:
         except Exception:  # noqa: BLE001
             continue
         if datos:
-            return [{"anio": d["year"], "valor": d["value"]} for d in datos]
+            # ORDENADA POR ANIO. La pagina la publica del ultimo al primero, y una
+            # serie al reves dibuja la linea al reves el dia que alguien la use.
+            return sorted(({"anio": int(d["year"]), "valor": float(d["value"])} for d in datos),
+                          key=lambda x: x["anio"])
     return []
 
 
