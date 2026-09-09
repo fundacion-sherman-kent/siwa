@@ -980,8 +980,13 @@
   .evolucion-cab{font-size:12px;color:#C7D2E0;line-height:1.5;margin-bottom:8px;}
   .evolucion-cab b{color:#fff;}
   .evolucion svg{display:block;}
+  /* La medida del Indice es un boton que salta al mapa: hereda el aspecto del
+     chip, no el del boton del navegador (fondo blanco, letra gris: ilegible). */
+  button.mide-chip{cursor:pointer;font:inherit;font-size:11px;line-height:1.35;appearance:none;-webkit-appearance:none;
+    background:rgba(251,101,0,.08);color:#C7D2E0;border:1px solid rgba(251,101,0,.45);}
+  button.mide-chip:hover{border-color:var(--orange);background:rgba(251,101,0,.18);color:#fff;}
+  button.mide-chip::after{content:' 92';color:var(--orange);}
   .mide-chip{font:inherit;}
-  button.mide-chip{cursor:pointer;}
 
   .oculto-visual{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
     white-space:nowrap;margin:-1px;}
