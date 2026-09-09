@@ -4553,9 +4553,11 @@
                        document.body.appendChild(fichaLimpia); }
       const textoFicha = fichaLimpia ? fichaLimpia.innerText.trim() : '';
       if(fichaLimpia) fichaLimpia.remove();
-      const lineasFicha = textoFicha
+      // Sin Estado elegido la ficha del mapa muestra la pista del cursor, que en
+      // una imagen no significa nada: va el ambito y lo que el mapa muestra.
+      const lineasFicha = (textoFicha && !(ficha && ficha.querySelector('.vacia')))
         ? textoFicha.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 5)
-        : [q.ambito, 'Sin Estado señalado: el mapa muestra los 33.'];
+        : [q.ambito, 'Los 33 Estados del padrón, cada uno con su último dato.'];
 
       // La altura se calcula antes de dibujar, para que nada quede cortado.
       const ALTO_CAB = 64, ALTO_TIT = 74, ALTO_PIE = 78;
@@ -7462,16 +7464,22 @@
       if(![so.lat, so.lng, ne.lat, ne.lng].every(Number.isFinite)) return false;
       const caja = document.getElementById('mapa');
       if(!caja || caja.clientHeight < 40 || caja.clientWidth < 40) return false;
-      mapa.fitBounds(b, {padding:[12,12]});
+      // SIN ANIMACION: Leaflet anima el encuadre con una transicion que no
+      // termina si la pestania esta oculta, y quien abria SIWA en una pestania
+      // de fondo encontraba el mapa sin encuadrar. El encuadre inicial es
+      // instantaneo; acercarse a un pais, que lo pide una persona que mira,
+      // sigue animado.
+      mapa.fitBounds(b, {padding:[4,4], animate:false});
       // EL MAPA QUEDA ENCERRADO EN LA REGION. Sin esto se podia arrastrar América
       // Latina fuera del recuadro y quedaba un rectángulo vacío —y el arrastre
       // empujaba el ancho de la página, que es lo que corría el encabezado—.
       // El margen es holgado: encierra sin que se sienta un corral.
-      mapa.setMaxBounds(b.pad(0.35));
+      mapa.setMaxBounds(b.pad(0.15));
       // Y no se aleja más allá de la región: alejarse más sólo servía para
       // perder de vista los 33 Estados que este registro mira.
       const z = mapa.getZoom();
-      if(Number.isFinite(z)) mapa.setMinZoom(Math.max(2, z - 1));
+      // No se aleja mas que el encuadre de la region: mas lejos solo hay vacio.
+      if(Number.isFinite(z)) mapa.setMinZoom(Math.max(2, z));
       return true;
     }catch(error){
       // Se deja constancia en la consola y se sigue: no se detiene el registro.
@@ -9125,7 +9133,7 @@
       if(!objetivo){ console.warn('[mapa] no hay capa para', iso); return encuadrar(); }
       const b = objetivo.getBounds && objetivo.getBounds();
       // Un encuadre invalido no puede llevarse la pagina: si no sirve, no se usa.
-      if(b && b.isValid()) mapa.fitBounds(b, {padding:[46,46], maxZoom:6, animate:true, duration:.5});
+      if(b && b.isValid()) mapa.fitBounds(b, {padding:[28,28], maxZoom:6, animate:true, duration:.5});
       else encuadrar();
     }catch(error){ console.warn('[mapa] no se pudo acercar a '+iso+':', error); }
   }
@@ -11807,9 +11815,16 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       // el encuadre sin que nadie lo pidiera. Se acerca con los botones + y −,
       // con dos dedos en un tactil, y tocando un pais, que es lo que se hace.
       // maxBoundsViscosity en 1 hace que el borde sea un tope y no un elastico.
+      // EL MAPA LLENA SU CUADRO Y NO SE ARRASTRA. zoomSnap en 0 permite un zum
+      // fraccionario: con niveles enteros la region quedaba chica adentro del
+      // recuadro, con aire arriba y abajo. Sin arrastre —dragging en falso— el
+      // mapa no se corre; se amplia con + y −, con dos dedos, y tocando un pais.
       mapa=L.map('mapa',{zoomControl:true,minZoom:2,maxZoom:8,worldCopyJump:false,
-                         scrollWheelZoom:false, maxBoundsViscosity:1.0})
+                         scrollWheelZoom:false, maxBoundsViscosity:1.0,
+                         zoomSnap:0, zoomDelta:0.5, dragging:false, boxZoom:false, keyboard:false})
              .setView([-15, -65], 3);
+      // Testigo para las pruebas: el encuadre se verifica preguntandole al mapa.
+      window.__mapaSiwa = mapa;
       mapa.attributionControl.setPrefix('');
       mapa.attributionControl.addAttribution('Límites: Natural Earth 1:50 m · dominio público');
       capaPaises=L.geoJSON(geo,{style:estiloPais, onEachFeature:(rasgo,capa)=>{
