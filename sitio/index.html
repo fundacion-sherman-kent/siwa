@@ -1068,6 +1068,13 @@
   .tocar-comparar input{margin-top:3px;accent-color:var(--orange);}
   .tocar-comparar span{display:block;font-size:10.5px;color:#7d90a8;}
 
+  /* LA SEGUNDA FUENTE. No es un adorno: es la unica parte del registro donde dos
+     fuentes independientes miden lo mismo y no siempre coinciden. */
+  .segunda-fuente{margin:10px 0 4px;padding:9px 12px;border-left:3px solid var(--mejor);
+    background:rgba(63,167,150,.08);border-radius:0 6px 6px 0;font-size:11.5px;line-height:1.55;}
+  .segunda-fuente b{color:#fff;}
+  .segunda-fuente .ojo{display:block;margin-top:5px;color:#7d90a8;font-size:10.5px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1722,6 +1729,7 @@
       <div class="grafico-seleccion" id="grafico-seleccion">
         <div id="slot-cruce-resultado"></div>
         <div id="slot-comparacion"></div>
+        <div id="slot-contraste"></div>
         <div class="evolucion" id="slot-evolucion"></div>
         <div class="relaciones" id="relaciones"></div>
         <details class="aviso-cobertura sobre-el-tema" id="sobre-el-tema">
@@ -3319,6 +3327,9 @@
     {clave:'desplazamiento',    eje:'Seguridad',  rotulo:'Desplazamiento forzado', disponible:()=>!!almacen.desplazamiento, archivo:'desplazamiento'},
     // Hechos contados por UNODC, al lado de la evaluación experta del índice.
     // No se orientan: una incautación mide la acción policial tanto como el flujo.
+    // La segunda fuente de homicidios: la OMS cuenta lo que certifica el medico,
+    // UNODC lo que registra la policia. Dos caminos hasta el mismo hecho.
+    {clave:'homicidios_oms', eje:'Seguridad', rotulo:'Homicidios · segunda fuente (OMS)', disponible:()=>!!almacen.oms, archivo:'oms_homicidios'},
     {clave:'incautaciones_cocaina', eje:'Seguridad', rotulo:'Incautaciones de cocaína', disponible:()=>!!almacen.drogas, archivo:'drogas'},
     {clave:'cultivo_coca',          eje:'Seguridad', rotulo:'Cultivo de coca',          disponible:()=>!!almacen.drogas, archivo:'drogas'},
     {clave:'ciber',             eje:'Seguridad',  rotulo:'Ciberseguridad',       disponible:()=>false, sinCapa:'no_comparable'},
@@ -3508,6 +3519,41 @@
       + '</text>' + barras + '</svg>';
   }
 
+  // ============ LA SEGUNDA FUENTE DE HOMICIDIOS ============
+  //
+  // UNODC cuenta lo que registra la policia; la OMS, lo que certifica el medico.
+  // Se comparan EN EL ANIO COMUN MAS RECIENTE, nunca los ultimos datos de cada
+  // una: El Salvador tiene 7,9 en 2022 por UNODC y 93,8 en 2021 por la OMS, y
+  // enfrentarlos asi fabricaria una diferencia que en buena parte es de fecha.
+  // Comparados en 2021 —17,3 contra 93,8— la brecha sigue, y esa si es real.
+  function contrasteHomicidios(iso){
+    if(!iso || !almacen.oms) return '';
+    const r = (almacen.oms.registros||[]).find(x=>x.iso===iso);
+    if(!r || !r.serie || !r.serie.length) return '';
+    const capaBM = (capas()||{}).homicidios;
+    const serieBM = (capaBM && capaBM.serieDe) ? (capaBM.serieDe(iso)||[]) : [];
+    const porAnioOMS = {}; r.serie.forEach(a=>porAnioOMS[a.anio]=a.valor);
+    const comunes = serieBM.map(a=>+a.anio).filter(a=>porAnioOMS[a] !== undefined);
+    if(!comunes.length){
+      return '<div class="segunda-fuente"><b>Segunda fuente · OMS:</b> ' + cifra(r.serie[r.serie.length-1].valor)
+        + ' por 100.000 en ' + r.serie[r.serie.length-1].anio + '. <span class="ojo">No hay un año en común '
+        + 'con la serie policial, así que no se las compara: comparar años distintos fabrica diferencias.</span></div>';
+    }
+    const anio = Math.max(...comunes);
+    const vBM = serieBM.find(a=>+a.anio===anio).valor, vOMS = porAnioOMS[anio];
+    const veces = vBM > 0 ? vOMS / vBM : 0;
+    const cuanto = Math.abs(veces - 1) < 0.15
+      ? 'Las dos coinciden'
+      : veces > 1
+        ? 'La estimación sanitaria es <b>' + cifra(Math.round(veces*10)/10) + ' veces</b> la policial'
+        : 'La cifra policial es <b>' + cifra(Math.round((1/veces)*10)/10) + ' veces</b> la sanitaria';
+    return '<div class="segunda-fuente"><b>Segunda fuente · OMS.</b> En <b>' + anio + '</b>, el mismo año: '
+      + cifra(vBM) + ' según UNODC —lo que registra la policía— y ' + cifra(vOMS)
+      + ' según la OMS —lo que certifica el médico—. ' + cuanto + '. '
+      + '<span class="ojo">La diferencia no se interpreta acá: puede venir del subregistro policial, '
+      + 'de la cobertura del registro civil o de las dos cosas.</span></div>';
+  }
+
   function fichaDeMateria(clave){
     const cap = (capas() || {})[clave];
     const rot = rotuloDeMateria(clave);
@@ -3543,6 +3589,7 @@
         + (puesto ? ' · lugar <b>' + puesto + '</b> de ' + todos.length
                     + ' Estados con dato' : '')
         + (detalle ? '<br>' + esc(detalle) : '')
+        + (clave === 'homicidios' ? contrasteHomicidios(paisFiltro) : '')
         + (cap.cautela ? '<details class="cautela-plegada"><summary>Cuidado con esta cifra</summary>'
                          + esc(cap.cautela) + '</details>' : '')
         + '</span>' + boton + '</div></div>';
@@ -5998,6 +6045,37 @@
       cautela:'Cifra anual de cierre, no dato en vivo. Sin desglose subnacional.',
       rotuloPunto:'Sin capa de puntos: la fuente no publica coordenada'
     },
+    homicidios_oms: {
+      materia:'homicidios_oms', unidad:'por cada 100.000 personas', leyenda:[5, 15, 30],
+      color(v){ return v===undefined?MAG[0] : v<5?MAG[0] : v<15?MAG[1] : v<30?MAG[2] : MAG[3]; },
+      subeEsPeor: true,
+      conteo(){
+        const m={};
+        (almacen.oms?.registros||[]).forEach(r=>{ if(r.tasa) m[r.iso]=r.tasa.valor; });
+        return m;
+      },
+      serieDe(iso){
+        const r=(almacen.oms?.registros||[]).find(x=>x.iso===iso);
+        return (r && r.serie) || [];
+      },
+      periodo(){ const a = almacen.oms?.resumen?.anios || []; return a.length ? a[0]+'–'+a[a.length-1] : ''; },
+      puntos(){ return []; },
+      detalle(iso){
+        const r=(almacen.oms?.registros||[]).find(x=>x.iso===iso);
+        if(!r || !r.tasa) return null;
+        const v=(l)=> (l && l.length) ? cifra(l[l.length-1].valor) : null;
+        const varones=v(r.serie_varones), mujeres=v(r.serie_mujeres);
+        return 'Estimación de ' + r.tasa.anio
+          + (varones ? ' · varones ' + varones : '')
+          + (mujeres ? ' · mujeres ' + mujeres : '')
+          + (r.numero ? ' · ' + miles(Math.round(r.numero.valor)) + ' hechos en ' + r.numero.anio : '');
+      },
+      cautela:'No es un recuento: es una estimación de la OMS sobre los certificados de '
+             +'defunción, modelada donde el registro civil es incompleto. Y no coincide '
+             +'siempre con la cifra policial de UNODC: donde se separan, el registro muestra '
+             +'las dos y no elige. Licencia CC BY-NC-SA 3.0 IGO.',
+      rotuloPunto:'Sin capa de puntos: la fuente publica estimaciones por Estado'
+    },
     incautaciones_cocaina: {
       materia:'incautaciones_cocaina', unidad:'kg incautados en el año', leyenda:[1000, 10000, 100000],
       color(v){ return v===undefined?MAG[0] : v<1000?MAG[0] : v<10000?MAG[1] : v<100000?MAG[2] : MAG[3]; },
@@ -6627,7 +6705,10 @@
     if(v === undefined)
       return {color: sel?'#FB6500':'rgba(255,255,255,.35)', weight: sel?2.4:.9, dashArray: sel?null:'3 3',
               fillColor:'rgba(255,255,255,.05)', fillOpacity:1};
-    return {color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
+    // dashArray EN NULO Y EXPLICITO: Leaflet no borra lo que el estilo nuevo no
+    // menciona, asi que al pasar de «sin dato» a «con dato» el borde punteado
+    // quedaba puesto. Medido: 32 Estados punteados con 31 valores cargados.
+    return {color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8, dashArray: null,
             fillColor: capa.color(v), fillOpacity:.9};
   }
 
@@ -8678,6 +8759,16 @@
       + '<small class="pie-tira">' + pie + '</small>';
   }
 
+  // El contraste de las dos fuentes de homicidios, debajo del mapa: es donde se
+  // ve la cifra, y donde la comparacion significa algo.
+  function contrasteVista(){
+    const caja = document.getElementById('slot-contraste');
+    if(!caja) return;
+    caja.innerHTML = (capaActiva === 'homicidios' || capaActiva === 'homicidios_oms')
+      ? contrasteHomicidios(paisFiltro) : '';
+    caja.hidden = !caja.innerHTML;
+  }
+
   function evolucionVista(){
     const caja = document.getElementById('slot-evolucion');
     if(!caja) return;
@@ -9051,6 +9142,7 @@
     paso('panorama', armarPanorama);
     paso('solapas', armarSolapas);
     paso('para publicar hoy', paraPublicarHoy);
+    paso('contraste de fuentes', contrasteVista);
     paso('evolución de la región', evolucionVista);
     paso('mapa de relaciones', relacionesVista);
     paso('pestaña', rotularLaPestania);
@@ -12355,6 +12447,11 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-violencia','banco mundial',err.message);
       document.getElementById('proc-violencia').textContent='Sin registro disponible.'; marcador(); });
+
+  // Homicidios de la OMS: la segunda fuente, con su corte por sexo.
+  traer('oms_homicidios.json')
+    .then(d=>{ almacen.oms=d; dominios++; repintar(); marcador(); })
+    .catch(err=>{ noLlego++; marcador(); });
 
   // Incautaciones y cultivo de coca (UNODC): hechos contados, sin orientar.
   traer('drogas.json')

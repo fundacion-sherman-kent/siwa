@@ -269,6 +269,14 @@ SERIES_DETENIDAS = {
 # declara, el archivo la lleva y el sitio la muestra. Asi no puede olvidarse
 # dentro de seis meses, cuando quien la conocia no este mirando.
 RESTRICCIONES = {
+    # CC BY-NC-SA 3.0 IGO. El «no comercial» no estorba a un registro gratuito;
+    # el «compartir igual» SI obliga, y a algo que no se ve: lo derivado de este
+    # dato lleva la misma licencia. Se declara para que nadie lo descubra tarde.
+    "no_comercial_compartir_igual":
+        "Gratuita para este registro, que es público y no se cobra. La licencia de la "
+        "fuente es de atribución, no comercial y compartir igual (CC BY-NC-SA 3.0 IGO): "
+        "este dato no puede viajar a un producto que la Fundación venda, y lo que se "
+        "derive de él se publica bajo esa misma licencia.",
     "solo_registro_publico":
         "Gratuita para este registro, que es público y no se cobra. La licencia de "
         "la fuente es de atribución no comercial: este dato no puede viajar a un "
