@@ -1026,7 +1026,35 @@
 
   /* LA PALETA SEMANTICA, declarada: naranja peor, verde mejor, punteado sin
      dato, violeta serie que no se deja proyectar. */
-  :root{--peor:#FB6500;--mejor:#3FA796;--sin-dato:rgba(255,255,255,.05);--no-proyectable:rgba(140,0,224,.22);}
+  /* LA PALETA DEL MANUAL, ENTERA. Hasta hoy el sitio usaba tres de sus colores;
+     el manual tiene siete y los otros cuatro no aparecían en ninguna parte. */
+  :root{
+    --navy-hondo:#07131E; --navy:#00121E; --gris-azul:#667B89;
+    --violeta:#8C00E0; --violeta-hondo:#460070; --violeta-claro:#BA66EC;
+    --naranja:#FB6500;
+    --peor:#FB6500; --mejor:#3FA796; --sin-dato:rgba(255,255,255,.05);
+    --no-proyectable:rgba(140,0,224,.22);
+    /* La tinta del nivel: la decide el nivel de lectura, no el tema. */
+    --tinta:#FB6500; --tinta-suave:rgba(251,101,0,.14); --tinta-borde:rgba(251,101,0,.45);
+  }
+  /* Ciudadano naranja, Periodista violeta, Analista gris azulado: el ambiente
+     entero cambia con el nivel, y eso se ve sin leer una palabra. */
+  body[data-nivel="2"]{--tinta:#BA66EC; --tinta-suave:rgba(186,102,236,.16); --tinta-borde:rgba(186,102,236,.5);}
+  body[data-nivel="3"]{--tinta:#8FA6B8; --tinta-suave:rgba(143,166,184,.14); --tinta-borde:rgba(143,166,184,.45);}
+  /* Donde la tinta manda: señales de navegación, nunca datos. */
+  .nivel.activo{border-color:var(--tinta)!important;box-shadow:inset 0 0 0 1px var(--tinta);}
+  .nivel.activo .ico,.nivel.activo b,.nivel.activo strong{color:var(--tinta);}
+  .grupo-sel.comparar .grupo-rotulo{color:var(--tinta);border-bottom-color:var(--tinta-borde);}
+  .sel-slot.eleccion{border-color:var(--tinta-borde);}
+  .sel-slot.eleccion label{color:var(--tinta);}
+  .solapas-perfil .solapa.activa{background:var(--tinta);border-color:var(--tinta);}
+  .mas-opciones:hover{border-color:var(--tinta);}
+  section[data-plegable] > .domain-head:hover h2,
+  section[data-plegable] > .bloque-head:hover h2{color:var(--tinta);}
+  section[data-plegable] > .domain-head::after,
+  section[data-plegable] > .bloque-head::after{border-color:var(--tinta);}
+  *:focus-visible{outline:2px solid var(--tinta);outline-offset:2px;}
+
   .delta.peor{color:var(--peor);} .delta.mejor{color:var(--mejor);}
 
   /* UNA PANTALLA POR NIVEL: la fila de selectores se pliega segun el nivel. */
@@ -1074,6 +1102,43 @@
     background:rgba(63,167,150,.08);border-radius:0 6px 6px 0;font-size:11.5px;line-height:1.55;}
   .segunda-fuente b{color:#fff;}
   .segunda-fuente .ojo{display:block;margin-top:5px;color:#7d90a8;font-size:10.5px;}
+
+  /* El filete que dice en qué registro está parado el lector. */
+  /* SIN TRANSICION, y no es pereza: medido en Chrome, una transición sobre un
+     color que viene de una variable heredada que cambia en un ancestro no se
+     completa —el filete se quedaba naranja en los tres niveles, con transition
+     sobre «background» y también sobre «background-color»—. El cambio de nivel
+     es instantáneo en todo lo demás; el filete lo acompaña. */
+  .marca-nivel{position:fixed;top:0;left:0;right:0;height:3px;z-index:900;
+    background-color:var(--tinta);}
+
+  /* LA VENTANA DE ANALISIS. Ancha, con su barra fija arriba y el cuerpo que
+     se desplaza: en un teléfono ocupa la pantalla entera. */
+  .ventana-analisis{border:none;padding:0;background:transparent;max-width:min(880px,94vw);
+    width:min(880px,94vw);max-height:92vh;color:#E8EEF5;}
+  .ventana-analisis::backdrop{background:rgba(0,18,30,.82);backdrop-filter:blur(2px);}
+  .ventana-analisis .va-barra{position:sticky;top:0;z-index:2;display:flex;align-items:center;
+    justify-content:space-between;gap:14px;background:var(--navy);border-bottom:3px solid var(--tinta);
+    padding:14px 18px;border-radius:12px 12px 0 0;}
+  .ventana-analisis h2{margin:0;font-size:16px;font-weight:800;color:#fff;line-height:1.3;}
+  .va-cerrar{background:none;border:1px solid var(--line);color:#C7D2E0;border-radius:8px;
+    width:36px;height:36px;font-size:20px;line-height:1;cursor:pointer;flex:0 0 auto;}
+  .va-cerrar:hover{border-color:var(--tinta);color:#fff;}
+  .va-cuerpo{background:#0E2135;border-radius:0 0 12px 12px;padding:16px 18px 22px;
+    max-height:calc(92vh - 64px);overflow-y:auto;}
+  .va-bloque{margin:0 0 16px;}
+  .va-bloque:last-child{margin-bottom:0;}
+  .va-rotulo{font-size:10.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--tinta);
+    font-weight:700;margin-bottom:7px;}
+  .va-fuente{border-top:1px solid var(--line);padding-top:12px;font-size:12px;color:#C7D2E0;}
+  .abrir-analisis-caja{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0 4px;}
+  .abrir-analisis-caja span{font-size:11px;color:#7d90a8;}
+  .abrir-analisis.destacado{border-color:var(--tinta);background:var(--tinta-suave);color:#fff;font-weight:700;}
+  @media (max-width:600px){
+    .ventana-analisis{max-width:100vw;width:100vw;max-height:100vh;margin:0;}
+    .va-cuerpo{max-height:calc(100vh - 62px);border-radius:0;}
+    .ventana-analisis .va-barra{border-radius:0;}
+  }
 
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
@@ -1687,6 +1752,16 @@
 </div>
 
 <div class="shell">
+  <div class="marca-nivel" id="marca-nivel" aria-hidden="true"></div>
+  <!-- LA VENTANA DE ANALISIS. <dialog> del navegador: foco atrapado, Escape y
+       fondo inerte sin una línea nuestra ni una librería de nadie. -->
+  <dialog class="ventana-analisis" id="ventana-analisis" aria-labelledby="va-titulo">
+    <div class="va-barra">
+      <h2 id="va-titulo">Análisis</h2>
+      <button class="va-cerrar" id="va-cerrar" type="button" aria-label="Cerrar el análisis">×</button>
+    </div>
+    <div class="va-cuerpo" id="va-cuerpo"></div>
+  </dialog>
   <nav class="rail" aria-label="Secciones del registro">
     <div class="grupo">Empezar</div>
     <a href="#tablero-siwa">Tablero</a>
@@ -1729,6 +1804,11 @@
       <div class="grafico-seleccion" id="grafico-seleccion">
         <div id="slot-cruce-resultado"></div>
         <div id="slot-comparacion"></div>
+        <div class="abrir-analisis-caja">
+          <button class="boton abrir-analisis" id="abrir-analisis" type="button">
+            Abrir el análisis completo</button>
+          <span id="abrir-analisis-pie">La ficha, la evolución, la tendencia y la fuente, en una sola ventana.</span>
+        </div>
         <div id="slot-contraste"></div>
         <div class="evolucion" id="slot-evolucion"></div>
         <div class="relaciones" id="relaciones"></div>
@@ -6227,7 +6307,7 @@
   // estaba con el dato anterior de cada indicador, y la diferencia entre los
   // dos es la variacion que se muestra al lado de la cifra grande. Una segunda
   // implementacion de la regla habria sido una segunda definicion del compuesto.
-  function armarCompuesto(campoValor, campoAnio, soloPareados){
+  function armarCompuesto(campoValor, campoAnio, soloPareados, deLaFila){
     // Percentil de cada Estado en cada indicador, siempre orientado a «peor».
     const porEje = {};
     EJES_DEL_RESUMEN.forEach(e => porEje[e] = {});
@@ -6239,8 +6319,10 @@
       // que cambio: medido, a Haiti le daba -12,9 por eso.
       let filas = filasDe(i.clave)
         .filter(x => !soloPareados || (isFinite(x.valor) && isFinite(x.valor_anterior)))
-        .map(x => ({...x, valor: x[campoValor], anio: x[campoAnio]}))
-        .filter(x => isFinite(x.valor));
+        // Con «deLaFila» el valor no sale de un campo sino de la serie: es lo
+        // que permite armar el mismo compuesto en un año cualquiera.
+        .map(x => deLaFila ? deLaFila(x, i) : {...x, valor: x[campoValor], anio: x[campoAnio]})
+        .filter(x => x && isFinite(x.valor));
 
       // NO SE COMPARAN EPOCAS DISTINTAS. Veinticinco indicadores mezclan años
       // entre países —«empresas a las que se pidió un soborno» va de 2010 a
@@ -6290,6 +6372,87 @@
       };
     });
     return {ejes, general};
+  }
+
+  // ============ LA HISTORIA DEL COMPUESTO ============
+  //
+  // Los cuatro compuestos no tenian serie: se calculaban con el ultimo dato de
+  // cada indicador. Los indicadores SI tienen serie, asi que el compuesto se
+  // puede rehacer año por año, y eso le da historia a lo primero que se ve.
+  //
+  // BASE PAREADA, o la linea mentiria. Si cada año usara los indicadores que
+  // existen ese año, el compuesto de 2016 saldria de treinta y el de 2024 de
+  // sesenta: la linea mostraria el crecimiento del registro, no el de la
+  // region. Entran solo los indicadores con dato en TODOS los años de la
+  // ventana, y el pie dice cuantos son.
+  const ANIOS_DEL_COMPUESTO = 10;      // ventana maxima hacia atras
+  const MINIMO_ESTADOS_POR_ANIO = 20;  // sin esto un año con cuatro Estados «ordena»
+  let historiaGuardada = null, selloHistoria = '';
+
+  function historiaDelCompuesto(){
+    const sello = selloDeDatos();
+    if(historiaGuardada && selloHistoria === sello) return historiaGuardada;
+
+    // 1. Que indicadores sirven: los que tienen dato en toda la ventana.
+    const hoy = new Date().getFullYear();
+    const desde = hoy - ANIOS_DEL_COMPUESTO;
+    const porClave = {};
+    fuentesInd().forEach(f => (f.indicadores||[]).forEach(i => {
+      if(!EJES_DEL_RESUMEN.includes(i.eje)) return;
+      const porAnio = {};
+      filasDe(i.clave).forEach(fila => {
+        (fila.serie || []).forEach(a => {
+          if(!isFinite(a.valor) || +a.anio < desde) return;
+          (porAnio[+a.anio] = porAnio[+a.anio] || {})[fila.iso] = a.valor;
+        });
+      });
+      const anios = Object.keys(porAnio).map(Number)
+        .filter(a => Object.keys(porAnio[a]).length >= MINIMO_ESTADOS_POR_ANIO);
+      if(anios.length >= 5) porClave[i.clave] = {ind: i, porAnio, anios: new Set(anios)};
+    }));
+
+    // 2. La ventana: los años que comparten TODOS los indicadores elegidos.
+    const claves = Object.keys(porClave);
+    if(!claves.length){ historiaGuardada = {anios: [], porIso: {}, indicadores: 0}; selloHistoria = sello; return historiaGuardada; }
+    const cuenta = {};
+    claves.forEach(c => porClave[c].anios.forEach(a => cuenta[a] = (cuenta[a]||0) + 1));
+    // Se busca la ventana mas larga con al menos la mitad de los indicadores.
+    const tope = Math.max(...Object.values(cuenta));
+    const anios = Object.keys(cuenta).map(Number).filter(a => cuenta[a] >= tope * 0.8).sort((a,b)=>a-b);
+    if(anios.length < 3){ historiaGuardada = {anios: [], porIso: {}, indicadores: 0}; selloHistoria = sello; return historiaGuardada; }
+    const usables = claves.filter(c => anios.every(a => porClave[c].anios.has(a)));
+    if(usables.length < 6){ historiaGuardada = {anios: [], porIso: {}, indicadores: 0}; selloHistoria = sello; return historiaGuardada; }
+
+    // 3. El mismo compuesto de siempre, un año por vez.
+    const porIso = {};
+    anios.forEach(anio => {
+      const armado = armarCompuesto(null, null, false, (fila, i) => {
+        const c = porClave[i.clave];
+        if(!c || !usables.includes(i.clave)) return null;
+        const v = (c.porAnio[anio] || {})[fila.iso];
+        return v === undefined ? null : {...fila, valor: v, anio};
+      });
+      Object.entries(armado.general || {}).forEach(([iso, x]) => {
+        (porIso[iso] = porIso[iso] || {general: [], ejes: {}}).general.push({anio, valor: Math.round(x.valor*100)/100});
+      });
+      EJES_COMPUESTOS.forEach(e => {
+        Object.entries((armado.ejes||{})[e] || {}).forEach(([iso, x]) => {
+          const d = (porIso[iso] = porIso[iso] || {general: [], ejes: {}});
+          (d.ejes[e] = d.ejes[e] || []).push({anio, valor: Math.round(x.valor*100)/100});
+        });
+      });
+    });
+    historiaGuardada = {anios, porIso, indicadores: usables.length};
+    selloHistoria = sello;
+    return historiaGuardada;
+  }
+
+  // La serie que la capa entrega: general o de un eje.
+  function serieCompuesta(iso, eje){
+    const h = historiaDelCompuesto();
+    const d = h.porIso[iso];
+    if(!d) return [];
+    return eje ? (d.ejes[eje] || []) : d.general;
   }
 
   function compuesto(){
@@ -6376,8 +6539,10 @@
     const datos = () => eje ? compuesto().ejes[eje] : compuesto().general;
     return {
       materia: clave, divergente: false, ceroAparte: false, compuesta: true,
-      // Un compuesto no tiene serie propia, de modo que no puede tener
-      // `serieDe`. Lo que ofrece es el compuesto REARMADO en el horizonte.
+      // EL COMPUESTO SI TIENE HISTORIA: se rehace año por año con los
+      // indicadores que tienen dato en toda la ventana. Y ademas ofrece el
+      // compuesto REARMADO en el horizonte, que es otra cosa.
+      serieDe(iso){ return serieCompuesta(iso, eje); },
       proyectados(n){
         const c = compuestoProyectado(n);
         const datos = eje ? c.ejes[eje] : c.general;
@@ -8135,6 +8300,10 @@
 
   function aplicarNivel(){
     document.body.dataset.nivel = String(nivel);
+    // El nivel se anuncia tambien a quien no ve el color.
+    const marca = document.getElementById('marca-nivel');
+    if(marca) marca.setAttribute('title', 'Nivel de lectura: '
+      + (nivel === 1 ? 'Ciudadano' : nivel === 2 ? 'Periodista' : 'Analista'));
     plegarPorNivel();
     // Despues de repintar, porque la visibilidad se mide del elemento ya pintado.
     setTimeout(panelDelNivel, 0);
@@ -8693,6 +8862,89 @@
     }).join('');
   }
 
+  // ============ LA VENTANA DE ANALISIS ============
+  //
+  // Lo elegido, junto y a pantalla completa: la ficha del tema, la evolucion de
+  // la region, el contraste de fuentes, el cruce o la comparacion, y la fuente
+  // al pie. Se abre CON UN BOTON, nunca sola: una ventana que salta cada vez
+  // que alguien toca un selector es una ventana que se cierra sin leer.
+  function armarVentanaAnalisis(){
+    const b = document.getElementById('abrir-analisis');
+    const d = document.getElementById('ventana-analisis');
+    if(!b || !d || b.dataset.armado) return;
+    b.dataset.armado = '1';
+    b.addEventListener('click', abrirAnalisis);
+    document.getElementById('va-cerrar')?.addEventListener('click', () => d.close());
+    // Un clic en el fondo cierra, como espera cualquiera.
+    d.addEventListener('click', ev => { if(ev.target === d) d.close(); });
+  }
+
+  function abrirAnalisis(){
+    const d = document.getElementById('ventana-analisis');
+    const cuerpo = document.getElementById('va-cuerpo');
+    const titulo = document.getElementById('va-titulo');
+    if(!d || !cuerpo) return;
+    const cap = capaActual();
+    const donde = paisNombre || bloqueActivo() || 'América Latina y el Caribe';
+    titulo.textContent = rotuloDeMateria(capaActiva) + ' · ' + donde;
+
+    const ancho = Math.max(320, Math.min(760, (window.innerWidth || 800) - 120));
+    const partes = [];
+    // 1. La ficha del tema: figura, cifra y puesto.
+    const ficha = fichaDeMateria(capaActiva);
+    if(ficha) partes.push('<div class="va-bloque">' + ficha + '</div>');
+    // 2. El contraste de fuentes SOLO si la ficha no lo trajo ya: en
+    // «homicidios» fichaDeMateria lo incluye, y salia dos veces.
+    const contraste = (capaActiva === 'homicidios_oms') ? contrasteHomicidios(paisFiltro) : '';
+    if(contraste) partes.push('<div class="va-bloque">' + contraste + '</div>');
+    // 3. La evolucion de la region, con su tendencia.
+    const evo = figuraEvolucionRegional(capaActiva, ancho);
+    if(evo) partes.push('<div class="va-bloque evolucion">' + evo + '</div>');
+    // 4. El cruce y la comparacion, si estan puestos.
+    const cruceHtml = (cruce && cruce.length)
+      ? cruce.map(c => fichaDeMateria(c)).filter(Boolean).join('') : '';
+    if(cruceHtml) partes.push('<div class="va-bloque"><div class="va-rotulo">Cruzado con</div>'
+                              + cruceHtml + '</div>');
+    const comp = estadosComparados();
+    if(comp.length > 1){
+      const t = document.getElementById('tabla-comparacion');
+      if(t && t.innerHTML.trim())
+        partes.push('<div class="va-bloque"><div class="va-rotulo">Comparación</div>'
+                    + t.innerHTML + '</div>');
+    }
+    // 5. La fuente, siempre al pie: sin esto no es un análisis, es un dibujo.
+    const proc = procedenciaDe(capaActiva);
+    if(proc && proc.fuente)
+      partes.push('<div class="va-bloque va-fuente"><div class="va-rotulo">De dónde sale</div>'
+        + '<b>' + esc(proc.fuente.nombre || '') + '</b>'
+        + (proc.calificacion ? ' · calificación ' + esc(proc.calificacion.fiabilidad) + '-'
+           + esc(String(proc.calificacion.credibilidad)) : '')
+        + (proc.obtenido_en ? '<br><small>Traído el ' + esc(String(proc.obtenido_en).slice(0,10)) + '</small>' : '')
+        + (proc.restriccion_de_uso ? '<div class="restriccion">' + esc(proc.restriccion_de_uso) + '</div>' : '')
+        + '</div>');
+
+    cuerpo.innerHTML = partes.length ? partes.join('')
+      : '<p class="nota-filtro">Este tema no tiene todavía nada que analizar: elegí otro, '
+        + 'o un país, y volvé a abrir.</p>';
+    // Las figuras vivas del diálogo responden como las de la página.
+    if(typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', '');
+    if(typeof armarFigurasVivas === 'function') armarFigurasVivas();
+  }
+
+  // El boton se destaca cuando hay mas para mostrar.
+  function pintarBotonAnalisis(){
+    const b = document.getElementById('abrir-analisis');
+    const pie = document.getElementById('abrir-analisis-pie');
+    if(!b) return;
+    const conCruce = cruce && cruce.length;
+    const conComp = estadosComparados().length > 1;
+    b.classList.toggle('destacado', !!(conCruce || conComp));
+    if(pie) pie.textContent = conCruce
+      ? 'El cruce, la evolución y la fuente, en una sola ventana.'
+      : conComp ? 'La comparación, la evolución y la fuente, en una sola ventana.'
+      : 'La ficha, la evolución, la tendencia y la fuente, en una sola ventana.';
+  }
+
   // ============ LA EVOLUCION DE LA REGION ============
   //
   // Todas las figuras de serie eran de UN Estado; con el ambito en «los 33» el
@@ -8782,10 +9034,20 @@
       ? 'Estos ' + n + ' años <b>no siguen una línea</b> (R² = ' + cifra(r2) + '): el registro no los prolonga.'
       : 'Son <b>' + n + ' ediciones</b>: alcanzan para ver el movimiento, <b>no para proyectar</b>. '
         + 'Una recta sobre ' + n + ' puntos no es un cálculo, es una convicción; el registro exige cinco.';
+    // El compuesto historico se arma con MENOS indicadores que la cifra de
+    // arriba —solo los que tienen dato en todos los años—, y por eso el ultimo
+    // punto no coincide exactamente. Decirlo es la diferencia entre una serie
+    // comparable y una que crece porque crecio el registro.
+    const nota = cap.compuesta
+      ? ' <span class="ojo">Esta serie se arma con los <b>' + historiaDelCompuesto().indicadores
+        + ' indicadores que tienen dato en los ' + n + ' años</b>, que son menos que los de la '
+        + 'cifra de arriba: por eso el último punto no coincide exacto. Son los mismos en los '
+        + 'dos extremos, y eso es lo que permite unir los puntos con una línea.</span>'
+      : '';
     return '<div class="evolucion-cab"><b>Cómo se movió ' + esc(rotuloDeMateria(clave)) + ' en ' + esc(donde) + '.</b> '
       + 'La línea blanca es la mediana de unos ' + cuantos + ' Estados por año; la banda, la mitad central'
       + (propia.length ? '; la naranja, ' + esc(paisNombre) : '') + '.'
-      + (cap.unidad ? ' Unidad: ' + esc(cap.unidad) + '.' : '') + '</div>' + svg
+      + (cap.unidad ? ' Unidad: ' + esc(cap.unidad) + '.' : '') + nota + '</div>' + svg
       + '<small class="pie-tira">' + pie + '</small>';
   }
 
@@ -9163,6 +9425,7 @@
     armarAnio();
     mudarElExplorador();
     armarPlegado();
+    armarVentanaAnalisis();
     armarMasOpciones();
     armarSolapasPerfil();
     llenarComparador();
@@ -9173,6 +9436,7 @@
     paso('solapas', armarSolapas);
     paso('para publicar hoy', paraPublicarHoy);
     paso('contraste de fuentes', contrasteVista);
+    paso('botón de análisis', pintarBotonAnalisis);
     paso('evolución de la región', evolucionVista);
     paso('mapa de relaciones', relacionesVista);
     paso('pestaña', rotularLaPestania);
