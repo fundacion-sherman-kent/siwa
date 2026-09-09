@@ -319,6 +319,17 @@
   .mapa-caja{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
   #mapa{height:440px;background:var(--navy-black);}
   @media (max-width:820px){#mapa{height:380px;}}
+  /* EN UN MONITOR GRANDE el registro no se queda en una columna de 880 px con
+     media pantalla vacia: se ensancha y el mapa crece con el. Medido en
+     1920 x 1080: el contenido usaba 882 px y el mapa 443. Va DESPUES de la
+     regla de 440 px, porque a igual peso gana la ultima. */
+  @media (min-width:1500px){ .shell{max-width:1460px;} #mapa{height:540px;} }
+  /* EN TELEFONO, lo que se toca con el dedo mide al menos 40 px de alto: medido,
+     habia ocho botones de menos de 32. */
+  @media (max-width:820px){
+    .nivel,.solapa,.boton,.modo,.mas-opciones,.mide-chip,button.mide-chip{min-height:40px;}
+    .sel-slot select,.sel-slot input{min-height:42px;font-size:16px;}
+  }
   .leaflet-container{background:var(--navy-black);font-family:'Inter',sans-serif;outline:none;}
   .leaflet-control-attribution{background:rgba(0,18,30,.75)!important;color:#7d90a8!important;font-size:9.5px!important;}
   .leaflet-control-attribution a{color:#9fb2c8!important;}
