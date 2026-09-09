@@ -50,6 +50,12 @@ import geo
 
 URL = "https://bti-project.org/content/en/downloads/data/BTI_2024_Scores.xlsx"
 EDICION = 2024
+# LA EDICION ANTERIOR, para que los seis indicadores tengan serie en vez de una
+# foto. Probadas las diez ediciones bienales desde 2006: en la ruta abierta solo
+# responden 2022 y 2024; las demas dan 404 (probado el 9 de septiembre de 2026).
+ANTERIORES = [2022]
+def _url(anio):
+    return f"https://bti-project.org/content/en/downloads/data/BTI_{anio}_Scores.xlsx"
 NAVEGADOR = comun.AGENTE
 
 # Nombre en la planilla → ISO del padrón.
@@ -172,6 +178,17 @@ def recolectar():
         raise RuntimeError("La planilla del BTI no trae fila de encabezados")
     cabecera = filas[1]
 
+    # Las ediciones anteriores. Si una no se puede bajar NO se cae el colector:
+    # la edicion vigente vale por si sola y la falta se declara.
+    viejas, sinBajar = {}, []
+    for anio in ANTERIORES:
+        try:
+            pet = urllib.request.Request(_url(anio), headers={"User-Agent": NAVEGADOR})
+            with urllib.request.urlopen(pet, timeout=180) as r:
+                viejas[anio] = _leer(zipfile.ZipFile(io.BytesIO(r.read())))
+        except Exception as error:  # noqa: BLE001 — se declara y se sigue
+            sinBajar.append(f"{anio} ({type(error).__name__})")
+
     # Cada indicador se ata a su rotulo. Si el proyecto reordena las columnas,
     # esto falla y se ve; no lee en silencio la columna equivocada.
     columna, faltantes = {}, []
@@ -204,7 +221,28 @@ def recolectar():
                 continue
             if valor != valor or not (0 <= valor <= 10):
                 continue
-            registro[i["clave"]] = {"valor": round(valor, 2), "anio": EDICION}
+            # La serie: la edicion vigente y las anteriores que se pudieron bajar.
+            serie = []
+            for anioViejo in sorted(viejas):
+                fv = viejas[anioViejo]
+                cab = fv.get(1) or {}
+                colV = next((c for c, v in cab.items()
+                             if str(v).strip() == i["rotulo_origen"]), None)
+                filaV = next((f for n2_, f in fv.items()
+                              if n2_ != 1 and str(f.get("A", "")).strip() == nombre), None)
+                if not colV or not filaV:
+                    continue
+                try:
+                    vv = float(filaV.get(colV))
+                except (TypeError, ValueError):
+                    continue
+                if vv == vv and 0 <= vv <= 10:
+                    serie.append({"anio": anioViejo, "valor": round(vv, 2)})
+            serie.append({"anio": EDICION, "valor": round(valor, 2)})
+            registro[i["clave"]] = {"valor": round(valor, 2), "anio": EDICION, "serie": serie}
+            if len(serie) > 1:
+                registro[i["clave"]]["valor_anterior"] = serie[-2]["valor"]
+                registro[i["clave"]]["anio_anterior"] = serie[-2]["anio"]
         if registro:
             datos[iso] = registro
 
