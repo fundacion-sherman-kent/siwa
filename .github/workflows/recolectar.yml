@@ -293,6 +293,20 @@ jobs:
         continue-on-error: true
         run: python colectores/oms_homicidios.py
 
+      # Femicidios y hacinamiento carcelario. Serie anual: corrida diaria.
+      - name: Femicidios y cárceles (CEPAL)
+        id: cepal
+        if: env.COMPLETA == 'true'
+        continue-on-error: true
+        run: python colectores/cepal_genero.py
+
+      # El registro de portales de compras cambia todos los días: va en la
+      # corrida horaria, que es donde vive lo que se mueve.
+      - name: Contrataciones abiertas (OCDS)
+        id: contrataciones_abiertas
+        continue-on-error: true
+        run: python colectores/contrataciones_abiertas.py
+
       - name: Democracia, terrorismo y conflicto (V-Dem, GTD, UCDP)
         id: owd
         if: env.COMPLETA == 'true'
@@ -368,6 +382,8 @@ jobs:
           [ "${{ steps.desplazamiento.outcome }}" = "failure" ] && { echo "Falló el colector de desplazamiento forzado."; fallo=1; }
           [ "${{ steps.drogas.outcome }}" = "failure" ] && { echo "Falló el colector de incautaciones y cultivo de coca (UNODC)."; fallo=1; }
           [ "${{ steps.oms.outcome }}" = "failure" ] && { echo "Falló el colector de homicidios de la OMS."; fallo=1; }
+          [ "${{ steps.cepal.outcome }}" = "failure" ] && { echo "Falló el colector de femicidios y cárceles (CEPAL)."; fallo=1; }
+          [ "${{ steps.contrataciones_abiertas.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }
           [ "${{ steps.oficiales.outcome }}" = "failure" ] && { echo "Falló el padrón de fuentes oficiales."; fallo=1; }
           [ "${{ steps.redes.outcome }}" = "failure" ] && { echo "Falló el colector de circulación en redes."; fallo=1; }
           [ "${{ steps.owd.outcome }}" = "failure" ] && { echo "Falló el colector de democracia y conflicto."; fallo=1; }

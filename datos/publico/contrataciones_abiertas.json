@@ -1,0 +1,780 @@
+{
+  "procedencia": {
+    "colector": "contrataciones_abiertas",
+    "capa": "publico",
+    "obtenido_en": "2026-09-09T16:37:31+00:00",
+    "fuente": {
+      "nombre": "Registro de publicadores del Estándar de Datos de Contrataciones Abiertas — Open Contracting Partnership",
+      "url": "https://data.open-contracting.org/en/publications"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 2,
+      "corroborado": false,
+      "nota": "Registro de la Open Contracting Partnership sobre los portales de compras de cada Estado. Fiabilidad A: no interpreta nada, lista quién publica en el estándar común y desde cuándo. Credibilidad 2 porque la fecha y el volumen salen del propio portal de cada Estado, que es el único que los conoce."
+    },
+    "vacios_declarados": [
+      "NO MIDE CORRUPCIÓN NI PRECIOS: mide si el expediente está publicado en un formato que una máquina pueda leer. Un Estado puede publicar todo y contratar mal, y al revés.",
+      "La cantidad de publicadores y de procesos NO ordena a los Estados: México tiene dieciocho publicadores por su estructura federal y Perú publica millones de procesos por su tamaño. Lo comparable es la vigencia —cuántos días pasaron desde el último proceso publicado— y cuántas de las cuatro etapas del expediente se publican.",
+      "Solo 15 de los 33 Estados del padrón publican en el estándar común. En los demás el expediente puede existir en su portal nacional, pero no en un formato comparable: eso es el hueco, y es lo que este dato mide.",
+      "Un portal que dejó de publicar hace años sigue figurando acá, con su fecha: el registro no lo borra, lo muestra viejo."
+    ],
+    "restriccion_de_uso": null,
+    "cantidad": 33,
+    "atribucion": {
+      "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
+      "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+      "sitio": "https://siwa.fundacionkent.org/sitio/index.html",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información citando la fuente de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes Y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
+    }
+  },
+  "registros": [
+    {
+      "iso": "VEN",
+      "pais": "Venezuela",
+      "bloque": "Andina",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 28,
+      "ultimo_proceso": "2026-08-12",
+      "publicadores": 2,
+      "procesos": 2133342,
+      "etapas": [
+        "licitación",
+        "adjudicación"
+      ],
+      "etapas_de_cuatro": 2,
+      "detalle": [
+        {
+          "publicador": "Agencia Reguladora de Compras Estatales (ARCE) (API)",
+          "desde": "2017-11-30",
+          "hasta": "2026-08-12",
+          "procesos": 656511,
+          "etapas": [
+            "licitación",
+            "adjudicación"
+          ],
+          "frecuencia": "REAL_TIME",
+          "url": "https://www.gub.uy/agencia-compras-contrataciones-estado/datos-y-estadisticas/datos/open-contracting"
+        },
+        {
+          "publicador": "Agencia Reguladora de Compras Estatales (ARCE) (Historical)",
+          "desde": "1970-01-01",
+          "hasta": "2024-12-31",
+          "procesos": 1476831,
+          "etapas": [
+            "licitación",
+            "adjudicación"
+          ],
+          "frecuencia": "ANNUALLY",
+          "url": "https://catalogodatos.gub.uy/dataset/arce-datos-historicos-de-compras"
+        }
+      ]
+    },
+    {
+      "iso": "TTO",
+      "pais": "Trinidad y Tobago",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "SUR",
+      "pais": "Surinam",
+      "bloque": "Guayanas",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "VCT",
+      "pais": "San Vicente y las Granadinas",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "LCA",
+      "pais": "Santa Lucía",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "KNA",
+      "pais": "San Cristóbal y Nieves",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "PER",
+      "pais": "Perú",
+      "bloque": "Andina",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 6,
+      "ultimo_proceso": "2026-09-03",
+      "publicadores": 2,
+      "procesos": 3123420,
+      "etapas": [
+        "planificación",
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 4,
+      "detalle": [
+        {
+          "publicador": "Organismo Especializado para las Contrataciones Públicas Eficientes (OECE)",
+          "desde": "2003-01-01",
+          "hasta": "2026-09-03",
+          "procesos": 2753905,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "DAILY",
+          "url": "https://contratacionesabiertas.oece.gob.pe/descargas"
+        },
+        {
+          "publicador": "Central de Compras Perú Compras",
+          "desde": "2021-08-02",
+          "hasta": "2023-11-30",
+          "procesos": 369515,
+          "etapas": [
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "DAILY",
+          "url": "https://www.catalogos.perucompras.gob.pe/ConsultaOrdenesPub"
+        }
+      ]
+    },
+    {
+      "iso": "PRY",
+      "pais": "Paraguay",
+      "bloque": "Cono Sur",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 21,
+      "ultimo_proceso": "2026-08-19",
+      "publicadores": 2,
+      "procesos": 246686,
+      "etapas": [
+        "planificación",
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 4,
+      "detalle": [
+        {
+          "publicador": "Dirección Nacional de Contrataciones Públicas (DNCP)",
+          "desde": "2011-01-03",
+          "hasta": "2026-08-19",
+          "procesos": 246686,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "HOURLY",
+          "url": "https://contrataciones.gov.py/datos/api/v3/doc/"
+        },
+        {
+          "publicador": "Ministerio de Hacienda",
+          "desde": "2022-12-21",
+          "hasta": "2022-12-22",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "DAILY",
+          "url": "https://datos.hacienda.gov.py/odmh-api-v1/api-docs/"
+        }
+      ]
+    },
+    {
+      "iso": "PAN",
+      "pais": "Panamá",
+      "bloque": "México y Centroamérica",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 881,
+      "ultimo_proceso": "2024-04-11",
+      "publicadores": 1,
+      "procesos": 0,
+      "etapas": [],
+      "etapas_de_cuatro": 0,
+      "detalle": [
+        {
+          "publicador": "Dirección General de Contrataciones Públicas",
+          "desde": "2013-11-01",
+          "hasta": "2024-04-11",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "DAILY",
+          "url": "https://ocds.panamacompraencifras.gob.pa/swagger/index.html"
+        }
+      ]
+    },
+    {
+      "iso": "NIC",
+      "pais": "Nicaragua",
+      "bloque": "México y Centroamérica",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "bloque": "México y Centroamérica",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 26,
+      "ultimo_proceso": "2026-08-14",
+      "publicadores": 18,
+      "procesos": 23371,
+      "etapas": [
+        "planificación",
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 4,
+      "detalle": [
+        {
+          "publicador": "Secretaría de Administración del Gobierno del Estado de Nuevo León",
+          "desde": "2024-01-25",
+          "hasta": "2026-08-14",
+          "procesos": 21822,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "WEEKLY",
+          "url": "https://catalogodatos.nl.gob.mx/dataset/contrataciones-abiertas-direccion-general-de-adquisiciones-y-servicios"
+        },
+        {
+          "publicador": "Secretaría Ejecutiva del Sistema Estatal Anticorrupción de Aguascalientes (SESEA)",
+          "desde": "2025-11-04",
+          "hasta": "2025-11-04",
+          "procesos": 702,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "ANNUALLY",
+          "url": "https://www.plataformadigitalnacional.org/contrataciones"
+        },
+        {
+          "publicador": "Instituto de Transparencia, Acceso a la Información Pública, Protección de Datos Personales y Rendición de Cuentas de la",
+          "desde": "2021-09-22",
+          "hasta": "2025-10-14",
+          "procesos": 173,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "UNKNOWN",
+          "url": "https://dashboard.infocdmx.org.mx/contratacionesabiertas/datosabiertos"
+        },
+        {
+          "publicador": "Instituto Estatal de Transparencia, Acceso a la Información Pública y Protección de Datos Personales de Yucatán (INAIP)",
+          "desde": "2021-03-25",
+          "hasta": "2025-07-22",
+          "procesos": 143,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "UNKNOWN",
+          "url": "https://contratacionesabiertas.inaipyucatan.org.mx/contratacionesabiertas/datosabiertos"
+        },
+        {
+          "publicador": "Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI)",
+          "desde": "2020-05-28",
+          "hasta": "2025-02-21",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "QUARTERLY",
+          "url": "http://contratacionesabiertas.inai.org.mx/contratacionesabiertas/datosabiertos"
+        }
+      ]
+    },
+    {
+      "iso": "JAM",
+      "pais": "Jamaica",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "HND",
+      "pais": "Honduras",
+      "bloque": "México y Centroamérica",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 6,
+      "ultimo_proceso": "2026-09-03",
+      "publicadores": 4,
+      "procesos": 2136992,
+      "etapas": [
+        "planificación",
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 4,
+      "detalle": [
+        {
+          "publicador": "Oficina Normativa de Contratación y Adquisiciones del Estado (ONCAE)",
+          "desde": "2005-11-02",
+          "hasta": "2026-09-03",
+          "procesos": 845616,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "DAILY",
+          "url": "https://web.oncae.gob.hn/datosabiertos"
+        },
+        {
+          "publicador": "Secretaría de Finanzas de Honduras (SEFIN)",
+          "desde": "2012-01-05",
+          "hasta": "2026-03-03",
+          "procesos": 902784,
+          "etapas": [
+            "planificación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "UNKNOWN",
+          "url": "https://www.sefin.gob.hn/edca/"
+        },
+        {
+          "publicador": "Instituto de Acceso a la Información Pública (IAIP)",
+          "desde": "2020-04-17",
+          "hasta": "2023-03-22",
+          "procesos": 388592,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "UNKNOWN",
+          "url": "https://portalunico.iaip.gob.hn/datosabierto/"
+        },
+        {
+          "publicador": "Sistema de Información y Seguimiento de Obras y Contratos (SISOCS)",
+          "desde": "2018-02-07",
+          "hasta": "2018-07-16",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "UNKNOWN",
+          "url": "http://app.sisocs.org/protected/ocdsShow/"
+        }
+      ]
+    },
+    {
+      "iso": "HTI",
+      "pais": "Haití",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "GUY",
+      "pais": "Guyana",
+      "bloque": "Guayanas",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "GTM",
+      "pais": "Guatemala",
+      "bloque": "México y Centroamérica",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 6,
+      "ultimo_proceso": "2026-09-03",
+      "publicadores": 1,
+      "procesos": 1768963,
+      "etapas": [
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 3,
+      "detalle": [
+        {
+          "publicador": "Ministerio de Finanzas Públicas",
+          "desde": "2020-01-02",
+          "hasta": "2026-09-03",
+          "procesos": 1768963,
+          "etapas": [
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "DAILY",
+          "url": "https://ocds.guatecompras.gt/descarga-datos"
+        }
+      ]
+    },
+    {
+      "iso": "GRD",
+      "pais": "Granada",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "SLV",
+      "pais": "El Salvador",
+      "bloque": "México y Centroamérica",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "ECU",
+      "pais": "Ecuador",
+      "bloque": "Andina",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 36,
+      "ultimo_proceso": "2026-08-04",
+      "publicadores": 1,
+      "procesos": 2362444,
+      "etapas": [
+        "planificación",
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 4,
+      "detalle": [
+        {
+          "publicador": "Servicio Nacional de Contratación Pública de Ecuador (SERCOP)",
+          "desde": "2015-01-05",
+          "hasta": "2026-08-04",
+          "procesos": 2362444,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "DAILY",
+          "url": "https://datosabiertos.compraspublicas.gob.ec/PLATAFORMA/datos-abiertos"
+        }
+      ]
+    },
+    {
+      "iso": "DOM",
+      "pais": "República Dominicana",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 14,
+      "ultimo_proceso": "2026-08-26",
+      "publicadores": 1,
+      "procesos": 591187,
+      "etapas": [
+        "planificación",
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 4,
+      "detalle": [
+        {
+          "publicador": "Dirección General de Contrataciones Públicas (DGCP)",
+          "desde": "2015-03-27",
+          "hasta": "2026-08-26",
+          "procesos": 591187,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "DAILY",
+          "url": "https://www.dgcp.gob.do/datos-abiertos/api/"
+        }
+      ]
+    },
+    {
+      "iso": "DMA",
+      "pais": "Dominica",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "CUB",
+      "pais": "Cuba",
+      "bloque": "Caribe hispano y Haití",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "CRI",
+      "pais": "Costa Rica",
+      "bloque": "México y Centroamérica",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 995,
+      "ultimo_proceso": "2023-12-19",
+      "publicadores": 1,
+      "procesos": 11991,
+      "etapas": [
+        "planificación",
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 4,
+      "detalle": [
+        {
+          "publicador": "Poder Judicial",
+          "desde": "2018-01-09",
+          "hasta": "2023-12-19",
+          "procesos": 11991,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "UNKNOWN",
+          "url": "https://ckanpj.azurewebsites.net/dataset/estandar-de-datos-de-contrataciones-abiertas-ocds"
+        }
+      ]
+    },
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "bloque": "Andina",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 1603,
+      "ultimo_proceso": "2022-04-20",
+      "publicadores": 2,
+      "procesos": 0,
+      "etapas": [],
+      "etapas_de_cuatro": 0,
+      "detalle": [
+        {
+          "publicador": "Agencia Nacional de Contratación Pública (Colombia Compra Eficiente)",
+          "desde": "2011-01-01",
+          "hasta": "2022-04-20",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "DAILY",
+          "url": "http://www.colombiacompra.gov.co/transparencia/api"
+        },
+        {
+          "publicador": "Agencia Nacional de Infraestructura Colombia (ANI)",
+          "desde": "2021-09-01",
+          "hasta": "2021-09-06",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "UNKNOWN",
+          "url": "https://aniscopio.ani.gov.co/datos-abiertos"
+        }
+      ]
+    },
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 113,
+      "ultimo_proceso": "2026-05-19",
+      "publicadores": 2,
+      "procesos": 4922279,
+      "etapas": [
+        "planificación",
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 4,
+      "detalle": [
+        {
+          "publicador": "Dirección de Compras y Contratación Pública - API",
+          "desde": "2022-01-03",
+          "hasta": "2026-05-19",
+          "procesos": 4922279,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "REAL_TIME",
+          "url": "https://datos-abiertos.chilecompra.cl/descargas/procesos-ocds"
+        },
+        {
+          "publicador": "Dirección de Compras y Contratación Pública - Historical",
+          "desde": "2018-12-31",
+          "hasta": "2022-04-07",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "DAILY",
+          "url": "https://datos-abiertos.chilecompra.cl/descargas/procesos-ocds"
+        }
+      ]
+    },
+    {
+      "iso": "BRA",
+      "pais": "Brasil",
+      "bloque": "Cono Sur",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 48,
+      "ultimo_proceso": "2026-07-23",
+      "publicadores": 2,
+      "procesos": 952035,
+      "etapas": [
+        "licitación",
+        "adjudicación"
+      ],
+      "etapas_de_cuatro": 2,
+      "detalle": [
+        {
+          "publicador": "Secretaria de Gestão e Inovação do Ministério da Gestão e da Inovação em Serviços Públicos - Compras Públicas do Governo",
+          "desde": "2021-08-10",
+          "hasta": "2026-07-23",
+          "procesos": 884725,
+          "etapas": [
+            "licitación",
+            "adjudicación"
+          ],
+          "frecuencia": "DAILY",
+          "url": "https://dadosabertos.compras.gov.br/swagger-ui/index.html#/11%20-%20OCDS/releases"
+        },
+        {
+          "publicador": "Medicamentos Transparentes",
+          "desde": "2021-09-29",
+          "hasta": "2026-04-30",
+          "procesos": 67310,
+          "etapas": [
+            "licitación",
+            "adjudicación"
+          ],
+          "frecuencia": "MONTHLY",
+          "url": "https://medicamentos.transparencia.org.br/dados-abertos"
+        }
+      ]
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "bloque": "Andina",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 2107,
+      "ultimo_proceso": "2020-12-02",
+      "publicadores": 1,
+      "procesos": 0,
+      "etapas": [],
+      "etapas_de_cuatro": 0,
+      "detalle": [
+        {
+          "publicador": "Agencia de Gobierno Electrónico y Tecnologías de Información y Comunicación (AGETIC)",
+          "desde": "2019-01-04",
+          "hasta": "2020-12-02",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "ANNUALLY",
+          "url": "https://datos.gob.bo/id/dataset/contrataciones-agetic-2019-estandar-ocp"
+        }
+      ]
+    },
+    {
+      "iso": "BLZ",
+      "pais": "Belice",
+      "bloque": "México y Centroamérica",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "BRB",
+      "pais": "Barbados",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "BHS",
+      "pais": "Bahamas",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    },
+    {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "bloque": "Cono Sur",
+      "estado": "publica",
+      "dias_desde_el_ultimo": 248,
+      "ultimo_proceso": "2026-01-04",
+      "publicadores": 3,
+      "procesos": 23006,
+      "etapas": [
+        "planificación",
+        "licitación",
+        "adjudicación",
+        "contrato"
+      ],
+      "etapas_de_cuatro": 4,
+      "detalle": [
+        {
+          "publicador": "Dirección General de Contrataciones y Gestión de Bienes (Provincia de Mendoza)",
+          "desde": "2023-10-22",
+          "hasta": "2026-01-04",
+          "procesos": 23006,
+          "etapas": [
+            "planificación",
+            "licitación",
+            "adjudicación",
+            "contrato"
+          ],
+          "frecuencia": "MONTHLY",
+          "url": "https://datosabiertos-compras.mendoza.gov.ar/datasets/"
+        },
+        {
+          "publicador": "Dirección Nacional de Vialidad",
+          "desde": "2023-12-20",
+          "hasta": "2023-12-20",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "DAILY",
+          "url": "https://datosabiertos.vialidad.gob.ar/ui/index.html#!/datos_abiertos"
+        },
+        {
+          "publicador": "Dirección General de Compras y Contrataciones (Ciudad de Buenos Aires)",
+          "desde": "2022-01-03",
+          "hasta": "2022-06-08",
+          "procesos": 0,
+          "etapas": [],
+          "frecuencia": "MONTHLY",
+          "url": "https://data.buenosaires.gob.ar/dataset/buenos-aires-compras"
+        }
+      ]
+    },
+    {
+      "iso": "ATG",
+      "pais": "Antigua y Barbuda",
+      "bloque": "Caribe oriental",
+      "estado": "sin_publicador"
+    }
+  ],
+  "resumen": {
+    "estados_que_publican": 15,
+    "estados_del_padron": 33,
+    "estados_al_dia": 7,
+    "publicadores_en_la_region": 43,
+    "etapas": [
+      "planificación",
+      "licitación",
+      "adjudicación",
+      "contrato"
+    ],
+    "lector_probado": true,
+    "consultado": "2026-09-09T16:37:31+00:00"
+  }
+}

@@ -140,6 +140,16 @@ CANDIDATAS = [
     },
     # ---- Halladas en la busqueda del 8 de septiembre de 2026 ----------------
     {
+        "clave": "global_forest_watch",
+        "rotulo": "Global Forest Watch — pérdida de bosque por Estado",
+        "url": "https://data-api.globalforestwatch.org/dataset/umd_tree_cover_loss",
+        "porque": "Daría hectáreas donde hoy solo hay una evaluación de especialistas de 1 a "
+                  "10: «delitos contra la flora» es una de las medidas del Índice Global de "
+                  "Crimen Organizado y no tiene ninguna cifra física detrás.",
+        "traba": "El catálogo responde sin credencial, pero la consulta de datos devuelve 403: "
+                 "exige una clave que hay que pedir. Probado el 9 de septiembre de 2026.",
+    },
+    {
         "clave": "hdx_hapi",
         "rotulo": "HDX HAPI (OCHA) — interfaz humanitaria",
         "url": "https://hapi.humdata.org/docs",

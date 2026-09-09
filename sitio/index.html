@@ -3334,6 +3334,8 @@
     {clave:'cultivo_coca',          eje:'Seguridad', rotulo:'Cultivo de coca',          disponible:()=>!!almacen.drogas, archivo:'drogas'},
     {clave:'ciber',             eje:'Seguridad',  rotulo:'Ciberseguridad',       disponible:()=>false, sinCapa:'no_comparable'},
     {clave:'contratacion',      eje:'Gobernanza', rotulo:'Contratación pública', disponible:()=>false, sinCapa:'no_comparable'},
+    // Quien publica sus compras en el formato comun, y hace cuantos dias.
+    {clave:'contrataciones_abiertas', eje:'Gobernanza', rotulo:'Compras públicas en formato abierto', disponible:()=>!!almacen.contrataciones, archivo:'contrataciones_abiertas'},
     {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false, sinCapa:'no_comparable'},
     {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales, archivo:'oficiales'},
   ];
@@ -5922,7 +5924,8 @@
 
   // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
   // agregar un colector nuevo no obligue a tocar el resto de la página.
-  const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti].filter(Boolean);
+  const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti,
+                            almacen.cepal].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -6044,6 +6047,33 @@
       },
       cautela:'Cifra anual de cierre, no dato en vivo. Sin desglose subnacional.',
       rotuloPunto:'Sin capa de puntos: la fuente no publica coordenada'
+    },
+    contrataciones_abiertas: {
+      materia:'contrataciones_abiertas', unidad:'días desde el último proceso publicado',
+      leyenda:[30, 180, 730],
+      color(v){ return v===undefined?MAG[0] : v<30?MAG[0] : v<180?MAG[1] : v<730?MAG[2] : MAG[3]; },
+      subeEsPeor: true,
+      conteo(){
+        const m={};
+        (almacen.contrataciones?.registros||[]).forEach(r=>{
+          if(typeof r.dias_desde_el_ultimo === 'number') m[r.iso]=r.dias_desde_el_ultimo;
+        });
+        return m;
+      },
+      puntos(){ return []; },
+      detalle(iso){
+        const r=(almacen.contrataciones?.registros||[]).find(x=>x.iso===iso);
+        if(!r || r.estado!=='publica') return null;
+        return 'Último proceso publicado el ' + r.ultimo_proceso
+          + ' · ' + r.etapas_de_cuatro + ' de 4 etapas (' + (r.etapas||[]).join(', ') + ')'
+          + ' · ' + r.publicadores + (r.publicadores===1?' publicador':' publicadores')
+          + ' · ' + miles(r.procesos) + ' procesos publicados';
+      },
+      cautela:'No mide corrupción ni precios: mide si el expediente está publicado en un '
+             +'formato que una máquina pueda leer. Ordena por VIGENCIA —días desde el último '
+             +'proceso—, que es lo único comparable: la cantidad de publicadores mide el '
+             +'federalismo y la de procesos, el tamaño del Estado.',
+      rotuloPunto:'Sin capa de puntos: es el estado de un portal, no un hecho ubicable'
     },
     homicidios_oms: {
       materia:'homicidios_oms', unidad:'por cada 100.000 personas', leyenda:[5, 15, 30],
@@ -12447,6 +12477,16 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-violencia','banco mundial',err.message);
       document.getElementById('proc-violencia').textContent='Sin registro disponible.'; marcador(); });
+
+  // Femicidios y hacinamiento carcelario (CEPAL): entran como indicadores.
+  traer('cepal_genero.json')
+    .then(d=>{ almacen.cepal=d; dominios++; repintar(); marcador(); })
+    .catch(err=>{ noLlego++; marcador(); });
+
+  // Contrataciones abiertas: el estado de una puerta, no un indicador.
+  traer('contrataciones_abiertas.json')
+    .then(d=>{ almacen.contrataciones=d; dominios++; repintar(); marcador(); })
+    .catch(err=>{ noLlego++; marcador(); });
 
   // Homicidios de la OMS: la segunda fuente, con su corte por sexo.
   traer('oms_homicidios.json')

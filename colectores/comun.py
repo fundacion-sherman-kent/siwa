@@ -72,6 +72,10 @@ ATRIBUCION = {
 # exactamente uno de cada uno.
 # ---------------------------------------------------------------------------
 CATEGORIAS = {
+    # La violencia contra la mujer y el hacinamiento carcelario entran con la
+    # CEPAL: la primera es una materia que el registro no medía en absoluto.
+    "femicidios": "violencia",
+    "ocupacion_carcelaria": "violencia",
     "acceso_informacion": "capacidad",
     "actores_antidemocraticos": "integridad",
     "administracion_basica": "integridad",
