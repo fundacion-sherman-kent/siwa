@@ -6500,8 +6500,15 @@
     if(sinAjuste(iso))
       return {color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
               fillColor:'rgba(140,0,224,.22)', fillOpacity:.9};
+    const v = valores()[iso];
+    // SIN DATO NO ES «POCO». El Estado sin cifra se dibuja aparte: relleno casi
+    // transparente y borde punteado. Pintarlo del color del tramo mas bajo
+    // hacia que treinta Estados sin cultivo de coca parecieran cultivarla poco.
+    if(v === undefined)
+      return {color: sel?'#FB6500':'rgba(255,255,255,.35)', weight: sel?2.4:.9, dashArray: sel?null:'3 3',
+              fillColor:'rgba(255,255,255,.05)', fillOpacity:1};
     return {color: sel?'#FB6500':'rgba(255,255,255,.30)', weight: sel?2.4:.8,
-            fillColor: capa.color(valores()[iso]), fillOpacity:.9};
+            fillColor: capa.color(v), fillOpacity:.9};
   }
 
   const cifra = v => Math.abs(v)<1000 ? (Math.round(v*100)/100).toLocaleString('es-AR') : miles(Math.round(v));
@@ -7293,12 +7300,19 @@
         + 'cifras para comparar. Si la fuente vuelve, el tema vuelve solo.</span>';
       return;
     }
+    // Cuantos Estados quedan sin dato en lo que el mapa muestra: la leyenda lo
+    // dice con su propia muestra.
+    const pintadosAhora = valores() || {};
+    const sinDato = (padron || []).filter(p => pintadosAhora[p.iso] === undefined).length;
     if(cajaLeyenda) cajaLeyenda.innerHTML =
       `<span class="tira-leyenda">${figuraLeyenda(capa, paleta)}</span>` +
       (capa.ceroAparte
         ? `<span><i style="background:${COLOR_CERO}"></i>En cero — ningún caso registrado</span>`
         : '') +
       rot.map((t,i)=>`<span><i style="background:${paleta[i]}"></i>${t}</span>`).join('')+
+      (sinDato
+        ? `<span><i style="background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.5)"></i>Sin dato · ${sinDato} Estado${sinDato===1?'':'s'}</span>`
+        : '') +
       (capa.ceroAparte
         ? `<span class="sin-puntos">Los tramos de color se calculan solo entre los Estados que sí registran casos: si no, el cero se llevaría medio mapa.</span>`
         : '') +
@@ -7503,6 +7517,8 @@
       navComparar.length ? u.searchParams.set('comparar', navComparar.join(','))
                          : u.searchParams.delete('comparar');
       anioElegido ? u.searchParams.set('anio', String(anioElegido)) : u.searchParams.delete('anio');
+      // El cruce tambien viaja: un enlace a «homicidios cruzado con corrupcion» tiene que devolver eso.
+      (cruce && cruce.length) ? u.searchParams.set('cruce', cruce.join(',')) : u.searchParams.delete('cruce');
       history.replaceState(null, '', u);
     }catch(e){}
   }
@@ -7520,6 +7536,8 @@
       const ma = q.get('materia'); if(ma){ navMateria = ma; }
       const cp = q.get('comparar');
       if(cp) navComparar = cp.split(',').filter(x => /^[A-Z]{3}$/.test(x)).slice(0, 4);
+      const cr = q.get('cruce');
+      if(cr) cruce = cr.split(',').filter(x => /^[a-z0-9_]+$/.test(x)).slice(0, 6);
       const an = parseInt(q.get('anio'), 10);
       if(an >= 1990 && an <= 2100) anioElegido = an;
       const pa = q.get('pais');
@@ -7550,7 +7568,9 @@
     // halló la auditoría del sitio.
     const aMano = () => {
       avisar('El navegador no dejó copiar. Copiá el texto del cuadro.', true);
-      window.prompt('Copiá este texto:', texto);
+      // prompt() no existe en todos los navegadores; si falla, el aviso ya
+      // dijo lo que pasa y no queda una promesa sin atender.
+      try{ window.prompt('Copiá este texto:', texto); }catch(e){}
     };
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(texto).then(listo, aMano);
@@ -8816,7 +8836,7 @@
     paso('para publicar hoy', paraPublicarHoy);
     paso('evolución de la región', evolucionVista);
     paso('mapa de relaciones', relacionesVista);
-    paso('encabezados', () => setTimeout(nivelarEncabezados, 0));
+    paso('encabezados', nivelarEncabezados);
     paso('pestaña', rotularLaPestania);
     paso('figuras vivas', armarFigurasVivas);
     paso('año del mapa', pintarAnio);
