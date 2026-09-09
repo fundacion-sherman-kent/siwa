@@ -1140,6 +1140,60 @@
     .ventana-analisis .va-barra{border-radius:0;}
   }
 
+  /* LA FICHA DEL CIUDADANO. Cifras grandes, lenguaje llano y la fecha de cada
+     dato al lado: para quien va a viajar, un dato de 2019 y uno de hoy no
+     valen igual. */
+  .ficha-ciudadana{background:#0E2135;border:1px solid var(--line);border-radius:12px;
+    padding:18px 20px;}
+  .fc-cab{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+  .fc-cab h3{margin:0;font-size:26px;font-weight:800;color:#fff;letter-spacing:-.4px;}
+  .fc-zona{font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:var(--tinta);font-weight:700;}
+  .fc-general{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:16px;}
+  .fc-cifra{font-family:'JetBrains Mono',monospace;font-size:46px;font-weight:700;color:#fff;
+    line-height:1;flex:0 0 auto;}
+  .fc-dice{flex:1 1 260px;min-width:0;font-size:13.5px;line-height:1.6;color:#C7D2E0;}
+  .fc-dice b{color:#fff;}
+  .fc-ojo{display:block;margin-top:6px;font-size:11.5px;color:#7d90a8;}
+  .fc-bloque{margin:0 0 18px;}
+  .fc-bloque h4{margin:0 0 10px;font-size:12px;text-transform:uppercase;letter-spacing:1.2px;
+    color:var(--tinta);font-weight:700;}
+  .dc-fila{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));}
+  .dc{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .dc-cifra{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#fff;
+    line-height:1.1;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;}
+  .dc-cifra small{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;color:#7d90a8;}
+  .dc-rotulo{font-size:12.5px;color:#C7D2E0;margin-top:6px;line-height:1.45;}
+  .dc-puesto{font-size:11px;color:#7d90a8;margin-top:5px;}
+  .dc-leer{font-size:11px;color:#9fb0c4;margin-top:4px;}
+  .cuando-dato{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
+    padding:1px 6px;border-radius:999px;margin-left:4px;vertical-align:middle;}
+  .cuando-dato.fresco{background:rgba(63,167,150,.18);color:#7fd3c4;}
+  .cuando-dato.medio{background:rgba(251,101,0,.14);color:#ffb27a;}
+  .cuando-dato.viejo{background:rgba(255,255,255,.07);color:#9fb0c4;}
+  .fc-nota{font-size:11px;color:#7d90a8;line-height:1.5;margin:8px 0 0;}
+  .fc-pie{font-size:11.5px;color:#7d90a8;border-top:1px solid var(--line);padding-top:12px;margin:4px 0 0;}
+  /* En el nivel Ciudadano no hay solapas de análisis ni gráfico de selección:
+     hay una ficha. Lo demás vive en los otros dos niveles. */
+  body[data-nivel="1"] #solapas-perfil,
+  body[data-nivel="1"] .panel-perfil,
+  body[data-nivel="1"] #grafico-seleccion{display:none;}
+
+  /* LA PORTADA DEL CIUDADANO. Medido: la ficha empezaba a 1.833 px del tope.
+     Se saca lo que describe la maquinaria y lo que sirve para citar; queda el
+     título, los tres niveles y, enseguida, el país. */
+  body[data-nivel="1"] .hero-linea,
+  body[data-nivel="1"] .hero-metodo,
+  body[data-nivel="1"] .hero-meta,
+  body[data-nivel="1"] #herramientas{display:none;}
+  body[data-nivel="1"] .hero{padding-bottom:18px;}
+  body[data-nivel="1"] .hero-title{font-size:clamp(26px,4.4vw,40px);margin-bottom:10px;}
+  body[data-nivel="1"] .niveles{gap:8px;margin:14px 0 0;}
+  body[data-nivel="1"] .nivel{padding:10px 12px;}
+  body[data-nivel="1"] .nivel .que{font-size:11px;line-height:1.35;}
+  /* La ficha, pegada al selector y respirando. */
+  body[data-nivel="1"] #ficha-pais{margin-top:14px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1818,6 +1872,9 @@
         </details>
       </div>
     </section>
+    <!-- Ancla: la ficha se muda al lado del selector en el nivel Ciudadano y
+         vuelve acá en los otros dos. Sin ancla no habría a dónde volver. -->
+    <div id="ancla-ficha" hidden></div>
     <section class="domain" id="ficha-pais">
       <div id="perfil-pais"></div>
       <div class="domain-head"><h3 id="titulo-ficha">La región en cifras</h3><span class="tag" id="tag-ficha">—</span></div>
@@ -5509,11 +5566,107 @@
       + (d > 0 ? '▲ +' : '▼ ') + cifra(Math.round(d * 10) / 10) + '</span>';
   }
 
+  // ============ LA FICHA DEL CIUDADANO ============
+  //
+  // El nivel Ciudadano no es el Analista con cosas tapadas: es otra pregunta.
+  // «Conocer la realidad de mi pais o de uno que voy a visitar», dicho por la
+  // Direccion. Cuatro bloques, cada dato con su fecha, y lo que se SIENTE
+  // separado de lo que se CUENTA.
+  function frescura(anio){
+    if(!anio) return '';
+    const dif = new Date().getFullYear() - (+anio);
+    const clase = dif <= 1 ? 'fresco' : dif <= 3 ? 'medio' : 'viejo';
+    return '<span class="cuando-dato ' + clase + '">' + anio + '</span>';
+  }
+
+  function datoCiudadano(clave, rotulo, comoLeer){
+    const cap = (capas() || {})[clave];
+    if(!cap || !cap.conteo || !paisFiltro) return null;
+    const v = (cap.conteo() || {})[paisFiltro];
+    if(v === undefined) return null;
+    const d = datoDeMateria(clave, paisFiltro);
+    const anio = (d && d.anio) || (typeof cap.periodo === 'function'
+      ? String(cap.periodo()).split('–').pop() : '');
+    return '<div class="dc"><div class="dc-cifra">' + cifra(v)
+      + '<small>' + esc(cap.unidad || '') + '</small></div>'
+      + '<div class="dc-rotulo">' + esc(rotulo) + ' ' + frescura(anio) + '</div>'
+      + (comoLeer ? '<div class="dc-leer">' + comoLeer + '</div>' : '')
+      + (d && d.puesto ? '<div class="dc-puesto">Puesto <b>' + d.puesto + '</b> de '
+         + d.deCuantos + ' Estados con dato</div>' : '')
+      + '</div>';
+  }
+
+  // OJO CON EL NOMBRE: ya existe fichaCiudadana(), que pinta las tarjetas del
+  // perfil. Dos funciones con el mismo nombre no conviven: la ultima gana y la
+  // primera desaparece sin avisar. Esta es otra cosa y se llama distinto.
+  function fichaDelCiudadano(iso){
+    const p = (padron || []).find(x => x.iso === iso) || {};
+    const mio = (compuesto().general || {})[iso];
+    const pg = mio ? posicionCompuesta(iso) : null;
+
+    // 1. La foto general, en una frase que se entiende sin saber nada.
+    const general = mio && pg
+      ? '<div class="fc-general"><div class="fc-cifra">' + cifra(mio.valor)
+        + variacionDelCompuesto(iso) + '</div>'
+        + '<div class="fc-dice">De los <b>' + pg.deCuantos + ' Estados</b> de la región, '
+        + esc(p.pais || iso) + ' está en el <b>puesto ' + pg.enRegion + '</b>, contando desde '
+        + 'el peor situado. <span class="fc-ojo">Es un lugar dentro de la región, no una nota: '
+        + 'que un Estado esté a mitad de tabla no quiere decir que esté «a mitad de camino» '
+        + 'de nada.</span></div></div>'
+      : '<p class="nota-filtro">Este Estado no tiene suficientes datos comparables para '
+        + 'ubicarlo en la región, y el registro no inventa un puesto con menos.</p>';
+
+    // 2. Lo que la gente siente. Encuestas: dicen lo que las personas declaran.
+    const siente = ['<div class="fc-bloque"><h4>Lo que siente la gente que vive ahí</h4>',
+      '<div class="dc-fila">',
+      datoCiudadano('seguridad_barrio', 'Se sienten seguros en su barrio') || '',
+      datoCiudadano('temor_delito', 'Temen ser víctimas de un delito') || '',
+      datoCiudadano('victima_delito', 'Fueron víctimas en el último año') || '',
+      '</div>',
+      '<p class="fc-nota">Sale de encuestas a los hogares: dice lo que las personas '
+      + '<b>declaran</b>, no lo que ocurrió. Un país puede tener pocos delitos y gente que '
+      + 'no sale de noche, y al revés.</p></div>'].join('');
+    const hayLoQueSiente = /class="dc"/.test(siente);
+
+    // 3. Lo que cuentan los registros.
+    const cuenta = ['<div class="fc-bloque"><h4>Lo que cuentan los registros</h4>',
+      '<div class="dc-fila">',
+      datoCiudadano('homicidios', 'Homicidios al año') || '',
+      datoCiudadano('femicidios', 'Femicidios al año') || '',
+      datoCiudadano('desplazamiento', 'Personas que tuvieron que irse') || '',
+      '</div>',
+      '<p class="fc-nota">Son recuentos oficiales, con el año en que se midió. '
+      + 'Un año viejo no es un dato de hoy: por eso está escrito.</p></div>'].join('');
+    const hayLoQueCuenta = /class="dc"/.test(cuenta);
+
+    return '<div class="ficha-ciudadana">'
+      + '<div class="fc-cab"><h3>' + esc(p.pais || iso) + '</h3>'
+      + '<span class="fc-zona">' + esc(p.bloque || '') + '</span></div>'
+      + general
+      + (hayLoQueSiente ? siente : '')
+      + (hayLoQueCuenta ? cuenta : '')
+      + '<p class="fc-pie">Esto es un resumen para conocer el país. El detalle, las fuentes '
+      + 'de cada cifra y los vacíos declarados están en los niveles <b>Periodista</b> y '
+      + '<b>Analista</b>, ahí arriba.</p>'
+      + '</div>';
+  }
+
+  // El puesto en la region, que el perfil ya calculaba adentro suyo.
+  function posicionCompuesta(iso){
+    const g = compuesto().general || {};
+    const orden = Object.entries(g).sort((a,b) => b[1].valor - a[1].valor);
+    const i = orden.findIndex(x => x[0] === iso);
+    return i < 0 ? null : {enRegion: i + 1, deCuantos: orden.length};
+  }
+
   function perfilPais(){
     const caja = document.getElementById('perfil-pais');
     if(!caja) return;
     const iso = paisFiltro;
     if(!iso){ caja.innerHTML = panoramaRegional() + novedadesRegionales(); return; }
+    // EL NIVEL CIUDADANO NO ANALIZA: conoce un pais. Otra ficha, no la misma
+    // con cosas tapadas.
+    if(nivel === 1){ caja.innerHTML = fichaDelCiudadano(iso); return; }
     const p = padron.find(x => x.iso === iso) || {};
     const comp = compuesto();
 
@@ -8136,6 +8289,18 @@
   // cruzar quedan detras de «Mas opciones». El Periodista ve pais y tema. El
   // Analista, los cuatro. Si el enlace trae tema, comparacion o cruce, la fila
   // se abre sola: un enlace que lleva a algo que no se ve no lleva a nada.
+  // La ficha viaja segun el nivel: pegada al selector para el Ciudadano —«que
+  // pais» y enseguida «como esta»— y en su lugar para los otros dos, donde el
+  // mapa es la herramienta de trabajo.
+  function acomodarFicha(){
+    const ficha = document.getElementById('ficha-pais');
+    const fila = document.getElementById('fila-selectores');
+    const ancla = document.getElementById('ancla-ficha');
+    if(!ficha || !fila || !ancla) return;
+    if(nivel === 1){ if(fila.nextElementSibling !== ficha) fila.after(ficha); }
+    else if(ancla.nextElementSibling !== ficha) ancla.after(ficha);
+  }
+
   function armarMasOpciones(){
     const b = document.getElementById('mas-opciones');
     const fila = document.getElementById('fila-selectores');
@@ -9441,6 +9606,7 @@
     paso('mapa de relaciones', relacionesVista);
     paso('pestaña', rotularLaPestania);
     paso('más opciones', pintarMasOpciones);
+    paso('lugar de la ficha', acomodarFicha);
     paso('solapas del perfil', pintarSolapasPerfil);
     paso('figuras vivas', armarFigurasVivas);
     paso('año del mapa', pintarAnio);
@@ -12743,7 +12909,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       document.getElementById('proc-violencia').textContent='Sin registro disponible.'; marcador(); });
 
   // Femicidios y hacinamiento carcelario (CEPAL): entran como indicadores.
-  traer('cepal_genero.json')
+  traer('cepal.json')
     .then(d=>{ almacen.cepal=d; dominios++; repintar(); marcador(); })
     .catch(err=>{ noLlego++; marcador(); });
 

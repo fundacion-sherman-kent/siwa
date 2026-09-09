@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Femicidios y violencia contra la mujer: el hueco más grande que quedaba.
+"""CEPAL: femicidios, cárceles y lo que la gente siente sobre su seguridad.
 
 POR QUÉ EXISTE
 --------------
@@ -57,6 +57,19 @@ INDICADORES = [
     {"id": 4143, "clave": "ocupacion_carcelaria",
      "rotulo": "Ocupación carcelaria sobre la capacidad oficial",
      "unidad": "% de la capacidad oficial", "mas_es_peor": True},
+    # LO QUE LA GENTE SIENTE, que no es lo mismo que lo que la policia cuenta.
+    # Un Estado puede tener pocos homicidios y una poblacion que no sale de
+    # noche, y al reves. Para quien vive en un pais —o va a visitarlo— esto
+    # dice tanto como la tasa.
+    {"id": 5651, "clave": "victima_delito",
+     "rotulo": "Personas que fueron víctimas de un delito en el último año",
+     "unidad": "% de las personas", "mas_es_peor": True},
+    {"id": 3259, "clave": "temor_delito",
+     "rotulo": "Personas que temen ser víctimas de un delito",
+     "unidad": "% de las personas", "mas_es_peor": True},
+    {"id": 5549, "clave": "seguridad_barrio",
+     "rotulo": "Personas que se sienten seguras en su barrio",
+     "unidad": "% de las personas", "mas_es_peor": False},
 ]
 # Los Estados que la fuente agrega —«América Latina», «El Caribe»— no son
 # Estados: se descartan por no estar en el padrón, sin ruido.
@@ -189,6 +202,10 @@ def recolectar():
               "con su propia definición legal, y la CEPAL lo recopila sin homologarlo."),
     )
     vacios = [
+        "LO QUE LA GENTE SIENTE NO ES LO QUE LA POLICÍA CUENTA. Las tres medidas de "
+        "victimización, temor y sensación de seguridad salen de encuestas de hogares: "
+        "dicen lo que las personas declaran, no lo que ocurrió. Un Estado puede tener "
+        "pocos homicidios y una población que no sale de noche, y al revés.",
         "EL FEMICIDIO NO SE DEFINE IGUAL EN TODOS LOS ESTADOS. Algunos cuentan solo el "
         "homicidio cometido por la pareja o la expareja; otros, todo asesinato de una mujer "
         "por razones de género. La comparación entre Estados es indicativa, no exacta: una "
@@ -203,18 +220,18 @@ def recolectar():
           + "; ".join(descartados) + "."] if descartados else [])
 
     return comun.escribir(
-        colector="cepal_genero",
+        colector="cepal",
         capa="publico",
-        fuente="CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL), "
-               "Observatorio de Igualdad de Género de América Latina y el Caribe",
-        url_fuente="https://oig.cepal.org",
+        fuente="CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL): "
+               "Observatorio de Igualdad de Género y estadísticas de seguridad ciudadana",
+        url_fuente="https://statistics.cepal.org/portal/cepalstat",
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,
         extra={
             "indicadores": [{"clave": i["clave"], "rotulo": i["rotulo"], "unidad": i["unidad"],
                              "mas_es_peor": i["mas_es_peor"], "eje": "Seguridad",
-                             "origen": "CEPAL, Observatorio de Igualdad de Género",
+                             "origen": "CEPAL, CEPALSTAT",
                              "cepalstat_id": i["id"]}
                             for i in publicables],
             "resumen": {
@@ -229,4 +246,4 @@ def recolectar():
 
 
 if __name__ == "__main__":
-    comun.correr("cepal_genero", recolectar)
+    comun.correr("cepal", recolectar)

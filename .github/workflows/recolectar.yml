@@ -294,11 +294,11 @@ jobs:
         run: python colectores/oms_homicidios.py
 
       # Femicidios y hacinamiento carcelario. Serie anual: corrida diaria.
-      - name: Femicidios y cárceles (CEPAL)
+      - name: CEPAL · femicidios, cárceles y seguridad ciudadana
         id: cepal
         if: env.COMPLETA == 'true'
         continue-on-error: true
-        run: python colectores/cepal_genero.py
+        run: python colectores/cepal.py
 
       # El registro de portales de compras cambia todos los días: va en la
       # corrida horaria, que es donde vive lo que se mueve.
