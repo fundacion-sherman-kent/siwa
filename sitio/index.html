@@ -1843,6 +1843,18 @@
   body.claro .buscar-tema{background:#fff;color:var(--texto-alto);}
   body.claro .control select option,body.claro .sel-slot select option{background:#fff;color:var(--texto-alto);}
   body.claro .control select optgroup,body.claro .sel-slot select optgroup{background:#fff;color:var(--tenue);}
+
+  /* LOS TRES BOTONES Y LAS SEIS CIFRAS, EN EL MISMO RENGLÓN. La mitad derecha
+     del primer panel estaba vacía y la tira ocupaba una franja entera debajo.
+     Se apilan solas cuando no entran: el contenedor envuelve, no hay un ancho
+     mágico donde se rompa. */
+  .hero-fila{display:flex;gap:24px 40px;align-items:flex-start;flex-wrap:wrap;margin-top:14px;}
+  .hero-fila > .niveles{flex:2 1 460px;min-width:0;margin:0;}
+  .hero-fila > .hero-meta{flex:1 1 320px;min-width:0;margin:0;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(min(130px,100%),1fr));gap:14px 20px;}
+  .hero-fila > .hero-meta > div{border-left:2px solid var(--tinta);padding-left:10px;}
+  .hero-fila > .hero-meta strong{display:block;font-size:20px;line-height:1.15;}
+  .hero-fila > .hero-meta span{font-size:9.5px;letter-spacing:.9px;}
 </style>
 </head>
 <body>
@@ -1888,6 +1900,9 @@
        juicios: publica hechos calificados</b>, se recolecta de forma automática y cada
        dato lleva su calificación de fiabilidad.</p>
   </details>
+  <!-- Los tres botones y las seis cifras comparten renglón: la mitad derecha
+       del panel estaba vacía y la tira alargaba la portada. -->
+  <div class="hero-fila">
   <div class="niveles">
     <span class="niveles-rotulo">¿Cómo querés leerlo? Elegí uno de los tres</span>
     <div class="botonera-nivel" role="group" aria-label="Nivel de lectura">
@@ -1909,6 +1924,7 @@
     <div><strong id="m-memoria">—</strong><span>Días de memoria</span></div>
     <div><strong id="m-edad">—</strong><span>Antigüedad mediana</span></div>
     <div><strong>33</strong><span>Estados del padrón</span></div>
+  </div>
   </div>
 </div>
 
