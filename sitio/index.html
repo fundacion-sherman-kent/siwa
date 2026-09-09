@@ -975,6 +975,52 @@
   .oculto-visual{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);
     white-space:nowrap;margin:-1px;}
 
+  /* LA PALETA SEMANTICA, declarada: naranja peor, verde mejor, punteado sin
+     dato, violeta serie que no se deja proyectar. */
+  :root{--peor:#FB6500;--mejor:#3FA796;--sin-dato:rgba(255,255,255,.05);--no-proyectable:rgba(140,0,224,.22);}
+  .delta.peor{color:var(--peor);} .delta.mejor{color:var(--mejor);}
+
+  /* UNA PANTALLA POR NIVEL: la fila de selectores se pliega segun el nivel. */
+  .mas-opciones{align-self:center;justify-self:start;background:none;border:1px solid var(--line);
+    color:#C7D2E0;border-radius:8px;padding:9px 14px;font:inherit;font-size:12.5px;cursor:pointer;}
+  .mas-opciones:hover{border-color:var(--orange);color:#fff;}
+  body[data-nivel="3"] .mas-opciones{display:none;}
+  body[data-nivel="1"] .fila-selectores:not(.abierta) #slot-tema,
+  body[data-nivel="1"] .fila-selectores:not(.abierta) .modificador,
+  body[data-nivel="2"] .fila-selectores:not(.abierta) .modificador{display:none;}
+  body[data-nivel="1"] .fila-selectores:not(.abierta){grid-template-columns:minmax(0,2fr) auto;}
+  body[data-nivel="2"] .fila-selectores:not(.abierta){grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;}
+  .fila-selectores.abierta{grid-template-columns:repeat(4,minmax(0,1fr)) auto;}
+  @media (max-width:1100px){ .fila-selectores.abierta{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  @media (max-width:600px){ .fila-selectores.abierta, body[data-nivel="1"] .fila-selectores:not(.abierta),
+    body[data-nivel="2"] .fila-selectores:not(.abierta){grid-template-columns:1fr;} }
+  body[data-nivel="1"] #slot-ambito select{font-size:17px;padding:12px 14px;}
+  body[data-nivel="1"] #slot-ambito label{font-size:12px;}
+
+  /* LAS SOLAPAS DEL PERFIL. */
+  .solapas-perfil{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 8px;border-bottom:1px solid var(--line);
+    padding-bottom:8px;}
+  .solapas-perfil .solapa{background:none;border:1px solid var(--line);color:#C7D2E0;border-radius:999px;
+    padding:6px 14px;font:inherit;font-size:12px;cursor:pointer;}
+  .solapas-perfil .solapa.activa{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700;}
+  .panel-perfil{display:none;}
+  #ficha-pais[data-solapa="ejes"] .panel-perfil[data-panel="ejes"],
+  #ficha-pais[data-solapa="hoy"] .panel-perfil[data-panel="hoy"],
+  #ficha-pais[data-solapa="temas"] .panel-perfil[data-panel="temas"]{display:block;}
+  #ficha-pais[data-solapa="novedades"] #perfil-pais .perfil.panorama:not(.novedades),
+  #ficha-pais:not([data-solapa="novedades"]) #perfil-pais .perfil.novedades{display:none;}
+
+  /* FIGURA ANTES QUE TEXTO: lo plegado. */
+  details.cautela-plegada,details.ahora-plegado,details.falta-plegada{margin-top:8px;font-size:11.5px;color:#C7D2E0;}
+  details.cautela-plegada summary,details.ahora-plegado summary,details.falta-plegada summary{
+    cursor:pointer;color:#7d90a8;font-size:11px;text-transform:uppercase;letter-spacing:.8px;}
+  details.cautela-plegada[open] summary,details.ahora-plegado[open] summary,details.falta-plegada[open] summary{color:var(--orange);}
+
+  /* COMPARAR TOCANDO EL MAPA. */
+  .tocar-comparar{display:flex;gap:8px;align-items:flex-start;margin-top:8px;font-size:12px;color:#C7D2E0;cursor:pointer;}
+  .tocar-comparar input{margin-top:3px;accent-color:var(--orange);}
+  .tocar-comparar span{display:block;font-size:10.5px;color:#7d90a8;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:#0E2135;border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:#fff;}
@@ -1616,6 +1662,7 @@
         <div class="sel-slot eleccion" id="slot-tema"></div>
         <div class="sel-slot modificador" id="slot-comparar"></div>
         <div class="sel-slot modificador" id="slot-cruce"></div>
+        <button class="mas-opciones" id="mas-opciones" type="button" aria-expanded="false">Más opciones</button>
       </div>
       <div id="slot-tablero"></div>
       <div class="grafico-seleccion" id="grafico-seleccion">
@@ -1632,6 +1679,7 @@
     <section class="domain" id="ficha-pais">
       <div id="perfil-pais"></div>
       <div class="domain-head"><h3 id="titulo-ficha">La región en cifras</h3><span class="tag" id="tag-ficha">—</span></div>
+      <div class="solapas-perfil" id="solapas-perfil" role="tablist"></div>
       <div class="elegir-ambito">
         <label for="ambito">Empezá acá</label>
         <select id="ambito"></select>
@@ -3430,16 +3478,20 @@
       // dice nada si no se sabe contra que se lo compara.
       const todos = Object.entries(valores).sort((a,b) => b[1] - a[1]);
       const puesto = todos.findIndex(x => x[0] === paisFiltro) + 1;
+      // LA FIGURA PRIMERO, la cifra despues, la advertencia plegada.
       return '<div class="asunto"><h4>' + esc(rot) + ' · ' + esc(paisNombre)
         + ' <span class="edad ' + (cap.subeEsPeor ? 'viejo' : 'fresco') + '">'
         + cifra(v) + '</span></h4>'
-        + '<div class="foot"><span class="porque"><b>' + cifra(v) + unidad + '</b>'
+        + '<div class="foot"><span class="porque">'
+        + figuraTira(clave, paisFiltro)
+        + figuraSerie(clave, paisFiltro)
+        + '<b>' + cifra(v) + ' ' + esc(unidadParaPersonas(cap)) + '</b>'
         + (puesto ? ' · lugar <b>' + puesto + '</b> de ' + todos.length
                     + ' Estados con dato' : '')
         + (detalle ? '<br>' + esc(detalle) : '')
-        + figuraTira(clave, paisFiltro)
-        + figuraSerie(clave, paisFiltro)
-        + cautela + '</span>' + boton + '</div></div>';
+        + (cap.cautela ? '<details class="cautela-plegada"><summary>Cuidado con esta cifra</summary>'
+                         + esc(cap.cautela) + '</details>' : '')
+        + '</span>' + boton + '</div></div>';
     }
 
     const todos = Object.entries(valores).sort((a,b) => b[1] - a[1]).slice(0, 8);
@@ -4164,6 +4216,14 @@
         const el = document.querySelector(q);
         if(el && !colMapa.contains(el)) colMapa.appendChild(el);
       });
+      // Comparar tocando el mapa: una casilla, y Shift+clic siempre.
+      if(!document.getElementById('comparar-tocando')){
+        const l = document.createElement('label');
+        l.className = 'tocar-comparar';
+        l.innerHTML = '<input type="checkbox" id="comparar-tocando"> Comparar tocando el mapa '
+                    + '<span>con un país elegido, cada toque suma o quita otro, hasta cuatro · Shift + clic hace lo mismo</span>';
+        colMapa.appendChild(l);
+      }
       // Y el boton que se lleva el tablero como imagen, donde esta el mapa.
       if(!document.getElementById('bajar-imagen-mapa')){
         const b = document.createElement('div');
@@ -7728,6 +7788,95 @@
     });
   }
 
+  // ============ UNA PANTALLA POR NIVEL ============
+  //
+  // El Ciudadano ve un selector de pais grande y el mapa; tema, comparar y
+  // cruzar quedan detras de «Mas opciones». El Periodista ve pais y tema. El
+  // Analista, los cuatro. Si el enlace trae tema, comparacion o cruce, la fila
+  // se abre sola: un enlace que lleva a algo que no se ve no lleva a nada.
+  function armarMasOpciones(){
+    const b = document.getElementById('mas-opciones');
+    const fila = document.getElementById('fila-selectores');
+    if(!b || !fila || b.dataset.armado) return;
+    b.dataset.armado = '1';
+    b.addEventListener('click', () => {
+      fila.classList.toggle('abierta');
+      b.setAttribute('aria-expanded', fila.classList.contains('abierta') ? 'true' : 'false');
+      pintarMasOpciones();
+    });
+  }
+  function pintarMasOpciones(){
+    const b = document.getElementById('mas-opciones');
+    const fila = document.getElementById('fila-selectores');
+    if(!b || !fila) return;
+    const conAlgo = (capaActiva && capaActiva !== 'situacion') || navComparar.length || (cruce && cruce.length);
+    if(conAlgo && !fila.dataset.abiertaPorEnlace){ fila.dataset.abiertaPorEnlace = '1'; fila.classList.add('abierta'); }
+    const abierta = fila.classList.contains('abierta');
+    b.setAttribute('aria-expanded', abierta ? 'true' : 'false');
+    b.textContent = abierta ? 'Menos opciones'
+      : nivel === 1 ? 'Elegir tema, comparar o cruzar' : 'Comparar o cruzar';
+  }
+
+  // ============ LAS SOLAPAS DEL PERFIL ============
+  //
+  // El perfil —cifra, flecha, puesto, escala— queda solo como pieza central.
+  // Los bloques que se apilaban debajo (ejes, opacidad, lo de hoy, temas)
+  // viven en solapas; son los mismos contenedores, mudados, no copias.
+  const SOLAPAS_PAIS = [['ejes', 'Ejes y opacidad'], ['hoy', 'Lo de hoy'], ['temas', 'Temas']];
+  const SOLAPAS_REGION = [['panorama', 'Panorama'], ['novedades', 'Novedades'], ['hoy', 'Lo de hoy'], ['temas', 'Temas']];
+  function armarSolapasPerfil(){
+    const ficha = document.getElementById('ficha-pais');
+    if(!ficha || ficha.dataset.solapasArmadas) return;
+    ficha.dataset.solapasArmadas = '1';
+    const panel = (nombre, ids) => {
+      const d = document.createElement('div');
+      d.className = 'panel-perfil'; d.dataset.panel = nombre; d.setAttribute('role', 'tabpanel');
+      ids.forEach(id => { const el = document.getElementById(id); if(el) d.appendChild(el); });
+      return d;
+    };
+    const barra = document.getElementById('solapas-perfil');
+    const paneles = [panel('ejes', ['ejes-resumen', 'opacidad-ficha']), panel('hoy', ['hoy']),
+                     panel('temas', ['tarj-ficha', 'pie-ficha'])];
+    paneles.forEach(pn => barra.after(pn));
+    // El orden en el DOM: barra, ejes, hoy, temas.
+    let ref = barra; paneles.forEach(pn => { ref.after(pn); ref = pn; });
+    barra.addEventListener('click', ev => {
+      const b = ev.target.closest('[data-solapa]');
+      if(!b) return;
+      ficha.dataset.solapa = b.dataset.solapa;
+      ficha.dataset.solapaAMano = '1';
+      pintarSolapasPerfil();
+    });
+  }
+  function pintarSolapasPerfil(){
+    const ficha = document.getElementById('ficha-pais');
+    const barra = document.getElementById('solapas-perfil');
+    if(!ficha || !barra) return;
+    const lista = paisFiltro ? SOLAPAS_PAIS : SOLAPAS_REGION;
+    const validas = lista.map(x => x[0]);
+    if(!validas.includes(ficha.dataset.solapa)) ficha.dataset.solapa = validas[0];
+    barra.innerHTML = lista.map(([k, r]) =>
+      '<button class="solapa' + (ficha.dataset.solapa === k ? ' activa' : '') + '" role="tab" data-solapa="' + k
+      + '" aria-selected="' + (ficha.dataset.solapa === k ? 'true' : 'false') + '">' + r + '</button>').join('');
+  }
+
+  // ============ NOMBRES PARA PERSONAS ============
+  //
+  // «estimación de -2,5 a 2,5» es lenguaje de fuente. La unidad se dice en
+  // castellano llano y con su orientacion, y el rotulo tecnico queda al lado.
+  // No se inventa una escala: se lee la de la capa y se le agrega hacia donde
+  // es peor, que la capa ya declara.
+  function unidadParaPersonas(cap){
+    if(!cap) return '';
+    let u = String(cap.unidad || '');
+    u = u.replace(/estimaci[oó]n de -?2,5 a 2,5/i, 'escala del Banco Mundial de −2,5 a 2,5')
+         .replace(/por cada 100\.000 habitantes/i, 'por cada 100.000 personas')
+         .replace(/por mill[oó]n de habitantes/i, 'por cada millón de personas')
+         .replace(/% de la poblaci[oó]n\b/i, '% de las personas');
+    if(cap.subeEsPeor === undefined) return u;
+    return u + (u ? ' · ' : '') + 'cuanto más alto, ' + (cap.subeEsPeor ? 'peor' : 'mejor');
+  }
+
   // ============ EL PLEGADO POR NIVEL ============
   //
   // Medido antes: 36 pantallas en el nivel Analista, 13 en Periodista, 7 en
@@ -8719,8 +8868,8 @@
            + '<span class="grado ' + grado[0] + '">' + grado[1] + '</span></header>'
            + '<p class="porque">' + esc(m.porque) + '</p>'
            + mide
-           + '<div class="ahora">' + ahora + '</div>'
-           + '<div class="falta"><b>Lo que no se mide.</b> ' + m.falta + '</div>'
+           + '<details class="ahora-plegado"><summary>Qué se está publicando ahora</summary><div class="ahora">' + ahora + '</div></details>'
+           + '<details class="falta-plegada"><summary>Lo que no se mide</summary><div class="falta">' + m.falta + '</div></details>'
            + '</article>';
     }).join('');
 
@@ -8827,6 +8976,8 @@
     armarAnio();
     mudarElExplorador();
     armarPlegado();
+    armarMasOpciones();
+    armarSolapasPerfil();
     llenarComparador();
     armarNavegador();
     paso('cuántos temas', contarTemas);
@@ -8836,8 +8987,9 @@
     paso('para publicar hoy', paraPublicarHoy);
     paso('evolución de la región', evolucionVista);
     paso('mapa de relaciones', relacionesVista);
-    paso('encabezados', nivelarEncabezados);
     paso('pestaña', rotularLaPestania);
+    paso('más opciones', pintarMasOpciones);
+    paso('solapas del perfil', pintarSolapasPerfil);
     paso('figuras vivas', armarFigurasVivas);
     paso('año del mapa', pintarAnio);
     paso('explorador', navegadorVista);
@@ -8944,6 +9096,8 @@
     tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista();
     redesVista(); mensajeriaVista(); conflictosVista(); comercioVista(); ransomwareVista();
     pintarFuentes(); informe();
+    // Al final de todo, porque nivela lo que los demas pintores dibujaron.
+    paso('encabezados', nivelarEncabezados);
   }
   function acercarA(iso){
     if(!mapa || !capaPaises){ console.warn('[mapa] sin mapa o sin capa', !!mapa, !!capaPaises); return; }
@@ -8960,7 +9114,19 @@
     }catch(error){ console.warn('[mapa] no se pudo acercar a '+iso+':', error); }
   }
 
-  function seleccionar(iso, nombre){
+  function seleccionar(iso, nombre, ev){
+    // COMPARAR TOCANDO EL MAPA. Con un pais elegido, tocar otro con Shift —o con
+    // la casilla «Comparar tocando el mapa» puesta— lo suma a la comparacion o
+    // lo quita, hasta cuatro. Sin eso, el toque hace lo de siempre: elegir.
+    const casilla = document.getElementById('comparar-tocando');
+    const comparando = (ev && ev.shiftKey) || (casilla && casilla.checked);
+    if(comparando && paisFiltro && iso !== paisFiltro){
+      if(navComparar.includes(iso)) navComparar = navComparar.filter(x => x !== iso);
+      else if(estadosComparados().length < TOPE_COMPARAR) navComparar.push(iso);
+      else avisar('Ya hay ' + TOPE_COMPARAR + ' Estados en la comparación: quitá uno para sumar otro.', true);
+      repintar();
+      return;
+    }
     if(paisFiltro===iso){ paisFiltro=null; paisNombre=null; } else { paisFiltro=iso; paisNombre=nombre; }
     bloqueFiltro = null;
     ambitoCobertura = paisFiltro ? 'pais' : 'todo';
@@ -11635,7 +11801,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
         capa.on('mouseover',()=>pintarFichaMapa(p.iso,p.pais,p.bloque));
         capa.on('mouseout',()=>pintarFichaMapa(paisFiltro, paisNombre,
           paisFiltro?(padron.find(x=>x.iso===paisFiltro)||{}).bloque:''));
-        capa.on('click',()=>seleccionar(p.iso,p.pais));
+        capa.on('click',(ev)=>seleccionar(p.iso,p.pais, ev && ev.originalEvent));
       }}).addTo(mapa);
       // El encuadre automatico se intenta, pero NUNCA a costa de la pagina.
       encuadrar();
