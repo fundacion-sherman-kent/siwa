@@ -68,7 +68,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**42 fuentes en servicio**, en 43 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**44 fuentes en servicio**, en 45 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -78,6 +78,7 @@ python colectores/focos.py
 | `bienes_culturales` | UNIDROIT — Convenio de 1995 sobre bienes culturales robados o exportados ilícitamente | `A-2` | 33 | 5 |
 | `brecha` | Fundación Sherman Kent — brecha entre lo registrado y lo publicado | `B-2` | 33 | 5 |
 | `bti` | Índice de Transformación Bertelsmann (BTI), edición 2024 | `B-3` | 22 | 7 |
+| `cepal_genero` | CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL), Observatorio de Igualdad de Género de América Latina y el Caribe | `A-2` | 33 | 4 |
 | `ciber` | OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta | `B-2` | 33 | 6 |
 | `cites` | CITES — base de datos de comercio de especies protegidas (secretaría CITES / UNEP-WCMC) | `A-3` | 33 | 8 |
 | `cobertura` | Padrón de medios de la Fundación Sherman Kent | `F-3` | — | 11 |
@@ -85,6 +86,7 @@ python colectores/focos.py
 | `conflictos` | Instituto de Estudios Interculturales, Pontificia Universidad Javeriana Cali — visor de conflictos de America Latina | `B-3` | 11 | 7 |
 | `consulta` | Fundación Sherman Kent — consulta dirigida a la fuente primaria | `A-2` | 33 | 6 |
 | `contratacion` | Registro de publicadores de contrataciones abiertas | `B-2` | 33 | 5 |
+| `contrataciones_abiertas` | Registro de publicadores del Estándar de Datos de Contrataciones Abiertas — Open Contracting Partnership | `A-2` | 33 | 4 |
 | `copernicus` | Copernicus — catálogo de observación de la Tierra de la Unión Europea | `A-2` | 33 | 6 |
 | `crimen_organizado` | Índice Global de Crimen Organizado — Global Initiative Against Transnational Organized Crime | `B-3` | 33 | 7 |
 | `desastres` | IFRC GO — Federación Internacional de Sociedades de la Cruz Roja y de la Media Luna Roja, registro de emergencias | `A-2` | 33 | 8 |
