@@ -1442,6 +1442,29 @@
   .mineria-tit{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--orange);
     font-weight:700;margin:16px 0 8px;}
 
+  /* EL ORDEN DEL INDICE DE OPACIDAD. */
+  .op-fila{display:grid;grid-template-columns:34px 1fr 120px 58px;gap:10px;align-items:center;
+    padding:6px 0;border-top:1px solid var(--velo-2);font-size:13px;}
+  .op-fila:first-of-type{border-top:none;}
+  .op-fila .pu{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tenue);
+    text-align:right;}
+  .op-fila .pa{color:var(--texto);}
+  .op-fila.suyo .pa{font-weight:700;color:var(--texto-max);}
+  .op-barra{height:9px;border-radius:5px;background:var(--velo-2);overflow:hidden;}
+  .op-barra i{display:block;height:100%;background:var(--orange);}
+  .op-fila .nu{font-family:'JetBrains Mono',monospace;font-weight:700;text-align:right;
+    color:var(--texto-max);font-size:13px;}
+  .op-fila .nu small{display:block;font-size:9.5px;color:var(--tenue);font-weight:400;
+    font-family:'Inter',sans-serif;}
+  .op-cab{display:grid;grid-template-columns:34px 1fr 120px 58px;gap:10px;font-size:9.5px;
+    text-transform:uppercase;letter-spacing:.9px;color:var(--tenue);font-weight:700;
+    padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:4px;}
+  .op-cab span:last-child,.op-cab span:nth-child(3){text-align:right;}
+  @media (max-width:560px){
+    .op-fila,.op-cab{grid-template-columns:28px 1fr 58px;}
+    .op-fila .op-barra,.op-cab span:nth-child(3){display:none;}
+  }
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -3458,7 +3481,29 @@
       <div id="vac-mensajeria"></div>
         </div>
     <div class="categoria" id="desinformacion" data-nivel="2">
-      <div class="categoria-head"><h3>Desinformación e infoxicación</h3><span class="tag" id="tag-desinformacion">—</span></div>
+      <div class="categoria-head"><h3>FIMI · manipulación e interferencia informativa</h3><span class="tag" id="tag-desinformacion">—</span></div>
+      <details class="aviso-cobertura"><summary>Qué es FIMI, y qué mide de eso este registro</summary>
+        <p><b>FIMI</b> —<i>Foreign Information Manipulation and Interference</i>, manipulación e
+           interferencia informativa extranjera— es el estándar que usa el Servicio Europeo de
+           Acción Exterior. Define un <b>patrón de conducta mayormente no ilegal</b>,
+           manipulador, <b>intencional y coordinado</b>, ejecutado por actores estatales o no
+           estatales y sus intermediarios, dentro o fuera de su territorio, que amenaza valores,
+           procedimientos y procesos políticos.</p>
+        <p><b>Lo decisivo: FIMI se define por la conducta, no por la falsedad.</b> Una operación
+           puede usar material enteramente cierto y serlo igual; y un error de buena fe puede ser
+           falso y no serlo. Por eso el estándar separa <b>misinformación</b> —falso, sin
+           intención—, <b>desinformación</b> —falso y con intención—, <b>malinformación</b>
+           —cierto, usado para dañar— y <b>FIMI</b>, que es la conducta.</p>
+        <p><b>De las tres capas, este registro tiene dos.</b> El <b>terreno</b> —censura,
+           autocensura, hostigamiento, sesgo, medios comprados, polarización— está en «Entorno
+           informativo». La <b>conducta observable</b> es lo que se mide acá: amplificación sin
+           corroboración. La <b>atribución</b> —quién y desde dónde— <b>no la tenemos y no se
+           inventa</b>.</p>
+        <p><b>La taxonomía de referencia es DISARM</b>, el marco abierto de técnicas de
+           manipulación informativa alineado con MITRE ATT&amp;CK: 391 técnicas sobre 16
+           tácticas, comprobado el 10 de septiembre de 2026. Es el vocabulario con el que se
+           nombran las conductas cuando se las observa.</p>
+      </details>
       <div class="procedencia" id="proc-desinformacion">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-desinformacion"></div>
       <div id="vac-desinformacion"></div>
@@ -3469,6 +3514,26 @@
       <div class="bloque-head"><h2>Índice de Opacidad</h2></div>
       <p class="bloque-bajada">Qué no publica cada Estado, y qué se revisó para poder afirmarlo. Es una medición propia de la Oficina: no la publica ningún organismo.</p>
     
+    <div class="categoria" id="indice-opacidad-puntaje" data-nivel="1">
+      <div class="categoria-head"><h3>El puntaje, de 0 a 100</h3><span class="tag" id="tag-puntaje">—</span></div>
+      <details class="aviso-cobertura"><summary>Mide actos observables, no percepciones — y no se compara con el índice de percepción</summary>
+        <p><b>0 es el Estado más transparente y 100 el más opaco.</b> La dirección importa y va
+           dicha: este índice mide la <b>ausencia</b>, no la presencia. Una afirmación de
+           ausencia se puede refutar mostrando una dirección, y eso es lo que la vuelve seria.</p>
+        <p><b>Se arma con seis actos, no con seis percepciones.</b> Que un portal responda o no,
+           que un sitio oficial esté en pie o retirado, que un Estado haya declarado su comercio
+           de armas a Naciones Unidas: todo eso <b>cualquiera lo comprueba repitiendo la
+           consulta</b>. Por eso <b>no debe compararse con el índice de percepción de
+           corrupción</b>, que promedia encuestas a expertos: contestan preguntas distintas y
+           ordenarían distinto con toda razón.</p>
+        <p><b>Esto no es la verificación de los cuatro pasos</b>, que está más abajo y es otra
+           cosa: aquella es una revisión manual del equipo sobre el acceso a la información;
+           esta es una medición automática de seis actos. <b>«Sin medir» no significa
+           opaco</b>: significa que faltan actos con evidencia.</p>
+      </details>
+      <div class="procedencia" id="proc-puntaje">Cargando el registro…</div>
+      <div id="tabla-opacidad"></div>
+        </div>
     <div class="categoria" id="memoria" data-nivel="2">
       <div class="categoria-head"><h3>Lo que cambió desde que miramos</h3><span class="tag" id="tag-memoria">—</span></div>
       <details class="aviso-cobertura"><summary>El registro guarda lo que observa, no solo lo que ve hoy</summary>
@@ -4010,7 +4075,7 @@
     {clave:'contratacion',      eje:'Gobernanza', rotulo:'Contratación pública', disponible:()=>false, sinCapa:'no_comparable'},
     // Quien publica sus compras en el formato comun, y hace cuantos dias.
     {clave:'contrataciones_abiertas', eje:'Gobernanza', rotulo:'Compras públicas en formato abierto', disponible:()=>!!almacen.contrataciones, archivo:'contrataciones_abiertas'},
-    {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false, sinCapa:'no_comparable'},
+    {clave:'desinformacion',    eje:'Gobernanza', rotulo:'FIMI — manipulación informativa', disponible:()=>false, sinCapa:'no_comparable'},
     // LA MEDICION MAS PROPIA DE LA CASA, adentro del registro y no al costado.
     // Calculaba puntaje y puesto desde hace tiempo, pero al no ser materia no se
     // la podia mapear, ordenar, cruzar ni poner en el mosaico: la unica medida
@@ -4081,10 +4146,16 @@
     acceso_informacion: 'transparencia acceso informacion publica datos',
     estabilidad: 'estabilidad golpe crisis politica violencia politica',
     libertad_expresion: 'prensa periodistas censura libertad expresion',
-    censura_medios: 'censura prensa medios periodistas',
+    // FIMI y sus vecinos: quien busque por el estandar internacional o por
+    // cualquiera de los terminos que el concepto abarca tiene que llegar.
+    censura_medios: 'censura prensa medios periodistas fimi manipulacion informativa',
+    autocensura: 'autocensura miedo periodistas fimi desinformacion',
+    sesgo_medios: 'sesgo medios parcialidad fimi desinformacion fake news noticias falsas',
+    medios_corruptos: 'medios comprados pauta publicidad oficial fimi',
+    hostigamiento_periodistas: 'hostigamiento periodistas ataques prensa fimi',
     hostigamiento_periodistas: 'periodistas amenazas prensa agresion',
     autocensura: 'autocensura prensa periodistas miedo',
-    polarizacion: 'polarizacion grieta division politica',
+    polarizacion: 'polarizacion grieta division politica fimi infoxicacion desinformacion',
     gini: 'desigualdad inequidad brecha ricos pobres',
     pobreza: 'pobreza indigencia carencia',
     empleo_informal: 'informalidad trabajo negro empleo informal',
@@ -9527,16 +9598,29 @@
           +'de cada licitación existe</b> en los portales de compras de cada Estado, pero en 33 '
           +'formatos distintos: es la brecha más grande y la más remontable de las seis.'},
 
-    {clave:'desinformacion', rotulo:'Desinformación', tema:'desinformacion',
-     porque:'El clima en que circula la información: qué se puede decir y quién lo dice.',
+    // FIMI, EL ESTANDAR INTERNACIONAL. Lo decisivo del concepto -y lo que obliga
+    // a rehacer la materia y no solo su rotulo- es que FIMI se define por la
+    // CONDUCTA y no por la falsedad del contenido: una operacion puede usar
+    // material enteramente cierto y ser FIMI. De las tres capas del concepto
+    // este registro tiene dos, y la tercera se declara faltante.
+    //
+    // EL `extra` ESTABA MUERTO: decia 'prensa' y enseguida null, y la segunda
+    // clave pisa a la primera. El registro de libertad de prensa nunca llego a
+    // esta materia. Estaba escrito y no corria.
+    {clave:'desinformacion', rotulo:'FIMI — manipulación e interferencia informativa',
+     tema:'desinformacion',
+     porque:'Conducta manipuladora, coordinada e intencionada sobre la información. El estándar '
+           +'la define por el COMPORTAMIENTO, no por la falsedad: una operación puede usar '
+           +'material cierto y serlo igual.',
      indicadores:['censura_medios','hostigamiento_periodistas','autocensura','sesgo_medios','medios_corruptos','polarizacion'],
      extra:'prensa',
-     extra:null,
-     falta:'<b>Nadie cuenta el contenido falso</b> de forma comparable entre países. Lo que se '
-          +'mide es el terreno en que prospera &mdash;censura, hostigamiento, autocensura, sesgo, '
-          +'medios comprados y polarización&mdash;, con evaluación experta de V-Dem. Es la '
-          +'medición <b>más reciente del registro</b>, y aun así no dice cuánta desinformación '
-          +'circula.'},
+     falta:'<b>El registro mide dos de las tres capas del concepto y la tercera no la tiene.</b> '
+          +'Mide <b>el terreno</b> &mdash;censura, hostigamiento, autocensura, sesgo, medios '
+          +'comprados y polarización, con evaluación experta de V-Dem&mdash; y mide <b>la '
+          +'conducta observable</b>: el índice de infoxicación propio, asuntos amplificados por '
+          +'tres o más portales que ningún segundo origen corrobora. <b>No mide la '
+          +'atribución</b> &mdash;la «F» de FIMI: quién lo hace y desde dónde&mdash;, porque '
+          +'atribuir origen extranjero exige evidencia que esta casa no recolecta y no inventa.'},
   ];
 
   // Tres materias se apoyan en fuentes que NO producen indicadores sino registros
@@ -10909,6 +10993,7 @@
     paso('llevarse la consulta', pintarCajaConsulta);
     paso('el objetivo y su medición', tableroObjetivo);
     paso('censo de fuentes subnacionales', censoVista);
+    paso('orden del Índice de Opacidad', tablaOpacidad);
     paso('fases del método', fasesVista);
     paso('minería del registro', mineriaVista);
     paso('cuántos temas', contarTemas);
@@ -11785,8 +11870,10 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   }
 
   // ---- Desinformacion e infoxicacion -------------------------------------
-  // No mide desinformacion probada: mide amplificacion sin corroboracion, que
-  // es lo unico que se puede medir con lo que el registro ya recolecta.
+  // NO MIDE FIMI PROBADO: mide amplificacion sin corroboracion, que es conducta
+  // observable -donde el estandar pone el foco- y lo unico de las tres capas del
+  // concepto que este registro puede medir con lo que ya recolecta. La
+  // atribucion de origen extranjero exige evidencia que esta casa no tiene.
   function desinformacion(){
     const d=almacen.cobertura, caja=document.getElementById('tarj-desinformacion');
     if(!caja) return;
@@ -11799,8 +11886,9 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       <div class="sub">${esc(sub)}</div><div class="foot"><span class="src">${esc(meta.fuente.nombre)}</span>
       <span class="badge unica">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
     caja.innerHTML =
-      tarjeta('Índice de infoxicación', r.indice_infoxicacion_pct+' %',
-              'asuntos repetidos por tres o más portales que ningún segundo origen corrobora') +
+      tarjeta('Amplificación sin corroborar · infoxicación', r.indice_infoxicacion_pct+' %',
+              'asuntos repetidos por tres o más portales que ningún segundo origen corrobora. '
+              +'Es conducta observable, que es donde FIMI pone el foco') +
       tarjeta('Asuntos amplificados sin corroborar', miles(r.asuntos_amplificados_sin_corroborar),
               'sobre '+miles(r.asuntos_con_cruce)+' asuntos con cruce') +
       tarjeta('Asuntos de un solo origen', miles(r.origen_unico),
@@ -13683,6 +13771,49 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       + '</b></p>';
   }
 
+  // EL ORDEN COMPLETO DEL INDICE DE OPACIDAD. La seccion llevaba su nombre y
+  // adentro mostraba la verificacion de los cuatro pasos, que es otra medida: el
+  // puntaje existia en el archivo, se veia en la ficha del pais y en el mapa,
+  // pero no en la seccion que lo nombra. Medido en pantalla.
+  function tablaOpacidad(){
+    const caja = document.getElementById('tabla-opacidad');
+    const d = almacen.indice;
+    if(!caja || !d) return;
+    const medidos = (d.registros||[]).filter(r => r.estado === 'medido'
+      && r.opacidad !== null && r.opacidad !== undefined);
+    if(!medidos.length){ caja.innerHTML = '<p class="sin-dato">Todavía sin Estados medidos.</p>'; return; }
+    const orden = medidos.slice().sort((a,b) => b.opacidad - a.opacidad);
+    const zona = bloqueActivo();
+    const suyos = orden.filter(r => (!zona || r.bloque === zona));
+
+    const tag = document.getElementById('tag-puntaje');
+    if(tag) tag.textContent = medidos.length + ' de ' + ((d.registros||[]).length)
+      + ' Estados medidos · 0 el más transparente';
+
+    const fila = r => {
+      const cumple = (r.actos||[]).filter(a => a.medido && a.puntaje === 0).length;
+      return '<div class="op-fila' + (r.iso === paisFiltro ? ' suyo' : '') + '">'
+        + '<span class="pu">' + r.puesto + '</span>'
+        + '<span class="pa">' + esc(r.pais) + '</span>'
+        + '<span class="op-barra"><i style="width:' + Math.max(2, r.opacidad) + '%"></i></span>'
+        + '<span class="nu">' + cifra(r.opacidad)
+        + '<small>' + cumple + '/' + r.actos_medidos + ' actos</small></span></div>';
+    };
+    const sinMedir = (d.registros||[]).filter(r => r.estado !== 'medido');
+    caja.innerHTML =
+      '<div class="op-cab"><span>#</span><span>Estado</span><span>0 · 100</span><span>Puntaje</span></div>'
+      + suyos.map(fila).join('')
+      + (sinMedir.length
+         ? '<p class="censo-aviso" style="margin-top:12px"><b>' + sinMedir.length
+           + ' Estado' + (sinMedir.length === 1 ? '' : 's') + ' sin medir</b> —'
+           + esc(sinMedir.map(r => r.pais).join(', ')) + '—. <b>Sin medir NO quiere decir '
+           + 'opaco</b>: quiere decir que faltan actos con evidencia.</p>'
+         : '')
+      + '<p class="censo-aviso" style="margin-top:12px">La columna de la derecha dice cuántos '
+      + 'de los actos medidos <b>cumple</b> cada Estado. El puntaje es el promedio simple de '
+      + 'los actos con evidencia: cada acto vale 0 si lo cumplió y 100 si no.</p>';
+  }
+
   function censoVista(){
     const caja = document.getElementById('lista-censo');
     const d = almacen.subnacional;
@@ -14397,7 +14528,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
 
   Promise.all([traer('indice_opacidad.json'), traer('estado/indice_opacidad.json').catch(()=>null)])
     .then(([d,estado])=>{
-      almacen.indice=d; const meta=d.procedencia;
+      almacen.indice=d; pintarProcedencia('proc-puntaje', d.procedencia); tablaOpacidad(); const meta=d.procedencia;
       vacios+=pintarVacios('vac-opacidad',meta.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('indice-opacidad','puntaje de opacidad',estado.mensaje,meta); }
       repintar(); marcador();
