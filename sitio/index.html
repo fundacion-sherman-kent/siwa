@@ -1280,6 +1280,28 @@
     text-decoration:none;}
   .cita-enlace:hover{border-bottom-width:2px;}
 
+  /* LA FICHA DEL PAÍS EN PAPEL. Solo existe al imprimir. */
+  #ficha-para-imprimir{display:none;}
+  @media print{
+    body.imprimir-ficha > *:not(#ficha-para-imprimir){display:none!important;}
+    body.imprimir-ficha #ficha-para-imprimir{
+      display:block!important;
+      /* Las nueve de la estructura, en papel. El resto de la pagina no se toca. */
+      --fondo:#fff; --panel:#fff; --campo:#fff; --texto:#1a2430; --texto-2:#3d4d5c;
+      --texto-alto:#00121E; --texto-max:#00121E; --tenue:#5b6f84;
+      --velo-1:rgba(0,18,30,.04); --velo-2:rgba(0,18,30,.08); --velo-3:rgba(0,18,30,.13);
+      --line:#c9d2da; --tinta:#FB6500; --mag-0:rgba(251,101,0,.10);
+      color:var(--texto); background:#fff;
+    }
+    body.imprimir-ficha #ficha-para-imprimir .fp-titulo{
+      font-size:22px;font-weight:800;color:#00121E;margin:0 0 2px;letter-spacing:-.02em;}
+    body.imprimir-ficha #ficha-para-imprimir .fp-zona{
+      font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#5b6f84;margin:0 0 14px;}
+    body.imprimir-ficha #ficha-para-imprimir .ficha-ciudadano,
+    body.imprimir-ficha #ficha-para-imprimir .fc-bloque{break-inside:avoid;}
+    body.imprimir-ficha #ficha-para-imprimir .fc-ojo{color:#5b6f84;}
+  }
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -3453,6 +3475,12 @@
   </main>
 </div>
 
+<!-- LA HOJA DEL PAÍS. Vacía en pantalla y oculta: se llena en el momento de
+     imprimir, con la ficha del Ciudadano, su membrete y su colofón. Vive fuera
+     del cuerpo del registro para que la regla de impresión no tenga que pelear
+     con las que esconden secciones. -->
+<div id="ficha-para-imprimir" hidden aria-hidden="true"></div>
+
 <footer>
   <strong>SIWA</strong> — Fundación Sherman Kent · Oficina de Generación de Inteligencia.
   Los dominios marcados «sin dato» describen colectores todavía no construidos y no muestran cifras.
@@ -5390,6 +5418,71 @@
               + '-' + new Date().toISOString().slice(0,10) + '.csv'};
   }
 
+  // LA HOJA DEL PAIS. Se arma en el momento de imprimir y con la ficha del
+  // Ciudadano, no con lo que haya dibujado en pantalla: si dependiera de eso, el
+  // boton imprimiria distinto segun el nivel de lectura, que es la clase de
+  // sorpresa que nadie perdona en una hoja que ya salio de la impresora.
+  function armarHojaDelPais(iso){
+    const caja = document.getElementById('ficha-para-imprimir');
+    if(!caja || !iso) return false;
+    const p = (padron||[]).find(x => x.iso === iso) || {};
+    const hoy = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'long', year:'numeric'});
+    caja.innerHTML =
+      '<div class="membrete">'
+      + '<img src="marca/fusk-logo-nombre-color.png" alt="Fundación Sherman Kent">'
+      + '<div class="membrete-txt"><strong>SIWA</strong>'
+      + '<span>Reporte de situación de América Latina y el Caribe</span>'
+      + '<span class="oficina">Fundación Sherman Kent · Oficina de Generación de Inteligencia</span>'
+      + '</div></div>'
+      + '<p class="fp-zona">Ficha de país · ' + esc(p.bloque || 'América Latina y el Caribe') + '</p>'
+      + '<h1 class="fp-titulo">' + esc(p.pais || iso) + '</h1>'
+      + fichaDelCiudadano(iso, true)
+      + '<div class="colofon">'
+      + '<div class="cita"><b>Cómo citar esta ficha — norma APA 7:</b><br>'
+      + 'Fundación Sherman Kent, Oficina de Generación de Inteligencia. (' + ANIO_HOY + '). '
+      + '<i>SIWA — Reporte de situación de América Latina y el Caribe: ' + esc(p.pais || iso)
+      + '</i> [Conjunto de datos]. Fundación Sherman Kent. Recuperado el ' + hoy + ' de '
+      + esc(direccionLimpia()) + '<br><small>Cada cifra de esta hoja lleva adentro su fuente y '
+      + 'su año; el productor del dato se cita junto con este registro.</small></div>'
+      + '<b>Qué es esto.</b> Una foto del Estado con lo que publican organismos '
+      + 'internacionales y el propio país, puesto en la misma vara que los otros 32. '
+      + '<b>Ningún número fue estimado, completado ni simulado</b>: lo que falta se dice que '
+      + 'falta. El registro publica hechos calificados y no emite juicios.'
+      + '<br><br><b>Uso libre y gratuito</b>, citando «SIWA, Fundación Sherman Kent» y al '
+      + 'productor de cada dato. El registro completo, con la serie histórica y los vacíos '
+      + 'declarados, está en siwa.fundacionkent.org.'
+      + '<div class="autoridades">La Fundación agradece a los especialistas y funcionarios '
+      + 'que contribuyeron con su tiempo y criterio.</div></div>';
+    caja.hidden = false;
+    return true;
+  }
+
+  // UN SOLO ESCUCHA, delegado. La ficha y la caja se repintan en cada cambio de
+  // ambito: enganchar uno por pintada es como se juntan diez copias del mismo
+  // escucha sobre elementos que ya no existen.
+  document.addEventListener('click', ev => {
+    if(ev.target.closest('.ficha-papel')) imprimirLaFicha();
+  });
+
+  function imprimirLaFicha(){
+    const iso = paisFiltro;
+    if(!iso){ avisar('Elegí primero un Estado: la ficha es de un país.', true); return; }
+    if(!armarHojaDelPais(iso)){ avisar('No se pudo armar la ficha.', true); return; }
+    document.body.classList.add('imprimir-ficha');
+    // El navegador avisa cuando termina —haya impreso o haya cancelado—, y ahi
+    // se limpia. Sin esto, cancelar dejaba la pagina en modo hoja.
+    const limpiar = () => {
+      document.body.classList.remove('imprimir-ficha');
+      const c = document.getElementById('ficha-para-imprimir');
+      if(c){ c.hidden = true; c.innerHTML = ''; }
+      window.removeEventListener('afterprint', limpiar);
+    };
+    window.addEventListener('afterprint', limpiar);
+    setTimeout(() => { window.print(); }, 60);
+    // Respaldo para el navegador que no dispara «afterprint».
+    setTimeout(limpiar, 4000);
+  }
+
   function pintarCajaConsulta(){
     const caja = document.getElementById('caja-consulta');
     if(!caja) return;
@@ -5415,6 +5508,8 @@
       + '<span><button class="boton chico" id="bajar-consulta">Descargar la planilla</button> '
       + '<button class="boton chico" id="bajar-imagen">Descargar la imagen</button> '
       + '<button class="boton chico" id="copiar-cita">Copiar la cita</button>'
+      + (paisFiltro ? ' <button class="boton chico ficha-papel" type="button">Ficha del país '
+         + 'en una carilla</button>' : '')
       + (puertaDeLaVista() ? ' <button class="boton chico" id="copiar-puerta">Enlace para redes</button>' : '')
       + '</span>'
       + '</div></div>';
@@ -5951,7 +6046,10 @@
   // OJO CON EL NOMBRE: ya existe fichaCiudadana(), que pinta las tarjetas del
   // perfil. Dos funciones con el mismo nombre no conviven: la ultima gana y la
   // primera desaparece sin avisar. Esta es otra cosa y se llama distinto.
-  function fichaDelCiudadano(iso){
+  // «paraPapel» cambia SOLO el cierre: en pantalla manda a los otros dos
+  // niveles «ahi arriba», que en una hoja impresa no significa nada, y ofrece el
+  // boton de imprimir, que en el papel seria un boton dibujado.
+  function fichaDelCiudadano(iso, paraPapel){
     const p = (padron || []).find(x => x.iso === iso) || {};
     const mio = (compuesto().general || {})[iso];
     const pg = mio ? posicionCompuesta(iso) : null;
@@ -5997,9 +6095,15 @@
       + general
       + (hayLoQueSiente ? siente : '')
       + (hayLoQueCuenta ? cuenta : '')
-      + '<p class="fc-pie">Esto es un resumen para conocer el país. El detalle, las fuentes '
-      + 'de cada cifra y los vacíos declarados están en los niveles <b>Periodista</b> y '
-      + '<b>Analista</b>, ahí arriba.</p>'
+      + (paraPapel
+         ? '<p class="fc-pie">Esto es un resumen para conocer el país. El detalle, las '
+           + 'fuentes de cada cifra y los vacíos declarados están en el registro completo, '
+           + 'en siwa.fundacionkent.org.</p>'
+         : '<p class="fc-pie">Esto es un resumen para conocer el país. El detalle, las fuentes '
+           + 'de cada cifra y los vacíos declarados están en los niveles <b>Periodista</b> y '
+           + '<b>Analista</b>, ahí arriba.'
+           + '<br><button class="boton chico ficha-papel" type="button">Imprimir esta ficha '
+           + 'en una carilla</button></p>')
       + '</div>';
   }
 
