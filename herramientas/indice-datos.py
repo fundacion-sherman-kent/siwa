@@ -41,9 +41,17 @@ PAGINA = RAIZ / "datos" / "index.html"
 sys.path.insert(0, str(RAIZ / "herramientas"))
 import puertas  # noqa: E402  — el estilo y la cabecera de la casa viven ahí
 
+sys.path.insert(0, str(RAIZ / "colectores"))
+import comun  # noqa: E402  — la lista de testigos, compartida con la auditoría
+
 BASE = puertas.BASE
 esc = puertas.esc
 DIR_DATOS = f"{BASE}/datos/publico"
+
+# Los archivos que NO son datos sino mediciones que esta casa hace de si misma.
+# La lista vive en comun.py, que es de donde la toma tambien la auditoria: dos
+# copias de la misma lista divergen el dia que aparece un testigo nuevo.
+TESTIGOS = comun.TESTIGOS
 
 
 # ---------------------------------------------------------------- el catálogo
@@ -51,7 +59,11 @@ def recorrer() -> list:
     """Un renglón por archivo publicado, leído del archivo mismo."""
     conjuntos = []
     for ruta in sorted(PUBLICO.glob("*.json")):
-        if ruta.name == "indice.json":
+        # Los TESTIGOS DE CONTROL no son conjuntos de datos y no pueden entrar
+        # al catálogo como si lo fueran: no tienen fuente ni calificación
+        # porque no vienen de ninguna fuente —los produce esta casa
+        # midiéndose a sí misma—. Se declaran aparte, en «controles».
+        if ruta.name in TESTIGOS:
             continue
         try:
             d = json.loads(ruta.read_text(encoding="utf-8"))
@@ -123,6 +135,13 @@ def catalogo(conjuntos: list) -> dict:
             "indicador desaparece y este índice lo dirá con su ausencia."),
         "padron": f"{BASE}/sitio/geo/paises-alc.geojson",
         "novedades": f"{BASE}/novedades.xml",
+        "controles": {
+            "que_son": "Mediciones que el registro hace de si mismo. No son datos de terceros: "
+                       "no tienen fuente ni calificacion, y por eso no cuentan como conjuntos. "
+                       "Se publican para que el objetivo declarado pueda controlarse desde afuera.",
+            "donde": {nombre: {"url": f"{DIR_DATOS}/{nombre}", "que_es": que}
+                      for nombre, que in sorted(TESTIGOS.items()) if nombre != "indice.json"},
+        },
         "conjuntos": conjuntos,
         "cuantos": len(conjuntos),
     }

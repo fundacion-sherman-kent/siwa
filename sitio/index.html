@@ -1327,6 +1327,36 @@
     body.imprimir-ficha #ficha-para-imprimir .fc-ojo{color:#5b6f84;}
   }
 
+  /* EL OBJETIVO Y SU MEDICIÓN. */
+  .obj-meta{font-size:14px;line-height:1.6;color:var(--texto);margin:0 0 14px;max-width:70ch;}
+  .obj-meta b{color:var(--texto-max);}
+  .obj-tres{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));
+    margin-bottom:14px;}
+  .obj-tres > div{border:1px solid var(--line);border-left:3px solid var(--orange);
+    border-radius:8px;padding:11px 13px;background:var(--velo-1);}
+  .obj-tres b{display:block;font-size:12px;color:var(--orange);margin-bottom:5px;
+    letter-spacing:.2px;}
+  .obj-tres span{font-size:12.5px;color:var(--texto-2);line-height:1.5;}
+  .obj-regla{font-size:13px;color:var(--texto-2);line-height:1.6;margin:0 0 12px;max-width:70ch;}
+  .obj-regla b{color:var(--texto);}
+  .obj-control{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));}
+  .obj-control > div{border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+    background:var(--panel);}
+  .obj-control .rot{font-size:10px;letter-spacing:1.3px;text-transform:uppercase;
+    color:var(--tenue);font-weight:700;display:block;margin-bottom:6px;}
+  .obj-control .ver{font-size:19px;font-weight:800;letter-spacing:-.01em;display:block;
+    line-height:1.2;}
+  .obj-control .ver.bien{color:var(--t-ok);} .obj-control .ver.mal{color:var(--t-falla);}
+  .obj-control .dice{font-size:12px;color:var(--texto-2);line-height:1.5;display:block;
+    margin-top:5px;}
+  .obj-control .cuando{font-size:10.5px;color:var(--tenue);display:block;margin-top:6px;}
+  .obj-brechas{margin:12px 0 0;padding:0;list-style:none;}
+  .obj-brechas li{font-size:12.5px;color:var(--texto-2);line-height:1.55;margin:0 0 6px;
+    padding-left:14px;position:relative;}
+  .obj-brechas li::before{content:'·';position:absolute;left:3px;color:var(--orange);
+    font-weight:800;}
+  .obj-brechas b{color:var(--texto);}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -2132,6 +2162,14 @@
         propios, una investigación, otra página—, están todos publicados en archivos abiertos:
         <a href="https://siwa.fundacionkent.org/datos/" target="_blank" rel="noopener">la
         interfaz de datos</a> dice qué hay, cómo se lee y qué se promete.</p>
+
+      <h3 class="ay-tit">7 · Hacia dónde va</h3>
+      <p>SIWA se propone ser <b>la primera plataforma de consulta de datos de América Latina y
+        el Caribe</b>: la primera a la que se recurre para saber cómo está la región y de dónde
+        sale ese dato. Eso obliga a buscar fuentes nuevas todo el tiempo, a que cada tema pueda
+        mirarse en el tiempo y a que la página se lea igual en un teléfono que en un monitor.
+        <b>El objetivo no se declara: se mide</b>, y la medición se publica en «De dónde sale y
+        qué falta», con las fallas y las brechas que haya.</p>
 
       <p class="ay-pie">¿Falta algo o algo no se entiende? Escríbanos: es la clase de aviso que
         cambia el registro.</p>
@@ -3351,6 +3389,26 @@
       <div class="bloque-head"><h2>De dónde sale y qué falta</h2></div>
       <p class="bloque-bajada">La trazabilidad completa: qué publica cada Estado, qué no publica, de dónde sale cada cifra, cómo se la califica y qué se puede descargar. <b>Elegí una solapa.</b> El informe en PDF no lleva estos paneles: lleva su propia sección de procedencia y de vacíos declarados, armada para el ámbito que estés mirando.</p>
       <div class="barra-solapas" id="barra-solapas" role="tablist" aria-label="Secciones de trazabilidad"></div>
+    <div class="categoria" id="el-objetivo" data-nivel="1">
+      <div class="categoria-head"><h3>El objetivo, y cómo se controla</h3><span class="tag" id="tag-objetivo">—</span></div>
+      <p class="obj-meta"><b>SIWA se propone ser la primera plataforma de consulta de datos de
+        América Latina y el Caribe.</b> No la más grande: la primera a la que se recurre cuando
+        hay que averiguar cómo está la región y de dónde sale ese dato.</p>
+      <div class="obj-tres">
+        <div><b>Vanguardia en la obtención</b><span>Se buscan fuentes nuevas todo el tiempo, y
+          ninguna entra sin una disponibilidad medida por el mismo robot que después la usa.</span></div>
+        <div><b>Vanguardia en el procesamiento y la visualización</b><span>Todo tema tiene que
+          poder mirarse en el tiempo y compararse. Una cifra sin historia ni contexto es un dato
+          incompleto, no un tablero.</span></div>
+        <div><b>Diseño adaptable, siempre</b><span>Teléfono, tableta, monitor y papel. Un
+          desarrollo que no entra en una pantalla chica está incompleto, por bien que se vea en
+          la grande.</span></div>
+      </div>
+      <p class="obj-regla"><b>El objetivo no se declara: se mide.</b> Un propósito sin medición
+        es una intención, y una intención no se audita. Estas dos cifras las calculan programas
+        que corren solos y que terminan en rojo cuando algo se rompe —salgan como salgan—.</p>
+      <div id="tablero-objetivo"></div>
+    </div>
     <div class="categoria" id="oficiales" data-nivel="3">
       <div class="categoria-head"><h3>Padrón de fuentes oficiales</h3><span class="tag" id="tag-oficiales">—</span></div>
       <details class="aviso-cobertura"><summary>Este padrón no publica datos: publica dónde están</summary>
@@ -4888,7 +4946,13 @@
     if(!barra) return;
     if(vivas.length < 2){ barra.innerHTML = ''; return; }
 
-    const rot = c => (c.querySelector('.categoria-head h3') || {}).textContent || c.id;
+    // EL ROTULO SE BUSCA EN CUALQUIER NIVEL DE ENCABEZADO. `nivelarEncabezados`
+    // sube y baja los titulos segun donde queden, asi que un `h3` escrito en el
+    // documento puede ser un `h2` cuando esta funcion mira. Con el selector fijo
+    // en h3, la solapa de «De la Fundacion» mostraba el identificador crudo:
+    // decia «fundacion» en vez del nombre. Medido en pantalla.
+    const rot = c => ((c.querySelector('.categoria-head h2, .categoria-head h3, '
+      + '.categoria-head h4') || {}).textContent || c.id).trim();
     const guardada = barra.dataset.abierta;
     const abierta = vivas.some(c => c.id === guardada) ? guardada : vivas[0].id;
 
@@ -10617,6 +10681,7 @@
     // APA—, porque su unica llamada colgaba del panel del perfil, que con la
     // region entera no se pinta. Se citaba un ambito que no era el mirado.
     paso('llevarse la consulta', pintarCajaConsulta);
+    paso('el objetivo y su medición', tableroObjetivo);
     paso('cuántos temas', contarTemas);
     paso('perfil del país', perfilPais);
     paso('panorama', armarPanorama);
@@ -13286,6 +13351,70 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     caja.innerHTML = html;
   }
 
+  // EL TABLERO DEL OBJETIVO. Dos mediciones que corren solas: la auditoria del
+  // registro en cada recoleccion y el control de pantallas en cada cambio de
+  // codigo. Se pintan SALGAN COMO SALGAN: publicar solo los resultados buenos
+  // seria propaganda, no medicion.
+  function tableroObjetivo(){
+    const caja = document.getElementById('tablero-objetivo');
+    if(!caja) return;
+    const a = almacen.auditoria, pn = almacen.pantallas;
+    if(!a && !pn){ caja.innerHTML = '<p class="sin-dato">Cargando las mediciones…</p>'; return; }
+
+    const cuando = iso => iso ? new Date(iso).toLocaleDateString('es-AR',
+      {day:'numeric', month:'long', year:'numeric'}) : '—';
+    let html = '<div class="obj-control">';
+    if(a){
+      const bien = !a.cuantas_fallas;
+      const se = a.series || {};
+      const conSerie = (se.con_serie_larga || 0) + (se.con_serie_corta || 0);
+      html += '<div><span class="rot">Auditoría del registro</span>'
+        + '<span class="ver ' + (bien ? 'bien' : 'mal') + '">' + esc(a.veredicto || '—') + '</span>'
+        + '<span class="dice">' + (a.conjuntos_revisados || 0) + ' conjuntos revisados uno por uno: '
+        + 'procedencia completa, padrón cerrado de ' + (a.estados_del_padron || 33) + ', series sin '
+        + 'agujeros y que exista todo lo que esta pantalla carga.</span>'
+        + '<span class="cuando">Corre en cada recolección · última, el ' + esc(cuando(a.corrida))
+        + '</span></div>';
+      if(se.con_serie_larga !== undefined)
+        html += '<div><span class="rot">Historia y tendencia</span>'
+          + '<span class="ver">' + se.con_serie_larga + ' de ' + (conSerie + (se.sin_serie||0))
+          + '</span><span class="dice">conjuntos con serie de ' + (se.anios_para_tendencia || 5)
+          + ' años o más, que es lo que hace falta para prolongarla. '
+          + (se.con_serie_corta || 0) + ' tienen serie corta y ' + (se.sin_serie || 0)
+          + ' todavía no tienen ninguna.</span>'
+          + '<span class="cuando">Es la brecha entre lo que hay y el objetivo</span></div>';
+    }
+    if(pn){
+      const bien = !(pn.fallas || []).length;
+      html += '<div><span class="rot">Control de pantallas</span>'
+        + '<span class="ver ' + (bien ? 'bien' : 'mal') + '">' + esc(pn.veredicto || '—') + '</span>'
+        + '<span class="dice">La página se abre en ' + (pn.anchos || []).join(', ') + ' píxeles de '
+        + 'ancho, con los dos fondos y los tres niveles de lectura: ' + (pn.combinaciones || 0)
+        + ' combinaciones. ' + esc(pn.lo_que_no_dice || '') + '</span>'
+        + '<span class="cuando">Corre en cada cambio de código · último, el '
+        + esc(cuando(pn.corrida)) + '</span></div>';
+    }
+    html += '</div>';
+
+    const brechas = (a && a.brechas) || [];
+    if(brechas.length){
+      html += '<ul class="obj-brechas">';
+      brechas.forEach(b => {
+        const cuanto = b.cuantos !== undefined
+          ? '<b>' + b.cuantos + (b.de ? ' de ' + b.de : '') + '</b> '
+          : (b.cuales ? '<b>' + esc(b.cuales.join(', ')) + '</b> · ' : '');
+        html += '<li>' + cuanto + esc(b.que) + ': ' + esc(b.porque) + '</li>';
+      });
+      html += '</ul>';
+    }
+    caja.innerHTML = html;
+    const tag = document.getElementById('tag-objetivo');
+    if(tag) tag.textContent = a
+      ? (a.cuantas_fallas ? a.veredicto : 'sin fallas · ' + brechas.length + ' brecha'
+         + (brechas.length === 1 ? '' : 's'))
+      : '—';
+  }
+
   // El colofon se arma con lo que el lector tiene delante: ambito, fecha, cuantas
   // cifras, y la cita exacta. Va en el papel, que es lo que circula fuera del sitio.
   function pintarColofon(){
@@ -13557,6 +13686,14 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-copernicus','imagen satelital',err.message);
       document.getElementById('proc-copernicus').textContent='Sin registro disponible.'; marcador(); });
+
+  // Los dos testigos de control. NO son conjuntos de datos —no tienen fuente ni
+  // calificacion: los produce esta casa midiendose a si misma— y por eso no
+  // pasan por pintarProcedencia. Si alguno falta, el tablero lo dice y el resto
+  // del registro sigue andando.
+  Promise.all([traer('auditoria.json').catch(()=>null),
+               traer('pantallas.json').catch(()=>null)])
+    .then(([au, pa]) => { almacen.auditoria = au; almacen.pantallas = pa; tableroObjetivo(); });
 
   Promise.all([traer('sondeo.json'), traer('estado/sondeo.json').catch(()=>null)])
     .then(([d,estado])=>{

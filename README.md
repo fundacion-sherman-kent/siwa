@@ -16,6 +16,29 @@ disponibilidad de las fuentes.
 > se consulta antes de decidir— y no a la adivinación: este registro no predice
 > nada, registra.
 
+## El objetivo
+
+**Ser la primera plataforma de consulta de datos de América Latina y el Caribe.**
+No la más grande: la primera a la que se recurre cuando hay que averiguar cómo
+está la región y de dónde sale ese dato. De ahí, tres compromisos que obligan al
+desarrollo:
+
+1. **Vanguardia en la obtención.** Se buscan fuentes nuevas de forma permanente
+   y ninguna entra sin una disponibilidad medida por el mismo robot que después
+   la va a usar.
+2. **Vanguardia en el procesamiento y en la visualización.** Todo tema tiene que
+   poder mirarse en el tiempo y compararse; una cifra sin historia ni contexto es
+   un dato incompleto, no un tablero.
+3. **Diseño adaptable, siempre.** Teléfono, tableta, monitor y papel. **Un
+   desarrollo que no entra en una pantalla chica está incompleto**, por bien que
+   se vea en la grande.
+
+**El objetivo no se declara: se mide**, y la medición se publica junto con la
+declaración. Los cinco controles que lo hacen cumplir, y que corren solos, están
+en la tabla de «Mejora continua» más abajo. La regla que los ordena a todos:
+**toda disciplina que dependa de que alguien se acuerde se convierte en máquina;
+lo que no falla solo en rojo, no se sostiene.**
+
 ## Qué es y qué no es
 
 Este registro **no emite juicios**. Publica hechos calificados. El análisis, con
@@ -122,11 +145,41 @@ La calificación es la del Almirantazgo: la letra mide **de quién viene** y el 
 
 <!-- fuentes:fin -->
 
+## Mejora continua
+
+El objetivo declarado arriba no se sostiene con buena voluntad. Se sostiene
+porque **cada regla de calidad es un programa que corre solo y termina en rojo
+cuando algo se rompe**. Ninguno depende de que una persona se acuerde de
+revisar.
+
+| Control | Qué hace cumplir | Qué publica | Cuándo corre |
+|---|---|---|---|
+| `herramientas/auditoria.py` | Procedencia completa, padrón cerrado de 33, series sin agujeros, y que exista todo lo que la pantalla carga | `datos/publico/auditoria.json` | cada recolección |
+| `herramientas/pantallas.py` | Que la página entre en 360, 390, 768, 1024 y 1440 px, con los dos fondos y los tres niveles de lectura | `datos/publico/pantallas.json` | cada cambio de código |
+| `colectores/sondeo.py` | Que las fuentes candidatas se reintenten solas y lleven disponibilidad medida antes de entrar | `datos/publico/sondeo.json` | cada recolección |
+| `colectores/explorador.py` | Que se toquen puertas de datos oficiales nuevas, sin publicar nada sin decisión humana | `datos/publico/explorador.json` | corrida diaria |
+| `colectores/memoria.py` | Que los cambios de estado queden registrados y anunciados, en la región y por Estado | `novedades.xml`, `novedades/*.xml` | cada recolección |
+| `herramientas/indice-datos.py` | Que el catálogo público no pueda quedar viejo: se regenera del recorrido de archivos | `datos/publico/indice.json` | cada recolección |
+| `.github/workflows/latido.yml` | Que GitHub no apague el robot por inactividad a los 60 días | `latido.txt` | dos veces por mes |
+
+Las **fallas** tumban la corrida y avisan solas. Las **brechas** no tumban nada:
+son la distancia que falta, se calculan igual y se publican, porque un objetivo
+sin medición es una intención.
+
+Para correr el control de pantallas hace falta un navegador de prueba, que no es
+dependencia del sitio sino de la verificación:
+
+```bash
+pip install playwright && python -m playwright install chromium
+python -m http.server 8000 &
+python herramientas/pantallas.py http://localhost:8000
+```
+
 ## Doctrina
 
-La carta de constitución —capas, calificación automática, cruce multilingüe,
-archivo de correcciones y prohibiciones— es interna de la Fundación y rige sobre
-cualquier decisión técnica de este repositorio.
+La carta de constitución —el objetivo, las capas, la calificación automática, el
+cruce multilingüe, el archivo de correcciones y las prohibiciones— es interna de
+la Fundación y rige sobre cualquier decisión técnica de este repositorio.
 
 ---
 

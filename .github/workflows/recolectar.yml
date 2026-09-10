@@ -365,6 +365,18 @@ jobs:
         continue-on-error: true
         run: python herramientas/indice-datos.py
 
+      # LA AUDITORIA VA ULTIMA Y NO CORTA LA CORRIDA EN EL ACTO. Corre despues de
+      # todo lo demas para revisar lo que quedo escrito, y se le deja terminar
+      # con `continue-on-error` A PROPOSITO: su resultado tiene que llegar a
+      # `datos/publico/auditoria.json` y publicarse aunque haya fallas -sobre
+      # todo si hay fallas-. La corrida queda en rojo un paso mas abajo, en
+      # «Declarar las fallas», que es donde este repositorio junta los avisos.
+      - name: Auditoria del registro
+        id: auditoria
+        if: always()
+        continue-on-error: true
+        run: python herramientas/auditoria.py
+
       - name: Guardar lo recolectado
         if: always()
         run: |
@@ -432,4 +444,9 @@ jobs:
           [ "${{ steps.copernicus.outcome }}" = "failure" ] && { echo "Falló el colector de imagen satelital."; fallo=1; }
           [ "${{ steps.memoria.outcome }}" = "failure" ] && { echo "Falló la memoria del registro."; fallo=1; }
           [ "${{ steps.sondeo.outcome }}" = "failure" ] && { echo "Falló el banco de pruebas."; fallo=1; }
+          # La auditoría no es un colector: no falla porque una fuente no
+          # respondió, falla porque el registro publicado dice algo que no
+          # cumple sus propias reglas. Por eso su aviso va aparte y nombra el
+          # archivo donde está el detalle.
+          [ "${{ steps.auditoria.outcome }}" = "failure" ] && { echo "LA AUDITORÍA ENCONTRÓ FALLAS. El detalle, con el porqué de cada una, está en datos/publico/auditoria.json y publicado en el sitio."; fallo=1; }
           exit $fallo

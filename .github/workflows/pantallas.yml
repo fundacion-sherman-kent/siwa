@@ -1,0 +1,106 @@
+# EL CONTROL DE PANTALLAS — que «se adapta a cualquier dispositivo» sea verdad.
+#
+# POR QUÉ EXISTE
+# --------------
+# El diseño adaptable no se rompe de golpe: se rompe de a un cambio por vez, y
+# casi siempre en un tamaño que quien programó no abrió esa tarde. En este
+# registro pasó tres veces —una línea que desbordaba el teléfono, una barra fija
+# de 220 px de alto, una dirección con etiquetas de campaña que corría la página
+# de costado— y las tres se descubrieron porque la Dirección mandó una captura.
+#
+# Eso no escala, y es exactamente la clase de disciplina que esta casa convierte
+# en máquina. Este flujo abre la página en cinco anchos, con los dos fondos y
+# los tres niveles de lectura —treinta combinaciones—, y deja la corrida en rojo
+# si algo se sale.
+#
+# POR QUÉ NO VA ADENTRO DE LA RECOLECCIÓN
+# ----------------------------------------
+# Porque miden cosas distintas y cambian por motivos distintos. La recolección
+# corre cada hora y le pasa lo que le pasa a las FUENTES; la maqueta solo cambia
+# cuando alguien toca el código. Meter un navegador de prueba en cada corrida
+# horaria sería gastar veinticuatro arranques por día para vigilar algo que no
+# se movió.
+#
+# QUÉ PASA CUANDO FALLA
+# ----------------------
+# La corrida queda en rojo y GitHub avisa. El detalle nombra el ancho, el fondo,
+# el nivel y EL ELEMENTO culpable: sin el culpable, un aviso de desborde no se
+# puede arreglar y se termina ignorando.
+
+name: Pantallas
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "sitio/**"
+      - "herramientas/pantallas.py"
+      - ".github/workflows/pantallas.yml"
+  # Una vez por día, además: la maqueta no cambió pero el dato sí, y una tabla
+  # que hoy trae una fila más puede ser la que mañana desborda.
+  schedule:
+    - cron: "35 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  pantallas:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # El navegador de prueba NO es dependencia del sitio: el sitio no carga
+      # código de terceros. Es dependencia de la verificación, y vive acá.
+      - name: Instalar el navegador de prueba
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+
+      # Se sirve el repositorio entero, no solo sitio/: la página pide los datos
+      # con una ruta relativa que sale de su carpeta. Servir solo sitio/ daría
+      # una página sin datos, y una página sin datos no desborda nunca: el
+      # control pasaría siempre y no serviría para nada.
+      - name: Servir el registro
+        run: |
+          python -m http.server 8000 --bind 127.0.0.1 &
+          for i in $(seq 1 30); do
+            curl -sf http://127.0.0.1:8000/sitio/index.html >/dev/null && break
+            sleep 1
+          done
+
+      - name: Medir las treinta combinaciones
+        id: medir
+        continue-on-error: true
+        run: python herramientas/pantallas.py http://127.0.0.1:8000
+
+      # El testigo se guarda SIEMPRE, haya pasado o no: el sitio lo publica, y
+      # publicar solo los resultados buenos sería propaganda, no medición.
+      - name: Guardar el testigo
+        if: always()
+        run: |
+          git config user.name "siwa"
+          git config user.email "actions@users.noreply.github.com"
+          git config merge.ours.driver true
+          git add datos/publico/pantallas.json
+          git diff --staged --quiet || git commit -m "Control de pantallas $(date -u +'%Y-%m-%d %H:%M UTC')"
+          for intento in 1 2 3; do
+            git push && break
+            git pull --no-rebase --no-edit origin main || exit 1
+          done
+
+      - name: Declarar el resultado
+        if: always()
+        run: |
+          if [ "${{ steps.medir.outcome }}" = "failure" ]; then
+            echo "LA PÁGINA NO ENTRA EN ALGUNA PANTALLA. El detalle —ancho, fondo, nivel y elemento culpable— está arriba y en datos/publico/pantallas.json."
+            exit 1
+          fi
+          echo "La página entra en las treinta combinaciones."

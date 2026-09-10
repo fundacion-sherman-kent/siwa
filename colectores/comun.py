@@ -39,6 +39,21 @@ FIABILIDAD = ("A", "B", "C", "D", "E", "F")
 BASE = "https://siwa.fundacionkent.org"
 SITIO_URL = f"{BASE}/sitio/index.html"
 
+# LOS TESTIGOS DE CONTROL. Viven en `datos/publico/` como todo lo demás, pero no
+# son datos: son mediciones que esta casa hace de sí misma, no vienen de ninguna
+# fuente y por eso no tienen procedencia ni calificación de Almirantazgo.
+#
+# La lista vive ACÁ y no en cada herramienta a propósito. El catálogo tiene que
+# excluirlos de la cuenta de conjuntos y la auditoría tiene que no exigirles una
+# procedencia que no les corresponde: si cada una llevara su propia copia, el
+# día que aparezca un testigo nuevo una de las dos lo trataría mal, y sería la
+# tercera vez que este registro paga la misma duplicación.
+TESTIGOS = {
+    "indice.json": "el catálogo público de conjuntos",
+    "auditoria.json": "auditoría del registro, corrida en cada recolección",
+    "pantallas.json": "control de diseño adaptable, corrido en cada cambio de código",
+}
+
 ATRIBUCION = {
     "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
     "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
