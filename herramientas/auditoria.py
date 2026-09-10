@@ -135,6 +135,18 @@ def main() -> None:
         fuente = proc.get("fuente") or {}
         cal = proc.get("calificacion") or {}
 
+        # LA DIRECCION DE LA FUENTE TIENE QUE SER UNA DIRECCION. Encontrado
+        # auditando a mano: tres conjuntos declaraban una ruta local
+        # -«colectores/medios.json»- que dentro del archivo publicado, y en el
+        # catalogo publico, no lleva a ninguna parte. Se comprueba la FORMA, no
+        # que el sitio ajeno este en pie: que un tercero se caiga no es falla de
+        # este registro, pero citar algo que no se puede abrir si lo es.
+        url = fuente.get("url") or ""
+        if url and not str(url).startswith(("http://", "https://")):
+            fallas.append({"que": "dirección de fuente que no es una dirección",
+                           "donde": ruta.name,
+                           "porque": f"dice «{url}»: quien reciba este archivo no puede abrirla"})
+
         falta = [c for c, v in (("colector", proc.get("colector")),
                                 ("fuente.nombre", fuente.get("nombre")),
                                 ("fuente.url", fuente.get("url")),

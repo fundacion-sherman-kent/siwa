@@ -129,7 +129,7 @@ CATEGORIAS = {
     "indice_gobernanza": "integridad",
     "industria": "industrial",
     "institucion_ddhh": "capacidad",
-    "intensidad_conflicto": "control",
+    "intensidad_conflicto": "control-territorial",
     "internet": "conectividad",
     "lanzamientos_anuales": "aeroespacial",
     "libertad_asociacion": "libertades",
@@ -140,7 +140,7 @@ CATEGORIAS = {
     "migrantes_pct": "migraciones",
     "militares_fuerza_laboral": "efectivos",
     "minerales": "materias",
-    "monopolio_fuerza": "control",
+    "monopolio_fuerza": "control-territorial",
     "objetos_espacio": "aeroespacial",
     "persecucion_abuso": "integridad",
     "personal_militar": "efectivos",
@@ -176,7 +176,11 @@ ROTULO_CATEGORIA = {
     "condiciones": "Condiciones de vida y desigualdad",
     "conectividad": "Conectividad",
     "contratación": "Contratación pública",
-    "control": "Control territorial del Estado",
+    # EL NOMBRE DE LA CATEGORIA ES EL DEL BLOQUE AL QUE MANDA. Se llamaba
+    # «control» y el bloque de la pagina «control-territorial»: la ficha de
+    # la materia armaba un enlace a #control que no existia, y dos medidas
+    # quedaban con el enlace muerto. Encontrado auditando anclas.
+    "control-territorial": "Control territorial del Estado",
     "democracia": "Nivel democrático",
     "efectivos": "Efectivos",
     "entorno-informativo": "Entorno informativo",

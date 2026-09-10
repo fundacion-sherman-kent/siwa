@@ -312,7 +312,11 @@ def recolectar():
         colector="telegram",
         capa="publico",
         fuente="Canales públicos de Telegram, vista sin cuenta",
-        url_fuente="colectores/telegram.json",
+        # LA DIRECCION DE LA FUENTE TIENE QUE SER UNA DIRECCION. Aca decia una
+        # ruta local, que dentro del archivo publicado -y en el catalogo
+        # publico- no lleva a ninguna parte. El padron esta publicado y se
+        # sirve como JSON: se cita donde cualquiera puede abrirlo.
+        url_fuente=f"{comun.BASE}/colectores/telegram.json",
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,

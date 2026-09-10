@@ -176,7 +176,11 @@ def recolectar():
         colector="ransomware",
         capa="publico",
         fuente="ransomware.live — recopilación de sitios de extorsión informática",
-        url_fuente="https://api.ransomware.live/v2/",
+        # LA DIRECCION QUE SE CITA TIENE QUE ABRIRSE. La anterior era el extremo
+        # de la interfaz: contesta a una consulta con parametros y devuelve error
+        # a quien la abre en un navegador. Se cita la pagina que una persona
+        # puede mirar; la interfaz sigue documentada adentro del colector.
+        url_fuente="https://api.ransomware.live/docs",
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,

@@ -2,10 +2,10 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-09-09T06:20:18+00:00",
+    "obtenido_en": "2026-09-10T04:16:58+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
-      "url": "colectores/oficiales.json"
+      "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
     },
     "calificacion": {
       "fiabilidad": "A",
@@ -18,13 +18,13 @@
       "Esto no publica datos, publica dónde están. Es un índice de conjuntos oficiales con su dirección, para que el analista vaya al original.",
       "**Las cifras de estos catálogos no son comparables entre países.** Cada Estado define el delito a su manera, lo publica con su cadencia y lo cuenta desde su año. Sumarlas para armar una serie regional produciría una serie falsa.",
       "Solo 9 de los 33 Estados tienen portal oficial con interfaz de consulta verificada. Sin portal verificado: Venezuela, Trinidad y Tobago, Surinam, San Vicente y las Granadinas, Santa Lucía, San Cristóbal y Nieves, Nicaragua, Jamaica, Honduras, Haití, Guyana, Guatemala, Granada, El Salvador, Ecuador, Dominica, Cuba, Costa Rica, Brasil, Bolivia, Belice, Barbados, Bahamas, Antigua y Barbuda.",
-      "Que un Estado no tenga portal NO significa que no publique. Las 33 oficinas nacionales de estadistica estan en el padron con su direccion verificada, y en esta corrida respondieron 25 de 33. Un Estado sin portal de datos abiertos es un Estado sin interfaz para programas, no un Estado callado.",
+      "Que un Estado no tenga portal NO significa que no publique. Las 33 oficinas nacionales de estadistica estan en el padron con su direccion verificada, y en esta corrida respondieron 26 de 33. Un Estado sin portal de datos abiertos es un Estado sin interfaz para programas, no un Estado callado.",
       "Las fichas de oficina de estadistica NO son comparables con las de portal: de la oficina se registra que existe, donde esta y que contesto, no cuantos conjuntos publica. No hay de donde contarlos.",
       "Cuatro respuestas distintas que no deben leerse como una sola: «cierra a maquinas» es un 401 o un 403 —el Estado publica para personas y rechaza a los programas—; «verificacion anti-robot» es una pagina de desafio devuelta con codigo 200, que finge normalidad; «falla el servidor» es un 500, que es una averia; y «no resuelve» es que el nombre de dominio no llega a ninguna maquina. Ninguna de las cuatro prueba opacidad.",
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "7 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Delito registrado: HTTPError; ARG/Contratación pública: HTTPError; ARG/Integridad: HTTPError; ARG/Presupuesto: HTTPError; ARG/Migración y desplazamiento: HTTPError; COL/Violencia organizada: TimeoutError."
+      "3 consultas fallaron en esta corrida: ARG/Integridad: HTTPError; ARG/Presupuesto: HTTPError; ARG/Migración y desplazamiento: HTTPError."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -57,19 +57,19 @@
               "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
             },
             {
+              "titulo": "PROCESOS CONTRATACION TAURAMENA",
+              "organismo": "TAURAMENA",
+              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
+            },
+            {
               "titulo": "Contratacion Alcaldía Chitaraque",
               "organismo": "Alcaldía de Chitaraque",
               "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
             },
             {
-              "titulo": "SECOP II CONTRATACION ABIERTA",
-              "organismo": "Alcaldía Mayor de Cartagena",
-              "enlace": "https://www.datos.gov.co/d/432e-zwh4"
-            },
-            {
-              "titulo": "PROCESOS CONTRATACION TAURAMENA",
-              "organismo": "TAURAMENA",
-              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
+              "titulo": "CONTRATACION CEPITA",
+              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
+              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
             }
           ]
         },
@@ -95,9 +95,9 @@
               "enlace": "https://www.datos.gov.co/d/8rih-qmrc"
             },
             {
-              "titulo": "ANM Desagregación Presupuesto Anual",
-              "organismo": "ANM Agencia Nacional de Mineria Planeacion",
-              "enlace": "https://www.datos.gov.co/d/a2rh-ncyc"
+              "titulo": "PRESUPUESTO AIM-2020",
+              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
+              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
             }
           ]
         },
@@ -146,14 +146,42 @@
               "enlace": "https://www.datos.gov.co/d/efw5-jiej"
             },
             {
-              "titulo": "Entrada de Venezolanos a Colombia por año(2012-2019)",
-              "organismo": "Savine",
-              "enlace": "https://www.datos.gov.co/d/p7hq-8vsm"
-            },
-            {
               "titulo": "MIGRANTES A COLOMBIA",
               "organismo": "BERNARDO GUEVARA",
               "enlace": "https://www.datos.gov.co/d/c4mm-qn8q"
+            },
+            {
+              "titulo": "Entrada de Venezolanos a Colombia por año(2012-2019)",
+              "organismo": "Savine",
+              "enlace": "https://www.datos.gov.co/d/p7hq-8vsm"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 78,
+          "ejemplos": [
+            {
+              "titulo": "HOMICIDIO",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/m8fd-ahd9"
+            },
+            {
+              "titulo": "Homicidio",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/2fxs-6yhd"
+            },
+            {
+              "titulo": "Homicidios accidente de tránsito Policía Nacional",
+              "organismo": "DIJIN",
+              "enlace": "https://www.datos.gov.co/d/ha6j-pa2r"
+            },
+            {
+              "titulo": "Homicidios en el municipio de Neiva",
+              "organismo": "Alcaldía Neiva",
+              "enlace": "https://www.datos.gov.co/d/hk7a-5ix3"
             }
           ]
         },
@@ -186,7 +214,7 @@
           ]
         }
       ],
-      "conjuntos_hallados": 1965
+      "conjuntos_hallados": 2043
     },
     {
       "iso": "PAN",
@@ -528,6 +556,34 @@
           ]
         },
         {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 28,
+          "ejemplos": [
+            {
+              "titulo": "Personas extranjeras víctimas de delito",
+              "organismo": "Instituto Nacional de Migración (INM)",
+              "enlace": "https://datos.gob.mx/dataset/personas_extranjeras_victimas_delito"
+            },
+            {
+              "titulo": "Entrega de Cartilla de Prevención de Delitos en Materia de Trata de Personas",
+              "organismo": "Comisión Ejecutiva de Atención a Víctimas (CEAV)",
+              "enlace": "https://datos.gob.mx/dataset/entrega_cartilla_prevencion_delitos_materia_trata_personas"
+            },
+            {
+              "titulo": "Información estadística penitenciaria nacional (febrero, 2025)",
+              "organismo": "Prevención y Reinserción Social (PRS)",
+              "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional"
+            },
+            {
+              "titulo": "Información estadística penitenciaria nacional (junio, 2025)",
+              "organismo": "Prevención y Reinserción Social (PRS)",
+              "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional_junio_2025"
+            }
+          ]
+        },
+        {
           "materia": "Migración y desplazamiento",
           "eje": "Inteligencia estratégica",
           "consulta": "migracion",
@@ -552,34 +608,6 @@
               "titulo": "Migrantes atendidos por los Grupos Beta de Protección a Migrantes",
               "organismo": "Instituto Nacional de Migración (INM)",
               "enlace": "https://datos.gob.mx/dataset/migrantes_atendidos_grupos_beta_proteccion_migrantes"
-            }
-          ]
-        },
-        {
-          "materia": "Delito registrado",
-          "eje": "Seguridad",
-          "consulta": "delito",
-          "cantidad": 26,
-          "ejemplos": [
-            {
-              "titulo": "Personas extranjeras víctimas de delito",
-              "organismo": "Instituto Nacional de Migración (INM)",
-              "enlace": "https://datos.gob.mx/dataset/personas_extranjeras_victimas_delito"
-            },
-            {
-              "titulo": "Entrega de Cartilla de Prevención de Delitos en Materia de Trata de Personas",
-              "organismo": "Comisión Ejecutiva de Atención a Víctimas (CEAV)",
-              "enlace": "https://datos.gob.mx/dataset/entrega_cartilla_prevencion_delitos_materia_trata_personas"
-            },
-            {
-              "titulo": "Información estadística penitenciaria nacional (febrero, 2025)",
-              "organismo": "Prevención y Reinserción Social (PRS)",
-              "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional"
-            },
-            {
-              "titulo": "Información estadística penitenciaria nacional (junio, 2025)",
-              "organismo": "Prevención y Reinserción Social (PRS)",
-              "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional_junio_2025"
             }
           ]
         },
@@ -640,7 +668,7 @@
           ]
         }
       ],
-      "conjuntos_hallados": 269
+      "conjuntos_hallados": 271
     },
     {
       "iso": "URY",
@@ -812,7 +840,7 @@
           "materia": "Presupuesto",
           "eje": "Gobernanza",
           "consulta": "presupuesto",
-          "cantidad": 39,
+          "cantidad": 40,
           "ejemplos": [
             {
               "titulo": "Presupuesto, 2021-2026",
@@ -840,7 +868,7 @@
           "materia": "Contratación pública",
           "eje": "Gobernanza",
           "consulta": "contrataciones",
-          "cantidad": 20,
+          "cantidad": 21,
           "ejemplos": [
             {
               "titulo": "Compras y Contrataciones Realizadas, 2021 - 2024.",
@@ -941,7 +969,7 @@
           "ejemplos": []
         }
       ],
-      "conjuntos_hallados": 83
+      "conjuntos_hallados": 85
     },
     {
       "iso": "PER",
@@ -1082,6 +1110,102 @@
       "conjuntos_hallados": 65
     },
     {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "bloque": "Cono Sur",
+      "incluye_malvinas": true,
+      "organismo": "Portal Nacional de Datos Abiertos",
+      "tipo": "CKAN",
+      "portal": "https://datos.gob.ar",
+      "materias": [
+        {
+          "materia": "Contratación pública",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 20,
+          "ejemplos": [
+            {
+              "titulo": "Sistema de Contrataciones Electrónicas",
+              "organismo": "Jefatura de Gabinete de Ministros (JGM)",
+              "enlace": "https://datos.gob.ar/dataset/sistema-de-contrataciones-electronicas"
+            },
+            {
+              "titulo": "Compras y Contrataciones de ACUMAR",
+              "organismo": "Autoridad de Cuenca Matanza Riachuelo (ACUMAR)",
+              "enlace": "https://datos.gob.ar/dataset/listado-de-compras-y-contrataciones-de-acumar"
+            },
+            {
+              "titulo": "Compras y Contrataciones de Nivel Central",
+              "organismo": "Instituto Nacional de Servicios Sociales para Jubilados y Pensionados (PAMI)",
+              "enlace": "https://datos.gob.ar/dataset/compras-y-contrataciones-de-nivel-central"
+            },
+            {
+              "titulo": "Contrataciones, Compras y Licitaciones de la Superintendencia de Servicios de Salud (SSS)",
+              "organismo": "Ministerio de Salud",
+              "enlace": "https://datos.gob.ar/dataset/contrataciones-compras-y-licitaciones-de-la-superintendencia-de-servicios-de-salud-sss"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 17,
+          "ejemplos": [
+            {
+              "titulo": "Codificación de delitos del Código Penal Argentino",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/codificacion-de-delitos-del-codigo-penal-argentino"
+            },
+            {
+              "titulo": "Delitos contra la propiedad. Sistema de Alerta Temprana. Estadísticas criminales",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/delitos-contra-la-propiedad-sistema-de-alerta-temprana-estadisticas-criminales"
+            },
+            {
+              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Orientaciones",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/lucha-contra-la-trata-de-personas-llamados-linea-145-orientaciones"
+            },
+            {
+              "titulo": "SNIC - Departamental. Estadísticas criminales en la República Argentina por departamentos",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/snic-departamental-estadisticas-criminales-en-la-republica-argentina-por-departamentos"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 9,
+          "ejemplos": [
+            {
+              "titulo": "Homicidios dolosos. Sistema de Alerta Temprana. Estadísticas criminales en la República Argentina.",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/homicidios-dolosos-sistema-de-alerta-temprana-estadisticas-criminales-en-la-republica-argentina"
+            },
+            {
+              "titulo": "Registro, sistematización y seguimiento de femicidios y homicidios agravados por el género",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/registro-sistematizacion-y-seguimiento-de-femicidios-y-homicidios-agravados-por-el-genero"
+            },
+            {
+              "titulo": "Estadísticas criminales en la República Argentina. Muertes violentas de mujeres",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/estadisticas-criminales-en-la-republica-argentina-muertes-violentas-de-mujeres"
+            },
+            {
+              "titulo": "Muertes viales. Sistema de Alerta Temprana. Estadísticas criminales en la República Argentina.",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/muertes-viales-sistema-de-alerta-temprana-estadisticas-criminales-en-la-republica-argentina"
+            }
+          ]
+        }
+      ],
+      "conjuntos_hallados": 46
+    },
+    {
       "iso": "PRY",
       "pais": "Paraguay",
       "bloque": "Cono Sur",
@@ -1166,26 +1290,15 @@
         }
       ],
       "conjuntos_hallados": 6
-    },
-    {
-      "iso": "ARG",
-      "pais": "Argentina",
-      "bloque": "Cono Sur",
-      "incluye_malvinas": true,
-      "organismo": "Portal Nacional de Datos Abiertos",
-      "tipo": "CKAN",
-      "portal": "https://datos.gob.ar",
-      "materias": [],
-      "conjuntos_hallados": 0
     }
   ],
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4412,
+    "conjuntos_hallados": 4540,
     "materias_consultadas": 6,
-    "oficinas_que_responden": 25,
-    "estados_con_alguna_fuente_oficial": 27
+    "oficinas_que_responden": 26,
+    "estados_con_alguna_fuente_oficial": 28
   },
   "oficinas_estadistica": [
     {
@@ -1242,9 +1355,8 @@
       "organismo": "Oficina Nacional de Estadística e Información",
       "url": "https://onei.gob.cu/",
       "nota": "Sin el prefijo «www». Con él, el servidor devuelve error 500. La diferencia entre un Estado que no publica y un prefijo de más es un carácter, y decide lo que el registro afirma.",
-      "estado": "certificado_invalido",
-      "codigo": 200,
-      "certificado": "no valida: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate ("
+      "estado": "sin_respuesta",
+      "detalle": "URLError: <urlopen error [WinError 10060] Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un period"
     },
     {
       "iso": "DOM",
@@ -1293,8 +1405,8 @@
       "sigla": "INE",
       "organismo": "Instituto Nacional de Estadística",
       "url": "https://www.ine.gob.hn/",
-      "estado": "cierra_a_maquinas",
-      "codigo": 403
+      "estado": "responde",
+      "codigo": 200
     },
     {
       "iso": "MEX",
@@ -1351,8 +1463,8 @@
       "organismo": "Instituto Nacional de Estadística",
       "url": "https://www.ine.gob.ve/",
       "nota": "El dominio no resuelve: los resolutores de Google y de Cloudflare devuelven SERVFAIL, que significa que los servidores de nombres del dominio fallan, no que la dirección esté mal escrita.",
-      "estado": "sin_respuesta",
-      "detalle": "URLError: <urlopen error timed out>"
+      "estado": "no_resuelve",
+      "detalle": "URLError: <urlopen error [Errno 11002] getaddrinfo failed>"
     },
     {
       "iso": "BLZ",
@@ -1459,15 +1571,16 @@
       "organismo": "Central Statistical Office",
       "url": "https://cso.gov.tt/",
       "estado": "responde",
-      "codigo": 202
+      "codigo": 200
     }
   ],
   "oficinas_por_estado": {
-    "responde": 25,
-    "cierra_a_maquinas": 3,
-    "certificado_invalido": 3,
+    "responde": 26,
+    "cierra_a_maquinas": 2,
+    "sin_respuesta": 1,
     "verificacion_anti_robot": 1,
-    "sin_respuesta": 1
+    "certificado_invalido": 2,
+    "no_resuelve": 1
   },
   "sectoriales_verificados": [
     {

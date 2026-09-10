@@ -176,7 +176,8 @@ def recolectar():
         capa="publico",
         fuente="Registro de publicadores del Estándar de Datos de Contrataciones Abiertas — "
                "Open Contracting Partnership",
-        url_fuente="https://data.open-contracting.org/en/publications",
+        # La anterior devolvia 404: el registro de publicadores vive en la raiz.
+        url_fuente="https://data.open-contracting.org/",
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,

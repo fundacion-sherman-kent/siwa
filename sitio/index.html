@@ -1489,6 +1489,10 @@
     .uni-fila .l,.uni-cab span:nth-child(3){display:none;}
   }
 
+  .ficha-mapa .ojo-fuentes{font-size:10.5px;line-height:1.45;color:var(--texto-2);
+    border-left:2.5px solid var(--t-violeta);padding:5px 0 5px 8px;margin-top:8px;}
+  .ficha-mapa .ojo-fuentes b{color:var(--t-violeta);}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -2334,6 +2338,7 @@
     <div class="grupo">Eje · Gobernanza</div>
     <a href="#gobernanza">Instituciones y democracia</a>
     <a href="#transparencia">Transparencia y control</a>
+    <a href="#opacidad-seccion">Índice de Opacidad</a>
     <a href="#censo-subnacional">Qué publica cada provincia</a>
     <a href="#metodo-busqueda">Cómo se busca</a>
     <div class="grupo">Eje · Desarrollo</div>
@@ -2345,7 +2350,6 @@
     <a href="#riesgo-ambiente">Riesgo y ambiente</a>
     <div class="grupo">Verificación y método</div>
     <a href="#que-se-publica">Qué se publica hoy</a>
-    <a href="#opacidad-seccion">Índice de Opacidad</a>
     <a href="#de-donde-sale">De dónde sale y qué falta</a>
     <a href="#fundacion">De la Fundación</a>
   </nav>
@@ -3333,6 +3337,81 @@
       <div id="tablero-mineria"></div>
         </div>
 </section>
+    <section class="domain bloque" id="opacidad-seccion" data-nivel="1">
+      <div class="bloque-head"><h2>Índice de Opacidad</h2></div>
+      <p class="bloque-bajada">Qué no publica cada Estado, y qué se revisó para poder afirmarlo. Es una medición propia de la Oficina: no la publica ningún organismo.</p>
+    
+    <div class="categoria" id="indice-opacidad-puntaje" data-nivel="1">
+      <div class="categoria-head"><h3>El puntaje, de 0 a 100</h3><span class="tag" id="tag-puntaje">—</span></div>
+      <details class="aviso-cobertura"><summary>Mide actos observables, no percepciones — y no se compara con el índice de percepción</summary>
+        <p><b>0 es el Estado más transparente y 100 el más opaco.</b> La dirección importa y va
+           dicha: este índice mide la <b>ausencia</b>, no la presencia. Una afirmación de
+           ausencia se puede refutar mostrando una dirección, y eso es lo que la vuelve seria.</p>
+        <p><b>Se arma con seis actos, no con seis percepciones.</b> Que un portal responda o no,
+           que un sitio oficial esté en pie o retirado, que un Estado haya declarado su comercio
+           de armas a Naciones Unidas: todo eso <b>cualquiera lo comprueba repitiendo la
+           consulta</b>. Por eso <b>no debe compararse con el índice de percepción de
+           corrupción</b>, que promedia encuestas a expertos: contestan preguntas distintas y
+           ordenarían distinto con toda razón.</p>
+        <p><b>Esto no es la verificación de los cuatro pasos</b>, que está más abajo y es otra
+           cosa: aquella es una revisión manual del equipo sobre el acceso a la información;
+           esta es una medición automática de seis actos. <b>«Sin medir» no significa
+           opaco</b>: significa que faltan actos con evidencia.</p>
+      </details>
+      <div class="procedencia" id="proc-puntaje">Cargando el registro…</div>
+      <div id="tabla-opacidad"></div>
+        </div>
+    <div class="categoria" id="memoria" data-nivel="2">
+      <div class="categoria-head"><h3>Lo que cambió desde que miramos</h3><span class="tag" id="tag-memoria">—</span></div>
+      <details class="aviso-cobertura"><summary>El registro guarda lo que observa, no solo lo que ve hoy</summary>
+        <p><b>El registro guarda lo que observa, no solo lo que ve hoy.</b> Cada vez que un
+           Estado cambia de estado —un portal que vuelve, un conjunto que desaparece, una
+           serie que se detiene— queda anotado con su fecha. Es la única parte del registro
+           que <b>nadie más está guardando</b>: la cifra de un organismo internacional va a
+           seguir estando; que un sitio se apagó existe porque alguien lo miró.</p>
+        <p><b>La fecha es cuándo lo observamos, no cuándo ocurrió.</b> Un portal pudo caerse
+           el martes y ser visto el jueves. Y la primera vez que se ve a un Estado
+           <b>no dice desde cuándo está así</b>: dice desde cuándo lo miramos. Esas líneas
+           van marcadas.</p>
+      </details>
+      <div class="procedencia" id="proc-memoria">Cargando el registro…</div>
+      <div class="cruce" id="lista-memoria"></div>
+      <div id="vac-memoria"></div>
+        </div>
+    <div class="categoria" id="retirada" data-nivel="2">
+      <div class="categoria-head"><h3>Lo que dejó de publicarse</h3><span class="tag" id="tag-archivo">—</span></div>
+      <details class="aviso-cobertura"><summary>No publicar y dejar de publicar no son lo mismo</summary>
+        <p><b>No publicar y dejar de publicar no son lo mismo.</b> Lo segundo es más
+           grave: hubo dato y se retiró. El archivo público de la web guarda copias
+           fechadas de los sitios oficiales, y comparar la última vez que un portal
+           respondió bien con lo que responde hoy da <b>la retirada con fecha</b>.</p>
+        <p><b>La afirmación exige las dos mitades y ninguna alcanza sola.</b> Que el
+           archivo no tenga capturas recientes no prueba que el sitio murió —prueba que
+           el rastreador no pasó—; que el portal no nos responda hoy no prueba que esté
+           caído. Solo se dice <b>retirado</b> cuando el archivo lo vio vivo en el pasado
+           <b>y</b> hoy no responde. <b>Y no se interpreta la causa</b>: presupuesto,
+           mudanza de sistema o decisión dan la misma caída.</p>
+      </details>
+      <div class="procedencia" id="proc-archivo">Cargando el registro…</div>
+      <div class="cruce" id="lista-archivo"></div>
+      <div id="vac-archivo"></div>
+        </div>
+    <div class="categoria" id="opacidad" data-nivel="2">
+      <div class="categoria-head"><h3>Índice de Opacidad</h3><span class="tag" id="tag-opacidad">—</span></div>
+      <details class="aviso-cobertura"><summary>Mide la ausencia, no la presencia</summary>
+        <p><b>Mide la ausencia, no la presencia.</b> Un puntaje de apertura no se puede
+           refutar mostrando una dirección; una afirmación de ausencia sí, y por eso vale.
+           <b>La presencia se prueba con una fuente; la ausencia exige las cuatro.</b> Mientras
+           falte un paso, el Estado dice <b>sin verificar</b>, que no es lo mismo que opaco y
+           <b>no cuenta como opacidad</b>.</p>
+      </details>
+      <div class="procedencia" id="proc-opacidad">Cargando el registro…</div>
+      <div class="indice-caja" id="indice-opacidad">Cargando el puntaje…</div>
+      <div class="opacidad-titular" id="titular-opacidad"></div>
+      <div class="materias" id="lista-opacidad"></div>
+      <div id="vac-opacidad"></div>
+        </div>
+    </section>
     <section class="domain bloque" id="desarrollo" data-nivel="3">
       <div class="bloque-head"><h2>Desarrollo</h2></div>
       <p class="bloque-bajada">Estructura material del territorio y de la economía. No es análisis económico: es la base sobre la que se leen las otras tres.</p>
@@ -3533,82 +3612,6 @@
       <div class="procedencia" id="proc-desinformacion">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-desinformacion"></div>
       <div id="vac-desinformacion"></div>
-        </div>
-    </section>
-
-    <section class="domain bloque" id="opacidad-seccion" data-nivel="1">
-      <div class="bloque-head"><h2>Índice de Opacidad</h2></div>
-      <p class="bloque-bajada">Qué no publica cada Estado, y qué se revisó para poder afirmarlo. Es una medición propia de la Oficina: no la publica ningún organismo.</p>
-    
-    <div class="categoria" id="indice-opacidad-puntaje" data-nivel="1">
-      <div class="categoria-head"><h3>El puntaje, de 0 a 100</h3><span class="tag" id="tag-puntaje">—</span></div>
-      <details class="aviso-cobertura"><summary>Mide actos observables, no percepciones — y no se compara con el índice de percepción</summary>
-        <p><b>0 es el Estado más transparente y 100 el más opaco.</b> La dirección importa y va
-           dicha: este índice mide la <b>ausencia</b>, no la presencia. Una afirmación de
-           ausencia se puede refutar mostrando una dirección, y eso es lo que la vuelve seria.</p>
-        <p><b>Se arma con seis actos, no con seis percepciones.</b> Que un portal responda o no,
-           que un sitio oficial esté en pie o retirado, que un Estado haya declarado su comercio
-           de armas a Naciones Unidas: todo eso <b>cualquiera lo comprueba repitiendo la
-           consulta</b>. Por eso <b>no debe compararse con el índice de percepción de
-           corrupción</b>, que promedia encuestas a expertos: contestan preguntas distintas y
-           ordenarían distinto con toda razón.</p>
-        <p><b>Esto no es la verificación de los cuatro pasos</b>, que está más abajo y es otra
-           cosa: aquella es una revisión manual del equipo sobre el acceso a la información;
-           esta es una medición automática de seis actos. <b>«Sin medir» no significa
-           opaco</b>: significa que faltan actos con evidencia.</p>
-      </details>
-      <div class="procedencia" id="proc-puntaje">Cargando el registro…</div>
-      <div id="tabla-opacidad"></div>
-        </div>
-    <div class="categoria" id="memoria" data-nivel="2">
-      <div class="categoria-head"><h3>Lo que cambió desde que miramos</h3><span class="tag" id="tag-memoria">—</span></div>
-      <details class="aviso-cobertura"><summary>El registro guarda lo que observa, no solo lo que ve hoy</summary>
-        <p><b>El registro guarda lo que observa, no solo lo que ve hoy.</b> Cada vez que un
-           Estado cambia de estado —un portal que vuelve, un conjunto que desaparece, una
-           serie que se detiene— queda anotado con su fecha. Es la única parte del registro
-           que <b>nadie más está guardando</b>: la cifra de un organismo internacional va a
-           seguir estando; que un sitio se apagó existe porque alguien lo miró.</p>
-        <p><b>La fecha es cuándo lo observamos, no cuándo ocurrió.</b> Un portal pudo caerse
-           el martes y ser visto el jueves. Y la primera vez que se ve a un Estado
-           <b>no dice desde cuándo está así</b>: dice desde cuándo lo miramos. Esas líneas
-           van marcadas.</p>
-      </details>
-      <div class="procedencia" id="proc-memoria">Cargando el registro…</div>
-      <div class="cruce" id="lista-memoria"></div>
-      <div id="vac-memoria"></div>
-        </div>
-    <div class="categoria" id="retirada" data-nivel="2">
-      <div class="categoria-head"><h3>Lo que dejó de publicarse</h3><span class="tag" id="tag-archivo">—</span></div>
-      <details class="aviso-cobertura"><summary>No publicar y dejar de publicar no son lo mismo</summary>
-        <p><b>No publicar y dejar de publicar no son lo mismo.</b> Lo segundo es más
-           grave: hubo dato y se retiró. El archivo público de la web guarda copias
-           fechadas de los sitios oficiales, y comparar la última vez que un portal
-           respondió bien con lo que responde hoy da <b>la retirada con fecha</b>.</p>
-        <p><b>La afirmación exige las dos mitades y ninguna alcanza sola.</b> Que el
-           archivo no tenga capturas recientes no prueba que el sitio murió —prueba que
-           el rastreador no pasó—; que el portal no nos responda hoy no prueba que esté
-           caído. Solo se dice <b>retirado</b> cuando el archivo lo vio vivo en el pasado
-           <b>y</b> hoy no responde. <b>Y no se interpreta la causa</b>: presupuesto,
-           mudanza de sistema o decisión dan la misma caída.</p>
-      </details>
-      <div class="procedencia" id="proc-archivo">Cargando el registro…</div>
-      <div class="cruce" id="lista-archivo"></div>
-      <div id="vac-archivo"></div>
-        </div>
-    <div class="categoria" id="opacidad" data-nivel="2">
-      <div class="categoria-head"><h3>Índice de Opacidad</h3><span class="tag" id="tag-opacidad">—</span></div>
-      <details class="aviso-cobertura"><summary>Mide la ausencia, no la presencia</summary>
-        <p><b>Mide la ausencia, no la presencia.</b> Un puntaje de apertura no se puede
-           refutar mostrando una dirección; una afirmación de ausencia sí, y por eso vale.
-           <b>La presencia se prueba con una fuente; la ausencia exige las cuatro.</b> Mientras
-           falte un paso, el Estado dice <b>sin verificar</b>, que no es lo mismo que opaco y
-           <b>no cuenta como opacidad</b>.</p>
-      </details>
-      <div class="procedencia" id="proc-opacidad">Cargando el registro…</div>
-      <div class="indice-caja" id="indice-opacidad">Cargando el puntaje…</div>
-      <div class="opacidad-titular" id="titular-opacidad"></div>
-      <div class="materias" id="lista-opacidad"></div>
-      <div id="vac-opacidad"></div>
         </div>
     </section>
 
@@ -4304,6 +4307,28 @@
   // una: El Salvador tiene 7,9 en 2022 por UNODC y 93,8 en 2021 por la OMS, y
   // enfrentarlos asi fabricaria una diferencia que en buena parte es de fecha.
   // Comparados en 2021 —17,3 contra 93,8— la brecha sigue, y esa si es real.
+  // CUANTO SE APARTAN LAS DOS FUENTES DE HOMICIDIOS, en el ultimo anio comun.
+  // Existe aparte del contraste porque hay un lugar donde la diferencia ENGANA y
+  // el contraste no llega: la ficha del mapa. Medido sobre los 31 Estados
+  // comparables, solo TRES se apartan dos veces o mas -El Salvador 5,4; Venezuela
+  // 3,3; Bolivia 3,1- y algunos se apartan al reves -Antigua y Barbuda 0,34-.
+  // Con tan pocos casos la marca informa en vez de ensuciar.
+  function divergenciaHomicidios(iso){
+    if(!iso || !almacen.oms) return null;
+    const r = (almacen.oms.registros||[]).find(x=>x.iso===iso);
+    if(!r || !r.serie || !r.serie.length) return null;
+    const cap = (capas()||{}).homicidios;
+    const serie = (cap && cap.serieDe) ? (cap.serieDe(iso)||[]) : [];
+    const porAnio = {}; r.serie.forEach(a=>porAnio[a.anio]=a.valor);
+    const comunes = serie.map(a=>+a.anio).filter(a=>porAnio[a]!==undefined);
+    if(!comunes.length) return null;
+    const anio = Math.max(...comunes);
+    const uno = (serie.find(a=>+a.anio===anio)||{}).valor, dos = porAnio[anio];
+    if(!uno || !dos) return null;
+    const veces = dos / uno;
+    return (veces >= 2 || veces <= 0.5) ? {anio, unodc:uno, oms:dos, veces} : null;
+  }
+
   function contrasteHomicidios(iso){
     if(!iso || !almacen.oms) return '';
     const r = (almacen.oms.registros||[]).find(x=>x.iso===iso);
@@ -8591,7 +8616,16 @@
         (R²&nbsp;${cifra(proys[0].pr.r2)}, por debajo de 0,5). Prolongarla daría una cifra sin sustento,
         así que <b>no se publica</b>.</span>`;
     }
-    // La cautela de la capa NO se repite acá: vive completa bajo el mapa.
+    // LA MARCA DE SEGUNDA FUENTE MUY DISTINTA. Sin esto, quien mira el mapa ve a
+    // Venezuela «19.º de 33» en homicidios y se lleva la idea de que esta a mitad
+    // de tabla, cuando la otra fuente la pone entre las peores. El contraste
+    // completo vive debajo del mapa; acá va solo el aviso de que existe.
+    const div = (capaActiva === 'homicidios') ? divergenciaHomicidios(iso) : null;
+    if(div)
+      html += '<div class="ojo-fuentes">Las dos fuentes difieren <b>'
+        + cifra(Math.round((div.veces >= 1 ? div.veces : 1/div.veces) * 10) / 10)
+        + ' veces</b> en ' + div.anio + ': ' + cifra(div.unodc) + ' policial y '
+        + cifra(div.oms) + ' sanitaria. El contraste, debajo del mapa.</div>';
     caja.innerHTML = html + mini;
     ajustarFichaDelMapa(caja, nombre);
   }
@@ -10872,7 +10906,12 @@
       const mide = filas.length
         ? '<div><div class="rotulo-bloque">Lo que se puede medir en ' + esc(donde) + '</div>'
           + '<div class="mide-lista">'
-          + filas.map(f => f.ancla
+          // UN ANCLA QUE NO EXISTE NO SE ENLAZA. La ficha arma el destino con la
+          // categoria del indicador, y si esa categoria no tiene bloque en la
+          // pagina el resultado era un enlace muerto -paso con «control»-. Ahora
+          // se comprueba antes: sin destino, la medida se nombra igual pero sin
+          // prometer un salto que no lleva a ningun lado.
+          + filas.map(f => (f.ancla && document.getElementById(f.ancla))
               ? '<a class="mide-chip" href="#' + esc(f.ancla) + '">' + esc(f.q) + '</a>'
               : f.capa
               ? '<button class="mide-chip" data-al-mapa="' + esc(f.capa) + '">' + esc(f.q) + '</button>'

@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-10T03:34:49+00:00",
-  "medidas_con_suficientes_casos": 115,
-  "pares_probados": 6555,
+  "corrida": "2026-09-10T04:21:57+00:00",
+  "medidas_con_suficientes_casos": 118,
+  "pares_probados": 6903,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 6555 pares y el umbral de siempre, alrededor de 327 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 1419,
-    "de_ellos_son_parentescos": 199
+    "por_que": "Con 6903 pares y el umbral de siempre, alrededor de 345 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 1546,
+    "de_ellos_son_parentescos": 202
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 1220,
+  "pistas_totales": 1344,
   "anomalias_totales": 170,
   "pistas": [
     {
@@ -372,6 +372,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:mediciones",
+      "b": "unidades:homicidios_del_pais",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "unidades · homicidios_del_pais",
+      "coeficiente": 0.864,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 4.2853507640651644e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion",
       "b": "corrupcion_politica",
       "rotulo_a": "Control de la corrupción",
@@ -515,6 +528,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:anomalias",
+      "b": "unidades:homicidios_del_pais",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "unidades · homicidios_del_pais",
+      "coeficiente": 0.845,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 5.7894783646494906e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "desplazamiento:expulsion",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -627,6 +653,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 1.5502833873898946e-07,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "desplazamiento:expulsion",
+      "b": "unidades:homicidios_del_pais",
+      "rotulo_a": "desplazamiento · expulsion",
+      "rotulo_b": "unidades · homicidios_del_pais",
+      "coeficiente": 0.833,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 2.2822605889947414e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -757,45 +796,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 3.006471533112588e-07,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "estabilidad",
-      "b": "percepcion_corrupcion:puntaje",
-      "rotulo_a": "Estabilidad política y ausencia de violencia",
-      "rotulo_b": "percepcion_corrupcion · puntaje",
-      "coeficiente": 0.822,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 1.50536700909633e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "prensa_libre:puesto_mundial",
-      "b": "voz_rendicion",
-      "rotulo_a": "prensa_libre · puesto_mundial",
-      "rotulo_b": "Voz y rendición de cuentas",
-      "coeficiente": -0.822,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 4.7831764903495944e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "prensa_libre:puntaje",
-      "b": "voz_rendicion",
-      "rotulo_a": "prensa_libre · puntaje",
-      "rotulo_b": "Voz y rendición de cuentas",
-      "coeficiente": 0.822,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 4.7831764903495944e-08,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

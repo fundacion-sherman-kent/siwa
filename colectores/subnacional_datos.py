@@ -59,7 +59,9 @@ FUENTES = [
         "nombre_local": "provincia",
         "fuente": "Sistema Nacional de Información Criminal (SNIC) — Ministerio de "
                   "Seguridad de la Nación, vía la interfaz de series de tiempo del Estado",
-        "url": "https://apis.datos.gob.ar/series/api/",
+        # La raiz de la interfaz devuelve 404 a quien la abre: se cita la
+        # documentacion, que es lo que una persona puede leer.
+        "url": "https://datosgobar.github.io/series-tiempo-ar-api/",
         "materia": "homicidios",
         "que_cuenta": "víctimas de homicidio doloso, recuento anual",
     },

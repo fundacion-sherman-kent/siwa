@@ -226,7 +226,11 @@ def construir() -> Path:
         colector=COLECTOR,
         capa=CAPA,
         fuente="CEPAL — Proyecto MEGA nivel 2 (con UN-GGIM Américas) y geoBoundaries (gbOpen)",
-        url_fuente="https://geoportal.cepal.org/geoserver/wfs",
+        # LA DIRECCION QUE SE CITA TIENE QUE ABRIRSE. La anterior era el extremo
+        # de la interfaz: contesta a una consulta con parametros y devuelve error
+        # a quien la abre en un navegador. Se cita la pagina que una persona
+        # puede mirar; la interfaz sigue documentada adentro del colector.
+        url_fuente="https://statistics.cepal.org/geo/geo-cepalstat/?lang=es",
         calificacion=comun.calificar(
             "A", 2, True,
             "Dos fuentes independientes se reparten el padrón sin superponerse: la CEPAL cubre "
