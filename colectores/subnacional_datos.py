@@ -37,6 +37,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -54,6 +55,23 @@ SERIES = "https://apis.datos.gob.ar/series/api/series?ids={ids}&format=json&limi
 # Estado agregando una entrada: el recorrido no cambia.
 FUENTES = [
     {
+        "iso": "COL",
+        "pais": "Colombia",
+        "nombre_local": "departamento",
+        "fuente": "Policía Nacional de Colombia — conjunto «HOMICIDIO», víctimas de homicidio "
+                  "intencional, vía el portal de datos abiertos del Estado",
+        "url": "https://www.datos.gov.co/d/m8fd-ahd9",
+        "materia": "homicidios",
+        "que_cuenta": "víctimas de homicidio intencional, recuento anual",
+        # OJO CON EL CONJUNTO. El portal tiene varios que empiezan con «Homicidio»
+        # y el primero que aparece buscando es «Homicidios accidente de transito»,
+        # que NO es lo mismo. Este declara en su descripcion «Incluye: HOMICIDIO
+        # INTENCIONAL» y se mide en victimas. Tomarlo por el nombre habria puesto
+        # muertes de transito donde el registro dice homicidios.
+        "recurso": "m8fd-ahd9",
+        "como": "socrata",
+    },
+    {
         "iso": "ARG",
         "pais": "Argentina",
         "nombre_local": "provincia",
@@ -64,6 +82,7 @@ FUENTES = [
         "url": "https://datosgobar.github.io/series-tiempo-ar-api/",
         "materia": "homicidios",
         "que_cuenta": "víctimas de homicidio doloso, recuento anual",
+        "como": "series_ar",
     },
 ]
 
@@ -127,10 +146,54 @@ def de_argentina(f: dict) -> tuple:
     return unidades, len(ids)
 
 
+# La consulta lleva espacios y parentesis: se codifica antes de pedirla, porque
+# una direccion con espacios no es una direccion.
+_SEL = "departamento, date_extract_y(fecha_hecho) AS anio, sum(cantidad) AS n"
+SOCRATA = ("https://www.datos.gov.co/resource/{recurso}.json?$select="
+           + urllib.parse.quote(_SEL)
+           + "&$group=" + urllib.parse.quote("departamento, anio") + "&$limit=5000")
+
+
+def de_socrata(f: dict) -> tuple:
+    """Recuento por unidad y por año, agregado por el propio portal.
+
+    La suma la hace la fuente y no esta casa: pedirle 500.000 filas para sumarlas
+    acá sería descortés con un portal público y daría el mismo número.
+    """
+    filas = pedir(SOCRATA.format(recurso=f["recurso"]), espera=180)
+    por_unidad = {}
+    for x in filas:
+        nombre, anio, n = x.get("departamento"), x.get("anio"), x.get("n")
+        if not nombre or not anio:
+            continue
+        try:
+            anio, n = int(str(anio)[:4]), float(n)
+        except (TypeError, ValueError):
+            continue
+        por_unidad.setdefault(nombre.strip(), []).append({"anio": anio, "valor": n})
+
+    # EL ANIO EN CURSO NO ENTRA. La fuente publica mes a mes: su ultimo anio esta
+    # incompleto y dibujarlo al lado de anios cerrados haria ver una caida que no
+    # existe. Es la misma regla que el registro ya aplica a las series anuales.
+    completos = [a["anio"] for v in por_unidad.values() for a in v]
+    tope = max(completos) - 1 if completos else None
+    unidades = []
+    for nombre, serie in por_unidad.items():
+        serie = sorted((a for a in serie if tope is None or a["anio"] <= tope),
+                       key=lambda a: a["anio"])
+        if not serie:
+            continue
+        unidades.append({"unidad": nombre, "id_en_la_fuente": f["recurso"], "serie": serie,
+                         "ultimo": serie[-1], "desde": serie[0]["anio"],
+                         "hasta": serie[-1]["anio"]})
+    return unidades, len(por_unidad)
+
+
 def construir() -> Path:
     registros, vacios = [], []
     for f in FUENTES:
-        unidades, pedidas = de_argentina(f)
+        unidades, pedidas = (de_socrata(f) if f.get("como") == "socrata"
+                             else de_argentina(f))
         if not unidades:
             raise RuntimeError(f"{f['iso']}: ninguna serie utilizable")
         anios = sorted({u["hasta"] for u in unidades})
@@ -147,10 +210,13 @@ def construir() -> Path:
             "unidades": sorted(unidades, key=lambda u: u["unidad"]),
         })
 
-    ultimo = registros[0]["ultimo_anio"] if registros else None
+    ultimo = next((r["ultimo_anio"] for r in registros if r["iso"] == "ARG"), None)
     vacios.append(
-        "Un solo Estado con dato subnacional. El resto no significa que no publiquen: "
-        "significa que todavía no se buscó su fuente nacional por unidad.")
+        f"{len(registros)} Estados con dato subnacional, de 33. El resto no significa que no "
+        "publiquen: significa que todavía no se buscó su fuente nacional por unidad.")
+    vacios.append(
+        "El año en curso NO entra en las series que la fuente publica mes a mes: está "
+        "incompleto, y dibujarlo al lado de años cerrados haría ver una caída que no existe.")
     vacios.append(
         "Estas cifras NO son comparables con las de otros países: cada Estado define el "
         "homicidio a su manera y lo cuenta con su método. Sirven para comparar unidades "
@@ -173,7 +239,8 @@ def construir() -> Path:
     return comun.escribir(
         colector=COLECTOR,
         capa=CAPA,
-        fuente=FUENTES[0]["fuente"],
+        fuente="Fuentes oficiales nacionales que publican por unidad de primer orden: "
+               + "; ".join(f["fuente"].split("—")[0].strip() for f in FUENTES),
         url_fuente=FUENTES[0]["url"],
         calificacion=comun.calificar(
             "A", 2, False,

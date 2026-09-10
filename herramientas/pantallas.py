@@ -110,7 +110,14 @@ def main() -> None:
         navegador = pw.chromium.launch()
         for ancho, alto in ANCHOS:
             pagina = navegador.new_page(viewport={"width": ancho, "height": alto})
-            pagina.goto(DIRECCION, wait_until="load")
+            try:
+                pagina.goto(DIRECCION, wait_until="load")
+            except Exception as e:  # noqa: BLE001 — un servidor apagado no es una falla de maqueta
+                print(f"[pantallas] no se pudo abrir {DIRECCION}: {type(e).__name__}. "
+                      "¿Está corriendo el servidor? Desde la raíz del repositorio: "
+                      "python -m http.server 8000", file=sys.stderr)
+                navegador.close()
+                sys.exit(2)
             # Se espera a que el registro TERMINE de cargarse: medir una página a
             # medio pintar da un resultado que no le corresponde a nadie.
             try:
