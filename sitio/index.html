@@ -966,6 +966,19 @@
     border-radius:8px;padding:8px 10px;box-shadow:0 12px 30px rgba(0,0,0,.5);}
   .grafico-seleccion{margin-top:14px;}
   .grafico-seleccion > div:empty{display:none;}
+  /* La figura que no está elegida no se dibuja NI OCUPA LUGAR. Se usa una clase
+     y no el atributo «hidden» porque varias de estas cajas traen su propio
+     display y lo pisarían. */
+  .grafico-seleccion > div.figura-guardada{display:none !important;}
+  .solapas-figuras{
+    margin:14px 0 10px;flex-wrap:wrap;gap:6px;width:auto;border:none;
+    border-radius:0;overflow:visible;
+  }
+  .solapas-figuras:empty{display:none;}
+  .solapas-figuras .modo{
+    border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+  }
+  .solapas-figuras .modo.activo{border-color:var(--purple);}
   .sobre-el-tema{margin-top:10px;}
 
   /* CUANDO: el deslizador de anio, debajo del mapa. Hacia atras sobre lo
@@ -2264,13 +2277,13 @@
 
       <h3 class="ay-tit">3 · Qué significa cada color</h3>
       <ul class="ay-colores">
-        <li><i class="c-peor"></i><b>Naranja: peor</b>, según el criterio de la fuente, no de
-          la Fundación. Cuanto más intenso, más alto el valor.</li>
-        <li><i class="c-mejor"></i><b>Verde: mejor.</b></li>
-        <li><i class="c-sin"></i><b>Punteado: sin dato.</b> No es cero: es que nadie lo midió
-          para ese Estado. La leyenda dice cuántos son.</li>
-        <li><i class="c-noproy"></i><b>Violeta: la serie no se deja proyectar</b>, porque no
-          describe una recta.</li>
+        <li><i class="c-peor"></i><span><b>Naranja: peor</b>, según el criterio de la fuente,
+          no de la Fundación. Cuanto más intenso, más alto el valor.</span></li>
+        <li><i class="c-mejor"></i><span><b>Verde: mejor.</b></span></li>
+        <li><i class="c-sin"></i><span><b>Punteado: sin dato.</b> No es cero: es que nadie lo
+          midió para ese Estado. La leyenda dice cuántos son.</span></li>
+        <li><i class="c-noproy"></i><span><b>Violeta: la serie no se deja proyectar</b>, porque
+          no describe una recta.</span></li>
       </ul>
 
       <h3 class="ay-tit">4 · La etiqueta de año</h3>
@@ -2382,6 +2395,11 @@
           <span id="abrir-analisis-pie">La ficha, la evolución, la tendencia y la fuente, en una sola ventana.</span>
         </div>
         <div id="slot-contraste"></div>
+        <!-- LA TIRA DE SOLAPAS. Se llena sola con las figuras que de veras tienen
+             algo que mostrar para el tema elegido: si una viene vacía, no ofrece
+             una solapa que lleve a una caja en blanco. -->
+        <div class="modos solapas-figuras" id="solapas-figuras" role="tablist"
+             aria-label="Maneras de mirar este tema"></div>
         <div class="evolucion" id="slot-mosaico"></div>
         <div class="evolucion" id="slot-dispersion"></div>
         <div class="evolucion" id="slot-evolucion"></div>
@@ -2433,7 +2451,7 @@
             <div class="elegidos" id="cruce-elegidos"></div>
             <div class="cruce" id="ficha-busqueda"></div>
           </div>
-          <button class="boton chico" id="limpiar-cruce">quitar cruce</button>
+          <button class="boton chico" id="limpiar-cruce" hidden>quitar cruce</button>
         </div>
 
         <div class="cuando" id="cuando">
@@ -2520,8 +2538,14 @@
           <div class="control ancho">
             <label for="comparar-pais">Con otro país</label>
             <select id="comparar-pais"><option value="">Agregar un país…</option></select>
+            <!-- LOS PAISES AGREGADOS, A LA VISTA. El desplegable se vacia solo despues de
+                 elegir, asi se puede agregar otro; pero antes no quedaba ninguna senal de
+                 que la eleccion hubiera surtido efecto, y un periodista concluyo que la
+                 comparacion no funcionaba. Funcionaba: la tabla salia cinco pantallas mas
+                 abajo. Ahora el pais elegido aparece aca mismo y se saca de a uno. -->
+            <div class="elegidos" id="paises-comparados"></div>
           </div>
-          <button class="boton chico" id="limpiar-comparacion">quitar comparación</button>
+          <button class="boton chico" id="limpiar-comparacion" hidden>quitar comparación</button>
         </div>
       </div>
 
@@ -5127,8 +5151,11 @@
       if(!document.getElementById('comparar-tocando')){
         const l = document.createElement('label');
         l.className = 'tocar-comparar';
-        l.innerHTML = '<input type="checkbox" id="comparar-tocando"> Comparar tocando el mapa '
-                    + '<span>con un país elegido, cada toque suma o quita otro, hasta cuatro · Shift + clic hace lo mismo</span>';
+        // El texto va envuelto y NO suelto: dentro de un flex, un texto sin
+        // envoltorio se vuelve una columna más, y esta etiqueta quedaba partida
+        // en tres —casilla | rótulo | explicación— en vez de dos.
+        l.innerHTML = '<input type="checkbox" id="comparar-tocando"><div>Comparar tocando el mapa'
+                    + '<span>con un país elegido, cada toque suma o quita otro, hasta cuatro · Shift + clic hace lo mismo</span></div>';
         colMapa.appendChild(l);
       }
       // Y el boton que se lleva el tablero como imagen, donde esta el mapa.
@@ -5281,12 +5308,14 @@
 
     if(sel) sel.addEventListener('change', () => {
       const v = sel.value;
-      if(v && !navComparar.includes(v) && v !== paisFiltro
-         && estadosComparados().length < TOPE_COMPARAR){
-        navComparar.push(v);
-      }
+      const sumado = v && !navComparar.includes(v) && v !== paisFiltro
+                     && estadosComparados().length < TOPE_COMPARAR;
+      if(sumado) navComparar.push(v);
+      // El desplegable se vacía para poder agregar otro, pero lo elegido queda
+      // a la vista en las fichas de al lado: ver «paises-comparados».
       sel.value = '';
       repintar();
+      if(sumado) irAlResultado('#tabla-comparacion');
     });
 
     if(limpiar) limpiar.addEventListener('click', () => { navComparar = []; repintar(); });
@@ -5301,6 +5330,30 @@
     const l = paisFiltro ? [paisFiltro] : [];
     navComparar.forEach(i => { if(!l.includes(i)) l.push(i); });
     return l;
+  }
+
+  // LOS PAISES DE LA COMPARACION, A LA VISTA Y RETIRABLES DE A UNO.
+  //
+  // Misma gramática que los temas cruzados: una ficha por elegido, con su cruz.
+  // Y los botones de «quitar» solo aparecen cuando hay algo que quitar: un botón
+  // que ofrece deshacer lo que nunca se hizo hace dudar de si se hizo.
+  function comparadosVista(){
+    const caja = document.getElementById('paises-comparados');
+    const limpiar = document.getElementById('limpiar-comparacion');
+    if(limpiar) limpiar.hidden = !navComparar.length;
+    const limpiarCruce = document.getElementById('limpiar-cruce');
+    if(limpiarCruce) limpiarCruce.hidden = !(typeof cruce !== 'undefined' && cruce.length);
+    if(!caja) return;
+    const nombre = i => (padron.find(p => p.iso === i) || {}).pais || i;
+    caja.innerHTML = navComparar.length
+      ? navComparar.map(i => `<button class="quita" data-quita-pais="${i}"
+             title="Quitar de la comparación"><b>${esc(nombre(i))}</b><span>×</span></button>`).join('')
+      : '';
+    caja.querySelectorAll('[data-quita-pais]').forEach(b =>
+      b.addEventListener('click', () => {
+        navComparar = navComparar.filter(x => x !== b.dataset.quitaPais);
+        repintar();
+      }));
   }
 
   function llenarComparador(){
@@ -8769,7 +8822,9 @@
     if(sel && sel.dataset.firma !== html.length+':'+hay.length){
       sel.dataset.firma = html.length+':'+hay.length;
       sel.innerHTML = html;
-      sel.addEventListener('change', ()=>{ capaActiva = sel.value; repintar(); });
+      sel.addEventListener('change', ()=>{
+        capaActiva = sel.value; repintar(); irAlResultado('#mapa');
+      });
     }
     if(sel) sel.value = capaActiva;
 
@@ -8861,6 +8916,113 @@
   // juntas, la ultima en llegar no se dibujaba nunca: la pagina quedaba a medio
   // armar. Aca cada pedido que entra durante un pintado deja marca y fuerza otro.
   let repintadoPendiente = false, repintadoPedidoDeNuevo = false;
+  // ============ UNA FIGURA POR VEZ ============
+  //
+  // Las seis maneras de mirar un tema estaban una debajo de la otra, todas
+  // dibujadas al mismo tiempo. Medido: 4,9 pantallas de teléfono y 4,8 de una
+  // pantalla de 15 pulgadas, solo de figuras. Quien elegía un tema recibía seis
+  // respuestas y no encontraba la que había ido a buscar.
+  //
+  // Ahora hay una tira de solapas y se muestra una sola. No se saca nada: están
+  // las seis, a un toque, y la tira dice cómo se llaman, que es la manera de
+  // indicar dónde mirar sin tapar el mapa con una ventana encima.
+  const FIGURAS = [
+    {slot:'slot-evolucion',  nombre:'Cómo se movió'},
+    {slot:'slot-puestos',    nombre:'Puestos en la región'},
+    {slot:'slot-mosaico',    nombre:'Los 33 juntos'},
+    {slot:'slot-dispersion', nombre:'Dos temas cruzados'},
+    {slot:'slot-matriz',     nombre:'Quién lo midió'},
+    {slot:'relaciones',      nombre:'Qué se mide con qué'},
+  ];
+  let figuraElegida = null;
+  // Mientras nadie tocó una solapa, la elegida se vuelve a calcular en cada
+  // pintado. Apenas el lector elige una, manda la suya y no se le mueve.
+  let figuraLaEligioElLector = false;
+
+  // Una figura «tiene algo» si su caja trae contenido. Se mira el contenido y no
+  // el alto, porque mientras está guardada su alto es cero y se descartarían
+  // todas menos la que está a la vista.
+  const figuraLlena = f => {
+    const el = document.getElementById(f.slot);
+    return !!(el && el.innerHTML.trim());
+  };
+
+  function mostrarFigura(slot){
+    FIGURAS.forEach(f => {
+      const el = document.getElementById(f.slot);
+      if(el) el.classList.toggle('figura-guardada', f.slot !== slot);
+    });
+    document.querySelectorAll('#solapas-figuras .modo').forEach(b => {
+      const suya = b.dataset.figura === slot;
+      b.classList.toggle('activo', suya);
+      b.setAttribute('aria-selected', suya ? 'true' : 'false');
+    });
+  }
+
+  function solapasDeFiguras(){
+    const tira = document.getElementById('solapas-figuras');
+    if(!tira) return;
+    const hay = FIGURAS.filter(figuraLlena);
+    // Con una sola figura la tira sobra: sería una solapa que no lleva a ningún
+    // lado. Y sin ninguna, tampoco hay nada que guardar.
+    if(hay.length < 2){
+      tira.innerHTML = '';
+      FIGURAS.forEach(f => document.getElementById(f.slot)
+        ?.classList.remove('figura-guardada'));
+      return;
+    }
+    // Si la elegida se quedó sin contenido al cambiar de tema, se pasa a la
+    // primera que sí tenga: nunca se deja al lector mirando una caja vacía.
+    if(!figuraLaEligioElLector || !hay.some(f => f.slot === figuraElegida))
+      figuraElegida = hay[0].slot;
+    const firma = hay.map(f => f.slot).join(',');
+    if(tira.dataset.firma !== firma){
+      tira.dataset.firma = firma;
+      tira.innerHTML = hay.map(f =>
+        `<button class="modo" type="button" role="tab" data-figura="${f.slot}"
+                 aria-selected="false">${esc(f.nombre)}</button>`).join('');
+      tira.querySelectorAll('.modo').forEach(b =>
+        b.addEventListener('click', () => {
+          figuraElegida = b.dataset.figura;
+          figuraLaEligioElLector = true;
+          // El orden importa: primero se muestra y recién después se redibuja.
+          // Una figura se dibuja midiendo el ancho de su caja, y una caja
+          // guardada mide cero: al revés saldría un gráfico de ancho cero.
+          mostrarFigura(figuraElegida);
+          repintar();
+        }));
+    }
+    mostrarFigura(figuraElegida);
+  }
+
+  // LLEVAR AL LECTOR HASTA LA RESPUESTA, y no dejarlo adivinando que hubo una.
+  //
+  // Se usa SOLO cuando la persona tocó un control: nunca al cargar la página ni
+  // al restaurar una dirección compartida, porque ahí mover la pantalla sola
+  // desorienta en vez de ayudar. Y respeta a quien pidió menos movimiento en su
+  // sistema: para esa persona el salto es seco, no deslizado.
+  function irAlResultado(qué){
+    const destino = document.querySelector(qué) || document.getElementById('mapa');
+    if(!destino) return;
+    const barra = document.querySelector('.topbar');
+    const alto = barra ? barra.getBoundingClientRect().height : 0;
+    const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Si ya está a la vista no se mueve nada: saltar a algo que la persona ya
+    // está mirando es ruido.
+    const caja = destino.getBoundingClientRect();
+    if(caja.top >= alto && caja.top < innerHeight * 0.7) return;
+    const desde = scrollY;
+    const y = Math.max(0, caja.top + scrollY - alto - 12);
+    scrollTo({top: y, behavior: quieto ? 'auto' : 'smooth'});
+    // LA RED, por si el deslizamiento no ocurre. Se comprobó que en algunos
+    // entornos «smooth» no hace absolutamente nada y no avisa: la persona toca
+    // el control, la página no se mueve y concluye que no funcionó, que es
+    // justamente lo que esto vino a corregir. Si medio segundo después no se
+    // movió ni un pixel, se salta seco. Si ya se movió, no se toca nada.
+    if(quieto) return;
+    setTimeout(() => { if(Math.abs(scrollY - desde) < 2) scrollTo({top: y, behavior: 'auto'}); }, 500);
+  }
+
   function repintar(){
     if(repintadoPendiente){ repintadoPedidoDeNuevo = true; return; }
     repintadoPendiente = true;
@@ -11029,6 +11191,8 @@
     paso('desplegables de tema', solapas);
     paso('leyenda', leyenda);
     paso('panel de cruce', panelCruce);
+    paso('países comparados', comparadosVista);
+    paso('solapas de las figuras', solapasDeFiguras);
     paso('resumen por eje', ejesVista);
     paso('lo de hoy', hoyVista);
     paso('estado de las herramientas', pintarHerramientas);

@@ -81,6 +81,27 @@ MEDIDA = """
                   quien: el.tagName.toLowerCase() + (el.id ? '#' + el.id : ''),
                   alto_del_control: Math.round(r.height), hace_falta: el.scrollHeight});
   });
+  // TEXTO SUELTO DENTRO DE UN FLEX, que es una trampa silenciosa: un texto sin
+  // envoltorio, puesto al lado de dos o mas elementos dentro de una caja flex o
+  // grid, SE CONVIERTE EN OTRA COLUMNA. La caja que el autor penso de dos
+  // columnas sale de tres, con el rotulo estrujado en un ancho ridiculo y la
+  // explicacion al costado. No rompe nada, no da error y se ve mal solo en
+  // pantallas angostas: la encontro un lector, no una prueba. Ahora la encuentra
+  // esta prueba. Con un solo elemento hijo no molesta —icono y texto es lo
+  // normal—, asi que se avisa desde dos.
+  document.querySelectorAll('body *').forEach(el => {
+    const d = getComputedStyle(el).display;
+    if(!/^(flex|inline-flex|grid|inline-grid)$/.test(d)) return;
+    if(el.children.length < 2) return;
+    if(!el.getBoundingClientRect().height) return;
+    const suelto = [...el.childNodes].some(
+      n => n.nodeType === 3 && n.textContent.trim().length > 2);
+    if(suelto) malos.push({que:'texto suelto dentro de una caja flex: se vuelve otra columna',
+      quien: el.tagName.toLowerCase() + (el.id ? '#' + el.id : '')
+             + (el.className && typeof el.className === 'string'
+                ? '.' + el.className.trim().split(' ').filter(Boolean).slice(0,2).join('.') : ''),
+      texto: el.textContent.trim().split(/[ \\n\\t]+/).join(' ').slice(0, 60)});
+  });
   // La ayuda tiene que verse en cualquier tamanio.
   const ayuda = document.getElementById('abrir-ayuda');
   if(!ayuda || ayuda.getBoundingClientRect().height === 0)
