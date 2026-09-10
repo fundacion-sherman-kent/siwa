@@ -1058,6 +1058,10 @@
     --texto-alto:#E8EEF5; --texto-max:#ffffff; --tenue:#7d90a8;
     --velo-1:rgba(255,255,255,.03); --velo-2:rgba(255,255,255,.07);
     --velo-3:rgba(255,255,255,.10);
+    /* EL ESCALON MAS BAJO DE LA ESCALA DE MAGNITUD. Sobre oscuro es «casi el
+       fondo»; sobre claro tiene que ser el naranja mas tenue, o el valor mas
+       bajo se lee como el mas alto. */
+    --mag-0:#0E2135;
     /* Los colores que SIGNIFICAN algo, con su versión para cada fondo: aviso,
        correcto, serie que no se deja proyectar y falla. No se apagan a gris. */
     --t-aviso:#ffb27a; --t-ok:#7fd3c4; --t-violeta:#c79bf0; --t-falla:#ff9c86;
@@ -1263,6 +1267,10 @@
   .mos-celda:hover rect{stroke:var(--tinta);stroke-width:2;}
   .mos-celda:focus-visible rect{stroke:var(--tinta);stroke-width:2.6;}
   .figura-mosaico svg{display:block;margin:0 auto;}
+
+  .mz-celda{cursor:pointer;}
+  .mz-celda:hover{stroke:var(--tinta);stroke-width:1.5;}
+  .figura-matriz svg{display:block;margin:0 auto;}
 
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
@@ -1816,6 +1824,7 @@
     --fondo:#F7F7F5; --panel:#FFFFFF; --campo:#FFFFFF; --texto:#2A3440; --texto-2:#46566A;
     --texto-alto:#10161E; --texto-max:#00121E; --tenue:#5A6B7D;
     --velo-1:rgba(0,18,30,.035); --velo-2:rgba(0,18,30,.08); --velo-3:rgba(0,18,30,.12);
+    --mag-0:rgba(251,101,0,.10);
     --line:#E3DCD0;
     --t-aviso:#A34700; --t-ok:#166B5E; --t-violeta:#5B1E8C; --t-falla:#A3231B;
     background:var(--fondo); color:var(--texto);
@@ -1833,6 +1842,7 @@
     color:var(--texto);
     --texto:#C7D2E0; --texto-2:#9fb0c4; --texto-alto:#E8EEF5; --texto-max:#ffffff;
     --tenue:#8FA0B4; --panel:#0E2135;
+    --mag-0:#0E2135;
     --velo-1:rgba(255,255,255,.04); --velo-2:rgba(255,255,255,.09);
     --velo-3:rgba(255,255,255,.13); --line:rgba(255,255,255,.16);
   }
@@ -2149,6 +2159,7 @@
         <div class="evolucion" id="slot-mosaico"></div>
         <div class="evolucion" id="slot-dispersion"></div>
         <div class="evolucion" id="slot-evolucion"></div>
+        <div class="evolucion" id="slot-matriz"></div>
         <div class="evolucion" id="slot-puestos"></div>
         <div class="relaciones" id="relaciones"></div>
         <details class="aviso-cobertura sobre-el-tema" id="sobre-el-tema">
@@ -6478,7 +6489,7 @@
 
 
   // Paleta por magnitud (peor = más naranja) y divergente (peor naranja, mejor verde).
-  const MAG = ['#0E2135','rgba(251,101,0,.28)','rgba(251,101,0,.55)','rgba(251,101,0,.85)'];
+  const MAG = ['var(--mag-0)','rgba(251,101,0,.28)','rgba(251,101,0,.55)','rgba(251,101,0,.85)'];
   const DIV = ['rgba(251,101,0,.85)','rgba(251,101,0,.40)','rgba(63,167,150,.40)','rgba(63,167,150,.75)'];
 
   // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
@@ -7194,7 +7205,7 @@
   // ninguna, una capa vacía que no rompe nada y no inventa nada.
   const CAPA_VACIA = {
     materia:'—', unidad:'', cautela:'', leyenda:[0,1,2], rotuloPunto:'Sin datos cargados',
-    conteo:()=>({}), puntos:()=>[], color:()=>'#0E2135', detalle:()=>null
+    conteo:()=>({}), puntos:()=>[], color:()=>'var(--mag-0)', detalle:()=>null
   };
   function capaActual(){
     const c = capas();
@@ -9457,6 +9468,126 @@
       : 'La ficha, la evolución, la tendencia y la fuente, en una sola ventana.';
   }
 
+  // ============ LA MATRIZ ESTADO x ANIO ============
+  //
+  // Una fila por Estado, una columna por anio, un color por valor. La celda
+  // vacia no es un cero: es que nadie lo midio, y va cruzada con una diagonal.
+  // Es la unica figura del tablero que muestra la COBERTURA y el VALOR a la
+  // vez, y por eso entran tambien los Estados con serie incompleta: excluirlos
+  // seria esconder lo que la figura vino a mostrar.
+  function figuraMatriz(clave, ancho){
+    const cap = (capas()||{})[clave];
+    if(!cap || typeof cap.serieDe !== 'function' || !cap.color) return '';
+    const zona = bloqueActivo();
+    const suyos = (padron||[]).filter(p => !zona || p.bloque === zona);
+    if(suyos.length < 4) return '';
+
+    const porIso = {}, anios = {};
+    suyos.forEach(p => {
+      (cap.serieDe(p.iso) || []).forEach(a => {
+        if(!isFinite(a.valor)) return;
+        (porIso[p.iso] = porIso[p.iso] || {})[+a.anio] = a.valor;
+        anios[+a.anio] = (anios[+a.anio] || 0) + 1;
+      });
+    });
+    // Un anio con un solo Estado medido no es una columna: es una anecdota.
+    let cols = Object.keys(anios).map(Number).filter(a => anios[a] >= 2).sort((a,b)=>a-b);
+    if(cols.length < 3) return '';
+    // Con muchos anios la celda se vuelve ilegible. Se conservan los ultimos,
+    // que son los que se consultan, y se dice cuantos quedaron afuera.
+    const tope = ancho < 420 ? 12 : ancho < 620 ? 16 : 22;
+    const recortados = Math.max(0, cols.length - tope);
+    if(recortados) cols = cols.slice(-tope);
+
+    const filas = suyos.filter(p => porIso[p.iso]);
+    if(filas.length < 4) return '';
+    const ultimo = iso => {
+      const d = porIso[iso] || {};
+      for(let i = cols.length - 1; i >= 0; i--) if(d[cols[i]] !== undefined) return d[cols[i]];
+      return null;
+    };
+    const peorArriba = cap.subeEsPeor !== false;
+    filas.sort((a,b) => {
+      const va = ultimo(a.iso), vb = ultimo(b.iso);
+      if(va === null) return 1;
+      if(vb === null) return -1;
+      return peorArriba ? vb - va : va - vb;
+    });
+
+    const mIzq = ancho < 420 ? 36 : 42, mDer = 4, mArr = 20, mAba = 6;
+    const altoFila = filas.length > 26 ? 13 : 15;
+    const ancoCol = Math.max(9, (ancho - mIzq - mDer) / cols.length);
+    const alto = mArr + filas.length * altoFila + mAba;
+
+    // Los anios se rotulan salteados si no entran: un rotulo pisado no se lee.
+    const cada = Math.max(1, Math.ceil(46 / ancoCol));
+    const cabecera = cols.map((a, i) => (i % cada === 0 || i === cols.length - 1)
+      ? '<text x="' + (mIzq + i * ancoCol + ancoCol/2).toFixed(1) + '" y="13" text-anchor="middle" '
+        + 'fill="var(--texto-2)" font-size="9.5">' + String(a).slice(2) + '</text>' : '').join('');
+
+    let huecos = 0, cuerpo = '';
+    filas.forEach((p, f) => {
+      const y = mArr + f * altoFila;
+      const suyo = p.iso === paisFiltro;
+      cuerpo += '<text x="' + (mIzq - 5) + '" y="' + (y + altoFila - 4) + '" text-anchor="end" '
+        + 'font-size="' + (altoFila > 13 ? 10 : 9) + '" fill="'
+        + (suyo ? 'var(--tinta)' : 'var(--texto-2)') + '" font-weight="' + (suyo ? '700' : '400')
+        + '">' + esc(p.iso) + '</text>';
+      cols.forEach((a, i) => {
+        const v = (porIso[p.iso] || {})[a];
+        const x = mIzq + i * ancoCol;
+        const w = Math.max(1, ancoCol - 1), h = altoFila - 1;
+        if(v === undefined){
+          huecos++;
+          cuerpo += '<rect x="' + x.toFixed(1) + '" y="' + y + '" width="' + w.toFixed(1)
+            + '" height="' + h + '" fill="var(--velo-1)"></rect>'
+            + '<line x1="' + x.toFixed(1) + '" y1="' + (y + h) + '" x2="' + (x + w).toFixed(1)
+            + '" y2="' + y + '" stroke="var(--velo-3)" stroke-width="1"></line>';
+        } else {
+          cuerpo += '<rect class="mz-celda" data-iso="' + esc(p.iso) + '" x="' + x.toFixed(1)
+            + '" y="' + y + '" width="' + w.toFixed(1) + '" height="' + h + '" fill="'
+            + cap.color(v) + '"><title>' + esc(p.pais) + ' · ' + a + ' · ' + cifra(v)
+            + (cap.unidad ? ' ' + esc(cap.unidad) : '') + '</title></rect>';
+        }
+      });
+      if(suyo)
+        cuerpo += '<rect x="' + (mIzq - 1) + '" y="' + (y - 1) + '" width="'
+          + (cols.length * ancoCol + 1).toFixed(1) + '" height="' + (altoFila + 1)
+          + '" fill="none" stroke="var(--orange)" stroke-width="1.6"></rect>';
+    });
+
+    const celdas = filas.length * cols.length;
+    const lleno = Math.round(100 * (celdas - huecos) / celdas);
+    return '<div class="figura-matriz"><div class="fc-tit"><b>Quién midió, y cuándo.</b> '
+      + 'Una fila por Estado, una columna por año, el color del valor. '
+      + '<b>La celda cruzada no es un cero</b>: es que nadie lo midió. '
+      + 'De las ' + celdas + ' casillas de ' + esc(rotuloDeMateria(clave)) + ' entre ' + cols[0]
+      + ' y ' + cols[cols.length-1] + ', hay dato en el <b>' + lleno + '%</b>.'
+      + (recortados ? ' Se muestran los últimos ' + cols.length + ' años; hay '
+         + recortados + ' anteriores en el archivo.' : '') + '</div>'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto
+      + '" style="max-width:100%;height:auto" role="img" aria-label="Matriz de '
+      + filas.length + ' Estados por ' + cols.length + ' años en '
+      + esc(rotuloDeMateria(clave)) + ', con las casillas sin dato cruzadas">'
+      + cabecera + cuerpo + '</svg></div>';
+  }
+
+  function matrizVista(){
+    const caja = document.getElementById('slot-matriz');
+    if(!caja) return;
+    const ancho = Math.max(280, Math.min(680, (caja.clientWidth || 600) - 28));
+    caja.innerHTML = figuraMatriz(capaActiva, ancho);
+    caja.hidden = !caja.innerHTML;
+    if(caja.dataset.armado) return;
+    caja.dataset.armado = '1';
+    caja.addEventListener('click', ev => {
+      const g = ev.target.closest('[data-iso]');
+      if(!g) return;
+      const p = (padron||[]).find(x => x.iso === g.dataset.iso);
+      if(p) seleccionar(p.iso, p.pais);
+    });
+  }
+
   // ============ EL MOSAICO DE LOS 33 ============
   //
   // En un mapa por superficie, Dominica es un punto de tres pixeles: ocho
@@ -10191,6 +10322,7 @@
     paso('botón de análisis', pintarBotonAnalisis);
     paso('evolución de la región', evolucionVista);
     paso('mosaico de los 33', mosaicoVista);
+    paso('matriz por anio', matrizVista);
     paso('nube y puestos', figurasNuevasVista);
     paso('mapa de relaciones', relacionesVista);
     paso('pestaña', rotularLaPestania);
