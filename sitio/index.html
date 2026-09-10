@@ -1465,6 +1465,30 @@
     .op-fila .op-barra,.op-cab span:nth-child(3){display:none;}
   }
 
+  /* EL PADRON SUBNACIONAL Y EL PRIMER DATO POR UNIDAD. */
+  .uni-fila{display:grid;grid-template-columns:1fr 62px 92px 74px;gap:10px;align-items:baseline;
+    padding:5px 0;border-top:1px solid var(--velo-2);font-size:12.5px;}
+  .uni-fila:first-of-type{border-top:none;}
+  .uni-fila .n{color:var(--texto);}
+  .uni-fila.suyo .n{font-weight:700;color:var(--texto-max);}
+  .uni-fila .c{font-family:'JetBrains Mono',monospace;text-align:right;color:var(--texto-max);
+    font-weight:700;}
+  .uni-fila .l{font-size:11px;color:var(--tenue);}
+  .uni-fila .t{font-size:10px;text-align:right;}
+  .marca-tasa{display:inline-block;padding:1px 6px;border-radius:3px;font-size:9.5px;
+    font-weight:700;letter-spacing:.3px;}
+  .marca-tasa.si{background:rgba(63,167,150,.18);color:var(--t-ok);}
+  .marca-tasa.no{background:rgba(140,0,224,.16);color:var(--t-violeta);}
+  .marca-tasa.nd{background:var(--velo-2);color:var(--tenue);}
+  .uni-cab{display:grid;grid-template-columns:1fr 62px 92px 74px;gap:10px;font-size:9.5px;
+    text-transform:uppercase;letter-spacing:.9px;color:var(--tenue);font-weight:700;
+    padding-bottom:5px;border-bottom:1px solid var(--line);margin-bottom:3px;}
+  .uni-cab span:nth-child(2),.uni-cab span:nth-child(3),.uni-cab span:last-child{text-align:right;}
+  @media (max-width:560px){
+    .uni-fila,.uni-cab{grid-template-columns:1fr 52px 62px;}
+    .uni-fila .l,.uni-cab span:nth-child(3){display:none;}
+  }
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -3283,8 +3307,10 @@
            la consulta: 5 es una serie que lee una máquina; 2, una infografía que lee una
            persona; 0, no publicar nada de sí misma.</p>
       </details>
+      <div id="padron-unidades"></div>
       <div class="procedencia" id="proc-censo">Cargando el registro…</div>
       <div class="cruce" id="lista-censo"></div>
+      <div id="dato-subnacional"></div>
       <div id="vac-censo"></div>
         </div>
     <div class="categoria" id="metodo-busqueda" data-nivel="3">
@@ -10993,6 +11019,8 @@
     paso('llevarse la consulta', pintarCajaConsulta);
     paso('el objetivo y su medición', tableroObjetivo);
     paso('censo de fuentes subnacionales', censoVista);
+    paso('padrón de unidades', padronUnidades);
+    paso('dato subnacional', datoSubnacional);
     paso('orden del Índice de Opacidad', tablaOpacidad);
     paso('fases del método', fasesVista);
     paso('minería del registro', mineriaVista);
@@ -13814,6 +13842,81 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       + 'los actos con evidencia: cada acto vale 0 si lo cumplió y 100 si no.</p>';
   }
 
+  // EL PADRON DE UNIDADES DE PRIMER ORDEN, y la regla que decide si cada una
+  // admite una tasa. No se supone: se calcula dividiendo los homicidios del
+  // pais entre sus unidades, porque el error relativo de un recuento es cercano
+  // a 1/raiz(n) y con menos de treinta casos una tasa por 100.000 se mueve
+  // enormemente con un caso mas.
+  function padronUnidades(){
+    const caja = document.getElementById('padron-unidades');
+    const d = almacen.unidades;
+    if(!caja || !d) return;
+    const r = d.resumen || {};
+    const filas = (d.registros||[]).filter(x => !paisFiltro || x.iso === paisFiltro);
+    const marca = x => x.admite_tasa === true
+      ? '<span class="marca-tasa si">tasa</span>'
+      : x.admite_tasa === false ? '<span class="marca-tasa no">recuento</span>'
+      : '<span class="marca-tasa nd">sin decidir</span>';
+
+    caja.innerHTML =
+      '<div class="censo-rejilla" style="margin-bottom:12px">'
+      + '<div><span class="q">Unidades de primer orden</span><span class="v">'
+        + miles(r.unidades_de_primer_orden||0) + '</span><span class="c">en los '
+        + (r.estados||33) + ' Estados</span></div>'
+      + '<div><span class="q">Admiten tasa</span><span class="v">' + (r.admiten_tasa||0)
+        + '</span><span class="c">Estados con casos suficientes por unidad</span></div>'
+      + '<div><span class="q">Solo recuento</span><span class="v">' + (r.solo_recuento||0)
+        + '</span><span class="c">una tasa ahí sería azar</span></div>'
+      + '<div><span class="q">Geometría</span><span class="v">' + (r.de_cepal||0) + '+'
+        + (r.de_geoboundaries||0) + '</span><span class="c">CEPAL y geoBoundaries</span></div>'
+      + '</div>'
+      + '<div class="uni-cab"><span>Estado</span><span>Unidades</span><span>Casos/unidad</span>'
+        + '<span>Regla</span></div>'
+      + filas.slice().sort((a,b) => b.unidades - a.unidades).map(x =>
+          '<div class="uni-fila' + (x.iso === paisFiltro ? ' suyo' : '') + '">'
+          + '<span class="n">' + esc(x.pais)
+            + (x.nombre_local ? ' <span class="l">· ' + esc(x.nombre_local) + '</span>' : '')
+            + '</span>'
+          + '<span class="c">' + x.unidades + '</span>'
+          + '<span class="c">' + (x.casos_por_unidad !== null && x.casos_por_unidad !== undefined
+              ? cifra(x.casos_por_unidad) : '—') + '</span>'
+          + '<span class="t">' + marca(x) + '</span></div>').join('')
+      + '<p class="censo-aviso" style="margin-top:10px"><b>' + esc(r.regla || '') + '</b> '
+      + 'Los límites salen de dos fuentes que se reparten el padrón sin superponerse: la capa '
+      + 'homologada de la CEPAL cubre ' + (r.de_cepal||0) + ' Estados y geoBoundaries los '
+      + (r.de_geoboundaries||0) + ' restantes —el Caribe, Haití, Belice y las Guayanas—.</p>';
+  }
+
+  // EL PRIMER DATO POR UNIDAD, y el contraste vertical que lo acompaña.
+  function datoSubnacional(){
+    const caja = document.getElementById('dato-subnacional');
+    const d = almacen.subDatos;
+    if(!caja || !d) return;
+    const filas = (d.registros||[]).filter(x => !paisFiltro || x.iso === paisFiltro);
+    if(!filas.length){ caja.innerHTML = ''; caja.hidden = true; return; }
+    caja.hidden = false;
+    caja.innerHTML = filas.map(r => {
+      const orden = (r.unidades||[]).slice()
+        .sort((a,b) => (b.ultimo?.valor||0) - (a.ultimo?.valor||0));
+      return '<div class="censo-unidad" style="margin-top:12px">'
+        + '<div class="censo-cab"><h4>' + esc(r.pais) + ' · ' + esc(r.materia)
+          + ' por ' + esc(r.nombre_local) + '</h4>'
+        + '<span class="pais">' + r.unidades_con_serie + ' de ' + r.unidades_pedidas
+          + ' con serie · hasta ' + r.ultimo_anio + '</span></div>'
+        + '<p class="censo-fuente">' + esc(r.que_cuenta) + '. Fuente: <b>'
+          + esc(r.fuente_nacional.nombre) + '</b>.</p>'
+        + '<div class="uni-cab"><span>Unidad</span><span>' + r.ultimo_anio
+          + '</span><span>Desde</span><span></span></div>'
+        + orden.map(u => '<div class="uni-fila"><span class="n">' + esc(u.unidad) + '</span>'
+            + '<span class="c">' + miles(Math.round(u.ultimo.valor)) + '</span>'
+            + '<span class="c">' + u.desde + '</span><span class="t"></span></div>').join('')
+        + '<p class="censo-aviso" style="margin-top:10px"><b>No son comparables con las de '
+        + 'otro país</b>: cada Estado define el homicidio a su manera. Sirven para comparar '
+        + 'unidades dentro del mismo país y para contrastarlas con lo que publica cada '
+        + 'jurisdicción de sí misma.</p></div>';
+    }).join('');
+  }
+
   function censoVista(){
     const caja = document.getElementById('lista-censo');
     const d = almacen.subnacional;
@@ -14245,6 +14348,13 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
         vacios_declarados:[]});
       mineriaVista(); })
     .catch(() => {});
+
+  // El padrón de unidades de primer orden y el primer dato por unidad. Si
+  // alguno falta, su panel queda vacío y el resto sigue andando.
+  Promise.all([traer('unidades.json').catch(()=>null),
+               traer('subnacional_datos.json').catch(()=>null)])
+    .then(([u, sd]) => { almacen.unidades = u; almacen.subDatos = sd;
+      padronUnidades(); datoSubnacional(); });
 
   // El censo de fuentes subnacionales. Si falta, su bloque queda vacio y el
   // resto del registro no se entera.

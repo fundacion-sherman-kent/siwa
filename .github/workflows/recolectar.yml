@@ -87,6 +87,22 @@ jobs:
         continue-on-error: true
         run: python colectores/reciente_oficial.py
 
+      # EL PADRON SUBNACIONAL: las unidades de primer orden de los 33 Estados,
+      # de dos fuentes que se reparten el padron sin superponerse, y la regla
+      # que decide si cada una admite tasa o solo recuento.
+      - name: Padron de unidades de primer orden
+        id: unidades
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/unidades.py
+
+      # EL PRIMER DATO POR UNIDAD, de la fuente nacional de cada Estado.
+      - name: Dato subnacional por unidad
+        id: subnacional_datos
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/subnacional_datos.py
+
       # EL CENSO DE FUENTES SUBNACIONALES. No publica cifras de criminalidad:
       # publica QUIEN publica, en que formato y con que frescura. Es la materia
       # prima del contraste vertical y, ademas, una medicion de transparencia
@@ -472,6 +488,8 @@ jobs:
           [ "${{ steps.memoria.outcome }}" = "failure" ] && { echo "Falló la memoria del registro."; fallo=1; }
           [ "${{ steps.sondeo.outcome }}" = "failure" ] && { echo "Falló el banco de pruebas."; fallo=1; }
           [ "${{ steps.subnacional.outcome }}" = "failure" ] && { echo "Falló el censo de fuentes subnacionales."; fallo=1; }
+          [ "${{ steps.unidades.outcome }}" = "failure" ] && { echo "Falló el padrón de unidades de primer orden."; fallo=1; }
+          [ "${{ steps.subnacional_datos.outcome }}" = "failure" ] && { echo "Falló el dato subnacional por unidad."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
           # La auditoría no es un colector: no falla porque una fuente no
