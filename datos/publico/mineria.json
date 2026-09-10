@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-10T18:30:57+00:00",
-  "medidas_con_suficientes_casos": 118,
-  "pares_probados": 6903,
+  "corrida": "2026-09-10T19:23:01+00:00",
+  "medidas_con_suficientes_casos": 119,
+  "pares_probados": 7021,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 6903 pares y el umbral de siempre, alrededor de 345 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 1544,
-    "de_ellos_son_parentescos": 202
+    "por_que": "Con 7021 pares y el umbral de siempre, alrededor de 351 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 1586,
+    "de_ellos_son_parentescos": 205
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 1342,
+  "pistas_totales": 1381,
   "anomalias_totales": 170,
   "pistas": [
     {
@@ -272,10 +272,10 @@
       "b": "focos:focos",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "focos · focos",
-      "coeficiente": 0.873,
+      "coeficiente": 0.875,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.6522579575844589e-13,
+      "p": 1.2110237465576523e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
