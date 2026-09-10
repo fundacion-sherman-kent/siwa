@@ -1272,6 +1272,10 @@
   .mz-celda:hover{stroke:var(--tinta);stroke-width:1.5;}
   .figura-matriz svg{display:block;margin:0 auto;}
 
+  .lt-punto{cursor:pointer;}
+  .lt-punto:hover{stroke:var(--tinta);stroke-width:1.5;}
+  .figura-linea-tiempo svg{display:block;margin:0 auto;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -3040,6 +3044,7 @@
            donde la definición está escrita.</p>
       </details>
       <div class="procedencia" id="proc-reciente">Cargando el registro…</div>
+      <div class="evolucion" id="slot-publicaciones"></div>
       <div class="cruce" id="lista-reciente"></div>
       <div id="vac-reciente"></div>
     </div><div class="categoria" id="entorno-informativo" data-nivel="3">
@@ -9468,6 +9473,126 @@
       : 'La ficha, la evolución, la tendencia y la fuente, en una sola ventana.';
   }
 
+  // ============ LA LINEA DE TIEMPO DE LA PUBLICACION OFICIAL ============
+  //
+  // Un punto por conjunto subido a un catalogo oficial, en el dia en que se
+  // subio. NO hay eje de magnitud: estas cifras no se comparan entre paises, y
+  // una figura con altura invitaria a compararlas. Lo que se ve es el pulso:
+  // quien sube todos los meses, quien subio una vez y no volvio.
+  function figuraPublicaciones(ancho){
+    const d = almacen.reciente;
+    if(!d || !d.registros) return '';
+    const zona = bloqueActivo();
+    let lista = d.registros.filter(x => (x.conjuntos||[]).length);
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+    if(!lista.length) return '';
+
+    const puntos = [];
+    lista.forEach(e => (e.conjuntos||[]).forEach(c => {
+      const t = Date.parse(c.actualizado);
+      if(isFinite(t)) puntos.push({iso:e.iso, pais:e.pais, t, c});
+    }));
+    if(puntos.length < 2) return '';
+
+    // LA VENTANA ES DE DOS ANIOS. Medido: el conjunto mas viejo del padron es
+    // de octubre de 2015, y con once anios de eje las publicaciones se
+    // amontonaban contra el borde derecho. Lo anterior a la ventana no se
+    // dibuja apretado contra el margen —eso lo pondria en una fecha que no le
+    // corresponde—: se cuenta en el pie.
+    const hoy = Date.now();
+    const VENTANA = 730 * 86400000;
+    const afuera = puntos.filter(x => hoy - x.t > VENTANA).length;
+    const dentro = puntos.filter(x => hoy - x.t <= VENTANA);
+    if(!dentro.length) return '';
+    const t0 = Math.min(...dentro.map(x => x.t));
+    const span = (hoy - t0) || 1;
+    const filas = lista.filter(e => dentro.some(x => x.iso === e.iso))
+      .sort((a,b) => {
+        const ua = Math.max(...dentro.filter(x=>x.iso===a.iso).map(x=>x.t));
+        const ub = Math.max(...dentro.filter(x=>x.iso===b.iso).map(x=>x.t));
+        return ub - ua;
+      });
+
+    const angosto = ancho < 460;
+    const mIzq = angosto ? 42 : 56, mDer = 10, mArr = 18, mAba = 24;
+    const altoFila = 22;
+    const alto = mArr + filas.length * altoFila + mAba;
+    const util = ancho - mIzq - mDer;
+    const px = t => mIzq + ((t - t0) / span) * util;
+
+    // Las marcas del eje: el primero, el ultimo y hoy. Mas marcas en una
+    // figura de siete filas es ruido.
+    const fecha = t => new Date(t).toLocaleDateString('es-AR', {month:'short', year:'2-digit'});
+    const eje = '<line x1="' + mIzq + '" y1="' + (alto - mAba + 4) + '" x2="' + (ancho - mDer)
+      + '" y2="' + (alto - mAba + 4) + '" stroke="var(--velo-3)" stroke-width="1"></line>'
+      + [[t0,'start'],[hoy,'end']].map(([t,an]) =>
+          '<text x="' + (an === 'start' ? mIzq : ancho - mDer) + '" y="' + (alto - 6)
+          + '" text-anchor="' + an + '" fill="var(--texto-2)" font-size="9.5">'
+          + (an === 'end' ? 'hoy' : fecha(t)) + '</text>').join('');
+
+    let cuerpo = '';
+    filas.forEach((e, i) => {
+      const y = mArr + i * altoFila + altoFila / 2;
+      const suyo = e.iso === paisFiltro;
+      cuerpo += '<text x="' + (mIzq - 6) + '" y="' + (y + 3.5) + '" text-anchor="end" '
+        + 'font-size="10" fill="' + (suyo ? 'var(--tinta)' : 'var(--texto-2)')
+        + '" font-weight="' + (suyo ? '700' : '400') + '">' + esc(e.iso) + '</text>';
+      cuerpo += '<line x1="' + mIzq + '" y1="' + y + '" x2="' + (ancho - mDer) + '" y2="' + y
+        + '" stroke="var(--velo-1)" stroke-width="' + altoFila * 0.62 + '"></line>';
+      const suyos = dentro.filter(x => x.iso === e.iso).sort((a,b) => a.t - b.t);
+      const ultimo = suyos[suyos.length - 1];
+      suyos.forEach(x => {
+        const reciente = x === ultimo;
+        cuerpo += '<circle class="lt-punto" data-iso="' + esc(e.iso) + '" cx="' + px(x.t).toFixed(1)
+          + '" cy="' + y + '" r="' + (reciente ? 5 : 3.6) + '" fill="'
+          + (reciente ? 'var(--orange)' : 'rgba(251,101,0,.42)') + '"><title>'
+          + esc(x.c.titulo) + '\n' + esc(x.c.organismo || e.pais) + '\n'
+          + esc(x.c.actualizado) + ' · hace ' + (x.c.dias != null ? x.c.dias : '—')
+          + ' días</title></circle>';
+      });
+      // El nombre del organismo del ultimo, si entra sin pisar el punto.
+      if(!angosto && ultimo && px(ultimo.t) < ancho - mDer - 90)
+        cuerpo += '<text x="' + (px(ultimo.t) + 9) + '" y="' + (y + 3.5) + '" font-size="9.5" '
+          + 'fill="var(--tenue)">' + esc(String(ultimo.c.organismo || '').slice(0, 30)) + '</text>';
+    });
+
+    const sinPortal = (d.resumen||{}).estados_del_padron
+      ? d.resumen.estados_del_padron - lista.length : 0;
+    const masFresco = Math.max(...dentro.map(x => x.t));
+    const dias = Math.round((hoy - masFresco) / 86400000);
+    return '<div class="figura-linea-tiempo"><div class="fc-tit"><b>El pulso de la publicación '
+      + 'oficial.</b> Cada punto es un conjunto que un organismo subió a su catálogo, el día '
+      + 'que lo subió; el punto lleno es el último de ese Estado. <b>No hay eje de valores</b>: '
+      + 'estas cifras no se comparan entre países, así que la figura muestra cuándo se publica, '
+      + 'no cuánto. Lo más reciente de todo el ámbito tiene <b>' + dias + ' día'
+      + (dias === 1 ? '' : 's') + '</b>.'
+      + (afuera ? ' Se ven los últimos dos años; <b>' + afuera + '</b> publicaci'
+         + (afuera === 1 ? 'ón anterior queda' : 'ones anteriores quedan') + ' fuera del dibujo.' : '')
+      + (sinPortal > 0 && !paisFiltro ? ' Faltan <b>' + sinPortal + '</b> Estados: no tienen '
+         + 'portal consultable, lo que no prueba que no publiquen.' : '') + '</div>'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto
+      + '" style="max-width:100%;height:auto" role="img" aria-label="Línea de tiempo de '
+      + dentro.length + ' publicaciones oficiales de ' + filas.length + ' Estados">'
+      + eje + cuerpo + '</svg></div>';
+  }
+
+  function publicacionesVista(){
+    const caja = document.getElementById('slot-publicaciones');
+    if(!caja) return;
+    const ancho = Math.max(280, Math.min(680, (caja.clientWidth || 600) - 28));
+    caja.innerHTML = figuraPublicaciones(ancho);
+    caja.hidden = !caja.innerHTML;
+    if(caja.dataset.armado) return;
+    caja.dataset.armado = '1';
+    caja.addEventListener('click', ev => {
+      const g = ev.target.closest('[data-iso]');
+      if(!g) return;
+      const p = (padron||[]).find(x => x.iso === g.dataset.iso);
+      if(p) seleccionar(p.iso, p.pais);
+    });
+  }
+
   // ============ LA MATRIZ ESTADO x ANIO ============
   //
   // Una fila por Estado, una columna por anio, un color por valor. La celda
@@ -12444,6 +12569,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   }
 
   function recienteVista(){
+    publicacionesVista();
     const caja = document.getElementById('lista-reciente');
     const d = almacen.reciente; if(!caja || !d) return;
     const zona = bloqueActivo();
