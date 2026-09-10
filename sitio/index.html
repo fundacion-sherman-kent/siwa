@@ -1855,6 +1855,13 @@
   .hero-fila > .hero-meta > div{border-left:2px solid var(--tinta);padding-left:10px;}
   .hero-fila > .hero-meta strong{display:block;font-size:20px;line-height:1.15;}
   .hero-fila > .hero-meta span{font-size:9.5px;letter-spacing:.9px;}
+
+  /* NINGUNA CADENA LARGA DESCUADRA LA PÁGINA. Una dirección sin espacios no
+     rompe línea por sí sola: medido en un teléfono de 390, la cita con los
+     parámetros de seguimiento pedía 844 px y corría el documento entero. */
+  .cita-apa,.asunto,.foot,.porque,.va-cuerpo,.dc,.fc-dice,td,.materia,.op-caja{
+    overflow-wrap:anywhere;word-break:normal;}
+  .cita-apa{display:block;max-width:100%;}
 </style>
 </head>
 <body>
@@ -5018,6 +5025,17 @@
   // LA CITA. Nombra al productor del dato Y al registro: omitir al primero seria
   // atribuirse trabajo ajeno; omitir al segundo, impedir que el lector encuentre
   // la version consultada.
+  // LA DIRECCION SIN RASTREO. Los parametros de seguimiento dicen de donde vino
+  // el lector, no de donde sale el dato: no viajan en una cita.
+  const RASTREO = /^(_gl|_ga.*|utm_.*|gclid|fbclid|mc_cid|mc_eid|igshid)$/i;
+  function direccionLimpia(){
+    try{
+      const u = new URL(location.href);
+      [...u.searchParams.keys()].forEach(k => { if(RASTREO.test(k)) u.searchParams.delete(k); });
+      return u.toString();
+    }catch(e){ return location.href; }
+  }
+
   function citaAPA(){
     const q = loQueSeMiro();
     const hoy = new Date();
@@ -5029,7 +5047,7 @@
       const p = procedenciaDe(c);
       return p && p.fuente ? (p.fuente.nombre || p.fuente) : null;
     }).filter(Boolean))];
-    const url = location.href;
+    const url = direccionLimpia();
     const propia = 'Fundación Sherman Kent, Oficina de Generación de Inteligencia. '
       + '(' + anio + '). <i>SIWA — Reporte de situación de América Latina y el Caribe: '
       + esc(q.titulo) + ' (' + esc(q.ambito) + ')</i> [Conjunto de datos]. '
@@ -8305,7 +8323,7 @@
       partes.push('Calificación de fiabilidad A-2 (sistema Almirantazgo): construcción propia con '
                 + 'método declarado, sobre fuentes calificadas.');
       partes.push('Advertencia: ' + compuesta.cautela);
-      partes.push(`Consultado el ${new Date().toLocaleDateString('es-AR')} en SIWA, Fundación Sherman Kent — ${location.href}`);
+      partes.push(`Consultado el ${new Date().toLocaleDateString('es-AR')} en SIWA, Fundación Sherman Kent — ${direccionLimpia()}`);
       return partes.join(' ');
     }
     const i = metaInd(capaActiva), conjunto = conjuntoDe(capaActiva);
@@ -8320,7 +8338,7 @@
     partes.push(`Fuente: ${i.origen || meta.fuente.nombre}.`);
     partes.push(`Calificación de fiabilidad ${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad} (sistema Almirantazgo).`);
     if(i.cautela) partes.push(`Advertencia de la fuente: ${i.cautela}`);
-    partes.push(`Consultado el ${new Date().toLocaleDateString('es-AR')} en SIWA, Fundación Sherman Kent — ${location.href}`);
+    partes.push(`Consultado el ${new Date().toLocaleDateString('es-AR')} en SIWA, Fundación Sherman Kent — ${direccionLimpia()}`);
     return partes.join(' ');
   }
 
