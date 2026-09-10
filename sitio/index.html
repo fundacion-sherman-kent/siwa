@@ -1259,6 +1259,11 @@
   .fc-tit b{color:var(--texto-max);}
   .figura-cruce svg,.figura-puestos svg{display:block;margin:0 auto;}
 
+  .mos-celda{cursor:pointer;outline:none;}
+  .mos-celda:hover rect{stroke:var(--tinta);stroke-width:2;}
+  .mos-celda:focus-visible rect{stroke:var(--tinta);stroke-width:2.6;}
+  .figura-mosaico svg{display:block;margin:0 auto;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -2108,6 +2113,7 @@
           <span id="abrir-analisis-pie">La ficha, la evolución, la tendencia y la fuente, en una sola ventana.</span>
         </div>
         <div id="slot-contraste"></div>
+        <div class="evolucion" id="slot-mosaico"></div>
         <div class="evolucion" id="slot-dispersion"></div>
         <div class="evolucion" id="slot-evolucion"></div>
         <div class="evolucion" id="slot-puestos"></div>
@@ -9412,6 +9418,90 @@
       : 'La ficha, la evolución, la tendencia y la fuente, en una sola ventana.';
   }
 
+  // ============ EL MOSAICO DE LOS 33 ============
+  //
+  // En un mapa por superficie, Dominica es un punto de tres pixeles: ocho
+  // Estados del padron son invisibles, y son un cuarto del padron. El mosaico
+  // los pone a todos del mismo tamaño, agrupados por su zona: un Estado, una
+  // celda, sin importar cuantos kilometros tenga.
+  const ORDEN_ZONAS = ['México y Centroamérica', 'Caribe hispano y Haití', 'Caribe oriental',
+                       'Andina', 'Guayanas', 'Cono Sur'];
+
+  function figuraMosaico(clave, ancho){
+    const cap = (capas()||{})[clave];
+    if(!cap || !cap.conteo) return '';
+    const vals = cap.conteo() || {};
+    const porZona = {};
+    (padron||[]).forEach(p => (porZona[p.bloque] = porZona[p.bloque] || []).push(p));
+    const zonas = ORDEN_ZONAS.filter(z => porZona[z]).concat(
+      Object.keys(porZona).filter(z => !ORDEN_ZONAS.includes(z)));
+    if(!zonas.length) return '';
+
+    const cols = ancho < 460 ? 4 : ancho < 620 ? 6 : 7;
+    const lado = Math.floor((ancho - (cols - 1) * 6) / cols);
+    const altoRot = 22;
+    let y = 0, cuerpo = '', sinDato = 0;
+    zonas.forEach(z => {
+      const suyos = porZona[z].slice().sort((a,b) => a.pais.localeCompare(b.pais,'es'));
+      cuerpo += '<text x="0" y="' + (y + 13) + '" font-size="10.5" font-weight="700" '
+        + 'fill="var(--tinta)" letter-spacing=".6">' + esc(z.toUpperCase()) + '</text>';
+      y += altoRot;
+      suyos.forEach((p, i) => {
+        const col = i % cols, fila = Math.floor(i / cols);
+        const x = col * (lado + 6), yy = y + fila * (lado + 6);
+        const v = vals[p.iso];
+        const hay = v !== undefined;
+        if(!hay) sinDato++;
+        const suyo = p.iso === paisFiltro;
+        const titulo = p.pais + ' · ' + (hay ? cifra(v) + ' ' + (cap.unidad || '') : 'sin dato');
+        cuerpo += '<g class="mos-celda" data-iso="' + esc(p.iso) + '" tabindex="0" role="button">'
+          + '<rect x="' + x + '" y="' + yy + '" width="' + lado + '" height="' + lado
+          + '" rx="7" fill="' + (hay ? cap.color(v) : 'var(--sin-dato)') + '" '
+          + 'stroke="' + (suyo ? 'var(--orange)' : (hay ? 'rgba(255,255,255,.14)' : 'rgba(255,255,255,.35)'))
+          + '" stroke-width="' + (suyo ? 2.4 : 1) + '"' + (hay ? '' : ' stroke-dasharray="3 3"') + '>'
+          + '<title>' + esc(titulo) + '</title></rect>'
+          + '<text x="' + (x + lado/2) + '" y="' + (yy + lado/2 - 2) + '" text-anchor="middle" '
+          + 'font-size="' + (lado > 54 ? 12 : 10) + '" font-weight="700" fill="var(--texto-max)" '
+          + 'style="pointer-events:none">' + esc(p.iso) + '</text>'
+          + (hay && lado > 46 ? '<text x="' + (x + lado/2) + '" y="' + (yy + lado/2 + 12)
+             + '" text-anchor="middle" font-size="9.5" fill="var(--texto-2)" '
+             + 'style="pointer-events:none">' + esc(cifra(v)) + '</text>' : '')
+          + '</g>';
+      });
+      y += Math.ceil(suyos.length / cols) * (lado + 6) + 8;
+    });
+
+    return '<div class="figura-mosaico"><div class="fc-tit"><b>Los 33 del mismo tamaño.</b> '
+      + 'En el mapa, Dominica es un punto y Brasil ocupa media pantalla; acá cada Estado es una '
+      + 'celda igual, agrupada por su zona. Tocá una para elegir ese Estado.'
+      + (sinDato ? ' <b>' + sinDato + '</b> sin dato, con el borde punteado.' : '') + '</div>'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + y + '" width="' + ancho + '" height="' + y
+      + '" style="max-width:100%;height:auto" role="img" aria-label="Mosaico de los 33 Estados en '
+      + esc(rotuloDeMateria(clave)) + ', cada uno del mismo tamaño, agrupados por zona">'
+      + cuerpo + '</svg></div>';
+  }
+
+  function mosaicoVista(){
+    const caja = document.getElementById('slot-mosaico');
+    if(!caja) return;
+    const ancho = Math.max(280, Math.min(680, (caja.clientWidth || 600) - 28));
+    caja.innerHTML = figuraMosaico(capaActiva, ancho);
+    caja.hidden = !caja.innerHTML;
+    if(caja.dataset.armado) return;
+    caja.dataset.armado = '1';
+    const elegir = t => {
+      const g = t.closest('[data-iso]');
+      if(!g) return;
+      const iso = g.dataset.iso;
+      const p = (padron||[]).find(x => x.iso === iso);
+      if(p) seleccionar(iso, p.pais);
+    };
+    caja.addEventListener('click', ev => elegir(ev.target));
+    caja.addEventListener('keydown', ev => {
+      if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); elegir(ev.target); }
+    });
+  }
+
   // ============ LA NUBE DEL CRUCE ============
   //
   // Cruzar dos temas devolvia dos fichas: la pregunta del cruce —«¿tienen algo
@@ -10061,6 +10151,7 @@
     paso('contraste de fuentes', contrasteVista);
     paso('botón de análisis', pintarBotonAnalisis);
     paso('evolución de la región', evolucionVista);
+    paso('mosaico de los 33', mosaicoVista);
     paso('nube y puestos', figurasNuevasVista);
     paso('mapa de relaciones', relacionesVista);
     paso('pestaña', rotularLaPestania);
