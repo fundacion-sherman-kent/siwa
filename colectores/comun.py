@@ -52,6 +52,7 @@ TESTIGOS = {
     "indice.json": "el catálogo público de conjuntos",
     "auditoria.json": "auditoría del registro, corrida en cada recolección",
     "pantallas.json": "control de diseño adaptable, corrido en cada cambio de código",
+    "mineria.json": "minería sobre el propio registro: pistas, no conclusiones",
 }
 
 ATRIBUCION = {

@@ -342,6 +342,14 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/indice_opacidad.py
 
+      # LA MINERIA va despues de TODO lo que recolecta: cruza lo que quedo
+      # escrito en esta corrida. Deja pistas, no conclusiones.
+      - name: Mineria sobre el propio registro
+        id: mineria
+        if: always()
+        continue-on-error: true
+        run: python herramientas/mineria.py
+
       # LA HISTORIA DEL INDICE va justo despues del indice y antes de todo lo
       # que lo muestra: archiva el puntaje del dia para que exista evolucion.
       # Sin esto el indice contesta «como esta» y nunca «esta mejorando».
@@ -464,6 +472,7 @@ jobs:
           [ "${{ steps.memoria.outcome }}" = "failure" ] && { echo "Falló la memoria del registro."; fallo=1; }
           [ "${{ steps.sondeo.outcome }}" = "failure" ] && { echo "Falló el banco de pruebas."; fallo=1; }
           [ "${{ steps.subnacional.outcome }}" = "failure" ] && { echo "Falló el censo de fuentes subnacionales."; fallo=1; }
+          [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
           # La auditoría no es un colector: no falla porque una fuente no
           # respondió, falla porque el registro publicado dice algo que no

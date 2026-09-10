@@ -1411,6 +1411,37 @@
     border-left:3px solid var(--t-violeta);padding-left:11px;}
   .censo-aviso b{color:var(--texto);}
 
+  /* LAS FASES DEL METODO Y LA MINERIA. */
+  .fases{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));
+    margin:0 0 16px;}
+  .fase{border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--velo-1);}
+  .fase .n{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
+    font-weight:700;color:var(--orange);border:1px solid rgba(251,101,0,.4);border-radius:4px;
+    padding:0 5px;margin-bottom:5px;}
+  .fase b{display:block;font-size:12.5px;color:var(--texto-max);margin-bottom:3px;}
+  .fase span{font-size:11.5px;color:var(--texto-2);line-height:1.5;display:block;}
+  .fase code{font-size:10.5px;color:var(--tenue);font-family:'JetBrains Mono',monospace;
+    display:block;margin-top:4px;word-break:break-all;}
+  .mineria-cifras{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
+    border-radius:9px;overflow:hidden;margin-bottom:12px;
+    grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));}
+  .mineria-cifras > div{background:var(--panel);padding:10px 12px;}
+  .mineria-cifras .q{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;
+    color:var(--tenue);font-weight:700;margin-bottom:3px;}
+  .mineria-cifras .v{display:block;font-size:17px;font-weight:800;color:var(--texto-max);
+    font-variant-numeric:tabular-nums;}
+  .mineria-cifras .c{display:block;font-size:11px;color:var(--texto-2);margin-top:2px;}
+  .pista{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:start;
+    padding:8px 0;border-top:1px solid var(--velo-2);font-size:12.5px;}
+  .pista:first-of-type{border-top:none;}
+  .pista .r{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;
+    text-align:right;color:var(--orange);}
+  .pista .r.neg{color:var(--t-ok);}
+  .pista .t{color:var(--texto);line-height:1.5;}
+  .pista .t i{font-style:normal;color:var(--tenue);font-size:11px;display:block;margin-top:2px;}
+  .mineria-tit{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--orange);
+    font-weight:700;margin:16px 0 8px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -2257,6 +2288,7 @@
     <a href="#gobernanza">Instituciones y democracia</a>
     <a href="#transparencia">Transparencia y control</a>
     <a href="#censo-subnacional">Qué publica cada provincia</a>
+    <a href="#metodo-busqueda">Cómo se busca</a>
     <div class="grupo">Eje · Desarrollo</div>
     <a href="#desarrollo">Desarrollo</a>
     <!-- Riesgo y ambiente NO es ninguno de los cuatro y no se lo fuerza a
@@ -3231,6 +3263,25 @@
       <div class="procedencia" id="proc-censo">Cargando el registro…</div>
       <div class="cruce" id="lista-censo"></div>
       <div id="vac-censo"></div>
+        </div>
+    <div class="categoria" id="metodo-busqueda" data-nivel="3">
+      <div class="categoria-head"><h3>Cómo se busca, y qué encontró la máquina</h3><span class="tag" id="tag-metodo">—</span></div>
+      <details class="aviso-cobertura"><summary>Las pistas de esta sección no son hallazgos: son candidatas</summary>
+        <p><b>Con seis mil pares probados, unos trescientos darían «significativo» por puro
+           azar</b> aunque los datos fueran ruido. Por eso está aplicada la corrección de
+           Benjamini y Hochberg, que controla la proporción de falsos hallazgos, y por eso el
+           número de pares probados se muestra <b>antes</b> que los resultados.</p>
+        <p><b>Que dos medidas se acompañen no prueba que una cause la otra.</b> Puede haber un
+           tercer factor detrás de las dos, o puede ser la forma en que se recolectan. Estas
+           relaciones son <b>candidatas a que las mire una persona</b>, y así se publican.</p>
+        <p><b>El coeficiente es de rangos, no de valores.</b> Casi todo lo que este registro
+           cuenta está torcido hacia arriba, y con valores crudos el resultado lo decide el
+           país más grande: aparecían relaciones de 0,97 sostenidas por dos puntos. Preguntar
+           si los Estados <b>se ordenan</b> parecido desarma eso.</p>
+      </details>
+      <div id="fases-osint"></div>
+      <div class="procedencia" id="proc-mineria">Cargando el registro…</div>
+      <div id="tablero-mineria"></div>
         </div>
 </section>
     <section class="domain bloque" id="desarrollo" data-nivel="3">
@@ -10858,6 +10909,8 @@
     paso('llevarse la consulta', pintarCajaConsulta);
     paso('el objetivo y su medición', tableroObjetivo);
     paso('censo de fuentes subnacionales', censoVista);
+    paso('fases del método', fasesVista);
+    paso('minería del registro', mineriaVista);
     paso('cuántos temas', contarTemas);
     paso('perfil del país', perfilPais);
     paso('panorama', armarPanorama);
@@ -13539,6 +13592,97 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     2:'infografía: la lee una persona', 1:'solo comunicados', 0:'no publica nada de sí misma'
   };
 
+  // LAS FASES DEL METODO, CON LOS PROGRAMAS QUE LAS EJECUTAN. No es una lamina:
+  // cada fase nombra archivos que corren en cada recoleccion. Si un dia un
+  // programa desaparece, la fase queda nombrando algo que no existe, y eso se
+  // nota; una lamina bonita no se habria enterado.
+  const FASES = [
+    {n:'1', rot:'Dirección', dice:'Qué se busca y sobre quién. El padrón de 33 Estados y los '
+      +'cuatro ejes fijan el requerimiento antes de tocar una fuente.', hace:'doctrina/siwa.md'},
+    {n:'2', rot:'Descubrimiento', dice:'Se tocan puertas nuevas sin publicar nada sin decisión '
+      +'humana, y ninguna fuente candidata entra sin disponibilidad medida.',
+      hace:'explorador.py · sondeo.py · subnacional.py'},
+    {n:'3', rot:'Recolección', dice:'Consulta a interfaces públicas, sin credenciales salvo una, '
+      +'y sin tocar nada que no sea abierto.', hace:'47 colectores'},
+    {n:'4', rot:'Procesamiento', dice:'Calificación de Almirantazgo por fuente y por dato. Sin '
+      +'segunda fuente independiente, la credibilidad baja y se declara.', hace:'comun.calificar'},
+    {n:'5', rot:'Correlación y minería', dice:'Todos los pares posibles, con corrección por '
+      +'comparaciones múltiples, y anomalías contra la propia historia de cada Estado.',
+      hace:'mineria.py'},
+    {n:'6', rot:'Contraste', dice:'Dos fuentes sobre el mismo hecho, solo en años comunes; '
+      +'brecha espejo del comercio; y el contraste vertical con lo que publica la jurisdicción.',
+      hace:'comercio.py · brecha.py · subnacional.py'},
+    {n:'7', rot:'Archivo y vigilancia', dice:'Qué cambió y desde cuándo, copias fechadas del '
+      +'archivo de la web y la historia del Índice de Opacidad.',
+      hace:'memoria.py · archivo.py · opacidad-historia.py'},
+    {n:'8', rot:'Control', dice:'La auditoría del registro y el control de pantallas corren '
+      +'solos y dejan la corrida en rojo si algo se rompe.', hace:'auditoria.py · pantallas.py'},
+  ];
+
+  function fasesVista(){
+    const caja = document.getElementById('fases-osint');
+    if(!caja || caja.dataset.armado) return;
+    caja.dataset.armado = '1';
+    caja.innerHTML = '<div class="fases">' + FASES.map(f =>
+      '<div class="fase"><span class="n">FASE ' + f.n + '</span><b>' + esc(f.rot) + '</b>'
+      + '<span>' + f.dice + '</span><code>' + esc(f.hace) + '</code></div>').join('') + '</div>';
+  }
+
+  function mineriaVista(){
+    const caja = document.getElementById('tablero-mineria');
+    const d = almacen.mineria;
+    if(!caja || !d) return;
+    const c = d.correccion || {};
+    // OJO CON EL NOMBRE: `tag-mineria` ya existia para la mineria ILEGAL, que es
+    // otra cosa. Dos elementos con el mismo identificador no conviven: el
+    // segundo no se encuentra nunca y el primero se llena con texto ajeno.
+    const tag = document.getElementById('tag-metodo');
+    if(tag) tag.textContent = (d.pistas_totales || (d.pistas||[]).length) + ' pistas · '
+      + (d.anomalias_totales || (d.anomalias||[]).length) + ' anomalías';
+
+    const pista = x =>
+      '<div class="pista"><span class="r' + (x.coeficiente < 0 ? ' neg' : '') + '">'
+      + (x.coeficiente > 0 ? '+' : '') + cifra(x.coeficiente) + '</span>'
+      + '<span class="t">' + esc(x.rotulo_a) + ' <b>×</b> ' + esc(x.rotulo_b)
+      + '<i>' + x.estados + ' Estados con dato en los dos · coeficiente de rangos</i></span></div>';
+
+    const anom = x => {
+      const cuanto = x.cambio_pct !== null && x.cambio_pct !== undefined
+        ? (x.cambio_pct > 0 ? '+' : '') + cifra(x.cambio_pct) + ' %'
+        : (x.cambio_en_unidades > 0 ? '+' : '') + cifra(x.cambio_en_unidades);
+      return '<div class="pista"><span class="r' + (x.desvios < 0 ? ' neg' : '') + '">'
+        + cuanto + '</span><span class="t"><b>' + esc(x.pais || x.iso) + '</b> · '
+        + esc(x.rotulo) + ' en ' + esc(x.anio)
+        + '<i>venía en ' + cifra(x.mediana_previa) + ' y pasó a ' + cifra(x.valor)
+        + ' · ' + cifra(Math.abs(x.desvios)) + ' desvíos de su propia serie, sobre '
+        + x.puntos_previos + ' años</i></span></div>';
+    };
+
+    caja.innerHTML =
+      '<div class="mineria-cifras">'
+      + '<div><span class="q">Medidas cruzadas</span><span class="v">'
+        + (d.medidas_con_suficientes_casos||0) + '</span><span class="c">con casos suficientes</span></div>'
+      + '<div><span class="q">Pares probados</span><span class="v">' + miles(d.pares_probados||0)
+        + '</span><span class="c">todos contra todos</span></div>'
+      + '<div><span class="q">Sobreviven</span><span class="v">' + (c.sobreviven||0)
+        + '</span><span class="c">a la corrección por azar</span></div>'
+      + '<div><span class="q">Pistas</span><span class="v">'
+        + (d.pistas_totales || (d.pistas||[]).length)
+        + '</span><span class="c">sin parentescos · se muestran las más fuertes</span></div>'
+      + '</div>'
+      + '<p class="obj-regla"><b>' + esc(c.por_que || '') + '</b> Método: '
+        + esc(c.metodo || '') + '. De los ' + (c.sobreviven||0) + ' que sobreviven, '
+        + (c.de_ellos_son_parentescos||0) + ' son parentescos —dos indicadores de la misma '
+        + 'fuente o de la misma categoría— y no se muestran: descubrir que se parecen no es '
+        + 'descubrir.</p>'
+      + '<div class="mineria-tit">Estados que se salieron de su propia historia</div>'
+      + (d.anomalias||[]).slice(0,10).map(anom).join('')
+      + '<div class="mineria-tit">Temas que se acompañan, y que nadie fue a buscar</div>'
+      + (d.pistas||[]).slice(0,12).map(pista).join('')
+      + '<p class="censo-aviso" style="margin-top:14px"><b>' + esc(d.lo_que_no_dice || '')
+      + '</b></p>';
+  }
+
   function censoVista(){
     const caja = document.getElementById('lista-censo');
     const d = almacen.subnacional;
@@ -13959,6 +14103,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   Promise.all([traer('auditoria.json').catch(()=>null),
                traer('pantallas.json').catch(()=>null)])
     .then(([au, pa]) => { almacen.auditoria = au; almacen.pantallas = pa; tableroObjetivo(); });
+
+  // La minería sobre el propio registro. Si falta, su bloque queda vacío.
+  traer('mineria.json')
+    .then(d => { almacen.mineria = d;
+      pintarProcedencia('proc-mineria', {colector:'minería propia',
+        fuente:{nombre:'Fundación Sherman Kent — minería sobre el propio registro',
+                url:'https://siwa.fundacionkent.org/datos/publico/mineria.json'},
+        obtenido_en:d.corrida, calificacion:{fiabilidad:'A', credibilidad:'2'},
+        vacios_declarados:[]});
+      mineriaVista(); })
+    .catch(() => {});
 
   // El censo de fuentes subnacionales. Si falta, su bloque queda vacio y el
   // resto del registro no se entera.
