@@ -192,7 +192,15 @@ def main() -> None:
                     for pt in puntos:
                         if not isinstance(pt, dict):
                             continue
-                        anio = pt.get("anio")
+                        # LA MARCA DE TIEMPO NO SIEMPRE SE LLAMA «anio». El
+                        # archivo del Índice de Opacidad guarda un punto por DÍA
+                        # —«fecha»—, porque cuatro de sus seis actos son del
+                        # presente y no tienen año. Es la tercera forma legítima
+                        # que este instrumento tuvo que aprender: primero exigió
+                        # «valor» donde había cinco medidas con nombre, ahora
+                        # exigía «anio» donde hay una fecha. La regla de fondo no
+                        # se toca: un punto necesita SU TIEMPO y SU VALOR.
+                        anio = pt.get("anio") if pt.get("anio") is not None else pt.get("fecha")
                         if conValor:
                             valor = pt.get("valor")
                             if (anio is None) != (valor is None):
@@ -200,7 +208,8 @@ def main() -> None:
                                     "que": "punto de serie a medias",
                                     "donde": f"{ruta.name} · {f.get('iso')}",
                                     "porque": f"en «{clave}» hay un punto con "
-                                              + ("año y sin valor" if valor is None else "valor y sin año")
+                                              + ("tiempo y sin valor" if valor is None
+                                                 else "valor y sin año ni fecha")
                                               + ": las figuras lo dibujan como si fuera bueno"})
                                 break
                         elif anio is not None and all(

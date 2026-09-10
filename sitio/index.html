@@ -3904,6 +3904,11 @@
     // Quien publica sus compras en el formato comun, y hace cuantos dias.
     {clave:'contrataciones_abiertas', eje:'Gobernanza', rotulo:'Compras públicas en formato abierto', disponible:()=>!!almacen.contrataciones, archivo:'contrataciones_abiertas'},
     {clave:'desinformacion',    eje:'Gobernanza', rotulo:'Desinformación',       disponible:()=>false, sinCapa:'no_comparable'},
+    // LA MEDICION MAS PROPIA DE LA CASA, adentro del registro y no al costado.
+    // Calculaba puntaje y puesto desde hace tiempo, pero al no ser materia no se
+    // la podia mapear, ordenar, cruzar ni poner en el mosaico: la unica medida
+    // que no pasaba por las herramientas de esta casa era la de esta casa.
+    {clave:'opacidad_indice',   eje:'Gobernanza', rotulo:'Índice de Opacidad',   disponible:()=>!!almacen.indice, archivo:'indice_opacidad'},
     {clave:'oficiales',         eje:'Fuentes',    rotulo:'Padrón oficial',       disponible:()=>!!almacen.oficiales, archivo:'oficiales'},
   ];
 
@@ -6812,6 +6817,49 @@
   }
 
   const ESTATICAS_CAPAS = {
+    opacidad_indice: {
+      materia:'opacidad_indice',
+      unidad:'0 el más transparente · 100 el más opaco',
+      // CUARTOS DE LA ESCALA, NO CUARTILES DE HOY. Cortar por la distribucion
+      // haria que el mismo color significara cosas distintas cada vez que cambia
+      // un Estado, y un mapa cuyo significado se mueve solo no se puede leer dos
+      // veces. Los cuartiles de hoy son 10, 40 y 50; los cortes son 25, 50 y 75.
+      leyenda:[25, 50, 75],
+      color(v){ return v===undefined?MAG[0] : v<25?MAG[0] : v<50?MAG[1] : v<75?MAG[2] : MAG[3]; },
+      subeEsPeor: true,
+      conteo(){
+        const m={};
+        ((almacen.indice&&almacen.indice.registros)||[]).forEach(r=>{
+          if(r.estado==='medido' && r.opacidad!==null && r.opacidad!==undefined) m[r.iso]=r.opacidad;
+        });
+        return m;
+      },
+      // LA SERIE ES ANUAL y toma el ULTIMO valor archivado de cada anio: asi se
+      // comporta un indice de estado -«asi estaba este Estado al cerrar el
+      // anio»- y encaja con las demas series sin mentir. El detalle diario vive
+      // en opacidad_historia.json, que es publico.
+      serieDe(iso){
+        const f=((almacen.opacidadHistoria&&almacen.opacidadHistoria.registros)||[])
+          .find(x=>x.iso===iso);
+        if(!f||!f.serie||!f.serie.length) return [];
+        const porAnio={};
+        f.serie.forEach(pt=>{ const a=+String(pt.fecha).slice(0,4); if(isFinite(a)) porAnio[a]=pt.valor; });
+        return Object.keys(porAnio).map(Number).sort((a,b)=>a-b)
+          .map(a=>({anio:a, valor:porAnio[a]}));
+      },
+      puntos(){ return []; },
+      detalle(iso){
+        const r=((almacen.indice&&almacen.indice.registros)||[]).find(x=>x.iso===iso);
+        if(!r) return null;
+        if(r.estado!=='medido') return 'Sin medir: faltan actos con evidencia. NO quiere decir opaco.';
+        const cumple=(r.actos||[]).filter(a=>a.medido&&a.puntaje===0).length;
+        return `${r.puesto}.º de ${r.de} · cumple ${cumple} de ${r.actos_medidos} actos medidos`;
+      },
+      cautela:'Mide actos observables, no percepciones, y por eso NO debe compararse con el '
+             +'índice de percepción de corrupción: contestan preguntas distintas. «Sin medir» '
+             +'no significa opaco: significa que faltan actos con evidencia.',
+      rotuloPunto:'Sin capa de puntos: el índice es del Estado entero'
+    },
     desplazamiento: {
       materia:'desplazamiento', unidad:'personas expulsadas', leyenda:[1000,50000,300000],
       color(v){ return v===undefined?MAG[0] : v<1000?MAG[0] : v<50000?MAG[1] : v<300000?MAG[2] : MAG[3]; },
@@ -13762,6 +13810,12 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   // calificacion: los produce esta casa midiendose a si misma— y por eso no
   // pasan por pintarProcedencia. Si alguno falta, el tablero lo dice y el resto
   // del registro sigue andando.
+  // La historia del Indice de Opacidad. Si falta, la capa se dibuja igual y solo
+  // se queda sin serie: una evolucion ausente no puede tumbar el mapa.
+  traer('opacidad_historia.json')
+    .then(d => { almacen.opacidadHistoria = d; repintar(); })
+    .catch(() => {});
+
   Promise.all([traer('auditoria.json').catch(()=>null),
                traer('pantallas.json').catch(()=>null)])
     .then(([au, pa]) => { almacen.auditoria = au; almacen.pantallas = pa; tableroObjetivo(); });

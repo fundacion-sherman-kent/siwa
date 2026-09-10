@@ -332,6 +332,15 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/indice_opacidad.py
 
+      # LA HISTORIA DEL INDICE va justo despues del indice y antes de todo lo
+      # que lo muestra: archiva el puntaje del dia para que exista evolucion.
+      # Sin esto el indice contesta «como esta» y nunca «esta mejorando».
+      - name: Historia del Indice de Opacidad
+        id: opacidad_historia
+        if: always()
+        continue-on-error: true
+        run: python herramientas/opacidad-historia.py
+
       # El canal de novedades sale DESPUES de la memoria: anuncia lo que ella
       # acaba de observar. Es la unica forma de aviso que no exige lista de
       # correo, servicio de envio ni credenciales.
@@ -444,6 +453,7 @@ jobs:
           [ "${{ steps.copernicus.outcome }}" = "failure" ] && { echo "Falló el colector de imagen satelital."; fallo=1; }
           [ "${{ steps.memoria.outcome }}" = "failure" ] && { echo "Falló la memoria del registro."; fallo=1; }
           [ "${{ steps.sondeo.outcome }}" = "failure" ] && { echo "Falló el banco de pruebas."; fallo=1; }
+          [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
           # La auditoría no es un colector: no falla porque una fuente no
           # respondió, falla porque el registro publicado dice algo que no
           # cumple sus propias reglas. Por eso su aviso va aparte y nombra el
