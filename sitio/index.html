@@ -354,7 +354,13 @@
      adentro suyo: un mapa que no se ve no es un mapa. */
   .ficha-mapa{
     position:absolute;top:12px;right:12px;width:238px;z-index:500;
-    max-height:calc(50% - 24px);overflow-y:auto;
+    /* EL TECHO ERA LA MITAD DE LA CAJA Y EL CONTENIDO PEDIA MAS DEL DOBLE.
+       Medido a 1440 px: 580 px de contenido contra 270 de techo. Y lo cortado
+       era inalcanzable, porque esta ficha lleva `pointer-events:none` para
+       dejar pasar el cursor al mapa: no se podia ni desplazar para leer el
+       resto. Ahora usa toda la altura del mapa; tapar el mapa mientras se lee
+       una ficha es menos malo que una ficha que no se puede leer. */
+    max-height:calc(100% - 24px);overflow-y:auto;
     background:rgba(14,33,53,.96);border:1px solid var(--line);border-radius:10px;
     padding:12px 14px;font-size:11.5px;line-height:1.45;color:var(--texto);
     box-shadow:0 8px 28px rgba(0,0,0,.45);pointer-events:none;
@@ -1357,6 +1363,18 @@
     font-weight:800;}
   .obj-brechas b{color:var(--texto);}
 
+  /* ADENTRO DE LA FICHA DEL MAPA, LAS LINEAS DE EJE SON UN VISTAZO, NO UNA
+     TABLA. Medido: ocho lineas y su pie ocupaban 278 de los 580 px que pedia la
+     ficha, casi la mitad. La explicacion larga no se pierde: vive completa
+     debajo del mapa y en la ficha del pais, que es donde hay lugar para leerla. */
+  .ficha-mapa .ejes-linea-caja{margin-top:7px;padding-top:6px;}
+  .ficha-mapa .eje-linea{padding:0;font-size:10px;line-height:1.42;gap:7px;}
+  .ficha-mapa .eje-linea .v{font-size:11px;}
+  /* El pie NO va en la ficha del mapa: la linea de unidad, tres renglones mas
+     arriba, ya dice «lugar en la region, 0 el mejor y 100 el peor». Repetirlo
+     costaba treinta pixeles y era justo lo que dejaba al bloque de ejes afuera. */
+  .ficha-mapa .eje-pie{display:none;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -2187,17 +2205,28 @@
     <a href="#tablero-siwa">Tablero</a>
     <a href="#ficha-pais">Mi país</a>
     <a href="#seis-materias">Las seis materias</a>
-    <div class="grupo">Los cuatro ejes</div>
+    <!-- LOS CUATRO EJES SIGUEN SIENDO CUATRO: lo que crecio son las secciones.
+         El rotulo anterior decia «Los cuatro ejes» y debajo listaba diez
+         entradas, que es peor que no decir nada. Se agrupa por eje, que era el
+         orden que el rotulo prometia. -->
+    <div class="grupo">Eje · Seguridad</div>
     <a href="#seguridad-violencia">Violencia y víctimas</a>
     <a href="#seguridad-territorio">Grupos y territorio</a>
     <a href="#seguridad-flujos-ilicitos">Flujos ilícitos</a>
     <a href="#personas-en-movimiento">Personas en movimiento</a>
     <a href="#ciberseguridad">Ciberseguridad</a>
-    <a href="#riesgo-ambiente">Riesgo y ambiente</a>
+    <div class="grupo">Eje · Defensa</div>
     <a href="#defensa">Defensa</a>
+    <div class="grupo">Eje · Gobernanza</div>
     <a href="#gobernanza">Instituciones y democracia</a>
     <a href="#transparencia">Transparencia y control</a>
+    <div class="grupo">Eje · Desarrollo</div>
     <a href="#desarrollo">Desarrollo</a>
+    <!-- Riesgo y ambiente NO es ninguno de los cuatro y no se lo fuerza a
+         serlo: sismos, desastres y fuego condicionan a los cuatro y no
+         dependen de ninguno. -->
+    <div class="grupo">Transversal a los cuatro</div>
+    <a href="#riesgo-ambiente">Riesgo y ambiente</a>
     <div class="grupo">Verificación y método</div>
     <a href="#que-se-publica">Qué se publica hoy</a>
     <a href="#opacidad-seccion">Índice de Opacidad</a>
@@ -2779,7 +2808,7 @@
         </section>
 
     <section class="domain bloque" id="ciberseguridad" data-nivel="3">
-      <div class="bloque-head"><h2>Ciberseguridad</h2></div>
+      <div class="bloque-head"><h2>Seguridad · ciberseguridad</h2></div>
       <p class="bloque-bajada">El terreno digital y lo que pasa en él. Estaba junto a las migraciones y el contrabando: un ataque informático y una migración no comparten componente.</p>
 <div class="categoria" id="ciber" data-nivel="3">
       <div class="categoria-head"><h3>Ciberseguridad</h3><span class="tag" id="tag-ciber">—</span></div>
@@ -2831,7 +2860,7 @@
 
     <section class="domain bloque" id="riesgo-ambiente" data-nivel="3">
       <div class="bloque-head"><h2>Riesgo y ambiente</h2></div>
-      <p class="bloque-bajada">Lo que ocurre sin que nadie lo decida —sismos, desastres, fuego— y que condiciona todo lo demás. No es seguridad: estaba ahí porque no había dónde ponerlo.</p>
+      <p class="bloque-bajada"><b>Transversal a los cuatro ejes.</b> Lo que ocurre sin que nadie lo decida —sismos, desastres, fuego— y que condiciona a los cuatro sin depender de ninguno. No es seguridad: estaba en ese bloque porque no había dónde ponerlo.</p>
 <div class="categoria" id="desastres" data-nivel="1">
       <div class="categoria-head"><h3>Desastres y emergencias · los últimos cinco años</h3><span class="tag" id="tag-desastres">—</span></div>
       <details class="aviso-cobertura"><summary>Más emergencias registradas puede significar más capacidad de respuesta, no más desastres</summary>
@@ -8232,7 +8261,8 @@
     if(!filas.length) return '';
     return '<div class="ejes-linea-caja">' + filas.join('')
       + '<div class="eje-pie">0 el mejor de la región · 100 el peor'
-      + ' · <i>Defensa es tamaño, no calidad</i>' + pieOpacidad + '</div></div>';
+      + '<span class="larga"> · <i>Defensa es tamaño, no calidad</i>' + pieOpacidad
+      + '</span></div></div>';
   }
 
   function pintarFichaMapa(iso, nombre, bloque){
@@ -8271,6 +8301,7 @@
     if(nivel === undefined && !proys.length){
       caja.innerHTML = `<h3>${esc(nombre)}</h3><div class="bloque">${esc(bloque)}</div>
         <span class="vacia">Sin dato en esta capa.</span>` + mini;
+      ajustarFichaDelMapa(caja, nombre);
       return;
     }
     const p = posicion(iso);
@@ -8298,11 +8329,10 @@
         return `<div class="fila"><span>${pr.anio}</span>
           <b class="${clase}">${cifra(pr.valor)} <span class="margen">±${cifra(pr.banda)}</span></b></div>`;
       }).join('') +
-      `<span class="nota">Recta ajustada a ${proys[0].pr.puntos} años
-        (${proys[0].pr.desdeAnio}–${proys[0].pr.hastaAnio}), ajuste R²&nbsp;${cifra(proys[0].pr.r2)}.
-        <b>El último dato es de ${proys[0].pr.hastaAnio}</b>, así que llegar a ${proys[proys.length-1].pr.anio}
-        exige prolongar ${proys[proys.length-1].pr.aniosProlongados} años, no ${proys[proys.length-1].n}.
-        <b>No es un pronóstico de la Fundación.</b></span>`;
+      `<span class="nota">Recta a ${proys[0].pr.puntos} años
+        (${proys[0].pr.desdeAnio}–${proys[0].pr.hastaAnio}), R²&nbsp;${cifra(proys[0].pr.r2)} ·
+        prolonga ${proys[proys.length-1].pr.aniosProlongados} años desde el último dato,
+        ${proys[0].pr.hastaAnio} · <b>no es un pronóstico de la Fundación</b>.</span>`;
     } else if(proys.length){
       html += `<div class="fila sin-ajuste"><span>Proyección</span><b>no utilizable</b></div>
         <span class="nota">La serie de ${proys[0].pr.desdeAnio}–${proys[0].pr.hastaAnio} no describe una recta
@@ -8311,6 +8341,47 @@
     }
     // La cautela de la capa NO se repite acá: vive completa bajo el mapa.
     caja.innerHTML = html + mini;
+    ajustarFichaDelMapa(caja, nombre);
+  }
+
+  // EL TECHO LO PONE EL MAPA, NO LA CAJA. La caja incluye tambien la leyenda
+  // -medido a 1440: caja 588, mapa 440-, asi que un techo calculado sobre ella
+  // dejaba la ficha saliendose 79 px por abajo, donde el marco del mapa la
+  // recorta. Se mide el mapa al pintar, que ademas sirve para sus tres tamanios
+  // -380, 440 y 540-.
+  //
+  // Y LA REGLA QUE RESUELVE EL FONDO DEL ASUNTO: esta ficha nunca muestra algo
+  // cortado. No se puede desplazar -lleva `pointer-events:none` para dejar pasar
+  // el cursor al mapa-, asi que todo lo que sobresalga es texto inalcanzable.
+  // Si no entra, se saca el bloque de ejes y se dice donde esta: mostrar menos
+  // y remitir es honesto; mostrar la mitad de una frase, no.
+  function ajustarFichaDelMapa(caja, nombre){
+    const mapa = document.getElementById('mapa');
+    const alto = Math.max(180, (mapa ? mapa.clientHeight : 400) - 24);
+    caja.style.maxHeight = alto + 'px';
+    if(caja.scrollHeight <= caja.clientHeight + 2) return;
+    // SE SACA DE A POCO, EMPEZANDO POR LO MENOS ESENCIAL. Sacar el bloque de
+    // ejes entero al primer pixel que sobra dejaba la ficha sin lo que mas
+    // sirve al pasar el cursor: la foto del Estado en los cuatro ejes. Primero
+    // salen las dos lineas de opacidad -que son otra medida y viven en su
+    // seccion propia-, y recien si aun asi no entra sale el bloque.
+    caja.querySelectorAll('.eje-linea.opacidad').forEach(l => {
+      if(caja.scrollHeight > caja.clientHeight + 2) l.remove();
+    });
+    if(caja.scrollHeight <= caja.clientHeight + 2) return;
+    const ejes = caja.querySelector('.ejes-linea-caja');
+    if(ejes){
+      ejes.remove();
+      caja.insertAdjacentHTML('beforeend',
+        '<div class="remite">Los cuatro ejes, la opacidad y la verificación de '
+        + esc(nombre || 'este Estado') + ', en su ficha, debajo del mapa.</div>');
+    }
+    // Si todavia sobra -una pantalla muy baja-, se saca la nota larga antes que
+    // dejarla cortada. Las cifras y su unidad no se sacan nunca: son el dato.
+    if(caja.scrollHeight > caja.clientHeight + 2){
+      const nota = caja.querySelector('.nota');
+      if(nota) nota.remove();
+    }
   }
 
   function leyenda(){
