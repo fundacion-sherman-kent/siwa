@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-10T05:25:49+00:00",
+  "corrida": "2026-09-10T06:09:35+00:00",
   "medidas_con_suficientes_casos": 118,
   "pares_probados": 6903,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 6903 pares y el umbral de siempre, alrededor de 345 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 1545,
+    "sobreviven": 1544,
     "de_ellos_son_parentescos": 202
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 1343,
+  "pistas_totales": 1342,
   "anomalias_totales": 170,
   "pistas": [
     {
@@ -216,19 +216,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.882,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.245097386229253e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "voz_rendicion",
       "rotulo_a": "Corrupción política",
@@ -281,6 +268,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.876,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.929358110865292e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "democracia_participativa",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -302,19 +302,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 5.01795932795336e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "armas:importa_usd",
-      "b": "indice_opacidad:opacidad",
-      "rotulo_a": "armas · importa_usd",
-      "rotulo_b": "indice_opacidad · opacidad",
-      "coeficiente": -0.871,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.374327543073332e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -354,6 +341,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.379314467919233e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "armas:importa_usd",
+      "b": "indice_opacidad:opacidad",
+      "rotulo_a": "armas · importa_usd",
+      "rotulo_b": "indice_opacidad · opacidad",
+      "coeficiente": -0.868,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.1970268223393725e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -736,19 +736,6 @@
       "misma_categoria": false
     },
     {
-      "a": "armas:socios_de_compra",
-      "b": "indice_opacidad:opacidad",
-      "rotulo_a": "armas · socios_de_compra",
-      "rotulo_b": "indice_opacidad · opacidad",
-      "coeficiente": -0.83,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.061650543942478e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "estado_derecho",
       "b": "hostigamiento_periodistas",
       "rotulo_a": "Estado de derecho",
@@ -775,19 +762,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "focos:nocturnos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · nocturnos",
-      "coeficiente": 0.826,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1802690280215746e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "crimen_organizado:resiliencia",
       "b": "persecucion_abuso",
       "rotulo_a": "crimen_organizado · resiliencia",
@@ -796,6 +770,32 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 3.006471533112588e-07,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:nocturnos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · nocturnos",
+      "coeficiente": 0.822,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.943255752579821e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "estabilidad",
+      "b": "percepcion_corrupcion:puntaje",
+      "rotulo_a": "Estabilidad política y ausencia de violencia",
+      "rotulo_b": "percepcion_corrupcion · puntaje",
+      "coeficiente": 0.822,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 1.50536700909633e-09,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
