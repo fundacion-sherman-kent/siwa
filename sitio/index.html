@@ -1226,6 +1226,39 @@
   /* La ficha, pegada al selector y respirando. */
   body[data-nivel="1"] #ficha-pais{margin-top:14px;}
 
+  /* LA AYUDA. Misma ventana que el análisis, con su propio contenido. */
+  .abrir-ayuda span:first-child{display:inline-flex;align-items:center;justify-content:center;
+    width:17px;height:17px;border-radius:50%;background:var(--tinta);color:#fff;font-weight:800;
+    font-size:11px;line-height:1;}
+  .ayuda-cuerpo{font-size:13.5px;line-height:1.65;color:var(--texto);}
+  .ayuda-cuerpo p{margin:0 0 12px;}
+  .ay-entrada{border-left:3px solid var(--tinta);padding-left:12px;}
+  .ay-tit{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--tinta);
+    font-weight:700;margin:20px 0 10px;}
+  .ay-niveles{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));}
+  .ay-nivel{border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:var(--velo-1);}
+  .ay-nivel b{display:block;margin-bottom:4px;}
+  .ay-nivel span{font-size:12px;color:var(--texto-2);line-height:1.5;}
+  .ay-nivel.n1{border-left:3px solid #FB6500;} .ay-nivel.n1 b{color:#FB6500;}
+  .ay-nivel.n2{border-left:3px solid #BA66EC;} .ay-nivel.n2 b{color:#BA66EC;}
+  .ay-nivel.n3{border-left:3px solid #8FA6B8;} .ay-nivel.n3 b{color:#8FA6B8;}
+  .ay-nota{font-size:12px;color:var(--tenue);margin-top:10px;}
+  .ay-pasos{margin:0;padding-left:20px;} .ay-pasos li{margin:0 0 8px;}
+  .ay-colores{list-style:none;margin:0;padding:0;}
+  .ay-colores li{display:flex;gap:10px;align-items:flex-start;margin:0 0 8px;}
+  .ay-colores i{flex:0 0 auto;width:16px;height:16px;border-radius:4px;margin-top:3px;}
+  .ay-colores .c-peor{background:rgba(251,101,0,.85);}
+  .ay-colores .c-mejor{background:var(--mejor);}
+  .ay-colores .c-sin{background:var(--sin-dato);border:1.5px dashed var(--texto-2);}
+  .ay-colores .c-noproy{background:var(--no-proyectable);}
+  .ay-nohace{margin:0;padding-left:20px;} .ay-nohace li{margin:0 0 8px;}
+  .ay-pie{margin-top:18px;padding-top:12px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--tenue);}
+
+  .fc-tit{font-size:12px;color:var(--texto);line-height:1.5;margin-bottom:8px;}
+  .fc-tit b{color:var(--texto-max);}
+  .figura-cruce svg,.figura-puestos svg{display:block;margin:0 auto;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -1878,6 +1911,8 @@
     </div>
   </div>
   <div class="topbar-right">
+    <button class="cambia-tema abrir-ayuda" id="abrir-ayuda" type="button">
+      <span aria-hidden="true">?</span><span>Cómo se usa</span></button>
     <button class="cambia-tema" id="cambia-tema" type="button" aria-pressed="false">
       <span id="cambia-tema-ico">◐</span><span id="cambia-tema-rot">Fondo claro</span></button>
     <span id="estado-general"><span class="status-dot"></span>Verificando estado…</span>
@@ -1939,6 +1974,81 @@
   <div class="marca-nivel" id="marca-nivel" aria-hidden="true"></div>
   <!-- LA VENTANA DE ANALISIS. <dialog> del navegador: foco atrapado, Escape y
        fondo inerte sin una línea nuestra ni una librería de nadie. -->
+  <!-- LA AYUDA. El mismo <dialog> del navegador que la ventana de análisis:
+       foco atrapado y cierre con Escape sin una línea nuestra. -->
+  <dialog class="ventana-analisis ventana-ayuda" id="ventana-ayuda" aria-labelledby="ay-titulo">
+    <div class="va-barra">
+      <h2 id="ay-titulo">Cómo se usa este registro</h2>
+      <button class="va-cerrar" id="ay-cerrar" type="button" aria-label="Cerrar la ayuda">×</button>
+    </div>
+    <div class="va-cuerpo ayuda-cuerpo">
+      <p class="ay-entrada"><b>SIWA es un registro público de los 33 Estados de América Latina
+        y el Caribe.</b> Reúne lo que publican organismos internacionales y Estados, lo pone en
+        la misma vara y dice de dónde sale cada cifra, de cuándo es y qué es lo que no cubre.
+        Es gratuito y no hay que registrarse.</p>
+
+      <h3 class="ay-tit">1 · Elegí cómo leerlo</h3>
+      <div class="ay-niveles">
+        <div class="ay-nivel n1"><b>Ciudadano</b><span>Una ficha de tu país: cómo está, qué
+          siente la gente que vive ahí y qué dicen los registros. Para conocer tu país o uno
+          que vas a visitar.</span></div>
+        <div class="ay-nivel n2"><b>Periodista</b><span>Cinco datos listos para citar, con su
+          fuente y su calificación, más lo que se está publicando ahora.</span></div>
+        <div class="ay-nivel n3"><b>Analista</b><span>Los 104 temas, los cruces, el método y
+          los vacíos declarados.</span></div>
+      </div>
+      <p class="ay-nota">Se cambia arriba de todo, en «¿Cómo querés leerlo?». Cada nivel tiene
+        su color: naranja, violeta y gris. Si cambia el color de la página, cambiaste de nivel.</p>
+
+      <h3 class="ay-tit">2 · Los cuatro pasos</h3>
+      <ol class="ay-pasos">
+        <li><b>Elegí un país</b> en «Empezá acá», o tocalo en el mapa. Todo el registro pasa a
+          hablar de ese Estado.</li>
+        <li><b>Mirá la ficha</b> que aparece debajo: la cifra grande es su lugar en la región.</li>
+        <li><b>Cambiá el tema</b> en «Tema, por eje», o escribí una palabra —cocaína, coima,
+          extorsión— en «Buscar por palabra».</li>
+        <li><b>Compará</b> con otro país o <b>cruzá</b> con otro tema, en el grupo «Comparar».
+          Con un país elegido, tocando otro en el mapa con la tecla Shift lo sumás a la
+          comparación.</li>
+      </ol>
+
+      <h3 class="ay-tit">3 · Qué significa cada color</h3>
+      <ul class="ay-colores">
+        <li><i class="c-peor"></i><b>Naranja: peor</b>, según el criterio de la fuente, no de
+          la Fundación. Cuanto más intenso, más alto el valor.</li>
+        <li><i class="c-mejor"></i><b>Verde: mejor.</b></li>
+        <li><i class="c-sin"></i><b>Punteado: sin dato.</b> No es cero: es que nadie lo midió
+          para ese Estado. La leyenda dice cuántos son.</li>
+        <li><i class="c-noproy"></i><b>Violeta: la serie no se deja proyectar</b>, porque no
+          describe una recta.</li>
+      </ul>
+
+      <h3 class="ay-tit">4 · La etiqueta de año</h3>
+      <p>Al lado de cada cifra hay un año en una etiqueta de color: <span class="cuando-dato
+        fresco">2025</span> es de este año o el pasado, <span class="cuando-dato medio">2023</span>
+        tiene dos o tres años, <span class="cuando-dato viejo">2019</span> es más viejo. Un dato
+        viejo no se esconde: se muestra con su fecha para que usted decida si le sirve.</p>
+
+      <h3 class="ay-tit">5 · Lo que este registro no hace</h3>
+      <ul class="ay-nohace">
+        <li><b>No opina.</b> Cuando dice que un Estado está en un extremo, usa el criterio de
+          la fuente y lo escribe.</li>
+        <li><b>No inventa lo que falta.</b> Si no hay dato, lo dice y explica por qué.</li>
+        <li><b>No adivina el futuro.</b> Solo prolonga una serie si tiene cinco años o más y la
+          recta explica la mitad de su movimiento; si no, dice que no se puede.</li>
+        <li><b>No es una nota.</b> La cifra grande es un lugar dentro de la región: que un
+          Estado esté a mitad de tabla no quiere decir que esté «a mitad de camino» de nada.</li>
+      </ul>
+
+      <h3 class="ay-tit">6 · Llevarse lo que mira</h3>
+      <p>Cada consulta se puede descargar: la <b>planilla</b> para trabajar los números, la
+        <b>imagen</b> para pegar en una nota, la <b>cita</b> en norma APA y el <b>enlace</b> que
+        devuelve exactamente esta vista. Están debajo del mapa y en «Llevarse esta consulta».</p>
+
+      <p class="ay-pie">¿Falta algo o algo no se entiende? Escríbanos: es la clase de aviso que
+        cambia el registro.</p>
+    </div>
+  </dialog>
   <dialog class="ventana-analisis" id="ventana-analisis" aria-labelledby="va-titulo">
     <div class="va-barra">
       <h2 id="va-titulo">Análisis</h2>
@@ -1998,7 +2108,9 @@
           <span id="abrir-analisis-pie">La ficha, la evolución, la tendencia y la fuente, en una sola ventana.</span>
         </div>
         <div id="slot-contraste"></div>
+        <div class="evolucion" id="slot-dispersion"></div>
         <div class="evolucion" id="slot-evolucion"></div>
+        <div class="evolucion" id="slot-puestos"></div>
         <div class="relaciones" id="relaciones"></div>
         <details class="aviso-cobertura sobre-el-tema" id="sobre-el-tema">
           <summary>Sobre el tema elegido: qué muestra, qué no es y qué falta</summary>
@@ -9197,6 +9309,26 @@
     }).join('');
   }
 
+  // La ayuda: se abre con el boton de la barra y se cierra con Escape, como la
+  // ventana de analisis. Y se abre sola la PRIMERA vez que alguien entra, una
+  // sola vez: quien ya la vio no la vuelve a ver.
+  function armarAyuda(){
+    const b = document.getElementById('abrir-ayuda');
+    const d = document.getElementById('ventana-ayuda');
+    if(!b || !d || b.dataset.armado) return;
+    b.dataset.armado = '1';
+    const abrir = () => { if(typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open',''); };
+    b.addEventListener('click', abrir);
+    document.getElementById('ay-cerrar')?.addEventListener('click', () => d.close());
+    d.addEventListener('click', ev => { if(ev.target === d) d.close(); });
+    let vista = null;
+    try{ vista = localStorage.getItem('siwa-ayuda-vista'); }catch(e){}
+    if(!vista){
+      try{ localStorage.setItem('siwa-ayuda-vista', '1'); }catch(e){}
+      setTimeout(abrir, 1200);
+    }
+  }
+
   // ============ LA VENTANA DE ANALISIS ============
   //
   // Lo elegido, junto y a pantalla completa: la ficha del tema, la evolucion de
@@ -9278,6 +9410,160 @@
       ? 'El cruce, la evolución y la fuente, en una sola ventana.'
       : conComp ? 'La comparación, la evolución y la fuente, en una sola ventana.'
       : 'La ficha, la evolución, la tendencia y la fuente, en una sola ventana.';
+  }
+
+  // ============ LA NUBE DEL CRUCE ============
+  //
+  // Cruzar dos temas devolvia dos fichas: la pregunta del cruce —«¿tienen algo
+  // que ver?»— no estaba dibujada en ninguna parte.
+  function figuraDispersion(claveX, claveY, ancho){
+    const cx = (capas()||{})[claveX], cy = (capas()||{})[claveY];
+    if(!cx || !cy || !cx.conteo || !cy.conteo) return '';
+    const vx = cx.conteo() || {}, vy = cy.conteo() || {};
+    const pares = (padron||[]).map(p => ({iso:p.iso, pais:p.pais,
+        x: vx[p.iso], y: vy[p.iso]}))
+      .filter(d => isFinite(d.x) && isFinite(d.y));
+    if(pares.length < 8) return '';
+
+    const alto = Math.round(ancho * 0.62);
+    const mIzq = 48, mDer = 14, mArr = 14, mAba = 42;
+    const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
+    const xs = pares.map(d => d.x), ys = pares.map(d => d.y);
+    const x0 = Math.min(...xs), x1 = Math.max(...xs);
+    const y0 = Math.min(...ys), y1 = Math.max(...ys);
+    const px = v => mIzq + ((v - x0) / ((x1 - x0) || 1)) * util;
+    const py = v => mArr + (1 - (v - y0) / ((y1 - y0) || 1)) * utilY;
+
+    // La correlacion, con su advertencia pegada.
+    const n = pares.length;
+    const mx = xs.reduce((a,b)=>a+b,0)/n, my = ys.reduce((a,b)=>a+b,0)/n;
+    let sxy=0, sxx=0, syy=0;
+    pares.forEach(d => { sxy += (d.x-mx)*(d.y-my); sxx += (d.x-mx)**2; syy += (d.y-my)**2; });
+    const r = (sxx && syy) ? sxy/Math.sqrt(sxx*syy) : 0;
+    const fuerza = Math.abs(r) < 0.3 ? 'no se acompañan'
+                 : Math.abs(r) < 0.6 ? 'se acompañan a medias'
+                 : 'se acompañan bastante';
+
+    const puntos = pares.map(d => {
+      const suyo = d.iso === paisFiltro;
+      return '<circle cx="' + px(d.x).toFixed(1) + '" cy="' + py(d.y).toFixed(1) + '" r="'
+        + (suyo ? 6 : 4) + '" fill="' + (suyo ? 'var(--orange)' : 'rgba(255,255,255,.32)')
+        + '" stroke="' + (suyo ? '#fff' : 'none') + '" stroke-width="' + (suyo ? 1.6 : 0) + '">'
+        + '<title>' + esc(d.pais) + ' · ' + esc(rotuloDeMateria(claveX)) + ' ' + cifra(d.x)
+        + ' · ' + esc(rotuloDeMateria(claveY)) + ' ' + cifra(d.y) + '</title></circle>';
+    }).join('');
+    const suyo = pares.find(d => d.iso === paisFiltro);
+    const marca = suyo
+      ? '<text x="' + Math.min(ancho - mDer - 4, px(suyo.x) + 9).toFixed(1) + '" y="'
+        + (py(suyo.y) - 8).toFixed(1) + '" fill="var(--orange)" font-size="11" font-weight="700">'
+        + esc(suyo.pais) + '</text>' : '';
+
+    const ejes = '<line x1="' + mIzq + '" y1="' + (alto-mAba) + '" x2="' + (ancho-mDer)
+      + '" y2="' + (alto-mAba) + '" stroke="rgba(255,255,255,.25)"/>'
+      + '<line x1="' + mIzq + '" y1="' + mArr + '" x2="' + mIzq + '" y2="' + (alto-mAba)
+      + '" stroke="rgba(255,255,255,.25)"/>'
+      + '<text x="' + mIzq + '" y="' + (alto-mAba+16) + '" fill="#7d90a8" font-size="10">' + cifra(x0) + '</text>'
+      + '<text x="' + (ancho-mDer) + '" y="' + (alto-mAba+16) + '" text-anchor="end" fill="#7d90a8" font-size="10">' + cifra(x1) + '</text>'
+      + '<text x="' + (mIzq-6) + '" y="' + (mArr+9) + '" text-anchor="end" fill="#7d90a8" font-size="10">' + cifra(y1) + '</text>'
+      + '<text x="' + (mIzq-6) + '" y="' + (alto-mAba) + '" text-anchor="end" fill="#7d90a8" font-size="10">' + cifra(y0) + '</text>'
+      + '<text x="' + (mIzq + util/2) + '" y="' + (alto-6) + '" text-anchor="middle" fill="var(--texto-2)" font-size="10.5">'
+      + esc(rotuloDeMateria(claveX)) + ' →</text>';
+
+    return '<div class="figura-cruce"><div class="fc-tit"><b>' + esc(rotuloDeMateria(claveY))
+      + '</b> frente a <b>' + esc(rotuloDeMateria(claveX)) + '</b>, un punto por Estado ('
+      + n + ' con dato en los dos).</div>'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto
+      + '" style="max-width:100%;height:auto" role="img" aria-label="Nube de puntos: '
+      + esc(rotuloDeMateria(claveY)) + ' frente a ' + esc(rotuloDeMateria(claveX)) + ', '
+      + n + ' Estados">' + ejes + puntos + marca + '</svg>'
+      + '<small class="pie-tira">Los dos temas <b>' + fuerza + '</b> en la región '
+      + '(coeficiente ' + cifra(Math.round(r*100)/100) + '). <b>Que dos cosas se muevan '
+      + 'juntas no prueba que una cause la otra</b>: puede haber un tercer factor detrás de '
+      + 'las dos, o ninguna relación real con treinta y tres casos.</small></div>';
+  }
+
+  // ============ EL RANKING QUE SE MUEVE ============
+  //
+  // Quien mejoro y quien empeoro, sin leer una cifra: el puesto de cada Estado
+  // año a año. Se cuenta con la orientacion declarada del tema.
+  function figuraPuestos(clave, ancho){
+    const cap = (capas()||{})[clave];
+    if(!cap || typeof cap.serieDe !== 'function') return '';
+    const porAnio = {};
+    (padron||[]).forEach(p => (cap.serieDe(p.iso) || []).forEach(a => {
+      if(!isFinite(a.valor)) return;
+      (porAnio[+a.anio] = porAnio[+a.anio] || {})[p.iso] = a.valor;
+    }));
+    const anios = Object.keys(porAnio).map(Number)
+      .filter(a => Object.keys(porAnio[a]).length >= 8).sort((a,b)=>a-b);
+    if(anios.length < 3) return '';
+    // Solo los Estados presentes en TODOS los años: una linea que aparece y
+    // desaparece no es un puesto que se mueve, es un dato que falta.
+    const completos = (padron||[]).map(p=>p.iso)
+      .filter(iso => anios.every(a => porAnio[a][iso] !== undefined));
+    if(completos.length < 8) return '';
+
+    const peorArriba = cap.subeEsPeor !== false;
+    const puestos = {};
+    anios.forEach(a => {
+      const orden = completos.slice().sort((i, j) =>
+        peorArriba ? porAnio[a][j] - porAnio[a][i] : porAnio[a][i] - porAnio[a][j]);
+      orden.forEach((iso, k) => { (puestos[iso] = puestos[iso] || {})[a] = k + 1; });
+    });
+
+    const alto = Math.max(260, Math.min(560, completos.length * 15));
+    const mIzq = 34, mDer = 96, mArr = 18, mAba = 26;
+    const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
+    const px = a => mIzq + ((a - anios[0]) / ((anios[anios.length-1] - anios[0]) || 1)) * util;
+    const py = k => mArr + ((k - 1) / ((completos.length - 1) || 1)) * utilY;
+    const nombre = iso => (padron.find(x=>x.iso===iso)||{}).pais || iso;
+
+    const lineas = completos.map(iso => {
+      const suyo = iso === paisFiltro;
+      const d = anios.map((a,i) => (i ? 'L' : 'M') + px(a).toFixed(1) + ' ' + py(puestos[iso][a]).toFixed(1)).join(' ');
+      const ultimo = puestos[iso][anios[anios.length-1]];
+      return '<path d="' + d + '" fill="none" stroke="' + (suyo ? 'var(--orange)' : 'rgba(255,255,255,.20)')
+        + '" stroke-width="' + (suyo ? 2.6 : 1.2) + '" stroke-linejoin="round"><title>'
+        + esc(nombre(iso)) + '</title></path>'
+        + (suyo || completos.length <= 14
+           ? '<text x="' + (ancho - mDer + 6) + '" y="' + (py(ultimo)+3.5).toFixed(1) + '" font-size="10" fill="'
+             + (suyo ? 'var(--orange)' : 'var(--texto-2)') + '" font-weight="' + (suyo?'700':'400') + '">'
+             + esc(nombre(iso).slice(0,16)) + '</text>' : '');
+    }).join('');
+    const rotAnios = anios.map(a => '<text x="' + px(a).toFixed(1) + '" y="' + (alto-8)
+      + '" text-anchor="middle" fill="#7d90a8" font-size="10">' + a + '</text>').join('');
+
+    return '<div class="figura-puestos"><div class="fc-tit"><b>Cómo se movió el puesto</b> de '
+      + completos.length + ' Estados en ' + esc(rotuloDeMateria(clave)) + ', de ' + anios[0]
+      + ' a ' + anios[anios.length-1] + '. Arriba está el <b>'
+      + (peorArriba ? 'peor situado' : 'mejor situado') + '</b>.</div>'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto
+      + '" style="max-width:100%;height:auto" role="img" aria-label="Puestos de '
+      + completos.length + ' Estados en ' + esc(rotuloDeMateria(clave)) + ', de ' + anios[0]
+      + ' a ' + anios[anios.length-1] + '">'
+      + '<text x="' + (mIzq-4) + '" y="' + (mArr+4) + '" text-anchor="end" fill="#7d90a8" font-size="10">1.º</text>'
+      + '<text x="' + (mIzq-4) + '" y="' + (alto-mAba) + '" text-anchor="end" fill="#7d90a8" font-size="10">' + completos.length + '.º</text>'
+      + lineas + rotAnios + '</svg>'
+      + '<small class="pie-tira">Solo entran los <b>' + completos.length + ' Estados con dato en '
+      + 'todos los años</b>: una línea que aparece y desaparece no sería un puesto que se mueve, '
+      + 'sería un dato que falta. Es un orden dentro de la región, no una nota.</small></div>';
+  }
+
+  // Las dos figuras nuevas, debajo del mapa.
+  function figurasNuevasVista(){
+    const cajaC = document.getElementById('slot-dispersion');
+    const cajaP = document.getElementById('slot-puestos');
+    if(cajaC){
+      const ancho = Math.max(300, Math.min(680, (cajaC.clientWidth || 600) - 28));
+      cajaC.innerHTML = (cruce && cruce.length === 1)
+        ? figuraDispersion(capaActiva, cruce[0], ancho) : '';
+      cajaC.hidden = !cajaC.innerHTML;
+    }
+    if(cajaP){
+      const ancho = Math.max(300, Math.min(680, (cajaP.clientWidth || 600) - 28));
+      cajaP.innerHTML = figuraPuestos(capaActiva, ancho);
+      cajaP.hidden = !cajaP.innerHTML;
+    }
   }
 
   // ============ LA EVOLUCION DE LA REGION ============
@@ -9762,6 +10048,7 @@
     mudarElExplorador();
     armarPlegado();
     armarVentanaAnalisis();
+    armarAyuda();
     armarMasOpciones();
     armarSolapasPerfil();
     llenarComparador();
@@ -9774,6 +10061,7 @@
     paso('contraste de fuentes', contrasteVista);
     paso('botón de análisis', pintarBotonAnalisis);
     paso('evolución de la región', evolucionVista);
+    paso('nube y puestos', figurasNuevasVista);
     paso('mapa de relaciones', relacionesVista);
     paso('pestaña', rotularLaPestania);
     paso('más opciones', pintarMasOpciones);
