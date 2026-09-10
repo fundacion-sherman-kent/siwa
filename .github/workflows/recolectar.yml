@@ -353,6 +353,14 @@ jobs:
         continue-on-error: true
         run: python herramientas/sellar-portada.py
 
+      # El catalogo va ULTIMO entre los generadores: recorre lo que quedo
+      # escrito en esta corrida. Si corriera antes, publicaria el catalogo de
+      # la corrida anterior, que es peor que no publicar ninguno.
+      - name: Catalogo publico de datos (indice y documentacion)
+        if: always()
+        continue-on-error: true
+        run: python herramientas/indice-datos.py
+
       - name: Guardar lo recolectado
         if: always()
         run: |

@@ -439,7 +439,7 @@ def construir():
         direcciones.append(ruta)
 
     # ── El mapa del sitio, con las cuarenta ──────────────────────────────────
-    urls = ["sitio/index.html", "index.html"] + direcciones
+    urls = ["sitio/index.html", "index.html", "datos/"] + direcciones
     mapa = ['<?xml version="1.0" encoding="UTF-8"?>',
             "<!--", "  Mapa del sitio de SIWA. Se GENERA con herramientas/puertas.py:",
             "  escribirlo a mano lo deja viejo, y ya pasó una vez.", "-->",

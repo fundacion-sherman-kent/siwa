@@ -1900,6 +1900,32 @@
   .cita-apa,.asunto,.foot,.porque,.va-cuerpo,.dc,.fc-dice,td,.materia,.op-caja{
     overflow-wrap:anywhere;word-break:normal;}
   .cita-apa{display:block;max-width:100%;}
+
+  /* EL BOTÓN FLOTANTE DE AYUDA. Siempre en pantalla, en cualquier tamaño y en
+     cualquier parte de la página. */
+  .ayuda-flota{position:fixed;right:16px;bottom:16px;z-index:800;
+    width:48px;height:48px;border-radius:50%;border:2px solid var(--tinta);
+    background:var(--navy);color:var(--tinta);font-size:22px;font-weight:800;
+    line-height:1;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.45);
+    display:flex;align-items:center;justify-content:center;}
+  .ayuda-flota:hover{background:var(--tinta);color:#fff;}
+  .ayuda-flota:focus-visible{outline:3px solid var(--tinta);outline-offset:3px;}
+  body.claro .ayuda-flota{background:#fff;box-shadow:0 6px 22px rgba(0,18,30,.18);}
+  @media print{ .ayuda-flota{display:none;} }
+
+  /* LA BARRA SE COMPACTA EN TELÉFONO. Medido: 220 px de alto en un ancho de
+     390, fija, o sea un cuarto de la pantalla ocupado siempre. El estado de los
+     colectores y la fecha son para quien audita; quien consulta necesita el
+     nombre y los dos botones. */
+  @media (max-width:700px){
+    .topbar{padding:8px 14px;gap:10px;}
+    .topbar .brand img{height:44px;}
+    .topbar-right .estado-colectores,.topbar-right .reloj,
+    .topbar-right > span,.topbar-right > time{display:none;}
+    .topbar-right{gap:8px;}
+    .cambia-tema{padding:5px 10px;font-size:11px;min-height:32px;}
+    .abrir-ayuda span:last-child{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -1981,6 +2007,9 @@
        fondo inerte sin una línea nuestra ni una librería de nadie. -->
   <!-- LA AYUDA. El mismo <dialog> del navegador que la ventana de análisis:
        foco atrapado y cierre con Escape sin una línea nuestra. -->
+  <!-- LA AYUDA, SIEMPRE A MANO. No depende de que la barra de arriba quepa. -->
+  <button class="ayuda-flota" id="ayuda-flota" type="button" title="Cómo se usa este registro"
+          aria-label="Cómo se usa este registro"><span aria-hidden="true">?</span></button>
   <dialog class="ventana-analisis ventana-ayuda" id="ventana-ayuda" aria-labelledby="ay-titulo">
     <div class="va-barra">
       <h2 id="ay-titulo">Cómo se usa este registro</h2>
@@ -2049,6 +2078,10 @@
       <p>Cada consulta se puede descargar: la <b>planilla</b> para trabajar los números, la
         <b>imagen</b> para pegar en una nota, la <b>cita</b> en norma APA y el <b>enlace</b> que
         devuelve exactamente esta vista. Están debajo del mapa y en «Llevarse esta consulta».</p>
+      <p>Y si lo que quiere es <b>construir algo con estos datos</b> —una nota con gráficos
+        propios, una investigación, otra página—, están todos publicados en archivos abiertos:
+        <a href="https://siwa.fundacionkent.org/datos/" target="_blank" rel="noopener">la
+        interfaz de datos</a> dice qué hay, cómo se lee y qué se promete.</p>
 
       <p class="ay-pie">¿Falta algo o algo no se entiende? Escríbanos: es la clase de aviso que
         cambia el registro.</p>
@@ -3414,6 +3447,11 @@
   <a href="https://fundacionkent.org/articulos/" target="_blank" rel="noopener">fundacionkent.org</a>,
   junto con la <a href="https://fundacionkent.org/nosotros/metodo-de-analisis/" target="_blank" rel="noopener">explicación
   del método</a> y la <a href="https://fundacionkent.org/formacion/" target="_blank" rel="noopener">oferta de formación</a>.
+  <br><br>
+  <b>Los datos están abiertos y documentados.</b> Todo lo que muestra esta página vive en
+  archivos JSON que cualquiera puede leer, sin credencial y sin registrarse:
+  <a href="https://siwa.fundacionkent.org/datos/">siwa.fundacionkent.org/datos</a> lista los
+  conjuntos con su fuente, su calificación y su fecha, y explica qué se promete de ellos.
   <br><br>
   <b>Uso libre y gratuito, citando la fuente.</b> Este registro se publica sin costo y sin
   registro de usuario. Se permite reproducirlo, redistribuirlo y derivar trabajos de él
@@ -9325,6 +9363,7 @@
     b.dataset.armado = '1';
     const abrir = () => { if(typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open',''); };
     b.addEventListener('click', abrir);
+    document.getElementById('ayuda-flota')?.addEventListener('click', abrir);
     document.getElementById('ay-cerrar')?.addEventListener('click', () => d.close());
     d.addEventListener('click', ev => { if(ev.target === d) d.close(); });
     let vista = null;
