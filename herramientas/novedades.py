@@ -38,6 +38,9 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "datos" / "publico"
 SALIDA = RAIZ / "novedades.xml"
+# Un canal por Estado, ademas del general: quien cubre Paraguay no quiere
+# sesenta avisos del Caribe oriental para encontrar los dos suyos.
+POR_ESTADO = RAIZ / "novedades"
 sys.path.insert(0, str(RAIZ / "colectores"))
 import comun  # noqa: E402
 
@@ -78,6 +81,33 @@ COMO_SE_DICE = {
 }
 
 
+def _canal(titulo: str, descripcion: str, self_url: str, enlace: str, avisos: list) -> str:
+    """El XML del canal. Es el mismo para el general y para los de cada Estado:
+    lo unico que cambia es el rotulo y que avisos entran."""
+    ahora = format_datetime(datetime.now(timezone.utc))
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Canal de novedades de SIWA. Se GENERA con herramientas/novedades.py; no se
+  escribe a mano. Anuncia CAMBIOS DE ESTADO observados por la Oficina, no cifras
+  nuevas: una cifra cambia todo el tiempo y no es noticia; que un portal deje de
+  responder, si.
+-->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{esc(titulo)}</title>
+    <link>{enlace}</link>
+    <atom:link href="{self_url}" rel="self" type="application/rss+xml"/>
+    <description>{esc(descripcion)}</description>
+    <language>es-AR</language>
+    <lastBuildDate>{ahora}</lastBuildDate>
+    <copyright>Acceso libre y gratuito. Citar como «SIWA, Fundación Sherman Kent».</copyright>
+    <generator>SIWA · herramientas/novedades.py</generator>
+{chr(10).join(avisos)}
+  </channel>
+</rss>
+"""
+
+
 def construir() -> int:
     ruta = DATOS / "memoria.json"
     if not ruta.exists():
@@ -90,8 +120,14 @@ def construir() -> int:
     # Solo transiciones REALES. La primera vez que se ve a un Estado no es una
     # novedad: es que empezamos a mirarlo, y anunciarlo seria dar por noticia el
     # arranque del propio registro.
-    cambios = [c for c in d.get("registros", []) if not c.get("primera_vez")]
-    cambios = list(reversed(cambios))[:MAXIMO]
+    todos_los_cambios = [c for c in d.get("registros", []) if not c.get("primera_vez")]
+    todos_los_cambios = list(reversed(todos_los_cambios))
+    # El canal GENERAL se corta en los mas recientes; cada canal por Estado se
+    # arma despues de la memoria COMPLETA de ese Estado, con su propio tope. Un
+    # Estado con tres cambios en dos anios los lleva a los tres, aunque el
+    # general ya no los muestre. Repartir el recorte del general dejaba sin
+    # archivo al Estado cuyo ultimo cambio quedaba en el aviso sesenta y uno.
+    cambios = todos_los_cambios
 
     avisos = []
     for c in cambios:
@@ -120,7 +156,7 @@ def construir() -> int:
         except Exception:  # noqa: BLE001
             fecha = datetime.now(timezone.utc)
 
-        avisos.append(
+        avisos.append((iso,
             "    <item>\n"
             f"      <title>{esc(titulo)}</title>\n"
             f"      <link>{enlace}</link>\n"
@@ -129,33 +165,40 @@ def construir() -> int:
             f"      <category>{esc(rot)}</category>\n"
             f"      <description><![CDATA[{cuerpo}]]></description>\n"
             "    </item>"
-        )
+        ))
 
-    ahora = format_datetime(datetime.now(timezone.utc))
-    canal = f"""<?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Canal de novedades de SIWA. Se GENERA con herramientas/novedades.py; no se
-  escribe a mano. Anuncia CAMBIOS DE ESTADO observados por la Oficina, no cifras
-  nuevas: una cifra cambia todo el tiempo y no es noticia; que un portal deje de
-  responder, sí.
--->
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>SIWA — lo que cambió</title>
-    <link>{BASE}/sitio/index.html</link>
-    <atom:link href="{BASE}/novedades.xml" rel="self" type="application/rss+xml"/>
-    <description>Cambios de estado observados en los 33 Estados de América Latina y el Caribe: portales que dejan de responder, conjuntos que desaparecen de un catálogo, Estados que pasan a publicar. Cada aviso declara que la fecha es la de la observación, no la del hecho. Registro público y gratuito de la Fundación Sherman Kent.</description>
-    <language>es-AR</language>
-    <lastBuildDate>{ahora}</lastBuildDate>
-    <copyright>Acceso libre y gratuito. Citar como «SIWA, Fundación Sherman Kent».</copyright>
-    <generator>SIWA · herramientas/novedades.py</generator>
-{chr(10).join(avisos)}
-  </channel>
-</rss>
-"""
-    SALIDA.write_text(canal, encoding="utf-8")
-    print(f"[novedades] canal escrito con {len(avisos)} aviso"
-          f"{'' if len(avisos) == 1 else 's'} de cambio observado")
+    todos = [x for _, x in avisos][:MAXIMO]
+    SALIDA.write_text(_canal(
+        "SIWA — lo que cambió",
+        "Cambios de estado observados en los 33 Estados de América Latina y el Caribe: "
+        "portales que dejan de responder, conjuntos que desaparecen de un catálogo, Estados "
+        "que pasan a publicar. Cada aviso declara que la fecha es la de la observación, no la "
+        "del hecho. Registro público y gratuito de la Fundación Sherman Kent.",
+        f"{BASE}/novedades.xml", f"{BASE}/sitio/index.html", todos), encoding="utf-8")
+
+    # Un canal por Estado que TENGA algo que anunciar. Publicar uno vacio seria
+    # una promesa que no se cumple: quien lo sigue espera avisos que no van a
+    # llegar porque todavia no hay nada que contar.
+    POR_ESTADO.mkdir(parents=True, exist_ok=True)
+    porIso = {}
+    for iso, x in avisos:
+        porIso.setdefault(iso, []).append(x)
+    for iso, suyos in porIso.items():
+        suyos = suyos[:MAXIMO]
+        pais = nombres.get(iso, iso)
+        arch = f"{sello(pais)}.xml"
+        (POR_ESTADO / arch).write_text(_canal(
+            f"SIWA — lo que cambió en {pais}",
+            f"Cambios de estado observados por la Oficina en {pais}: su portal oficial, su "
+            f"catálogo de datos, sus compras públicas y su acceso a la información. Cada aviso "
+            f"declara que la fecha es la de la observación, no la del hecho. Registro público y "
+            f"gratuito de la Fundación Sherman Kent.",
+            f"{BASE}/novedades/{arch}", f"{BASE}/sitio/pais/{sello(pais)}.html", suyos),
+            encoding="utf-8")
+
+    print(f"[novedades] canal general con {len(todos)} aviso"
+          f"{'' if len(todos) == 1 else 's'} de cambio observado de {len(avisos)} · "
+          f"{len(porIso)} canales por Estado")
     return len(avisos)
 
 

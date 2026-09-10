@@ -173,7 +173,19 @@ h2{font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercas
 """
 
 
+def _canal(ruta: str) -> tuple:
+    """El canal que le corresponde a esta pagina: el propio si existe, el
+    general si no. Un `alternate` que devuelve 404 es peor que ninguno: el
+    lector lo agrega, falla en silencio y no vuelve."""
+    if ruta.startswith("sitio/pais/"):
+        nombre = pathlib.Path(ruta).stem + ".xml"
+        if (RAIZ / "novedades" / nombre).exists():
+            return f"{BASE}/novedades/{nombre}", "SIWA — lo que cambió acá"
+    return f"{BASE}/novedades.xml", "SIWA — lo que cambió"
+
+
 def cabeza(titulo: str, descripcion: str, ruta: str, ld: dict) -> str:
+    canal, rotCanal = _canal(ruta)
     return f"""<!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -182,7 +194,7 @@ def cabeza(titulo: str, descripcion: str, ruta: str, ld: dict) -> str:
 <title>{esc(titulo)}</title>
 <meta name="description" content="{esc(descripcion)}">
 <link rel="canonical" href="{BASE}/{ruta}">
-<link rel="alternate" type="application/rss+xml" title="SIWA — lo que cambió" href="{BASE}/novedades.xml">
+<link rel="alternate" type="application/rss+xml" title="{esc(rotCanal)}" href="{canal}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{esc(titulo)}">
 <meta property="og:description" content="{esc(descripcion)}">
@@ -200,7 +212,7 @@ def cabeza(titulo: str, descripcion: str, ruta: str, ld: dict) -> str:
 <body>
 <div class="banda"><div class="dentro">
   <a href="{BASE}/sitio/index.html">SIWA · <span>Fundación Sherman Kent</span></a>
-  <a class="vuelta" href="{BASE}/novedades.xml">Seguir lo que cambia</a>
+  <a class="vuelta" href="{canal}">Seguir lo que cambia</a>
   <a class="vuelta" href="{BASE}/sitio/index.html">Registro completo →</a>
 </div></div>
 <main>

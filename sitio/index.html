@@ -1276,6 +1276,10 @@
   .lt-punto:hover{stroke:var(--tinta);stroke-width:1.5;}
   .figura-linea-tiempo svg{display:block;margin:0 auto;}
 
+  .cita-enlace{color:var(--tinta);border-bottom:1px solid var(--orange);
+    text-decoration:none;}
+  .cita-enlace:hover{border-bottom-width:2px;}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -5390,6 +5394,7 @@
     const caja = document.getElementById('caja-consulta');
     if(!caja) return;
     const cita = citaAPA();
+    const canal = canalDeLaVista();
     caja.innerHTML =
       '<div class="asunto"><h4>Llevarse esta consulta</h4>'
       + '<div class="foot"><span class="porque">'
@@ -5401,6 +5406,11 @@
          ? '<br><br><b>Y el productor del dato:</b><br>'
            + cita.deTerceros.map(x => '<span class="cita-apa">' + x + '</span>').join('<br>')
          : '')
+      + '<br><br><b>Enterarse sin volver:</b> <a class="cita-enlace" href="'
+      + canal.url + '" target="_blank" rel="noopener">' + esc(canal.rot) + '</a>. '
+      + 'Es un canal de novedades: lo sigue cualquier lector de noticias, sin dar un correo y '
+      + 'sin registrarse. <b>Anuncia cambios de estado</b> —un portal que deja de responder, '
+      + 'un Estado que vuelve a publicar—, no cifras nuevas.'
       + '</span>'
       + '<span><button class="boton chico" id="bajar-consulta">Descargar la planilla</button> '
       + '<button class="boton chico" id="bajar-imagen">Descargar la imagen</button> '
@@ -8521,6 +8531,21 @@
   const RAIZ_PUERTAS = 'https://siwa.fundacionkent.org/sitio/';
   const selloDeNombre = t => String(t || '').normalize('NFKD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+  // EL CANAL QUE LE CORRESPONDE A ESTA VISTA. Con un Estado elegido y al menos
+  // un cambio observado, el suyo; si no, el de la region. La regla de «al menos
+  // un cambio» es LA MISMA que usa el generador para decidir si escribe el
+  // archivo: asi no se ofrece una direccion que devuelve 404.
+  function canalDeLaVista(){
+    const general = {url:'https://siwa.fundacionkent.org/novedades.xml',
+                     rot:'Seguir lo que cambia en la región'};
+    if(!paisFiltro || !paisNombre) return general;
+    const d = almacen.memoria;
+    const tiene = d && (d.registros||[]).some(c => c.iso === paisFiltro && !c.primera_vez);
+    if(!tiene) return general;
+    return {url:'https://siwa.fundacionkent.org/novedades/' + selloDeNombre(paisNombre) + '.xml',
+            rot:'Seguir lo que cambia en ' + paisNombre};
+  }
+
   function puertaDeLaVista(){
     if(paisFiltro && paisNombre) return RAIZ_PUERTAS + 'pais/' + selloDeNombre(paisNombre) + '.html';
     const zona = bloqueActivo();
@@ -10381,6 +10406,10 @@
   // y el informe descargable conservan la direccion LIMPIA, que es la que hay
   // que citar. La etiqueta es cosa de la pantalla.
   const UTM_PROPIO = 'fundacionkent.org';
+  // El registro vive en un subdominio de la Fundacion. Se nombra aparte porque
+  // la etiqueta mide el SALTO del registro a la Fundacion, y un enlace de la
+  // pagina a si misma no es ese salto.
+  const UTM_REGISTRO = 'siwa.fundacionkent.org';
   const UTM_CAMPANA = [
     ['.marca-enlace',   'marca'],      // el logotipo de la barra superior
     ['.boletin-btn',    'boletin'],
@@ -10395,6 +10424,13 @@
       try{ u = new URL(a.getAttribute('href'), location.href); }
       catch(e){ return; }                       // ancla, correo o direccion rota
       if(!u.hostname.endsWith(UTM_PROPIO)) return;
+      // NI EL HOST PROPIO. El registro vive en un subdominio de la Fundacion,
+      // asi que sin esta linea se etiquetaba a si mismo: quien copiaba el canal
+      // de novedades se llevaba la direccion con la etiqueta pegada, y dos
+      // lectores con etiquetas distintas quedan suscriptos a dos direcciones
+      // distintas del mismo archivo. La etiqueta mide el salto del registro a
+      // la Fundacion; un enlace de la pagina a si misma no es ese salto.
+      if(u.hostname === location.hostname || u.hostname === UTM_REGISTRO) return;
       if(u.searchParams.has('utm_source')) return;   // ya etiquetado: no se repite
 
       const par = UTM_CAMPANA.find(([sel]) => a.closest(sel));
@@ -10438,6 +10474,12 @@
     armarSolapasPerfil();
     llenarComparador();
     armarNavegador();
+    // LA CAJA DE LLEVARSE LA CONSULTA SE REPINTA SIEMPRE, y no solo dentro del
+    // panel del pais. Medido: elegido un Estado y vuelto a «los 33», la caja
+    // seguia diciendo el nombre del Estado anterior —en la bajada y en la cita
+    // APA—, porque su unica llamada colgaba del panel del perfil, que con la
+    // region entera no se pinta. Se citaba un ambito que no era el mirado.
+    paso('llevarse la consulta', pintarCajaConsulta);
     paso('cuántos temas', contarTemas);
     paso('perfil del país', perfilPais);
     paso('panorama', armarPanorama);
