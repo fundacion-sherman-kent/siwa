@@ -139,7 +139,7 @@ python colectores/focos.py
 | `sismos` | Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN | `A-1` | 33 | 6 |
 | `sondeo` | Fundación Sherman Kent — banco de pruebas de fuentes candidatas | `A-1` | — | 5 |
 | `subnacional` | Censo propio de fuentes subnacionales — Fundación Sherman Kent, sobre los catálogos que publica cada jurisdicción | `A-2` | — | 3 |
-| `subnacional_datos` | Sistema Nacional de Información Criminal (SNIC) — Ministerio de Seguridad de la Nación, vía la interfaz de series de tiempo del Estado | `A-2` | 1 | 4 |
+| `subnacional_datos` | Fuentes oficiales nacionales que publican por unidad de primer orden: Policía Nacional de Colombia; Sistema Nacional de Información Criminal (SNIC) | `A-2` | 2 | 5 |
 | `telegram` | Canales públicos de Telegram, vista sin cuenta | `F-4` | — | 8 |
 | `trata_personas` | Departamento de Estado de los Estados Unidos — Informe sobre la Trata de Personas, edición 2025 | `B-2` | 33 | 6 |
 | `ucdp` | UCDP — Programa de Datos de Conflicto de Upsala, Universidad de Upsala. Conjunto de país-año sobre violencia organizada dentro de las fronteras | `A-2` | 33 | 8 |
