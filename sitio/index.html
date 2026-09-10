@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 74 indicadores, 44 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-74-44">
+<meta property="og:description" content="33 Estados, 74 indicadores, 48 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-74-48">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 74 indicadores, 44 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-74-44">
+<meta name="twitter:description" content="33 Estados, 74 indicadores, 48 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-74-48">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 74 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 44 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 74 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 48 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -2339,7 +2339,6 @@
     <a href="#gobernanza">Instituciones y democracia</a>
     <a href="#transparencia">Transparencia y control</a>
     <a href="#opacidad-seccion">Índice de Opacidad</a>
-    <a href="#censo-subnacional">Qué publica cada provincia</a>
     <a href="#metodo-busqueda">Cómo se busca</a>
     <div class="grupo">Eje · Desarrollo</div>
     <a href="#desarrollo">Desarrollo</a>
@@ -3296,7 +3295,7 @@
       <div class="cruce" id="lista-prensa"></div>
       <div id="vac-prensa"></div>
         </div>
-            <div class="categoria" id="censo-subnacional" data-nivel="2">
+            <div class="categoria" id="censo-subnacional" data-nivel="2" hidden>
       <div class="categoria-head"><h3>Qué publica cada provincia de sí misma</h3><span class="tag" id="tag-censo">—</span></div>
       <details class="aviso-cobertura"><summary>Esto no publica cifras de delito: publica quién publica</summary>
         <p><b>Este censo no publica cifras de criminalidad de las provincias.</b> Publica
@@ -13739,6 +13738,21 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   // registro en cada recoleccion y el control de pantallas en cada cambio de
   // codigo. Se pintan SALGAN COMO SALGAN: publicar solo los resultados buenos
   // seria propaganda, no medicion.
+  // LA CAPA SUBNACIONAL ESPERA A LA SEGUNDA ETAPA. Decision de la Direccion, 10
+  // de septiembre de 2026: hoy se publica lo NACIONAL de los 33 Estados.
+  //
+  // Lo subnacional esta construido y probado -padron de 544 unidades de primer
+  // orden, censo de fuentes por jurisdiccion, primer dato por unidad y el
+  // contraste vertical- pero entrega dato de UN pais sobre 33. Anunciar una capa
+  // subnacional con esa cobertura prometeria mas de lo que hay, y este registro
+  // no hace eso.
+  //
+  // NO SE BORRA NADA: los colectores siguen corriendo y los archivos siguen
+  // publicos en la interfaz de datos, que es donde el trabajo hecho tiene que
+  // estar disponible. Lo unico que espera es el panel de lectura. Encender la
+  // segunda etapa es poner esta constante en true.
+  const SEGUNDA_ETAPA = false;
+
   // EL CENSO DE FUENTES SUBNACIONALES. Cada unidad con su fuente propia, su
   // grado de apertura y que mide. NO hay cifras de delito aca: hay cifras sobre
   // la PUBLICACION, que es otra cosa y se dice.
@@ -13887,6 +13901,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   // a 1/raiz(n) y con menos de treinta casos una tasa por 100.000 se mueve
   // enormemente con un caso mas.
   function padronUnidades(){
+    if(!SEGUNDA_ETAPA) return;
     const caja = document.getElementById('padron-unidades');
     const d = almacen.unidades;
     if(!caja || !d) return;
@@ -13928,6 +13943,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
 
   // EL PRIMER DATO POR UNIDAD, y el contraste vertical que lo acompaña.
   function datoSubnacional(){
+    if(!SEGUNDA_ETAPA) return;
     const caja = document.getElementById('dato-subnacional');
     const d = almacen.subDatos;
     if(!caja || !d) return;
@@ -13957,6 +13973,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   }
 
   function censoVista(){
+    if(!SEGUNDA_ETAPA) return;
     const caja = document.getElementById('lista-censo');
     const d = almacen.subnacional;
     if(!caja || !d) return;
