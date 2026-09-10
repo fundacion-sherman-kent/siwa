@@ -1006,18 +1006,27 @@
   .relaciones svg{display:block;margin:0 auto;max-width:100%;height:auto;}
   .relaciones .rama{transition:opacity .15s;}
   .relaciones svg:hover .rama:not(:hover){opacity:.28;}
-  .relaciones .tronco{stroke:rgba(255,255,255,.22);stroke-width:1.5;fill:none;}
+  .relaciones .tronco{stroke:var(--velo-3);stroke-width:1.5;fill:none;}
   .relaciones .lazo{fill:none;stroke-width:1;opacity:.55;}
   .relaciones .nodo{cursor:pointer;outline:none;}
   .relaciones .nodo:focus-visible circle,.relaciones .nodo:focus-visible rect{stroke-width:3;}
   .relaciones .nodo.sin circle,.relaciones .nodo.sin rect{stroke-width:1.3;stroke-dasharray:2 1.5;}
   .relaciones .nodo.con circle,.relaciones .nodo.con rect{stroke-width:1.3;}
-  .relaciones .nodo.materia circle{fill:#132A45;stroke:var(--orange);stroke-width:2;}
+  .relaciones .nodo.materia circle{fill:var(--panel);stroke:var(--orange);stroke-width:2;}
   .relaciones .nodo.materia:hover circle{fill:var(--orange);}
-  .relaciones .materia-rotulo{font-size:10.5px;font-weight:700;fill:#fff;letter-spacing:.3px;}
-  .relaciones .hoja{font-size:9px;fill:var(--texto);font-family:'JetBrains Mono',monospace;}
+  /* EL HALO. Los rótulos caen sobre lazos y troncos, y en una figura radial no
+     hay forma de garantizar que no se crucen: el contorno del color del panel
+     los despega del dibujo sin tapar nada. `paint-order` pinta primero el
+     contorno y encima el relleno; al revés se comería la letra. */
+  .relaciones .materia-rotulo{font-size:10.5px;font-weight:700;fill:var(--texto-max);
+    letter-spacing:.3px;paint-order:stroke;stroke:var(--panel);stroke-width:3.5px;
+    stroke-linejoin:round;}
+  .relaciones .hoja{font-size:9px;fill:var(--texto);font-family:'JetBrains Mono',monospace;
+    paint-order:stroke;stroke:var(--panel);stroke-width:2.5px;stroke-linejoin:round;}
   .relaciones .hoja.vacia{fill:var(--tenue);}
-  .relaciones .centro circle{fill:#00121E;stroke:var(--orange);stroke-width:2;}
+  /* El centro es el ancla de la figura: naranja de la casa en los dos fondos,
+     que es el único color que no depende de cuál esté puesto. */
+  .relaciones .centro circle{fill:var(--orange);stroke:var(--panel);stroke-width:2;}
   .relaciones .centro text{font-size:10px;font-weight:700;fill:#fff;}
   .relaciones-pie{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font-size:10.5px;color:var(--tenue);
     align-items:center;}
@@ -1027,7 +1036,8 @@
   .relaciones-pie i.hueco{background:none;border:1.3px dashed var(--texto);}
   .relaciones-pie .cuenta{margin-left:auto;color:var(--texto);}
   .relaciones-pie .cuenta b{color:var(--orange);}
-  @media (max-width:640px){ .relaciones .hoja{font-size:8px;} }
+  @media (max-width:640px){ .relaciones .hoja{font-size:8px;}
+    .relaciones .materia-rotulo{font-size:9.5px;} }
 
   .llevar-mapa{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:10.5px;
     color:var(--tenue);}
@@ -1094,9 +1104,18 @@
   .delta.peor{color:var(--peor);} .delta.mejor{color:var(--mejor);}
 
   /* UNA PANTALLA POR NIVEL: la fila de selectores se pliega segun el nivel. */
-  .mas-opciones{align-self:center;justify-self:start;background:none;border:1px solid var(--line);
-    color:var(--texto);border-radius:8px;padding:9px 14px;font:inherit;font-size:12.5px;cursor:pointer;}
-  .mas-opciones:hover{border-color:var(--orange);color:var(--texto-max);}
+  /* DE LA MISMA FAMILIA QUE LAS RANURAS. Las tres de al lado son tarjetas con
+     fondo, borde y esquina de 10; este era un rectangulo sin fondo, con esquina
+     de 8 y flotando a media altura por un align-self:center. Ahora es una
+     tarjeta mas, con el borde inferior en linea con las otras. */
+  .mas-opciones{align-self:flex-end;justify-self:start;display:flex;align-items:center;
+    gap:8px;background:var(--panel);border:1px solid rgba(251,101,0,.45);
+    color:var(--orange);border-radius:10px;padding:0 18px;height:44px;
+    font:inherit;font-size:11.5px;font-weight:700;letter-spacing:.9px;
+    text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+  .mas-opciones::after{content:'+';font-size:15px;font-weight:800;line-height:1;}
+  .fila-selectores.abierta .mas-opciones::after{content:'−';}
+  .mas-opciones:hover{background:rgba(251,101,0,.10);border-color:var(--orange);}
   body[data-nivel="3"] .mas-opciones{display:none;}
   /* El nivel decide CUANTOS controles se ven, no como se acomodan: el Ciudadano
      ve el ambito, el Periodista ve tambien tema y palabra, el Analista todo. */
@@ -1105,7 +1124,13 @@
   body[data-nivel="1"] .fila-selectores:not(.abierta) #grupo-comparar,
   body[data-nivel="2"] .fila-selectores:not(.abierta) #grupo-comparar{display:none;}
   body[data-nivel="1"] .fila-selectores:not(.abierta) .grupo-rotulo{display:none;}
-  body[data-nivel="1"] #slot-ambito select{font-size:17px;padding:12px 14px;}
+  /* MEDIDO: la ranura fija 40 px de alto y este nivel pide letra de 17 con 12 de
+     relleno arriba y abajo. 40 − 2 de borde − 24 de relleno = 14 px de caja para
+     una letra de 17: el nombre salia con las colas cortadas. En el nivel donde el
+     desplegable ES la pantalla, se le da altura propia y el relleno vertical se
+     saca: el navegador centra solo el texto de un <select>. */
+  body[data-nivel="1"] #slot-ambito select{font-size:17px;padding:0 14px;
+    height:50px;min-height:50px;}
   body[data-nivel="1"] #slot-ambito label{font-size:12px;}
 
   /* LAS SOLAPAS DEL PERFIL. */
@@ -1941,18 +1966,6 @@
     overflow-wrap:anywhere;word-break:normal;}
   .cita-apa{display:block;max-width:100%;}
 
-  /* EL BOTÓN FLOTANTE DE AYUDA. Siempre en pantalla, en cualquier tamaño y en
-     cualquier parte de la página. */
-  .ayuda-flota{position:fixed;right:16px;bottom:16px;z-index:800;
-    width:48px;height:48px;border-radius:50%;border:2px solid var(--tinta);
-    background:var(--navy);color:var(--tinta);font-size:22px;font-weight:800;
-    line-height:1;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.45);
-    display:flex;align-items:center;justify-content:center;}
-  .ayuda-flota:hover{background:var(--tinta);color:#fff;}
-  .ayuda-flota:focus-visible{outline:3px solid var(--tinta);outline-offset:3px;}
-  body.claro .ayuda-flota{background:#fff;box-shadow:0 6px 22px rgba(0,18,30,.18);}
-  @media print{ .ayuda-flota{display:none;} }
-
   /* LA BARRA SE COMPACTA EN TELÉFONO. Medido: 220 px de alto en un ancho de
      390, fija, o sea un cuarto de la pantalla ocupado siempre. El estado de los
      colectores y la fecha son para quien audita; quien consulta necesita el
@@ -2047,9 +2060,6 @@
        fondo inerte sin una línea nuestra ni una librería de nadie. -->
   <!-- LA AYUDA. El mismo <dialog> del navegador que la ventana de análisis:
        foco atrapado y cierre con Escape sin una línea nuestra. -->
-  <!-- LA AYUDA, SIEMPRE A MANO. No depende de que la barra de arriba quepa. -->
-  <button class="ayuda-flota" id="ayuda-flota" type="button" title="Cómo se usa este registro"
-          aria-label="Cómo se usa este registro"><span aria-hidden="true">?</span></button>
   <dialog class="ventana-analisis ventana-ayuda" id="ventana-ayuda" aria-labelledby="ay-titulo">
     <div class="va-barra">
       <h2 id="ay-titulo">Cómo se usa este registro</h2>
@@ -9508,7 +9518,6 @@
     b.dataset.armado = '1';
     const abrir = () => { if(typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open',''); };
     b.addEventListener('click', abrir);
-    document.getElementById('ayuda-flota')?.addEventListener('click', abrir);
     document.getElementById('ay-cerrar')?.addEventListener('click', () => d.close());
     d.addEventListener('click', ev => { if(ev.target === d) d.close(); });
     let vista = null;
@@ -10258,6 +10267,31 @@
     const punto = (r, a) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
     let conDato = 0, total = 0;
 
+    // EL ROTULO DE CADA MATERIA SALE HACIA AFUERA POR SU PROPIO RADIO. Antes iba
+    // siempre debajo del circulo, y con seis materias dispuestas en circulo los
+    // de la mitad caian encima del centro: «Desinformacion» y «Economias
+    // ilicitas» tapaban a «Region». Hacia afuera es la unica direccion en la que
+    // seis etiquetas en circulo no se pisan entre si.
+    const rotuloDeLaRama = (a, r, texto) => {
+      const [x, y] = punto(r, a);
+      const cosA = Math.cos(a), sinA = Math.sin(a);
+      const arriba = Math.abs(cosA) < 0.35;              // las de las doce y las seis
+      const anclaje = arriba ? 'middle' : (cosA > 0 ? 'start' : 'end');
+      const dy = arriba ? (sinA > 0 ? 12 : -5) : 4;
+      // SUJETO AL BORDE. Medido a 375 px: dos de los seis se salian del lienzo y
+      // la palabra quedaba cortada. Se estima el ancho -10,5 px en negrita, 0,60
+      // del cuerpo por caracter- y se corre lo justo para que entre. La
+      // estimacion no es exacta y no hace falta que lo sea: el margen de 4 px
+      // absorbe el error, y errarle hacia adentro no rompe nada.
+      const ancho = texto.length * 6.3, borde = 4;
+      let xx = x;
+      if(anclaje === 'end') xx = Math.max(x, ancho + borde);
+      else if(anclaje === 'start') xx = Math.min(x, w - borde - ancho);
+      else xx = Math.max(ancho / 2 + borde, Math.min(w - borde - ancho / 2, x));
+      return '<text x="' + xx.toFixed(1) + '" y="' + (y + dy).toFixed(1) + '" text-anchor="'
+        + anclaje + '" class="materia-rotulo">' + esc(texto) + '</text>';
+    };
+
     const rotuloRadial = (a, r, texto, clase, titulo) => {
       const grados = a * 180 / Math.PI;
       const izquierda = Math.cos(a) < 0;
@@ -10304,8 +10338,7 @@
         + '<circle cx="' + mx.toFixed(1) + '" cy="' + my.toFixed(1) + '" r="' + rad.toFixed(1) + '"/>'
         + '<title>' + esc(m.rotulo + ': ' + hayMateria + ' de ' + nodos.length
             + (iso ? ' medidas con dato para ' + paisNombre : ' medidas cargadas')) + '</title>'
-        + '<text x="' + mx.toFixed(1) + '" y="' + (my + rad + 11).toFixed(1) + '" text-anchor="middle" class="materia-rotulo">'
-        + esc(m.rotulo) + '</text></g></g>';
+        + rotuloDeLaRama(a0, r1 + rad + 9, m.rotulo) + '</g></g>';
     }).join('');
 
     const centro = '<g class="centro"><circle cx="' + cx + '" cy="' + cy + '" r="24"/>'
