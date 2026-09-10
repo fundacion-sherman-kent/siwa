@@ -125,10 +125,8 @@ def _delEstado(portal: dict) -> tuple:
 
 
 def _dias(fecha: str) -> int | None:
-    try:
-        return (date.today() - date.fromisoformat(fecha)).days
-    except Exception:  # noqa: BLE001 — una fecha ilegible no descarta el conjunto
-        return None
+    # La cuenta vive en comun.py: era la segunda copia de la misma resta.
+    return comun.dias_desde(fecha)
 
 
 def recolectar():

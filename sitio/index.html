@@ -1375,6 +1375,42 @@
      costaba treinta pixeles y era justo lo que dejaba al bloque de ejes afuera. */
   .ficha-mapa .eje-pie{display:none;}
 
+  /* EL CENSO DE FUENTES SUBNACIONALES. */
+  .censo-unidad{border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+    background:var(--panel);margin-bottom:10px;}
+  .censo-cab{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:baseline;margin-bottom:4px;}
+  .censo-cab h4{margin:0;font-size:15px;font-weight:700;color:var(--texto-max);}
+  .censo-cab .local{font-size:10px;text-transform:uppercase;letter-spacing:1px;
+    color:var(--tenue);font-weight:700;}
+  .censo-cab .pais{font-size:11px;color:var(--texto-2);}
+  .grado{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:11px;
+    color:var(--texto-2);}
+  .grado b{font-size:15px;font-weight:800;color:var(--orange);
+    font-family:'JetBrains Mono',monospace;}
+  .censo-fuente{font-size:12.5px;color:var(--texto-2);line-height:1.55;margin:6px 0 10px;}
+  .censo-fuente a{color:var(--orange);text-decoration:none;}
+  .censo-fuente a:hover{text-decoration:underline;}
+  .censo-rejilla{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
+    border-radius:8px;overflow:hidden;
+    grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));}
+  .censo-rejilla > div{background:var(--panel);padding:9px 11px;}
+  .censo-rejilla .q{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;
+    color:var(--tenue);font-weight:700;margin-bottom:3px;}
+  .censo-rejilla .v{display:block;font-size:16px;font-weight:700;color:var(--texto-max);
+    font-variant-numeric:tabular-nums;line-height:1.2;}
+  .censo-rejilla .c{display:block;font-size:11px;color:var(--texto-2);margin-top:2px;}
+  .censo-lista{margin:10px 0 0;padding:0;list-style:none;}
+  .censo-lista li{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;
+    font-size:12.5px;padding:5px 0;border-top:1px solid var(--velo-2);}
+  .censo-lista li:first-child{border-top:none;}
+  .censo-lista .n{font-weight:600;color:var(--texto);}
+  .censo-lista .cuantos{font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    color:var(--texto-2);}
+  .censo-lista .cuando{margin-left:auto;font-size:11px;}
+  .censo-aviso{font-size:12px;color:var(--texto-2);line-height:1.55;margin-top:10px;
+    border-left:3px solid var(--t-violeta);padding-left:11px;}
+  .censo-aviso b{color:var(--texto);}
+
   .paises-oficiales{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px, 100%), 1fr));gap:14px;}
   .ficha-pais{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;}
   .ficha-pais h4,.ficha-pais h3{margin:0;font-size:13px;font-weight:700;color:var(--texto-max);}
@@ -2220,6 +2256,7 @@
     <div class="grupo">Eje · Gobernanza</div>
     <a href="#gobernanza">Instituciones y democracia</a>
     <a href="#transparencia">Transparencia y control</a>
+    <a href="#censo-subnacional">Qué publica cada provincia</a>
     <div class="grupo">Eje · Desarrollo</div>
     <a href="#desarrollo">Desarrollo</a>
     <!-- Riesgo y ambiente NO es ninguno de los cuatro y no se lo fuerza a
@@ -3176,7 +3213,26 @@
       <div class="cruce" id="lista-prensa"></div>
       <div id="vac-prensa"></div>
         </div>
-        </section>
+            <div class="categoria" id="censo-subnacional" data-nivel="2">
+      <div class="categoria-head"><h3>Qué publica cada provincia de sí misma</h3><span class="tag" id="tag-censo">—</span></div>
+      <details class="aviso-cobertura"><summary>Esto no publica cifras de delito: publica quién publica</summary>
+        <p><b>Este censo no publica cifras de criminalidad de las provincias.</b> Publica
+           <b>quién publica</b>, qué mide, en qué formato y con qué frescura. Donde el dato de
+           la jurisdicción vive adentro de una infografía se declara que existe y se enlaza:
+           <b>transcribir un número leyéndolo de un dibujo es lo que este registro no hace</b>.</p>
+        <p><b>Para qué sirve.</b> La cifra nacional de un país se puede contrastar con la que
+           publica la propia provincia sobre sí misma. Donde coinciden, el dato se fortalece;
+           donde difieren, la diferencia es un hecho sobre la publicación; y donde la
+           jurisdicción no publica nada, esa ausencia también es un dato.</p>
+        <p><b>El grado de apertura es un acto, no una opinión</b>, y se comprueba repitiendo
+           la consulta: 5 es una serie que lee una máquina; 2, una infografía que lee una
+           persona; 0, no publicar nada de sí misma.</p>
+      </details>
+      <div class="procedencia" id="proc-censo">Cargando el registro…</div>
+      <div class="cruce" id="lista-censo"></div>
+      <div id="vac-censo"></div>
+        </div>
+</section>
     <section class="domain bloque" id="desarrollo" data-nivel="3">
       <div class="bloque-head"><h2>Desarrollo</h2></div>
       <p class="bloque-bajada">Estructura material del territorio y de la economía. No es análisis económico: es la base sobre la que se leen las otras tres.</p>
@@ -10801,6 +10857,7 @@
     // region entera no se pinta. Se citaba un ambito que no era el mirado.
     paso('llevarse la consulta', pintarCajaConsulta);
     paso('el objetivo y su medición', tableroObjetivo);
+    paso('censo de fuentes subnacionales', censoVista);
     paso('cuántos temas', contarTemas);
     paso('perfil del país', perfilPais);
     paso('panorama', armarPanorama);
@@ -13474,6 +13531,89 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   // registro en cada recoleccion y el control de pantallas en cada cambio de
   // codigo. Se pintan SALGAN COMO SALGAN: publicar solo los resultados buenos
   // seria propaganda, no medicion.
+  // EL CENSO DE FUENTES SUBNACIONALES. Cada unidad con su fuente propia, su
+  // grado de apertura y que mide. NO hay cifras de delito aca: hay cifras sobre
+  // la PUBLICACION, que es otra cosa y se dice.
+  const GRADO_APERTURA = {
+    5:'serie que lee una máquina', 4:'tabla en una página', 3:'informe en PDF',
+    2:'infografía: la lee una persona', 1:'solo comunicados', 0:'no publica nada de sí misma'
+  };
+
+  function censoVista(){
+    const caja = document.getElementById('lista-censo');
+    const d = almacen.subnacional;
+    if(!caja || !d) return;
+    const filas = (d.registros||[]).filter(r =>
+      !paisFiltro || r.iso_pais === paisFiltro);
+
+    const tag = document.getElementById('tag-censo');
+    if(tag) tag.textContent = (d.registros||[]).length + ' unidad'
+      + ((d.registros||[]).length === 1 ? '' : 'es') + ' censada'
+      + ((d.registros||[]).length === 1 ? '' : 's');
+
+    if(!filas.length){
+      caja.innerHTML = '<div class="asunto"><h4>Todavía no se censó ninguna unidad de '
+        + esc(paisNombre || 'este Estado') + '</h4><div class="foot"><span class="porque">'
+        + '<b>No significa que sus provincias no publiquen</b>: significa que todavía no se '
+        + 'las miró. El censo se amplía de a una jurisdicción por vez, y la primera es '
+        + 'Santa Fe.</span><span class="badge unica">sin censar</span></div></div>';
+      return;
+    }
+
+    caja.innerHTML = filas.map(r => {
+      const f = r.fuente_propia || {};
+      const mat = (r.materias||[]).slice().sort((a,b) => (b.ultimo||'').localeCompare(a.ultimo||''));
+      const amb = (r.ambitos||[]);
+      const grafias = amb.filter(a => a.grafias_en_la_fuente);
+      return '<div class="censo-unidad">'
+        + '<div class="censo-cab"><h4>' + esc(r.unidad) + '</h4>'
+        + '<span class="local">' + esc(r.nombre_local || '') + '</span>'
+        + '<span class="pais">' + esc((padron.find(p=>p.iso===r.iso_pais)||{}).pais || r.iso_pais)
+        + ' · ' + esc(r.codigo) + '</span>'
+        + '<span class="grado"><b>' + r.grado_apertura + '</b> de 5 · '
+        + esc(GRADO_APERTURA[r.grado_apertura] || '') + '</span></div>'
+        + '<p class="censo-fuente">Publica <b>' + esc(f.nombre || '—') + '</b>'
+        + (f.quien ? ' — ' + esc(f.quien) : '') + '. '
+        + (f.url ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener">Ver la fuente</a>' : '')
+        + '</p>'
+        + '<div class="censo-rejilla">'
+        + '<div><span class="q">Informes</span><span class="v">' + (r.informes||0)
+        + '</span><span class="c">desde ' + esc((r.desde||'').slice(0,7)) + '</span></div>'
+        + '<div><span class="q">El último</span><span class="v">'
+        + (r.dias_desde_el_ultimo !== null && r.dias_desde_el_ultimo !== undefined
+           ? 'hace ' + r.dias_desde_el_ultimo + ' d' : '—')
+        + '</span><span class="c">' + esc(r.hasta || '') + '</span></div>'
+        + '<div><span class="q">Materias</span><span class="v">' + mat.length
+        + '</span><span class="c">que la jurisdicción mide</span></div>'
+        + '<div><span class="q">Ámbitos</span><span class="v">' + amb.length
+        + '</span><span class="c">la unidad y sus partes</span></div>'
+        + '</div>'
+        + (mat.length ? '<ul class="censo-lista">' + mat.map(m =>
+            '<li><span class="n">' + esc(rotuloDeMateria(m.clave) !== m.clave
+              ? rotuloDeMateria(m.clave) : m.clave.replace(/_/g,' '))
+            + '</span><span class="cuantos">' + m.informes + ' informes</span>'
+            + '<span class="cuando">' + cuandoDato(m.ultimo) + '</span></li>').join('')
+          + '</ul>' : '')
+        + (r.cifras_leibles === false
+           ? '<p class="censo-aviso"><b>La cifra existe y no se transcribe.</b> '
+             + esc(r.porque_ese_grado || '') + '</p>' : '')
+        + (grafias.length
+           ? '<p class="censo-aviso"><b>La propia fuente escribe el mismo ámbito de varias '
+             + 'maneras</b> —' + grafias.map(a => esc(a.nombre) + ': ' + a.grafias_en_la_fuente.length)
+             + '—. Se cuentan como uno solo. Es por esto que una capa subnacional necesita un '
+             + 'código homologado y no el nombre que cada quien escribe.</p>' : '')
+        + '</div>';
+    }).join('');
+  }
+
+  // La antiguedad de una fecha, con el mismo criterio de color que el resto.
+  function cuandoDato(fecha){
+    if(!fecha) return '';
+    const dias = Math.round((Date.now() - Date.parse(fecha)) / 86400000);
+    const clase = dias <= 60 ? 'fresco' : dias <= 400 ? 'medio' : 'viejo';
+    return '<span class="edad ' + clase + '">' + esc(String(fecha).slice(0,7)) + '</span>';
+  }
+
   function tableroObjetivo(){
     const caja = document.getElementById('tablero-objetivo');
     if(!caja) return;
@@ -13819,6 +13959,20 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   Promise.all([traer('auditoria.json').catch(()=>null),
                traer('pantallas.json').catch(()=>null)])
     .then(([au, pa]) => { almacen.auditoria = au; almacen.pantallas = pa; tableroObjetivo(); });
+
+  // El censo de fuentes subnacionales. Si falta, su bloque queda vacio y el
+  // resto del registro no se entera.
+  Promise.all([traer('subnacional.json'), traer('estado/subnacional.json').catch(()=>null)])
+    .then(([d, estado]) => {
+      almacen.subnacional = d;
+      pintarProcedencia('proc-censo', d.procedencia);
+      vacios += pintarVacios('vac-censo', d.procedencia.vacios_declarados);
+      if(estado && estado.estado === 'error'){ fallas++;
+        pintarFalla('lista-censo','censo de fuentes subnacionales',estado.mensaje,d.procedencia); }
+      censoVista(); marcador();
+    })
+    .catch(err => { noLlego++;
+      pintarNoLlego('lista-censo','censo de fuentes subnacionales',err.message); marcador(); });
 
   Promise.all([traer('sondeo.json'), traer('estado/sondeo.json').catch(()=>null)])
     .then(([d,estado])=>{

@@ -87,6 +87,16 @@ jobs:
         continue-on-error: true
         run: python colectores/reciente_oficial.py
 
+      # EL CENSO DE FUENTES SUBNACIONALES. No publica cifras de criminalidad:
+      # publica QUIEN publica, en que formato y con que frescura. Es la materia
+      # prima del contraste vertical y, ademas, una medicion de transparencia
+      # que hoy no existe en la region.
+      - name: Censo de fuentes subnacionales
+        id: subnacional
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/subnacional.py
+
       - name: Consulta dirigida a la fuente primaria
         id: consulta
         continue-on-error: true
@@ -453,6 +463,7 @@ jobs:
           [ "${{ steps.copernicus.outcome }}" = "failure" ] && { echo "Falló el colector de imagen satelital."; fallo=1; }
           [ "${{ steps.memoria.outcome }}" = "failure" ] && { echo "Falló la memoria del registro."; fallo=1; }
           [ "${{ steps.sondeo.outcome }}" = "failure" ] && { echo "Falló el banco de pruebas."; fallo=1; }
+          [ "${{ steps.subnacional.outcome }}" = "failure" ] && { echo "Falló el censo de fuentes subnacionales."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
           # La auditoría no es un colector: no falla porque una fuente no
           # respondió, falla porque el registro publicado dice algo que no

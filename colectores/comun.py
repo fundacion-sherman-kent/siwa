@@ -212,6 +212,20 @@ def pedir(url: str) -> dict:
         return json.loads(respuesta.read().decode("utf-8"))
 
 
+def dias_desde(fecha: str) -> int | None:
+    """Cuántos días pasaron desde una fecha ISO. None si la fecha no se deja leer.
+
+    Vive acá y no en cada colector: «hace cuántos días» es la pregunta que este
+    registro hace en todos lados —el último conjunto publicado, el último
+    informe de una jurisdicción, la última compra— y ya había dos copias.
+    """
+    from datetime import date as _date
+    try:
+        return (_date.today() - _date.fromisoformat(str(fecha)[:10])).days
+    except Exception:  # noqa: BLE001 — una fecha ilegible no descarta el registro
+        return None
+
+
 def calificar(fiabilidad: str, credibilidad: int, corroborado: bool, nota: str) -> dict:
     """Arma la calificación de Almirantazgo y verifica los techos del §3."""
     if fiabilidad not in FIABILIDAD:
