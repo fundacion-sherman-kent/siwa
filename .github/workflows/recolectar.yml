@@ -110,6 +110,18 @@ jobs:
       # GASTO DEL ESTADO POR FUNCION: seguridad y defensa, con serie larga. Es
       # otra fuente y por eso es otro conjunto: no se le cuelga al Banco Mundial.
       # EDUCACION, la materia que el eje Desarrollo no medía en absoluto.
+      # CLOUDFLARE RADAR. La llave es de solo lectura y gratuita. El colector se
+      # escribio SIN PODER PROBARLO —la llave vive aca y no en la maquina donde se
+      # programo—, asi que declara lo que no entiende en vez de inventarlo. Esta
+      # corrida es su verdadera prueba.
+      - name: Trafico de internet por Estado
+        id: radar
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        env:
+          CLOUDFLARE_RADAR: ${{ secrets.CLOUDFLARE_RADAR }}
+        run: python colectores/radar.py
+
       - name: Educación
         id: unesco
         continue-on-error: true
@@ -507,6 +519,7 @@ jobs:
           [ "${{ steps.subnacional_datos.outcome }}" = "failure" ] && { echo "Falló el dato subnacional por unidad."; fallo=1; }
           [ "${{ steps.gasto_publico.outcome }}" = "failure" ] && { echo "Falló el gasto en seguridad y defensa."; fallo=1; }
           [ "${{ steps.unesco.outcome }}" = "failure" ] && { echo "Falló educación."; fallo=1; }
+          [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
           # La auditoría no es un colector: no falla porque una fuente no
