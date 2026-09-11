@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-10T23:24:39+00:00",
-  "medidas_con_suficientes_casos": 119,
-  "pares_probados": 7021,
+  "corrida": "2026-09-11T00:36:16+00:00",
+  "medidas_con_suficientes_casos": 118,
+  "pares_probados": 6903,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 7021 pares y el umbral de siempre, alrededor de 351 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 1585,
-    "de_ellos_son_parentescos": 205
+    "por_que": "Con 6903 pares y el umbral de siempre, alrededor de 345 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 1544,
+    "de_ellos_son_parentescos": 202
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 1380,
+  "pistas_totales": 1342,
   "anomalias_totales": 170,
   "pistas": [
     {
@@ -211,19 +211,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.3202327060549845e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.886,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6137179313995873e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -515,6 +502,32 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.847,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.363949215249902e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:anomalias",
+      "b": "unidades:homicidios_del_pais",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "unidades · homicidios_del_pais",
+      "coeficiente": 0.847,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 4.44620722768234e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "pobreza:vulnerabilidad",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -529,13 +542,13 @@
     },
     {
       "a": "ciber:anomalias",
-      "b": "unidades:homicidios_del_pais",
+      "b": "personal_militar",
       "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "unidades · homicidios_del_pais",
-      "coeficiente": 0.845,
-      "estados": 31,
+      "rotulo_b": "Efectivos de las fuerzas armadas",
+      "coeficiente": 0.844,
+      "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 5.7894783646494906e-11,
+      "p": 6.412645170500941e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -562,19 +575,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.6372884961916225e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:anomalias",
-      "b": "personal_militar",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Efectivos de las fuerzas armadas",
-      "coeficiente": 0.842,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 8.253195169802337e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -658,6 +658,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:anomalias",
+      "b": "sanciones:entidades",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "sanciones · entidades",
+      "coeficiente": 0.833,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.241684002645924e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "desplazamiento:expulsion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "desplazamiento · expulsion",
@@ -692,19 +705,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 5.498661349447234e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:anomalias",
-      "b": "sanciones:entidades",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "sanciones · entidades",
-      "coeficiente": 0.831,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.596508721335687e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -756,7 +756,7 @@
       "coeficiente": 0.827,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.0728272820376352e-10,
+      "p": 1.0531077509988655e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
