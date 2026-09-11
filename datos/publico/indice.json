@@ -3,7 +3,7 @@
   "de": "Fundación Sherman Kent, Oficina de Generación de Inteligencia",
   "sitio": "https://siwa.fundacionkent.org",
   "documentacion": "https://siwa.fundacionkent.org/datos/",
-  "generado": "2026-09-11T16:10:28+00:00",
+  "generado": "2026-09-11T16:28:47+00:00",
   "como_usarlo": "Cada conjunto se descarga de su «url» y responde JSON con cabeceras abiertas: se puede leer desde cualquier sitio, sin credencial y sin registrarse. Todos traen el mismo bloque «procedencia» —fuente, url, calificación de Almirantazgo, fecha y vacíos declarados— y una lista «registros». Los campos de valor NO son los mismos en todos los conjuntos: cada uno declara acá los suyos en «campos_de_la_fila», y «por_estado» dice si la fila es un Estado identificado por su código ISO de tres letras.",
   "condicion": "Uso libre citando a la Fundación Sherman Kent y a la fuente original de cada dato, que viaja en el propio archivo. Los conjuntos con «restriccion_de_uso» llevan además la condición de su fuente, y esa condición manda.",
   "estabilidad": "Las direcciones no cambian y la forma del bloque de procedencia se mantiene. NO se promete que un indicador viva para siempre: si una fuente cierra, el indicador desaparece y este índice lo dirá con su ausencia.",
@@ -173,6 +173,30 @@
       "vacios_declarados": 7,
       "restriccion_de_uso": null,
       "bytes": 57941
+    },
+    {
+      "archivo": "censo_subnacional.json",
+      "url": "https://siwa.fundacionkent.org/datos/publico/censo_subnacional.json",
+      "colector": "censo_subnacional",
+      "fuente": "Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas",
+      "url_fuente": "https://ucdp.uu.se/downloads/",
+      "calificacion": "B-3",
+      "obtenido_en": "2026-09-11T16:27:31+00:00",
+      "registros": 33,
+      "indicadores": null,
+      "por_estado": true,
+      "campos_de_la_fila": [
+        "iso",
+        "pais",
+        "bloque",
+        "categorias_alcanzables",
+        "cuantas",
+        "de_upsala",
+        "de_fuente_nacional"
+      ],
+      "vacios_declarados": 5,
+      "restriccion_de_uso": null,
+      "bytes": 13877
     },
     {
       "archivo": "cepal.json",
@@ -756,7 +780,7 @@
       "fuente": "Mapa de cables submarinos — TeleGeography, interfaz pública; OurAirports — censo abierto y colaborativo de aeródromos del mundo; Energy Institute y Ember, via Our World in Data",
       "url_fuente": "https://www.submarinecablemap.com/",
       "calificacion": "B-3",
-      "obtenido_en": "2026-09-11T16:07:58+00:00",
+      "obtenido_en": "2026-09-11T16:14:49+00:00",
       "registros": 33,
       "indicadores": 4,
       "por_estado": true,
@@ -768,7 +792,7 @@
       ],
       "vacios_declarados": 9,
       "restriccion_de_uso": null,
-      "bytes": 212120
+      "bytes": 212249
     },
     {
       "archivo": "memoria.json",
@@ -1478,5 +1502,5 @@
       "bytes": 73281
     }
   ],
-  "cuantos": 57
+  "cuantos": 58
 }

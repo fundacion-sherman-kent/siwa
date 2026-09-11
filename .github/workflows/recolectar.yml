@@ -167,6 +167,19 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/infraestructura.py
 
+      # EL CENSO DE LO QUE SE PODRIA PUBLICAR POR UNIDAD. No recolecta datos:
+      # cuenta que hay disponible por unidad de primer orden y a cuantos Estados
+      # alcanza, para poder decidir si la capa subnacional llega al umbral que
+      # fijo la Direccion. Necesita el identificador humanitario para ver los
+      # temas que sin el quedan SIN MIRAR, que no es lo mismo que no existir.
+      - name: Censo de disponibilidad subnacional
+        id: censo_subnacional
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        env:
+          HDX_HAPI_APP: ${{ secrets.HDX_HAPI_APP }}
+        run: python colectores/censo_subnacional.py
+
       - name: Muertes no delictivas y salud
         id: oms
         continue-on-error: true
@@ -590,6 +603,7 @@ jobs:
           [ "${{ steps.oms_salud.outcome }}" = "failure" ] && { echo "Fallaron las muertes no delictivas y la salud."; fallo=1; }
           [ "${{ steps.recursos.outcome }}" = "failure" ] && { echo "Fallaron los recursos estratégicos."; fallo=1; }
           [ "${{ steps.infraestructura.outcome }}" = "failure" ] && { echo "Fallaron las infraestructuras críticas."; fallo=1; }
+          [ "${{ steps.censo_subnacional.outcome }}" = "failure" ] && { echo "Falló el censo de disponibilidad subnacional."; fallo=1; }
           [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
           [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
