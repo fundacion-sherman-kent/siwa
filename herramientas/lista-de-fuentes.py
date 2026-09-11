@@ -63,6 +63,10 @@ NO_SON_FUENTES = {
     "auditoria.json": "es un CONTROL de la casa: mide al registro, no al mundo",
     "pantallas.json": "es un CONTROL de la casa: mide la maqueta, no al mundo",
     "mineria.json": "derivado propio, sin procedencia de tercero",
+    "censo_subnacional.json": "es un INSTRUMENTO DE MEDICIÓN, no una fuente sobre el "
+                              "mundo: cuenta qué se podría llegar a publicar por unidad "
+                              "y a cuántos Estados alcanza, para decidir si la capa "
+                              "subnacional llega al umbral que fijó la Dirección",
     "desplazamiento-serie.json": "es la serie histórica de ACNUR, que ya figura "
                                  "como «desplazamiento»: un mismo productor no se "
                                  "cuenta dos veces por entregar dos archivos",
