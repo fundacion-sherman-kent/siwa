@@ -596,6 +596,19 @@
   .elegidos .quita span{font-size:13px;line-height:1;opacity:.75;}
   .elegidos .ninguno{color:var(--tenue);font-size:11.5px;padding:3px 0;}
   nav.rail a.afuera span{opacity:.6;font-size:11px;margin-left:2px;}
+  .ay-sub{font-size:12.5px;color:var(--texto-2);line-height:1.6;margin:0 0 10px;}
+  .guia-caja{margin:0 0 10px;}
+  .guia-rot{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;
+    color:var(--grey-blue);font-weight:700;margin-bottom:5px;}
+  .guia-salida{margin:0 0 6px;}
+  .guia-tarea{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 8px;
+    background:var(--velo-1);}
+  .guia-tarea h5{margin:0 0 6px;font-size:13.5px;color:var(--texto-max);font-weight:700;}
+  .guia-tarea ol{margin:0;padding-left:18px;}
+  .guia-tarea li{margin:0 0 4px;font-size:12.5px;color:var(--texto);line-height:1.55;}
+  .guia-tarea .guia-porque{display:block;margin-top:7px;font-size:11.5px;color:var(--tenue);
+    line-height:1.5;}
+  .guia-vacio{font-size:12.5px;color:var(--texto-2);line-height:1.6;}
   .hallazgos{margin:12px 0 0;}
   .hallazgos-eje{display:block;font-size:10.5px;text-transform:uppercase;
     letter-spacing:.8px;color:var(--grey-blue);font-weight:700;margin-bottom:2px;}
@@ -2255,6 +2268,17 @@
         la misma vara y dice de dónde sale cada cifra, de cuándo es y qué es lo que no cubre.
         Es gratuito y no hay que registrarse.</p>
 
+      <h3 class="ay-tit">La guía · decinos qué querés hacer</h3>
+      <p class="ay-sub">Escribí una tarea —«comparar», «citar», «descargar»—, un tema
+        —«cocaína», «coima», «ciberataque»— o un país. <b>Contesta con lo que el registro
+        tiene</b>: no es una inteligencia artificial y no inventa nada.</p>
+      <div class="guia-caja">
+        <label class="guia-rot" for="guia-busca">¿Qué querés hacer o qué dato buscás?</label>
+        <input type="search" id="guia-busca" class="buscar-tema" autocomplete="off"
+               placeholder="comparar dos países · citar un dato · cocaína · Perú">
+      </div>
+      <div id="guia-salida" class="guia-salida"></div>
+
       <h3 class="ay-tit">1 · Elegí cómo leerlo</h3>
       <div class="ay-niveles">
         <div class="ay-nivel n1"><b>Ciudadano</b><span>Una ficha de tu país: cómo está, qué
@@ -2353,6 +2377,9 @@
     <a href="#ciberseguridad">Ciberseguridad</a>
     <div class="grupo">Eje · Defensa</div>
     <a href="#defensa">Defensa</a>
+    <a href="#ciencia-tecnologia">Ciencia y tecnología</a>
+    <a href="#recursos-estrategicos">Recursos estratégicos</a>
+    <a href="#infraestructuras-criticas">Infraestructuras críticas</a>
     <div class="grupo">Eje · Gobernanza</div>
     <a href="#gobernanza">Instituciones y democracia</a>
     <a href="#transparencia">Transparencia y control</a>
@@ -3124,6 +3151,60 @@
       <div class="procedencia" id="proc-aeroespacial">Cargando el registro…</div>
       <div class="grid-cards" id="tarj-aeroespacial"></div>
       <div id="vac-aeroespacial"></div>
+        </div>
+
+    <div class="categoria" id="ciencia-tecnologia" data-nivel="3">
+      <div class="categoria-head"><h3>Desarrollo científico y tecnológico</h3><span class="tag" id="tag-ciencia-tecnologia">—</span></div>
+      <details class="aviso-cobertura"><summary>mide esfuerzo y producción, no utilidad</summary>
+        <p>La capacidad de un Estado de producir conocimiento propio en vez de comprarlo
+           hecho. <b>Mide esfuerzo y producción, no utilidad ni calidad</b>: un gasto alto mal
+           dirigido no produce capacidad, y una patente solicitada no es una patente concedida
+           ni una tecnología en uso.</p>
+        <p>Dos de las cuatro medidas son <b>recuentos</b> —artículos y patentes— y por lo
+           tanto premian al Estado grande. Se leen junto a la población, no sueltas. La
+           cobertura es despareja y va declarada en cada tarjeta: el gasto en investigación y
+           los investigadores por millón son los peor cubiertos, con menos de la mitad de los
+           Estados informando.</p>
+      </details>
+      <div class="procedencia" id="proc-ciencia-tecnologia">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-ciencia-tecnologia"></div>
+      <div id="vac-ciencia-tecnologia"></div>
+        </div>
+
+    <div class="categoria" id="recursos-estrategicos" data-nivel="3">
+      <div class="categoria-head"><h3>Recursos estratégicos</h3><span class="tag" id="tag-recursos-estrategicos">—</span></div>
+      <details class="aviso-cobertura"><summary>la dependencia es tan estratégica como la dotación</summary>
+        <p>Lo que un Estado tiene en su territorio y de qué depende de afuera. <b>La
+           dependencia es tan estratégica como la dotación</b>: quien importa la mayor parte
+           de su energía queda expuesto a decisiones que no toma.</p>
+        <p>Un promedio nacional puede tapar una escasez regional severa: un Estado con mucha
+           agua renovable por habitante puede tener provincias secas. Y tener el recurso no es
+           poder usarlo: la tierra arable mide superficie, no producción.</p>
+        <p>El eje Desarrollo mide dos cosas emparentadas con otra vara —<a href="#industrial">rentas
+           de recursos naturales y exportación de minerales</a>—, que miran cuánto DEPENDE la
+           economía de extraer, no cuánto TIENE el territorio.</p>
+      </details>
+      <div class="procedencia" id="proc-recursos-estrategicos">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-recursos-estrategicos"></div>
+      <div id="vac-recursos-estrategicos"></div>
+        </div>
+
+    <div class="categoria" id="infraestructuras-criticas" data-nivel="3">
+      <div class="categoria-head"><h3>Infraestructuras críticas</h3><span class="tag" id="tag-infraestructuras-criticas">—</span></div>
+      <details class="aviso-cobertura"><summary>acceso no es continuidad</summary>
+        <p>Lo que tiene que seguir funcionando para que todo lo demás funcione. Se lee como
+           capacidad y fragilidad, no como bienestar: una red que pierde un quinto de lo que
+           transporta es un problema de defensa antes que de confort.</p>
+        <p><b>Acceso no es continuidad.</b> Un hogar conectado a una red que se corta todos los
+           días cuenta como con acceso, y un agua «básica» es la que está a menos de treinta
+           minutos de ida y vuelta: no dice que sea segura. Las pérdidas eléctricas mezclan
+           falla técnica con robo de energía y <b>la fuente no las separa</b>.</p>
+        <p>Los Estados sin litoral marítimo no tienen movimiento de contenedores, y eso no es
+           una falta del registro.</p>
+      </details>
+      <div class="procedencia" id="proc-infraestructuras-criticas">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-infraestructuras-criticas"></div>
+      <div id="vac-infraestructuras-criticas"></div>
         </div>
     </section>
 
@@ -4240,6 +4321,18 @@
     militares_fuerza_laboral: 'militares soldados fuerzas armadas efectivos',
     armas_importadas: 'armas armamento compra importacion defensa',
     armas_exportadas: 'armas armamento venta exportacion defensa',
+    id_producto: 'ciencia tecnologia investigacion desarrollo innovacion i+d',
+    investigadores: 'ciencia investigadores cientificos tecnologia universidad',
+    articulos_cientificos: 'ciencia publicaciones articulos papers investigacion',
+    patentes_residentes: 'patentes invencion innovacion propiedad intelectual tecnologia',
+    agua_renovable: 'agua recursos hidricos reservas estrategico escasez',
+    tierra_arable: 'tierra cultivo agricultura alimentos soberania alimentaria recursos',
+    energia_importada: 'energia dependencia importacion petroleo gas estrategico soberania',
+    uso_energia: 'energia consumo electricidad petroleo',
+    acceso_electricidad: 'electricidad energia infraestructura critica red apagon',
+    perdidas_electricas: 'electricidad perdidas robo energia red infraestructura critica',
+    puertos_contenedores: 'puertos contenedores comercio infraestructura critica logistica',
+    agua_potable_basica: 'agua potable saneamiento infraestructura critica servicios',
     oficiales: 'transparencia datos abiertos gobierno fuentes oficiales',
   };
   const ORDEN_EJES = ['Situación','Seguridad','Defensa','Gobernanza','Desarrollo','Fuentes'];
@@ -10149,6 +10242,158 @@
     }).join('');
   }
 
+  // ============ LA GUIA ============
+  //
+  // Las tareas que la gente viene a hacer, con el nombre exacto de cada control.
+  // La ayuda explicaba QUE significan las cosas y no COMO hacerlas: un analista
+  // que probo el sitio dijo exactamente eso. Cada tarea lleva sus palabras de
+  // entrada, porque nadie la va a nombrar como la nombramos nosotros.
+  const TAREAS = [
+    {t:'Comparar mi país con otros',
+     busca:'comparar comparacion contrastar versus otro pais paises varios',
+     pasos:['En «Empezá acá», elegí tu país. También podés tocarlo en el mapa.',
+            'En «Comparar · Con otro país», elegí el segundo. Aparece como una ficha debajo.',
+            'Repetí hasta cuatro. La tabla comparada se arma sola y la página te lleva.'],
+     porque:'Solo se comparan los años que los dos Estados tienen en común: comparar 2019 '
+            + 'con 2023 no dice quién está peor, dice que se midieron en momentos distintos.'},
+    {t:'Ver cómo cambió un tema en el tiempo',
+     busca:'evolucion tiempo historico serie tendencia cambio subio bajo años',
+     pasos:['Elegí el tema en «Tema, por eje».',
+            'Debajo del mapa, tocá la solapa «Cómo se movió».',
+            'Para un país solo, elegilo primero y la serie pasa a ser la suya.'],
+     porque:'Si la serie no alcanza para prolongarla, el registro lo dice en vez de dibujar '
+            + 'una línea que no se sostiene.'},
+    {t:'Saber de dónde sale una cifra y si es confiable',
+     busca:'fuente confiable origen procedencia quien mide metodologia calidad verificar',
+     pasos:['Tocá el tema en «Explorar» y abrí su ficha.',
+            'Ahí está el organismo que la publica, el año y el enlace al dato original.',
+            'La solapa «Quién lo midió» muestra lo mismo para todos los Estados a la vez.'],
+     porque:'Cada conjunto lleva además su calificación de fuente y sus vacíos declarados: '
+            + 'qué no cubre y por qué.'},
+    {t:'Bajar el gráfico o la planilla para publicar',
+     busca:'descargar bajar planilla csv excel imagen png grafico publicar nota',
+     pasos:['Dejá la pantalla como la querés mostrar.',
+            'Debajo del mapa, «Descargar el tablero como imagen» da un PNG con la fuente y la fecha.',
+            'En «Llevarse esta consulta» está la planilla de datos.'],
+     porque:'La imagen sale con la fuente y la fecha adentro, para que el dato no se despegue '
+            + 'de su origen cuando circula.'},
+    {t:'Citar un dato en una nota',
+     busca:'citar cita apa referencia bibliografia nota periodistica fuente',
+     pasos:['Abrí la ficha del tema que querés citar.',
+            'Tocá «Copiar la cita del tema»: viene en norma APA, con el organismo y el año.',
+            'Si querés que el lector vea lo mismo, sumá el enlace de «Copiar el enlace de esta vista».'],
+     porque:'El enlace devuelve exactamente la pantalla que estabas mirando: país, tema, año '
+            + 'y comparaciones.'},
+    {t:'Buscar un tema por palabra',
+     busca:'buscar palabra sinonimo encontrar tema delito narcotrafico droga',
+     pasos:['Escribí en «Buscar por palabra»: sirve el hecho, no hace falta el nombre técnico.',
+            'No necesitás elegir un país primero: contesta para los 33.',
+            'Tocá un resultado y el mapa lo pinta.'],
+     porque:'Probá con el hecho antes que con el nombre: «homicidio» además de «sicariato», '
+            + '«cocaína» además de «narco», «corrupción» además de «coima».'},
+    {t:'Cruzar dos temas para ver si se mueven juntos',
+     busca:'cruzar cruce relacion correlacion dos temas juntos comparar temas',
+     pasos:['Elegí el primer tema en «Tema, por eje».',
+            'En «Comparar · Con otro tema», escribí el segundo y tildalo.',
+            'Con uno tildado sale una nube de puntos; con dos o más, una tabla.'],
+     porque:'Que dos cosas se muevan juntas NO significa que una cause la otra. El registro '
+            + 'muestra la coincidencia; la explicación es trabajo de análisis.'},
+    {t:'Entender por qué un dato no está',
+     busca:'falta faltante sin dato vacio no aparece hueco ausencia por que no',
+     pasos:['Mirá el color: punteado no es cero, es que nadie lo midió para ese Estado.',
+            'Abrí «Sobre el tema elegido» debajo del gráfico: ahí se declara qué falta y por qué.',
+            'La sección «De dónde sale y qué falta» lo dice para todo el registro.'],
+     porque:'Que no figure acá no significa que no exista: significa que este registro todavía '
+            + 'no lo mide, y eso se declara en vez de disimularse.'},
+    {t:'Leerlo en el teléfono, o cambiar el nivel de detalle',
+     busca:'telefono celular movil nivel ciudadano periodista analista detalle leer',
+     pasos:['Arriba están los tres niveles: Ciudadano, Periodista y Analista.',
+            'Ciudadano deja la ficha y saca la maquinaria; Analista muestra todo.',
+            'El botón «Fondo oscuro» cambia el fondo para leer de noche.'],
+     porque:'Los tres niveles muestran los mismos datos: cambia cuánto se despliega, no qué '
+            + 'se publica.'},
+  ];
+
+  function guiaTarea(x){
+    return '<div class="guia-tarea"><h5>' + esc(x.t) + '</h5><ol>'
+      + x.pasos.map(p => '<li>' + p + '</li>').join('')
+      + '</ol><span class="guia-porque">' + x.porque + '</span></div>';
+  }
+
+  function guiaResponde(){
+    const salida = document.getElementById('guia-salida');
+    const caja = document.getElementById('guia-busca');
+    if(!salida || !caja) return;
+    const crudo = caja.value.trim();
+    const q = sinTilde(crudo);
+
+    if(!q){   // Sin pregunta, la guía muestra todo lo que sabe hacer.
+      salida.innerHTML = '<div class="elegidos">' + TAREAS.map((x, i) =>
+        '<button class="quita" type="button" data-guia-tarea="' + i + '"><b>'
+        + esc(x.t) + '</b><span>\u203a</span></button>').join('') + '</div>';
+      return;
+    }
+
+    const tareas = TAREAS.filter(x => sinTilde(x.t + ' ' + x.busca).includes(q));
+    const vive = m => !m.disponible || m.disponible();
+    const temas = MATERIAS().filter(vive).filter(m => sinTilde(m.eje + ' ' + m.rotulo + ' '
+        + (m.busca || PALABRAS[m.clave] || '')).includes(q)).slice(0, 24);
+    const paises = padron.filter(p => sinTilde(p.pais).includes(q)).slice(0, 6);
+
+    let h = tareas.map(guiaTarea).join('');
+    if(paises.length)
+      h += '<div class="hallazgos"><b class="hallazgos-eje">Estados</b><div class="elegidos">'
+        + paises.map(p => '<button class="quita" type="button" data-guia-pais="' + esc(p.iso)
+            + '"><b>' + esc(p.pais) + '</b><span>\u203a</span></button>').join('')
+        + '</div></div>';
+    if(temas.length){
+      ORDEN_EJES.forEach(eje => {
+        const dele = temas.filter(m => m.eje === eje);
+        if(!dele.length) return;
+        h += '<div class="hallazgos"><b class="hallazgos-eje">' + esc(eje)
+          + '</b><div class="elegidos">' + dele.map(m =>
+            '<button class="quita" type="button" data-guia-capa="'
+            + esc(claveDeCapa(m.clave) || m.clave) + '"><b>' + esc(m.rotulo)
+            + '</b><span>\u203a</span></button>').join('') + '</div></div>';
+      });
+    }
+    if(!h)
+      h = '<p class="guia-vacio">Nada responde a «' + esc(crudo) + '». <b>Que no figure acá no '
+        + 'significa que no exista</b>: significa que este registro todavía no lo mide, y eso '
+        + 'se declara en vez de disimularse.<br>Probá con el hecho antes que con el nombre: '
+        + '«homicidio» además de «sicariato», «cocaína» además de «narco», «corrupción» además '
+        + 'de «coima».</p>';
+    salida.innerHTML = h;
+  }
+
+  function armarGuia(){
+    const caja = document.getElementById('guia-busca');
+    const salida = document.getElementById('guia-salida');
+    const d = document.getElementById('ventana-ayuda');
+    if(!caja || !salida || caja.dataset.armado) return;
+    caja.dataset.armado = '1';
+    caja.addEventListener('input', guiaResponde);
+
+    salida.addEventListener('click', ev => {
+      const t = ev.target.closest('[data-guia-tarea]');
+      if(t){ salida.innerHTML = guiaTarea(TAREAS[+t.dataset.guiaTarea]); return; }
+      // Las dos acciones cierran la ayuda: la respuesta está en la página, no acá.
+      const capa = ev.target.closest('[data-guia-capa]');
+      if(capa){
+        capaActiva = capa.dataset.guiaCapa;
+        d?.close(); repintar(); irAlResultado('#mapa'); return;
+      }
+      const pais = ev.target.closest('[data-guia-pais]');
+      if(pais){
+        const sel = document.getElementById('ambito');
+        if(sel){ sel.value = 'p:' + pais.dataset.guiaPais;
+                 sel.dispatchEvent(new Event('change', {bubbles:true})); }
+        d?.close(); irAlResultado('#ficha-pais');
+      }
+    });
+    guiaResponde();
+  }
+
   // La ayuda: se abre con el boton de la barra y se cierra con Escape, como la
   // ventana de analisis. Y se abre sola la PRIMERA vez que alguien entra, una
   // sola vez: quien ya la vio no la vuelve a ver.
@@ -10157,7 +10402,10 @@
     const d = document.getElementById('ventana-ayuda');
     if(!b || !d || b.dataset.armado) return;
     b.dataset.armado = '1';
-    const abrir = () => { if(typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open',''); };
+    const abrir = () => {
+      armarGuia();
+      if(typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open','');
+    };
     b.addEventListener('click', abrir);
     document.getElementById('ay-cerrar')?.addEventListener('click', () => d.close());
     d.addEventListener('click', ev => { if(ev.target === d) d.close(); });
@@ -11390,6 +11638,12 @@
     tarjetasBanco(['personal_militar','militares_fuerza_laboral'],'efectivos');
     tarjetasBanco(['armas_importadas','armas_exportadas'],'material');
     tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
+    tarjetasBanco(['id_producto','investigadores','articulos_cientificos',
+                   'patentes_residentes'],'ciencia-tecnologia');
+    tarjetasBanco(['agua_renovable','tierra_arable','energia_importada',
+                   'uso_energia'],'recursos-estrategicos');
+    tarjetasBanco(['acceso_electricidad','perdidas_electricas','puertos_contenedores',
+                   'agua_potable_basica'],'infraestructuras-criticas');
     fronterasVista();
     tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista();
     redesVista(); mensajeriaVista(); conflictosVista(); comercioVista(); ransomwareVista();
@@ -14999,11 +15253,15 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     .then(([d,estado])=>{
       almacen.banco=d; dominios+=Object.keys(d.cobertura||{}).length;
       ['violencia','institucional','urbano','industrial','materias','ciber','contratacion',
-       'presupuesto-defensa']
+       'presupuesto-defensa','ciencia-tecnologia','recursos-estrategicos',
+       'infraestructuras-criticas']
         .forEach(x=>{ pintarProcedencia('proc-'+x, d.procedencia); enlaceLimites(x,'banco-mundial'); });
       registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
       vacios+=pintarVacios('vac-violencia',d.procedencia.vacios_declarados);
       pintarVacios('vac-presupuesto-defensa',d.procedencia.vacios_declarados);
+      pintarVacios('vac-ciencia-tecnologia',d.procedencia.vacios_declarados);
+      pintarVacios('vac-recursos-estrategicos',d.procedencia.vacios_declarados);
+      pintarVacios('vac-infraestructuras-criticas',d.procedencia.vacios_declarados);
       pintarVacios('vac-ciber',d.procedencia.vacios_declarados);
       pintarVacios('vac-contratacion',d.procedencia.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-violencia','banco mundial',estado.mensaje,d.procedencia); }

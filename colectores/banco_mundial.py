@@ -102,6 +102,88 @@ INDICADORES = [
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Mide lo que el Estado destina a defensa, no su capacidad ni su empleo. "
                 "Un valor alto no indica mas seguridad ni menos."},
+    # ── Desarrollo científico y tecnológico ──────────────────────────────────
+    # La capacidad de un Estado de producir conocimiento propio. No mide calidad
+    # ni utilidad: mide esfuerzo y producción.
+    {"clave": "id_producto", "codigo": "GB.XPD.RSDV.GD.ZS", "fuente_id": None,
+     "rotulo": "Gasto en investigación y desarrollo", "eje": "Defensa",
+     "unidad": "% del producto", "mas_es_peor": False,
+     "origen": "UNESCO, compilado por el Banco Mundial",
+     "cautela": "Menos de la mitad de los Estados lo informan. Mide lo que se gasta, no lo que se "
+                "obtiene: un gasto alto mal dirigido no produce capacidad."},
+    {"clave": "investigadores", "codigo": "SP.POP.SCIE.RD.P6", "fuente_id": None,
+     "rotulo": "Investigadores por millón de habitantes", "eje": "Defensa",
+     "unidad": "personas por millón", "mas_es_peor": False,
+     "origen": "UNESCO, compilado por el Banco Mundial",
+     "cautela": "La cobertura más floja de este bloque: menos de la mitad lo informa. "
+                "Cuenta personas dedicadas a investigar, en equivalente a tiempo completo."},
+    {"clave": "articulos_cientificos", "codigo": "IP.JRN.ARTC.SC", "fuente_id": None,
+     "rotulo": "Artículos científicos y técnicos publicados", "eje": "Defensa",
+     "unidad": "artículos por año", "mas_es_peor": False,
+     "origen": "National Science Foundation, compilado por el Banco Mundial",
+     "cautela": "Los 33. Es un RECUENTO, no una tasa: un Estado grande publica más que "
+                "uno chico sin ser por eso más capaz. Se lee junto a la población."},
+    {"clave": "patentes_residentes", "codigo": "IP.PAT.RESD", "fuente_id": None,
+     "rotulo": "Solicitudes de patente de residentes", "eje": "Defensa",
+     "unidad": "solicitudes por año", "mas_es_peor": False,
+     "origen": "Organización Mundial de la Propiedad Intelectual, vía el Banco Mundial",
+     "cautela": "Tres de cada cuatro Estados. Cuenta solicitudes, no concesiones, y solo de residentes: "
+                "es invención propia, no tecnología que entra comprada."},
+
+    # ── Recursos estratégicos ────────────────────────────────────────────────
+    # Lo que un Estado tiene bajo su suelo y su territorio, y de qué depende de
+    # afuera. La dependencia es tan estratégica como la dotación.
+    {"clave": "agua_renovable", "codigo": "ER.H2O.INTR.PC", "fuente_id": None,
+     "rotulo": "Agua dulce renovable por habitante", "eje": "Defensa",
+     "unidad": "metros cúbicos por persona", "mas_es_peor": False,
+     "origen": "FAO AQUASTAT, compilado por el Banco Mundial",
+     "cautela": "Los 33. Es el agua que se renueva dentro del propio territorio. Un "
+                "promedio nacional alto puede convivir con escasez severa en una región."},
+    {"clave": "tierra_arable", "codigo": "AG.LND.ARBL.ZS", "fuente_id": None,
+     "rotulo": "Tierra arable", "eje": "Defensa",
+     "unidad": "% de la superficie", "mas_es_peor": False,
+     "origen": "FAO, compilado por el Banco Mundial",
+     "cautela": "Los 33. Mide superficie cultivable, no producción ni seguridad "
+                "alimentaria: un Estado con poca tierra puede alimentarse importando."},
+    {"clave": "energia_importada", "codigo": "EG.IMP.CONS.ZS", "fuente_id": None,
+     "rotulo": "Energía que se importa", "eje": "Defensa",
+     "unidad": "% del uso de energía", "mas_es_peor": True,
+     "origen": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+     "cautela": "Dos tercios de los Estados. Un valor negativo significa que exporta más energía "
+                "de la que usa. Es la medida más directa de dependencia externa."},
+    {"clave": "uso_energia", "codigo": "EG.USE.PCAP.KG.OE", "fuente_id": None,
+     "rotulo": "Uso de energía por habitante", "eje": "Defensa",
+     "unidad": "kg equivalentes de petróleo", "mas_es_peor": False,
+     "origen": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+     "cautela": "Dos tercios de los Estados. No es virtud ni defecto: es escala de la economía. Se lee junto "
+                "a la energía importada, que es la que dice de quién se depende."},
+
+    # ── Infraestructuras críticas ────────────────────────────────────────────
+    # Lo que tiene que seguir funcionando para que todo lo demás funcione.
+    {"clave": "acceso_electricidad", "codigo": "EG.ELC.ACCS.ZS", "fuente_id": None,
+     "rotulo": "Población con acceso a electricidad", "eje": "Defensa",
+     "unidad": "% de la población", "mas_es_peor": False,
+     "origen": "Banco Mundial, marco de seguimiento de energía sostenible",
+     "cautela": "Los 33. Acceso no es continuidad: un hogar conectado a una red que se "
+                "corta todos los días cuenta como con acceso."},
+    {"clave": "perdidas_electricas", "codigo": "EG.ELC.LOSS.ZS", "fuente_id": None,
+     "rotulo": "Electricidad perdida en el traslado", "eje": "Defensa",
+     "unidad": "% de la producción", "mas_es_peor": True,
+     "origen": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+     "cautela": "Dos tercios de los Estados. Mezcla pérdida técnica con robo de energía, y la fuente no las "
+                "separa: un valor alto indica una red frágil, sin decir por cuál motivo."},
+    {"clave": "puertos_contenedores", "codigo": "IS.SHP.GOOD.TU", "fuente_id": None,
+     "rotulo": "Movimiento de contenedores en puertos", "eje": "Defensa",
+     "unidad": "contenedores de veinte pies por año", "mas_es_peor": False,
+     "origen": "Naciones Unidas, compilado por el Banco Mundial",
+     "cautela": "Casi todos. Es un RECUENTO y depende del tamaño de la economía. Los Estados "
+                "sin litoral marítimo no tienen este dato, y no es una falla."},
+    {"clave": "agua_potable_basica", "codigo": "SH.H2O.BASW.ZS", "fuente_id": None,
+     "rotulo": "Población con agua potable básica", "eje": "Defensa",
+     "unidad": "% de la población", "mas_es_peor": False,
+     "origen": "OMS y UNICEF, programa conjunto de monitoreo, vía el Banco Mundial",
+     "cautela": "Casi todos. «Básica» es el escalón mínimo: fuente mejorada a menos de "
+                "treinta minutos de ida y vuelta. No dice que el agua sea segura."},
     {"clave": "personal_militar", "codigo": "MS.MIL.TOTL.P1", "fuente_id": None,
      "rotulo": "Efectivos de las fuerzas armadas", "eje": "Defensa",
      "unidad": "personas", "mas_es_peor": False,
