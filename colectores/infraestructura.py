@@ -251,9 +251,15 @@ def construir() -> Path:
     registros.sort(key=lambda r: r["pais"])
 
     medidas = [
+        # ESTA SI TIENE DIRECCION, y es al reves de lo que uno esperaría de un
+        # recuento: pocos puntos de amarre es PEOR, porque un solo accidente de
+        # ancla deja a un Estado incomunicado. Marcarla como magnitud sin lado
+        # ponía a Brasil con 75 al frente y escondía a Guyana con 1, que es el
+        # único dato que este cuadro tiene para contar. No es un juicio
+        # político: es cómo funciona una red sin camino alternativo.
         {"clave": "cables_submarinos", "rotulo": "Puntos de amarre de cable submarino",
          "eje": "Defensa", "unidad": "puntos de amarre", "mas_es_peor": False,
-         "sin_direccion": True, "origen": ORIGEN_CABLES,
+         "origen": ORIGEN_CABLES,
          "cautela": "Es DÓNDE TOCA TIERRA el internet del país. Lo que importa no es el "
                     "número alto sino el bajo: con un solo punto, un accidente de ancla "
                     "deja a un Estado incomunicado, y varios de la región tienen uno. Un "
