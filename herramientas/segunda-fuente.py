@@ -31,6 +31,7 @@ LA REGLA QUE APLICA, Y CUÁNDO SE PONE EN ROJO
 from __future__ import annotations
 
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -46,6 +47,8 @@ SALIDA = PUBLICO / "segunda_fuente.json"
 # no: son dos números de la misma mano.
 ASUNTOS = {
     "violencia letal": ["homicidios", "homicidios_oms", "femicidios"],
+    "muerte violenta no delictiva": ["suicidio", "muertes_transito"],
+    "salud": ["esperanza_vida", "mortalidad_materna"],
     "gasto en defensa": ["gasto_militar", "gasto_militar_publico",
                          "gasto_militar_dolares", "gasto_defensa_fmi"],
     "gasto en seguridad": ["gasto_seguridad", "gasto_seguridad_publico"],
@@ -115,6 +118,30 @@ SIN_SEGUNDA = {
 }
 
 
+# El sitio es quien sabe qué archivo alimenta a cada materia cuando el conjunto
+# no publica lista de indicadores. Se lee de ahí y no se copia acá: una copia a
+# mano se desactualiza el día que alguien agregue otra y nadie se entere.
+A_MEDIDA = re.compile(r"\{clave:'([a-z_0-9]+)'[^}]*?archivo:'([a-z_0-9/-]+)'")
+
+
+def materias_a_medida() -> dict:
+    """{clave: nombre de archivo} de las materias que no salen de un catálogo."""
+    pagina = RAIZ / "sitio" / "index.html"
+    if not pagina.exists():
+        return {}
+    return {c: a + ".json" for c, a in A_MEDIDA.findall(pagina.read_text(encoding="utf-8"))}
+
+
+def fuente_de(ruta: Path) -> str:
+    try:
+        d = json.loads(ruta.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return ""
+    f = (d.get("procedencia") or {}).get("fuente")
+    f = f.get("nombre") if isinstance(f, dict) else f
+    return str(f or "")
+
+
 def conjuntos() -> list:
     salida = []
     for ruta in sorted(PUBLICO.glob("*.json")):
@@ -148,6 +175,18 @@ def main() -> None:
     for c in datos:
         for k in c["claves"]:
             de_quien.setdefault(k, set()).add(productor(c["fuente"]))
+
+    # Y las que no salen de un catálogo, que el control no veía y son siete.
+    a_medida = 0
+    for clave, archivo in materias_a_medida().items():
+        ruta = PUBLICO / archivo
+        if not ruta.exists():
+            continue
+        nombre = fuente_de(ruta)
+        if not nombre:
+            continue
+        de_quien.setdefault(clave, set()).add(productor(nombre))
+        a_medida += 1
 
     publicadas = set(de_quien)
     clasificadas = {k for v in ASUNTOS.values() for k in v}
@@ -183,6 +222,7 @@ def main() -> None:
         "con_dos_o_mas": len(corroborados),
         "con_una_sola": len(agenda),
         "materias_publicadas": len(publicadas),
+        "materias_de_archivo_a_medida": a_medida,
         "agenda_de_busqueda": sorted(agenda, key=lambda a: -a["materias"]),
         "asuntos": asuntos,
         "fallas": fallas,

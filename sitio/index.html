@@ -2380,6 +2380,7 @@
          existe. Lo dijo la Direccion mirando la pantalla. -->
     <a href="#terrorismo">Terrorismo</a>
     <a href="#presupuesto-seguridad">Presupuesto de seguridad</a>
+    <a href="#muertes-no-delito">Muertes que no son delito</a>
     <a href="#seguridad-territorio">Grupos y territorio</a>
     <a href="#seguridad-flujos-ilicitos">Flujos ilícitos</a>
     <a href="#personas-en-movimiento">Personas en movimiento</a>
@@ -2397,6 +2398,7 @@
     <div class="grupo">Eje · Desarrollo</div>
     <a href="#desarrollo">Desarrollo</a>
     <a href="#educacion">Educación</a>
+    <a href="#salud">Salud</a>
     <!-- Riesgo y ambiente NO es ninguno de los cuatro y no se lo fuerza a
          serlo: sismos, desastres y fuego condicionan a los cuatro y no
          dependen de ninguno. -->
@@ -2634,6 +2636,26 @@
       <div class="grid-cards" id="tarj-violencia"></div>
       <div id="serie-violencia"></div>
       <div id="vac-violencia"></div>
+        </div>
+    <div class="categoria" id="muertes-no-delito" data-nivel="2">
+      <div class="categoria-head"><h3>Muertes violentas que no son delito</h3><span class="tag" id="tag-muertes-no-delito">—</span></div>
+      <details class="aviso-cobertura"><summary>en varios Estados el suicidio mata más que el homicidio</summary>
+        <p>El registro contaba muertes violentas <b>de una sola clase</b>: el homicidio.
+           En la región se muere de otras maneras que tampoco son azar y que <b>ningún
+           organismo de seguridad cuenta, porque no son delitos</b>.</p>
+        <p><b>En varios Estados del padrón el suicidio mata más gente que el homicidio</b>
+           y no figura en ninguna estadística criminal. Y las muertes de tránsito son la
+           principal causa de muerte violenta entre jóvenes: se leen como accidente y son
+           en buena medida una cuestión de reglas, control y carretera.</p>
+        <p><b>Son estimaciones, no recuentos.</b> Se modelan sobre los registros de
+           defunción de cada Estado, corrigiendo por subregistro y por causas mal
+           clasificadas: donde el registro civil es flojo, la corrección es grande.</p>
+        <p>Las muertes de tránsito traen <b>un solo año</b>: la fuente las publica por
+           ronda y no todos los años, así que no hay serie para ver si mejora o empeora.</p>
+      </details>
+      <div class="procedencia" id="proc-muertes-no-delito">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-muertes-no-delito"></div>
+      <div id="vac-muertes-no-delito"></div>
         </div>
     <div class="categoria" id="presupuesto-seguridad" data-nivel="2">
       <div class="categoria-head"><h3>Presupuesto de seguridad y justicia</h3><span class="tag" id="tag-presupuesto-seguridad">—</span></div>
@@ -3608,6 +3630,24 @@
       <div class="grid-cards" id="tarj-materias"></div>
       <div id="vac-materias"></div>
         </div>
+    <div class="categoria" id="salud" data-nivel="2">
+      <div class="categoria-head"><h3>Salud</h3><span class="tag" id="tag-salud">—</span></div>
+      <details class="aviso-cobertura"><summary>la medida más dura de si un Estado llega con lo básico</summary>
+        <p>La <b>mortalidad materna</b> es la medida más dura que existe de si un Estado
+           llega o no llega con lo básico: son muertes evitables casi en su totalidad. Y la
+           <b>esperanza de vida</b> es el resumen de todo lo demás —no es una predicción
+           sobre nadie en particular, sino cuánto viviría en promedio quien nace hoy si las
+           condiciones no cambiaran—.</p>
+        <p><b>La serie llega hasta 2021 e incluye el golpe de la pandemia</b>, que en la
+           región fue grande: comparar 2021 con 2019 no describe una tendencia.</p>
+        <p>En los Estados chicos del Caribe, los casos de mortalidad materna son tan pocos
+           que <b>un año cualquiera salta mucho sin que haya cambiado nada</b>. Se lee la
+           serie entera, no el último punto.</p>
+      </details>
+      <div class="procedencia" id="proc-salud">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-salud"></div>
+      <div id="vac-salud"></div>
+        </div>
     <div class="categoria" id="educacion" data-nivel="2">
       <div class="categoria-head"><h3>Educación</h3><span class="tag" id="tag-educacion">—</span></div>
       <details class="aviso-cobertura"><summary>no dicen nada sobre la calidad de lo que se enseña</summary>
@@ -4401,6 +4441,10 @@
     bosque: 'bosque deforestacion selva amazonia ambiente',
     perdida_bosque: 'bosque deforestacion tala hectareas selva amazonia incendio flora',
     policias: 'policia policias fuerza seguridad efectivos agentes',
+    suicidio: 'suicidio muerte autoinfligida salud mental violencia',
+    muertes_transito: 'transito accidentes rutas autos motos muertes viales',
+    mortalidad_materna: 'mortalidad materna embarazo parto muertes evitables salud',
+    esperanza_vida: 'esperanza de vida longevidad salud mortalidad',
     gasto_educacion: 'educacion gasto presupuesto escuela inversion estudiantes',
     fuera_escuela: 'educacion escuela chicos ninos desercion abandono primaria',
     termina_secundaria: 'educacion secundaria egreso terminan graduados colegio',
@@ -7245,7 +7289,7 @@
   // agregar un colector nuevo no obligue a tocar el resto de la página.
   const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti,
                             almacen.cepal, almacen.gasto, almacen.unesco,
-                            almacen.oit].filter(Boolean);
+                            almacen.oit, almacen.salud].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -11736,6 +11780,8 @@
     seriesEnSeccion();
     tarjetasBanco(['homicidios','policias'],'violencia');
     tarjetasBanco(['gasto_seguridad','gasto_seguridad_publico'],'presupuesto-seguridad');
+    tarjetasBanco(['suicidio','muertes_transito'],'muertes-no-delito');
+    tarjetasBanco(['esperanza_vida','mortalidad_materna'],'salud');
     tarjetasBanco(['fuera_escuela','termina_secundaria','matricula_terciaria',
                    'alfabetizacion','gasto_educacion'],'educacion');
     tarjetasBanco(['corrupcion','estado_derecho','estabilidad','voz_rendicion',
@@ -15337,6 +15383,26 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-control','índice Bertelsmann',err.message);
       document.getElementById('proc-control').textContent='Sin registro disponible.'; marcador(); });
+
+  // MUERTES QUE NO SON DELITO, Y SALUD. Lo que ningun organismo de seguridad
+  // cuenta porque no es un delito, y que sin embargo mata.
+  Promise.all([traer('oms.json'), traer('estado/oms.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      // NOMBRE PROPIO: «almacen.oms» ya es el conjunto de homicidios de esta
+      // misma casa, cargado por otra via. Pisarlo romperia esa capa, y el
+      // orden en que llegan los archivos no esta garantizado.
+      almacen.salud=d;
+      dominios+=Object.keys(d.cobertura||{}).length;
+      ['muertes-no-delito','salud'].forEach(x=>pintarProcedencia('proc-'+x, d.procedencia));
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-muertes-no-delito',d.procedencia.vacios_declarados);
+      pintarVacios('vac-salud',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-muertes-no-delito','OMS',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-muertes-no-delito','OMS',err.message);
+      document.getElementById('proc-muertes-no-delito').textContent='Sin registro disponible.'; marcador(); });
 
   // EL BLOQUE LABORAL CON SU SEGUNDA FUENTE. Dos de sus tres medidas ya las
   // publica el Banco Mundial: estan para poder compararlas, no para reemplazarlas.
