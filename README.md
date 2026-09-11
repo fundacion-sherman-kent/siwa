@@ -59,6 +59,16 @@ su confianza y su probabilidad, sale por otro camino y con firma.
 5. **Todo el registro es público.** No hay capa reservada ni cuenta de acceso:
    el estado, la serie histórica, la exportación en planilla y el informe
    descargable están abiertos para cualquiera, sin registro.
+6. **Nada se cambia si pone en riesgo el sitio o los datos.** Ante la duda entre
+   una función nueva y la integridad de lo publicado, gana lo publicado. Ningún
+   cambio se sube sin sus controles en verde; ningún colector nuevo puede tumbar
+   a los que ya andan; lo que no se pudo probar entra al robot pero no a la
+   pantalla; y ninguna función vistosa justifica publicar una cifra sin fuente,
+   sin año o sin su vacío declarado.
+
+   No es una excusa para no avanzar: frena lo riesgoso, no lo nuevo. La medida
+   de si una mejora vale la pena no es cuánto impresiona, sino **si el lector
+   puede seguir sabiendo de dónde sale cada cifra, de cuándo es y qué no cubre**.
 
 ## Estructura
 
