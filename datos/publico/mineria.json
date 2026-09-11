@@ -1,6 +1,6 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-11T06:32:36+00:00",
+  "corrida": "2026-09-11T07:27:22+00:00",
   "medidas_con_suficientes_casos": 138,
   "pares_probados": 9453,
   "correccion": {
@@ -207,10 +207,10 @@
       "b": "superficie",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.901,
+      "coeficiente": 0.9,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.168886909503508e-16,
+      "p": 7.679853335867633e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -281,19 +281,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:nocturnos",
-      "b": "superficie",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.883,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.7004652593853587e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "voz_rendicion",
       "rotulo_a": "Corrupción política",
@@ -341,6 +328,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.3926105704984327e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.872,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.9633359433692136e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -597,10 +597,23 @@
       "b": "poblacion",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Población total",
+      "coeficiente": 0.85,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.2511123277410424e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
       "coeficiente": 0.849,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 7.118088662418751e-12,
+      "p": 7.271669041290221e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -614,19 +627,6 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 1.0365959787840974e-07,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.848,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.54111920730706e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -749,19 +749,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:nocturnos",
-      "b": "poblacion",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.836,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.91687047619803e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "crimen_organizado:resiliencia",
       "b": "voz_rendicion",
       "rotulo_a": "crimen_organizado · resiliencia",
@@ -796,6 +783,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 1.550283387389894e-07,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:anomalias",
+      "b": "sanciones:entidades",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "sanciones · entidades",
+      "coeficiente": 0.833,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.241684002645924e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
