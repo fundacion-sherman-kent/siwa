@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 130 indicadores, 54 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-130-54">
+<meta property="og:description" content="33 Estados, 130 indicadores, 50 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-130-50">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 130 indicadores, 54 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-130-54">
+<meta name="twitter:description" content="33 Estados, 130 indicadores, 50 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-130-50">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 130 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 54 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 130 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 50 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -4225,8 +4225,17 @@
     // inofensivo: son dos verdades que empiezan iguales y se separan solas.
     const conjuntos = FUENTES_DEL_REGISTRO
       .map(([k,rot])=>({rot, d:almacen[k]})).filter(x=>x.d);
+    // CONJUNTOS Y FUENTES NO SON LO MISMO, y decir «51 fuentes» acá mientras el
+    // rótulo del enlace decía 50 era una contradicción a la vista de cualquiera
+    // que contara los renglones. La diferencia es real y tiene explicación: DOS
+    // CONJUNTOS PUEDEN VENIR DEL MISMO PRODUCTOR —los homicidios y la salud los
+    // publica el mismo observatorio— y un productor no se cuenta dos veces por
+    // entregar dos archivos. Se dicen las dos cifras en vez de elegir una.
+    const productores = new Set(conjuntos.map(x =>
+      (x.d.procedencia.fuente && (x.d.procedencia.fuente.nombre || x.d.procedencia.fuente)) || ''));
+    const vaciosTotales = conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0);
     document.getElementById('tag-fuentes').textContent =
-      conjuntos.length+' fuentes · '+conjuntos.reduce((a,x)=>a+x.d.procedencia.vacios_declarados.length,0)+' vacíos declarados';
+      conjuntos.length+' conjuntos · '+productores.size+' fuentes · '+vaciosTotales+' vacíos declarados';
     // LOS VACIOS SE PLIEGAN, NO SE QUITAN. Esta lista ocupaba 221.088 pixeles
     // —unas 307 pantallas, el 47 % de la pagina en el nivel de analista— porque
     // dibujaba las 36 fichas con todos sus vacios abiertos.

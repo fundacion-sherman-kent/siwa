@@ -106,8 +106,26 @@ def _cifras() -> dict:
     # renglones anunciaba fuentes que el lector no puede consultar. Se cuentan
     # las fuentes DISTINTAS que dejaron archivo, que es la misma cuenta que hace
     # la tabla del README: un solo numero, calculado en un solo lugar.
+    # NO SE ANUNCIA LO QUE EL LECTOR NO PUEDE CONSULTAR. Hay archivos publicados
+    # que NO figuran en la lista de fuentes de la página, cada uno con su motivo
+    # escrito: los de la segunda etapa, que están recolectados y sin encender, y
+    # el censo, que es un instrumento de medición y no una fuente sobre el
+    # mundo. Contarlos hacía decir «54 fuentes» cuando se podían abrir 51.
+    #
+    # La lista de exclusiones se IMPORTA del control que ya la tiene, y no se
+    # copia: dos listas con el mismo contenido empiezan iguales y se separan
+    # solas, que es como nacen las cifras que se contradicen.
+    import importlib.util
+    _spec = importlib.util.spec_from_file_location(
+        "lista_de_fuentes", RAIZ / "herramientas" / "lista-de-fuentes.py")
+    _lf = importlib.util.module_from_spec(_spec)
+    _spec.loader.exec_module(_lf)
+    no_visibles = set(_lf.NO_SON_FUENTES)
+
     nombres = set()
     for archivo in _publicados():
+        if archivo.name in no_visibles:
+            continue
         try:
             d = json.loads(archivo.read_text(encoding="utf-8"))
         except Exception:  # noqa: BLE001 — un archivo ilegible no infla la cuenta
