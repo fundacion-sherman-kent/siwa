@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-09-11T15:27:23+00:00",
+    "obtenido_en": "2026-09-11T17:27:42+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**189 de los 295 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**190 de los 297 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece sólo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -36,7 +36,7 @@
       "iso": "COL",
       "pais": "Colombia",
       "bloque": "Andina",
-      "sismos": 13,
+      "sismos": 14,
       "mayor_magnitud": 7.4,
       "mayor": {
         "magnitud": 7.4,
@@ -47,14 +47,22 @@
         "tsunami": false
       },
       "ultimo": {
-        "magnitud": 4.5,
-        "lugar": "11 km N of Jordán, Colombia",
-        "cuando": "2026-09-03T16:58:46+00:00",
-        "profundidad_km": 144.678,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000te20",
+        "magnitud": 4.7,
+        "lugar": "33 km SW of Sipí, Colombia",
+        "cuando": "2026-09-11T16:42:30+00:00",
+        "profundidad_km": 61.088,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tgpu",
         "tsunami": false
       },
       "recientes": [
+        {
+          "magnitud": 4.7,
+          "lugar": "33 km SW of Sipí, Colombia",
+          "cuando": "2026-09-11T16:42:30+00:00",
+          "profundidad_km": 61.088,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tgpu",
+          "tsunami": false
+        },
         {
           "magnitud": 4.5,
           "lugar": "11 km N of Jordán, Colombia",
@@ -85,14 +93,6 @@
           "cuando": "2026-08-27T16:21:22+00:00",
           "profundidad_km": 63.685,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tca5",
-          "tsunami": false
-        },
-        {
-          "magnitud": 4.7,
-          "lugar": "19 km SW of Sipí, Colombia",
-          "cuando": "2026-08-27T15:25:29+00:00",
-          "profundidad_km": 61.381,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tc9s",
           "tsunami": false
         }
       ]
@@ -867,20 +867,20 @@
     "ventana_dias": 90,
     "desde": "2026-06-13",
     "magnitud_minima": 4.5,
-    "sismos": 295,
-    "en_tierra": 106,
-    "mar_adentro": 189,
+    "sismos": 297,
+    "en_tierra": 107,
+    "mar_adentro": 190,
     "estados_con_sismo": 12,
     "estados_del_padron": 33,
     "por_magnitud": {
-      "4,5 a 4,9": 201,
+      "4,5 a 4,9": 203,
       "5 a 5,9": 87,
       "6 o mayor": 7
     },
-    "consultado": "2026-09-11T15:27:23+00:00"
+    "consultado": "2026-09-11T17:27:42+00:00"
   },
   "mar": {
-    "cantidad": 189,
+    "cantidad": 190,
     "mayores": [
       {
         "magnitud": 7.5,
@@ -950,8 +950,8 @@
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2060,
-    "recuadro": 295,
+    "mundo": 2063,
+    "recuadro": 297,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
 }
