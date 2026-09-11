@@ -180,6 +180,29 @@ CANDIDATAS = [
                  "Es una carta (ncsi@ega.ee). La página responde.",
     },
     {
+        "clave": "inegi_mexico",
+        "rotulo": "INEGI — instituto de estadística de México",
+        "url": "https://www.inegi.org.mx/servicios/api_indicadores.html",
+        "porque": "México es el Estado del padrón con más unidades de primer orden (32) y "
+                  "su instituto publica interfaz propia. Es la clase de fuente que la "
+                  "doctrina subnacional pide: la jurisdicción consultada a sí misma.",
+        "traba": "Su interfaz exige una credencial que se pide en el sitio. Falta pedirla "
+                 "y decidir qué indicadores entran.",
+    },
+    {
+        "clave": "observatorios_nacionales",
+        "rotulo": "Observatorios nacionales de violencia — CERAC, Ideas para la Paz, IUDPAS",
+        "url": "https://iudpas.unah.edu.hn/",
+        "porque": "Los observatorios de la propia región miden con más detalle que "
+                  "cualquier organismo mundial, y son la fuente que la doctrina subnacional "
+                  "pide para contrastar lo que dice el Estado sobre sí mismo.",
+        "traba": "NINGUNO PUBLICA PARA MÁQUINAS. CERAC rechaza al programa con un 406, "
+                 "Ideas para la Paz no responde, el de Guatemala tampoco, y el de Honduras "
+                 "entrega páginas web. Publican informes en PDF para personas. Que un "
+                 "observatorio de transparencia no sea legible por máquina ES EN SÍ MISMO "
+                 "UN DATO sobre el acceso a la información en la región.",
+    },
+    {
         "clave": "ilostat",
         "rotulo": "OIT — ILOSTAT, estadísticas del trabajo",
         "url": "https://rplumber.ilo.org/data/indicator/?id=SDG_0831_SEX_ECO_RT_A&ref_area=ARG&format=.json",
@@ -203,12 +226,15 @@ CANDIDATAS = [
     {
         "clave": "bid_datos",
         "rotulo": "BID — Números para el Desarrollo",
-        "url": "https://mydata.iadb.org/api/views.json?limit=3",
-        "porque": "Banco regional con datos propios de América Latina y el Caribe: sería "
-                  "segunda fuente para buena parte de lo que hoy sostiene solo el Banco "
-                  "Mundial, y con mirada de la región y no del mundo.",
-        "traba": "404 en la ruta probada. Hay que encontrar la dirección real de su "
-                 "interfaz antes de poder usarla.",
+        "url": "https://data.iadb.org/api/3/action/package_search?rows=1",
+        "porque": "Banco regional con datos propios de América Latina y el Caribe. Su "
+                  "catálogo abierto tiene 1.591 conjuntos y responde sin credencial.",
+        "traba": "La dirección anterior estaba mal y por eso daba 404: la buena es "
+                 "data.iadb.org, no mydata. Lo que publica son en su mayoría MICRODATOS "
+                 "DE INVESTIGACIÓN —encuestas asociadas a papers— y no series de "
+                 "indicadores comparables entre países, que es lo que este registro usa. "
+                 "Sirve para bajar a un tema puntual, no como segunda fuente de una "
+                 "materia.",
     },
     {
         "clave": "lapop",
