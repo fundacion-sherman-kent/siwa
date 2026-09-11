@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-11T02:27:32+00:00",
-  "medidas_con_suficientes_casos": 118,
-  "pares_probados": 6903,
+  "corrida": "2026-09-11T03:26:46+00:00",
+  "medidas_con_suficientes_casos": 130,
+  "pares_probados": 8385,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 6903 pares y el umbral de siempre, alrededor de 345 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 1543,
-    "de_ellos_son_parentescos": 202
+    "por_que": "Con 8385 pares y el umbral de siempre, alrededor de 419 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 1768,
+    "de_ellos_son_parentescos": 271
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 1341,
-  "anomalias_totales": 170,
+  "pistas_totales": 1497,
+  "anomalias_totales": 195,
   "pistas": [
     {
       "a": "corrupcion",
@@ -645,6 +645,19 @@
       "misma_categoria": false
     },
     {
+      "a": "articulos_cientificos",
+      "b": "ciber:anomalias",
+      "rotulo_a": "Artículos científicos y técnicos publicados",
+      "rotulo_b": "ciber · anomalias",
+      "coeficiente": 0.835,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.361985061274651e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estabilidad",
       "b": "monopolio_fuerza",
       "rotulo_a": "Estabilidad política y ausencia de violencia",
@@ -762,6 +775,19 @@
       "misma_categoria": false
     },
     {
+      "a": "articulos_cientificos",
+      "b": "sanciones:entidades",
+      "rotulo_a": "Artículos científicos y técnicos publicados",
+      "rotulo_b": "sanciones · entidades",
+      "coeficiente": 0.827,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.0960843967981294e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "democracia_liberal",
       "b": "estado_derecho",
       "rotulo_a": "Democracia liberal — límites al poder",
@@ -770,32 +796,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 3.323222164403028e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "crimen_organizado:resiliencia",
-      "b": "persecucion_abuso",
-      "rotulo_a": "crimen_organizado · resiliencia",
-      "rotulo_b": "Persecución del abuso de función pública",
-      "coeficiente": 0.826,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 3.006471533112588e-07,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "estabilidad",
-      "b": "percepcion_corrupcion:puntaje",
-      "rotulo_a": "Estabilidad política y ausencia de violencia",
-      "rotulo_b": "percepcion_corrupcion · puntaje",
-      "coeficiente": 0.822,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 1.50536700909633e-09,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -1125,6 +1125,20 @@
       "de": "onu-ods"
     },
     {
+      "iso": "CHL",
+      "pais": "Chile",
+      "clave": "investigadores",
+      "rotulo": "Investigadores por millón de habitantes",
+      "anio": 2022,
+      "valor": 707.056,
+      "mediana_previa": 511.315,
+      "desvios": 9.33,
+      "cambio_pct": 38.3,
+      "cambio_en_unidades": 195.74,
+      "puntos_previos": 6,
+      "de": "banco-mundial"
+    },
+    {
       "iso": "SLV",
       "pais": "El Salvador",
       "clave": "polarizacion",
@@ -1307,6 +1321,20 @@
       "de": "cepal"
     },
     {
+      "iso": "ATG",
+      "pais": "Antigua y Barbuda",
+      "clave": "articulos_cientificos",
+      "rotulo": "Artículos científicos y técnicos publicados",
+      "anio": 2023,
+      "valor": 13.43,
+      "mediana_previa": 5.45,
+      "desvios": 8.28,
+      "cambio_pct": 146.4,
+      "cambio_en_unidades": 7.98,
+      "puntos_previos": 7,
+      "de": "banco-mundial"
+    },
+    {
       "iso": "DOM",
       "pais": "República Dominicana",
       "clave": "calidad_regulatoria",
@@ -1333,34 +1361,6 @@
       "cambio_en_unidades": -0.394,
       "puntos_previos": 8,
       "de": "banco-mundial"
-    },
-    {
-      "iso": "ECU",
-      "pais": "Ecuador",
-      "clave": "victima_delito",
-      "rotulo": "Personas que fueron víctimas de un delito en el último año",
-      "anio": 2023,
-      "valor": 36.3,
-      "mediana_previa": 28.45,
-      "desvios": 8.15,
-      "cambio_pct": 27.6,
-      "cambio_en_unidades": 7.85,
-      "puntos_previos": 6,
-      "de": "cepal"
-    },
-    {
-      "iso": "HTI",
-      "pais": "Haití",
-      "clave": "democracia_electoral",
-      "rotulo": "Nivel democrático — democracia electoral",
-      "anio": 2025,
-      "valor": 0.238,
-      "mediana_previa": 0.419,
-      "desvios": -8.14,
-      "cambio_pct": -43.2,
-      "cambio_en_unidades": -0.181,
-      "puntos_previos": 12,
-      "de": "owd"
     }
   ],
   "lo_que_no_dice": "Que una cosa cause la otra. Dos medidas pueden acompañarse por un tercer factor, por la forma en que se recolectan o por azar que esta corrección reduce pero no elimina."
