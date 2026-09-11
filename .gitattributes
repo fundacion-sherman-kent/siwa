@@ -9,6 +9,21 @@
 # escritos a mano, donde descartar el cambio ajeno en silencio si seria grave.
 datos/**/*.json merge=ours
 
+# Y los generados que NO son .json, que es donde reventó de verdad: el conflicto
+# del 11 de septiembre fue en `datos/index.html`, el catálogo público, que lo
+# escribe entero `indice-datos.py` en cada corrida. Mismo criterio y mismo
+# alcance estricto: solo lo que una herramienta reescribe completo.
+datos/index.html merge=ours
+sitio/pais/** merge=ours
+sitio/zona/** merge=ours
+sitemap.xml merge=ours
+novedades.xml merge=ours
+novedades/** merge=ours
+
+# NO entran acá `sitio/index.html`, el `index.html` de la raíz ni el `README.md`:
+# son escritos a mano con partes selladas por una herramienta, y descartar en
+# silencio el cambio de otro sí sería grave.
+
 # Los .py y .html llevan fin de linea propio del sistema en la copia de trabajo
 # y LF en el repositorio, para que Windows y Linux no ensucien el historial.
 * text=auto

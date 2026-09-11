@@ -8,6 +8,26 @@ on:
     - cron: "40 5 * * *"
   workflow_dispatch:
 
+# DOS CORRIDAS NO PUEDEN PISARSE. El 11 de septiembre de 2026 una corrida a mano
+# —la pasada completa, veintiún minutos— seguía trabajando cuando arrancó la
+# programada de la hora. La programada publicó primero; la otra, al terminar, se
+# encontró con que el repositorio había cambiado, no pudo fusionar y PERDIÓ TODO
+# LO QUE HABÍA RECOLECTADO. Entre eso, la primera medición de tráfico de
+# internet por Estado, que era justamente lo que se había ido a buscar.
+#
+# El daño no se vio en ninguna parte: la corrida programada quedó en verde, el
+# sitio siguió al día, y lo único que hubo fue una corrida en rojo que parecía
+# un colector caído.
+#
+# Con esto, GitHub deja pasar de a una: la segunda espera a que termine la
+# primera. Se espera y no se cancela la que está corriendo, porque la que está
+# corriendo ya gastó su trabajo; si mientras tanto se acumula más de una en la
+# cola, GitHub descarta las del medio, que es lo correcto: la recolección
+# siguiente trae lo mismo y más fresco.
+concurrency:
+  group: publicar-en-main
+  cancel-in-progress: false
+
 permissions:
   contents: write
 

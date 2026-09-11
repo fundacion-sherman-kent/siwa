@@ -42,6 +42,14 @@ on:
     - cron: "0 6 1,15 * *"
   workflow_dispatch:
 
+# También espera turno: el latido empuja un commit, y dos cosas empujando a la
+# vez es lo que hizo perder una recolección entera. Corre a las 06:00 y la
+# recolección a las 06:17, así que nunca deberían cruzarse; «nunca deberían» es
+# exactamente la clase de suposición que esta casa convierte en máquina.
+concurrency:
+  group: publicar-en-main
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
