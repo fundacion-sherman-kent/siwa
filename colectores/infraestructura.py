@@ -236,7 +236,15 @@ def construir() -> Path:
         if por_cable or p["iso"] in SIN_COSTA:
             n = por_cable.get(p["iso"], 0)
             if n or p["iso"] in SIN_COSTA:
-                f["indicadores"]["cables_submarinos"] = foto(n)
+                ficha_cables = foto(n)
+                # EL CERO DE UN PAIS SIN COSTA ENCABEZA LA TARJETA, porque se
+                # ordena de menor a mayor. Sin esta nota el lector lee «Bolivia,
+                # 0 puntos de amarre» como la peor fragilidad de la región, y es
+                # geografía: no hay costa donde amarrar. La nota viaja con el
+                # dato y no solo en la pantalla.
+                if p["iso"] in SIN_COSTA:
+                    ficha_cables["nota"] = "no tiene costa"
+                f["indicadores"]["cables_submarinos"] = ficha_cables
                 cobertura["cables_submarinos"] = cobertura.get("cables_submarinos", 0) + 1
         if p["iso"] in por_aero:
             f["indicadores"]["aeropuertos"] = foto(por_aero[p["iso"]])
@@ -251,9 +259,16 @@ def construir() -> Path:
     registros.sort(key=lambda r: r["pais"])
 
     medidas = [
+        # ESTA SI TIENE DIRECCION, y es al reves de lo que uno esperaría de un
+        # recuento: pocos puntos de amarre es PEOR, porque un solo accidente de
+        # ancla deja a un Estado incomunicado. Marcarla como magnitud sin lado
+        # ponía a Brasil con 75 al frente y escondía a Guyana con 1, que es el
+        # único dato que este cuadro tiene para contar. No es un juicio
+        # político: es cómo funciona una red sin camino alternativo.
         {"clave": "cables_submarinos", "rotulo": "Puntos de amarre de cable submarino",
-         "eje": "Defensa", "unidad": "puntos de amarre", "mas_es_peor": False,
-         "sin_direccion": True, "origen": ORIGEN_CABLES,
+         "eje": "Defensa", "unidad": "puntos de amarre",
+         "unidad_singular": "punto de amarre", "mas_es_peor": False,
+         "origen": ORIGEN_CABLES,
          "cautela": "Es DÓNDE TOCA TIERRA el internet del país. Lo que importa no es el "
                     "número alto sino el bajo: con un solo punto, un accidente de ancla "
                     "deja a un Estado incomunicado, y varios de la región tienen uno. Un "
@@ -261,8 +276,8 @@ def construir() -> Path:
                     "tienen costa. Cuenta puntos, no cables: por un mismo punto pueden "
                     "entrar varios."},
         {"clave": "aeropuertos", "rotulo": "Aeropuertos grandes y medianos",
-         "eje": "Defensa", "unidad": "aeropuertos", "mas_es_peor": False,
-         "sin_direccion": True, "origen": ORIGEN_AEROPUERTOS,
+         "eje": "Defensa", "unidad": "aeropuertos", "unidad_singular": "aeropuerto",
+         "mas_es_peor": False, "sin_direccion": True, "origen": ORIGEN_AEROPUERTOS,
          "cautela": "NO se cuentan las pistas chicas, que en la región son más de diez mil "
                     "y en buena parte privadas: contarlas mediría cuánta aviación general "
                     "hay, no por dónde entra y sale un país. El censo es COLABORATIVO y no "
