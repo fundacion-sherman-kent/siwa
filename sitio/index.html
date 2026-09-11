@@ -12192,7 +12192,11 @@
     const m = magnitud(f.valor, info.unidad);
     return `<div class="card"><h4>${esc(paisFiltro ? (info.rotulo||nombre) : nombre)}</h4>
       <div class="value">${m.texto}</div>
-      <div class="sub">${esc(m.unidad)} · dato de ${f.anio}${
+      <div class="sub">${esc(m.unidad)}${
+        /* DE QUÉ. «Brasil, 92,29 % de la producción mundial» sin decir de qué
+           mineral no informa: invita a entender que Brasil produce el 92 % de
+           los minerales del mundo. Cuando la ficha trae el nombre, va acá. */
+        f.de_que_mineral ? ` <b>de ${esc(f.de_que_mineral)}</b>` : ''} · dato de ${f.anio}${
         edad(f.anio) ? ` <span class="edad ${edad(f.anio).clase}">${edad(f.anio).texto}</span>` : ''}${
         (tv!==null&&tv!==undefined)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
       ${avisoDetenida(info)}

@@ -164,6 +164,44 @@ NOMBRE_USGS = {
     "Saint Vincent and the Grenadines": "VCT",
 }
 
+# EL NOMBRE DEL MINERAL, EN CASTELLANO. La base publica en inglés, y una tarjeta
+# que dice «Brasil, 92,29 % de la producción mundial de Niobium» obliga al lector
+# a traducir para entender de qué le hablan. Se traduce acá y no en la pantalla
+# porque el dato tiene que viajar entendible también para quien se lleve el
+# archivo. El nombre original queda al lado: lo que no está en esta tabla
+# conserva su nombre en inglés, y eso se ve.
+EN_CASTELLANO = {
+    "lithium": "litio", "tin": "estaño", "niobium": "niobio", "iodine": "yodo",
+    "gold": "oro", "silver": "plata", "arsenic": "arsénico", "bauxite": "bauxita",
+    "copper": "cobre", "zinc": "cinc", "lead": "plomo", "nickel": "níquel",
+    "cobalt": "cobalto", "molybdenum": "molibdeno", "rhenium": "renio",
+    "beryllium": "berilio", "boron": "boro", "bismuth": "bismuto",
+    "antimony": "antimonio", "cadmium": "cadmio", "selenium": "selenio",
+    "tellurium": "telurio", "indium": "indio", "mercury": "mercurio",
+    "manganese": "manganeso", "titanium": "titanio", "vanadium": "vanadio",
+    "tungsten": "wolframio", "magnesium": "magnesio", "aluminum": "aluminio",
+    "silicon": "silicio", "strontium": "estroncio", "bromine": "bromo",
+    "iron ore": "mineral de hierro", "rare earths": "tierras raras",
+    "phosphate rock": "roca fosfórica", "potash": "potasa", "sulfur": "azufre",
+    "salt": "sal", "cement": "cemento", "gypsum": "yeso", "lime": "cal",
+    "barite": "baritina", "feldspar": "feldespato", "graphite": "grafito",
+    "fluorspar": "fluorita", "wollastonite": "wollastonita",
+    "diatomite": "diatomita", "asbestos": "amianto", "talc": "talco",
+    "mica": "mica", "kaolin": "caolín", "clays": "arcillas", "perlite": "perlita",
+    "vermiculite": "vermiculita", "garnet": "granate", "helium": "helio",
+    "peat": "turba", "abrasives": "abrasivos", "soda ash": "carbonato de sodio",
+    "zeolites (natural)": "zeolitas naturales",
+    "pumice & pumicite": "piedra pómez",
+    "nitrogen(fixed) - ammonia": "nitrógeno fijado (amoníaco)",
+    "sand and gravel": "arena y grava", "stone": "piedra",
+}
+
+
+def en_castellano(nombre: str) -> str:
+    """El nombre en castellano, o el original si no está en la tabla."""
+    return EN_CASTELLANO.get((nombre or "").strip().lower(), (nombre or "").strip())
+
+
 # Filas que NO son un país y que, sumadas al total del mundo, lo inflarían.
 NO_ES_PAIS = {"world total", "world total (rounded)", "other countries",
               "united states and canada", "world total (rounded, excluding u.s.)"}
@@ -211,12 +249,18 @@ def minerales() -> tuple:
         iso = NOMBRE_USGS.get(pais)
         if iso:
             del_pais.setdefault(iso, []).append(
-                {"mineral": com, "medida": tipo, "unidad": x.get("UNIT_MEAS"),
+                {"mineral": en_castellano(com), "mineral_original": com,
+                 "medida": tipo, "unidad": x.get("UNIT_MEAS"),
                  "produccion": prod, "reservas": numero(x.get("RESERVES_2024"))})
 
     for iso, lista in del_pais.items():
         for m in lista:
-            total = mundo.get((m["mineral"], m["medida"])) or 0
+            # EL TOTAL DEL MUNDO SE BUSCA CON EL NOMBRE ORIGINAL. Traducirlo
+            # antes de esta línea dejaba la cuota en nada para casi todos los
+            # Estados, y el orden quedaba al azar: Brasil aparecía con 10 % de
+            # tántalo en vez de 92 % de niobio. La traducción es para el lector;
+            # la cuenta se hace con la llave de la fuente.
+            total = mundo.get((m["mineral_original"], m["medida"])) or 0
             m["cuota_mundial_pct"] = round(m["produccion"] / total * 100, 2) if total else None
         lista.sort(key=lambda m: -(m.get("cuota_mundial_pct") or 0))
     return del_pais, edicion
@@ -269,6 +313,7 @@ def construir() -> Path:
                 "tendencia_ventana_pct": None,
                 "serie": [{"anio": anio, "valor": mayor["cuota_mundial_pct"]}],
                 "de_que_mineral": mayor["mineral"],
+                "de_que_mineral_original": mayor.get("mineral_original"),
             }
             f["indicadores"]["minerales_escala_mundial"] = {
                 "valor": len({m["mineral"] for m in conCuota}), "anio": anio,
