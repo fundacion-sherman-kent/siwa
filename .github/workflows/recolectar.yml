@@ -359,7 +359,7 @@ jobs:
 
       # La segunda fuente de homicidios. Serie anual: corrida diaria.
       - name: Homicidios · segunda fuente (OMS)
-        id: oms
+        id: oms_salud
         if: env.COMPLETA == 'true'
         continue-on-error: true
         run: python colectores/oms_homicidios.py
@@ -548,7 +548,7 @@ jobs:
           [ "${{ steps.gasto_publico.outcome }}" = "failure" ] && { echo "Falló el gasto en seguridad y defensa."; fallo=1; }
           [ "${{ steps.unesco.outcome }}" = "failure" ] && { echo "Falló educación."; fallo=1; }
           [ "${{ steps.oit.outcome }}" = "failure" ] && { echo "Falló trabajo y desempleo."; fallo=1; }
-          [ "${{ steps.oms.outcome }}" = "failure" ] && { echo "Fallaron las muertes no delictivas y la salud."; fallo=1; }
+          [ "${{ steps.oms_salud.outcome }}" = "failure" ] && { echo "Fallaron las muertes no delictivas y la salud."; fallo=1; }
           [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
           [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
