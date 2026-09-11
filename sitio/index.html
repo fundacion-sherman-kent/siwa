@@ -2395,6 +2395,7 @@
     <a href="#gobernanza">Instituciones y democracia</a>
     <a href="#transparencia">Transparencia y control</a>
     <a href="#opacidad-seccion">Índice de Opacidad</a>
+    <a href="#censo-subnacional">Lo que no se publica por dentro</a>
     <a href="#metodo-busqueda">Cómo se busca</a>
     <div class="grupo">Eje · Desarrollo</div>
     <a href="#desarrollo">Desarrollo</a>
@@ -3609,6 +3610,38 @@
       <div class="materias" id="lista-opacidad"></div>
       <div id="vac-opacidad"></div>
         </div>
+    </section>
+
+    <!-- EL CENSO SUBNACIONAL. Salió de una búsqueda que no encontró lo que iba a
+         buscar: medir si la capa por unidad llegaba al umbral que fijó la
+         Dirección. No llega. Pero al medirlo apareció el inventario de qué
+         Estados no publican NADA por debajo del nivel de país, que no lo
+         publica nadie y es de la misma familia que el Índice de Opacidad. -->
+    <section class="domain bloque" id="censo-subnacional" data-nivel="2">
+      <div class="bloque-head"><h2>Lo que no se publica por dentro</h2></div>
+      <p class="bloque-bajada">Casi todo lo que se sabe de la región está medido por país.
+         Esta sección cuenta qué se puede saber <b>por provincia, departamento o estado</b>,
+         y de cuántos. Es una medición propia: ningún organismo la publica.</p>
+
+      <div class="categoria" id="censo-unidades" data-nivel="2">
+        <div class="categoria-head"><h3>Qué hay por unidad, y de cuántos Estados</h3>
+          <span class="tag" id="tag-censo">—</span></div>
+        <details class="aviso-cobertura"><summary>Qué significa esta cuenta, y qué no</summary>
+          <p><b>Cuenta disponibilidad, no calidad.</b> Que un Estado figure acá con eventos
+             de conflicto por provincia <b>no lo convierte en un Estado con estadística de
+             seguridad subnacional</b>: son cosas distintas y confundirlas sería el error
+             que este registro evita.</p>
+          <p><b>Un cero de la base de conflictos no es ausencia de violencia.</b> Esa fuente
+             registra violencia <b>organizada</b> por encima de un umbral de muertes: un
+             Estado sin eventos puede tener muchísima violencia común. Leerlo como «país en
+             paz» sería un error grave.</p>
+          <p><b>Las fuentes nacionales se cuentan una por una.</b> No hay ninguna interfaz
+             regional que las junte, y esa ausencia es en sí misma un dato sobre la región.</p>
+        </details>
+        <div class="procedencia" id="proc-censo">Cargando el registro…</div>
+        <div id="tarj-censo"></div>
+        <div id="vac-censo"></div>
+      </div>
     </section>
     <section class="domain bloque" id="desarrollo" data-nivel="3">
       <div class="bloque-head"><h2>Desarrollo</h2></div>
@@ -11815,6 +11848,7 @@
     const q = document.getElementById('quitar');
     if(q) q.addEventListener('click', ()=>{ paisFiltro=null; paisNombre=null; sincronizar(); repintar(); });
     seriesEnSeccion();
+    pintarCenso();
     tarjetasBanco(['homicidios','policias'],'violencia');
     tarjetasBanco(['gasto_seguridad','gasto_seguridad_publico'],'presupuesto-seguridad');
     tarjetasBanco(['suicidio','muertes_transito'],'muertes-no-delito');
@@ -12027,6 +12061,38 @@
   // La serie histórica se ve en la propia sección, sin ir hasta el informe.
   // Serie de diez años de la capa activa, en la propia sección. Es lo que
   // permite comprobar que la tendencia declarada existe de verdad.
+  // EL CENSO SUBNACIONAL EN PANTALLA. Se dibuja de abajo hacia arriba: primero
+  // los que no tienen nada, porque son la noticia. Un listado ordenado de mayor
+  // a menor pondría a Colombia con dos categorías al frente y dejaría el hueco
+  // —trece Estados sin nada— abajo de todo, donde nadie llega.
+  function pintarCenso(){
+    const d = almacen.censo, caja = document.getElementById('tarj-censo');
+    if(!caja || !d) return;
+    const u = d.umbral || {};
+    const sinNada = (d.registros||[]).filter(r => !r.cuantas);
+    const conAlgo = (d.registros||[]).filter(r => r.cuantas);
+    const tag = document.getElementById('tag-censo');
+    if(tag) tag.textContent = `${sinNada.length} de 33 Estados sin nada por unidad`;
+
+    const fila = r => `<tr><td>${esc(r.pais)}</td><td class="num">${r.cuantas}</td>
+      <td>${esc((r.categorias_alcanzables||[]).join(' · ') || '—')}</td></tr>`;
+
+    caja.innerHTML =
+      `<p class="sin-dato"><b>${sinNada.length} de los 33 Estados no publican, ni permiten
+         reconstruir, un solo dato de seguridad por debajo del nivel de país.</b>
+         De los otros ${conAlgo.length}, el que más tiene llega a
+         ${Math.max(0, ...conAlgo.map(r=>r.cuantas))} de las
+         ${(d.categorias_del_eje||[]).length} categorías del eje.</p>
+       <p class="sin-dato">La Dirección fijó el umbral para publicar esta capa en
+         <b>${u.categorias_minimas} categorías</b> para <b>${u.estados_minimos} Estados</b>.
+         Hoy llegan <b>${u.estados_que_llegan}</b>: la capa <b>no se publica</b>, y esta
+         página dice por qué en lugar de dejar el hueco sin explicar.</p>
+       <div class="caja-tabla"><table class="comparacion">
+         <thead><tr><th>Estado</th><th class="num">Categorías</th><th>Cuáles</th></tr></thead>
+         <tbody>${conAlgo.map(fila).join('')}${sinNada.map(fila).join('')}</tbody>
+       </table></div>`;
+  }
+
   function seriesEnSeccion(){
     const destinos = {violencia:'homicidios', desplazamiento:'desplazamiento'};
     Object.entries(destinos).forEach(([seccion, clave])=>{
@@ -15517,6 +15583,23 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-educacion','UNESCO',err.message);
       document.getElementById('proc-educacion').textContent='Sin registro disponible.'; marcador(); });
+
+  // EL CENSO DE LO QUE NO SE PUBLICA POR DENTRO. Es un INSTRUMENTO de la casa y
+  // no una fuente sobre el mundo: por eso no entra a la lista de fuentes ni a
+  // `fuentesInd`, pero sí a la pantalla, porque lo que mide —que trece Estados
+  // no publiquen nada por unidad— es un dato que nadie más publica.
+  Promise.all([traer('censo_subnacional.json'), traer('estado/censo_subnacional.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.censo=d;
+      pintarProcedencia('proc-censo', d.procedencia);
+      vacios+=pintarVacios('vac-censo', d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-censo','censo subnacional',estado.mensaje,d.procedencia); }
+      pintarCenso(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-censo','censo subnacional',err.message);
+      const p=document.getElementById('proc-censo');
+      if(p) p.textContent='Sin registro disponible.'; marcador(); });
 
   // INFRAESTRUCTURAS CRITICAS: por donde entra y sale un pais. Cables
   // submarinos, aeropuertos y energia. Lo critico no es el numero alto: es el
