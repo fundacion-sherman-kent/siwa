@@ -122,6 +122,15 @@ jobs:
           CLOUDFLARE_RADAR: ${{ secrets.CLOUDFLARE_RADAR }}
         run: python colectores/radar.py
 
+      # LA SEGUNDA FUENTE DEL BLOQUE LABORAL. Dos de sus tres medidas ya las
+      # publica otro organismo: estan para poder compararlas, no para
+      # reemplazarlas. La regla de la casa pide dos fuentes por dato.
+      - name: Trabajo y desempleo
+        id: oit
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/oit.py
+
       - name: Educación
         id: unesco
         continue-on-error: true
@@ -529,6 +538,7 @@ jobs:
           [ "${{ steps.subnacional_datos.outcome }}" = "failure" ] && { echo "Falló el dato subnacional por unidad."; fallo=1; }
           [ "${{ steps.gasto_publico.outcome }}" = "failure" ] && { echo "Falló el gasto en seguridad y defensa."; fallo=1; }
           [ "${{ steps.unesco.outcome }}" = "failure" ] && { echo "Falló educación."; fallo=1; }
+          [ "${{ steps.oit.outcome }}" = "failure" ] && { echo "Falló trabajo y desempleo."; fallo=1; }
           [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
           [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }

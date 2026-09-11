@@ -3651,6 +3651,7 @@
       <div class="categoria-head"><h3>Empleo informal</h3>
         <span class="tag" id="tag-informalidad">—</span></div>
       <div class="grid-cards" id="tarj-informalidad"></div>
+      <div id="vac-informalidad"></div>
         </div>
     <div class="categoria" id="pobreza" data-nivel="1">
       <div class="categoria-head"><h3>Pobreza por ingresos · la medida de la propia región</h3><span class="tag" id="tag-pobreza">—</span></div>
@@ -4385,6 +4386,9 @@
     gini: 'desigualdad inequidad brecha ricos pobres',
     pobreza: 'pobreza indigencia carencia',
     empleo_informal: 'informalidad trabajo negro empleo informal',
+    empleo_informal_oit: 'informalidad trabajo negro empleo informal oit segunda fuente',
+    desempleo_joven_oit: 'desempleo jovenes desocupacion oit segunda fuente',
+    desempleo_oit: 'desempleo desocupacion sin trabajo paro oit',
     trabajo_infantil: 'trabajo infantil niños explotacion laboral',
     desempleo_joven: 'desempleo desocupacion jovenes trabajo',
     asentamientos: 'villas favelas asentamientos precarios hacinamiento',
@@ -7240,7 +7244,8 @@
   // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
   // agregar un colector nuevo no obligue a tocar el resto de la página.
   const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti,
-                            almacen.cepal, almacen.gasto, almacen.unesco].filter(Boolean);
+                            almacen.cepal, almacen.gasto, almacen.unesco,
+                            almacen.oit].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -11740,7 +11745,8 @@
     tarjetasBanco(['minerales','rentas_naturales'],'materias');
     tarjetasBanco(['trata_victimas','trata_sexual','trata_trabajo'],'trata');
     tarjetasBanco(['soborno_personas','soborno_empresas'],'soborno');
-    tarjetasBanco('empleo_informal','informalidad');
+    tarjetasBanco(['empleo_informal','empleo_informal_oit','desempleo_joven',
+                   'desempleo_joven_oit','desempleo_oit'],'informalidad');
     tarjetasBanco(['victimas_robo','denuncia_robo','denuncia_agresion','sin_condena'],'victimizacion');
     // `internet` pertenece a «conectividad» por categoría declarada: ponerlo
     // también acá lo mostraba dos veces en la misma página.
@@ -15331,6 +15337,19 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-control','índice Bertelsmann',err.message);
       document.getElementById('proc-control').textContent='Sin registro disponible.'; marcador(); });
+
+  // EL BLOQUE LABORAL CON SU SEGUNDA FUENTE. Dos de sus tres medidas ya las
+  // publica el Banco Mundial: estan para poder compararlas, no para reemplazarlas.
+  Promise.all([traer('oit.json'), traer('estado/oit.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.oit=d; dominios+=Object.keys(d.cobertura||{}).length;
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-informalidad',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-informalidad','OIT',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-informalidad','OIT',err.message); marcador(); });
 
   // EDUCACION, que este registro no medía. Conjunto propio, con su licencia.
   Promise.all([traer('unesco.json'), traer('estado/unesco.json').catch(()=>null)])
