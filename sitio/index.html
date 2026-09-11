@@ -11860,7 +11860,16 @@
     tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
     tarjetasBanco(['id_producto','investigadores','articulos_cientificos',
                    'patentes_residentes'],'ciencia-tecnologia');
-    tarjetasBanco(['renta_petroleo','renta_gas','renta_minerales','exporta_combustibles',
+    // LO QUE SE TIENE VA PRIMERO, Y DESPUES DE LO QUE SE DEPENDE. Hasta hoy esta
+    // categoria empezaba por la renta y la importacion —cuanto vale y cuanto
+    // falta—, que son medidas de dependencia. Las siete primeras dicen QUE
+    // PRODUCE cada Estado y cuanto pesa en el mundo, que es la otra mitad de la
+    // pregunta y la que el lector viene a buscar cuando abre «recursos
+    // estrategicos».
+    tarjetasBanco(['cuota_mineral_mundial','minerales_escala_mundial','produccion_litio',
+                   'produccion_petroleo','reservas_petroleo','produccion_gas',
+                   'produccion_carbon',
+                   'renta_petroleo','renta_gas','renta_minerales','exporta_combustibles',
                    'energia_importada','uso_energia','uso_energia_ei','superficie',
                    'poblacion','agua_renovable','tierra_arable'],'recursos-estrategicos');
     tarjetasBanco(['acceso_electricidad','electricidad_por_habitante',
