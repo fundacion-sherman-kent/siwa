@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-11T17:28:09+00:00",
+  "corrida": "2026-09-11T18:29:23+00:00",
   "medidas_con_suficientes_casos": 168,
   "pares_probados": 14028,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 14028 pares y el umbral de siempre, alrededor de 701 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2763,
-    "de_ellos_son_parentescos": 386
+    "sobreviven": 2760,
+    "de_ellos_son_parentescos": 385
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2377,
+  "pistas_totales": 2375,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -229,6 +229,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.918,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.166325688211279e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Estado de derecho",
@@ -276,19 +289,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.7631297647118704e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.91,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.152452227454863e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -399,13 +399,13 @@
     },
     {
       "a": "focos:focos",
-      "b": "perdida_bosque",
+      "b": "poblacion",
       "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.89,
+      "rotulo_b": "Población total",
+      "coeficiente": 0.889,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.421817551495294e-15,
+      "p": 8.50306562668716e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -419,6 +419,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 9.995655754126103e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.887,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.3726138204742348e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -484,19 +497,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.2187629731577568e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "poblacion",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.878,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.331891359493495e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -684,6 +684,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.868,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.9909525015330036e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "aeropuertos",
       "b": "copernicus:escenas",
       "rotulo_a": "Aeropuertos grandes y medianos",
@@ -718,19 +731,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 3.540973458041777e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.864,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.932347566030629e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
