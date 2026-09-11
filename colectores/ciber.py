@@ -53,14 +53,8 @@ NAVEGADOR = (
 DIAS = 30   # la ventana de observación
 
 # El padrón usa ISO de tres letras; estas tres fuentes, de dos.
-DOS_LETRAS = {
-    "ARG": "AR", "BOL": "BO", "BRA": "BR", "CHL": "CL", "COL": "CO", "CRI": "CR",
-    "CUB": "CU", "DOM": "DO", "ECU": "EC", "SLV": "SV", "GTM": "GT", "HTI": "HT",
-    "HND": "HN", "MEX": "MX", "NIC": "NI", "PAN": "PA", "PRY": "PY", "PER": "PE",
-    "URY": "UY", "VEN": "VE", "BLZ": "BZ", "GUY": "GY", "SUR": "SR",
-    "ATG": "AG", "BHS": "BS", "BRB": "BB", "DMA": "DM", "GRD": "GD", "JAM": "JM",
-    "KNA": "KN", "LCA": "LC", "VCT": "VC", "TTO": "TT",
-}
+# La tabla vive en comun: la usan varios colectores.
+DOS_LETRAS = comun.DOS_LETRAS
 
 
 def _json(url: str, segundos: int = 60):

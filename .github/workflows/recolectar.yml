@@ -107,6 +107,14 @@ jobs:
       # publica QUIEN publica, en que formato y con que frescura. Es la materia
       # prima del contraste vertical y, ademas, una medicion de transparencia
       # que hoy no existe en la region.
+      # GASTO DEL ESTADO POR FUNCION: seguridad y defensa, con serie larga. Es
+      # otra fuente y por eso es otro conjunto: no se le cuelga al Banco Mundial.
+      - name: Gasto en seguridad y defensa
+        id: gasto_publico
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/gasto_publico.py
+
       - name: Censo de fuentes subnacionales
         id: subnacional
         continue-on-error: true
@@ -490,6 +498,7 @@ jobs:
           [ "${{ steps.subnacional.outcome }}" = "failure" ] && { echo "Falló el censo de fuentes subnacionales."; fallo=1; }
           [ "${{ steps.unidades.outcome }}" = "failure" ] && { echo "Falló el padrón de unidades de primer orden."; fallo=1; }
           [ "${{ steps.subnacional_datos.outcome }}" = "failure" ] && { echo "Falló el dato subnacional por unidad."; fallo=1; }
+          [ "${{ steps.gasto_publico.outcome }}" = "failure" ] && { echo "Falló el gasto en seguridad y defensa."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
           # La auditoría no es un colector: no falla porque una fuente no

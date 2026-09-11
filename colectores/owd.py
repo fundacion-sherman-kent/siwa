@@ -112,6 +112,29 @@ SERIES = [
      "cautela": "Misma advertencia: LA SERIE TERMINA EN 2021. Cuenta hechos "
                 "registrados, de modo que un Estado con mejor registro puede aparecer "
                 "peor que uno que no lleva la cuenta."},
+    {"clave": "perdida_bosque", "slug": "tree-cover-loss",
+     "columna": "tree_cover_loss_ha__category_total",
+     "rotulo": "Bosque perdido", "eje": "Seguridad",
+     "unidad": "hectáreas por año", "mas_es_peor": True,
+     "origen": "Laboratorio GLAD de la Universidad de Maryland y Global Forest Watch, "
+               "via Our World in Data",
+     "cautela": "Hectáreas medidas por satélite, no denuncias: entra al lado de «delitos "
+                "contra la flora», que hoy es una evaluación de especialistas de 1 a 10. "
+                "PÉRDIDA NO ES DEFORESTACIÓN: incluye tala legal, incendio, plaga y "
+                "cosecha forestal, y el satélite no distingue la causa. Un Estado con "
+                "mucha industria forestal legal aparece alto sin que haya delito."},
+    {"clave": "policias", "slug": "police-officers-per-1000-people",
+     "columna": "policecap",
+     "rotulo": "Policías por cada mil habitantes", "eje": "Seguridad",
+     "unidad": "policías por 1.000 personas", "mas_es_peor": False,
+     "origen": "Oficina de las Naciones Unidas contra la Droga y el Delito, via Our "
+               "World in Data",
+     "cautela": "LA SERIE TERMINA EN 2015 y no hay dato posterior por esta vía: la "
+                "fuente más fresca se publica en una planilla de formato viejo que este "
+                "registro no puede leer sin bibliotecas de terceros. Se publica con su "
+                "antigüedad a la vista. Y cuenta EFECTIVOS DECLARADOS, no despliegue: "
+                "más policías por habitante no significa más presencia en la calle ni "
+                "mejor servicio."},
     {"clave": "conflicto_no_estatal", "slug": "deaths-in-non-state-conflicts",
      "columna": None,   # se resuelve sola: es la unica columna de valor
      "rotulo": "Muertes en conflicto entre grupos armados", "eje": "Seguridad",

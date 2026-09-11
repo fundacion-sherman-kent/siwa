@@ -2379,6 +2379,7 @@
          quien usa el sitio, una categoria que no figura en la navegacion no
          existe. Lo dijo la Direccion mirando la pantalla. -->
     <a href="#terrorismo">Terrorismo</a>
+    <a href="#presupuesto-seguridad">Presupuesto de seguridad</a>
     <a href="#seguridad-territorio">Grupos y territorio</a>
     <a href="#seguridad-flujos-ilicitos">Flujos ilícitos</a>
     <a href="#personas-en-movimiento">Personas en movimiento</a>
@@ -2632,6 +2633,31 @@
       <div class="grid-cards" id="tarj-violencia"></div>
       <div id="serie-violencia"></div>
       <div id="vac-violencia"></div>
+        </div>
+    <div class="categoria" id="presupuesto-seguridad" data-nivel="2">
+      <div class="categoria-head"><h3>Presupuesto de seguridad y justicia</h3><span class="tag" id="tag-presupuesto-seguridad">—</span></div>
+      <details class="aviso-cobertura"><summary>gastar más no es estar más seguro</summary>
+        <p>Cuánto destina cada Estado a <b>policía, bomberos, tribunales y cárceles</b>: el
+           aparato de seguridad y justicia entero, no solo la policía. <b>Mide lo que se
+           destina, no lo que se obtiene</b>: en la región, varios de los Estados que más
+           gastan son los que más homicidios tienen. La relación entre gasto y resultado
+           no se afirma acá.</p>
+        <p><b>Es el presupuesto del gobierno central, y eso tiene un costo.</b> La fuente
+           ofrece cuatro pedazos del Estado; el gobierno general, que incluiría a las
+           provincias, solo cubre 6 de los 33, y con seis no se puede afirmar nada de la
+           región. En los Estados federales —la Argentina, el Brasil, México, Venezuela—
+           <b>la policía es en buena medida provincial y no entra en esta cifra</b>: para
+           esos cuatro es un piso, no el total.</p>
+        <p><b>No hay monto en pesos ni en dólares, y no es un olvido.</b> La fuente publica
+           el absoluto en la moneda de cada país, y eso no se compara: convertirlo exigiría
+           elegir un tipo de cambio, y esa elección es una opinión metida adentro de un
+           dato. Lo comparable es la proporción, y va en dos formas.</p>
+        <p><b>Mirá el año antes de comparar.</b> El Salvador trae treinta y cuatro años
+           hasta 2023; Granada, cinco, y termina en 1995.</p>
+      </details>
+      <div class="procedencia" id="proc-presupuesto-seguridad">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-presupuesto-seguridad"></div>
+      <div id="vac-presupuesto-seguridad"></div>
         </div>
     <div class="categoria" id="terrorismo" data-nivel="2">
       <div class="categoria-head"><h3>Terrorismo</h3><span class="tag" id="tag-terrorismo">—</span></div>
@@ -4346,6 +4372,11 @@
     minerales: 'mineria minerales metales extraccion recursos',
     rentas_naturales: 'recursos naturales petroleo mineria rentas',
     bosque: 'bosque deforestacion selva amazonia ambiente',
+    perdida_bosque: 'bosque deforestacion tala hectareas selva amazonia incendio flora',
+    policias: 'policia policias fuerza seguridad efectivos agentes',
+    gasto_seguridad: 'gasto presupuesto seguridad policia justicia carceles inversion',
+    gasto_seguridad_publico: 'gasto presupuesto seguridad justicia parte del estado',
+    gasto_defensa_fmi: 'gasto presupuesto defensa militar fmi segunda fuente',
     gasto_militar: 'defensa militar fuerzas armadas presupuesto',
     gasto_militar_dolares: 'defensa militar fuerzas armadas presupuesto',
     gasto_militar_publico: 'defensa militar fuerzas armadas presupuesto',
@@ -7181,7 +7212,7 @@
   // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
   // agregar un colector nuevo no obligue a tocar el resto de la página.
   const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti,
-                            almacen.cepal].filter(Boolean);
+                            almacen.cepal, almacen.gasto].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -11670,7 +11701,8 @@
     const q = document.getElementById('quitar');
     if(q) q.addEventListener('click', ()=>{ paisFiltro=null; paisNombre=null; sincronizar(); repintar(); });
     seriesEnSeccion();
-    tarjetasBanco('homicidios','violencia');
+    tarjetasBanco(['homicidios','policias'],'violencia');
+    tarjetasBanco(['gasto_seguridad','gasto_seguridad_publico'],'presupuesto-seguridad');
     tarjetasBanco(['corrupcion','estado_derecho','estabilidad','voz_rendicion',
                    'calidad_regulatoria'],'institucional');
     tarjetasBanco(['urbanizacion','asentamientos'],'urbano');
@@ -11687,7 +11719,7 @@
     tarjetasBanco(['recaudacion','registro_nacimientos','acceso_informacion','institucion_ddhh'],'capacidad');
     tarjetasBanco(['gini','pobreza','desempleo_joven','trabajo_infantil','agua_potable'],'condiciones');
     tarjetasBanco(['internet','banda_ancha'],'conectividad');
-    tarjetasBanco('bosque','ambiente');
+    tarjetasBanco(['bosque','perdida_bosque'],'ambiente');
     tarjetasBanco(['terrorismo_muertes','terrorismo_atentados'],'terrorismo');
     tarjetasBanco('conflicto_no_estatal','grupos-armados');
     tarjetasBanco(['democracia_electoral','democracia_liberal','democracia_participativa',
@@ -11702,7 +11734,8 @@
     tarjetasBanco(['aprobacion_democracia','persecucion_abuso','politica_anticorrupcion',
                    'actores_antidemocraticos','administracion_basica','indice_gobernanza'],'integridad');
     tarjetasBanco(['migracion_neta','migrantes','migrantes_pct','remesas'],'migraciones');
-    tarjetasBanco(['gasto_militar','gasto_militar_publico','gasto_militar_dolares'],'presupuesto-defensa');
+    tarjetasBanco(['gasto_militar','gasto_militar_publico','gasto_militar_dolares',
+                   'gasto_defensa_fmi'],'presupuesto-defensa');
     tarjetasBanco(['personal_militar','efectivos_por_km2','efectivos_por_habitante',
                    'militares_fuerza_laboral'],'efectivos');
     tarjetasBanco(['armas_importadas','armas_exportadas'],'material');
@@ -15268,6 +15301,21 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-control','índice Bertelsmann',err.message);
       document.getElementById('proc-control').textContent='Sin registro disponible.'; marcador(); });
+
+  // EL GASTO DEL ESTADO POR FUNCION. Conjunto propio, con su procedencia y su
+  // calificacion: no se lo cuelga del Banco Mundial, que es otra fuente.
+  Promise.all([traer('gasto_publico.json'), traer('estado/gasto_publico.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.gasto=d; dominios+=Object.keys(d.cobertura||{}).length;
+      ['presupuesto-seguridad'].forEach(x=>pintarProcedencia('proc-'+x, d.procedencia));
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-presupuesto-seguridad',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-presupuesto-seguridad','finanzas públicas del FMI',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-presupuesto-seguridad','finanzas públicas del FMI',err.message);
+      document.getElementById('proc-presupuesto-seguridad').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('owd.json'), traer('estado/owd.json').catch(()=>null)])
     .then(([d,estado])=>{
