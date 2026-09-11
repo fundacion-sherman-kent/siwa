@@ -81,6 +81,17 @@ jobs:
         continue-on-error: true
         run: python herramientas/pantallas.py http://127.0.0.1:8000
 
+      # UNA TARJETA POR TEMA, para que compartir un enlace muestre ese tema y no
+      # siempre la misma tapa. Los robots de las redes NO ejecutan el registro:
+      # leen el HTML crudo, así que hay que escribirles de antemano una página
+      # chiquita por tema, con su título, su descripción y su imagen. Va acá y
+      # no en el robot de cada hora porque abre un navegador ciento veinticinco
+      # veces: los temas no cambian de nombre todos los días.
+      - name: Armar la tarjeta de cada tema
+        id: tarjetas
+        continue-on-error: true
+        run: python herramientas/tarjetas-por-tema.py http://127.0.0.1:8000
+
       # El testigo se guarda SIEMPRE, haya pasado o no: el sitio lo publica, y
       # publicar solo los resultados buenos sería propaganda, no medición.
       - name: Guardar el testigo
@@ -89,7 +100,7 @@ jobs:
           git config user.name "siwa"
           git config user.email "actions@users.noreply.github.com"
           git config merge.ours.driver true
-          git add datos/publico/pantallas.json
+          git add datos/publico/pantallas.json sitio/t
           git diff --staged --quiet || git commit -m "Control de pantallas $(date -u +'%Y-%m-%d %H:%M UTC')"
           for intento in 1 2 3; do
             git push && break
