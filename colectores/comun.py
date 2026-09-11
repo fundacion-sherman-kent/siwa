@@ -87,6 +87,17 @@ ATRIBUCION = {
 # desarrollo—; la categoria agrupa DENTRO del eje. Un indicador tiene
 # exactamente uno de cada uno.
 # ---------------------------------------------------------------------------
+# El padrón usa ISO de tres letras; varias fuentes internacionales, de dos.
+# Vive acá y no adentro de un colector porque ya la necesitan tres.
+DOS_LETRAS = {
+    "ARG": "AR", "BOL": "BO", "BRA": "BR", "CHL": "CL", "COL": "CO", "CRI": "CR",
+    "CUB": "CU", "DOM": "DO", "ECU": "EC", "SLV": "SV", "GTM": "GT", "HTI": "HT",
+    "HND": "HN", "MEX": "MX", "NIC": "NI", "PAN": "PA", "PRY": "PY", "PER": "PE",
+    "URY": "UY", "VEN": "VE", "BLZ": "BZ", "GUY": "GY", "SUR": "SR",
+    "ATG": "AG", "BHS": "BS", "BRB": "BB", "DMA": "DM", "GRD": "GD", "JAM": "JM",
+    "KNA": "KN", "LCA": "LC", "VCT": "VC", "TTO": "TT",
+}
+
 CATEGORIAS = {
     # La violencia contra la mujer y el hacinamiento carcelario entran con la
     # CEPAL: la primera es una materia que el registro no medía en absoluto.
@@ -126,6 +137,8 @@ CATEGORIAS = {
     "tierra_arable": "recursos-estrategicos",
     "uso_energia": "recursos-estrategicos",
     "bosque": "ambiente",
+    "perdida_bosque": "ambiente",
+    "policias": "violencia",
     "calidad_regulatoria": "institucional",
     "censura_medios": "entorno-informativo",
     "conflicto_no_estatal": "grupos-armados",
@@ -140,6 +153,9 @@ CATEGORIAS = {
     "empleo_informal": "informalidad",
     "estabilidad": "institucional",
     "estado_derecho": "institucional",
+    "gasto_defensa_fmi": "presupuesto-defensa",
+    "gasto_seguridad": "presupuesto-seguridad",
+    "gasto_seguridad_publico": "presupuesto-seguridad",
     "gasto_militar": "presupuesto-defensa",
     "gasto_militar_dolares": "presupuesto-defensa",
     "gasto_militar_publico": "presupuesto-defensa",
