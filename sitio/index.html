@@ -595,6 +595,11 @@
   .elegidos .quita b{font-weight:700;}
   .elegidos .quita span{font-size:13px;line-height:1;opacity:.75;}
   .elegidos .ninguno{color:var(--tenue);font-size:11.5px;padding:3px 0;}
+  nav.rail a.afuera span{opacity:.6;font-size:11px;margin-left:2px;}
+  .hallazgos{margin:12px 0 0;}
+  .hallazgos-eje{display:block;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.8px;color:var(--grey-blue);font-weight:700;margin-bottom:2px;}
+  .hallazgos .elegidos{margin-top:4px;}
   .control select[multiple]{padding:6px 8px;min-height:40px;}
   .control select optgroup{background:#00121E;color:var(--tenue);font-style:normal;font-weight:700;}
   .control select option{background:var(--campo);color:var(--texto-alto);padding:3px 0;}
@@ -2360,6 +2365,13 @@
          dependen de ninguno. -->
     <div class="grupo">Transversal a los cuatro</div>
     <a href="#riesgo-ambiente">Riesgo y ambiente</a>
+    <!-- EL PUENTE AL ANÁLISIS. Acá terminan las cifras y empieza el juicio sobre
+         ellas: quien llegó buscando un dato puede seguir al informe sin tener
+         que ir a buscarlo. Sale del sitio, así que se avisa con la flechita y
+         se abre aparte para no perder la consulta que la persona venía haciendo. -->
+    <div class="grupo">Análisis de la Fundación</div>
+    <a class="afuera" href="https://fundacionkent.org/articulos/" target="_blank"
+       rel="noopener noreferrer">Informes y artículos <span aria-hidden="true">↗</span></a>
     <div class="grupo">Verificación y método</div>
     <a href="#que-se-publica">Qué se publica hoy</a>
     <a href="#de-donde-sale">De dónde sale y qué falta</a>
@@ -3945,7 +3957,7 @@
       const abierto = inf.classList.toggle('desplegado');
       bt.setAttribute('aria-expanded', abierto ? 'true' : 'false');
       bt.textContent = abierto ? 'Ocultar el informe' : 'Ver el informe completo';
-      if(abierto) inf.scrollIntoView({behavior:'smooth', block:'start'});
+      if(abierto) irAlResultado(inf);
     });
   })();
 
@@ -4992,6 +5004,34 @@
           + '</span><span class="badge medio">eje</span></div></div>').join('');
   }
 
+  // LA BÚSQUEDA CONTESTA AUNQUE NO HAYA UN PAÍS ELEGIDO.
+  //
+  // Buscar un tema antes de elegir un país no es un error del lector: es el
+  // orden natural —primero qué me interesa, después dónde—. Antes esa puerta
+  // estaba cerrada y la búsqueda devolvía silencio.
+  function resultadosDeLaRegion(){
+    const vive = m => !m.disponible || m.disponible();
+    const hallan = MATERIAS().filter(vive).filter(m => sinTilde(m.eje + ' ' + m.rotulo
+        + ' ' + (m.busca || PALABRAS[m.clave] || '')).includes(navBusca));
+    if(!hallan.length) return sinResultados();
+    const q = esc((document.getElementById('buscar-navegador') || {}).value || navBusca);
+    let h = '<div class="asunto"><h4>' + hallan.length + (hallan.length === 1
+        ? ' tema responde' : ' temas responden') + ' a «' + q + '»</h4>'
+      + '<div class="foot"><span class="porque">Tocá uno y el mapa lo pinta para los 33 '
+      + 'Estados. Para ver las cifras de un Estado en particular, elegilo arriba o tocalo '
+      + 'en el mapa.</span><span class="badge unica">en toda la región</span></div></div>';
+    ORDEN_EJES.forEach(eje => {
+      const dele = hallan.filter(m => m.eje === eje);
+      if(!dele.length) return;
+      h += '<div class="hallazgos"><b class="hallazgos-eje">' + esc(eje) + '</b>'
+        + '<div class="elegidos">' + dele.map(m =>
+            '<button class="quita" type="button" data-al-mapa="'
+            + esc(claveDeCapa(m.clave) || m.clave) + '"><b>' + esc(m.rotulo)
+            + '</b><span>\u203a</span></button>').join('') + '</div></div>';
+    });
+    return h;
+  }
+
   function navegadorVista(){
     const panel = document.getElementById('panel-navegador');
     const ruta = document.getElementById('ruta-navegador');
@@ -5001,11 +5041,16 @@
     const iso = paisFiltro;
     if(!iso){
       ruta.innerHTML = '';
-      panel.innerHTML = '<div class="asunto"><h4>Elegí un país</h4><div class="foot">'
+      // Si hay una palabra buscada, se contesta: la falta de país no es motivo
+      // para no responder una pregunta que el registro sabe contestar.
+      panel.innerHTML = navBusca ? resultadosDeLaRegion()
+        : '<div class="asunto"><h4>Elegí un país</h4><div class="foot">'
         + '<span class="porque">Tocá un Estado en el mapa, o elegilo en la lista de arriba. '
         + 'Desde acá se baja por sus ejes hasta el dato, y se puede comparar con otros.'
+        + '<br>También podés <b>buscar un tema por palabra</b> sin elegir ningún país: '
+        + 'escribí «cocaína», «coima» o «ciberataque» en «Buscar por palabra».'
         + '</span></div></div>';
-      if(tag) tag.textContent = 'sin país elegido';
+      if(tag) tag.textContent = navBusca ? 'búsqueda en los 33' : 'sin país elegido';
       tablaComparacion();
       return;
     }
@@ -5050,7 +5095,7 @@
       sel.value = 'p:' + b.dataset.vaA;
       sel.dispatchEvent(new Event('change'));
       revelar('ficha-pais');
-      document.getElementById('ficha-pais')?.scrollIntoView({behavior:'smooth', block:'start'});
+      irAlResultado('#ficha-pais');
     });
   }
 
@@ -5284,7 +5329,7 @@
       const mapa = ev.target.closest('[data-al-mapa]');
       if(mapa){
         capaActiva = mapa.dataset.alMapa; repintar();
-        document.getElementById('mapa')?.scrollIntoView({behavior:'smooth', block:'center'});
+        irAlResultado('#mapa');
         return;
       }
       if(mat){ navMateria = mat.dataset.materia; repintar(); return; }
@@ -6786,7 +6831,7 @@
       sel.value = 'p:' + el.dataset.iso;
       sel.dispatchEvent(new Event('change'));
       revelar('ficha-pais');
-      document.getElementById('ficha-pais')?.scrollIntoView({behavior:'smooth', block:'start'});
+      irAlResultado('#ficha-pais');
     });
 
     // Con el teclado responde igual: un gráfico que sólo obedece al mouse deja
@@ -9002,7 +9047,8 @@
   // desorienta en vez de ayudar. Y respeta a quien pidió menos movimiento en su
   // sistema: para esa persona el salto es seco, no deslizado.
   function irAlResultado(qué){
-    const destino = document.querySelector(qué) || document.getElementById('mapa');
+    const destino = (qué && qué.nodeType === 1) ? qué
+                  : (document.querySelector(qué) || document.getElementById('mapa'));
     if(!destino) return;
     const barra = document.querySelector('.topbar');
     const alto = barra ? barra.getBoundingClientRect().height : 0;
@@ -10977,14 +11023,14 @@
         aplicarNivel(); repintar();
       }
       revelar(destino);
-      setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'start'}), 30);
+      setTimeout(() => irAlResultado(el), 30);
     };
     const activar = t => {
       const mat = t.closest('[data-ir-materia]');
       if(mat){ revelar('seis-materias'); ir('materia-' + mat.dataset.irMateria); return; }
       const cap = t.closest('[data-capa]');
       if(cap){ capaActiva = cap.dataset.capa; repintar();
-               document.getElementById('mapa')?.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+               irAlResultado('#mapa'); return; }
       const sec = t.closest('[data-ir-seccion]');
       if(sec && sec.dataset.irSeccion) ir(sec.dataset.irSeccion);
     };
@@ -11857,7 +11903,7 @@
           bt.addEventListener('click', () => {
             capaActiva = bt.dataset.alMapa;
             repintar();
-            document.getElementById('mapa')?.scrollIntoView({behavior:'smooth', block:'center'});
+            irAlResultado('#mapa');
           }));
       }
     }
