@@ -2396,6 +2396,7 @@
     <a href="#metodo-busqueda">Cómo se busca</a>
     <div class="grupo">Eje · Desarrollo</div>
     <a href="#desarrollo">Desarrollo</a>
+    <a href="#educacion">Educación</a>
     <!-- Riesgo y ambiente NO es ninguno de los cuatro y no se lo fuerza a
          serlo: sismos, desastres y fuego condicionan a los cuatro y no
          dependen de ninguno. -->
@@ -3607,6 +3608,28 @@
       <div class="grid-cards" id="tarj-materias"></div>
       <div id="vac-materias"></div>
         </div>
+    <div class="categoria" id="educacion" data-nivel="2">
+      <div class="categoria-head"><h3>Educación</h3><span class="tag" id="tag-educacion">—</span></div>
+      <details class="aviso-cobertura"><summary>no dicen nada sobre la calidad de lo que se enseña</summary>
+        <p>Tres preguntas: <b>cuánto pone el Estado</b>, <b>quién queda afuera</b> y <b>hasta
+           dónde llega quien entra</b>. Era la materia que este eje no medía en absoluto.</p>
+        <p><b>Ninguna de estas cifras dice nada sobre la calidad de lo que se enseña.</b> Un
+           Estado puede tener a todos sus chicos adentro de la escuela y enseñarles poco. La
+           medición de aprendizajes existe, se hace con pruebas que no cubren a los 33
+           Estados, y cuando los cubran entra.</p>
+        <p>«Fuera de la escuela» es una <b>tasa y no un recuento</b> —un recuento premia al
+           Estado grande por ser grande— y cuenta a quienes no están matriculados: <b>no
+           cuenta a quienes están matriculados y no van</b>, que en varios Estados del
+           padrón es un problema tan grande y que nadie mide con la misma vara.</p>
+        <p>La matrícula terciaria es una razón <b>bruta</b>: puede pasar de 100 cuando
+           estudia gente mayor. Y la alfabetización se releva en buena parte
+           <b>preguntando si sabe leer</b>, no tomando una prueba, lo que tiende a
+           sobrestimar.</p>
+      </details>
+      <div class="procedencia" id="proc-educacion">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-educacion"></div>
+      <div id="vac-educacion"></div>
+        </div>
     <div class="categoria" id="condiciones" data-nivel="3">
       <div class="categoria-head"><h3>Condiciones de vida y desigualdad</h3><span class="tag" id="tag-condiciones">—</span></div>
       <details class="aviso-cobertura"><summary>La pobreza según línea nacional no es comparable entre países</summary>
@@ -4374,6 +4397,11 @@
     bosque: 'bosque deforestacion selva amazonia ambiente',
     perdida_bosque: 'bosque deforestacion tala hectareas selva amazonia incendio flora',
     policias: 'policia policias fuerza seguridad efectivos agentes',
+    gasto_educacion: 'educacion gasto presupuesto escuela inversion estudiantes',
+    fuera_escuela: 'educacion escuela chicos ninos desercion abandono primaria',
+    termina_secundaria: 'educacion secundaria egreso terminan graduados colegio',
+    matricula_terciaria: 'educacion universidad terciaria superior estudiantes',
+    alfabetizacion: 'educacion alfabetizacion analfabetismo leer escribir',
     gasto_seguridad: 'gasto presupuesto seguridad policia justicia carceles inversion',
     gasto_seguridad_publico: 'gasto presupuesto seguridad justicia parte del estado',
     gasto_defensa_fmi: 'gasto presupuesto defensa militar fmi segunda fuente',
@@ -7212,7 +7240,7 @@
   // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
   // agregar un colector nuevo no obligue a tocar el resto de la página.
   const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti,
-                            almacen.cepal, almacen.gasto].filter(Boolean);
+                            almacen.cepal, almacen.gasto, almacen.unesco].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -11703,6 +11731,8 @@
     seriesEnSeccion();
     tarjetasBanco(['homicidios','policias'],'violencia');
     tarjetasBanco(['gasto_seguridad','gasto_seguridad_publico'],'presupuesto-seguridad');
+    tarjetasBanco(['fuera_escuela','termina_secundaria','matricula_terciaria',
+                   'alfabetizacion','gasto_educacion'],'educacion');
     tarjetasBanco(['corrupcion','estado_derecho','estabilidad','voz_rendicion',
                    'calidad_regulatoria'],'institucional');
     tarjetasBanco(['urbanizacion','asentamientos'],'urbano');
@@ -15301,6 +15331,20 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-control','índice Bertelsmann',err.message);
       document.getElementById('proc-control').textContent='Sin registro disponible.'; marcador(); });
+
+  // EDUCACION, que este registro no medía. Conjunto propio, con su licencia.
+  Promise.all([traer('unesco.json'), traer('estado/unesco.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.unesco=d; dominios+=Object.keys(d.cobertura||{}).length;
+      pintarProcedencia('proc-educacion', d.procedencia);
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-educacion',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-educacion','UNESCO',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-educacion','UNESCO',err.message);
+      document.getElementById('proc-educacion').textContent='Sin registro disponible.'; marcador(); });
 
   // EL GASTO DEL ESTADO POR FUNCION. Conjunto propio, con su procedencia y su
   // calificacion: no se lo cuelga del Banco Mundial, que es otra fuente.

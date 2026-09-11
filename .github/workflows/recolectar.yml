@@ -109,6 +109,13 @@ jobs:
       # que hoy no existe en la region.
       # GASTO DEL ESTADO POR FUNCION: seguridad y defensa, con serie larga. Es
       # otra fuente y por eso es otro conjunto: no se le cuelga al Banco Mundial.
+      # EDUCACION, la materia que el eje Desarrollo no medía en absoluto.
+      - name: Educación
+        id: unesco
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/unesco.py
+
       - name: Gasto en seguridad y defensa
         id: gasto_publico
         continue-on-error: true
@@ -499,6 +506,7 @@ jobs:
           [ "${{ steps.unidades.outcome }}" = "failure" ] && { echo "Falló el padrón de unidades de primer orden."; fallo=1; }
           [ "${{ steps.subnacional_datos.outcome }}" = "failure" ] && { echo "Falló el dato subnacional por unidad."; fallo=1; }
           [ "${{ steps.gasto_publico.outcome }}" = "failure" ] && { echo "Falló el gasto en seguridad y defensa."; fallo=1; }
+          [ "${{ steps.unesco.outcome }}" = "failure" ] && { echo "Falló educación."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
           # La auditoría no es un colector: no falla porque una fuente no
