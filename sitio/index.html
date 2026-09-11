@@ -9503,11 +9503,21 @@
   // clickeaba y no pasaba nada. Un menu que promete lo que no entrega es peor
   // que un menu corto. No se decide a mano cual va en cual: se le PREGUNTA al
   // destino, de modo que mover una seccion de nivel arregla el panel solo.
+  // Plegado no es ausente. Una categoria dentro de una seccion plegada mide
+  // cero y sin embargo existe: tocarla despliega la seccion y baja hasta ella.
+  // Lo que de veras no existe en este nivel es lo que ni siquiera tiene su
+  // seccion a la vista.
+  function destinoDisponible(el){
+    if(!el) return false;
+    if(el.getBoundingClientRect().height > 0) return true;
+    const sec = el.closest('section');
+    return !!sec && sec.getBoundingClientRect().height > 0;
+  }
+
   function panelDelNivel(){
     document.querySelectorAll('nav.rail a[href^="#"]').forEach(a => {
       const destino = document.getElementById(a.getAttribute('href').slice(1));
-      const visible = destino && destino.getBoundingClientRect().height > 0;
-      a.hidden = !visible;
+      a.hidden = !destinoDisponible(destino);
     });
     // Un rotulo de grupo sin ningun destino debajo tampoco tiene sentido.
     document.querySelectorAll('nav.rail .grupo').forEach(g => {
@@ -9761,8 +9771,7 @@
     // La barra lateral solo lista lo que en este nivel existe.
     document.querySelectorAll('nav.rail a[href^="#"]').forEach(a=>{
       const destino = document.getElementById(a.getAttribute('href').slice(1));
-      const oculto = destino && destino.offsetParent === null && destino.dataset.nivel;
-      a.style.display = oculto ? 'none' : '';
+      a.style.display = destinoDisponible(destino) ? '' : 'none';
     });
     document.querySelectorAll('nav.rail .grupo').forEach(g=>{
       let hay = false, n = g.nextElementSibling;
