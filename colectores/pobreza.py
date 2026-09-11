@@ -71,6 +71,54 @@ UMBRALES = [
 ]
 
 
+# LAS MATERIAS. Este conjunto existía y no era una materia: alimentaba una vista
+# propia y nada más. La pobreza la medía solo el Banco Mundial, con la línea
+# nacional de cada Estado; esta la mide con metodología propia y comparable, que
+# es otra manera de contar pobres.
+MATERIAS_POBREZA = [
+    {"clave": "pobreza_cepal", "campo": "pobreza",
+     "rotulo": "Pobreza · segunda fuente", "eje": "Desarrollo",
+     "unidad": "% de las personas", "mas_es_peor": True,
+     "cautela": "SEGUNDA MEDICIÓN de algo que el registro ya publica con el Banco Mundial. "
+                "No miden lo mismo de la misma manera: aquella usa la línea de pobreza que "
+                "fija cada Estado, y esta una metodología regional comparable. Si difieren, "
+                "la diferencia dice cómo define la pobreza cada quien, no quién se equivoca."},
+    {"clave": "pobreza_extrema", "campo": "extrema",
+     "rotulo": "Pobreza extrema", "eje": "Desarrollo",
+     "unidad": "% de las personas", "mas_es_peor": True,
+     "cautela": "Quienes no cubren la canasta básica de alimentos. Es el piso duro: por "
+                "debajo de esta línea no se trata de desigualdad sino de hambre."},
+    {"clave": "vulnerabilidad", "campo": "vulnerabilidad",
+     "rotulo": "Población vulnerable a la pobreza", "eje": "Desarrollo",
+     "unidad": "% de las personas", "mas_es_peor": True,
+     "cautela": "Quienes no son pobres hoy y caerían con un golpe —una enfermedad, un "
+                "despido, una devaluación—. Es la medida que explica por qué la pobreza "
+                "sube tan rápido en las crisis de esta región."},
+]
+
+
+def _ficha(serie, campo):
+    """La forma que usa todo el registro para cualquier serie."""
+    puntos = [(x["anio"], x[campo]) for x in serie
+              if x.get(campo) is not None and x.get("anio")]
+    if not puntos:
+        return None
+    puntos.sort()
+    anio, valor = puntos[-1]
+    ant = puntos[-2] if len(puntos) >= 2 else None
+    return {
+        "valor": valor, "anio": anio,
+        "anio_anterior": ant[0] if ant else None,
+        "valor_anterior": ant[1] if ant else None,
+        "variacion_pct": (round((valor - ant[1]) / abs(ant[1]) * 100, 1)
+                          if ant and ant[1] else None),
+        "anio_inicial": puntos[0][0], "valor_inicial": puntos[0][1],
+        "tendencia_ventana_pct": (round((valor - puntos[0][1]) / abs(puntos[0][1]) * 100, 1)
+                                  if len(puntos) >= 3 and puntos[0][1] else None),
+        "serie": [{"anio": a, "valor": v} for a, v in puntos],
+    }
+
+
 def _pedir(ruta: str) -> dict:
     url = f"{BASE}/{ruta}"
     ultimo = ""
@@ -229,6 +277,14 @@ def recolectar():
               "encuesta nacional."),
     )
 
+    for r in registros:
+        fichas = {}
+        for m in MATERIAS_POBREZA:
+            f = _ficha(r.get("serie") or [], m["campo"])
+            if f:
+                fichas[m["clave"]] = f
+        r["indicadores"] = fichas   # siempre presente, vacío si no hay serie
+
     return comun.escribir(
         colector="pobreza",
         capa="publico",
@@ -238,6 +294,13 @@ def recolectar():
         registros=registros,
         vacios=vacios,
         extra={
+            "indicadores": [{"clave": m["clave"], "rotulo": m["rotulo"], "eje": m["eje"],
+                             "unidad": m["unidad"], "mas_es_peor": m["mas_es_peor"],
+                             "origen": "CEPALSTAT — Comisión Económica para América Latina y el Caribe",
+                             "cautela": m["cautela"]} for m in MATERIAS_POBREZA],
+            "cobertura": {m["clave"]: sum(1 for r in registros
+                                          if (r.get("indicadores") or {}).get(m["clave"]))
+                          for m in MATERIAS_POBREZA},
             "resumen": {
                 "indicador": (cuerpo.get("metadata") or {}).get("indicator_name"),
                 "unidad": (cuerpo.get("metadata") or {}).get("unit"),

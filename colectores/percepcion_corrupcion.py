@@ -62,6 +62,28 @@ MINIMO_PAISES = 150  # la edición verificada trae 180
 ESPERADO = {"A": "country", "B": "iso3", "D": "cpi 2024 score", "E": "rank"}
 
 
+def _ficha(serie, campo):
+    """La forma que usa todo el registro para cualquier serie."""
+    puntos = [(x["anio"], x[campo]) for x in serie
+              if x.get(campo) is not None and x.get("anio")]
+    if not puntos:
+        return None
+    puntos.sort()
+    anio, valor = puntos[-1]
+    ant = puntos[-2] if len(puntos) >= 2 else None
+    return {
+        "valor": valor, "anio": anio,
+        "anio_anterior": ant[0] if ant else None,
+        "valor_anterior": ant[1] if ant else None,
+        "variacion_pct": (round((valor - ant[1]) / abs(ant[1]) * 100, 1)
+                          if ant and ant[1] else None),
+        "anio_inicial": puntos[0][0], "valor_inicial": puntos[0][1],
+        "tendencia_ventana_pct": (round((valor - puntos[0][1]) / abs(puntos[0][1]) * 100, 1)
+                                  if len(puntos) >= 3 and puntos[0][1] else None),
+        "serie": [{"anio": a, "valor": v} for a, v in puntos],
+    }
+
+
 def _cadenas(z: zipfile.ZipFile) -> list:
     """Una entrada por cadena, aunque el formato la parta en fragmentos."""
     crudo = z.read("xl/sharedStrings.xml").decode("utf-8", "replace")
@@ -265,6 +287,10 @@ def recolectar():
               "el puntaje que el índice asignó, con su incertidumbre declarada."),
     )
 
+    for r in registros:
+        f = _ficha(r.get("serie") or [], "puntaje")
+        r["indicadores"] = {"percepcion_corrupcion": f} if f else {}
+
     return comun.escribir(
         colector="percepcion_corrupcion",
         capa="publico",
@@ -274,6 +300,24 @@ def recolectar():
         registros=registros,
         vacios=vacios,
         extra={
+            # LA MATERIA. El conjunto existía y no se podía pintar, cruzar ni contar:
+            # alimentaba una vista propia. La corrupción la medían el Banco Mundial y
+            # V-Dem, las dos por evaluación de especialistas; esta combina trece
+            # fuentes independientes y publica su error estándar.
+            "indicadores": [{
+                "clave": "percepcion_corrupcion",
+                "rotulo": "Percepción de corrupción",
+                "eje": "Gobernanza",
+                "unidad": "puntaje de 0 a 100",
+                "mas_es_peor": False,
+                "origen": "Transparency International — Índice de Percepción de la Corrupción",
+                "cautela": "MIDE PERCEPCIÓN, no hechos: combina evaluaciones de especialistas "
+                           "y encuestas a empresarios. Cien es el mejor puntaje posible. No "
+                           "se compara con el Índice de Opacidad de esta casa, que mide actos "
+                           "observables: son dos cosas distintas y confundirlas seria un error.",
+            }],
+            "cobertura": {"percepcion_corrupcion": sum(
+                1 for r in registros if (r.get("indicadores") or {}).get("percepcion_corrupcion"))},
             "resumen": {
                 "anio": anio,
                 "estados_en_el_indice": len(evaluados),

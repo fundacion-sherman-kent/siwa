@@ -4426,6 +4426,10 @@
     polarizacion: 'polarizacion grieta division politica fimi infoxicacion desinformacion',
     gini: 'desigualdad inequidad brecha ricos pobres',
     pobreza: 'pobreza indigencia carencia',
+    pobreza_cepal: 'pobreza indigencia carencia cepal segunda fuente',
+    pobreza_extrema: 'pobreza extrema indigencia hambre canasta basica',
+    vulnerabilidad: 'vulnerabilidad pobreza riesgo caer clase media',
+    percepcion_corrupcion: 'corrupcion percepcion transparencia internacional indice ipc',
     empleo_informal: 'informalidad trabajo negro empleo informal',
     empleo_informal_oit: 'informalidad trabajo negro empleo informal oit segunda fuente',
     desempleo_joven_oit: 'desempleo jovenes desocupacion oit segunda fuente',
@@ -7293,7 +7297,8 @@
   // agregar un colector nuevo no obligue a tocar el resto de la página.
   const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti,
                             almacen.cepal, almacen.gasto, almacen.unesco,
-                            almacen.oit, almacen.salud, almacen.prensa].filter(Boolean);
+                            almacen.oit, almacen.salud, almacen.prensa,
+                            almacen.pobreza, almacen.percepcion_corrupcion].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -7309,13 +7314,17 @@
   }
   function filasDe(clave){
     const f=conjuntoDe(clave);
-    return f ? (f.registros||[]).filter(r=>r.indicadores[clave])
+    // UN REGISTRO PUEDE NO TENER FICHAS. Pasa cuando la fuente no evalúa a ese
+    // Estado —ocho del padrón quedan fuera de la clasificación de prensa— y el
+    // conjunto igual lo incluye para decir que no lo mide. Sin esta guarda, un
+    // solo registro sin fichas tumbaba el mapa, las figuras y el colofón.
+    return f ? (f.registros||[]).filter(r=>(r.indicadores||{})[clave])
                  .map(r=>({pais:r.pais, iso:r.iso, ...r.indicadores[clave]})) : [];
   }
   const datoDe = (clave, iso) => {
     const f=conjuntoDe(clave);
     const r=f&&(f.registros||[]).find(x=>x.iso===iso);
-    return r ? r.indicadores[clave] : null;
+    return r ? (r.indicadores||{})[clave] : null;
   };
 
   const COLOR_CERO = 'rgba(125,144,168,.30)';   // ni naranja ni verde: sin casos
@@ -11788,8 +11797,8 @@
     tarjetasBanco(['esperanza_vida','mortalidad_materna'],'salud');
     tarjetasBanco(['fuera_escuela','termina_secundaria','matricula_terciaria',
                    'alfabetizacion','gasto_educacion'],'educacion');
-    tarjetasBanco(['corrupcion','estado_derecho','estabilidad','voz_rendicion',
-                   'calidad_regulatoria'],'institucional');
+    tarjetasBanco(['corrupcion','percepcion_corrupcion','estado_derecho','estabilidad',
+                   'voz_rendicion','calidad_regulatoria'],'institucional');
     tarjetasBanco(['urbanizacion','asentamientos'],'urbano');
     tarjetasBanco('industria','industrial');
     tarjetasBanco(['minerales','rentas_naturales'],'materias');

@@ -162,6 +162,7 @@ def recolectar():
     # queda con la ultima. Un punto solo se dibuja igual, y no se finge historia.
     for r in registros:
         if r.get("puntaje") is None:
+            r["indicadores"] = {}   # se declara vacío, no ausente
             continue
         r["indicadores"] = {"libertad_prensa": {
             "valor": r["puntaje"], "anio": anio,
