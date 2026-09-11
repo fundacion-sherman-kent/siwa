@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-11T21:25:55+00:00",
+  "corrida": "2026-09-11T22:26:03+00:00",
   "medidas_con_suficientes_casos": 169,
   "pares_probados": 14196,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 14196 pares y el umbral de siempre, alrededor de 709 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2816,
+    "sobreviven": 2818,
     "de_ellos_son_parentescos": 388
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2428,
+  "pistas_totales": 2430,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -184,7 +184,7 @@
       "coeficiente": 0.927,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.538431054567417e-19,
+      "p": 2.8234412109687004e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -372,6 +372,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.899,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.73579251145692e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "migrantes",
       "b": "ransomware:victimas",
       "rotulo_a": "Población migrante que el país aloja",
@@ -380,19 +393,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.3202327060549845e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.894,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.1434642603438187e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -528,19 +528,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.876,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.0036883999721604e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "desempleo_joven",
       "b": "desempleo_oit",
       "rotulo_a": "Desempleo juvenil",
@@ -562,6 +549,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 9.712603388347818e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.873,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.7577491469562997e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -614,6 +614,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 5.01795932795336e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "poblacion",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.871,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.252047212831198e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -679,19 +692,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.379314467919233e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "poblacion",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.869,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.54285434862107e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
