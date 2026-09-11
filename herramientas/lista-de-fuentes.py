@@ -46,6 +46,7 @@ Esto mira una sola cosa: que lo que el registro tiene, el lector lo pueda ver.
 """
 from __future__ import annotations
 
+import collections
 import json
 import re
 import sys
@@ -166,6 +167,19 @@ def main() -> None:
         if archivo in listados:
             fallas.append(f"{archivo} está en la lista Y declarado como excluido: "
                           f"una de las dos cosas sobra")
+
+    # 4. IDENTIFICADORES REPETIDOS EN LA PAGINA. Es la quinta vez en este
+    #    proyecto que un identificador repetido rompe algo en silencio —cuatro
+    #    veces en los flujos del robot y una acá—, y siempre de la misma
+    #    manera: el navegador se queda con el PRIMERO que encuentra, así que una
+    #    sección queda muda y otra muestra la procedencia equivocada. Ninguna
+    #    cifra es falsa y nada avisa. Ya no.
+    ids = re.findall(r'\sid="([^"]+)"', html)
+    for k, n in collections.Counter(ids).items():
+        if n > 1:
+            fallas.append(f"el identificador «{k}» está {n} veces en la página: el "
+                          f"navegador se queda con el primero, así que una sección queda "
+                          f"muda y otra muestra lo que no le corresponde")
 
     visibles = len([k for k in renglones if k in carga])
     print(f"[fuentes] {visibles} fuentes visibles en la lista · "
