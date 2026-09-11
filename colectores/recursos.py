@@ -287,7 +287,7 @@ def construir() -> Path:
 
     medidas = [
         {"clave": m["clave"], "rotulo": m["rotulo"], "eje": "Defensa",
-         "unidad": m["unidad"], "mas_es_peor": False,
+         "unidad": m["unidad"], "mas_es_peor": False, "sin_direccion": True,
          # EL LITIO NO ES DEL ENERGY INSTITUTE. Lo redistribuye Our World in
          # Data pero lo produce el mismo servicio geológico que publica los
          # minerales. Declararlo con el otro origen lo habría hecho contar como
@@ -300,6 +300,7 @@ def construir() -> Path:
         {"clave": "cuota_mineral_mundial",
          "rotulo": "Mayor cuota mundial en un mineral", "eje": "Defensa",
          "unidad": "% de la producción mundial", "mas_es_peor": False,
+         "sin_direccion": True,
          "origen": ORIGEN_USGS,
          "cautela": "Es la cuota del mineral donde el país pesa MÁS en el mundo, y el "
                     "nombre de ese mineral viaja al lado de la cifra. Una cuota alta no "
@@ -309,6 +310,7 @@ def construir() -> Path:
         {"clave": "minerales_escala_mundial",
          "rotulo": "Minerales que produce a escala mundial", "eje": "Defensa",
          "unidad": "recuento de minerales", "mas_es_peor": False,
+         "sin_direccion": True,
          "origen": ORIGEN_USGS,
          "cautela": "Cuenta en cuántos minerales distintos el país aparece en la base "
                     "mundial con producción medible. Es amplitud, no tamaño: un país puede "

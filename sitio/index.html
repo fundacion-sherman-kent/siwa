@@ -11860,7 +11860,16 @@
     tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
     tarjetasBanco(['id_producto','investigadores','articulos_cientificos',
                    'patentes_residentes'],'ciencia-tecnologia');
-    tarjetasBanco(['renta_petroleo','renta_gas','renta_minerales','exporta_combustibles',
+    // LO QUE SE TIENE VA PRIMERO, Y DESPUES DE LO QUE SE DEPENDE. Hasta hoy esta
+    // categoria empezaba por la renta y la importacion —cuanto vale y cuanto
+    // falta—, que son medidas de dependencia. Las siete primeras dicen QUE
+    // PRODUCE cada Estado y cuanto pesa en el mundo, que es la otra mitad de la
+    // pregunta y la que el lector viene a buscar cuando abre «recursos
+    // estrategicos».
+    tarjetasBanco(['cuota_mineral_mundial','minerales_escala_mundial','produccion_litio',
+                   'produccion_petroleo','reservas_petroleo','produccion_gas',
+                   'produccion_carbon',
+                   'renta_petroleo','renta_gas','renta_minerales','exporta_combustibles',
                    'energia_importada','uso_energia','uso_energia_ei','superficie',
                    'poblacion','agua_renovable','tierra_arable'],'recursos-estrategicos');
     tarjetasBanco(['acceso_electricidad','electricidad_por_habitante',
@@ -12076,15 +12085,25 @@
 
     const principal = info(claves[0]);
     const filas = filasDe(claves[0]);
-    const orden = principal.mas_es_peor ? (a,b)=>b.valor-a.valor : (a,b)=>a.valor-b.valor;
+    // HAY MEDIDAS QUE NO TIENEN LADO BUENO NI MALO, y hasta hoy la tarjeta no lo
+    // contemplaba: ordenaba suponiendo que toda cifra alta es buena o mala, y
+    // mostraba «los seis valores más bajos». Con «cuánto del mundo produce este
+    // país» eso escondía el único dato que importa —Brasil con el 92 % del
+    // niobio— y ponía adelante a Jamaica con 1,37 %, que no es ni bueno ni malo.
+    // Una magnitud se ordena de mayor a menor y no se la califica.
+    const sinLado = !!principal.sin_direccion;
+    const orden = sinLado || principal.mas_es_peor ? (a,b)=>b.valor-a.valor
+                                                   : (a,b)=>a.valor-b.valor;
     const ordenadas = filas.slice().sort(orden);
     const todos = verTodos[destino];
     const lista = todos ? ordenadas : ordenadas.slice(0,TOPE);
-    const extremo = principal.mas_es_peor ? 'más altos' : 'más bajos';
+    const extremo = sinLado ? 'mayores' : (principal.mas_es_peor ? 'más altos' : 'más bajos');
     if(tag) tag.textContent = `${filas.length} de 33 Estados · ${esc(principal.unidad||'')}`;
     caja.innerHTML = lista.map(f=>tarjeta(f,principal,f.pais,metaDe(claves[0]))).join('') +
       `<div class="criterio"><span>${todos
-          ? `Los ${filas.length} Estados con dato, ordenados de peor a mejor.`
+          ? (sinLado
+              ? `Los ${filas.length} Estados con dato, de mayor a menor. Esta medida no tiene lado bueno ni malo: es una magnitud.`
+              : `Los ${filas.length} Estados con dato, ordenados de peor a mejor.`)
           : `Criterio: los <b>${lista.length} valores ${extremo}</b> de ${filas.length} Estados con dato. El resto está en el mapa y en el informe.`}
         </span><button class="ver-todos" data-destino="${destino}">${todos?'ver solo los '+TOPE:'ver los '+filas.length}</button></div>`;
     caja.querySelectorAll('.ver-todos').forEach(b=>
