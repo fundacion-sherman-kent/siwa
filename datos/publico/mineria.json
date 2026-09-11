@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-11T19:26:01+00:00",
-  "medidas_con_suficientes_casos": 168,
-  "pares_probados": 14028,
+  "corrida": "2026-09-11T20:26:52+00:00",
+  "medidas_con_suficientes_casos": 169,
+  "pares_probados": 14196,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 14028 pares y el umbral de siempre, alrededor de 701 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2764,
-    "de_ellos_son_parentescos": 386
+    "por_que": "Con 14196 pares y el umbral de siempre, alrededor de 709 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 2819,
+    "de_ellos_son_parentescos": 388
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2378,
+  "pistas_totales": 2431,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -177,6 +177,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.925,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.826322999960158e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -224,19 +237,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.969829993850244e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.918,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.166325688211279e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -385,6 +385,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.893,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.848965404570725e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:anomalias",
       "b": "poblacion",
       "rotulo_a": "ciber · anomalias",
@@ -398,19 +411,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "poblacion",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.889,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.50306562668716e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "ciber:mediciones",
       "b": "poblacion",
       "rotulo_a": "ciber · mediciones",
@@ -419,19 +419,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 9.995655754126103e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.887,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3726138204742348e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -536,6 +523,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 9.871169224018443e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.875,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.257812318433797e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -684,19 +684,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.868,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.9909525015330036e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "aeropuertos",
       "b": "copernicus:escenas",
       "rotulo_a": "Aeropuertos grandes y medianos",
@@ -705,6 +692,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 4.223593808796827e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "poblacion",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.868,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.2490472406673346e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
