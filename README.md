@@ -101,7 +101,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**53 fuentes en servicio**, en 55 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**51 fuentes en servicio**, en 53 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -131,8 +131,6 @@ python colectores/focos.py
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
 | `gasto_publico` | Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics | `B-2` | 22 | 8 |
-| `gdl` | Global Data Lab — Universidad Radboud de Nimega: base de datos subnacional de desarrollo humano, corrupción y demografía | `B-3` | 28 | 7 |
-| `hapi` | HDX HAPI — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA): población base, pobreza multidimensional y riesgo INFORM | `A-2` | 33 | 6 |
 | `indice_opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición uno | `A-1` | 33 | 10 |
 | `memoria` | Fundación Sherman Kent — bitácora de observación de SIWA | `A-2` | 33 | 5 |
 | `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 11 |
