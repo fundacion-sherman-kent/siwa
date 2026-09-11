@@ -1,0 +1,97 @@
+# EL VIGÍA DEL ROBOT — para que una muerte no vuelva a pasar inadvertida.
+#
+# POR QUÉ EXISTE
+# --------------
+# El 11 de septiembre de 2026 el robot de recolección estuvo una hora y cuarto
+# muerto y nadie se enteró. La causa fue mínima: dos pasos con el mismo
+# identificador. GitHub, cuando eso pasa, no salta el paso repetido: RECHAZA EL
+# ARCHIVO ENTERO y deja de correr.
+#
+# Lo grave no fue el error, que se arregla en un minuto. Fue que el silencio se
+# veía igual que el buen funcionamiento: el sitio siguió en pie —los datos
+# publicados no se caen solos— y simplemente dejó de actualizarse. Un registro
+# que dice ser de hoy y trae lo de ayer engaña sin mentir.
+#
+# Se descubrió porque la Dirección miró la pantalla de GitHub. Eso no es un
+# control: es suerte. Y en esta casa, toda disciplina que dependa de que alguien
+# se acuerde se convierte en máquina.
+#
+# POR QUÉ NO VA ADENTRO DE LA RECOLECCIÓN
+# ----------------------------------------
+# Porque un vigía que vive dentro de lo que vigila se muere con ello y no avisa
+# nada. Ese es exactamente el error de diseño que permitió la hora y cuarto: el
+# único que podía detectar la muerte del robot era el robot. Este flujo es un
+# archivo aparte, y GitHub rechaza archivos de a uno: si mañana `recolectar.yml`
+# vuelve a quedar inválido, este sigue corriendo y lo dice.
+#
+# QUÉ MIRA
+# --------
+# Dos cosas, y ninguna es opinable:
+#
+#   1. HACE CUÁNTO QUE NO LLEGA UN DATO NUEVO. La fecha de obtención más
+#      reciente de todo el registro. Si pasó el tope, el robot no está
+#      corriendo, y el porqué se averigua después.
+#   2. SI LOS ARCHIVOS DEL ROBOT SON VÁLIDOS PARA GITHUB. Que es otra cosa que
+#      ser YAML válido, y confundir las dos fue justamente lo que costó la hora
+#      y cuarto: aquel archivo era YAML impecable. Se revisa lo que el lector de
+#      YAML no revisa —identificadores repetidos, pasos sin acción, avisos que
+#      nombran pasos inexistentes—, y se revisa en TODOS los flujos, este
+#      incluido.
+#
+# QUÉ NO MIRA
+# -----------
+# Si los datos son buenos. Dice que llegan y que el robot puede correr. La
+# calidad la miden la auditoría y la regla de las dos fuentes, que son otros
+# controles y corren por su cuenta.
+#
+# QUÉ PASA CUANDO FALLA
+# ----------------------
+# La corrida queda en rojo y GitHub avisa por correo. No se arregla nada solo, a
+# propósito: el rojo es el aviso, y qué hacer depende de qué se rompió.
+
+name: Vigía del robot
+
+on:
+  schedule:
+    # Cada hora a los 47. La recolección corre a los 17, así que esto mira
+    # media hora después de que le tocaba traer algo. El tope de tolerancia son
+    # tres horas: el aviso llega, como mucho, unas horas después de la muerte, y
+    # no al día siguiente ni cuando alguien se acuerde de mirar.
+    - cron: "47 * * * *"
+  # Y antes de que un archivo roto llegue a estar en producción una hora: cada
+  # vez que se toca un flujo o el propio vigía.
+  push:
+    paths:
+      - ".github/workflows/**"
+      - "herramientas/vigia-robot.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  vigilar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # El único agregado. El vigía necesita leer YAML para revisar los flujos;
+      # si esto faltara, el vigía lo declara como falla en vez de callarse.
+      - name: Lector de YAML
+        run: python -m pip install --quiet pyyaml
+
+      - name: ¿El robot sigue vivo?
+        run: python herramientas/vigia-robot.py
+
+      - name: Qué hacer si esto quedó en rojo
+        if: failure()
+        run: |
+          echo "::error::El vigía encontró algo. Arriba está qué, en castellano."
+          echo "::error::Si dice IDENTIFICADOR REPETIDO: GitHub rechazó el archivo"
+          echo "::error::entero y el robot NO está corriendo. Es lo más urgente."
+          echo "::error::Si dice que NO TRAE DATOS NUEVOS: mirar la última corrida"
+          echo "::error::de «Recolectar» y ver qué paso se rompió."
