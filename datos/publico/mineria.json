@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-11T05:25:20+00:00",
+  "corrida": "2026-09-11T06:11:32+00:00",
   "medidas_con_suficientes_casos": 138,
   "pares_probados": 9453,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 9453 pares y el umbral de siempre, alrededor de 472 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 1952,
+    "sobreviven": 1953,
     "de_ellos_son_parentescos": 340
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 1612,
+  "pistas_totales": 1613,
   "anomalias_totales": 221,
   "pistas": [
     {
@@ -90,10 +90,10 @@
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
+      "coeficiente": 0.939,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.150968194373588e-22,
+      "p": 2.9622836271391e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -415,10 +415,10 @@
       "b": "indice_opacidad:opacidad",
       "rotulo_a": "armas · importa_usd",
       "rotulo_b": "indice_opacidad · opacidad",
-      "coeficiente": -0.868,
+      "coeficiente": -0.869,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.1970268223393725e-13,
+      "p": 3.097717749958057e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -510,6 +510,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.5531006020092533e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "poblacion",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.854,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.4623378089271875e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -610,10 +623,10 @@
       "b": "focos:focos",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "focos · focos",
-      "coeficiente": 0.847,
+      "coeficiente": 0.848,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 9.363949215249902e-12,
+      "p": 7.54111920730706e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -679,19 +692,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.6372884961916225e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "poblacion",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.842,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6485022333381005e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
