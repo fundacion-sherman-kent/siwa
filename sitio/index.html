@@ -12197,7 +12197,14 @@
     const m = magnitud(f.valor, info.unidad);
     return `<div class="card"><h4>${esc(paisFiltro ? (info.rotulo||nombre) : nombre)}</h4>
       <div class="value">${m.texto}</div>
-      <div class="sub">${esc(m.unidad)}${
+      <div class="sub">${esc(
+        /* «1 puntos de amarre» se lee mal y el registro cuida la lengua. Cuando
+           la materia declara su singular y el valor es uno, se usa. */
+        (f.valor === 1 && info.unidad_singular) ? info.unidad_singular : m.unidad)}${
+        /* POR QUÉ ESE CERO. Bolivia y el Paraguay encabezan los cables con cero
+           porque no tienen costa, no porque sean los más frágiles. Sin decirlo,
+           el orden miente sin que ninguna cifra sea falsa. */
+        f.nota ? ` <span class="edad">${esc(f.nota)}</span>` : ''}${
         /* DE QUÉ. «Brasil, 92,29 % de la producción mundial» sin decir de qué
            mineral no informa: invita a entender que Brasil produce el 92 % de
            los minerales del mundo. Cuando la ficha trae el nombre, va acá. */
