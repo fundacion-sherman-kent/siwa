@@ -2395,7 +2395,7 @@
     <a href="#gobernanza">Instituciones y democracia</a>
     <a href="#transparencia">Transparencia y control</a>
     <a href="#opacidad-seccion">Índice de Opacidad</a>
-    <a href="#censo-subnacional">Lo que no se publica por dentro</a>
+    <a href="#lo-que-no-se-publica">Lo que no se publica por dentro</a>
     <a href="#metodo-busqueda">Cómo se busca</a>
     <div class="grupo">Eje · Desarrollo</div>
     <a href="#desarrollo">Desarrollo</a>
@@ -3617,7 +3617,7 @@
          Dirección. No llega. Pero al medirlo apareció el inventario de qué
          Estados no publican NADA por debajo del nivel de país, que no lo
          publica nadie y es de la misma familia que el Índice de Opacidad. -->
-    <section class="domain bloque" id="censo-subnacional" data-nivel="2">
+    <section class="domain bloque" id="lo-que-no-se-publica" data-nivel="2">
       <div class="bloque-head"><h2>Lo que no se publica por dentro</h2></div>
       <p class="bloque-bajada">Casi todo lo que se sabe de la región está medido por país.
          Esta sección cuenta qué se puede saber <b>por provincia, departamento o estado</b>,
@@ -3625,7 +3625,7 @@
 
       <div class="categoria" id="censo-unidades" data-nivel="2">
         <div class="categoria-head"><h3>Qué hay por unidad, y de cuántos Estados</h3>
-          <span class="tag" id="tag-censo">—</span></div>
+          <span class="tag" id="tag-censo-unidades">—</span></div>
         <details class="aviso-cobertura"><summary>Qué significa esta cuenta, y qué no</summary>
           <p><b>Cuenta disponibilidad, no calidad.</b> Que un Estado figure acá con eventos
              de conflicto por provincia <b>no lo convierte en un Estado con estadística de
@@ -3638,9 +3638,14 @@
           <p><b>Las fuentes nacionales se cuentan una por una.</b> No hay ninguna interfaz
              regional que las junte, y esa ausencia es en sí misma un dato sobre la región.</p>
         </details>
-        <div class="procedencia" id="proc-censo">Cargando el registro…</div>
-        <div id="tarj-censo"></div>
-        <div id="vac-censo"></div>
+        <!-- LOS CUATRO IDENTIFICADORES LLEVAN SUFIJO A PROPOSITO. Sin el, chocaban
+             con los de «Que publica cada provincia de si misma», que es otra
+             seccion y otro conjunto: el navegador se queda con el PRIMERO que
+             encuentra, asi que esta seccion quedaba muda y la otra mostraba la
+             procedencia equivocada. Ninguna cifra era falsa y nada avisaba. -->
+        <div class="procedencia" id="proc-censo-unidades">Cargando el registro…</div>
+        <div id="tarj-censo-unidades"></div>
+        <div id="vac-censo-unidades"></div>
       </div>
     </section>
     <section class="domain bloque" id="desarrollo" data-nivel="3">
@@ -12066,12 +12071,12 @@
   // a menor pondría a Colombia con dos categorías al frente y dejaría el hueco
   // —trece Estados sin nada— abajo de todo, donde nadie llega.
   function pintarCenso(){
-    const d = almacen.censo, caja = document.getElementById('tarj-censo');
+    const d = almacen.censo, caja = document.getElementById('tarj-censo-unidades');
     if(!caja || !d) return;
     const u = d.umbral || {};
     const sinNada = (d.registros||[]).filter(r => !r.cuantas);
     const conAlgo = (d.registros||[]).filter(r => r.cuantas);
-    const tag = document.getElementById('tag-censo');
+    const tag = document.getElementById('tag-censo-unidades');
     if(tag) tag.textContent = `${sinNada.length} de 33 Estados sin nada por unidad`;
 
     const fila = r => `<tr><td>${esc(r.pais)}</td><td class="num">${r.cuantas}</td>
@@ -15591,14 +15596,14 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   Promise.all([traer('censo_subnacional.json'), traer('estado/censo_subnacional.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.censo=d;
-      pintarProcedencia('proc-censo', d.procedencia);
-      vacios+=pintarVacios('vac-censo', d.procedencia.vacios_declarados);
+      pintarProcedencia('proc-censo-unidades', d.procedencia);
+      vacios+=pintarVacios('vac-censo-unidades', d.procedencia.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++;
-        pintarFalla('tarj-censo','censo subnacional',estado.mensaje,d.procedencia); }
+        pintarFalla('tarj-censo-unidades','censo subnacional',estado.mensaje,d.procedencia); }
       pintarCenso(); marcador();
     })
-    .catch(err=>{ noLlego++; pintarNoLlego('tarj-censo','censo subnacional',err.message);
-      const p=document.getElementById('proc-censo');
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-censo-unidades','censo subnacional',err.message);
+      const p=document.getElementById('proc-censo-unidades');
       if(p) p.textContent='Sin registro disponible.'; marcador(); });
 
   // INFRAESTRUCTURAS CRITICAS: por donde entra y sale un pais. Cables
