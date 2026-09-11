@@ -112,6 +112,36 @@ SERIES = [
      "cautela": "Misma advertencia: LA SERIE TERMINA EN 2021. Cuenta hechos "
                 "registrados, de modo que un Estado con mejor registro puede aparecer "
                 "peor que uno que no lleva la cuenta."},
+    {"clave": "uso_energia_ei", "slug": "per-capita-energy-use",
+     "columna": "total_energy_supply_per_capita_kwh",
+     "rotulo": "Uso de energía por habitante · segunda fuente", "eje": "Defensa",
+     "unidad": "kilovatios hora por persona", "mas_es_peor": False,
+     "origen": "Energy Institute, Revisión Estadística de la Energía Mundial, via Our "
+               "World in Data",
+     "cautela": "SEGUNDA FUENTE de algo que el registro ya publica con el Banco Mundial, "
+                "y de un productor de veras distinto: aquella cifra la arma la Agencia "
+                "Internacional de Energia y esta un instituto independiente. La unidad no "
+                "es la misma —acá kilovatios hora, alla kilos equivalentes de petroleo— "
+                "asi que no se comparan los numeros: se comparan los ORDENES y las "
+                "tendencias."},
+    {"clave": "electricidad_renovable", "slug": "share-electricity-renewables",
+     "columna": "renewable_share_of_electricity__pct",
+     "rotulo": "Electricidad de fuentes renovables", "eje": "Defensa",
+     "unidad": "% de la electricidad generada", "mas_es_peor": False,
+     "origen": "Energy Institute y Ember, via Our World in Data",
+     "cautela": "Que parte de la electricidad de cada Estado NO viene de quemar "
+                "combustible. En esta region la cifra es alta por razones viejas —la "
+                "hidroelectrica de los grandes rios— y no por politica reciente: un valor "
+                "alto no prueba una transicion en curso. Y la hidroelectrica depende de "
+                "que llueva: una sequia la baja sin que cambie nada de la infraestructura."},
+    {"clave": "electricidad_por_habitante", "slug": "per-capita-electricity-generation",
+     "columna": "per_capita_total_generation__kwh",
+     "rotulo": "Electricidad generada por habitante", "eje": "Defensa",
+     "unidad": "kilovatios hora por persona", "mas_es_peor": False,
+     "origen": "Energy Institute y Ember, via Our World in Data",
+     "cautela": "Cuanta electricidad produce el pais por cada habitante. Se lee junto al "
+                "acceso a la electricidad y a las perdidas de transmision: generar mucho "
+                "no sirve si se pierde en el camino o no llega."},
     {"clave": "perdida_bosque", "slug": "tree-cover-loss",
      "columna": "tree_cover_loss_ha__category_total",
      "rotulo": "Bosque perdido", "eje": "Seguridad",

@@ -157,6 +157,20 @@ def recolectar():
               "independiente."),
     )
 
+    # La ficha por Estado, con la forma que usa todo el registro. Es un punto y
+    # no una serie: la fuente publica una edicion por anio y este colector se
+    # queda con la ultima. Un punto solo se dibuja igual, y no se finge historia.
+    for r in registros:
+        if r.get("puntaje") is None:
+            continue
+        r["indicadores"] = {"libertad_prensa": {
+            "valor": r["puntaje"], "anio": anio,
+            "anio_anterior": None, "valor_anterior": None, "variacion_pct": None,
+            "anio_inicial": anio, "valor_inicial": r["puntaje"],
+            "tendencia_ventana_pct": None,
+            "serie": [{"anio": anio, "valor": r["puntaje"]}],
+        }}
+
     return comun.escribir(
         colector="prensa_libre",
         capa="publico",
@@ -166,6 +180,25 @@ def recolectar():
         registros=registros,
         vacios=vacios,
         extra={
+            # LA MATERIA. Hasta hoy este conjunto alimentaba una vista propia y
+            # nada mas: no se podia pintar en el mapa, ni cruzar con otro tema, ni
+            # lo contaba la regla de las dos fuentes. El dato estaba; lo que
+            # faltaba era declararlo como materia del registro.
+            "indicadores": [{
+                "clave": "libertad_prensa",
+                "rotulo": "Libertad de prensa — clasificación mundial",
+                "eje": "Gobernanza",
+                "unidad": "puntaje de 0 a 100",
+                "mas_es_peor": False,
+                "origen": "Reporteros Sin Fronteras — clasificación mundial de la "
+                          "libertad de prensa",
+                "cautela": "SEGUNDA FUENTE del bloque de prensa, que hasta hoy media solo "
+                           "V-Dem: dos organizaciones distintas evaluando lo mismo "
+                           "permiten ver si coinciden. Es una EVALUACION DE ESPECIALISTAS "
+                           "combinada con un recuento de agresiones, no un recuento puro. "
+                           "Cien es el mejor puntaje posible y cero el peor.",
+            }],
+            "cobertura": {"libertad_prensa": conDato},
             "resumen": {
                 "edicion": anio,
                 "estados_evaluados": conDato,

@@ -63,7 +63,8 @@ ASUNTOS = {
     "trabajo infantil": ["trabajo_infantil"],
     "conectividad": ["internet", "banda_ancha", "servidores_seguros", "internet_moderno"],
     "libertad de prensa": ["libertad_expresion", "censura_medios", "autocensura",
-                           "hostigamiento_periodistas", "sesgo_medios", "medios_corruptos"],
+                           "hostigamiento_periodistas", "sesgo_medios", "medios_corruptos",
+                           "libertad_prensa"],
     "democracia": ["democracia_electoral", "democracia_liberal", "democracia_participativa",
                    "aprobacion_democracia", "actores_antidemocraticos"],
     "estado de derecho": ["estado_derecho", "calidad_regulatoria", "indice_gobernanza",
@@ -85,9 +86,11 @@ ASUNTOS = {
     "recursos naturales": ["minerales", "rentas_naturales", "renta_petroleo", "renta_gas",
                            "renta_minerales", "exporta_combustibles", "agua_renovable",
                            "tierra_arable", "recursos_no_renovables"],
-    "energía e infraestructura": ["energia_importada", "uso_energia", "acceso_electricidad",
-                                  "perdidas_electricas", "puertos_contenedores",
-                                  "agua_potable", "agua_potable_basica"],
+    "energía e infraestructura": ["energia_importada", "uso_energia", "uso_energia_ei",
+                                  "acceso_electricidad", "electricidad_renovable",
+                                  "electricidad_por_habitante", "perdidas_electricas",
+                                  "puertos_contenedores", "agua_potable",
+                                  "agua_potable_basica"],
     "fuerza militar": ["personal_militar", "militares_fuerza_laboral", "efectivos_por_km2",
                        "efectivos_por_habitante", "armas_importadas", "armas_exportadas"],
     "policía": ["policias"],
@@ -154,8 +157,14 @@ def conjuntos() -> list:
         p = d.get("procedencia") or {}
         fuente = p.get("fuente")
         fuente = fuente.get("nombre") if isinstance(fuente, dict) else fuente
+        # EL PRODUCTOR SE LEE DE CADA INDICADOR, no del archivo. Un conjunto
+        # puede traer medidas de varios productores —el de Our World in Data
+        # trae seis— y atribuirlas todas al primero contaría corroboración
+        # falsa: diría que quien mide democracia también mide energía.
         salida.append({"archivo": ruta.name, "fuente": str(fuente or "sin nombre"),
-                       "claves": [i.get("clave") for i in d["indicadores"] if i.get("clave")]})
+                       "claves": [i.get("clave") for i in d["indicadores"] if i.get("clave")],
+                       "de_cada_uno": {i["clave"]: str(i.get("origen") or fuente or "")
+                                       for i in d["indicadores"] if i.get("clave")}})
     return salida
 
 
@@ -174,7 +183,8 @@ def main() -> None:
     de_quien = {}
     for c in datos:
         for k in c["claves"]:
-            de_quien.setdefault(k, set()).add(productor(c["fuente"]))
+            propio = (c.get("de_cada_uno") or {}).get(k) or c["fuente"]
+            de_quien.setdefault(k, set()).add(productor(propio))
 
     # Y las que no salen de un catálogo, que el control no veía y son siete.
     a_medida = 0

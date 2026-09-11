@@ -4413,6 +4413,7 @@
     acceso_informacion: 'transparencia acceso informacion publica datos',
     estabilidad: 'estabilidad golpe crisis politica violencia politica',
     libertad_expresion: 'prensa periodistas censura libertad expresion',
+    libertad_prensa: 'prensa libertad periodistas rsf reporteros sin fronteras clasificacion',
     // FIMI y sus vecinos: quien busque por el estandar internacional o por
     // cualquiera de los terminos que el concepto abarca tiene que llegar.
     censura_medios: 'censura prensa medios periodistas fimi manipulacion informativa',
@@ -4476,6 +4477,9 @@
     tierra_arable: 'tierra cultivo agricultura alimentos soberania alimentaria recursos',
     energia_importada: 'energia dependencia importacion petroleo gas estrategico soberania',
     uso_energia: 'energia consumo electricidad petroleo',
+    uso_energia_ei: 'energia consumo segunda fuente instituto energia',
+    electricidad_renovable: 'electricidad renovable hidroelectrica energia limpia transicion',
+    electricidad_por_habitante: 'electricidad generacion energia por habitante',
     acceso_electricidad: 'electricidad energia infraestructura critica red apagon',
     perdidas_electricas: 'electricidad perdidas robo energia red infraestructura critica',
     puertos_contenedores: 'puertos contenedores comercio infraestructura critica logistica',
@@ -7289,7 +7293,7 @@
   // agregar un colector nuevo no obligue a tocar el resto de la página.
   const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti,
                             almacen.cepal, almacen.gasto, almacen.unesco,
-                            almacen.oit, almacen.salud].filter(Boolean);
+                            almacen.oit, almacen.salud, almacen.prensa].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -11810,8 +11814,9 @@
     // Los seis del entorno informativo no se pintaban en ninguna seccion: la
     // categoria no existia y nada lo advertia. Son los datos MAS RECIENTES
     // del registro, de 2025.
-    tarjetasBanco(['censura_medios','hostigamiento_periodistas','autocensura',
-                   'sesgo_medios','medios_corruptos','polarizacion'],'entorno-informativo');
+    tarjetasBanco(['libertad_prensa','censura_medios','hostigamiento_periodistas',
+                   'autocensura','sesgo_medios','medios_corruptos','polarizacion'],
+                  'entorno-informativo');
     tarjetasBanco(['monopolio_fuerza','intensidad_conflicto'],'control');
     tarjetasBanco(['aprobacion_democracia','persecucion_abuso','politica_anticorrupcion',
                    'actores_antidemocraticos','administracion_basica','indice_gobernanza'],'integridad');
@@ -11825,9 +11830,10 @@
     tarjetasBanco(['id_producto','investigadores','articulos_cientificos',
                    'patentes_residentes'],'ciencia-tecnologia');
     tarjetasBanco(['renta_petroleo','renta_gas','renta_minerales','exporta_combustibles',
-                   'energia_importada','uso_energia','superficie','poblacion',
-                   'agua_renovable','tierra_arable'],'recursos-estrategicos');
-    tarjetasBanco(['acceso_electricidad','perdidas_electricas','puertos_contenedores',
+                   'energia_importada','uso_energia','uso_energia_ei','superficie',
+                   'poblacion','agua_renovable','tierra_arable'],'recursos-estrategicos');
+    tarjetasBanco(['acceso_electricidad','electricidad_por_habitante',
+                   'electricidad_renovable','perdidas_electricas','puertos_contenedores',
                    'agua_potable_basica'],'infraestructuras-criticas');
     fronterasVista();
     tarjetasDesplazamiento(); desinformacion(); coberturaVista(); palabrasVista();
