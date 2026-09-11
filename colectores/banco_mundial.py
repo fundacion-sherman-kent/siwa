@@ -139,6 +139,13 @@ INDICADORES = [
      "origen": "FAO AQUASTAT, compilado por el Banco Mundial",
      "cautela": "Los 33. Es el agua que se renueva dentro del propio territorio. Un "
                 "promedio nacional alto puede convivir con escasez severa en una región."},
+    {"clave": "superficie", "codigo": "AG.SRF.TOTL.K2", "fuente_id": None,
+     "rotulo": "Superficie del territorio", "eje": "Defensa",
+     "unidad": "kilómetros cuadrados", "mas_es_peor": None,
+     "origen": "FAO, compilado por el Banco Mundial",
+     "cautela": "Los 33. No es virtud ni defecto: es la extensión que hay que cubrir, "
+                "administrar y vigilar. Es el denominador de cualquier medida de densidad "
+                "—efectivos, puestos fronterizos, cobertura— y por eso entra acá."},
     {"clave": "tierra_arable", "codigo": "AG.LND.ARBL.ZS", "fuente_id": None,
      "rotulo": "Tierra arable", "eje": "Defensa",
      "unidad": "% de la superficie", "mas_es_peor": False,

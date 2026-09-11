@@ -115,6 +115,7 @@ CATEGORIAS = {
     "patentes_residentes": "ciencia-tecnologia",
     "perdidas_electricas": "infraestructuras-criticas",
     "puertos_contenedores": "infraestructuras-criticas",
+    "superficie": "recursos-estrategicos",
     "tierra_arable": "recursos-estrategicos",
     "uso_energia": "recursos-estrategicos",
     "bosque": "ambiente",
