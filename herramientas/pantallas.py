@@ -102,6 +102,22 @@ MEDIDA = """
                 ? '.' + el.className.trim().split(' ').filter(Boolean).slice(0,2).join('.') : ''),
       texto: el.textContent.trim().split(/[ \\n\\t]+/).join(' ').slice(0, 60)});
   });
+  // VINETAS VACIAS. Una lista con renglones en blanco no informa: desconcierta.
+  // Aparecen cuando el codigo que las dibuja busca un campo que el dato no tiene,
+  // que es un error que no falla ni avisa: la lista sale, con nada adentro. Pasó
+  // en la ficha del Indice de Opacidad, con tres renglones vacios en la Argentina
+  // y en Mexico. No se cuentan las que llevan una imagen, un control o un dibujo.
+  document.querySelectorAll('li').forEach(li => {
+    if(!li.getBoundingClientRect().height) return;
+    if(li.textContent.trim()) return;
+    if(li.querySelector('img, svg, input, button, canvas, select, textarea')) return;
+    const p = li.parentElement;
+    malos.push({que:'vinieta vacia en una lista',
+      quien: (p ? p.tagName.toLowerCase() + (p.id ? '#' + p.id : '')
+                  + (p.className && typeof p.className === 'string'
+                     ? '.' + p.className.trim().split(' ').filter(Boolean).slice(0,2).join('.') : '')
+                : 'li')});
+  });
   // La ayuda tiene que verse en cualquier tamanio.
   const ayuda = document.getElementById('abrir-ayuda');
   if(!ayuda || ayuda.getBoundingClientRect().height === 0)
@@ -114,6 +130,18 @@ MEDIDA = """
                 alto_de_la_barra: alto});
   return {malos, alto_barra: alto, doc: document.documentElement.scrollWidth, ventana: V};
 }
+"""
+
+
+# Se elige la Argentina porque su ficha del Indice de Opacidad tiene rastro de
+# busquedas: ejercita el camino que se rompio, con viñetas de verdad.
+PAIS_ELEGIDO = """
+() => { const s = document.getElementById('ambito');
+        if(s){ s.value = 'p:ARG'; s.dispatchEvent(new Event('change', {bubbles:true})); } }
+"""
+SIN_PAIS = """
+() => { const s = document.getElementById('ambito');
+        if(s){ s.value = ''; s.dispatchEvent(new Event('change', {bubbles:true})); } }
 """
 
 
@@ -163,12 +191,28 @@ def main() -> None:
                     for m in r["malos"]:
                         fallas.append({**m, "ancho": ancho,
                                        "tema": "claro" if claro else "oscuro", "nivel": nivel})
+
+                # Y AHORA CON UN PAIS ELEGIDO, que es media aplicacion que antes
+                # no se miraba: la ficha del Estado, sus ejes y el Indice de
+                # Opacidad solo se dibujan cuando hay uno seleccionado.
+                pagina.evaluate(PAIS_ELEGIDO)
+                pagina.wait_for_timeout(1800)
+                r = pagina.evaluate(MEDIDA)
+                probadas.append({"ancho": ancho, "tema": "claro" if claro else "oscuro",
+                                 "nivel": "3 · con país", "barra": r["alto_barra"]})
+                for m in r["malos"]:
+                    fallas.append({**m, "ancho": ancho,
+                                   "tema": "claro" if claro else "oscuro",
+                                   "nivel": "3 · con país"})
+                pagina.evaluate(SIN_PAIS)
+                pagina.wait_for_timeout(900)
             pagina.close()
         navegador.close()
 
     salida = {
         "que_es": "Control de diseño adaptable. La página se abre en varios anchos, con los dos "
-                  "fondos y los tres niveles de lectura, y se mide que nada se salga.",
+                  "fondos, los tres niveles de lectura y también con un país elegido —que es "
+                  "media aplicación que de otro modo no se mira—, y se mide que nada se salga.",
         "corrida": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "anchos": [a for a, _ in ANCHOS],
         "combinaciones": len(probadas),

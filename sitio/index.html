@@ -609,6 +609,9 @@
   .guia-tarea .guia-porque{display:block;margin-top:7px;font-size:11.5px;color:var(--tenue);
     line-height:1.5;}
   .guia-vacio{font-size:12.5px;color:var(--texto-2);line-height:1.6;}
+  .rastro-rot{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;
+    color:var(--grey-blue);font-weight:700;margin:10px 0 4px;}
+  .rastro-falla{color:var(--t-aviso);}
   .hallazgos{margin:12px 0 0;}
   .hallazgos-eje{display:block;font-size:10.5px;text-transform:uppercase;
     letter-spacing:.8px;color:var(--grey-blue);font-weight:700;margin-bottom:2px;}
@@ -8576,11 +8579,30 @@
     // Con un solo Estado no se cuenta: se dice en qué estado está.
     if(paisFiltro){
       const x = lista[0], r = ROTULO_OPACIDAD[x.estado] || ROTULO_OPACIDAD.sin_verificar;
-      const rastro = (x.rastro||[]).length
-        ? '<ul class="rastro-op">' + x.rastro.slice(0,4).map(p =>
-            '<li>' + esc(typeof p === 'string' ? p : (p.paso || p.detalle || ''))
-            + (p && p.enlace ? ' · <a href="'+esc(p.enlace)+'" target="_blank" rel="noopener noreferrer">ver</a>' : '')
-            + '</li>').join('') + '</ul>'
+      // EL RASTRO ES LA PRUEBA, no un adorno: este índice afirma ausencias, y una
+      // ausencia solo se sostiene mostrando dónde se buscó. Cada renglón dice qué
+      // se buscó, qué devolvió el portal del Estado y deja la consulta a la vista
+      // para que cualquiera la repita.
+      const renglonRastro = p => {
+        if(typeof p === 'string') return esc(p);
+        const que = p.termino || p.paso || p.detalle || '';
+        if(!que) return '';
+        let t = '<b>«' + esc(que) + '»</b>';
+        if(p.falla) t += ' · <span class="rastro-falla">no respondió: ' + esc(p.falla) + '</span>';
+        else if(typeof p.devueltos === 'number')
+          t += ' · ' + p.devueltos + (p.devueltos === 1 ? ' conjunto devuelto' : ' conjuntos devueltos')
+             + (typeof p.pertinentes === 'number' ? ', ' + p.pertinentes + ' pertinente'
+                + (p.pertinentes === 1 ? '' : 's') : '');
+        const url = p.consulta || p.enlace;
+        if(url) t += ' · <a href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">ver la consulta</a>';
+        return t;
+      };
+      // Una viñeta sin texto no se dibuja: una lista con renglones vacíos no
+      // informa, desconcierta. Era exactamente lo que se veía.
+      const renglones = (x.rastro||[]).slice(0,4).map(renglonRastro).filter(Boolean);
+      const rastro = renglones.length
+        ? '<div class="rastro-rot">Lo que se buscó para poder afirmarlo</div>'
+          + '<ul class="rastro-op">' + renglones.map(t => '<li>' + t + '</li>').join('') + '</ul>'
         : '';
       caja.innerHTML =
         '<div class="rot">Índice de Opacidad — ' + esc(paisNombre) + '</div>'
