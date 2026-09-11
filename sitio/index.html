@@ -3123,6 +3123,21 @@
     <div class="categoria" id="efectivos" data-nivel="3">
       <div class="categoria-head"><h3>Efectivos</h3><span class="tag" id="tag-efectivos">—</span></div>
       <details class="aviso-cobertura"><summary>No hay desagregación por arma, y no es un olvido</summary>
+        <p><b>Dos de estas medidas las calcula la Oficina</b>, dividiendo los efectivos por
+           la superficie y por la población: un recuento suelto premia al Estado grande por
+           ser grande. Se calculan solo con años que las dos series comparten, y donde no
+           hay un año en común no se calcula nada.</p>
+        <p><b>Ninguna mide despliegue.</b> Un efectivo contado puede estar en un cuartel de
+           la capital y no en la frontera.</p>
+        <p><b>Y hay que mirar qué se está contando.</b> Costa Rica abolió su ejército en 1949
+           y Panamá lo disolvió en 1990, y sin embargo los dos figuran acá con efectivos. No
+           es un error: la fuente cuenta al personal militar en actividad <b>e incluye
+           fuerzas paramilitares cuando se parecen a unidades regulares</b> en organización,
+           equipamiento, entrenamiento o misión. En esos dos Estados lo que se cuenta es su
+           fuerza pública, no un ejército.</p>
+        <p>Antigua y Barbuda aparece con cero y tiene fuerza de defensa: <b>un cero acá puede
+           significar «no tiene» o «no informó»</b>, y la fuente no las distingue. Se publica
+           como viene y se dice que no se sabe cuál de las dos es.</p>
         <p><b>No hay desagregación por arma, y no es un olvido.</b> No existe fuente gratuita
            que publique los efectivos separados en ejército, armada y aviación para los 33
            Estados. El registro de referencia es el <b>Balance Militar</b> del Instituto
@@ -4343,6 +4358,8 @@
     articulos_cientificos: 'ciencia publicaciones articulos papers investigacion',
     patentes_residentes: 'patentes invencion innovacion propiedad intelectual tecnologia',
     agua_renovable: 'agua recursos hidricos reservas estrategico escasez',
+    efectivos_por_km2: 'densidad efectivos soldados territorio kilometros militares despliegue',
+    efectivos_por_habitante: 'densidad efectivos soldados habitantes militares por cada',
     poblacion: 'poblacion habitantes personas cuanta gente tamaño',
     renta_petroleo: 'petroleo crudo hidrocarburos combustible recursos estrategicos renta',
     renta_gas: 'gas natural hidrocarburos energia recursos estrategicos renta',
@@ -11677,7 +11694,8 @@
                    'actores_antidemocraticos','administracion_basica','indice_gobernanza'],'integridad');
     tarjetasBanco(['migracion_neta','migrantes','migrantes_pct','remesas'],'migraciones');
     tarjetasBanco(['gasto_militar','gasto_militar_publico','gasto_militar_dolares'],'presupuesto-defensa');
-    tarjetasBanco(['personal_militar','militares_fuerza_laboral'],'efectivos');
+    tarjetasBanco(['personal_militar','efectivos_por_km2','efectivos_por_habitante',
+                   'militares_fuerza_laboral'],'efectivos');
     tarjetasBanco(['armas_importadas','armas_exportadas'],'material');
     tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
     tarjetasBanco(['id_producto','investigadores','articulos_cientificos',

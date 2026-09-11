@@ -229,8 +229,13 @@ INDICADORES = [
      "rotulo": "Efectivos de las fuerzas armadas", "eje": "Defensa",
      "unidad": "personas", "mas_es_peor": False,
      "origen": "Banco Mundial",
-     "cautela": "Efectivos declarados. No incluye fuerzas de seguridad interior ni "
-                "policiales, que en varios Estados del padron son el grueso del despliegue."},
+     "cautela": "Efectivos declarados. Cuenta personal militar en actividad E INCLUYE "
+                "fuerzas paramilitares cuando se parecen a unidades regulares en "
+                "organizacion, equipamiento, entrenamiento o mision. Por eso Costa Rica, "
+                "que abolio su ejercito en 1949, y Panama, que lo disolvio en 1990, "
+                "figuran con efectivos: lo que se cuenta ahi es su fuerza publica. No "
+                "incluye a la policia comun, que en varios Estados del padron es el grueso "
+                "del despliegue."},
     {"clave": "voz_rendicion", "codigo": "GOV_WGI_VA.EST", "fuente_id": 3,
      "rotulo": "Voz y rendición de cuentas", "eje": "Gobernanza",
      "unidad": "estimación de -2,5 a 2,5", "mas_es_peor": False,
@@ -411,12 +416,68 @@ def _traer(indicador: dict, isos: list) -> dict:
     return series
 
 
+# ============ LAS MEDIDAS QUE SE CALCULAN ============
+#
+# No se piden a la fuente: se dividen acá, a partir de dos indicadores que sí se
+# piden. Llevan «codigo: None» y por eso el recorrido de consulta las saltea.
+DERIVADOS = [
+    {"clave": "efectivos_por_km2", "codigo": None, "fuente_id": None,
+     "arriba": "personal_militar", "abajo": "superficie", "por": 1000,
+     "rotulo": "Efectivos por cada mil kilómetros cuadrados", "eje": "Defensa",
+     "unidad": "efectivos por 1.000 km²", "mas_es_peor": False,
+     "origen": "Cálculo de la Oficina sobre efectivos y superficie del Banco Mundial",
+     "cautela": "Cuánta fuerza hay por territorio que cubrir. Se calcula solo con años "
+                "que las dos series comparten. NO mide despliegue: un efectivo contado "
+                "puede estar en un cuartel de la capital y no en la frontera. Y OJO CON "
+                "QUÉ SE ESTÁ CONTANDO: Costa Rica y Panamá no tienen fuerzas armadas, y "
+                "sin embargo figuran, porque la fuente cuenta también fuerzas públicas "
+                "organizadas como militares."},
+    {"clave": "efectivos_por_habitante", "codigo": None, "fuente_id": None,
+     "arriba": "personal_militar", "abajo": "poblacion", "por": 100000,
+     "rotulo": "Efectivos por cada cien mil habitantes", "eje": "Defensa",
+     "unidad": "efectivos por 100.000 personas", "mas_es_peor": False,
+     "origen": "Cálculo de la Oficina sobre efectivos y población del Banco Mundial",
+     "cautela": "Cuánta fuerza hay por gente que proteger. Cuenta personal militar en "
+                "actividad Y fuerzas paramilitares cuando se parecen a unidades regulares, "
+                "pero NO a la policía común: un valor bajo puede convivir con una presencia "
+                "armada enorme en la calle. Antigua y Barbuda figura con cero y tiene "
+                "fuerza de defensa: un cero acá puede ser «no tiene» o «no informó», y la "
+                "fuente no las distingue."},
+]
+INDICADORES = INDICADORES + DERIVADOS
+
+
+def _calcular(datos):
+    """Arma las series calculadas a partir de las que ya se trajeron.
+
+    Solo con años compartidos por las dos series: dividir un numerador de un año
+    por un denominador de otro da una cifra que no corresponde a ningún momento.
+    """
+    for d in DERIVADOS:
+        arriba = datos.get(d["arriba"]) or {}
+        abajo = datos.get(d["abajo"]) or {}
+        salida = {}
+        for iso, serie in arriba.items():
+            divisor = dict(abajo.get(iso) or [])
+            puntos = []
+            for anio, valor in serie:
+                base = divisor.get(anio)
+                if base in (None, 0) or valor is None:
+                    continue
+                puntos.append((anio, round(valor / base * d["por"], 2)))
+            if puntos:
+                salida[iso] = puntos
+        datos[d["clave"]] = salida
+
+
 def recolectar():
     padron = geo.padron()
     isos = [p["iso"] for p in padron]
 
     datos, fallidos = {}, []
     for indicador in INDICADORES:
+        if not indicador.get("codigo"):
+            continue          # se calcula más abajo, no se le pide a nadie
         try:
             datos[indicador["clave"]] = _traer(indicador, isos)
         except Exception as error:  # noqa: BLE001 — el indicador caído se declara
@@ -425,6 +486,9 @@ def recolectar():
 
     if all(not v for v in datos.values()):
         raise RuntimeError("Ningún indicador devolvió serie. No se escribe nada.")
+
+    # Recién ahora, con todo lo pedido en la mano, se hacen las divisiones.
+    _calcular(datos)
 
     # UN INDICADOR CON CERO ESTADOS NO ES UN RESULTADO: ES UNA FALLA.
     #

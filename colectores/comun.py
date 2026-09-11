@@ -115,6 +115,8 @@ CATEGORIAS = {
     "patentes_residentes": "ciencia-tecnologia",
     "perdidas_electricas": "infraestructuras-criticas",
     "puertos_contenedores": "infraestructuras-criticas",
+    "efectivos_por_habitante": "efectivos",
+    "efectivos_por_km2": "efectivos",
     "exporta_combustibles": "recursos-estrategicos",
     "poblacion": "recursos-estrategicos",
     "renta_gas": "recursos-estrategicos",
