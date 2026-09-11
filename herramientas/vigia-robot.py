@@ -145,6 +145,51 @@ def revisar_flujos() -> list:
     return fallas
 
 
+def corrio_el_robot() -> tuple:
+    """La pregunta directa: ¿cuándo terminó bien la recolección por última vez?
+
+    Las otras dos preguntas son rodeos buenos pero rodeos. «¿Llegaron datos?»
+    se puede contestar que sí porque alguien publicó a mano, y «¿el archivo es
+    válido?» no ve las muertes que dejan el archivo intacto: el flujo
+    desactivado a mano, la desactivación automática a los sesenta días, una
+    caída de GitHub, una credencial vencida. Todas se ven igual desde acá:
+    silencio.
+
+    Así que se le pregunta a GitHub. Necesita una credencial, que en el robot
+    viene sola. Sin ella —una corrida de escritorio— NO se da por buena ni por
+    mala: se declara que no se pudo mirar, porque una alarma que se apaga sola
+    cuando falta un dato es peor que no tenerla.
+    """
+    import os
+    import urllib.request
+
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    repo = os.environ.get("GITHUB_REPOSITORY", "fundacion-sherman-kent/siwa")
+    url = (f"https://api.github.com/repos/{repo}/actions/workflows/"
+           f"recolectar.yml/runs?status=success&per_page=1")
+    cabeceras = {"User-Agent": "siwa-vigia", "Accept": "application/vnd.github+json"}
+    # El registro es PUBLICO, y GitHub contesta sobre un repositorio publico sin
+    # credencial. Eso importa por una razon de metodo: un control que solo se
+    # puede correr adentro del robot es un control que nadie probo nunca. Asi se
+    # corre igual desde el escritorio, y el mismo comando dice lo mismo. La
+    # credencial, cuando esta, solo levanta el limite de consultas por hora.
+    if token:
+        cabeceras["Authorization"] = f"Bearer {token}"
+    pedido = urllib.request.Request(url, headers=cabeceras)
+    try:
+        d = json.loads(urllib.request.urlopen(pedido, timeout=30).read())
+    except Exception as e:  # noqa: BLE001
+        return None, f"no se pudo consultar a GitHub: {str(e)[:80]}"
+    corridas = d.get("workflow_runs") or []
+    if not corridas:
+        return None, "GitHub no devolvió ninguna corrida exitosa de la recolección"
+    fin = corridas[0].get("updated_at") or corridas[0].get("created_at")
+    try:
+        return datetime.fromisoformat(fin.replace("Z", "+00:00")), None
+    except Exception:  # noqa: BLE001
+        return None, f"GitHub devolvió una fecha que no se entiende: {fin}"
+
+
 def main() -> None:
     sys.stdout.reconfigure(encoding="utf-8")
     ahora = datetime.now(timezone.utc)
@@ -164,6 +209,21 @@ def main() -> None:
                 "porque": "la recolección corre cada hora; si pasaron más de "
                           f"{HORAS}, dejó de correr y hay que mirar por qué"})
 
+    # LA PREGUNTA DIRECTA. Va después de las otras dos y no las reemplaza: si
+    # GitHub no contesta, las dos primeras siguen en pie.
+    ultima_corrida, por_que_no = corrio_el_robot()
+    horas_corrida = None
+    if ultima_corrida:
+        horas_corrida = round((ahora - ultima_corrida).total_seconds() / 3600, 1)
+        if horas_corrida > HORAS:
+            fallas.append({
+                "que": "el robot no termina bien una corrida",
+                "quien": f"la última recolección exitosa fue hace {horas_corrida} horas",
+                "porque": "corre cada hora. Puede estar rechazado el archivo, "
+                          "desactivado el flujo, vencida una credencial o caído GitHub: "
+                          "desde acá se ven todos igual, y todos significan que el "
+                          "registro dejó de actualizarse"})
+
     salida = {
         "que_es": "Vigía del robot. Pregunta dos cosas que nadie hacía: hace cuánto que no "
                   "llega un dato nuevo, y si los archivos del robot son válidos para "
@@ -173,6 +233,9 @@ def main() -> None:
         "de_quien": quien,
         "horas_sin_dato_nuevo": horas,
         "tope_de_horas": HORAS,
+        "ultima_corrida_exitosa": ultima_corrida.isoformat(timespec="seconds") if ultima_corrida else None,
+        "horas_desde_la_ultima_corrida": horas_corrida,
+        "por_que_no_se_pudo_mirar": por_que_no,
         "fallas": fallas,
         "veredicto": "el robot está vivo" if not fallas else f"{len(fallas)} problemas",
         "lo_que_no_dice": "Si los datos son buenos. Dice que llegan y que el robot puede "
@@ -187,6 +250,10 @@ def main() -> None:
         print(f"[vigia] último dato hace {horas} h ({quien}) · {salida['veredicto']}")
     else:
         print(f"[vigia] {salida['veredicto']}")
+    if horas_corrida is not None:
+        print(f"[vigia] última corrida exitosa del robot: hace {horas_corrida} h")
+    elif por_que_no:
+        print(f"[vigia] no se pudo preguntar si el robot corrió — {por_que_no}")
     for f in fallas:
         print(f"  FALLA · {f['que']} · {f['quien']}")
     if fallas:
