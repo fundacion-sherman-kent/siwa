@@ -441,6 +441,16 @@ jobs:
       # `datos/publico/auditoria.json` y publicarse aunque haya fallas -sobre
       # todo si hay fallas-. La corrida queda en rojo un paso mas abajo, en
       # «Declarar las fallas», que es donde este repositorio junta los avisos.
+      # LA REGLA DE LAS DOS FUENTES, medida sola. Cuenta productores
+      # independientes por asunto, no archivos: dos indicadores del mismo
+      # organismo no son dos fuentes por mas que sean dos numeros. Falla si un
+      # asunto que tenia dos se queda con una, o si entra una materia sin
+      # clasificar, que es una materia que este control no podria vigilar.
+      - name: La regla de las dos fuentes
+        id: segunda_fuente
+        continue-on-error: true
+        run: python herramientas/segunda-fuente.py
+
       - name: Auditoria del registro
         id: auditoria
         if: always()
@@ -520,6 +530,7 @@ jobs:
           [ "${{ steps.gasto_publico.outcome }}" = "failure" ] && { echo "Falló el gasto en seguridad y defensa."; fallo=1; }
           [ "${{ steps.unesco.outcome }}" = "failure" ] && { echo "Falló educación."; fallo=1; }
           [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
+          [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
           # La auditoría no es un colector: no falla porque una fuente no

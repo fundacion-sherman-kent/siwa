@@ -180,6 +180,47 @@ CANDIDATAS = [
                  "Es una carta (ncsi@ega.ee). La página responde.",
     },
     {
+        "clave": "ilostat",
+        "rotulo": "OIT — ILOSTAT, estadísticas del trabajo",
+        "url": "https://rplumber.ilo.org/data/indicator/?id=SDG_0831_SEX_ECO_RT_A&ref_area=ARG&format=.json",
+        "porque": "SEGUNDA FUENTE del bloque laboral, que hoy sostiene solo el Banco "
+                  "Mundial: empleo informal en 27 de los 33 Estados y desempleo juvenil "
+                  "en 29, medido y comprobado. Además trae desempleo total en los 33 con "
+                  "serie desde 1969.",
+        "traba": "Ninguna medida: contesta JSON sin credencial. Falta escribir el colector "
+                 "y filtrar las dimensiones de sexo y edad, que vienen desagregadas.",
+    },
+    {
+        "clave": "oms_gho",
+        "rotulo": "OMS — Observatorio Mundial de la Salud",
+        "url": "https://ghoapi.azureedge.net/api/Indicator?$top=3",
+        "porque": "Segunda fuente para violencia letal y puerta a materias que el registro "
+                  "no mide: mortalidad por causa, suicidio, muertes de tránsito. El "
+                  "registro ya usa una cifra suya de homicidios por otra vía; esta es la "
+                  "interfaz completa.",
+        "traba": "Ninguna medida: contesta JSON sin credencial. Falta elegir indicadores.",
+    },
+    {
+        "clave": "bid_datos",
+        "rotulo": "BID — Números para el Desarrollo",
+        "url": "https://mydata.iadb.org/api/views.json?limit=3",
+        "porque": "Banco regional con datos propios de América Latina y el Caribe: sería "
+                  "segunda fuente para buena parte de lo que hoy sostiene solo el Banco "
+                  "Mundial, y con mirada de la región y no del mundo.",
+        "traba": "404 en la ruta probada. Hay que encontrar la dirección real de su "
+                 "interfaz antes de poder usarla.",
+    },
+    {
+        "clave": "lapop",
+        "rotulo": "LAPOP — Barómetro de las Américas",
+        "url": "https://www.vanderbilt.edu/lapop/",
+        "porque": "Segunda fuente de lo que la gente DECLARA —victimización, confianza en "
+                  "la policía, percepción de corrupción—, que hoy mide solo la comisión "
+                  "regional. Es la encuesta de referencia del hemisferio.",
+        "traba": "Publica en informes y en archivos de encuesta, no en una interfaz de "
+                 "datos. Hay que ver si existe una ruta legible por máquina.",
+    },
+    {
         "clave": "uis_unesco",
         "rotulo": "UNESCO — Instituto de Estadística (interfaz abierta)",
         "url": "https://api.uis.unesco.org/api/public/data/indicators?indicator=CR.1&geoUnit=ARG",

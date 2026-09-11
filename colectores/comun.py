@@ -53,6 +53,7 @@ TESTIGOS = {
     "auditoria.json": "auditoría del registro, corrida en cada recolección",
     "pantallas.json": "control de diseño adaptable, corrido en cada cambio de código",
     "mineria.json": "minería sobre el propio registro: pistas, no conclusiones",
+    "segunda_fuente.json": "la regla de las dos fuentes, medida en cada recolección",
 }
 
 ATRIBUCION = {
