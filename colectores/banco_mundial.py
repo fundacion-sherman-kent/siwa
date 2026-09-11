@@ -139,6 +139,40 @@ INDICADORES = [
      "origen": "FAO AQUASTAT, compilado por el Banco Mundial",
      "cautela": "Los 33. Es el agua que se renueva dentro del propio territorio. Un "
                 "promedio nacional alto puede convivir con escasez severa en una región."},
+    {"clave": "poblacion", "codigo": "SP.POP.TOTL", "fuente_id": None,
+     "rotulo": "Población total", "eje": "Defensa",
+     "unidad": "personas", "mas_es_peor": None,
+     "origen": "Naciones Unidas, compilado por el Banco Mundial",
+     "cautela": "Los 33. No es virtud ni defecto: es el otro denominador, junto a la "
+                "superficie. Sin él, cualquier recuento —efectivos, policías, delitos— "
+                "premia al Estado grande por ser grande."},
+    {"clave": "renta_petroleo", "codigo": "NY.GDP.PETR.RT.ZS", "fuente_id": None,
+     "rotulo": "Renta del petróleo", "eje": "Defensa",
+     "unidad": "% del producto", "mas_es_peor": True,
+     "origen": "Banco Mundial",
+     "cautela": "Casi todos. Mide cuánto PESA el petróleo en la economía, no cuánto hay bajo "
+                "el suelo: un Estado con una reserva enorme sin explotar da cero acá. "
+                "Un valor alto es riqueza y a la vez exposición al precio internacional."},
+    {"clave": "renta_gas", "codigo": "NY.GDP.NGAS.RT.ZS", "fuente_id": None,
+     "rotulo": "Renta del gas natural", "eje": "Defensa",
+     "unidad": "% del producto", "mas_es_peor": True,
+     "origen": "Banco Mundial",
+     "cautela": "Casi todos. Misma vara que el petróleo: pesa en la economía, no mide reservas. "
+                "En la región hay Estados donde el gas es la mitad de las exportaciones."},
+    {"clave": "renta_minerales", "codigo": "NY.GDP.MINR.RT.ZS", "fuente_id": None,
+     "rotulo": "Renta de los minerales", "eje": "Defensa",
+     "unidad": "% del producto", "mas_es_peor": True,
+     "origen": "Banco Mundial",
+     "cautela": "Casi todos. Agrupa los minerales metálicos sin separarlos: NO distingue cobre "
+                "de litio ni de tierras raras, que es justamente lo que haría falta para "
+                "hablar de minerales críticos. Esa desagregación no está acá."},
+    {"clave": "exporta_combustibles", "codigo": "TX.VAL.FUEL.ZS.UN", "fuente_id": None,
+     "rotulo": "Combustibles sobre lo que se exporta", "eje": "Defensa",
+     "unidad": "% de las exportaciones de bienes", "mas_es_peor": True,
+     "origen": "Naciones Unidas COMTRADE, compilado por el Banco Mundial",
+     "cautela": "Casi todos, y es la serie más fresca del bloque. Cuánto de lo que el Estado "
+                "vende afuera son combustibles: mide concentración, y una economía "
+                "concentrada en un solo producto es frágil aunque ese producto valga mucho."},
     {"clave": "superficie", "codigo": "AG.SRF.TOTL.K2", "fuente_id": None,
      "rotulo": "Superficie del territorio", "eje": "Defensa",
      "unidad": "kilómetros cuadrados", "mas_es_peor": None,

@@ -3188,8 +3188,17 @@
         <p>Un promedio nacional puede tapar una escasez regional severa: un Estado con mucha
            agua renovable por habitante puede tener provincias secas. Y tener el recurso no es
            poder usarlo: la tierra arable mide superficie, no producción.</p>
-        <p>El eje Desarrollo mide dos cosas emparentadas con otra vara —<a href="#industrial">rentas
-           de recursos naturales y exportación de minerales</a>—, que miran cuánto DEPENDE la
+        <p>Las rentas del petróleo, del gas y de los minerales miden <b>cuánto pesa cada
+           recurso en la economía</b>, que es lo que hay dato para medir. <b>No miden cuánto
+           hay bajo el suelo</b>: un Estado con una reserva enorme sin explotar da cero. Y un
+           valor alto es riqueza y exposición al mismo tiempo.</p>
+        <p><b>Tierras raras y minerales críticos no están todavía, y falta decirlo.</b> La
+           renta de los minerales agrupa los metálicos sin separarlos: no distingue cobre de
+           litio ni de tierras raras. La fuente que sí lo hace —el Servicio Geológico de los
+           Estados Unidos— bloquea la consulta automática y publica en informes anuales, así
+           que entrarán cargados a mano. Mientras tanto se declara la falta.</p>
+        <p>El eje Desarrollo mide algo emparentado con otra vara —<a href="#industrial">rentas
+           de recursos naturales y exportación de minerales</a>—, que mira cuánto DEPENDE la
            economía de extraer, no cuánto TIENE el territorio.</p>
       </details>
       <div class="procedencia" id="proc-recursos-estrategicos">Cargando el registro…</div>
@@ -4334,6 +4343,11 @@
     articulos_cientificos: 'ciencia publicaciones articulos papers investigacion',
     patentes_residentes: 'patentes invencion innovacion propiedad intelectual tecnologia',
     agua_renovable: 'agua recursos hidricos reservas estrategico escasez',
+    poblacion: 'poblacion habitantes personas cuanta gente tamaño',
+    renta_petroleo: 'petroleo crudo hidrocarburos combustible recursos estrategicos renta',
+    renta_gas: 'gas natural hidrocarburos energia recursos estrategicos renta',
+    renta_minerales: 'minerales mineria metales litio cobre tierras raras recursos estrategicos',
+    exporta_combustibles: 'combustibles petroleo gas exportaciones hidrocarburos',
     superficie: 'superficie territorio extension kilometros cuadrados tamaño pais',
     tierra_arable: 'tierra cultivo agricultura alimentos soberania alimentaria recursos',
     energia_importada: 'energia dependencia importacion petroleo gas estrategico soberania',
@@ -11668,8 +11682,9 @@
     tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
     tarjetasBanco(['id_producto','investigadores','articulos_cientificos',
                    'patentes_residentes'],'ciencia-tecnologia');
-    tarjetasBanco(['superficie','agua_renovable','tierra_arable','energia_importada',
-                   'uso_energia'],'recursos-estrategicos');
+    tarjetasBanco(['renta_petroleo','renta_gas','renta_minerales','exporta_combustibles',
+                   'energia_importada','uso_energia','superficie','poblacion',
+                   'agua_renovable','tierra_arable'],'recursos-estrategicos');
     tarjetasBanco(['acceso_electricidad','perdidas_electricas','puertos_contenedores',
                    'agua_potable_basica'],'infraestructuras-criticas');
     fronterasVista();
