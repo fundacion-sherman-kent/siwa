@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-11T09:27:06+00:00",
+  "corrida": "2026-09-11T10:27:10+00:00",
   "medidas_con_suficientes_casos": 138,
   "pares_probados": 9453,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 9453 pares y el umbral de siempre, alrededor de 472 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 1960,
+    "sobreviven": 1957,
     "de_ellos_son_parentescos": 340
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 1620,
+  "pistas_totales": 1617,
   "anomalias_totales": 221,
   "pistas": [
     {
@@ -177,6 +177,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.91,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.4781300831616334e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -198,19 +211,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.8981853752028557e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.901,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.795505787118107e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -307,6 +307,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.879,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.5975757387571565e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "estado_derecho",
       "rotulo_a": "Corrupción política",
@@ -328,19 +341,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.3926105704984327e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:nocturnos",
-      "b": "superficie",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.874,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3154496896131209e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -437,6 +437,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "poblacion",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.867,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.750114453547661e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:mediciones",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "ciber · mediciones",
@@ -458,6 +471,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 8.435986656188149e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.863,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.159695122926498e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -554,32 +580,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "poblacion",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.852,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.2781433405833554e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.852,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.432484666298149e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -614,6 +614,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 3.0079626910684376e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:nocturnos",
+      "b": "poblacion",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.85,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.0783708006188585e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,27 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "estabilidad",
-      "b": "monopolio_fuerza",
-      "rotulo_a": "Estabilidad política y ausencia de violencia",
-      "rotulo_b": "Monopolio del Estado en el uso de la fuerza",
+      "a": "ciber:equipos_respuesta",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "ciber · equipos_respuesta",
+      "rotulo_b": "ransomware · grupos_distintos",
       "coeficiente": 0.835,
-      "estados": 22,
+      "estados": 29,
       "tipo": "rangos (Spearman)",
-      "p": 1.550283387389894e-07,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:anomalias",
-      "b": "sanciones:entidades",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "sanciones · entidades",
-      "coeficiente": 0.833,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.241684002645924e-11,
+      "p": 8.168787605767541e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
