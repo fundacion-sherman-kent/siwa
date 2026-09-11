@@ -58,6 +58,18 @@ ASUNTOS = {
     "bosque y deforestación": ["bosque", "perdida_bosque"],
     "pobreza": ["pobreza", "pobreza_cepal", "pobreza_extrema", "vulnerabilidad"],
     "desigualdad": ["gini"],
+    # RECURSOS ESTRATEGICOS. Se separan en dos asuntos y no en uno: los
+    # hidrocarburos los mide el Energy Institute y los minerales el servicio
+    # geologico estadounidense. Juntarlos daria dos productores para un solo
+    # asunto y este control declararia corroborado algo que no lo esta.
+    # `exporta_combustibles` NO entra acá aunque tiente: mide qué proporción de
+    # lo que un país vende son combustibles, que es comercio y no extracción.
+    # Sumarla habría dado un segundo productor —Comtrade— y este control habría
+    # declarado corroborado un asunto que depende de una sola fuente.
+    "hidrocarburos": ["produccion_petroleo", "produccion_gas", "produccion_carbon",
+                      "reservas_petroleo"],
+    "minerales": ["produccion_litio", "cuota_mineral_mundial",
+                  "minerales_escala_mundial"],
     "empleo informal": ["empleo_informal", "empleo_informal_oit"],
     "desempleo juvenil": ["desempleo_joven", "desempleo_joven_oit"],
     "desempleo total": ["desempleo_oit"],

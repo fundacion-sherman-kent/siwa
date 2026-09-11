@@ -124,6 +124,17 @@ CATEGORIAS = {
     "acceso_electricidad": "infraestructuras-criticas",
     "agua_potable_basica": "infraestructuras-criticas",
     "agua_renovable": "recursos-estrategicos",
+    # LO QUE HAY BAJO TIERRA. Hasta acá la categoría tenía agua, energía importada
+    # y exportación de combustibles: medidas de DEPENDENCIA, no de tenencia. Estas
+    # siete dicen qué produce cada Estado y cuánto pesa en el mundo, que es la otra
+    # mitad de la pregunta y la que faltaba.
+    "produccion_petroleo": "recursos-estrategicos",
+    "produccion_gas": "recursos-estrategicos",
+    "produccion_carbon": "recursos-estrategicos",
+    "reservas_petroleo": "recursos-estrategicos",
+    "produccion_litio": "recursos-estrategicos",
+    "cuota_mineral_mundial": "recursos-estrategicos",
+    "minerales_escala_mundial": "recursos-estrategicos",
     "armas_exportadas": "material",
     "armas_importadas": "material",
     "articulos_cientificos": "ciencia-tecnologia",

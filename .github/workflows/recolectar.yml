@@ -148,6 +148,16 @@ jobs:
       # MUERTES QUE NO SON DELITO, Y SALUD. Lo que ningun organismo de
       # seguridad cuenta porque no es delito, y que sin embargo mata: en varios
       # Estados del padron el suicidio mata mas gente que el homicidio.
+      # RECURSOS ESTRATEGICOS: que produce cada Estado y cuanto pesa en el mundo.
+      # Dos fuentes oficiales que no piden credencial. Va en la pasada completa
+      # porque las dos publican una vez al año: pedirlas cada hora seria pedir
+      # sesenta veces por dia un numero que cambia una vez por ano.
+      - name: Recursos estrategicos (minerales e hidrocarburos)
+        id: recursos
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/recursos.py
+
       - name: Muertes no delictivas y salud
         id: oms
         continue-on-error: true
@@ -569,6 +579,7 @@ jobs:
           [ "${{ steps.unesco.outcome }}" = "failure" ] && { echo "Falló educación."; fallo=1; }
           [ "${{ steps.oit.outcome }}" = "failure" ] && { echo "Falló trabajo y desempleo."; fallo=1; }
           [ "${{ steps.oms_salud.outcome }}" = "failure" ] && { echo "Fallaron las muertes no delictivas y la salud."; fallo=1; }
+          [ "${{ steps.recursos.outcome }}" = "failure" ] && { echo "Fallaron los recursos estratégicos."; fallo=1; }
           [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
           [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }

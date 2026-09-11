@@ -34,6 +34,8 @@ el eje horizontal —solo se comparan años comunes— y rige igual acá.
 """
 from __future__ import annotations
 
+import csv
+import io
 import json
 import re
 import sys
@@ -84,7 +86,27 @@ FUENTES = [
         "que_cuenta": "víctimas de homicidio doloso, recuento anual",
         "como": "series_ar",
     },
+    {
+        "iso": "URY",
+        "pais": "Uruguay",
+        "nombre_local": "departamento",
+        "fuente": "Ministerio del Interior del Uruguay — microdatos de homicidios "
+                  "dolosos consumados, vía el catálogo de datos abiertos del Estado",
+        "url": "https://catalogodatos.gub.uy/dataset/delitos-denunciados-en-el-uruguay",
+        "materia": "homicidios",
+        "que_cuenta": "víctimas de homicidio doloso consumado, recuento anual "
+                      "calculado por esta casa sobre los microdatos",
+        "recurso": "https://catalogodatos.gub.uy/dataset/999f2edc-5ef5-4d41-bed7-"
+                   "824a5635ea8d/resource/5ed98add-f127-4377-b529-aa8ad35b77e3/"
+                   "download/homicidios_dolosos_consumados.csv",
+        "como": "microdatos_uy",
+    },
 ]
+
+# LO QUE NO ES UNA UNIDAD. El campo DEPARTAMENTO del archivo uruguayo trae un
+# vigesimo valor que no es un departamento sino un lugar del hecho. Se aparta y
+# se cuenta aparte: ni se inventa una unidad ni se reparte entre las otras.
+NO_ES_UNIDAD_URY = {"CENTROS CARCELARIOS"}
 
 # «Cantidad de víctimas de homicidios dolosos. Provincia de Santa Fe.»
 UNIDAD = re.compile(r"\.\s*(?:Provincia de\s+)?([^.]+?)\s*\.?\s*$")
@@ -189,11 +211,72 @@ def de_socrata(f: dict) -> tuple:
     return unidades, len(por_unidad)
 
 
+def de_microdatos_uy(f: dict) -> tuple:
+    """Cuenta las víctimas por departamento y por año, sobre el hecho.
+
+    El archivo trae una fila por víctima. El recuento lo hace esta casa, que es
+    por qué se puede declarar exactamente qué se contó: filas con departamento
+    del padrón y año legible, sin filtrar por ninguna otra columna.
+    """
+    peticion = urllib.request.Request(f["recurso"], headers={"User-Agent": comun.AGENTE})
+    with urllib.request.urlopen(peticion, timeout=180) as respuesta:
+        crudo = respuesta.read()
+    # `utf-8-sig` y no `utf-8`: el archivo empieza con la marca de orden de bytes
+    # y sin quitarla el nombre de la primera columna sale con basura adelante.
+    texto = crudo.decode("utf-8-sig", "replace")
+    filas = list(csv.DictReader(io.StringIO(texto)))
+    if not filas:
+        raise RuntimeError("URY: el archivo de microdatos llegó vacío")
+
+    # El nombre de la columna del año lleva eñe. Se busca por forma y no por
+    # literal, para que un cambio de acentuación en la fuente no lo rompa.
+    columna_anio = next((c for c in filas[0] if c.strip().upper().rstrip("O").startswith("A")
+                         and len(c.strip()) <= 4), None)
+    if not columna_anio:
+        raise RuntimeError("URY: no se halló la columna del año")
+
+    por_unidad, apartadas = {}, 0
+    for x in filas:
+        nombre = (x.get("DEPARTAMENTO") or "").strip()
+        try:
+            anio = int(str(x.get(columna_anio) or "")[:4])
+        except ValueError:
+            continue
+        if not nombre:
+            continue
+        if nombre.upper() in NO_ES_UNIDAD_URY:
+            apartadas += 1
+            continue
+        cuenta = por_unidad.setdefault(nombre, {})
+        cuenta[anio] = cuenta.get(anio, 0) + 1
+
+    # EL ANIO EN CURSO NO ENTRA, por la misma razon que en los otros Estados: la
+    # fuente carga mes a mes y el ultimo anio esta a medio llenar.
+    todos = [a for v in por_unidad.values() for a in v]
+    tope = max(todos) - 1 if todos else None
+
+    unidades = []
+    for nombre, cuenta in por_unidad.items():
+        serie = [{"anio": a, "valor": n} for a, n in sorted(cuenta.items())
+                 if tope is None or a <= tope]
+        if not serie:
+            continue
+        unidades.append({"unidad": nombre, "id_en_la_fuente": "DEPARTAMENTO",
+                         "serie": serie, "ultimo": serie[-1],
+                         "desde": serie[0]["anio"], "hasta": serie[-1]["anio"]})
+    f["_apartadas"] = apartadas
+    return unidades, len(por_unidad)
+
+
 def construir() -> Path:
     registros, vacios = [], []
     for f in FUENTES:
-        unidades, pedidas = (de_socrata(f) if f.get("como") == "socrata"
-                             else de_argentina(f))
+        lectores = {"socrata": de_socrata, "series_ar": de_argentina,
+                    "microdatos_uy": de_microdatos_uy}
+        lector = lectores.get(f.get("como"))
+        if not lector:
+            raise RuntimeError(f"{f['iso']}: no hay lector para «{f.get('como')}»")
+        unidades, pedidas = lector(f)
         if not unidades:
             raise RuntimeError(f"{f['iso']}: ninguna serie utilizable")
         anios = sorted({u["hasta"] for u in unidades})
@@ -214,6 +297,13 @@ def construir() -> Path:
     vacios.append(
         f"{len(registros)} Estados con dato subnacional, de 33. El resto no significa que no "
         "publiquen: significa que todavía no se buscó su fuente nacional por unidad.")
+    apartadas = next((f.get("_apartadas") for f in FUENTES if f["iso"] == "URY"), 0)
+    if apartadas:
+        vacios.append(
+            f"Uruguay: {apartadas} víctimas del archivo nacional NO se asignan a ninguna "
+            "unidad. La fuente las registra bajo «CENTROS CARCELARIOS», que no es un "
+            "departamento sino un lugar del hecho. No se inventa una unidad para alojarlas "
+            "ni se reparten entre las otras: se apartan y se cuentan acá.")
     vacios.append(
         "El año en curso NO entra en las series que la fuente publica mes a mes: está "
         "incompleto, y dibujarlo al lado de años cerrados haría ver una caída que no existe.")

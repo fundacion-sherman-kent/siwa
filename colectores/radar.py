@@ -30,6 +30,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -144,10 +145,11 @@ def construir() -> Path:
 
     # La fecha de la medición es la ventana, no un año: se guarda el año en curso
     # para que el registro pueda ordenarla junto al resto, y la ventana se declara.
-    anio = int(comun.ahora().year) if hasattr(comun, "ahora") else None
-    if anio is None:
-        from datetime import datetime, timezone
-        anio = datetime.now(timezone.utc).year
+    # `comun.ahora()` devuelve una CADENA en ISO, no una fecha: pedirle `.year`
+    # reventaba el colector entero. Fue el precio de escribirlo sin poder
+    # correrlo —la credencial vive en el robot—, y el robot lo declaró en su
+    # primera corrida real en vez de publicar algo a medias.
+    anio = datetime.now(timezone.utc).year
 
     registros, cobertura = [], {}
     for p in padron:
