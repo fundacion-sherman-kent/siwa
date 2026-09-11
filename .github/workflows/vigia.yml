@@ -26,7 +26,7 @@
 #
 # QUÉ MIRA
 # --------
-# Dos cosas, y ninguna es opinable:
+# Tres cosas, y ninguna es opinable:
 #
 #   1. HACE CUÁNTO QUE NO LLEGA UN DATO NUEVO. La fecha de obtención más
 #      reciente de todo el registro. Si pasó el tope, el robot no está
@@ -37,6 +37,12 @@
 #      YAML no revisa —identificadores repetidos, pasos sin acción, avisos que
 #      nombran pasos inexistentes—, y se revisa en TODOS los flujos, este
 #      incluido.
+#   3. SI EL LECTOR PUEDE VER LAS FUENTES QUE EL REGISTRO DICE TENER. El mismo
+#      día se midió que la página mostraba 36 fuentes, el rótulo que ven Google
+#      y WhatsApp decía 48, y en los archivos había 51. Tres cifras distintas en
+#      un mismo producto. La lista de la página descarta EN SILENCIO el renglón
+#      cuya clave no existe, así que cuatro fuentes estaban recolectadas,
+#      publicadas y contadas, y el lector no podía verlas.
 #
 # QUÉ NO MIRA
 # -----------
@@ -49,7 +55,7 @@
 # La corrida queda en rojo y GitHub avisa por correo. No se arregla nada solo, a
 # propósito: el rojo es el aviso, y qué hacer depende de qué se rompió.
 
-name: Vigía del robot
+name: Vigía
 
 on:
   schedule:
@@ -64,6 +70,8 @@ on:
     paths:
       - ".github/workflows/**"
       - "herramientas/vigia-robot.py"
+      - "herramientas/lista-de-fuentes.py"
+      - "sitio/index.html"
   workflow_dispatch:
 
 permissions:
@@ -85,7 +93,29 @@ jobs:
         run: python -m pip install --quiet pyyaml
 
       - name: ¿El robot sigue vivo?
+        id: robot
+        continue-on-error: true
         run: python herramientas/vigia-robot.py
+
+      # ¿PUEDE EL LECTOR VER LAS FUENTES QUE EL REGISTRO DICE TENER? El mismo
+      # día se midió que la página mostraba 36 fuentes, el rótulo del enlace
+      # decía 48 y en los archivos había 51. La causa no fue mala fe: la lista
+      # descarta en silencio el renglón cuya clave no existe, y agregar un
+      # colector sin agregar su renglón no rompe nada visible.
+      - name: ¿Se ven todas las fuentes?
+        id: fuentes
+        continue-on-error: true
+        run: python herramientas/lista-de-fuentes.py
+
+      # Los dos controles corren SIEMPRE los dos, y recién después se decide el
+      # color. Si el primero cortara la corrida, una muerte del robot taparía
+      # un problema de fuentes, y se arreglaría uno por vez sin saber del otro.
+      - name: Juntar los avisos
+        run: |
+          fallo=0
+          [ "${{ steps.robot.outcome }}" = "failure" ] && { echo "El robot no está bien."; fallo=1; }
+          [ "${{ steps.fuentes.outcome }}" = "failure" ] && { echo "La lista de fuentes no está bien."; fallo=1; }
+          exit $fallo
 
       - name: Qué hacer si esto quedó en rojo
         if: failure()

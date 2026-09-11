@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -52,9 +53,42 @@ MARCA_INICIO = "<!-- fuentes:calculado -->"
 MARCA_FIN = "<!-- fuentes:fin -->"
 
 
+def _publicados() -> list:
+    """Los archivos de datos que el lector va a poder abrir.
+
+    NO es lo mismo que los archivos del disco, y la diferencia costó una cifra
+    inflada: en la máquina de trabajo conviven con el registro en servicio los
+    archivos de la segunda etapa —la capa subnacional—, recolectados y todavía
+    sin publicar. Contarlos anuncia fuentes que nadie puede consultar, que es el
+    error inverso al de declarar de menos y se nota mucho menos.
+
+    Se le pregunta a git cuáles va a ignorar. Si git no está —no debería pasar,
+    pero no se adivina—, se cuenta todo y se avisa: es preferible una cifra
+    alta declarada a una silenciosa.
+    """
+    todos = sorted(DATOS.glob("*.json"))
+    # Los nombres van como ARGUMENTOS y no por la entrada estandar: `--stdin`
+    # devuelve vacio en Windows, y el sellador se quedaba contando de mas sin
+    # decir nada, que es justo lo que este cambio vino a impedir.
+    try:
+        r = subprocess.run(["git", "check-ignore"]
+                           + [q.relative_to(RAIZ).as_posix() for q in todos],
+                           cwd=RAIZ,
+                           capture_output=True, text=True, timeout=30)
+    except Exception as e:  # noqa: BLE001 — sin git se cuenta todo, declarándolo
+        print(f"[sellar-portada] AVISO: no se pudo consultar a git ({e}); se cuenta "
+              f"todo lo que hay en el disco.", file=sys.stderr)
+        return todos
+    fuera = {Path(l.strip()).name for l in r.stdout.splitlines() if l.strip()}
+    if fuera:
+        print(f"[sellar-portada] {len(fuera)} archivos NO se cuentan porque no se "
+              f"publican: {', '.join(sorted(fuera))}", file=sys.stderr)
+    return [p for p in todos if p.name not in fuera]
+
+
 def _cifras() -> dict:
     indicadores = 0
-    for archivo in sorted(DATOS.glob("*.json")):
+    for archivo in _publicados():
         try:
             d = json.loads(archivo.read_text(encoding="utf-8"))
         except Exception:  # noqa: BLE001 — un archivo ilegible no debe sellar mal
@@ -73,7 +107,7 @@ def _cifras() -> dict:
     # las fuentes DISTINTAS que dejaron archivo, que es la misma cuenta que hace
     # la tabla del README: un solo numero, calculado en un solo lugar.
     nombres = set()
-    for archivo in sorted(DATOS.glob("*.json")):
+    for archivo in _publicados():
         try:
             d = json.loads(archivo.read_text(encoding="utf-8"))
         except Exception:  # noqa: BLE001 — un archivo ilegible no infla la cuenta
