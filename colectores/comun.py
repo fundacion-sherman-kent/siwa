@@ -122,6 +122,14 @@ CATEGORIAS = {
     "termina_secundaria": "educacion",
     "aprobacion_democracia": "integridad",
     "acceso_electricidad": "infraestructuras-criticas",
+    # POR DONDE ENTRA Y SALE UN PAIS. La categoría medía el servicio —acceso,
+    # pérdidas, agua— y no la puerta física. Un Estado con un solo punto de
+    # amarre queda incomunicado con un accidente de ancla, y eso no aparece en
+    # ninguna estadística de conectividad.
+    "cables_submarinos": "infraestructuras-criticas",
+    "aeropuertos": "infraestructuras-criticas",
+    "generacion_electrica": "infraestructuras-criticas",
+    "capacidad_solar": "infraestructuras-criticas",
     "agua_potable_basica": "infraestructuras-criticas",
     "agua_renovable": "recursos-estrategicos",
     # LO QUE HAY BAJO TIERRA. Hasta acá la categoría tenía agua, energía importada

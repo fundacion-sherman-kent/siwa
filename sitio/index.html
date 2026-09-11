@@ -10,7 +10,7 @@
      tarjeta vacía con la dirección cruda, y el registro parece abandonado.
      Las direcciones van ABSOLUTAS a propósito: las redes no resuelven rutas
      relativas cuando leen la etiqueta. -->
-<meta name="description" content="Registro público y gratuito de América Latina y el Caribe: 126 indicadores sobre 33 Estados. Cada cifra con su fuente, su fecha y sus vacíos declarados.">
+<meta name="description" content="Registro público y gratuito de América Latina y el Caribe: 130 indicadores sobre 33 Estados. Cada cifra con su fuente, su fecha y sus vacíos declarados.">
 <link rel="alternate" type="application/rss+xml" title="SIWA — lo que cambió"
       href="https://siwa.fundacionkent.org/novedades.xml">
 <link rel="canonical" href="https://siwa.fundacionkent.org/sitio/index.html">
@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 126 indicadores, 52 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-126-52">
+<meta property="og:description" content="33 Estados, 130 indicadores, 53 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-130-53">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 126 indicadores, 52 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-126-52">
+<meta name="twitter:description" content="33 Estados, 130 indicadores, 53 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-130-53">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 126 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 52 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 130 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 53 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -4163,7 +4163,8 @@
                      ['drogas','UNODC — Informe Mundial sobre las Drogas'],
                      ['contrataciones','Estándar de Datos de Contrataciones Abiertas'],
                      ['opacidadHistoria','Oficina — archivo del Índice de Opacidad'],
-                     ['recursos','USGS y Energy Institute — minerales e hidrocarburos']];
+                     ['recursos','USGS y Energy Institute — minerales e hidrocarburos'],
+                     ['infraestructura','Cables submarinos, aeropuertos y energía']];
 
   // El informe imprimible se abre a pedido. En papel sale siempre entero: la
   // regla de impresion anula el plegado, de modo que el PDF no cambia.
@@ -7320,7 +7321,7 @@
                             almacen.cepal, almacen.gasto, almacen.unesco,
                             almacen.oit, almacen.salud, almacen.prensa,
                             almacen.pobreza, almacen.percepcion_corrupcion,
-                            almacen.recursos].filter(Boolean);
+                            almacen.recursos, almacen.infraestructura].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -11872,7 +11873,11 @@
                    'renta_petroleo','renta_gas','renta_minerales','exporta_combustibles',
                    'energia_importada','uso_energia','uso_energia_ei','superficie',
                    'poblacion','agua_renovable','tierra_arable'],'recursos-estrategicos');
-    tarjetasBanco(['acceso_electricidad','electricidad_por_habitante',
+    // LA PUERTA FISICA PRIMERO. Los cables encabezan a proposito: es el unico
+    // renglon donde el numero BAJO es la noticia, y varios Estados de la region
+    // dependen de un solo punto de amarre.
+    tarjetasBanco(['cables_submarinos','aeropuertos','generacion_electrica','capacidad_solar',
+                   'acceso_electricidad','electricidad_por_habitante',
                    'electricidad_renovable','perdidas_electricas','puertos_contenedores',
                    'agua_potable_basica'],'infraestructuras-criticas');
     fronterasVista();
@@ -15490,6 +15495,23 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-educacion','UNESCO',err.message);
       document.getElementById('proc-educacion').textContent='Sin registro disponible.'; marcador(); });
+
+  // INFRAESTRUCTURAS CRITICAS: por donde entra y sale un pais. Cables
+  // submarinos, aeropuertos y energia. Lo critico no es el numero alto: es el
+  // bajo, y varios Estados de la region tienen un solo punto de amarre.
+  Promise.all([traer('infraestructura.json'), traer('estado/infraestructura.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.infraestructura=d; dominios+=Object.keys(d.cobertura||{}).length;
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-infraestructuras-criticas',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-infraestructuras-criticas','cables, aeropuertos y energía',
+                    estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++;
+      pintarNoLlego('tarj-infraestructuras-criticas','cables, aeropuertos y energía',err.message);
+      marcador(); });
 
   // RECURSOS ESTRATEGICOS: que produce cada Estado y cuanto pesa en el mundo.
   // Hasta acá esta categoría solo tenía medidas de DEPENDENCIA —agua, energía

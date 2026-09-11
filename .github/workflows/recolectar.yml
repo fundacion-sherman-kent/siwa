@@ -158,6 +158,15 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/recursos.py
 
+      # INFRAESTRUCTURAS CRITICAS: cables submarinos, aeropuertos y energia.
+      # Tres fuentes abiertas sin credencial. Va en la pasada completa: el mapa
+      # de cables y el censo de aerodromos cambian de a un punto por mes.
+      - name: Infraestructuras criticas (cables, aeropuertos y energia)
+        id: infraestructura
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/infraestructura.py
+
       - name: Muertes no delictivas y salud
         id: oms
         continue-on-error: true
@@ -580,6 +589,7 @@ jobs:
           [ "${{ steps.oit.outcome }}" = "failure" ] && { echo "Falló trabajo y desempleo."; fallo=1; }
           [ "${{ steps.oms_salud.outcome }}" = "failure" ] && { echo "Fallaron las muertes no delictivas y la salud."; fallo=1; }
           [ "${{ steps.recursos.outcome }}" = "failure" ] && { echo "Fallaron los recursos estratégicos."; fallo=1; }
+          [ "${{ steps.infraestructura.outcome }}" = "failure" ] && { echo "Fallaron las infraestructuras críticas."; fallo=1; }
           [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
           [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }

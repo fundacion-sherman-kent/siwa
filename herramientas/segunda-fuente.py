@@ -58,6 +58,11 @@ ASUNTOS = {
     "bosque y deforestación": ["bosque", "perdida_bosque"],
     "pobreza": ["pobreza", "pobreza_cepal", "pobreza_extrema", "vulnerabilidad"],
     "desigualdad": ["gini"],
+    # Asuntos propios y no dentro de «conectividad»: los cables son la puerta
+    # física y el internet es el uso. Juntarlos daría por corroborado, con dos
+    # productores, algo que ninguno de los dos mide dos veces.
+    "cables submarinos": ["cables_submarinos"],
+    "aeropuertos": ["aeropuertos"],
     # RECURSOS ESTRATEGICOS. Se separan en dos asuntos y no en uno: los
     # hidrocarburos los mide el Energy Institute y los minerales el servicio
     # geologico estadounidense. Juntarlos daria dos productores para un solo
@@ -99,7 +104,11 @@ ASUNTOS = {
     "recursos naturales": ["minerales", "rentas_naturales", "renta_petroleo", "renta_gas",
                            "renta_minerales", "exporta_combustibles", "agua_renovable",
                            "tierra_arable", "recursos_no_renovables"],
-    "energía e infraestructura": ["energia_importada", "uso_energia", "uso_energia_ei",
+    # La generación y la capacidad solar entran acá porque miden lo mismo que el
+    # resto del renglón —cuánta energía hay y de dónde sale— y las trae otro
+    # productor: es corroboración de verdad, no dos nombres del mismo organismo.
+    "energía e infraestructura": ["generacion_electrica", "capacidad_solar",
+                                  "energia_importada", "uso_energia", "uso_energia_ei",
                                   "acceso_electricidad", "electricidad_renovable",
                                   "electricidad_por_habitante", "perdidas_electricas",
                                   "puertos_contenedores", "agua_potable",
