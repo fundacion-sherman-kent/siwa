@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-11T23:24:26+00:00",
-  "medidas_con_suficientes_casos": 169,
-  "pares_probados": 14196,
+  "corrida": "2026-09-12T00:33:15+00:00",
+  "medidas_con_suficientes_casos": 168,
+  "pares_probados": 14028,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 14196 pares y el umbral de siempre, alrededor de 709 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2818,
-    "de_ellos_son_parentescos": 388
+    "por_que": "Con 14028 pares y el umbral de siempre, alrededor de 701 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 2763,
+    "de_ellos_son_parentescos": 386
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2430,
+  "pistas_totales": 2377,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -177,19 +177,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.926,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.390721121840256e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -295,13 +282,13 @@
     },
     {
       "a": "focos:focos",
-      "b": "perdida_bosque",
+      "b": "superficie",
       "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.909,
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.912,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 7.042621191835532e-17,
+      "p": 3.6684682607698896e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -328,19 +315,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.8981853752028557e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:nocturnos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.9,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.096164775131272e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -385,6 +359,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.898,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1065879819113682e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "migrantes",
       "b": "ransomware:victimas",
       "rotulo_a": "Población migrante que el país aloja",
@@ -398,27 +385,14 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:anomalias",
-      "b": "poblacion",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.892,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.701985505372362e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "ciber:mediciones",
       "b": "poblacion",
       "rotulo_a": "ciber · mediciones",
       "rotulo_b": "Población total",
-      "coeficiente": 0.888,
+      "coeficiente": 0.886,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 9.995655754126103e-15,
+      "p": 1.4022242497771976e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -432,6 +406,32 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.492826828830485e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:anomalias",
+      "b": "poblacion",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.884,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.1687521539940998e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:nocturnos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.883,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.5519026209116013e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -463,32 +463,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "poblacion",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.881,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.981192167286904e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:nocturnos",
-      "b": "superficie",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.879,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.5975757387571565e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "estado_derecho",
       "rotulo_a": "Corrupción política",
@@ -497,6 +471,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.2187629731577568e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:mediciones",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.878,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 7.281325863002586e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -528,32 +515,6 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:anomalias",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.876,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.871169224018443e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.875,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.2521278131951146e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "desempleo_joven",
       "b": "desempleo_oit",
       "rotulo_a": "Desempleo juvenil",
@@ -575,19 +536,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 9.712603388347818e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.872,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.8779586352328563e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -723,6 +671,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:anomalias",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.867,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.591307475583416e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "ransomware:victimas",
       "rotulo_a": "Generación eléctrica",
@@ -796,6 +757,45 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 3.708848446856278e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "crimen_organizado:resiliencia",
+      "b": "percepcion_corrupcion:intervalo_bajo",
+      "rotulo_a": "crimen_organizado · resiliencia",
+      "rotulo_b": "percepcion_corrupcion · intervalo_bajo",
+      "coeficiente": 0.86,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 1.8834640759680453e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "crimen_organizado:resiliencia",
+      "b": "percepcion_corrupcion",
+      "rotulo_a": "crimen_organizado · resiliencia",
+      "rotulo_b": "Percepción de corrupción",
+      "coeficiente": 0.859,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 2.107432215685898e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "crimen_organizado:resiliencia",
+      "b": "percepcion_corrupcion:puntaje",
+      "rotulo_a": "crimen_organizado · resiliencia",
+      "rotulo_b": "percepcion_corrupcion · puntaje",
+      "coeficiente": 0.859,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 2.107432215685898e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
