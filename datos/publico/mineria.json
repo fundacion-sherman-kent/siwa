@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-12T05:24:40+00:00",
-  "medidas_con_suficientes_casos": 168,
-  "pares_probados": 14028,
+  "corrida": "2026-09-12T06:07:14+00:00",
+  "medidas_con_suficientes_casos": 170,
+  "pares_probados": 14365,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 14028 pares y el umbral de siempre, alrededor de 701 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2762,
-    "de_ellos_son_parentescos": 386
+    "por_que": "Con 14365 pares y el umbral de siempre, alrededor de 718 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 2756,
+    "de_ellos_son_parentescos": 383
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2376,
+  "pistas_totales": 2373,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -142,10 +142,10 @@
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.939,
+      "coeficiente": 0.94,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 2.9622836271391e-21,
+      "p": 1.818923215569148e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -385,6 +385,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.893,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.4029928956549348e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:mediciones",
       "b": "poblacion",
       "rotulo_a": "ciber · mediciones",
@@ -393,19 +406,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.4022242497771976e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.886,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.492826828830485e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -458,6 +458,19 @@
       "estados": 15,
       "tipo": "rangos (Spearman)",
       "p": 1.6597679031752078e-06,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "armas:importa_usd",
+      "b": "indice_opacidad:opacidad",
+      "rotulo_a": "armas · importa_usd",
+      "rotulo_b": "indice_opacidad · opacidad",
+      "coeficiente": -0.88,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.6551472597830116e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -580,19 +593,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "generacion_electrica",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.871,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.404489278026183e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Corrupción política",
@@ -645,19 +645,6 @@
       "misma_categoria": false
     },
     {
-      "a": "aeropuertos",
-      "b": "copernicus:escenas",
-      "rotulo_a": "Aeropuertos grandes y medianos",
-      "rotulo_b": "copernicus · escenas",
-      "coeficiente": 0.868,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.223593808796827e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "actores_antidemocraticos",
       "b": "estado_derecho",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -679,6 +666,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 4.591307475583416e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "generacion_electrica",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.865,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.71072819976006e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -723,6 +723,19 @@
       "misma_categoria": false
     },
     {
+      "a": "aeropuertos",
+      "b": "copernicus:escenas",
+      "rotulo_a": "Aeropuertos grandes y medianos",
+      "rotulo_b": "copernicus · escenas",
+      "coeficiente": 0.863,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 8.815227144160317e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "percepcion_corrupcion:intervalo_alto",
       "b": "voz_rendicion",
       "rotulo_a": "percepcion_corrupcion · intervalo_alto",
@@ -731,6 +744,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.4482106419781867e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.861,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.286024230968239e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -770,32 +796,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.8834640759680453e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "crimen_organizado:resiliencia",
-      "b": "percepcion_corrupcion",
-      "rotulo_a": "crimen_organizado · resiliencia",
-      "rotulo_b": "Percepción de corrupción",
-      "coeficiente": 0.859,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 2.107432215685898e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "crimen_organizado:resiliencia",
-      "b": "percepcion_corrupcion:puntaje",
-      "rotulo_a": "crimen_organizado · resiliencia",
-      "rotulo_b": "percepcion_corrupcion · puntaje",
-      "coeficiente": 0.859,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 2.107432215685898e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
