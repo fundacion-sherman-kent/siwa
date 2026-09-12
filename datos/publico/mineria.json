@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-12T17:27:19+00:00",
+  "corrida": "2026-09-12T18:27:38+00:00",
   "medidas_con_suficientes_casos": 170,
   "pares_probados": 14365,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 14365 pares y el umbral de siempre, alrededor de 718 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2748,
+    "sobreviven": 2756,
     "de_ellos_son_parentescos": 383
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2365,
+  "pistas_totales": 2373,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -320,32 +320,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.903,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.985402792067891e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.901,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.484728188897578e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -385,6 +359,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.899,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 8.381130028449996e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "migrantes",
       "b": "ransomware:victimas",
       "rotulo_a": "Población migrante que el país aloja",
@@ -393,6 +380,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.3202327060549845e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.896,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.957295181252055e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -762,6 +762,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "poblacion",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.861,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.2534120336170777e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "uso_energia",
       "b": "uso_energia_ei",
       "rotulo_a": "Uso de energía por habitante",
@@ -783,19 +796,6 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 3.708848446856278e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "crimen_organizado:resiliencia",
-      "b": "percepcion_corrupcion:intervalo_bajo",
-      "rotulo_a": "crimen_organizado · resiliencia",
-      "rotulo_b": "percepcion_corrupcion · intervalo_bajo",
-      "coeficiente": 0.86,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 1.8834640759680453e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
