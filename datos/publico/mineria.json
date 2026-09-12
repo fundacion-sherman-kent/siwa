@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-12T06:30:16+00:00",
+  "corrida": "2026-09-12T07:24:03+00:00",
   "medidas_con_suficientes_casos": 170,
   "pares_probados": 14365,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 14365 pares y el umbral de siempre, alrededor de 718 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2755,
+    "sobreviven": 2756,
     "de_ellos_son_parentescos": 383
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2372,
+  "pistas_totales": 2373,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -285,10 +285,10 @@
       "b": "superficie",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.912,
+      "coeficiente": 0.909,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.6684682607698896e-17,
+      "p": 8.764784031865106e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -359,19 +359,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.898,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1065879819113682e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "migrantes",
       "b": "ransomware:victimas",
       "rotulo_a": "Población migrante que el país aloja",
@@ -380,6 +367,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.3202327060549845e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.895,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.12553956848103e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -431,7 +431,7 @@
       "coeficiente": 0.883,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 2.5519026209116013e-14,
+      "p": 2.97193093360727e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -749,19 +749,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.861,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.286024230968239e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "uso_energia",
       "b": "uso_energia_ei",
       "rotulo_a": "Uso de energía por habitante",
@@ -796,6 +783,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.8834640759680453e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "crimen_organizado:resiliencia",
+      "b": "percepcion_corrupcion",
+      "rotulo_a": "crimen_organizado · resiliencia",
+      "rotulo_b": "Percepción de corrupción",
+      "coeficiente": 0.859,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 2.107432215685898e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
