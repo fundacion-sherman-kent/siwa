@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-13T05:25:55+00:00",
+  "corrida": "2026-09-13T06:07:48+00:00",
   "medidas_con_suficientes_casos": 170,
   "pares_probados": 14365,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 14365 pares y el umbral de siempre, alrededor de 718 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2740,
+    "sobreviven": 2697,
     "de_ellos_son_parentescos": 383
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2357,
+  "pistas_totales": 2314,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -142,10 +142,10 @@
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.94,
+      "coeficiente": 0.941,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.818923215569148e-21,
+      "p": 1.1505044275781066e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -198,19 +198,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.2779862246654644e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "migrantes",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.921,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 3.318989170205655e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -307,19 +294,6 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.909,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 8.77994889508746e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Corrupción política",
@@ -372,27 +346,14 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:victimas",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.897,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3202327060549845e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "copernicus:escenas",
       "b": "perdida_bosque",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.893,
+      "coeficiente": 0.884,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.4029928956549348e-15,
+      "p": 2.176709137002121e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -445,19 +406,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 3.7270182571627936e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "armas:importa_usd",
-      "b": "indice_opacidad:opacidad",
-      "rotulo_a": "armas · importa_usd",
-      "rotulo_b": "indice_opacidad · opacidad",
-      "coeficiente": -0.88,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.6551472597830116e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -528,27 +476,14 @@
       "misma_categoria": false
     },
     {
-      "a": "generacion_electrica",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Generación eléctrica",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.874,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 9.712603388347818e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "copernicus:escenas",
-      "b": "focos:focos",
+      "b": "generacion_electrica",
       "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
+      "rotulo_b": "Generación eléctrica",
       "coeficiente": 0.873,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.8516146429781466e-13,
+      "p": 1.5842776811325338e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -658,14 +593,14 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "generacion_electrica",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.865,
+      "a": "aeropuertos",
+      "b": "copernicus:escenas",
+      "rotulo_a": "Aeropuertos grandes y medianos",
+      "rotulo_b": "copernicus · escenas",
+      "coeficiente": 0.866,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.71072819976006e-13,
+      "p": 5.459989449650313e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -684,14 +619,14 @@
       "misma_categoria": false
     },
     {
-      "a": "generacion_electrica",
-      "b": "ransomware:victimas",
-      "rotulo_a": "Generación eléctrica",
-      "rotulo_b": "ransomware · victimas",
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
       "coeficiente": 0.865,
-      "estados": 31,
+      "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.540973458041777e-12,
+      "p": 6.869251838358942e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -718,19 +653,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 8.435986656188149e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "aeropuertos",
-      "b": "copernicus:escenas",
-      "rotulo_a": "Aeropuertos grandes y medianos",
-      "rotulo_b": "copernicus · escenas",
-      "coeficiente": 0.863,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.815227144160317e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +718,84 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.8834640759680453e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "crimen_organizado:resiliencia",
+      "b": "percepcion_corrupcion",
+      "rotulo_a": "crimen_organizado · resiliencia",
+      "rotulo_b": "Percepción de corrupción",
+      "coeficiente": 0.859,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 2.107432215685898e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "crimen_organizado:resiliencia",
+      "b": "percepcion_corrupcion:puntaje",
+      "rotulo_a": "crimen_organizado · resiliencia",
+      "rotulo_b": "percepcion_corrupcion · puntaje",
+      "coeficiente": 0.859,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 2.107432215685898e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "democracia_participativa",
+      "b": "voz_rendicion",
+      "rotulo_a": "Democracia participativa",
+      "rotulo_b": "Voz y rendición de cuentas",
+      "coeficiente": 0.858,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 1.5531006020092533e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "gasto_seguridad",
+      "b": "ransomware:victimas_ultimos_dos_anios",
+      "rotulo_a": "Gasto en orden público y seguridad",
+      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
+      "coeficiente": -0.858,
+      "estados": 15,
+      "tipo": "rangos (Spearman)",
+      "p": 8.48155762425766e-06,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · grupos_distintos",
+      "coeficiente": 0.856,
+      "estados": 21,
+      "tipo": "rangos (Spearman)",
+      "p": 6.045166109898839e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "poblacion",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.855,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.0274156314171003e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
