@@ -1079,6 +1079,27 @@
   @media (max-width:640px){ .relaciones .hoja{font-size:8px;}
     .relaciones .materia-rotulo{font-size:9.5px;} }
 
+  /* LA CARRERA DEL CONSTRUCTOR. Barras en HTML y no en SVG: así cada país conserva
+     su fila entre un año y otro, y el cambio de puesto se ve como un movimiento y
+     no como un salto. */
+  .ctor-carrera-controles{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 10px;}
+  .ctor-carrera-controles input[type=range]{flex:1 1 200px;accent-color:#FB6500;}
+  .ctor-carrera-controles output{font:700 13px 'JetBrains Mono',monospace;min-width:4ch;}
+  .ctor-carrera{position:relative;margin:0 44px 4px 128px;}
+  .ctor-carrera .c-titulo{position:absolute;left:0;top:-2px;font-size:9.5px;font-weight:600;color:#7d90a8;}
+  .ctor-carrera .c-anio{position:absolute;right:0;bottom:6px;font:700 clamp(40px,8vw,72px)/1 'JetBrains Mono',monospace;
+    color:currentColor;opacity:.12;pointer-events:none;}
+  .ctor-carrera .c-fila{position:absolute;left:0;right:0;top:0;height:18px;display:flex;align-items:center;
+    transition:transform .45s ease,opacity .3s;}
+  .ctor-carrera .c-nombre{position:absolute;right:calc(100% + 6px);white-space:nowrap;font-size:11px;opacity:.8;}
+  .ctor-carrera .c-barra{height:14px;background:rgba(251,101,0,.62);min-width:1px;}
+  .ctor-carrera .c-fila.propio .c-barra{background:#FB6500;}
+  .ctor-carrera .c-valor{margin-left:5px;font-size:10.5px;font-weight:700;white-space:nowrap;}
+  .ctor-carrera .c-valor i{font-style:normal;font-weight:400;color:#7d90a8;}
+  .ctor-carrera .c-eje{position:absolute;left:0;right:0;bottom:0;height:18px;border-top:1px solid currentColor;
+    border-top-color:rgba(125,144,168,.45);font-size:9.5px;color:#7d90a8;}
+  .ctor-carrera .c-eje span{position:absolute;top:3px;transform:translateX(-50%);}
+  @media (prefers-reduced-motion: reduce){ .ctor-carrera .c-fila{transition:none;} }
   .llevar-mapa{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:10.5px;
     color:var(--tenue);}
 
@@ -4170,6 +4191,7 @@
   // Se abre en la situacion general y no en un indicador suelto: quien entra
   // por primera vez pregunta «como esta la region», no «como estan los homicidios».
   let capaActiva = 'situacion', modo = 'nivel', paisFiltro = null, paisNombre = null, padron = [];
+  let geoInfo = null;
   // EL ANIO ELEGIDO PARA EL MAPA. null es «el ultimo dato de cada Estado», que
   // es lo que siempre se mostro. Un anio concreto repinta el mapa con lo que la
   // fuente publico para ese anio: no se calcula ni se proyecta nada.
@@ -5599,9 +5621,12 @@
         const b = document.createElement('div');
         b.className = 'llevar-mapa';
         b.innerHTML = '<button class="boton chico" id="bajar-imagen-mapa">Descargar el tablero '
-                    + 'como imagen</button><span>Mapa, tarjeta, gráfico, fuente y fecha, en un PNG.</span>';
+                    + 'como imagen</button><span>Mapa, tarjeta, gráfico, fuente y fecha, en un PNG.</span>'
+                    + '<button class="boton chico" id="bajar-infografia">Descargar la infografía del país</button>'
+                    + '<span>Seis cifras del país elegido frente a la región, lista para redes.</span>';
         colMapa.appendChild(b);
-        b.querySelector('button').addEventListener('click', () => imagenDelTablero());
+        b.querySelector('#bajar-imagen-mapa').addEventListener('click', () => imagenDelTablero());
+        b.querySelector('#bajar-infografia').addEventListener('click', () => infografiaPais());
       }
     }
     // El grafico de lo elegido o cruzado, debajo del mapa.
@@ -6024,6 +6049,151 @@
       }, 'image/png');
     }catch(e){
       avisar('No se pudo armar la imagen: ' + (e && e.message ? e.message : e), true);
+    }
+  }
+
+  // ============ INFOGRAFÍA DEL PAÍS, DESCARGABLE ============
+  //
+  // Autorizada por la dirección el 13/9/2026. Una imagen vertical de 1080 × 1350
+  // —la medida de Instagram y LinkedIn— con seis cifras del país frente a la región.
+  // VA EN EL REGISTRO CLARO DEL MANUAL DE IDENTIDAD, porque es material de difusión
+  // abierta: crema de fondo, banda navy inset con el título en gris claro, filete
+  // naranja vertical, Inter en sus tres pesos, logo oficial con nombre y los dos
+  // sitios de la Fundación. El naranja aparece dos veces y ninguna más.
+  const INFO_FICHAS = [
+    {k:'temor_delito', eje:'SEGURIDAD', tit:'Temen ser víctimas de un delito', uni:'% de las personas', fuente:'CEPAL'},
+    {k:'victima_delito', eje:'SEGURIDAD', tit:'Fueron víctimas de un delito en el último año', uni:'% de las personas', fuente:'CEPAL'},
+    {k:'homicidios', eje:'SEGURIDAD', tit:'Homicidios intencionales', uni:'por cada 100.000 habitantes', fuente:'UNODC · Banco Mundial'},
+    {k:'gini', eje:'DESARROLLO', tit:'Desigualdad del ingreso (Gini)', uni:'de 0 a 100', fuente:'Banco Mundial'},
+    {k:'perdida_bosque', eje:'DESARROLLO', tit:'Bosque perdido en el año', uni:'hectáreas', fuente:'GLAD · Global Forest Watch · franja logarítmica', log:true},
+    {k:'democracia_electoral', eje:'GOBERNANZA', tit:'Nivel de democracia electoral', uni:'índice de 0 a 1', fuente:'V-Dem'},
+  ];
+
+  function infoCifra(k, v){
+    const n = (x, d) => x.toLocaleString('es-AR', {minimumFractionDigits:d, maximumFractionDigits:d});
+    if(k === 'perdida_bosque') return v >= 1e6 ? n(v / 1e6, 2) + ' mill.' : v >= 1e3 ? n(v / 1e3, 1) + ' mil' : n(v, 0);
+    if(k === 'democracia_electoral') return n(v, 2);
+    return n(v, Math.abs(v) >= 100 ? 0 : 1);
+  }
+
+  async function infografiaPais(){
+    const iso = paisFiltro;
+    if(!iso){ avisar('Elegí un país en el mapa para descargar su infografía.', true); return; }
+    try{
+      const C = {crema:'#F9F9F7', navy:'#00121E', gris:'#667B89', banda:'#C6C6C5', violeta:'#8C00E0',
+                 naranja:'#FB6500', linea:'rgba(102,123,137,.35)', punto:'rgba(102,123,137,.45)'};
+      const W = 1080, H = 1350, M = 64;
+      const lienzo = document.createElement('canvas'); lienzo.width = W; lienzo.height = H;
+      const ctx = lienzo.getContext('2d');
+      try{ await Promise.all(['700 76px Inter', '500 18px Inter', '400 28px Inter'].map(f => document.fonts.load(f))); }catch(_){}
+      const logo = await new Promise(ok => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null);
+                                             im.src = 'marca/fusk-logo-nombre-color.png'; });
+      const envolver = (texto, x, y, ancho, alto) => {
+        let linea = '', yy = y;
+        for(const p of String(texto).split(' ')){
+          const prueba = linea ? linea + ' ' + p : p;
+          if(ctx.measureText(prueba).width > ancho && linea){ ctx.fillText(linea, x, yy); linea = p; yy += alto; }
+          else linea = prueba;
+        }
+        ctx.fillText(linea, x, yy); return yy;
+      };
+      ctx.fillStyle = C.crema; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = C.navy; ctx.fillRect(M, 0, W - 2 * M, 96);
+      ctx.fillStyle = C.banda; ctx.font = '700 30px Inter'; ctx.textAlign = 'center';
+      ctx.fillText('SIWA · REPORTE DE SITUACIÓN', W / 2, 60); ctx.textAlign = 'left';
+      // LA SILUETA DEL PAÍS, dibujada con el mismo mapa del sitio y en violeta de la
+      // casa: identifica al país sin traer colores de afuera del manual.
+      const rasgo = geoInfo && geoInfo.features.find(g => g.properties && g.properties.iso === iso);
+      if(rasgo){
+        const polis = rasgo.geometry.type === 'Polygon' ? [rasgo.geometry.coordinates] : rasgo.geometry.coordinates;
+        let xa = 1e9, xb = -1e9, ya = 1e9, yb = -1e9;
+        polis.forEach(pl => pl[0].forEach(([lon, lat]) => {
+          xa = Math.min(xa, lon); xb = Math.max(xb, lon); ya = Math.min(ya, lat); yb = Math.max(yb, lat); }));
+        const k = Math.cos(((ya + yb) / 2) * Math.PI / 180);
+        const cajaW = 250, cajaH = 160, cx0 = W - M - cajaW, cy0 = 116;
+        const esc = Math.min(cajaW / (((xb - xa) * k) || 1), cajaH / ((yb - ya) || 1));
+        const ox = cx0 + (cajaW - (xb - xa) * k * esc) / 2, oy = cy0 + (cajaH - (yb - ya) * esc) / 2;
+        ctx.fillStyle = C.violeta; ctx.beginPath();
+        polis.forEach(pl => pl.forEach(anillo => anillo.forEach(([lon, lat], j) => {
+          const px = ox + (lon - xa) * k * esc, py = oy + (yb - lat) * esc;
+          j ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+        })));
+        ctx.fill('evenodd');
+      }
+      const nombre = nombreDe(iso);
+      let tam = 76; ctx.fillStyle = C.navy; ctx.font = '700 ' + tam + 'px Inter';
+      while(ctx.measureText(nombre).width > W - 2 * M - 300 && tam > 40){ tam -= 4; ctx.font = '700 ' + tam + 'px Inter'; }
+      ctx.fillText(nombre, M + 26, 196);
+      ctx.fillStyle = C.gris; ctx.font = '400 28px Inter';
+      ctx.fillText('en seis cifras, frente a la región', M + 26, 240);
+      ctx.fillStyle = C.naranja; ctx.fillRect(M, 196 - tam * .72, 7, 240 - (196 - tam * .72) + 8);
+
+      const y0 = 290, filas = 3, col = 2, gx = 48, cw = (W - 2 * M - gx) / col, ch = 288;
+      ctx.fillStyle = C.linea;
+      for(let r = 0; r <= filas; r++) ctx.fillRect(M, y0 + r * ch, W - 2 * M, r === 0 || r === filas ? 2 : 1);
+      ctx.fillRect(M + cw + gx / 2, y0 + 24, 1, filas * ch - 48);
+      const caps = capas() || {};
+      INFO_FICHAS.forEach((f, i) => {
+        const x = M + (i % col) * (cw + gx), y = y0 + Math.floor(i / col) * ch;
+        const cap = caps[f.k], todos = cap && cap.conteo ? (cap.conteo() || {}) : {};
+        const v = todos[iso];
+        ctx.fillStyle = C.violeta; ctx.font = '700 17px Inter'; ctx.fillText(f.eje, x, y + 42);
+        ctx.fillStyle = C.navy; ctx.font = '700 25px Inter';
+        const yTit = envolver(f.tit, x, y + 80, cw - 10, 31);
+        ctx.fillStyle = C.gris; ctx.font = '500 15px Inter'; ctx.fillText(f.fuente, x, y + ch - 18);
+        if(!isFinite(v)){
+          ctx.font = '500 24px Inter'; ctx.fillText('Sin dato para este país', x, yTit + 70);
+          ctx.font = '500 18px Inter'; ctx.fillText('La fuente no lo publica.', x, yTit + 100);
+          return;
+        }
+        const d = typeof datoDe === 'function' ? datoDe(f.k, iso) : null;
+        const texto = infoCifra(f.k, v);
+        ctx.fillStyle = C.navy; ctx.font = '700 64px Inter';
+        const yNum = yTit + 76; ctx.fillText(texto, x, yNum);
+        const anchoNum = ctx.measureText(texto).width;
+        ctx.fillStyle = C.gris; ctx.font = '500 18px Inter';
+        envolver(f.uni + (d && d.anio ? ' · ' + d.anio : ''), x + anchoNum + 14, yNum - 24, cw - anchoNum - 24, 22);
+        const vals = Object.values(todos).filter(isFinite);
+        const tr = f.log ? (z => Math.log10(Math.max(z, 1))) : (z => z);
+        const lo = Math.min(...vals.map(tr)), hi = Math.max(...vals.map(tr));
+        const fx = z => x + 8 + (hi === lo ? .5 : (tr(z) - lo) / (hi - lo)) * (cw - 16);
+        const yF = y + ch - 76;
+        ctx.fillStyle = C.linea; ctx.fillRect(x, yF - 1, cw, 2);
+        ctx.fillStyle = C.punto;
+        vals.forEach(z => { ctx.beginPath(); ctx.arc(fx(z), yF, 6, 0, 7); ctx.fill(); });
+        ctx.fillStyle = C.violeta; ctx.beginPath(); ctx.arc(fx(v), yF, 11, 0, 7); ctx.fill();
+        ctx.strokeStyle = C.crema; ctx.lineWidth = 3; ctx.stroke();
+        const puesto = vals.filter(z => z > v).length + 1;
+        ctx.fillStyle = C.gris; ctx.font = '500 17px Inter'; ctx.fillText('menor', x, yF + 34);
+        ctx.textAlign = 'right'; ctx.fillText('mayor', x + cw, yF + 34);
+        ctx.textAlign = 'center'; ctx.fillStyle = C.navy; ctx.font = '700 18px Inter';
+        ctx.fillText(puesto + '.º más alto de ' + vals.length, x + cw / 2, yF + 34);
+        ctx.textAlign = 'left';
+      });
+      const yP = y0 + filas * ch + 32;
+      const hoy = new Date().toLocaleDateString('es-AR', {day:'numeric', month:'long', year:'numeric'});
+      ctx.fillStyle = C.gris; ctx.font = '500 16px Inter';
+      ctx.fillText('Cada punto es un país de América Latina y el Caribe con dato · datos del registro al '
+                   + hoy + ' · acceso libre', M, yP);
+      // Logo oficial con nombre, 110 px de alto: el manual pide 72 como mínimo en digital.
+      if(logo){ const lw = 280, lh = lw * logo.naturalHeight / logo.naturalWidth; ctx.drawImage(logo, M - 26, yP + 8, lw, lh); }
+      ctx.textAlign = 'right'; ctx.fillStyle = C.navy; ctx.font = '700 26px Inter';
+      ctx.fillText('siwa.fundacionkent.org', W - M, yP + 68);
+      ctx.fillStyle = C.naranja; ctx.font = '700 22px Inter';
+      ctx.fillText('fundacionkent.org', W - M, yP + 100); ctx.textAlign = 'left';
+
+      const archivo = ('siwa-infografia-' + nombre + '-' + new Date().toISOString().slice(0, 10))
+        .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.png';
+      lienzo.toBlob(blob => {
+        if(!blob){ avisar('No se pudo armar la infografía.', true); return; }
+        const dir = URL.createObjectURL(blob), a = document.createElement('a');
+        a.href = dir; a.download = archivo;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(dir), 60000);
+        avisar('Infografía descargada: ' + archivo);
+      }, 'image/png');
+    }catch(e){
+      avisar('No se pudo armar la infografía: ' + (e && e.message ? e.message : e), true);
     }
   }
 
@@ -7265,6 +7435,135 @@
         + 'Cada barra lleva el suyo.</p>' : '');
   }
 
+  // =================== LA CARRERA: «CÓMO ESTÁN HOY», AÑO POR AÑO ===================
+  //
+  // Autorizada por la dirección el 13/9/2026, después de ver el prototipo. Es el
+  // mismo gráfico de barras, con un botón que lo hace andar desde el primer año
+  // con dato. EN CADA AÑO, CADA PAÍS MUESTRA SU ÚLTIMO DATO PUBLICADO HASTA ESE AÑO,
+  // y si es de un año anterior la barra lo dice: no se inventa un valor para los
+  // años que la fuente no midió.
+  const carrera = {anio:null, corriendo:null, datos:null};
+
+  function ctorCarreraDatos(clave, isos){
+    const cap = (capas() || {})[clave];
+    if(!cap || typeof cap.serieDe !== 'function' || typeof cap.conteo !== 'function') return null;
+    const todos = cap.conteo() || {};
+    const elegidos = (isos.length ? isos : Object.keys(todos));
+    const series = {};
+    let max = 0; const anios = new Set();
+    for(const iso of elegidos){
+      const pts = (cap.serieDe(iso) || []).filter(a => isFinite(a.valor) && isFinite(+a.anio))
+        .map(a => ({anio:+a.anio, valor:+a.valor})).sort((a, b) => a.anio - b.anio);
+      if(!pts.length) continue;
+      series[iso] = pts;
+      pts.forEach(p => { anios.add(p.anio); if(p.valor > max) max = p.valor; });
+    }
+    const lista = [...anios].sort((a, b) => a - b);
+    // Con menos de tres años no hay película: queda el gráfico quieto.
+    if(lista.length < 3 || Object.keys(series).length < 2) return null;
+    // Marcas redondas en el eje: el tope se lleva al múltiplo de 1, 2, 2,5 o 5 que lo
+    // cubre, para que el eje diga 0, 25, 50, 75 y 100 y no 21,27 o 42,54.
+    const bruto = (max || 1) / 4, pot = Math.pow(10, Math.floor(Math.log10(bruto)));
+    const paso = [1, 2, 2.5, 5, 10].map(m => m * pot).find(m => m >= bruto);
+    return {clave, cap, series, anios: lista, max: paso * 4, paso,
+            firma: clave + '|' + isos.join(',')};
+  }
+
+  function ctorHasta(pts, anio){
+    let u = null;
+    for(const p of pts){ if(p.anio <= anio) u = p; else break; }
+    return u;
+  }
+
+  function ctorCarrera(d, isos){
+    const n = Object.keys(d.series).length, alto = n * 22 + 40;
+    const [div, pre] = escalaDeEje(d.max);
+    const a0 = d.anios[0], aFin = d.anios[d.anios.length - 1];
+    if(carrera.anio === null || carrera.anio < a0 || carrera.anio > aFin) carrera.anio = aFin;
+    const marcas = [0, 1, 2, 3, 4].map(i => '<span style="left:' + (i * 25) + '%">'
+      + cifra(d.paso * i / div) + '</span>').join('');
+    const filas = Object.keys(d.series).map(iso => '<div class="c-fila' + (iso === paisFiltro ? ' propio' : '')
+      + '" data-iso="' + esc(iso) + '"><span class="c-nombre">' + esc(nombreDe(iso).slice(0, 20))
+      + '</span><div class="c-barra"></div><span class="c-valor"></span></div>').join('');
+    return '<figure class="grafico"><figcaption>' + esc(d.cap.rotulo) + ' · ' + n + ' Estados · '
+      + a0 + '–' + aFin + '</figcaption>'
+      + '<div class="ctor-carrera-controles">'
+      + '<button type="button" class="boton chico" id="ctor-play">Reproducir año por año</button>'
+      + '<input type="range" id="ctor-anio" min="' + a0 + '" max="' + aFin + '" step="1" value="' + carrera.anio
+      + '" aria-label="Año del gráfico"><output id="ctor-anio-ver">' + carrera.anio + '</output></div>'
+      + '<div class="ctor-carrera" id="ctor-carrera" style="height:' + alto + 'px">'
+      + '<span class="c-titulo">' + esc((pre + (d.cap.unidad || 'valor')).trim()) + '</span>'
+      + '<div class="c-anio" id="ctor-carrera-anio">' + carrera.anio + '</div>'
+      + filas + '<div class="c-eje">' + marcas + '</div></div></figure>'
+      + '<p class="sin-dato"><b>Cómo se lee:</b> en cada año, cada país muestra su último dato publicado '
+      + 'hasta ese año. Si es de un año anterior, la barra lo dice entre paréntesis.</p>';
+  }
+
+  function ctorCarreraPintar(anioDecimal){
+    const d = carrera.datos, caja = document.getElementById('ctor-carrera');
+    if(!d || !caja) return;
+    const a = Math.floor(anioDecimal), t = anioDecimal - a;
+    const [div] = escalaDeEje(d.max);
+    const vals = Object.entries(d.series).map(([iso, pts]) => {
+      const p0 = ctorHasta(pts, a), p1 = ctorHasta(pts, a + 1);
+      if(!p0) return [iso, null, null, null];
+      const v = p1 && p1.anio === a + 1 ? p0.valor + (p1.valor - p0.valor) * t : p0.valor;
+      return [iso, v, p0.anio, p0.valor];
+    });
+    // EL PUESTO CAMBIA UNA VEZ POR AÑO, con el valor entero del año, y no en cada
+    // cuadro: si se reordenara con los valores intermedios, las filas se cruzarían
+    // todo el tiempo y el gráfico se volvería ilegible mientras anda.
+    const orden = vals.filter(v => v[1] !== null).sort((x, y) => y[3] - x[3] || x[0].localeCompare(y[0]));
+    const puesto = {}; orden.forEach((v, i) => { puesto[v[0]] = i; });
+    for(const [iso, v, anioDato, entero] of vals){
+      const f = caja.querySelector('.c-fila[data-iso="' + iso + '"]');
+      if(!f) continue;
+      if(v === null){ f.style.opacity = 0; continue; }
+      f.style.opacity = 1;
+      f.style.transform = 'translateY(' + (18 + puesto[iso] * 22) + 'px)';
+      f.querySelector('.c-barra').style.width = (Math.max(0, v) / d.max * 100) + '%';
+      // La cifra escrita es la del año, no la intermedia: la barra se desliza, el
+      // número no inventa decimales que la fuente no publicó.
+      f.querySelector('.c-valor').innerHTML = cifra(entero / div)
+        + (anioDato < a ? ' <i>(' + anioDato + ')</i>' : '');
+    }
+    const rot = document.getElementById('ctor-carrera-anio'), sal = document.getElementById('ctor-anio-ver');
+    if(rot) rot.textContent = a;
+    if(sal) sal.textContent = a;
+  }
+
+  function ctorCarreraParar(){
+    if(carrera.corriendo) cancelAnimationFrame(carrera.corriendo);
+    carrera.corriendo = null;
+    const b = document.getElementById('ctor-play');
+    if(b) b.textContent = 'Reproducir año por año';
+  }
+
+  function ctorCarreraActivar(){
+    const d = carrera.datos, b = document.getElementById('ctor-play'), r = document.getElementById('ctor-anio');
+    if(!d || !b || !r) return;
+    ctorCarreraPintar(carrera.anio);
+    const quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    b.addEventListener('click', () => {
+      if(carrera.corriendo) return ctorCarreraParar();
+      const a0 = d.anios[0], aFin = d.anios[d.anios.length - 1];
+      let actual = carrera.anio >= aFin ? a0 : carrera.anio, previo = null;
+      b.textContent = 'Pausa';
+      const paso = ts => {
+        const antes = actual;
+        if(previo !== null) actual = Math.min(aFin, actual + (ts - previo) / (quieto ? 900 : 480));
+        previo = ts;
+        carrera.anio = Math.floor(actual); r.value = carrera.anio;
+        // Con movimiento reducido, se pasa de año en año sin deslizar los valores.
+        if(!quieto || Math.floor(antes) !== Math.floor(actual) || antes === actual) ctorCarreraPintar(quieto ? Math.floor(actual) : actual);
+        if(actual >= aFin){ ctorCarreraPintar(aFin); return ctorCarreraParar(); }
+        carrera.corriendo = requestAnimationFrame(paso);
+      };
+      carrera.corriendo = requestAnimationFrame(paso);
+    });
+    r.addEventListener('input', () => { ctorCarreraParar(); carrera.anio = +r.value; ctorCarreraPintar(carrera.anio); });
+  }
+
   function ctorAnchoUtil(){
     const caja = document.getElementById('ctor-grafico');
     const w = caja ? caja.clientWidth : 0;
@@ -7272,14 +7571,16 @@
   }
 
   function ctorEnlace(){
-    const partes = [ctor.tipo, ctor.tema || '', ctor.tipo === 'relacion' ? (ctor.tema2 || '') : '', ctor.paises.join(',')];
+    const partes = [ctor.tipo, ctor.tema || '', ctor.tipo === 'relacion' ? (ctor.tema2 || '') : '', ctor.paises.join(','),
+                    ctor.tipo === 'hoy' && carrera.datos && carrera.anio ? String(carrera.anio) : ''];
     return location.origin + location.pathname + '#grafico=' + partes.map(encodeURIComponent).join('|');
   }
 
   function ctorLeerEnlace(){
     const h = location.hash.slice(1);
     if(!h.startsWith('grafico=')) return false;
-    const [tipo, tema, tema2, paises] = h.slice(8).split('|').map(decodeURIComponent);
+    const [tipo, tema, tema2, paises, anio] = h.slice(8).split('|').map(decodeURIComponent);
+    if(/^\d{4}$/.test(anio || '')) carrera.anio = +anio;
     if(['serie', 'hoy', 'relacion'].includes(tipo)) ctor.tipo = tipo;
     if(tema) ctor.tema = tema;
     if(tema2) ctor.tema2 = tema2;
@@ -7290,6 +7591,11 @@
   function ctorDibujar(){
     const caja = document.getElementById('ctor-grafico');
     if(!caja) return;
+    // MIENTRAS LA CARRERA ANDA, NO SE REDIBUJA SI NADA CAMBIÓ. Los datos siguen
+    // llegando y cada llegada pide redibujar: sin esto, la animación se cortaba
+    // apenas empezaba.
+    if(carrera.corriendo && ctor.tipo === 'hoy' && carrera.datos && document.getElementById('ctor-carrera')
+       && carrera.datos.firma === ctor.tema + '|' + ctor.paises.join(',')) return;
     const cap = (capas() || {})[ctor.tema];
     document.querySelectorAll('.ctor-tipo').forEach(b => b.classList.toggle('activo', b.dataset.tipo === ctor.tipo));
     document.getElementById('ctor-tema2-caja').hidden = ctor.tipo !== 'relacion';
@@ -7307,13 +7613,18 @@
       html = ctor.paises.length ? ctorSerie(ctor.tema, ctor.paises, ancho) + ctorFuente(ctor.tema)
                                 : '<p class="sin-dato">Agregá uno o más países para ver cómo cambió.</p>';
     } else if(ctor.tipo === 'hoy'){
-      html = ctorHoy(ctor.tema, ctor.paises, ancho) + ctorFuente(ctor.tema);
+      ctorCarreraParar();
+      carrera.datos = ctorCarreraDatos(ctor.tema, ctor.paises);
+      html = (carrera.datos ? ctorCarrera(carrera.datos, ctor.paises) : ctorHoy(ctor.tema, ctor.paises, ancho))
+        + ctorFuente(ctor.tema);
     } else {
       html = (ctor.tema2 && ctor.tema2 !== ctor.tema)
         ? dispersion(ctor.tema, ctor.tema2) + ctorFuente(ctor.tema) + ctorFuente(ctor.tema2)
         : '<p class="sin-dato">Elegí un segundo tema, distinto del primero.</p>';
     }
+    if(ctor.tipo !== 'hoy'){ ctorCarreraParar(); carrera.datos = null; }
     caja.innerHTML = html;
+    if(ctor.tipo === 'hoy' && carrera.datos) ctorCarreraActivar();
     const tag = document.getElementById('tag-constructor');
     if(tag) tag.textContent = cap ? cap.rotulo : '—';
   }
@@ -15496,6 +15807,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   // ---- Carga --------------------------------------------------------------
   fetch('geo/paises-alc.geojson').then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(geo => {
+      geoInfo = geo;   // la infografía dibuja la silueta del país con este mismo mapa
       padron = geo.features.map(f=>f.properties).sort((a,b)=>a.pais.localeCompare(b.pais,'es'));
       // Recien ahora se puede resolver un pais pedido por la direccion.
       leerDeLaDireccion();
