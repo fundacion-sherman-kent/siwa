@@ -6088,6 +6088,9 @@
       try{ await Promise.all(['700 76px Inter', '500 18px Inter', '400 28px Inter'].map(f => document.fonts.load(f))); }catch(_){}
       const logo = await new Promise(ok => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null);
                                              im.src = 'marca/fusk-logo-nombre-color.png'; });
+      // La bandera va con sus colores y sin recolorear, como un logo ajeno.
+      const bandera = await new Promise(ok => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null);
+                                                im.src = 'banderas/' + iso + '.png'; });
       const envolver = (texto, x, y, ancho, alto) => {
         let linea = '', yy = y;
         for(const p of String(texto).split(' ')){
@@ -6122,8 +6125,14 @@
       }
       const nombre = nombreDe(iso);
       let tam = 76; ctx.fillStyle = C.navy; ctx.font = '700 ' + tam + 'px Inter';
-      while(ctx.measureText(nombre).width > W - 2 * M - 300 && tam > 40){ tam -= 4; ctx.font = '700 ' + tam + 'px Inter'; }
+      const lugarBandera = bandera ? 96 : 0;
+      while(ctx.measureText(nombre).width > W - 2 * M - 300 - lugarBandera && tam > 40){ tam -= 4; ctx.font = '700 ' + tam + 'px Inter'; }
       ctx.fillText(nombre, M + 26, 196);
+      if(bandera){
+        const bw = 72, bh = 54, bx = M + 26 + ctx.measureText(nombre).width + 22, by = 196 - tam * .72 + (tam * .72 - bh) / 2;
+        ctx.drawImage(bandera, bx, by, bw, bh);
+        ctx.strokeStyle = C.linea; ctx.lineWidth = 1; ctx.strokeRect(bx + .5, by + .5, bw - 1, bh - 1);
+      }
       ctx.fillStyle = C.gris; ctx.font = '400 28px Inter';
       ctx.fillText('en seis cifras, frente a la región', M + 26, 240);
       ctx.fillStyle = C.naranja; ctx.fillRect(M, 196 - tam * .72, 7, 240 - (196 - tam * .72) + 8);
