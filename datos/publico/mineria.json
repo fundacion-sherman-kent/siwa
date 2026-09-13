@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-13T21:25:28+00:00",
-  "medidas_con_suficientes_casos": 173,
-  "pares_probados": 14878,
+  "corrida": "2026-09-13T23:25:28+00:00",
+  "medidas_con_suficientes_casos": 176,
+  "pares_probados": 15400,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 14878 pares y el umbral de siempre, alrededor de 743 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2787,
+    "por_que": "Con 15400 pares y el umbral de siempre, alrededor de 770 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 2875,
     "de_ellos_son_parentescos": 385
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2402,
-  "anomalias_totales": 342,
+  "pistas_totales": 2490,
+  "anomalias_totales": 350,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -68,6 +68,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 9.294617676038392e-33,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "secundaria_cepal",
+      "b": "termina_secundaria",
+      "rotulo_a": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
+      "rotulo_b": "Terminan la secundaria",
+      "coeficiente": 0.973,
+      "estados": 17,
+      "tipo": "rangos (Spearman)",
+      "p": 9.639140440489106e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -177,6 +190,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.924,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.189251650349073e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -191,13 +217,13 @@
     },
     {
       "a": "focos:focos",
-      "b": "superficie",
+      "b": "perdida_bosque",
       "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
+      "rotulo_b": "Bosque perdido",
       "coeficiente": 0.923,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.285028868810068e-18,
+      "p": 1.3581529091017117e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -250,19 +276,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 2.4628521962340764e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.915,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.4838226278229015e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -541,19 +554,6 @@
       "misma_categoria": false
     },
     {
-      "a": "articulos_cientificos",
-      "b": "redes:cuentas_distintas",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "redes · cuentas_distintas",
-      "coeficiente": 0.871,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.569270571816294e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Corrupción política",
@@ -601,6 +601,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.379314467919233e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "articulos_cientificos",
+      "b": "redes:cuentas_distintas",
+      "rotulo_a": "Artículos científicos y técnicos publicados",
+      "rotulo_b": "redes · cuentas_distintas",
+      "coeficiente": 0.868,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.892306657914359e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -736,6 +749,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.859,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.7354260593446642e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "crimen_organizado:resiliencia",
       "b": "percepcion_corrupcion",
       "rotulo_a": "crimen_organizado · resiliencia",
@@ -770,32 +796,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.5531006020092533e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "gasto_seguridad",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Gasto en orden público y seguridad",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": -0.858,
-      "estados": 15,
-      "tipo": "rangos (Spearman)",
-      "p": 8.48155762425766e-06,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "migrantes",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.856,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 6.045166109898839e-08,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
