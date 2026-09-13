@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-13T19:23:44+00:00",
+  "corrida": "2026-09-13T20:26:45+00:00",
   "medidas_con_suficientes_casos": 173,
   "pares_probados": 14878,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 14878 pares y el umbral de siempre, alrededor de 743 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2789,
+    "sobreviven": 2784,
     "de_ellos_son_parentescos": 385
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2404,
+  "pistas_totales": 2399,
   "anomalias_totales": 342,
   "pistas": [
     {
@@ -424,19 +424,6 @@
       "misma_categoria": false
     },
     {
-      "a": "articulos_cientificos",
-      "b": "redes:cuentas_distintas",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "redes · cuentas_distintas",
-      "coeficiente": 0.879,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.156684625933836e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "estado_derecho",
       "rotulo_a": "Corrupción política",
@@ -692,6 +679,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.4482106419781867e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "articulos_cientificos",
+      "b": "redes:cuentas_distintas",
+      "rotulo_a": "Artículos científicos y técnicos publicados",
+      "rotulo_b": "redes · cuentas_distintas",
+      "coeficiente": 0.861,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.18549275633777e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
