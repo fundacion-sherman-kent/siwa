@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-13T18:28:44+00:00",
-  "medidas_con_suficientes_casos": 171,
-  "pares_probados": 14535,
+  "corrida": "2026-09-13T19:23:44+00:00",
+  "medidas_con_suficientes_casos": 173,
+  "pares_probados": 14878,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 14535 pares y el umbral de siempre, alrededor de 726 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2761,
+    "por_que": "Con 14878 pares y el umbral de siempre, alrededor de 743 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 2789,
     "de_ellos_son_parentescos": 385
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2376,
-  "anomalias_totales": 338,
+  "pistas_totales": 2404,
+  "anomalias_totales": 342,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -190,6 +190,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.922,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.7870395076942467e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Estado de derecho",
@@ -255,19 +268,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.915,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.5581148914719416e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -302,6 +302,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.8981853752028557e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "gini",
+      "b": "gini_cepal",
+      "rotulo_a": "Desigualdad — índice de Gini",
+      "rotulo_b": "Desigualdad · índice de Gini · segunda fuente",
+      "coeficiente": 0.904,
+      "estados": 15,
+      "tipo": "rangos (Spearman)",
+      "p": 2.3895073203695945e-07,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -411,6 +424,19 @@
       "misma_categoria": false
     },
     {
+      "a": "articulos_cientificos",
+      "b": "redes:cuentas_distintas",
+      "rotulo_a": "Artículos científicos y técnicos publicados",
+      "rotulo_b": "redes · cuentas_distintas",
+      "coeficiente": 0.879,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.156684625933836e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "estado_derecho",
       "rotulo_a": "Corrupción política",
@@ -445,19 +471,6 @@
       "estados": 23,
       "tipo": "rangos (Spearman)",
       "p": 1.0412057403663234e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "articulos_cientificos",
-      "b": "redes:cuentas_distintas",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "redes · cuentas_distintas",
-      "coeficiente": 0.876,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.876593531323903e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -718,19 +731,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.8834640759680453e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "poblacion",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.859,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6554288340065369e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
