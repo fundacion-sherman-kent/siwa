@@ -42,6 +42,27 @@ INTENTOS = 3
 ESPERA = 5  # segundos, y crece con cada intento
 TOPE = 12
 
+# CUÁNTO SE TOLERA EL BLOQUEO SIN PONER LA CORRIDA EN ROJO. El alojamiento bloquea
+# al robot por la dirección desde donde llama, y ese bloqueo no es un defecto de
+# este registro: ya se declara, y la lista anterior queda intacta. Poner la
+# corrida en rojo cada vez convertía una condición conocida en ruido, y una
+# alarma que suena por ruido se aprende a ignorar.
+#
+# PERO NO SE APAGA. Si pasan más de tres días sin una sola lectura buena, el
+# bloqueo dejó de ser un tropiezo y pasó a ser un canal muerto: la corrida vuelve
+# a rojo. Tres días y no siete, porque el colector corre una vez por día y un
+# canal que no se lee en tres pasadas seguidas no se va a arreglar solo.
+TOLERANCIA_HORAS = 72
+
+
+class BloqueoDelAlojamiento(RuntimeError):
+    """El cortafuegos del sitio propio devolvió su verificación anti-robot.
+
+    Clase propia y no un RuntimeError cualquiera, a propósito: es lo único que se
+    trata distinto. Un error de red, un HTTP 500 o un XML roto siguen fallando en
+    rojo como siempre.
+    """
+
 # Secciones de la web institucional, verificadas el 31 de agosto de 2026.
 SECCIONES = [
     {"rotulo": "Informes y artículos", "url": "https://fundacionkent.org/articulos/",
@@ -75,7 +96,7 @@ def _traer(tope: int) -> bytes:
     El desafio es probabilistico, asi que se reintenta. Y si igual persiste, se
     dice exactamente eso en vez de dejar creer que el canal esta roto.
     """
-    ultimo = None
+    ultimo, fue_desafio = None, False
     for numero in range(INTENTOS):
         try:
             peticion = urllib.request.Request(
@@ -86,24 +107,34 @@ def _traer(tope: int) -> bytes:
         except urllib.error.HTTPError as e:
             raise RuntimeError(f"El canal de la Fundación respondio HTTP {e.code}") from e
         except Exception as e:  # noqa: BLE001 — falla de red: se reintenta
-            ultimo = f"{type(e).__name__}: {e}"
+            ultimo, fue_desafio = f"{type(e).__name__}: {e}", False
             print(f"[fundacion] intento {numero + 1} de {INTENTOS}: {ultimo}", file=sys.stderr)
             time.sleep(ESPERA * (numero + 1))
             continue
 
         if SENAL_DESAFIO not in crudo[:600]:
             return crudo
-        ultimo = "el cortafuegos del alojamiento devolvió su verificación anti-robot"
+        ultimo, fue_desafio = "el cortafuegos del alojamiento devolvió su verificación anti-robot", True
         print(f"[fundacion] intento {numero + 1} de {INTENTOS}: {ultimo}", file=sys.stderr)
         time.sleep(ESPERA * (numero + 1))
 
+    # Solo el desafío del alojamiento lleva la clase propia. Si lo último fue una
+    # falla de red, es otra cosa y se trata como falla.
+    # LA EXPLICACIÓN DEPENDE DE LA CAUSA. Hasta el 13/9 una falla de red también se
+    # explicaba como bloqueo anti-robot, porque el texto era uno solo: el lector
+    # recibía un diagnóstico que no correspondía.
+    if fue_desafio:
+        raise BloqueoDelAlojamiento(
+            f"En {INTENTOS} intentos el canal de la Fundación no entregó su contenido: "
+            f"{ultimo}. NO es que el canal esté roto ni que no haya publicaciones: el "
+            "servicio de alojamiento del sitio propio le pone una verificación anti-robot "
+            "a quien llama desde un centro de datos, y el servidor que corre este registro "
+            "llama desde uno. Desde una máquina común el mismo pedido devuelve XML "
+            "correcto. NO se publica una lista vacía: la anterior queda intacta.")
     raise RuntimeError(
-        f"En {INTENTOS} intentos el canal de la Fundación no entregó su contenido: "
-        f"{ultimo}. NO es que el canal esté roto ni que no haya publicaciones: el "
-        "servicio de alojamiento del sitio propio le pone una verificación anti-robot a "
-        "quien llama desde un centro de datos, y el servidor que corre este registro "
-        "llama desde uno. Desde una máquina común el mismo pedido devuelve XML "
-        "correcto. NO se publica una lista vacía: la anterior queda intacta.")
+        f"En {INTENTOS} intentos el canal de la Fundación no respondió: {ultimo}. Es una "
+        "falla de red, no el bloqueo del alojamiento. NO se publica una lista vacía: la "
+        "anterior queda intacta.")
 
 
 def recolectar():
@@ -197,5 +228,43 @@ def recolectar():
     )
 
 
+def _horas_desde_la_ultima_lectura_buena() -> float | None:
+    """Cuánto hace que el canal se leyó bien, según la fecha del último archivo."""
+    try:
+        import json
+        d = json.loads((comun.DATOS / "publico" / "fundacion.json").read_text(encoding="utf-8"))
+        cuando = datetime.fromisoformat(d["procedencia"]["obtenido_en"].replace("Z", "+00:00"))
+    except Exception:  # noqa: BLE001 — sin fecha no se puede tolerar nada
+        return None
+    return (datetime.now(timezone.utc) - cuando).total_seconds() / 3600
+
+
+def _tarea():
+    try:
+        return recolectar()
+    except BloqueoDelAlojamiento as bloqueo:
+        horas = _horas_desde_la_ultima_lectura_buena()
+        if horas is None or horas > TOLERANCIA_HORAS:
+            # Pasó el tope, o no se sabe cuándo fue la última lectura: vuelve a ser
+            # falla, y lo dice con la cuenta hecha.
+            cuando = ("no se sabe cuándo fue la última lectura buena" if horas is None
+                      else f"la última lectura buena fue hace {horas / 24:.1f} días, más de "
+                           f"{TOLERANCIA_HORAS // 24}")
+            raise RuntimeError(
+                f"{bloqueo} EL BLOQUEO YA NO ES UN TROPIEZO: {cuando}. Hay que resolverlo en "
+                "el alojamiento.") from bloqueo
+        comun.escribir_estado(
+            "fundacion", "bloqueado",
+            f"{bloqueo} La lista publicada es la de la última lectura buena, de hace "
+            f"{horas / 24:.1f} días. Si el bloqueo sigue más de {TOLERANCIA_HORAS // 24} "
+            "días, la corrida vuelve a rojo.")
+        print(f"[fundacion] BLOQUEADO por el alojamiento. Última lectura buena hace "
+              f"{horas:.0f} h: se declara y la corrida NO se pone en rojo.", file=sys.stderr)
+        # SystemExit y no un retorno: `comun.correr` escribiría «correcto» encima
+        # del «bloqueado». SystemExit no es una Exception, así que pasa de largo
+        # la captura de `correr` y sale con código cero.
+        raise SystemExit(0)
+
+
 if __name__ == "__main__":
-    comun.correr("fundacion", recolectar)
+    comun.correr("fundacion", _tarea)

@@ -15537,7 +15537,10 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       almacen.fundacion=d; const meta=d.procedencia;
       pintarProcedencia('proc-fundacion',meta);
       vacios+=pintarVacios('vac-fundacion',meta.vacios_declarados);
-      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-fundacion','informes de la Fundación',estado.mensaje,meta); }
+      // «BLOQUEADO» TAMBIÉN SE MUESTRA. Que el robot no ponga su corrida en rojo
+      // por un bloqueo del alojamiento no autoriza a esconderle al lector que la
+      // lista que está viendo es de la última lectura buena y no de hoy.
+      if(estado&&(estado.estado==='error'||estado.estado==='bloqueado')){ fallas++; pintarFalla('lista-fundacion','informes de la Fundación',estado.mensaje,meta); }
       repintar(); marcador();
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-fundacion','informes de la Fundación',err.message);
