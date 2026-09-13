@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-13T16:39:24+00:00",
+  "corrida": "2026-09-13T17:36:58+00:00",
   "medidas_con_suficientes_casos": 170,
   "pares_probados": 14365,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 14365 pares y el umbral de siempre, alrededor de 718 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2694,
+    "sobreviven": 2704,
     "de_ellos_son_parentescos": 383
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2311,
+  "pistas_totales": 2321,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -541,6 +541,19 @@
       "misma_categoria": false
     },
     {
+      "a": "articulos_cientificos",
+      "b": "redes:cuentas_distintas",
+      "rotulo_a": "Artículos científicos y técnicos publicados",
+      "rotulo_b": "redes · cuentas_distintas",
+      "coeficiente": 0.87,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.6463849059638306e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "libertad_prensa",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -601,19 +614,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 7.643588771636819e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "articulos_cientificos",
-      "b": "redes:cuentas_distintas",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "redes · cuentas_distintas",
-      "coeficiente": 0.867,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.629916889348427e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
