@@ -19,10 +19,10 @@ encenderse.
 QUÉ MIRA, Y POR QUÉ ESAS DOS
 ------------------------------
   · **La interfaz humanitaria de Naciones Unidas.** Publica eventos de
-    conflicto, desplazamiento interno, personas refugiadas y retornadas **por
-    unidad de primer orden**, y —lo que más importa acá— expone un índice de
-    disponibilidad que dice, tema por tema y Estado por Estado, hasta qué nivel
-    llega. Necesita un identificador que vive en el robot.
+    conflicto y desplazamiento interno **por unidad de primer orden**. Personas
+    refugiadas y retornadas NO: se publican por país de origen y de asilo, y la
+    primera versión de este censo las contaba por error. Necesita un
+    identificador que vive en el robot.
   · **La base georreferenciada de Upsala.** Evento por evento, con unidad y
     coordenada, desde 1989 y sin credencial. Se mide acá mismo cuántos Estados
     de la región deja con dato por unidad.
@@ -41,6 +41,7 @@ import io
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -77,8 +78,18 @@ CATEGORIAS_SEGURIDAD = [
 TEMAS = {
     "coordination-context/conflict-events": "Grupos y territorio",
     "affected-people/idps": "Personas en movimiento",
-    "affected-people/refugees-persons-of-concern": "Personas en movimiento",
-    "affected-people/returnees": "Personas en movimiento",
+}
+
+# LOS QUE NO ENTRAN, y por qué. Estaban en la primera versión y fue un error de
+# concepto: la especificación pública muestra que refugiados y retornados se
+# publican por país de ORIGEN y de ASILO, sin `admin_level` ni `admin1_code`. No
+# tienen unidad de primer orden, así que no pueden alimentar un censo
+# subnacional por más que respondan.
+FUERA_DE_CENSO = {
+    "affected-people/refugees-persons-of-concern":
+        "se publica por país de origen y de asilo, sin unidad de primer orden",
+    "affected-people/returnees":
+        "se publica por país de origen y de asilo, sin unidad de primer orden",
 }
 
 # Lo que ya está recolectado por fuente nacional, y de qué categoría es. Se
@@ -95,18 +106,43 @@ def identificador() -> str | None:
     return os.environ.get("HDX_HAPI_APP") or None
 
 
+def que_dijo(error: Exception) -> str:
+    """El error con su código y lo que contestó la fuente.
+
+    «HTTPError» a secas no distingue un identificador rechazado de un exceso de
+    pedidos, y así quedó el primer censo: cuatro fallas que no decían por qué.
+    """
+    codigo = getattr(error, "code", None)
+    cuerpo = ""
+    try:
+        cuerpo = error.read().decode("utf-8", "replace")[:160] if hasattr(error, "read") else ""
+    except Exception:  # noqa: BLE001 — el cuerpo es un detalle, no puede tapar el error
+        cuerpo = ""
+    partes = [type(error).__name__] + ([str(codigo)] if codigo else [])
+    return " ".join(partes) + (f": {' '.join(cuerpo.split())}" if cuerpo else "")
+
+
 def hapi(ruta: str, **filtros) -> list:
-    """Una consulta a la interfaz humanitaria. Devuelve [] y no rompe si no hay llave."""
+    """Una consulta a la interfaz humanitaria, con cortesía si pide ir más despacio."""
     app = identificador()
     if not app:
         raise RuntimeError("sin identificador: no se puede preguntar")
     consulta = {"output_format": "json", "app_identifier": app, "limit": 10000}
     consulta.update({k: v for k, v in filtros.items() if v is not None})
     url = f"{HAPI}/{ruta}?" + urllib.parse.urlencode(consulta)
-    peticion = urllib.request.Request(url, headers={"User-Agent": comun.AGENTE})
-    with urllib.request.urlopen(peticion, timeout=120) as respuesta:
-        d = json.loads(respuesta.read())
-    return d.get("data") or []
+    peticion = urllib.request.Request(url, headers={"User-Agent": comun.AGENTE,
+                                                    "Accept": "application/json"})
+    for intento in range(6):
+        try:
+            with urllib.request.urlopen(peticion, timeout=120) as respuesta:
+                return json.loads(respuesta.read()).get("data") or []
+        except urllib.error.HTTPError as e:
+            # Un servicio público que dice «más despacio» pide cortesía, no anuncia
+            # una falla: se espera y se reintenta. Cualquier otro código, se sube.
+            if e.code != 429 or intento == 5:
+                raise
+            time.sleep(4 * (intento + 1))
+    return []
 
 
 def de_upsala(isos_por_nombre: dict) -> dict:
@@ -182,20 +218,29 @@ def construir() -> Path:
             "censo lo vuelve a intentar en la próxima corrida completa.")
     else:
         for ruta, categoria in TEMAS.items():
-            try:
-                filas = hapi(ruta, admin_level=1)
-            except Exception as error:  # noqa: BLE001
-                caidos.append(f"{ruta}: {type(error).__name__}")
+            # ESTADO POR ESTADO Y NO EL MUNDO ENTERO. La interfaz corta en 10.000
+            # filas por consulta, y con todo el mundo la región podía no entrar en
+            # esa página sin que nada avisara. Treinta y tres consultas chicas,
+            # espaciadas, en vez de una grande truncada.
+            vistos, fallo_tema = {}, None
+            for iso in sorted(del_padron):
+                try:
+                    filas = hapi(ruta, location_code=iso, admin_level=1)
+                except Exception as error:  # noqa: BLE001
+                    fallo_tema = f"{ruta}: {que_dijo(error)}"
+                    # Si la fuente rechaza el pedido —identificador inválido, ruta
+                    # mal armada— va a rechazar los otros treinta y dos igual.
+                    # Insistir sería descortés y no enseñaría nada nuevo.
+                    break
+                for f in filas:
+                    v = vistos.setdefault(iso, {"filas": 0, "unidades": set()})
+                    v["filas"] += 1
+                    if f.get("admin1_code"):
+                        v["unidades"].add(f["admin1_code"])
+                time.sleep(1.5)
+            if fallo_tema:
+                caidos.append(fallo_tema)
                 continue
-            vistos = {}
-            for f in filas:
-                iso = (f.get("location_code") or "").strip()
-                if iso not in del_padron:
-                    continue
-                v = vistos.setdefault(iso, {"filas": 0, "unidades": set()})
-                v["filas"] += 1
-                if f.get("admin1_code"):
-                    v["unidades"].add(f["admin1_code"])
             por_tema[ruta] = {
                 "categoria": categoria,
                 "estados": sorted(vistos),
@@ -245,6 +290,10 @@ def construir() -> Path:
         "distintos con cada Estado: no hay una interfaz regional que las junte, y esa "
         "ausencia es en sí misma un dato sobre la región.",
     ]
+    for ruta, motivo in FUERA_DE_CENSO.items():
+        vacios.append(f"NO ENTRA AL CENSO «{ruta}»: {motivo}. Estaba en la primera versión "
+                      "y fue un error de concepto: un tema sin unidad no puede medir "
+                      "disponibilidad por unidad.")
     vacios.extend(caidos)
 
     return comun.escribir(

@@ -4203,7 +4203,8 @@
                      ['contrataciones','Estándar de Datos de Contrataciones Abiertas'],
                      ['opacidadHistoria','Oficina — archivo del Índice de Opacidad'],
                      ['recursos','USGS y Energy Institute — minerales e hidrocarburos'],
-                     ['infraestructura','Cables submarinos, aeropuertos y energía']];
+                     ['infraestructura','Cables submarinos, aeropuertos y energía'],
+                     ['radar','Cloudflare Radar — tráfico real de internet']];
 
   // El informe imprimible se abre a pedido. En papel sale siempre entero: la
   // regla de impresion anula el plegado, de modo que el PDF no cambia.
@@ -7369,7 +7370,7 @@
                             almacen.cepal, almacen.gasto, almacen.unesco,
                             almacen.oit, almacen.salud, almacen.prensa,
                             almacen.pobreza, almacen.percepcion_corrupcion,
-                            almacen.recursos, almacen.infraestructura].filter(Boolean);
+                            almacen.recursos, almacen.infraestructura, almacen.radar].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -11881,11 +11882,14 @@
     tarjetasBanco(['victimas_robo','denuncia_robo','denuncia_agresion','sin_condena'],'victimizacion');
     // `internet` pertenece a «conectividad» por categoría declarada: ponerlo
     // también acá lo mostraba dos veces en la misma página.
-    tarjetasBanco(['servidores_seguros'],'ciber');
+    // EL TRAFICO AUTOMATIZADO VA PRIMERO en ciberseguridad: es la unica cifra de
+    // esta categoria medida sobre trafico real y no sobre infraestructura
+    // desplegada. Su cautela dice lo que no es —mezcla lo legitimo y lo hostil—.
+    tarjetasBanco(['trafico_automatizado','servidores_seguros'],'ciber');
     tarjetasBanco('regalo_contrato','contratacion');
     tarjetasBanco(['recaudacion','registro_nacimientos','acceso_informacion','institucion_ddhh'],'capacidad');
     tarjetasBanco(['gini','pobreza','desempleo_joven','trabajo_infantil','agua_potable'],'condiciones');
-    tarjetasBanco(['internet','banda_ancha'],'conectividad');
+    tarjetasBanco(['internet','banda_ancha','internet_moderno'],'conectividad');
     tarjetasBanco(['bosque','perdida_bosque'],'ambiente');
     tarjetasBanco(['terrorismo_muertes','terrorismo_atentados'],'terrorismo');
     tarjetasBanco('conflicto_no_estatal','grupos-armados');
@@ -15614,6 +15618,22 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-censo-unidades','censo subnacional',err.message);
       const p=document.getElementById('proc-censo-unidades');
       if(p) p.textContent='Sin registro disponible.'; marcador(); });
+
+  // CLOUDFLARE RADAR: el trafico real de internet, medido desde adentro de una red
+  // grande. Entro al robot el 11/9 sin poder probarse —la credencial vive ahi—,
+  // fallo en su primera corrida, se arreglo, y publico por primera vez el 12/9.
+  // Recien con esa corrida real se enciende en la pantalla: es la regla de la
+  // casa para lo que no se pudo probar antes. Autorizado por la direccion el 13/9.
+  Promise.all([traer('radar.json'), traer('estado/radar.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.radar=d; dominios+=Object.keys(d.cobertura||{}).length;
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-ciber',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-ciber','tráfico de internet',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-ciber','tráfico de internet',err.message); marcador(); });
 
   // INFRAESTRUCTURAS CRITICAS: por donde entra y sale un pais. Cables
   // submarinos, aeropuertos y energia. Lo critico no es el numero alto: es el
