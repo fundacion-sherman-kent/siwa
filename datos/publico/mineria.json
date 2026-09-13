@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-13T06:46:56+00:00",
+  "corrida": "2026-09-13T07:25:16+00:00",
   "medidas_con_suficientes_casos": 170,
   "pares_probados": 14365,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 14365 pares y el umbral de siempre, alrededor de 718 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2688,
+    "sobreviven": 2700,
     "de_ellos_son_parentescos": 383
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2305,
+  "pistas_totales": 2317,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -181,10 +181,10 @@
       "b": "perdida_bosque",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.926,
+      "coeficiente": 0.925,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.1528895388532983e-19,
+      "p": 6.791802492092186e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -236,7 +236,7 @@
       "coeficiente": 0.918,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 5.822318390020064e-18,
+      "p": 5.378668693747277e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -619,14 +619,14 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.865,
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.864,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.869251838358942e-13,
+      "p": 7.455308180498838e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -658,6 +658,32 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "poblacion",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.862,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.843424987450087e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.862,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.088979793693635e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "percepcion_corrupcion:intervalo_alto",
       "b": "voz_rendicion",
       "rotulo_a": "percepcion_corrupcion · intervalo_alto",
@@ -666,19 +692,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.4482106419781867e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "poblacion",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.861,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.2301344324678383e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,27 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · grupos_distintos",
+      "a": "focos:nocturnos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Bosque perdido",
       "coeficiente": 0.856,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 6.045166109898839e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "poblacion",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.855,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.0274156314171003e-12,
+      "p": 2.6871774633537982e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
