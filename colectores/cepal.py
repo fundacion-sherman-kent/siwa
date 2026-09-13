@@ -70,6 +70,29 @@ INDICADORES = [
     {"id": 5549, "clave": "seguridad_barrio",
      "rotulo": "Personas que se sienten seguras en su barrio",
      "unidad": "% de las personas", "mas_es_peor": False},
+    # SEGUNDA FUENTE DE DOS COSAS QUE EL REGISTRO MEDÍA CON UNA SOLA. La
+    # desigualdad la medía solo el Banco Mundial, y el desempleo total solo la
+    # OIT. La CEPAL mide las dos con su propia manera de contar, y es el
+    # organismo de la región: si difiere, la diferencia se ve, no se esconde.
+    {"id": 3289, "clave": "gini_cepal", "eje": "Desarrollo",
+     "rotulo": "Desigualdad · índice de Gini · segunda fuente",
+     "unidad": "0 igualdad, 100 desigualdad máxima", "mas_es_peor": True,
+     # La CEPAL lo publica de 0 a 1; el registro lo muestra de 0 a 100, igual que
+     # el Banco Mundial, para que las dos cifras se puedan poner lado a lado.
+     "escala": 100, "decimales": 1,
+     "cautela": "SEGUNDA MEDICIÓN de algo que el registro ya publica con el Banco Mundial. "
+                "La CEPAL lo calcula sobre el ingreso per cápita de las personas, con sus "
+                "propios ajustes a las encuestas de hogares; si las dos cifras difieren, la "
+                "diferencia dice cómo se mide, no quién se equivoca. La CEPAL lo publica de "
+                "0 a 1 y acá se muestra multiplicado por 100."},
+    {"id": 127, "clave": "desempleo_cepal", "eje": "Desarrollo",
+     "rotulo": "Desempleo · segunda fuente",
+     "unidad": "% de la población activa", "mas_es_peor": True,
+     "cautela": "SEGUNDA MEDICIÓN de algo que el registro ya publica con la OIT, y NO mide "
+                "exactamente lo mismo. Es la cifra oficial que informa cada Estado, y la "
+                "CEPAL advierte que en muchos es desempleo URBANO —de las ciudades o de "
+                "algunas de ellas— y no nacional. La OIT, en cambio, estima una tasa "
+                "nacional comparable. Si difieren, la cobertura explica buena parte."},
 ]
 # Los Estados que la fuente agrega —«América Latina», «El Caribe»— no son
 # Estados: se descartan por no estar en el padrón, sin ruido.
@@ -124,7 +147,7 @@ def _serie(indicador: dict, isos: set) -> tuple:
             continue
         totales = {m.get("id") for m in (d.get("members") or [])
                    if str(m.get("name") or "").strip().lower() in
-                   ("total", "ambos sexos", "total nacional", "ambos")}
+                   ("total", "ambos sexos", "total nacional", "ambos", "nacional")}
         if not totales:
             return {}, f"tiene la dimensión «{nombre}» y ningún miembro que agregue el total"
         otras.append(totales)
@@ -146,7 +169,8 @@ def _serie(indicador: dict, isos: set) -> tuple:
             valor = float(str(fila.get("value")).replace(",", "."))
         except (TypeError, ValueError):
             continue
-        salida.setdefault(iso, {})[anio] = round(valor, 2)
+        valor = valor * indicador.get("escala", 1)
+        salida.setdefault(iso, {})[anio] = round(valor, indicador.get("decimales", 2))
     return ({iso: [{"anio": a, "valor": v} for a, v in sorted(por.items())]
              for iso, por in salida.items()}, None)
 
@@ -212,6 +236,15 @@ def recolectar():
         "cifra baja puede significar menos casos o una definición más estrecha.",
         "Es la cifra que cada Estado informa. Donde el sistema judicial no tipifica el "
         "femicidio, o no lo registra aparte del homicidio, la cifra no existe o queda corta.",
+        "EL DESEMPLEO DE LA CEPAL ES, EN MUCHOS ESTADOS, URBANO. Es la cifra oficial "
+        "de cada país, y la propia CEPAL advierte que se refiere a las zonas urbanas —o a "
+        "algunas ciudades— salvo que se indique cobertura nacional. No se compara sin "
+        "mirar eso con la tasa nacional que estima la OIT.",
+        "EL GINI SE PUBLICA DE 0 A 100. La CEPAL lo da de 0 a 1; se multiplica por 100 "
+        "para que se lea en la misma escala que el del Banco Mundial.",
+        "DEL GINI SE TOMA SOLO EL NACIONAL. Donde la CEPAL publica únicamente el urbano "
+        "—es el caso de la Argentina, cuya encuesta cubre solo ciudades— el Estado queda "
+        "sin esta segunda cifra: el urbano no se hace pasar por nacional.",
         "Serie anual con rezago: no es un dato en vivo.",
         f"Cobertura del padrón: " + " · ".join(
             f"{i['rotulo']}, {cobertura.get(i['clave'], 0)} de {len(registros)} Estados"
@@ -230,8 +263,9 @@ def recolectar():
         vacios=vacios,
         extra={
             "indicadores": [{"clave": i["clave"], "rotulo": i["rotulo"], "unidad": i["unidad"],
-                             "mas_es_peor": i["mas_es_peor"], "eje": "Seguridad",
+                             "mas_es_peor": i["mas_es_peor"], "eje": i.get("eje", "Seguridad"),
                              "origen": "CEPAL, CEPALSTAT",
+                             **({"cautela": i["cautela"]} if i.get("cautela") else {}),
                              "cepalstat_id": i["id"]}
                             for i in publicables],
             "resumen": {

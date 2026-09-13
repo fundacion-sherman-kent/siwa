@@ -4562,6 +4562,8 @@
     autocensura: 'autocensura prensa periodistas miedo',
     polarizacion: 'polarizacion grieta division politica fimi infoxicacion desinformacion',
     gini: 'desigualdad inequidad brecha ricos pobres',
+    gini_cepal: 'desigualdad inequidad brecha ricos pobres gini cepal segunda fuente',
+    desempleo_cepal: 'desempleo desocupacion sin trabajo paro cepal segunda fuente',
     pobreza: 'pobreza indigencia carencia',
     pobreza_cepal: 'pobreza indigencia carencia cepal segunda fuente',
     pobreza_extrema: 'pobreza extrema indigencia hambre canasta basica',
@@ -12280,7 +12282,7 @@
     tarjetasBanco(['trata_victimas','trata_sexual','trata_trabajo'],'trata');
     tarjetasBanco(['soborno_personas','soborno_empresas'],'soborno');
     tarjetasBanco(['empleo_informal','empleo_informal_oit','desempleo_joven',
-                   'desempleo_joven_oit','desempleo_oit'],'informalidad');
+                   'desempleo_joven_oit','desempleo_oit','desempleo_cepal'],'informalidad');
     tarjetasBanco(['victimas_robo','denuncia_robo','denuncia_agresion','sin_condena'],'victimizacion');
     // `internet` pertenece a «conectividad» por categoría declarada: ponerlo
     // también acá lo mostraba dos veces en la misma página.
@@ -12290,7 +12292,7 @@
     tarjetasBanco(['trafico_automatizado','servidores_seguros'],'ciber');
     tarjetasBanco('regalo_contrato','contratacion');
     tarjetasBanco(['recaudacion','registro_nacimientos','acceso_informacion','institucion_ddhh'],'capacidad');
-    tarjetasBanco(['gini','pobreza','desempleo_joven','trabajo_infantil','agua_potable'],'condiciones');
+    tarjetasBanco(['gini','gini_cepal','pobreza','desempleo_joven','trabajo_infantil','agua_potable'],'condiciones');
     tarjetasBanco(['internet','banda_ancha','internet_moderno'],'conectividad');
     tarjetasBanco(['bosque','perdida_bosque'],'ambiente');
     tarjetasBanco(['terrorismo_muertes','terrorismo_atentados'],'terrorismo');
