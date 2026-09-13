@@ -217,8 +217,20 @@ def numero(v) -> float | None:
         return None
 
 
-def minerales() -> tuple:
-    """Producción y reservas por país y mineral, y la cuota de cada uno en el mundo."""
+# LA COPIA DE LA EDICION VIGENTE. Desde el robot la descarga en linea falla y
+# desde una maquina comun no, y sin esta copia las materias de minerales dejaban
+# de publicarse. Sus metadatos oficiales declaran «Use constraints: None»: se
+# puede redistribuir, y el LEEME de la carpeta dice cuando se reemplaza.
+COPIA_USGS = Path(__file__).resolve().parent / "fijas" / "usgs-mcs2025" / "MCS2025_World_Data.csv"
+
+
+def _por_codigo(error: Exception) -> str:
+    """El error con su código, que es lo único que sirve para saber por qué cayó."""
+    codigo = getattr(error, "code", None)
+    return f"{type(error).__name__} {codigo}" if codigo else type(error).__name__
+
+
+def _filas_en_linea() -> list:
     peticion = urllib.request.Request(USGS_ITEM, headers={"User-Agent": comun.AGENTE})
     with urllib.request.urlopen(peticion, timeout=90) as respuesta:
         item = __import__("json").loads(respuesta.read())
@@ -231,7 +243,25 @@ def minerales() -> tuple:
         crudo = respuesta.read()
     z = zipfile.ZipFile(io.BytesIO(crudo))
     nombre = next(n for n in z.namelist() if n.lower().endswith(".csv"))
-    filas = list(csv.DictReader(io.StringIO(z.read(nombre).decode("utf-8-sig", "replace"))))
+    return list(csv.DictReader(io.StringIO(z.read(nombre).decode("utf-8-sig", "replace"))))
+
+
+def minerales() -> tuple:
+    """Producción y reservas por país y mineral, y la cuota de cada uno en el mundo.
+
+    Devuelve también POR QUÉ CAMINO se leyó. Si la descarga en línea cae se usa
+    la copia guardada, y eso se declara: una copia usada en silencio es un dato
+    viejo presentado como fresco.
+    """
+    try:
+        filas, camino = _filas_en_linea(), None
+    except Exception as error:  # noqa: BLE001 — se prueba la copia y se declara
+        if not COPIA_USGS.exists():
+            raise
+        filas = list(csv.DictReader(io.StringIO(
+            COPIA_USGS.read_text(encoding="utf-8-sig", errors="replace"))))
+        camino = (f"la descarga en línea cayó ({_por_codigo(error)}) y se leyó la copia "
+                  "guardada en el repositorio de la misma edición")
 
     # El total del mundo se SUMA, no se lee: la base trae renglones de «world
     # total» que ya vienen redondeados y agregados, y usarlos daría una cuota
@@ -263,7 +293,7 @@ def minerales() -> tuple:
             total = mundo.get((m["mineral_original"], m["medida"])) or 0
             m["cuota_mundial_pct"] = round(m["produccion"] / total * 100, 2) if total else None
         lista.sort(key=lambda m: -(m.get("cuota_mundial_pct") or 0))
-    return del_pais, edicion
+    return del_pais, edicion, camino
 
 
 def construir() -> Path:
@@ -286,10 +316,19 @@ def construir() -> Path:
         s, f = serie_de(rejillas.get(m["slug"]) or [], m["columna"], del_padron)
         datos[m["clave"]], futuros = s, futuros + f
 
+    # SE LEYO O NO SE LEYO. Esa diferencia decide qué vacío se declara: si la base
+    # no se pudo leer por ningún camino, los Estados quedan SIN MIRAR, y afirmar
+    # que «no figuran» sería falso —ya se publicó una vez, nombrando a Brasil y a
+    # Chile—.
+    minerales_leidos = False
     try:
-        por_mineral, edicion = minerales()
+        por_mineral, edicion, camino = minerales()
+        minerales_leidos = True
+        if camino:
+            caidos.append(f"MINERALES: {camino}. Las cifras son de la edición {edicion}, "
+                          "que es la vigente; no hay una más nueva que se haya dejado de leer.")
     except Exception as error:  # noqa: BLE001
-        caidos.append(f"base mundial de minerales: {type(error).__name__}")
+        caidos.append(f"base mundial de minerales: {_por_codigo(error)}")
         por_mineral, edicion = {}, None
 
     registros, cobertura = [], {}
@@ -403,7 +442,12 @@ def construir() -> Path:
         "y las reservas a la declaración más reciente. No hay serie histórica: la base "
         "publica una foto por edición, no una serie.",
     ]
-    if sin_mineral:
+    if not minerales_leidos:
+        vacios.append(
+            "LOS MINERALES QUEDAN SIN MIRAR: la base mundial no se pudo leer por ningún "
+            "camino. NO se afirma que ningún Estado esté ausente de ella —eso sería "
+            "confundir una fuente caída con un país que no produce—.")
+    elif sin_mineral:
         vacios.append(
             f"{len(sin_mineral)} Estados del padrón NO figuran en la base mundial de "
             "minerales. No aparecer NO significa no tener: significa que no producen a una "
