@@ -46,6 +46,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
+from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -167,6 +168,61 @@ def de_colombia() -> tuple:
     return conjuntos, categorias, caidos
 
 
+# TRINIDAD Y TOBAGO Y BOLIVIA, MEDIDOS Y NO RECOLECTADOS (autorizado el 13/9/2026).
+# Igual que Colombia: se abre el archivo, se cuentan unidades y delitos, y ninguna
+# cifra entra a este censo.
+TTPS = "https://ttps.gov.tt/statistics/download/?year={anio}"
+# Qué delito del Servicio de Policía alimenta qué categoría. El secuestro extorsivo
+# va a «Grupos y territorio», con el mismo criterio que el secuestro en Colombia.
+TTPS_CATEGORIAS = {
+    "Murders": "Violencia y víctimas",
+    "Kidnapping for Ransom": "Grupos y territorio",
+}
+INE_BOLIVIA = "https://nube.ine.gob.bo/index.php/s/rb85ZWi9fyUJFHl/download"
+DEPARTAMENTOS_BOLIVIA = ["Chuquisaca", "La Paz", "Cochabamba", "Oruro", "Potosí",
+                         "Tarija", "Santa Cruz", "Beni", "Pando"]
+
+
+def de_trinidad() -> tuple:
+    """Divisiones policiales y delitos del último año completo. Solo recuentos."""
+    anio = datetime.now(timezone.utc).year - 1
+    peticion = urllib.request.Request(TTPS.format(anio=anio),
+                                      headers={"User-Agent": comun.AGENTE})
+    with urllib.request.urlopen(peticion, timeout=120) as respuesta:
+        texto = respuesta.read().decode("utf-8", "replace")
+    # El archivo abre con un título antes de la cabecera: se busca la cabecera.
+    lineas = texto.splitlines()
+    desde = next(i for i, l in enumerate(lineas) if l.startswith("Year,"))
+    filas = list(csv.DictReader(io.StringIO("\n".join(lineas[desde:]))))
+    divisiones = {f.get("Division") for f in filas} - {None, ""}
+    por_delito = {}
+    for f in filas:
+        por_delito.setdefault(f.get("Offence"), set()).add(f.get("Division"))
+    categorias, detalle = set(), []
+    for delito, categoria in TTPS_CATEGORIAS.items():
+        cubre = len(por_delito.get(delito, set()))
+        detalle.append({"delito": delito, "categoria": categoria,
+                        "divisiones": cubre, "de": len(divisiones)})
+        if divisiones and cubre >= 0.7 * len(divisiones):
+            categorias.add(categoria)
+    return {"anio": anio, "divisiones": len(divisiones), "delitos": detalle}, categorias
+
+
+def de_bolivia() -> tuple:
+    """Si el cuadro de delitos del INE nombra los nueve departamentos y el homicidio."""
+    peticion = urllib.request.Request(INE_BOLIVIA, headers={"User-Agent": comun.AGENTE})
+    with urllib.request.urlopen(peticion, timeout=180) as respuesta:
+        libro = zipfile.ZipFile(io.BytesIO(respuesta.read()))
+    textos = libro.read("xl/sharedStrings.xml").decode("utf-8", "replace")
+    nombrados = [d for d in DEPARTAMENTOS_BOLIVIA if f">{d}<" in textos]
+    tiene_homicidio = ">Homicidio<" in textos
+    categorias = {"Violencia y víctimas"} if tiene_homicidio and len(nombrados) >= 7 else set()
+    return ({"departamentos": len(nombrados), "de": len(DEPARTAMENTOS_BOLIVIA),
+             "trae_homicidio": tiene_homicidio,
+             "cuadro": "INE, cuadro 3.08.02.13 — delitos por departamento, Policía Boliviana"},
+            categorias)
+
+
 def identificador() -> str | None:
     return os.environ.get("HDX_HAPI_APP") or None
 
@@ -278,6 +334,16 @@ def construir() -> Path:
     colombia, cats_colombia, caidos_col = de_colombia()
     caidos.extend(caidos_col)
 
+    # ── Trinidad y Tobago y Bolivia ────────────────────────────────────────
+    medidos = {}
+    for iso, medir, rotulo in (("TTO", de_trinidad, "Servicio de Policía de Trinidad y Tobago"),
+                               ("BOL", de_bolivia, "INE de Bolivia")):
+        try:
+            detalle, cats = medir()
+            medidos[iso] = {"fuente": rotulo, "detalle": detalle, "categorias": sorted(cats)}
+        except Exception as error:  # noqa: BLE001 — SIN MIRAR, no se cuenta
+            caidos.append(f"{rotulo}: {que_dijo(error)}. Queda SIN MIRAR.")
+
     # ── La interfaz humanitaria, que necesita la llave del robot ───────────
     humanitaria, por_tema = {}, {}
     if not identificador():
@@ -328,6 +394,8 @@ def construir() -> Path:
             categorias.add(cat)
         if iso == "COL":
             categorias |= cats_colombia
+        if iso in medidos:
+            categorias |= set(medidos[iso]["categorias"])
         u = upsala.get(iso)
         if u and u["con_unidad"]:
             categorias.add("Grupos y territorio")
@@ -340,7 +408,10 @@ def construir() -> Path:
             "de_fuente_nacional": [f"{c} · {d}" for c, d in NACIONALES.get(iso, [])]
                                   + ([f"{x['categoria']} · {x['fuente']} ({x['unidades']} de "
                                       f"{x['de']} unidades)" for x in colombia]
-                                     if iso == "COL" else []),
+                                     if iso == "COL" else [])
+                                  + ([f"{c} · {medidos[iso]['fuente']}"
+                                      for c in medidos[iso]["categorias"]]
+                                     if iso in medidos else []),
         }
 
     minimo = 5  # más del 60 % de ocho categorías
@@ -376,6 +447,18 @@ def construir() -> Path:
                 f"LOS CONJUNTOS DE COLOMBIA TRAEN {raros} CÓDIGOS QUE NO SON DEPARTAMENTOS "
                 "—como «1111»—. No se cuentan como unidad. Antes de publicar cualquier "
                 "cifra habría que averiguar qué registran.")
+    if "TTO" in medidos:
+        vacios.append(
+            "TRINIDAD Y TOBAGO SE MIDE POR DIVISIÓN POLICIAL, NO POR UNIDAD ADMINISTRATIVA. "
+            f"El Servicio de Policía publica {medidos['TTO']['detalle']['divisiones']} "
+            "divisiones, que no coinciden con las corporaciones regionales del país. Antes de "
+            "publicar habría que declararlo en cada cifra.")
+    if "BOL" in medidos:
+        vacios.append(
+            "BOLIVIA SE MIDIÓ SOBRE UN CUADRO DEL INE: se comprobó que nombra los "
+            "departamentos y el homicidio, no se leyó fila por fila. Los cuadros de trata, "
+            "droga incautada y tránsito por departamento existen pero no se abrieron: no "
+            "se cuentan.")
     for ruta, motivo in FUERA_DE_CENSO.items():
         vacios.append(f"NO ENTRA AL CENSO «{ruta}»: {motivo}. Estaba en la primera versión "
                       "y fue un error de concepto: un tema sin unidad no puede medir "
@@ -406,6 +489,7 @@ def construir() -> Path:
             },
             "por_tema_humanitario": por_tema,
             "colombia_por_conjunto": colombia,
+            "medidos_por_archivo": medidos,
         },
     )
 
