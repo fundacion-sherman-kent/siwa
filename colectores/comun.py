@@ -127,6 +127,10 @@ CATEGORIAS = {
     # amarre queda incomunicado con un accidente de ancla, y eso no aparece en
     # ninguna estadística de conectividad.
     "cables_submarinos": "infraestructuras-criticas",
+    # CLOUDFLARE RADAR. El tráfico automatizado es la única cifra de ciberseguridad
+    # medida sobre tráfico real; la internet moderna es conectividad, no seguridad.
+    "trafico_automatizado": "ciber",
+    "internet_moderno": "conectividad",
     "aeropuertos": "infraestructuras-criticas",
     "generacion_electrica": "infraestructuras-criticas",
     "capacidad_solar": "infraestructuras-criticas",
