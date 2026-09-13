@@ -7033,7 +7033,7 @@
     const marcasY = [o.min, (o.min + o.max) / 2, o.max].map(v => {
       const yy = o.y(v).toFixed(1);
       return '<line x1="' + o.mIzq + '" y1="' + yy + '" x2="' + (o.ancho - o.mDer) + '" y2="' + yy
-        + '" stroke="rgba(255,255,255,.07)" stroke-width="1"></line>'
+        + '" stroke="currentColor" stroke-opacity=".08" stroke-width="1"></line>'
         + '<text x="' + (o.mIzq - 5) + '" y="' + (+yy + 3).toFixed(1) + '" text-anchor="end" '
         + 'fill="' + gris + '" font-size="9">' + marca(v) + '</text>';
     }).join('');
@@ -7057,11 +7057,15 @@
     }).join('');
 
     const titY = (pre + (o.unidad || 'valor')).trim();
+    // LOS EJES SE PINTAN CON EL COLOR DEL TEXTO QUE RODEA AL GRÁFICO, no en blanco:
+    // el sitio se lee sobre fondo claro, y en blanco los ejes no se veían. Con el
+    // color del texto quedan oscuros sobre claro y claros sobre oscuro, sin que
+    // el gráfico tenga que saber en qué tema está.
     return marcasY
       + '<line x1="' + o.mIzq + '" y1="' + o.mArr + '" x2="' + o.mIzq + '" y2="' + base
-      + '" stroke="rgba(255,255,255,.28)" stroke-width="1"></line>'
+      + '" stroke="currentColor" stroke-opacity=".35" stroke-width="1"></line>'
       + '<line x1="' + o.mIzq + '" y1="' + base + '" x2="' + (o.ancho - o.mDer) + '" y2="' + base
-      + '" stroke="rgba(255,255,255,.28)" stroke-width="1"></line>'
+      + '" stroke="currentColor" stroke-opacity=".35" stroke-width="1"></line>'
       + marcasX
       // Título del eje vertical: la medida, arriba del eje.
       + '<text x="2" y="10" fill="' + gris + '" font-size="9.5" font-weight="600">'
@@ -7143,7 +7147,7 @@
       // El último valor observado, junto a su punto: con la escala a la izquierda
       // ya no hace falta repetir el primero en una esquina.
       + '<text x="' + x(u.anio).toFixed(1) + '" y="' + (y(u.valor) - 7).toFixed(1) + '" '
-      + 'text-anchor="' + (prolonga ? 'middle' : 'end') + '" fill="#fff" font-size="10" '
+      + 'text-anchor="' + (prolonga ? 'middle' : 'end') + '" fill="currentColor" font-size="10" '
       + 'font-weight="700">' + cifra(u.valor) + '</text></svg>';
 
     // El pie NO es decoración: una línea punteada que sale de un gráfico se lee
@@ -7392,7 +7396,7 @@
       + 'role="img" aria-label="' + esc(nom) + ' entre los ' + pares.length
       + ' Estados con dato en ' + esc(rotuloDeMateria(clave)) + '">'
       + '<line x1="' + mIzq + '" y1="' + yEje + '" x2="' + (ancho - mDer) + '" y2="'
-      + yEje + '" stroke="rgba(255,255,255,.12)" stroke-width="1"></line>'
+      + yEje + '" stroke="currentColor" stroke-opacity=".18" stroke-width="1"></line>'
       // La mediana: la referencia que un puesto solo no da.
       + '<line x1="' + x(med).toFixed(1) + '" y1="' + (yEje - 11) + '" x2="'
       + x(med).toFixed(1) + '" y2="' + (yEje + 11) + '" stroke="#7d90a8" '
@@ -7404,7 +7408,7 @@
       + '" cy="' + yEje + '" r="6" fill="var(--orange)" stroke="#00121E" '
       + 'stroke-width="1.5"></circle>'
       + '<text x="' + xr.toFixed(1) + '" y="' + (yEje - 13) + '" text-anchor="' + anclaje
-      + '" fill="#fff" font-size="10" font-weight="700">' + esc(nom) + '</text>'
+      + '" fill="currentColor" font-size="10" font-weight="700">' + esc(nom) + '</text>'
       + '<text x="' + (mIzq - 7) + '" y="' + (yEje + 3) + '" text-anchor="end" fill="#7d90a8" '
       + 'font-size="9">' + cifra(min) + '</text>'
       + '<text x="' + (ancho - mDer + 7) + '" y="' + (yEje + 3) + '" fill="#7d90a8" '
@@ -11380,9 +11384,11 @@
     const camino = (xs, ys) => xs.map((a, i) => (i ? 'L' : 'M') + x(a).toFixed(1) + ' ' + y(ys[i]).toFixed(1)).join(' ');
 
     const banda = '<path d="' + camino(anios, q3) + ' ' + anios.slice().reverse().map((a, i) =>
-        'L' + x(a).toFixed(1) + ' ' + y(q1[n - 1 - i]).toFixed(1)).join(' ') + ' Z" fill="rgba(255,255,255,.10)"/>';
-    const lineaMed = '<path d="' + camino(anios, med) + '" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>'
-      + anios.map((a, i) => '<circle cx="' + x(a).toFixed(1) + '" cy="' + y(med[i]).toFixed(1) + '" r="2.6" fill="#fff"/>').join('');
+        'L' + x(a).toFixed(1) + ' ' + y(q1[n - 1 - i]).toFixed(1)).join(' ') + ' Z" fill="currentColor" fill-opacity=".10"/>';
+    // La mediana va en el color del texto y no en blanco: sobre fondo claro, la
+    // línea que el encabezado llama «la línea blanca» no se veía.
+    const lineaMed = '<path d="' + camino(anios, med) + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'
+      + anios.map((a, i) => '<circle cx="' + x(a).toFixed(1) + '" cy="' + y(med[i]).toFixed(1) + '" r="2.6" fill="currentColor"/>').join('');
     const lineaPropia = propia.length
       ? '<path d="' + camino(propia.map(a => +a.anio), propia.map(a => a.valor)) + '" fill="none" stroke="var(--orange)" stroke-width="2.2" stroke-linejoin="round"/>'
         + propia.map(a => '<circle cx="' + x(+a.anio).toFixed(1) + '" cy="' + y(a.valor).toFixed(1) + '" r="2.8" fill="var(--orange)"/>').join('')
@@ -11421,7 +11427,7 @@
         + 'dos extremos, y eso es lo que permite unir los puntos con una línea.</span>'
       : '';
     return '<div class="evolucion-cab"><b>Cómo se movió ' + esc(rotuloDeMateria(clave)) + ' en ' + esc(donde) + '.</b> '
-      + 'La línea blanca es la mediana de unos ' + cuantos + ' Estados por año; la banda, la mitad central'
+      + 'La línea neutra es la mediana de unos ' + cuantos + ' Estados por año; la banda, la mitad central'
       + (propia.length ? '; la naranja, ' + esc(paisNombre) : '') + '.'
       + (cap.unidad ? ' Unidad: ' + esc(cap.unidad) + '.' : '') + nota + '</div>' + svg
       + '<small class="pie-tira">' + pie + '</small>';
