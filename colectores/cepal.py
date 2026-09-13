@@ -93,6 +93,38 @@ INDICADORES = [
                 "CEPAL advierte que en muchos es desempleo URBANO —de las ciudades o de "
                 "algunas de ellas— y no nacional. La OIT, en cambio, estima una tasa "
                 "nacional comparable. Si difieren, la cobertura explica buena parte."},
+    # CUARTA VUELTA (autorizada el 13/9/2026): tres asuntos más que tenían una
+    # sola fuente.
+    {"id": 2119, "clave": "secundaria_cepal", "eje": "Desarrollo",
+     "rotulo": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
+     "unidad": "% de los jóvenes de 20 a 24", "mas_es_peor": False, "decimales": 1,
+     "cautela": "SEGUNDA MEDICIÓN, y no de la misma pregunta. La UNESCO mide cuántos "
+                "terminan la secundaria en la cohorte de edad que corresponde; la CEPAL, "
+                "cuántos jóvenes de 20 a 24 años declaran tenerla completa en la encuesta "
+                "de hogares. Las dos hablan de lo mismo desde dos fuentes distintas: "
+                "registros escolares y encuestas."},
+    {"id": 4784, "clave": "esperanza_vida_cepal", "eje": "Desarrollo",
+     "rotulo": "Esperanza de vida al nacer · segunda fuente",
+     "unidad": "años", "mas_es_peor": False, "decimales": 1,
+     # La serie llega a 2100: desde 2024 es proyección y no estimación. Se corta
+     # en el último año estimado de la edición 2024 de la ONU.
+     "hasta": 2023,
+     "cautela": "SEGUNDA MEDICIÓN con independencia PARCIAL. La calcula el Centro "
+                "Latinoamericano y Caribeño de Demografía de la CEPAL con la División de "
+                "Población de la ONU; la OMS usa en parte esos mismos insumos para sus "
+                "tablas de vida. Que coincidan corrobora menos de lo que parece. Se "
+                "publica hasta 2023: lo posterior es proyección."},
+    {"id": 4410, "clave": "gasto_seguridad_cepal", "eje": "Seguridad",
+     "rotulo": "Gasto en orden público y seguridad · segunda fuente",
+     "unidad": "% del producto", "mas_es_peor": False, "sin_direccion": True,
+     "decimales": 2,
+     "fijar": {"función": "Orden público y seguridad",
+               "Cobertura institucional": "Gobierno central"},
+     "cautela": "SEGUNDA MEDICIÓN de algo que el registro ya publica con el FMI. La CEPAL "
+                "toma el gasto del gobierno central según la clasificación por funciones; "
+                "no incluye provincias ni municipios, que en los Estados federales pagan "
+                "buena parte de la policía. LA SERIE TERMINA EN 2020 en casi todos los "
+                "Estados: sirve para contrastar niveles, no para el año corriente."},
 ]
 # Los Estados que la fuente agrega —«América Latina», «El Caribe»— no son
 # Estados: se descartan por no estar en el padrón, sin ruido.
@@ -141,9 +173,21 @@ def _serie(indicador: dict, isos: set) -> tuple:
     # Las dimensiones que no son país ni año: solo se aceptan si la fila trae el
     # miembro que agrega el total. Si no se puede resolver, no se publica.
     otras = []
+    fijar = indicador.get("fijar") or {}
     for d in dims:
         nombre = str(d.get("name") or "")
         if "País" in nombre or "Pais" in nombre or "Años" in nombre:
+            continue
+        # Las dimensiones que el indicador FIJA por nombre —una función del gasto,
+        # una cobertura— se resuelven por el rótulo exacto del miembro. Si el rótulo
+        # no está, no se adivina otro: se descarta y se declara.
+        pedido = next((v for k, v in fijar.items() if k.lower() in nombre.lower()), None)
+        if pedido:
+            elegidos = {m.get("id") for m in (d.get("members") or [])
+                        if str(m.get("name") or "").strip() == pedido}
+            if not elegidos:
+                return {}, f"en «{nombre}» no figura «{pedido}»"
+            otras.append(elegidos)
             continue
         totales = {m.get("id") for m in (d.get("members") or [])
                    if str(m.get("name") or "").strip().lower() in
@@ -159,7 +203,7 @@ def _serie(indicador: dict, isos: set) -> tuple:
             continue
         anio = next((porAnio[v] for k, v in fila.items()
                      if k.startswith("dim_") and v in porAnio), None)
-        if anio is None:
+        if anio is None or anio > indicador.get("hasta", 9999):
             continue
         if otras:
             valores = {v for k, v in fila.items() if k.startswith("dim_")}
@@ -266,6 +310,7 @@ def recolectar():
                              "mas_es_peor": i["mas_es_peor"], "eje": i.get("eje", "Seguridad"),
                              "origen": "CEPAL, CEPALSTAT",
                              **({"cautela": i["cautela"]} if i.get("cautela") else {}),
+                             **({"sin_direccion": True} if i.get("sin_direccion") else {}),
                              "cepalstat_id": i["id"]}
                             for i in publicables],
             "resumen": {

@@ -52,6 +52,8 @@ REJILLA = "https://ourworldindata.org/grapher/{slug}.csv"
 ORIGEN_CABLES = "Mapa de cables submarinos — TeleGeography, interfaz pública"
 ORIGEN_AEROPUERTOS = "OurAirports — censo abierto y colaborativo de aeródromos del mundo"
 ORIGEN_ENERGIA = "Energy Institute y Ember, via Our World in Data"
+GCAT = "https://planet4589.org/space/gcat/tsv/cat/satcat.tsv"
+ORIGEN_GCAT = "GCAT — catálogo general de objetos espaciales de Jonathan McDowell, CC BY 4.0"
 
 # Los Estados del padrón sin salida al mar. El cero de cables no es un vacío:
 # es geografía, y hay que decirlo o el lector lo lee como falta de dato.
@@ -149,6 +151,51 @@ def aeropuertos() -> tuple:
     return por_iso, chicos, len(filas)
 
 
+def satelites() -> dict:
+    """Cargas útiles puestas en órbita por Estado responsable, acumuladas por año.
+
+    SEGUNDA FUENTE de la capacidad aeroespacial (autorizada el 13/9/2026). El
+    registro ya publica el recuento de la ONU; este es un catálogo independiente
+    que el astrofísico Jonathan McDowell mantiene objeto por objeto. Se cuentan
+    solo las CARGAS ÚTILES —satélites y sondas—, no las etapas de cohete ni los
+    restos, porque eso es lo que dice algo de un Estado.
+    """
+    texto = pedir(GCAT, espera=180).decode("utf-8", "replace")
+    lineas = texto.splitlines()
+    cabeza = lineas[0].lstrip("#").split("\t")
+    i_estado, i_tipo, i_fecha = cabeza.index("State"), cabeza.index("Type"), cabeza.index("LDate")
+    dos_letras = {v: k for k, v in comun.DOS_LETRAS.items()}
+    por_iso = {}
+    for linea in lineas[1:]:
+        if linea.startswith("#"):
+            continue
+        f = linea.split("\t")
+        if len(f) <= max(i_estado, i_tipo, i_fecha):
+            continue
+        iso = dos_letras.get(f[i_estado].strip())
+        if not iso or not f[i_tipo].strip().startswith("P"):
+            continue
+        try:
+            anio = int(f[i_fecha].strip()[:4])
+        except ValueError:
+            continue
+        por_iso.setdefault(iso, {}).setdefault(anio, 0)
+        por_iso[iso][anio] += 1
+    series = {}
+    for iso, anios in por_iso.items():
+        acumulado, serie = 0, []
+        for anio in range(min(anios), HASTA + 1):
+            acumulado += anios.get(anio, 0)
+            serie.append((anio, acumulado))
+        if serie and serie[-1][1]:
+            series[iso] = serie
+    # PROBAR EL LECTOR: Brasil tiene decenas de satélites. Si no aparece, lo que
+    # falló es la lectura, no la capacidad espacial de la región.
+    if "BRA" not in series or series["BRA"][-1][1] < 10:
+        raise RuntimeError("el catálogo no dejó a Brasil con satélites: cambió la forma del archivo")
+    return series
+
+
 def rejilla(slug: str) -> list:
     texto = pedir(REJILLA.format(slug=slug), espera=90).decode("utf-8", "replace")
     return list(csv.DictReader(io.StringIO(texto)))
@@ -216,6 +263,12 @@ def construir() -> Path:
         caidos.append(f"aeropuertos: {type(error).__name__}")
         por_aero, chicos, censo = {}, 0, 0
 
+    try:
+        por_satelite = satelites()
+    except Exception as error:  # noqa: BLE001
+        caidos.append(f"catálogo de satélites GCAT: {type(error).__name__}: {error}")
+        por_satelite = {}
+
     datos, futuros, rejillas = {}, 0, {}
     for m in ENERGIA:
         if m["slug"] not in rejillas:
@@ -249,6 +302,9 @@ def construir() -> Path:
         if p["iso"] in por_aero:
             f["indicadores"]["aeropuertos"] = foto(por_aero[p["iso"]])
             cobertura["aeropuertos"] = cobertura.get("aeropuertos", 0) + 1
+        if p["iso"] in por_satelite:
+            f["indicadores"]["satelites_gcat"] = ficha(por_satelite[p["iso"]])
+            cobertura["satelites_gcat"] = cobertura.get("satelites_gcat", 0) + 1
         for m in ENERGIA:
             s = datos[m["clave"]].get(p["iso"])
             if s:
@@ -284,6 +340,15 @@ def construir() -> Path:
                     "oficial: es el más completo que existe abierto, y eso mismo quiere "
                     "decir que un Estado con poca gente cargando datos puede figurar con "
                     "menos de los que tiene."},
+        {"clave": "satelites_gcat", "rotulo": "Satélites en órbita, acumulado · segunda fuente",
+         "eje": "Defensa", "unidad": "satélites", "unidad_singular": "satélite",
+         "mas_es_peor": False, "sin_direccion": True, "origen": ORIGEN_GCAT,
+         "cautela": "SEGUNDA MEDICIÓN de lo que el registro ya publica con la ONU, desde un "
+                    "catálogo independiente. Cuenta satélites y sondas, no etapas de cohete ni "
+                    "restos, y los atribuye al Estado de la organización dueña: una empresa "
+                    "radicada en un país suma a ese país aunque sus satélites se lancen desde "
+                    "otro. Así se explica que el Uruguay figure arriba: la mayoría son de una "
+                    "empresa de observación terrestre registrada allí."},
     ] + [
         {"clave": m["clave"], "rotulo": m["rotulo"], "eje": "Defensa",
          "unidad": m["unidad"], "mas_es_peor": False, "sin_direccion": True,
@@ -322,6 +387,9 @@ def construir() -> Path:
         "porque no la hay.",
         f"NI EL AÑO EN CURSO NI EL FUTURO ENTRAN en las series de energía: se corta en "
         f"{HASTA}. {futuros} puntos quedaron afuera.",
+        "LOS SATÉLITES SE ATRIBUYEN AL ESTADO DEL DUEÑO, no al del lanzamiento. Solo "
+        "figuran los Estados con al menos uno: los demás no tienen un cero declarado, "
+        "no aparecen en el catálogo.",
         "La generación eléctrica es SEGUNDA FUENTE de algo que el registro ya publica con "
         "el Banco Mundial. Si difieren, ninguna está mal: cada una arma el total con reglas "
         "propias, y la diferencia es un dato sobre cómo se mide.",
@@ -339,7 +407,7 @@ def construir() -> Path:
     return comun.escribir(
         colector=COLECTOR,
         capa=CAPA,
-        fuente=f"{ORIGEN_CABLES}; {ORIGEN_AEROPUERTOS}; {ORIGEN_ENERGIA}",
+        fuente=f"{ORIGEN_CABLES}; {ORIGEN_AEROPUERTOS}; {ORIGEN_ENERGIA}; {ORIGEN_GCAT}",
         url_fuente="https://www.submarinecablemap.com/",
         calificacion=comun.calificar(
             "B", 3, False,

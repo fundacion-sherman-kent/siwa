@@ -4275,7 +4275,7 @@
                      ['contrataciones','Estándar de Datos de Contrataciones Abiertas'],
                      ['opacidadHistoria','Oficina — archivo del Índice de Opacidad'],
                      ['recursos','USGS y Energy Institute — minerales e hidrocarburos'],
-                     ['infraestructura','Cables submarinos, aeropuertos y energía'],
+                     ['infraestructura','Cables submarinos, aeropuertos, energía y satélites (GCAT)'],
                      ['radar','Cloudflare Radar — tráfico real de internet']];
 
   // El informe imprimible se abre a pedido. En papel sale siempre entero: la
@@ -4564,6 +4564,10 @@
     gini: 'desigualdad inequidad brecha ricos pobres',
     gini_cepal: 'desigualdad inequidad brecha ricos pobres gini cepal segunda fuente',
     desempleo_cepal: 'desempleo desocupacion sin trabajo paro cepal segunda fuente',
+    secundaria_cepal: 'educacion secundaria escuela jovenes cepal segunda fuente',
+    esperanza_vida_cepal: 'esperanza de vida salud mortalidad cepal segunda fuente',
+    gasto_seguridad_cepal: 'gasto seguridad policia presupuesto orden publico cepal segunda fuente',
+    satelites_gcat: 'satelites espacio orbita aeroespacial gcat segunda fuente',
     pobreza: 'pobreza indigencia carencia',
     pobreza_cepal: 'pobreza indigencia carencia cepal segunda fuente',
     pobreza_extrema: 'pobreza extrema indigencia hambre canasta basica',
@@ -12269,10 +12273,10 @@
     seriesEnSeccion();
     pintarCenso();
     tarjetasBanco(['homicidios','policias'],'violencia');
-    tarjetasBanco(['gasto_seguridad','gasto_seguridad_publico'],'presupuesto-seguridad');
+    tarjetasBanco(['gasto_seguridad','gasto_seguridad_publico','gasto_seguridad_cepal'],'presupuesto-seguridad');
     tarjetasBanco(['suicidio','muertes_transito'],'muertes-no-delito');
-    tarjetasBanco(['esperanza_vida','mortalidad_materna'],'salud');
-    tarjetasBanco(['fuera_escuela','termina_secundaria','matricula_terciaria',
+    tarjetasBanco(['esperanza_vida','mortalidad_materna','esperanza_vida_cepal'],'salud');
+    tarjetasBanco(['fuera_escuela','termina_secundaria','secundaria_cepal','matricula_terciaria',
                    'alfabetizacion','gasto_educacion'],'educacion');
     tarjetasBanco(['corrupcion','percepcion_corrupcion','estado_derecho','estabilidad',
                    'voz_rendicion','calidad_regulatoria'],'institucional');
@@ -12315,7 +12319,7 @@
     tarjetasBanco(['personal_militar','efectivos_por_km2','efectivos_por_habitante',
                    'militares_fuerza_laboral'],'efectivos');
     tarjetasBanco(['armas_importadas','armas_exportadas'],'material');
-    tarjetasBanco(['objetos_espacio','lanzamientos_anuales'],'aeroespacial');
+    tarjetasBanco(['objetos_espacio','lanzamientos_anuales','satelites_gcat'],'aeroespacial');
     tarjetasBanco(['id_producto','investigadores','articulos_cientificos',
                    'patentes_residentes'],'ciencia-tecnologia');
     // LO QUE SE TIENE VA PRIMERO, Y DESPUES DE LO QUE SE DEPENDE. Hasta hoy esta
