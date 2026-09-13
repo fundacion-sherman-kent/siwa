@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-13T11:35:21+00:00",
+  "corrida": "2026-09-13T12:32:58+00:00",
   "medidas_con_suficientes_casos": 170,
   "pares_probados": 14365,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 14365 pares y el umbral de siempre, alrededor de 718 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2693,
+    "sobreviven": 2695,
     "de_ellos_son_parentescos": 383
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2310,
+  "pistas_totales": 2312,
   "anomalias_totales": 338,
   "pistas": [
     {
@@ -580,6 +580,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.868,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.0488532564578484e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "estado_derecho",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -588,19 +601,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 7.643588771636819e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:nocturnos",
-      "b": "superficie",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.866,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.068677763880253e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
