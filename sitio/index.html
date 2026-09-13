@@ -1548,6 +1548,31 @@
     font-size:11px;font-weight:700;padding:7px 16px;cursor:pointer;letter-spacing:.3px;
     flex:0 0 auto;white-space:nowrap;}
   .modo.activo{background:var(--purple);color:var(--texto-max);}
+  /* EL CONSTRUCTOR USA SU PROPIA CLASE DE BOTÓN y no «modo»: el repintado recorre
+     todos los «.modo» de la página y les quita el resaltado según el modo del
+     mapa, y los botones del constructor se apagaban solos. */
+  .ctor-tipo{background:transparent;border:none;color:var(--texto-2);font-family:'Inter',sans-serif;
+    font-size:11px;font-weight:700;padding:7px 14px;cursor:pointer;letter-spacing:.3px;
+    flex:0 0 auto;white-space:nowrap;}
+  .ctor-tipo.activo{background:var(--purple);color:var(--texto-max);}
+  .ctor-tipos{flex-wrap:wrap;}
+  .ctor-barra{flex-direction:column;align-items:stretch;gap:10px;}
+  .ctor-tope{font-weight:400;text-transform:none;letter-spacing:0;opacity:.7;}
+  .ctor-leyenda{display:flex;flex-wrap:wrap;gap:6px 16px;margin:6px 0 2px;font-size:12px;color:var(--texto-2);}
+  .ctor-leyenda span{display:inline-flex;align-items:center;gap:6px;}
+  .ctor-leyenda i{display:inline-block;width:18px;height:0;border-top:2.5px solid;}
+  .ctor-fuente{font-size:11.5px;color:var(--texto-2);line-height:1.55;margin:8px 0 0;}
+  .ctor-acciones{display:flex;align-items:center;gap:10px;margin:10px 0 4px;flex-wrap:wrap;}
+  .ctor-copiado{font-size:11.5px;color:var(--grey-blue);}
+  #ctor-grafico svg{max-width:100%;height:auto;display:block;}
+  /* «hidden» no alcanza: «.control» declara display:flex y le gana. */
+  #constructor [hidden]{display:none!important;}
+  /* En columna, el «flex:1 1 230px» de «.control» se volvía 230 píxeles de ALTO:
+     de ahí el hueco entre los botones y el tema. */
+  #constructor .ctor-barra > .control{flex:0 0 auto;}
+  /* Los tres botones se acomodan en varias líneas en vez de cortarse en el teléfono. */
+  #constructor .ctor-tipos{flex-wrap:wrap;overflow:visible;width:auto;border-radius:14px;}
+  @media (max-width:560px){ #constructor .ctor-tipo{white-space:normal;text-align:left;flex:1 1 100%;} }
   .modo:disabled{opacity:.4;cursor:not-allowed;}
   .cruzar{display:flex;align-items:center;gap:8px;margin:10px 0 4px;}
   .cruzar label{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--grey-blue);font-weight:700;}
@@ -2369,6 +2394,7 @@
     <a href="#tablero-siwa">Tablero</a>
     <a href="#ficha-pais">Mi país</a>
     <a href="#seis-materias">Las seis materias</a>
+    <a href="#constructor">Armá tu gráfico</a>
     <!-- LOS CUATRO EJES SIGUEN SIENDO CUATRO: lo que crecio son las secciones.
          El rotulo anterior decia «Los cuatro ejes» y debajo listaba diez
          entradas, que es peor que no decir nada. Se agrupa por eje, que era el
@@ -2573,6 +2599,48 @@
         Argentina pero no aporta ni altera ninguna medición.
       </p>
         </section>
+    <!-- ARMÁ TU GRÁFICO. Pedido de la dirección el 13/9/2026: que el lector —o la
+         Fundación, al analizar— arme el gráfico según lo que quiera cruzar u
+         observar, en vez de recibir solo los que el registro decidió dibujar.
+         Tres preguntas y no un editor libre: cada una lleva a un tipo de gráfico
+         que no puede mentir sobre el dato —una serie no se dibuja como barras
+         ni una comparación de un año como una línea—. -->
+    <section class="domain" id="constructor">
+      <div class="domain-head"><h2>Armá tu gráfico</h2><span class="tag" id="tag-constructor">—</span></div>
+      <p class="nota-filtro"><b>Elegí qué querés ver, el tema y los países.</b> El gráfico se arma
+        con los datos del registro, lleva su fuente y su año, y lo podés compartir con un enlace que
+        lo reproduce tal cual.</p>
+      <div class="mapa-barra ctor-barra">
+        <div class="control">
+          <label>1 · Qué querés ver</label>
+          <div class="modos ctor-tipos" role="group" aria-label="Tipo de gráfico">
+            <button type="button" class="ctor-tipo activo" data-tipo="serie">Cómo cambió en el tiempo</button>
+            <button type="button" class="ctor-tipo" data-tipo="hoy">Cómo están hoy</button>
+            <button type="button" class="ctor-tipo" data-tipo="relacion">Si dos temas se mueven juntos</button>
+          </div>
+        </div>
+        <div class="controles">
+          <div class="control ancho">
+            <label for="ctor-tema">2 · Tema</label>
+            <select id="ctor-tema"></select>
+          </div>
+          <div class="control ancho" id="ctor-tema2-caja" hidden>
+            <label for="ctor-tema2">Contra este otro tema</label>
+            <select id="ctor-tema2"></select>
+          </div>
+          <div class="control ancho" id="ctor-paises-caja">
+            <label for="ctor-pais">3 · Países <span class="ctor-tope">hasta cinco</span></label>
+            <select id="ctor-pais"><option value="">Agregar un país…</option></select>
+            <div class="elegidos" id="ctor-elegidos"></div>
+          </div>
+        </div>
+      </div>
+      <div id="ctor-grafico" aria-live="polite"></div>
+      <div class="ctor-acciones">
+        <button type="button" class="boton chico" id="ctor-enlace">Copiar el enlace a este gráfico</button>
+        <span class="ctor-copiado" id="ctor-copiado"></span>
+      </div>
+    </section>
     <section class="domain" id="navegador">
       <div class="domain-head"><h2>Explorar</h2><span class="tag" id="tag-navegador">—</span></div>
       <p class="nota-filtro" id="ayuda-navegador"><b>Elegí un país en el mapa y bajá por sus ejes
@@ -7075,6 +7143,244 @@
       + '" text-anchor="middle" fill="' + gris + '" font-size="9.5" font-weight="600">año</text>';
   }
 
+  // =================== ARMÁ TU GRÁFICO ===================
+  //
+  // Tres preguntas, tres gráficos, y ninguno inventa nada: todo sale de las mismas
+  // capas que pintan el mapa. Lo que el constructor agrega es la ELECCIÓN —qué
+  // tema, qué países, qué pregunta— y un enlace que la reproduce, para que un
+  // gráfico armado en una redacción o en un informe se pueda volver a abrir igual.
+  const CTOR_TOPE = 5;
+  // Cinco colores que se distinguen entre sí sobre el fondo oscuro, y el quinto
+  // con trazo cortado: dos países no pueden quedar separados solo por un matiz.
+  // El tercer color es el del TEXTO y no blanco: sobre el fondo claro del sitio, una
+  // línea blanca no se veía.
+  const CTOR_COLORES = [
+    {c:'var(--orange)', d:''}, {c:'#3FA796', d:''}, {c:'currentColor', d:''},
+    {c:'var(--purple)', d:''}, {c:'#7d90a8', d:'5 4'}];
+  const ctor = {tipo:'serie', tema:null, tema2:null, paises:[]};
+
+  function ctorFuente(clave){
+    const cap = (capas() || {})[clave] || {};
+    const m = metaInd(clave) || {};
+    const periodo = typeof cap.periodo === 'function' ? cap.periodo() : '';
+    return '<p class="ctor-fuente"><b>Fuente:</b> ' + esc(m.origen || 'la que declara el tema en su sección')
+      + (periodo ? ' · <b>Período:</b> ' + esc(periodo) : '')
+      + (cap.unidad ? ' · <b>Unidad:</b> ' + esc(cap.unidad) : '')
+      + (cap.cautela ? '<br><b>Cuidado:</b> ' + esc(cap.cautela) : '') + '</p>';
+  }
+
+  function ctorSerie(clave, isos, ancho){
+    const cap = (capas() || {})[clave];
+    if(!cap || typeof cap.serieDe !== 'function')
+      return '<p class="sin-dato">Este tema <b>no tiene serie en el tiempo</b> en el registro: probá «Cómo están hoy».</p>';
+    const series = isos.map((iso, k) => ({iso, k,
+      puntos: (cap.serieDe(iso) || []).filter(a => isFinite(a.valor)).map(a => ({anio:+a.anio, valor:a.valor}))}))
+      .filter(s => s.puntos.length >= 2);
+    if(!series.length)
+      return '<p class="sin-dato">Ninguno de los países elegidos tiene <b>dos años o más</b> en este tema. '
+        + 'Con un solo año no hay movimiento que dibujar.</p>';
+    const todos = series.flatMap(s => s.puntos);
+    const a0 = Math.min(...todos.map(p => p.anio)), aFin = Math.max(...todos.map(p => p.anio));
+    const min = Math.min(...todos.map(p => p.valor)), max = Math.max(...todos.map(p => p.valor));
+    const alto = 250, mIzq = 44, mDer = 14, mArr = 22, mAba = 32;
+    const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba, rango = (max - min) || 1, span = (aFin - a0) || 1;
+    const x = a => mIzq + ((a - a0) / span) * util;
+    const y = v => mArr + (1 - (v - min) / rango) * utilY;
+    const lineas = series.map(s => {
+      const col = CTOR_COLORES[s.k];
+      const d = s.puntos.map((p, i) => (i ? 'L' : 'M') + x(p.anio).toFixed(1) + ' ' + y(p.valor).toFixed(1)).join(' ');
+      const nombre = nombreDe(s.iso);
+      // Cada punto responde al pasar el cursor —o al tocarlo— con el valor exacto:
+      // el gráfico dinámico no pide una biblioteca, pide que cada punto sepa qué es.
+      return '<path d="' + d + '" fill="none" stroke="' + col.c + '" stroke-width="2.2" stroke-linejoin="round"'
+        + (col.d ? ' stroke-dasharray="' + col.d + '"' : '') + '></path>'
+        + s.puntos.map(p => '<circle cx="' + x(p.anio).toFixed(1) + '" cy="' + y(p.valor).toFixed(1)
+          + '" r="3.2" fill="' + col.c + '"><title>' + esc(nombre) + ' · ' + p.anio + ': ' + cifra(p.valor)
+          + (cap.unidad ? ' ' + esc(cap.unidad) : '') + '</title></circle>').join('');
+    }).join('');
+    const sinSerie = isos.filter(i => !series.some(s => s.iso === i));
+    const leyenda = '<div class="ctor-leyenda">' + series.map(s => {
+      const col = CTOR_COLORES[s.k], u = s.puntos[s.puntos.length - 1];
+      return '<span><i style="border-top-color:' + col.c + (col.d ? ';border-top-style:dashed' : '') + '"></i>'
+        + esc(nombreDe(s.iso)) + ' · <b>' + cifra(u.valor) + '</b> en ' + u.anio + '</span>';
+    }).join('') + '</div>'
+      + (sinSerie.length ? '<p class="sin-dato">Sin serie en este tema: ' + sinSerie.map(i => esc(nombreDe(i))).join(', ') + '.</p>' : '');
+    return '<figure class="grafico"><figcaption>' + esc(cap.rotulo) + ' · ' + a0 + '–' + aFin + '</figcaption>'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto + '" role="img" '
+      + 'aria-label="Serie de ' + esc(cap.rotulo) + ' para ' + series.map(s => esc(nombreDe(s.iso))).join(', ') + '">'
+      + ejesDeSerie({ancho, alto, mIzq, mDer, mArr, mAba, a0, aFin, min, max, x, y, unidad: cap.unidad})
+      + lineas + '</svg></figure>' + leyenda;
+  }
+
+  function ctorHoy(clave, isos, ancho){
+    const cap = (capas() || {})[clave];
+    if(!cap || typeof cap.conteo !== 'function') return '<p class="sin-dato">Este tema no tiene cifras por Estado.</p>';
+    const todos = cap.conteo() || {};
+    const elegidos = (isos.length ? isos : Object.keys(todos)).filter(i => isFinite(todos[i]));
+    if(!elegidos.length) return '<p class="sin-dato">Ninguno de los países elegidos tiene dato en este tema.</p>';
+    const filas = elegidos.map(i => {
+      const d = typeof datoDe === 'function' ? datoDe(clave, i) : null;
+      return {iso:i, nombre:nombreDe(i), valor:todos[i], anio: d && d.anio};
+    }).sort((a, b) => b.valor - a.valor);
+    // CADA BARRA LLEVA SU AÑO cuando no todos son del mismo: comparar el dato de
+    // un país en 2023 con el de otro en 2016 como si fueran del mismo momento es
+    // el error más común con estas cifras, y la barra sola lo esconde.
+    const anios = new Set(filas.map(f => f.anio).filter(Boolean));
+    const conAnio = anios.size > 1;
+    const mIzq = 128, mDer = conAnio ? 92 : 60, alto = filas.length * 22 + 34;
+    const maximo = Math.max(...filas.map(f => f.valor), 0) || 1;
+    const [div, pre] = escalaDeEje(maximo);
+    const util = ancho - mIzq - mDer;
+    const barras = filas.map((f, k) => {
+      const yy = 22 + k * 22, largo = Math.max(0, f.valor) / maximo * util;
+      const sel = isos.length ? false : f.iso === paisFiltro;
+      return '<text x="' + (mIzq - 6) + '" y="' + (yy + 11) + '" text-anchor="end" fill="currentColor" fill-opacity=".8" font-size="11">'
+        + esc(f.nombre.slice(0, 20)) + '</text>'
+        + '<rect x="' + mIzq + '" y="' + yy + '" width="' + largo.toFixed(1) + '" height="14" fill="'
+        + (sel ? '#FB6500' : 'rgba(251,101,0,.62)') + '"><title>' + esc(f.nombre) + ': ' + cifra(f.valor)
+        + (cap.unidad ? ' ' + esc(cap.unidad) : '') + (f.anio ? ' (' + f.anio + ')' : '') + '</title></rect>'
+        + '<text x="' + (mIzq + largo + 5).toFixed(1) + '" y="' + (yy + 11) + '" fill="currentColor" font-size="10.5" font-weight="700">'
+        + cifra(f.valor / div) + (conAnio && f.anio ? '<tspan fill="#7d90a8" font-weight="400"> · ' + f.anio + '</tspan>' : '')
+        + '</text>';
+    }).join('');
+    const titulo = (pre + (cap.unidad || 'valor')).trim();
+    return '<figure class="grafico"><figcaption>' + esc(cap.rotulo) + ' · ' + filas.length + ' Estados'
+      + (!conAnio && anios.size ? ' · dato de ' + [...anios][0] : '') + '</figcaption>'
+      + '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto + '" role="img" '
+      + 'aria-label="' + esc(cap.rotulo) + ', comparación entre ' + filas.length + ' Estados">'
+      + '<text x="' + mIzq + '" y="12" fill="#7d90a8" font-size="9.5" font-weight="600">' + esc(titulo) + '</text>'
+      + '<line x1="' + mIzq + '" y1="18" x2="' + mIzq + '" y2="' + (alto - 8) + '" stroke="currentColor" stroke-opacity=".35"></line>'
+      + barras + '</svg></figure>'
+      + (conAnio ? '<p class="sin-dato"><b>Ojo con los años:</b> no todos los Estados publican el mismo año. '
+        + 'Cada barra lleva el suyo.</p>' : '');
+  }
+
+  function ctorAnchoUtil(){
+    const caja = document.getElementById('ctor-grafico');
+    const w = caja ? caja.clientWidth : 0;
+    return Math.max(300, Math.min(760, w || 640));
+  }
+
+  function ctorEnlace(){
+    const partes = [ctor.tipo, ctor.tema || '', ctor.tipo === 'relacion' ? (ctor.tema2 || '') : '', ctor.paises.join(',')];
+    return location.origin + location.pathname + '#grafico=' + partes.map(encodeURIComponent).join('|');
+  }
+
+  function ctorLeerEnlace(){
+    const h = location.hash.slice(1);
+    if(!h.startsWith('grafico=')) return false;
+    const [tipo, tema, tema2, paises] = h.slice(8).split('|').map(decodeURIComponent);
+    if(['serie', 'hoy', 'relacion'].includes(tipo)) ctor.tipo = tipo;
+    if(tema) ctor.tema = tema;
+    if(tema2) ctor.tema2 = tema2;
+    ctor.paises = (paises || '').split(',').filter(Boolean).slice(0, CTOR_TOPE);
+    return true;
+  }
+
+  function ctorDibujar(){
+    const caja = document.getElementById('ctor-grafico');
+    if(!caja) return;
+    const cap = (capas() || {})[ctor.tema];
+    document.querySelectorAll('.ctor-tipo').forEach(b => b.classList.toggle('activo', b.dataset.tipo === ctor.tipo));
+    document.getElementById('ctor-tema2-caja').hidden = ctor.tipo !== 'relacion';
+    document.getElementById('ctor-paises-caja').hidden = ctor.tipo === 'relacion';
+    const el = document.getElementById('ctor-elegidos');
+    el.innerHTML = ctor.paises.length
+      ? ctor.paises.map(i => '<button type="button" class="quita" data-iso="' + esc(i) + '" aria-label="Quitar '
+          + esc(nombreDe(i)) + '"><b>' + esc(nombreDe(i)) + '</b><span aria-hidden="true">✕</span></button>').join('')
+      : '<span class="ninguno">' + (ctor.tipo === 'hoy' ? 'Sin países elegidos: se muestran los 33.'
+                                                         : 'Agregá al menos un país.') + '</span>';
+    const ancho = ctorAnchoUtil();
+    let html = '';
+    if(!cap){ html = '<p class="sin-dato">Cargando el tema elegido…</p>'; }
+    else if(ctor.tipo === 'serie'){
+      html = ctor.paises.length ? ctorSerie(ctor.tema, ctor.paises, ancho) + ctorFuente(ctor.tema)
+                                : '<p class="sin-dato">Agregá uno o más países para ver cómo cambió.</p>';
+    } else if(ctor.tipo === 'hoy'){
+      html = ctorHoy(ctor.tema, ctor.paises, ancho) + ctorFuente(ctor.tema);
+    } else {
+      html = (ctor.tema2 && ctor.tema2 !== ctor.tema)
+        ? dispersion(ctor.tema, ctor.tema2) + ctorFuente(ctor.tema) + ctorFuente(ctor.tema2)
+        : '<p class="sin-dato">Elegí un segundo tema, distinto del primero.</p>';
+    }
+    caja.innerHTML = html;
+    const tag = document.getElementById('tag-constructor');
+    if(tag) tag.textContent = cap ? cap.rotulo : '—';
+  }
+
+  function ctorLlenarTemas(){
+    const origen = document.getElementById('tema-principal');
+    const t1 = document.getElementById('ctor-tema'), t2 = document.getElementById('ctor-tema2');
+    if(!origen || !t1 || !origen.options.length) return;
+    // Los temas se COPIAN del selector del mapa y no se arman de nuevo: dos listas
+    // de temas empiezan iguales y se separan solas.
+    if(t1.dataset.firma !== String(origen.innerHTML.length)){
+      t1.dataset.firma = String(origen.innerHTML.length);
+      t1.innerHTML = origen.innerHTML;
+      t2.innerHTML = origen.innerHTML;
+    }
+    const valores = [...t1.options].map(o => o.value);
+    // EL TEMA ELEGIDO NO SE REEMPLAZA PORQUE TODAVÍA NO LLEGÓ. Los temas entran de a
+    // poco, a medida que cargan los datos: la primera vez hay veinticuatro y
+    // homicidios no está. La versión anterior pisaba el tema pedido —por un enlace
+    // o por el lector— con el primero de la lista, y cuando llegaban los ciento
+    // sesenta ya era tarde. Ahora solo se pone un tema por defecto si no hay
+    // ninguno pedido, y el pedido se selecciona apenas aparece.
+    if(!ctor.tema) ctor.tema = 'homicidios';
+    if(!ctor.tema2) ctor.tema2 = 'pobreza';
+    if(valores.includes(ctor.tema)) t1.value = ctor.tema;
+    if(valores.includes(ctor.tema2)) t2.value = ctor.tema2;
+    const sp = document.getElementById('ctor-pais');
+    if(sp && sp.options.length <= 1 && padron.length){
+      sp.innerHTML = '<option value="">Agregar un país…</option>'
+        + padron.map(x => '<option value="' + esc(x.iso) + '">' + esc(x.pais) + '</option>').join('');
+    }
+    ctorDibujar();
+  }
+
+  function iniciarConstructor(){
+    const sec = document.getElementById('constructor');
+    if(!sec) return;
+    ctorLeerEnlace();
+    sec.querySelectorAll('.ctor-tipo').forEach(b => b.addEventListener('click', () => {
+      ctor.tipo = b.dataset.tipo; ctorDibujar();
+    }));
+    document.getElementById('ctor-tema').addEventListener('change', e => { ctor.tema = e.target.value; ctorDibujar(); });
+    document.getElementById('ctor-tema2').addEventListener('change', e => { ctor.tema2 = e.target.value; ctorDibujar(); });
+    document.getElementById('ctor-pais').addEventListener('change', e => {
+      const v = e.target.value; e.target.value = '';
+      if(v && !ctor.paises.includes(v) && ctor.paises.length < CTOR_TOPE){ ctor.paises.push(v); ctorDibujar(); }
+    });
+    document.getElementById('ctor-elegidos').addEventListener('click', e => {
+      const b = e.target.closest('.quita');
+      if(!b) return;
+      ctor.paises = ctor.paises.filter(i => i !== b.dataset.iso); ctorDibujar();
+    });
+    document.getElementById('ctor-enlace').addEventListener('click', async () => {
+      const url = ctorEnlace(), aviso = document.getElementById('ctor-copiado');
+      history.replaceState(null, '', url);
+      try{ await navigator.clipboard.writeText(url); aviso.textContent = 'Enlace copiado. Quien lo abra ve este mismo gráfico.'; }
+      catch(_){ aviso.textContent = 'Copiá la dirección de la barra del navegador: ya quedó con este gráfico.'; }
+    });
+    // Los temas llegan cuando llegan los datos: se espera al selector del mapa.
+    const origen = document.getElementById('tema-principal');
+    if(origen) new MutationObserver(ctorLlenarTemas).observe(origen, {childList: true});
+    // QUIEN RECIBE UN ENLACE A UN GRÁFICO TIENE QUE VER EL GRÁFICO. La sección se
+    // pliega según el nivel de lectura, como las demás, y sin esto el enlace
+    // compartido abría un título cerrado: el periodista que lo recibe no sabría
+    // que tiene que tocarlo para ver algo.
+    const abrirConEnlace = () => { revelar('constructor'); ctorLlenarTemas(); sec.scrollIntoView(); };
+    window.addEventListener('hashchange', () => { if(ctorLeerEnlace()) abrirConEnlace(); });
+    window.addEventListener('resize', () => { clearTimeout(iniciarConstructor.t); iniciarConstructor.t = setTimeout(ctorDibujar, 200); });
+    ctorLlenarTemas();
+    if(location.hash.startsWith('#grafico=')) setTimeout(abrirConEnlace, 800);
+  }
+  // SE INICIA CUANDO TERMINA DE CORRER EL PROGRAMA, no acá. En este punto del
+  // archivo todavía no existen varias constantes que usan las capas —la paleta,
+  // la búsqueda del dato—, y tocarlas antes de tiempo tira un error que para la
+  // página entera. Esperar un turno no cuesta nada y evita ese riesgo.
+  setTimeout(iniciarConstructor, 0);
+
   function figuraSerie(clave, iso){
     const cap = (capas() || {})[clave];
     if(!cap || !cap.serieDe) return '';
@@ -10757,7 +11063,11 @@
     d.addEventListener('click', ev => { if(ev.target === d) d.close(); });
     let vista = null;
     try{ vista = localStorage.getItem('siwa-ayuda-vista'); }catch(e){}
-    if(!vista){
+    // QUIEN LLEGA POR UN ENLACE A UN GRÁFICO VINO A VER ESE GRÁFICO. La ayuda de la
+    // primera visita se le abría encima y se lo tapaba. No se abre, y tampoco se
+    // marca como vista: la verá en su próxima visita normal.
+    const llegoPorGrafico = location.hash.startsWith('#grafico=');
+    if(!vista && !llegoPorGrafico){
       try{ localStorage.setItem('siwa-ayuda-vista', '1'); }catch(e){}
       setTimeout(abrir, 1200);
     }
@@ -12694,7 +13004,9 @@
     }
     const ex = escala(puntos.map(p=>p.a)), ey = escala(puntos.map(p=>p.b));
 
-    const A=620, H=330, mi=62, md=20, ms=22, mb=62;
+    // Margen derecho más ancho: ahí va el rótulo de la mediana del eje vertical,
+    // afuera del cuadro, donde no puede tapar ningún punto.
+    const A=620, H=330, mi=62, md=58, ms=22, mb=62;
     const px=v=>mi+((ex.t(v)-ex.lo)/((ex.hi-ex.lo)||1))*(A-mi-md);
     const py=v=>H-mb-((ey.t(v)-ey.lo)/((ey.hi-ey.lo)||1))*(H-mb-ms);
 
@@ -12754,6 +13066,15 @@
       return null;
     };
 
+    // LOS RÓTULOS DE MEDIANA VAN AFUERA DEL CUADRO Y SE ANOTAN PRIMERO. Estaban
+    // adentro, sobre los puntos, y el sistema que acomoda los nombres de los
+    // Estados no los conocía: «mediana de homicidios» quedaba encima de Guatemala
+    // y «mediana de pobreza» encima de un racimo de puntos. Ahora el de la mediana
+    // horizontal va arriba del cuadro y el de la vertical, a su derecha; y se
+    // reservan antes de rotular, para que los nombres los esquiven.
+    const xMed = cx(ex.t(medA)), yMed = cy(ey.t(medB));
+    const xRotMed = Math.min(Math.max(xMed, mi + 34), A - md - 34);
+    puestos.push({x: xRotMed, y: ms - 7}, {x: A - md + 24, y: yMed});
     const conRotulo = puntos
       .slice()
       .sort((u, v) => (v.iso === paisFiltro) - (u.iso === paisFiltro)
@@ -12778,8 +13099,8 @@
         ${marcasX.map(v=>`<line x1="${cx(v).toFixed(1)}" y1="${ms}" x2="${cx(v).toFixed(1)}" y2="${H-mb}" class="rejilla"/>`).join('')}
         <line x1="${cx0.toFixed(1)}" y1="${ms}" x2="${cx0.toFixed(1)}" y2="${H-mb}" class="mediana"/>
         <line x1="${mi}" y1="${cy0.toFixed(1)}" x2="${A-md}" y2="${cy0.toFixed(1)}" class="mediana"/>
-        <text x="${cx0+5}" y="${ms+11}" class="rotg mediana-rot">mediana de ${esc(nomA)}</text>
-        <text x="${mi+5}" y="${cy0-5}" class="rotg mediana-rot">mediana de ${esc(nomB)}</text>
+        <text x="${xRotMed.toFixed(1)}" y="${ms-7}" class="rotg mediana-rot" text-anchor="middle">mediana ${cifra(medA)}</text>
+        <text x="${(A-md+5).toFixed(1)}" y="${(yMed-2).toFixed(1)}" class="rotg mediana-rot">mediana<tspan x="${(A-md+5).toFixed(1)}" dy="10">${cifra(medB)}</tspan></text>
         ${ajusta ? `<line x1="${mi}" y1="${cy(rectaY(ex.lo)).toFixed(1)}" x2="${(A-md)}" y2="${cy(rectaY(ex.hi)).toFixed(1)}" class="recta"/>` : ''}
         <line x1="${mi}" y1="${H-mb}" x2="${A-md}" y2="${H-mb}" class="ejeg"/>
         <line x1="${mi}" y1="${ms}" x2="${mi}" y2="${H-mb}" class="ejeg"/>
