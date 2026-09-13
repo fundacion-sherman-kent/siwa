@@ -1594,7 +1594,9 @@
   .cuad.mixto{border-left-color:var(--tenue);}
   .cuad.bienbien{border-left-color:#3FA796;}
   .grafico .rejilla{stroke:var(--velo-2);stroke-width:1;}
-  .grafico .mediana{stroke:rgba(255,255,255,.20);stroke-width:1;stroke-dasharray:3 4;}
+  /* La mediana parte el gráfico en cuadrantes: si no se ve, los cuadrantes no
+     se entienden. Era blanca al 20 % e invisible sobre el fondo claro. */
+  .grafico .mediana{stroke:currentColor;stroke-opacity:.5;stroke-width:1;stroke-dasharray:3 4;}
   .grafico .recta{stroke:#8C00E0;stroke-width:2.5;opacity:.9;}
   .grafico .puntog{stroke:rgba(0,18,30,.85);stroke-width:1;}
   .grafico .puntog.malmal{fill:#FB6500;}
@@ -1645,7 +1647,9 @@
   .grafico{margin:14px 0 18px;overflow:hidden;}
   .grafico figcaption{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--tenue);margin-bottom:6px;}
   .grafico svg{display:block;width:100%;height:auto;overflow:hidden;}
-  .grafico .ejeg{stroke:rgba(255,255,255,.18);stroke-width:1;}
+  /* Con el color del texto y no en blanco: sobre el fondo claro del sitio, en
+     blanco los ejes solo se veían al imprimir. */
+  .grafico .ejeg{stroke:currentColor;stroke-opacity:.35;stroke-width:1;}
   .grafico .lineag{fill:none;stroke:var(--orange);stroke-width:2;}
   .grafico .eje-titulo{font-size:.82em;letter-spacing:.06em;text-transform:lowercase;opacity:.72;}
   .grafico .areag{fill:rgba(251,101,0,.14);stroke:none;}
@@ -13051,17 +13055,30 @@
     // que caen en el cuadrante peor. Y si dos rotulos se superponen, el segundo
     // se corre: un grafico con nombres encimados no se lee.
     const puestos = [];
-    const cabe = (x, y) => {
-      const alto = 11, ancho = 62;
+    // LOS NOMBRES ESQUIVAN TAMBIÉN LOS PUNTOS, no solo otros nombres. Antes el
+    // rótulo de un Estado podía caer encima del punto de otro —«México» sobre
+    // Colombia— y el lector no sabía a cuál de los dos nombraba.
+    const obstaculos = puntos.map(q => ({iso: q.iso, x: px(q.a), y: py(q.b)}));
+    // Y CADA NOMBRE OCUPA SU LARGO. La caja fija de 62 píxeles servía para
+    // «Chile» y no para «San Vicente y las Granadinas», que mide el triple y se
+    // encimaba igual.
+    const cabe = (x, y, propio, ancho = 62) => {
+      const alto = 11;
       for(const q of puestos){
-        if(Math.abs(q.x - x) < ancho && Math.abs(q.y - y) < alto) return false;
+        if(Math.abs(q.x - x) < (q.ancho + ancho) / 2 && Math.abs(q.y - y) < alto) return false;
       }
-      puestos.push({x, y}); return true;
+      // La caja del texto va de la línea base hacia arriba; un punto de radio 5
+      // la toca si cae dentro de ella con ese margen.
+      for(const o of obstaculos){
+        if(o.iso === propio) continue;
+        if(Math.abs(o.x - x) < ancho / 2 + 5 && o.y > y - 14 && o.y < y + 6) return false;
+      }
+      puestos.push({x, y, ancho}); return true;
     };
     const rotular = p => {
       const base = py(p.b) - 11;
       for(const dy of [0, -11, 11, -22, 22]){
-        if(cabe(px(p.a), base + dy)) return base + dy;
+        if(cabe(px(p.a), base + dy, p.iso, Math.max(40, (p.pais || '').length * 5.8))) return base + dy;
       }
       return null;
     };
@@ -13074,7 +13091,7 @@
     // reservan antes de rotular, para que los nombres los esquiven.
     const xMed = cx(ex.t(medA)), yMed = cy(ey.t(medB));
     const xRotMed = Math.min(Math.max(xMed, mi + 34), A - md - 34);
-    puestos.push({x: xRotMed, y: ms - 7}, {x: A - md + 24, y: yMed});
+    puestos.push({x: xRotMed, y: ms - 7, ancho: 70}, {x: A - md + 24, y: yMed, ancho: 48});
     const conRotulo = puntos
       .slice()
       .sort((u, v) => (v.iso === paisFiltro) - (u.iso === paisFiltro)
