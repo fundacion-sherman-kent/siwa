@@ -7002,6 +7002,75 @@
   // serie tiene forma de recta. Sin ejes ni grilla: una línea, sus extremos
   // rotulados y los puntos marcados. Lo que hace falta para ver la forma; lo que
   // sobra confunde en un teléfono.
+  // LOS EJES DE UNA SERIE, EN UN SOLO LUGAR. La dirección pidió año en el eje
+  // horizontal y medida en el vertical, y el 11/9 se agregó a un solo gráfico:
+  // los otros dos que dibujan años siguieron sin ejes. Una pieza compartida es la
+  // manera de que el próximo gráfico no vuelva a quedar afuera.
+  //
+  // LA UNIDAD VA ARRIBA DEL EJE VERTICAL, horizontal, y no girada a lo largo del
+  // eje: «por cada 100.000 habitantes» no entra girada en cien píxeles de alto, y
+  // cortada no dice nada. Es la convención de las publicaciones de datos.
+  //
+  // Y LA ESCALA VA EN EL TÍTULO, no en cada número: «48,3 · 24,2 · 0» con
+  // «miles de millones de barriles» arriba se lee; «48.301.298.000» en el margen
+  // se sale del dibujo.
+  function escalaDeEje(maximo){
+    const a = Math.abs(maximo);
+    if(a >= 1e12) return [1e12, 'billones de '];
+    if(a >= 1e9)  return [1e9,  'miles de millones de '];
+    if(a >= 1e6)  return [1e6,  'millones de '];
+    return [1, ''];
+  }
+
+  function ejesDeSerie(o){
+    // o = {ancho, alto, mIzq, mDer, mArr, mAba, a0, aFin, min, max, x, y, unidad}
+    const gris = '#7d90a8';
+    const base = o.alto - o.mAba;
+    const [div, pre] = escalaDeEje(Math.max(Math.abs(o.min), Math.abs(o.max)));
+    const marca = v => cifra(v / div);
+
+    // Tres marcas verticales —mínimo, medio y máximo— con su línea guía tenue.
+    const marcasY = [o.min, (o.min + o.max) / 2, o.max].map(v => {
+      const yy = o.y(v).toFixed(1);
+      return '<line x1="' + o.mIzq + '" y1="' + yy + '" x2="' + (o.ancho - o.mDer) + '" y2="' + yy
+        + '" stroke="rgba(255,255,255,.07)" stroke-width="1"></line>'
+        + '<text x="' + (o.mIzq - 5) + '" y="' + (+yy + 3).toFixed(1) + '" text-anchor="end" '
+        + 'fill="' + gris + '" font-size="9">' + marca(v) + '</text>';
+    }).join('');
+
+    // Los años: el primero, el último y los intermedios a un paso redondo, sin
+    // amontonarlos. Con diez años cada dos; con treinta, cada cinco.
+    const span = o.aFin - o.a0;
+    const paso = span <= 6 ? 1 : span <= 12 ? 2 : span <= 25 ? 5 : 10;
+    const anios = [o.a0];
+    for(let a = Math.ceil((o.a0 + 1) / paso) * paso; a < o.aFin; a += paso){
+      if(a - o.a0 >= paso / 2 && o.aFin - a >= paso / 2) anios.push(a);
+    }
+    if(o.aFin !== o.a0) anios.push(o.aFin);
+    const marcasX = anios.map((a, k) => {
+      const xx = o.x(a).toFixed(1);
+      const ancla = k === 0 ? 'start' : k === anios.length - 1 ? 'end' : 'middle';
+      return '<line x1="' + xx + '" y1="' + base + '" x2="' + xx + '" y2="' + (base + 3)
+        + '" stroke="' + gris + '" stroke-width="1"></line>'
+        + '<text x="' + xx + '" y="' + (base + 13) + '" text-anchor="' + ancla + '" '
+        + 'fill="' + gris + '" font-size="9">' + a + '</text>';
+    }).join('');
+
+    const titY = (pre + (o.unidad || 'valor')).trim();
+    return marcasY
+      + '<line x1="' + o.mIzq + '" y1="' + o.mArr + '" x2="' + o.mIzq + '" y2="' + base
+      + '" stroke="rgba(255,255,255,.28)" stroke-width="1"></line>'
+      + '<line x1="' + o.mIzq + '" y1="' + base + '" x2="' + (o.ancho - o.mDer) + '" y2="' + base
+      + '" stroke="rgba(255,255,255,.28)" stroke-width="1"></line>'
+      + marcasX
+      // Título del eje vertical: la medida, arriba del eje.
+      + '<text x="2" y="10" fill="' + gris + '" font-size="9.5" font-weight="600">'
+      + esc(titY) + '</text>'
+      // Título del eje horizontal.
+      + '<text x="' + ((o.mIzq + o.ancho - o.mDer) / 2).toFixed(1) + '" y="' + (o.alto - 2)
+      + '" text-anchor="middle" fill="' + gris + '" font-size="9.5" font-weight="600">año</text>';
+  }
+
   function figuraSerie(clave, iso){
     const cap = (capas() || {})[clave];
     if(!cap || !cap.serieDe) return '';
@@ -7033,7 +7102,9 @@
     const valorFin = pend * anioFin + orden;
 
     // ---- La geometría, ya sabiendo hasta dónde llega el dibujo --------------
-    const alto = 118, mIzq = 8, mDer = prolonga ? 54 : 8, mArr = 16, mAba = 22;
+    // Más margen a la izquierda y abajo para que entren la escala y los años SIN
+    // pisar la curva; y arriba, para el título del eje vertical.
+    const alto = 158, mIzq = 44, mDer = prolonga ? 54 : 12, mArr = 22, mAba = 32;
     const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
     const todosY = prolonga ? ys.concat([valorFin, pend * ultimoAnio + orden]) : ys;
     const min = Math.min(...todosY), max = Math.max(...todosY), rango = (max - min) || 1;
@@ -7053,10 +7124,10 @@
         + 'stroke="#7d90a8" stroke-width="1.6" stroke-dasharray="4 3"></path>'
         + '<circle cx="' + x(anioFin).toFixed(1) + '" cy="' + y(valorFin).toFixed(1)
         + '" r="2.6" fill="none" stroke="#7d90a8" stroke-width="1.4"></circle>'
-        + '<text x="' + (ancho - mDer + 5) + '" y="' + (y(valorFin) + 3).toFixed(1)
-        + '" fill="#7d90a8" font-size="10">' + anioFin + '<tspan x="'
-        + (ancho - mDer + 5) + '" dy="12" font-weight="700">' + cifra(valorFin)
-        + '</tspan></text>'
+        // Solo el valor: el año de la prolongación ya lo marca el eje horizontal, y
+        // repetido encima de la marca se pisaban.
+        + '<text x="' + (ancho - mDer + 6) + '" y="' + (y(valorFin) + 3).toFixed(1)
+        + '" fill="#7d90a8" font-size="10" font-weight="700">' + cifra(valorFin) + '</text>'
       : '';
 
     const p = serie[0], u = serie[n-1];
@@ -7064,14 +7135,16 @@
       + '" height="' + alto + '" style="max-width:100%;height:auto" role="img" '
       + 'aria-label="Serie de ' + esc(rotuloDeMateria(clave)) + ', ' + n + ' años, de '
       + p.anio + ' a ' + u.anio + (prolonga ? ', con prolongación hasta ' + anioFin : '') + '">'
+      + ejesDeSerie({ancho, alto, mIzq, mDer, mArr, mAba, a0, aFin: anioFin, min, max, x, y,
+                     unidad: cap.unidad})
       + '<path d="' + linea + '" fill="none" stroke="var(--orange)" stroke-width="2" '
       + 'stroke-linejoin="round" stroke-linecap="round" opacity=".85"></path>'
       + trazo + puntos
-      + '<text x="' + mIzq + '" y="' + (alto - 6) + '" fill="#7d90a8" font-size="10">'
-      + p.anio + ' · ' + cifra(p.valor) + '</text>'
-      + '<text x="' + (ancho - mDer) + '" y="' + (alto - 6) + '" text-anchor="end" '
-      + 'fill="#fff" font-size="10" font-weight="700">' + u.anio + ' · ' + cifra(u.valor)
-      + '</text></svg>';
+      // El último valor observado, junto a su punto: con la escala a la izquierda
+      // ya no hace falta repetir el primero en una esquina.
+      + '<text x="' + x(u.anio).toFixed(1) + '" y="' + (y(u.valor) - 7).toFixed(1) + '" '
+      + 'text-anchor="' + (prolonga ? 'middle' : 'end') + '" fill="#fff" font-size="10" '
+      + 'font-weight="700">' + cifra(u.valor) + '</text></svg>';
 
     // El pie NO es decoración: una línea punteada que sale de un gráfico se lee
     // como una promesa, y hay que decir que no lo es.
@@ -7287,7 +7360,12 @@
     const med = vals.length % 2 ? vals[(vals.length - 1) / 2]
               : (vals[vals.length/2 - 1] + vals[vals.length/2]) / 2;
     const ancho = Math.min(520, anchoDeFigura('panel-navegador'));
-    const alto = 62, mIzq = 10, mDer = 10;
+    // Alto extra para el título del eje: los treinta y tres puntos están en una
+    // unidad, y sin decirla «4,42 … 64,16» son números sueltos.
+    // El mínimo y el máximo van en los EXTREMOS DE LA LÍNEA, a su altura, y no
+    // arriba: arriba se pisaban con el nombre del Estado cuando ese Estado era el
+    // del extremo —pasaba con la Argentina en homicidios—.
+    const alto = 76, mIzq = 36, mDer = 36;
     const util = ancho - mIzq - mDer;
     const x = v => mIzq + ((v - min) / (max - min)) * util;
     const yEje = 30;
@@ -7327,9 +7405,12 @@
       + 'stroke-width="1.5"></circle>'
       + '<text x="' + xr.toFixed(1) + '" y="' + (yEje - 13) + '" text-anchor="' + anclaje
       + '" fill="#fff" font-size="10" font-weight="700">' + esc(nom) + '</text>'
-      + '<text x="' + mIzq + '" y="12" fill="#7d90a8" font-size="9">' + cifra(min) + '</text>'
-      + '<text x="' + (ancho - mDer) + '" y="12" text-anchor="end" fill="#7d90a8" '
+      + '<text x="' + (mIzq - 7) + '" y="' + (yEje + 3) + '" text-anchor="end" fill="#7d90a8" '
+      + 'font-size="9">' + cifra(min) + '</text>'
+      + '<text x="' + (ancho - mDer + 7) + '" y="' + (yEje + 3) + '" fill="#7d90a8" '
       + 'font-size="9">' + cifra(max) + '</text>'
+      + '<text x="' + (ancho / 2).toFixed(1) + '" y="' + (alto - 2) + '" text-anchor="middle" '
+      + 'fill="#7d90a8" font-size="9.5" font-weight="600">' + esc(cap.unidad || 'valor') + '</text>'
       + '</svg>'
       + '<small class="pie-tira">Cada punto es un Estado con dato en este tema; '
       + 'son ' + pares.length + '. Donde el gris se satura hay varios superpuestos.</small>';
@@ -11289,7 +11370,7 @@
     const anioFin = prolonga ? anios[n - 1] + 3 : anios[n - 1];
     const valorFin = pend * anioFin + orden;
 
-    const alto = 150, mIzq = 8, mDer = prolonga ? 56 : 8, mArr = 14, mAba = 22;
+    const alto = 184, mIzq = 44, mDer = prolonga ? 56 : 12, mArr = 22, mAba = 32;
     const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
     const todos = q1.concat(q3, propia.map(a => a.valor), prolonga ? [valorFin] : []);
     const min = Math.min(...todos), max = Math.max(...todos), rango = (max - min) || 1;
@@ -11309,17 +11390,18 @@
     const trazo = prolonga
       ? '<path d="M' + x(anios[n - 1]).toFixed(1) + ' ' + y(pend * anios[n - 1] + orden).toFixed(1) + ' L' + x(anioFin).toFixed(1)
         + ' ' + y(valorFin).toFixed(1) + '" fill="none" stroke="#7d90a8" stroke-width="1.6" stroke-dasharray="4 3"/>'
-        + '<text x="' + (ancho - mDer + 5) + '" y="' + (y(valorFin) + 3).toFixed(1) + '" fill="#7d90a8" font-size="10">' + anioFin
-        + '<tspan x="' + (ancho - mDer + 5) + '" dy="12" font-weight="700">' + cifra(valorFin) + '</tspan></text>'
+        + '<text x="' + (ancho - mDer + 6) + '" y="' + (y(valorFin) + 3).toFixed(1) + '" fill="#7d90a8" font-size="10" font-weight="700">'
+        + cifra(valorFin) + '</text>'
       : '';
-    const rotulos = '<text x="' + mIzq + '" y="' + (alto - 6) + '" fill="#7d90a8" font-size="10">' + anios[0] + ' · mediana ' + cifra(med[0]) + '</text>'
-      + '<text x="' + (ancho - mDer) + '" y="' + (alto - 6) + '" text-anchor="end" fill="#fff" font-size="10" font-weight="700">'
-      + anios[n - 1] + ' · mediana ' + cifra(med[n - 1]) + '</text>';
+    // Los rótulos de esquina se reemplazan por ejes: la leyenda de arriba ya dice
+    // qué es cada línea, y la escala da el valor de cualquier punto, no solo de dos.
+    const rotulos = ejesDeSerie({ancho, alto, mIzq, mDer, mArr, mAba, a0, aFin: anioFin,
+                                 min, max, x, y, unidad: cap.unidad});
     const cuantos = Math.round(anios.reduce((a, b) => a + porAnio[b].length, 0) / n);
     const donde = zona || 'los 33 Estados';
     const svg = '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho + '" height="' + alto
       + '" style="max-width:100%;height:auto" role="img" aria-label="Evolución de ' + esc(rotuloDeMateria(clave))
-      + ' en ' + esc(donde) + ', ' + n + ' años, mediana y mitad central">' + banda + lineaMed + lineaPropia + trazo + rotulos + '</svg>';
+      + ' en ' + esc(donde) + ', ' + n + ' años, mediana y mitad central">' + rotulos + banda + lineaMed + lineaPropia + trazo + '</svg>';
 
     const pie = prolonga
       ? '<b>La línea punteada no es un pronóstico.</b> Prolonga tres años la recta que mejor ajusta a la mediana de estos '
