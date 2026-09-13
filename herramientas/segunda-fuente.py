@@ -57,7 +57,7 @@ ASUNTOS = {
                    "percepcion_corrupcion"],
     "bosque y deforestación": ["bosque", "perdida_bosque"],
     "pobreza": ["pobreza", "pobreza_cepal", "pobreza_extrema", "vulnerabilidad"],
-    "desigualdad": ["gini"],
+    "desigualdad": ["gini", "gini_cepal"],
     # Asuntos propios y no dentro de «conectividad»: los cables son la puerta
     # física y el internet es el uso. Juntarlos daría por corroborado, con dos
     # productores, algo que ninguno de los dos mide dos veces.
@@ -77,7 +77,7 @@ ASUNTOS = {
                   "minerales_escala_mundial"],
     "empleo informal": ["empleo_informal", "empleo_informal_oit"],
     "desempleo juvenil": ["desempleo_joven", "desempleo_joven_oit"],
-    "desempleo total": ["desempleo_oit"],
+    "desempleo total": ["desempleo_oit", "desempleo_cepal"],
     "trabajo infantil": ["trabajo_infantil"],
     "conectividad": ["internet", "banda_ancha", "servidores_seguros", "internet_moderno"],
     "libertad de prensa": ["libertad_expresion", "censura_medios", "autocensura",

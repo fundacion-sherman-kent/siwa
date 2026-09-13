@@ -204,6 +204,8 @@ CATEGORIAS = {
     "pobreza_extrema": "pobreza",
     "vulnerabilidad": "pobreza",
     "gini": "condiciones",
+    "gini_cepal": "condiciones",
+    "desempleo_cepal": "informalidad",
     "homicidios": "violencia",
     "hostigamiento_periodistas": "entorno-informativo",
     "indice_gobernanza": "integridad",
