@@ -1,0 +1,58 @@
+{
+  "revisado": "2026-09-13",
+  "criterio": "Solo regiones públicas de nube que la documentación técnica oficial de cada empresa lista como existentes. No se cuentan las anunciadas ni las que aparecen en otra lista sin figurar en la documentación. Las regiones de acceso restringido se cuentan y se marcan.",
+  "empresas": [
+    {"empresa": "Amazon Web Services", "origen": "Estados Unidos",
+     "fuente": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html",
+     "regiones": [
+       {"iso": "BRA", "codigo": "sa-east-1", "lugar": "São Paulo"},
+       {"iso": "MEX", "codigo": "mx-central-1", "lugar": "México (Central)"}
+     ],
+     "nota": "La lista de direcciones IP de la empresa incluye además «sa-west-1», que no figura en su documentación de regiones: no se cuenta."},
+    {"empresa": "Google Cloud", "origen": "Estados Unidos",
+     "fuente": "https://docs.cloud.google.com/compute/docs/regions-zones/regions-zones",
+     "regiones": [
+       {"iso": "BRA", "codigo": "southamerica-east1", "lugar": "Osasco, São Paulo"},
+       {"iso": "CHL", "codigo": "southamerica-west1", "lugar": "Santiago"},
+       {"iso": "MEX", "codigo": "northamerica-south1", "lugar": "Querétaro"}
+     ]},
+    {"empresa": "Microsoft Azure", "origen": "Estados Unidos",
+     "fuente": "https://learn.microsoft.com/en-us/azure/reliability/regions-list",
+     "regiones": [
+       {"iso": "BRA", "codigo": "brazilsouth", "lugar": "Estado de São Paulo"},
+       {"iso": "BRA", "codigo": "brazilsoutheast", "lugar": "Río de Janeiro", "restringida": true},
+       {"iso": "CHL", "codigo": "chilecentral", "lugar": "Santiago"},
+       {"iso": "MEX", "codigo": "mexicocentral", "lugar": "Estado de Querétaro"}
+     ],
+     "nota": "La página comercial de la empresa presentaba Chile y México como «próximamente»; su documentación técnica, actualizada el 28/7/2026, las lista como regiones existentes. Manda la documentación."},
+    {"empresa": "Oracle Cloud", "origen": "Estados Unidos",
+     "fuente": "https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm",
+     "regiones": [
+       {"iso": "BRA", "codigo": "sa-saopaulo-1", "lugar": "São Paulo"},
+       {"iso": "BRA", "codigo": "sa-vinhedo-1", "lugar": "Vinhedo"},
+       {"iso": "CHL", "codigo": "sa-santiago-1", "lugar": "Santiago"},
+       {"iso": "CHL", "codigo": "sa-valparaiso-1", "lugar": "Valparaíso"},
+       {"iso": "COL", "codigo": "sa-bogota-1", "lugar": "Bogotá"},
+       {"iso": "MEX", "codigo": "mx-queretaro-1", "lugar": "Querétaro"},
+       {"iso": "MEX", "codigo": "mx-monterrey-1", "lugar": "Monterrey"}
+     ]},
+    {"empresa": "Huawei Cloud", "origen": "China",
+     "fuente": "https://www.huaweicloud.com/intl/en-us/securecenter/data_protection/region_query.html",
+     "regiones": [
+       {"iso": "MEX", "codigo": "LA-Mexico City2", "lugar": "Ciudad de México"},
+       {"iso": "BRA", "codigo": "LA-Sao Paulo1", "lugar": "São Paulo"},
+       {"iso": "CHL", "codigo": "LA-Santiago", "lugar": "Santiago"}
+     ]},
+    {"empresa": "Alibaba Cloud", "origen": "China",
+     "fuente": "https://www.alibabacloud.com/help/en/cloud-migration-guide-for-beginners/latest/regions-and-zones",
+     "regiones": [
+       {"iso": "MEX", "codigo": "na-south-1", "lugar": "México"}
+     ],
+     "nota": "La página de ubicaciones de la empresa menciona también São Paulo con estado ambiguo; su documentación de regiones no la lista: no se cuenta."},
+    {"empresa": "Tencent Cloud", "origen": "China",
+     "fuente": "https://www.tencentcloud.com/document/product/213/6091",
+     "regiones": [
+       {"iso": "BRA", "codigo": "sa-saopaulo", "lugar": "São Paulo"}
+     ]}
+  ]
+}

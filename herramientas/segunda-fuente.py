@@ -131,6 +131,12 @@ ASUNTOS = {
                            "redes_criminales", "actores_del_estado", "actores_privados",
                            "actores_extranjeros", "delitos_informaticos"],
     "tráfico de internet": ["trafico_automatizado"],
+    "uso de inteligencia artificial": ["uso_ia_generativa"],
+    "uso de ChatGPT": ["uso_chatgpt"],
+    "uso de Claude": ["uso_claude"],
+    "regiones de nube de empresas de Estados Unidos": ["nube_eeuu"],
+    "regiones de nube de empresas de China": ["nube_china"],
+    "redes de influencia dadas de baja": ["redes_influencia", "redes_influencia_extrarregional"],
 }
 
 # Materias que NO necesitan segunda fuente, y por qué. Un compuesto de esta casa
@@ -138,6 +144,14 @@ ASUNTOS = {
 # ya vienen corroborados o no. Declararlas acá evita que el control pida algo
 # imposible y pierda autoridad.
 SIN_SEGUNDA = {
+    "uso de ChatGPT": "mide el servicio de una sola empresa con sus propios registros: nadie más "
+                      "puede medir ese mismo servicio.",
+    "uso de Claude": "mide el servicio de una sola empresa con sus propios registros: nadie más "
+                     "puede medir ese mismo servicio.",
+    "regiones de nube de empresas de Estados Unidos": "es la documentación de cada empresa sobre "
+                     "su propia infraestructura: la fuente primaria de ese hecho.",
+    "regiones de nube de empresas de China": "es la documentación de cada empresa sobre su propia "
+                     "infraestructura: la fuente primaria de ese hecho.",
     "situación compuesta": "son índices propios de la Oficina, armados con materias que "
                            "ya declaran su fuente: pedirles una segunda fuente sería "
                            "pedir que otro publique nuestro propio cálculo.",

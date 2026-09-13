@@ -3570,6 +3570,13 @@
            «ausencia de» porque en la escala de V-Dem el valor alto es el bueno; la polarización
            va al revés y así se declara en su ficha.</p>
       </details>
+      <details class="aviso-cobertura"><summary>Las redes de influencia se cuentan según Google, no según la Fundación</summary>
+        <p><b>Las redes de influencia se cuentan según Google, no según la Fundación.</b> Son las
+           que Google informa haber dado de baja en sus servicios y cuyo texto nombra al país. El
+           país al que cada red está vinculada lo dice Google, y la Fundación no puede verificarlo.
+           Todos los orígenes cuentan igual, de la región o de fuera de ella. <b>Un cero no prueba
+           que no haya actividad</b>: WhatsApp, Telegram, TikTok y X no publican registros así.</p>
+      </details>
       <div class="grid-cards" id="tarj-entorno-informativo"></div>
     </div><div class="categoria" id="prensa-libre" data-nivel="2">
       <div class="categoria-head"><h3>En qué condiciones se puede publicar</h3><span class="tag" id="tag-prensa">—</span></div>
@@ -3813,6 +3820,12 @@
         </div>
     <div class="categoria" id="conectividad" data-nivel="3">
       <div class="categoria-head"><h3>Conectividad</h3><span class="tag" id="tag-conectividad">—</span></div>
+      <details class="aviso-cobertura"><summary>Nadie publica de qué país es la IA que usa cada país</summary>
+        <p><b>Nadie publica de qué país es la IA que usa cada país.</b> El uso de IA generativa es una
+           estimación de Microsoft que cuenta cualquier marca. ChatGPT y Claude son servicios de dos
+           empresas de Estados Unidos y cada uno mide solo el suyo. DeepSeek, Gemini, Mistral y las
+           demás no publican datos por país.</p>
+      </details>
       <div class="grid-cards" id="tarj-conectividad"></div>
         </div>
     <div class="categoria" id="ambiente" data-nivel="3">
@@ -4298,7 +4311,9 @@
                      ['opacidadHistoria','Oficina — archivo del Índice de Opacidad'],
                      ['recursos','USGS y Energy Institute — minerales e hidrocarburos'],
                      ['infraestructura','Cables submarinos, aeropuertos, energía y satélites (GCAT)'],
-                     ['radar','Cloudflare Radar — tráfico real de internet']];
+                     ['radar','Cloudflare Radar — tráfico real de internet'],
+                     ['ia','Microsoft, OpenAI, Anthropic y siete empresas de nube — uso de IA y nube'],
+                     ['influencia','Google — redes de influencia coordinada dadas de baja']];
 
   // El informe imprimible se abre a pedido. En papel sale siempre entero: la
   // regla de impresion anula el plegado, de modo que el PDF no cambia.
@@ -4585,6 +4600,13 @@
     polarizacion: 'polarizacion grieta division politica fimi infoxicacion desinformacion',
     gini: 'desigualdad inequidad brecha ricos pobres',
     gini_cepal: 'desigualdad inequidad brecha ricos pobres gini cepal segunda fuente',
+    uso_ia_generativa: 'inteligencia artificial ia generativa uso chatbots adopcion microsoft',
+    uso_chatgpt: 'chatgpt openai inteligencia artificial ia uso estados unidos',
+    uso_claude: 'claude anthropic inteligencia artificial ia uso estados unidos',
+    nube_eeuu: 'nube cloud centro de datos amazon google microsoft oracle estados unidos soberania datos',
+    nube_china: 'nube cloud centro de datos huawei alibaba tencent china soberania datos',
+    redes_influencia: 'bots redes influencia desinformacion fimi injerencia operaciones google youtube',
+    redes_influencia_extrarregional: 'injerencia extranjera rusia china iran bots influencia fimi potencias',
     desempleo_cepal: 'desempleo desocupacion sin trabajo paro cepal segunda fuente',
     secundaria_cepal: 'educacion secundaria escuela jovenes cepal segunda fuente',
     esperanza_vida_cepal: 'esperanza de vida salud mortalidad cepal segunda fuente',
@@ -8091,7 +8113,8 @@
                             almacen.cepal, almacen.gasto, almacen.unesco,
                             almacen.oit, almacen.salud, almacen.prensa,
                             almacen.pobreza, almacen.percepcion_corrupcion,
-                            almacen.recursos, almacen.infraestructura, almacen.radar].filter(Boolean);
+                            almacen.recursos, almacen.infraestructura, almacen.radar,
+                            almacen.ia, almacen.influencia].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -12617,7 +12640,7 @@
     tarjetasBanco('regalo_contrato','contratacion');
     tarjetasBanco(['recaudacion','registro_nacimientos','acceso_informacion','institucion_ddhh'],'capacidad');
     tarjetasBanco(['gini','gini_cepal','pobreza','desempleo_joven','trabajo_infantil','agua_potable'],'condiciones');
-    tarjetasBanco(['internet','banda_ancha','internet_moderno'],'conectividad');
+    tarjetasBanco(['internet','banda_ancha','internet_moderno','uso_ia_generativa','uso_chatgpt','uso_claude'],'conectividad');
     tarjetasBanco(['bosque','perdida_bosque'],'ambiente');
     tarjetasBanco(['terrorismo_muertes','terrorismo_atentados'],'terrorismo');
     tarjetasBanco('conflicto_no_estatal','grupos-armados');
@@ -12628,7 +12651,8 @@
     // categoria no existia y nada lo advertia. Son los datos MAS RECIENTES
     // del registro, de 2025.
     tarjetasBanco(['libertad_prensa','censura_medios','hostigamiento_periodistas',
-                   'autocensura','sesgo_medios','medios_corruptos','polarizacion'],
+                   'autocensura','sesgo_medios','medios_corruptos','polarizacion',
+                   'redes_influencia','redes_influencia_extrarregional'],
                   'entorno-informativo');
     tarjetasBanco(['monopolio_fuerza','intensidad_conflicto'],'control');
     tarjetasBanco(['aprobacion_democracia','persecucion_abuso','politica_anticorrupcion',
@@ -12657,7 +12681,7 @@
     // LA PUERTA FISICA PRIMERO. Los cables encabezan a proposito: es el unico
     // renglon donde el numero BAJO es la noticia, y varios Estados de la region
     // dependen de un solo punto de amarre.
-    tarjetasBanco(['cables_submarinos','aeropuertos','generacion_electrica','capacidad_solar',
+    tarjetasBanco(['cables_submarinos','aeropuertos','nube_eeuu','nube_china','generacion_electrica','capacidad_solar',
                    'acceso_electricidad','electricidad_por_habitante',
                    'electricidad_renovable','perdidas_electricas','puertos_contenedores',
                    'agua_potable_basica'],'infraestructuras-criticas');
@@ -16390,6 +16414,35 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       repintar(); marcador();
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-ciber','tráfico de internet',err.message); marcador(); });
+
+  // INTELIGENCIA ARTIFICIAL Y NUBE (autorizado por la direccion el 13/9/2026):
+  // cuanto se usa la IA en cada pais y cuantas regiones de nube tienen ahi las
+  // empresas de Estados Unidos y de China. Lo que no se sabe —que parte del uso
+  // va a IA de que pais— se declara en el archivo, no se inventa.
+  Promise.all([traer('ia.json'), traer('estado/ia.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.ia=d; dominios+=Object.keys(d.cobertura||{}).length;
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-conectividad',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-conectividad','uso de inteligencia artificial y nube',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-conectividad','uso de inteligencia artificial y nube',err.message); marcador(); });
+
+  // REDES DE INFLUENCIA DADAS DE BAJA, SEGUN LA PLATAFORMA QUE LAS DIO DE BAJA
+  // (autorizado el 13/9/2026). La atribucion es de Google y asi se dice en cada
+  // ficha: este registro no afirma que una red responda a un Estado.
+  Promise.all([traer('influencia.json'), traer('estado/influencia.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.influencia=d; dominios+=Object.keys(d.cobertura||{}).length;
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-entorno-informativo',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-entorno-informativo','redes de influencia dadas de baja',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-entorno-informativo','redes de influencia dadas de baja',err.message); marcador(); });
 
   // INFRAESTRUCTURAS CRITICAS: por donde entra y sale un pais. Cables
   // submarinos, aeropuertos y energia. Lo critico no es el numero alto: es el
