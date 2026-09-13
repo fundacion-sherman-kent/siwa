@@ -255,6 +255,79 @@ CANDIDATAS = [
                   "puerta, abierta, para el eje de Desarrollo.",
         "traba": "Ninguna medida: contesta JSON. Falta decidir qué indicadores entran.",
     },
+    # ---- Puertas de seguridad por provincia, 13 de septiembre de 2026 -------
+    # Varios Estados publican su dato de seguridad por provincia y lo cierran a
+    # los pedidos que llegan desde fuera del país, o lo abren y cierran sin
+    # aviso. El banco las prueba cada día: si abren, el registro se entera ese
+    # mismo día. Probarlas no es publicar nada: solo se mide si contestan.
+    {
+        "clave": "sesnsp_mexico",
+        "rotulo": "México — Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública",
+        "url": "https://repodatos.atdt.gob.mx/api_update/sesnsp/incidencia_delictiva/IDVFC_NM_dic25.csv",
+        "porque": "Víctimas de delitos del fuero común por entidad federativa, mensual, "
+                  "desde 2015. Es la cifra oficial de México sobre sí mismo, por estado.",
+        "traba": "INTERMITENTE: el archivo se descargó el 11 de septiembre de 2026 y devolvió "
+                 "403 en cuatro intentos el 13. El nombre del archivo cambia con cada corte "
+                 "mensual.",
+    },
+    {
+        "clave": "homicidios_ecuador",
+        "rotulo": "Ecuador — homicidios intencionales por provincia (Presidencia)",
+        "url": "https://datosabiertos.presidencia.gob.ec/dataset/homicidios-intencionales",
+        "porque": "Segunda vía del mismo conjunto que publica el portal de datos abiertos: "
+                  "homicidios intencionales por provincia.",
+        "traba": "403 incluso a un lector externo: bloquea pedidos desde fuera del país. Se "
+                 "resuelve pidiéndolo, no con técnica.",
+    },
+    {
+        "clave": "cead_chile",
+        "rotulo": "Chile — Centro de Estudios y Análisis del Delito",
+        "url": "https://cead.minsegpublica.gob.cl/estadisticas-delictuales/",
+        "porque": "Estadística delictual oficial por región y por comuna.",
+        "traba": "403 desde fuera del país, probado el 13 de septiembre de 2026 en su "
+                 "dirección nueva del Ministerio de Seguridad Pública.",
+    },
+    {
+        "clave": "sinesp_brasil",
+        "rotulo": "Brasil — indicadores del Sinesp (Ministerio de Justicia)",
+        "url": "https://dados.mj.gov.br/dataset/sistema-nacional-de-estatisticas-de-seguranca-publica",
+        "porque": "Indicadores de seguridad pública por estado, del sistema nacional de "
+                  "estadísticas. Es la vía oficial para los 27 estados de Brasil.",
+        "traba": "La dirección no resuelve: el nombre del servidor no existe desde afuera, "
+                 "probado el 13 de septiembre de 2026.",
+    },
+    {
+        "clave": "oij_costarica",
+        "rotulo": "Costa Rica — estadísticas policiales del Organismo de Investigación Judicial",
+        "url": "https://pjenlinea3.poder-judicial.go.cr/estadisticasoij/",
+        "porque": "Descarga de delitos por provincia del organismo que investiga los "
+                  "homicidios en Costa Rica.",
+        "traba": "404 a un programa, aunque la página existe para personas.",
+    },
+    {
+        "clave": "observatorio_costarica",
+        "rotulo": "Costa Rica — Observatorio de la Violencia (Ministerio de Justicia y Paz)",
+        "url": "https://observatorio.mj.go.cr/",
+        "porque": "Indicadores cantonales de homicidio de 2016 a 2024.",
+        "traba": "Responde a personas; falta hallar una ruta de datos legible por máquina.",
+    },
+    {
+        "clave": "sidpol_peru",
+        "rotulo": "Perú — denuncias policiales (SIDPOL), Ministerio del Interior",
+        "url": "https://observatorio.mininter.gob.pe/proyectos/base-de-datos-hechos-delictivos-basados-en-denuncias-en-el-sidpol",
+        "porque": "Hechos delictivos denunciados por departamento, del sistema de denuncias "
+                  "de la Policía Nacional.",
+        "traba": "El conjunto del portal de datos abiertos redirige a inicio de sesión. La "
+                 "página del observatorio responde; falta ver si la base se descarga.",
+    },
+    {
+        "clave": "ine_guatemala",
+        "rotulo": "Guatemala — INE, víctimas registradas por la Policía Nacional Civil",
+        "url": "https://datos.ine.gob.gt/api/3/action/package_show?id=cc975da9-d43f-46f6-ad5a-4e0cb3514300",
+        "porque": "Microdatos anuales con departamento de ocurrencia, 22 de 22 departamentos.",
+        "traba": "Ninguna medida: el catálogo contesta JSON. Se vigila porque es la fuente "
+                 "confirmada de Guatemala y todavía no está construida.",
+    },
 ]
 
 

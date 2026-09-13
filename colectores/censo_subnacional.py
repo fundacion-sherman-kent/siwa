@@ -102,6 +102,71 @@ NACIONALES = {
 }
 
 
+# COLOMBIA, MEDIDA Y NO RECOLECTADA. El portal de datos abiertos publica, además de
+# homicidios, cuatro categorías más por departamento. Se consulta SOLO cuántos
+# departamentos trae cada conjunto: ninguna cifra de delitos entra a este archivo.
+# La capa sigue apagada (acta, 13/9/2026) y medir no es publicar.
+DATOS_COLOMBIA = "https://www.datos.gov.co"
+CONJUNTOS_COLOMBIA = [
+    ("26zg-9p9r", "Flujos ilícitos", "Ministerio de Defensa — incautaciones de cocaína", "cod_depto"),
+    ("g228-vp9d", "Flujos ilícitos", "Ministerio de Defensa — incautaciones de marihuana", "cod_depto"),
+    ("nxbk-nikm", "Flujos ilícitos", "Ministerio de Defensa — incautaciones de base de coca", "cod_depto"),
+    ("3cjd-phaj", "Flujos ilícitos", "Ministerio de Defensa — incautaciones de basuco", "cod_depto"),
+    ("k2wp-tdv7", "Flujos ilícitos", "Ministerio de Defensa — incautaciones de insumos líquidos", "cod_depto"),
+    ("d7zw-hpf4", "Grupos y territorio", "Ministerio de Defensa — secuestro", "cod_depto"),
+    ("q2ib-t9am", "Grupos y territorio", "Ministerio de Defensa — extorsión", "cod_depto"),
+    ("yi5j-5fe9", "Terrorismo", "Ministerio de Defensa — terrorismo", "cod_depto"),
+    ("37p5-impc", "Terrorismo", "Policía Nacional — terrorismo", "departamento"),
+    ("krnc-8azs", "Personas en movimiento", "Unidad para las Víctimas — desplazamiento", "cod_estado_depto"),
+]
+# Los 32 departamentos y Bogotá, por su código DANE. Los conjuntos traen además
+# códigos que no son departamentos —«1111», «1112»—: no se cuentan como unidad, se
+# cuentan aparte y se declaran.
+DEPARTAMENTOS_DANE = {
+    "05", "08", "11", "13", "15", "17", "18", "19", "20", "23", "25", "27", "41", "44",
+    "47", "50", "52", "54", "63", "66", "68", "70", "73", "76", "81", "85", "86", "88",
+    "91", "94", "95", "97", "99",
+}
+# Una categoría cuenta para Colombia si algún conjunto la cubre en 24 de sus 33
+# unidades o más: la misma vara del 70 % que la dirección fijó para los Estados.
+MINIMO_UNIDADES_COL = 24
+
+
+def de_colombia() -> tuple:
+    """Cuántos departamentos trae cada conjunto. Solo recuentos, nunca valores."""
+    conjuntos, categorias, caidos = [], set(), []
+    for ident, categoria, rotulo, columna in CONJUNTOS_COLOMBIA:
+        consulta = urllib.parse.urlencode({"$select": f"{columna},count(*)",
+                                           "$group": columna, "$limit": 500})
+        url = f"{DATOS_COLOMBIA}/resource/{ident}.json?{consulta}"
+        try:
+            peticion = urllib.request.Request(url, headers={"User-Agent": comun.AGENTE,
+                                                            "Accept": "application/json"})
+            with urllib.request.urlopen(peticion, timeout=120) as respuesta:
+                grupos = json.loads(respuesta.read())
+        except Exception as error:  # noqa: BLE001 — se declara SIN MIRAR, no se cuenta
+            caidos.append(f"Colombia · {rotulo}: {que_dijo(error)}. Queda SIN MIRAR.")
+            continue
+        claves = {str(g.get(columna) or "").strip() for g in grupos} - {""}
+        if columna == "departamento":
+            # Este conjunto trae el nombre y no el código: se cuentan los nombres
+            # distintos, y se declara que la comparación no es exacta.
+            validas, otras = claves, set()
+        else:
+            validas = {c.zfill(2) for c in claves if c.zfill(2) in DEPARTAMENTOS_DANE}
+            otras = {c for c in claves if c.zfill(2) not in DEPARTAMENTOS_DANE}
+        conjuntos.append({
+            "conjunto": ident, "categoria": categoria, "fuente": rotulo,
+            "unidades": len(validas), "de": len(DEPARTAMENTOS_DANE),
+            "codigos_que_no_son_departamento": len(otras),
+            "por_nombre": columna == "departamento",
+        })
+        if len(validas) >= MINIMO_UNIDADES_COL:
+            categorias.add(categoria)
+        time.sleep(1)
+    return conjuntos, categorias, caidos
+
+
 def identificador() -> str | None:
     return os.environ.get("HDX_HAPI_APP") or None
 
@@ -209,6 +274,10 @@ def construir() -> Path:
         caidos.append(f"base georreferenciada de Upsala: {type(error).__name__}")
         upsala = {}
 
+    # ── Colombia, conjunto por conjunto ────────────────────────────────────
+    colombia, cats_colombia, caidos_col = de_colombia()
+    caidos.extend(caidos_col)
+
     # ── La interfaz humanitaria, que necesita la llave del robot ───────────
     humanitaria, por_tema = {}, {}
     if not identificador():
@@ -257,6 +326,8 @@ def construir() -> Path:
         categorias = set()
         for cat, _ in NACIONALES.get(iso, []):
             categorias.add(cat)
+        if iso == "COL":
+            categorias |= cats_colombia
         u = upsala.get(iso)
         if u and u["con_unidad"]:
             categorias.add("Grupos y territorio")
@@ -266,7 +337,10 @@ def construir() -> Path:
             "categorias_alcanzables": sorted(categorias),
             "cuantas": len(categorias),
             "de_upsala": {k: v for k, v in (u or {}).items()} or None,
-            "de_fuente_nacional": [f"{c} · {d}" for c, d in NACIONALES.get(iso, [])],
+            "de_fuente_nacional": [f"{c} · {d}" for c, d in NACIONALES.get(iso, [])]
+                                  + ([f"{x['categoria']} · {x['fuente']} ({x['unidades']} de "
+                                      f"{x['de']} unidades)" for x in colombia]
+                                     if iso == "COL" else []),
         }
 
     minimo = 5  # más del 60 % de ocho categorías
@@ -290,6 +364,18 @@ def construir() -> Path:
         "distintos con cada Estado: no hay una interfaz regional que las junte, y esa "
         "ausencia es en sí misma un dato sobre la región.",
     ]
+    if colombia:
+        vacios.append(
+            "COLOMBIA SE MIDIÓ, NO SE RECOLECTÓ. De cada conjunto del portal de datos "
+            "abiertos se consultó solo cuántos departamentos trae; ninguna cifra de delitos "
+            "entra a este archivo. Una categoría cuenta si algún conjunto la cubre en "
+            f"{MINIMO_UNIDADES_COL} de las 33 unidades o más.")
+        raros = sum(x["codigos_que_no_son_departamento"] for x in colombia)
+        if raros:
+            vacios.append(
+                f"LOS CONJUNTOS DE COLOMBIA TRAEN {raros} CÓDIGOS QUE NO SON DEPARTAMENTOS "
+                "—como «1111»—. No se cuentan como unidad. Antes de publicar cualquier "
+                "cifra habría que averiguar qué registran.")
     for ruta, motivo in FUERA_DE_CENSO.items():
         vacios.append(f"NO ENTRA AL CENSO «{ruta}»: {motivo}. Estaba en la primera versión "
                       "y fue un error de concepto: un tema sin unidad no puede medir "
@@ -319,6 +405,7 @@ def construir() -> Path:
                 "quienes_llegan": sorted(r["pais"] for r in llegan),
             },
             "por_tema_humanitario": por_tema,
+            "colombia_por_conjunto": colombia,
         },
     )
 
