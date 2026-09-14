@@ -209,6 +209,16 @@ CATEGORIAS = {
     "esperanza_vida_cepal": "salud",
     "gasto_seguridad_cepal": "presupuesto-seguridad",
     "satelites_gcat": "aeroespacial",
+    "trata_nivel": "trata",
+    "produccion_petroleo_eia": "recursos-estrategicos",
+    "produccion_gas_eia": "recursos-estrategicos",
+    "sanciones_ofac": "sanciones",
+    "sanciones_ofsi": "sanciones",
+    "riesgo_inform": "riesgo-humanitario",
+    "riesgo_inform_amenaza": "riesgo-humanitario",
+    "riesgo_inform_vulnerabilidad": "riesgo-humanitario",
+    "riesgo_inform_capacidad": "riesgo-humanitario",
+    "redes_influencia_tiktok": "entorno-informativo",
     "uso_ia_generativa": "conectividad",
     "uso_chatgpt": "conectividad",
     "uso_claude": "conectividad",
@@ -262,6 +272,8 @@ CATEGORIAS = {
 }
 
 ROTULO_CATEGORIA = {
+    "sanciones": "Sanciones internacionales",
+    "riesgo-humanitario": "Riesgo de crisis humanitaria",
     "aeroespacial": "Capacidad aeroespacial",
     "ambiente": "Superficie forestal",
     "capacidad": "Capacidad del Estado",

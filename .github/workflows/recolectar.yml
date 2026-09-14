@@ -157,6 +157,25 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/influencia.py
 
+      # FUENTES NUEVAS DE LA AUDITORIA (autorizadas el 14/9/2026).
+      - name: Petroleo y gas de la EIA
+        id: eia
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/eia.py
+
+      - name: Sanciones de EE. UU. y del Reino Unido
+        id: sanciones_primarias
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/sanciones_primarias.py
+
+      - name: Riesgo de crisis humanitaria (INFORM)
+        id: inform
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/inform.py
+
       # LA SEGUNDA FUENTE DEL BLOQUE LABORAL. Dos de sus tres medidas ya las
       # publica otro organismo: estan para poder compararlas, no para
       # reemplazarlas. La regla de la casa pide dos fuentes por dato.
@@ -622,6 +641,9 @@ jobs:
           [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
           [ "${{ steps.ia.outcome }}" = "failure" ] && { echo "Falló el uso de IA y las regiones de nube."; fallo=1; }
           [ "${{ steps.influencia.outcome }}" = "failure" ] && { echo "Fallaron las redes de influencia dadas de baja."; fallo=1; }
+          [ "${{ steps.eia.outcome }}" = "failure" ] && { echo "Falló el petróleo y gas de la EIA."; fallo=1; }
+          [ "${{ steps.sanciones_primarias.outcome }}" = "failure" ] && { echo "Fallaron las listas de sanciones de EE. UU. y del Reino Unido."; fallo=1; }
+          [ "${{ steps.inform.outcome }}" = "failure" ] && { echo "Falló el riesgo de crisis humanitaria."; fallo=1; }
           [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }

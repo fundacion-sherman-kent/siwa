@@ -186,6 +186,16 @@ def recolectar():
             registro["por_que_no"] = (
                 "El informe no evalúa a este Estado en esta edición."
                 if falla == "no_evaluado" else f"No se pudo leer: {falla}")
+        # LA CATEGORÍA TAMBIÉN VIAJA COMO MATERIA (autorizado el 14/9/2026): así el control
+        # de dos fuentes la cuenta junto a las víctimas que registra UNODC. El «caso
+        # especial» no tiene lugar en la escala y no se le asigna número.
+        if categoria and categoria["orden"] <= 4:
+            registro["indicadores"] = {"trata_nivel": {
+                "valor": categoria["orden"], "anio": anio, "anio_anterior": None,
+                "valor_anterior": None, "nota": categoria["rotulo"],
+                "serie": [{"anio": anio, "valor": categoria["orden"]}]}}
+        else:
+            registro["indicadores"] = {}
         registros.append(registro)
     registros.sort(key=lambda r: (not r["evaluado"], r.get("orden", 9), r["pais"]))
 
@@ -246,6 +256,16 @@ def recolectar():
         registros=registros,
         vacios=vacios,
         extra={
+            "indicadores": [{
+                "clave": "trata_nivel", "rotulo": "Esfuerzo del gobierno contra la trata (EE. UU.)",
+                "eje": "Seguridad", "unidad": "nivel de 1 a 4 (1 = cumple los estándares mínimos)",
+                "unidad_singular": "nivel", "mas_es_peor": True,
+                "origen": "Departamento de Estado de los EE. UU. — Informe sobre la Trata de Personas",
+                "cautela": "SEGUNDA MEDICIÓN de la trata, y de otra cosa: no cuenta víctimas, evalúa "
+                           "cuánto hace el gobierno según los estándares de la ley de EE. UU. 1 = cumple "
+                           "plenamente; 2 = hace esfuerzos significativos; 3 = lista de vigilancia; "
+                           "4 = no cumple ni hace esfuerzos. Es la evaluación de un gobierno sobre otros."}],
+            "cobertura": {"trata_nivel": sum(1 for r in registros if r.get("indicadores"))},
             "resumen": {
                 "edicion": anio,
                 "estados_evaluados": sum(1 for r in registros if r["evaluado"]),

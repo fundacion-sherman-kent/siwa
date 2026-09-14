@@ -73,7 +73,7 @@ ASUNTOS = {
     # Sumarla habría dado un segundo productor —Comtrade— y este control habría
     # declarado corroborado un asunto que depende de una sola fuente.
     "hidrocarburos": ["produccion_petroleo", "produccion_gas", "produccion_carbon",
-                      "reservas_petroleo"],
+                      "reservas_petroleo", "produccion_petroleo_eia", "produccion_gas_eia"],
     "minerales": ["produccion_litio", "cuota_mineral_mundial",
                   "minerales_escala_mundial"],
     "empleo informal": ["empleo_informal", "empleo_informal_oit"],
@@ -92,7 +92,8 @@ ASUNTOS = {
     "conflicto armado": ["conflicto_no_estatal", "intensidad_conflicto", "monopolio_fuerza"],
     "desplazamiento y migración": ["desplazamiento", "migrantes", "migrantes_pct",
                                    "migracion_neta", "remesas"],
-    "trata de personas": ["trata_victimas", "trata_sexual", "trata_trabajo", "trata_personas"],
+    "trata de personas": ["trata_victimas", "trata_sexual", "trata_trabajo", "trata_personas",
+                          "trata_nivel"],
     "drogas": ["incautaciones_cocaina", "cultivo_coca", "droga_cocaina", "droga_heroina",
                "droga_cannabis", "droga_sinteticas"],
     "delito común y su denuncia": ["victimas_robo", "denuncia_robo", "denuncia_agresion",
@@ -136,7 +137,11 @@ ASUNTOS = {
     "uso de Claude": ["uso_claude"],
     "regiones de nube de empresas de Estados Unidos": ["nube_eeuu"],
     "regiones de nube de empresas de China": ["nube_china"],
-    "redes de influencia dadas de baja": ["redes_influencia", "redes_influencia_extrarregional"],
+    "redes de influencia dadas de baja": ["redes_influencia", "redes_influencia_extrarregional",
+                                          "redes_influencia_tiktok"],
+    "sanciones internacionales": ["sanciones_ofac", "sanciones_ofsi"],
+    "riesgo de crisis humanitaria": ["riesgo_inform", "riesgo_inform_amenaza",
+                                     "riesgo_inform_vulnerabilidad", "riesgo_inform_capacidad"],
 }
 
 # Materias que NO necesitan segunda fuente, y por qué. Un compuesto de esta casa
@@ -144,6 +149,8 @@ ASUNTOS = {
 # ya vienen corroborados o no. Declararlas acá evita que el control pida algo
 # imposible y pierda autoridad.
 SIN_SEGUNDA = {
+    "riesgo de crisis humanitaria": "es un índice compuesto de terceros: sus insumos tienen sus "
+                                    "propias fuentes, y pedirle una segunda sería pedir otro índice.",
     "uso de ChatGPT": "mide el servicio de una sola empresa con sus propios registros: nadie más "
                       "puede medir ese mismo servicio.",
     "uso de Claude": "mide el servicio de una sola empresa con sus propios registros: nadie más "
