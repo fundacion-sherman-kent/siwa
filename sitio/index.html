@@ -2158,10 +2158,12 @@
   body.claro .ventana-analisis .va-barra{background:var(--navy);}
   body.claro .va-cuerpo{background:var(--panel);}
   /* El botón que cambia el tema. */
-  .cambia-tema{background:none;border:1px solid var(--line);color:var(--texto);
+  .cambia-tema{background:none;border:1px solid rgba(0,18,30,.22);color:#00121E;
     border-radius:999px;padding:6px 14px;font:inherit;font-size:11.5px;cursor:pointer;
     display:inline-flex;align-items:center;gap:7px;min-height:34px;}
-  .cambia-tema:hover{border-color:var(--tinta);color:var(--texto-max);}
+  /* El encabezado es blanco en los dos temas: el texto del botón no puede tomar el color
+     del tema, o en fondo oscuro queda blanco sobre blanco. */
+  .cambia-tema:hover{border-color:var(--tinta);color:#00121E;}
 
   /* El título del primer panel, en blanco: era el gris del cuerpo y competía
      con el naranja en vez de acompañarlo. */
@@ -2256,7 +2258,7 @@
 </div>
 
 <div class="hero">
-  <h2 class="hero-title">Reporte de situación en <em>América Latina y Caribe</em></h2>
+  <h2 class="hero-title">Reporte de situación en <em>América Latina y el Caribe</em></h2>
   <!-- EL METODO NO ABRE LA PAGINA. Abria con doscientas palabras: que se
        recolecta solo, que cada cifra declara fuente, fecha, calificacion y
        vacios, que hay cuatro ejes porque asi se produce y seis materias porque
@@ -2371,9 +2373,9 @@
 
       <h3 class="ay-tit">4 · La etiqueta de año</h3>
       <p>Al lado de cada cifra hay un año en una etiqueta de color: <span class="cuando-dato
-        fresco">2025</span> es de este año o el pasado, <span class="cuando-dato medio">2023</span>
-        tiene dos o tres años, <span class="cuando-dato viejo">2019</span> es más viejo. Un dato
-        viejo no se esconde: se muestra con su fecha para que usted decida si le sirve.</p>
+        fresco">2026</span> es de este año o el pasado, <span class="cuando-dato medio">2024</span>
+        tiene dos o tres años, <span class="cuando-dato viejo">2020</span> es más viejo. Un dato
+        viejo no se esconde: se muestra con su fecha para que decidas si te sirve.</p>
 
       <h3 class="ay-tit">5 · Lo que este registro no hace</h3>
       <ul class="ay-nohace">
@@ -2386,11 +2388,11 @@
           Estado esté a mitad de tabla no quiere decir que esté «a mitad de camino» de nada.</li>
       </ul>
 
-      <h3 class="ay-tit">6 · Llevarse lo que mira</h3>
+      <h3 class="ay-tit">6 · Llevarse lo que mirás</h3>
       <p>Cada consulta se puede descargar: la <b>planilla</b> para trabajar los números, la
         <b>imagen</b> para pegar en una nota, la <b>cita</b> en norma APA y el <b>enlace</b> que
         devuelve exactamente esta vista. Están debajo del mapa y en «Llevarse esta consulta».</p>
-      <p>Y si lo que quiere es <b>construir algo con estos datos</b> —una nota con gráficos
+      <p>Y si lo que querés es <b>construir algo con estos datos</b> —una nota con gráficos
         propios, una investigación, otra página—, están todos publicados en archivos abiertos:
         <a href="https://siwa.fundacionkent.org/datos/" target="_blank" rel="noopener">la
         interfaz de datos</a> dice qué hay, cómo se lee y qué se promete.</p>
@@ -2403,7 +2405,7 @@
         <b>El objetivo no se declara: se mide</b>, y la medición se publica en «De dónde sale y
         qué falta», con las fallas y las brechas que haya.</p>
 
-      <p class="ay-pie">¿Falta algo o algo no se entiende? Escríbanos: es la clase de aviso que
+      <p class="ay-pie">¿Falta algo o algo no se entiende? Escribinos: es la clase de aviso que
         cambia el registro.</p>
     </div>
   </dialog>
@@ -2674,8 +2676,8 @@
     <div class="categoria" id="metodo-busqueda" data-nivel="3">
       <div class="categoria-head"><h3>Qué encontró la máquina</h3><span class="tag" id="tag-metodo">—</span></div>
       <details class="aviso-cobertura"><summary>Las pistas de esta sección no son hallazgos: son candidatas</summary>
-        <p><b>Con seis mil pares probados, unos trescientos darían «significativo» por puro
-           azar</b> aunque los datos fueran ruido. Por eso está aplicada la corrección de
+        <p><b>Con miles de pares probados, cientos darían «significativo» por puro
+           azar</b> aunque los datos fueran ruido: la cuenta exacta de esta corrida figura abajo. Por eso está aplicada la corrección de
            Benjamini y Hochberg, que controla la proporción de falsos hallazgos, y por eso el
            número de pares probados se muestra <b>antes</b> que los resultados.</p>
         <p><b>Que dos medidas se acompañen no prueba que una cause la otra.</b> Puede haber un
@@ -2779,7 +2781,7 @@
         </div>
     <div class="categoria" id="presupuesto-seguridad" data-nivel="2">
       <div class="categoria-head"><h3>Presupuesto de seguridad y justicia</h3><span class="tag" id="tag-presupuesto-seguridad">—</span></div>
-      <details class="aviso-cobertura"><summary>gastar más no es estar más seguro</summary>
+      <details class="aviso-cobertura"><summary>Mide lo que se destina, no lo que se obtiene</summary>
         <p>Cuánto destina cada Estado a <b>policía, bomberos, tribunales y cárceles</b>: el
            aparato de seguridad y justicia entero, no solo la policía. <b>Mide lo que se
            destina, no lo que se obtiene</b>: en la región, varios de los Estados que más
@@ -2996,7 +2998,7 @@
            con todas las letras: es el único lugar de este registro donde <b>la fuente somos
            nosotros</b>. Ninguna organización publica un padrón de focos transfronterizos de
            América Latina y el Caribe, así que la selección es un criterio de la casa —zonas
-           con jurisdicciones superpuestas y actividad transfronteriza documentada— y no un
+           con jurisdicciones superpuestas y actividad transfronteriza registrada en fuentes abiertas— y no un
            dato tomado de un tercero. Se puede discutir qué zona falta o qué zona sobra; lo
            que no se puede es tomarla por una lista oficial, porque no lo es.</p>
         <p><b>No son indicadores: son lugares</b>, y ninguna fuente publica estadística
@@ -4171,8 +4173,9 @@
 
 <footer>
   <strong>SIWA</strong> — Fundación Sherman Kent · Oficina de Generación de Inteligencia.
-  Los dominios marcados «sin dato» describen colectores todavía no construidos y no muestran cifras.
-  Ningún número de esta página fue estimado, completado ni simulado: si una fuente falla, se muestra
+  Los temas marcados «sin dato» no tienen cifra: la fuente no la publica o todavía no se recolecta.
+  Ningún número fue completado ni simulado por la Fundación: las proyecciones y los índices propios
+  van rotulados como tales, y las estimaciones son de la fuente que las publica. Si una fuente falla, se muestra
   la falla y la fecha del último dato válido. Este registro publica hechos calificados y no emite
   juicios; el análisis de la Fundación sale por sus productos, con confianza y probabilidad declaradas.
   <br><br>
@@ -4184,7 +4187,7 @@
   junto con la <a href="https://fundacionkent.org/nosotros/metodo-de-analisis/" target="_blank" rel="noopener">explicación
   del método</a> y la <a href="https://fundacionkent.org/formacion/" target="_blank" rel="noopener">oferta de formación</a>.
   <br><br>
-  <b>Los datos están abiertos y documentados.</b> Todo lo que muestra esta página vive en
+  <b>Los datos están abiertos y descriptos.</b> Todo lo que muestra esta página vive en
   archivos JSON que cualquiera puede leer, sin credencial y sin registrarse:
   <a href="https://siwa.fundacionkent.org/datos/">siwa.fundacionkent.org/datos</a> lista los
   conjuntos con su fuente, su calificación y su fecha, y explica qué se promete de ellos.
@@ -6064,7 +6067,7 @@
                + 'Oficina de Generación de Inteligencia · acceso libre', MARGEN, ypp + 4,
                W - MARGEN * 2, '500 11px ' + fuente, '#7d90a8', 15);
 
-      const nombre = ('siwa-' + q.titulo + '-' + q.ambito + '-' + new Date().toISOString().slice(0, 10))
+      const nombre = ('siwa-' + q.titulo + '-' + q.ambito + '-' + new Date().toLocaleDateString('sv-SE'))
         .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
         .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.png';
       lienzo.toBlob(blob => {
@@ -6107,7 +6110,12 @@
 
   async function infografiaPais(){
     const iso = paisFiltro;
-    if(!iso){ avisar('Elegí un país en el mapa para descargar su infografía.', true); return; }
+    if(!iso){
+      const junto = document.querySelector('#bajar-infografia + span');
+      if(junto) junto.innerHTML = '<b>Primero elegí un país</b> en el mapa o en «Empezá acá».';
+      avisar('Elegí un país en el mapa para descargar su infografía.', true);
+      return;
+    }
     try{
       const C = {crema:'#F9F9F7', navy:'#00121E', gris:'#667B89', banda:'#C6C6C5', violeta:'#8C00E0',
                  naranja:'#FB6500', linea:'rgba(102,123,137,.35)', punto:'rgba(102,123,137,.45)'};
@@ -6220,7 +6228,7 @@
       ctx.fillStyle = C.naranja; ctx.font = '700 22px Inter';
       ctx.fillText('fundacionkent.org', W - M, yP + 100); ctx.textAlign = 'left';
 
-      const archivo = ('siwa-infografia-' + nombre + '-' + new Date().toISOString().slice(0, 10))
+      const archivo = ('siwa-infografia-' + nombre + '-' + new Date().toLocaleDateString('sv-SE'))
         .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.png';
       lienzo.toBlob(blob => {
         if(!blob){ avisar('No se pudo armar la infografía.', true); return; }
@@ -6448,7 +6456,7 @@
             nombre: 'siwa-' + (q.titulo||'consulta').toLowerCase()
               .normalize('NFD').replace(/[̀-ͯ]/g,'')
               .replace(/[^a-z0-9]+/g,'-').slice(0,50)
-              + '-' + new Date().toISOString().slice(0,10) + '.csv'};
+              + '-' + new Date().toLocaleDateString('sv-SE') + '.csv'};
   }
 
   // LA HOJA DEL PAIS. Se arma en el momento de imprimir y con la ficha del
@@ -6479,7 +6487,8 @@
       + 'su año; el productor del dato se cita junto con este registro.</small></div>'
       + '<b>Qué es esto.</b> Una foto del Estado con lo que publican organismos '
       + 'internacionales y el propio país, puesto en la misma vara que los otros 32. '
-      + '<b>Ningún número fue estimado, completado ni simulado</b>: lo que falta se dice que '
+      + '<b>Ningún número fue completado ni simulado por la Fundación</b>: las proyecciones y los '
+      + 'índices propios van rotulados, las estimaciones son de la fuente que las publica y lo que falta se dice que '
       + 'falta. El registro publica hechos calificados y no emite juicios.'
       + '<br><br><b>Uso libre y gratuito</b>, citando «SIWA, Fundación Sherman Kent» y al '
       + 'productor de cada dato. El registro completo, con la serie histórica y los vacíos '
@@ -7517,6 +7526,11 @@
     const n = Object.keys(d.series).length, alto = n * 22 + 40;
     const [div, pre] = escalaDeEje(d.max);
     const a0 = d.anios[0], aFin = d.anios[d.anios.length - 1];
+    // Al cambiar de tema o de países se vuelve al último año con dato: quedarse en el
+    // año del tema anterior mostraba 2021 cuando había dato de 2023. Solo un enlace
+    // compartido fija otro año.
+    if(carrera.firmaAnio !== d.firma && !carrera.anioDelEnlace) carrera.anio = null;
+    carrera.firmaAnio = d.firma; carrera.anioDelEnlace = false;
     if(carrera.anio === null || carrera.anio < a0 || carrera.anio > aFin) carrera.anio = aFin;
     const marcas = [0, 1, 2, 3, 4].map(i => '<span style="left:' + (i * 25) + '%">'
       + cifra(d.paso * i / div) + '</span>').join('');
@@ -7618,7 +7632,7 @@
     const h = location.hash.slice(1);
     if(!h.startsWith('grafico=')) return false;
     const [tipo, tema, tema2, paises, anio] = h.slice(8).split('|').map(decodeURIComponent);
-    if(/^\d{4}$/.test(anio || '')) carrera.anio = +anio;
+    if(/^\d{4}$/.test(anio || '')){ carrera.anio = +anio; carrera.anioDelEnlace = true; }
     if(['serie', 'hoy', 'relacion'].includes(tipo)) ctor.tipo = tipo;
     if(tema) ctor.tema = tema;
     if(tema2) ctor.tema2 = tema2;
@@ -8725,19 +8739,19 @@
       get unidad(){ return 'lugar en la región, 0 el mejor y 100 el peor'; },
       get rotulo(){ return rotulo; },
       get cautela(){
-        return 'ES UN ORDEN DENTRO DE LA REGION, NO UNA MEDIDA ABSOLUTA: un Estado en 50 '
-             + 'esta en la mediana de America Latina y el Caribe, no «a mitad de camino» '
-             + 'de nada. Se arma promediando el LUGAR que el Estado ocupa en cada '
-             + 'indicador, no los valores, que estan en unidades distintas. Todos los '
-             + 'indicadores pesan igual porque decidir que pesa mas seria un juicio. '
-             + 'NO INCLUYE EL EJE DEFENSA: gasto militar, efectivos y material son '
-             + 'magnitudes, no virtudes ni defectos, y orientarlos exigiria decidir si '
-             + 'mas capacidad militar es mejor o peor. Con Defensa adentro, Costa Rica '
-             + '—que no tiene ejercito desde 1949— figuraba entre los peores de la region. '
-             + 'TAMPOCO SE COMPARAN EPOCAS DISTINTAS: dentro de cada indicador, el Estado '
-             + 'cuyo dato quedo mas de cinco años detras del mas reciente NO entra en ese '
+        return 'Es un orden dentro de la región, no una medida absoluta: un Estado en 50 '
+             + 'está en la mediana de América Latina y el Caribe, no «a mitad de camino» '
+             + 'de nada. Se arma promediando el lugar que el Estado ocupa en cada '
+             + 'indicador, no los valores, que están en unidades distintas. Todos los '
+             + 'indicadores pesan igual, porque decidir cuál pesa más sería un juicio. '
+             + 'No incluye el eje Defensa: gasto militar, efectivos y material son '
+             + 'magnitudes, no virtudes ni defectos, y orientarlos exigiría decidir si '
+             + 'más capacidad militar es mejor o peor. Con Defensa adentro, Costa Rica, '
+             + 'que abolió su ejército en 1948, figuraba entre los peores de la región. '
+             + 'Tampoco se comparan épocas distintas: dentro de cada indicador, el Estado '
+             + 'cuyo dato quedó más de cinco años detrás del más reciente no entra en ese '
              + 'orden. Comparar un valor de 2010 con uno de 2025 no es un dato viejo: es '
-             + 'una comparacion falsa.';
+             + 'una comparación falsa.';
       },
       conteo(){
         const m = {};
@@ -10244,7 +10258,13 @@
   // Hasta ahora todo el estado vivia solo en la pantalla: quien compartia el
   // enlace mandaba a la portada, no a lo que estaba mirando. Ahora el pais, el
   // tema y el nivel viajan en la direccion.
+  // NO SE ESCRIBE LA DIRECCIÓN ANTES DE HABERLA LEÍDO. Si un archivo de datos
+  // llegaba antes que el mapa, el repintado escribía la dirección con el país
+  // todavía vacío y borraba el que traía el enlace: quien abría un enlace
+  // compartido en una conexión lenta caía en toda la región y en nivel Ciudadano.
+  let direccionLeida = false;
   function guardarEnLaDireccion(){
+    if(!direccionLeida) return;
     try{
       const u = new URL(location.href);
       paisFiltro ? u.searchParams.set('pais', paisFiltro) : u.searchParams.delete('pais');
@@ -10698,7 +10718,12 @@
     const cuantos = fuentesInd().reduce((a,f)=>a+(f.indicadores||[]).length, 0);
     // La cantidad de FUENTES tambien se cuenta: escrita a mano decia trece
     // cuando ya eran quince, y esa cifra viajaba hasta la descripcion social.
-    const cuantasFuentes = FUENTES_DEL_REGISTRO.filter(([k]) => almacen[k]).length;
+    // Se cuentan PRODUCTORES DISTINTOS, no archivos: la OMS alimenta dos conjuntos y
+    // es una sola fuente. Es la misma cuenta que sella la descripción para redes.
+    const cuantasFuentes = new Set(FUENTES_DEL_REGISTRO.filter(([k]) => almacen[k]).map(([k]) => {
+      const f = (almacen[k].procedencia || {}).fuente;
+      return typeof f === 'string' ? f : ((f && f.nombre) || k);
+    })).size;
     const pie = document.getElementById('niveles-pie');
     if(pie) pie.innerHTML = (PIE_NIVEL[nivel] || '')
       .replace('{IND}', cuantos || '')
@@ -10751,8 +10776,8 @@
       if(tag) tag.textContent = 'toda la región';
       if(aviso) aviso.innerHTML =
         `<b>Elegí un país o una zona en «Empezá acá», o hacé clic en el mapa.</b><br>
-         Vas a ver los datos que más se movieron en los últimos años: qué mejoró, qué
-         empeoró, de dónde sale cada cifra y qué es lo que esa cifra <b>no</b> dice.`;
+         Vas a ver los datos que más se movieron en los últimos años: qué subió y qué
+         bajó, hacia qué lado lo considera cada fuente, de dónde sale cada cifra y qué es lo que esa cifra <b>no</b> dice.`;
       return;
     }
     if(aviso) aviso.innerHTML = '';
@@ -10866,7 +10891,7 @@
            : `<span class="sin-enlace" title="El canal publicó esta nota sin una dirección utilizable, así que el registro no inventa una">${esc(x.titulo)}
           <span class="quien">${esc(x.medio)} · ${esc(x.pais)}${x.publicada?' · '+x.publicada.slice(0,10):''} · sin enlace</span></span>`)).join('')}</div>
       <p class="aclara"><b>Esto no actualiza la cifra de arriba.</b> La serie cuenta hechos
-        verificados por su fuente y llega con años de retraso; esto cuenta <b>menciones</b> de
+        registrados por su fuente y llega con años de retraso; esto cuenta <b>menciones</b> de
         las últimas ${sr.ventana_horas} horas. Sirve para saber que hay actividad que la serie
         todavía no contó — <b>no para reemplazarla</b>.
         ${porMedio?`<br>${porMedio} de estas notas se atribuyen por el medio y no por el título: un diario nacional rara vez nombra a su propio país.`:''}
@@ -10906,7 +10931,7 @@
           `<a href="${esc(x.enlace)}" target="_blank" rel="noopener">${esc(x.titulo)}
             <span class="quien">${esc(x.medio)} · ${esc(x.pais)}</span></a>`).join('')}</div>
         <p class="aclara"><b>Esto no actualiza las cifras de esta sección.</b> Son menciones de
-          las últimas ${sr.ventana_horas} horas, no hechos verificados por una fuente estadística.
+          las últimas ${sr.ventana_horas} horas, no hechos registrados por una fuente estadística.
           ${tema.cautela?`<br><b>Ojo:</b> ${esc(tema.cautela)}`:''}</p>
       </div>`;
     });
@@ -12763,7 +12788,7 @@
     if(sel.dataset.firma !== firma){
       sel.dataset.firma = firma;
       sel.innerHTML =
-        '<option value="">América Latina y Caribe · los 33</option>'
+        '<option value="">América Latina y el Caribe · los 33</option>'
         + `<optgroup label="Zonas">${bloques.map(b=>
             `<option value="b:${esc(b)}">${esc(b)}</option>`).join('')}</optgroup>`
         + `<optgroup label="Estados">${padron.slice()
@@ -13054,7 +13079,10 @@
            los minerales del mundo. Cuando la ficha trae el nombre, va acá. */
         f.de_que_mineral ? ` <b>de ${esc(f.de_que_mineral)}</b>` : ''} · dato de ${f.anio}${
         edad(f.anio) ? ` <span class="edad ${edad(f.anio).clase}">${edad(f.anio).texto}</span>` : ''}${
-        (tv!==null&&tv!==undefined)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
+        /* El porcentaje de cambio solo se muestra si la cifra de partida y la de
+           llegada son positivas: sobre valores negativos, como un saldo migratorio,
+           «−133,7 %» no significa nada. */
+        (tv!==null&&tv!==undefined&&f.valor_inicial>0&&f.valor>=0)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
       ${avisoDetenida(info)}
       <div class="foot"><span class="src">${esc(info.origen||meta.fuente.nombre)}</span>
         <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
@@ -15224,7 +15252,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     const caja=document.getElementById('informe-cuerpo'); if(!caja) return;
     const filas=filasInforme();
     document.getElementById('informe-titulo').textContent = paisFiltro ? paisNombre
-      : 'América Latina y Caribe — los 33 Estados del padrón';
+      : 'América Latina y el Caribe — los 33 Estados del padrón';
     document.getElementById('informe-fecha').textContent =
       'Emitido el '+new Date().toLocaleString('es-AR',{dateStyle:'long',timeStyle:'short'});
     if(!filas.length){ caja.innerHTML='<p class="sin-dato">Todavía no hay temas con dato para informar.</p>'; return; }
@@ -15419,9 +15447,16 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       + '<i>' + x.estados + ' Estados con dato en los dos · coeficiente de rangos</i></span></div>';
 
     const anom = x => {
-      const cuanto = x.cambio_pct !== null && x.cambio_pct !== undefined
+      // UN PORCENTAJE SOBRE CASI CERO NO INFORMA: «+1.400.375 %» porque la serie venía
+      // en 0. Si la base es nula, negativa o el cambio supera diez veces, se muestra la
+      // diferencia en las unidades del indicador, que es lo que pasó.
+      const pctSirve = x.cambio_pct !== null && x.cambio_pct !== undefined
+        && x.mediana_previa > 0 && Math.abs(x.cambio_pct) <= 1000;
+      const enUnidades = x.cambio_en_unidades !== null && x.cambio_en_unidades !== undefined
+        ? x.cambio_en_unidades : (x.valor - x.mediana_previa);
+      const cuanto = pctSirve
         ? (x.cambio_pct > 0 ? '+' : '') + cifra(x.cambio_pct) + ' %'
-        : (x.cambio_en_unidades > 0 ? '+' : '') + cifra(x.cambio_en_unidades);
+        : (enUnidades > 0 ? '+' : '') + cifra(enUnidades) + ' en unidades';
       return '<div class="pista"><span class="r' + (x.desvios < 0 ? ' neg' : '') + '">'
         + cuanto + '</span><span class="t"><b>' + esc(x.pais || x.iso) + '</b> · '
         + esc(x.rotulo) + ' en ' + esc(x.anio)
@@ -15436,14 +15471,14 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
         + (d.medidas_con_suficientes_casos||0) + '</span><span class="c">con casos suficientes</span></div>'
       + '<div><span class="q">Pares probados</span><span class="v">' + miles(d.pares_probados||0)
         + '</span><span class="c">todos contra todos</span></div>'
-      + '<div><span class="q">Sobreviven</span><span class="v">' + (c.sobreviven||0)
+      + '<div><span class="q">Sobreviven</span><span class="v">' + miles(c.sobreviven||0)
         + '</span><span class="c">a la corrección por azar</span></div>'
       + '<div><span class="q">Pistas</span><span class="v">'
-        + (d.pistas_totales || (d.pistas||[]).length)
+        + miles(d.pistas_totales || (d.pistas||[]).length)
         + '</span><span class="c">sin parentescos · se muestran las más fuertes</span></div>'
       + '</div>'
       + '<p class="obj-regla"><b>' + esc(c.por_que || '') + '</b> Método: '
-        + esc(c.metodo || '') + '. De los ' + (c.sobreviven||0) + ' que sobreviven, '
+        + esc(c.metodo || '') + '. De los ' + miles(c.sobreviven||0) + ' que sobreviven, '
         + (c.de_ellos_son_parentescos||0) + ' son parentescos —dos indicadores de la misma '
         + 'fuente o de la misma categoría— y no se muestran: descubrir que se parecen no es '
         + 'descubrir.</p>'
@@ -15741,7 +15776,9 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       su calificación de fiabilidad en el sistema Almirantazgo —letra para la fuente, número para
       el dato—.
       <br><br>
-      <b>Qué no contiene.</b> Ningún número fue estimado, completado ni simulado. Cuando una fuente
+      <b>Qué no contiene.</b> Ningún número fue completado ni simulado por la Fundación: las
+      proyecciones y los índices propios van rotulados, y las estimaciones son de la fuente que las
+      publica. Cuando una fuente
       falla se muestra la falla y la fecha del último dato válido. <b>Este registro publica hechos
       calificados y no emite juicios</b>: el análisis de la Fundación sale por sus productos, con
       confianza y probabilidad declaradas.
@@ -15832,7 +15869,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     const a=document.createElement('a');
     const direccion=URL.createObjectURL(blob);
     a.href=direccion;
-    a.download='siwa-'+(paisFiltro||'region').toLowerCase()+'-'+new Date().toISOString().slice(0,10)+'.csv';
+    a.download='siwa-'+(paisFiltro||'region').toLowerCase()+'-'+new Date().toLocaleDateString('sv-SE')+'.csv';
     document.body.appendChild(a); a.click(); a.remove();
     // El enlace temporal se suelta: si no, cada descarga deja la planilla
     // entera retenida en memoria hasta que se cierre la pestaña.
@@ -15851,6 +15888,7 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       padron = geo.features.map(f=>f.properties).sort((a,b)=>a.pais.localeCompare(b.pais,'es'));
       // Recien ahora se puede resolver un pais pedido por la direccion.
       leerDeLaDireccion();
+      direccionLeida = true;
       // Vista inicial fija ANTES de cualquier ajuste automatico. Si el contenedor
       // todavia no tiene alto —tipografia que llega tarde, pestania en segundo
       // plano, ventana angosta—, calcular el encuadre da coordenadas invalidas,

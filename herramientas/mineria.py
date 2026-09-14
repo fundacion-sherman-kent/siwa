@@ -346,10 +346,13 @@ def main() -> None:
         "correccion": {
             "metodo": "Benjamini-Hochberg",
             "alfa": FDR,
-            "por_que": f"Con {probados} pares y el umbral de siempre, alrededor de "
-                       f"{int(probados * 0.05)} darían «significativo» por puro azar aunque "
-                       "los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a "
-                       "escala industrial.",
+            # Separador de miles con punto, como el resto del sitio.
+            "por_que": ("Con " + f"{probados:,}".replace(",", ".")
+                        + " pares y el umbral de siempre, alrededor de "
+                        + f"{int(probados * 0.05):,}".replace(",", ".")
+                        + " darían «significativo» por puro azar aunque "
+                        "los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a "
+                        "escala industrial."),
             "sobreviven": len(sobreviven),
             "de_ellos_son_parentescos": len(sobreviven) - len(pistas),
         },
