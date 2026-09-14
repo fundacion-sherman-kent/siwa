@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-14T06:35:32+00:00",
+  "corrida": "2026-09-14T07:30:32+00:00",
   "medidas_con_suficientes_casos": 184,
   "pares_probados": 16836,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 16.836 pares y el umbral de siempre, alrededor de 841 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3417,
+    "sobreviven": 3412,
     "de_ellos_son_parentescos": 394
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3023,
+  "pistas_totales": 3018,
   "anomalias_totales": 353,
   "pistas": [
     {
@@ -229,6 +229,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.918,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.725950684640884e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Estado de derecho",
@@ -250,19 +263,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 2.4628521962340764e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.917,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.110527050114939e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -457,7 +457,7 @@
       "coeficiente": 0.888,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 9.623200850238296e-15,
+      "p": 1.0307406678930452e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
