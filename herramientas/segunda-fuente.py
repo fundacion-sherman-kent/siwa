@@ -135,6 +135,9 @@ ASUNTOS = {
     "uso de inteligencia artificial": ["uso_ia_generativa"],
     "uso de ChatGPT": ["uso_chatgpt"],
     "uso de Claude": ["uso_claude"],
+    "asistentes de IA en la tienda de apps, por origen": ["ia_apps_ranking", "ia_apps_ranking_eeuu",
+                                                          "ia_apps_ranking_china", "ia_apps_ranking_otros",
+                                                          "ia_apps_disponibles"],
     "regiones de nube de empresas de Estados Unidos": ["nube_eeuu"],
     "regiones de nube de empresas de China": ["nube_china"],
     "redes de influencia dadas de baja": ["redes_influencia", "redes_influencia_extrarregional",
@@ -151,6 +154,8 @@ ASUNTOS = {
 SIN_SEGUNDA = {
     "riesgo de crisis humanitaria": "es un índice compuesto de terceros: sus insumos tienen sus "
                                     "propias fuentes, y pedirle una segunda sería pedir otro índice.",
+    "asistentes de IA en la tienda de apps, por origen": "es lo que la tienda publica sobre sí "
+                     "misma: nadie más puede medir el ranking ni la disponibilidad de esa tienda.",
     "uso de ChatGPT": "mide el servicio de una sola empresa con sus propios registros: nadie más "
                       "puede medir ese mismo servicio.",
     "uso de Claude": "mide el servicio de una sola empresa con sus propios registros: nadie más "

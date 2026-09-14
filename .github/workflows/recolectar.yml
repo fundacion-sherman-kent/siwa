@@ -150,6 +150,13 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/ia.py
 
+      # ASISTENTES DE IA POR ORIGEN DE LA EMPRESA, SEGUN LA TIENDA DE APPLE (autorizado el 14/9/2026).
+      - name: Asistentes de IA por origen
+        id: ia_apps
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/ia_apps.py
+
       # REDES DE INFLUENCIA DADAS DE BAJA, SEGUN GOOGLE (autorizado el 13/9/2026).
       - name: Redes de influencia dadas de baja
         id: influencia
@@ -640,6 +647,7 @@ jobs:
           [ "${{ steps.censo_subnacional.outcome }}" = "failure" ] && { echo "Falló el censo de disponibilidad subnacional."; fallo=1; }
           [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
           [ "${{ steps.ia.outcome }}" = "failure" ] && { echo "Falló el uso de IA y las regiones de nube."; fallo=1; }
+          [ "${{ steps.ia_apps.outcome }}" = "failure" ] && { echo "Fallaron los asistentes de IA por origen."; fallo=1; }
           [ "${{ steps.influencia.outcome }}" = "failure" ] && { echo "Fallaron las redes de influencia dadas de baja."; fallo=1; }
           [ "${{ steps.eia.outcome }}" = "failure" ] && { echo "Falló el petróleo y gas de la EIA."; fallo=1; }
           [ "${{ steps.sanciones_primarias.outcome }}" = "failure" ] && { echo "Fallaron las listas de sanciones de EE. UU. y del Reino Unido."; fallo=1; }
