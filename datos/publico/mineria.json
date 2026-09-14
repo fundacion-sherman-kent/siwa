@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-14T02:38:09+00:00",
-  "medidas_con_suficientes_casos": 178,
-  "pares_probados": 15753,
+  "corrida": "2026-09-14T03:31:29+00:00",
+  "medidas_con_suficientes_casos": 184,
+  "pares_probados": 16836,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 15753 pares y el umbral de siempre, alrededor de 787 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2960,
-    "de_ellos_son_parentescos": 386
+    "por_que": "Con 16.836 pares y el umbral de siempre, alrededor de 841 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3343,
+    "de_ellos_son_parentescos": 393
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2574,
-  "anomalias_totales": 351,
+  "pistas_totales": 2950,
+  "anomalias_totales": 353,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -294,6 +294,19 @@
       "misma_categoria": false
     },
     {
+      "a": "produccion_petroleo_eia",
+      "b": "reservas_petroleo",
+      "rotulo_a": "Producción de petróleo · segunda fuente",
+      "rotulo_b": "Reservas probadas de petróleo",
+      "coeficiente": 0.914,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.0733036532958168e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Corrupción política",
@@ -372,6 +385,19 @@
       "misma_categoria": false
     },
     {
+      "a": "riesgo_inform_amenaza",
+      "b": "unidades:homicidios_del_pais",
+      "rotulo_a": "Exposición a amenazas (INFORM)",
+      "rotulo_b": "unidades · homicidios_del_pais",
+      "coeficiente": 0.897,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1532181702939435e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "persecucion_abuso",
       "b": "uso_chatgpt",
       "rotulo_a": "Persecución del abuso de función pública",
@@ -380,6 +406,19 @@
       "estados": 20,
       "tipo": "rangos (Spearman)",
       "p": 2.031080312840195e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "riesgo_inform_amenaza",
+      "b": "unidades:casos_por_unidad",
+      "rotulo_a": "Exposición a amenazas (INFORM)",
+      "rotulo_b": "unidades · casos_por_unidad",
+      "coeficiente": 0.894,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 2.2609870139890335e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -497,6 +536,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.3926105704984327e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "estabilidad",
+      "b": "riesgo_inform",
+      "rotulo_a": "Estabilidad política y ausencia de violencia",
+      "rotulo_b": "Riesgo de crisis humanitaria (INFORM)",
+      "coeficiente": -0.877,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.182368555613423e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -632,6 +684,19 @@
       "misma_categoria": false
     },
     {
+      "a": "riesgo_inform",
+      "b": "unidades:casos_por_unidad",
+      "rotulo_a": "Riesgo de crisis humanitaria (INFORM)",
+      "rotulo_b": "unidades · casos_por_unidad",
+      "coeficiente": 0.87,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.6857528127829822e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "libertad_prensa",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -666,6 +731,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.379314467919233e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "produccion_petroleo_eia",
+      "b": "renta_gas",
+      "rotulo_a": "Producción de petróleo · segunda fuente",
+      "rotulo_b": "Renta del gas natural",
+      "coeficiente": 0.869,
+      "estados": 32,
+      "tipo": "rangos (Spearman)",
+      "p": 8.008795083626974e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -710,92 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "corrupcion",
-      "b": "corrupcion_politica",
-      "rotulo_a": "Control de la corrupción",
-      "rotulo_b": "Corrupción política",
-      "coeficiente": -0.864,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 8.435986656188149e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "servidores_seguros",
-      "b": "uso_chatgpt",
-      "rotulo_a": "Servidores de internet cifrados",
-      "rotulo_b": "Intensidad de uso de ChatGPT",
+      "a": "riesgo_inform",
+      "b": "unidades:homicidios_del_pais",
+      "rotulo_a": "Riesgo de crisis humanitaria (INFORM)",
+      "rotulo_b": "unidades · homicidios_del_pais",
       "coeficiente": 0.864,
-      "estados": 21,
+      "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 2.903347839712144e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "percepcion_corrupcion",
-      "b": "uso_claude",
-      "rotulo_a": "Percepción de corrupción",
-      "rotulo_b": "Intensidad de uso de Claude por habitante",
-      "coeficiente": 0.863,
-      "estados": 19,
-      "tipo": "rangos (Spearman)",
-      "p": 1.7841966540877893e-07,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "percepcion_corrupcion:puntaje",
-      "b": "uso_claude",
-      "rotulo_a": "percepcion_corrupcion · puntaje",
-      "rotulo_b": "Intensidad de uso de Claude por habitante",
-      "coeficiente": 0.863,
-      "estados": 19,
-      "tipo": "rangos (Spearman)",
-      "p": 1.7841966540877893e-07,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "percepcion_corrupcion:intervalo_alto",
-      "b": "voz_rendicion",
-      "rotulo_a": "percepcion_corrupcion · intervalo_alto",
-      "rotulo_b": "Voz y rendición de cuentas",
-      "coeficiente": 0.862,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 1.4482106419781867e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:nocturnos",
-      "b": "superficie",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.861,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.16449860768065e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "uso_energia",
-      "b": "uso_energia_ei",
-      "rotulo_a": "Uso de energía por habitante",
-      "rotulo_b": "Uso de energía por habitante · segunda fuente",
-      "coeficiente": 0.861,
-      "estados": 23,
-      "tipo": "rangos (Spearman)",
-      "p": 6.808594447534034e-09,
+      "p": 4.502282509140932e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
