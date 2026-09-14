@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-13T23:25:28+00:00",
-  "medidas_con_suficientes_casos": 176,
-  "pares_probados": 15400,
+  "corrida": "2026-09-14T00:35:47+00:00",
+  "medidas_con_suficientes_casos": 178,
+  "pares_probados": 15753,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 15400 pares y el umbral de siempre, alrededor de 770 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 2875,
-    "de_ellos_son_parentescos": 385
+    "por_que": "Con 15753 pares y el umbral de siempre, alrededor de 787 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 2962,
+    "de_ellos_son_parentescos": 386
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2490,
-  "anomalias_totales": 350,
+  "pistas_totales": 2576,
+  "anomalias_totales": 351,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -190,19 +190,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.924,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.189251650349073e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -217,13 +204,13 @@
     },
     {
       "a": "focos:focos",
-      "b": "perdida_bosque",
+      "b": "superficie",
       "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.923,
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.921,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.3581529091017117e-18,
+      "p": 2.5824837642299654e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -372,6 +359,32 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.897,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.5789980679816153e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "persecucion_abuso",
+      "b": "uso_chatgpt",
+      "rotulo_a": "Persecución del abuso de función pública",
+      "rotulo_b": "Intensidad de uso de ChatGPT",
+      "coeficiente": 0.896,
+      "estados": 20,
+      "tipo": "rangos (Spearman)",
+      "p": 2.031080312840195e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "copernicus:escenas",
       "b": "perdida_bosque",
       "rotulo_a": "copernicus · escenas",
@@ -385,14 +398,27 @@
       "misma_categoria": false
     },
     {
+      "a": "uso_claude",
+      "b": "voz_rendicion",
+      "rotulo_a": "Intensidad de uso de Claude por habitante",
+      "rotulo_b": "Voz y rendición de cuentas",
+      "coeficiente": 0.884,
+      "estados": 19,
+      "tipo": "rangos (Spearman)",
+      "p": 2.4452722780373087e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:anomalias",
       "b": "poblacion",
       "rotulo_a": "ciber · anomalias",
       "rotulo_b": "Población total",
-      "coeficiente": 0.883,
+      "coeficiente": 0.882,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 2.816713519232963e-14,
+      "p": 3.6439768669271565e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -424,14 +450,27 @@
       "misma_categoria": false
     },
     {
+      "a": "esperanza_vida",
+      "b": "uso_claude",
+      "rotulo_a": "Esperanza de vida al nacer",
+      "rotulo_b": "Intensidad de uso de Claude por habitante",
+      "coeficiente": 0.881,
+      "estados": 19,
+      "tipo": "rangos (Spearman)",
+      "p": 3.3787899529893795e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:mediciones",
       "b": "poblacion",
       "rotulo_a": "ciber · mediciones",
       "rotulo_b": "Población total",
-      "coeficiente": 0.881,
+      "coeficiente": 0.879,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.7270182571627936e-14,
+      "p": 6.141445035964023e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -476,19 +515,6 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.875,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1094162403325361e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "desempleo_joven",
       "b": "desempleo_oit",
       "rotulo_a": "Desempleo juvenil",
@@ -510,6 +536,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.5842776811325338e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:mediciones",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.873,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.7727186058173272e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -554,6 +593,19 @@
       "misma_categoria": false
     },
     {
+      "a": "estado_derecho",
+      "b": "uso_claude",
+      "rotulo_a": "Estado de derecho",
+      "rotulo_b": "Intensidad de uso de Claude por habitante",
+      "coeficiente": 0.872,
+      "estados": 19,
+      "tipo": "rangos (Spearman)",
+      "p": 8.211255245104506e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Corrupción política",
@@ -562,6 +614,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 3.6670129170398383e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "empleo_informal_oit",
+      "b": "uso_claude",
+      "rotulo_a": "Empleo informal · segunda fuente",
+      "rotulo_b": "Intensidad de uso de Claude por habitante",
+      "coeficiente": -0.871,
+      "estados": 18,
+      "tipo": "rangos (Spearman)",
+      "p": 2.1459380585703297e-07,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -606,32 +671,6 @@
       "misma_categoria": false
     },
     {
-      "a": "articulos_cientificos",
-      "b": "redes:cuentas_distintas",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "redes · cuentas_distintas",
-      "coeficiente": 0.868,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.892306657914359e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:nocturnos",
-      "b": "superficie",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.868,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.0488532564578484e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "actores_antidemocraticos",
       "b": "estado_derecho",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -662,23 +701,10 @@
       "b": "generacion_electrica",
       "rotulo_a": "ciber · anomalias",
       "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.865,
+      "coeficiente": 0.864,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.714225232579943e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "unidades:homicidios_del_pais",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "unidades · homicidios_del_pais",
-      "coeficiente": 0.864,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 4.037066589297438e-12,
+      "p": 7.083774601295383e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -697,6 +723,45 @@
       "misma_categoria": false
     },
     {
+      "a": "servidores_seguros",
+      "b": "uso_chatgpt",
+      "rotulo_a": "Servidores de internet cifrados",
+      "rotulo_b": "Intensidad de uso de ChatGPT",
+      "coeficiente": 0.864,
+      "estados": 21,
+      "tipo": "rangos (Spearman)",
+      "p": 2.903347839712144e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "percepcion_corrupcion",
+      "b": "uso_claude",
+      "rotulo_a": "Percepción de corrupción",
+      "rotulo_b": "Intensidad de uso de Claude por habitante",
+      "coeficiente": 0.863,
+      "estados": 19,
+      "tipo": "rangos (Spearman)",
+      "p": 1.7841966540877893e-07,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "percepcion_corrupcion:puntaje",
+      "b": "uso_claude",
+      "rotulo_a": "percepcion_corrupcion · puntaje",
+      "rotulo_b": "Intensidad de uso de Claude por habitante",
+      "coeficiente": 0.863,
+      "estados": 19,
+      "tipo": "rangos (Spearman)",
+      "p": 1.7841966540877893e-07,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "percepcion_corrupcion:intervalo_alto",
       "b": "voz_rendicion",
       "rotulo_a": "percepcion_corrupcion · intervalo_alto",
@@ -710,6 +775,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.861,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.16449860768065e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "uso_energia",
       "b": "uso_energia_ei",
       "rotulo_a": "Uso de energía por habitante",
@@ -718,84 +796,6 @@
       "estados": 23,
       "tipo": "rangos (Spearman)",
       "p": 6.808594447534034e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "gasto_seguridad",
-      "b": "superficie",
-      "rotulo_a": "Gasto en orden público y seguridad",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": -0.861,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 3.708848446856278e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "crimen_organizado:resiliencia",
-      "b": "percepcion_corrupcion:intervalo_bajo",
-      "rotulo_a": "crimen_organizado · resiliencia",
-      "rotulo_b": "percepcion_corrupcion · intervalo_bajo",
-      "coeficiente": 0.86,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 1.8834640759680453e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.859,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.7354260593446642e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "crimen_organizado:resiliencia",
-      "b": "percepcion_corrupcion",
-      "rotulo_a": "crimen_organizado · resiliencia",
-      "rotulo_b": "Percepción de corrupción",
-      "coeficiente": 0.859,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 2.107432215685898e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "crimen_organizado:resiliencia",
-      "b": "percepcion_corrupcion:puntaje",
-      "rotulo_a": "crimen_organizado · resiliencia",
-      "rotulo_b": "percepcion_corrupcion · puntaje",
-      "coeficiente": 0.859,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 2.107432215685898e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "democracia_participativa",
-      "b": "voz_rendicion",
-      "rotulo_a": "Democracia participativa",
-      "rotulo_b": "Voz y rendición de cuentas",
-      "coeficiente": 0.858,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 1.5531006020092533e-09,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
