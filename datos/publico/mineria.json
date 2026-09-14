@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-14T05:26:10+00:00",
+  "corrida": "2026-09-14T06:21:04+00:00",
   "medidas_con_suficientes_casos": 184,
   "pares_probados": 16836,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 16.836 pares y el umbral de siempre, alrededor de 841 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3347,
-    "de_ellos_son_parentescos": 393
+    "sobreviven": 3414,
+    "de_ellos_son_parentescos": 394
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 2954,
+  "pistas_totales": 3020,
   "anomalias_totales": 353,
   "pistas": [
     {
@@ -138,6 +138,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.944,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.3218315903051573e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -146,19 +159,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.941,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1505044275781066e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -198,19 +198,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.2779862246654644e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.921,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.5824837642299654e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -268,6 +255,32 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.917,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.110527050114939e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:victimas_ultimos_dos_anios",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
+      "coeficiente": 0.915,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.5709121985447753e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -302,6 +315,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 2.0733036532958168e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · grupos_distintos",
+      "coeficiente": 0.908,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 9.526938200526444e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -372,19 +398,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.897,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.5789980679816153e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -393,6 +406,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.1532181702939435e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:victimas",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.897,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1938153330464426e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -424,14 +450,14 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
+      "a": "focos:focos",
       "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
+      "rotulo_a": "focos · focos",
       "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.884,
+      "coeficiente": 0.888,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 2.176709137002121e-14,
+      "p": 9.623200850238296e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -489,6 +515,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.881,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.3951109982188884e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "esperanza_vida",
       "b": "uso_claude",
       "rotulo_a": "Esperanza de vida al nacer",
@@ -523,6 +562,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.2187629731577568e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "generacion_electrica",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.878,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.890732685424101e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -567,6 +619,19 @@
       "misma_categoria": false
     },
     {
+      "a": "armas:importa_usd",
+      "b": "indice_opacidad:opacidad",
+      "rotulo_a": "armas · importa_usd",
+      "rotulo_b": "indice_opacidad · opacidad",
+      "coeficiente": -0.876,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1002380179701154e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "desempleo_joven",
       "b": "desempleo_oit",
       "rotulo_a": "Desempleo juvenil",
@@ -580,19 +645,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "generacion_electrica",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.873,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.5842776811325338e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "ciber:mediciones",
       "b": "generacion_electrica",
       "rotulo_a": "ciber · mediciones",
@@ -601,6 +653,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.7727186058173272e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "generacion_electrica",
+      "b": "ransomware:victimas_ultimos_dos_anios",
+      "rotulo_a": "Generación eléctrica",
+      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
+      "coeficiente": 0.873,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.162387508624727e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -731,71 +796,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.379314467919233e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "produccion_petroleo_eia",
-      "b": "renta_gas",
-      "rotulo_a": "Producción de petróleo · segunda fuente",
-      "rotulo_b": "Renta del gas natural",
-      "coeficiente": 0.869,
-      "estados": 32,
-      "tipo": "rangos (Spearman)",
-      "p": 8.008795083626974e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "actores_antidemocraticos",
-      "b": "estado_derecho",
-      "rotulo_a": "Control sobre actores antidemocraticos",
-      "rotulo_b": "Estado de derecho",
-      "coeficiente": 0.868,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 7.643588771636819e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "aeropuertos",
-      "b": "copernicus:escenas",
-      "rotulo_a": "Aeropuertos grandes y medianos",
-      "rotulo_b": "copernicus · escenas",
-      "coeficiente": 0.866,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.459989449650313e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:anomalias",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.864,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.083774601295383e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "riesgo_inform",
-      "b": "unidades:homicidios_del_pais",
-      "rotulo_a": "Riesgo de crisis humanitaria (INFORM)",
-      "rotulo_b": "unidades · homicidios_del_pais",
-      "coeficiente": 0.864,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 4.502282509140932e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

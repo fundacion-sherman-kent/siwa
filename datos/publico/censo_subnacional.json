@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "censo_subnacional",
     "capa": "publico",
-    "obtenido_en": "2026-09-13T05:51:19+00:00",
+    "obtenido_en": "2026-09-14T06:02:15+00:00",
     "fuente": {
       "nombre": "Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas",
       "url": "https://ucdp.uu.se/downloads/"
@@ -15,13 +15,17 @@
     },
     "vacios_declarados": [
       "ESTO NO ES UNA CAPA DE DATOS: es un censo de lo que se podría llegar a publicar por unidad. Que un Estado figure con eventos de conflicto por provincia NO lo convierte en un Estado con estadística de seguridad subnacional. Son cosas distintas y confundirlas sería el error que este registro evita.",
-      "EL UMBRAL SE MIDE CONTRA LAS 8 CATEGORÍAS del eje Seguridad tal como el lector las ve: más del 60 % son 5, y el 70 % de los Estados son 24. Hoy llegan 0.",
+      "EL UMBRAL SE MIDE CONTRA LAS 8 CATEGORÍAS del eje Seguridad tal como el lector las ve: más del 60 % son 5, y el 70 % de los Estados son 24. Hoy llegan 1.",
       "UN CERO DE UPSALA NO ES AUSENCIA DE VIOLENCIA. Esa base registra violencia ORGANIZADA por encima de un umbral de muertes: un Estado sin eventos puede tener mucha violencia común y ningún conflicto armado. Leerlo como «país en paz» sería un error grave.",
       "Las fuentes nacionales se cuentan una por una y a mano porque son acuerdos distintos con cada Estado: no hay una interfaz regional que las junte, y esa ausencia es en sí misma un dato sobre la región.",
-      "coordination-context/conflict-events: HTTPError",
-      "affected-people/idps: HTTPError",
-      "affected-people/refugees-persons-of-concern: HTTPError",
-      "affected-people/returnees: HTTPError"
+      "COLOMBIA SE MIDIÓ, NO SE RECOLECTÓ. De cada conjunto del portal de datos abiertos se consultó solo cuántos departamentos trae; ninguna cifra de delitos entra a este archivo. Una categoría cuenta si algún conjunto la cubre en 24 de las 33 unidades o más.",
+      "LOS CONJUNTOS DE COLOMBIA TRAEN 89 CÓDIGOS QUE NO SON DEPARTAMENTOS —como «1111»—. No se cuentan como unidad. Antes de publicar cualquier cifra habría que averiguar qué registran.",
+      "TRINIDAD Y TOBAGO SE MIDE POR DIVISIÓN POLICIAL, NO POR UNIDAD ADMINISTRATIVA. El Servicio de Policía publica 9 divisiones, que no coinciden con las corporaciones regionales del país. Antes de publicar habría que declararlo en cada cifra.",
+      "BOLIVIA SE MIDIÓ SOBRE UN CUADRO DEL INE: se comprobó que nombra los departamentos y el homicidio, no se leyó fila por fila. Los cuadros de trata, droga incautada y tránsito por departamento existen pero no se abrieron: no se cuentan.",
+      "NO ENTRA AL CENSO «affected-people/refugees-persons-of-concern»: se publica por país de origen y de asilo, sin unidad de primer orden. Estaba en la primera versión y fue un error de concepto: un tema sin unidad no puede medir disponibilidad por unidad.",
+      "NO ENTRA AL CENSO «affected-people/returnees»: se publica por país de origen y de asilo, sin unidad de primer orden. Estaba en la primera versión y fue un error de concepto: un tema sin unidad no puede medir disponibilidad por unidad.",
+      "coordination-context/conflict-events: HTTPError 403: {\"error\":\"Invalid app identifier\"}",
+      "affected-people/idps: HTTPError 403: {\"error\":\"Invalid app identifier\"}"
     ],
     "restriccion_de_uso": null,
     "cantidad": 33,
@@ -34,6 +38,39 @@
     }
   },
   "registros": [
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "bloque": "Andina",
+      "categorias_alcanzables": [
+        "Flujos ilícitos",
+        "Grupos y territorio",
+        "Personas en movimiento",
+        "Terrorismo",
+        "Violencia y víctimas"
+      ],
+      "cuantas": 5,
+      "de_upsala": {
+        "eventos": 16481,
+        "con_unidad": 16260,
+        "unidades": 34,
+        "desde": 1989,
+        "hasta": 2025
+      },
+      "de_fuente_nacional": [
+        "Violencia y víctimas · Policía Nacional — homicidios por departamento",
+        "Flujos ilícitos · Ministerio de Defensa — incautaciones de cocaína (33 de 33 unidades)",
+        "Flujos ilícitos · Ministerio de Defensa — incautaciones de marihuana (33 de 33 unidades)",
+        "Flujos ilícitos · Ministerio de Defensa — incautaciones de base de coca (33 de 33 unidades)",
+        "Flujos ilícitos · Ministerio de Defensa — incautaciones de basuco (33 de 33 unidades)",
+        "Flujos ilícitos · Ministerio de Defensa — incautaciones de insumos líquidos (33 de 33 unidades)",
+        "Grupos y territorio · Ministerio de Defensa — secuestro (32 de 33 unidades)",
+        "Grupos y territorio · Ministerio de Defensa — extorsión (33 de 33 unidades)",
+        "Terrorismo · Ministerio de Defensa — terrorismo (32 de 33 unidades)",
+        "Terrorismo · Policía Nacional — terrorismo (31 de 33 unidades)",
+        "Personas en movimiento · Unidad para las Víctimas — desplazamiento (33 de 33 unidades)"
+      ]
+    },
     {
       "iso": "ARG",
       "pais": "Argentina",
@@ -55,8 +92,8 @@
       ]
     },
     {
-      "iso": "COL",
-      "pais": "Colombia",
+      "iso": "BOL",
+      "pais": "Bolivia",
       "bloque": "Andina",
       "categorias_alcanzables": [
         "Grupos y territorio",
@@ -64,32 +101,36 @@
       ],
       "cuantas": 2,
       "de_upsala": {
-        "eventos": 16481,
-        "con_unidad": 16260,
-        "unidades": 34,
-        "desde": 1989,
-        "hasta": 2025
-      },
-      "de_fuente_nacional": [
-        "Violencia y víctimas · Policía Nacional — homicidios por departamento"
-      ]
-    },
-    {
-      "iso": "BOL",
-      "pais": "Bolivia",
-      "bloque": "Andina",
-      "categorias_alcanzables": [
-        "Grupos y territorio"
-      ],
-      "cuantas": 1,
-      "de_upsala": {
         "eventos": 13,
         "con_unidad": 9,
         "unidades": 3,
         "desde": 1998,
         "hasta": 2025
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [
+        "Violencia y víctimas · INE de Bolivia"
+      ]
+    },
+    {
+      "iso": "TTO",
+      "pais": "Trinidad y Tobago",
+      "bloque": "Caribe oriental",
+      "categorias_alcanzables": [
+        "Grupos y territorio",
+        "Violencia y víctimas"
+      ],
+      "cuantas": 2,
+      "de_upsala": {
+        "eventos": 3,
+        "con_unidad": 3,
+        "unidades": 1,
+        "desde": 1990,
+        "hasta": 1990
+      },
+      "de_fuente_nacional": [
+        "Grupos y territorio · Servicio de Policía de Trinidad y Tobago",
+        "Violencia y víctimas · Servicio de Policía de Trinidad y Tobago"
+      ]
     },
     {
       "iso": "BRA",
@@ -330,23 +371,6 @@
       "de_fuente_nacional": []
     },
     {
-      "iso": "TTO",
-      "pais": "Trinidad y Tobago",
-      "bloque": "Caribe oriental",
-      "categorias_alcanzables": [
-        "Grupos y territorio"
-      ],
-      "cuantas": 1,
-      "de_upsala": {
-        "eventos": 3,
-        "con_unidad": 3,
-        "unidades": 1,
-        "desde": 1990,
-        "hasta": 1990
-      },
-      "de_fuente_nacional": []
-    },
-    {
       "iso": "URY",
       "pais": "Uruguay",
       "bloque": "Cono Sur",
@@ -507,9 +531,142 @@
   "umbral": {
     "categorias_minimas": 5,
     "estados_minimos": 24,
-    "estados_que_llegan": 0,
+    "estados_que_llegan": 1,
     "se_cumple": false,
-    "quienes_llegan": []
+    "quienes_llegan": [
+      "Colombia"
+    ]
   },
-  "por_tema_humanitario": {}
+  "por_tema_humanitario": {},
+  "colombia_por_conjunto": [
+    {
+      "conjunto": "26zg-9p9r",
+      "categoria": "Flujos ilícitos",
+      "fuente": "Ministerio de Defensa — incautaciones de cocaína",
+      "unidades": 33,
+      "de": 33,
+      "codigos_que_no_son_departamento": 55,
+      "por_nombre": false
+    },
+    {
+      "conjunto": "g228-vp9d",
+      "categoria": "Flujos ilícitos",
+      "fuente": "Ministerio de Defensa — incautaciones de marihuana",
+      "unidades": 33,
+      "de": 33,
+      "codigos_que_no_son_departamento": 20,
+      "por_nombre": false
+    },
+    {
+      "conjunto": "nxbk-nikm",
+      "categoria": "Flujos ilícitos",
+      "fuente": "Ministerio de Defensa — incautaciones de base de coca",
+      "unidades": 33,
+      "de": 33,
+      "codigos_que_no_son_departamento": 9,
+      "por_nombre": false
+    },
+    {
+      "conjunto": "3cjd-phaj",
+      "categoria": "Flujos ilícitos",
+      "fuente": "Ministerio de Defensa — incautaciones de basuco",
+      "unidades": 33,
+      "de": 33,
+      "codigos_que_no_son_departamento": 0,
+      "por_nombre": false
+    },
+    {
+      "conjunto": "k2wp-tdv7",
+      "categoria": "Flujos ilícitos",
+      "fuente": "Ministerio de Defensa — incautaciones de insumos líquidos",
+      "unidades": 33,
+      "de": 33,
+      "codigos_que_no_son_departamento": 4,
+      "por_nombre": false
+    },
+    {
+      "conjunto": "d7zw-hpf4",
+      "categoria": "Grupos y territorio",
+      "fuente": "Ministerio de Defensa — secuestro",
+      "unidades": 32,
+      "de": 33,
+      "codigos_que_no_son_departamento": 0,
+      "por_nombre": false
+    },
+    {
+      "conjunto": "q2ib-t9am",
+      "categoria": "Grupos y territorio",
+      "fuente": "Ministerio de Defensa — extorsión",
+      "unidades": 33,
+      "de": 33,
+      "codigos_que_no_son_departamento": 0,
+      "por_nombre": false
+    },
+    {
+      "conjunto": "yi5j-5fe9",
+      "categoria": "Terrorismo",
+      "fuente": "Ministerio de Defensa — terrorismo",
+      "unidades": 32,
+      "de": 33,
+      "codigos_que_no_son_departamento": 0,
+      "por_nombre": false
+    },
+    {
+      "conjunto": "37p5-impc",
+      "categoria": "Terrorismo",
+      "fuente": "Policía Nacional — terrorismo",
+      "unidades": 31,
+      "de": 33,
+      "codigos_que_no_son_departamento": 0,
+      "por_nombre": true
+    },
+    {
+      "conjunto": "krnc-8azs",
+      "categoria": "Personas en movimiento",
+      "fuente": "Unidad para las Víctimas — desplazamiento",
+      "unidades": 33,
+      "de": 33,
+      "codigos_que_no_son_departamento": 1,
+      "por_nombre": false
+    }
+  ],
+  "medidos_por_archivo": {
+    "TTO": {
+      "fuente": "Servicio de Policía de Trinidad y Tobago",
+      "detalle": {
+        "anio": 2025,
+        "divisiones": 9,
+        "delitos": [
+          {
+            "delito": "Murders",
+            "categoria": "Violencia y víctimas",
+            "divisiones": 9,
+            "de": 9
+          },
+          {
+            "delito": "Kidnapping for Ransom",
+            "categoria": "Grupos y territorio",
+            "divisiones": 9,
+            "de": 9
+          }
+        ]
+      },
+      "categorias": [
+        "Grupos y territorio",
+        "Violencia y víctimas"
+      ]
+    },
+    "BOL": {
+      "fuente": "INE de Bolivia",
+      "detalle": {
+        "departamentos": 9,
+        "de": 9,
+        "trae_homicidio": true,
+        "cuadro": "INE, cuadro 3.08.02.13 — delitos por departamento, Policía Boliviana"
+      },
+      "categorias": [
+        "Violencia y víctimas"
+      ]
+    }
+  }
 }
