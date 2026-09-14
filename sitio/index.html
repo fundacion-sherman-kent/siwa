@@ -2420,6 +2420,7 @@
     <a href="#ficha-pais">Mi país</a>
     <a href="#seis-materias">Las seis materias</a>
     <a href="#constructor">Armá tu gráfico</a>
+    <a href="#como-se-busca">Cómo se busca</a>
     <!-- LOS CUATRO EJES SIGUEN SIENDO CUATRO: lo que crecio son las secciones.
          El rotulo anterior decia «Los cuatro ejes» y debajo listaba diez
          entradas, que es peor que no decir nada. Se agrupa por eje, que era el
@@ -2446,8 +2447,6 @@
     <a href="#gobernanza">Instituciones y democracia</a>
     <a href="#transparencia">Transparencia y control</a>
     <a href="#opacidad-seccion">Índice de Opacidad</a>
-    <a href="#lo-que-no-se-publica">Lo que no se publica por dentro</a>
-    <a href="#metodo-busqueda">Cómo se busca</a>
     <div class="grupo">Eje · Desarrollo</div>
     <a href="#desarrollo">Desarrollo</a>
     <a href="#educacion">Educación</a>
@@ -2468,6 +2467,7 @@
     <a href="#que-se-publica">Qué se publica hoy</a>
     <a href="#de-donde-sale">De dónde sale y qué falta</a>
     <a href="#fundacion">De la Fundación</a>
+    <a href="#lo-que-no-se-publica">Lo que no se publica por dentro</a>
   </nav>
 
   <main>
@@ -2665,6 +2665,31 @@
         <button type="button" class="boton chico" id="ctor-enlace">Copiar el enlace a este gráfico</button>
         <span class="ctor-copiado" id="ctor-copiado"></span>
       </div>
+    </section>
+    <!-- CÓMO SE BUSCA pasó a «Empezar», después de «Armá tu gráfico», por pedido
+         de la dirección (14/9/2026): explica cómo trabaja el registro, no es una
+         materia del eje Gobernanza, y estaba escondida dentro de Transparencia. -->
+    <section class="domain" id="como-se-busca" data-nivel="3">
+      <div class="domain-head"><h2>Cómo se busca</h2></div>
+    <div class="categoria" id="metodo-busqueda" data-nivel="3">
+      <div class="categoria-head"><h3>Qué encontró la máquina</h3><span class="tag" id="tag-metodo">—</span></div>
+      <details class="aviso-cobertura"><summary>Las pistas de esta sección no son hallazgos: son candidatas</summary>
+        <p><b>Con seis mil pares probados, unos trescientos darían «significativo» por puro
+           azar</b> aunque los datos fueran ruido. Por eso está aplicada la corrección de
+           Benjamini y Hochberg, que controla la proporción de falsos hallazgos, y por eso el
+           número de pares probados se muestra <b>antes</b> que los resultados.</p>
+        <p><b>Que dos medidas se acompañen no prueba que una cause la otra.</b> Puede haber un
+           tercer factor detrás de las dos, o puede ser la forma en que se recolectan. Estas
+           relaciones son <b>candidatas a que las mire una persona</b>, y así se publican.</p>
+        <p><b>El coeficiente es de rangos, no de valores.</b> Casi todo lo que este registro
+           cuenta está torcido hacia arriba, y con valores crudos el resultado lo decide el
+           país más grande: aparecían relaciones de 0,97 sostenidas por dos puntos. Preguntar
+           si los Estados <b>se ordenan</b> parecido desarma eso.</p>
+      </details>
+      <div id="fases-osint"></div>
+      <div class="procedencia" id="proc-mineria">Cargando el registro…</div>
+      <div id="tablero-mineria"></div>
+        </div>
     </section>
     <section class="domain" id="navegador">
       <div class="domain-head"><h2>Explorar</h2><span class="tag" id="tag-navegador">—</span></div>
@@ -3616,25 +3641,6 @@
       <div id="dato-subnacional"></div>
       <div id="vac-censo"></div>
         </div>
-    <div class="categoria" id="metodo-busqueda" data-nivel="3">
-      <div class="categoria-head"><h3>Cómo se busca, y qué encontró la máquina</h3><span class="tag" id="tag-metodo">—</span></div>
-      <details class="aviso-cobertura"><summary>Las pistas de esta sección no son hallazgos: son candidatas</summary>
-        <p><b>Con seis mil pares probados, unos trescientos darían «significativo» por puro
-           azar</b> aunque los datos fueran ruido. Por eso está aplicada la corrección de
-           Benjamini y Hochberg, que controla la proporción de falsos hallazgos, y por eso el
-           número de pares probados se muestra <b>antes</b> que los resultados.</p>
-        <p><b>Que dos medidas se acompañen no prueba que una cause la otra.</b> Puede haber un
-           tercer factor detrás de las dos, o puede ser la forma en que se recolectan. Estas
-           relaciones son <b>candidatas a que las mire una persona</b>, y así se publican.</p>
-        <p><b>El coeficiente es de rangos, no de valores.</b> Casi todo lo que este registro
-           cuenta está torcido hacia arriba, y con valores crudos el resultado lo decide el
-           país más grande: aparecían relaciones de 0,97 sostenidas por dos puntos. Preguntar
-           si los Estados <b>se ordenan</b> parecido desarma eso.</p>
-      </details>
-      <div id="fases-osint"></div>
-      <div class="procedencia" id="proc-mineria">Cargando el registro…</div>
-      <div id="tablero-mineria"></div>
-        </div>
 </section>
     <section class="domain bloque" id="opacidad-seccion" data-nivel="1">
       <div class="bloque-head"><h2>Índice de Opacidad</h2></div>
@@ -3712,42 +3718,6 @@
         </div>
     </section>
 
-    <!-- EL CENSO SUBNACIONAL. Salió de una búsqueda que no encontró lo que iba a
-         buscar: medir si la capa por unidad llegaba al umbral que fijó la
-         Dirección. No llega. Pero al medirlo apareció el inventario de qué
-         Estados no publican NADA por debajo del nivel de país, que no lo
-         publica nadie y es de la misma familia que el Índice de Opacidad. -->
-    <section class="domain bloque" id="lo-que-no-se-publica" data-nivel="2">
-      <div class="bloque-head"><h2>Lo que no se publica por dentro</h2></div>
-      <p class="bloque-bajada">Casi todo lo que se sabe de la región está medido por país.
-         Esta sección cuenta qué se puede saber <b>por provincia, departamento o estado</b>,
-         y de cuántos. Es una medición propia: ningún organismo la publica.</p>
-
-      <div class="categoria" id="censo-unidades" data-nivel="2">
-        <div class="categoria-head"><h3>Qué hay por unidad, y de cuántos Estados</h3>
-          <span class="tag" id="tag-censo-unidades">—</span></div>
-        <details class="aviso-cobertura"><summary>Qué significa esta cuenta, y qué no</summary>
-          <p><b>Cuenta disponibilidad, no calidad.</b> Que un Estado figure acá con eventos
-             de conflicto por provincia <b>no lo convierte en un Estado con estadística de
-             seguridad subnacional</b>: son cosas distintas y confundirlas sería el error
-             que este registro evita.</p>
-          <p><b>Un cero de la base de conflictos no es ausencia de violencia.</b> Esa fuente
-             registra violencia <b>organizada</b> por encima de un umbral de muertes: un
-             Estado sin eventos puede tener muchísima violencia común. Leerlo como «país en
-             paz» sería un error grave.</p>
-          <p><b>Las fuentes nacionales se cuentan una por una.</b> No hay ninguna interfaz
-             regional que las junte, y esa ausencia es en sí misma un dato sobre la región.</p>
-        </details>
-        <!-- LOS CUATRO IDENTIFICADORES LLEVAN SUFIJO A PROPOSITO. Sin el, chocaban
-             con los de «Que publica cada provincia de si misma», que es otra
-             seccion y otro conjunto: el navegador se queda con el PRIMERO que
-             encuentra, asi que esta seccion quedaba muda y la otra mostraba la
-             procedencia equivocada. Ninguna cifra era falsa y nada avisaba. -->
-        <div class="procedencia" id="proc-censo-unidades">Cargando el registro…</div>
-        <div id="tarj-censo-unidades"></div>
-        <div id="vac-censo-unidades"></div>
-      </div>
-    </section>
     <section class="domain bloque" id="desarrollo" data-nivel="3">
       <div class="bloque-head"><h2>Desarrollo</h2></div>
       <p class="bloque-bajada">Estructura material del territorio y de la economía. No es análisis económico: es la base sobre la que se leen las otras tres.</p>
@@ -4153,7 +4123,44 @@
         </div>
     </section>
 
-  </main>
+      <!-- En «Verificación y método» por pedido de la dirección (14/9/2026).
+         EL CENSO SUBNACIONAL. Salió de una búsqueda que no encontró lo que iba a
+         buscar: medir si la capa por unidad llegaba al umbral que fijó la
+         Dirección. No llega. Pero al medirlo apareció el inventario de qué
+         Estados no publican NADA por debajo del nivel de país, que no lo
+         publica nadie y es de la misma familia que el Índice de Opacidad. -->
+    <section class="domain bloque" id="lo-que-no-se-publica" data-nivel="2">
+      <div class="bloque-head"><h2>Lo que no se publica por dentro</h2></div>
+      <p class="bloque-bajada">Casi todo lo que se sabe de la región está medido por país.
+         Esta sección cuenta qué se puede saber <b>por provincia, departamento o estado</b>,
+         y de cuántos. Es una medición propia: ningún organismo la publica.</p>
+
+      <div class="categoria" id="censo-unidades" data-nivel="2">
+        <div class="categoria-head"><h3>Qué hay por unidad, y de cuántos Estados</h3>
+          <span class="tag" id="tag-censo-unidades">—</span></div>
+        <details class="aviso-cobertura"><summary>Qué significa esta cuenta, y qué no</summary>
+          <p><b>Cuenta disponibilidad, no calidad.</b> Que un Estado figure acá con eventos
+             de conflicto por provincia <b>no lo convierte en un Estado con estadística de
+             seguridad subnacional</b>: son cosas distintas y confundirlas sería el error
+             que este registro evita.</p>
+          <p><b>Un cero de la base de conflictos no es ausencia de violencia.</b> Esa fuente
+             registra violencia <b>organizada</b> por encima de un umbral de muertes: un
+             Estado sin eventos puede tener muchísima violencia común. Leerlo como «país en
+             paz» sería un error grave.</p>
+          <p><b>Las fuentes nacionales se cuentan una por una.</b> No hay ninguna interfaz
+             regional que las junte, y esa ausencia es en sí misma un dato sobre la región.</p>
+        </details>
+        <!-- LOS CUATRO IDENTIFICADORES LLEVAN SUFIJO A PROPOSITO. Sin el, chocaban
+             con los de «Que publica cada provincia de si misma», que es otra
+             seccion y otro conjunto: el navegador se queda con el PRIMERO que
+             encuentra, asi que esta seccion quedaba muda y la otra mostraba la
+             procedencia equivocada. Ninguna cifra era falsa y nada avisaba. -->
+        <div class="procedencia" id="proc-censo-unidades">Cargando el registro…</div>
+        <div id="tarj-censo-unidades"></div>
+        <div id="vac-censo-unidades"></div>
+      </div>
+    </section>
+</main>
 </div>
 
 <!-- LA HOJA DEL PAÍS. Vacía en pantalla y oculta: se llena en el momento de
