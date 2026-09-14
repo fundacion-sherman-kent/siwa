@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-14T21:27:30+00:00",
+  "corrida": "2026-09-14T22:28:36+00:00",
   "medidas_con_suficientes_casos": 185,
   "pares_probados": 17020,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 17.020 pares y el umbral de siempre, alrededor de 851 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3470,
+    "sobreviven": 3473,
     "de_ellos_son_parentescos": 396
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3074,
+  "pistas_totales": 3077,
   "anomalias_totales": 353,
   "pistas": [
     {
@@ -138,6 +138,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.945,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.407065004039732e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "copernicus:escenas",
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
@@ -185,19 +198,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1284759852983783e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.928,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.149344684174877e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -315,6 +315,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 2.0733036532958168e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.909,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 7.183507807928774e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -445,19 +458,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.2609870139890335e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.886,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.447316753329956e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -723,6 +723,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.871,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.5403453580020293e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Corrupción política",
@@ -780,19 +793,6 @@
       "rotulo_a": "Control sobre actores antidemocraticos",
       "rotulo_b": "prensa_libre · puesto_mundial",
       "coeficiente": -0.87,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 6.379314467919233e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "actores_antidemocraticos",
-      "b": "prensa_libre:puntaje",
-      "rotulo_a": "Control sobre actores antidemocraticos",
-      "rotulo_b": "prensa_libre · puntaje",
-      "coeficiente": 0.87,
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.379314467919233e-09,
