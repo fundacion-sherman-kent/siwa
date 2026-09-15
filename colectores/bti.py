@@ -24,7 +24,7 @@ Lo que hay que saber para leerlo
 --------------------------------
 - **Es evaluación experta, no recuento de hechos.** Dos personas por país.
 - **Es bienal y sin serie**: se publica una foto cada dos años, no una línea de
-  tiempo. Este registro toma la edición 2024.
+  tiempo. Este registro toma la edición 2026 (antes, la 2024).
 - **Solo cubre Estados «en desarrollo o transición»**: los Estados chicos del
   Caribe y los de renta alta quedan fuera del proyecto, no del registro.
 
@@ -48,12 +48,14 @@ import zipfile
 import comun
 import geo
 
-URL = "https://bti-project.org/content/en/downloads/data/BTI_2024_Scores.xlsx"
-EDICION = 2024
+URL = "https://bti-project.org/content/en/downloads/data/BTI_2026_Scores.xlsx"
+EDICION = 2026
 # LA EDICION ANTERIOR, para que los seis indicadores tengan serie en vez de una
 # foto. Probadas las diez ediciones bienales desde 2006: en la ruta abierta solo
 # responden 2022 y 2024; las demas dan 404 (probado el 9 de septiembre de 2026).
-ANTERIORES = [2022]
+# La edicion 2026 aparecio en la ruta abierta entre el 9 y el 15 de septiembre de
+# 2026 (la detecto el reloj de actualidad).
+ANTERIORES = [2022, 2024]
 def _url(anio):
     return f"https://bti-project.org/content/en/downloads/data/BTI_{anio}_Scores.xlsx"
 NAVEGADOR = comun.AGENTE

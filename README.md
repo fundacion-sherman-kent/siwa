@@ -101,7 +101,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**61 fuentes en servicio**, en 63 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**63 fuentes en servicio**, en 65 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -110,7 +110,7 @@ python colectores/focos.py
 | `banco-mundial` | Banco Mundial — indicadores de desarrollo y gobernanza | `A-2` | 33 | 8 |
 | `bienes_culturales` | UNIDROIT — Convenio de 1995 sobre bienes culturales robados o exportados ilícitamente | `A-2` | 33 | 5 |
 | `brecha` | Fundación Sherman Kent — brecha entre lo registrado y lo publicado | `B-2` | 33 | 5 |
-| `bti` | Índice de Transformación Bertelsmann (BTI), edición 2024 | `B-3` | 22 | 7 |
+| `bti` | Índice de Transformación Bertelsmann (BTI), edición 2026 | `B-3` | 22 | 7 |
 | `censo_subnacional` | Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas | `B-3` | 33 | 12 |
 | `cepal` | CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL): Observatorio de Igualdad de Género y estadísticas de seguridad ciudadana | `A-2` | 33 | 8 |
 | `ciber` | OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta | `B-2` | 33 | 6 |
@@ -133,6 +133,8 @@ python colectores/focos.py
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
 | `gasto_publico` | Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics | `B-2` | 22 | 8 |
+| `gdl` | Global Data Lab — Universidad Radboud de Nimega: base de datos subnacional de desarrollo humano, corrupción y demografía | `B-3` | 28 | 7 |
+| `hapi` | HDX HAPI — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA): población base, pobreza multidimensional y riesgo INFORM | `A-2` | 33 | 6 |
 | `ia` | Microsoft AI Economy Institute; OpenAI Signals; Anthropic Economic Index; documentación oficial de siete empresas de nube | `B-3` | 33 | 7 |
 | `ia_apps` | Apple App Store — rankings de apps gratuitas y disponibilidad por país; padrón de asistentes de IA con origen verificado por la Fundación | `B-3` | 33 | 6 |
 | `indice_opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición uno | `A-1` | 33 | 10 |
