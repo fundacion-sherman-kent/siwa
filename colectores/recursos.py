@@ -340,12 +340,23 @@ def minerales() -> tuple:
     for x in filas:
         com, tipo, pais = x.get("COMMODITY"), x.get("TYPE"), (x.get("COUNTRY") or "").strip()
         edicion = edicion or x.get("SOURCE")
-        prod = (numero(x.get("PROD_ULTIMO")) or numero(x.get("PROD_ANTERIOR"))
-                or numero(x.get("PROD_EST_ 2024")) or numero(x.get("PROD_2023")))
-        if not (com and prod) or x.get("COMPARABLE") is False:
+        # UN SOLO AÑO POR CUENTA. En la edición 2026 se usa solo la producción del
+        # último año: completar con la del anterior mezclaba años en el total del
+        # mundo. En la forma vieja (2025) se conserva la regla de entonces.
+        if "PROD_ULTIMO" in x or "PROD_ANTERIOR" in x:
+            prod = numero(x.get("PROD_ULTIMO"))
+        else:
+            prod = numero(x.get("PROD_EST_ 2024"))
+            prod = prod if prod is not None else numero(x.get("PROD_2023"))
+        if not com or not prod or x.get("COMPARABLE") is False:
             continue
-        if pais.lower() not in NO_ES_PAIS:
-            mundo[(com, tipo)] = mundo.get((com, tipo), 0.0) + prod
+        unidad = (x.get("UNIT_MEAS") or "").strip()
+        # «OTROS PAÍSES» ES PRODUCCIÓN REAL y va en el total del mundo; lo que no va
+        # es el renglón de total ya sumado. Dejarlo afuera inflaba las cuotas: la
+        # plata de México daba 26,4 % en vez de 24,3 % (auditoría del 15/9/2026).
+        # La unidad va en la llave: arena en toneladas y en metros cúbicos no se suman.
+        if pais.lower() not in NO_ES_PAIS or pais.lower() == "other countries":
+            mundo[(com, tipo, unidad)] = mundo.get((com, tipo, unidad), 0.0) + prod
         iso = NOMBRE_USGS.get(pais)
         if iso:
             del_pais.setdefault(iso, []).append(
@@ -360,7 +371,7 @@ def minerales() -> tuple:
             # Estados, y el orden quedaba al azar: Brasil aparecía con 10 % de
             # tántalo en vez de 92 % de niobio. La traducción es para el lector;
             # la cuenta se hace con la llave de la fuente.
-            total = mundo.get((m["mineral_original"], m["medida"])) or 0
+            total = mundo.get((m["mineral_original"], m["medida"], (m.get("unidad") or "").strip())) or 0
             m["cuota_mundial_pct"] = round(m["produccion"] / total * 100, 2) if total else None
         lista.sort(key=lambda m: -(m.get("cuota_mundial_pct") or 0))
     return del_pais, edicion, camino, anio_produccion

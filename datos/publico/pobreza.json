@@ -2,16 +2,16 @@
   "procedencia": {
     "colector": "pobreza",
     "capa": "publico",
-    "obtenido_en": "2026-09-15T20:28:40+00:00",
+    "obtenido_en": "2026-09-15T20:46:22+00:00",
     "fuente": {
-      "nombre": "CEPALSTAT — Comisión Económica para América Latina y el Caribe (Naciones Unidas)",
+      "nombre": "Banco Mundial, Plataforma sobre Pobreza y Desigualdad — redistribuido por CEPALSTAT (Comisión Económica para América Latina y el Caribe)",
       "url": "https://statistics.cepal.org/portal/cepalstat/"
     },
     "calificacion": {
       "fiabilidad": "A",
       "credibilidad": 2,
       "corroborado": false,
-      "nota": "Comisión regional de las Naciones Unidas para América Latina y el Caribe, con metodología publicada y armonización declarada entre las encuestas nacionales. Es la fuente estadística nativa de la región. Lo que se registra es su estimación armonizada, no el dato crudo de cada encuesta nacional."
+      "nota": "Estimación del Banco Mundial (Plataforma sobre Pobreza y Desigualdad) sobre las encuestas de hogares de cada Estado, con metodología publicada; la CEPAL la redistribuye en CEPALSTAT. Un solo productor: no corrobora la pobreza con línea nacional, que también es del Banco Mundial."
     },
     "vacios_declarados": [
       "**Sale de encuestas de hogares, no de un censo ni de un registro.** Cada Estado levanta la suya con su periodicidad, y por eso **el último año disponible no es el mismo para todos**: comparar el dato de un Estado con el de otro puede ser comparar dos momentos distintos. Cada ficha publica su año, y hay que mirarlo antes de comparar.",
@@ -5695,12 +5695,12 @@
   "indicadores": [
     {
       "clave": "pobreza_cepal",
-      "rotulo": "Pobreza · segunda fuente",
+      "rotulo": "Pobreza con umbral internacional (4,1 dólares diarios)",
       "eje": "Desarrollo",
       "unidad": "% de las personas",
       "mas_es_peor": true,
-      "origen": "CEPALSTAT — Comisión Económica para América Latina y el Caribe",
-      "cautela": "SEGUNDA MEDICIÓN de algo que el registro ya publica con el Banco Mundial. No miden lo mismo de la misma manera: aquella usa la línea de pobreza que fija cada Estado, y esta una metodología regional comparable. Si difieren, la diferencia dice cómo define la pobreza cada quien, no quién se equivoca.",
+      "origen": "Banco Mundial, Plataforma sobre Pobreza y Desigualdad (vía CEPALSTAT)",
+      "cautela": "Personas con ingresos menores a 4,1 dólares diarios de paridad de poder adquisitivo (precios de 2021). Lo calcula el Banco Mundial en su Plataforma sobre Pobreza y Desigualdad y lo redistribuye la CEPAL: NO es una segunda fuente independiente de la pobreza con línea nacional, que también publica el Banco Mundial. Las dos difieren porque una usa la línea de cada Estado y esta un umbral internacional en dólares.",
       "hasta_anio": 2025,
       "rezago_anios": 1,
       "seccion": "pobreza",
@@ -5712,8 +5712,8 @@
       "eje": "Desarrollo",
       "unidad": "% de las personas",
       "mas_es_peor": true,
-      "origen": "CEPALSTAT — Comisión Económica para América Latina y el Caribe",
-      "cautela": "Quienes no cubren la canasta básica de alimentos. Es el piso duro: por debajo de esta línea no se trata de desigualdad sino de hambre.",
+      "origen": "Banco Mundial, Plataforma sobre Pobreza y Desigualdad (vía CEPALSTAT)",
+      "cautela": "Personas con ingresos menores a 3,0 dólares diarios de paridad de poder adquisitivo (precios de 2021): el umbral internacional de pobreza extrema del Banco Mundial. No es la pobreza extrema que calcula cada Estado con su canasta de alimentos.",
       "hasta_anio": 2025,
       "rezago_anios": 1,
       "seccion": "pobreza",
@@ -5725,8 +5725,8 @@
       "eje": "Desarrollo",
       "unidad": "% de las personas",
       "mas_es_peor": true,
-      "origen": "CEPALSTAT — Comisión Económica para América Latina y el Caribe",
-      "cautela": "Quienes no son pobres hoy y caerían con un golpe —una enfermedad, un despido, una devaluación—. Es la medida que explica por qué la pobreza sube tan rápido en las crisis de esta región.",
+      "origen": "Banco Mundial, Plataforma sobre Pobreza y Desigualdad (vía CEPALSTAT)",
+      "cautela": "Personas con ingresos menores a 8,3 dólares diarios de paridad de poder adquisitivo (precios de 2021), el umbral que el Banco Mundial usa para países de ingreso mediano alto. No es pobreza según la línea nacional: marca a quienes viven con ingresos bajos para la escala regional.",
       "hasta_anio": 2025,
       "rezago_anios": 1,
       "seccion": "pobreza",
@@ -5746,7 +5746,7 @@
     "anio_mas_nuevo": 2025,
     "anio_mas_viejo": 1992,
     "filas_leidas": 1650,
-    "consultado": "2026-09-15T20:28:40+00:00"
+    "consultado": "2026-09-15T20:46:22+00:00"
   },
   "umbrales": [
     {

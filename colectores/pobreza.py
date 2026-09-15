@@ -42,8 +42,8 @@ import geo
 
 BASE = "https://api-cepalstat.cepal.org/cepalstat/api/v1"
 INDICADOR = 160
-FUENTE = ("CEPALSTAT — Comisión Económica para América Latina y el Caribe "
-          "(Naciones Unidas)")
+FUENTE = ("Banco Mundial, Plataforma sobre Pobreza y Desigualdad — redistribuido por "
+          "CEPALSTAT (Comisión Económica para América Latina y el Caribe)")
 URL_FUENTE = "https://statistics.cepal.org/portal/cepalstat/"
 NAVEGADOR = comun.AGENTE
 
@@ -77,23 +77,26 @@ UMBRALES = [
 # es otra manera de contar pobres.
 MATERIAS_POBREZA = [
     {"clave": "pobreza_cepal", "campo": "pobreza",
-     "rotulo": "Pobreza · segunda fuente", "eje": "Desarrollo",
+     "rotulo": "Pobreza con umbral internacional (4,1 dólares diarios)", "eje": "Desarrollo",
      "unidad": "% de las personas", "mas_es_peor": True,
-     "cautela": "SEGUNDA MEDICIÓN de algo que el registro ya publica con el Banco Mundial. "
-                "No miden lo mismo de la misma manera: aquella usa la línea de pobreza que "
-                "fija cada Estado, y esta una metodología regional comparable. Si difieren, "
-                "la diferencia dice cómo define la pobreza cada quien, no quién se equivoca."},
+     "cautela": "Personas con ingresos menores a 4,1 dólares diarios de paridad de poder adquisitivo "
+                "(precios de 2021). Lo calcula el Banco Mundial en su Plataforma sobre Pobreza y "
+                "Desigualdad y lo redistribuye la CEPAL: NO es una segunda fuente independiente de la "
+                "pobreza con línea nacional, que también publica el Banco Mundial. Las dos difieren "
+                "porque una usa la línea de cada Estado y esta un umbral internacional en dólares."},
     {"clave": "pobreza_extrema", "campo": "extrema",
      "rotulo": "Pobreza extrema", "eje": "Desarrollo",
      "unidad": "% de las personas", "mas_es_peor": True,
-     "cautela": "Quienes no cubren la canasta básica de alimentos. Es el piso duro: por "
-                "debajo de esta línea no se trata de desigualdad sino de hambre."},
+     "cautela": "Personas con ingresos menores a 3,0 dólares diarios de paridad de poder adquisitivo "
+                "(precios de 2021): el umbral internacional de pobreza extrema del Banco Mundial. No es "
+                "la pobreza extrema que calcula cada Estado con su canasta de alimentos."},
     {"clave": "vulnerabilidad", "campo": "vulnerabilidad",
      "rotulo": "Población vulnerable a la pobreza", "eje": "Desarrollo",
      "unidad": "% de las personas", "mas_es_peor": True,
-     "cautela": "Quienes no son pobres hoy y caerían con un golpe —una enfermedad, un "
-                "despido, una devaluación—. Es la medida que explica por qué la pobreza "
-                "sube tan rápido en las crisis de esta región."},
+     "cautela": "Personas con ingresos menores a 8,3 dólares diarios de paridad de poder adquisitivo "
+                "(precios de 2021), el umbral que el Banco Mundial usa para países de ingreso mediano "
+                "alto. No es pobreza según la línea nacional: marca a quienes viven con ingresos bajos "
+                "para la escala regional."},
 ]
 
 
@@ -270,11 +273,10 @@ def recolectar():
         fiabilidad="A",
         credibilidad=2,
         corroborado=False,
-        nota=("Comisión regional de las Naciones Unidas para América Latina y el "
-              "Caribe, con metodología publicada y armonización declarada entre las "
-              "encuestas nacionales. Es la fuente estadística nativa de la región. Lo "
-              "que se registra es su estimación armonizada, no el dato crudo de cada "
-              "encuesta nacional."),
+        nota=("Estimación del Banco Mundial (Plataforma sobre Pobreza y Desigualdad) sobre "
+              "las encuestas de hogares de cada Estado, con metodología publicada; la CEPAL la "
+              "redistribuye en CEPALSTAT. Un solo productor: no corrobora la pobreza con línea "
+              "nacional, que también es del Banco Mundial."),
     )
 
     for r in registros:
@@ -296,7 +298,7 @@ def recolectar():
         extra={
             "indicadores": [{"clave": m["clave"], "rotulo": m["rotulo"], "eje": m["eje"],
                              "unidad": m["unidad"], "mas_es_peor": m["mas_es_peor"],
-                             "origen": "CEPALSTAT — Comisión Económica para América Latina y el Caribe",
+                             "origen": "Banco Mundial, Plataforma sobre Pobreza y Desigualdad (vía CEPALSTAT)",
                              "cautela": m["cautela"]} for m in MATERIAS_POBREZA],
             "cobertura": {m["clave"]: sum(1 for r in registros
                                           if (r.get("indicadores") or {}).get(m["clave"]))

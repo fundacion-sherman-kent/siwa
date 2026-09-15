@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Sanciones según quien las dicta: Estados Unidos (OFAC) y Reino Unido (OFSI).
+"""Sanciones según quien las dicta: Estados Unidos (OFAC) y Reino Unido (UK Sanctions List).
 
 POR QUÉ EXISTE
 --------------
@@ -34,7 +34,11 @@ import geo  # noqa: E402
 COLECTOR = "sanciones_primarias"
 CAPA = "publico"
 OFAC_ADD = "https://www.treasury.gov/ofac/downloads/add.csv"
-OFSI = "https://ofsistorage.blob.core.windows.net/publishlive/2022format/ConList.csv"
+# LA LISTA BRITÁNICA CAMBIÓ. La lista consolidada de la OFSI cerró el 28/1/2026 y dejó de
+# actualizarse; desde entonces la única fuente de designaciones del Reino Unido es la
+# UK Sanctions List del FCDO (licencia OGL v3). SIWA siguió leyendo la cerrada hasta la
+# auditoría del 15/9/2026.
+UK_LISTA = "https://sanctionslist.fcdo.gov.uk/docs/UK-Sanctions-List.csv"
 
 EN_INGLES = {
     "Argentina": "ARG", "Bolivia": "BOL", "Brazil": "BRA", "Chile": "CHL", "Colombia": "COL",
@@ -78,17 +82,26 @@ def ofac() -> dict:
 
 
 def ofsi() -> tuple:
-    """Grupos distintos (Group ID) con domicilio en cada país, y la fecha de la lista."""
-    texto = pedir(OFSI)
-    lineas = texto.splitlines()
-    fecha = lineas[0].split(",", 1)[1].strip() if lineas and lineas[0].startswith("Last Updated") else None
-    lector = csv.DictReader(io.StringIO("\n".join(lineas[1:])))
-    por_iso = {}
-    for fila in lector:
-        iso = EN_INGLES.get((fila.get("Country") or "").strip())
-        grupo = (fila.get("Group ID") or "").strip()
-        if iso and grupo:
-            por_iso.setdefault(iso, set()).add(grupo)
+    """Designados distintos (Unique ID) con domicilio en cada país, y la fecha del informe.
+
+    El archivo pesa unos 50 MB: se lee en flujo, línea por línea, sin cargarlo entero.
+    """
+    peticion = urllib.request.Request(UK_LISTA, headers={"User-Agent": comun.AGENTE})
+    por_iso, fecha = {}, None
+    with urllib.request.urlopen(peticion, timeout=300) as respuesta:
+        texto = io.TextIOWrapper(respuesta, encoding="utf-8-sig", errors="replace", newline="")
+        primera = texto.readline()
+        if primera.startswith("Report Date:"):
+            crudo = primera.split(":", 1)[1].strip()
+            try:
+                fecha = datetime.strptime(crudo, "%d-%b-%Y").date().isoformat()
+            except ValueError:
+                fecha = crudo
+        for fila in csv.DictReader(texto):
+            iso = EN_INGLES.get((fila.get("Address Country") or "").strip())
+            ident = (fila.get("Unique ID") or "").strip()
+            if iso and ident:
+                por_iso.setdefault(iso, set()).add(ident)
     if len(por_iso) < 5:
         raise RuntimeError("La lista del Reino Unido dejó menos de cinco Estados de la región: la "
                            "lectura falló.")
@@ -143,12 +156,12 @@ def construir() -> Path:
                         "rotulo": "Sancionados por el Reino Unido con domicilio en el país",
                         "eje": "Gobernanza", "unidad": "personas y entidades", "mas_es_peor": True,
                         "sin_direccion": True,
-                        "origen": "Oficina de Implementación de Sanciones Financieras (OFSI), Reino Unido",
+                        "origen": "UK Sanctions List — Foreign, Commonwealth & Development Office (FCDO), Reino Unido",
                         "cautela": cautela})
     return comun.escribir(
         colector=COLECTOR,
         capa=CAPA,
-        fuente="Listas primarias de sanciones: OFAC (EE. UU.) y OFSI (Reino Unido)",
+        fuente="Listas primarias de sanciones: OFAC (EE. UU.) y UK Sanctions List (Reino Unido)",
         url_fuente="https://sanctionssearch.ofac.treas.gov/",
         calificacion=comun.calificar(
             "A", 2, True,
@@ -161,7 +174,8 @@ def construir() -> Path:
             "SE CUENTA EL DOMICILIO DECLARADO, no la nacionalidad: una empresa pantalla registrada "
             "en un país suma a ese país.",
             "UNA MISMA PERSONA PUEDE TENER DOMICILIOS EN VARIOS PAÍSES y suma en cada uno.",
-            f"La lista del Reino Unido declara su última actualización: {fecha_uk or 'no informada'}.",
+            f"La lista del Reino Unido (UK Sanctions List) declara su informe del {fecha_uk or 'día no informado'}. "
+            "La lista consolidada de la OFSI, que se leía antes, cerró el 28/1/2026.",
         ] + caidos,
         extra={"indicadores": medidas,
                "cobertura": {m["clave"]: len(registros) for m in medidas},
