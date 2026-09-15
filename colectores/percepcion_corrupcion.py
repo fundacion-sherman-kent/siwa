@@ -45,13 +45,15 @@ import zipfile
 import comun
 import geo
 
-URL = "https://images.transparencycdn.org/images/CPI2024-Results-and-trends.xlsx"
+# Edición 2025, publicada el 10/2/2026. La planilla cambió de nombre respecto de
+# la de 2024 («CPI2024-Results-and-trends.xlsx»): el reloj de actualidad prueba los dos.
+URL = "https://images.transparencycdn.org/images/CPI2025_Results.xlsx"
 FUENTE = "Transparency International — Índice de Percepción de la Corrupción"
 URL_FUENTE = "https://www.transparency.org/en/cpi"
 LICENCIA = "CC BY-ND 4.0 © Transparency International"
 NAVEGADOR = comun.AGENTE
 
-HOJA_ANIO = 1        # «CPI 2024»: puntaje, puesto, error e intervalo
+HOJA_ANIO = 1        # «CPI2025»: puntaje, puesto, error e intervalo
 HOJA_SERIE = 2       # «CPI Timeseries»: la serie por año
 CONTROL = "URY"      # está en el índice desde el comienzo; si falta, falló la lectura
 MINIMO_PAISES = 150  # la edición verificada trae 180
@@ -59,7 +61,7 @@ MINIMO_PAISES = 150  # la edición verificada trae 180
 # El encabezado que se verificó. Si la planilla cambia de forma, se declara en
 # vez de leer columnas por su posición y publicar el puesto como si fuera el
 # puntaje, que es exactamente el error que una lectura posicional comete sola.
-ESPERADO = {"A": "country", "B": "iso3", "D": "cpi 2024 score", "E": "rank"}
+ESPERADO = {"A": "country / territory", "B": "iso3", "D": "cpi 2025 score", "E": "rank"}
 
 
 def _ficha(serie, campo):

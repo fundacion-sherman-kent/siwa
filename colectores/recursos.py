@@ -41,6 +41,7 @@ rellena.
 from __future__ import annotations
 
 import csv
+import re
 import io
 import sys
 import urllib.request
@@ -62,7 +63,9 @@ CAPA = "publico"
 HASTA = datetime.now(timezone.utc).year - 1
 
 REJILLA = "https://ourworldindata.org/grapher/{slug}.csv"
-USGS_ITEM = "https://www.sciencebase.gov/catalog/item/677eaf95d34e760b392c4970?format=json"
+# Edición 2026 (publicada el 6/2/2026). Cambió de forma: ya no trae la tabla ancha
+# «World_Data_Release» sino «MCS2026_Commodities_Data.csv» en formato largo.
+USGS_ITEM = "https://www.sciencebase.gov/catalog/item/69837e43b66b01367d7ec7c7?format=json"
 
 ORIGEN_ENERGIA = ("Energy Institute y Servicio Geológico de los Estados Unidos, "
                   "via Our World in Data")
@@ -194,6 +197,12 @@ EN_CASTELLANO = {
     "pumice & pumicite": "piedra pómez",
     "nitrogen(fixed) - ammonia": "nitrógeno fijado (amoníaco)",
     "sand and gravel": "arena y grava", "stone": "piedra",
+    # Nombres de la edición 2026, que cambió la forma de escribirlos.
+    "zeolites": "zeolitas naturales", "pumice and pumicite": "piedra pómez",
+    "nitrogen (fixed)—ammonia": "nitrógeno fijado (amoníaco)",
+    "magnesium compounds": "compuestos de magnesio", "alumina": "alúmina",
+    "chromium": "cromo", "iron and steel": "hierro y acero", "tantalum": "tántalo",
+    "feldspar and nepheline syenite": "feldespato y sienita nefelínica",
 }
 
 
@@ -221,7 +230,7 @@ def numero(v) -> float | None:
 # desde una maquina comun no, y sin esta copia las materias de minerales dejaban
 # de publicarse. Sus metadatos oficiales declaran «Use constraints: None»: se
 # puede redistribuir, y el LEEME de la carpeta dice cuando se reemplaza.
-COPIA_USGS = Path(__file__).resolve().parent / "fijas" / "usgs-mcs2025" / "MCS2025_World_Data.csv"
+COPIA_USGS = Path(__file__).resolve().parent / "fijas" / "usgs-mcs2026" / "MCS2026_Commodities_World.csv"
 
 
 def _por_codigo(error: Exception) -> str:
@@ -235,15 +244,74 @@ def _filas_en_linea() -> list:
     with urllib.request.urlopen(peticion, timeout=90) as respuesta:
         item = __import__("json").loads(respuesta.read())
     archivo = next((f for f in (item.get("files") or [])
-                    if f.get("name", "").startswith("World_Data_Release")), None)
+                    if f.get("name", "").endswith("_Commodities_Data.csv")), None)
     if not archivo:
         raise RuntimeError("la base mundial de minerales no trae su archivo de datos")
     peticion = urllib.request.Request(archivo["url"], headers={"User-Agent": comun.AGENTE})
     with urllib.request.urlopen(peticion, timeout=180) as respuesta:
         crudo = respuesta.read()
-    z = zipfile.ZipFile(io.BytesIO(crudo))
-    nombre = next(n for n in z.namelist() if n.lower().endswith(".csv"))
-    return list(csv.DictReader(io.StringIO(z.read(nombre).decode("utf-8-sig", "replace"))))
+    # EL ARCHIVO 2026 NO VIENE EN UTF-8 sino en la codificación de Windows: leído
+    # como UTF-8, la raya de «Production—crude ore» se vuelve un signo roto.
+    try:
+        texto = crudo.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        texto = crudo.decode("cp1252")
+    return list(csv.DictReader(io.StringIO(texto)))
+
+
+def _a_la_forma_ancha(filas: list) -> tuple:
+    """La edición 2026 viene en formato largo: una fila por país, mineral,
+    estadística y año. Se la pasa a la forma que el resto del colector ya sabe
+    leer —producción del último año, del anterior y reservas— sin tocar la cuenta.
+
+    Devuelve las filas y el AÑO de la producción más nueva, que sale del archivo y
+    no se escribe a mano.
+    """
+    if filas and "COMMODITY" in filas[0]:
+        return filas, 2024   # la forma vieja (edición 2025) trae producción de 2024
+    mundo = [x for x in filas if (x.get("Section") or "").startswith("World")]
+    anios = [int(x["Year"]) for x in mundo
+             if x.get("Statistics") == "Production" and (x.get("Year") or "").isdigit()]
+    ultimo = max(anios) if anios else None
+    ancha: dict = {}
+    reservas: dict = {}
+    for x in mundo:
+        com = re.sub(r"\s*\(.*?\)\s*$", "", (x.get("Commodity") or "").strip())
+        pais = (x.get("Country") or "").strip()
+        if x.get("Statistics") == "Reserves":
+            reservas.setdefault((com, pais), x.get("Value"))
+            continue
+        if x.get("Statistics") != "Production" or not (x.get("Year") or "").isdigit():
+            continue
+        detalle = (x.get("Statistics_detail") or "").strip()
+        # «Mine production: beneficiated» y «Production—crude ore» se agrupan por su
+        # primera parte, y el detalle completo se guarda para ver si es comparable.
+        base = re.split(r"\s*[—:]\s*", detalle, maxsplit=1)[0]
+        clave = (com, pais, base, (x.get("Unit") or "").strip())
+        fila = ancha.setdefault(clave, {"SOURCE": "MCS" + str((ultimo or 0) + 1), "COMMODITY": com,
+                                        "COUNTRY": pais, "TYPE": clave[2], "UNIT_MEAS": clave[3]})
+        fila.setdefault("_detalles", set()).add(detalle)
+        if int(x["Year"]) == ultimo:
+            fila["PROD_ULTIMO"] = x.get("Value")
+        elif int(x["Year"]) == (ultimo or 0) - 1:
+            fila["PROD_ANTERIOR"] = x.get("Value")
+    # UNA CUOTA MUNDIAL SOLO SE CALCULA SOBRE LO MISMO. Si un país declara boro en
+    # bruto y otro en óxido bórico, sumarlos para sacar «el total del mundo» mezcla
+    # cosas distintas: con eso Argentina y Perú salían con el 100 % del boro. Esos
+    # grupos quedan sin cuota.
+    detalles_por_grupo: dict = {}
+    for (com, pais, tipo, unidad), fila in ancha.items():
+        if pais.lower() in NO_ES_PAIS:
+            continue
+        detalles_por_grupo.setdefault((com, tipo, unidad), set()).update(fila["_detalles"])
+    vistas = set()
+    for (com, pais, _tipo, _unidad), fila in ancha.items():
+        fila["COMPARABLE"] = len(detalles_por_grupo.get((com, _tipo, _unidad), set())) <= 1
+        fila.pop("_detalles", None)
+        if (com, pais) not in vistas:
+            fila["RESERVAS"] = reservas.get((com, pais))
+            vistas.add((com, pais))
+    return list(ancha.values()), ultimo
 
 
 def minerales() -> tuple:
@@ -266,13 +334,15 @@ def minerales() -> tuple:
     # El total del mundo se SUMA, no se lee: la base trae renglones de «world
     # total» que ya vienen redondeados y agregados, y usarlos daría una cuota
     # que no cierra con las partes.
+    filas, anio_produccion = _a_la_forma_ancha(filas)
     mundo, del_pais = {}, {}
     edicion = None
     for x in filas:
         com, tipo, pais = x.get("COMMODITY"), x.get("TYPE"), (x.get("COUNTRY") or "").strip()
         edicion = edicion or x.get("SOURCE")
-        prod = numero(x.get("PROD_EST_ 2024")) or numero(x.get("PROD_2023"))
-        if not (com and prod):
+        prod = (numero(x.get("PROD_ULTIMO")) or numero(x.get("PROD_ANTERIOR"))
+                or numero(x.get("PROD_EST_ 2024")) or numero(x.get("PROD_2023")))
+        if not (com and prod) or x.get("COMPARABLE") is False:
             continue
         if pais.lower() not in NO_ES_PAIS:
             mundo[(com, tipo)] = mundo.get((com, tipo), 0.0) + prod
@@ -281,7 +351,7 @@ def minerales() -> tuple:
             del_pais.setdefault(iso, []).append(
                 {"mineral": en_castellano(com), "mineral_original": com,
                  "medida": tipo, "unidad": x.get("UNIT_MEAS"),
-                 "produccion": prod, "reservas": numero(x.get("RESERVES_2024"))})
+                 "produccion": prod, "reservas": numero(x.get("RESERVAS") or x.get("RESERVES_2024"))})
 
     for iso, lista in del_pais.items():
         for m in lista:
@@ -293,7 +363,7 @@ def minerales() -> tuple:
             total = mundo.get((m["mineral_original"], m["medida"])) or 0
             m["cuota_mundial_pct"] = round(m["produccion"] / total * 100, 2) if total else None
         lista.sort(key=lambda m: -(m.get("cuota_mundial_pct") or 0))
-    return del_pais, edicion, camino
+    return del_pais, edicion, camino, anio_produccion
 
 
 def construir() -> Path:
@@ -322,14 +392,14 @@ def construir() -> Path:
     # Chile—.
     minerales_leidos = False
     try:
-        por_mineral, edicion, camino = minerales()
+        por_mineral, edicion, camino, anio_minerales = minerales()
         minerales_leidos = True
         if camino:
             caidos.append(f"MINERALES: {camino}. Las cifras son de la edición {edicion}, "
                           "que es la vigente; no hay una más nueva que se haya dejado de leer.")
     except Exception as error:  # noqa: BLE001
         caidos.append(f"base mundial de minerales: {_por_codigo(error)}")
-        por_mineral, edicion = {}, None
+        por_mineral, edicion, anio_minerales = {}, None, None
 
     registros, cobertura = [], {}
     for p in padron:
@@ -344,7 +414,7 @@ def construir() -> Path:
         conCuota = [m for m in lista if m.get("cuota_mundial_pct")]
         if conCuota:
             mayor = conCuota[0]
-            anio = 2024
+            anio = anio_minerales
             f["indicadores"]["cuota_mineral_mundial"] = {
                 "valor": mayor["cuota_mundial_pct"], "anio": anio,
                 "anio_anterior": None, "valor_anterior": None, "variacion_pct": None,
