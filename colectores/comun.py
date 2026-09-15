@@ -51,6 +51,7 @@ SITIO_URL = f"{BASE}/sitio/index.html"
 TESTIGOS = {
     "indice.json": "el catálogo público de conjuntos",
     "auditoria.json": "auditoría del registro, corrida en cada recolección",
+    "reloj-actualidad.json": "reloj de actualidad: compara cada indicador con lo último que publica su fuente",
     "pantallas.json": "control de diseño adaptable, corrido en cada cambio de código",
     "mineria.json": "minería sobre el propio registro: pistas, no conclusiones",
     "segunda_fuente.json": "la regla de las dos fuentes, medida en cada recolección",
@@ -233,6 +234,7 @@ CATEGORIAS = {
     "redes_influencia_extrarregional": "entorno-informativo",
     "desempleo_cepal": "informalidad",
     "homicidios": "violencia",
+    "homicidios_estado": "violencia",
     "hostigamiento_periodistas": "entorno-informativo",
     "indice_gobernanza": "integridad",
     "industria": "industrial",

@@ -63,6 +63,7 @@ DATOS = RAIZ / "datos" / "publico"
 NO_SON_FUENTES = {
     "auditoria.json": "es un CONTROL de la casa: mide al registro, no al mundo",
     "pantallas.json": "es un CONTROL de la casa: mide la maqueta, no al mundo",
+    "reloj-actualidad.json": "es un CONTROL de la casa: mide si el registro está al día con sus fuentes",
     "mineria.json": "derivado propio, sin procedencia de tercero",
     "censo_subnacional.json": "es un INSTRUMENTO DE MEDICIÓN, no una fuente sobre el "
                               "mundo: cuenta qué se podría llegar a publicar por unidad "

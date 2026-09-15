@@ -157,6 +157,22 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/ia_apps.py
 
+      # LO ULTIMO QUE PUBLICA CADA ESTADO: homicidios segun la estadistica oficial
+      # del propio pais (autorizado el 15/9/2026). Corre en todas las pasadas:
+      # Colombia actualiza mes a mes.
+      - name: Homicidios segun el propio Estado
+        id: estado_reciente
+        continue-on-error: true
+        run: python colectores/estado_reciente.py
+
+      # RELOJ DE ACTUALIDAD: compara cada indicador con lo ultimo que publica su
+      # fuente y comprueba la hora contra servidores externos (autorizado el 15/9/2026).
+      - name: Reloj de actualidad
+        id: reloj
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python herramientas/reloj-actualidad.py datos/publico/reloj-actualidad.json
+
       # REDES DE INFLUENCIA DADAS DE BAJA, SEGUN GOOGLE (autorizado el 13/9/2026).
       - name: Redes de influencia dadas de baja
         id: influencia
@@ -648,6 +664,8 @@ jobs:
           [ "${{ steps.radar.outcome }}" = "failure" ] && { echo "Falló el tráfico de internet por Estado."; fallo=1; }
           [ "${{ steps.ia.outcome }}" = "failure" ] && { echo "Falló el uso de IA y las regiones de nube."; fallo=1; }
           [ "${{ steps.ia_apps.outcome }}" = "failure" ] && { echo "Fallaron los asistentes de IA por origen."; fallo=1; }
+          [ "${{ steps.estado_reciente.outcome }}" = "failure" ] && { echo "Fallaron los homicidios segun el propio Estado."; fallo=1; }
+          [ "${{ steps.reloj.outcome }}" = "failure" ] && { echo "Fallo el reloj de actualidad."; fallo=1; }
           [ "${{ steps.influencia.outcome }}" = "failure" ] && { echo "Fallaron las redes de influencia dadas de baja."; fallo=1; }
           [ "${{ steps.eia.outcome }}" = "failure" ] && { echo "Falló el petróleo y gas de la EIA."; fallo=1; }
           [ "${{ steps.sanciones_primarias.outcome }}" = "failure" ] && { echo "Fallaron las listas de sanciones de EE. UU. y del Reino Unido."; fallo=1; }

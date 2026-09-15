@@ -10,7 +10,7 @@
      tarjeta vacía con la dirección cruda, y el registro parece abandonado.
      Las direcciones van ABSOLUTAS a propósito: las redes no resuelven rutas
      relativas cuando leen la etiqueta. -->
-<meta name="description" content="Registro público y gratuito de América Latina y el Caribe: 160 indicadores sobre 33 Estados. Cada cifra con su fuente, su fecha y sus vacíos declarados.">
+<meta name="description" content="Registro público y gratuito de América Latina y el Caribe: 161 indicadores sobre 33 Estados. Cada cifra con su fuente, su fecha y sus vacíos declarados.">
 <link rel="alternate" type="application/rss+xml" title="SIWA — lo que cambió"
       href="https://siwa.fundacionkent.org/novedades.xml">
 <link rel="canonical" href="https://siwa.fundacionkent.org/sitio/index.html">
@@ -22,8 +22,8 @@
 <meta property="og:locale" content="es_AR">
 <meta property="og:url" content="https://siwa.fundacionkent.org/sitio/index.html">
 <meta property="og:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta property="og:description" content="33 Estados, 160 indicadores, 57 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-160-57">
+<meta property="og:description" content="33 Estados, 161 indicadores, 58 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta property="og:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-161-58">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
@@ -31,8 +31,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SIWA — Reporte de situación de América Latina y el Caribe">
-<meta name="twitter:description" content="33 Estados, 160 indicadores, 57 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
-<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-160-57">
+<meta name="twitter:description" content="33 Estados, 161 indicadores, 58 fuentes. Cada cifra con su fuente, su fecha y su calificación de fiabilidad. Acceso libre y gratuito.">
+<meta name="twitter:image" content="https://siwa.fundacionkent.org/sitio/marca/siwa-compartir.png?v=33-161-58">
 
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="apple-touch-icon" href="marca/fusk-icono-color.png">
@@ -46,7 +46,7 @@
       "@id": "https://siwa.fundacionkent.org/sitio/index.html#dataset",
       "name": "SIWA — Reporte de situación de América Latina y el Caribe",
       "alternateName": "SIWA",
-      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 160 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 57 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
+      "description": "Registro público de la situación de los 33 Estados de América Latina y el Caribe: 161 indicadores de seguridad, defensa, gobernanza y desarrollo, recolectados de forma automática de 58 fuentes públicas y calificados con el sistema Almirantazgo. Cada cifra declara su fuente, su año de referencia, su calificación de fiabilidad y qué es lo que su fuente no cubre. El registro publica hechos calificados y no emite juicios.",
       "url": "https://siwa.fundacionkent.org/sitio/index.html",
       "sameAs": "https://github.com/fundacion-sherman-kent/siwa",
       "isAccessibleForFree": true,
@@ -4343,6 +4343,7 @@
                      ['infraestructura','Cables submarinos, aeropuertos, energía y satélites (GCAT)'],
                      ['radar','Cloudflare Radar — tráfico real de internet'],
                      ['ia','Microsoft, OpenAI, Anthropic y siete empresas de nube — uso de IA y nube'],
+                     ['estado_reciente','Argentina, Colombia y Trinidad y Tobago — homicidios según el propio Estado'],
                      ['ia_apps','Apple App Store — asistentes de IA por origen de la empresa'],
                      ['influencia','Google y TikTok — redes de influencia dadas de baja'],
                      ['eia','EIA de EE. UU. — petróleo y gas'],
@@ -4636,6 +4637,7 @@
     gini_cepal: 'desigualdad inequidad brecha ricos pobres gini cepal segunda fuente',
     uso_ia_generativa: 'inteligencia artificial ia generativa uso chatbots adopcion microsoft',
     uso_chatgpt: 'chatgpt openai inteligencia artificial ia uso estados unidos',
+    homicidios_estado: 'homicidios asesinatos muertes violentas estado oficial reciente snic ministerio policia 2025 2026',
     ia_apps_ranking: 'inteligencia artificial ia asistentes chatbots apps descargas deepseek gemini grok kimi china estados unidos',
     ia_apps_ranking_eeuu: 'inteligencia artificial ia asistentes apps estados unidos chatgpt gemini claude grok copilot meta',
     ia_apps_ranking_china: 'inteligencia artificial ia asistentes apps china deepseek kimi baidu qwen doubao',
@@ -8156,7 +8158,10 @@
   function MATERIAS(){
     const deFuentes = fuentesInd().flatMap(f=>(f.indicadores||[]).map(i=>({
       clave:i.clave, eje:i.eje, rotulo:i.rotulo,
-      busca:PALABRAS[i.clave]||'', disponible:()=>true})));
+      busca:PALABRAS[i.clave]||'',
+      // Sin capa de mapa ni lugar en el constructor: no se compara entre países.
+      disponible:()=>!i.no_comparable_entre_paises,
+      ...(i.no_comparable_entre_paises ? {sinCapa:'no_comparable'} : {})})));
     return MATERIAS_COMPUESTAS().concat(deFuentes, ESTATICAS, MATERIAS_CRIMEN()).sort((a,b)=>
       ORDEN_EJES.indexOf(a.eje) - ORDEN_EJES.indexOf(b.eje));
   }
@@ -8174,7 +8179,7 @@
                             almacen.oit, almacen.salud, almacen.prensa,
                             almacen.pobreza, almacen.percepcion_corrupcion,
                             almacen.recursos, almacen.infraestructura, almacen.radar,
-                            almacen.ia, almacen.ia_apps, almacen.influencia, almacen.eia, almacen.sanciones_primarias,
+                            almacen.ia, almacen.ia_apps, almacen.estado_reciente, almacen.influencia, almacen.eia, almacen.sanciones_primarias,
                             almacen.inform, almacen.trata_personas].filter(Boolean);
 
   function metaInd(clave){
@@ -8875,6 +8880,10 @@
       };
     });
     fuentesInd().forEach(f=>(f.indicadores||[]).forEach(i=>{
+      // LO QUE NO SE COMPARA ENTRE PAÍSES NO ES CAPA. Un mapa, un ranking o una
+      // carrera ponen a los países uno al lado del otro; la cifra de cada Estado
+      // con su propia definición se muestra en su tarjeta, no ahí.
+      if(i.no_comparable_entre_paises) return;
       c[i.clave] = capaBanco(i.clave, cortesDe(i), esEscalaEstimacion(i));
     }));
     capasGuardadas = c; selloCapas = sello;
@@ -12686,7 +12695,7 @@
     if(q) q.addEventListener('click', ()=>{ paisFiltro=null; paisNombre=null; sincronizar(); repintar(); });
     seriesEnSeccion();
     pintarCenso();
-    tarjetasBanco(['homicidios','policias'],'violencia');
+    tarjetasBanco(['homicidios_estado','homicidios','policias'],'violencia');
     tarjetasBanco(['gasto_seguridad','gasto_seguridad_publico','gasto_seguridad_cepal'],'presupuesto-seguridad');
     tarjetasBanco(['suicidio','muertes_transito'],'muertes-no-delito');
     tarjetasBanco(['esperanza_vida','mortalidad_materna','esperanza_vida_cepal'],'salud');
@@ -16530,6 +16539,19 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       repintar(); marcador();
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-conectividad','uso de inteligencia artificial y nube',err.message); marcador(); });
+
+  // LO ULTIMO QUE PUBLICA CADA ESTADO (autorizado el 15/9/2026): la cifra oficial
+  // de homicidios del propio pais, con su periodo. No se compara ni se suma.
+  Promise.all([traer('estado_reciente.json'), traer('estado/estado_reciente.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.estado_reciente=d; dominios+=Object.keys(d.cobertura||{}).length;
+      registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
+      vacios+=pintarVacios('vac-violencia',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-violencia','homicidios según el propio Estado',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-violencia','homicidios según el propio Estado',err.message); marcador(); });
 
   // ASISTENTES DE IA POR ORIGEN DE LA EMPRESA (autorizado el 14/9/2026): cuales
   // estan entre las apps mas descargadas de la tienda de Apple y cuales se pueden
