@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-15T06:35:16+00:00",
+  "corrida": "2026-09-15T07:30:32+00:00",
   "medidas_con_suficientes_casos": 185,
   "pares_probados": 17020,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 17.020 pares y el umbral de siempre, alrededor de 851 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3442,
+    "sobreviven": 3447,
     "de_ellos_son_parentescos": 396
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3046,
+  "pistas_totales": 3051,
   "anomalias_totales": 353,
   "pistas": [
     {
@@ -190,6 +190,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.925,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.714180983222558e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -224,19 +237,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.969829993850244e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.918,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.2904222474504134e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -476,6 +476,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.885,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.9125226410134522e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:anomalias",
       "b": "poblacion",
       "rotulo_a": "ciber · anomalias",
@@ -562,6 +575,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.2187629731577568e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.878,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 7.546581014862e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -770,32 +796,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.379314467919233e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.869,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.2212057024716275e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.869,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.4542102057680767e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
