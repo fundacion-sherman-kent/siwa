@@ -83,7 +83,9 @@ TOPE_LECTURA = 80_000_000
 # fuente: se reintenta. Si igual falla, se detiene la corrida; nunca se anota cero.
 # Tres intentos en veinticuatro segundos NO alcanzaron: volvio a fallar dos veces
 # despues de ponerlos. Se estira la espera, que es gratis en una tarea horaria.
-INTENTOS = 4
+# En las corridas horarias la espera se acorta: FIRMS llegó a tomar diez minutos de
+# una corrida horaria (auditoría del robot, 15/9/2026).
+INTENTOS = 4 if os.environ.get("COMPLETA") == "true" else 2
 ESPERA_ENTRE_INTENTOS = 10  # segundos, y crece con cada intento
 
 
@@ -102,7 +104,7 @@ def _pedir(clave: str, dias: int) -> list:
     for numero in range(INTENTOS):
         try:
             peticion = urllib.request.Request(url, headers={"User-Agent": NAVEGADOR})
-            with urllib.request.urlopen(peticion, timeout=180) as respuesta:
+            with urllib.request.urlopen(peticion, timeout=180 if INTENTOS == 4 else 60) as respuesta:
                 crudo = respuesta.read(TOPE_LECTURA)
             break
         except urllib.error.HTTPError as error:

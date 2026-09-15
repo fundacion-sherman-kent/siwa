@@ -80,6 +80,7 @@ permissions:
 jobs:
   vigilar:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -95,6 +96,9 @@ jobs:
       - name: ¿El robot sigue vivo?
         id: robot
         continue-on-error: true
+        # Con credencial, la consulta a GitHub no depende del cupo compartido de 60 por hora.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python herramientas/vigia-robot.py
 
       # ¿PUEDE EL LECTOR VER LAS FUENTES QUE EL REGISTRO DICE TENER? El mismo

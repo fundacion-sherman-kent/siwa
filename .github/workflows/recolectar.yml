@@ -34,6 +34,10 @@ permissions:
 jobs:
   recolectar:
     runs-on: ubuntu-latest
+    # TIEMPO MAXIMO (auditoría del 15/9/2026): sin tope, un colector colgado retenía
+    # el candado hasta seis horas y detenía todo el robot. La pasada completa dura
+    # 20 a 40 minutos.
+    timeout-minutes: 75
     env:
       # A mano o en la corrida diaria se recolecta todo; en las horarias, solo lo que cambia seguido.
       COMPLETA: ${{ github.event_name == 'workflow_dispatch' || github.event.schedule == '40 5 * * *' }}
@@ -172,14 +176,6 @@ jobs:
         continue-on-error: true
         if: env.COMPLETA == 'true'
         run: python colectores/inflacion.py
-
-      # RELOJ DE ACTUALIDAD: compara cada indicador con lo ultimo que publica su
-      # fuente y comprueba la hora contra servidores externos (autorizado el 15/9/2026).
-      - name: Reloj de actualidad
-        id: reloj
-        continue-on-error: true
-        if: env.COMPLETA == 'true'
-        run: python herramientas/reloj-actualidad.py datos/publico/reloj-actualidad.json --avisar
 
       # REDES DE INFLUENCIA DADAS DE BAJA, SEGUN GOOGLE (autorizado el 13/9/2026).
       - name: Redes de influencia dadas de baja
@@ -432,21 +428,6 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/copernicus.py
 
-      # VA ULTIMO A PROPOSITO: la memoria compara lo que los demas colectores
-      # acaban de escribir contra lo que ya sabia. Si corriera antes, anotaria
-      # el estado de ayer como si fuera el de hoy.
-      # Seis consultas baratas por vuelta. Mide si las fuentes TRABADAS volvieron,
-      # sin depender de que alguien se acuerde de reintentar —y nadie se acuerda—.
-      - name: Banco de pruebas de fuentes candidatas
-        id: sondeo
-        continue-on-error: true
-        run: python colectores/sondeo.py
-
-      - name: Memoria del registro (que cambio)
-        id: memoria
-        continue-on-error: true
-        run: python colectores/memoria.py
-
       # --- Series anuales y catalogos, una vez por dia ---
       - name: Indicadores comparables (Banco Mundial)
         id: banco
@@ -520,6 +501,30 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/indice_opacidad.py
 
+      # VA DESPUES DE TODOS LOS COLECTORES A PROPOSITO (se movió acá el 15/9/2026): la memoria compara lo que los demas colectores
+      # acaban de escribir contra lo que ya sabia. Si corriera antes, anotaria
+      # el estado de ayer como si fuera el de hoy.
+      # Seis consultas baratas por vuelta. Mide si las fuentes TRABADAS volvieron,
+      # sin depender de que alguien se acuerde de reintentar —y nadie se acuerda—.
+      - name: Banco de pruebas de fuentes candidatas
+        id: sondeo
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/sondeo.py
+
+      - name: Memoria del registro (que cambio)
+        id: memoria
+        continue-on-error: true
+        run: python colectores/memoria.py
+
+      # RELOJ DE ACTUALIDAD: compara cada indicador con lo ultimo que publica su
+      # fuente y comprueba la hora contra servidores externos (autorizado el 15/9/2026).
+      - name: Reloj de actualidad
+        id: reloj
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python herramientas/reloj-actualidad.py datos/publico/reloj-actualidad.json --avisar
+
       # LA MINERIA va despues de TODO lo que recolecta: cruza lo que quedo
       # escrito en esta corrida. Deja pistas, no conclusiones.
       - name: Mineria sobre el propio registro
@@ -533,7 +538,7 @@ jobs:
       # Sin esto el indice contesta «como esta» y nunca «esta mejorando».
       - name: Historia del Indice de Opacidad
         id: opacidad_historia
-        if: always()
+        if: always() && env.COMPLETA == 'true'
         continue-on-error: true
         run: python herramientas/opacidad-historia.py
 
@@ -545,6 +550,7 @@ jobs:
       # para ofrecerlo tiene que existir. Al reves, la puerta ofrecia el canal
       # de la corrida anterior.
       - name: Escribir el canal de novedades
+        id: novedades
         if: always()
         continue-on-error: true
         run: python herramientas/novedades.py
@@ -553,11 +559,13 @@ jobs:
       # Estado. Escribirlas a mano seria mantener cuarenta copias, que es la
       # duplicacion que este registro ya pago dos veces.
       - name: Generar las cuarenta puertas
+        id: puertas
         if: always()
         continue-on-error: true
         run: python herramientas/puertas.py
 
       - name: Sellar las cifras de la portada
+        id: sellar
         if: always()
         continue-on-error: true
         run: python herramientas/sellar-portada.py
@@ -566,6 +574,7 @@ jobs:
       # escrito en esta corrida. Si corriera antes, publicaria el catalogo de
       # la corrida anterior, que es peor que no publicar ninguno.
       - name: Catalogo publico de datos (indice y documentacion)
+        id: catalogo
         if: always()
         continue-on-error: true
         run: python herramientas/indice-datos.py
@@ -604,10 +613,14 @@ jobs:
           # Si alguien subio algo mientras corria la recoleccion, se trae y se
           # reintenta en lugar de fallar. Los datos se resuelven solos por la
           # regla de .gitattributes; el codigo ajeno se conserva intacto.
+          publicado=0
           for intento in 1 2 3; do
-            git push && break
+            if git push; then publicado=1; break; fi
             git pull --no-rebase --no-edit origin main || exit 1
           done
+          # Sin esto, si los tres intentos fallaban la corrida terminaba en verde
+          # sin haber publicado nada (auditoría del 15/9/2026).
+          [ "$publicado" = 1 ] || { echo "NO SE PUDO PUBLICAR tras tres intentos."; exit 1; }
 
       # Si algun colector fallo, la corrida queda en rojo. El dato anterior no se pisa
       # y la falla queda registrada en datos/publico/estado/.
@@ -620,9 +633,9 @@ jobs:
           [ "${{ steps.ods.outcome }}" = "failure" ] && { echo "Falló el colector de los ODS."; fallo=1; }
           [ "${{ steps.desplazamiento.outcome }}" = "failure" ] && { echo "Falló el colector de desplazamiento forzado."; fallo=1; }
           [ "${{ steps.drogas.outcome }}" = "failure" ] && { echo "Falló el colector de incautaciones y cultivo de coca (UNODC)."; fallo=1; }
-          [ "${{ steps.oms.outcome }}" = "failure" ] && { echo "Falló el colector de homicidios de la OMS."; fallo=1; }
+          [ "${{ steps.oms.outcome }}" = "failure" ] && { echo "Fallaron las muertes no delictivas y la salud (OMS)."; fallo=1; }
           [ "${{ steps.cepal.outcome }}" = "failure" ] && { echo "Falló el colector de femicidios y cárceles (CEPAL)."; fallo=1; }
-          [ "${{ steps.contrataciones_abiertas.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }
+          [ "${{ steps.contrataciones_abiertas.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas (OCDS)."; fallo=1; }
           [ "${{ steps.oficiales.outcome }}" = "failure" ] && { echo "Falló el padrón de fuentes oficiales."; fallo=1; }
           [ "${{ steps.redes.outcome }}" = "failure" ] && { echo "Falló el colector de circulación en redes."; fallo=1; }
           [ "${{ steps.owd.outcome }}" = "failure" ] && { echo "Falló el colector de democracia y conflicto."; fallo=1; }
@@ -654,7 +667,7 @@ jobs:
           [ "${{ steps.indice_opacidad.outcome }}" = "failure" ] && { echo "Falló el Índice de Opacidad."; fallo=1; }
           [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
           [ "${{ steps.brecha.outcome }}" = "failure" ] && { echo "Falló el colector de la brecha."; fallo=1; }
-          [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló el colector de contrataciones abiertas."; fallo=1; }
+          [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló la contratación pública por portal."; fallo=1; }
           [ "${{ steps.archivo.outcome }}" = "failure" ] && { echo "Falló el colector del archivo de la web."; fallo=1; }
           [ "${{ steps.copernicus.outcome }}" = "failure" ] && { echo "Falló el colector de imagen satelital."; fallo=1; }
           [ "${{ steps.memoria.outcome }}" = "failure" ] && { echo "Falló la memoria del registro."; fallo=1; }
@@ -665,7 +678,7 @@ jobs:
           [ "${{ steps.gasto_publico.outcome }}" = "failure" ] && { echo "Falló el gasto en seguridad y defensa."; fallo=1; }
           [ "${{ steps.unesco.outcome }}" = "failure" ] && { echo "Falló educación."; fallo=1; }
           [ "${{ steps.oit.outcome }}" = "failure" ] && { echo "Falló trabajo y desempleo."; fallo=1; }
-          [ "${{ steps.oms_salud.outcome }}" = "failure" ] && { echo "Fallaron las muertes no delictivas y la salud."; fallo=1; }
+          [ "${{ steps.oms_salud.outcome }}" = "failure" ] && { echo "Falló la segunda fuente de homicidios (OMS)."; fallo=1; }
           [ "${{ steps.recursos.outcome }}" = "failure" ] && { echo "Fallaron los recursos estratégicos."; fallo=1; }
           [ "${{ steps.infraestructura.outcome }}" = "failure" ] && { echo "Fallaron las infraestructuras críticas."; fallo=1; }
           [ "${{ steps.censo_subnacional.outcome }}" = "failure" ] && { echo "Falló el censo de disponibilidad subnacional."; fallo=1; }
@@ -680,6 +693,10 @@ jobs:
           [ "${{ steps.sanciones_primarias.outcome }}" = "failure" ] && { echo "Fallaron las listas de sanciones de EE. UU. y del Reino Unido."; fallo=1; }
           [ "${{ steps.inform.outcome }}" = "failure" ] && { echo "Falló el riesgo de crisis humanitaria."; fallo=1; }
           [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
+          [ "${{ steps.novedades.outcome }}" = "failure" ] && { echo "Falló el canal de novedades: el sitio muestra las de la corrida anterior."; fallo=1; }
+          [ "${{ steps.puertas.outcome }}" = "failure" ] && { echo "Fallaron las cuarenta puertas: quedan las de la corrida anterior."; fallo=1; }
+          [ "${{ steps.sellar.outcome }}" = "failure" ] && { echo "Falló el sellado de las cifras de la portada."; fallo=1; }
+          [ "${{ steps.catalogo.outcome }}" = "failure" ] && { echo "Falló el catálogo público de datos."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
           # La auditoría no es un colector: no falla porque una fuente no

@@ -17,6 +17,7 @@ Reglas de la casa que este módulo hace cumplir por código
 from __future__ import annotations
 
 import json
+import os
 import sys
 import urllib.request
 from datetime import datetime, timezone
@@ -539,7 +540,27 @@ def escribir(
             f"(NaN o infinito): {error}. Un dato ausente se omite, no se escribe."
         ) from error
 
-    destino.write_text(texto + "\n", encoding="utf-8")
+    # UN COLECTOR QUE HOY NO TRAE NADA NO PISA LO QUE AYER SÍ TRAÍA. Sin esto, una
+    # fuente que devolvía una respuesta vacía dejaba el archivo con cero indicadores
+    # y el colector «correcto» (auditoría del robot, 15/9/2026). Se falla y el dato
+    # anterior queda intacto, que es la regla de todo el registro.
+    if destino.exists() and not os.environ.get("SIWA_PERMITIR_VACIO"):
+        try:
+            previo = json.loads(destino.read_text(encoding="utf-8"))
+            antes = len((previo.get("cobertura") or {})) if isinstance(previo, dict) else 0
+        except Exception:  # noqa: BLE001 — un archivo previo ilegible no frena nada
+            antes = 0
+        ahora_n = len(contenido.get("cobertura") or {})
+        if antes and not ahora_n and contenido.get("indicadores") is not None:
+            raise RuntimeError(
+                f"El colector «{colector}» trajo cero indicadores con dato cuando el archivo "
+                f"anterior tenía {antes}. No se pisa: la fuente probablemente respondió vacío.")
+
+    # ESCRITURA ATÓMICA: se escribe al lado y se reemplaza de una vez. Un corte a la
+    # mitad dejaba un JSON cortado que igual se publicaba.
+    temporal = destino.with_suffix(destino.suffix + ".tmp")
+    temporal.write_text(texto + "\n", encoding="utf-8")
+    os.replace(temporal, destino)
     return destino
 
 

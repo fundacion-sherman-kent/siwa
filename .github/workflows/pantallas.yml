@@ -68,6 +68,7 @@ concurrency:
 jobs:
   pantallas:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Traer el repositorio
         uses: actions/checkout@v4
@@ -122,10 +123,12 @@ jobs:
           git config merge.ours.driver true
           git add datos/publico/pantallas.json sitio/t
           git diff --staged --quiet || git commit -m "Control de pantallas $(date -u +'%Y-%m-%d %H:%M UTC')"
+          publicado=0
           for intento in 1 2 3; do
-            git push && break
+            if git push; then publicado=1; break; fi
             git pull --no-rebase --no-edit origin main || exit 1
           done
+          [ "$publicado" = 1 ] || { echo "NO SE PUDO PUBLICAR tras tres intentos."; exit 1; }
 
       - name: Declarar el resultado
         if: always()
