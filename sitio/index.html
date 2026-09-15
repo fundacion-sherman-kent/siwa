@@ -170,6 +170,19 @@
   .brand h1{font-size:17px;margin:0;font-weight:700;letter-spacing:2px;color:var(--navy-deep);}
   .brand small{display:block;color:var(--grey-blue);font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;}
   .topbar-right{display:flex;gap:22px;align-items:center;font-size:11px;color:var(--grey-blue);}
+  .actualidad-boton{all:unset;cursor:pointer;font-size:11px;white-space:nowrap;color:inherit;text-decoration:underline;
+    text-decoration-style:dotted;text-underline-offset:3px;}
+  .actualidad-boton:focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
+  #reloj b{font-weight:600;}
+  .act-cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:4px 0 14px;}
+  .act-cifras div{border-left:3px solid var(--purple);padding:4px 10px;}
+  .act-cifras b{display:block;font-size:22px;color:var(--texto-alto);font-variant-numeric:tabular-nums;}
+  .act-cifras span{font-size:12px;color:var(--texto-2);}
+  .act-tabla{overflow-x:auto;}
+  .act-tabla table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .act-tabla th,.act-tabla td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--velo-3);vertical-align:top;}
+  .act-tabla th{font-size:11px;color:var(--texto-2);font-weight:600;}
+  .act-ok{color:var(--t-ok);font-weight:600;} .act-atras{color:var(--t-aviso);font-weight:600;}
   .status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:6px;box-shadow:0 0 8px var(--ok);}
   .status-dot.mal{background:var(--alert);box-shadow:0 0 8px var(--alert);}
   /* A los dos días sin recolectar, el aviso deja de ser discreto. */
@@ -2265,7 +2278,9 @@
     <button class="cambia-tema" id="cambia-tema" type="button" aria-pressed="false">
       <span id="cambia-tema-ico">◐</span><span id="cambia-tema-rot">Fondo claro</span></button>
     <span id="estado-general"><span class="status-dot"></span>Verificando estado…</span>
-    <span class="mono" id="reloj">—</span>
+    <button class="actualidad-boton" id="actualidad-boton" type="button" hidden
+            aria-haspopup="dialog">Actualidad —</button>
+    <span class="mono" id="reloj" title="Hora universal (UTC) y hora de tu dispositivo">—</span>
   </div>
 </div>
 
@@ -2420,6 +2435,15 @@
       <p class="ay-pie">¿Falta algo o algo no se entiende? Escribinos: es la clase de aviso que
         cambia el registro.</p>
     </div>
+  </dialog>
+  <!-- EL RELOJ DE ACTUALIDAD. Qué dijo el último control que compara cada
+       indicador con lo último que publica su fuente (autorizado el 15/9/2026). -->
+  <dialog class="ventana-analisis" id="ventana-actualidad" aria-labelledby="act-titulo">
+    <div class="va-barra">
+      <h2 id="act-titulo">¿SIWA está al día con sus fuentes?</h2>
+      <button class="va-cerrar" id="act-cerrar" type="button" aria-label="Cerrar">×</button>
+    </div>
+    <div class="va-cuerpo" id="act-cuerpo"></div>
   </dialog>
   <dialog class="ventana-analisis" id="ventana-analisis" aria-labelledby="va-titulo">
     <div class="va-barra">
@@ -4262,11 +4286,74 @@
   const momento = iso => iso ? new Date(iso).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}) : '—';
   const esc = t => String(t??'').replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
 
+  // EL RELOJ: HORA UNIVERSAL Y HORA DE QUIEN MIRA. La región va de tres a seis horas
+  // menos que Greenwich: no hay una hora «de la región», y la de una capital haría
+  // mirar la región desde ahí. La hora universal es la de las fuentes y el robot;
+  // al lado va la del dispositivo del lector. Se corrige con la hora que informa el
+  // servidor si el dispositivo está corrido (decisión de la dirección, 15/9/2026).
+  let desfaseServidor = 0;
+  const hhmm = (d, zona) => d.toLocaleTimeString('es-AR',
+    Object.assign({hour:'2-digit', minute:'2-digit', hour12:false}, zona ? {timeZone:zona} : {}));
   function reloj(){
-    document.getElementById('reloj').textContent =
-      new Date().toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'});
+    const ahora = new Date(Date.now() + desfaseServidor);
+    const fecha = ahora.toLocaleDateString('es-AR', {timeZone:'UTC', day:'numeric', month:'short', year:'numeric'});
+    document.getElementById('reloj').innerHTML =
+      fecha + ' · <b>' + hhmm(ahora,'UTC') + ' UTC</b> · ' + hhmm(ahora) + ' tu hora';
   }
-  reloj(); setInterval(reloj, 30000);
+  reloj(); setInterval(reloj, 15000);
+
+  // EL CONTROL DE ACTUALIDAD. Lo corre el robot una vez por día; la página solo lo
+  // muestra. Si el archivo no llegó, el botón no aparece: no se inventa un «al día».
+  function pintarActualidad(c){
+    const s = c.resumen || {};
+    const cuando = new Date(c.controlado.utc);
+    const boton = document.getElementById('actualidad-boton');
+    const control = cuando.toLocaleDateString('es-AR',{timeZone:'UTC',day:'numeric',month:'numeric'})
+      + ' ' + hhmm(cuando,'UTC') + ' UTC (' + hhmm(cuando) + ' tu hora)';
+    boton.textContent = s.al_dia + '/' + s.comprobados + ' al día';
+    boton.title = 'Indicadores con lo último que publica su fuente. Último control: ' + control;
+    boton.hidden = false;
+    const nombres = {al_dia:'al día', siwa_atrasado:'la fuente tiene algo más nuevo', no_comprobado:'sin comprobar'};
+    const orden = {siwa_atrasado:0, no_comprobado:1, al_dia:2};
+    const filas = (c.comprobaciones||[]).slice().sort((a,b)=>orden[a.estado]-orden[b.estado]).map(x =>
+      '<tr><td>' + esc(x.rotulo) + '</td><td>' + esc(x.fuente) + '</td><td>' + esc(x.anio_siwa ?? '—')
+      + '</td><td>' + esc(x.anio_fuente ?? '—') + '</td><td class="' + (x.estado==='al_dia'?'act-ok':'act-atras')
+      + '">' + esc(nombres[x.estado]||x.estado) + '</td></tr>').join('');
+    const nac = (c.fuentes_nacionales_mas_nuevas_fuera_de_siwa||[]).map(n =>
+      '<tr><td>' + esc(nombreDe(n.iso)) + '</td><td>' + esc(n.materia) + '</td><td>' + esc(n.organismo)
+      + '</td><td>' + esc(n.ultimo_periodo || n.ultima_actualizacion || '—') + '</td></tr>').join('');
+    const hora = c.reloj && c.reloj.estado === 'sincronizado'
+      ? '±' + Math.abs(Math.round(c.reloj.desfase_mediano_segundos)) + ' s' : 'desfasado';
+    document.getElementById('act-cuerpo').innerHTML =
+      '<div class="act-cifras">'
+      + '<div><b>' + s.al_dia + '/' + s.comprobados + '</b><span>indicadores con lo último que publica su fuente</span></div>'
+      + '<div><b>' + s.siwa_atrasado + '</b><span>con una edición más nueva sin tomar</span></div>'
+      + '<div><b>' + hora + '</b><span>hora del robot contra ' + ((c.reloj && c.reloj.lecturas || []).length)
+      + ' servidores externos</span></div>'
+      + '<div><b>' + hhmm(cuando,'UTC') + ' UTC</b><span>último control, ' + control + '</span></div></div>'
+      + '<p><b>«Al día» quiere decir que SIWA tiene lo último que publica esa fuente, no que la fuente sea reciente.</b>'
+      + ' La serie comparable de homicidios de la ONU, por ejemplo, llega hasta 2023: por eso al lado va la cifra'
+      + ' que publica cada Estado. El control se hace una vez por día y, si SIWA queda atrás, el robot lo avisa.</p>'
+      + '<div class="act-tabla"><table><thead><tr><th>Indicador</th><th>Fuente</th><th>En SIWA</th>'
+      + '<th>En la fuente</th><th>Estado</th></tr></thead><tbody>' + filas + '</tbody></table></div>'
+      + (nac ? '<h3>Lo más reciente que publica cada Estado</h3><div class="act-tabla"><table><thead><tr>'
+             + '<th>País</th><th>Materia</th><th>Organismo</th><th>Período más nuevo</th></tr></thead><tbody>'
+             + nac + '</tbody></table></div>' : '');
+  }
+  fetch(RUTA + 'reloj-actualidad.json', {cache:'no-cache'}).then(r => {
+    const fechaServidor = r.headers.get('Date');
+    if(fechaServidor){
+      const d = new Date(fechaServidor).getTime() - Date.now();
+      if(Math.abs(d) > 60000) { desfaseServidor = d; reloj(); }
+    }
+    return r.ok ? r.json() : null;
+  }).then(c => {
+    if(!c || !c.controlado) return;
+    pintarActualidad(c);
+    const ventana = document.getElementById('ventana-actualidad');
+    document.getElementById('actualidad-boton').addEventListener('click', () => ventana.showModal());
+    document.getElementById('act-cerrar').addEventListener('click', () => ventana.close());
+  }).catch(() => {});
 
   // «no-cache» NO es «no-store»: pide igual, pero PREGUNTANDO si cambió. Sin
   // esto el navegador servía el archivo guardado hasta diez minutos —es lo que
