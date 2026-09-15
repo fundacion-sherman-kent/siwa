@@ -7228,6 +7228,27 @@
       + '</div>';
   }
 
+  // LA CIFRA DEL PROPIO ESTADO, EN EL NIVEL CIUDADANO. La ficha abría con los
+  // homicidios de la serie comparable de la ONU, que llega con tres años de atraso,
+  // cuando el Estado ya publicaba su año pasado: es lo que señalaron dos analistas
+  // el 15/9/2026. Va al lado, con su organismo, y sin puesto: no se compara.
+  function datoDelEstado(iso){
+    const r = ((almacen.estado_reciente || {}).registros || []).find(x => x.iso === iso);
+    const f = r && (r.indicadores || {}).homicidios_estado;
+    if(!f) return null;
+    const org = ((r.fuente_nacional || {}).organismo || '').split('—')[0].trim();
+    const curso = f.en_curso
+      ? '<div class="dc-leer">Y en ' + f.en_curso.anio + ', hasta ' + ['enero','febrero','marzo','abril',
+          'mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][f.en_curso.hasta_mes - 1]
+        + ': <b>' + miles(f.en_curso.valor) + '</b>, cifra provisional.</div>'
+      : '';
+    return '<div class="dc"><div class="dc-cifra">' + miles(f.valor) + '<small>víctimas</small></div>'
+      + '<div class="dc-rotulo">Homicidios según el propio país ' + frescura(f.anio) + '</div>'
+      + curso
+      + '<div class="dc-leer">Fuente: ' + esc(org || 'el propio Estado') + '. Cada país lo cuenta a su '
+      + 'manera: sirve para ver cómo cambia, no para compararlo con otros.</div></div>';
+  }
+
   // OJO CON EL NOMBRE: ya existe fichaCiudadana(), que pinta las tarjetas del
   // perfil. Dos funciones con el mismo nombre no conviven: la ultima gana y la
   // primera desaparece sin avisar. Esta es otra cosa y se llama distinto.
@@ -7266,12 +7287,18 @@
     // 3. Lo que cuentan los registros.
     const cuenta = ['<div class="fc-bloque"><h4>Lo que cuentan los registros</h4>',
       '<div class="dc-fila">',
-      datoCiudadano('homicidios', 'Homicidios al año') || '',
+      datoDelEstado(iso) || '',
+      datoCiudadano('homicidios', 'Homicidios al año, serie comparable de la ONU') || '',
       datoCiudadano('femicidios', 'Femicidios al año') || '',
+      datoCiudadano('inflacion_interanual', 'Cuánto subieron los precios en doce meses',
+        (() => { const f = (((almacen.inflacion || {}).registros || []).find(x => x.iso === iso) || {})
+                   .indicadores; const i = f && f.inflacion_interanual;
+                 return i && i.periodo ? 'Hasta ' + esc(i.periodo) + '.' : ''; })()) || '',
       datoCiudadano('desplazamiento', 'Personas que tuvieron que irse') || '',
       '</div>',
       '<p class="fc-nota">Son recuentos oficiales, con el año en que se midió. '
-      + 'Un año viejo no es un dato de hoy: por eso está escrito.</p></div>'].join('');
+      + 'Un año viejo no es un dato de hoy: por eso está escrito. Cuando el propio país ya '
+      + 'publicó un año más nuevo que la serie comparable, va primero.</p></div>'].join('');
     const hayLoQueCuenta = /class="dc"/.test(cuenta);
 
     return '<div class="ficha-ciudadana">'
