@@ -533,8 +533,6 @@ def recolectar():
     mapa_palabras = _palabras_clave(recientes, gentilicios, bloques, nombres_pais)
     zonas = json.loads(PADRON_FRONTERAS.read_text(encoding="utf-8"))["zonas"]
     fronteras = _fronteras(recientes, zonas, gentilicios)
-    for n in recientes:
-        n.pop("_isos", None)
 
     temas_lexico = json.loads(PADRON_TEMAS.read_text(encoding="utf-8"))["temas"]
     senal = _senal_reciente(recientes, temas_lexico, gentilicios, nombres_pais,
@@ -560,6 +558,11 @@ def recolectar():
                 for n in lista
             ],
         })
+
+    # LA ATRIBUCIÓN SE BORRA RECIÉN ACÁ, después de armar los asuntos. Se borraba antes, y
+    # desde el 8/9/2026 todos los asuntos salían sin país (auditoría del 15/9/2026).
+    for n in recientes:
+        n.pop("_isos", None)
 
     orden = {"corroborado_fuerte": 0, "corroborado": 1, "origen_unico": 2}
     eventos.sort(key=lambda e: (orden[e["corroboracion"]["estado"]],

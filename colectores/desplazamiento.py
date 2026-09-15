@@ -52,6 +52,14 @@ def _codigos_acnur() -> dict:
     }
 
 
+def _entero(v) -> int:
+    """La fuente escribe «-» o «0» como texto cuando no hay dato: se lee como cero."""
+    try:
+        return int(float(v))
+    except (TypeError, ValueError):
+        return 0
+
+
 def _serie(parametro: str, codigo: str, hasta: int) -> dict:
     """Trae la serie anual de un país, como origen o como asilo."""
     url = f"{BASE}?yearFrom={DESDE}&yearTo={hasta}&{parametro}={codigo}&limit=200"
@@ -59,9 +67,14 @@ def _serie(parametro: str, codigo: str, hasta: int) -> dict:
     filas = {}
     for fila in crudo.get("items", []):
         filas[int(fila["year"])] = {
-            "refugiados": int(fila.get("refugees") or 0),
-            "solicitantes_asilo": int(fila.get("asylum_seekers") or 0),
-            "desplazados_internos": int(fila.get("idps") or 0),
+            "refugiados": _entero(fila.get("refugees")),
+            "solicitantes_asilo": _entero(fila.get("asylum_seekers")),
+            "desplazados_internos": _entero(fila.get("idps")),
+            # «OTRAS PERSONAS CON NECESIDAD DE PROTECCIÓN INTERNACIONAL». Sin este campo,
+            # Venezuela figuraba con 1,6 millones de desplazados cuando ACNUR cuenta 6,0
+            # millones más, y Colombia recibía 18.885 en vez de 2,8 millones: son los
+            # venezolanos con permisos de estadía que no pidieron asilo (auditoría 15/9/2026).
+            "otras_proteccion": _entero(fila.get("oip")),
         }
     return filas
 
@@ -96,9 +109,11 @@ def recolectar():
                 {
                     "anio": anio,
                     "origen_refugiados": o.get("refugiados", 0),
-                    "origen_solicitantes": o.get("solicitantes_asilo", 0),
+                    "origen_solicitantes": o.get("solicitantes_asilo", 0) + o.get("otras_proteccion", 0),
+                    "origen_otras_proteccion": o.get("otras_proteccion", 0),
                     "asilo_refugiados": a.get("refugiados", 0),
-                    "asilo_solicitantes": a.get("solicitantes_asilo", 0),
+                    "asilo_solicitantes": a.get("solicitantes_asilo", 0) + a.get("otras_proteccion", 0),
+                    "asilo_otras_proteccion": a.get("otras_proteccion", 0),
                     "desplazados_internos": a.get("desplazados_internos", 0),
                 }
             )
@@ -152,6 +167,10 @@ def recolectar():
         "La migración irregular no registrada no aparece, y en varios corredores de "
         "la región es la mayoría del flujo.",
         "Sin desglose subnacional: la cifra es nacional y el mapa la muestra como tal.",
+        "LA CIFRA SUMA REFUGIADOS, SOLICITANTES DE ASILO Y «OTRAS PERSONAS CON NECESIDAD DE "
+        "PROTECCIÓN INTERNACIONAL», la categoría con que ACNUR cuenta a quienes salieron por "
+        "la misma crisis y viven en otro país con otro permiso, sin haber pedido asilo. En "
+        "Venezuela es la mayor parte: dejarla afuera escondía seis millones de personas.",
         "«Expulsión» y «recepción» son dos fenómenos distintos y no se suman: un "
         "mismo Estado puede ser alto en ambos.",
         "Los desplazados internos se consignan en el país que los aloja, que es "

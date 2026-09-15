@@ -125,8 +125,8 @@ python colectores/focos.py
 | `crimen_organizado` | Índice Global de Crimen Organizado — Global Initiative Against Transnational Organized Crime | `B-3` | 33 | 7 |
 | `desastres` | IFRC GO — Federación Internacional de Sociedades de la Cruz Roja y de la Media Luna Roja, registro de emergencias | `A-2` | 33 | 8 |
 | `designados` | Consejo de Seguridad de las Naciones Unidas — lista consolidada de sanciones | `A-2` | 33 | 6 |
-| `desplazamiento-serie` | ACNUR — Refugee Data Finder | `A-2` | 33 | 7 |
-| `desplazamiento` | ACNUR — Refugee Data Finder | `A-2` | 33 | 7 |
+| `desplazamiento-serie` | ACNUR — Refugee Data Finder | `A-2` | 33 | 8 |
+| `desplazamiento` | ACNUR — Refugee Data Finder | `A-2` | 33 | 8 |
 | `drogas` | Informe Mundial sobre las Drogas 2025, anexo estadístico — Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC) | `B-2` | 33 | 4 |
 | `eia` | Administración de Información Energética de los Estados Unidos (EIA) — estadística energética internacional | `A-2` | 33 | 3 |
 | `estado_reciente` | Estadística oficial de homicidios de cada Estado — Argentina (SNIC), Colombia (Ministerio de Defensa) y Trinidad y Tobago (Servicio de Policía) | `A-2` | 33 | 4 |
