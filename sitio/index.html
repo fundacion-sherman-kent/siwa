@@ -138,6 +138,16 @@
      función que los dibuja: el eje se ve firme, la guía se ve, y las marcas y
      rótulos se leen. Los textos de color —verde, naranja— no se tocan. */
   svg line[stroke-opacity=".35"]{stroke-opacity:.8;stroke-width:1.2}
+  /* LO QUE SE DIBUJABA EN BLANCO. Varios gráficos nacieron para el fondo oscuro y
+     trazan ejes, líneas de fondo y puntos en blanco semitransparente: sobre el fondo
+     claro no se ven (la dirección seguía sin ver los ejes, 15/9/2026). Con el color
+     del texto quedan visibles en los dos temas. */
+  svg line[stroke^="rgba(255,255,255"]{stroke:currentColor;stroke-opacity:.7;stroke-width:1.2}
+  svg path[stroke^="rgba(255,255,255"]{stroke:currentColor;stroke-opacity:.28}
+  svg circle[fill^="rgba(255,255,255"]{fill:currentColor;fill-opacity:.38}
+  svg rect[fill^="rgba(255,255,255"]{fill:currentColor;fill-opacity:.08}
+  .grafico .ejeg{stroke-opacity:.8 !important;stroke-width:1.2 !important}
+  svg text[fill="#C7D2E0"],svg text[fill="#fff"]{fill:var(--texto-alto)}
   svg line[stroke-opacity=".08"]{stroke-opacity:.18}
   svg line[stroke="#7d90a8"]{stroke:var(--texto-2)}
   svg text[fill="#7d90a8"]{fill:var(--texto-2)}
@@ -6773,17 +6783,14 @@
     const angosto = ancho < 420;
     // El margen derecho aloja el rótulo de cada línea. Si no se reserva, el
     // nombre se corta y la figura queda mintiendo sobre dónde termina la serie.
-    const mIzq = angosto ? 34 : 44, mDer = angosto ? 62 : 92, mArr = 14, mAba = 26;
-    const alto = angosto ? 170 : 190;
+    const mIzq = angosto ? 38 : 48, mDer = angosto ? 62 : 92, mArr = 20, mAba = 34;
+    const alto = angosto ? 190 : 210;
     const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
     const x = a => mIzq + ((+a - a0) / span) * util;
     const y = v => mArr + (1 - (v - min) / rango) * utilY;
 
-    const rejilla = [min, min + rango / 2, max].map(v =>
-      '<line x1="' + mIzq + '" y1="' + y(v).toFixed(1) + '" x2="' + (ancho - mDer)
-      + '" y2="' + y(v).toFixed(1) + '" stroke="rgba(255,255,255,.07)" stroke-width="1"></line>'
-      + '<text x="' + (mIzq - 5) + '" y="' + (y(v) + 3).toFixed(1) + '" text-anchor="end" '
-      + 'fill="#7d90a8" font-size="9">' + cifra(v) + '</text>').join('');
+    const rejilla = ejesDeSerie({ancho, alto, mIzq, mDer, mArr, mAba, a0, aFin: a1, min, max,
+                                 x, y, unidad: cap.unidad});
 
     // Los rótulos se separan si dos series terminan pegadas: superpuestos no se
     // leen ni uno ni otro.
@@ -6826,9 +6833,6 @@
       + esc(rotuloDeMateria(clave)) + ' entre ' + datos.length + ' Estados, de ' + a0
       + ' a ' + a1 + '">'
       + rejilla + lineas
-      + '<text x="' + mIzq + '" y="' + (alto - 8) + '" fill="#7d90a8" font-size="9">' + a0 + '</text>'
-      + '<text x="' + (ancho - mDer) + '" y="' + (alto - 8) + '" text-anchor="end" '
-      + 'fill="#7d90a8" font-size="9">' + a1 + '</text>'
       + '</svg>' + pie + '</div>';
   }
 
@@ -6855,7 +6859,7 @@
     const angosto = ancho < 420;
     const altoFila = angosto ? 40 : 34;
     const margenIzq = angosto ? 96 : 132;
-    const margenDer = angosto ? 58 : 76;
+    const margenDer = angosto ? 70 : 110;
     const util = ancho - margenIzq - margenDer;
     const alto = datos.length * altoFila + (angosto ? 22 : 16);
 
@@ -12080,7 +12084,7 @@
     if(pares.length < 8) return '';
 
     const alto = Math.round(ancho * 0.62);
-    const mIzq = 48, mDer = 14, mArr = 14, mAba = 42;
+    const mIzq = 48, mDer = 14, mArr = 24, mAba = 42;
     const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
     const xs = pares.map(d => d.x), ys = pares.map(d => d.y);
     const x0 = Math.min(...xs), x1 = Math.max(...xs);
@@ -12121,7 +12125,9 @@
       + '<text x="' + (mIzq-6) + '" y="' + (mArr+9) + '" text-anchor="end" fill="#7d90a8" font-size="10">' + cifra(y1) + '</text>'
       + '<text x="' + (mIzq-6) + '" y="' + (alto-mAba) + '" text-anchor="end" fill="#7d90a8" font-size="10">' + cifra(y0) + '</text>'
       + '<text x="' + (mIzq + util/2) + '" y="' + (alto-6) + '" text-anchor="middle" fill="var(--texto-2)" font-size="10.5">'
-      + esc(rotuloDeMateria(claveX)) + ' →</text>';
+      + esc(rotuloDeMateria(claveX)) + ' →</text>'
+      + '<text x="' + (mIzq + 4) + '" y="' + (mArr - 6) + '" fill="var(--texto-2)" font-size="10.5">↑ '
+      + esc(rotuloDeMateria(claveY)) + '</text>';
 
     return '<div class="figura-cruce"><div class="fc-tit"><b>' + esc(rotuloDeMateria(claveY))
       + '</b> frente a <b>' + esc(rotuloDeMateria(claveX)) + '</b>, un punto por Estado ('
@@ -12166,7 +12172,7 @@
     });
 
     const alto = Math.max(260, Math.min(560, completos.length * 15));
-    const mIzq = 34, mDer = 96, mArr = 18, mAba = 26;
+    const mIzq = 40, mDer = 96, mArr = 22, mAba = 34;
     const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
     const px = a => mIzq + ((a - anios[0]) / ((anios[anios.length-1] - anios[0]) || 1)) * util;
     const py = k => mArr + ((k - 1) / ((completos.length - 1) || 1)) * utilY;
@@ -12184,8 +12190,15 @@
              + (suyo ? 'var(--orange)' : 'var(--texto-2)') + '" font-weight="' + (suyo?'700':'400') + '">'
              + esc(nombre(iso).slice(0,16)) + '</text>' : '');
     }).join('');
-    const rotAnios = anios.map(a => '<text x="' + px(a).toFixed(1) + '" y="' + (alto-8)
-      + '" text-anchor="middle" fill="#7d90a8" font-size="10">' + a + '</text>').join('');
+    const rotAnios = anios.map(a => '<text x="' + px(a).toFixed(1) + '" y="' + (alto-mAba+14)
+      + '" text-anchor="middle" fill="#7d90a8" font-size="10">' + a + '</text>').join('')
+      + '<line x1="' + mIzq + '" y1="' + mArr + '" x2="' + mIzq + '" y2="' + (alto-mAba)
+      + '" stroke="currentColor" stroke-opacity=".35"></line>'
+      + '<line x1="' + mIzq + '" y1="' + (alto-mAba) + '" x2="' + (ancho-mDer) + '" y2="' + (alto-mAba)
+      + '" stroke="currentColor" stroke-opacity=".35"></line>'
+      + '<text x="2" y="12" fill="#7d90a8" font-size="9.5" font-weight="600">puesto en la región</text>'
+      + '<text x="' + (mIzq + util/2).toFixed(1) + '" y="' + (alto-2) + '" text-anchor="middle" '
+      + 'fill="#7d90a8" font-size="9.5" font-weight="600">año</text>';
 
     return '<div class="figura-puestos"><div class="fc-tit"><b>Cómo se movió el puesto</b> de '
       + completos.length + ' Estados en ' + esc(rotuloDeMateria(clave)) + ', de ' + anios[0]
