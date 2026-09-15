@@ -52,20 +52,20 @@ ORIGEN = ("Organización Internacional del Trabajo — ILOSTAT, armonización de
 MEDIDAS = [
     {"clave": "empleo_informal_oit", "codigo": "SDG_0831_SEX_ECO_RT_A",
      "sexo": "SEX_T", "clasif": "ECO_SECTOR_TOTAL",
-     "rotulo": "Empleo informal · segunda fuente", "eje": "Desarrollo",
+     "rotulo": "Empleo informal según la OIT", "eje": "Desarrollo",
      "unidad": "% del empleo total", "mas_es_peor": True,
-     "cautela": "ES UNA SEGUNDA MEDICIÓN de algo que el registro ya publica con el Banco "
-                "Mundial, y por eso está: dos fuentes que miden lo mismo permiten ver si "
-                "coinciden. Si difieren, ninguna está mal: armonizan las encuestas de "
-                "hogares con reglas distintas, y esa diferencia es un dato sobre cómo se "
-                "mide. Es el total de ambos sexos y de todos los sectores."},
+     "cautela": "Lo armoniza la OIT sobre las encuestas de hogares de cada Estado. El Banco "
+                "Mundial republica series de la misma OIT, así que las dos tarjetas no son dos "
+                "fuentes independientes: si difieren, es por la edición o el ajuste. Es el total "
+                "de ambos sexos y de todos los sectores."},
     {"clave": "desempleo_joven_oit", "codigo": "UNE_2EAP_SEX_AGE_RT_A",
      "sexo": "SEX_T", "clasif": "AGE_YTHADULT_Y15-24",
-     "rotulo": "Desempleo juvenil · segunda fuente", "eje": "Desarrollo",
+     "rotulo": "Desempleo juvenil · estimación modelada de la OIT", "eje": "Desarrollo",
      "unidad": "% de los jóvenes de 15 a 24 activos", "mas_es_peor": True,
-     "cautela": "Segunda medición del desempleo entre 15 y 24 años, que el registro ya "
-                "publica con el Banco Mundial. Cuenta a quien BUSCA trabajo y no encuentra: "
-                "quien dejó de buscar no figura, y en la región eso es mucha gente."},
+     "cautela": "ESTIMACIÓN MODELADA, no medición: la OIT la calcula con un modelo cuando el país "
+                "no tiene encuesta reciente (Haití no la tiene desde 2012). Es la MISMA estimación "
+                "que republica el Banco Mundial, así que no es una segunda fuente. Cuenta a quien "
+                "BUSCA trabajo y no encuentra: quien dejó de buscar no figura."},
     {"clave": "desempleo_oit", "codigo": "UNE_DEAP_SEX_AGE_RT_A",
      "sexo": "SEX_T", "clasif": "AGE_YTHADULT_YGE15",
      "rotulo": "Desempleo", "eje": "Desarrollo",
@@ -200,11 +200,11 @@ def construir() -> Path:
         fuente=ORIGEN,
         url_fuente="https://ilostat.ilo.org/",
         calificacion=comun.calificar(
-            "B", 2, True,
+            "B", 2, False,
             "Organismo multilateral que armoniza las encuestas de hogares de cada Estado "
             "con metodología propia y publicada. No es el productor original —lo es cada "
-            "instituto de estadística— y por eso no sube de B. Entra CORROBORANDO: dos de "
-            "sus tres medidas ya las publica otra fuente en este registro."),
+            "instituto de estadística— y por eso no sube de B. NO corrobora: el desempleo juvenil "
+            "es la estimación modelada de la OIT que también republica el Banco Mundial."),
         registros=registros,
         vacios=vacios,
         extra={

@@ -87,7 +87,7 @@ INDICADORES = [
      "cautela": "ATENCIÓN A LA ESCALA: en este indicador un valor ALTO significa MENOS "
                 "conflicto. Mide cuánto pesan las divisiones etnicas, religiosas o "
                 "sociales en la vida política."},
-    {"clave": "administracion_basica", "rotulo_origen": "Q1.4 | Basic administratión",
+    {"clave": "administracion_basica", "rotulo_origen": "Q1.4 | Basic administration",
      "rotulo": "Administración básica del Estado", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Si existe una estructura administrativa que funcione en todo el "
@@ -107,7 +107,7 @@ INDICADORES = [
      "cautela": "Si los funcionarios que abusan de su cargo son efectivamente procesados. "
                 "Mide impunidad, que es distinto de percepción de corrupción: un país "
                 "puede tener mala fama y buena persecución, o al revés."},
-    {"clave": "politica_anticorrupcion", "rotulo_origen": "Q15.3 | Anti-corruptión policy",
+    {"clave": "politica_anticorrupcion", "rotulo_origen": "Q15.3 | Anti-corruption policy",
      "rotulo": "Política anticorrupción", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Si existen y funcionan los mecanismos de integridad: declaraciones "

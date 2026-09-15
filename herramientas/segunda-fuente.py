@@ -222,13 +222,38 @@ def conjuntos() -> list:
     return salida
 
 
+# EL MISMO ORGANISMO CON DISTINTOS NOMBRES ES UN SOLO PRODUCTOR. Sin esta tabla, la OIT
+# contaba dos veces («OIT» y «Organización Internacional del Trabajo») y el Banco Mundial
+# tres («Banco Mundial», «Worldwide Governance Indicators», «Encuestas de empresas del
+# Banco Mundial»): la regla daba por corroborado lo que venía de uno solo (auditoría de
+# controles, 15/9/2026). Se busca por fragmento, en este orden.
+CANONICOS = [
+    ("organización internacional del trabajo", "oit"), ("ilostat", "oit"),
+    ("worldwide governance indicators", "banco mundial"), ("banco mundial", "banco mundial"),
+    ("fondo monetario internacional", "fmi"), ("fmi y banco mundial", "fmi"),
+    ("comtrade", "naciones unidas comtrade"),
+    ("oficina de las naciones unidas contra la droga", "unodc"), ("informe mundial sobre las drogas", "unodc"),
+    ("observatorio mundial de la salud", "oms"),
+    ("cepalstat", "cepal"),
+    ("instituto de estadística de la unesco", "unesco"),
+    ("energy institute", "energy institute"),
+    ("fao aquastat", "fao"),
+    ("bertelsmann", "bti"),
+    ("cálculo de la oficina sobre", "banco mundial"),
+]
+
+
 def productor(fuente: str) -> str:
-    """El nombre corto del productor, para no contar dos veces al mismo.
+    """El nombre corto y canónico del productor, para no contar dos veces al mismo.
 
     Se corta en el primer guion largo porque las procedencias se escriben
     «Organismo — qué publica», y lo que identifica al productor es la cabeza.
     """
-    return fuente.split("—")[0].split(",")[0].strip().lower()
+    corto = fuente.split("—")[0].split(",")[0].strip().lower()
+    for fragmento, canonico in CANONICOS:
+        if fragmento in corto:
+            return canonico
+    return corto
 
 
 def main() -> None:
@@ -276,6 +301,18 @@ def main() -> None:
                        "porque": "este control no puede vigilar lo que no está clasificado, "
                                  "y un control con agujeros invisibles no es un control"})
 
+    # EL RETROCESO DE DOS FUENTES A UNA SE AVISA. Era la primera promesa de este
+    # control y no estaba en el código: se compara con la medición anterior.
+    retrocesos = []
+    try:
+        previo = json.loads(SALIDA.read_text(encoding="utf-8"))
+        antes = {x["asunto"]: x.get("cuantos", 0) for x in previo.get("asuntos", [])}
+        for x in asuntos:
+            if antes.get(x["asunto"], 0) >= 2 and x["cuantos"] < 2 and x["asunto"] not in SIN_SEGUNDA:
+                retrocesos.append({"asunto": x["asunto"], "antes": antes[x["asunto"]], "ahora": x["cuantos"]})
+    except Exception:  # noqa: BLE001 — sin medición anterior no hay con qué comparar
+        pass
+
     corroborados = [a for a in asuntos if a["corroborado"]]
     salida = {
         "que_es": "La regla de las dos fuentes, medida. Cuenta PRODUCTORES INDEPENDIENTES "
@@ -290,6 +327,7 @@ def main() -> None:
         "agenda_de_busqueda": sorted(agenda, key=lambda a: -a["materias"]),
         "asuntos": asuntos,
         "fallas": fallas,
+        "retrocesos": retrocesos,
         "lo_que_no_dice": "Si las dos fuentes son buenas. Dice que son dos y que son "
                           "distintas; la calidad de cada una la declara su propia ficha.",
     }
@@ -303,7 +341,9 @@ def main() -> None:
               f"{', '.join(a['productores'])[:60]}")
     for f in fallas[:10]:
         print(f"  FALLA · {f['que']} · {f['quien']}")
-    if fallas:
+    for r in retrocesos:
+        print(f"  RETROCESO · {r['asunto']}: tenía {r['antes']} productores y ahora {r['ahora']}")
+    if fallas or retrocesos:
         sys.exit(1)
 
 

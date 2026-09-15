@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-15T20:46:39+00:00",
-  "medidas_con_suficientes_casos": 195,
-  "pares_probados": 18915,
+  "corrida": "2026-09-15T21:36:34+00:00",
+  "medidas_con_suficientes_casos": 199,
+  "pares_probados": 19701,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 18.915 pares y el umbral de siempre, alrededor de 945 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3574,
-    "de_ellos_son_parentescos": 395
+    "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3758,
+    "de_ellos_son_parentescos": 407
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,14 +17,14 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3179,
-  "anomalias_totales": 355,
+  "pistas_totales": 3351,
+  "anomalias_totales": 356,
   "pistas": [
     {
       "a": "empleo_informal",
       "b": "empleo_informal_oit",
       "rotulo_a": "Empleo informal",
-      "rotulo_b": "Empleo informal · segunda fuente",
+      "rotulo_b": "Empleo informal según la OIT",
       "coeficiente": 0.995,
       "estados": 27,
       "tipo": "rangos (Spearman)",
@@ -94,6 +94,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 8.199112071120751e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "inflacion_fmi",
+      "b": "inflacion_interanual",
+      "rotulo_a": "Inflación de doce meses, según el FMI",
+      "rotulo_b": "Inflación de los últimos doce meses",
+      "coeficiente": 0.963,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 9.68055127903216e-26,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -172,6 +185,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 4.455905047556957e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "administracion_basica",
+      "b": "voz_rendicion",
+      "rotulo_a": "Administración básica del Estado",
+      "rotulo_b": "Voz y rendición de cuentas",
+      "coeficiente": 0.936,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 1.0176881835958402e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -268,6 +294,19 @@
       "misma_categoria": false
     },
     {
+      "a": "generacion_electrica",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Generación eléctrica",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.915,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 6.004521120331854e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "articulos_cientificos",
       "b": "generacion_electrica",
       "rotulo_a": "Artículos científicos y técnicos publicados",
@@ -315,6 +354,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 9.526938200526444e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "administracion_basica",
+      "b": "estado_derecho",
+      "rotulo_a": "Administración básica del Estado",
+      "rotulo_b": "Estado de derecho",
+      "coeficiente": 0.905,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 6.517598865116535e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -476,6 +528,19 @@
       "misma_categoria": false
     },
     {
+      "a": "administracion_basica",
+      "b": "democracia_electoral",
+      "rotulo_a": "Administración básica del Estado",
+      "rotulo_b": "Nivel democrático — democracia electoral",
+      "coeficiente": 0.889,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 6.4095052761961e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "democracia_participativa",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -515,6 +580,19 @@
       "misma_categoria": false
     },
     {
+      "a": "poblacion",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Población total",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.885,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 3.5654804054503037e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:anomalias",
       "b": "poblacion",
       "rotulo_a": "ciber · anomalias",
@@ -523,6 +601,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 2.4728144789816483e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ransomware:grupos_distintos",
+      "b": "reservas_internacionales",
+      "rotulo_a": "ransomware · grupos_distintos",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.884,
+      "estados": 28,
+      "tipo": "rangos (Spearman)",
+      "p": 3.4318518890424855e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -593,6 +684,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:mediciones",
+      "b": "reservas_internacionales",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.88,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 9.213193151649643e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "copernicus:escenas",
       "b": "generacion_electrica",
       "rotulo_a": "copernicus · escenas",
@@ -645,6 +749,45 @@
       "misma_categoria": false
     },
     {
+      "a": "administracion_basica",
+      "b": "pobreza:extrema",
+      "rotulo_a": "Administración básica del Estado",
+      "rotulo_b": "pobreza · extrema",
+      "coeficiente": -0.878,
+      "estados": 21,
+      "tipo": "rangos (Spearman)",
+      "p": 6.862241346391372e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "administracion_basica",
+      "b": "pobreza_extrema",
+      "rotulo_a": "Administración básica del Estado",
+      "rotulo_b": "Pobreza extrema",
+      "coeficiente": -0.878,
+      "estados": 21,
+      "tipo": "rangos (Spearman)",
+      "p": 6.862241346391372e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "administracion_basica",
+      "b": "empleo_informal_oit",
+      "rotulo_a": "Administración básica del Estado",
+      "rotulo_b": "Empleo informal según la OIT",
+      "coeficiente": -0.878,
+      "estados": 20,
+      "tipo": "rangos (Spearman)",
+      "p": 1.6734776707835433e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estabilidad",
       "b": "riesgo_inform",
       "rotulo_a": "Estabilidad política y ausencia de violencia",
@@ -653,149 +796,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 9.182368555613423e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "electricidad_por_habitante",
-      "b": "uso_energia",
-      "rotulo_a": "Electricidad generada por habitante",
-      "rotulo_b": "Uso de energía por habitante",
-      "coeficiente": 0.877,
-      "estados": 23,
-      "tipo": "rangos (Spearman)",
-      "p": 1.0412057403663234e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "actores_antidemocraticos",
-      "b": "libertad_prensa",
-      "rotulo_a": "Control sobre actores antidemocraticos",
-      "rotulo_b": "Libertad de prensa — clasificación mundial",
-      "coeficiente": 0.876,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 3.2407925705609633e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "actores_antidemocraticos",
-      "b": "prensa_libre:puesto_mundial",
-      "rotulo_a": "Control sobre actores antidemocraticos",
-      "rotulo_b": "prensa_libre · puesto_mundial",
-      "coeficiente": -0.876,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 3.2407925705609633e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "actores_antidemocraticos",
-      "b": "prensa_libre:puntaje",
-      "rotulo_a": "Control sobre actores antidemocraticos",
-      "rotulo_b": "prensa_libre · puntaje",
-      "coeficiente": 0.876,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 3.2407925705609633e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "desempleo_joven",
-      "b": "desempleo_oit",
-      "rotulo_a": "Desempleo juvenil",
-      "rotulo_b": "Desempleo",
-      "coeficiente": 0.875,
-      "estados": 29,
-      "tipo": "rangos (Spearman)",
-      "p": 5.1448173908581525e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "indice_gobernanza",
-      "b": "libertad_prensa",
-      "rotulo_a": "Índice de gobernanza",
-      "rotulo_b": "Libertad de prensa — clasificación mundial",
-      "coeficiente": 0.875,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 3.735398212840562e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "indice_gobernanza",
-      "b": "prensa_libre:puesto_mundial",
-      "rotulo_a": "Índice de gobernanza",
-      "rotulo_b": "prensa_libre · puesto_mundial",
-      "coeficiente": -0.875,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 3.735398212840562e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "indice_gobernanza",
-      "b": "prensa_libre:puntaje",
-      "rotulo_a": "Índice de gobernanza",
-      "rotulo_b": "prensa_libre · puntaje",
-      "coeficiente": 0.875,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 3.735398212840562e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "generacion_electrica",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Generación eléctrica",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.873,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.162387508624727e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "generacion_electrica",
-      "b": "superficie",
-      "rotulo_a": "Generación eléctrica",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.872,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.005215863830575e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "estado_derecho",
-      "b": "uso_claude",
-      "rotulo_a": "Estado de derecho",
-      "rotulo_b": "Intensidad de uso de Claude por habitante",
-      "coeficiente": 0.872,
-      "estados": 19,
-      "tipo": "rangos (Spearman)",
-      "p": 8.211255245104505e-08,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -1067,20 +1067,6 @@
       "cambio_en_unidades": 0.068,
       "puntos_previos": 24,
       "de": "infraestructura"
-    },
-    {
-      "iso": "HTI",
-      "pais": "Haití",
-      "clave": "suicidio",
-      "rotulo": "Suicidio",
-      "anio": 2021,
-      "valor": 16.705,
-      "mediana_previa": 8.037,
-      "desvios": 38.46,
-      "cambio_pct": 107.9,
-      "cambio_en_unidades": 8.668,
-      "puntos_previos": 21,
-      "de": "oms"
     },
     {
       "iso": "SUR",
@@ -1361,6 +1347,20 @@
       "cambio_en_unidades": 202.997,
       "puntos_previos": 12,
       "de": "owd"
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "clave": "renta_minerales",
+      "rotulo": "Renta de los minerales",
+      "anio": 2021,
+      "valor": 1.365,
+      "mediana_previa": 0.464,
+      "desvios": 15.03,
+      "cambio_pct": 194.0,
+      "cambio_en_unidades": 0.901,
+      "puntos_previos": 5,
+      "de": "banco-mundial"
     }
   ],
   "lo_que_no_dice": "Que una cosa cause la otra. Dos medidas pueden acompañarse por un tercer factor, por la forma en que se recolectan o por azar que esta corrección reduce pero no elimina."
