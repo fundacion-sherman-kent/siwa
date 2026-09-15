@@ -99,11 +99,23 @@ def series(filas: list, m: dict, del_padron: set) -> dict:
             continue
         if m["sexo"] and x.get("Dim1") != m["sexo"]:
             continue
+        # TODAS LAS EDADES. La serie de suicidio viene también por tramo de edad, y sin
+        # este filtro el último renglón leído pisaba al total: Argentina publicaba la
+        # tasa de 60 a 69 años (8,53) en vez de la de todas las edades (7,94)
+        # (auditoría del 15/9/2026). Cualquier dimensión de edad tiene que ser el total.
+        if any(x.get(f"Dim{k}Type") == "AGEGROUP" and x.get(f"Dim{k}") != "AGEGROUP_YEARSALL"
+               for k in (1, 2, 3)):
+            continue
         iso, anio, valor = x.get("SpatialDim"), x.get("TimeDim"), x.get("NumericValue")
         if iso not in del_padron or valor is None:
             continue
         try:
-            crudo.setdefault(iso, {})[int(anio)] = round(float(valor), 3)
+            anio = int(anio)
+            if anio in crudo.get(iso, {}):
+                raise RuntimeError(
+                    f"La OMS trajo dos valores para {iso} en {anio} con los filtros aplicados: "
+                    "hay una dimensión sin filtrar y se publicaría uno al azar. No se publica.")
+            crudo.setdefault(iso, {})[anio] = round(float(valor), 3)
         except (TypeError, ValueError):
             continue
     return {i: sorted(v.items()) for i, v in crudo.items()}
