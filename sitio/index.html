@@ -131,6 +131,18 @@
   *{box-sizing:border-box;}
   body{margin:0;font-family:'Inter',sans-serif;background:var(--navy-deep);color:var(--paper);}
   .mono{font-family:'JetBrains Mono',monospace;}
+  /* LOS EJES DE LOS GRÁFICOS TIENEN QUE VERSE. Se dibujaban con la línea al 35 %
+     y los números en 9 px gris azulado: sobre el fondo oscuro, y en teléfono, el
+     lector no encontraba ni el eje ni la escala (señalado por la dirección el
+     15/9/2026). Se corrige acá, para todos los gráficos a la vez, sin tocar cada
+     función que los dibuja: el eje se ve firme, la guía se ve, y las marcas y
+     rótulos se leen. Los textos de color —verde, naranja— no se tocan. */
+  svg line[stroke-opacity=".35"]{stroke-opacity:.8;stroke-width:1.2}
+  svg line[stroke-opacity=".08"]{stroke-opacity:.18}
+  svg line[stroke="#7d90a8"]{stroke:var(--texto-2)}
+  svg text[fill="#7d90a8"]{fill:var(--texto-2)}
+  svg text[font-size="9"],svg text[font-size="9.5"]{font-size:10.5px}
+  svg text[font-weight="600"][fill="#7d90a8"]{fill:var(--texto-alto)}
 
   /* Banda de marca sobre fondo cálido, con filete naranja. El logotipo va tal
      cual lo entrega el manual: sin recolorear y sin efectos. */
