@@ -140,7 +140,7 @@ python colectores/focos.py
 | `inform` | INFORM Risk — Centro Común de Investigación de la Comisión Europea y OCHA | `A-3` | 33 | 4 |
 | `infraestructura` | Mapa de cables submarinos — TeleGeography, interfaz pública; OurAirports — censo abierto y colaborativo de aeródromos del mundo; Energy Institute y Ember, via Our World in Data; GCAT — catálogo general de objetos espaciales de Jonathan McDowell, CC BY 4.0 | `B-3` | 33 | 10 |
 | `memoria` | Fundación Sherman Kent — bitácora de observación de SIWA | `A-2` | 33 | 5 |
-| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 11 |
+| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 10 |
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 5 |
 | `oms_homicidios` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `A-2` | 33 | 6 |
@@ -154,7 +154,7 @@ python colectores/focos.py
 | `radar` | Cloudflare Radar — mediciones sobre tráfico real de internet | `B-2` | 33 | 4 |
 | `ransomware` | ransomware.live — recopilación de sitios de extorsión informática | `D-4` | 31 | 6 |
 | `reciente_oficial` | Catalogos oficiales de los Estados — lo mas reciente publicado | `A-2` | 33 | 5 |
-| `recursos` | Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas; Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data | `A-2` | 33 | 10 |
+| `recursos` | Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas; Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data | `A-2` | 33 | 9 |
 | `redes` | Mastodon — instancias mastodon.social, mstdn.social, masto.ai, mas.to | `F-4` | 33 | 7 |
 | `regimen_politico` | V-Dem, Universidad de Gotemburgo — «Regímenes del Mundo», vía Our World in Data | `B-2` | 33 | 5 |
 | `sanciones` | OpenSanctions — registros de sanciones y personas expuestas | `B-2` | 33 | 5 |
