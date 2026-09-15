@@ -4846,6 +4846,31 @@
   const sinTilde = t => String(t||'').toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 
+  // LA BÚSQUEDA SE PARTE EN PALABRAS Y RECONOCE EL PAÍS. Se buscaba la frase entera
+  // como un solo trozo: «homicidios argentina» o «pobreza bolivia» no encontraban
+  // nada y el sitio decía que el registro no lo medía, cuando los dos datos están
+  // publicados (auditoría del sitio, 15/9/2026). Ahora el nombre de un Estado se
+  // separa y el resto se busca como tema: todas las palabras tienen que estar.
+  const PALABRAS_VACIAS = new Set(['de','del','la','el','los','las','en','y','e','o','por',
+    'con','para','un','una','que','al','a','sobre','entre']);
+  function palabrasDeBusqueda(q){
+    let resto = ' ' + sinTilde(q).replace(/[^a-z0-9ñ ]+/g, ' ') + ' ';
+    const paises = [];
+    (padron || []).slice().sort((a, b) => b.pais.length - a.pais.length).forEach(pp => {
+      const n = ' ' + sinTilde(pp.pais) + ' ';
+      if(resto.includes(n)){ paises.push(pp.iso); resto = resto.replace(n, ' '); }
+    });
+    const palabras = resto.split(/\s+/).filter(w => w.length > 1 && !PALABRAS_VACIAS.has(w));
+    return {paises, palabras};
+  }
+  function coincideBusqueda(texto, q){
+    const {palabras} = palabrasDeBusqueda(q);
+    if(!palabras.length) return false;
+    const tt = sinTilde(texto);
+    return palabras.every(w => tt.includes(w)
+      || (w.length > 4 && tt.includes(w.replace(/(es|s)$/, ''))));
+  }
+
   // Las materias del indice de crimen organizado se arman DEL CATALOGO que
   // publica la fuente: si el indice agrega un mercado, aparece solo.
   function MATERIAS_CRIMEN(){
@@ -5138,8 +5163,8 @@
 
   const materiasDelEje = eje => MATERIAS()
     .filter(m => m.eje === eje && (!m.disponible || m.disponible()))
-    .filter(m => !navBusca || sinTilde(m.eje + ' ' + m.rotulo + ' '
-        + (m.busca || PALABRAS[m.clave] || '')).includes(navBusca));
+    .filter(m => !navBusca || coincideBusqueda(m.eje + ' ' + m.rotulo + ' '
+        + (m.busca || PALABRAS[m.clave] || ''), navBusca));
 
   // ---- Nivel 1: los ejes de un Estado --------------------------------------
   function panelEjes(iso){
@@ -5561,16 +5586,15 @@
   function sinResultados(){
     const vive = m => !m.disponible || m.disponible();
     const todas = MATERIAS().filter(vive);
-    const hallan = todas.filter(m => sinTilde(m.eje + ' ' + m.rotulo + ' '
-        + (m.busca || PALABRAS[m.clave] || '')).includes(navBusca));
+    const hallan = todas.filter(m => coincideBusqueda(m.eje + ' ' + m.rotulo + ' '
+        + (m.busca || PALABRAS[m.clave] || ''), navBusca));
     const q = esc((document.getElementById('buscar-navegador') || {}).value || navBusca);
 
     if(!hallan.length)
       return '<div class="asunto"><h4>Nada con «' + q + '»</h4><div class="foot">'
         + '<span class="porque">Ninguno de los <b>' + todas.length + '</b> temas del '
-        + 'registro responde a esa palabra. <b>Que no figure acá no significa que no '
-        + 'exista</b>: significa que este registro todavía no lo mide, y eso se declara '
-        + 'en vez de disimularse.<br>Probá con el hecho antes que con el nombre: '
+        + 'registro responde a esas palabras. <b>Puede que el registro lo mida con otro '
+        + 'nombre</b>, o que todavía no lo mida.<br>Probá con el hecho antes que con el nombre: '
         + '«homicidio» además de «sicariato», «cocaína» además de «narco», «corrupción» '
         + 'además de «coima».</span><span class="badge unica">sin resultados</span>'
         + '</div></div>';
@@ -5599,8 +5623,8 @@
   // estaba cerrada y la búsqueda devolvía silencio.
   function resultadosDeLaRegion(){
     const vive = m => !m.disponible || m.disponible();
-    const hallan = MATERIAS().filter(vive).filter(m => sinTilde(m.eje + ' ' + m.rotulo
-        + ' ' + (m.busca || PALABRAS[m.clave] || '')).includes(navBusca));
+    const hallan = MATERIAS().filter(vive).filter(m => coincideBusqueda(m.eje + ' ' + m.rotulo
+        + ' ' + (m.busca || PALABRAS[m.clave] || ''), navBusca));
     if(!hallan.length) return sinResultados();
     const q = esc((document.getElementById('buscar-navegador') || {}).value || navBusca);
     let h = '<div class="asunto"><h4>' + hallan.length + (hallan.length === 1
@@ -11550,9 +11574,10 @@
 
     const tareas = TAREAS.filter(x => sinTilde(x.t + ' ' + x.busca).includes(q));
     const vive = m => !m.disponible || m.disponible();
-    const temas = MATERIAS().filter(vive).filter(m => sinTilde(m.eje + ' ' + m.rotulo + ' '
-        + (m.busca || PALABRAS[m.clave] || '')).includes(q)).slice(0, 24);
-    const paises = padron.filter(p => sinTilde(p.pais).includes(q)).slice(0, 6);
+    const temas = MATERIAS().filter(vive).filter(m => coincideBusqueda(m.eje + ' ' + m.rotulo + ' '
+        + (m.busca || PALABRAS[m.clave] || ''), q)).slice(0, 24);
+    const enLaFrase = palabrasDeBusqueda(q).paises;
+    const paises = padron.filter(p => sinTilde(p.pais).includes(q) || enLaFrase.includes(p.iso)).slice(0, 6);
 
     let h = tareas.map(guiaTarea).join('');
     if(paises.length)
@@ -11572,9 +11597,8 @@
       });
     }
     if(!h)
-      h = '<p class="guia-vacio">Nada responde a «' + esc(crudo) + '». <b>Que no figure acá no '
-        + 'significa que no exista</b>: significa que este registro todavía no lo mide, y eso '
-        + 'se declara en vez de disimularse.<br>Probá con el hecho antes que con el nombre: '
+      h = '<p class="guia-vacio">Nada responde a «' + esc(crudo) + '». <b>Puede que el registro '
+        + 'lo mida con otro nombre</b>, o que todavía no lo mida.<br>Probá con el hecho antes que con el nombre: '
         + '«homicidio» además de «sicariato», «cocaína» además de «narco», «corrupción» además '
         + 'de «coima».</p>';
     salida.innerHTML = h;
@@ -13139,6 +13163,13 @@
       return;
     }
 
+    // SIN PAÍS ELEGIDO, LO QUE NO SE COMPARA ENTRE PAÍSES NO ENCABEZA. La vista regional
+    // ordena Estados de mayor a menor: con la cifra que cada Estado cuenta a su manera
+    // quedaba Colombia arriba de Argentina y desaparecía la serie comparable de la ONU
+    // (auditoría del sitio, 15/9/2026). Esa cifra se ve al elegir el país.
+    const comparables = claves.filter(c => !(info(c) || {}).no_comparable_entre_paises);
+    if(!comparables.length){ seccionSinDato(destino); return; }
+    claves = comparables;
     const principal = info(claves[0]);
     const filas = filasDe(claves[0]);
     // HAY MEDIDAS QUE NO TIENEN LADO BUENO NI MALO, y hasta hoy la tarjeta no lo
