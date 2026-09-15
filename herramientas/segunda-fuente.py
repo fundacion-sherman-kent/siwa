@@ -136,6 +136,7 @@ ASUNTOS = {
     "uso de ChatGPT": ["uso_chatgpt"],
     "uso de Claude": ["uso_claude"],
     "homicidios según el propio Estado": ["homicidios_estado"],
+    "inflación": ["inflacion_interanual", "inflacion_mensual"],
     "asistentes de IA en la tienda de apps, por origen": ["ia_apps_ranking", "ia_apps_ranking_eeuu",
                                                           "ia_apps_ranking_china", "ia_apps_ranking_otros",
                                                           "ia_apps_disponibles"],

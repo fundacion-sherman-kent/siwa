@@ -235,6 +235,8 @@ CATEGORIAS = {
     "desempleo_cepal": "informalidad",
     "homicidios": "violencia",
     "homicidios_estado": "violencia",
+    "inflacion_interanual": "condiciones",
+    "inflacion_mensual": "condiciones",
     "hostigamiento_periodistas": "entorno-informativo",
     "indice_gobernanza": "integridad",
     "industria": "industrial",

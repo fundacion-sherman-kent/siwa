@@ -283,7 +283,11 @@ def corridas(momento: datetime) -> list:
 
 
 def main() -> None:
-    destino = Path(sys.argv[1]) if len(sys.argv) > 1 else RAIZ / "reloj-actualidad.json"
+    # --avisar: termina en error si SIWA quedó atrás de alguna fuente. En el robot eso
+    # pone la corrida en rojo, y GitHub manda el correo solo, sin credenciales.
+    avisar = "--avisar" in sys.argv
+    argumentos = [a for a in sys.argv[1:] if not a.startswith("--")]
+    destino = Path(argumentos[0]) if argumentos else RAIZ / "reloj-actualidad.json"
     inicio = datetime.now(timezone.utc)
     isos = [p["iso"] for p in geo.padron()]
     r = reloj()
@@ -320,6 +324,11 @@ def main() -> None:
     for n in resultado["fuentes_nacionales_mas_nuevas_fuera_de_siwa"]:
         print(f"   FUENTE NACIONAL · {n['iso']} {n['materia']} · SIWA {n['siwa']} · {n['organismo']}"
               f" {n.get('ultimo_periodo') or n.get('ultima_actualizacion')}")
+
+
+    if avisar and (s["siwa_atrasado"] or r.get("estado") == "desfasado"):
+        print("[reloj] AVISO: SIWA quedó atrás de su fuente o el reloj del robot está desfasado.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

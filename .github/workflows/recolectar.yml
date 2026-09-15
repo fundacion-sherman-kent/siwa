@@ -165,13 +165,21 @@ jobs:
         continue-on-error: true
         run: python colectores/estado_reciente.py
 
+      # INFLACION MENSUAL DE LOS 33, con el indice de precios que compila la CEPAL
+      # (autorizado el 15/9/2026).
+      - name: Inflacion mensual
+        id: inflacion
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/inflacion.py
+
       # RELOJ DE ACTUALIDAD: compara cada indicador con lo ultimo que publica su
       # fuente y comprueba la hora contra servidores externos (autorizado el 15/9/2026).
       - name: Reloj de actualidad
         id: reloj
         continue-on-error: true
         if: env.COMPLETA == 'true'
-        run: python herramientas/reloj-actualidad.py datos/publico/reloj-actualidad.json
+        run: python herramientas/reloj-actualidad.py datos/publico/reloj-actualidad.json --avisar
 
       # REDES DE INFLUENCIA DADAS DE BAJA, SEGUN GOOGLE (autorizado el 13/9/2026).
       - name: Redes de influencia dadas de baja
@@ -665,7 +673,8 @@ jobs:
           [ "${{ steps.ia.outcome }}" = "failure" ] && { echo "Falló el uso de IA y las regiones de nube."; fallo=1; }
           [ "${{ steps.ia_apps.outcome }}" = "failure" ] && { echo "Fallaron los asistentes de IA por origen."; fallo=1; }
           [ "${{ steps.estado_reciente.outcome }}" = "failure" ] && { echo "Fallaron los homicidios segun el propio Estado."; fallo=1; }
-          [ "${{ steps.reloj.outcome }}" = "failure" ] && { echo "Fallo el reloj de actualidad."; fallo=1; }
+          [ "${{ steps.reloj.outcome }}" = "failure" ] && { echo "El reloj de actualidad avisa: SIWA quedo atras de una fuente (ver datos/publico/reloj-actualidad.json)."; fallo=1; }
+          [ "${{ steps.inflacion.outcome }}" = "failure" ] && { echo "Fallo la inflacion mensual."; fallo=1; }
           [ "${{ steps.influencia.outcome }}" = "failure" ] && { echo "Fallaron las redes de influencia dadas de baja."; fallo=1; }
           [ "${{ steps.eia.outcome }}" = "failure" ] && { echo "Falló el petróleo y gas de la EIA."; fallo=1; }
           [ "${{ steps.sanciones_primarias.outcome }}" = "failure" ] && { echo "Fallaron las listas de sanciones de EE. UU. y del Reino Unido."; fallo=1; }
