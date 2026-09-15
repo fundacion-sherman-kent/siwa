@@ -177,6 +177,12 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/inflacion.py
 
+      - name: Reservas e inflacion mensual (FMI)
+        id: fmi_mensual
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/fmi_mensual.py
+
       # REDES DE INFLUENCIA DADAS DE BAJA, SEGUN GOOGLE (autorizado el 13/9/2026).
       - name: Redes de influencia dadas de baja
         id: influencia
@@ -688,6 +694,7 @@ jobs:
           [ "${{ steps.estado_reciente.outcome }}" = "failure" ] && { echo "Fallaron los homicidios segun el propio Estado."; fallo=1; }
           [ "${{ steps.reloj.outcome }}" = "failure" ] && { echo "El reloj de actualidad avisa: SIWA quedo atras de una fuente (ver datos/publico/reloj-actualidad.json)."; fallo=1; }
           [ "${{ steps.inflacion.outcome }}" = "failure" ] && { echo "Fallo la inflacion mensual."; fallo=1; }
+          [ "${{ steps.fmi_mensual.outcome }}" = "failure" ] && { echo "Fallaron las reservas e inflacion del FMI."; fallo=1; }
           [ "${{ steps.influencia.outcome }}" = "failure" ] && { echo "Fallaron las redes de influencia dadas de baja."; fallo=1; }
           [ "${{ steps.eia.outcome }}" = "failure" ] && { echo "Falló el petróleo y gas de la EIA."; fallo=1; }
           [ "${{ steps.sanciones_primarias.outcome }}" = "failure" ] && { echo "Fallaron las listas de sanciones de EE. UU. y del Reino Unido."; fallo=1; }

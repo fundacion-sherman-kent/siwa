@@ -237,6 +237,8 @@ CATEGORIAS = {
     "homicidios": "violencia",
     "homicidios_estado": "violencia",
     "inflacion_interanual": "condiciones",
+    "inflacion_fmi": "condiciones",
+    "reservas_internacionales": "condiciones",
     "inflacion_mensual": "condiciones",
     "hostigamiento_periodistas": "entorno-informativo",
     "indice_gobernanza": "integridad",
