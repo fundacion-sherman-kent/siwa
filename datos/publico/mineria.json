@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-15T21:36:34+00:00",
+  "corrida": "2026-09-15T21:42:44+00:00",
   "medidas_con_suficientes_casos": 199,
   "pares_probados": 19701,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3758,
+    "sobreviven": 3769,
     "de_ellos_son_parentescos": 407
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3351,
+  "pistas_totales": 3362,
   "anomalias_totales": 356,
   "pistas": [
     {
@@ -354,6 +354,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 9.526938200526444e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "desplazamiento:recepcion",
+      "b": "migrantes",
+      "rotulo_a": "desplazamiento · recepcion",
+      "rotulo_b": "Población migrante que el país aloja",
+      "coeficiente": 0.907,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1905778960493398e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 20,
       "tipo": "rangos (Spearman)",
       "p": 1.6734776707835433e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "estabilidad",
-      "b": "riesgo_inform",
-      "rotulo_a": "Estabilidad política y ausencia de violencia",
-      "rotulo_b": "Riesgo de crisis humanitaria (INFORM)",
-      "coeficiente": -0.877,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.182368555613423e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
