@@ -220,7 +220,306 @@ def mexico() -> dict:
             "nota": "La serie llega a 2025 con la metodología anterior; 2026 estrenó otra."}
 
 
-PAISES = {"ARG": argentina, "COL": colombia, "ECU": ecuador, "PER": peru, "MEX": mexico}
+# ── BOLIVIA ──────────────────────────────────────────────────────────────────
+BOLIVIA_URL = "https://nube.ine.gob.bo/index.php/s/rb85ZWi9fyUJFHl/download"
+_DEPTOS_BOL = {"chuquisaca", "la paz", "cochabamba", "oruro", "potosi",
+               "tarija", "santa cruz", "beni", "pando"}
+
+
+def _sin_acentos(s: str) -> str:
+    import unicodedata
+    return "".join(c for c in unicodedata.normalize("NFD", s)
+                   if unicodedata.category(c) != "Mn").lower().strip()
+
+
+def _decodificar(raw: bytes) -> str:
+    """Texto de un CSV que puede venir en UTF-8 o en CP1252 (gobierno de Panamá)."""
+    for enc in ("utf-8-sig", "cp1252", "latin-1"):
+        try:
+            t = raw.decode(enc)
+            if "�" not in t:
+                return t
+        except (UnicodeDecodeError, LookupError):
+            continue
+    return raw.decode("latin-1", "replace")
+
+
+def bolivia() -> dict:
+    """Denuncias de homicidio por departamento (INE Bolivia, datos de la Policía)."""
+    import re as _re
+    raw = comun.traer_crudo(BOLIVIA_URL)
+    filas = er._planilla(raw, "3.08.02.13")
+    col_anio = {}
+    for num in sorted(filas):
+        for c, v in filas[num].items():
+            m = _re.match(r"(20\d\d)", str(v).strip())  # tolera «2024(p)» provisional
+            if m:
+                col_anio[c] = int(m.group(1))
+        if col_anio:
+            break
+    por = collections.defaultdict(dict)
+    dept = None
+    for num in sorted(filas):
+        b = filas[num].get("B")
+        if not isinstance(b, str):
+            continue
+        clave = _sin_acentos(b)
+        if clave in _DEPTOS_BOL:
+            dept = b.strip()
+            continue
+        if dept and clave.startswith("homicidio"):
+            for c, anio in col_anio.items():
+                try:
+                    por[dept][anio] = int(float(filas[num].get(c)))
+                except (TypeError, ValueError):
+                    continue
+            dept = None  # una sola fila de homicidio por bloque
+    return {"unidad": "departamento", "por_unidad": dict(por), "en_curso": None,
+            "organismo": "INE Bolivia — denuncias registradas por la Policía Boliviana",
+            "licencia": "estadística oficial publicada",
+            "nota": "Es RECUENTO DE DENUNCIAS de homicidio, no de víctimas ni de hechos; "
+                    "un mismo hecho puede generar más de una denuncia. Serie 2007 en adelante."}
+
+
+# ── URUGUAY ──────────────────────────────────────────────────────────────────
+URUGUAY_CSV = ("https://catalogodatos.gub.uy/dataset/999f2edc-5ef5-4d41-bed7-824a5635ea8d/"
+               "resource/5ed98add-f127-4377-b529-aa8ad35b77e3/download/"
+               "homicidios_dolosos_consumados.csv")
+
+
+def uruguay() -> dict:
+    """Homicidios dolosos consumados por departamento (Ministerio del Interior).
+
+    El recurso es microdato: una fila por víctima. Se cuenta por departamento y año.
+    """
+    raw = comun.traer_crudo(URUGUAY_CSV)
+    txt = raw.decode("utf-8-sig", "replace")
+    cabecera = txt.splitlines()[0] if txt else ""
+    delim = ";" if cabecera.count(";") > cabecera.count(",") else ","
+    lector = csv.DictReader(io.StringIO(txt), delimiter=delim)
+    # Ubicar las columnas de departamento y año tolerando acentos y mayúsculas.
+    mapa = {_sin_acentos(c): c for c in (lector.fieldnames or [])}
+    col_dep = mapa.get("departamento")
+    col_anio = next((mapa[k] for k in mapa if k in ("ano", "anio", "year")), None)
+    if not col_dep or not col_anio:
+        raise RuntimeError(f"Uruguay: no se hallaron columnas dep/año en {lector.fieldnames}")
+    por = collections.defaultdict(lambda: collections.defaultdict(int))
+    for fila in lector:
+        dep = (fila.get(col_dep) or "").strip()
+        try:
+            anio = int(str(fila.get(col_anio)).strip()[:4])
+        except (TypeError, ValueError):
+            continue
+        if dep:
+            por[dep][anio] += 1
+    por = {d: dict(s) for d, s in por.items()}
+    # El último año suele ser el corriente (parcial): se separa.
+    anios = sorted({a for s in por.values() for a in s})
+    curso = None
+    if anios:
+        este = datetime.now(timezone.utc).year
+        if anios[-1] == este:
+            u = anios[-1]
+            curso = {"anio": u, "por_unidad": {d: s.pop(u) for d, s in por.items() if u in s}}
+    return {"unidad": "departamento", "por_unidad": {d: s for d, s in por.items() if s},
+            "en_curso": curso,
+            "organismo": "Ministerio del Interior — Observatorio Nacional sobre Violencia y Criminalidad",
+            "licencia": "Catálogo Nacional de Datos Abiertos (datos abiertos del Uruguay)",
+            "nota": "Recuento de VÍCTIMAS de homicidio doloso consumado, agregado del microdato "
+                    "oficial por departamento."}
+
+
+# ── TRINIDAD Y TOBAGO ────────────────────────────────────────────────────────
+TTPS_CSV = "https://ttps.gov.tt/statistics/download/?year={anio}"
+
+
+def trinidad() -> dict:
+    """Homicidios (murders) por división policial (Trinidad and Tobago Police Service)."""
+    por = collections.defaultdict(dict)
+    este = datetime.now(timezone.utc).year
+    curso_anio, curso = None, None
+    for anio in range(2018, este + 1):
+        try:
+            raw = comun.traer_crudo(TTPS_CSV.format(anio=anio))
+        except Exception:  # noqa: BLE001 — un año que falta no voltea al resto
+            continue
+        lineas = raw.decode("utf-8-sig", "replace").splitlines()
+        # El CSV arranca con dos líneas de título; el encabezado real empieza en «Year,».
+        cab = next((i for i, l in enumerate(lineas) if l.lower().startswith("year,")), None)
+        if cab is None:
+            continue
+        txt = "\n".join(lineas[cab:])
+        acum = collections.defaultdict(int)
+        hubo = False
+        for fila in csv.DictReader(io.StringIO(txt)):
+            m = {_sin_acentos(k): k for k in fila if k}
+            delito = (fila.get(m.get("offence", "")) or "").strip().lower()
+            division = (fila.get(m.get("division", "")) or "").strip()
+            rep = fila.get(m.get("reported", "")) or fila.get(m.get("count", "")) or "0"
+            if "murder" in delito and division:
+                try:
+                    acum[division] += int(float(str(rep).strip() or 0))
+                    hubo = True
+                except ValueError:
+                    continue
+        if not hubo:
+            continue
+        for div, n in acum.items():
+            por[div][anio] = n
+    por = {d: s for d, s in por.items() if s}
+    if por:
+        anios = sorted({a for s in por.values() for a in s})
+        if anios and anios[-1] == este:
+            u = anios[-1]
+            curso = {"anio": u, "por_unidad": {d: s.pop(u) for d, s in por.items() if u in s}}
+            por = {d: s for d, s in por.items() if s}
+    return {"unidad": "división policial", "por_unidad": por, "en_curso": curso,
+            "organismo": "Trinidad and Tobago Police Service (TTPS) — Crime and Problem Analysis",
+            "licencia": "datos públicos del TTPS",
+            "nota": "Recuento de homicidios (murders) por DIVISIÓN POLICIAL —no por corporación "
+                    "regional—, que es la geografía con que la policía publica. Serie desde 2018."}
+
+
+# ── PANAMÁ ───────────────────────────────────────────────────────────────────
+PANAMA_API = ("https://www.datosabiertos.gob.pa/api/3/action/package_search"
+              "?q=v%C3%ADctimas+de+homicidio&rows=40")
+
+
+def panama() -> dict:
+    """Homicidios por provincia (Procuraduría General de la Nación, PGN).
+
+    Un dataset por año en el portal de datos abiertos; cada CSV es microdato
+    (una fila por víctima). Se cuenta por área geográfica (provincia) y año.
+    """
+    d = json.loads(er.pedir(PANAMA_API).decode("utf-8", "replace"))
+    urls = []
+    for p in (d.get("result") or {}).get("results") or []:
+        if "homicidio" not in (p.get("title") or "").lower():
+            continue
+        for r in p.get("resources") or []:
+            if (r.get("format") or "").upper() == "CSV" and r.get("url"):
+                urls.append(r["url"])
+    if not urls:
+        raise RuntimeError("Panamá: el portal no devolvió CSV de homicidios")
+    import re as _re
+    por = collections.defaultdict(lambda: collections.defaultdict(int))
+    display = {}  # clave sin acentos -> nombre lindo de la provincia
+    for url in urls:
+        # El año sale del NOMBRE DE ARCHIVO (cada CSV es un año); se toma el último
+        # 20XX del basename para no confundirlo con números del UUID de la ruta.
+        anios_url = _re.findall(r"20\d\d", url.rsplit("/", 1)[-1])
+        if not anios_url:
+            continue
+        anio = int(anios_url[-1])
+        try:
+            txt = _decodificar(er.pedir(url))
+        except Exception:  # noqa: BLE001 — un año que falla no voltea al resto
+            continue
+        head = txt.splitlines()[0] if txt else ""
+        delim = ";" if head.count(";") > head.count(",") else ","
+        lector = csv.DictReader(io.StringIO(txt), delimiter=delim)
+        mapa = {_sin_acentos(c): c for c in (lector.fieldnames or []) if c}
+        col_area = next((mapa[k] for k in mapa if "area geograf" in k or k == "provincia"), None)
+        if not col_area:
+            continue
+        for fila in lector:
+            prov = (fila.get(col_area) or "").strip()
+            if not prov or prov.isdigit():
+                continue
+            clave = _sin_acentos(prov)  # une «Panamá»/«Panama», «Colón»/«Colon»
+            por[clave][anio] += 1
+            # se conserva la grafía con más acentos (la más correcta)
+            if clave not in display or sum(c > "~" for c in prov) > sum(c > "~" for c in display[clave]):
+                display[clave] = prov
+    por = {display.get(k, k): dict(s) for k, s in por.items()}
+    por = {p: dict(s) for p, s in por.items() if s}
+    curso = None
+    anios = sorted({a for s in por.values() for a in s})
+    if anios:
+        este = datetime.now(timezone.utc).year
+        if anios[-1] == este:
+            u = anios[-1]
+            curso = {"anio": u, "por_unidad": {p: s.pop(u) for p, s in por.items() if u in s}}
+            por = {p: s for p, s in por.items() if s}
+    return {"unidad": "provincia", "por_unidad": por, "en_curso": curso,
+            "organismo": "Procuraduría General de la Nación (PGN) — Panamá",
+            "licencia": "Portal Nacional de Datos Abiertos de Panamá",
+            "nota": "Recuento de VÍCTIMAS de homicidio, agregado del microdato oficial por "
+                    "provincia (incluye la comarca donde la fuente la registra)."}
+
+
+# ── BRASIL ───────────────────────────────────────────────────────────────────
+BRASIL_XLSX = ("https://www.gov.br/mj/pt-br/assuntos/sua-seguranca/seguranca-publica/"
+               "estatistica/download/dnsp-base-de-dados/bancovde-{anio}.xlsx/@@download/file")
+
+
+def _brasil_un_anio(raw: bytes) -> dict:
+    """{UF: víctimas de homicídio doloso} de un archivo BancoVDE anual."""
+    import re
+    import zipfile
+    z = zipfile.ZipFile(io.BytesIO(raw))
+    data = z.read("xl/worksheets/sheet1.xml").decode("utf-8", "replace")
+
+    def valor(celda: str) -> str:
+        v = re.search(r"<v>(.*?)</v>", celda, re.S)
+        if v:
+            return v.group(1)
+        t = re.search(r"<t[^>]*>(.*?)</t>", celda, re.S)
+        return t.group(1) if t else ""
+
+    colmap, por = {}, {}
+    for fila in re.finditer(r"<row[^>]*>(.*?)</row>", data, re.S):
+        celdas = re.findall(r'(<c\b[^>]*\br="[A-Z]+\d+".*?(?:/>|</c>))', fila.group(1), re.S)
+        d = {}
+        for c in celdas:
+            ref = re.search(r'\br="([A-Z]+)\d+"', c)
+            if ref:
+                d[ref.group(1)] = valor(c)
+        if not colmap:  # primera fila = encabezado
+            colmap = {v.strip().lower(): k for k, v in d.items()}
+            continue
+        if d.get(colmap.get("evento", "")) == "Homicídio doloso":
+            uf = d.get(colmap.get("uf", ""), "")
+            try:
+                por[uf] = por.get(uf, 0) + int(float(d.get(colmap.get("total_vitima", ""), "0")))
+            except (TypeError, ValueError):
+                pass
+    return por
+
+
+def brasil() -> dict:
+    """Homicídios dolosos por unidade federativa (SINESP/MJSP — BancoVDE)."""
+    este = datetime.now(timezone.utc).year
+    por = collections.defaultdict(dict)
+    logrados = []
+    for anio in (este, este - 1, este - 2):
+        if len(logrados) >= 2:
+            break
+        try:
+            datos = _brasil_un_anio(comun.traer_crudo(BRASIL_XLSX.format(anio=anio)))
+        except Exception:  # noqa: BLE001 — un año que falta no voltea al resto
+            continue
+        if datos:
+            for uf, n in datos.items():
+                por[uf][anio] = n
+            logrados.append(anio)
+    por = {u: s for u, s in por.items() if s}
+    curso = None
+    if logrados and max(logrados) == este:
+        u = este
+        curso = {"anio": u, "por_unidad": {uf: s.pop(u) for uf, s in por.items() if u in s}}
+        por = {uf: s for uf, s in por.items() if s}
+    return {"unidad": "unidade federativa (UF)", "por_unidad": por, "en_curso": curso,
+            "organismo": "Ministério da Justiça e Segurança Pública (MJSP/SENASP) — Sinesp VDE",
+            "licencia": "dados abertos do governo federal do Brasil",
+            "nota": "Recuento de VÍCTIMAS de homicídio doloso, sumado del microdato municipal a la "
+                    "unidade federativa. La UF va por su sigla (AC, BA, RJ…); el nombre se cruza "
+                    "después. El año en curso es provisional."}
+
+
+PAISES = {"ARG": argentina, "COL": colombia, "ECU": ecuador, "PER": peru,
+          "MEX": mexico, "BOL": bolivia, "URY": uruguay, "TTO": trinidad,
+          "PAN": panama, "BRA": brasil}
 
 
 def construir() -> Path:

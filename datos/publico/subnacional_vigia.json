@@ -1,0 +1,219 @@
+{
+  "procedencia": {
+    "colector": "subnacional_vigia",
+    "capa": "publico",
+    "obtenido_en": "2026-09-16T20:43:17+00:00",
+    "fuente": {
+      "nombre": "Vigía subnacional de SIWA — reintento sostenido de fuentes por unidad de primer orden",
+      "url": "https://siwa.fundacionkent.org/"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 2,
+      "corroborado": false,
+      "nota": "Parte de situación interno de la propia Oficina sobre el estado de sus fuentes; no es un dato de terceros ni pretende confianza máxima: es el registro de qué puertas respondieron en cada vuelta del robot."
+    },
+    "vacios_declarados": [
+      "NO ES UN DATO DE PAÍSES: es el estado de las fuentes subnacionales pendientes y la frescura de las activas. Sirve para saber cuándo construir o actualizar, no para publicar.",
+      "Que una puerta responda HTTP 200 no garantiza que el dato esté ahí en formato usable: confirma acceso, no contenido. El colector se construye y se verifica aparte."
+    ],
+    "restriccion_de_uso": null,
+    "cantidad": 0,
+    "atribucion": {
+      "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
+      "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+      "sitio": "https://siwa.fundacionkent.org/sitio/index.html",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información citando la fuente de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes Y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
+    }
+  },
+  "registros": [],
+  "puertas": [
+    {
+      "pais": "República Dominicana",
+      "clave": "do_datos_gob",
+      "que_es": "Portal CKAN nacional (homicidios por provincia)",
+      "url": "https://datos.gob.do/api/3/action/package_search?q=homicidios&rows=5",
+      "abierta": true,
+      "http": 200,
+      "detalle": "HTTP 200, 3336 bytes",
+      "revisado": "2026-09-16T20:42:49+00:00"
+    },
+    {
+      "pais": "República Dominicana",
+      "clave": "do_cadseci",
+      "que_es": "CADSECI — indicadores territoriales de seguridad",
+      "url": "https://cadseci.gob.do/",
+      "abierta": true,
+      "http": 200,
+      "detalle": "HTTP 200, 4096 bytes",
+      "revisado": "2026-09-16T20:42:50+00:00"
+    },
+    {
+      "pais": "Paraguay",
+      "clave": "py_ine_ods",
+      "que_es": "INE Paraguay ODS 16.1.1 — busca un archivo de datos (no metadatos)",
+      "url": "https://ods.ine.gov.py/ine-main/ods/paz-justicias-e-instituciones-solidas-16/meta-16.1/indicador-284",
+      "abierta": true,
+      "http": 200,
+      "detalle": "HTTP 200, 4096 bytes",
+      "revisado": "2026-09-16T20:42:50+00:00"
+    },
+    {
+      "pais": "Costa Rica",
+      "clave": "cr_oij",
+      "que_es": "OIJ / Poder Judicial — datos abiertos de homicidios por provincia",
+      "url": "https://pjenlinea3.poder-judicial.go.cr/estadisticasoij/",
+      "abierta": false,
+      "http": 404,
+      "detalle": "HTTP 404, 0 bytes",
+      "revisado": "2026-09-16T20:42:51+00:00"
+    },
+    {
+      "pais": "Bolivia",
+      "clave": "bo_fiscalia_roma",
+      "que_es": "Fiscalía General — Ecosistema ROMA de datos abiertos (marzo 2026)",
+      "url": "https://fiscalia.gob.bo/",
+      "abierta": false,
+      "http": null,
+      "detalle": "URLError",
+      "revisado": "2026-09-16T20:43:12+00:00"
+    },
+    {
+      "pais": "Guatemala",
+      "clave": "gt_ine_pnc",
+      "que_es": "INE Guatemala — dataset «Víctimas PNC» por departamento (XLSX)",
+      "url": "https://datos.ine.gob.gt/api/3/action/package_search?q=v%C3%ADctimas&rows=5",
+      "abierta": true,
+      "http": 200,
+      "detalle": "HTTP 200, 4096 bytes",
+      "revisado": "2026-09-16T20:43:12+00:00"
+    },
+    {
+      "pais": "Barbados",
+      "clave": "bb_tbps",
+      "que_es": "The Barbados Police Service — estadísticas (dio 503)",
+      "url": "https://www.tbps.gov.bb/",
+      "abierta": false,
+      "http": null,
+      "detalle": "URLError",
+      "revisado": "2026-09-16T20:43:12+00:00"
+    },
+    {
+      "pais": "Granada",
+      "clave": "gd_rgpf",
+      "que_es": "Royal Grenada Police Force — estadísticas (dio 500)",
+      "url": "https://www.rgpf.gd/",
+      "abierta": false,
+      "http": 500,
+      "detalle": "HTTP 500, 0 bytes",
+      "revisado": "2026-09-16T20:43:13+00:00"
+    },
+    {
+      "pais": "Surinam",
+      "clave": "sr_abs",
+      "que_es": "Algemeen Bureau voor de Statistiek — crimen por distrito (actualización)",
+      "url": "https://statistics-suriname.org/en/statistics/",
+      "abierta": true,
+      "http": 200,
+      "detalle": "HTTP 200, 4096 bytes",
+      "revisado": "2026-09-16T20:43:16+00:00"
+    }
+  ],
+  "activas": [
+    {
+      "iso": "ARG",
+      "pais": "Argentina",
+      "unidad": "provincia",
+      "unidades": 24,
+      "hasta": 2025
+    },
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "unidad": "departamento",
+      "unidades": 33,
+      "hasta": 2026
+    },
+    {
+      "iso": "ECU",
+      "pais": "Ecuador",
+      "unidad": "provincia",
+      "unidades": 24,
+      "hasta": 2026
+    },
+    {
+      "iso": "PER",
+      "pais": "Perú",
+      "unidad": "región (código ubigeo)",
+      "unidades": 26,
+      "hasta": 2021
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "unidad": "entidad federativa",
+      "unidades": 32,
+      "hasta": 2025
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "unidad": "departamento",
+      "unidades": 9,
+      "hasta": 2023
+    },
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "unidad": "departamento",
+      "unidades": 20,
+      "hasta": 2026
+    },
+    {
+      "iso": "TTO",
+      "pais": "Trinidad y Tobago",
+      "unidad": "división policial",
+      "unidades": 9,
+      "hasta": 2026
+    },
+    {
+      "iso": "PAN",
+      "pais": "Panamá",
+      "unidad": "provincia",
+      "unidades": 17,
+      "hasta": 2026
+    },
+    {
+      "iso": "BRA",
+      "pais": "Brasil",
+      "unidad": "unidade federativa (UF)",
+      "unidades": 27,
+      "hasta": 2026
+    },
+    {
+      "iso": "GTM",
+      "pais": "Guatemala",
+      "unidad": "departamento",
+      "unidades": 22,
+      "hasta": 2026
+    }
+  ],
+  "resumen": {
+    "puertas_probadas": 9,
+    "puertas_abiertas": 5,
+    "novedades": [
+      "República Dominicana: SE ABRIÓ «Portal CKAN nacional (homicidios por provincia)» (https://datos.gob.do/api/3/action/package_search?q=homicidios&rows=5) — a construir",
+      "República Dominicana: SE ABRIÓ «CADSECI — indicadores territoriales de seguridad» (https://cadseci.gob.do/) — a construir",
+      "Paraguay: SE ABRIÓ «INE Paraguay ODS 16.1.1 — busca un archivo de datos (no metadatos)» (https://ods.ine.gov.py/ine-main/ods/paz-justicias-e-instituciones-solidas-16/meta-16.1/indicador-284) — a construir",
+      "Guatemala: SE ABRIÓ «INE Guatemala — dataset «Víctimas PNC» por departamento (XLSX)» (https://datos.ine.gob.gt/api/3/action/package_search?q=v%C3%ADctimas&rows=5) — a construir",
+      "Surinam: SE ABRIÓ «Algemeen Bureau voor de Statistiek — crimen por distrito (actualización)» (https://statistics-suriname.org/en/statistics/) — a construir"
+    ],
+    "fuentes_activas": 11,
+    "activas_atrasadas": [
+      "Perú (hasta 2021)",
+      "Bolivia (hasta 2023)"
+    ],
+    "consultado": "2026-09-16T20:43:17+00:00"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "procedencia": {
+    "colector": "chile_ine_seguridad",
+    "capa": "publico",
+    "obtenido_en": "2026-09-16T16:46:57+00:00",
+    "fuente": {
+      "nombre": "Instituto Nacional de Estadísticas de Chile (INE) — Estadísticas Policiales, cuadro de víctimas",
+      "url": "https://www.ine.gob.cl/estadisticas-por-tema/sociedad-y-condiciones-de-vida/estadisticas-policiales-y-judiciales"
+    },
+    "calificacion": {
+      "fiabilidad": "A",
+      "credibilidad": 2,
+      "corroborado": false,
+      "nota": "Instituto oficial de estadística. Credibilidad 2: es registro administrativo de las policías, sujeto a subregistro y a revisión, y el año en curso es provisional."
+    },
+    "vacios_declarados": [
+      "ES RECUENTO DE VÍCTIMAS, NO TASA: sin población por región no se calcula tasa.",
+      "EL AÑO EN CURSO ES PROVISIONAL: acumula lo que va del año, no un año cerrado.",
+      "Solo Carabineros de Chile (cuadro 18). La Policía de Investigaciones publica su propio cuadro; no se suma acá para no duplicar víctimas.",
+      "NO SE COMPARA ENTRE PAÍSES: cada Estado define y registra el homicidio a su manera."
+    ],
+    "restriccion_de_uso": null,
+    "cantidad": 1,
+    "atribucion": {
+      "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
+      "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+      "sitio": "https://siwa.fundacionkent.org/sitio/index.html",
+      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información citando la fuente de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes Y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
+    }
+  },
+  "registros": [
+    {
+      "iso": "CHL",
+      "pais": "Chile",
+      "bloque": "Cono Sur",
+      "indicadores": {
+        "homicidio_ine_chile": {
+          "valor": 730,
+          "anio": 2025,
+          "provisional": true,
+          "componentes": {
+            "Homicidio": 590,
+            "Homicidio calificado": 66,
+            "Homicidio en riña o pelea": 74
+          },
+          "femicidio": {
+            "Femicidio íntimo": 44,
+            "Femicidio no íntimo": 4
+          },
+          "detalle": "730 víctimas de homicidio (ICCS 702+703+705) registradas por Carabineros, 2025 provisional"
+        }
+      }
+    }
+  ],
+  "indicadores": [
+    {
+      "clave": "homicidio_ine_chile",
+      "eje": "Seguridad",
+      "rotulo": "Víctimas de homicidio (INE Chile, ICCS)",
+      "unidad": "víctimas registradas",
+      "unidad_singular": "víctima",
+      "mas_es_peor": true,
+      "origen": "Instituto Nacional de Estadísticas de Chile — Estadísticas Policiales",
+      "cautela": "Son VÍCTIMAS registradas por Carabineros de Chile, sumando las materias de homicidio de la ICCS (702 homicidio, 703 calificado, 705 en riña). El año en curso es PROVISIONAL: acumula lo que va del año, no un año cerrado. No es tasa —falta población por región— y no se compara con otros países.",
+      "hasta_anio": 2025,
+      "rezago_anios": 1
+    }
+  ],
+  "resumen": {
+    "anio": 2025,
+    "archivo": "https://www.ine.gob.cl/docs/default-source/estadisticas-policiales-y-judiciales/cuadro-estadístico/estadisticas-policiales/2025/estadísticas-policiales_penal_2025.xlsx?sfvrsn=9579c5aa_4",
+    "total_homicidio": 730,
+    "consultado": "2026-09-16T16:46:57+00:00"
+  }
+}

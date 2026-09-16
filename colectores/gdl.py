@@ -56,6 +56,18 @@ COLECTOR = "gdl"
 CAPA = "publico"
 AQUI = Path(__file__).resolve().parent
 
+# CITA OBLIGATORIA DEL GLOBAL DATA LAB. Sus términos permiten el uso público no
+# comercial —como el de SIWA— con la sola condición de citar la fuente, enlazar
+# a su sitio e indicar la VERSIÓN del dato descargado (Dirección, 16/9/2026,
+# «Camino A»). La versión se toma de la fecha del archivo en el repositorio y del
+# último año que traen las series: así la cita queda siempre exacta y se
+# actualiza sola cuando se recargan los archivos.
+def version_descarga() -> str:
+    import datetime as _dt
+    fechas = [_dt.date.fromtimestamp((AQUI / a["archivo"]).stat().st_mtime)
+              for a in ARCHIVOS if (AQUI / a["archivo"]).exists()]
+    return fechas and max(fechas).isoformat() or "sin archivo"
+
 # Los tres archivos, con la clave y el rótulo que llevan en el registro. El
 # nombre del archivo es el que la fuente pone al descargar: no se lo renombra
 # para que se vea de dónde salió.
@@ -225,6 +237,9 @@ def construir() -> Path:
             "medidas": {clave: lista for clave, lista in med.items()},
         })
 
+    version = version_descarga()
+    hasta_global = max((m["hasta"] for m in medidas if m["hasta"]), default=None)
+
     del_padron = sum(1 for r in registros if r["geografia"] == "padron")
     mixtos = sum(1 for r in registros if r["geografia"] == "parcial")
     agrupados = sum(1 for r in registros if r["geografia"] == "agrupada")
@@ -283,6 +298,11 @@ def construir() -> Path:
         registros=registros,
         vacios=vacios,
         extra={"medidas": medidas,
+               # CITA COMPLETA QUE EXIGE EL GLOBAL DATA LAB (fuente + enlace + versión).
+               "cita": (f"Global Data Lab, Universidad Radboud de Nimega — "
+                        f"https://globaldatalab.org/ (archivos descargados el {version}"
+                        + (f", series hasta {hasta_global}" if hasta_global else "") + ")"),
+               "version_descarga": version,
                "resumen": {
                    "estados_con_dato": len(registros),
                    "estados_del_padron": len(padron),

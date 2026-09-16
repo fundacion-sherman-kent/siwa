@@ -1,0 +1,85 @@
+name: Robot subnacional
+
+# QUÉ ES ESTE ROBOT
+# -----------------
+# Busca, de forma sostenida y sin gastar tokens, mejorar la capa subnacional de SIWA
+# (el dato por unidad de primer orden de cada país). En cada vuelta:
+#   1. Refresca los colectores subnacionales que ya andan (homicidios por unidad y la
+#      PDH de Guatemala), para que no envejezcan contra el reloj de tiempo real.
+#   2. Corre el VIGÍA, que golpea las puertas pendientes —fuentes hoy bloqueadas o en
+#      trámite— y avisa en cuanto alguna se abre, para construir ese colector.
+#
+# La capa subnacional SIGUE APAGADA en el sitio: este robot mantiene y explora el dato,
+# no lo publica en pantalla. El encendido lo decide la dirección.
+
+on:
+  schedule:
+    # Una vez por día. El dato subnacional cambia despacio; lo que se quiere sostener
+    # es el golpeteo diario a las puertas pendientes.
+    - cron: "25 6 * * *"
+  workflow_dispatch:
+
+# MISMO CANDADO QUE EL ROBOT PRINCIPAL. Los dos escriben en main; sin compartir grupo
+# se pisarían y uno perdería lo recolectado (incidente del 11/9/2026 documentado en
+# recolectar.yml). Con esto, GitHub deja pasar de a uno y el segundo espera.
+concurrency:
+  group: publicar-en-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  subnacional:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Homicidios por unidad de primer orden
+        id: homicidios
+        continue-on-error: true
+        run: python colectores/subnacional_homicidios.py
+
+      - name: Guatemala — denuncias de DD.HH. por departamento (PDH)
+        id: pdh
+        continue-on-error: true
+        run: python colectores/pdh_guatemala_subnacional.py
+
+      - name: Vigía — golpear las puertas pendientes
+        id: vigia
+        continue-on-error: true
+        run: python colectores/subnacional_vigia.py
+
+      - name: Guardar lo recolectado
+        if: always()
+        run: |
+          git config user.name "siwa"
+          git config user.email "actions@users.noreply.github.com"
+          git config merge.ours.driver true
+          git add datos/
+          git diff --staged --quiet || git commit -m "Subnacional $(date -u +'%Y-%m-%d %H:%M UTC')"
+          publicado=0
+          for intento in 1 2 3; do
+            if git push; then publicado=1; break; fi
+            git pull --no-rebase --no-edit origin main || exit 1
+          done
+          [ "$publicado" = 1 ] || { echo "NO SE PUDO PUBLICAR tras tres intentos."; exit 1; }
+
+      # A diferencia del robot principal, acá una fuente que bloquea la IP de la nube
+      # (como le pasa a CEAD y a NASA FIRMS) NO enrojece el robot: el colector se
+      # protege solo (declara la caída por país y sigue), y el vigía justamente existe
+      # para registrar qué puerta respondió. Solo se avisa; no se corta la alarma.
+      - name: Declarar el estado
+        if: always()
+        run: |
+          [ "${{ steps.homicidios.outcome }}" = "failure" ] && echo "AVISO: el colector de homicidios por unidad no terminó (revisar datos/publico/estado/)."
+          [ "${{ steps.pdh.outcome }}" = "failure" ] && echo "AVISO: la PDH de Guatemala no respondió esta vuelta."
+          [ "${{ steps.vigia.outcome }}" = "failure" ] && echo "AVISO: el vigía subnacional no pudo completar la ronda."
+          echo "Ronda subnacional terminada $(date -u +'%Y-%m-%d %H:%M UTC')."
