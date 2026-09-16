@@ -48,7 +48,14 @@
      `canonical` ya manda la señal al registro. El `noscript` cubre a quien tenga
      el guion apagado. Se conserva la consulta y el ancla: quien comparta
      «…/?pais=ARG» llega a Argentina, no a la portada. -->
-<script>location.replace('sitio/index.html' + location.search + location.hash);</script>
+<script>
+/* Se salta al registro pasando la consulta y el ancla TAL CUAL: el enlazador de
+   Google Analytics (_gl) y las etiquetas de campaña (utm_, gclid) tienen que llegar
+   al registro para que su medición los lea y cuente el viaje WordPress -> SIWA como
+   una sola visita. La barra la limpia el registro DESPUES de leerlos, no acá. Se usa
+   replace para no dejar esta pagina en el historial y que el boton de atras funcione. */
+location.replace('sitio/index.html' + location.search + location.hash);
+</script>
 <noscript><meta http-equiv="refresh" content="0; url=sitio/index.html"></noscript>
 
 <style>
