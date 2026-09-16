@@ -7512,12 +7512,26 @@
     const comp = MATERIAS_COMPUESTAS().filter(vive).length;
     const crim = MATERIAS_CRIMEN().filter(vive).length;
     const est = ESTATICAS.filter(vive).length;
+    // LA CUENTA TIENE QUE CERRAR, Y NO CERRABA POR UNO. Decía 167 + 4 + 20 + 7 y
+    // remataba en 197, que da 198: el lector que sumaba encontraba el error en el
+    // párrafo escrito para que no hubiera errores. Falta la cifra que cada Estado
+    // publica con su propia definición, que no entra al mapa ni al buscador de temas
+    // justamente porque no se compara. Se cuenta y se nombra, en vez de esconderla.
+    const noComp = fuentesInd().reduce((a,f) => a + (f.indicadores || [])
+      .filter(i => i && i.no_comparable_entre_paises).length, 0);
     if(!ind) return;
     c.innerHTML = '<details class="aviso-cobertura"><summary>La portada dice «'
       + ind + ' indicadores» y acá dice «' + M.length + ' temas»: por qué</summary>'
       + '<p>Son dos cuentas distintas y ninguna está mal. Los <b>' + ind + '</b> '
       + 'indicadores son los que el registro toma tal cual de una fuente, cada uno '
-      + 'con su serie y su calificación. A eso se suman <b>' + comp + '</b> compuestos '
+      + 'con su serie y su calificación. '
+      + (noComp
+          ? 'De esos, <b>' + noComp + '</b> ' + (noComp === 1 ? 'no se compara' : 'no se comparan')
+            + ' entre países —es la cifra que publica cada Estado con su propia '
+            + 'definición— y por eso ' + (noComp === 1 ? 'vive' : 'viven') + ' en la ficha '
+            + 'de cada país y no acá. Quedan <b>' + (ind - noComp) + '</b>, y a '
+          : 'A ')
+      + 'eso se suman <b>' + comp + '</b> compuestos '
       + 'que arma el propio registro con esos mismos indicadores, <b>' + crim + '</b> '
       + 'medidas de crimen organizado y <b>' + est + '</b> clasificaciones, que no son '
       + 'cifras sino categorías. Todo junto da los <b>' + M.length + '</b> temas que se '

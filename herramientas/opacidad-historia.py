@@ -55,6 +55,22 @@ def main() -> None:
     d = json.loads(FUENTE.read_text(encoding="utf-8"))
     hoy = datetime.now(timezone.utc).date().isoformat()
 
+    # LA FECHA DEL PUNTO ES LA DEL ÍNDICE, NO LA DE HOY. Esto archivaba con la fecha
+    # de la corrida: si el índice no se recalculaba durante tres días —porque el
+    # colector falló—, la historia igual anotaba tres puntos, uno por día, todos con
+    # el mismo valor viejo. Eso es inventar tres mediciones que nadie hizo. Se usa el
+    # día en que el índice se calculó de verdad, y si ese día ya está archivado no se
+    # vuelve a escribir: no hubo medición nueva que guardar.
+    medido = ((d.get("procedencia") or {}).get("obtenido_en") or "")[:10]
+    if not medido:
+        print("[opacidad-historia] el índice no dice cuándo se calculó: no se archiva",
+              file=sys.stderr)
+        sys.exit(1)
+    if medido > hoy:
+        print(f"[opacidad-historia] el índice dice haberse calculado el {medido}, que todavía "
+              f"no llegó: no se archiva", file=sys.stderr)
+        sys.exit(1)
+
     historia = {}
     if SALIDA.exists():
         try:
@@ -65,6 +81,15 @@ def main() -> None:
             sys.exit(1)
 
     por_iso = {r["iso"]: r for r in historia.get("registros", [])}
+    # SE LIMPIA LO QUE YA ESTABA. La versión anterior fechaba con el día de la corrida
+    # y podía dejar dos puntos del mismo día en la misma serie. Al cargar se colapsa
+    # por fecha —gana el último escrito— y se ordena, así el archivo se sana solo sin
+    # que haya que tocarlo a mano.
+    for fila in por_iso.values():
+        unico = {}
+        for q in fila.get("serie") or []:
+            unico[q.get("fecha")] = q
+        fila["serie"] = [unico[f] for f in sorted(unico)]
     nuevos = cambiados = 0
     for r in d.get("registros", []):
         if r.get("estado") != "medido" or r.get("opacidad") is None:
@@ -73,21 +98,26 @@ def main() -> None:
                                              "bloque": r.get("bloque"), "serie": []})
         fila["pais"] = r.get("pais") or fila.get("pais")
         fila["bloque"] = r.get("bloque") or fila.get("bloque")
-        punto = {"fecha": hoy, "valor": round(float(r["opacidad"]), 1),
+        punto = {"fecha": medido, "valor": round(float(r["opacidad"]), 1),
                  "actos": r.get("actos_medidos")}
+        # SE BUSCA POR FECHA, NO SE MIRA SOLO EL ÚLTIMO. Mirando el último, un punto
+        # con fecha anterior —que pasa cuando el índice se recalcula tarde— se agregaba
+        # al final y la serie quedaba desordenada y con el día repetido. Se indexa por
+        # fecha, se reemplaza el del día y se ordena al guardar.
         serie = fila["serie"]
-        if serie and serie[-1]["fecha"] == hoy:
-            # El mismo dia se reemplaza: el robot corre cada hora y no se guardan
-            # veinticuatro puntos identicos por dia.
-            if serie[-1] != punto:
-                serie[-1] = punto
+        porFecha = {q["fecha"]: i for i, q in enumerate(serie)}
+        if punto["fecha"] in porFecha:
+            i = porFecha[punto["fecha"]]
+            if serie[i] != punto:
+                serie[i] = punto
                 cambiados += 1
         else:
             serie.append(punto)
             nuevos += 1
+        serie.sort(key=lambda q: q["fecha"])
 
     registros = sorted(por_iso.values(), key=lambda x: x["iso"])
-    desde = min((f["serie"][0]["fecha"] for f in registros if f["serie"]), default=hoy)
+    desde = min((f["serie"][0]["fecha"] for f in registros if f["serie"]), default=medido)
     dias = len({p["fecha"] for f in registros for p in f["serie"]})
 
     salida = {
@@ -96,7 +126,17 @@ def main() -> None:
             "fuente": {"nombre": "Fundación Sherman Kent — archivo del Índice de Opacidad",
                        "url": f"{comun.BASE}/datos/publico/indice_opacidad.json"},
             "obtenido_en": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            "calificacion": {"fiabilidad": "A", "credibilidad": "1"},
+            # SE CALIFICA CON LA FUNCIÓN DE LA CASA, NO A MANO. Escrita a mano, esta
+            # ficha declaraba credibilidad «1» —la máxima— sin corroboración, que es
+            # justo lo que `comun.calificar` prohíbe, y además como texto en vez de
+            # número, así que ningún control podía ordenarla. Es archivo propio de un
+            # índice propio: fiable como acto —lo escribió esta casa y quedó fechado—
+            # y credibilidad 2, porque nadie fuera de la casa lo comprueba.
+            "calificacion": comun.calificar(
+                "A", 2, False,
+                "Archivo propio: esta casa guarda cada día el Índice de Opacidad que ella misma "
+                "calcula. La fecha y el acto de archivar son ciertos; el índice archivado vale lo "
+                "que valga el índice, y no lo corrobora nadie de afuera."),
             "vacios_declarados": [
                 "La serie empieza el " + desde + ", que es cuando esta casa empezó a "
                 "archivarla. NO se reconstruyó hacia atrás: cuatro de los seis actos del "

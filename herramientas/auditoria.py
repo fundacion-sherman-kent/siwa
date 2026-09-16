@@ -67,6 +67,9 @@ import geo  # noqa: E402
 ANIOS_PARA_TENDENCIA = 5
 
 
+ESTE_ANIO = datetime.now(timezone.utc).year
+
+
 def leer(ruta: pathlib.Path):
     try:
         return json.loads(ruta.read_text(encoding="utf-8"))
@@ -231,6 +234,21 @@ def main() -> None:
                                 "donde": f"{ruta.name} · {f.get('iso')}",
                                 "porque": f"en «{clave}» hay un año con todas sus medidas vacías: "
                                           "es un hueco disfrazado de dato"})
+                            break
+                        # NINGÚN DATO PUEDE SER DE UN AÑO QUE TODAVÍA NO PASÓ.
+                        # Es el error que ninguna fuente declara y ninguna figura
+                        # muestra como raro: la recta de tendencia lo toma como un
+                        # punto más y el mapa lo pinta. Se revisa acá, que es donde
+                        # se mira punto por punto, y no cuesta nada. Se admite el
+                        # año en curso, que es legítimo cuando la fuente publica
+                        # meses cerrados.
+                        if isinstance(anio, int) and anio > ESTE_ANIO:
+                            fallas.append({
+                                "que": "dato fechado en el futuro",
+                                "donde": f"{ruta.name} · {f.get('iso')}",
+                                "porque": f"en «{clave}» hay un punto del año {anio}, que "
+                                          f"todavía no pasó: no hay fuente que pueda haberlo "
+                                          f"medido"})
                             break
                         if anio is not None:
                             buenos += 1

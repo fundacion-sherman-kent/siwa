@@ -53,23 +53,43 @@ INTENTOS = 3
 INDICADORES = [
     {"id": 2812, "clave": "femicidios",
      "rotulo": "Femicidios o feminicidios",
-     "unidad": "por cada 100.000 mujeres", "mas_es_peor": True},
+     "unidad": "por cada 100.000 mujeres", "mas_es_peor": True,
+     "cautela": ("Cada Estado define el femicidio en su propia ley y no todos cuentan lo mismo: "
+                 "unos registran solo el crimen cometido por la pareja o la expareja y otros, "
+                 "toda muerte violenta de una mujer por razones de género. Una cifra más baja "
+                 "puede venir de una definición más angosta o de un registro que recién empieza, "
+                 "no de menos crímenes.")},
     {"id": 4143, "clave": "ocupacion_carcelaria",
      "rotulo": "Ocupación carcelaria sobre la capacidad oficial",
-     "unidad": "% de la capacidad oficial", "mas_es_peor": True},
+     "unidad": "% de la capacidad oficial", "mas_es_peor": True,
+     "cautela": ("Se compara contra la capacidad que declara cada Estado, y esa capacidad la fija "
+                 "cada uno con su propio criterio. Un Estado que recalcula hacia arriba lo que "
+                 "entra en sus cárceles baja este número sin mover un solo preso. Dice cuán "
+                 "llena está la cárcel según su propia vara, no cuánta gente hay presa.")},
     # LO QUE LA GENTE SIENTE, que no es lo mismo que lo que la policia cuenta.
     # Un Estado puede tener pocos homicidios y una poblacion que no sale de
     # noche, y al reves. Para quien vive en un pais —o va a visitarlo— esto
     # dice tanto como la tasa.
     {"id": 5651, "clave": "victima_delito",
      "rotulo": "Personas que fueron víctimas de un delito en el último año",
-     "unidad": "% de las personas", "mas_es_peor": True},
+     "unidad": "% de las personas", "mas_es_peor": True,
+     "cautela": ("Sale de preguntarle a la gente, no de los registros de la policía: dice lo que "
+                 "las personas DECLARAN haber vivido. No están los 33 Estados y el año de la "
+                 "encuesta no es el mismo en todos, así que dos países se comparan con cuidado. "
+                 "Suele ser más alto que la denuncia policial, porque mucho delito no se denuncia.")},
     {"id": 3259, "clave": "temor_delito",
      "rotulo": "Personas que temen ser víctimas de un delito",
-     "unidad": "% de las personas", "mas_es_peor": True},
+     "unidad": "% de las personas", "mas_es_peor": True,
+     "cautela": ("Mide MIEDO, no delito. El temor sube con la cobertura de los medios y con la "
+                 "experiencia del barrio, y puede ser alto donde el delito baja y al revés. No "
+                 "están los 33 Estados y el año de la encuesta cambia de país a país.")},
     {"id": 5549, "clave": "seguridad_barrio",
      "rotulo": "Personas que se sienten seguras en su barrio",
-     "unidad": "% de las personas", "mas_es_peor": False},
+     "unidad": "% de las personas", "mas_es_peor": False,
+     "cautela": ("Es una sensación declarada en una encuesta, no una medición de lo que pasa en "
+                 "la calle, y se refiere al barrio propio, no al país. La gente suele sentir su "
+                 "barrio más seguro que su ciudad. No están los 33 Estados y el año de la "
+                 "encuesta cambia de país a país.")},
     # SEGUNDA FUENTE DE DOS COSAS QUE EL REGISTRO MEDÍA CON UNA SOLA. La
     # desigualdad la medía solo el Banco Mundial, y el desempleo total solo la
     # OIT. La CEPAL mide las dos con su propia manera de contar, y es el
