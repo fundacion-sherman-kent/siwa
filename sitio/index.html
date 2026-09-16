@@ -5,6 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SIWA — Reporte de situación de América Latina y el Caribe</title>
 
+<!-- MEDICIÓN DE TRÁFICO (Google Analytics 4). SIWA no medía nada: el enlazador
+     «_gl» que llega de fundacionkent.org no tenía acá ningún GA que lo recibiera.
+     Con esto el registro cuenta sus visitas y, con el enlazador de dominios, el
+     viaje fundacionkent.org -> SIWA se cuenta como una sola persona, no dos.
+     · El identificador sale del propio enlazador de la Fundación (_ga_L9ZDDH81GB).
+       Si la propiedad cambia, se cambia SOLO esta línea.
+     · anonymize_ip: la IP del visitante se recorta antes de guardarse.
+     · PENDIENTE DE LA DIRECCIÓN: esto instala cookies de medición; corresponde el
+       aviso de privacidad y el consentimiento (Ley 25.326), que ya está en la
+       lista de la dirección. -->
+<script>
+  window.SIWA_GA = "G-L9ZDDH81GB";
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L9ZDDH81GB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', window.SIWA_GA, {
+    anonymize_ip: true,
+    linker: { domains: ['fundacionkent.org', 'siwa.fundacionkent.org'] }
+  });
+</script>
+
 <!-- Lo que ven LinkedIn, X, WhatsApp, Telegram y los buscadores cuando alguien
      comparte el enlace. Sin esto no aparece ni imagen ni descripción: sale una
      tarjeta vacía con la dirección cruda, y el registro parece abandonado.
@@ -4278,17 +4302,35 @@
   // país, nivel, eje, materia, año— para que «…?pais=ARG» siga llevando a
   // Argentina. Se usa replaceState: no recarga la página ni deja rastro en el
   // historial, así el botón de atrás sigue funcionando.
-  try {
-    var u = new URL(location.href);
-    var basura = ["_gl","_ga","gclid","fbclid","gclsrc","dclid","msclkid","mc_cid","mc_eid","_hsenc","_hsmi"];
-    var habia = false;
-    basura.forEach(function(k){ if(u.searchParams.has(k)){ u.searchParams.delete(k); habia = true; } });
-    // Los «utm_*» son varios y no se listan de a uno.
-    Array.from(u.searchParams.keys()).forEach(function(k){
-      if(k.toLowerCase().indexOf("utm_") === 0){ u.searchParams.delete(k); habia = true; }
-    });
-    if(habia) history.replaceState(null, "", u.pathname + (u.search ? u.search : "") + u.hash);
-  } catch(e) { /* si algo falla, la página anda igual: no vale romper por limpiar */ }
+  // PRIMERO LO LEE GOOGLE, DESPUÉS SE LIMPIA. Google Analytics necesita ver «_gl»
+  // (para unir la visita con fundacionkent.org) y «utm_»/«gclid» (para saber de qué
+  // campaña vino) ANTES de que se borren. Por eso la limpieza NO corre ya mismo: se
+  // dispara cuando GA avisa que terminó de leer, y si GA está bloqueado por el
+  // navegador, igual se limpia a los tres segundos. Así no se pierde ni un rastreo
+  // y el enlace igual queda prolijo para compartir.
+  function limpiarLaBarra(){
+    try {
+      var u = new URL(location.href);
+      var basura = ["_gl","_ga","gclid","fbclid","gclsrc","dclid","msclkid","mc_cid","mc_eid","_hsenc","_hsmi"];
+      var habia = false;
+      basura.forEach(function(k){ if(u.searchParams.has(k)){ u.searchParams.delete(k); habia = true; } });
+      Array.from(u.searchParams.keys()).forEach(function(k){
+        if(k.toLowerCase().indexOf("utm_") === 0){ u.searchParams.delete(k); habia = true; }
+      });
+      if(habia) history.replaceState(null, "", u.pathname + (u.search ? u.search : "") + u.hash);
+    } catch(e) { /* si algo falla, la página anda igual */ }
+  }
+  (function(){
+    var hecho = false;
+    var una = function(){ if(hecho) return; hecho = true; limpiarLaBarra(); };
+    try {
+      if(window.gtag && window.SIWA_GA){
+        // Cuando GA responde con el client_id ya leyó el enlazador y la campaña.
+        window.gtag('get', window.SIWA_GA, 'client_id', una);
+      }
+    } catch(e){}
+    setTimeout(una, 3000); // red de seguridad: GA bloqueado o ausente.
+  })();
 
   // Un solo lugar decide DE DONDE sale el dato. Hoy apunta a la carpeta publica
   // del propio sitio. Si algun dia la Fundacion quisiera servir el registro desde

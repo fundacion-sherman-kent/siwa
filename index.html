@@ -49,23 +49,12 @@
      el guion apagado. Se conserva la consulta y el ancla: quien comparta
      «…/?pais=ARG» llega a Argentina, no a la portada. -->
 <script>
-/* Se salta al registro SIN arrastrar la basura de rastreo de Google Analytics
-   («_gl», «_ga…», «utm_», «gclid», «fbclid»), pero conservando los parámetros
-   propios —tema, país, nivel—: quien comparte «…/?pais=ARG» llega a Argentina y
-   el enlace queda limpio desde el primer salto. */
-(function(){
-  try {
-    var u = new URL(location.href);
-    ["_gl","_ga","gclid","fbclid","gclsrc","dclid","msclkid","mc_cid","mc_eid","_hsenc","_hsmi"]
-      .forEach(function(k){ u.searchParams.delete(k); });
-    Array.from(u.searchParams.keys()).forEach(function(k){
-      if(k.toLowerCase().indexOf("utm_") === 0) u.searchParams.delete(k);
-    });
-    location.replace("sitio/index.html" + (u.search ? u.search : "") + u.hash);
-  } catch(e) {
-    location.replace("sitio/index.html" + location.search + location.hash);
-  }
-})();
+/* Se salta al registro pasando la consulta y el ancla TAL CUAL: el enlazador de
+   Google Analytics (_gl) y las etiquetas de campaña (utm_, gclid) tienen que llegar
+   al registro para que su medición los lea y cuente el viaje WordPress -> SIWA como
+   una sola visita. La barra la limpia el registro DESPUES de leerlos, no acá. Se usa
+   replace para no dejar esta pagina en el historial y que el boton de atras funcione. */
+location.replace('sitio/index.html' + location.search + location.hash);
 </script>
 <noscript><meta http-equiv="refresh" content="0; url=sitio/index.html"></noscript>
 
