@@ -101,7 +101,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**66 fuentes en servicio**, en 68 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**64 fuentes en servicio**, en 66 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -135,8 +135,6 @@ python colectores/focos.py
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
 | `gasto_publico` | Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics | `B-2` | 22 | 8 |
-| `gdl` | Global Data Lab — Universidad Radboud de Nimega: base de datos subnacional de desarrollo humano, corrupción y demografía | `B-3` | 28 | 7 |
-| `hapi` | HDX HAPI — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA): población base, pobreza multidimensional y riesgo INFORM | `A-2` | 33 | 6 |
 | `ia` | Microsoft AI Economy Institute; OpenAI Signals; Anthropic Economic Index; documentación oficial de siete empresas de nube | `B-3` | 33 | 7 |
 | `ia_apps` | Apple App Store — rankings de apps gratuitas y disponibilidad por país; padrón de asistentes de IA con origen verificado por la Fundación | `B-3` | 33 | 6 |
 | `indice_opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición uno | `A-1` | 33 | 10 |
