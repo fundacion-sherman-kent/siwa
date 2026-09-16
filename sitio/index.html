@@ -4270,6 +4270,26 @@
 <script src="vendor/leaflet.js"></script>
 <script>
 (function(){
+  // LA BARRA DE DIRECCIONES QUEDA LIMPIA. Quien llega desde fundacionkent.org
+  // arrastra el enlazador de Google Analytics —«_gl», «_ga…»— y a veces «utm_»,
+  // «gclid» o «fbclid»: basura de rastreo que ensucia el enlace y lo vuelve
+  // imposible de compartir o de recortar a «siwa.fundacionkent.org». Se borra de
+  // la barra apenas carga, SIN tocar los parámetros propios del registro —tema,
+  // país, nivel, eje, materia, año— para que «…?pais=ARG» siga llevando a
+  // Argentina. Se usa replaceState: no recarga la página ni deja rastro en el
+  // historial, así el botón de atrás sigue funcionando.
+  try {
+    var u = new URL(location.href);
+    var basura = ["_gl","_ga","gclid","fbclid","gclsrc","dclid","msclkid","mc_cid","mc_eid","_hsenc","_hsmi"];
+    var habia = false;
+    basura.forEach(function(k){ if(u.searchParams.has(k)){ u.searchParams.delete(k); habia = true; } });
+    // Los «utm_*» son varios y no se listan de a uno.
+    Array.from(u.searchParams.keys()).forEach(function(k){
+      if(k.toLowerCase().indexOf("utm_") === 0){ u.searchParams.delete(k); habia = true; }
+    });
+    if(habia) history.replaceState(null, "", u.pathname + (u.search ? u.search : "") + u.hash);
+  } catch(e) { /* si algo falla, la página anda igual: no vale romper por limpiar */ }
+
   // Un solo lugar decide DE DONDE sale el dato. Hoy apunta a la carpeta publica
   // del propio sitio. Si algun dia la Fundacion quisiera servir el registro desde
   // un origen con clave —o partirlo en una capa abierta y otra reservada—, se
