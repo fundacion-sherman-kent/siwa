@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-15T23:24:38+00:00",
+  "corrida": "2026-09-16T00:44:22+00:00",
   "medidas_con_suficientes_casos": 191,
   "pares_probados": 18145,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 18.145 pares y el umbral de siempre, alrededor de 907 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3616,
+    "sobreviven": 3605,
     "de_ellos_son_parentescos": 402
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3214,
-  "anomalias_totales": 356,
+  "pistas_totales": 3203,
+  "anomalias_totales": 357,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -333,19 +333,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.911,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.981278332722618e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -437,6 +424,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.898,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1850508043607583e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -515,6 +515,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:mediciones",
+      "b": "poblacion",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.889,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 8.162737474339178e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Corrupción política",
@@ -567,19 +580,6 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:mediciones",
-      "b": "poblacion",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.886,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6325080776971024e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "copernicus:escenas",
       "b": "perdida_bosque",
       "rotulo_a": "copernicus · escenas",
@@ -606,14 +606,14 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:anomalias",
-      "b": "poblacion",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.884,
-      "estados": 33,
+      "a": "ciber:mediciones",
+      "b": "reservas_internacionales",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.885,
+      "estados": 30,
       "tipo": "rangos (Spearman)",
-      "p": 2.4728144789816483e-14,
+      "p": 3.730213449974386e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -685,32 +685,6 @@
     },
     {
       "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.88,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.5704197068430906e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "reservas_internacionales",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.88,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 9.213193151649643e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
       "b": "generacion_electrica",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Generación eléctrica",
@@ -744,6 +718,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 2.1831114095062896e-09,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:anomalias",
+      "b": "poblacion",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.878,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.823735580032583e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +783,19 @@
       "estados": 20,
       "tipo": "rangos (Spearman)",
       "p": 1.6734776707835436e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "estabilidad",
+      "b": "riesgo_inform",
+      "rotulo_a": "Estabilidad política y ausencia de violencia",
+      "rotulo_b": "Riesgo de crisis humanitaria (INFORM)",
+      "coeficiente": -0.877,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.182368555613423e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -1349,18 +1349,18 @@
       "de": "owd"
     },
     {
-      "iso": "MEX",
-      "pais": "México",
-      "clave": "renta_minerales",
-      "rotulo": "Renta de los minerales",
-      "anio": 2021,
-      "valor": 1.365,
-      "mediana_previa": 0.464,
-      "desvios": 15.03,
-      "cambio_pct": 194.0,
-      "cambio_en_unidades": 0.901,
-      "puntos_previos": 5,
-      "de": "banco-mundial"
+      "iso": "ECU",
+      "pais": "Ecuador",
+      "clave": "homicidios_estado",
+      "rotulo": "Homicidios según el propio Estado",
+      "anio": 2025,
+      "valor": 9252,
+      "mediana_previa": 1310,
+      "desvios": 15.76,
+      "cambio_pct": 606.3,
+      "cambio_en_unidades": 7942,
+      "puntos_previos": 11,
+      "de": "estado_reciente"
     }
   ],
   "lo_que_no_dice": "Que una cosa cause la otra. Dos medidas pueden acompañarse por un tercer factor, por la forma en que se recolectan o por azar que esta corrección reduce pero no elimina."
