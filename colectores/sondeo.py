@@ -72,9 +72,9 @@ CANDIDATAS = [
     {
         "clave": "reliefweb",
         "rotulo": "ReliefWeb — desastres y crisis",
-        "url": "https://api.reliefweb.int/v2/disasters?appname=fusk-siwa&limit=1",
+        "url": "https://api.reliefweb.int/v2/disasters?appname=fundacionkent-report-q5v8&limit=1",
         "porque": "Capa de hoy: desastres y crisis con fecha y país.",
-        "traba": "403 · exige un nombre de aplicación autorizado, que hay que pedir.",
+        "traba": "APROBADO el 16/9/2026: appname «fundacionkent-report-q5v8». Listo para colector.",
     },
     {
         "clave": "ops",
