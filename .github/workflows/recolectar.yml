@@ -682,7 +682,13 @@ jobs:
           [ "${{ steps.armas.outcome }}" = "failure" ] && { echo "Falló el colector de comercio de armas."; fallo=1; }
           [ "${{ steps.explorador.outcome }}" = "failure" ] && { echo "Falló el explorador de puertas."; fallo=1; }
           [ "${{ steps.indice_opacidad.outcome }}" = "failure" ] && { echo "Falló el Índice de Opacidad."; fallo=1; }
-          [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
+          # FOCOS (NASA FIRMS) NO ENROJECE EL ROBOT. Comprobado el 16/9/2026: NASA bloquea
+          # las IP de los runners de GitHub (desde otra red la ruta y la clave responden bien),
+          # asi que aca da siempre error de red. Enrojecer cada hora por algo que el runner no
+          # puede resolver arruina la alarma. El paso igual corre y reintenta, deja su estado, y
+          # la frescura la vigila el reloj de actualidad (diario). Se corre bien desde la tarea
+          # programada local, que si alcanza a NASA.
+          [ "${{ steps.focos.outcome }}" = "failure" ] && echo "Aviso: focos (FIRMS) no se pudo traer desde el runner (NASA bloquea la IP); no cuenta como falla."
           [ "${{ steps.brecha.outcome }}" = "failure" ] && { echo "Falló el colector de la brecha."; fallo=1; }
           [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló la contratación pública por portal."; fallo=1; }
           [ "${{ steps.archivo.outcome }}" = "failure" ] && { echo "Falló el colector del archivo de la web."; fallo=1; }
