@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-16T13:13:25+00:00",
-  "medidas_con_suficientes_casos": 198,
-  "pares_probados": 19503,
+  "corrida": "2026-09-16T13:32:44+00:00",
+  "medidas_con_suficientes_casos": 199,
+  "pares_probados": 19701,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 19.503 pares y el umbral de siempre, alrededor de 975 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3663,
+    "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3736,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3251,
+  "pistas_totales": 3324,
   "anomalias_totales": 366,
   "pistas": [
     {
@@ -320,6 +320,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.914,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.9802139811942428e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "produccion_petroleo_eia",
       "b": "reservas_petroleo",
       "rotulo_a": "Producción de petróleo · segunda fuente",
@@ -406,19 +419,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 6.269344376085972e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.899,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.653229002874199e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -588,6 +588,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 7.061326432405993e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.887,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.3551245015301487e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 20,
       "tipo": "rangos (Spearman)",
       "p": 1.6734776707835436e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "estabilidad",
-      "b": "riesgo_inform",
-      "rotulo_a": "Estabilidad política y ausencia de violencia",
-      "rotulo_b": "Riesgo de crisis humanitaria (INFORM)",
-      "coeficiente": -0.877,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.182368555613423e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
