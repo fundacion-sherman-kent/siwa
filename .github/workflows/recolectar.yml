@@ -162,11 +162,14 @@ jobs:
         run: python colectores/ia_apps.py
 
       # LO ULTIMO QUE PUBLICA CADA ESTADO: homicidios segun la estadistica oficial
-      # del propio pais (autorizado el 15/9/2026). Corre en todas las pasadas:
-      # Colombia actualiza mes a mes.
+      # del propio pais (autorizado el 15/9/2026). Corre UNA VEZ POR DIA: son seis
+      # Estados y unos veinticinco megas de planillas por pasada, y ninguna de esas
+      # oficinas publica mas de una vez por mes. Traerlas cada hora no adelantaria
+      # un dato y le costaria al servidor del que dependemos.
       - name: Homicidios segun el propio Estado
         id: estado_reciente
         continue-on-error: true
+        if: env.COMPLETA == 'true'
         run: python colectores/estado_reciente.py
 
       # INFLACION MENSUAL DE LOS 33, con el indice de precios que compila la CEPAL
