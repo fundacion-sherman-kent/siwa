@@ -101,7 +101,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**64 fuentes en servicio**, en 66 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**67 fuentes en servicio**, en 69 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -135,6 +135,8 @@ python colectores/focos.py
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
 | `gasto_publico` | Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics | `B-2` | 22 | 8 |
+| `gdl` | Global Data Lab — Universidad Radboud de Nimega: base de datos subnacional de desarrollo humano, corrupción y demografía | `B-3` | 28 | 7 |
+| `hapi` | HDX HAPI — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA): población base, pobreza multidimensional y riesgo INFORM | `A-2` | 33 | 6 |
 | `ia` | Microsoft AI Economy Institute; OpenAI Signals; Anthropic Economic Index; documentación oficial de siete empresas de nube | `B-3` | 33 | 7 |
 | `ia_apps` | Apple App Store — rankings de apps gratuitas y disponibilidad por país; padrón de asistentes de IA con origen verificado por la Fundación | `B-3` | 33 | 6 |
 | `indice_opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición uno | `A-1` | 33 | 10 |
@@ -160,6 +162,7 @@ python colectores/focos.py
 | `recursos` | Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas; Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data | `A-2` | 33 | 9 |
 | `redes` | Mastodon — instancias mastodon.social, mstdn.social, masto.ai, mas.to | `F-4` | 33 | 7 |
 | `regimen_politico` | V-Dem, Universidad de Gotemburgo — «Regímenes del Mundo», vía Our World in Data | `B-2` | 33 | 5 |
+| `reliefweb` | ReliefWeb — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA) | `A-2` | 33 | 3 |
 | `sanciones` | OpenSanctions — registros de sanciones y personas expuestas | `B-2` | 33 | 5 |
 | `sanciones_primarias` | Listas primarias de sanciones: OFAC (EE. UU.) y UK Sanctions List (Reino Unido) | `A-2` | 33 | 4 |
 | `sismos` | Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN | `A-1` | 33 | 6 |
