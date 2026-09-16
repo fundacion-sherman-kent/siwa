@@ -125,8 +125,13 @@ def argentina() -> dict:
         if len(f) < len(cabeza) or f[i["codigo_delito_snic_nombre"]].strip('"') != "Homicidios dolosos":
             continue
         anio = int(f[i["anio"]])
-        serie.append({"anio": anio, "valor": int(float(f[i["cantidad_victimas"]]))})
-        tasas[anio] = round(numero(f[i["tasa_victimas"]]), 2)
+        # LA TASA ES DEL MINISTERIO, NO DE LA CASA. El SNIC publica la columna
+        # «tasa_victimas» por año, cada 100.000 habitantes: no hay que calcularla
+        # ni hay motivo para decir que no existe. Va con cada punto de la serie,
+        # que es lo que permite dibujarla al lado de la serie comparable de la ONU.
+        tasa = round(numero(f[i["tasa_victimas"]]), 2)
+        serie.append({"anio": anio, "valor": int(float(f[i["cantidad_victimas"]])), "tasa": tasa})
+        tasas[anio] = tasa
     serie.sort(key=lambda x: x["anio"])
     if not serie:
         raise RuntimeError("el SNIC no trae la fila de homicidios dolosos: cambió la planilla")
@@ -151,6 +156,8 @@ def argentina() -> dict:
             "organismo": "Ministerio de Seguridad Nacional — Sistema Nacional de Información Criminal (SNIC)",
             "enlace": "https://www.argentina.gob.ar/seguridad/estadisticascriminales/bases-de-datos",
             "licencia": "CC BY 4.0", "cadencia": "anual",
+            "unidad_tasa": "por cada 100.000 habitantes",
+            "quien_calcula_la_tasa": "el propio Ministerio de Seguridad",
             "unidades": {"nombre": "provincia", "cuantas": len(provincias)} if provincias else None}
 
 
@@ -372,8 +379,9 @@ def peru() -> dict:
                 if f.get("AMBITO") != PERU_AMBITO_NACIONAL:
                     continue
                 anio = int(f["ANIO"])
-                propia.append({"anio": anio, "valor": int(float(f["VALORES"]))})
-                sus_tasas[anio] = round(numero(f["VALORES_2"]), 2)
+                tasa = round(numero(f["VALORES_2"]), 2)
+                propia.append({"anio": anio, "valor": int(float(f["VALORES"])), "tasa": tasa})
+                sus_tasas[anio] = tasa
             if propia and (not serie or max(x["anio"] for x in propia) > max(x["anio"] for x in serie)):
                 serie, tasas, regiones = propia, sus_tasas, sus_regiones
     if not serie:
@@ -388,6 +396,8 @@ def peru() -> dict:
             "organismo": "Ministerio del Interior — indicador 30 (CEIC) del Plan de Acción de "
                          "Seguridad Ciudadana",
             "enlace": PERU_FICHA, "licencia": "ODC-BY", "cadencia": "anual",
+            "unidad_tasa": "por cada 100.000 habitantes",
+            "quien_calcula_la_tasa": "el propio tablero del Ministerio del Interior",
             "unidades": {"nombre": "región", "cuantas": len(regiones)} if regiones else None}
 
 
@@ -668,6 +678,10 @@ def ficha(dato: dict) -> dict:
     ultimo = serie[-1]
     anterior = serie[-2] if len(serie) > 1 else None
     f = {"valor": ultimo["valor"], "anio": ultimo["anio"],
+         "tasa": ultimo.get("tasa"),
+         "tasa_anterior": anterior.get("tasa") if anterior else None,
+         "unidad_tasa": dato.get("unidad_tasa"),
+         "quien_calcula_la_tasa": dato.get("quien_calcula_la_tasa"),
          "anio_anterior": anterior["anio"] if anterior else None,
          "valor_anterior": anterior["valor"] if anterior else None,
          "variacion_pct": (round((ultimo["valor"] - anterior["valor"]) / anterior["valor"] * 100, 1)

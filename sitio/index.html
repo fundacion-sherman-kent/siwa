@@ -4293,6 +4293,12 @@
   let registros = 0, vacios = 0, fallas = 0, dominios = 0, noLlego = 0;
 
   const miles = n => Number(n).toLocaleString('es-AR');
+  // UN OBJETO NO ES UNA FRASE. Cada capa devuelve su «detalle» y casi todas dan
+  // texto, pero la compuesta devuelve un objeto porque el mapa usa sus campos.
+  // Las fichas lo pasaban por esc() y salía «[object Object]» impreso en la
+  // pantalla. Acá se decide una sola vez qué es una frase y qué no.
+  const enFrase = d => typeof d === 'string' ? d
+                     : (d && typeof d.frase === 'string' ? d.frase : null);
   const momento = iso => iso ? new Date(iso).toLocaleString('es-AR',{dateStyle:'medium',timeStyle:'short'}) : '—';
   const esc = t => String(t??'').replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
 
@@ -5042,12 +5048,26 @@
     // novedad: sería vender por nuevo un año que el registro ya mostraba.
     if(anioBM !== null && f.anio <= anioBM && !enCurso) return '';
     const org = ((r.fuente_nacional || {}).organismo || '').split('—')[0].trim();
+    // NO SE DICE QUE NO HAY TASA CUANDO LA HAY. Esto afirmaba «es un recuento de
+    // víctimas, no una tasa» para todos los Estados, y era falso: el SNIC publica
+    // su columna de tasa cada 100.000 habitantes, y el tablero peruano también.
+    // Se dice lo que cada fuente publica, no lo que convendría para una frase corta.
+    const conTasa = f.tasa && f.unidad_tasa
+      ? ', que son <b>' + cifra(f.tasa) + '</b> ' + esc(f.unidad_tasa) + ' según '
+        + esc(f.quien_calcula_la_tasa || 'el propio Estado')
+      : '';
+    const siNoHayTasa = conTasa ? '' : ' Es un recuento de víctimas: esta fuente no publica '
+      + 'la tasa por habitante.';
     return '<div class="segunda-fuente"><b>Más reciente · lo que publica el propio Estado.</b> '
       + esc(nombreDe(iso)) + ' ya publicó <b>' + f.anio + '</b>: <b>' + miles(f.valor)
-      + '</b> víctimas' + (org ? ' (' + esc(org) + ')' : '') + '.' + enCurso
-      + ' <span class="ojo">Es un recuento de víctimas, no una tasa, y no se compara con otros '
-      + 'países: cada Estado define y registra el homicidio a su manera. Para comparar entre '
-      + 'Estados sigue valiendo la serie de la UNODC, que es la del gráfico.</span></div>';
+      + '</b> víctimas' + conTasa
+      // Sin el organismo repetido: con tasa la frase ya nombra a quien la calcula,
+      // y quedaba «según el propio Ministerio de Seguridad (Ministerio de Seguridad)».
+      + (!conTasa && org ? ' (' + esc(org) + ')' : '') + '.' + enCurso
+      + siNoHayTasa
+      + ' <span class="ojo">No se compara con otros países: cada Estado define y registra el '
+      + 'homicidio a su manera. Para comparar entre Estados vale la serie homologada de la '
+      + 'UNODC, que es la línea naranja del gráfico.</span></div>';
   }
 
   function fichaDeMateria(clave){
@@ -5069,7 +5089,7 @@
           + 'medido. ' + (cap.rotuloPunto ? esc(cap.rotuloPunto) + '. ' : '')
           + '</span><span class="badge unica">sin dato</span></div></div>';
       }
-      const detalle = cap.detalle ? cap.detalle(paisFiltro) : null;
+      const detalle = enFrase(cap.detalle ? cap.detalle(paisFiltro) : null);
       // Donde queda el Estado entre los que SI tienen dato: un numero suelto no
       // dice nada si no se sabe contra que se lo compara.
       const todos = Object.entries(valores).sort((a,b) => b[1] - a[1]);
@@ -5543,7 +5563,7 @@
         + '</span><span class="badge unica">sin dato</span></div></div>';
     }
     const meta = metaInd(clave) || {};
-    const detalle = d.cap.detalle ? d.cap.detalle(iso) : null;
+    const detalle = enFrase(d.cap.detalle ? d.cap.detalle(iso) : null);
     const serie = d.cap.serieDe ? (d.cap.serieDe(iso) || []) : [];
     return '<div class="asunto"><h4>' + esc(rot) + ' · ' + esc(nombre)
       + ' <span class="edad fresco">' + cifra(d.valor) + '</span></h4>'
@@ -8003,6 +8023,33 @@
   // página entera. Esperar un turno no cuesta nada y evita ese riesgo.
   setTimeout(iniciarConstructor, 0);
 
+  // LA TASA QUE PUBLICA EL PROPIO ESTADO, EN LA MISMA UNIDAD.
+  //
+  // La serie comparable de la UNODC llega con dos o tres años de atraso, y el
+  // gráfico terminaba en 2023 mientras el Ministerio argentino ya publicaba 2025
+  // —con su tasa cada 100.000 habitantes, que sale de la columna «tasa_victimas»
+  // del SNIC: no hay que calcularla—. Un gráfico que se corta donde se corta la
+  // fuente internacional, teniendo el dato nacional, es un gráfico viejo.
+  //
+  // Se dibuja SOLO si se cumplen las tres condiciones, y si falta una no se
+  // dibuja nada: el Estado publica tasa, la unidad es la misma, y hay algún año
+  // más nuevo que el último de la serie comparable. Va en otro color y con otro
+  // trazo, y el pie dice de quién es cada línea.
+  function tasaDelEstado(clave, iso, unidadDeLaCapa){
+    if(clave !== 'homicidios' || !iso) return null;
+    const r = ((almacen.estado_reciente || {}).registros || []).find(x => x.iso === iso);
+    const f = r && (r.indicadores || {}).homicidios_estado;
+    if(!f || !f.tasa || !f.unidad_tasa) return null;
+    if(String(unidadDeLaCapa || '').trim() !== String(f.unidad_tasa || '').trim()) return null;
+    const puntos = (f.serie || [])
+      .filter(a => a && isFinite(a.tasa) && isFinite(a.anio))
+      .map(a => ({anio: +a.anio, valor: +a.tasa}));
+    if(!puntos.length) return null;
+    const org = ((r.fuente_nacional || {}).organismo || '').split('—')[0].trim();
+    return {puntos, organismo: org,
+            quien: (r.fuente_nacional || {}).quien_calcula_la_tasa || 'el propio Estado'};
+  }
+
   function figuraSerie(clave, iso){
     const cap = (capas() || {})[clave];
     if(!cap || !cap.serieDe) return '';
@@ -8030,7 +8077,18 @@
     const ANIOS_ADELANTE = 3;
     const prolonga = n >= 5 && r2 >= 0.5 && sxx > 0;
     const ultimoAnio = xs[n-1];
-    const anioFin = prolonga ? ultimoAnio + ANIOS_ADELANTE : ultimoAnio;
+
+    // Lo que el propio Estado ya publicó, en la misma unidad. Se toma desde el
+    // último año que tienen en común, para que se vea de dónde arranca y cuánto
+    // se parecen los dos en ese año: si no coincidieran, esconderlo sería peor.
+    const propio = tasaDelEstado(clave, iso, cap.unidad);
+    const delEstado = propio
+      ? propio.puntos.filter(a => a.anio >= ultimoAnio).sort((a,b) => a.anio - b.anio)
+      : [];
+    const hayPropio = delEstado.length >= 2 && delEstado[delEstado.length-1].anio > ultimoAnio;
+    const anioPropioFin = hayPropio ? delEstado[delEstado.length-1].anio : ultimoAnio;
+
+    const anioFin = Math.max(prolonga ? ultimoAnio + ANIOS_ADELANTE : ultimoAnio, anioPropioFin);
     const valorFin = pend * anioFin + orden;
 
     // ---- La geometría, ya sabiendo hasta dónde llega el dibujo --------------
@@ -8038,7 +8096,8 @@
     // pisar la curva; y arriba, para el título del eje vertical.
     const alto = 158, mIzq = 44, mDer = prolonga ? 54 : 12, mArr = 22, mAba = 32;
     const util = ancho - mIzq - mDer, utilY = alto - mArr - mAba;
-    const todosY = prolonga ? ys.concat([valorFin, pend * ultimoAnio + orden]) : ys;
+    let todosY = prolonga ? ys.concat([valorFin, pend * ultimoAnio + orden]) : ys.slice();
+    if(hayPropio) todosY = todosY.concat(delEstado.map(a => a.valor));
     const min = Math.min(...todosY), max = Math.max(...todosY), rango = (max - min) || 1;
     const a0 = xs[0], span = (anioFin - a0) || 1;
     const x = a => mIzq + ((+a - a0) / span) * util;
@@ -8062,16 +8121,32 @@
         + '" fill="#7d90a8" font-size="10" font-weight="700">' + cifra(valorFin) + '</text>'
       : '';
 
+    // EL TRAZO DEL ESTADO. Color y grosor propios, y el último valor rotulado:
+    // tiene que verse que es otra fuente, no la continuación de la misma línea.
+    const trazoPropio = hayPropio
+      ? '<path d="' + delEstado.map((a,i) => (i ? 'L' : 'M') + x(a.anio).toFixed(1) + ' '
+          + y(a.valor).toFixed(1)).join(' ') + '" fill="none" stroke="#3FA796" '
+        + 'stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"></path>'
+        + delEstado.map(a => '<circle cx="' + x(a.anio).toFixed(1) + '" cy="'
+            + y(a.valor).toFixed(1) + '" r="2.6" fill="#3FA796"></circle>').join('')
+        + '<text x="' + x(anioPropioFin).toFixed(1) + '" y="'
+        + (y(delEstado[delEstado.length-1].valor) + 13).toFixed(1) + '" text-anchor="middle" '
+        + 'fill="#3FA796" font-size="10" font-weight="700">'
+        + cifra(delEstado[delEstado.length-1].valor) + '</text>'
+      : '';
+
     const p = serie[0], u = serie[n-1];
     const dibujo = '<svg viewBox="0 0 ' + ancho + ' ' + alto + '" width="' + ancho
       + '" height="' + alto + '" style="max-width:100%;height:auto" role="img" '
       + 'aria-label="Serie de ' + esc(rotuloDeMateria(clave)) + ', ' + n + ' años, de '
-      + p.anio + ' a ' + u.anio + (prolonga ? ', con prolongación hasta ' + anioFin : '') + '">'
+      + p.anio + ' a ' + u.anio
+      + (hayPropio ? ', más la tasa oficial del propio Estado hasta ' + anioPropioFin : '')
+      + (prolonga ? ', con prolongación hasta ' + anioFin : '') + '">'
       + ejesDeSerie({ancho, alto, mIzq, mDer, mArr, mAba, a0, aFin: anioFin, min, max, x, y,
                      unidad: cap.unidad})
       + '<path d="' + linea + '" fill="none" stroke="var(--orange)" stroke-width="2" '
       + 'stroke-linejoin="round" stroke-linecap="round" opacity=".85"></path>'
-      + trazo + puntos
+      + trazo + trazoPropio + puntos
       // El último valor observado, junto a su punto: con la escala a la izquierda
       // ya no hace falta repetir el primero en una esquina.
       + '<text x="' + x(u.anio).toFixed(1) + '" y="' + (y(u.valor) - 7).toFixed(1) + '" '
@@ -8092,7 +8167,24 @@
          : '<small class="pie-tira">Con ' + n + ' años el registro no prolonga la serie: '
            + 'por tan pocos puntos pasa casi cualquier recta.</small>');
 
-    return dibujo + pie;
+    // QUIÉN DIBUJÓ CADA LÍNEA, y cuánto se parecen donde se cruzan. Dos líneas de
+    // colores distintos sin decir de quién es cada una obligan al lector a adivinar.
+    let pieEstado = '';
+    if(hayPropio){
+      const comun = delEstado.find(a => a.anio === ultimoAnio);
+      const dice = comun
+        ? ' En <b>' + ultimoAnio + '</b>, el año que comparten: ' + cifra(u.valor)
+          + ' según la ONU y ' + cifra(comun.valor) + ' según el Ministerio.'
+        : '';
+      pieEstado = '<small class="pie-tira"><b style="color:#3FA796">En verde, lo que ya '
+        + 'publicó ' + esc(nombreDe(iso)) + '.</b> Es la tasa oficial que calcula '
+        + esc(propio.quien) + ', en la misma unidad, hasta <b>' + anioPropioFin + '</b>.'
+        + dice + ' <span class="ojo">No es la misma fuente que la línea naranja —esa es la '
+        + 'serie homologada de la UNODC, la que se usa para comparar entre países— y por eso '
+        + 'van separadas en vez de pegadas.</span></small>';
+    }
+
+    return dibujo + pie + pieEstado;
   }
 
   // ============ LAS FIGURAS RESPONDEN ============
@@ -9021,11 +9113,18 @@
       periodo(){ return 'según el último dato de cada indicador'; },
       puntos(){ return []; },
       rotuloPunto: 'Sin capa de puntos: es un compuesto por país',
+      // DEVUELVE UN OBJETO A PROPÓSITO: el mapa usa sus campos. Pero las fichas
+      // esperaban texto y lo imprimían como «[object Object]», a la vista de
+      // cualquiera. Se le agrega «frase», que es lo único que la ficha muestra.
       detalle(iso){
         const x = datos()[iso];
         if(!x) return null;
+        const n = (x.indicadores || []).length || 0;
         return {valor: Math.round(x.valor*10)/10, anio: null,
-                indicadores: x.indicadores, ejes: x.ejes, detalle: x.detalle};
+                indicadores: x.indicadores, ejes: x.ejes, detalle: x.detalle,
+                frase: n ? ('Promedia el lugar que este Estado ocupa en ' + n
+                            + ' indicador' + (n === 1 ? '' : 'es') + ', no sus valores.')
+                         : null};
       },
     };
   }

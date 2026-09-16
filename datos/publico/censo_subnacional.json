@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "censo_subnacional",
     "capa": "publico",
-    "obtenido_en": "2026-09-15T06:02:43+00:00",
+    "obtenido_en": "2026-09-16T02:12:32+00:00",
     "fuente": {
       "nombre": "Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas",
       "url": "https://ucdp.uu.se/downloads/"
@@ -24,8 +24,7 @@
       "BOLIVIA SE MIDIÓ SOBRE UN CUADRO DEL INE: se comprobó que nombra los departamentos y el homicidio, no se leyó fila por fila. Los cuadros de trata, droga incautada y tránsito por departamento existen pero no se abrieron: no se cuentan.",
       "NO ENTRA AL CENSO «affected-people/refugees-persons-of-concern»: se publica por país de origen y de asilo, sin unidad de primer orden. Estaba en la primera versión y fue un error de concepto: un tema sin unidad no puede medir disponibilidad por unidad.",
       "NO ENTRA AL CENSO «affected-people/returnees»: se publica por país de origen y de asilo, sin unidad de primer orden. Estaba en la primera versión y fue un error de concepto: un tema sin unidad no puede medir disponibilidad por unidad.",
-      "coordination-context/conflict-events: HTTPError 403: {\"error\":\"Invalid app identifier\"}",
-      "affected-people/idps: HTTPError 403: {\"error\":\"Invalid app identifier\"}"
+      "SIN IDENTIFICADOR de la interfaz humanitaria: sus temas quedan SIN MIRAR, que no es lo mismo que no existir. Se carga como secreto del repositorio y este censo lo vuelve a intentar en la próxima corrida completa."
     ],
     "restriccion_de_uso": null,
     "cantidad": 33,
@@ -58,7 +57,6 @@
         "hasta": 2025
       },
       "de_fuente_nacional": [
-        "Violencia y víctimas · Policía Nacional — homicidios por departamento",
         "Flujos ilícitos · Ministerio de Defensa — incautaciones de cocaína (33 de 33 unidades)",
         "Flujos ilícitos · Ministerio de Defensa — incautaciones de marihuana (33 de 33 unidades)",
         "Flujos ilícitos · Ministerio de Defensa — incautaciones de base de coca (33 de 33 unidades)",
@@ -68,8 +66,17 @@
         "Grupos y territorio · Ministerio de Defensa — extorsión (33 de 33 unidades)",
         "Terrorismo · Ministerio de Defensa — terrorismo (32 de 33 unidades)",
         "Terrorismo · Policía Nacional — terrorismo (31 de 33 unidades)",
-        "Personas en movimiento · Unidad para las Víctimas — desplazamiento (33 de 33 unidades)"
-      ]
+        "Personas en movimiento · Unidad para las Víctimas — desplazamiento (33 de 33 unidades)",
+        "Violencia y víctimas · Ministerio de Defensa Nacional — conjunto «HOMICIDIO» en datos.gov.co (33 departamentos)"
+      ],
+      "de_su_propio_estado": {
+        "categoria": "Violencia y víctimas",
+        "fuente": "Ministerio de Defensa Nacional — conjunto «HOMICIDIO» en datos.gov.co",
+        "nombre_unidad": "departamento",
+        "unidades": 33,
+        "cuenta_para_el_umbral": true,
+        "por_que_no": null
+      }
     },
     {
       "iso": "ARG",
@@ -88,8 +95,16 @@
         "hasta": 2025
       },
       "de_fuente_nacional": [
-        "Violencia y víctimas · SNIC — homicidios dolosos por provincia"
-      ]
+        "Violencia y víctimas · Ministerio de Seguridad Nacional — Sistema Nacional de Información Criminal (SNIC) (24 provincias)"
+      ],
+      "de_su_propio_estado": {
+        "categoria": "Violencia y víctimas",
+        "fuente": "Ministerio de Seguridad Nacional — Sistema Nacional de Información Criminal (SNIC)",
+        "nombre_unidad": "provincia",
+        "unidades": 24,
+        "cuenta_para_el_umbral": true,
+        "por_que_no": null
+      }
     },
     {
       "iso": "BOL",
@@ -109,7 +124,92 @@
       },
       "de_fuente_nacional": [
         "Violencia y víctimas · INE de Bolivia"
-      ]
+      ],
+      "de_su_propio_estado": null
+    },
+    {
+      "iso": "ECU",
+      "pais": "Ecuador",
+      "bloque": "Andina",
+      "categorias_alcanzables": [
+        "Grupos y territorio",
+        "Violencia y víctimas"
+      ],
+      "cuantas": 2,
+      "de_upsala": {
+        "eventos": 984,
+        "con_unidad": 981,
+        "unidades": 13,
+        "desde": 1995,
+        "hasta": 2025
+      },
+      "de_fuente_nacional": [
+        "Violencia y víctimas · Instituto Nacional de Estadística y Censos — tabulado de Justicia y Crimen (24 provincias)"
+      ],
+      "de_su_propio_estado": {
+        "categoria": "Violencia y víctimas",
+        "fuente": "Instituto Nacional de Estadística y Censos — tabulado de Justicia y Crimen",
+        "nombre_unidad": "provincia",
+        "unidades": 24,
+        "cuenta_para_el_umbral": true,
+        "por_que_no": null
+      }
+    },
+    {
+      "iso": "MEX",
+      "pais": "México",
+      "bloque": "México y Centroamérica",
+      "categorias_alcanzables": [
+        "Grupos y territorio",
+        "Violencia y víctimas"
+      ],
+      "cuantas": 2,
+      "de_upsala": {
+        "eventos": 25714,
+        "con_unidad": 25672,
+        "unidades": 32,
+        "desde": 1989,
+        "hasta": 2025
+      },
+      "de_fuente_nacional": [
+        "Violencia y víctimas · Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública — incidencia delictiva estatal (32 entidad federativas)"
+      ],
+      "de_su_propio_estado": {
+        "categoria": "Violencia y víctimas",
+        "fuente": "Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública — incidencia delictiva estatal",
+        "nombre_unidad": "entidad federativa",
+        "unidades": 32,
+        "cuenta_para_el_umbral": true,
+        "por_que_no": null
+      }
+    },
+    {
+      "iso": "PER",
+      "pais": "Perú",
+      "bloque": "Andina",
+      "categorias_alcanzables": [
+        "Grupos y territorio",
+        "Violencia y víctimas"
+      ],
+      "cuantas": 2,
+      "de_upsala": {
+        "eventos": 890,
+        "con_unidad": 775,
+        "unidades": 35,
+        "desde": 1989,
+        "hasta": 2023
+      },
+      "de_fuente_nacional": [
+        "Violencia y víctimas · Ministerio del Interior — indicador 30 (CEIC) del Plan de Acción de Seguridad Ciudadana (26 regións)"
+      ],
+      "de_su_propio_estado": {
+        "categoria": "Violencia y víctimas",
+        "fuente": "Ministerio del Interior — indicador 30 (CEIC) del Plan de Acción de Seguridad Ciudadana",
+        "nombre_unidad": "región",
+        "unidades": 26,
+        "cuenta_para_el_umbral": true,
+        "por_que_no": null
+      }
     },
     {
       "iso": "TTO",
@@ -130,7 +230,15 @@
       "de_fuente_nacional": [
         "Grupos y territorio · Servicio de Policía de Trinidad y Tobago",
         "Violencia y víctimas · Servicio de Policía de Trinidad y Tobago"
-      ]
+      ],
+      "de_su_propio_estado": {
+        "categoria": "Violencia y víctimas",
+        "fuente": "Trinidad and Tobago Police Service (TTPS) — Crime Statistics",
+        "nombre_unidad": "división policial",
+        "unidades": 9,
+        "cuenta_para_el_umbral": false,
+        "por_que_no": "publica por división policial y no por unidad de primer orden: no coincide con la división censal ni tiene población publicada"
+      }
     },
     {
       "iso": "BRA",
@@ -147,7 +255,8 @@
         "desde": 1993,
         "hasta": 2025
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "CRI",
@@ -164,24 +273,8 @@
         "desde": 2023,
         "hasta": 2025
       },
-      "de_fuente_nacional": []
-    },
-    {
-      "iso": "ECU",
-      "pais": "Ecuador",
-      "bloque": "Andina",
-      "categorias_alcanzables": [
-        "Grupos y territorio"
-      ],
-      "cuantas": 1,
-      "de_upsala": {
-        "eventos": 984,
-        "con_unidad": 981,
-        "unidades": 13,
-        "desde": 1995,
-        "hasta": 2025
-      },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "SLV",
@@ -198,7 +291,8 @@
         "desde": 1989,
         "hasta": 2022
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "GTM",
@@ -215,7 +309,8 @@
         "desde": 1989,
         "hasta": 2025
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "GUY",
@@ -232,7 +327,8 @@
         "desde": 2008,
         "hasta": 2008
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "HTI",
@@ -249,7 +345,8 @@
         "desde": 1989,
         "hasta": 2025
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "HND",
@@ -266,7 +363,8 @@
         "desde": 1999,
         "hasta": 2025
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "JAM",
@@ -283,24 +381,8 @@
         "desde": 1989,
         "hasta": 2024
       },
-      "de_fuente_nacional": []
-    },
-    {
-      "iso": "MEX",
-      "pais": "México",
-      "bloque": "México y Centroamérica",
-      "categorias_alcanzables": [
-        "Grupos y territorio"
-      ],
-      "cuantas": 1,
-      "de_upsala": {
-        "eventos": 25714,
-        "con_unidad": 25672,
-        "unidades": 32,
-        "desde": 1989,
-        "hasta": 2025
-      },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "NIC",
@@ -317,7 +399,8 @@
         "desde": 1989,
         "hasta": 1990
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "PAN",
@@ -334,7 +417,15 @@
         "desde": 1989,
         "hasta": 2009
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": {
+        "categoria": "Violencia y víctimas",
+        "fuente": "Procuraduría General de la Nación — Informe Estadístico de Víctimas de Homicidio",
+        "nombre_unidad": "provincia o comarca",
+        "unidades": null,
+        "cuenta_para_el_umbral": false,
+        "por_que_no": "trae 26 etiquetas para el mismo puñado de provincia o comarcas: hay que cotejar los nombres antes de contarlas"
+      }
     },
     {
       "iso": "PRY",
@@ -351,24 +442,8 @@
         "desde": 1989,
         "hasta": 2021
       },
-      "de_fuente_nacional": []
-    },
-    {
-      "iso": "PER",
-      "pais": "Perú",
-      "bloque": "Andina",
-      "categorias_alcanzables": [
-        "Grupos y territorio"
-      ],
-      "cuantas": 1,
-      "de_upsala": {
-        "eventos": 890,
-        "con_unidad": 775,
-        "unidades": 35,
-        "desde": 1989,
-        "hasta": 2023
-      },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "URY",
@@ -381,7 +456,8 @@
       "de_upsala": null,
       "de_fuente_nacional": [
         "Violencia y víctimas · Ministerio del Interior — microdatos por departamento"
-      ]
+      ],
+      "de_su_propio_estado": null
     },
     {
       "iso": "VEN",
@@ -398,7 +474,8 @@
         "desde": 1989,
         "hasta": 2025
       },
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "ATG",
@@ -407,7 +484,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "BHS",
@@ -416,7 +494,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "BRB",
@@ -425,7 +504,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "BLZ",
@@ -434,7 +514,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "CHL",
@@ -443,7 +524,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "CUB",
@@ -452,7 +534,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "DMA",
@@ -461,7 +544,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "GRD",
@@ -470,7 +554,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "DOM",
@@ -479,7 +564,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "KNA",
@@ -488,7 +574,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "VCT",
@@ -497,7 +584,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "LCA",
@@ -506,7 +594,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     },
     {
       "iso": "SUR",
@@ -515,7 +604,8 @@
       "categorias_alcanzables": [],
       "cuantas": 0,
       "de_upsala": null,
-      "de_fuente_nacional": []
+      "de_fuente_nacional": [],
+      "de_su_propio_estado": null
     }
   ],
   "categorias_del_eje": [

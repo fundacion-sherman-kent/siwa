@@ -96,11 +96,58 @@ FUERA_DE_CENSO = {
 # Lo que ya está recolectado por fuente nacional, y de qué categoría es. Se
 # escribe a mano porque son acuerdos con fuentes distintas, una por una, y el
 # día que sean veinte esto va a ser la lista que muestre por qué costó tanto.
+# ESCRITO A MANO, ESTO ENVEJECÍA SOLO. Esta tabla tenía tres países cuando el
+# registro ya traía siete, y el umbral —lo que decide si la capa se enciende— se
+# medía con ese inventario viejo. Lo que queda a mano es solo lo que ningún
+# colector mide todavía; el resto se lee de lo que `estado_reciente` ya contó al
+# abrir cada archivo, en `_de_los_colectores()`.
 NACIONALES = {
-    "COL": [("Violencia y víctimas", "Policía Nacional — homicidios por departamento")],
-    "ARG": [("Violencia y víctimas", "SNIC — homicidios dolosos por provincia")],
     "URY": [("Violencia y víctimas", "Ministerio del Interior — microdatos por departamento")],
 }
+
+
+def _de_los_colectores() -> dict:
+    """Lo que los colectores ya midieron por unidad, sin volver a pedir nada.
+
+    `estado_reciente` cuenta, con el archivo abierto, cuántas unidades de primer
+    orden trae la fuente de cada Estado. Acá se lee ese recuento. Dos reglas:
+
+      · **Una división policial NO es una unidad de primer orden.** Trinidad y
+        Tobago publica por división de la policía, que no coincide con la unidad
+        censal y no tiene población publicada: no cuenta para el umbral, y se
+        declara por qué.
+      · **Un nombre sin cotejar no es una unidad contada.** Panamá escribe el mismo
+        lugar de varias maneras: se anota el caso y no se suma hasta cotejarlo.
+    """
+    ruta = comun.DATOS / "publico" / "estado_reciente.json"
+    if not ruta.exists():
+        return {}
+    try:
+        d = json.loads(ruta.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001 — un archivo ilegible no inventa cobertura
+        return {}
+    salida = {}
+    for iso, f in (d.get("fuentes_nacionales") or {}).items():
+        u = (f or {}).get("unidades") or {}
+        cuantas = u.get("cuantas")
+        motivo = None
+        if u.get("coincide_con_la_unidad_censal") is False:
+            motivo = (f"publica por {u.get('nombre')} y no por unidad de primer orden: "
+                      "no coincide con la división censal ni tiene población publicada")
+        elif u.get("hay_que_cotejar_los_nombres"):
+            motivo = (f"trae {u.get('etiquetas_distintas')} etiquetas para el mismo puñado de "
+                      f"{u.get('nombre')}s: hay que cotejar los nombres antes de contarlas")
+        elif not cuantas:
+            motivo = "la fuente no dejó ver el desglose por unidad en esta corrida"
+        salida[iso] = {
+            "categoria": "Violencia y víctimas",
+            "fuente": (f or {}).get("organismo") or "estadística oficial del propio Estado",
+            "nombre_unidad": u.get("nombre"),
+            "unidades": cuantas,
+            "cuenta_para_el_umbral": motivo is None,
+            "por_que_no": motivo,
+        }
+    return salida
 
 
 # COLOMBIA, MEDIDA Y NO RECOLECTADA. El portal de datos abiertos publica, además de
@@ -387,11 +434,15 @@ def construir() -> Path:
                 humanitaria.setdefault(iso, set()).add(categoria)
 
     # ── El recuento contra el umbral ───────────────────────────────────────
+    colectores = _de_los_colectores()
     por_estado = {}
     for iso, p in del_padron.items():
         categorias = set()
         for cat, _ in NACIONALES.get(iso, []):
             categorias.add(cat)
+        propia = colectores.get(iso)
+        if propia and propia["cuenta_para_el_umbral"]:
+            categorias.add(propia["categoria"])
         if iso == "COL":
             categorias |= cats_colombia
         if iso in medidos:
@@ -411,7 +462,11 @@ def construir() -> Path:
                                      if iso == "COL" else [])
                                   + ([f"{c} · {medidos[iso]['fuente']}"
                                       for c in medidos[iso]["categorias"]]
-                                     if iso in medidos else []),
+                                     if iso in medidos else [])
+                                  + ([f"{propia['categoria']} · {propia['fuente']} "
+                                      f"({propia['unidades']} {propia['nombre_unidad']}s)"]
+                                     if propia and propia["cuenta_para_el_umbral"] else []),
+            "de_su_propio_estado": propia,
         }
 
     minimo = 5  # más del 60 % de ocho categorías
