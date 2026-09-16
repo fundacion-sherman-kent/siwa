@@ -212,6 +212,14 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/inform.py
 
+      # DESASTRES Y CRISIS DECLARADOS POR LA ONU (ReliefWeb/OCHA), autorizado el
+      # 16/9/2026 con el appname aprobado. Diario: las declaraciones cambian de a poco.
+      - name: Desastres y crisis (ReliefWeb, ONU)
+        id: reliefweb
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/reliefweb.py
+
       # LA SEGUNDA FUENTE DEL BLOQUE LABORAL. Dos de sus tres medidas ya las
       # publica otro organismo: estan para poder compararlas, no para
       # reemplazarlas. La regla de la casa pide dos fuentes por dato.
@@ -674,7 +682,13 @@ jobs:
           [ "${{ steps.armas.outcome }}" = "failure" ] && { echo "Falló el colector de comercio de armas."; fallo=1; }
           [ "${{ steps.explorador.outcome }}" = "failure" ] && { echo "Falló el explorador de puertas."; fallo=1; }
           [ "${{ steps.indice_opacidad.outcome }}" = "failure" ] && { echo "Falló el Índice de Opacidad."; fallo=1; }
-          [ "${{ steps.focos.outcome }}" = "failure" ] && { echo "Falló el colector de focos de calor."; fallo=1; }
+          # FOCOS (NASA FIRMS) NO ENROJECE EL ROBOT. Comprobado el 16/9/2026: NASA bloquea
+          # las IP de los runners de GitHub (desde otra red la ruta y la clave responden bien),
+          # asi que aca da siempre error de red. Enrojecer cada hora por algo que el runner no
+          # puede resolver arruina la alarma. El paso igual corre y reintenta, deja su estado, y
+          # la frescura la vigila el reloj de actualidad (diario). Se corre bien desde la tarea
+          # programada local, que si alcanza a NASA.
+          [ "${{ steps.focos.outcome }}" = "failure" ] && echo "Aviso: focos (FIRMS) no se pudo traer desde el runner (NASA bloquea la IP); no cuenta como falla."
           [ "${{ steps.brecha.outcome }}" = "failure" ] && { echo "Falló el colector de la brecha."; fallo=1; }
           [ "${{ steps.contratacion.outcome }}" = "failure" ] && { echo "Falló la contratación pública por portal."; fallo=1; }
           [ "${{ steps.archivo.outcome }}" = "failure" ] && { echo "Falló el colector del archivo de la web."; fallo=1; }
@@ -702,6 +716,7 @@ jobs:
           [ "${{ steps.eia.outcome }}" = "failure" ] && { echo "Falló el petróleo y gas de la EIA."; fallo=1; }
           [ "${{ steps.sanciones_primarias.outcome }}" = "failure" ] && { echo "Fallaron las listas de sanciones de EE. UU. y del Reino Unido."; fallo=1; }
           [ "${{ steps.inform.outcome }}" = "failure" ] && { echo "Falló el riesgo de crisis humanitaria."; fallo=1; }
+          [ "${{ steps.reliefweb.outcome }}" = "failure" ] && { echo "Fallaron los desastres de ReliefWeb (ONU)."; fallo=1; }
           [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
           [ "${{ steps.novedades.outcome }}" = "failure" ] && { echo "Falló el canal de novedades: el sitio muestra las de la corrida anterior."; fallo=1; }
           [ "${{ steps.puertas.outcome }}" = "failure" ] && { echo "Fallaron las cuarenta puertas: quedan las de la corrida anterior."; fallo=1; }
