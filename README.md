@@ -101,7 +101,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**64 fuentes en servicio**, en 66 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**66 fuentes en servicio**, en 68 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -129,12 +129,14 @@ python colectores/focos.py
 | `desplazamiento` | ACNUR — Refugee Data Finder | `A-2` | 33 | 8 |
 | `drogas` | Informe Mundial sobre las Drogas 2025, anexo estadístico — Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC) | `B-2` | 33 | 4 |
 | `eia` | Administración de Información Energética de los Estados Unidos (EIA) — estadística energética internacional | `A-2` | 33 | 3 |
-| `estado_reciente` | Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Argentina, Colombia, Ecuador, Panamá, Perú, Trinidad y Tobago | `A-2` | 33 | 4 |
+| `estado_reciente` | Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Argentina, Colombia, Ecuador, México, Panamá, Perú, Trinidad y Tobago | `A-2` | 33 | 4 |
 | `explorador` | Fundación Sherman Kent — exploración de puertas de datos oficiales | `A-1` | 33 | 6 |
 | `fmi_mensual` | Fondo Monetario Internacional — datos estadísticos (SDMX 3.0): liquidez internacional (IL) e índice de precios al consumidor (CPI) | `A-2` | 33 | 4 |
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
 | `gasto_publico` | Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics | `B-2` | 22 | 8 |
+| `gdl` | Global Data Lab — Universidad Radboud de Nimega: base de datos subnacional de desarrollo humano, corrupción y demografía | `B-3` | 28 | 7 |
+| `hapi` | HDX HAPI — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA): población base, pobreza multidimensional y riesgo INFORM | `A-2` | 33 | 6 |
 | `ia` | Microsoft AI Economy Institute; OpenAI Signals; Anthropic Economic Index; documentación oficial de siete empresas de nube | `B-3` | 33 | 7 |
 | `ia_apps` | Apple App Store — rankings de apps gratuitas y disponibilidad por país; padrón de asistentes de IA con origen verificado por la Fundación | `B-3` | 33 | 6 |
 | `indice_opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición uno | `A-1` | 33 | 10 |

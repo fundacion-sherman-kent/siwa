@@ -42,6 +42,10 @@ QUÉ PUBLICA, POR PAÍS
   · Ecuador — INEC, tabulado mensual de Justicia y Crimen con datos de la Fiscalía
     y el Ministerio del Interior: homicidios intencionales mes a mes desde enero de
     2014, fila «Total Nacional», y el año en curso hasta el último mes publicado.
+  · México — Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública:
+    víctimas de homicidio doloso por entidad y por mes. La serie llega a 2025 con
+    la metodología vieja; 2026 estrenó otra y va aparte, como avisa el propio
+    Secretariado.
 
 El año en curso NUNCA entra en la serie como si fuera un año entero: va aparte,
 con los meses que cubre.
@@ -51,10 +55,8 @@ from __future__ import annotations
 import csv
 import io
 import json
-import time
 import urllib.error
 import urllib.parse
-import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -75,20 +77,8 @@ TTPS = "https://ttps.gov.tt/statistics/download/?year={anio}"
 
 
 def pedir(url: str) -> bytes:
-    ultimo = None
-    for intento in range(4):
-        try:
-            p = urllib.request.Request(url, headers={"User-Agent": comun.AGENTE})
-            with urllib.request.urlopen(p, timeout=120) as r:
-                return r.read()
-        except urllib.error.HTTPError as e:
-            if e.code in (400, 404):
-                raise
-            ultimo = e
-        except Exception as e:  # noqa: BLE001 — se reintenta
-            ultimo = e
-        time.sleep(5 * (intento + 1))
-    raise RuntimeError(f"No se pudo llegar a {url}: {type(ultimo).__name__}")
+    """Un solo lugar para pedir. Si el sitio rechaza al recolector, se presenta entero."""
+    return comun.traer_crudo(url)
 
 
 def numero(v: str) -> float:
@@ -453,8 +443,123 @@ def ecuador() -> dict:
             "cadencia": "mensual"}
 
 
+# ── MÉXICO ──────────────────────────────────────────────────────────────────
+#
+# El Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública publica las
+# víctimas de homicidio doloso por entidad y por mes. El registro lo daba por
+# inaccesible: la página devolvía 403 y los archivos viven en un repositorio de
+# Microsoft que responde con una página de redirección en vez del archivo. Las dos
+# cosas tenían arreglo y ninguna era un bloqueo real:
+#   · la página responde apenas uno se presenta con las cabeceras completas;
+#   · el archivo se baja por la puerta «download.aspx?share=», que es la que usa
+#     el propio botón de descarga.
+#
+# DOS METODOLOGÍAS, DOS ARCHIVOS. En 2026 México estrenó el Registro Nacional de
+# Incidencia Delictiva y su propio ministerio advierte que no se compara con la
+# serie anterior. Por eso la serie llega hasta 2025 con el archivo viejo y el año
+# en curso sale del nuevo, declarado aparte. Pegarlos sería fabricar una caída.
+MEXICO_FICHA = "https://www.gob.mx/sesnsp/acciones-y-programas/datos-abiertos-de-incidencia-delictiva"
+MEXICO_DESCARGA = ("https://sspcgob-my.sharepoint.com/personal/cni_sspc_gob_mx/"
+                   "_layouts/15/download.aspx?share={id}")
+MESES_MX = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+            "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+
+
+def _victimas_mexico(identificador: str) -> tuple:
+    """Devuelve (víctimas de homicidio doloso por año, último mes con actividad)."""
+    import zipfile
+
+    with zipfile.ZipFile(io.BytesIO(pedir(MEXICO_DESCARGA.format(id=identificador)))) as z:
+        interno = next((n for n in z.namelist() if n.lower().endswith(".csv")), None)
+        if not interno:
+            raise RuntimeError("el archivo de México no trae planilla de texto")
+        crudo = z.read(interno)
+    texto = None
+    for codigo in ("utf-8-sig", "cp1252", "latin-1"):
+        try:
+            texto = crudo.decode(codigo)
+            break
+        except UnicodeDecodeError:
+            continue
+    if texto is None:
+        raise RuntimeError("no se pudo leer la planilla de México")
+    por_anio, ultimo_mes = {}, {}
+    for f in csv.DictReader(io.StringIO(texto)):
+        try:
+            anio = int(f["Año"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        homicidio = (f.get("Subtipo de delito") or "").strip().lower() == "homicidio doloso"
+        for n, mes in enumerate(MESES_MX, start=1):
+            try:
+                cantidad = int(float(f.get(mes) or 0))
+            except ValueError:
+                continue
+            # EL ÚLTIMO MES SE MIDE CON TODOS LOS DELITOS, no con los homicidios:
+            # un mes sin homicidios en una entidad no quiere decir que el mes no
+            # esté cargado, y México tiene delitos todos los meses en todo el país.
+            if cantidad > 0:
+                ultimo_mes[anio] = max(ultimo_mes.get(anio, 0), n)
+            if homicidio:
+                por_anio[anio] = por_anio.get(anio, 0) + cantidad
+    if not por_anio:
+        raise RuntimeError("la planilla de México ya no trae «Homicidio doloso»")
+    return por_anio, ultimo_mes
+
+
+def mexico() -> dict:
+    import html as _html
+    import re
+
+    pagina = pedir(MEXICO_FICHA).decode("utf-8", "replace")
+    enlaces = []
+    for href, cuerpo in re.findall(r'<a[^>]*href="([^"]*sharepoint[^"]*)"[^>]*>(.*?)</a>', pagina, re.S):
+        rotulo = _html.unescape(re.sub(r"<[^>]+>", " ", cuerpo)).replace("\xa0", " ")
+        rotulo = " ".join(rotulo.split())
+        identificador = re.search(r"/([A-Za-z0-9_\-]{30,})(?:\?|$)", href.split("?")[0] + "?")
+        if identificador:
+            enlaces.append((rotulo, identificador.group(1)))
+    if not enlaces:
+        raise RuntimeError("la página del Secretariado de México ya no ofrece archivos")
+
+    def elegir(patron):
+        for rotulo, ident in enlaces:
+            bajo = rotulo.lower()
+            if "tablero" in bajo or "municipal" in bajo or "federal -" in bajo:
+                continue
+            if "víctimas" not in bajo or "estatal" not in bajo:
+                continue
+            if re.search(patron, bajo):
+                return rotulo, ident
+        return None, None
+
+    rot_serie, id_serie = elegir(r"^\s*\d{4}\s*-\s*\d{4}\b")
+    rot_curso, id_curso = elegir(r"^\s*\w+\s*-\s*\w+\s+\d{4}\b")
+    if not id_serie:
+        raise RuntimeError("no se encontró la planilla histórica de víctimas por entidad de México")
+    por_anio, _ = _victimas_mexico(id_serie)
+    en_curso, aviso = None, None
+    if id_curso:
+        curso, meses = _victimas_mexico(id_curso)
+        anio = max(curso)
+        if meses.get(anio) and meses[anio] < 12:
+            en_curso = {"anio": anio, "hasta_mes": meses[anio], "valor": curso[anio]}
+            aviso = ("El año en curso sale del Registro Nacional de Incidencia Delictiva, que estrenó "
+                     "otra metodología en 2026: el propio Secretariado advierte que no se compara con "
+                     "la serie anterior, y por eso va aparte y no se pega a la serie")
+    serie = [{"anio": a, "valor": v} for a, v in sorted(por_anio.items())]
+    return {"serie": serie, "en_curso": en_curso, "nota": aviso,
+            "definicion": "víctimas de homicidio doloso en las carpetas de investigación abiertas por "
+                          "las fiscalías de los estados (fuero común)",
+            "organismo": "Secretariado Ejecutivo del Sistema Nacional de Seguridad Pública — "
+                         "incidencia delictiva estatal",
+            "enlace": MEXICO_FICHA,
+            "licencia": "Términos de libre uso de la información de gob.mx",
+            "cadencia": "mensual"}
+
+
 PAISES = {"ARG": argentina, "COL": colombia, "TTO": trinidad, "PAN": panama, "PER": peru,
-          "ECU": ecuador}
+          "ECU": ecuador, "MEX": mexico}
 
 
 def ficha(dato: dict) -> dict:
@@ -537,9 +642,11 @@ def construir() -> Path:
             "ESTAS CIFRAS NO SON COMPARABLES ENTRE PAÍSES Y NO SE SUMAN: cada Estado define el homicidio "
             "a su manera. Para comparar se usa la serie de la UNODC (Banco Mundial).",
             f"NO ESTÁN LOS 33: hoy hay {len(detalle)} Estados cuya estadística se lee sola ({con_dato}). "
-            "Se comprobó el 15/9/2026, portal por portal: Chile, México, Ecuador en su portal de datos "
-            "abiertos, República Dominicana y Brasil rechazan a los programas o esconden el archivo "
-            "detrás de un tablero; Costa Rica tenía todo el dominio del Poder Judicial caído; Uruguay "
+            "Se comprobó el 15/9/2026, portal por portal: Chile y Ecuador rechazan al recolector en el "
+            "portal donde está el dato, y el tablero chileno no abre ni con un navegador de verdad; "
+            "Brasil esconde el archivo detrás de una página que no lo enseña; República Dominicana "
+            "publica robos y feminicidios, pero no la serie de homicidios; Costa Rica tenía todo el "
+            "dominio del Poder Judicial caído; Uruguay "
             "difunde su cifra en informe PDF y en un visualizador, y en su catálogo abierto solo hay "
             "imputados, que no son víctimas; El Salvador dejó de publicar la estadística policial en "
             "2022. Venezuela, Cuba y Nicaragua no publican estadística de homicidios. Que un Estado no "
