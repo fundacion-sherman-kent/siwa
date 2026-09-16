@@ -177,6 +177,17 @@ INDICADORES = [
      "unidad": "% de las personas", "mas_es_peor": True, "decimales": 1,
      "cautela": "Es corrupción VIVIDA, no percibida: la persona declara que un agente le pidió "
                 "una coima. Suele ser más baja que la percepción, porque no todos la sufren. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+    # GASTO PÚBLICO SOCIAL (barrido de CEPALSTAT del 16/9/2026). Cuánto de su producto
+    # dedica cada Estado al gasto social; comparable en % del PIB, llena un hueco de
+    # desarrollo. Gobierno central (27 Estados; el general solo trae 9), función «Gasto social».
+    {"id": 3127, "clave": "gasto_social_cepal", "eje": "Desarrollo",
+     "rotulo": "Gasto público social", "unidad": "% del producto",
+     "mas_es_peor": False, "sin_direccion": True, "decimales": 2,
+     "fijar": {"Cobertura institucional": "Gobierno Central", "funciones": "Gasto social"},
+     "cautela": "Cuánto de su producto dedica cada Estado al gasto social, según CEPAL. Es el "
+                "gasto del GOBIERNO CENTRAL: en los Estados federales no cuenta lo que gastan "
+                "provincias y municipios, que puede ser mucho. Más gasto no es en sí mejor ni "
+                "peor: dice una decisión de política, no un resultado. La serie llega a 2023."},
 ]
 # Los Estados que la fuente agrega —«América Latina», «El Caribe»— no son
 # Estados: se descartan por no estar en el padrón, sin ruido.

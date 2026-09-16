@@ -61,6 +61,7 @@ ASUNTOS = {
     # Hoy tiene una sola fuente —avisa, no falla— hasta que entre una segunda encuesta.
     "confianza en las instituciones": ["confianza_policia", "desconfianza_justicia",
                                        "desconfianza_partidos", "confianza_municipio"],
+    "gasto social": ["gasto_social_cepal"],
     "bosque y deforestación": ["bosque", "perdida_bosque"],
     "pobreza": ["pobreza", "pobreza_cepal", "pobreza_extrema", "vulnerabilidad"],
     "desigualdad": ["gini", "gini_cepal"],
