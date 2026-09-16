@@ -55,7 +55,12 @@ ASUNTOS = {
                            "gasto_seguridad_cepal"],
     "corrupción": ["corrupcion", "corrupcion_politica", "soborno_personas",
                    "soborno_empresas", "regalo_contrato", "politica_anticorrupcion",
-                   "percepcion_corrupcion"],
+                   "percepcion_corrupcion", "corrupcion_percibida_gente", "coima_policia"],
+    # CONFIANZA EN LAS INSTITUCIONES (Latinobarómetro vía CEPAL, 16/9/2026). Asunto
+    # propio: mide lo que la gente SIENTE hacia sus instituciones, no cómo funcionan.
+    # Hoy tiene una sola fuente —avisa, no falla— hasta que entre una segunda encuesta.
+    "confianza en las instituciones": ["confianza_policia", "desconfianza_justicia",
+                                       "desconfianza_partidos", "confianza_municipio"],
     "bosque y deforestación": ["bosque", "perdida_bosque"],
     "pobreza": ["pobreza", "pobreza_cepal", "pobreza_extrema", "vulnerabilidad"],
     "desigualdad": ["gini", "gini_cepal"],

@@ -145,6 +145,38 @@ INDICADORES = [
                 "no incluye provincias ni municipios, que en los Estados federales pagan "
                 "buena parte de la policía. LA SERIE TERMINA EN 2020 en casi todos los "
                 "Estados: sirve para contrastar niveles, no para el año corriente."},
+    # CONFIANZA EN LAS INSTITUCIONES Y CORRUPCIÓN VIVIDA (barrido de CEPALSTAT del
+    # 16/9/2026). Capa de gobernanza que el registro no tenía: no cuánta corrupción
+    # miden los expertos —eso ya está con el WGI y Transparencia— sino cuánto confía
+    # y qué vive la gente. Fuente base: Latinobarómetro vía CEPAL, que la dirección
+    # autorizó a publicar como porcentaje. Dieciocho Estados.
+    {"id": 3257, "clave": "confianza_policia", "eje": "Gobernanza",
+     "rotulo": "Personas que confían en la policía",
+     "unidad": "% de las personas", "mas_es_peor": False, "decimales": 1,
+     "cautela": "CUÁNTO CONFÍA LA GENTE en la policía, no cuán buena es. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+    {"id": 5528, "clave": "desconfianza_justicia", "eje": "Gobernanza",
+     "rotulo": "Personas que desconfían del poder judicial",
+     "unidad": "% de las personas", "mas_es_peor": True, "decimales": 1,
+     "cautela": "Es desconfianza DECLARADA en la justicia, no una medida de su independencia "
+                "—esa está en «Estado de derecho»—. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+    {"id": 995, "clave": "desconfianza_partidos", "eje": "Gobernanza",
+     "rotulo": "Personas que desconfían de los partidos y el congreso",
+     "unidad": "% de las personas", "mas_es_peor": True, "decimales": 1,
+     "cautela": "Mide desconfianza DECLARADA en los partidos políticos y el congreso. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+    {"id": 5653, "clave": "confianza_municipio", "eje": "Gobernanza",
+     "rotulo": "Personas que confían en su municipalidad",
+     "unidad": "% de las personas", "mas_es_peor": False, "decimales": 1,
+     "cautela": "Confianza DECLARADA en el gobierno local, el más cercano. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+    {"id": 5548, "clave": "corrupcion_percibida_gente", "eje": "Gobernanza",
+     "rotulo": "Personas que creen que la corrupción está muy generalizada",
+     "unidad": "% de las personas", "mas_es_peor": True, "decimales": 1,
+     "cautela": "Es lo que la gente CREE sobre los funcionarios públicos, y suma a los índices "
+                "de expertos de Transparencia y el WGI la vivencia ciudadana. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+    {"id": 5655, "clave": "coima_policia", "eje": "Gobernanza",
+     "rotulo": "Personas a las que un policía pidió una coima en el último año",
+     "unidad": "% de las personas", "mas_es_peor": True, "decimales": 1,
+     "cautela": "Es corrupción VIVIDA, no percibida: la persona declara que un agente le pidió "
+                "una coima. Suele ser más baja que la percepción, porque no todos la sufren. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
 ]
 # Los Estados que la fuente agrega —«América Latina», «El Caribe»— no son
 # Estados: se descartan por no estar en el padrón, sin ruido.

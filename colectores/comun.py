@@ -204,6 +204,13 @@ CATEGORIAS = {
     "censura_medios": "entorno-informativo",
     "conflicto_no_estatal": "grupos-armados",
     "corrupcion": "institucional",
+    # Confianza y corrupción vividas, de Latinobarómetro vía CEPAL (16/9/2026).
+    "confianza_policia": "institucional",
+    "desconfianza_justicia": "institucional",
+    "desconfianza_partidos": "democracia",
+    "confianza_municipio": "institucional",
+    "corrupcion_percibida_gente": "institucional",
+    "coima_policia": "soborno",
     "corrupcion_politica": "democracia",
     "democracia_electoral": "democracia",
     "democracia_liberal": "democracia",
