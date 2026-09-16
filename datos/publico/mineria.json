@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-16T19:25:02+00:00",
+  "corrida": "2026-09-16T20:27:22+00:00",
   "medidas_con_suficientes_casos": 199,
   "pares_probados": 19701,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3730,
+    "sobreviven": 3731,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3318,
+  "pistas_totales": 3319,
   "anomalias_totales": 366,
   "pistas": [
     {
@@ -333,6 +333,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.912,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.5067171396501984e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -341,19 +354,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 7.941009585112988e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.908,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1437178874846145e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
