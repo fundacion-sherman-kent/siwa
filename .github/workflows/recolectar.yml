@@ -579,17 +579,6 @@ jobs:
         continue-on-error: true
         run: python herramientas/sellar-portada.py
 
-      # LA TARJETA PARA COMPARTIR SE REHACE ACA, detras del sello. Es la imagen
-      # que se ve cuando alguien pasa SIWA por WhatsApp o LinkedIn, y lleva
-      # horneadas las cifras: «167 indicadores · 60 fuentes · 33 Estados». Nadie
-      # la rehacia: se generaba a mano, asi que cada vez que entraba un indicador
-      # la tarjeta seguia diciendo el numero viejo hasta que alguien se acordaba.
-      - name: Tarjeta para compartir
-        id: tarjeta
-        if: always()
-        continue-on-error: true
-        run: python herramientas/tarjeta-compartir.py
-
       # El catalogo va ULTIMO entre los generadores: recorre lo que quedo
       # escrito en esta corrida. Si corriera antes, publicaria el catalogo de
       # la corrida anterior, que es peor que no publicar ninguno.
@@ -717,7 +706,6 @@ jobs:
           [ "${{ steps.novedades.outcome }}" = "failure" ] && { echo "Falló el canal de novedades: el sitio muestra las de la corrida anterior."; fallo=1; }
           [ "${{ steps.puertas.outcome }}" = "failure" ] && { echo "Fallaron las cuarenta puertas: quedan las de la corrida anterior."; fallo=1; }
           [ "${{ steps.sellar.outcome }}" = "failure" ] && { echo "Falló el sellado de las cifras de la portada."; fallo=1; }
-          [ "${{ steps.tarjeta.outcome }}" = "failure" ] && { echo "Fallo la tarjeta para compartir."; fallo=1; }
           [ "${{ steps.catalogo.outcome }}" = "failure" ] && { echo "Falló el catálogo público de datos."; fallo=1; }
           [ "${{ steps.mineria.outcome }}" = "failure" ] && { echo "Falló la minería sobre el registro."; fallo=1; }
           [ "${{ steps.opacidad_historia.outcome }}" = "failure" ] && { echo "Falló el archivo de la historia del Índice de Opacidad: la evolución se corta."; fallo=1; }
