@@ -62,6 +62,7 @@ ASUNTOS = {
     "confianza en las instituciones": ["confianza_policia", "desconfianza_justicia",
                                        "desconfianza_partidos", "confianza_municipio"],
     "gasto social": ["gasto_social_cepal"],
+    "desastres declarados por la ONU": ["desastres_onu"],
     "bosque y deforestación": ["bosque", "perdida_bosque"],
     "pobreza": ["pobreza", "pobreza_cepal", "pobreza_extrema", "vulnerabilidad"],
     "desigualdad": ["gini", "gini_cepal"],

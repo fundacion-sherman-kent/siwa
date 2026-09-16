@@ -212,6 +212,7 @@ CATEGORIAS = {
     "corrupcion_percibida_gente": "institucional",
     "coima_policia": "soborno",
     "gasto_social_cepal": "condiciones",
+    "desastres_onu": "riesgo-humanitario",
     "corrupcion_politica": "democracia",
     "democracia_electoral": "democracia",
     "democracia_liberal": "democracia",
