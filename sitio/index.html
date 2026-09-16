@@ -4356,11 +4356,18 @@
              + '<th>País</th><th>Materia</th><th>Organismo</th><th>Período más nuevo</th></tr></thead><tbody>'
              + nac + '</tbody></table></div>' : '');
   }
-  fetch(RUTA + 'reloj-actualidad.json', {cache:'no-cache'}).then(r => {
+  // LA HORA DEL SERVIDOR TIENE QUE SER FRESCA. Con VPN o detrás de un proxy, la
+  // respuesta puede venir de una caché intermedia y su cabecera «Date» quedar vieja
+  // de horas: tomarla como hora real corría el reloj UTC. Se pide con «no-store» y
+  // con un parámetro único, así ninguna caché puede servir una respuesta guardada;
+  // y se ignora un desfase mayor a doce horas, que a esa altura no es un reloj
+  // corrido sino una cabecera rancia que se coló igual. Ante la duda, gana la hora
+  // del propio dispositivo, que la VPN no cambia.
+  fetch(RUTA + 'reloj-actualidad.json?t=' + Date.now(), {cache:'no-store'}).then(r => {
     const fechaServidor = r.headers.get('Date');
     if(fechaServidor){
       const d = new Date(fechaServidor).getTime() - Date.now();
-      if(Math.abs(d) > 60000) { desfaseServidor = d; reloj(); }
+      if(Math.abs(d) > 60000 && Math.abs(d) < 12 * 3600000) { desfaseServidor = d; reloj(); }
     }
     return r.ok ? r.json() : null;
   }).then(c => {
