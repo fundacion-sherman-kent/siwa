@@ -71,6 +71,7 @@ MESES_EN = ["january", "february", "march", "april", "may", "june", "july", "aug
             "september", "october", "november", "december"]
 
 SNIC = "https://cloud-snic.minseg.gob.ar/Bases/SNIC/snic-pais.csv"
+SNIC_PROVINCIAS = "https://cloud-snic.minseg.gob.ar/Bases/SNIC/snic-provincias.csv"
 COLOMBIA = "https://www.datos.gov.co/resource/m8fd-ahd9.json"
 COLOMBIA_FICHA = "https://www.datos.gov.co/api/views/m8fd-ahd9.json"
 TTPS = "https://ttps.gov.tt/statistics/download/?year={anio}"
@@ -83,6 +84,35 @@ def pedir(url: str) -> bytes:
 
 def numero(v: str) -> float:
     return float(str(v).replace(",", ".").strip())
+
+
+def _texto(crudo: bytes) -> str:
+    """La Procuraduría de Panamá publica unos años en UTF-8 y otros en cp1252.
+
+    Leerlos todos como UTF-8 no rompe la lectura: la ensucia. «Chiriquí» queda como
+    «Chiriqu�» y pasa a contar como una provincia distinta de «Chiriquí». Se
+    prueba en orden y gana la primera codificación que entra entera.
+    """
+    for codigo in ("utf-8-sig", "utf-8", "cp1252", "latin-1"):
+        try:
+            return crudo.decode(codigo)
+        except UnicodeDecodeError:
+            continue
+    return crudo.decode("utf-8", "replace")
+
+
+def _llave(nombre: str) -> str:
+    """El mismo lugar escrito de ocho maneras tiene que contar como uno.
+
+    Panamá trae «BOCAS DEL TORO», «Bocas Del Toro», «Bocas del Toro», «Chiriqui»,
+    «Chiriquí» y una versión con el acento roto: 38 etiquetas para unos 13 lugares.
+    Contarlas como distintas multiplicaría por tres las provincias del país.
+    """
+    import unicodedata
+    limpio = unicodedata.normalize("NFKD", str(nombre or ""))
+    limpio = "".join(c for c in limpio if not unicodedata.combining(c))
+    limpio = limpio.replace("�", "")
+    return " ".join(limpio.lower().split())
 
 
 # ── ARGENTINA ───────────────────────────────────────────────────────────────
@@ -101,12 +131,27 @@ def argentina() -> dict:
     if not serie:
         raise RuntimeError("el SNIC no trae la fila de homicidios dolosos: cambió la planilla")
     ultimo = serie[-1]["anio"]
+    # El desglose por provincia vive en otra planilla de la misma base. Si ese día
+    # no está, la cifra nacional NO se cae: el censo se queda sin ese renglón y se
+    # declara, que es distinto de decir que Argentina no publica por provincia.
+    provincias = set()
+    try:
+        crudo = list(csv.reader(io.StringIO(pedir(SNIC_PROVINCIAS).decode("utf-8-sig", "replace")),
+                                delimiter=";"))
+        cab = [c.strip('"') for c in crudo[0]]
+        j = {c: n for n, c in enumerate(cab)}
+        for f in crudo[1:]:
+            if len(f) >= len(cab) and f[j["codigo_delito_snic_nombre"]].strip('"') == "Homicidios dolosos":
+                provincias.add(f[j["provincia_nombre"]].strip('"'))
+    except Exception:  # noqa: BLE001 — se declara con el ausente, no se inventa
+        provincias = set()
     return {"serie": serie, "en_curso": None,
             "nota": f"{str(tasas[ultimo]).replace('.', ',')} víctimas cada 100.000 habitantes en {ultimo}, según el Ministerio",
             "definicion": "víctimas de homicidio doloso (SNIC, delitos registrados por las fuerzas de seguridad)",
             "organismo": "Ministerio de Seguridad Nacional — Sistema Nacional de Información Criminal (SNIC)",
             "enlace": "https://www.argentina.gob.ar/seguridad/estadisticascriminales/bases-de-datos",
-            "licencia": "CC BY 4.0", "cadencia": "anual"}
+            "licencia": "CC BY 4.0", "cadencia": "anual",
+            "unidades": {"nombre": "provincia", "cuantas": len(provincias)} if provincias else None}
 
 
 # ── COLOMBIA ────────────────────────────────────────────────────────────────
@@ -116,6 +161,14 @@ def colombia() -> dict:
     q = urllib.parse.quote("date_trunc_ym(fecha_hecho) as mes, sum(cantidad) as total")
     mensual = json.loads(pedir(f"{COLOMBIA}?$select={q}&$group=mes&$order=mes%20DESC&$limit=1"))
     ficha = json.loads(pedir(COLOMBIA_FICHA))
+    departamentos = set()
+    try:
+        q3 = urllib.parse.quote("departamento, count(*) as n")
+        for x in json.loads(pedir(f"{COLOMBIA}?$select={q3}&$group=departamento&$limit=200")):
+            if x.get("departamento"):
+                departamentos.add(x["departamento"].strip())
+    except Exception:  # noqa: BLE001 — se declara con el ausente
+        departamentos = set()
     ultimo_mes = datetime.fromisoformat(mensual[0]["mes"][:10])
     por_anio = {int(x["anio"]): int(float(x["total"])) for x in anual if x.get("anio")}
     en_curso = None
@@ -129,13 +182,15 @@ def colombia() -> dict:
                           "publicado por el Ministerio de Defensa)",
             "organismo": "Ministerio de Defensa Nacional — conjunto «HOMICIDIO» en datos.gov.co",
             "enlace": "https://www.datos.gov.co/d/m8fd-ahd9", "licencia": "CC BY-SA 4.0",
-            "cadencia": "mensual"}
+            "cadencia": "mensual",
+            "unidades": {"nombre": "departamento", "cuantas": len(departamentos)}
+                        if departamentos else None}
 
 
 # ── TRINIDAD Y TOBAGO ───────────────────────────────────────────────────────
 def trinidad() -> dict:
     este = datetime.now(timezone.utc).year
-    por_anio, meses_del_anio = {}, {}
+    por_anio, meses_del_anio, divisiones = {}, {}, set()
     for anio in range(2018, este + 1):
         try:
             texto = pedir(TTPS.format(anio=anio)).decode("utf-8-sig", "replace")
@@ -150,6 +205,8 @@ def trinidad() -> dict:
             if (f.get("Offence") or "").strip().lower() != "murders":
                 continue
             total += int(float(f.get("Reported") or 0))
+            if (f.get("Division") or "").strip():
+                divisiones.add(_llave(f["Division"]))
             mes = (f.get("Month") or "").strip().lower()
             if mes in MESES_EN:
                 meses.add(MESES_EN.index(mes) + 1)
@@ -167,7 +224,12 @@ def trinidad() -> dict:
             "organismo": "Trinidad and Tobago Police Service (TTPS) — Crime Statistics",
             "enlace": "https://ttps.gov.tt/statistics/",
             "licencia": "sin licencia declarada: estadística oficial publicada para el público",
-            "cadencia": "mensual"}
+            "cadencia": "mensual",
+            # NO ES LA UNIDAD CENSAL. Son divisiones de la policía, que no coinciden
+            # con las «regional corporations» y para las que nadie publica población.
+            # Se anota lo que es, para que el censo no las cuente como provincias.
+            "unidades": {"nombre": "división policial", "cuantas": len(divisiones),
+                         "coincide_con_la_unidad_censal": False} if divisiones else None}
 
 
 # ── PANAMÁ ──────────────────────────────────────────────────────────────────
@@ -202,7 +264,7 @@ def _anio_del_titulo(titulo: str) -> tuple:
 
 def panama() -> dict:
     catalogo = json.loads(pedir(PANAMA_CATALOGO))
-    por_anio, hasta_mes, licencias, discordancia = {}, {}, set(), {}
+    por_anio, hasta_mes, licencias, discordancia, areas = {}, {}, set(), {}, set()
     for p in (catalogo.get("result") or {}).get("results") or []:
         org = ((p.get("organization") or {}).get("title") or "")
         if "procuradur" not in org.lower():
@@ -214,12 +276,17 @@ def panama() -> dict:
                         if (r.get("format") or "").upper() == "CSV" and r.get("url")), None)
         if not recurso:
             continue
-        texto = pedir(recurso["url"]).decode("utf-8", "replace")
+        texto = _texto(pedir(recurso["url"]))
         filas = [l for l in texto.splitlines()[1:] if l.strip()]
         if not filas:
             continue
-        distintos = sum(1 for l in filas
-                        if (l.split(";")[1].strip() if len(l.split(";")) > 1 else "") != str(anio))
+        distintos = 0
+        for l in filas:
+            campos = l.split(";")
+            if len(campos) > 1 and campos[1].strip() != str(anio):
+                distintos += 1
+            if len(campos) > 3 and campos[3].strip():
+                areas.add(_llave(campos[3]))
         por_anio[anio] = len(filas)
         hasta_mes[anio] = hasta
         if distintos:
@@ -246,7 +313,16 @@ def panama() -> dict:
             "organismo": "Procuraduría General de la Nación — Informe Estadístico de Víctimas de Homicidio",
             "enlace": "https://www.datosabiertos.gob.pa/dataset?q=homicidio",
             "licencia": "CC BY 4.0" if "cc-by" in licencias else "según declara el catálogo de datos abiertos",
-            "cadencia": "anual, con un avance semestral"}
+            "cadencia": "anual, con un avance semestral",
+            # EL CONTEO ES APROXIMADO Y SE DICE. El original escribe el mismo lugar de
+            # varias maneras —«Chiriquí», «Chiriqui», «Chiriqu¡»— y en algunos años los
+            # acentos se perdieron enteros («panam», «darin», «cocl»): quedan 26
+            # etiquetas para unas 14 unidades reales. Juntarlas a ojo sería inventar
+            # una precisión que el archivo no tiene. Se cuentan las etiquetas, se avisa,
+            # y el cotejo contra el padrón es el paso siguiente.
+            "unidades": {"nombre": "provincia o comarca", "etiquetas_distintas": len(areas),
+                         "cuantas": None,
+                         "hay_que_cotejar_los_nombres": True} if areas else None}
 
 
 # ── PERÚ ────────────────────────────────────────────────────────────────────
@@ -277,23 +353,29 @@ def peru() -> dict:
     # EL ZIP TRAE UNA FOTO POR MES y ninguna dice en el nombre cuál llega más lejos:
     # la más pesada tiene más distritos, no más años. Se leen todas y gana la que
     # tiene el año más nuevo; elegir por tamaño dejaba la serie tres años atrás.
-    serie, tasas = [], {}
+    serie, tasas, regiones = [], {}, set()
     with zipfile.ZipFile(io.BytesIO(pedir(enlaces[0]))) as z:
         internos = [n for n in z.namelist() if n.lower().endswith(".csv")]
         if not internos:
             raise RuntimeError("el ZIP de Perú no trae ningún CSV")
         for interno in internos:
             texto = z.read(interno).decode("utf-8-sig", "replace")
-            propia, sus_tasas = [], {}
+            propia, sus_tasas, sus_regiones = [], {}, set()
             for f in csv.DictReader(io.StringIO(texto)):
-                if (f.get("INDICADOR") != PERU_INDICADOR or f.get("AMBITO") != PERU_AMBITO_NACIONAL
-                        or f.get("FUENTE") != PERU_FUENTE):
+                if f.get("INDICADOR") != PERU_INDICADOR or f.get("FUENTE") != PERU_FUENTE:
+                    continue
+                # De paso, sin descargar nada más: el mismo archivo trae el ámbito
+                # regional. Es lo que el censo subnacional necesita para medir el
+                # umbral con lo que hay y no con dos fuentes internacionales.
+                if f.get("AMBITO") == "1" and f.get("UBIGEO_DASH"):
+                    sus_regiones.add(f["UBIGEO_DASH"])
+                if f.get("AMBITO") != PERU_AMBITO_NACIONAL:
                     continue
                 anio = int(f["ANIO"])
                 propia.append({"anio": anio, "valor": int(float(f["VALORES"]))})
                 sus_tasas[anio] = round(numero(f["VALORES_2"]), 2)
             if propia and (not serie or max(x["anio"] for x in propia) > max(x["anio"] for x in serie)):
-                serie, tasas = propia, sus_tasas
+                serie, tasas, regiones = propia, sus_tasas, sus_regiones
     if not serie:
         raise RuntimeError("el tablero del Perú no trae el indicador 30 del CEIC en el ámbito nacional")
     serie.sort(key=lambda x: x["anio"])
@@ -305,7 +387,8 @@ def peru() -> dict:
                           "Criminalidad (INEI, Ministerio Público y Policía Nacional)",
             "organismo": "Ministerio del Interior — indicador 30 (CEIC) del Plan de Acción de "
                          "Seguridad Ciudadana",
-            "enlace": PERU_FICHA, "licencia": "ODC-BY", "cadencia": "anual"}
+            "enlace": PERU_FICHA, "licencia": "ODC-BY", "cadencia": "anual",
+            "unidades": {"nombre": "región", "cuantas": len(regiones)} if regiones else None}
 
 
 # ── ECUADOR ─────────────────────────────────────────────────────────────────
@@ -415,6 +498,19 @@ def ecuador() -> dict:
             break
     if total is None:
         raise RuntimeError("la hoja de homicidios del INEC de Ecuador ya no trae «Total Nacional»")
+    # Las provincias son las filas con etiqueta entre la cabecera y «Total Nacional»:
+    # el conteo sale de la misma planilla, sin pedir nada más.
+    provincias = set()
+    for numero_fila in sorted(filas):
+        if numero_fila <= cabeza:
+            continue
+        if filas[numero_fila] is total:
+            break
+        for v in filas[numero_fila].values():
+            if isinstance(v, str) and len(v.strip()) > 2 and not v.strip().lower().startswith(
+                    ("total", "fuente", "nota", "elabor", "número", "numero")):
+                provincias.add(v.strip())
+                break
     por_anio, meses = {}, {}
     for col, fecha in columnas.items():
         v = total.get(col)
@@ -440,7 +536,8 @@ def ecuador() -> dict:
             "enlace": ECUADOR_FICHA,
             "licencia": "sin licencia declarada junto al tabulado: estadística oficial publicada para "
                         "el público",
-            "cadencia": "mensual"}
+            "cadencia": "mensual",
+            "unidades": {"nombre": "provincia", "cuantas": len(provincias)} if provincias else None}
 
 
 # ── MÉXICO ──────────────────────────────────────────────────────────────────
@@ -483,12 +580,14 @@ def _victimas_mexico(identificador: str) -> tuple:
             continue
     if texto is None:
         raise RuntimeError("no se pudo leer la planilla de México")
-    por_anio, ultimo_mes = {}, {}
+    por_anio, ultimo_mes, entidades = {}, {}, set()
     for f in csv.DictReader(io.StringIO(texto)):
         try:
             anio = int(f["Año"])
         except (KeyError, TypeError, ValueError):
             continue
+        if (f.get("Entidad") or "").strip():
+            entidades.add(f["Entidad"].strip())
         homicidio = (f.get("Subtipo de delito") or "").strip().lower() == "homicidio doloso"
         for n, mes in enumerate(MESES_MX, start=1):
             try:
@@ -504,7 +603,7 @@ def _victimas_mexico(identificador: str) -> tuple:
                 por_anio[anio] = por_anio.get(anio, 0) + cantidad
     if not por_anio:
         raise RuntimeError("la planilla de México ya no trae «Homicidio doloso»")
-    return por_anio, ultimo_mes
+    return por_anio, ultimo_mes, entidades
 
 
 def mexico() -> dict:
@@ -537,10 +636,10 @@ def mexico() -> dict:
     rot_curso, id_curso = elegir(r"^\s*\w+\s*-\s*\w+\s+\d{4}\b")
     if not id_serie:
         raise RuntimeError("no se encontró la planilla histórica de víctimas por entidad de México")
-    por_anio, _ = _victimas_mexico(id_serie)
+    por_anio, _, entidades = _victimas_mexico(id_serie)
     en_curso, aviso = None, None
     if id_curso:
-        curso, meses = _victimas_mexico(id_curso)
+        curso, meses, _ = _victimas_mexico(id_curso)
         anio = max(curso)
         if meses.get(anio) and meses[anio] < 12:
             en_curso = {"anio": anio, "hasta_mes": meses[anio], "valor": curso[anio]}
@@ -555,7 +654,9 @@ def mexico() -> dict:
                          "incidencia delictiva estatal",
             "enlace": MEXICO_FICHA,
             "licencia": "Términos de libre uso de la información de gob.mx",
-            "cadencia": "mensual"}
+            "cadencia": "mensual",
+            "unidades": {"nombre": "entidad federativa", "cuantas": len(entidades)}
+                        if entidades else None}
 
 
 PAISES = {"ARG": argentina, "COL": colombia, "TTO": trinidad, "PAN": panama, "PER": peru,
@@ -595,9 +696,13 @@ def construir() -> Path:
             try:
                 dato = lector()
                 r["indicadores"]["homicidios_estado"] = ficha(dato)
+                # «unidades» viaja con la ficha: es lo que el censo subnacional necesita
+                # para medir el umbral con lo que de verdad hay. Se mide de paso, con el
+                # archivo ya abierto, y no se publica ninguna cifra por unidad: la capa
+                # sigue apagada. Esto dice cuán lejos está de poder encenderse.
                 r["fuente_nacional"] = {k: dato.get(k) for k in
                                         ("organismo", "enlace", "licencia", "cadencia", "definicion",
-                                         "actualizado_por_la_fuente")}
+                                         "actualizado_por_la_fuente", "unidades")}
                 detalle[p["iso"]] = r["fuente_nacional"]
                 cobertura["homicidios_estado"] = cobertura.get("homicidios_estado", 0) + 1
             except Exception as error:  # noqa: BLE001 — la caída se declara
