@@ -4454,7 +4454,7 @@
                      ['ia','Microsoft, OpenAI, Anthropic y siete empresas de nube — uso de IA y nube'],
                      ['fmi_mensual','FMI — reservas internacionales e inflación mensual'],
                      ['inflacion','CEPALSTAT — índice de precios al consumidor mensual de los 33'],
-                     ['estado_reciente','Argentina, Colombia y Trinidad y Tobago — homicidios según el propio Estado'],
+                     ['estado_reciente','Estadística oficial de homicidios de cada Estado'],
                      ['ia_apps','Apple App Store — asistentes de IA por origen de la empresa'],
                      ['influencia','Google y TikTok — redes de influencia dadas de baja'],
                      ['eia','EIA de EE. UU. — petróleo y gas'],
@@ -5018,6 +5018,38 @@
       + 'de la cobertura del registro civil o de las dos cosas.</span></div>';
   }
 
+  // LO QUE EL ESTADO YA PUBLICÓ, EN LA MISMA TARJETA. La serie comparable de la
+  // UNODC llega con dos o tres años de atraso porque homologa lo que le mandan
+  // los 33 Estados. Mientras tanto el Ministerio ya publicó el año pasado, y el
+  // lector que abría la tarjeta veía 2023 sin enterarse. Eso fue lo que marcaron
+  // dos analistas. La cifra del Estado va acá, con su organismo y su año, y NO
+  // se compara con otros países: se dice en la misma línea.
+  const MES_NOMBRE = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto',
+                      'septiembre','octubre','noviembre','diciembre'];
+  function ultimoDelEstado(clave, iso){
+    if(clave !== 'homicidios' || !iso) return '';
+    const r = ((almacen.estado_reciente || {}).registros || []).find(x => x.iso === iso);
+    const f = r && (r.indicadores || {}).homicidios_estado;
+    if(!f) return '';
+    const capaBM = (capas() || {}).homicidios;
+    const serieBM = (capaBM && capaBM.serieDe) ? (capaBM.serieDe(iso) || []) : [];
+    const anioBM = serieBM.length ? +serieBM[serieBM.length - 1].anio : null;
+    const enCurso = f.en_curso && f.en_curso.hasta_mes
+      ? ' Y de <b>' + f.en_curso.anio + '</b>, hasta ' + MES_NOMBRE[f.en_curso.hasta_mes - 1]
+        + ': <b>' + miles(f.en_curso.valor) + '</b>, cifra provisional que el Estado corrige hasta el cierre.'
+      : '';
+    // Si el Estado no va más adelante que la serie comparable, no se anuncia como
+    // novedad: sería vender por nuevo un año que el registro ya mostraba.
+    if(anioBM !== null && f.anio <= anioBM && !enCurso) return '';
+    const org = ((r.fuente_nacional || {}).organismo || '').split('—')[0].trim();
+    return '<div class="segunda-fuente"><b>Más reciente · lo que publica el propio Estado.</b> '
+      + esc(nombreDe(iso)) + ' ya publicó <b>' + f.anio + '</b>: <b>' + miles(f.valor)
+      + '</b> víctimas' + (org ? ' (' + esc(org) + ')' : '') + '.' + enCurso
+      + ' <span class="ojo">Es un recuento de víctimas, no una tasa, y no se compara con otros '
+      + 'países: cada Estado define y registra el homicidio a su manera. Para comparar entre '
+      + 'Estados sigue valiendo la serie de la UNODC, que es la del gráfico.</span></div>';
+  }
+
   function fichaDeMateria(clave){
     const cap = (capas() || {})[clave];
     const rot = rotuloDeMateria(clave);
@@ -5053,6 +5085,7 @@
         + (puesto ? ' · lugar <b>' + puesto + '</b> de ' + todos.length
                     + ' Estados con dato' : '')
         + (detalle ? '<br>' + esc(detalle) : '')
+        + ultimoDelEstado(clave, paisFiltro)
         + (clave === 'homicidios' ? contrasteHomicidios(paisFiltro) : '')
         + (cap.cautela ? '<details class="cautela-plegada"><summary>Cuidado con esta cifra</summary>'
                          + esc(cap.cautela) + '</details>' : '')
@@ -5521,6 +5554,7 @@
           + esc(d.bloque) : '')
       + figuraTira(clave, iso)
       + (detalle ? '<br>' + esc(detalle) : '')
+      + ultimoDelEstado(clave, iso)
       + (fuenteDeMateria(clave) ? '<br><b>Fuente:</b> ' + fuenteDeMateria(clave) : '')
       + (serie.length > 1 ? '<br><b>Serie:</b> ' + serie.length + ' años, de '
           + serie[0].anio + ' a ' + serie[serie.length-1].anio
