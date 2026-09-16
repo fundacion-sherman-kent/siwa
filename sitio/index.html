@@ -4289,6 +4289,10 @@
   de base pertenecen a los productores citados en cada indicador, con sus propias condiciones.
   La cita no implica aval de la Fundación sobre el uso que se haga de estos datos ni sobre
   conclusiones ajenas.
+  <br><br>
+  <b>Medición y privacidad.</b> SIWA mide su tráfico con Google Analytics, con la dirección IP
+  anonimizada y sin guardar datos que identifiquen a una persona. Cómo se mide, por cuánto
+  tiempo y cómo desactivarlo, en <a href="privacidad.html">Privacidad y cookies</a>.
 </footer>
 
 <script src="vendor/leaflet.js"></script>
@@ -17220,6 +17224,40 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-desplazamiento','desplazamiento',err.message);
       document.getElementById('proc-desplazamiento').textContent='Sin registro disponible.'; marcador(); });
+})();
+</script>
+<!-- CARTEL DE COOKIES, SOBRIO Y CON MEMORIA. La medición ya está activa (modelo de
+     consentimiento por uso, habitual en la región); este cartel INFORMA y enlaza al aviso.
+     Se recuerda la aceptación en el propio navegador —try/catch: si el almacenamiento está
+     bloqueado, no rompe, solo vuelve a mostrarse—. Sin colores nuevos: usa la paleta de la casa. -->
+<div id="aviso-cookies" role="dialog" aria-label="Aviso de cookies" style="display:none;
+     position:fixed; left:12px; right:12px; bottom:12px; z-index:9999; max-width:560px; margin:0 auto;
+     background:#00121E; color:#F4F2EC; border:1px solid #1d3346; border-radius:12px;
+     box-shadow:0 10px 30px rgba(0,0,0,.35); padding:14px 16px; font-size:13.5px; line-height:1.5;">
+  <div style="display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap;">
+    <div style="flex:1; min-width:220px;">
+      SIWA mide su tráfico con cookies de Google Analytics —con la IP anonimizada— para
+      entender cuánta gente lo usa y mejorarlo. No guarda datos que te identifiquen.
+      <a href="privacidad.html" style="color:#FB6500;">Cómo se mide y cómo desactivarlo</a>.
+    </div>
+    <button id="aviso-cookies-ok" type="button" style="align-self:center; background:#FB6500;
+       color:#fff; border:0; border-radius:8px; font-weight:700; font-size:13.5px;
+       padding:9px 18px; cursor:pointer;">Entendido</button>
+  </div>
+</div>
+<script>
+(function(){
+  var LLAVE = "siwa_cookies_ok";
+  var caja = document.getElementById("aviso-cookies");
+  if(!caja) return;
+  var aceptado = false;
+  try { aceptado = localStorage.getItem(LLAVE) === "1"; } catch(e) {}
+  if(!aceptado) caja.style.display = "block";
+  var b = document.getElementById("aviso-cookies-ok");
+  if(b) b.addEventListener("click", function(){
+    try { localStorage.setItem(LLAVE, "1"); } catch(e) {}
+    caja.style.display = "none";
+  });
 })();
 </script>
 </body>
