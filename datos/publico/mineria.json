@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-16T05:26:00+00:00",
-  "medidas_con_suficientes_casos": 196,
-  "pares_probados": 19110,
+  "corrida": "2026-09-16T06:23:18+00:00",
+  "medidas_con_suficientes_casos": 198,
+  "pares_probados": 19503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 19.110 pares y el umbral de siempre, alrededor de 955 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3592,
+    "por_que": "Con 19.503 pares y el umbral de siempre, alrededor de 975 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3671,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3180,
-  "anomalias_totales": 364,
+  "pistas_totales": 3259,
+  "anomalias_totales": 366,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -42,6 +42,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 9.606943935565834e-32,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "secundaria_cepal",
+      "b": "termina_secundaria",
+      "rotulo_a": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
+      "rotulo_b": "Terminan la secundaria",
+      "coeficiente": 0.973,
+      "estados": 17,
+      "tipo": "rangos (Spearman)",
+      "p": 9.639140440489106e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,6 +684,19 @@
       "misma_categoria": false
     },
     {
+      "a": "armas:importa_usd",
+      "b": "indice_opacidad:opacidad",
+      "rotulo_a": "armas · importa_usd",
+      "rotulo_b": "indice_opacidad · opacidad",
+      "coeficiente": -0.88,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.035923652057914e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "estado_derecho",
       "rotulo_a": "Corrupción política",
@@ -770,32 +796,6 @@
       "estados": 20,
       "tipo": "rangos (Spearman)",
       "p": 1.6734776707835436e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "estabilidad",
-      "b": "riesgo_inform",
-      "rotulo_a": "Estabilidad política y ausencia de violencia",
-      "rotulo_b": "Riesgo de crisis humanitaria (INFORM)",
-      "coeficiente": -0.877,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.182368555613423e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ransomware:victimas",
-      "b": "reservas_internacionales",
-      "rotulo_a": "ransomware · victimas",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.877,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 1.0123541137690472e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
