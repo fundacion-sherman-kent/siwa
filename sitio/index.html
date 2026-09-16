@@ -8042,19 +8042,45 @@
   // dibuja nada: el Estado publica tasa, la unidad es la misma, y hay algún año
   // más nuevo que el último de la serie comparable. Va en otro color y con otro
   // trazo, y el pie dice de quién es cada línea.
+  // La población por país y año, del Banco Mundial, para convertir un recuento
+  // oficial en tasa comparable cuando el Estado no publica la tasa él mismo.
+  function poblacionPorAnio(iso){
+    const r = ((almacen.banco || {}).registros || []).find(x => x.iso === iso);
+    const s = r && (r.indicadores || {}).poblacion && r.indicadores.poblacion.serie;
+    const m = {};
+    (s || []).forEach(p => { if(isFinite(p.valor)) m[+p.anio] = +p.valor; });
+    return m;
+  }
+
+  // LA CIFRA OFICIAL DEL ESTADO, EN LA MISMA UNIDAD DEL GRÁFICO (por 100.000).
+  // Dos caminos, y el segundo es lo que faltaba para Ecuador, México, Colombia,
+  // Panamá y Trinidad: publican RECUENTO, no tasa, así que su línea no entraba en
+  // un gráfico cuyo eje es «por cada 100.000». Se calcula la tasa con la población
+  // del Banco Mundial y se ROTULA como cálculo de la Fundación —no se hace pasar
+  // por dato oficial—. Donde el Estado sí publica su tasa (Argentina, Perú), se usa
+  // esa y no se calcula nada.
   function tasaDelEstado(clave, iso, unidadDeLaCapa){
     if(clave !== 'homicidios' || !iso) return null;
+    if(String(unidadDeLaCapa || '').indexOf('100.000') < 0) return null;
     const r = ((almacen.estado_reciente || {}).registros || []).find(x => x.iso === iso);
     const f = r && (r.indicadores || {}).homicidios_estado;
-    if(!f || !f.tasa || !f.unidad_tasa) return null;
-    if(String(unidadDeLaCapa || '').trim() !== String(f.unidad_tasa || '').trim()) return null;
-    const puntos = (f.serie || [])
-      .filter(a => a && isFinite(a.tasa) && isFinite(a.anio))
-      .map(a => ({anio: +a.anio, valor: +a.tasa}));
-    if(!puntos.length) return null;
+    if(!f || !(f.serie || []).length) return null;
     const org = ((r.fuente_nacional || {}).organismo || '').split('—')[0].trim();
-    return {puntos, organismo: org,
-            quien: (r.fuente_nacional || {}).quien_calcula_la_tasa || 'el propio Estado'};
+    // Camino 1: el Estado publica su propia tasa.
+    if(f.tasa && String(f.unidad_tasa || '').trim() === String(unidadDeLaCapa || '').trim()){
+      const puntos = f.serie.filter(a => a && isFinite(a.tasa) && isFinite(a.anio))
+                            .map(a => ({anio: +a.anio, valor: +a.tasa}));
+      if(puntos.length) return {puntos, organismo: org, calculada: false,
+        quien: (r.fuente_nacional || {}).quien_calcula_la_tasa || 'el propio Estado'};
+    }
+    // Camino 2: el Estado publica recuento; la Fundación calcula la tasa con la población.
+    const pob = poblacionPorAnio(iso);
+    const puntos = f.serie
+      .filter(a => a && isFinite(a.valor) && isFinite(a.anio) && pob[+a.anio])
+      .map(a => ({anio: +a.anio, valor: Math.round(a.valor / pob[+a.anio] * 100000 * 100) / 100}));
+    if(puntos.length < 2) return null;
+    return {puntos, organismo: org, calculada: true,
+            quien: 'la Fundación, sobre la población del Banco Mundial'};
   }
 
   function figuraSerie(clave, iso){
@@ -8147,7 +8173,7 @@
       + '" height="' + alto + '" style="max-width:100%;height:auto" role="img" '
       + 'aria-label="Serie de ' + esc(rotuloDeMateria(clave)) + ', ' + n + ' años, de '
       + p.anio + ' a ' + u.anio
-      + (hayPropio ? ', más la tasa oficial del propio Estado hasta ' + anioPropioFin : '')
+      + (hayPropio ? ', más lo que publica el propio Estado hasta ' + anioPropioFin : '')
       + (prolonga ? ', con prolongación hasta ' + anioFin : '') + '">'
       + ejesDeSerie({ancho, alto, mIzq, mDer, mArr, mAba, a0, aFin: anioFin, min, max, x, y,
                      unidad: cap.unidad})
@@ -8179,13 +8205,20 @@
     let pieEstado = '';
     if(hayPropio){
       const comun = delEstado.find(a => a.anio === ultimoAnio);
+      const quienDato = propio.calculada ? 'la cifra oficial del propio Estado' : 'la tasa oficial';
       const dice = comun
         ? ' En <b>' + ultimoAnio + '</b>, el año que comparten: ' + cifra(u.valor)
-          + ' según la ONU y ' + cifra(comun.valor) + ' según el Ministerio.'
+          + ' según la UNODC y ' + cifra(comun.valor) + (propio.calculada
+             ? ' con la cifra del Estado.' : ' según el propio Estado.')
         : '';
+      // Cuando el Estado publica RECUENTO y no tasa, la línea verde es una tasa que
+      // calcula la Fundación con la población: se dice, no se hace pasar por oficial.
+      const como = propio.calculada
+        ? 'Es ' + quienDato + ' —un recuento de víctimas— convertido a tasa por '
+          + esc(propio.quien) + ', para poder ponerlo en esta escala'
+        : 'Es la tasa oficial que calcula ' + esc(propio.quien) + ', en la misma unidad';
       pieEstado = '<small class="pie-tira"><b style="color:#3FA796">En verde, lo que ya '
-        + 'publicó ' + esc(nombreDe(iso)) + '.</b> Es la tasa oficial que calcula '
-        + esc(propio.quien) + ', en la misma unidad, hasta <b>' + anioPropioFin + '</b>.'
+        + 'publicó ' + esc(nombreDe(iso)) + '.</b> ' + como + ', hasta <b>' + anioPropioFin + '</b>.'
         + dice + ' <span class="ojo">No es la misma fuente que la línea naranja —esa es la '
         + 'serie homologada de la UNODC, la que se usa para comparar entre países— y por eso '
         + 'van separadas en vez de pegadas.</span></small>';
