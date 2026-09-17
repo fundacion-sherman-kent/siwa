@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa de opacidad de América Latina y el Caribe · SIWA</title>
+<meta name="description" content="Mapa de los 33 Estados de América Latina y el Caribe coloreados por el Índice de Opacidad de SIWA: 0 transparente, 100 opaco.">
+<link rel="canonical" href="https://siwa.fundacionkent.org/sitio/mapa.html">
+<meta name="theme-color" content="#F4F2EC">
+<link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+<script src="lib/echarts.min.js"></script>
+<style>
+  :root{--orange:#FB6500;--verde:#1f8f7a;--rojo:#d34a3f;
+    --fondo:#F4F2EC;--tinta:#0d2233;--tenue:#5f7186;--linea:#d7dce3;--caja:#ffffff;--navy:#00121E;}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#3fb27f;--rojo:#e2564b;}}
+  :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#3fb27f;--rojo:#e2564b;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--fondo);color:var(--tinta);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5;}
+  .barra{background:var(--navy);color:#F4F2EC;padding:14px 22px;}
+  .barra a{color:#F4F2EC;text-decoration:none;font-weight:700;letter-spacing:.02em;}
+  .barra span{color:var(--orange);}
+  main{max-width:1080px;margin:0 auto;padding:22px 22px 50px;}
+  .filete{height:4px;width:74px;background:var(--orange);border-radius:2px;margin-bottom:14px;}
+  h1{font-size:clamp(24px,4.6vw,34px);margin:0 0 6px;letter-spacing:-.4px;}
+  h1 b{color:var(--orange);}
+  .bajada{color:var(--tenue);font-size:14.5px;max-width:820px;margin:0 0 8px;}
+  .controles{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0;}
+  .controles button{background:var(--caja);border:1px solid var(--linea);color:var(--tinta);
+    padding:8px 14px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;}
+  .controles button:hover{border-color:var(--orange);}
+  #mapa{width:100%;height:660px;}
+  .cargando{padding:30px 4px;color:var(--tenue);}
+  .pie{margin-top:16px;padding-top:14px;border-top:1px solid var(--linea);color:var(--tenue);font-size:12.5px;}
+  .pie a{color:var(--orange);}
+  b{color:var(--tinta);}
+</style>
+</head>
+<body>
+<div class="barra"><a href="index.html"><span>SIWA</span> · Reporte de situación de América Latina y el Caribe</a></div>
+<main>
+  <div class="filete"></div>
+  <h1>Mapa de <b>opacidad</b> · América Latina y el Caribe</h1>
+  <p class="bajada">Los 33 Estados coloreados por el <b>Índice de Opacidad</b>: cuán difícil es
+     obtener del Estado la información que debería ser pública. <b>Verde = transparente (0),
+     rojo = opaco (100).</b> Pasá el mouse por un país para ver su puntaje y su puesto.</p>
+  <div class="controles">
+    <button id="tema">Fondo oscuro</button>
+    <span class="fecha" id="rango" style="color:var(--tenue);font-size:13px;margin-left:auto;"></span>
+  </div>
+  <div class="cargando" id="cargando">Cargando el mapa…</div>
+  <div id="mapa" style="display:none"></div>
+  <p class="pie">SIWA — Fundación Sherman Kent · Índice de Opacidad, edición 1 · geometrías de
+     geoBoundaries (CC BY) · <a href="opacidad.html">Ver el ranking en movimiento →</a></p>
+</main>
+<script>
+const cssvar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let chart, GEO, DATOS;
+async function cargar(){
+  const [geo, ind] = await Promise.all([
+    fetch("../datos/geo/paises-alc.geojson", {cache:"no-store"}).then(r=>r.json()),
+    fetch("../datos/publico/indice_opacidad.json", {cache:"no-store"}).then(r=>r.json())
+  ]);
+  GEO = geo;
+  DATOS = ind.registros.filter(r=>r.opacidad!=null).map(r=>({
+    name:r.iso, value:Number(r.opacidad), pais:r.pais, puesto:r.puesto, de:r.de, actos:r.actos_medidos}));
+  echarts.registerMap('alc', GEO);
+  document.getElementById('cargando').style.display='none';
+  const cont=document.getElementById('mapa'); cont.style.display='block';
+  chart=echarts.init(cont, null, {renderer:'svg'});
+  window.addEventListener('resize', ()=>chart.resize());
+  pintar();
+}
+function pintar(){
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'item', backgroundColor:cssvar('--caja'), borderColor:cssvar('--linea'),
+      textStyle:{color:cssvar('--tinta')},
+      formatter:o=>{const d=DATOS.find(x=>x.name===o.name);
+        return d? '<b>'+d.pais+'</b><br>opacidad '+d.value+' · puesto '+d.puesto+' de '+d.de+'<br><span style="opacity:.7">'+d.actos+' actos medidos</span>' : o.name;}},
+    visualMap:{min:0, max:100, left:14, bottom:20, calculable:true,
+      text:['opaco (100)','transparente (0)'],
+      textStyle:{color:cssvar('--tinta')},
+      inRange:{color:[cssvar('--verde'),'#e6c14a',cssvar('--rojo')]}},
+    series:[{type:'map', map:'alc', roam:true, name:'Opacidad',
+      label:{show:false}, aspectScale:1,
+      itemStyle:{borderColor:cssvar('--fondo'), borderWidth:.7},
+      emphasis:{label:{show:true, color:cssvar('--tinta')}, itemStyle:{areaColor:cssvar('--orange')}},
+      data:DATOS}]
+  }, true);
+}
+document.getElementById('tema').onclick=()=>{
+  const r=document.documentElement, osc=r.getAttribute('data-theme')==='dark';
+  r.setAttribute('data-theme',osc?'light':'dark');
+  document.getElementById('tema').textContent=osc?'Fondo oscuro':'Fondo claro'; if(chart) pintar();
+};
+cargar().catch(e=>document.getElementById('cargando').textContent='No se pudo cargar el mapa: '+e);
+</script>
+</body>
+</html>
