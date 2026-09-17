@@ -42,10 +42,25 @@ jobs:
         with:
           python-version: "3.12"
 
+      # pypdf lee el TOTAL de los PDF grado 2 (Santa Fe) sin OCR. Se instala solo acá,
+      # no en todo el robot, que sigue siendo de biblioteca estándar.
+      - name: Lector de PDF (pypdf)
+        run: python -m pip install --quiet pypdf
+
       - name: Homicidios por unidad de primer orden
         id: homicidios
         continue-on-error: true
         run: python colectores/subnacional_homicidios.py
+
+      - name: Robos/hurtos por unidad de primer orden
+        id: robos
+        continue-on-error: true
+        run: python colectores/subnacional_robos.py
+
+      - name: Santa Fe — homicidios según su observatorio propio (segunda fuente)
+        id: santafe
+        continue-on-error: true
+        run: python colectores/subnacional_santafe.py
 
       - name: Guatemala — denuncias de DD.HH. por departamento (PDH)
         id: pdh
@@ -80,6 +95,8 @@ jobs:
         if: always()
         run: |
           [ "${{ steps.homicidios.outcome }}" = "failure" ] && echo "AVISO: el colector de homicidios por unidad no terminó (revisar datos/publico/estado/)."
+          [ "${{ steps.robos.outcome }}" = "failure" ] && echo "AVISO: el colector de robos por unidad no terminó."
+          [ "${{ steps.santafe.outcome }}" = "failure" ] && echo "AVISO: Santa Fe no respondió (puede bloquear la IP de nube; entonces va por tarea local)."
           [ "${{ steps.pdh.outcome }}" = "failure" ] && echo "AVISO: la PDH de Guatemala no respondió esta vuelta."
           [ "${{ steps.vigia.outcome }}" = "failure" ] && echo "AVISO: el vigía subnacional no pudo completar la ronda."
           echo "Ronda subnacional terminada $(date -u +'%Y-%m-%d %H:%M UTC')."
