@@ -259,14 +259,17 @@ async function render(){
 
   chart.setOption({
     backgroundColor:'transparent',
-    grid:{left:52,right:20,top:38,bottom:34},
+    grid:{left:58,right:18,top:46,bottom:34},
     tooltip:{trigger:'axis',backgroundColor:cssvar('--caja'),borderColor:cssvar('--linea'),
       textStyle:{color:cssvar('--tinta')}},
-    legend:{top:4,textStyle:{color:cssvar('--tinta')},
+    legend:{top:8,type:'scroll',textStyle:{color:cssvar('--tinta')},
       data:series.filter(s=>['Tendencia lineal','Mediana regional',reg.pais].includes(s.name)).map(s=>s.name)},
     xAxis:{type:'category',data:anios,boundaryGap:false,axisLine:{lineStyle:{color:cssvar('--linea')}},
       axisLabel:{color:cssvar('--tenue')}},
-    yAxis:{type:'value',scale:true,name:T.unidad,nameTextStyle:{color:cssvar('--tenue'),align:'left'},
+    // El nombre del eje va VERTICAL a lo largo del eje: en pantalla angosta ya no
+    // se pisa con la leyenda de arriba (era el error de teléfono señalado el 17/9).
+    yAxis:{type:'value',scale:true,name:T.unidad,nameLocation:'middle',nameGap:44,nameRotate:90,
+      nameTextStyle:{color:cssvar('--tenue'),fontSize:11},
       axisLabel:{color:cssvar('--tenue')},splitLine:{lineStyle:{color:cssvar('--linea')}}},
     series
   }, true);
