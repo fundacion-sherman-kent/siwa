@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-16T23:24:38+00:00",
+  "corrida": "2026-09-17T00:33:24+00:00",
   "medidas_con_suficientes_casos": 199,
   "pares_probados": 19701,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3734,
+    "sobreviven": 3713,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3322,
+  "pistas_totales": 3301,
   "anomalias_totales": 366,
   "pistas": [
     {
@@ -333,19 +333,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.913,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.4003137623448326e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -516,13 +503,13 @@
     },
     {
       "a": "ciber:mediciones",
-      "b": "poblacion",
+      "b": "reservas_internacionales",
       "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.889,
-      "estados": 33,
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.891,
+      "estados": 30,
       "tipo": "rangos (Spearman)",
-      "p": 8.162737474339178e-15,
+      "p": 1.2831438600856023e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -580,6 +567,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:mediciones",
+      "b": "poblacion",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.888,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.075277523590026e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "democracia_participativa",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -619,19 +619,6 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:mediciones",
-      "b": "reservas_internacionales",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.885,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 3.730213449974386e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "uso_claude",
       "b": "voz_rendicion",
       "rotulo_a": "Intensidad de uso de Claude por habitante",
@@ -640,6 +627,19 @@
       "estados": 19,
       "tipo": "rangos (Spearman)",
       "p": 2.4452722780373087e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.882,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.365895157360279e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -724,13 +724,13 @@
     },
     {
       "a": "ciber:anomalias",
-      "b": "poblacion",
+      "b": "generacion_electrica",
       "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Población total",
+      "rotulo_b": "Generación eléctrica",
       "coeficiente": 0.878,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.823735580032583e-14,
+      "p": 6.944333362644456e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "estabilidad",
-      "b": "riesgo_inform",
-      "rotulo_a": "Estabilidad política y ausencia de violencia",
-      "rotulo_b": "Riesgo de crisis humanitaria (INFORM)",
-      "coeficiente": -0.877,
+      "a": "ciber:mediciones",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.877,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 9.182368555613423e-14,
+      "p": 8.842324518420972e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
