@@ -36,30 +36,18 @@
   .pie a{color:var(--orange);}
   b{color:var(--tinta);}
 
-  .cab{display:flex;align-items:center;gap:14px;background:var(--navy);padding:11px 20px;}
-  .cab .marca img{height:32px;display:block;}
-  .cab .marca{display:flex;align-items:center;}
-  .cab-tit{color:#F4F2EC;line-height:1.15;}
-  .cab-tit b{color:var(--orange);font-weight:800;letter-spacing:.03em;}
-  .cab-tit span{color:#c7d2e0;font-size:11.5px;display:block;letter-spacing:.05em;text-transform:uppercase;}
-  .cab-volver{margin-left:auto;color:#F4F2EC;text-decoration:none;font-size:12.5px;border:1px solid rgba(255,255,255,.22);padding:6px 12px;border-radius:7px;}
-  .cab-volver:hover{border-color:var(--orange);}
   .envoltorio{display:grid;grid-template-columns:232px minmax(0,1fr);max-width:1340px;margin:0 auto;}
-  .rail{border-right:1px solid var(--linea);padding:16px 12px 40px;font-size:13px;position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;}
+  .rail{border-right:1px solid var(--linea);padding:16px 12px 40px;font-size:13px;position:sticky;top:var(--siwa-topbar-h,100px);align-self:start;max-height:calc(100vh - var(--siwa-topbar-h,100px));overflow:auto;}
   .rail .grupo{color:var(--tenue);text-transform:uppercase;font-size:10.5px;letter-spacing:.06em;margin:14px 0 4px;font-weight:700;}
   .rail a{display:block;color:var(--tinta);text-decoration:none;padding:4px 7px;border-radius:6px;}
   .rail a:hover{background:var(--caja);color:var(--orange);}
   .rail a.actual{color:var(--orange);font-weight:700;background:var(--caja);}
-  .envoltorio main{max-width:none;margin:0;}
-  @media(max-width:860px){.envoltorio{grid-template-columns:1fr;} .rail{border-right:none;border-bottom:1px solid var(--linea);position:static;max-height:none;}}
+  .envoltorio main{max-width:none;margin:0;min-width:0;}
+  @media(max-width:860px){.envoltorio{grid-template-columns:minmax(0,1fr);} .rail{border-right:none;border-bottom:1px solid var(--linea);position:static;max-height:none;}}
 </style>
+<script defer src="_comun/cabecera-siwa.js"></script>
 </head>
 <body>
-<header class="cab">
-  <a class="marca" href="index.html"><img src="marca/fusk-logo-nombre-color.png" alt="Fundación Sherman Kent"></a>
-  <div class="cab-tit"><b>SIWA</b><span>Reporte de situación · ALC</span></div>
-  <a class="cab-volver" href="index.html">← Volver al registro</a>
-</header>
 <div class="envoltorio">
 <nav class="rail" aria-label="Secciones del registro">
 <div class="grupo">Empezar</div>
@@ -102,7 +90,6 @@
      obtener del Estado la información que debería ser pública. <b>Verde = transparente (0),
      rojo = opaco (100).</b> Pasá el mouse por un país para ver su puntaje y su puesto.</p>
   <div class="controles">
-    <button id="tema">Fondo oscuro</button>
     <span class="fecha" id="rango" style="color:var(--tenue);font-size:13px;margin-left:auto;"></span>
   </div>
   <div class="cargando" id="cargando">Cargando el mapa…</div>
@@ -146,11 +133,7 @@ function pintar(){
       data:DATOS}]
   }, true);
 }
-document.getElementById('tema').onclick=()=>{
-  const r=document.documentElement, osc=r.getAttribute('data-theme')==='dark';
-  r.setAttribute('data-theme',osc?'light':'dark');
-  document.getElementById('tema').textContent=osc?'Fondo oscuro':'Fondo claro'; if(chart) pintar();
-};
+window.SIWA_onTema=function(){ if(chart) pintar(); };
 cargar().catch(e=>document.getElementById('cargando').textContent='No se pudo cargar el mapa: '+e);
 </script>
 </body>
