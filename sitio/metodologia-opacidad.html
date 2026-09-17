@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metodología del Índice de Opacidad · SIWA</title>
+<meta name="description" content="Cómo se calcula el Índice de Opacidad de SIWA: indicador compuesto según el marco OCDE–JRC, con normalización, pesos declarados, tratamiento de faltantes y control de calidad.">
+<link rel="canonical" href="https://siwa.fundacionkent.org/sitio/metodologia-opacidad.html">
+<meta name="theme-color" content="#F4F2EC">
+<link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+<style>
+  :root{--orange:#FB6500;--fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;--linea:#d7dce3;--caja:#ffffff;--navy:#00121E;}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;}}
+  :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--fondo);color:var(--tinta);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.62;font-size:16px;}
+  .barra{background:var(--navy);color:#F4F2EC;padding:14px 22px;}
+  .barra a{color:#F4F2EC;text-decoration:none;font-weight:700;letter-spacing:.02em;}
+  .barra span{color:var(--orange);}
+  main{max-width:760px;margin:0 auto;padding:30px 22px 60px;}
+  .filete{height:4px;width:74px;background:var(--orange);border-radius:2px;margin-bottom:18px;}
+  h1{font-size:clamp(24px,5vw,34px);line-height:1.15;margin:0 0 6px;}
+  h1 b{color:var(--orange);}
+  .bajada{color:var(--tenue);margin:0 0 22px;font-size:15px;}
+  h2{font-size:19px;margin:28px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--linea);}
+  p{margin:0 0 12px;} ul{margin:0 0 12px;padding-left:22px;} li{margin-bottom:6px;}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 14px;}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--linea);vertical-align:top;}
+  th{color:var(--tenue);font-size:12px;text-transform:uppercase;letter-spacing:.05em;}
+  b{color:var(--tinta);} a{color:var(--orange);}
+  .caja{background:var(--caja);border:1px solid var(--linea);border-radius:10px;padding:14px 16px;margin:14px 0;}
+  .pie{margin-top:34px;padding-top:16px;border-top:1px solid var(--linea);color:var(--tenue);font-size:13px;}
+</style>
+</head>
+<body>
+<div class="barra"><a href="index.html"><span>SIWA</span> · Reporte de situación de América Latina y el Caribe</a></div>
+<main>
+  <div class="filete"></div>
+  <h1>Metodología del Índice de <b>Opacidad</b></h1>
+  <p class="bajada">Cómo se calcula, con qué reglas y con qué estándares internacionales. Edición 1.</p>
+
+  <p><b>Qué mide.</b> La <b>ausencia</b> de datos públicos de un Estado: cuán difícil es obtener del
+     Estado la información que debería ser pública. <b>0 = transparente, 100 = opaco.</b> Mide
+     <b>actos observables, no percepciones</b>: cualquiera reproduce cada componente repitiendo la
+     consulta. Por eso NO se compara con el Índice de Percepción de la Corrupción, que promedia
+     opiniones de expertos y contesta otra pregunta.</p>
+
+  <h2>Marco: es un indicador compuesto</h2>
+  <p>Se construye siguiendo el marco de referencia de los indicadores compuestos de la
+     <b>OCDE y el Joint Research Centre de la Comisión Europea</b> (<i>Handbook on Constructing
+     Composite Indicators</i>, OECD/JRC), con sus cuatro decisiones declaradas:</p>
+  <table>
+    <tr><th>Decisión</th><th>Qué se hizo</th></tr>
+    <tr><td>Selección de componentes</td><td>6 actos observables, cada uno medido en este registro, con fecha y rastro</td></tr>
+    <tr><td>Normalización</td><td>todos en escala 0–100, misma dirección (más alto = más opaco)</td></tr>
+    <tr><td>Ponderación</td><td>pesos iguales, declarados: cualquier reparto es un juicio, y pesos iguales es la única elección que no esconde una preferencia</td></tr>
+    <tr><td>Agregación</td><td>media aritmética de los actos <b>medidos</b>, lineal y reproducible</td></tr>
+  </table>
+
+  <h2>Los seis actos</h2>
+  <table>
+    <tr><th>Acto</th><th>0 (cumple)</th><th>100 (no cumple)</th></tr>
+    <tr><td>Puerta a los datos</td><td>portal legible por máquina</td><td>sin portal (60 si responde a una persona pero no se deja recolectar)</td></tr>
+    <tr><td>Sitio oficial en pie</td><td>vivo</td><td>retirado (60 si no responde hoy)</td></tr>
+    <tr><td>Compras públicas comparables</td><td>publica en formato abierto</td><td>no publica</td></tr>
+    <tr><td>Declara su comercio de armas (ONU)</td><td>declaró</td><td>sin declarar</td></tr>
+    <tr><td>Informa al tratado de especies (CITES)</td><td>al día</td><td>más de un año atrás (50 si un año)</td></tr>
+    <tr><td>Publica lo que importa</td><td>las 6 materias en su portal</td><td>ninguna (proporción faltante)</td></tr>
+  </table>
+
+  <h2>Tratamiento de los faltantes — el núcleo</h2>
+  <ul>
+    <li><b>Un acto sin evidencia no puntúa:</b> el índice es la media de los actos efectivamente
+        medidos. No se castiga lo que no se miró.</li>
+    <li><b>Fallo de un tercero ≠ opacidad del Estado:</b> si el archivo público que verifica un
+        sitio no respondió, ese acto se descarta, no cuenta en contra.</li>
+    <li><b>Umbral de validez:</b> con menos de 3 actos medidos el Estado queda <b>SIN MEDIR</b>, que
+        no es lo mismo que opaco.</li>
+  </ul>
+
+  <h2>Fiabilidad e incertidumbre</h2>
+  <p>Cada puntaje se publica junto a <b>cuántos actos lo miden</b> (6/6 plena, 3/6 mínima): un 40
+     medido con 6 actos es más firme que un 40 con 3. Es el equivalente honesto de un intervalo.
+     <b>Sensibilidad:</b> como los pesos son iguales y hay hasta seis componentes, mover un acto
+     cambia el puntaje en a lo sumo 100/n; los extremos son estables ante cualquier reparto de
+     pesos alternativo, y esa cautela se declara.</p>
+
+  <h2>Control de calidad</h2>
+  <p>En cada corrida se comprueba un <b>Estado de control</b> (Uruguay): si su puntaje supera 35,
+     el que falló es el cálculo y el índice no se publica.</p>
+
+  <h2>Alineación con estándares internacionales</h2>
+  <div class="caja">
+    <ul style="margin:0">
+      <li><b>Principios Fundamentales de las Estadísticas Oficiales (ONU, 2014):</b> imparcialidad,
+          fuentes y métodos transparentes, y declaración de las limitaciones — todo el registro los cumple.</li>
+      <li><b>Código de Buenas Prácticas de las Estadísticas Europeas:</b> metodología sólida,
+          reproducibilidad y comparabilidad declaradas.</li>
+      <li><b>Marco OCDE–JRC de indicadores compuestos:</b> normalización, ponderación, agregación y
+          análisis de sensibilidad, tal como se describen arriba.</li>
+      <li><b>Calidad del dato (ISO/IEC 25012, ISO 8000):</b> cada cifra lleva fuente, fecha y una
+          calificación de fiabilidad; los vacíos se declaran. Pendiente formal: certificación.</li>
+    </ul>
+  </div>
+
+  <p class="pie">SIWA — Fundación Sherman Kent, Oficina de Generación de Inteligencia ·
+     Índice de Opacidad, edición 1 · <a href="opacidad.html">Ver el ranking en movimiento</a> ·
+     <a href="mapa.html">Ver el mapa</a> · <a href="index.html">Volver al registro</a></p>
+</main>
+</body>
+</html>
