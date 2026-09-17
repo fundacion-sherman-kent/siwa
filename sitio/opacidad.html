@@ -139,16 +139,21 @@ function bump(){
     return {name:p.iso, type:'line', smooth:true, symbol:'circle', symbolSize:5,
       lineStyle:{width:1.6,color:color(vfin),opacity:.55}, itemStyle:{color:color(vfin)},
       emphasis:{focus:'series', lineStyle:{width:3.6,opacity:1}},
-      // Etiquetas al final SOLO en modo puesto (en valor se pisan porque muchos empatan).
-      endLabel:{show:esPuesto, formatter:p.iso, color:color(vfin), fontSize:11},
-      labelLayout:{hideOverlap:true},
+      // Etiqueta al final en los dos modos: el país (ISO) y, en modo valor, su puntaje.
+      // moveOverlap:'shiftY' corre las que se pisan en vez de esconderlas, así se ven todas.
+      endLabel:{show:true, formatter: esPuesto ? p.iso : (p.iso+'  '+Math.round(vfin)),
+        color:color(vfin), fontSize:11, fontWeight:600},
+      labelLayout:{moveOverlap:'shiftY', hideOverlap:false},
       data};
   });
   chart.setOption({
     timeline:{show:false}, animationDuration:800, animationDurationUpdate:800, backgroundColor:'transparent',
-    grid:{left:60,right:esPuesto?70:24,top:20,bottom:36},
+    grid:{left:60,right:esPuesto?74:104,top:20,bottom:36},
     tooltip:{trigger:'item', backgroundColor:cssvar('--caja'), borderColor:cssvar('--linea'), textStyle:{color:cssvar('--tinta')},
-      formatter:o=>{const p=H.find(x=>x.iso===o.seriesName); return '<b>'+(p?p.pais:o.seriesName)+'</b><br>'+o.name+': '+(esPuesto?'puesto '+o.value:'opacidad '+o.value);}},
+      formatter:o=>{const p=H.find(x=>x.iso===o.seriesName);
+        const m=R.puestos[o.dataIndex]&&R.puestos[o.dataIndex][o.seriesName];
+        return '<b>'+(p?p.pais:o.seriesName)+'</b> ('+o.seriesName+')<br>'+
+          (m? 'opacidad '+m.valor+' · puesto '+m.puesto+' de '+N : 'valor '+o.value);}},
     xAxis:{type:'category', data:fechas.map(f=>f.slice(5)), boundaryGap:false,
       axisLine:{lineStyle:{color:cssvar('--linea')}}, axisLabel:{color:cssvar('--tenue')}},
     yAxis:{type:'value', inverse:esPuesto, min:esPuesto?1:0, max:esPuesto?N:100,
