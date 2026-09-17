@@ -42,10 +42,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      # pypdf lee el TOTAL de los PDF grado 2 (Santa Fe) sin OCR. Se instala solo acá,
-      # no en todo el robot, que sigue siendo de biblioteca estándar.
-      - name: Lector de PDF (pypdf)
-        run: python -m pip install --quiet pypdf
+      # pypdf lee el TOTAL de los PDF grado 2 (Santa Fe) sin OCR; shapely asigna cada
+      # foco de calor a su unidad (punto-en-polígono). Se instalan solo acá, no en todo
+      # el robot, que sigue siendo de biblioteca estándar.
+      - name: Dependencias del paso (pypdf, shapely)
+        run: python -m pip install --quiet pypdf shapely
 
       - name: Homicidios por unidad de primer orden
         id: homicidios
@@ -61,6 +62,13 @@ jobs:
         id: santafe
         continue-on-error: true
         run: python colectores/subnacional_santafe.py
+
+      - name: Focos de calor por unidad de primer orden (NASA FIRMS + geoBoundaries)
+        id: focos
+        continue-on-error: true
+        env:
+          NASA_FIRMS_MAP_KEY: ${{ secrets.NASA_FIRMS_MAP_KEY }}
+        run: python colectores/subnacional_focos.py
 
       - name: Guatemala — denuncias de DD.HH. por departamento (PDH)
         id: pdh
@@ -97,6 +105,7 @@ jobs:
           [ "${{ steps.homicidios.outcome }}" = "failure" ] && echo "AVISO: el colector de homicidios por unidad no terminó (revisar datos/publico/estado/)."
           [ "${{ steps.robos.outcome }}" = "failure" ] && echo "AVISO: el colector de robos por unidad no terminó."
           [ "${{ steps.santafe.outcome }}" = "failure" ] && echo "AVISO: Santa Fe no respondió (puede bloquear la IP de nube; entonces va por tarea local)."
+          [ "${{ steps.focos.outcome }}" = "failure" ] && echo "AVISO: focos de calor por unidad no terminó (FIRMS falla intermitente de red; se reintenta solo la próxima vuelta)."
           [ "${{ steps.pdh.outcome }}" = "failure" ] && echo "AVISO: la PDH de Guatemala no respondió esta vuelta."
           [ "${{ steps.vigia.outcome }}" = "failure" ] && echo "AVISO: el vigía subnacional no pudo completar la ronda."
           echo "Ronda subnacional terminada $(date -u +'%Y-%m-%d %H:%M UTC')."
