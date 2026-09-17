@@ -48,8 +48,12 @@ from pathlib import Path
 AQUI = Path(__file__).resolve().parent
 NAVEGADOR = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
              "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
-POR_PORTAL = 30          # conjuntos recientes que se miran por portal
-POR_LLAMADA = 8          # conjuntos por consulta a Llama: menos tokens por minuto
+# EL PLAN GRATUITO TIENE TOPE DE TOKENS POR MINUTO. Con 30 conjuntos por portal y
+# tandas de 8, Groq frenó el primer pedido (17/9/2026, error 429). Se mira menos por
+# vuelta —la rotación diaria compensa— y se pide de a poco, con pausa.
+POR_PORTAL = 15          # conjuntos recientes que se miran por portal
+POR_LLAMADA = 4          # conjuntos por consulta
+PAUSA_ENTRE_PEDIDOS = 25 # segundos
 PORTALES_POR_CORRIDA = 2
 
 
@@ -66,16 +70,24 @@ def pedir_json(url: str, cabeceras: dict | None = None, datos: dict | None = Non
     # consulta, idéntica, anduvo. Tres intentos con espera creciente antes de dar
     # un portal por caído.
     import time
-    for intento in range(3):
+    for intento in range(5):
         try:
             req = urllib.request.Request(url, data=cuerpo, headers=h)
             with urllib.request.urlopen(req, timeout=espera) as r:
                 return json.loads(r.read(6_000_000).decode("utf-8", "replace"))
         except urllib.error.HTTPError as e:
-            if e.code in (400, 401, 403, 404) or intento == 2:
+            if e.code in (400, 401, 403, 404) or intento == 4:
                 raise
+            if e.code == 429:
+                # Groq dice cuánto esperar: se respeta, con un mínimo de 20 segundos.
+                try:
+                    espera_429 = float(e.headers.get("Retry-After") or 0)
+                except ValueError:
+                    espera_429 = 0
+                time.sleep(min(max(espera_429, 20), 90))
+                continue
         except (urllib.error.URLError, TimeoutError):
-            if intento == 2:
+            if intento == 4:
                 raise
         time.sleep(5 * (intento + 1))
 
@@ -106,13 +118,13 @@ def recientes(portal: dict) -> list[dict]:
                 "id": f"{portal['iso']}:{p.get('name')}",
                 "pais": portal["iso"],
                 "titulo": p.get("title") or p.get("name"),
-                "descripcion": re.sub(r"\s+", " ", (p.get("notes") or ""))[:500],
+                "descripcion": re.sub(r"\s+", " ", (p.get("notes") or ""))[:250],
                 "organismo": (p.get("organization") or {}).get("title", ""),
                 "modificado": p.get("metadata_modified", ""),
                 "pagina": f"{base}/dataset/{p.get('name')}",
                 "recursos": [{"url": x.get("url"), "formato": (x.get("format") or "").upper(),
                               "nombre": (x.get("name") or "")[:80]}
-                             for x in (p.get("resources") or [])[:6] if x.get("url")],
+                             for x in (p.get("resources") or [])[:3] if x.get("url")],
             })
     elif portal["tipo"] == "Socrata":
         dominio = urllib.parse.urlparse(base).netloc
@@ -125,7 +137,7 @@ def recientes(portal: dict) -> list[dict]:
                 "id": f"{portal['iso']}:{rid}",
                 "pais": portal["iso"],
                 "titulo": r.get("name"),
-                "descripcion": re.sub(r"\s+", " ", r.get("description") or "")[:500],
+                "descripcion": re.sub(r"\s+", " ", r.get("description") or "")[:250],
                 "organismo": r.get("attribution") or "",
                 "modificado": r.get("updatedAt", ""),
                 "pagina": x.get("permalink") or f"{base}/d/{rid}",
@@ -239,6 +251,9 @@ def clasificar(conjuntos: list[dict], temas: list[dict]) -> tuple[list[dict], st
                    json.dumps([{k: c[k] for k in ("id", "pais", "titulo", "descripcion", "organismo",
                                                    "modificado", "recursos")} for c in tanda],
                               ensure_ascii=False))
+        if i:
+            import time
+            time.sleep(PAUSA_ENTRE_PEDIDOS)
         texto, servicio = conversar(SISTEMA, usuario)
         try:
             bloque = texto[texto.index("{"): texto.rindex("}") + 1]
