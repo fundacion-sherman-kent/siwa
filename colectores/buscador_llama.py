@@ -241,6 +241,29 @@ Respondé SOLO un objeto JSON con esta forma:
   "motivo": "una línea en castellano"}]}"""
 
 
+def normalizar(respuesta) -> list[dict]:
+    """LOS MODELOS NO SIEMPRE RESPETAN LA FORMA PEDIDA. El 17/9/2026 una tanda volvió
+    con la lista de conjuntos como textos en vez de objetos, y el robot se cayó entero.
+    Se aceptan las formas razonables —lista de objetos, objetos escritos como texto,
+    objeto con los identificadores como claves— y lo que no se entiende se descarta
+    y se declara, sin tirar abajo la corrida."""
+    items = respuesta.get("conjuntos", respuesta) if isinstance(respuesta, dict) else respuesta
+    if isinstance(items, dict):
+        items = [dict(v, id=v.get("id", k)) if isinstance(v, dict) else v for k, v in items.items()]
+    salida = []
+    for x in items if isinstance(items, list) else []:
+        if isinstance(x, str):
+            try:
+                x = json.loads(x)
+            except Exception:  # noqa: BLE001
+                continue
+        if isinstance(x, dict) and x.get("id"):
+            salida.append(x)
+    if not salida:
+        print("  una tanda no trajo conjuntos con forma legible", file=sys.stderr)
+    return salida
+
+
 def clasificar(conjuntos: list[dict], temas: list[dict]) -> tuple[list[dict], str]:
     lista_temas = "\n".join(f"{t['clave']} = {t['nombre']} ({t['grupo']})" for t in temas)
     todos, servicio = [], ""
@@ -257,9 +280,11 @@ def clasificar(conjuntos: list[dict], temas: list[dict]) -> tuple[list[dict], st
         texto, servicio = conversar(SISTEMA, usuario)
         try:
             bloque = texto[texto.index("{"): texto.rindex("}") + 1]
-            todos.extend(json.loads(bloque).get("conjuntos", []))
+            todos.extend(normalizar(json.loads(bloque)))
         except Exception:  # noqa: BLE001 — una tanda ilegible se declara y se sigue
-            print("  respuesta ilegible en la tanda", i // POR_LLAMADA + 1, file=sys.stderr)
+            print("  respuesta ilegible en la tanda", i // POR_LLAMADA + 1, "·", texto[:200].replace("
+", " "),
+                  file=sys.stderr)
     return todos, servicio
 
 
