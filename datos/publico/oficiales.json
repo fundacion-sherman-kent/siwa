@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-09-16T13:12:06+00:00",
+    "obtenido_en": "2026-09-17T06:19:43+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "4 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Delito registrado: HTTPError; ARG/Integridad: HTTPError; ARG/Migración y desplazamiento: HTTPError."
+      "5 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Contratación pública: HTTPError; ARG/Integridad: HTTPError; ARG/Presupuesto: HTTPError; ARG/Migración y desplazamiento: HTTPError."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -49,7 +49,7 @@
           "materia": "Contratación pública",
           "eje": "Gobernanza",
           "consulta": "contrataciones",
-          "cantidad": 1055,
+          "cantidad": 1056,
           "ejemplos": [
             {
               "titulo": "Contratacion Emserchia E.S.P.",
@@ -62,14 +62,14 @@
               "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             },
             {
-              "titulo": "CONTRATACION CEPITA",
-              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
-              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
-            },
-            {
               "titulo": "Contratacion Alcaldía Chitaraque",
               "organismo": "Alcaldía de Chitaraque",
               "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
+            },
+            {
+              "titulo": "CONTRATACION CEPITA",
+              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
+              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
             }
           ]
         },
@@ -80,24 +80,24 @@
           "cantidad": 611,
           "ejemplos": [
             {
-              "titulo": "Presupuesto de Gastos",
-              "organismo": "INDUSTRIA MILITAR",
-              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
-            },
-            {
               "titulo": "Presupuesto de Ingresos",
               "organismo": "INDUSTRIA MILITAR",
               "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
             },
             {
-              "titulo": "PRESUPUESTO AIM-2020",
-              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
-              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
+              "titulo": "Presupuesto de Gastos",
+              "organismo": "INDUSTRIA MILITAR",
+              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
             },
             {
               "titulo": "Presupuesto DADEP",
               "organismo": "DEFENSORIA DEL ESPACIO PUBLICO",
               "enlace": "https://www.datos.gov.co/d/8rih-qmrc"
+            },
+            {
+              "titulo": "PRESUPUESTO AIM-2020",
+              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
+              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
             }
           ]
         },
@@ -108,14 +108,14 @@
           "cantidad": 146,
           "ejemplos": [
             {
-              "titulo": "DELITOS INFORMÁTICOS",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
-            },
-            {
               "titulo": "DELITOS SEXUALES",
               "organismo": "Observatorio MDN",
               "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
+            },
+            {
+              "titulo": "DELITOS INFORMÁTICOS",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
             },
             {
               "titulo": "Reporte  Delitos sexuales Policía Nacional",
@@ -136,14 +136,14 @@
           "cantidad": 114,
           "ejemplos": [
             {
-              "titulo": "Entradas de extranjeros a Colombia",
-              "organismo": "emurillo",
-              "enlace": "https://www.datos.gov.co/d/96sh-4v8d"
-            },
-            {
               "titulo": "Salidas de colombianos desde el territorio nacional",
               "organismo": "emurillo",
               "enlace": "https://www.datos.gov.co/d/efw5-jiej"
+            },
+            {
+              "titulo": "Entradas de extranjeros a Colombia",
+              "organismo": "emurillo",
+              "enlace": "https://www.datos.gov.co/d/96sh-4v8d"
             },
             {
               "titulo": "Entrada de Venezolanos a Colombia por año(2012-2019)",
@@ -214,7 +214,7 @@
           ]
         }
       ],
-      "conjuntos_hallados": 2062
+      "conjuntos_hallados": 2063
     },
     {
       "iso": "PAN",
@@ -671,6 +671,164 @@
       "conjuntos_hallados": 273
     },
     {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "organismo": "Catalogo Nacional de Datos Abiertos",
+      "tipo": "CKAN",
+      "portal": "https://catalogodatos.gub.uy",
+      "materias": [
+        {
+          "materia": "Migración y desplazamiento",
+          "eje": "Inteligencia estratégica",
+          "consulta": "migracion",
+          "cantidad": 36,
+          "ejemplos": [
+            {
+              "titulo": "Porcentaje anual de crecimiento poblacional. Países seleccionados",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6647"
+            },
+            {
+              "titulo": "Porcentaje de jóvenes que migraron dentro del país. País urbano",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-9044"
+            },
+            {
+              "titulo": "Porcentaje de personas nacidas en el exterior. Censos 2011",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-10673"
+            },
+            {
+              "titulo": "Porcentaje de jóvenes que tienen familiares en otro país. País urbano",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-9020"
+            }
+          ]
+        },
+        {
+          "materia": "Presupuesto",
+          "eje": "Gobernanza",
+          "consulta": "presupuesto",
+          "cantidad": 28,
+          "ejemplos": [
+            {
+              "titulo": "Presupuesto",
+              "organismo": "ANCAP",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ancap-presupuesto"
+            },
+            {
+              "titulo": "Presupuesto",
+              "organismo": "URSEC",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ursec-presupuesto-ejecucion-presupuestal"
+            },
+            {
+              "titulo": "Presupuesto",
+              "organismo": "INE",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ine-presupuesto_ine"
+            },
+            {
+              "titulo": "Presupuesto",
+              "organismo": "Centro Ceibal",
+              "enlace": "https://catalogodatos.gub.uy/dataset/centro-ceibal-presupuesto"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 18,
+          "ejemplos": [
+            {
+              "titulo": "Delitos sexuales",
+              "organismo": "Ministerio del Interior",
+              "enlace": "https://catalogodatos.gub.uy/dataset/delitos-sexuales"
+            },
+            {
+              "titulo": "Delitos denunciados en el Uruguay",
+              "organismo": "Ministerio del Interior",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-del-interior-delitos_denunciados_en_el_uruguay"
+            },
+            {
+              "titulo": "Cantidad de denuncias policiales por delitos contra las personas. Total país",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6711"
+            },
+            {
+              "titulo": "Información del Nuevo Código de Proceso Penal",
+              "organismo": "Poder Judicial",
+              "enlace": "https://catalogodatos.gub.uy/dataset/suprema-corte-de-justicia-informacion-del-nuevo-codigo-de-proceso-penal"
+            }
+          ]
+        },
+        {
+          "materia": "Contratación pública",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 6,
+          "ejemplos": [
+            {
+              "titulo": "Llamados publicados para adquisición y contratación de bienes y servicios",
+              "organismo": "Banco Central del Uruguay",
+              "enlace": "https://catalogodatos.gub.uy/dataset/bcu_llamados-publicados-comprasycontrataciones"
+            },
+            {
+              "titulo": "Licitaciones y compras",
+              "organismo": "ANCAP",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ancap-licitaciones-compras"
+            },
+            {
+              "titulo": "Seguimiento Ley de Promoción del Empleo",
+              "organismo": "Ministerio de Trabajo y Seguridad Social de Uruguay",
+              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-de-trabajo-y-seguridad-social-de-uruguay-ley-de-promocion-del-empleo"
+            },
+            {
+              "titulo": "Cantidad de RRHH en EEPP",
+              "organismo": "Oficina de Planeamiento y Presupuesto",
+              "enlace": "https://catalogodatos.gub.uy/dataset/opp-cantidad-de-rrhh-en-eepp"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 5,
+          "ejemplos": [
+            {
+              "titulo": "Homicidios a mujeres",
+              "organismo": "Ministerio del Interior",
+              "enlace": "https://catalogodatos.gub.uy/dataset/homicidios-a-mujeres"
+            },
+            {
+              "titulo": "Tasa de procesamientos por homicidios. Total país",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6707"
+            },
+            {
+              "titulo": "Porcentaje de denuncia de homicidios consumados. Total país",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6703"
+            },
+            {
+              "titulo": "Tasa de denuncia de homicidios consumados. Total país",
+              "organismo": "MIDES",
+              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-10505"
+            }
+          ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 0,
+          "ejemplos": []
+        }
+      ],
+      "conjuntos_hallados": 93
+    },
+    {
       "iso": "DOM",
       "pais": "República Dominicana",
       "bloque": "Caribe hispano y Haití",
@@ -814,74 +972,6 @@
       "conjuntos_hallados": 83
     },
     {
-      "iso": "ARG",
-      "pais": "Argentina",
-      "bloque": "Cono Sur",
-      "incluye_malvinas": true,
-      "organismo": "Portal Nacional de Datos Abiertos",
-      "tipo": "CKAN",
-      "portal": "https://datos.gob.ar",
-      "materias": [
-        {
-          "materia": "Presupuesto",
-          "eje": "Gobernanza",
-          "consulta": "presupuesto",
-          "cantidad": 55,
-          "ejemplos": [
-            {
-              "titulo": "Presupuesto institucional",
-              "organismo": "Instituto Nacional de Servicios Sociales para Jubilados y Pensionados (PAMI)",
-              "enlace": "https://datos.gob.ar/dataset/presupuesto"
-            },
-            {
-              "titulo": "API de Presupuesto Abierto",
-              "organismo": "Subsecretaría de Presupuesto",
-              "enlace": "https://datos.gob.ar/dataset/api-de-presupuesto-abierto"
-            },
-            {
-              "titulo": "Presupuesto de la Administración Pública Nacional .",
-              "organismo": "Subsecretaría de Presupuesto",
-              "enlace": "https://datos.gob.ar/dataset/presupuesto-de-la-administracion-publica-nacional"
-            },
-            {
-              "titulo": "Presupuesto de la Administración Pública Nacional 2025.",
-              "organismo": "Subsecretaría de Presupuesto",
-              "enlace": "https://datos.gob.ar/dataset/presupuesto-de-la-administracion-publica-nacional-2025"
-            }
-          ]
-        },
-        {
-          "materia": "Contratación pública",
-          "eje": "Gobernanza",
-          "consulta": "contrataciones",
-          "cantidad": 20,
-          "ejemplos": [
-            {
-              "titulo": "Sistema de Contrataciones Electrónicas",
-              "organismo": "Jefatura de Gabinete de Ministros (JGM)",
-              "enlace": "https://datos.gob.ar/dataset/sistema-de-contrataciones-electronicas"
-            },
-            {
-              "titulo": "Compras y Contrataciones de ACUMAR",
-              "organismo": "Autoridad de Cuenca Matanza Riachuelo (ACUMAR)",
-              "enlace": "https://datos.gob.ar/dataset/listado-de-compras-y-contrataciones-de-acumar"
-            },
-            {
-              "titulo": "Compras y Contrataciones de Nivel Central",
-              "organismo": "Instituto Nacional de Servicios Sociales para Jubilados y Pensionados (PAMI)",
-              "enlace": "https://datos.gob.ar/dataset/compras-y-contrataciones-de-nivel-central"
-            },
-            {
-              "titulo": "Contrataciones, Compras y Licitaciones de la Superintendencia de Servicios de Salud (SSS)",
-              "organismo": "Ministerio de Salud",
-              "enlace": "https://datos.gob.ar/dataset/contrataciones-compras-y-licitaciones-de-la-superintendencia-de-servicios-de-salud-sss"
-            }
-          ]
-        }
-      ],
-      "conjuntos_hallados": 75
-    },
-    {
       "iso": "PER",
       "pais": "Perú",
       "bloque": "Andina",
@@ -1020,157 +1110,44 @@
       "conjuntos_hallados": 65
     },
     {
-      "iso": "URY",
-      "pais": "Uruguay",
+      "iso": "ARG",
+      "pais": "Argentina",
       "bloque": "Cono Sur",
-      "organismo": "Catalogo Nacional de Datos Abiertos",
+      "incluye_malvinas": true,
+      "organismo": "Portal Nacional de Datos Abiertos",
       "tipo": "CKAN",
-      "portal": "https://catalogodatos.gub.uy",
+      "portal": "https://datos.gob.ar",
       "materias": [
-        {
-          "materia": "Migración y desplazamiento",
-          "eje": "Inteligencia estratégica",
-          "consulta": "migracion",
-          "cantidad": 9,
-          "ejemplos": [
-            {
-              "titulo": "Encuesta de Turismo Receptivo",
-              "organismo": "Intendencia de Montevideo",
-              "enlace": "https://catalogodatos.gub.uy/dataset/encuesta-de-turismo-receptivo"
-            },
-            {
-              "titulo": "Porcentaje de jóvenes que tienen familiares en otro país según sexo. País urbano",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-9022"
-            },
-            {
-              "titulo": "Distribución porcentual de personas nacidas en el exterior según país de nacimiento. Censos 2011",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-10675"
-            },
-            {
-              "titulo": "Distribución porcentual de personas nacidas en el exterior según país de nacimiento por sexo. Censos 2011",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-10686"
-            }
-          ]
-        },
         {
           "materia": "Delito registrado",
           "eje": "Seguridad",
           "consulta": "delito",
-          "cantidad": 7,
+          "cantidad": 17,
           "ejemplos": [
             {
-              "titulo": "Delitos sexuales",
-              "organismo": "Ministerio del Interior",
-              "enlace": "https://catalogodatos.gub.uy/dataset/delitos-sexuales"
+              "titulo": "Codificación de delitos del Código Penal Argentino",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/codificacion-de-delitos-del-codigo-penal-argentino"
             },
             {
-              "titulo": "Delitos denunciados en el Uruguay",
-              "organismo": "Ministerio del Interior",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-del-interior-delitos_denunciados_en_el_uruguay"
+              "titulo": "Delitos contra la propiedad. Sistema de Alerta Temprana. Estadísticas criminales",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/delitos-contra-la-propiedad-sistema-de-alerta-temprana-estadisticas-criminales"
             },
             {
-              "titulo": "Información del Nuevo Código de Proceso Penal",
-              "organismo": "Poder Judicial",
-              "enlace": "https://catalogodatos.gub.uy/dataset/suprema-corte-de-justicia-informacion-del-nuevo-codigo-de-proceso-penal"
+              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Orientaciones",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/lucha-contra-la-trata-de-personas-llamados-linea-145-orientaciones"
             },
             {
-              "titulo": "Sistema carcelario",
-              "organismo": "Ministerio del Interior",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-del-interior-sistema-carcelario"
+              "titulo": "SNIC - Departamental. Estadísticas criminales en la República Argentina por departamentos",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/snic-departamental-estadisticas-criminales-en-la-republica-argentina-por-departamentos"
             }
           ]
-        },
-        {
-          "materia": "Presupuesto",
-          "eje": "Gobernanza",
-          "consulta": "presupuesto",
-          "cantidad": 6,
-          "ejemplos": [
-            {
-              "titulo": "Presupuesto y financiamiento externo",
-              "organismo": "Centro Ceibal",
-              "enlace": "https://catalogodatos.gub.uy/dataset/centro-ceibal-presupuesto_y_financiamiento_externo"
-            },
-            {
-              "titulo": "Balance de Ejecución Presupuestal del BCU",
-              "organismo": "Banco Central del Uruguay",
-              "enlace": "https://catalogodatos.gub.uy/dataset/banco-central-del-uruguay-presupuesto_bcu"
-            },
-            {
-              "titulo": "Partidas financiadas por organismos internacionales BCU",
-              "organismo": "Banco Central del Uruguay",
-              "enlace": "https://catalogodatos.gub.uy/dataset/banco-central-del-uruguay-presupuesto_organismos_internacionales"
-            },
-            {
-              "titulo": "Estados Financieros del BCU",
-              "organismo": "Banco Central del Uruguay",
-              "enlace": "https://catalogodatos.gub.uy/dataset/banco-central-del-uruguay-auditorias_bcu"
-            }
-          ]
-        },
-        {
-          "materia": "Contratación pública",
-          "eje": "Gobernanza",
-          "consulta": "contrataciones",
-          "cantidad": 5,
-          "ejemplos": [
-            {
-              "titulo": "Llamados publicados para adquisición y contratación de bienes y servicios",
-              "organismo": "Banco Central del Uruguay",
-              "enlace": "https://catalogodatos.gub.uy/dataset/bcu_llamados-publicados-comprasycontrataciones"
-            },
-            {
-              "titulo": "Licitaciones y compras",
-              "organismo": "ANCAP",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ancap-licitaciones-compras"
-            },
-            {
-              "titulo": "Seguimiento Ley de Promoción del Empleo",
-              "organismo": "Ministerio de Trabajo y Seguridad Social de Uruguay",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-de-trabajo-y-seguridad-social-de-uruguay-ley-de-promocion-del-empleo"
-            },
-            {
-              "titulo": "Publicaciones realizadas en el sitio web de Compras Estatales",
-              "organismo": "ARCE",
-              "enlace": "https://catalogodatos.gub.uy/dataset/acce-compras-estatales"
-            }
-          ]
-        },
-        {
-          "materia": "Violencia organizada",
-          "eje": "Seguridad",
-          "consulta": "homicidio",
-          "cantidad": 3,
-          "ejemplos": [
-            {
-              "titulo": "Homicidios a mujeres",
-              "organismo": "Ministerio del Interior",
-              "enlace": "https://catalogodatos.gub.uy/dataset/homicidios-a-mujeres"
-            },
-            {
-              "titulo": "Tasa de denuncia de homicidios consumados. Total país",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-10505"
-            },
-            {
-              "titulo": "Delitos denunciados en el Uruguay",
-              "organismo": "Ministerio del Interior",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-del-interior-delitos_denunciados_en_el_uruguay"
-            }
-          ]
-        },
-        {
-          "materia": "Integridad",
-          "eje": "Gobernanza",
-          "consulta": "corrupcion",
-          "cantidad": 0,
-          "ejemplos": []
         }
       ],
-      "conjuntos_hallados": 30
+      "conjuntos_hallados": 17
     },
     {
       "iso": "PRY",
@@ -1262,7 +1239,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4527,
+    "conjuntos_hallados": 4533,
     "materias_consultadas": 6,
     "oficinas_que_responden": 26,
     "estados_con_alguna_fuente_oficial": 28
@@ -1322,8 +1299,8 @@
       "organismo": "Oficina Nacional de Estadística e Información",
       "url": "https://onei.gob.cu/",
       "nota": "Sin el prefijo «www». Con él, el servidor devuelve error 500. La diferencia entre un Estado que no publica y un prefijo de más es un carácter, y decide lo que el registro afirma.",
-      "estado": "sin_respuesta",
-      "detalle": "URLError: <urlopen error timed out>",
+      "estado": "certificado_invalido",
+      "codigo": 200,
       "certificado": "no valida: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate ("
     },
     {
@@ -1538,15 +1515,15 @@
       "organismo": "Central Statistical Office",
       "url": "https://cso.gov.tt/",
       "estado": "responde",
-      "codigo": 200
+      "codigo": 202
     }
   ],
   "oficinas_por_estado": {
     "responde": 26,
     "cierra_a_maquinas": 3,
-    "sin_respuesta": 2,
+    "certificado_invalido": 2,
     "verificacion_anti_robot": 1,
-    "certificado_invalido": 1
+    "sin_respuesta": 1
   },
   "sectoriales_verificados": [
     {
