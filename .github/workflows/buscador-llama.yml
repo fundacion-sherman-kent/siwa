@@ -4,8 +4,9 @@ name: Buscador de fuentes con Llama
 # -----------------
 # Autorizado por la dirección el 17/9/2026 (acta, I-05). Reemplaza la búsqueda de
 # fuentes que hacía una tarea programada de Claude, apagada el 16/9 porque gastaba
-# el uso de la Fundación. Este no gasta nada: usa Llama, de Meta, por los servicios
-# gratuitos de Groq y, de respaldo, Cloudflare.
+# el uso de la Fundación. Este no gasta nada: usa Llama, de Meta, por el plan gratuito
+# de Cloudflare; si esas claves no están, el modelo abierto que Groq sirva gratis
+# (Groq tiene Llama sólo en plan pago: acta, 17/9/2026).
 #
 # Cada día mira dos portales oficiales de datos abiertos, rotando, y le pasa a Llama
 # lo que se publicó o modificó ahí. Llama propone a qué tema de SIWA corresponde; el
@@ -25,6 +26,11 @@ on:
   schedule:
     - cron: "50 7 * * *"
   workflow_dispatch:
+    inputs:
+      portal:
+        description: "Código de un país para mirar sólo su portal (por ejemplo PER). Vacío: los que tocan hoy"
+        required: false
+        default: ""
 
 # Escribe en otra rama, no en main: no compite con la recolección. Igual va de a uno.
 concurrency:
@@ -79,7 +85,9 @@ jobs:
       - name: Buscar y clasificar
         id: buscar
         if: steps.clave.outputs.hay == 'si'
-        run: python colectores/buscador_llama.py --salida rama/propuestas
+        env:
+          PORTAL: ${{ github.event.inputs.portal }}
+        run: python colectores/buscador_llama.py --salida rama/propuestas ${PORTAL:+--portal "$PORTAL"}
 
       - name: Guardar las propuestas
         if: steps.clave.outputs.hay == 'si' && always()

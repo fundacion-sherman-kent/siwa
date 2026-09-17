@@ -10,8 +10,8 @@ QUÉ HACE, EN ORDEN
    recientemente. Es la misma interfaz CKAN o Socrata que ya consulta
    `fuentes_oficiales.py`.
 2. Descarta lo que ya propuso antes.
-3. Le pasa a Llama —servido gratis por Groq, o por Cloudflare si Groq no
-   responde— el título, la descripción y los recursos de cada conjunto, con la
+3. Le pasa a un modelo de pesos abiertos —Llama por Cloudflare si hay clave; si
+   no, el que Groq sirva gratis— el título, la descripción y los recursos de cada conjunto, con la
    lista de temas de SIWA. Llama devuelve, por cada uno: si corresponde a un tema,
    a cuál, el último período que cubre, el formato y el motivo en una línea.
 4. COMPRUEBA cada enlace que Llama dio por bueno: tiene que responder y tiene que
@@ -30,12 +30,21 @@ LO QUE NO HACE, Y NO DEBE HACER
 
 Llama es de Meta, con pesos abiertos bajo su propia licencia. Los nombres de
 modelo se eligen en cada corrida, no se fijan: los fijos caducan.
+
+AJUSTES DEL 17/9/2026, ORDENADOS POR LA DIRECCIÓN (acta)
+· Perú y Paraguay entran: sus portales no tienen buscador, pero sí la lista de
+  conjuntos ordenada del más reciente al más viejo.
+· Llama primero: si están las claves de Cloudflare, clasifica Llama; Groq queda
+  de respaldo.
+· Una serie, una propuesta: los archivos que son la misma serie contada de otra
+  manera (en unidades y en TEU, por tipo y por destino) se juntan.
 """
 
 from __future__ import annotations
 
 import argparse
 import datetime as dt
+import unicodedata
 import json
 import os
 import re
@@ -108,6 +117,26 @@ def comprobar(url: str) -> dict:
 
 # ─────────────────────────── 1 · los portales ───────────────────────────
 
+FORMATOS_DE_DATOS = {"CSV", "XLSX", "XLS", "EXCEL", "JSON", "ODS", "XML", "API", "ZIP"}
+
+
+def elegir_recursos(recursos: list[dict]) -> list[dict]:
+    """LOS PRIMEROS RECURSOS SUELEN SER EL DICCIONARIO Y LOS METADATOS. En Perú, un
+    conjunto de empleo tenía 48 archivos: el diccionario primero y el mes más nuevo
+    al final. Se prefieren archivos de datos, y de ellos los últimos publicados."""
+    limpios = []
+    for x in recursos or []:
+        if not x.get("url"):
+            continue
+        formato = (x.get("format") or "").upper().lstrip(".")
+        nombre = x.get("name") or ""
+        limpios.append({"url": x["url"], "formato": formato, "nombre": nombre[:80],
+                        "_datos": formato in FORMATOS_DE_DATOS
+                        and not re.search(r"diccionario|metadato", nombre, re.I)})
+    datos = [x for x in limpios if x["_datos"]]
+    elegidos = datos[-3:] if datos else limpios[:3]
+    return [{k: v for k, v in x.items() if k != "_datos"} for x in elegidos]
+
 def recientes(portal: dict) -> list[dict]:
     base = portal["base"].rstrip("/")
     salida = []
@@ -122,9 +151,7 @@ def recientes(portal: dict) -> list[dict]:
                 "organismo": (p.get("organization") or {}).get("title", ""),
                 "modificado": p.get("metadata_modified", ""),
                 "pagina": f"{base}/dataset/{p.get('name')}",
-                "recursos": [{"url": x.get("url"), "formato": (x.get("format") or "").upper(),
-                              "nombre": (x.get("name") or "")[:80]}
-                             for x in (p.get("resources") or [])[:3] if x.get("url")],
+                "recursos": elegir_recursos(p.get("resources")),
             })
     elif portal["tipo"] == "Socrata":
         dominio = urllib.parse.urlparse(base).netloc
@@ -143,8 +170,27 @@ def recientes(portal: dict) -> list[dict]:
                 "pagina": x.get("permalink") or f"{base}/d/{rid}",
                 "recursos": [{"url": f"{base}/resource/{rid}.csv", "formato": "CSV", "nombre": "API CSV"}],
             })
-    # «CKAN-lista» (Perú, Paraguay): no tienen buscador ni orden por fecha. Se
-    # declaran como no cubiertos en el resumen, en vez de simular una búsqueda.
+    elif portal["tipo"] == "CKAN-lista":
+        # PERÚ Y PARAGUAY no tienen buscador (package_search da 404 o una página), pero
+        # sí la lista de conjuntos con sus recursos, ordenada del más reciente al más
+        # viejo. Comprobado en vivo el 17/9/2026 en los dos portales.
+        d = pedir_json(f"{base}/api/3/action/current_package_list_with_resources?limit={POR_PORTAL}",
+                       espera=90)
+        lista = d.get("result") or []
+        if lista and isinstance(lista[0], list):  # estos portales la devuelven anidada
+            lista = lista[0]
+        for p in lista[:POR_PORTAL]:
+            grupos = p.get("groups") or []
+            salida.append({
+                "id": f"{portal['iso']}:{p.get('name')}",
+                "pais": portal["iso"],
+                "titulo": p.get("title") or p.get("name"),
+                "descripcion": re.sub(r"<[^>]+>|\s+", " ", (p.get("notes") or ""))[:250],
+                "organismo": (grupos[0].get("title") if grupos and isinstance(grupos[0], dict) else "") or "",
+                "modificado": p.get("metadata_modified", ""),
+                "pagina": f"{base}/dataset/{urllib.parse.quote(p.get('name') or '')}",
+                "recursos": elegir_recursos(p.get("resources")),
+            })
     return salida
 
 
@@ -185,8 +231,29 @@ def elegir_cloudflare(cuenta: str, token: str) -> str | None:
 
 
 def conversar(sistema: str, usuario: str) -> tuple[str, str]:
-    """Devuelve (texto, «servicio · modelo»). Groq primero; Cloudflare de respaldo."""
+    """Devuelve (texto, «servicio · modelo»). LLAMA PRIMERO: la dirección pidió Llama
+    (17/9/2026) y Groq sólo lo da en plan pago. Si están las claves de Cloudflare,
+    clasifica Llama ahí; Groq queda de respaldo."""
     groq = os.environ.get("GROQ_API_KEY")
+    cuenta, token = os.environ.get("CLOUDFLARE_ACCOUNT_ID"), os.environ.get("CLOUDFLARE_API_TOKEN")
+    if cuenta and token:
+        try:
+            modelo = elegir_cloudflare(cuenta, token)
+            if modelo:
+                d = pedir_json(f"https://api.cloudflare.com/client/v4/accounts/{cuenta}/ai/run/{modelo}",
+                               {"Authorization": "Bearer " + token},
+                               {"messages": [{"role": "system", "content": sistema},
+                                             {"role": "user", "content": usuario}],
+                                "temperature": 0, "max_tokens": 2048}, espera=120)
+                respuesta = (d.get("result") or {}).get("response", "")
+                if not isinstance(respuesta, str):  # algunos modelos ya devuelven el objeto
+                    respuesta = json.dumps(respuesta, ensure_ascii=False)
+                if respuesta:
+                    return respuesta, "Cloudflare · " + modelo
+            else:
+                print("  Cloudflare no ofrece Llama a esta cuenta.", file=sys.stderr)
+        except Exception as e:  # noqa: BLE001
+            print("  Cloudflare no respondió:", type(e).__name__, str(e)[:120], file=sys.stderr)
     if groq:
         try:
             modelo = elegir_groq(groq)
@@ -207,15 +274,6 @@ def conversar(sistema: str, usuario: str) -> tuple[str, str]:
                 return d["choices"][0]["message"]["content"], "Groq · " + modelo
         except Exception as e:  # noqa: BLE001
             print("  Groq no respondió:", type(e).__name__, str(e)[:120], file=sys.stderr)
-    cuenta, token = os.environ.get("CLOUDFLARE_ACCOUNT_ID"), os.environ.get("CLOUDFLARE_API_TOKEN")
-    if cuenta and token:
-        modelo = elegir_cloudflare(cuenta, token)
-        if modelo:
-            d = pedir_json(f"https://api.cloudflare.com/client/v4/accounts/{cuenta}/ai/run/{modelo}",
-                           {"Authorization": "Bearer " + token},
-                           {"messages": [{"role": "system", "content": sistema},
-                                         {"role": "user", "content": usuario}], "temperature": 0}, espera=120)
-            return (d.get("result") or {}).get("response", ""), "Cloudflare · " + modelo
     if not groq and not (cuenta and token):
         raise RuntimeError("No hay clave de Groq ni de Cloudflare cargada en el repositorio.")
     raise RuntimeError("Hay clave, pero ningún servicio ofreció un modelo abierto que responda. Ver el detalle arriba.")
@@ -287,7 +345,36 @@ def clasificar(conjuntos: list[dict], temas: list[dict]) -> tuple[list[dict], st
     return todos, servicio
 
 
-# ─────────────────────────── 3 · la corrida ───────────────────────────
+# ─────────────────────────── 3 · una serie, una propuesta ───────────────────────────
+
+_VACIAS = set("""de del la las el los en y o por a al con para sobre segun e u
+enero febrero marzo abril mayo junio julio agosto septiembre setiembre octubre noviembre diciembre
+teu unidades unidad total totales mensual anual trimestral semestral periodo""".split())
+
+
+def raiz_de_serie(titulo: str) -> str:
+    """El 17/9/2026 salieron cinco propuestas que eran una sola serie: movimiento de
+    contenedores de Panamá en TEU y en unidades, por tipo y por destino. La raíz es el
+    comienzo del título sin fechas, meses, unidades ni desagregaciones."""
+    t = unicodedata.normalize("NFKD", titulo or "").encode("ascii", "ignore").decode().lower()
+    t = re.sub(r"\(.*?\)|\[.*?\]", " ", t)
+    t = re.split(r"\bpor\b", t)[0]
+    palabras = [w for w in re.findall(r"[a-z]+", t) if w not in _VACIAS and len(w) > 1]
+    return " ".join(palabras[:4])
+
+
+def agrupar(propuestas: list[dict]) -> list[dict]:
+    grupos: dict[tuple, dict] = {}
+    for x in propuestas:
+        clave = (x["pais"], x["tema"], raiz_de_serie(x["titulo"]))
+        if clave not in grupos:
+            grupos[clave] = {**x, "variantes": []}
+        else:
+            grupos[clave]["variantes"].append({k: x[k] for k in ("titulo", "pagina", "enlace", "periodo")})
+    return list(grupos.values())
+
+
+# ─────────────────────────── 4 · la corrida ───────────────────────────
 
 def principal():
     ap = argparse.ArgumentParser()
@@ -306,8 +393,9 @@ def principal():
     vistos_f = salida / "vistos.json"
     vistos = set(json.loads(vistos_f.read_text(encoding="utf-8"))) if vistos_f.exists() else set()
 
-    buscables = [p for p in oficiales["portales"] if p["tipo"] in ("CKAN", "Socrata")]
-    no_cubiertos = [p["iso"] for p in oficiales["portales"] if p["tipo"] not in ("CKAN", "Socrata")]
+    leibles = ("CKAN", "Socrata", "CKAN-lista")
+    buscables = [p for p in oficiales["portales"] if p["tipo"] in leibles]
+    no_cubiertos = [p["iso"] for p in oficiales["portales"] if p["tipo"] not in leibles]
     hoy = dt.date.today()
     if a.portal:
         elegidos = [p for p in buscables if p["iso"] == a.portal]
@@ -355,28 +443,38 @@ def principal():
             if c["recursos"]:
                 print("  comprobación", c["recursos"][0]["url"][:90], "→", comprobar(c["recursos"][0]["url"]))
 
+    archivos = len(propuestas)
+    propuestas = agrupar(propuestas)
     sello = hoy.isoformat()
     if not a.sin_ia:
         vistos.update(c["id"] for c in candidatos)
         vistos_f.write_text(json.dumps(sorted(vistos), ensure_ascii=False, indent=0), encoding="utf-8")
-    (salida / f"{sello}.json").write_text(json.dumps(
+    # Dos corridas el mismo día (la programada y una a mano) no se pisan: el archivo
+    # lleva también los países mirados.
+    archivo = f"{sello}-{'-'.join(p['iso'] for p in elegidos)}"
+    (salida / f"{archivo}.json").write_text(json.dumps(
         {"fecha": sello, "servicio": servicio, "portales": [p["iso"] for p in elegidos],
-         "mirados": len(candidatos), "propuestas": propuestas, "descartadas": descartadas,
+         "mirados": len(candidatos), "archivos_aceptados": archivos, "propuestas": propuestas, "descartadas": descartadas,
          "fallas": fallas, "no_cubiertos": no_cubiertos}, ensure_ascii=False, indent=1), encoding="utf-8")
 
     renglones = [f"# Propuestas de fuentes · {sello}", "",
                  f"Portales mirados: {', '.join(p['iso'] for p in elegidos)} · conjuntos nuevos: {len(candidatos)} · "
                  f"clasificó: {servicio}", "",
-                 f"**{len(propuestas)} propuestas**, {descartadas} descartadas. Ninguna está incorporada ni calificada.", ""]
+                 f"**{len(propuestas)} propuestas** ({archivos} archivos: los que son la misma serie van juntos), "
+                 f"{descartadas} descartadas. Ninguna está incorporada ni calificada.", ""]
     for x in propuestas:
         renglones += [f"- **{x['pais']} · {x['tema_nombre']}** — {x['titulo']}",
                       f"  {x['organismo']} · período {x['periodo'] or 's/d'} · {x['formato'] or 's/d'}",
-                      f"  {x['enlace']}", f"  Motivo: {x['motivo']}", ""]
+                      f"  {x['enlace']}", f"  Motivo: {x['motivo']}"]
+        for v in x["variantes"]:
+            renglones.append(f"  · misma serie: {v['titulo']} — {v['enlace']}")
+        renglones.append("")
     if fallas:
         renglones += ["**Portales que no respondieron:** " + "; ".join(fallas), ""]
-    renglones += [f"Sin cobertura en esta etapa (sus portales no tienen buscador): {', '.join(no_cubiertos)}."]
-    (salida / f"{sello}.md").write_text("\n".join(renglones) + "\n", encoding="utf-8")
-    print(f"{len(propuestas)} propuestas · {descartadas} descartadas · {servicio}")
+    if no_cubiertos:
+        renglones += [f"Sin cobertura en esta etapa: {', '.join(no_cubiertos)}."]
+    (salida / f"{archivo}.md").write_text("\n".join(renglones) + "\n", encoding="utf-8")
+    print(f"{len(propuestas)} propuestas ({archivos} archivos) · {descartadas} descartadas · {servicio}")
 
 
 if __name__ == "__main__":
