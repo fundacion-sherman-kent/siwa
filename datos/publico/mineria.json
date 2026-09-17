@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-17T18:36:06+00:00",
+  "corrida": "2026-09-17T20:27:05+00:00",
   "medidas_con_suficientes_casos": 199,
   "pares_probados": 19701,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3688,
+    "sobreviven": 3703,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3276,
+  "pistas_totales": 3291,
   "anomalias_totales": 366,
   "pistas": [
     {
@@ -502,6 +502,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.893,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.3059119883466207e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:mediciones",
       "b": "reservas_internacionales",
       "rotulo_a": "ciber · mediciones",
@@ -627,19 +640,6 @@
       "estados": 19,
       "tipo": "rangos (Spearman)",
       "p": 2.4452722780373087e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.883,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.983778906449475e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
