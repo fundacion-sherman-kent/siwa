@@ -1,0 +1,92 @@
+name: Buscador de fuentes con Llama
+
+# QUÉ ES ESTE ROBOT
+# -----------------
+# Autorizado por la dirección el 17/9/2026 (acta, I-05). Reemplaza la búsqueda de
+# fuentes que hacía una tarea programada de Claude, apagada el 16/9 porque gastaba
+# el uso de la Fundación. Este no gasta nada: usa Llama, de Meta, por los servicios
+# gratuitos de Groq y, de respaldo, Cloudflare.
+#
+# Cada día mira dos portales oficiales de datos abiertos, rotando, y le pasa a Llama
+# lo que se publicó o modificó ahí. Llama propone a qué tema de SIWA corresponde; el
+# robot comprueba que cada enlace responda y deja las propuestas escritas.
+#
+# PROPONE, NO INCORPORA. Las propuestas van a la rama «propuestas-llama», que el
+# sitio NO publica. Nada entra al registro sin calificación humana y sin seguir el
+# acta. Se leen en:
+#   https://github.com/fundacion-sherman-kent/siwa/tree/propuestas-llama/propuestas
+#
+# NECESITA UNA CLAVE GRATUITA cargada por la dirección como secreto del repositorio:
+# GROQ_API_KEY (o CLOUDFLARE_ACCOUNT_ID y CLOUDFLARE_API_TOKEN). Instructivo en
+# ClaudeGral/direccion/instructivos/clave-groq-siwa.md. Sin clave, el robot no
+# falla: avisa que falta y termina en verde.
+
+on:
+  schedule:
+    - cron: "50 7 * * *"
+  workflow_dispatch:
+
+# Escribe en otra rama, no en main: no compite con la recolección. Igual va de a uno.
+concurrency:
+  group: buscador-llama
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Comprobar que hay clave
+        id: clave
+        run: |
+          if [ -n "$GROQ_API_KEY" ] || { [ -n "$CLOUDFLARE_ACCOUNT_ID" ] && [ -n "$CLOUDFLARE_API_TOKEN" ]; }; then
+            echo "hay=si" >> "$GITHUB_OUTPUT"
+          else
+            echo "hay=no" >> "$GITHUB_OUTPUT"
+            echo "::notice::Falta la clave gratuita de Groq (GROQ_API_KEY). El buscador no corre hasta que la dirección la cargue."
+          fi
+
+      - name: Traer las propuestas anteriores
+        if: steps.clave.outputs.hay == 'si'
+        run: |
+          if git ls-remote --exit-code --heads origin propuestas-llama >/dev/null; then
+            git worktree add rama origin/propuestas-llama
+            git -C rama checkout -B propuestas-llama
+          else
+            git worktree add --detach rama
+            git -C rama checkout --orphan propuestas-llama
+            git -C rama rm -rf . >/dev/null
+            printf '# Propuestas de fuentes para SIWA\n\nLas escribe el buscador con Llama. Ninguna está incorporada ni calificada.\n' > rama/README.md
+          fi
+
+      - name: Buscar y clasificar
+        id: buscar
+        if: steps.clave.outputs.hay == 'si'
+        run: python colectores/buscador_llama.py --salida rama/propuestas
+
+      - name: Guardar las propuestas
+        if: steps.clave.outputs.hay == 'si' && always()
+        run: |
+          cd rama
+          git config user.name "siwa"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "Propuestas $(date -u +'%Y-%m-%d')"
+          git push origin propuestas-llama
