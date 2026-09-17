@@ -282,8 +282,7 @@ def clasificar(conjuntos: list[dict], temas: list[dict]) -> tuple[list[dict], st
             bloque = texto[texto.index("{"): texto.rindex("}") + 1]
             todos.extend(normalizar(json.loads(bloque)))
         except Exception:  # noqa: BLE001 — una tanda ilegible se declara y se sigue
-            print("  respuesta ilegible en la tanda", i // POR_LLAMADA + 1, "·", texto[:200].replace("
-", " "),
+            print("  respuesta ilegible en la tanda", i // POR_LLAMADA + 1, "·", texto[:200].replace(chr(10), " "),
                   file=sys.stderr)
     return todos, servicio
 
