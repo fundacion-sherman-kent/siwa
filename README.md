@@ -101,7 +101,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**70 fuentes en servicio**, en 72 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**73 fuentes en servicio**, en 75 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -170,7 +170,10 @@ python colectores/focos.py
 | `sondeo` | Fundación Sherman Kent — banco de pruebas de fuentes candidatas | `A-1` | — | 5 |
 | `subnacional` | Censo propio de fuentes subnacionales — Fundación Sherman Kent, sobre los catálogos que publica cada jurisdicción | `A-2` | — | 3 |
 | `subnacional_datos` | Fuentes oficiales nacionales que publican por unidad de primer orden: Policía Nacional de Colombia; Sistema Nacional de Información Criminal (SNIC); Ministerio del Interior del Uruguay | `A-2` | 3 | 6 |
+| `subnacional_focos` | Focos de calor por unidad de primer orden — NASA FIRMS agregado sobre geoBoundaries ADM1 | `A-2` | 21 | 3 |
 | `subnacional_homicidios` | Homicidios por unidad de primer orden, de la fuente nacional de cada Estado (Argentina SNIC, Colombia MinDefensa, Ecuador INEC, Perú CEIC, México SESNSP) | `A-2` | 10 | 3 |
+| `subnacional_robos` | Robos/hurtos por unidad de primer orden, de la fuente nacional de cada Estado (Bolivia INE, Trinidad TTPS) | `A-2` | 2 | 3 |
+| `subnacional_santafe` | Observatorio de Seguridad Pública de Santa Fe — infografía mensual de homicidios dolosos | `A-2` | 1 | 3 |
 | `subnacional_vigia` | Vigía subnacional de SIWA — reintento sostenido de fuentes por unidad de primer orden | `A-2` | — | 2 |
 | `telegram` | Canales públicos de Telegram, vista sin cuenta | `F-4` | — | 8 |
 | `trata_personas` | Departamento de Estado de los Estados Unidos — Informe sobre la Trata de Personas, edición 2025 | `B-2` | 33 | 6 |
