@@ -147,11 +147,16 @@ def elegir_groq(clave: str) -> str | None:
     ids = [m["id"] for m in pedir_json("https://api.groq.com/openai/v1/models",
                                        {"Authorization": "Bearer " + clave}).get("data", [])
            if m.get("active", True)]
-    ids = [i for i in ids if not re.search(r"guard|prompt|whisper|tts", i, re.I)]
-    for patron in (r"llama-4", r"llama-3\.\d-70b", r"llama"):
+    ids = [i for i in ids if not re.search(r"guard|prompt|whisper|tts|compound", i, re.I)]
+    # LLAMA PRIMERO, Y SI NO ESTÁ, OTRO MODELO DE PESOS ABIERTOS. El 17/9/2026 Groq
+    # tenía Llama sólo en su plan empresarial: con cuenta gratuita no aparece. En ese
+    # caso se usa GPT-OSS (OpenAI, licencia Apache 2.0) o Qwen (Alibaba), que Groq sí
+    # sirve gratis. Cada propuesta deja escrito qué modelo la clasificó.
+    for patron in (r"llama-4", r"llama-3\.\d-70b", r"llama", r"gpt-oss-120b", r"gpt-oss", r"qwen"):
         hallados = [i for i in ids if re.search(patron, i, re.I)]
         if hallados:
             return sorted(hallados, key=_version, reverse=True)[0]
+    print("  Groq no ofrece modelos abiertos a esta cuenta. Disponibles:", ", ".join(ids)[:300], file=sys.stderr)
     return None
 
 
@@ -174,11 +179,19 @@ def conversar(sistema: str, usuario: str) -> tuple[str, str]:
         try:
             modelo = elegir_groq(groq)
             if modelo:
-                d = pedir_json("https://api.groq.com/openai/v1/chat/completions",
-                               {"Authorization": "Bearer " + groq},
-                               {"model": modelo, "temperature": 0, "response_format": {"type": "json_object"},
-                                "messages": [{"role": "system", "content": sistema},
-                                             {"role": "user", "content": usuario}]}, espera=120)
+                cuerpo = {"model": modelo, "temperature": 0, "response_format": {"type": "json_object"},
+                          "messages": [{"role": "system", "content": sistema},
+                                       {"role": "user", "content": usuario}]}
+                try:
+                    d = pedir_json("https://api.groq.com/openai/v1/chat/completions",
+                                   {"Authorization": "Bearer " + groq}, cuerpo, espera=120)
+                except urllib.error.HTTPError as e:
+                    if e.code != 400:
+                        raise
+                    # Hay modelos que no aceptan el modo JSON: se pide igual, sin él.
+                    cuerpo.pop("response_format")
+                    d = pedir_json("https://api.groq.com/openai/v1/chat/completions",
+                                   {"Authorization": "Bearer " + groq}, cuerpo, espera=120)
                 return d["choices"][0]["message"]["content"], "Groq · " + modelo
         except Exception as e:  # noqa: BLE001
             print("  Groq no respondió:", type(e).__name__, str(e)[:120], file=sys.stderr)
@@ -191,7 +204,9 @@ def conversar(sistema: str, usuario: str) -> tuple[str, str]:
                            {"messages": [{"role": "system", "content": sistema},
                                          {"role": "user", "content": usuario}], "temperature": 0}, espera=120)
             return (d.get("result") or {}).get("response", ""), "Cloudflare · " + modelo
-    raise RuntimeError("No hay clave de Groq ni de Cloudflare cargada en el repositorio.")
+    if not groq and not (cuenta and token):
+        raise RuntimeError("No hay clave de Groq ni de Cloudflare cargada en el repositorio.")
+    raise RuntimeError("Hay clave, pero ningún servicio ofreció un modelo abierto que responda. Ver el detalle arriba.")
 
 
 SISTEMA = """Sos un asistente de catalogación de datos públicos. Trabajás para SIWA, un
