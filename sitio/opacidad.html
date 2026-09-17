@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Índice de Opacidad — el ranking en movimiento · SIWA</title>
+<meta name="description" content="Índice de Opacidad de SIWA: cuán difícil es obtener del Estado la información que debería ser pública. 0 transparente, 100 opaco, y cómo se mueve cada país en el ranking.">
+<link rel="canonical" href="https://siwa.fundacionkent.org/sitio/opacidad.html">
+<meta name="theme-color" content="#F4F2EC">
+<link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+<script src="lib/echarts.min.js"></script>
+<style>
+  :root{--orange:#FB6500;--verde:#1f8f7a;--rojo:#d34a3f;
+    --fondo:#F4F2EC;--tinta:#0d2233;--tenue:#5f7186;--linea:#d7dce3;--caja:#ffffff;--navy:#00121E;}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#3fb27f;--rojo:#e2564b;}}
+  :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#3fb27f;--rojo:#e2564b;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--fondo);color:var(--tinta);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5;}
+  .barra{background:var(--navy);color:#F4F2EC;padding:14px 22px;}
+  .barra a{color:#F4F2EC;text-decoration:none;font-weight:700;letter-spacing:.02em;}
+  .barra span{color:var(--orange);}
+  main{max-width:1080px;margin:0 auto;padding:22px 22px 50px;}
+  .filete{height:4px;width:74px;background:var(--orange);border-radius:2px;margin-bottom:14px;}
+  h1{font-size:clamp(24px,4.6vw,34px);margin:0 0 6px;letter-spacing:-.4px;}
+  h1 b{color:var(--orange);}
+  .bajada{color:var(--tenue);font-size:14.5px;max-width:820px;margin:0 0 8px;}
+  .controles{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0;}
+  .controles button{background:var(--caja);border:1px solid var(--linea);color:var(--tinta);
+    padding:8px 14px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;}
+  .controles button:hover{border-color:var(--orange);}
+  .controles button.on{background:var(--orange);color:#fff;border-color:var(--orange);}
+  .fecha{color:var(--tenue);font-size:13px;margin-left:auto;}
+  #grafico{width:100%;height:640px;}
+  .pie{margin-top:16px;padding-top:14px;border-top:1px solid var(--linea);color:var(--tenue);font-size:12.5px;}
+  .pie a{color:var(--orange);}
+  b{color:var(--tinta);}
+</style>
+</head>
+<body>
+<div class="barra"><a href="index.html"><span>SIWA</span> · Reporte de situación de América Latina y el Caribe</a></div>
+<main>
+  <div class="filete"></div>
+  <h1>Índice de <b>Opacidad</b> — el ranking en movimiento</h1>
+  <p class="bajada">Cuán difícil es obtener del Estado la información que debería ser pública.
+     Mide <b>actos observables</b>, no opiniones: <b>0 = transparente, 100 = opaco</b>. Cada línea
+     es un Estado; sube o baja cuando cambia de puesto entre una medición y la siguiente.</p>
+  <div class="controles">
+    <button id="modo-puesto" class="on">Ver por puesto</button>
+    <button id="modo-valor">Ver por puntaje 0–100</button>
+    <button id="tema">Fondo oscuro</button>
+    <span class="fecha" id="rango"></span>
+  </div>
+  <div id="grafico"></div>
+  <p class="pie" id="metodo">SIWA — Fundación Sherman Kent · Índice de Opacidad, edición 1 ·
+     pesos iguales, escala 0–100 · Verde = transparente, rojo = opaco · Actualización diaria.</p>
+</main>
+<script>
+const SNAP = [{"iso":"ARG","pais":"Argentina","serie":[{"fecha":"2026-09-10","valor":0.0},{"fecha":"2026-09-11","valor":2.8},{"fecha":"2026-09-12","valor":2.8},{"fecha":"2026-09-13","valor":2.8},{"fecha":"2026-09-14","valor":3.3},{"fecha":"2026-09-15","valor":3.3},{"fecha":"2026-09-16","valor":0.0},{"fecha":"2026-09-17","valor":0.0}]},{"iso":"ATG","pais":"Antigua y Barbuda","serie":[{"fecha":"2026-09-10","valor":50.0},{"fecha":"2026-09-11","valor":50.0},{"fecha":"2026-09-12","valor":52.0},{"fecha":"2026-09-13","valor":50.0},{"fecha":"2026-09-14","valor":52.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":50.0},{"fecha":"2026-09-17","valor":40.0}]},{"iso":"BHS","pais":"Bahamas","serie":[{"fecha":"2026-09-10","valor":40.0},{"fecha":"2026-09-11","valor":50.0},{"fecha":"2026-09-12","valor":40.0},{"fecha":"2026-09-13","valor":50.0},{"fecha":"2026-09-14","valor":40.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":40.0},{"fecha":"2026-09-17","valor":40.0}]},{"iso":"BLZ","pais":"Belice","serie":[{"fecha":"2026-09-10","valor":50.0},{"fecha":"2026-09-11","valor":50.0},{"fecha":"2026-09-12","valor":40.0},{"fecha":"2026-09-13","valor":50.0},{"fecha":"2026-09-14","valor":40.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":50.0},{"fecha":"2026-09-17","valor":50.0}]},{"iso":"BOL","pais":"Bolivia","serie":[{"fecha":"2026-09-10","valor":12.0},{"fecha":"2026-09-11","valor":12.0},{"fecha":"2026-09-12","valor":12.0},{"fecha":"2026-09-13","valor":12.0},{"fecha":"2026-09-14","valor":12.0},{"fecha":"2026-09-15","valor":15.0},{"fecha":"2026-09-16","valor":15.0},{"fecha":"2026-09-17","valor":12.0}]},{"iso":"BRA","pais":"Brasil","serie":[{"fecha":"2026-09-10","valor":12.0},{"fecha":"2026-09-11","valor":15.0},{"fecha":"2026-09-12","valor":12.0},{"fecha":"2026-09-13","valor":12.0},{"fecha":"2026-09-14","valor":12.0},{"fecha":"2026-09-15","valor":12.0},{"fecha":"2026-09-16","valor":12.0},{"fecha":"2026-09-17","valor":12.0}]},{"iso":"BRB","pais":"Barbados","serie":[{"fecha":"2026-09-10","valor":40.0},{"fecha":"2026-09-11","valor":40.0},{"fecha":"2026-09-12","valor":40.0},{"fecha":"2026-09-13","valor":50.0},{"fecha":"2026-09-14","valor":40.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":50.0},{"fecha":"2026-09-17","valor":40.0}]},{"iso":"CHL","pais":"Chile","serie":[{"fecha":"2026-09-10","valor":5.5},{"fecha":"2026-09-11","valor":5.5},{"fecha":"2026-09-12","valor":5.5},{"fecha":"2026-09-13","valor":5.5},{"fecha":"2026-09-14","valor":5.5},{"fecha":"2026-09-15","valor":6.7},{"fecha":"2026-09-16","valor":6.7},{"fecha":"2026-09-17","valor":5.5}]},{"iso":"COL","pais":"Colombia","serie":[{"fecha":"2026-09-10","valor":16.7},{"fecha":"2026-09-11","valor":0.0},{"fecha":"2026-09-12","valor":0.0},{"fecha":"2026-09-13","valor":0.0},{"fecha":"2026-09-14","valor":0.0},{"fecha":"2026-09-15","valor":0.0},{"fecha":"2026-09-16","valor":16.7},{"fecha":"2026-09-17","valor":0.0}]},{"iso":"CRI","pais":"Costa Rica","serie":[{"fecha":"2026-09-10","valor":15.0},{"fecha":"2026-09-11","valor":15.0},{"fecha":"2026-09-12","valor":15.0},{"fecha":"2026-09-13","valor":15.0},{"fecha":"2026-09-14","valor":15.0},{"fecha":"2026-09-15","valor":15.0},{"fecha":"2026-09-16","valor":15.0},{"fecha":"2026-09-17","valor":15.0}]},{"iso":"CUB","pais":"Cuba","serie":[{"fecha":"2026-09-10","valor":60.0},{"fecha":"2026-09-11","valor":60.0},{"fecha":"2026-09-12","valor":72.0},{"fecha":"2026-09-13","valor":75.0},{"fecha":"2026-09-14","valor":72.0},{"fecha":"2026-09-15","valor":75.0},{"fecha":"2026-09-16","valor":75.0},{"fecha":"2026-09-17","valor":60.0}]},{"iso":"DMA","pais":"Dominica","serie":[{"fecha":"2026-09-10","valor":75.0},{"fecha":"2026-09-11","valor":60.0},{"fecha":"2026-09-12","valor":60.0},{"fecha":"2026-09-13","valor":75.0},{"fecha":"2026-09-14","valor":60.0},{"fecha":"2026-09-15","valor":75.0},{"fecha":"2026-09-16","valor":75.0},{"fecha":"2026-09-17","valor":60.0}]},{"iso":"DOM","pais":"República Dominicana","serie":[{"fecha":"2026-09-10","valor":2.8},{"fecha":"2026-09-11","valor":2.8},{"fecha":"2026-09-12","valor":2.8},{"fecha":"2026-09-13","valor":2.8},{"fecha":"2026-09-14","valor":2.8},{"fecha":"2026-09-15","valor":3.3},{"fecha":"2026-09-16","valor":3.3},{"fecha":"2026-09-17","valor":2.8}]},{"iso":"ECU","pais":"Ecuador","serie":[{"fecha":"2026-09-10","valor":12.0},{"fecha":"2026-09-11","valor":12.0},{"fecha":"2026-09-12","valor":12.0},{"fecha":"2026-09-13","valor":15.0},{"fecha":"2026-09-14","valor":12.0},{"fecha":"2026-09-15","valor":15.0},{"fecha":"2026-09-16","valor":15.0},{"fecha":"2026-09-17","valor":12.0}]},{"iso":"GRD","pais":"Granada","serie":[{"fecha":"2026-09-10","valor":62.5},{"fecha":"2026-09-11","valor":62.5},{"fecha":"2026-09-12","valor":50.0},{"fecha":"2026-09-13","valor":62.5},{"fecha":"2026-09-14","valor":50.0},{"fecha":"2026-09-15","valor":62.5},{"fecha":"2026-09-16","valor":62.5},{"fecha":"2026-09-17","valor":50.0}]},{"iso":"GTM","pais":"Guatemala","serie":[{"fecha":"2026-09-10","valor":12.0},{"fecha":"2026-09-11","valor":15.0},{"fecha":"2026-09-12","valor":12.0},{"fecha":"2026-09-13","valor":15.0},{"fecha":"2026-09-14","valor":12.0},{"fecha":"2026-09-15","valor":15.0},{"fecha":"2026-09-16","valor":15.0},{"fecha":"2026-09-17","valor":12.0}]},{"iso":"GUY","pais":"Guyana","serie":[{"fecha":"2026-09-10","valor":50.0},{"fecha":"2026-09-11","valor":40.0},{"fecha":"2026-09-12","valor":40.0},{"fecha":"2026-09-13","valor":50.0},{"fecha":"2026-09-14","valor":40.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":50.0},{"fecha":"2026-09-17","valor":40.0}]},{"iso":"HND","pais":"Honduras","serie":[{"fecha":"2026-09-10","valor":15.0},{"fecha":"2026-09-11","valor":15.0},{"fecha":"2026-09-12","valor":15.0},{"fecha":"2026-09-13","valor":15.0},{"fecha":"2026-09-14","valor":15.0},{"fecha":"2026-09-15","valor":15.0},{"fecha":"2026-09-16","valor":15.0},{"fecha":"2026-09-17","valor":15.0}]},{"iso":"HTI","pais":"Haití","serie":[{"fecha":"2026-09-10","valor":75.0},{"fecha":"2026-09-11","valor":60.0},{"fecha":"2026-09-12","valor":75.0},{"fecha":"2026-09-13","valor":60.0},{"fecha":"2026-09-14","valor":60.0},{"fecha":"2026-09-15","valor":75.0},{"fecha":"2026-09-16","valor":75.0},{"fecha":"2026-09-17","valor":60.0}]},{"iso":"JAM","pais":"Jamaica","serie":[{"fecha":"2026-09-10","valor":40.0},{"fecha":"2026-09-11","valor":52.0},{"fecha":"2026-09-12","valor":40.0},{"fecha":"2026-09-13","valor":52.0},{"fecha":"2026-09-14","valor":40.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":50.0},{"fecha":"2026-09-17","valor":40.0}]},{"iso":"KNA","pais":"San Cristóbal y Nieves","serie":[{"fecha":"2026-09-10","valor":60.0},{"fecha":"2026-09-11","valor":75.0},{"fecha":"2026-09-12","valor":75.0},{"fecha":"2026-09-13","valor":75.0},{"fecha":"2026-09-14","valor":60.0},{"fecha":"2026-09-15","valor":75.0},{"fecha":"2026-09-16","valor":75.0},{"fecha":"2026-09-17","valor":60.0}]},{"iso":"LCA","pais":"Santa Lucía","serie":[{"fecha":"2026-09-10","valor":80.0},{"fecha":"2026-09-11","valor":80.0},{"fecha":"2026-09-12","valor":80.0},{"fecha":"2026-09-13","valor":100.0},{"fecha":"2026-09-14","valor":80.0},{"fecha":"2026-09-15","valor":100.0},{"fecha":"2026-09-16","valor":100.0},{"fecha":"2026-09-17","valor":80.0}]},{"iso":"MEX","pais":"México","serie":[{"fecha":"2026-09-10","valor":0.0},{"fecha":"2026-09-11","valor":0.0},{"fecha":"2026-09-12","valor":0.0},{"fecha":"2026-09-13","valor":0.0},{"fecha":"2026-09-14","valor":0.0},{"fecha":"2026-09-15","valor":0.0},{"fecha":"2026-09-16","valor":0.0},{"fecha":"2026-09-17","valor":0.0}]},{"iso":"NIC","pais":"Nicaragua","serie":[{"fecha":"2026-09-10","valor":50.0},{"fecha":"2026-09-11","valor":40.0},{"fecha":"2026-09-12","valor":40.0},{"fecha":"2026-09-13","valor":40.0},{"fecha":"2026-09-14","valor":40.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":50.0},{"fecha":"2026-09-17","valor":40.0}]},{"iso":"PAN","pais":"Panamá","serie":[{"fecha":"2026-09-10","valor":2.8},{"fecha":"2026-09-11","valor":2.8},{"fecha":"2026-09-12","valor":2.8},{"fecha":"2026-09-13","valor":2.8},{"fecha":"2026-09-14","valor":2.8},{"fecha":"2026-09-15","valor":3.3},{"fecha":"2026-09-16","valor":3.3},{"fecha":"2026-09-17","valor":2.8}]},{"iso":"PER","pais":"Perú","serie":[{"fecha":"2026-09-10","valor":2.8},{"fecha":"2026-09-11","valor":2.8},{"fecha":"2026-09-12","valor":2.8},{"fecha":"2026-09-13","valor":2.8},{"fecha":"2026-09-14","valor":2.8},{"fecha":"2026-09-15","valor":3.3},{"fecha":"2026-09-16","valor":3.3},{"fecha":"2026-09-17","valor":2.8}]},{"iso":"PRY","pais":"Paraguay","serie":[{"fecha":"2026-09-10","valor":8.3},{"fecha":"2026-09-11","valor":8.3},{"fecha":"2026-09-12","valor":10.0},{"fecha":"2026-09-13","valor":8.3},{"fecha":"2026-09-14","valor":8.3},{"fecha":"2026-09-15","valor":10.0},{"fecha":"2026-09-16","valor":10.0},{"fecha":"2026-09-17","valor":8.3}]},{"iso":"SLV","pais":"El Salvador","serie":[{"fecha":"2026-09-10","valor":40.0},{"fecha":"2026-09-11","valor":50.0},{"fecha":"2026-09-12","valor":40.0},{"fecha":"2026-09-13","valor":50.0},{"fecha":"2026-09-14","valor":40.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":50.0},{"fecha":"2026-09-17","valor":40.0}]},{"iso":"SUR","pais":"Surinam","serie":[{"fecha":"2026-09-10","valor":40.0},{"fecha":"2026-09-11","valor":40.0},{"fecha":"2026-09-12","valor":40.0},{"fecha":"2026-09-13","valor":50.0},{"fecha":"2026-09-14","valor":40.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":40.0},{"fecha":"2026-09-17","valor":40.0}]},{"iso":"TTO","pais":"Trinidad y Tobago","serie":[{"fecha":"2026-09-10","valor":50.0},{"fecha":"2026-09-11","valor":40.0},{"fecha":"2026-09-12","valor":40.0},{"fecha":"2026-09-13","valor":50.0},{"fecha":"2026-09-14","valor":40.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":50.0},{"fecha":"2026-09-17","valor":40.0}]},{"iso":"URY","pais":"Uruguay","serie":[{"fecha":"2026-09-10","valor":2.8},{"fecha":"2026-09-11","valor":2.8},{"fecha":"2026-09-12","valor":2.8},{"fecha":"2026-09-13","valor":2.8},{"fecha":"2026-09-14","valor":2.8},{"fecha":"2026-09-15","valor":2.8},{"fecha":"2026-09-16","valor":3.3},{"fecha":"2026-09-17","valor":2.8}]},{"iso":"VCT","pais":"San Vicente y las Granadinas","serie":[{"fecha":"2026-09-10","valor":50.0},{"fecha":"2026-09-11","valor":50.0},{"fecha":"2026-09-12","valor":50.0},{"fecha":"2026-09-13","valor":50.0},{"fecha":"2026-09-14","valor":50.0},{"fecha":"2026-09-15","valor":50.0},{"fecha":"2026-09-16","valor":50.0},{"fecha":"2026-09-17","valor":50.0}]},{"iso":"VEN","pais":"Venezuela","serie":[{"fecha":"2026-09-10","valor":72.0},{"fecha":"2026-09-11","valor":80.0},{"fecha":"2026-09-12","valor":60.0},{"fecha":"2026-09-13","valor":75.0},{"fecha":"2026-09-14","valor":60.0},{"fecha":"2026-09-15","valor":75.0},{"fecha":"2026-09-16","valor":75.0},{"fecha":"2026-09-17","valor":60.0}]}];
+const BASE = "https://siwa.fundacionkent.org/datos/publico/";
+const chart = echarts.init(document.getElementById('grafico'), null, {renderer:'svg'});
+window.addEventListener('resize', ()=>chart.resize());
+
+async function datos(){
+  try{
+    const r = await fetch(BASE+"opacidad_historia.json", {cache:"no-store"});
+    if(!r.ok) throw 0;
+    return (await r.json()).registros.map(x=>({iso:x.iso,pais:x.pais,serie:x.serie.map(s=>({fecha:s.fecha,valor:s.valor}))}));
+  }catch(e){ return SNAP; }
+}
+function rankings(H){
+  const fechas=[...new Set(H.flatMap(p=>p.serie.map(s=>s.fecha)))].sort();
+  const ult={};
+  const puestos=fechas.map(f=>{
+    H.forEach(p=>{const s=p.serie.find(x=>x.fecha===f); if(s) ult[p.iso]=s.valor;});
+    const v=H.filter(p=>ult[p.iso]!=null).map(p=>({iso:p.iso,valor:ult[p.iso]}));
+    v.sort((a,b)=>a.valor-b.valor||a.iso.localeCompare(b.iso));
+    const m={}; v.forEach((x,i)=>m[x.iso]={puesto:i+1,valor:x.valor}); return m;
+  });
+  return {fechas,puestos};
+}
+const cssvar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function color(v){ return v<=15?cssvar('--verde'): v>=55?cssvar('--rojo'):cssvar('--orange'); }
+let H, R, modo='puesto';
+
+function pintar(){
+  const {fechas,puestos}=R, N=H.length;
+  const series=H.map(p=>{
+    const data=fechas.map((f,i)=>{const m=puestos[i][p.iso]; return m? (modo==='puesto'? m.puesto : m.valor):null;});
+    let vfin=0; for(let i=fechas.length-1;i>=0;i--){const m=puestos[i][p.iso]; if(m){vfin=m.valor;break;}}
+    return {name:p.iso, type:'line', smooth:true, symbol:'circle', symbolSize:5,
+      lineStyle:{width:1.6,color:color(vfin),opacity:.55}, itemStyle:{color:color(vfin)},
+      emphasis:{focus:'series', lineStyle:{width:3.4,opacity:1}},
+      endLabel:{show:true, formatter:p.iso, color:color(vfin), fontSize:11},
+      data};
+  });
+  chart.setOption({
+    animationDuration:900, animationDurationUpdate:900, backgroundColor:'transparent',
+    grid:{left:60,right:70,top:20,bottom:36},
+    tooltip:{trigger:'item', backgroundColor:cssvar('--caja'), borderColor:cssvar('--linea'),
+      textStyle:{color:cssvar('--tinta')},
+      formatter:o=>{const p=H.find(x=>x.iso===o.seriesName); return '<b>'+(p?p.pais:o.seriesName)+'</b><br>'+o.name+': '+(modo==='puesto'?'puesto '+o.value:'opacidad '+o.value);}},
+    xAxis:{type:'category', data:fechas.map(f=>f.slice(5)), boundaryGap:false,
+      axisLine:{lineStyle:{color:cssvar('--linea')}}, axisLabel:{color:cssvar('--tenue')}},
+    yAxis:{type:'value', inverse:modo==='puesto', min: modo==='puesto'?1:0, max: modo==='puesto'?N:100,
+      name: modo==='puesto'?'puesto (1 = más transparente)':'opacidad 0–100',
+      nameTextStyle:{color:cssvar('--tenue')},
+      axisLabel:{color:cssvar('--tenue')}, splitLine:{lineStyle:{color:cssvar('--linea'),opacity:.5}}},
+    series
+  }, true);
+  document.getElementById('rango').textContent=fechas[0]+'  →  '+fechas[fechas.length-1];
+}
+function setModo(m){ modo=m;
+  document.getElementById('modo-puesto').classList.toggle('on',m==='puesto');
+  document.getElementById('modo-valor').classList.toggle('on',m==='valor'); pintar(); }
+document.getElementById('modo-puesto').onclick=()=>setModo('puesto');
+document.getElementById('modo-valor').onclick=()=>setModo('valor');
+document.getElementById('tema').onclick=()=>{
+  const r=document.documentElement, osc=r.getAttribute('data-theme')==='dark';
+  r.setAttribute('data-theme',osc?'light':'dark');
+  document.getElementById('tema').textContent=osc?'Fondo oscuro':'Fondo claro'; pintar();
+};
+(async()=>{ H=await datos(); R=rankings(H); pintar(); })();
+</script>
+</body>
+</html>
