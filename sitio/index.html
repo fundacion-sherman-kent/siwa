@@ -10762,6 +10762,49 @@
     }catch(e){}
   }
 
+  // ¿DE QUÉ PAÍS ENTRA EL LECTOR? Se infiere de la zona horaria del navegador
+  // —y, como respaldo, de la región de su idioma—. Es cálculo LOCAL: no se
+  // consulta la IP, ningún servicio externo, ni se guarda nada. Si no cae en uno
+  // de los 33 del padrón (un visitante de afuera de la región), devuelve null y
+  // SIWA abre en la vista regional, como siempre.
+  function paisPorContexto(){
+    try{
+      const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+      if(tz){
+        if(/^America\/Argentina\//.test(tz) ||
+           /^America\/(Buenos_Aires|Cordoba|Mendoza|Catamarca|Jujuy|Rosario|Salta|Tucuman|San_Juan|San_Luis|La_Rioja)$/.test(tz)) return 'ARG';
+        const directo = {
+          'America/La_Paz':'BOL','America/Santiago':'CHL','America/Punta_Arenas':'CHL',
+          'America/Bogota':'COL','America/Costa_Rica':'CRI','America/Havana':'CUB',
+          'America/Santo_Domingo':'DOM','America/Guayaquil':'ECU','Pacific/Galapagos':'ECU',
+          'America/El_Salvador':'SLV','America/Guatemala':'GTM','America/Guyana':'GUY',
+          'America/Port-au-Prince':'HTI','America/Tegucigalpa':'HND','America/Jamaica':'JAM',
+          'America/Managua':'NIC','America/Panama':'PAN','America/Asuncion':'PRY',
+          'America/Lima':'PER','America/Paramaribo':'SUR','America/Montevideo':'URY',
+          'America/Caracas':'VEN','America/Port_of_Spain':'TTO','America/Antigua':'ATG',
+          'America/Nassau':'BHS','America/Barbados':'BRB','America/Belize':'BLZ',
+          'America/Dominica':'DMA','America/Grenada':'GRD','America/St_Kitts':'KNA',
+          'America/St_Lucia':'LCA','America/St_Vincent':'VCT'
+        };
+        if(directo[tz]) return directo[tz];
+        if(/^America\/(Sao_Paulo|Bahia|Fortaleza|Manaus|Recife|Belem|Cuiaba|Campo_Grande|Boa_Vista|Porto_Velho|Rio_Branco|Noronha|Maceio|Araguaina|Santarem|Eirunepe)$/.test(tz)) return 'BRA';
+        if(/^America\/(Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Hermosillo|Mazatlan|Tijuana|Ojinaga|Bahia_Banderas|Ciudad_Juarez)$/.test(tz)) return 'MEX';
+      }
+    }catch(e){}
+    try{
+      const idiomas = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+      const iso2a3 = {AR:'ARG',BO:'BOL',BR:'BRA',CL:'CHL',CO:'COL',CR:'CRI',CU:'CUB',DO:'DOM',
+        EC:'ECU',SV:'SLV',GT:'GTM',GY:'GUY',HT:'HTI',HN:'HND',JM:'JAM',MX:'MEX',NI:'NIC',
+        PA:'PAN',PY:'PRY',PE:'PER',SR:'SUR',UY:'URY',VE:'VEN',TT:'TTO',AG:'ATG',BS:'BHS',
+        BB:'BRB',BZ:'BLZ',DM:'DMA',GD:'GRD',KN:'KNA',LC:'LCA',VC:'VCT'};
+      for(let i=0;i<idiomas.length;i++){
+        const m = (idiomas[i]||'').match(/[-_]([A-Za-z]{2})\b/);
+        if(m){ const r = m[1].toUpperCase(); if(iso2a3[r]) return iso2a3[r]; }
+      }
+    }catch(e){}
+    return null;
+  }
+
   function leerDeLaDireccion(){
     try{
       const q = new URL(location.href).searchParams;
@@ -10783,6 +10826,13 @@
       if(pa && padron.length){
         const p = padron.find(x => x.iso === pa);
         if(p){ paisFiltro = p.iso; paisNombre = p.pais; bloqueFiltro = null; }
+      } else if(!pa && !bloqueFiltro && padron.length){
+        // Sin país ni zona en el enlace, SIWA arranca en el país desde donde se
+        // entra (zona horaria del navegador). Es una PRIMERA vista, no un candado:
+        // el lector cambia de país o vuelve a lo regional con un clic, y el enlace
+        // lo refleja. Un enlace explícito («?pais=…», «?zona=…») siempre manda.
+        const iso = paisPorContexto();
+        if(iso){ const p = padron.find(x => x.iso === iso); if(p){ paisFiltro = p.iso; paisNombre = p.pais; } }
       }
       ambitoCobertura = paisFiltro ? 'pais' : (bloqueFiltro ? 'bloque' : 'todo');
     }catch(e){}
