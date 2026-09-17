@@ -2,23 +2,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Prototipo · Capa subnacional (homicidios por unidad) — SIWA</title>
 <style>
- :root{--navy:#00121E;--orange:#FB6500;--crema:#F4F2EC;--texto:#C7D2E0;--tenue:#7d90a8;--linea:#1d3346;}
- *{box-sizing:border-box;} body{margin:0;background:var(--navy);color:var(--crema);
+ :root{--orange:#FB6500;
+   --fondo:#F4F2EC;--tinta:#0d2233;--texto:#33465a;--tenue:#5f7186;--linea:#d7dce3;--caja:#ffffff;--pista:#e6e9ee;}
+ @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+   --fondo:#00121E;--tinta:#F4F2EC;--texto:#C7D2E0;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--pista:#0a1f30;}}
+ :root[data-theme="dark"]{--fondo:#00121E;--tinta:#F4F2EC;--texto:#C7D2E0;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--pista:#0a1f30;}
+ *{box-sizing:border-box;} body{margin:0;background:var(--fondo);color:var(--tinta);
    font-family:'Inter',system-ui,sans-serif;line-height:1.5;}
  header{padding:22px 20px;border-bottom:1px solid var(--linea);}
  .filete{height:4px;width:74px;background:var(--orange);border-radius:2px;margin-bottom:14px;}
  h1{margin:0 0 6px;font-size:26px;} .sub{color:var(--tenue);font-size:14px;margin:0;}
- .aviso{background:#0a1f30;border:1px solid var(--linea);border-radius:10px;padding:12px 16px;
+ .aviso{background:var(--caja);border:1px solid var(--linea);border-radius:10px;padding:12px 16px;
    margin:18px 20px;font-size:13.5px;color:var(--texto);}
  main{max-width:820px;margin:0 auto;padding:6px 20px 50px;}
  .pais{margin:26px 0;} h2{font-size:19px;margin:0 0 2px;border-bottom:1px solid var(--linea);padding-bottom:6px;}
  h2 small{color:var(--tenue);font-weight:400;font-size:13px;}
  .org{color:var(--tenue);font-size:12px;margin:4px 0 10px;}
  .fila{display:grid;grid-template-columns:150px 1fr 60px;gap:10px;align-items:center;margin:3px 0;font-size:13px;}
- .u{color:var(--crema);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
- .barra{background:#0a1f30;border-radius:4px;height:14px;overflow:hidden;}
+ .u{color:var(--tinta);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+ .barra{background:var(--pista);border-radius:4px;height:14px;overflow:hidden;}
  .barra span{display:block;height:100%;background:var(--orange);}
- .v{text-align:right;color:var(--crema);font-variant-numeric:tabular-nums;}
+ .v{text-align:right;color:var(--tinta);font-variant-numeric:tabular-nums;}
  @media(max-width:520px){.fila{grid-template-columns:110px 1fr 50px;}}
 </style></head><body>
 <header><div class="filete"></div>
