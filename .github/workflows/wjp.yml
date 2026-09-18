@@ -1,0 +1,65 @@
+name: WJP — estado de derecho
+
+# QUÉ ES ESTE ROBOT
+# -----------------
+# Trae el WJP Rule of Law Index (estado de derecho, escala 0–1) de los 33.
+# Complementa al Banco Mundial (WGI) en el eje Gobernanza con una medición de
+# recolección primaria.
+#
+# El sitio de WJP es una app JavaScript, pero referencia un Excel histórico real
+# en el servidor: el colector lo baja directo (sin navegador) y lee la hoja
+# «Historical Data» con openpyxl. El año del archivo se descubre solo. WJP publica
+# una vez al año; corre semanal para no perder la edición nueva.
+
+on:
+  schedule:
+    - cron: "45 6 * * 4"   # jueves, una vez por semana
+  workflow_dispatch:
+
+concurrency:
+  group: publicar-en-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  wjp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dependencia del paso (openpyxl)
+        run: python -m pip install --quiet openpyxl
+
+      - name: Estado de derecho por país (WJP)
+        id: wjp
+        continue-on-error: true
+        run: python colectores/wjp.py
+
+      - name: Guardar lo recolectado
+        if: always()
+        run: |
+          git config user.name "siwa"
+          git config user.email "actions@users.noreply.github.com"
+          git add datos/
+          git diff --staged --quiet || git commit -m "WJP $(date -u +'%Y-%m-%d %H:%M UTC')"
+          publicado=0
+          for intento in 1 2 3; do
+            if git push; then publicado=1; break; fi
+            git pull --no-rebase --no-edit origin main || exit 1
+          done
+          [ "$publicado" = 1 ] || { echo "NO SE PUDO PUBLICAR tras tres intentos."; exit 1; }
+
+      - name: Declarar el estado
+        if: always()
+        run: |
+          [ "${{ steps.wjp.outcome }}" = "failure" ] && echo "AVISO: WJP no terminó (revisar datos/publico/estado/)."
+          echo "Ronda WJP terminada $(date -u +'%Y-%m-%d %H:%M UTC')."

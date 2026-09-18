@@ -230,6 +230,7 @@ CATEGORIAS = {
     "empleo_informal": "informalidad",
     "estabilidad": "institucional",
     "estado_derecho": "institucional",
+    "estado_derecho_wjp": "institucional",   # World Justice Project
     "gasto_defensa_fmi": "presupuesto-defensa",
     "gasto_seguridad": "presupuesto-seguridad",
     "gasto_seguridad_publico": "presupuesto-seguridad",
