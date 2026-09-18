@@ -344,8 +344,62 @@ def brasil() -> dict:
                     "carga y vehículo), por recuento de ocurrencias."}
 
 
+# ── URUGUAY — «Rapiña» por departamento (mismo dataset del Min. del Interior) ──
+# El dataset «Delitos denunciados en el Uruguay» trae un CSV de «otros delitos»
+# (microdato, una fila por hecho) con la RAPIÑA —robo con violencia— por
+# departamento. Se cuenta por departamento y año.
+URY_API = ("https://catalogodatos.gub.uy/api/3/action/package_search?q="
+           + urllib.parse.quote("Delitos denunciados en el Uruguay") + "&rows=3")
+
+
+def uruguay() -> dict:
+    d = json.loads(comun.traer_crudo(URY_API).decode("utf-8", "replace"))
+    url = None
+    for p in (d.get("result") or {}).get("results") or []:
+        for r in p.get("resources") or []:
+            if "otros delitos" in (r.get("name") or "").lower() and (r.get("format") or "").upper() == "CSV":
+                url = r["url"]
+                break
+        if url:
+            break
+    if not url:
+        raise RuntimeError("Uruguay: no se encontró el CSV de otros delitos")
+    txt = base._decodificar(comun.traer_crudo(url))
+    head = txt.splitlines()[0] if txt else ""
+    delim = ";" if head.count(";") >= head.count(",") else ","
+    lector = csv.DictReader(io.StringIO(txt), delimiter=delim)
+    mapa = {base._sin_acentos(c): c for c in (lector.fieldnames or []) if c}
+    col_del = next((mapa[k] for k in mapa if k.strip() == "delito"), None)
+    col_dep = next((mapa[k] for k in mapa if k.strip() == "depto"), None)
+    col_anio = next((mapa[k] for k in mapa if k.strip() in ("ano", "anio", "year")), None)
+    if not (col_del and col_dep and col_anio):
+        raise RuntimeError("Uruguay: faltan columnas en el CSV de otros delitos")
+    por = collections.defaultdict(lambda: collections.defaultdict(int))
+    for f in lector:
+        if base._sin_acentos((f.get(col_del) or "").strip()) != "rapina":
+            continue
+        dep = (f.get(col_dep) or "").strip()
+        try:
+            anio = int(str(f.get(col_anio) or "").strip()[:4])
+        except ValueError:
+            continue
+        if dep:
+            por[dep][anio] += 1
+    por = {d: dict(s) for d, s in por.items() if s}
+    curso = None
+    este = datetime.now(timezone.utc).year
+    anios = sorted({a for s in por.values() for a in s})
+    if anios and anios[-1] == este:
+        u = anios[-1]
+        curso = {"anio": u, "por_unidad": {d: s.pop(u) for d, s in por.items() if u in s}}
+        por = {d: s for d, s in por.items() if s}
+    return {"unidad": "departamento", "por_unidad": por, "en_curso": curso,
+            "organismo": "Ministerio del Interior — Uruguay", "licencia": "Datos Abiertos de Uruguay",
+            "nota": "Rapiñas (robo con violencia) por departamento, recuento de denuncias."}
+
+
 PAISES = {"ARG": argentina, "BOL": bolivia, "BRA": brasil, "COL": colombia,
-          "MEX": mexico, "TTO": trinidad, "DOM": dominicana}
+          "MEX": mexico, "URY": uruguay, "TTO": trinidad, "DOM": dominicana}
 
 
 def construir() -> Path:
