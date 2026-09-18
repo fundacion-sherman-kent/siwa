@@ -3,7 +3,7 @@
   "de": "Fundación Sherman Kent, Oficina de Generación de Inteligencia",
   "sitio": "https://siwa.fundacionkent.org",
   "documentacion": "https://siwa.fundacionkent.org/datos/",
-  "generado": "2026-09-18T12:31:10+00:00",
+  "generado": "2026-09-18T13:25:50+00:00",
   "como_usarlo": "Cada conjunto se descarga de su «url» y responde JSON con cabeceras abiertas: se puede leer desde cualquier sitio, sin credencial y sin registrarse. Todos traen el mismo bloque «procedencia» —fuente, url, calificación de Almirantazgo, fecha y vacíos declarados— y una lista «registros». Los campos de valor NO son los mismos en todos los conjuntos: cada uno declara acá los suyos en «campos_de_la_fila», y «por_estado» dice si la fila es un Estado identificado por su código ISO de tres letras.",
   "condicion": "Uso libre citando a la Fundación Sherman Kent y a la fuente original de cada dato, que viaja en el propio archivo. Los conjuntos con «restriccion_de_uso» llevan además la condición de su fuente, y esa condición manda.",
   "estabilidad": "Las direcciones no cambian y la forma del bloque de procedencia se mantiene. NO se promete que un indicador viva para siempre: si una fuente cierra, el indicador desaparece y este índice lo dirá con su ausencia.",
@@ -274,7 +274,7 @@
       "fuente": "OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta",
       "url_fuente": "https://api.ooni.io/api/v1/aggregation",
       "calificacion": "B-2",
-      "obtenido_en": "2026-09-18T12:30:59+00:00",
+      "obtenido_en": "2026-09-18T13:25:40+00:00",
       "registros": 33,
       "indicadores": null,
       "por_estado": true,
@@ -329,8 +329,8 @@
       "fuente": "Padrón de medios de la Fundación Sherman Kent",
       "url_fuente": "https://siwa.fundacionkent.org/colectores/medios.json",
       "calificacion": "F-3",
-      "obtenido_en": "2026-09-18T12:29:57+00:00",
-      "registros": 214,
+      "obtenido_en": "2026-09-18T13:24:47+00:00",
+      "registros": 223,
       "indicadores": null,
       "por_estado": false,
       "campos_de_la_fila": [
@@ -342,7 +342,7 @@
       ],
       "vacios_declarados": 11,
       "restriccion_de_uso": null,
-      "bytes": 538408
+      "bytes": 559236
     },
     {
       "archivo": "comercio.json",
@@ -445,7 +445,7 @@
       "fuente": "Registro de publicadores del Estándar de Datos de Contrataciones Abiertas — Open Contracting Partnership",
       "url_fuente": "https://data.open-contracting.org/",
       "calificacion": "A-2",
-      "obtenido_en": "2026-09-18T12:31:08+00:00",
+      "obtenido_en": "2026-09-18T13:25:48+00:00",
       "registros": 33,
       "indicadores": null,
       "por_estado": true,
@@ -739,7 +739,7 @@
       "fuente": "NASA FIRMS — focos de calor detectados por satélite",
       "url_fuente": "https://firms.modaps.eosdis.nasa.gov/",
       "calificacion": "A-2",
-      "obtenido_en": "2026-09-18T12:31:07+00:00",
+      "obtenido_en": "2026-09-18T13:25:47+00:00",
       "registros": 33,
       "indicadores": null,
       "por_estado": true,
@@ -963,7 +963,7 @@
       "fuente": "Fundación Sherman Kent — bitácora de observación de SIWA",
       "url_fuente": "https://siwa.fundacionkent.org/sitio/index.html#memoria",
       "calificacion": "A-2",
-      "obtenido_en": "2026-09-18T12:31:08+00:00",
+      "obtenido_en": "2026-09-18T13:25:48+00:00",
       "registros": 400,
       "indicadores": null,
       "por_estado": true,
@@ -1337,7 +1337,7 @@
       "fuente": "Catalogos oficiales de los Estados — lo mas reciente publicado",
       "url_fuente": "https://siwa.fundacionkent.org/sitio/index.html",
       "calificacion": "A-2",
-      "obtenido_en": "2026-09-18T12:30:48+00:00",
+      "obtenido_en": "2026-09-18T13:25:30+00:00",
       "registros": 33,
       "indicadores": null,
       "por_estado": true,
@@ -1381,7 +1381,7 @@
       "fuente": "Mastodon — instancias mastodon.social, mstdn.social, masto.ai, mas.to",
       "url_fuente": "https://docs.joinmastodon.org/methods/timelines/",
       "calificacion": "F-4",
-      "obtenido_en": "2026-09-18T12:30:31+00:00",
+      "obtenido_en": "2026-09-18T13:25:11+00:00",
       "registros": 33,
       "indicadores": null,
       "por_estado": true,
@@ -1399,7 +1399,7 @@
       ],
       "vacios_declarados": 7,
       "restriccion_de_uso": null,
-      "bytes": 53242
+      "bytes": 53667
     },
     {
       "archivo": "regimen_politico.json",
@@ -1516,13 +1516,35 @@
       "bytes": 106586
     },
     {
+      "archivo": "sipri_transferencias.json",
+      "url": "https://siwa.fundacionkent.org/datos/publico/sipri_transferencias.json",
+      "colector": "sipri_transferencias",
+      "fuente": "SIPRI — Stockholm International Peace Research Institute: base de transferencias de armas mayores (valores TIV)",
+      "url_fuente": "https://armstransfers.sipri.org/",
+      "calificacion": "A-2",
+      "obtenido_en": "2026-09-18T12:57:35+00:00",
+      "registros": 33,
+      "indicadores": 2,
+      "por_estado": true,
+      "campos_de_la_fila": [
+        "iso",
+        "pais",
+        "bloque",
+        "estado",
+        "indicadores"
+      ],
+      "vacios_declarados": 2,
+      "restriccion_de_uso": null,
+      "bytes": 31506
+    },
+    {
       "archivo": "sismos.json",
       "url": "https://siwa.fundacionkent.org/datos/publico/sismos.json",
       "colector": "sismos",
       "fuente": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url_fuente": "https://earthquake.usgs.gov/fdsnws/event/1/",
       "calificacion": "A-1",
-      "obtenido_en": "2026-09-18T12:31:01+00:00",
+      "obtenido_en": "2026-09-18T13:25:42+00:00",
       "registros": 33,
       "indicadores": null,
       "por_estado": true,
@@ -1778,7 +1800,7 @@
       "fuente": "Canales públicos de Telegram, vista sin cuenta",
       "url_fuente": "https://siwa.fundacionkent.org/colectores/telegram.json",
       "calificacion": "F-4",
-      "obtenido_en": "2026-09-18T12:30:34+00:00",
+      "obtenido_en": "2026-09-18T13:25:14+00:00",
       "registros": 20,
       "indicadores": null,
       "por_estado": false,
@@ -1799,7 +1821,7 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 47389
+      "bytes": 46551
     },
     {
       "archivo": "trata_personas.json",
@@ -1917,7 +1939,51 @@
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
       "bytes": 70499
+    },
+    {
+      "archivo": "unodc_armas.json",
+      "url": "https://siwa.fundacionkent.org/datos/publico/unodc_armas.json",
+      "colector": "unodc_armas",
+      "fuente": "UNODC — Oficina de las Naciones Unidas contra la Droga y el Delito: base de tráfico de armas de fuego (incautaciones y detenciones)",
+      "url_fuente": "https://data.unodc.org/datareport/firearm-seizures",
+      "calificacion": "A-2",
+      "obtenido_en": "2026-09-18T12:37:03+00:00",
+      "registros": 33,
+      "indicadores": 2,
+      "por_estado": true,
+      "campos_de_la_fila": [
+        "iso",
+        "pais",
+        "bloque",
+        "estado",
+        "indicadores"
+      ],
+      "vacios_declarados": 2,
+      "restriccion_de_uso": null,
+      "bytes": 29082
+    },
+    {
+      "archivo": "wjp.json",
+      "url": "https://siwa.fundacionkent.org/datos/publico/wjp.json",
+      "colector": "wjp",
+      "fuente": "World Justice Project — WJP Rule of Law Index (índice general de estado de derecho)",
+      "url_fuente": "https://worldjusticeproject.org/rule-of-law-index",
+      "calificacion": "A-2",
+      "obtenido_en": "2026-09-18T13:04:36+00:00",
+      "registros": 33,
+      "indicadores": 1,
+      "por_estado": true,
+      "campos_de_la_fila": [
+        "iso",
+        "pais",
+        "bloque",
+        "estado",
+        "indicadores"
+      ],
+      "vacios_declarados": 2,
+      "restriccion_de_uso": null,
+      "bytes": 44005
     }
   ],
-  "cuantos": 77
+  "cuantos": 80
 }
