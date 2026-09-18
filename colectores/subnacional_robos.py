@@ -141,10 +141,77 @@ def trinidad() -> dict:
             "nota": "Recuento de robberies por división policial. Serie desde 2018."}
 
 
+# ── REPÚBLICA DOMINICANA ─────────────────────────────────────────────────────
+# El Portal de Datos Abiertos de RD (datos.gob.do, CKAN) publica, de la Policía
+# Nacional, los robos reportados POR PROVINCIA. Se resuelve el CSV por la API del
+# portal —no por una URL fija, que cambia cuando actualizan el archivo—. No hace
+# falta ningún permiso ni correo: el portal responde a un programa.
+DOM_API = ("https://datos.gob.do/api/3/action/package_search?q="
+           + urllib.parse.quote("Robos reportados por provincia") + "&rows=5")
+
+
+def dominicana() -> dict:
+    """Robos por provincia (Policía Nacional), del Portal de Datos Abiertos de RD.
+
+    El CSV viene agregado por delito, nacionalidad, sexo, provincia, mes y año; se
+    suma «Cantidad de casos» de los robos, por provincia y año.
+    """
+    d = json.loads(comun.traer_crudo(DOM_API).decode("utf-8", "replace"))
+    url = None
+    for p in (d.get("result") or {}).get("results") or []:
+        t = (p.get("title") or "").lower()
+        if "robo" in t and "provincia" in t:
+            for r in p.get("resources") or []:
+                if (r.get("format") or "").upper() == "CSV" and r.get("url"):
+                    url = r["url"]
+                    break
+        if url:
+            break
+    if not url:
+        raise RuntimeError("RD: el portal no devolvió CSV de robos por provincia")
+    txt = base._decodificar(comun.traer_crudo(url))
+    head = txt.splitlines()[0] if txt else ""
+    delim = ";" if head.count(";") >= head.count(",") else ","
+    lector = csv.DictReader(io.StringIO(txt), delimiter=delim)
+    mapa = {base._sin_acentos(c): c for c in (lector.fieldnames or []) if c}
+    col_delito = next((mapa[k] for k in mapa if "tipo de delito" in k), None)
+    col_cant = next((mapa[k] for k in mapa if "cantidad" in k), None)
+    col_prov = next((mapa[k] for k in mapa if k.strip() == "provincia"), None)
+    col_anio = next((mapa[k] for k in mapa if k.strip() in ("ano", "anio", "year")), None)
+    if not (col_delito and col_cant and col_prov and col_anio):
+        raise RuntimeError("RD: faltan columnas esperadas en el CSV de robos")
+    por = collections.defaultdict(lambda: collections.defaultdict(int))
+    for fila in lector:
+        if "robo" not in (fila.get(col_delito) or "").strip().lower():
+            continue
+        prov = (fila.get(col_prov) or "").strip()
+        try:
+            anio = int(str(fila.get(col_anio) or "").strip()[:4])
+            n = int(float(str(fila.get(col_cant) or 0).strip() or 0))
+        except ValueError:
+            continue
+        if prov and prov.lower() != "provincia":
+            por[prov][anio] += n
+    por = {p: dict(s) for p, s in por.items() if s}
+    curso = None
+    anios = sorted({a for s in por.values() for a in s})
+    if anios:
+        este = datetime.now(timezone.utc).year
+        if anios[-1] == este:
+            u = anios[-1]
+            curso = {"anio": u, "por_unidad": {p: s.pop(u) for p, s in por.items() if u in s}}
+            por = {p: s for p, s in por.items() if s}
+    return {"unidad": "provincia", "por_unidad": por, "en_curso": curso,
+            "organismo": "Policía Nacional (PN) — República Dominicana",
+            "licencia": "Portal de Datos Abiertos de la República Dominicana",
+            "nota": "Recuento de casos de robo reportados por provincia, agregado del dato "
+                    "oficial por delito, provincia y mes."}
+
+
 # Colombia queda FUERA por ahora: el dataset d4fr-sbn2 resultó ser solo hurto de
 # nicho (abigeato, piratería terrestre, entidades financieras), NO hurto general.
 # Se suma cuando se confirme el dataset correcto de «hurto a personas» por departamento.
-PAISES = {"BOL": bolivia, "TTO": trinidad}
+PAISES = {"BOL": bolivia, "TTO": trinidad, "DOM": dominicana}
 
 
 def construir() -> Path:
@@ -176,8 +243,8 @@ def construir() -> Path:
     return comun.escribir(
         colector=COLECTOR, capa=CAPA,
         fuente="Robos/hurtos por unidad de primer orden, de la fuente nacional de cada Estado "
-               "(Bolivia INE, Trinidad TTPS)",
-        url_fuente="https://nube.ine.gob.bo/",
+               "(Bolivia INE, Trinidad TTPS, República Dominicana — Policía Nacional vía datos.gob.do)",
+        url_fuente="https://datos.gob.do/",
         calificacion=comun.calificar(
             "A", 2, False,
             "Registro administrativo oficial por unidad de primer orden. Credibilidad 2: cada "
