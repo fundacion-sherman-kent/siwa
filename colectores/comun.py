@@ -232,6 +232,9 @@ CATEGORIAS = {
     "gasto_militar": "presupuesto-defensa",
     "gasto_militar_dolares": "presupuesto-defensa",
     "gasto_militar_publico": "presupuesto-defensa",
+    "gasto_militar_pbi": "presupuesto-defensa",       # SIPRI: % del PBI
+    "gasto_militar_gasto_pub": "presupuesto-defensa", # SIPRI: % del gasto público
+    "gasto_militar_usd_const": "presupuesto-defensa", # SIPRI: USD constantes
     "percepcion_corrupcion": "institucional",
     "pobreza_cepal": "pobreza",
     "pobreza_extrema": "pobreza",
