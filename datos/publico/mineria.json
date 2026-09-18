@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-18T01:25:09+00:00",
-  "medidas_con_suficientes_casos": 200,
-  "pares_probados": 19900,
+  "corrida": "2026-09-18T02:29:57+00:00",
+  "medidas_con_suficientes_casos": 203,
+  "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3791,
-    "de_ellos_son_parentescos": 411
+    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3835,
+    "de_ellos_son_parentescos": 412
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3380,
-  "anomalias_totales": 366,
+  "pistas_totales": 3423,
+  "anomalias_totales": 376,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -29,6 +29,19 @@
       "estados": 27,
       "tipo": "rangos (Spearman)",
       "p": 4.2905875328048415e-49,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "gasto_militar_dolares",
+      "b": "gasto_militar_usd_const",
+      "rotulo_a": "Gasto militar en dólares",
+      "rotulo_b": "gasto_militar_usd_const",
+      "coeficiente": 0.991,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 6.453227415987272e-32,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -146,6 +159,19 @@
       "estados": 32,
       "tipo": "rangos (Spearman)",
       "p": 1.8081019561050884e-24,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "gasto_militar_gasto_pub",
+      "b": "gasto_militar_publico",
+      "rotulo_a": "gasto_militar_gasto_pub",
+      "rotulo_b": "Gasto militar sobre el gasto del Estado",
+      "coeficiente": 0.947,
+      "estados": 20,
+      "tipo": "rangos (Spearman)",
+      "p": 9.76090379436755e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -445,6 +471,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 9.614742378866782e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "gasto_militar_usd_const",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "gasto_militar_usd_const",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.898,
+      "estados": 20,
+      "tipo": "rangos (Spearman)",
+      "p": 1.77900654087025e-09,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -757,45 +796,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 6.517384345359005e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "democracia_electoral",
-      "b": "estado_derecho",
-      "rotulo_a": "Nivel democrático — democracia electoral",
-      "rotulo_b": "Estado de derecho",
-      "coeficiente": 0.878,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3926105704984327e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "administracion_basica",
-      "b": "pobreza:extrema",
-      "rotulo_a": "Administración básica del Estado",
-      "rotulo_b": "pobreza · extrema",
-      "coeficiente": -0.878,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 6.8622413463913705e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "administracion_basica",
-      "b": "pobreza_extrema",
-      "rotulo_a": "Administración básica del Estado",
-      "rotulo_b": "Pobreza extrema",
-      "coeficiente": -0.878,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 6.8622413463913705e-09,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

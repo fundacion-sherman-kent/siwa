@@ -101,7 +101,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**74 fuentes en servicio**, en 76 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**75 fuentes en servicio**, en 77 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -166,6 +166,7 @@ python colectores/focos.py
 | `reliefweb` | ReliefWeb — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA) | `A-2` | 33 | 3 |
 | `sanciones` | OpenSanctions — registros de sanciones y personas expuestas | `B-2` | 33 | 5 |
 | `sanciones_primarias` | Listas primarias de sanciones: OFAC (EE. UU.) y UK Sanctions List (Reino Unido) | `A-2` | 33 | 4 |
+| `sipri` | SIPRI — Stockholm International Peace Research Institute: base de gasto militar | `A-2` | 33 | 3 |
 | `sismos` | Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN | `A-1` | 33 | 6 |
 | `sondeo` | Fundación Sherman Kent — banco de pruebas de fuentes candidatas | `A-1` | — | 5 |
 | `subnacional` | Censo propio de fuentes subnacionales — Fundación Sherman Kent, sobre los catálogos que publica cada jurisdicción | `A-2` | — | 3 |
