@@ -154,6 +154,8 @@ CATEGORIAS = {
     # CLOUDFLARE RADAR. El tráfico automatizado es la única cifra de ciberseguridad
     # medida sobre tráfico real; la internet moderna es conectividad, no seguridad.
     "trafico_automatizado": "ciber",
+    "armas_incautadas": "seguridad-flujos-ilicitos",       # UNODC: tráfico de armas
+    "detenidos_trafico_armas": "seguridad-flujos-ilicitos",
     "internet_moderno": "conectividad",
     "aeropuertos": "infraestructuras-criticas",
     "generacion_electrica": "infraestructuras-criticas",

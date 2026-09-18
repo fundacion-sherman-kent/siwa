@@ -1,0 +1,66 @@
+name: UNODC — tráfico de armas
+
+# QUÉ ES ESTE ROBOT
+# -----------------
+# Trae de UNODC el flujo ILÍCITO de armas de fuego (incautaciones y detenidos por
+# tráfico) por país y año. Complementa a Comtrade (comercio legal) y SIPRI (gasto
+# militar) en el eje Seguridad / flujos ilícitos.
+#
+# El portal de UNODC es una app JavaScript, pero el botón «Download data» apunta a
+# un Excel real en el servidor: el colector lo baja directo (sin navegador) y lo
+# lee con openpyxl. La carpeta lleva el mes de publicación y se descubre sola, así
+# se toma la actualización cuando UNODC publique una nueva. Corre semanal: UNODC
+# actualiza una vez al año, alcanza para no perder la nueva sin golpear de más.
+
+on:
+  schedule:
+    - cron: "50 6 * * 2"   # martes, una vez por semana
+  workflow_dispatch:
+
+concurrency:
+  group: publicar-en-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  unodc-armas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dependencia del paso (openpyxl)
+        run: python -m pip install --quiet openpyxl
+
+      - name: Tráfico de armas por país (UNODC)
+        id: unodc
+        continue-on-error: true
+        run: python colectores/unodc_armas.py
+
+      - name: Guardar lo recolectado
+        if: always()
+        run: |
+          git config user.name "siwa"
+          git config user.email "actions@users.noreply.github.com"
+          git add datos/
+          git diff --staged --quiet || git commit -m "UNODC armas $(date -u +'%Y-%m-%d %H:%M UTC')"
+          publicado=0
+          for intento in 1 2 3; do
+            if git push; then publicado=1; break; fi
+            git pull --no-rebase --no-edit origin main || exit 1
+          done
+          [ "$publicado" = 1 ] || { echo "NO SE PUDO PUBLICAR tras tres intentos."; exit 1; }
+
+      - name: Declarar el estado
+        if: always()
+        run: |
+          [ "${{ steps.unodc.outcome }}" = "failure" ] && echo "AVISO: UNODC armas no terminó (revisar datos/publico/estado/)."
+          echo "Ronda UNODC armas terminada $(date -u +'%Y-%m-%d %H:%M UTC')."
