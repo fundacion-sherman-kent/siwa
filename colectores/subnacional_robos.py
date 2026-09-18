@@ -27,40 +27,64 @@ import subnacional_homicidios as base  # reutiliza _sin_acentos, _decodificar, T
 COLECTOR = "subnacional_robos"
 CAPA = "publico"
 
-# ── COLOMBIA — hurto por departamento (Policía Nacional, Socrata) ──────────────
-CO_HURTO = "https://www.datos.gov.co/resource/d4fr-sbn2.json"
+# ── ARGENTINA — «Robos» por provincia (mismo CSV del SNIC que los homicidios) ──
+# El SNIC publica todas las figuras en la misma planilla por provincia; se toma la
+# categoría de robo base (excluye los agravados con lesiones/muerte, que son otra
+# fila) y se cuenta por HECHOS, no por víctimas: un robo no tiene «víctima» contada.
+_ROBO_SNIC = "Robos (excluye los agravados por el resultado de lesiones y/o muertes)"
+
+
+def argentina() -> dict:
+    filas = list(csv.reader(io.StringIO(base.er.pedir(base.er.SNIC_PROVINCIAS).decode("utf-8-sig", "replace")),
+                            delimiter=";"))
+    cab = [c.strip('"') for c in filas[0]]
+    i = {c: n for n, c in enumerate(cab)}
+    por = collections.defaultdict(dict)
+    for f in filas[1:]:
+        if len(f) < len(cab) or f[i["codigo_delito_snic_nombre"]].strip('"') != _ROBO_SNIC:
+            continue
+        try:
+            por[f[i["provincia_nombre"]].strip('"')][int(f[i["anio"]])] = int(float(f[i["cantidad_hechos"]]))
+        except (ValueError, KeyError):
+            continue
+    return {"unidad": "provincia", "por_unidad": dict(por), "en_curso": None,
+            "organismo": "Ministerio de Seguridad — SNIC (Argentina)", "licencia": "CC BY 4.0",
+            "nota": "Robos (excluye los agravados con lesiones/muerte), contados por HECHOS."}
+
+
+# ── COLOMBIA — hurto a personas por departamento (Policía Nacional, Socrata) ───
+CO_HURTO = "https://www.datos.gov.co/resource/4rxi-8m8d.json"
 
 
 def colombia() -> dict:
+    """Hurto a personas por departamento. Se agrega por departamento y año con la
+    API Socrata (la suma la hace el servidor: una sola llamada)."""
+    soql = urllib.parse.urlencode({
+        "$select": "departamento, date_extract_y(fecha_hecho) as anio, sum(cantidad) as t",
+        "$group": "departamento, date_extract_y(fecha_hecho)", "$limit": "20000"})
+    filas = json.loads(comun.traer_crudo(f"{CO_HURTO}?{soql}", espera=90).decode("utf-8", "replace"))
     por = collections.defaultdict(dict)
-    este = datetime.now(timezone.utc).year
-    for anio in range(este, este - 4, -1):
-        soql = urllib.parse.urlencode({
-            "$select": "departamento,sum(cantidad) as t",
-            "$where": f"fecha_hecho like '%/{anio}'",
-            "$group": "departamento", "$limit": "60"})
+    for f in filas:
+        dep = (f.get("departamento") or "").strip()
         try:
-            filas = json.loads(comun.traer_crudo(f"{CO_HURTO}?{soql}", espera=90).decode("utf-8", "replace"))
-        except Exception:  # noqa: BLE001
+            anio = int(f["anio"])
+            tot = int(float(f["t"]))
+        except (KeyError, ValueError, TypeError):
             continue
-        for f in filas:
-            dep = (f.get("departamento") or "").strip()
-            if dep and f.get("t"):
-                try:
-                    por[dep][anio] = int(float(f["t"]))
-                except ValueError:
-                    pass
+        if dep and dep.upper() not in ("NO REPORTA", "-", ""):
+            por[dep][anio] = por[dep].get(anio, 0) + tot
     por = {d: s for d, s in por.items() if s}
     curso = None
+    este = datetime.now(timezone.utc).year
     anios = sorted({a for s in por.values() for a in s})
     if anios and anios[-1] == este:
         u = anios[-1]
         curso = {"anio": u, "por_unidad": {d: s.pop(u) for d, s in por.items() if u in s}}
         por = {d: s for d, s in por.items() if s}
     return {"unidad": "departamento", "por_unidad": por, "en_curso": curso,
-            "organismo": "Policía Nacional de Colombia (DIJIN) — datos.gov.co",
-            "licencia": "datos abiertos de Colombia",
-            "nota": "Recuento de HURTOS (todas las modalidades) por departamento."}
+            "organismo": "Policía Nacional de Colombia — datos.gov.co",
+            "licencia": "Datos Abiertos de Colombia",
+            "nota": "Recuento de HURTO A PERSONAS por departamento."}
 
 
 # ── BOLIVIA — «Robo» por departamento (mismo XLSX del INE que homicidios) ──────
@@ -208,10 +232,7 @@ def dominicana() -> dict:
                     "oficial por delito, provincia y mes."}
 
 
-# Colombia queda FUERA por ahora: el dataset d4fr-sbn2 resultó ser solo hurto de
-# nicho (abigeato, piratería terrestre, entidades financieras), NO hurto general.
-# Se suma cuando se confirme el dataset correcto de «hurto a personas» por departamento.
-PAISES = {"BOL": bolivia, "TTO": trinidad, "DOM": dominicana}
+PAISES = {"ARG": argentina, "BOL": bolivia, "COL": colombia, "TTO": trinidad, "DOM": dominicana}
 
 
 def construir() -> Path:
@@ -243,8 +264,9 @@ def construir() -> Path:
     return comun.escribir(
         colector=COLECTOR, capa=CAPA,
         fuente="Robos/hurtos por unidad de primer orden, de la fuente nacional de cada Estado "
-               "(Bolivia INE, Trinidad TTPS, República Dominicana — Policía Nacional vía datos.gob.do)",
-        url_fuente="https://datos.gob.do/",
+               "(Argentina SNIC, Colombia Policía Nacional, Bolivia INE, Trinidad TTPS, "
+               "República Dominicana — Policía Nacional vía datos.gob.do)",
+        url_fuente="https://www.datos.gov.co/",
         calificacion=comun.calificar(
             "A", 2, False,
             "Registro administrativo oficial por unidad de primer orden. Credibilidad 2: cada "
