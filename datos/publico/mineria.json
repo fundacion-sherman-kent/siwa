@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-18T06:31:43+00:00",
+  "corrida": "2026-09-18T07:31:48+00:00",
   "medidas_con_suficientes_casos": 204,
   "pares_probados": 20706,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.706 pares y el umbral de siempre, alrededor de 1.035 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3875,
+    "sobreviven": 3871,
     "de_ellos_son_parentescos": 413
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3462,
+  "pistas_totales": 3458,
   "anomalias_totales": 377,
   "pistas": [
     {
@@ -463,19 +463,6 @@
       "misma_categoria": false
     },
     {
-      "a": "gasto_militar_usd_const",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "gasto_militar_usd_const",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.898,
-      "estados": 20,
-      "tipo": "rangos (Spearman)",
-      "p": 1.77900654087025e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -523,6 +510,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 2.459871006864293e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "gasto_militar_usd_const",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "gasto_militar_usd_const",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.896,
+      "estados": 20,
+      "tipo": "rangos (Spearman)",
+      "p": 2.163053977677879e-09,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,6 +671,19 @@
       "misma_categoria": false
     },
     {
+      "a": "gasto_seguridad",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "Gasto en orden público y seguridad",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": -0.885,
+      "estados": 16,
+      "tipo": "rangos (Spearman)",
+      "p": 4.5586661053497373e-07,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "uso_claude",
       "b": "voz_rendicion",
       "rotulo_a": "Intensidad de uso de Claude por habitante",
@@ -783,19 +796,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 6.517384345359005e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "democracia_electoral",
-      "b": "estado_derecho",
-      "rotulo_a": "Nivel democrático — democracia electoral",
-      "rotulo_b": "Estado de derecho",
-      "coeficiente": 0.878,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3926105704984327e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
