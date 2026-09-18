@@ -115,6 +115,16 @@
     });
   }
 
+  // Cargar la Guía SIWA (asistente de navegación) junto con la franja oficial:
+  // una burbuja abajo a la derecha, en toda página que lleve esta cabecera.
+  if (!window.__guiaSiwaCargada) {
+    window.__guiaSiwaCargada = true;
+    var gs = document.createElement("script");
+    gs.src = base + "_comun/guia-siwa.js";
+    gs.defer = true;
+    document.head.appendChild(gs);
+  }
+
   if (document.body) montar();
   else document.addEventListener("DOMContentLoaded", montar);
 })();
