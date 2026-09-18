@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-18T05:24:22+00:00",
-  "medidas_con_suficientes_casos": 203,
-  "pares_probados": 20503,
+  "corrida": "2026-09-18T06:23:50+00:00",
+  "medidas_con_suficientes_casos": 204,
+  "pares_probados": 20706,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3815,
-    "de_ellos_son_parentescos": 412
+    "por_que": "Con 20.706 pares y el umbral de siempre, alrededor de 1.035 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3873,
+    "de_ellos_son_parentescos": 413
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3403,
-  "anomalias_totales": 376,
+  "pistas_totales": 3460,
+  "anomalias_totales": 377,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -55,19 +55,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 9.606943935565834e-32,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "inflacion_fmi",
-      "b": "inflacion_interanual",
-      "rotulo_a": "Inflación de doce meses, según el FMI",
-      "rotulo_b": "Inflación de los últimos doce meses",
-      "coeficiente": 0.974,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 2.059904517847503e-30,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -177,19 +164,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.943,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.466674891572683e-22,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -198,6 +172,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.941,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.500110897068384e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -580,6 +567,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.893,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.228894976778724e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:mediciones",
       "b": "poblacion",
       "rotulo_a": "ciber · mediciones",
@@ -627,19 +627,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.409505276196099e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.888,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.046380057340579e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -749,6 +736,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "generacion_electrica",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.88,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.8445333601761765e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "estado_derecho",
       "rotulo_a": "Corrupción política",
@@ -775,19 +775,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "generacion_electrica",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.878,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.482510041266552e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "ciber:mediciones",
       "b": "generacion_electrica",
       "rotulo_a": "ciber · mediciones",
@@ -796,6 +783,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 6.517384345359005e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "democracia_electoral",
+      "b": "estado_derecho",
+      "rotulo_a": "Nivel democrático — democracia electoral",
+      "rotulo_b": "Estado de derecho",
+      "coeficiente": 0.878,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 1.3926105704984327e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
