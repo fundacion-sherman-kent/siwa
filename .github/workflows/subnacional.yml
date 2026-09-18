@@ -63,6 +63,14 @@ jobs:
         continue-on-error: true
         run: python colectores/subnacional_santafe.py
 
+      - name: Violencia política por unidad de primer orden (ACLED)
+        id: acled
+        continue-on-error: true
+        env:
+          ACLED_USUARIO: ${{ secrets.ACLED_USUARIO }}
+          ACLED_CLAVE: ${{ secrets.ACLED_CLAVE }}
+        run: python colectores/subnacional_acled.py
+
       - name: Focos de calor por unidad de primer orden (NASA FIRMS + geoBoundaries)
         id: focos
         continue-on-error: true
