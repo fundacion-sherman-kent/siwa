@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-18T20:24:51+00:00",
+  "corrida": "2026-09-18T21:25:05+00:00",
   "medidas_con_suficientes_casos": 207,
   "pares_probados": 21321,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.321 pares y el umbral de siempre, alrededor de 1.066 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4044,
+    "sobreviven": 4037,
     "de_ellos_son_parentescos": 413
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3631,
+  "pistas_totales": 3624,
   "anomalias_totales": 382,
   "pistas": [
     {
@@ -242,6 +242,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.936,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.0683284698207898e-20,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "administracion_basica",
       "b": "voz_rendicion",
       "rotulo_a": "Administración básica del Estado",
@@ -302,19 +315,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1284759852983783e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.93,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.2363215791720775e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,6 +671,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.894,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.719876507306262e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:casos_por_unidad",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -783,19 +796,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 2.220061914883335e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "poblacion",
-      "b": "reservas_internacionales",
-      "rotulo_a": "Población total",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.885,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 3.565480405450303e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
