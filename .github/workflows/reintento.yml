@@ -1,0 +1,83 @@
+name: Reintento de fuentes caídas
+
+# QUÉ ES ESTE ROBOT
+# -----------------
+# Los colectores de series anuales corren UNA VEZ POR DÍA (la pasada diaria de
+# recolectar.yml, 05:40 UTC). Si la fuente estaba lenta o caída justo en ese
+# minuto —como CEPALSTAT/UIS el 16 y el 18 de septiembre de 2026—, el colector
+# hace lo correcto: no inventa nada y declara la falla. Pero entonces el dato
+# esperaba HASTA EL DÍA SIGUIENTE, 24 horas, aunque la fuente volviera media
+# hora después.
+#
+# Este robot cierra esa espera. Dos veces más tarde el mismo día revisa si quedó
+# algún colector en falla (leyendo datos/publico/estado/). Si lo hay, vuelve a
+# disparar la recolección completa: eso reintenta la fuente y regenera todo lo
+# que depende de ella (portada, reloj, catálogo, tarjeta). Si está todo en
+# verde, NO HACE NADA. No reemplaza a la pasada diaria: la respalda.
+
+on:
+  schedule:
+    - cron: "40 11 * * *"   # ~6 h después de la pasada diaria
+    - cron: "40 17 * * *"   # ~12 h después de la pasada diaria
+  workflow_dispatch:
+
+# No publica: solo lee el estado y, si hace falta, dispara la otra pasada. Por
+# eso pide actions:write (para volver a disparar) y no contents:write.
+permissions:
+  contents: read
+  actions: write
+
+# No comparte el candado de publicación: este robot no escribe en main. La
+# pasada que dispara sí usa "publicar-en-main" y espera su turno como las demás.
+concurrency:
+  group: reintento-fuentes
+  cancel-in-progress: true
+
+jobs:
+  reintento:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Buscar colectores en falla
+        id: buscar
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import glob, json
+          caidos = []
+          for f in glob.glob("datos/publico/estado/*.json"):
+              try:
+                  d = json.load(open(f, encoding="utf-8"))
+              except Exception:
+                  continue
+              # Solo cuenta la falla declarada por un colector con nombre. Un
+              # archivo sin "colector" o sin "estado" no se toma como falla:
+              # evita disparar la pasada por un archivo que no es de un colector.
+              if d.get("colector") and str(d.get("estado", "")).strip().lower() == "error":
+                  caidos.append(d["colector"])
+          caidos = sorted(set(caidos))
+          print("caidos=" + ",".join(caidos))
+          print("hay=" + ("1" if caidos else "0"))
+          PY
+
+      - name: Avisar qué se encontró
+        run: |
+          if [ "${{ steps.buscar.outputs.hay }}" = "1" ]; then
+            echo "Colectores en falla desde la última pasada: ${{ steps.buscar.outputs.caidos }}"
+            echo "Se vuelve a disparar la recolección completa para reintentar la fuente."
+          else
+            echo "Todo en verde: no hay ningún colector en falla, no hay nada que reintentar."
+          fi
+
+      - name: Volver a disparar la recolección completa
+        if: steps.buscar.outputs.hay == '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run recolectar.yml
