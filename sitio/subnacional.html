@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Territorio · vista preliminar · SIWA</title>
+<meta name="description" content="Vista preliminar de la capa subnacional de SIWA: datos por unidad de primer orden (provincia, departamento, estado) de cada país, con su fuente y su calificación. Es recuento, no tasa, y no se compara entre países.">
+<link rel="canonical" href="https://siwa.fundacionkent.org/sitio/subnacional.html">
+<meta name="theme-color" content="#F4F2EC">
+<link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+<style>
+  :root{--orange:#FB6500;--verde:#3FA796;--rojo:#C23B22;--purple:#8C00E0;--grey-blue:#667B89;
+    --fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;--linea:#d7dce3;--caja:#ffffff;--navy:#00121E;}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;}}
+  :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--fondo);color:var(--tinta);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5;}
+  main{max-width:1000px;margin:0 auto;padding:22px 22px 50px;}
+  .filete{height:4px;width:74px;background:var(--orange);border-radius:2px;margin-bottom:14px;}
+  h1{font-size:clamp(24px,4.6vw,34px);margin:0 0 6px;letter-spacing:-.4px;}
+  h1 b{color:var(--orange);}
+  .bajada{color:var(--tenue);font-size:14.5px;max-width:840px;margin:0 0 8px;}
+
+  .aviso{background:var(--caja);border:1px solid var(--linea);border-left:5px solid var(--orange);
+    border-radius:12px;padding:14px 16px;margin:14px 0 18px;font-size:13.5px;}
+  .aviso .tit{font-weight:800;color:var(--orange);letter-spacing:.04em;text-transform:uppercase;font-size:12px;}
+  .aviso ul{margin:8px 0 0;padding-left:20px;} .aviso li{margin-bottom:4px;}
+  .aviso b{color:var(--tinta);}
+
+  .controles{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:6px 0 16px;}
+  .controles label{font-size:12px;color:var(--tenue);font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
+  select{background:var(--caja);border:1px solid var(--linea);color:var(--tinta);padding:8px 12px;
+    border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;max-width:100%;min-width:0;}
+  select:hover{border-color:var(--orange);}
+
+  .tarjeta{background:var(--caja);border:1px solid var(--linea);border-radius:12px;padding:16px 18px;margin:0 0 16px;}
+  .cab-ind{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px;}
+  .cab-ind h2{font-size:18px;margin:0;letter-spacing:-.2px;}
+  .badge{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+    padding:3px 9px;border-radius:20px;white-space:nowrap;}
+  .b-prim{background:rgba(63,167,150,.16);color:var(--verde);}
+  .b-sec{background:rgba(251,101,0,.15);color:var(--orange);}
+  .b-sat{background:rgba(102,123,137,.18);color:var(--grey-blue);}
+  .cal{font-size:11.5px;color:var(--tenue);font-variant-numeric:tabular-nums;}
+  .fte{font-size:12.5px;color:var(--tenue);margin:2px 0 4px;}
+  .nota-ind{font-size:12px;color:var(--tenue);margin:0 0 10px;}
+  .nota-ind b{color:var(--tinta);}
+
+  .barras{display:grid;gap:5px;}
+  .fila{display:grid;grid-template-columns:minmax(96px,150px) 1fr auto;gap:10px;align-items:center;font-size:13px;}
+  .fila .u{color:var(--tinta);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .fila .b{height:14px;border-radius:4px;background:var(--orange);min-width:2px;}
+  .fila .v{font-variant-numeric:tabular-nums;color:var(--tinta);font-weight:600;white-space:nowrap;}
+  .prim .b{background:var(--verde);} .sec .b{background:var(--orange);} .sat .b{background:var(--grey-blue);}
+  .mas{font-size:12px;color:var(--tenue);margin-top:6px;}
+  .cargando,.sindato{color:var(--tenue);padding:18px 2px;font-size:13.5px;}
+  .pie{margin-top:22px;padding-top:14px;border-top:1px solid var(--linea);color:var(--tenue);font-size:12.5px;}
+  .pie a{color:var(--orange);}
+
+  .envoltorio{display:grid;grid-template-columns:232px minmax(0,1fr);max-width:1340px;margin:0 auto;}
+  .rail{border-right:1px solid var(--linea);padding:16px 12px 40px;font-size:13px;position:sticky;top:var(--siwa-topbar-h,100px);align-self:start;max-height:calc(100vh - var(--siwa-topbar-h,100px));overflow:auto;}
+  .rail .grupo{color:var(--tenue);text-transform:uppercase;font-size:10.5px;letter-spacing:.06em;margin:14px 0 4px;font-weight:700;}
+  .rail a{display:block;color:var(--tinta);text-decoration:none;padding:4px 7px;border-radius:6px;}
+  .rail a:hover{background:var(--caja);color:var(--orange);}
+  .rail a.actual{color:var(--orange);font-weight:700;background:var(--caja);}
+  .envoltorio main{max-width:none;margin:0;min-width:0;}
+  @media(max-width:860px){.envoltorio{grid-template-columns:minmax(0,1fr);} .rail{border-right:none;border-bottom:1px solid var(--linea);position:static;max-height:none;}}
+</style>
+<script defer src="_comun/cabecera-siwa.js"></script>
+</head>
+<body>
+<div class="envoltorio">
+<nav class="rail" aria-label="Secciones del registro">
+<div class="grupo">Empezar</div>
+<a href="index.html#tablero-siwa">Tablero</a>
+<a href="index.html#ficha-pais">Mi país</a>
+<a href="index.html#seis-materias">Las seis materias</a>
+<a href="opacidad.html">Índice de opacidad</a>
+<a href="mapa.html">Mapa de opacidad</a>
+<a href="tendencias.html">Tendencias y reloj</a>
+<a href="subnacional.html" class="actual">Territorio · preliminar</a>
+<div class="grupo">Eje · Seguridad</div>
+<a href="index.html#seguridad-violencia">Violencia y víctimas</a>
+<a href="index.html#terrorismo">Terrorismo</a>
+<a href="index.html#seguridad-territorio">Grupos y territorio</a>
+<a href="index.html#seguridad-flujos-ilicitos">Flujos ilícitos</a>
+<a href="index.html#ciberseguridad">Ciberseguridad</a>
+<div class="grupo">Eje · Gobernanza</div>
+<a href="index.html#gobernanza">Instituciones y democracia</a>
+<a href="index.html#transparencia">Transparencia y control</a>
+<a href="index.html#opacidad-seccion">Índice de Opacidad</a>
+<div class="grupo">Eje · Desarrollo</div>
+<a href="index.html#desarrollo">Desarrollo</a>
+<div class="grupo">Transversal</div>
+<a href="index.html#riesgo-ambiente">Riesgo y ambiente</a>
+</nav>
+<main>
+  <div class="filete"></div>
+  <h1>Territorio · <b>vista preliminar</b></h1>
+  <p class="bajada">Lo que cada Estado publica <b>por unidad de primer orden</b> —provincia,
+     departamento, estado, división— de su propia fuente. Elegí un país y mirá el detalle.</p>
+
+  <div class="aviso">
+    <div class="tit">⚠ Vista preliminar — leer esto primero</div>
+    <ul>
+      <li><b>Es RECUENTO, no tasa.</b> Sin población por unidad no se calcula tasa; se muestra el conteo.</li>
+      <li><b>NO se compara entre países.</b> Cada Estado define el delito a su manera y cada fuente mide distinto.</li>
+      <li><b>Cada fuente lleva su calificación</b> y su naturaleza a la vista:
+         <span class="badge b-prim">Primaria oficial</span>
+         <span class="badge b-sec">Secundaria</span>
+         <span class="badge b-sat">Satelital</span>.
+         Una fuente secundaria o estimada <b>no reemplaza</b> al dato oficial: se publica rotulada.</li>
+      <li>Los nombres de unidad van <b>como los publica cada fuente</b>; el cotejo geográfico está pendiente.</li>
+    </ul>
+  </div>
+
+  <div class="controles">
+    <label for="pais">País</label>
+    <select id="pais"></select>
+  </div>
+
+  <div id="tarjetas" class="cargando">Cargando la capa de territorio…</div>
+
+  <p class="pie">SIWA — Fundación Sherman Kent · Capa subnacional en vista preliminar ·
+     Cada cifra con su fuente, su fecha y su calificación · <a href="index.html">Volver al registro</a></p>
+</main></div>
+<script>
+// Fuentes subnacionales: cada una con su archivo, cómo leer el valor, y su rótulo.
+const FUENTES = [
+  {arch:'subnacional_homicidios.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Homicidios por unidad', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Recuento de <b>víctimas de homicidio</b> por unidad. Fuente oficial de cada Estado.'},
+  {arch:'subnacional_robos.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Robos / hurtos por unidad', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Recuento de <b>robos/hurtos</b> según la figura de cada país (robo, hurto, rapiña).'},
+  {arch:'subnacional_acled.json', clase:'sec', badge:['Secundaria','b-sec'],
+   titulo:'Violencia política por unidad (ACLED)', valor:u=>u.ultimo&&u.ultimo.eventos,
+   extra:u=>u.ultimo?(u.ultimo.victimas+' víctimas'):'',
+   nota:'<b>Eventos</b> de violencia política (y sus víctimas). ACLED codifica de <b>prensa y fuentes locales</b>: es secundaria.'},
+  {arch:'subnacional_focos.json', clase:'sat', badge:['Satelital','b-sat'],
+   titulo:'Focos de calor por unidad (NASA FIRMS)', valor:u=>u.focos,
+   nota:'<b>Focos de calor</b> detectados por satélite (proxy de incendios/quemas). No es delito ni gobernanza.'},
+];
+const CACHE={}, ESTADO={pais:null};
+async function traer(a){ if(!CACHE[a]) CACHE[a]=await fetch('../datos/publico/'+a,{cache:'no-store'}).then(r=>r.json()).catch(()=>null); return CACHE[a]; }
+function calif(d){ const c=(d.procedencia||{}).calificacion||{}; return (c.fiabilidad||'?')+String(c.credibilidad||''); }
+function esc(s){ return String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+
+async function arranque(){
+  const datos = await Promise.all(FUENTES.map(f=>traer(f.arch)));
+  // padrón de países desde la unión de registros con unidades
+  const paises={};
+  datos.forEach(d=>{ if(!d) return; (d.registros||[]).forEach(r=>{
+    if((r.cuantas||(r.unidades||[]).length)>0) paises[r.iso]=r.pais; }); });
+  const sel=document.getElementById('pais');
+  const lista=Object.entries(paises).sort((a,b)=>a[1].localeCompare(b[1],'es'));
+  lista.forEach(([iso,nom])=>{ const o=document.createElement('option'); o.value=iso; o.textContent=nom; sel.appendChild(o); });
+  // Arranca en el país con MÁS fuentes cargadas (mejor primera impresión), no en el primero alfabético.
+  const riqueza = iso => datos.reduce((n,d)=>{ const r=d&&(d.registros||[]).find(x=>x.iso===iso);
+    return n + (r && (r.unidades||[]).length>0 ? 1:0); },0);
+  ESTADO.pais = lista.length ? lista.slice().sort((a,b)=>riqueza(b[0])-riqueza(a[0]))[0][0] : null;
+  sel.value=ESTADO.pais;
+  sel.onchange=()=>{ ESTADO.pais=sel.value; pintar(datos); };
+  pintar(datos);
+}
+
+function pintar(datos){
+  const cont=document.getElementById('tarjetas'); cont.classList.remove('cargando');
+  const iso=ESTADO.pais;
+  let html='';
+  FUENTES.forEach((f,i)=>{
+    const d=datos[i]; if(!d) return;
+    const reg=(d.registros||[]).find(r=>r.iso===iso);
+    const unidades=reg&&reg.unidades?reg.unidades:[];
+    const filas=unidades.map(u=>({nombre:u.nombre, v:Number(f.valor(u))||0, extra:f.extra?f.extra(u):''}))
+                        .filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
+    if(!filas.length) return;
+    const max=filas[0].v, top=filas.slice(0,15);
+    const anio=reg.en_curso?('hasta '+reg.en_curso.anio+' (prov.)'):(unidades[0]&&unidades[0].ultimo?('último '+unidades[0].ultimo.anio):'');
+    html+=`<div class="tarjeta ${f.clase}">
+      <div class="cab-ind"><h2>${esc(f.titulo)}</h2>
+        <span class="badge ${f.badge[1]}">${f.badge[0]}</span>
+        <span class="cal">calif. ${calif(d)} · ${filas.length} ${esc(reg.nombre_unidad||'unidades')}</span></div>
+      <div class="fte">${esc(reg.organismo||d.procedencia.fuente.nombre)} · ${anio}</div>
+      <div class="nota-ind">${f.nota}</div>
+      <div class="barras">`;
+    top.forEach(x=>{
+      html+=`<div class="fila"><span class="u" title="${esc(x.nombre)}">${esc(x.nombre)}</span>
+        <span class="b" style="width:${Math.max(2,Math.round(100*x.v/max))}%"></span>
+        <span class="v">${x.v.toLocaleString('es-AR')}${x.extra?(' · '+esc(x.extra)):''}</span></div>`;
+    });
+    html+=`</div>`;
+    if(filas.length>15) html+=`<div class="mas">y ${filas.length-15} unidades más…</div>`;
+    html+=`</div>`;
+  });
+  cont.innerHTML = html || '<div class="sindato">Este país todavía no tiene datos subnacionales cargados. La búsqueda no se detiene.</div>';
+}
+
+arranque().catch(e=>{ document.getElementById('tarjetas').textContent='No se pudo cargar la capa: '+e; });
+</script>
+</body>
+</html>
