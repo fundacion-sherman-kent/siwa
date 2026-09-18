@@ -156,6 +156,8 @@ CATEGORIAS = {
     "trafico_automatizado": "ciber",
     "armas_incautadas": "seguridad-flujos-ilicitos",       # UNODC: tráfico de armas
     "detenidos_trafico_armas": "seguridad-flujos-ilicitos",
+    "armas_recibidas_tiv": "material",                    # SIPRI: transferencias TIV
+    "armas_enviadas_tiv": "material",
     "internet_moderno": "conectividad",
     "aeropuertos": "infraestructuras-criticas",
     "generacion_electrica": "infraestructuras-criticas",

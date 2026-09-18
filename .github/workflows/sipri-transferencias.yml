@@ -1,0 +1,61 @@
+name: SIPRI — transferencias de armas (TIV)
+
+# QUÉ ES ESTE ROBOT
+# -----------------
+# Trae de SIPRI el VOLUMEN de armas mayores que cada Estado recibe y envía, en TIV
+# (Trend-Indicator Value). Complementa a Comtrade (valor en dólares) y a UNODC (flujo
+# ilícito) en el eje Seguridad/Defensa (material).
+#
+# El generador de SIPRI es JavaScript, pero por debajo hace un POST a un backend JSON
+# abierto (atbackend.sipri.org). El colector reproduce ese POST con la biblioteca
+# estándar: sin clave, sin navegador y sin dependencias. Corre semanal.
+
+on:
+  schedule:
+    - cron: "55 6 * * 3"   # miércoles, una vez por semana
+  workflow_dispatch:
+
+concurrency:
+  group: publicar-en-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sipri-transferencias:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Transferencias de armas por país (SIPRI TIV)
+        id: tiv
+        continue-on-error: true
+        run: python colectores/sipri_transferencias.py
+
+      - name: Guardar lo recolectado
+        if: always()
+        run: |
+          git config user.name "siwa"
+          git config user.email "actions@users.noreply.github.com"
+          git add datos/
+          git diff --staged --quiet || git commit -m "SIPRI transferencias $(date -u +'%Y-%m-%d %H:%M UTC')"
+          publicado=0
+          for intento in 1 2 3; do
+            if git push; then publicado=1; break; fi
+            git pull --no-rebase --no-edit origin main || exit 1
+          done
+          [ "$publicado" = 1 ] || { echo "NO SE PUDO PUBLICAR tras tres intentos."; exit 1; }
+
+      - name: Declarar el estado
+        if: always()
+        run: |
+          [ "${{ steps.tiv.outcome }}" = "failure" ] && echo "AVISO: SIPRI transferencias no terminó (revisar datos/publico/estado/)."
+          echo "Ronda SIPRI transferencias terminada $(date -u +'%Y-%m-%d %H:%M UTC')."
