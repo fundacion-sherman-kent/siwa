@@ -319,7 +319,7 @@ async function renderMapa(datos){
   const puntos=[];
   geo.features.forEach(ft=>{ const nm=ft.properties.name; if(!(nm in agg)) return;
     const b=bboxGeom(ft.geometry), dim=Math.max(b[2]-b[0], b[3]-b[1]);
-    if(dim < 0.02*dimP){ const val=agg[nm];
+    if(dim < 0.025*dimP){ const val=agg[nm];
       puntos.push({name:nm, value:[(b[0]+b[2])/2,(b[1]+b[3])/2,val],
         itemStyle:{color:colorEscala(val,maxv,VERDE,ORANGE,ROJO), borderColor:'#fff', borderWidth:1.4}}); } });
   const tip=o=>{ const v=(o.seriesType==='scatter')?(o.value&&o.value[2]):o.value;
