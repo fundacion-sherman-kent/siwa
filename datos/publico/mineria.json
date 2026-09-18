@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-17T23:22:07+00:00",
+  "corrida": "2026-09-18T00:32:27+00:00",
   "medidas_con_suficientes_casos": 199,
   "pares_probados": 19701,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3702,
-    "de_ellos_son_parentescos": 412
+    "sobreviven": 3697,
+    "de_ellos_son_parentescos": 411
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3290,
+  "pistas_totales": 3286,
   "anomalias_totales": 366,
   "pistas": [
     {
@@ -236,7 +236,7 @@
       "coeficiente": 0.927,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.2778264052778486e-19,
+      "p": 3.6686085546662906e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -519,10 +519,23 @@
       "b": "reservas_internacionales",
       "rotulo_a": "ciber · mediciones",
       "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.891,
+      "coeficiente": 0.894,
       "estados": 30,
       "tipo": "rangos (Spearman)",
-      "p": 1.2831438600856023e-13,
+      "p": 7.001498537959264e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:mediciones",
+      "b": "poblacion",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.889,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 8.74850746266937e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -575,19 +588,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.046380057340579e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "poblacion",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.888,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.075277523590026e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,6 +671,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:anomalias",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.881,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.946210174423355e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "esperanza_vida",
       "b": "uso_claude",
       "rotulo_a": "Esperanza de vida al nacer",
@@ -723,14 +736,14 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:anomalias",
+      "a": "ciber:mediciones",
       "b": "generacion_electrica",
-      "rotulo_a": "ciber · anomalias",
+      "rotulo_a": "ciber · mediciones",
       "rotulo_b": "Generación eléctrica",
       "coeficiente": 0.878,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.944333362644456e-14,
+      "p": 6.517384345359005e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 20,
       "tipo": "rangos (Spearman)",
       "p": 1.6734776707835436e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.877,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.842324518420972e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
