@@ -1,0 +1,65 @@
+name: SIPRI — gasto militar
+
+# QUÉ ES ESTE ROBOT
+# -----------------
+# Trae el gasto militar de los 33 según SIPRI (la referencia mundial): porcentaje
+# del PBI, porcentaje del gasto público y USD constantes. Complementa al Banco
+# Mundial en el eje Defensa. SIPRI publica una vez al año (abril), así que corre
+# semanal —alcanza para tomar la actualización sin golpear la fuente de más—.
+#
+# El archivo de SIPRI es un Excel para lectura humana; se lee con openpyxl, que se
+# instala solo en este paso (como pypdf y shapely en el robot subnacional).
+
+on:
+  schedule:
+    - cron: "40 6 * * 1"   # lunes, una vez por semana
+  workflow_dispatch:
+
+# Mismo candado que los otros robots que escriben en main.
+concurrency:
+  group: publicar-en-main
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sipri:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dependencia del paso (openpyxl)
+        run: python -m pip install --quiet openpyxl
+
+      - name: Gasto militar por país (SIPRI)
+        id: sipri
+        continue-on-error: true
+        run: python colectores/sipri.py
+
+      - name: Guardar lo recolectado
+        if: always()
+        run: |
+          git config user.name "siwa"
+          git config user.email "actions@users.noreply.github.com"
+          git add datos/
+          git diff --staged --quiet || git commit -m "SIPRI $(date -u +'%Y-%m-%d %H:%M UTC')"
+          publicado=0
+          for intento in 1 2 3; do
+            if git push; then publicado=1; break; fi
+            git pull --no-rebase --no-edit origin main || exit 1
+          done
+          [ "$publicado" = 1 ] || { echo "NO SE PUDO PUBLICAR tras tres intentos."; exit 1; }
+
+      - name: Declarar el estado
+        if: always()
+        run: |
+          [ "${{ steps.sipri.outcome }}" = "failure" ] && echo "AVISO: SIPRI no terminó esta vuelta (revisar datos/publico/estado/)."
+          echo "Ronda SIPRI terminada $(date -u +'%Y-%m-%d %H:%M UTC')."
