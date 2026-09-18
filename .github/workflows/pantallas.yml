@@ -113,6 +113,16 @@ jobs:
         continue-on-error: true
         run: python herramientas/tarjetas-por-tema.py http://127.0.0.1:8000
 
+      # EL CATÁLOGO DEL ASISTENTE (Guía SIWA) sale de la MISMA lista de temas que
+      # las tarjetas: el selector #tema-principal del índice. Se regenera acá para
+      # que el día que se agrega un tema, el asistente lo conozca sin que nadie
+      # toque el archivo a mano. Si trae menos temas de los esperados, no pisa el
+      # catálogo bueno.
+      - name: Refrescar el catálogo del asistente
+        id: guia
+        continue-on-error: true
+        run: python herramientas/guia-catalogo.py http://127.0.0.1:8000
+
       # El testigo se guarda SIEMPRE, haya pasado o no: el sitio lo publica, y
       # publicar solo los resultados buenos sería propaganda, no medición.
       - name: Guardar el testigo
@@ -121,7 +131,7 @@ jobs:
           git config user.name "siwa"
           git config user.email "actions@users.noreply.github.com"
           git config merge.ours.driver true
-          git add datos/publico/pantallas.json sitio/t
+          git add datos/publico/pantallas.json sitio/t sitio/_comun/guia-siwa.json
           git diff --staged --quiet || git commit -m "Control de pantallas $(date -u +'%Y-%m-%d %H:%M UTC')"
           publicado=0
           for intento in 1 2 3; do
