@@ -170,6 +170,45 @@ async function traer(a){ if(!CACHE[a]) CACHE[a]=await fetch('../datos/publico/'+
 function calif(d){ const c=(d.procedencia||{}).calificacion||{}; return (c.fiabilidad||'?')+String(c.credibilidad||''); }
 function esc(s){ return String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
 function norm(s){ return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/\s+/g,' ').trim(); }
+
+// COTEJO DE UNIDADES CON EL MAPA. Regla de la casa: un cotejo equivocado es peor
+// que un vacío honesto (nunca inventar). Solo se coteja con certeza —por código
+// estable donde existe, por alias cuando el nombre de la fuente difiere del mapa—
+// y lo dudoso queda "sin cotejar", declarado a la vista.
+// Unidades que NO son un territorio del mapa (categorías de la fuente):
+const GEO_SKIP={ COL:{'sin establecer':1}, URY:{'centros carcelarios':1}, DOM:{'san cristonal':1} };
+// Nombre de la fuente -> nombre del mapa, cuando difieren:
+const GEO_ALIAS={
+  ARG:{'tierra del fuego, antartida e islas del atlantico sur':'tierra del fuego','la roja':'la rioja'},
+  MEX:{'ciudad de mexico':'distrito federal','queretaro':'queretaro de arteaga'},
+  COL:{'bogota d.c.':'bogota capital district','bogota, d.c.':'bogota capital district','san andres islas':'archipielago de san andres, providencia y santa catalina','san andres y providencia':'archipielago de san andres, providencia y santa catalina'},
+  DOM:{'el seibo':'el seybo','elias pina':'la estrelleta','hermanas mirabal':'hermanas'},
+  BRA:{'rio granda do norte':'rio grande do norte','rio de jeneiro':'rio de janeiro'},
+  PAN:{'bocas del toro':'provincia de bocas del toro','chiriqui':'provincia de chiriqui','cocle':'provincia de cocle','colon':'colon province','comarca embera wounaan':'comarca embera-wounaan','comarca ngabe bugle':'comarca ngabe-bugle','darien':'provincia de darien','herrera':'provincia de herrera','los santos':'provincia de los santos','panama':'provincia de panama','panama oeste':'provincia de panama oeste','veraguas':'provincia de veraguas'}
+};
+// Países cuyo dato trae un CÓDIGO que coteja contra el shapeISO del mapa (prefijo país):
+const GEO_ISO_PREFIJO={ BRA:'BR-' };
+// Perú: el dato trae el código INEI del departamento -> nombre del mapa:
+const PER_COD={'1':'Amazonas','2':'Ancash','3':'Apurimac','4':'Arequipa','5':'Ayacucho','6':'Cajamarca','7':'El Callao','8':'Cusco','9':'Huancavelica','10':'Huanuco','11':'Ica','12':'Junin','13':'La Libertad','14':'Lambayeque','16':'Loreto','17':'Madre de Dios','18':'Moquegua','19':'Pasco','20':'Piura','21':'Puno','22':'San Martin','23':'Tacna','24':'Tumbes','25':'Ucayali','1501':'Municipalidad Metropolitana de Lima','1599':'Lima'};
+// Nombre lindo para la lista cuando el dato viene como sigla o código:
+const BRA_NOM={AC:'Acre',AL:'Alagoas',AM:'Amazonas',AP:'Amapá',BA:'Bahia',CE:'Ceará',DF:'Distrito Federal',ES:'Espírito Santo',GO:'Goiás',MA:'Maranhão',MG:'Minas Gerais',MS:'Mato Grosso do Sul',MT:'Mato Grosso',PA:'Pará',PB:'Paraíba',PE:'Pernambuco',PI:'Piauí',PR:'Paraná',RJ:'Rio de Janeiro',RN:'Rio Grande do Norte',RO:'Rondônia',RR:'Roraima',RS:'Rio Grande do Sul',SC:'Santa Catarina',SE:'Sergipe',SP:'São Paulo',TO:'Tocantins'};
+// Devuelve el nombre del mapa que corresponde a esta unidad: '' si no es territorio,
+// null si no coteja, o el shapeName si coteja.
+function cotejarUnidad(iso,nombre,porNorm,porISO){
+  const n=norm(nombre);
+  if(GEO_SKIP[iso]&&GEO_SKIP[iso][n]) return '';
+  if(GEO_ISO_PREFIJO[iso]){ const c=(GEO_ISO_PREFIJO[iso]+nombre).toLowerCase(); if(porISO[c]) return porISO[c]; }
+  if(iso==='PER'&&PER_COD[nombre]){ const t=norm(PER_COD[nombre]); if(porNorm[t]) return porNorm[t]; }
+  if(GEO_ALIAS[iso]&&GEO_ALIAS[iso][n]&&porNorm[GEO_ALIAS[iso][n]]) return porNorm[GEO_ALIAS[iso][n]];
+  if(porNorm[n]) return porNorm[n];
+  return null;
+}
+// Nombre para mostrar en la lista (sigla/código -> nombre real):
+function nombreUnidad(iso,nombre){
+  if(iso==='BRA'&&BRA_NOM[nombre]) return BRA_NOM[nombre];
+  if(iso==='PER'&&PER_COD[nombre]) return PER_COD[nombre];
+  return nombre;
+}
 const GEO={};
 async function traerGeo(iso){ if(!(iso in GEO)) GEO[iso]=await fetch('../datos/geo/adm1/'+iso+'.geojson',{cache:'no-store'}).then(r=>r.json()).catch(()=>null); return GEO[iso]; }
 let chart=null;
@@ -217,10 +256,24 @@ async function renderMapa(datos){
   if(!geo||!geo.features){ caja.style.display='none'; return; }
   caja.style.display='block';
   geo.features.forEach(ft=>{ ft.properties.name=ft.properties.shapeName||ft.properties.name; });
-  const porNorm={}; geo.features.forEach(ft=>porNorm[norm(ft.properties.name)]=ft.properties.name);
-  const valores=[]; const sinCotejo=[]; let maxv=0;
-  unidades.forEach(u=>{ const v=Number(f.valor(u))||0; const gn=porNorm[norm(u.nombre)];
-    if(gn){ valores.push({name:gn,value:v}); if(v>maxv)maxv=v; } else if(v>0) sinCotejo.push(u.nombre); });
+  const porNorm={}, porISO={};
+  geo.features.forEach(ft=>{ porNorm[norm(ft.properties.name)]=ft.properties.name;
+    if(ft.properties.shapeISO) porISO[String(ft.properties.shapeISO).toLowerCase()]=ft.properties.name; });
+  const valores=[]; const sinCotejo=[]; let maxv=0, territorios=0;
+  unidades.forEach(u=>{ const v=Number(f.valor(u))||0; const gn=cotejarUnidad(iso,u.nombre,porNorm,porISO);
+    if(gn==='') return;                 // categoría de la fuente que no es un territorio
+    territorios++;
+    if(gn){ valores.push({name:gn,value:v}); if(v>maxv)maxv=v; } else if(v>0) sinCotejo.push(nombreUnidad(iso,u.nombre)); });
+  // Si la fuente publica por una división que el mapa disponible NO representa
+  // (ubica menos de la mitad de las unidades), no se dibuja un mapa engañoso:
+  // se declara y la lista de abajo hace el trabajo.
+  if(territorios && valores.length < territorios/2){
+    if(chart) chart.clear();
+    document.getElementById('mapa').style.display='none';
+    nota.innerHTML='<b>'+esc(f.titulo)+'</b> · '+esc(f.badge[0])+' · sin mapa por unidad: la fuente publica por una división territorial distinta de la del mapa disponible ('+valores.length+' de '+territorios+' ubicadas). El detalle va en la lista de abajo.';
+    return;
+  }
+  document.getElementById('mapa').style.display='';
   echarts.registerMap('u_'+iso, geo);
   if(!chart){ chart=echarts.init(document.getElementById('mapa'),null,{renderer:'svg'}); window.addEventListener('resize',()=>chart&&chart.resize()); }
   const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -235,7 +288,8 @@ async function renderMapa(datos){
       emphasis:{label:{show:true,color:cv('--tinta')}, itemStyle:{areaColor:cv('--orange')}},
       data:valores}]
   }, true);
-  nota.innerHTML='<b>'+esc(f.titulo)+'</b> · '+esc(f.badge[0])+' · '+valores.length+' de '+unidades.length+' unidades ubicadas'
+  if(chart) chart.resize();
+  nota.innerHTML='<b>'+esc(f.titulo)+'</b> · '+esc(f.badge[0])+' · '+valores.length+' de '+territorios+' unidades ubicadas'
     +(sinCotejo.length?(' · '+sinCotejo.length+' sin cotejar geográficamente (van igual en la lista)'):'')
     +'. Recuento, no tasa; no se compara entre países.';
 }
@@ -278,7 +332,7 @@ function pintar(datos){
     const d=datos[i]; if(!d) return;
     const reg=(d.registros||[]).find(r=>r.iso===iso);
     const unidades=reg&&reg.unidades?reg.unidades:[];
-    let filas=unidades.map(u=>({nombre:u.nombre, v:Number(f.valor(u))||0, extra:f.extra?f.extra(u):''}))
+    let filas=unidades.map(u=>({nombre:nombreUnidad(iso,u.nombre), v:Number(f.valor(u))||0, extra:f.extra?f.extra(u):''}))
                       .filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
     if(!filas.length) return;
     huboAlgo=true;
