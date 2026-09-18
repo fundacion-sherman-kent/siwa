@@ -184,7 +184,7 @@ const GEO_ALIAS={
   COL:{'bogota d.c.':'bogota capital district','bogota, d.c.':'bogota capital district','san andres islas':'archipielago de san andres, providencia y santa catalina','san andres y providencia':'archipielago de san andres, providencia y santa catalina'},
   DOM:{'el seibo':'el seybo','elias pina':'la estrelleta','hermanas mirabal':'hermanas'},
   BRA:{'rio granda do norte':'rio grande do norte','rio de jeneiro':'rio de janeiro'},
-  PAN:{'bocas del toro':'provincia de bocas del toro','chiriqui':'provincia de chiriqui','cocle':'provincia de cocle','colon':'colon province','comarca embera wounaan':'comarca embera-wounaan','comarca ngabe bugle':'comarca ngabe-bugle','darien':'provincia de darien','herrera':'provincia de herrera','los santos':'provincia de los santos','panama':'provincia de panama','panama oeste':'provincia de panama oeste','veraguas':'provincia de veraguas','ngobe bugle':'comarca ngabe-bugle'},
+  PAN:{'bocas del toro':'provincia de bocas del toro','chiriqui':'provincia de chiriqui','cocle':'provincia de cocle','colon':'colon province','comarca embera wounaan':'comarca embera-wounaan','comarca ngabe bugle':'comarca ngabe-bugle','darien':'provincia de darien','herrera':'provincia de herrera','los santos':'provincia de los santos','panama':'provincia de panama','panama oeste':'provincia de panama oeste','veraguas':'provincia de veraguas','ngobe bugle':'comarca ngabe-bugle','comarca kuna yala':'comarca guna yala','panama (san miguelito)':'provincia de panama','san miguelito':'provincia de panama'},
   // Capa de violencia política (ACLED): usa el nombre pelado; el mapa, el nombre con prefijo.
   CHL:{'antofagasta':'region de antofagasta','araucania':'region de la araucania','arica y parinacota':'region de arica y parinacota','atacama':'region de atacama','aysen':'region de aysen del gral.ibanez del campo','biobio':'region del bio-bio','coquimbo':'region de coquimbo','los lagos':'region de los lagos','los rios':'region de los rios','magallanes':'region de magallanes y antartica chilena','maule':'region del maule','metropolitana':'region metropolitana de santiago','nuble':'region de nuble','o\'higgins':'region del libertador bernardo o\'higgins','tarapaca':'region de tarapaca','valparaiso':'region de valparaiso'},
   CRI:{'alajuela':'provincia alajuela','cartago':'provincia cartago','guanacaste':'provincia guanacaste','heredia':'provincia heredia','limon':'provincia limon','puntarenas':'provincia puntarenas','san jose':'provincia san jose'},
@@ -194,7 +194,7 @@ const GEO_ALIAS={
   NIC:{'costa caribe norte':'north carribean coast autonomous region','costa caribe sur':'south atlantic autonomous region','jinotega':'jinotega (departamento)','matagalpa':'matagalpa (departemento)'},
   PER:{'callao':'el callao'},
   BHS:{'bimini':'biminis'},
-  TTO:{'mayaro rio claro':'rio claro-mayaro','tunapuna piarco':'tunapuna-piarco'}
+  TTO:{'mayaro rio claro':'mayaro/rio claro','tunapuna piarco':'tunapuna/piarco'}
 };
 // Países cuyo dato trae un CÓDIGO que coteja contra el shapeISO del mapa (prefijo país):
 const GEO_ISO_PREFIJO={ BRA:'BR-' };
@@ -269,11 +269,21 @@ async function renderMapa(datos){
   const porNorm={}, porISO={};
   geo.features.forEach(ft=>{ porNorm[norm(ft.properties.name)]=ft.properties.name;
     if(ft.properties.shapeISO) porISO[String(ft.properties.shapeISO).toLowerCase()]=ft.properties.name; });
-  const valores=[]; const sinCotejo=[]; let maxv=0, territorios=0;
-  unidades.forEach(u=>{ const v=Number(f.valor(u))||0; const gn=cotejarUnidad(iso,u.nombre,porNorm,porISO);
+  // (a) DEDUPE por nombre: ante dos filas de la misma unidad, se queda con el valor
+  //     mayor —descarta fragmentos y duplicados vacíos que a veces trae la fuente—.
+  // (b) AGREGA por división del mapa: suma sub-unidades distintas que caen en una misma
+  //     división (p. ej. San Miguelito dentro de la provincia de Panamá).
+  const porNombre={};
+  unidades.forEach(u=>{ const gn=cotejarUnidad(iso,u.nombre,porNorm,porISO);
     if(gn==='') return;                 // categoría de la fuente que no es un territorio
-    territorios++;
-    if(gn){ valores.push({name:gn,value:v}); if(v>maxv)maxv=v; } else if(v>0) sinCotejo.push(nombreUnidad(iso,u.nombre)); });
+    const v=Number(f.valor(u))||0, k=norm(u.nombre);
+    if(!(k in porNombre) || v>porNombre[k].v) porNombre[k]={v:v,gn:gn,nombre:u.nombre}; });
+  const agg={}; const sinCotejo=[];
+  Object.keys(porNombre).forEach(k=>{ const it=porNombre[k];
+    if(it.gn){ agg[it.gn]=(agg[it.gn]||0)+it.v; } else if(it.v>0) sinCotejo.push(nombreUnidad(iso,it.nombre)); });
+  const valores=Object.keys(agg).map(name=>({name:name,value:agg[name]}));
+  let maxv=0; valores.forEach(x=>{ if(x.value>maxv)maxv=x.value; });
+  const territorios=valores.length+sinCotejo.length;
   // Si la fuente publica por una división que el mapa disponible NO representa
   // (ubica menos de la mitad de las unidades), no se dibuja un mapa engañoso:
   // se declara y la lista de abajo hace el trabajo.
