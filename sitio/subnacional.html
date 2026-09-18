@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://siwa.fundacionkent.org/sitio/subnacional.html">
 <meta name="theme-color" content="#F4F2EC">
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+<script src="lib/echarts.min.js"></script>
 <style>
   :root{--orange:#FB6500;--verde:#3FA796;--rojo:#C23B22;--purple:#8C00E0;--grey-blue:#667B89;
     --fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;--linea:#d7dce3;--caja:#ffffff;--navy:#00121E;}
@@ -31,9 +32,22 @@
 
   .controles{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:6px 0 16px;}
   .controles label{font-size:12px;color:var(--tenue);font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
-  select{background:var(--caja);border:1px solid var(--linea);color:var(--tinta);padding:8px 12px;
-    border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;max-width:100%;min-width:0;}
-  select:hover{border-color:var(--orange);}
+  select,input[type="search"]{background:var(--caja);border:1px solid var(--linea);color:var(--tinta);padding:8px 12px;
+    border-radius:8px;font-weight:600;font-size:14px;font-family:inherit;max-width:100%;min-width:0;}
+  select{cursor:pointer;}
+  input[type="search"]{font-weight:400;min-width:200px;flex:1 1 200px;}
+  select:hover,input[type="search"]:focus{border-color:var(--orange);outline:none;}
+  .toggle-map{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0 2px;}
+  .toggle-map .rot{font-size:12px;color:var(--tenue);font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
+  .toggle-map button{background:var(--caja);border:1px solid var(--linea);color:var(--tinta);
+    padding:6px 12px;border-radius:8px;font-weight:600;font-size:12.5px;cursor:pointer;font-family:inherit;}
+  .toggle-map button:hover{border-color:var(--orange);}
+  .toggle-map button.on{border-color:var(--orange);color:var(--orange);}
+  .mapa-caja{background:var(--caja);border:1px solid var(--linea);border-radius:12px;padding:10px 12px 4px;margin:6px 0 18px;}
+  #mapa{width:100%;height:460px;}
+  .mapa-nota{font-size:12px;color:var(--tenue);margin:4px 2px 6px;}
+  .mapa-nota b{color:var(--tinta);}
+  @media(max-width:860px){#mapa{height:360px;}}
 
   .tarjeta{background:var(--caja);border:1px solid var(--linea);border-radius:12px;padding:16px 18px;margin:0 0 16px;}
   .cab-ind{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px;}
@@ -119,6 +133,14 @@
   <div class="controles">
     <label for="pais">País</label>
     <select id="pais"></select>
+    <label for="buscar">Buscar</label>
+    <input id="buscar" type="search" placeholder="provincia, departamento, estado…" autocomplete="off" aria-label="Buscar unidad">
+  </div>
+
+  <div class="toggle-map"><span class="rot">Mapa por</span><span id="toggle-ind"></span></div>
+  <div class="mapa-caja" id="mapa-caja" style="display:none">
+    <div id="mapa"></div>
+    <p class="mapa-nota" id="mapa-nota"></p>
   </div>
 
   <div id="tarjetas" class="cargando">Cargando la capa de territorio…</div>
@@ -147,6 +169,78 @@ const CACHE={}, ESTADO={pais:null};
 async function traer(a){ if(!CACHE[a]) CACHE[a]=await fetch('../datos/publico/'+a,{cache:'no-store'}).then(r=>r.json()).catch(()=>null); return CACHE[a]; }
 function calif(d){ const c=(d.procedencia||{}).calificacion||{}; return (c.fiabilidad||'?')+String(c.credibilidad||''); }
 function esc(s){ return String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+function norm(s){ return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/\s+/g,' ').trim(); }
+const GEO={};
+async function traerGeo(iso){ if(!(iso in GEO)) GEO[iso]=await fetch('../datos/geo/adm1/'+iso+'.geojson',{cache:'no-store'}).then(r=>r.json()).catch(()=>null); return GEO[iso]; }
+let chart=null;
+
+// ¿DE QUÉ PAÍS ENTRA EL LECTOR? Cálculo LOCAL (zona horaria + idioma), sin IP ni
+// servicio externo, igual que el registro. Si no cae en uno de los 33, devuelve null.
+function paisPorContexto(){
+  try{ const tz=(Intl.DateTimeFormat().resolvedOptions().timeZone||'');
+    if(/^America\/Argentina\//.test(tz)||/^America\/(Buenos_Aires|Cordoba|Mendoza|Catamarca|Jujuy|Salta|Tucuman|San_Juan|San_Luis|La_Rioja)$/.test(tz)) return 'ARG';
+    const m={'America/La_Paz':'BOL','America/Santiago':'CHL','America/Punta_Arenas':'CHL','America/Bogota':'COL','America/Costa_Rica':'CRI','America/Havana':'CUB','America/Santo_Domingo':'DOM','America/Guayaquil':'ECU','Pacific/Galapagos':'ECU','America/El_Salvador':'SLV','America/Guatemala':'GTM','America/Guyana':'GUY','America/Port-au-Prince':'HTI','America/Tegucigalpa':'HND','America/Jamaica':'JAM','America/Managua':'NIC','America/Panama':'PAN','America/Asuncion':'PRY','America/Lima':'PER','America/Paramaribo':'SUR','America/Montevideo':'URY','America/Caracas':'VEN','America/Port_of_Spain':'TTO','America/Antigua':'ATG','America/Nassau':'BHS','America/Barbados':'BRB','America/Belize':'BLZ','America/Dominica':'DMA','America/Grenada':'GRD','America/St_Kitts':'KNA','America/St_Lucia':'LCA','America/St_Vincent':'VCT'};
+    if(m[tz]) return m[tz];
+    if(/^America\/(Sao_Paulo|Bahia|Fortaleza|Manaus|Recife|Belem|Cuiaba|Campo_Grande|Boa_Vista|Porto_Velho|Rio_Branco|Noronha|Maceio|Araguaina|Santarem|Eirunepe)$/.test(tz)) return 'BRA';
+    if(/^America\/(Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Hermosillo|Mazatlan|Tijuana|Ojinaga|Bahia_Banderas|Ciudad_Juarez)$/.test(tz)) return 'MEX';
+  }catch(e){}
+  try{ const idiomas=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||''];
+    const i2={AR:'ARG',BO:'BOL',BR:'BRA',CL:'CHL',CO:'COL',CR:'CRI',CU:'CUB',DO:'DOM',EC:'ECU',SV:'SLV',GT:'GTM',GY:'GUY',HT:'HTI',HN:'HND',JM:'JAM',MX:'MEX',NI:'NIC',PA:'PAN',PY:'PRY',PE:'PER',SR:'SUR',UY:'URY',VE:'VEN',TT:'TTO',AG:'ATG',BS:'BHS',BB:'BRB',BZ:'BLZ',DM:'DMA',GD:'GRD',KN:'KNA',LC:'LCA',VC:'VCT'};
+    for(let k=0;k<idiomas.length;k++){ const mm=(idiomas[k]||'').match(/[-_]([A-Za-z]{2})\b/); if(mm){ const r=mm[1].toUpperCase(); if(i2[r]) return i2[r]; } }
+  }catch(e){}
+  return null;
+}
+
+function construirToggle(datos){
+  const cont=document.getElementById('toggle-ind'), barra=document.querySelector('.toggle-map');
+  cont.innerHTML='';
+  const disp=FUENTES.map((f,i)=>({f,i})).filter(({f,i})=>{
+    const d=datos[i], reg=d&&(d.registros||[]).find(r=>r.iso===ESTADO.pais);
+    return reg && (reg.unidades||[]).some(u=>Number(f.valor(u))>0);
+  });
+  if(!disp.length){ barra.style.display='none'; return; }
+  barra.style.display='flex';
+  if(!disp.some(x=>x.i===ESTADO.indMapa)) ESTADO.indMapa=disp[0].i;
+  disp.forEach(({f,i})=>{ const b=document.createElement('button');
+    b.textContent=f.titulo.split(' por')[0]; b.className=(i===ESTADO.indMapa)?'on':'';
+    b.onclick=()=>{ ESTADO.indMapa=i; construirToggle(datos); renderMapa(datos); };
+    cont.appendChild(b); });
+}
+
+async function renderMapa(datos){
+  const caja=document.getElementById('mapa-caja'), nota=document.getElementById('mapa-nota');
+  const iso=ESTADO.pais, f=FUENTES[ESTADO.indMapa], d=datos[ESTADO.indMapa];
+  const reg=d&&(d.registros||[]).find(r=>r.iso===iso);
+  const unidades=(reg&&reg.unidades)?reg.unidades:[];
+  if(!unidades.length){ caja.style.display='none'; return; }
+  let geo=null; try{ geo=await traerGeo(iso); }catch(e){}
+  if(!geo||!geo.features){ caja.style.display='none'; return; }
+  caja.style.display='block';
+  geo.features.forEach(ft=>{ ft.properties.name=ft.properties.shapeName||ft.properties.name; });
+  const porNorm={}; geo.features.forEach(ft=>porNorm[norm(ft.properties.name)]=ft.properties.name);
+  const valores=[]; const sinCotejo=[]; let maxv=0;
+  unidades.forEach(u=>{ const v=Number(f.valor(u))||0; const gn=porNorm[norm(u.nombre)];
+    if(gn){ valores.push({name:gn,value:v}); if(v>maxv)maxv=v; } else if(v>0) sinCotejo.push(u.nombre); });
+  echarts.registerMap('u_'+iso, geo);
+  if(!chart){ chart=echarts.init(document.getElementById('mapa'),null,{renderer:'svg'}); window.addEventListener('resize',()=>chart&&chart.resize()); }
+  const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const materia=f.titulo.split(' por')[0];
+  chart.setOption({ backgroundColor:'transparent',
+    tooltip:{trigger:'item', backgroundColor:cv('--caja'), borderColor:cv('--linea'), textStyle:{color:cv('--tinta')},
+      formatter:o=>(o.value!=null&&!isNaN(o.value))? '<b>'+esc(o.name)+'</b><br>'+esc(materia)+': '+Number(o.value).toLocaleString('es-AR') : '<b>'+esc(o.name)+'</b><br>sin dato'},
+    visualMap:{min:0, max:maxv||1, left:12, bottom:16, calculable:true, text:['más','menos'],
+      textStyle:{color:cv('--tinta')}, inRange:{color:[cv('--verde'),cv('--orange'),cv('--rojo')]}},
+    series:[{type:'map', map:'u_'+iso, roam:true, aspectScale:1,
+      label:{show:false}, itemStyle:{borderColor:cv('--fondo'), borderWidth:.6, areaColor:'rgba(102,123,137,.14)'},
+      emphasis:{label:{show:true,color:cv('--tinta')}, itemStyle:{areaColor:cv('--orange')}},
+      data:valores}]
+  }, true);
+  nota.innerHTML='<b>'+esc(f.titulo)+'</b> · '+esc(f.badge[0])+' · '+valores.length+' de '+unidades.length+' unidades ubicadas'
+    +(sinCotejo.length?(' · '+sinCotejo.length+' sin cotejar geográficamente (van igual en la lista)'):'')
+    +'. Recuento, no tasa; no se compara entre países.';
+}
+
+function seleccionarPais(datos){ construirToggle(datos); renderMapa(datos); pintar(datos); }
 
 async function arranque(){
   const datos = await Promise.all(FUENTES.map(f=>traer(f.arch)));
@@ -160,24 +254,38 @@ async function arranque(){
   // Arranca en el país con MÁS fuentes cargadas (mejor primera impresión), no en el primero alfabético.
   const riqueza = iso => datos.reduce((n,d)=>{ const r=d&&(d.registros||[]).find(x=>x.iso===iso);
     return n + (r && (r.unidades||[]).length>0 ? 1:0); },0);
-  ESTADO.pais = lista.length ? lista.slice().sort((a,b)=>riqueza(b[0])-riqueza(a[0]))[0][0] : null;
-  sel.value=ESTADO.pais;
-  sel.onchange=()=>{ ESTADO.pais=sel.value; pintar(datos); };
-  pintar(datos);
+  const rico = lista.length ? lista.slice().sort((a,b)=>riqueza(b[0])-riqueza(a[0]))[0][0] : null;
+  // Arranca en el país del visitante (?pais= manda; si no, la zona horaria; si no,
+  // el más rico). Igual que el registro: siempre abre en el país de quien observa.
+  const param = new URL(location.href).searchParams.get('pais');
+  const geoP = paisPorContexto();
+  ESTADO.pais = (param && paises[param]) ? param : (geoP && paises[geoP]) ? geoP : rico;
+  ESTADO.indMapa = 0;
+  window.__datos = datos;
+  sel.value = ESTADO.pais;
+  sel.onchange = ()=>{ ESTADO.pais=sel.value; seleccionarPais(datos); };
+  window.SIWA_onTema = ()=>{ if(chart) renderMapa(datos); };
+  document.getElementById('buscar').addEventListener('input', ()=>pintar(datos));
+  seleccionarPais(datos);
 }
 
 function pintar(datos){
   const cont=document.getElementById('tarjetas'); cont.classList.remove('cargando');
   const iso=ESTADO.pais;
-  let html='';
+  const q=norm((document.getElementById('buscar')||{}).value||'');
+  let html='', huboAlgo=false;
   FUENTES.forEach((f,i)=>{
     const d=datos[i]; if(!d) return;
     const reg=(d.registros||[]).find(r=>r.iso===iso);
     const unidades=reg&&reg.unidades?reg.unidades:[];
-    const filas=unidades.map(u=>({nombre:u.nombre, v:Number(f.valor(u))||0, extra:f.extra?f.extra(u):''}))
-                        .filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
+    let filas=unidades.map(u=>({nombre:u.nombre, v:Number(f.valor(u))||0, extra:f.extra?f.extra(u):''}))
+                      .filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
     if(!filas.length) return;
-    const max=filas[0].v, top=filas.slice(0,15);
+    huboAlgo=true;
+    const max=filas[0].v;
+    if(q) filas=filas.filter(x=>norm(x.nombre).includes(q));
+    if(!filas.length) return;
+    const top=q?filas:filas.slice(0,15);
     const anio=reg.en_curso?('hasta '+reg.en_curso.anio+' (prov.)'):(unidades[0]&&unidades[0].ultimo?('último '+unidades[0].ultimo.anio):'');
     html+=`<div class="tarjeta ${f.clase}">
       <div class="cab-ind"><h2>${esc(f.titulo)}</h2>
@@ -188,14 +296,20 @@ function pintar(datos){
       <div class="barras">`;
     top.forEach(x=>{
       html+=`<div class="fila"><span class="u" title="${esc(x.nombre)}">${esc(x.nombre)}</span>
-        <span class="b" style="width:${Math.max(2,Math.round(100*x.v/max))}%"></span>
+        <span class="b" style="width:${Math.max(2,Math.round(100*x.v/(max||1)))}%"></span>
         <span class="v">${x.v.toLocaleString('es-AR')}${x.extra?(' · '+esc(x.extra)):''}</span></div>`;
     });
     html+=`</div>`;
-    if(filas.length>15) html+=`<div class="mas">y ${filas.length-15} unidades más…</div>`;
+    if(!q && filas.length>15) html+=`<div class="mas">y ${filas.length-15} unidades más…</div>`;
     html+=`</div>`;
   });
-  cont.innerHTML = html || '<div class="sindato">Este país todavía no tiene datos subnacionales cargados. La búsqueda no se detiene.</div>';
+  if(!huboAlgo) html='<div class="sindato">Este país todavía no tiene datos subnacionales cargados. La búsqueda no se detiene.</div>';
+  else if(!html) html='<div class="sindato">Ninguna unidad coincide con «'+esc(document.getElementById('buscar').value)+'». Probá con otro nombre.</div>';
+  cont.innerHTML=html;
+  // Resaltar en el mapa la unidad buscada (si coincide una geometría).
+  if(chart && q){ try{ chart.dispatchAction({type:'downplay', seriesIndex:0});
+    const nombres=(chart.getOption().series[0].data||[]).map(x=>x.name).filter(n=>norm(n).includes(q));
+    nombres.forEach(n=>chart.dispatchAction({type:'highlight', seriesIndex:0, name:n})); }catch(e){} }
 }
 
 arranque().catch(e=>{ document.getElementById('tarjetas').textContent='No se pudo cargar la capa: '+e; });
