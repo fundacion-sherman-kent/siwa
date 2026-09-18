@@ -232,7 +232,120 @@ def dominicana() -> dict:
                     "oficial por delito, provincia y mes."}
 
 
-PAISES = {"ARG": argentina, "BOL": bolivia, "COL": colombia, "TTO": trinidad, "DOM": dominicana}
+# ── MÉXICO — «Robo» por entidad (planilla de DELITOS, no la de víctimas) ──────
+# La planilla de víctimas que alimenta los homicidios NO trae robo (un robo no
+# tiene «víctima» contada). El robo vive en la planilla de DELITOS estatal, como
+# un único «Tipo de delito» que agrupa todas las modalidades (casa, vehículo,
+# transeúnte, etc.). Se suman los doce meses por entidad y año.
+def mexico() -> dict:
+    import html as _html
+    import re as _re
+    import zipfile
+    pagina = base.er.pedir(base.er.MEXICO_FICHA).decode("utf-8", "replace")
+    enlaces = []
+    for href, cuerpo in _re.findall(r'<a[^>]*href="([^"]*sharepoint[^"]*)"[^>]*>(.*?)</a>', pagina, _re.S):
+        rot = " ".join(_html.unescape(_re.sub(r"<[^>]+>", " ", cuerpo)).replace("\xa0", " ").split())
+        m = _re.search(r"/([A-Za-z0-9_\-]{30,})(?:\?|$)", href.split("?")[0] + "?")
+        if m:
+            enlaces.append((rot.lower(), m.group(1)))
+    ident = next((i for r, i in enlaces if r.startswith("2015") and "delitos" in r and "estatal" in r), None)
+    if not ident:
+        raise RuntimeError("México: no se encontró la planilla estatal de delitos")
+    with zipfile.ZipFile(io.BytesIO(base.er.pedir(base.er.MEXICO_DESCARGA.format(id=ident)))) as z:
+        crudo = z.read(next(n for n in z.namelist() if n.lower().endswith(".csv")))
+    texto = None
+    for c in ("utf-8-sig", "cp1252", "latin-1"):
+        try:
+            texto = crudo.decode(c)
+            break
+        except UnicodeDecodeError:
+            continue
+    meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+             "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    por = collections.defaultdict(dict)
+    for f in csv.DictReader(io.StringIO(texto)):
+        if (f.get("Tipo de delito") or "").strip() != "Robo":
+            continue
+        ent = (f.get("Entidad") or "").strip()
+        try:
+            anio = int(f["Año"])
+        except (KeyError, ValueError):
+            continue
+        tot = 0
+        for m in meses:
+            try:
+                tot += int(float(f.get(m) or 0))
+            except ValueError:
+                pass
+        if ent:
+            por[ent][anio] = por[ent].get(anio, 0) + tot
+    return {"unidad": "entidad federativa", "por_unidad": dict(por), "en_curso": None,
+            "organismo": "Secretariado Ejecutivo (SESNSP) — México", "licencia": "libre uso gob.mx",
+            "nota": "Robo (todas las modalidades: casa, vehículo, transeúnte, etc.), incidencia delictiva estatal."}
+
+
+# ── BRASIL — «Roubo» por unidade federativa (BancoVDE, todas las modalidades) ──
+_ROUBO_BR = {"Roubo seguido de morte (latrocínio)", "Roubo a instituição financeira",
+             "Roubo de carga", "Roubo de veículo"}
+
+
+def _brasil_roubo_un_anio(raw: bytes) -> dict:
+    """{UF: recuento de roubos (todas las modalidades)} de un BancoVDE anual."""
+    import re
+    import zipfile
+    z = zipfile.ZipFile(io.BytesIO(raw))
+    data = z.read("xl/worksheets/sheet1.xml").decode("utf-8", "replace")
+
+    def valor(celda: str) -> str:
+        v = re.search(r"<v>(.*?)</v>", celda, re.S)
+        if v:
+            return v.group(1)
+        t = re.search(r"<t[^>]*>(.*?)</t>", celda, re.S)
+        return t.group(1) if t else ""
+
+    colmap, por = {}, {}
+    for fila in re.finditer(r"<row[^>]*>(.*?)</row>", data, re.S):
+        d = {}
+        for c in re.findall(r'(<c\b[^>]*\br="[A-Z]+\d+".*?(?:/>|</c>))', fila.group(1), re.S):
+            ref = re.search(r'\br="([A-Z]+)\d+"', c)
+            if ref:
+                d[ref.group(1)] = valor(c)
+        if not colmap:
+            colmap = {v.strip().lower(): k for k, v in d.items()}
+            continue
+        if d.get(colmap.get("evento", "")) in _ROUBO_BR:
+            uf = d.get(colmap.get("uf", ""), "")
+            try:
+                por[uf] = por.get(uf, 0) + int(float(d.get(colmap.get("total", ""), "0")))
+            except (TypeError, ValueError):
+                pass
+    return por
+
+
+def brasil() -> dict:
+    este = datetime.now(timezone.utc).year
+    por = collections.defaultdict(dict)
+    logrados = []
+    for anio in (este, este - 1, este - 2):
+        if len(logrados) >= 2:
+            break
+        try:
+            datos = _brasil_roubo_un_anio(comun.traer_crudo(base.BRASIL_XLSX.format(anio=anio)))
+        except Exception:  # noqa: BLE001 — un año que falta no voltea al resto
+            continue
+        if datos:
+            for uf, n in datos.items():
+                por[uf][anio] = n
+            logrados.append(anio)
+    por = {u: s for u, s in por.items() if s}
+    return {"unidad": "unidade federativa", "por_unidad": por, "en_curso": None,
+            "organismo": "SINESP/MJSP — BancoVDE (Brasil)", "licencia": "dados abertos gov.br",
+            "nota": "Roubo, suma de todas las modalidades (latrocínio, institución financiera, "
+                    "carga y vehículo), por recuento de ocurrencias."}
+
+
+PAISES = {"ARG": argentina, "BOL": bolivia, "BRA": brasil, "COL": colombia,
+          "MEX": mexico, "TTO": trinidad, "DOM": dominicana}
 
 
 def construir() -> Path:
