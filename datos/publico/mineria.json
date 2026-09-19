@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-19T17:23:34+00:00",
-  "medidas_con_suficientes_casos": 206,
-  "pares_probados": 21115,
+  "corrida": "2026-09-19T18:20:04+00:00",
+  "medidas_con_suficientes_casos": 205,
+  "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3959,
+    "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3938,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3547,
-  "anomalias_totales": 382,
+  "pistas_totales": 3526,
+  "anomalias_totales": 380,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -68,19 +68,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 9.606943935565834e-32,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "secundaria_cepal",
-      "b": "termina_secundaria",
-      "rotulo_a": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
-      "rotulo_b": "Terminan la secundaria",
-      "coeficiente": 0.973,
-      "estados": 17,
-      "tipo": "rangos (Spearman)",
-      "p": 9.639140440489106e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -190,19 +177,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.946,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.391252148447855e-23,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "copernicus:escenas",
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
@@ -224,6 +198,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.942,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.180397555339922e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -502,19 +489,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.91,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.085024204028381e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -549,6 +523,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.517598865116537e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.904,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.75862022275686e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +783,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 2.220061914883335e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "poblacion",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Población total",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.885,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 3.565480405450303e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
