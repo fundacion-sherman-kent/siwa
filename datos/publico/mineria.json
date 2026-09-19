@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-19T21:24:10+00:00",
+  "corrida": "2026-09-19T22:24:36+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3946,
+    "sobreviven": 3949,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3534,
+  "pistas_totales": 3537,
   "anomalias_totales": 380,
   "pistas": [
     {
@@ -168,10 +168,10 @@
       "b": "superficie",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.954,
+      "coeficiente": 0.955,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.127744041741323e-24,
+      "p": 5.0317999199343365e-25,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -346,6 +346,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.926,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.1528895388532983e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "democracia_electoral",
       "b": "estado_derecho_wjp",
       "rotulo_a": "Nivel democrático — democracia electoral",
@@ -354,19 +367,6 @@
       "estados": 24,
       "tipo": "rangos (Spearman)",
       "p": 1.0444564718830348e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.924,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.533188772262128e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
