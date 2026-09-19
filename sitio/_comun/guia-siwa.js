@@ -127,7 +127,10 @@
     return '<a class="gs-card" href="' + url + '"><div class="gs-k">' + k + '</div>' +
       '<div class="gs-v">' + r + ' <span class="gs-ir">↗</span></div></a>';
   }
-  var uT = function (s) { return base + "t/" + s + ".html"; };
+  // Va DIRECTO al registro con el tema puesto y BAJA al gráfico (#tablero-siwa):
+  // el stub t/<slug>.html rebota al índice pero deja al lector arriba de todo, sin
+  // ver el gráfico. Con el ancla, aterriza en el tablero, que es lo que pidió.
+  var uT = function (s) { return base + "index.html?tema=" + encodeURIComponent(s) + "&nivel=3#tablero-siwa"; };
   var uP = function (s) { return base + "pais/" + s + ".html"; };
   var uH = function (a) { return base + a; };
 
