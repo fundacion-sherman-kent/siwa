@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "explorador",
     "capa": "publico",
-    "obtenido_en": "2026-09-18T06:11:25+00:00",
+    "obtenido_en": "2026-09-19T06:09:44+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — exploración de puertas de datos oficiales",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#explorador"
@@ -126,7 +126,7 @@
         {
           "dominio": "www.datosabiertos.gob.pe",
           "dialecto": "CKAN",
-          "conjuntos": 4685,
+          "conjuntos": 4684,
           "url": "https://www.datosabiertos.gob.pe/api/3/action/package_list"
         }
       ],
@@ -170,7 +170,7 @@
         {
           "dominio": "www.datosabiertos.gob.pa",
           "dialecto": "CKAN",
-          "conjuntos": 5734,
+          "conjuntos": 5739,
           "url": "https://www.datosabiertos.gob.pa/api/3/action/package_list"
         }
       ],
@@ -200,7 +200,7 @@
         {
           "dominio": "datos.gob.mx",
           "dialecto": "CKAN",
-          "conjuntos": 1749,
+          "conjuntos": 1751,
           "url": "https://datos.gob.mx/api/3/action/package_list"
         }
       ],
@@ -319,7 +319,7 @@
         {
           "dominio": "datos.gob.do",
           "dialecto": "CKAN",
-          "conjuntos": 1063,
+          "conjuntos": 1064,
           "url": "https://datos.gob.do/api/3/action/package_list"
         }
       ],
@@ -370,8 +370,21 @@
       "iso": "COL",
       "pais": "Colombia",
       "bloque": "Andina",
-      "estado": "sin_puerta_hallada",
-      "puertas_abiertas": [],
+      "estado": "abre",
+      "puertas_abiertas": [
+        {
+          "dominio": "www.datos.gov.co",
+          "dialecto": "DCAT",
+          "conjuntos": null,
+          "url": "https://www.datos.gov.co/data.json"
+        },
+        {
+          "dominio": "www.datos.gov.co",
+          "dialecto": "Socrata",
+          "conjuntos": null,
+          "url": "https://www.datos.gov.co/api/views.json?limit=1"
+        }
+      ],
       "puertas_cerradas": [],
       "dominios_probados": [
         "www.dane.gov.co",
@@ -491,15 +504,15 @@
     }
   ],
   "resumen": {
-    "estados_que_abren": 8,
+    "estados_que_abren": 9,
     "estados_que_cierran": 6,
-    "estados_sin_puerta_hallada": 19,
+    "estados_sin_puerta_hallada": 18,
     "estados_del_padron": 33,
     "dominios_probados": 50,
     "dialectos_probados": 6,
     "toques_realizados": 350,
     "explorador_probado": true,
-    "consultado": "2026-09-18T06:11:25+00:00"
+    "consultado": "2026-09-19T06:09:44+00:00"
   },
   "dialectos": [
     "ArcGIS Hub",

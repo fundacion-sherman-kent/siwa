@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-19T05:23:41+00:00",
+  "corrida": "2026-09-19T06:23:00+00:00",
   "medidas_con_suficientes_casos": 206,
   "pares_probados": 21115,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3967,
+    "sobreviven": 3969,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3555,
+  "pistas_totales": 3557,
   "anomalias_totales": 382,
   "pistas": [
     {
@@ -203,6 +203,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.943,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.656665711484529e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -211,19 +224,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.941,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.500110897068384e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -428,10 +428,10 @@
       "b": "ransomware:victimas_ultimos_dos_anios",
       "rotulo_a": "Población migrante que el país aloja",
       "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.916,
+      "coeficiente": 0.918,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 1.15406326118479e-16,
+      "p": 8.472337533120666e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -567,6 +567,19 @@
       "misma_categoria": false
     },
     {
+      "a": "migrantes",
+      "b": "ransomware:victimas",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.9,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 6.0870186774496966e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -593,14 +606,14 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:victimas",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.898,
-      "estados": 31,
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.897,
+      "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 9.614742378866782e-15,
+      "p": 1.6579121760289582e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -692,19 +705,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.2609870139890335e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.893,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.228894976778724e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
