@@ -123,6 +123,15 @@ jobs:
         continue-on-error: true
         run: python herramientas/guia-catalogo.py http://127.0.0.1:8000
 
+      # VERSIONAR LOS ARCHIVOS COMPARTIDOS. Escribe el manifiesto (assets.json) con
+      # el hash de cada archivo, para que el navegador no sirva versiones viejas de
+      # caché. Red de seguridad: mantiene el manifiesto al día aunque el archivo se
+      # haya cambiado sin correrlo a mano.
+      - name: Versionar assets compartidos
+        id: versionar
+        continue-on-error: true
+        run: python herramientas/versionar-assets.py
+
       # El testigo se guarda SIEMPRE, haya pasado o no: el sitio lo publica, y
       # publicar solo los resultados buenos sería propaganda, no medición.
       - name: Guardar el testigo
@@ -131,7 +140,7 @@ jobs:
           git config user.name "siwa"
           git config user.email "actions@users.noreply.github.com"
           git config merge.ours.driver true
-          git add datos/publico/pantallas.json sitio/t sitio/_comun/guia-siwa.json
+          git add datos/publico/pantallas.json sitio/t sitio/_comun/guia-siwa.json sitio/_comun/assets.json
           git diff --staged --quiet || git commit -m "Control de pantallas $(date -u +'%Y-%m-%d %H:%M UTC')"
           publicado=0
           for intento in 1 2 3; do
