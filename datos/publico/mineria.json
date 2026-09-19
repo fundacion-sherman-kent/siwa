@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-19T06:30:27+00:00",
+  "corrida": "2026-09-19T07:24:32+00:00",
   "medidas_con_suficientes_casos": 206,
   "pares_probados": 21115,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3968,
+    "sobreviven": 3962,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3556,
+  "pistas_totales": 3550,
   "anomalias_totales": 382,
   "pistas": [
     {
@@ -302,6 +302,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 5.0666175818744904e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "gasto_seguridad",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "Gasto en orden público y seguridad",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": -0.931,
+      "estados": 16,
+      "tipo": "rangos (Spearman)",
+      "p": 2.0337083188092404e-09,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,19 +684,6 @@
       "misma_categoria": false
     },
     {
-      "a": "gasto_militar_usd_const",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "gasto_militar_usd_const",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.896,
-      "estados": 20,
-      "tipo": "rangos (Spearman)",
-      "p": 2.163053977677879e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "democracia_electoral",
       "b": "indice_gobernanza",
       "rotulo_a": "Nivel democrático — democracia electoral",
@@ -718,6 +718,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.2831438600856023e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "subnacional_focos:cuantas",
+      "b": "superficie",
+      "rotulo_a": "subnacional_focos · cuantas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.891,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 6.026911846699604e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 2.220061914883335e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "poblacion",
-      "b": "reservas_internacionales",
-      "rotulo_a": "Población total",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.885,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 3.565480405450303e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
