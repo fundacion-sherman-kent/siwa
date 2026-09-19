@@ -17344,7 +17344,16 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   });
 })();
 </script>
-<!-- Guía SIWA — asistente de navegación (corre en el navegador, sin costo) -->
-<script defer src="_comun/guia-siwa.js"></script>
+<!-- Guía SIWA — asistente de navegación (corre en el navegador, sin costo).
+     Se carga con la versión del manifiesto (assets.json, sin caché) para que el
+     navegador baje el archivo nuevo apenas cambia, sin forzar el refresco. -->
+<script>
+(function(){
+  function cargar(v){ var s=document.createElement('script'); s.defer=true;
+    s.src='_comun/guia-siwa.js'+(v?('?v='+v):''); document.head.appendChild(s); }
+  fetch('_comun/assets.json',{cache:'no-store'}).then(function(r){return r.json();})
+    .then(function(m){ cargar(m&&m['guia-siwa.js']); }).catch(function(){ cargar(); });
+})();
+</script>
 </body>
 </html>

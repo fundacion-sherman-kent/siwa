@@ -119,10 +119,17 @@
   // una burbuja abajo a la derecha, en toda página que lleve esta cabecera.
   if (!window.__guiaSiwaCargada) {
     window.__guiaSiwaCargada = true;
-    var gs = document.createElement("script");
-    gs.src = base + "_comun/guia-siwa.js";
-    gs.defer = true;
-    document.head.appendChild(gs);
+    // Se carga con la versión del manifiesto (sin caché) para no servir una vieja.
+    var cargarGuia = function (v) {
+      var gs = document.createElement("script");
+      gs.src = base + "_comun/guia-siwa.js" + (v ? ("?v=" + v) : "");
+      gs.defer = true;
+      document.head.appendChild(gs);
+    };
+    fetch(base + "_comun/assets.json", { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(function (m) { cargarGuia(m && m["guia-siwa.js"]); })
+      .catch(function () { cargarGuia(); });
   }
 
   if (document.body) montar();
