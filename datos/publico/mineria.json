@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-19T20:25:01+00:00",
+  "corrida": "2026-09-19T21:24:10+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3942,
+    "sobreviven": 3946,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3530,
+  "pistas_totales": 3534,
   "anomalias_totales": 380,
   "pistas": [
     {
@@ -164,6 +164,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.954,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.127744041741323e-24,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "gasto_militar_gasto_pub",
       "b": "gasto_militar_publico",
       "rotulo_a": "gasto_militar_gasto_pub",
@@ -172,19 +185,6 @@
       "estados": 20,
       "tipo": "rangos (Spearman)",
       "p": 9.76090379436755e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.946,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.881000539095663e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -359,6 +359,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.924,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 8.533188772262128e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -432,19 +445,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 8.472337533120666e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.915,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6244228107482293e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
