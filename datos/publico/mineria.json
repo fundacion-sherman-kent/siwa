@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-18T23:24:34+00:00",
-  "medidas_con_suficientes_casos": 207,
-  "pares_probados": 21321,
+  "corrida": "2026-09-19T01:25:10+00:00",
+  "medidas_con_suficientes_casos": 206,
+  "pares_probados": 21115,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 21.321 pares y el umbral de siempre, alrededor de 1.066 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4035,
-    "de_ellos_son_parentescos": 413
+    "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3961,
+    "de_ellos_son_parentescos": 412
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3622,
+  "pistas_totales": 3549,
   "anomalias_totales": 382,
   "pistas": [
     {
@@ -190,6 +190,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.944,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.110712149792282e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -237,19 +250,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 5.732099141718714e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.936,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.0683284698207898e-20,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -489,6 +489,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.91,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.129934116101513e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -671,19 +684,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.894,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.719876507306262e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:casos_por_unidad",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -692,19 +692,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.2609870139890335e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "reservas_internacionales",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.894,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 7.001498537959264e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -724,13 +711,13 @@
     },
     {
       "a": "ciber:mediciones",
-      "b": "poblacion",
+      "b": "reservas_internacionales",
       "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Población total",
-      "coeficiente": 0.889,
-      "estados": 33,
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.891,
+      "estados": 30,
       "tipo": "rangos (Spearman)",
-      "p": 8.74850746266937e-15,
+      "p": 1.2831438600856023e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +783,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 2.220061914883335e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "poblacion",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Población total",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.885,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 3.565480405450303e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
