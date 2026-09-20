@@ -52,6 +52,16 @@ jobs:
       - name: Linter — reporte completo (informativo)
         run: ruff check --exit-zero .
 
+      # ANÁLISIS ESTÁTICO DE SEGURIDAD (Bandit). Busca vulnerabilidades comunes en
+      # el código Python (uso inseguro de subprocess, deserialización, etc.).
+      # Informativo: reporta pero no frena la corrida, porque la superficie de
+      # ataque es acotada (sitio estático, sin entrada de usuario, biblioteca
+      # estándar) y no queremos romper el build por avisos de bajo riesgo.
+      - name: Análisis estático de seguridad (Bandit)
+        run: |
+          pip install bandit
+          bandit -r colectores herramientas -ll --exit-zero
+
       # Los tests usan solo biblioteca estándar; no hace falta instalar nada más.
       - name: Tests
         run: python -m unittest discover -s tests -v

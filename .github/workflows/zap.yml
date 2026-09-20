@@ -1,0 +1,34 @@
+# ANÁLISIS DINÁMICO DE SEGURIDAD — escaneo del sitio en ejecución (OWASP ZAP).
+#
+# POR QUÉ EXISTE
+# El análisis estático (ruff, Bandit) mira el código quieto; este mira el SITIO
+# CORRIENDO. OWASP ZAP hace un escaneo pasivo del sitio publicado y avisa de
+# problemas observables en tiempo de ejecución (cabeceras de seguridad ausentes,
+# contenido mixto, etc.). Es una de las buenas prácticas de seguridad de la OpenSSF.
+#
+# Corre una vez por mes y a pedido. Es INFORMATIVO: reporta pero no frena nada
+# —el sitio es estático, sin cuentas ni entrada de usuario, así que la superficie
+# de ataque es acotada—; el reporte queda como artefacto de la corrida.
+
+name: Escaneo dinámico (OWASP ZAP)
+
+on:
+  schedule:
+    - cron: "30 5 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  zap_baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Escaneo baseline del sitio publicado
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: "https://siwa.fundacionkent.org"
+          allow_issue_writing: false
+          fail_action: false
+          cmd_options: "-a"
