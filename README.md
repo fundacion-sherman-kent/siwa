@@ -44,6 +44,16 @@ lo que no falla solo en rojo, no se sostiene.**
 Este registro **no emite juicios**. Publica hechos calificados. El análisis, con
 su confianza y su probabilidad, sale por otro camino y con firma.
 
+## Licencia
+
+- **Datos** (`datos/publico/`): **Creative Commons Atribución 4.0 (CC BY 4.0)** —
+  cubre el aporte de la Fundación (recolección, calificación, vacíos). Ver
+  [`LICENSE-DATOS.md`](LICENSE-DATOS.md).
+- **Código** (colectores, sitio, herramientas): **MIT**. Ver [`LICENSE`](LICENSE).
+- Los **datos de base** conservan la licencia de su fuente; cuando hay condiciones
+  adicionales, se declaran por dato en el campo `restriccion_de_uso`.
+- Cómo citar: «SIWA — Fundación Sherman Kent», enlazando a https://siwa.fundacionkent.org.
+
 ## Reglas que el código hace cumplir
 
 1. **No se simulan datos.** Si una fuente falla, el colector termina con error,
