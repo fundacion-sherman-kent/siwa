@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-20T09:25:11+00:00",
+  "corrida": "2026-09-20T10:25:54+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3948,
+    "sobreviven": 3960,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3536,
+  "pistas_totales": 3548,
   "anomalias_totales": 380,
   "pistas": [
     {
@@ -203,6 +203,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.939,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.368696067025692e-21,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -220,10 +233,10 @@
       "b": "perdida_bosque",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.937,
+      "coeficiente": 0.938,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 7.321950143578488e-21,
+      "p": 3.905014170159192e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -250,19 +263,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 1.0176881835958401e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.934,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.2392807023044776e-20,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
