@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "censo_subnacional",
     "capa": "publico",
-    "obtenido_en": "2026-09-19T18:01:50+00:00",
+    "obtenido_en": "2026-09-20T05:58:33+00:00",
     "fuente": {
       "nombre": "Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas",
       "url": "https://ucdp.uu.se/downloads/"
@@ -15,16 +15,15 @@
     },
     "vacios_declarados": [
       "ESTO NO ES UNA CAPA DE DATOS: es un censo de lo que se podría llegar a publicar por unidad. Que un Estado figure con eventos de conflicto por provincia NO lo convierte en un Estado con estadística de seguridad subnacional. Son cosas distintas y confundirlas sería el error que este registro evita.",
-      "EL UMBRAL SE MIDE CONTRA LAS 8 CATEGORÍAS del eje Seguridad tal como el lector las ve: más del 60 % son 5, y el 70 % de los Estados son 24. Hoy llegan 0.",
+      "EL UMBRAL SE MIDE CONTRA LAS 8 CATEGORÍAS del eje Seguridad tal como el lector las ve: más del 60 % son 5, y el 70 % de los Estados son 24. Hoy llegan 1.",
       "UN CERO DE UPSALA NO ES AUSENCIA DE VIOLENCIA. Esa base registra violencia ORGANIZADA por encima de un umbral de muertes: un Estado sin eventos puede tener mucha violencia común y ningún conflicto armado. Leerlo como «país en paz» sería un error grave.",
       "Las fuentes nacionales se cuentan una por una y a mano porque son acuerdos distintos con cada Estado: no hay una interfaz regional que las junte, y esa ausencia es en sí misma un dato sobre la región.",
       "COLOMBIA SE MIDIÓ, NO SE RECOLECTÓ. De cada conjunto del portal de datos abiertos se consultó solo cuántos departamentos trae; ninguna cifra de delitos entra a este archivo. Una categoría cuenta si algún conjunto la cubre en 24 de las 33 unidades o más.",
-      "LOS CONJUNTOS DE COLOMBIA TRAEN 88 CÓDIGOS QUE NO SON DEPARTAMENTOS —como «1111»—. No se cuentan como unidad. Antes de publicar cualquier cifra habría que averiguar qué registran.",
+      "LOS CONJUNTOS DE COLOMBIA TRAEN 89 CÓDIGOS QUE NO SON DEPARTAMENTOS —como «1111»—. No se cuentan como unidad. Antes de publicar cualquier cifra habría que averiguar qué registran.",
       "TRINIDAD Y TOBAGO SE MIDE POR DIVISIÓN POLICIAL, NO POR UNIDAD ADMINISTRATIVA. El Servicio de Policía publica 9 divisiones, que no coinciden con las corporaciones regionales del país. Antes de publicar habría que declararlo en cada cifra.",
       "BOLIVIA SE MIDIÓ SOBRE UN CUADRO DEL INE: se comprobó que nombra los departamentos y el homicidio, no se leyó fila por fila. Los cuadros de trata, droga incautada y tránsito por departamento existen pero no se abrieron: no se cuentan.",
       "NO ENTRA AL CENSO «affected-people/refugees-persons-of-concern»: se publica por país de origen y de asilo, sin unidad de primer orden. Estaba en la primera versión y fue un error de concepto: un tema sin unidad no puede medir disponibilidad por unidad.",
       "NO ENTRA AL CENSO «affected-people/returnees»: se publica por país de origen y de asilo, sin unidad de primer orden. Estaba en la primera versión y fue un error de concepto: un tema sin unidad no puede medir disponibilidad por unidad.",
-      "Colombia · Unidad para las Víctimas — desplazamiento: TimeoutError. Queda SIN MIRAR.",
       "coordination-context/conflict-events: HTTPError 403: {\"error\":\"Invalid app identifier\"}",
       "affected-people/idps: HTTPError 403: {\"error\":\"Invalid app identifier\"}"
     ],
@@ -46,10 +45,11 @@
       "categorias_alcanzables": [
         "Flujos ilícitos",
         "Grupos y territorio",
+        "Personas en movimiento",
         "Terrorismo",
         "Violencia y víctimas"
       ],
-      "cuantas": 4,
+      "cuantas": 5,
       "de_upsala": {
         "eventos": 16481,
         "con_unidad": 16260,
@@ -67,6 +67,7 @@
         "Grupos y territorio · Ministerio de Defensa — extorsión (33 de 33 unidades)",
         "Terrorismo · Ministerio de Defensa — terrorismo (32 de 33 unidades)",
         "Terrorismo · Policía Nacional — terrorismo (31 de 33 unidades)",
+        "Personas en movimiento · Unidad para las Víctimas — desplazamiento (33 de 33 unidades)",
         "Violencia y víctimas · Ministerio de Defensa Nacional — conjunto «HOMICIDIO» en datos.gov.co (33 departamentos)"
       ],
       "de_su_propio_estado": {
@@ -621,9 +622,11 @@
   "umbral": {
     "categorias_minimas": 5,
     "estados_minimos": 24,
-    "estados_que_llegan": 0,
+    "estados_que_llegan": 1,
     "se_cumple": false,
-    "quienes_llegan": []
+    "quienes_llegan": [
+      "Colombia"
+    ]
   },
   "por_tema_humanitario": {},
   "colombia_por_conjunto": [
@@ -707,6 +710,15 @@
       "de": 33,
       "codigos_que_no_son_departamento": 0,
       "por_nombre": true
+    },
+    {
+      "conjunto": "krnc-8azs",
+      "categoria": "Personas en movimiento",
+      "fuente": "Unidad para las Víctimas — desplazamiento",
+      "unidades": 33,
+      "de": 33,
+      "codigos_que_no_son_departamento": 1,
+      "por_nombre": false
     }
   ],
   "medidos_por_archivo": {
