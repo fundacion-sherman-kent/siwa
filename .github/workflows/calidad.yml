@@ -1,0 +1,57 @@
+# CONTROL DE CALIDAD — linter y tests en cada cambio.
+#
+# POR QUÉ EXISTE
+# Cumple dos buenas prácticas que el badge OpenSSF Best Practices pide y que, más
+# allá del sello, mejoran el repositorio: un LINTER que avisa de errores reales
+# (variables sin definir, imports rotos, sintaxis) y una SUITE DE TESTS que
+# comprueba que el registro publicado esté sano (JSON bien formado, con su
+# procedencia y sus licencias declaradas).
+#
+# No publica nada ni toca el sitio: solo lee el repositorio y falla en rojo si
+# algo está mal. Corre en cada push y en cada pull request.
+
+name: Calidad
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "colectores/**"
+      - "herramientas/**"
+      - "tests/**"
+      - ".github/workflows/calidad.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calidad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar el linter
+        run: pip install ruff
+
+      # Falla solo ante ERRORES reales (sintaxis, nombres sin definir, imports
+      # rotos): el conjunto crítico de pyflakes. Así el aviso es útil y la corrida
+      # no se pone en rojo por cuestiones de estilo.
+      - name: Linter — errores reales
+        run: ruff check --output-format=github --select=E9,F63,F7,F82 .
+
+      # Reporte de estilo completo, informativo: avisa pero no frena la corrida.
+      - name: Linter — reporte completo (informativo)
+        run: ruff check --exit-zero .
+
+      # Los tests usan solo biblioteca estándar; no hace falta instalar nada más.
+      - name: Tests
+        run: python -m unittest discover -s tests -v
