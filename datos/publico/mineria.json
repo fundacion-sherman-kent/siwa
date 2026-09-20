@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-20T08:27:00+00:00",
+  "corrida": "2026-09-20T09:25:11+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3940,
+    "sobreviven": 3948,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3528,
+  "pistas_totales": 3536,
   "anomalias_totales": 380,
   "pistas": [
     {
@@ -216,6 +216,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.937,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 7.321950143578488e-21,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -243,26 +256,13 @@
     },
     {
       "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.934,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.9535070069743728e-20,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
       "b": "superficie",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.932,
+      "coeficiente": 0.934,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.9883163069969204e-20,
+      "p": 2.2392807023044776e-20,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -541,6 +541,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.903,
+      "estados": 23,
+      "tipo": "rangos (Spearman)",
+      "p": 2.92384954678958e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Estado de derecho",
@@ -705,19 +718,6 @@
       "estados": 23,
       "tipo": "rangos (Spearman)",
       "p": 1.7252426034401567e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.89,
-      "estados": 23,
-      "tipo": "rangos (Spearman)",
-      "p": 1.9240463635928416e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
