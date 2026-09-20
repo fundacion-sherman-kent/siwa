@@ -3,6 +3,13 @@
 **Registro de situación de América Latina y el Caribe.**
 Fundación Sherman Kent · Oficina de Generación de Inteligencia.
 
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/14737/badge)](https://www.bestpractices.dev/projects/14737)
+[![ODI Open Data Certificate](https://img.shields.io/badge/ODI%20Open%20Data%20Certificate-Silver-9e9e9e)](https://certificates.theodi.org/datasets/6ab05790309dbc520e929c91/certificates/6ab057cc309dbc520e929ca1)
+[![Código: MIT](https://img.shields.io/badge/c%C3%B3digo-MIT-green)](LICENSE)
+[![Datos: CC BY 4.0](https://img.shields.io/badge/datos-CC%20BY%204.0-blue)](LICENSE-DATOS.md)
+
+*English: [`README.en.md`](README.en.md).*
+
 Datos públicos de los 33 Estados del padrón, recolectados de forma automática y
 calificados con doctrina de inteligencia: cada cifra sale con su fuente, su
 fecha de referencia, su calificación de fiabilidad y su estado de corroboración.
