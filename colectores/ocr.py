@@ -35,6 +35,16 @@ from __future__ import annotations
 import io
 import re
 import urllib.request
+from typing import TYPE_CHECKING
+
+# Pillow es OPCIONAL en tiempo de ejecución (ver disponible() más abajo): no se
+# importa acá arriba. Este import solo corre para el chequeo de tipos -TYPE_CHECKING
+# es False en tiempo de ejecución- y le da nombre a "Image" para la anotación de
+# _preprocesar(), que si no queda como F821 "Undefined name" en el linter aunque el
+# código funcione bien: la anotación es una cadena (PEP 563) y nunca se evaluó en
+# la corrida, pero el linter sí la revisa contra los nombres del módulo.
+if TYPE_CHECKING:
+    from PIL import Image  # noqa: F401 — solo para el tipo de retorno de abajo
 
 # Español + inglés: la mayoría de las infografías de la región están en uno u otro.
 IDIOMAS = "spa+eng"
