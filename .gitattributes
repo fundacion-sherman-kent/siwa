@@ -21,6 +21,13 @@ novedades.xml merge=ours
 novedades/** merge=ours
 # Las tarjetas por tema que escribe Pantallas: conflicto real el 14/9/2026.
 sitio/t/** merge=ours
+# La tarjeta de compartir y sus variantes por pais/zona (21/9/2026): las
+# reescribe entera herramientas/tarjeta-compartir.py, ahora tambien desde el
+# robot. Mismo criterio que sitio/t/**: si dos corridas coinciden, se prefiere
+# la version de quien fusiona y la corrida siguiente reconcilia.
+sitio/marca/siwa-compartir.png merge=ours
+sitio/marca/siwa-compartir.json merge=ours
+sitio/marca/tarjetas/** merge=ours
 
 # NO entran acá `sitio/index.html`, el `index.html` de la raíz ni el `README.md`:
 # son escritos a mano con partes selladas por una herramienta, y descartar en

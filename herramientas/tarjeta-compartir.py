@@ -1,32 +1,54 @@
 """Genera la tarjeta que se ve cuando alguien comparte SIWA.
 
-NO forma parte del robot. Es una herramienta local que se corre a mano cuando
-cambian la identidad o las cifras, y deja el resultado en
-`sitio/marca/siwa-compartir.png`. El sitio publicado sigue sin dependencias: lo
-único que viaja es el PNG ya dibujado.
+Corre SOLA, dentro del robot (`.github/workflows/recolectar.yml`, paso
+"Redibujar la tarjeta de compartir"), después de que el catálogo público
+escribe `cuantos_portada` en `datos/publico/indice.json`. También se puede
+correr a mano, por ejemplo después de tocar la identidad visual:
 
     python herramientas/tarjeta-compartir.py
 
-POR QUÉ SE REHÍZO
------------------
-La tarjeta anterior decía **«71 indicadores · 15 fuentes»** cuando ya eran 69 y
-27. No era un error de cálculo —la herramienta siempre sacó las cifras de los
-datos— sino de **cadencia**: se dibujó una vez y nadie volvió a correrla, porque
-está fuera del robot. Y es la primera cosa que ve quien recibe el enlace.
+Deja el resultado en `sitio/marca/siwa-compartir.png` (y una tarjeta por país
+y por zona en `sitio/marca/tarjetas/`). El sitio publicado sigue sin
+dependencias en tiempo de lectura: lo único que viaja es el PNG ya dibujado.
 
-Es el mismo problema que el de la portada, con un agravante: la portada la
-recalcula el robot en cada corrida; **una imagen no puede recalcularse sin
-Pillow, que el robot no tiene**. La solución no es meter la dependencia en el
-robot: es dejar al lado del PNG un archivo con las cifras que se usaron para
-dibujarlo, de modo que el sellador —que sí corre siempre y solo necesita la
-biblioteca estándar— **compare y avise cuando la tarjeta quedó vieja**.
+POR QUÉ SE REHÍZO (2/9/2026) Y POR QUÉ SE VOLVIÓ A TOCAR (21/9/2026)
+------------------------------------------------------------------------
+La tarjeta original decía **«71 indicadores · 15 fuentes»** cuando ya eran 69 y
+27. No era un error de cálculo —la herramienta siempre sacó las cifras de los
+datos— sino de **cadencia**: se dibujaba una vez y nadie la volvía a correr,
+porque vivía fuera del robot y había que acordarse. Y es la primera cosa que
+ve quien recibe el enlace.
+
+La primera corrección (2/9/2026) dejó el `.png` a mano pero agregó un testigo
+(`siwa-compartir.json`) para que `sellar-portada.py` -que sí corre siempre y
+solo necesita la biblioteca estándar- avisara cuando la tarjeta había quedado
+vieja. Fue una mejora a medias: avisaba, pero no se redibujaba sola, y para el
+21/9/2026 la tarjeta seguía diciendo **174 indicadores · 60 fuentes** con el
+registro ya en 237 y 73 -el aviso quedó sonando en los logs del robot durante
+semanas y nadie lo redibujó a mano-.
+
+La segunda corrección (21/9/2026) invierte esa decisión: Pillow **sí** entra al
+robot, pero SOLO en el paso que dibuja la tarjeta, no en el resto -es el mismo
+patrón que ya usan `sipri.yml` y `wjp.yml` para sus propias dependencias sueltas
+(`openpyxl`, `pypdf`, etc.): un `pip install` de una línea, en el único paso
+que la necesita, y nada más del robot pasa a depender de ella. El testigo
+(`siwa-compartir.json`) se conserva: sigue sirviendo para quien la corre a mano
+y para que `sellar-portada.py` -que corre ANTES, sin Pillow- detecte una
+tarjeta vieja si por lo que sea el paso del robot no llegó a correr.
 
 LAS CIFRAS SALEN DE UN SOLO LUGAR
 ---------------------------------
-Antes la tarjeta contaba por su cuenta y el sellador de la portada por la suya.
-Coincidían, pero por casualidad: dos recuentos independientes de lo mismo se
-separan tarde o temprano, y entonces la tarjeta diría una cosa y la página otra.
-Acá se importa el recuento del sellador. **Una sola fuente de verdad.**
+Antes la tarjeta contaba por su cuenta, y después importó el cálculo de
+`sellar-portada.py` -que a su vez lo reháce por su cuenta, leyendo archivo por
+archivo-. Coincidían, pero eran dos implementaciones separadas del mismo
+número: exactamente el tipo de duplicación que esta casa ya pagó (es la razon
+por la que esta herramienta se rehizo la primera vez, ver arriba). Desde el
+21/9/2026 hay un lugar publicado y único para este número:
+`datos/publico/indice.json` -> `cuantos_portada`, que escribe
+`herramientas/indice-datos.py`. Esta herramienta LEE ESE CAMPO, no lo recalcula.
+No puede leerlo de `sellar-portada.py` -que corre ANTES que `indice-datos.py`
+en el robot, para tener margen de sellar el HTML antes del último generador- así
+que esta sí tiene que ir DESPUÉS de él (ver el paso nuevo en `recolectar.yml`).
 
 LO QUE SE CORRIGIÓ DEL DIBUJO
 -----------------------------
@@ -72,12 +94,30 @@ MARGEN = 76
 
 
 def _cifras() -> dict:
-    """Las mismas que sella la portada. No se cuenta dos veces lo mismo."""
-    ruta = RAIZ / "herramientas" / "sellar-portada.py"
-    spec = importlib.util.spec_from_file_location("sellar", ruta)
-    modulo = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(modulo)
-    return modulo._cifras()
+    """Las cifras publicadas de la portada, LEÍDAS, no recalculadas.
+
+    Única fuente de verdad: `datos/publico/indice.json` -> `cuantos_portada`,
+    que escribe `herramientas/indice-datos.py` en cada corrida del robot (el
+    último generador, para no anunciar el número de la corrida anterior). Antes
+    esta función importaba y ejecutaba `sellar-portada.py` para que recontara los
+    archivos por su cuenta: dos cálculos separados del mismo número, que es
+    justo el error que obligó a reescribir esta herramienta la primera vez.
+    """
+    indice = RAIZ / "datos" / "publico" / "indice.json"
+    try:
+        datos = json.loads(indice.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        raise SystemExit(
+            f"No existe {indice.relative_to(RAIZ)}. Corré antes "
+            "herramientas/indice-datos.py (el robot lo hace solo, en cada pasada)."
+        )
+    c = datos.get("cuantos_portada")
+    if not c or not all(k in c for k in ("estados", "indicadores", "fuentes")):
+        raise SystemExit(
+            f"{indice.relative_to(RAIZ)} no tiene 'cuantos_portada' completo. "
+            "Corré antes herramientas/indice-datos.py."
+        )
+    return {"estados": c["estados"], "indicadores": c["indicadores"], "fuentes": c["fuentes"]}
 
 
 def _letra(tamanio: int, peso: float = 400.0) -> ImageFont.FreeTypeFont:
