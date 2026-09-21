@@ -77,6 +77,30 @@ NO_SON_FUENTES = {
     "unidades.json": "SEGUNDA ETAPA: el padrón de unidades subnacionales",
     "gdl.json": "SEGUNDA ETAPA: subnacional, no publicada",
     "hapi.json": "SEGUNDA ETAPA: subnacional, no publicada",
+    "subnacional_vigia.json": "es un CONTROL interno del robot: mide el reintento "
+                              "sostenido de fuentes subnacionales, no una fuente sobre "
+                              "el mundo (mismo criterio que auditoria.json y "
+                              "reloj-actualidad.json)",
+    # Las cuatro capas subnacionales SI se ven, pero en sitio/subnacional.html,
+    # no en sitio/index.html: este control solo lee index.html (ver docstring),
+    # asi que sin esta exclusion las marcaria como no encontrables aunque el
+    # lector ya puede verlas. Ampliar el control para que tambien escanee
+    # subnacional.html no es un cambio declarativo -- esa pagina arma sus
+    # fuentes con un array FUENTES=[{arch:...}] totalmente distinto de
+    # FUENTES_DEL_REGISTRO/almacen.X que este control sabe leer, y escribirle
+    # un segundo parser es desarrollo, no una exclusion de bajo riesgo. Se
+    # opta por declarar la exclusion (21/9/2026); si mas adelante se decide
+    # unificar el control sobre las dos paginas, es tarea aparte.
+    "subnacional_homicidios.json": "visible en subnacional.html (capa preliminar), "
+                                   "no en index.html, que es lo unico que este control lee",
+    "subnacional_robos.json": "visible en subnacional.html (capa preliminar), "
+                              "no en index.html, que es lo unico que este control lee",
+    "subnacional_acled.json": "visible en subnacional.html (capa preliminar), "
+                              "no en index.html, que es lo unico que este control lee",
+    "subnacional_focos.json": "visible en subnacional.html (capa preliminar), "
+                              "no en index.html, que es lo unico que este control lee",
+    "pdh_guatemala_subnacional.json": "prototipo subnacional, oculto por decision de "
+                                      "Direccion",
 }
 
 
