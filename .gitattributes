@@ -28,6 +28,14 @@ sitio/t/** merge=ours
 sitio/marca/siwa-compartir.png merge=ours
 sitio/marca/siwa-compartir.json merge=ours
 sitio/marca/tarjetas/** merge=ours
+# El listado de huellas SHA-256 de todo lo publicado: lo reescribe entero
+# indice-datos.py en cada corrida (no es .json, asi que ninguna regla de
+# arriba lo cubria). Ese agujero es la causa confirmada del robot caido desde
+# hace unos 5 dias: el `git push` se rechaza porque main avanzo, y el
+# `git pull --no-rebase` de reintento choca en este archivo con
+# "CONFLICT (content)" y aborta la corrida (diagnosticado en vivo el
+# 21/9/2026 sobre el log de recolectar.yml).
+datos/publico/checksums.txt merge=ours
 
 # NO entran acá `sitio/index.html`, el `index.html` de la raíz ni el `README.md`:
 # son escritos a mano con partes selladas por una herramienta, y descartar en
