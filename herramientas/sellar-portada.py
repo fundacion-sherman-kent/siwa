@@ -33,6 +33,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
+
+sys.path.insert(0, str(RAIZ / "colectores"))
+import comun  # noqa: E402 — TESTIGOS: los archivos de control, no de datos
+
 SITIO = RAIZ / "sitio" / "index.html"
 # La portada de la raiz es la que recibe a quien entra por la direccion corta, y
 # tiene las MISMAS frases. Quedo con las cifras viejas la primera vez justamente
@@ -86,14 +90,55 @@ def _publicados() -> list:
     return [p for p in todos if p.name not in fuera]
 
 
+# La misma lista se IMPORTA de indice-datos.py, y no se copia (ver más abajo el
+# mismo criterio con lista-de-fuentes.py): dos copias de qué colector cuenta
+# como indicador comparable divergen el día que entra uno nuevo, que es
+# exactamente el error que esta herramienta existe para no repetir.
+#
+# HALLAZGO 21/9/2026: esta herramienta YA calculaba «indicadores» sumando el
+# largo de «indicadores» de CADA archivo publicado, sin distinguir un
+# indicador comparable (homicidios, inflación) de un acto de auditoría interno
+# (archivo, explorador, contratacion) o de la capa subnacional. Por eso selló
+# «186 indicadores» con datos de HOY, no con datos viejos: el número estaba al
+# día pero la definición era la que no correspondía. Se corrige acá, en el
+# mismo lugar donde vivía el error, en vez de sumar un cálculo nuevo aparte
+# que esta herramienta iba a seguir contradiciendo cada hora.
+def _colectores_no_indicador() -> set:
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "indice_datos", RAIZ / "herramientas" / "indice-datos.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m.EXCLUIDOS_DE_PORTADA
+
+
 def _cifras() -> dict:
+    no_indicador = _colectores_no_indicador()
     indicadores = 0
+    urls_fuente = set()
     for archivo in _publicados():
+        # Los TESTIGOS DE CONTROL (auditoria, reloj-actualidad, pantallas,
+        # mineria, segunda_fuente, el propio indice) no son conjuntos de datos:
+        # no declaran «colector» y por eso, antes de este chequeo, cada uno
+        # sumaba 1 indicador fantasma. indice-datos.py ya los excluye por la
+        # misma razon; es la misma lista, importada, no copiada.
+        if archivo.name in comun.TESTIGOS:
+            continue
         try:
             d = json.loads(archivo.read_text(encoding="utf-8"))
         except Exception:  # noqa: BLE001 — un archivo ilegible no debe sellar mal
             continue
-        indicadores += len(d.get("indicadores") or [])
+        proc = d.get("procedencia") or {}
+        colector = proc.get("colector")
+        if colector not in no_indicador:
+            # «catalogo» es la misma cosa que «indicadores» con otro nombre:
+            # crimen_organizado.json declara sus 36 items ahi (indice-datos.py
+            # ya hace este mismo respaldo al armar el catalogo).
+            lista = d.get("indicadores") or d.get("catalogo") or []
+            indicadores += len(lista) if isinstance(lista, list) and lista else 1
+        url = (proc.get("fuente") or {}).get("url")
+        if url:
+            urls_fuente.add(url)
 
     html = SITIO.read_text(encoding="utf-8")
     lista = re.search(r"const FUENTES_DEL_REGISTRO = \[(.*?)\];", html, re.S)
@@ -133,14 +178,21 @@ def _cifras() -> dict:
         fuente = (d.get("procedencia") or {}).get("fuente")
         if fuente:
             nombres.add(fuente if isinstance(fuente, str) else fuente.get("nombre", ""))
-    fuentes = len({n for n in nombres if n})
+    fuentes_nombradas = len({n for n in nombres if n})
     renglones = lista.group(1).count("['")
-    if renglones != fuentes:
+    if renglones != fuentes_nombradas:
         print(f"[sellar-portada] la lista de la página tiene {renglones} renglones y "
-              f"hay {fuentes} fuentes con dato: se sella con {fuentes}.", file=sys.stderr)
+              f"hay {fuentes_nombradas} fuentes con dato (por nombre): se sella con "
+              f"{fuentes_nombradas} en ese control.", file=sys.stderr)
 
-    estados = json.loads((RAIZ / "colectores" / "m49.json").read_text(encoding="utf-8")) \
-        if (RAIZ / "colectores" / "m49.json").exists() else None
+    # LA CIFRA QUE SE SELLA EN LA PORTADA («X fuentes») usa la definición
+    # aprobada por la Dirección el 21/9/2026: URLs de fuente DISTINTAS, no
+    # nombres distintos —dos nombres parecidos pueden ser dos URLs, o un mismo
+    # productor puede repetir nombre en dos archivos—. Es la MISMA cuenta que
+    # indice.json → cuantos_portada.fuentes, para que la portada y el catálogo
+    # digan siempre el mismo número.
+    fuentes = len(urls_fuente)
+
     return {"indicadores": indicadores, "fuentes": fuentes, "estados": 33}
 
 
@@ -204,7 +256,11 @@ def _sellarArchivo(ruta: Path, c: dict) -> tuple:
         sinTocar.append("descripción de los datos estructurados")
 
     if html != original:
-        ruta.write_text(html, encoding="utf-8")
+        # newline="" preserva el fin de linea tal cual esta en la cadena
+        # (LF, como escribe el resto del registro). Sin esto, en Windows
+        # write_text() convierte TODO el archivo a CRLF y el commit siguiente
+        # muestra miles de lineas cambiadas por un reemplazo de cuatro cifras.
+        ruta.write_text(html, encoding="utf-8", newline="")
     return cambios, sinTocar
 
 
@@ -217,7 +273,7 @@ def _sellarMapa() -> int:
     nuevo, n = re.subn(r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>",
                        f"<lastmod>{hoy}</lastmod>", texto)
     if n and nuevo != texto:
-        MAPA.write_text(nuevo, encoding="utf-8")
+        MAPA.write_text(nuevo, encoding="utf-8", newline="")
         print(f"[sellar-portada] sitemap.xml: {n} fechas puestas en {hoy}")
     return n
 
@@ -285,7 +341,7 @@ def _sellarLeeme() -> int:
     fin = texto.index(MARCA_FIN) + len(MARCA_FIN)
     nuevo = texto[:inicio] + "\n".join(cuerpo) + texto[fin:]
     if nuevo != texto:
-        LEEME.write_text(nuevo, encoding="utf-8")
+        LEEME.write_text(nuevo, encoding="utf-8", newline="")
         print(f"[sellar-portada] README.md: tabla rehecha con {distintas} fuentes "
               f"en {len(filas)} archivos")
     return len(filas)
@@ -309,7 +365,7 @@ def _versionarTarjeta(ruta: Path, c: dict) -> int:
         r'(siwa-compartir\.png)(\?v=[0-9-]+)?"',
         rf'\g<1>?v={version}"', texto)
     if n and nuevo != texto:
-        ruta.write_text(nuevo, encoding="utf-8")
+        ruta.write_text(nuevo, encoding="utf-8", newline="")
         print(f"[sellar-portada] {ruta.relative_to(RAIZ)}: tarjeta versionada como "
               f"v={version} "
               f"({n} direcciones)")

@@ -45,6 +45,7 @@ import puertas  # noqa: E402  — el estilo y la cabecera de la casa viven ahí
 
 sys.path.insert(0, str(RAIZ / "colectores"))
 import comun  # noqa: E402  — la lista de testigos, compartida con la auditoría
+import geo  # noqa: E402  — el padrón de 33 Estados, la misma fuente que usa la auditoría
 
 BASE = puertas.BASE
 esc = puertas.esc
@@ -186,13 +187,105 @@ def identificadores() -> dict:
     }
 
 
+# --------------------------------------------------- los totales de portada
+# La home de SIWA y la web de presentación mostraban «186 indicadores · 74
+# fuentes» escritos A MANO: no salían de ningún recorrido y no coincidían con
+# el catálogo (verificado en vivo el 21/9/2026). Esto los calcula, para que
+# nunca más haya que acordarse de actualizarlos.
+#
+# Fuentes = URLs de fuente distintas entre los conjuntos publicados.
+#
+# Indicadores = para cada conjunto: su «indicadores» declarado si es un
+# número; si no lo declara, 1 —una serie temática comparable— salvo que el
+# conjunto esté en EXCLUIDOS_DE_PORTADA, en cuyo caso vale 0 aunque declare un
+# número (ver nota debajo de la lista).
+#
+# La lista NO se adivinó desde afuera del catálogo: se armó leyendo el
+# propósito real de cada colector —su docstring y, para el Índice de
+# Opacidad, la lista ACTOS de indice_opacidad.py, que nombra sus propios
+# insumos—. Definición aprobada por la Dirección el 21/9/2026
+# (`productos/siwa-certificaciones/siwa-contadores-fix.md`).
+EXCLUIDOS_DE_PORTADA = {
+    # Herramientas y procesos de la propia Oficina: no miden al país, miden
+    # si una puerta responde, si algo se mencionó o si una fuente en prueba
+    # ya contesta. «copernicus» declara en su propio docstring que «no mira
+    # la imagen: dice que existe» — es disponibilidad, no una medición.
+    "archivo", "cobertura", "consulta", "explorador", "memoria", "sondeo",
+    "copernicus",
+    # Los seis actos del Índice de Opacidad (indice_opacidad.py, lista ACTOS):
+    # "explorador" y "archivo" ya están arriba; "armas" y "cites" SÍ quedan
+    # afuera de esta lista porque además de alimentar el acto son, ellos
+    # mismos, conjuntos sustantivos con cifra propia (comercio de armas,
+    # comercio de especies) — «contratacion» y «oficiales» no tienen cifra
+    # propia comparable, son el insumo del acto y nada más.
+    "contratacion", "oficiales",
+    # La materia Opacidad entera: es un puntaje de auditoría de LO QUE YA
+    # SE CONTÓ arriba (los actos), no un indicador sustantivo adicional, y
+    # su serie histórica es la misma cosa en el tiempo.
+    "opacidad", "opacidad-historia", "indice_opacidad",
+    # Variable declarada por su propio colector como "de la Oficina, no de
+    # la fuente que la alimenta" (brecha.py).
+    "brecha",
+    # Serie histórica de un indicador que ya se cuenta una vez por su
+    # archivo de corte más reciente (desplazamiento.py escribe los dos).
+    "desplazamiento-serie",
+    # El propio colector declara que NO reemplaza a la serie comparable y
+    # que la acompaña porque no es comparable entre países (distinto
+    # rezago y método en cada Estado).
+    "reciente_oficial",
+    # Registros administrativos de cumplimiento, no una situación del país.
+    "contrataciones_abiertas", "censo_subnacional", "unidades",
+    # No son una fila por Estado con una medición del país: "redes" y
+    # "telegram" son un feed de circulación/menciones, "fundacion" es el
+    # propio catálogo de publicaciones de la Fundación.
+    "redes", "telegram", "fundacion",
+    # Capa subnacional: es la versión fina de un indicador de país que ya
+    # se cuenta arriba, o —"pdh_guatemala_subnacional" y
+    # "subnacional_santafe"— el cruce de una sola jurisdicción contra sí
+    # misma. Ninguno es comparable entre los 33 Estados.
+    "subnacional", "subnacional_acled", "subnacional_datos",
+    "subnacional_focos", "subnacional_homicidios", "subnacional_robos",
+    "subnacional_santafe", "subnacional_vigia", "pdh_guatemala_subnacional",
+}
+
+
+def _indicadores_de_portada(conj: dict) -> int:
+    if conj.get("colector") in EXCLUIDOS_DE_PORTADA:
+        return 0
+    if isinstance(conj.get("indicadores"), int):
+        return conj["indicadores"]
+    return 1  # serie temática de un indicador comparable, sin cifra declarada
+
+
+def totales_portada(conjuntos: list, generado: str) -> dict:
+    """Los tres números de portada, calculados por la máquina y no a mano.
+
+    ATENCIÓN — lo que este cálculo da hoy (21/9/2026) es más alto que el
+    rango de 65 a 70 que se anticipaba al aprobar la definición: contando
+    literalmente el «indicadores» que cada conjunto declara, cinco conjuntos
+    grandes (Banco Mundial 51, ONU-ODS 15, CEPAL 17, OWD 22, Índice de Crimen
+    Organizado 36) ya suman 141 por sí solos. Excluir la capa subnacional y
+    lo utilitario no podía bajar eso, porque esos conjuntos ya estaban en
+    null y sumaban 0 o 1 antes del arreglo. Se declara acá, no se ajusta a
+    ojo: la definición aprobada se aplicó literal y el número que sale es
+    este. Queda para que la Dirección lo confirme o pida otra unidad de
+    conteo (por conjunto en vez de por indicador declarado).
+    """
+    return {
+        "estados": len(geo.padron()),
+        "indicadores": sum(_indicadores_de_portada(c) for c in conjuntos),
+        "fuentes": len({c["url_fuente"] for c in conjuntos if c.get("url_fuente")}),
+        "generado": generado,
+    }
+
+
 def catalogo(conjuntos: list) -> dict:
     return {
         "registro": "SIWA — Reporte de situación de América Latina y el Caribe",
         "de": "Fundación Sherman Kent, Oficina de Generación de Inteligencia",
         "sitio": BASE,
         "documentacion": f"{BASE}/datos/",
-        "generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "generado": (generado := datetime.now(timezone.utc).isoformat(timespec="seconds")),
         "como_usarlo": (
             "Cada conjunto se descarga de su «url» y responde JSON con cabeceras abiertas: "
             "se puede leer desde cualquier sitio, sin credencial y sin registrarse. Todos "
@@ -243,6 +336,9 @@ def catalogo(conjuntos: list) -> dict:
         },
         "conjuntos": conjuntos,
         "cuantos": len(conjuntos),
+        # Totales de portada — única fuente de verdad de los tres números que
+        # muestran la home de SIWA y la web de presentación. Ver totales_portada().
+        "cuantos_portada": totales_portada(conjuntos, generado),
     }
 
 
