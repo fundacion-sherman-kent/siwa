@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-21T00:35:44+00:00",
+  "corrida": "2026-09-21T01:26:11+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3975,
+    "sobreviven": 3972,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3564,
+  "pistas_totales": 3561,
   "anomalias_totales": 380,
   "pistas": [
     {
@@ -203,19 +203,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.941,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.229920457485607e-22,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -224,19 +211,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 4.4559050475569576e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.937,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.069426197263699e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -645,19 +619,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.895,
-      "estados": 23,
-      "tipo": "rangos (Spearman)",
-      "p": 9.806690741387899e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "democracia_electoral",
       "b": "indice_gobernanza",
       "rotulo_a": "Nivel democrático — democracia electoral",
@@ -796,6 +757,45 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 3.565480405450303e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "democracia_liberal",
+      "b": "estado_derecho_wjp",
+      "rotulo_a": "Democracia liberal — límites al poder",
+      "rotulo_b": "Estado de derecho (WJP)",
+      "coeficiente": 0.885,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 1.5695355100650316e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "uso_claude",
+      "b": "voz_rendicion",
+      "rotulo_a": "Intensidad de uso de Claude por habitante",
+      "rotulo_b": "Voz y rendición de cuentas",
+      "coeficiente": 0.884,
+      "estados": 19,
+      "tipo": "rangos (Spearman)",
+      "p": 2.4452722780373087e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.883,
+      "estados": 23,
+      "tipo": "rangos (Spearman)",
+      "p": 4.994041183349366e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
