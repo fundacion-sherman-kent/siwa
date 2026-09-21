@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "opacidad",
     "capa": "publico",
-    "obtenido_en": "2026-09-20T17:46:56+00:00",
+    "obtenido_en": "2026-09-21T05:49:19+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — Índice de Opacidad, edición cero",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#opacidad"
@@ -29,7 +29,9 @@
       "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
       "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
       "sitio": "https://siwa.fundacionkent.org/sitio/index.html",
-      "uso": "Acceso libre y gratuito. Se permite reproducir, redistribuir y derivar esta información citando la fuente de este modo: «SIWA, Fundación Sherman Kent». La recolección, la calificación de fuentes Y la declaración de vacíos son trabajo de la Fundación; los datos de base pertenecen a los productores citados en cada indicador.",
+      "uso": "Acceso libre y gratuito. El aporte de la Fundación —recolección, calificación de fuentes y declaración de vacíos— se publica bajo licencia Creative Commons Atribución 4.0 Internacional (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/. Se permite reproducir, redistribuir y derivar citando la fuente de este modo: «SIWA, Fundación Sherman Kent». Los datos de base pertenecen a los productores citados en cada indicador y conservan la licencia de su fuente; cuando una fuente impone condiciones adicionales, se declaran en «restriccion_de_uso».",
+      "licencia": "CC BY 4.0",
+      "licencia_url": "https://creativecommons.org/licenses/by/4.0/",
       "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
     }
   },
@@ -439,7 +441,7 @@
           "consulta": "https://www.datos.gov.co/api/catalog/v1?q=Solicitudes%20de%20acceso%20a%20la%20informaci%C3%B3n&limit=12",
           "http": 200,
           "devueltos": 12,
-          "pertinentes": 2,
+          "pertinentes": 1,
           "falla": null
         },
         {
@@ -455,7 +457,7 @@
           "consulta": "https://www.datos.gov.co/api/catalog/v1?q=solicitudes%20de%20informaci%C3%B3n%20publica&limit=12",
           "http": 200,
           "devueltos": 12,
-          "pertinentes": 1,
+          "pertinentes": 2,
           "falla": null
         }
       ]
@@ -570,10 +572,10 @@
         {
           "termino": "solicitudes de información publica",
           "consulta": "https://datos.gob.ar/api/3/action/package_search?q=solicitudes%20de%20informaci%C3%B3n%20publica&rows=12",
-          "http": 200,
-          "devueltos": 12,
-          "pertinentes": 5,
-          "falla": null
+          "http": null,
+          "devueltos": 0,
+          "pertinentes": 0,
+          "falla": "HTTPError"
         }
       ]
     },
@@ -611,9 +613,10 @@
     "sin_verificar": 28,
     "estados_del_padron": 33,
     "estados_con_portal_consultable": 9,
-    "consultado": "2026-09-20T17:46:56+00:00"
+    "consultado": "2026-09-21T05:49:19+00:00"
   },
   "caidas": [
+    "ARG: HTTPError",
     "PER: HTTPError",
     "PER: HTTPError",
     "PER: HTTPError",
