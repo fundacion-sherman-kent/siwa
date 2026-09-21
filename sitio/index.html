@@ -13071,7 +13071,7 @@
 
       const par = UTM_CAMPANA.find(([sel]) => a.closest(sel));
       u.searchParams.set('utm_source', 'siwa');
-      u.searchParams.set('utm_medium', 'registro');
+      u.searchParams.set('utm_medium', 'referral');
       u.searchParams.set('utm_campaign', par ? par[1] : 'registro');
       // El contenido es la RUTA de destino, que es estable: el rotulo del enlace
       // cambia con la edicion y ensuciaria la comparacion entre meses.
