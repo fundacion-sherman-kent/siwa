@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-21T19:44:45+00:00",
+  "corrida": "2026-09-21T20:26:27+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3977,
+    "sobreviven": 3935,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3566,
-  "anomalias_totales": 380,
+  "pistas_totales": 3524,
+  "anomalias_totales": 382,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -68,6 +68,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 9.606943935565834e-32,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "secundaria_cepal",
+      "b": "termina_secundaria",
+      "rotulo_a": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
+      "rotulo_b": "Terminan la secundaria",
+      "coeficiente": 0.973,
+      "estados": 17,
+      "tipo": "rangos (Spearman)",
+      "p": 9.639140440489106e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -184,7 +197,7 @@
       "coeficiente": 0.943,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.487101311474485e-22,
+      "p": 3.9840053308397474e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -224,6 +237,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 5.732099141718714e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.936,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 9.135717016059758e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -463,6 +489,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.91,
+      "estados": 21,
+      "tipo": "rangos (Spearman)",
+      "p": 9.201757483703283e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -632,6 +671,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.894,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.801072182687878e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:casos_por_unidad",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -640,45 +692,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.2609870139890335e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.893,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.807193686611284e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.892,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3133935714191985e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.89,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.483950400361353e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 24,
       "tipo": "rangos (Spearman)",
       "p": 1.5695355100650316e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "uso_claude",
-      "b": "voz_rendicion",
-      "rotulo_a": "Intensidad de uso de Claude por habitante",
-      "rotulo_b": "Voz y rendición de cuentas",
-      "coeficiente": 0.884,
-      "estados": 19,
-      "tipo": "rangos (Spearman)",
-      "p": 2.4452722780373087e-08,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
