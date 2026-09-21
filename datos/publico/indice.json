@@ -3,12 +3,68 @@
   "de": "Fundación Sherman Kent, Oficina de Generación de Inteligencia",
   "sitio": "https://siwa.fundacionkent.org",
   "documentacion": "https://siwa.fundacionkent.org/datos/",
-  "generado": "2026-09-21T03:27:26+00:00",
+  "generado": "2026-09-21T03:49:20+00:00",
   "como_usarlo": "Cada conjunto se descarga de su «url» y responde JSON con cabeceras abiertas: se puede leer desde cualquier sitio, sin credencial y sin registrarse. Todos traen el mismo bloque «procedencia» —fuente, url, calificación de Almirantazgo, fecha y vacíos declarados— y una lista «registros». Los campos de valor NO son los mismos en todos los conjuntos: cada uno declara acá los suyos en «campos_de_la_fila», y «por_estado» dice si la fila es un Estado identificado por su código ISO de tres letras.",
   "condicion": "Uso libre citando a la Fundación Sherman Kent y a la fuente original de cada dato, que viaja en el propio archivo. Los conjuntos con «restriccion_de_uso» llevan además la condición de su fuente, y esa condición manda.",
   "estabilidad": "Las direcciones no cambian y la forma del bloque de procedencia se mantiene. NO se promete que un indicador viva para siempre: si una fuente cierra, el indicador desaparece y este índice lo dirá con su ausencia.",
   "padron": "https://siwa.fundacionkent.org/sitio/geo/paises-alc.geojson",
   "novedades": "https://siwa.fundacionkent.org/novedades.xml",
+  "derechos": {
+    "titular_del_aporte": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+    "licencia": "CC BY 4.0",
+    "licencia_url": "https://creativecommons.org/licenses/by/4.0/",
+    "declaracion_de_derechos": "https://siwa.fundacionkent.org/sitio/licencia.html",
+    "citar_como": "SIWA, Fundación Sherman Kent",
+    "url_de_cita": "https://siwa.fundacionkent.org",
+    "contenido_de_los_datos": "Los valores del registro son hechos y cifras —tasas, recuentos, índices— sin derechos de autor sobre su contenido. El aporte de la Fundación (recolección, calificación y declaración de vacíos) va bajo CC BY 4.0. Los datos de base pertenecen a los productores citados en cada archivo y conservan la licencia de su fuente; cuando una fuente impone condiciones, viajan en «restriccion_de_uso» y esa condición manda."
+  },
+  "keywords": [
+    "América Latina",
+    "Caribe",
+    "datos abiertos",
+    "situación regional",
+    "seguridad",
+    "crimen organizado",
+    "homicidios",
+    "violencia",
+    "gobernanza",
+    "corrupción",
+    "derechos humanos",
+    "conflictos",
+    "desplazamiento",
+    "economía",
+    "inflación",
+    "comercio",
+    "energía",
+    "minería",
+    "salud",
+    "desastres",
+    "entorno digital",
+    "indicadores comparables"
+  ],
+  "identificadores": {
+    "esquema": "ISO 3166-1 alfa-3",
+    "que_identifica": "Cada Estado del padrón de 33 de América Latina y el Caribe.",
+    "campo": "iso",
+    "resolver_en": "https://siwa.fundacionkent.org/sitio/geo/paises-alc.geojson",
+    "nota": "El código de tres letras (p. ej. «ARG», «MEX») es estándar y estable; el padrón en GeoJSON lo resuelve a nombre y geometría, y es el mismo para todos los conjuntos que van por Estado."
+  },
+  "integridad": {
+    "que_es": "La huella SHA-256 de cada archivo publicado. Quien descarga un conjunto puede recalcular su huella y compararla con esta para confirmar que recibió exactamente lo que la casa publicó.",
+    "archivo": "https://siwa.fundacionkent.org/datos/publico/checksums.txt",
+    "algoritmo": "SHA-256",
+    "formato": "sha256sum (huella  nombre), verificable con herramientas comunes"
+  },
+  "herramientas": {
+    "que_es": "Los conjuntos son JSON plano servido con cabeceras abiertas: se leen con las librerías habituales de cualquier lenguaje, sin cliente propio.",
+    "donde": "https://siwa.fundacionkent.org/datos/",
+    "ejemplos": {
+      "Python": "requests + json (o pandas.read_json para tabla)",
+      "R": "jsonlite::fromJSON(url)",
+      "JavaScript": "fetch(url).then(r => r.json())",
+      "línea de comandos": "curl -s <url> | jq"
+    }
+  },
   "controles": {
     "que_son": "Mediciones que el registro hace de si mismo. No son datos de terceros: no tienen fuente ni calificacion, y por eso no cuentan como conjuntos. Se publican para que el objetivo declarado pueda controlarse desde afuera.",
     "donde": {
@@ -55,7 +111,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 21613
+      "licencia": "CC BY 4.0",
+      "bytes": 22320
     },
     {
       "archivo": "armas.json",
@@ -86,7 +143,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 38134
+      "licencia": "CC BY 4.0",
+      "bytes": 39669
     },
     {
       "archivo": "banco-mundial.json",
@@ -108,7 +166,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 1465251
+      "licencia": "CC BY 4.0",
+      "bytes": 1526578
     },
     {
       "archivo": "bce_ecuador.json",
@@ -129,7 +188,8 @@
       ],
       "vacios_declarados": 2,
       "restriccion_de_uso": null,
-      "bytes": 2876
+      "licencia": "CC BY 4.0",
+      "bytes": 2943
     },
     {
       "archivo": "bienes_culturales.json",
@@ -154,7 +214,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 10670
+      "licencia": "CC BY 4.0",
+      "bytes": 10987
     },
     {
       "archivo": "brecha.json",
@@ -176,7 +237,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 9000
+      "licencia": "CC BY 4.0",
+      "bytes": 9280
     },
     {
       "archivo": "bti.json",
@@ -197,7 +259,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 86980
+      "licencia": "CC BY 4.0",
+      "bytes": 90685
     },
     {
       "archivo": "censo_subnacional.json",
@@ -222,7 +285,8 @@
       ],
       "vacios_declarados": 12,
       "restriccion_de_uso": null,
-      "bytes": 23764
+      "licencia": "CC BY 4.0",
+      "bytes": 24527
     },
     {
       "archivo": "cepal.json",
@@ -244,7 +308,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 740627
+      "licencia": "CC BY 4.0",
+      "bytes": 774580
     },
     {
       "archivo": "chile_ine_seguridad.json",
@@ -265,7 +330,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 3643
+      "licencia": "CC BY 4.0",
+      "bytes": 3719
     },
     {
       "archivo": "ciber.json",
@@ -294,7 +360,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 15418
+      "licencia": "CC BY 4.0",
+      "bytes": 15930
     },
     {
       "archivo": "cites.json",
@@ -320,7 +387,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 15435
+      "licencia": "CC BY 4.0",
+      "bytes": 15862
     },
     {
       "archivo": "cobertura.json",
@@ -342,7 +410,8 @@
       ],
       "vacios_declarados": 11,
       "restriccion_de_uso": null,
-      "bytes": 473091
+      "licencia": "CC BY 4.0",
+      "bytes": 485961
     },
     {
       "archivo": "comercio.json",
@@ -366,7 +435,8 @@
       ],
       "vacios_declarados": 9,
       "restriccion_de_uso": null,
-      "bytes": 22389
+      "licencia": "CC BY 4.0",
+      "bytes": 23085
     },
     {
       "archivo": "conflictos.json",
@@ -388,7 +458,8 @@
       ],
       "vacios_declarados": 7,
       "restriccion_de_uso": null,
-      "bytes": 19174
+      "licencia": "CC BY 4.0",
+      "bytes": 19829
     },
     {
       "archivo": "consulta.json",
@@ -412,7 +483,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 143105
+      "licencia": "CC BY 4.0",
+      "bytes": 146934
     },
     {
       "archivo": "contratacion.json",
@@ -436,7 +508,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 21607
+      "licencia": "CC BY 4.0",
+      "bytes": 22262
     },
     {
       "archivo": "contrataciones_abiertas.json",
@@ -464,7 +537,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 23837
+      "licencia": "CC BY 4.0",
+      "bytes": 24619
     },
     {
       "archivo": "copernicus.json",
@@ -489,7 +563,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 14612
+      "licencia": "CC BY 4.0",
+      "bytes": 14990
     },
     {
       "archivo": "crimen_organizado.json",
@@ -518,7 +593,8 @@
       ],
       "vacios_declarados": 7,
       "restriccion_de_uso": null,
-      "bytes": 377968
+      "licencia": "CC BY 4.0",
+      "bytes": 397491
     },
     {
       "archivo": "desastres.json",
@@ -543,7 +619,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 111616
+      "licencia": "CC BY 4.0",
+      "bytes": 115544
     },
     {
       "archivo": "designados.json",
@@ -567,7 +644,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 10996
+      "licencia": "CC BY 4.0",
+      "bytes": 11373
     },
     {
       "archivo": "desplazamiento-serie.json",
@@ -589,7 +667,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 109035
+      "licencia": "CC BY 4.0",
+      "bytes": 112605
     },
     {
       "archivo": "desplazamiento.json",
@@ -619,7 +698,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 23613
+      "licencia": "CC BY 4.0",
+      "bytes": 24413
     },
     {
       "archivo": "drogas.json",
@@ -642,7 +722,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 74326
+      "licencia": "CC BY 4.0",
+      "bytes": 77744
     },
     {
       "archivo": "eia.json",
@@ -663,7 +744,8 @@
       ],
       "vacios_declarados": 3,
       "restriccion_de_uso": null,
-      "bytes": 196697
+      "licencia": "CC BY 4.0",
+      "bytes": 205838
     },
     {
       "archivo": "estado_reciente.json",
@@ -685,7 +767,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 32270
+      "licencia": "CC BY 4.0",
+      "bytes": 33285
     },
     {
       "archivo": "explorador.json",
@@ -709,7 +792,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 15048
+      "licencia": "CC BY 4.0",
+      "bytes": 15573
     },
     {
       "archivo": "fmi_mensual.json",
@@ -730,7 +814,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 97729
+      "licencia": "CC BY 4.0",
+      "bytes": 101858
     },
     {
       "archivo": "focos.json",
@@ -754,7 +839,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 10629
+      "licencia": "CC BY 4.0",
+      "bytes": 10977
     },
     {
       "archivo": "fundacion.json",
@@ -777,7 +863,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 9492
+      "licencia": "CC BY 4.0",
+      "bytes": 9665
     },
     {
       "archivo": "gasto_publico.json",
@@ -798,7 +885,68 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 116349
+      "licencia": "CC BY 4.0",
+      "bytes": 121343
+    },
+    {
+      "archivo": "gdl.json",
+      "url": "https://siwa.fundacionkent.org/datos/publico/gdl.json",
+      "colector": "gdl",
+      "fuente": "Global Data Lab — Universidad Radboud de Nimega: base de datos subnacional de desarrollo humano, corrupción y demografía",
+      "url_fuente": "https://globaldatalab.org/",
+      "calificacion": "B-3",
+      "obtenido_en": "2026-09-16T15:40:22+00:00",
+      "registros": 28,
+      "indicadores": null,
+      "por_estado": true,
+      "campos_de_la_fila": [
+        "iso",
+        "pais",
+        "bloque",
+        "geografia",
+        "unidades_del_padron",
+        "unidades_alcanzadas",
+        "cobertura_del_padron",
+        "unidades_con_dato_propio",
+        "proporcion_con_dato_propio",
+        "resolucion",
+        "unidades_sin_dato",
+        "renglones",
+        "medidas"
+      ],
+      "vacios_declarados": 7,
+      "restriccion_de_uso": null,
+      "licencia": "CC BY 4.0",
+      "bytes": 2649445
+    },
+    {
+      "archivo": "hapi.json",
+      "url": "https://siwa.fundacionkent.org/datos/publico/hapi.json",
+      "colector": "hapi",
+      "fuente": "HDX HAPI — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA): población base, pobreza multidimensional y riesgo INFORM",
+      "url_fuente": "https://hapi.humdata.org/",
+      "calificacion": "A-2",
+      "obtenido_en": "2026-09-10T12:36:08+00:00",
+      "registros": 33,
+      "indicadores": null,
+      "por_estado": true,
+      "campos_de_la_fila": [
+        "iso",
+        "pais",
+        "bloque",
+        "unidades_del_padron",
+        "unidades_alcanzadas",
+        "unidades_sin_dato",
+        "poblacion_por_unidad",
+        "pobreza_por_unidad",
+        "anio_poblacion",
+        "anios_pobreza",
+        "riesgo_del_pais"
+      ],
+      "vacios_declarados": 6,
+      "restriccion_de_uso": null,
+      "licencia": "CC BY 4.0",
+      "bytes": 215277
     },
     {
       "archivo": "ia.json",
@@ -819,7 +967,8 @@
       ],
       "vacios_declarados": 7,
       "restriccion_de_uso": null,
-      "bytes": 58770
+      "licencia": "CC BY 4.0",
+      "bytes": 61110
     },
     {
       "archivo": "ia_apps.json",
@@ -842,7 +991,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 152346
+      "licencia": "CC BY 4.0",
+      "bytes": 157688
     },
     {
       "archivo": "indice_opacidad.json",
@@ -868,7 +1018,8 @@
       ],
       "vacios_declarados": 10,
       "restriccion_de_uso": null,
-      "bytes": 45570
+      "licencia": "CC BY 4.0",
+      "bytes": 47253
     },
     {
       "archivo": "inflacion.json",
@@ -889,7 +1040,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 57317
+      "licencia": "CC BY 4.0",
+      "bytes": 59684
     },
     {
       "archivo": "influencia.json",
@@ -912,7 +1064,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 126275
+      "licencia": "CC BY 4.0",
+      "bytes": 130090
     },
     {
       "archivo": "inform.json",
@@ -933,7 +1086,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 78601
+      "licencia": "CC BY 4.0",
+      "bytes": 82104
     },
     {
       "archivo": "infraestructura.json",
@@ -954,7 +1108,8 @@
       ],
       "vacios_declarados": 10,
       "restriccion_de_uso": null,
-      "bytes": 229660
+      "licencia": "CC BY 4.0",
+      "bytes": 239604
     },
     {
       "archivo": "memoria.json",
@@ -977,7 +1132,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 107562
+      "licencia": "CC BY 4.0",
+      "bytes": 112061
     },
     {
       "archivo": "oficiales.json",
@@ -1003,7 +1159,8 @@
       ],
       "vacios_declarados": 10,
       "restriccion_de_uso": null,
-      "bytes": 72421
+      "licencia": "CC BY 4.0",
+      "bytes": 74170
     },
     {
       "archivo": "oit.json",
@@ -1024,7 +1181,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 184972
+      "licencia": "CC BY 4.0",
+      "bytes": 193102
     },
     {
       "archivo": "oms.json",
@@ -1045,7 +1203,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 285007
+      "licencia": "CC BY 4.0",
+      "bytes": 297609
     },
     {
       "archivo": "oms_homicidios.json",
@@ -1071,7 +1230,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": "Gratuita para este registro, que es público y no se cobra. La licencia de la fuente es de atribución, no comercial y compartir igual (CC BY-NC-SA 3.0 IGO): este dato no puede viajar a un producto que la Fundación venda, y lo que se derive de él se publica bajo esa misma licencia.",
-      "bytes": 157483
+      "licencia": "CC BY 4.0",
+      "bytes": 166380
     },
     {
       "archivo": "onu-ods.json",
@@ -1093,7 +1253,8 @@
       ],
       "vacios_declarados": 7,
       "restriccion_de_uso": null,
-      "bytes": 290440
+      "licencia": "CC BY 4.0",
+      "bytes": 303527
     },
     {
       "archivo": "opacidad.json",
@@ -1123,7 +1284,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 27702
+      "licencia": "CC BY 4.0",
+      "bytes": 28326
     },
     {
       "archivo": "opacidad_historia.json",
@@ -1144,7 +1306,8 @@
       ],
       "vacios_declarados": 1,
       "restriccion_de_uso": null,
-      "bytes": 41381
+      "licencia": "CC BY 4.0",
+      "bytes": 43454
     },
     {
       "archivo": "owd.json",
@@ -1165,7 +1328,8 @@
       ],
       "vacios_declarados": 9,
       "restriccion_de_uso": null,
-      "bytes": 826201
+      "licencia": "CC BY 4.0",
+      "bytes": 861656
     },
     {
       "archivo": "pdh_guatemala_subnacional.json",
@@ -1191,7 +1355,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 22403
+      "licencia": "CC BY 4.0",
+      "bytes": 23248
     },
     {
       "archivo": "percepcion_corrupcion.json",
@@ -1224,7 +1389,8 @@
       ],
       "vacios_declarados": 7,
       "restriccion_de_uso": null,
-      "bytes": 90942
+      "licencia": "CC BY 4.0",
+      "bytes": 95256
     },
     {
       "archivo": "pobreza.json",
@@ -1254,7 +1420,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 133091
+      "licencia": "CC BY 4.0",
+      "bytes": 138868
     },
     {
       "archivo": "prensa_libre.json",
@@ -1279,7 +1446,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 26842
+      "licencia": "CC BY 4.0",
+      "bytes": 27816
     },
     {
       "archivo": "radar.json",
@@ -1300,7 +1468,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 35552
+      "licencia": "CC BY 4.0",
+      "bytes": 36906
     },
     {
       "archivo": "ransomware.json",
@@ -1328,7 +1497,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 46069
+      "licencia": "CC BY 4.0",
+      "bytes": 48325
     },
     {
       "archivo": "reciente_oficial.json",
@@ -1350,7 +1520,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 23281
+      "licencia": "CC BY 4.0",
+      "bytes": 23990
     },
     {
       "archivo": "recursos.json",
@@ -1372,7 +1543,8 @@
       ],
       "vacios_declarados": 9,
       "restriccion_de_uso": null,
-      "bytes": 292850
+      "licencia": "CC BY 4.0",
+      "bytes": 305307
     },
     {
       "archivo": "redes.json",
@@ -1399,7 +1571,8 @@
       ],
       "vacios_declarados": 7,
       "restriccion_de_uso": null,
-      "bytes": 48206
+      "licencia": "CC BY 4.0",
+      "bytes": 50288
     },
     {
       "archivo": "regimen_politico.json",
@@ -1426,7 +1599,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 14980
+      "licencia": "CC BY 4.0",
+      "bytes": 15380
     },
     {
       "archivo": "reliefweb.json",
@@ -1447,7 +1621,8 @@
       ],
       "vacios_declarados": 3,
       "restriccion_de_uso": null,
-      "bytes": 12531
+      "licencia": "CC BY 4.0",
+      "bytes": 13018
     },
     {
       "archivo": "sanciones.json",
@@ -1470,7 +1645,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": "Gratuita para este registro, que es público y no se cobra. La licencia de la fuente es de atribución no comercial: este dato no puede viajar a un producto que la Fundación venda sin tomar antes una licencia comercial.",
-      "bytes": 9080
+      "licencia": "CC BY 4.0",
+      "bytes": 9388
     },
     {
       "archivo": "sanciones_primarias.json",
@@ -1491,7 +1667,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 25599
+      "licencia": "CC BY 4.0",
+      "bytes": 26694
     },
     {
       "archivo": "sipri.json",
@@ -1513,7 +1690,8 @@
       ],
       "vacios_declarados": 3,
       "restriccion_de_uso": null,
-      "bytes": 106586
+      "licencia": "CC BY 4.0",
+      "bytes": 111392
     },
     {
       "archivo": "sipri_transferencias.json",
@@ -1535,7 +1713,8 @@
       ],
       "vacios_declarados": 2,
       "restriccion_de_uso": null,
-      "bytes": 31506
+      "licencia": "CC BY 4.0",
+      "bytes": 32833
     },
     {
       "archivo": "sismos.json",
@@ -1560,7 +1739,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 32686
+      "licencia": "CC BY 4.0",
+      "bytes": 33668
     },
     {
       "archivo": "sondeo.json",
@@ -1587,7 +1767,8 @@
       ],
       "vacios_declarados": 5,
       "restriccion_de_uso": null,
-      "bytes": 23790
+      "licencia": "CC BY 4.0",
+      "bytes": 24337
     },
     {
       "archivo": "subnacional.json",
@@ -1621,7 +1802,8 @@
       ],
       "vacios_declarados": 3,
       "restriccion_de_uso": null,
-      "bytes": 6404
+      "licencia": "CC BY 4.0",
+      "bytes": 6558
     },
     {
       "archivo": "subnacional_acled.json",
@@ -1647,7 +1829,8 @@
       ],
       "vacios_declarados": 3,
       "restriccion_de_uso": null,
-      "bytes": 290232
+      "licencia": "CC BY 4.0",
+      "bytes": 303116
     },
     {
       "archivo": "subnacional_datos.json",
@@ -1674,7 +1857,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 154083
+      "licencia": "CC BY 4.0",
+      "bytes": 161143
     },
     {
       "archivo": "subnacional_focos.json",
@@ -1699,7 +1883,8 @@
       ],
       "vacios_declarados": 3,
       "restriccion_de_uso": null,
-      "bytes": 28786
+      "licencia": "CC BY 4.0",
+      "bytes": 30054
     },
     {
       "archivo": "subnacional_homicidios.json",
@@ -1726,7 +1911,8 @@
       ],
       "vacios_declarados": 3,
       "restriccion_de_uso": null,
-      "bytes": 284160
+      "licencia": "CC BY 4.0",
+      "bytes": 297811
     },
     {
       "archivo": "subnacional_robos.json",
@@ -1753,7 +1939,8 @@
       ],
       "vacios_declarados": 3,
       "restriccion_de_uso": null,
-      "bytes": 235661
+      "licencia": "CC BY 4.0",
+      "bytes": 246812
     },
     {
       "archivo": "subnacional_santafe.json",
@@ -1775,7 +1962,8 @@
       ],
       "vacios_declarados": 3,
       "restriccion_de_uso": null,
-      "bytes": 3530
+      "licencia": "CC BY 4.0",
+      "bytes": 3602
     },
     {
       "archivo": "subnacional_vigia.json",
@@ -1791,7 +1979,8 @@
       "campos_de_la_fila": [],
       "vacios_declarados": 2,
       "restriccion_de_uso": null,
-      "bytes": 6731
+      "licencia": "CC BY 4.0",
+      "bytes": 6944
     },
     {
       "archivo": "telegram.json",
@@ -1821,7 +2010,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 48774
+      "licencia": "CC BY 4.0",
+      "bytes": 50215
     },
     {
       "archivo": "trata_personas.json",
@@ -1851,7 +2041,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 29063
+      "licencia": "CC BY 4.0",
+      "bytes": 30009
     },
     {
       "archivo": "ucdp.json",
@@ -1886,7 +2077,8 @@
       ],
       "vacios_declarados": 8,
       "restriccion_de_uso": null,
-      "bytes": 143977
+      "licencia": "CC BY 4.0",
+      "bytes": 149312
     },
     {
       "archivo": "unesco.json",
@@ -1907,7 +2099,8 @@
       ],
       "vacios_declarados": 6,
       "restriccion_de_uso": null,
-      "bytes": 149318
+      "licencia": "CC BY 4.0",
+      "bytes": 155750
     },
     {
       "archivo": "unidades.json",
@@ -1938,7 +2131,8 @@
       ],
       "vacios_declarados": 4,
       "restriccion_de_uso": null,
-      "bytes": 70499
+      "licencia": "CC BY 4.0",
+      "bytes": 73281
     },
     {
       "archivo": "unodc_armas.json",
@@ -1960,7 +2154,8 @@
       ],
       "vacios_declarados": 2,
       "restriccion_de_uso": null,
-      "bytes": 29082
+      "licencia": "CC BY 4.0",
+      "bytes": 30277
     },
     {
       "archivo": "wjp.json",
@@ -1982,8 +2177,9 @@
       ],
       "vacios_declarados": 2,
       "restriccion_de_uso": null,
-      "bytes": 44005
+      "licencia": "CC BY 4.0",
+      "bytes": 45927
     }
   ],
-  "cuantos": 80
+  "cuantos": 82
 }
