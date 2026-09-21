@@ -50,7 +50,13 @@ ASUNTOS = {
     "muerte violenta no delictiva": ["suicidio", "muertes_transito"],
     "salud": ["esperanza_vida", "mortalidad_materna", "esperanza_vida_cepal"],
     "gasto en defensa": ["gasto_militar", "gasto_militar_publico",
-                         "gasto_militar_dolares", "gasto_defensa_fmi"],
+                         "gasto_militar_dolares", "gasto_defensa_fmi",
+                         # Base de gasto militar de SIPRI, ahora tambien vista
+                         # directo (no solo via el Banco Mundial): mismo
+                         # productor "sipri" que las tres de arriba, no suma
+                         # un tercer origen independiente (21/9/2026).
+                         "gasto_militar_pbi", "gasto_militar_gasto_pub",
+                         "gasto_militar_usd_const"],
     "gasto en seguridad": ["gasto_seguridad", "gasto_seguridad_publico",
                            "gasto_seguridad_cepal"],
     "corrupción": ["corrupcion", "corrupcion_politica", "soborno_personas",
@@ -94,7 +100,8 @@ ASUNTOS = {
     "democracia": ["democracia_electoral", "democracia_liberal", "democracia_participativa",
                    "aprobacion_democracia", "actores_antidemocraticos"],
     "estado de derecho": ["estado_derecho", "calidad_regulatoria", "indice_gobernanza",
-                          "administracion_basica", "persecucion_abuso", "voz_rendicion"],
+                          "administracion_basica", "persecucion_abuso", "voz_rendicion",
+                          "estado_derecho_wjp"],
     "terrorismo": ["terrorismo_muertes", "terrorismo_atentados"],
     "conflicto armado": ["conflicto_no_estatal", "intensidad_conflicto", "monopolio_fuerza"],
     "desplazamiento y migración": ["desplazamiento", "migrantes", "migrantes_pct",
@@ -122,8 +129,14 @@ ASUNTOS = {
                                   "electricidad_por_habitante", "perdidas_electricas",
                                   "puertos_contenedores", "agua_potable",
                                   "agua_potable_basica"],
+    # armas_enviadas_tiv/armas_recibidas_tiv (base de transferencias de SIPRI,
+    # vista directo) son el MISMO productor que armas_importadas/armas_exportadas
+    # (SIPRI compilado por el Banco Mundial): las cuatro resuelven al productor
+    # canonico "sipri" y no suman un tercer origen. Se declaran igual para que
+    # el control no las marque como materia sin asunto (21/9/2026).
     "fuerza militar": ["personal_militar", "militares_fuerza_laboral", "efectivos_por_km2",
-                       "efectivos_por_habitante", "armas_importadas", "armas_exportadas"],
+                       "efectivos_por_habitante", "armas_importadas", "armas_exportadas",
+                       "armas_enviadas_tiv", "armas_recibidas_tiv"],
     "policía": ["policias"],
     "capacidad aeroespacial": ["objetos_espacio", "lanzamientos_anuales", "satelites_gcat"],
     "territorio y población": ["superficie", "poblacion", "urbanizacion", "asentamientos"],
