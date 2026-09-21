@@ -57,6 +57,23 @@ import geo  # noqa: E402
 COLECTOR = "unidades"
 CAPA = "publico"
 
+# EL WFS DE CEPAL ESTA CAIDO (verificado en vivo, 21/9/2026): "/geoserver/wfs"
+# devuelve HTTP 404 de Apache Tomcat -- el servlet ni existe. Se investigo si el
+# path se habia mudado: la propia API de GeoNode del geoportal (todavia viva en
+# "/api/v2/datasets/473") sigue catalogando esta capa -- alternate
+# "geonode:mega_nivel_2_simplificado", titulo "Unidades Territoriales - Nivel 2
+# - (Proyecto MEGA)" -- y declara como URL canonica de WFS/WMS/GetCapabilities
+# "https://geoportal.cepal.org/geoserver/ows" (dispatcher OGC general, no el
+# atajo "/wfs"). Probada esa URL, la misma que GeoNode ofrece de si misma para
+# WFS GetFeature, WMS GetMap y WMS GetCapabilities: los tres devuelven 404
+# tambien. El proxy de descarga propio de GeoNode
+# ("/datasets/.../dataset_download") devuelve 500. Conclusion: no es un cambio
+# de URL de nuestro lado, es el GeoServer de CEPAL el que esta caido del lado
+# de ellos -- el catalogo (GeoNode) sigue en pie, el motor de mapas (GeoServer)
+# no responde por ningun camino probado. No se encontro reemplazo que
+# funcione; se deja la URL historica declarada y el colector se vuelve
+# resiliente a esta caida (cae a geoBoundaries por Estado, mas abajo) en vez
+# de tumbar toda la corrida.
 WFS = ("https://geoportal.cepal.org/geoserver/wfs?service=WFS&version=2.0.0"
        "&request=GetFeature&typeNames=geonode:mega_nivel_2_simplificado"
        "&outputFormat=application/json&propertyName=nv2_cod_in,nv2_nbre,country_es")
@@ -149,7 +166,19 @@ def construir() -> Path:
             if n is not None:
                 homicidios[r["iso"]] = {"casos": n, "anio": (r.get("numero") or {}).get("anio")}
 
-    cepal = de_cepal()
+    # SI EL WFS DE CEPAL FALLA -- 404, timeout, JSON roto -- no se tumba la
+    # corrida entera: se degrada con elegancia. cepal queda vacio, TODOS los
+    # 19 Estados caen al `else` de mas abajo y se resuelven por geoBoundaries
+    # (que cubre el padron completo), y la caida se declara en los vacios y en
+    # la calificacion en vez de hacer exit 1 y dejar el dato de ayer sin decir
+    # por que (mismo patron de "continue-on-error" que ya usan otros
+    # colectores del robot).
+    cepal_error = None
+    try:
+        cepal = de_cepal()
+    except Exception as e:  # noqa: BLE001 — se declara la caida, no se tumba la corrida
+        cepal = {}
+        cepal_error = f"{type(e).__name__}: {str(e)[:160]}"
     registros, vacios = [], []
     sin_geometria = []
 
@@ -204,6 +233,13 @@ def construir() -> Path:
     sin_medir = sum(1 for r in registros if r["admite_tasa"] is None)
     total = sum(r["unidades"] for r in registros)
 
+    if cepal_error:
+        vacios.append(
+            f"EL WFS DE CEPAL FALLÓ EN ESTA CORRIDA ({cepal_error}): los {len(DE_CEPAL)} "
+            "Estados que normalmente trae la CEPAL se resolvieron con geoBoundaries en su "
+            "lugar, así que esta corrida queda con UNA sola fuente de geometría para todo "
+            "el padrón y no con dos. No se rellenó con el dato de ayer: se recalculó todo "
+            "con la fuente que sí respondió.")
     if sin_geometria:
         vacios.append("Estados sin límites de primer orden en ninguna de las dos fuentes: "
                       + ", ".join(sorted(sin_geometria)) + ".")
@@ -232,9 +268,13 @@ def construir() -> Path:
         # puede mirar; la interfaz sigue documentada adentro del colector.
         url_fuente="https://statistics.cepal.org/geo/geo-cepalstat/?lang=es",
         calificacion=comun.calificar(
-            "A", 2, True,
-            "Dos fuentes independientes se reparten el padrón sin superponerse: la CEPAL cubre "
-            "19 Estados y geoBoundaries los 14 restantes. Cada unidad declara de cuál salió."),
+            "A", 2, not cepal_error,
+            ("Dos fuentes independientes se reparten el padrón sin superponerse: la CEPAL cubre "
+             "19 Estados y geoBoundaries los 14 restantes. Cada unidad declara de cuál salió."
+             if not cepal_error else
+             f"EL WFS DE CEPAL FALLÓ ESTA CORRIDA ({cepal_error}): geoBoundaries resolvió el "
+             "padrón completo, así que hoy es una sola fuente y no dos. Cada unidad sigue "
+             "declarando de cuál salió; ver vacíos.")),
         registros=registros,
         vacios=vacios,
         extra={"resumen": {
@@ -243,6 +283,8 @@ def construir() -> Path:
             "de_cepal": sum(1 for r in registros if "CEPAL" in (r["fuente_geometria"] or "")),
             "de_geoboundaries": sum(1 for r in registros
                                     if "geoBoundaries" in (r["fuente_geometria"] or "")),
+            "cepal_wfs_ok": not cepal_error,
+            "cepal_wfs_error": cepal_error,
             "admiten_tasa": con_tasa,
             "solo_recuento": sin_tasa,
             "sin_decidir": sin_medir,
