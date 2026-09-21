@@ -16,10 +16,19 @@ Estados. Los otros 14 —el Caribe no iberoamericano, Haití, Belice y las
 Guayanas— no están, y son el mismo cuarto del padrón que ya era invisible en el
 mapa por superficie. Para esos se usa geoBoundaries, que los cubre a todos.
 
-**Cada unidad declara de cuál de las dos salió, de qué año es su límite y bajo
-qué licencia**, porque no son la misma cosa: hay límites de 2005 y de 2021, y
-tres licencias distintas de compartir-igual que pesan sobre cualquier producto
-que la Fundación venda.
+Dentro de geoBoundaries hay dos releases, y no son intercambiables: **gbOpen**
+es la general y **gbHumanitarian** es un recorte más nuevo, curado con las
+Naciones Unidas (HDX/UNHCR), que en el cotejo de la casa viene más completo —
+a la Argentina, gbOpen le faltaba Entre Ríos (23 en vez de 24 provincias) y
+gbHumanitarian la trae. Por eso el colector intenta primero gbHumanitarian y
+recién si ese Estado no tiene release humanitaria —o la consulta falla— cae a
+gbOpen. La CEPAL sigue mandando cuando responde: esto solo mejora la red de
+seguridad de abajo.
+
+**Cada unidad declara de cuál de las tres salió (CEPAL, gbHumanitarian o
+gbOpen), de qué año es su límite y bajo qué licencia**, porque no son la misma
+cosa: hay límites de 2005 y de 2021, y licencias distintas —algunas de
+compartir-igual— que pesan sobre cualquier producto que la Fundación venda.
 
 EL NOMBRE LOCAL NO SE TRADUCE
 ------------------------------
@@ -77,7 +86,17 @@ CAPA = "publico"
 WFS = ("https://geoportal.cepal.org/geoserver/wfs?service=WFS&version=2.0.0"
        "&request=GetFeature&typeNames=geonode:mega_nivel_2_simplificado"
        "&outputFormat=application/json&propertyName=nv2_cod_in,nv2_nbre,country_es")
-GB = "https://www.geoboundaries.org/api/current/gbOpen/{iso}/ADM1/"
+
+# GEOBOUNDARIES TIENE DOS RELEASES Y NO SON INTERCAMBIABLES (verificado en
+# vivo, 21/9/2026). gbHumanitarian es el recorte curado con HDX/UNHCR: para
+# Argentina devuelve admUnitCount=24 (con Entre Ríos), contra 23 de gbOpen --
+# el hueco conocido de la casa. Por eso se intenta PRIMERO gbHumanitarian y
+# solo si ese Estado no tiene release humanitaria (o la consulta falla) se cae
+# a gbOpen, que cubre prácticamente a todos. Probado también en vivo que
+# gbHumanitarian responde para Estados chicos (VCT, BLZ, ATG), así que no es
+# solo Argentina la que mejora.
+GB_HUMANITARIAN = "https://www.geoboundaries.org/api/current/gbHumanitarian/{iso}/ADM1/"
+GB_OPEN = "https://www.geoboundaries.org/api/current/gbOpen/{iso}/ADM1/"
 
 # CASOS POR UNIDAD PARA QUE UNA TASA SIGNIFIQUE ALGO. El error relativo de un
 # recuento es cercano a 1/raiz(n): con 30 casos es del 18 %, con 10 del 32 %.
@@ -131,12 +150,27 @@ def de_cepal() -> dict:
     return por_pais
 
 
+def _metadato_geoboundaries(iso: str) -> tuple:
+    """Intenta gbHumanitarian primero; si el Estado no tiene release
+    humanitaria (falla la consulta, o responde vacío) cae a gbOpen. Devuelve
+    (metadato, origen) — origen es "gbHumanitarian" o "gbOpen"."""
+    try:
+        d = pedir(GB_HUMANITARIAN.format(iso=iso), espera=90)
+        if isinstance(d, list) and not d:
+            d = None
+    except Exception:  # noqa: BLE001 — sin release humanitaria para este Estado, cae a gbOpen
+        d = None
+    if d is not None:
+        return (d[0] if isinstance(d, list) else d), "gbHumanitarian"
+    d = pedir(GB_OPEN.format(iso=iso), espera=90)
+    return (d[0] if isinstance(d, list) else d), "gbOpen"
+
+
 def de_geoboundaries(iso: str) -> tuple:
     """Las unidades de un Estado que la CEPAL no cubre, con su procedencia."""
-    d = pedir(GB.format(iso=iso), espera=90)
-    d = d[0] if isinstance(d, list) else d
+    d, origen = _metadato_geoboundaries(iso)
     meta = {
-        "fuente": "geoBoundaries (gbOpen)",
+        "fuente": f"geoBoundaries ({origen})",
         "nombre_local": (d.get("boundaryCanonical") or "").strip() or None,
         "anio_limite": d.get("boundaryYearRepresented"),
         "licencia": d.get("boundaryLicense"),
@@ -241,7 +275,7 @@ def construir() -> Path:
             "el padrón y no con dos. No se rellenó con el dato de ayer: se recalculó todo "
             "con la fuente que sí respondió.")
     if sin_geometria:
-        vacios.append("Estados sin límites de primer orden en ninguna de las dos fuentes: "
+        vacios.append("Estados sin límites de primer orden en ninguna de las fuentes: "
                       + ", ".join(sorted(sin_geometria)) + ".")
     if sin_medir:
         vacios.append(
@@ -250,10 +284,13 @@ def construir() -> Path:
             "sin decidir.")
     vacios.append(
         "Los límites NO son del mismo año en todas partes: los de la CEPAL son de su capa "
-        "vigente y los de geoBoundaries van de 2005 a 2021. Cada Estado declara el suyo.")
+        "vigente y los de geoBoundaries van de 2005 a 2021 según el Estado y la release "
+        "(gbHumanitarian o gbOpen) que lo haya cubierto. Cada Estado declara el suyo.")
     vacios.append(
-        "Tres licencias de geoBoundaries son de compartir-igual —CC BY-SA y ODbL—: esos límites "
-        "no pueden viajar a un producto que la Fundación venda sin arrastrar la misma condición.")
+        "Las licencias de geoBoundaries no son todas la misma: gbHumanitarian suele traer "
+        "CC BY (solo atribución) y gbOpen incluye también CC BY-SA y ODbL, de compartir-igual. "
+        "Esos límites no pueden viajar a un producto que la Fundación venda sin arrastrar la "
+        "misma condición; cada unidad declara la que le corresponde.")
     vacios.append(
         "Este padrón trae las unidades y sus límites, NO datos sobre ellas. Qué publica cada "
         "jurisdicción de sí misma se mide aparte, en el censo de fuentes subnacionales.")
@@ -261,7 +298,8 @@ def construir() -> Path:
     return comun.escribir(
         colector=COLECTOR,
         capa=CAPA,
-        fuente="CEPAL — Proyecto MEGA nivel 2 (con UN-GGIM Américas) y geoBoundaries (gbOpen)",
+        fuente=("CEPAL — Proyecto MEGA nivel 2 (con UN-GGIM Américas) y geoBoundaries "
+                "(gbHumanitarian, con gbOpen como red de seguridad)"),
         # LA DIRECCION QUE SE CITA TIENE QUE ABRIRSE. La anterior era el extremo
         # de la interfaz: contesta a una consulta con parametros y devuelve error
         # a quien la abre en un navegador. Se cita la pagina que una persona
@@ -270,7 +308,8 @@ def construir() -> Path:
         calificacion=comun.calificar(
             "A", 2, not cepal_error,
             ("Dos fuentes independientes se reparten el padrón sin superponerse: la CEPAL cubre "
-             "19 Estados y geoBoundaries los 14 restantes. Cada unidad declara de cuál salió."
+             "19 Estados y geoBoundaries los 14 restantes, con gbHumanitarian preferida sobre "
+             "gbOpen por estar más completa. Cada unidad declara de cuál salió."
              if not cepal_error else
              f"EL WFS DE CEPAL FALLÓ ESTA CORRIDA ({cepal_error}): geoBoundaries resolvió el "
              "padrón completo, así que hoy es una sola fuente y no dos. Cada unidad sigue "
@@ -283,6 +322,10 @@ def construir() -> Path:
             "de_cepal": sum(1 for r in registros if "CEPAL" in (r["fuente_geometria"] or "")),
             "de_geoboundaries": sum(1 for r in registros
                                     if "geoBoundaries" in (r["fuente_geometria"] or "")),
+            "de_geoboundaries_gbhumanitarian": sum(
+                1 for r in registros if "gbHumanitarian" in (r["fuente_geometria"] or "")),
+            "de_geoboundaries_gbopen": sum(
+                1 for r in registros if "gbOpen" in (r["fuente_geometria"] or "")),
             "cepal_wfs_ok": not cepal_error,
             "cepal_wfs_error": cepal_error,
             "admiten_tasa": con_tasa,
