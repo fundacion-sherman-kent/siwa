@@ -28,6 +28,7 @@ ausencia. Prometer lo contrario sería prometer sobre algo que no manejamos.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import pathlib
 import sys
@@ -37,6 +38,7 @@ RAIZ = pathlib.Path(__file__).resolve().parent.parent
 PUBLICO = RAIZ / "datos" / "publico"
 SALIDA = PUBLICO / "indice.json"
 PAGINA = RAIZ / "datos" / "index.html"
+CHECKSUMS = PUBLICO / "checksums.txt"
 
 sys.path.insert(0, str(RAIZ / "herramientas"))
 import puertas  # noqa: E402  — el estilo y la cabecera de la casa viven ahí
@@ -105,9 +107,83 @@ def recorrer() -> list:
             "campos_de_la_fila": campos,
             "vacios_declarados": len(proc.get("vacios_declarados") or []),
             "restriccion_de_uso": proc.get("restriccion_de_uso"),
+            "licencia": comun.ATRIBUCION["licencia"],
             "bytes": ruta.stat().st_size,
         })
     return conjuntos
+
+
+# --------------------------------------------------------------- la integridad
+def sellar() -> dict:
+    """La huella SHA-256 de cada archivo publicado, para verificar integridad.
+
+    Quien descarga un conjunto puede recalcular su huella y compararla con la de
+    acá: si coincide, lo que recibió es exactamente lo que la casa publicó. Se
+    escribe en el formato estándar de `sha256sum` —«huella  nombre»— para que
+    cualquier herramienta común lo verifique sin código propio. NO se sella el
+    propio índice ni este archivo de huellas, porque cambian después de esta
+    corrida; sí los conjuntos de datos, que es lo que la gente descarga.
+    """
+    lineas, huellas = [], {}
+    for ruta in sorted(PUBLICO.glob("*.json")):
+        if ruta.name in ("indice.json",):
+            continue
+        h = hashlib.sha256(ruta.read_bytes()).hexdigest()
+        huellas[ruta.name] = h
+        lineas.append(f"{h}  {ruta.name}")
+    CHECKSUMS.write_text("\n".join(lineas) + "\n", encoding="utf-8", newline="")
+    return huellas
+
+
+# ------------------------------------------------------------------ los derechos
+# El bloque de derechos, legible por máquina: quién es el titular, bajo qué
+# licencia se publica el aporte de la casa, cómo se cita y qué pasa con el
+# contenido de los datos. No es texto nuevo: es lo que ya dicen la página de
+# licencia y el bloque ATRIBUCION de cada archivo, puesto donde una herramienta
+# lo pueda leer sin adivinar.
+def derechos() -> dict:
+    return {
+        "titular_del_aporte": comun.ATRIBUCION["autor"],
+        "licencia": comun.ATRIBUCION["licencia"],
+        "licencia_url": comun.ATRIBUCION["licencia_url"],
+        "declaracion_de_derechos": f"{BASE}/sitio/licencia.html",
+        "citar_como": "SIWA, Fundación Sherman Kent",
+        "url_de_cita": BASE,
+        "contenido_de_los_datos": (
+            "Los valores del registro son hechos y cifras —tasas, recuentos, "
+            "índices— sin derechos de autor sobre su contenido. El aporte de la "
+            "Fundación (recolección, calificación y declaración de vacíos) va bajo "
+            "CC BY 4.0. Los datos de base pertenecen a los productores citados en "
+            "cada archivo y conservan la licencia de su fuente; cuando una fuente "
+            "impone condiciones, viajan en «restriccion_de_uso» y esa condición manda."),
+    }
+
+
+# Palabras clave del registro, legibles por máquina, para que se encuentre y se
+# entienda de qué trata sin abrir cada archivo.
+KEYWORDS = [
+    "América Latina", "Caribe", "datos abiertos", "situación regional",
+    "seguridad", "crimen organizado", "homicidios", "violencia", "gobernanza",
+    "corrupción", "derechos humanos", "conflictos", "desplazamiento",
+    "economía", "inflación", "comercio", "energía", "minería", "salud",
+    "desastres", "entorno digital", "indicadores comparables",
+]
+
+
+# El esquema de identificadores y su forma de resolución: la fila de cada Estado
+# se identifica con su código ISO 3166-1 alfa-3, y ese código se resuelve —a
+# nombre y geometría— contra el padrón en GeoJSON. Así el identificador no es
+# opaco: lleva a más información.
+def identificadores() -> dict:
+    return {
+        "esquema": "ISO 3166-1 alfa-3",
+        "que_identifica": "Cada Estado del padrón de 33 de América Latina y el Caribe.",
+        "campo": "iso",
+        "resolver_en": f"{BASE}/sitio/geo/paises-alc.geojson",
+        "nota": ("El código de tres letras (p. ej. «ARG», «MEX») es estándar y estable; "
+                 "el padrón en GeoJSON lo resuelve a nombre y geometría, y es el mismo "
+                 "para todos los conjuntos que van por Estado."),
+    }
 
 
 def catalogo(conjuntos: list) -> dict:
@@ -135,6 +211,29 @@ def catalogo(conjuntos: list) -> dict:
             "indicador desaparece y este índice lo dirá con su ausencia."),
         "padron": f"{BASE}/sitio/geo/paises-alc.geojson",
         "novedades": f"{BASE}/novedades.xml",
+        "derechos": derechos(),
+        "keywords": KEYWORDS,
+        "identificadores": identificadores(),
+        "integridad": {
+            "que_es": ("La huella SHA-256 de cada archivo publicado. Quien descarga un "
+                       "conjunto puede recalcular su huella y compararla con esta para "
+                       "confirmar que recibió exactamente lo que la casa publicó."),
+            "archivo": f"{DIR_DATOS}/checksums.txt",
+            "algoritmo": "SHA-256",
+            "formato": "sha256sum (huella  nombre), verificable con herramientas comunes",
+        },
+        "herramientas": {
+            "que_es": ("Los conjuntos son JSON plano servido con cabeceras abiertas: se "
+                       "leen con las librerías habituales de cualquier lenguaje, sin "
+                       "cliente propio."),
+            "donde": f"{BASE}/datos/",
+            "ejemplos": {
+                "Python": "requests + json (o pandas.read_json para tabla)",
+                "R": "jsonlite::fromJSON(url)",
+                "JavaScript": "fetch(url).then(r => r.json())",
+                "línea de comandos": "curl -s <url> | jq",
+            },
+        },
         "controles": {
             "que_son": "Mediciones que el registro hace de si mismo. No son datos de terceros: "
                        "no tienen fuente ni calificacion, y por eso no cuentan como conjuntos. "
@@ -294,6 +393,28 @@ def pagina(indice: dict) -> str:
   GeoJSON</a> y el <a class="enlace" href="{BASE}/novedades.xml">canal de novedades</a>,
   que anuncia qué cambió en cada corrida.</p>
 
+<h2>Herramientas para usarlo</h2>
+<p>Al ser JSON plano con cabeceras abiertas, se lee con las librerías habituales de
+  cualquier lenguaje, sin cliente propio:</p>
+<div class="filas">
+  <div><b>Python</b><span><code>requests</code> + <code>json</code>, o
+    <code>pandas.read_json(url)</code> para tenerlo como tabla.</span></div>
+  <div><b>R</b><span><code>jsonlite::fromJSON(url)</code>.</span></div>
+  <div><b>JavaScript</b><span><code>fetch(url).then(r =&gt; r.json())</code>, desde
+    cualquier dominio.</span></div>
+  <div><b>Línea de comandos</b><span><code>curl -s &lt;url&gt; | jq</code>.</span></div>
+</div>
+
+<h2>Verificar que es lo que publicamos</h2>
+<p>Cada archivo lleva su huella <b>SHA-256</b> en
+  <a class="enlace" href="{DIR_DATOS}/checksums.txt">checksums.txt</a>, en el formato de
+  <code>sha256sum</code>. Quien descarga un conjunto puede recalcular la huella y
+  compararla: si coincide, recibió exactamente lo que la casa publicó. El propio
+  <a class="enlace" href="{DIR_DATOS}/indice.json">catálogo</a> declara además, en formato
+  máquina, los <code>derechos</code> (titular, licencia y cómo citar), las
+  <code>keywords</code> del registro y el esquema de <code>identificadores</code>
+  (código ISO de Estado y dónde se resuelve).</p>
+
 <h2>Lo que se promete, y lo que no</h2>
 <div class="dice">
   <p><b>Las direcciones no cambian.</b> Un archivo publicado conserva su nombre y su
@@ -349,12 +470,15 @@ def pagina(indice: dict) -> str:
 
 def main() -> None:
     sys.stdout.reconfigure(encoding="utf-8")
-    indice = catalogo(recorrer())
+    conjuntos = recorrer()
+    huellas = sellar()  # las huellas de los datos, antes de escribir el índice
+    indice = catalogo(conjuntos)
     SALIDA.write_text(json.dumps(indice, ensure_ascii=False, indent=2), encoding="utf-8",
                       newline="")
     PAGINA.write_text(pagina(indice), encoding="utf-8", newline="")
-    print(f"[indice] {indice['cuantos']} conjuntos · {SALIDA.relative_to(RAIZ)} "
-          f"y {PAGINA.relative_to(RAIZ)}")
+    print(f"[indice] {indice['cuantos']} conjuntos · {len(huellas)} huellas · "
+          f"{SALIDA.relative_to(RAIZ)}, {PAGINA.relative_to(RAIZ)} y "
+          f"{CHECKSUMS.relative_to(RAIZ)}")
 
 
 if __name__ == "__main__":
