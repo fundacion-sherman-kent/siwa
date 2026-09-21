@@ -65,3 +65,23 @@ jobs:
       # Los tests usan solo biblioteca estándar; no hace falta instalar nada más.
       - name: Tests
         run: python -m unittest discover -s tests -v
+
+      # === VERIFICACION TEMPORAL, SE SACA ANTES DE MERGEAR ===
+      # Genera la tarjeta de compartir en el MISMO entorno Linux que va a usar
+      # el robot, para confirmar que las cifras y la tipografia renderizan
+      # bien antes de aprobar el PR de tarjeta-compartir.py.
+      - name: (temporal) Instalar Pillow y generar la tarjeta
+        run: |
+          python -m pip install --quiet pillow
+          python herramientas/tarjeta-compartir.py
+          cat sitio/marca/siwa-compartir.json
+
+      - name: (temporal) Subir la tarjeta como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: tarjeta-verificacion
+          path: |
+            sitio/marca/siwa-compartir.png
+            sitio/marca/siwa-compartir.json
+            sitio/marca/tarjetas/argentina.png
+          retention-days: 3
