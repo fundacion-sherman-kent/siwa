@@ -129,7 +129,7 @@ python colectores/focos.py
 | `bienes_culturales` | UNIDROIT — Convenio de 1995 sobre bienes culturales robados o exportados ilícitamente | `A-2` | 33 | 5 |
 | `brecha` | Fundación Sherman Kent — brecha entre lo registrado y lo publicado | `B-2` | 33 | 5 |
 | `bti` | Índice de Transformación Bertelsmann (BTI), edición 2026 | `B-3` | 22 | 6 |
-| `censo_subnacional` | Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas | `B-3` | 33 | 12 |
+| `censo_subnacional` | Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas | `B-3` | 33 | 13 |
 | `cepal` | CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL): Observatorio de Igualdad de Género y estadísticas de seguridad ciudadana | `A-2` | 33 | 8 |
 | `chile_ine_seguridad` | Instituto Nacional de Estadísticas de Chile (INE) — Estadísticas Policiales, cuadro de víctimas | `A-2` | 1 | 4 |
 | `ciber` | OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta | `B-2` | 33 | 6 |
@@ -198,7 +198,7 @@ python colectores/focos.py
 | `telegram` | Canales públicos de Telegram, vista sin cuenta | `F-4` | — | 8 |
 | `trata_personas` | Departamento de Estado de los Estados Unidos — Informe sobre la Trata de Personas, edición 2025 | `B-2` | 33 | 6 |
 | `ucdp` | UCDP — Programa de Datos de Conflicto de Upsala, Universidad de Upsala. Conjunto de país-año sobre violencia organizada dentro de las fronteras | `A-2` | 33 | 8 |
-| `unesco` | Instituto de Estadística de la UNESCO (UIS), interfaz abierta | `B-2` | 33 | 6 |
+| `unesco` | Instituto de Estadística de la UNESCO (UIS), interfaz abierta | `B-2` | 33 | 5 |
 | `unidades` | CEPAL — Proyecto MEGA nivel 2 (con UN-GGIM Américas) y geoBoundaries (gbOpen) | `A-2` | 33 | 4 |
 | `unodc_armas` | UNODC — Oficina de las Naciones Unidas contra la Droga y el Delito: base de tráfico de armas de fuego (incautaciones y detenciones) | `A-2` | 33 | 2 |
 | `wjp` | World Justice Project — WJP Rule of Law Index (índice general de estado de derecho) | `A-2` | 33 | 2 |
