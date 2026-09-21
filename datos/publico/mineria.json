@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-21T06:37:10+00:00",
+  "corrida": "2026-09-21T07:28:13+00:00",
   "medidas_con_suficientes_casos": 204,
   "pares_probados": 20706,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.706 pares y el umbral de siempre, alrededor de 1.035 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3912,
+    "sobreviven": 3916,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3501,
+  "pistas_totales": 3505,
   "anomalias_totales": 380,
   "pistas": [
     {
@@ -424,6 +424,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.915,
+      "estados": 21,
+      "tipo": "rangos (Spearman)",
+      "p": 3.9812595832495786e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "articulos_cientificos",
       "b": "generacion_electrica",
       "rotulo_a": "Artículos científicos y técnicos publicados",
@@ -658,19 +671,6 @@
       "misma_categoria": false
     },
     {
-      "a": "subnacional_focos:cuantas",
-      "b": "superficie",
-      "rotulo_a": "subnacional_focos · cuantas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.891,
-      "estados": 23,
-      "tipo": "rangos (Spearman)",
-      "p": 1.7252426034401567e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Corrupción política",
@@ -789,13 +789,13 @@
     },
     {
       "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
+      "b": "superficie",
       "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.883,
-      "estados": 23,
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.882,
+      "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.994041183349366e-10,
+      "p": 3.4264727847394654e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
