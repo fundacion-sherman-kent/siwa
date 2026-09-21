@@ -110,6 +110,13 @@ ASUNTOS = {
                           "trata_nivel"],
     "drogas": ["incautaciones_cocaina", "cultivo_coca", "droga_cocaina", "droga_heroina",
                "droga_cannabis", "droga_sinteticas"],
+    # Asunto propio y no dentro de «economías ilícitas»: ese renglón mide la
+    # PERCEPCIÓN/índices de terceros sobre tráfico de armas (trafico_armas, en
+    # V-Dem), y esto mide la ACCIÓN POLICIAL de cada Estado sobre su propio
+    # territorio -- incautación y detención. Un solo productor por ahora
+    # (UNODC, colector `unodc_armas`): entra en la agenda de búsqueda, no
+    # como falla (21/9/2026).
+    "tráfico ilícito de armas de fuego": ["armas_incautadas", "detenidos_trafico_armas"],
     "delito común y su denuncia": ["victimas_robo", "denuncia_robo", "denuncia_agresion",
                                    "victima_delito", "temor_delito", "seguridad_barrio"],
     "cárceles": ["sin_condena", "ocupacion_carcelaria"],
@@ -155,9 +162,24 @@ ASUNTOS = {
     "uso de inteligencia artificial": ["uso_ia_generativa"],
     "uso de ChatGPT": ["uso_chatgpt"],
     "uso de Claude": ["uso_claude"],
-    "homicidios según el propio Estado": ["homicidios_estado"],
+    "homicidios según el propio Estado": ["homicidios_estado", "homicidio_ine_chile"],
+    # Asunto propio y no dentro de «violencia letal»: esa serie es regional
+    # (homicidios/homicidios_oms/femicidios) y esta es la segunda fuente de UNA
+    # SOLA PROVINCIA (Santa Fe) que contrasta al SNIC nacional (colector
+    # `subnacional_santafe`). Sumarla a «violencia letal» haría pasar por
+    # corroborado a un asunto regional cuando la corroboración es de una sola
+    # unidad subnacional. Fuente única por ahora -- agenda, no falla -- hasta
+    # que se sumen otros observatorios provinciales (21/9/2026).
+    "homicidios según observatorios provinciales": ["homicidios_observatorio_provincial"],
     "inflación": ["inflacion_interanual", "inflacion_mensual", "inflacion_fmi"],
-    "reservas internacionales": ["reservas_internacionales"],
+    # Dos productores DISTINTOS del mismo hecho -- reserva internacional --
+    # aunque de alcance distinto: el FMI trae la serie regional (33 Estados) y
+    # el Banco Central del Ecuador trae la propia, solo para Ecuador (colector
+    # `bce_ecuador`). Es corroboración real para Ecuador, no para el resto del
+    # padrón; el control mide por asunto y no por país, así que el asunto pasa
+    # a "con dos o más" aun cuando 32 Estados sigan con una sola fuente
+    # (21/9/2026).
+    "reservas internacionales": ["reservas_internacionales", "reservas_bce_ecuador"],
     "asistentes de IA en la tienda de apps, por origen": ["ia_apps_ranking", "ia_apps_ranking_eeuu",
                                                           "ia_apps_ranking_china", "ia_apps_ranking_otros",
                                                           "ia_apps_disponibles"],
@@ -192,6 +214,20 @@ SIN_SEGUNDA = {
     "situación compuesta": "son índices propios de la Oficina, armados con materias que "
                            "ya declaran su fuente: pedirles una segunda fuente sería "
                            "pedir que otro publique nuestro propio cálculo.",
+}
+
+# MATERIAS PRELIMINARES QUE TODAVÍA NO ENTRAN AL MAPA, y por qué. Se recolectan y
+# se publica su JSON, pero por decisión de Dirección no bajan a la unidad todavía
+# (subnacional, prototipo). Este control no tiene forma de exigirles un asunto
+# clasificado sin, de paso, tratarlas como si ya fueran materia definitiva. El
+# mismo patrón que `NO_SON_FUENTES` en lista-de-fuentes.py: la exclusión se
+# declara con su motivo, y si el motivo deja de correr, este control lo avisa
+# (ver el chequeo más abajo).
+PRELIMINARES = {
+    "denuncias_ddhh_pdh": "SUBNACIONAL Y PROTOTIPO (colector `pdh_guatemala_subnacional`): "
+                          "el propio archivo declara que no va al mapa sin aprobación de "
+                          "la Dirección; clasificarla en un asunto la trataría como materia "
+                          "ya definitiva.",
 }
 
 
@@ -299,7 +335,7 @@ def main() -> None:
 
     publicadas = set(de_quien)
     clasificadas = {k for v in ASUNTOS.values() for k in v}
-    huerfanas = sorted(publicadas - clasificadas)
+    huerfanas = sorted(publicadas - clasificadas - set(PRELIMINARES))
 
     asuntos, agenda, fallas = [], [], []
     for asunto, claves in sorted(ASUNTOS.items()):
@@ -320,6 +356,18 @@ def main() -> None:
         fallas.append({"que": "materia publicada sin asunto declarado", "quien": k,
                        "porque": "este control no puede vigilar lo que no está clasificado, "
                                  "y un control con agujeros invisibles no es un control"})
+
+    # EXCLUSIONES DE PRELIMINARES QUE YA NO CORREN: la clave dejó de publicarse,
+    # o alguien la clasificó en ASUNTOS y la exclusión sobra (mismo chequeo que
+    # lista-de-fuentes.py hace con NO_SON_FUENTES).
+    for k, motivo in sorted(PRELIMINARES.items()):
+        if k not in publicadas:
+            fallas.append({"que": "preliminar declarado que ya no se publica", "quien": k,
+                           "porque": "la exclusión en PRELIMINARES sobra: revisar y sacarla"})
+        elif k in clasificadas:
+            fallas.append({"que": "preliminar declarado Y clasificado en ASUNTOS", "quien": k,
+                           "porque": "una de las dos cosas sobra: o ya no es preliminar, "
+                                     "o no debería estar en un asunto"})
 
     # EL RETROCESO DE DOS FUENTES A UNA SE AVISA. Era la primera promesa de este
     # control y no estaba en el código: se compara con la medición anterior.
