@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-22T12:46:38+00:00",
+  "corrida": "2026-09-22T13:27:52+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3933,
+    "sobreviven": 3972,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3522,
-  "anomalias_totales": 384,
+  "pistas_totales": 3561,
+  "anomalias_totales": 382,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -68,19 +68,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 9.606943935565834e-32,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "secundaria_cepal",
-      "b": "termina_secundaria",
-      "rotulo_a": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
-      "rotulo_b": "Terminan la secundaria",
-      "coeficiente": 0.973,
-      "estados": 17,
-      "tipo": "rangos (Spearman)",
-      "p": 9.639140440489106e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +783,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 3.565480405450303e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "democracia_liberal",
+      "b": "estado_derecho_wjp",
+      "rotulo_a": "Democracia liberal — límites al poder",
+      "rotulo_b": "Estado de derecho (WJP)",
+      "coeficiente": 0.885,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 1.5695355100650316e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
