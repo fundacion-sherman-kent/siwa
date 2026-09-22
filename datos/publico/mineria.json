@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-21T22:25:16+00:00",
-  "medidas_con_suficientes_casos": 205,
-  "pares_probados": 20910,
+  "corrida": "2026-09-22T00:04:44+00:00",
+  "medidas_con_suficientes_casos": 206,
+  "pares_probados": 21115,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3935,
+    "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3996,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3524,
+  "pistas_totales": 3585,
   "anomalias_totales": 382,
   "pistas": [
     {
@@ -190,19 +190,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.943,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.9840053308397474e-22,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -211,6 +198,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.942,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 8.431302002534356e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -619,6 +619,19 @@
       "misma_categoria": false
     },
     {
+      "a": "riesgo_inform_amenaza",
+      "b": "unidades:casos_por_unidad",
+      "rotulo_a": "Exposición a amenazas (INFORM)",
+      "rotulo_b": "unidades · casos_por_unidad",
+      "coeficiente": 0.897,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.308745289185404e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "subnacional_acled:cuantas",
       "rotulo_a": "Población total",
@@ -675,23 +688,10 @@
       "b": "perdida_bosque",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.894,
+      "coeficiente": 0.889,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 2.801072182687878e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "riesgo_inform_amenaza",
-      "b": "unidades:casos_por_unidad",
-      "rotulo_a": "Exposición a amenazas (INFORM)",
-      "rotulo_b": "unidades · casos_por_unidad",
-      "coeficiente": 0.894,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 2.2609870139890335e-14,
+      "p": 7.954589674355898e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

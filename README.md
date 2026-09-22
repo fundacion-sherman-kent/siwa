@@ -162,7 +162,7 @@ python colectores/focos.py
 | `inform` | INFORM Risk — Centro Común de Investigación de la Comisión Europea y OCHA | `A-3` | 33 | 4 |
 | `infraestructura` | Mapa de cables submarinos — TeleGeography, interfaz pública; OurAirports — censo abierto y colaborativo de aeródromos del mundo; Energy Institute y Ember, via Our World in Data; GCAT — catálogo general de objetos espaciales de Jonathan McDowell, CC BY 4.0 | `B-3` | 33 | 10 |
 | `memoria` | Fundación Sherman Kent — bitácora de observación de SIWA | `A-2` | 30 | 5 |
-| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 10 |
+| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 11 |
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 5 |
 | `oms_homicidios` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `A-2` | 33 | 6 |
@@ -199,7 +199,7 @@ python colectores/focos.py
 | `trata_personas` | Departamento de Estado de los Estados Unidos — Informe sobre la Trata de Personas, edición 2025 | `B-2` | 33 | 6 |
 | `ucdp` | UCDP — Programa de Datos de Conflicto de Upsala, Universidad de Upsala. Conjunto de país-año sobre violencia organizada dentro de las fronteras | `A-2` | 33 | 8 |
 | `unesco` | Instituto de Estadística de la UNESCO (UIS), interfaz abierta | `B-2` | 33 | 5 |
-| `unidades` | CEPAL — Proyecto MEGA nivel 2 (con UN-GGIM Américas) y geoBoundaries (gbOpen) | `A-2` | 33 | 4 |
+| `unidades` | CEPAL — Proyecto MEGA nivel 2 (con UN-GGIM Américas) y geoBoundaries (gbHumanitarian, con gbOpen como red de seguridad) | `A-2` | 33 | 4 |
 | `unodc_armas` | UNODC — Oficina de las Naciones Unidas contra la Droga y el Delito: base de tráfico de armas de fuego (incautaciones y detenciones) | `A-2` | 33 | 2 |
 | `wjp` | World Justice Project — WJP Rule of Law Index (índice general de estado de derecho) | `A-2` | 33 | 2 |
 

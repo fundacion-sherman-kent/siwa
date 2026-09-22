@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "unidades",
     "capa": "publico",
-    "obtenido_en": "2026-09-21T23:17:57+00:00",
+    "obtenido_en": "2026-09-21T23:24:01+00:00",
     "fuente": {
       "nombre": "CEPAL — Proyecto MEGA nivel 2 (con UN-GGIM Américas) y geoBoundaries (gbHumanitarian, con gbOpen como red de seguridad)",
       "url": "https://statistics.cepal.org/geo/geo-cepalstat/?lang=es"
@@ -10,11 +10,10 @@
     "calificacion": {
       "fiabilidad": "A",
       "credibilidad": 2,
-      "corroborado": false,
-      "nota": "EL WFS DE CEPAL FALLÓ ESTA CORRIDA (HTTPError: HTTP Error 404: ): geoBoundaries resolvió el padrón completo, así que hoy es una sola fuente y no dos. Cada unidad sigue declarando de cuál salió; ver vacíos."
+      "corroborado": true,
+      "nota": "Dos fuentes independientes se reparten el padrón sin superponerse: la CEPAL cubre 19 Estados y geoBoundaries los 14 restantes, con gbHumanitarian preferida sobre gbOpen por estar más completa. Cada unidad declara de cuál salió."
     },
     "vacios_declarados": [
-      "EL WFS DE CEPAL FALLÓ EN ESTA CORRIDA (HTTPError: HTTP Error 404: ): los 19 Estados que normalmente trae la CEPAL se resolvieron con geoBoundaries en su lugar, así que esta corrida queda con UNA sola fuente de geometría para todo el padrón y no con dos. No se rellenó con el dato de ayer: se recalculó todo con la fuente que sí respondió.",
       "2 Estados no tienen recuento absoluto de homicidios en la fuente de la OMS, así que no se puede decidir si sus unidades admiten tasa. No se supone: queda sin decidir.",
       "Los límites NO son del mismo año en todas partes: los de la CEPAL son de su capa vigente y los de geoBoundaries van de 2005 a 2021 según el Estado y la release (gbHumanitarian o gbOpen) que lo haya cubierto. Cada Estado declara el suyo.",
       "Las licencias de geoBoundaries no son todas la misma: gbHumanitarian suele traer CC BY (solo atribución) y gbOpen incluye también CC BY-SA y ODbL, de compartir-igual. Esos límites no pueden viajar a un producto que la Fundación venda sin arrastrar la misma condición; cada unidad declara la que le corresponde.",
@@ -38,10 +37,10 @@
       "pais": "Venezuela",
       "bloque": "Andina",
       "unidades": 24,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2018",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "estado",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 18132,
       "anio_homicidios": 2019,
       "casos_por_unidad": 755.5,
@@ -49,100 +48,100 @@
       "porque": "755 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "56519817B71931497151374",
-          "nombre": "Amazonas"
+          "codigo": "862001",
+          "nombre": "DISTRITO CAPITAL"
         },
         {
-          "codigo": "56519817B96727504741311",
-          "nombre": "Anzoategui"
+          "codigo": "862002",
+          "nombre": "ESTADO AMAZONAS"
         },
         {
-          "codigo": "56519817B14832289680597",
-          "nombre": "Apure"
+          "codigo": "862003",
+          "nombre": "ESTADO ANZOÁTEGUI"
         },
         {
-          "codigo": "56519817B40417173077158",
-          "nombre": "Aragua"
+          "codigo": "862004",
+          "nombre": "ESTADO APURE"
         },
         {
-          "codigo": "56519817B82588277095814",
-          "nombre": "Barinas"
+          "codigo": "862005",
+          "nombre": "ESTADO ARAGUA"
         },
         {
-          "codigo": "56519817B63831238266522",
-          "nombre": "Bolivar"
+          "codigo": "862006",
+          "nombre": "ESTADO BARINAS"
         },
         {
-          "codigo": "56519817B94667408786146",
-          "nombre": "Carabobo"
+          "codigo": "862015",
+          "nombre": "ESTADO BOLIVARIANO MIRANDA"
         },
         {
-          "codigo": "56519817B33677625626148",
-          "nombre": "Cojedes"
+          "codigo": "862007",
+          "nombre": "ESTADO BOLÍVAR"
         },
         {
-          "codigo": "56519817B37651403353531",
-          "nombre": "Delta Amacuro"
+          "codigo": "862008",
+          "nombre": "ESTADO CARABOBO"
         },
         {
-          "codigo": "56519817B51515570187738",
-          "nombre": "Distrito Federal"
+          "codigo": "862009",
+          "nombre": "ESTADO COJEDES"
         },
         {
-          "codigo": "56519817B37313279909766",
-          "nombre": "Falcon"
+          "codigo": "862010",
+          "nombre": "ESTADO DELTA AMACURO"
         },
         {
-          "codigo": "56519817B88355939450749",
-          "nombre": "Guarico"
+          "codigo": "862011",
+          "nombre": "ESTADO FALCÓN"
         },
         {
-          "codigo": "56519817B6655114803664",
-          "nombre": "Lara"
+          "codigo": "862012",
+          "nombre": "ESTADO GUÁRICO"
         },
         {
-          "codigo": "56519817B94537355685233",
-          "nombre": "Merida"
+          "codigo": "862013",
+          "nombre": "ESTADO LARA"
         },
         {
-          "codigo": "56519817B65969574202014",
-          "nombre": "Miranda"
+          "codigo": "862014",
+          "nombre": "ESTADO MÉRIDA"
         },
         {
-          "codigo": "56519817B62102756135233",
-          "nombre": "Monagas"
+          "codigo": "862016",
+          "nombre": "ESTADO MONAGAS"
         },
         {
-          "codigo": "56519817B94327150137452",
-          "nombre": "Nueva Esparta"
+          "codigo": "862017",
+          "nombre": "ESTADO NUEVA ESPARTA"
         },
         {
-          "codigo": "56519817B64592429571609",
-          "nombre": "Portuguesa"
+          "codigo": "862018",
+          "nombre": "ESTADO PORTUGUESA"
         },
         {
-          "codigo": "56519817B30043763667935",
-          "nombre": "Sucre"
+          "codigo": "862019",
+          "nombre": "ESTADO SUCRE"
         },
         {
-          "codigo": "56519817B5228038209149",
-          "nombre": "Tachira"
+          "codigo": "862020",
+          "nombre": "ESTADO TÁCHIRA"
         },
         {
-          "codigo": "56519817B60504113406475",
-          "nombre": "Trujillo"
+          "codigo": "862021",
+          "nombre": "ESTADO TRUJILLO"
         },
         {
-          "codigo": "56519817B45693777212538",
-          "nombre": "Vargas"
+          "codigo": "862024",
+          "nombre": "ESTADO VARGAS"
         },
         {
-          "codigo": "56519817B50956386497177",
-          "nombre": "Yaracuy"
+          "codigo": "862022",
+          "nombre": "ESTADO YARACUY"
         },
         {
-          "codigo": "56519817B8097924248100",
-          "nombre": "Zulia"
+          "codigo": "862023",
+          "nombre": "ESTADO ZULIA"
         }
       ]
     },
@@ -151,10 +150,10 @@
       "pais": "Uruguay",
       "bloque": "Cono Sur",
       "unidades": 19,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2017",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "departamento",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 295,
       "anio_homicidios": 2019,
       "casos_por_unidad": 15.5,
@@ -162,80 +161,80 @@
       "porque": "15.5 homicidios por unidad. Con tan pocos casos una tasa por 100.000 se mueve enormemente con un caso más: se publica el recuento.",
       "lista": [
         {
-          "codigo": "80564697B1198995001569",
-          "nombre": "Artigas"
+          "codigo": "858002",
+          "nombre": "ARTIGAS"
         },
         {
-          "codigo": "80564697B62523108156320",
-          "nombre": "Canelones"
+          "codigo": "858003",
+          "nombre": "CANELONES"
         },
         {
-          "codigo": "80564697B12097906256617",
-          "nombre": "Cerro Largo"
+          "codigo": "858004",
+          "nombre": "CERRO LARGO"
         },
         {
-          "codigo": "80564697B89336533445187",
-          "nombre": "Colonia"
+          "codigo": "858005",
+          "nombre": "COLONIA"
         },
         {
-          "codigo": "80564697B17684253505648",
-          "nombre": "Durazno"
+          "codigo": "858006",
+          "nombre": "DURAZNO"
         },
         {
-          "codigo": "80564697B9776461985396",
-          "nombre": "Flores"
+          "codigo": "858007",
+          "nombre": "FLORES"
         },
         {
-          "codigo": "80564697B98370273249532",
-          "nombre": "Florida"
+          "codigo": "858008",
+          "nombre": "FLORIDA"
         },
         {
-          "codigo": "80564697B82644675954293",
-          "nombre": "Lavalleja"
+          "codigo": "858009",
+          "nombre": "LAVALLEJA"
         },
         {
-          "codigo": "80564697B78150062627674",
-          "nombre": "Maldonado"
+          "codigo": "858010",
+          "nombre": "MALDONADO"
         },
         {
-          "codigo": "80564697B32727418629494",
-          "nombre": "Montevideo"
+          "codigo": "858001",
+          "nombre": "MONTEVIDEO"
         },
         {
-          "codigo": "80564697B88530863398689",
-          "nombre": "Paysandú"
+          "codigo": "858011",
+          "nombre": "PAYSANDU"
         },
         {
-          "codigo": "80564697B33030633994200",
-          "nombre": "Río Negro"
+          "codigo": "858012",
+          "nombre": "RIO NEGRO"
         },
         {
-          "codigo": "80564697B52754681221252",
-          "nombre": "Rivera"
+          "codigo": "858013",
+          "nombre": "RIVERA"
         },
         {
-          "codigo": "80564697B26494347406089",
-          "nombre": "Rocha"
+          "codigo": "858014",
+          "nombre": "ROCHA"
         },
         {
-          "codigo": "80564697B11618264719596",
-          "nombre": "Salto"
+          "codigo": "858015",
+          "nombre": "SALTO"
         },
         {
-          "codigo": "80564697B89607873848124",
-          "nombre": "San José"
+          "codigo": "858016",
+          "nombre": "SAN JOSE"
         },
         {
-          "codigo": "80564697B82201981627189",
-          "nombre": "Soriano"
+          "codigo": "858017",
+          "nombre": "SORIANO"
         },
         {
-          "codigo": "80564697B34025570507412",
-          "nombre": "Tacuarembó"
+          "codigo": "858018",
+          "nombre": "TACUAREMBO"
         },
         {
-          "codigo": "80564697B62914800894856",
-          "nombre": "Treinta y Tres"
+          "codigo": "858019",
+          "nombre": "TREINTA Y TRES"
         }
       ]
     },
@@ -548,115 +547,111 @@
       "iso": "PER",
       "pais": "Perú",
       "bloque": "Andina",
-      "unidades": 25,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2015",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "unidades": 24,
+      "nombre_local": "departamento",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 3013,
       "anio_homicidios": 2019,
-      "casos_por_unidad": 120.5,
+      "casos_por_unidad": 125.5,
       "admite_tasa": true,
-      "porque": "121 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
+      "porque": "126 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "95727424B408322208084",
+          "codigo": "604001",
           "nombre": "Amazonas"
         },
         {
-          "codigo": "95727424B83846690677933",
+          "codigo": "604002",
           "nombre": "Ancash"
         },
         {
-          "codigo": "95727424B9364119344765",
-          "nombre": "Apurimac"
+          "codigo": "604003",
+          "nombre": "Apurímac"
         },
         {
-          "codigo": "95727424B49933121335248",
+          "codigo": "604004",
           "nombre": "Arequipa"
         },
         {
-          "codigo": "95727424B91955929814288",
+          "codigo": "604005",
           "nombre": "Ayacucho"
         },
         {
-          "codigo": "95727424B76235055551376",
+          "codigo": "604006",
           "nombre": "Cajamarca"
         },
         {
-          "codigo": "95727424B68792293935745",
-          "nombre": "Callao"
-        },
-        {
-          "codigo": "95727424B46510537083092",
+          "codigo": "604008",
           "nombre": "Cusco"
         },
         {
-          "codigo": "95727424B74864238373664",
+          "codigo": "604009",
           "nombre": "Huancavelica"
         },
         {
-          "codigo": "95727424B67634664644534",
-          "nombre": "Huanuco"
+          "codigo": "604010",
+          "nombre": "Huánuco"
         },
         {
-          "codigo": "95727424B3379576432752",
+          "codigo": "604011",
           "nombre": "Ica"
         },
         {
-          "codigo": "95727424B82095230149835",
-          "nombre": "Junin"
+          "codigo": "604012",
+          "nombre": "Junín"
         },
         {
-          "codigo": "95727424B78907107607826",
+          "codigo": "604013",
           "nombre": "La Libertad"
         },
         {
-          "codigo": "95727424B69312363193930",
+          "codigo": "604014",
           "nombre": "Lambayeque"
         },
         {
-          "codigo": "95727424B70033936032910",
+          "codigo": "604015",
           "nombre": "Lima"
         },
         {
-          "codigo": "95727424B93318560409146",
+          "codigo": "604016",
           "nombre": "Loreto"
         },
         {
-          "codigo": "95727424B62247838323690",
-          "nombre": "Madre de Dios"
+          "codigo": "604017",
+          "nombre": "Madre de dios"
         },
         {
-          "codigo": "95727424B2865947805569",
+          "codigo": "604018",
           "nombre": "Moquegua"
         },
         {
-          "codigo": "95727424B39787915121576",
+          "codigo": "604019",
           "nombre": "Pasco"
         },
         {
-          "codigo": "95727424B19174916515507",
+          "codigo": "604020",
           "nombre": "Piura"
         },
         {
-          "codigo": "95727424B4676169286001",
+          "codigo": "604021",
           "nombre": "Puno"
         },
         {
-          "codigo": "95727424B39345752733133",
-          "nombre": "San Martin"
+          "codigo": "604022",
+          "nombre": "San Martín"
         },
         {
-          "codigo": "95727424B35323171903452",
+          "codigo": "604023",
           "nombre": "Tacna"
         },
         {
-          "codigo": "95727424B59179356952238",
+          "codigo": "604024",
           "nombre": "Tumbes"
         },
         {
-          "codigo": "95727424B67686182322292",
+          "codigo": "604025",
           "nombre": "Ucayali"
         }
       ]
@@ -665,87 +660,83 @@
       "iso": "PRY",
       "pais": "Paraguay",
       "bloque": "Cono Sur",
-      "unidades": 18,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2017",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "unidades": 17,
+      "nombre_local": "departamento",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 566,
       "anio_homicidios": 2019,
-      "casos_por_unidad": 31.4,
+      "casos_por_unidad": 33.3,
       "admite_tasa": true,
-      "porque": "31 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
+      "porque": "33 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "72632821B8670602259839",
+          "codigo": "600017",
           "nombre": "Alto Paraguay"
         },
         {
-          "codigo": "72632821B15042956543896",
+          "codigo": "600010",
           "nombre": "Alto Paraná"
         },
         {
-          "codigo": "72632821B86698456821020",
+          "codigo": "600013",
           "nombre": "Amambay"
         },
         {
-          "codigo": "72632821B75783196862149",
-          "nombre": "Asunción"
-        },
-        {
-          "codigo": "72632821B23852562832392",
+          "codigo": "600016",
           "nombre": "Boquerón"
         },
         {
-          "codigo": "72632821B19150834980400",
+          "codigo": "600005",
           "nombre": "Caaguazú"
         },
         {
-          "codigo": "72632821B88283912308354",
+          "codigo": "600006",
           "nombre": "Caazapá"
         },
         {
-          "codigo": "72632821B14080361331822",
+          "codigo": "600014",
           "nombre": "Canindeyú"
         },
         {
-          "codigo": "72632821B95692985219029",
+          "codigo": "600011",
           "nombre": "Central"
         },
         {
-          "codigo": "72632821B83536849976142",
+          "codigo": "600001",
           "nombre": "Concepción"
         },
         {
-          "codigo": "72632821B50479026686944",
+          "codigo": "600003",
           "nombre": "Cordillera"
         },
         {
-          "codigo": "72632821B79403940235505",
+          "codigo": "600004",
           "nombre": "Guairá"
         },
         {
-          "codigo": "72632821B17509224146275",
+          "codigo": "600007",
           "nombre": "Itapúa"
         },
         {
-          "codigo": "72632821B24053055431374",
+          "codigo": "600008",
           "nombre": "Misiones"
         },
         {
-          "codigo": "72632821B86106009155968",
+          "codigo": "600012",
           "nombre": "Ñeembucú"
         },
         {
-          "codigo": "72632821B55602411110151",
+          "codigo": "600009",
           "nombre": "Paraguarí"
         },
         {
-          "codigo": "72632821B15818945230975",
+          "codigo": "600015",
           "nombre": "Presidente Hayes"
         },
         {
-          "codigo": "72632821B36537792199297",
+          "codigo": "600002",
           "nombre": "San Pedro"
         }
       ]
@@ -754,67 +745,63 @@
       "iso": "PAN",
       "pais": "Panamá",
       "bloque": "México y Centroamérica",
-      "unidades": 13,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2020",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "unidades": 12,
+      "nombre_local": "provincia",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 730,
       "anio_homicidios": 2019,
-      "casos_por_unidad": 56.1,
+      "casos_por_unidad": 60.8,
       "admite_tasa": true,
-      "porque": "56 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
+      "porque": "61 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "12938417B95790673917149",
+          "codigo": "591001",
           "nombre": "Bocas del Toro"
         },
         {
-          "codigo": "12938417B67935899714093",
+          "codigo": "591004",
           "nombre": "Chiriquí"
         },
         {
-          "codigo": "12938417B37534854973081",
+          "codigo": "591002",
           "nombre": "Coclé"
         },
         {
-          "codigo": "12938417B62833246731749",
+          "codigo": "591003",
           "nombre": "Colón"
         },
         {
-          "codigo": "12938417B88355982361970",
+          "codigo": "591011",
+          "nombre": "Comarca Emberá Wounaán"
+        },
+        {
+          "codigo": "591010",
+          "nombre": "Comarca Kuna Yala"
+        },
+        {
+          "codigo": "591012",
+          "nombre": "Comarca Ngäbe Buglé"
+        },
+        {
+          "codigo": "591005",
           "nombre": "Darién"
         },
         {
-          "codigo": "12938417B42681771960261",
-          "nombre": "Emberá"
-        },
-        {
-          "codigo": "12938417B86555161689861",
+          "codigo": "591006",
           "nombre": "Herrera"
         },
         {
-          "codigo": "12938417B7097344219581",
-          "nombre": "Kuna Yala"
-        },
-        {
-          "codigo": "12938417B50611275389514",
+          "codigo": "591007",
           "nombre": "Los Santos"
         },
         {
-          "codigo": "12938417B7551203017130",
-          "nombre": "Ngöbe Buglé"
-        },
-        {
-          "codigo": "12938417B63872371062078",
+          "codigo": "591008",
           "nombre": "Panamá"
         },
         {
-          "codigo": "12938417B68215981178965",
-          "nombre": "Panamá Oeste"
-        },
-        {
-          "codigo": "12938417B29428681441486",
+          "codigo": "591009",
           "nombre": "Veraguas"
         }
       ]
@@ -823,84 +810,80 @@
       "iso": "NIC",
       "pais": "Nicaragua",
       "bloque": "México y Centroamérica",
-      "unidades": 17,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2017",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "unidades": 16,
+      "nombre_local": "departamento",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 619,
       "anio_homicidios": 2019,
-      "casos_por_unidad": 36.4,
+      "casos_por_unidad": 38.7,
       "admite_tasa": true,
-      "porque": "36 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
+      "porque": "39 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "14209808B26537428398342",
-          "nombre": "Boaco"
+          "codigo": "558050",
+          "nombre": "BOACO"
         },
         {
-          "codigo": "14209808B37460489301635",
-          "nombre": "Carazo"
+          "codigo": "558075",
+          "nombre": "CARAZO"
         },
         {
-          "codigo": "14209808B5655555821502",
-          "nombre": "Chinandega"
+          "codigo": "558030",
+          "nombre": "CHINANDEGA"
         },
         {
-          "codigo": "14209808B82535016445107",
-          "nombre": "Chontales"
+          "codigo": "558065",
+          "nombre": "CHONTALES"
         },
         {
-          "codigo": "14209808B48742649675146",
-          "nombre": "Estelí"
+          "codigo": "558025",
+          "nombre": "ESTELI"
         },
         {
-          "codigo": "14209808B78285117766006",
-          "nombre": "Granada"
+          "codigo": "558070",
+          "nombre": "GRANADA"
         },
         {
-          "codigo": "14209808B19761284646968",
-          "nombre": "Jinotega"
+          "codigo": "558010",
+          "nombre": "JINOTEGA"
         },
         {
-          "codigo": "14209808B18962414184757",
-          "nombre": "León"
+          "codigo": "558035",
+          "nombre": "LEON"
         },
         {
-          "codigo": "14209808B5988260193817",
-          "nombre": "Madriz"
+          "codigo": "558020",
+          "nombre": "MADRIZ"
         },
         {
-          "codigo": "14209808B34019257908190",
-          "nombre": "Managua"
+          "codigo": "558055",
+          "nombre": "MANAGUA"
         },
         {
-          "codigo": "14209808B84184825497854",
-          "nombre": "Masaya"
+          "codigo": "558060",
+          "nombre": "MASAYA"
         },
         {
-          "codigo": "14209808B71303504251074",
-          "nombre": "Matagalpa"
+          "codigo": "558040",
+          "nombre": "MATAGALPA"
         },
         {
-          "codigo": "14209808B12365020834195",
-          "nombre": "Nueva Segovia"
+          "codigo": "558005",
+          "nombre": "NUEVA SEGOVIA"
         },
         {
-          "codigo": "14209808B89078376537074",
-          "nombre": "Región Autónoma Atlántico Norte"
+          "codigo": "558091",
+          "nombre": "REGION AUTONOMA DE LA COSTA CARIBE NORTE (RACCN)"
         },
         {
-          "codigo": "14209808B92122758245596",
-          "nombre": "Región Autónoma Atlántico Sur"
+          "codigo": "558085",
+          "nombre": "RIO SAN JUAN"
         },
         {
-          "codigo": "14209808B86851793780466",
-          "nombre": "Río San Juan"
-        },
-        {
-          "codigo": "14209808B25312685332130",
-          "nombre": "Rivas"
+          "codigo": "558080",
+          "nombre": "RIVAS"
         }
       ]
     },
@@ -909,10 +892,10 @@
       "pais": "México",
       "bloque": "México y Centroamérica",
       "unidades": 32,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2020",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "estado",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 32450,
       "anio_homicidios": 2019,
       "casos_por_unidad": 1014.1,
@@ -920,131 +903,131 @@
       "porque": "1014 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "98052597B11941119740690",
+          "codigo": "484001",
           "nombre": "Aguascalientes"
         },
         {
-          "codigo": "98052597B26508443667513",
+          "codigo": "484002",
           "nombre": "Baja California"
         },
         {
-          "codigo": "98052597B4593188952621",
+          "codigo": "484003",
           "nombre": "Baja California Sur"
         },
         {
-          "codigo": "98052597B9105633594834",
+          "codigo": "484004",
           "nombre": "Campeche"
         },
         {
-          "codigo": "98052597B14942501430324",
+          "codigo": "484007",
           "nombre": "Chiapas"
         },
         {
-          "codigo": "98052597B13892435843472",
+          "codigo": "484008",
           "nombre": "Chihuahua"
         },
         {
-          "codigo": "98052597B7159471215405",
+          "codigo": "484009",
+          "nombre": "Ciudad de México"
+        },
+        {
+          "codigo": "484005",
           "nombre": "Coahuila de Zaragoza"
         },
         {
-          "codigo": "98052597B44026005666457",
+          "codigo": "484006",
           "nombre": "Colima"
         },
         {
-          "codigo": "98052597B35898236654776",
-          "nombre": "Distrito Federal"
-        },
-        {
-          "codigo": "98052597B37361540883164",
+          "codigo": "484010",
           "nombre": "Durango"
         },
         {
-          "codigo": "98052597B85016982170960",
+          "codigo": "484011",
           "nombre": "Guanajuato"
         },
         {
-          "codigo": "98052597B52987931087227",
+          "codigo": "484012",
           "nombre": "Guerrero"
         },
         {
-          "codigo": "98052597B35031248059301",
+          "codigo": "484013",
           "nombre": "Hidalgo"
         },
         {
-          "codigo": "98052597B42759214188103",
+          "codigo": "484014",
           "nombre": "Jalisco"
         },
         {
-          "codigo": "98052597B46567033443293",
+          "codigo": "484015",
           "nombre": "México"
         },
         {
-          "codigo": "98052597B8939930477611",
+          "codigo": "484016",
           "nombre": "Michoacán de Ocampo"
         },
         {
-          "codigo": "98052597B36172734809975",
+          "codigo": "484017",
           "nombre": "Morelos"
         },
         {
-          "codigo": "98052597B73072613593338",
+          "codigo": "484018",
           "nombre": "Nayarit"
         },
         {
-          "codigo": "98052597B56011277694845",
+          "codigo": "484019",
           "nombre": "Nuevo León"
         },
         {
-          "codigo": "98052597B36517083550959",
+          "codigo": "484020",
           "nombre": "Oaxaca"
         },
         {
-          "codigo": "98052597B75017558864365",
+          "codigo": "484021",
           "nombre": "Puebla"
         },
         {
-          "codigo": "98052597B14760524038135",
-          "nombre": "Querétaro de Arteaga"
+          "codigo": "484022",
+          "nombre": "Querétaro"
         },
         {
-          "codigo": "98052597B29724476078346",
+          "codigo": "484023",
           "nombre": "Quintana Roo"
         },
         {
-          "codigo": "98052597B68507857064204",
+          "codigo": "484024",
           "nombre": "San Luis Potosí"
         },
         {
-          "codigo": "98052597B25674980661302",
+          "codigo": "484025",
           "nombre": "Sinaloa"
         },
         {
-          "codigo": "98052597B67135365989015",
+          "codigo": "484026",
           "nombre": "Sonora"
         },
         {
-          "codigo": "98052597B50425192008641",
+          "codigo": "484027",
           "nombre": "Tabasco"
         },
         {
-          "codigo": "98052597B61061630085706",
+          "codigo": "484028",
           "nombre": "Tamaulipas"
         },
         {
-          "codigo": "98052597B4326606574727",
+          "codigo": "484029",
           "nombre": "Tlaxcala"
         },
         {
-          "codigo": "98052597B63727932689904",
+          "codigo": "484030",
           "nombre": "Veracruz de Ignacio de la Llave"
         },
         {
-          "codigo": "98052597B35178438838137",
+          "codigo": "484031",
           "nombre": "Yucatán"
         },
         {
-          "codigo": "98052597B92523477202333",
+          "codigo": "484032",
           "nombre": "Zacatecas"
         }
       ]
@@ -1126,87 +1109,83 @@
       "iso": "HND",
       "pais": "Honduras",
       "bloque": "México y Centroamérica",
-      "unidades": 18,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2015",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "unidades": 17,
+      "nombre_local": "departamento",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 6520,
       "anio_homicidios": 2019,
-      "casos_por_unidad": 362.2,
+      "casos_por_unidad": 383.5,
       "admite_tasa": true,
-      "porque": "362 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
+      "porque": "384 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "HND-ADM1-49027024B48011358",
-          "nombre": "Atlantida"
-        },
-        {
-          "codigo": "HND-ADM1-49027024B48093306",
+          "codigo": "340006",
           "nombre": "Choluteca"
         },
         {
-          "codigo": "HND-ADM1-49027024B73128823",
-          "nombre": "Colon"
+          "codigo": "340002",
+          "nombre": "Colón"
         },
         {
-          "codigo": "HND-ADM1-49027024B15118174",
+          "codigo": "340003",
           "nombre": "Comayagua"
         },
         {
-          "codigo": "HND-ADM1-49027024B50565218",
-          "nombre": "Copan"
+          "codigo": "340004",
+          "nombre": "Copán"
         },
         {
-          "codigo": "HND-ADM1-49027024B8319893",
-          "nombre": "Cortes"
+          "codigo": "340005",
+          "nombre": "Cortés"
         },
         {
-          "codigo": "HND-ADM1-49027024B76122723",
-          "nombre": "El Paraiso"
+          "codigo": "340007",
+          "nombre": "El Paraíso"
         },
         {
-          "codigo": "HND-ADM1-49027024B68880276",
-          "nombre": "Francisco Morazan"
+          "codigo": "340008",
+          "nombre": "Francisco Morazán"
         },
         {
-          "codigo": "HND-ADM1-49027024B1396673",
+          "codigo": "340009",
           "nombre": "Gracias a Dios"
         },
         {
-          "codigo": "HND-ADM1-49027024B91382991",
-          "nombre": "Intibuca"
+          "codigo": "340010",
+          "nombre": "Intibucá"
         },
         {
-          "codigo": "HND-ADM1-49027024B28787020",
-          "nombre": "Islas de La Bahia"
+          "codigo": "340011",
+          "nombre": "Islas de la BahÍa"
         },
         {
-          "codigo": "HND-ADM1-49027024B68479143",
+          "codigo": "340012",
           "nombre": "La Paz"
         },
         {
-          "codigo": "HND-ADM1-49027024B77869837",
+          "codigo": "340013",
           "nombre": "Lempira"
         },
         {
-          "codigo": "HND-ADM1-49027024B52438486",
+          "codigo": "340014",
           "nombre": "Ocotepeque"
         },
         {
-          "codigo": "HND-ADM1-49027024B36206966",
+          "codigo": "340015",
           "nombre": "Olancho"
         },
         {
-          "codigo": "HND-ADM1-49027024B34052282",
-          "nombre": "Santa Barbara"
+          "codigo": "340016",
+          "nombre": "Santa Bárbara"
         },
         {
-          "codigo": "HND-ADM1-49027024B62413387",
+          "codigo": "340017",
           "nombre": "Valle"
         },
         {
-          "codigo": "HND-ADM1-49027024B8543513",
+          "codigo": "340018",
           "nombre": "Yoro"
         }
       ]
@@ -1330,10 +1309,10 @@
       "pais": "Guatemala",
       "bloque": "México y Centroamérica",
       "unidades": 22,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2019",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "departamento",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 4411,
       "anio_homicidios": 2019,
       "casos_por_unidad": 200.5,
@@ -1341,91 +1320,91 @@
       "porque": "200 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "84958850B73130114324294",
+          "codigo": "320016",
           "nombre": "Alta Verapaz"
         },
         {
-          "codigo": "84958850B44050960728696",
+          "codigo": "320015",
           "nombre": "Baja Verapaz"
         },
         {
-          "codigo": "84958850B41006003138267",
+          "codigo": "320004",
           "nombre": "Chimaltenango"
         },
         {
-          "codigo": "84958850B55601218136357",
+          "codigo": "320020",
           "nombre": "Chiquimula"
         },
         {
-          "codigo": "84958850B7994744545809",
+          "codigo": "320002",
           "nombre": "El Progreso"
         },
         {
-          "codigo": "84958850B57986051838588",
+          "codigo": "320005",
           "nombre": "Escuintla"
         },
         {
-          "codigo": "84958850B32339411344941",
+          "codigo": "320001",
           "nombre": "Guatemala"
         },
         {
-          "codigo": "84958850B50175156945825",
+          "codigo": "320013",
           "nombre": "Huehuetenango"
         },
         {
-          "codigo": "84958850B66576042826423",
+          "codigo": "320018",
           "nombre": "Izabal"
         },
         {
-          "codigo": "84958850B27156855506470",
+          "codigo": "320021",
           "nombre": "Jalapa"
         },
         {
-          "codigo": "84958850B41978916528075",
+          "codigo": "320022",
           "nombre": "Jutiapa"
         },
         {
-          "codigo": "84958850B28015638993109",
+          "codigo": "320017",
           "nombre": "Petén"
         },
         {
-          "codigo": "84958850B88406791546784",
+          "codigo": "320009",
           "nombre": "Quetzaltenango"
         },
         {
-          "codigo": "84958850B12300519582873",
+          "codigo": "320014",
           "nombre": "Quiché"
         },
         {
-          "codigo": "84958850B81638490353103",
+          "codigo": "320011",
           "nombre": "Retalhuleu"
         },
         {
-          "codigo": "84958850B11224370919704",
+          "codigo": "320003",
           "nombre": "Sacatepéquez"
         },
         {
-          "codigo": "84958850B24644473681617",
+          "codigo": "320012",
           "nombre": "San Marcos"
         },
         {
-          "codigo": "84958850B52274697018454",
+          "codigo": "320006",
           "nombre": "Santa Rosa"
         },
         {
-          "codigo": "84958850B70559719864288",
+          "codigo": "320007",
           "nombre": "Sololá"
         },
         {
-          "codigo": "84958850B32274472366789",
+          "codigo": "320010",
           "nombre": "Suchitepéquez"
         },
         {
-          "codigo": "84958850B11230138754767",
+          "codigo": "320008",
           "nombre": "Totonicapán"
         },
         {
-          "codigo": "84958850B61017031797382",
+          "codigo": "320019",
           "nombre": "Zacapa"
         }
       ]
@@ -1480,10 +1459,10 @@
       "pais": "El Salvador",
       "bloque": "México y Centroamérica",
       "unidades": 14,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2020",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "departamento",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 5485,
       "anio_homicidios": 2019,
       "casos_por_unidad": 391.8,
@@ -1491,60 +1470,60 @@
       "porque": "392 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "70761779B47431256471434",
-          "nombre": "Ahuachapán"
+          "codigo": "22201",
+          "nombre": "AHUACHAPAN"
         },
         {
-          "codigo": "70761779B68682175614594",
-          "nombre": "Cabañas"
+          "codigo": "22209",
+          "nombre": "CABANAS"
         },
         {
-          "codigo": "70761779B34426950810075",
-          "nombre": "Chalatenango"
+          "codigo": "22204",
+          "nombre": "CHALATENANGO"
         },
         {
-          "codigo": "70761779B9581436860689",
-          "nombre": "Cuscatlán"
+          "codigo": "22207",
+          "nombre": "CUSCATLAN"
         },
         {
-          "codigo": "70761779B19427477061782",
-          "nombre": "La Libertad"
+          "codigo": "22205",
+          "nombre": "LA LIBERTAD"
         },
         {
-          "codigo": "70761779B76437072210598",
-          "nombre": "La Paz"
+          "codigo": "22208",
+          "nombre": "LA PAZ"
         },
         {
-          "codigo": "70761779B33401112605494",
-          "nombre": "La Unión"
+          "codigo": "22214",
+          "nombre": "LA UNION"
         },
         {
-          "codigo": "70761779B36728209053141",
-          "nombre": "Morazán"
+          "codigo": "22213",
+          "nombre": "MORAZAN"
         },
         {
-          "codigo": "70761779B22760574708987",
-          "nombre": "San Miguel"
+          "codigo": "22212",
+          "nombre": "SAN MIGUEL"
         },
         {
-          "codigo": "70761779B57046310180798",
-          "nombre": "San Salvador"
+          "codigo": "22206",
+          "nombre": "SAN SALVADOR"
         },
         {
-          "codigo": "70761779B56953273895592",
-          "nombre": "San Vicente"
+          "codigo": "22210",
+          "nombre": "SAN VICENTE"
         },
         {
-          "codigo": "70761779B56642797508189",
-          "nombre": "Santa Ana"
+          "codigo": "22202",
+          "nombre": "SANTA ANA"
         },
         {
-          "codigo": "70761779B73032949287828",
-          "nombre": "Sonsonate"
+          "codigo": "22203",
+          "nombre": "SONSONATE"
         },
         {
-          "codigo": "70761779B19229870901418",
-          "nombre": "Usulután"
+          "codigo": "22211",
+          "nombre": "USULUTAN"
         }
       ]
     },
@@ -1552,116 +1531,112 @@
       "iso": "ECU",
       "pais": "Ecuador",
       "bloque": "Andina",
-      "unidades": 25,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2018",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "unidades": 24,
+      "nombre_local": "provincia",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 1210,
       "anio_homicidios": 2019,
-      "casos_por_unidad": 48.4,
+      "casos_por_unidad": 50.4,
       "admite_tasa": true,
-      "porque": "48 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
+      "porque": "50 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "21010510B75639144310013",
-          "nombre": "Azuay"
+          "codigo": "218001",
+          "nombre": "AZUAY"
         },
         {
-          "codigo": "21010510B34699500920914",
-          "nombre": "Bolivar"
+          "codigo": "218002",
+          "nombre": "BOLIVAR"
         },
         {
-          "codigo": "21010510B38942156246085",
-          "nombre": "Cañar"
+          "codigo": "218003",
+          "nombre": "CA8AR"
         },
         {
-          "codigo": "21010510B87646393969556",
-          "nombre": "Carchi"
+          "codigo": "218004",
+          "nombre": "CARCHI"
         },
         {
-          "codigo": "21010510B70625465191573",
-          "nombre": "Chimborazo"
+          "codigo": "218006",
+          "nombre": "CHIMBORAZO"
         },
         {
-          "codigo": "21010510B88400045602760",
-          "nombre": "Cotopaxi"
+          "codigo": "218005",
+          "nombre": "COTOPAXI"
         },
         {
-          "codigo": "21010510B84282838591880",
-          "nombre": "El Oro"
+          "codigo": "218007",
+          "nombre": "EL ORO"
         },
         {
-          "codigo": "21010510B9522171144168",
-          "nombre": "Esmeraldas"
+          "codigo": "218008",
+          "nombre": "ESMERALDAS"
         },
         {
-          "codigo": "21010510B46254116619258",
-          "nombre": "Galapagos"
+          "codigo": "218020",
+          "nombre": "GALAPAGOS"
         },
         {
-          "codigo": "21010510B48438283968",
-          "nombre": "Guayas"
+          "codigo": "218009",
+          "nombre": "GUAYAS"
         },
         {
-          "codigo": "21010510B51769673582608",
-          "nombre": "Imbabura"
+          "codigo": "218010",
+          "nombre": "IMBABURA"
         },
         {
-          "codigo": "21010510B29220315992993",
-          "nombre": "Loja"
+          "codigo": "218011",
+          "nombre": "LOJA"
         },
         {
-          "codigo": "21010510B43477953487028",
-          "nombre": "Los Rios"
+          "codigo": "218012",
+          "nombre": "LOS RIOS"
         },
         {
-          "codigo": "21010510B72073794833428",
-          "nombre": "Manabi"
+          "codigo": "218013",
+          "nombre": "MANABI"
         },
         {
-          "codigo": "21010510B27506899732119",
-          "nombre": "Morona Santiago"
+          "codigo": "218014",
+          "nombre": "MORONA SANTIAGO"
         },
         {
-          "codigo": "21010510B70247264398989",
-          "nombre": "Napo"
+          "codigo": "218015",
+          "nombre": "NAPO"
         },
         {
-          "codigo": "21010510B12675502810680",
-          "nombre": "Orellana"
+          "codigo": "218022",
+          "nombre": "ORELLANA"
         },
         {
-          "codigo": "21010510B6487605715658",
-          "nombre": "Pastaza"
+          "codigo": "218016",
+          "nombre": "PASTAZA"
         },
         {
-          "codigo": "21010510B92135023939136",
-          "nombre": "Pichincha"
+          "codigo": "218017",
+          "nombre": "PICHINCHA"
         },
         {
-          "codigo": "21010510B71651209819373",
-          "nombre": "Santa Elena"
+          "codigo": "218024",
+          "nombre": "SANTA ELENA"
         },
         {
-          "codigo": "21010510B42952458340379",
-          "nombre": "Santo Domingo de los Tsachilas"
+          "codigo": "218023",
+          "nombre": "SANTO DOMINGO DE LOS TSACHILAS"
         },
         {
-          "codigo": "21010510B1731861532783",
-          "nombre": "Sucumbios"
+          "codigo": "218021",
+          "nombre": "SUCUMBIOS"
         },
         {
-          "codigo": "21010510B43515971509962",
-          "nombre": "Tungurahua"
+          "codigo": "218018",
+          "nombre": "TUNGURAHUA"
         },
         {
-          "codigo": "21010510B50265765560945",
-          "nombre": "Zamora Chinchipe"
-        },
-        {
-          "codigo": "21010510B79761010694148",
-          "nombre": "Zona No Delimitada"
+          "codigo": "218019",
+          "nombre": "ZAMORA CHINCHIPE"
         }
       ]
     },
@@ -1669,56 +1644,140 @@
       "iso": "DOM",
       "pais": "República Dominicana",
       "bloque": "Caribe hispano y Haití",
-      "unidades": 10,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2017",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "unidades": 31,
+      "nombre_local": "provincia",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 1917,
       "anio_homicidios": 2019,
-      "casos_por_unidad": 191.7,
+      "casos_por_unidad": 61.8,
       "admite_tasa": true,
-      "porque": "192 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
+      "porque": "62 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "57920505B93273392135884",
-          "nombre": "Región Cibao Nordeste"
+          "codigo": "21402",
+          "nombre": "AZUA"
         },
         {
-          "codigo": "57920505B54358480761659",
-          "nombre": "Región Cibao Noroeste"
+          "codigo": "21403",
+          "nombre": "BAORUCO"
         },
         {
-          "codigo": "57920505B85302677953392",
-          "nombre": "Región Cibao Norte"
+          "codigo": "21404",
+          "nombre": "BARAHONA"
         },
         {
-          "codigo": "57920505B64607754859164",
-          "nombre": "Región Cibao Sur"
+          "codigo": "21405",
+          "nombre": "DAJABÓN"
         },
         {
-          "codigo": "57920505B69242292948047",
-          "nombre": "Región El Valle"
+          "codigo": "21401",
+          "nombre": "DISTRITO NACIONAL"
         },
         {
-          "codigo": "57920505B12754692064934",
-          "nombre": "Región Enriquillo"
+          "codigo": "21406",
+          "nombre": "DUARTE"
         },
         {
-          "codigo": "57920505B69129749944766",
-          "nombre": "Región Higuamo"
+          "codigo": "21408",
+          "nombre": "EL SEIBO"
         },
         {
-          "codigo": "57920505B76883175299605",
-          "nombre": "Región Ozama"
+          "codigo": "21407",
+          "nombre": "ELIAS PIÑA"
         },
         {
-          "codigo": "57920505B63077394574974",
-          "nombre": "Región Valdesia"
+          "codigo": "21409",
+          "nombre": "ESPAILLAT"
         },
         {
-          "codigo": "57920505B74230315009518",
-          "nombre": "Región Yuma"
+          "codigo": "21430",
+          "nombre": "HATO MAYOR"
+        },
+        {
+          "codigo": "21419",
+          "nombre": "HERMANAS MIRABAL"
+        },
+        {
+          "codigo": "21410",
+          "nombre": "INDEPENDENCIA"
+        },
+        {
+          "codigo": "21411",
+          "nombre": "LA ALTAGRACIA"
+        },
+        {
+          "codigo": "21412",
+          "nombre": "LA ROMANA"
+        },
+        {
+          "codigo": "21413",
+          "nombre": "LA VEGA"
+        },
+        {
+          "codigo": "21414",
+          "nombre": "MARÍA TRINIDAD SÁNCHEZ"
+        },
+        {
+          "codigo": "21428",
+          "nombre": "MONSEÑOR NOUEL"
+        },
+        {
+          "codigo": "21415",
+          "nombre": "MONTE CRISTI"
+        },
+        {
+          "codigo": "21429",
+          "nombre": "MONTE PLATA"
+        },
+        {
+          "codigo": "21416",
+          "nombre": "PEDERNALES"
+        },
+        {
+          "codigo": "21417",
+          "nombre": "PERAVIA"
+        },
+        {
+          "codigo": "21418",
+          "nombre": "PUERTO PLATA"
+        },
+        {
+          "codigo": "21420",
+          "nombre": "SAMANÁ"
+        },
+        {
+          "codigo": "21421",
+          "nombre": "SAN CRISTÓBAL"
+        },
+        {
+          "codigo": "21431",
+          "nombre": "SAN JOSÉ DE OCOA"
+        },
+        {
+          "codigo": "21422",
+          "nombre": "SAN JUAN"
+        },
+        {
+          "codigo": "21423",
+          "nombre": "SAN PEDRO DE MACORÍS"
+        },
+        {
+          "codigo": "21424",
+          "nombre": "SANCHEZ RAMÍREZ"
+        },
+        {
+          "codigo": "21425",
+          "nombre": "SANTIAGO"
+        },
+        {
+          "codigo": "21426",
+          "nombre": "SANTIAGO RODRÍGUEZ"
+        },
+        {
+          "codigo": "21427",
+          "nombre": "VALVERDE"
         }
       ]
     },
@@ -1784,10 +1843,10 @@
       "pais": "Cuba",
       "bloque": "Caribe hispano y Haití",
       "unidades": 16,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2017",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "provincia",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 584,
       "anio_homicidios": 2019,
       "casos_por_unidad": 36.5,
@@ -1795,67 +1854,67 @@
       "porque": "36 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "45727629B28127005339219",
+          "codigo": "19222",
           "nombre": "Artemisa"
         },
         {
-          "codigo": "45727629B48357747942287",
-          "nombre": "Camagüey"
+          "codigo": "19230",
+          "nombre": "Camag"
         },
         {
-          "codigo": "45727629B72748656127091",
-          "nombre": "Ciego de Ávila"
+          "codigo": "19229",
+          "nombre": "Ciego de Avila"
         },
         {
-          "codigo": "45727629B75167533650740",
+          "codigo": "19227",
           "nombre": "Cienfuegos"
         },
         {
-          "codigo": "45727629B81311956553781",
+          "codigo": "19233",
           "nombre": "Granma"
         },
         {
-          "codigo": "45727629B11065803726107",
-          "nombre": "Guantánamo"
+          "codigo": "19235",
+          "nombre": "Guant"
         },
         {
-          "codigo": "45727629B72251945038566",
-          "nombre": "Holguín"
+          "codigo": "19232",
+          "nombre": "Holgu"
         },
         {
-          "codigo": "45727629B71555123535468",
-          "nombre": "Isla de la Juventud"
-        },
-        {
-          "codigo": "45727629B68485549052230",
+          "codigo": "19223",
           "nombre": "La Habana"
         },
         {
-          "codigo": "45727629B60511795176896",
+          "codigo": "19231",
           "nombre": "Las Tunas"
         },
         {
-          "codigo": "45727629B36359829031364",
+          "codigo": "19225",
           "nombre": "Matanzas"
         },
         {
-          "codigo": "45727629B83670070383170",
+          "codigo": "19224",
           "nombre": "Mayabeque"
         },
         {
-          "codigo": "45727629B22384752063116",
-          "nombre": "Pinar del Río"
+          "codigo": "1924001",
+          "nombre": "ME Isla de la Juventud"
         },
         {
-          "codigo": "45727629B80020443569557",
-          "nombre": "Sancti Spíritus"
+          "codigo": "19225",
+          "nombre": "Pinar del R"
         },
         {
-          "codigo": "45727629B52931396286363",
+          "codigo": "19228",
+          "nombre": "Sancti Spsritus"
+        },
+        {
+          "codigo": "19234",
           "nombre": "Santiago de Cuba"
         },
         {
-          "codigo": "45727629B24516638366851",
+          "codigo": "19226",
           "nombre": "Villa Clara"
         }
       ]
@@ -1865,10 +1924,10 @@
       "pais": "Costa Rica",
       "bloque": "México y Centroamérica",
       "unidades": 7,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2022",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "provincia",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 635,
       "anio_homicidios": 2019,
       "casos_por_unidad": 90.8,
@@ -1876,32 +1935,32 @@
       "porque": "91 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "85557120B60811145918317",
+          "codigo": "188002",
           "nombre": "Alajuela"
         },
         {
-          "codigo": "85557120B44437344785948",
+          "codigo": "188003",
           "nombre": "Cartago"
         },
         {
-          "codigo": "85557120B19282495953541",
+          "codigo": "188005",
           "nombre": "Guanacaste"
         },
         {
-          "codigo": "85557120B72134843838457",
+          "codigo": "188004",
           "nombre": "Heredia"
         },
         {
-          "codigo": "85557120B12174557198052",
-          "nombre": "Limon"
+          "codigo": "188007",
+          "nombre": "Limón"
         },
         {
-          "codigo": "85557120B96984304543852",
+          "codigo": "188006",
           "nombre": "Puntarenas"
         },
         {
-          "codigo": "85557120B35220135477230",
-          "nombre": "San Jose"
+          "codigo": "188001",
+          "nombre": "San José"
         }
       ]
     },
@@ -1909,148 +1968,144 @@
       "iso": "COL",
       "pais": "Colombia",
       "bloque": "Andina",
-      "unidades": 33,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2020",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "unidades": 32,
+      "nombre_local": "departamento",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 19268,
       "anio_homicidios": 2019,
-      "casos_por_unidad": 583.9,
+      "casos_por_unidad": 602.1,
       "admite_tasa": true,
-      "porque": "584 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
+      "porque": "602 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "42566267B58430406918545",
-          "nombre": "Amazonas"
+          "codigo": "170091",
+          "nombre": "AMAZONAS"
         },
         {
-          "codigo": "42566267B32024247778913",
-          "nombre": "Antioquia"
+          "codigo": "170005",
+          "nombre": "ANTIOQUIA"
         },
         {
-          "codigo": "42566267B81885511830395",
-          "nombre": "Arauca"
+          "codigo": "170081",
+          "nombre": "ARAUCA"
         },
         {
-          "codigo": "42566267B49659174496539",
-          "nombre": "Archipiélago de San Andrés, Providencia y Santa Catalina"
+          "codigo": "170088",
+          "nombre": "ARCHIPIÉLAGO DE SAN ANDRES, PROVIDENCIA Y SANTA C"
         },
         {
-          "codigo": "42566267B30233244805896",
-          "nombre": "Atlántico"
+          "codigo": "170008",
+          "nombre": "ATLÁNTICO"
         },
         {
-          "codigo": "42566267B65559996937762",
-          "nombre": "Bogotá, D.C."
+          "codigo": "170013",
+          "nombre": "BOLÍVAR"
         },
         {
-          "codigo": "42566267B64888848740122",
-          "nombre": "Bolívar"
+          "codigo": "170015",
+          "nombre": "BOYACÁ"
         },
         {
-          "codigo": "42566267B5095325784285",
-          "nombre": "Boyacá"
+          "codigo": "170017",
+          "nombre": "CALDAS"
         },
         {
-          "codigo": "42566267B21351814996569",
-          "nombre": "Caldas"
+          "codigo": "170018",
+          "nombre": "CAQUETÁ"
         },
         {
-          "codigo": "42566267B13615240530838",
-          "nombre": "Caquetá"
+          "codigo": "170085",
+          "nombre": "CASANARE"
         },
         {
-          "codigo": "42566267B19340766385029",
-          "nombre": "Casanare"
+          "codigo": "170019",
+          "nombre": "CAUCA"
         },
         {
-          "codigo": "42566267B19494126662117",
-          "nombre": "Cauca"
+          "codigo": "170020",
+          "nombre": "CESAR"
         },
         {
-          "codigo": "42566267B1501541255485",
-          "nombre": "Cesar"
+          "codigo": "170027",
+          "nombre": "CHOCÓ"
         },
         {
-          "codigo": "42566267B10992917220108",
-          "nombre": "Chocó"
+          "codigo": "170023",
+          "nombre": "CÓRDOBA"
         },
         {
-          "codigo": "42566267B42238997909963",
-          "nombre": "Córdoba"
+          "codigo": "170025",
+          "nombre": "CUNDINAMARCA"
         },
         {
-          "codigo": "42566267B77251374995620",
-          "nombre": "Cundinamarca"
+          "codigo": "170094",
+          "nombre": "GUAINÍA"
         },
         {
-          "codigo": "42566267B62439591835019",
-          "nombre": "Guainía"
+          "codigo": "170095",
+          "nombre": "GUAVIARE"
         },
         {
-          "codigo": "42566267B9574918747314",
-          "nombre": "Guaviare"
+          "codigo": "170041",
+          "nombre": "HUILA"
         },
         {
-          "codigo": "42566267B14172924104981",
-          "nombre": "Huila"
+          "codigo": "170044",
+          "nombre": "LA GUAJIRA"
         },
         {
-          "codigo": "42566267B29524311694470",
-          "nombre": "La Guajira"
+          "codigo": "170047",
+          "nombre": "MAGDALENA"
         },
         {
-          "codigo": "42566267B55090830148025",
-          "nombre": "Magdalena"
+          "codigo": "170050",
+          "nombre": "META"
         },
         {
-          "codigo": "42566267B75401239569409",
-          "nombre": "Meta"
+          "codigo": "170052",
+          "nombre": "NARIÑO"
         },
         {
-          "codigo": "42566267B34637271607717",
-          "nombre": "Nariño"
+          "codigo": "170054",
+          "nombre": "NORTE DE SANTANDER"
         },
         {
-          "codigo": "42566267B64268120293971",
-          "nombre": "Norte de Santander"
+          "codigo": "170086",
+          "nombre": "PUTUMAYO"
         },
         {
-          "codigo": "42566267B31225419786856",
-          "nombre": "Putumayo"
+          "codigo": "170063",
+          "nombre": "QUINDÍO"
         },
         {
-          "codigo": "42566267B35018238464138",
-          "nombre": "Quindio"
+          "codigo": "170066",
+          "nombre": "RISARALDA"
         },
         {
-          "codigo": "42566267B39209441856936",
-          "nombre": "Risaralda"
+          "codigo": "170068",
+          "nombre": "SANTANDER"
         },
         {
-          "codigo": "42566267B11193498809117",
-          "nombre": "Santander"
+          "codigo": "170070",
+          "nombre": "SUCRE"
         },
         {
-          "codigo": "42566267B62373578778648",
-          "nombre": "Sucre"
+          "codigo": "170073",
+          "nombre": "TOLIMA"
         },
         {
-          "codigo": "42566267B18979483484919",
-          "nombre": "Tolima"
+          "codigo": "170076",
+          "nombre": "VALLE DEL CAUCA"
         },
         {
-          "codigo": "42566267B47307841195823",
-          "nombre": "Valle del Cauca"
+          "codigo": "170097",
+          "nombre": "VAUPÉS"
         },
         {
-          "codigo": "42566267B47103842442996",
-          "nombre": "Vaupés"
-        },
-        {
-          "codigo": "42566267B38050414602346",
-          "nombre": "Vichada"
+          "codigo": "170099",
+          "nombre": "VICHADA"
         }
       ]
     },
@@ -2059,10 +2114,10 @@
       "pais": "Chile",
       "bloque": "Cono Sur",
       "unidades": 16,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2021",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "región",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 744,
       "anio_homicidios": 2019,
       "casos_por_unidad": 46.5,
@@ -2070,68 +2125,68 @@
       "porque": "46 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "50868194B14818100049450",
-          "nombre": "Región de Antofagasta"
+          "codigo": "152002",
+          "nombre": "ANTOFAGASTA"
         },
         {
-          "codigo": "50868194B31439970790695",
-          "nombre": "Región de Arica y Parinacota"
+          "codigo": "152015",
+          "nombre": "ARICA Y PARINACOTA"
         },
         {
-          "codigo": "50868194B91714389486112",
-          "nombre": "Región de Atacama"
+          "codigo": "152003",
+          "nombre": "ATACAMA"
         },
         {
-          "codigo": "50868194B52632666764418",
-          "nombre": "Región de Aysén del Gral. Ibañez del Campo"
+          "codigo": "152011",
+          "nombre": "AYSÉN DEL GENERAL CARLOS IBÁÑEZ DEL CAMPO"
         },
         {
-          "codigo": "50868194B29527740668909",
-          "nombre": "Región de Coquimbo"
+          "codigo": "152008",
+          "nombre": "BIOBÍO"
         },
         {
-          "codigo": "50868194B51006121760094",
-          "nombre": "Región de La Araucanía"
+          "codigo": "152004",
+          "nombre": "COQUIMBO"
         },
         {
-          "codigo": "50868194B75603588256780",
-          "nombre": "Región de Los Lagos"
+          "codigo": "152009",
+          "nombre": "LA ARAUCANÍA"
         },
         {
-          "codigo": "50868194B21815522334804",
-          "nombre": "Región de Los Ríos"
+          "codigo": "152006",
+          "nombre": "LIBERTADOR GENERAL BERNARDO O'HIGGINS"
         },
         {
-          "codigo": "50868194B91952719719909",
-          "nombre": "Región de Magallanes y Antártica Chilena"
+          "codigo": "152010",
+          "nombre": "LOS LAGOS"
         },
         {
-          "codigo": "50868194B29836445931090",
-          "nombre": "Región de Ñuble"
+          "codigo": "152014",
+          "nombre": "LOS RÍOS"
         },
         {
-          "codigo": "50868194B26849478631569",
-          "nombre": "Región de Tarapacá"
+          "codigo": "152012",
+          "nombre": "MAGALLANES Y DE LA ANTÁRTICA CHILENA"
         },
         {
-          "codigo": "50868194B74555000931797",
-          "nombre": "Región de Valparaíso"
+          "codigo": "152007",
+          "nombre": "MAULE"
         },
         {
-          "codigo": "50868194B56894154558267",
-          "nombre": "Región del Bío-Bío"
+          "codigo": "152013",
+          "nombre": "METROPOLITANA DE SANTIAGO"
         },
         {
-          "codigo": "50868194B14329983933060",
-          "nombre": "Región del Libertador Bernardo O'Higgins"
+          "codigo": "152016",
+          "nombre": "ÑUBLE"
         },
         {
-          "codigo": "50868194B21376464942303",
-          "nombre": "Región del Maule"
+          "codigo": "152001",
+          "nombre": "TARAPACÁ"
         },
         {
-          "codigo": "50868194B65086874177375",
-          "nombre": "Región Metropolitana de Santiago"
+          "codigo": "152005",
+          "nombre": "VALPARAÍSO"
         }
       ]
     },
@@ -2139,123 +2194,119 @@
       "iso": "BRA",
       "pais": "Brasil",
       "bloque": "Cono Sur",
-      "unidades": 27,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2020",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "unidades": 26,
+      "nombre_local": "estado",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 68779,
       "anio_homicidios": 2019,
-      "casos_por_unidad": 2547.4,
+      "casos_por_unidad": 2645.4,
       "admite_tasa": true,
-      "porque": "2547 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
+      "porque": "2645 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "60159587B49532436562366",
+          "codigo": "076012",
           "nombre": "Acre"
         },
         {
-          "codigo": "60159587B68685888397983",
+          "codigo": "076027",
           "nombre": "Alagoas"
         },
         {
-          "codigo": "60159587B53144202568665",
+          "codigo": "076016",
           "nombre": "Amapá"
         },
         {
-          "codigo": "60159587B10468380590652",
+          "codigo": "076013",
           "nombre": "Amazonas"
         },
         {
-          "codigo": "60159587B61263471982168",
+          "codigo": "076029",
           "nombre": "Bahia"
         },
         {
-          "codigo": "60159587B45210374005753",
+          "codigo": "076023",
           "nombre": "Ceará"
         },
         {
-          "codigo": "60159587B58459658569897",
-          "nombre": "Distrito Federal"
-        },
-        {
-          "codigo": "60159587B95437038432578",
+          "codigo": "076032",
           "nombre": "Espírito Santo"
         },
         {
-          "codigo": "60159587B97334350393633",
+          "codigo": "076052",
           "nombre": "Goiás"
         },
         {
-          "codigo": "60159587B60159592782080",
+          "codigo": "076021",
           "nombre": "Maranhão"
         },
         {
-          "codigo": "60159587B12903742740697",
+          "codigo": "076051",
           "nombre": "Mato Grosso"
         },
         {
-          "codigo": "60159587B52803437102816",
+          "codigo": "076050",
           "nombre": "Mato Grosso do Sul"
         },
         {
-          "codigo": "60159587B53835101574985",
+          "codigo": "076031",
           "nombre": "Minas Gerais"
         },
         {
-          "codigo": "60159587B45655595285593",
+          "codigo": "076015",
           "nombre": "Pará"
         },
         {
-          "codigo": "60159587B63334864494148",
+          "codigo": "076025",
           "nombre": "Paraíba"
         },
         {
-          "codigo": "60159587B14963481749881",
+          "codigo": "076041",
           "nombre": "Paraná"
         },
         {
-          "codigo": "60159587B8372041358455",
+          "codigo": "076026",
           "nombre": "Pernambuco"
         },
         {
-          "codigo": "60159587B84786225528470",
+          "codigo": "076022",
           "nombre": "Piauí"
         },
         {
-          "codigo": "60159587B85911034470445",
+          "codigo": "076033",
           "nombre": "Rio de Janeiro"
         },
         {
-          "codigo": "60159587B75634133353384",
+          "codigo": "076024",
           "nombre": "Rio Grande do Norte"
         },
         {
-          "codigo": "60159587B18273199144746",
+          "codigo": "076043",
           "nombre": "Rio Grande do Sul"
         },
         {
-          "codigo": "60159587B12051243102581",
+          "codigo": "076011",
           "nombre": "Rondônia"
         },
         {
-          "codigo": "60159587B26178067012466",
+          "codigo": "076014",
           "nombre": "Roraima"
         },
         {
-          "codigo": "60159587B8409943202054",
+          "codigo": "076042",
           "nombre": "Santa Catarina"
         },
         {
-          "codigo": "60159587B41849656626200",
+          "codigo": "076035",
           "nombre": "São Paulo"
         },
         {
-          "codigo": "60159587B28957294814384",
+          "codigo": "076028",
           "nombre": "Sergipe"
         },
         {
-          "codigo": "60159587B54240034643363",
+          "codigo": "076017",
           "nombre": "Tocantins"
         }
       ]
@@ -2265,10 +2316,10 @@
       "pais": "Bolivia",
       "bloque": "Andina",
       "unidades": 9,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2019",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "departamento",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 1097,
       "anio_homicidios": 2019,
       "casos_por_unidad": 121.9,
@@ -2276,39 +2327,39 @@
       "porque": "122 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "57833138B63538210739273",
+          "codigo": "068008",
           "nombre": "Beni"
         },
         {
-          "codigo": "57833138B74619901780454",
+          "codigo": "068001",
           "nombre": "Chuquisaca"
         },
         {
-          "codigo": "57833138B18586044909468",
+          "codigo": "068003",
           "nombre": "Cochabamba"
         },
         {
-          "codigo": "57833138B76708237237397",
+          "codigo": "068002",
           "nombre": "La Paz"
         },
         {
-          "codigo": "57833138B79748524589613",
+          "codigo": "068004",
           "nombre": "Oruro"
         },
         {
-          "codigo": "57833138B22141922469507",
+          "codigo": "068009",
           "nombre": "Pando"
         },
         {
-          "codigo": "57833138B64760515854795",
+          "codigo": "068005",
           "nombre": "Potosí"
         },
         {
-          "codigo": "57833138B99957041761903",
+          "codigo": "068007",
           "nombre": "Santa Cruz"
         },
         {
-          "codigo": "57833138B82110246855548",
+          "codigo": "068006",
           "nombre": "Tarija"
         }
       ]
@@ -2565,10 +2616,10 @@
       "pais": "Argentina",
       "bloque": "Cono Sur",
       "unidades": 24,
-      "nombre_local": "Unknown",
-      "fuente_geometria": "geoBoundaries (gbHumanitarian)",
-      "anio_limite": "2020",
-      "licencia_geometria": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "nombre_local": "provincia",
+      "fuente_geometria": "CEPAL · Proyecto MEGA, nivel 2 (con UN-GGIM Américas)",
+      "anio_limite": null,
+      "licencia_geometria": null,
       "homicidios_del_pais": 2712,
       "anio_homicidios": 2019,
       "casos_por_unidad": 113.0,
@@ -2576,99 +2627,99 @@
       "porque": "113 homicidios por unidad: con ese recuento la tasa por 100.000 tiene un error relativo tolerable.",
       "lista": [
         {
-          "codigo": "19242171B67325407992592",
+          "codigo": "032006",
           "nombre": "Buenos Aires"
         },
         {
-          "codigo": "19242171B21812337854314",
+          "codigo": "032010",
           "nombre": "Catamarca"
         },
         {
-          "codigo": "19242171B68031762728331",
+          "codigo": "032022",
           "nombre": "Chaco"
         },
         {
-          "codigo": "19242171B37021956910639",
+          "codigo": "032026",
           "nombre": "Chubut"
         },
         {
-          "codigo": "19242171B44273571741390",
-          "nombre": "Ciudad de Buenos Aires"
+          "codigo": "032002",
+          "nombre": "Ciudad Autónoma de Buenos Aires"
         },
         {
-          "codigo": "19242171B50125698327464",
+          "codigo": "032014",
           "nombre": "Córdoba"
         },
         {
-          "codigo": "19242171B4270298834982",
+          "codigo": "032018",
           "nombre": "Corrientes"
         },
         {
-          "codigo": "19242171B687295543128",
+          "codigo": "032030",
           "nombre": "Entre Ríos"
         },
         {
-          "codigo": "19242171B28331020527097",
+          "codigo": "032034",
           "nombre": "Formosa"
         },
         {
-          "codigo": "19242171B10041895234917",
+          "codigo": "032038",
           "nombre": "Jujuy"
         },
         {
-          "codigo": "19242171B60940880669657",
+          "codigo": "032042",
           "nombre": "La Pampa"
         },
         {
-          "codigo": "19242171B33417700986997",
+          "codigo": "032046",
           "nombre": "La Rioja"
         },
         {
-          "codigo": "19242171B11341679433213",
+          "codigo": "032050",
           "nombre": "Mendoza"
         },
         {
-          "codigo": "19242171B55979267317516",
+          "codigo": "032054",
           "nombre": "Misiones"
         },
         {
-          "codigo": "19242171B43958645418150",
+          "codigo": "032058",
           "nombre": "Neuquén"
         },
         {
-          "codigo": "19242171B42788183427109",
-          "nombre": "Río negro"
+          "codigo": "032062",
+          "nombre": "Río Negro"
         },
         {
-          "codigo": "19242171B9962507435110",
+          "codigo": "032066",
           "nombre": "Salta"
         },
         {
-          "codigo": "19242171B69823526596786",
+          "codigo": "032070",
           "nombre": "San Juan"
         },
         {
-          "codigo": "19242171B40567020526585",
+          "codigo": "032074",
           "nombre": "San Luis"
         },
         {
-          "codigo": "19242171B73292984092398",
+          "codigo": "032078",
           "nombre": "Santa Cruz"
         },
         {
-          "codigo": "19242171B70350892095610",
+          "codigo": "032082",
           "nombre": "Santa Fe"
         },
         {
-          "codigo": "19242171B10675703612785",
+          "codigo": "032086",
           "nombre": "Santiago del Estero"
         },
         {
-          "codigo": "19242171B27114544829768",
-          "nombre": "Tierra del Fuego"
+          "codigo": "032094",
+          "nombre": "Tierra del Fuego Antártida e Isl del Atlántico S"
         },
         {
-          "codigo": "19242171B55199017147243",
+          "codigo": "032090",
           "nombre": "Tucumán"
         }
       ]
@@ -2725,13 +2776,13 @@
   ],
   "resumen": {
     "estados": 33,
-    "unidades_de_primer_orden": 532,
-    "de_cepal": 0,
-    "de_geoboundaries": 33,
-    "de_geoboundaries_gbhumanitarian": 33,
+    "unidades_de_primer_orden": 545,
+    "de_cepal": 19,
+    "de_geoboundaries": 14,
+    "de_geoboundaries_gbhumanitarian": 14,
     "de_geoboundaries_gbopen": 0,
-    "cepal_wfs_ok": false,
-    "cepal_wfs_error": "HTTPError: HTTP Error 404: ",
+    "cepal_wfs_ok": true,
+    "cepal_wfs_error": null,
     "admiten_tasa": 21,
     "solo_recuento": 10,
     "sin_decidir": 2,
