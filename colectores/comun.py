@@ -78,6 +78,8 @@ TESTIGOS = {
     "pantallas.json": "control de diseño adaptable, corrido en cada cambio de código",
     "mineria.json": "minería sobre el propio registro: pistas, no conclusiones",
     "segunda_fuente.json": "la regla de las dos fuentes, medida en cada recolección",
+    "frescura.json": "termómetro de frescura: de qué año es cada indicador, calculado del propio registro",
+    "propuestas-frescura.json": "clasificación de indicadores atrasados en caminos posibles, sin aplicar ninguno",
 }
 
 ATRIBUCION = {

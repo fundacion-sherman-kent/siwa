@@ -642,6 +642,27 @@ jobs:
         continue-on-error: true
         run: python herramientas/segunda-fuente.py
 
+      # EL TERMOMETRO DE FRESCURA. Lee lo que YA esta escrito en datos/publico/
+      # (no sale a ninguna fuente) y arma, por indicador, de que ano es el dato
+      # mas nuevo. Va DESPUES de todos los colectores para medir el estado real
+      # de esta corrida, y ANTES del proponedor, que lo necesita.
+      - name: Termometro de frescura
+        id: frescura
+        continue-on-error: true
+        run: python herramientas/frescura.py
+
+      # EL PROPONEDOR. Clasifica cada indicador atrasado en cuatro caminos
+      # (hermana fresca ya publicada, re-pull de la misma fuente, rezago ya
+      # investigado, o a la cola del buscador externo) y NO aplica ninguno:
+      # incorporar o promover una fuente es juicio, y el juicio no se
+      # automatiza. Corre igual si el reloj de actualidad no corrio esta vez
+      # (las corridas horarias no lo ejecutan): se degrada solo, sin el cruce
+      # de "re-pull", y lo declara en sus propios vacios.
+      - name: Propuestas de frescura
+        id: propuestas_frescura
+        continue-on-error: true
+        run: python herramientas/propuestas-frescura.py
+
       - name: Auditoria del registro
         id: auditoria
         if: always()
@@ -749,6 +770,8 @@ jobs:
           [ "${{ steps.inform.outcome }}" = "failure" ] && { echo "Falló el riesgo de crisis humanitaria."; fallo=1; }
           [ "${{ steps.reliefweb.outcome }}" = "failure" ] && { echo "Fallaron los desastres de ReliefWeb (ONU)."; fallo=1; }
           [ "${{ steps.segunda_fuente.outcome }}" = "failure" ] && { echo "La regla de las dos fuentes encontró una materia sin clasificar."; fallo=1; }
+          [ "${{ steps.frescura.outcome }}" = "failure" ] && { echo "Falló el termómetro de frescura."; fallo=1; }
+          [ "${{ steps.propuestas_frescura.outcome }}" = "failure" ] && { echo "Fallaron las propuestas de frescura."; fallo=1; }
           [ "${{ steps.novedades.outcome }}" = "failure" ] && { echo "Falló el canal de novedades: el sitio muestra las de la corrida anterior."; fallo=1; }
           [ "${{ steps.puertas.outcome }}" = "failure" ] && { echo "Fallaron las cuarenta puertas: quedan las de la corrida anterior."; fallo=1; }
           [ "${{ steps.sellar.outcome }}" = "failure" ] && { echo "Falló el sellado de las cifras de la portada."; fallo=1; }

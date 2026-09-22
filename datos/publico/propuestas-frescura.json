@@ -1,0 +1,1233 @@
+{
+  "que_es": "Clasifica cada indicador atrasado de SIWA (frescura.json) en cuatro caminos posibles. PROPONE: ninguna fila de este archivo se aplicó sola. Incorporar una fuente, promover una sobre otra o tocar comparabilidad es juicio, y el juicio no se automatiza.",
+  "corrida": "2026-09-22T04:20:56+00:00",
+  "reloj_disponible_esta_corrida": true,
+  "resumen": {
+    "clasificados": 82,
+    "promover_hermana_fresca": 9,
+    "re_pull_misma_fuente": 0,
+    "rezago_de_fuente_ya_investigado": 10,
+    "derivar_a_buscador_externo": 63
+  },
+  "propuestas": [
+    {
+      "clave": "policias",
+      "rotulo": "Policías por cada mil habitantes",
+      "eje": "Seguridad",
+      "fuente_actual": "Oficina de las Naciones Unidas contra la Droga y el Delito, via Our World in Data",
+      "anio_actual": 2015,
+      "antiguedad_anios": 11,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "efectivos_por_habitante",
+      "rotulo": "Efectivos por cada cien mil habitantes",
+      "eje": "Defensa",
+      "fuente_actual": "Cálculo de la Oficina sobre efectivos y población del Banco Mundial",
+      "anio_actual": 2020,
+      "antiguedad_anios": 6,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "efectivos_por_km2",
+      "rotulo": "Efectivos por cada mil kilómetros cuadrados",
+      "eje": "Defensa",
+      "fuente_actual": "Cálculo de la Oficina sobre efectivos y superficie del Banco Mundial",
+      "anio_actual": 2020,
+      "antiguedad_anios": 6,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "gasto_seguridad_cepal",
+      "rotulo": "Gasto en orden público y seguridad · segunda fuente",
+      "eje": "Seguridad",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2020,
+      "antiguedad_anios": 6,
+      "aplicable_automaticamente": false,
+      "camino": "promover_hermana_fresca",
+      "asunto": "gasto en seguridad",
+      "candidata": {
+        "clave": "gasto_seguridad",
+        "rotulo": "Gasto en orden público y seguridad",
+        "fuente": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+        "anio": 2023
+      },
+      "motivo": "«gasto en seguridad» ya tiene, dentro de SIWA, «Gasto en orden público y seguridad» (Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics) con dato de 2023, más nuevo que 2020.",
+      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+    },
+    {
+      "clave": "militares_fuerza_laboral",
+      "rotulo": "Efectivos sobre la fuerza laboral",
+      "eje": "Defensa",
+      "fuente_actual": "Banco Mundial",
+      "anio_actual": 2020,
+      "antiguedad_anios": 6,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": {
+        "ultimo_en_la_fuente": 2020,
+        "consultado": "2026-09-03",
+        "detalle": "Se consultó al Banco Mundial y su dato más nuevo es de 2020, En 214 países. Depende de la misma fuente que los efectivos.",
+        "reemplazo": null
+      },
+      "fuentes_intentadas": null,
+      "motivo": "Se consultó a la fuente el 2026-09-03 y su dato más nuevo es 2020.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "personal_militar",
+      "rotulo": "Efectivos de las fuerzas armadas",
+      "eje": "Defensa",
+      "fuente_actual": "Banco Mundial",
+      "anio_actual": 2020,
+      "antiguedad_anios": 6,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": {
+        "ultimo_en_la_fuente": 2020,
+        "consultado": "2026-09-03",
+        "detalle": "Se consultó al Banco Mundial y su dato más nuevo para el mundo es de 2020, en 216 países. La serie no avanza desde entonces.",
+        "reemplazo": null
+      },
+      "fuentes_intentadas": [
+        {
+          "nombre": "Correlates of War, National Material Capabilities v7.0 — variable «milper» (efectivos militares)",
+          "claves_relacionadas": [
+            "personal_militar"
+          ],
+          "resultado": "rechazada-licencia",
+          "fecha": "2026-09-16",
+          "detalle": "Cobertura excelente (33 de 33 Estados con dato 2022) pero SIN LICENCIA DECLARADA: el codebook completo (83 páginas) no menciona ningún tipo de licencia abierta, ni CC-BY, ni dominio público; el FAQ de COW sólo pide citar y no cobrar por el acceso, que no es una autorización de redistribución en un tercero. Motivo adicional para sospechar de la licencia real: desde 2002 «milper» se transcribe directamente de IISS, The Military Balance — la misma publicación comercial cuyo cambio de licencia congeló personal_militar del Banco Mundial en 2020. No se integró nada: no hay colector, no se tocó `SERIES_DETENIDAS['personal_militar']['reemplazo']`.",
+          "evidencia": "fuentes/siwa-actualizacion-continua/pendientes.md, fila 89 (ClaudeGral)",
+          "camino_legitimo_si_se_insiste": "Carta a los anfitriones del dato (greig@unt.edu, ajenter@unt.edu, University of North Texas) pidiendo autorización explícita de republicación en un registro público gratuito — la redacta la Oficina y la envía la Dirección, como toda fuente con licencia dudosa.",
+          "reintentar": false
+        }
+      ],
+      "motivo": "Se consultó a la fuente el 2026-09-03 y su dato más nuevo es 2020.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "esperanza_vida",
+      "rotulo": "Esperanza de vida al nacer",
+      "eje": "Desarrollo",
+      "fuente_actual": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "promover_hermana_fresca",
+      "asunto": "salud",
+      "candidata": {
+        "clave": "esperanza_vida_cepal",
+        "rotulo": "Esperanza de vida al nacer (CEPALSTAT)",
+        "fuente": "CEPAL, CEPALSTAT",
+        "anio": 2023
+      },
+      "motivo": "«salud» ya tiene, dentro de SIWA, «Esperanza de vida al nacer (CEPALSTAT)» (CEPAL, CEPALSTAT) con dato de 2023, más nuevo que 2021.",
+      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+    },
+    {
+      "clave": "muertes_transito",
+      "rotulo": "Muertes de tránsito",
+      "eje": "Seguridad",
+      "fuente_actual": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "IHME / Global Burden of Disease (GBD) — suicidio, tránsito y mortalidad materna",
+          "claves_relacionadas": [
+            "suicidio",
+            "muertes_transito",
+            "mortalidad_materna"
+          ],
+          "resultado": "gated",
+          "fecha": "2026-09-13",
+          "detalle": "Devolvió 403 desde la red del robot. Sería la única alternativa real a la OMS en estas tres materias (segunda fuente hoy ausente), pero la interfaz exige registro y, además de la puerta técnica cerrada, su licencia es de uso no comercial (NC): no alcanza sin gestión adicional aunque la puerta técnica se resolviera.",
+          "evidencia": "fuentes/catalogo-siwa.md, líneas 774-777 y 809-810 (ClaudeGral)",
+          "reintentar": true,
+          "nota_reintento": "Reintentar el acceso 403 desde otra red antes de descartar la puerta técnica; la licencia NC de todos modos exigiría gestión aparte."
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "patentes_residentes",
+      "rotulo": "Solicitudes de patente de residentes",
+      "eje": "Defensa",
+      "fuente_actual": "Organización Mundial de la Propiedad Intelectual, vía el Banco Mundial",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "renta_gas",
+      "rotulo": "Renta del gas natural",
+      "eje": "Defensa",
+      "fuente_actual": "Banco Mundial",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "renta_minerales",
+      "rotulo": "Renta de los minerales",
+      "eje": "Defensa",
+      "fuente_actual": "Banco Mundial",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "renta_petroleo",
+      "rotulo": "Renta del petróleo",
+      "eje": "Defensa",
+      "fuente_actual": "Banco Mundial",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "rentas_naturales",
+      "rotulo": "Rentas de recursos naturales",
+      "eje": "Desarrollo",
+      "fuente_actual": "Banco Mundial",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": {
+        "ultimo_en_la_fuente": 2021,
+        "consultado": "2026-09-03",
+        "detalle": "Se consultó al Banco Mundial y su dato más nuevo es de 2021, en 244 países.",
+        "reemplazo": null
+      },
+      "fuentes_intentadas": [
+        {
+          "nombre": "Banco Mundial — Rentas de los recursos naturales (rentas_naturales, NY.GDP.TOTL.RT.ZS)",
+          "claves_relacionadas": [
+            "rentas_naturales"
+          ],
+          "resultado": "rezago-fuente",
+          "fecha": "2026-09-03",
+          "detalle": "Se consultó al Banco Mundial y su dato más nuevo para el mundo es de 2021, en 244 países. La serie no avanza desde entonces: no es que el colector se quedó atrás, es que la fuente no publica nada más nuevo.",
+          "evidencia": "colectores/comun.py, SERIES_DETENIDAS['rentas_naturales']",
+          "reintentar": false
+        }
+      ],
+      "motivo": "Se consultó a la fuente el 2026-09-03 y su dato más nuevo es 2021.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "reservas_petroleo",
+      "rotulo": "Reservas probadas de petróleo",
+      "eje": "Defensa",
+      "fuente_actual": "Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "suicidio",
+      "rotulo": "Suicidio",
+      "eje": "Seguridad",
+      "fuente_actual": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "IHME / Global Burden of Disease (GBD) — suicidio, tránsito y mortalidad materna",
+          "claves_relacionadas": [
+            "suicidio",
+            "muertes_transito",
+            "mortalidad_materna"
+          ],
+          "resultado": "gated",
+          "fecha": "2026-09-13",
+          "detalle": "Devolvió 403 desde la red del robot. Sería la única alternativa real a la OMS en estas tres materias (segunda fuente hoy ausente), pero la interfaz exige registro y, además de la puerta técnica cerrada, su licencia es de uso no comercial (NC): no alcanza sin gestión adicional aunque la puerta técnica se resolviera.",
+          "evidencia": "fuentes/catalogo-siwa.md, líneas 774-777 y 809-810 (ClaudeGral)",
+          "reintentar": true,
+          "nota_reintento": "Reintentar el acceso 403 desde otra red antes de descartar la puerta técnica; la licencia NC de todos modos exigiría gestión aparte."
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "agua_renovable",
+      "rotulo": "Agua dulce renovable por habitante",
+      "eje": "Defensa",
+      "fuente_actual": "FAO AQUASTAT, compilado por el Banco Mundial",
+      "anio_actual": 2022,
+      "antiguedad_anios": 4,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "asentamientos",
+      "rotulo": "Población en asentamientos precarios",
+      "eje": "Desarrollo",
+      "fuente_actual": "ONU-Hábitat, compilado por el Banco Mundial",
+      "anio_actual": 2022,
+      "antiguedad_anios": 4,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "Banco Mundial — Población en asentamientos precarios (asentamientos, EN.POP.SLUM.UR.ZS)",
+          "claves_relacionadas": [
+            "asentamientos"
+          ],
+          "resultado": "rezago-fuente",
+          "fecha": "2026-09-22",
+          "detalle": "El dato más nuevo que publica el Banco Mundial/ONU-Hábitat para esta serie es de 2022; no avanzó en la corrida del 22/9/2026. A diferencia de rentas_naturales, esta entrada TODAVÍA NO está declarada en `comun.SERIES_DETENIDAS`: se registra acá como primer hallazgo (rezago observado, no confirmado con una consulta directa a la fuente sobre su año más nuevo mundial) para que no se reintente sin necesidad, y queda pendiente sumarla a SERIES_DETENIDAS si se confirma que el productor no tiene nada más nuevo.",
+          "evidencia": "Encargo del lazo de automejora de frescura, 22/9/2026",
+          "reintentar": true,
+          "nota_reintento": "Confirmar contra el Banco Mundial (mrnev=1, todos los países) si 2022 sigue siendo el máximo mundial antes de sumarla a SERIES_DETENIDAS como rezago cerrado."
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "armas_incautadas",
+      "rotulo": "Armas de fuego incautadas",
+      "eje": "Sin clasificar",
+      "fuente_actual": "UNODC — Oficina de las Naciones Unidas contra la Droga y el Delito: base de tráfico de armas de fuego (incautaciones y detenciones)",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "articulos_cientificos",
+      "rotulo": "Artículos científicos y técnicos publicados",
+      "eje": "Defensa",
+      "fuente_actual": "National Science Foundation, compilado por el Banco Mundial",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "bosque",
+      "rotulo": "Superficie forestal",
+      "eje": "Desarrollo",
+      "fuente_actual": "FAO, compilado por el Banco Mundial",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "coima_policia",
+      "rotulo": "Personas a las que un policía pidió una coima en el último año",
+      "eje": "Gobernanza",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "confianza_municipio",
+      "rotulo": "Personas que confían en su municipalidad",
+      "eje": "Gobernanza",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "promover_hermana_fresca",
+      "asunto": "confianza en las instituciones",
+      "candidata": {
+        "clave": "confianza_policia",
+        "rotulo": "Personas que confían en la policía",
+        "fuente": "CEPAL, CEPALSTAT",
+        "anio": 2024
+      },
+      "motivo": "«confianza en las instituciones» ya tiene, dentro de SIWA, «Personas que confían en la policía» (CEPAL, CEPALSTAT) con dato de 2024, más nuevo que 2023.",
+      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+    },
+    {
+      "clave": "corrupcion_percibida_gente",
+      "rotulo": "Personas que creen que la corrupción está muy generalizada",
+      "eje": "Gobernanza",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "detenidos_trafico_armas",
+      "rotulo": "Detenidos por tráfico de armas",
+      "eje": "Sin clasificar",
+      "fuente_actual": "UNODC — Oficina de las Naciones Unidas contra la Droga y el Delito: base de tráfico de armas de fuego (incautaciones y detenciones)",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "energia_importada",
+      "rotulo": "Energía que se importa",
+      "eje": "Defensa",
+      "fuente_actual": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "esperanza_vida_cepal",
+      "rotulo": "Esperanza de vida al nacer (CEPALSTAT)",
+      "eje": "Desarrollo",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "gasto_defensa_fmi",
+      "rotulo": "Gasto en defensa · segunda fuente",
+      "eje": "Defensa",
+      "fuente_actual": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "promover_hermana_fresca",
+      "asunto": "gasto en defensa",
+      "candidata": {
+        "clave": "gasto_militar",
+        "rotulo": "Gasto militar sobre el producto",
+        "fuente": "SIPRI, compilado por el Banco Mundial",
+        "anio": 2024
+      },
+      "motivo": "«gasto en defensa» ya tiene, dentro de SIWA, «Gasto militar sobre el producto» (SIPRI, compilado por el Banco Mundial) con dato de 2024, más nuevo que 2023.",
+      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+    },
+    {
+      "clave": "gasto_seguridad",
+      "rotulo": "Gasto en orden público y seguridad",
+      "eje": "Seguridad",
+      "fuente_actual": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "gasto_seguridad_publico",
+      "rotulo": "Seguridad sobre el gasto del Estado",
+      "eje": "Seguridad",
+      "fuente_actual": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "gasto_social_cepal",
+      "rotulo": "Gasto público social",
+      "eje": "Desarrollo",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "homicidios",
+      "rotulo": "Homicidios intencionales",
+      "eje": "Seguridad",
+      "fuente_actual": "UNODC, compilado por el Banco Mundial",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "mortalidad_materna",
+      "rotulo": "Mortalidad materna",
+      "eje": "Desarrollo",
+      "fuente_actual": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "IHME / Global Burden of Disease (GBD) — suicidio, tránsito y mortalidad materna",
+          "claves_relacionadas": [
+            "suicidio",
+            "muertes_transito",
+            "mortalidad_materna"
+          ],
+          "resultado": "gated",
+          "fecha": "2026-09-13",
+          "detalle": "Devolvió 403 desde la red del robot. Sería la única alternativa real a la OMS en estas tres materias (segunda fuente hoy ausente), pero la interfaz exige registro y, además de la puerta técnica cerrada, su licencia es de uso no comercial (NC): no alcanza sin gestión adicional aunque la puerta técnica se resolviera.",
+          "evidencia": "fuentes/catalogo-siwa.md, líneas 774-777 y 809-810 (ClaudeGral)",
+          "reintentar": true,
+          "nota_reintento": "Reintentar el acceso 403 desde otra red antes de descartar la puerta técnica; la licencia NC de todos modos exigiría gestión aparte."
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "ocupacion_carcelaria",
+      "rotulo": "Ocupación carcelaria sobre la capacidad oficial",
+      "eje": "Seguridad",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "seguridad_barrio",
+      "rotulo": "Personas que se sienten seguras en su barrio",
+      "eje": "Seguridad",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "promover_hermana_fresca",
+      "asunto": "delito común y su denuncia",
+      "candidata": {
+        "clave": "temor_delito",
+        "rotulo": "Personas que temen ser víctimas de un delito",
+        "fuente": "CEPAL, CEPALSTAT",
+        "anio": 2024
+      },
+      "motivo": "«delito común y su denuncia» ya tiene, dentro de SIWA, «Personas que temen ser víctimas de un delito» (CEPAL, CEPALSTAT) con dato de 2024, más nuevo que 2023.",
+      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+    },
+    {
+      "clave": "soborno_personas",
+      "rotulo": "Prevalencia del soborno a personas",
+      "eje": "Gobernanza",
+      "fuente_actual": "UNODC, vía la base global de los ODS",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "superficie",
+      "rotulo": "Superficie del territorio",
+      "eje": "Defensa",
+      "fuente_actual": "FAO, compilado por el Banco Mundial",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "tierra_arable",
+      "rotulo": "Tierra arable",
+      "eje": "Defensa",
+      "fuente_actual": "FAO, compilado por el Banco Mundial",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "victima_delito",
+      "rotulo": "Personas que fueron víctimas de un delito en el último año",
+      "eje": "Seguridad",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2023,
+      "antiguedad_anios": 3,
+      "aplicable_automaticamente": false,
+      "camino": "promover_hermana_fresca",
+      "asunto": "delito común y su denuncia",
+      "candidata": {
+        "clave": "temor_delito",
+        "rotulo": "Personas que temen ser víctimas de un delito",
+        "fuente": "CEPAL, CEPALSTAT",
+        "anio": 2024
+      },
+      "motivo": "«delito común y su denuncia» ya tiene, dentro de SIWA, «Personas que temen ser víctimas de un delito» (CEPAL, CEPALSTAT) con dato de 2024, más nuevo que 2023.",
+      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+    },
+    {
+      "clave": "acceso_electricidad",
+      "rotulo": "Población con acceso a electricidad",
+      "eje": "Defensa",
+      "fuente_actual": "Banco Mundial, marco de seguimiento de energía sostenible",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "agua_potable",
+      "rotulo": "Acceso a agua potable gestionada",
+      "eje": "Desarrollo",
+      "fuente_actual": "OMS y UNICEF, via la base global de los ODS",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "agua_potable_basica",
+      "rotulo": "Población con agua potable básica",
+      "eje": "Defensa",
+      "fuente_actual": "OMS y UNICEF, programa conjunto de monitoreo, vía el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "alfabetizacion",
+      "rotulo": "Alfabetización adulta",
+      "eje": "Desarrollo",
+      "fuente_actual": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "armas_exportadas",
+      "rotulo": "Exportación de armamento mayor",
+      "eje": "Defensa",
+      "fuente_actual": "SIPRI, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "armas_importadas",
+      "rotulo": "Importación de armamento mayor",
+      "eje": "Defensa",
+      "fuente_actual": "SIPRI, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "banda_ancha",
+      "rotulo": "Suscripciones a banda ancha fija",
+      "eje": "Desarrollo",
+      "fuente_actual": "UIT, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "calidad_regulatoria",
+      "rotulo": "Calidad regulatoria",
+      "eje": "Gobernanza",
+      "fuente_actual": "Worldwide Governance Indicators, Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "confianza_policia",
+      "rotulo": "Personas que confían en la policía",
+      "eje": "Gobernanza",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "Latinobarómetro — encuesta regional (apoyo a la democracia, confianza institucional, victimización)",
+          "claves_relacionadas": [
+            "confianza_policia",
+            "desconfianza_justicia",
+            "desconfianza_partidos",
+            "confianza_municipio"
+          ],
+          "resultado": "file-drop-pendiente",
+          "fecha": "2026-09-13",
+          "detalle": "Licencia propia: \"Se prohíbe la redistribución: volver a publicar datos del Latinobarómetro en otros sitios web infringe el derecho de propiedad\" (página «agregados», leída el 13/9/2026). La Dirección envió el pedido de autorización el 13/9/2026 y está a la espera de respuesta. Mientras tanto, las cuatro claves de «confianza en las instituciones» se publican vía CEPALSTAT (que sí redistribuye porcentajes agregados de Latinobarómetro con permiso de CEPAL), no directo del productor.",
+          "evidencia": "fuentes/catalogo-siwa.md, líneas 797-805 (ClaudeGral); direccion/instructivos/latinobarometro-permiso-siwa.md (ClaudeGral)",
+          "reintentar": false,
+          "nota_reintento": "No corresponde a sondeo.py ni al buscador: es una carta enviada, en espera de respuesta de la organización. Reintentar cuando llegue la respuesta, no antes."
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "corrupcion",
+      "rotulo": "Control de la corrupción",
+      "eje": "Gobernanza",
+      "fuente_actual": "Worldwide Governance Indicators, Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "denuncia_agresion",
+      "rotulo": "Agresiones que la víctima denuncio",
+      "eje": "Seguridad",
+      "fuente_actual": "UNODC, via la base global de los ODS",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "denuncia_robo",
+      "rotulo": "Robos que la víctima denuncio a la policia",
+      "eje": "Seguridad",
+      "fuente_actual": "UNODC, via la base global de los ODS",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "desconfianza_justicia",
+      "rotulo": "Personas que desconfían del poder judicial",
+      "eje": "Gobernanza",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "Latinobarómetro — encuesta regional (apoyo a la democracia, confianza institucional, victimización)",
+          "claves_relacionadas": [
+            "confianza_policia",
+            "desconfianza_justicia",
+            "desconfianza_partidos",
+            "confianza_municipio"
+          ],
+          "resultado": "file-drop-pendiente",
+          "fecha": "2026-09-13",
+          "detalle": "Licencia propia: \"Se prohíbe la redistribución: volver a publicar datos del Latinobarómetro en otros sitios web infringe el derecho de propiedad\" (página «agregados», leída el 13/9/2026). La Dirección envió el pedido de autorización el 13/9/2026 y está a la espera de respuesta. Mientras tanto, las cuatro claves de «confianza en las instituciones» se publican vía CEPALSTAT (que sí redistribuye porcentajes agregados de Latinobarómetro con permiso de CEPAL), no directo del productor.",
+          "evidencia": "fuentes/catalogo-siwa.md, líneas 797-805 (ClaudeGral); direccion/instructivos/latinobarometro-permiso-siwa.md (ClaudeGral)",
+          "reintentar": false,
+          "nota_reintento": "No corresponde a sondeo.py ni al buscador: es una carta enviada, en espera de respuesta de la organización. Reintentar cuando llegue la respuesta, no antes."
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "desconfianza_partidos",
+      "rotulo": "Personas que desconfían de los partidos y el congreso",
+      "eje": "Gobernanza",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "Latinobarómetro — encuesta regional (apoyo a la democracia, confianza institucional, victimización)",
+          "claves_relacionadas": [
+            "confianza_policia",
+            "desconfianza_justicia",
+            "desconfianza_partidos",
+            "confianza_municipio"
+          ],
+          "resultado": "file-drop-pendiente",
+          "fecha": "2026-09-13",
+          "detalle": "Licencia propia: \"Se prohíbe la redistribución: volver a publicar datos del Latinobarómetro en otros sitios web infringe el derecho de propiedad\" (página «agregados», leída el 13/9/2026). La Dirección envió el pedido de autorización el 13/9/2026 y está a la espera de respuesta. Mientras tanto, las cuatro claves de «confianza en las instituciones» se publican vía CEPALSTAT (que sí redistribuye porcentajes agregados de Latinobarómetro con permiso de CEPAL), no directo del productor.",
+          "evidencia": "fuentes/catalogo-siwa.md, líneas 797-805 (ClaudeGral); direccion/instructivos/latinobarometro-permiso-siwa.md (ClaudeGral)",
+          "reintentar": false,
+          "nota_reintento": "No corresponde a sondeo.py ni al buscador: es una carta enviada, en espera de respuesta de la organización. Reintentar cuando llegue la respuesta, no antes."
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "desempleo_cepal",
+      "rotulo": "Desempleo · segunda fuente",
+      "eje": "Desarrollo",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "promover_hermana_fresca",
+      "asunto": "desempleo total",
+      "candidata": {
+        "clave": "desempleo_oit",
+        "rotulo": "Desempleo",
+        "fuente": "Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado",
+        "anio": 2025
+      },
+      "motivo": "«desempleo total» ya tiene, dentro de SIWA, «Desempleo» (Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado) con dato de 2025, más nuevo que 2024.",
+      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+    },
+    {
+      "clave": "estabilidad",
+      "rotulo": "Estabilidad política y ausencia de violencia",
+      "eje": "Gobernanza",
+      "fuente_actual": "Worldwide Governance Indicators, Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "estado_derecho",
+      "rotulo": "Estado de derecho",
+      "eje": "Gobernanza",
+      "fuente_actual": "Worldwide Governance Indicators, Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "femicidios",
+      "rotulo": "Femicidios o feminicidios",
+      "eje": "Seguridad",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "fuera_escuela",
+      "rotulo": "Chicos fuera de la escuela primaria",
+      "eje": "Desarrollo",
+      "fuente_actual": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "gasto_educacion",
+      "rotulo": "Gasto público en educación",
+      "eje": "Desarrollo",
+      "fuente_actual": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "gasto_militar",
+      "rotulo": "Gasto militar sobre el producto",
+      "eje": "Defensa",
+      "fuente_actual": "SIPRI, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "gasto_militar_dolares",
+      "rotulo": "Gasto militar en dólares",
+      "eje": "Defensa",
+      "fuente_actual": "SIPRI, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "gasto_militar_publico",
+      "rotulo": "Gasto militar sobre el gasto del Estado",
+      "eje": "Defensa",
+      "fuente_actual": "SIPRI, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "gini_cepal",
+      "rotulo": "Desigualdad · índice de Gini · segunda fuente",
+      "eje": "Desarrollo",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "promover_hermana_fresca",
+      "asunto": "desigualdad",
+      "candidata": {
+        "clave": "gini",
+        "rotulo": "Desigualdad — índice de Gini",
+        "fuente": "Banco Mundial, sobre encuestas de hogares",
+        "anio": 2025
+      },
+      "motivo": "«desigualdad» ya tiene, dentro de SIWA, «Desigualdad — índice de Gini» (Banco Mundial, sobre encuestas de hogares) con dato de 2025, más nuevo que 2024.",
+      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+    },
+    {
+      "clave": "id_producto",
+      "rotulo": "Gasto en investigación y desarrollo",
+      "eje": "Defensa",
+      "fuente_actual": "UNESCO, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "internet",
+      "rotulo": "Usuarios de internet",
+      "eje": "Desarrollo",
+      "fuente_actual": "UIT, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "investigadores",
+      "rotulo": "Investigadores por millón de habitantes",
+      "eje": "Defensa",
+      "fuente_actual": "UNESCO, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "migrantes",
+      "rotulo": "Población migrante que el país aloja",
+      "eje": "Seguridad",
+      "fuente_actual": "Naciones Unidas, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "migrantes_pct",
+      "rotulo": "Peso de la población migrante",
+      "eje": "Seguridad",
+      "fuente_actual": "Naciones Unidas, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "perdida_bosque",
+      "rotulo": "Bosque perdido",
+      "eje": "Seguridad",
+      "fuente_actual": "Laboratorio GLAD de la Universidad de Maryland y Global Forest Watch, via Our World in Data",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "perdidas_electricas",
+      "rotulo": "Electricidad perdida en el traslado",
+      "eje": "Defensa",
+      "fuente_actual": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "produccion_gas_eia",
+      "rotulo": "Producción de gas natural · segunda fuente",
+      "eje": "Defensa",
+      "fuente_actual": "Administración de Información Energética de EE. UU. (EIA)",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "puertos_contenedores",
+      "rotulo": "Movimiento de contenedores en puertos",
+      "eje": "Defensa",
+      "fuente_actual": "Naciones Unidas, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "recaudacion",
+      "rotulo": "Recaudación tributaria",
+      "eje": "Gobernanza",
+      "fuente_actual": "FMI y Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "promover_hermana_fresca",
+      "asunto": "economía",
+      "candidata": {
+        "clave": "industria",
+        "rotulo": "Industria — valor agregado",
+        "fuente": "Cuentas nacionales, compiladas por el Banco Mundial",
+        "anio": 2025
+      },
+      "motivo": "«economía» ya tiene, dentro de SIWA, «Industria — valor agregado» (Cuentas nacionales, compiladas por el Banco Mundial) con dato de 2025, más nuevo que 2024.",
+      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+    },
+    {
+      "clave": "registro_nacimientos",
+      "rotulo": "Nacimientos registrados",
+      "eje": "Gobernanza",
+      "fuente_actual": "UNICEF, via la base global de los ODS",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "secundaria_cepal",
+      "rotulo": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
+      "eje": "Desarrollo",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "servidores_seguros",
+      "rotulo": "Servidores de internet cifrados",
+      "eje": "Seguridad",
+      "fuente_actual": "Netcraft, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "sin_condena",
+      "rotulo": "Detenidos sin condena",
+      "eje": "Seguridad",
+      "fuente_actual": "UNODC, via la base global de los ODS",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "temor_delito",
+      "rotulo": "Personas que temen ser víctimas de un delito",
+      "eje": "Seguridad",
+      "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "termina_secundaria",
+      "rotulo": "Terminan la secundaria",
+      "eje": "Desarrollo",
+      "fuente_actual": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "trabajo_infantil",
+      "rotulo": "Trabajo infantil",
+      "eje": "Desarrollo",
+      "fuente_actual": "OIT, via la base global de los ODS",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "uso_energia",
+      "rotulo": "Uso de energía por habitante",
+      "eje": "Defensa",
+      "fuente_actual": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "victimas_robo",
+      "rotulo": "Víctimas de robo en los últimos 12 meses",
+      "eje": "Seguridad",
+      "fuente_actual": "UNODC, via la base global de los ODS",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "voz_rendicion",
+      "rotulo": "Voz y rendición de cuentas",
+      "eje": "Gobernanza",
+      "fuente_actual": "Worldwide Governance Indicators, Banco Mundial",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    }
+  ],
+  "vacios_declarados": [
+    "El cruce contra `reloj-actualidad.json` es por texto (el reloj compara por rótulo libre, no por clave única) y sólo está disponible en la corrida diaria completa, no en las horarias.",
+    "Ninguna fila lleva `aplicable_automaticamente: true`. Se evaluó la opción de marcar el re-pull de una misma API como automático y se descartó: en este registro esos colectores ya corren cada hora con el filtro de \"más reciente\", así que no hay una acción mecánica separada que aplicar sin investigar primero por qué no llegó sola.",
+    "«derivar_a_buscador_externo» es sólo una cola: esta herramienta no ejecuta `colectores/buscador_llama.py` ni ninguna búsqueda por su cuenta.",
+    "«promover_hermana_fresca» exige mismo asunto de `segunda-fuente.ASUNTOS` Y misma unidad declarada, y ese filtro ya evitó un error real (proponía promover efectivos militares, en personas, con el valor SIPRI de importación de armas, porque las dos comparten el asunto «fuerza militar»). Pero unidad igual no es garantía de que dos productores midan LO MISMO: «economía»: [industria, recaudación] comparte unidad (% del producto) y asunto sin ser la misma magnitud. Por eso esta clasificación es una PROPUESTA, nunca un hecho: cada fila pide explícitamente que una persona confirme la comparabilidad antes de promover."
+  ]
+}

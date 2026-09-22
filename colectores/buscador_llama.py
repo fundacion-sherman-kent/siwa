@@ -55,6 +55,8 @@ import urllib.request
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
+RAIZ = AQUI.parent
+MEMORIA_INVESTIGACIONES = RAIZ / "fuentes" / "fuentes-intentadas.json"
 NAVEGADOR = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
              "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 # EL PLAN GRATUITO TIENE TOPE DE TOKENS POR MINUTO. Con 30 conjuntos por portal y
@@ -322,8 +324,35 @@ def normalizar(respuesta) -> list[dict]:
     return salida
 
 
+def memoria_no_reintentar() -> list[str]:
+    """Nombres de fuentes que YA se investigaron de fondo y no se pudieron incorporar
+    por licencia o por no ser automatizables (`fuentes/fuentes-intentadas.json`), para
+    que Llama no las vuelva a proponer si aparecen en un portal oficial. Se excluyen
+    las marcadas `reintentar: true`: esas SI pueden haber cambiado. Sin el archivo, se
+    degrada a una lista vacia -- el buscador sigue funcionando igual, solo sin este aviso."""
+    try:
+        d = json.loads(MEMORIA_INVESTIGACIONES.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return []
+    return [it["nombre"] for it in d.get("intentos", [])
+            if it.get("resultado") in ("rechazada-licencia", "no-automatizable") and not it.get("reintentar")]
+
+
+def sistema_con_memoria(base: str) -> str:
+    nombres = memoria_no_reintentar()
+    if not nombres:
+        return base
+    lista = chr(10).join(f"- {n}" for n in nombres)
+    return (base + chr(10) + chr(10)
+            + "ADEMAS: las siguientes fuentes YA SE INVESTIGARON y no se pueden usar "
+            "(licencia que prohibe redistribuir, o no automatizable). Si un conjunto es "
+            "claramente una de estas -mismo productor o mismo nombre-, marca \"sirve\": false "
+            "y decilo en el motivo:" + chr(10) + lista)
+
+
 def clasificar(conjuntos: list[dict], temas: list[dict]) -> tuple[list[dict], str]:
     lista_temas = "\n".join(f"{t['clave']} = {t['nombre']} ({t['grupo']})" for t in temas)
+    sistema = sistema_con_memoria(SISTEMA)
     todos, servicio = [], ""
     for i in range(0, len(conjuntos), POR_LLAMADA):
         tanda = conjuntos[i:i + POR_LLAMADA]
@@ -335,7 +364,7 @@ def clasificar(conjuntos: list[dict], temas: list[dict]) -> tuple[list[dict], st
         if i:
             import time
             time.sleep(PAUSA_ENTRE_PEDIDOS)
-        texto, servicio = conversar(SISTEMA, usuario)
+        texto, servicio = conversar(sistema, usuario)
         try:
             bloque = texto[texto.index("{"): texto.rindex("}") + 1]
             todos.extend(normalizar(json.loads(bloque)))

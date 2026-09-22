@@ -1,0 +1,89 @@
+{
+  "que_es": "Memoria de fuentes candidatas ya investigadas, para que sondeo.py, explorador.py y el buscador de fuentes (Llama) no repitan un intento que ya tiene resultado conocido. NO es el banco de disponibilidad técnica (eso lo mide sondeo.py, en datos/sondeo.json): esto es la investigación de fondo — licencia, si existe otra puerta, si la fuente misma está detenida — de una fuente o un reemplazo candidato.",
+  "como_se_usa": "propuestas-frescura.py cruza `claves_relacionadas` contra el ranking de frescura.json para no proponer una búsqueda externa donde ya se investigó y no hay salida. Un intento sin `claves_relacionadas` es una fuente candidata que todavía no reemplaza ni corrobora ningún indicador publicado.",
+  "resultados_posibles": ["integrada", "rechazada-licencia", "gated", "endpoint-muerto", "rezago-fuente", "no-automatizable", "file-drop-pendiente"],
+  "quien_la_mantiene": "Se agrega a mano (o por un agente que investigó en vivo) cuando una investigación llega a veredicto. No la escribe ningún colector: decidir el veredicto es juicio, igual que decidir incorporar.",
+  "actualizado": "2026-09-22",
+  "intentos": [
+    {
+      "nombre": "Base Global de Terrorismo (GTD) — consorcio START, Universidad de Maryland, republicada por Our World in Data",
+      "claves_relacionadas": ["terrorismo_muertes", "terrorismo_atentados"],
+      "resultado": "rechazada-licencia",
+      "fecha": "2026-09-21",
+      "detalle": "Se publicaba vía Our World in Data con sello general CC BY, pero la propia página de esta serie aclara que queda sujeta a los términos de licencia del PROVEEDOR ORIGINAL (\"All data and visualizations on Our World in Data...are subject to the license terms from the original providers\"), y la EULA de START prohíbe la redistribución. El sello CC BY de OWD no alcanza para esta serie en particular. RETIRADA de la capa pública el 21/9/2026, no sólo detenida: SIWA venía republicándola sin tener la licencia que hacía falta.",
+      "evidencia": "colectores/owd.py (bloque «Terrorismo — retirado» y `SERIES_RETIRADAS_GTD`)",
+      "reemplazo": "Global Terrorism Index (IEP), file-drop con licencia CC BY-NC-SA 4.0 gestionada por la Dirección, en vivo desde el 21/9/2026 (colectores/gti.py). UCDP GED sigue aparte y mide otra cosa (violencia organizada, no terrorismo).",
+      "reintentar": false
+    },
+    {
+      "nombre": "Correlates of War, National Material Capabilities v7.0 — variable «milper» (efectivos militares)",
+      "claves_relacionadas": ["personal_militar"],
+      "resultado": "rechazada-licencia",
+      "fecha": "2026-09-16",
+      "detalle": "Cobertura excelente (33 de 33 Estados con dato 2022) pero SIN LICENCIA DECLARADA: el codebook completo (83 páginas) no menciona ningún tipo de licencia abierta, ni CC-BY, ni dominio público; el FAQ de COW sólo pide citar y no cobrar por el acceso, que no es una autorización de redistribución en un tercero. Motivo adicional para sospechar de la licencia real: desde 2002 «milper» se transcribe directamente de IISS, The Military Balance — la misma publicación comercial cuyo cambio de licencia congeló personal_militar del Banco Mundial en 2020. No se integró nada: no hay colector, no se tocó `SERIES_DETENIDAS['personal_militar']['reemplazo']`.",
+      "evidencia": "fuentes/siwa-actualizacion-continua/pendientes.md, fila 89 (ClaudeGral)",
+      "camino_legitimo_si_se_insiste": "Carta a los anfitriones del dato (greig@unt.edu, ajenter@unt.edu, University of North Texas) pidiendo autorización explícita de republicación en un registro público gratuito — la redacta la Oficina y la envía la Dirección, como toda fuente con licencia dudosa.",
+      "reintentar": false
+    },
+    {
+      "nombre": "IHME / Global Burden of Disease (GBD) — suicidio, tránsito y mortalidad materna",
+      "claves_relacionadas": ["suicidio", "muertes_transito", "mortalidad_materna"],
+      "resultado": "gated",
+      "fecha": "2026-09-13",
+      "detalle": "Devolvió 403 desde la red del robot. Sería la única alternativa real a la OMS en estas tres materias (segunda fuente hoy ausente), pero la interfaz exige registro y, además de la puerta técnica cerrada, su licencia es de uso no comercial (NC): no alcanza sin gestión adicional aunque la puerta técnica se resolviera.",
+      "evidencia": "fuentes/catalogo-siwa.md, líneas 774-777 y 809-810 (ClaudeGral)",
+      "reintentar": true,
+      "nota_reintento": "Reintentar el acceso 403 desde otra red antes de descartar la puerta técnica; la licencia NC de todos modos exigiría gestión aparte."
+    },
+    {
+      "nombre": "CEPAL — geoservicio MEGA nivel 2 (WFS/WMS, geoportal.cepal.org/geoserver)",
+      "claves_relacionadas": [],
+      "resultado": "endpoint-muerto",
+      "fecha": "2026-09-21",
+      "detalle": "El WFS de CEPAL está caído: \"/geoserver/wfs\" devuelve HTTP 404 de Apache Tomcat — el servlet ni existe. Se investigó una URL alternativa (geoportal.cepal.org/geoserver/ows, dispatcher OGC general) y también devuelve 404 en WFS GetFeature, WMS GetMap y WMS GetCapabilities. El colector `unidades.py` es resiliente a esta caída: cae a geoBoundaries (gbHumanitarian primero, con gbOpen como red de seguridad) por Estado.",
+      "evidencia": "colectores/unidades.py, líneas 69-90",
+      "nota_geoboundaries": "geoBoundaries tiene sus propios errores conocidos (a Argentina le faltaba Entre Ríos en gbOpen) y gbHumanitarian suele estar más completo — ver [[siwa-cotejo-subnacional]].",
+      "reintentar": true,
+      "nota_reintento": "Reintentar el WFS de CEPAL periódicamente: si vuelve, sería la geometría oficial preferida sobre geoBoundaries para los Estados que hoy cubre."
+    },
+    {
+      "nombre": "Banco Mundial — Rentas de los recursos naturales (rentas_naturales, NY.GDP.TOTL.RT.ZS)",
+      "claves_relacionadas": ["rentas_naturales"],
+      "resultado": "rezago-fuente",
+      "fecha": "2026-09-03",
+      "detalle": "Se consultó al Banco Mundial y su dato más nuevo para el mundo es de 2021, en 244 países. La serie no avanza desde entonces: no es que el colector se quedó atrás, es que la fuente no publica nada más nuevo.",
+      "evidencia": "colectores/comun.py, SERIES_DETENIDAS['rentas_naturales']",
+      "reintentar": false
+    },
+    {
+      "nombre": "Banco Mundial — Población en asentamientos precarios (asentamientos, EN.POP.SLUM.UR.ZS)",
+      "claves_relacionadas": ["asentamientos"],
+      "resultado": "rezago-fuente",
+      "fecha": "2026-09-22",
+      "detalle": "El dato más nuevo que publica el Banco Mundial/ONU-Hábitat para esta serie es de 2022; no avanzó en la corrida del 22/9/2026. A diferencia de rentas_naturales, esta entrada TODAVÍA NO está declarada en `comun.SERIES_DETENIDAS`: se registra acá como primer hallazgo (rezago observado, no confirmado con una consulta directa a la fuente sobre su año más nuevo mundial) para que no se reintente sin necesidad, y queda pendiente sumarla a SERIES_DETENIDAS si se confirma que el productor no tiene nada más nuevo.",
+      "evidencia": "Encargo del lazo de automejora de frescura, 22/9/2026",
+      "reintentar": true,
+      "nota_reintento": "Confirmar contra el Banco Mundial (mrnev=1, todos los países) si 2022 sigue siendo el máximo mundial antes de sumarla a SERIES_DETENIDAS como rezago cerrado."
+    },
+    {
+      "nombre": "UNODC — estadísticas de la Policía (Global Statistics on Homicide / dataUNODC), tablero Power BI",
+      "claves_relacionadas": [],
+      "resultado": "no-automatizable",
+      "fecha": "2026-09-22",
+      "detalle": "UNODC publica series de delitos y sistema de justicia penal por país en un tablero de Power BI embebido, sin servicio de datos ni descarga programática abierta detrás: se puede LEER de a una consulta con el navegador de un humano, no se puede automatizar con un colector. El Informe Mundial sobre las Drogas de UNODC (dato 2024) figura aparte como pendiente P1 en `fuentes/siwa-actualizacion-continua/pendientes.md` (fila 31, ClaudeGral) y no depende de este hallazgo.",
+      "evidencia": "Encargo del lazo de automejora de frescura, 22/9/2026",
+      "reintentar": true,
+      "nota_reintento": "Si UNODC abre alguna vez una API o un export CSV/JSON del mismo tablero, reintentar; hasta entonces no vale la pena que sondeo.py lo pruebe cada corrida."
+    },
+    {
+      "nombre": "Latinobarómetro — encuesta regional (apoyo a la democracia, confianza institucional, victimización)",
+      "claves_relacionadas": ["confianza_policia", "desconfianza_justicia", "desconfianza_partidos", "confianza_municipio"],
+      "resultado": "file-drop-pendiente",
+      "fecha": "2026-09-13",
+      "detalle": "Licencia propia: \"Se prohíbe la redistribución: volver a publicar datos del Latinobarómetro en otros sitios web infringe el derecho de propiedad\" (página «agregados», leída el 13/9/2026). La Dirección envió el pedido de autorización el 13/9/2026 y está a la espera de respuesta. Mientras tanto, las cuatro claves de «confianza en las instituciones» se publican vía CEPALSTAT (que sí redistribuye porcentajes agregados de Latinobarómetro con permiso de CEPAL), no directo del productor.",
+      "evidencia": "fuentes/catalogo-siwa.md, líneas 797-805 (ClaudeGral); direccion/instructivos/latinobarometro-permiso-siwa.md (ClaudeGral)",
+      "reintentar": false,
+      "nota_reintento": "No corresponde a sondeo.py ni al buscador: es una carta enviada, en espera de respuesta de la organización. Reintentar cuando llegue la respuesta, no antes."
+    }
+  ]
+}
