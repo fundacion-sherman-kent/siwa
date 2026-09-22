@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-22T06:31:52+00:00",
+  "corrida": "2026-09-22T07:26:58+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3946,
+    "sobreviven": 3943,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3535,
+  "pistas_totales": 3532,
   "anomalias_totales": 384,
   "pistas": [
     {
@@ -346,6 +346,19 @@
       "misma_categoria": false
     },
     {
+      "a": "subnacional_focos:cuantas",
+      "b": "superficie",
+      "rotulo_a": "subnacional_focos · cuantas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.925,
+      "estados": 20,
+      "tipo": "rangos (Spearman)",
+      "p": 2.0403320564539755e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -367,6 +380,19 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 1.1912948479436594e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.921,
+      "estados": 20,
+      "tipo": "rangos (Spearman)",
+      "p": 5.170523040633662e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -684,19 +710,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.893,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 1.026643647457223e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Corrupción política",
@@ -783,19 +796,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 3.565480405450303e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "democracia_liberal",
-      "b": "estado_derecho_wjp",
-      "rotulo_a": "Democracia liberal — límites al poder",
-      "rotulo_b": "Estado de derecho (WJP)",
-      "coeficiente": 0.885,
-      "estados": 24,
-      "tipo": "rangos (Spearman)",
-      "p": 1.5695355100650316e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
