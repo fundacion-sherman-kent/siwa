@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-22T19:26:31+00:00",
+  "corrida": "2026-09-22T20:25:41+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3965,
+    "sobreviven": 3981,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3554,
+  "pistas_totales": 3570,
   "anomalias_totales": 382,
   "pistas": [
     {
@@ -359,6 +359,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.921,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.6904812886540187e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "administracion_basica",
       "b": "estado_derecho_wjp",
       "rotulo_a": "Administración básica del Estado",
@@ -476,19 +489,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.912,
-      "estados": 20,
-      "tipo": "rangos (Spearman)",
-      "p": 2.117605543349905e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -541,6 +541,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.902,
+      "estados": 20,
+      "tipo": "rangos (Spearman)",
+      "p": 9.132186272010214e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Estado de derecho",
@@ -588,19 +601,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 1.5202120125389205e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.897,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.5620186722726305e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
