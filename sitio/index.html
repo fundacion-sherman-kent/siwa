@@ -3184,6 +3184,24 @@
       <div class="procedencia" id="proc-armas">Cargando el registro…</div>
       <div class="cruce" id="lista-armas"></div>
       <div id="vac-armas"></div>
+        </div><div class="categoria" id="trafico-armas-ilicito" data-nivel="2">
+      <div class="categoria-head"><h3>Tráfico de armas · incautaciones y detenidos</h3><span class="tag" id="tag-trafico-armas-ilicito">—</span></div>
+      <details class="aviso-cobertura"><summary>Esto no mide el tráfico: mide lo que cada Estado incautó y persiguió</summary>
+        <p><b>Esto no mide el tráfico: mide la acción policial y judicial contra él.</b> Una
+           incautación depende de cuánto controla cada Estado su frontera y sus mercados
+           ilegales, no solo de cuánta arma circula. Un número alto puede significar más
+           tráfico o más control; uno bajo puede significar menos tráfico o menos capacidad
+           de detectarlo. La fuente —UNODC— no elige entre esas lecturas, y este registro
+           tampoco.</p>
+        <p><b>No se compara entre países ni se suma.</b> Cada Estado reporta según su propia
+           capacidad de registro, y no todos reportan todos los años: el vacío se declara,
+           no se rellena. Por eso estas cifras se muestran por país, no en un ranking.</p>
+        <p><b>Es la otra cara de «Armas», la categoría de al lado.</b> Esa mide el comercio
+           legal declarado en la aduana; esta mide lo que se detectó fuera de ese circuito.</p>
+      </details>
+      <div class="procedencia" id="proc-trafico-armas-ilicito">Cargando el registro…</div>
+      <div class="grid-cards" id="tarj-trafico-armas-ilicito"></div>
+      <div id="vac-trafico-armas-ilicito"></div>
         </div><div class="categoria" id="bienes" data-nivel="2">
       <div class="categoria-head"><h3>Bienes culturales · qué está tipificado</h3><span class="tag" id="tag-bienes">—</span></div>
       <details class="aviso-cobertura"><summary>Esto no mide tráfico: mide qué se obligó a restituir cada Estado</summary>
@@ -4573,7 +4591,8 @@
                      ['sipri_transferencias','SIPRI — Transferencias de armas mayores (TIV)'],
                      ['bce_ecuador','Banco Central del Ecuador — Reservas internacionales'],
                      ['chile_ine','INE Chile — Estadísticas policiales de homicidio'],
-                     ['santafe','Observatorio de Seguridad Pública de Santa Fe — Homicidios provinciales']];
+                     ['santafe','Observatorio de Seguridad Pública de Santa Fe — Homicidios provinciales'],
+                     ['unodc_armas','UNODC — Tráfico ilícito de armas de fuego']];
 
   // El informe imprimible se abre a pedido. En papel sale siempre entero: la
   // regla de impresion anula el plegado, de modo que el PDF no cambia.
@@ -4871,6 +4890,8 @@
     homicidios_estado: 'homicidios asesinatos muertes violentas estado oficial reciente snic ministerio policia 2025 2026',
     homicidio_ine_chile: 'homicidios asesinatos chile ine carabineros victimas',
     homicidios_observatorio_provincial: 'homicidios asesinatos santa fe observatorio provincial segunda fuente snic',
+    armas_incautadas: 'armas trafico ilicito incautacion decomiso fusiles municiones unodc',
+    detenidos_trafico_armas: 'armas trafico ilicito detenidos arrestos unodc',
     ia_apps_ranking: 'inteligencia artificial ia asistentes chatbots apps descargas deepseek gemini grok kimi china estados unidos',
     ia_apps_ranking_eeuu: 'inteligencia artificial ia asistentes apps estados unidos chatgpt gemini claude grok copilot meta',
     ia_apps_ranking_china: 'inteligencia artificial ia asistentes apps china deepseek kimi baidu qwen doubao',
@@ -8632,7 +8653,8 @@
                             almacen.ia, almacen.ia_apps, almacen.estado_reciente, almacen.inflacion, almacen.fmi_mensual, almacen.influencia, almacen.eia, almacen.sanciones_primarias,
                             almacen.inform, almacen.reliefweb, almacen.trata_personas,
                             almacen.wjp, almacen.sipri, almacen.sipri_transferencias,
-                            almacen.bce_ecuador, almacen.chile_ine, almacen.santafe].filter(Boolean);
+                            almacen.bce_ecuador, almacen.chile_ine, almacen.santafe,
+                            almacen.unodc_armas].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -13225,6 +13247,7 @@
     if(q) q.addEventListener('click', ()=>{ paisFiltro=null; paisNombre=null; sincronizar(); repintar(); });
     seriesEnSeccion();
     pintarCenso();
+    pintarTraficoArmas();
     tarjetasBanco(['homicidios_estado','homicidio_ine_chile','homicidios_observatorio_provincial','homicidios','policias'],'violencia');
     tarjetasBanco(['gasto_seguridad','gasto_seguridad_publico','gasto_seguridad_cepal'],'presupuesto-seguridad');
     tarjetasBanco(['suicidio','muertes_transito'],'muertes-no-delito');
@@ -13481,6 +13504,46 @@
          <thead><tr><th>Estado</th><th class="num">Categorías</th><th>Cuáles</th></tr></thead>
          <tbody>${conAlgo.map(fila).join('')}${sinNada.map(fila).join('')}</tbody>
        </table></div>`;
+  }
+
+  // TRAFICO ILICITO DE ARMAS (UNODC): las dos claves son no_comparable_entre_paises,
+  // asi que no usa tarjetasBanco() -esa funcion muestra «Sin dato» cuando NINGUNA
+  // clave del grupo es comparable, pensada para grupos mixtos como «violencia»-.
+  // Mismo patron que pintarCenso(): lista por pais, sin ranking, con su fuente,
+  // fecha y calificacion en cada ficha.
+  function pintarTraficoArmas(){
+    const d = almacen.unodc_armas, caja = document.getElementById('tarj-trafico-armas-ilicito');
+    const tag = document.getElementById('tag-trafico-armas-ilicito');
+    if(!caja || !d) return;
+    const conDato = (d.registros||[]).filter(r => r.indicadores &&
+      (r.indicadores.armas_incautadas || r.indicadores.detenidos_trafico_armas));
+    if(tag) tag.textContent = conDato.length + ' de 33 Estados · no se compara ni se suma';
+    if(!conDato.length){
+      caja.innerHTML = '<div class="card"><h4>Sin dato</h4><div class="sub">Ninguna fuente '
+        + 'del catálogo publica todavía este tema para el padrón. El vacío se declara; no '
+        + 'se rellena.</div></div>';
+      return;
+    }
+    const lista = paisFiltro ? conDato.filter(r => r.iso === paisFiltro)
+      : conDato.slice().sort((a,b) => a.pais.localeCompare(b.pais, 'es'));
+    if(paisFiltro && !lista.length){
+      caja.innerHTML = '<div class="card"><h4>Sin dato</h4><div class="sub">La fuente no '
+        + 'consigna a ' + esc(paisNombre) + ' en esta materia.</div></div>';
+      return;
+    }
+    const meta = d.procedencia;
+    caja.innerHTML = lista.map(r => {
+      const ai = r.indicadores.armas_incautadas, dt = r.indicadores.detenidos_trafico_armas;
+      return '<div class="card"><h4>' + esc(r.pais) + '</h4>'
+        + (ai ? '<div class="value">' + miles(ai.valor) + '</div>'
+             + '<div class="sub">armas de fuego incautadas · dato de ' + ai.anio + '</div>'
+           : '<div class="sub">Sin incautaciones registradas en la fuente.</div>')
+        + (dt ? '<div class="sub">' + miles(dt.valor) + ' detenidos por tráfico de armas · '
+             + 'dato de ' + dt.anio + '</div>' : '')
+        + '<div class="foot"><span class="src">' + esc(meta.fuente.nombre) + '</span>'
+        + '<span class="badge unica" title="' + esc(explicaCalif(meta.calificacion)) + '">'
+        + meta.calificacion.fiabilidad + '-' + meta.calificacion.credibilidad + '</span></div></div>';
+    }).join('');
   }
 
   function seriesEnSeccion(){
@@ -17454,6 +17517,39 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       repintar(); marcador();
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-violencia','homicidios del Observatorio de Santa Fe',err.message); marcador(); });
+
+  // TRAFICO ILICITO DE ARMAS (UNODC): incautaciones y detenidos, categoria nueva
+  // dentro de Seguridad · flujos ilícitos, al lado de «armas» (Comtrade, comercio
+  // legal). Autorizado por la dirección el 22/9/2026.
+  Promise.all([traer('unodc_armas.json'), traer('estado/unodc_armas.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      // El colector no declara eje, no_comparable_entre_paises, origen ni
+      // cautela en la metadata top-level (solo clave/rotulo/unidad/hasta_anio).
+      // Sin no_comparable_entre_paises=true, capas() lo trataria como
+      // comparable y el buscador ofrecería un mapa-ranking que la propia
+      // fuente advierte que no corresponde («NO SE COMPARA COMO RANKING»,
+      // vacios_declarados del archivo). Se completa acá, en memoria, sobre lo
+      // que esta fuente agrega — no se toca MATERIAS(), capas() ni el colector.
+      const CAUTELA_UNODC = 'NO SE COMPARA COMO RANKING: la incautación mide acción '
+        + 'policial además de flujo; más incautaciones puede ser más control, no más '
+        + 'tráfico. Varios Estados no reportan a UNODC todos los años: el vacío se '
+        + 'declara, no se rellena.';
+      (d.indicadores||[]).forEach(i=>{
+        if(i.eje===undefined) i.eje='Seguridad';
+        if(i.no_comparable_entre_paises===undefined) i.no_comparable_entre_paises=true;
+        if(i.origen===undefined) i.origen=(d.procedencia.fuente&&d.procedencia.fuente.nombre)||'UNODC';
+        if(i.cautela===undefined) i.cautela=CAUTELA_UNODC;
+      });
+      const nInd=(d.indicadores||[]).length;
+      almacen.unodc_armas=d; dominios+=nInd; registros+=d.registros.length*nInd;
+      pintarProcedencia('proc-trafico-armas-ilicito',d.procedencia);
+      vacios+=pintarVacios('vac-trafico-armas-ilicito',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-trafico-armas-ilicito','tráfico ilícito de armas de la UNODC',estado.mensaje,d.procedencia); }
+      pintarTraficoArmas(); repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-trafico-armas-ilicito','tráfico ilícito de armas de la UNODC',err.message);
+      document.getElementById('proc-trafico-armas-ilicito').textContent='Sin registro disponible.'; marcador(); });
 })();
 </script>
 <!-- CARTEL DE COOKIES, SOBRIO Y CON MEMORIA. La medición ya está activa (modelo de
