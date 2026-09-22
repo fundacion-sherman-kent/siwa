@@ -13269,12 +13269,16 @@
     tarjetasBanco(['aprobacion_democracia','persecucion_abuso','politica_anticorrupcion',
                    'actores_antidemocraticos','administracion_basica','indice_gobernanza'],'integridad');
     tarjetasBanco(['migracion_neta','migrantes','migrantes_pct','remesas'],'migraciones');
-    tarjetasBanco(['gasto_militar','gasto_militar_publico','gasto_militar_dolares',
-                   'gasto_defensa_fmi','gasto_militar_pbi','gasto_militar_gasto_pub',
+    // SIPRI directo (2025) reemplaza a SIPRI-vía-Banco-Mundial (2024): mismo
+    // productor, no se muestra dos veces. gasto_defensa_fmi queda: es el FMI,
+    // otra fuente, otra definicion (ejecucion presupuestaria, no gasto militar).
+    tarjetasBanco(['gasto_militar_pbi','gasto_defensa_fmi','gasto_militar_gasto_pub',
                    'gasto_militar_usd_const'],'presupuesto-defensa');
     tarjetasBanco(['personal_militar','efectivos_por_km2','efectivos_por_habitante',
                    'militares_fuerza_laboral'],'efectivos');
-    tarjetasBanco(['armas_importadas','armas_exportadas','armas_recibidas_tiv','armas_enviadas_tiv'],'material');
+    // SIPRI directo (2025, TIV) reemplaza a SIPRI-vía-Banco-Mundial (2024, el
+    // mismo TIV compilado): mismo productor, no se muestra dos veces.
+    tarjetasBanco(['armas_recibidas_tiv','armas_enviadas_tiv'],'material');
     tarjetasBanco(['objetos_espacio','lanzamientos_anuales','satelites_gcat'],'aeroespacial');
     tarjetasBanco(['id_producto','investigadores','articulos_cientificos',
                    'patentes_residentes'],'ciencia-tecnologia');
