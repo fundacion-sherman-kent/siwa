@@ -1,13 +1,14 @@
 {
   "que_es": "Clasifica cada indicador atrasado de SIWA (frescura.json) en cuatro caminos posibles. PROPONE: ninguna fila de este archivo se aplicó sola. Incorporar una fuente, promover una sobre otra o tocar comparabilidad es juicio, y el juicio no se automatiza.",
-  "corrida": "2026-09-22T22:25:34+00:00",
+  "corrida": "2026-09-22T23:23:54+00:00",
   "reloj_disponible_esta_corrida": true,
+  "orden_de_exhibicion_disponible_esta_corrida": true,
   "resumen": {
     "clasificados": 81,
-    "promover_hermana_fresca": 9,
+    "promover_hermana_fresca": 0,
     "re_pull_misma_fuente": 0,
-    "rezago_de_fuente_ya_investigado": 10,
-    "derivar_a_buscador_externo": 62
+    "rezago_de_fuente_ya_investigado": 11,
+    "derivar_a_buscador_externo": 70
   },
   "propuestas": [
     {
@@ -54,16 +55,9 @@
       "anio_actual": 2020,
       "antiguedad_anios": 6,
       "aplicable_automaticamente": false,
-      "camino": "promover_hermana_fresca",
-      "asunto": "gasto en seguridad",
-      "candidata": {
-        "clave": "gasto_seguridad",
-        "rotulo": "Gasto en orden público y seguridad",
-        "fuente": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
-        "anio": 2023
-      },
-      "motivo": "«gasto en seguridad» ya tiene, dentro de SIWA, «Gasto en orden público y seguridad» (Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics) con dato de 2023, más nuevo que 2020.",
-      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
     },
     {
       "clave": "militares_fuerza_laboral",
@@ -124,16 +118,9 @@
       "anio_actual": 2021,
       "antiguedad_anios": 5,
       "aplicable_automaticamente": false,
-      "camino": "promover_hermana_fresca",
-      "asunto": "salud",
-      "candidata": {
-        "clave": "esperanza_vida_cepal",
-        "rotulo": "Esperanza de vida al nacer (CEPALSTAT)",
-        "fuente": "CEPAL, CEPALSTAT",
-        "anio": 2023
-      },
-      "motivo": "«salud» ya tiene, dentro de SIWA, «Esperanza de vida al nacer (CEPALSTAT)» (CEPAL, CEPALSTAT) con dato de 2023, más nuevo que 2021.",
-      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
     },
     {
       "clave": "muertes_transito",
@@ -379,16 +366,27 @@
       "anio_actual": 2023,
       "antiguedad_anios": 3,
       "aplicable_automaticamente": false,
-      "camino": "promover_hermana_fresca",
-      "asunto": "confianza en las instituciones",
-      "candidata": {
-        "clave": "confianza_policia",
-        "rotulo": "Personas que confían en la policía",
-        "fuente": "CEPAL, CEPALSTAT",
-        "anio": 2024
-      },
-      "motivo": "«confianza en las instituciones» ya tiene, dentro de SIWA, «Personas que confían en la policía» (CEPAL, CEPALSTAT) con dato de 2024, más nuevo que 2023.",
-      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "Latinobarómetro — encuesta regional (apoyo a la democracia, confianza institucional, victimización)",
+          "claves_relacionadas": [
+            "confianza_policia",
+            "desconfianza_justicia",
+            "desconfianza_partidos",
+            "confianza_municipio"
+          ],
+          "resultado": "file-drop-pendiente",
+          "fecha": "2026-09-13",
+          "detalle": "Licencia propia: \"Se prohíbe la redistribución: volver a publicar datos del Latinobarómetro en otros sitios web infringe el derecho de propiedad\" (página «agregados», leída el 13/9/2026). La Dirección envió el pedido de autorización el 13/9/2026 y está a la espera de respuesta. Mientras tanto, las cuatro claves de «confianza en las instituciones» se publican vía CEPALSTAT (que sí redistribuye porcentajes agregados de Latinobarómetro con permiso de CEPAL), no directo del productor.",
+          "evidencia": "fuentes/catalogo-siwa.md, líneas 797-805 (ClaudeGral); direccion/instructivos/latinobarometro-permiso-siwa.md (ClaudeGral)",
+          "reintentar": false,
+          "nota_reintento": "No corresponde a sondeo.py ni al buscador: es una carta enviada, en espera de respuesta de la organización. Reintentar cuando llegue la respuesta, no antes."
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
     },
     {
       "clave": "corrupcion_percibida_gente",
@@ -446,16 +444,9 @@
       "anio_actual": 2023,
       "antiguedad_anios": 3,
       "aplicable_automaticamente": false,
-      "camino": "promover_hermana_fresca",
-      "asunto": "gasto en defensa",
-      "candidata": {
-        "clave": "gasto_militar",
-        "rotulo": "Gasto militar sobre el producto",
-        "fuente": "SIPRI, compilado por el Banco Mundial",
-        "anio": 2024
-      },
-      "motivo": "«gasto en defensa» ya tiene, dentro de SIWA, «Gasto militar sobre el producto» (SIPRI, compilado por el Banco Mundial) con dato de 2024, más nuevo que 2023.",
-      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
     },
     {
       "clave": "gasto_seguridad",
@@ -554,16 +545,9 @@
       "anio_actual": 2023,
       "antiguedad_anios": 3,
       "aplicable_automaticamente": false,
-      "camino": "promover_hermana_fresca",
-      "asunto": "delito común y su denuncia",
-      "candidata": {
-        "clave": "temor_delito",
-        "rotulo": "Personas que temen ser víctimas de un delito",
-        "fuente": "CEPAL, CEPALSTAT",
-        "anio": 2024
-      },
-      "motivo": "«delito común y su denuncia» ya tiene, dentro de SIWA, «Personas que temen ser víctimas de un delito» (CEPAL, CEPALSTAT) con dato de 2024, más nuevo que 2023.",
-      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
     },
     {
       "clave": "soborno_personas",
@@ -609,16 +593,9 @@
       "anio_actual": 2023,
       "antiguedad_anios": 3,
       "aplicable_automaticamente": false,
-      "camino": "promover_hermana_fresca",
-      "asunto": "delito común y su denuncia",
-      "candidata": {
-        "clave": "temor_delito",
-        "rotulo": "Personas que temen ser víctimas de un delito",
-        "fuente": "CEPAL, CEPALSTAT",
-        "anio": 2024
-      },
-      "motivo": "«delito común y su denuncia» ya tiene, dentro de SIWA, «Personas que temen ser víctimas de un delito» (CEPAL, CEPALSTAT) con dato de 2024, más nuevo que 2023.",
-      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
     },
     {
       "clave": "acceso_electricidad",
@@ -850,16 +827,9 @@
       "anio_actual": 2024,
       "antiguedad_anios": 2,
       "aplicable_automaticamente": false,
-      "camino": "promover_hermana_fresca",
-      "asunto": "desempleo total",
-      "candidata": {
-        "clave": "desempleo_oit",
-        "rotulo": "Desempleo",
-        "fuente": "Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado",
-        "anio": 2025
-      },
-      "motivo": "«desempleo total» ya tiene, dentro de SIWA, «Desempleo» (Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado) con dato de 2025, más nuevo que 2024.",
-      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
     },
     {
       "clave": "estabilidad",
@@ -965,16 +935,9 @@
       "anio_actual": 2024,
       "antiguedad_anios": 2,
       "aplicable_automaticamente": false,
-      "camino": "promover_hermana_fresca",
-      "asunto": "desigualdad",
-      "candidata": {
-        "clave": "gini",
-        "rotulo": "Desigualdad — índice de Gini",
-        "fuente": "Banco Mundial, sobre encuestas de hogares",
-        "anio": 2025
-      },
-      "motivo": "«desigualdad» ya tiene, dentro de SIWA, «Desigualdad — índice de Gini» (Banco Mundial, sobre encuestas de hogares) con dato de 2025, más nuevo que 2024.",
-      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
     },
     {
       "clave": "id_producto",
@@ -1092,16 +1055,9 @@
       "anio_actual": 2024,
       "antiguedad_anios": 2,
       "aplicable_automaticamente": false,
-      "camino": "promover_hermana_fresca",
-      "asunto": "economía",
-      "candidata": {
-        "clave": "industria",
-        "rotulo": "Industria — valor agregado",
-        "fuente": "Cuentas nacionales, compiladas por el Banco Mundial",
-        "anio": 2025
-      },
-      "motivo": "«economía» ya tiene, dentro de SIWA, «Industria — valor agregado» (Cuentas nacionales, compiladas por el Banco Mundial) con dato de 2025, más nuevo que 2024.",
-      "que_falta": "Una persona decide si son comparables (metodología, cobertura) antes de promoverla a vista principal — mismo criterio que la promoción de esperanza de vida (CEPAL sobre OMS)."
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
     },
     {
       "clave": "registro_nacimientos",
@@ -1216,6 +1172,7 @@
     "El cruce contra `reloj-actualidad.json` es por texto (el reloj compara por rótulo libre, no por clave única) y sólo está disponible en la corrida diaria completa, no en las horarias.",
     "Ninguna fila lleva `aplicable_automaticamente: true`. Se evaluó la opción de marcar el re-pull de una misma API como automático y se descartó: en este registro esos colectores ya corren cada hora con el filtro de \"más reciente\", así que no hay una acción mecánica separada que aplicar sin investigar primero por qué no llegó sola.",
     "«derivar_a_buscador_externo» es sólo una cola: esta herramienta no ejecuta `colectores/buscador_llama.py` ni ninguna búsqueda por su cuenta.",
-    "«promover_hermana_fresca» exige mismo asunto de `segunda-fuente.ASUNTOS` Y misma unidad declarada, y ese filtro ya evitó un error real (proponía promover efectivos militares, en personas, con el valor SIPRI de importación de armas, porque las dos comparten el asunto «fuerza militar»). Pero unidad igual no es garantía de que dos productores midan LO MISMO: «economía»: [industria, recaudación] comparte unidad (% del producto) y asunto sin ser la misma magnitud. Por eso esta clasificación es una PROPUESTA, nunca un hecho: cada fila pide explícitamente que una persona confirme la comparabilidad antes de promover."
+    "«promover_hermana_fresca» exige mismo asunto de `segunda-fuente.ASUNTOS`, misma unidad declarada, que la candidata ya se exhiba en algún `tarjetasBanco` de `sitio/index.html` sin estar ya antes que la vieja en esa misma tarjeta, y que el rótulo de las dos sea, en su forma de comparación, LA MISMA medida (filtro 3, ver `_misma_medida`). Este último filtro no lee una tabla explícita de pares «misma medida, dos productores»: no existe una en el repositorio. Se apoya en la convención de rótulo que ya usan los colectores («· segunda fuente» en `cepal.py`/`eia.py`/`owd.py`/`infraestructura.py`, o el productor entre paréntesis al final en CEPALSTAT) para reconocer cuándo dos claves son el mismo dato contado por dos fuentes. Es un indicio de texto, no un metadato limpio: separó bien los nueve casos medidos el 22/9/2026 (los cuatro reales — `gasto_seguridad_cepal`, `esperanza_vida`, `desempleo_cepal`, `gini_cepal` — quedaron fuera por el filtro 1, ya exhibidos; y descartó los cuatro falsos positivos de concepto — `confianza_municipio`→`confianza_policia`, `seguridad_barrio` y `victima_delito`→`temor_delito`, `recaudacion`→`industria` — porque sus rótulos no son el mismo texto base) pero puede, en el futuro, descartar por error un par real que la casa nombre sin esa convención. Sigue faltando una tabla explícita y mantenida (como `segunda-fuente.ASUNTOS`) de qué pares son literalmente la misma medida de dos productores distintos — hasta que exista, esta es una propuesta y una persona la confirma antes de promover, igual que antes.",
+    "Los filtros 1 y 2 leen `sitio/index.html` con una expresión regular sobre el texto de las llamadas a `tarjetasBanco(...)`, no con un parser de HTML/JS: si esa función cambia de firma o de nombre, los dos filtros dejan de encontrar nada y se apagan solos (`orden_de_exhibicion_disponible_esta_corrida: false`), degradando SIN filtrar en vez de fallar en silencio con un resultado equivocado — declarado para que se note en la salida, no para que se ignore."
   ]
 }
