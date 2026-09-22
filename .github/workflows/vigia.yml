@@ -71,6 +71,7 @@ on:
       - ".github/workflows/**"
       - "herramientas/vigia-robot.py"
       - "herramientas/lista-de-fuentes.py"
+      - "herramientas/avisos-frescura.py"
       - "sitio/index.html"
   workflow_dispatch:
 
@@ -110,6 +111,19 @@ jobs:
         id: fuentes
         continue-on-error: true
         run: python herramientas/lista-de-fuentes.py
+
+      # EL TERMOMETRO DE FRESCURA Y LAS PROPUESTAS, A LA VISTA. No es un
+      # control: no falla nada ni suma al color de esta corrida. Sólo pone en
+      # el Resumen de esta corrida (pestaña Actions) lo que ya escribió
+      # `recolectar.yml` en datos/publico/frescura.json y
+      # datos/publico/propuestas-frescura.json, para que una persona lo vea
+      # sin tener que abrir dos archivos JSON. «contents: read» alcanza:
+      # sólo lee lo ya publicado.
+      - name: Termómetro y propuestas de frescura, a la vista
+        id: avisos_frescura
+        if: always()
+        continue-on-error: true
+        run: python herramientas/avisos-frescura.py
 
       # Los dos controles corren SIEMPRE los dos, y recién después se decide el
       # color. Si el primero cortara la corrida, una muerte del robot taparía

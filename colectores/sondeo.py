@@ -37,6 +37,14 @@ import comun
 
 RAIZ = Path(__file__).resolve().parent.parent
 BITACORA = RAIZ / "datos" / "sondeo.json"
+# LA MEMORIA DE INVESTIGACIONES YA CERRADAS (fuentes/fuentes-intentadas.json):
+# antes de sumar una candidata nueva acá a mano, conviene mirar si ya se
+# investigó de fondo (licencia, si hay otra puerta) y quedó con veredicto. El
+# banco mide disponibilidad TÉCNICA; esa memoria es otra cosa —el motivo de
+# fondo— y hoy no se cruzan clave por clave porque ninguna candidata de acá
+# coincide todavía con un nombre de esa memoria. Se deja el enlace declarado
+# para que quien sume la próxima candidata la consulte primero.
+MEMORIA_INVESTIGACIONES = RAIZ / "fuentes" / "fuentes-intentadas.json"
 NAVEGADOR = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"

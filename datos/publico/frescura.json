@@ -1,0 +1,3798 @@
+{
+  "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
+  "corrida": "2026-09-22T04:20:56+00:00",
+  "cortes_del_termometro": {
+    "al_dia": "≤1 año",
+    "tibio": "2 a 3 años",
+    "atrasado": "4 años o más"
+  },
+  "resumen": {
+    "indicadores_medidos": 189,
+    "mediana_antiguedad_anios": 1,
+    "al_dia_1_anio_o_menos": 107,
+    "tibio_2_a_3_anios": 65,
+    "atrasado_4_anios_o_mas": 17,
+    "series_detenidas_declaradas": 3,
+    "archivos_leidos": 78,
+    "archivos_sin_json_valido": [],
+    "archivos_sin_indicadores_por_anio": [
+      "archivo.json",
+      "armas.json",
+      "bienes_culturales.json",
+      "brecha.json",
+      "censo_subnacional.json",
+      "ciber.json",
+      "cites.json",
+      "cobertura.json",
+      "comercio.json",
+      "conflictos.json",
+      "consulta.json",
+      "contratacion.json",
+      "contrataciones_abiertas.json",
+      "copernicus.json",
+      "crimen_organizado.json",
+      "desastres.json",
+      "designados.json",
+      "desplazamiento-serie.json",
+      "desplazamiento.json",
+      "drogas.json",
+      "explorador.json",
+      "focos.json",
+      "fundacion.json",
+      "memoria.json",
+      "oficiales.json",
+      "oms_homicidios.json",
+      "opacidad.json",
+      "pdh_guatemala_subnacional.json",
+      "ransomware.json",
+      "reciente_oficial.json",
+      "redes.json",
+      "regimen_politico.json",
+      "sanciones.json",
+      "sismos.json",
+      "subnacional.json",
+      "subnacional_acled.json",
+      "subnacional_datos.json",
+      "subnacional_focos.json",
+      "subnacional_homicidios.json",
+      "subnacional_robos.json",
+      "subnacional_vigia.json",
+      "telegram.json",
+      "ucdp.json",
+      "unidades.json"
+    ]
+  },
+  "ranking_mas_atrasados": [
+    {
+      "clave": "policias",
+      "rotulo": "Policías por cada mil habitantes",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "Oficina de las Naciones Unidas contra la Droga y el Delito, via Our World in Data",
+      "unidad": "policías por 1.000 personas",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2015,
+      "antiguedad_anios": 11,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "efectivos_por_habitante",
+      "rotulo": "Efectivos por cada cien mil habitantes",
+      "eje": "Defensa",
+      "seccion": "efectivos",
+      "fuente": "Cálculo de la Oficina sobre efectivos y población del Banco Mundial",
+      "unidad": "efectivos por 100.000 personas",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 28,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "efectivos_por_km2",
+      "rotulo": "Efectivos por cada mil kilómetros cuadrados",
+      "eje": "Defensa",
+      "seccion": "efectivos",
+      "fuente": "Cálculo de la Oficina sobre efectivos y superficie del Banco Mundial",
+      "unidad": "efectivos por 1.000 km²",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 28,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_seguridad_cepal",
+      "rotulo": "Gasto en orden público y seguridad · segunda fuente",
+      "eje": "Seguridad",
+      "seccion": "presupuesto-seguridad",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% del producto",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 24,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "militares_fuerza_laboral",
+      "rotulo": "Efectivos sobre la fuerza laboral",
+      "eje": "Defensa",
+      "seccion": "efectivos",
+      "fuente": "Banco Mundial",
+      "unidad": "% de la fuerza laboral",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 27,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": true
+    },
+    {
+      "clave": "personal_militar",
+      "rotulo": "Efectivos de las fuerzas armadas",
+      "eje": "Defensa",
+      "seccion": "efectivos",
+      "fuente": "Banco Mundial",
+      "unidad": "personas",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 28,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": true
+    },
+    {
+      "clave": "esperanza_vida",
+      "rotulo": "Esperanza de vida al nacer",
+      "eje": "Desarrollo",
+      "seccion": "salud",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "años",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "muertes_transito",
+      "rotulo": "Muertes de tránsito",
+      "eje": "Seguridad",
+      "seccion": "muertes-no-delito",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "por cada 100.000 personas",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "patentes_residentes",
+      "rotulo": "Solicitudes de patente de residentes",
+      "eje": "Defensa",
+      "seccion": "ciencia-tecnologia",
+      "fuente": "Organización Mundial de la Propiedad Intelectual, vía el Banco Mundial",
+      "unidad": "solicitudes por año",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 19,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "renta_gas",
+      "rotulo": "Renta del gas natural",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "renta_minerales",
+      "rotulo": "Renta de los minerales",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "renta_petroleo",
+      "rotulo": "Renta del petróleo",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "rentas_naturales",
+      "rotulo": "Rentas de recursos naturales",
+      "eje": "Desarrollo",
+      "seccion": "materias",
+      "fuente": "Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": true
+    },
+    {
+      "clave": "reservas_petroleo",
+      "rotulo": "Reservas probadas de petróleo",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data",
+      "unidad": "barriles",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "suicidio",
+      "rotulo": "Suicidio",
+      "eje": "Seguridad",
+      "seccion": "muertes-no-delito",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "por cada 100.000 personas",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "agua_renovable",
+      "rotulo": "Agua dulce renovable por habitante",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "FAO AQUASTAT, compilado por el Banco Mundial",
+      "unidad": "metros cúbicos por persona",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2022,
+      "antiguedad_anios": 4,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "asentamientos",
+      "rotulo": "Población en asentamientos precarios",
+      "eje": "Desarrollo",
+      "seccion": "urbano",
+      "fuente": "ONU-Hábitat, compilado por el Banco Mundial",
+      "unidad": "% de la población urbana",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2022,
+      "antiguedad_anios": 4,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 26,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "armas_incautadas",
+      "rotulo": "Armas de fuego incautadas",
+      "eje": "Sin clasificar",
+      "seccion": null,
+      "fuente": "UNODC — Oficina de las Naciones Unidas contra la Droga y el Delito: base de tráfico de armas de fuego (incautaciones y detenciones)",
+      "unidad": "armas de fuego",
+      "colector": "unodc_armas",
+      "archivo": "unodc_armas.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 5,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "articulos_cientificos",
+      "rotulo": "Artículos científicos y técnicos publicados",
+      "eje": "Defensa",
+      "seccion": "ciencia-tecnologia",
+      "fuente": "National Science Foundation, compilado por el Banco Mundial",
+      "unidad": "artículos por año",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "bosque",
+      "rotulo": "Superficie forestal",
+      "eje": "Desarrollo",
+      "seccion": "ambiente",
+      "fuente": "FAO, compilado por el Banco Mundial",
+      "unidad": "% del territorio",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "coima_policia",
+      "rotulo": "Personas a las que un policía pidió una coima en el último año",
+      "eje": "Gobernanza",
+      "seccion": "soborno",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "confianza_municipio",
+      "rotulo": "Personas que confían en su municipalidad",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "corrupcion_percibida_gente",
+      "rotulo": "Personas que creen que la corrupción está muy generalizada",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 16,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "detenidos_trafico_armas",
+      "rotulo": "Detenidos por tráfico de armas",
+      "eje": "Sin clasificar",
+      "seccion": null,
+      "fuente": "UNODC — Oficina de las Naciones Unidas contra la Droga y el Delito: base de tráfico de armas de fuego (incautaciones y detenciones)",
+      "unidad": "casos",
+      "colector": "unodc_armas",
+      "archivo": "unodc_armas.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "energia_importada",
+      "rotulo": "Energía que se importa",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+      "unidad": "% del uso de energía",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 9,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "esperanza_vida_cepal",
+      "rotulo": "Esperanza de vida al nacer (CEPALSTAT)",
+      "eje": "Desarrollo",
+      "seccion": "salud",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "años",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_defensa_fmi",
+      "rotulo": "Gasto en defensa · segunda fuente",
+      "eje": "Defensa",
+      "seccion": "presupuesto-defensa",
+      "fuente": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+      "unidad": "% del producto",
+      "colector": "gasto_publico",
+      "archivo": "gasto_publico.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 10,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_seguridad",
+      "rotulo": "Gasto en orden público y seguridad",
+      "eje": "Seguridad",
+      "seccion": "presupuesto-seguridad",
+      "fuente": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+      "unidad": "% del producto",
+      "colector": "gasto_publico",
+      "archivo": "gasto_publico.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 10,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_seguridad_publico",
+      "rotulo": "Seguridad sobre el gasto del Estado",
+      "eje": "Seguridad",
+      "seccion": "presupuesto-seguridad",
+      "fuente": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+      "unidad": "% del gasto público",
+      "colector": "gasto_publico",
+      "archivo": "gasto_publico.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 10,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_social_cepal",
+      "rotulo": "Gasto público social",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% del producto",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 24,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    }
+  ],
+  "indicadores": [
+    {
+      "clave": "policias",
+      "rotulo": "Policías por cada mil habitantes",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "Oficina de las Naciones Unidas contra la Droga y el Delito, via Our World in Data",
+      "unidad": "policías por 1.000 personas",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2015,
+      "antiguedad_anios": 11,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "efectivos_por_habitante",
+      "rotulo": "Efectivos por cada cien mil habitantes",
+      "eje": "Defensa",
+      "seccion": "efectivos",
+      "fuente": "Cálculo de la Oficina sobre efectivos y población del Banco Mundial",
+      "unidad": "efectivos por 100.000 personas",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 28,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "efectivos_por_km2",
+      "rotulo": "Efectivos por cada mil kilómetros cuadrados",
+      "eje": "Defensa",
+      "seccion": "efectivos",
+      "fuente": "Cálculo de la Oficina sobre efectivos y superficie del Banco Mundial",
+      "unidad": "efectivos por 1.000 km²",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 28,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_seguridad_cepal",
+      "rotulo": "Gasto en orden público y seguridad · segunda fuente",
+      "eje": "Seguridad",
+      "seccion": "presupuesto-seguridad",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% del producto",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 24,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "militares_fuerza_laboral",
+      "rotulo": "Efectivos sobre la fuerza laboral",
+      "eje": "Defensa",
+      "seccion": "efectivos",
+      "fuente": "Banco Mundial",
+      "unidad": "% de la fuerza laboral",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 27,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": true
+    },
+    {
+      "clave": "personal_militar",
+      "rotulo": "Efectivos de las fuerzas armadas",
+      "eje": "Defensa",
+      "seccion": "efectivos",
+      "fuente": "Banco Mundial",
+      "unidad": "personas",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 28,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": true
+    },
+    {
+      "clave": "esperanza_vida",
+      "rotulo": "Esperanza de vida al nacer",
+      "eje": "Desarrollo",
+      "seccion": "salud",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "años",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "muertes_transito",
+      "rotulo": "Muertes de tránsito",
+      "eje": "Seguridad",
+      "seccion": "muertes-no-delito",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "por cada 100.000 personas",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "patentes_residentes",
+      "rotulo": "Solicitudes de patente de residentes",
+      "eje": "Defensa",
+      "seccion": "ciencia-tecnologia",
+      "fuente": "Organización Mundial de la Propiedad Intelectual, vía el Banco Mundial",
+      "unidad": "solicitudes por año",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 19,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "renta_gas",
+      "rotulo": "Renta del gas natural",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "renta_minerales",
+      "rotulo": "Renta de los minerales",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "renta_petroleo",
+      "rotulo": "Renta del petróleo",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "rentas_naturales",
+      "rotulo": "Rentas de recursos naturales",
+      "eje": "Desarrollo",
+      "seccion": "materias",
+      "fuente": "Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": true
+    },
+    {
+      "clave": "reservas_petroleo",
+      "rotulo": "Reservas probadas de petróleo",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data",
+      "unidad": "barriles",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "suicidio",
+      "rotulo": "Suicidio",
+      "eje": "Seguridad",
+      "seccion": "muertes-no-delito",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "por cada 100.000 personas",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2021,
+      "antiguedad_anios": 5,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "agua_renovable",
+      "rotulo": "Agua dulce renovable por habitante",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "FAO AQUASTAT, compilado por el Banco Mundial",
+      "unidad": "metros cúbicos por persona",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2022,
+      "antiguedad_anios": 4,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "asentamientos",
+      "rotulo": "Población en asentamientos precarios",
+      "eje": "Desarrollo",
+      "seccion": "urbano",
+      "fuente": "ONU-Hábitat, compilado por el Banco Mundial",
+      "unidad": "% de la población urbana",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2022,
+      "antiguedad_anios": 4,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 26,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "armas_incautadas",
+      "rotulo": "Armas de fuego incautadas",
+      "eje": "Sin clasificar",
+      "seccion": null,
+      "fuente": "UNODC — Oficina de las Naciones Unidas contra la Droga y el Delito: base de tráfico de armas de fuego (incautaciones y detenciones)",
+      "unidad": "armas de fuego",
+      "colector": "unodc_armas",
+      "archivo": "unodc_armas.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 5,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "articulos_cientificos",
+      "rotulo": "Artículos científicos y técnicos publicados",
+      "eje": "Defensa",
+      "seccion": "ciencia-tecnologia",
+      "fuente": "National Science Foundation, compilado por el Banco Mundial",
+      "unidad": "artículos por año",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "bosque",
+      "rotulo": "Superficie forestal",
+      "eje": "Desarrollo",
+      "seccion": "ambiente",
+      "fuente": "FAO, compilado por el Banco Mundial",
+      "unidad": "% del territorio",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "coima_policia",
+      "rotulo": "Personas a las que un policía pidió una coima en el último año",
+      "eje": "Gobernanza",
+      "seccion": "soborno",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "confianza_municipio",
+      "rotulo": "Personas que confían en su municipalidad",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "corrupcion_percibida_gente",
+      "rotulo": "Personas que creen que la corrupción está muy generalizada",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 16,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "detenidos_trafico_armas",
+      "rotulo": "Detenidos por tráfico de armas",
+      "eje": "Sin clasificar",
+      "seccion": null,
+      "fuente": "UNODC — Oficina de las Naciones Unidas contra la Droga y el Delito: base de tráfico de armas de fuego (incautaciones y detenciones)",
+      "unidad": "casos",
+      "colector": "unodc_armas",
+      "archivo": "unodc_armas.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "energia_importada",
+      "rotulo": "Energía que se importa",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+      "unidad": "% del uso de energía",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 9,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "esperanza_vida_cepal",
+      "rotulo": "Esperanza de vida al nacer (CEPALSTAT)",
+      "eje": "Desarrollo",
+      "seccion": "salud",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "años",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_defensa_fmi",
+      "rotulo": "Gasto en defensa · segunda fuente",
+      "eje": "Defensa",
+      "seccion": "presupuesto-defensa",
+      "fuente": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+      "unidad": "% del producto",
+      "colector": "gasto_publico",
+      "archivo": "gasto_publico.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 10,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_seguridad",
+      "rotulo": "Gasto en orden público y seguridad",
+      "eje": "Seguridad",
+      "seccion": "presupuesto-seguridad",
+      "fuente": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+      "unidad": "% del producto",
+      "colector": "gasto_publico",
+      "archivo": "gasto_publico.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 10,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_seguridad_publico",
+      "rotulo": "Seguridad sobre el gasto del Estado",
+      "eje": "Seguridad",
+      "seccion": "presupuesto-seguridad",
+      "fuente": "Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics",
+      "unidad": "% del gasto público",
+      "colector": "gasto_publico",
+      "archivo": "gasto_publico.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 10,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_social_cepal",
+      "rotulo": "Gasto público social",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% del producto",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 24,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "homicidios",
+      "rotulo": "Homicidios intencionales",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "UNODC, compilado por el Banco Mundial",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "mortalidad_materna",
+      "rotulo": "Mortalidad materna",
+      "eje": "Desarrollo",
+      "seccion": "salud",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "por cada 100.000 nacidos vivos",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "ocupacion_carcelaria",
+      "rotulo": "Ocupación carcelaria sobre la capacidad oficial",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de la capacidad oficial",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 20,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "seguridad_barrio",
+      "rotulo": "Personas que se sienten seguras en su barrio",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "soborno_personas",
+      "rotulo": "Prevalencia del soborno a personas",
+      "eje": "Gobernanza",
+      "seccion": "soborno",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "% de la población",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "superficie",
+      "rotulo": "Superficie del territorio",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "FAO, compilado por el Banco Mundial",
+      "unidad": "kilómetros cuadrados",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "tierra_arable",
+      "rotulo": "Tierra arable",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "FAO, compilado por el Banco Mundial",
+      "unidad": "% de la superficie",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "victima_delito",
+      "rotulo": "Personas que fueron víctimas de un delito en el último año",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "acceso_electricidad",
+      "rotulo": "Población con acceso a electricidad",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Banco Mundial, marco de seguimiento de energía sostenible",
+      "unidad": "% de la población",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "agua_potable",
+      "rotulo": "Acceso a agua potable gestionada",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "OMS y UNICEF, via la base global de los ODS",
+      "unidad": "% de la población",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 14,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "agua_potable_basica",
+      "rotulo": "Población con agua potable básica",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "OMS y UNICEF, programa conjunto de monitoreo, vía el Banco Mundial",
+      "unidad": "% de la población",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 27,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "alfabetizacion",
+      "rotulo": "Alfabetización adulta",
+      "eje": "Desarrollo",
+      "seccion": "educacion",
+      "fuente": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "unidad": "% de las personas de 15 años o más",
+      "colector": "unesco",
+      "archivo": "unesco.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "armas_exportadas",
+      "rotulo": "Exportación de armamento mayor",
+      "eje": "Defensa",
+      "seccion": "material",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "valor indicativo SIPRI, NO son dólares",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "armas_importadas",
+      "rotulo": "Importación de armamento mayor",
+      "eje": "Defensa",
+      "seccion": "material",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "valor indicativo SIPRI, NO son dólares",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 15,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "banda_ancha",
+      "rotulo": "Suscripciones a banda ancha fija",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "UIT, compilado por el Banco Mundial",
+      "unidad": "por 100 habitantes",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "calidad_regulatoria",
+      "rotulo": "Calidad regulatoria",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "Worldwide Governance Indicators, Banco Mundial",
+      "unidad": "estimación de -2,5 a 2,5",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "confianza_policia",
+      "rotulo": "Personas que confían en la policía",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "corrupcion",
+      "rotulo": "Control de la corrupción",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "Worldwide Governance Indicators, Banco Mundial",
+      "unidad": "estimación de -2,5 a 2,5",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "denuncia_agresion",
+      "rotulo": "Agresiones que la víctima denuncio",
+      "eje": "Seguridad",
+      "seccion": "victimizacion",
+      "fuente": "UNODC, via la base global de los ODS",
+      "unidad": "% de las agresiones sufridas",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "denuncia_robo",
+      "rotulo": "Robos que la víctima denuncio a la policia",
+      "eje": "Seguridad",
+      "seccion": "victimizacion",
+      "fuente": "UNODC, via la base global de los ODS",
+      "unidad": "% de los robos sufridos",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "desconfianza_justicia",
+      "rotulo": "Personas que desconfían del poder judicial",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "desconfianza_partidos",
+      "rotulo": "Personas que desconfían de los partidos y el congreso",
+      "eje": "Gobernanza",
+      "seccion": "democracia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "desempleo_cepal",
+      "rotulo": "Desempleo · segunda fuente",
+      "eje": "Desarrollo",
+      "seccion": "informalidad",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de la población activa",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "estabilidad",
+      "rotulo": "Estabilidad política y ausencia de violencia",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "Worldwide Governance Indicators, Banco Mundial",
+      "unidad": "estimación de -2,5 a 2,5",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "estado_derecho",
+      "rotulo": "Estado de derecho",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "Worldwide Governance Indicators, Banco Mundial",
+      "unidad": "estimación de -2,5 a 2,5",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "femicidios",
+      "rotulo": "Femicidios o feminicidios",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "por cada 100.000 mujeres",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 16,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "fuera_escuela",
+      "rotulo": "Chicos fuera de la escuela primaria",
+      "eje": "Desarrollo",
+      "seccion": "educacion",
+      "fuente": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "unidad": "% de los chicos en edad escolar",
+      "colector": "unesco",
+      "archivo": "unesco.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 20,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_educacion",
+      "rotulo": "Gasto público en educación",
+      "eje": "Desarrollo",
+      "seccion": "educacion",
+      "fuente": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "unidad": "% del producto",
+      "colector": "unesco",
+      "archivo": "unesco.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 11,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_militar",
+      "rotulo": "Gasto militar sobre el producto",
+      "eje": "Defensa",
+      "seccion": "presupuesto-defensa",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 20,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_militar_dolares",
+      "rotulo": "Gasto militar en dólares",
+      "eje": "Defensa",
+      "seccion": "presupuesto-defensa",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "dólares estadounidenses corrientes",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 23,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_militar_publico",
+      "rotulo": "Gasto militar sobre el gasto del Estado",
+      "eje": "Defensa",
+      "seccion": "presupuesto-defensa",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "% del gasto público",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 20,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gini_cepal",
+      "rotulo": "Desigualdad · índice de Gini · segunda fuente",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "0 igualdad, 100 desigualdad máxima",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 11,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "id_producto",
+      "rotulo": "Gasto en investigación y desarrollo",
+      "eje": "Defensa",
+      "seccion": "ciencia-tecnologia",
+      "fuente": "UNESCO, compilado por el Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "internet",
+      "rotulo": "Usuarios de internet",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "UIT, compilado por el Banco Mundial",
+      "unidad": "% de la población",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 32,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "investigadores",
+      "rotulo": "Investigadores por millón de habitantes",
+      "eje": "Defensa",
+      "seccion": "ciencia-tecnologia",
+      "fuente": "UNESCO, compilado por el Banco Mundial",
+      "unidad": "personas por millón",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 4,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "migrantes",
+      "rotulo": "Población migrante que el país aloja",
+      "eje": "Seguridad",
+      "seccion": "migraciones",
+      "fuente": "Naciones Unidas, compilado por el Banco Mundial",
+      "unidad": "personas",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "migrantes_pct",
+      "rotulo": "Peso de la población migrante",
+      "eje": "Seguridad",
+      "seccion": "migraciones",
+      "fuente": "Naciones Unidas, compilado por el Banco Mundial",
+      "unidad": "% de la población",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "perdida_bosque",
+      "rotulo": "Bosque perdido",
+      "eje": "Seguridad",
+      "seccion": "ambiente",
+      "fuente": "Laboratorio GLAD de la Universidad de Maryland y Global Forest Watch, via Our World in Data",
+      "unidad": "hectáreas por año",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "perdidas_electricas",
+      "rotulo": "Electricidad perdida en el traslado",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+      "unidad": "% de la producción",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 6,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "produccion_gas_eia",
+      "rotulo": "Producción de gas natural · segunda fuente",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Administración de Información Energética de EE. UU. (EIA)",
+      "unidad": "miles de millones de metros cúbicos",
+      "colector": "eia",
+      "archivo": "eia.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "puertos_contenedores",
+      "rotulo": "Movimiento de contenedores en puertos",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Naciones Unidas, compilado por el Banco Mundial",
+      "unidad": "contenedores de veinte pies por año",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 21,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "recaudacion",
+      "rotulo": "Recaudación tributaria",
+      "eje": "Gobernanza",
+      "seccion": "capacidad",
+      "fuente": "FMI y Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 14,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "registro_nacimientos",
+      "rotulo": "Nacimientos registrados",
+      "eje": "Gobernanza",
+      "seccion": "capacidad",
+      "fuente": "UNICEF, via la base global de los ODS",
+      "unidad": "% de los menores de 5 años",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "secundaria_cepal",
+      "rotulo": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
+      "eje": "Desarrollo",
+      "seccion": "educacion",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de los jóvenes de 20 a 24",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 11,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "servidores_seguros",
+      "rotulo": "Servidores de internet cifrados",
+      "eje": "Seguridad",
+      "seccion": "ciber",
+      "fuente": "Netcraft, compilado por el Banco Mundial",
+      "unidad": "por millón de habitantes",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "sin_condena",
+      "rotulo": "Detenidos sin condena",
+      "eje": "Seguridad",
+      "seccion": "victimizacion",
+      "fuente": "UNODC, via la base global de los ODS",
+      "unidad": "% de la población carcelaria",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 21,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "temor_delito",
+      "rotulo": "Personas que temen ser víctimas de un delito",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "termina_secundaria",
+      "rotulo": "Terminan la secundaria",
+      "eje": "Desarrollo",
+      "seccion": "educacion",
+      "fuente": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "unidad": "% de la cohorte",
+      "colector": "unesco",
+      "archivo": "unesco.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 11,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trabajo_infantil",
+      "rotulo": "Trabajo infantil",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "OIT, via la base global de los ODS",
+      "unidad": "% de los ninos de 5 a 17",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "uso_energia",
+      "rotulo": "Uso de energía por habitante",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+      "unidad": "kg equivalentes de petróleo",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 6,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "victimas_robo",
+      "rotulo": "Víctimas de robo en los últimos 12 meses",
+      "eje": "Seguridad",
+      "seccion": "victimizacion",
+      "fuente": "UNODC, via la base global de los ODS",
+      "unidad": "% de la población",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "voz_rendicion",
+      "rotulo": "Voz y rendición de cuentas",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "Worldwide Governance Indicators, Banco Mundial",
+      "unidad": "estimación de -2,5 a 2,5",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "acceso_informacion",
+      "rotulo": "Garantías de acceso a la información",
+      "eje": "Gobernanza",
+      "seccion": "capacidad",
+      "fuente": "UNESCO, via la base global de los ODS",
+      "unidad": "puntaje de 0 a 100",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 27,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "armas_enviadas_tiv",
+      "rotulo": "Armas mayores enviadas (TIV)",
+      "eje": "Sin clasificar",
+      "seccion": null,
+      "fuente": "SIPRI — Stockholm International Peace Research Institute: base de transferencias de armas mayores (valores TIV)",
+      "unidad": "millones de TIV (SIPRI)",
+      "colector": "sipri_transferencias",
+      "archivo": "sipri_transferencias.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "armas_recibidas_tiv",
+      "rotulo": "Armas mayores recibidas (TIV)",
+      "eje": "Sin clasificar",
+      "seccion": null,
+      "fuente": "SIPRI — Stockholm International Peace Research Institute: base de transferencias de armas mayores (valores TIV)",
+      "unidad": "millones de TIV (SIPRI)",
+      "colector": "sipri_transferencias",
+      "archivo": "sipri_transferencias.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "autocensura",
+      "rotulo": "Ausencia de autocensura periodistica",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de -4 a 4",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "capacidad_solar",
+      "rotulo": "Capacidad solar instalada",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Energy Institute y Ember, via Our World in Data",
+      "unidad": "gigavatios",
+      "colector": "infraestructura",
+      "archivo": "infraestructura.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "censura_medios",
+      "rotulo": "Ausencia de censura estatal a los medios",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de -4 a 4",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "conflicto_no_estatal",
+      "rotulo": "Muertes en conflicto entre grupos armados",
+      "eje": "Seguridad",
+      "seccion": "grupos-armados",
+      "fuente": "UCDP, Programa de Datos de Conflicto de Upsala, via Our World in Data",
+      "unidad": "personas por año",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "corrupcion_politica",
+      "rotulo": "Corrupción política",
+      "eje": "Gobernanza",
+      "seccion": "democracia",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de 0 a 1",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "cuota_mineral_mundial",
+      "rotulo": "Mayor cuota mundial en un mineral",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "% de la producción mundial",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 11,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "democracia_electoral",
+      "rotulo": "Nivel democrático — democracia electoral",
+      "eje": "Gobernanza",
+      "seccion": "democracia",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de 0 a 1",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "democracia_liberal",
+      "rotulo": "Democracia liberal — límites al poder",
+      "eje": "Gobernanza",
+      "seccion": "democracia",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de 0 a 1",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "democracia_participativa",
+      "rotulo": "Democracia participativa",
+      "eje": "Gobernanza",
+      "seccion": "democracia",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de 0 a 1",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "desempleo_joven",
+      "rotulo": "Desempleo juvenil",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "OIT, compilado por el Banco Mundial",
+      "unidad": "% de la población de 15 a 24",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 29,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "desempleo_joven_oit",
+      "rotulo": "Desempleo juvenil · estimación modelada de la OIT",
+      "eje": "Desarrollo",
+      "seccion": "informalidad",
+      "fuente": "Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado",
+      "unidad": "% de los jóvenes de 15 a 24 activos",
+      "colector": "oit",
+      "archivo": "oit.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 29,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "desempleo_oit",
+      "rotulo": "Desempleo",
+      "eje": "Desarrollo",
+      "seccion": "informalidad",
+      "fuente": "Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado",
+      "unidad": "% de la población activa",
+      "colector": "oit",
+      "archivo": "oit.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "electricidad_por_habitante",
+      "rotulo": "Electricidad generada por habitante",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Energy Institute y Ember, via Our World in Data",
+      "unidad": "kilovatios hora por persona",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "electricidad_renovable",
+      "rotulo": "Electricidad de fuentes renovables",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Energy Institute y Ember, via Our World in Data",
+      "unidad": "% de la electricidad generada",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "empleo_informal",
+      "rotulo": "Empleo informal",
+      "eje": "Desarrollo",
+      "seccion": "informalidad",
+      "fuente": "OIT, vía la base global de los ODS",
+      "unidad": "% del empleo total",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 7,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "empleo_informal_oit",
+      "rotulo": "Empleo informal según la OIT",
+      "eje": "Desarrollo",
+      "seccion": "informalidad",
+      "fuente": "Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado",
+      "unidad": "% del empleo total",
+      "colector": "oit",
+      "archivo": "oit.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 16,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "estado_derecho_wjp",
+      "rotulo": "Estado de derecho (WJP)",
+      "eje": "Sin clasificar",
+      "seccion": null,
+      "fuente": "World Justice Project — WJP Rule of Law Index (índice general de estado de derecho)",
+      "unidad": "índice WJP (0 a 1)",
+      "colector": "wjp",
+      "archivo": "wjp.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 32,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "exporta_combustibles",
+      "rotulo": "Combustibles sobre lo que se exporta",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Naciones Unidas COMTRADE, compilado por el Banco Mundial",
+      "unidad": "% de las exportaciones de bienes",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 6,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_militar_gasto_pub",
+      "rotulo": "gasto_militar_gasto_pub",
+      "eje": "Sin clasificar",
+      "seccion": "presupuesto-defensa",
+      "fuente": "SIPRI — Stockholm International Peace Research Institute: base de gasto militar",
+      "unidad": "porcentaje del gasto público",
+      "colector": "sipri",
+      "archivo": "sipri.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_militar_pbi",
+      "rotulo": "gasto_militar_pbi",
+      "eje": "Sin clasificar",
+      "seccion": "presupuesto-defensa",
+      "fuente": "SIPRI — Stockholm International Peace Research Institute: base de gasto militar",
+      "unidad": "porcentaje del PBI",
+      "colector": "sipri",
+      "archivo": "sipri.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_militar_usd_const",
+      "rotulo": "gasto_militar_usd_const",
+      "eje": "Sin clasificar",
+      "seccion": "presupuesto-defensa",
+      "fuente": "SIPRI — Stockholm International Peace Research Institute: base de gasto militar",
+      "unidad": "millones de USD constantes de 2024",
+      "colector": "sipri",
+      "archivo": "sipri.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "generacion_electrica",
+      "rotulo": "Generación eléctrica",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Energy Institute y Ember, via Our World in Data",
+      "unidad": "teravatios hora",
+      "colector": "infraestructura",
+      "archivo": "infraestructura.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gini",
+      "rotulo": "Desigualdad — índice de Gini",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "Banco Mundial, sobre encuestas de hogares",
+      "unidad": "0 igualdad, 100 desigualdad máxima",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gti_heridos",
+      "rotulo": "Heridos en atentados terroristas (GTI)",
+      "eje": "Seguridad",
+      "seccion": "terrorismo",
+      "fuente": "Institute for Economics & Peace — Global Terrorism Index 2026",
+      "unidad": "personas por año",
+      "colector": "gti",
+      "archivo": "gti.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 23,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gti_incidentes",
+      "rotulo": "Atentados terroristas registrados (GTI)",
+      "eje": "Seguridad",
+      "seccion": "terrorismo",
+      "fuente": "Institute for Economics & Peace — Global Terrorism Index 2026",
+      "unidad": "hechos por año",
+      "colector": "gti",
+      "archivo": "gti.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 23,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gti_muertes",
+      "rotulo": "Muertes por atentados terroristas (GTI)",
+      "eje": "Seguridad",
+      "seccion": "terrorismo",
+      "fuente": "Institute for Economics & Peace — Global Terrorism Index 2026",
+      "unidad": "personas por año",
+      "colector": "gti",
+      "archivo": "gti.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 23,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gti_rehenes",
+      "rotulo": "Rehenes tomados en atentados terroristas (GTI)",
+      "eje": "Seguridad",
+      "seccion": "terrorismo",
+      "fuente": "Institute for Economics & Peace — Global Terrorism Index 2026",
+      "unidad": "personas por año",
+      "colector": "gti",
+      "archivo": "gti.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 23,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gti_score",
+      "rotulo": "Índice del Terrorismo Global (GTI)",
+      "eje": "Seguridad",
+      "seccion": "terrorismo",
+      "fuente": "Institute for Economics & Peace — Global Terrorism Index 2026",
+      "unidad": "índice GTI (0 = sin impacto registrado, sin techo fijo)",
+      "colector": "gti",
+      "archivo": "gti.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 23,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "homicidio_ine_chile",
+      "rotulo": "Víctimas de homicidio (INE Chile, ICCS)",
+      "eje": "Seguridad",
+      "seccion": null,
+      "fuente": "Instituto Nacional de Estadísticas de Chile — Estadísticas Policiales",
+      "unidad": "víctimas registradas",
+      "colector": "chile_ine_seguridad",
+      "archivo": "chile_ine_seguridad.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 1
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "homicidios_estado",
+      "rotulo": "Homicidios según el propio Estado",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "Estadística oficial de cada Estado (ministerios de seguridad y defensa, policías)",
+      "unidad": "víctimas en el año",
+      "colector": "estado_reciente",
+      "archivo": "estado_reciente.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 6,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "hostigamiento_periodistas",
+      "rotulo": "Ausencia de hostigamiento a periodistas",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de -4 a 4",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "industria",
+      "rotulo": "Industria — valor agregado",
+      "eje": "Desarrollo",
+      "seccion": "industrial",
+      "fuente": "Cuentas nacionales, compiladas por el Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 24,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "institucion_ddhh",
+      "rotulo": "Institución de derechos humanos independiente",
+      "eje": "Gobernanza",
+      "seccion": "capacidad",
+      "fuente": "ACNUDH, via la base global de los ODS",
+      "unidad": "cumplimiento de 0 a 1",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "lanzamientos_anuales",
+      "rotulo": "Objetos puestos en órbita por año",
+      "eje": "Defensa",
+      "seccion": "aeroespacial",
+      "fuente": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, via Our World in Data",
+      "unidad": "objetos por año",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "libertad_asociacion",
+      "rotulo": "Libertad de asociación y partidos",
+      "eje": "Gobernanza",
+      "seccion": "libertades",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de 0 a 1",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "libertad_expresion",
+      "rotulo": "Libertad de expresión y de prensa",
+      "eje": "Gobernanza",
+      "seccion": "libertades",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de 0 a 1",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "matricula_terciaria",
+      "rotulo": "Matrícula terciaria",
+      "eje": "Desarrollo",
+      "seccion": "educacion",
+      "fuente": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "unidad": "% del grupo de edad",
+      "colector": "unesco",
+      "archivo": "unesco.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "medios_corruptos",
+      "rotulo": "Ausencia de corrupción en los medios",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de -4 a 4",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "migracion_neta",
+      "rotulo": "Migración neta",
+      "eje": "Seguridad",
+      "seccion": "migraciones",
+      "fuente": "Naciones Unidas, compilado por el Banco Mundial",
+      "unidad": "personas por quinquenio",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "minerales",
+      "rotulo": "Exportación de minerales y metales",
+      "eje": "Desarrollo",
+      "seccion": "materias",
+      "fuente": "UN Comtrade, compilado por el Banco Mundial",
+      "unidad": "% de las exportaciones",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 6,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "minerales_escala_mundial",
+      "rotulo": "Minerales que produce a escala mundial",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "recuento de minerales",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 11,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "objetos_espacio",
+      "rotulo": "Objetos puestos en órbita, acumulado",
+      "eje": "Defensa",
+      "seccion": "aeroespacial",
+      "fuente": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, via Our World in Data",
+      "unidad": "objetos",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "percepcion_corrupcion",
+      "rotulo": "Percepción de corrupción",
+      "eje": "Gobernanza",
+      "seccion": "institucional",
+      "fuente": "Transparency International — Índice de Percepción de la Corrupción",
+      "unidad": "puntaje de 0 a 100",
+      "colector": "percepcion_corrupcion",
+      "archivo": "percepcion_corrupcion.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 30,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "poblacion",
+      "rotulo": "Población total",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Naciones Unidas, compilado por el Banco Mundial",
+      "unidad": "personas",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "pobreza",
+      "rotulo": "Pobreza según línea nacional",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "Banco Mundial, sobre líneas nacionales",
+      "unidad": "% de la población",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 4,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "pobreza_cepal",
+      "rotulo": "Pobreza con umbral internacional (4,1 dólares diarios)",
+      "eje": "Desarrollo",
+      "seccion": "pobreza",
+      "fuente": "Banco Mundial, Plataforma sobre Pobreza y Desigualdad (vía CEPALSTAT)",
+      "unidad": "% de las personas",
+      "colector": "pobreza",
+      "archivo": "pobreza.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "pobreza_extrema",
+      "rotulo": "Pobreza extrema",
+      "eje": "Desarrollo",
+      "seccion": "pobreza",
+      "fuente": "Banco Mundial, Plataforma sobre Pobreza y Desigualdad (vía CEPALSTAT)",
+      "unidad": "% de las personas",
+      "colector": "pobreza",
+      "archivo": "pobreza.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "polarizacion",
+      "rotulo": "Polarización política",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de -4 a 4",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 24,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "produccion_carbon",
+      "rotulo": "Producción de carbón",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data",
+      "unidad": "teravatios hora equivalentes",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 4,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "produccion_gas",
+      "rotulo": "Producción de gas natural",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data",
+      "unidad": "teravatios hora equivalentes",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 8,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "produccion_litio",
+      "rotulo": "Producción de litio",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "toneladas de contenido de litio",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "produccion_petroleo",
+      "rotulo": "Producción de petróleo",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data",
+      "unidad": "teravatios hora equivalentes",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 9,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "produccion_petroleo_eia",
+      "rotulo": "Producción de petróleo · segunda fuente",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Administración de Información Energética de EE. UU. (EIA)",
+      "unidad": "miles de barriles por día",
+      "colector": "eia",
+      "archivo": "eia.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "regalo_contrato",
+      "rotulo": "Empresas que esperan pagar por un contrato público",
+      "eje": "Gobernanza",
+      "seccion": "contratacion",
+      "fuente": "Encuestas de Empresas del Banco Mundial",
+      "unidad": "% de las empresas consultadas",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "remesas",
+      "rotulo": "Remesas recibidas",
+      "eje": "Seguridad",
+      "seccion": "migraciones",
+      "fuente": "Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 24,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "satelites_gcat",
+      "rotulo": "Satélites en órbita, acumulado · segunda fuente",
+      "eje": "Defensa",
+      "seccion": "aeroespacial",
+      "fuente": "GCAT — catálogo general de objetos espaciales de Jonathan McDowell, CC BY 4.0",
+      "unidad": "satélites",
+      "colector": "infraestructura",
+      "archivo": "infraestructura.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "sesgo_medios",
+      "rotulo": "Ausencia de sesgo en la cobertura",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+      "unidad": "índice de -4 a 4",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "soborno_empresas",
+      "rotulo": "Empresas a las que se pidió un soborno",
+      "eje": "Gobernanza",
+      "seccion": "soborno",
+      "fuente": "Banco Mundial, vía la base global de los ODS",
+      "unidad": "% de las empresas",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_nivel",
+      "rotulo": "Esfuerzo del gobierno contra la trata (EE. UU.)",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "Departamento de Estado de los EE. UU. — Informe sobre la Trata de Personas",
+      "unidad": "nivel de 1 a 4 (1 = cumple los estándares mínimos)",
+      "colector": "trata_personas",
+      "archivo": "trata_personas.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 29,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_sexual",
+      "rotulo": "Trata para explotación sexual",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_trabajo",
+      "rotulo": "Trata para trabajo forzoso",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_victimas",
+      "rotulo": "Víctimas detectadas de trata de personas",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "urbanizacion",
+      "rotulo": "Población urbana",
+      "eje": "Desarrollo",
+      "seccion": "urbano",
+      "fuente": "Banco Mundial, sobre censos nacionales",
+      "unidad": "% de la población",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "uso_energia_ei",
+      "rotulo": "Uso de energía por habitante · segunda fuente",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Energy Institute, Revisión Estadística de la Energía Mundial, via Our World in Data",
+      "unidad": "kilovatios hora por persona",
+      "colector": "owd",
+      "archivo": "owd.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 9,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "vulnerabilidad",
+      "rotulo": "Población vulnerable a la pobreza",
+      "eje": "Desarrollo",
+      "seccion": "pobreza",
+      "fuente": "Banco Mundial, Plataforma sobre Pobreza y Desigualdad (vía CEPALSTAT)",
+      "unidad": "% de las personas",
+      "colector": "pobreza",
+      "archivo": "pobreza.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "actores_antidemocraticos",
+      "rotulo": "Control sobre actores antidemocraticos",
+      "eje": "Gobernanza",
+      "seccion": "integridad",
+      "fuente": "Índice de Transformación Bertelsmann 2026",
+      "unidad": "escala de 1 a 10",
+      "colector": "bti",
+      "archivo": "bti.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "administracion_basica",
+      "rotulo": "Administración básica del Estado",
+      "eje": "Gobernanza",
+      "seccion": "integridad",
+      "fuente": "Índice de Transformación Bertelsmann 2026",
+      "unidad": "escala de 1 a 10",
+      "colector": "bti",
+      "archivo": "bti.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "aeropuertos",
+      "rotulo": "Aeropuertos grandes y medianos",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "OurAirports — censo abierto y colaborativo de aeródromos del mundo",
+      "unidad": "aeropuertos",
+      "colector": "infraestructura",
+      "archivo": "infraestructura.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "aprobacion_democracia",
+      "rotulo": "Aprobación social de la democracia",
+      "eje": "Gobernanza",
+      "seccion": "integridad",
+      "fuente": "Índice de Transformación Bertelsmann 2026",
+      "unidad": "escala de 1 a 10",
+      "colector": "bti",
+      "archivo": "bti.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 16,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "cables_submarinos",
+      "rotulo": "Puntos de amarre de cable submarino",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Mapa de cables submarinos — TeleGeography, interfaz pública",
+      "unidad": "puntos de amarre",
+      "colector": "infraestructura",
+      "archivo": "infraestructura.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 32,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "desastres_onu",
+      "rotulo": "Desastres declarados por la ONU (últimos 10 años)",
+      "eje": "Desarrollo",
+      "seccion": "riesgo-humanitario",
+      "fuente": "ReliefWeb — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA)",
+      "unidad": "desastres declarados en 10 años",
+      "colector": "reliefweb",
+      "archivo": "reliefweb.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "homicidios_observatorio_provincial",
+      "rotulo": "Homicidios según el observatorio provincial (Santa Fe)",
+      "eje": "Seguridad",
+      "seccion": null,
+      "fuente": "Observatorio de Seguridad Pública de Santa Fe (MPA — Ministerio de Justicia y Seguridad)",
+      "unidad": "homicidios acumulados en el año",
+      "colector": "subnacional_santafe",
+      "archivo": "subnacional_santafe.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 1
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "ia_apps_disponibles",
+      "rotulo": "Asistentes de IA disponibles en la tienda del país",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "Apple App Store — rankings de descargas y disponibilidad por país",
+      "unidad": "asistentes de un padrón de 36",
+      "colector": "ia_apps",
+      "archivo": "ia_apps.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "ia_apps_ranking",
+      "rotulo": "Asistentes de IA entre las apps más descargadas",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "Apple App Store — rankings de descargas y disponibilidad por país",
+      "unidad": "asistentes de IA",
+      "colector": "ia_apps",
+      "archivo": "ia_apps.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "ia_apps_ranking_china",
+      "rotulo": "De ellos, de empresas de China",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "Apple App Store — rankings de descargas y disponibilidad por país",
+      "unidad": "asistentes de IA",
+      "colector": "ia_apps",
+      "archivo": "ia_apps.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "ia_apps_ranking_eeuu",
+      "rotulo": "De ellos, de empresas de Estados Unidos",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "Apple App Store — rankings de descargas y disponibilidad por país",
+      "unidad": "asistentes de IA",
+      "colector": "ia_apps",
+      "archivo": "ia_apps.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "ia_apps_ranking_otros",
+      "rotulo": "De ellos, de otros orígenes",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "Apple App Store — rankings de descargas y disponibilidad por país",
+      "unidad": "asistentes de IA",
+      "colector": "ia_apps",
+      "archivo": "ia_apps.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "indice_gobernanza",
+      "rotulo": "Índice de gobernanza",
+      "eje": "Gobernanza",
+      "seccion": "integridad",
+      "fuente": "Índice de Transformación Bertelsmann 2026",
+      "unidad": "escala de 1 a 10",
+      "colector": "bti",
+      "archivo": "bti.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "inflacion_fmi",
+      "rotulo": "Inflación de doce meses, según el FMI",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "Fondo Monetario Internacional — índice de precios al consumidor (SDMX)",
+      "unidad": "%",
+      "colector": "fmi_mensual",
+      "archivo": "fmi_mensual.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 29,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "inflacion_interanual",
+      "rotulo": "Inflación de los últimos doce meses",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "CEPALSTAT (índice de precios al consumidor de cada instituto nacional); porcentaje calculado por la Fundación",
+      "unidad": "%",
+      "colector": "inflacion",
+      "archivo": "inflacion.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 32,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "inflacion_mensual",
+      "rotulo": "Inflación del último mes",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "CEPALSTAT (índice de precios al consumidor de cada instituto nacional); porcentaje calculado por la Fundación",
+      "unidad": "%",
+      "colector": "inflacion",
+      "archivo": "inflacion.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "intensidad_conflicto",
+      "rotulo": "Intensidad del conflicto interno",
+      "eje": "Seguridad",
+      "seccion": "control-territorial",
+      "fuente": "Índice de Transformación Bertelsmann 2026",
+      "unidad": "escala de 1 a 10, más alto es menos conflicto",
+      "colector": "bti",
+      "archivo": "bti.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "internet_moderno",
+      "rotulo": "Tráfico por la internet moderna (IPv6)",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "Cloudflare Radar — mediciones sobre tráfico real de internet",
+      "unidad": "% del tráfico web",
+      "colector": "radar",
+      "archivo": "radar.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "libertad_prensa",
+      "rotulo": "Libertad de prensa — clasificación mundial",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "Reporteros Sin Fronteras — clasificación mundial de la libertad de prensa",
+      "unidad": "puntaje de 0 a 100",
+      "colector": "prensa_libre",
+      "archivo": "prensa_libre.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "monopolio_fuerza",
+      "rotulo": "Monopolio del Estado en el uso de la fuerza",
+      "eje": "Seguridad",
+      "seccion": "control-territorial",
+      "fuente": "Índice de Transformación Bertelsmann 2026",
+      "unidad": "escala de 1 a 10",
+      "colector": "bti",
+      "archivo": "bti.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "nube_china",
+      "rotulo": "Regiones de nube de empresas de China",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Documentación oficial de Huawei, Alibaba y Tencent",
+      "unidad": "regiones de nube",
+      "colector": "ia",
+      "archivo": "ia.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "nube_eeuu",
+      "rotulo": "Regiones de nube de empresas de Estados Unidos",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Documentación oficial de Amazon, Google, Microsoft y Oracle",
+      "unidad": "regiones de nube",
+      "colector": "ia",
+      "archivo": "ia.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "persecucion_abuso",
+      "rotulo": "Persecución del abuso de función pública",
+      "eje": "Gobernanza",
+      "seccion": "integridad",
+      "fuente": "Índice de Transformación Bertelsmann 2026",
+      "unidad": "escala de 1 a 10",
+      "colector": "bti",
+      "archivo": "bti.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "politica_anticorrupcion",
+      "rotulo": "Política anticorrupción",
+      "eje": "Gobernanza",
+      "seccion": "integridad",
+      "fuente": "Índice de Transformación Bertelsmann 2026",
+      "unidad": "escala de 1 a 10",
+      "colector": "bti",
+      "archivo": "bti.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 22
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "redes_influencia",
+      "rotulo": "Redes de influencia dadas de baja por Google que mencionan al país",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "Google — boletín trimestral de operaciones de influencia coordinada",
+      "unidad": "redes en los últimos cuatro trimestres",
+      "colector": "influencia",
+      "archivo": "influencia.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "redes_influencia_extrarregional",
+      "rotulo": "De ellas, vinculadas por Google a un país de fuera de la región",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "Google — boletín trimestral de operaciones de influencia coordinada",
+      "unidad": "redes en los últimos cuatro trimestres",
+      "colector": "influencia",
+      "archivo": "influencia.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "redes_influencia_tiktok",
+      "rotulo": "Redes de influencia desarticuladas por TikTok que mencionan al país",
+      "eje": "Gobernanza",
+      "seccion": "entorno-informativo",
+      "fuente": "TikTok — informes mensuales de operaciones de influencia encubiertas",
+      "unidad": "redes en los últimos doce meses",
+      "colector": "influencia",
+      "archivo": "influencia.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "reservas_bce_ecuador",
+      "rotulo": "Reservas internacionales (Banco Central del Ecuador)",
+      "eje": "Desarrollo",
+      "seccion": null,
+      "fuente": "Banco Central del Ecuador — Información Estadística Mensual, cuadro IEM-121",
+      "unidad": "millones de USD",
+      "colector": "bce_ecuador",
+      "archivo": "bce_ecuador.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 1
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "reservas_internacionales",
+      "rotulo": "Reservas internacionales",
+      "eje": "Desarrollo",
+      "seccion": "condiciones",
+      "fuente": "Fondo Monetario Internacional — liquidez internacional (SDMX)",
+      "unidad": "dólares corrientes",
+      "colector": "fmi_mensual",
+      "archivo": "fmi_mensual.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 27,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "riesgo_inform",
+      "rotulo": "Riesgo de crisis humanitaria (INFORM)",
+      "eje": "Desarrollo",
+      "seccion": "riesgo-humanitario",
+      "fuente": "INFORM — Centro Común de Investigación de la Comisión Europea y OCHA",
+      "unidad": "índice de 0 a 10",
+      "colector": "inform",
+      "archivo": "inform.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "riesgo_inform_amenaza",
+      "rotulo": "Exposición a amenazas (INFORM)",
+      "eje": "Desarrollo",
+      "seccion": "riesgo-humanitario",
+      "fuente": "INFORM — Centro Común de Investigación de la Comisión Europea y OCHA",
+      "unidad": "índice de 0 a 10",
+      "colector": "inform",
+      "archivo": "inform.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "riesgo_inform_capacidad",
+      "rotulo": "Falta de capacidad para enfrentar crisis (INFORM)",
+      "eje": "Desarrollo",
+      "seccion": "riesgo-humanitario",
+      "fuente": "INFORM — Centro Común de Investigación de la Comisión Europea y OCHA",
+      "unidad": "índice de 0 a 10",
+      "colector": "inform",
+      "archivo": "inform.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "riesgo_inform_vulnerabilidad",
+      "rotulo": "Vulnerabilidad (INFORM)",
+      "eje": "Desarrollo",
+      "seccion": "riesgo-humanitario",
+      "fuente": "INFORM — Centro Común de Investigación de la Comisión Europea y OCHA",
+      "unidad": "índice de 0 a 10",
+      "colector": "inform",
+      "archivo": "inform.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "sanciones_ofac",
+      "rotulo": "Sancionados por Estados Unidos con domicilio en el país",
+      "eje": "Gobernanza",
+      "seccion": "sanciones",
+      "fuente": "Oficina de Control de Activos Extranjeros (OFAC), Tesoro de EE. UU.",
+      "unidad": "personas y entidades",
+      "colector": "sanciones_primarias",
+      "archivo": "sanciones_primarias.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "sanciones_ofsi",
+      "rotulo": "Sancionados por el Reino Unido con domicilio en el país",
+      "eje": "Gobernanza",
+      "seccion": "sanciones",
+      "fuente": "UK Sanctions List — Foreign, Commonwealth & Development Office (FCDO), Reino Unido",
+      "unidad": "personas y entidades",
+      "colector": "sanciones_primarias",
+      "archivo": "sanciones_primarias.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trafico_automatizado",
+      "rotulo": "Tráfico de internet automatizado",
+      "eje": "Seguridad",
+      "seccion": "ciber",
+      "fuente": "Cloudflare Radar — mediciones sobre tráfico real de internet",
+      "unidad": "% del tráfico web",
+      "colector": "radar",
+      "archivo": "radar.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "uso_chatgpt",
+      "rotulo": "Intensidad de uso de ChatGPT",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "OpenAI — Signals, datos abiertos (CC BY 4.0)",
+      "unidad": "percentil mundial (100 = el país con más uso)",
+      "colector": "ia",
+      "archivo": "ia.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 21,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "uso_claude",
+      "rotulo": "Intensidad de uso de Claude por habitante",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "Anthropic — Economic Index (CC BY)",
+      "unidad": "índice (1 = el uso que corresponde a su población)",
+      "colector": "ia",
+      "archivo": "ia.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 19,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "uso_ia_generativa",
+      "rotulo": "Uso de inteligencia artificial generativa",
+      "eje": "Desarrollo",
+      "seccion": "conectividad",
+      "fuente": "Microsoft AI Economy Institute — AI Diffusion Report",
+      "unidad": "% de las personas",
+      "colector": "ia",
+      "archivo": "ia.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 23,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    }
+  ],
+  "colisiones_de_clave": {},
+  "vacios_declarados": [
+    "La 'cobertura' cuenta filas con dato en el año más reciente de ESE indicador, no contra el padrón de 33 Estados: un indicador regional (no por Estado) declara su propio total de filas.",
+    "Un indicador con `serie_detenida` en verdadero no es un colector roto: se le preguntó a la fuente y no tiene nada más nuevo (`colectores/comun.SERIES_DETENIDAS`). Igual entra al ranking, porque la región sigue sin medida vigente de esa materia y eso hay que verlo.",
+    "Esta medición es tan buena como lo que cada colector declaró en su bloque `indicadores`: un indicador sin ese bloque (o con la clave mal escrita) no entra al ranking aunque tenga datos. Ver `archivos_sin_indicadores_por_anio`."
+  ]
+}
