@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "owd",
     "capa": "publico",
-    "obtenido_en": "2026-09-22T01:37:37+00:00",
+    "obtenido_en": "2026-09-22T06:23:29+00:00",
     "fuente": {
       "nombre": "V-Dem y UCDP, vía Our World in Data (la Base Global de Terrorismo se retiró de esta capa el 21/9/2026: ver vacíos declarados)",
       "url": "https://ourworldindata.org/grapher/electoral-democracy-index"
@@ -16,9 +16,9 @@
     "vacios_declarados": [
       "V-Dem no cubre a los Estados chicos del Caribe: Antigua y Barbuda, Bahamas, Belice, Dominica, Granada, San Cristóbal y Nieves, San Vicente y las Granadinas, Santa Lucía. Sin dato no significa sin democracia ni sin problema: significa que el proyecto no los codifica.",
       "TERRORISMO: este registro RETIRÓ el 21/9/2026 las dos series que tomaba de la Base Global de Terrorismo (START) vía Our World in Data —muertes y atentados—. Motivo: la licencia de esa base prohíbe la redistribución, y Our World in Data aclara en la propia página de esta serie que queda sujeta a los términos del proveedor original, no al sello general de atribución abierta del sitio. Publicarla acá corría el riesgo de incumplir esa licencia. El código de las dos series queda comentado en este archivo (`SERIES_RETIRADAS_GTD`), no borrado.",
-      "Lo que la reemplaza EN PARTE: UCDP GED, en la sección «Violencia organizada» de este mismo registro (licencia CC BY 4.0, llega a 2025). MIDE OTRA COSA —violencia organizada con un umbral de 25 muertes anuales, no todo lo que se llama terrorismo— y se declara así, sin presentarse como continuación de la serie retirada.",
-      "Segunda fuente candidata, PENDIENTE de gestión: el Global Terrorism Index del Instituto para la Economía y la Paz —score y ranking por país, llega a 2025, licencia gratuita para organizaciones sin fines de lucro—. Su archivo XLSX está detrás de un formulario de solicitud de licencia (no hay descarga directa); no se automatiza sin que la Dirección lo gestione.",
-      "«Terrorismo» además es una definición disputada: varios Estados de la región califican de terrorista a la protesta social. Esa cautela vale para cualquier fuente futura de esta materia, no solo para la retirada.",
+      "REEMPLAZO CON FUENTE PROPIA, el mismo día: el Global Terrorism Index del Instituto para la Economía y la Paz (IEP) entró en vivo el 21/9/2026 en su propio colector (`colectores/gti.py`, sección «Terrorismo»), con puntaje, atentados, muertes, heridos y rehenes hasta 2025. Es fuente file-drop —la Dirección gestionó la licencia y bajó el archivo a mano, sin descarga pública directa— y licencia no comercial (CC BY-NC-SA 4.0, atribución al IEP).",
+      "UCDP GED, en la sección «Violencia organizada» de este mismo registro (licencia CC BY 4.0, llega a 2025), sigue en vivo como capa complementaria. MIDE OTRA COSA —violencia organizada con un umbral de 25 muertes anuales, no todo lo que se llama terrorismo— y no corrobora al Global Terrorism Index: son dos fuentes sobre dos fenómenos distintos, no dos fuentes sobre el mismo.",
+      "«Terrorismo» además es una definición disputada: varios Estados de la región califican de terrorista a la protesta social. Esa cautela vale para el Global Terrorism Index igual que valía para la serie retirada.",
       "El conflicto entre grupos armados exige 25 muertes anuales para que UCDP lo registre. Por debajo de ese umbral el Estado figura en cero sin estar en paz. Y cuenta muertes en enfrentamiento, no presencia ni control territorial: no es una medida de cuánto territorio dominan los grupos criminales.",
       "Los índices de V-Dem son medición experta codificada, no recuento de hechos. El proyecto publica un intervalo de incertidumbre por dato; acá se toma la estimación central y el intervalo no se muestra.",
       "Percepción democrática y de las instituciones: no hay dato. Latinobarometro y el Barometro de las Américas la miden, pero exigen registro para descargar los microdatos. Lo que se publica acá es el nivel democratico según especialistas, que es otra cosa: mide como funciona el sistema, no que piensa la gente de él.",
