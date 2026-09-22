@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "opacidad",
     "capa": "publico",
-    "obtenido_en": "2026-09-22T05:48:39+00:00",
+    "obtenido_en": "2026-09-22T11:50:10+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — Índice de Opacidad, edición cero",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#opacidad"
@@ -174,26 +174,26 @@
         {
           "termino": "Solicitudes de acceso a la información",
           "consulta": "https://www.datos.gov.py/api/catalog/v1?q=Solicitudes%20de%20acceso%20a%20la%20informaci%C3%B3n&limit=12",
-          "http": null,
+          "http": 200,
           "devueltos": 0,
           "pertinentes": 0,
-          "falla": "URLError"
+          "falla": "JSONDecodeError"
         },
         {
           "termino": "acceso a la información publica estadísticas",
           "consulta": "https://www.datos.gov.py/api/catalog/v1?q=acceso%20a%20la%20informaci%C3%B3n%20publica%20estad%C3%ADsticas&limit=12",
-          "http": null,
+          "http": 200,
           "devueltos": 0,
           "pertinentes": 0,
-          "falla": "URLError"
+          "falla": "JSONDecodeError"
         },
         {
           "termino": "solicitudes de información publica",
           "consulta": "https://www.datos.gov.py/api/catalog/v1?q=solicitudes%20de%20informaci%C3%B3n%20publica&limit=12",
-          "http": null,
+          "http": 200,
           "devueltos": 0,
           "pertinentes": 0,
-          "falla": "URLError"
+          "falla": "JSONDecodeError"
         }
       ]
     },
@@ -441,7 +441,7 @@
           "consulta": "https://www.datos.gov.co/api/catalog/v1?q=Solicitudes%20de%20acceso%20a%20la%20informaci%C3%B3n&limit=12",
           "http": 200,
           "devueltos": 12,
-          "pertinentes": 2,
+          "pertinentes": 1,
           "falla": null
         },
         {
@@ -457,7 +457,7 @@
           "consulta": "https://www.datos.gov.co/api/catalog/v1?q=solicitudes%20de%20informaci%C3%B3n%20publica&limit=12",
           "http": 200,
           "devueltos": 12,
-          "pertinentes": 2,
+          "pertinentes": 1,
           "falla": null
         }
       ]
@@ -490,7 +490,7 @@
           "consulta": "https://datos.gob.cl/api/3/action/package_search?q=solicitudes%20de%20informaci%C3%B3n%20publica&rows=12",
           "http": 200,
           "devueltos": 12,
-          "pertinentes": 5,
+          "pertinentes": 6,
           "falla": null
         }
       ]
@@ -613,14 +613,14 @@
     "sin_verificar": 28,
     "estados_del_padron": 33,
     "estados_con_portal_consultable": 9,
-    "consultado": "2026-09-22T05:48:39+00:00"
+    "consultado": "2026-09-22T11:50:10+00:00"
   },
   "caidas": [
     "PER: HTTPError",
     "PER: HTTPError",
     "PER: HTTPError",
-    "PRY: URLError",
-    "PRY: URLError",
-    "PRY: URLError"
+    "PRY: JSONDecodeError",
+    "PRY: JSONDecodeError",
+    "PRY: JSONDecodeError"
   ]
 }
