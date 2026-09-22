@@ -2882,18 +2882,22 @@
         </div>
     <div class="categoria" id="terrorismo" data-nivel="2">
       <div class="categoria-head"><h3>Terrorismo</h3><span class="tag" id="tag-terrorismo">—</span></div>
-      <details class="aviso-cobertura" open><summary>Esta serie se retiró: su licencia no permite republicarla. El dato fresco está en «Violencia organizada» (UCDP)</summary>
-        <p><b>Este registro retiró estas dos series</b> —muertes y atentados— <b>porque su
-           licencia no permite redistribuirlas.</b> Venían de la Base Global de Terrorismo
-           (START, Universidad de Maryland) vía Our World in Data, que dejó de actualizarse
-           en 2021 y aclara, en la página de esta serie, que queda sujeta a los términos del
-           proveedor original: el sello general de licencia abierta de Our World in Data no
-           la cubre.</p>
-        <p><b>El dato más actual y comparable de este registro está en
-           <a href="#ucdp">«Violencia organizada» (UCDP)</a>, hasta 2025.</b> Mide eventos de
-           violencia organizada con un umbral de 25 muertes al año: <b>no es lo mismo que
-           terrorismo</b>, y esta sección no se completa con ese dato ni lo reemplaza — se
-           declara la diferencia y se invita a mirar esa sección aparte.</p>
+      <details class="aviso-cobertura"><summary>Fuente propia: Global Terrorism Index (IEP), licencia no comercial con atribución al IEP</summary>
+        <p><b>Esta sección tiene fuente propia desde el 21/9/2026: el Global Terrorism
+           Index</b> del Institute for Economics &amp; Peace (IEP), con puntaje de impacto del
+           terrorismo, atentados, muertes, heridos y rehenes por Estado, hasta 2025.
+           Reemplaza a la Base Global de Terrorismo (START, vía Our World in Data), retirada
+           ese mismo día porque su licencia no permitía redistribuirla.</p>
+        <p><b>Licencia no comercial.</b> El GTI se publica bajo Creative Commons
+           Atribución-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0), con atribución
+           obligatoria al IEP: este dato no puede viajar a ningún producto que la Fundación
+           cobre. Es además una fuente <b>file-drop</b>: el IEP no tiene descarga pública
+           directa, y la Dirección gestionó la licencia y bajó el archivo a mano.</p>
+        <p><b>Fuente única, y se declara así.</b> El GTI es la sola fuente de terrorismo de
+           este registro: no hay una segunda fuente que mida lo mismo. <b>«Violencia
+           organizada» (<a href="#ucdp">UCDP</a>) mide otra cosa</b> —un umbral de 25 muertes
+           anuales en conflicto organizado, no terrorismo— y queda como capa complementaria
+           relacionada, sin corroborar a este conjunto ni reemplazarlo.</p>
         <p><b>Y «terrorismo» es, de por sí, una definición disputada</b>: varios Estados de la
            región han calificado de terrorista a la protesta social.</p>
       </details>
@@ -4599,7 +4603,8 @@
                      ['bce_ecuador','Banco Central del Ecuador — Reservas internacionales'],
                      ['chile_ine','INE Chile — Estadísticas policiales de homicidio'],
                      ['santafe','Observatorio de Seguridad Pública de Santa Fe — Homicidios provinciales'],
-                     ['unodc_armas','UNODC — Tráfico ilícito de armas de fuego']];
+                     ['unodc_armas','UNODC — Tráfico ilícito de armas de fuego'],
+                     ['gti','IEP — Global Terrorism Index']];
 
   // El informe imprimible se abre a pedido. En papel sale siempre entero: la
   // regla de impresion anula el plegado, de modo que el PDF no cambia.
@@ -4851,6 +4856,11 @@
     conflicto_no_estatal: 'conflicto armado guerra grupos armados enfrentamiento',
     terrorismo_muertes: 'terrorismo atentado bomba',
     terrorismo_atentados: 'terrorismo atentado bomba',
+    gti_score: 'terrorismo atentado bomba indice global terrorism index iep',
+    gti_incidentes: 'terrorismo atentado bomba indice global terrorism index iep',
+    gti_muertes: 'terrorismo atentado bomba indice global terrorism index iep',
+    gti_heridos: 'terrorismo atentado bomba heridos indice global terrorism index iep',
+    gti_rehenes: 'terrorismo atentado bomba rehenes secuestro indice global terrorism index iep',
     victimas_robo: 'robo hurto arrebato inseguridad delito comun',
     denuncia_robo: 'robo denuncia policia cifra negra subregistro',
     denuncia_agresion: 'agresion violencia denuncia policia',
@@ -8655,7 +8665,7 @@
                             almacen.inform, almacen.reliefweb, almacen.trata_personas,
                             almacen.wjp, almacen.sipri, almacen.sipri_transferencias,
                             almacen.bce_ecuador, almacen.chile_ine, almacen.santafe,
-                            almacen.unodc_armas].filter(Boolean);
+                            almacen.unodc_armas, almacen.gti].filter(Boolean);
 
   function metaInd(clave){
     for(const f of fuentesInd()){
@@ -13277,7 +13287,7 @@
     tarjetasBanco(['internet','banda_ancha','internet_moderno','uso_ia_generativa','uso_chatgpt','uso_claude',
                   'ia_apps_ranking','ia_apps_ranking_eeuu','ia_apps_ranking_china','ia_apps_ranking_otros','ia_apps_disponibles'],'conectividad');
     tarjetasBanco(['bosque','perdida_bosque'],'ambiente');
-    tarjetasBanco(['terrorismo_muertes','terrorismo_atentados'],'terrorismo');
+    tarjetasBanco(['gti_score','gti_incidentes','gti_muertes','gti_heridos','gti_rehenes'],'terrorismo');
     tarjetasBanco('conflicto_no_estatal','grupos-armados');
     tarjetasBanco(['democracia_electoral','democracia_liberal','democracia_participativa',
                    'corrupcion_politica'],'democracia');
@@ -17314,10 +17324,9 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   Promise.all([traer('owd.json'), traer('estado/owd.json').catch(()=>null)])
     .then(([d,estado])=>{
       almacen.owd=d; dominios+=Object.keys(d.cobertura||{}).length;
-      ['terrorismo','democracia','aeroespacial'].forEach(x=>pintarProcedencia('proc-'+x, d.procedencia));
+      ['democracia','aeroespacial'].forEach(x=>pintarProcedencia('proc-'+x, d.procedencia));
       pintarVacios('vac-aeroespacial',d.procedencia.vacios_declarados);
       registros+=d.registros.length*Object.keys(d.cobertura||{}).length;
-      vacios+=pintarVacios('vac-terrorismo',d.procedencia.vacios_declarados);
       pintarVacios('vac-democracia',d.procedencia.vacios_declarados);
       if(estado&&estado.estado==='error'){ fallas++; pintarFalla('tarj-democracia','V-Dem y UCDP',estado.mensaje,d.procedencia); }
       repintar(); marcador();
@@ -17444,6 +17453,24 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
       repintar(); marcador();
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-institucional','estado de derecho del World Justice Project',err.message); marcador(); });
+
+  // GLOBAL TERRORISM INDEX (IEP): fuente propia de terrorismo desde el
+  // 21/9/2026, en reemplazo de la Base Global de Terrorismo (START, retirada
+  // por licencia). Licencia no comercial (CC BY-NC-SA 4.0, atribucion al
+  // IEP) y fuente unica -- UCDP («Violencia organizada») mide otra cosa y
+  // queda aparte, sin corroborarla.
+  Promise.all([traer('gti.json'), traer('estado/gti.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.gti=d; const nInd=(d.indicadores||[]).length;
+      dominios+=nInd; registros+=d.registros.length*nInd;
+      pintarProcedencia('proc-terrorismo', d.procedencia);
+      vacios+=pintarVacios('vac-terrorismo',d.procedencia.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++;
+        pintarFalla('tarj-terrorismo','Global Terrorism Index (IEP)',estado.mensaje,d.procedencia); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('tarj-terrorismo','Global Terrorism Index (IEP)',err.message);
+      document.getElementById('proc-terrorismo').textContent='Sin registro disponible.'; marcador(); });
 
   // GASTO MILITAR DE SIPRI, DIRECTO: el Banco Mundial ya publica la misma
   // medida compilada de SIPRI, un año atrasada (2024). Esta es la fuente

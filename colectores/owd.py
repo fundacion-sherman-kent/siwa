@@ -29,7 +29,8 @@ admite uso comercial, y mantiene la dirección estable.
 
 **La atribución va al productor original en cada ficha**, no a quien republica.
 
-Terrorismo — retirado de esta capa el 21/9/2026 (propuesta, PR sin aprobar)
+Terrorismo — retirado de esta capa el 21/9/2026, con fuente propia desde ese
+mismo día
 ----------------------------------------------------------------------------
 Las dos series de terrorismo (muertes y atentados) se sacaron de `SERIES` y
 quedaron en `SERIES_RETIRADAS_GTD`, más abajo, sin borrar el código: se
@@ -44,20 +45,21 @@ to the license terms from the original providers»), es decir a la EULA de
 START — verificado en vivo el 21/9/2026. El sello CC BY de OWD no alcanza
 para cubrir esta serie en particular, y SIWA venía republicándola.
 
-**Qué la reemplaza en parte.** UCDP GED entró en vivo el 21/9/2026 como
-sección aparte («Violencia organizada», `colectores/ucdp.py`), con licencia
-CC BY 4.0 y dato hasta 2025. Mide otra cosa —violencia organizada con un
-umbral de 25 muertes anuales— y se rotula así, sin presentarse como
-continuación de la serie de terrorismo.
+**Qué la reemplaza.** El mismo día, 21/9/2026, entró en vivo el **Global
+Terrorism Index** del Instituto para la Economía y la Paz (IEP) —colector
+`colectores/gti.py`, sección «Terrorismo» del sitio— como **fuente propia de
+terrorismo**: puntaje del impacto del terrorismo, atentados, muertes, heridos
+y rehenes, por Estado y año, hasta 2025. Es fuente file-drop (sin descarga
+pública directa; la Dirección gestionó la licencia y bajó el archivo a mano,
+como Latinobarómetro) y licencia no comercial (CC BY-NC-SA 4.0, atribución al
+IEP): ver `colectores/fijas/gti-iep-2026/LEEME.md` y `comun.RESTRICCIONES`,
+clave `gti_iep_no_comercial`.
 
-**Segunda fuente candidata, pendiente de gestión.** El Global Terrorism
-Index del Instituto para la Economía y la Paz da un score y un ranking por
-país, llega a 2025 y su licencia no comercial es gratuita para
-organizaciones sin fines de lucro. Pero su archivo XLSX está detrás de un
-formulario de solicitud de licencia (nombre, organización, sitio, uso) en
-`economicsandpeace.org/consulting/data-licensing` — verificado en vivo el
-21/9/2026, no hay descarga directa. No se automatiza sin que la Dirección
-gestione esa licencia.
+UCDP GED sigue en vivo aparte, en la sección «Violencia organizada»
+(`colectores/ucdp.py`), con licencia CC BY 4.0 y dato hasta 2025. **Mide otra
+cosa** —violencia organizada con un umbral de 25 muertes anuales, no
+terrorismo— y queda como capa complementaria: no corrobora al GTI ni lo
+reemplaza, y se declara así en ambas secciones.
 """
 
 from __future__ import annotations
@@ -283,7 +285,9 @@ SERIES_RETIRADAS_GTD = [
                 "actualizarse. No hay dato posterior y no se estima ninguno. Además, "
                 "la definición de terrorismo es disputada y varios Estados de la región "
                 "califican como terrorista a la protesta social. RETIRADA el 21/9/2026: "
-                "su EULA prohíbe la redistribución (ver docstring)."},
+                "su EULA prohíbe la redistribución (ver docstring). REEMPLAZADA ese "
+                "mismo día por el Global Terrorism Index del IEP (`colectores/gti.py`, "
+                "clave «gti_muertes»), con fuente y licencia propias."},
     {"clave": "terrorismo_atentados", "slug": "terrorist-attacks",
      "columna": "total_incident_counts",
      "rotulo": "Atentados terroristas registrados", "eje": "Seguridad",
@@ -293,7 +297,9 @@ SERIES_RETIRADAS_GTD = [
      "cautela": "Misma advertencia: LA SERIE TERMINA EN 2021. Cuenta hechos "
                 "registrados, de modo que un Estado con mejor registro puede aparecer "
                 "peor que uno que no lleva la cuenta. RETIRADA el 21/9/2026: su EULA "
-                "prohíbe la redistribución (ver docstring)."},
+                "prohíbe la redistribución (ver docstring). REEMPLAZADA ese mismo día "
+                "por el Global Terrorism Index del IEP (`colectores/gti.py`, clave "
+                "«gti_incidentes»), con fuente y licencia propias."},
 ]
 
 
@@ -409,19 +415,20 @@ def recolectar():
         "proveedor original, no al sello general de atribución abierta del sitio. "
         "Publicarla acá corría el riesgo de incumplir esa licencia. El código de las dos "
         "series queda comentado en este archivo (`SERIES_RETIRADAS_GTD`), no borrado.",
-        "Lo que la reemplaza EN PARTE: UCDP GED, en la sección «Violencia organizada» de "
-        "este mismo registro (licencia CC BY 4.0, llega a 2025). MIDE OTRA COSA —violencia "
-        "organizada con un umbral de 25 muertes anuales, no todo lo que se llama "
-        "terrorismo— y se declara así, sin presentarse como continuación de la serie "
-        "retirada.",
-        "Segunda fuente candidata, PENDIENTE de gestión: el Global Terrorism Index del "
-        "Instituto para la Economía y la Paz —score y ranking por país, llega a 2025, "
-        "licencia gratuita para organizaciones sin fines de lucro—. Su archivo XLSX está "
-        "detrás de un formulario de solicitud de licencia (no hay descarga directa); no se "
-        "automatiza sin que la Dirección lo gestione.",
+        "REEMPLAZO CON FUENTE PROPIA, el mismo día: el Global Terrorism Index del "
+        "Instituto para la Economía y la Paz (IEP) entró en vivo el 21/9/2026 en su "
+        "propio colector (`colectores/gti.py`, sección «Terrorismo»), con puntaje, "
+        "atentados, muertes, heridos y rehenes hasta 2025. Es fuente file-drop —la "
+        "Dirección gestionó la licencia y bajó el archivo a mano, sin descarga pública "
+        "directa— y licencia no comercial (CC BY-NC-SA 4.0, atribución al IEP).",
+        "UCDP GED, en la sección «Violencia organizada» de este mismo registro (licencia "
+        "CC BY 4.0, llega a 2025), sigue en vivo como capa complementaria. MIDE OTRA "
+        "COSA —violencia organizada con un umbral de 25 muertes anuales, no todo lo que "
+        "se llama terrorismo— y no corrobora al Global Terrorism Index: son dos fuentes "
+        "sobre dos fenómenos distintos, no dos fuentes sobre el mismo.",
         "«Terrorismo» además es una definición disputada: varios Estados de la región "
-        "califican de terrorista a la protesta social. Esa cautela vale para cualquier "
-        "fuente futura de esta materia, no solo para la retirada.",
+        "califican de terrorista a la protesta social. Esa cautela vale para el Global "
+        "Terrorism Index igual que valía para la serie retirada.",
         "El conflicto entre grupos armados exige 25 muertes anuales para que UCDP lo "
         "registre. Por debajo de ese umbral el Estado figura en cero sin estar en paz. "
         "Y cuenta muertes en enfrentamiento, no presencia ni control territorial: no es "

@@ -102,7 +102,18 @@ ASUNTOS = {
     "estado de derecho": ["estado_derecho", "calidad_regulatoria", "indice_gobernanza",
                           "administracion_basica", "persecucion_abuso", "voz_rendicion",
                           "estado_derecho_wjp"],
-    "terrorismo": ["terrorismo_muertes", "terrorismo_atentados"],
+    # TERRORISMO. La Base Global de Terrorismo (GTD/START) se retiró el
+    # 21/9/2026 por licencia: sus dos claves quedan acá SIN publicarse —no
+    # aportan a `de_quien` y este control las ignora en silencio, como pasa
+    # con cualquier clave que dejó de tener archivo—. El Global Terrorism
+    # Index del IEP (colector `gti.py`) es, desde ese mismo día, la fuente
+    # propia y ÚNICA de esta materia: por eso este asunto va a aparecer en la
+    # agenda de búsqueda de segunda fuente (con_dos_o_mas=False), y es
+    # correcto que así sea — UCDP («violencia organizada») no corrobora al
+    # GTI porque mide otra cosa, y por eso NO está en esta lista.
+    "terrorismo": ["terrorismo_muertes", "terrorismo_atentados",
+                  "gti_score", "gti_incidentes", "gti_muertes", "gti_heridos",
+                  "gti_rehenes"],
     "conflicto armado": ["conflicto_no_estatal", "intensidad_conflicto", "monopolio_fuerza"],
     "desplazamiento y migración": ["desplazamiento", "migrantes", "migrantes_pct",
                                    "migracion_neta", "remesas"],
