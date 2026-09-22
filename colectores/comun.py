@@ -483,19 +483,32 @@ SERIES_DETENIDAS = {
                    "en 244 países.",
         "reemplazo": None,
     },
+    # NOTA 21/9/2026: estas dos entradas ya NO se usan -- owd.py sacó ambas
+    # claves de su SERIES activa (ver colectores/owd.py, SERIES_RETIRADAS_GTD),
+    # así que este diccionario nunca las procesa. Se dejan, corregidas, como
+    # registro histórico: el "reemplazo" que decía ACLED estaba mal — ACLED se
+    # investigó y se descartó por licencia (su EULA excluye tableros públicos
+    # como SIWA). El reemplazo real es UCDP GED (sección aparte, mide otra
+    # cosa) y, como segunda fuente pendiente de licencia, el Global Terrorism
+    # Index del IEP.
     "terrorismo_muertes": {
         "ultimo_en_la_fuente": 2021, "consultado": "2026-09-03",
         "detalle": "La serie que publica Our World in Data termina en 2021: la Base "
-                   "Global de Terrorismo dejó de actualizarse de forma pública.",
-        "reemplazo": "ACLED cubre el mismo fenómeno con cadencia semanal y exige "
-                     "credencial gratuita, todavía no gestionada.",
+                   "Global de Terrorismo dejó de actualizarse de forma pública. Además, "
+                   "su EULA prohíbe la redistribución: RETIRADA de la capa pública el "
+                   "21/9/2026, no solo detenida.",
+        "reemplazo": "UCDP GED (sección «Violencia organizada», mide otra cosa) ya está "
+                     "en vivo. Global Terrorism Index (IEP) es candidata a segunda "
+                     "fuente, pendiente de gestionar licencia por formulario.",
     },
     "terrorismo_atentados": {
         "ultimo_en_la_fuente": 2021, "consultado": "2026-09-03",
         "detalle": "La serie que publica Our World in Data termina en 2021, por la "
-                   "misma razón que las muertes por atentado.",
-        "reemplazo": "ACLED cubre el mismo fenómeno con cadencia semanal y exige "
-                     "credencial gratuita, todavía no gestionada.",
+                   "misma razón que las muertes por atentado. RETIRADA de la capa "
+                   "pública el 21/9/2026, no solo detenida.",
+        "reemplazo": "UCDP GED (sección «Violencia organizada», mide otra cosa) ya está "
+                     "en vivo. Global Terrorism Index (IEP) es candidata a segunda "
+                     "fuente, pendiente de gestionar licencia por formulario.",
     },
 }
 

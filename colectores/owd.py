@@ -11,7 +11,9 @@ Los productores originales, que son quienes responden por el dato
   varios especialistas por país y año, y **publican su propio intervalo de
   incertidumbre**: acá se toma la estimación central.
 - **Base Global de Terrorismo**, consorcio START, Universidad de Maryland.
-  Atentados y muertes.
+  Atentados y muertes. **RETIRADA de esta capa pública el 21/9/2026** — ver
+  "Terrorismo — retirado" más abajo. Se deja la nota porque la serie todavía
+  aparece en el historial de este archivo, no porque siga publicándose.
 - **UCDP**, Programa de Datos de Conflicto de Upsala. Muertes en conflicto no
   estatal, es decir enfrentamientos armados **entre grupos, sin el Estado como
   parte**: en esta región eso es, en buena medida, disputa entre organizaciones
@@ -26,6 +28,36 @@ in Data republica las tres con licencia **Creative Commons de atribución**, que
 admite uso comercial, y mantiene la dirección estable.
 
 **La atribución va al productor original en cada ficha**, no a quien republica.
+
+Terrorismo — retirado de esta capa el 21/9/2026 (propuesta, PR sin aprobar)
+----------------------------------------------------------------------------
+Las dos series de terrorismo (muertes y atentados) se sacaron de `SERIES` y
+quedaron en `SERIES_RETIRADAS_GTD`, más abajo, sin borrar el código: se
+restauran moviéndolas de una lista a la otra.
+
+**Motivo.** La Base Global de Terrorismo (START) prohíbe en su EULA la
+redistribución de sus datos. Our World in Data republica bajo un sello
+general de Creative Commons de atribución, pero **su propia página de esta
+serie aclara que queda sujeta a los términos de licencia del proveedor
+original** («All data and visualizations on Our World in Data...are subject
+to the license terms from the original providers»), es decir a la EULA de
+START — verificado en vivo el 21/9/2026. El sello CC BY de OWD no alcanza
+para cubrir esta serie en particular, y SIWA venía republicándola.
+
+**Qué la reemplaza en parte.** UCDP GED entró en vivo el 21/9/2026 como
+sección aparte («Violencia organizada», `colectores/ucdp.py`), con licencia
+CC BY 4.0 y dato hasta 2025. Mide otra cosa —violencia organizada con un
+umbral de 25 muertes anuales— y se rotula así, sin presentarse como
+continuación de la serie de terrorismo.
+
+**Segunda fuente candidata, pendiente de gestión.** El Global Terrorism
+Index del Instituto para la Economía y la Paz da un score y un ranking por
+país, llega a 2025 y su licencia no comercial es gratuita para
+organizaciones sin fines de lucro. Pero su archivo XLSX está detrás de un
+formulario de solicitud de licencia (nombre, organización, sitio, uso) en
+`economicsandpeace.org/consulting/data-licensing` — verificado en vivo el
+21/9/2026, no hay descarga directa. No se automatiza sin que la Dirección
+gestione esa licencia.
 """
 
 from __future__ import annotations
@@ -93,25 +125,6 @@ SERIES = [
      "cautela": "Libertad para formar partidos y organizaciones civiles, y grado de "
                 "represión sobre ellas. Es la materia de conflicto político leida por "
                 "el lado del espacio disponible para la oposición."},
-    {"clave": "terrorismo_muertes", "slug": "terrorism-deaths",
-     "columna": "total_killed",
-     "rotulo": "Muertes por atentados terroristas", "eje": "Seguridad",
-     "unidad": "personas por año", "mas_es_peor": True,
-     "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
-               "via Our World in Data",
-     "cautela": "LA SERIE TERMINA EN 2021: la Base Global de Terrorismo dejo de "
-                "actualizarse. No hay dato posterior y no se estima ninguno. Además, "
-                "la definición de terrorismo es disputada y varios Estados de la región "
-                "califican como terrorista a la protesta social."},
-    {"clave": "terrorismo_atentados", "slug": "terrorist-attacks",
-     "columna": "total_incident_counts",
-     "rotulo": "Atentados terroristas registrados", "eje": "Seguridad",
-     "unidad": "hechos por año", "mas_es_peor": True,
-     "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
-               "via Our World in Data",
-     "cautela": "Misma advertencia: LA SERIE TERMINA EN 2021. Cuenta hechos "
-                "registrados, de modo que un Estado con mejor registro puede aparecer "
-                "peor que uno que no lleva la cuenta."},
     {"clave": "uso_energia_ei", "slug": "per-capita-energy-use",
      "columna": "total_energy_supply_per_capita_kwh",
      "rotulo": "Uso de energía por habitante · segunda fuente", "eje": "Defensa",
@@ -256,6 +269,34 @@ SERIES = [
 ]
 
 
+# RETIRADAS de la capa publica el 21/9/2026 -- ver docstring del modulo.
+# No se suman a SERIES: quedan aca, con el mismo formato, para restaurarlas
+# con un solo movimiento si la Direccion decide lo contrario. NO se usan.
+SERIES_RETIRADAS_GTD = [
+    {"clave": "terrorismo_muertes", "slug": "terrorism-deaths",
+     "columna": "total_killed",
+     "rotulo": "Muertes por atentados terroristas", "eje": "Seguridad",
+     "unidad": "personas por año", "mas_es_peor": True,
+     "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
+               "via Our World in Data",
+     "cautela": "LA SERIE TERMINA EN 2021: la Base Global de Terrorismo dejo de "
+                "actualizarse. No hay dato posterior y no se estima ninguno. Además, "
+                "la definición de terrorismo es disputada y varios Estados de la región "
+                "califican como terrorista a la protesta social. RETIRADA el 21/9/2026: "
+                "su EULA prohíbe la redistribución (ver docstring)."},
+    {"clave": "terrorismo_atentados", "slug": "terrorist-attacks",
+     "columna": "total_incident_counts",
+     "rotulo": "Atentados terroristas registrados", "eje": "Seguridad",
+     "unidad": "hechos por año", "mas_es_peor": True,
+     "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
+               "via Our World in Data",
+     "cautela": "Misma advertencia: LA SERIE TERMINA EN 2021. Cuenta hechos "
+                "registrados, de modo que un Estado con mejor registro puede aparecer "
+                "peor que uno que no lleva la cuenta. RETIRADA el 21/9/2026: su EULA "
+                "prohíbe la redistribución (ver docstring)."},
+]
+
+
 def _traer(slug: str) -> tuple:
     """Trae una planilla. Devuelve (slug, filas, falla)."""
     url = (f"https://ourworldindata.org/grapher/{slug}.csv"
@@ -361,12 +402,26 @@ def recolectar():
         + (", ".join(sin_vdem) if sin_vdem else "ninguno")
         + ". Sin dato no significa sin democracia ni sin problema: significa que el "
           "proyecto no los codifica.",
-        "La serie de terrorismo termina en 2021. La Base Global de Terrorismo dejó de "
-        "actualizarse y no hay reemplazo gratuito. No se estima ningún valor posterior.",
-        "«Terrorismo» es una definición disputada. Varios Estados de la región califican "
-        "de terrorista a la protesta social, y esa calificación entra en las bases que "
-        "se nutren de prensa. El dato se publica con esa advertencia y no sostiene por "
-        "si solo ningún juicio.",
+        "TERRORISMO: este registro RETIRÓ el 21/9/2026 las dos series que tomaba de la "
+        "Base Global de Terrorismo (START) vía Our World in Data —muertes y atentados—. "
+        "Motivo: la licencia de esa base prohíbe la redistribución, y Our World in Data "
+        "aclara en la propia página de esta serie que queda sujeta a los términos del "
+        "proveedor original, no al sello general de atribución abierta del sitio. "
+        "Publicarla acá corría el riesgo de incumplir esa licencia. El código de las dos "
+        "series queda comentado en este archivo (`SERIES_RETIRADAS_GTD`), no borrado.",
+        "Lo que la reemplaza EN PARTE: UCDP GED, en la sección «Violencia organizada» de "
+        "este mismo registro (licencia CC BY 4.0, llega a 2025). MIDE OTRA COSA —violencia "
+        "organizada con un umbral de 25 muertes anuales, no todo lo que se llama "
+        "terrorismo— y se declara así, sin presentarse como continuación de la serie "
+        "retirada.",
+        "Segunda fuente candidata, PENDIENTE de gestión: el Global Terrorism Index del "
+        "Instituto para la Economía y la Paz —score y ranking por país, llega a 2025, "
+        "licencia gratuita para organizaciones sin fines de lucro—. Su archivo XLSX está "
+        "detrás de un formulario de solicitud de licencia (no hay descarga directa); no se "
+        "automatiza sin que la Dirección lo gestione.",
+        "«Terrorismo» además es una definición disputada: varios Estados de la región "
+        "califican de terrorista a la protesta social. Esa cautela vale para cualquier "
+        "fuente futura de esta materia, no solo para la retirada.",
         "El conflicto entre grupos armados exige 25 muertes anuales para que UCDP lo "
         "registre. Por debajo de ese umbral el Estado figura en cero sin estar en paz. "
         "Y cuenta muertes en enfrentamiento, no presencia ni control territorial: no es "
@@ -405,7 +460,8 @@ def recolectar():
     return comun.escribir(
         colector="owd",
         capa="publico",
-        fuente="V-Dem, Base Global de Terrorismo y UCDP, vía Our World in Data",
+        fuente="V-Dem y UCDP, vía Our World in Data (la Base Global de Terrorismo se "
+               "retiró de esta capa el 21/9/2026: ver vacíos declarados)",
         url_fuente="https://ourworldindata.org/grapher/electoral-democracy-index",
         calificacion=calificacion,
         registros=registros,
