@@ -317,8 +317,23 @@ CATEGORIAS = {
     "sin_condena": "victimizacion",
     "soborno_empresas": "soborno",
     "soborno_personas": "soborno",
+    # LA BASE GLOBAL DE TERRORISMO (GTD/START), que llenaba estas dos claves via
+    # owd.py, se RETIRO el 21/9/2026 por licencia (ver SERIES_DETENIDAS mas abajo):
+    # ya no se publica nada bajo "terrorismo_muertes"/"terrorismo_atentados". Se
+    # dejan mapeadas por si se restauran algun dia; el reemplazo con fuente propia
+    # es el Global Terrorism Index del IEP, con sus propias claves "gti_*" abajo.
     "terrorismo_atentados": "terrorismo",
     "terrorismo_muertes": "terrorismo",
+    # GLOBAL TERRORISM INDEX (IEP), colector `gti.py`, en vivo desde el 21/9/2026:
+    # fuente propia de terrorismo para la sección, con licencia CC BY-NC-SA 4.0
+    # y atribución obligatoria al IEP (ver RESTRICCIONES, clave
+    # "gti_iep_no_comercial"). UCDP GED («Violencia organizada») mide otra cosa y
+    # queda en su propia categoría, sin mezclarse acá.
+    "gti_score": "terrorismo",
+    "gti_incidentes": "terrorismo",
+    "gti_muertes": "terrorismo",
+    "gti_heridos": "terrorismo",
+    "gti_rehenes": "terrorismo",
     "trabajo_infantil": "condiciones",
     "trata_sexual": "trata",
     "trata_trabajo": "trata",
@@ -489,26 +504,28 @@ SERIES_DETENIDAS = {
     # registro histórico: el "reemplazo" que decía ACLED estaba mal — ACLED se
     # investigó y se descartó por licencia (su EULA excluye tableros públicos
     # como SIWA). El reemplazo real es UCDP GED (sección aparte, mide otra
-    # cosa) y, como segunda fuente pendiente de licencia, el Global Terrorism
-    # Index del IEP.
+    # cosa) y, como segunda fuente, el Global Terrorism Index del IEP — YA EN
+    # VIVO desde el 21/9/2026 (colector `gti.py`, claves "gti_*"): la Dirección
+    # gestionó la licencia y bajó el archivo a mano (es file-drop, no se
+    # automatiza la descarga). Ver `colectores/fijas/gti-iep-2026/LEEME.md`.
     "terrorismo_muertes": {
         "ultimo_en_la_fuente": 2021, "consultado": "2026-09-03",
         "detalle": "La serie que publica Our World in Data termina en 2021: la Base "
                    "Global de Terrorismo dejó de actualizarse de forma pública. Además, "
                    "su EULA prohíbe la redistribución: RETIRADA de la capa pública el "
                    "21/9/2026, no solo detenida.",
-        "reemplazo": "UCDP GED (sección «Violencia organizada», mide otra cosa) ya está "
-                     "en vivo. Global Terrorism Index (IEP) es candidata a segunda "
-                     "fuente, pendiente de gestionar licencia por formulario.",
+        "reemplazo": "UCDP GED (sección «Violencia organizada», mide otra cosa) sigue en "
+                     "vivo. El Global Terrorism Index (IEP) reemplaza a esta serie con "
+                     "fuente propia de terrorismo desde el 21/9/2026 (colector `gti.py`).",
     },
     "terrorismo_atentados": {
         "ultimo_en_la_fuente": 2021, "consultado": "2026-09-03",
         "detalle": "La serie que publica Our World in Data termina en 2021, por la "
                    "misma razón que las muertes por atentado. RETIRADA de la capa "
                    "pública el 21/9/2026, no solo detenida.",
-        "reemplazo": "UCDP GED (sección «Violencia organizada», mide otra cosa) ya está "
-                     "en vivo. Global Terrorism Index (IEP) es candidata a segunda "
-                     "fuente, pendiente de gestionar licencia por formulario.",
+        "reemplazo": "UCDP GED (sección «Violencia organizada», mide otra cosa) sigue en "
+                     "vivo. El Global Terrorism Index (IEP) reemplaza a esta serie con "
+                     "fuente propia de terrorismo desde el 21/9/2026 (colector `gti.py`).",
     },
 }
 
@@ -535,6 +552,18 @@ RESTRICCIONES = {
         "Gratuita para este registro, que es público y no se cobra. La licencia de "
         "la fuente es de atribución no comercial: este dato no puede viajar a un "
         "producto que la Fundación venda sin tomar antes una licencia comercial.",
+    # CC BY-NC-SA 4.0 (no confundir con la 3.0 IGO de arriba: es otra version y
+    # otro productor). El Instituto para la Economia y la Paz (IEP) entrega el
+    # Global Terrorism Index por licencia no comercial, a pedido y sin descarga
+    # publica directa; la Direccion la gestiono y bajo el archivo a mano el
+    # 21/9/2026 (ver `colectores/fijas/gti-iep-2026/LEEME.md`).
+    "gti_iep_no_comercial":
+        "Gratuita para este registro, que es público y no se cobra. La licencia de "
+        "la fuente es de atribución, no comercial y compartir igual (CC BY-NC-SA "
+        "4.0), con atribución obligatoria al Institute for Economics & Peace "
+        "(IEP): este dato no puede viajar a un producto que la Fundación venda, y "
+        "lo que se derive de él se publica bajo esa misma licencia. Cita: "
+        "Institute for Economics & Peace, Global Terrorism Index 2026.",
 }
 
 

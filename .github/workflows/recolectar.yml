@@ -499,6 +499,16 @@ jobs:
         continue-on-error: true
         run: python colectores/owd.py
 
+      # TERRORISMO, FUENTE PROPIA: Global Terrorism Index (IEP). Es file-drop
+      # -- lee la copia guardada en colectores/fijas/gti-iep-2026/, no hay
+      # puerta en linea -- asi que corre en la pasada completa, junto con las
+      # demas fuentes que cambian una vez por edicion y no hora a hora.
+      - name: Terrorismo — Global Terrorism Index (IEP)
+        id: gti
+        if: env.COMPLETA == 'true'
+        continue-on-error: true
+        run: python colectores/gti.py
+
       - name: Padron de fuentes oficiales
         id: oficiales
         if: env.COMPLETA == 'true'
@@ -676,6 +686,7 @@ jobs:
           [ "${{ steps.oficiales.outcome }}" = "failure" ] && { echo "Falló el padrón de fuentes oficiales."; fallo=1; }
           [ "${{ steps.redes.outcome }}" = "failure" ] && { echo "Falló el colector de circulación en redes."; fallo=1; }
           [ "${{ steps.owd.outcome }}" = "failure" ] && { echo "Falló el colector de democracia y conflicto."; fallo=1; }
+          [ "${{ steps.gti.outcome }}" = "failure" ] && { echo "Falló el colector de terrorismo (Global Terrorism Index, IEP)."; fallo=1; }
           [ "${{ steps.telegram.outcome }}" = "failure" ] && { echo "Falló el colector de canales de mensajería."; fallo=1; }
           [ "${{ steps.conflictos.outcome }}" = "failure" ] && { echo "Falló el colector de conflictos territoriales."; fallo=1; }
           [ "${{ steps.comercio.outcome }}" = "failure" ] && { echo "Falló el colector de brecha espejo."; fallo=1; }
