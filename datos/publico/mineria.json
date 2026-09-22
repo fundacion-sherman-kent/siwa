@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-22T01:26:27+00:00",
+  "corrida": "2026-09-22T02:26:23+00:00",
   "medidas_con_suficientes_casos": 206,
   "pares_probados": 21115,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4001,
+    "sobreviven": 3999,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3590,
-  "anomalias_totales": 382,
+  "pistas_totales": 3588,
+  "anomalias_totales": 381,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -502,19 +502,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.905,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.9836393005018732e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "administracion_basica",
       "b": "estado_derecho",
       "rotulo_a": "Administración básica del Estado",
@@ -536,6 +523,19 @@
       "estados": 15,
       "tipo": "rangos (Spearman)",
       "p": 2.3895073203695945e-07,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.903,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.621618439036118e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,19 +671,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.893,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 1.026643647457223e-09,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "copernicus:escenas",
       "b": "perdida_bosque",
       "rotulo_a": "copernicus · escenas",
@@ -796,6 +783,19 @@
       "estados": 24,
       "tipo": "rangos (Spearman)",
       "p": 1.5695355100650316e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "uso_claude",
+      "b": "voz_rendicion",
+      "rotulo_a": "Intensidad de uso de Claude por habitante",
+      "rotulo_b": "Voz y rendición de cuentas",
+      "coeficiente": 0.884,
+      "estados": 19,
+      "tipo": "rangos (Spearman)",
+      "p": 2.4452722780373087e-08,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
