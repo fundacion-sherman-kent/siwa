@@ -7659,45 +7659,39 @@
     document.querySelectorAll('.cuenta-temas')
       .forEach(x => { x.textContent = M.length; });
 
-    // DOS CUENTAS EN LA MISMA PAGINA. La portada dice «69 indicadores» y esta
-    // pantalla dice «95 temas». Ninguna esta mal: son cuentas distintas. Pero
-    // el lector que compara las dos no tiene como saberlo, y una contradiccion
-    // aparente le cuesta caro a un registro que se ofrece como trazable. Se
-    // explica con las cuatro cifras contadas, no escritas a mano.
+    // LA MISMA CUENTA QUE ARRIBA, NO UNA PROPIA. Este panel volvia a sumar por su
+    // cuenta (indicadores - no_comparables + compuestos + crimen + estaticos =
+    // temas) y esa cuenta duplicaba los 36 del Indice de Crimen Organizado: ya
+    // estan adentro de cuantos_portada.indicadores (238), y el panel los volvia a
+    // sumar aparte como «crim». Se saca la aritmetica que cerraba mal y se cuenta
+    // con la misma fuente que el texto del nivel Analista: cuantos_portada. Sin
+    // ese numero, el panel no se dibuja (si no llego, no se dibuja).
     const c = document.getElementById('composicion-temas');
     if(!c) return;
-    const ind = fuentesInd().reduce((a,f) => a + (f.indicadores || []).length, 0);
-    const comp = MATERIAS_COMPUESTAS().filter(vive).length;
-    const crim = MATERIAS_CRIMEN().filter(vive).length;
-    const est = ESTATICAS.filter(vive).length;
-    // LA CUENTA TIENE QUE CERRAR, Y NO CERRABA POR UNO. Decía 167 + 4 + 20 + 7 y
-    // remataba en 197, que da 198: el lector que sumaba encontraba el error en el
-    // párrafo escrito para que no hubiera errores. Falta la cifra que cada Estado
-    // publica con su propia definición, que no entra al mapa ni al buscador de temas
-    // justamente porque no se compara. Se cuenta y se nombra, en vez de esconderla.
+    const cp = almacen.catalogo && almacen.catalogo.cuantos_portada;
+    if(!cp) return;
     const noComp = fuentesInd().reduce((a,f) => a + (f.indicadores || [])
       .filter(i => i && i.no_comparable_entre_paises).length, 0);
-    if(!ind) return;
     c.innerHTML = '<details class="aviso-cobertura"><summary>La portada dice «'
-      + ind + ' indicadores» y acá dice «' + M.length + ' temas»: por qué</summary>'
-      + '<p>Son dos cuentas distintas y ninguna está mal. Los <b>' + ind + '</b> '
-      + 'indicadores son los que el registro toma tal cual de una fuente, cada uno '
-      + 'con su serie y su calificación. '
+      + cp.indicadores + ' indicadores» y acá dice «' + M.length + ' temas»: por qué</summary>'
+      + '<p>Son dos cuentas distintas, y ninguna está mal: no se suman entre sí porque '
+      + 'miden cosas distintas. Los <b>' + cp.indicadores + '</b> indicadores son series '
+      + 'que el registro toma tal cual de una fuente —lo que la Fundación '
+      + '<b>recolecta</b>—. Los <b>' + M.length + '</b> temas son lo que se puede '
+      + '<b>abrir y consultar</b> acá, y no coinciden con esa lista uno a uno: un mismo '
+      + 'tema puede agrupar varios indicadores de una misma fuente; hay temas —los '
+      + 'compuestos por eje, el índice de Crimen Organizado, las clasificaciones fijas— '
+      + 'que el propio registro arma o cuenta aparte, sin ser un indicador tomado tal '
+      + 'cual de una fuente; y, al revés, '
       + (noComp
-          ? 'De esos, <b>' + noComp + '</b> ' + (noComp === 1 ? 'no se compara' : 'no se comparan')
-            + ' entre países —es la cifra que publica cada Estado con su propia '
-            + 'definición— y por eso ' + (noComp === 1 ? 'vive' : 'viven') + ' en la ficha '
-            + 'de cada país y no acá. Quedan <b>' + (ind - noComp) + '</b>, y a '
-          : 'A ')
-      + 'eso se suman <b>' + comp + '</b> compuestos '
-      + 'que arma el propio registro con esos mismos indicadores, <b>' + crim + '</b> '
-      + 'medidas de crimen organizado y <b>' + est + '</b> clasificaciones, que no son '
-      + 'cifras sino categorías. Todo junto da los <b>' + M.length + '</b> temas que se '
-      + 'pueden abrir acá.</p>'
-      + '<p>La portada cuenta lo primero porque es lo que el registro <b>recolecta</b>; '
-      + 'esta pantalla cuenta todo lo que se puede <b>consultar</b>. Las cuatro cifras '
-      + 'salen de contar los datos cargados: si mañana entra una fuente nueva, cambian '
-      + 'solas.</p></details>';
+          ? '<b>' + noComp + '</b> indicador' + (noComp === 1 ? '' : 'es')
+            + ' de esa lista no se compara' + (noComp === 1 ? '' : 'n')
+          : 'algún indicador de esa lista no se compara')
+      + ' entre países —es la cifra que publica cada Estado con su propia definición— y '
+      + 'por eso vive en la ficha de cada país y no en el mapa comparado, aunque sí '
+      + 'cuenta como tema.</p>'
+      + '<p>Cada cifra se cuenta de los datos cargados, no se escribe a mano: si mañana '
+      + 'entra una fuente nueva, cambian solas.</p></details>';
   }
 
   // La serie de una materia, dibujada, con su prolongación aritmética cuando la
