@@ -11303,18 +11303,18 @@
       b.classList.toggle('activo', suyo);
       b.setAttribute('aria-pressed', suyo ? 'true' : 'false');
     });
-    // La cantidad de indicadores se cuenta de los datos: escrita a mano quedaba
-    // vieja cada vez que entraba una serie nueva, y era de las primeras cosas
-    // que leia el visitante.
-    const cuantos = fuentesInd().reduce((a,f)=>a+(f.indicadores||[]).length, 0);
-    // La cantidad de FUENTES tambien se cuenta: escrita a mano decia trece
-    // cuando ya eran quince, y esa cifra viajaba hasta la descripcion social.
-    // Se cuentan PRODUCTORES DISTINTOS, no archivos: la OMS alimenta dos conjuntos y
-    // es una sola fuente. Es la misma cuenta que sella la descripción para redes.
-    const cuantasFuentes = new Set(FUENTES_DEL_REGISTRO.filter(([k]) => almacen[k]).map(([k]) => {
-      const f = (almacen[k].procedencia || {}).fuente;
-      return typeof f === 'string' ? f : ((f && f.nombre) || k);
-    })).size;
+    // EL REGISTRO COMPLETO SE CUENTA UNA SOLA VEZ, EN EL ROBOT. indice.json trae
+    // cuantos_portada: la misma cuenta que sella la portada, la web institucional
+    // y la tarjeta de compartir (definicion aprobada por la Direccion el
+    // 21/9/2026). Antes esta pantalla recontaba con una lista propia
+    // (fuentesInd/FUENTES_DEL_REGISTRO) que se atrasaba cada vez que entraba un
+    // colector nuevo: decia «186 indicadores de 68 fuentes» cuando el registro
+    // ya tenia 238 de 73 (verificado en vivo el 22/9/2026). Mientras el catalogo
+    // no llego, se deja en blanco: es preferible no mostrar el numero a mostrar
+    // uno viejo o incompleto.
+    const cp = almacen.catalogo && almacen.catalogo.cuantos_portada;
+    const cuantos = cp ? cp.indicadores : '';
+    const cuantasFuentes = cp ? cp.fuentes : '';
     const pie = document.getElementById('niveles-pie');
     if(pie) pie.innerHTML = (PIE_NIVEL[nivel] || '')
       .replace('{IND}', cuantos || '')
@@ -17385,6 +17385,18 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   traer('cepal.json')
     .then(d=>{ almacen.cepal=d; dominios++; repintar(); marcador(); })
     .catch(err=>{ noLlego++; marcador(); });
+
+  // EL CATALOGO (indice.json) TRAE LOS TRES NUMEROS QUE SELLA EL ROBOT EN LA
+  // PORTADA (estados/indicadores/fuentes: cuantos_portada), con la definicion
+  // aprobada por la Direccion el 21/9/2026. No es un indicador mas: es el
+  // catalogo que describe al registro completo. Antes, esta pantalla volvia a
+  // contar con una lista propia (fuentesInd/FUENTES_DEL_REGISTRO) que se
+  // atrasaba cada vez que entraba un colector nuevo: decia «186 indicadores de
+  // 68 fuentes» cuando la portada ya decia 238 de 73 (verificado en vivo el
+  // 22/9/2026). No suma a dominios/registros/vacios: no es un conjunto de datos.
+  traer('indice.json')
+    .then(d=>{ almacen.catalogo=d; aplicarNivel(); })
+    .catch(err=>{});
 
   // Contrataciones abiertas: el estado de una puerta, no un indicador.
   traer('contrataciones_abiertas.json')
