@@ -124,16 +124,21 @@ INDICADORES = [
                 "de hogares. Las dos hablan de lo mismo desde dos fuentes distintas: "
                 "registros escolares y encuestas."},
     {"id": 4784, "clave": "esperanza_vida_cepal", "eje": "Desarrollo",
-     "rotulo": "Esperanza de vida al nacer · segunda fuente",
+     "rotulo": "Esperanza de vida al nacer (CEPALSTAT)",
      "unidad": "años", "mas_es_peor": False, "decimales": 1,
      # La serie llega a 2100: desde 2024 es proyección y no estimación. Se corta
      # en el último año estimado de la edición 2024 de la ONU.
      "hasta": 2023,
-     "cautela": "SEGUNDA MEDICIÓN con independencia PARCIAL. La calcula el Centro "
-                "Latinoamericano y Caribeño de Demografía de la CEPAL con la División de "
-                "Población de la ONU; la OMS usa en parte esos mismos insumos para sus "
-                "tablas de vida. Que coincidan corrobora menos de lo que parece. Se "
-                "publica hasta 2023: lo posterior es proyección."},
+     # PROMOVIDA A DATO FRESCO (22/9/2026): CEPALSTAT llega a 2023, dos años más
+     # que la OMS (2021), que sigue publicada aparte como segunda fuente que
+     # corrobora. La independencia es PARCIAL y se sigue advirtiendo.
+     "cautela": "DATO MÁS FRESCO de esperanza de vida: CEPALSTAT llega a 2023, dos años "
+                "más que la OMS (2021), que queda publicada aparte como segunda fuente "
+                "que corrobora. La corroboración es PARCIAL: esta cifra la calcula el "
+                "Centro Latinoamericano y Caribeño de Demografía de la CEPAL con la "
+                "División de Población de la ONU, y la OMS usa en parte esos mismos "
+                "insumos para sus tablas de vida. Que coincidan corrobora menos de lo "
+                "que parece. Se publica hasta 2023: lo posterior es proyección."},
     {"id": 4410, "clave": "gasto_seguridad_cepal", "eje": "Seguridad",
      "rotulo": "Gasto en orden público y seguridad · segunda fuente",
      "unidad": "% del producto", "mas_es_peor": False, "sin_direccion": True,
