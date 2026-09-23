@@ -127,6 +127,9 @@
          <span class="badge b-sat">Satelital</span>.
          Una fuente secundaria o estimada <b>no reemplaza</b> al dato oficial: se publica rotulada.</li>
       <li>Los nombres de unidad van <b>como los publica cada fuente</b>; el cotejo geográfico está pendiente.</li>
+      <li><b>Ocho indicadores son de un solo país (Colombia).</b> Cubren sus 33 departamentos, pero
+         no existen para el resto de la región: en el mapa, solo Colombia aparece coloreada para
+         esas materias — es cobertura parcial, no un vacío de la fuente colombiana.</li>
     </ul>
   </div>
 
@@ -164,6 +167,33 @@ const FUENTES = [
   {arch:'subnacional_focos.json', clase:'sat', badge:['Satelital','b-sat'],
    titulo:'Focos de calor por unidad (NASA FIRMS)', valor:u=>u.focos,
    nota:'<b>Focos de calor</b> detectados por satélite (proxy de incendios/quemas). No es delito ni gobernanza.'},
+  // — Colombia (cobertura parcial: un solo país, 33 departamentos) — Ministerio de
+  // Defensa / Policía Nacional, vía datos.gov.co (Socrata). Wireados el 23/9/2026,
+  // colectores `colectores/subnacional_colombia_*.py`. Rama sin mergear.
+  {arch:'subnacional_colombia_incautacion_basuco.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Incautación de basuco por departamento (Colombia)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Kilogramos de basuco incautados por la Policía Nacional. Solo Colombia (33 departamentos): cobertura parcial de la región.'},
+  {arch:'subnacional_colombia_incautacion_cocaina.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Incautación de cocaína por departamento (Colombia)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Kilogramos de cocaína incautados por la Policía Nacional. Solo Colombia (33 departamentos): cobertura parcial de la región.'},
+  {arch:'subnacional_colombia_incautacion_marihuana.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Incautación de marihuana por departamento (Colombia)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Kilogramos de marihuana incautados por la Policía Nacional. Solo Colombia (33 departamentos): cobertura parcial de la región.'},
+  {arch:'subnacional_colombia_incautacion_base_coca.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Incautación de base de coca por departamento (Colombia)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Kilogramos de base de coca incautados por la Policía Nacional. Solo Colombia (33 departamentos): cobertura parcial de la región.'},
+  {arch:'subnacional_colombia_incautacion_insumos_liquidos.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Incautación de insumos líquidos por departamento (Colombia)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Galones de insumos líquidos para procesar estupefacientes, incautados por la Policía Nacional. No se compara en kilogramos con los otros flujos ilícitos. Solo Colombia: cobertura parcial de la región.'},
+  {arch:'subnacional_colombia_secuestro.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Secuestro por departamento (Colombia)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Casos de secuestro (simple y extorsivo, sumados) registrados por la Policía Nacional. Solo Colombia (32 de 33 departamentos en esta corrida): cobertura parcial de la región.'},
+  {arch:'subnacional_colombia_extorsion.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Extorsión por departamento (Colombia)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Casos de extorsión registrados por la Policía Nacional. Solo Colombia (33 departamentos): cobertura parcial de la región.'},
+  {arch:'subnacional_colombia_terrorismo.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Terrorismo / acciones subversivas por departamento (Colombia)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Acciones terroristas o subversivas registradas por el Ministerio de Defensa (no es la cifra de Policía/DIJIN). Solo Colombia (32 de 33 departamentos en esta corrida): cobertura parcial de la región.'},
 ];
 const CACHE={}, ESTADO={pais:null};
 async function traer(a){ if(!CACHE[a]) CACHE[a]=await fetch('../datos/publico/'+a,{cache:'no-store'}).then(r=>r.json()).catch(()=>null); return CACHE[a]; }
