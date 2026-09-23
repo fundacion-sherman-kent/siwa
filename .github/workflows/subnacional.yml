@@ -4,9 +4,15 @@ name: Robot subnacional
 # -----------------
 # Busca, de forma sostenida y sin gastar tokens, mejorar la capa subnacional de SIWA
 # (el dato por unidad de primer orden de cada país). En cada vuelta:
-#   1. Refresca los colectores subnacionales que ya andan (homicidios por unidad y la
-#      PDH de Guatemala), para que no envejezcan contra el reloj de tiempo real.
-#   2. Corre el VIGÍA, que golpea las puertas pendientes —fuentes hoy bloqueadas o en
+#   1. Refresca los colectores subnacionales que ya andan (homicidios y robos por
+#      unidad, Santa Fe, ACLED, focos de calor y la PDH de Guatemala), para que no
+#      envejezcan contra el reloj de tiempo real.
+#   2. Refresca los nueve colectores sumados en el PR #23 (Colombia ×8 —incautación
+#      de basuco/cocaína/marihuana/base de coca/insumos líquidos, secuestro,
+#      extorsión y terrorismo, todos vía Socrata de datos.gov.co— y Argentina
+#      —muertes en accidentes viales, SNIC—), que hasta esta vuelta quedaban
+#      cargados una sola vez y estáticos.
+#   3. Corre el VIGÍA, que golpea las puertas pendientes —fuentes hoy bloqueadas o en
 #      trámite— y avisa en cuanto alguna se abre, para construir ese colector.
 #
 # La capa subnacional SIGUE APAGADA en el sitio: este robot mantiene y explora el dato,
@@ -15,7 +21,10 @@ name: Robot subnacional
 on:
   schedule:
     # Una vez por día. El dato subnacional cambia despacio; lo que se quiere sostener
-    # es el golpeteo diario a las puertas pendientes.
+    # es el golpeteo diario a las puertas pendientes. Los nueve colectores sumados en
+    # el PR #23 son igual de lentos (Socrata de Colombia y el CSV del SNIC no cambian
+    # por hora) y son idempotentes: la misma cadencia diaria alcanza, no hace falta
+    # correrlos más seguido.
     - cron: "25 6 * * *"
   workflow_dispatch:
 
@@ -83,6 +92,55 @@ jobs:
         continue-on-error: true
         run: python colectores/pdh_guatemala_subnacional.py
 
+      # Los nueve de abajo (PR #23, 23/9/2026) comparten API sin clave (Socrata de
+      # datos.gov.co, salvo el vial que es el CSV del SNIC): no llevan `env` ni
+      # secreto nuevo. Van cada uno con su propio `continue-on-error` para que una
+      # fuente caída no frene a las demás, igual que el resto del robot.
+      - name: Colombia — secuestro por departamento (MinDefensa/Policía Nacional)
+        id: col_secuestro
+        continue-on-error: true
+        run: python colectores/subnacional_colombia_secuestro.py
+
+      - name: Colombia — extorsión por departamento (MinDefensa/Policía Nacional)
+        id: col_extorsion
+        continue-on-error: true
+        run: python colectores/subnacional_colombia_extorsion.py
+
+      - name: Colombia — terrorismo por departamento (MinDefensa/Policía Nacional)
+        id: col_terrorismo
+        continue-on-error: true
+        run: python colectores/subnacional_colombia_terrorismo.py
+
+      - name: Colombia — incautación de cocaína por departamento
+        id: col_cocaina
+        continue-on-error: true
+        run: python colectores/subnacional_colombia_incautacion_cocaina.py
+
+      - name: Colombia — incautación de basuco por departamento
+        id: col_basuco
+        continue-on-error: true
+        run: python colectores/subnacional_colombia_incautacion_basuco.py
+
+      - name: Colombia — incautación de marihuana por departamento
+        id: col_marihuana
+        continue-on-error: true
+        run: python colectores/subnacional_colombia_incautacion_marihuana.py
+
+      - name: Colombia — incautación de base de coca por departamento
+        id: col_base_coca
+        continue-on-error: true
+        run: python colectores/subnacional_colombia_incautacion_base_coca.py
+
+      - name: Colombia — incautación de insumos líquidos por departamento
+        id: col_insumos_liquidos
+        continue-on-error: true
+        run: python colectores/subnacional_colombia_incautacion_insumos_liquidos.py
+
+      - name: Argentina — muertes en accidentes viales por provincia (SNIC)
+        id: viales
+        continue-on-error: true
+        run: python colectores/subnacional_viales.py
+
       - name: Vigía — golpear las puertas pendientes
         id: vigia
         continue-on-error: true
@@ -115,5 +173,14 @@ jobs:
           [ "${{ steps.santafe.outcome }}" = "failure" ] && echo "AVISO: Santa Fe no respondió (puede bloquear la IP de nube; entonces va por tarea local)."
           [ "${{ steps.focos.outcome }}" = "failure" ] && echo "AVISO: focos de calor por unidad no terminó (FIRMS falla intermitente de red; se reintenta solo la próxima vuelta)."
           [ "${{ steps.pdh.outcome }}" = "failure" ] && echo "AVISO: la PDH de Guatemala no respondió esta vuelta."
+          [ "${{ steps.col_secuestro.outcome }}" = "failure" ] && echo "AVISO: Colombia — secuestro por departamento no terminó."
+          [ "${{ steps.col_extorsion.outcome }}" = "failure" ] && echo "AVISO: Colombia — extorsión por departamento no terminó."
+          [ "${{ steps.col_terrorismo.outcome }}" = "failure" ] && echo "AVISO: Colombia — terrorismo por departamento no terminó."
+          [ "${{ steps.col_cocaina.outcome }}" = "failure" ] && echo "AVISO: Colombia — incautación de cocaína por departamento no terminó."
+          [ "${{ steps.col_basuco.outcome }}" = "failure" ] && echo "AVISO: Colombia — incautación de basuco por departamento no terminó."
+          [ "${{ steps.col_marihuana.outcome }}" = "failure" ] && echo "AVISO: Colombia — incautación de marihuana por departamento no terminó."
+          [ "${{ steps.col_base_coca.outcome }}" = "failure" ] && echo "AVISO: Colombia — incautación de base de coca por departamento no terminó."
+          [ "${{ steps.col_insumos_liquidos.outcome }}" = "failure" ] && echo "AVISO: Colombia — incautación de insumos líquidos por departamento no terminó."
+          [ "${{ steps.viales.outcome }}" = "failure" ] && echo "AVISO: Argentina — muertes en accidentes viales por provincia no terminó."
           [ "${{ steps.vigia.outcome }}" = "failure" ] && echo "AVISO: el vigía subnacional no pudo completar la ronda."
           echo "Ronda subnacional terminada $(date -u +'%Y-%m-%d %H:%M UTC')."
