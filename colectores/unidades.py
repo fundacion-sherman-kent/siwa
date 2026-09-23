@@ -17,13 +17,15 @@ Guayanas— no están, y son el mismo cuarto del padrón que ya era invisible en
 mapa por superficie. Para esos se usa geoBoundaries, que los cubre a todos.
 
 Dentro de geoBoundaries hay dos releases, y no son intercambiables: **gbOpen**
-es la general y **gbHumanitarian** es un recorte más nuevo, curado con las
-Naciones Unidas (HDX/UNHCR), que en el cotejo de la casa viene más completo —
-a la Argentina, gbOpen le faltaba Entre Ríos (23 en vez de 24 provincias) y
-gbHumanitarian la trae. Por eso el colector intenta primero gbHumanitarian y
-recién si ese Estado no tiene release humanitaria —o la consulta falla— cae a
-gbOpen. La CEPAL sigue mandando cuando responde: esto solo mejora la red de
-seguridad de abajo.
+es la general y **gbHumanitarian** es un recorte curado con las Naciones Unidas
+(HDX/UNHCR). NINGUNA de las dos es siempre la mejor —a la Argentina, gbOpen le
+faltaba Entre Ríos (23 en vez de 24 provincias) y gbHumanitarian la trae, pero a
+República Dominicana, Perú y Venezuela les pasa lo contrario: gbHumanitarian
+trae MENOS (para Rep. Dominicana, 10 regiones de 2017 contra 32 provincias de
+2022 en gbOpen). Por eso el colector pide las dos y se queda con la que declara
+más unidades (`comun.geoboundaries_adm1`, verificado en vivo el 23/9/2026). La
+CEPAL sigue mandando cuando responde: esto solo mejora la red de seguridad de
+abajo.
 
 **Cada unidad declara de cuál de las tres salió (CEPAL, gbHumanitarian o
 gbOpen), de qué año es su límite y bajo qué licencia**, porque no son la misma
@@ -87,16 +89,17 @@ WFS = ("https://geoportal.cepal.org/geoserver/wfs?service=WFS&version=2.0.0"
        "&request=GetFeature&typeNames=geonode:mega_nivel_2_simplificado"
        "&outputFormat=application/json&propertyName=nv2_cod_in,nv2_nbre,country_es")
 
-# GEOBOUNDARIES TIENE DOS RELEASES Y NO SON INTERCAMBIABLES (verificado en
-# vivo, 21/9/2026). gbHumanitarian es el recorte curado con HDX/UNHCR: para
-# Argentina devuelve admUnitCount=24 (con Entre Ríos), contra 23 de gbOpen --
-# el hueco conocido de la casa. Por eso se intenta PRIMERO gbHumanitarian y
-# solo si ese Estado no tiene release humanitaria (o la consulta falla) se cae
-# a gbOpen, que cubre prácticamente a todos. Probado también en vivo que
-# gbHumanitarian responde para Estados chicos (VCT, BLZ, ATG), así que no es
-# solo Argentina la que mejora.
-GB_HUMANITARIAN = "https://www.geoboundaries.org/api/current/gbHumanitarian/{iso}/ADM1/"
-GB_OPEN = "https://www.geoboundaries.org/api/current/gbOpen/{iso}/ADM1/"
+# GEOBOUNDARIES TIENE DOS RELEASES Y NO SON INTERCAMBIABLES. Hasta el
+# 23/9/2026 esta casa asumía que gbHumanitarian era siempre la mejor -- lo era
+# para Argentina (24 con Entre Ríos, contra 23 de gbOpen) y para Estados chicos
+# del Caribe (VCT, BLZ, ATG) -- pero verificado en vivo ese día contra los 33,
+# a República Dominicana, Perú y Venezuela gbHumanitarian les da MENOS unidades
+# que gbOpen (Rep. Dominicana: 10 regiones de 2017 contra 32 provincias de
+# 2022). La regla correcta no es "gbHumanitarian primero": es GANA LA QUE
+# DECLARA MÁS UNIDADES, y vive en `comun.py` (`comun.geoboundaries_adm1`) desde
+# esa fecha porque la necesita también `subnacional_focos.py`, que tenía la
+# misma geometría hardcodeada a gbOpen sin ningún resguardo. Un solo lugar para
+# la regla, dos colectores que la usan.
 
 # CASOS POR UNIDAD PARA QUE UNA TASA SIGNIFIQUE ALGO. El error relativo de un
 # recuento es cercano a 1/raiz(n): con 30 casos es del 18 %, con 10 del 32 %.
@@ -151,19 +154,13 @@ def de_cepal() -> dict:
 
 
 def _metadato_geoboundaries(iso: str) -> tuple:
-    """Intenta gbHumanitarian primero; si el Estado no tiene release
-    humanitaria (falla la consulta, o responde vacío) cae a gbOpen. Devuelve
-    (metadato, origen) — origen es "gbHumanitarian" o "gbOpen"."""
-    try:
-        d = pedir(GB_HUMANITARIAN.format(iso=iso), espera=90)
-        if isinstance(d, list) and not d:
-            d = None
-    except Exception:  # noqa: BLE001 — sin release humanitaria para este Estado, cae a gbOpen
-        d = None
-    if d is not None:
-        return (d[0] if isinstance(d, list) else d), "gbHumanitarian"
-    d = pedir(GB_OPEN.format(iso=iso), espera=90)
-    return (d[0] if isinstance(d, list) else d), "gbOpen"
+    """Metadato ADM1 de geoBoundaries: gana la release que declara más unidades.
+
+    Delega en `comun.geoboundaries_adm1` — misma regla que usa `subnacional_focos.py`
+    desde el 23/9/2026, para que ningún colector quede con la peor fuente sin que
+    el otro se entere.
+    """
+    return comun.geoboundaries_adm1(iso, espera=90)
 
 
 def de_geoboundaries(iso: str) -> tuple:
