@@ -42,7 +42,14 @@ import geo  # noqa: E402
 COLECTOR = "subnacional_focos"
 CAPA = "publico"
 CACHE = comun.DATOS / "geo" / "adm1"
-GEOBOUNDARIES = "https://www.geoboundaries.org/api/current/gbOpen/{iso}/ADM1/"
+# LA GEOMETRÍA SE RESUELVE CON `comun.geoboundaries_adm1` DESDE EL 23/9/2026:
+# entre gbHumanitarian y gbOpen gana la release que declara MÁS unidades para
+# ese país (ninguna de las dos es siempre la mejor — verificado en vivo:
+# gbHumanitarian mejora a Argentina pero empeora a Rep. Dominicana, Perú y
+# Venezuela). Antes esto estaba hardcodeado a gbOpen sin ningún resguardo: si
+# el caché de `datos/geo/adm1/{iso}.geojson` se borraba o se regeneraba para un
+# país nuevo, ese país podía perder unidades sin que nada lo avisara. Ahora
+# `unidades.py` y este colector comparten la misma regla, en un solo lugar.
 
 
 def _cargar_geometrias(iso: str):
@@ -54,7 +61,7 @@ def _cargar_geometrias(iso: str):
     if ruta.exists():
         gj = json.loads(ruta.read_text(encoding="utf-8"))
     else:
-        meta = json.loads(comun.traer_crudo(GEOBOUNDARIES.format(iso=iso)).decode("utf-8", "replace"))
+        meta, _origen = comun.geoboundaries_adm1(iso)
         url = meta.get("simplifiedGeometryGeoJSON")
         if not url:
             return []

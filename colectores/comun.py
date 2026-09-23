@@ -387,13 +387,72 @@ def ahora() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def pedir(url: str) -> dict:
+def pedir(url: str, espera: int = ESPERA) -> dict:
     """Trae un JSON. Levanta excepción ante cualquier respuesta que no sea 200."""
     peticion = urllib.request.Request(url, headers={"User-Agent": AGENTE})
-    with urllib.request.urlopen(peticion, timeout=ESPERA) as respuesta:
+    with urllib.request.urlopen(peticion, timeout=espera) as respuesta:
         if respuesta.status != 200:
             raise RuntimeError(f"HTTP {respuesta.status} al pedir {url}")
         return json.loads(respuesta.read().decode("utf-8"))
+
+
+# GEOBOUNDARIES TIENE DOS RELEASES Y NO SON INTERCAMBIABLES. gbHumanitarian es
+# el recorte curado con HDX/UNHCR y gbOpen es la general; NINGUNA de las dos es
+# siempre la mejor — GANA LA QUE DECLARA MÁS UNIDADES (`admUnitCount`), país por
+# país. Verificado en vivo el 23/9/2026 al blindar `subnacional_focos.py`
+# (que hasta esa fecha tenía la geometría HARDCODEADA a gbOpen, sin ningún
+# resguardo):
+#   · Argentina: gbHumanitarian trae 24 (con Entre Ríos) contra 23 de gbOpen
+#     — el hueco conocido de la casa — así que ahí gana gbHumanitarian.
+#   · República Dominicana: gbHumanitarian trae solo 10 (2017, son REGIONES,
+#     no provincias) contra 32 de gbOpen (2022, provincias) — ahí gbHumanitarian
+#     sería un retroceso enorme si se la tomara siempre por delante.
+#   · Perú (25 contra 26) y Venezuela (24 contra 25): gbOpen trae una unidad
+#     más en los dos.
+# La regla vieja de esta casa —«gbHumanitarian primero, gbOpen si falla»— sólo
+# se verificó contra Argentina y tres Estados chicos del Caribe (VCT, BLZ, ATG);
+# generalizarla sin más hubiera dejado a Rep. Dominicana, Perú y Venezuela con
+# MENOS unidades que las que ya tenían cacheadas, que es justo lo que este
+# blindaje tiene que evitar. Por eso se pide a las dos releases y gana la que
+# declara más unidades; ante empate, gbHumanitarian por ser el recorte más
+# nuevo y curado.
+#
+# VIVE ACÁ, EN COMÚN, Y NO ADENTRO DE UN SOLO COLECTOR: la necesitan
+# `unidades.py` (padrón de unidades) y `subnacional_focos.py` (focos de calor
+# por unidad). Un solo lugar para la regla evita que se corrija en uno y el
+# hueco se repita en el otro.
+GB_HUMANITARIAN = "https://www.geoboundaries.org/api/current/gbHumanitarian/{iso}/ADM1/"
+GB_OPEN = "https://www.geoboundaries.org/api/current/gbOpen/{iso}/ADM1/"
+
+
+def geoboundaries_adm1(iso: str, espera: int = 90) -> tuple:
+    """Metadato ADM1 de geoBoundaries para un país: gana la release —gbHumanitarian
+    o gbOpen— que declara MÁS unidades (`admUnitCount`), no una fija de antemano.
+    Si una de las dos falla o responde vacía se usa la otra. Devuelve
+    (metadato, origen) — origen es "gbHumanitarian" o "gbOpen".
+    """
+    candidatos = []
+    for url, origen in ((GB_HUMANITARIAN, "gbHumanitarian"), (GB_OPEN, "gbOpen")):
+        try:
+            d = pedir(url.format(iso=iso), espera=espera)
+        except Exception:  # noqa: BLE001 — esta release no respondió para este Estado
+            continue
+        if isinstance(d, list) and not d:
+            continue
+        candidatos.append((d[0] if isinstance(d, list) else d, origen))
+    if not candidatos:
+        raise RuntimeError(f"geoBoundaries: sin metadato ADM1 para {iso} "
+                            "(ni gbHumanitarian ni gbOpen respondieron)")
+    # Gana quien declara más unidades; empate lo resuelve gbHumanitarian.
+    # admUnitCount llega como texto en algunas respuestas de la API: se fuerza a
+    # entero para no comparar strings, y una lectura ilegible cuenta como 0.
+    def _cuantas(c):
+        try:
+            return int(c[0].get("admUnitCount") or 0)
+        except (TypeError, ValueError):
+            return 0
+    candidatos.sort(key=lambda c: (-_cuantas(c), c[1] != "gbHumanitarian"))
+    return candidatos[0]
 
 
 def traer_crudo(url: str, espera: int = 120, intentos: int = 4) -> bytes:
