@@ -208,8 +208,13 @@
   .brand .sep{width:2px;height:44px;background:var(--orange);}
   /* EL LOCKUP DE SIWA: el nombre y, pegado a su derecha, el isotipo de ondas.
      display:inline-flex + gap en em para que el ícono escale con el tamaño de
-     letra (17px hoy) y no con un píxel fijo si el tipo cambia. */
-  .brand h1{font-size:17px;margin:0;font-weight:700;letter-spacing:2px;color:var(--orange);
+     letra (19px) y no con un píxel fijo si el tipo cambia. 19px en vez de los
+     17px originales: a 17px/800 el naranja (#FB6500) mide 12,75pt, por debajo
+     del piso de «texto grande» de WCAG 2.2 (14pt/18,66px en negrita), y el
+     3.02:1 medido exigía entonces el umbral de texto normal (4.5:1), que no
+     cumple. A 19px (14,25pt) ya califica como texto grande sin reserva, y el
+     ícono y el espaciado —atados en em— escalan solos con la letra. */
+  .brand h1{font-size:19px;margin:0;font-weight:700;letter-spacing:2px;color:var(--orange);
     display:inline-flex;align-items:center;gap:.4em;line-height:1;}
   /* ISOTIPO DE ONDAS/RADAR: tres arcos que se abren a la derecha de la A, con un
      punto naranja como fuente. En 1em (o sea, del tamaño de la letra): vectorial,
