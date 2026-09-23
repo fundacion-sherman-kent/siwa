@@ -1,8 +1,11 @@
 /* Franja de cabecera OFICIAL de SIWA — fuente única.
    La misma franja del index (sitio/index.html): fondo blanco, logo FUSK completo,
-   bloque SIWA · REPORTE DE SITUACIÓN · ALC, control de tema, estado "al día" en vivo,
-   reloj UTC + hora local, y el filete naranja del manual. Se inyecta en cualquier
-   subpágina con <script src="_comun/cabecera-siwa.js"></script>.
+   lockup SIWA en naranja (#FB6500, 19px) con el isotipo de ondas/radar después
+   de la A, filete vertical naranja entre el logo y el lockup, control de tema,
+   estado "al día" en vivo, reloj UTC + hora local, y el filete naranja del
+   manual bajo toda la barra. Se inyecta en cualquier subpágina con
+   <script src="_comun/cabecera-siwa.js"></script>. Actualizada el 23/9/2026 para
+   igualar la cabecera nueva del index (antes: SIWA en navy, sin radar).
    Regla de la casa: toda página o subpágina conserva ESTA franja, idéntica. */
 (function () {
   var script = document.currentScript;
@@ -20,8 +23,10 @@
     ".siwa-topbar .marca-enlace{display:inline-flex;text-decoration:none;}" +
     ".siwa-topbar .marca-enlace:hover img{opacity:.82;}" +
     ".siwa-topbar .brand img{height:72px;width:auto;flex:0 0 auto;object-fit:contain;display:block;}" +
-    ".siwa-topbar .brand .sep{width:1px;height:44px;background:rgba(0,18,30,.22);}" +
-    ".siwa-topbar .brand h1{font-size:17px;margin:0;font-weight:800;letter-spacing:1.8px;color:#00121E;}" +
+    ".siwa-topbar .brand .sep{width:2px;height:44px;background:#FB6500;}" +
+    ".siwa-topbar .brand h1{font-size:19px;margin:0;font-weight:700;letter-spacing:2px;color:#FB6500;" +
+      "display:inline-flex;align-items:center;gap:.4em;line-height:1;}" +
+    ".siwa-topbar .brand h1 .siwa-onda{width:1em;height:1em;flex:0 0 auto;display:block;overflow:visible;}" +
     ".siwa-topbar .brand small{display:block;color:#667B89;font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;}" +
     ".siwa-topbar-right{display:flex;gap:20px;align-items:center;font-size:11px;color:#667B89;}" +
     ".siwa-pill{background:none;border:1px solid rgba(0,18,30,.22);color:#00121E;border-radius:999px;" +
@@ -48,7 +53,13 @@
         'title="Ir a la web de la Fundación Sherman Kent">' +
         '<img src="' + logo + '" alt="FUSK · Fundación Sherman Kent"></a>' +
       '<div class="sep"></div>' +
-      '<div><h1>SIWA</h1><small>Reporte de situación · ALC</small></div>' +
+      '<div><h1><span class="siwa-txt">SIWA</span><svg class="siwa-onda" viewBox="-6 -20 40 40" ' +
+        'aria-hidden="true" focusable="false"><g transform="rotate(-15)">' +
+        '<circle cx="0" cy="0" r="3.2" fill="#FB6500"/>' +
+        '<path d="M0 -8  A8 8 0 0 1 0 8" fill="none" stroke="#00121E" stroke-width="2" stroke-linecap="round"/>' +
+        '<path d="M0 -13 A13 13 0 0 1 0 13" fill="none" stroke="#33454F" stroke-width="2" stroke-linecap="round"/>' +
+        '<path d="M0 -18 A18 18 0 0 1 0 18" fill="none" stroke="#7E8A94" stroke-width="2" stroke-linecap="round"/>' +
+        '</g></svg></h1><small>Reporte de situación · ALC</small></div>' +
     '</div>' +
     '<div class="siwa-topbar-right">' +
       '<a class="siwa-pill" href="' + ayuda + '"><span aria-hidden="true">?</span><span>Cómo se usa</span></a>' +
