@@ -32,6 +32,29 @@ DÓNDE VIVE, Y POR QUÉ NO EN EL ROBOT
 **Corre en un flujo distinto del que vigila.** Un vigía que vive adentro de lo
 que vigila se muere con ello, y no avisa nada: es el mismo error de diseño que
 permitió que esto pasara.
+
+LA PREGUNTA DIRECTA PUEDE MENTIR, Y YA MINTIÓ UNA VEZ
+------------------------------------------------------
+El 23/9/2026 la tercera pregunta (`corrio_el_robot()`, que le pregunta a la API
+de GitHub cuándo fue la última corrida exitosa) declaró al robot muerto hacía
+164.9 horas. Era falso: la recolección venía corriendo bien cada hora, y el
+dato más fresco del registro tenía 0.9 horas. La misma consulta a la API,
+repetida minutos después, ya devolvía la corrida correcta.
+
+La causa fue la propia API de GitHub: el listado de corridas de un workflow
+con volumen alto (cientos de corridas acumuladas) puede tardar en reflejar la
+más reciente —consistencia eventual del lado de GitHub, no un problema del
+robot ni del repositorio—. Una sola lectura mala de esa API alcanzaba para
+poner en rojo una corrida entera del vigía sin que el robot hubiera hecho nada
+mal.
+
+Por eso la pregunta directa ya NO decide sola. Si dice que la última corrida
+fue hace más del tope pero el REGISTRO PUBLICADO (la primera pregunta, que no
+depende de la API de GitHub) tiene un dato más fresco que el tope, se
+interpreta que la que está mintiendo es la API, no el robot: se deja
+constancia como aviso —queda escrito, se puede seguir— y no como falla que
+enrojece la corrida. Solo si las DOS coinciden en que no hay nada fresco se
+declara la caída.
 """
 from __future__ import annotations
 
@@ -159,6 +182,11 @@ def corrio_el_robot() -> tuple:
     viene sola. Sin ella —una corrida de escritorio— NO se da por buena ni por
     mala: se declara que no se pudo mirar, porque una alarma que se apaga sola
     cuando falta un dato es peor que no tenerla.
+
+    OJO: esta pregunta puede volver una respuesta VIEJA aunque GitHub conteste
+    bien y rápido (ver nota del 23/9/2026 en el docstring del módulo). Por eso
+    `main()` no le cree ciegamente: la cruza contra `ultimo_dato()` antes de
+    convertirla en falla.
     """
     import os
     import urllib.request
@@ -195,6 +223,7 @@ def main() -> None:
     ahora = datetime.now(timezone.utc)
     reciente, quien = ultimo_dato()
     fallas = revisar_flujos()
+    avisos = []
 
     horas = None
     if reciente is None:
@@ -211,18 +240,42 @@ def main() -> None:
 
     # LA PREGUNTA DIRECTA. Va después de las otras dos y no las reemplaza: si
     # GitHub no contesta, las dos primeras siguen en pie.
+    #
+    # PERO PUEDE MENTIR (23/9/2026): la lista de corridas de la API de GitHub
+    # llegó a reportar una corrida de hace 164.9 horas mientras el registro
+    # publicado tenía un dato de hace 0.9 horas. Antes de convertir esta
+    # pregunta en una falla que enrojece la corrida, se la cruza contra el
+    # dato publicado (`horas`, ya calculado arriba, que no depende de esta
+    # API). Si el registro está fresco, la que se sospecha es la API, y se
+    # deja constancia como AVISO, no como falla. Solo si el registro TAMBIÉN
+    # está viejo (o no se pudo leer un solo dato) se declara la caída.
     ultima_corrida, por_que_no = corrio_el_robot()
     horas_corrida = None
+    dato_publicado_fresco = horas is not None and horas <= HORAS
     if ultima_corrida:
         horas_corrida = round((ahora - ultima_corrida).total_seconds() / 3600, 1)
         if horas_corrida > HORAS:
-            fallas.append({
-                "que": "el robot no termina bien una corrida",
-                "quien": f"la última recolección exitosa fue hace {horas_corrida} horas",
-                "porque": "corre cada hora. Puede estar rechazado el archivo, "
-                          "desactivado el flujo, vencida una credencial o caído GitHub: "
-                          "desde acá se ven todos igual, y todos significan que el "
-                          "registro dejó de actualizarse"})
+            if dato_publicado_fresco:
+                avisos.append({
+                    "que": "la API de GitHub reporta una corrida vieja, pero el "
+                           "registro publicado está fresco: se sospecha una "
+                           "lectura demorada de la API (consistencia eventual "
+                           "del lado de GitHub, no una caída real) y no se "
+                           "cuenta como falla",
+                    "quien": f"API: hace {horas_corrida} h · registro: hace {horas} h",
+                    "porque": "el 23/9/2026 esta misma consulta devolvió una "
+                              "corrida de hace 164.9 horas con el registro "
+                              "recién actualizado; repetida minutos después ya "
+                              "daba la corrida correcta"})
+            else:
+                fallas.append({
+                    "que": "el robot no termina bien una corrida",
+                    "quien": f"la última recolección exitosa fue hace {horas_corrida} horas",
+                    "porque": "corre cada hora, y el registro publicado TAMPOCO tiene "
+                              "un dato fresco. Puede estar rechazado el archivo, "
+                              "desactivado el flujo, vencida una credencial o caído "
+                              "GitHub: desde acá se ven todos igual, y todos "
+                              "significan que el registro dejó de actualizarse"})
 
     salida = {
         "que_es": "Vigía del robot. Pregunta dos cosas que nadie hacía: hace cuánto que no "
@@ -237,6 +290,7 @@ def main() -> None:
         "horas_desde_la_ultima_corrida": horas_corrida,
         "por_que_no_se_pudo_mirar": por_que_no,
         "fallas": fallas,
+        "avisos": avisos,
         "veredicto": "el robot está vivo" if not fallas else f"{len(fallas)} problemas",
         "lo_que_no_dice": "Si los datos son buenos. Dice que llegan y que el robot puede "
                           "correr; la calidad la miden la auditoría y la regla de las dos "
@@ -254,6 +308,8 @@ def main() -> None:
         print(f"[vigia] última corrida exitosa del robot: hace {horas_corrida} h")
     elif por_que_no:
         print(f"[vigia] no se pudo preguntar si el robot corrió — {por_que_no}")
+    for a in avisos:
+        print(f"  AVISO (no falla) · {a['que']} · {a['quien']}")
     for f in fallas:
         print(f"  FALLA · {f['que']} · {f['quien']}")
     if fallas:
