@@ -101,6 +101,63 @@ NO_SON_FUENTES = {
                               "no en index.html, que es lo unico que este control lee",
     "pdh_guatemala_subnacional.json": "prototipo subnacional, oculto por decision de "
                                       "Direccion",
+    # LAS NUEVE DE COLOMBIA (Min. Defensa / Policía Nacional, vía datos.gov.co) Y
+    # LA DE ARGENTINA (viales, Min. Seguridad/SNIC) wireadas el 23/9/2026, MISMO
+    # PATRON que las cuatro de arriba: ya estan en `sitio/subnacional.html` ->
+    # const FUENTES (con su rotulo, licencia y nota), visibles en la capa
+    # preliminar. El PR #23 las publico en datos/publico/ y las cableo en esa
+    # pagina, pero NO las agrego aca -- por eso este control las marcaba como
+    # "publicada y no figura en la lista de fuentes" a pesar de que el lector SI
+    # las puede ver. Se corrige dandolas de alta en esta misma exclusion, no en
+    # index.html: la capa subnacional del mapa principal sigue apagada por
+    # decision de Direccion (13/9/2026) y esto no la encinde.
+    "subnacional_colombia_extorsion.json": "visible en subnacional.html (capa preliminar), "
+                                           "no en index.html, que es lo unico que este control lee. "
+                                           "Fuente: Ministerio de Defensa Nacional / Policia Nacional de "
+                                           "Colombia, via datos.gov.co (Socrata) — CC BY-SA 4.0, "
+                                           "https://www.datos.gov.co/resource/q2ib-t9am.json — "
+                                           "Almirantazgo A2 (primaria oficial, fuente unica: rotulada)",
+    "subnacional_colombia_incautacion_base_coca.json": "visible en subnacional.html (capa preliminar), "
+                                           "no en index.html, que es lo unico que este control lee. "
+                                           "Fuente: Ministerio de Defensa Nacional / Policia Nacional de "
+                                           "Colombia, via datos.gov.co (Socrata) — CC BY-SA 4.0 — "
+                                           "Almirantazgo A2 (primaria oficial, fuente unica: rotulada)",
+    "subnacional_colombia_incautacion_basuco.json": "visible en subnacional.html (capa preliminar), "
+                                           "no en index.html, que es lo unico que este control lee. "
+                                           "Fuente: Ministerio de Defensa Nacional / Policia Nacional de "
+                                           "Colombia, via datos.gov.co (Socrata) — CC BY-SA 4.0 — "
+                                           "Almirantazgo A2 (primaria oficial, fuente unica: rotulada)",
+    "subnacional_colombia_incautacion_cocaina.json": "visible en subnacional.html (capa preliminar), "
+                                           "no en index.html, que es lo unico que este control lee. "
+                                           "Fuente: Ministerio de Defensa Nacional / Policia Nacional de "
+                                           "Colombia, via datos.gov.co (Socrata) — CC BY-SA 4.0 — "
+                                           "Almirantazgo A2 (primaria oficial, fuente unica: rotulada)",
+    "subnacional_colombia_incautacion_insumos_liquidos.json": "visible en subnacional.html (capa "
+                                           "preliminar), no en index.html, que es lo unico que este "
+                                           "control lee. Fuente: Ministerio de Defensa Nacional / "
+                                           "Policia Nacional de Colombia, via datos.gov.co (Socrata) — "
+                                           "CC BY-SA 4.0 — Almirantazgo A2 (primaria oficial, fuente "
+                                           "unica: rotulada)",
+    "subnacional_colombia_incautacion_marihuana.json": "visible en subnacional.html (capa preliminar), "
+                                           "no en index.html, que es lo unico que este control lee. "
+                                           "Fuente: Ministerio de Defensa Nacional / Policia Nacional de "
+                                           "Colombia, via datos.gov.co (Socrata) — CC BY-SA 4.0 — "
+                                           "Almirantazgo A2 (primaria oficial, fuente unica: rotulada)",
+    "subnacional_colombia_secuestro.json": "visible en subnacional.html (capa preliminar), "
+                                           "no en index.html, que es lo unico que este control lee. "
+                                           "Fuente: Ministerio de Defensa Nacional / Policia Nacional de "
+                                           "Colombia, via datos.gov.co (Socrata) — CC BY-SA 4.0 — "
+                                           "Almirantazgo A2 (primaria oficial, fuente unica: rotulada)",
+    "subnacional_colombia_terrorismo.json": "visible en subnacional.html (capa preliminar), "
+                                           "no en index.html, que es lo unico que este control lee. "
+                                           "Fuente: Ministerio de Defensa Nacional / Policia Nacional de "
+                                           "Colombia, via datos.gov.co (Socrata) — CC BY-SA 4.0 — "
+                                           "Almirantazgo A2 (primaria oficial, fuente unica: rotulada)",
+    "subnacional_viales.json": "visible en subnacional.html (capa preliminar), "
+                              "no en index.html, que es lo unico que este control lee. "
+                              "Fuente: Ministerio de Seguridad — SNIC (Argentina) — CC BY 4.0, "
+                              "https://www.argentina.gob.ar/seguridad/estadisticascriminales/bases-de-datos "
+                              "— Almirantazgo A2 (primaria oficial, fuente unica: rotulada)",
 }
 
 
