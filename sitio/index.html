@@ -3779,7 +3779,7 @@
       <div class="cruce" id="lista-prensa"></div>
       <div id="vac-prensa"></div>
         </div>
-            <div class="categoria" id="censo-subnacional" data-nivel="2" hidden>
+            <div class="categoria" id="censo-subnacional" data-nivel="2"><!-- PROTOTIPO: hidden quitado solo para esta rama de prueba -->
       <div class="categoria-head"><h3>Qué publica cada provincia de sí misma</h3><span class="tag" id="tag-censo">—</span></div>
       <details class="aviso-cobertura"><summary>Esto no publica cifras de delito: publica quién publica</summary>
         <p><b>Este censo no publica cifras de criminalidad de las provincias.</b> Publica
@@ -16102,7 +16102,9 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
   // publicos en la interfaz de datos, que es donde el trabajo hecho tiene que
   // estar disponible. Lo unico que espera es el panel de lectura. Encender la
   // segunda etapa es poner esta constante en true.
-  const SEGUNDA_ETAPA = false;
+  // PROTOTIPO — NO MERGEAR. Encendido temporal para que la Dirección vea
+  // como quedarian los tres paneles antes de decidir si se prende en serio.
+  const SEGUNDA_ETAPA = true;
 
   // EL CENSO DE FUENTES SUBNACIONALES. Cada unidad con su fuente propia, su
   // grado de apertura y que mide. NO hay cifras de delito aca: hay cifras sobre
