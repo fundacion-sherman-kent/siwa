@@ -130,6 +130,10 @@
       <li><b>Ocho indicadores son de un solo país (Colombia).</b> Cubren sus 33 departamentos, pero
          no existen para el resto de la región: en el mapa, solo Colombia aparece coloreada para
          esas materias — es cobertura parcial, no un vacío de la fuente colombiana.</li>
+      <li><b>Denuncias de DD.HH. (Guatemala)</b> y <b>muertes viales (Argentina)</b> también son de
+         un solo país cada uno. La de Guatemala es <span class="badge b-sec">Secundaria</span> —son
+         denuncias, no violaciones comprobadas—; la de Argentina es un accidente de tránsito,
+         no un delito, y no se suma a homicidios ni robos.</li>
     </ul>
   </div>
 
@@ -194,6 +198,22 @@ const FUENTES = [
   {arch:'subnacional_colombia_terrorismo.json', clase:'prim', badge:['Primaria oficial','b-prim'],
    titulo:'Terrorismo / acciones subversivas por departamento (Colombia)', valor:u=>u.ultimo&&u.ultimo.valor,
    nota:'Acciones terroristas o subversivas registradas por el Ministerio de Defensa (no es la cifra de Policía/DIJIN). Solo Colombia (32 de 33 departamentos en esta corrida): cobertura parcial de la región.'},
+  // GUATEMALA — PDH: denuncias de derechos humanos por departamento. Va como
+  // SECUNDARIA (no primaria oficial de delito, como homicidios/robos): son
+  // DENUNCIAS recibidas, no violaciones comprobadas, y su credibilidad de
+  // Almirantazgo (B3) es más cautelosa que la de ACLED (B2). Único registro
+  // hoy (Guatemala); el resto del padrón queda sin dato para esta fuente, y
+  // este panel ya declara "este país no tiene datos" cuando no hay fila.
+  {arch:'pdh_guatemala_subnacional.json', clase:'sec', badge:['Secundaria','b-sec'],
+   titulo:'Denuncias de derechos humanos por departamento (PDH Guatemala)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'<b>Denuncias</b> recibidas por la Procuraduría de los Derechos Humanos (PDH) —de oficio o por queja—, NO violaciones comprobadas: más denuncias puede ser más problema o más acceso a la institución. Acumulado del año; el año en curso es provisional.'},
+  // ARGENTINA — «Muertes en accidentes viales» del MISMO CSV del SNIC que ya
+  // leen homicidios/robos (costo de descarga cero). Llena la categoría del eje
+  // "Muertes que no son delito" (hoy en 0 Estados): es un accidente de tránsito,
+  // no un delito, y por eso NO se suma ni se compara con homicidios/robos.
+  {arch:'subnacional_viales.json', clase:'prim', badge:['Primaria oficial','b-prim'],
+   titulo:'Muertes en accidentes viales por provincia (Argentina)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'Recuento de <b>muertes en accidentes viales</b> (Ministerio de Seguridad — SNIC). NO es delito: llena la categoría "muertes que no son delito", no se suma a homicidios. Solo Argentina (24 provincias): cobertura parcial de la región.'},
 ];
 const CACHE={}, ESTADO={pais:null};
 async function traer(a){ if(!CACHE[a]) CACHE[a]=await fetch('../datos/publico/'+a,{cache:'no-store'}).then(r=>r.json()).catch(()=>null); return CACHE[a]; }
