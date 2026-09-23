@@ -209,12 +209,8 @@
   /* EL LOCKUP DE SIWA: el nombre y, pegado a su derecha, el isotipo de ondas.
      display:inline-flex + gap en em para que el ícono escale con el tamaño de
      letra (17px hoy) y no con un píxel fijo si el tipo cambia. */
-  .brand h1{font-size:17px;margin:0;font-weight:700;letter-spacing:2px;color:var(--navy-deep);
+  .brand h1{font-size:17px;margin:0;font-weight:700;letter-spacing:2px;color:var(--orange);
     display:inline-flex;align-items:center;gap:.4em;line-height:1;}
-  /* Subraya solo el TEXTO «SIWA», nunca el ícono: por eso vive en un span propio
-     con ancho de contenido (inline-block), y no como border-bottom del h1 entero. */
-  .brand h1 .siwa-txt{display:inline-block;border-bottom:1.6px solid var(--orange);
-    padding-bottom:3px;line-height:1;}
   /* ISOTIPO DE ONDAS/RADAR: tres arcos que se abren a la derecha de la A, con un
      punto naranja como fuente. En 1em (o sea, del tamaño de la letra): vectorial,
      nítido en cualquier densidad de píxeles, y crece o achica con el lockup sin
@@ -2252,14 +2248,13 @@
   h2.hero-title{color:#ffffff;}
   body.claro h2.hero-title{color:#ffffff;}
 
-  /* EL NOMBRE DEL SITIO. Estaba en el mismo gris tenue que el resto de la
-     barra y se perdía: es el nombre, y tiene que leerse primero. */
-  /* LA BARRA ES BLANCA EN LOS DOS TEMAS —no navy—, pero este color colgaba de
-     --texto-max, que en tema oscuro vale blanco: SIWA quedaba en blanco sobre
-     blanco, invisible (detectado auditando en vivo el 23/9/2026). La tinta de
-     la barra no depende del tema, porque la barra tampoco depende del tema:
-     va siempre en el navy de la casa, igual que ya iba en el claro. */
-  .topbar .brand h1{color:var(--navy-deep);font-weight:800;letter-spacing:1.8px;}
+  /* EL NOMBRE DEL SITIO, en el naranja de la casa. Primero se probó navy: leía
+     bien, pero Edgardo pidió el naranja de marca, igual en los dos temas —la
+     barra es blanca en claro y en oscuro, así que un solo color incondicional
+     resuelve el nombre Y de paso sigue resolviendo el bug del 23/9/2026 (SIWA
+     en blanco sobre la barra blanca del tema oscuro: --texto-max ya no
+     interviene acá). */
+  .topbar .brand h1{color:var(--orange);font-weight:800;letter-spacing:1.8px;}
   .topbar .brand small{color:var(--texto-2);}
 
   /* LOS TRES NIVELES, cada uno con su color, siempre: así se ven los tres a la
