@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-23T06:39:57+00:00",
+  "corrida": "2026-09-23T07:27:19+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3972,
+    "sobreviven": 3980,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3561,
+  "pistas_totales": 3569,
   "anomalias_totales": 382,
   "pistas": [
     {
@@ -203,6 +203,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.94,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.8668143381308346e-21,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -237,19 +250,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 1.0176881835958401e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.932,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.748935004633224e-20,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -346,19 +346,6 @@
       "misma_categoria": false
     },
     {
-      "a": "subnacional_focos:cuantas",
-      "b": "superficie",
-      "rotulo_a": "subnacional_focos · cuantas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.925,
-      "estados": 20,
-      "tipo": "rangos (Spearman)",
-      "p": 2.0403320564539755e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -393,19 +380,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 3.965924445094981e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.92,
-      "estados": 20,
-      "tipo": "rangos (Spearman)",
-      "p": 5.534828693341861e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -684,6 +658,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.894,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.692133572992437e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "copernicus:escenas",
       "b": "perdida_bosque",
       "rotulo_a": "copernicus · escenas",
@@ -757,6 +744,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 7.061326432405993e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "subnacional_focos:cuantas",
+      "b": "superficie",
+      "rotulo_a": "subnacional_focos · cuantas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.887,
+      "estados": 21,
+      "tipo": "rangos (Spearman)",
+      "p": 2.3570410012824727e-09,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
