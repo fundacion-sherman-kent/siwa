@@ -219,7 +219,11 @@
      punto naranja como fuente. En 1em (o sea, del tamaño de la letra): vectorial,
      nítido en cualquier densidad de píxeles, y crece o achica con el lockup sin
      que nadie tenga que volver a tocar esto. El naranja es señal, no superficie:
-     solo el punto de origen lo usa; las ondas van en los grises de la casa. */
+     solo el punto de origen lo usa. Los arcos van navy -> gris (de adentro hacia
+     afuera): sobre la barra real, que es blanca, el gris claro sobre gris claro
+     se leía apagado; el navy de la propia tinta de la casa lee nítido, como el
+     original pensado para fondo oscuro (decidido por Edgardo el 23/9/2026,
+     comparando capturas reales de las dos variantes). */
   .brand h1 .siwa-onda{width:1em;height:1em;flex:0 0 auto;display:block;overflow:visible;}
   .brand small{display:block;color:var(--grey-blue);font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;}
   .topbar-right{display:flex;gap:22px;align-items:center;font-size:11px;color:var(--grey-blue);}
@@ -2250,10 +2254,13 @@
 
   /* EL NOMBRE DEL SITIO. Estaba en el mismo gris tenue que el resto de la
      barra y se perdía: es el nombre, y tiene que leerse primero. */
-  .topbar .brand h1{color:var(--texto-max);font-weight:800;letter-spacing:1.8px;}
+  /* LA BARRA ES BLANCA EN LOS DOS TEMAS —no navy—, pero este color colgaba de
+     --texto-max, que en tema oscuro vale blanco: SIWA quedaba en blanco sobre
+     blanco, invisible (detectado auditando en vivo el 23/9/2026). La tinta de
+     la barra no depende del tema, porque la barra tampoco depende del tema:
+     va siempre en el navy de la casa, igual que ya iba en el claro. */
+  .topbar .brand h1{color:var(--navy-deep);font-weight:800;letter-spacing:1.8px;}
   .topbar .brand small{color:var(--texto-2);}
-  body.claro .topbar .brand h1{color:var(--navy);}
-  body.claro .topbar .brand small{color:var(--texto-2);}
 
   /* LOS TRES NIVELES, cada uno con su color, siempre: así se ven los tres a la
      vez y se entiende que son tres registros distintos, no un botón encendido
@@ -2325,8 +2332,8 @@
            aria-hidden="true" focusable="false">
         <g transform="rotate(-15)">
           <circle cx="0" cy="0" r="3.2" fill="#FB6500"/>
-          <path d="M0 -8  A8 8 0 0 1 0 8"   fill="none" stroke="#DDE2E5" stroke-width="2" stroke-linecap="round"/>
-          <path d="M0 -13 A13 13 0 0 1 0 13" fill="none" stroke="#C6C6C5" stroke-width="2" stroke-linecap="round"/>
+          <path d="M0 -8  A8 8 0 0 1 0 8"   fill="none" stroke="#00121E" stroke-width="2" stroke-linecap="round"/>
+          <path d="M0 -13 A13 13 0 0 1 0 13" fill="none" stroke="#33454F" stroke-width="2" stroke-linecap="round"/>
           <path d="M0 -18 A18 18 0 0 1 0 18" fill="none" stroke="#7E8A94" stroke-width="2" stroke-linecap="round"/>
         </g>
       </svg></h1>
