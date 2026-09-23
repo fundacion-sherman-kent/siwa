@@ -164,6 +164,15 @@ const FUENTES = [
   {arch:'subnacional_focos.json', clase:'sat', badge:['Satelital','b-sat'],
    titulo:'Focos de calor por unidad (NASA FIRMS)', valor:u=>u.focos,
    nota:'<b>Focos de calor</b> detectados por satélite (proxy de incendios/quemas). No es delito ni gobernanza.'},
+  // GUATEMALA — PDH: denuncias de derechos humanos por departamento. Va como
+  // SECUNDARIA (no primaria oficial de delito, como homicidios/robos): son
+  // DENUNCIAS recibidas, no violaciones comprobadas, y su credibilidad de
+  // Almirantazgo (B3) es más cautelosa que la de ACLED (B2). Único registro
+  // hoy (Guatemala); el resto del padrón queda sin dato para esta fuente, y
+  // este panel ya declara "este país no tiene datos" cuando no hay fila.
+  {arch:'pdh_guatemala_subnacional.json', clase:'sec', badge:['Secundaria','b-sec'],
+   titulo:'Denuncias de derechos humanos por departamento (PDH Guatemala)', valor:u=>u.ultimo&&u.ultimo.valor,
+   nota:'<b>Denuncias</b> recibidas por la Procuraduría de los Derechos Humanos (PDH) —de oficio o por queja—, NO violaciones comprobadas: más denuncias puede ser más problema o más acceso a la institución. Acumulado del año; el año en curso es provisional.'},
 ];
 const CACHE={}, ESTADO={pais:null};
 async function traer(a){ if(!CACHE[a]) CACHE[a]=await fetch('../datos/publico/'+a,{cache:'no-store'}).then(r=>r.json()).catch(()=>null); return CACHE[a]; }
