@@ -202,8 +202,30 @@
        · object-fit:contain — red de seguridad: si algo lo recortara igual, la
          imagen se ajusta DENTRO de la caja en vez de estirarse para llenarla. */
   .brand img{height:72px;width:auto;flex:0 0 auto;object-fit:contain;display:block;}  /* mínimo digital del manual */
-  .brand .sep{width:1px;height:44px;background:rgba(0,18,30,.22);}
-  .brand h1{font-size:17px;margin:0;font-weight:700;letter-spacing:2px;color:var(--navy-deep);}
+  /* EL FILETE ENTRE EL LOGO Y «SIWA» PASA A NARANJA. Era gris (rgba(0,18,30,.22)),
+     un separador mudo; ahora es la señal de marca —igual que el filete que ya corre
+     bajo toda la barra— y se angosta a 2px para leerse como trazo, no como bloque. */
+  .brand .sep{width:2px;height:44px;background:var(--orange);}
+  /* EL LOCKUP DE SIWA: el nombre y, pegado a su derecha, el isotipo de ondas.
+     display:inline-flex + gap en em para que el ícono escale con el tamaño de
+     letra (19px) y no con un píxel fijo si el tipo cambia. 19px en vez de los
+     17px originales: a 17px/800 el naranja (#FB6500) mide 12,75pt, por debajo
+     del piso de «texto grande» de WCAG 2.2 (14pt/18,66px en negrita), y el
+     3.02:1 medido exigía entonces el umbral de texto normal (4.5:1), que no
+     cumple. A 19px (14,25pt) ya califica como texto grande sin reserva, y el
+     ícono y el espaciado —atados en em— escalan solos con la letra. */
+  .brand h1{font-size:19px;margin:0;font-weight:700;letter-spacing:2px;color:var(--orange);
+    display:inline-flex;align-items:center;gap:.4em;line-height:1;}
+  /* ISOTIPO DE ONDAS/RADAR: tres arcos que se abren a la derecha de la A, con un
+     punto naranja como fuente. En 1em (o sea, del tamaño de la letra): vectorial,
+     nítido en cualquier densidad de píxeles, y crece o achica con el lockup sin
+     que nadie tenga que volver a tocar esto. El naranja es señal, no superficie:
+     solo el punto de origen lo usa. Los arcos van navy -> gris (de adentro hacia
+     afuera): sobre la barra real, que es blanca, el gris claro sobre gris claro
+     se leía apagado; el navy de la propia tinta de la casa lee nítido, como el
+     original pensado para fondo oscuro (decidido por Edgardo el 23/9/2026,
+     comparando capturas reales de las dos variantes). */
+  .brand h1 .siwa-onda{width:1em;height:1em;flex:0 0 auto;display:block;overflow:visible;}
   .brand small{display:block;color:var(--grey-blue);font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;}
   .topbar-right{display:flex;gap:22px;align-items:center;font-size:11px;color:var(--grey-blue);}
   .actualidad-boton{all:unset;cursor:pointer;font-size:11px;white-space:nowrap;color:inherit;text-decoration:underline;
@@ -2231,12 +2253,14 @@
   h2.hero-title{color:#ffffff;}
   body.claro h2.hero-title{color:#ffffff;}
 
-  /* EL NOMBRE DEL SITIO. Estaba en el mismo gris tenue que el resto de la
-     barra y se perdía: es el nombre, y tiene que leerse primero. */
-  .topbar .brand h1{color:var(--texto-max);font-weight:800;letter-spacing:1.8px;}
+  /* EL NOMBRE DEL SITIO, en el naranja de la casa. Primero se probó navy: leía
+     bien, pero Edgardo pidió el naranja de marca, igual en los dos temas —la
+     barra es blanca en claro y en oscuro, así que un solo color incondicional
+     resuelve el nombre Y de paso sigue resolviendo el bug del 23/9/2026 (SIWA
+     en blanco sobre la barra blanca del tema oscuro: --texto-max ya no
+     interviene acá). */
+  .topbar .brand h1{color:var(--orange);font-weight:800;letter-spacing:1.8px;}
   .topbar .brand small{color:var(--texto-2);}
-  body.claro .topbar .brand h1{color:var(--navy);}
-  body.claro .topbar .brand small{color:var(--texto-2);}
 
   /* LOS TRES NIVELES, cada uno con su color, siempre: así se ven los tres a la
      vez y se entiende que son tres registros distintos, no un botón encendido
@@ -2304,7 +2328,15 @@
       <img src="marca/fusk-logo-nombre-color.png" alt="FUSK · Fundación Sherman Kent"></a>
     <div class="sep"></div>
     <div>
-      <h1>SIWA</h1>
+      <h1><span class="siwa-txt">SIWA</span><svg class="siwa-onda" viewBox="-6 -20 40 40"
+           aria-hidden="true" focusable="false">
+        <g transform="rotate(-15)">
+          <circle cx="0" cy="0" r="3.2" fill="#FB6500"/>
+          <path d="M0 -8  A8 8 0 0 1 0 8"   fill="none" stroke="#00121E" stroke-width="2" stroke-linecap="round"/>
+          <path d="M0 -13 A13 13 0 0 1 0 13" fill="none" stroke="#33454F" stroke-width="2" stroke-linecap="round"/>
+          <path d="M0 -18 A18 18 0 0 1 0 18" fill="none" stroke="#7E8A94" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </svg></h1>
       <small>Reporte de situación · ALC</small>
     </div>
   </div>
