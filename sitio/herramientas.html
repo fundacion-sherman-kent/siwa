@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Herramientas · SIWA — Fundación Sherman Kent</title>
+<meta name="description" content="Cómo trabajar los datos de SIWA: formatos abiertos, el bloque de procedencia de cada archivo, librerías libres recomendadas (pandas, R, jq, QGIS) y cómo verificar su integridad con el manifiesto de huellas SHA-256.">
+<link rel="canonical" href="https://siwa.fundacionkent.org/sitio/herramientas.html">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#00121E">
+<link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+<style>
+  :root{
+    --navy:#00121E; --orange:#FB6500; --crema:#F4F2EC; --texto:#C7D2E0;
+    --tenue:#7d90a8; --linea:#1d3346; --fondo:#F4F2EC; --tinta:#0d2233;
+    --caja:#ffffff; --caja-linea:#dfe4ea;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --fondo:#00121E; --tinta:#eef3f8; --texto:#C7D2E0; --caja:#0a1f30; --caja-linea:#1d3346;
+    }
+  }
+  /* El boton "Fondo oscuro" de la cabecera pone data-theme="dark" a mano: sin
+     esta regla explicita el cambio de tema no se ve si el sistema esta en
+     claro (la media query de arriba solo responde a la preferencia del
+     sistema). Mismo valor que la de arriba, forzado por el atributo. */
+  :root[data-theme="dark"]{
+    --fondo:#00121E; --tinta:#eef3f8; --texto:#C7D2E0; --caja:#0a1f30; --caja-linea:#1d3346;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--fondo); color:var(--tinta);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    line-height:1.62; font-size:16px;
+  }
+  main{max-width:720px; margin:0 auto; padding:30px 20px 60px;}
+  .filete{height:4px; width:74px; background:var(--orange); border-radius:2px; margin-bottom:20px;}
+  h1{font-size:clamp(26px,5.5vw,36px); line-height:1.15; letter-spacing:-.4px; margin:0 0 6px;}
+  .bajada{color:var(--tenue); margin:0 0 8px; font-size:15px;}
+  .fecha{color:var(--tenue); font-size:13px; margin:0 0 26px;}
+  h2{font-size:19px; margin:30px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--caja-linea);}
+  p{margin:0 0 12px;}
+  ul{margin:0 0 12px; padding-left:22px;}
+  li{margin-bottom:6px;}
+  b{color:var(--tinta);}
+  a{color:var(--orange);}
+  .caja{background:var(--caja); border:1px solid var(--caja-linea); border-radius:10px; padding:16px 18px; margin:16px 0;}
+  .pie{margin-top:36px; padding-top:16px; border-top:1px solid var(--caja-linea); color:var(--tenue); font-size:13px;}
+  code{background:rgba(125,144,168,.16); padding:1px 5px; border-radius:4px; font-size:.92em; word-break:break-word;}
+  .tabla-h{width:100%; border-collapse:collapse; margin:8px 0 16px;}
+  .tabla-h th, .tabla-h td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--caja-linea); vertical-align:top; font-size:14.5px;}
+  .tabla-h th{font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--tenue);}
+  .vacio{border-left:3px solid var(--orange); padding-left:12px; margin:16px 0; color:var(--tenue); font-size:14px;}
+</style>
+<script defer src="_comun/cabecera-siwa.js"></script>
+</head>
+<body>
+<main>
+  <div class="filete"></div>
+  <h1>Herramientas</h1>
+  <p class="bajada">Cómo se leen los datos de SIWA y con qué programas libres se trabajan.</p>
+  <p class="fecha">Fundación Sherman Kent — Oficina de Generación de Inteligencia · Publicada el 23 de septiembre de 2026.</p>
+
+  <p>Esta página no enseña a programar: dice, en una sola lectura, qué formato usa cada
+     archivo del registro, qué trae adentro y con qué herramientas libres —sin costo y sin
+     credencial— se puede abrir, cruzar o mapear. El detalle completo de los conjuntos,
+     archivo por archivo, está en <a href="https://siwa.fundacionkent.org/datos/" target="_blank" rel="noopener">la
+     interfaz de datos</a>; esta página lo resume del lado de quien quiere <b>usar</b> el dato.</p>
+
+  <h2>El formato: JSON, con su procedencia adentro</h2>
+  <p>Todo el registro se publica en archivos <b>JSON</b> planos, en
+     <code>https://siwa.fundacionkent.org/datos/publico/*.json</code>, sin credencial, sin
+     registrarse y sin límite de consultas. Las cabeceras están abiertas
+     (<code>Access-Control-Allow-Origin: *</code>), así que se leen desde cualquier dominio o
+     programa. Conviene empezar por
+     <a href="https://siwa.fundacionkent.org/datos/publico/indice.json">indice.json</a>: es el
+     catálogo de los conjuntos, con la dirección y la forma de cada uno.</p>
+  <p>Cada archivo trae dos bloques fijos, pensados para programar contra ellos sin abrirlos a
+     mano:</p>
+  <div class="caja">
+    <p style="margin:0 0 8px"><b><code>procedencia</code></b> — de dónde sale y de cuándo es:
+       <code>fuente.nombre</code>, <code>fuente.url</code>, <code>colector</code>,
+       <code>obtenido_en</code>, la <b>calificación Almirantazgo</b> (letra de fiabilidad y
+       número de credibilidad) y los <code>vacios_declarados</code>.</p>
+    <p style="margin:0"><b><code>registros</code></b> — la lista de filas, identificadas por
+       <code>iso</code> (código ISO 3166-1 alfa-3 del Estado) en la mayoría de los conjuntos. Un
+       Estado sin dato no aparece con cero: no aparece.</p>
+  </div>
+
+  <h2>El mapa: capas en GeoJSON</h2>
+  <p>Para trabajar el dato sobre un mapa, el registro publica sus fronteras en
+     <b>GeoJSON</b>: el padrón de los 33 Estados en
+     <a href="https://siwa.fundacionkent.org/datos/geo/paises-alc.geojson">paises-alc.geojson</a>,
+     y el detalle subnacional (provincia, departamento o estado, según el país) en
+     <code>https://siwa.fundacionkent.org/datos/geo/adm1/&lt;código ISO-3&gt;.geojson</code> —por
+     ejemplo, <code>ARG.geojson</code> para Argentina—. Son las mismas capas que dibujan el
+     Mapa de opacidad y el tablero subnacional del propio registro.</p>
+  <div class="vacio">Vacío declarado: SIWA no publica sus conjuntos en un archivo <b>.csv</b>
+     nativo. Como cada conjunto es tabular, se obtiene un CSV en un paso, con las herramientas
+     de la sección siguiente —no hace falta que la Fundación lo publique aparte—.</div>
+
+  <h2>Herramientas libres recomendadas</h2>
+  <table class="tabla-h">
+    <thead><tr><th>Herramienta</th><th>Para qué sirve</th></tr></thead>
+    <tbody>
+      <tr><td><b>Hoja de cálculo</b><br>(LibreOffice Calc, Google Sheets, Excel)</td>
+          <td>Mirar un conjunto sin programar. Como el archivo de origen es JSON y no CSV,
+              conviene convertirlo primero con <code>pandas</code> o <code>jq</code> (siguientes
+              filas) y abrir ese CSV.</td></tr>
+      <tr><td><b>Python</b> — <code>pandas</code> + <code>requests</code></td>
+          <td><code>requests.get(url).json()</code> trae el archivo entero; con
+              <code>pandas.json_normalize(datos['registros'])</code> queda como tabla, lista para
+              <code>.to_csv()</code> o para analizar.</td></tr>
+      <tr><td><b>R</b> — <code>jsonlite</code></td>
+          <td><code>jsonlite::fromJSON(url)</code> trae el mismo archivo como lista, con
+              <code>$registros</code> ya en forma de data frame.</td></tr>
+      <tr><td><b><code>jq</code></b></td>
+          <td>Para mirar o filtrar un JSON en la terminal sin escribir un programa:
+              <code>curl -s &lt;url&gt; | jq '.registros[0]'</code>.</td></tr>
+      <tr><td><b>QGIS</b></td>
+          <td>Software libre de mapas (SIG). Abre directo los archivos GeoJSON de arriba como
+              capas, y permite unirles los indicadores de SIWA por su código <code>iso</code>
+              para armar un mapa temático propio.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Verificar que el archivo es el publicado</h2>
+  <p>Cada conjunto de <code>datos/publico/</code> lleva su huella <b>SHA-256</b> en el manifiesto
+     <a href="https://siwa.fundacionkent.org/datos/publico/checksums.txt">checksums.txt</a>, en el
+     formato de <code>sha256sum</code> (huella y nombre de archivo, uno por línea). Quien
+     descarga un conjunto puede calcular su propia huella —<code>sha256sum archivo.json</code> en
+     Linux o macOS, <code>Get-FileHash archivo.json -Algorithm SHA256</code> en PowerShell— y
+     compararla con la del manifiesto: si coinciden, es exactamente lo que la Fundación publicó,
+     sin alteración en el camino.</p>
+  <div class="vacio">Vacío declarado: el manifiesto cubre los archivos JSON de
+     <code>datos/publico/</code>. Las capas GeoJSON de <code>datos/geo/</code> todavía no tienen
+     su huella publicada ahí.</div>
+
+  <h2>El código: abierto, bajo MIT</h2>
+  <p>Los colectores que arman cada conjunto, el sitio y las propias herramientas de este
+     catálogo están en el repositorio público
+     <a href="https://github.com/fundacion-sherman-kent/siwa" rel="noopener" target="_blank">github.com/fundacion-sherman-kent/siwa</a>,
+     bajo licencia <b>MIT</b>: se puede leer, copiar, ejecutar y modificar. Quien quiera aportar
+     una fuente nueva o corregir un colector encuentra ahí el camino para proponerlo.</p>
+
+  <h2>Licencia y cómo citar</h2>
+  <p>Los datos se publican bajo <b>Creative Commons Atribución 4.0 (CC BY 4.0)</b> y el código
+     bajo <b>MIT</b>; el detalle completo —qué permite cada licencia y qué conservan las fuentes
+     de base— está en <a href="licencia.html">Licencia y uso</a>.</p>
+  <div class="caja">
+    <p style="margin:0"><b>Cómo citar.</b> «SIWA — Fundación Sherman Kent», enlazando a
+       <a href="https://siwa.fundacionkent.org">siwa.fundacionkent.org</a>.</p>
+  </div>
+
+  <p class="pie">
+    SIWA — Reporte de situación de América Latina y el Caribe ·
+    Fundación Sherman Kent, Oficina de Generación de Inteligencia ·
+    Datos CC BY 4.0 · Código MIT ·
+    <a href="https://siwa.fundacionkent.org/datos/" target="_blank" rel="noopener">Interfaz completa de datos</a> ·
+    <a href="licencia.html">Licencia</a> ·
+    <a href="index.html">Volver al registro</a>
+  </p>
+</main>
+</body>
+</html>
