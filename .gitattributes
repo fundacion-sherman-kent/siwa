@@ -28,6 +28,16 @@ sitio/t/** merge=ours
 sitio/marca/siwa-compartir.png merge=ours
 sitio/marca/siwa-compartir.json merge=ours
 sitio/marca/tarjetas/** merge=ours
+# El catalogo del asistente y el manifiesto de assets: los reescribe
+# entero Pantallas (herramientas/guia-catalogo.py y
+# herramientas/versionar-assets.py) en cada corrida. Mismo agujero que
+# tenia checksums.txt hasta el 21/9/2026: hoy no revento porque todos los
+# flujos que publican en main comparten el mismo grupo de concurrencia
+# ("publicar-en-main") y nunca corren a la vez, pero si algun dia un flujo
+# nuevo escribe a main sin ese grupo, esto es lo que evita el mismo
+# conflicto de merge (revisado en vivo el 23/9/2026).
+sitio/_comun/guia-siwa.json merge=ours
+sitio/_comun/assets.json merge=ours
 # El listado de huellas SHA-256 de todo lo publicado: lo reescribe entero
 # indice-datos.py en cada corrida (no es .json, asi que ninguna regla de
 # arriba lo cubria). Ese agujero es la causa confirmada del robot caido desde
