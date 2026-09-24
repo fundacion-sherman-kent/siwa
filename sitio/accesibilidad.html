@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Declaración de accesibilidad · SIWA — Fundación Sherman Kent</title>
+<meta name="description" content="Qué tan accesible es SIWA según WCAG 2.2: el nivel de conformidad real, lo que cumple, sus límites conocidos y cómo reportar un problema.">
+<link rel="canonical" href="https://siwa.fundacionkent.org/sitio/accesibilidad.html">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#00121E">
+<link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+<style>
+  :root{
+    --navy:#00121E; --orange:#FB6500; --crema:#F4F2EC; --texto:#C7D2E0;
+    --tenue:#7d90a8; --linea:#1d3346; --fondo:#F4F2EC; --tinta:#0d2233;
+    --caja:#ffffff; --caja-linea:#dfe4ea;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --fondo:#00121E; --tinta:#eef3f8; --texto:#C7D2E0; --caja:#0a1f30; --caja-linea:#1d3346;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--fondo); color:var(--tinta);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    line-height:1.62; font-size:16px;
+  }
+  main{max-width:720px; margin:0 auto; padding:30px 20px 60px;}
+  .filete{height:4px; width:74px; background:var(--orange); border-radius:2px; margin-bottom:20px;}
+  h1{font-size:clamp(26px,5.5vw,36px); line-height:1.15; letter-spacing:-.4px; margin:0 0 6px;}
+  .bajada{color:var(--tenue); margin:0 0 8px; font-size:15px;}
+  .fecha{color:var(--tenue); font-size:13px; margin:0 0 26px;}
+  h2{font-size:19px; margin:30px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--caja-linea);}
+  p{margin:0 0 12px;}
+  ul{margin:0 0 12px; padding-left:22px;}
+  li{margin-bottom:10px;}
+  b{color:var(--tinta);}
+  /* El naranja de la casa marca acá SOLO el subrayado del enlace, no el texto:
+     como texto sobre fondo claro no llega al contraste 4.5:1 que exige el
+     propio criterio que esta página declara (ver «Limitaciones conocidas»).
+     El texto va en --tinta, que sí cumple en los dos temas. */
+  a{color:var(--tinta); border-bottom:1px solid var(--orange); text-decoration:none;}
+  .caja{background:var(--caja); border:1px solid var(--caja-linea); border-radius:10px; padding:16px 18px; margin:16px 0;}
+  .pie{margin-top:36px; padding-top:16px; border-top:1px solid var(--caja-linea); color:var(--tenue); font-size:13px;}
+  code{background:rgba(125,144,168,.16); padding:1px 5px; border-radius:4px; font-size:.92em;}
+</style>
+<script defer src="_comun/cabecera-siwa.js"></script>
+</head>
+<body>
+<main>
+  <div class="filete"></div>
+  <h1>Declaración de accesibilidad</h1>
+  <p class="bajada">Qué tan accesible es SIWA, dicho con el nivel de conformidad real y sus
+     límites conocidos — no el que quisiéramos tener.</p>
+  <p class="fecha">Fundación Sherman Kent — Oficina de Generación de Inteligencia · Vigente desde el 24 de septiembre de 2026.</p>
+
+  <h2>Estado de conformidad</h2>
+  <p>El estándar de referencia es <b>WCAG 2.2</b> (Pautas de Accesibilidad para el Contenido
+     Web, del W3C), <b>nivel AA</b>.</p>
+  <div class="caja">
+    <p style="margin:0 0 4px"><b>Conformidad parcial con WCAG 2.2 nivel AA.</b> SIWA cumple la
+       mayor parte de los criterios que se revisaron, pero no todos: hay al menos una brecha
+       confirmada —el contraste de color— y zonas del sitio que no se auditaron una por una.</p>
+    <p style="margin:0; color:var(--tenue); font-size:13px">«Parcial» es, en el propio
+       vocabulario del estándar, la categoría que corresponde cuando una parte del contenido
+       no cumple: no es una forma más suave de decir «no cumple», es la categoría exacta.</p>
+  </div>
+
+  <h2>Cómo se hizo esta revisión, y hasta cuándo</h2>
+  <p>Revisión <b>manual y en vivo</b> del código que el sitio efectivamente sirve —no un
+     análisis del diseño en abstracto ni una plantilla completada de memoria—: se leyó el DOM
+     y la hoja de estilos servidos por <code>siwa.fundacionkent.org</code>, se probó el teclado
+     sobre los controles propios (mapa, mosaico, árbol de relaciones, buscador subnacional,
+     asistente «Guía SIWA») y se calcularon a mano las relaciones de contraste entre el naranja
+     de la casa y sus fondos.</p>
+  <p>No se corrió una herramienta automática de auditoría (axe-core, Lighthouse, WAVE) sobre el
+     sitio publicado: instalar una herramienta nueva sobre lo que ya está en producción, sin
+     autorización previa, es exactamente el riesgo que esta casa no toma. Por eso el método es
+     manual y dirigido, y por eso puede no cubrir el ciento por ciento de los criterios del
+     estándar; ese límite se declara abajo, no se disimula.</p>
+  <p style="color:var(--tenue); font-size:13px"><b>Corte:</b> código revisado en vivo el 24 de
+     septiembre de 2026.</p>
+
+  <h2>Lo que sí cumple</h2>
+  <ul>
+    <li><b>Idioma declarado</b> en cada página (<code>lang="es-AR"</code>).</li>
+    <li><b>Etiquetas explícitas</b> en los campos de formulario y de búsqueda que se revisaron
+       —con <code>&lt;label for&gt;</code>, o <code>aria-label</code> cuando no hay texto
+       visible al lado—.</li>
+    <li><b>Texto alternativo</b> en las imágenes propias del sitio (logos, isotipo de radar,
+       sellos de certificación).</li>
+    <li><b>Controles propios con rol y teclado.</b> Las figuras interactivas que no son
+       controles nativos del navegador —marcas del mapa, celdas del mosaico, nodos del árbol de
+       relaciones— llevan rol (<code>role="button"</code> o <code>role="link"</code>), se
+       alcanzan con la tecla Tab y responden a <code>Enter</code> y a la barra espaciadora, no
+       solo al clic del mouse.</li>
+    <li><b>Foco visible propio</b> en esos mismos controles, con contraste suficiente sobre el
+       color de cada figura.</li>
+    <li><b>Secciones plegables con estado declarado</b> (<code>aria-expanded</code>), para quien
+       usa lector de pantalla.</li>
+    <li><b>Tema claro/oscuro</b> que respeta la preferencia del sistema y la elección de la
+       persona.</li>
+    <li><b>El asistente «Guía SIWA»</b> (la burbuja de abajo a la derecha) tiene nombre
+       accesible en sus botones y se cierra con el mismo control que lo abre.</li>
+    <li><b>Cuatro formatos de lectura</b> —teléfono, tableta, monitor y papel— sin que el
+       contenido se recorte.</li>
+  </ul>
+
+  <h2>Limitaciones conocidas</h2>
+  <ul>
+    <li><b>Contraste de color en el tema claro.</b> El naranja de la casa (<code>#FB6500</code>)
+       usado como color de texto o de enlace sobre fondos claros o blancos rinde entre 2,7:1 y
+       3,0:1 — por debajo del 4,5:1 que exige el criterio <b>1.4.3 (Contraste mínimo)</b> de
+       WCAG 2.2 AA para texto de tamaño normal. Afecta a los enlaces de ocho páginas que
+       comparten esta plantilla (herramientas, licencia, mapa, metodología del Índice de
+       Opacidad, privacidad, subnacional, tendencias y la página principal) cuando se mira con
+       el tema claro —el que la casa muestra por defecto—, y a algunos textos de la burbuja del
+       asistente «Guía SIWA», presente en toda página. En el tema oscuro el mismo naranja sobre
+       el azul de la casa rinde cerca de 6,3:1 y cumple. No se corrigió en esta revisión: el
+       color de los enlaces es parte del sistema visual único de la casa
+       (<code>_comun/sistema-visual.js</code>, identidad FUSK), y cambiarlo en ocho archivos a
+       la vez es una decisión de diseño que excede esta tarea. Queda declarado, para resolver
+       aparte y con su propia autorización.</li>
+    <li><b>Más de un encabezado de primer nivel.</b> La página principal del registro
+       (<code>sitio/index.html</code>) tiene tres elementos <code>&lt;h1&gt;</code> en el mismo
+       documento —la marca «SIWA» de la cabecera, el título del informe, y un tercero que
+       aparece al elegir un país—. No confunde a la vista, pero sí a quien navega saltando de
+       encabezado en encabezado con un lector de pantalla, que espera un único tema por página.
+       Corregirlo implica reordenar el documento —separar la marca en un encabezado de sitio
+       propio y bajar el resto a <code>&lt;h2&gt;</code>—, un cambio de estructura que no se
+       hizo en esta revisión.</li>
+    <li><b>Una imagen de una librería de terceros, sin describir.</b> La librería de gráficos
+       incluida en el sitio (<code>sitio/lib/echarts.min.js</code>) genera, en su función de
+       exportar una figura como imagen, una etiqueta de imagen sin texto alternativo. Es código
+       de un tercero, sin modificar por la casa: no se parcha el archivo de la librería.</li>
+    <li><b>Alcance de la revisión.</b> No se recorrió una por una las 33 páginas de país ni las
+       6 de zona que genera <code>herramientas/puertas.py</code> —se revisó el patrón que las
+       genera a todas, y dos casos de muestra (Argentina y la zona Andina)—, ni cada una de las
+       decenas de figuras dinámicas de <code>sitio/index.html</code>: se revisaron las funciones
+       que las construyen, no cada instancia. Un defecto puntual en una página o una figura que
+       no se haya mirado puede no estar reflejado acá.</li>
+    <li><b>Sin verificación con herramienta automática.</b> Como se explicó arriba, no se corrió
+       un analizador automático sobre el sitio publicado. Una herramienta de ese tipo puede
+       encontrar criterios que esta revisión manual no cubrió.</li>
+  </ul>
+
+  <h2>Cómo se preparó esta declaración</h2>
+  <p>Siguiendo, en su estructura, el modelo de declaración de accesibilidad que recomienda la
+     Iniciativa de Accesibilidad Web (WAI) del W3C: estado de conformidad, método de evaluación,
+     fecha, y las brechas conocidas en vez de una promesa genérica. Es una <b>autoevaluación de
+     la propia Fundación</b>, no una auditoría de un organismo externo ni una certificación.</p>
+
+  <h2>Reportar un problema</h2>
+  <div class="caja">
+    <p style="margin:0 0 4px"><b>¿Encontraste algo que no se puede usar?</b> Escribinos a
+       través de <a href="https://fundacionkent.org" rel="noopener" target="_blank">fundacionkent.org</a>,
+       o directamente a
+       <a href="mailto:direjecutiva@fundacionkent.org">direjecutiva@fundacionkent.org</a>,
+       contando qué página, qué intentabas hacer y con qué herramienta (lector de pantalla,
+       teclado, zoom) lo usás.</p>
+    <p style="margin:0; color:var(--tenue); font-size:13px">La Fundación va a responder y, si
+       corresponde, corregirlo.</p>
+  </div>
+
+  <h2>Cambios</h2>
+  <p>Si esta declaración cambia —porque se corrige una limitación o aparece una nueva—, se
+     actualiza acá y se cambia la fecha de vigencia de arriba.</p>
+
+  <p class="pie">
+    SIWA — Reporte de situación de América Latina y el Caribe ·
+    Fundación Sherman Kent, Oficina de Generación de Inteligencia ·
+    <a href="privacidad.html">Privacidad</a> ·
+    <a href="licencia.html">Licencia</a> ·
+    <a href="herramientas.html">Herramientas</a> ·
+    <a href="index.html">Volver al registro</a>
+  </p>
+</main>
+</body>
+</html>

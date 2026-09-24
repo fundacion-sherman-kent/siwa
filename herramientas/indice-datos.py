@@ -39,6 +39,9 @@ PUBLICO = RAIZ / "datos" / "publico"
 SALIDA = PUBLICO / "indice.json"
 PAGINA = RAIZ / "datos" / "index.html"
 CHECKSUMS = PUBLICO / "checksums.txt"
+# Segunda representación del mismo catálogo, en el vocabulario DCAT del W3C.
+# NO reemplaza al schema.org/DataCatalog de datos/index.html: conviven.
+DCAT_SALIDA = PUBLICO / "dcat.jsonld"
 
 sys.path.insert(0, str(RAIZ / "herramientas"))
 import puertas  # noqa: E402  — el estilo y la cabecera de la casa viven ahí
@@ -342,6 +345,100 @@ def catalogo(conjuntos: list) -> dict:
     }
 
 
+# ------------------------------------------------------------------------ DCAT
+# Acta de Dirección, 24/09/2026: conformidad con el vocabulario DCAT del W3C,
+# sin costo. Es una SEGUNDA representación del mismo catálogo que ya arma
+# `catalogo()` — no reemplaza al schema.org/DataCatalog que vive incrustado en
+# datos/index.html (ver `pagina()`), lo acompaña. Sirve para quien consume
+# portales de datos abiertos de gobierno (CKAN, data.europa.eu, los catálogos
+# oficiales que SIWA ya cita en `oficiales.json`): esos hablan DCAT, no
+# schema.org. Nada se recalcula: los dos vocabularios leen el mismo
+# `conjuntos` que ya recorrió `recorrer()`.
+#
+# El identificador de la Fundación ("#organizacion") es LITERAL —no se deriva
+# de BASE, que es el subdominio de SIWA— porque tiene que ser el MISMO IRI que
+# ya usa el bloque schema.org de sitio/index.html para la Organization: dos
+# identificadores distintos para la misma entidad rompen el enlace entre
+# vocabularios, que es la razón de ser de un identificador estable.
+ORGANIZACION_ID = "https://fundacionkent.org/#organizacion"
+
+
+def dcat(indice: dict) -> dict:
+    conjuntos = [c for c in indice["conjuntos"] if c.get("url")]
+    derechos_ = indice["derechos"]
+
+    def distribucion(c: dict) -> dict:
+        d = {
+            "@type": "dcat:Distribution",
+            "dct:title": c["archivo"],
+            "dcat:downloadURL": {"@id": c["url"]},
+            "dcat:accessURL": {"@id": c["url"]},
+            "dcat:mediaType": "application/json",
+            "dct:license": {"@id": derechos_["licencia_url"]},
+        }
+        if c.get("bytes"):
+            d["dcat:byteSize"] = c["bytes"]
+        if c.get("obtenido_en"):
+            d["dct:modified"] = {"@value": c["obtenido_en"], "@type": "xsd:dateTime"}
+        return d
+
+    def dataset(c: dict) -> dict:
+        nombre = c.get("fuente") or c["archivo"]
+        ds = {
+            "@type": "dcat:Dataset",
+            "@id": f'{c["url"]}#dataset',
+            "dct:identifier": c["archivo"],
+            "dct:title": nombre,
+            "dct:description": (
+                f'Conjunto «{c["archivo"]}» del registro SIWA — Fundación Sherman Kent. '
+                f'Calificación Almirantazgo: {c.get("calificacion") or "sin calificar"}. '
+                f'Vacíos declarados: {c.get("vacios_declarados") or 0}.'),
+            "dct:license": {"@id": derechos_["licencia_url"]},
+            "dct:publisher": {"@id": ORGANIZACION_ID},
+            "dcat:distribution": [distribucion(c)],
+            "dct:isPartOf": {"@id": f"{BASE}/datos/#catalogo"},
+        }
+        if c.get("url_fuente"):
+            ds["dct:source"] = {"@id": c["url_fuente"]}
+        # La condición adicional de una fuente (3 de 90 conjuntos) manda sobre
+        # la licencia general: se declara en dct:accessRights, no se calla.
+        if c.get("restriccion_de_uso"):
+            ds["dct:accessRights"] = c["restriccion_de_uso"]
+        if c.get("obtenido_en"):
+            ds["dct:modified"] = {"@value": c["obtenido_en"], "@type": "xsd:dateTime"}
+        return ds
+
+    return {
+        "@context": {
+            "dcat": "http://www.w3.org/ns/dcat#",
+            "dct": "http://purl.org/dc/terms/",
+            "foaf": "http://xmlns.com/foaf/0.1/",
+            "xsd": "http://www.w3.org/2001/XMLSchema#",
+        },
+        "@id": f"{BASE}/datos/#catalogo",
+        "@type": "dcat:Catalog",
+        "dct:title": "SIWA — catálogo de datos de América Latina y el Caribe (DCAT)",
+        "dct:description": (
+            "Representación en el vocabulario DCAT del mismo catálogo que SIWA publica "
+            "en schema.org/DataCatalog (datos/index.html) y en JSON propio "
+            "(datos/publico/indice.json): un dcat:Dataset por cada conjunto publicado, "
+            "con su dcat:Distribution en JSON. No reemplaza a las otras dos "
+            "declaraciones: las acompaña."),
+        "dct:publisher": {
+            "@id": ORGANIZACION_ID,
+            "@type": "foaf:Agent",
+            "foaf:name": derechos_["titular_del_aporte"],
+            "foaf:homepage": {"@id": "https://fundacionkent.org/"},
+        },
+        "dct:license": {"@id": derechos_["licencia_url"]},
+        "dct:accrualPeriodicity": "http://purl.org/linked-data/sdmx/2009/code#freq-H",
+        "dct:modified": {"@value": indice["generado"], "@type": "xsd:dateTime"},
+        "dct:spatial": "América Latina y el Caribe — 33 Estados",
+        "dcat:keyword": KEYWORDS,
+        "dcat:dataset": [dataset(c) for c in conjuntos],
+    }
+
+
 # ------------------------------------------------------------------ la página
 EXTRA = """
 .tabla{width:100%;border-collapse:collapse;font-size:13.5px;
@@ -511,6 +608,14 @@ def pagina(indice: dict) -> str:
   <code>keywords</code> del registro y el esquema de <code>identificadores</code>
   (código ISO de Estado y dónde se resuelve).</p>
 
+<h2>El mismo catálogo, en DCAT</h2>
+<p>Además del <code>schema.org/DataCatalog</code> incrustado en esta página, el mismo
+  catálogo se publica en el vocabulario <b>DCAT</b> del W3C —el que leen los portales de
+  datos abiertos de gobierno y agregadores como data.europa.eu, y no <code>schema.org</code>—,
+  sin recalcular nada: un <code>dcat:Dataset</code> por cada conjunto, con su
+  <code>dcat:Distribution</code> apuntando al mismo archivo JSON. Uno no reemplaza al otro;
+  se descarga de <a class="enlace" href="{DIR_DATOS}/dcat.jsonld">dcat.jsonld</a>.</p>
+
 <h2>Lo que se promete, y lo que no</h2>
 <div class="dice">
   <p><b>Las direcciones no cambian.</b> Un archivo publicado conserva su nombre y su
@@ -560,7 +665,9 @@ def pagina(indice: dict) -> str:
 </html>
 """
     cabeza = puertas.cabeza(titulo, descripcion, "datos/", ld)
-    cabeza = cabeza.replace("</head>", f"<style>{EXTRA}</style>\n</head>", 1)
+    enlace_dcat = (f'<link rel="alternate" type="application/ld+json" '
+                   f'href="{DIR_DATOS}/dcat.jsonld" title="Catálogo en DCAT">')
+    cabeza = cabeza.replace("</head>", f"{enlace_dcat}\n<style>{EXTRA}</style>\n</head>", 1)
     return cabeza + cuerpo + pie
 
 
@@ -571,10 +678,12 @@ def main() -> None:
     indice = catalogo(conjuntos)
     SALIDA.write_text(json.dumps(indice, ensure_ascii=False, indent=2), encoding="utf-8",
                       newline="")
+    DCAT_SALIDA.write_text(json.dumps(dcat(indice), ensure_ascii=False, indent=2),
+                           encoding="utf-8", newline="")
     PAGINA.write_text(pagina(indice), encoding="utf-8", newline="")
     print(f"[indice] {indice['cuantos']} conjuntos · {len(huellas)} huellas · "
-          f"{SALIDA.relative_to(RAIZ)}, {PAGINA.relative_to(RAIZ)} y "
-          f"{CHECKSUMS.relative_to(RAIZ)}")
+          f"{SALIDA.relative_to(RAIZ)}, {DCAT_SALIDA.relative_to(RAIZ)}, "
+          f"{PAGINA.relative_to(RAIZ)} y {CHECKSUMS.relative_to(RAIZ)}")
 
 
 if __name__ == "__main__":

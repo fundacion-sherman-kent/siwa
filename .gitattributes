@@ -46,6 +46,10 @@ sitio/_comun/assets.json merge=ours
 # "CONFLICT (content)" y aborta la corrida (diagnosticado en vivo el
 # 21/9/2026 sobre el log de recolectar.yml).
 datos/publico/checksums.txt merge=ours
+# La representacion DCAT del catalogo (acta 24/9/2026): la reescribe entera
+# indice-datos.py en cada corrida, igual que indice.json; pero dcat.jsonld no
+# es .json, asi que ninguna regla de arriba lo cubria.
+datos/publico/dcat.jsonld merge=ours
 
 # NO entran acá `sitio/index.html`, el `index.html` de la raíz ni el `README.md`:
 # son escritos a mano con partes selladas por una herramienta, y descartar en

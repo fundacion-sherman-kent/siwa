@@ -88,7 +88,7 @@
         '<span class="gs-g">sin costo · sin IA paga</span>' +
         '<button class="gs-x" id="gs-x" aria-label="Cerrar">×</button></div>' +
       '<div class="gs-hilo" id="gs-hilo"></div>' +
-      '<div class="gs-barra"><input id="gs-entrada" autocomplete="off" placeholder="Escribí: corrupción en México">' +
+      '<div class="gs-barra"><input id="gs-entrada" autocomplete="off" placeholder="Escribí: corrupción en México" aria-label="Escribí tu consulta para la Guía SIWA">' +
         '<button id="gs-ir">Ir</button></div>' +
     '</div>';
   function montarDom() { while (raiz.firstChild) document.body.appendChild(raiz.firstChild); }
