@@ -62,6 +62,16 @@ LO QUE SE CORRIGIÓ DEL DIBUJO
   la tarjeta entera, con el número grande y el rótulo abajo: es lo que sigue
   legible cuando la miniatura se muestra a 500 px en una lista.
 - **Un solo filete naranja.** Había dos, arriba y abajo; el manual manda uno.
+
+EL ISOTIPO DE RADAR (24/9/2026, PROTOTIPO)
+-------------------------------------------
+Acta del 24/9/2026: la tarjeta lleva el mismo isotipo de radar de la cabecera
+(`sitio/_comun/cabecera-siwa.js`) pegado a «SIWA» —los mismos tres arcos
+concéntricos de 180° y el punto naranja, con el mismo giro de -15°—, pero con
+la tinta invertida porque acá el fondo es oscuro y «SIWA» ya es blanco: el
+arco más cercano al punto va en blanco, los siguientes se apagan hacia el
+gris claro de la casa, y el punto sigue en naranja. Es la misma geometría,
+no un dibujo nuevo. Ver `_radar()`.
 """
 
 from __future__ import annotations
@@ -154,6 +164,35 @@ def _texto(pincel, xy, texto, fuente, relleno, espaciado=0):
     return x - espaciado - xy[0]
 
 
+def _radar(pincel, centro, radio, colores, giro=-15):
+    """El isotipo de radar de la cabecera —tres arcos de 180° + un punto—,
+    con la MISMA geometría que `sitio/_comun/cabecera-siwa.js` dibuja en SVG:
+
+        <circle r="3.2"/>
+        <path d="M0 -8  A8 8 0 0 1 0 8"  />   (arco al 8/18 del radio)
+        <path d="M0 -13 A13 13 0 0 1 0 13"/>  (arco al 13/18 del radio)
+        <path d="M0 -18 A18 18 0 0 1 0 18"/>  (arco al radio completo)
+        <g transform="rotate(-15)">           (mismo giro, -15°)
+
+    `centro` es el punto naranja (el origen de la cabecera); `radio` es el
+    radio del arco exterior (el "18" del SVG); `colores` son los tres arcos,
+    del más cercano al punto al más lejano. En la cabecera el arco cercano es
+    el más oscuro (NAVY, sobre fondo blanco); en la tarjeta el fondo es
+    oscuro, así que la tinta se invierte: el arco cercano va en blanco y el
+    lejano se apaga hacia el gris claro de la casa. El punto sigue naranja.
+    """
+    cx, cy = centro
+    color_r8, color_r13, color_r18 = colores
+    ancho_trazo = max(3, round(radio * (2 / 18)))
+    inicio, fin = -90 + giro, 90 + giro
+    for proporcion, color in ((8 / 18, color_r8), (13 / 18, color_r13), (18 / 18, color_r18)):
+        r = radio * proporcion
+        caja = [cx - r, cy - r, cx + r, cy + r]
+        pincel.arc(caja, start=inicio, end=fin, fill=color, width=ancho_trazo)
+    r_punto = radio * (3.2 / 18)
+    pincel.ellipse([cx - r_punto, cy - r_punto, cx + r_punto, cy + r_punto], fill=NARANJA)
+
+
 def dibujar() -> pathlib.Path:
     c = _cifras()
     lienzo = Image.new("RGB", (ANCHO, ALTO), NAVY)
@@ -180,7 +219,21 @@ def dibujar() -> pathlib.Path:
         lienzo.paste(logo, (MARGEN + aire, 44 + aire), logo)
 
     # «SIWA» funciona como sello, no como palabra: espaciado ancho y peso alto.
-    _texto(pincel, (MARGEN, 182), "SIWA", _letra(144, 800), BLANCO, espaciado=21)
+    fuente_siwa = _letra(144, 800)
+    xy_siwa = (MARGEN, 182)
+    ancho_siwa = _texto(pincel, xy_siwa, "SIWA", fuente_siwa, BLANCO, espaciado=21)
+
+    # El isotipo de radar, pegado a «SIWA» — acta del 24/9/2026. Mismo dibujo
+    # que la cabecera, tinta invertida porque acá el fondo es oscuro. En la
+    # cabecera el icono mide 1em (el tamaño de letra) y su radio exterior, en
+    # el SVG, es 18 de 40 unidades de viewBox: escalado a 1em da un radio
+    # exterior de 0,45 del tamaño de fuente. Se guarda esa misma proporción.
+    caja_siwa = pincel.textbbox(xy_siwa, "SIWA", font=fuente_siwa)
+    centro_y_siwa = (caja_siwa[1] + caja_siwa[3]) / 2
+    radio_radar = round(144 * 0.45)
+    gap_radar = 34
+    centro_radar = (xy_siwa[0] + ancho_siwa + gap_radar + round(radio_radar * 0.3), centro_y_siwa)
+    _radar(pincel, centro_radar, radio_radar, (BLANCO, CLARO, TENUE))
 
     _texto(pincel, (MARGEN + 4, 352),
            "Reporte de situación de América Latina y el Caribe",
