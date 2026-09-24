@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-09-23T18:21:31+00:00",
+    "obtenido_en": "2026-09-24T06:22:55+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "5 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Contratación pública: HTTPError; ARG/Integridad: HTTPError; ARG/Presupuesto: HTTPError; ARG/Migración y desplazamiento: HTTPError."
+      "3 consultas fallaron en esta corrida: ARG/Delito registrado: HTTPError; ARG/Integridad: HTTPError; ARG/Presupuesto: HTTPError."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -110,14 +110,14 @@
           "cantidad": 146,
           "ejemplos": [
             {
-              "titulo": "DELITOS INFORMÁTICOS",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
-            },
-            {
               "titulo": "DELITOS SEXUALES",
               "organismo": "Observatorio MDN",
               "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
+            },
+            {
+              "titulo": "DELITOS INFORMÁTICOS",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
             },
             {
               "titulo": "Reporte  Delitos sexuales Policía Nacional",
@@ -181,9 +181,9 @@
               "enlace": "https://www.datos.gov.co/d/ha6j-pa2r"
             },
             {
-              "titulo": "Homicidios en el municipio de Neiva",
-              "organismo": "Alcaldía Neiva",
-              "enlace": "https://www.datos.gov.co/d/hk7a-5ix3"
+              "titulo": "Guadalajara de Buga : Homicidios por Accidente de Tránsito",
+              "organismo": "Alcaldía Municipal de Guadalajara de Buga",
+              "enlace": "https://www.datos.gov.co/d/8rme-4s7n"
             }
           ]
         },
@@ -388,7 +388,7 @@
           "materia": "Presupuesto",
           "eje": "Gobernanza",
           "consulta": "presupuesto",
-          "cantidad": 563,
+          "cantidad": 564,
           "ejemplos": [
             {
               "titulo": "Presupuestos Historicos",
@@ -491,7 +491,7 @@
           "ejemplos": []
         }
       ],
-      "conjuntos_hallados": 593
+      "conjuntos_hallados": 594
     },
     {
       "iso": "MEX",
@@ -1121,35 +1121,86 @@
       "portal": "https://datos.gob.ar",
       "materias": [
         {
-          "materia": "Delito registrado",
-          "eje": "Seguridad",
-          "consulta": "delito",
-          "cantidad": 17,
+          "materia": "Contratación pública",
+          "eje": "Gobernanza",
+          "consulta": "contrataciones",
+          "cantidad": 20,
           "ejemplos": [
             {
-              "titulo": "Codificación de delitos del Código Penal Argentino",
-              "organismo": "Ministerio de Justicia",
-              "enlace": "https://datos.gob.ar/dataset/codificacion-de-delitos-del-codigo-penal-argentino"
+              "titulo": "Sistema de Contrataciones Electrónicas",
+              "organismo": "Jefatura de Gabinete de Ministros (JGM)",
+              "enlace": "https://datos.gob.ar/dataset/sistema-de-contrataciones-electronicas"
             },
             {
-              "titulo": "Delitos contra la propiedad. Sistema de Alerta Temprana. Estadísticas criminales",
+              "titulo": "Compras y Contrataciones de ACUMAR",
+              "organismo": "Autoridad de Cuenca Matanza Riachuelo (ACUMAR)",
+              "enlace": "https://datos.gob.ar/dataset/listado-de-compras-y-contrataciones-de-acumar"
+            },
+            {
+              "titulo": "Contrataciones, Compras y Licitaciones de la Superintendencia de Servicios de Salud (SSS)",
+              "organismo": "Ministerio de Salud",
+              "enlace": "https://datos.gob.ar/dataset/contrataciones-compras-y-licitaciones-de-la-superintendencia-de-servicios-de-salud-sss"
+            },
+            {
+              "titulo": "Compras y Contrataciones de Nivel Central",
+              "organismo": "Instituto Nacional de Servicios Sociales para Jubilados y Pensionados (PAMI)",
+              "enlace": "https://datos.gob.ar/dataset/compras-y-contrataciones-de-nivel-central"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 9,
+          "ejemplos": [
+            {
+              "titulo": "Homicidios dolosos. Sistema de Alerta Temprana. Estadísticas criminales en la República Argentina.",
               "organismo": "Ministerio de Seguridad",
-              "enlace": "https://datos.gob.ar/dataset/delitos-contra-la-propiedad-sistema-de-alerta-temprana-estadisticas-criminales"
+              "enlace": "https://datos.gob.ar/dataset/homicidios-dolosos-sistema-de-alerta-temprana-estadisticas-criminales-en-la-republica-argentina"
             },
             {
-              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Orientaciones",
+              "titulo": "Registro, sistematización y seguimiento de femicidios y homicidios agravados por el género",
               "organismo": "Ministerio de Justicia",
-              "enlace": "https://datos.gob.ar/dataset/lucha-contra-la-trata-de-personas-llamados-linea-145-orientaciones"
+              "enlace": "https://datos.gob.ar/dataset/registro-sistematizacion-y-seguimiento-de-femicidios-y-homicidios-agravados-por-el-genero"
             },
             {
-              "titulo": "SNIC - Departamental. Estadísticas criminales en la República Argentina por departamentos",
+              "titulo": "Estadísticas criminales en la República Argentina. Muertes violentas de mujeres",
               "organismo": "Ministerio de Seguridad",
-              "enlace": "https://datos.gob.ar/dataset/snic-departamental-estadisticas-criminales-en-la-republica-argentina-por-departamentos"
+              "enlace": "https://datos.gob.ar/dataset/estadisticas-criminales-en-la-republica-argentina-muertes-violentas-de-mujeres"
+            },
+            {
+              "titulo": "Muertes viales. Sistema de Alerta Temprana. Estadísticas criminales en la República Argentina.",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/muertes-viales-sistema-de-alerta-temprana-estadisticas-criminales-en-la-republica-argentina"
+            }
+          ]
+        },
+        {
+          "materia": "Migración y desplazamiento",
+          "eje": "Inteligencia estratégica",
+          "consulta": "migracion",
+          "cantidad": 3,
+          "ejemplos": [
+            {
+              "titulo": "Crucerismo Marítimo",
+              "organismo": "Subsecretaría de Turismo",
+              "enlace": "https://datos.gob.ar/dataset/crucerismo-maritimo"
+            },
+            {
+              "titulo": "Estructura de poblacion de origen extranjero",
+              "organismo": "Registro Nacional de las Personas (RENAPER)",
+              "enlace": "https://datos.gob.ar/dataset/estructura-de-poblacion-de-origen-extranjero"
+            },
+            {
+              "titulo": "Turismo Internacional - Total País",
+              "organismo": "Subsecretaría de Turismo",
+              "enlace": "https://datos.gob.ar/dataset/turismo-internacional-total-pais"
             }
           ]
         }
       ],
-      "conjuntos_hallados": 17
+      "conjuntos_hallados": 32
     },
     {
       "iso": "PRY",
@@ -1241,7 +1292,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4536,
+    "conjuntos_hallados": 4552,
     "materias_consultadas": 6,
     "oficinas_que_responden": 26,
     "estados_con_alguna_fuente_oficial": 28
@@ -1517,7 +1568,7 @@
       "organismo": "Central Statistical Office",
       "url": "https://cso.gov.tt/",
       "estado": "responde",
-      "codigo": 200
+      "codigo": 202
     }
   ],
   "oficinas_por_estado": {

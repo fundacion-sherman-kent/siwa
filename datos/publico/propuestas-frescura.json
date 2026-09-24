@@ -1,14 +1,14 @@
 {
   "que_es": "Clasifica cada indicador atrasado de SIWA (frescura.json) en cuatro caminos posibles. PROPONE: ninguna fila de este archivo se aplicó sola. Incorporar una fuente, promover una sobre otra o tocar comparabilidad es juicio, y el juicio no se automatiza.",
-  "corrida": "2026-09-24T05:26:03+00:00",
+  "corrida": "2026-09-24T06:24:06+00:00",
   "reloj_disponible_esta_corrida": true,
   "orden_de_exhibicion_disponible_esta_corrida": true,
   "resumen": {
-    "clasificados": 81,
+    "clasificados": 82,
     "promover_hermana_fresca": 0,
     "re_pull_misma_fuente": 0,
     "rezago_de_fuente_ya_investigado": 11,
-    "derivar_a_buscador_externo": 70
+    "derivar_a_buscador_externo": 71
   },
   "propuestas": [
     {
@@ -1112,6 +1112,18 @@
       "rotulo": "Personas que temen ser víctimas de un delito",
       "eje": "Seguridad",
       "fuente_actual": "CEPAL, CEPALSTAT",
+      "anio_actual": 2024,
+      "antiguedad_anios": 2,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+    },
+    {
+      "clave": "termina_secundaria",
+      "rotulo": "Terminan la secundaria",
+      "eje": "Desarrollo",
+      "fuente_actual": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
       "anio_actual": 2024,
       "antiguedad_anios": 2,
       "aplicable_automaticamente": false,

@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "opacidad",
     "capa": "publico",
-    "obtenido_en": "2026-09-23T17:49:02+00:00",
+    "obtenido_en": "2026-09-24T05:49:46+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — Índice de Opacidad, edición cero",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#opacidad"
@@ -68,10 +68,10 @@
         {
           "termino": "Solicitudes de acceso a la información",
           "consulta": "https://catalogodatos.gub.uy/api/3/action/package_search?q=Solicitudes%20de%20acceso%20a%20la%20informaci%C3%B3n&rows=12",
-          "http": null,
-          "devueltos": 0,
-          "pertinentes": 0,
-          "falla": "RemoteDisconnected"
+          "http": 200,
+          "devueltos": 12,
+          "pertinentes": 5,
+          "falla": null
         },
         {
           "termino": "acceso a la información publica estadísticas",
@@ -441,7 +441,7 @@
           "consulta": "https://www.datos.gov.co/api/catalog/v1?q=Solicitudes%20de%20acceso%20a%20la%20informaci%C3%B3n&limit=12",
           "http": 200,
           "devueltos": 12,
-          "pertinentes": 1,
+          "pertinentes": 2,
           "falla": null
         },
         {
@@ -457,7 +457,7 @@
           "consulta": "https://www.datos.gov.co/api/catalog/v1?q=solicitudes%20de%20informaci%C3%B3n%20publica&limit=12",
           "http": 200,
           "devueltos": 12,
-          "pertinentes": 1,
+          "pertinentes": 2,
           "falla": null
         }
       ]
@@ -613,7 +613,7 @@
     "sin_verificar": 28,
     "estados_del_padron": 33,
     "estados_con_portal_consultable": 9,
-    "consultado": "2026-09-23T17:49:02+00:00"
+    "consultado": "2026-09-24T05:49:46+00:00"
   },
   "caidas": [
     "ARG: HTTPError",
@@ -624,7 +624,6 @@
     "PER: HTTPError",
     "PRY: JSONDecodeError",
     "PRY: JSONDecodeError",
-    "PRY: JSONDecodeError",
-    "URY: RemoteDisconnected"
+    "PRY: JSONDecodeError"
   ]
 }
