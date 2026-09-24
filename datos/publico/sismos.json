@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-09-24T12:32:33+00:00",
+    "obtenido_en": "2026-09-24T13:28:10+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**191 de los 314 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**191 de los 315 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece sólo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -527,7 +527,7 @@
       "iso": "VEN",
       "pais": "Venezuela",
       "bloque": "Andina",
-      "sismos": 8,
+      "sismos": 9,
       "mayor_magnitud": 4.7,
       "mayor": {
         "magnitud": 4.7,
@@ -563,6 +563,14 @@
           "tsunami": false
         },
         {
+          "magnitud": 4.6,
+          "lugar": "16 km WNW of Güiria, Venezuela",
+          "cuando": "2026-08-27T12:58:05+00:00",
+          "profundidad_km": 97.913,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tdxa",
+          "tsunami": false
+        },
+        {
           "magnitud": 4.5,
           "lugar": "30 km ENE of Yaguaraparo, Venezuela",
           "cuando": "2026-08-12T08:14:47+00:00",
@@ -576,14 +584,6 @@
           "cuando": "2026-08-02T03:16:44+00:00",
           "profundidad_km": 10.0,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thk4",
-          "tsunami": false
-        },
-        {
-          "magnitud": 4.5,
-          "lugar": "26 km NE of Yaguaraparo, Venezuela",
-          "cuando": "2026-07-13T19:59:53+00:00",
-          "profundidad_km": 88.024,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t06y",
           "tsunami": false
         }
       ]
@@ -900,17 +900,17 @@
     "ventana_dias": 90,
     "desde": "2026-06-26",
     "magnitud_minima": 4.5,
-    "sismos": 314,
-    "en_tierra": 123,
+    "sismos": 315,
+    "en_tierra": 124,
     "mar_adentro": 191,
     "estados_con_sismo": 13,
     "estados_del_padron": 33,
     "por_magnitud": {
-      "4,5 a 4,9": 218,
+      "4,5 a 4,9": 219,
       "5 a 5,9": 91,
       "6 o mayor": 5
     },
-    "consultado": "2026-09-24T12:32:33+00:00"
+    "consultado": "2026-09-24T13:28:10+00:00"
   },
   "mar": {
     "cantidad": 191,
@@ -983,8 +983,8 @@
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2020,
-    "recuadro": 314,
+    "mundo": 2024,
+    "recuadro": 315,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
 }
