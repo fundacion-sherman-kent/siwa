@@ -11,6 +11,12 @@ generador comparte la fuente con tarjetas-por-tema.py y no puede quedar
 desincronizado. Corre en el mismo robot (el control de pantallas), que ya tiene
 el navegador de prueba montado y el registro servido.
 
+Las provincias/departamentos/estados (bloque "unidades", corrección del
+24/9/2026) se leen directo de los MISMOS archivos de datos que alimenta
+sitio/subnacional.html —su propia lista FUENTES—, sin navegador: es más rápido
+y, si algún archivo falta o cambia de forma, el resto del catálogo (temas,
+países, herramientas) sale igual.
+
 QUÉ NO HACE. No inventa sinónimos ni respuestas: el asistente busca por el
 rótulo real y por el slug. Los sinónimos finos y las respuestas frecuentes más
 ricas los puede sumar después el robot con el modelo local; esto asegura, como
@@ -20,11 +26,13 @@ from __future__ import annotations
 
 import json
 import sys
+import unicodedata
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
 RAIZ = AQUI.parent
 SALIDA = RAIZ / "sitio" / "_comun" / "guia-siwa.json"
+DATOS_PUBLICO = RAIZ / "datos" / "publico"
 BASE = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8000"
 
 # Nombre de cada país por su slug de página (sitio/pais/<slug>.html). Si mañana
@@ -76,6 +84,121 @@ FAQ = [
           "Arriba de cada página, «X/X al día» dice cuántas fuentes están al día."},
 ]
 
+# ---------------------------------------------------------------------------
+# Unidades subnacionales (provincia/departamento/estado). Corrección del
+# 24/9/2026: hasta hoy el catálogo del asistente no tenía NINGUNA, así que
+# "córdoba", "jalisco" o "santa fe" (como provincia) no resolvían nada propio
+# y la búsqueda caía sobre países o temas por casualidad de letras.
+#
+# LA MISMA LISTA de archivos que sitio/subnacional.html lee en su propio
+# FUENTES (JS): si esa lista cambia allá, hay que actualizar esta también —
+# es la fuente que el pedido señaló como "los mismos datos que alimentan
+# subnacional.html". No se amplía a otros archivos "subnacional_*.json" del
+# repositorio (hay varios con otro esquema, p. ej. el censo de cobertura o el
+# índice de apertura) porque esos NO son los que arma la vista subnacional.
+UNIDADES_ARCHIVOS = [
+    "subnacional_homicidios.json", "subnacional_robos.json", "subnacional_acled.json",
+    "subnacional_focos.json",
+    "subnacional_colombia_incautacion_basuco.json",
+    "subnacional_colombia_incautacion_cocaina.json",
+    "subnacional_colombia_incautacion_marihuana.json",
+    "subnacional_colombia_incautacion_base_coca.json",
+    "subnacional_colombia_incautacion_insumos_liquidos.json",
+    "subnacional_colombia_secuestro.json", "subnacional_colombia_extorsion.json",
+    "subnacional_colombia_terrorismo.json",
+    "pdh_guatemala_subnacional.json", "subnacional_viales.json",
+]
+
+# Unidades que NO son un territorio del mapa (categorías de la propia fuente):
+# mismo criterio y mismos casos que GEO_SKIP en sitio/subnacional.html. Si se
+# dejaran, el asistente ofrecería "llevarte a la unidad «Sin establecer»",
+# que no existe en ningún mapa.
+UNIDAD_SKIP = {
+    "COL": {"sin establecer"},
+    "URY": {"centros carcelarios"},
+    "DOM": {"san cristonal"},
+}
+
+# Nombre lindo cuando el dato viene como sigla o código: mismo criterio que
+# nombreUnidad() en sitio/subnacional.html.
+BRA_NOM = {
+    "AC": "Acre", "AL": "Alagoas", "AM": "Amazonas", "AP": "Amapá", "BA": "Bahia",
+    "CE": "Ceará", "DF": "Distrito Federal", "ES": "Espírito Santo", "GO": "Goiás",
+    "MA": "Maranhão", "MG": "Minas Gerais", "MS": "Mato Grosso do Sul", "MT": "Mato Grosso",
+    "PA": "Pará", "PB": "Paraíba", "PE": "Pernambuco", "PI": "Piauí", "PR": "Paraná",
+    "RJ": "Rio de Janeiro", "RN": "Rio Grande do Norte", "RO": "Rondônia", "RR": "Roraima",
+    "RS": "Rio Grande do Sul", "SC": "Santa Catarina", "SE": "Sergipe", "SP": "São Paulo",
+    "TO": "Tocantins",
+}
+PER_COD = {
+    "1": "Amazonas", "2": "Ancash", "3": "Apurimac", "4": "Arequipa", "5": "Ayacucho",
+    "6": "Cajamarca", "7": "El Callao", "8": "Cusco", "9": "Huancavelica", "10": "Huanuco",
+    "11": "Ica", "12": "Junin", "13": "La Libertad", "14": "Lambayeque", "16": "Loreto",
+    "17": "Madre de Dios", "18": "Moquegua", "19": "Pasco", "20": "Piura", "21": "Puno",
+    "22": "San Martin", "23": "Tacna", "24": "Tumbes", "25": "Ucayali",
+    "1501": "Municipalidad Metropolitana de Lima", "1599": "Lima",
+}
+
+# Palabras que no llevan mayúscula salvo que abran el nombre — solo para
+# prolijar los nombres que la fuente entrega TODO EN MAYÚSCULAS (Colombia vía
+# Socrata, algunos países en ACLED). No se toca el nombre si ya viene con
+# mayúsculas y minúsculas mezcladas: eso es cosa de la fuente, no del catálogo.
+_CONECTORES = {"de", "del", "la", "las", "los", "y", "en", "el"}
+
+
+def _norm(s: str) -> str:
+    s = unicodedata.normalize("NFD", s or "")
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    return s.lower().strip()
+
+
+def _bonito(nombre: str) -> str:
+    if not nombre or nombre != nombre.upper() or nombre == nombre.lower():
+        return nombre
+    palabras = nombre.split(" ")
+    return " ".join(
+        w.lower() if i > 0 and w.lower() in _CONECTORES else w.capitalize()
+        for i, w in enumerate(palabras)
+    )
+
+
+def unidades_subnacionales() -> list:
+    """Provincias/departamentos/estados YA visibles en sitio/subnacional.html,
+    leídos de sus mismos archivos de datos. Homónimos entre países (p. ej.
+    Córdoba en Argentina y en Colombia) quedan como DOS entradas separadas: el
+    asistente los muestra a los dos, nunca elige uno por su cuenta."""
+    vistos: dict[tuple, dict] = {}
+    for archivo in UNIDADES_ARCHIVOS:
+        ruta = DATOS_PUBLICO / archivo
+        if not ruta.exists():
+            print(f"[guia] {archivo}: no existe, se saltea (no bloquea el resto)", file=sys.stderr)
+            continue
+        try:
+            contenido = json.loads(ruta.read_text(encoding="utf-8"))
+        except Exception as e:  # noqa: BLE001
+            print(f"[guia] {archivo}: no se pudo leer ({e}), se saltea", file=sys.stderr)
+            continue
+        for reg in contenido.get("registros") or []:
+            iso, pais = reg.get("iso"), reg.get("pais")
+            if not iso or not pais:
+                continue
+            for u in reg.get("unidades") or []:
+                crudo = u.get("nombre")
+                if not crudo:
+                    continue
+                n = _norm(crudo)
+                if n in UNIDAD_SKIP.get(iso, set()):
+                    continue
+                if iso == "BRA" and crudo in BRA_NOM:
+                    nombre = BRA_NOM[crudo]
+                elif iso == "PER" and crudo in PER_COD:
+                    nombre = PER_COD[crudo]
+                else:
+                    nombre = _bonito(crudo)
+                clave = (iso, _norm(nombre))
+                vistos.setdefault(clave, {"nombre": nombre, "iso": iso, "pais": pais})
+    return sorted(vistos.values(), key=lambda x: (x["pais"], x["nombre"]))
+
 
 def paises() -> list:
     """Los 33 países, por el slug de su página (sitio/pais/<slug>.html)."""
@@ -126,12 +249,20 @@ def main() -> int:
         print(f"[guia] solo {len(temas)} temas; no se reescribe el catálogo.", file=sys.stderr)
         return 2
 
+    unidades = unidades_subnacionales()
+    if not unidades:
+        # No bloquea (temas/países/herramientas son lo esencial), pero se avisa:
+        # si esto da 0 con los archivos presentes, algo cambió de esquema.
+        print("[guia] 0 unidades subnacionales; se publica igual sin ese bloque.", file=sys.stderr)
+
     catalogo = {
         "generado_nota": "Catálogo del asistente Guía SIWA. Temas tomados del selector "
-                         "del índice (#tema-principal), como las tarjetas por tema.",
+                         "del índice (#tema-principal), como las tarjetas por tema; unidades "
+                         "subnacionales tomadas de los mismos archivos que lee subnacional.html.",
         "ejes_orden": EJES_ORDEN,
         "temas": temas,
         "paises": paises(),
+        "unidades": unidades,
         "herramientas": HERRAMIENTAS,
         "faq": FAQ,
     }
@@ -139,7 +270,7 @@ def main() -> int:
     SALIDA.write_text(json.dumps(catalogo, ensure_ascii=False, separators=(",", ":")),
                       encoding="utf-8")
     print(f"[guia] catálogo escrito: {len(temas)} temas, {len(catalogo['paises'])} países, "
-          f"{len(HERRAMIENTAS)} herramientas.")
+          f"{len(unidades)} unidades subnacionales, {len(HERRAMIENTAS)} herramientas.")
     return 0
 
 

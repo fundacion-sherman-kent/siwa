@@ -1,9 +1,12 @@
 /* Guía SIWA — asistente de navegación. Fuente única.
    Una burbuja fija abajo a la derecha que abre una ventana de chat: conversa,
-   entiende lo que el usuario escribe (tema, país, herramienta o pregunta), lo
-   cruza contra el catálogo real y lo lleva a la página que existe. Corre ENTERO
-   en el navegador: no gasta un solo token, no consulta ninguna IA paga, no manda
-   datos a ningún lado. Nunca inventa: si no encuentra, lo dice.
+   entiende lo que el usuario escribe (tema, país, provincia/departamento/estado,
+   herramienta o pregunta), lo cruza contra el catálogo real y lo lleva a la
+   página que existe. Corre ENTERO en el navegador: no gasta un solo token, no
+   consulta ninguna IA paga, no manda datos a ningún lado. Nunca inventa: si no
+   encuentra, lo dice; y si hay más de un lugar con el mismo nombre (p. ej.
+   Córdoba en Argentina y en Colombia), los muestra a los dos en vez de elegir
+   uno por su cuenta.
    Se carga en cualquier página junto con la franja oficial (cabecera-siwa.js),
    y en el índice con <script defer src="_comun/guia-siwa.js"></script>. */
 (function () {
@@ -93,22 +96,65 @@
   /* ---------- motor ---------- */
   var DATOS = null, hilo, entrada, ctxPais = null, arrancado = false;
 
-  function puntaje(qt, texto) {
-    var t = " " + norm(texto) + " ", p = 0;
-    for (var i = 0; i < qt.length; i++) { var w = qt[i];
-      if (w.length > 2 && t.indexOf(" " + w) >= 0) p += (t.indexOf(" " + w + " ") >= 0 ? 2 : 1); }
-    return p;
+  // Palabras de relleno del español: se descartan del cómputo de cobertura para
+  // que la fracción se mida sobre las palabras que de verdad dicen algo. Si la
+  // consulta queda vacía después de sacarlas (p. ej. el usuario escribió solo
+  // "la"), se usan las palabras originales: es mejor buscar con la palabra
+  // hueca que quedarse sin ninguna.
+  var RELLENO = " que de del la las el los en un una y a al por para con ";
+  function palabrasSignificativas(q) {
+    var todas = q.split(" ").filter(Boolean);
+    var sig = todas.filter(function (w) { return RELLENO.indexOf(" " + w + " ") < 0; });
+    return sig.length ? sig : todas;
   }
-  // busca el mejor ítem en una lista [{slug/archivo, rotulo, s?, eje?}]
+
+  // Corrección del 24/9/2026. Antes: las palabras de 2 letras se ignoraban por
+  // completo (por eso "fe" de "santa fe" no contaba y la consulta quedaba
+  // reducida a "santa", que también matchea "Santa Lucía") y se puntuaba por
+  // aciertos absolutos, no por cuánto de lo que el usuario escribió se explica
+  // con el candidato. Ahora se cuentan, por separado, los aciertos EXACTOS
+  // (palabra completa) y los de PREFIJO, y se miden dos coberturas: la exacta
+  // (para decidir ENTRE categorías —país, tema, unidad— sin que un prefijo le
+  // gane a una palabra completa de otra categoría) y la total, con prefijo
+  // incluido (para elegir el mejor candidato DENTRO de una misma lista, de
+  // respaldo cuando no hay ninguna palabra completa).
+  function coincidencia(qt, texto) {
+    var t = " " + norm(texto) + " ", exactos = 0, hits = 0;
+    for (var i = 0; i < qt.length; i++) {
+      var w = qt[i]; if (!w) continue;
+      if (t.indexOf(" " + w + " ") >= 0) { exactos++; hits++; }
+      else if (w.length > 2 && t.indexOf(" " + w) >= 0) { hits++; }
+    }
+    return { total: qt.length, exactos: exactos, hits: hits };
+  }
+  // DENTRO de una lista: la cobertura total (exacto + prefijo) manda, para no
+  // quedarse sin nada ante una consulta parecida pero no exacta.
+  function puntajeTotal(c) { return c.total ? (c.hits / c.total) * 1000 + c.exactos : 0; }
+  // ENTRE listas distintas (país, tema, unidad, herramienta): sólo cuenta lo
+  // EXACTO —"priorizar coincidencia de palabra completa/exacta por sobre
+  // prefijo"—, para que un prefijo casual (p. ej. "provincia" ante un tema que
+  // dice "observatorio provincial") no le robe la prioridad a la unidad
+  // subnacional que matchea completa.
+  function puntajeExacto(c) { return c.total ? (c.exactos / c.total) * 1000 + c.exactos : 0; }
+
+  // Busca en una lista [{slug/archivo/iso, rotulo/nombre, s?, pais?}] y devuelve
+  // el mejor puntaje MÁS todos los candidatos empatados en ese puntaje. Un
+  // empate real (dos lugares con el mismo nombre, como "Córdoba" en Argentina y
+  // en Colombia, o "San Juan" en Argentina y en República Dominicana) no se
+  // resuelve solo: se avisa y se muestran los dos.
   function mejor(qt, lista, campoClave) {
-    var top = null, mp = 0;
+    var mp = -1, empatados = [], mejorCoin = null;
     for (var i = 0; i < lista.length; i++) {
       var it = lista[i];
-      var texto = (it.rotulo || "") + " " + (it.s || "") + " " + String(it[campoClave] || "").replace(/[_-]/g, " ");
-      var p = puntaje(qt, texto);
-      if (p > mp) { mp = p; top = it; }
+      var texto = (it.rotulo || it.nombre || "") + " " + (it.s || "") + " " + (it.pais || "") + " " +
+        String(it[campoClave] || "").replace(/[_-]/g, " ");
+      var c = coincidencia(qt, texto);
+      if (c.hits <= 0) continue;
+      var p = puntajeTotal(c);
+      if (p > mp) { mp = p; empatados = [it]; mejorCoin = c; }
+      else if (p === mp) { empatados.push(it); }
     }
-    return mp > 0 ? { it: top, p: mp } : null;
+    return mp > 0 ? { it: empatados[0], p: mp, pExacto: puntajeExacto(mejorCoin), empatados: empatados } : null;
   }
 
   function burbuja(clase, html) {
@@ -127,20 +173,32 @@
     return '<a class="gs-card" href="' + url + '"><div class="gs-k">' + k + '</div>' +
       '<div class="gs-v">' + r + ' <span class="gs-ir">↗</span></div></a>';
   }
+  // Muestra TODOS los empatados como tarjetas, en vez de adivinar cuál quiso
+  // decir el usuario. armarCard recibe cada ítem y arma su tarjeta.
+  function mostrarAmbiguedad(intro, empatados, armarCard) {
+    var d = burbuja("gs-bot", intro);
+    empatados.forEach(function (it) { d.innerHTML += armarCard(it); });
+    seguir();
+  }
   // Va DIRECTO al registro con el tema puesto y BAJA al gráfico (#tablero-siwa):
   // el stub t/<slug>.html rebota al índice pero deja al lector arriba de todo, sin
   // ver el gráfico. Con el ancla, aterriza en el tablero, que es lo que pidió.
   var uT = function (s) { return base + "index.html?tema=" + encodeURIComponent(s) + "&nivel=3#tablero-siwa"; };
   var uP = function (s) { return base + "pais/" + s + ".html"; };
   var uH = function (a) { return base + a; };
+  // Corrección del 24/9/2026 (cobertura subnacional): lleva a la capa por
+  // unidad, con el país puesto y el nombre de la unidad en `?unidad=`, que
+  // subnacional.html usa para dejar la búsqueda de la página ya escrita y
+  // resaltada —el mismo mecanismo que el cuadro "Buscar" de esa vista—.
+  var uU = function (u) { return base + "subnacional.html?pais=" + encodeURIComponent(u.iso) + "&unidad=" + encodeURIComponent(u.nombre); };
 
   function saludar() {
     hilo.innerHTML = ""; ctxPais = null;
-    burbuja("gs-bot", "Hola. Soy la guía de SIWA. Te llevo a un tema, a un país o a una herramienta —y te cuento cómo funciona el registro.\n\n¿Por dónde arrancamos?");
+    burbuja("gs-bot", "Hola. Soy la guía de SIWA. Te llevo a un tema, a un país, a una provincia o a una herramienta —y te cuento cómo funciona el registro.\n\n¿Por dónde arrancamos?");
     var chipsEje = DATOS.ejes_orden.map(function (e) { return { t: e, eje: 1, fn: function () { abrirEje(e); } }; });
     chipsEje.push({ t: "Un país", fn: function () {
       burbuja("gs-yo", "Un país");
-      burbuja("gs-bot", "Escribí el país abajo (p. ej. <b>Perú</b>) y te llevo a su ficha. O nombralo con un tema, como <i>“corrupción en México”</i>."); } });
+      burbuja("gs-bot", "Escribí el país abajo (p. ej. <b>Perú</b>) y te llevo a su ficha. O nombralo con un tema, como <i>“corrupción en México”</i>, o con una provincia, como <i>“Antioquia”</i>."); } });
     chipsEje.push({ t: "Herramientas", fn: mostrarHerr });
     chipsEje.push({ t: "¿Qué es SIWA?", fn: function () { responder("que es siwa"); } });
     chips(chipsEje);
@@ -170,6 +228,13 @@
     d.innerHTML += card("País", p.rotulo, uP(p.slug));
     ctxPais = p; seguir();
   }
+  // Cobertura subnacional (24/9/2026): lleva a la provincia/departamento/estado
+  // exacto dentro de la capa subnacional del país correspondiente.
+  function llevarUnidad(u) {
+    var d = burbuja("gs-bot", "Ahí va <b>" + u.nombre + "</b> (" + u.pais + "), en la capa subnacional:");
+    d.innerHTML += card("Provincia / departamento / estado", u.nombre + " — " + u.pais, uU(u));
+    seguir();
+  }
   function seguir() {
     chips([
       { t: "Buscar otra cosa", fn: function () { burbuja("gs-bot", "Dale, escribila abajo."); entrada.focus(); } },
@@ -178,21 +243,49 @@
     ]);
   }
   function responder(texto) {
-    var q = norm(texto), qt = q.split(" ");
+    var q = norm(texto), qt = palabrasSignificativas(q);
     burbuja("gs-yo", texto);
     var ft = null, fp = 0;
-    DATOS.faq.forEach(function (f) { var p = puntaje(qt, f.q); if (p > fp) { fp = p; ft = f; } });
+    DATOS.faq.forEach(function (f) { var p = puntajeTotal(coincidencia(qt, f.q)); if (p > fp) { fp = p; ft = f; } });
+    var tU = mejor(qt, DATOS.unidades || [], "iso");
     var tP = mejor(qt, DATOS.paises, "slug");
     var tT = mejor(qt, DATOS.temas, "slug");
     var tH = mejor(qt, DATOS.herramientas, "archivo");
-    var mx = Math.max(tT ? tT.p : 0, tP ? tP.p : 0);
+    var pU = tU ? tU.p : -1, pP = tP ? tP.p : -1, pT = tT ? tT.p : -1;
+    var mx = Math.max(pT, pP, pU, 0);
     if (ft && fp >= 2 && fp >= mx) { burbuja("gs-bot", ft.r); seguir(); return; }
+
+    // 1) Unidad subnacional, sólo cuando su coincidencia EXACTA (sin prefijos)
+    // explica la consulta mejor que un país o un tema. Así "méxico" —que
+    // empata el país con el estado homónimo por partes iguales— sigue yendo a
+    // la ficha del país, y "santa fe" —que empata la unidad con un tema que
+    // sólo la nombra entre paréntesis— va a la provincia.
+    var pUx = tU ? tU.pExacto : -1, pPx = tP ? tP.pExacto : -1, pTx = tT ? tT.pExacto : -1;
+    if (tU && pUx > pPx && pUx >= pTx) {
+      if (tU.empatados.length > 1) {
+        mostrarAmbiguedad("Hay más de un lugar con ese nombre —tocá el que buscás:", tU.empatados,
+          function (u) { return card("Provincia / departamento / estado", u.nombre + " — " + u.pais, uU(u)); });
+      } else {
+        llevarUnidad(tU.it);
+      }
+      return;
+    }
+
+    // 2) País ambiguo: si el empate lo produce una sola palabra corta y
+    // genérica ("san", "santa"…), no se combina con el tema a ciegas —se
+    // pregunta cuál país— (caso "san juan" cuando la provincia no ganó arriba).
+    if (tP && tP.empatados.length > 1) {
+      mostrarAmbiguedad("Hay más de un país que podría ser —tocá el que buscás:", tP.empatados,
+        function (p) { return card("País", p.rotulo, uP(p.slug)); });
+      return;
+    }
+
     if (tP && tT) { llevarTema(tT.it, tP.it); return; }
     if (tT) { llevarTema(tT.it, ctxPais); return; }
     if (tP) { llevarPais(tP.it); return; }
     if (tH) { var d = burbuja("gs-bot", "Creo que buscás esta herramienta:");
       d.innerHTML += card("Herramienta", tH.it.rotulo, uH(tH.it.archivo)); seguir(); return; }
-    burbuja("gs-bot", "No lo tengo con ese nombre —y prefiero no adivinar. Probá con un tema (homicidios, corrupción, agua potable…), un país, o una herramienta.");
+    burbuja("gs-bot", "No lo tengo con ese nombre —y prefiero no adivinar. Probá con un tema (homicidios, corrupción, agua potable…), un país, una provincia/departamento/estado, o una herramienta.");
     chips([{ t: "Ver los temas", fn: saludar }, { t: "Herramientas", fn: mostrarHerr }]);
   }
 

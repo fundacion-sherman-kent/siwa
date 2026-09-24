@@ -413,6 +413,12 @@ async function arranque(){
   const param = new URL(location.href).searchParams.get('pais');
   const geoP = paisPorContexto();
   ESTADO.pais = (param && paises[param]) ? param : (geoP && paises[geoP]) ? geoP : rico;
+  // Corrección del 24/9/2026: si la Guía SIWA (o cualquier enlace) trae
+  // ?unidad=<nombre>, se precarga en el mismo cuadro "Buscar" que ya filtra
+  // las tarjetas y resalta el territorio en el mapa (pintar(), más abajo) —no
+  // se agrega un mecanismo nuevo, se reutiliza el que ya prueba esta página.
+  const unidadParam = new URL(location.href).searchParams.get('unidad');
+  if (unidadParam) { const campoBuscar = document.getElementById('buscar'); if (campoBuscar) campoBuscar.value = unidadParam; }
   ESTADO.indMapa = 0;
   window.__datos = datos;
   sel.value = ESTADO.pais;
