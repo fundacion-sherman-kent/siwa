@@ -381,7 +381,7 @@ async function renderMapa(datos){
       textStyle:{color:cv('--tinta')}, inRange:{color:RB}, seriesIndex:0},
     geo:{ map:'u_'+iso, roam:true, aspectScale:1,
       itemStyle:{borderColor:cv('--fondo'), borderWidth:.6, areaColor:'rgba(102,123,137,.14)'},
-      emphasis:{label:{show:true,color:cv('--tinta')}, itemStyle:{areaColor:ORANGE}} },
+      emphasis:{label:{show:true,color:cv('--tinta')}, itemStyle:{areaColor:cv('--orange')}} },
     series:[
       {type:'map', geoIndex:0, data:valores},
       {type:'scatter', coordinateSystem:'geo', data:puntos, symbolSize:12, zlevel:2,
