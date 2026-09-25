@@ -394,6 +394,7 @@
   .bloque-bajada b{color:var(--texto);}
   .categoria{
     margin:0 0 26px;padding-left:15px;border-left:2px solid var(--line);
+    scroll-margin-top:96px; /* que el ancla no quede bajo la barra fija */
   }
   .categoria:last-child{margin-bottom:0;}
   .categoria-head{
@@ -17878,6 +17879,125 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     s.src='_comun/guia-siwa.js'+(v?('?v='+v):''); document.head.appendChild(s); }
   fetch('_comun/assets.json',{cache:'no-store'}).then(function(r){return r.json();})
     .then(function(m){ cargar(m&&m['guia-siwa.js']); }).catch(function(){ cargar(); });
+})();
+</script>
+
+<!-- ============================================================
+     CONSULTA RÁPIDA (acta 25/9): al tocar una categoría del panel
+     izquierdo, una tarjeta flotante muestra el dato de ese país+
+     categoría SIN mover la página, con enlace a la sección completa.
+     Lee lo que ya está en la página (no gasta tokens, no pide nada).
+     ============================================================ -->
+<style>
+  .qa-backdrop{position:fixed;inset:0;z-index:1200;display:none;
+    background:rgba(0,18,30,.45);backdrop-filter:blur(2px);
+    align-items:center;justify-content:center;padding:16px;}
+  .qa-backdrop[data-abierto]{display:flex;}
+  .qa-card{background:var(--panel);color:var(--texto);border:1px solid var(--line);
+    border-radius:14px;width:100%;max-width:460px;max-height:82vh;overflow:auto;
+    box-shadow:0 18px 60px rgba(0,18,30,.35);padding:18px 20px 16px;position:relative;
+    font-family:'Inter',system-ui,sans-serif;}
+  .qa-x{position:absolute;top:10px;right:12px;background:transparent;border:0;
+    color:var(--tenue);font-size:22px;line-height:1;cursor:pointer;padding:2px 6px;}
+  .qa-x:hover{color:var(--texto-max);}
+  .qa-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--fusk-violeta,#8C00E0);margin:0 0 2px;}
+  .qa-titulo{font-size:19px;font-weight:800;margin:0 0 2px;padding-right:26px;line-height:1.2;}
+  .qa-sub{font-size:12.5px;color:var(--tenue);margin:0 0 12px;}
+  .qa-lista{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .qa-item{display:flex;flex-direction:column;gap:2px;padding-bottom:9px;
+    border-bottom:1px solid var(--line);}
+  .qa-item:last-child{border-bottom:0;padding-bottom:0;}
+  .qa-item .qa-l{font-size:12.5px;color:var(--texto-2);line-height:1.35;}
+  .qa-item .qa-fila{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .qa-item .qa-v{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:800;
+    color:var(--texto-max);}
+  .qa-item .qa-u{font-size:11.5px;color:var(--tenue);}
+  .qa-fuente{font-size:11.5px;color:var(--tenue);line-height:1.5;margin:0 0 14px;
+    padding-top:10px;border-top:1px solid var(--line);}
+  .qa-acciones{display:flex;gap:10px;flex-wrap:wrap;}
+  .qa-ir{flex:1;text-align:center;background:var(--fusk-violeta,#8C00E0);color:#fff;
+    text-decoration:none;font-weight:700;font-size:13px;padding:10px 14px;border-radius:9px;}
+  .qa-ir:hover{filter:brightness(1.08);}
+  .qa-cerrar2{background:transparent;border:1px solid var(--line);color:var(--texto-2);
+    font-family:'Inter';font-weight:600;font-size:13px;padding:10px 14px;border-radius:9px;cursor:pointer;}
+  .qa-vacio{font-size:13px;color:var(--texto-2);line-height:1.5;margin:0 0 14px;}
+  @media (max-width:560px){
+    .qa-backdrop{align-items:flex-end;padding:0;}
+    .qa-card{max-width:none;border-radius:16px 16px 0 0;max-height:88vh;}
+  }
+  @media (prefers-reduced-motion:reduce){.qa-backdrop{backdrop-filter:none;}}
+</style>
+<div class="qa-backdrop" id="qa-backdrop" role="dialog" aria-modal="true" aria-labelledby="qa-titulo" hidden>
+  <div class="qa-card" id="qa-card"></div>
+</div>
+<script>
+(function(){
+  var bd = document.getElementById('qa-backdrop');
+  var card = document.getElementById('qa-card');
+  if(!bd || !card) return;
+  var rail = document.querySelector('nav.rail') || document.querySelector('nav');
+  if(!rail) return;
+
+  function esCategoria(sec){ return sec && (sec.classList.contains('categoria') || sec.querySelector('.grid-cards .card')); }
+  function txt(el){ return el ? el.textContent.replace(/\s+/g,' ').trim() : ''; }
+  function pais(){ var t=(document.title||'').split('—')[0].trim(); return t && t.toLowerCase().indexOf('siwa')<0 ? t : ''; }
+
+  function abrir(sec, nombre){
+    var cards = [].slice.call(sec.querySelectorAll('.grid-cards .card')).slice(0,8);
+    var p = pais();
+    var sub = (p ? p+' · ' : '') + cards.length + ' indicador' + (cards.length===1?'':'es');
+    var h = '<button class="qa-x" id="qa-x" aria-label="Cerrar">×</button>'
+          + '<p class="qa-eyebrow">Consulta rápida</p>'
+          + '<h3 class="qa-titulo" id="qa-titulo">'+ (nombre||'Categoría') +'</h3>'
+          + '<p class="qa-sub">'+ sub +'</p>';
+    if(cards.length){
+      h += '<ul class="qa-lista">';
+      cards.forEach(function(c){
+        var label = txt(c.querySelector('h4,h3,.dc-rotulo'));
+        var val   = txt(c.querySelector('.value,.dc-cifra'));
+        var subEl = txt(c.querySelector('.sub'));
+        var unidad = subEl ? subEl.split('·')[0].trim() : '';
+        var edad  = c.querySelector('.edad');
+        var edadTxt = edad ? txt(edad) : '';
+        h += '<li class="qa-item"><span class="qa-l">'+ (label||'—') +'</span>'
+           + '<span class="qa-fila"><span class="qa-v">'+ (val||'—') +'</span>'
+           + (unidad? '<span class="qa-u">'+unidad+'</span>':'')
+           + (edadTxt? ' <span class="edad '+(edad.className.indexOf('fresco')>=0?'fresco':edad.className.indexOf('viejo')>=0?'viejo':'medio')+'">'+edadTxt+'</span>':'')
+           + '</span></li>';
+      });
+      h += '</ul>';
+    } else {
+      h += '<p class="qa-vacio">Esta sección no resume un número simple. Abrila para ver el detalle.</p>';
+    }
+    var proc = txt(sec.querySelector('.procedencia'));
+    if(proc) h += '<p class="qa-fuente">'+ proc +'</p>';
+    h += '<div class="qa-acciones">'
+       + '<a class="qa-ir" id="qa-ir" href="#'+ sec.id +'">Ver la sección completa →</a>'
+       + '<button class="qa-cerrar2" id="qa-cerrar2" type="button">Cerrar</button>'
+       + '</div>';
+    card.innerHTML = h;
+    bd.hidden = false; bd.setAttribute('data-abierto','1');
+    document.getElementById('qa-x').addEventListener('click', cerrar);
+    document.getElementById('qa-cerrar2').addEventListener('click', cerrar);
+    document.getElementById('qa-ir').addEventListener('click', function(e){
+      e.preventDefault(); cerrar();
+      var s=document.getElementById(sec.id);
+      if(s){ s.scrollIntoView({behavior:'smooth',block:'start'}); history.replaceState(null,'','#'+sec.id); }
+    });
+    var x=document.getElementById('qa-x'); if(x) x.focus();
+  }
+  function cerrar(){ bd.removeAttribute('data-abierto'); bd.hidden = true; card.innerHTML=''; }
+
+  rail.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if(!a || !rail.contains(a)) return;
+    var id = a.getAttribute('href').slice(1);
+    var sec = id && document.getElementById(id);
+    if(esCategoria(sec)){ e.preventDefault(); abrir(sec, txt(a)); }
+  });
+  bd.addEventListener('click', function(e){ if(e.target===bd) cerrar(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && bd.hasAttribute('data-abierto')) cerrar(); });
 })();
 </script>
 </body>
