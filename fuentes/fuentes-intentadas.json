@@ -1,13 +1,27 @@
 {
   "que_es": "Memoria de fuentes candidatas ya investigadas, para que sondeo.py, explorador.py y el buscador de fuentes (Llama) no repitan un intento que ya tiene resultado conocido. NO es el banco de disponibilidad técnica (eso lo mide sondeo.py, en datos/sondeo.json): esto es la investigación de fondo — licencia, si existe otra puerta, si la fuente misma está detenida — de una fuente o un reemplazo candidato.",
   "como_se_usa": "propuestas-frescura.py cruza `claves_relacionadas` contra el ranking de frescura.json para no proponer una búsqueda externa donde ya se investigó y no hay salida. Un intento sin `claves_relacionadas` es una fuente candidata que todavía no reemplaza ni corrobora ningún indicador publicado.",
-  "resultados_posibles": ["integrada", "rechazada-licencia", "gated", "endpoint-muerto", "rezago-fuente", "no-automatizable", "file-drop-pendiente", "propuesta-sin-evaluar-por-humano", "gated-pendiente-evaluacion-humana"],
+  "resultados_posibles": [
+    "integrada",
+    "rechazada-licencia",
+    "gated",
+    "endpoint-muerto",
+    "rezago-fuente",
+    "no-automatizable",
+    "file-drop-pendiente",
+    "propuesta-sin-evaluar-por-humano",
+    "gated-pendiente-evaluacion-humana",
+    "propuesta-calificada-vale"
+  ],
   "quien_la_mantiene": "Se agrega a mano (o por un agente que investigó en vivo) cuando una investigación llega a veredicto. No la escribe ningún colector: decidir el veredicto es juicio, igual que decidir incorporar. Las dos últimas entradas de `resultados_posibles` (agregadas 24/9/2026) son intermedias: la candidata quedó relevada y encolada para que el buscador la vuelva a proponer, pero todavía nadie la calificó ni la incorporó — a diferencia de las demás, que ya tienen veredicto de fondo cerrado.",
   "actualizado": "2026-09-24",
   "intentos": [
     {
       "nombre": "Base Global de Terrorismo (GTD) — consorcio START, Universidad de Maryland, republicada por Our World in Data",
-      "claves_relacionadas": ["terrorismo_muertes", "terrorismo_atentados"],
+      "claves_relacionadas": [
+        "terrorismo_muertes",
+        "terrorismo_atentados"
+      ],
       "resultado": "rechazada-licencia",
       "fecha": "2026-09-21",
       "detalle": "Se publicaba vía Our World in Data con sello general CC BY, pero la propia página de esta serie aclara que queda sujeta a los términos de licencia del PROVEEDOR ORIGINAL (\"All data and visualizations on Our World in Data...are subject to the license terms from the original providers\"), y la EULA de START prohíbe la redistribución. El sello CC BY de OWD no alcanza para esta serie en particular. RETIRADA de la capa pública el 21/9/2026, no sólo detenida: SIWA venía republicándola sin tener la licencia que hacía falta.",
@@ -17,7 +31,9 @@
     },
     {
       "nombre": "Correlates of War, National Material Capabilities v7.0 — variable «milper» (efectivos militares)",
-      "claves_relacionadas": ["personal_militar"],
+      "claves_relacionadas": [
+        "personal_militar"
+      ],
       "resultado": "rechazada-licencia",
       "fecha": "2026-09-16",
       "detalle": "Cobertura excelente (33 de 33 Estados con dato 2022) pero SIN LICENCIA DECLARADA: el codebook completo (83 páginas) no menciona ningún tipo de licencia abierta, ni CC-BY, ni dominio público; el FAQ de COW sólo pide citar y no cobrar por el acceso, que no es una autorización de redistribución en un tercero. Motivo adicional para sospechar de la licencia real: desde 2002 «milper» se transcribe directamente de IISS, The Military Balance — la misma publicación comercial cuyo cambio de licencia congeló personal_militar del Banco Mundial en 2020. No se integró nada: no hay colector, no se tocó `SERIES_DETENIDAS['personal_militar']['reemplazo']`.",
@@ -27,7 +43,11 @@
     },
     {
       "nombre": "IHME / Global Burden of Disease (GBD) — suicidio, tránsito y mortalidad materna",
-      "claves_relacionadas": ["suicidio", "muertes_transito", "mortalidad_materna"],
+      "claves_relacionadas": [
+        "suicidio",
+        "muertes_transito",
+        "mortalidad_materna"
+      ],
       "resultado": "gated",
       "fecha": "2026-09-13",
       "detalle": "Devolvió 403 desde la red del robot. Sería la única alternativa real a la OMS en estas tres materias (segunda fuente hoy ausente), pero la interfaz exige registro y, además de la puerta técnica cerrada, su licencia es de uso no comercial (NC): no alcanza sin gestión adicional aunque la puerta técnica se resolviera.",
@@ -48,7 +68,9 @@
     },
     {
       "nombre": "Banco Mundial — Rentas de los recursos naturales (rentas_naturales, NY.GDP.TOTL.RT.ZS)",
-      "claves_relacionadas": ["rentas_naturales"],
+      "claves_relacionadas": [
+        "rentas_naturales"
+      ],
       "resultado": "rezago-fuente",
       "fecha": "2026-09-03",
       "detalle": "Se consultó al Banco Mundial y su dato más nuevo para el mundo es de 2021, en 244 países. La serie no avanza desde entonces: no es que el colector se quedó atrás, es que la fuente no publica nada más nuevo.",
@@ -57,7 +79,9 @@
     },
     {
       "nombre": "Banco Mundial — Población en asentamientos precarios (asentamientos, EN.POP.SLUM.UR.ZS)",
-      "claves_relacionadas": ["asentamientos"],
+      "claves_relacionadas": [
+        "asentamientos"
+      ],
       "resultado": "rezago-fuente",
       "fecha": "2026-09-22",
       "detalle": "El dato más nuevo que publica el Banco Mundial/ONU-Hábitat para esta serie es de 2022; no avanzó en la corrida del 22/9/2026. A diferencia de rentas_naturales, esta entrada TODAVÍA NO está declarada en `comun.SERIES_DETENIDAS`: se registra acá como primer hallazgo (rezago observado, no confirmado con una consulta directa a la fuente sobre su año más nuevo mundial) para que no se reintente sin necesidad, y queda pendiente sumarla a SERIES_DETENIDAS si se confirma que el productor no tiene nada más nuevo.",
@@ -77,7 +101,12 @@
     },
     {
       "nombre": "Latinobarómetro — encuesta regional (apoyo a la democracia, confianza institucional, victimización)",
-      "claves_relacionadas": ["confianza_policia", "desconfianza_justicia", "desconfianza_partidos", "confianza_municipio"],
+      "claves_relacionadas": [
+        "confianza_policia",
+        "desconfianza_justicia",
+        "desconfianza_partidos",
+        "confianza_municipio"
+      ],
       "resultado": "file-drop-pendiente",
       "fecha": "2026-09-13",
       "detalle": "Licencia propia: \"Se prohíbe la redistribución: volver a publicar datos del Latinobarómetro en otros sitios web infringe el derecho de propiedad\" (página «agregados», leída el 13/9/2026). La Dirección envió el pedido de autorización el 13/9/2026 y está a la espera de respuesta. Mientras tanto, las cuatro claves de «confianza en las instituciones» se publican vía CEPALSTAT (que sí redistribuye porcentajes agregados de Latinobarómetro con permiso de CEPAL), no directo del productor.",
@@ -87,7 +116,11 @@
     },
     {
       "nombre": "DolarAPI.com — brecha cambiaria oficial/paralelo (AR, CL, VE, UY, MX, BO, BR, CO)",
-      "claves_relacionadas": ["brecha-cambiaria", "entorno-digital", "economia-informal"],
+      "claves_relacionadas": [
+        "brecha-cambiaria",
+        "entorno-digital",
+        "economia-informal"
+      ],
       "resultado": "propuesta-sin-evaluar-por-humano",
       "fecha": "2026-09-24",
       "detalle": "API REST sin clave, licencia MIT (dolarapi.com/docs, repo GitHub enzonotario/dolarapi.com). Cubre 8 de 33 Estados de ALC; no existe en SIWA ninguna fuente equivalente (colectores/brecha.py mide otra cosa: brecha de transparencia vía ACLED, no tipo de cambio). Propuesta por osint-profundo el 24/9/2026, encolada para calificación humana; no evaluada licencia por dataset ni cobertura fuera de los 8 países.",
@@ -96,7 +129,9 @@
     },
     {
       "nombre": "elToque.com — tasa de cambio informal Cuba (TRMI)",
-      "claves_relacionadas": ["brecha-cambiaria"],
+      "claves_relacionadas": [
+        "brecha-cambiaria"
+      ],
       "resultado": "propuesta-sin-evaluar-por-humano",
       "fecha": "2026-09-24",
       "detalle": "Complementa a DolarAPI.com para Cuba, único país relevante que ese servicio no cubre. La fuente declara haber abierto acceso a su API de tasas; términos de republicación NO verificados en esta sesión (búsqueda web únicamente, sin lectura directa de contrato de licencia).",
@@ -105,7 +140,12 @@
     },
     {
       "nombre": "Banco Central de Brasil — Dados Abertos (portal CKAN)",
-      "claves_relacionadas": ["padron-oficiales", "brasil", "gasto-publico", "economia"],
+      "claves_relacionadas": [
+        "padron-oficiales",
+        "brasil",
+        "gasto-publico",
+        "economia"
+      ],
       "resultado": "propuesta-sin-evaluar-por-humano",
       "fecha": "2026-09-24",
       "detalle": "Ausente de colectores/oficiales.json (verificado en vivo 24/9/2026); es el único de los ocho portales nacionales tipo CKAN que falta agregar para Brasil (que hoy solo tiene registrado IBGE como oficina de estadística). Confirmado como CKAN por patrón de URL /dataset/?res_format=API. Licencia de reuso por dataset no localizada en la página consultada.",
@@ -114,7 +154,11 @@
     },
     {
       "nombre": "Câmara dos Deputados (Brasil) — Dados Abertos, API REST/Swagger",
-      "claves_relacionadas": ["gobernanza", "brasil", "legislativo"],
+      "claves_relacionadas": [
+        "gobernanza",
+        "brasil",
+        "legislativo"
+      ],
       "resultado": "propuesta-sin-evaluar-por-humano",
       "fecha": "2026-09-24",
       "detalle": "API REST propia con Swagger, sin clave. Datos legislativos (proposiciones, votaciones, gastos de bancada, contratos/licitaciones de la Cámara) que hoy no mide SIWA para Brasil. NO es CKAN/Socrata: no la descubre el mecanismo genérico de buscador_llama; requeriría colector dedicado (fuera de alcance de este puesto: no se construye colector). Licencia de reuso no localizada en la documentación consultada.",
@@ -123,7 +167,12 @@
     },
     {
       "nombre": "INEI Perú — microdatos (sistema ANDA/IHSN)",
-      "claves_relacionadas": ["peru", "desarrollo", "pobreza", "censo"],
+      "claves_relacionadas": [
+        "peru",
+        "desarrollo",
+        "pobreza",
+        "censo"
+      ],
       "resultado": "gated-pendiente-evaluacion-humana",
       "fecha": "2026-09-24",
       "detalle": "Distinto del portal general inei.gob.pe (ya registrado en oficiales.json). Portal de descarga por encuesta (ENAHO, ENDES, CENAGRO, etc.) en formatos SPSS/Excel, con secreto estadístico declarado; patrón 'gated' equivalente a WJP/Latinobarómetro antes de su automatización. Conexión HTTPS directa a proyectos.inei.gob.pe/microdatos falló (ECONNREFUSED) en esta sesión; caracterización basada en resultados de búsqueda, no en visita directa. Posible redundancia con colectores/pobreza.py y censo_subnacional.py ya existentes: verificar antes de insistir.",
@@ -142,6 +191,54 @@
       "fecha": "2026-09-25",
       "detalle": "Par natural de INEI Perú (ya registrada): punto de acceso a la expansión subnacional de México, pendiente por licencia/decodificación (SESNSP sin licencia explícita; diccionario CEIC sin decodificar — ver memoria siwa-subnacional-expansion). Dos puertas: INEGI (inegi.org.mx, estadística oficial con API de indicadores) y datos.gob.mx (portal de datos abiertos del gobierno federal). Aparece en el volcado de public-apis del 24/9. NO verificado en vivo en esta sesión: caracterización basada en la lista de public-apis y en la memoria de la expansión subnacional. Antes de incorporar: confirmar licencia de cada dataset (INEGI declara términos propios, no CC automática) y cobertura por entidad federativa.",
       "evidencia": "candidatas-api/candidatas.md (public-apis 24/9/2026); memoria siwa-subnacional-expansion; no verificado en vivo",
+      "reintentar": true
+    },
+    {
+      "nombre": "SIACAM + Secretaría de Energía (Argentina) — recursos estratégicos: litio, minerales, petróleo y gas",
+      "claves_relacionadas": [
+        "minerales",
+        "produccion_litio",
+        "exporta_combustibles",
+        "produccion_petroleo",
+        "reservas_petroleo"
+      ],
+      "resultado": "propuesta-calificada-vale",
+      "fecha": "2026-09-25",
+      "detalle": "Del buscador Llama (17-22/9), CALIFICADA por la Oficina el 25/9 como la más valiosa de la tanda: recursos estratégicos, prioridad regional (el litio es el triángulo ARG-CHL-BOL). Portales oficiales datos.gob.ar (Secretaría de Minería, sistema SIACAM) y Secretaría de Energía, en CSV, enlaces que responden (206/200). Es dato de ARGENTINA (alimenta su celda), no una serie comparable de los 33. Pendiente: construir colector y CONFIRMAR LICENCIA en la incorporación (datos.gob.ar suele ser CC-BY).",
+      "evidencia": "rama propuestas-llama, 2026-09-21/22; datos.gob.ar/dataset/exportaciones-argentinas-de-litio-siacam; comprobación del robot: responde 206 text/csv",
+      "reintentar": true
+    },
+    {
+      "nombre": "SECOP II — Agencia Nacional de Contratación Pública (Colombia), contratación abierta (OCDS)",
+      "claves_relacionadas": [
+        "contrataciones_abiertas"
+      ],
+      "resultado": "propuesta-calificada-vale",
+      "fecha": "2026-09-25",
+      "detalle": "Del buscador Llama (23/9), calificada el 25/9: estándar OCDS de contratación abierta, fuente de referencia de transparencia. datos.gov.co, CSV, responde 200. Pendiente: colector + licencia. ANTES de duplicar, verificar si SIWA ya toma OCDS regional para contrataciones_abiertas.",
+      "evidencia": "rama propuestas-llama, 2026-09-23; datos.gov.co/d/b6m4-qgqv; responde 200 text/csv",
+      "reintentar": true
+    },
+    {
+      "nombre": "Autoridad Marítima de Panamá (AMP) — movimiento de contenedores del Sistema Portuario Nacional",
+      "claves_relacionadas": [
+        "puertos_contenedores"
+      ],
+      "resultado": "propuesta-calificada-vale",
+      "fecha": "2026-09-25",
+      "detalle": "Del buscador Llama (17/9), calificada el 25/9: logística del canal de Panamá, punto estratégico del comercio global. datosabiertos.gob.pa, enlace responde. Varias tablas (por destino/tipo/TEU) de una misma fuente. Pendiente: colector + licencia.",
+      "evidencia": "rama propuestas-llama, 2026-09-17; datosabiertos.gob.pa/dataset/amp-movimiento-de-contenedores-en-el-spn...; responde",
+      "reintentar": true
+    },
+    {
+      "nombre": "INAPI (Chile) — registros y solicitudes de patentes",
+      "claves_relacionadas": [
+        "patentes_residentes"
+      ],
+      "resultado": "propuesta-calificada-vale",
+      "fecha": "2026-09-25",
+      "detalle": "Del buscador Llama (22/9), calificada el 25/9: puede REFRESCAR «solicitudes de patente de residentes», hoy atrasado (2021). datos.gob.cl, xlsx, responde 206. OJO: SIWA usa una serie regional (WIPO/Banco Mundial) para patentes; esto es Chile solo — evaluar como segunda fuente o refresco puntual, NO reemplazo de la serie comparable. Pendiente: colector + licencia.",
+      "evidencia": "rama propuestas-llama, 2026-09-22; datos.gob.cl/dataset/registros-de-patentes; responde 206 xlsx",
       "reintentar": true
     }
   ]
