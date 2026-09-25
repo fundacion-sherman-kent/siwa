@@ -43,7 +43,7 @@
     "font-family:'Inter',system-ui,sans-serif;color:#12212b;}" +
   ".gs-on .gs-pop{display:flex;}" +
   ".gs-tope{background:#00121E;color:#fff;padding:13px 15px;display:flex;align-items:center;gap:9px;}" +
-  ".gs-tope .gs-p{width:9px;height:9px;border-radius:50%;background:#3FA796;box-shadow:0 0 0 3px rgba(63,167,150,.25);}" +
+  ".gs-tope .gs-p{width:9px;height:9px;border-radius:50%;background:#8C00E0;box-shadow:0 0 0 3px rgba(140,0,224,.25);}" +
   ".gs-tope .gs-t{font-weight:700;font-size:14px;}" +
   ".gs-tope .gs-g{margin-left:auto;font-size:10.5px;color:#9fb2be;}" +
   ".gs-tope .gs-x{background:transparent;border:0;color:#9fb2be;font-size:20px;cursor:pointer;line-height:1;margin-left:6px;font-family:inherit;}" +

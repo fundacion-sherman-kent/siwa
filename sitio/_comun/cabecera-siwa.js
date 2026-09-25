@@ -33,8 +33,8 @@
       "padding:6px 14px;font:inherit;font-size:11.5px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;min-height:34px;text-decoration:none;}" +
     ".siwa-pill:hover{border-color:#00121E;}" +
     ".siwa-estado{display:inline-flex;align-items:center;white-space:nowrap;}" +
-    ".siwa-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3FA796;margin-right:6px;box-shadow:0 0 8px #3FA796;}" +
-    ".siwa-dot.mal{background:#C23B22;box-shadow:0 0 8px #C23B22;}" +
+    ".siwa-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8C00E0;margin-right:6px;box-shadow:0 0 8px #8C00E0;}" +
+    ".siwa-dot.mal{background:#FB6500;box-shadow:0 0 8px #FB6500;}" +
     ".siwa-mono{font-family:'JetBrains Mono',ui-monospace,monospace;white-space:nowrap;}" +
     ".siwa-mono b{font-weight:600;}" +
     "@media(max-width:760px){.siwa-topbar{padding:8px 14px;gap:10px;}.siwa-topbar .brand img{height:44px;}" +

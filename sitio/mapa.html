@@ -10,11 +10,11 @@
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <script src="lib/echarts.min.js"></script>
 <style>
-  :root{--orange:#FB6500;--verde:#3FA796;--rojo:#C23B22;
+  :root{--orange:#FB6500;--verde:#8C00E0;--rojo:#FB6500;
     --fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;--linea:#d7dce3;--caja:#ffffff;--navy:#00121E;}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
-    --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#3FA796;--rojo:#C23B22;}}
-  :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#3FA796;--rojo:#C23B22;}
+    --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#8C00E0;--rojo:#FB6500;}}
+  :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#8C00E0;--rojo:#FB6500;}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--fondo);color:var(--tinta);
     font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5;}
@@ -87,8 +87,8 @@
   <div class="filete"></div>
   <h1>Mapa de <b>opacidad</b> · América Latina y el Caribe</h1>
   <p class="bajada">Los 33 Estados coloreados por el <b>Índice de Opacidad</b>: cuán difícil es
-     obtener del Estado la información que debería ser pública. <b>Verde = transparente (0),
-     rojo = opaco (100).</b> Pasá el mouse por un país para ver su puntaje y su puesto.</p>
+     obtener del Estado la información que debería ser pública. <b>Claro = transparente (0),
+     violeta oscuro = opaco (100).</b> Pasá el mouse por un país para ver su puntaje y su puesto.</p>
   <div class="controles">
     <span class="fecha" id="rango" style="color:var(--tenue);font-size:13px;margin-left:auto;"></span>
   </div>
@@ -125,7 +125,7 @@ function pintar(){
     visualMap:{min:0, max:100, left:14, bottom:20, calculable:true,
       text:['opaco (100)','transparente (0)'],
       textStyle:{color:cssvar('--tinta')},
-      inRange:{color:[cssvar('--verde'),cssvar('--orange'),cssvar('--rojo')]}},
+      inRange:{color:['#F9F9F7','#BA66EC','#8C00E0','#460070','#00121E']}},
     series:[{type:'map', map:'alc', roam:true, name:'Opacidad',
       label:{show:false}, aspectScale:1,
       itemStyle:{borderColor:cssvar('--fondo'), borderWidth:.7},
