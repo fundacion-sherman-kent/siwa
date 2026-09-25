@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-25T07:27:38+00:00",
+  "corrida": "2026-09-25T08:28:49+00:00",
   "medidas_con_suficientes_casos": 206,
   "pares_probados": 21115,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3907,
+    "sobreviven": 3912,
     "de_ellos_son_parentescos": 410
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3497,
+  "pistas_totales": 3502,
   "anomalias_totales": 384,
   "pistas": [
     {
@@ -233,10 +233,10 @@
       "b": "superficie",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.939,
+      "coeficiente": 0.941,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 2.9550604820416193e-21,
+      "p": 1.0050067501826927e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -697,14 +697,27 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.893,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.894462643889987e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "focos:focos",
       "b": "perdida_bosque",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.89,
+      "coeficiente": 0.891,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 7.0690915841837005e-15,
+      "p": 6.1145049109471705e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 2.220061914883335e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "poblacion",
-      "b": "reservas_internacionales",
-      "rotulo_a": "Población total",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.885,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 3.565480405450303e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
