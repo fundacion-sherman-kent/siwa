@@ -257,6 +257,24 @@
   }
   #estado-general.detenido .status-dot{background:#fff;box-shadow:none;}
 
+  /* LA BARRA DE ESTADO HONESTA - acta 24/9/2026, S2: "sube de nivel de
+     interfaz tomando Crucix (terminal libre, AGPL) como referencia". Se toma
+     el genero (una linea de estado sobria en el encabezado), no el look: sin
+     verde de terminal ni medidor de aguja, fondo claro de la casa, una sola
+     tipografia. Los tres numeros salen del mismo reloj-actualidad.json que ya
+     alimenta el boton "Actualidad", sin pedirlo dos veces. Si un dato no
+     llego, dice "sin dato": no se inventa (regla 4 y 8 de la casa). */
+  .franja-estado{
+    padding:6px 28px;background:var(--panel);border-bottom:1px solid var(--line);
+    font-size:11.5px;color:var(--texto-2);
+  }
+  .franja-estado .fe-fila{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;
+    gap:5px 14px;align-items:baseline;}
+  .franja-estado b{font-family:'JetBrains Mono',monospace;font-weight:600;
+    color:var(--texto-alto);font-variant-numeric:tabular-nums;}
+  @media(min-width:1500px){.franja-estado .fe-fila{max-width:1460px;}}
+  @media(max-width:560px){.franja-estado{padding:6px 17px;}}
+
   /* EL FONDO CRUZA LA PANTALLA; lo que se limita es el CONTENIDO. Con
      max-width en la franja quedaban dos márgenes claros a los costados y
      parecía una tarjeta, no una franja. */
@@ -1379,6 +1397,9 @@
   .dc-rotulo{font-size:12.5px;color:var(--texto);margin-top:6px;line-height:1.45;}
   .dc-puesto{font-size:11px;color:var(--tenue);margin-top:5px;}
   .dc-leer{font-size:11px;color:var(--texto-2);margin-top:4px;}
+  /* SIN DATO, con el mismo punteado que ya significa eso en .ay-colores .c-sin. */
+  .dc.dc-sin{border-style:dashed;border-color:var(--line);background:var(--sin-dato);}
+  .dc.dc-sin .dc-cifra{color:var(--tenue);}
   .cuando-dato{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
     padding:1px 6px;border-radius:999px;margin-left:4px;vertical-align:middle;}
   .cuando-dato.fresco{background:rgba(63,167,150,.18);color:var(--t-ok);}
@@ -2358,6 +2379,13 @@
             aria-haspopup="dialog">Actualidad —</button>
     <span class="mono" id="reloj" title="Hora universal (UTC) y hora de tu dispositivo">—</span>
   </div>
+</div>
+
+<!-- LA BARRA DE ESTADO HONESTA. Oculta hasta que llegue el dato real: no se
+     inventa un "al día" mientras se espera la respuesta (misma regla que ya
+     usa el boton "Actualidad", mas abajo). -->
+<div class="franja-estado" id="franja-estado" hidden>
+  <p class="fe-fila" id="fe-fila">—</p>
 </div>
 
 <div class="hero">
@@ -4507,6 +4535,21 @@
     boton.textContent = s.al_dia + '/' + s.comprobados + ' al día';
     boton.title = 'Indicadores con lo último que publica su fuente. Último control: ' + control;
     boton.hidden = false;
+    // LA BARRA DE ESTADO HONESTA: mismo objeto c, sin pedirlo de nuevo.
+    // Ultima vez que corrio el control, cuanto tardo esa corrida y cuantas
+    // fuentes respondieron de cuantas. Lo que falte, se declara "sin dato":
+    // no se inventa (acta 24/9/2026).
+    const franja = document.getElementById('franja-estado');
+    const fila = document.getElementById('fe-fila');
+    if(franja && fila){
+      const dur = (typeof c.duracion_segundos === 'number') ? c.duracion_segundos + ' s' : 'sin dato';
+      const totalFuentes = (s.comprobados != null)
+        ? s.comprobados + (s.no_comprobado || 0) : null;
+      const fuentes = totalFuentes ? s.comprobados + '/' + totalFuentes : 'sin dato';
+      fila.innerHTML = 'Último control: <b>' + control + '</b> · la corrida tardó <b>'
+        + dur + '</b> · <b>' + fuentes + '</b> fuentes respondieron';
+      franja.hidden = false;
+    }
     const nombres = {al_dia:'al día', siwa_atrasado:'la fuente tiene algo más nuevo', no_comprobado:'sin comprobar'};
     const orden = {siwa_atrasado:0, no_comprobado:1, al_dia:2};
     const filas = (c.comprobaciones||[]).slice().sort((a,b)=>orden[a.estado]-orden[b.estado]).map(x =>
@@ -7510,7 +7553,16 @@
     const cap = (capas() || {})[clave];
     if(!cap || !cap.conteo || !paisFiltro) return null;
     const v = (cap.conteo() || {})[paisFiltro];
-    if(v === undefined) return null;
+    // EL HUECO SE ESCRIBE, NO SE CALLA (acta 24/9/2026). El tema existe y se
+    // mide en la region -cap existe- pero este pais no tiene valor: antes la
+    // fila desaparecia entera y el bloque completo podia esconderse sin decir
+    // por que. Ahora queda el rotulo, con "sin dato" explicito y el mismo
+    // punteado que ya significa lo mismo en el resto del registro (.c-sin).
+    if(v === undefined){
+      return '<div class="dc dc-sin"><div class="dc-cifra">—<small>sin dato</small></div>'
+        + '<div class="dc-rotulo">' + esc(rotulo) + '</div>'
+        + '<div class="dc-leer">Nadie lo midió para este país, o no llegó al registro.</div></div>';
+    }
     const d = datoDeMateria(clave, paisFiltro);
     const anio = (d && d.anio) || (typeof cap.periodo === 'function'
       ? String(cap.periodo()).split('–').pop() : '');
@@ -7577,7 +7629,11 @@
       '<p class="fc-nota">Sale de encuestas a los hogares: dice lo que las personas '
       + '<b>declaran</b>, no lo que ocurrió. Un país puede tener pocos delitos y gente que '
       + 'no sale de noche, y al revés.</p></div>'].join('');
-    const hayLoQueSiente = /class="dc"/.test(siente);
+    // OJO: la tarjeta "sin dato" lleva class="dc dc-sin", no class="dc"
+    // exacto. Con la comilla pegada, un bloque donde TODO esta sin dato se
+    // volvia a esconder entero -el caso justo que hay que declarar-. Se
+    // acepta la comilla o un espacio despues de "dc" (acta 24/9/2026).
+    const hayLoQueSiente = /class="dc[\s"]/.test(siente);
 
     // 3. Lo que cuentan los registros.
     const cuenta = ['<div class="fc-bloque"><h4>Lo que cuentan los registros</h4>',
@@ -7594,7 +7650,7 @@
       '<p class="fc-nota">Son recuentos oficiales, con el año en que se midió. '
       + 'Un año viejo no es un dato de hoy: por eso está escrito. Cuando el propio país ya '
       + 'publicó un año más nuevo que la serie comparable, va primero.</p></div>'].join('');
-    const hayLoQueCuenta = /class="dc"/.test(cuenta);
+    const hayLoQueCuenta = /class="dc[\s"]/.test(cuenta);
 
     return '<div class="ficha-ciudadana">'
       + '<div class="fc-cab"><h3>' + esc(p.pais || iso) + '</h3>'

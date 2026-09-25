@@ -1,9 +1,9 @@
 {
   "que_es": "Memoria de fuentes candidatas ya investigadas, para que sondeo.py, explorador.py y el buscador de fuentes (Llama) no repitan un intento que ya tiene resultado conocido. NO es el banco de disponibilidad técnica (eso lo mide sondeo.py, en datos/sondeo.json): esto es la investigación de fondo — licencia, si existe otra puerta, si la fuente misma está detenida — de una fuente o un reemplazo candidato.",
   "como_se_usa": "propuestas-frescura.py cruza `claves_relacionadas` contra el ranking de frescura.json para no proponer una búsqueda externa donde ya se investigó y no hay salida. Un intento sin `claves_relacionadas` es una fuente candidata que todavía no reemplaza ni corrobora ningún indicador publicado.",
-  "resultados_posibles": ["integrada", "rechazada-licencia", "gated", "endpoint-muerto", "rezago-fuente", "no-automatizable", "file-drop-pendiente"],
-  "quien_la_mantiene": "Se agrega a mano (o por un agente que investigó en vivo) cuando una investigación llega a veredicto. No la escribe ningún colector: decidir el veredicto es juicio, igual que decidir incorporar.",
-  "actualizado": "2026-09-22",
+  "resultados_posibles": ["integrada", "rechazada-licencia", "gated", "endpoint-muerto", "rezago-fuente", "no-automatizable", "file-drop-pendiente", "propuesta-sin-evaluar-por-humano", "gated-pendiente-evaluacion-humana"],
+  "quien_la_mantiene": "Se agrega a mano (o por un agente que investigó en vivo) cuando una investigación llega a veredicto. No la escribe ningún colector: decidir el veredicto es juicio, igual que decidir incorporar. Las dos últimas entradas de `resultados_posibles` (agregadas 24/9/2026) son intermedias: la candidata quedó relevada y encolada para que el buscador la vuelva a proponer, pero todavía nadie la calificó ni la incorporó — a diferencia de las demás, que ya tienen veredicto de fondo cerrado.",
+  "actualizado": "2026-09-24",
   "intentos": [
     {
       "nombre": "Base Global de Terrorismo (GTD) — consorcio START, Universidad de Maryland, republicada por Our World in Data",
@@ -84,6 +84,51 @@
       "evidencia": "fuentes/catalogo-siwa.md, líneas 797-805 (ClaudeGral); direccion/instructivos/latinobarometro-permiso-siwa.md (ClaudeGral)",
       "reintentar": false,
       "nota_reintento": "No corresponde a sondeo.py ni al buscador: es una carta enviada, en espera de respuesta de la organización. Reintentar cuando llegue la respuesta, no antes."
+    },
+    {
+      "nombre": "DolarAPI.com — brecha cambiaria oficial/paralelo (AR, CL, VE, UY, MX, BO, BR, CO)",
+      "claves_relacionadas": ["brecha-cambiaria", "entorno-digital", "economia-informal"],
+      "resultado": "propuesta-sin-evaluar-por-humano",
+      "fecha": "2026-09-24",
+      "detalle": "API REST sin clave, licencia MIT (dolarapi.com/docs, repo GitHub enzonotario/dolarapi.com). Cubre 8 de 33 Estados de ALC; no existe en SIWA ninguna fuente equivalente (colectores/brecha.py mide otra cosa: brecha de transparencia vía ACLED, no tipo de cambio). Propuesta por osint-profundo el 24/9/2026, encolada para calificación humana; no evaluada licencia por dataset ni cobertura fuera de los 8 países.",
+      "evidencia": "https://dolarapi.com/docs/ ; https://github.com/enzonotario/dolarapi.com ; verificado en vivo 24/9/2026",
+      "reintentar": true
+    },
+    {
+      "nombre": "elToque.com — tasa de cambio informal Cuba (TRMI)",
+      "claves_relacionadas": ["brecha-cambiaria"],
+      "resultado": "propuesta-sin-evaluar-por-humano",
+      "fecha": "2026-09-24",
+      "detalle": "Complementa a DolarAPI.com para Cuba, único país relevante que ese servicio no cubre. La fuente declara haber abierto acceso a su API de tasas; términos de republicación NO verificados en esta sesión (búsqueda web únicamente, sin lectura directa de contrato de licencia).",
+      "evidencia": "https://eltoque.com/eltoque-abre-acceso-a-su-api-de-las-tasas-de-cambio ; no verificado en vivo, solo por búsqueda",
+      "reintentar": true
+    },
+    {
+      "nombre": "Banco Central de Brasil — Dados Abertos (portal CKAN)",
+      "claves_relacionadas": ["padron-oficiales", "brasil", "gasto-publico", "economia"],
+      "resultado": "propuesta-sin-evaluar-por-humano",
+      "fecha": "2026-09-24",
+      "detalle": "Ausente de colectores/oficiales.json (verificado en vivo 24/9/2026); es el único de los ocho portales nacionales tipo CKAN que falta agregar para Brasil (que hoy solo tiene registrado IBGE como oficina de estadística). Confirmado como CKAN por patrón de URL /dataset/?res_format=API. Licencia de reuso por dataset no localizada en la página consultada.",
+      "evidencia": "https://dadosabertos.bcb.gov.br/ ; https://dadosabertos.bcb.gov.br/dataset/?res_format=API",
+      "reintentar": true
+    },
+    {
+      "nombre": "Câmara dos Deputados (Brasil) — Dados Abertos, API REST/Swagger",
+      "claves_relacionadas": ["gobernanza", "brasil", "legislativo"],
+      "resultado": "propuesta-sin-evaluar-por-humano",
+      "fecha": "2026-09-24",
+      "detalle": "API REST propia con Swagger, sin clave. Datos legislativos (proposiciones, votaciones, gastos de bancada, contratos/licitaciones de la Cámara) que hoy no mide SIWA para Brasil. NO es CKAN/Socrata: no la descubre el mecanismo genérico de buscador_llama; requeriría colector dedicado (fuera de alcance de este puesto: no se construye colector). Licencia de reuso no localizada en la documentación consultada.",
+      "evidencia": "https://dadosabertos.camara.leg.br/swagger/api.html",
+      "reintentar": true
+    },
+    {
+      "nombre": "INEI Perú — microdatos (sistema ANDA/IHSN)",
+      "claves_relacionadas": ["peru", "desarrollo", "pobreza", "censo"],
+      "resultado": "gated-pendiente-evaluacion-humana",
+      "fecha": "2026-09-24",
+      "detalle": "Distinto del portal general inei.gob.pe (ya registrado en oficiales.json). Portal de descarga por encuesta (ENAHO, ENDES, CENAGRO, etc.) en formatos SPSS/Excel, con secreto estadístico declarado; patrón 'gated' equivalente a WJP/Latinobarómetro antes de su automatización. Conexión HTTPS directa a proyectos.inei.gob.pe/microdatos falló (ECONNREFUSED) en esta sesión; caracterización basada en resultados de búsqueda, no en visita directa. Posible redundancia con colectores/pobreza.py y censo_subnacional.py ya existentes: verificar antes de insistir.",
+      "evidencia": "búsqueda web 24/9/2026; conexión directa fallida; no verificado en vivo",
+      "reintentar": true
     }
   ]
 }
