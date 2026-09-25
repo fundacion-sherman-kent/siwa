@@ -94,6 +94,11 @@
     <p>visualMap claro→navy (muestra)</p>
     <div class="g" id="g-rampa"></div>
   </div>
+  <div class="tarjeta">
+    <h2>Bueno / malo · en colores de la casa</h2>
+    <p>Reemplaza el semáforo verde-rojo. Cambio interanual (muestra)</p>
+    <div class="g" id="g-semaforo"></div>
+  </div>
 </div>
 
 <div class="pie">Prototipo interno de la Oficina · ECharts 5.6.0 servido por la casa ·
@@ -192,7 +197,29 @@
         xAxis:{type:'category',data:paises,axisLabel:{interval:0,rotate:30}},
         yAxis:{type:'value'},
         series:[{type:'bar',data:homi,barWidth:'56%'}]
-      }
+      },
+      'g-semaforo': (function(){
+        // Reemplazo del semáforo verde-rojo con colores de la casa:
+        // empeora -> naranja (señal), mejora -> violeta (marca), igual -> gris azul.
+        var MEJORA = T.paleta.purpura, EMPEORA = SENAL, IGUAL = T.paleta.grisAzul;
+        var cambio = [-8, 3, -2, 12, -5, 0, 18]; // % interanual (muestra)
+        var pares = paises.map(function(p,i){return [p, cambio[i]];})
+                          .sort(function(a,b){return a[1]-b[1];});
+        return {
+          grid:{left:8,right:30,top:8,bottom:8,containLabel:true},
+          tooltip:{trigger:'axis',valueFormatter:function(v){return (v>0?'+':'')+v+'%';}},
+          xAxis:{type:'value',axisLabel:{formatter:'{value}%'}},
+          yAxis:{type:'category',data:pares.map(function(x){return x[0];})},
+          series:[{type:'bar',barWidth:'52%',
+            data:pares.map(function(x){
+              var c = x[1]>0 ? EMPEORA : (x[1]<0 ? MEJORA : IGUAL);
+              return {value:x[1], itemStyle:{color:c, borderRadius:[0,3,3,0]}};
+            }),
+            label:{show:true,position:'right',fontFamily:"'JetBrains Mono',monospace",
+                   color:colRotulo,formatter:function(o){return (o.value>0?'+':'')+o.value+'%';}}
+          }]
+        };
+      })()
     };
   }
 
