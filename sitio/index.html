@@ -275,6 +275,26 @@
   @media(min-width:1500px){.franja-estado .fe-fila{max-width:1460px;}}
   @media(max-width:560px){.franja-estado{padding:6px 17px;}}
 
+  /* LA GUIA DE PRIMER USO - acta 24/9/2026, S2, adoptable "secuencia de
+     entrada que ensena a leer el tablero". Cuatro pasos, una sola vez: se
+     cierra y se recuerda en el propio navegador (misma memoria que el
+     aviso de cookies, mas abajo). No es el asistente "Guia SIWA" -esa es
+     una conversacion que ayuda en cualquier momento-: esto es un cartel
+     que se lee una vez y se va. No tapa nada: ocupa su lugar en el flujo,
+     no esta fijo sobre el contenido. */
+  .guia-inicio{
+    padding:10px 28px;background:var(--panel);border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:10px;
+  }
+  .gi-pasos{max-width:1180px;margin:0 auto;flex:1;display:flex;flex-wrap:wrap;
+    gap:6px 20px;list-style:none;padding:0;font-size:12px;color:var(--texto-2);}
+  .gi-pasos b{color:var(--orange);font-weight:700;margin-right:4px;}
+  .gi-cerrar{background:transparent;border:0;color:var(--tenue);font-size:18px;
+    line-height:1;cursor:pointer;padding:2px 6px;flex:0 0 auto;}
+  .gi-cerrar:hover{color:var(--texto-max);}
+  @media(min-width:1500px){.gi-pasos{max-width:1460px;}}
+  @media(max-width:560px){.guia-inicio{padding:10px 17px;}}
+
   /* EL FONDO CRUZA LA PANTALLA; lo que se limita es el CONTENIDO. Con
      max-width en la franja quedaban dos márgenes claros a los costados y
      parecía una tarjeta, no una franja. */
@@ -595,6 +615,21 @@
   .edad.reciente{background:rgba(255,255,255,.09);color:var(--texto-2);}
   .edad.viejo{background:rgba(251,101,0,.20);color:var(--t-aviso);}
   .edad.muy-viejo{background:rgba(251,101,0,.34);color:var(--t-aviso);}
+  /* EL MISMO DATO, DOS VISTAS, UN SELECTOR (acta 24/9/2026, adoptable
+     "valor <-> ranking"). v y puesto ya estaban calculados los dos en
+     fichaDeMateria(); antes se mostraban siempre juntos. Ahora el titular
+     alterna con un control chico, sin pedir el dato de nuevo y sin variable
+     global: el estado de cual vista esta activa vive en el propio bloque
+     -el atributo hidden de cada span-, asi que dos fichas abiertas a la vez
+     (el cruce, la comparacion) no se pisan entre si. */
+  .fm-selector{display:flex;gap:5px;margin:7px 0 2px;flex-wrap:wrap;}
+  .fm-vista-btn{
+    font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;
+    background:var(--velo-1);color:var(--texto-2);border:1px solid var(--line);
+    border-radius:999px;padding:3px 10px;cursor:pointer;
+  }
+  .fm-vista-btn.activo{background:var(--tinta-suave);color:var(--texto-max);
+    border-color:var(--tinta-borde);}
   .senal{
     border:1px solid rgba(251,101,0,.42);border-radius:9px;padding:13px 15px;
     margin-top:14px;background:rgba(251,101,0,.07);
@@ -1394,9 +1429,13 @@
   .dc-cifra{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:var(--texto-max);
     line-height:1.1;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;}
   .dc-cifra small{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;color:var(--tenue);}
+  /* LAS TRES SEPARACIONES DE LA TARJETA, A UN SOLO VALOR (acta 24/9/2026,
+     "densidad sin ruido"). Eran 6/5/4px sin que ninguna razon de fondo lo
+     pidiera: en una lista de tarjetas, un margen que cambia de una linea a
+     otra se nota como ruido antes de leerse como jerarquia. */
   .dc-rotulo{font-size:12.5px;color:var(--texto);margin-top:6px;line-height:1.45;}
-  .dc-puesto{font-size:11px;color:var(--tenue);margin-top:5px;}
-  .dc-leer{font-size:11px;color:var(--texto-2);margin-top:4px;}
+  .dc-puesto{font-size:11px;color:var(--tenue);margin-top:6px;}
+  .dc-leer{font-size:11px;color:var(--texto-2);margin-top:6px;}
   /* SIN DATO, con el mismo punteado que ya significa eso en .ay-colores .c-sin. */
   .dc.dc-sin{border-style:dashed;border-color:var(--line);background:var(--sin-dato);}
   .dc.dc-sin .dc-cifra{color:var(--tenue);}
@@ -2381,6 +2420,21 @@
   </div>
 </div>
 
+<!-- LA GUIA DE PRIMER USO. Cuatro pasos, se cierra y no vuelve (localStorage,
+     con try/catch: si el navegador lo bloquea, solo vuelve a mostrarse, no
+     rompe nada). Empieza oculta -mismo criterio que la franja de estado, de
+     abajo- para no parpadear vacía antes de que el script decida. -->
+<div class="guia-inicio" id="guia-inicio" hidden>
+  <ol class="gi-pasos" id="gi-pasos">
+    <li><b>1.</b> Elegí tu país en «Empezá acá»</li>
+    <li><b>2.</b> Elegí cómo leerlo: Ciudadano, Periodista o Analista</li>
+    <li><b>3.</b> Mirá la cifra, con su fuente y su fecha</li>
+    <li><b>4.</b> Los vacíos se declaran: lo que no se sabe, se dice</li>
+  </ol>
+  <button type="button" class="gi-cerrar" id="guia-inicio-cerrar"
+          aria-label="Cerrar esta guía">×</button>
+</div>
+
 <!-- LA BARRA DE ESTADO HONESTA. Oculta hasta que llegue el dato real: no se
      inventa un "al día" mientras se espera la respuesta (misma regla que ya
      usa el boton "Actualidad", mas abajo). -->
@@ -2695,7 +2749,7 @@
           <div class="control ancho">
             <label for="buscar-cruce">Con otro tema</label>
             <input type="search" id="buscar-cruce" class="buscar-tema"
-                   placeholder="Buscá por tema o por delito: cocaína, extorsión, lavado, coima…"
+                   placeholder="Buscá por tema o por delito: cocaína, extorsión, coima…"
                    aria-describedby="ayuda-cruce" autocomplete="off">
             <div class="lista-temas" id="cruce-lista" role="group" aria-label="Temas para cruzar"></div>
             <div class="elegidos" id="cruce-elegidos"></div>
@@ -5348,9 +5402,27 @@
       const todos = Object.entries(valores).sort((a,b) => b[1] - a[1]);
       const puesto = todos.findIndex(x => x[0] === paisFiltro) + 1;
       // LA FIGURA PRIMERO, la cifra despues, la advertencia plegada.
+      // EL TITULAR ALTERNA VALOR Y PUESTO CON UN SELECTOR (acta 24/9/2026):
+      // los dos ya estaban calculados (v, puesto) para el "· lugar" del pie;
+      // se reusan, no se vuelven a pedir. Sin puesto (menos de dos Estados
+      // con dato) no hay nada que alternar: se muestra solo el valor, como
+      // siempre.
+      const vistaValor = '<span class="fm-vista" data-fm-vista="valor">'
+        + cifra(v) + '</span>';
+      const vistaPuesto = puesto
+        ? '<span class="fm-vista" data-fm-vista="puesto" hidden>Lugar ' + puesto
+          + ' de ' + todos.length + '</span>'
+        : '';
+      const selectorVistas = puesto
+        ? '<div class="fm-selector" role="group" aria-label="Cómo mostrar este dato">'
+          + '<button type="button" class="fm-vista-btn activo" data-fm-mostrar="valor">Valor</button>'
+          + '<button type="button" class="fm-vista-btn" data-fm-mostrar="puesto">Puesto en la región</button>'
+          + '</div>'
+        : '';
       return '<div class="asunto"><h4>' + esc(rot) + ' · ' + esc(paisNombre)
-        + ' <span class="edad ' + (cap.subeEsPeor ? 'viejo' : 'fresco') + '">'
-        + cifra(v) + '</span></h4>'
+        + ' <span class="edad ' + (cap.subeEsPeor ? 'viejo' : 'fresco') + ' fm-headline">'
+        + vistaValor + vistaPuesto + '</span></h4>'
+        + selectorVistas
         + '<div class="foot"><span class="porque">'
         + figuraTira(clave, paisFiltro)
         + figuraSerie(clave, paisFiltro)
@@ -6991,6 +7063,20 @@
   // escucha sobre elementos que ya no existen.
   document.addEventListener('click', ev => {
     if(ev.target.closest('.ficha-papel')) imprimirLaFicha();
+  });
+
+  // EL MISMO DATO, DOS VISTAS: idem, un solo escucha delegado. Se busca el
+  // '.asunto' mas cercano -no un id fijo- porque puede haber varias fichas
+  // abiertas a la vez (la principal, el cruce, la comparacion) y cada una
+  // alterna la suya sin tocar las demas.
+  document.addEventListener('click', ev => {
+    const b = ev.target.closest('.fm-vista-btn');
+    if(!b) return;
+    const caja = b.closest('.asunto');
+    if(!caja) return;
+    caja.querySelectorAll('.fm-vista-btn').forEach(x => x.classList.toggle('activo', x === b));
+    const cual = b.dataset.fmMostrar;
+    caja.querySelectorAll('.fm-vista').forEach(v => { v.hidden = v.dataset.fmVista !== cual; });
   });
 
   function imprimirLaFicha(){
@@ -17701,6 +17787,51 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('tarj-trafico-armas-ilicito','tráfico ilícito de armas de la UNODC',err.message);
       document.getElementById('proc-trafico-armas-ilicito').textContent='Sin registro disponible.'; marcador(); });
+})();
+</script>
+<script>
+(function(){
+  var LLAVE = "siwa_guia_inicio_ok";
+  var caja = document.getElementById("guia-inicio");
+  if(!caja) return;
+  function mostrarSiCorresponde(){
+    var visto = false;
+    try { visto = localStorage.getItem(LLAVE) === "1"; } catch(e) {}
+    if(!visto) caja.hidden = false;
+  }
+  // LA AYUDA COMPLETA («Cómo se usa este registro») YA SE ABRE SOLA la
+  // primera vez que alguien entra (armarAyuda()), con un temporizador que
+  // cuenta desde que llegan los datos, no desde la navegación: adivinar un
+  // plazo fijo para esta tira fallaba (medido en vivo: la ayuda podía abrir
+  // después de que la tira ya estaba mostrada, y quedaban las dos juntas).
+  // Se usa la MISMA señal con la que armarAyuda() decide si va a abrir sola
+  // -localStorage «siwa-ayuda-vista» y el hash «#grafico=»-, sin tocarla:
+  // esto solo la lee desde afuera.
+  var ayuda = document.getElementById("ventana-ayuda");
+  var vistaAyuda = null;
+  try { vistaAyuda = localStorage.getItem("siwa-ayuda-vista"); } catch(e) {}
+  var llegoPorGrafico = location.hash.indexOf("#grafico=") === 0;
+  if(!ayuda || vistaAyuda || llegoPorGrafico){
+    // La ayuda grande no se va a abrir sola esta vez: ya se puede decidir.
+    mostrarSiCorresponde();
+  } else {
+    // Primera vez de verdad: la ayuda SI se va a abrir sola, en algún
+    // momento. Se espera a que aparezca -MutationObserver sobre su propio
+    // atributo "open", sin importar cuándo lo agregue- y despues a que la
+    // cierren, para no competir por la atencion con otro aviso a la vez.
+    var obs = new MutationObserver(function(){
+      if(ayuda.hasAttribute("open")){
+        obs.disconnect();
+        ayuda.addEventListener("close", mostrarSiCorresponde, {once:true});
+      }
+    });
+    obs.observe(ayuda, {attributes:true, attributeFilter:["open"]});
+  }
+  var b = document.getElementById("guia-inicio-cerrar");
+  if(b) b.addEventListener("click", function(){
+    try { localStorage.setItem(LLAVE, "1"); } catch(e) {}
+    caja.hidden = true;
+  });
 })();
 </script>
 <!-- CARTEL DE COOKIES, SOBRIO Y CON MEMORIA. La medición ya está activa (modelo de
