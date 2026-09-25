@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-25T18:28:39+00:00",
-  "medidas_con_suficientes_casos": 207,
-  "pares_probados": 21321,
+  "corrida": "2026-09-25T19:24:22+00:00",
+  "medidas_con_suficientes_casos": 206,
+  "pares_probados": 21115,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 21.321 pares y el umbral de siempre, alrededor de 1.066 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3752,
-    "de_ellos_son_parentescos": 404
+    "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3960,
+    "de_ellos_son_parentescos": 411
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3348,
+  "pistas_totales": 3549,
   "anomalias_totales": 384,
   "pistas": [
     {
@@ -190,6 +190,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.947,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.893062732707311e-23,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "gasto_militar_gasto_pub",
       "b": "gasto_militar_publico",
       "rotulo_a": "gasto_militar_gasto_pub",
@@ -211,19 +224,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.01899938391224e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -717,7 +717,7 @@
       "coeficiente": 0.89,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 7.414274509798978e-15,
+      "p": 6.777191969584722e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
