@@ -129,6 +129,20 @@
       "detalle": "Distinto del portal general inei.gob.pe (ya registrado en oficiales.json). Portal de descarga por encuesta (ENAHO, ENDES, CENAGRO, etc.) en formatos SPSS/Excel, con secreto estadístico declarado; patrón 'gated' equivalente a WJP/Latinobarómetro antes de su automatización. Conexión HTTPS directa a proyectos.inei.gob.pe/microdatos falló (ECONNREFUSED) en esta sesión; caracterización basada en resultados de búsqueda, no en visita directa. Posible redundancia con colectores/pobreza.py y censo_subnacional.py ya existentes: verificar antes de insistir.",
       "evidencia": "búsqueda web 24/9/2026; conexión directa fallida; no verificado en vivo",
       "reintentar": true
+    },
+    {
+      "nombre": "INEGI + datos.gob.mx (México) — estadística oficial y portal de datos abiertos",
+      "claves_relacionadas": [
+        "mexico",
+        "subnacional",
+        "seguridad",
+        "poblacion"
+      ],
+      "resultado": "gated-pendiente-evaluacion-humana",
+      "fecha": "2026-09-25",
+      "detalle": "Par natural de INEI Perú (ya registrada): punto de acceso a la expansión subnacional de México, pendiente por licencia/decodificación (SESNSP sin licencia explícita; diccionario CEIC sin decodificar — ver memoria siwa-subnacional-expansion). Dos puertas: INEGI (inegi.org.mx, estadística oficial con API de indicadores) y datos.gob.mx (portal de datos abiertos del gobierno federal). Aparece en el volcado de public-apis del 24/9. NO verificado en vivo en esta sesión: caracterización basada en la lista de public-apis y en la memoria de la expansión subnacional. Antes de incorporar: confirmar licencia de cada dataset (INEGI declara términos propios, no CC automática) y cobertura por entidad federativa.",
+      "evidencia": "candidatas-api/candidatas.md (public-apis 24/9/2026); memoria siwa-subnacional-expansion; no verificado en vivo",
+      "reintentar": true
     }
   ]
 }
