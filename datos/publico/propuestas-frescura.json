@@ -1,6 +1,6 @@
 {
   "que_es": "Clasifica cada indicador atrasado de SIWA (frescura.json) en cinco caminos posibles. PROPONE: ninguna fila de este archivo se aplicó sola. Incorporar una fuente, promover una sobre otra o tocar comparabilidad es juicio, y el juicio no se automatiza.",
-  "corrida": "2026-09-25T13:28:44+00:00",
+  "corrida": "2026-09-25T14:31:25+00:00",
   "reloj_disponible_esta_corrida": true,
   "orden_de_exhibicion_disponible_esta_corrida": true,
   "resumen": {
@@ -8,8 +8,8 @@
     "promover_hermana_fresca": 0,
     "hermana_fresca_ya_exhibida": 4,
     "re_pull_misma_fuente": 0,
-    "rezago_de_fuente_ya_investigado": 11,
-    "derivar_a_buscador_externo": 67
+    "rezago_de_fuente_ya_investigado": 14,
+    "derivar_a_buscador_externo": 64
   },
   "propuestas": [
     {
@@ -172,9 +172,23 @@
       "anio_actual": 2021,
       "antiguedad_anios": 5,
       "aplicable_automaticamente": false,
-      "camino": "derivar_a_buscador_externo",
-      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
-      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "INAPI (Chile) — registros y solicitudes de patentes",
+          "claves_relacionadas": [
+            "patentes_residentes"
+          ],
+          "resultado": "propuesta-calificada-vale",
+          "fecha": "2026-09-25",
+          "detalle": "Del buscador Llama (22/9), calificada el 25/9: puede REFRESCAR «solicitudes de patente de residentes», hoy atrasado (2021). datos.gob.cl, xlsx, responde 206. OJO: SIWA usa una serie regional (WIPO/Banco Mundial) para patentes; esto es Chile solo — evaluar como segunda fuente o refresco puntual, NO reemplazo de la serie comparable. Pendiente: colector + licencia.",
+          "evidencia": "rama propuestas-llama, 2026-09-22; datos.gob.cl/dataset/registros-de-patentes; responde 206 xlsx",
+          "reintentar": true
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
     },
     {
       "clave": "renta_gas",
@@ -251,9 +265,27 @@
       "anio_actual": 2021,
       "antiguedad_anios": 5,
       "aplicable_automaticamente": false,
-      "camino": "derivar_a_buscador_externo",
-      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
-      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "SIACAM + Secretaría de Energía (Argentina) — recursos estratégicos: litio, minerales, petróleo y gas",
+          "claves_relacionadas": [
+            "minerales",
+            "produccion_litio",
+            "exporta_combustibles",
+            "produccion_petroleo",
+            "reservas_petroleo"
+          ],
+          "resultado": "propuesta-calificada-vale",
+          "fecha": "2026-09-25",
+          "detalle": "Del buscador Llama (17-22/9), CALIFICADA por la Oficina el 25/9 como la más valiosa de la tanda: recursos estratégicos, prioridad regional (el litio es el triángulo ARG-CHL-BOL). Portales oficiales datos.gob.ar (Secretaría de Minería, sistema SIACAM) y Secretaría de Energía, en CSV, enlaces que responden (206/200). Es dato de ARGENTINA (alimenta su celda), no una serie comparable de los 33. Pendiente: construir colector y CONFIRMAR LICENCIA en la incorporación (datos.gob.ar suele ser CC-BY).",
+          "evidencia": "rama propuestas-llama, 2026-09-21/22; datos.gob.ar/dataset/exportaciones-argentinas-de-litio-siacam; comprobación del robot: responde 206 text/csv",
+          "reintentar": true
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
     },
     {
       "clave": "suicidio",
@@ -1068,9 +1100,23 @@
       "anio_actual": 2024,
       "antiguedad_anios": 2,
       "aplicable_automaticamente": false,
-      "camino": "derivar_a_buscador_externo",
-      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
-      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
+      "camino": "rezago_de_fuente_ya_investigado",
+      "serie_detenida": null,
+      "fuentes_intentadas": [
+        {
+          "nombre": "Autoridad Marítima de Panamá (AMP) — movimiento de contenedores del Sistema Portuario Nacional",
+          "claves_relacionadas": [
+            "puertos_contenedores"
+          ],
+          "resultado": "propuesta-calificada-vale",
+          "fecha": "2026-09-25",
+          "detalle": "Del buscador Llama (17/9), calificada el 25/9: logística del canal de Panamá, punto estratégico del comercio global. datosabiertos.gob.pa, enlace responde. Varias tablas (por destino/tipo/TEU) de una misma fuente. Pendiente: colector + licencia.",
+          "evidencia": "rama propuestas-llama, 2026-09-17; datosabiertos.gob.pa/dataset/amp-movimiento-de-contenedores-en-el-spn...; responde",
+          "reintentar": true
+        }
+      ],
+      "motivo": "1 intento(s) ya registrados en fuentes-intentadas.json.",
+      "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
     },
     {
       "clave": "recaudacion",
