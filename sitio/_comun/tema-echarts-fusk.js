@@ -22,18 +22,27 @@
   var FUENTE  = "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
   var FUENTE_N = "'JetBrains Mono', ui-monospace, 'Consolas', monospace";
 
-  // Paleta del manual (idéntica a las variables de index.html)
+  // FUENTE ÚNICA DE LA PALETA: se lee de `_comun/paleta-fusk.css` en vivo (los tokens
+  // --fusk-*), con los valores del manual como respaldo si ese CSS no está cargado
+  // (por ejemplo en una demostración suelta). Así el tema de gráficos y las páginas
+  // usan exactamente el MISMO archivo de paleta.
+  function cvar(nombre, respaldo){
+    try{
+      var v = getComputedStyle(document.documentElement).getPropertyValue(nombre).trim();
+      return v || respaldo;
+    }catch(e){ return respaldo; }
+  }
   var M = {
-    navy:        '#00121E', // azul de la casa
-    navyHondo:   '#07131E',
-    grisAzul:    '#667B89', // secundario del manual (filetes = este gris con opacidad)
-    violetaHondo:'#460070', // violeta hondo del manual
-    purpura:     '#8C00E0', // violeta del símbolo
-    purpuraClaro:'#BA66EC',
-    naranja:     '#FB6500', // NARANJA = SEÑAL. No va en rotación (máx 2 por vista).
-    crema:       '#F9F9F7', // crema del manual
-    grisTitulo:  '#C6C6C5', // gris del título de banda (manual)
-    // --- Los siete de arriba + crema + gris son la PALETA CERRADA del manual. ---
+    navy:        cvar('--fusk-navy',          '#00121E'), // azul de la casa
+    navyHondo:   cvar('--fusk-navy-hondo',    '#07131E'),
+    grisAzul:    cvar('--fusk-gris-azul',     '#667B89'), // secundario (filetes = este gris con opacidad)
+    violetaHondo:cvar('--fusk-violeta-hondo', '#460070'),
+    purpura:     cvar('--fusk-violeta',       '#8C00E0'), // violeta del símbolo
+    purpuraClaro:cvar('--fusk-violeta-claro', '#BA66EC'),
+    naranja:     cvar('--fusk-naranja',       '#FB6500'), // NARANJA = SEÑAL. No va en rotación.
+    crema:       cvar('--fusk-crema',         '#F9F9F7'),
+    grisTitulo:  cvar('--fusk-gris-titulo',   '#C6C6C5'),
+    // --- Los nueve de arriba son la PALETA CERRADA del manual (paleta-fusk.css). ---
     // Abajo van sólo neutros de TEXTO e interfaz (tinta y separadores), no colores
     // de marca. El verde/rojo del semáforo del sitio NO entran acá: son funcionales.
     // claro
