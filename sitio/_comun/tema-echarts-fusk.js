@@ -49,10 +49,20 @@
     lineaSuaveOsc:'rgba(255,255,255,.07)'
   };
 
-  // Rotación categórica: navy -> gris azul -> púrpura -> teal -> púrpura claro
-  // -> violeta hondo -> texto-2.  SIN naranja (es señal).
-  var ROTACION = [
+  // Rotación categórica: SIN naranja (es señal).  Cada modo tiene la suya, porque
+  // un color no se lee igual sobre blanco que sobre navy: en claro van tintas
+  // oscuras de la paleta; en oscuro, tintes claros de la MISMA familia. El navy
+  // #00121E no puede ser color de serie en oscuro -desaparece sobre el panel navy-.
+  var ROTACION_CLARO = [
     M.navy, M.grisAzul, M.purpura, M.teal, M.purpuraClaro, M.violetaHondo, M.texto2
+  ];
+  var ROTACION_OSCURO = [
+    '#A9BED0', // acero claro  (reemplaza al navy como ancla)
+    '#4FBFAE', // teal claro   (aclarado de #3FA796)
+    '#BA66EC', // violeta claro (token del manual)
+    '#E0A6F7', // violeta más claro (tinte)
+    '#7FB0D6', // azul medio claro
+    '#C7D2E0'  // texto claro  (neutro)
   ];
 
   function tema(modo) {
@@ -70,7 +80,7 @@
     var partido  = { show: true, lineStyle: { color: lineaSuave, type: 'dashed' } };
 
     return {
-      color: ROTACION,
+      color: oscuro ? ROTACION_OSCURO : ROTACION_CLARO,
       backgroundColor: 'transparent',
       textStyle: { fontFamily: FUENTE, color: texto },
 
@@ -157,7 +167,8 @@
   // Se expone la paleta y el color de señal para uso a mano en cada gráfico.
   var API = {
     registrar: registrar,
-    rotacion: ROTACION.slice(),
+    rotacionClaro: ROTACION_CLARO.slice(),
+    rotacionOscuro: ROTACION_OSCURO.slice(),
     colorSenal: M.naranja,   // NARANJA = resaltar la serie/barra que importa
     paleta: M
   };
