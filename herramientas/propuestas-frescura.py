@@ -274,15 +274,20 @@ def clasificar() -> dict:
                          key=lambda h: -por_clave[h]["anio_mas_reciente"])
 
         candidata_valida = None
+        ya_resuelta_por = None  # hermana fresca de la MISMA medida ya exhibida ANTES
         for h in mejores:
             candidata = por_clave[h]
-            if orden_disponible:
-                if not _candidata_se_exhibe(llamados, h):
-                    continue  # FILTRO 2: se sacó del sitio a propósito
-                if _candidata_ya_exhibida_antes(llamados, clave, h):
-                    continue  # FILTRO 1: la tarjeta ya está resuelta
+            if orden_disponible and not _candidata_se_exhibe(llamados, h):
+                continue  # FILTRO 2: se sacó del sitio a propósito
             if not _misma_medida(ind["rotulo"], candidata["rotulo"]):
                 continue  # FILTRO 3: mismo asunto+unidad no es la misma medida
+            if orden_disponible and _candidata_ya_exhibida_antes(llamados, clave, h):
+                # FILTRO 1: la fresca ya está PRIMERA en la tarjeta. Esta clave
+                # vieja no es un vacío: es una segunda fuente declarada, ya
+                # resuelta (p. ej. CEPAL 2023 sobre OMS 2021 en esperanza de vida).
+                if ya_resuelta_por is None:
+                    ya_resuelta_por = candidata
+                continue
             candidata_valida = candidata
             break
 
@@ -300,6 +305,26 @@ def clasificar() -> dict:
                                "que_falta": "Una persona decide si son comparables (metodología, cobertura) "
                                             "antes de promoverla a vista principal — mismo criterio que la "
                                             "promoción de esperanza de vida (CEPAL sobre OMS)."})
+            continue
+
+        # (a-bis) SEGUNDA FUENTE YA RESUELTA — hay una hermana fresca de la MISMA
+        # medida que ya se exhibe ANTES que esta clave en su tarjeta (la promoción
+        # ya la hizo una persona: p. ej. CEPAL 2023 sobre OMS 2021 en esperanza de
+        # vida). El atraso de esta clave es esperado: corrobora el dato fresco, no
+        # lo reemplaza. NO es un vacío ni algo para derivar al buscador externo —
+        # antes caía a (d) y aparecía como falso positivo en la cola de trabajo.
+        if ya_resuelta_por:
+            propuestas.append({**base, "camino": "hermana_fresca_ya_exhibida",
+                               "candidata": {"clave": ya_resuelta_por["clave"], "rotulo": ya_resuelta_por["rotulo"],
+                                            "fuente": ya_resuelta_por["fuente"],
+                                            "anio": ya_resuelta_por["anio_mas_reciente"]},
+                               "motivo": f"«{ind['rotulo']}» es una segunda fuente declarada: "
+                                         f"«{ya_resuelta_por['rotulo']}» ({ya_resuelta_por['fuente']}, "
+                                         f"{ya_resuelta_por['anio_mas_reciente']}) ya se exhibe ANTES en su "
+                                         "tarjeta como el dato fresco. El atraso de esta clave es esperado: "
+                                         "corrobora el dato principal, no lo reemplaza.",
+                               "que_falta": "Nada: la tarjeta ya está resuelta (dato fresco primero, esta "
+                                            "segunda fuente después). No va a la cola del buscador."})
             continue
 
         # (b) RE-PULL — el reloj, EN VIVO, ya encontró una edición más nueva de
@@ -351,7 +376,7 @@ def clasificar() -> dict:
     propuestas.sort(key=lambda p: -p["antiguedad_anios"])
 
     salida = {
-        "que_es": "Clasifica cada indicador atrasado de SIWA (frescura.json) en cuatro caminos posibles. "
+        "que_es": "Clasifica cada indicador atrasado de SIWA (frescura.json) en cinco caminos posibles. "
                   "PROPONE: ninguna fila de este archivo se aplicó sola. Incorporar una fuente, promover una "
                   "sobre otra o tocar comparabilidad es juicio, y el juicio no se automatiza.",
         "corrida": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -360,6 +385,7 @@ def clasificar() -> dict:
         "resumen": {
             "clasificados": len(propuestas),
             "promover_hermana_fresca": len(por_camino.get("promover_hermana_fresca", [])),
+            "hermana_fresca_ya_exhibida": len(por_camino.get("hermana_fresca_ya_exhibida", [])),
             "re_pull_misma_fuente": len(por_camino.get("re_pull_misma_fuente", [])),
             "rezago_de_fuente_ya_investigado": len(por_camino.get("rezago_de_fuente_ya_investigado", [])),
             "derivar_a_buscador_externo": len(por_camino.get("derivar_a_buscador_externo", [])),
@@ -408,6 +434,7 @@ def main() -> None:
     r = salida["resumen"]
     print(f"[propuestas-frescura] {r.get('clasificados', 0)} indicadores clasificados · "
           f"{r.get('promover_hermana_fresca', 0)} con hermana fresca · "
+          f"{r.get('hermana_fresca_ya_exhibida', 0)} segunda fuente ya resuelta · "
           f"{r.get('re_pull_misma_fuente', 0)} re-pull · "
           f"{r.get('rezago_de_fuente_ya_investigado', 0)} rezago ya investigado · "
           f"{r.get('derivar_a_buscador_externo', 0)} a derivar")
