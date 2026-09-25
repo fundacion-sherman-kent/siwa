@@ -26,13 +26,16 @@
   var M = {
     navy:        '#00121E', // azul de la casa
     navyHondo:   '#07131E',
-    grisAzul:    '#667B89',
+    grisAzul:    '#667B89', // secundario del manual (filetes = este gris con opacidad)
+    violetaHondo:'#460070', // violeta hondo del manual
     purpura:     '#8C00E0', // violeta del símbolo
     purpuraClaro:'#BA66EC',
-    violetaHondo:'#5B1E8C',
-    teal:        '#3FA796', // "mejor" / ok
-    naranja:     '#FB6500', // NARANJA = SEÑAL. No va en rotación.
-    alerta:      '#C23B22',
+    naranja:     '#FB6500', // NARANJA = SEÑAL. No va en rotación (máx 2 por vista).
+    crema:       '#F9F9F7', // crema del manual
+    grisTitulo:  '#C6C6C5', // gris del título de banda (manual)
+    // --- Los siete de arriba + crema + gris son la PALETA CERRADA del manual. ---
+    // Abajo van sólo neutros de TEXTO e interfaz (tinta y separadores), no colores
+    // de marca. El verde/rojo del semáforo del sitio NO entran acá: son funcionales.
     // claro
     papel:       '#F7F7F5',
     panel:       '#FFFFFF',
@@ -49,21 +52,28 @@
     lineaSuaveOsc:'rgba(255,255,255,.07)'
   };
 
-  // Rotación categórica: SIN naranja (es señal).  Cada modo tiene la suya, porque
-  // un color no se lee igual sobre blanco que sobre navy: en claro van tintas
-  // oscuras de la paleta; en oscuro, tintes claros de la MISMA familia. El navy
-  // #00121E no puede ser color de serie en oscuro -desaparece sobre el panel navy-.
+  // Rotación categórica: SÓLO colores del manual, SIN naranja (es señal). Cada modo
+  // usa los que se leen sobre su fondo: el navy no puede ser color de serie en
+  // oscuro (desaparece sobre el panel navy), así que en oscuro entran los violetas
+  // claros y los neutros claros del manual. NO se inventan colores intermedios.
   var ROTACION_CLARO = [
-    M.navy, M.grisAzul, M.purpura, M.teal, M.purpuraClaro, M.violetaHondo, M.texto2
+    M.navy,          // #00121E
+    M.grisAzul,      // #667B89
+    M.purpura,       // #8C00E0
+    M.purpuraClaro,  // #BA66EC
+    M.violetaHondo   // #460070
   ];
   var ROTACION_OSCURO = [
-    '#A9BED0', // acero claro  (reemplaza al navy como ancla)
-    '#4FBFAE', // teal claro   (aclarado de #3FA796)
-    '#BA66EC', // violeta claro (token del manual)
-    '#E0A6F7', // violeta más claro (tinte)
-    '#7FB0D6', // azul medio claro
-    '#C7D2E0'  // texto claro  (neutro)
+    M.purpuraClaro,  // #BA66EC
+    M.grisTitulo,    // #C6C6C5
+    M.purpura,       // #8C00E0
+    M.grisAzul,      // #667B89
+    M.crema          // #F9F9F7
   ];
+  // Rampa secuencial (mapa / visualMap): un solo tono, el VIOLETA -«la energía de
+  // marca»-, del claro al navy. Todos son colores del manual.
+  var RAMPA_CLARO  = [M.crema, M.purpuraClaro, M.purpura, M.violetaHondo, M.navy];
+  var RAMPA_OSCURO = [M.violetaHondo, M.purpura, M.purpuraClaro];
 
   function tema(modo) {
     var oscuro = modo === 'oscuro';
@@ -136,21 +146,17 @@
         splitArea: { areaStyle: { color: ['transparent'] } }
       },
 
-      // Rampa secuencial (mapa coroplético / visualMap).  Claro -> navy.
-      // El extremo "peor" puede reemplazarse a mano por naranja (señal).
+      // Rampa secuencial (mapa coroplético / visualMap): un solo tono, el violeta
+      // del manual, del claro al navy. Todos colores del manual.
       visualMap: {
         textStyle: { color: texto2, fontFamily: FUENTE_N },
-        inRange: {
-          color: oscuro
-            ? ['#12324a', '#1f5f7a', '#3FA796', '#8FD6C8']
-            : ['#DCEDEA', '#8FD0C4', '#3FA796', '#0E5C50', M.navy]
-        }
+        inRange: { color: oscuro ? RAMPA_OSCURO : RAMPA_CLARO }
       },
 
-      // Barra de puntaje / gauge
+      // Barra de puntaje / gauge -> violeta de marca (no verde).
       gauge: {
         axisLine: { lineStyle: { color: [[1, linea]] } },
-        progress: { show: true, itemStyle: { color: M.teal } },
+        progress: { show: true, itemStyle: { color: M.purpura } },
         detail: { fontFamily: FUENTE_N, color: texto },
         title:  { fontFamily: FUENTE, color: texto2 }
       }
