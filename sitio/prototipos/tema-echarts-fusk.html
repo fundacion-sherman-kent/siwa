@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototipo · Tema ECharts FUSK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_comun/paleta-fusk.css"><!-- FUENTE ÚNICA de la paleta -->
+<script src="../lib/echarts.min.js"></script>
+<script src="../_comun/tema-echarts-fusk.js"></script>
+<style>
+  :root{
+    --papel:#F7F7F5; --panel:#FFFFFF; --texto:#1A2430; --texto2:#46566A;
+    --tenue:#5A6B7D; --linea:#E3DCD0; --navy:#00121E; --naranja:#FB6500;
+  }
+  :root[data-modo="oscuro"]{
+    --papel:#00121E; --panel:#0E2135; --texto:#C7D2E0; --texto2:#9FB0C4;
+    --tenue:#7D90A8; --linea:rgba(255,255,255,.16); --navy:#C7D2E0;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',system-ui,sans-serif;background:var(--papel);
+    color:var(--texto);transition:background .2s,color .2s;}
+  .barra{display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    padding:18px max(20px,calc((100% - 1180px)/2));border-bottom:1px solid var(--linea);}
+  .barra h1{font-size:18px;font-weight:800;margin:0;letter-spacing:.2px;}
+  .barra .sub{font-size:13px;color:var(--tenue);margin:0;flex:1;min-width:220px;}
+  .toggle{border:1px solid var(--linea);background:var(--panel);color:var(--texto2);
+    font-family:'Inter';font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;
+    cursor:pointer;}
+  .toggle:hover{color:var(--texto);}
+  .nota{padding:14px max(20px,calc((100% - 1180px)/2)) 0;font-size:13px;color:var(--texto2);
+    line-height:1.6;}
+  .nota b{color:var(--texto);}
+  .chip{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;
+    margin:0 5px 0 2px;}
+  .grilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;
+    padding:16px max(20px,calc((100% - 1180px)/2)) 40px;}
+  .tarjeta{background:var(--panel);border:1px solid var(--linea);border-radius:12px;
+    padding:14px 16px 8px;}
+  .tarjeta h2{font-size:14px;font-weight:700;margin:0 0 2px;}
+  .tarjeta p{font-size:12px;color:var(--tenue);margin:0 0 6px;}
+  .g{width:100%;height:280px;}
+  .pie{padding:24px max(20px,calc((100% - 1180px)/2));border-top:1px solid var(--linea);
+    font-size:12px;color:var(--tenue);}
+</style>
+</head>
+<body>
+
+<div class="barra">
+  <h1>Tema ECharts · identidad FUSK</h1>
+  <p class="sub">Prototipo (acta 25/9). La paleta del manual cargada una sola vez en
+     <code>_comun/paleta-fusk.css</code> —fuente única que también leen las páginas—, aplicada a todos los gráficos. No toca nada publicado.</p>
+  <button class="toggle" id="toggle" type="button">Ver en oscuro</button>
+</div>
+
+<p class="nota">
+  <b>Datos de muestra</b> —para mostrar el estilo, no son cifras publicadas—.
+  La rotación de series usa sólo colores del manual —navy, gris azul y los tres
+  violetas—, y en modo oscuro entran los más claros para que se lean sobre el navy.
+  La rampa del mapa es el violeta de marca, del claro al navy.
+  <b>El naranja <span class="chip" style="background:#FB6500"></span>#FB6500 es señal:</b>
+  no entra en la rotación; se usa a mano para resaltar lo que importa (mirá la barra de Venezuela abajo).
+</p>
+
+<div class="grilla">
+  <div class="tarjeta">
+    <h2>Barras · una serie con señal</h2>
+    <p>Homicidios por país (tasa cada 100&nbsp;mil, muestra)</p>
+    <div class="g" id="g-barras"></div>
+  </div>
+  <div class="tarjeta">
+    <h2>Ranking · vista «puesto»</h2>
+    <p>Barras horizontales, orden descendente</p>
+    <div class="g" id="g-ranking"></div>
+  </div>
+  <div class="tarjeta">
+    <h2>Línea temporal · varias series</h2>
+    <p>Evolución 2019–2025 (muestra)</p>
+    <div class="g" id="g-linea"></div>
+  </div>
+  <div class="tarjeta">
+    <h2>Dona · composición</h2>
+    <p>Origen de la señal (muestra)</p>
+    <div class="g" id="g-dona"></div>
+  </div>
+  <div class="tarjeta">
+    <h2>Radar · perfil de un país</h2>
+    <p>Cinco dimensiones (muestra)</p>
+    <div class="g" id="g-radar"></div>
+  </div>
+  <div class="tarjeta">
+    <h2>Rampa secuencial · como el mapa</h2>
+    <p>visualMap claro→navy (muestra)</p>
+    <div class="g" id="g-rampa"></div>
+  </div>
+  <div class="tarjeta">
+    <h2>Bueno / malo · en colores de la casa</h2>
+    <p>Reemplaza el semáforo verde-rojo. Cambio interanual (muestra)</p>
+    <div class="g" id="g-semaforo"></div>
+  </div>
+</div>
+
+<div class="pie">Prototipo interno de la Oficina · ECharts 5.6.0 servido por la casa ·
+  tipografías Inter y JetBrains Mono · fondo claro por defecto (manual de identidad FUSK).</div>
+
+<script>
+(function(){
+  var T = window.TemaEchartsFUSK;
+  var SENAL = T.colorSenal;
+  var paises = ['Argentina','Brasil','Colombia','México','Perú','Chile','Venezuela'];
+  var homi   = [4.6, 22.8, 25.7, 24.9, 5.4, 4.5, 40.4];
+
+  var charts = [];
+  function crear(id, modo, opt){
+    var el = document.getElementById(id);
+    var c = echarts.init(el, modo==='oscuro'?'fusk-oscuro':'fusk', {renderer:'canvas'});
+    c.setOption(opt);
+    charts.push({id:id, opt:opt});
+    return c;
+  }
+
+  function opciones(modo){
+    var colRotulo = modo==='oscuro' ? '#C7D2E0' : '#46566A';
+    return {
+      'g-barras': {
+        grid:{left:8,right:14,top:16,bottom:24,containLabel:true},
+        tooltip:{trigger:'axis'},
+        xAxis:{type:'category',data:paises,axisLabel:{interval:0,rotate:30}},
+        yAxis:{type:'value'},
+        series:[{
+          type:'bar', data: homi.map(function(v,i){
+            // Venezuela resaltada con el naranja de señal
+            return paises[i]==='Venezuela' ? {value:v, itemStyle:{color:SENAL}} : v;
+          }), barWidth:'56%'
+        }]
+      },
+      'g-ranking': (function(){
+        var pares = paises.map(function(p,i){return [p,homi[i]];})
+                          .sort(function(a,b){return a[1]-b[1];});
+        return {
+          grid:{left:8,right:28,top:10,bottom:8,containLabel:true},
+          tooltip:{trigger:'axis'},
+          xAxis:{type:'value'},
+          yAxis:{type:'category',data:pares.map(function(x){return x[0];})},
+          series:[{type:'bar',barWidth:'52%',
+            data:pares.map(function(x){
+              return x[0]==='Venezuela'?{value:x[1],itemStyle:{color:SENAL}}:x[1];
+            }),
+            label:{show:true,position:'right',fontFamily:"'JetBrains Mono',monospace",
+                   color:colRotulo}
+          }]
+        };
+      })(),
+      'g-linea': {
+        grid:{left:8,right:14,top:22,bottom:20,containLabel:true},
+        tooltip:{trigger:'axis'},
+        legend:{top:0,right:0},
+        xAxis:{type:'category',boundaryGap:false,
+               data:['2019','2020','2021','2022','2023','2024','2025']},
+        yAxis:{type:'value'},
+        series:[
+          {name:'Argentina',type:'line',data:[5.3,5.0,4.6,4.4,4.5,4.6,4.4]},
+          {name:'Colombia', type:'line',data:[25.4,23.7,27.5,26.1,25.7,25.3,24.9]},
+          {name:'México',   type:'line',data:[29.0,27.9,28.2,25.7,24.9,24.0,23.5]}
+        ]
+      },
+      'g-dona': {
+        tooltip:{trigger:'item'},
+        legend:{bottom:0,left:'center'},
+        series:[{type:'pie',radius:['45%','70%'],center:['50%','44%'],
+          avoidLabelOverlap:true,
+          label:{show:false}, labelLine:{show:false},
+          data:[
+            {name:'Fuente oficial',value:58},
+            {name:'Organismo regional',value:22},
+            {name:'Prensa verificada',value:12},
+            {name:'Sin segunda fuente',value:8, itemStyle:{color:SENAL}}
+          ]
+        }]
+      },
+      'g-radar': {
+        tooltip:{},
+        radar:{indicator:[
+          {name:'Seguridad',max:100},{name:'Economía',max:100},
+          {name:'Institucional',max:100},{name:'Ambiente',max:100},
+          {name:'Social',max:100}
+        ], radius:'62%'},
+        series:[{type:'radar',areaStyle:{opacity:.12},
+          data:[{value:[62,54,71,48,66],name:'Perfil (muestra)'}]}]
+      },
+      'g-rampa': {
+        grid:{left:8,right:14,top:14,bottom:56,containLabel:true},
+        tooltip:{trigger:'axis'},
+        visualMap:{show:true,type:'continuous',min:0,max:45,calculable:true,
+          orient:'horizontal',left:'center',bottom:0},
+        xAxis:{type:'category',data:paises,axisLabel:{interval:0,rotate:30}},
+        yAxis:{type:'value'},
+        series:[{type:'bar',data:homi,barWidth:'56%'}]
+      },
+      'g-semaforo': (function(){
+        // Reemplazo del semáforo verde-rojo con colores de la casa:
+        // empeora -> naranja (señal), mejora -> violeta (marca), igual -> gris azul.
+        var MEJORA = T.paleta.purpura, EMPEORA = SENAL, IGUAL = T.paleta.grisAzul;
+        var cambio = [-8, 3, -2, 12, -5, 0, 18]; // % interanual (muestra)
+        var pares = paises.map(function(p,i){return [p, cambio[i]];})
+                          .sort(function(a,b){return a[1]-b[1];});
+        return {
+          grid:{left:8,right:30,top:8,bottom:8,containLabel:true},
+          tooltip:{trigger:'axis',valueFormatter:function(v){return (v>0?'+':'')+v+'%';}},
+          xAxis:{type:'value',axisLabel:{formatter:'{value}%'}},
+          yAxis:{type:'category',data:pares.map(function(x){return x[0];})},
+          series:[{type:'bar',barWidth:'52%',
+            data:pares.map(function(x){
+              var c = x[1]>0 ? EMPEORA : (x[1]<0 ? MEJORA : IGUAL);
+              return {value:x[1], itemStyle:{color:c, borderRadius:[0,3,3,0]}};
+            }),
+            label:{show:true,position:'right',fontFamily:"'JetBrains Mono',monospace",
+                   color:colRotulo,formatter:function(o){return (o.value>0?'+':'')+o.value+'%';}}
+          }]
+        };
+      })()
+    };
+  }
+
+  function render(modo){
+    charts.forEach(function(c){ var e=echarts.getInstanceByDom(document.getElementById(c.id)); if(e) e.dispose(); });
+    charts = [];
+    var O = opciones(modo);
+    Object.keys(O).forEach(function(id){ crear(id, modo, O[id]); });
+  }
+
+  var modo = 'claro';
+  render(modo);
+
+  document.getElementById('toggle').addEventListener('click', function(){
+    modo = modo==='claro' ? 'oscuro' : 'claro';
+    document.documentElement.setAttribute('data-modo', modo==='oscuro'?'oscuro':'claro');
+    this.textContent = modo==='claro' ? 'Ver en oscuro' : 'Ver en claro';
+    render(modo);
+  });
+
+  window.addEventListener('resize', function(){
+    charts.forEach(function(c){ var e=echarts.getInstanceByDom(document.getElementById(c.id)); if(e) e.resize(); });
+  });
+})();
+</script>
+</body>
+</html>

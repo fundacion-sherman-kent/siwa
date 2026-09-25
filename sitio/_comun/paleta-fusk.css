@@ -1,0 +1,55 @@
+/* ============================================================================
+   PALETA FUSK · FUENTE ÚNICA  (acta 25/9/2026)
+   ----------------------------------------------------------------------------
+   Un solo archivo con la paleta del manual (Estudio TUPÉ) y la convención de
+   colores de la casa. La leen todas las piezas que quieran el mismo sistema:
+   las páginas de SIWA, el aula y los informes, y el tema de gráficos de ECharts
+   (que toma estos mismos tokens en vivo). Cambiar un color acá lo cambia en todo.
+
+   REGLA: la paleta del manual es CERRADA. No se inventan colores intermedios.
+   El naranja es SEÑAL. El violeta es la energía de marca y la base de las rampas.
+   El verde y el rojo NO están en el manual: no se usan.
+   ========================================================================== */
+:root{
+  /* --- Los siete del manual + crema + gris de título (PALETA CERRADA) --- */
+  --fusk-navy:          #00121E;  /* azul de la casa */
+  --fusk-navy-hondo:    #07131E;
+  --fusk-gris-azul:     #667B89;  /* secundario; los filetes son este gris con opacidad */
+  --fusk-violeta-hondo: #460070;
+  --fusk-violeta:       #8C00E0;  /* violeta del símbolo */
+  --fusk-violeta-claro: #BA66EC;
+  --fusk-naranja:       #FB6500;  /* SEÑAL · máx. dos por vista como jerarquía decorativa */
+  --fusk-crema:         #F9F9F7;
+  --fusk-gris-titulo:   #C6C6C5;
+
+  /* --- Convención semántica de la casa (bueno/malo SIN verde ni rojo) --- */
+  --fusk-mejora:        var(--fusk-violeta);     /* mejora / mejor / ok  */
+  --fusk-empeora:       var(--fusk-naranja);     /* empeora / peor / alerta (señal, dato: puede repetirse) */
+  --fusk-sin-cambio:    var(--fusk-gris-azul);   /* sin cambio / neutro  */
+
+  /* --- Rampa secuencial de magnitud (mapas / coropléticos): un solo tono,
+         el violeta de marca, del claro al navy. Todos colores del manual. --- */
+  --fusk-rampa-0: #F9F9F7;
+  --fusk-rampa-1: #BA66EC;
+  --fusk-rampa-2: #8C00E0;
+  --fusk-rampa-3: #460070;
+  --fusk-rampa-4: #00121E;
+  /* variante para fondo oscuro (del violeta hondo al claro, legible sobre navy) */
+  --fusk-rampa-osc-0: #460070;
+  --fusk-rampa-osc-1: #8C00E0;
+  --fusk-rampa-osc-2: #BA66EC;
+
+  /* --- Rotación de series de gráficos (SIN naranja, que es señal) --- */
+  /* claro: tintas oscuras del manual sobre fondo claro */
+  --fusk-serie-0: var(--fusk-navy);
+  --fusk-serie-1: var(--fusk-gris-azul);
+  --fusk-serie-2: var(--fusk-violeta);
+  --fusk-serie-3: var(--fusk-violeta-claro);
+  --fusk-serie-4: var(--fusk-violeta-hondo);
+  /* oscuro: el navy no se lee sobre el panel navy; van los claros del manual */
+  --fusk-serie-osc-0: var(--fusk-violeta-claro);
+  --fusk-serie-osc-1: var(--fusk-gris-titulo);
+  --fusk-serie-osc-2: var(--fusk-violeta);
+  --fusk-serie-osc-3: var(--fusk-gris-azul);
+  --fusk-serie-osc-4: var(--fusk-crema);
+}

@@ -146,21 +146,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="_comun/paleta-fusk.css"><!-- FUENTE ÚNICA de la paleta -->
 <style>
   /* Paleta oficial FUSK — manual de identidad.
      Donde el manual rotula un hexadecimal y un RGB que no coinciden, manda el
      hexadecimal. */
   :root{
-    --navy-deep:#00121E;   /* azul de la casa */
-    --navy-black:#07131E;
-    --grey-blue:#667B89;
-    --purple:#8C00E0;      /* violeta del símbolo */
-    --purple-light:#BA66EC;
-    --orange:#FB6500;      /* naranja de la casa */
+    --navy-deep:var(--fusk-navy,#00121E);   /* azul de la casa */
+    --navy-black:var(--fusk-navy-hondo,#07131E);
+    --grey-blue:var(--fusk-gris-azul,#667B89);
+    --purple:var(--fusk-violeta,#8C00E0);      /* violeta del símbolo */
+    --purple-light:var(--fusk-violeta-claro,#BA66EC);
+    --orange:var(--fusk-naranja,#FB6500);      /* naranja de la casa */
     --paper:#F4F2EC;
     --line:rgba(255,255,255,0.10);
-    --ok:#3FA796;
-    --alert:#C23B22;
+    --ok:var(--fusk-mejora,#8C00E0);
+    --alert:var(--fusk-empeora,#FB6500);
   }
   *{box-sizing:border-box;}
   body{margin:0;font-family:'Inter',sans-serif;background:var(--navy-deep);color:var(--paper);}
@@ -393,6 +394,7 @@
   .bloque-bajada b{color:var(--texto);}
   .categoria{
     margin:0 0 26px;padding-left:15px;border-left:2px solid var(--line);
+    scroll-margin-top:96px; /* que el ancla no quede bajo la barra fija */
   }
   .categoria:last-child{margin-bottom:0;}
   .categoria-head{
@@ -430,7 +432,7 @@
   .card .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px;padding-top:8px;border-top:1px solid var(--line);}
   .card .src{font-size:10px;color:var(--tenue);}
   .badge{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:3px 8px;border-radius:20px;white-space:nowrap;}
-  .badge.corr{background:rgba(63,167,150,.18);color:var(--t-ok);}
+  .badge.corr{background:rgba(140,0,224,.18);color:var(--t-ok);}
   .badge.unica{background:rgba(251,101,0,.18);color:var(--t-aviso);}
   .badge.pending{background:rgba(124,140,158,.18);color:var(--texto-2);}
 
@@ -441,7 +443,7 @@
   .vacios li{font-size:12px;color:var(--texto);line-height:1.6;margin-bottom:4px;}
 
   .falla{
-    grid-column:1/-1;border:1px solid rgba(194,59,34,.5);background:rgba(194,59,34,.10);
+    grid-column:1/-1;border:1px solid rgba(251,101,0,.5);background:rgba(251,101,0,.10);
     border-radius:10px;padding:16px 18px;
   }
   .falla h4,.falla h3{margin:0 0 6px;font-size:13px;color:var(--t-falla);font-weight:700;}
@@ -561,7 +563,7 @@
   .herram:disabled:hover{background:rgba(255,255,255,.04);border-color:var(--line);color:var(--texto);}
   .herram .ico{font-size:13px;line-height:1;}
   .aviso-herram{
-    margin-top:6px;font-size:11.5px;color:#3FA796;min-height:1.1em;line-height:1.5;
+    margin-top:6px;font-size:11.5px;color:#8C00E0;min-height:1.1em;line-height:1.5;
   }
   .aviso-herram.malo{color:var(--orange);}
   .niveles-rotulo{
@@ -577,11 +579,11 @@
   .hoy-fila{display:flex;flex-wrap:wrap;gap:8px;}
   .hoy-dato{
     display:inline-flex;align-items:baseline;gap:6px;flex-wrap:wrap;
-    border:1px solid var(--line);border-left:3px solid #3FA796;border-radius:9px;
+    border:1px solid var(--line);border-left:3px solid #8C00E0;border-radius:9px;
     padding:9px 13px;font-size:11.5px;color:var(--texto);text-decoration:none;
-    background:rgba(63,167,150,.06);
+    background:rgba(140,0,224,.06);
   }
-  .hoy-dato:hover{border-color:#3FA796;background:rgba(63,167,150,.13);color:var(--texto-max);}
+  .hoy-dato:hover{border-color:#8C00E0;background:rgba(140,0,224,.13);color:var(--texto-max);}
   .hoy-dato b{font-size:17px;font-weight:800;color:var(--texto-max);font-family:'JetBrains Mono',monospace;}
   .hoy-dato i{font-style:normal;color:var(--t-ok);font-size:10.5px;}
   .hoy-pie{margin:9px 0 0;font-size:10.5px;line-height:1.55;color:var(--tenue);}
@@ -611,7 +613,7 @@
     display:inline-block;padding:1px 7px;border-radius:999px;font-size:9.5px;
     font-weight:700;letter-spacing:.3px;vertical-align:1px;
   }
-  .edad.fresco{background:rgba(63,167,150,.22);color:var(--t-ok);}
+  .edad.fresco{background:rgba(140,0,224,.22);color:var(--t-ok);}
   .edad.reciente{background:rgba(255,255,255,.09);color:var(--texto-2);}
   .edad.viejo{background:rgba(251,101,0,.20);color:var(--t-aviso);}
   .edad.muy-viejo{background:rgba(251,101,0,.34);color:var(--t-aviso);}
@@ -659,7 +661,7 @@
   .vigencia span b{color:var(--texto-alto);}
   .cambio{border-left:3px solid var(--line);}
   .cambio.empeora{border-left-color:var(--orange);}
-  .cambio.mejora{border-left-color:#3FA796;}
+  .cambio.mejora{border-left-color:#8C00E0;}
   .cambio .flecha{font-size:16px;line-height:1;margin-right:5px;}
   .cambio .lectura{
     font-size:11.5px;line-height:1.45;color:var(--texto-2);margin:7px 0 0;
@@ -812,9 +814,9 @@
   .origen:hover{border-color:var(--orange);color:var(--texto-max);}
   .origen .jur{color:var(--tenue);font-family:'JetBrains Mono',monospace;}
   .asunto .porque{font-size:10.5px;color:var(--tenue);line-height:1.55;}
-  .badge.fuerte{background:rgba(63,167,150,.20);color:var(--t-ok);}
+  .badge.fuerte{background:rgba(140,0,224,.20);color:var(--t-ok);}
   .badge.medio{background:rgba(251,101,0,.18);color:var(--t-aviso);}
-  .badge.solo{background:rgba(194,59,34,.18);color:var(--t-falla);}
+  .badge.solo{background:rgba(251,101,0,.18);color:var(--t-falla);}
   .origenes-nube{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 8px;}
   .fuente-nube{
     background:var(--velo-1);border:1px solid var(--line);border-radius:999px;
@@ -842,7 +844,7 @@
   .nube.chica .term{font-size:11px;padding:3px 10px;}
   .nube .vacio{color:var(--tenue);font-size:12px;line-height:1.6;max-width:62ch;}
   .aviso-cobertura{
-    border:1px solid rgba(194,59,34,.45);background:rgba(194,59,34,.08);
+    border:1px solid rgba(251,101,0,.45);background:rgba(251,101,0,.08);
     border-radius:10px;padding:14px 18px;margin-bottom:14px;
   }
   .aviso-cobertura p{margin:0;font-size:12px;color:var(--texto);line-height:1.65;}
@@ -866,7 +868,7 @@
     text-align:right;}
   .comparacion th:first-child,.comparacion td:first-child{text-align:left;}
   .comparacion thead th{position:sticky;top:0;background:var(--panel);}
-  .comparacion td.mejor{color:#3FA796;font-weight:700;}
+  .comparacion td.mejor{color:#8C00E0;font-weight:700;}
   .comparacion td.peor{color:var(--orange);font-weight:700;}
 
   /* EL INFORME IMPRIMIBLE, PLEGADO EN PANTALLA. Ocupaba 65 pantallas repitiendo
@@ -982,7 +984,7 @@
   .fila-nov .cuánto{font-size:11.5px;font-weight:700;text-align:right;
     font-family:'JetBrains Mono',monospace;}
   .fila-nov .cuánto.peor{color:var(--orange);}
-  .fila-nov .cuánto.mejor{color:#3FA796;}
+  .fila-nov .cuánto.mejor{color:#8C00E0;}
   .fila-nov .cuándo{font-size:10px;color:var(--tenue);text-align:right;}
   @media (max-width:520px){
     .fila-nov{grid-template-columns:1fr 84px;grid-template-areas:'quien cuanto' 'que cuando';
@@ -1160,7 +1162,7 @@
 
   .delta{display:inline-block;margin-left:10px;font-size:15px;font-weight:700;
     vertical-align:middle;font-family:'JetBrains Mono',monospace;cursor:help;}
-  .delta.peor{color:var(--orange);} .delta.mejor{color:#3FA796;} .delta.igual{color:var(--tenue);}
+  .delta.peor{color:var(--orange);} .delta.mejor{color:#8C00E0;} .delta.igual{color:var(--tenue);}
 
   /* EL PLEGADO. La seccion plegada es su encabezado; el chevron dice que se
      abre con un clic. */
@@ -1279,12 +1281,12 @@
     --mag-0:#0E2135;
     /* Los colores que SIGNIFICAN algo, con su versión para cada fondo: aviso,
        correcto, serie que no se deja proyectar y falla. No se apagan a gris. */
-    --t-aviso:#ffb27a; --t-ok:#7fd3c4; --t-violeta:#c79bf0; --t-falla:#ff9c86;
-    --navy-hondo:#07131E; --navy:#00121E; --gris-azul:#667B89;
-    --violeta:#8C00E0; --violeta-hondo:#460070; --violeta-claro:#BA66EC;
-    --naranja:#FB6500;
-    --peor:#FB6500; --mejor:#3FA796; --sin-dato:rgba(255,255,255,.05);
-    --no-proyectable:rgba(140,0,224,.22);
+    --t-aviso:#ffb27a; --t-ok:#BA66EC; --t-violeta:#c79bf0; --t-falla:#ffb27a;
+    --navy-hondo:var(--fusk-navy-hondo,#07131E); --navy:var(--fusk-navy,#00121E); --gris-azul:var(--fusk-gris-azul,#667B89);
+    --violeta:var(--fusk-violeta,#8C00E0); --violeta-hondo:var(--fusk-violeta-hondo,#460070); --violeta-claro:var(--fusk-violeta-claro,#BA66EC);
+    --naranja:var(--fusk-naranja,#FB6500);
+    --peor:var(--fusk-empeora,#FB6500); --mejor:var(--fusk-mejora,#8C00E0); --sin-dato:rgba(255,255,255,.05);
+    --no-proyectable:rgba(102,123,137,.28);
     /* La tinta del nivel: la decide el nivel de lectura, no el tema. */
     --tinta:#FB6500; --tinta-suave:rgba(251,101,0,.14); --tinta-borde:rgba(251,101,0,.45);
   }
@@ -1365,7 +1367,7 @@
   /* LA SEGUNDA FUENTE. No es un adorno: es la unica parte del registro donde dos
      fuentes independientes miden lo mismo y no siempre coinciden. */
   .segunda-fuente{margin:10px 0 4px;padding:9px 12px;border-left:3px solid var(--mejor);
-    background:rgba(63,167,150,.08);border-radius:0 6px 6px 0;font-size:11.5px;line-height:1.55;}
+    background:rgba(140,0,224,.08);border-radius:0 6px 6px 0;font-size:11.5px;line-height:1.55;}
   .segunda-fuente b{color:var(--texto-max);}
   .segunda-fuente .ojo{display:block;margin-top:5px;color:var(--tenue);font-size:10.5px;}
 
@@ -1441,7 +1443,7 @@
   .dc.dc-sin .dc-cifra{color:var(--tenue);}
   .cuando-dato{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
     padding:1px 6px;border-radius:999px;margin-left:4px;vertical-align:middle;}
-  .cuando-dato.fresco{background:rgba(63,167,150,.18);color:var(--t-ok);}
+  .cuando-dato.fresco{background:rgba(140,0,224,.18);color:var(--t-ok);}
   .cuando-dato.medio{background:rgba(251,101,0,.14);color:var(--t-aviso);}
   .cuando-dato.viejo{background:var(--velo-2);color:var(--texto-2);}
   .fc-nota{font-size:11px;color:var(--tenue);line-height:1.5;margin:8px 0 0;}
@@ -1683,7 +1685,7 @@
   .uni-fila .t{font-size:10px;text-align:right;}
   .marca-tasa{display:inline-block;padding:1px 6px;border-radius:3px;font-size:9.5px;
     font-weight:700;letter-spacing:.3px;}
-  .marca-tasa.si{background:rgba(63,167,150,.18);color:var(--t-ok);}
+  .marca-tasa.si{background:rgba(140,0,224,.18);color:var(--t-ok);}
   .marca-tasa.no{background:rgba(140,0,224,.16);color:var(--t-violeta);}
   .marca-tasa.nd{background:var(--velo-2);color:var(--tenue);}
   .uni-cab{display:grid;grid-template-columns:1fr 62px 92px 74px;gap:10px;font-size:9.5px;
@@ -1764,7 +1766,7 @@
   .cuad span{color:var(--texto-2);}
   .cuad.malmal{border-left-color:#FB6500;}
   .cuad.mixto{border-left-color:var(--tenue);}
-  .cuad.bienbien{border-left-color:#3FA796;}
+  .cuad.bienbien{border-left-color:#8C00E0;}
   .grafico .rejilla{stroke:var(--velo-2);stroke-width:1;}
   /* La mediana parte el gráfico en cuadrantes: si no se ve, los cuadrantes no
      se entienden. Era blanca al 20 % e invisible sobre el fondo claro. */
@@ -1773,7 +1775,7 @@
   .grafico .puntog{stroke:rgba(0,18,30,.85);stroke-width:1;}
   .grafico .puntog.malmal{fill:#FB6500;}
   .grafico .puntog.mixto{fill:var(--tenue);}
-  .grafico .puntog.bienbien{fill:#3FA796;}
+  .grafico .puntog.bienbien{fill:#8C00E0;}
   .grafico .puntog.destacada{stroke:#fff;stroke-width:2;}
   .grafico .etiqueta{font-size:9px;fill:var(--texto-2);}
   .grafico .etiqueta.destacada{fill:#fff;font-weight:700;font-size:10px;}
@@ -1786,7 +1788,7 @@
   .leyenda-cruce .pt{width:9px;height:9px;border-radius:50%;display:inline-block;}
   .leyenda-cruce .pt.malmal{background:#FB6500;}
   .leyenda-cruce .pt.mixto{background:var(--tenue);}
-  .leyenda-cruce .pt.bienbien{background:#3FA796;}
+  .leyenda-cruce .pt.bienbien{background:#8C00E0;}
   .leyenda-cruce .pt.linea-mediana{width:16px;height:0;border-radius:0;border-top:1px dashed rgba(255,255,255,.45);}
   .leyenda-cruce .pt.linea-recta{width:16px;height:0;border-radius:0;border-top:2.5px solid #8C00E0;}
   .cruzar{align-items:flex-start;flex-wrap:wrap;}
@@ -1972,7 +1974,7 @@
     display:inline-block;padding:2px 9px;border-radius:999px;font-size:9.5px;
     font-weight:700;letter-spacing:.4px;text-transform:uppercase;
   }
-  .op-estado.publicado{background:rgba(63,167,150,.22);color:var(--t-ok);}
+  .op-estado.publicado{background:rgba(140,0,224,.22);color:var(--t-ok);}
   .op-estado.parcial{background:rgba(251,101,0,.22);color:var(--t-aviso);}
   .op-estado.sin_verificar{background:rgba(125,144,168,.18);color:var(--texto-2);}
   .op-rastro{
@@ -1995,7 +1997,7 @@
     flex:0 0 auto;font-size:9.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
     padding:3px 9px;border-radius:999px;background:rgba(125,144,168,.18);color:var(--texto-2);
   }
-  .materia .grado.hay{background:rgba(63,167,150,.20);color:var(--t-ok);}
+  .materia .grado.hay{background:rgba(140,0,224,.20);color:var(--t-ok);}
   .materia .grado.poco{background:rgba(251,101,0,.20);color:var(--t-aviso);}
   .materia .porque{margin:0;font-size:11.5px;line-height:1.55;color:var(--texto-2);}
   .rotulo-bloque{
@@ -2004,13 +2006,13 @@
   }
   .prensa-viva{
     margin:8px 0 0;padding:9px 11px;border-radius:8px;font-size:11px;line-height:1.5;
-    color:var(--texto);background:rgba(63,167,150,.08);border:1px solid rgba(63,167,150,.30);
+    color:var(--texto);background:rgba(140,0,224,.08);border:1px solid rgba(140,0,224,.30);
   }
   .prensa-viva b{color:var(--texto-max);}
   .prensa-viva .titulares{display:flex;flex-direction:column;gap:4px;margin:7px 0 0;}
   .prensa-viva .titulares a{
     color:var(--t-ok);text-decoration:none;font-size:11px;line-height:1.35;
-    border-left:2px solid rgba(63,167,150,.45);padding-left:7px;
+    border-left:2px solid rgba(140,0,224,.45);padding-left:7px;
   }
   .prensa-viva .titulares a:hover{color:var(--texto-max);}
   .prensa-viva .titulares .quien{display:block;color:var(--tenue);font-size:10px;}
@@ -2157,7 +2159,7 @@
     display:inline-block;padding:2px 9px;border-radius:999px;font-size:9.5px;
     font-weight:700;letter-spacing:.4px;text-transform:uppercase;
   }
-  .sello.libre{background:rgba(63,167,150,.22);color:var(--t-ok);}
+  .sello.libre{background:rgba(140,0,224,.22);color:var(--t-ok);}
   .sello.reservado{background:rgba(140,0,224,.22);color:var(--t-violeta);}
   .secciones-fusk{
     display:grid;grid-template-columns:repeat(auto-fit,minmax(min(232px, 100%), 1fr));gap:8px;margin-top:10px;
@@ -2283,7 +2285,7 @@
     --velo-1:rgba(0,18,30,.035); --velo-2:rgba(0,18,30,.08); --velo-3:rgba(0,18,30,.12);
     --mag-0:rgba(251,101,0,.10);
     --line:#E3DCD0;
-    --t-aviso:#A34700; --t-ok:#166B5E; --t-violeta:#5B1E8C; --t-falla:#A3231B;
+    --t-aviso:#A34700; --t-ok:#5B1E8C; --t-violeta:#5B1E8C; --t-falla:#A34700;
     background:var(--fondo); color:var(--texto);
   }
   /* LAS SUPERFICIES QUE SIGUEN SIENDO OSCURAS LLEVAN SU PROPIA PALETA DE TEXTO.
@@ -2549,10 +2551,10 @@
       <ul class="ay-colores">
         <li><i class="c-peor"></i><span><b>Naranja: peor</b>, según el criterio de la fuente,
           no de la Fundación. Cuanto más intenso, más alto el valor.</span></li>
-        <li><i class="c-mejor"></i><span><b>Verde: mejor.</b></span></li>
+        <li><i class="c-mejor"></i><span><b>Violeta: mejor.</b></span></li>
         <li><i class="c-sin"></i><span><b>Punteado: sin dato.</b> No es cero: es que nadie lo
           midió para ese Estado. La leyenda dice cuántos son.</span></li>
-        <li><i class="c-noproy"></i><span><b>Violeta: la serie no se deja proyectar</b>, porque
+        <li><i class="c-noproy"></i><span><b>Gris azul: la serie no se deja proyectar</b>, porque
           no describe una recta.</span></li>
       </ul>
 
@@ -5598,7 +5600,7 @@
               + '<line x1="' + x(med).toFixed(1) + '" y1="4" x2="' + x(med).toFixed(1)
               + '" y2="18" stroke="#7d90a8" stroke-width="1" stroke-dasharray="2 2"></line>'
               + '<circle cx="' + x(v).toFixed(1) + '" cy="11" r="4.2" fill="'
-              + (v > med ? 'var(--orange)' : '#3FA796') + '" stroke="#00121E" '
+              + (v > med ? 'var(--orange)' : '#8C00E0') + '" stroke="#00121E" '
               + 'stroke-width="1.2"></circle></svg>';
           }
         }
@@ -5759,7 +5761,7 @@
     const orientada = cap.subeEsPeor !== undefined;
     const propio = todos[iso];
     const mal = orientada && (cap.subeEsPeor ? propio > med : propio < med);
-    const color = !orientada ? '#8C00E0' : mal ? 'var(--orange)' : '#3FA796';
+    const color = !orientada ? '#667B89' : mal ? 'var(--orange)' : '#8C00E0';
     return '<svg class="mini" viewBox="0 0 ' + an + ' ' + al + '" width="' + an
       + '" height="' + al + '" role="img" aria-label="Posición en la escala de la región">'
       + '<line x1="' + m + '" y1="11" x2="' + (an - m) + '" y2="11" '
@@ -5785,7 +5787,7 @@
     const d = s.map((a,i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(a.valor).toFixed(1)).join(' ');
     const sube = v[v.length - 1] > v[0];
     const peor = cap.subeEsPeor === undefined ? null : (cap.subeEsPeor ? sube : !sube);
-    const color = peor === null ? '#9fb2c8' : peor ? 'var(--orange)' : '#3FA796';
+    const color = peor === null ? '#9fb2c8' : peor ? 'var(--orange)' : '#8C00E0';
     return '<svg class="mini" viewBox="0 0 ' + an + ' ' + al + '" width="' + an + '" height="' + al
       + '" role="img" aria-label="Serie de ' + s.length + ' años, de ' + s[0].anio
       + ' a ' + s[s.length-1].anio + '">'
@@ -7160,7 +7162,7 @@
   //
   // El nombre va pegado al final de cada línea y no en una leyenda aparte: una
   // leyenda obliga al ojo a ir y volver entre el color y el nombre.
-  const TINTAS = ['var(--orange)', '#3FA796', '#8C00E0', '#9fb2c8'];
+  const TINTAS = ['var(--orange)', '#8C00E0', '#8C00E0', '#9fb2c8'];
 
   function figuraSeriesComparadas(clave, estados){
     const cap = (capas() || {})[clave];
@@ -7269,7 +7271,7 @@
       const orientada = cap.subeEsPeor !== undefined;
       const peor = orientada && (cap.subeEsPeor ? x.d.valor === maximo : x.d.valor === minimo);
       const color = !orientada ? 'rgba(140,0,224,.75)'
-                  : peor ? 'rgba(251,101,0,.85)' : 'rgba(63,167,150,.7)';
+                  : peor ? 'rgba(251,101,0,.85)' : 'rgba(140,0,224,.7)';
       return '<g>'
         + '<text x="' + (margenIzq - 8) + '" y="' + (y + 15) + '" text-anchor="end" '
         + 'fill="#C7D2E0" font-size="11">' + esc(nombre(x.iso)) + '</text>'
@@ -7566,7 +7568,7 @@
       + '<circle' + marcaViva(iso, 'Situación general', cifra(propio)) + ' cx="'
       + x(propio).toFixed(1) + '" cy="' + y + '" r="6.5" fill="var(--orange)" '
       + 'stroke="#00121E" stroke-width="1.5"></circle>'
-      + '<text x="' + m + '" y="14" fill="#3FA796" font-size="9.5">'
+      + '<text x="' + m + '" y="14" fill="#8C00E0" font-size="9.5">'
       + esc(nom(elMejor[0])) + ' ' + cifra(elMejor[1]) + '</text>'
       + '<text x="' + (an - m) + '" y="14" text-anchor="end" fill="var(--orange)" '
       + 'font-size="9.5">' + esc(nom(elPeor[0])) + ' ' + cifra(elPeor[1]) + '</text>'
@@ -7997,7 +7999,7 @@
   // El tercer color es el del TEXTO y no blanco: sobre el fondo claro del sitio, una
   // línea blanca no se veía.
   const CTOR_COLORES = [
-    {c:'var(--orange)', d:''}, {c:'#3FA796', d:''}, {c:'currentColor', d:''},
+    {c:'var(--orange)', d:''}, {c:'#8C00E0', d:''}, {c:'currentColor', d:''},
     {c:'var(--purple)', d:''}, {c:'#7d90a8', d:'5 4'}];
   const ctor = {tipo:'serie', tema:null, tema2:null, paises:[]};
 
@@ -8497,13 +8499,13 @@
     // tiene que verse que es otra fuente, no la continuación de la misma línea.
     const trazoPropio = hayPropio
       ? '<path d="' + delEstado.map((a,i) => (i ? 'L' : 'M') + x(a.anio).toFixed(1) + ' '
-          + y(a.valor).toFixed(1)).join(' ') + '" fill="none" stroke="#3FA796" '
+          + y(a.valor).toFixed(1)).join(' ') + '" fill="none" stroke="#8C00E0" '
         + 'stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"></path>'
         + delEstado.map(a => '<circle cx="' + x(a.anio).toFixed(1) + '" cy="'
-            + y(a.valor).toFixed(1) + '" r="2.6" fill="#3FA796"></circle>').join('')
+            + y(a.valor).toFixed(1) + '" r="2.6" fill="#8C00E0"></circle>').join('')
         + '<text x="' + x(anioPropioFin).toFixed(1) + '" y="'
         + (y(delEstado[delEstado.length-1].valor) + 13).toFixed(1) + '" text-anchor="middle" '
-        + 'fill="#3FA796" font-size="10" font-weight="700">'
+        + 'fill="#8C00E0" font-size="10" font-weight="700">'
         + cifra(delEstado[delEstado.length-1].valor) + '</text>'
       : '';
 
@@ -8556,7 +8558,7 @@
         ? 'Es ' + quienDato + ' —un recuento de víctimas— convertido a tasa por '
           + esc(propio.quien) + ', para poder ponerlo en esta escala'
         : 'Es la tasa oficial que calcula ' + esc(propio.quien) + ', en la misma unidad';
-      pieEstado = '<small class="pie-tira"><b style="color:#3FA796">En verde, lo que ya '
+      pieEstado = '<small class="pie-tira"><b style="color:#8C00E0">En violeta, lo que ya '
         + 'publicó ' + esc(nombreDe(iso)) + '.</b> ' + como + ', hasta <b>' + anioPropioFin + '</b>.'
         + dice + ' <span class="ojo">No es la misma fuente que la línea naranja —esa es la '
         + 'serie homologada de la UNODC, la que se usa para comparar entre países— y por eso '
@@ -8849,7 +8851,7 @@
 
   // Paleta por magnitud (peor = más naranja) y divergente (peor naranja, mejor verde).
   const MAG = ['var(--mag-0)','rgba(251,101,0,.28)','rgba(251,101,0,.55)','rgba(251,101,0,.85)'];
-  const DIV = ['rgba(251,101,0,.85)','rgba(251,101,0,.40)','rgba(63,167,150,.40)','rgba(63,167,150,.75)'];
+  const DIV = ['rgba(251,101,0,.85)','rgba(251,101,0,.40)','rgba(140,0,224,.40)','rgba(140,0,224,.75)'];
 
   // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
   // agregar un colector nuevo no obligue a tocar el resto de la página.
@@ -12961,7 +12963,7 @@
   // ambito elegido, el primer anillo las seis materias, y el de afuera los
   // indicadores y registros con que se miden, con el color de su eje. Sale de
   // MATERIAS_FUSK y de los datos cargados; no hay una lista aparte.
-  const TINTA_EJE = {Seguridad:'var(--orange)', Gobernanza:'#8C00E0', Desarrollo:'#3FA796',
+  const TINTA_EJE = {Seguridad:'var(--orange)', Gobernanza:'#8C00E0', Desarrollo:'#8C00E0',
                      Defensa:'#9fb2c8', Fuentes:'#7d90a8'};
 
   function nodosDeMateria(m, iso){
@@ -13646,7 +13648,7 @@
 
   const EXPLICA = {
     _wgi: q => `<b>Qué muestra:</b> la estimación de ${q} del Banco Mundial, en escala aproximada de -2,5 a 2,5. `+
-      `Verde mejor, naranja peor.`+
+      `Violeta mejor, naranja peor.`+
       `<span class="no-es"><b>Qué no es:</b> no cuenta hechos. Es una <b>estimación de percepción</b> construida agregando `+
       `encuestas y evaluaciones de expertos: mide cómo se percibe la situación, no la situación. Presentarla como recuento `+
       `sería un error de método.</span>`,
@@ -13669,7 +13671,7 @@
       const a=almacen.serie&&almacen.serie.registros[0]?almacen.serie.registros[0].serie:[];
       const par=a.length>1?`${a[a.length-2].anio} contra ${a[a.length-1].anio}`:'—';
       return `<b>Qué muestra:</b> cuánto varió la expulsión de personas entre los dos últimos años publicados (${par}). `+
-        `Verde baja, naranja sube. Es lo que el nivel absoluto no dice.`+
+        `Violeta baja, naranja sube. Es lo que el nivel absoluto no dice.`+
         `<span class="no-es"><b>Qué no es:</b> no es una proyección ni un pronóstico. Es aritmética sobre dos cifras `+
         `publicadas. SIWA no estima el futuro; eso sale por los productos, firmado y con probabilidad declarada.</span>`;
     },
@@ -14201,7 +14203,7 @@
       const pu = c.puesto[iso]; if(!pu) return '';
       const q = pu / c.total;
       const col = q<=.25 ? 'rgba(251,101,0,.55)' : q<=.5 ? 'rgba(251,101,0,.28)'
-                : q<=.75 ? 'rgba(63,167,150,.20)' : 'rgba(63,167,150,.38)';
+                : q<=.75 ? 'rgba(140,0,224,.20)' : 'rgba(140,0,224,.38)';
       return `background:${col}`;
     };
     return `<figure class="grafico"><figcaption>${cols.length} temas comparados · ${filas.length} Estados con al menos dos</figcaption>
@@ -14216,7 +14218,7 @@
           }).join('')}</tr>`).join('')}
       </tbody></table></div></figure>
       <p class="sin-dato">El color indica el <b>lugar que ocupa cada Estado dentro de la región</b> en ese tema:
-         naranja el cuarto peor, verde el cuarto mejor. <b>No se promedian los temas entre sí</b>: son unidades
+         naranja el cuarto peor, violeta el cuarto mejor. <b>No se promedian los temas entre sí</b>: son unidades
          distintas y un promedio no significaría nada. Se muestra coincidencia, no causa.</p>`;
   }
 
@@ -17877,6 +17879,142 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     s.src='_comun/guia-siwa.js'+(v?('?v='+v):''); document.head.appendChild(s); }
   fetch('_comun/assets.json',{cache:'no-store'}).then(function(r){return r.json();})
     .then(function(m){ cargar(m&&m['guia-siwa.js']); }).catch(function(){ cargar(); });
+})();
+</script>
+
+<!-- ============================================================
+     CONSULTA RÁPIDA (acta 25/9): al tocar una categoría del panel
+     izquierdo, una tarjeta flotante muestra el dato de ese país+
+     categoría SIN mover la página, con enlace a la sección completa.
+     Lee lo que ya está en la página (no gasta tokens, no pide nada).
+     ============================================================ -->
+<style>
+  .qa-backdrop{position:fixed;inset:0;z-index:1200;display:none;
+    background:rgba(0,18,30,.45);backdrop-filter:blur(2px);
+    align-items:center;justify-content:center;padding:16px;}
+  .qa-backdrop[data-abierto]{display:flex;}
+  .qa-card{background:var(--panel);color:var(--texto);border:1px solid var(--line);
+    border-radius:14px;width:100%;max-width:460px;max-height:82vh;overflow:auto;
+    box-shadow:0 18px 60px rgba(0,18,30,.35);padding:18px 20px 16px;position:relative;
+    font-family:'Inter',system-ui,sans-serif;}
+  .qa-x{position:absolute;top:10px;right:12px;background:transparent;border:0;
+    color:var(--tenue);font-size:22px;line-height:1;cursor:pointer;padding:2px 6px;}
+  .qa-x:hover{color:var(--texto-max);}
+  .qa-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--fusk-violeta,#8C00E0);margin:0 0 2px;}
+  .qa-titulo{font-size:19px;font-weight:800;margin:0 0 2px;padding-right:26px;line-height:1.2;}
+  .qa-sub{font-size:12.5px;color:var(--tenue);margin:0 0 12px;}
+  .qa-lista{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .qa-item{display:flex;flex-direction:column;gap:2px;padding-bottom:9px;
+    border-bottom:1px solid var(--line);}
+  .qa-item:last-child{border-bottom:0;padding-bottom:0;}
+  .qa-item .qa-l{font-size:12.5px;color:var(--texto-2);line-height:1.35;}
+  .qa-item .qa-fila{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .qa-item .qa-v{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:800;
+    color:var(--texto-max);}
+  .qa-item .qa-u{font-size:11.5px;color:var(--tenue);}
+  .qa-fuente{font-size:11.5px;color:var(--tenue);line-height:1.5;margin:0 0 14px;
+    padding-top:10px;border-top:1px solid var(--line);}
+  .qa-acciones{display:flex;gap:10px;flex-wrap:wrap;}
+  .qa-ir{flex:1;text-align:center;background:var(--fusk-violeta,#8C00E0);color:#fff;
+    text-decoration:none;font-weight:700;font-size:13px;padding:10px 14px;border-radius:9px;}
+  .qa-ir:hover{filter:brightness(1.08);}
+  .qa-cerrar2{background:transparent;border:1px solid var(--line);color:var(--texto-2);
+    font-family:'Inter';font-weight:600;font-size:13px;padding:10px 14px;border-radius:9px;cursor:pointer;}
+  .qa-vacio{font-size:13px;color:var(--texto-2);line-height:1.5;margin:0 0 14px;}
+  @media (max-width:560px){
+    .qa-backdrop{align-items:flex-end;padding:0;}
+    .qa-card{max-width:none;border-radius:16px 16px 0 0;max-height:88vh;}
+  }
+  @media (prefers-reduced-motion:reduce){.qa-backdrop{backdrop-filter:none;}}
+</style>
+<div class="qa-backdrop" id="qa-backdrop" role="dialog" aria-modal="true" aria-labelledby="qa-titulo" hidden>
+  <div class="qa-card" id="qa-card"></div>
+</div>
+<script>
+(function(){
+  var bd = document.getElementById('qa-backdrop');
+  var card = document.getElementById('qa-card');
+  if(!bd || !card) return;
+  var rail = document.querySelector('nav.rail') || document.querySelector('nav');
+  if(!rail) return;
+
+  function esCategoria(sec){ return sec && (sec.classList.contains('categoria') || sec.querySelector('.grid-cards .card')); }
+  function txt(el){ return el ? el.textContent.replace(/\s+/g,' ').trim() : ''; }
+  function pais(){ var t=(document.title||'').split('—')[0].trim(); return t && t.toLowerCase().indexOf('siwa')<0 ? t : ''; }
+
+  function abrir(sec, nombre){
+    var cards = [].slice.call(sec.querySelectorAll('.grid-cards .card')).slice(0,8);
+    var p = pais();
+    var sub = (p ? p+' · ' : '') + cards.length + ' indicador' + (cards.length===1?'':'es');
+    var h = '<button class="qa-x" id="qa-x" aria-label="Cerrar">×</button>'
+          + '<p class="qa-eyebrow">Consulta rápida</p>'
+          + '<h3 class="qa-titulo" id="qa-titulo">'+ (nombre||'Categoría') +'</h3>'
+          + '<p class="qa-sub">'+ sub +'</p>';
+    if(cards.length){
+      h += '<ul class="qa-lista">';
+      cards.forEach(function(c){
+        var h4 = txt(c.querySelector('h4,h3,.dc-rotulo'));
+        var val = txt(c.querySelector('.value,.dc-cifra'));
+        var subs = [].slice.call(c.querySelectorAll('.sub')).map(txt);
+        var sub0 = subs[0] || '';
+        // La estructura de tarjeta varía entre categorías: a veces el <h4> es el
+        // nombre del indicador (Terrorismo) y a veces es el país (Flujos ilícitos),
+        // con el indicador en .sub. Se elige la etiqueta que describe el dato, y
+        // nunca se muestra el nombre del país como etiqueta.
+        var esPais = h4 && p && h4.toLowerCase() === p.toLowerCase();
+        var label, unidad;
+        if (h4 && !esPais) { label = h4; unidad = sub0.split('·')[0].trim(); }
+        else { label = sub0.split('·')[0].trim() || h4 || '—'; unidad = ''; }
+        // Frescura: la badge .edad si existe; si no, el año que aparezca en los .sub.
+        var edad = c.querySelector('.edad');
+        var edadTxt = edad ? txt(edad) : '';
+        var edadHtml = '';
+        if (edadTxt) {
+          var cls = edad.className.indexOf('fresco')>=0?'fresco':edad.className.indexOf('viejo')>=0?'viejo':'medio';
+          edadHtml = ' <span class="edad '+cls+'">'+edadTxt+'</span>';
+        } else {
+          var m = subs.join(' ').match(/dato de\s+(\d{4})|·\s*(\d{4})\b/);
+          if (m) edadHtml = ' <span class="qa-u">dato de '+(m[1]||m[2])+'</span>';
+        }
+        h += '<li class="qa-item"><span class="qa-l">'+ label +'</span>'
+           + '<span class="qa-fila"><span class="qa-v">'+ (val||'—') +'</span>'
+           + (unidad? '<span class="qa-u">'+unidad+'</span>':'')
+           + edadHtml
+           + '</span></li>';
+      });
+      h += '</ul>';
+    } else {
+      h += '<p class="qa-vacio">Esta sección no resume un número simple. Abrila para ver el detalle.</p>';
+    }
+    var proc = txt(sec.querySelector('.procedencia'));
+    if(proc) h += '<p class="qa-fuente">'+ proc +'</p>';
+    h += '<div class="qa-acciones">'
+       + '<a class="qa-ir" id="qa-ir" href="#'+ sec.id +'">Ver la sección completa →</a>'
+       + '<button class="qa-cerrar2" id="qa-cerrar2" type="button">Cerrar</button>'
+       + '</div>';
+    card.innerHTML = h;
+    bd.hidden = false; bd.setAttribute('data-abierto','1');
+    document.getElementById('qa-x').addEventListener('click', cerrar);
+    document.getElementById('qa-cerrar2').addEventListener('click', cerrar);
+    document.getElementById('qa-ir').addEventListener('click', function(e){
+      e.preventDefault(); cerrar();
+      var s=document.getElementById(sec.id);
+      if(s){ s.scrollIntoView({behavior:'smooth',block:'start'}); history.replaceState(null,'','#'+sec.id); }
+    });
+    var x=document.getElementById('qa-x'); if(x) x.focus();
+  }
+  function cerrar(){ bd.removeAttribute('data-abierto'); bd.hidden = true; card.innerHTML=''; }
+
+  rail.addEventListener('click', function(e){
+    var a = e.target.closest('a[href^="#"]');
+    if(!a || !rail.contains(a)) return;
+    var id = a.getAttribute('href').slice(1);
+    var sec = id && document.getElementById(id);
+    if(esCategoria(sec)){ e.preventDefault(); abrir(sec, txt(a)); }
+  });
+  bd.addEventListener('click', function(e){ if(e.target===bd) cerrar(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && bd.hasAttribute('data-abierto')) cerrar(); });
 })();
 </script>
 </body>
