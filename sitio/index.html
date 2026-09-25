@@ -13982,7 +13982,7 @@
         (tv!==null&&tv!==undefined&&f.valor_inicial>0&&f.valor>=0)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
       ${tarjeta.sinDetenida ? '' : avisoDetenida(info)}
       <div class="foot"><span class="src">${esc(info.origen||meta.fuente.nombre)}</span>
-        <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
+        <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>${notaArmonizacion(info.clave, paisFiltro)}</div>`;
   }
 
   // «Hace cinco años» y «el productor dejó de publicar» se leen igual y no son
