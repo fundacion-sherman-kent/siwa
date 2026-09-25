@@ -17954,16 +17954,33 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     if(cards.length){
       h += '<ul class="qa-lista">';
       cards.forEach(function(c){
-        var label = txt(c.querySelector('h4,h3,.dc-rotulo'));
-        var val   = txt(c.querySelector('.value,.dc-cifra'));
-        var subEl = txt(c.querySelector('.sub'));
-        var unidad = subEl ? subEl.split('·')[0].trim() : '';
-        var edad  = c.querySelector('.edad');
+        var h4 = txt(c.querySelector('h4,h3,.dc-rotulo'));
+        var val = txt(c.querySelector('.value,.dc-cifra'));
+        var subs = [].slice.call(c.querySelectorAll('.sub')).map(txt);
+        var sub0 = subs[0] || '';
+        // La estructura de tarjeta varía entre categorías: a veces el <h4> es el
+        // nombre del indicador (Terrorismo) y a veces es el país (Flujos ilícitos),
+        // con el indicador en .sub. Se elige la etiqueta que describe el dato, y
+        // nunca se muestra el nombre del país como etiqueta.
+        var esPais = h4 && p && h4.toLowerCase() === p.toLowerCase();
+        var label, unidad;
+        if (h4 && !esPais) { label = h4; unidad = sub0.split('·')[0].trim(); }
+        else { label = sub0.split('·')[0].trim() || h4 || '—'; unidad = ''; }
+        // Frescura: la badge .edad si existe; si no, el año que aparezca en los .sub.
+        var edad = c.querySelector('.edad');
         var edadTxt = edad ? txt(edad) : '';
-        h += '<li class="qa-item"><span class="qa-l">'+ (label||'—') +'</span>'
+        var edadHtml = '';
+        if (edadTxt) {
+          var cls = edad.className.indexOf('fresco')>=0?'fresco':edad.className.indexOf('viejo')>=0?'viejo':'medio';
+          edadHtml = ' <span class="edad '+cls+'">'+edadTxt+'</span>';
+        } else {
+          var m = subs.join(' ').match(/dato de\s+(\d{4})|·\s*(\d{4})\b/);
+          if (m) edadHtml = ' <span class="qa-u">dato de '+(m[1]||m[2])+'</span>';
+        }
+        h += '<li class="qa-item"><span class="qa-l">'+ label +'</span>'
            + '<span class="qa-fila"><span class="qa-v">'+ (val||'—') +'</span>'
            + (unidad? '<span class="qa-u">'+unidad+'</span>':'')
-           + (edadTxt? ' <span class="edad '+(edad.className.indexOf('fresco')>=0?'fresco':edad.className.indexOf('viejo')>=0?'viejo':'medio')+'">'+edadTxt+'</span>':'')
+           + edadHtml
            + '</span></li>';
       });
       h += '</ul>';
