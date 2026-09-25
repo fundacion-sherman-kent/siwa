@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-24T23:24:51+00:00",
+  "corrida": "2026-09-25T00:34:24+00:00",
   "medidas_con_suficientes_casos": 206,
   "pares_probados": 21115,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3959,
+    "sobreviven": 3961,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3548,
+  "pistas_totales": 3550,
   "anomalias_totales": 384,
   "pistas": [
     {
@@ -236,7 +236,7 @@
       "coeficiente": 0.939,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 2.8412892648843895e-21,
+      "p": 2.9550604820416193e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -658,19 +658,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.897,
-      "estados": 23,
-      "tipo": "rangos (Spearman)",
-      "p": 6.817618191063002e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Corrupción política",
@@ -714,23 +701,10 @@
       "b": "perdida_bosque",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.889,
+      "coeficiente": 0.89,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 8.558489270876394e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.889,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.878057101593643e-15,
+      "p": 7.0690915841837005e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +770,32 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 7.061326432405993e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ransomware:grupos_distintos",
+      "b": "reservas_internacionales",
+      "rotulo_a": "ransomware · grupos_distintos",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.886,
+      "estados": 28,
+      "tipo": "rangos (Spearman)",
+      "p": 2.220061914883335e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "poblacion",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Población total",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.885,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 3.565480405450303e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
