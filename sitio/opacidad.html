@@ -10,11 +10,11 @@
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <script src="lib/echarts.min.js"></script>
 <style>
-  :root{--orange:#FB6500;--verde:#3FA796;--rojo:#C23B22;
+  :root{--orange:#FB6500;--verde:#8C00E0;--rojo:#FB6500;
     --fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;--linea:#d7dce3;--caja:#ffffff;--navy:#00121E;}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
-    --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#3FA796;--rojo:#C23B22;}}
-  :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#3FA796;--rojo:#C23B22;}
+    --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#8C00E0;--rojo:#FB6500;}}
+  :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--verde:#8C00E0;--rojo:#FB6500;}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--fondo);color:var(--tinta);
     font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5;}
@@ -98,7 +98,7 @@
   </div>
   <div id="grafico"></div>
   <p class="pie">
-    <b>Verde = transparente · rojo = opaco.</b> En "ranking por puesto" cada línea es un Estado y sube
+    <b>Claro = transparente · violeta oscuro = opaco.</b> En "ranking por puesto" cada línea es un Estado y sube
     o baja cuando cambia de puesto; en "evolución" las barras corren mostrando el cambio día a día.
     <span class="tenue">Índice de Opacidad, edición 1 · pesos iguales, escala 0–100 · actualización diaria ·
     indicador compuesto según el marco OCDE–JRC.</span>
@@ -111,7 +111,7 @@ const BASE = "https://siwa.fundacionkent.org/datos/publico/";
 const chart = echarts.init(document.getElementById('grafico'), null, {renderer:'svg'});
 window.addEventListener('resize', ()=>chart.resize());
 const cssvar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-function color(v){ return v<=20?cssvar('--verde'): v>=55?cssvar('--rojo'):cssvar('--orange'); }
+function color(v){ return v<=20?'#BA66EC': v>=55?'#460070':'#8C00E0'; } // rampa violeta de magnitud (manual)
 
 async function datos(){
   try{ const r=await fetch(BASE+"opacidad_historia.json",{cache:"no-store"}); if(!r.ok) throw 0;

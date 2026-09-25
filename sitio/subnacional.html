@@ -10,7 +10,7 @@
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <script src="lib/echarts.min.js"></script>
 <style>
-  :root{--orange:#FB6500;--verde:#3FA796;--rojo:#C23B22;--purple:#8C00E0;--grey-blue:#667B89;
+  :root{--orange:#FB6500;--verde:#8C00E0;--rojo:#FB6500;--purple:#8C00E0;--grey-blue:#667B89;
     --fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;--linea:#d7dce3;--caja:#ffffff;--navy:#00121E;}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;}}
@@ -54,7 +54,7 @@
   .cab-ind h2{font-size:18px;margin:0;letter-spacing:-.2px;}
   .badge{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
     padding:3px 9px;border-radius:20px;white-space:nowrap;}
-  .b-prim{background:rgba(63,167,150,.16);color:var(--verde);}
+  .b-prim{background:rgba(140,0,224,.16);color:var(--verde);}
   .b-sec{background:rgba(251,101,0,.15);color:var(--orange);}
   .b-sat{background:rgba(102,123,137,.18);color:var(--grey-blue);}
   .cal{font-size:11.5px;color:var(--tenue);font-variant-numeric:tabular-nums;}
@@ -358,7 +358,7 @@ async function renderMapa(datos){
   if(!chart){ chart=echarts.init(document.getElementById('mapa'),null,{renderer:'svg'}); window.addEventListener('resize',()=>chart&&chart.resize()); }
   const cv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
   const materia=f.titulo.split(' por')[0];
-  const VERDE=cv('--verde'), ORANGE=cv('--orange'), ROJO=cv('--rojo');
+  const RB=['#F9F9F7','#BA66EC','#8C00E0','#460070','#00121E']; // rampa violeta de magnitud (manual)
   // JURISDICCIONES MUY CHICAS: a escala país no se ven (CABA, distritos capitales,
   // microestados insulares). Se marcan con un PUNTO coloreado por su valor, con la
   // misma escala, para que existan en el mapa y se puedan tocar.
@@ -371,13 +371,13 @@ async function renderMapa(datos){
     const b=bboxGeom(ft.geometry), dim=Math.max(b[2]-b[0], b[3]-b[1]);
     if(dim < 0.025*dimP){ const val=agg[nm];
       puntos.push({name:nm, value:[(b[0]+b[2])/2,(b[1]+b[3])/2,val],
-        itemStyle:{color:colorEscala(val,maxv,VERDE,ORANGE,ROJO), borderColor:'#fff', borderWidth:1.4}}); } });
+        itemStyle:{color:colorEscala(val,maxv,RB[1],RB[2],RB[3]), borderColor:'#fff', borderWidth:1.4}}); } });
   const tip=o=>{ const v=(o.seriesType==='scatter')?(o.value&&o.value[2]):o.value;
     return (v!=null&&!isNaN(v))? '<b>'+esc(o.name)+'</b><br>'+esc(materia)+': '+Number(v).toLocaleString('es-AR') : '<b>'+esc(o.name)+'</b><br>sin dato'; };
   chart.setOption({ backgroundColor:'transparent',
     tooltip:{trigger:'item', backgroundColor:cv('--caja'), borderColor:cv('--linea'), textStyle:{color:cv('--tinta')}, formatter:tip},
     visualMap:{min:0, max:maxv||1, left:12, bottom:16, calculable:true, text:['más','menos'],
-      textStyle:{color:cv('--tinta')}, inRange:{color:[VERDE,ORANGE,ROJO]}, seriesIndex:0},
+      textStyle:{color:cv('--tinta')}, inRange:{color:RB}, seriesIndex:0},
     geo:{ map:'u_'+iso, roam:true, aspectScale:1,
       itemStyle:{borderColor:cv('--fondo'), borderWidth:.6, areaColor:'rgba(102,123,137,.14)'},
       emphasis:{label:{show:true,color:cv('--tinta')}, itemStyle:{areaColor:ORANGE}} },
