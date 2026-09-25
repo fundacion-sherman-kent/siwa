@@ -663,6 +663,15 @@ jobs:
         continue-on-error: true
         run: python herramientas/propuestas-frescura.py
 
+      # ARMONIZACION. Lee fuentes/armonizaciones.json y, por cada par declarado
+      # (fuente fresca vs comparable), calcula el enlace por pais y escribe las
+      # fichas en datos/publico/armonizacion.json, que el sitio lee para rotular.
+      # Calcula, no decide: el nivel y el supuesto los confirma una persona.
+      - name: Armonizacion de fuentes
+        id: armonizacion
+        continue-on-error: true
+        run: python herramientas/armonizacion.py
+
       - name: Auditoria del registro
         id: auditoria
         if: always()
