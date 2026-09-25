@@ -146,21 +146,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="_comun/paleta-fusk.css"><!-- FUENTE ÚNICA de la paleta -->
 <style>
   /* Paleta oficial FUSK — manual de identidad.
      Donde el manual rotula un hexadecimal y un RGB que no coinciden, manda el
      hexadecimal. */
   :root{
-    --navy-deep:#00121E;   /* azul de la casa */
-    --navy-black:#07131E;
-    --grey-blue:#667B89;
-    --purple:#8C00E0;      /* violeta del símbolo */
-    --purple-light:#BA66EC;
-    --orange:#FB6500;      /* naranja de la casa */
+    --navy-deep:var(--fusk-navy,#00121E);   /* azul de la casa */
+    --navy-black:var(--fusk-navy-hondo,#07131E);
+    --grey-blue:var(--fusk-gris-azul,#667B89);
+    --purple:var(--fusk-violeta,#8C00E0);      /* violeta del símbolo */
+    --purple-light:var(--fusk-violeta-claro,#BA66EC);
+    --orange:var(--fusk-naranja,#FB6500);      /* naranja de la casa */
     --paper:#F4F2EC;
     --line:rgba(255,255,255,0.10);
-    --ok:#8C00E0;
-    --alert:#FB6500;
+    --ok:var(--fusk-mejora,#8C00E0);
+    --alert:var(--fusk-empeora,#FB6500);
   }
   *{box-sizing:border-box;}
   body{margin:0;font-family:'Inter',sans-serif;background:var(--navy-deep);color:var(--paper);}
@@ -1280,10 +1281,10 @@
     /* Los colores que SIGNIFICAN algo, con su versión para cada fondo: aviso,
        correcto, serie que no se deja proyectar y falla. No se apagan a gris. */
     --t-aviso:#ffb27a; --t-ok:#BA66EC; --t-violeta:#c79bf0; --t-falla:#ffb27a;
-    --navy-hondo:#07131E; --navy:#00121E; --gris-azul:#667B89;
-    --violeta:#8C00E0; --violeta-hondo:#460070; --violeta-claro:#BA66EC;
-    --naranja:#FB6500;
-    --peor:#FB6500; --mejor:#8C00E0; --sin-dato:rgba(255,255,255,.05);
+    --navy-hondo:var(--fusk-navy-hondo,#07131E); --navy:var(--fusk-navy,#00121E); --gris-azul:var(--fusk-gris-azul,#667B89);
+    --violeta:var(--fusk-violeta,#8C00E0); --violeta-hondo:var(--fusk-violeta-hondo,#460070); --violeta-claro:var(--fusk-violeta-claro,#BA66EC);
+    --naranja:var(--fusk-naranja,#FB6500);
+    --peor:var(--fusk-empeora,#FB6500); --mejor:var(--fusk-mejora,#8C00E0); --sin-dato:rgba(255,255,255,.05);
     --no-proyectable:rgba(102,123,137,.28);
     /* La tinta del nivel: la decide el nivel de lectura, no el tema. */
     --tinta:#FB6500; --tinta-suave:rgba(251,101,0,.14); --tinta-borde:rgba(251,101,0,.45);
