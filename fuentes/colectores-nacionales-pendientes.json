@@ -1,0 +1,59 @@
+{
+  "que_es": "Manifiesto build-ready de los colectores nacionales calificados que faltan construir. NO son colectores todavía: son la especificación completa para que cada uno se escriba y se PRUEBE en el robot (que sí alcanza la web; el fetch externo está bloqueado en la herramienta de la Oficina, y algunos portales bloquean hasta la nube —ver colectores/bce_ecuador.py, que tuvo que ir a archivos estáticos—). Cada colector se construye uno por uno, se prueba en el robot y se revisa antes de sumarlo al pipeline diario.",
+  "recordatorio_33": "SIWA es un registro comparativo de los 33 Estados. Estas cuatro fuentes son NACIONALES (de un solo país): cada colector impacta LA FILA de su país, no las 33. Lo que vuelve comparable esa fila es la ARMONIZACIÓN (fuentes/armonizaciones.json + herramientas/armonizacion.py): el dato fresco del país se enlaza a la serie regional. Para impactar los 33 de una, la prioridad son FUENTES REGIONALES (que cubran muchos países), no nacionales sueltas —eso lo sigue buscando el robot Llama—.",
+  "patron_a_seguir": "colectores/bce_ecuador.py (país único, URL sin número fijo, degrada sin tumbar) y colectores/contrataciones_abiertas.py (OCDS). Cada colector escribe en la estructura estándar (registros[].iso, indicadores[clave].{valor,anio,serie}) y, si corresponde, declara su par en fuentes/armonizaciones.json para que el motor lo enlace.",
+  "colectores": [
+    {
+      "nombre": "SIACAM + Secretaría de Energía (Argentina)",
+      "pais": "ARG",
+      "impacta": "fila de Argentina",
+      "temas_siwa": ["minerales", "produccion_litio", "exporta_combustibles", "produccion_petroleo", "reservas_petroleo"],
+      "portal": "datos.gob.ar (CKAN)",
+      "recursos": [
+        "https://www.mecon.gob.ar/dataset/Tablero-Litio/Exportaciones-litio.csv",
+        "https://www.mecon.gob.ar/dataset/Tablero-Litio/Exportaciones-por-destino-litio.csv"
+      ],
+      "formato": "CSV",
+      "metodo_armonizacion": "enlace (litio ⊂ minerales: definir si se muestra como serie propia de litio o se enlaza al agregado de minerales)",
+      "licencia_a_confirmar": "datos.gob.ar suele ser CC-BY 2.0 AR; verificar en el dataset",
+      "riesgo": "el CSV vive en mecon.gob.ar (otro host que datos.gob.ar); confirmar que el robot lo alcanza (como bce_ecuador con los estáticos)."
+    },
+    {
+      "nombre": "SECOP II — Agencia Nacional de Contratación Pública (Colombia)",
+      "pais": "COL",
+      "impacta": "fila de Colombia",
+      "temas_siwa": ["contrataciones_abiertas"],
+      "portal": "datos.gov.co (Socrata — API SODA con JSON y CORS)",
+      "recursos": ["https://www.datos.gov.co/resource/b6m4-qgqv.json"],
+      "formato": "JSON (Socrata) / CSV",
+      "metodo_armonizacion": "concordancia OCDS + normalización; ANTES revisar si colectores/contrataciones_abiertas.py ya cubre OCDS regional para no duplicar",
+      "licencia_a_confirmar": "datos abiertos de Colombia; verificar",
+      "riesgo": "el más fetch-friendly (Socrata da JSON con CORS); es el mejor candidato para el primer colector real."
+    },
+    {
+      "nombre": "Autoridad Marítima de Panamá (AMP) — contenedores del SPN",
+      "pais": "PAN",
+      "impacta": "fila de Panamá",
+      "temas_siwa": ["puertos_contenedores"],
+      "portal": "datosabiertos.gob.pa (CKAN)",
+      "recursos": ["https://www.datosabiertos.gob.pa/dataset/amp-movimiento-de-contenedores-en-el-spn-por-destino-en-teu-enero-2026"],
+      "formato": "xlsx (varias tablas por destino/tipo/TEU/mes)",
+      "metodo_armonizacion": "normalización percentil",
+      "licencia_a_confirmar": "verificar",
+      "riesgo": "varias tablas mensuales; elegir la agregada anual o sumar; xlsx (parsear con openpyxl)."
+    },
+    {
+      "nombre": "INAPI (Chile) — solicitudes/registros de patentes",
+      "pais": "CHL",
+      "impacta": "fila de Chile (refresca 'patentes_residentes', hoy 2021)",
+      "temas_siwa": ["patentes_residentes"],
+      "portal": "datos.gob.cl (CKAN, dataset 14d2cbaf-8160-4c14-aeab-4c595662f660)",
+      "recursos": ["Applications-YYYY.xlsx por año (un registro por solicitud; contar solicitudes de RESIDENTES para igualar IP.PAT.RESD del Banco Mundial)"],
+      "formato": "xlsx (registros crudos)",
+      "metodo_armonizacion": "benchmarking contra la serie WIPO/Banco Mundial (usar el dato fresco de INAPI para actualizar la serie regional)",
+      "licencia_a_confirmar": "verificar",
+      "riesgo": "hay que reproducir la definición del Banco Mundial (solicitudes de residentes) sobre registros crudos; OJO: WIPO (la fuente del BM) puede tener 2022-2023 directo — evaluar re-pull de WIPO antes de armar INAPI."
+    }
+  ],
+  "orden_sugerido": "Empezar por SECOP (Socrata/JSON, el más fetch-friendly) como primer colector real y prueba del circuito completo colector→armonización→ficha→tarjeta. Después AMP y SIACAM. INAPI último (evaluar antes si conviene re-pull de WIPO)."
+}
