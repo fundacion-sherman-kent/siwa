@@ -1,0 +1,29 @@
+{
+  "que_es": "Declaración de pares de fuentes que SIWA armoniza para poder compararlas: una fuente FRESCA (más nueva) y una COMPARABLE (la serie regional de la 'misma vara'), con el MÉTODO que las vuelve comparables. El motor herramientas/armonizacion.py calcula, por país, la relación entre las dos y emite una ficha con la incertidumbre. PROPONE el nivel; el nivel y el supuesto los confirma una persona. Doctrina: doctrina/fuentes.md (armonización).",
+  "como_se_usa": "El motor lee este archivo, cruza las dos series por país, calcula el enlace/normalización y escribe datos/publico/armonizacion.json. El sitio lee ESE archivo para rotular la tarjeta con el dato fresco, su base comparable y la incertidumbre. Agregar un par acá NO incorpora nada solo: hay que tener las dos series ya recolectadas y el nivel confirmado.",
+  "metodos_posibles": [
+    "enlace  · coeficiente/offset sobre los años que se solapan (dos productores del mismo concepto)",
+    "benchmarking · usar la fresca para actualizar la comparable preservando su movimiento (Denton/Chow-Lin)",
+    "normalizacion · llevar a escala común (min-max 0-100, z, percentil) cuando difiere unidad/rango",
+    "concordancia · recodificar definiciones/clasificaciones a una base común (ex-post)"
+  ],
+  "niveles": {
+    "A": "Directa — misma definición y unidad; no hace falta método.",
+    "B": "Armonizada — difiere definición/clasificación/unidad; concordancia + normalización.",
+    "C": "Enlazada/actualizada — distinta fuente con solapamiento o serie guía; enlace o benchmarking, con incertidumbre."
+  },
+  "armonizaciones": [
+    {
+      "indicador": "Esperanza de vida al nacer",
+      "unidad": "años",
+      "fresca": {"clave": "esperanza_vida_cepal", "archivo": "cepal.json", "fuente": "CEPALSTAT"},
+      "comparable": {"clave": "esperanza_vida", "archivo": "oms.json", "fuente": "OMS (WHOSIS)"},
+      "metodo": "enlace",
+      "desde_anio": 2012,
+      "nivel_propuesto": "C",
+      "decimales": 1,
+      "nota_base": "Dos productores de la misma medida. La fresca (CEPALSTAT) llega más lejos; la comparable (OMS) es la 'misma vara' de la región. Se enlazan por el offset sobre los años que se solapan.",
+      "confirmado_por_humano": false
+    }
+  ]
+}

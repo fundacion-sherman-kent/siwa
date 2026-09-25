@@ -4664,6 +4664,22 @@
     return r.json();
   });
 
+  // ARMONIZACIÓN (acta 25/9): fichas por país de las fuentes armonizadas
+  // (fresca vs comparable, con offset e incertidumbre). Carga best-effort: si no
+  // está, las tarjetas se pintan igual, sin la nota. Ver herramientas/armonizacion.py.
+  let ARMONIZACION = null;
+  traer('armonizacion.json').then(d => {
+    ARMONIZACION = d;
+    if (typeof repintar === 'function') repintar(); // repinta cuando llega, sin gatear el resto
+  }).catch(() => {});
+  function notaArmonizacion(clave, iso){
+    if(!ARMONIZACION || !Array.isArray(ARMONIZACION.fichas)) return '';
+    const f = ARMONIZACION.fichas.find(x => x.clave === clave && x.iso === iso);
+    if(!f || !f.nota) return '';
+    return '<details class="cautela-plegada"><summary>Cómo se compara (armonización)</summary>'
+      + esc(f.nota) + '</details>';
+  }
+
   function enlaceLimites(destino, colector){
     const cab=document.querySelector('#'+destino+' .domain-head');
     if(!cab || cab.querySelector('.limites-enlace')) return;
@@ -5434,6 +5450,7 @@
         + (detalle ? '<br>' + esc(detalle) : '')
         + ultimoDelEstado(clave, paisFiltro)
         + (clave === 'homicidios' ? contrasteHomicidios(paisFiltro) : '')
+        + notaArmonizacion(clave, paisFiltro)
         + (cap.cautela ? '<details class="cautela-plegada"><summary>Cuidado con esta cifra</summary>'
                          + esc(cap.cautela) + '</details>' : '')
         + '</span>' + boton + '</div></div>';
@@ -13965,7 +13982,7 @@
         (tv!==null&&tv!==undefined&&f.valor_inicial>0&&f.valor>=0)?` · <b>${tv>0?'+':''}${cifra(tv)} %</b> desde ${f.anio_inicial}`:''}</div>
       ${tarjeta.sinDetenida ? '' : avisoDetenida(info)}
       <div class="foot"><span class="src">${esc(info.origen||meta.fuente.nombre)}</span>
-        <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div></div>`;
+        <span class="badge unica" title="${esc(explicaCalif(meta.calificacion))}">${meta.calificacion.fiabilidad}-${meta.calificacion.credibilidad}</span></div>${notaArmonizacion(info.clave, paisFiltro)}</div>`;
   }
 
   // «Hace cinco años» y «el productor dejó de publicar» se leen igual y no son
