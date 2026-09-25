@@ -8,10 +8,11 @@
 <link rel="canonical" href="https://siwa.fundacionkent.org/sitio/subnacional.html">
 <meta name="theme-color" content="#F4F2EC">
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+  <link rel="stylesheet" href="_comun/paleta-fusk.css"><!-- FUENTE ÚNICA de la paleta -->
 <script src="lib/echarts.min.js"></script>
 <style>
-  :root{--orange:#FB6500;--verde:#8C00E0;--rojo:#FB6500;--purple:#8C00E0;--grey-blue:#667B89;
-    --fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;--linea:#d7dce3;--caja:#ffffff;--navy:#00121E;}
+  :root{--orange:var(--fusk-naranja,#FB6500);--verde:var(--fusk-mejora,#8C00E0);--rojo:var(--fusk-empeora,#FB6500);--purple:var(--fusk-violeta,#8C00E0);--grey-blue:var(--fusk-gris-azul,#667B89);
+    --fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;--linea:#d7dce3;--caja:#ffffff;--navy:var(--fusk-navy,#00121E);}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;}}
   :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;}
