@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-26T06:31:00+00:00",
+  "corrida": "2026-09-26T07:25:29+00:00",
   "medidas_con_suficientes_casos": 204,
   "pares_probados": 20706,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.706 pares y el umbral de siempre, alrededor de 1.035 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3869,
+    "sobreviven": 3864,
     "de_ellos_son_parentescos": 410
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3459,
+  "pistas_totales": 3454,
   "anomalias_totales": 382,
   "pistas": [
     {
@@ -159,19 +159,6 @@
       "estados": 32,
       "tipo": "rangos (Spearman)",
       "p": 1.8081019561050884e-24,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "gasto_seguridad",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "Gasto en orden público y seguridad",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": -0.953,
-      "estados": 15,
-      "tipo": "rangos (Spearman)",
-      "p": 9.74263040291341e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -593,19 +580,6 @@
       "misma_categoria": false
     },
     {
-      "a": "subnacional_focos:cuantas",
-      "b": "superficie",
-      "rotulo_a": "subnacional_focos · cuantas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.898,
-      "estados": 23,
-      "tipo": "rangos (Spearman)",
-      "p": 6.678862866014729e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -796,6 +770,32 @@
       "estados": 19,
       "tipo": "rangos (Spearman)",
       "p": 2.4452722780373087e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "corrupcion_politica",
+      "b": "voz_rendicion",
+      "rotulo_a": "Corrupción política",
+      "rotulo_b": "Voz y rendición de cuentas",
+      "coeficiente": -0.882,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 8.867187249247304e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "armas:pct_compra_sin_origen",
+      "b": "contrataciones_abiertas:publicadores",
+      "rotulo_a": "armas · pct_compra_sin_origen",
+      "rotulo_b": "contrataciones_abiertas · publicadores",
+      "coeficiente": 0.882,
+      "estados": 15,
+      "tipo": "rangos (Spearman)",
+      "p": 1.6597679031752078e-06,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
