@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-27T09:25:53+00:00",
+  "corrida": "2026-09-27T10:26:04+00:00",
   "medidas_con_suficientes_casos": 204,
   "pares_probados": 20706,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.706 pares y el umbral de siempre, alrededor de 1.035 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3881,
+    "sobreviven": 3886,
     "de_ellos_son_parentescos": 409
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3472,
+  "pistas_totales": 3477,
   "anomalias_totales": 394,
   "pistas": [
     {
@@ -155,10 +155,10 @@
       "b": "superficie",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.948,
+      "coeficiente": 0.949,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.8590092872334887e-23,
+      "p": 2.4253394477659072e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -359,6 +359,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.918,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.169299073756192e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "democracia_liberal",
       "b": "voz_rendicion",
       "rotulo_a": "Democracia liberal — límites al poder",
@@ -424,6 +437,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.912,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.308567936763205e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "administracion_basica",
       "b": "estado_derecho",
       "rotulo_a": "Administración básica del Estado",
@@ -450,19 +476,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.911,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.399243687116153e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -484,19 +497,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1905778960493398e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:nocturnos",
-      "b": "superficie",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.906,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.8033667823553994e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
