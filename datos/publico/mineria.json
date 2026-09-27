@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-27T19:23:56+00:00",
+  "corrida": "2026-09-27T20:26:08+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3911,
+    "sobreviven": 3915,
     "de_ellos_son_parentescos": 409
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3502,
+  "pistas_totales": 3506,
   "anomalias_totales": 394,
   "pistas": [
     {
@@ -155,10 +155,10 @@
       "b": "superficie",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.95,
+      "coeficiente": 0.949,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.1409887493986321e-23,
+      "p": 2.433880683876081e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -710,19 +710,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.891,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 4.895252887660053e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Corrupción política",
@@ -796,6 +783,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 3.7625675888497296e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "subnacional_focos:cuantas",
+      "b": "superficie",
+      "rotulo_a": "subnacional_focos · cuantas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.887,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 8.125006326786964e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
