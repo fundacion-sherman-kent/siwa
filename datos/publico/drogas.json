@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "drogas",
     "capa": "publico",
-    "obtenido_en": "2026-09-27T16:44:32+00:00",
+    "obtenido_en": "2026-09-27T18:24:42+00:00",
     "fuente": {
       "nombre": "Informe Mundial sobre las Drogas 2025, anexo estadístico — Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC)",
       "url": "https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2025-annex.html"
@@ -38,6 +38,19 @@
       "bloque": "Andina",
       "estado": "con_dato",
       "incautaciones": {
+        "hoja_coca": {
+          "rotulo": "hoja de coca",
+          "serie": [
+            {
+              "anio": 2022,
+              "valor": 0.87
+            }
+          ],
+          "ultimo": {
+            "anio": 2022,
+            "valor": 0.87
+          }
+        },
         "opiaceos": {
           "rotulo": "opiáceos",
           "serie": [
@@ -67,46 +80,33 @@
             "valor": 13.04
           }
         },
-        "hoja_coca": {
-          "rotulo": "hoja de coca",
-          "serie": [
-            {
-              "anio": 2022,
-              "valor": 0.87
-            }
-          ],
-          "ultimo": {
-            "anio": 2022,
-            "valor": 0.87
-          }
-        },
-        "cocaina": {
-          "rotulo": "cocaína",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 28793.0
+              "valor": 1.0
             },
             {
               "anio": 2020,
-              "valor": 34326.25
+              "valor": 12.7
             },
             {
               "anio": 2021,
-              "valor": 45450.8
+              "valor": 2.35
             },
             {
               "anio": 2022,
-              "valor": 32682.1
+              "valor": 6.34
             },
             {
               "anio": 2023,
-              "valor": 43725.83
+              "valor": 28.93
             }
           ],
           "ultimo": {
             "anio": 2023,
-            "valor": 43725.83
+            "valor": 28.93
           }
         },
         "otras": {
@@ -138,6 +138,35 @@
             "valor": 3.47
           }
         },
+        "cocaina": {
+          "rotulo": "cocaína",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 28793.0
+            },
+            {
+              "anio": 2020,
+              "valor": 34326.25
+            },
+            {
+              "anio": 2021,
+              "valor": 45450.8
+            },
+            {
+              "anio": 2022,
+              "valor": 32682.1
+            },
+            {
+              "anio": 2023,
+              "valor": 43725.83
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 43725.83
+          }
+        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -166,35 +195,6 @@
             "anio": 2023,
             "valor": 8568.04
           }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 1.0
-            },
-            {
-              "anio": 2020,
-              "valor": 12.7
-            },
-            {
-              "anio": 2021,
-              "valor": 2.35
-            },
-            {
-              "anio": 2022,
-              "valor": 6.34
-            },
-            {
-              "anio": 2023,
-              "valor": 28.93
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 28.93
-          }
         }
       },
       "cultivo_coca": null
@@ -205,23 +205,6 @@
       "bloque": "Cono Sur",
       "estado": "con_dato",
       "incautaciones": {
-        "opiaceos": {
-          "rotulo": "opiáceos",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 0.0
-            },
-            {
-              "anio": 2021,
-              "valor": 0.48
-            }
-          ],
-          "ultimo": {
-            "anio": 2021,
-            "valor": 0.48
-          }
-        },
         "hoja_coca": {
           "rotulo": "hoja de coca",
           "serie": [
@@ -241,6 +224,77 @@
           "ultimo": {
             "anio": 2023,
             "valor": 3.26
+          }
+        },
+        "opiaceos": {
+          "rotulo": "opiáceos",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 0.0
+            },
+            {
+              "anio": 2021,
+              "valor": 0.48
+            }
+          ],
+          "ultimo": {
+            "anio": 2021,
+            "valor": 0.48
+          }
+        },
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 4.0
+            },
+            {
+              "anio": 2020,
+              "valor": 1.33
+            },
+            {
+              "anio": 2021,
+              "valor": 2.77
+            },
+            {
+              "anio": 2022,
+              "valor": 44.89
+            },
+            {
+              "anio": 2023,
+              "valor": 6.88
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 6.88
+          }
+        },
+        "otras": {
+          "rotulo": "otras sustancias",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 0.0
+            },
+            {
+              "anio": 2021,
+              "valor": 0.03
+            },
+            {
+              "anio": 2022,
+              "valor": 0.17
+            },
+            {
+              "anio": 2023,
+              "valor": 5.68
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 5.68
           }
         },
         "cocaina": {
@@ -272,31 +326,6 @@
             "valor": 3469.75
           }
         },
-        "otras": {
-          "rotulo": "otras sustancias",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 0.0
-            },
-            {
-              "anio": 2021,
-              "valor": 0.03
-            },
-            {
-              "anio": 2022,
-              "valor": 0.17
-            },
-            {
-              "anio": 2023,
-              "valor": 5.68
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 5.68
-          }
-        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -324,35 +353,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 1635.46
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 4.0
-            },
-            {
-              "anio": 2020,
-              "valor": 1.33
-            },
-            {
-              "anio": 2021,
-              "valor": 2.77
-            },
-            {
-              "anio": 2022,
-              "valor": 44.89
-            },
-            {
-              "anio": 2023,
-              "valor": 6.88
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 6.88
           }
         }
       },
@@ -393,6 +393,40 @@
             "valor": 0.7
           }
         },
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2022,
+              "valor": 12.7
+            },
+            {
+              "anio": 2023,
+              "valor": 0.54
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 0.54
+          }
+        },
+        "otras": {
+          "rotulo": "otras sustancias",
+          "serie": [
+            {
+              "anio": 2021,
+              "valor": 0.36
+            },
+            {
+              "anio": 2023,
+              "valor": 0.01
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 0.01
+          }
+        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -421,40 +455,6 @@
             "anio": 2023,
             "valor": 3.21
           }
-        },
-        "otras": {
-          "rotulo": "otras sustancias",
-          "serie": [
-            {
-              "anio": 2021,
-              "valor": 0.36
-            },
-            {
-              "anio": 2023,
-              "valor": 0.01
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 0.01
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2022,
-              "valor": 12.7
-            },
-            {
-              "anio": 2023,
-              "valor": 0.54
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 0.54
-          }
         }
       },
       "cultivo_coca": null
@@ -465,6 +465,27 @@
       "bloque": "Guayanas",
       "estado": "con_dato",
       "incautaciones": {
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2021,
+              "valor": 0.19
+            },
+            {
+              "anio": 2022,
+              "valor": 7.33
+            },
+            {
+              "anio": 2023,
+              "valor": 3.25
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 3.25
+          }
+        },
         "cocaina": {
           "rotulo": "cocaína",
           "serie": [
@@ -505,27 +526,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 50.95
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2021,
-              "valor": 0.19
-            },
-            {
-              "anio": 2022,
-              "valor": 7.33
-            },
-            {
-              "anio": 2023,
-              "valor": 3.25
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 3.25
           }
         }
       },
@@ -603,6 +603,35 @@
             "valor": 18.7
           }
         },
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 10.0
+            },
+            {
+              "anio": 2020,
+              "valor": 53.0
+            },
+            {
+              "anio": 2021,
+              "valor": 59.0
+            },
+            {
+              "anio": 2022,
+              "valor": 16.0
+            },
+            {
+              "anio": 2023,
+              "valor": 14.24
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 14.24
+          }
+        },
         "cocaina": {
           "rotulo": "cocaína",
           "serie": [
@@ -659,35 +688,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 237362.22
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 10.0
-            },
-            {
-              "anio": 2020,
-              "valor": 53.0
-            },
-            {
-              "anio": 2021,
-              "valor": 59.0
-            },
-            {
-              "anio": 2022,
-              "valor": 16.0
-            },
-            {
-              "anio": 2023,
-              "valor": 14.24
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 14.24
           }
         }
       },
@@ -752,6 +752,35 @@
       "bloque": "Cono Sur",
       "estado": "con_dato",
       "incautaciones": {
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 90.0
+            },
+            {
+              "anio": 2020,
+              "valor": 0.0
+            },
+            {
+              "anio": 2021,
+              "valor": 13.93
+            },
+            {
+              "anio": 2022,
+              "valor": 10.16
+            },
+            {
+              "anio": 2023,
+              "valor": 5.87
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 5.87
+          }
+        },
         "otras": {
           "rotulo": "otras sustancias",
           "serie": [
@@ -830,35 +859,6 @@
             "anio": 2023,
             "valor": 688502.6
           }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 90.0
-            },
-            {
-              "anio": 2020,
-              "valor": 0.0
-            },
-            {
-              "anio": 2021,
-              "valor": 13.93
-            },
-            {
-              "anio": 2022,
-              "valor": 10.16
-            },
-            {
-              "anio": 2023,
-              "valor": 5.87
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 5.87
-          }
         }
       },
       "cultivo_coca": null
@@ -880,6 +880,31 @@
           "ultimo": {
             "anio": 2021,
             "valor": 10.0
+          }
+        },
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 10.0
+            },
+            {
+              "anio": 2020,
+              "valor": 25.84
+            },
+            {
+              "anio": 2021,
+              "valor": 3.23
+            },
+            {
+              "anio": 2023,
+              "valor": 90.0
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 90.0
           }
         },
         "cocaina": {
@@ -938,31 +963,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 33610.0
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 10.0
-            },
-            {
-              "anio": 2020,
-              "valor": 25.84
-            },
-            {
-              "anio": 2021,
-              "valor": 3.23
-            },
-            {
-              "anio": 2023,
-              "valor": 90.0
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 90.0
           }
         }
       },
@@ -1062,33 +1062,33 @@
             "valor": 1332.35
           }
         },
-        "cocaina": {
-          "rotulo": "cocaína",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 12430.0
+              "valor": 32030.0
             },
             {
               "anio": 2020,
-              "valor": 21151.66
+              "valor": 18905.92
             },
             {
               "anio": 2021,
-              "valor": 15001.17
+              "valor": 41337.68
             },
             {
               "anio": 2022,
-              "valor": 21068.93
+              "valor": 37061.07
             },
             {
               "anio": 2023,
-              "valor": 38882.39
+              "valor": 64219.02
             }
           ],
           "ultimo": {
             "anio": 2023,
-            "valor": 38882.39
+            "valor": 64219.02
           }
         },
         "otras": {
@@ -1120,6 +1120,35 @@
             "valor": 1.01
           }
         },
+        "cocaina": {
+          "rotulo": "cocaína",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 12430.0
+            },
+            {
+              "anio": 2020,
+              "valor": 21151.66
+            },
+            {
+              "anio": 2021,
+              "valor": 15001.17
+            },
+            {
+              "anio": 2022,
+              "valor": 21068.93
+            },
+            {
+              "anio": 2023,
+              "valor": 38882.39
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 38882.39
+          }
+        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -1147,35 +1176,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 72940.11
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 32030.0
-            },
-            {
-              "anio": 2020,
-              "valor": 18905.92
-            },
-            {
-              "anio": 2021,
-              "valor": 41337.68
-            },
-            {
-              "anio": 2022,
-              "valor": 37061.07
-            },
-            {
-              "anio": 2023,
-              "valor": 64219.02
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 64219.02
           }
         }
       },
@@ -1276,6 +1276,48 @@
             "valor": 2.44
           }
         },
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 1.0
+            },
+            {
+              "anio": 2022,
+              "valor": 0.0
+            },
+            {
+              "anio": 2023,
+              "valor": 0.05
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 0.05
+          }
+        },
+        "otras": {
+          "rotulo": "otras sustancias",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 5.0
+            },
+            {
+              "anio": 2020,
+              "valor": 4487.11
+            },
+            {
+              "anio": 2022,
+              "valor": 0.0
+            }
+          ],
+          "ultimo": {
+            "anio": 2022,
+            "valor": 0.0
+          }
+        },
         "cocaina": {
           "rotulo": "cocaína",
           "serie": [
@@ -1305,27 +1347,6 @@
             "valor": 36327.63
           }
         },
-        "otras": {
-          "rotulo": "otras sustancias",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 5.0
-            },
-            {
-              "anio": 2020,
-              "valor": 4487.11
-            },
-            {
-              "anio": 2022,
-              "valor": 0.0
-            }
-          ],
-          "ultimo": {
-            "anio": 2022,
-            "valor": 0.0
-          }
-        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -1353,27 +1374,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 97891.36
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 1.0
-            },
-            {
-              "anio": 2022,
-              "valor": 0.0
-            },
-            {
-              "anio": 2023,
-              "valor": 0.05
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 0.05
           }
         }
       },
@@ -1516,6 +1516,23 @@
       "bloque": "México y Centroamérica",
       "estado": "con_dato",
       "incautaciones": {
+        "hoja_coca": {
+          "rotulo": "hoja de coca",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 2343845.0
+            },
+            {
+              "anio": 2023,
+              "valor": 8904889.0
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 8904889.0
+          }
+        },
         "opiaceos": {
           "rotulo": "opiáceos",
           "serie": [
@@ -1541,21 +1558,46 @@
             "valor": 66741.54
           }
         },
-        "hoja_coca": {
-          "rotulo": "hoja de coca",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 2343845.0
+              "valor": 16878.0
+            },
+            {
+              "anio": 2020,
+              "valor": 0.04
+            },
+            {
+              "anio": 2021,
+              "valor": 11.15
             },
             {
               "anio": 2023,
-              "valor": 8904889.0
+              "valor": 23.43
             }
           ],
           "ultimo": {
             "anio": 2023,
-            "valor": 8904889.0
+            "valor": 23.43
+          }
+        },
+        "otras": {
+          "rotulo": "otras sustancias",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 318.0
+            },
+            {
+              "anio": 2020,
+              "valor": 14028.7
+            }
+          ],
+          "ultimo": {
+            "anio": 2020,
+            "valor": 14028.7
           }
         },
         "cocaina": {
@@ -1583,23 +1625,6 @@
             "valor": 5044.89
           }
         },
-        "otras": {
-          "rotulo": "otras sustancias",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 318.0
-            },
-            {
-              "anio": 2020,
-              "valor": 14028.7
-            }
-          ],
-          "ultimo": {
-            "anio": 2020,
-            "valor": 14028.7
-          }
-        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -1624,31 +1649,6 @@
             "anio": 2023,
             "valor": 174303.41
           }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 16878.0
-            },
-            {
-              "anio": 2020,
-              "valor": 0.04
-            },
-            {
-              "anio": 2021,
-              "valor": 11.15
-            },
-            {
-              "anio": 2023,
-              "valor": 23.43
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 23.43
-          }
         }
       },
       "cultivo_coca": null
@@ -1667,21 +1667,33 @@
       "bloque": "México y Centroamérica",
       "estado": "con_dato",
       "incautaciones": {
-        "opiaceos": {
-          "rotulo": "opiáceos",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 1.0
+              "valor": 0.0
+            },
+            {
+              "anio": 2020,
+              "valor": 5.71
             },
             {
               "anio": 2021,
-              "valor": 0.03
+              "valor": 1.64
+            },
+            {
+              "anio": 2022,
+              "valor": 7.12
+            },
+            {
+              "anio": 2023,
+              "valor": 1.51
             }
           ],
           "ultimo": {
-            "anio": 2021,
-            "valor": 0.03
+            "anio": 2023,
+            "valor": 1.51
           }
         },
         "cocaina": {
@@ -1742,33 +1754,21 @@
             "valor": 495.53
           }
         },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
+        "opiaceos": {
+          "rotulo": "opiáceos",
           "serie": [
             {
               "anio": 2019,
-              "valor": 0.0
-            },
-            {
-              "anio": 2020,
-              "valor": 5.71
+              "valor": 1.0
             },
             {
               "anio": 2021,
-              "valor": 1.64
-            },
-            {
-              "anio": 2022,
-              "valor": 7.12
-            },
-            {
-              "anio": 2023,
-              "valor": 1.51
+              "valor": 0.03
             }
           ],
           "ultimo": {
-            "anio": 2023,
-            "valor": 1.51
+            "anio": 2021,
+            "valor": 0.03
           }
         }
       },
@@ -1780,6 +1780,19 @@
       "bloque": "Andina",
       "estado": "con_dato",
       "incautaciones": {
+        "hoja_coca": {
+          "rotulo": "hoja de coca",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 5120.0
+            }
+          ],
+          "ultimo": {
+            "anio": 2019,
+            "valor": 5120.0
+          }
+        },
         "opiaceos": {
           "rotulo": "opiáceos",
           "serie": [
@@ -1809,17 +1822,54 @@
             "valor": 325.01
           }
         },
-        "hoja_coca": {
-          "rotulo": "hoja de coca",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 5120.0
+              "valor": 6.0
+            },
+            {
+              "anio": 2020,
+              "valor": 2.3
+            },
+            {
+              "anio": 2021,
+              "valor": 11.67
+            },
+            {
+              "anio": 2022,
+              "valor": 9.72
             }
           ],
           "ultimo": {
-            "anio": 2019,
-            "valor": 5120.0
+            "anio": 2022,
+            "valor": 9.72
+          }
+        },
+        "otras": {
+          "rotulo": "otras sustancias",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 807002.0
+            },
+            {
+              "anio": 2020,
+              "valor": 75512.58
+            },
+            {
+              "anio": 2021,
+              "valor": 53900.82
+            },
+            {
+              "anio": 2023,
+              "valor": 163552.37
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 163552.37
           }
         },
         "cocaina": {
@@ -1851,31 +1901,6 @@
             "valor": 201252.9
           }
         },
-        "otras": {
-          "rotulo": "otras sustancias",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 807002.0
-            },
-            {
-              "anio": 2020,
-              "valor": 75512.58
-            },
-            {
-              "anio": 2021,
-              "valor": 53900.82
-            },
-            {
-              "anio": 2023,
-              "valor": 163552.37
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 163552.37
-          }
-        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -1904,31 +1929,6 @@
             "anio": 2023,
             "valor": 19594.07
           }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 6.0
-            },
-            {
-              "anio": 2020,
-              "valor": 2.3
-            },
-            {
-              "anio": 2021,
-              "valor": 11.67
-            },
-            {
-              "anio": 2022,
-              "valor": 9.72
-            }
-          ],
-          "ultimo": {
-            "anio": 2022,
-            "valor": 9.72
-          }
         }
       },
       "cultivo_coca": null
@@ -1939,35 +1939,6 @@
       "bloque": "Caribe hispano y Haití",
       "estado": "con_dato",
       "incautaciones": {
-        "opiaceos": {
-          "rotulo": "opiáceos",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 0.0
-            },
-            {
-              "anio": 2020,
-              "valor": 3.44
-            },
-            {
-              "anio": 2021,
-              "valor": 8.29
-            },
-            {
-              "anio": 2022,
-              "valor": 0.91
-            },
-            {
-              "anio": 2023,
-              "valor": 39.31
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 39.31
-          }
-        },
         "cocaina": {
           "rotulo": "cocaína",
           "serie": [
@@ -1997,6 +1968,77 @@
             "valor": 18082.22
           }
         },
+        "opiaceos": {
+          "rotulo": "opiáceos",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 0.0
+            },
+            {
+              "anio": 2020,
+              "valor": 3.44
+            },
+            {
+              "anio": 2021,
+              "valor": 8.29
+            },
+            {
+              "anio": 2022,
+              "valor": 0.91
+            },
+            {
+              "anio": 2023,
+              "valor": 39.31
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 39.31
+          }
+        },
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 13.0
+            },
+            {
+              "anio": 2020,
+              "valor": 0.67
+            },
+            {
+              "anio": 2021,
+              "valor": 2.92
+            },
+            {
+              "anio": 2023,
+              "valor": 1.02
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 1.02
+          }
+        },
+        "otras": {
+          "rotulo": "otras sustancias",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 812661.0
+            },
+            {
+              "anio": 2020,
+              "valor": 103.37
+            }
+          ],
+          "ultimo": {
+            "anio": 2020,
+            "valor": 103.37
+          }
+        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -2024,48 +2066,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 6920.27
-          }
-        },
-        "otras": {
-          "rotulo": "otras sustancias",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 812661.0
-            },
-            {
-              "anio": 2020,
-              "valor": 103.37
-            }
-          ],
-          "ultimo": {
-            "anio": 2020,
-            "valor": 103.37
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 13.0
-            },
-            {
-              "anio": 2020,
-              "valor": 0.67
-            },
-            {
-              "anio": 2021,
-              "valor": 2.92
-            },
-            {
-              "anio": 2023,
-              "valor": 1.02
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 1.02
           }
         }
       },
@@ -2122,33 +2122,33 @@
             "valor": 0.18
           }
         },
-        "cocaina": {
-          "rotulo": "cocaína",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 31160.0
+              "valor": 11.0
             },
             {
               "anio": 2020,
-              "valor": 47156.57
+              "valor": 5.14
             },
             {
               "anio": 2021,
-              "valor": 44348.1
+              "valor": 2.16
             },
             {
               "anio": 2022,
-              "valor": 24799.86
+              "valor": 4.5
             },
             {
               "anio": 2023,
-              "valor": 15682.52
+              "valor": 153.58
             }
           ],
           "ultimo": {
             "anio": 2023,
-            "valor": 15682.52
+            "valor": 153.58
           }
         },
         "otras": {
@@ -2180,6 +2180,35 @@
             "valor": 0.0
           }
         },
+        "cocaina": {
+          "rotulo": "cocaína",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 31160.0
+            },
+            {
+              "anio": 2020,
+              "valor": 47156.57
+            },
+            {
+              "anio": 2021,
+              "valor": 44348.1
+            },
+            {
+              "anio": 2022,
+              "valor": 24799.86
+            },
+            {
+              "anio": 2023,
+              "valor": 15682.52
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 15682.52
+          }
+        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -2207,35 +2236,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 52471.9
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 11.0
-            },
-            {
-              "anio": 2020,
-              "valor": 5.14
-            },
-            {
-              "anio": 2021,
-              "valor": 2.16
-            },
-            {
-              "anio": 2022,
-              "valor": 4.5
-            },
-            {
-              "anio": 2023,
-              "valor": 153.58
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 153.58
           }
         }
       },
@@ -2305,33 +2305,33 @@
             "valor": 572.44
           }
         },
-        "cocaina": {
-          "rotulo": "cocaína",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 489222.0
+              "valor": 67.0
             },
             {
               "anio": 2020,
-              "valor": 579876.34
+              "valor": 25.72
             },
             {
               "anio": 2021,
-              "valor": 759329.01
+              "valor": 15.11
             },
             {
               "anio": 2022,
-              "valor": 767318.77
+              "valor": 29.01
             },
             {
               "anio": 2023,
-              "valor": 846729.0
+              "valor": 160.17
             }
           ],
           "ultimo": {
             "anio": 2023,
-            "valor": 846729.0
+            "valor": 160.17
           }
         },
         "otras": {
@@ -2363,6 +2363,35 @@
             "valor": 1826145.66
           }
         },
+        "cocaina": {
+          "rotulo": "cocaína",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 489222.0
+            },
+            {
+              "anio": 2020,
+              "valor": 579876.34
+            },
+            {
+              "anio": 2021,
+              "valor": 759329.01
+            },
+            {
+              "anio": 2022,
+              "valor": 767318.77
+            },
+            {
+              "anio": 2023,
+              "valor": 846729.0
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 846729.0
+          }
+        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -2390,35 +2419,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 421167.0
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 67.0
-            },
-            {
-              "anio": 2020,
-              "valor": 25.72
-            },
-            {
-              "anio": 2021,
-              "valor": 15.11
-            },
-            {
-              "anio": 2022,
-              "valor": 29.01
-            },
-            {
-              "anio": 2023,
-              "valor": 160.17
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 160.17
           }
         }
       },
@@ -2487,6 +2487,19 @@
       "bloque": "Cono Sur",
       "estado": "con_dato",
       "incautaciones": {
+        "hoja_coca": {
+          "rotulo": "hoja de coca",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 82.0
+            }
+          ],
+          "ultimo": {
+            "anio": 2019,
+            "valor": 82.0
+          }
+        },
         "opiaceos": {
           "rotulo": "opiáceos",
           "serie": [
@@ -2512,17 +2525,58 @@
             "valor": 0.01
           }
         },
-        "hoja_coca": {
-          "rotulo": "hoja de coca",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 82.0
+              "valor": 407.0
+            },
+            {
+              "anio": 2020,
+              "valor": 331.73
+            },
+            {
+              "anio": 2021,
+              "valor": 47.39
+            },
+            {
+              "anio": 2022,
+              "valor": 388.52
+            },
+            {
+              "anio": 2023,
+              "valor": 182.33
             }
           ],
           "ultimo": {
-            "anio": 2019,
-            "valor": 82.0
+            "anio": 2023,
+            "valor": 182.33
+          }
+        },
+        "otras": {
+          "rotulo": "otras sustancias",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 1.0
+            },
+            {
+              "anio": 2020,
+              "valor": 6854.47
+            },
+            {
+              "anio": 2022,
+              "valor": 0.0
+            },
+            {
+              "anio": 2023,
+              "valor": 0.0
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 0.0
           }
         },
         "cocaina": {
@@ -2554,31 +2608,6 @@
             "valor": 13681.5
           }
         },
-        "otras": {
-          "rotulo": "otras sustancias",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 1.0
-            },
-            {
-              "anio": 2020,
-              "valor": 6854.47
-            },
-            {
-              "anio": 2022,
-              "valor": 0.0
-            },
-            {
-              "anio": 2023,
-              "valor": 0.0
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 0.0
-          }
-        },
         "cannabis": {
           "rotulo": "cannabis",
           "serie": [
@@ -2606,35 +2635,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 105889.4
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 407.0
-            },
-            {
-              "anio": 2020,
-              "valor": 331.73
-            },
-            {
-              "anio": 2021,
-              "valor": 47.39
-            },
-            {
-              "anio": 2022,
-              "valor": 388.52
-            },
-            {
-              "anio": 2023,
-              "valor": 182.33
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 182.33
           }
         }
       },
@@ -2692,6 +2692,60 @@
             "valor": 0.02
           }
         },
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 180.0
+            },
+            {
+              "anio": 2020,
+              "valor": 82.44
+            },
+            {
+              "anio": 2021,
+              "valor": 58.35
+            },
+            {
+              "anio": 2022,
+              "valor": 282.17
+            },
+            {
+              "anio": 2023,
+              "valor": 210.66
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 210.66
+          }
+        },
+        "otras": {
+          "rotulo": "otras sustancias",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 5.0
+            },
+            {
+              "anio": 2020,
+              "valor": 0.0
+            },
+            {
+              "anio": 2021,
+              "valor": 1.82
+            },
+            {
+              "anio": 2022,
+              "valor": 4694.23
+            }
+          ],
+          "ultimo": {
+            "anio": 2022,
+            "valor": 4694.23
+          }
+        },
         "cocaina": {
           "rotulo": "cocaína",
           "serie": [
@@ -2719,31 +2773,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 72504.35
-          }
-        },
-        "otras": {
-          "rotulo": "otras sustancias",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 5.0
-            },
-            {
-              "anio": 2020,
-              "valor": 0.0
-            },
-            {
-              "anio": 2021,
-              "valor": 1.82
-            },
-            {
-              "anio": 2022,
-              "valor": 4694.23
-            }
-          ],
-          "ultimo": {
-            "anio": 2022,
-            "valor": 4694.23
           }
         },
         "cannabis": {
@@ -2774,35 +2803,6 @@
             "anio": 2023,
             "valor": 535934.79
           }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 180.0
-            },
-            {
-              "anio": 2020,
-              "valor": 82.44
-            },
-            {
-              "anio": 2021,
-              "valor": 58.35
-            },
-            {
-              "anio": 2022,
-              "valor": 282.17
-            },
-            {
-              "anio": 2023,
-              "valor": 210.66
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 210.66
-          }
         }
       },
       "cultivo_coca": null
@@ -2813,6 +2813,27 @@
       "bloque": "Andina",
       "estado": "con_dato",
       "incautaciones": {
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2021,
+              "valor": 0.22
+            },
+            {
+              "anio": 2022,
+              "valor": 5.38
+            },
+            {
+              "anio": 2023,
+              "valor": 41.41
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 41.41
+          }
+        },
         "otras": {
           "rotulo": "otras sustancias",
           "serie": [
@@ -2895,27 +2916,6 @@
             "anio": 2023,
             "valor": 372194.0
           }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2021,
-              "valor": 0.22
-            },
-            {
-              "anio": 2022,
-              "valor": 5.38
-            },
-            {
-              "anio": 2023,
-              "valor": 41.41
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 41.41
-          }
         }
       },
       "cultivo_coca": [
@@ -2983,21 +2983,25 @@
       "bloque": "México y Centroamérica",
       "estado": "con_dato",
       "incautaciones": {
-        "opiaceos": {
-          "rotulo": "opiáceos",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 2.0
+              "valor": 0.0
             },
             {
-              "anio": 2021,
-              "valor": 4.4
+              "anio": 2022,
+              "valor": 8.9
+            },
+            {
+              "anio": 2023,
+              "valor": 0.01
             }
           ],
           "ultimo": {
-            "anio": 2021,
-            "valor": 4.4
+            "anio": 2023,
+            "valor": 0.01
           }
         },
         "cocaina": {
@@ -3050,25 +3054,21 @@
             "valor": 2335.98
           }
         },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
+        "opiaceos": {
+          "rotulo": "opiáceos",
           "serie": [
             {
               "anio": 2019,
-              "valor": 0.0
+              "valor": 2.0
             },
             {
-              "anio": 2022,
-              "valor": 8.9
-            },
-            {
-              "anio": 2023,
-              "valor": 0.01
+              "anio": 2021,
+              "valor": 4.4
             }
           ],
           "ultimo": {
-            "anio": 2023,
-            "valor": 0.01
+            "anio": 2021,
+            "valor": 4.4
           }
         }
       },
@@ -3088,6 +3088,19 @@
       "bloque": "Caribe oriental",
       "estado": "con_dato",
       "incautaciones": {
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2020,
+              "valor": 0.11
+            }
+          ],
+          "ultimo": {
+            "anio": 2020,
+            "valor": 0.11
+          }
+        },
         "cocaina": {
           "rotulo": "cocaína",
           "serie": [
@@ -3137,19 +3150,6 @@
             "anio": 2022,
             "valor": 5800.0
           }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2020,
-              "valor": 0.11
-            }
-          ],
-          "ultimo": {
-            "anio": 2020,
-            "valor": 0.11
-          }
         }
       },
       "cultivo_coca": null
@@ -3160,6 +3160,35 @@
       "bloque": "Cono Sur",
       "estado": "con_dato",
       "incautaciones": {
+        "cocaina": {
+          "rotulo": "cocaína",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 10535.0
+            },
+            {
+              "anio": 2020,
+              "valor": 5565.12
+            },
+            {
+              "anio": 2021,
+              "valor": 6257.31
+            },
+            {
+              "anio": 2022,
+              "valor": 13674.97
+            },
+            {
+              "anio": 2023,
+              "valor": 9883.11
+            }
+          ],
+          "ultimo": {
+            "anio": 2023,
+            "valor": 9883.11
+          }
+        },
         "hoja_coca": {
           "rotulo": "hoja de coca",
           "serie": [
@@ -3218,62 +3247,33 @@
             "valor": 0.09
           }
         },
-        "cocaina": {
-          "rotulo": "cocaína",
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
           "serie": [
             {
               "anio": 2019,
-              "valor": 10535.0
+              "valor": 383.0
             },
             {
               "anio": 2020,
-              "valor": 5565.12
+              "valor": 181.66
             },
             {
               "anio": 2021,
-              "valor": 6257.31
+              "valor": 114.45
             },
             {
               "anio": 2022,
-              "valor": 13674.97
+              "valor": 208.68
             },
             {
               "anio": 2023,
-              "valor": 9883.11
+              "valor": 301.35
             }
           ],
           "ultimo": {
             "anio": 2023,
-            "valor": 9883.11
-          }
-        },
-        "cannabis": {
-          "rotulo": "cannabis",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 192050.0
-            },
-            {
-              "anio": 2020,
-              "valor": 244061.88
-            },
-            {
-              "anio": 2021,
-              "valor": 266721.79
-            },
-            {
-              "anio": 2022,
-              "valor": 199550.88
-            },
-            {
-              "anio": 2023,
-              "valor": 159697.69
-            }
-          ],
-          "ultimo": {
-            "anio": 2023,
-            "valor": 159697.69
+            "valor": 301.35
           }
         },
         "otras": {
@@ -3305,33 +3305,33 @@
             "valor": 6442.14
           }
         },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
+        "cannabis": {
+          "rotulo": "cannabis",
           "serie": [
             {
               "anio": 2019,
-              "valor": 383.0
+              "valor": 192050.0
             },
             {
               "anio": 2020,
-              "valor": 181.66
+              "valor": 244061.88
             },
             {
               "anio": 2021,
-              "valor": 114.45
+              "valor": 266721.79
             },
             {
               "anio": 2022,
-              "valor": 208.68
+              "valor": 199550.88
             },
             {
               "anio": 2023,
-              "valor": 301.35
+              "valor": 159697.69
             }
           ],
           "ultimo": {
             "anio": 2023,
-            "valor": 301.35
+            "valor": 159697.69
           }
         }
       },
@@ -3343,6 +3343,19 @@
       "bloque": "Caribe oriental",
       "estado": "con_dato",
       "incautaciones": {
+        "sinteticas": {
+          "rotulo": "drogas sintéticas",
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 0.0
+            }
+          ],
+          "ultimo": {
+            "anio": 2019,
+            "valor": 0.0
+          }
+        },
         "cocaina": {
           "rotulo": "cocaína",
           "serie": [
@@ -3371,19 +3384,6 @@
           "ultimo": {
             "anio": 2023,
             "valor": 771.64
-          }
-        },
-        "sinteticas": {
-          "rotulo": "drogas sintéticas",
-          "serie": [
-            {
-              "anio": 2019,
-              "valor": 0.0
-            }
-          ],
-          "ultimo": {
-            "anio": 2019,
-            "valor": 0.0
           }
         }
       },
@@ -3414,7 +3414,7 @@
       "otras": "otras sustancias"
     },
     "lector_probado": true,
-    "consultado": "2026-09-27T16:44:32+00:00"
+    "consultado": "2026-09-27T18:24:42+00:00"
   },
   "licencia": "Reproducción permitida con fines educativos o sin fines de lucro, citando la fuente. Sin uso comercial."
 }
