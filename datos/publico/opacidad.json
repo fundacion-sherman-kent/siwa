@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "opacidad",
     "capa": "publico",
-    "obtenido_en": "2026-09-26T05:48:43+00:00",
+    "obtenido_en": "2026-09-27T05:48:59+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — Índice de Opacidad, edición cero",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#opacidad"
@@ -382,26 +382,26 @@
         {
           "termino": "Solicitudes de acceso a la información",
           "consulta": "https://datos.gob.do/api/3/action/package_search?q=Solicitudes%20de%20acceso%20a%20la%20informaci%C3%B3n&rows=12",
-          "http": 200,
-          "devueltos": 12,
+          "http": null,
+          "devueltos": 0,
           "pertinentes": 0,
-          "falla": null
+          "falla": "HTTPError"
         },
         {
           "termino": "acceso a la información publica estadísticas",
           "consulta": "https://datos.gob.do/api/3/action/package_search?q=acceso%20a%20la%20informaci%C3%B3n%20publica%20estad%C3%ADsticas&rows=12",
-          "http": 200,
-          "devueltos": 12,
+          "http": null,
+          "devueltos": 0,
           "pertinentes": 0,
-          "falla": null
+          "falla": "HTTPError"
         },
         {
           "termino": "solicitudes de información publica",
           "consulta": "https://datos.gob.do/api/3/action/package_search?q=solicitudes%20de%20informaci%C3%B3n%20publica&rows=12",
-          "http": 200,
-          "devueltos": 12,
-          "pertinentes": 9,
-          "falla": null
+          "http": null,
+          "devueltos": 0,
+          "pertinentes": 0,
+          "falla": "HTTPError"
         }
       ]
     },
@@ -613,9 +613,12 @@
     "sin_verificar": 28,
     "estados_del_padron": 33,
     "estados_con_portal_consultable": 9,
-    "consultado": "2026-09-26T05:48:43+00:00"
+    "consultado": "2026-09-27T05:48:59+00:00"
   },
   "caidas": [
+    "DOM: HTTPError",
+    "DOM: HTTPError",
+    "DOM: HTTPError",
     "PER: HTTPError",
     "PER: HTTPError",
     "PER: HTTPError",
