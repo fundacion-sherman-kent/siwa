@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-09-26T06:26:08+00:00",
+    "obtenido_en": "2026-09-27T06:29:31+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "2 consultas fallaron en esta corrida: ARG/Delito registrado: HTTPError; ARG/Presupuesto: HTTPError."
+      "9 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Presupuesto: HTTPError; ARG/Migración y desplazamiento: HTTPError; DOM/Violencia organizada: HTTPError; DOM/Delito registrado: HTTPError; DOM/Contratación pública: HTTPError; DOM/Integridad: HTTPError; DOM/Presupuesto: HTTPError; DOM/Migración y desplazamiento: HTTPError."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -59,6 +59,11 @@
               "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
             },
             {
+              "titulo": "Contratacion Alcaldía Chitaraque",
+              "organismo": "Alcaldía de Chitaraque",
+              "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
+            },
+            {
               "titulo": "PROCESOS CONTRATACION TAURAMENA",
               "organismo": "TAURAMENA",
               "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
@@ -67,11 +72,6 @@
               "titulo": "SECOP II CONTRATACION ABIERTA",
               "organismo": "Alcaldía Mayor de Cartagena",
               "enlace": "https://www.datos.gov.co/d/432e-zwh4"
-            },
-            {
-              "titulo": "Contratacion Alcaldía Chitaraque",
-              "organismo": "Alcaldía de Chitaraque",
-              "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
             }
           ]
         },
@@ -148,14 +148,14 @@
               "enlace": "https://www.datos.gov.co/d/efw5-jiej"
             },
             {
-              "titulo": "MIGRANTES A COLOMBIA",
-              "organismo": "BERNARDO GUEVARA",
-              "enlace": "https://www.datos.gov.co/d/c4mm-qn8q"
-            },
-            {
               "titulo": "Entrada de Venezolanos a Colombia por año(2012-2019)",
               "organismo": "Savine",
               "enlace": "https://www.datos.gov.co/d/p7hq-8vsm"
+            },
+            {
+              "titulo": "MIGRANTES A COLOMBIA",
+              "organismo": "BERNARDO GUEVARA",
+              "enlace": "https://www.datos.gov.co/d/c4mm-qn8q"
             }
           ]
         },
@@ -831,149 +831,6 @@
       "conjuntos_hallados": 93
     },
     {
-      "iso": "DOM",
-      "pais": "República Dominicana",
-      "bloque": "Caribe hispano y Haití",
-      "organismo": "Datos Abiertos Republica Dominicana",
-      "tipo": "CKAN",
-      "portal": "https://datos.gob.do",
-      "materias": [
-        {
-          "materia": "Presupuesto",
-          "eje": "Gobernanza",
-          "consulta": "presupuesto",
-          "cantidad": 39,
-          "ejemplos": [
-            {
-              "titulo": "Presupuesto, 2021-2026",
-              "organismo": "Fondo Nacional para el Medio Ambiente y Recursos Naturales (FONDOMARENA)",
-              "enlace": "https://datos.gob.do/dataset/presupuesto-fondo-marena-2019-2023"
-            },
-            {
-              "titulo": "Presupuestos aprobados, 2019-2025",
-              "organismo": "Consejo Nacional de Zonas Francas de Exportacion (CNZFE)",
-              "enlace": "https://datos.gob.do/dataset/presupuesto-aprobado-por-ano"
-            },
-            {
-              "titulo": "Presupuesto Aprobado 2022 - 2026",
-              "organismo": "Instituto de Innovación en Biotecnología e Industria (IIBI)",
-              "enlace": "https://datos.gob.do/dataset/presupuesto-aprobado"
-            },
-            {
-              "titulo": "Presupuesto Aprobado, 2019 - 2026",
-              "organismo": "Oficina Nacional de Evaluación Sísmica y Vulnerabilidad  de Infraestructura   y Edificaciones (ONESVIE)",
-              "enlace": "https://datos.gob.do/dataset/http-onesvie-gob-do-transparencia-index-php-datos-abiertos-category-340-ejecucion-del-presupuesto"
-            }
-          ]
-        },
-        {
-          "materia": "Contratación pública",
-          "eje": "Gobernanza",
-          "consulta": "contrataciones",
-          "cantidad": 21,
-          "ejemplos": [
-            {
-              "titulo": "Compras y Contrataciones Realizadas, 2021 - 2024.",
-              "organismo": "Instituto Nacional de Educación Física (INEFI)",
-              "enlace": "https://datos.gob.do/dataset/compras-y-contrataciones-realizadas-y-aprobadas-inefi"
-            },
-            {
-              "titulo": "Estadísticas de Compras y Contrataciones, 2018 - 2025",
-              "organismo": "Ministerio de Economía, Planificación y Desarrollo (MEPyD)",
-              "enlace": "https://datos.gob.do/dataset/listado-compras-contratacciones-mepyd-2018-2019"
-            },
-            {
-              "titulo": "Plan Anual de Compra y Contrataciones (PACC), 2021",
-              "organismo": "Ayuntamiento Municipal de San José de las Matas",
-              "enlace": "https://datos.gob.do/dataset/plan-anual-de-compra-y-contrataciones-pacc-aysajoma-2021"
-            },
-            {
-              "titulo": "Compras y Contrataciones Realizadas y Aprobadas, 2017 - 2026",
-              "organismo": "Instituto de Estabilización de Precios (INESPRE)",
-              "enlace": "https://datos.gob.do/dataset/compras-y-contrataciones-realizadas-y-aprobadas-2017-inespre"
-            }
-          ]
-        },
-        {
-          "materia": "Delito registrado",
-          "eje": "Seguridad",
-          "consulta": "delito",
-          "cantidad": 13,
-          "ejemplos": [
-            {
-              "titulo": "Estadísticas de Delitos Registrados, 2021 - 2026.",
-              "organismo": "Cuerpo Especializado de Control de Combustibles (CECCOM)",
-              "enlace": "https://datos.gob.do/dataset/delitos-detectados-por-direccion-regional"
-            },
-            {
-              "titulo": "Estadísticas de Violencia de Género, Intrafamiliar y Delitos Sexuales 2020 - 2025",
-              "organismo": "Procuraduría General de la República (PGR)",
-              "enlace": "https://datos.gob.do/dataset/informes-de-violencia-de-genero-intrafamiliar-y-delitos-sexuales"
-            },
-            {
-              "titulo": "Estadísticas de Casos Sometidos, 2017 – 2022",
-              "organismo": "Procuraduría General de la República (PGR)",
-              "enlace": "https://datos.gob.do/dataset/estadisticas-de-casos-sometidos"
-            },
-            {
-              "titulo": "Estadisticas de feminicidios y homicidios de mujeres, 2017 – 2022",
-              "organismo": "Procuraduría General de la República (PGR)",
-              "enlace": "https://datos.gob.do/dataset/estadisticas-de-feminicidios-y-homicidios-de-mujeres"
-            }
-          ]
-        },
-        {
-          "materia": "Migración y desplazamiento",
-          "eje": "Inteligencia estratégica",
-          "consulta": "migracion",
-          "cantidad": 10,
-          "ejemplos": [
-            {
-              "titulo": "Servicios Escuela Nacional de Migración, 2018-2026.",
-              "organismo": "Instituto Nacional de Migración (INMRD)",
-              "enlace": "https://datos.gob.do/dataset/estadisticas-servicios-enm"
-            },
-            {
-              "titulo": "Nómina de empleados, 2018-2026",
-              "organismo": "Dirección General de Migración",
-              "enlace": "https://datos.gob.do/dataset/reporte-de-nomina-sueldos-fijos-y-nominal-2018-2026"
-            },
-            {
-              "titulo": "Estadísticas de residencias otorgadas, 2018-2026",
-              "organismo": "Dirección General de Migración",
-              "enlace": "https://datos.gob.do/dataset/residencias-2018-2026"
-            },
-            {
-              "titulo": "Estadísticas dominicanos deportados, 2024-2026",
-              "organismo": "Dirección General de Migración",
-              "enlace": "https://datos.gob.do/dataset/dominicanos-deportados-2024-2026"
-            }
-          ]
-        },
-        {
-          "materia": "Violencia organizada",
-          "eje": "Seguridad",
-          "consulta": "homicidio",
-          "cantidad": 1,
-          "ejemplos": [
-            {
-              "titulo": "Estadisticas de feminicidios y homicidios de mujeres, 2017 – 2022",
-              "organismo": "Procuraduría General de la República (PGR)",
-              "enlace": "https://datos.gob.do/dataset/estadisticas-de-feminicidios-y-homicidios-de-mujeres"
-            }
-          ]
-        },
-        {
-          "materia": "Integridad",
-          "eje": "Gobernanza",
-          "consulta": "corrupcion",
-          "cantidad": 0,
-          "ejemplos": []
-        }
-      ],
-      "conjuntos_hallados": 84
-    },
-    {
       "iso": "PER",
       "pais": "Perú",
       "bloque": "Andina",
@@ -1149,53 +1006,30 @@
           ]
         },
         {
-          "materia": "Violencia organizada",
+          "materia": "Delito registrado",
           "eje": "Seguridad",
-          "consulta": "homicidio",
-          "cantidad": 9,
+          "consulta": "delito",
+          "cantidad": 17,
           "ejemplos": [
             {
-              "titulo": "Homicidios dolosos. Sistema de Alerta Temprana. Estadísticas criminales en la República Argentina.",
-              "organismo": "Ministerio de Seguridad",
-              "enlace": "https://datos.gob.ar/dataset/homicidios-dolosos-sistema-de-alerta-temprana-estadisticas-criminales-en-la-republica-argentina"
-            },
-            {
-              "titulo": "Registro, sistematización y seguimiento de femicidios y homicidios agravados por el género",
+              "titulo": "Codificación de delitos del Código Penal Argentino",
               "organismo": "Ministerio de Justicia",
-              "enlace": "https://datos.gob.ar/dataset/registro-sistematizacion-y-seguimiento-de-femicidios-y-homicidios-agravados-por-el-genero"
+              "enlace": "https://datos.gob.ar/dataset/codificacion-de-delitos-del-codigo-penal-argentino"
             },
             {
-              "titulo": "Estadísticas criminales en la República Argentina. Muertes violentas de mujeres",
+              "titulo": "Delitos contra la propiedad. Sistema de Alerta Temprana. Estadísticas criminales",
               "organismo": "Ministerio de Seguridad",
-              "enlace": "https://datos.gob.ar/dataset/estadisticas-criminales-en-la-republica-argentina-muertes-violentas-de-mujeres"
+              "enlace": "https://datos.gob.ar/dataset/delitos-contra-la-propiedad-sistema-de-alerta-temprana-estadisticas-criminales"
             },
             {
-              "titulo": "Muertes viales. Sistema de Alerta Temprana. Estadísticas criminales en la República Argentina.",
+              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Orientaciones",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/lucha-contra-la-trata-de-personas-llamados-linea-145-orientaciones"
+            },
+            {
+              "titulo": "SNIC - Departamental. Estadísticas criminales en la República Argentina por departamentos",
               "organismo": "Ministerio de Seguridad",
-              "enlace": "https://datos.gob.ar/dataset/muertes-viales-sistema-de-alerta-temprana-estadisticas-criminales-en-la-republica-argentina"
-            }
-          ]
-        },
-        {
-          "materia": "Migración y desplazamiento",
-          "eje": "Inteligencia estratégica",
-          "consulta": "migracion",
-          "cantidad": 3,
-          "ejemplos": [
-            {
-              "titulo": "Crucerismo Marítimo",
-              "organismo": "Subsecretaría de Turismo",
-              "enlace": "https://datos.gob.ar/dataset/crucerismo-maritimo"
-            },
-            {
-              "titulo": "Estructura de poblacion de origen extranjero",
-              "organismo": "Registro Nacional de las Personas (RENAPER)",
-              "enlace": "https://datos.gob.ar/dataset/estructura-de-poblacion-de-origen-extranjero"
-            },
-            {
-              "titulo": "Turismo Internacional - Total País",
-              "organismo": "Subsecretaría de Turismo",
-              "enlace": "https://datos.gob.ar/dataset/turismo-internacional-total-pais"
+              "enlace": "https://datos.gob.ar/dataset/snic-departamental-estadisticas-criminales-en-la-republica-argentina-por-departamentos"
             }
           ]
         },
@@ -1207,7 +1041,7 @@
           "ejemplos": []
         }
       ],
-      "conjuntos_hallados": 32
+      "conjuntos_hallados": 37
     },
     {
       "iso": "PRY",
@@ -1294,12 +1128,22 @@
         }
       ],
       "conjuntos_hallados": 6
+    },
+    {
+      "iso": "DOM",
+      "pais": "República Dominicana",
+      "bloque": "Caribe hispano y Haití",
+      "organismo": "Datos Abiertos Republica Dominicana",
+      "tipo": "CKAN",
+      "portal": "https://datos.gob.do",
+      "materias": [],
+      "conjuntos_hallados": 0
     }
   ],
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4555,
+    "conjuntos_hallados": 4476,
     "materias_consultadas": 6,
     "oficinas_que_responden": 26,
     "estados_con_alguna_fuente_oficial": 28
