@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-27T23:27:24+00:00",
+  "corrida": "2026-09-28T00:35:51+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3924,
+    "sobreviven": 3920,
     "de_ellos_son_parentescos": 409
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3515,
+  "pistas_totales": 3511,
   "anomalias_totales": 394,
   "pistas": [
     {
@@ -151,19 +151,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.948,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.1971715977015595e-23,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -237,6 +224,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 5.732099141718714e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.934,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.0323962080719863e-20,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -359,32 +359,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:nocturnos",
-      "b": "superficie",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.918,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.169299073756192e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.918,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.5547042916450635e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "democracia_liberal",
       "b": "voz_rendicion",
       "rotulo_a": "Democracia liberal — límites al poder",
@@ -476,6 +450,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.91,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.688241349400106e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -497,6 +484,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1905778960493398e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.905,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.234381145975716e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
