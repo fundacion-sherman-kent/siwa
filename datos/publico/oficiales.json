@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-09-28T06:25:47+00:00",
+    "obtenido_en": "2026-09-28T12:35:15+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "10 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Contratación pública: HTTPError; ARG/Integridad: HTTPError; ARG/Migración y desplazamiento: HTTPError; DOM/Violencia organizada: HTTPError; DOM/Delito registrado: HTTPError; DOM/Contratación pública: HTTPError; DOM/Integridad: HTTPError; DOM/Presupuesto: HTTPError; DOM/Migración y desplazamiento: HTTPError."
+      "11 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Contratación pública: HTTPError; ARG/Integridad: HTTPError; ARG/Migración y desplazamiento: HTTPError; COL/Presupuesto: URLError; DOM/Violencia organizada: HTTPError; DOM/Delito registrado: HTTPError; DOM/Contratación pública: HTTPError; DOM/Integridad: HTTPError; DOM/Presupuesto: HTTPError; DOM/Migración y desplazamiento: HTTPError."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -51,12 +51,12 @@
           "materia": "Contratación pública",
           "eje": "Gobernanza",
           "consulta": "contrataciones",
-          "cantidad": 1059,
+          "cantidad": 1060,
           "ejemplos": [
             {
-              "titulo": "Contratacion Emserchia E.S.P.",
-              "organismo": "Emserchia",
-              "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
+              "titulo": "PROCESOS CONTRATACION TAURAMENA",
+              "organismo": "TAURAMENA",
+              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             },
             {
               "titulo": "Contratacion Alcaldía Chitaraque",
@@ -64,42 +64,14 @@
               "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
             },
             {
-              "titulo": "PROCESOS CONTRATACION TAURAMENA",
-              "organismo": "TAURAMENA",
-              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
+              "titulo": "Contratacion Emserchia E.S.P.",
+              "organismo": "Emserchia",
+              "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
             },
             {
               "titulo": "SECOP II CONTRATACION ABIERTA",
               "organismo": "Alcaldía Mayor de Cartagena",
               "enlace": "https://www.datos.gov.co/d/432e-zwh4"
-            }
-          ]
-        },
-        {
-          "materia": "Presupuesto",
-          "eje": "Gobernanza",
-          "consulta": "presupuesto",
-          "cantidad": 609,
-          "ejemplos": [
-            {
-              "titulo": "Presupuesto de Ingresos",
-              "organismo": "INDUSTRIA MILITAR",
-              "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
-            },
-            {
-              "titulo": "Presupuesto de Gastos",
-              "organismo": "INDUSTRIA MILITAR",
-              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
-            },
-            {
-              "titulo": "Presupuesto DADEP",
-              "organismo": "DEFENSORIA DEL ESPACIO PUBLICO",
-              "enlace": "https://www.datos.gov.co/d/8rih-qmrc"
-            },
-            {
-              "titulo": "PRESUPUESTO AIM-2020",
-              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
-              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
             }
           ]
         },
@@ -216,7 +188,7 @@
           ]
         }
       ],
-      "conjuntos_hallados": 2064
+      "conjuntos_hallados": 1456
     },
     {
       "iso": "PAN",
@@ -1031,7 +1003,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4418,
+    "conjuntos_hallados": 3810,
     "materias_consultadas": 6,
     "oficinas_que_responden": 26,
     "estados_con_alguna_fuente_oficial": 28
@@ -1091,8 +1063,9 @@
       "organismo": "Oficina Nacional de Estadística e Información",
       "url": "https://onei.gob.cu/",
       "nota": "Sin el prefijo «www». Con él, el servidor devuelve error 500. La diferencia entre un Estado que no publica y un prefijo de más es un carácter, y decide lo que el registro afirma.",
-      "estado": "sin_respuesta",
-      "detalle": "URLError: <urlopen error [Errno 104] Connection reset by peer>"
+      "estado": "certificado_invalido",
+      "codigo": 200,
+      "certificado": "no valida: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate ("
     },
     {
       "iso": "DOM",
@@ -1312,9 +1285,9 @@
   "oficinas_por_estado": {
     "responde": 26,
     "cierra_a_maquinas": 3,
-    "sin_respuesta": 2,
+    "certificado_invalido": 2,
     "verificacion_anti_robot": 1,
-    "certificado_invalido": 1
+    "sin_respuesta": 1
   },
   "sectoriales_verificados": [
     {
