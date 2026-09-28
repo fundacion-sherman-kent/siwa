@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-28T17:27:58+00:00",
+  "corrida": "2026-09-28T18:31:36+00:00",
   "medidas_con_suficientes_casos": 205,
   "pares_probados": 20910,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.910 pares y el umbral de siempre, alrededor de 1.045 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3919,
+    "sobreviven": 3920,
     "de_ellos_son_parentescos": 409
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3510,
+  "pistas_totales": 3511,
   "anomalias_totales": 394,
   "pistas": [
     {
@@ -229,19 +229,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.935,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6004936609296935e-20,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion",
       "b": "estado_derecho_wjp",
       "rotulo_a": "Control de la corrupción",
@@ -263,6 +250,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 2.163618454048824e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.932,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.200501244229075e-20,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -476,6 +476,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.908,
+      "estados": 23,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1637399344491138e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -567,19 +580,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.902,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.052657400356498e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -588,19 +588,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 6.269344376085972e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.9,
-      "estados": 23,
-      "tipo": "rangos (Spearman)",
-      "p": 4.93353750938979e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -666,6 +653,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 9.621070309355055e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.895,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.5590414739750717e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
