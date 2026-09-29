@@ -118,7 +118,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**90 fuentes en servicio**, en 92 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**92 fuentes en servicio**, en 94 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -165,6 +165,7 @@ python colectores/focos.py
 | `infraestructura` | Mapa de cables submarinos — TeleGeography, interfaz pública; OurAirports — censo abierto y colaborativo de aeródromos del mundo; Energy Institute y Ember, via Our World in Data; GCAT — catálogo general de objetos espaciales de Jonathan McDowell, CC BY 4.0 | `B-3` | 33 | 10 |
 | `memoria` | Fundación Sherman Kent — bitácora de observación de SIWA | `A-2` | 30 | 5 |
 | `migrantes_r4v` | R4V — Plataforma de Coordinación Interagencial para Refugiados y Migrantes de Venezuela (ACNUR–OIM) | `B-2` | — | 4 |
+| `minerales_comercio` | Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108, 7112, 2616, 8001, 2609, 2615, 8103) | `A-2` | 33 | 6 |
 | `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 10 |
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 5 |
@@ -209,6 +210,7 @@ python colectores/focos.py
 | `subnacional_vigia` | Vigía subnacional de SIWA — reintento sostenido de fuentes por unidad de primer orden | `A-2` | — | 2 |
 | `telegram` | Canales públicos de Telegram, vista sin cuenta | `F-4` | — | 8 |
 | `trata_personas` | Departamento de Estado de los Estados Unidos — Informe sobre la Trata de Personas, edición 2025 | `B-2` | 33 | 6 |
+| `trata_unodc` | UNODC — Global Report on Trafficking in Persons (GLOTIP): víctimas detectadas por ciudadanía | `B-2` | — | 4 |
 | `ucdp` | UCDP — Programa de Datos de Conflicto de Upsala, Universidad de Upsala. Conjunto de país-año sobre violencia organizada dentro de las fronteras | `A-2` | 33 | 8 |
 | `unesco` | Instituto de Estadística de la UNESCO (UIS), interfaz abierta | `B-2` | 33 | 6 |
 | `unidades` | CEPAL — Proyecto MEGA nivel 2 (con UN-GGIM Américas) y geoBoundaries (gbHumanitarian, con gbOpen como red de seguridad) | `A-2` | 33 | 4 |

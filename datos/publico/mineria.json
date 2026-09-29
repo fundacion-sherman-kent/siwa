@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-29T17:28:41+00:00",
-  "medidas_con_suficientes_casos": 206,
-  "pares_probados": 21115,
+  "corrida": "2026-09-29T19:38:04+00:00",
+  "medidas_con_suficientes_casos": 210,
+  "pares_probados": 21945,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 21.115 pares y el umbral de siempre, alrededor de 1.055 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3980,
-    "de_ellos_son_parentescos": 411
+    "por_que": "Con 21.945 pares y el umbral de siempre, alrededor de 1.097 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 4304,
+    "de_ellos_son_parentescos": 419
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3569,
+  "pistas_totales": 3885,
   "anomalias_totales": 394,
   "pistas": [
     {
@@ -281,19 +281,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.929,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.4872861751060333e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion:puntaje",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -302,6 +289,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.0729130189288262e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.928,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.498557771863326e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -398,19 +398,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.914,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.729484137145672e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "articulos_cientificos",
       "b": "generacion_electrica",
       "rotulo_a": "Artículos científicos y técnicos publicados",
@@ -458,6 +445,19 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 6.027655962382693e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.908,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1415166639203442e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
