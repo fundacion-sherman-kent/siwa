@@ -33,7 +33,28 @@
   .chip .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto;}
   .chip[aria-pressed="true"]{opacity:1;border-color:var(--tenue);}
   .aviso{font-size:12px;color:var(--tenue);margin:2px 0 10px;}
+  .leyenda{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin:8px 0 2px;color:var(--tenue);font-size:12px;}
+  .leyenda .li{display:inline-flex;align-items:center;gap:6px;}
+  .leyenda svg{color:var(--tinta);}
+  .controles{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0 4px;}
+  .controles .rot{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--tenue);font-weight:700;}
+  .controles select{font-family:inherit;font-size:13px;font-weight:600;color:var(--tinta);background:var(--caja);
+    border:1px solid var(--linea);border-radius:20px;padding:7px 12px;cursor:pointer;min-width:200px;}
+  .controles select:focus{outline:2px solid var(--orange);outline-offset:1px;}
+  .controles .limpiar{border:none;background:none;color:var(--orange);font-family:inherit;font-size:12.5px;
+    font-weight:600;cursor:pointer;padding:6px 4px;display:none;}
   #mapa{width:100%;height:640px;}
+  .lista{margin:14px 0 4px;display:none;}
+  .lista h2{font-size:15px;margin:0 0 8px;letter-spacing:-.2px;}
+  .lista h2 b{color:var(--orange);}
+  .lista .fila{display:grid;grid-template-columns:14px 1fr auto;gap:9px;align-items:center;
+    padding:7px 2px;border-bottom:1px solid var(--linea);font-size:13px;}
+  .lista .fila .dot{width:10px;height:10px;border-radius:50%;}
+  .lista .fila .via{color:var(--tinta);}
+  .lista .fila .via .cap{color:var(--tenue);font-size:11px;text-transform:uppercase;letter-spacing:.04em;margin-right:5px;}
+  .lista .fila .val{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap;}
+  .lista .fila .val small{font-weight:500;color:var(--tenue);}
+  .lista .vacio{color:var(--tenue);font-size:13px;padding:8px 2px;}
   .cargando{padding:30px 4px;color:var(--tenue);}
   .pie{margin-top:16px;padding-top:14px;border-top:1px solid var(--linea);color:var(--tenue);font-size:12.5px;}
   .pie a{color:var(--orange);}
@@ -75,12 +96,23 @@
      flujo para compararlos. Los ejes que salen de la región terminan en un destino marcado en el borde.
      <b>El ancho de cada corredor sale de su valor.</b></p>
   <div class="chips" id="chips"><span class="rot">Comparar flujos</span></div>
+  <div class="controles" id="control-pais">
+    <span class="rot">Flujos por país</span>
+    <select id="pais" aria-label="Elegir un país para ver sus corredores"><option value="">Todos los países</option></select>
+    <button type="button" class="limpiar" id="limpiar">Volver a todos ✕</button>
+  </div>
+  <p class="leyenda" id="leyenda">
+    <span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4"/></svg> sale de la región</span>
+    <span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4" stroke-dasharray="5 4"/></svg> llega a la región</span>
+    <span class="li">La flecha animada marca el sentido; los ejes que cruzan el borde terminan en su compuerta rotulada.</span>
+  </p>
   <p class="aviso" id="aviso"></p>
   <div class="cargando" id="cargando">Cargando el mapa…</div>
   <div id="mapa" style="display:none"></div>
+  <section class="lista" id="lista" aria-live="polite"></section>
   <p class="pie">SIWA — Fundación Sherman Kent · corredores derivados de las fuentes de cada capa
      (Comtrade, CITES, UNODC, GFI, UN DESA) · geometrías de geoBoundaries (CC BY). Comercio y detección
-     declarados: son indicios, no prueba de ilegalidad. <a href="index.html#seguridad-flujos-ilicitos">Ver los flujos por país →</a></p>
+     declarados: son indicios, no prueba de ilegalidad. <a href="#control-pais" id="ir-pais">Ver los flujos por país →</a></p>
 </main></div>
 <script>
 const cssvar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
@@ -105,6 +137,31 @@ function edge(nombre,lon,lat){
   return 'asia';
 }
 let chart, GEO, CORR, activos=new Set(['migracion','armas']);
+let PAIS='', NOM={}, CENTRO={};
+
+// nombre de una contraparte: país de la región, socio externo traducido, u original
+function nombre(iso){ return NOM[iso] || EXT_NOMBRE[iso] || iso; }
+// socios fuera de la región (nombres de Comtrade) llevados a español RAE
+const EXT_NOMBRE={USA:'EE.UU.', Offshore:'Centros offshore', China:'China', India:'India',
+  Austria:'Austria', Belgium:'Bélgica', Canada:'Canadá', Cyprus:'Chipre', Czechia:'Chequia',
+  'Dem. Rep. of the Congo':'Rep. Dem. del Congo', France:'Francia', Germany:'Alemania',
+  Israel:'Israel', Italy:'Italia', Japan:'Japón', Malaysia:'Malasia', Netherlands:'Países Bajos',
+  Portugal:'Portugal', 'Rep. of Korea':'Corea del Sur', Singapore:'Singapur',
+  'South Africa':'Sudáfrica', Spain:'España', Switzerland:'Suiza', Thailand:'Tailandia',
+  'Türkiye':'Turquía', 'United Arab Emirates':'Emiratos Árabes Unidos', 'United Kingdom':'Reino Unido'};
+
+// centro aproximado de un país (bbox) para encuadrar el mapa
+function centroBbox(feature){
+  let xmin=180,xmax=-180,ymin=90,ymax=-90;
+  function rec(cs){
+    if(typeof cs[0]==='number'){ // es un par [lon,lat]
+      if(cs[0]<xmin)xmin=cs[0]; if(cs[0]>xmax)xmax=cs[0];
+      if(cs[1]<ymin)ymin=cs[1]; if(cs[1]>ymax)ymax=cs[1];
+    } else cs.forEach(rec);
+  }
+  rec(feature.geometry.coordinates);
+  return [(xmin+xmax)/2,(ymin+ymax)/2];
+}
 
 async function cargar(){
   const [geo, corr] = await Promise.all([
@@ -112,6 +169,8 @@ async function cargar(){
     fetch("../datos/publico/corredores.json",{cache:"no-store"}).then(r=>r.json())
   ]);
   GEO=geo; CORR=corr; echarts.registerMap('alc',GEO);
+  // nombre y centro de cada país de la región, desde la geometría
+  GEO.features.forEach(f=>{ const iso=f.properties.name; NOM[iso]=f.properties.pais; CENTRO[iso]=centroBbox(f); });
   // sólo flujos con dato
   const disp=ORDEN.filter(k=>CORR.flujos[k] && CORR.flujos[k].disponible);
   activos=new Set(disp.slice(0,2));
@@ -123,6 +182,29 @@ async function cargar(){
     b.onclick=()=>{activos.has(k)?activos.delete(k):activos.add(k);b.setAttribute('aria-pressed',activos.has(k));pintar();};
     chips.appendChild(b);
   });
+  // países que aparecen en algún corredor (origen o destino, dentro de la región)
+  const enJuego=new Set();
+  disp.forEach(k=>CORR.flujos[k].corredores.forEach(c=>{
+    if(NOM[c.origen])enJuego.add(c.origen); if(NOM[c.destino])enJuego.add(c.destino);
+  }));
+  const sel=document.getElementById('pais');
+  [...enJuego].map(iso=>[iso,NOM[iso]]).sort((a,b)=>a[1].localeCompare(b[1],'es'))
+    .forEach(([iso,nom])=>{ const o=document.createElement('option'); o.value=iso; o.textContent=nom; sel.appendChild(o); });
+  sel.onchange=()=>{
+    PAIS=sel.value;
+    document.getElementById('limpiar').style.display = PAIS ? 'inline' : 'none';
+    if(PAIS){ // al elegir país, se encienden todos los flujos que lo tocan
+      disp.forEach(k=>{ const toca=CORR.flujos[k].corredores.some(c=>c.origen===PAIS||c.destino===PAIS);
+        if(toca)activos.add(k); });
+      document.querySelectorAll('#chips .chip').forEach((b,i)=>b.setAttribute('aria-pressed',activos.has(disp[i])));
+    }
+    pintar();
+  };
+  document.getElementById('limpiar').onclick=()=>{ sel.value=''; sel.onchange(); };
+  const ir=document.getElementById('ir-pais');
+  if(ir)ir.onclick=e=>{ e.preventDefault();
+    document.getElementById('control-pais').scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(()=>sel.focus(),350); };
   const faltan=ORDEN.filter(k=>CORR.flujos[k] && !CORR.flujos[k].disponible);
   document.getElementById('aviso').textContent = faltan.length
     ? 'Esperan la próxima corrida del robot: '+faltan.map(k=>(META[k]||{}).n||k).join(', ')+'. Narco queda como corredor narrativo (dato gated).'
@@ -134,27 +216,40 @@ async function cargar(){
   pintar();
 }
 
+const valDe=c=>c.valor!=null?c.valor:c.valor_usd;
 function pintar(){
-  const series=[], edgesUsados={};
+  const series=[], edgesUsados={}, filas=[];
   activos.forEach(k=>{
     const flujo=CORR.flujos[k]; if(!flujo||!flujo.disponible)return;
     const col=cssvar('--fl-'+k)||cssvar('--orange');
-    const cs=flujo.corredores.slice(0,30);
-    const maxv=Math.max(...cs.map(c=>c.valor!=null?c.valor:c.valor_usd));
+    // si hay país elegido, sólo los corredores que lo tocan; si no, los 30 mayores
+    let cs=flujo.corredores;
+    if(PAIS) cs=cs.filter(c=>c.origen===PAIS||c.destino===PAIS);
+    cs=cs.slice(0,30);
+    if(!cs.length)return;
+    const maxv=Math.max(...cs.map(valDe));
     const data=cs.map(c=>{
-      const v=c.valor!=null?c.valor:c.valor_usd;
+      const v=valDe(c);
+      // los dos extremos fuera de la región se llevan a una compuerta en el borde
+      let ocoord=[c.origen_lon,c.origen_lat];
+      if(c.origen_extra_region){const e=edge(c.origen,c.origen_lon,c.origen_lat);edgesUsados[e]=1;ocoord=EDGES[e].c;}
       let dcoord=[c.destino_lon,c.destino_lat];
       if(c.extra_region){const e=edge(c.destino,c.destino_lon,c.destino_lat);edgesUsados[e]=1;dcoord=EDGES[e].c;}
-      return {coords:[[c.origen_lon,c.origen_lat],dcoord],
-        lineStyle:{width:1+Math.sqrt(v/maxv)*6}, val:v, flow:k,
-        oname:c.origen, dname:c.destino};
+      // dirección respecto de la región: sale (destino externo), entra (origen externo) o interno
+      const dir = c.extra_region ? 'sale' : (c.origen_extra_region ? 'entra' : 'intra');
+      if(PAIS) filas.push({flow:k, c, v});
+      return {coords:[ocoord,dcoord],
+        lineStyle:{width:1+Math.sqrt(v/maxv)*6, type: dir==='entra'?'dashed':'solid',
+                   opacity: dir==='intra'?.42:.62},
+        val:v, flow:k, dir, oname:c.origen, dname:c.destino};
     });
     series.push({name:META[k]?META[k].n:k, type:'lines', coordinateSystem:'geo', zlevel:2,
-      lineStyle:{color:col, opacity:.55, curveness:.25},
-      effect:{show:true, period:5, trailLength:.5, symbol:'arrow', symbolSize:5, color:col},
-      emphasis:{lineStyle:{opacity:.95, width:3}},
+      lineStyle:{color:col, curveness:.25},
+      effect:{show:true, period:5, trailLength:.5, symbol:'arrow', symbolSize:6, color:col},
+      emphasis:{lineStyle:{opacity:1, width:3}},
       data});
   });
+  listaPais(filas);
   // marcadores de destino externo
   const edgePts=Object.keys(edgesUsados).map(e=>({name:EDGES[e].t, value:EDGES[e].c.concat(0)}));
   if(edgePts.length) series.push({type:'scatter', coordinateSystem:'geo', zlevel:3, symbol:'rect', symbolSize:9,
@@ -168,14 +263,40 @@ function pintar(){
     tooltip:{trigger:'item', backgroundColor:cssvar('--caja'), borderColor:cssvar('--linea'),
       textStyle:{color:cssvar('--tinta')},
       formatter:o=>{ if(o.seriesType==='lines'){const d=o.data;
-        return '<b>'+(META[d.flow]?META[d.flow].n:d.flow)+'</b><br>'+d.oname+' → '+d.dname+
+        const eti={sale:'sale de la región', entra:'llega a la región', intra:'dentro de la región'}[d.dir];
+        return '<b>'+(META[d.flow]?META[d.flow].n:d.flow)+'</b> <span style="opacity:.6">· '+eti+'</span><br>'+
+          nombre(d.oname)+' → '+nombre(d.dname)+
           '<br>'+META[d.flow].f(d.val)+' <span style="opacity:.6">'+META[d.flow].u+'</span>';}
         return o.name; }},
-    geo:{map:'alc', roam:true, aspectScale:1, zoom:1.1,
+    geo:{map:'alc', roam:true, aspectScale:1,
+      zoom: PAIS?3:1.1, center: PAIS?CENTRO[PAIS]:null,
       itemStyle:{areaColor:cssvar('--area'), borderColor:cssvar('--borde'), borderWidth:.6},
+      regions: PAIS?[{name:PAIS, itemStyle:{areaColor:cssvar('--fl-migracion'), opacity:.14,
+        borderColor:cssvar('--tenue'), borderWidth:1}}]:[],
       emphasis:{disabled:true}, silent:true},
     series
   }, true);
+}
+
+// panel de corredores del país elegido, ordenados por valor
+function listaPais(filas){
+  const cont=document.getElementById('lista');
+  if(!PAIS){ cont.style.display='none'; cont.innerHTML=''; return; }
+  cont.style.display='block';
+  const nom=NOM[PAIS]||PAIS;
+  if(!filas.length){ cont.innerHTML='<h2>Corredores de <b>'+nom+'</b></h2>'+
+    '<p class="vacio">No hay corredores medidos que toquen a '+nom+' en los flujos disponibles.</p>'; return; }
+  filas.sort((a,b)=>b.v-a.v);
+  const html=filas.slice(0,20).map(f=>{
+    const c=f.c, entra=c.destino===PAIS;
+    const contra=entra?c.origen:c.destino;
+    const cap=entra?'entra desde':'sale hacia';
+    return '<div class="fila"><span class="dot" style="background:var(--fl-'+f.flow+')"></span>'+
+      '<span class="via"><span class="cap">'+cap+'</span>'+nombre(contra)+
+      ' <span style="opacity:.6">· '+(META[f.flow]?META[f.flow].n:f.flow)+'</span></span>'+
+      '<span class="val">'+META[f.flow].f(f.v)+' <small>'+META[f.flow].u+'</small></span></div>';
+  }).join('');
+  cont.innerHTML='<h2>Corredores de <b>'+nom+'</b></h2>'+html;
 }
 window.SIWA_onTema=function(){ if(chart) pintar(); };
 cargar().catch(e=>document.getElementById('cargando').textContent='No se pudo cargar el mapa: '+e);
