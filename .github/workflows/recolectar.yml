@@ -411,6 +411,14 @@ jobs:
         continue-on-error: true
         run: python colectores/migrantes_r4v.py
 
+      # MIGRACIÓN (todos los países): stock bilateral origen→destino de UN DESA
+      # (International Migrant Stock 2024). Baja la planilla oficial (link directo).
+      # Complementa a R4V. No bloquea el robot.
+      - name: Migración origen-destino, todos los países (UN DESA)
+        id: migrantes_undesa
+        continue-on-error: true
+        run: python colectores/migrantes_undesa.py
+
       # ESPECIES: comercio CITES (fauna y flora) que toca ALC. Lee el agregado
       # fuentes/entrada-manual/cites_alc.csv (file-drop: la base completa de CITES
       # no tiene API y se agrega fuera de línea con herramientas/agregar_cites.py).
