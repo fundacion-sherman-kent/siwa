@@ -139,9 +139,16 @@ function edge(nombre,lon,lat){
 let chart, GEO, CORR, activos=new Set(['migracion','armas']);
 let PAIS='', NOM={}, CENTRO={};
 
-// nombre de una contraparte: país de la región, destino externo, u ISO tal cual
-function nombre(iso){ return NOM[iso] || (EDGES_NOMBRE[iso]) || iso; }
-const EDGES_NOMBRE={USA:'EE.UU.', Offshore:'Offshore'};
+// nombre de una contraparte: país de la región, socio externo traducido, u original
+function nombre(iso){ return NOM[iso] || EXT_NOMBRE[iso] || iso; }
+// socios fuera de la región (nombres de Comtrade) llevados a español RAE
+const EXT_NOMBRE={USA:'EE.UU.', Offshore:'Centros offshore', China:'China', India:'India',
+  Austria:'Austria', Belgium:'Bélgica', Canada:'Canadá', Cyprus:'Chipre', Czechia:'Chequia',
+  'Dem. Rep. of the Congo':'Rep. Dem. del Congo', France:'Francia', Germany:'Alemania',
+  Israel:'Israel', Italy:'Italia', Japan:'Japón', Malaysia:'Malasia', Netherlands:'Países Bajos',
+  Portugal:'Portugal', 'Rep. of Korea':'Corea del Sur', Singapore:'Singapur',
+  'South Africa':'Sudáfrica', Spain:'España', Switzerland:'Suiza', Thailand:'Tailandia',
+  'Türkiye':'Turquía', 'United Arab Emirates':'Emiratos Árabes Unidos', 'United Kingdom':'Reino Unido'};
 
 // centro aproximado de un país (bbox) para encuadrar el mapa
 function centroBbox(feature){
