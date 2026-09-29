@@ -51,6 +51,12 @@ jobs:
         with:
           python-version: "3.12"
 
+      # openpyxl: lo usan los lectores de planillas .xlsx (financiero GFI, migración
+      # UN DESA). Sin él, esos colectores fallan con ModuleNotFoundError. Va antes de
+      # todo. Los lectores de UNODC/CITES no lo necesitan (leen el XML crudo).
+      - name: Dependencias de planillas
+        run: python -m pip install --quiet openpyxl
+
       # --- Transversal, cada hora ---
       - name: Cobertura noticiosa cruzada
         id: cobertura
