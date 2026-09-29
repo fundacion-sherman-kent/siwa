@@ -558,6 +558,14 @@ jobs:
         continue-on-error: true
         run: python colectores/contrataciones_abiertas.py
 
+      # SECOP Colombia: la fuente OCDS de Colombia quedó muerta (2022). SECOP por
+      # Socrata sigue vivo: trae el Plan Anual de Adquisiciones por año (planes y
+      # presupuesto). Refresca la fila de Colombia. Un solo país. No bloquea.
+      - name: SECOP Colombia (contratacion, dato vivo)
+        id: secop_colombia
+        continue-on-error: true
+        run: python colectores/secop_colombia.py
+
       - name: Democracia, terrorismo y conflicto (V-Dem, GTD, UCDP)
         id: owd
         if: env.COMPLETA == 'true'
