@@ -672,6 +672,16 @@ jobs:
         continue-on-error: true
         run: python herramientas/armonizacion.py
 
+      # CORREDORES. Deriva de los archivos de flujo YA publicados (hoy armas.json,
+      # Comtrade cap. 93, nivel A) los pares origen->destino para el mapa regional,
+      # con las coordenadas y si el destino sale de la region. No consulta internet
+      # ni incorpora fuentes: reordena dato ya calificado. Archivo derivado (TESTIGOS).
+      # No bloquea el robot: no entra en "Declarar las fallas".
+      - name: Corredores de flujos
+        id: corredores
+        continue-on-error: true
+        run: python herramientas/corredores.py
+
       - name: Auditoria del registro
         id: auditoria
         if: always()
