@@ -411,6 +411,15 @@ jobs:
         continue-on-error: true
         run: python colectores/migrantes_r4v.py
 
+      # ESPECIES: comercio CITES (fauna y flora) que toca ALC. Lee el agregado
+      # fuentes/entrada-manual/cites_alc.csv (file-drop: la base completa de CITES
+      # no tiene API y se agrega fuera de línea con herramientas/agregar_cites.py).
+      # No consulta internet. No bloquea el robot.
+      - name: Especies CITES (fauna y flora)
+        id: especies_cites
+        continue-on-error: true
+        run: python colectores/especies_cites.py
+
       # El explorador PROPONE, no publica: toca puertas y deja el hallazgo
       # declarado para que una persona decida.
       - name: Explorador de puertas de datos oficiales
