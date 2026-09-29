@@ -480,15 +480,33 @@ def construir() -> dict:
     for k, v in PENDIENTES.items():
         flujos[k] = {"disponible": False, "porque": v}
         vacios.append(f"{k}: {v}.")
+    # AUTOMEJORA: cada flujo auto-reporta su frescura. El motor y el sitio detectan
+    # solos qué corredor está rezagado (> 2 años) para priorizar su refresco. No
+    # auto-corrige: marca. Compuerta humana en decidir la fuente nueva.
+    anio_actual = datetime.now(timezone.utc).year
+    frescura = []
+    for k, v in flujos.items():
+        if not v.get("disponible"):
+            continue
+        a = v.get("anio")
+        if isinstance(a, int):
+            edad = anio_actual - a
+            frescura.append({"flujo": k, "anio": a, "antiguedad_anios": edad,
+                             "estado": "rezagado" if edad > 2 else "fresco"})
+        else:
+            frescura.append({"flujo": k, "anio": a, "estado": "sin_anio"})
+    rezagados = [f["flujo"] for f in frescura if f.get("estado") == "rezagado"]
+
     return {
         "que_es": "Corredores de flujos para el mapa regional: pares origen→destino con coordenadas, "
                   "valor y si el destino sale de la región. DERIVADO de los archivos de flujo ya "
-                  "publicados y calificados; reordena, no incorpora. Hoy armas y minerales (Comtrade, "
-                  "nivel A) y migrantes (R4V, nivel B) tienen fuente dura; el resto queda pendiente.",
+                  "publicados y calificados; reordena, no incorpora. Cada flujo declara su nivel y su "
+                  "frescura; el detalle de fuente y unidad va en cada capa.",
         "corrida": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "resumen": {"corredores": total,
                     "flujos_con_dato": [k for k, v in flujos.items() if v.get("disponible")],
                     "flujos_pendientes": list(PENDIENTES)},
+        "frescura": {"anio_actual": anio_actual, "por_flujo": frescura, "rezagados": rezagados},
         "flujos": flujos,
         "vacios_declarados": vacios or ["Sin vacíos en esta corrida."],
     }
