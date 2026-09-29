@@ -118,7 +118,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**88 fuentes en servicio**, en 90 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**90 fuentes en servicio**, en 92 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -148,6 +148,7 @@ python colectores/focos.py
 | `desplazamiento` | ACNUR — Refugee Data Finder | `A-2` | 33 | 8 |
 | `drogas` | Informe Mundial sobre las Drogas 2025, anexo estadístico — Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC) | `B-2` | 33 | 4 |
 | `eia` | Administración de Información Energética de los Estados Unidos (EIA) — estadística energética internacional | `A-2` | 33 | 3 |
+| `especies_cites` | CITES Trade Database — UNEP-WCMC para la Secretaría CITES (descarga completa, agregada a ALC) | `B-2` | — | 5 |
 | `estado_reciente` | Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Argentina, Colombia, Ecuador, México, Panamá, Perú, Trinidad y Tobago | `A-2` | 33 | 4 |
 | `explorador` | Fundación Sherman Kent — exploración de puertas de datos oficiales | `A-1` | 33 | 6 |
 | `fmi_mensual` | Fondo Monetario Internacional — datos estadísticos (SDMX 3.0): liquidez internacional (IL) e índice de precios al consumidor (CPI) | `A-2` | 33 | 4 |
@@ -163,6 +164,7 @@ python colectores/focos.py
 | `inform` | INFORM Risk — Centro Común de Investigación de la Comisión Europea y OCHA | `A-3` | 33 | 4 |
 | `infraestructura` | Mapa de cables submarinos — TeleGeography, interfaz pública; OurAirports — censo abierto y colaborativo de aeródromos del mundo; Energy Institute y Ember, via Our World in Data; GCAT — catálogo general de objetos espaciales de Jonathan McDowell, CC BY 4.0 | `B-3` | 33 | 10 |
 | `memoria` | Fundación Sherman Kent — bitácora de observación de SIWA | `A-2` | 30 | 5 |
+| `migrantes_r4v` | R4V — Plataforma de Coordinación Interagencial para Refugiados y Migrantes de Venezuela (ACNUR–OIM) | `B-2` | — | 4 |
 | `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 10 |
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 5 |
