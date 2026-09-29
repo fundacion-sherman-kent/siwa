@@ -171,14 +171,66 @@ def _corredores_comercio(archivo: str, flujo: str, fuente: str, nivel: str = "A"
     }
 
 
+# R4V nombra los destinos a su manera; se los lleva al ISO del padrón o al hub.
+R4V_DESTINO = {
+    "Colombia": "COL", "Peru": "PER", "Brazil": "BRA", "Chile": "CHL", "Ecuador": "ECU",
+    "Argentina": "ARG", "Dominican Republic": "DOM", "Mexico": "MEX", "Panama": "PAN",
+    "Trinidad & Tobago": "TTO", "Uruguay": "URY", "Costa Rica": "CRI", "Guyana": "GUY",
+    "Bolivia (Plurinational State of)": "BOL", "Paraguay": "PRY", "Guatemala": "GTM",
+    "El Salvador": "SLV", "Nicaragua": "NIC", "Honduras": "HND",
+    "USA": "USA", "Spain": "Spain", "Italy": "Italy", "Portugal": "Portugal", "Canada": "Canada",
+}
+
+
+def _corredores_migrantes() -> dict:
+    """Corredores Venezuela → destino, del stock de venezolanos que reporta R4V.
+    El «valor» es personas, no dólares: lleva unidad propia."""
+    d = _cargar(PUBLICO / "migrantes.json")
+    if not isinstance(d, dict):
+        return {"disponible": False, "porque": "no se encontró migrantes.json"}
+    ven = REGION["VEN"]
+    corredores, no_ubicados = [], set()
+    for reg in d.get("registros", []) or []:
+        destino, val = reg.get("destino"), reg.get("poblacion") or 0
+        clave = R4V_DESTINO.get(destino)
+        if not clave or not val:
+            if destino and not clave and not str(destino).startswith("Others"):
+                no_ubicados.add(destino)
+            continue
+        if clave in REGION:
+            dlat, dlon, extra = REGION[clave][0], REGION[clave][1], False
+        elif clave in HUBS:
+            dlat, dlon, extra = HUBS[clave][0], HUBS[clave][1], True
+        else:
+            no_ubicados.add(destino)
+            continue
+        corredores.append({
+            "flujo": "migrantes", "sentido": "sale",
+            "origen": "VEN", "origen_lat": ven[0], "origen_lon": ven[1],
+            "destino": clave, "destino_lat": dlat, "destino_lon": dlon,
+            "extra_region": extra, "valor": int(val), "unidad": "personas",
+        })
+    return {
+        "disponible": True,
+        "anio": (d.get("resumen") or {}).get("consultado", "")[:4] or None,
+        "nivel": "B",
+        "fuente": "R4V (ACNUR–OIM) — venezolanos por país de destino",
+        "calificacion": (d.get("calificacion") or {}),
+        "advertencia": ("Stock de venezolanos que reporta cada gobierno de destino, no flujo del "
+                        "año; puede incluir estimación y subcontar la situación irregular. El valor "
+                        "es personas, no dólares."),
+        "corredores": sorted(corredores, key=lambda c: -c["valor"]),
+        "contrapartes_no_ubicadas": sorted(no_ubicados),
+    }
+
+
 # Flujos cuya geometría de corredor todavía no tiene fuente dura en el robot.
 PENDIENTES = {
     "narco": "UNODC World Drug Report — dato de país/incautación, corredor sólo narrativo (C)",
     "trata": "UNODC Global TIP (nacionalidad × detección) — pendiente de colector",
     "especies": "CITES Trade Database — file-drop anual, pendiente de licencia UNEP-WCMC",
     "financiero": "GFI/FSI/ICIJ — capa de «exposición», pendiente de licencia",
-    "migrantes": "IOM Missing Migrants (CC BY 4.0) — pendiente de colector",
-    "pesca": "Global Fishing Watch / IUU Index — pendiente de colector",
+    "pesca": "Global Fishing Watch / IUU Index — pendiente de clave y colector",
 }
 
 
@@ -189,7 +241,8 @@ def construir() -> dict:
     minerales = _corredores_comercio(
         "minerales_comercio.json", "minerales",
         "Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108/7112/2616/8001/2609/2615/8103)")
-    flujos = {"armas": armas, "minerales": minerales}
+    migrantes = _corredores_migrantes()
+    flujos = {"armas": armas, "minerales": minerales, "migrantes": migrantes}
     total = sum(len(f.get("corredores", [])) for f in flujos.values() if f.get("disponible"))
     vacios = []
     for nom, fx in flujos.items():
@@ -204,8 +257,8 @@ def construir() -> dict:
     return {
         "que_es": "Corredores de flujos para el mapa regional: pares origen→destino con coordenadas, "
                   "valor y si el destino sale de la región. DERIVADO de los archivos de flujo ya "
-                  "publicados y calificados; reordena, no incorpora. Hoy armas y minerales tienen "
-                  "fuente dura (Comtrade, nivel A); el resto queda declarado como pendiente.",
+                  "publicados y calificados; reordena, no incorpora. Hoy armas y minerales (Comtrade, "
+                  "nivel A) y migrantes (R4V, nivel B) tienen fuente dura; el resto queda pendiente.",
         "corrida": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "resumen": {"corredores": total,
                     "flujos_con_dato": [k for k, v in flujos.items() if v.get("disponible")],
@@ -224,8 +277,11 @@ def main() -> None:
           f"con dato: {r['flujos_con_dato']} · pendientes: {len(r['flujos_pendientes'])}")
     for nom in r["flujos_con_dato"]:
         for c in salida["flujos"][nom].get("corredores", [])[:3]:
+            v, u = c.get("valor_usd"), "USD"
+            if v is None:
+                v, u = c.get("valor", 0), c.get("unidad", "")
             print(f"   [{nom}] {c['origen']} → {c['destino']} · {c['sentido']} · "
-                  f"USD {c['valor_usd']:,}{' · fuera de región' if c['extra_region'] else ''}")
+                  f"{v:,} {u}{' · fuera de región' if c['extra_region'] else ''}")
 
 
 if __name__ == "__main__":

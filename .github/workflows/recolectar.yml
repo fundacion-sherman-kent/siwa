@@ -402,6 +402,15 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/minerales_comercio.py
 
+      # MIGRANTES: venezolanos por país de destino (R4V, ACNUR-OIM). Un solo
+      # origen -Venezuela- hacia destinos regionales y de fuera de la región;
+      # alimenta el corredor de migración. Lectura del JSON embebido en la página,
+      # sin navegador. No bloquea el robot.
+      - name: Migrantes venezolanos por destino (R4V)
+        id: migrantes_r4v
+        continue-on-error: true
+        run: python colectores/migrantes_r4v.py
+
       # El explorador PROPONE, no publica: toca puertas y deja el hallazgo
       # declarado para que una persona decida.
       - name: Explorador de puertas de datos oficiales
