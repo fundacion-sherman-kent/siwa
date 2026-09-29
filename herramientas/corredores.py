@@ -412,11 +412,45 @@ def _corredores_financiero() -> dict:
     }
 
 
-# Flujos sin corredor país→país. Narco: el dato bilateral real está gated. Pesca: es
-# una capa de país (eventos por bandera, pesca_gfw.json), no un corredor: no va acá.
-PENDIENTES = {
-    "narco": "UNODC World Drug Report — dato de país/incautación, corredor sólo narrativo (C)",
-}
+def _corredores_narco() -> dict:
+    """Corredor ESTIMADO de narco: producción de coca (COL/PER/BOL) → mercado principal.
+    Magnitud = hectáreas de cultivo; destino = Norteamérica según UNODC. Nivel C, rotulado."""
+    d = _cargar(PUBLICO / "drogas.json")
+    if not isinstance(d, dict):
+        return {"disponible": False, "porque": "no se encontró drogas.json"}
+    usa = HUBS["USA"]
+    corredores, anio = [], None
+    for reg in d.get("registros", []) or []:
+        iso, serie = reg.get("iso"), reg.get("cultivo_coca")
+        if iso not in REGION or not serie:
+            continue
+        ult = serie[-1]
+        ha, anio = ult.get("valor"), ult.get("anio")
+        if not ha:
+            continue
+        o = REGION[iso]
+        corredores.append({
+            "flujo": "narco", "sentido": "produccion",
+            "origen": iso, "origen_lat": o[0], "origen_lon": o[1],
+            "destino": "USA", "destino_lat": usa[0], "destino_lon": usa[1],
+            "extra_region": True, "valor": int(ha),
+            "unidad": "ha de coca (producción, estimado)", "anio": anio,
+        })
+    corredores.sort(key=lambda c: -c["valor"])
+    return {
+        "disponible": bool(corredores), "nivel": "C", "anio": anio,
+        "fuente": "UNODC — cultivo de coca (producción) hacia el mercado principal, estimado",
+        "calificacion": (d.get("calificacion") or {}),
+        "advertencia": ("ESTIMADO, no medido: la magnitud es hectáreas de cultivo (producción de "
+                        "COL/PER/BOL) y el destino es el mercado principal, Norteamérica, según "
+                        "UNODC —Europa es el otro gran mercado—. NO es un flujo bilateral medido ni "
+                        "un reparto entre mercados; el dato bilateral real está gated (UNODC DMP)."),
+        "corredores": corredores, "contrapartes_no_ubicadas": [],
+    }
+
+
+# Flujos sin corredor país→país. Pesca: capa de país (pesca_gfw.json), no corredor.
+PENDIENTES = {}
 
 
 def construir() -> dict:
@@ -431,9 +465,10 @@ def construir() -> dict:
     trata = _corredores_trata()
     financiero = _corredores_financiero()
     migracion = _corredores_migracion()
+    narco = _corredores_narco()
     flujos = {"armas": armas, "minerales": minerales, "migrantes": migrantes,
               "migracion": migracion, "especies": especies, "trata": trata,
-              "financiero": financiero}
+              "financiero": financiero, "narco": narco}
     total = sum(len(f.get("corredores", [])) for f in flujos.values() if f.get("disponible"))
     vacios = []
     for nom, fx in flujos.items():
