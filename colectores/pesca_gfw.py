@@ -27,6 +27,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import os
+import urllib.error
 import urllib.request
 
 import comun
@@ -55,8 +56,19 @@ def _consultar(token: str, dataset: str, desde: str, hasta: str) -> dict:
         "Content-Type": "application/json",
         "User-Agent": comun.AGENTE,
     })
-    with urllib.request.urlopen(pet, timeout=120) as r:
-        return json.loads(r.read().decode("utf-8", "replace"))
+    try:
+        with urllib.request.urlopen(pet, timeout=120) as r:
+            return json.loads(r.read().decode("utf-8", "replace"))
+    except urllib.error.HTTPError as error:
+        # La API no se puede probar en la Oficina (token secreto): que el robot cuente
+        # EXACTAMENTE qué rechaza —código y cuerpo— para arreglar el pedido a ciegas.
+        import sys
+        try:
+            detalle = error.read().decode("utf-8", "replace")[:400]
+        except Exception:  # noqa: BLE001
+            detalle = "(sin cuerpo)"
+        print(f"[pesca_gfw] GFW HTTP {error.code} en {dataset}: {detalle}", file=sys.stderr)
+        raise
 
 
 def recolectar():
