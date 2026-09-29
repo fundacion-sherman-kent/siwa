@@ -412,10 +412,10 @@ def _corredores_financiero() -> dict:
     }
 
 
-# Flujos cuya geometría de corredor todavía no tiene fuente dura en el robot.
+# Flujos sin corredor país→país. Narco: el dato bilateral real está gated. Pesca: es
+# una capa de país (eventos por bandera, pesca_gfw.json), no un corredor: no va acá.
 PENDIENTES = {
     "narco": "UNODC World Drug Report — dato de país/incautación, corredor sólo narrativo (C)",
-    "pesca": "Global Fishing Watch / IUU Index — pendiente de colector (clave lista)",
 }
 
 

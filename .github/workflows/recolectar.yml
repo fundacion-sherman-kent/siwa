@@ -442,6 +442,16 @@ jobs:
         continue-on-error: true
         run: python colectores/financiero_gfi.py
 
+      # PESCA: presión de pesca sospechosa por país (Global Fishing Watch), eventos
+      # de encuentro y AIS apagado por bandera. Capa de país, no corredor. Usa la
+      # clave GFW_API_TOKEN (secreto del robot). No bloquea el robot.
+      - name: Pesca ilegal (Global Fishing Watch)
+        id: pesca_gfw
+        continue-on-error: true
+        env:
+          GFW_API_TOKEN: ${{ secrets.GFW_API_TOKEN }}
+        run: python colectores/pesca_gfw.py
+
       # El explorador PROPONE, no publica: toca puertas y deja el hallazgo
       # declarado para que una persona decida.
       - name: Explorador de puertas de datos oficiales
