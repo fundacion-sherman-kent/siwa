@@ -81,6 +81,7 @@ TESTIGOS = {
     "frescura.json": "termómetro de frescura: de qué año es cada indicador, calculado del propio registro",
     "propuestas-frescura.json": "clasificación de indicadores atrasados en caminos posibles, sin aplicar ninguno",
     "armonizacion.json": "fichas de armonización: cómo se enlaza cada par de fuentes, calculado del propio registro",
+    "corredores.json": "corredores de flujos para el mapa: pares origen→destino derivados de los archivos de flujo ya calificados",
 }
 
 ATRIBUCION = {
