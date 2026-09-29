@@ -188,9 +188,9 @@ R4V_DESTINO = {
 def _corredores_migrantes() -> dict:
     """Corredores Venezuela → destino, del stock de venezolanos que reporta R4V.
     El «valor» es personas, no dólares: lleva unidad propia."""
-    d = _cargar(PUBLICO / "migrantes.json")
+    d = _cargar(PUBLICO / "migrantes_r4v.json")
     if not isinstance(d, dict):
-        return {"disponible": False, "porque": "no se encontró migrantes.json"}
+        return {"disponible": False, "porque": "no se encontró migrantes_r4v.json"}
     ven = REGION["VEN"]
     corredores, no_ubicados = [], set()
     for reg in d.get("registros", []) or []:
