@@ -33,6 +33,9 @@
   .chip .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto;}
   .chip[aria-pressed="true"]{opacity:1;border-color:var(--tenue);}
   .aviso{font-size:12px;color:var(--tenue);margin:2px 0 10px;}
+  .leyenda{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin:8px 0 2px;color:var(--tenue);font-size:12px;}
+  .leyenda .li{display:inline-flex;align-items:center;gap:6px;}
+  .leyenda svg{color:var(--tinta);}
   .controles{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0 4px;}
   .controles .rot{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--tenue);font-weight:700;}
   .controles select{font-family:inherit;font-size:13px;font-weight:600;color:var(--tinta);background:var(--caja);
@@ -98,6 +101,11 @@
     <select id="pais" aria-label="Elegir un país para ver sus corredores"><option value="">Todos los países</option></select>
     <button type="button" class="limpiar" id="limpiar">Volver a todos ✕</button>
   </div>
+  <p class="leyenda" id="leyenda">
+    <span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4"/></svg> sale de la región</span>
+    <span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4" stroke-dasharray="5 4"/></svg> llega a la región</span>
+    <span class="li">La flecha animada marca el sentido; los ejes que cruzan el borde terminan en su compuerta rotulada.</span>
+  </p>
   <p class="aviso" id="aviso"></p>
   <div class="cargando" id="cargando">Cargando el mapa…</div>
   <div id="mapa" style="display:none"></div>
@@ -215,17 +223,23 @@ function pintar(){
     const maxv=Math.max(...cs.map(valDe));
     const data=cs.map(c=>{
       const v=valDe(c);
+      // los dos extremos fuera de la región se llevan a una compuerta en el borde
+      let ocoord=[c.origen_lon,c.origen_lat];
+      if(c.origen_extra_region){const e=edge(c.origen,c.origen_lon,c.origen_lat);edgesUsados[e]=1;ocoord=EDGES[e].c;}
       let dcoord=[c.destino_lon,c.destino_lat];
       if(c.extra_region){const e=edge(c.destino,c.destino_lon,c.destino_lat);edgesUsados[e]=1;dcoord=EDGES[e].c;}
+      // dirección respecto de la región: sale (destino externo), entra (origen externo) o interno
+      const dir = c.extra_region ? 'sale' : (c.origen_extra_region ? 'entra' : 'intra');
       if(PAIS) filas.push({flow:k, c, v});
-      return {coords:[[c.origen_lon,c.origen_lat],dcoord],
-        lineStyle:{width:1+Math.sqrt(v/maxv)*6}, val:v, flow:k,
-        oname:c.origen, dname:c.destino};
+      return {coords:[ocoord,dcoord],
+        lineStyle:{width:1+Math.sqrt(v/maxv)*6, type: dir==='entra'?'dashed':'solid',
+                   opacity: dir==='intra'?.42:.62},
+        val:v, flow:k, dir, oname:c.origen, dname:c.destino};
     });
     series.push({name:META[k]?META[k].n:k, type:'lines', coordinateSystem:'geo', zlevel:2,
-      lineStyle:{color:col, opacity:.55, curveness:.25},
-      effect:{show:true, period:5, trailLength:.5, symbol:'arrow', symbolSize:5, color:col},
-      emphasis:{lineStyle:{opacity:.95, width:3}},
+      lineStyle:{color:col, curveness:.25},
+      effect:{show:true, period:5, trailLength:.5, symbol:'arrow', symbolSize:6, color:col},
+      emphasis:{lineStyle:{opacity:1, width:3}},
       data});
   });
   listaPais(filas);
@@ -242,7 +256,9 @@ function pintar(){
     tooltip:{trigger:'item', backgroundColor:cssvar('--caja'), borderColor:cssvar('--linea'),
       textStyle:{color:cssvar('--tinta')},
       formatter:o=>{ if(o.seriesType==='lines'){const d=o.data;
-        return '<b>'+(META[d.flow]?META[d.flow].n:d.flow)+'</b><br>'+nombre(d.oname)+' → '+nombre(d.dname)+
+        const eti={sale:'sale de la región', entra:'llega a la región', intra:'dentro de la región'}[d.dir];
+        return '<b>'+(META[d.flow]?META[d.flow].n:d.flow)+'</b> <span style="opacity:.6">· '+eti+'</span><br>'+
+          nombre(d.oname)+' → '+nombre(d.dname)+
           '<br>'+META[d.flow].f(d.val)+' <span style="opacity:.6">'+META[d.flow].u+'</span>';}
         return o.name; }},
     geo:{map:'alc', roam:true, aspectScale:1,
