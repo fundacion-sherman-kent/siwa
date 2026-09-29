@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-29T19:38:04+00:00",
-  "medidas_con_suficientes_casos": 210,
-  "pares_probados": 21945,
+  "corrida": "2026-09-29T21:01:51+00:00",
+  "medidas_con_suficientes_casos": 211,
+  "pares_probados": 22155,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 21.945 pares y el umbral de siempre, alrededor de 1.097 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4304,
-    "de_ellos_son_parentescos": 419
+    "por_que": "Con 22.155 pares y el umbral de siempre, alrededor de 1.107 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 4381,
+    "de_ellos_son_parentescos": 420
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3885,
+  "pistas_totales": 3961,
   "anomalias_totales": 394,
   "pistas": [
     {
@@ -203,6 +203,19 @@
       "misma_categoria": false
     },
     {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "reservas_internacionales",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.942,
+      "estados": 27,
+      "tipo": "rangos (Spearman)",
+      "p": 7.9480456202409e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -224,6 +237,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 5.732099141718714e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "generacion_electrica",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.937,
+      "estados": 29,
+      "tipo": "rangos (Spearman)",
+      "p": 2.631703612429346e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -315,6 +341,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.5199678582347144e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "poblacion",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "Población total",
+      "coeficiente": 0.927,
+      "estados": 29,
+      "tipo": "rangos (Spearman)",
+      "p": 8.030917381111556e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -567,6 +606,19 @@
       "misma_categoria": false
     },
     {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "ransomware:victimas",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.902,
+      "estados": 28,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1128084260439211e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -575,6 +627,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 6.269344376085972e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "ransomware · grupos_distintos",
+      "coeficiente": 0.9,
+      "estados": 28,
+      "tipo": "rangos (Spearman)",
+      "p": 1.8238490787034338e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -731,71 +796,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 6.409505276196099e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "actores_antidemocraticos",
-      "b": "democracia_participativa",
-      "rotulo_a": "Control sobre actores antidemocraticos",
-      "rotulo_b": "Democracia participativa",
-      "coeficiente": 0.888,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 7.061326432405993e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.887,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.198209567786406e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "percepcion_corrupcion",
-      "b": "voz_rendicion",
-      "rotulo_a": "Percepción de corrupción",
-      "rotulo_b": "Voz y rendición de cuentas",
-      "coeficiente": 0.887,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 2.673042796156778e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "democracia_electoral",
-      "b": "estado_derecho",
-      "rotulo_a": "Nivel democrático — democracia electoral",
-      "rotulo_b": "Estado de derecho",
-      "coeficiente": 0.887,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.7625675888497296e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "percepcion_corrupcion:intervalo_alto",
-      "b": "voz_rendicion",
-      "rotulo_a": "percepcion_corrupcion · intervalo_alto",
-      "rotulo_b": "Voz y rendición de cuentas",
-      "coeficiente": 0.885,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.250274167999921e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
