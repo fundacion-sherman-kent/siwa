@@ -224,13 +224,73 @@ def _corredores_migrantes() -> dict:
     }
 
 
+# CITES usa ISO2; se lo lleva al ISO3 del padrón o al nombre del hub.
+ISO2_A_CLAVE = {
+    "AR":"ARG","BO":"BOL","BR":"BRA","CL":"CHL","CO":"COL","CR":"CRI","CU":"CUB","DO":"DOM",
+    "EC":"ECU","SV":"SLV","GT":"GTM","HN":"HND","MX":"MEX","NI":"NIC","PA":"PAN","PY":"PRY",
+    "PE":"PER","UY":"URY","VE":"VEN","HT":"HTI","JM":"JAM","TT":"TTO","GY":"GUY","SR":"SUR",
+    "BZ":"BLZ","BS":"BHS","BB":"BRB","AG":"ATG","DM":"DMA","GD":"GRD","KN":"KNA","LC":"LCA","VC":"VCT",
+    "US":"USA","CA":"Canada","CZ":"Czechia","DE":"Germany","FR":"France","IT":"Italy","ES":"Spain",
+    "GB":"United Kingdom","BE":"Belgium","AT":"Austria","CH":"Switzerland","IL":"Israel",
+    "RU":"Russian Federation","CN":"China","KR":"Rep. of Korea","TR":"Türkiye","NL":"Netherlands",
+    "PT":"Portugal","SE":"Sweden","PL":"Poland","JP":"Japan","AE":"United Arab Emirates","IN":"India",
+    "SG":"Singapore","ZA":"South Africa",
+}
+
+
+def _coords_clave(clave):
+    if clave in REGION:
+        return REGION[clave][0], REGION[clave][1], False
+    if clave in HUBS:
+        return HUBS[clave][0], HUBS[clave][1], True
+    return None
+
+
+def _corredores_especies() -> dict:
+    """Corredores exportador→importador de especies CITES (envíos), con incautaciones."""
+    d = _cargar(PUBLICO / "especies_cites.json")
+    if not isinstance(d, dict):
+        return {"disponible": False, "porque": "no se encontró especies_cites.json"}
+    corredores, no_ubicados = [], set()
+    for reg in d.get("registros", []) or []:
+        exp, imp, val = reg.get("exportador"), reg.get("importador"), reg.get("registros") or 0
+        ke, ki = ISO2_A_CLAVE.get(exp), ISO2_A_CLAVE.get(imp)
+        if not ke or not ki or not val:
+            if exp and not ke:
+                no_ubicados.add(exp)
+            if imp and not ki:
+                no_ubicados.add(imp)
+            continue
+        oe, oi = _coords_clave(ke), _coords_clave(ki)
+        if not oe or not oi or (oe[2] and oi[2]):  # al menos un extremo regional
+            continue
+        corredores.append({
+            "flujo": "especies", "sentido": "exporta",
+            "origen": ke, "origen_lat": oe[0], "origen_lon": oe[1],
+            "destino": ki, "destino_lat": oi[0], "destino_lon": oi[1],
+            "extra_region": oi[2], "valor": val, "unidad": "envíos CITES",
+            "incautaciones": reg.get("incautaciones") or 0,
+            "desde": reg.get("desde"), "hasta": reg.get("hasta"),
+        })
+    corredores.sort(key=lambda c: -c["valor"])
+    return {
+        "disponible": True, "nivel": "B",
+        "anio": max((r.get("hasta") or 0) for r in (d.get("registros") or [{}])) or None,
+        "fuente": "CITES Trade Database (UNEP-WCMC) — envíos por par exportador→importador",
+        "calificacion": (d.get("calificacion") or {}),
+        "advertencia": ("Envíos CITES declarados y autorizados más incautaciones (Source='I'); es "
+                        "número de envíos, no kilos. La incautación es el indicio de lo ilícito."),
+        "corredores": corredores[:60],
+        "contrapartes_no_ubicadas": sorted(no_ubicados),
+    }
+
+
 # Flujos cuya geometría de corredor todavía no tiene fuente dura en el robot.
 PENDIENTES = {
     "narco": "UNODC World Drug Report — dato de país/incautación, corredor sólo narrativo (C)",
-    "trata": "UNODC Global TIP (nacionalidad × detección) — pendiente de colector",
-    "especies": "CITES Trade Database — file-drop anual, pendiente de licencia UNEP-WCMC",
-    "financiero": "GFI/FSI/ICIJ — capa de «exposición», pendiente de licencia",
-    "pesca": "Global Fishing Watch / IUU Index — pendiente de clave y colector",
+    "trata": "UNODC Global TIP (nacionalidad × detección) — pendiente de lector (file-drop listo)",
+    "financiero": "GFI trade misinvoicing — pendiente de lector (file-drop listo)",
+    "pesca": "Global Fishing Watch / IUU Index — pendiente de colector (clave lista)",
 }
 
 
@@ -242,7 +302,8 @@ def construir() -> dict:
         "minerales_comercio.json", "minerales",
         "Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108/7112/2616/8001/2609/2615/8103)")
     migrantes = _corredores_migrantes()
-    flujos = {"armas": armas, "minerales": minerales, "migrantes": migrantes}
+    especies = _corredores_especies()
+    flujos = {"armas": armas, "minerales": minerales, "migrantes": migrantes, "especies": especies}
     total = sum(len(f.get("corredores", [])) for f in flujos.values() if f.get("disponible"))
     vacios = []
     for nom, fx in flujos.items():
