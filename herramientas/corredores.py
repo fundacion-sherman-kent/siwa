@@ -109,10 +109,12 @@ def _ubicar(nombre: str):
     return None
 
 
-def _corredores_armas() -> dict:
-    d = _cargar(PUBLICO / "armas.json")
+def _corredores_comercio(archivo: str, flujo: str, fuente: str, nivel: str = "A") -> dict:
+    """Deriva corredores de un archivo de comercio bilateral con la forma de armas.json
+    (registros[].mayores_proveedores / mayores_clientes). Sirve para armas y minerales."""
+    d = _cargar(PUBLICO / archivo)
     if not isinstance(d, dict):
-        return {"disponible": False, "porque": "no se encontró armas.json"}
+        return {"disponible": False, "porque": f"no se encontró {archivo}"}
     anio = (d.get("resumen") or {}).get("anio")
     corredores, no_ubicados = [], set()
 
@@ -125,7 +127,7 @@ def _corredores_armas() -> dict:
             return
         d_id, dlat, dlon, extra = dest
         corredores.append({
-            "flujo": "armas", "sentido": sentido,
+            "flujo": flujo, "sentido": sentido,
             "origen": origen_iso, "origen_lat": oi[0], "origen_lon": oi[1],
             "destino": d_id, "destino_lat": dlat, "destino_lon": dlon,
             "extra_region": extra, "valor_usd": round(valor),
@@ -143,7 +145,7 @@ def _corredores_armas() -> dict:
                 if dest:
                     d_id, dlat, dlon, extra = dest
                     corredores.append({
-                        "flujo": "armas", "sentido": "importa",
+                        "flujo": flujo, "sentido": "importa",
                         "origen": d_id, "origen_lat": dlat, "origen_lon": dlon,
                         "destino": iso, "destino_lat": REGION[iso][0], "destino_lon": REGION[iso][1],
                         "extra_region": False, "origen_extra_region": extra,
@@ -158,8 +160,8 @@ def _corredores_armas() -> dict:
                 añadir(iso, soc, val, "exporta")
 
     return {
-        "disponible": True, "anio": anio, "nivel": "A",
-        "fuente": "Comtrade de Naciones Unidas — capítulo 93 (armas, municiones y partes)",
+        "disponible": True, "anio": anio, "nivel": nivel,
+        "fuente": fuente,
         "calificacion": (d.get("calificacion") or {}),
         "advertencia": ("Comercio LEGAL declarado en aduana, no tráfico ilícito. Sirve para ver el "
                         "flujo y, cruzado con la brecha espejo, señalar dónde no cierra. Valores de "
@@ -171,33 +173,41 @@ def _corredores_armas() -> dict:
 
 # Flujos cuya geometría de corredor todavía no tiene fuente dura en el robot.
 PENDIENTES = {
-    "narco": "UNODC World Drug Report (incautaciones/flujos) — pendiente de colector",
-    "trata": "UNODC Global TIP (flujos origen→destino) — pendiente de colector",
-    "especies": "CITES (comercio bilateral) — pendiente de colector",
-    "minerales": "Comtrade HS (coltán/estaño/oro) + GI-TOC — pendiente de transformación",
-    "financiero": "GAFILAT/OCDE/ICIJ (flujos financieros ilícitos) — pendiente de fuente",
+    "narco": "UNODC World Drug Report — dato de país/incautación, corredor sólo narrativo (C)",
+    "trata": "UNODC Global TIP (nacionalidad × detección) — pendiente de colector",
+    "especies": "CITES Trade Database — file-drop anual, pendiente de licencia UNEP-WCMC",
+    "financiero": "GFI/FSI/ICIJ — capa de «exposición», pendiente de licencia",
+    "migrantes": "IOM Missing Migrants (CC BY 4.0) — pendiente de colector",
+    "pesca": "Global Fishing Watch / IUU Index — pendiente de colector",
 }
 
 
 def construir() -> dict:
-    armas = _corredores_armas()
-    flujos = {"armas": armas}
-    total = len(armas.get("corredores", [])) if armas.get("disponible") else 0
+    armas = _corredores_comercio(
+        "armas.json", "armas",
+        "Comtrade de Naciones Unidas — capítulo 93 (armas, municiones y partes)")
+    minerales = _corredores_comercio(
+        "minerales_comercio.json", "minerales",
+        "Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108/7112/2616/8001/2609/2615/8103)")
+    flujos = {"armas": armas, "minerales": minerales}
+    total = sum(len(f.get("corredores", [])) for f in flujos.values() if f.get("disponible"))
     vacios = []
-    if not armas.get("disponible"):
-        vacios.append("Armas: " + armas.get("porque", "sin dato."))
-    elif armas.get("contrapartes_no_ubicadas"):
-        vacios.append("Armas: contrapartes sin coordenada (no se dibujan): "
-                      + ", ".join(armas["contrapartes_no_ubicadas"]))
+    for nom, fx in flujos.items():
+        if not fx.get("disponible"):
+            vacios.append(f"{nom}: " + fx.get("porque", "sin dato."))
+        elif fx.get("contrapartes_no_ubicadas"):
+            vacios.append(f"{nom}: contrapartes sin coordenada (no se dibujan): "
+                          + ", ".join(fx["contrapartes_no_ubicadas"]))
     for k, v in PENDIENTES.items():
         flujos[k] = {"disponible": False, "porque": v}
         vacios.append(f"{k}: {v}.")
     return {
         "que_es": "Corredores de flujos para el mapa regional: pares origen→destino con coordenadas, "
                   "valor y si el destino sale de la región. DERIVADO de los archivos de flujo ya "
-                  "publicados y calificados; reordena, no incorpora. Hoy sólo armas tiene fuente dura.",
+                  "publicados y calificados; reordena, no incorpora. Hoy armas y minerales tienen "
+                  "fuente dura (Comtrade, nivel A); el resto queda declarado como pendiente.",
         "corrida": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "resumen": {"corredores_armas": total,
+        "resumen": {"corredores": total,
                     "flujos_con_dato": [k for k, v in flujos.items() if v.get("disponible")],
                     "flujos_pendientes": list(PENDIENTES)},
         "flujos": flujos,
@@ -210,11 +220,12 @@ def main() -> None:
     salida = construir()
     SALIDA.write_text(json.dumps(salida, ensure_ascii=False, indent=2), encoding="utf-8", newline="")
     r = salida["resumen"]
-    print(f"[corredores] armas: {r['corredores_armas']} corredores · "
+    print(f"[corredores] {r['corredores']} corredores · "
           f"con dato: {r['flujos_con_dato']} · pendientes: {len(r['flujos_pendientes'])}")
-    for c in salida["flujos"]["armas"].get("corredores", [])[:6]:
-        print(f"   {c['origen']} → {c['destino']} · {c['sentido']} · "
-              f"USD {c['valor_usd']:,}{' · fuera de región' if c['extra_region'] else ''}")
+    for nom in r["flujos_con_dato"]:
+        for c in salida["flujos"][nom].get("corredores", [])[:3]:
+            print(f"   [{nom}] {c['origen']} → {c['destino']} · {c['sentido']} · "
+                  f"USD {c['valor_usd']:,}{' · fuera de región' if c['extra_region'] else ''}")
 
 
 if __name__ == "__main__":

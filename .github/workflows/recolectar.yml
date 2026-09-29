@@ -393,6 +393,15 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/armas.py
 
+      # MINERALES: comercio bilateral de oro, estaño y coltán (Comtrade, mismos
+      # HS sensibles). Gemelo del de armas; alimenta los corredores de minerales.
+      # No bloquea el robot: continue-on-error y fuera de "Declarar las fallas".
+      - name: Comercio de minerales (Comtrade, oro/estaño/coltán)
+        id: minerales_comercio
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/minerales_comercio.py
+
       # El explorador PROPONE, no publica: toca puertas y deja el hallazgo
       # declarado para que una persona decida.
       - name: Explorador de puertas de datos oficiales
