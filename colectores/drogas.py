@@ -56,9 +56,17 @@ from datetime import date, timedelta
 import comun
 import geo
 
-BASE = "https://www.unodc.org/documents/data-and-analysis/WDR_2025/Annex/"
-INCAUTACIONES = "7.1_Drug_seizures_2019-2023.xlsx"
-CULTIVO = "6.1.1_Global_illicit_coca_bush_cultivation.xlsx"
+# EDICIONES DEL WDR, DE LA MÁS FRESCA A LA QUE HOY FUNCIONA. Se prueba la 2026
+# primero; si la fuente todavía no la publicó, o cambió de forma de un modo que el
+# lector no entiende, se cae a la 2025 —que es la que anda— sin romper nada. La
+# 2026 renombró la columna del ISO de «msCode» a «Iso3_code»: se aceptan las dos.
+EDICIONES = [
+    ("https://www.unodc.org/documents/data-and-analysis/WDR_2026/Annex/",
+     "7.1_Drug_seizures_2015-2024.xlsx", "6.1.1_global_Illicit_cultivation_of_coca_bush.xlsx"),
+    ("https://www.unodc.org/documents/data-and-analysis/WDR_2025/Annex/",
+     "7.1_Drug_seizures_2019-2023.xlsx", "6.1.1_Global_illicit_coca_bush_cultivation.xlsx"),
+]
+COL_ISO = ("msCode", "Iso3_code", "Country ISO3", "ISO3")
 NS = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
 CONTROL = "COL"
 
@@ -83,8 +91,8 @@ ROTULOS = {"cocaina": "cocaína", "hoja_coca": "hoja de coca", "cannabis": "cann
 TOTAL = re.compile(r"\(total", re.I)
 
 
-def _bajar(nombre: str) -> bytes:
-    peticion = urllib.request.Request(BASE + nombre, headers={"User-Agent": comun.AGENTE})
+def _bajar(base: str, nombre: str) -> bytes:
+    peticion = urllib.request.Request(base + nombre, headers={"User-Agent": comun.AGENTE})
     with urllib.request.urlopen(peticion, timeout=180) as respuesta:
         return respuesta.read()
 
@@ -138,14 +146,18 @@ def _incautaciones(filas: list, isos: set) -> dict:
         raise RuntimeError("La planilla de incautaciones cambió de forma: no se halló la fila "
                            "de encabezados (Region · SubRegion · Country …). NO se publica.")
     col = {nombre: i for i, nombre in enumerate(filas[cab]) if nombre}
-    for necesaria in ("DrugGroup", "DrugSubGroup", "DrugName", "Reference year", "Kilograms", "msCode"):
+    iso_col = next((c for c in COL_ISO if c in col), None)
+    for necesaria in ("DrugGroup", "DrugSubGroup", "DrugName", "Reference year", "Kilograms"):
         if necesaria not in col:
             raise RuntimeError(f"La planilla de incautaciones no trae la columna «{necesaria}».")
+    if iso_col is None:
+        raise RuntimeError("La planilla de incautaciones no trae la columna del ISO "
+                           f"(ninguna de {COL_ISO}); la 2026 la llamó «Iso3_code». NO se publica.")
     partes, totales = {}, {}
     for f in filas[cab + 1:]:
         if len(f) <= max(col.values()):
             continue
-        iso = f[col["msCode"]]
+        iso = f[col[iso_col]]
         if iso not in isos:
             continue
         anio, kg = _anio(f[col["Reference year"]]), _numero(f[col["Kilograms"]])
@@ -195,18 +207,24 @@ def _cultivo(filas: list) -> dict:
 def recolectar():
     padron = geo.padron()
     isos = {p["iso"] for p in padron}
-    incaut = _incautaciones(_filas(_bajar(INCAUTACIONES)), isos)
-    cultivo = _cultivo(_filas(_bajar(CULTIVO)))
-
-    # SE PRUEBA EL LECTOR ANTES DE CREERLE UN VACÍO A NADIE.
-    if len(incaut.get(CONTROL, {}).get("cocaina", {})) < 3:
-        raise RuntimeError(
-            f"La prueba del lector falló: en {CONTROL} no se leyeron incautaciones de cocaína "
-            "de al menos tres años. La planilla cambió de forma. NO se publica.")
-    if len(cultivo.get(CONTROL, [])) < 8:
-        raise RuntimeError(
-            f"La prueba del lector falló: en {CONTROL} no se leyó la serie de cultivo de coca. "
-            "La planilla cambió de forma. NO se publica.")
+    # SE PRUEBA EL LECTOR CONTRA CADA EDICIÓN, DE LA MÁS FRESCA A LA QUE ANDA. La
+    # primera cuyo control pasa es la que se publica; si ninguna pasa, no se publica.
+    incaut, cultivo, edicion, intentos = None, None, None, []
+    for base, arch_inc, arch_cul in EDICIONES:
+        try:
+            i = _incautaciones(_filas(_bajar(base, arch_inc)), isos)
+            c = _cultivo(_filas(_bajar(base, arch_cul)))
+        except Exception as error:  # noqa: BLE001 — se prueba la próxima edición
+            intentos.append(f"{base.split('/')[-3]}: {type(error).__name__}")
+            continue
+        if len(i.get(CONTROL, {}).get("cocaina", {})) >= 3 and len(c.get(CONTROL, [])) >= 8:
+            incaut, cultivo, edicion = i, c, base
+            break
+        intentos.append(f"{base.split('/')[-3]}: el control {CONTROL} no pasó")
+    if incaut is None:
+        raise RuntimeError("Ninguna edición del WDR pudo leerse con el control pasando "
+                           f"({'; '.join(intentos)}). La planilla cambió de forma. NO se publica.")
+    anio_wdr = "2026" if "WDR_2026" in edicion else "2025"
 
     registros, conDato = [], 0
     for p in padron:
@@ -247,8 +265,8 @@ def recolectar():
     return comun.escribir(
         colector="drogas",
         capa="publico",
-        fuente="Informe Mundial sobre las Drogas 2025, anexo estadístico — Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC)",
-        url_fuente="https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-2025-annex.html",
+        fuente=f"Informe Mundial sobre las Drogas {anio_wdr}, anexo estadístico — Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC)",
+        url_fuente=f"https://www.unodc.org/unodc/en/data-and-analysis/world-drug-report-{anio_wdr}-annex.html",
         calificacion=calificacion,
         registros=registros,
         vacios=vacios,
@@ -259,6 +277,7 @@ def recolectar():
                 "anios_incautaciones": anios,
                 "estados_con_cultivo": sorted(cultivo.keys()),
                 "familias": ROTULOS,
+                "edicion_wdr": anio_wdr,
                 "lector_probado": True,
                 "consultado": comun.ahora(),
             },
