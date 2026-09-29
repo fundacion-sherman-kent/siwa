@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corredores de flujos ilícitos · SIWA</title>
+<meta name="description" content="Mapa de corredores de flujos ilícitos de América Latina y el Caribe: migración, armas, especies, trata y flujos financieros, país a país, con dato medido y fuente por capa.">
+<link rel="canonical" href="https://siwa.fundacionkent.org/sitio/flujos.html">
+<meta name="theme-color" content="#F4F2EC">
+<link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
+<link rel="stylesheet" href="_comun/paleta-fusk.css"><!-- FUENTE ÚNICA de la paleta -->
+<script src="lib/echarts.min.js"></script>
+<style>
+  :root{--orange:var(--fusk-naranja,#FB6500);--fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;
+    --linea:#d7dce3;--caja:#ffffff;--navy:var(--fusk-navy,#00121E);--area:#e4e0d4;--borde:#b9c1c9;
+    --fl-migracion:#8C00E0;--fl-armas:#5b7180;--fl-especies:#460070;--fl-trata:#FB6500;
+    --fl-financiero:#00121E;--fl-minerales:#FB6500;--fl-migrantes:#8C00E0;}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--area:#0e2233;--borde:#24405a;
+    --fl-migracion:#BA66EC;--fl-armas:#8296a4;--fl-especies:#8C00E0;--fl-financiero:#F9F9F7;--fl-migrantes:#BA66EC;}}
+  :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--area:#0e2233;--borde:#24405a;
+    --fl-migracion:#BA66EC;--fl-armas:#8296a4;--fl-especies:#8C00E0;--fl-financiero:#F9F9F7;--fl-migrantes:#BA66EC;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--fondo);color:var(--tinta);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5;}
+  .filete{height:4px;width:74px;background:var(--orange);border-radius:2px;margin-bottom:14px;}
+  h1{font-size:clamp(24px,4.6vw,34px);margin:0 0 6px;letter-spacing:-.4px;}
+  h1 b{color:var(--orange);}
+  .bajada{color:var(--tenue);font-size:14.5px;max-width:820px;margin:0 0 8px;}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0 6px;}
+  .chips .rot{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--tenue);font-weight:700;margin-right:2px;}
+  .chip{display:inline-flex;align-items:center;gap:7px;cursor:pointer;border:1px solid var(--linea);background:var(--caja);
+    color:var(--tinta);padding:6px 11px 6px 9px;border-radius:20px;font-size:12.5px;font-weight:600;opacity:.5;font-family:inherit;}
+  .chip .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto;}
+  .chip[aria-pressed="true"]{opacity:1;border-color:var(--tenue);}
+  .aviso{font-size:12px;color:var(--tenue);margin:2px 0 10px;}
+  #mapa{width:100%;height:640px;}
+  .cargando{padding:30px 4px;color:var(--tenue);}
+  .pie{margin-top:16px;padding-top:14px;border-top:1px solid var(--linea);color:var(--tenue);font-size:12.5px;}
+  .pie a{color:var(--orange);}
+  b{color:var(--tinta);}
+  .envoltorio{display:grid;grid-template-columns:232px minmax(0,1fr);max-width:1340px;margin:0 auto;}
+  .rail{border-right:1px solid var(--linea);padding:16px 12px 40px;font-size:13px;position:sticky;top:var(--siwa-topbar-h,100px);align-self:start;max-height:calc(100vh - var(--siwa-topbar-h,100px));overflow:auto;}
+  .rail .grupo{color:var(--tenue);text-transform:uppercase;font-size:10.5px;letter-spacing:.06em;margin:14px 0 4px;font-weight:700;}
+  .rail a{display:block;color:var(--tinta);text-decoration:none;padding:4px 7px;border-radius:6px;}
+  .rail a:hover{background:var(--caja);color:var(--orange);}
+  .rail a.actual{color:var(--orange);font-weight:700;background:var(--caja);}
+  .envoltorio main{max-width:none;margin:0;min-width:0;padding:22px 22px 50px;}
+  @media(max-width:860px){.envoltorio{grid-template-columns:minmax(0,1fr);} .rail{border-right:none;border-bottom:1px solid var(--linea);position:static;max-height:none;} #mapa{height:70vh;min-height:420px;}}
+</style>
+<script defer src="_comun/cabecera-siwa.js"></script>
+</head>
+<body>
+<div class="envoltorio">
+<nav class="rail" aria-label="Secciones del registro">
+<div class="grupo">Empezar</div>
+<a href="index.html#tablero-siwa">Tablero</a>
+<a href="index.html#ficha-pais">Mi país</a>
+<a href="opacidad.html">Índice de opacidad</a>
+<a href="mapa.html">Mapa de opacidad</a>
+<a href="flujos.html" class="actual">Corredores de flujos</a>
+<div class="grupo">Eje · Seguridad</div>
+<a href="index.html#seguridad-flujos-ilicitos">Flujos ilícitos</a>
+<a href="index.html#personas-en-movimiento">Personas en movimiento</a>
+<a href="index.html#seguridad-violencia">Violencia y víctimas</a>
+<a href="index.html#seguridad-territorio">Grupos y territorio</a>
+<div class="grupo">Los cuatro ejes</div>
+<a href="index.html#defensa">Defensa</a>
+<a href="index.html#gobernanza">Gobernanza</a>
+<a href="index.html#desarrollo">Desarrollo</a>
+</nav>
+<main>
+  <div class="filete"></div>
+  <h1>Corredores de <b>flujos ilícitos</b> · América Latina y el Caribe</h1>
+  <p class="bajada">Los flujos país a país, con <b>dato medido</b> y una unidad por capa. Prendé y apagá cada
+     flujo para compararlos. Los ejes que salen de la región terminan en un destino marcado en el borde.
+     <b>El ancho de cada corredor sale de su valor.</b></p>
+  <div class="chips" id="chips"><span class="rot">Comparar flujos</span></div>
+  <p class="aviso" id="aviso"></p>
+  <div class="cargando" id="cargando">Cargando el mapa…</div>
+  <div id="mapa" style="display:none"></div>
+  <p class="pie">SIWA — Fundación Sherman Kent · corredores derivados de las fuentes de cada capa
+     (Comtrade, CITES, UNODC, GFI, UN DESA) · geometrías de geoBoundaries (CC BY). Comercio y detección
+     declarados: son indicios, no prueba de ilegalidad. <a href="index.html#seguridad-flujos-ilicitos">Ver los flujos por país →</a></p>
+</main></div>
+<script>
+const cssvar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+// metadatos por flujo: nombre, unidad y formato del número
+const META={
+  migracion:{n:'Migración',u:'personas',f:v=>v>=1e6?(v/1e6).toFixed(2).replace('.',',')+' M':Math.round(v/1e3)+' k'},
+  migrantes:{n:'Migrantes (R4V)',u:'personas',f:v=>v>=1e6?(v/1e6).toFixed(2).replace('.',',')+' M':Math.round(v/1e3)+' k'},
+  armas:{n:'Armas',u:'US$ comercio',f:v=>'US$ '+Math.round(v/1e6)+' M'},
+  minerales:{n:'Minerales',u:'US$ comercio',f:v=>'US$ '+Math.round(v/1e6)+' M'},
+  especies:{n:'Especies (CITES)',u:'envíos',f:v=>Math.round(v/1e3)+' k env.'},
+  trata:{n:'Trata de personas',u:'víctimas detectadas',f:v=>v.toLocaleString('es-AR')},
+  financiero:{n:'Financiero',u:'brecha US$ · exposición',f:v=>'US$ '+(v/1000).toFixed(1).replace('.',',')+' mil M'},
+};
+const ORDEN=['migracion','migrantes','armas','minerales','especies','trata','financiero'];
+// destinos fuera de la región: se llevan a un marcador en el borde según su dirección real
+const EDGES={norte:{c:[-96,31],t:'EE.UU. / Norteamérica'},europa:{c:[-37,15],t:'Europa'},
+  offshore:{c:[-37,4],t:'Offshore'},asia:{c:[-37,-7],t:'Asia'}};
+function edge(nombre,lon,lat){
+  if(nombre==='Offshore')return 'offshore';
+  if(lat>14 && lon<-50)return 'norte';
+  if(lon>=-35 && lon<75)return 'europa';
+  return 'asia';
+}
+let chart, GEO, CORR, activos=new Set(['migracion','armas']);
+
+async function cargar(){
+  const [geo, corr] = await Promise.all([
+    fetch("../datos/geo/paises-alc.geojson",{cache:"no-store"}).then(r=>r.json()),
+    fetch("../datos/publico/corredores.json",{cache:"no-store"}).then(r=>r.json())
+  ]);
+  GEO=geo; CORR=corr; echarts.registerMap('alc',GEO);
+  // sólo flujos con dato
+  const disp=ORDEN.filter(k=>CORR.flujos[k] && CORR.flujos[k].disponible);
+  activos=new Set(disp.slice(0,2));
+  const chips=document.getElementById('chips');
+  disp.forEach(k=>{
+    const b=document.createElement('button'); b.className='chip'; b.type='button';
+    b.setAttribute('aria-pressed',activos.has(k));
+    b.innerHTML=`<span class="dot" style="background:var(--fl-${k})"></span>${(META[k]||{}).n||k}`;
+    b.onclick=()=>{activos.has(k)?activos.delete(k):activos.add(k);b.setAttribute('aria-pressed',activos.has(k));pintar();};
+    chips.appendChild(b);
+  });
+  const faltan=ORDEN.filter(k=>CORR.flujos[k] && !CORR.flujos[k].disponible);
+  document.getElementById('aviso').textContent = faltan.length
+    ? 'Esperan la próxima corrida del robot: '+faltan.map(k=>(META[k]||{}).n||k).join(', ')+'. Narco queda como corredor narrativo (dato gated).'
+    : '';
+  document.getElementById('cargando').style.display='none';
+  const cont=document.getElementById('mapa'); cont.style.display='block';
+  chart=echarts.init(cont,null,{renderer:'canvas'});
+  window.addEventListener('resize',()=>chart.resize());
+  pintar();
+}
+
+function pintar(){
+  const series=[], edgesUsados={};
+  activos.forEach(k=>{
+    const flujo=CORR.flujos[k]; if(!flujo||!flujo.disponible)return;
+    const col=cssvar('--fl-'+k)||cssvar('--orange');
+    const cs=flujo.corredores.slice(0,30);
+    const maxv=Math.max(...cs.map(c=>c.valor!=null?c.valor:c.valor_usd));
+    const data=cs.map(c=>{
+      const v=c.valor!=null?c.valor:c.valor_usd;
+      let dcoord=[c.destino_lon,c.destino_lat];
+      if(c.extra_region){const e=edge(c.destino,c.destino_lon,c.destino_lat);edgesUsados[e]=1;dcoord=EDGES[e].c;}
+      return {coords:[[c.origen_lon,c.origen_lat],dcoord],
+        lineStyle:{width:1+Math.sqrt(v/maxv)*6}, val:v, flow:k,
+        oname:c.origen, dname:c.destino};
+    });
+    series.push({name:META[k]?META[k].n:k, type:'lines', coordinateSystem:'geo', zlevel:2,
+      lineStyle:{color:col, opacity:.55, curveness:.25},
+      effect:{show:true, period:5, trailLength:.5, symbol:'arrow', symbolSize:5, color:col},
+      emphasis:{lineStyle:{opacity:.95, width:3}},
+      data});
+  });
+  // marcadores de destino externo
+  const edgePts=Object.keys(edgesUsados).map(e=>({name:EDGES[e].t, value:EDGES[e].c.concat(0)}));
+  if(edgePts.length) series.push({type:'scatter', coordinateSystem:'geo', zlevel:3, symbol:'rect', symbolSize:9,
+    itemStyle:{color:'transparent', borderColor:cssvar('--tenue'), borderWidth:1.5},
+    label:{show:true, formatter:o=>o.name, position:'right', color:cssvar('--tinta'), fontSize:11, fontWeight:600,
+      backgroundColor:cssvar('--caja'), padding:[2,4], borderRadius:3},
+    data:edgePts});
+
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'item', backgroundColor:cssvar('--caja'), borderColor:cssvar('--linea'),
+      textStyle:{color:cssvar('--tinta')},
+      formatter:o=>{ if(o.seriesType==='lines'){const d=o.data;
+        return '<b>'+(META[d.flow]?META[d.flow].n:d.flow)+'</b><br>'+d.oname+' → '+d.dname+
+          '<br>'+META[d.flow].f(d.val)+' <span style="opacity:.6">'+META[d.flow].u+'</span>';}
+        return o.name; }},
+    geo:{map:'alc', roam:true, aspectScale:1, zoom:1.1,
+      itemStyle:{areaColor:cssvar('--area'), borderColor:cssvar('--borde'), borderWidth:.6},
+      emphasis:{disabled:true}, silent:true},
+    series
+  }, true);
+}
+window.SIWA_onTema=function(){ if(chart) pintar(); };
+cargar().catch(e=>document.getElementById('cargando').textContent='No se pudo cargar el mapa: '+e);
+</script>
+</body>
+</html>
