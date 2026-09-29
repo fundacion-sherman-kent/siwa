@@ -46,6 +46,7 @@ SOCIOS = "https://comtradeapi.un.org/files/v1/app/reference/partnerAreas.json"
 NAVEGADOR = comun.AGENTE
 CODIGOS = "7108,7112,2616,8001,2609,2615,8103"  # oro, desechos, minerales de metal precioso, estaño, coltán
 ANIO = 2023           # último año con cobertura amplia en la vista pública
+ANIOS_SERIE = "2019,2020,2021,2022,2023"  # ventana para la historia (mandato de tiempo real)
 ESPERA = 2.5          # cortesía con un servidor público y gratuito
 CUANTOS_SOCIOS = 6    # los mayores que se publican por Estado y sentido
 SIN_DECLARAR = {"Areas, nes", "Other Asia, nes", "Bunkers", "Free Zones",
@@ -104,6 +105,25 @@ def _flujo(codigo: int, sentido: str) -> tuple:
     return socios, len(filas) - len(buenas)
 
 
+def _serie(codigo: int) -> dict:
+    """Historia del comercio total (con el Mundo) por año, importar y exportar. Mandato de serie."""
+    out = {"importa": {}, "exporta": {}}
+    for sentido, clave in (("M", "importa"), ("X", "exporta")):
+        url = BASE + "?" + urllib.parse.urlencode(
+            {"reporterCode": codigo, "flowCode": sentido, "period": ANIOS_SERIE,
+             "cmdCode": CODIGOS, "partnerCode": 0})
+        d = _pedir(url)
+        por_anio: dict = {}
+        for f in d.get("data") or []:
+            if (f.get("motCode") in (0, "0") and f.get("customsCode") in (None, "C00")
+                    and f.get("partner2Code") in (0, "0", None)):
+                anio = int(f.get("period") or f.get("refYear") or f.get("refPeriodId", 0) // 100 or 0)
+                if 1990 <= anio <= 2100:
+                    por_anio[anio] = por_anio.get(anio, 0.0) + float(f.get("primaryValue") or 0)
+        out[clave] = por_anio
+    return {k: [{"anio": a, "valor_usd": round(v)} for a, v in sorted(d.items())] for k, d in out.items()}
+
+
 def recolectar():
     nombres = _nombresDeSocio()
     if len(nombres) < 100:
@@ -124,6 +144,11 @@ def recolectar():
             vende, d2 = _flujo(codigo, "X")
             time.sleep(ESPERA)
             descartadas += d1 + d2
+            try:
+                serie = _serie(codigo)
+                time.sleep(ESPERA)
+            except Exception:  # noqa: BLE001 — la serie es extra; si falla, queda el año suelto
+                serie = {"importa": [], "exporta": []}
         except urllib.error.HTTPError as error:
             sinConsultar = [p["pais"] for p in geo.padron()
                             if p["iso"] not in {r["iso"] for r in registros}]
@@ -158,6 +183,7 @@ def recolectar():
             "socios_de_venta": len(vende),
             "mayores_proveedores": mayores(compra),
             "mayores_clientes": mayores(vende),
+            "serie": serie,
             "importa_sin_declarar_origen_usd": round(opacaCompra),
             "exporta_sin_declarar_destino_usd": round(opacaVenta),
             "pct_compra_sin_origen": round(opacaCompra * 100 / totalCompra, 1) if totalCompra else None,
