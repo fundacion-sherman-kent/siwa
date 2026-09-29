@@ -1,21 +1,27 @@
 {
   "que_es": "Auditoría automática del registro. La corre el robot en cada recolección, no una persona cuando se acuerda.",
-  "corrida": "2026-09-29T22:16:48+00:00",
-  "conjuntos_revisados": 96,
+  "corrida": "2026-09-29T22:52:17+00:00",
+  "conjuntos_revisados": 97,
   "estados_del_padron": 33,
-  "fallas": [],
-  "cuantas_fallas": 0,
+  "fallas": [
+    {
+      "que": "dato fechado en el futuro",
+      "donde": "secop_colombia.json · COL",
+      "porque": "en «serie» hay un punto del año 2027, que todavía no pasó: no hay fuente que pueda haberlo medido"
+    }
+  ],
+  "cuantas_fallas": 1,
   "brechas": [
     {
       "que": "conjuntos sin ninguna serie histórica",
       "cuantos": 54,
-      "de": 86,
+      "de": 87,
       "porque": "muestran el último valor y no dejan ver si mejora o empeora"
     },
     {
       "que": "conjuntos con serie corta",
       "cuantos": 4,
-      "de": 86,
+      "de": 87,
       "porque": "tienen entre 2 y 4 años: alcanza para dibujar, no para prolongar"
     },
     {
@@ -25,45 +31,45 @@
     }
   ],
   "series": {
-    "con_serie_larga": 28,
+    "con_serie_larga": 29,
     "con_serie_corta": 4,
     "sin_serie": 54,
     "anios_para_tendencia": 5
   },
   "cobertura_por_estado": {
     "VEN": 28,
-    "PRY": 30,
-    "SLV": 31,
-    "BLZ": 26,
-    "PER": 31,
-    "CUB": 24,
-    "VCT": 24,
     "KNA": 18,
-    "NIC": 31,
-    "BOL": 31,
-    "HTI": 27,
-    "COL": 32,
-    "CHL": 31,
-    "LCA": 24,
-    "ARG": 32,
-    "GUY": 28,
-    "GRD": 23,
-    "MEX": 32,
-    "DMA": 21,
-    "GTM": 31,
-    "PAN": 31,
-    "BRA": 31,
-    "CRI": 31,
-    "BHS": 25,
-    "HND": 30,
-    "BRB": 24,
     "SUR": 26,
-    "DOM": 31,
+    "SLV": 31,
+    "HND": 30,
+    "VCT": 24,
+    "LCA": 24,
     "URY": 31,
-    "TTO": 30,
-    "ATG": 23,
+    "MEX": 32,
+    "BOL": 31,
+    "DMA": 21,
+    "NIC": 31,
+    "ARG": 32,
+    "PER": 31,
+    "PAN": 31,
+    "CUB": 24,
+    "DOM": 31,
     "JAM": 31,
-    "ECU": 31
+    "ECU": 31,
+    "BLZ": 26,
+    "BHS": 25,
+    "GTM": 31,
+    "HTI": 27,
+    "PRY": 30,
+    "COL": 33,
+    "CRI": 31,
+    "ATG": 23,
+    "BRA": 31,
+    "BRB": 24,
+    "CHL": 31,
+    "GRD": 23,
+    "GUY": 28,
+    "TTO": 30
   },
-  "veredicto": "sin fallas"
+  "veredicto": "1 falla"
 }

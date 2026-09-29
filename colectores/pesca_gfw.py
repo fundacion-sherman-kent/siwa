@@ -42,14 +42,21 @@ DATASETS = {
 ISO3 = None  # se llena del padrón en recolectar()
 
 
-def _consultar(token: str, dataset: str, desde: str, hasta: str) -> dict:
+def _consultar(token: str, dataset: str, desde: str, hasta: str, flag: str) -> int:
+    """Cuenta de eventos de un dataset para UNA bandera, en la ventana dada.
+
+    El endpoint /v3/events/stats NO agrupa por bandera: devuelve el agregado de lo que
+    pida el filtro. Para tener el dato por país se consulta bandera por bandera con el
+    campo `flags`. El cuerpo va en camelCase (startDate/endDate); la forma hifenada
+    (start-date) es sólo para el GET de /v3/events y acá devolvía 422. `timeseriesInterval`
+    admite HOUR/DAY/MONTH/YEAR. La respuesta trae numEvents en la raíz.
+    """
     cuerpo = json.dumps({
         "datasets": [dataset],
-        "start-date": desde,
-        "end-date": hasta,
+        "startDate": desde,
+        "endDate": hasta,
         "timeseriesInterval": "YEAR",
-        "groupBy": "FLAG",
-        "includes": ["TOTAL_COUNT"],
+        "flags": [flag],
     }).encode("utf-8")
     pet = urllib.request.Request(BASE, data=cuerpo, method="POST", headers={
         "Authorization": f"Bearer {token}",
@@ -58,16 +65,17 @@ def _consultar(token: str, dataset: str, desde: str, hasta: str) -> dict:
     })
     try:
         with urllib.request.urlopen(pet, timeout=120) as r:
-            return json.loads(r.read().decode("utf-8", "replace"))
+            d = json.loads(r.read().decode("utf-8", "replace"))
+        return int(d.get("numEvents") or 0)
     except urllib.error.HTTPError as error:
-        # La API no se puede probar en la Oficina (token secreto): que el robot cuente
-        # EXACTAMENTE qué rechaza —código y cuerpo— para arreglar el pedido a ciegas.
+        # El token es secreto y no se prueba en la Oficina: que el robot cuente EXACTAMENTE
+        # qué rechaza —código y cuerpo— para arreglar el pedido a ciegas.
         import sys
         try:
             detalle = error.read().decode("utf-8", "replace")[:400]
         except Exception:  # noqa: BLE001
             detalle = "(sin cuerpo)"
-        print(f"[pesca_gfw] GFW HTTP {error.code} en {dataset}: {detalle}", file=sys.stderr)
+        print(f"[pesca_gfw] GFW HTTP {error.code} en {dataset} ({flag}): {detalle}", file=sys.stderr)
         raise
 
 
@@ -86,17 +94,26 @@ def recolectar():
 
     porpais = {p["iso"]: {"iso": p["iso"], "pais": p["pais"], "bloque": p["bloque"],
                           "encuentros": 0, "ais_off": 0} for p in padron}
+    isos_ordenados = sorted(isos)
     faltantes = []
     for clave, dataset in DATASETS.items():
-        try:
-            d = _consultar(token, dataset, desde, hasta)
-        except Exception as error:  # noqa: BLE001 — una señal que falla se declara
-            faltantes.append(f"{clave}: {type(error).__name__}")
+        # el endpoint no agrupa por bandera: se consulta país por país con el filtro flags.
+        # si los primeros pedidos fallan (token vencido, API caída), se corta la señal y se
+        # declara —no se dispara 33 veces contra una API que no responde.
+        errores_seguidos = 0
+        caido = False
+        for iso in isos_ordenados:
+            try:
+                porpais[iso][clave] = _consultar(token, dataset, desde, hasta, iso)
+                errores_seguidos = 0
+            except Exception as error:  # noqa: BLE001
+                errores_seguidos += 1
+                if errores_seguidos >= 3:
+                    faltantes.append(f"{clave}: {type(error).__name__} (cortada tras 3 fallos)")
+                    caido = True
+                    break
+        if caido:
             continue
-        for g in d.get("groups", []) or []:
-            bandera = g.get("flag") or g.get("name")
-            if bandera in isos:
-                porpais[bandera][clave] = int(g.get("value") or 0)
 
     if len(DATASETS) == len(faltantes):
         raise RuntimeError("La API de GFW no respondió ninguna de las señales: "
