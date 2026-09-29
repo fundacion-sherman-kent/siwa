@@ -420,6 +420,20 @@ jobs:
         continue-on-error: true
         run: python colectores/especies_cites.py
 
+      # TRATA: víctimas detectadas por ciudadanía y país de detección (UNODC GLOTIP,
+      # file-drop fuentes/entrada-manual/unodc_glotip.xlsx). Sin internet. No bloquea.
+      - name: Trata de personas (UNODC GLOTIP)
+        id: trata_unodc
+        continue-on-error: true
+        run: python colectores/trata_unodc.py
+
+      # FINANCIERO: brecha de valor del comercio por país (GFI, file-drop
+      # fuentes/entrada-manual/gfi_iff.xlsx). Exposición, no corredor. Sin internet.
+      - name: Flujos financieros ilícitos (GFI)
+        id: financiero_gfi
+        continue-on-error: true
+        run: python colectores/financiero_gfi.py
+
       # El explorador PROPONE, no publica: toca puertas y deja el hallazgo
       # declarado para que una persona decida.
       - name: Explorador de puertas de datos oficiales

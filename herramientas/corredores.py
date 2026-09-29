@@ -65,6 +65,9 @@ HUBS = {
     "United Arab Emirates": (23.4, 53.8), "Cyprus": (35.1, 33.4),
     "Malaysia": (4.2, 101.9), "Dem. Rep. of the Congo": (-4.0, 21.8),
     "South Africa": (-30.6, 22.9), "India": (22.0, 79.0), "Singapore": (1.35, 103.8),
+    "Nigeria": (9.1, 8.7), "Romania": (45.9, 25.0), "Ukraine": (48.4, 31.2),
+    "Philippines": (12.9, 121.8), "Thailand": (15.0, 101.0), "Morocco": (31.8, -7.1),
+    "Dominican Rep.": (18.7, -70.2), "Offshore": (28.0, -40.0),
 }
 
 # Nombre Comtrade → ISO del padrón (para reconocer la contraparte regional).
@@ -285,11 +288,103 @@ def _corredores_especies() -> dict:
     }
 
 
+# El GLOTIP usa nombres ONU largos; se los lleva al ISO3 del padrón o al nombre del hub.
+NOMBRE_ONU = {
+    "Argentina": "ARG", "Bolivia (Plurinational State of)": "BOL", "Brazil": "BRA",
+    "Chile": "CHL", "Colombia": "COL", "Costa Rica": "CRI", "Cuba": "CUB",
+    "Dominican Republic": "DOM", "Ecuador": "ECU", "El Salvador": "SLV", "Guatemala": "GTM",
+    "Honduras": "HND", "Mexico": "MEX", "Nicaragua": "NIC", "Panama": "PAN",
+    "Paraguay": "PRY", "Peru": "PER", "Uruguay": "URY",
+    "Venezuela (Bolivarian Republic of)": "VEN", "Haiti": "HTI", "Jamaica": "JAM",
+    "Trinidad and Tobago": "TTO", "Guyana": "GUY", "Suriname": "SUR", "Belize": "BLZ",
+    "Bahamas": "BHS", "Barbados": "BRB", "Antigua and Barbuda": "ATG", "Dominica": "DMA",
+    "Grenada": "GRD", "Saint Kitts and Nevis": "KNA", "Saint Lucia": "LCA",
+    "Saint Vincent and the Grenadines": "VCT",
+    "United States of America": "USA", "Canada": "Canada", "Spain": "Spain", "Italy": "Italy",
+    "Portugal": "Portugal", "Germany": "Germany", "France": "France", "China": "China",
+    "India": "India", "Russian Federation": "Russian Federation", "Switzerland": "Switzerland",
+    "Netherlands (Kingdom of the)": "Netherlands", "Netherlands": "Netherlands",
+    "United Kingdom of Great Britain and Northern Ireland": "United Kingdom",
+    "Nigeria": "Nigeria", "Romania": "Romania", "Ukraine": "Ukraine",
+    "Philippines": "Philippines", "Thailand": "Thailand", "Morocco": "Morocco",
+    "Türkiye": "Türkiye", "Turkey": "Türkiye",
+}
+
+
+def _corredores_trata() -> dict:
+    """Corredores ciudadanía(origen) → país de detección(destino), de víctimas de trata."""
+    d = _cargar(PUBLICO / "trata_unodc.json")
+    if not isinstance(d, dict):
+        return {"disponible": False, "porque": "no se encontró trata_unodc.json"}
+    corredores, no_ubicados = [], set()
+    for reg in d.get("registros", []) or []:
+        origen, destino, val = reg.get("origen"), reg.get("destino"), reg.get("victimas") or 0
+        ko, kd = NOMBRE_ONU.get(origen), NOMBRE_ONU.get(destino)
+        if not ko or not kd or not val:
+            if origen and not ko:
+                no_ubicados.add(origen)
+            if destino and not kd:
+                no_ubicados.add(destino)
+            continue
+        oo, od = _coords_clave(ko), _coords_clave(kd)
+        if not oo or not od or (oo[2] and od[2]):
+            continue
+        corredores.append({
+            "flujo": "trata", "sentido": "sale",
+            "origen": ko, "origen_lat": oo[0], "origen_lon": oo[1],
+            "destino": kd, "destino_lat": od[0], "destino_lon": od[1],
+            "extra_region": od[2], "valor": int(val), "unidad": "víctimas detectadas",
+            "desde": reg.get("desde"), "hasta": reg.get("hasta"),
+        })
+    corredores.sort(key=lambda c: -c["valor"])
+    return {
+        "disponible": True, "nivel": "B",
+        "anio": max((r.get("hasta") or 0) for r in (d.get("registros") or [{}])) or None,
+        "fuente": "UNODC GLOTIP — víctimas detectadas por ciudadanía y país de detección",
+        "calificacion": (d.get("calificacion") or {}),
+        "advertencia": ("Es DETECCIÓN, no flujo: refleja la trata y la capacidad de detectarla. "
+                        "Una ciudadanía distinta del país de detección no equivale a una ruta. Se "
+                        "excluye la trata interna (mismo país). El valor es víctimas detectadas."),
+        "corredores": corredores[:60],
+        "contrapartes_no_ubicadas": sorted(no_ubicados),
+    }
+
+
+def _corredores_financiero() -> dict:
+    """EXPOSICIÓN, no corredor: brecha de valor del comercio por país (GFI) → offshore genérico."""
+    d = _cargar(PUBLICO / "financiero_gfi.json")
+    if not isinstance(d, dict):
+        return {"disponible": False, "porque": "no se encontró financiero_gfi.json"}
+    off = HUBS["Offshore"]
+    corredores = []
+    for reg in d.get("registros", []) or []:
+        iso, val = reg.get("iso"), reg.get("brecha_usd_millones") or 0
+        if iso not in REGION or not val:
+            continue
+        o = REGION[iso]
+        corredores.append({
+            "flujo": "financiero", "sentido": "sale",
+            "origen": iso, "origen_lat": o[0], "origen_lon": o[1],
+            "destino": "Offshore", "destino_lat": off[0], "destino_lon": off[1],
+            "extra_region": True, "valor": int(val), "unidad": "USD millones (brecha)",
+            "anio": reg.get("anio"),
+        })
+    corredores.sort(key=lambda c: -c["valor"])
+    return {
+        "disponible": True, "nivel": "C",
+        "anio": max((r.get("anio") or 0) for r in (d.get("registros") or [{}])) or None,
+        "fuente": "Global Financial Integrity — brecha de valor del comercio por país",
+        "calificacion": (d.get("calificacion") or {}),
+        "advertencia": ("EXPOSICIÓN, no corredor medido: es la brecha de valor del comercio por país "
+                        "(cuánto, no hacia dónde); el destino offshore es genérico. Serie hasta 2018."),
+        "corredores": corredores,
+        "contrapartes_no_ubicadas": [],
+    }
+
+
 # Flujos cuya geometría de corredor todavía no tiene fuente dura en el robot.
 PENDIENTES = {
     "narco": "UNODC World Drug Report — dato de país/incautación, corredor sólo narrativo (C)",
-    "trata": "UNODC Global TIP (nacionalidad × detección) — pendiente de lector (file-drop listo)",
-    "financiero": "GFI trade misinvoicing — pendiente de lector (file-drop listo)",
     "pesca": "Global Fishing Watch / IUU Index — pendiente de colector (clave lista)",
 }
 
@@ -303,7 +398,10 @@ def construir() -> dict:
         "Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108/7112/2616/8001/2609/2615/8103)")
     migrantes = _corredores_migrantes()
     especies = _corredores_especies()
-    flujos = {"armas": armas, "minerales": minerales, "migrantes": migrantes, "especies": especies}
+    trata = _corredores_trata()
+    financiero = _corredores_financiero()
+    flujos = {"armas": armas, "minerales": minerales, "migrantes": migrantes,
+              "especies": especies, "trata": trata, "financiero": financiero}
     total = sum(len(f.get("corredores", [])) for f in flujos.values() if f.get("disponible"))
     vacios = []
     for nom, fx in flujos.items():
