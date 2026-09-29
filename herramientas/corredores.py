@@ -350,6 +350,36 @@ def _corredores_trata() -> dict:
     }
 
 
+def _corredores_migracion() -> dict:
+    """Corredores origen→destino del stock de migrantes de todos los países (UN DESA)."""
+    d = _cargar(PUBLICO / "migrantes_undesa.json")
+    if not isinstance(d, dict):
+        return {"disponible": False, "porque": "no se encontró migrantes_undesa.json"}
+    corredores, no_ubic = [], set()
+    for reg in d.get("registros", []) or []:
+        o, dst, val = reg.get("origen"), reg.get("destino"), reg.get("personas") or 0
+        oo, od = _coords_clave(o), _coords_clave(dst)
+        if not oo or not od or not val or (oo[2] and od[2]):
+            continue
+        corredores.append({
+            "flujo": "migracion", "sentido": "sale",
+            "origen": o, "origen_lat": oo[0], "origen_lon": oo[1],
+            "destino": dst, "destino_lat": od[0], "destino_lon": od[1],
+            "extra_region": od[2], "valor": int(val), "unidad": "personas (stock)",
+            "anio": reg.get("anio"),
+        })
+    corredores.sort(key=lambda c: -c["valor"])
+    return {
+        "disponible": True, "nivel": "A", "anio": (d.get("resumen") or {}).get("anio"),
+        "fuente": "UN DESA International Migrant Stock 2024 — stock origen→destino",
+        "calificacion": (d.get("calificacion") or {}),
+        "advertencia": ("Stock de migrantes por par origen→destino de todos los países, no flujo del "
+                        "año. Complementa a R4V, que es el detalle fresco de Venezuela."),
+        "corredores": corredores[:80],
+        "contrapartes_no_ubicadas": sorted(no_ubic),
+    }
+
+
 def _corredores_financiero() -> dict:
     """EXPOSICIÓN, no corredor: brecha de valor del comercio por país (GFI) → offshore genérico."""
     d = _cargar(PUBLICO / "financiero_gfi.json")
@@ -400,8 +430,10 @@ def construir() -> dict:
     especies = _corredores_especies()
     trata = _corredores_trata()
     financiero = _corredores_financiero()
+    migracion = _corredores_migracion()
     flujos = {"armas": armas, "minerales": minerales, "migrantes": migrantes,
-              "especies": especies, "trata": trata, "financiero": financiero}
+              "migracion": migracion, "especies": especies, "trata": trata,
+              "financiero": financiero}
     total = sum(len(f.get("corredores", [])) for f in flujos.values() if f.get("disponible"))
     vacios = []
     for nom, fx in flujos.items():
