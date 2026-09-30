@@ -1,0 +1,323 @@
+{
+ "flujo_nombre": "opioides",
+ "es_prototipo": false,
+ "corte": "2026-09-30",
+ "aviso": "Opioides (fentanilo y heroína) de/por ALC. Fuentes de EE.UU. (DEA, CBP, Tesoro) y gobiernos rotuladas actor interesado; varias leídas de extracto por 403. El fentanilo es sobre todo cadena de precursores China/India→México; la heroína mexicana está en declive y la sudamericana es marginal (2% en peso, DEA 2024).",
+ "cobertura_parcial": "Cobertura parcial: casi todo es México y el corredor centroamericano de precursores. No hay ruta de opioides documentada para Perú, Ecuador, Venezuela, Argentina, Brasil ni Chile, ni tránsito vigente por el Caribe; tampoco opioides farmacéuticos (tramadol, oxicodona). La ausencia de una línea NO implica ausencia de flujo. No se dibuja México→Canadá (afirmación de la DEA rebatida por Brookings y la CBSA).",
+ "rutas": [
+  {
+   "id": "O01",
+   "nombre": "Fentanilo: precursores China → Manzanillo/Lázaro Cárdenas → laboratorios en Sinaloa/Michoacán (insumo, no droga)",
+   "subtipo": "Opioides",
+   "waypoints": [
+    [
+     105.0,
+     35.0,
+     "China (proveedores; centroide-marcador)",
+     "origen"
+    ],
+    [
+     -104.32,
+     19.05,
+     "Manzanillo, Colima",
+     "transito"
+    ],
+    [
+     -102.2,
+     17.96,
+     "Lázaro Cárdenas, Michoacán",
+     "transito"
+    ],
+    [
+     -107.39,
+     24.8,
+     "Culiacán, Sinaloa",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2020,
+   "construccion_propia": true,
+   "base": "Tramo puerto→laboratorios inferido; centroide de origen.",
+   "fuente": "Univ. de Virginia NSDPI 'Precursors, Ports, and Pills' (2026, independiente); DEA NDTA 2025 (actor interesado, 403 leído de extracto); InSight Crime/Milenio-CNI (actor interesado)",
+   "url": "https://nationalsecurity.virginia.edu/research/precursors-ports-and-pills-inside-china-mexico-us-fentanyl-supply-chain",
+   "nota": "Manzanillo es el puerto dominante de descarga (UVA). El tramo puerto→laboratorios de Sinaloa se infiere. La mayor parte del comercio químico es lícito; los envíos mezclan precursores de fentanilo y de metanfetamina. Centroide de China = marcador."
+  },
+  {
+   "id": "O02",
+   "nombre": "Fentanilo (síntesis en Sinaloa) → Sonora/Baja California → cruces de San Ysidro y Nogales → EE.UU.",
+   "subtipo": "Opioides",
+   "waypoints": [
+    [
+     -107.39,
+     24.8,
+     "Culiacán, Sinaloa",
+     "origen"
+    ],
+    [
+     -110.97,
+     31.33,
+     "Nogales, Sonora (P. Mariposa)",
+     "transito"
+    ],
+    [
+     -117.03,
+     32.54,
+     "San Ysidro–Tijuana",
+     "transito"
+    ],
+    [
+     -110.97,
+     32.22,
+     "Tucson/Phoenix, Arizona",
+     "destino"
+    ],
+    [
+     -117.16,
+     32.72,
+     "San Diego, California",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": true,
+   "base": "Trayectos internos origen→cruce inferidos; destinos = sectores de incautación.",
+   "fuente": "Sedena vía Infobae/El Financiero (actor interesado); CBP vía WOLA (actor interesado); InSight Crime; Tesoro/OFAC jy1887 (actor interesado)",
+   "url": "https://insightcrime.org/news/are-fentanyl-trafficking-routes-shifting-us-mexico-border/",
+   "nota": "Origen en laboratorios de Sinaloa (84% de los desmantelados 2019-24) y cruces por CA/AZ (96% de lo incautado). Lo incautado NO equivale al flujo; el paso San Diego→Arizona puede ser efecto de la tecnología de detección, no desplazamiento de ruta. Destinos interiores = sectores de incautación, no hubs."
+  },
+  {
+   "id": "O03",
+   "nombre": "Fentanilo: precursores China/India → (Turquía, salida declarada) → Puerto Barrios (Guatemala) → México (presunto)",
+   "subtipo": "Opioides",
+   "waypoints": [
+    [
+     35.0,
+     39.0,
+     "Turquía (puerto de salida declarado; centroide-marcador)",
+     "origen"
+    ],
+    [
+     -88.6,
+     15.73,
+     "Puerto Barrios, Izabal",
+     "transito"
+    ],
+    [
+     -107.39,
+     24.8,
+     "Sinaloa (destino presunto)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2023,
+   "construccion_propia": true,
+   "base": "Tramo a Sinaloa y vínculo con fentanilo no acreditados.",
+   "fuente": "Infobae (2023) citando a Gobernación de Guatemala, SGAIA, Tesoro y DEA (todos actores interesados)",
+   "url": "https://www.infobae.com/mexico/2023/05/30/el-cartel-de-sinaloa-usa-a-guatemala-como-ruta-de-paso-para-importar-precursores-de-fentanilo/",
+   "nota": "4 contenedores con 240 barriles de xileno (solvente) incautados en Puerto Barrios (23/3/2023). El vínculo con fentanilo es atribución oficial, no prueba; el tramo Guatemala→Sinaloa no consta; 'salida de Turquía' es el dato del caso, no el origen de fabricación."
+  },
+  {
+   "id": "O04",
+   "nombre": "Fentanilo: precursores China/India → Ciudad de Guatemala (narcoencomiendas) → México",
+   "subtipo": "Opioides",
+   "waypoints": [
+    [
+     95.0,
+     30.0,
+     "China/India (proveedores; centroide-marcador)",
+     "origen"
+    ],
+    [
+     -90.51,
+     14.63,
+     "Ciudad de Guatemala",
+     "transito"
+    ],
+    [
+     -107.39,
+     24.8,
+     "México (Cártel de Sinaloa; sin ciudad)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "base": "Destino en México sin ciudad; origen por centroide.",
+   "fuente": "UDG TV y La Hora (2026) citando a la Policía de Guatemala (actor interesado)",
+   "url": "https://udgtv.com/noticias/guatemala-desmantela-red-trafico-precursores-fentanilo/315493",
+   "nota": "Red desmantelada (6/5/2026, 17 detenidos). Caso reciente, fuente secundaria; el destino en México se ubica en Sinaloa sólo por el vínculo con el cártel, sin ciudad. Centroides de origen."
+  },
+  {
+   "id": "O06a",
+   "nombre": "Heroína de amapola: Triángulo Dorado (Sinaloa–Durango–Chihuahua) → cruces del suroeste → EE.UU.",
+   "subtipo": "Opioides",
+   "waypoints": [
+    [
+     -107.0,
+     25.5,
+     "Triángulo Dorado (centroide-marcador)",
+     "origen"
+    ],
+    [
+     -117.03,
+     32.54,
+     "San Diego–San Ysidro",
+     "transito"
+    ],
+    [
+     -110.97,
+     31.33,
+     "Nogales/Tucson, Arizona",
+     "transito"
+    ],
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (mercado; destino genérico)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2017,
+   "construccion_propia": true,
+   "base": "Trayecto zona→cruce inferido; origen por zona.",
+   "fuente": "DEA Heroin Signature CY2024 (actor interesado, leído de extracto); UNODC vía prensa; CBP vía WOLA; gobierno de México (actor interesado)",
+   "url": "https://www.wola.org/2025/11/weekly-u-s-mexico-border-update-drug-seizure-data-pope-leo-voices-concern-updates-from-the-americas/",
+   "nota": "~82% en peso de la heroína analizada por la DEA es de origen mexicano. Flujo en DECLIVE (erradicación y caída de cultivo). El trayecto de cada zona a cada cruce se infiere de dónde están los cultivos y dónde se incauta; origen = zona, no punto."
+  },
+  {
+   "id": "O06b",
+   "nombre": "Heroína de amapola: Sierra de Guerrero (Costa Grande/Tierra Caliente) → frontera → EE.UU.",
+   "subtipo": "Opioides",
+   "waypoints": [
+    [
+     -101.0,
+     17.9,
+     "Sierra de Guerrero (centroide-marcador)",
+     "origen"
+    ],
+    [
+     -99.51,
+     27.5,
+     "Laredo, Texas",
+     "transito"
+    ],
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (mercado; destino genérico)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2017,
+   "construccion_propia": true,
+   "base": "Trayecto a la frontera inferido; origen por zona.",
+   "fuente": "UNODC vía Infobae/Crónica; gobierno de México (actor interesado)",
+   "url": "https://www.infobae.com/mexico/2026/09/06/de-la-amapola-a-los-laboratorios-asi-cambio-el-mapa-de-la-produccion-de-drogas-en-guerrero/",
+   "nota": "Guerrero, zona histórica de amapola hoy en fuerte retroceso (42,65 ha erradicadas en 2024 contra >7.500 una década antes), con viraje a laboratorios sintéticos. Origen = zona; trayecto a la frontera inferido."
+  },
+  {
+   "id": "O07",
+   "nombre": "Heroína de amapola: San Marcos/Huehuetenango (Guatemala) → frontera con México (Chiapas) → cárteles mexicanos",
+   "subtipo": "Opioides",
+   "waypoints": [
+    [
+     -91.95,
+     15.1,
+     "San Marcos (Tajumulco/Ixchiguán)",
+     "origen"
+    ],
+    [
+     -92.07,
+     15.24,
+     "Frontera Guatemala–México (Chiapas)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Destino en México inferido; sin cruce documentado.",
+   "fuente": "Agencia Ocote (2024, independiente)",
+   "url": "https://www.agenciaocote.com/blog/2024/01/22/lo-que-dejo-la-fiebre-de-la-amapola-en-san-marcos/",
+   "nota": "Goma de opio vendida a Sinaloa (Ixchiguán) y CJNG (Tajumulco); cultivo desplomado hacia 2018 por caída de precios. Destino en México inferido; no consta el cruce ni ciudad. No hay dato de flujo actual a EE.UU."
+  },
+  {
+   "id": "O08",
+   "nombre": "Heroína de Colombia (Cauca: Corinto) → Cali → Pereira → Panamá → EE.UU. (histórica, decreciente)",
+   "subtipo": "Opioides",
+   "waypoints": [
+    [
+     -76.26,
+     3.17,
+     "Corinto, Cauca",
+     "origen"
+    ],
+    [
+     -76.53,
+     3.45,
+     "Cali",
+     "transito"
+    ],
+    [
+     -75.69,
+     4.81,
+     "Pereira",
+     "transito"
+    ],
+    [
+     -79.52,
+     8.98,
+     "Ciudad de Panamá",
+     "transito"
+    ],
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (destino genérico)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2015,
+   "construccion_propia": true,
+   "base": "Destino genérico; sin dato posterior a 2016.",
+   "fuente": "El País Cali (2015, act. 2023); UNODC-SIMCI vía buscador",
+   "url": "https://www.elpais.com.co/judicial/asi-funciona-el-trafico-de-heroina-que-sale-del-cauca.html",
+   "nota": "Cadena descrita por la fuente; destino EE.UU. genérico. Datos de cultivo de 2014-2016 (462 ha en 2016). Hoy la proporción sudamericana en EE.UU. es mínima (2% en peso, DEA 2024): no puede afirmarse vigente.",
+   "estado": "historica"
+  },
+  {
+   "id": "O09",
+   "nombre": "Heroína colombiana → Caribe (vuelos comerciales a Puerto Rico / Santo Domingo, nodo de tránsito) (histórica)",
+   "subtipo": "Opioides",
+   "waypoints": [
+    [
+     -69.93,
+     18.49,
+     "Santo Domingo, Rep. Dominicana",
+     "transito"
+    ],
+    [
+     -66.11,
+     18.47,
+     "San Juan, Puerto Rico",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2006,
+   "construccion_propia": true,
+   "base": "Patrón general antiguo; sin ruta concreta ni vigencia.",
+   "fuente": "INCSR / Dpto. de Estado de EE.UU. (actor interesado, extracto; 2006-2007)",
+   "url": "https://2009-2017.state.gov/documents/organization/82209.pdf",
+   "nota": "Patrón general de mensajeros por vuelos comerciales; datos de hace >15 años, sin respaldo actual. Se mapea SÓLO como histórico.",
+   "estado": "historica"
+  }
+ ]
+}

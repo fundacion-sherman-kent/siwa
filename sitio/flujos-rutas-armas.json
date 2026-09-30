@@ -1,0 +1,1401 @@
+{
+ "flujo_nombre": "armas",
+ "es_prototipo": false,
+ "corte": "2026-09-30",
+ "rutas": [
+  {
+   "id": "R01",
+   "nombre": "Río de hierro: EE.UU. (TX/AZ/CA/NM) → México",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "Texas/Arizona/California/N.México",
+     "origen"
+    ],
+    [
+     -99.51,
+     27.5,
+     "Laredo (cruces CBP)",
+     "transito"
+    ],
+    [
+     -102.5,
+     23.6,
+     "Estados fronterizos (Sonora, BC, Chihuahua, NL, Tamaulipas)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2010,
+   "construccion_propia": true,
+   "base": "Trazado del ATF: indica el origen de FABRICACIÓN o primera compra del arma recuperada, NO una ruta de contrabando medida.",
+   "fuente": "GAO-26-108061 (2026); GAO-21-322; ATF trace data",
+   "url": "https://files.gao.gov/reports/GAO-26-108061/index.html",
+   "nota": "68% de 122.084 armas trazadas 2020-2024 tuvo origen EE.UU.; 77% de las cuatro estados fronterizos del suroeste. Es dato de TRAZADO, no ruta medida.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R01a",
+   "nombre": "Corredor Arizona → Sonora / Baja California",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "Arizona",
+     "origen"
+    ],
+    [
+     -110.9,
+     29.3,
+     "Sonora / Baja California",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2012,
+   "construccion_propia": true,
+   "base": "Trazado del ATF: indica el origen de FABRICACIÓN o primera compra del arma recuperada, NO una ruta de contrabando medida.",
+   "fuente": "GAO-26-108061 (2026); ATF NFCTA",
+   "url": "https://files.gao.gov/reports/GAO-26-108061/index.html",
+   "nota": "Arizona: 1.587 FFL asociados a 15.413 armas recuperadas en México (2018-2025).",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R01b",
+   "nombre": "Corredor Texas → Tamaulipas / NL / Chihuahua",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "Texas",
+     "origen"
+    ],
+    [
+     -99.51,
+     27.5,
+     "Laredo",
+     "transito"
+    ],
+    [
+     -98.5,
+     24.0,
+     "Tamaulipas y otros",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2012,
+   "construccion_propia": true,
+   "base": "Trazado del ATF: indica el origen de FABRICACIÓN o primera compra del arma recuperada, NO una ruta de contrabando medida.",
+   "fuente": "GAO-26-108061 (2026); ATF NFCTA",
+   "url": "https://files.gao.gov/reports/GAO-26-108061/index.html",
+   "nota": "Texas → Tamaulipas confirmado por GAO; NL/Chihuahua/Guanajuato solo en resumen ATF no verificado.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R02",
+   "nombre": ".50: Lake City (Missouri) → sur de EE.UU. → México",
+   "waypoints": [
+    [
+     -94.27,
+     39.09,
+     "Lake City AAP, Missouri",
+     "origen"
+    ],
+    [
+     -98.6,
+     39.8,
+     "comercio del sur de EE.UU.",
+     "transito"
+    ],
+    [
+     -102.5,
+     23.6,
+     "México (masacres 2019)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": true,
+   "base": "Trazado del ATF: indica el origen de FABRICACIÓN o primera compra del arma recuperada, NO una ruta de contrabando medida.",
+   "fuente": "ICIJ (10 y 07/02/2026); registros ATF",
+   "url": "https://www.icij.org/news/2026/02/nearly-half-of-powerful-50-caliber-ammo-seized-by-mexican-government-came-from-us-army-plant-defense-minister-says/",
+   "nota": "47% de 137.000 cartuchos .50 incautados desde 2012 vino de Lake City (afirmación oficial mexicana, respaldo ATF). El tramo fronterizo concreto no está descrito.",
+   "subtipo": "Municiones"
+  },
+  {
+   "id": "R03",
+   "nombre": "Florida → Haití (directa por mar/aire)",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "Miami, Florida",
+     "origen"
+    ],
+    [
+     -72.31,
+     18.59,
+     "Puerto Príncipe",
+     "destino"
+    ],
+    [
+     -72.2,
+     19.76,
+     "Cap-Haïtien",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2021,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "UNODC vía UN News (2024); GAO-25-107007; Small Arms Survey (2025); Al Jazeera",
+   "url": "https://news.un.org/en/story/2024/04/1148231",
+   "nota": "71% de armas recuperadas en Haití 2018-2022 trazadas a EE.UU.; 7 de 10 en el Caribe vienen de Florida y Georgia; 30% de Miami-Dade y Broward.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R03b",
+   "nombre": "Florida → Bahamas / Turks y Caicos → Haití",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "Florida",
+     "origen"
+    ],
+    [
+     -77.4,
+     24.3,
+     "Bahamas / Turcas y Caicos",
+     "transito"
+    ],
+    [
+     -72.3,
+     18.97,
+     "costas norte y oeste de Haití",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "UNODC vía UN News (2024)",
+   "url": "https://news.un.org/en/story/2024/04/1148231",
+   "nota": "Corredor 'Turks and Caicos and Bahamas'. Una sola fuente secundaria.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R04",
+   "nombre": "EE.UU. → República Dominicana → Haití (frontera terrestre)",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "Florida / EE.UU.",
+     "origen"
+    ],
+    [
+     -70.16,
+     18.74,
+     "República Dominicana",
+     "transito"
+    ],
+    [
+     -71.7,
+     19.0,
+     "frontera dominico-haitiana",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2022,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "GAO-25-107007; UNODC vía UN News; Al Jazeera (caso Sori-Rodríguez)",
+   "url": "https://files.gao.gov/reports/GAO-25-107007/index.html",
+   "nota": "Tres fuentes independientes afirman el tránsito por RD. Punto de cruce no nombrado.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R05",
+   "nombre": "EE.UU. → Jamaica",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "EE.UU. (Florida)",
+     "origen"
+    ],
+    [
+     -77.3,
+     18.1,
+     "Jamaica (puertos/aeropuertos)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Trazado del ATF: indica el origen de FABRICACIÓN o primera compra del arma recuperada, NO una ruta de contrabando medida.",
+   "fuente": "GAO-25-107007 (2024)",
+   "url": "https://files.gao.gov/reports/GAO-25-107007/index.html",
+   "nota": "Solo 36% se trazó a comprador minorista de EE.UU., el más bajo de los grandes receptores: hay orígenes no identificados.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R06",
+   "nombre": "EE.UU. → Bahamas",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "Florida",
+     "origen"
+    ],
+    [
+     -77.4,
+     24.3,
+     "Bahamas",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Trazado del ATF: indica el origen de FABRICACIÓN o primera compra del arma recuperada, NO una ruta de contrabando medida.",
+   "fuente": "GAO-25-107007 (2024)",
+   "url": "https://files.gao.gov/reports/GAO-25-107007/index.html",
+   "nota": "85% de trazados a comprador minorista de EE.UU. Un arma de $350 se revende en $1.600. Métodos: go-fast.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R07",
+   "nombre": "EE.UU. → Trinidad y Tobago (origen por trazado)",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU.",
+     "origen"
+    ],
+    [
+     -61.2,
+     10.5,
+     "Trinidad y Tobago",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "en base a 23% de trazados a EE.UU. (GAO); sin ruta en la fuente.",
+   "fuente": "GAO-25-107007 (2024)",
+   "url": "https://files.gao.gov/reports/GAO-25-107007/index.html",
+   "nota": "Solo 23% trazado a EE.UU.; 31% a origen no estadounidense. GAO no describe ruta: la flecha es inferencia nuestra.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R08",
+   "nombre": "EE.UU. → (México) → Guatemala",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "Texas/California/Florida",
+     "origen"
+    ],
+    [
+     -102.5,
+     23.6,
+     "tránsito terrestre en cajas",
+     "transito"
+    ],
+    [
+     -90.4,
+     15.7,
+     "Guatemala",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2013,
+   "construccion_propia": true,
+   "base": "Trazado del ATF: indica el origen de FABRICACIÓN o primera compra del arma recuperada, NO una ruta de contrabando medida.",
+   "fuente": "InSight Crime (2013, act. 2023) sobre Wilson Center con datos ATF 2009",
+   "url": "https://insightcrime.org/news/analysis/guatemala-arms-trafficking/",
+   "nota": "Datos de 17 años (ATF 2009). 28% de 6.000 armas importadas directo de EE.UU. Fuente única y antigua.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R09",
+   "nombre": "EE.UU. → Norte de Centroamérica (origen por trazado)",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU.",
+     "origen"
+    ],
+    [
+     -86.5,
+     15.0,
+     "Honduras",
+     "destino"
+    ],
+    [
+     -88.9,
+     13.8,
+     "El Salvador",
+     "destino"
+    ],
+    [
+     -90.4,
+     15.7,
+     "Guatemala",
+     "destino"
+    ],
+    [
+     -88.7,
+     17.2,
+     "Belice",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2015,
+   "construccion_propia": true,
+   "base": "en base a 40% de trazados a EE.UU. (GAO); el propio GAO advierte desvío interno.",
+   "fuente": "GAO-22-104680 (2022)",
+   "url": "https://www.gao.gov/products/gao-22-104680",
+   "nota": "40% trazada a EE.UU.; casi la mitad de esas se DESVIÓ dentro del país tras exportación legal, no contrabando desde EE.UU. Rotular como origen de fabricación, no ruta.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R10",
+   "nombre": "Desvío de policía/FF.AA. de Honduras → Guatemala → Zetas",
+   "waypoints": [
+    [
+     -86.5,
+     15.0,
+     "Honduras (depósitos policiales)",
+     "origen"
+    ],
+    [
+     -90.4,
+     15.7,
+     "Guatemala",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2011,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "InSight Crime (2017, act. 2023)",
+   "url": "https://insightcrime.org/investigations/trafficking-firearms-in-honduras/",
+   "nota": "Armas de la policía hondureña transportadas 'ant-style' a Guatemala (la fuente dice 'allegedly'). Casos 2007-2011. Fuente única.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R11",
+   "nombre": "Venezuela (arsenales FANB) → frontera → Colombia (grupos armados)",
+   "waypoints": [
+    [
+     -66.59,
+     6.42,
+     "Venezuela (marcas FANB; sin vía de desvío ni responsabilidad estatal establecida)",
+     "origen"
+    ],
+    [
+     -72.24,
+     11.38,
+     "Maicao (La Guajira)",
+     "transito"
+    ],
+    [
+     -72.51,
+     7.89,
+     "Cúcuta",
+     "transito"
+    ],
+    [
+     -70.76,
+     7.08,
+     "Arauca",
+     "transito"
+    ],
+    [
+     -74.3,
+     4.57,
+     "grupos armados",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2020,
+   "construccion_propia": true,
+   "base": "La fuente halla armas con marcas de la FANB en grupos colombianos, pero NO establece la vía de desvío ni la responsabilidad del Estado venezolano: la flecha no afirma origen estatal.",
+   "fuente": "Ejército de Colombia vía El Nacional (2025); Infobae/DIJIN (2026); ColombiaOne (2025)",
+   "url": "https://www.infobae.com/colombia/2026/09/15/de-donde-vienen-las-armas-ilegales-que-usan-los-delincuentes-en-colombia-estan-relacionadas-con-el-76-de-los-homicidios-en-el-pais/",
+   "nota": "Hay armas con marcas FANB en grupos colombianos (2025). NO está establecida la vía de desvío ni responsabilidad del Estado venezolano.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R12",
+   "nombre": "Desvío del Ejército colombiano → La Guajira → grupos armados",
+   "waypoints": [
+    [
+     -74.3,
+     4.57,
+     "Ejército de Colombia",
+     "origen"
+    ],
+    [
+     -72.24,
+     11.38,
+     "Maicao",
+     "transito"
+    ],
+    [
+     -73.5,
+     11.0,
+     "Pachenca/ELN/disidencias",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "ColombiaOne (2025), operativo con 23 detenidos",
+   "url": "https://colombiaone.com/2025/10/04/colombia-military-weapons-network-to-criminal-groups-dismantled/",
+   "nota": "Armas intercambiadas por cocaína. Medio secundario; no leí el comunicado original de la Fiscalía.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R13",
+   "nombre": "Perú → Ecuador → Colombia (municiones/armas/explosivos)",
+   "waypoints": [
+    [
+     -80.45,
+     -3.57,
+     "Tumbes / Aguas Verdes",
+     "origen"
+    ],
+    [
+     -80.23,
+     -3.48,
+     "Huaquillas",
+     "transito"
+    ],
+    [
+     -79.92,
+     -2.17,
+     "Guayaquil",
+     "transito"
+    ],
+    [
+     -76.9,
+     0.08,
+     "Lago Agrio",
+     "transito"
+    ],
+    [
+     -76.2,
+     0.4,
+     "Putumayo",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2023,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Dirin (Policía de Perú) vía Infobae (2024)",
+   "url": "https://www.infobae.com/america/america-latina/2024/01/23/ecuador-un-informe-revelo-que-existen-hasta-80-pasos-irregulares-para-el-contrabando-de-armas-en-la-frontera-con-peru/",
+   "nota": "Fuente policial peruana (interesada). FAME (Perú) NIEGA ser origen de la munición. La ruta interna en Ecuador viene solo de esa fuente.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R14",
+   "nombre": "Chile → Ecuador → Colombia (armas EE.UU./Europa/Asia, desarmadas)",
+   "waypoints": [
+    [
+     -71.6,
+     -33.0,
+     "Chile (puertos)",
+     "origen"
+    ],
+    [
+     -78.18,
+     -1.83,
+     "Ecuador",
+     "transito"
+    ],
+    [
+     -78.0,
+     1.6,
+     "Nariño",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2021,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "InSight Crime (2021, act. 2023)",
+   "url": "https://insightcrime.org/news/ecuador-new-corridor-south-american-arms-trafficking/",
+   "nota": "Fuente única de 2021. 30 fusiles AM-15 desarmados incautados.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R15",
+   "nombre": "Ecuador → Colombia (hormiga: Tumaco, Ipiales, Puerto Asís)",
+   "waypoints": [
+    [
+     -78.18,
+     -1.83,
+     "Ecuador",
+     "origen"
+    ],
+    [
+     -77.64,
+     0.83,
+     "Ipiales",
+     "transito"
+    ],
+    [
+     -78.82,
+     1.8,
+     "Tumaco",
+     "transito"
+    ],
+    [
+     -76.0,
+     2.9,
+     "Popayán / Cali",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Infobae/DIJIN (2026)",
+   "url": "https://www.infobae.com/colombia/2026/09/15/de-donde-vienen-las-armas-ilegales-que-usan-los-delincuentes-en-colombia-estan-relacionadas-con-el-76-de-los-homicidios-en-el-pais/",
+   "nota": "Ruta descrita por la Policía (interesada): Tumaco/Ipiales/Puerto Asís → Mocoa, Florencia, Popayán, Cali.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R18",
+   "nombre": "Paraguay → Brasil (armas cortas): Triple Frontera, Ponta Porã",
+   "waypoints": [
+    [
+     -54.61,
+     -25.51,
+     "Ciudad del Este (Triple Frontera)",
+     "origen"
+    ],
+    [
+     -55.73,
+     -22.55,
+     "Pedro Juan Caballero / Ponta Porã",
+     "origen"
+    ],
+    [
+     -53.0,
+     -24.0,
+     "Paraná y Mato Grosso do Sul",
+     "transito"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "São Paulo",
+     "destino"
+    ],
+    [
+     -43.17,
+     -22.91,
+     "Río de Janeiro",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2015,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Polícia Federal (Zampronha) vía Istoé Dinheiro (2018)",
+   "url": "https://istoedinheiro.com.br/armas-do-crime-vem-de-paraguai-e-eua-e-rota-e-pela-triplice-fronteira-diz-pf",
+   "nota": "99% entra por fronteras terrestres. PF es actor interesado y el dato tiene 8 años. Armas cortas vienen de Paraguay; fusiles de EE.UU. (R19).",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R19",
+   "nombre": "EE.UU. → Paraguay → Brasil: fusiles y partes ('ghost guns')",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (fusiles y kits de piezas)",
+     "origen"
+    ],
+    [
+     -57.6,
+     -25.3,
+     "Paraguay",
+     "transito"
+    ],
+    [
+     -43.17,
+     -22.91,
+     "Río de Janeiro",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2023,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Langeani & Pollachi, JIED (2025); CNN Brasil (2025)",
+   "url": "https://jied.lse.ac.uk/articles/10.31389/jied.300",
+   "nota": "Tres fuentes concuerdan: origen EE.UU., Paraguay tránsito principal. 593 fusiles incautados en RJ (ene-sep 2025); 95% fabricados en el exterior.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "R20",
+   "nombre": "Turquía/Eslovenia/Croacia/Chequia → Paraguay → Brasil (caso IAS)",
+   "waypoints": [
+    [
+     4.35,
+     51.27,
+     "Fabricantes europeos y turcos",
+     "origen"
+    ],
+    [
+     -57.6,
+     -25.3,
+     "Paraguay (importadora IAS)",
+     "transito"
+    ],
+    [
+     -49.0,
+     -20.0,
+     "PCC y Comando Vermelho",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "InSight Crime (2024)",
+   "url": "https://insightcrime.org/news/arms-trafficking-europe-paraguay-pipeline/",
+   "nota": "International Auto Supply importó 45.000+ armas a Paraguay (2014-2023); 25.000+ vendidas a PCC y CV; 17.300 sin explicar.",
+   "subtipo": "Armas de fuego"
+  },
+  {
+   "id": "N01",
+   "nombre": "Armas: Miami → Puerto de Santo Domingo (RD) → frontera RD-Haití → Haití (caso 2025: 23 armas)",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "Miami, Florida",
+     "origen"
+    ],
+    [
+     -69.88,
+     18.47,
+     "Puerto de Santo Domingo",
+     "transito"
+    ],
+    [
+     -71.7,
+     19.0,
+     "Frontera RD-Haití (cruce no identificado)",
+     "transito"
+    ],
+    [
+     -72.3,
+     18.97,
+     "Haití",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2024,
+   "construccion_propia": true,
+   "base": "Cruce RD→Haití inferido.",
+   "fuente": "DOJ EE.UU. (actor interesado) vía CBS12; Aduana dominicana DGA (actor interesado); ONU Noticias (Panel de Expertos)",
+   "url": "https://news.un.org/en/story/2025/10/1166121",
+   "nota": "23 armas (incluido un Barrett .50), >36.000 cartuchos y un silenciador. Tres imputados en Florida. Tramo terrestre RD→Haití inferido; puerto por una sola fuente derivada."
+  },
+  {
+   "id": "N02",
+   "nombre": "Armas: Nueva York (Brooklyn) → República Dominicana → Haití",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -73.95,
+     40.65,
+     "Brooklyn, Nueva York",
+     "origen"
+    ],
+    [
+     -70.16,
+     18.74,
+     "República Dominicana (puerto no identificado)",
+     "transito"
+    ],
+    [
+     -72.3,
+     18.97,
+     "Haití",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Tramos tras RD inferidos.",
+   "fuente": "ONU Noticias, Panel de Expertos; Jamaica Observer (aduana dominicana, actor interesado)",
+   "url": "https://news.un.org/en/story/2025/10/1166121",
+   "nota": "La ONU: 'also from New York via the Dominican Republic'. Del caso Brooklyn (37 armas) sólo hay una línea periodística. Tramos tras la RD inferidos."
+  },
+  {
+   "id": "N03",
+   "nombre": "Armas: EE.UU. → (contenedor) → Cap-Haïtien (Quartier-Morin) → Haití",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "EE.UU. (puerto no especificado; marcador)",
+     "origen"
+    ],
+    [
+     -72.17,
+     19.7,
+     "Cap Terminal, Quartier-Morin / Cap-Haïtien",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Puerto de salida no identificado.",
+   "fuente": "UNODC/ROPAN PCCP (actor interesado, 404); HaitiLibre; Haitian Times",
+   "url": "https://www.haitilibre.com/en/news-46589-haiti-security-seizure-of-weapons-and-ammunition-at-quartier-morin-customs.html",
+   "nota": "Dos decomisos (dic 2025-ene 2026): 3+9 pistolas y miles de cartuchos. 'Contenedor procedente de EE.UU.', sin puerto de salida."
+  },
+  {
+   "id": "N04",
+   "nombre": "Armas por cannabis: Haití → (pesqueros) → Old Harbour Bay (Jamaica)",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -72.3,
+     18.97,
+     "Haití (punto de embarque no nombrado; marcador)",
+     "origen"
+    ],
+    [
+     -77.11,
+     17.94,
+     "Old Harbour Bay, Jamaica",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2017,
+   "construccion_propia": true,
+   "base": "Punto de salida no nombrado; dato 2020.",
+   "fuente": "InSight Crime (reportes del Gleaner); A. Clayton (UWI) vía CCLEC",
+   "url": "https://insightcrime.org/news/analysis/jamaica-haiti-drugs-guns/",
+   "nota": "Dirección Haití→Jamaica (inversa a la esperada): 150-200 armas/mes, trueque 30 lb de cannabis por fusil. Circulación de armas ya instaladas en Haití, no contrabando primario. Datos 2020."
+  },
+  {
+   "id": "N05",
+   "nombre": "Armas: Florida → Buenos Aires (armado de AR-15) → Rosario → Asunción → Pedro Juan Caballero (PCC)",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "Florida",
+     "origen"
+    ],
+    [
+     -58.38,
+     -34.6,
+     "Buenos Aires",
+     "transito"
+    ],
+    [
+     -60.64,
+     -32.95,
+     "Rosario",
+     "transito"
+    ],
+    [
+     -57.58,
+     -25.27,
+     "Asunción",
+     "transito"
+    ],
+    [
+     -55.73,
+     -22.55,
+     "Pedro Juan Caballero",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "La Nación y Aire de Santa Fe (causa Yadarola/Ledesma, actor interesado)",
+   "url": "https://www.lanacion.com.ar/seguridad/una-ruta-armas-lleva-grandes-carteles-brasilenos-nid2387127/",
+   "nota": "Piezas de AR-15 desde Florida por paquetería, armadas en Argentina, a Paraguay en ómnibus. Dos condenados (2020). Datos de 6 años."
+  },
+  {
+   "id": "N06",
+   "nombre": "Armas (desvío de arsenal estatal): Fabricaciones Militares (Fray Luis Beltrán, Argentina) → PCC (Brasil)",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -60.73,
+     -32.8,
+     "Fray Luis Beltrán (Batallón 603/FM)",
+     "origen"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "São Paulo (PCC)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2013,
+   "construccion_propia": true,
+   "base": "Tránsito no documentado; marcadores.",
+   "fuente": "La Nación (Instituto Sou da Paz, PF de Brasil, Justicia Federal de Rosario; actor interesado salvo la ONG)",
+   "url": "https://www.lanacion.com.ar/seguridad/el-pcc-nutre-sus-arsenales-en-brasil-con-armamento-militar-robado-en-la-argentina-nid11102025/",
+   "nota": "Desvío de arsenal estatal: FMK-3, FAL y MAG con marcas argentinas en poder del PCC. Siete militares procesados (2025) por ~400 fusiles. La causa no prueba que cada arma brasileña salga de ese robo. Origen-destino, sin tránsito."
+  },
+  {
+   "id": "N07",
+   "nombre": "Armas (desvío del mercado legal): Argentina (13 provincias) → Uruguay / Chile",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -64.0,
+     -34.0,
+     "Argentina (red de gestores)",
+     "origen"
+    ],
+    [
+     -56.19,
+     -34.9,
+     "Montevideo (marcador)",
+     "destino"
+    ],
+    [
+     -70.67,
+     -33.45,
+     "Chile (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": true,
+   "base": "Destinos por marcador.",
+   "fuente": "Infobae (causa del juez González Charvay, actor interesado)",
+   "url": "https://www.infobae.com/sociedad/policiales/2026/05/03/tipo-modelo-y-calibre-de-las-armas-legales-que-fueron-desviadas-al-mercado-negro-nacional-e-internacional-durante-2-anos/",
+   "nota": "Desvío con credenciales legales, sin contrabando previo. 2.269 armas en el expediente; 140 allanamientos (2026). Destinos sin punto de cruce."
+  },
+  {
+   "id": "N08",
+   "nombre": "Armas: Argentina → pasos cordilleranos (Los Libertadores, Pino Hachado, Cardenal Samoré) → Chile",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -64.0,
+     -34.0,
+     "Argentina (origen provincial; marcador)",
+     "origen"
+    ],
+    [
+     -70.1,
+     -32.83,
+     "Paso Los Libertadores",
+     "transito"
+    ],
+    [
+     -70.9,
+     -38.65,
+     "Paso Pino Hachado",
+     "transito"
+    ],
+    [
+     -71.89,
+     -40.72,
+     "Paso Cardenal Samoré",
+     "transito"
+    ],
+    [
+     -71.58,
+     -39.36,
+     "Temuco/Talcahuano",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": true,
+   "base": "Pasos agrupados, no un recorrido único.",
+   "fuente": "Carabineros de Chile (actor interesado) vía Emol; causa de Temuco vía Infobae",
+   "url": "https://www.infobae.com/america/america-latina/2026/09/01/chile-prision-preventiva-para-dos-individuos-que-traficaban-armas-desde-argentina/",
+   "nota": "1.144 armas argentinas incautadas en Chile desde 2022; ≥40 originalmente de la PF o FFAA argentinas. Los pasos se agrupan; no son un mismo recorrido."
+  },
+  {
+   "id": "N09",
+   "nombre": "Armas: Houston/Miami → Aeropuerto de Santiago y Puerto de Arica (Chile)",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -95.37,
+     29.76,
+     "Houston",
+     "origen"
+    ],
+    [
+     -80.19,
+     25.76,
+     "Miami",
+     "origen"
+    ],
+    [
+     -70.79,
+     -33.39,
+     "Aeropuerto de Santiago",
+     "destino"
+    ],
+    [
+     -70.32,
+     -18.48,
+     "Puerto de Arica",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2015,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Emol (reportaje 'Operación Houston', 2015-2018)",
+   "url": "https://www.emol.com/noticias/Nacional/2024/11/17/1148592/trafico-armas-economia-criminal-chile.html",
+   "nota": "Fuente única secundaria, un caso de 2015-2018.",
+   "estado": "historica"
+  },
+  {
+   "id": "N10",
+   "nombre": "Armas (origen turco): Paraguay (Encarnación) → puente San Roque González → Posadas → Brasil (presunto)",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -55.87,
+     -27.33,
+     "Encarnación, Paraguay",
+     "origen"
+    ],
+    [
+     -55.89,
+     -27.37,
+     "Posadas, Misiones",
+     "transito"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "Brasil (presunto; marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2023,
+   "construccion_propia": true,
+   "base": "Destino presunto; sin tramo.",
+   "fuente": "Dirección General de Aduanas de Argentina (actor interesado) vía La Nación",
+   "url": "https://www.lanacion.com.ar/seguridad/trafico-de-armas-escondia-un-arsenal-de-guerra-de-origen-turco-en-dobles-fondos-de-su-auto-nid30072023/",
+   "nota": "7 escopetas Derya, 1 fusil .223 y 4 pistolas de origen turco en dobles fondos (2023). Destino Brasil presunto."
+  },
+  {
+   "id": "N11",
+   "nombre": "Armas: Perú (Tumbes/Aguas Verdes) → Huaquillas → El Oro → Guayaquil (Ecuador)",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -80.25,
+     -3.49,
+     "Aguas Verdes/Tumbes (Perú)",
+     "origen"
+    ],
+    [
+     -80.23,
+     -3.48,
+     "Huaquillas",
+     "transito"
+    ],
+    [
+     -79.92,
+     -2.17,
+     "Guayaquil",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Presidente Noboa (actor interesado); OECO (financiado por INL-EE.UU.); Primicias",
+   "url": "https://www.primicias.ec/noticias/seguridad/bandas-criminales-ecuador-armas-peru-colombia-mexico/",
+   "nota": "Noboa: 70% de las armas ilegales llega por la frontera con Perú (declaración, no medición). 30 pasos clandestinos en El Oro/Loja. Ecuador incautó 10.771 armas en 2025."
+  },
+  {
+   "id": "N12",
+   "nombre": "Armas: Miami → (courier aéreo) → Aeropuerto J. J. Olmedo, Guayaquil",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "Miami",
+     "origen"
+    ],
+    [
+     -79.88,
+     -2.16,
+     "Aeropuerto J. J. Olmedo, Guayaquil",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "SENAE, aduana de Ecuador (actor interesado) vía Vistazo/El Universo",
+   "url": "https://www.vistazo.com/actualidad/nacional/2025-04-28-incautan-armas-ocultas-parlantes-carga-courier-miami-guayaquil-IM9248569",
+   "nota": "14 fusiles y 2 pistolas en parlantes por courier desde Miami (2025). Casos aislados."
+  },
+  {
+   "id": "N13",
+   "nombre": "Armas: Colombia (Putumayo/Nariño) → frontera fluvial → Ecuador (Sucumbíos)",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -76.5,
+     0.5,
+     "Puerto Asís, Putumayo",
+     "origen"
+    ],
+    [
+     -76.89,
+     0.09,
+     "Lago Agrio, Sucumbíos",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2024,
+   "construccion_propia": true,
+   "base": "Sin caso; puntos inferidos.",
+   "fuente": "OECO (actor interesado)",
+   "url": "https://www.primicias.ec/noticias/seguridad/bandas-criminales-ecuador-armas-peru-colombia-mexico/",
+   "nota": "Mención en informe (ríos Aguarico/Napo), sin caso. La mayoría de los casos corre al revés (Ecuador→Colombia). Puntos elegidos por el recolector."
+  },
+  {
+   "id": "N14",
+   "nombre": "Armas (origen de fabricación): Europa/Turquía → Panamá → Colombia",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     35.2,
+     39.0,
+     "Turquía/Europa (fabricación; marcador)",
+     "origen"
+    ],
+    [
+     -79.52,
+     8.98,
+     "Panamá",
+     "transito"
+    ],
+    [
+     -74.3,
+     4.57,
+     "Colombia (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2024,
+   "construccion_propia": true,
+   "base": "Trazado de origen; tránsito afirmado sin caso.",
+   "fuente": "DIJIN, Policía de Colombia (actor interesado) vía Infobae",
+   "url": "https://www.infobae.com/colombia/2026/09/15/de-donde-vienen-las-armas-ilegales-que-usan-los-delincuentes-en-colombia-estan-relacionadas-con-el-76-de-los-homicidios-en-el-pais/",
+   "nota": "3.923 armas de origen turco (mayoría 'traumáticas', no letales de fábrica) y 4.343 de EE.UU. Cifras de origen (trazado), no de ruta. Tránsito por Panamá afirmado sin decomiso."
+  },
+  {
+   "id": "N18",
+   "nombre": "Armas (trazado de origen): EE.UU. → Barbados",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "EE.UU. (Florida; marcador)",
+     "origen"
+    ],
+    [
+     -59.54,
+     13.19,
+     "Barbados",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Trazado ATF, no ruta.",
+   "fuente": "GAO-25-107007 (datos de trazado ATF, actor interesado)",
+   "url": "https://files.gao.gov/reports/GAO-25-107007/index.html",
+   "nota": "80% de las armas trazadas en Barbados (2018-22) con origen EE.UU. Es TRAZADO (origen de fabricación/compra), no ruta de contrabando."
+  },
+  {
+   "id": "N19",
+   "nombre": "Armas (trazado de origen): EE.UU. → Guyana",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "EE.UU. (Florida; marcador)",
+     "origen"
+    ],
+    [
+     -58.16,
+     6.8,
+     "Georgetown, Guyana",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Trazado ATF, no ruta.",
+   "fuente": "GAO-25-107007 (trazado ATF, actor interesado)",
+   "url": "https://files.gao.gov/reports/GAO-25-107007/index.html",
+   "nota": "55% de trazados a EE.UU. (2018-22). Trazado, no ruta."
+  },
+  {
+   "id": "N20",
+   "nombre": "Armas (trazado de origen): EE.UU. → República Dominicana",
+   "subtipo": "Armas de fuego",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "EE.UU. (Florida/Nueva York; marcador)",
+     "origen"
+    ],
+    [
+     -69.88,
+     18.47,
+     "Santo Domingo",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Trazado parcial; no ruta.",
+   "fuente": "GAO-25-107007 (trazado ATF, actor interesado)",
+   "url": "https://files.gao.gov/reports/GAO-25-107007/index.html",
+   "nota": "Sólo 34% se trazó a EE.UU.: hay origen no-EE.UU. o sin identificar. Convive con el rol de tránsito hacia Haití."
+  },
+  {
+   "id": "M01",
+   "nombre": "Municiones: EE.UU. (Florida) → (contenedor) → Port-de-Paix / Cap-Haïtien → Haití",
+   "subtipo": "Municiones",
+   "waypoints": [
+    [
+     -80.19,
+     25.76,
+     "Florida (puerto no identificado)",
+     "origen"
+    ],
+    [
+     -72.83,
+     19.94,
+     "Port-de-Paix",
+     "destino"
+    ],
+    [
+     -72.17,
+     19.7,
+     "Cap-Haïtien/Quartier-Morin",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2022,
+   "construccion_propia": true,
+   "base": "Puerto de salida no identificado.",
+   "fuente": "InSight Crime (autoridades haitianas, actor interesado); UNODC/PCCP; ONU Noticias",
+   "url": "https://insightcrime.org/news/scandal-at-haiti-customs-after-over-100000-rounds-of-smuggled-ammunition-seized/",
+   "nota": "~120.000 cartuchos en Port-de-Paix (2022); 7.300 más en Cap-Haïtien (2025-26). Haití no fabrica municiones. Puerto de salida en Florida no identificado."
+  },
+  {
+   "id": "M03",
+   "nombre": "Municiones: Perú (Aguas Verdes/Tumbes) → pasos clandestinos → Ecuador (Huaquillas)",
+   "subtipo": "Municiones",
+   "waypoints": [
+    [
+     -80.45,
+     -3.57,
+     "Tumbes (Perú)",
+     "origen"
+    ],
+    [
+     -80.25,
+     -3.49,
+     "Aguas Verdes/Zarumilla",
+     "transito"
+    ],
+    [
+     -80.23,
+     -3.48,
+     "Huaquillas (Ecuador)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2023,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Policía Nacional del Perú (actor interesado) vía Infobae; OECO",
+   "url": "https://www.infobae.com/peru/2025/08/26/mas-de-5-mil-municiones-iban-a-salir-del-peru-hacia-ecuador-de-forma-ilegal-por-tumbes/",
+   "nota": "5.361 cartuchos de guerra incautados en Aguas Verdes (2025). Perú incautó >391.000 cartuchos en Tumbes en 2023 (138× más que 2022)."
+  },
+  {
+   "id": "M04",
+   "nombre": "Municiones (desvío estatal): FFAA/PNP de Perú (Lima) → Tumbes → Ecuador",
+   "subtipo": "Municiones",
+   "waypoints": [
+    [
+     -77.04,
+     -12.05,
+     "Lima (Chorrillos/La Victoria)",
+     "origen"
+    ],
+    [
+     -80.45,
+     -3.57,
+     "Tumbes",
+     "transito"
+    ],
+    [
+     -80.23,
+     -3.48,
+     "Ecuador (frontera; marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Tramo Lima→Tumbes inferido; imputación, no hecho probado.",
+   "fuente": "Infobae; TV Perú (actor interesado); Fiscalía de Tumbes (actor interesado)",
+   "url": "https://www.infobae.com/peru/2025/11/25/policia-de-peru-envio-mas-de-3-mil-municiones-a-oficial-de-ecuador-con-antecedentes-por-trafico-de-armas/",
+   "nota": "Dos casos de desvío de arsenal estatal (2025): un teniente del Ejército con 4.000 cartuchos; 2.900 cartuchos por encomienda de un teniente PNP a un oficial ecuatoriano. Imputaciones en investigación."
+  },
+  {
+   "id": "M05",
+   "nombre": "Municiones (desvío policial): lotes de la PM de São Paulo → RMSP / Londrina / São Gonçalo (Brasil)",
+   "subtipo": "Municiones",
+   "waypoints": [
+    [
+     -46.63,
+     -23.55,
+     "São Paulo (PM, compras 2005/2007)",
+     "origen"
+    ],
+    [
+     -46.79,
+     -23.53,
+     "Osasco/RMSP",
+     "destino"
+    ],
+    [
+     -51.16,
+     -23.31,
+     "Londrina, PR",
+     "destino"
+    ],
+    [
+     -43.05,
+     -22.83,
+     "São Gonçalo, RJ",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2012,
+   "construccion_propia": true,
+   "base": "Camino de desvío no identificado; sin marca atribuida.",
+   "fuente": "Instituto Sou da Paz (ONG) vía O Tempo",
+   "url": "https://www.otempo.com.br/brasil/2026/9/6/municao-desviada-da-pm-de-sp-aparece-em-crimes-cometidos-ao-longo-de-14-anos",
+   "nota": "Lotes de 2005/2007 en crímenes durante 14 años. La fuente NO atribuye marca CBC (aunque CBC provee casi toda la munición policial). Camino de desvío no identificado."
+  },
+  {
+   "id": "M06",
+   "nombre": "Municiones (fulminantes, insumo): Argentina (Puerto Iguazú) → puente Tancredo Neves → Foz do Iguaçu (Brasil)",
+   "subtipo": "Municiones",
+   "waypoints": [
+    [
+     -54.58,
+     -25.6,
+     "Puerto Iguazú, Misiones",
+     "origen"
+    ],
+    [
+     -54.59,
+     -25.55,
+     "Foz do Iguaçu, Brasil",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "base": "Caso aislado; insumo, no munición terminada.",
+   "fuente": "Aduana de Puerto Iguazú (actor interesado) vía Infobae",
+   "url": "https://www.infobae.com/sociedad/policiales/2026/02/18/frontera-caliente-detuvieron-en-misiones-a-un-brasileno-que-intentaba-cruzar-con-225-mil-capsulas-para-armas-de-fuego/",
+   "nota": "225.000 fulminantes (componentes de munición, no munición terminada) en doble fondo (2026). Caso aislado."
+  }
+ ],
+ "aviso": "Rutas de armas DOCUMENTADAS por agencias e investigaciones de terceros. Ojo: buena parte de lo 'de origen EE.UU.' es dato de TRAZADO (ATF), no ruta medida; y en el norte de Centroamérica mucho salió por exportación legal y se desvió dentro del país (no contrabando). Fuentes oficiales de EE.UU. (GAO/ATF) y policiales son actores interesados; se rotula. R07 y R09 marcadas construcción propia.",
+ "correcciones_disenso": [
+  "Rutas de trazado ATF marcadas como origen de fabricación (no contrabando); R11 (FANB) sin rol de origen estatal."
+ ],
+ "cobertura_parcial": "Cobertura parcial: bien cubiertos EE.UU.→Haití (vía RD), el eje Argentina→Chile/Brasil/Paraguay, y Perú→Ecuador. Buena parte de lo 'de origen EE.UU.' es TRAZADO del ATF, no ruta. Sin ruta documentada (búsqueda agotada): Balcanes→ALC, Centroamérica sur, Bolivia, y varios desvíos de arsenal estatal sin tránsito. La ausencia de una línea NO implica ausencia de flujo."
+}

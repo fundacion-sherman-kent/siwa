@@ -1,0 +1,1075 @@
+{
+ "flujo_nombre": "contrabando",
+ "es_prototipo": false,
+ "corte": "2026-09-30",
+ "aviso": "Contrabando de mercancías (cigarrillos, combustible) en ALC. Dos de los flujos mejor documentados —cigarrillos de Paraguay y combustible en la frontera colombo-venezolana— y dos brazos agregados marcados como construcción propia. La dirección de un flujo de frontera puede invertirse según precios.",
+ "rutas": [
+  {
+   "id": "C01",
+   "nombre": "Cigarrillos: Paraguay (Ciudad del Este / Hernandarias) → Brasil",
+   "waypoints": [
+    [
+     -54.64,
+     -25.41,
+     "Hernandarias / Ciudad del Este, Paraguay",
+     "origen"
+    ],
+    [
+     -54.58,
+     -25.52,
+     "Foz do Iguaçu, Brasil",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2015,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "UNODC; Euromonitor; InSight Crime; Receita Federal do Brasil (actor interesado)",
+   "url": "https://insightcrime.org/news/paraguay-cigarette-smuggling-brazil/",
+   "nota": "Paraguay produce muy por encima de su consumo interno; el excedente cruza a Brasil por la Triple Frontera. Cruce terrestre y fluvial (Paraná). Uno de los contrabandos mejor documentados de la región.",
+   "subtipo": "Cigarrillos"
+  },
+  {
+   "id": "C02",
+   "nombre": "Cigarrillos: Paraguay → Argentina (Triple Frontera y Formosa/Misiones)",
+   "waypoints": [
+    [
+     -54.8,
+     -25.6,
+     "Paraguay (frontera)",
+     "origen"
+    ],
+    [
+     -58.2,
+     -26.3,
+     "NE argentino (Misiones/Formosa)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2016,
+   "construccion_propia": true,
+   "base": "Flujo agregado de frontera, sin caso puntual georreferenciado.",
+   "fuente": "UNODC; prensa argentina; AFIP (actor interesado)",
+   "url": "https://www.unodc.org/",
+   "nota": "Mismo origen paraguayo, brazo hacia la Argentina. Trayecto terrestre aproximado.",
+   "subtipo": "Cigarrillos"
+  },
+  {
+   "id": "C03",
+   "nombre": "Combustible: Colombia (Norte de Santander) ↔ Venezuela (Táchira) — 'pimpineros'",
+   "waypoints": [
+    [
+     -72.44,
+     7.81,
+     "San Antonio del Táchira (Venezuela)",
+     "origen"
+    ],
+    [
+     -72.5,
+     7.89,
+     "Cúcuta, Norte de Santander (Colombia)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2014,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "InSight Crime; prensa colombo-venezolana; OFAC/ICG (contexto)",
+   "url": "https://insightcrime.org/news/venezuela-fuel-smuggling/",
+   "nota": "Sentido dominante histórico VE→CO: gasolina subsidiada venezolana cruzando a Colombia ('pimpineros', bachaqueo). Se INVIERTE según precios y desabastecimiento. Flujo pendular de corto alcance.",
+   "subtipo": "Combustible"
+  },
+  {
+   "id": "C04",
+   "nombre": "Combustible: Venezuela → Caribe (mar), desvío de PDVSA",
+   "waypoints": [
+    [
+     -64.6,
+     10.2,
+     "Costa oriental de Venezuela",
+     "origen"
+    ],
+    [
+     -61.51,
+     10.65,
+     "Caribe (Trinidad / Antillas)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": true,
+   "base": "Flujo marítimo agregado bajo régimen de sanciones; sin caso puntual con puerto.",
+   "fuente": "InSight Crime; OFAC (actor interesado, sanciones)",
+   "url": "https://insightcrime.org/",
+   "nota": "Desvío marítimo de combustible/crudo por redes ligadas a PDVSA. Destino Caribe genérico; punto de entrega no acreditado. Construcción propia.",
+   "subtipo": "Combustible"
+  },
+  {
+   "id": "CB-E1",
+   "nombre": "Electrónica (y cigarrillos, licor): Ciudad del Este → Ponte da Amizade/Foz do Iguaçu → mercados de Brasil",
+   "subtipo": "Electrónica",
+   "waypoints": [
+    [
+     -54.61,
+     -25.51,
+     "Ciudad del Este, Paraguay",
+     "origen"
+    ],
+    [
+     -54.59,
+     -25.53,
+     "Foz do Iguaçu (Ponte da Amizade)",
+     "transito"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "São Paulo",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 1995,
+   "construccion_propia": true,
+   "base": "Destino por centroide de mercado.",
+   "fuente": "Global Initiative Against TOC (2026); SciELO (2019); La Nación",
+   "url": "https://globalinitiative.net/analysis/criminal-coexistence-the-illicit-ecosystem-of-the-southern-cones-triple-border/",
+   "nota": "Flujo dominante hacia Brasil por la Triple Frontera; modelo 'hormiga' (sacoleiros), difuso. São Paulo = centroide del mercado final (la fuente dice 'mercados de Brasil')."
+  },
+  {
+   "id": "CB-E2",
+   "nombre": "Electrónica (celulares): ribera paraguaya de la Triple Frontera → río Paraná (lanchas) → Foz do Iguaçu",
+   "subtipo": "Electrónica",
+   "waypoints": [
+    [
+     -54.61,
+     -25.51,
+     "Ciudad del Este (marcador)",
+     "origen"
+    ],
+    [
+     -54.6,
+     -25.57,
+     "río Paraná, Triple Frontera",
+     "transito"
+    ],
+    [
+     -54.59,
+     -25.55,
+     "Foz do Iguaçu",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2020,
+   "construccion_propia": true,
+   "base": "Localidad de salida ambigua; método más que ruta.",
+   "fuente": "La Nación citando Prefectura Naval Argentina y Armada paraguaya (actor interesado)",
+   "url": "https://www.lanacion.com.ar/seguridad/del-trafico-hormiga-lanchas-control-remoto-contrabando-nid2416871/",
+   "nota": "Método (lanchas a control remoto con celulares sellados), no corredor fijo. Punto de salida exacto no especificado."
+  },
+  {
+   "id": "CB-E3",
+   "nombre": "Electrónica (celulares, laptops): Zofri Iquique → Pisiga/Colchane → Oruro → La Paz/El Alto",
+   "subtipo": "Electrónica",
+   "waypoints": [
+    [
+     -70.14,
+     -20.22,
+     "Zofri, Iquique, Chile",
+     "origen"
+    ],
+    [
+     -68.68,
+     -19.3,
+     "Pisiga Choque",
+     "transito"
+    ],
+    [
+     -67.11,
+     -17.97,
+     "Oruro",
+     "transito"
+    ],
+    [
+     -68.15,
+     -16.5,
+     "La Paz/El Alto",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2013,
+   "construccion_propia": true,
+   "base": "Mercadería electrónica inferida del corredor de vehículos.",
+   "fuente": "Iquique Hoy (2026, extracto); Biobío Chile (2026, sólo vehículos); Aduanas de Chile/Carabineros (actor interesado)",
+   "url": "https://www.iquiquehoy.cl/2026/03/16/de-zofri-a-bolivia-asi-opera-la-ruta-del-contrabando-de-vehiculos-en-el-norte-de-chile/",
+   "nota": "Que celulares/laptops sigan el itinerario de los vehículos es inferencia (Biobío sólo confirma vehículos). Pasos Tambo Quemado y Pisiga 24/7 desde 2024."
+  },
+  {
+   "id": "CB-E4",
+   "nombre": "Electrónica (mixta): Zofri Iquique → Hito Tripartito → Pisacoma → Desaguadero → Juli → Puno",
+   "subtipo": "Electrónica",
+   "waypoints": [
+    [
+     -70.14,
+     -20.22,
+     "Zofri, Iquique",
+     "origen"
+    ],
+    [
+     -69.47,
+     -17.6,
+     "Hito Tripartito CL-BO-PE",
+     "transito"
+    ],
+    [
+     -69.36,
+     -16.91,
+     "Pisacoma",
+     "transito"
+    ],
+    [
+     -69.04,
+     -16.57,
+     "Desaguadero",
+     "transito"
+    ],
+    [
+     -69.46,
+     -16.21,
+     "Juli",
+     "transito"
+    ],
+    [
+     -70.03,
+     -15.84,
+     "Puno",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Gestión (Perú, 2024)",
+   "url": "https://gestion.pe/peru/peru-y-bolivia-los-10-puntos-de-la-ruta-de-contrabando-comercio-ilegal-empresa-noticia/",
+   "nota": "Uno de 10 puntos que lista la fuente; celulares, licor, cigarrillos, ropa, alimentos y combustible en el mismo corredor. El sentido puede invertirse según precios. Coordenadas aproximadas."
+  },
+  {
+   "id": "CB-E5",
+   "nombre": "Electrónica (celulares gama alta): Arica → Complejo Santa Rosa/Chacalluta → Tacna",
+   "subtipo": "Electrónica",
+   "waypoints": [
+    [
+     -70.31,
+     -18.48,
+     "Arica, Chile",
+     "origen"
+    ],
+    [
+     -70.35,
+     -18.4,
+     "Santa Rosa/Chacalluta",
+     "transito"
+    ],
+    [
+     -70.25,
+     -18.01,
+     "Tacna, Perú",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "base": "Origen inferido; caso puntual.",
+   "fuente": "El Búho (Tacna, 2026), operativo de Policía Fiscal y Aduanas (actor interesado)",
+   "url": "https://elbuho.pe/2026/09/tacna-incautan-91-celulares-de-alta-gama-valorizados-en-s-450-mil-ocultos-en-una-caleta/",
+   "nota": "Caso puntual (91 iPhone/Samsung, S/450 mil). Arica como origen es inferencia (Iquique es alternativa). Indicio, no corredor medido."
+  },
+  {
+   "id": "CB-V1",
+   "nombre": "Vehículos ('autos chutos'): Zofri Iquique → camiones cigüeña → Pisiga/Colchane → Oruro (Bolivia)",
+   "subtipo": "Vehículos",
+   "waypoints": [
+    [
+     -70.14,
+     -20.22,
+     "Zofri, Iquique",
+     "origen"
+    ],
+    [
+     -68.68,
+     -19.3,
+     "Pisiga Choque",
+     "transito"
+    ],
+    [
+     -67.11,
+     -17.97,
+     "Oruro",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2013,
+   "construccion_propia": true,
+   "base": "Destino final por nodo documentado.",
+   "fuente": "Biobío Chile Investiga (2026); SWI (2022); Connectas; Aduanas de Chile/Carabineros (actor interesado)",
+   "url": "https://www.biobiochile.cl/especial/bbcl-investiga/noticias/articulos/2026/03/16/la-ruta-de-los-autos-chutos-como-vehiculos-comprados-en-zofri-terminan-en-mercado-ilegal-de-bolivia.shtml",
+   "nota": ">1,2 millones de autos chutos 2013-2024 (~120.000/año, cifras de actor interesado). Oruro documentado como nodo; destino final 'Bolivia'."
+  },
+  {
+   "id": "CB-M1",
+   "nombre": "Medicamentos (semaglutida/tirzepatida, en parte falsos): Ciudad del Este → Ponte da Amizade → Foz do Iguaçu",
+   "subtipo": "Medicamentos",
+   "waypoints": [
+    [
+     -54.61,
+     -25.51,
+     "Ciudad del Este, Paraguay",
+     "origen"
+    ],
+    [
+     -54.6,
+     -25.51,
+     "Ponte da Amizade",
+     "transito"
+    ],
+    [
+     -54.59,
+     -25.55,
+     "Foz do Iguaçu",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Receita Federal de Brasil (actor interesado) vía ABC Color (2026); El Tiempo/AFP",
+   "url": "https://www.abc.com.py/este/2026/05/28/aumenta-contrabando-de-medicamentos-y-baja-el-de-cigarrillos-en-frontera-entre-ciudad-del-este-y-foz-de-iguazu/",
+   "nota": "Sube el contrabando de medicamentos mientras baja el de cigarrillos en la misma frontera. El decomiso mide aplicación de la ley, no flujo."
+  },
+  {
+   "id": "CB-M2",
+   "nombre": "Medicamentos: Huaquillas (EC) → Zapotillo → Las Lomas → Sullana → Lima (galerías)",
+   "subtipo": "Medicamentos",
+   "waypoints": [
+    [
+     -80.23,
+     -3.48,
+     "Huaquillas, Ecuador",
+     "origen"
+    ],
+    [
+     -80.25,
+     -4.38,
+     "Zapotillo",
+     "transito"
+    ],
+    [
+     -80.25,
+     -4.65,
+     "Las Lomas",
+     "transito"
+    ],
+    [
+     -80.69,
+     -4.9,
+     "Sullana",
+     "transito"
+    ],
+    [
+     -77.04,
+     -12.05,
+     "Lima (Las Malvinas/El Hueco)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Infobae Perú (2024, investigación encubierta); Digemid (actor interesado)",
+   "url": "https://www.infobae.com/peru/2024/03/19/la-ruta-de-medicamentos-ilegales-ecuador-es-el-punto-de-partida-del-contrabando-que-invade-farmacias-en-lima/",
+   "nota": "Se apoya en entrevistas con 'armadores' y 'pasadores'. No cita fuentes oficiales para la ruta."
+  },
+  {
+   "id": "CB-L1",
+   "nombre": "Licor (whisky, vodka, tequila; parte adulterado): Ecuador (Tulcán) → Ipiales → Bogotá y otras ciudades",
+   "subtipo": "Licor",
+   "waypoints": [
+    [
+     -77.72,
+     0.81,
+     "Tulcán, Ecuador",
+     "origen"
+    ],
+    [
+     -77.64,
+     0.83,
+     "Ipiales, Colombia",
+     "transito"
+    ],
+    [
+     -74.07,
+     4.71,
+     "Bogotá",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Pasos y destino por marcadores.",
+   "fuente": "Infobae/El Tiempo (2018, caso 'reina del contrabando'), Policía Fiscal y Aduanera (actor interesado)",
+   "url": "https://www.infobae.com/america/colombia/2018/08/01/cayo-la-reina-del-contrabando-que-ingresaba-licor-ilegal-de-venezuela-y-ecuador/",
+   "nota": "Caso judicial de una red, no medición de flujo. Bogotá es uno de varios destinos; el origen real de las botellas puede ser un tercer país."
+  },
+  {
+   "id": "CB-L2",
+   "nombre": "Licor (whisky, ron, aguardiente): Venezuela → frontera colombiana (trochas) → Antioquia y Valle",
+   "subtipo": "Licor",
+   "waypoints": [
+    [
+     -72.5,
+     7.89,
+     "Frontera CO-VE (Cúcuta, marcador)",
+     "origen"
+    ],
+    [
+     -75.58,
+     6.24,
+     "Medellín",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Frontera por marcador; se recomienda leerlo como marcador, no línea.",
+   "fuente": "Confirmado.com.ve (extracto); caso Infobae 2018",
+   "url": "https://confirmado.com.ve/decomisaron-whisky-ron-y-aguardiente-en-colombia-procedentes-de-venezuela/",
+   "nota": "Se solapa con el corredor CO-VE ya cargado, con otro producto. Cúcuta es marcador de toda la frontera; el paso no consta."
+  },
+  {
+   "id": "CB-L3",
+   "nombre": "Licor (whisky premium, evasión de impuesto vía zona franca): Zona Libre de Colón → Centroamérica y Colombia",
+   "subtipo": "Licor",
+   "waypoints": [
+    [
+     -79.88,
+     9.35,
+     "Zona Libre de Colón, Panamá",
+     "origen"
+    ],
+    [
+     -75.48,
+     10.39,
+     "Cartagena",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Destino inferido; fuente única interesada.",
+   "fuente": "TRACIT 2025 (alianza del sector privado, actor interesado)",
+   "url": "https://www.tracit.org/uploads/1/0/2/2/102238034/illicit_trade_via_ftzs_-_central_and_south_america_-_focus_on_5_zones_final.pdf",
+   "nota": "TRACIT dice 'into all countries in the Central American region, including Colombia' sin puertos. Cartagena es inferencia; sin segunda fuente independiente."
+  },
+  {
+   "id": "CB-L4",
+   "nombre": "Licor y cigarrillos: Haití (Ouanaminthe) → Dajabón (Rep. Dominicana)",
+   "subtipo": "Licor",
+   "waypoints": [
+    [
+     -71.73,
+     19.55,
+     "Ouanaminthe, Haití",
+     "origen"
+    ],
+    [
+     -71.71,
+     19.55,
+     "Dajabón, Rep. Dominicana",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Paso binacional; caso puntual.",
+   "fuente": "Diario Libre (2025), Ejército y Policía Nacional de RD (actor interesado)",
+   "url": "https://www.diariolibre.com/actualidad/sucesos/2025/01/22/contrabando-descubierto-en-camion-de-carga-de-guineos/2975411",
+   "nota": "Caso puntual (camión con guineos de fachada). Sin datos de volumen."
+  },
+  {
+   "id": "CB-T1",
+   "nombre": "Ropa usada: Zofri Iquique/puerto de Arica → Tacna → costa sur y centro de Perú (Lima)",
+   "subtipo": "Textiles",
+   "waypoints": [
+    [
+     -70.14,
+     -20.22,
+     "Zofri, Iquique",
+     "origen"
+    ],
+    [
+     -70.31,
+     -18.48,
+     "Arica",
+     "transito"
+    ],
+    [
+     -70.25,
+     -18.01,
+     "Tacna",
+     "transito"
+    ],
+    [
+     -77.04,
+     -12.05,
+     "Lima",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "ICEV para OLCI-SNI (gremio industrial, actor interesado; 81 días de campo); Gestión",
+   "url": "https://olci.sni.org.pe/wp-content/uploads/2026/08/La-cadena-de-suministro-de-la-ropa-usada-en-Peru.pdf",
+   "nota": "La importación comercial de ropa usada es ilegal en Perú, Bolivia y Argentina; Chile es el único importador legal de Sudamérica. Camuflaje en camiones/buses y pasos irregulares."
+  },
+  {
+   "id": "CB-T2",
+   "nombre": "Ropa usada y nueva (con electrónicos, línea blanca, autopartes): Zofri → Pisiga/Colchane → Oruro/El Alto (Bolivia)",
+   "subtipo": "Textiles",
+   "waypoints": [
+    [
+     -70.14,
+     -20.22,
+     "Zofri, Iquique",
+     "origen"
+    ],
+    [
+     -68.63,
+     -19.28,
+     "Colchane/Pisiga",
+     "transito"
+    ],
+    [
+     -67.11,
+     -17.97,
+     "Oruro",
+     "transito"
+    ],
+    [
+     -68.19,
+     -16.5,
+     "El Alto/La Paz",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "ICEV-SNI (tabla 1, eslabón VII, actor interesado); Fashion Network Perú",
+   "url": "https://olci.sni.org.pe/wp-content/uploads/2026/08/La-cadena-de-suministro-de-la-ropa-usada-en-Peru.pdf",
+   "nota": "Bolivia cobra 40% de arancel textil, el más alto de la región. Única evidencia de autopartes en ruta."
+  },
+  {
+   "id": "CB-T3",
+   "nombre": "Ropa usada: Bolivia (La Paz/El Alto) → Desaguadero o Lago Titicaca → Puno/Juliaca (Perú)",
+   "subtipo": "Textiles",
+   "waypoints": [
+    [
+     -68.19,
+     -16.5,
+     "El Alto/La Paz",
+     "origen"
+    ],
+    [
+     -69.04,
+     -16.57,
+     "Desaguadero",
+     "transito"
+    ],
+    [
+     -70.03,
+     -15.84,
+     "Puno",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2024,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "ICEV-SNI (eslabón VII, actividad 21, actor interesado); Gestión",
+   "url": "https://olci.sni.org.pe/wp-content/uploads/2026/08/La-cadena-de-suministro-de-la-ropa-usada-en-Peru.pdf",
+   "nota": "Convoyes 'culebra' (10-20 vehículos), 4x4 y botes por el Titicaca, con corrupción de aduanas. A veces el mismo tramo lleva cocaína y oro de vuelta (afirmación de investigadores)."
+  },
+  {
+   "id": "CB-T4",
+   "nombre": "Textil y calzado (contrabando abierto y técnico por subvaluación): Zona Libre de Colón → Colombia → Bogotá",
+   "subtipo": "Textiles",
+   "waypoints": [
+    [
+     -79.88,
+     9.35,
+     "Zona Libre de Colón, Panamá",
+     "origen"
+    ],
+    [
+     -75.48,
+     10.39,
+     "Cartagena (marcador de puerto)",
+     "transito"
+    ],
+    [
+     -74.07,
+     4.71,
+     "Bogotá (Los Mártires/7 de Agosto)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2012,
+   "construccion_propia": true,
+   "base": "Puerto de entrada inferido.",
+   "fuente": "InSight Crime; El País Cali (2020); DIAN (actor interesado)",
+   "url": "https://insightcrime.org/news/textile-contraband-colombia-money-laundering/",
+   "nota": "El contrabando técnico (subvaluación) es la modalidad principal. Cartagena es inferencia (la fuente menciona también Maicao e Ipiales). InSight vincula una incautación de 2020 con ELN y Urabeños."
+  },
+  {
+   "id": "CB-T5",
+   "nombre": "Ropa y calzado (contrabando técnico): China → Pacífico → Manzanillo/Lázaro Cárdenas (México)",
+   "subtipo": "Textiles",
+   "waypoints": [
+    [
+     121.47,
+     31.23,
+     "China (Shanghái, marcador)",
+     "origen"
+    ],
+    [
+     -104.32,
+     19.05,
+     "Manzanillo",
+     "transito"
+    ],
+    [
+     -102.2,
+     17.96,
+     "Lázaro Cárdenas",
+     "transito"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2015,
+   "construccion_propia": true,
+   "base": "Puerto de embarque no consta; modalidad técnica.",
+   "fuente": "SAT (actor interesado) y Concamin (gremio) vía Forbes México",
+   "url": "http://omawww.sat.gob.mx/cifras_sat/Documents/Evasi%C3%B3n_por_contrabando_en_Textil.pdf",
+   "nota": "79% del calzado importado entra por Lázaro Cárdenas y Manzanillo. Es contrabando TÉCNICO (subvaluación, falso origen), no físico. China por centroide/puerto marcador."
+  },
+  {
+   "id": "CB-C1",
+   "nombre": "Cigarrillos: Salto del Guairá (PY) → río Paraná (lanchas) → Guaíra (BR) → São Paulo/Río",
+   "subtipo": "Cigarrillos",
+   "waypoints": [
+    [
+     -54.3,
+     -24.06,
+     "Salto del Guairá, Paraguay",
+     "origen"
+    ],
+    [
+     -54.26,
+     -24.08,
+     "Guaíra, Brasil",
+     "transito"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "São Paulo",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2005,
+   "construccion_propia": true,
+   "base": "Destino por centroide de mercado.",
+   "fuente": "ICIJ 'Tobacco Underground'; InSight Crime; Receita Federal (actor interesado)",
+   "url": "https://www.icij.org/investigations/tobacco-underground/smuggling-made-easy/",
+   "nota": "Corredor fluvial distinto del de Ciudad del Este. ~20-30 mil millones de cigarrillos/año (ICIJ). São Paulo = centroide."
+  },
+  {
+   "id": "CB-C2",
+   "nombre": "Cigarrillos: Zona Libre de Colón → Caribe → Urabá (Necoclí) → Eje Cafetero/frontera con Ecuador",
+   "subtipo": "Cigarrillos",
+   "waypoints": [
+    [
+     -79.88,
+     9.35,
+     "Zona Libre de Colón, Panamá",
+     "origen"
+    ],
+    [
+     -76.78,
+     8.43,
+     "Urabá (Necoclí)",
+     "transito"
+    ],
+    [
+     -75.69,
+     4.81,
+     "Pereira",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Tramo interno por marcadores.",
+   "fuente": "El Tiempo con estudio FND-Invamer 2025 y Policía Fiscal y Aduanera (actor interesado); TRACIT 2025",
+   "url": "https://www.eltiempo.com/datos/las-rutas-del-contrabando-de-cigarrillos-que-crece-en-america-latina-incidencia-en-colombia-es-la-mas-alta-desde-que-se-hace-medicion-3570686",
+   "nota": "TRACIT describe Colón como nodo principal de cigarrillos ilícitos de ALC. Necoclí y Pereira son marcadores."
+  },
+  {
+   "id": "CB-C3",
+   "nombre": "Cigarrillos: Ciudad del Este (PY)/Montevideo → Aruba y Curazao → Maicao → costa caribeña colombiana",
+   "subtipo": "Cigarrillos",
+   "waypoints": [
+    [
+     -54.61,
+     -25.51,
+     "Ciudad del Este, Paraguay",
+     "origen"
+    ],
+    [
+     -70.03,
+     12.52,
+     "Oranjestad (Aruba)",
+     "transito"
+    ],
+    [
+     -68.93,
+     12.11,
+     "Willemstad (Curazao)",
+     "transito"
+    ],
+    [
+     -72.24,
+     11.38,
+     "Maicao",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "El Tiempo (Policía Fiscal y Aduanera, actor interesado); Las2orillas",
+   "url": "https://www.eltiempo.com/datos/las-rutas-del-contrabando-de-cigarrillos-que-crece-en-america-latina-incidencia-en-colombia-es-la-mas-alta-desde-que-se-hace-medicion-3570686",
+   "nota": "Las2orillas describe una versión distinta (PY→BR→VE→La Guajira) que no se pudo contrastar. Se solapa en parte con el corredor CO-VE."
+  },
+  {
+   "id": "CB-C4",
+   "nombre": "Cigarrillos asiáticos: China (Zhejiang) → Zona Franca de Corozal (Belice) → Punta Gorda → Livingston (GT) → Puerto Cortés (HN)",
+   "subtipo": "Cigarrillos",
+   "waypoints": [
+    [
+     121.55,
+     29.87,
+     "China (Ningbo, marcador)",
+     "origen"
+    ],
+    [
+     -88.4,
+     18.49,
+     "Zona Franca de Corozal, Belice",
+     "transito"
+    ],
+    [
+     -88.8,
+     16.1,
+     "Punta Gorda",
+     "transito"
+    ],
+    [
+     -88.75,
+     15.83,
+     "Livingston, Guatemala",
+     "transito"
+    ],
+    [
+     -87.95,
+     15.84,
+     "Puerto Cortés, Honduras",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Puerto de embarque por marcador.",
+   "fuente": "Plaza Pública (Guatemala); Infobae/Prensa Libre (extracto)",
+   "url": "https://www.plazapublica.com.gt/centroamerica/reportaje/norte-de-centroamerica-inundado-por-cigarrillos-asiaticos-de-contrabando",
+   "nota": "4-6 mil millones de cigarrillos/año hacia zonas francas de Belice, por encima del consumo legítimo. Puerto de embarque chino no consta. Incidencias por país de gremios (actor interesado)."
+  },
+  {
+   "id": "CB-C5",
+   "nombre": "Cigarrillos: Benque Viejo (Belice) → Melchor de Mencos (GT) → El Florido/pasos ciegos → Honduras occidental",
+   "subtipo": "Cigarrillos",
+   "waypoints": [
+    [
+     -89.14,
+     17.08,
+     "Benque Viejo del Carmen, Belice",
+     "origen"
+    ],
+    [
+     -89.15,
+     17.07,
+     "Melchor de Mencos, Guatemala",
+     "transito"
+    ],
+    [
+     -89.15,
+     14.79,
+     "El Florido (Copán), Honduras",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Punto de llegada por marcador.",
+   "fuente": "Plaza Pública (Guatemala)",
+   "url": "https://www.plazapublica.com.gt/centroamerica/reportaje/norte-de-centroamerica-inundado-por-cigarrillos-asiaticos-de-contrabando",
+   "nota": "La fuente lista El Florido, El Paraíso, El Corinto y Agua Caliente como llegadas sin decir cuál recibe cada envío. El Florido es marcador."
+  },
+  {
+   "id": "CB-F1",
+   "nombre": "Combustible (diésel, gasolina, GLP): Bolivia (Desaguadero) → Juli → Puno/Juliaca (Perú)",
+   "subtipo": "Combustible",
+   "waypoints": [
+    [
+     -69.04,
+     -16.57,
+     "Desaguadero, Bolivia",
+     "origen"
+    ],
+    [
+     -69.46,
+     -16.21,
+     "Juli",
+     "transito"
+    ],
+    [
+     -70.13,
+     -15.5,
+     "Juliaca",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2022,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "eju.tv (2025); Infobae Perú (2025), Policía y SUNAT (actor interesado)",
+   "url": "https://eju.tv/2025/12/el-negocio-del-combustible-boliviano-se-acaba-en-peru-tras-el-levantamiento-de-la-subvencion/",
+   "nota": "HISTÓRICO/sentido en revisión: el 18/12/2025 Bolivia eliminó el subsidio y el negocio 'ya no resulta rentable' (eju.tv), aunque el GLP 'aumenta' porque sigue más barato (Infobae). Magnitud y sentido pueden haber cambiado.",
+   "estado": "historica"
+  },
+  {
+   "id": "CB-F2a",
+   "nombre": "Combustible subsidiado boliviano → Guayaramerín → Guajará-Mirim (Brasil)",
+   "subtipo": "Combustible",
+   "waypoints": [
+    [
+     -65.35,
+     -10.81,
+     "Guayaramerín, Bolivia",
+     "origen"
+    ],
+    [
+     -65.34,
+     -10.78,
+     "Guajará-Mirim, Brasil",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": true,
+   "base": "Salida por ciudad gemela.",
+   "fuente": "El Post (Bolivia, 2025), Plan Soberanía del Gobierno (actor interesado)",
+   "url": "https://elpost.com.bo/2025/12/26/el-combustible-barato-de-bolivia-se-iba-a-cinco-paises-vecinos/",
+   "nota": "El contrabando habría sido ~30% del combustible subsidiado (~US$600 M/año). Mismo riesgo de sentido tras el fin del subsidio (dic 2025).",
+   "estado": "historica"
+  },
+  {
+   "id": "CB-F2b",
+   "nombre": "Combustible subsidiado boliviano → Puerto Quijarro → Corumbá (Brasil)",
+   "subtipo": "Combustible",
+   "waypoints": [
+    [
+     -57.72,
+     -17.78,
+     "Puerto Quijarro, Bolivia",
+     "origen"
+    ],
+    [
+     -57.65,
+     -19.01,
+     "Corumbá, Brasil",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": true,
+   "base": "Salida por ciudad gemela.",
+   "fuente": "El Post (Bolivia, 2025), Plan Soberanía (actor interesado)",
+   "url": "https://elpost.com.bo/2025/12/26/el-combustible-barato-de-bolivia-se-iba-a-cinco-paises-vecinos/",
+   "nota": "También salía hacia Chile (23 pasos nuevos en 2025), Argentina y Paraguay, sin puntos concretos.",
+   "estado": "historica"
+  },
+  {
+   "id": "CB-F3",
+   "nombre": "Combustible (gasolina): Santa Elena de Uairén (VE) → Pacaraima → Boa Vista (Brasil)",
+   "subtipo": "Combustible",
+   "waypoints": [
+    [
+     -61.11,
+     4.6,
+     "Santa Elena de Uairén, Venezuela",
+     "origen"
+    ],
+    [
+     -61.15,
+     4.48,
+     "Pacaraima",
+     "transito"
+    ],
+    [
+     -60.67,
+     2.82,
+     "Boa Vista, Brasil",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2017,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Policía Federal de Brasil (op. Bachaquero 2017, actor interesado) vía Diario Las Américas",
+   "url": "https://www.diariolasamericas.com/america-latina/brasil-inicia-operacion-contra-contrabando-combustible-venezuela-n4134281",
+   "nota": "SENTIDO INVERTIDO después: en la escasez posterior Venezuela recibió gasolina desde Colombia y Brasil (InSight Crime). Dato de 2017.",
+   "estado": "historica"
+  },
+  {
+   "id": "CB-F4",
+   "nombre": "Combustible (diésel, gasolina subsidiados): El Oro (EC) → Huaquillas → Aguas Verdes → Tumbes (Perú)",
+   "subtipo": "Combustible",
+   "waypoints": [
+    [
+     -79.96,
+     -3.26,
+     "Machala (El Oro, marcador)",
+     "origen"
+    ],
+    [
+     -80.23,
+     -3.48,
+     "Huaquillas",
+     "transito"
+    ],
+    [
+     -80.45,
+     -3.57,
+     "Tumbes, Perú",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2024,
+   "construccion_propia": true,
+   "base": "Origen por marcador provincial.",
+   "fuente": "Primicias; Infobae (2025), Petroecuador (actor interesado)",
+   "url": "https://www.infobae.com/america/america-latina/2025/09/18/contrabando-de-diesel-dreno-mas-de-120-millones-de-dolares-del-estado-ecuatoriano/",
+   "nota": "148 km de frontera con ≥34 pasos ilegales. Ecuador quitó el subsidio al diésel en sep 2025 y el contrabando continúa. Cifras del Estado (actor interesado). Machala = marcador provincial."
+  },
+  {
+   "id": "CB-F5",
+   "nombre": "Combustible (gasolina): Esmeraldas/Carchi (EC) → Tulcán → Ipiales → Nariño (Colombia)",
+   "subtipo": "Combustible",
+   "waypoints": [
+    [
+     -77.72,
+     0.81,
+     "Tulcán, Ecuador",
+     "origen"
+    ],
+    [
+     -77.64,
+     0.83,
+     "Ipiales",
+     "transito"
+    ],
+    [
+     -77.28,
+     1.21,
+     "Pasto",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Ruta y destino por marcadores.",
+   "fuente": "Primicias (extracto)",
+   "url": "https://www.primicias.ec/noticias/economia/contrabando-combustibles-400-millones-anuales/",
+   "nota": "En Nariño 'lo más incautado es gasolina'; sentido EC→CO por precios subsidiados. Pasto es marcador. El Gobierno acusa a grupos armados de los tres países."
+  },
+  {
+   "id": "CB-F6",
+   "nombre": "Combustible ('huachicol fiscal', diésel con documentación falsa): Texas (EE.UU.) → Tampico/Altamira (México)",
+   "subtipo": "Combustible",
+   "waypoints": [
+    [
+     -95.27,
+     29.73,
+     "Houston, Texas (marcador)",
+     "origen"
+    ],
+    [
+     -97.85,
+     22.25,
+     "Tampico, México",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Puerto de embarque por marcador.",
+   "fuente": "Milenio e Infobae (2025-2026), FGR y SAT (actor interesado)",
+   "url": "https://www.milenio.com/estados/huachicol-fiscal-tampico-epicentro-decomiso-combustible",
+   "nota": "Buque Challenge Procyon: 10 millones de litros de diésel declarados como 'aditivos' (19/3/2025). Tamaulipas: >15 millones de litros decomisados en 2025; SAT sancionó a 2.205 empresas. Puerto de embarque exacto no consta."
+  }
+ ],
+ "cobertura_parcial": "Cobertura parcial: se cubren cigarrillos, combustible, electrónica, vehículos, medicamentos, licor y textiles en los corredores mejor documentados (Triple Frontera, Zofri-Bolivia-Perú, Colón, frontera andina, Belice-Centroamérica, huachicol fiscal). Quedan fuera por falta de ruta documentada: medicamentos en Bolivia y el resto de la región, autopartes (sin ruta autónoma), licor de producción doméstica, cigarrillos hacia Argentina, y varios corredores de combustible boliviano (Chile/Argentina/Paraguay). La dirección de un flujo de frontera puede invertirse según precios. La ausencia de una línea NO implica ausencia de flujo."
+}

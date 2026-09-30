@@ -1,0 +1,1548 @@
+{
+ "flujo_nombre": "migracion",
+ "es_prototipo": false,
+ "corte": "2026-09-30",
+ "rutas": [
+  {
+   "id": "RUTA-01",
+   "nombre": "Corredor del Darién: Sudamérica – Necoclí – Darién – Panamá – Costa Rica – Nicaragua – Honduras – Guatemala – México – EE.UU.",
+   "waypoints": [
+    [
+     -66.59,
+     6.42,
+     "Venezuela (origen mayoritario 2022-2024)",
+     "origen"
+    ],
+    [
+     -76.7833,
+     8.4167,
+     "Necoclí (puerto de embarque)",
+     "transito"
+    ],
+    [
+     -76.7333,
+     8.1,
+     "Turbo (embarque alternativo)",
+     "transito"
+    ],
+    [
+     -77.2778,
+     8.5114,
+     "Acandí (cruce del golfo de Urabá)",
+     "transito"
+    ],
+    [
+     -77.3333,
+     8.6167,
+     "Capurganá (ruta norte, más cara)",
+     "transito"
+    ],
+    [
+     -78.15,
+     8.3833,
+     "Bajo Chiquito (estación de recepción, Darién)",
+     "transito"
+    ],
+    [
+     -77.97,
+     8.5,
+     "Lajas Blancas (ETRM, cerrado en 2025); se usa Metetí como proxy",
+     "transito"
+    ],
+    [
+     -82.8386,
+     8.534,
+     "Paso Canoas (Panamá a Costa Rica)",
+     "transito"
+    ],
+    [
+     -84.599,
+     10.9639,
+     "Los Chiles (salida de Costa Rica hacia Nicaragua)",
+     "transito"
+    ],
+    [
+     -85.21,
+     12.87,
+     "Nicaragua (sin nodo publicado)",
+     "transito"
+    ],
+    [
+     -85.983,
+     14.067,
+     "Trojes / Danlí (ingreso a Honduras por la frontera con Nicaragua)",
+     "transito"
+    ],
+    [
+     -89.35,
+     14.5667,
+     "Esquipulas (Guatemala)",
+     "transito"
+    ],
+    [
+     -92.1509,
+     14.6795,
+     "Ciudad Hidalgo / Tecún Umán (Suchiate)",
+     "transito"
+    ],
+    [
+     -92.2667,
+     14.9,
+     "Tapachula (cuello de botella)",
+     "transito"
+    ],
+    [
+     -106.4886,
+     31.7592,
+     "Frontera sur de EE.UU. (punto ilustrativo: El Paso/Ciudad Juárez)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2021,
+   "poblacion": "mixto (2022-2024: venezolanos, haitianos, ecuatorianos, cubanos, colombianos, chinos; ver serie)",
+   "mercado": "EE.UU.",
+   "construccion_propia": true,
+   "base": "Tramos Colombia a Panamá y Panamá a Costa Rica: afirmados por SNM, HRW, CSIS, InSight Crime y Encartes. Los nodos intermedios se ordenan según Encartes y OIM Honduras. Ver tramos.",
+   "fuente": "SNM Panamá 2020-2026 (F2-F9), Cuadros 001-005 · HRW 2023 (F22), 'Acandí–Bajo Chiquito–Lajas Blancas' y 'Capurganá–Canaán Membrillo–San Vicente' · CSIS 2024 (F23)",
+   "url": "https://www.migracion.gob.pa/estadisticas/",
+   "nota": "VIGENCIA: el corredor colapsó — 520.085 cruces (2023) → 302.203 (2024) → 3.091 (2025) → 468 (ene-ago 2026). Se muestra como histórico, no como flujo principal vigente. El SNM cuenta 'tránsito irregular de extranjeros por la frontera con Colombia': 520.085 en 2023 (récord), 302.203 en 2024, 3.091 en 2025 (cifras revisadas) y 468 en ene-ago 2026 (preliminar). HRW y Encartes describen las dos vías de selva; InSight Crime dice que la AGC obliga a pasar por Acandí y co",
+   "estado": "historica",
+   "subtipo": "Tránsito hacia el norte"
+  },
+  {
+   "id": "RUTA-02",
+   "nombre": "Venezuela – Cúcuta/San Antonio del Táchira – Colombia (asentamiento y tránsito)",
+   "waypoints": [
+    [
+     -66.59,
+     6.42,
+     "Venezuela",
+     "origen"
+    ],
+    [
+     -72.5039,
+     7.8942,
+     "Cúcuta / San Antonio del Táchira",
+     "transito"
+    ],
+    [
+     -74.3,
+     4.57,
+     "Colombia (acogida: 2,84 M, R4V ago 2026)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2017,
+   "poblacion": "venezolanos",
+   "mercado": "Colombia (y tránsito hacia Ecuador, Perú y Chile)",
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "R4V Stock Map ago 2026 (F11) · R4V Stock Map nov 2024 (F12) · Migración Colombia y M3 vía Valora Analitik, 1T 2026 (F43)",
+   "url": "https://www.r4v.info/sites/g/files/tmzbdl2426/files/2026-08/Stock%20Map_Aug26_Eng.pdf",
+   "nota": "R4V ago 2026: Colombia 2,84 M (nov 2024: 2,81 M). Migración Colombia y M3, 1T 2026: cerca de 11 millones de movimientos (5,4 M de entradas y 5,4 M de salidas). Norte de Santander (Cúcuta–San Antonio) concentra 86,8 %, Arauca 11,3 % y La Guajira 1,9 %. Solo 182.000 entradas y 184.000 salidas fueron d",
+   "subtipo": "Intrarregional y asentamiento"
+  },
+  {
+   "id": "RUTA-03",
+   "nombre": "Colombia – Rumichaca (Ecuador) – Huaquillas/Aguas Verdes–Tumbes (Perú) – Chile (Tacna/Arica o Bolivia–Colchane)",
+   "waypoints": [
+    [
+     -74.3,
+     4.57,
+     "Colombia",
+     "origen"
+    ],
+    [
+     -77.6444,
+     0.8303,
+     "Ipiales / Rumichaca (frontera norte de Ecuador)",
+     "transito"
+    ],
+    [
+     -80.25,
+     -3.4833,
+     "Huaquillas / Aguas Verdes (Ecuador–Perú)",
+     "transito"
+    ],
+    [
+     -70.3212,
+     -18.4784,
+     "Tacna / Arica (Perú–Chile)",
+     "transito"
+    ],
+    [
+     -68.6396,
+     -19.2754,
+     "Colchane (entrada desde Bolivia)",
+     "transito"
+    ],
+    [
+     -71.54,
+     -35.68,
+     "Chile (acogida: 669,4 mil)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "poblacion": "venezolanos",
+   "mercado": "Perú (1,63 M), Chile (669,4 mil), Ecuador (440,5 mil)",
+   "construccion_propia": true,
+   "base": "El eslabón Perú → Bolivia → Colchane es inferido; ver tramos.",
+   "fuente": "R4V Reporte de Movimientos ene-mar 2025, mapa consolidado y notas por país (F13) · R4V Stock Map ago 2026 (F11) · Servicio Nacional de Migraciones de Chile vía La Tercera (F42)",
+   "url": "https://r4v.info/sites/g/files/tmzbdl2426/files/2025-07/MoM%20JAN-MAR%20Q1_2025_[ESP].pdf",
+   "nota": "R4V, 1T 2025: Ecuador 69,5 mil entradas y 62,8 mil salidas (regulares e irregulares). Los cruces irregulares por su frontera norte bajaron 17 % en entradas y 36 % en salidas frente al 1T 2024. Perú 54,3 mil entradas y 52,7 mil salidas. Chile 69,5 mil entradas y 56,7 mil salidas, regulares. Ecuador y",
+   "subtipo": "Intrarregional y asentamiento"
+  },
+  {
+   "id": "RUTA-04",
+   "nombre": "Venezuela – Pacaraima – Boa Vista – interiorización (Paraná, São Paulo, Santa Catarina, otros)",
+   "waypoints": [
+    [
+     -66.59,
+     6.42,
+     "Venezuela",
+     "origen"
+    ],
+    [
+     -61.1461,
+     4.4311,
+     "Pacaraima (Roraima)",
+     "transito"
+    ],
+    [
+     -60.6714,
+     2.8194,
+     "Boa Vista (Roraima)",
+     "transito"
+    ],
+    [
+     -51.93,
+     -14.24,
+     "Brasil (destino de interiorización; estados nombrados por la fuente)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2018,
+   "poblacion": "venezolanos",
+   "mercado": "Brasil (797,3 mil, R4V ago 2026)",
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "OIM Brasil, Operação Acolhida (F44) · R4V Stock Map ago 2026 (F11) y nov 2024 (F12)",
+   "url": "https://brazil.iom.int/pt-br/news/operacao-acolhida-atinge-marca-de-100-mil-pessoas-refugiadas-e-migrantes-venezuelanas-interiorizadas",
+   "nota": "OIM Brasil: Pacaraima y Boa Vista son las áreas de recepción; la interiorización desde abril de 2018 llegó a 100.000 personas el 30/3/2023, en más de 930 municipios. Destinos principales: Paraná, São Paulo, Rio de Janeiro, Santa Catarina, Mato Grosso do Sul y Amazonas. Stock según R4V: 626,9 mil (no",
+   "subtipo": "Intrarregional y asentamiento"
+  },
+  {
+   "id": "RUTA-05",
+   "nombre": "Flujo inverso: Honduras/Guatemala/México – Costa Rica (Paso Canoas) – Panamá – Puerto Miramar/Palenque (Colón) – Puerto Obaldía/Capurganá – Colombia – Venezuela",
+   "waypoints": [
+    [
+     -102.55,
+     23.63,
+     "México (varados tras el cierre de CBP One y el endurecimiento de EE.UU.)",
+     "origen"
+    ],
+    [
+     -86.5833,
+     14.05,
+     "El Paraíso (Honduras), sentido norte-sur",
+     "transito"
+    ],
+    [
+     -82.8386,
+     8.534,
+     "Paso Canoas (ingreso a Panamá desde Costa Rica)",
+     "transito"
+    ],
+    [
+     -79.8986,
+     9.3572,
+     "Colón (Puerto Miramar/Palenque, embarque)",
+     "transito"
+    ],
+    [
+     -77.4191,
+     8.6672,
+     "Puerto Obaldía (Guna Yala)",
+     "transito"
+    ],
+    [
+     -77.3333,
+     8.6167,
+     "Capurganá (llegada a la costa caribe colombiana)",
+     "transito"
+    ],
+    [
+     -76.7833,
+     8.4167,
+     "Necoclí → Medellín (concentrador terrestre)",
+     "transito"
+    ],
+    [
+     -66.59,
+     6.42,
+     "Venezuela (destino declarado por 64,55 % de los entrevistados norte-sur)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "poblacion": "venezolanos (más de 91 %), colombianos, ecuatorianos",
+   "mercado": "Venezuela y Colombia (retorno)",
+   "construccion_propia": true,
+   "base": "Solo el tramo Necoclí → Medellín → Venezuela es inferido; ver tramos.",
+   "fuente": "SNM Panamá / Destino Panamá, 10/9/2026 (F31) · OACNUDH, 29/8/2025 (F30) · R4V ene-mar 2025 (F13)",
+   "url": "https://destinopanama.com.pa/2026/09/flujo-migratorio-inverso-suma-6293-ingresos-a-panama-en-2026/",
+   "nota": "Ingresos a Panamá por el flujo inverso: 22.833 en 2025 y 6.293 en 2026 hasta el 7/9 (5.754 venezolanos; 222 colombianos; 74 ecuatorianos; 64 de EE.UU.). Entran por Paso Canoas (principal), Río Sereno y Guabito, y embarcan en Puerto Miramar y Puerto Palenque. OACNUDH: 14.000 o más retornos ene-ago 20",
+   "estado": "vigente_2026",
+   "subtipo": "Flujo inverso y retorno"
+  },
+  {
+   "id": "RUTA-06",
+   "nombre": "Cuba – Estrecho de Florida – Florida (Cayos / Miami)",
+   "waypoints": [
+    [
+     -77.78,
+     21.52,
+     "Cuba",
+     "origen"
+    ],
+    [
+     -81.7819,
+     24.555,
+     "Estrecho de Florida (Cayos de Florida, Key West)",
+     "transito"
+    ],
+    [
+     -80.16,
+     25.73,
+     "Virginia Key / Miami (punto de arribo citado por CBS)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "poblacion": "cubanos",
+   "mercado": "EE.UU. (Florida)",
+   "construccion_propia": true,
+   "base": "El origen en Cuba es implícito: las fuentes hablan de 'cubanos interceptados', no de puertos de salida.",
+   "fuente": "CBS News, enero de 2023 (F26) · GAO-26-107440, Operation Vigilant Sentry (F25)",
+   "url": "https://www.cbsnews.com/news/us-coast-guard-intercepts-migrants-cuba-haiti-sea-florida/",
+   "nota": "CBS: más de 6.100 cubanos interceptados en el FY2022 y más de 4.900 desde el 1/10/2022 hasta enero de 2023; el arribo citado es Virginia Key, en Miami. GAO: cerca de 70.000 migrantes intentaron cruzar el Caribe y el Estrecho de Florida entre los FY2022 y FY2024 (Operation Vigilant Sentry, desde agos",
+   "subtipo": "Tránsito hacia el norte"
+  },
+  {
+   "id": "RUTA-07",
+   "nombre": "Haití – Gran Inagua (Bahamas) / Providenciales (Turks y Caicos) – hacia EE.UU.",
+   "waypoints": [
+    [
+     -72.29,
+     18.97,
+     "Haití",
+     "origen"
+    ],
+    [
+     -73.3,
+     21.05,
+     "Gran Inagua (Bahamas): una lancha con 257 migrantes interceptada el 6/4/2024",
+     "transito"
+    ],
+    [
+     -72.27,
+     21.77,
+     "Providenciales (Turks y Caicos): 30 migrantes detectados el 5/4/2024",
+     "transito"
+    ],
+    [
+     -80.19,
+     25.76,
+     "EE.UU. (destino, según la fuente)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "poblacion": "haitianos",
+   "mercado": "EE.UU. (vía Bahamas y Turks y Caicos)",
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "The Watch, 30/5/2024 (F27) · GAO-26-107440 (F25)",
+   "url": "https://thewatch-journal.com/2024/05/30/bahamas-turks-and-caicos-collaborate-with-u-s-to-control-migrant-surge/",
+   "nota": "The Watch (Guardia Costera de EE.UU.): 11/3 a 6/4/2024, la Real Fuerza de Defensa de Bahamas aprehendió unos 676 migrantes y Turks y Caicos otros 300-400; el 7/3/2024 el cúter Venturous repatrió a 65 a Haití tras una interdicción cerca de Gran Inagua. Las fuentes de búsqueda mencionan 1.375 haitiano",
+   "subtipo": "Tránsito hacia el norte"
+  },
+  {
+   "id": "RUTA-08",
+   "nombre": "Haití – República Dominicana (frontera terrestre) y retornos forzados; desplazamiento interno en Haití",
+   "waypoints": [
+    [
+     -72.29,
+     18.97,
+     "Haití (1,5 M de desplazados internos, junio 2026)",
+     "origen"
+    ],
+    [
+     -70.16,
+     18.74,
+     "República Dominicana",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2024,
+   "poblacion": "haitianos",
+   "mercado": "República Dominicana (y retornos forzados a Haití)",
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "OIM, Haití 1,5 M desplazados, 5/6/2026 (F21)",
+   "url": "https://www.iom.int/news/haitis-displacement-crisis-hits-record-15-million-amid-escalating-violence",
+   "nota": "OIM: cerca de 1,5 M de personas desplazadas en Haití; Puerto Príncipe supera los 300.000 por primera vez, y el Departamento Sudeste recibe desplazados tras ataques armados. Desde principios de 2026 más de 110.000 haitianos fueron devueltos por la fuerza; la OIM no dice desde qué país. Los datos de d",
+   "subtipo": "Flujo inverso y retorno"
+  },
+  {
+   "id": "RUTA-09",
+   "nombre": "Haití – Brasil / Chile – (Colombia) – Darién – México – EE.UU.",
+   "waypoints": [
+    [
+     -72.29,
+     18.97,
+     "Haití",
+     "origen"
+    ],
+    [
+     -51.93,
+     -14.24,
+     "Brasil (residencia previa)",
+     "transito"
+    ],
+    [
+     -71.54,
+     -35.68,
+     "Chile (residencia previa)",
+     "transito"
+    ],
+    [
+     -76.7833,
+     8.4167,
+     "Necoclí (entrada al Darién)",
+     "transito"
+    ],
+    [
+     -106.4886,
+     31.7592,
+     "Frontera sur de EE.UU.",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2021,
+   "poblacion": "haitianos y sus hijos nacidos en Chile y Brasil",
+   "mercado": "EE.UU.",
+   "construccion_propia": true,
+   "base": "El tramo intermedio Chile/Brasil → Colombia es inferido; ver tramos.",
+   "fuente": "SNM 2021-2024, Cuadro 004 y nota (1) (F2, F3, F5, F6) · LAWG (F46) · HRW (F22)",
+   "url": "https://www.migracion.gob.pa/wp-content/uploads/2026/03/IRREGULARES_POR_DARIEN_DICIEMBRE_2021.pdf",
+   "nota": "El SNM aclara que 'Chile' y 'Brasil' en su cuadro son 'hijos de ciudadanos haitianos cuyos registros de nacimiento corresponden a estos países'. Haití fue el primer origen en 2021 (82.952 de 133.726). Cifras del SNM por año: 22.435 en 2022; 46.422 en 2023; 11.954 en 2024; 48 en 2025. 'Chile': 9.587 ",
+   "subtipo": "Tránsito hacia el norte"
+  },
+  {
+   "id": "RUTA-10",
+   "nombre": "Cuba – Managua (vuelo) – Trojes/Danlí – Guatemala – México – EE.UU.",
+   "waypoints": [
+    [
+     -77.78,
+     21.52,
+     "Cuba (La Habana)",
+     "origen"
+    ],
+    [
+     -86.2514,
+     12.1364,
+     "Managua (aeropuerto; visa libre desde nov 2021 hasta feb 2026)",
+     "transito"
+    ],
+    [
+     -85.983,
+     14.067,
+     "Trojes / Danlí (frontera Nicaragua–Honduras)",
+     "transito"
+    ],
+    [
+     -92.2667,
+     14.9,
+     "Tapachula",
+     "transito"
+    ],
+    [
+     -106.4886,
+     31.7592,
+     "Frontera sur de EE.UU.",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2021,
+   "poblacion": "cubanos",
+   "mercado": "EE.UU.",
+   "construccion_propia": true,
+   "base": "Ver tramos: la fuente afirma la llegada a Managua y la entrada a Honduras por Danlí/Trojes, pero ninguna documenta el traslado entre ambas.",
+   "fuente": "Confidencial, 8/2/2026 (F28) · INM Honduras vía Swissinfo, 2025 (F29) · OIM/DTM Honduras 2025 (F15)",
+   "url": "https://confidencial.digital/en/english/nicaragua-eliminates-visa-free-entry-for-cuban-citizens/",
+   "nota": "Confidencial: Nicaragua dejó sin efecto la visa libre para cubanos el 8/2/2026 (categoría A a C, visa consultiva gratuita). En diciembre de 2021 llegaron 6.178 cubanos. INM Honduras 2024: cubanos 60.007, segundo grupo tras 187.331 venezolanos. OIM Honduras 2025: 60,15 % de los 23.455 ingresos ene-ag",
+   "subtipo": "Tránsito hacia el norte"
+  },
+  {
+   "id": "RUTA-11",
+   "nombre": "Asia/África – Ecuador (ingreso aéreo sin visa) – Colombia – Necoclí – Darién",
+   "waypoints": [
+    [
+     104.2,
+     35.86,
+     "Asia/África (China como caso documentado)",
+     "origen"
+    ],
+    [
+     -78.18,
+     -1.83,
+     "Ecuador (ingreso; visa libre para chinos hasta el 1/7/2024)",
+     "transito"
+    ],
+    [
+     -77.6444,
+     0.8303,
+     "Ipiales / Rumichaca",
+     "transito"
+    ],
+    [
+     -76.7833,
+     8.4167,
+     "Necoclí",
+     "transito"
+    ],
+    [
+     -106.4886,
+     31.7592,
+     "Darién → Panamá → ... → frontera de EE.UU. (ver RUTA-01)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2023,
+   "poblacion": "extracontinentales",
+   "mercado": "EE.UU. / Canadá",
+   "construccion_propia": true,
+   "base": "Tramo Ecuador → Colombia inferido; ver tramos.",
+   "fuente": "VOA, 1/7/2024 (F41) · SNM 2020-2026, Cuadro 001 y 004 (F2-F9) · CSIS (F23)",
+   "url": "https://www.voanews.com/a/ecuador-ends-visa-free-entry-for-chinese-nationals/7671139.html",
+   "nota": "Ecuador suspendió la visa libre para chinos el 1/7/2024. Encuentros de chinos en la frontera de EE.UU.: cerca de 6.000 en diciembre de 2023 y unos 3.600 en mayo de 2024. Serie SNM de Asia en el Darién: 4.529 (2021), 13.664 (2022), 42.386 (2023), 28.735 (2024), 662 (2025). Serie de África: 5.064; 12.",
+   "subtipo": "Tránsito hacia el norte"
+  },
+  {
+   "id": "RUTA-12",
+   "nombre": "Guyana – Brasil – Manaus – Tabatinga – Colombia/Perú (corredor amazónico)",
+   "waypoints": [
+    [
+     -58.93,
+     4.86,
+     "Guyana (punto de partida citado)",
+     "origen"
+    ],
+    [
+     -60.0217,
+     -3.1189,
+     "Manaus (viaje de 2 días por tierra desde la frontera)",
+     "transito"
+    ],
+    [
+     -69.9381,
+     -4.2525,
+     "Tabatinga (por río, aprox. 1 semana; frontera con Colombia y Perú)",
+     "transito"
+    ],
+    [
+     -69.9333,
+     -4.2167,
+     "Leticia (Colombia), cruce de frontera",
+     "transito"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2023,
+   "poblacion": "extracontinentales (además de cubanos y haitianos)",
+   "mercado": "EE.UU. / Canadá (vía Darién)",
+   "construccion_propia": true,
+   "base": "Una sola fuente (Voz de América, con datos de Interpol) y un tramo posterior inferido; ver tramos.",
+   "fuente": "Voz de América, 11/12/2023, sobre Operación Turquesa V de Interpol (F40) · CSIS (F23)",
+   "url": "https://www.vozdeamerica.com/a/aumento-inmigrantes-asia-africa-convierte-selva-amazonica-corredor/7393403.html",
+   "nota": "Operación Turquesa V: 257 detenidos, 163 víctimas de trata rescatadas y cerca de 12.000 migrantes indocumentados de 69 países detectados. China fue el tercer origen, tras Venezuela y Ecuador. La nota de Interpol la califica de 'corredor antes considerado reservado a las Américas' y hoy objetivo del ",
+   "subtipo": "Intrarregional y asentamiento"
+  },
+  {
+   "id": "RUTA-13",
+   "nombre": "Triángulo Norte – Guatemala (Esquipulas / Tecún Umán) – Tapachula – Oaxaca – frontera de EE.UU.",
+   "waypoints": [
+    [
+     -88.9,
+     13.79,
+     "El Salvador (El Amatillo, frontera con Honduras; nodo citado por Encartes)",
+     "origen"
+    ],
+    [
+     -86.24,
+     15.2,
+     "Honduras",
+     "origen"
+    ],
+    [
+     -89.35,
+     14.5667,
+     "Esquipulas (punto de monitoreo de flujo OIM)",
+     "transito"
+    ],
+    [
+     -92.1509,
+     14.6795,
+     "Ciudad Hidalgo / Tecún Umán (Suchiate)",
+     "transito"
+    ],
+    [
+     -92.2667,
+     14.9,
+     "Tapachula",
+     "transito"
+    ],
+    [
+     -95.2389,
+     16.3244,
+     "Tehuantepec (Oaxaca; Encartes cita San Pedro Tapanatepec / Tehuantepec)",
+     "transito"
+    ],
+    [
+     -106.4886,
+     31.7592,
+     "Frontera sur de EE.UU. (El Paso, Reynosa, Matamoros y otros)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2014,
+   "poblacion": "guatemaltecos, hondureños, salvadoreños (además de los del corredor mixto)",
+   "mercado": "EE.UU.",
+   "construccion_propia": true,
+   "base": "El trazado ordena nodos que Encartes y la OIM nombran; falta cifra por nacionalidad de CBP.",
+   "fuente": "CRS IF12538 (F37) · OIM/DTM Guatemala (F17) · OIM/DTM México jun-ago 2025 (F16)",
+   "url": "https://www.congress.gov/crs_external_products/IF/PDF/IF12538/IF12538.5.pdf",
+   "nota": "CRS: 'la gran mayoría' de los migrantes encontrados en la frontera durante la última década era de México o del norte de Centroamérica, pero en FY2024 una leve mayoría fue de otros países; al menos 89 % procede del hemisferio occidental. WOLA y CBP, FY2024 frente a FY2023: Guatemala -7 %, Honduras -",
+   "subtipo": "Tránsito hacia el norte"
+  },
+  {
+   "id": "MG-01",
+   "nombre": "Migración extracontinental: China → Ecuador → Colombia → Necoclí → Darién → frontera EE.UU.",
+   "subtipo": "Extracontinental",
+   "waypoints": [
+    [
+     104.2,
+     35.9,
+     "China (centroide)",
+     "origen"
+    ],
+    [
+     -78.47,
+     -0.18,
+     "Quito (entrada aérea, marcador)",
+     "transito"
+    ],
+    [
+     -76.78,
+     8.43,
+     "Necoclí",
+     "transito"
+    ],
+    [
+     -77.85,
+     8.22,
+     "Bajo Chiquito (Darién)",
+     "transito"
+    ],
+    [
+     -110.9,
+     31.3,
+     "Frontera EE.UU.–México (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2023,
+   "construccion_propia": true,
+   "base": "Ciudad de entrada y destino por marcador.",
+   "fuente": "Mixed Migration Centre (2025, independiente); Asia Matters for America",
+   "url": "https://mixedmigration.org/publications/mmr/2025/chinese-migrants-latin-america-survival-solidarity/",
+   "nota": "Ecuador era la entrada aérea sin visa (restablecida jul 2024). El flujo se colapsó en 2025-26. Ciudad de entrada y punto final por marcador."
+  },
+  {
+   "id": "MG-02",
+   "nombre": "Migración extracontinental: África → Brasil/Ecuador → Necoclí → Darién → Centroamérica → frontera EE.UU.",
+   "subtipo": "Extracontinental",
+   "waypoints": [
+    [
+     17.0,
+     2.0,
+     "África (centroide)",
+     "origen"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "São Paulo (entrada aérea, marcador)",
+     "transito"
+    ],
+    [
+     -76.78,
+     8.43,
+     "Necoclí",
+     "transito"
+    ],
+    [
+     -82.84,
+     8.53,
+     "Paso Canoas",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "transito"
+    ],
+    [
+     -110.9,
+     31.3,
+     "Frontera EE.UU.–México (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2013,
+   "construccion_propia": true,
+   "base": "Orden intermedio y ciudades por marcador.",
+   "fuente": "Migration Policy Institute (2021, independiente); OIM (2019, multilateral)",
+   "url": "https://www.migrationpolicy.org/sites/default/files/publications/mpi-african-migration-americas-eng_final.pdf",
+   "nota": ">5.000 encuentros de africanos de 35 países en la frontera EE.UU. (FY2019). Datos previos al colapso; hoy 'prácticamente desaparecieron' (Infobae 2026). Orden intermedio y ciudades por marcador."
+  },
+  {
+   "id": "MG-03",
+   "nombre": "Migración extracontinental: África occidental → Managua → Honduras → Guatemala → frontera EE.UU. (evita el Darién)",
+   "subtipo": "Extracontinental",
+   "waypoints": [
+    [
+     0.0,
+     10.0,
+     "África occidental/central (centroide)",
+     "origen"
+    ],
+    [
+     -86.25,
+     12.13,
+     "Managua",
+     "transito"
+    ],
+    [
+     -86.58,
+     14.03,
+     "Danlí (marcador)",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "transito"
+    ],
+    [
+     -110.9,
+     31.3,
+     "Frontera EE.UU.–México (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": true,
+   "base": "Danlí y cruce por marcador.",
+   "fuente": "Voz de América (relato de migrantes); INM de Honduras (actor interesado) vía MPI",
+   "url": "https://www.voanews.com/a/african-asian-migrants-seek-nicaragua-shortcut-to-us-/7418273.html",
+   "nota": "+553% de llegadas de africanos a Honduras (19.412 en 2023, dato del INM). Vuelo a Nicaragua y luego tierra. Danlí y cruce final por marcador."
+  },
+  {
+   "id": "MG-07",
+   "nombre": "Migración: La Habana → (vuelo chárter) → Managua → Honduras → Guatemala → México (Tapachula)",
+   "subtipo": "Tránsito hacia el norte",
+   "waypoints": [
+    [
+     -82.37,
+     23.11,
+     "La Habana",
+     "origen"
+    ],
+    [
+     -86.25,
+     12.13,
+     "Managua",
+     "transito"
+    ],
+    [
+     -86.58,
+     14.03,
+     "Danlí (marcador)",
+     "transito"
+    ],
+    [
+     -92.14,
+     14.68,
+     "Tecún Umán–Ciudad Hidalgo",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2021,
+   "construccion_propia": true,
+   "base": "Cruces por marcador.",
+   "fuente": "OIM vía Directorio Cubano; Tico Times; Inter-American Dialogue",
+   "url": "https://www.directoriocubano.info/acontecer/cubanos-america-latina-nuevo-destino-migratorio-oim/",
+   "nota": "≥100.000 pasajeros de Haití y Cuba en chárteres a Nicaragua en 2023. Las entradas cubanas cayeron tras la visa nicaragüense (feb 2026). Orden de países de la OIM; cruces por marcador."
+  },
+  {
+   "id": "MG-10",
+   "nombre": "Migración (balseros): Cuba → Estrecho de Florida → Cayos de Florida",
+   "subtipo": "Tránsito hacia el norte",
+   "waypoints": [
+    [
+     -82.36,
+     23.14,
+     "La Habana (costa norte, marcador)",
+     "origen"
+    ],
+    [
+     -81.5,
+     24.0,
+     "Estrecho de Florida (marcador)",
+     "transito"
+    ],
+    [
+     -81.09,
+     24.71,
+     "Marathon, Cayos de Florida",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2024,
+   "construccion_propia": true,
+   "base": "Puntos por marcador; cuenta interceptados.",
+   "fuente": "Guardia Costera de EE.UU. y CBP (actor interesado)",
+   "url": "https://www.news.uscg.mil/Press-Releases/Article/4025128/coast-guard-repatriates-20-migrants-2-dogs-to-cuba/",
+   "nota": "308 repatriados a Cuba (FY2024). El registro cuenta interceptados/repatriados, no salidas ni llegadas no detectadas."
+  },
+  {
+   "id": "MG-12",
+   "nombre": "Migración: Haití (Cap-Haïtien) → Providenciales (Islas Turcas y Caicos)",
+   "subtipo": "Tránsito hacia el norte",
+   "waypoints": [
+    [
+     -72.2,
+     19.76,
+     "Cap-Haïtien (marcador)",
+     "origen"
+    ],
+    [
+     -72.27,
+     21.77,
+     "Providenciales",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Puerto de salida por marcador.",
+   "fuente": "Guardia Costera y CBP (actor interesado); The Haitian Times",
+   "url": "https://haitiantimes.com/2025/04/02/depoted-haitians-turks-and-caicos/",
+   "nota": "240 personas a 15 millas al sur de las islas (2026, Op. Vigilant Sentry); 98 haitianos (abr 2025). Puerto de salida no verificado."
+  },
+  {
+   "id": "MG-13",
+   "nombre": "Migración (yolas): República Dominicana (costa este) → Canal de la Mona → Puerto Rico",
+   "subtipo": "Tránsito hacia el norte",
+   "waypoints": [
+    [
+     -68.71,
+     18.62,
+     "Higüey (costa este, marcador)",
+     "origen"
+    ],
+    [
+     -67.89,
+     18.08,
+     "Isla de Mona",
+     "transito"
+    ],
+    [
+     -67.15,
+     18.43,
+     "Aguadilla",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2023,
+   "construccion_propia": true,
+   "base": "Puerto de salida por marcador.",
+   "fuente": "Guardia Costera de EE.UU. (actor interesado)",
+   "url": "https://www.news.uscg.mil/Press-Releases/Article/4591606/coast-guard-repatriates-75-migrants-to-dominican-republic-following-vessel-inte/",
+   "nota": "Septiembre 2026: 75 devueltos a RD. El registro cuenta interceptados; las llegadas no detectadas no figuran."
+  },
+  {
+   "id": "MG-14",
+   "nombre": "Migración: Haití → (Brasil o Chile) → Sudamérica → Darién → Centroamérica → Tapachula",
+   "subtipo": "Tránsito hacia el norte",
+   "waypoints": [
+    [
+     -72.31,
+     18.59,
+     "Puerto Príncipe",
+     "origen"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "Brasil (São Paulo, marcador)",
+     "transito"
+    ],
+    [
+     -76.78,
+     8.43,
+     "Necoclí",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2016,
+   "construccion_propia": true,
+   "base": "Orden inferido; caso cualitativo.",
+   "fuente": "IMUMI 'Un viaje de esperanza' (2023); Encartes",
+   "url": "https://imumi.org/2023/Un-viaje-de-esperanza-La-Migracion-de-Mujeres-Haitianas-a-Tapachula-Mexico.pdf",
+   "nota": "Testimonio cualitativo (mujeres haitianas). Orden inferido; no es flujo medido. En 2025 las caravanas cambiaron de meta."
+  },
+  {
+   "id": "MG-15",
+   "nombre": "Migración (caravanas): Tapachula → Ciudad de México / Guadalajara / Monterrey",
+   "subtipo": "Intrarregional y asentamiento",
+   "waypoints": [
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "origen"
+    ],
+    [
+     -99.13,
+     19.43,
+     "Ciudad de México",
+     "destino"
+    ],
+    [
+     -103.35,
+     20.67,
+     "Guadalajara",
+     "destino"
+    ],
+    [
+     -100.32,
+     25.69,
+     "Monterrey",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Metas sin trayecto único; cifras de ONG.",
+   "fuente": "La Jornada; CNN en Español; MSF",
+   "url": "https://www.jornada.com.mx/noticia/2026/06/16/estados/alistan-nueva-caravana-migrante-en-tapachula-chiapas-buscan-llegar-a-cdmx-guadalajara-y-monterrey",
+   "nota": "≥7 caravanas desde Chiapas (2025-26); 20.000-75.000 varados (estimación de ONG). Es asentamiento dentro de México, no tránsito a EE.UU."
+  },
+  {
+   "id": "MG-16",
+   "nombre": "Migración (asentamiento): La Habana → Mérida / Cancún / Ciudad de México (cubanos en México)",
+   "subtipo": "Intrarregional y asentamiento",
+   "waypoints": [
+    [
+     -82.37,
+     23.11,
+     "La Habana",
+     "origen"
+    ],
+    [
+     -89.62,
+     20.97,
+     "Mérida",
+     "destino"
+    ],
+    [
+     -86.85,
+     21.16,
+     "Cancún",
+     "destino"
+    ],
+    [
+     -99.13,
+     19.43,
+     "Ciudad de México",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": true,
+   "base": "Casos, no flujo; ciudades citadas.",
+   "fuente": "eltoque; Gatopardo; COMAR (actor interesado)",
+   "url": "https://eltoque.com/tres-migrantes-cubanos-buscaron-la-supervivencia-en-mexico",
+   "nota": "COMAR 2025: ~34.000 solicitudes de cubanos. Casos, no flujo medido. Ciudades citadas en los casos."
+  },
+  {
+   "id": "MG-17",
+   "nombre": "Migración: Colombia (Ipiales) → Rumichaca → Quito → Huaquillas → Tumbes → Lima",
+   "subtipo": "Intrarregional y asentamiento",
+   "waypoints": [
+    [
+     -77.67,
+     0.82,
+     "Ipiales–Rumichaca",
+     "origen"
+    ],
+    [
+     -78.47,
+     -0.18,
+     "Quito",
+     "transito"
+    ],
+    [
+     -80.23,
+     -3.48,
+     "Huaquillas",
+     "transito"
+    ],
+    [
+     -80.45,
+     -3.57,
+     "Tumbes",
+     "transito"
+    ],
+    [
+     -77.04,
+     -12.05,
+     "Lima",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2017,
+   "construccion_propia": true,
+   "base": "Tramo interno por marcador.",
+   "fuente": "OIM DTM Ecuador y Perú (multilateral)",
+   "url": "https://dtm.iom.int/ecuador",
+   "nota": "2018: 695.000 venezolanos cruzaron de Ecuador a Perú por Huaquillas–Tumbes (66% a Lima). 2026: ~515/día (entradas y salidas). Quito por marcador."
+  },
+  {
+   "id": "MG-18",
+   "nombre": "Migración: Perú → Desaguadero → Pisiga (Bolivia) → Colchane → Iquique → Santiago",
+   "subtipo": "Intrarregional y asentamiento",
+   "waypoints": [
+    [
+     -69.04,
+     -16.57,
+     "Desaguadero",
+     "origen"
+    ],
+    [
+     -68.68,
+     -19.25,
+     "Pisiga (Bolivia)",
+     "transito"
+    ],
+    [
+     -68.63,
+     -19.28,
+     "Colchane",
+     "transito"
+    ],
+    [
+     -70.15,
+     -20.21,
+     "Iquique",
+     "transito"
+    ],
+    [
+     -70.67,
+     -33.45,
+     "Santiago",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2021,
+   "construccion_propia": true,
+   "base": "Iquique/Santiago por marcador.",
+   "fuente": "PDI Chile (actor interesado) vía CIPER; Cooperativa",
+   "url": "https://www.ciperchile.cl/2026/09/23/entre-enero-y-agosto-se-detectaron-286-extranjeros-cruzando-ilegalmente-la-frontera-norte-93-menos-que-en-igual-periodo-de-2025/",
+   "nota": "Ene-ago 2026: 286 cruces detectados (-93,5% vs 2025). Reconducciones a Bolivia. Iquique/Santiago por marcador. El flujo sur-sur reciente es mayoría boliviana."
+  },
+  {
+   "id": "MG-20",
+   "nombre": "Migración: Venezuela (Güiria) → Trinidad y Tobago (Puerto España)",
+   "subtipo": "Intrarregional y asentamiento",
+   "waypoints": [
+    [
+     -62.3,
+     10.58,
+     "Güiria",
+     "origen"
+    ],
+    [
+     -61.51,
+     10.66,
+     "Puerto España",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "R4V (multilateral); ACNUR (naufragio 'Jhonnaly Jose'); MPI",
+   "url": "https://www.unhcr.org/africa/news/briefing-notes/fears-venezuelans-missing-caribbean-shipwreck",
+   "nota": "R4V proyecta ~35.702 venezolanos en T&T (2025). En oct 2025 T&T ordenó deportar ≥200 venezolanos."
+  },
+  {
+   "id": "MG-22",
+   "nombre": "Migración (interiorización): Pacaraima → Boa Vista → municipios de Brasil",
+   "subtipo": "Intrarregional y asentamiento",
+   "waypoints": [
+    [
+     -61.15,
+     4.48,
+     "Pacaraima",
+     "origen"
+    ],
+    [
+     -60.67,
+     2.82,
+     "Boa Vista",
+     "transito"
+    ],
+    [
+     -47.9,
+     -15.8,
+     "Brasil interior (centroide de destinos)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Destino por centroide.",
+   "fuente": "ACNUR Brasil (multilateral); Operação Acolhida (actor interesado)",
+   "url": "https://roraima1.com.br/entrada-de-venezuelanos-no-brasil-cai-nos-primeiros-dias-de-2026-aponta-operacao-acolhida/",
+   "nota": ">157.000 interiorizaciones a feb 2026. Entrada por Pacaraima cae en 2026. Destino por centroide (miles de municipios)."
+  },
+  {
+   "id": "MG-24",
+   "nombre": "Migración: Nicaragua → Peñas Blancas → San José (Costa Rica)",
+   "subtipo": "Intrarregional y asentamiento",
+   "waypoints": [
+    [
+     -85.83,
+     11.43,
+     "Nicaragua (Rivas, marcador)",
+     "origen"
+    ],
+    [
+     -85.63,
+     11.21,
+     "Peñas Blancas",
+     "transito"
+    ],
+    [
+     -84.08,
+     9.93,
+     "San José",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Rivas/San José por marcador.",
+   "fuente": "ACNUR Costa Rica (multilateral); Noticias ONU",
+   "url": "https://reporting.unhcr.org/operational/operations/costa-rica",
+   "nota": ">300.000 nicaragüenses han pedido asilo en Costa Rica desde 2018. Rivas y San José por marcador."
+  },
+  {
+   "id": "MG-25",
+   "nombre": "Migración (retorno): Chile → Venezuela (salvoconducto y salidas voluntarias)",
+   "subtipo": "Flujo inverso y retorno",
+   "waypoints": [
+    [
+     -70.67,
+     -33.45,
+     "Santiago",
+     "origen"
+    ],
+    [
+     -66.88,
+     10.49,
+     "Caracas",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2026,
+   "construccion_propia": true,
+   "base": "Escalas no constan; puntos por marcador.",
+   "fuente": "PDI Chile (actor interesado) vía CIPER; El Nacional (acuerdo Chile–Venezuela)",
+   "url": "https://www.ciperchile.cl/2026/09/23/entre-enero-y-agosto-se-detectaron-286-extranjeros-cruzando-ilegalmente-la-frontera-norte-93-menos-que-en-igual-periodo-de-2025/",
+   "nota": "'Hay más venezolanos saliendo de Chile que pretendiendo entrar'. Ene-jul 2026: 7.501 salieron por pasos habilitados (78% venezolanos). Medio de transporte y escalas no constan."
+  },
+  {
+   "id": "MG-28",
+   "nombre": "Migración (deportación): EE.UU. → Ciudad de Guatemala (vuelos)",
+   "subtipo": "Flujo inverso y retorno",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (centroide)",
+     "origen"
+    ],
+    [
+     -90.51,
+     14.63,
+     "Ciudad de Guatemala",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2026,
+   "construccion_propia": true,
+   "base": "Origen por centroide.",
+   "fuente": "Instituto Guatemalteco de Migración (actor interesado) vía Infobae",
+   "url": "https://www.infobae.com/guatemala/2026/08/31/cuatro-paises-de-centroamerica-quedaron-en-el-centro-de-una-nueva-red-de-traslados-migratorios-desde-estados-unidos-en-2026/",
+   "nota": "Ago 2026: 58 vuelos con 6.379 retornados; 390 vuelos en el año. Origen por centroide; cifras son vuelos y retornados, no rutas."
+  },
+  {
+   "id": "MG-29",
+   "nombre": "Migración (deportación): EE.UU. → Honduras (San Pedro Sula, vuelos)",
+   "subtipo": "Flujo inverso y retorno",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (centroide)",
+     "origen"
+    ],
+    [
+     -88.03,
+     15.5,
+     "San Pedro Sula (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2026,
+   "construccion_propia": true,
+   "base": "Destino por marcador.",
+   "fuente": "Gobierno de Honduras (actor interesado) vía Info7/Infobae",
+   "url": "https://www.info7.mx/internacional/suman-casi-31-mil-deportados-hondurenos-en-este-2026/9789075041",
+   "nota": "47 vuelos en agosto (3.624 retornados); ~31.000 en total en 2026. Destino por marcador."
+  },
+  {
+   "id": "MG-30",
+   "nombre": "Migración (deportación): EE.UU. → El Salvador (San Salvador, vuelos)",
+   "subtipo": "Flujo inverso y retorno",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (centroide)",
+     "origen"
+    ],
+    [
+     -89.19,
+     13.69,
+     "San Salvador",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2026,
+   "construccion_propia": true,
+   "base": "Origen por centroide; fuente única.",
+   "fuente": "El Diario de Hoy (cifras de autoridades)",
+   "url": "https://www.eldiariodehoy.com/noticias/nacionales/ee-uu-mantiene-ritmo-constante-de-deportaciones-el-salvador-suma-116-vuelos-de-retorno-a-agosto-de-2026/93945/2026/",
+   "nota": "15 vuelos en agosto; 116 en ocho meses. Una sola fuente."
+  },
+  {
+   "id": "MG-31",
+   "nombre": "Migración (repatriación): EE.UU. → frontera norte de México → estados de origen (Chiapas, etc.)",
+   "subtipo": "Flujo inverso y retorno",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (centroide)",
+     "origen"
+    ],
+    [
+     -106.42,
+     31.69,
+     "Frontera norte de México (Ciudad Juárez, marcador)",
+     "transito"
+    ],
+    [
+     -93.12,
+     16.75,
+     "Chiapas (Tuxtla Gutiérrez, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Pasos y estados por marcador.",
+   "fuente": "Gobierno de México, 'México te abraza' (actor interesado) vía Latinus/La Opinión",
+   "url": "https://latinus.us/mexico/2026/9/2/mexico-recibio-262-mil-repatriados-desde-eu-en-ano-medio-equivale-480-personas-diarias-183234.html",
+   "nota": "271.193 mexicanos recibidos (20/1/2025-13/8/2026). Ocho estados suman 55% de repatriados. Pasos de ingreso no especificados."
+  },
+  {
+   "id": "MG-32",
+   "nombre": "Migración (deportación en tránsito): EE.UU. → Guatemala → México (Tapachula)",
+   "subtipo": "Flujo inverso y retorno",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (centroide)",
+     "origen"
+    ],
+    [
+     -90.51,
+     14.63,
+     "Ciudad de Guatemala",
+     "transito"
+    ],
+    [
+     -92.14,
+     14.68,
+     "Tecún Umán–Ciudad Hidalgo (marcador)",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2026,
+   "construccion_propia": true,
+   "base": "Tapachula por marcador; destino final no consta.",
+   "fuente": "Presidente de Guatemala (actor interesado) vía Univisión/La Nación",
+   "url": "https://www.univision.com/noticias/america-latina/estados-unidos-ha-deportado-a-mas-de-2-000-mexicanos-a-guatemala-en-lo-que-va-de-2026",
+   "nota": "2.284 mexicanos deportados a Guatemala en 2026, trasladados a México en <24 h. Tapachula por marcador; destino final no consta."
+  },
+  {
+   "id": "MG-33",
+   "nombre": "Migración (deportación): República Dominicana → Haití (Dajabón–Ouanaminthe, Jimaní–Malpasse)",
+   "subtipo": "Flujo inverso y retorno",
+   "waypoints": [
+    [
+     -70.69,
+     19.45,
+     "Santiago (centro de procesamiento, RD)",
+     "origen"
+    ],
+    [
+     -71.72,
+     19.55,
+     "Dajabón–Ouanaminthe",
+     "transito"
+    ],
+    [
+     -72.2,
+     19.76,
+     "Cap-Haïtien",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2024,
+   "construccion_propia": true,
+   "base": "Emparejamiento centros-pasos inferido.",
+   "fuente": "DGM (actor interesado); GARR (ONG); OIM (multilateral)",
+   "url": "https://www.iom.int/news/haitis-displacement-crisis-hits-record-15-million-amid-escalating-violence",
+   "nota": "226.500 deportados en ene-jul 2026 (DGM); ~380.000 en 2025. Cifras de eventos: una persona puede contarse más de una vez. Emparejamiento de centros y pasos inferido."
+  },
+  {
+   "id": "MG-35",
+   "nombre": "Desplazamiento interno: Catatumbo (Tibú) → Cúcuta (Colombia)",
+   "subtipo": "Desplazamiento interno",
+   "waypoints": [
+    [
+     -72.73,
+     8.64,
+     "Tibú",
+     "origen"
+    ],
+    [
+     -72.5,
+     7.89,
+     "Cúcuta",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "ONU Colombia/OCHA (multilateral); UNDP; UARIV (actor interesado); NRC",
+   "url": "https://news.un.org/es/story/2026/01/1541031",
+   "nota": "~100.000 desplazados desde enero 2025 (UARIV: 102.857); 15.086 a Cúcuta. Mayor desplazamiento masivo por un solo evento en Colombia. IDMC: >394.000 desplazamientos en 2025."
+  },
+  {
+   "id": "MG-36",
+   "nombre": "Desplazamiento interno: Catatumbo (Tibú) → Ocaña (Colombia)",
+   "subtipo": "Desplazamiento interno",
+   "waypoints": [
+    [
+     -72.73,
+     8.64,
+     "Tibú",
+     "origen"
+    ],
+    [
+     -73.36,
+     8.25,
+     "Ocaña",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "ONU Colombia/OCHA; UARIV (actor interesado)",
+   "url": "https://news.un.org/es/story/2026/01/1541031",
+   "nota": "9.474 llegados a Ocaña. Un mismo desplazado puede figurar en más de una declaración."
+  },
+  {
+   "id": "MG-37",
+   "nombre": "Desplazamiento forzado con cruce: Amatenango de la Frontera (Chiapas) → Cuilco (Guatemala)",
+   "subtipo": "Desplazamiento interno",
+   "waypoints": [
+    [
+     -92.08,
+     15.43,
+     "Amatenango de la Frontera",
+     "origen"
+    ],
+    [
+     -91.96,
+     15.4,
+     "Cuilco",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2024,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Gobierno de México (actor interesado) vía Proceso",
+   "url": "https://www.proceso.com.mx/nacional/2024/7/26/amlo-admite-desplazamiento-humano-de-chiapas-hacia-guatemala-por-disputa-entre-grupos-criminal-332265.html",
+   "nota": "~400 personas cruzaron a Guatemala por la violencia CJNG–Sinaloa (2024). Desplazamiento interno con cruce de frontera."
+  },
+  {
+   "id": "MG-38",
+   "nombre": "Desplazamiento forzado con cruce: Frontera Comalapa (Chiapas) → La Democracia (Huehuetenango, Guatemala)",
+   "subtipo": "Desplazamiento interno",
+   "waypoints": [
+    [
+     -92.15,
+     15.67,
+     "Frontera Comalapa",
+     "origen"
+    ],
+    [
+     -91.93,
+     15.63,
+     "La Democracia (Huehuetenango)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Instituto Guatemalteco de Migración (actor interesado) vía Proceso/El Imparcial",
+   "url": "https://www.proceso.com.mx/nacional/estados/2025/9/25/habitantes-de-frontera-comalapa-solicitan-refugio-en-guatemala-por-la-violencia-del-narco-357654.html",
+   "nota": "Guatemala dio asilo a 161 mexicanos (ago 2025); 100-248 cruzados por la violencia del narco."
+  },
+  {
+   "id": "MG-39",
+   "nombre": "Desplazamiento interno: Cité Soleil → sitios de desplazados en Puerto Príncipe (Haití)",
+   "subtipo": "Desplazamiento interno",
+   "waypoints": [
+    [
+     -72.33,
+     18.58,
+     "Cité Soleil",
+     "origen"
+    ],
+    [
+     -72.31,
+     18.59,
+     "Puerto Príncipe (sitios, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2022,
+   "construccion_propia": true,
+   "base": "Movimiento intraurbano; destino por marcador.",
+   "fuente": "OIM DTM (multilateral)",
+   "url": "https://www.iom.int/news/haitis-displacement-crisis-hits-record-15-million-amid-escalating-violence",
+   "nota": "~1,5 millones de desplazados en Haití (récord). >18.000 huyeron de Cité Soleil en días de mayo 2026. Movimiento intraurbano; destino por marcador."
+  }
+ ],
+ "aviso": "Rutas de migración/desplazamiento sobre registros de Estado (SNM Panamá, INM Honduras, DGME Costa Rica, CBP) y multilaterales (R4V, OIM). Muchos tramos intermedios son construcción propia (ordenan nodos que las fuentes nombran por separado): van marcados. El Darién tiene serie por año: 520.085 (2023), 302.203 (2024), 3.091 (2025), 468 (ene-ago 2026).",
+ "correcciones_disenso": [
+  "Darién (RUTA-01) marcado histórico por su colapso; el flujo inverso (RUTA-05) es la realidad 2025-2026."
+ ],
+ "cobertura_parcial": "Cobertura parcial: bien cubiertos el tránsito al norte (Darién y caribeño), lo intrarregional (éxodo venezolano a los vecinos), las deportaciones de 2026 (EE.UU.→Centroamérica/México, RD→Haití) y el desplazamiento interno (Catatumbo, Chiapas, Haití). Muchos tramos son construcción propia: el registro cuenta encuentros/stock, no el trayecto de la misma persona. Quedan como vacío: desplazamiento interno en México/NCA sin pares origen-destino, y varios retornos por aire. La ausencia de una línea NO implica ausencia de flujo."
+}

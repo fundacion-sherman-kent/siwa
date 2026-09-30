@@ -1,0 +1,801 @@
+{
+ "droga": "cocaína",
+ "es_prototipo": false,
+ "corte": "2026-09-30",
+ "aviso": "Rutas DOCUMENTADAS por agencias e investigaciones de terceros, no flujos medidos. Cada ruta lleva su fuente y su confianza. Varias fuentes fuertes (Treasury/DHS/JIATF-S) son de un actor interesado (gobierno de EE.UU.); se rotula. UNODC no se pudo verificar en vivo. Los porcentajes de reparto por ruta no son atribuibles y no se publican. La línea de tiempo refleja el AÑO DESDE EL QUE LA FUENTE DOCUMENTA cada ruta, no su volumen. El par en cambio (Brasil menguante / Surinam-Guyana creciente desde 2023) sale de GI-TOC junio 2026.",
+ "leyenda_confianza": {
+  "alta": "el paso por país está sostenido por fuente primaria o varias independientes",
+  "media": "sostenido por una fuente analítica o casos",
+  "baja": "caso puntual o país de tránsito incierto"
+ },
+ "rutas": [
+  {
+   "id": "R-01",
+   "nombre": "Pacífico oriental — Colombia/Ecuador → Centroamérica → México → EE.UU.",
+   "mercado": "Norteamérica",
+   "confianza": "media",
+   "waypoints": [
+    [
+     -78.76,
+     1.8,
+     "Colombia (Nariño, Tumaco)",
+     "origen"
+    ],
+    [
+     -80.71,
+     -0.95,
+     "Ecuador (Manta/Esmeraldas)",
+     "tránsito"
+    ],
+    [
+     -90.79,
+     13.93,
+     "Guatemala (Pacífico)",
+     "tránsito"
+    ],
+    [
+     -102.5,
+     23.6,
+     "México",
+     "tránsito"
+    ],
+    [
+     -98.6,
+     39.8,
+     "EE.UU.",
+     "destino"
+    ]
+   ],
+   "modo": "marítimo (go-fast, pesqueros, contenedores) + terrestre en México",
+   "fuente": "U.S. Treasury/OFAC (20/8/2026); DHS Operation Pacific Viper (17/6/2026); Diálogo Américas (órgano del Comando Sur de EE.UU.) (17/9/2026); InSight Crime (Ecuador superhighway).",
+   "url": "https://home.treasury.gov/news/press-releases/sb0610",
+   "nota": "Confianza descendida por el disenso: se apoyaba en fuente interesada (EE.UU.) o secundaria (UNODC no verificado en vivo). Ecuador→EPAC→México→EE.UU. documentado por Treasury (actor interesado). Guatemala en una sola fuente analítica; Honduras/Costa Rica/Panamá sin fuente = incierto, no se dibujan.",
+   "desde": 2016,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-02",
+   "nombre": "Ecuador → Europa (contenedores de fruta) — Guayaquil → Amberes/Róterdam/España",
+   "mercado": "Europa",
+   "confianza": "media",
+   "waypoints": [
+    [
+     -77.3,
+     1.2,
+     "Colombia (Nariño/Putumayo)",
+     "origen"
+    ],
+    [
+     -79.89,
+     -2.19,
+     "Ecuador (Guayaquil/Posorja)",
+     "tránsito"
+    ],
+    [
+     -0.3,
+     39.5,
+     "España (Valencia/Algeciras)",
+     "destino"
+    ],
+    [
+     4.35,
+     51.27,
+     "Bélgica (Amberes) / P. Bajos",
+     "destino"
+    ]
+   ],
+   "modo": "marítimo, contenedores con banano/fruta refrigerada",
+   "fuente": "InSight Crime (Ecuador superhighway); Europol op. Los Lobos (6/3/2026); EU Drug Markets Analysis 2024 (EUDA-Europol).",
+   "url": "https://insightcrime.org/investigations/ecuador-a-cocaine-superhighway-to-the-us-and-europe/",
+   "nota": "Ecuador→puertos del norte de Europa sostenido por varias fuentes; toneladas del EUDA 2020 sin cotejar.",
+   "desde": 2018,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-03",
+   "nombre": "Caribe — Venezuela → Rep. Dominicana → EE.UU./Puerto Rico y Europa",
+   "mercado": "Norteamérica",
+   "confianza": "media",
+   "waypoints": [
+    [
+     -72.6,
+     8.5,
+     "Colombia (Catatumbo/Guajira)",
+     "origen"
+    ],
+    [
+     -70.0,
+     11.9,
+     "Venezuela (Zulia/Paraguaná)",
+     "tránsito"
+    ],
+    [
+     -69.63,
+     18.43,
+     "Rep. Dominicana (Caucedo)",
+     "tránsito"
+    ],
+    [
+     -66.5,
+     18.2,
+     "Puerto Rico (EE.UU.)",
+     "destino"
+    ],
+    [
+     -98.6,
+     39.8,
+     "EE.UU. continental",
+     "destino"
+    ]
+   ],
+   "modo": "marítimo (go-fast, contenedores) + aéreo menor",
+   "fuente": "InSight Crime (Cocaine Across the Caribbean, act. 2026); CSIS (Tracking Transatlantic Drug Flows); InSight/ColombiaOne (16/4/2026).",
+   "url": "https://insightcrime.org/investigations/dominican-republic-venezuela-cocaine-across-caribbean/",
+   "nota": "Confianza descendida por el disenso: se apoyaba en fuente interesada (EE.UU.) o secundaria (UNODC no verificado en vivo). Caudales citados son de 2018; la interdicción de EE.UU. desde sep-2025 pudo desplazar el trazado.",
+   "desde": 2018,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-04",
+   "nombre": "Caribe oriental — Venezuela → Trinidad/Antillas/ABC → Europa",
+   "mercado": "Europa",
+   "confianza": "media",
+   "waypoints": [
+    [
+     -62.3,
+     10.58,
+     "Venezuela (Güiria, Sucre)",
+     "origen"
+    ],
+    [
+     -61.3,
+     10.5,
+     "Trinidad y Tobago",
+     "tránsito"
+    ],
+    [
+     -68.99,
+     12.17,
+     "Aruba/Bonaire/Curazao",
+     "tránsito"
+    ],
+    [
+     4.14,
+     51.95,
+     "Países Bajos (Róterdam)",
+     "destino"
+    ]
+   ],
+   "modo": "marítimo (go-fast entre islas, luego contenedores/yates)",
+   "fuente": "CSIS (Tracking Transatlantic Drug Flows); InSight/ColombiaOne (16/4/2026).",
+   "url": "https://features.csis.org/tracking-transatlantic-drug-flows-cocaines-path-from-south-america-across-the-caribbean-to-europe/",
+   "nota": "Datos de incautación 2022 según CSIS.",
+   "desde": 2022,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-05",
+   "nombre": "Caribe — Colombia/Venezuela → Haití → Jamaica → EE.UU./Amberes",
+   "mercado": "Europa",
+   "confianza": "baja",
+   "waypoints": [
+    [
+     -73.0,
+     9.0,
+     "Colombia/Venezuela",
+     "origen"
+    ],
+    [
+     -72.3,
+     18.9,
+     "Haití",
+     "tránsito"
+    ],
+    [
+     -76.79,
+     17.97,
+     "Jamaica (Kingston)",
+     "tránsito"
+    ],
+    [
+     4.35,
+     51.27,
+     "Bélgica (Amberes)",
+     "destino"
+    ]
+   ],
+   "modo": "marítimo/aéreo",
+   "fuente": "Diálogo Américas (órgano del Comando Sur de EE.UU.) (20/2/2026): decomiso ago-2025 de 1.156 kg en Amberes 'via transshipment in Kingston'.",
+   "url": "https://dialogo-americas.com/articles/haiti-the-caribbean-new-epicenter-for-drug-trafficking/",
+   "nota": "Un decomiso aislado no prueba una ruta estable. Confianza baja.",
+   "desde": 2025,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-07",
+   "nombre": "Guayanas — Colombia/Venezuela → Guyana/Surinam/Guayana Francesa → Europa",
+   "mercado": "Europa",
+   "confianza": "media",
+   "waypoints": [
+    [
+     -66.6,
+     6.4,
+     "Venezuela (Bolívar/Amazonas)",
+     "origen"
+    ],
+    [
+     -58.16,
+     6.8,
+     "Guyana",
+     "tránsito"
+    ],
+    [
+     -55.2,
+     5.85,
+     "Surinam",
+     "tránsito"
+    ],
+    [
+     -52.33,
+     4.94,
+     "Guayana Francesa (río Maroni)",
+     "tránsito"
+    ],
+    [
+     2.35,
+     48.85,
+     "Francia / P. Bajos / Bélgica",
+     "destino"
+    ]
+   ],
+   "modo": "aéreo (avionetas), fluvial y marítimo",
+   "fuente": "CSIS; GI-TOC/InSight 'Cocaine Pipeline to Europe' (2021); GI-TOC (jun-2026): desde 2023 la salida se corrió de Brasil a Surinam/Guyana.",
+   "url": "https://features.csis.org/tracking-transatlantic-drug-flows-cocaines-path-from-south-america-across-the-caribbean-to-europe/",
+   "nota": "El origen exacto en Venezuela para este tramo no está sostenido: queda como 'Colombia/Venezuela'.",
+   "desde": 2021,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-08",
+   "nombre": "Amazonía — Perú/Colombia → Tabatinga → Manaus → Belém/Amapá → Europa",
+   "mercado": "Europa",
+   "confianza": "baja",
+   "waypoints": [
+    [
+     -69.94,
+     -4.2,
+     "Triple frontera (Leticia)",
+     "origen"
+    ],
+    [
+     -60.02,
+     -3.12,
+     "Brasil (Manaus)",
+     "tránsito"
+    ],
+    [
+     -51.17,
+     0.06,
+     "Brasil (Macapá/Belém)",
+     "tránsito"
+    ],
+    [
+     2.35,
+     48.85,
+     "Europa (vía G. Francesa o directo)",
+     "destino"
+    ]
+   ],
+   "modo": "fluvial y marítimo (narcosubmarinos, pesqueros, contenedores)",
+   "fuente": "CNN Brasil (28/9/2026, sobre GI-TOC); Diálogo Américas (órgano del Comando Sur de EE.UU.)/Eurasia Review (28/9/2026).",
+   "url": "https://www.cnnbrasil.com.br/nacional/norte/am/submarinos-e-mergulhadores-as-taticas-do-trafico-na-amazonia-para-a-europa/",
+   "nota": "Confianza descendida por el disenso: se apoyaba en fuente interesada (EE.UU.) o secundaria (UNODC no verificado en vivo). El informe primario de GI-TOC (sep-2026) no se pudo abrir; se apoya en su reflejo en prensa.",
+   "desde": 2023,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-09",
+   "nombre": "Transatlántica sur — Bolivia/Perú/Paraguay → Brasil (Santos) → África Occidental → Europa",
+   "mercado": "Europa",
+   "confianza": "media",
+   "waypoints": [
+    [
+     -57.72,
+     -17.78,
+     "Bolivia (Santa Cruz/Quijarro)",
+     "origen"
+    ],
+    [
+     -46.3,
+     -23.96,
+     "Brasil (Santos)",
+     "tránsito"
+    ],
+    [
+     -13.23,
+     8.48,
+     "África Occidental (Nigeria/Ghana/S. Leona)",
+     "tránsito"
+    ],
+    [
+     4.35,
+     51.27,
+     "Europa (Amberes/Róterdam/España)",
+     "destino"
+    ]
+   ],
+   "modo": "marítimo (contenedores, graneleros)",
+   "fuente": "GI-TOC (2023) vía Maritime Executive; InSight Crime (Santos); UNODC Global Report on Cocaine 2023 (extracto, no verificado en vivo).",
+   "url": "https://maritime-executive.com/article/gangs-ramp-up-cocaine-exports-on-brazil-to-west-africa-routes",
+   "nota": "Desde 2023 la salida no contenerizada se corrió de Brasil a Surinam/Guyana (R-11); la ruta de contenedores sigue vigente.",
+   "desde": 2016,
+   "cambio": "menguante",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-10",
+   "nombre": "Atlántico directo — Brasil (delta del Amazonas) → Península Ibérica",
+   "mercado": "Europa",
+   "confianza": "media",
+   "waypoints": [
+    [
+     -50.0,
+     0.0,
+     "Brasil (delta del Amazonas)",
+     "origen"
+    ],
+    [
+     -27.0,
+     35.0,
+     "Atlántico (sur de las Azores)",
+     "tránsito"
+    ],
+    [
+     -9.1,
+     38.7,
+     "Península Ibérica",
+     "destino"
+    ]
+   ],
+   "modo": "marítimo (semisumergible)",
+   "fuente": "MAOC-N op. NAUTILUS (26/3/2025): semisumergible con ~6,5 t, 'departure point: Brazil'; InSight Crime.",
+   "url": "https://maoc.eu/portuguese-authorities-intercept-6-5-tonnes-of-cocaine-on-semi-submersible-in-remarkable-operation-in-the-atlantic/",
+   "nota": "Evento único con fuente primaria (MAOC-N). Coordenadas de tránsito aproximadas.",
+   "desde": 2025,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-11",
+   "nombre": "Atlántico–África Occidental — Surinam/Guyana → Sierra Leona/Guinea-Bisáu → Canarias/Marruecos → Europa",
+   "mercado": "Europa",
+   "confianza": "alta",
+   "waypoints": [
+    [
+     -55.2,
+     5.85,
+     "Surinam / Guyana",
+     "origen"
+    ],
+    [
+     -13.23,
+     8.48,
+     "Sierra Leona (Freetown)",
+     "tránsito"
+    ],
+    [
+     -16.0,
+     11.25,
+     "Guinea-Bisáu (Bijagós)/Senegal",
+     "tránsito"
+    ],
+    [
+     -15.9,
+     28.3,
+     "Marruecos / Canarias",
+     "tránsito"
+    ],
+    [
+     -3.7,
+     40.4,
+     "Europa (España)",
+     "destino"
+    ]
+   ],
+   "modo": "marítimo (graneleros, veleros, transbordo a lanchas)",
+   "fuente": "GI-TOC 'The Arconian operation' (jun-2026, leído): 30+ t frente a Dajla; INTERPOL/ENACT (nov-2023, leído); INTERPOL op. Lionfish Hurricane (2024).",
+   "url": "https://globalinitiative.net/wp-content/uploads/2026/06/Josef-Skrdlik-Sarah-Fares-Lucia-Bird-The-Arconian-operation-Anatomy-of-a-record-Atlantic-cocaine-shipment-GI-TOC-June-2026.pdf",
+   "nota": "Surinam/Guyana→África Occidental es tendencia observada en incautaciones desde 2023 (GI-TOC).",
+   "desde": 2023,
+   "cambio": "creciente",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-12",
+   "nombre": "Cono Sur — Bolivia → Paraguay → Hidrovía Paraná → Rosario/Buenos Aires → Montevideo → Europa",
+   "mercado": "Europa",
+   "confianza": "alta",
+   "waypoints": [
+    [
+     -63.18,
+     -17.78,
+     "Bolivia (Santa Cruz)",
+     "origen"
+    ],
+    [
+     -57.58,
+     -25.26,
+     "Paraguay (río Paraguay/Asunción)",
+     "tránsito"
+    ],
+    [
+     -60.65,
+     -32.95,
+     "Argentina (Rosario, Paraná)",
+     "tránsito"
+    ],
+    [
+     -56.16,
+     -34.9,
+     "Uruguay (Montevideo)",
+     "tránsito"
+    ],
+    [
+     4.35,
+     51.27,
+     "Europa (Amberes/Hamburgo)",
+     "destino"
+    ]
+   ],
+   "modo": "aéreo (Bolivia→Paraguay), fluvial (barcazas) y marítimo",
+   "fuente": "JIFE/INCB vía Buenos Aires Times (2022); UNODC vía MercoPress/WaPo (2024); Sampó & Troncoso (2021, académico).",
+   "url": "https://en.mercopress.com/2024/12/30/wapo-says-parana-waterway-riddled-with-drug-trafficking",
+   "nota": "Tramo Paraguay→Argentina→Uruguay con tres fuentes independientes.",
+   "desde": 2012,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-13",
+   "nombre": "Pacífico sur — Bolivia/Perú → Chile (Arica/Iquique/San Antonio) → Europa/Asia-Pacífico",
+   "mercado": "Europa",
+   "confianza": "media",
+   "waypoints": [
+    [
+     -63.18,
+     -17.78,
+     "Bolivia (Santa Cruz)",
+     "origen"
+    ],
+    [
+     -70.31,
+     -18.48,
+     "Chile (Arica/Iquique)",
+     "tránsito"
+    ],
+    [
+     -71.61,
+     -33.59,
+     "Chile (San Antonio)",
+     "tránsito"
+    ],
+    [
+     4.35,
+     51.27,
+     "Europa",
+     "destino"
+    ]
+   ],
+   "modo": "terrestre y marítimo (contenedores)",
+   "fuente": "InSight Crime (Arica, 2024); Sampó & Troncoso (2021); Diálogo Américas (órgano del Comando Sur de EE.UU.) (5/5/2026).",
+   "url": "https://insightcrime.org/news/chiles-arica-port-bust-underscores-role-bolivian-cocaine-supply-chain/",
+   "nota": "Tramo Chile→Asia-Pacífico sostenido solo por la fuente académica de 2021.",
+   "desde": 2023,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "R-14",
+   "nombre": "Perú → Callao → Europa",
+   "mercado": "Europa",
+   "confianza": "media",
+   "waypoints": [
+    [
+     -73.6,
+     -12.5,
+     "Perú (VRAEM)",
+     "origen"
+    ],
+    [
+     -77.15,
+     -12.05,
+     "Perú (Callao)",
+     "tránsito"
+    ],
+    [
+     4.35,
+     51.27,
+     "Bélgica/P. Bajos/España/Adriático",
+     "destino"
+    ]
+   ],
+   "modo": "marítimo, contenedores",
+   "fuente": "GI-TOC Risk Bulletin n.º 19 (ago-2024).",
+   "url": "https://riskbulletins.globalinitiative.net/see-obs-019/03-cocaine-trafficking-peru-to-europe.html",
+   "nota": "Sostenido por casos individuales, no por estadística de flujo.",
+   "desde": 2021,
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "T1-R1",
+   "nombre": "Cocaína: San Lorenzo (hidrovía, Santa Fe) → Australia, en granelero",
+   "waypoints": [
+    [
+     -60.73,
+     -32.75,
+     "San Lorenzo, Santa Fe",
+     "origen"
+    ],
+    [
+     80.0,
+     -35.0,
+     "Océano Índico",
+     "transito"
+    ],
+    [
+     115.86,
+     -31.95,
+     "Australia (costa)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "InSight Crime ('Crafty Trafficking'); La Nación (2/6/2023); Maritime Executive; gCaptain — caso ST Pinot",
+   "url": "https://insightcrime.org/news/crafty-trafficking-how-cocaine-is-flowing-between-latam-and-australia/",
+   "nota": "Los ~849,5 kg se hallaron en el TANQUE DE LASTRE del buque, NO en la caja de mar (ese método corresponde al Chemstar Sapphire, otra ruta). El ST Pinot cargó grano en Timbúes (terminal Renova) y pasó por San Lorenzo y La Plata: el punto de carga de la droga no consta. 'Australia' es destino genérico.",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "T1-R2",
+   "nombre": "Cocaína: San Lorenzo → Melbourne, vía Nueva Zelanda (caso Chemstar Sapphire)",
+   "waypoints": [
+    [
+     -60.73,
+     -32.75,
+     "San Lorenzo, Santa Fe",
+     "origen"
+    ],
+    [
+     174.76,
+     -36.85,
+     "Nueva Zelanda (recalada)",
+     "transito"
+    ],
+    [
+     144.96,
+     -37.81,
+     "Melbourne, Australia",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2021,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Australian Federal Police (actor interesado); prensa AU/NZ — buque Chemstar Sapphire",
+   "url": "https://www.afp.gov.au/news-centre",
+   "nota": "En el Chemstar Sapphire la cocaína iba en la CAJA DE MAR (sea chest) del casco, con recalada en Nueva Zelanda antes de Melbourne. Caso único sostenido por una sola agencia (AFP): confianza baja.",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "T1-R3",
+   "nombre": "Cocaína: eslabón Paraguay → hidrovía (vinculación AFIRMADA, no probada)",
+   "waypoints": [
+    [
+     -57.6,
+     -25.3,
+     "Asunción / Alto Paraná, Paraguay",
+     "origen"
+    ],
+    [
+     -60.73,
+     -32.75,
+     "San Lorenzo, Santa Fe",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2019,
+   "construccion_propia": true,
+   "base": "Vinculación de origen afirmada por fuentes secundarias; ningún expediente la prueba.",
+   "fuente": "InSight Crime; The Washington Post — afirmación de origen, sin caso que la ligue a los decomisos australianos",
+   "url": "https://insightcrime.org/news/crafty-trafficking-how-cocaine-is-flowing-between-latam-and-australia/",
+   "nota": "NINGÚN caso conocido une la cocaína incautada rumbo a Australia con Paraguay: es una afirmación de prensa sobre el origen probable de la droga que baja por la hidrovía, no una ruta acreditada. Se dibuja SÓLO hasta San Lorenzo y se marca como construcción propia de baja confianza.",
+   "etiqueta": "vínculo afirmado, no acreditado",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "T1-R4",
+   "nombre": "Cocaína: Santos (Brasil) → Australia, en contenedor/granelero",
+   "waypoints": [
+    [
+     -46.33,
+     -23.96,
+     "Santos, Brasil",
+     "origen"
+    ],
+    [
+     18.42,
+     -33.92,
+     "Ciudad del Cabo (recalada)",
+     "transito"
+    ],
+    [
+     115.86,
+     -31.95,
+     "Australia",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Recalada africana (Ciudad del Cabo) inferida, no acreditada para un lote.",
+   "fuente": "Australian Border Force (actor interesado); InSight Crime; UNODC",
+   "url": "https://insightcrime.org/news/crafty-trafficking-how-cocaine-is-flowing-between-latam-and-australia/",
+   "nota": "Santos es el principal puerto de salida de cocaína de Brasil. Recalada africana frecuente en la ruta austral. Puerto australiano de arribo no siempre consta. La recalada en Ciudad del Cabo es inferencia de la ruta austral, no consta para este caso.",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "T1-R5",
+   "nombre": "Cocaína líquida: Brasil → Hong Kong (~444 kg disueltos)",
+   "waypoints": [
+    [
+     -46.33,
+     -23.96,
+     "Santos / Brasil",
+     "origen"
+    ],
+    [
+     114.17,
+     22.32,
+     "Hong Kong",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": true,
+   "base": "Origen y destino de la incautación; sin puerto de salida ni tránsito acreditado.",
+   "fuente": "Aduanas de Hong Kong (actor interesado); prensa — cocaína disuelta en líquido",
+   "url": "https://www.customs.gov.hk/en/publication_press/press/",
+   "nota": "Ocultamiento por disolución química (~444 kg recuperados). Par origen-destino sin tránsito documentado: el tramo directo es construcción propia.",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "T1-R6",
+   "nombre": "Cocaína: Santos (Brasil) → Asia (China/HK/Corea), contenedor",
+   "waypoints": [
+    [
+     -46.33,
+     -23.96,
+     "Santos, Brasil",
+     "origen"
+    ],
+    [
+     120.0,
+     30.0,
+     "Asia oriental",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2018,
+   "construccion_propia": true,
+   "base": "Flujo agregado, sin caso puntual con puerto.",
+   "fuente": "UNODC; InSight Crime — flujo genérico Brasil→Asia oriental",
+   "url": "https://www.unodc.org/",
+   "nota": "Destino 'Asia oriental' genérico, sin puerto preciso: marcador de zona, no punto de arribo. Construcción propia. (Flujo agregado sin URL específica que lo acredite: vacío declarado.)",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "T1-R7",
+   "nombre": "Cocaína: Brasil → Busan (Corea del Sur)",
+   "waypoints": [
+    [
+     -48.51,
+     -25.52,
+     "Santos / Paranaguá, Brasil",
+     "origen"
+    ],
+    [
+     129.04,
+     35.1,
+     "Busan, Corea del Sur",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2020,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "Servicio de Aduanas de Corea (actor interesado); prensa coreana",
+   "url": "https://www.customs.go.kr/english/main.do",
+   "nota": "Contenedor marítimo. Trayecto aproximado; recaladas intermedias no detalladas.",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "T1-R8",
+   "nombre": "Cocaína: México → Ecuador → Panamá → China → Gangneung (Corea, ~2 t)",
+   "waypoints": [
+    [
+     -100.0,
+     17.0,
+     "México (Pacífico)",
+     "origen"
+    ],
+    [
+     -79.88,
+     -2.19,
+     "Guayaquil, Ecuador",
+     "transito"
+    ],
+    [
+     -79.57,
+     8.95,
+     "Balboa, Panamá",
+     "transito"
+    ],
+    [
+     121.47,
+     31.23,
+     "China (transbordo)",
+     "transito"
+    ],
+    [
+     128.9,
+     37.75,
+     "Gangneung, Corea del Sur",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2021,
+   "construccion_propia": true,
+   "base": "Cadena multi-tramo (5 escalas) reconstruida; los puntos intermedios no acreditan una logística única.",
+   "fuente": "Prensa coreana; InSight Crime — decomiso ~2 t en Gangneung",
+   "url": "https://insightcrime.org/",
+   "nota": "Cadena multi-tramo con transbordo en China antes de Corea. Uno de los mayores decomisos en aguas coreanas. Puntos intermedios aproximados.",
+   "subtipo": "Cocaína"
+  },
+  {
+   "id": "T1-R9",
+   "nombre": "Cocaína: Balboa (Panamá) → Tauranga (Nueva Zelanda)",
+   "waypoints": [
+    [
+     -79.57,
+     8.95,
+     "Balboa, Panamá",
+     "origen"
+    ],
+    [
+     176.17,
+     -37.69,
+     "Tauranga, Nueva Zelanda",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2020,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "New Zealand Customs (actor interesado); prensa NZ",
+   "url": "https://www.customs.govt.nz/about-us/news/",
+   "nota": "Contenedor por el Pacífico sur. Trayecto marítimo aproximado.",
+   "subtipo": "Cocaína"
+  }
+ ],
+ "correcciones_disenso": [
+  "Diálogo Américas rotulado como órgano del SOUTHCOM; R-01 y R-03 bajadas a media, R-08 a baja (regla 10 + L-03)."
+ ]
+}

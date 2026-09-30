@@ -1,0 +1,239 @@
+{
+ "flujo_nombre": "precursores",
+ "es_prototipo": false,
+ "corte": "2026-09-30",
+ "aviso": "Precursores químicos que alimentan la producción de drogas sintéticas (fentanilo, metanfetamina) en México. El origen (China, y de forma emergente India) está documentado por agencias —actor interesado—; el puerto de salida asiático casi nunca consta. El centroide de origen es marcador de país, no punto de carga.",
+ "rutas": [
+  {
+   "id": "P01",
+   "nombre": "Precursores: China → Manzanillo (México), insumos de fentanilo/metanfetamina",
+   "waypoints": [
+    [
+     121.47,
+     31.23,
+     "China (puertos)",
+     "origen"
+    ],
+    [
+     -104.31,
+     19.05,
+     "Manzanillo, Colima (México)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2017,
+   "construccion_propia": false,
+   "base": "",
+   "fuente": "DEA (actor interesado); CRS; InSight Crime; GAO",
+   "url": "https://www.dea.gov/",
+   "nota": "Manzanillo es el principal punto de entrada de precursores químicos a México. Origen chino documentado por reportes de agencias; el puerto de salida chino específico rara vez consta: el centroide es marcador. Sostiene la producción de fentanilo y metanfetamina de los cárteles.",
+   "subtipo": "Precursores"
+  },
+  {
+   "id": "P02",
+   "nombre": "Precursores: India → Manzanillo / Lázaro Cárdenas (México)",
+   "waypoints": [
+    [
+     72.88,
+     19.08,
+     "India (puertos)",
+     "origen"
+    ],
+    [
+     -102.2,
+     17.96,
+     "Lázaro Cárdenas, Michoacán (México)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2021,
+   "construccion_propia": true,
+   "base": "Origen emergente afirmado por agencias; sin caso con puerto de salida.",
+   "fuente": "DEA (actor interesado); prensa — India como origen emergente",
+   "url": "https://www.dea.gov/",
+   "nota": "India aparece como origen emergente de precursores a medida que China restringe algunos compuestos. Flujo menos documentado que el chino: confianza baja. Par origen-destino sin tránsito: construcción propia.",
+   "subtipo": "Precursores"
+  },
+  {
+   "id": "P03",
+   "nombre": "Precursores (permanganato de potasio): China → puertos del Pacífico de Ecuador → Tulcán/Sucumbíos → Colombia",
+   "subtipo": "Precursores",
+   "waypoints": [
+    [
+     104.2,
+     35.86,
+     "China (marcador)",
+     "origen"
+    ],
+    [
+     -79.89,
+     -2.19,
+     "Guayaquil (marcador de puerto)",
+     "transito"
+    ],
+    [
+     -77.72,
+     0.81,
+     "Tulcán",
+     "transito"
+    ],
+    [
+     -74.3,
+     4.57,
+     "Colombia (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2023,
+   "construccion_propia": true,
+   "base": "Puerto de entrada por marcador.",
+   "fuente": "INCB Informe de Precursores 2025 (extracto); Primicias con INCSR 2025 (actor interesado); Diálogo Américas",
+   "url": "https://www.primicias.ec/seguridad/ecuador-importacion-precursores-quimicos-drogas-cocaina-heronia-clave-narcotrafico-colombia-peru-104103/",
+   "nota": "Ecuador reporta todas sus incautaciones como país de tránsito hacia Colombia. Importó 101,7 t de permanganato en 2023 (China 98,67%). 95 kg incautados en Sucumbíos. Puertos del Pacífico no nombrados."
+  },
+  {
+   "id": "P04",
+   "nombre": "Precursores (carbonato de sodio, acetato de etilo): Hong Kong/Panamá → Iquique/Arica → Bolivia",
+   "subtipo": "Precursores",
+   "waypoints": [
+    [
+     114.17,
+     22.32,
+     "Hong Kong",
+     "origen"
+    ],
+    [
+     -79.52,
+     8.98,
+     "Panamá (marcador)",
+     "origen"
+    ],
+    [
+     -70.15,
+     -20.21,
+     "Iquique",
+     "transito"
+    ],
+    [
+     -70.31,
+     -18.48,
+     "Arica",
+     "transito"
+    ],
+    [
+     -64.7,
+     -16.5,
+     "Bolivia (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Cruce a Bolivia y destino por marcador.",
+   "fuente": "Servicio Nacional de Aduanas de Chile (actor interesado); INCSR 2025 (actor interesado, extracto)",
+   "url": "https://www.aduana.cl/historica-incautacion-de-146-toneladas-de-precursores-quimicos-para/aduana/2025-03-24/095717.html",
+   "nota": "146 t en seis contenedores rotulados 'base para detergente' con destino Bolivia (2025). Sólo el carbonato figura como precursor de clorhidrato de cocaína. Cruce a Bolivia y destino interno no constan."
+  },
+  {
+   "id": "P05",
+   "nombre": "Precursores (permanganato de potasio): Santiago → norte de Chile → Bolivia",
+   "subtipo": "Precursores",
+   "waypoints": [
+    [
+     -70.67,
+     -33.45,
+     "Santiago",
+     "origen"
+    ],
+    [
+     -70.1,
+     -20.2,
+     "Norte de Chile (marcador)",
+     "transito"
+    ],
+    [
+     -64.7,
+     -16.5,
+     "Bolivia (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2021,
+   "construccion_propia": true,
+   "base": "Paso fronterizo no informado.",
+   "fuente": "PDI Chile (actor interesado) vía Chilevisión; INCSR 2025",
+   "url": "https://www.chilevision.cl/noticias/reportajes/cronicas/decomisan-una-tonelada-de-permanganato-de-potasio-chilenos-exportaban-quimicos-para-elaborar-cocaina",
+   "nota": "1.000 kg de permanganato (para ≥7 t de cocaína) vía empresa pantalla (2021). Caso único; paso fronterizo no informado."
+  },
+  {
+   "id": "P06",
+   "nombre": "Precursores de metanfetamina: India → Guatemala (mensajería) → laboratorios de México",
+   "subtipo": "Precursores",
+   "waypoints": [
+    [
+     78.96,
+     20.59,
+     "India (marcador)",
+     "origen"
+    ],
+    [
+     -90.51,
+     14.63,
+     "Ciudad de Guatemala",
+     "transito"
+    ],
+    [
+     -102.55,
+     23.63,
+     "México (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Enlace a México inferido; sin puerto.",
+   "fuente": "Diálogo Américas (Comando Sur de EE.UU., actor interesado); DEA NDTA 2025 (actor interesado)",
+   "url": "https://dialogo-americas.com/articles/guatemalas-drug-route-the-new-geography-of-organized-crime/",
+   "nota": "Red que importaba precursores de India para labs mexicanos vía empresas de mensajería (2025). Es precursor de sintéticos, no de cocaína. Enlace Guatemala→México inferido."
+  },
+  {
+   "id": "P07",
+   "nombre": "Precursor de metanfetamina (peróxido de dicumilo): China → Long Beach (EE.UU.) → Sinaloa (México)",
+   "subtipo": "Precursores",
+   "waypoints": [
+    [
+     104.2,
+     35.86,
+     "China (marcador)",
+     "origen"
+    ],
+    [
+     -118.19,
+     33.77,
+     "Long Beach, CA",
+     "transito"
+    ],
+    [
+     -107.39,
+     24.8,
+     "Sinaloa",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2025,
+   "construccion_propia": true,
+   "base": "Destino final asumido por la agencia.",
+   "fuente": "ICE/HSI y CBP (actor interesado)",
+   "url": "https://www.ice.gov/news/releases/ice-cbp-seize-50000-kilograms-meth-precursor-chemicals-destined-sinaloa-cartel",
+   "nota": "50.000 kg incautados en Long Beach (2025); destino final Sinaloa asumido por ICE. Caso único."
+  }
+ ],
+ "cobertura_parcial": "Cobertura parcial: precursores de cocaína hacia los Andes (permanganato China→Ecuador→Colombia; carbonato Hong Kong/Panamá→Chile→Bolivia) y de metanfetamina/fentanilo hacia México (China/India). Sin ruta bilateral verificable para Perú y para Brasil/Argentina/Venezuela. La ausencia de una línea NO implica ausencia de flujo."
+}
