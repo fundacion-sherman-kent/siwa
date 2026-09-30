@@ -188,6 +188,9 @@ Promise.all([
   const cont=document.getElementById('mapa'); cont.style.display='block';
   chart=echarts.init(cont,null,{renderer:'canvas'});
   window.addEventListener('resize',()=>chart.resize());
+  // Reajuste robusto: si el contenedor tomó su ancho después del init (canvas en 0), el observer lo corrige.
+  try{ new ResizeObserver(()=>{ if(chart) chart.resize(); }).observe(cont); }catch(e){}
+  requestAnimationFrame(()=>{ if(chart) chart.resize(); });
   document.getElementById('leyenda').innerHTML=
     '<span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4"/></svg> línea llena: con fuente</span>'+
     '<span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4" stroke-dasharray="5 4"/></svg> de puntos: inferido, trazado o histórico</span>'+
