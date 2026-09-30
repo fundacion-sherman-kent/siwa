@@ -3524,6 +3524,22 @@
       <div class="procedencia" id="proc-focos">Cargando el registro…</div>
       <div class="cruce" id="lista-focos"></div>
       <div id="vac-focos"></div>
+        </div><div class="categoria" id="pesca" data-nivel="2">
+      <div class="categoria-head"><h3>Pesca sospechosa · dos años</h3><span class="tag" id="tag-pesca">—</span></div>
+      <details class="aviso-cobertura"><summary>Cuenta comportamiento de riesgo por bandera del buque, no delito ni lugar</summary>
+        <p><b>No mide pesca ilegal probada: mide comportamiento de riesgo.</b> Dos señales
+           satelitales —<b>encuentros</b> en altamar, donde dos buques se juntan (posible
+           transbordo de captura), y <b>AIS apagado</b>, cuando un buque deja de emitir su
+           posición (posible actividad oculta)—. Un encuentro puede ser un transbordo legal
+           y un AIS apagado puede tener causa técnica: <b>son indicios, no prueba.</b></p>
+        <p><b>Se cuentan por bandera del buque, no por dónde ocurren.</b> Miden la flota de
+           cada Estado, no la presión extranjera en sus aguas. <b>No ordena Estados</b>: una
+           flota grande registra más eventos por tamaño, no por conducta. Faltan los buques
+           sin AIS o con AIS manipulado, que por definición no aparecen.</p>
+      </details>
+      <div class="procedencia" id="proc-pesca">Cargando el registro…</div>
+      <div class="cruce" id="lista-pesca"></div>
+      <div id="vac-pesca"></div>
         </div>
         </section>
     <section class="domain bloque" id="defensa" data-nivel="3">
@@ -4727,6 +4743,7 @@
                      ['sondeo','Banco de pruebas de fuentes candidatas'],
                      ['prensa','RSF — libertad de prensa'],
                      ['focos','NASA FIRMS — focos de calor'],
+                     ['pesca_gfw','Global Fishing Watch — pesca sospechosa por bandera'],
                      ['pobreza','CEPALSTAT — pobreza por ingresos'],
                      ['percepcion_corrupcion','Transparency International — percepción de corrupción'],
                      ['desastres','IFRC — desastres y emergencias'],
@@ -13424,6 +13441,7 @@
     paso('bienes culturales', bienesVista);
     paso('especies protegidas', citesVista);
     paso('focos de calor', focosVista);
+    paso('pesca sospechosa', pescaVista);
     paso('libertad de prensa', prensaVista);
     paso('sanciones y personas expuestas', sancionesVista);
     paso('ciberseguridad', ciberVista);
@@ -15499,6 +15517,36 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
        + d.resumen.ventana_dias + ' días.</span><span class="badge unica">sin dato</span></div></div>';
   }
 
+  function pescaVista(){
+    const caja = document.getElementById('lista-pesca');
+    const d = almacen.pesca; if(!caja || !d) return;
+    const zona = bloqueActivo();
+    let lista = d.registros;
+    if(paisFiltro) lista = lista.filter(x => x.iso === paisFiltro);
+    else if(zona) lista = lista.filter(x => x.bloque === zona);
+    const total = x => (x.encuentros||0) + (x.ais_off||0);
+    const con = lista.filter(x => total(x) > 0);
+    const anios = (d.resumen && d.resumen.ventana)
+      ? (d.resumen.ventana.desde||'').slice(0,4) + '–' + (d.resumen.ventana.hasta||'').slice(0,4) : '';
+    const tag = document.getElementById('tag-pesca');
+    const totalEventos = con.reduce((a,x)=>a+total(x),0);
+    if(tag) tag.textContent = (paisFiltro
+      ? miles(totalEventos) + ' evento' + (totalEventos===1?'':'s')
+      : con.length + ' Estado' + (con.length===1?'':'s') + ' con evento')
+      + (anios ? ' · ' + anios : '');
+    caja.innerHTML = con.slice().sort((a,b)=>total(b)-total(a)).map(x =>
+      '<div class="asunto"><h4>' + esc(x.pais) + '</h4><div class="foot"><span class="porque">'
+      + '<b>' + miles(x.encuentros||0) + '</b> encuentro' + ((x.encuentros===1)?'':'s') + ' en altamar · '
+      + '<b>' + miles(x.ais_off||0) + '</b> con AIS apagado'
+      + '<br><i>Comportamiento de riesgo por bandera del buque, no prueba de ilegalidad ni lugar del hecho. '
+      + 'El recuento no ordena Estados.</i>'
+      + '</span><span class="badge medio">detección</span></div></div>').join('')
+      || '<div class="asunto"><h4>Sin eventos en la ventana</h4><div class="foot">'
+       + '<span class="porque">Ninguna señal en '
+       + esc(paisFiltro ? paisNombre : (zona || 'la región')) + ' en la ventana observada.'
+       + '</span><span class="badge unica">sin dato</span></div></div>';
+  }
+
   function prensaVista(){
     const caja = document.getElementById('lista-prensa');
     const d = almacen.prensa; if(!caja || !d) return;
@@ -17176,6 +17224,17 @@ ${cuadrante(malA(p), malB(p))}</title></circle>`;
     })
     .catch(err=>{ noLlego++; pintarNoLlego('lista-focos','focos de calor',err.message);
       document.getElementById('proc-focos').textContent='Sin registro disponible.'; marcador(); });
+
+  Promise.all([traer('pesca_gfw.json'), traer('estado/pesca_gfw.json').catch(()=>null)])
+    .then(([d,estado])=>{
+      almacen.pesca=d; const meta=d.procedencia;
+      pintarProcedencia('proc-pesca',meta);
+      vacios+=pintarVacios('vac-pesca',meta.vacios_declarados);
+      if(estado&&estado.estado==='error'){ fallas++; pintarFalla('lista-pesca','pesca sospechosa',estado.mensaje,meta); }
+      repintar(); marcador();
+    })
+    .catch(err=>{ noLlego++; pintarNoLlego('lista-pesca','pesca sospechosa',err.message);
+      document.getElementById('proc-pesca').textContent='Sin registro disponible.'; marcador(); });
 
   Promise.all([traer('prensa_libre.json'), traer('estado/prensa_libre.json').catch(()=>null)])
     .then(([d,estado])=>{
