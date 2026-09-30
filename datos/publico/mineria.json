@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-30T20:52:17+00:00",
-  "medidas_con_suficientes_casos": 212,
-  "pares_probados": 22366,
+  "corrida": "2026-09-30T22:18:39+00:00",
+  "medidas_con_suficientes_casos": 213,
+  "pares_probados": 22578,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 22.366 pares y el umbral de siempre, alrededor de 1.118 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4293,
-    "de_ellos_son_parentescos": 417
+    "por_que": "Con 22.578 pares y el umbral de siempre, alrededor de 1.128 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 4349,
+    "de_ellos_son_parentescos": 419
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3876,
-  "anomalias_totales": 395,
+  "pistas_totales": 3930,
+  "anomalias_totales": 396,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -177,19 +177,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.945,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6615959368183758e-22,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -198,6 +185,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.942,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.150968194373588e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -281,6 +281,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.932,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.3064257062447474e-20,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -333,6 +346,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.927,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.0030286955054554e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "financiero_gfi:brecha_usd_millones",
       "b": "poblacion",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
@@ -341,32 +367,6 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 8.030917381111556e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.926,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.785893837385414e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.926,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.081961585577735e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -632,6 +632,19 @@
       "misma_categoria": false
     },
     {
+      "a": "desempleo_cepal",
+      "b": "desempleo_oit",
+      "rotulo_a": "Desempleo · segunda fuente",
+      "rotulo_b": "Desempleo",
+      "coeficiente": 0.902,
+      "estados": 26,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1013554348831368e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -779,19 +792,6 @@
       "b": "percepcion_corrupcion",
       "rotulo_a": "Corrupción política",
       "rotulo_b": "Percepción de corrupción",
-      "coeficiente": -0.889,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.003697736400934e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion:puntaje",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "percepcion_corrupcion · puntaje",
       "coeficiente": -0.889,
       "estados": 25,
       "tipo": "rangos (Spearman)",
