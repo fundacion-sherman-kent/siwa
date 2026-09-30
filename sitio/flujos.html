@@ -11,19 +11,20 @@
 <link rel="stylesheet" href="_comun/paleta-fusk.css"><!-- FUENTE ÚNICA de la paleta -->
 <script src="lib/echarts.min.js"></script>
 <style>
-  /* Paleta cerrada del manual FUSK: #07131E #00121E #667B89 #460070 #8C00E0 #BA66EC #FB6500 (+ crema #F9F9F7).
-     Una familia se ve por vez: su color identifica a la familia elegida; el nombre va siempre escrito. */
+  /* Base del manual FUSK: #07131E #00121E #667B89 #460070 #8C00E0 #BA66EC #FB6500 (+ crema #F9F9F7).
+     Cada familia lleva un color propio y distinto. Se parte del manual (violeta, naranja, gris-azul) y, para
+     separar las siete, se extiende con ámbar, cian-azul, índigo y magenta: nunca verde ni rojo (acta 25/9). */
   :root{--orange:var(--fusk-naranja,#FB6500);--fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;
     --linea:#d7dce3;--caja:#ffffff;--navy:var(--fusk-navy,#00121E);--area:#e4e0d4;--borde:#b9c1c9;
-    --f-narcotrafico:#8C00E0;--f-armas:#667B89;--f-migracion:#BA66EC;--f-minerales:#460070;
-    --f-especies:#00121E;--f-contrabando:#FB6500;--f-trata:#BA66EC;--soberano:#667B89;}
+    --f-narcotrafico:#8C00E0;--f-armas:#FB6500;--f-migracion:#0E7C9E;--f-minerales:#C8891E;
+    --f-especies:#4C6EF5;--f-contrabando:#667B89;--f-trata:#C0267E;--soberano:#9AA7B0;}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--area:#0e2233;--borde:#24405a;
-    --f-narcotrafico:#BA66EC;--f-armas:#667B89;--f-migracion:#F9F9F7;--f-minerales:#BA66EC;
-    --f-especies:#F9F9F7;--f-contrabando:#FB6500;--f-trata:#BA66EC;}}
+    --f-narcotrafico:#B983F0;--f-armas:#FF7A1A;--f-migracion:#2FB6D9;--f-minerales:#E0A83A;
+    --f-especies:#6E8BFF;--f-contrabando:#8CA3B2;--f-trata:#E255A0;--soberano:#B9C4CD;}}
   :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--area:#0e2233;--borde:#24405a;
-    --f-narcotrafico:#BA66EC;--f-armas:#667B89;--f-migracion:#F9F9F7;--f-minerales:#BA66EC;
-    --f-especies:#F9F9F7;--f-contrabando:#FB6500;--f-trata:#BA66EC;}
+    --f-narcotrafico:#B983F0;--f-armas:#FF7A1A;--f-migracion:#2FB6D9;--f-minerales:#E0A83A;
+    --f-especies:#6E8BFF;--f-contrabando:#8CA3B2;--f-trata:#E255A0;--soberano:#B9C4CD;}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--fondo);color:var(--tinta);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5;}
   b{color:var(--tinta);}
