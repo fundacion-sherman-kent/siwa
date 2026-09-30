@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-30T08:32:54+00:00",
+  "corrida": "2026-09-30T12:28:15+00:00",
   "medidas_con_suficientes_casos": 212,
   "pares_probados": 22366,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 22.366 pares y el umbral de siempre, alrededor de 1.118 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4300,
+    "sobreviven": 4326,
     "de_ellos_son_parentescos": 417
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3883,
-  "anomalias_totales": 394,
+  "pistas_totales": 3909,
+  "anomalias_totales": 395,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -347,13 +347,26 @@
     },
     {
       "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.926,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.785893837385414e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
       "b": "perdida_bosque",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.925,
+      "coeficiente": 0.926,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 7.039472621183296e-19,
+      "p": 5.081961585577735e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -385,14 +398,14 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.922,
-      "estados": 33,
+      "a": "migrantes",
+      "b": "ransomware:victimas_ultimos_dos_anios",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
+      "coeficiente": 0.923,
+      "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 1.5558273735081232e-18,
+      "p": 1.6105070484444756e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -419,19 +432,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.612828881614103e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "migrantes",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.915,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.9252794840458167e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -515,6 +515,19 @@
       "misma_categoria": false
     },
     {
+      "a": "migrantes",
+      "b": "ransomware:victimas",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.908,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1410557563891904e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -593,6 +606,19 @@
       "misma_categoria": false
     },
     {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "ransomware:victimas",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.903,
+      "estados": 28,
+      "tipo": "rangos (Spearman)",
+      "p": 9.266663002191697e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estabilidad",
       "b": "monopolio_fuerza",
       "rotulo_a": "Estabilidad política y ausencia de violencia",
@@ -601,19 +627,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 8.223482471956663e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "ransomware:victimas",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.902,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1128084260439211e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -645,14 +658,14 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:victimas",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas",
+      "a": "focos:nocturnos",
+      "b": "superficie",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "Superficie del territorio",
       "coeficiente": 0.898,
-      "estados": 31,
+      "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 9.345878819830885e-15,
+      "p": 1.2703139117542602e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 3.003697736400934e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "administracion_basica",
-      "b": "democracia_electoral",
-      "rotulo_a": "Administración básica del Estado",
-      "rotulo_b": "Nivel democrático — democracia electoral",
-      "coeficiente": 0.889,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 6.409505276196099e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
