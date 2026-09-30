@@ -14,7 +14,7 @@
   :root{--orange:var(--fusk-naranja,#FB6500);--fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;
     --linea:#d7dce3;--caja:#ffffff;--navy:var(--fusk-navy,#00121E);--area:#e4e0d4;--borde:#b9c1c9;
     --fl-migracion:#8C00E0;--fl-armas:#5b7180;--fl-especies:#460070;--fl-trata:#FB6500;
-    --fl-financiero:#00121E;--fl-minerales:#FB6500;--fl-migrantes:#8C00E0;}
+    --fl-financiero:#00121E;--fl-minerales:#FB6500;--fl-migrantes:#8C00E0;--fl-narco:#667B89;}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--area:#0e2233;--borde:#24405a;
     --fl-migracion:#BA66EC;--fl-armas:#8296a4;--fl-especies:#8C00E0;--fl-financiero:#F9F9F7;--fl-migrantes:#BA66EC;}}
@@ -32,6 +32,8 @@
     color:var(--tinta);padding:6px 11px 6px 9px;border-radius:20px;font-size:12.5px;font-weight:600;opacity:.5;font-family:inherit;}
   .chip .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto;}
   .chip[aria-pressed="true"]{opacity:1;border-color:var(--tenue);}
+  .chip .nivel{font-size:9.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--tenue);border:1px solid var(--linea);border-radius:9px;padding:1px 5px;margin-left:1px;}
   .aviso{font-size:12px;color:var(--tenue);margin:2px 0 10px;}
   .leyenda{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin:8px 0 2px;color:var(--tenue);font-size:12px;}
   .leyenda .li{display:inline-flex;align-items:center;gap:6px;}
@@ -125,8 +127,9 @@ const META={
   especies:{n:'Especies (CITES)',u:'envíos',f:v=>Math.round(v/1e3)+' k env.'},
   trata:{n:'Trata de personas',u:'víctimas detectadas',f:v=>v.toLocaleString('es-AR')},
   financiero:{n:'Financiero',u:'brecha US$ · exposición',f:v=>'US$ '+(v/1000).toFixed(1).replace('.',',')+' mil M'},
+  narco:{n:'Narco', nivel:'C', u:'ha de coca · producción (estimado)', f:v=>v.toLocaleString('es-AR')+' ha'},
 };
-const ORDEN=['migracion','migrantes','armas','minerales','especies','trata','financiero'];
+const ORDEN=['migracion','migrantes','armas','minerales','especies','trata','financiero','narco'];
 // destinos fuera de la región: se llevan a un marcador en el borde según su dirección real
 const EDGES={norte:{c:[-96,31],t:'EE.UU. / Norteamérica'},europa:{c:[-37,15],t:'Europa'},
   offshore:{c:[-37,4],t:'Offshore'},asia:{c:[-37,-7],t:'Asia'}};
@@ -178,7 +181,10 @@ async function cargar(){
   disp.forEach(k=>{
     const b=document.createElement('button'); b.className='chip'; b.type='button';
     b.setAttribute('aria-pressed',activos.has(k));
-    b.innerHTML=`<span class="dot" style="background:var(--fl-${k})"></span>${(META[k]||{}).n||k}`;
+    const nivel=(META[k]||{}).nivel;
+    const badge=nivel?`<span class="nivel" title="Calificación ${nivel}">nivel ${nivel}</span>`:'';
+    b.innerHTML=`<span class="dot" style="background:var(--fl-${k})"></span>${(META[k]||{}).n||k}${badge}`;
+    if(CORR.flujos[k].advertencia) b.title=CORR.flujos[k].advertencia;
     b.onclick=()=>{activos.has(k)?activos.delete(k):activos.add(k);b.setAttribute('aria-pressed',activos.has(k));pintar();};
     chips.appendChild(b);
   });
@@ -206,9 +212,12 @@ async function cargar(){
     document.getElementById('control-pais').scrollIntoView({behavior:'smooth',block:'center'});
     setTimeout(()=>sel.focus(),350); };
   const faltan=ORDEN.filter(k=>CORR.flujos[k] && !CORR.flujos[k].disponible);
-  document.getElementById('aviso').textContent = faltan.length
-    ? 'Esperan la próxima corrida del robot: '+faltan.map(k=>(META[k]||{}).n||k).join(', ')+'. Narco queda como corredor narrativo (dato gated).'
-    : '';
+  const avisos=[];
+  if(faltan.length) avisos.push('Esperan la próxima corrida del robot: '+faltan.map(k=>(META[k]||{}).n||k).join(', ')+'.');
+  const narco=CORR.flujos.narco;
+  if(narco && narco.disponible) avisos.push('Narco (nivel '+(narco.nivel||'C')+', estimado): '+
+    (narco.advertencia || 'hectáreas de cultivo de coca de Colombia, Perú y Bolivia hacia su mercado principal; no es ruta ni incautación medida.'));
+  document.getElementById('aviso').textContent = avisos.join(' ');
   document.getElementById('cargando').style.display='none';
   const cont=document.getElementById('mapa'); cont.style.display='block';
   chart=echarts.init(cont,null,{renderer:'canvas'});
@@ -264,9 +273,10 @@ function pintar(){
       textStyle:{color:cssvar('--tinta')},
       formatter:o=>{ if(o.seriesType==='lines'){const d=o.data;
         const eti={sale:'sale de la región', entra:'llega a la región', intra:'dentro de la región'}[d.dir];
+        const cav = d.flow==='narco' ? '<br><span style="opacity:.6;font-size:11px">Estimado · nivel C · proxy de cultivo, no ruta ni incautación</span>' : '';
         return '<b>'+(META[d.flow]?META[d.flow].n:d.flow)+'</b> <span style="opacity:.6">· '+eti+'</span><br>'+
           nombre(d.oname)+' → '+nombre(d.dname)+
-          '<br>'+META[d.flow].f(d.val)+' <span style="opacity:.6">'+META[d.flow].u+'</span>';}
+          '<br>'+META[d.flow].f(d.val)+' <span style="opacity:.6">'+META[d.flow].u+'</span>'+cav;}
         return o.name; }},
     geo:{map:'alc', roam:true, aspectScale:1,
       zoom: PAIS?3:1.1, center: PAIS?CENTRO[PAIS]:null,
