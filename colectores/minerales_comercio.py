@@ -224,6 +224,13 @@ def recolectar():
             f"LA FUENTE CORTÓ LA TANDA y quedaron {len(sinConsultar)} Estados SIN CONSULTAR: "
             f"{', '.join(sinConsultar)}. No figuran en cero: figuran como no consultados.")
 
+    # GUARDA: si NINGÚN Estado declaró, la fuente falló (límite/caída de Comtrade). No se
+    # publica un archivo en cero —pisaría el último dato bueno y vaciaría los corredores—.
+    if conDato == 0:
+        raise RuntimeError(
+            f"Comtrade no devolvió ningún Estado con declaración (sin consultar: {len(sinConsultar)}). "
+            "Probable límite o corte de la fuente. NO se publica para no pisar el último dato bueno.")
+
     calificacion = comun.calificar(
         fiabilidad="A", credibilidad=2, corroborado=False,
         nota=("Base de comercio de Naciones Unidas, alimentada por las aduanas de cada Estado. "

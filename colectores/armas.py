@@ -248,6 +248,15 @@ def recolectar():
             f"Estados SIN CONSULTAR: {', '.join(sinConsultar)}. NO figuran en cero: "
             "figuran como no consultados, que es distinto.")
 
+    # GUARDA: si NINGÚN Estado declaró, la fuente falló (límite/caída de Comtrade). No se
+    # publica un archivo en cero —pisaría el último dato bueno y vaciaría los corredores—.
+    # Se corta y se declara; el paso queda en rojo (continue-on-error) y el archivo previo
+    # se conserva. Así fue como una corrida con Comtrade caído dejó armas en cero.
+    if conDato == 0:
+        raise RuntimeError(
+            f"Comtrade no devolvió ningún Estado con declaración (sin consultar: {len(sinConsultar)}). "
+            "Probable límite o corte de la fuente. NO se publica para no pisar el último dato bueno.")
+
     calificacion = comun.calificar(
         fiabilidad="A",
         credibilidad=2,

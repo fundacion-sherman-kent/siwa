@@ -45,6 +45,13 @@
   .controles select:focus{outline:2px solid var(--orange);outline-offset:1px;}
   .controles .limpiar{border:none;background:none;color:var(--orange);font-family:inherit;font-size:12.5px;
     font-weight:600;cursor:pointer;padding:6px 4px;display:none;}
+  .segmento{display:inline-flex;border:1px solid var(--linea);border-radius:20px;overflow:hidden;background:var(--caja);}
+  .segmento button{border:none;background:none;font-family:inherit;font-size:12.5px;font-weight:600;color:var(--tenue);
+    cursor:pointer;padding:7px 13px;border-right:1px solid var(--linea);}
+  .segmento button:last-child{border-right:none;}
+  .segmento button[aria-pressed="true"]{background:var(--navy);color:#fff;}
+  :root[data-theme="dark"] .segmento button[aria-pressed="true"]{background:var(--fl-migracion);color:#00121E;}
+  @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .segmento button[aria-pressed="true"]{background:var(--fl-migracion);color:#00121E;}}
   #mapa{width:100%;height:640px;}
   .lista{margin:14px 0 4px;display:none;}
   .lista h2{font-size:15px;margin:0 0 8px;letter-spacing:-.2px;}
@@ -103,6 +110,14 @@
     <select id="pais" aria-label="Elegir un país para ver sus corredores"><option value="">Todos los países</option></select>
     <button type="button" class="limpiar" id="limpiar">Volver a todos ✕</button>
   </div>
+  <div class="controles">
+    <span class="rot">Sentido</span>
+    <div class="segmento" id="sentido" role="group" aria-label="Filtrar por sentido del flujo">
+      <button type="button" data-s="todos" aria-pressed="true">Todos</button>
+      <button type="button" data-s="sale" aria-pressed="false">Sale de la región</button>
+      <button type="button" data-s="entra" aria-pressed="false">Llega a la región</button>
+    </div>
+  </div>
   <p class="leyenda" id="leyenda">
     <span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4"/></svg> sale de la región</span>
     <span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4" stroke-dasharray="5 4"/></svg> llega a la región</span>
@@ -140,7 +155,7 @@ function edge(nombre,lon,lat){
   return 'asia';
 }
 let chart, GEO, CORR, activos=new Set(['migracion','armas']);
-let PAIS='', NOM={}, CENTRO={};
+let PAIS='', NOM={}, CENTRO={}, SENTIDO='todos';
 
 // nombre de una contraparte: país de la región, socio externo traducido, u original
 function nombre(iso){ return NOM[iso] || EXT_NOMBRE[iso] || iso; }
@@ -207,6 +222,12 @@ async function cargar(){
     pintar();
   };
   document.getElementById('limpiar').onclick=()=>{ sel.value=''; sel.onchange(); };
+  // filtro por sentido: dejar ver de a uno lo que sale y lo que llega
+  document.querySelectorAll('#sentido button').forEach(b=>b.onclick=()=>{
+    SENTIDO=b.dataset.s;
+    document.querySelectorAll('#sentido button').forEach(x=>x.setAttribute('aria-pressed', x===b));
+    pintar();
+  });
   const ir=document.getElementById('ir-pais');
   if(ir)ir.onclick=e=>{ e.preventDefault();
     document.getElementById('control-pais').scrollIntoView({behavior:'smooth',block:'center'});
@@ -226,14 +247,17 @@ async function cargar(){
 }
 
 const valDe=c=>c.valor!=null?c.valor:c.valor_usd;
+// dirección respecto de la región: sale (destino externo), entra (origen externo) o interno
+const dirOf=c=> c.extra_region ? 'sale' : (c.origen_extra_region ? 'entra' : 'intra');
 function pintar(){
   const series=[], edgesUsados={}, filas=[];
   activos.forEach(k=>{
     const flujo=CORR.flujos[k]; if(!flujo||!flujo.disponible)return;
     const col=cssvar('--fl-'+k)||cssvar('--orange');
-    // si hay país elegido, sólo los corredores que lo tocan; si no, los 30 mayores
+    // país elegido → sólo corredores que lo tocan; sentido elegido → sólo ese sentido
     let cs=flujo.corredores;
     if(PAIS) cs=cs.filter(c=>c.origen===PAIS||c.destino===PAIS);
+    if(SENTIDO!=='todos') cs=cs.filter(c=>dirOf(c)===SENTIDO);
     cs=cs.slice(0,30);
     if(!cs.length)return;
     const maxv=Math.max(...cs.map(valDe));
@@ -244,18 +268,18 @@ function pintar(){
       if(c.origen_extra_region){const e=edge(c.origen,c.origen_lon,c.origen_lat);edgesUsados[e]=1;ocoord=EDGES[e].c;}
       let dcoord=[c.destino_lon,c.destino_lat];
       if(c.extra_region){const e=edge(c.destino,c.destino_lon,c.destino_lat);edgesUsados[e]=1;dcoord=EDGES[e].c;}
-      // dirección respecto de la región: sale (destino externo), entra (origen externo) o interno
-      const dir = c.extra_region ? 'sale' : (c.origen_extra_region ? 'entra' : 'intra');
+      const dir=dirOf(c);
       if(PAIS) filas.push({flow:k, c, v});
       return {coords:[ocoord,dcoord],
-        lineStyle:{width:1+Math.sqrt(v/maxv)*6, type: dir==='entra'?'dashed':'solid',
-                   opacity: dir==='intra'?.42:.62},
+        lineStyle:{width:0.6+Math.sqrt(v/maxv)*3, type: dir==='entra'?'dashed':'solid',
+                   opacity: dir==='intra'?.4:.6},
         val:v, flow:k, dir, oname:c.origen, dname:c.destino};
     });
     series.push({name:META[k]?META[k].n:k, type:'lines', coordinateSystem:'geo', zlevel:2,
-      lineStyle:{color:col, curveness:.25},
-      effect:{show:true, period:5, trailLength:.5, symbol:'arrow', symbolSize:6, color:col},
-      emphasis:{lineStyle:{opacity:1, width:3}},
+      lineStyle:{color:col, curveness:.2},
+      symbol:['none','arrow'], symbolSize:6,          // punta fija en el destino: el sentido se ve sin animación
+      effect:{show:true, period:6, trailLength:.4, symbol:'arrow', symbolSize:5, color:col},
+      emphasis:{lineStyle:{opacity:1, width:2.5}},
       data});
   });
   listaPais(filas);
