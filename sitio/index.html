@@ -4709,6 +4709,13 @@
     ARMONIZACION = d;
     if (typeof repintar === 'function') repintar(); // repinta cuando llega, sin gatear el resto
   }).catch(() => {});
+
+  // Policías: fuente UNODC (UN-CTS) directa, más fresca (hasta 2024) y con más
+  // cobertura (29 Estados) que Our World in Data (24, 2015). Mismo proveedor de
+  // fondo. Va ANTES que owd en fuentesInd(), así que encabeza la clave «policias».
+  traer('policias_unodc.json').then(d => { almacen.policias_unodc = d;
+    if (typeof repintar === 'function') repintar();
+  }).catch(() => {});
   function notaArmonizacion(clave, iso){
     if(!ARMONIZACION || !Array.isArray(ARMONIZACION.fichas)) return '';
     const f = ARMONIZACION.fichas.find(x => x.clave === clave && x.iso === iso);
@@ -8910,7 +8917,7 @@
 
   // Los indicadores vienen de varias fuentes. Se buscan en todas, para que
   // agregar un colector nuevo no obligue a tocar el resto de la página.
-  const fuentesInd = () => [almacen.banco, almacen.ods, almacen.owd, almacen.bti,
+  const fuentesInd = () => [almacen.banco, almacen.ods, almacen.policias_unodc, almacen.owd, almacen.bti,
                             almacen.cepal, almacen.gasto, almacen.unesco,
                             almacen.oit, almacen.salud, almacen.prensa,
                             almacen.pobreza, almacen.percepcion_corrupcion,
