@@ -10,6 +10,7 @@
 <link rel="icon" href="marca/fusk-icono-color.png" type="image/png">
 <link rel="stylesheet" href="_comun/paleta-fusk.css"><!-- FUENTE ÚNICA de la paleta -->
 <script src="lib/echarts.min.js"></script>
+<script src="lib/echarts-gl.min.js"></script>
 <style>
   /* Base del manual FUSK: #07131E #00121E #667B89 #460070 #8C00E0 #BA66EC #FB6500 (+ crema #F9F9F7).
      Cada familia lleva un color propio y distinto. Se parte del manual (violeta, naranja, gris-azul) y, para
@@ -17,14 +18,17 @@
   :root{--orange:var(--fusk-naranja,#FB6500);--fondo:#F4F2EC;--tinta:#0d2233;--tenue:#667B89;
     --linea:#d7dce3;--caja:#ffffff;--navy:var(--fusk-navy,#00121E);--area:#e4e0d4;--borde:#b9c1c9;
     --f-narcotrafico:#8C00E0;--f-armas:#FB6500;--f-migracion:#0E7C9E;--f-minerales:#C8891E;
-    --f-especies:#4C6EF5;--f-contrabando:#667B89;--f-trata:#C0267E;--soberano:#9AA7B0;}
+    --f-especies:#4C6EF5;--f-contrabando:#667B89;--f-trata:#C0267E;--soberano:#9AA7B0;
+    --oceano:#cfe0ec;--rio:#7fb0d0;--atmos:#d4e6f2;}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
     --fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--area:#0e2233;--borde:#24405a;
     --f-narcotrafico:#B983F0;--f-armas:#FF7A1A;--f-migracion:#2FB6D9;--f-minerales:#E0A83A;
-    --f-especies:#6E8BFF;--f-contrabando:#8CA3B2;--f-trata:#E255A0;--soberano:#B9C4CD;}}
+    --f-especies:#6E8BFF;--f-contrabando:#8CA3B2;--f-trata:#E255A0;--soberano:#B9C4CD;
+    --oceano:#0e2a3e;--rio:#2f6f93;--atmos:#0e2a3e;}}
   :root[data-theme="dark"]{--fondo:#00121E;--tinta:#eef3f8;--tenue:#7d90a8;--linea:#1d3346;--caja:#0a1f30;--area:#0e2233;--borde:#24405a;
     --f-narcotrafico:#B983F0;--f-armas:#FF7A1A;--f-migracion:#2FB6D9;--f-minerales:#E0A83A;
-    --f-especies:#6E8BFF;--f-contrabando:#8CA3B2;--f-trata:#E255A0;--soberano:#B9C4CD;}
+    --f-especies:#6E8BFF;--f-contrabando:#8CA3B2;--f-trata:#E255A0;--soberano:#B9C4CD;
+    --oceano:#0e2a3e;--rio:#2f6f93;--atmos:#0e2a3e;}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--fondo);color:var(--tinta);font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.5;}
   b{color:var(--tinta);}
@@ -137,6 +141,10 @@
       <input type="range" id="anio" min="2010" max="2026" value="2026" step="1">
       <button type="button" class="btn" id="play">▶ Evolución</button>
     </div>
+    <div class="grupo-c"><span class="rot">Vista</span>
+      <button type="button" class="btn" id="vista" aria-pressed="true">◉ Globo</button>
+      <button type="button" class="btn" id="girar" aria-pressed="false">▶ Giro</button>
+    </div>
   </div>
   <div class="banner" id="banner" role="note"></div>
   <p class="leyenda" id="leyenda"></p>
@@ -170,32 +178,68 @@ const AVISO={
 };
 const OPAC={alta:.92,media:.62,baja:.42};  // la opacidad es confianza, NO volumen
 let chart, RUTAS={}, COB={}, fam='narcotrafico', sub='__todos', anioMax=2026, playing=false, timer=null;
+let WORLD=null, RIOS=null, LAGOS=null, RELIEVE=null, BASE=null, vista='globo', girando=false;
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const urlOk=u=>/^https?:\/\//i.test(u||'');
+const loadImg=src=>new Promise(res=>{const im=new Image(); im.crossOrigin='anonymous'; im.onload=()=>res(im); im.onerror=()=>res(null); im.src=src;});
+// ¿hay WebGL y ECharts-GL para el globo?
+const GL_OK=(function(){ try{ if(typeof echarts==='undefined'||!window.WebGLRenderingContext) return false;
+  const c=document.createElement('canvas'); return !!(c.getContext('webgl')||c.getContext('experimental-webgl')); }catch(e){ return false; } })();
 
 function famColor(f){ return cssvar('--f-'+f)||'#8C00E0'; }
 function aplicarFam(){  // el color de la familia elegida alimenta bordes y puntos de los botones
   document.querySelectorAll('.chip').forEach(b=>{ b.style.setProperty('--fam',famColor(b.dataset.f)); b.querySelector('.dot').style.background=famColor(b.dataset.f); });
 }
 
+// Textura de la Tierra para el globo: países (límites visibles), relieve leve, lagos y ríos
+function baseTextura(){
+  const W=4096,H=2048, c=document.createElement('canvas'); c.width=W; c.height=H; const x=c.getContext('2d');
+  const px=(lon,lat)=>[ (lon+180)/360*W, (90-lat)/180*H ];
+  const polys=(feats,cb)=>{ (feats||[]).forEach(f=>{ const g=f.geometry; if(!g)return;
+    const pp=g.type==='Polygon'?[g.coordinates]:(g.type==='MultiPolygon'?g.coordinates:[]);
+    pp.forEach(poly=>poly.forEach((ring,i)=>{ x.beginPath();
+      ring.forEach((pt,j)=>{const p=px(pt[0],pt[1]); j?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]);});
+      x.closePath(); cb(i); })); }); };
+  x.fillStyle=cssvar('--oceano'); x.fillRect(0,0,W,H);
+  x.fillStyle=cssvar('--area'); polys((WORLD||{}).features, i=>{ if(i===0)x.fill(); });   // tierra
+  if(RELIEVE){ x.save(); x.beginPath();                                                    // relieve leve (multiply recortado a tierra)
+    (WORLD.features||[]).forEach(f=>{ const g=f.geometry; if(!g)return;
+      const pp=g.type==='Polygon'?[g.coordinates]:(g.type==='MultiPolygon'?g.coordinates:[]);
+      pp.forEach(poly=>poly.forEach((ring,i)=>{ if(i)return; ring.forEach((pt,j)=>{const p=px(pt[0],pt[1]); j?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]);}); x.closePath(); })); });
+    x.clip(); x.globalCompositeOperation='multiply';
+    x.globalAlpha=(document.documentElement.getAttribute('data-theme')==='dark')?0.28:0.34;
+    x.drawImage(RELIEVE,0,0,W,H); x.restore(); }
+  x.strokeStyle=cssvar('--borde'); x.lineWidth=1.3; x.lineJoin='round'; polys((WORLD||{}).features, ()=>x.stroke()); // límites
+  x.fillStyle=cssvar('--oceano'); x.strokeStyle=cssvar('--rio'); x.lineWidth=.8; polys((LAGOS||{}).features, i=>{ if(i===0){x.fill(); x.stroke();} }); // lagos
+  x.strokeStyle=cssvar('--rio'); x.lineWidth=1.4; x.lineCap='round';                        // ríos
+  (RIOS&&RIOS.features||[]).forEach(f=>{ const g=f.geometry; if(!g)return;
+    const ls=g.type==='LineString'?[g.coordinates]:(g.type==='MultiLineString'?g.coordinates:[]);
+    ls.forEach(line=>{ x.beginPath(); line.forEach((pt,j)=>{const p=px(pt[0],pt[1]); j?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]);}); x.stroke(); }); });
+  return c.toDataURL('image/png');
+}
+
 const FILES=['cocaina','opioides','marihuana','sinteticos','armas','migracion','minerales','especies','contrabando','precursores','trata'];
 Promise.all([
   fetch('flujos-world.json').then(r=>{ if(!r.ok) throw new Error('mundo'); return r.json(); }),
+  fetch('flujos-rios.json').then(r=>r.json()).catch(()=>({features:[]})),
+  fetch('flujos-lagos.json').then(r=>r.json()).catch(()=>({features:[]})),
+  GL_OK?loadImg('relieve-gris.jpg'):Promise.resolve(null),
   ...FILES.map(f=>fetch('flujos-rutas-'+f+'.json').then(r=>r.json()).catch(()=>({rutas:[]})))
-]).then(([world,...packs])=>{
+]).then(([world,rios,lagos,relieve,...packs])=>{
   FILES.forEach((f,i)=>{ RUTAS[f]=packs[i].rutas||[]; if(packs[i].cobertura_parcial) COB[f]=packs[i].cobertura_parcial; });
+  WORLD=world; RIOS=rios; LAGOS=lagos; RELIEVE=relieve;
   echarts.registerMap('world',world);
+  if(!GL_OK){ vista='plano'; const vb=document.getElementById('vista'), gb=document.getElementById('girar');
+    if(vb){vb.style.display='none';} if(gb){gb.style.display='none';} }
   document.getElementById('cargando').style.display='none';
   const cont=document.getElementById('mapa'); cont.style.display='block';
-  chart=echarts.init(cont,null,{renderer:'canvas'});
-  window.addEventListener('resize',()=>chart.resize());
-  // Reajuste robusto: si el contenedor tomó su ancho después del init (canvas en 0), el observer lo corrige.
+  window.addEventListener('resize',()=>{ if(chart) chart.resize(); });
   try{ new ResizeObserver(()=>{ if(chart) chart.resize(); }).observe(cont); }catch(e){}
-  requestAnimationFrame(()=>{ if(chart) chart.resize(); });
   document.getElementById('leyenda').innerHTML=
     '<span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4"/></svg> línea llena: con fuente</span>'+
     '<span class="li"><svg width="30" height="8" aria-hidden="true"><line x1="0" y1="4" x2="30" y2="4" stroke="currentColor" stroke-width="2.4" stroke-dasharray="5 4"/></svg> de puntos: inferido, trazado o histórico</span>'+
-    '<span class="li">opacidad: confianza, <b>no</b> volumen</span><span class="li">flecha: sentido</span>'+
+    '<span class="li">opacidad: confianza, <b>no</b> volumen</span>'+
+    '<span class="li">límites, relieve, ríos y lagos: Natural Earth</span>'+
     '<span class="li">gris: flujo soberano bajo sanción, no ilícito</span>';
   document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{ fam=b.dataset.f; sub='__todos';
     document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f===fam)); llenarSub(); pintar(); });
@@ -206,10 +250,28 @@ Promise.all([
     if(playing){ if(+anio.value>=2026)anio.value=2010; timer=setInterval(()=>{ let v=+anio.value;
       if(v>=2026){clearInterval(timer);playing=false;document.getElementById('play').textContent='▶ Evolución';return;} anio.value=v+1; anio.oninput(); },650); }
     else clearInterval(timer); };
-  aplicarFam(); llenarSub(); pintar();
+  const vb=document.getElementById('vista'); if(vb) vb.onclick=function(){ vista=(vista==='globo')?'plano':'globo';
+    this.textContent=vista==='globo'?'◉ Globo':'▭ Plano'; this.setAttribute('aria-pressed',vista==='globo');
+    const gb=document.getElementById('girar'); if(gb) gb.style.visibility=vista==='globo'?'visible':'hidden';
+    montarChart(); };
+  const gb=document.getElementById('girar'); if(gb) gb.onclick=function(){ girando=!girando;
+    this.textContent=girando?'⏸ Giro':'▶ Giro'; this.setAttribute('aria-pressed',girando);
+    if(chart&&vista==='globo') chart.setOption({globe:{viewControl:{autoRotate:girando}}}); };
+  if(gb&&vista!=='globo') gb.style.visibility='hidden';
+  aplicarFam(); llenarSub(); montarChart();
 }).catch(()=>{ document.getElementById('cargando').innerHTML='No se pudo cargar el mapa. La lista completa de rutas, con su fuente, está en el <a href="flujos-anexo-fuentes.html">anexo de fuentes</a>.'; });
 
-window.SIWA_onTema=function(){ aplicarFam(); if(chart) pintar(); };
+window.SIWA_onTema=function(){ aplicarFam(); if(vista==='globo'&&GL_OK) BASE=baseTextura(); if(chart) pintar(); };
+
+// (re)inicializa el chart según la vista; el globo necesita su propia instancia
+function montarChart(){
+  const cont=document.getElementById('mapa');
+  if(chart){ chart.dispose(); chart=null; }
+  chart=echarts.init(cont,null,{renderer:'canvas'});
+  if(vista==='globo'&&GL_OK){ BASE=baseTextura(); }
+  pintar();
+  requestAnimationFrame(()=>{ if(chart) chart.resize(); });
+}
 
 // todas las rutas de la familia activa (sin filtrar por año ni subtipo)
 function rutasFam(){ let o=[]; FAM[fam].files.forEach(f=>(RUTAS[f]||[]).forEach(r=>o.push(Object.assign({_file:f},r)))); return o; }
@@ -222,7 +284,39 @@ function llenarSub(){
 }
 function rutasVis(){ return rutasFam().filter(r=>(r.desde||2012)<=anioMax && (sub==='__todos'||r.subtipo===sub)); }
 function pintar(){
-  const col=famColor(fam), gris=cssvar('--soberano')||'#667B89', rs=rutasVis();
+  const rs=rutasVis();
+  if(vista==='globo'&&GL_OK) pintarGlobo(rs); else pintarPlano(rs);
+  pintarPie(rs);
+}
+function pintarGlobo(rs){
+  const col=famColor(fam), gris=cssvar('--soberano')||'#667B89';
+  const lineas=rs.map(r=>{ const hist=r.estado==='historica', inf=r.construccion_propia||hist, ni=r.no_ilicito;
+    return {coords:r.waypoints.map(w=>[w[0],w[1]]),
+      lineStyle:{color:ni?gris:col, width:(ni||inf)?1.6:2.4, opacity:(OPAC[r.confianza]||.6)*(hist?.55:1)}, ruta:r}; });
+  const nodos=[]; rs.forEach(r=>r.waypoints.forEach(w=>{ if(w[3]==='origen'||w[3]==='destino') nodos.push({name:w[2],value:[w[0],w[1]]}); }));
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'item',confine:true,backgroundColor:cssvar('--caja'),borderColor:cssvar('--linea'),textStyle:{color:cssvar('--tinta')},
+      extraCssText:'max-width:min(330px,86vw);white-space:normal;', formatter:tipRuta},
+    globe:{ baseTexture:BASE, shading:'color', environment:cssvar('--fondo'),
+      atmosphere:{show:true,color:cssvar('--atmos'),glowPower:2,innerGlowPower:1},
+      viewControl:{ autoRotate:girando, autoRotateSpeed:5, autoRotateAfterStill:3,
+        targetCoord:[-75,8], distance:175, alpha:20, rotateSensitivity:1.3, zoomSensitivity:1.1 } },
+    series:[
+      {type:'lines3D',coordinateSystem:'globe',
+        effect:{show:!REDUCE,trailWidth:1.8,trailLength:.16,trailOpacity:.85,period:6,trailColor:col},
+        lineStyle:{color:col,width:2,opacity:.7}, data:lineas},
+      {type:'scatter3D',coordinateSystem:'globe',symbolSize:4.6,itemStyle:{color:cssvar('--tenue'),opacity:.95,borderWidth:0}, data:nodos}
+    ]
+  },true);
+}
+function tipRuta(o){ const r=o.data&&o.data.ruta; if(r){
+    return '<b>'+esc(r.nombre)+'</b><br><span style="opacity:.7">'+(r.subtipo?esc(r.subtipo)+' · ':'')+'confianza '+esc(r.confianza)+' · desde '+esc(r.desde||'—')+
+      (r.construccion_propia?' · construcción propia':'')+(r.inferencia==='comercio'?' · inferencia de comercio (espejo)':'')+(r.no_ilicito?' · soberano bajo sanción, NO ilícito':'')+'</span><br>'+
+      r.waypoints.map(w=>esc(w[2])).join(' → ')+'<br><span style="opacity:.7;font-size:11px">'+esc(r.fuente)+'</span>'+(r.etiqueta?'<br><b>'+esc(r.etiqueta)+'</b>':''); }
+  return esc(o.name); }
+function pintarPlano(rs){
+  const col=famColor(fam), gris=cssvar('--soberano')||'#667B89';
   const lineas=rs.map(r=>{ const hist=r.estado==='historica', inf=r.construccion_propia||hist, ni=r.no_ilicito;
     return {coords:r.waypoints.map(w=>[w[0],w[1]]),
       lineStyle:{color:ni?gris:col, width:2.2, opacity:(OPAC[r.confianza]||.6)*(hist?.5:1), type:(inf||ni)?'dashed':'solid', curveness:.18},
@@ -232,12 +326,7 @@ function pintar(){
   chart.setOption({
     backgroundColor:'transparent',
     tooltip:{trigger:'item',confine:true,backgroundColor:cssvar('--caja'),borderColor:cssvar('--linea'),textStyle:{color:cssvar('--tinta')},
-      extraCssText:'max-width:min(330px,86vw);white-space:normal;',
-      formatter:o=>{ if(o.seriesType==='lines'){const r=o.data.ruta;
-        return '<b>'+esc(r.nombre)+'</b><br><span style="opacity:.7">'+(r.subtipo?esc(r.subtipo)+' · ':'')+'confianza '+esc(r.confianza)+' · desde '+esc(r.desde||'—')+
-          (r.construccion_propia?' · construcción propia':'')+(r.inferencia==='comercio'?' · inferencia de comercio (espejo)':'')+(r.no_ilicito?' · soberano bajo sanción, NO ilícito':'')+'</span><br>'+
-          r.waypoints.map(w=>esc(w[2])).join(' → ')+'<br><span style="opacity:.7;font-size:11px">'+esc(r.fuente)+'</span>'+(r.etiqueta?'<br><b>'+esc(r.etiqueta)+'</b>':'');}
-        return esc(o.name); }},
+      extraCssText:'max-width:min(330px,86vw);white-space:normal;', formatter:tipRuta},
     geo:{map:'world',roam:true,center:[-45,8],zoom:2.1,
       itemStyle:{areaColor:cssvar('--area'),borderColor:cssvar('--borde'),borderWidth:.5},
       emphasis:{disabled:true},silent:true},
@@ -249,6 +338,9 @@ function pintar(){
         symbolSize:5, itemStyle:{color:cssvar('--tenue'),opacity:.85}, data:nodos, silent:true}
     ]
   },true);
+}
+function pintarPie(rs){
+  const col=famColor(fam), gris=cssvar('--soberano')||'#667B89';
   // banner de cobertura parcial (según los archivos presentes en la vista)
   const cobs=[...new Set(rs.map(r=>r._file).filter(f=>COB[f]))].map(f=>COB[f]);
   const ban=document.getElementById('banner');
