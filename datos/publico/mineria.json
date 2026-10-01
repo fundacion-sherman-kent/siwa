@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-09-30T22:18:39+00:00",
-  "medidas_con_suficientes_casos": 213,
-  "pares_probados": 22578,
+  "corrida": "2026-10-01T00:33:38+00:00",
+  "medidas_con_suficientes_casos": 212,
+  "pares_probados": 22366,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 22.578 pares y el umbral de siempre, alrededor de 1.128 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4349,
-    "de_ellos_son_parentescos": 419
+    "por_que": "Con 22.366 pares y el umbral de siempre, alrededor de 1.118 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 4293,
+    "de_ellos_son_parentescos": 417
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3930,
+  "pistas_totales": 3876,
   "anomalias_totales": 396,
   "pistas": [
     {
@@ -281,19 +281,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.932,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.3064257062447474e-20,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -341,19 +328,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.5199678582347144e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.927,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.0030286955054554e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -476,6 +450,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.912,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.157893763867736e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "administracion_basica",
       "b": "estado_derecho",
       "rotulo_a": "Administración básica del Estado",
@@ -536,6 +523,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1905778960493398e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.905,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.3640395328212323e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,19 +671,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:nocturnos",
-      "b": "superficie",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.898,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.2703139117542602e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -792,6 +779,19 @@
       "b": "percepcion_corrupcion",
       "rotulo_a": "Corrupción política",
       "rotulo_b": "Percepción de corrupción",
+      "coeficiente": -0.889,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 3.003697736400934e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "corrupcion_politica",
+      "b": "percepcion_corrupcion:puntaje",
+      "rotulo_a": "Corrupción política",
+      "rotulo_b": "percepcion_corrupcion · puntaje",
       "coeficiente": -0.889,
       "estados": 25,
       "tipo": "rangos (Spearman)",
