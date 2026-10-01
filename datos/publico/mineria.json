@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-01T07:12:08+00:00",
+  "corrida": "2026-10-01T12:32:23+00:00",
   "medidas_con_suficientes_casos": 212,
   "pares_probados": 22366,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 22.366 pares y el umbral de siempre, alrededor de 1.118 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4283,
+    "sobreviven": 4296,
     "de_ellos_son_parentescos": 417
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3866,
+  "pistas_totales": 3879,
   "anomalias_totales": 396,
   "pistas": [
     {
@@ -190,6 +190,19 @@
       "misma_categoria": false
     },
     {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "reservas_internacionales",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.943,
+      "estados": 27,
+      "tipo": "rangos (Spearman)",
+      "p": 4.9726033118320344e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "copernicus:escenas",
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
@@ -198,19 +211,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 6.150968194373588e-22,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "reservas_internacionales",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.942,
-      "estados": 27,
-      "tipo": "rangos (Spearman)",
-      "p": 7.9480456202409e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -398,6 +398,19 @@
       "misma_categoria": false
     },
     {
+      "a": "generacion_electrica",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Generación eléctrica",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.918,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 2.9425092281286084e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "democracia_liberal",
       "b": "voz_rendicion",
       "rotulo_a": "Democracia liberal — límites al poder",
@@ -411,14 +424,14 @@
       "misma_categoria": false
     },
     {
-      "a": "generacion_electrica",
-      "b": "reservas_internacionales",
-      "rotulo_a": "Generación eléctrica",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.915,
-      "estados": 30,
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.916,
+      "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.004521120331854e-16,
+      "p": 9.823220678961622e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -445,19 +458,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 2.0733036532958168e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.912,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.157893763867736e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -515,6 +515,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.907,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.18421594812333e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -523,19 +536,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1905778960493398e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.905,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.3640395328212323e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
