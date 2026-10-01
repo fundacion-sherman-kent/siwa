@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-01T20:24:47+00:00",
+  "corrida": "2026-10-01T22:31:50+00:00",
   "medidas_con_suficientes_casos": 212,
   "pares_probados": 22366,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 22.366 pares y el umbral de siempre, alrededor de 1.118 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4331,
-    "de_ellos_son_parentescos": 416
+    "sobreviven": 4325,
+    "de_ellos_son_parentescos": 414
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3915,
-  "anomalias_totales": 401,
+  "pistas_totales": 3911,
+  "anomalias_totales": 397,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -177,6 +177,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.945,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.965409603277941e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -198,19 +211,6 @@
       "estados": 27,
       "tipo": "rangos (Spearman)",
       "p": 4.9726033118320344e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.150968194373588e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -1153,20 +1153,6 @@
       "de": "unesco"
     },
     {
-      "iso": "BLZ",
-      "pais": "Belice",
-      "clave": "policias",
-      "rotulo": "Policías por cada mil habitantes",
-      "anio": 2014,
-      "valor": 5.908,
-      "mediana_previa": 4.713,
-      "desvios": 25.36,
-      "cambio_pct": 25.4,
-      "cambio_en_unidades": 1.195,
-      "puntos_previos": 7,
-      "de": "owd"
-    },
-    {
       "iso": "ECU",
       "pais": "Ecuador",
       "clave": "homicidios",
@@ -1360,6 +1346,20 @@
       "cambio_pct": 1117.7,
       "cambio_en_unidades": 3.657,
       "puntos_previos": 8,
+      "de": "banco-mundial"
+    },
+    {
+      "iso": "DMA",
+      "pais": "Dominica",
+      "clave": "exporta_combustibles",
+      "rotulo": "Combustibles sobre lo que se exporta",
+      "anio": 2023,
+      "valor": 0.007,
+      "mediana_previa": 0.0,
+      "desvios": 15.96,
+      "cambio_pct": null,
+      "cambio_en_unidades": 0.007,
+      "puntos_previos": 7,
       "de": "banco-mundial"
     }
   ],

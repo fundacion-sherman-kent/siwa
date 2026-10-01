@@ -1,6 +1,6 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-01T20:24:56+00:00",
+  "corrida": "2026-10-01T22:31:56+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
@@ -10,8 +10,8 @@
     "indicadores_medidos": 188,
     "mediana_antiguedad_anios": 1.0,
     "al_dia_1_anio_o_menos": 112,
-    "tibio_2_a_3_anios": 59,
-    "atrasado_4_anios_o_mas": 17,
+    "tibio_2_a_3_anios": 60,
+    "atrasado_4_anios_o_mas": 16,
     "series_detenidas_declaradas": 3,
     "archivos_leidos": 96,
     "archivos_sin_json_valido": [],
@@ -80,23 +80,6 @@
     ]
   },
   "ranking_mas_atrasados": [
-    {
-      "clave": "policias",
-      "rotulo": "Policías por cada mil habitantes",
-      "eje": "Seguridad",
-      "seccion": "violencia",
-      "fuente": "Oficina de las Naciones Unidas contra la Droga y el Delito, via Our World in Data",
-      "unidad": "policías por 1.000 personas",
-      "colector": "owd",
-      "archivo": "owd.json",
-      "anio_mas_reciente": 2015,
-      "antiguedad_anios": 11,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 13,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
     {
       "clave": "efectivos_por_habitante",
       "rotulo": "Efectivos por cada cien mil habitantes",
@@ -589,26 +572,26 @@
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
-    }
-  ],
-  "indicadores": [
+    },
     {
-      "clave": "policias",
-      "rotulo": "Policías por cada mil habitantes",
+      "clave": "homicidios",
+      "rotulo": "Homicidios intencionales",
       "eje": "Seguridad",
       "seccion": "violencia",
-      "fuente": "Oficina de las Naciones Unidas contra la Droga y el Delito, via Our World in Data",
-      "unidad": "policías por 1.000 personas",
-      "colector": "owd",
-      "archivo": "owd.json",
-      "anio_mas_reciente": 2015,
-      "antiguedad_anios": 11,
+      "fuente": "UNODC, compilado por el Banco Mundial",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
       "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 13,
+        "con_dato_en_el_anio_mas_reciente": 25,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
-    },
+    }
+  ],
+  "indicadores": [
     {
       "clave": "efectivos_por_habitante",
       "rotulo": "Efectivos por cada cien mil habitantes",
@@ -1693,6 +1676,23 @@
       "antiguedad_anios": 2,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 6,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "policias",
+      "rotulo": "Policías por cada mil habitantes",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "UNODC — UN-CTS (personal policial), tasa por 1.000 con población del Banco Mundial",
+      "unidad": "policías por 1.000 personas",
+      "colector": "policias_unodc",
+      "archivo": "policias_unodc.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -3789,11 +3789,7 @@
       "serie_detenida": false
     }
   ],
-  "colisiones_de_clave": {
-    "policias": [
-      "policias_unodc.json"
-    ]
-  },
+  "colisiones_de_clave": {},
   "vacios_declarados": [
     "La 'cobertura' cuenta filas con dato en el año más reciente de ESE indicador, no contra el padrón de 33 Estados: un indicador regional (no por Estado) declara su propio total de filas.",
     "Un indicador con `serie_detenida` en verdadero no es un colector roto: se le preguntó a la fuente y no tiene nada más nuevo (`colectores/comun.SERIES_DETENIDAS`). Igual entra al ranking, porque la región sigue sin medida vigente de esa materia y eso hay que verlo.",
