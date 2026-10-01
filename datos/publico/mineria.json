@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-01T18:18:40+00:00",
+  "corrida": "2026-10-01T20:24:47+00:00",
   "medidas_con_suficientes_casos": 212,
   "pares_probados": 22366,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 22.366 pares y el umbral de siempre, alrededor de 1.118 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4294,
-    "de_ellos_son_parentescos": 417
+    "sobreviven": 4331,
+    "de_ellos_son_parentescos": 416
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3877,
-  "anomalias_totales": 396,
+  "pistas_totales": 3915,
+  "anomalias_totales": 401,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -346,19 +346,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.926,
-      "estados": 24,
-      "tipo": "rangos (Spearman)",
-      "p": 8.753667834301543e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "democracia_electoral",
       "b": "estado_derecho_wjp",
       "rotulo_a": "Nivel democrático — democracia electoral",
@@ -367,6 +354,19 @@
       "estados": 24,
       "tipo": "rangos (Spearman)",
       "p": 1.0444564718830348e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.924,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 1.4767515245619866e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -437,19 +437,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.916,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.823220678961622e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "articulos_cientificos",
       "b": "generacion_electrica",
       "rotulo_a": "Artículos científicos y técnicos publicados",
@@ -458,6 +445,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.7631297647118704e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.914,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.0549965859768206e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -528,19 +528,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.907,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.18421594812333e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -562,6 +549,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 6.9480466583918774e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.904,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.68364122859876e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

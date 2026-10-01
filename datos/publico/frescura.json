@@ -1,6 +1,6 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-01T18:18:49+00:00",
+  "corrida": "2026-10-01T20:24:56+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
@@ -13,7 +13,7 @@
     "tibio_2_a_3_anios": 59,
     "atrasado_4_anios_o_mas": 17,
     "series_detenidas_declaradas": 3,
-    "archivos_leidos": 95,
+    "archivos_leidos": 96,
     "archivos_sin_json_valido": [],
     "archivos_sin_indicadores_por_anio": [
       "archivo.json",
@@ -3789,7 +3789,11 @@
       "serie_detenida": false
     }
   ],
-  "colisiones_de_clave": {},
+  "colisiones_de_clave": {
+    "policias": [
+      "policias_unodc.json"
+    ]
+  },
   "vacios_declarados": [
     "La 'cobertura' cuenta filas con dato en el año más reciente de ESE indicador, no contra el padrón de 33 Estados: un indicador regional (no por Estado) declara su propio total de filas.",
     "Un indicador con `serie_detenida` en verdadero no es un colector roto: se le preguntó a la fuente y no tiene nada más nuevo (`colectores/comun.SERIES_DETENIDAS`). Igual entra al ranking, porque la región sigue sin medida vigente de esa materia y eso hay que verlo.",
