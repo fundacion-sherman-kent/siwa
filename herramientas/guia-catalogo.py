@@ -65,6 +65,8 @@ HERRAMIENTAS = [
      "s": "tendencia evolucion en el tiempo reloj actualidad al dia"},
     {"archivo": "subnacional.html", "rotulo": "Datos subnacionales",
      "s": "subnacional provincia departamento estado municipio unidad territorio mapa por unidad"},
+    {"archivo": "flujos.html", "rotulo": "Corredores de flujos",
+     "s": "flujos ilicitos corredores trayectorias rutas narcotrafico cocaina marihuana opioides sinteticos precursores armas municiones migracion desplazamiento oro minerales esmeraldas coltan cobre especies vida silvestre madera contrabando cigarrillos combustible trata personas"},
 ]
 
 FAQ = [
