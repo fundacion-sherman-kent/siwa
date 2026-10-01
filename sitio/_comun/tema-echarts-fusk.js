@@ -194,4 +194,23 @@
   // Autorregistro si ECharts ya está cargado
   if (global.echarts) registrar(global.echarts);
 
+  // Aplica el tema de la casa POR DEFECTO a cualquier gráfico que no elija uno:
+  // envuelve echarts.init para inyectar 'fusk' (claro) o 'fusk-oscuro' según el
+  // fondo de la página. Quien pase un tema explícito conserva el suyo; los colores
+  // definidos a mano en cada opción (series, geo, visualMap) siguen mandando sobre
+  // el tema, así que no rompe los mapas que ya fijan sus colores.
+  function envolverInit(echarts){
+    if (!echarts || !echarts.init || echarts.__fuskWrap) return;
+    var _init = echarts.init;
+    echarts.__fuskWrap = true;
+    echarts.init = function (dom, theme, opts) {
+      if (theme == null) {
+        theme = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'fusk-oscuro' : 'fusk';
+      }
+      return _init.call(this, dom, theme, opts);
+    };
+  }
+  if (global.echarts) envolverInit(global.echarts);
+  global.TemaEchartsFUSK.envolverInit = envolverInit;
+
 })(typeof window !== 'undefined' ? window : this);
