@@ -1,0 +1,619 @@
+{
+ "flujo_nombre": "minerales-infra",
+ "es_prototipo": true,
+ "nivel": "infraestructura",
+ "corte": "2026-10-01",
+ "aviso": "Prototipo de la capa de infraestructura de minerales ilícitos (oro, coltán, estaño, cobre) de ALC, transcripto del informe de recolección profunda del 01/10/2026. Coordenadas aproximadas por conocimiento: se anclan a OSM antes de publicar. Varias rutas son posibles duplicados de la capa país (se anota en la nota) y deben cotejarse antes de incorporar. Los pares de comercio sin lote rastreado van como construcción propia; los flujos comerciales no probados como contrabando se rotulan (no_ilicito). Se excluyen las esmeraldas (sin ruta ilícita registrada) y menciones sin trayecto físico.",
+ "rutas": [
+  {
+   "id": "MIN-I01",
+   "nombre": "Oro: Guayana Francesa (alto Maroni) → río Maroni → Paramaribo (Surinam)",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "río Maroni (paso de Albina)",
+   "waypoints": [
+    [
+     -54.03,
+     3.64,
+     "Maripasoula (alto Maroni)",
+     "origen"
+    ],
+    [
+     -54.05,
+     5.5,
+     "Albina (paso del Maroni)",
+     "transito"
+    ],
+    [
+     -55.2,
+     5.85,
+     "Paramaribo",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "Global Organized Crime Index 2025 (GI-TOC/ENACT); INTERPOL op. Guyana Shield (actor interesado)",
+   "url": "https://www.interpol.int/en/News-and-Events/News/2026/198-arrests-in-cross-border-illegal-gold-mining-operation-in-South-America",
+   "nota": "~La mitad del oro ilegal de Guayana Francesa pasa a Paramaribo (estimación del índice). INTERPOL nombra el Maroni y el Oyapock como corredores. Posible duplicado con la capa país.",
+   "dedup_candidato": true
+  },
+  {
+   "id": "MIN-I02",
+   "nombre": "Oro: Surinam (Paramaribo) → Schiphol (Ámsterdam) → Dubái",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "aérea — aeropuerto de Schiphol",
+   "waypoints": [
+    [
+     -55.2,
+     5.85,
+     "Paramaribo",
+     "origen"
+    ],
+    [
+     4.76,
+     52.31,
+     "Schiphol, Ámsterdam",
+     "transito"
+    ],
+    [
+     55.27,
+     25.2,
+     "Dubái",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": true,
+   "fuente": "WWF Guianas (2010); GI-TOC índice 2025 (discrepancias de exportación)",
+   "url": "https://wwflac.awsassets.panda.org/downloads/2010__gold_mining_marketing_chain_heemskerk.pdf",
+   "nota": "Discrepancia de comercio espejo (~2,1× el valor declarado). El tramo Schiphol proviene de un preprint sin revisión: se señala, no se afirma. Leer el PDF de WWF antes de publicar.",
+   "vinculo_difuso": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I03",
+   "nombre": "Oro: Guyana (interior minero) → frontera fluvial con Surinam → EE.UU./Europa/Oriente Medio",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "frontera fluvial río Corentyne (Corriverton)",
+   "waypoints": [
+    [
+     -60.3,
+     6.0,
+     "Interior minero (Mazaruni–Potaro)",
+     "origen"
+    ],
+    [
+     -57.15,
+     5.87,
+     "Corriverton (frontera con Surinam)",
+     "transito"
+    ],
+    [
+     55.27,
+     25.2,
+     "Dubái (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "fuente": "SOCU/gobierno de Guyana (actor interesado) vía Washington Post; Stabroek News",
+   "url": "https://www.stabroeknews.com/2025/07/04/opinion/editorial/unravelling-guyanas-gold-smuggling-web/",
+   "nota": "El 6/01/2026 se suspendieron licencias de 107 mineros brasileños. Estimación oficial: hasta 15.000 oz/semana. Orden de tramos reconstruido; Dubái por marcador. Dos fuentes, pero ambas dependen de la misma unidad oficial.",
+   "vinculo_difuso": true
+  },
+  {
+   "id": "MIN-I04",
+   "nombre": "Oro: Venezuela (Arco Minero) → Guyana (corredores fluviales, pistas) → Dubái",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "corredores fluviales (río Cuyuní) y pistas clandestinas",
+   "waypoints": [
+    [
+     -61.83,
+     7.35,
+     "El Callao / Arco Minero",
+     "origen"
+    ],
+    [
+     -58.62,
+     6.4,
+     "Bartica / Cuyuní",
+     "transito"
+    ],
+    [
+     55.27,
+     25.2,
+     "Dubái",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2015,
+   "construccion_propia": false,
+   "fuente": "Stabroek News; gCaptain (investigación a los Mohamed); Tesoro de EE.UU. (sanciones 2024, actor interesado)",
+   "url": "https://www.stabroeknews.com/2025/07/04/opinion/editorial/unravelling-guyanas-gold-smuggling-web/",
+   "nota": "El editorial habla de 'riverine corridors and remote airstrips' sin nombrar pasos; Bartica es marcador plausible. Sanciones de EE.UU. a operadores del Arco Minero: acusaciones, no sentencia; sin nombrar personas.",
+   "vinculo_difuso": true,
+   "dh_nominados_resuelto": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I05",
+   "nombre": "Oro: Brasil (Itaituba) → Santarém → Manaus → Boa Vista → Venezuela (lavado)",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "eje fluvial amazónico (Tapajós/Amazonas) y carretera BR-174 (Manaus–Boa Vista)",
+   "waypoints": [
+    [
+     -55.98,
+     -4.28,
+     "Itaituba",
+     "origen"
+    ],
+    [
+     -54.71,
+     -2.44,
+     "Santarém",
+     "transito"
+    ],
+    [
+     -60.02,
+     -3.12,
+     "Manaus",
+     "transito"
+    ],
+    [
+     -60.67,
+     2.82,
+     "Boa Vista",
+     "transito"
+    ],
+    [
+     -61.83,
+     7.35,
+     "El Callao (Venezuela)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2023,
+   "construccion_propia": false,
+   "fuente": "Mongabay (PF de Brasil, op. Flygold, actor interesado)",
+   "url": "https://news.mongabay.com/2025/04/amazon-illegal-miners-bypass-enforcement-by-smuggling-gold-into-venezuela/",
+   "nota": "Op. Flygold (PF): ≥1 t en 13 meses (21 kg en termos en Santarém; 47 kg en jet privado desde Manaus). Destinos finales (India/EAU/Turquía) sin trayecto. Posible duplicado con la capa país.",
+   "dedup_candidato": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I06",
+   "nombre": "Oro: Brasil (Pará/Mato Grosso, sin título) → São Paulo → Italia (Arezzo)",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "aérea de exportación — São Paulo (Guarulhos)",
+   "waypoints": [
+    [
+     -55.98,
+     -4.28,
+     "Itaituba",
+     "origen"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "São Paulo",
+     "transito"
+    ],
+    [
+     11.88,
+     43.46,
+     "Italia (Arezzo, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2020,
+   "construccion_propia": false,
+   "fuente": "Instituto Escolhas (ONG); Repórter Brasil",
+   "url": "https://reporterbrasil.org.br/2026/04/italy-pressed-over-signs-of-illegal-gold-imports-from-brazil/",
+   "nota": "17% del oro exportado por Brasil en 2020 era ilegal. Italia importó 356 kg, 254 de Pará/SP; refinería italiana investigada por facturas fraudulentas. Arezzo es marcador. Posible duplicado con la capa país.",
+   "vinculo_difuso": true,
+   "dedup_candidato": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I07",
+   "nombre": "Oro: Brasil (Amazonía, sin título) → São Paulo → Suiza (Zúrich)",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "aérea de exportación — São Paulo (Guarulhos)",
+   "waypoints": [
+    [
+     -55.98,
+     -4.28,
+     "Itaituba",
+     "origen"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "São Paulo",
+     "transito"
+    ],
+    [
+     8.54,
+     47.37,
+     "Suiza (Zúrich, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2020,
+   "construccion_propia": true,
+   "fuente": "Mongabay 'Amazon to Alps'; Instituto Escolhas",
+   "url": "https://news.mongabay.com/2022/01/amazon-to-alps-swiss-gold-imports-from-brazil-tread-a-legal-minefield/",
+   "nota": "Discrepancia y lista de destinos de Escolhas; ciudad suiza por marcador. Artículo de Mongabay no leído completo: verificar antes de publicar.",
+   "vinculo_difuso": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I08",
+   "nombre": "Oro: Ecuador (Zamora Chinchipe; Arenillas) → Guayaquil → EE.UU. (Miami)",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "carretera de El Oro y aeropuerto de Guayaquil",
+   "waypoints": [
+    [
+     -78.7,
+     -4.0,
+     "Zamora Chinchipe (Nambija)",
+     "origen"
+    ],
+    [
+     -80.06,
+     -3.55,
+     "Arenillas",
+     "transito"
+    ],
+    [
+     -79.92,
+     -2.17,
+     "Guayaquil",
+     "transito"
+    ],
+    [
+     -80.29,
+     25.79,
+     "Miami (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2014,
+   "construccion_propia": false,
+   "fuente": "InSight Crime; Global Americans (think tank)",
+   "url": "https://insightcrime.org/news/analysis/tracing-colombia-bolivia-ecuador-illegal-gold-to-us/",
+   "nota": ">70 t a NTR (19 t)/Republic Metals (13 t) en 2010-2014 por vuelos desde Guayaquil. Caso Arenillas: 90 lingotes para mezclar y exportar 'legalmente'. Datos de +10 años; Miami por marcador.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I09",
+   "nombre": "Oro (mineral): Ecuador (Zamora Chinchipe) → Guayaquil → China",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "puerto de Guayaquil",
+   "waypoints": [
+    [
+     -78.7,
+     -4.0,
+     "Zamora Chinchipe",
+     "origen"
+    ],
+    [
+     -79.92,
+     -2.17,
+     "Guayaquil",
+     "transito"
+    ],
+    [
+     121.47,
+     31.23,
+     "China (Shanghái, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2015,
+   "construccion_propia": true,
+   "fuente": "Global Americans (think tank, datos 2015-2019)",
+   "url": "https://globalamericans.org/illicit-gold-mining-in-ecuador-challenges-and-considerations/",
+   "nota": "Exportaciones de mineral de oro +27.604% en peso 2015-2019; China recibió >99% en 2019. Que sea ilícito es juicio de la fuente, sin decomiso. Puerto chino no registrado; segunda fuente pendiente.",
+   "no_publicar": true,
+   "motivo_dh": "C: flujo legal o no probado como ilícito — fuera del mapa de ilícitos"
+  },
+  {
+   "id": "MIN-I10",
+   "nombre": "Oro: Bolivia (norte de La Paz, Beni, Pando; cooperativas) → El Alto → Dubái/Suiza/EE.UU./India",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "carretera a El Alto y aeropuerto de El Alto",
+   "waypoints": [
+    [
+     -68.3,
+     -15.3,
+     "Mapiri / Teoponte",
+     "origen"
+    ],
+    [
+     -68.19,
+     -16.51,
+     "El Alto",
+     "transito"
+    ],
+    [
+     55.27,
+     25.2,
+     "Dubái",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2010,
+   "construccion_propia": false,
+   "fuente": "InSight Crime (2010-2014); Taylor & Francis (2024); Climate Diplomacy",
+   "url": "https://insightcrime.org/news/analysis/tracing-colombia-bolivia-ecuador-illegal-gold-to-us/",
+   "nota": ">310 t exportadas 2010-2014 (sólo InSight Crime leído). >90% de producción cooperativa. Cifras de destino recientes vienen de un agregador, no de registro: no se citan como dato. Posible duplicado con la capa país.",
+   "vinculo_difuso": true,
+   "dedup_candidato": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I11",
+   "nombre": "Oro: Perú (Madre de Dios/Puno) → lago Titicaca/Desaguadero → Bolivia (La Paz/El Alto)",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "lago Titicaca / paso fronterizo de Desaguadero",
+   "waypoints": [
+    [
+     -70.4,
+     -12.9,
+     "Huaypetue (Madre de Dios)",
+     "origen"
+    ],
+    [
+     -70.02,
+     -15.84,
+     "Puno",
+     "transito"
+    ],
+    [
+     -69.04,
+     -16.57,
+     "Desaguadero",
+     "transito"
+    ],
+    [
+     -68.19,
+     -16.51,
+     "La Paz/El Alto",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2014,
+   "construccion_propia": false,
+   "fuente": "InSight Crime (min. del Interior de Perú, actor interesado)",
+   "url": "https://insightcrime.org/news/brief/peru-illegal-miners-trafficking-gold-to-bolivia/",
+   "nota": "Bolivia registró 24 t exportadas (ene-ago 2014) y produjo ~6× menos. Avionetas con 200 kg. Puno/Desaguadero son la ruta lacustre inferida ('across Lake Titicaca'). Dato 2014: re-verificar. Posible duplicado con la capa país.",
+   "dedup_candidato": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I12",
+   "nombre": "Oro (flujo comercial, alerta): Nicaragua (RACCN, León) → Canadá (y Suiza, EAU)",
+   "subtipo": "Oro",
+   "nivel": "infraestructura",
+   "via": "exportación formal (minería industrial)",
+   "waypoints": [
+    [
+     -84.59,
+     13.96,
+     "Bonanza (RACCN)",
+     "origen"
+    ],
+    [
+     -86.4,
+     12.6,
+     "El Limón (León)",
+     "origen"
+    ],
+    [
+     -79.38,
+     43.65,
+     "Toronto (Canadá, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": true,
+   "fuente": "Confidencial; OEC; Mongabay",
+   "url": "https://news.mongabay.com/2025/01/as-the-gold-rush-surges-in-nicaragua-indigenous-communities-pay-the-price/",
+   "nota": "FLUJO COMERCIAL, no contrabando probado (Canadá USD 461 M, Suiza USD 86 M en 2024). Se muestra por el conflicto social y la concesión a una empresa china (COMINTSA → Zhong Fu). Toronto por marcador.",
+   "no_ilicito": true,
+   "no_publicar": true,
+   "motivo_dh": "C: flujo legal o no probado como ilícito — fuera del mapa de ilícitos",
+   "dh_revisar_nominados": true
+  },
+  {
+   "id": "MIN-I13",
+   "nombre": "Coltán: Venezuela (Bolívar, Parguaza) → Puerto Carreño → Inírida → Bogotá → Cartagena → Trieste (Italia)",
+   "subtipo": "Coltán",
+   "nivel": "infraestructura",
+   "via": "corredores fluviales Inírida/Atabapo/Negro y puerto de Cartagena",
+   "waypoints": [
+    [
+     -67.2,
+     6.0,
+     "Agua Mena–Parguaza (Bolívar)",
+     "origen"
+    ],
+    [
+     -67.49,
+     6.19,
+     "Puerto Carreño",
+     "transito"
+    ],
+    [
+     -67.92,
+     3.87,
+     "Inírida",
+     "transito"
+    ],
+    [
+     -74.07,
+     4.71,
+     "Bogotá",
+     "transito"
+    ],
+    [
+     -75.48,
+     10.39,
+     "Cartagena",
+     "transito"
+    ],
+    [
+     13.78,
+     45.65,
+     "Trieste",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2019,
+   "construccion_propia": false,
+   "fuente": "InSight Crime; ICIJ/Center for Public Integrity",
+   "url": "https://insightcrime.org/news/colombia-backdoor-for-venezuelan-coltan/",
+   "nota": "Corredores fluviales (Inírida, Atabapo, Negro) controlados por grupos armados. Decomisos 2021 (5 t, 1,2 t, 1,5 t). Italia incautó coltán venezolano de Cartagena (2019). El tramo a Trieste tiene fuente única. Posible duplicado con la capa país.",
+   "vinculo_difuso": true,
+   "dedup_candidato": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I14",
+   "nombre": "Casiterita (estaño): Brasil (Territorio Yanomami/Rondônia) → Ariquemes (fundición) — insumo presuntamente blanqueado",
+   "subtipo": "Estaño/Tungsteno/Tantalio",
+   "nivel": "infraestructura",
+   "via": "fundición de Ariquemes (White Solder)",
+   "waypoints": [
+    [
+     -63.6,
+     2.8,
+     "Territorio Yanomami (Roraima)",
+     "origen"
+    ],
+    [
+     -63.62,
+     -10.57,
+     "Campo Novo de Rondônia ('minas fantasma')",
+     "transito"
+    ],
+    [
+     -63.04,
+     -9.91,
+     "Ariquemes (White Solder)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2020,
+   "construccion_propia": false,
+   "fuente": "Repórter Brasil; Mongabay; Ministerio Público Federal (actor interesado)",
+   "url": "https://reporterbrasil.org.br/2026/09/global-tin-producer-illegal-mining-amazon-us-military-industry/",
+   "nota": "Multa aceptada (sin condena) contra una fundición por presunta legalización de >525 t de casiterita del territorio Yanomami (2021-2022). El acto ilícito ocurre EN BRASIL; la cadena del estaño refinado a EE.UU. es comercial legal y no se dibuja. Fuente única. Excluida del mapa de ilícitos.",
+   "no_publicar": true,
+   "motivo_dh": "C: flujo legal o no probado como ilícito — fuera del mapa de ilícitos",
+   "dh_nominados_resuelto": true
+  },
+  {
+   "id": "MIN-I15",
+   "nombre": "Cobre robado: Chile (norte y centro) → Iquique → Perú (Callao, escala) → China",
+   "subtipo": "Cobre",
+   "nivel": "infraestructura",
+   "via": "puerto de Iquique y escala en el Callao (Perú)",
+   "waypoints": [
+    [
+     -70.4,
+     -23.65,
+     "Norte de Chile (Antofagasta, marcador)",
+     "origen"
+    ],
+    [
+     -70.15,
+     -20.21,
+     "Iquique",
+     "transito"
+    ],
+    [
+     -77.15,
+     -12.05,
+     "Perú (Callao, marcador)",
+     "transito"
+    ],
+    [
+     121.47,
+     31.23,
+     "China (Shanghái, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2020,
+   "construccion_propia": false,
+   "fuente": "Infobae (op. Alto Voltaje, Fiscalía/Aduanas de Chile, actor interesado); Gestión",
+   "url": "https://www.infobae.com/peru/2026/04/09/chile-desmantela-red-criminal-que-usaba-al-peru-como-escala-para-exportar-cobre-robado-por-us-917-millones/",
+   "nota": "Red movilizó ~USD 917 M (2020-25); embarques a Perú 'como parte de la ruta ilegal'. En Iquique, contenedores 'chatarra' con cables/cátodos (120 t). Puerto peruano y destino chino de la nota; ciudad por marcador.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MIN-I16",
+   "nombre": "Cobre robado (cables de telecom): Chile (Arica) → Puerto de Arica → China (declarado chatarra)",
+   "subtipo": "Cobre",
+   "nivel": "infraestructura",
+   "via": "puerto de Arica",
+   "waypoints": [
+    [
+     -70.31,
+     -18.48,
+     "Región de Arica",
+     "origen"
+    ],
+    [
+     -70.32,
+     -18.47,
+     "Puerto de Arica",
+     "transito"
+    ],
+    [
+     121.47,
+     31.23,
+     "China (Shanghái, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": false,
+   "fuente": "Servicio Nacional de Aduanas, Dir. de Arica (actor interesado) vía The Clinic",
+   "url": "https://www.theclinic.cl/2026/06/02/aduana-de-arica-detecta-exportacion-ilegal-de-429-kilos-de-cobre-robado-que-eran-enviados-al-extranjero-como-chatarra/amp/",
+   "nota": "Caso puntual: 429 kg declarados chatarra. Varias notas repiten un comunicado de Aduanas: una sola fuente real. China por marcador.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  }
+ ]
+}

@@ -1,0 +1,480 @@
+{
+ "flujo_nombre": "armas-infra",
+ "es_prototipo": true,
+ "nivel": "infraestructura",
+ "corte": "2026-10-01",
+ "aviso": "Capa de infraestructura (PROTOTIPO): corredores de tráfico de armas anclados a pasos fronterizos, puentes, puertos, ríos y carreteras reales. Coordenadas aproximadas para previsualización; se anclan a OSM antes de publicar. Buena parte del origen 'EE.UU.' es dato de TRAZADO del ATF (origen de fabricación/compra), no ruta medida; varios tramos fronterizos e infraestructuras concretas son construcción propia a partir de las ciudades que nombra la fuente. Fuentes policiales/militares se rotulan como actor interesado.",
+ "rutas": [
+  {
+   "id": "AR-I01",
+   "nombre": "Armas: Texas (I-35) → paso Laredo–Nuevo Laredo → Monterrey/Tamaulipas",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "Interstate 35; Puente de Comercio Mundial (POE Laredo–Nuevo Laredo); carretera federal 85D",
+   "waypoints": [
+    [
+     -98.49,
+     29.42,
+     "Texas (FFL; corredor I-35, San Antonio)",
+     "origen"
+    ],
+    [
+     -99.54,
+     27.6,
+     "Puente de Comercio Mundial, Laredo (POE)",
+     "transito"
+    ],
+    [
+     -99.52,
+     27.48,
+     "Nuevo Laredo, Tamaulipas",
+     "transito"
+    ],
+    [
+     -100.32,
+     25.69,
+     "Monterrey / Nuevo León",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2010,
+   "construccion_propia": true,
+   "fuente": "GAO-26-108061 (2026); GAO-21-322; datos de trazado ATF",
+   "url": "https://files.gao.gov/reports/GAO-26-108061/index.html",
+   "nota": "GAO nombra la región de Laredo como la de mayores incautaciones de CBP; el anclaje concreto (I-35, Puente de Comercio Mundial, carretera 85 a Monterrey) es construcción propia. 68% de 122.084 armas trazadas 2020-2024 con origen EE.UU.; es dato de TRAZADO, no ruta medida.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true
+  },
+  {
+   "id": "AR-I02",
+   "nombre": "Armas: Arizona → paso Nogales (Mariposa) → Sonora",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "Interstate 19; Mariposa POE (Nogales AZ–Nogales Sonora); carretera federal 15",
+   "waypoints": [
+    [
+     -110.97,
+     32.22,
+     "Arizona (FFL; Tucson/Phoenix)",
+     "origen"
+    ],
+    [
+     -110.94,
+     31.33,
+     "Paso Nogales (Mariposa POE)",
+     "transito"
+    ],
+    [
+     -110.96,
+     29.07,
+     "Hermosillo / Sonora",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2012,
+   "construccion_propia": true,
+   "fuente": "GAO-26-108061 (2026); ATF NFCTA",
+   "url": "https://files.gao.gov/reports/GAO-26-108061/index.html",
+   "nota": "GAO afirma el par estado-a-estado Arizona→Sonora; el paso concreto (Nogales/Mariposa, carretera 15) es construcción propia. Arizona: 1.587 FFL asociados a 15.413 armas recuperadas en México (2018-2025).",
+   "dh_grupo_A": true,
+   "tramo_inferido": true
+  },
+  {
+   "id": "AR-I03",
+   "nombre": "Armas: California → paso San Ysidro–Tijuana → Baja California",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "Interstate 5; paso San Ysidro–El Chaparral (Tijuana)",
+   "waypoints": [
+    [
+     -117.16,
+     32.72,
+     "California (San Diego)",
+     "origen"
+    ],
+    [
+     -117.03,
+     32.54,
+     "Paso San Ysidro–Tijuana (I-5)",
+     "transito"
+    ],
+    [
+     -117.02,
+     32.52,
+     "Tijuana / Baja California",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2018,
+   "construccion_propia": true,
+   "fuente": "GAO-26-108061 (2026)",
+   "url": "https://files.gao.gov/reports/GAO-26-108061/index.html",
+   "nota": "Par California→Baja California en una frase general de GAO ('typically'); el paso concreto San Ysidro–Tijuana (I-5) es construcción propia. Fuente única."
+  },
+  {
+   "id": "AR-I04",
+   "nombre": "Municiones .50: Lake City (Missouri) → México (Villa Unión, Coahuila)",
+   "subtipo": "Municiones",
+   "nivel": "infraestructura",
+   "via": "no anclada: el tramo fronterizo concreto no está descrito en la fuente",
+   "waypoints": [
+    [
+     -94.27,
+     39.09,
+     "Lake City AAP, Missouri (fabricación)",
+     "origen"
+    ],
+    [
+     -100.72,
+     28.22,
+     "Villa Unión, Coahuila (sitio de masacre 2019)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2019,
+   "construccion_propia": true,
+   "fuente": "ICIJ (02/2026); ministro de Defensa de México (actor interesado); registros ATF",
+   "url": "https://www.icij.org/news/2026/02/nearly-half-of-powerful-50-caliber-ammo-seized-by-mexican-government-came-from-us-army-plant-defense-minister-says/",
+   "nota": "Solo hay origen de fabricación (Lake City) y sitio de incautación (Villa Unión); el paso fronterizo intermedio no tiene fuente, así que esta línea NO está anclada a infraestructura. 47% de 137.000 cartuchos .50 incautados desde 2012 vino de Lake City (afirmación oficial mexicana con respaldo ATF)."
+  },
+  {
+   "id": "AR-I05",
+   "nombre": "Armas: Puerto de Miami → puertos de Puerto Príncipe y Cap-Haïtien (Haití)",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "ruta marítima del Caribe; puertos de Miami/Tampa → puertos de Puerto Príncipe y Cap-Haïtien",
+   "waypoints": [
+    [
+     -80.17,
+     25.77,
+     "Puerto de Miami, Florida",
+     "origen"
+    ],
+    [
+     -72.35,
+     18.56,
+     "Puerto de Puerto Príncipe",
+     "destino"
+    ],
+    [
+     -72.2,
+     19.76,
+     "Puerto de Cap-Haïtien",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2021,
+   "construccion_propia": false,
+   "fuente": "UNODC vía UN News (2024); GAO-25-107007; Small Arms Survey (2025); Al Jazeera",
+   "url": "https://news.un.org/en/story/2024/04/1148231",
+   "nota": "UNODC describe dos rutas marítimas desde Florida en buques de carga a Puerto Príncipe y contenedores/pesqueros a Cap-Haïtien; 78% de los envíos ilegales con destino Caribe se detectaron en puertos de Tampa, Miami y Atlanta. 71% de armas recuperadas en Haití 2018-2022 trazadas a EE.UU."
+  },
+  {
+   "id": "AR-I06",
+   "nombre": "Armas: Florida → Puerto de Santo Domingo → paso Dajabón–Ouanaminthe → Haití",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "marítimo hasta Santo Domingo; autopista Duarte; paso terrestre Dajabón–Ouanaminthe (Río Masacre); RN rumbo a Puerto Príncipe",
+   "waypoints": [
+    [
+     -80.19,
+     25.77,
+     "Florida (Miami)",
+     "origen"
+    ],
+    [
+     -69.88,
+     18.47,
+     "Puerto de Santo Domingo (RD)",
+     "transito"
+    ],
+    [
+     -71.71,
+     19.55,
+     "Paso Dajabón–Ouanaminthe (frontera RD–Haití)",
+     "transito"
+    ],
+    [
+     -72.31,
+     18.59,
+     "Puerto Príncipe",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": true,
+   "fuente": "GAO-25-107007; UNODC vía UN News; Al Jazeera (caso Sori-Rodríguez)",
+   "url": "https://files.gao.gov/reports/GAO-25-107007/index.html",
+   "nota": "Tres fuentes independientes afirman el tránsito por RD hacia Haití; la fuente no nombra el cruce concreto. El paso Dajabón–Ouanaminthe (principal de la frontera norte, Río Masacre) es construcción propia.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true
+  },
+  {
+   "id": "AR-I07",
+   "nombre": "Armas: Venezuela → pasos fronterizos → Colombia (grupos armados)",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "pasos Paraguachón (Troncal del Caribe), Puente Simón Bolívar (Cúcuta), Arauca y Puerto Carreño (Río Orinoco), frontera Venezuela–Colombia",
+   "waypoints": [
+    [
+     -72.22,
+     7.77,
+     "Venezuela (frontera Táchira/Apure)",
+     "origen"
+    ],
+    [
+     -71.98,
+     11.3,
+     "Paso Paraguachón (Troncal del Caribe)",
+     "transito"
+    ],
+    [
+     -72.46,
+     7.81,
+     "Puente Simón Bolívar (San Antonio–Cúcuta)",
+     "transito"
+    ],
+    [
+     -70.76,
+     7.08,
+     "Arauca (Puente José A. Páez)",
+     "transito"
+    ],
+    [
+     -67.49,
+     6.19,
+     "Puerto Carreño (Río Orinoco)",
+     "transito"
+    ],
+    [
+     -73.0,
+     8.5,
+     "Colombia (grupos armados; Catatumbo/Arauca)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2020,
+   "construccion_propia": true,
+   "fuente": "Ejército de Colombia vía El Nacional (2025) (actor interesado); DIJIN vía Infobae (2026) (actor interesado); ColombiaOne (2025)",
+   "url": "https://www.infobae.com/colombia/2026/09/15/de-donde-vienen-las-armas-ilegales-que-usan-los-delincuentes-en-colombia-estan-relacionadas-con-el-76-de-los-homicidios-en-el-pais/",
+   "nota": "La DIJIN lista Paraguachón, Maicao, Cúcuta, Arauca y Puerto Carreño como vías de entrada, sin asignarlas a un lote concreto: son pasos agrupados, no un recorrido único. Se hallaron armas con marcas de origen venezolano en grupos colombianos (2025); NO está establecida la vía de desvío ni la responsabilidad de ningún Estado. El Puente Simón Bolívar es anclaje propio del paso de Cúcuta.",
+   "dh_nominados_resuelto": true
+  },
+  {
+   "id": "AR-I08",
+   "nombre": "Armas: Ejército de Colombia → Maicao → Alta Guajira (embarque costero) → grupos armados",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "Troncal del Caribe (Ruta 90); embarque costero en Alta Guajira (Uribia, Nazareth)",
+   "waypoints": [
+    [
+     -72.91,
+     11.54,
+     "Ejército de Colombia (La Guajira; Riohacha)",
+     "origen"
+    ],
+    [
+     -72.24,
+     11.38,
+     "Maicao (Troncal del Caribe)",
+     "transito"
+    ],
+    [
+     -72.27,
+     11.71,
+     "Uribia (ruta a Alta Guajira)",
+     "transito"
+    ],
+    [
+     -71.29,
+     12.18,
+     "Nazareth / costa Alta Guajira (embarque en lanchas)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "ColombiaOne (2025) (actor interesado: Policía, Fiscalía y Contrainteligencia Militar; 23 detenidos)",
+   "url": "https://colombiaone.com/2025/10/04/colombia-military-weapons-network-to-criminal-groups-dismantled/",
+   "nota": "Desvío de inventarios del Ejército vía Maicao y embarque en lanchas desde Uribia/Nazareth (nombrados por la fuente). Armas intercambiadas por cocaína. Medio secundario; no se leyó el comunicado original de la Fiscalía."
+  },
+  {
+   "id": "AR-I09",
+   "nombre": "Armas: Perú (Tumbes/Aguas Verdes) → Puente de la Paz (Huaquillas) → Ecuador → Río San Miguel → Putumayo (Colombia)",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "Puente Internacional de la Paz (Aguas Verdes–Huaquillas, Río Zarumilla); Panamericana E25; frontera fluvial Río San Miguel (San Miguel–Putumayo)",
+   "waypoints": [
+    [
+     -80.24,
+     -3.48,
+     "Aguas Verdes / Tumbes (Perú)",
+     "origen"
+    ],
+    [
+     -80.23,
+     -3.48,
+     "Huaquillas (Puente Internacional, Río Zarumilla)",
+     "transito"
+    ],
+    [
+     -79.92,
+     -2.17,
+     "Guayaquil",
+     "transito"
+    ],
+    [
+     -76.89,
+     0.09,
+     "Lago Agrio (Nueva Loja)",
+     "transito"
+    ],
+    [
+     -76.5,
+     0.49,
+     "Putumayo (frontera Río San Miguel)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2023,
+   "construccion_propia": true,
+   "fuente": "Dirin (Policía de Perú) vía Infobae (2024) (actor interesado)",
+   "url": "https://www.infobae.com/america/america-latina/2024/01/23/ecuador-un-informe-revelo-que-existen-hasta-80-pasos-irregulares-para-el-contrabando-de-armas-en-la-frontera-con-peru/",
+   "nota": "Ciudades de la ruta tomadas del informe policial peruano (fuente interesada); el Puente de la Paz (Río Zarumilla) y la frontera fluvial Río San Miguel son anclaje propio. Hasta 80 pasos irregulares; 391.239 municiones incautadas en Tumbes en 2023 (92% del total nacional). FAME (Perú) niega ser origen de la munición."
+  },
+  {
+   "id": "AR-I10",
+   "nombre": "Armas: Ecuador → Puente de Rumichaca (Ipiales) y corredor del Pacífico (Tumaco) → suroccidente de Colombia",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "Puente de Rumichaca (frontera Tulcán–Ipiales); Vía Panamericana; corredor del Pacífico (Tumaco)",
+   "waypoints": [
+    [
+     -77.72,
+     0.81,
+     "Ecuador (Tulcán, frontera norte)",
+     "origen"
+    ],
+    [
+     -77.67,
+     0.81,
+     "Puente de Rumichaca (Tulcán–Ipiales)",
+     "transito"
+    ],
+    [
+     -78.82,
+     1.8,
+     "Tumaco (puerto del Pacífico)",
+     "transito"
+    ],
+    [
+     -76.5,
+     0.51,
+     "Puerto Asís (Putumayo)",
+     "transito"
+    ],
+    [
+     -76.52,
+     3.44,
+     "Cali / suroccidente",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": true,
+   "fuente": "DIJIN vía Infobae (2026) (actor interesado)",
+   "url": "https://www.infobae.com/colombia/2026/09/15/de-donde-vienen-las-armas-ilegales-que-usan-los-delincuentes-en-colombia-estan-relacionadas-con-el-76-de-los-homicidios-en-el-pais/",
+   "nota": "Puntos de entrada nombrados por la Policía (Tumaco, Ipiales, Puerto Asís) y luego Mocoa, Florencia, Popayán, Cali; son puntos de ingreso alternativos agrupados, no un recorrido único. El Puente de Rumichaca es anclaje propio del paso de Ipiales."
+  },
+  {
+   "id": "AR-I11",
+   "nombre": "Armas cortas: Paraguay (Puente de la Amistad, Pedro Juan Caballero) → BR-277/BR-163 → São Paulo y Río de Janeiro",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "Puente de la Amistad (Ciudad del Este–Foz do Iguaçu, Río Paraná); paso seco Pedro Juan Caballero–Ponta Porã; Guaíra–Salto del Guairá; BR-277 y BR-163",
+   "waypoints": [
+    [
+     -54.6,
+     -25.51,
+     "Ciudad del Este (Puente de la Amistad, Río Paraná)",
+     "origen"
+    ],
+    [
+     -55.73,
+     -22.55,
+     "Pedro Juan Caballero–Ponta Porã (paso seco)",
+     "origen"
+    ],
+    [
+     -54.26,
+     -24.08,
+     "Guaíra–Salto del Guairá",
+     "transito"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "São Paulo (BR-277/BR-163)",
+     "destino"
+    ],
+    [
+     -43.17,
+     -22.91,
+     "Río de Janeiro",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2015,
+   "construccion_propia": true,
+   "fuente": "Polícia Federal (delegado Zampronha) vía Istoé Dinheiro (2018) (actor interesado)",
+   "url": "https://istoedinheiro.com.br/armas-do-crime-vem-de-paraguai-e-eua-e-rota-e-pela-triplice-fronteira-diz-pf",
+   "nota": "La PF nombra los pasos Triple Frontera, Ponta Porã–Pedro Juan Caballero y Guaíra–Salto del Guairá; los puentes/carreteras concretos (Puente de la Amistad, BR-277/BR-163) y la distribución interna a SP/RJ son anclaje propio. 99% entra por fronteras terrestres; dato de 8 años.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true
+  },
+  {
+   "id": "AR-I12",
+   "nombre": "Armas (fusiles y 'ghost guns'): EE.UU. → ingreso por Ciudad del Este (Paraguay) → Río de Janeiro",
+   "subtipo": "Armas de fuego",
+   "nivel": "infraestructura",
+   "via": "envío postal/courier desde EE.UU.; ingreso por Ciudad del Este (Puente de la Amistad); montaje clandestino en Río",
+   "waypoints": [
+    [
+     -80.19,
+     25.77,
+     "EE.UU. (compra de fusiles y kits de piezas; Florida)",
+     "origen"
+    ],
+    [
+     -54.61,
+     -25.51,
+     "Paraguay (ingreso por Ciudad del Este)",
+     "transito"
+    ],
+    [
+     -43.17,
+     -22.91,
+     "Río de Janeiro (montaje clandestino)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2023,
+   "construccion_propia": true,
+   "fuente": "Langeani & Pollachi, JIED (2025); CNN Brasil (2025)",
+   "url": "https://jied.lse.ac.uk/articles/10.31389/jied.300",
+   "nota": "Tres fuentes concuerdan en origen EE.UU. y Paraguay como tránsito principal de fusiles y partes del 80%; el anclaje del ingreso por Ciudad del Este es construcción propia. 593 fusiles incautados en RJ (ene-sep 2025); 95% fabricados en el exterior."
+  }
+ ]
+}

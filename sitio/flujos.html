@@ -224,7 +224,12 @@ Promise.all([
   fetch('flujos-rios.json').then(r=>r.json()).catch(()=>({features:[]})),
   fetch('flujos-lagos.json').then(r=>r.json()).catch(()=>({features:[]})),
   GL_OK?loadImg('relieve-gris.jpg'):Promise.resolve(null),
-  ...FILES.map(f=>fetch('flujos-rutas-'+f+'.json').then(r=>r.json()).catch(()=>({rutas:[]})))
+  ...FILES.map(f=>Promise.all([
+    fetch('flujos-rutas-'+f+'.json').then(r=>r.json()).catch(()=>({rutas:[]})),
+    fetch('infra-rutas-'+f+'.json').then(r=>r.json()).catch(()=>({rutas:[]}))
+  ]).then(([pais,infra])=>({
+    rutas:(pais.rutas||[]).filter(x=>!x.no_publicar).concat((infra.rutas||[]).filter(x=>!x.no_publicar)),
+    cobertura_parcial:pais.cobertura_parcial })))
 ]).then(([world,rios,lagos,relieve,...packs])=>{
   FILES.forEach((f,i)=>{ RUTAS[f]=packs[i].rutas||[]; if(packs[i].cobertura_parcial) COB[f]=packs[i].cobertura_parcial; });
   WORLD=world; RIOS=rios; LAGOS=lagos; RELIEVE=relieve;
@@ -290,9 +295,9 @@ function pintar(){
 }
 function pintarGlobo(rs){
   const col=famColor(fam), gris=cssvar('--soberano')||'#667B89';
-  const lineas=rs.map(r=>{ const hist=r.estado==='historica', inf=r.construccion_propia||hist, ni=r.no_ilicito;
+  const lineas=rs.map(r=>{ const hist=r.estado==='historica', inf=r.construccion_propia||hist||r.tramo_inferido, dif=r.vinculo_difuso, ni=r.no_ilicito;
     return {coords:r.waypoints.map(w=>[w[0],w[1]]),
-      lineStyle:{color:ni?gris:col, width:(ni||inf)?1.6:2.4, opacity:(OPAC[r.confianza]||.6)*(hist?.55:1)}, ruta:r}; });
+      lineStyle:{color:ni?gris:col, width:dif?1.1:((ni||inf)?1.6:2.4), opacity:(OPAC[r.confianza]||.6)*(hist?.55:1)*(dif?.5:1)}, ruta:r}; });
   const nodos=[]; rs.forEach(r=>r.waypoints.forEach(w=>{ if(w[3]==='origen'||w[3]==='destino') nodos.push({name:w[2],value:[w[0],w[1]]}); }));
   chart.setOption({
     backgroundColor:'transparent',
@@ -312,14 +317,14 @@ function pintarGlobo(rs){
 }
 function tipRuta(o){ const r=o.data&&o.data.ruta; if(r){
     return '<b>'+esc(r.nombre)+'</b><br><span style="opacity:.7">'+(r.subtipo?esc(r.subtipo)+' · ':'')+'confianza '+esc(r.confianza)+' · desde '+esc(r.desde||'—')+
-      (r.construccion_propia?' · construcción propia':'')+(r.inferencia==='comercio'?' · inferencia de comercio (espejo)':'')+(r.no_ilicito?' · soberano bajo sanción, NO ilícito':'')+'</span><br>'+
+      (r.construccion_propia?' · construcción propia':'')+(r.tramo_inferido?' · tramo inferido':'')+(r.vinculo_difuso?' · vínculo difuso (no corredor anclado)':'')+(r.inferencia==='comercio'?' · inferencia de comercio (espejo)':'')+(r.no_ilicito?' · soberano bajo sanción, NO ilícito':'')+'</span><br>'+
       r.waypoints.map(w=>esc(w[2])).join(' → ')+'<br><span style="opacity:.7;font-size:11px">'+esc(r.fuente)+'</span>'+(r.etiqueta?'<br><b>'+esc(r.etiqueta)+'</b>':''); }
   return esc(o.name); }
 function pintarPlano(rs){
   const col=famColor(fam), gris=cssvar('--soberano')||'#667B89';
-  const lineas=rs.map(r=>{ const hist=r.estado==='historica', inf=r.construccion_propia||hist, ni=r.no_ilicito;
+  const lineas=rs.map(r=>{ const hist=r.estado==='historica', inf=r.construccion_propia||hist||r.tramo_inferido, dif=r.vinculo_difuso, ni=r.no_ilicito;
     return {coords:r.waypoints.map(w=>[w[0],w[1]]),
-      lineStyle:{color:ni?gris:col, width:2.2, opacity:(OPAC[r.confianza]||.6)*(hist?.5:1), type:(inf||ni)?'dashed':'solid', curveness:.18},
+      lineStyle:{color:ni?gris:col, width:dif?1.3:2.2, opacity:(OPAC[r.confianza]||.6)*(hist?.5:1)*(dif?.6:1), type:(inf||ni||dif)?'dashed':'solid', curveness:dif?.3:.18},
       ruta:r}; });
   const nodos=[]; rs.forEach(r=>r.waypoints.forEach(w=>{ if(w[3]==='origen'||w[3]==='destino')
     nodos.push({name:w[2],value:[w[0],w[1]]}); }));

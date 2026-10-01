@@ -1,0 +1,137 @@
+{
+ "flujo_nombre": "precursores-infra",
+ "es_prototipo": true,
+ "nivel": "infraestructura",
+ "corte": "2026-10-01",
+ "aviso": "Capa de infraestructura de precursores: China→puertos mexicanos (Lázaro Cárdenas, Manzanillo) para fentanilo; Hong Kong/Panamá→Iquique/Arica→El Alto para cocaína; Bogotá→Cúcuta→Catatumbo. Actor interesado rotulado; pasos terrestres no nombrados marcados.",
+ "rutas": [
+  {
+   "id": "PR-I01",
+   "nombre": "Precursores de fentanilo: China (Qingdao) → puerto de Lázaro Cárdenas (Michoacán)",
+   "nivel": "infraestructura",
+   "via": "marítima en contenedor",
+   "waypoints": [
+    [
+     120.38,
+     36.07,
+     "Qingdao (China)",
+     "origen"
+    ],
+    [
+     -102.18,
+     17.93,
+     "Lázaro Cárdenas",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2023,
+   "construccion_propia": false,
+   "fuente": "Semar (2023, actor interesado); DEA NDTA 2025",
+   "url": "https://www.milenio.com/estados/contenedor-con-fentanilo-de-china-es-asegurado-en-puerto-de-michoacan",
+   "nota": "20 t de resina + 600 bultos de precursores (2023). Punto de importación disputado por el CJNG (DEA).",
+   "subtipo": "precursores"
+  },
+  {
+   "id": "PR-I02",
+   "nombre": "Precursores: China (Ningbo-Beilun) → puerto de Manzanillo (Colima)",
+   "nivel": "infraestructura",
+   "via": "marítima",
+   "waypoints": [
+    [
+     121.85,
+     29.93,
+     "Beilun (Ningbo)",
+     "origen"
+    ],
+    [
+     -104.31,
+     19.05,
+     "Manzanillo",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "Semar/FGR/ANAM (actor interesado); DEA NDTA",
+   "url": "https://www.elfinanciero.com.mx/estados/2026/05/24/fgr-deja-al-narco-sin-produccion-decomisan-sustancias-para-elaborar-fentanilo-en-manzanillo/",
+   "nota": "Metiletilcetona (2025); 54.960 l de alcohol bencílico (2026). El CJNG controla el acceso corrupto a Manzanillo (DEA).",
+   "subtipo": "precursores"
+  },
+  {
+   "id": "PR-I04",
+   "nombre": "Precursores de cocaína: Hong Kong/Panamá → Iquique/Arica → El Alto (Bolivia)",
+   "nivel": "infraestructura",
+   "via": "marítima + terrestre por contenedores",
+   "waypoints": [
+    [
+     114.17,
+     22.3,
+     "Hong Kong",
+     "origen"
+    ],
+    [
+     -70.15,
+     -20.21,
+     "Puerto de Iquique",
+     "transito"
+    ],
+    [
+     -70.32,
+     -18.47,
+     "Puerto de Arica",
+     "transito"
+    ],
+    [
+     -68.2,
+     -16.5,
+     "El Alto",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": true,
+   "fuente": "Servicio Nacional de Aduanas/Fiscalía de Arica (actor interesado); CIPER (2025)",
+   "url": "https://www.ciperchile.cl/2025/05/16/en-casi-siete-meses-fiscalia-regional-de-arica-incauto-500-toneladas-de-precursores-quimicos-para-cocaina-en-puertos-de-arica-e-iquique/",
+   "nota": "146 t (mar 2025) + 500 t en 7 meses: carbonato de sodio y acetato de etilo falsamente declarados. Paso terrestre a Bolivia no nombrado.",
+   "subtipo": "precursores",
+   "dh_grupo_A": true,
+   "tramo_inferido": true
+  },
+  {
+   "id": "PR-I06",
+   "nombre": "Precursores: Bogotá → Cúcuta → laboratorios del Catatumbo (Tibú)",
+   "nivel": "infraestructura",
+   "via": "carretera Bogotá–Cúcuta",
+   "waypoints": [
+    [
+     -74.07,
+     4.71,
+     "Bogotá",
+     "origen"
+    ],
+    [
+     -72.5,
+     7.89,
+     "Cúcuta",
+     "transito"
+    ],
+    [
+     -72.74,
+     8.64,
+     "Tibú (Catatumbo)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "fuente": "Fiscalía CTI/Policía (actor interesado, 2025)",
+   "url": "https://www.infobae.com/colombia/2025/06/03/hay-una-narcomansion-en-cucuta-que-estaria-vinculada-a-una-red-de-insumos-para-capos-en-el-catatumbo/",
+   "nota": "48 t de sólidos + 34.283 l (2025); mansión-nodo en Cúcuta. Tibú como ancla de zona.",
+   "subtipo": "precursores"
+  }
+ ]
+}

@@ -1,0 +1,1225 @@
+{
+ "flujo_nombre": "especies-infra",
+ "es_prototipo": true,
+ "nivel": "infraestructura",
+ "corte": "2026-10-01",
+ "aviso": "Corredores de tráfico de especies (fauna y madera) de ALC a nivel infraestructura, anclados a ríos, carreteras, puertos y aeropuertos reales. Prototipo: coordenadas aproximadas por conocimiento, a anclar en OSM antes de publicar. El marcador asiático es centroide de zona, no puerto; varios tramos a Asia son construcción propia. Un decomiso prueba el punto de intercepción, no la ruta completa.",
+ "rutas": [
+  {
+   "id": "ES-I01",
+   "nombre": "Especies: Altamira (Xingu) → Manaus-Leticia-Bogotá → Hong Kong",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Río Xingu; Manaus-Tabatinga; Leticia-Bogotá en vuelo; exportación aérea desde Bogotá (El Dorado)",
+   "waypoints": [
+    [
+     -52.21,
+     -3.2,
+     "Altamira, Volta Grande del Xingu (PA)",
+     "origen"
+    ],
+    [
+     -60.05,
+     -3.04,
+     "Aeropuerto Eduardo Gomes, Manaus",
+     "transito"
+    ],
+    [
+     -69.94,
+     -4.25,
+     "Tabatinga (AM)",
+     "transito"
+    ],
+    [
+     -69.94,
+     -4.21,
+     "Leticia (Amazonas, CO)",
+     "transito"
+    ],
+    [
+     -74.15,
+     4.7,
+     "Aeropuerto El Dorado, Bogotá",
+     "transito"
+    ],
+    [
+     114.17,
+     22.32,
+     "Hong Kong (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2017,
+   "construccion_propia": true,
+   "fuente": "A Critica/PF-Ibama (actor interesado); SINCHI 2025 (actor interesado); ScienceDirect (H. zebra)",
+   "url": "https://acritica.com/channels/manaus/news/apos-tentativa-de-contrabando-peixes-ornamentais-apreendidos-pela-pf-morrem",
+   "nota": "Decomiso en Manaus (14/10/2017): 672 peces, 302 acari-zebra endémico del Xingu. ~100.000 ejemplares/año fuera de Brasil (cifra de fuente). Hong Kong es marcador.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true,
+   "vinculo_difuso": true
+  },
+  {
+   "id": "ES-I02",
+   "nombre": "Especies: Barcelos (río Negro) → Manaus-Leticia-Bogotá → Hong Kong",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Río Negro; barco Barcelos-Manaus (~30 h); triple frontera; Leticia-Bogotá y exportación aérea",
+   "waypoints": [
+    [
+     -62.92,
+     -0.98,
+     "Barcelos (AM)",
+     "origen"
+    ],
+    [
+     -60.02,
+     -3.12,
+     "Manaus (cuarentena y exportación)",
+     "transito"
+    ],
+    [
+     -69.94,
+     -4.25,
+     "Tabatinga",
+     "transito"
+    ],
+    [
+     -69.94,
+     -4.21,
+     "Leticia",
+     "transito"
+    ],
+    [
+     -74.15,
+     4.7,
+     "Aeropuerto El Dorado, Bogotá",
+     "transito"
+    ],
+    [
+     114.17,
+     22.32,
+     "Hong Kong (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2017,
+   "construccion_propia": true,
+   "fuente": "Boletim do Instituto de Pesca (SP); SEPROR/Amazonas (actor interesado); SINCHI 2025 (actor interesado)",
+   "url": "https://siatac.co/Documentos/Atlas/conflictos/Conflictos%202025/035/SINCHI035_V1.pdf",
+   "nota": "Barcelos-Manaus es cadena legal (Projeto Piaba); el tramo a triple frontera es inferencia. Cargar como ruta de riesgo, no probada.",
+   "no_publicar": true,
+   "motivo_dh": "C: flujo legal o no probado como ilícito — fuera del mapa de ilícitos"
+  },
+  {
+   "id": "ES-I03",
+   "nombre": "Especies: Puerto Nariño → Leticia → Bogotá (El Dorado) → Hong Kong",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Río Amazonas hasta Leticia; vuelo Leticia-Bogotá; exportación aérea",
+   "waypoints": [
+    [
+     -70.36,
+     -3.77,
+     "Puerto Nariño (Amazonas, CO)",
+     "origen"
+    ],
+    [
+     -69.94,
+     -4.21,
+     "Leticia",
+     "transito"
+    ],
+    [
+     -69.94,
+     -4.19,
+     "Aeropuerto Vásquez Cobo, Leticia",
+     "transito"
+    ],
+    [
+     -74.15,
+     4.7,
+     "Aeropuerto El Dorado, Bogotá",
+     "transito"
+    ],
+    [
+     114.17,
+     22.32,
+     "Hong Kong (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2020,
+   "construccion_propia": false,
+   "fuente": "Casa Macondo; Pulitzer Center; Secretaría Distrital de Ambiente (actor interesado)",
+   "url": "https://casamacondo.co/cronicas/trafico-peces-ornamentales-amazonia/",
+   "nota": "El Dorado retuvo 11 envios (~1.200 peces) 2020-2025; se inspecciona 5-10 % de las cajas. Brecha de control, no medida del flujo."
+  },
+  {
+   "id": "ES-I04",
+   "nombre": "Especies: Inírida/Puerto Carreno (Orinoco) → Villavicencio → Bogotá → exportación",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Ríos Inírida/Atabapo/Orinoco; carga aérea y terrestre a Bogotá",
+   "waypoints": [
+    [
+     -67.92,
+     3.87,
+     "Inírida (Guainía)",
+     "origen"
+    ],
+    [
+     -67.49,
+     6.19,
+     "Puerto Carreno (Vichada)",
+     "origen"
+    ],
+    [
+     -73.63,
+     4.14,
+     "Villavicencio",
+     "transito"
+    ],
+    [
+     -74.15,
+     4.7,
+     "Bogotá (bodegas de exportación)",
+     "transito"
+    ],
+    [
+     114.17,
+     22.32,
+     "Hong Kong (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2020,
+   "construccion_propia": true,
+   "fuente": "ResearchGate, estudio de producción de ornamentales 2020 (AUNAP/SEPEC)",
+   "url": "https://www.researchgate.net/publication/353464252_Produccion_de_peces_ornamentales_registrada_en_sitios_de_acopio_de_la_Orinoquia_y_la_Amazonia_y_en_bodegas_de_exportacion_de_la_ciudad_de_Bogota_durante_el_periodo_febrero_-diciembre_de_2020",
+   "nota": "Cadena legal de exportación (centros de acopio y bodegas); sin tramo ilícito documentado. Ruta de contexto.",
+   "no_publicar": true,
+   "motivo_dh": "C: flujo legal o no probado como ilícito — fuera del mapa de ilícitos"
+  },
+  {
+   "id": "ES-I05",
+   "nombre": "Especies: Loreto (ríos amazonicos) → Iquitos → Lima",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Ríos Amazonas, Marañón, Ucayali, Putumayo, Napo, Pastaza, Tigre; aerodromos de Güepi y Andoas; vuelo Iquitos-Lima",
+   "waypoints": [
+    [
+     -73.47,
+     -4.47,
+     "Confluencia Marañón-Ucayali (huevos de taricaya)",
+     "origen"
+    ],
+    [
+     -73.7,
+     -3.6,
+     "Río Napo / Alto Nanay (zona de extraccion)",
+     "origen"
+    ],
+    [
+     -73.25,
+     -3.75,
+     "Iquitos (acopio)",
+     "transito"
+    ],
+    [
+     -73.31,
+     -3.79,
+     "Aeropuerto de Iquitos",
+     "transito"
+    ],
+    [
+     -77.04,
+     -12.05,
+     "Lima",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2000,
+   "construccion_propia": false,
+   "fuente": "WCS/SERFOR/USFWS 2018 (actor interesado); InSight Crime",
+   "url": "https://peru.wcs.org/Portals/94/Publicaciones/Tr%C3%A1fico%20y%20Salud/WCS%202018_Rutas_Trafico.pdf?ver=2021-06-10-222822-457",
+   "nota": "WCS: 324 zonas de extraccion en 153 distritos, Loreto concentra >40. 35 % de decomisos en aeropuertos de Lima, Pucallpa e Iquitos."
+  },
+  {
+   "id": "ES-I06",
+   "nombre": "Especies: triple frontera (Islandia-Santa Rosa-Tabatinga) → aeropuerto de Leticia → Bogotá",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Río Amazonas; paso libre Santa Rosa-Leticia-Tabatinga; vuelo regular Leticia-Bogotá",
+   "waypoints": [
+    [
+     -69.78,
+     -3.99,
+     "Islandia (Yavarí, PE)",
+     "origen"
+    ],
+    [
+     -69.97,
+     -4.26,
+     "Santa Rosa (PE)",
+     "transito"
+    ],
+    [
+     -69.94,
+     -4.25,
+     "Tabatinga",
+     "transito"
+    ],
+    [
+     -69.94,
+     -4.21,
+     "Leticia",
+     "transito"
+    ],
+    [
+     -69.94,
+     -4.19,
+     "Aeropuerto de Leticia",
+     "transito"
+    ],
+    [
+     -74.15,
+     4.7,
+     "Bogotá",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2020,
+   "construccion_propia": false,
+   "fuente": "SINCHI 2025 sobre cifras de Corpoamazonia (actor interesado); InSight Crime",
+   "url": "https://siatac.co/Documentos/Atlas/conflictos/Conflictos%202025/035/SINCHI035_V1.pdf",
+   "nota": "Corpoamazonia: ~87 incautaciones en Amazonas 2020-2025, todas en Leticia. Puerto Nariño y la frontera con Perú concentran el tráfico."
+  },
+  {
+   "id": "ES-I07",
+   "nombre": "Especies: Titicaca (Puno) → Cabanillas → Lima",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Transporte de carga por carretera (empresa JATSA); declarada como 'trucha'",
+   "waypoints": [
+    [
+     -70.02,
+     -15.84,
+     "Lago Titicaca, Puno",
+     "origen"
+    ],
+    [
+     -70.35,
+     -15.65,
+     "Puesto de control de Cabanillas (Puno)",
+     "transito"
+    ],
+    [
+     -77.04,
+     -12.05,
+     "Lima (mercados)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2017,
+   "construccion_propia": false,
+   "fuente": "Aduana y SERFOR vía La Derecha del Sur (actor interesado); WCS 2018",
+   "url": "https://laderasur.com/articulo/peru-autoridades-interceptan-en-puno-cargamento-con-mas-de-1700-ranas-gigantes-del-lago-titicaca-una-especie-en-peligro-de-extincion/",
+   "nota": "Mayo 2021: 1.745 Telmatobius culeus en cajas con compartimentos; mercados de Lima a >1.300 km del hábitat. Ruta interna."
+  },
+  {
+   "id": "ES-I08",
+   "nombre": "Especies: Madre de Dios (Iñapari) → Interoceanica Sur → Tacna",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Carretera Interoceanica Sur (Iñapari-Puerto Maldonado-Cusco-Juliaca); ríos Madre de Dios, Manu y Urubamba",
+   "waypoints": [
+    [
+     -69.57,
+     -11.0,
+     "Iñapari / Tahuamanu (Madre de Dios)",
+     "origen"
+    ],
+    [
+     -69.19,
+     -12.59,
+     "Puerto Maldonado",
+     "transito"
+    ],
+    [
+     -71.97,
+     -13.53,
+     "Cusco",
+     "transito"
+    ],
+    [
+     -70.13,
+     -15.5,
+     "Juliaca",
+     "transito"
+    ],
+    [
+     -70.25,
+     -18.01,
+     "Tacna",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2013,
+   "construccion_propia": false,
+   "fuente": "WCS/SERFOR 2018 (actor interesado); Mongabay Latam (19/5/2017)",
+   "url": "https://peru.wcs.org/Portals/94/Publicaciones/Tr%C3%A1fico%20y%20Salud/WCS%202018_Rutas_Trafico.pdf?ver=2021-06-10-222822-457",
+   "nota": "Tortugas motelo y taricaya, caimanes y loros desde Bahuaja Sonene y Madidi; Tacna/Chile como destino de riesgo (WCS)."
+  },
+  {
+   "id": "ES-I09",
+   "nombre": "Especies: Bahía (Curaçá/Milagres) → Feira de Santana → BR-116 → Río/São Paulo",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "BR-116 (>900 km en Bahía) y BR-101 en el sur",
+   "waypoints": [
+    [
+     -39.91,
+     -8.99,
+     "Curaçá (BA)",
+     "origen"
+    ],
+    [
+     -39.86,
+     -12.87,
+     "Milagres (BA)",
+     "origen"
+    ],
+    [
+     -40.84,
+     -14.87,
+     "Vitória da Conquista (BA)",
+     "origen"
+    ],
+    [
+     -38.97,
+     -12.27,
+     "Feira de Santana",
+     "transito"
+    ],
+    [
+     -43.17,
+     -22.91,
+     "Río de Janeiro",
+     "destino"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "São Paulo",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "PRF, MP-BA, ICMBio, RENCTAS (actores interesados); Correio 24 Horas",
+   "url": "https://www.correio24horas.com.br/asteriscao/como-funciona-o-esquema-bilionario-que-usa-estrada-baiana-para-trafico-de-aves-de-canto-0925",
+   "nota": "2025: PRF contó 4.108 aves en la BR-116 (94,6 % de los decomisos de Bahía). Destino interno (Río/São Paulo), no exterior."
+  },
+  {
+   "id": "ES-I10",
+   "nombre": "Especies: Delta Amacuro (VE) → golfo de Paria → Trinidad → Guyana",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Pirogas por el golfo de Paria (~16 km en su tramo mas angosto)",
+   "waypoints": [
+    [
+     -62.05,
+     9.06,
+     "Delta Amacuro (ancla Tucupita)",
+     "origen"
+    ],
+    [
+     -61.5,
+     10.65,
+     "Isla de Trinidad (ancla Puerto España)",
+     "transito"
+    ],
+    [
+     -58.16,
+     6.8,
+     "Guyana (ancla Georgetown)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2020,
+   "construccion_propia": true,
+   "fuente": "InSight Crime; The Guardian (T&T); Ecopolitica Venezuela",
+   "url": "https://ecopoliticavenezuela.org/denuncian-contrabando-de-aves-de-venezuela-hacia-trinidad-y-tobago-guyana-y-otros-destinos/",
+   "nota": "Jun. 2020: ~50 aves ahogadas en una intercepción. Trazado fino inferido; fuentes nombran país/región, no puertos."
+  },
+  {
+   "id": "ES-I11",
+   "nombre": "Especies: Venezuela (frontera) → Riohacha (La Guajira)",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Terrestre desde la frontera (Maicao/Paraguachón), inferido",
+   "waypoints": [
+    [
+     -72.24,
+     11.38,
+     "Maicao / Paraguachón (frontera)",
+     "origen"
+    ],
+    [
+     -72.91,
+     11.54,
+     "Riohacha",
+     "transito"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "Policía Nacional de Colombia (actor interesado); Consonante",
+   "url": "https://www.policia.gov.co/noticia/policia-nacional-frena-trafico-aves-silvestres-en-guajira-captura-un-presunto-traficante",
+   "nota": "Única base: incautación 25/2/2026 en Riohacha (100 aves). Sentido del flujo sin cerrar (puede ser Colombia->Venezuela)."
+  },
+  {
+   "id": "ES-I12",
+   "nombre": "Especies: sureste de México (Chiapas) → Veracruz → Ciudad de México",
+   "subtipo": "Fauna viva y aves",
+   "nivel": "infraestructura",
+   "via": "Carreteras y puntos de inspección de Profepa",
+   "waypoints": [
+    [
+     -93.12,
+     16.75,
+     "Chiapas (ancla Tuxtla Gutiérrez)",
+     "origen"
+    ],
+    [
+     -92.95,
+     17.99,
+     "Villahermosa (Tabasco)",
+     "transito"
+    ],
+    [
+     -96.13,
+     19.17,
+     "Veracruz",
+     "transito"
+    ],
+    [
+     -99.13,
+     19.43,
+     "Ciudad de México",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2025,
+   "construccion_propia": true,
+   "fuente": "Profepa (actor interesado); La Jornada Ecológica; Revista Ciencia (AMC)",
+   "url": "https://ciencias.jornada.com.mx/ecologica/2025/06/22/un-breve-panorama-del-trafico-ilegal-de-especies-en-mexico-5408.html",
+   "nota": "'Ruta del sureste hacia el centro' sin tramos nombrados; waypoints son anclas. 65.000-78.500 pericos/año (cifra citada)."
+  },
+  {
+   "id": "ES-I13",
+   "nombre": "Especies: Beni (Rurrenabaque/San Borja/Riberalta) → Santa Cruz/La Paz → China",
+   "subtipo": "Fauna terrestre",
+   "nivel": "infraestructura",
+   "via": "Envios aéreos y postales; Ecobol interceptó paquetes; Brasil como transito declarado",
+   "waypoints": [
+    [
+     -67.53,
+     -14.44,
+     "Rurrenabaque (Beni)",
+     "origen"
+    ],
+    [
+     -66.86,
+     -14.82,
+     "San Borja (Beni)",
+     "origen"
+    ],
+    [
+     -66.09,
+     -11.0,
+     "Riberalta (Beni)",
+     "origen"
+    ],
+    [
+     -63.13,
+     -17.64,
+     "Aeropuerto Viru Viru, Santa Cruz",
+     "transito"
+    ],
+    [
+     -68.19,
+     -16.51,
+     "El Alto / La Paz",
+     "transito"
+    ],
+    [
+     121.47,
+     31.23,
+     "China (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2013,
+   "construccion_propia": false,
+   "fuente": "Earth League International/IUCN NL vía Mongabay Latam; decomisos de Ecobol (actor interesado); Semana",
+   "url": "https://es.mongabay.com/2021/01/trafico-de-jaguar-en-bolivia-tres-bandas-internacionales-chinas/",
+   "nota": "2013-2016: 380 colmillos (95 jaguares); Ecobol interceptó 300 en 16 paquetes. Sin incautaciones desde ene. 2019. China es marcador (Shanghái).",
+   "sin_dato_reciente": true,
+   "vinculo_difuso": true
+  },
+  {
+   "id": "ES-I14",
+   "nombre": "Especies: Selva Central (Satipo) → La Oroya → Lima",
+   "subtipo": "Fauna terrestre",
+   "nivel": "infraestructura",
+   "via": "Carretera Central y carretera longitudinal de la selva central",
+   "waypoints": [
+    [
+     -74.64,
+     -11.25,
+     "Satipo / Selva Central (Junín)",
+     "origen"
+    ],
+    [
+     -75.9,
+     -11.52,
+     "La Oroya",
+     "transito"
+    ],
+    [
+     -77.04,
+     -12.05,
+     "Lima",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": true,
+   "fuente": "WCS 2018; Servindi",
+   "url": "https://www.servindi.org/actualidad-noticias/02/02/2024/trafico-de-fauna-y-madera-toma-la-carretera-central",
+   "nota": "Ene. 2019-jul. 2023: productos forestales equivalentes a 70 camiones y >700 animales vivos (Servindi). Origen en Selva Central inferido."
+  },
+  {
+   "id": "ES-I15",
+   "nombre": "Especies: totoaba, San Felipe → Mexicali/Tijuana → Calexico → sur de China",
+   "subtipo": "Fauna marina",
+   "nivel": "infraestructura",
+   "via": "Caletas del Alto Golfo de California; terrestre a Mexicali y Tijuana (secado y consolidacion de buches)",
+   "waypoints": [
+    [
+     -114.84,
+     31.02,
+     "San Felipe (BC)",
+     "origen"
+    ],
+    [
+     -114.5,
+     31.68,
+     "Golfo de Santa Clara (Sonora)",
+     "origen"
+    ],
+    [
+     -115.45,
+     32.62,
+     "Mexicali",
+     "transito"
+    ],
+    [
+     -117.04,
+     32.52,
+     "Tijuana",
+     "transito"
+    ],
+    [
+     -115.5,
+     32.68,
+     "Calexico (CA)",
+     "transito"
+    ],
+    [
+     113.26,
+     23.13,
+     "Sur de China (marcador, ancla Guangzhou)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2018,
+   "construccion_propia": false,
+   "fuente": "InSight Crime; FGR (actor interesado); Infobae; La Jornada",
+   "url": "https://insightcrime.org/news/brief/fish-bladder-big-business-china-mexico-smugglers/",
+   "nota": "444 kg de buche (~USD 26 M) en una operación; cartel de Tijuana movería los buches. Sin aeropuerto ni paso fronterizo nombrado."
+  },
+  {
+   "id": "ES-I16",
+   "nombre": "Especies: Manta → Guayaquil (puerto) → Hong Kong",
+   "subtipo": "Fauna marina",
+   "nivel": "infraestructura",
+   "via": "Marítima, contenedores (enero 2020)",
+   "waypoints": [
+    [
+     -80.71,
+     -0.97,
+     "Manta (desembarque)",
+     "origen"
+    ],
+    [
+     -79.92,
+     -2.28,
+     "Puerto marítimo de Guayaquil",
+     "transito"
+    ],
+    [
+     114.12,
+     22.32,
+     "Hong Kong (puerto)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2020,
+   "construccion_propia": false,
+   "fuente": "Aduana de Hong Kong (actor interesado); MAAE de Ecuador (actor interesado); Mongabay Latam 2021",
+   "url": "https://es.mongabay.com/2021/07/trafico-de-tiburones-ecuador-empresa-sospechosa-de-millonaria-exportacion-de-aletas/",
+   "nota": "Ene. 2020: 26 t (~38.500 tiburones, zorro y sedoso), halladas por etiqueta en español. Permisos pedidos tras salir los contenedores."
+  },
+  {
+   "id": "ES-I17",
+   "nombre": "Especies: Guayaquil (aeropuerto) → Kuala Lumpur",
+   "subtipo": "Fauna marina",
+   "nivel": "infraestructura",
+   "via": "Vía aérea; 21.987 aletas en 75 sacos declaradas como 'buche de pescado'",
+   "waypoints": [
+    [
+     -79.88,
+     -2.16,
+     "Aeropuerto José Joaquín de Olmedo, Guayaquil",
+     "transito"
+    ],
+    [
+     101.69,
+     3.14,
+     "Kuala Lumpur (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2026,
+   "construccion_propia": false,
+   "fuente": "Expreso (3/4/2026); Policía Nacional y UPMA (actor interesado)",
+   "url": "https://www.expreso.ec/actualidad/redes-de-trafico-cambian-de-ruta-y-sacan-aletas-por-avion-desde-guayaquil-280496.html",
+   "nota": "2026: 21.987 aletas en 75 sacos declaradas como 'buche de pescado'. Cambio al aéreo indicaría adaptación de las redes (lectura del medio)."
+  },
+  {
+   "id": "ES-I18",
+   "nombre": "Especies: Ecuador (pesca) → Callao (almacén) → Hong Kong",
+   "subtipo": "Fauna marina",
+   "nivel": "infraestructura",
+   "via": "Transito terrestre Ecuador-Perú (paso no identificado); exportación desde el Callao",
+   "waypoints": [
+    [
+     -79.89,
+     -2.19,
+     "Ecuador, pesca (sin puerto identificado)",
+     "origen"
+    ],
+    [
+     -77.12,
+     -12.06,
+     "Callao, almacén",
+     "transito"
+    ],
+    [
+     114.17,
+     22.32,
+     "Hong Kong (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "fuente": "DIVINCCOMA/PNP y USFWS (actor interesado); Mongabay Latam; Infobae; Swissinfo",
+   "url": "https://es.mongabay.com/2026/07/peru-empresario-investigado-trafico-ilegal-especies-crimen-organizado-continua-exportando-aletas-tiburones-protegidos/",
+   "nota": "10/11/2025: 9.380 kg en 338 sacos en almacén de exportadora en el Callao. Origen ecuatoriano es hipótesis de la embajada de EE. UU. (actor interesado).",
+   "vinculo_difuso": true
+  },
+  {
+   "id": "ES-I19",
+   "nombre": "Especies: Paita → Piura → Lima (bus interprovincial)",
+   "subtipo": "Fauna marina",
+   "nivel": "infraestructura",
+   "via": "Carretera Panamericana, en bus de pasajeros como equipaje",
+   "waypoints": [
+    [
+     -81.11,
+     -5.09,
+     "Paita",
+     "origen"
+    ],
+    [
+     -80.63,
+     -5.2,
+     "Piura",
+     "transito"
+    ],
+    [
+     -77.04,
+     -12.05,
+     "Lima",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": false,
+   "fuente": "PNP, Aduana Paita, Produce y Serfor (actor interesado); Infobae",
+   "url": "https://www.infobae.com/peru/2024/06/06/policia-y-la-sunat-incautan-mas-de-3-mil-aletas-de-tiburon-como-equipaje-en-bus-que-se-dirigia-de-piura-a-lima/",
+   "nota": "6/6/2024: 3.122 aletas (165 kg) en bus Piura-Lima. Destino final tras Lima desconocido."
+  },
+  {
+   "id": "ES-I20",
+   "nombre": "Especies: Roldanillo → Bogotá (El Dorado) → Hong Kong",
+   "subtipo": "Fauna marina",
+   "nivel": "infraestructura",
+   "via": "Transporte terrestre y encomienda aérea",
+   "waypoints": [
+    [
+     -76.15,
+     4.41,
+     "Roldanillo (Valle del Cauca)",
+     "origen"
+    ],
+    [
+     -74.15,
+     4.7,
+     "Aeropuerto El Dorado, Bogotá",
+     "transito"
+    ],
+    [
+     114.17,
+     22.32,
+     "Hong Kong (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2021,
+   "construccion_propia": false,
+   "fuente": "Secretaría de Ambiente de Bogotá, Policía Ambiental y Dijín (actor interesado); Infobae",
+   "url": "https://www.infobae.com/america/colombia/2021/09/25/incautan-3493-aletas-de-tiburon-en-el-aeropuerto-el-dorado-iban-a-ser-exportadas-a-hong-kong/",
+   "nota": "24-25/9/2021: 3.493 aletas y 117 kg de buches en 10 bultos. Puerto de desembarque no identificado; permiso del remitente vencido en 2020."
+  },
+  {
+   "id": "ES-I21",
+   "nombre": "Especies: Puntarenas → San José → vía EE. UU. → Hong Kong",
+   "subtipo": "Fauna marina",
+   "nivel": "infraestructura",
+   "via": "Camión a San José; vuelo con escala en EE. UU.",
+   "waypoints": [
+    [
+     -84.84,
+     9.98,
+     "Puntarenas (muelles privados)",
+     "origen"
+    ],
+    [
+     -84.21,
+     9.99,
+     "Aeropuerto Juan Santamaría, San José",
+     "transito"
+    ],
+    [
+     114.17,
+     22.32,
+     "Hong Kong (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2014,
+   "construccion_propia": false,
+   "fuente": "Turtle Island Restoration Network (ONG, actor interesado); Wikipedia; CREMA",
+   "url": "https://seaturtles.org/costa-rica-shark-finners-fly-fins-u-s-en-route-hong-kong-documents-reveal/",
+   "nota": "Envios documentados nov.-dic. 2014 (220,85 y 411,2 kg) a firma de Hong Kong; exportaciones con permisos de Costa Rica. Escala en EE. UU."
+  },
+  {
+   "id": "ES-I22",
+   "nombre": "Especies: pepino de mar, Yucatan (Dzilam/Progreso) → China",
+   "subtipo": "Fauna marina",
+   "nivel": "infraestructura",
+   "via": "Embarcaciones menores y tráfico terrestre",
+   "waypoints": [
+    [
+     -88.89,
+     21.39,
+     "Dzilam de Bravo",
+     "origen"
+    ],
+    [
+     -89.67,
+     21.28,
+     "Progreso",
+     "transito"
+    ],
+    [
+     121.47,
+     31.23,
+     "China (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "Semar y FGR (actor interesado) vía Latinus y Heraldo",
+   "url": "https://latinus.us/mexico/2026/6/28/decomisan-250-kilos-de-pepino-de-mar-especies-en-veda-de-embarcacion-en-yucatan-hay-tres-detenidos-177478.html",
+   "nota": "Sitios de pesca (Dzilam, Progreso, Sisal, Celestún) y decomisos 2026; mercado China. Sin ruta hasta puerto o aeropuerto de salida; trazado propio.",
+   "vinculo_difuso": true
+  },
+  {
+   "id": "ES-I23",
+   "nombre": "Especies: madera, Islandia (Yavarí) → ríos Putumayo/Amazonas → Maicao",
+   "subtipo": "Madera",
+   "nivel": "infraestructura",
+   "via": "Ríos Putumayo y Amazonas; blanqueo con salvoconductos colombianos; Leticia único puerto aduanero",
+   "waypoints": [
+    [
+     -69.78,
+     -3.99,
+     "Islandia (Yavarí, PE)",
+     "origen"
+    ],
+    [
+     -69.74,
+     -2.89,
+     "Tarapacá (Amazonas, CO)",
+     "transito"
+    ],
+    [
+     -74.78,
+     -0.19,
+     "Puerto Leguízamo (Putumayo)",
+     "transito"
+    ],
+    [
+     -76.5,
+     0.5,
+     "Puerto Asís (Putumayo)",
+     "transito"
+    ],
+    [
+     -69.94,
+     -4.21,
+     "Leticia (único puerto aduanero)",
+     "transito"
+    ],
+    [
+     -72.24,
+     11.38,
+     "Maicao (La Guajira)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2012,
+   "construccion_propia": false,
+   "fuente": "EIA; Corpoamazonia (actor interesado); Semana/RAISG; Mongabay",
+   "url": "https://www.semana.com/medio-ambiente/articulo/asi-se-trafica-la-madera-en-la-amazonia-colombiana/44746/",
+   "nota": "600+ salvoconductos (2012-2017) por 5.600 m3 a Maicao que nunca llegaron. Destino es mercado interno, no Asia."
+  },
+  {
+   "id": "ES-I24",
+   "nombre": "Especies: madera, Loreto → Iquitos → buque Yacu Kallpa → Tampico/Houston",
+   "subtipo": "Madera",
+   "nivel": "infraestructura",
+   "via": "Río Amazonas; buque Yacu Kallpa con paradas en RD, Surinam, Honduras y Jamaica",
+   "waypoints": [
+    [
+     -72.0,
+     -4.2,
+     "Zona del Yavarí / Loreto (cedro, caoba)",
+     "origen"
+    ],
+    [
+     -73.25,
+     -3.75,
+     "Puerto de Iquitos",
+     "transito"
+    ],
+    [
+     -97.86,
+     22.23,
+     "Tampico (Tamaulipas)",
+     "destino"
+    ],
+    [
+     -95.37,
+     29.76,
+     "Houston",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2015,
+   "construccion_propia": false,
+   "fuente": "OSINFOR y Fiscalía del Perú (actor interesado); Ojo Público; Mongabay/EIA",
+   "url": "https://ojo-publico.com/especiales/madera-ilegal/del-sur-al-norte-la-ruta-del-trafico-de-madera-del-amazonas/",
+   "nota": "Yacu Kallpa salió de Iquitos 24/11/2015 con 3.331 bultos, 96 % con orden de incautación (91,3 % ilegal, OSINFOR). Houston destino secundario."
+  },
+  {
+   "id": "ES-I25",
+   "nombre": "Especies: madera, Pucallpa (Ucayali) → Federico Basadre → Carretera Central → Callao",
+   "subtipo": "Madera",
+   "nivel": "infraestructura",
+   "via": "Río Ucayali; carretera Federico Basadre; carretera Central; puerto del Callao",
+   "waypoints": [
+    [
+     -74.55,
+     -8.38,
+     "Pucallpa (puerto, Ucayali)",
+     "origen"
+    ],
+    [
+     -76.0,
+     -9.29,
+     "Tingo María",
+     "transito"
+    ],
+    [
+     -76.24,
+     -9.93,
+     "Huánuco",
+     "transito"
+    ],
+    [
+     -75.9,
+     -11.52,
+     "La Oroya (Junín)",
+     "transito"
+    ],
+    [
+     -77.15,
+     -12.05,
+     "Puerto del Callao",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2015,
+   "construccion_propia": false,
+   "fuente": "OSINFOR (actor interesado); Servindi, Gestión y Mongabay; WCS/EIA 2018",
+   "url": "https://www.servindi.org/actualidad-noticias/02/02/2024/trafico-de-fauna-y-madera-toma-la-carretera-central",
+   "nota": "OSINFOR: ~42.913 m3 sin autorización 2015-2025 (944 camiones). Callao principal salida; China, RD, EE. UU. y México como destinos (EIA 2018)."
+  },
+  {
+   "id": "ES-I26",
+   "nombre": "Especies: madera, TI Cachoeira Seca (Para) → Belém → Itajaí/Paranaguá → exportación",
+   "subtipo": "Madera",
+   "nivel": "infraestructura",
+   "via": "Río Iriri/Xingu y carreteras locales; embarque marítimo",
+   "waypoints": [
+    [
+     -53.6,
+     -4.05,
+     "TI Cachoeira Seca do Iriri (aprox)",
+     "origen"
+    ],
+    [
+     -48.49,
+     -1.46,
+     "Puerto de Belém",
+     "transito"
+    ],
+    [
+     -48.66,
+     -26.91,
+     "Puerto de Itajaí",
+     "destino"
+    ],
+    [
+     -48.51,
+     -25.52,
+     "Puerto de Paranaguá",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2010,
+   "construccion_propia": true,
+   "fuente": "Policía Federal de Brasil (actor interesado); Mongabay Latam (16/12/2017)",
+   "url": "https://es.mongabay.com/2017/12/policia-brasilena-atrapa-ladrones-madera-del-amazonas-falsificaban-creditos-forestales/",
+   "nota": "Operación Anhangá Arara: pérdidas de 897 M de reales 2010-2017; ipé hasta USD 2.500/m3. Trazado interno inferido; coord. de la TI aprox."
+  },
+  {
+   "id": "ES-I27",
+   "nombre": "Especies: madera, Apuí/Lábrea/Humaitá → Manaus (Porto Chibatão) → exportación",
+   "subtipo": "Madera",
+   "nivel": "infraestructura",
+   "via": "Río Madeira y afluentes hasta Manaus; contenedores por vía marítima",
+   "waypoints": [
+    [
+     -59.89,
+     -7.2,
+     "Apuí (AM)",
+     "origen"
+    ],
+    [
+     -64.8,
+     -7.26,
+     "Lábrea (AM)",
+     "origen"
+    ],
+    [
+     -63.03,
+     -7.51,
+     "Humaitá (AM)",
+     "origen"
+    ],
+    [
+     -60.02,
+     -3.14,
+     "Manaus, Porto Chibatão (aprox)",
+     "transito"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": null,
+   "construccion_propia": true,
+   "fuente": "Nota de prensa indexada (Amazonas Atual / ((o))eco), sin leer",
+   "url": "https://amazonasatual.com.br/madeira-ilegal-da-amazonia-movimentou-negocios-no-sul-do-pais/",
+   "nota": "Operación con 479 contenedores de 63 empresas (~10.000 m3) retenidos en Porto Chibatão (resumen, sin leer). Verificar antes de cargar; fecha sin confirmar.",
+   "desde_incierto": true
+  },
+  {
+   "id": "ES-I28",
+   "nombre": "Especies: palo de rosa, Petén/Izabal → Santo Tomás/Quetzal → Hong Kong",
+   "subtipo": "Madera",
+   "nivel": "infraestructura",
+   "via": "Camiones hasta puertos guatemaltecos; tramos por tierra por México, El Salvador y Honduras",
+   "waypoints": [
+    [
+     -88.9,
+     15.9,
+     "Río Sarstún (aprox)",
+     "origen"
+    ],
+    [
+     -89.89,
+     16.93,
+     "Flores / Petén",
+     "origen"
+    ],
+    [
+     -88.61,
+     15.7,
+     "Puerto Santo Tomás de Castilla",
+     "transito"
+    ],
+    [
+     -90.78,
+     13.93,
+     "Puerto Quetzal",
+     "transito"
+    ],
+    [
+     114.17,
+     22.32,
+     "Hong Kong (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2009,
+   "construccion_propia": false,
+   "fuente": "National Geographic; fiscalías guatemaltecas (actor interesado); Prensa Libre",
+   "url": "https://www.nationalgeographic.com/animals/article/guatemala-fight-against-rosewood-trafficking",
+   "nota": "2009-2014 las importaciones chinas de palo de rosa x14; 19 incautaciones 2017-2018. Fuente de 2019, sin actualización verificada.",
+   "vinculo_difuso": true
+  },
+  {
+   "id": "ES-I29",
+   "nombre": "Especies: madera, Bosawás (Nicaragua) → Catacamas (Honduras)",
+   "subtipo": "Madera",
+   "nivel": "infraestructura",
+   "via": "Ríos y caminos de montana con paso por puntos ciegos fronterizos",
+   "waypoints": [
+    [
+     -85.0,
+     14.0,
+     "Reserva Bosawás (aprox)",
+     "origen"
+    ],
+    [
+     -85.88,
+     14.83,
+     "Catacamas (Olancho)",
+     "transito"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2020,
+   "construccion_propia": true,
+   "fuente": "InSight Crime; Nodal (2020)",
+   "url": "https://insightcrime.org/news/brief/nicaragua-timber-trafficking-major-problem-in-centams-largest-forest-reserve/",
+   "nota": "Madera de Bosawás a Honduras por puntos ciegos; la del sur de Nicaragua iría a Costa Rica. Sin puerto de salida; Bosawás es zona."
+  },
+  {
+   "id": "ES-I30",
+   "nombre": "Especies: balsa, Napo/Orellana → Guayaquil → China",
+   "subtipo": "Madera",
+   "nivel": "infraestructura",
+   "via": "Ríos Napo, Orellana y Pastaza; carretera; aserraderos y puerto de Guayaquil",
+   "waypoints": [
+    [
+     -76.98,
+     -0.47,
+     "Río Napo, Orellana (ancla Coca)",
+     "origen"
+    ],
+    [
+     -76.88,
+     0.09,
+     "Lago Agrio (Sucumbíos)",
+     "transito"
+    ],
+    [
+     -79.89,
+     -2.19,
+     "Guayaquil (aserraderos)",
+     "transito"
+    ],
+    [
+     121.47,
+     31.23,
+     "China (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": false,
+   "fuente": "EIA 'Ill Wind' (ONG); UPMA de Ecuador (actor interesado); Mongabay",
+   "url": "https://es.mongabay.com/2024/10/estudio-auge-energia-eolica-ocasiona-tala-ilegal-madera-de-balsa-ecuador-peru/",
+   "nota": "2019-ago. 2024: ~163.681 t de balsa a China (79 % del total). Grueso del flujo es comercio legal; la ilegalidad es parcial. China es marcador.",
+   "no_publicar": true,
+   "motivo_dh": "C: flujo legal o no probado como ilícito — fuera del mapa de ilícitos",
+   "vinculo_difuso": true
+  }
+ ]
+}

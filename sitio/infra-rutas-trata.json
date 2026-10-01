@@ -1,0 +1,551 @@
+{
+ "flujo_nombre": "trata-infra",
+ "es_prototipo": true,
+ "nivel": "infraestructura",
+ "corte": "2026-10-01",
+ "aviso": "Infraestructura de trata de personas (captacion -> transito -> explotacion) anclada a rutas, ciudades y pasos reales. Prototipo: coordenadas aproximadas, a anclar a OSM antes de publicar. La trata es de lo mas subregistrado: la ausencia de una linea NO implica ausencia de flujo.",
+ "rutas": [
+  {
+   "id": "TR-I01",
+   "nombre": "Trata: Guiria (Sucre) -> Boca de la Sierpe -> playas de Trinidad (Chaguanas)",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Penero por la Boca de la Sierpe; desembarco en Icacos y otras playas de Trinidad",
+   "waypoints": [
+    [
+     -62.3,
+     10.58,
+     "Guiria (Sucre)",
+     "origen"
+    ],
+    [
+     -62.0,
+     10.0,
+     "Boca de la Sierpe",
+     "transito"
+    ],
+    [
+     -61.91,
+     10.04,
+     "Icacos (Trinidad)",
+     "transito"
+    ],
+    [
+     -61.41,
+     10.52,
+     "Chaguanas (Trinidad)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": true,
+   "fuente": "InSight Crime; Informe TIP Depto. de Estado 2020 (actor interesado)",
+   "url": "https://insightcrime.org/news/venezuela-other-plight-sex-trafficking-trinidad-and-tobago/",
+   "nota": "Mujeres y ninas venezolanas; se citan al menos 4.000 traslados (periodistico, no registro); TIP 2020 solo identifico 34 victimas. Coordenada del estrecho es propia."
+  },
+  {
+   "id": "TR-I02",
+   "nombre": "Trata: Cusco -> Urcos -> Mazuko -> La Pampa -> Puerto Maldonado",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Interoceanica Sur (km 98-115), Cusco-Puerto Maldonado; mineria ilegal de oro en La Pampa",
+   "waypoints": [
+    [
+     -71.97,
+     -13.52,
+     "Cusco",
+     "origen"
+    ],
+    [
+     -71.62,
+     -13.69,
+     "Urcos",
+     "transito"
+    ],
+    [
+     -71.39,
+     -13.63,
+     "Ocongate",
+     "transito"
+    ],
+    [
+     -70.38,
+     -13.07,
+     "Mazuko",
+     "transito"
+    ],
+    [
+     -70.0,
+     -12.9,
+     "La Pampa",
+     "destino"
+    ],
+    [
+     -69.19,
+     -12.59,
+     "Puerto Maldonado",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2016,
+   "construccion_propia": false,
+   "fuente": "El Comercio (CHS Alternativo); Fiscalia Especializada en Trata (actor interesado) via Noticias Madre de Dios",
+   "url": "https://elcomercio.pe/peru/trata-menores-selva-son-rutas-delito-noticia-505733-noticia/",
+   "nota": "804 casos 2020-jun 2025; victimas de Cusco, Lima, Puno y del extranjero (Bolivia, Venezuela). Coordenadas de Mazuko y La Pampa verificadas.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "TR-I03",
+   "nombre": "Trata: Santa Rosa (Loreto) -> Iquitos -> Nauta -> Tarapoto (triple frontera Leticia/Tabatinga)",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Eje fluvial amazonico; triple frontera Santa Rosa-Leticia-Tabatinga",
+   "waypoints": [
+    [
+     -69.96,
+     -4.21,
+     "Santa Rosa (Loreto)",
+     "origen"
+    ],
+    [
+     -69.94,
+     -4.21,
+     "Leticia",
+     "destino"
+    ],
+    [
+     -69.94,
+     -4.25,
+     "Tabatinga",
+     "destino"
+    ],
+    [
+     -73.25,
+     -3.74,
+     "Iquitos",
+     "transito"
+    ],
+    [
+     -73.58,
+     -4.51,
+     "Nauta",
+     "transito"
+    ],
+    [
+     -76.36,
+     -6.49,
+     "Tarapoto",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2014,
+   "construccion_propia": false,
+   "fuente": "El Comercio; Operacion Abeona Fase II (red 'Los Amazonicos')",
+   "url": "https://elcomercio.pe/peru/trata-menores-selva-son-rutas-delito-noticia-505733-noticia/",
+   "nota": "Subregistro grave; trata asociada a narcotrafico, tala y lavado. El flujo sigue rio arriba y abajo segun el tramo."
+  },
+  {
+   "id": "TR-I04",
+   "nombre": "Trata: Huanuco -> Tingo Maria -> Pucallpa -> Contamana -> Requena -> Nauta",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Eje fluvial Huanuco-Tingo Maria-Pucallpa-Nauta; explotacion en cantinas",
+   "waypoints": [
+    [
+     -76.24,
+     -9.93,
+     "Huanuco",
+     "origen"
+    ],
+    [
+     -75.99,
+     -9.29,
+     "Tingo Maria",
+     "transito"
+    ],
+    [
+     -74.55,
+     -8.38,
+     "Pucallpa",
+     "transito"
+    ],
+    [
+     -75.01,
+     -7.33,
+     "Contamana",
+     "transito"
+    ],
+    [
+     -73.85,
+     -5.06,
+     "Requena",
+     "transito"
+    ],
+    [
+     -73.58,
+     -4.51,
+     "Nauta",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2007,
+   "construccion_propia": false,
+   "fuente": "El Comercio (CHS Alternativo)",
+   "url": "https://elcomercio.pe/peru/trata-menores-selva-son-rutas-delito-noticia-505733-noticia/",
+   "nota": "Una sola fuente leida. 107 licencias de cantinas entre 2007 y 2014 en Huanuco. Coordenadas aproximadas."
+  },
+  {
+   "id": "TR-I05",
+   "nombre": "Trata: Cucuta/Riohacha -> Cali -> Rumichaca o La Hormiga -> Ecuador (Quito)",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Cali y pasos informales de Carchi (Rumichaca) / Sucumbios (La Hormiga)",
+   "waypoints": [
+    [
+     -72.5,
+     7.89,
+     "Cucuta",
+     "origen"
+    ],
+    [
+     -76.53,
+     3.45,
+     "Cali",
+     "transito"
+    ],
+    [
+     -77.66,
+     0.8,
+     "Puente de Rumichaca",
+     "transito"
+    ],
+    [
+     -76.92,
+     0.42,
+     "La Hormiga (Sucumbios)",
+     "transito"
+    ],
+    [
+     -78.47,
+     -0.18,
+     "Quito (Pichincha)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": true,
+   "fuente": "Primicias; ONU Mujeres; UNHCR (mas de 50 cruces informales en Carchi)",
+   "url": "https://www.primicias.ec/noticias/sociedad/nueve-paises-ruta-trata-personas/",
+   "nota": "162 casos en Ecuador 2019-2020. Frontera norte mezcla trata y trafico de migrantes; Quito es uno de varios destinos."
+  },
+  {
+   "id": "TR-I06",
+   "nombre": "Trata: Venezuela -> Colchane o Chacalluta -> Iquique (norte de Chile)",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Pasos no habilitados Colchane / Chacalluta hacia Iquique",
+   "waypoints": [
+    [
+     -68.63,
+     -19.28,
+     "Colchane",
+     "transito"
+    ],
+    [
+     -70.34,
+     -18.33,
+     "Chacalluta",
+     "transito"
+    ],
+    [
+     -70.14,
+     -20.21,
+     "Iquique",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2022,
+   "construccion_propia": true,
+   "fuente": "BioBioChile (Fiscalia de Iquique/PDI, actor interesado); 4.o Tribunal Oral de Santiago",
+   "url": "https://www.biobiochile.cl/noticias/nacional/chile/2024/01/20/detienen-a-una-de-las-lideres-del-tren-de-aragua-por-explotacion-sexual-de-compatriotas-en-iquique.shtml",
+   "nota": "Vinculo con Tren de Aragua. Origen venezolano sin coordenada; 'sur de Chile' sin punto fuente, excluido.",
+   "dedup_disposicion": "conservar_ambos",
+   "dedup_nota": "origen distinto (Venezuela vs Colombia): no es duplicado"
+  },
+  {
+   "id": "TR-I07",
+   "nombre": "Trata laboral: Villazon / La Quiaca -> talleres textiles de Buenos Aires y GBA",
+   "subtipo": "Explotación laboral",
+   "nivel": "infraestructura",
+   "via": "Paso Villazon-La Quiaca; talleres textiles clandestinos del AMBA",
+   "waypoints": [
+    [
+     -65.6,
+     -22.09,
+     "Villazon",
+     "origen"
+    ],
+    [
+     -65.6,
+     -22.11,
+     "La Quiaca",
+     "transito"
+    ],
+    [
+     -58.38,
+     -34.6,
+     "Buenos Aires",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": true,
+   "fuente": "Infobae (Min. de Seguridad, PROTEX y PNR, actor interesado); CONICET",
+   "url": "https://www.infobae.com/sociedad/policiales/2019/01/06/bolivianos-explotados-en-talleres-textiles-las-principales-victimas-de-trata-en-2018/",
+   "nota": "2018: de 718 rescatados, 545 por explotacion laboral (71% en talleres textiles, 58% bolivianos). Paso de entrada inferido."
+  },
+  {
+   "id": "TR-I08",
+   "nombre": "Trata laboral: Bolivia -> Puerto Quijarro / Corumba -> Sao Paulo (talleres de costura)",
+   "subtipo": "Explotación laboral",
+   "nivel": "infraestructura",
+   "via": "Bus La Paz-Puerto Quijarro; Corumba-Sao Paulo",
+   "waypoints": [
+    [
+     -57.71,
+     -19.0,
+     "Puerto Quijarro",
+     "origen"
+    ],
+    [
+     -57.65,
+     -19.01,
+     "Corumba",
+     "transito"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "Sao Paulo",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2013,
+   "construccion_propia": false,
+   "fuente": "eju.tv; SciELO REMHU; Ministerio de Trabajo de Brasil (actor interesado)",
+   "url": "https://eju.tv/2013/05/a-pesar-del-trabajo-esclavo-320-bolivianos-se-van-a-diario-a-brasil/",
+   "nota": "Cifra de 120.000 bolivianos en situacion precaria es estimacion de la embajada, no contrastada. Coordenada de Quijarro verificada."
+  },
+  {
+   "id": "TR-I09",
+   "nombre": "Trata: Presidente Franco / Ciudad del Este -> Puente de la Amistad -> Foz do Iguacu y Puerto Iguazu",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Puente de la Amistad, triple frontera del Parana; turismo sexual infantil",
+   "waypoints": [
+    [
+     -54.61,
+     -25.51,
+     "Ciudad del Este",
+     "origen"
+    ],
+    [
+     -54.59,
+     -25.52,
+     "Foz do Iguacu",
+     "destino"
+    ],
+    [
+     -54.57,
+     -25.6,
+     "Puerto Iguazu",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": false,
+   "fuente": "MDZ (OIT, OIM y UNICEF); Procuraduria de la Trata / argentina.gob.ar",
+   "url": "https://www.mdzol.com/sociedad/2024/6/25/la-triple-frontera-la-ruta-del-trafico-de-ninos-el-turismo-sexual-infantil-437644.html",
+   "nota": "OIT: 3.500 a 4.000 menores explotados sexualmente en la region. Misiones zona de captacion (OIM). Dato OIT sin ano preciso; desde = ano de la nota.",
+   "dedup_disposicion": "revisar_pais_mas_amplio",
+   "no_publicar": true,
+   "motivo_dh": "G/dedup: se conserva el de país"
+  },
+  {
+   "id": "TR-I10",
+   "nombre": "Trata: Tecun Uman -> rio Suchiate -> Ciudad Hidalgo -> Tapachula",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Cruce del rio Suchiate, Tecun Uman-Ciudad Hidalgo",
+   "waypoints": [
+    [
+     -92.14,
+     14.67,
+     "Tecun Uman",
+     "origen"
+    ],
+    [
+     -92.15,
+     14.68,
+     "Ciudad Hidalgo",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2021,
+   "construccion_propia": false,
+   "fuente": "CNDH, Diagnostico TDP Mexico 2021 (actor interesado); UNODC TOCTA Centroamerica",
+   "url": "https://www.cndh.org.mx/sites/default/files/documentos/2021-12/DIAGNOSTICO_TDP_2021.pdf",
+   "nota": "Captacion cerca de la frontera en Malacatan, Tecun Uman y El Carmen. PDF completo no abierto.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "TR-I11",
+   "nombre": "Trata laboral: San Marcos (Guatemala) -> Tecun Uman -> Suchiate -> fincas cafetaleras del Soconusco",
+   "subtipo": "Explotación laboral",
+   "nivel": "infraestructura",
+   "via": "Rio Suchiate hacia fincas cafetaleras del Soconusco (estacional, oct-mar)",
+   "waypoints": [
+    [
+     -92.14,
+     14.67,
+     "Tecun Uman",
+     "origen"
+    ],
+    [
+     -92.15,
+     14.68,
+     "Ciudad Hidalgo",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2014,
+   "construccion_propia": true,
+   "fuente": "El Universal ('Esclavos de los cafetales'); SciELO Mexico 2014; Alerta Chiapas 2026",
+   "url": "https://alertachiapas.com/2026/05/25/jornaleros-guatemaltecos-chiapas-frontera-cafe-cosecha-chicomuselo-2026/",
+   "nota": "Flujo estacional de jornaleros; la CNDH dijo que 'se estaria tipificando la trata' (calificacion de funcionario). SIWA debe decidir el rotulo.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "TR-I12",
+   "nombre": "Trata: Santa Elena de Uairen -> Pacaraima -> BR-174 -> Boa Vista -> Manaus",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "BR-174, Pacaraima-Boa Vista-Manaus",
+   "waypoints": [
+    [
+     -61.11,
+     4.6,
+     "Santa Elena de Uairen",
+     "origen"
+    ],
+    [
+     -61.15,
+     4.48,
+     "Pacaraima",
+     "transito"
+    ],
+    [
+     -60.67,
+     2.82,
+     "Boa Vista",
+     "transito"
+    ],
+    [
+     -60.02,
+     -3.12,
+     "Manaus",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2017,
+   "construccion_propia": true,
+   "fuente": "Agencia Brasil (Policia Federal, actor interesado); Informe ENAFRON / ICMPD",
+   "url": "https://agenciabrasil.ebc.com.br/es/geral/noticia/2017-05/policia-brasilena-combate-la-explotacion-sexual-de-venezolanas-en-la-frontera",
+   "nota": "Roraima como eje de ruta internacional por la BR-174; caso confirmado en Pacaraima. Manaus agregado como cierre del eje."
+  },
+  {
+   "id": "TR-I13",
+   "nombre": "Trata: San Felix / Puerto Ordaz (Bolivar) -> rio Cuyuni -> Georgetown",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Rio Cuyuni (via Eteringbang) hacia Georgetown; mineria de oro",
+   "waypoints": [
+    [
+     -62.65,
+     8.37,
+     "San Felix",
+     "origen"
+    ],
+    [
+     -62.72,
+     8.3,
+     "Puerto Ordaz",
+     "origen"
+    ],
+    [
+     -58.16,
+     6.8,
+     "Georgetown",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": true,
+   "fuente": "InSight Crime; Informe TIP Depto. de Estado 2021 (actor interesado)",
+   "url": "https://insightcrime.org/es/noticias/analisis/minera-guyana-crimen-organizado-venezuela/",
+   "nota": "Controles sobre el Cuyuni (ELN, sindicatos, fuerzas de seguridad). Eteringbang sin coordenada fiable, excluido de waypoints."
+  },
+  {
+   "id": "TR-I14",
+   "nombre": "Trata: Haiti -> Dajabon y Elias Pina -> Republica Dominicana",
+   "subtipo": "Explotación sexual",
+   "nivel": "infraestructura",
+   "via": "Pasos de frontera de Dajabon y Elias Pina",
+   "waypoints": [
+    [
+     -71.71,
+     19.55,
+     "Dajabon",
+     "origen"
+    ],
+    [
+     -71.7,
+     18.88,
+     "Elias Pina",
+     "origen"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2022,
+   "construccion_propia": true,
+   "fuente": "Depto. de Estado, Informes TIP Rep. Dominicana 2022 y 2024 (actor interesado); Ecpat",
+   "url": "https://do.usembassy.gov/2022-dominican-republic-trafficking-in-persons-report/",
+   "nota": "Trata sexual y laboral. Dajabon zona de preocupacion; 45 a 60 menores posibles victimas. Destino en RD no precisado por las fuentes: vacio."
+  }
+ ]
+}

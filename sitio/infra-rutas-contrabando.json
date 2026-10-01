@@ -1,0 +1,669 @@
+{
+ "flujo_nombre": "contrabando-infra",
+ "es_prototipo": true,
+ "nivel": "infraestructura",
+ "corte": "2026-10-01",
+ "aviso": "Prototipo de infraestructura del contrabando de mercancias en ALC: corredores anclados a pasos fronterizos, puentes, puertos y rutas reales, reconstruidos a partir de decomisos y prensa de investigacion. No existe un registro publico de rutas. Coordenadas aproximadas, a anclar en OSM/Natural Earth antes de publicar. Varias direcciones de frontera son reversibles segun precios.",
+ "rutas": [
+  {
+   "id": "CB-I01",
+   "nombre": "Contrabando: Hernandarias → Puente de la Amistad → Foz do Iguacu",
+   "subtipo": "Cigarrillos",
+   "nivel": "infraestructura",
+   "via": "Puente de la Amistad y orillas del rio Parana y del lago de Itaipu",
+   "waypoints": [
+    [
+     -54.64,
+     -25.41,
+     "Hernandarias",
+     "origen"
+    ],
+    [
+     -54.61,
+     -25.51,
+     "Ciudad del Este",
+     "transito"
+    ],
+    [
+     -54.6,
+     -25.51,
+     "Puente de la Amistad",
+     "transito"
+    ],
+    [
+     -54.59,
+     -25.52,
+     "Foz do Iguacu",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2009,
+   "construccion_propia": false,
+   "fuente": "Global Initiative against TOC (2014); ABC Color (2026) citando a la Receita Federal de Foz (actor interesado)",
+   "url": "https://globalinitiative.net/analysis/smuggling-across-south-americas-triple-frontier/",
+   "nota": "Receita: 27,4 millones de cajetillas decomisadas en 2025, baja del 8%. Direccion Paraguay → Brasil. Tramo hacia el interior sin fuente abierta (vacio)."
+  },
+  {
+   "id": "CB-I02",
+   "nombre": "Contrabando: Ciudad del Este → Puente de la Amistad → Foz do Iguacu",
+   "subtipo": "Medicamentos",
+   "nivel": "infraestructura",
+   "via": "Puente de la Amistad (rio Parana)",
+   "waypoints": [
+    [
+     -54.61,
+     -25.51,
+     "Ciudad del Este",
+     "origen"
+    ],
+    [
+     -54.6,
+     -25.51,
+     "Puente de la Amistad",
+     "transito"
+    ],
+    [
+     -54.59,
+     -25.52,
+     "Foz do Iguacu",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "Receita Federal via ABC Color (actor interesado); Yahoo Noticias (extracto)",
+   "url": "https://www.abc.com.py/este/2026/05/28/aumenta-contrabando-de-medicamentos-y-baja-el-de-cigarrillos-en-frontera-entre-ciudad-del-este-y-foz-de-iguazu/",
+   "nota": "Tirzepatida. 79.837 unidades decomisadas ene-abr 2026 por R$ 18,7 millones. El decomiso mide aplicacion de la ley, no flujo."
+  },
+  {
+   "id": "CB-I03",
+   "nombre": "Contrabando: Salto del Guaira → Guaira → Mercedes (Arroio Guacu)",
+   "subtipo": "Cigarrillos",
+   "nivel": "infraestructura",
+   "via": "Rio Parana (lanchas) y puerto clandestino en el Arroio Guacu",
+   "waypoints": [
+    [
+     -54.34,
+     -24.06,
+     "Salto del Guaira",
+     "origen"
+    ],
+    [
+     -54.26,
+     -24.08,
+     "Guaira",
+     "transito"
+    ],
+    [
+     -54.16,
+     -24.46,
+     "Mercedes (Arroio Guacu)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "Ponta Pora Informa (2026), parte de la Policia Federal y el BPFRON (actor interesado)",
+   "url": "https://www.pontaporainforma.com.br/pf-e-bpfron-apreendem-cigarros-contrabandeados-em-porto-clandestino/",
+   "nota": "Un decomiso: 5 vehiculos, ~120 bultos. Origen en Paraguay inferido; coordenadas del Arroio Guacu aproximadas."
+  },
+  {
+   "id": "CB-I04",
+   "nombre": "Contrabando: Encarnacion → Posadas → Puerto Rico → Eldorado",
+   "subtipo": "Cigarrillos",
+   "nivel": "infraestructura",
+   "via": "Puente San Roque Gonzalez de Santa Cruz, tren Posadas-Encarnacion y rio Parana",
+   "waypoints": [
+    [
+     -55.87,
+     -27.33,
+     "Encarnacion",
+     "origen"
+    ],
+    [
+     -55.89,
+     -27.37,
+     "Posadas",
+     "transito"
+    ],
+    [
+     -55.02,
+     -26.8,
+     "Puerto Rio y Sol (Puerto Rico)",
+     "transito"
+    ],
+    [
+     -54.64,
+     -26.41,
+     "Eldorado",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2020,
+   "construccion_propia": true,
+   "fuente": "Prefectura Naval Argentina via argentina.gob.ar (actor interesado); Misiones Online (extracto)",
+   "url": "https://www.argentina.gob.ar/noticias/contrabando-en-misiones-prefectura-secuestro-un-cargamento-de-cigarrillos-ilegales",
+   "nota": "1.800 cartones decomisados. La linea Puerto Rio y Sol → Eldorado une dos decomisos distintos (construccion parcial)."
+  },
+  {
+   "id": "CB-I05",
+   "nombre": "Contrabando: Pedro Juan Caballero → Ponta Pora → MS",
+   "subtipo": "Cigarrillos",
+   "nivel": "infraestructura",
+   "via": "Frontera seca Pedro Juan Caballero-Ponta Pora, BR-463 y MS-164",
+   "waypoints": [
+    [
+     -55.73,
+     -22.55,
+     "Pedro Juan Caballero",
+     "origen"
+    ],
+    [
+     -55.73,
+     -22.54,
+     "Ponta Pora",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2025,
+   "construccion_propia": true,
+   "fuente": "Ponta Pora Informa, decomisos de la PM y del DOF (actor interesado) (extracto)",
+   "url": "https://www.pontaporainforma.com.br/category/policia/",
+   "nota": "Destino final (Nova Itamarati, Sanga Puita) sin coordenadas fiables ni fuente; vacio. Solo 2 puntos mapeables."
+  },
+  {
+   "id": "CB-I06",
+   "nombre": "Contrabando: Zofri Iquique → Pisiga/Colchane → Oruro → La Paz",
+   "subtipo": "Vehículos",
+   "nivel": "infraestructura",
+   "via": "Camiones ciguena, paso Pisiga Choque-Colchane (24 h desde 2024) y pasos no habilitados cerca del Salar de Coipasa",
+   "waypoints": [
+    [
+     -70.14,
+     -20.2,
+     "Zofri, Iquique",
+     "origen"
+    ],
+    [
+     -68.63,
+     -19.28,
+     "Pisiga Choque / Colchane",
+     "transito"
+    ],
+    [
+     -68.63,
+     -19.27,
+     "Pisiga Bolivar",
+     "transito"
+    ],
+    [
+     -67.11,
+     -17.97,
+     "Oruro",
+     "transito"
+    ],
+    [
+     -68.15,
+     -16.5,
+     "La Paz",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2013,
+   "construccion_propia": true,
+   "fuente": "Iquique Hoy (2026) con Aduanas Chile, Carabineros y Camara Automotor Boliviana (actor interesado); Red Uno (2026); El Deber via eju.tv (2022)",
+   "url": "https://www.iquiquehoy.cl/2026/03/16/de-zofri-a-bolivia-asi-opera-la-ruta-del-contrabando-de-vehiculos-en-el-norte-de-chile/",
+   "nota": "'Autos chutos'; 10-12 por ciguena. 1,28 millones de vehiculos 2013-2024 (Camara Automotor Boliviana, actor interesado). Confianza alta hasta Pisiga, media hacia Oruro/La Paz. Pisiga Bolivar en proxy de Colchane."
+  },
+  {
+   "id": "CB-I07",
+   "nombre": "Contrabando: Zofri Iquique → Pisiga → Oruro → La Paz",
+   "subtipo": "Electrónica",
+   "nivel": "infraestructura",
+   "via": "Paso Pisiga Choque, pasos ancestrales y 'carritos' adaptados",
+   "waypoints": [
+    [
+     -70.14,
+     -20.2,
+     "Zofri, Iquique",
+     "origen"
+    ],
+    [
+     -68.63,
+     -19.28,
+     "Pisiga Choque / Colchane",
+     "transito"
+    ],
+    [
+     -68.63,
+     -19.27,
+     "Pisiga Bolivar",
+     "transito"
+    ],
+    [
+     -67.11,
+     -17.97,
+     "Oruro",
+     "transito"
+    ],
+    [
+     -68.15,
+     -16.5,
+     "La Paz",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2019,
+   "construccion_propia": false,
+   "fuente": "El Deber via eju.tv (2022); Aduanas Chile (actor interesado) (extracto)",
+   "url": "https://eju.tv/2022/10/el-contrabando-amplia-sus-tacticas-y-usa-pasos-ancestrales-en-frontera/",
+   "nota": "Celulares, laptops y tabletas. Un decomiso ronda los USD 500.000."
+  },
+  {
+   "id": "CB-I08",
+   "nombre": "Contrabando: Arica → Chacalluta/Santa Rosa → Tacna",
+   "subtipo": "Textiles",
+   "nivel": "infraestructura",
+   "via": "Complejo Chacalluta-Santa Rosa y pasos no habilitados de la pampa",
+   "waypoints": [
+    [
+     -70.31,
+     -18.48,
+     "Arica",
+     "origen"
+    ],
+    [
+     -70.37,
+     -18.33,
+     "Chacalluta / Santa Rosa",
+     "transito"
+    ],
+    [
+     -70.25,
+     -18.01,
+     "Tacna",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2009,
+   "construccion_propia": false,
+   "fuente": "Diario Correo Tacna (extracto); Infobae Peru (2026) (extracto)",
+   "url": "https://diariocorreo.pe/edicion/tacna/tacna-en-frontera-con-chile-incautan-contrabando-por-mas-de-100-mil-noticia/",
+   "nota": "Ropa usada y electronica menor; 2-4 toneladas diarias. Direccion Chile → Peru. Coordenadas del paso aproximadas.",
+   "dedup_disposicion": "revisar_pais_mas_amplio",
+   "no_publicar": true,
+   "motivo_dh": "G/dedup: país más amplio (ropa usada)"
+  },
+  {
+   "id": "CB-I09",
+   "nombre": "Contrabando: San Cristobal → San Antonio del Tachira → Cucuta",
+   "subtipo": "Combustible",
+   "nivel": "infraestructura",
+   "via": "Controles El Mirador/Peracal/San Antonio, Villa del Rosario, y trochas hacia Puerto Santander/Catatumbo",
+   "waypoints": [
+    [
+     -72.22,
+     7.77,
+     "San Cristobal",
+     "origen"
+    ],
+    [
+     -72.44,
+     7.81,
+     "San Antonio del Tachira",
+     "transito"
+    ],
+    [
+     -72.47,
+     7.83,
+     "Villa del Rosario",
+     "transito"
+    ],
+    [
+     -72.5,
+     7.89,
+     "Cucuta",
+     "destino"
+    ],
+    [
+     -72.41,
+     8.36,
+     "Puerto Santander",
+     "transito"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2015,
+   "construccion_propia": false,
+   "fuente": "Crudo Transparente (2019); Las2orillas/Viva FM (2015)",
+   "url": "https://crudotransparente.com/2019/10/02/complicidad-fronteriza-el-contrabando-de-combustible-en-norte-de-santander/",
+   "nota": "246 trochas totales, 50 en Norte de Santander. Direccion clasica Venezuela → Colombia, reversible segun precios. Datos 2015-2019."
+  },
+  {
+   "id": "CB-I10",
+   "nombre": "Contrabando: Paraguachon → Maicao → Riohacha → Valledupar",
+   "subtipo": "Combustible",
+   "nivel": "infraestructura",
+   "via": "Paso de Paraguachon y trochas de La Guajira",
+   "waypoints": [
+    [
+     -72.14,
+     11.36,
+     "Paraguachon",
+     "origen"
+    ],
+    [
+     -72.24,
+     11.38,
+     "Maicao",
+     "transito"
+    ],
+    [
+     -72.91,
+     11.54,
+     "Riohacha",
+     "transito"
+    ],
+    [
+     -73.25,
+     10.46,
+     "Valledupar",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2015,
+   "construccion_propia": true,
+   "fuente": "Las2orillas (2015); El Heraldo (2017) (extracto); Polfa (actor interesado)",
+   "url": "https://www.las2orillas.co/asi-funciona-el-contrabando-de-gasolina-venezolana-en-la-frontera/",
+   "nota": "1 millon de galones/dia por 192 pasos en La Guajira (Polfa, actor interesado, extracto). Datos anteriores al cambio de politica venezolana; obsoletos, re-datar.",
+   "estado": "historica"
+  },
+  {
+   "id": "CB-I11",
+   "nombre": "Contrabando: Oranjestad (Aruba) → Maicao → Bogota/Medellin",
+   "subtipo": "Cigarrillos",
+   "nivel": "infraestructura",
+   "via": "Via maritima desde Aruba a la Alta Guajira, luego Maicao y troncales a Bosconia/Bogota/Medellin",
+   "waypoints": [
+    [
+     -70.04,
+     12.52,
+     "Oranjestad (Aruba)",
+     "origen"
+    ],
+    [
+     -72.24,
+     11.38,
+     "Maicao",
+     "transito"
+    ],
+    [
+     -73.89,
+     9.97,
+     "Bosconia",
+     "transito"
+    ],
+    [
+     -74.07,
+     4.71,
+     "Bogota",
+     "destino"
+    ],
+    [
+     -75.57,
+     6.25,
+     "Medellin",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2014,
+   "construccion_propia": true,
+   "fuente": "El Tiempo (2019) cita Polfa (actor interesado); El Espectador (2014); El Heraldo (2025)",
+   "url": "https://www.eltiempo.com/justicia/investigacion/cae-buque-con-de-old-parr-y-cigarrillos-de-contrabando-en-costas-de-la-alta-guajira-325136",
+   "nota": "Buque Angel Guardian: ~800.000 cartones y 3.500 L de whisky. Se solapa con subtipo Licor (misma ruta). Punto de la Alta Guajira sin coordenadas fiables."
+  },
+  {
+   "id": "CB-I12",
+   "nombre": "Contrabando: Zona Libre de Colon → Cartagena (puerto) → Colombia",
+   "subtipo": "Textiles",
+   "nivel": "infraestructura",
+   "via": "Puertos de Cartagena, Barranquilla y Santa Marta (contrabando tecnico por subfacturacion)",
+   "waypoints": [
+    [
+     -79.88,
+     9.36,
+     "Zona Libre de Colon",
+     "origen"
+    ],
+    [
+     -75.53,
+     10.4,
+     "Cartagena (puerto)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2012,
+   "construccion_propia": true,
+   "fuente": "InSight Crime; DIAN y El Tiempo (actor interesado) (extracto)",
+   "url": "https://insightcrime.org/news/textile-contraband-colombia-money-laundering/",
+   "nota": "Contrabando tecnico (subfacturacion) >90% de los textiles irregulares; lavado narco-textil. Sin paso concreto fuente; es la ruta mas debil."
+  },
+  {
+   "id": "CB-I13",
+   "nombre": "Contrabando: Huaquillas → Aguas Verdes → Tumbes → Piura",
+   "subtipo": "Combustible",
+   "nivel": "infraestructura",
+   "via": "Puente internacional Huaquillas-Aguas Verdes y ~29-30 pasos informales",
+   "waypoints": [
+    [
+     -80.23,
+     -3.48,
+     "Huaquillas",
+     "origen"
+    ],
+    [
+     -80.24,
+     -3.48,
+     "Aguas Verdes",
+     "transito"
+    ],
+    [
+     -80.27,
+     -3.5,
+     "Zarumilla",
+     "transito"
+    ],
+    [
+     -80.45,
+     -3.57,
+     "Tumbes",
+     "transito"
+    ],
+    [
+     -80.63,
+     -5.19,
+     "Piura",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2021,
+   "construccion_propia": false,
+   "fuente": "Vistazo; Inforegion (extracto); Ministerio de Energia de Ecuador (actor interesado)",
+   "url": "https://www.vistazo.com/actualidad/nacional/contrabandear-gasolina-frontera-ecuador-peru-botella-BD3140982",
+   "nota": "Perdida de USD 106,8 millones en diesel (2021, actor interesado). 5 depositos en el sector Tropezon despachan ~150.000 galones/mes. Motivacion: subsidio ecuatoriano."
+  },
+  {
+   "id": "CB-I14",
+   "nombre": "Contrabando: Tulcan → Puente de Rumichaca → Ipiales",
+   "subtipo": "Combustible",
+   "nivel": "infraestructura",
+   "via": "Puente internacional de Rumichaca (metodo 'hormigueo')",
+   "waypoints": [
+    [
+     -77.72,
+     0.81,
+     "Tulcan",
+     "origen"
+    ],
+    [
+     -77.66,
+     0.8,
+     "Puente de Rumichaca",
+     "transito"
+    ],
+    [
+     -77.64,
+     0.83,
+     "Ipiales",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2024,
+   "construccion_propia": false,
+   "fuente": "El Universo (2024) cita Policia Nacional de Ecuador (actor interesado)",
+   "url": "https://www.eluniverso.com/noticias/ecuador/el-contrabando-de-combustibles-en-la-frontera-colombia-y-ecuador-tratan-de-identificar-vehiculos-que-se-usan-para-estos-fines-nota/",
+   "nota": "Vehiculos con tanque modificado y placas ecuatorianas. Fuente unica leida."
+  },
+  {
+   "id": "CB-I15",
+   "nombre": "Contrabando: Desaguadero → Zepita/Yunguyo → Juliaca",
+   "subtipo": "Combustible",
+   "nivel": "infraestructura",
+   "via": "Pasos de Desaguadero y Kasani, hito 38 (Sombra Pata), Tilali, hacia Zepita/Yunguyo/Ilave",
+   "waypoints": [
+    [
+     -69.04,
+     -16.57,
+     "Desaguadero",
+     "origen"
+    ],
+    [
+     -69.1,
+     -16.5,
+     "Zepita",
+     "transito"
+    ],
+    [
+     -69.09,
+     -16.25,
+     "Yunguyo",
+     "transito"
+    ],
+    [
+     -70.13,
+     -15.5,
+     "Juliaca",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": false,
+   "fuente": "El Deber (2024); Infobae Peru (2025) cita Policia Nacional del Peru (actor interesado); eju.tv (dic 2025, extracto)",
+   "url": "https://eldeber.com.bo/pais/combustible-boliviano-subvencionado-se-vende-en-poblaciones-fronterizas-de-peru_355722/",
+   "nota": "Decomiso 4/1/2025: 4.000 galones bajo grava. Tras el retiro de la subvencion boliviana (dic 2025) el corredor puede estar muerto o invertido; re-datar.",
+   "estado": "historica"
+  },
+  {
+   "id": "CB-I16",
+   "nombre": "Contrabando: Puerto Suarez/Puerto Quijarro → Corumba",
+   "subtipo": "Combustible",
+   "nivel": "infraestructura",
+   "via": "Arroyo Concepcion y pasos hacia Corumba, con placas bolivianas falsas",
+   "waypoints": [
+    [
+     -57.85,
+     -18.94,
+     "Puerto Suarez",
+     "origen"
+    ],
+    [
+     -57.71,
+     -19.0,
+     "Puerto Quijarro",
+     "transito"
+    ],
+    [
+     -57.65,
+     -19.01,
+     "Corumba",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": false,
+   "fuente": "Unitel via eju.tv (2025); Los Tiempos (2022, extracto)",
+   "url": "https://eju.tv/2025/01/investigacion-como-se-realiza-el-contrabando-de-combustible-boliviano-en-la-frontera-con-brasil/",
+   "nota": "Hasta 5 cargas/dia; el precio en Brasil es casi el triple. Trayecto interno en Brasil no fuente. Mismo riesgo de sentido tras el fin del subsidio (dic 2025).",
+   "estado": "historica"
+  },
+  {
+   "id": "CB-I17",
+   "nombre": "Contrabando: Salvador Mazza ↔ Pocitos/Yacuiba",
+   "subtipo": "Combustible",
+   "nivel": "infraestructura",
+   "via": "Puente y Quebrada Internacional Salvador Mazza-Pocitos",
+   "waypoints": [
+    [
+     -63.7,
+     -22.05,
+     "Salvador Mazza",
+     "transito"
+    ],
+    [
+     -63.68,
+     -22.02,
+     "Yacuiba",
+     "transito"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2023,
+   "construccion_propia": false,
+   "fuente": "El Tribuno (2023); Opinion Bolivia (2024) cita al Min. de Defensa Novillo (actor interesado)",
+   "url": "https://www.eltribuno.com/nota/2023-11-2-0-0-0-afirman-que-el-combustible-que-cruza-a-bolivia-no-es-argentino",
+   "nota": "Direccionalidad disputada: una fuente ve el combustible entrando a Bolivia (transito aduanero YPFB), otra saliendo hacia Argentina. Se publica rotulada como disputada."
+  },
+  {
+   "id": "CB-I18",
+   "nombre": "Contrabando: Corumba → Arroyo Concepcion (Puerto Quijarro) → interior de Bolivia",
+   "subtipo": "Licor",
+   "nivel": "infraestructura",
+   "via": "Arroyo Concepcion, paso Corumba-Puerto Quijarro",
+   "waypoints": [
+    [
+     -57.65,
+     -19.01,
+     "Corumba",
+     "origen"
+    ],
+    [
+     -57.71,
+     -19.0,
+     "Puerto Quijarro",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2022,
+   "construccion_propia": false,
+   "fuente": "Los Tiempos / eju.tv (2022, extracto)",
+   "url": "https://eju.tv/2022/04/desde-corumba-la-cerveza-brasilena-elude-el-control-con-jugosas-coimas-y-rutas-alternas/",
+   "nota": "Cerveza brasilena, no licor destilado; declarado por si SIWA lo quiere en la familia Licor. Fuente unica (extracto)."
+  }
+ ]
+}

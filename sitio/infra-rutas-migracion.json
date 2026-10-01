@@ -1,0 +1,1230 @@
+{
+ "flujo_nombre": "migracion-infra",
+ "es_prototipo": true,
+ "nivel": "infraestructura",
+ "corte": "2026-10-01",
+ "aviso": "Prototipo de capa de infraestructura: corredores de migracion y desplazamiento ALC anclados a pasos, rios, puertos y puntos de cruce reales (Darien, Necocli, Acandi, Rumichaca, Colchane, Canal de la Mona, Dajabon-Ouanaminthe). Muchos tramos son construccion propia (ordenan nodos que las fuentes citan por separado) y las coordenadas son aproximadas por conocimiento: se anclan a OSM antes de publicar. Solo se cargan corredores con dos o mas puntos reales mapeables; dos fuentes o se desciende la calificacion.",
+ "rutas": [
+  {
+   "id": "MG-I01",
+   "nombre": "Migracion: China -> Quito -> Necocli -> Darien -> frontera EE.UU.",
+   "subtipo": "Extracontinental",
+   "nivel": "infraestructura",
+   "via": "Entrada aerea a Quito; Necocli-golfo de Uraba; Tapon del Darien (Bajo Chiquito)",
+   "waypoints": [
+    [
+     104.2,
+     35.9,
+     "China (centroide)",
+     "origen"
+    ],
+    [
+     -78.47,
+     -0.18,
+     "Quito (entrada aerea, marcador)",
+     "transito"
+    ],
+    [
+     -76.78,
+     8.43,
+     "Necocli",
+     "transito"
+    ],
+    [
+     -77.85,
+     8.22,
+     "Bajo Chiquito (Darien)",
+     "transito"
+    ],
+    [
+     -110.9,
+     31.3,
+     "Frontera EE.UU.-Mexico (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2023,
+   "construccion_propia": true,
+   "fuente": "Mixed Migration Centre (2025, independiente); Asia Matters for America",
+   "url": "https://mixedmigration.org/publications/mmr/2025/chinese-migrants-latin-america-survival-solidarity/",
+   "nota": "Ecuador era la entrada aerea sin visa (restablecida jul 2024). El flujo se colapso en 2025-26. Ciudad de entrada y punto final por marcador.",
+   "estado": "historica",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I02",
+   "nombre": "Migracion: Africa -> Brasil/Ecuador -> Necocli -> Darien -> Centroamerica -> frontera EE.UU.",
+   "subtipo": "Extracontinental",
+   "nivel": "infraestructura",
+   "via": "Tapon del Darien y corredor centroamericano (Paso Canoas-Tapachula)",
+   "waypoints": [
+    [
+     17.0,
+     2.0,
+     "Africa (centroide)",
+     "origen"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "Sao Paulo (entrada aerea, marcador)",
+     "transito"
+    ],
+    [
+     -76.78,
+     8.43,
+     "Necocli",
+     "transito"
+    ],
+    [
+     -82.84,
+     8.53,
+     "Paso Canoas",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "transito"
+    ],
+    [
+     -110.9,
+     31.3,
+     "Frontera EE.UU.-Mexico (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2013,
+   "construccion_propia": true,
+   "fuente": "Migration Policy Institute (2021, independiente); OIM (2019, multilateral)",
+   "url": "https://www.migrationpolicy.org/sites/default/files/publications/mpi-african-migration-americas-eng_final.pdf",
+   "nota": "Mas de 5.000 encuentros de africanos de 35 paises en la frontera EE.UU. (FY2019). Datos previos al colapso; hoy 'practicamente desaparecieron' (Infobae 2026). Orden intermedio y ciudades por marcador.",
+   "estado": "historica",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I03",
+   "nombre": "Migracion: Africa occidental -> Managua -> Honduras -> Guatemala -> frontera EE.UU. (evita el Darien)",
+   "subtipo": "Extracontinental",
+   "nivel": "infraestructura",
+   "via": "Puente aereo a Managua; ruta terrestre centroamericana que evita el Darien (Danli-Tapachula)",
+   "waypoints": [
+    [
+     0.0,
+     10.0,
+     "Africa occidental/central (centroide)",
+     "origen"
+    ],
+    [
+     -86.25,
+     12.13,
+     "Managua",
+     "transito"
+    ],
+    [
+     -86.58,
+     14.03,
+     "Danli (marcador)",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "transito"
+    ],
+    [
+     -110.9,
+     31.3,
+     "Frontera EE.UU.-Mexico (marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": true,
+   "fuente": "Voz de America (prensa); INM de Honduras (actor interesado) via MPI",
+   "url": "https://www.voanews.com/a/african-asian-migrants-seek-nicaragua-shortcut-to-us-/7418273.html",
+   "nota": "+553% de llegadas de africanos a Honduras (19.412 en 2023, dato del INM). Vuelo a Nicaragua y luego tierra. Danli y cruce final por marcador. Caso documentado, no registro de trayecto.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I04",
+   "nombre": "Migracion: Necocli -> Acandi/Capurgana -> Darien -> Bajo Chiquito -> Lajas Blancas -> Paso Canoas",
+   "subtipo": "Tránsito hacia el norte",
+   "nivel": "infraestructura",
+   "via": "Golfo de Uraba (Necocli-Acandi) y Tapon del Darien (Bajo Chiquito-Lajas Blancas)",
+   "waypoints": [
+    [
+     -76.78,
+     8.43,
+     "Necocli",
+     "origen"
+    ],
+    [
+     -77.28,
+     8.52,
+     "Acandi",
+     "transito"
+    ],
+    [
+     -77.85,
+     8.22,
+     "Bajo Chiquito",
+     "transito"
+    ],
+    [
+     -78.0,
+     8.3,
+     "Lajas Blancas",
+     "transito"
+    ],
+    [
+     -82.84,
+     8.53,
+     "Paso Canoas",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2021,
+   "construccion_propia": false,
+   "fuente": "Migracion Panama (actor interesado) via Infobae; Crisis Group; The New Humanitarian (2024)",
+   "url": "https://www.infobae.com/panama/2026/09/27/panama-contabiliza-6385-migrantes-en-el-flujo-norte-sur-y-solo-505-ingresos-por-darien/",
+   "nota": "Corredor historico del Darien: 520.085 cruces (2023) -> 302.203 (2024) -> 3.091 (2025) -> 468 (ene-ago 2026). Colapso del 99%. Variante 'VIP' por Capurgana. Tramo Lajas Blancas->Paso Canoas inferido. Posible duplicado de ruta existente: cotejar.",
+   "estado": "historica",
+   "dedup_candidato": true,
+   "dedup_disposicion": "revisar_pais_mas_amplio",
+   "no_publicar": true,
+   "motivo_dh": "G/dedup: sub-tramo histórico; país completo"
+  },
+  {
+   "id": "MG-I05",
+   "nombre": "Migracion (flujo inverso): Paso Canoas -> Miramar (Colon) -> Puerto Obaldia -> Capurgana/Necocli/Turbo -> Medellin",
+   "subtipo": "Flujo inverso y retorno",
+   "nivel": "infraestructura",
+   "via": "Flujo inverso: Paso Canoas; cabotaje caribeno Colon-Puerto Obaldia-Capurgana; Necocli/Turbo-Medellin",
+   "waypoints": [
+    [
+     -82.84,
+     8.53,
+     "Paso Canoas",
+     "origen"
+    ],
+    [
+     -79.9,
+     9.36,
+     "Miramar (Colon)",
+     "transito"
+    ],
+    [
+     -77.42,
+     8.66,
+     "Puerto Obaldia",
+     "transito"
+    ],
+    [
+     -77.34,
+     8.63,
+     "Capurgana",
+     "transito"
+    ],
+    [
+     -76.78,
+     8.43,
+     "Necocli",
+     "transito"
+    ],
+    [
+     -76.73,
+     8.1,
+     "Turbo",
+     "transito"
+    ],
+    [
+     -75.56,
+     6.25,
+     "Medellin",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "Defensorias del Pueblo (CR, PA, CO) via OACNUDH (multilateral); Migracion Panama (actor interesado) via Infobae; Migracion Colombia (actor interesado)",
+   "url": "https://www.oacnudh.org/informe-revela-desafios-humanitarios-entre-la-migracion-inversa-de-costa-rica-panama-y-colombia/",
+   "nota": "Flujo inverso vigente 2025-26: 6.385 personas norte-sur al 20/9/2026 (91,6% venezolanos). Embarque en Puerto Miramar/Palenque (Colon). Tramo Necocli->Medellin inferido. Precio hasta USD 280. Posible duplicado de ruta existente: cotejar.",
+   "estado": "vigente_2026",
+   "dedup_candidato": true
+  },
+  {
+   "id": "MG-I06",
+   "nombre": "Migracion: La Habana -> (vuelo charter) -> Managua -> Honduras -> Guatemala -> Tapachula",
+   "subtipo": "Tránsito hacia el norte",
+   "nivel": "infraestructura",
+   "via": "Vuelo charter a Managua; corredor terrestre Danli-Tecun Uman (rio Suchiate)-Tapachula",
+   "waypoints": [
+    [
+     -82.37,
+     23.11,
+     "La Habana",
+     "origen"
+    ],
+    [
+     -86.25,
+     12.13,
+     "Managua",
+     "transito"
+    ],
+    [
+     -86.58,
+     14.03,
+     "Danli (marcador)",
+     "transito"
+    ],
+    [
+     -92.14,
+     14.68,
+     "Tecun Uman-Ciudad Hidalgo",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2021,
+   "construccion_propia": true,
+   "fuente": "OIM via Directorio Cubano; Tico Times; Inter-American Dialogue",
+   "url": "https://www.directoriocubano.info/acontecer/cubanos-america-latina-nuevo-destino-migratorio-oim/",
+   "nota": "Mas de 100.000 pasajeros de Haiti y Cuba en charteres a Nicaragua (2023). Las entradas cubanas cayeron tras la visa nicaraguense (feb 2026). Orden de paises de la OIM; cruces por marcador.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I07",
+   "nombre": "Migracion: La Habana -> Managua -> Penas Blancas -> San Jose (Costa Rica)",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Vuelo a Managua; paso de Penas Blancas (Nicaragua-Costa Rica)",
+   "waypoints": [
+    [
+     -82.37,
+     23.11,
+     "La Habana",
+     "origen"
+    ],
+    [
+     -86.25,
+     12.13,
+     "Managua",
+     "transito"
+    ],
+    [
+     -85.63,
+     11.21,
+     "Penas Blancas",
+     "transito"
+    ],
+    [
+     -84.08,
+     9.93,
+     "San Jose",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "Directorio Cubano (prensa, fuente unica)",
+   "url": "https://www.directoriocubano.info/actualidad/la-nueva-ruta-de-los-cubanos-vuelos-a-nicaragua-y-cruce-hacia-costa-rica/",
+   "nota": "Una sola fuente, sin segunda: no sostiene confianza alta. Posiblemente anterior a la visa de feb 2026. San Jose por marcador."
+  },
+  {
+   "id": "MG-I08",
+   "nombre": "Migracion: La Habana -> Georgetown (Guyana) -> Necocli (Darien)",
+   "subtipo": "Tránsito hacia el norte",
+   "nivel": "infraestructura",
+   "via": "Escala aerea en Georgetown (Guyana); entrada al Darien por Necocli",
+   "waypoints": [
+    [
+     -82.37,
+     23.11,
+     "La Habana",
+     "origen"
+    ],
+    [
+     -58.16,
+     6.8,
+     "Georgetown",
+     "transito"
+    ],
+    [
+     -76.78,
+     8.43,
+     "Necocli",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": null,
+   "construccion_propia": true,
+   "fuente": "14ymedio via Translating Cuba (prensa); LatAm Journalism Review",
+   "url": "https://translatingcuba.com/guyana-the-new-springboard-to-the-united-states-14ymedio/",
+   "nota": "Guyana sin visa para cubanos; escala hacia el Darien. Tramo Guyana->Colombia no documentado. Con el Darien casi cerrado, quedo sin salida norte. Fecha de inicio no verificada. Fuente de prensa.",
+   "desde_incierto": true
+  },
+  {
+   "id": "MG-I09",
+   "nombre": "Migracion (balseros): Cuba -> Estrecho de Florida -> Cayos de Florida",
+   "subtipo": "Tránsito hacia el norte",
+   "nivel": "infraestructura",
+   "via": "Travesia maritima por el Estrecho de Florida (balseros)",
+   "waypoints": [
+    [
+     -82.36,
+     23.14,
+     "La Habana (costa norte, marcador)",
+     "origen"
+    ],
+    [
+     -81.5,
+     24.0,
+     "Estrecho de Florida (marcador)",
+     "transito"
+    ],
+    [
+     -81.09,
+     24.71,
+     "Marathon, Cayos de Florida",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": true,
+   "fuente": "Guardia Costera de EE.UU. y CBP (actor interesado)",
+   "url": "https://www.news.uscg.mil/Press-Releases/Article/4025128/coast-guard-repatriates-20-migrants-2-dogs-to-cuba/",
+   "nota": "308 repatriados a Cuba (FY2024). El registro cuenta interceptados/repatriados, no salidas ni llegadas no detectadas. Puntos por marcador.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I10",
+   "nombre": "Migracion: Haiti -> (Cuba/Cay Sal Bank) -> Cayos de Florida",
+   "subtipo": "Tránsito hacia el norte",
+   "nivel": "infraestructura",
+   "via": "Travesia maritima via Cay Sal Bank hacia los Cayos de Florida",
+   "waypoints": [
+    [
+     -72.5,
+     19.5,
+     "Haiti (costa, marcador)",
+     "origen"
+    ],
+    [
+     -80.0,
+     23.7,
+     "Cay Sal Bank",
+     "transito"
+    ],
+    [
+     -81.09,
+     24.71,
+     "Marathon (Cayos de Florida)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2025,
+   "construccion_propia": true,
+   "fuente": "Guardia Costera de EE.UU. (actor interesado) via Fox News",
+   "url": "https://www.foxnews.com/us/coast-guard-intercepts-132-haitians-boat-south-florida-keys-sends-them-back-home.print",
+   "nota": "Un solo evento: 132 haitianos repatriados (feb 2025) entre Cuba y Cay Sal Bank. Sin serie. No sostiene corredor sin segunda fuente."
+  },
+  {
+   "id": "MG-I11",
+   "nombre": "Migracion: Haiti (Cap-Haitien) -> Providenciales (Islas Turcas y Caicos)",
+   "subtipo": "Tránsito hacia el norte",
+   "nivel": "infraestructura",
+   "via": "Travesia maritima Cap-Haitien-Islas Turcas y Caicos",
+   "waypoints": [
+    [
+     -72.2,
+     19.76,
+     "Cap-Haitien (marcador)",
+     "origen"
+    ],
+    [
+     -72.27,
+     21.77,
+     "Providenciales",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "fuente": "Guardia Costera y CBP (actor interesado); The Haitian Times",
+   "url": "https://haitiantimes.com/2025/04/02/depoted-haitians-turks-and-caicos/",
+   "nota": "240 personas a 15 millas al sur de las islas (2026, Op. Vigilant Sentry); 98 haitianos (abr 2025). Puerto de salida (Cap-Haitien) por marcador.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I12",
+   "nombre": "Migracion (yolas): Republica Dominicana (costa este) -> Canal de la Mona -> Puerto Rico",
+   "subtipo": "Tránsito hacia el norte",
+   "nivel": "infraestructura",
+   "via": "Canal de la Mona (yolas) hacia Puerto Rico",
+   "waypoints": [
+    [
+     -68.71,
+     18.62,
+     "Higuey (costa este, marcador)",
+     "origen"
+    ],
+    [
+     -67.89,
+     18.08,
+     "Isla de Mona",
+     "transito"
+    ],
+    [
+     -67.15,
+     18.43,
+     "Aguadilla",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2023,
+   "construccion_propia": true,
+   "fuente": "Guardia Costera de EE.UU. (actor interesado)",
+   "url": "https://www.news.uscg.mil/Press-Releases/Article/4591606/coast-guard-repatriates-75-migrants-to-dominican-republic-following-vessel-inte/",
+   "nota": "Sep 2026: 75 devueltos a RD por el Canal de la Mona. 'Yolas'. El registro cuenta interceptados; las llegadas no detectadas no figuran.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I13",
+   "nombre": "Migracion: Haiti -> (Brasil o Chile) -> Sudamerica -> Darien -> Centroamerica -> Tapachula",
+   "subtipo": "Tránsito hacia el norte",
+   "nivel": "infraestructura",
+   "via": "Reemigracion desde Brasil/Chile; Tapon del Darien (Necocli) y corredor hasta Tapachula",
+   "waypoints": [
+    [
+     -72.31,
+     18.59,
+     "Puerto Principe",
+     "origen"
+    ],
+    [
+     -46.63,
+     -23.55,
+     "Brasil (Sao Paulo, marcador)",
+     "transito"
+    ],
+    [
+     -76.78,
+     8.43,
+     "Necocli",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2016,
+   "construccion_propia": true,
+   "fuente": "IMUMI 'Un viaje de esperanza' (2023); Encartes",
+   "url": "https://imumi.org/2023/Un-viaje-de-esperanza-La-Migracion-de-Mujeres-Haitianas-a-Tapachula-Mexico.pdf",
+   "nota": "Testimonio cualitativo (mujeres haitianas); reemigracion desde Brasil/Chile. Orden inferido; no es flujo medido. En 2025 las caravanas cambiaron de meta.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I14",
+   "nombre": "Migracion (caravanas): Tapachula -> Ciudad de Mexico / Guadalajara / Monterrey",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Caravanas por carretera desde Chiapas hacia el centro y norte de Mexico",
+   "waypoints": [
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "origen"
+    ],
+    [
+     -99.13,
+     19.43,
+     "Ciudad de Mexico",
+     "destino"
+    ],
+    [
+     -103.35,
+     20.67,
+     "Guadalajara",
+     "destino"
+    ],
+    [
+     -100.32,
+     25.69,
+     "Monterrey",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "fuente": "La Jornada; CNN en Espanol; MSF",
+   "url": "https://www.jornada.com.mx/noticia/2026/06/16/estados/alistan-nueva-caravana-migrante-en-tapachula-chiapas-buscan-llegar-a-cdmx-guadalajara-y-monterrey",
+   "nota": "Al menos 7 caravanas desde Chiapas (2025-26); 20.000-75.000 varados (estimacion de ONG). Asentamiento dentro de Mexico, no transito a EE.UU.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I15",
+   "nombre": "Migracion (asentamiento): La Habana -> Merida / Cancun / Ciudad de Mexico",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Arribo aereo y asentamiento en el sureste y centro de Mexico",
+   "waypoints": [
+    [
+     -82.37,
+     23.11,
+     "La Habana",
+     "origen"
+    ],
+    [
+     -89.62,
+     20.97,
+     "Merida",
+     "destino"
+    ],
+    [
+     -86.85,
+     21.16,
+     "Cancun",
+     "destino"
+    ],
+    [
+     -99.13,
+     19.43,
+     "Ciudad de Mexico",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": true,
+   "fuente": "eltoque; Gatopardo; COMAR (actor interesado)",
+   "url": "https://eltoque.com/tres-migrantes-cubanos-buscaron-la-supervivencia-en-mexico",
+   "nota": "COMAR 2025: unas 34.000 solicitudes de cubanos. Casos de asentamiento, no flujo medido. Ciudades citadas en los casos.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I16",
+   "nombre": "Migracion: Colombia (Ipiales) -> Rumichaca -> Quito -> Huaquillas -> Tumbes -> Lima",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Paso de Rumichaca; cruce Huaquillas-Aguas Verdes/Tumbes; carretera Panamericana a Lima",
+   "waypoints": [
+    [
+     -77.67,
+     0.82,
+     "Ipiales-Rumichaca",
+     "origen"
+    ],
+    [
+     -78.47,
+     -0.18,
+     "Quito",
+     "transito"
+    ],
+    [
+     -80.23,
+     -3.48,
+     "Huaquillas",
+     "transito"
+    ],
+    [
+     -80.45,
+     -3.57,
+     "Tumbes",
+     "transito"
+    ],
+    [
+     -77.04,
+     -12.05,
+     "Lima",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2017,
+   "construccion_propia": true,
+   "fuente": "OIM DTM Ecuador y Peru (multilateral)",
+   "url": "https://dtm.iom.int/ecuador",
+   "nota": "2018: 695.000 venezolanos cruzaron de Ecuador a Peru por Huaquillas-Tumbes (66% a Lima). 2026: unas 515/dia (entradas y salidas). Quito por marcador.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I17",
+   "nombre": "Migracion: Peru -> Desaguadero -> Pisiga (Bolivia) -> Colchane -> Iquique -> Santiago",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Altiplano: Desaguadero; paso Pisiga-Colchane; ruta a Iquique y Santiago",
+   "waypoints": [
+    [
+     -69.04,
+     -16.57,
+     "Desaguadero",
+     "origen"
+    ],
+    [
+     -68.68,
+     -19.25,
+     "Pisiga (Bolivia)",
+     "transito"
+    ],
+    [
+     -68.63,
+     -19.28,
+     "Colchane",
+     "transito"
+    ],
+    [
+     -70.15,
+     -20.21,
+     "Iquique",
+     "transito"
+    ],
+    [
+     -70.67,
+     -33.45,
+     "Santiago",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2021,
+   "construccion_propia": true,
+   "fuente": "PDI Chile (actor interesado) via CIPER; Cooperativa",
+   "url": "https://www.ciperchile.cl/2026/09/23/entre-enero-y-agosto-se-detectaron-286-extranjeros-cruzando-ilegalmente-la-frontera-norte-93-menos-que-en-igual-periodo-de-2025/",
+   "nota": "Ene-ago 2026: 286 cruces detectados (-93,5% vs 2025). Reconducciones a Bolivia. Iquique/Santiago por marcador. Flujo sur-sur reciente, mayoria boliviana.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I18",
+   "nombre": "Migracion: Bolivia (Pisiga) -> Colchane (Chile)",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Paso fronterizo Pisiga-Colchane (altiplano)",
+   "waypoints": [
+    [
+     -68.68,
+     -19.25,
+     "Pisiga",
+     "origen"
+    ],
+    [
+     -68.63,
+     -19.28,
+     "Colchane",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "PDI Chile (actor interesado) via CIPER",
+   "url": "https://www.ciperchile.cl/2026/09/23/entre-enero-y-agosto-se-detectaron-286-extranjeros-cruzando-ilegalmente-la-frontera-norte-93-menos-que-en-igual-periodo-de-2025/",
+   "nota": "Tramo registrado por la PDI. Mar-ago 2026: 69% bolivianos, 20% venezolanos. Cuenta detecciones en el paso, no trayecto."
+  },
+  {
+   "id": "MG-I19",
+   "nombre": "Migracion: Venezuela (Guiria) -> Trinidad y Tobago (Puerto Espana)",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Travesia maritima por el golfo de Paria",
+   "waypoints": [
+    [
+     -62.3,
+     10.58,
+     "Guiria",
+     "origen"
+    ],
+    [
+     -61.51,
+     10.66,
+     "Puerto Espana",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": false,
+   "fuente": "R4V (multilateral); ACNUR (naufragio 'Jhonnaly Jose'); MPI",
+   "url": "https://www.unhcr.org/africa/news/briefing-notes/fears-venezuelans-missing-caribbean-shipwreck",
+   "nota": "R4V proyecta unos 35.702 venezolanos en T&T (2025). Travesia por el golfo de Paria; naufragio del 'Jhonnaly Jose'. Oct 2025: T&T ordeno deportar al menos 200.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I20",
+   "nombre": "Migracion: Venezuela (Paraguana/Falcon) -> Aruba / Curazao",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Travesia maritima caribena desde la peninsula de Paraguana a Aruba y Curazao",
+   "waypoints": [
+    [
+     -70.2,
+     11.7,
+     "Paraguana (Falcon, marcador)",
+     "origen"
+    ],
+    [
+     -70.03,
+     12.52,
+     "Oranjestad (Aruba)",
+     "destino"
+    ],
+    [
+     -68.93,
+     12.11,
+     "Willemstad (Curazao)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2018,
+   "construccion_propia": true,
+   "fuente": "R4V, plataforma subregional del Caribe (multilateral, fuente unica)",
+   "url": "https://www.r4v.info/en/caribbean",
+   "nota": "R4V proyecta unos 12.230 en Aruba y 13.639 en Curazao (2025). Puertos de salida/llegada no documentados; Paraguana por marcador. Una sola fuente."
+  },
+  {
+   "id": "MG-I21",
+   "nombre": "Migracion (interiorizacion): Pacaraima -> Boa Vista -> municipios de Brasil",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "BR-174: Pacaraima-Boa Vista e interiorizacion",
+   "waypoints": [
+    [
+     -61.15,
+     4.48,
+     "Pacaraima",
+     "origen"
+    ],
+    [
+     -60.67,
+     2.82,
+     "Boa Vista",
+     "transito"
+    ],
+    [
+     -47.9,
+     -15.8,
+     "Brasil interior (centroide de destinos)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": true,
+   "fuente": "ACNUR Brasil (multilateral); Operacao Acolhida (actor interesado)",
+   "url": "https://roraima1.com.br/entrada-de-venezuelanos-no-brasil-cai-nos-primeiros-dias-de-2026-aponta-operacao-acolhida/",
+   "nota": "Mas de 157.000 interiorizaciones a feb 2026 por la BR-174. Entrada por Pacaraima cae en 2026. Destino por centroide (miles de municipios).",
+   "dh_grupo_A": true,
+   "tramo_inferido": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I22",
+   "nombre": "Migracion: Venezuela (San Antonio del Tachira) <-> Cucuta (movimiento pendular)",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Puentes internacionales del Tachira (movimiento pendular)",
+   "waypoints": [
+    [
+     -72.44,
+     7.81,
+     "San Antonio del Tachira",
+     "origen"
+    ],
+    [
+     -72.5,
+     7.89,
+     "Cucuta",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": null,
+   "construccion_propia": false,
+   "fuente": "Migracion Colombia (actor interesado) via Valora Analitik",
+   "url": "https://www.valoraanalitik.com/frontera-colombia-venezuela-2026-resultados/",
+   "nota": "1T 2026: casi 11 millones de movimientos pendulares (Norte de Santander 86,8%). Son cruces, no personas. Flujo historico. Posible duplicado de ruta existente: cotejar.",
+   "desde_incierto": true,
+   "dedup_candidato": true
+  },
+  {
+   "id": "MG-I23",
+   "nombre": "Migracion: Nicaragua -> Penas Blancas -> San Jose (Costa Rica)",
+   "subtipo": "Intrarregional y asentamiento",
+   "nivel": "infraestructura",
+   "via": "Paso de Penas Blancas (Nicaragua-Costa Rica)",
+   "waypoints": [
+    [
+     -85.83,
+     11.43,
+     "Nicaragua (Rivas, marcador)",
+     "origen"
+    ],
+    [
+     -85.63,
+     11.21,
+     "Penas Blancas",
+     "transito"
+    ],
+    [
+     -84.08,
+     9.93,
+     "San Jose",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2018,
+   "construccion_propia": true,
+   "fuente": "ACNUR Costa Rica (multilateral); Noticias ONU",
+   "url": "https://reporting.unhcr.org/operational/operations/costa-rica",
+   "nota": "Mas de 300.000 nicaraguenses han pedido asilo en Costa Rica desde 2018 por Penas Blancas y Tablillas. Rivas y San Jose por marcador. Falta trazar Tablillas.",
+   "dedup_disposicion": "infra_reemplaza_pais",
+   "tramo_inferido": true,
+   "dh_grupo_A": true
+  },
+  {
+   "id": "MG-I24",
+   "nombre": "Migracion (retorno): Chile -> Venezuela (salvoconducto y salidas voluntarias)",
+   "subtipo": "Flujo inverso y retorno",
+   "nivel": "infraestructura",
+   "via": "Salida por pasos habilitados del norte de Chile; retorno a Venezuela con salvoconducto",
+   "waypoints": [
+    [
+     -70.67,
+     -33.45,
+     "Santiago",
+     "origen"
+    ],
+    [
+     -66.88,
+     10.49,
+     "Caracas",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "PDI Chile (actor interesado) via CIPER; El Nacional (acuerdo Chile-Venezuela)",
+   "url": "https://www.ciperchile.cl/2026/09/23/entre-enero-y-agosto-se-detectaron-286-extranjeros-cruzando-ilegalmente-la-frontera-norte-93-menos-que-en-igual-periodo-de-2025/",
+   "nota": "'Hay mas venezolanos saliendo de Chile que pretendiendo entrar'. Ene-jul 2026: 7.501 salidas (78% venezolanos). Acuerdo Chile-Venezuela (sep 2026, salvoconducto). Medio de transporte y escalas no constan.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I25",
+   "nombre": "Migracion (retorno andino): Chile/Peru (Tacna) -> Desaguadero (Bolivia) a pie",
+   "subtipo": "Flujo inverso y retorno",
+   "nivel": "infraestructura",
+   "via": "Retorno andino a pie por la zona altoandina Tacna-Desaguadero",
+   "waypoints": [
+    [
+     -70.2,
+     -18.0,
+     "Tacna (frontera tripartita, marcador)",
+     "origen"
+    ],
+    [
+     -69.04,
+     -16.57,
+     "Desaguadero",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "RPP (prensa); Swissinfo",
+   "url": "https://rpp.pe/peru/tacna/retorno-de-migrantes-tacna-a-bolivia-por-frontera-tripartito-noticia-1688433",
+   "nota": "Caso puntual: venezolanos que volvieron a Bolivia a pie por la zona altoandina. Etapa final no documentada. No sostiene corredor sin segunda fuente."
+  },
+  {
+   "id": "MG-I26",
+   "nombre": "Migracion (repatriacion): EE.UU. -> frontera norte de Mexico -> estados de origen (Chiapas, etc.)",
+   "subtipo": "Flujo inverso y retorno",
+   "nivel": "infraestructura",
+   "via": "Repatriacion por la frontera norte (Ciudad Juarez) y traslado interno a los estados de origen",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (centroide)",
+     "origen"
+    ],
+    [
+     -106.42,
+     31.69,
+     "Frontera norte de Mexico (Ciudad Juarez, marcador)",
+     "transito"
+    ],
+    [
+     -93.12,
+     16.75,
+     "Chiapas (Tuxtla Gutierrez, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2025,
+   "construccion_propia": true,
+   "fuente": "Gobierno de Mexico, 'Mexico te abraza' (actor interesado) via Latinus/La Opinion",
+   "url": "https://latinus.us/mexico/2026/9/2/mexico-recibio-262-mil-repatriados-desde-eu-en-ano-medio-equivale-480-personas-diarias-183234.html",
+   "nota": "271.193 mexicanos recibidos (20/1/2025-13/8/2026); ocho estados suman el 55%. Pasos de ingreso no especificados; Ciudad Juarez y Tuxtla por marcador. Dato del propio Gobierno de Mexico.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I27",
+   "nombre": "Migracion (deportacion en transito): EE.UU. -> Guatemala -> Mexico (Tapachula)",
+   "subtipo": "Flujo inverso y retorno",
+   "nivel": "infraestructura",
+   "via": "Deportacion aerea a Guatemala y transito terrestre por Tecun Uman (rio Suchiate) a Mexico",
+   "waypoints": [
+    [
+     -98.6,
+     39.8,
+     "EE.UU. (centroide)",
+     "origen"
+    ],
+    [
+     -90.51,
+     14.63,
+     "Ciudad de Guatemala",
+     "transito"
+    ],
+    [
+     -92.14,
+     14.68,
+     "Tecun Uman-Ciudad Hidalgo (marcador)",
+     "transito"
+    ],
+    [
+     -92.26,
+     14.91,
+     "Tapachula",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "Presidente de Guatemala (actor interesado) via Univision/La Nacion",
+   "url": "https://www.univision.com/noticias/america-latina/estados-unidos-ha-deportado-a-mas-de-2-000-mexicanos-a-guatemala-en-lo-que-va-de-2026",
+   "nota": "2.284 mexicanos deportados a Guatemala en 2026, trasladados a Mexico en menos de 24 h por Tecun Uman. Tapachula por marcador; destino final no consta.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I28",
+   "nombre": "Migracion (deportacion): Republica Dominicana -> Haiti (Dajabon-Ouanaminthe)",
+   "subtipo": "Flujo inverso y retorno",
+   "nivel": "infraestructura",
+   "via": "Deportacion terrestre por el paso Dajabon-Ouanaminthe",
+   "waypoints": [
+    [
+     -70.69,
+     19.45,
+     "Santiago (centro de procesamiento, RD)",
+     "origen"
+    ],
+    [
+     -71.72,
+     19.55,
+     "Dajabon-Ouanaminthe",
+     "transito"
+    ],
+    [
+     -72.2,
+     19.76,
+     "Cap-Haitien",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": true,
+   "fuente": "DGM (actor interesado); GARR (ONG); OIM (multilateral)",
+   "url": "https://www.iom.int/news/haitis-displacement-crisis-hits-record-15-million-amid-escalating-violence",
+   "nota": "226.500 deportados en ene-jul 2026 (DGM); unas 380.000 en 2025. Cifras de eventos: una persona puede contarse mas de una vez. Emparejamiento centros-pasos inferido. Cabe una 2.a ruta Haina-Malpasse-Puerto Principe.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I29",
+   "nombre": "Desplazamiento interno: Catatumbo (Tibu) -> Cucuta (Colombia)",
+   "subtipo": "Desplazamiento interno",
+   "nivel": "infraestructura",
+   "via": "Desplazamiento Catatumbo: Tibu-Cucuta",
+   "waypoints": [
+    [
+     -72.73,
+     8.64,
+     "Tibu",
+     "origen"
+    ],
+    [
+     -72.5,
+     7.89,
+     "Cucuta",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "ONU Colombia/OCHA (multilateral); UNDP; UARIV (actor interesado); NRC",
+   "url": "https://news.un.org/es/story/2026/01/1541031",
+   "nota": "Unas 100.000 personas desplazadas desde ene 2025 (UARIV: 102.857); 15.086 a Cucuta. Mayor desplazamiento masivo por un solo evento registrado en Colombia.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I30",
+   "nombre": "Desplazamiento interno: Catatumbo (Tibu) -> Ocana (Colombia)",
+   "subtipo": "Desplazamiento interno",
+   "nivel": "infraestructura",
+   "via": "Desplazamiento Catatumbo: Tibu-Ocana",
+   "waypoints": [
+    [
+     -72.73,
+     8.64,
+     "Tibu",
+     "origen"
+    ],
+    [
+     -73.36,
+     8.25,
+     "Ocana",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "ONU Colombia/OCHA (multilateral); UARIV (actor interesado)",
+   "url": "https://news.un.org/es/story/2026/01/1541031",
+   "nota": "9.474 llegados a Ocana. Un mismo desplazado puede figurar en mas de una declaracion.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I31",
+   "nombre": "Desplazamiento forzado con cruce: Amatenango de la Frontera (Chiapas) -> Cuilco (Guatemala)",
+   "subtipo": "Desplazamiento interno",
+   "nivel": "infraestructura",
+   "via": "Cruce fronterizo por desplazamiento forzado Amatenango de la Frontera-Cuilco",
+   "waypoints": [
+    [
+     -92.08,
+     15.43,
+     "Amatenango de la Frontera",
+     "origen"
+    ],
+    [
+     -91.96,
+     15.4,
+     "Cuilco",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2024,
+   "construccion_propia": false,
+   "fuente": "Gobierno de Mexico (actor interesado) via Proceso",
+   "url": "https://www.proceso.com.mx/nacional/2024/7/26/amlo-admite-desplazamiento-humano-de-chiapas-hacia-guatemala-por-disputa-entre-grupos-criminal-332265.html",
+   "nota": "Unas 400 personas cruzaron a Guatemala por la violencia CJNG-Sinaloa (2024). Desplazamiento interno con cruce de frontera.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I32",
+   "nombre": "Desplazamiento forzado con cruce: Frontera Comalapa (Chiapas) -> La Democracia (Huehuetenango, Guatemala)",
+   "subtipo": "Desplazamiento interno",
+   "nivel": "infraestructura",
+   "via": "Cruce fronterizo por desplazamiento forzado Frontera Comalapa-La Democracia (Huehuetenango)",
+   "waypoints": [
+    [
+     -92.15,
+     15.67,
+     "Frontera Comalapa",
+     "origen"
+    ],
+    [
+     -91.93,
+     15.63,
+     "La Democracia (Huehuetenango)",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2025,
+   "construccion_propia": false,
+   "fuente": "Instituto Guatemalteco de Migracion (actor interesado) via Proceso/El Imparcial",
+   "url": "https://www.proceso.com.mx/nacional/estados/2025/9/25/habitantes-de-frontera-comalapa-solicitan-refugio-en-guatemala-por-la-violencia-del-narco-357654.html",
+   "nota": "Guatemala dio asilo a 161 mexicanos (ago 2025); 100-248 cruzados por la violencia del narco.",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "MG-I33",
+   "nombre": "Desplazamiento interno: Cite Soleil -> sitios de desplazados en Puerto Principe (Haiti)",
+   "subtipo": "Desplazamiento interno",
+   "nivel": "infraestructura",
+   "via": "Desplazamiento intraurbano Cite Soleil-sitios de Puerto Principe",
+   "waypoints": [
+    [
+     -72.33,
+     18.58,
+     "Cite Soleil",
+     "origen"
+    ],
+    [
+     -72.31,
+     18.59,
+     "Puerto Principe (sitios, marcador)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2022,
+   "construccion_propia": true,
+   "fuente": "OIM DTM (multilateral)",
+   "url": "https://www.iom.int/news/haitis-displacement-crisis-hits-record-15-million-amid-escalating-violence",
+   "nota": "Cerca de 1,5 millones de desplazados en Haiti (record). Mas de 18.000 huyeron de Cite Soleil en dias de mayo 2026. Movimiento intraurbano; destino por marcador.",
+   "dh_grupo_A": true,
+   "tramo_inferido": true,
+   "dedup_disposicion": "infra_reemplaza_pais"
+  }
+ ]
+}

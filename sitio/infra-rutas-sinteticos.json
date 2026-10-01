@@ -1,0 +1,211 @@
+{
+ "flujo_nombre": "sinteticos-infra",
+ "es_prototipo": true,
+ "nivel": "infraestructura",
+ "corte": "2026-10-01",
+ "aviso": "Capa de infraestructura de sintéticos: MDMA europeo a puertos del Cono Sur, metanfetamina de Sinaloa a las garitas, ketamina Lima→Tacna→Arica→Santiago y boliviana por Arica. Actor interesado rotulado; tramos inferidos marcados.",
+ "rutas": [
+  {
+   "id": "SN-I01",
+   "nombre": "MDMA: Río de Janeiro → Paraguay → RN14 (Paso Cerrito, Entre Ríos) → Buenos Aires",
+   "nivel": "infraestructura",
+   "via": "RN14",
+   "waypoints": [
+    [
+     -43.17,
+     -22.91,
+     "Río de Janeiro",
+     "origen"
+    ],
+    [
+     -57.95,
+     -30.9,
+     "Paso Cerrito (RN14, Entre Ríos, aprox.)",
+     "transito"
+    ],
+    [
+     -58.38,
+     -34.6,
+     "Buenos Aires",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "Policía de Entre Ríos/Juzgado Federal de Concordia (actor interesado); Infobae",
+   "url": "https://www.infobae.com/sociedad/policiales/2026/09/23/encontraron-extasis-valuado-en-mas-de-2-millones-de-dolares-dentro-de-tres-autos-provenientes-de-brasil/",
+   "nota": "40 kg de MDMA + 10.000 pastillas en 3 autos (2026). 'Pasó por Paraguay' de una sola fuente; punto de entrada a AR no nombrado.",
+   "subtipo": "sinteticos"
+  },
+  {
+   "id": "SN-I03",
+   "nombre": "MDMA (histórica): Amberes → San Antonio / Iquique (Chile)",
+   "nivel": "infraestructura",
+   "via": "marítima",
+   "waypoints": [
+    [
+     4.4,
+     51.26,
+     "Amberes",
+     "origen"
+    ],
+    [
+     -71.62,
+     -33.59,
+     "San Antonio",
+     "destino"
+    ],
+    [
+     -70.15,
+     -20.21,
+     "Iquique",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2022,
+   "construccion_propia": false,
+   "fuente": "Servicio Nacional de Aduanas de Chile (actor interesado)",
+   "url": "https://www.aduana.cl/trabajo-de-inteligencia-de-aduanas-y-pdi-permite-historica-incautacion/aduana/2022-06-24/110520.html",
+   "nota": "474.322 comprimidos (2022); 140 kg (2023). Sin 2024-2026 verificado.",
+   "estado": "historica",
+   "subtipo": "sinteticos"
+  },
+  {
+   "id": "SN-I05",
+   "nombre": "Metanfetamina: laboratorios de Sinaloa (Culiacán) → garita de Otay Mesa / Nogales",
+   "nivel": "infraestructura",
+   "via": "MEX-15 / carretera costera (inferida)",
+   "waypoints": [
+    [
+     -107.39,
+     24.81,
+     "Culiacán (Sinaloa)",
+     "origen"
+    ],
+    [
+     -117.03,
+     32.55,
+     "Otay Mesa (Tijuana–San Diego)",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "Semar/FGR/SSPC (actor interesado); DEA NDTA 2025",
+   "url": "https://www.infobae.com/mexico/2026/09/03/marina-inhabilita-narcolaboratorio-clandestino-en-sinaloa-y-asegura-750-kilos-de-metanfetamina-en-el-sitio/",
+   "nota": "Laboratorios documentados en Sinaloa; garitas por CBP. También cruza por Nogales. Ruta entre ambos, construcción propia.",
+   "subtipo": "sinteticos"
+  },
+  {
+   "id": "SN-I06",
+   "nombre": "Ketamina: origen interno → buses/encomiendas → peaje La Uribe (Andalucía) / Palmira → laboratorios de tusi",
+   "nivel": "infraestructura",
+   "via": "corredor Andalucía–Cerritos; vía Cencar–Aeropuerto",
+   "waypoints": [
+    [
+     -76.17,
+     4.17,
+     "Andalucía (Valle)",
+     "origen"
+    ],
+    [
+     -76.3,
+     3.54,
+     "Palmira",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2026,
+   "construccion_propia": false,
+   "fuente": "Policía de Tránsito del Valle (actor interesado)",
+   "url": "https://www.eltiempo.com/colombia/cali/buses-y-encomiendas-la-ruta-silenciosa-de-la-ketamina-hacia-los-laboratorios-de-tusi-en-el-valle-del-cauca-3587268",
+   "nota": "322+90 frascos; 156.052 ml acumulados 2026. Origen y laboratorio exactos sin nombrar.",
+   "subtipo": "sinteticos"
+  },
+  {
+   "id": "SN-I07",
+   "nombre": "Ketamina: Lima → Tacna → paso Santa Rosa–Chacalluta → Arica → Santiago",
+   "nivel": "infraestructura",
+   "via": "Panamericana Sur; paso Santa Rosa–Chacalluta; vuelo Arica–Santiago",
+   "waypoints": [
+    [
+     -77.04,
+     -12.05,
+     "Lima",
+     "origen"
+    ],
+    [
+     -70.25,
+     -18.01,
+     "Tacna",
+     "transito"
+    ],
+    [
+     -70.33,
+     -18.35,
+     "Paso Chacalluta/Santa Rosa",
+     "transito"
+    ],
+    [
+     -70.31,
+     -18.48,
+     "Arica",
+     "transito"
+    ],
+    [
+     -70.66,
+     -33.45,
+     "Santiago",
+     "destino"
+    ]
+   ],
+   "confianza": "alta",
+   "desde": 2024,
+   "construccion_propia": false,
+   "fuente": "Infobae; BioBio; Fiscalía de Chile (actor interesado); El Mostrador",
+   "url": "https://www.biobiochile.cl/noticias/nacional/region-de-arica-y-parinacota/2026/08/03/condenan-a-17-integrantes-de-red-que-traficaba-ketamina-desde-peru-hacia-la-zona-central-de-chile.shtml",
+   "nota": "Tacna concentra 498,6 de 929,8 kg decomisados en Perú (2020-25). Red condenada (17 de 25).",
+   "subtipo": "sinteticos",
+   "dedup_disposicion": "infra_reemplaza_pais"
+  },
+  {
+   "id": "SN-I08",
+   "nombre": "Ketamina boliviana: Bolivia → Puerto de Arica → Hamburgo / Manzanillo / Venecia",
+   "nivel": "infraestructura",
+   "via": "camión hasta Arica; marítima",
+   "waypoints": [
+    [
+     -70.32,
+     -18.47,
+     "Puerto de Arica",
+     "origen"
+    ],
+    [
+     9.97,
+     53.54,
+     "Hamburgo",
+     "destino"
+    ],
+    [
+     -104.31,
+     19.05,
+     "Manzanillo (México)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2026,
+   "construccion_propia": true,
+   "fuente": "Servicio Nacional de Aduanas/Fiscalía de Arica (actor interesado)",
+   "url": "https://www.aduana.cl/perfilamiento-de-riesgos-y-trabajo-de-binomios-caninos-de-aduanas-y/aduana/2026-03-24/173714.html",
+   "nota": "Ketamina en madera, caucho y baldosas (2026). Tramo Bolivia→Arica (Tambo Quemado), construcción propia.",
+   "subtipo": "sinteticos",
+   "dh_grupo_A": true,
+   "tramo_inferido": true
+  }
+ ]
+}

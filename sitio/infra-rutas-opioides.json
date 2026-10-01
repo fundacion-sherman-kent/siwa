@@ -1,0 +1,73 @@
+{
+ "flujo_nombre": "opioides-infra",
+ "es_prototipo": true,
+ "nivel": "infraestructura",
+ "corte": "2026-10-01",
+ "aviso": "Capa de infraestructura de opioides: fentanilo Culiacán→Nogales y heroína del Cauca (histórica). Trazados inferidos entre laboratorio y garita; actor interesado (DEA/CBP/GAO) rotulado.",
+ "rutas": [
+  {
+   "id": "OP-I02",
+   "nombre": "Heroína (histórica): Corinto (Cauca) → Cali → Pereira → correos → Panamá → Europa/EE.UU.",
+   "nivel": "infraestructura",
+   "via": "Panamericana; correos humanos vía Panamá",
+   "waypoints": [
+    [
+     -76.26,
+     3.17,
+     "Corinto (Cauca)",
+     "origen"
+    ],
+    [
+     -76.53,
+     3.45,
+     "Cali",
+     "transito"
+    ],
+    [
+     -75.69,
+     4.81,
+     "Pereira",
+     "destino"
+    ]
+   ],
+   "confianza": "baja",
+   "desde": 2015,
+   "construccion_propia": false,
+   "fuente": "El País Cali (Policía/UNODC)",
+   "url": "https://www.elpais.com.co/judicial/asi-funciona-el-trafico-de-heroina-que-sale-del-cauca.html",
+   "nota": "Dato de 2015: histórico; sin verificación 2024-2026.",
+   "estado": "historica",
+   "subtipo": "opioides",
+   "dedup_disposicion": "revisar_pais_mas_amplio",
+   "no_publicar": true,
+   "motivo_dh": "G/dedup: país incluye Panamá"
+  },
+  {
+   "id": "OP-I03",
+   "nombre": "Fentanilo y pasta de opio: Culiacán (laboratorios) → Sonora → garita de Nogales (Arizona)",
+   "nivel": "infraestructura",
+   "via": "carretera Culiacán–Nogales (inferida)",
+   "waypoints": [
+    [
+     -107.39,
+     24.81,
+     "Culiacán (Sinaloa)",
+     "origen"
+    ],
+    [
+     -110.96,
+     31.34,
+     "Nogales (puerto de entrada)",
+     "destino"
+    ]
+   ],
+   "confianza": "media",
+   "desde": 2024,
+   "construccion_propia": true,
+   "fuente": "GAO-26-107918; DEA NDTA 2025; CBP Nogales (actor interesado)",
+   "url": "https://files.gao.gov/reports/GAO-26-107918/index.html",
+   "nota": ">90% del fentanilo se decomisa en puertos de entrada. ~1 millón de pastillas + 125 lb de pasta de opio (Nogales, 2026). Trazado inferido.",
+   "subtipo": "opioides"
+  }
+ ]
+}
