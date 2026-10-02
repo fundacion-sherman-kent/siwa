@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-02T12:06:15+00:00",
+  "corrida": "2026-10-02T13:51:37+00:00",
   "medidas_con_suficientes_casos": 208,
   "pares_probados": 21528,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.528 pares y el umbral de siempre, alrededor de 1.076 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4093,
+    "sobreviven": 4112,
     "de_ellos_son_parentescos": 404
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3689,
+  "pistas_totales": 3708,
   "anomalias_totales": 399,
   "pistas": [
     {
@@ -112,6 +112,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.961,
+      "estados": 23,
+      "tipo": "rangos (Spearman)",
+      "p": 2.257762775923468e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "renta_gas",
       "b": "reservas_petroleo",
       "rotulo_a": "Renta del gas natural",
@@ -194,10 +207,10 @@
       "b": "subnacional_focos:cuantas",
       "rotulo_a": "focos · nocturnos",
       "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.944,
-      "estados": 24,
+      "coeficiente": 0.945,
+      "estados": 23,
       "tipo": "rangos (Spearman)",
-      "p": 5.175254943264253e-16,
+      "p": 1.3704960932136627e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -276,19 +289,6 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 2.631703612429346e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.934,
-      "estados": 24,
-      "tipo": "rangos (Spearman)",
-      "p": 9.164800143907142e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -432,6 +432,19 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 1.1912948479436594e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "subnacional_focos:cuantas",
+      "b": "superficie",
+      "rotulo_a": "subnacional_focos · cuantas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.92,
+      "estados": 23,
+      "tipo": "rangos (Spearman)",
+      "p": 1.2125662038462153e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 2.833062584254064e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "estado_derecho",
-      "b": "percepcion_corrupcion:intervalo_bajo",
-      "rotulo_a": "Estado de derecho",
-      "rotulo_b": "percepcion_corrupcion · intervalo_bajo",
-      "coeficiente": 0.894,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 2.413158697455027e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
