@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-02T13:51:37+00:00",
+  "corrida": "2026-10-02T17:35:17+00:00",
   "medidas_con_suficientes_casos": 208,
   "pares_probados": 21528,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.528 pares y el umbral de siempre, alrededor de 1.076 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4112,
+    "sobreviven": 4079,
     "de_ellos_son_parentescos": 404
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3708,
-  "anomalias_totales": 399,
+  "pistas_totales": 3675,
+  "anomalias_totales": 397,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -55,19 +55,6 @@
       "estados": 32,
       "tipo": "rangos (Spearman)",
       "p": 4.1421674204103817e-35,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "secundaria_cepal",
-      "b": "termina_secundaria",
-      "rotulo_a": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
-      "rotulo_b": "Terminan la secundaria",
-      "coeficiente": 0.973,
-      "estados": 17,
-      "tipo": "rangos (Spearman)",
-      "p": 9.639140440489106e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +783,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 2.833062584254064e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "estado_derecho",
+      "b": "percepcion_corrupcion:intervalo_bajo",
+      "rotulo_a": "Estado de derecho",
+      "rotulo_b": "percepcion_corrupcion · intervalo_bajo",
+      "coeficiente": 0.894,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 2.413158697455027e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

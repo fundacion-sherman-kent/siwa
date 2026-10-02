@@ -1,16 +1,16 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-02T13:51:45+00:00",
+  "corrida": "2026-10-02T17:35:26+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
     "atrasado": "4 años o más"
   },
   "resumen": {
-    "indicadores_medidos": 189,
-    "mediana_antiguedad_anios": 1,
-    "al_dia_1_anio_o_menos": 112,
-    "tibio_2_a_3_anios": 62,
+    "indicadores_medidos": 196,
+    "mediana_antiguedad_anios": 1.0,
+    "al_dia_1_anio_o_menos": 120,
+    "tibio_2_a_3_anios": 61,
     "atrasado_4_anios_o_mas": 15,
     "series_detenidas_declaradas": 3,
     "archivos_leidos": 96,
@@ -272,7 +272,7 @@
       "rotulo": "Reservas probadas de petróleo",
       "eje": "Defensa",
       "seccion": "recursos-estrategicos",
-      "fuente": "Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data",
+      "fuente": "U.S. Energy Information Administration (EIA) — International Energy Data, base mundial de reservas, vía Our World in Data",
       "unidad": "barriles",
       "colector": "recursos",
       "archivo": "recursos.json",
@@ -784,7 +784,7 @@
       "rotulo": "Reservas probadas de petróleo",
       "eje": "Defensa",
       "seccion": "recursos-estrategicos",
-      "fuente": "Energy Institute y Servicio Geológico de los Estados Unidos, via Our World in Data",
+      "fuente": "U.S. Energy Information Administration (EIA) — International Energy Data, base mundial de reservas, vía Our World in Data",
       "unidad": "barriles",
       "colector": "recursos",
       "archivo": "recursos.json",
@@ -1834,23 +1834,6 @@
       "serie_detenida": false
     },
     {
-      "clave": "termina_secundaria",
-      "rotulo": "Terminan la secundaria",
-      "eje": "Desarrollo",
-      "seccion": "educacion",
-      "fuente": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
-      "unidad": "% de la cohorte",
-      "colector": "unesco",
-      "archivo": "unesco.json",
-      "anio_mas_reciente": 2024,
-      "antiguedad_anios": 2,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 11,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "trabajo_infantil",
       "rotulo": "Trabajo infantil",
       "eje": "Desarrollo",
@@ -2837,6 +2820,40 @@
       "serie_detenida": false
     },
     {
+      "clave": "produccion_cobalto",
+      "rotulo": "Producción de cobalto",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "toneladas métricas",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "produccion_cobre",
+      "rotulo": "Producción de cobre",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "miles de toneladas métricas",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "produccion_gas",
       "rotulo": "Producción de gas natural",
       "eje": "Defensa",
@@ -2866,6 +2883,23 @@
       "antiguedad_anios": 1,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "produccion_niquel",
+      "rotulo": "Producción de níquel",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "toneladas métricas",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -2905,6 +2939,23 @@
       "serie_detenida": false
     },
     {
+      "clave": "produccion_tierras_raras",
+      "rotulo": "Producción de tierras raras",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "toneladas métricas de óxidos (REO)",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "regalo_contrato",
       "rotulo": "Empresas que esperan pagar por un contrato público",
       "eje": "Gobernanza",
@@ -2934,6 +2985,74 @@
       "antiguedad_anios": 1,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 24,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "reservas_cobalto",
+      "rotulo": "Reservas de cobalto",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "toneladas métricas",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "reservas_cobre",
+      "rotulo": "Reservas de cobre",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "miles de toneladas métricas",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "reservas_niquel",
+      "rotulo": "Reservas de níquel",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "toneladas métricas",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "reservas_tierras_raras",
+      "rotulo": "Reservas de tierras raras",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas",
+      "unidad": "toneladas métricas de óxidos (REO)",
+      "colector": "recursos",
+      "archivo": "recursos.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
