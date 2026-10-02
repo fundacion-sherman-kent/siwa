@@ -71,6 +71,13 @@ ORIGEN_ENERGIA = ("Energy Institute y Servicio Geológico de los Estados Unidos,
                   "via Our World in Data")
 ORIGEN_USGS = ("Servicio Geológico de los Estados Unidos — Mineral Commodity "
                "Summaries, base mundial de producción y reservas")
+# LAS RESERVAS PROBADAS DE PETRÓLEO NO SON DEL ENERGY INSTITUTE. Our World in Data
+# las redistribuye, pero sus metadatos (verificados en vivo el 2/10/2026) citan
+# «U.S. Energy Information Administration (2022)»: el EI alimenta producción y
+# consumo, pero las reservas vienen de la EIA. Declararlas con el origen genérico
+# de energía era una atribución equivocada.
+ORIGEN_EIA = ("U.S. Energy Information Administration (EIA) — International Energy "
+              "Data, base mundial de reservas, vía Our World in Data")
 
 # Cada medida dice de qué rejilla sale y qué columna leer. Agregar una es
 # agregar una línea.
@@ -458,7 +465,7 @@ def construir() -> Path:
          # minerales. Declararlo con el otro origen lo habría hecho contar como
          # un productor distinto, y la regla de las dos fuentes habría dado por
          # corroborado un asunto que depende de un solo organismo.
-         "origen": ORIGEN_USGS if m["clave"] == "produccion_litio" else ORIGEN_ENERGIA,
+         "origen": {"produccion_litio": ORIGEN_USGS, "reservas_petroleo": ORIGEN_EIA}.get(m["clave"], ORIGEN_ENERGIA),
          "cautela": m["cautela"]}
         for m in ENERGIA
     ] + [
