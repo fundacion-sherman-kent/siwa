@@ -79,6 +79,27 @@ ORIGEN_USGS = ("Servicio Geológico de los Estados Unidos — Mineral Commodity 
 ORIGEN_EIA = ("U.S. Energy Information Administration (EIA) — International Energy "
               "Data, base mundial de reservas, vía Our World in Data")
 
+# MINERALES CRÍTICOS Y TIERRAS RARAS que se exponen como indicador propio, de la
+# misma base USGS (MCS 2026) que ya se descarga. Se eligen cuatro por su peso
+# estratégico y por el que tiene la región (cobre de Chile y Perú, litio y níquel,
+# tierras raras de Brasil). (nombre USGS, slug, unidad, rótulo singular)
+CRITICOS = [
+    ("Copper",      "cobre",         "miles de toneladas métricas",            "cobre"),
+    ("Nickel",      "niquel",        "toneladas métricas",                     "níquel"),
+    ("Cobalt",      "cobalto",       "toneladas métricas",                     "cobalto"),
+    ("Rare Earths", "tierras_raras", "toneladas métricas de óxidos (REO)",     "tierras raras"),
+]
+# La unidad REAL la pone la USGS por mineral (cobre en miles de toneladas, níquel y
+# cobalto en toneladas): se lee del dato y se traduce, no se asume.
+UNIDAD_ES = {"thousand metric tons": "miles de toneladas métricas",
+             "metric tons": "toneladas métricas", "metric tons, gross weight": "toneladas métricas (peso bruto)",
+             "carats": "quilates", "kilograms": "kilogramos"}
+CAUTELA_CRITICO = ("Producción y reservas declaradas a la USGS (Mineral Commodity Summaries). "
+                   "RESERVAS PROBADAS es lo que hoy se puede extraer con la técnica y el precio "
+                   "de hoy, no cuánto hay bajo tierra; sube y baja con el precio. La reserva "
+                   "suele ser de la producción de mina; si un país refina lo que otro extrae, "
+                   "la cifra no lo muestra. Un cero puede ser «no produce» o «no informó».")
+
 # Cada medida dice de qué rejilla sale y qué columna leer. Agregar una es
 # agregar una línea.
 ENERGIA = [
@@ -419,7 +440,7 @@ def construir() -> Path:
         caidos.append(f"base mundial de minerales: {_por_codigo(error)}")
         por_mineral, edicion, anio_minerales = {}, None, None
 
-    registros, cobertura = [], {}
+    registros, cobertura, unidades_criticos = [], {}, {}
     for p in padron:
         f = {"iso": p["iso"], "pais": p["pais"], "bloque": p.get("bloque"), "indicadores": {}}
         for m in ENERGIA:
@@ -452,6 +473,35 @@ def construir() -> Path:
             cobertura["cuota_mineral_mundial"] = cobertura.get("cuota_mineral_mundial", 0) + 1
             cobertura["minerales_escala_mundial"] = cobertura.get("minerales_escala_mundial", 0) + 1
             f["minerales"] = conCuota[:20]
+
+        # Minerales críticos y tierras raras: producción y reservas por país, de la
+        # misma base USGS. Se toma la producción de mina (o la de mayor volumen).
+        for _orig, _slug, _unidad, _rot in CRITICOS:
+            cands = [m for m in lista if (m.get("mineral_original") or "").strip().lower() == _orig.lower()]
+            if not cands:
+                continue
+            cands.sort(key=lambda m: (not str(m.get("medida", "")).lower().startswith("mine"),
+                                      -(m.get("produccion") or 0)))
+            best = cands[0]
+            an = anio_minerales
+            _u = UNIDAD_ES.get((best.get("unidad") or "").strip().lower(), best.get("unidad") or _unidad)
+            if _slug == "tierras_raras" and "REO" not in _u and "óxido" not in _u:
+                _u += " de óxidos (REO)"
+            unidades_criticos[_slug] = _u
+            if best.get("produccion"):
+                f["indicadores"]["produccion_" + _slug] = {
+                    "valor": best["produccion"], "anio": an, "anio_anterior": None,
+                    "valor_anterior": None, "variacion_pct": None, "anio_inicial": an,
+                    "valor_inicial": best["produccion"], "tendencia_ventana_pct": None,
+                    "serie": [{"anio": an, "valor": best["produccion"]}]}
+                cobertura["produccion_" + _slug] = cobertura.get("produccion_" + _slug, 0) + 1
+            if best.get("reservas"):
+                f["indicadores"]["reservas_" + _slug] = {
+                    "valor": best["reservas"], "anio": an, "anio_anterior": None,
+                    "valor_anterior": None, "variacion_pct": None, "anio_inicial": an,
+                    "valor_inicial": best["reservas"], "tendencia_ventana_pct": None,
+                    "serie": [{"anio": an, "valor": best["reservas"]}]}
+                cobertura["reservas_" + _slug] = cobertura.get("reservas_" + _slug, 0) + 1
 
         if f["indicadores"]:
             registros.append(f)
@@ -488,6 +538,15 @@ def construir() -> Path:
                     "mundial con producción medible. Es amplitud, no tamaño: un país puede "
                     "producir muchos minerales en poca cantidad, o uno solo y dominar el "
                     "mercado."},
+    ] + [
+        meta for _orig, _slug, _unidad, _rot in CRITICOS for meta in (
+            {"clave": "produccion_" + _slug, "rotulo": "Producción de " + _rot, "eje": "Defensa",
+             "unidad": unidades_criticos.get(_slug, _unidad), "mas_es_peor": False, "sin_direccion": True,
+             "origen": ORIGEN_USGS, "cautela": CAUTELA_CRITICO},
+            {"clave": "reservas_" + _slug, "rotulo": "Reservas de " + _rot, "eje": "Defensa",
+             "unidad": unidades_criticos.get(_slug, _unidad), "mas_es_peor": False, "sin_direccion": True,
+             "origen": ORIGEN_USGS, "cautela": CAUTELA_CRITICO},
+        )
     ]
     publicables = [m for m in medidas if cobertura.get(m["clave"], 0)]
     for m in medidas:
