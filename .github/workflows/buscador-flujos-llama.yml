@@ -1,0 +1,86 @@
+name: Scanner de eventos de flujos con Llama
+
+# QUÉ ES ESTE ROBOT (automejora, fase 2 — hacia el dato en tiempo real)
+# ---------------------------------------------------------------------
+# Hermano del "Buscador de fuentes con Llama", pero para los CORREDORES DE FLUJOS
+# ilícitos. Levanta la cola que arma herramientas/propuestas-flujos.py (los
+# corredores mas atrasados y con que terminos buscar), mira titulares recientes en
+# Google News RSS (gratis, sin clave), y le pide a Llama —Cloudflare, o el que Groq
+# sirva gratis— que marque cuales son operativos/decomisos reales de ese flujo en
+# ese corredor. Comprueba cada enlace y deja los candidatos escritos.
+#
+# PROPONE, NO INCORPORA. Van a la rama «propuestas-flujos», que el sitio NO publica.
+# Nada entra al mapa sin dos fuentes o rotulo, decimo hombre y visto bueno.
+#   https://github.com/fundacion-sherman-kent/siwa/tree/propuestas-flujos/flujos
+#
+# NECESITA la misma clave gratuita que el otro buscador (GROQ_API_KEY, o
+# CLOUDFLARE_ACCOUNT_ID + CLOUDFLARE_API_TOKEN). Sin clave no falla: avisa y termina.
+
+on:
+  schedule:
+    - cron: "20 8 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: buscador-flujos-llama
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Comprobar que hay clave
+        id: clave
+        run: |
+          if [ -n "$GROQ_API_KEY" ] || { [ -n "$CLOUDFLARE_ACCOUNT_ID" ] && [ -n "$CLOUDFLARE_API_TOKEN" ]; }; then
+            echo "hay=si" >> "$GITHUB_OUTPUT"
+          else
+            echo "hay=no" >> "$GITHUB_OUTPUT"
+            echo "::notice::Falta la clave gratuita de Groq (GROQ_API_KEY). El scanner de flujos no corre hasta que la direccion la cargue."
+          fi
+
+      - name: Traer las propuestas anteriores
+        if: steps.clave.outputs.hay == 'si'
+        run: |
+          if git ls-remote --exit-code --heads origin propuestas-flujos >/dev/null; then
+            git worktree add rama origin/propuestas-flujos
+            git -C rama checkout -B propuestas-flujos
+          else
+            git worktree add --detach rama
+            git -C rama checkout --orphan propuestas-flujos
+            git -C rama rm -rf . >/dev/null
+            printf '# Candidatos de eventos de flujos para SIWA\n\nLos escribe el scanner con Llama desde titulares de prensa. Ninguno esta incorporado ni calificado: dos fuentes o rotulo, decimo hombre y visto bueno antes de entrar al mapa.\n' > rama/README.md
+          fi
+
+      - name: Buscar y clasificar
+        id: buscar
+        if: steps.clave.outputs.hay == 'si'
+        run: python colectores/buscador_flujos_llama.py --salida rama/flujos
+
+      - name: Guardar las propuestas
+        if: steps.clave.outputs.hay == 'si' && always()
+        run: |
+          cd rama
+          git config user.name "siwa"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "Candidatos de flujos $(date -u +'%Y-%m-%d')"
+          git push origin propuestas-flujos

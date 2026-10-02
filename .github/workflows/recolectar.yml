@@ -750,6 +750,15 @@ jobs:
         continue-on-error: true
         run: python herramientas/frescura-flujos.py
 
+      # PROPONEDOR DE FLUJOS (fase 2). Toma lo mas atrasado del termometro y arma
+      # la cola de busqueda: que corredores refrescar y con que terminos buscar
+      # eventos recientes. Propone; no incorpora ni dispara nada solo. El scanner
+      # Llama la levanta en su propia corrida.
+      - name: Propuestas de refresco de flujos
+        id: propuestas_flujos
+        continue-on-error: true
+        run: python herramientas/propuestas-flujos.py
+
       # ARMONIZACION. Lee fuentes/armonizaciones.json y, por cada par declarado
       # (fuente fresca vs comparable), calcula el enlace por pais y escribe las
       # fichas en datos/publico/armonizacion.json, que el sitio lee para rotular.
