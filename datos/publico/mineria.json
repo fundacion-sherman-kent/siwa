@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-01T22:31:50+00:00",
+  "corrida": "2026-10-02T00:47:16+00:00",
   "medidas_con_suficientes_casos": 212,
   "pares_probados": 22366,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 22.366 pares y el umbral de siempre, alrededor de 1.118 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4325,
-    "de_ellos_son_parentescos": 414
+    "sobreviven": 4349,
+    "de_ellos_son_parentescos": 415
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3911,
+  "pistas_totales": 3934,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -190,6 +190,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:nocturnos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.944,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 4.779004405514662e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -211,6 +224,19 @@
       "estados": 27,
       "tipo": "rangos (Spearman)",
       "p": 4.9726033118320344e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.943,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 7.190030008470834e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -359,19 +385,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.924,
-      "estados": 24,
-      "tipo": "rangos (Spearman)",
-      "p": 1.4767515245619866e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -445,19 +458,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.7631297647118704e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.914,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.0549965859768206e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -549,19 +549,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 6.9480466583918774e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.904,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.68364122859876e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -684,6 +671,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.898,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.2215315868897047e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -762,19 +762,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:nocturnos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.895,
-      "estados": 24,
-      "tipo": "rangos (Spearman)",
-      "p": 3.215946683163479e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "democracia_electoral",
       "b": "indice_gobernanza",
       "rotulo_a": "Nivel democrático — democracia electoral",
@@ -796,6 +783,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "corrupcion_politica",
+      "b": "percepcion_corrupcion",
+      "rotulo_a": "Corrupción política",
+      "rotulo_b": "Percepción de corrupción",
+      "coeficiente": -0.889,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 3.003697736400934e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
