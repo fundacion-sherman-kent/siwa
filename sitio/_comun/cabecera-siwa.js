@@ -22,6 +22,8 @@
     ".siwa-topbar .brand{display:flex;align-items:center;gap:18px;}" +
     ".siwa-topbar .marca-enlace{display:inline-flex;text-decoration:none;}" +
     ".siwa-topbar .marca-enlace:hover img{opacity:.82;}" +
+    ".siwa-topbar .siwa-home{display:inline-flex;text-decoration:none;color:inherit;cursor:pointer;}" +
+    ".siwa-topbar .siwa-home:hover h1{opacity:.82;}" +
     ".siwa-topbar .brand img{height:72px;width:auto;flex:0 0 auto;object-fit:contain;display:block;}" +
     ".siwa-topbar .brand .sep{width:2px;height:44px;background:#FB6500;}" +
     ".siwa-topbar .brand h1{font-size:19px;margin:0;font-weight:700;letter-spacing:2px;color:#FB6500;" +
@@ -53,13 +55,14 @@
         'title="Ir a la web de la Fundación Sherman Kent">' +
         '<img src="' + logo + '" alt="FUSK · Fundación Sherman Kent"></a>' +
       '<div class="sep"></div>' +
-      '<div><h1><span class="siwa-txt">SIWA</span><svg class="siwa-onda" viewBox="-6 -20 40 40" ' +
+      '<a href="' + ayuda + '" class="siwa-home" title="Ir a la portada de SIWA">' +
+      '<div><h1><span class="siwa-txt">SIWA</span><svg class="siwa-onda" viewBox="-6 -20 40 40"' +
         'aria-hidden="true" focusable="false"><g transform="rotate(-15)">' +
         '<circle cx="0" cy="0" r="3.2" fill="#FB6500"/>' +
         '<path d="M0 -8  A8 8 0 0 1 0 8" fill="none" stroke="#00121E" stroke-width="2" stroke-linecap="round"/>' +
         '<path d="M0 -13 A13 13 0 0 1 0 13" fill="none" stroke="#33454F" stroke-width="2" stroke-linecap="round"/>' +
         '<path d="M0 -18 A18 18 0 0 1 0 18" fill="none" stroke="#7E8A94" stroke-width="2" stroke-linecap="round"/>' +
-        '</g></svg></h1><small>Reporte de situación · ALC</small></div>' +
+        '</g></svg></h1><small>Reporte de situación · ALC</small></div></a>' +
     '</div>' +
     '<div class="siwa-topbar-right">' +
       '<a class="siwa-pill" href="' + ayuda + '"><span aria-hidden="true">?</span><span>Cómo se usa</span></a>' +
