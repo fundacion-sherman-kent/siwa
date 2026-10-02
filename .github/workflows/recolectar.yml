@@ -740,6 +740,16 @@ jobs:
         continue-on-error: true
         run: python herramientas/propuestas-frescura.py
 
+      # TERMOMETRO DE FLUJOS. Mismo lazo de automejora, para los corredores de
+      # flujos ilicitos: mide por familia que tan fresca es la cobertura (anio
+      # `desde` de cada ruta) y deja el ranking de lo mas atrasado para que la
+      # proxima recoleccion lo priorice. Mide y declara; no incorpora nada solo.
+      # Primer ladrillo hacia el dato en tiempo real de los flujos.
+      - name: Termometro de frescura de flujos
+        id: frescura_flujos
+        continue-on-error: true
+        run: python herramientas/frescura-flujos.py
+
       # ARMONIZACION. Lee fuentes/armonizaciones.json y, por cada par declarado
       # (fuente fresca vs comparable), calcula el enlace por pais y escribe las
       # fichas en datos/publico/armonizacion.json, que el sitio lee para rotular.
