@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-02T22:08:55+00:00",
+  "corrida": "2026-10-02T23:01:05+00:00",
   "medidas_con_suficientes_casos": 208,
   "pares_probados": 21528,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.528 pares y el umbral de siempre, alrededor de 1.076 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4106,
+    "sobreviven": 4105,
     "de_ellos_son_parentescos": 404
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3702,
+  "pistas_totales": 3701,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -120,19 +120,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 7.848906402508523e-24,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.956,
-      "estados": 23,
-      "tipo": "rangos (Spearman)",
-      "p": 2.6790165298588827e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -320,6 +307,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.931,
+      "estados": 23,
+      "tipo": "rangos (Spearman)",
+      "p": 8.29617703471378e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "perdida_bosque",
       "b": "superficie",
       "rotulo_a": "Bosque perdido",
@@ -484,6 +484,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 2.0733036532958168e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.912,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.5699282401648963e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.893,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.2736581375741383e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
