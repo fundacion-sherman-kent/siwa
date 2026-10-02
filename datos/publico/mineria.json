@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-02T07:05:52+00:00",
-  "medidas_con_suficientes_casos": 212,
-  "pares_probados": 22366,
+  "corrida": "2026-10-02T12:06:15+00:00",
+  "medidas_con_suficientes_casos": 208,
+  "pares_probados": 21528,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 22.366 pares y el umbral de siempre, alrededor de 1.118 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4333,
-    "de_ellos_son_parentescos": 414
+    "por_que": "Con 21.528 pares y el umbral de siempre, alrededor de 1.076 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 4093,
+    "de_ellos_son_parentescos": 404
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3919,
-  "anomalias_totales": 397,
+  "pistas_totales": 3689,
+  "anomalias_totales": 399,
   "pistas": [
     {
       "a": "empleo_informal",
@@ -55,6 +55,19 @@
       "estados": 32,
       "tipo": "rangos (Spearman)",
       "p": 4.1421674204103817e-35,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "secundaria_cepal",
+      "b": "termina_secundaria",
+      "rotulo_a": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
+      "rotulo_b": "Terminan la secundaria",
+      "coeficiente": 0.973,
+      "estados": 17,
+      "tipo": "rangos (Spearman)",
+      "p": 9.639140440489106e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -177,19 +190,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.945,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.965409603277941e-22,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "focos:nocturnos",
       "b": "subnacional_focos:cuantas",
       "rotulo_a": "focos · nocturnos",
@@ -197,7 +197,7 @@
       "coeficiente": 0.944,
       "estados": 24,
       "tipo": "rangos (Spearman)",
-      "p": 4.779004405514662e-16,
+      "p": 5.175254943264253e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -229,14 +229,14 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.943,
-      "estados": 24,
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.941,
+      "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 7.190030008470834e-16,
+      "p": 1.1505044275781066e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -276,6 +276,19 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 2.631703612429346e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.934,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 9.164800143907142e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -405,7 +418,7 @@
       "coeficiente": 0.923,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 1.6105070484444756e-17,
+      "p": 1.469148229118789e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -509,7 +522,7 @@
       "coeficiente": 0.908,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 1.086084961866991e-15,
+      "p": 9.615377823121149e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -662,23 +675,10 @@
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
       "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.9,
+      "coeficiente": 0.899,
       "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 1.8238490787034338e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.898,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.2215315868897047e-15,
+      "p": 2.0918915953104788e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,6 +775,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.894,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.833062584254064e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Estado de derecho",
@@ -783,19 +796,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "Percepción de corrupción",
-      "coeficiente": -0.889,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.003697736400934e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

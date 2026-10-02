@@ -1,17 +1,17 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-02T07:06:00+00:00",
+  "corrida": "2026-10-02T12:06:24+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
     "atrasado": "4 años o más"
   },
   "resumen": {
-    "indicadores_medidos": 188,
-    "mediana_antiguedad_anios": 1.0,
+    "indicadores_medidos": 189,
+    "mediana_antiguedad_anios": 1,
     "al_dia_1_anio_o_menos": 112,
-    "tibio_2_a_3_anios": 60,
-    "atrasado_4_anios_o_mas": 16,
+    "tibio_2_a_3_anios": 62,
+    "atrasado_4_anios_o_mas": 15,
     "series_detenidas_declaradas": 3,
     "archivos_leidos": 96,
     "archivos_sin_json_valido": [],
@@ -164,23 +164,6 @@
         "de_filas_con_iso": 33
       },
       "serie_detenida": true
-    },
-    {
-      "clave": "esperanza_vida",
-      "rotulo": "Esperanza de vida al nacer",
-      "eje": "Desarrollo",
-      "seccion": "salud",
-      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
-      "unidad": "años",
-      "colector": "oms",
-      "archivo": "oms.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 31,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
     },
     {
       "clave": "muertes_transito",
@@ -484,6 +467,23 @@
       "antiguedad_anios": 3,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 9,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "esperanza_vida",
+      "rotulo": "Esperanza de vida al nacer",
+      "eje": "Desarrollo",
+      "seccion": "salud",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "años",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -678,23 +678,6 @@
       "serie_detenida": true
     },
     {
-      "clave": "esperanza_vida",
-      "rotulo": "Esperanza de vida al nacer",
-      "eje": "Desarrollo",
-      "seccion": "salud",
-      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
-      "unidad": "años",
-      "colector": "oms",
-      "archivo": "oms.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 31,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "muertes_transito",
       "rotulo": "Muertes de tránsito",
       "eje": "Seguridad",
@@ -996,6 +979,23 @@
       "antiguedad_anios": 3,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 9,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "esperanza_vida",
+      "rotulo": "Esperanza de vida al nacer",
+      "eje": "Desarrollo",
+      "seccion": "salud",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "años",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 31,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -1829,6 +1829,23 @@
       "antiguedad_anios": 2,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "termina_secundaria",
+      "rotulo": "Terminan la secundaria",
+      "eje": "Desarrollo",
+      "seccion": "educacion",
+      "fuente": "Instituto de Estadística de la UNESCO (UIS), interfaz abierta",
+      "unidad": "% de la cohorte",
+      "colector": "unesco",
+      "archivo": "unesco.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 11,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
