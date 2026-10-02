@@ -759,6 +759,15 @@ jobs:
         continue-on-error: true
         run: python herramientas/propuestas-flujos.py
 
+      # VIGIA DE FUENTES (changedetection.io hecho en casa). Mira las fuentes que
+      # NO se refrescan solas (ediciones anuales, file-drops, gated) y avisa cuando
+      # su pagina cambia, para revisar si salio edicion nueva y actualizar el
+      # colector. Mide y declara; no publica ni decide. Complementa la frescura.
+      - name: Vigia de fuentes
+        id: vigia_fuentes
+        continue-on-error: true
+        run: python colectores/vigia_fuentes.py
+
       # ARMONIZACION. Lee fuentes/armonizaciones.json y, por cada par declarado
       # (fuente fresca vs comparable), calcula el enlace por pais y escribe las
       # fichas en datos/publico/armonizacion.json, que el sitio lee para rotular.
