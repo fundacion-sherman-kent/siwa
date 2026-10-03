@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-10-03T15:48:37+00:00",
+    "obtenido_en": "2026-10-03T20:47:55+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -23,8 +23,7 @@
       "Cuatro respuestas distintas que no deben leerse como una sola: «cierra a maquinas» es un 401 o un 403 —el Estado publica para personas y rechaza a los programas—; «verificacion anti-robot» es una pagina de desafio devuelta con codigo 200, que finge normalidad; «falla el servidor» es un 500, que es una averia; y «no resuelve» es que el nombre de dominio no llega a ninguna maquina. Ninguna de las cuatro prueba opacidad.",
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
-      "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "1 consultas fallaron en esta corrida: COL/Delito registrado: TimeoutError."
+      "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -64,14 +63,14 @@
               "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
             },
             {
+              "titulo": "Contratacion Alcaldía Chitaraque",
+              "organismo": "Alcaldía de Chitaraque",
+              "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
+            },
+            {
               "titulo": "CONTRATACION CEPITA",
               "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
               "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
-            },
-            {
-              "titulo": "SECOP II CONTRATACION ABIERTA",
-              "organismo": "Alcaldía Mayor de Cartagena",
-              "enlace": "https://www.datos.gov.co/d/432e-zwh4"
             }
           ]
         },
@@ -82,24 +81,52 @@
           "cantidad": 609,
           "ejemplos": [
             {
-              "titulo": "Presupuesto de Gastos",
-              "organismo": "INDUSTRIA MILITAR",
-              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
-            },
-            {
               "titulo": "Presupuesto de Ingresos",
               "organismo": "INDUSTRIA MILITAR",
               "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
             },
             {
+              "titulo": "Presupuesto de Gastos",
+              "organismo": "INDUSTRIA MILITAR",
+              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
+            },
+            {
+              "titulo": "PRESUPUESTO AIM-2020",
+              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
+              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
+            },
+            {
               "titulo": "Presupuesto DADEP",
               "organismo": "DEFENSORIA DEL ESPACIO PUBLICO",
               "enlace": "https://www.datos.gov.co/d/8rih-qmrc"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 146,
+          "ejemplos": [
+            {
+              "titulo": "DELITOS INFORMÁTICOS",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
             },
             {
-              "titulo": "ANM Desagregación Presupuesto Anual",
-              "organismo": "ANM Agencia Nacional de Mineria Planeacion",
-              "enlace": "https://www.datos.gov.co/d/a2rh-ncyc"
+              "titulo": "DELITOS SEXUALES",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
+            },
+            {
+              "titulo": "Reporte  Delitos sexuales Policía Nacional",
+              "organismo": "DIJIN",
+              "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
+            },
+            {
+              "titulo": "Delitos Informaticos V1",
+              "organismo": "Damicruz",
+              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
             }
           ]
         },
@@ -110,14 +137,14 @@
           "cantidad": 114,
           "ejemplos": [
             {
-              "titulo": "Entradas de extranjeros a Colombia",
-              "organismo": "emurillo",
-              "enlace": "https://www.datos.gov.co/d/96sh-4v8d"
-            },
-            {
               "titulo": "Salidas de colombianos desde el territorio nacional",
               "organismo": "emurillo",
               "enlace": "https://www.datos.gov.co/d/efw5-jiej"
+            },
+            {
+              "titulo": "Entradas de extranjeros a Colombia",
+              "organismo": "emurillo",
+              "enlace": "https://www.datos.gov.co/d/96sh-4v8d"
             },
             {
               "titulo": "Entrada de Venezolanos a Colombia por año(2012-2019)",
@@ -188,7 +215,7 @@
           ]
         }
       ],
-      "conjuntos_hallados": 1918
+      "conjuntos_hallados": 2064
     },
     {
       "iso": "PAN",
@@ -1222,7 +1249,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4395,
+    "conjuntos_hallados": 4541,
     "materias_consultadas": 6,
     "oficinas_que_responden": 24,
     "estados_con_alguna_fuente_oficial": 26
@@ -1282,8 +1309,9 @@
       "organismo": "Oficina Nacional de Estadística e Información",
       "url": "https://onei.gob.cu/",
       "nota": "Sin el prefijo «www». Con él, el servidor devuelve error 500. La diferencia entre un Estado que no publica y un prefijo de más es un carácter, y decide lo que el registro afirma.",
-      "estado": "sin_respuesta",
-      "detalle": "URLError: <urlopen error timed out>"
+      "estado": "certificado_invalido",
+      "codigo": 200,
+      "certificado": "no valida: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate ("
     },
     {
       "iso": "DOM",
@@ -1316,8 +1344,8 @@
       "sigla": "INE",
       "organismo": "Instituto Nacional de Estadística",
       "url": "https://www.ine.gob.gt/",
-      "estado": "sin_respuesta",
-      "detalle": "URLError: <urlopen error timed out>"
+      "estado": "verificacion_anti_robot",
+      "codigo": 200
     },
     {
       "iso": "HTI",
@@ -1503,8 +1531,9 @@
   "oficinas_por_estado": {
     "responde": 24,
     "cierra_a_maquinas": 3,
-    "sin_respuesta": 4,
-    "certificado_invalido": 1,
+    "certificado_invalido": 2,
+    "verificacion_anti_robot": 1,
+    "sin_respuesta": 2,
     "falla_el_servidor": 1
   },
   "sectoriales_verificados": [
