@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-03T08:08:14+00:00",
+  "corrida": "2026-10-03T11:12:27+00:00",
   "medidas_con_suficientes_casos": 208,
   "pares_probados": 21528,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 21.528 pares y el umbral de siempre, alrededor de 1.076 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 4044,
+    "sobreviven": 4031,
     "de_ellos_son_parentescos": 404
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3640,
+  "pistas_totales": 3627,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -68,6 +68,19 @@
       "estados": 32,
       "tipo": "rangos (Spearman)",
       "p": 1.843291944404296e-29,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "inflacion_fmi",
+      "b": "inflacion_interanual",
+      "rotulo_a": "Inflación de doce meses, según el FMI",
+      "rotulo_b": "Inflación de los últimos doce meses",
+      "coeficiente": 0.97,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 1.6895859357781392e-27,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -181,10 +194,10 @@
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.943,
+      "coeficiente": 0.944,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.466674891572683e-22,
+      "p": 3.1058793304408947e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -762,6 +775,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:nocturnos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.892,
+      "estados": 23,
+      "tipo": "rangos (Spearman)",
+      "p": 1.5359707979004516e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Corrupción política",
@@ -770,32 +796,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 3.003697736400934e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion:puntaje",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "percepcion_corrupcion · puntaje",
-      "coeficiente": -0.889,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.003697736400934e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "administracion_basica",
-      "b": "democracia_electoral",
-      "rotulo_a": "Administración básica del Estado",
-      "rotulo_b": "Nivel democrático — democracia electoral",
-      "coeficiente": 0.889,
-      "estados": 22,
-      "tipo": "rangos (Spearman)",
-      "p": 6.409505276196099e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
