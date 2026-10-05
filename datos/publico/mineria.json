@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-05T13:26:12+00:00",
+  "corrida": "2026-10-05T16:00:36+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3798,
+    "sobreviven": 3808,
     "de_ellos_son_parentescos": 399
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3399,
+  "pistas_totales": 3409,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -411,6 +411,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.921,
+      "estados": 21,
+      "tipo": "rangos (Spearman)",
+      "p": 1.4052445075509625e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "reservas_internacionales",
       "rotulo_a": "Generación eléctrica",
@@ -632,6 +645,19 @@
       "misma_categoria": false
     },
     {
+      "a": "subnacional_focos:cuantas",
+      "b": "superficie",
+      "rotulo_a": "subnacional_focos · cuantas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.901,
+      "estados": 21,
+      "tipo": "rangos (Spearman)",
+      "p": 3.564859549029817e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -770,32 +796,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 6.146847553677796e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "Percepción de corrupción",
-      "coeficiente": -0.889,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.003697736400934e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion:puntaje",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "percepcion_corrupcion · puntaje",
-      "coeficiente": -0.889,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.003697736400934e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
