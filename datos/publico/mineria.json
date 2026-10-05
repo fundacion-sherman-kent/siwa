@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-05T07:02:27+00:00",
-  "medidas_con_suficientes_casos": 204,
-  "pares_probados": 20706,
+  "corrida": "2026-10-05T13:26:12+00:00",
+  "medidas_con_suficientes_casos": 203,
+  "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.706 pares y el umbral de siempre, alrededor de 1.035 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3789,
-    "de_ellos_son_parentescos": 397
+    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3798,
+    "de_ellos_son_parentescos": 399
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3392,
+  "pistas_totales": 3399,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -194,10 +194,10 @@
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.945,
+      "coeficiente": 0.943,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.965409603277941e-22,
+      "p": 4.466674891572683e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -658,19 +658,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.897,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.5440470687484986e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -770,6 +757,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.89,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.146847553677796e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
