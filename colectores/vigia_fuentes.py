@@ -67,6 +67,47 @@ FUENTES = [
      "url": "https://www.oisevi.org/"},
 ]
 
+# QUE INDICADOR(ES) DE SIWA ALIMENTA CADA FUENTE, para cruzar con la frescura. Si la
+# pagina cambio PERO SIWA ya tiene el ultimo anio de esa fuente (antiguedad <= 1), el
+# cambio es casi seguro ruido dinamico, no edicion nueva: se marca y no se prioriza.
+# Un indicador coincide por substring en su `fuente` o por estar en `claves`.
+ALIMENTA = {
+    "usgs_mcs":         {"claves": ["produccion_litio", "cuota_mineral_mundial", "minerales_escala_mundial",
+                                    "produccion_cobre", "produccion_niquel", "produccion_cobalto",
+                                    "produccion_tierras_raras"]},
+    "energy_institute": {"fuente": ["Energy Institute"]},
+    "ti_cpi":           {"fuente": ["Transparency", "Percepción de la Corrupción"]},
+    "bti":              {"fuente": ["Bertelsmann"]},
+    "wjp":              {"fuente": ["World Justice", "WJP"]},
+    "latinobarometro":  {"fuente": ["Latinobar"]},
+    "unodc_portal":     {"fuente": ["UNODC"]},
+    "sipri_milex":      {"fuente": ["SIPRI"]},
+    "wipo_ipstats":     {"fuente": ["Propiedad Intelectual", "WIPO"], "claves": ["patentes_residentes"]},
+    "fao_aquastat":     {"fuente": ["AQUASTAT"], "claves": ["agua_renovable"]},
+    "who_gho_road":     {"claves": ["muertes_transito"]},
+    "oisevi":           {"claves": ["muertes_transito"]},
+}
+
+def frescura_por_fuente():
+    """Para cada fuente vigilada, la MENOR antiguedad (en anios) de los indicadores de
+    SIWA que alimenta. Si no se puede leer frescura.json, devuelve {} y no cruza."""
+    p = AQUI.parent / "datos" / "publico" / "frescura.json"
+    try:
+        ind = json.loads(p.read_text(encoding="utf-8")).get("indicadores", [])
+    except Exception:
+        return {}
+    out = {}
+    for clave, regla in ALIMENTA.items():
+        subs = [s.lower() for s in regla.get("fuente", [])]
+        claves = set(regla.get("claves", []))
+        ants = [i.get("antiguedad_anios") for i in ind
+                if (i.get("clave") in claves
+                    or any(s in str(i.get("fuente", "")).lower() for s in subs))
+                and i.get("antiguedad_anios") is not None]
+        if ants:
+            out[clave] = min(ants)
+    return out
+
 def mirar(url: str) -> dict:
     req = urllib.request.Request(url, headers={"User-Agent": AGENTE})
     try:
@@ -104,14 +145,21 @@ def main():
         except Exception:
             prev = {}
     ahora = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    fuentes, cambiaron = [], []
+    fresc = frescura_por_fuente()
+    fuentes, cambiaron, a_revisar = [], [], []
     for f in FUENTES:
         act = mirar(f["url"])
         ant = prev.get(f["clave"])
         cambio_detectado = cambio(ant, act)
+        ant_siwa = fresc.get(f["clave"])
+        al_dia = ant_siwa is not None and ant_siwa <= 1
         if cambio_detectado:
             cambiaron.append(f["clave"])
+            if not al_dia:   # cambio Y SIWA no está al día -> conviene revisar edición nueva
+                a_revisar.append(f["clave"])
         fuentes.append({**f, **act, "cambio_desde_la_ultima": cambio_detectado,
+                        "antiguedad_siwa_anios": ant_siwa, "siwa_al_dia": al_dia,
+                        "a_revisar": bool(cambio_detectado and not al_dia),
                         "visto_por_ultima_vez": ahora,
                         "cambio_visto_en": ahora if cambio_detectado else (ant or {}).get("cambio_visto_en")})
     doc = {
@@ -121,12 +169,15 @@ def main():
         "corrida": ahora,
         "resumen": {"fuentes_miradas": len(fuentes),
                     "respondieron": sum(1 for f in fuentes if f.get("ok")),
-                    "cambiaron_esta_vuelta": len(cambiaron), "cuales": cambiaron},
+                    "cambiaron_esta_vuelta": len(cambiaron), "cuales": cambiaron,
+                    "a_revisar_edicion_nueva": a_revisar,
+                    "cambiaron_pero_siwa_al_dia": [c for c in cambiaron if c not in a_revisar]},
         "fuentes": fuentes,
     }
     SALIDA.write_text(json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8", newline="")
     print(f"vigia-fuentes.json: {doc['resumen']['respondieron']}/{len(fuentes)} respondieron, "
-          f"{len(cambiaron)} cambiaron ({', '.join(cambiaron) or 'ninguna'})")
+          f"{len(cambiaron)} cambiaron, {len(a_revisar)} a revisar edición nueva "
+          f"({', '.join(a_revisar) or 'ninguna'})")
 
 if __name__ == "__main__":
     main()

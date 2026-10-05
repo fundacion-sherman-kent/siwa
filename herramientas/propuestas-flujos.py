@@ -62,10 +62,17 @@ def main():
                 for r in cargar(pref, a):
                     rutas.append(r)
         # las más viejas de la familia (año desde más antiguo)
-        con_desde = [r for r in rutas if isinstance(r.get("desde"), int)]
-        con_desde.sort(key=lambda r: (r.get("estado") == "historica", r["desde"]))
+        # Corredores ACTIVOS: no historicos y no anteriores a ~12 anios. Son los que
+        # pueden tener noticias recientes; los historicos (un contrabando de 1995) no
+        # las tienen y hacian que el scanner volviera con las manos vacias. Se priorizan
+        # los de mayor confianza —los corredores establecidos que de verdad aparecen en
+        # prensa— y, dentro de eso, los que hace mas que no se confirman.
+        conf_rank = {"alta": 3, "media": 2, "baja": 1}
+        activos = [r for r in rutas if isinstance(r.get("desde"), int)
+                   and r.get("estado") != "historica" and r["desde"] >= ANIO - 12]
+        activos.sort(key=lambda r: (-conf_rank.get(r.get("confianza"), 2), r["desde"]))
         objetivo = []
-        for r in con_desde[:8]:   # hasta 8 corredores por familia a refrescar
+        for r in activos[:8]:   # hasta 8 corredores activos por familia a refrescar
             o, d = corredor(r)
             lugares = " ".join(x for x in (o, d) if x)
             objetivo.append({
