@@ -168,11 +168,11 @@ python colectores/focos.py
 | `migrantes_r4v` | R4V — Plataforma de Coordinación Interagencial para Refugiados y Migrantes de Venezuela (ACNUR–OIM) | `B-2` | — | 4 |
 | `migrantes_undesa` | UN DESA, División de Población — International Migrant Stock 2024 (origen×destino) | `A-2` | — | 4 |
 | `minerales_comercio` | Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108, 7112, 2616, 8001, 2609, 2615, 8103) | `A-2` | 33 | 7 |
-| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 10 |
+| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 11 |
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 5 |
 | `oms_homicidios` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `A-2` | 33 | 6 |
-| `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 7 |
+| `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 8 |
 | `opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición cero | `A-3` | 33 | 8 |
 | `opacidad_historia` | Fundación Sherman Kent — archivo del Índice de Opacidad | `A-2` | 33 | 1 |
 | `owd` | V-Dem y UCDP, vía Our World in Data (la Base Global de Terrorismo se retiró de esta capa el 21/9/2026: ver vacíos declarados) | `B-2` | 33 | 10 |
