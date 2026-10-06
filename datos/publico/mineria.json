@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-06T16:50:12+00:00",
+  "corrida": "2026-10-06T18:08:57+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3835,
+    "sobreviven": 3829,
     "de_ellos_son_parentescos": 399
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3436,
+  "pistas_totales": 3430,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -233,10 +233,10 @@
       "b": "superficie",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.941,
+      "coeficiente": 0.942,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 9.729340429823139e-22,
+      "p": 6.824590062941562e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -398,6 +398,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.924,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 1.280154219900037e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "poblacion",
       "rotulo_a": "Generación eléctrica",
@@ -411,14 +424,14 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.922,
-      "estados": 24,
+      "a": "administracion_basica",
+      "b": "estado_derecho_wjp",
+      "rotulo_a": "Administración básica del Estado",
+      "rotulo_b": "Estado de derecho (WJP)",
+      "coeficiente": 0.921,
+      "estados": 21,
       "tipo": "rangos (Spearman)",
-      "p": 2.1223355042044042e-13,
+      "p": 1.1912948479436594e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -428,23 +441,10 @@
       "b": "perdida_bosque",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.921,
+      "coeficiente": 0.92,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 2.4841369482777752e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "administracion_basica",
-      "b": "estado_derecho_wjp",
-      "rotulo_a": "Administración básica del Estado",
-      "rotulo_b": "Estado de derecho (WJP)",
-      "coeficiente": 0.921,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1912948479436594e-11,
+      "p": 3.7110515885103315e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -574,7 +574,7 @@
       "coeficiente": 0.906,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.5594894578320444e-16,
+      "p": 1.6672211000132303e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
