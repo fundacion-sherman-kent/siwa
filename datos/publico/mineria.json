@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-05T23:56:44+00:00",
+  "corrida": "2026-10-06T02:58:43+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3812,
+    "sobreviven": 3825,
     "de_ellos_son_parentescos": 399
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3413,
+  "pistas_totales": 3426,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -229,6 +229,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.939,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.5473345901538683e-21,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -263,19 +276,6 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 2.631703612429346e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.936,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.207149869018836e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -328,19 +328,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1284759852983783e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.929,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.5180337052423558e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -424,6 +411,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.922,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.8469989063192037e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "administracion_basica",
       "b": "estado_derecho_wjp",
       "rotulo_a": "Administración básica del Estado",
@@ -458,19 +458,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.612828881614103e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.916,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 3.212651339419073e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,19 +658,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.902,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.767728278733727e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "desempleo_cepal",
       "b": "desempleo_oit",
       "rotulo_a": "Desempleo · segunda fuente",
@@ -692,6 +666,19 @@
       "estados": 26,
       "tipo": "rangos (Spearman)",
       "p": 1.2508660869411333e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.901,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.33211917449025e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +783,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.2383289276792077e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "democracia_electoral",
+      "b": "indice_gobernanza",
+      "rotulo_a": "Nivel democrático — democracia electoral",
+      "rotulo_b": "Índice de gobernanza",
+      "coeficiente": 0.895,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 2.787409683278332e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
