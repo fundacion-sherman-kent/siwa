@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-06T12:58:38+00:00",
+  "corrida": "2026-10-06T16:50:12+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3829,
+    "sobreviven": 3835,
     "de_ellos_son_parentescos": 399
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3430,
+  "pistas_totales": 3436,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -412,6 +412,19 @@
     },
     {
       "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.922,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 2.1223355042044042e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
       "b": "perdida_bosque",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Bosque perdido",
@@ -684,19 +697,6 @@
       "misma_categoria": false
     },
     {
-      "a": "subnacional_focos:cuantas",
-      "b": "superficie",
-      "rotulo_a": "subnacional_focos · cuantas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.901,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 3.564859549029817e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -762,19 +762,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.896,
-      "estados": 21,
-      "tipo": "rangos (Spearman)",
-      "p": 7.787022110705324e-10,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion",
       "b": "corrupcion_politica",
       "rotulo_a": "Control de la corrupción",
@@ -796,6 +783,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.2383289276792077e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "democracia_electoral",
+      "b": "indice_gobernanza",
+      "rotulo_a": "Nivel democrático — democracia electoral",
+      "rotulo_b": "Índice de gobernanza",
+      "coeficiente": 0.895,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 2.787409683278332e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
