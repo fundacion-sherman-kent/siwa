@@ -3,11 +3,12 @@
 
 El motor hacia el dato en TIEMPO REAL de los corredores de flujos ilícitos. Levanta
 la cola que arma `herramientas/propuestas-flujos.py` (datos/publico/propuestas-flujos.json)
-y, por cada corredor atrasado, busca titulares RECIENTES en Google News RSS (gratis,
-sin clave), le pide a un modelo de pesos abiertos —Llama por Cloudflare, o el que Groq
-sirva gratis— que diga cuáles son operativos/decomisos reales de ese flujo en ese
-corredor y extraiga evento, lugar, fecha y enlace. Comprueba cada enlace y deja los
-candidatos en una rama aparte que el sitio NO publica.
+y, por familia, busca titulares RECIENTES en DOS feeds independientes y gratuitos sin
+clave —Google News RSS y GDELT DOC 2.0 (prensa mundial, se actualiza cada 15 min)—, le
+pide a un modelo de pesos abiertos —Llama por Cloudflare, o el que Groq sirva gratis—
+que diga cuáles son operativos/decomisos reales de ese flujo y a qué corredor conocido
+corresponden. Comprueba cada enlace y deja los candidatos en una rama aparte que el
+sitio NO publica. Que un corredor aparezca en los dos feeds es la señal de dos fuentes.
 
 LO QUE NO HACE: no incorpora nada al registro ni toca el sitio; no califica (eso es
 juicio humano: dos fuentes o rótulo, décimo hombre, visto bueno); no inventa (sólo
@@ -46,6 +47,20 @@ BROAD = {
     "especies": ["tráfico de especies decomiso " + str(ANIO), "incautación de fauna silvestre " + str(ANIO)],
     "contrabando": ["contrabando decomiso " + str(ANIO), "mercadería de contrabando incautación " + str(ANIO)],
     "trata": ["trata de personas rescate " + str(ANIO), "operativo trata de personas " + str(ANIO)],
+}
+
+# GDELT indexa TODO traducido al inglés, así que se le busca con términos en INGLÉS y se
+# filtra por idioma de la fuente (sourcelang) para quedarnos con prensa de la región. Las
+# frases en español con acento le daban 0; en inglés contra sourcelang:spanish trae las
+# mismas notas en castellano/portugués. Un bloque por familia, que se combinan con OR.
+BROAD_EN = {
+    "narcotrafico": ["cocaine seizure", "drug seizure", "drug trafficking"],
+    "armas": ["firearms seizure", "weapons trafficking", "arms seized"],
+    "migracion": ["migrant smuggling", "migrants rescued"],
+    "minerales": ["illegal mining", "illegal gold"],
+    "especies": ["wildlife trafficking", "wildlife seizure"],
+    "contrabando": ["smuggling seized", "contraband seizure"],
+    "trata": ["human trafficking rescue", "trafficking victims rescued"],
 }
 
 SISTEMA = (
@@ -90,7 +105,52 @@ def rss(query: str, limite: int = MAX_TITULARES_QUERY) -> list[dict]:
             fecha = None
         if titulo and link and reciente:
             out.append({"titular": titulo, "enlace": link, "fuente": fuente,
-                        "fecha": fecha.isoformat() if fecha else None})
+                        "fecha": fecha.isoformat() if fecha else None, "feed": "google"})
+    return out[:limite]
+
+GDELT_DOC = "https://api.gdeltproject.org/api/v2/doc/doc"
+
+def gdelt(consultas: list[str], limite: int = MAX_TITULARES_FAM) -> list[dict]:
+    """Segundo feed de titulares, INDEPENDIENTE de Google News: GDELT DOC 2.0 (gratis,
+    sin clave, prensa mundial que se actualiza cada 15 min, con ventana de 3 meses).
+    Es la segunda fuente que a los eventos de flujos les faltaba: hasta hoy el scanner
+    miraba un solo agregador. Un pedido por familia, respetando el límite de GDELT de
+    un pedido cada 5 segundos. Castellano y portugués (por Brasil)."""
+    import time
+    frase = " OR ".join('"' + c.strip() + '"' for c in consultas if c.strip())
+    q = "(" + frase + ") (sourcelang:spanish OR sourcelang:portuguese)"
+    url = GDELT_DOC + "?" + urllib.parse.urlencode(
+        {"query": q, "mode": "ArtList", "format": "json",
+         "maxrecords": "50", "sortby": "datedesc", "timespan": "3m"})
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (SIWA/automejora)"})
+    d = None
+    for intento in range(3):
+        time.sleep(6)  # GDELT pide un llamado cada 5 segundos; se respeta con margen
+        try:
+            crudo = urllib.request.urlopen(req, timeout=40).read()
+            d = json.loads(crudo.decode("utf-8", "replace"))
+            break
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and intento < 2:
+                time.sleep(10)  # límite de ritmo: se espera y se reintenta
+                continue
+            return []
+        except Exception:
+            return []  # GDELT a veces devuelve HTML de error ante una consulta rara: se ignora
+    if d is None:
+        return []
+    out = []
+    for a in d.get("articles", []):
+        titulo = (a.get("title") or "").strip()
+        link = (a.get("url") or "").strip()
+        dom = (a.get("domain") or "").strip()
+        try:
+            fecha = dt.datetime.strptime((a.get("seendate") or "")[:15], "%Y%m%dT%H%M%S").date()
+        except Exception:
+            fecha = None
+        if titulo and link:
+            out.append({"titular": titulo, "enlace": link, "fuente": dom,
+                        "fecha": fecha.isoformat() if fecha else None, "feed": "gdelt"})
     return out[:limite]
 
 def extraer_json(texto: str):
@@ -110,15 +170,24 @@ def main(salida: Path):
     corr_por_fam = {p["familia"]: p.get("corredores_a_refrescar", []) for p in cola.get("propuestas", [])}
 
     eventos, sin_corredor, titulares_totales = [], [], 0
+    por_feed = {"google": 0, "gdelt": 0}
     for fam, consultas in BROAD.items():
-        # 1) MUCHOS titulares de la familia, de varias búsquedas amplias, deduplicados
-        vistos, titulares = set(), []
+        # 1) MUCHOS titulares de la familia, de DOS feeds independientes, deduplicados.
+        #    Google News RSS y GDELT se piden por separado y se topea cada uno, para que
+        #    GDELT —la segunda fuente nueva— no quede afuera por el tope de la familia.
+        vistos, google, gd = set(), [], []
         for q in consultas:
             for t in rss(q):
                 if t["enlace"] in vistos:
                     continue
-                vistos.add(t["enlace"]); titulares.append(t)
-        titulares = titulares[:MAX_TITULARES_FAM]
+                vistos.add(t["enlace"]); google.append(t)
+        for t in gdelt(BROAD_EN.get(fam, consultas)):
+            if t["enlace"] in vistos:
+                continue
+            vistos.add(t["enlace"]); gd.append(t)
+        titulares = google[:MAX_TITULARES_FAM] + gd[:MAX_TITULARES_FAM]
+        por_feed["google"] += len(google[:MAX_TITULARES_FAM])
+        por_feed["gdelt"] += len(gd[:MAX_TITULARES_FAM])
         titulares_totales += len(titulares)
         if not titulares:
             continue
@@ -144,24 +213,38 @@ def main(salida: Path):
             if not bl.comprobar(t["enlace"]).get("responde"):
                 continue  # el enlace tiene que responder
             reg = {"familia": fam, "corredor_id": cid, "titular": t["titular"], "enlace": t["enlace"],
-                   "fuente": t["fuente"], "fecha": t["fecha"], "lugar": ev.get("lugar"), "que": ev.get("que")}
+                   "fuente": t["fuente"], "feed": t.get("feed"), "fecha": t["fecha"],
+                   "lugar": ev.get("lugar"), "que": ev.get("que")}
             (sin_corredor if cid == "ninguno" else eventos).append(reg)
+
+    # CORROBORACIÓN: un corredor queda "con dos fuentes" cuando lo respaldan eventos de
+    # los DOS feeds independientes (Google News y GDELT). Es la señal que mira el curador;
+    # la confirmación final sigue siendo juicio humano (dos fuentes o rótulo, décimo hombre).
+    feeds_por_corredor: dict[str, set] = {}
+    for e in eventos:
+        feeds_por_corredor.setdefault(e["corredor_id"], set()).add(e.get("feed"))
+    corroborados = sorted(c for c, fs in feeds_por_corredor.items() if {"google", "gdelt"} <= fs)
 
     salida.mkdir(parents=True, exist_ok=True)
     doc = {
         "que_es": "Candidatos de eventos recientes (operativos/decomisos) de flujos ilícitos, hallados por "
-                  "búsqueda amplia por familia y mapeados por Llama a los corredores conocidos. Los que no calzan "
-                  "con ninguno van aparte como candidatos a corredor NUEVO. NINGUNO está incorporado ni calificado: "
-                  "dos fuentes o rótulo, décimo hombre y visto bueno antes de entrar al mapa.",
+                  "búsqueda amplia por familia en DOS feeds independientes (Google News RSS y GDELT) y mapeados "
+                  "por Llama a los corredores conocidos. Los que no calzan con ninguno van aparte como candidatos "
+                  "a corredor NUEVO. Un corredor 'corroborado' aparece en los dos feeds. NINGUNO está incorporado "
+                  "ni calificado: dos fuentes o rótulo, décimo hombre y visto bueno antes de entrar al mapa.",
         "corrida": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "resumen": {"familias_miradas": len(BROAD), "titulares_mirados": titulares_totales,
-                    "eventos_mapeados_a_corredor": len(eventos), "candidatos_corredor_nuevo": len(sin_corredor)},
+                    "titulares_por_feed": por_feed,
+                    "eventos_mapeados_a_corredor": len(eventos), "candidatos_corredor_nuevo": len(sin_corredor),
+                    "corredores_corroborados_por_dos_feeds": corroborados},
         "eventos": eventos,
         "candidatos_corredor_nuevo": sin_corredor,
     }
     (salida / f"flujos-{HOY.isoformat()}.json").write_text(
         json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"flujos-{HOY}: {titulares_totales} titulares mirados, {len(eventos)} eventos mapeados a corredor, "
+    print(f"flujos-{HOY}: {titulares_totales} titulares mirados "
+          f"(Google {por_feed['google']} + GDELT {por_feed['gdelt']}), {len(eventos)} eventos mapeados a corredor, "
+          f"{len(corroborados)} corredores corroborados por los dos feeds, "
           f"{len(sin_corredor)} candidatos a corredor nuevo (en rama aparte, sin incorporar)")
 
 if __name__ == "__main__":

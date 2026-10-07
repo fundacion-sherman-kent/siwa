@@ -70,7 +70,11 @@ PORTALES_POR_CORRIDA = 2
 
 # ─────────────────────────── utilidades de red ───────────────────────────
 
-def pedir_json(url: str, cabeceras: dict | None = None, datos: dict | None = None, espera: int = 45):
+def pedir_json(url: str, cabeceras: dict | None = None, datos: dict | None = None, espera: int = 45,
+               reintentar_429: bool = True):
+    """reintentar_429=False hace que un 429 (cuota/límite) se eleve enseguida, sin
+    dormir: lo usa el lazo multi-modelo de Groq para saltar al modelo siguiente —que
+    tiene cuota propia— en vez de esperar a que se libere el que se agotó."""
     h = {"User-Agent": NAVEGADOR, "Accept": "application/json"}
     h.update(cabeceras or {})
     cuerpo = None
@@ -89,6 +93,8 @@ def pedir_json(url: str, cabeceras: dict | None = None, datos: dict | None = Non
         except urllib.error.HTTPError as e:
             if e.code in (400, 401, 403, 404) or intento == 4:
                 raise
+            if e.code == 429 and not reintentar_429:
+                raise  # el que llama prefiere saltar a otro modelo antes que esperar
             if e.code == 429:
                 # Groq dice cuánto esperar: se respeta, con un mínimo de 20 segundos.
                 try:
@@ -203,7 +209,10 @@ def _version(nombre: str) -> float:
     return float(m[0]) if m else 0.0
 
 
-def elegir_groq(clave: str) -> str | None:
+def elegir_groq_lista(clave: str) -> list[str]:
+    """Lista ORDENADA de modelos abiertos de Groq, uno por familia, del preferido al
+    de respaldo. En Groq gratis cada modelo tiene cuota propia: si el preferido la
+    agotó, se pasa al siguiente en vez de esperar. Por eso es una lista, no uno solo."""
     ids = [m["id"] for m in pedir_json("https://api.groq.com/openai/v1/models",
                                        {"Authorization": "Bearer " + clave}).get("data", [])
            if m.get("active", True)]
@@ -212,12 +221,21 @@ def elegir_groq(clave: str) -> str | None:
     # tenía Llama sólo en su plan empresarial: con cuenta gratuita no aparece. En ese
     # caso se usa GPT-OSS (OpenAI, licencia Apache 2.0) o Qwen (Alibaba), que Groq sí
     # sirve gratis. Cada propuesta deja escrito qué modelo la clasificó.
+    orden = []
     for patron in (r"llama-4", r"llama-3\.\d-70b", r"llama", r"gpt-oss-120b", r"gpt-oss", r"qwen"):
         hallados = [i for i in ids if re.search(patron, i, re.I)]
         if hallados:
-            return sorted(hallados, key=_version, reverse=True)[0]
-    print("  Groq no ofrece modelos abiertos a esta cuenta. Disponibles:", ", ".join(ids)[:300], file=sys.stderr)
-    return None
+            mejor = sorted(hallados, key=_version, reverse=True)[0]
+            if mejor not in orden:
+                orden.append(mejor)
+    if not orden:
+        print("  Groq no ofrece modelos abiertos a esta cuenta. Disponibles:", ", ".join(ids)[:300], file=sys.stderr)
+    return orden
+
+
+def elegir_groq(clave: str) -> str | None:
+    lista = elegir_groq_lista(clave)
+    return lista[0] if lista else None
 
 
 def elegir_cloudflare(cuenta: str, token: str) -> str | None:
@@ -258,24 +276,39 @@ def conversar(sistema: str, usuario: str) -> tuple[str, str]:
             print("  Cloudflare no respondió:", type(e).__name__, str(e)[:120], file=sys.stderr)
     if groq:
         try:
-            modelo = elegir_groq(groq)
-            if modelo:
-                cuerpo = {"model": modelo, "temperature": 0, "response_format": {"type": "json_object"},
-                          "messages": [{"role": "system", "content": sistema},
-                                       {"role": "user", "content": usuario}]}
+            modelos = elegir_groq_lista(groq)
+        except Exception as e:  # noqa: BLE001
+            print("  Groq no respondió:", type(e).__name__, str(e)[:120], file=sys.stderr)
+            modelos = []
+        # Se recorre la lista: si un modelo agotó su cuota (429), se salta al siguiente
+        # —que en el plan gratuito tiene cuota propia— en vez de esperar a que se libere.
+        for modelo in modelos:
+            cuerpo = {"model": modelo, "temperature": 0, "response_format": {"type": "json_object"},
+                      "messages": [{"role": "system", "content": sistema},
+                                   {"role": "user", "content": usuario}]}
+            try:
                 try:
                     d = pedir_json("https://api.groq.com/openai/v1/chat/completions",
-                                   {"Authorization": "Bearer " + groq}, cuerpo, espera=120)
+                                   {"Authorization": "Bearer " + groq}, cuerpo, espera=120,
+                                   reintentar_429=False)
                 except urllib.error.HTTPError as e:
                     if e.code != 400:
                         raise
                     # Hay modelos que no aceptan el modo JSON: se pide igual, sin él.
                     cuerpo.pop("response_format")
                     d = pedir_json("https://api.groq.com/openai/v1/chat/completions",
-                                   {"Authorization": "Bearer " + groq}, cuerpo, espera=120)
+                                   {"Authorization": "Bearer " + groq}, cuerpo, espera=120,
+                                   reintentar_429=False)
                 return d["choices"][0]["message"]["content"], "Groq · " + modelo
-        except Exception as e:  # noqa: BLE001
-            print("  Groq no respondió:", type(e).__name__, str(e)[:120], file=sys.stderr)
+            except urllib.error.HTTPError as e:
+                if e.code == 429:
+                    print(f"  Groq {modelo}: cuota o límite (429); pruebo el modelo siguiente", file=sys.stderr)
+                    continue
+                print(f"  Groq {modelo} no respondió: HTTP {e.code}", file=sys.stderr)
+                continue
+            except Exception as e:  # noqa: BLE001
+                print(f"  Groq {modelo} no respondió:", type(e).__name__, str(e)[:120], file=sys.stderr)
+                continue
     if not groq and not (cuenta and token):
         raise RuntimeError("No hay clave de Groq ni de Cloudflare cargada en el repositorio.")
     raise RuntimeError("Hay clave, pero ningún servicio ofreció un modelo abierto que responda. Ver el detalle arriba.")
