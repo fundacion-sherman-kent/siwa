@@ -118,7 +118,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**97 fuentes en servicio**, en 99 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**99 fuentes en servicio**, en 101 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -135,6 +135,7 @@ python colectores/focos.py
 | `ciber` | OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta | `B-2` | 33 | 6 |
 | `cites` | CITES — base de datos de comercio de especies protegidas (secretaría CITES / UNEP-WCMC) | `A-3` | 33 | 8 |
 | `cobertura` | Padrón de medios de la Fundación Sherman Kent | `F-3` | — | 11 |
+| `coca_ondcp` | ONDCP -- Oficina de Politica Nacional de Control de Drogas de la Casa Blanca (EE.UU.), estimacion de cultivo de coca y produccion potencial de cocaina en la region andina | `B-2` | 3 | 4 |
 | `comercio` | Comtrade de Naciones Unidas — vista pública | `A-2` | 19 | 8 |
 | `conflictos` | Instituto de Estudios Interculturales, Pontificia Universidad Javeriana Cali — visor de conflictos de America Latina | `B-3` | 11 | 7 |
 | `consulta` | Fundación Sherman Kent — consulta dirigida a la fuente primaria | `A-2` | 33 | 6 |
@@ -156,6 +157,7 @@ python colectores/focos.py
 | `focos` | NASA FIRMS — focos de calor detectados por satélite | `A-2` | 33 | 6 |
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
 | `gasto_publico` | Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics | `B-2` | 22 | 8 |
+| `gdacs` | GDACS -- Global Disaster Alert and Coordination System (Comision Europea JRC y Naciones Unidas) | `B-2` | 33 | 4 |
 | `gti` | Institute for Economics & Peace (IEP) — Global Terrorism Index 2026: Measuring the Impact of Terrorism | `B-3` | 33 | 7 |
 | `ia` | Microsoft AI Economy Institute; OpenAI Signals; Anthropic Economic Index; documentación oficial de siete empresas de nube | `B-3` | 33 | 7 |
 | `ia_apps` | Apple App Store — rankings de apps gratuitas y disponibilidad por país; padrón de asistentes de IA con origen verificado por la Fundación | `B-3` | 33 | 6 |
@@ -168,7 +170,7 @@ python colectores/focos.py
 | `migrantes_r4v` | R4V — Plataforma de Coordinación Interagencial para Refugiados y Migrantes de Venezuela (ACNUR–OIM) | `B-2` | — | 4 |
 | `migrantes_undesa` | UN DESA, División de Población — International Migrant Stock 2024 (origen×destino) | `A-2` | — | 4 |
 | `minerales_comercio` | Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108, 7112, 2616, 8001, 2609, 2615, 8103) | `A-2` | 33 | 7 |
-| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 11 |
+| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 10 |
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 7 |
 | `oms_homicidios` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `A-2` | 33 | 6 |
