@@ -129,7 +129,7 @@ python colectores/focos.py
 | `bienes_culturales` | UNIDROIT — Convenio de 1995 sobre bienes culturales robados o exportados ilícitamente | `A-2` | 33 | 5 |
 | `brecha` | Fundación Sherman Kent — brecha entre lo registrado y lo publicado | `B-2` | 33 | 5 |
 | `bti` | Índice de Transformación Bertelsmann (BTI), edición 2026 | `B-3` | 22 | 6 |
-| `censo_subnacional` | Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas | `B-3` | 33 | 13 |
+| `censo_subnacional` | Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas | `B-3` | 33 | 12 |
 | `cepal` | CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL): Observatorio de Igualdad de Género y estadísticas de seguridad ciudadana | `A-2` | 33 | 8 |
 | `chile_ine_seguridad` | Instituto Nacional de Estadísticas de Chile (INE) — Estadísticas Policiales, cuadro de víctimas | `A-2` | 1 | 4 |
 | `ciber` | OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta | `B-2` | 33 | 6 |
@@ -168,11 +168,11 @@ python colectores/focos.py
 | `migrantes_r4v` | R4V — Plataforma de Coordinación Interagencial para Refugiados y Migrantes de Venezuela (ACNUR–OIM) | `B-2` | — | 4 |
 | `migrantes_undesa` | UN DESA, División de Población — International Migrant Stock 2024 (origen×destino) | `A-2` | — | 4 |
 | `minerales_comercio` | Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108, 7112, 2616, 8001, 2609, 2615, 8103) | `A-2` | 33 | 7 |
-| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 11 |
+| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 9 | 10 |
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 5 |
 | `oms_homicidios` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `A-2` | 33 | 6 |
-| `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 8 |
+| `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 7 |
 | `opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición cero | `A-3` | 33 | 8 |
 | `opacidad_historia` | Fundación Sherman Kent — archivo del Índice de Opacidad | `A-2` | 33 | 1 |
 | `owd` | V-Dem y UCDP, vía Our World in Data (la Base Global de Terrorismo se retiró de esta capa el 21/9/2026: ver vacíos declarados) | `B-2` | 33 | 10 |
@@ -207,7 +207,7 @@ python colectores/focos.py
 | `subnacional_colombia_secuestro` | Secuestro — Ministerio de Defensa Nacional / Policía Nacional de Colombia, vía datos.gov.co (Socrata) | `A-2` | 1 | 5 |
 | `subnacional_colombia_terrorismo` | Terrorismo / acciones subversivas — Ministerio de Defensa Nacional / Policía Nacional de Colombia, vía datos.gov.co (Socrata) | `A-2` | 1 | 5 |
 | `subnacional_datos` | Fuentes oficiales nacionales que publican por unidad de primer orden: Policía Nacional de Colombia; Sistema Nacional de Información Criminal (SNIC); Ministerio del Interior del Uruguay | `A-2` | 3 | 6 |
-| `subnacional_focos` | Focos de calor por unidad de primer orden — NASA FIRMS agregado sobre geoBoundaries ADM1 | `A-2` | 21 | 3 |
+| `subnacional_focos` | Focos de calor por unidad de primer orden — NASA FIRMS agregado sobre geoBoundaries ADM1 | `A-2` | 24 | 3 |
 | `subnacional_homicidios` | Homicidios por unidad de primer orden, de la fuente nacional de cada Estado (Argentina SNIC, Colombia MinDefensa, Ecuador INEC, Perú CEIC, México SESNSP) | `A-2` | 10 | 3 |
 | `subnacional_robos` | Robos/hurtos por unidad de primer orden, de la fuente nacional de cada Estado (Argentina SNIC, Colombia Policía Nacional, Bolivia INE, Trinidad TTPS, República Dominicana — Policía Nacional vía datos.gob.do) | `A-2` | 8 | 3 |
 | `subnacional_santafe` | Observatorio de Seguridad Pública de Santa Fe — infografía mensual de homicidios dolosos | `A-2` | 1 | 3 |
