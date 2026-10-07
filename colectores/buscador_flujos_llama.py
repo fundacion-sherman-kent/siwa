@@ -154,13 +154,36 @@ def gdelt(consultas: list[str], limite: int = MAX_TITULARES_FAM) -> list[dict]:
     return out[:limite]
 
 def extraer_json(texto: str):
-    m = re.search(r"\{.*\}", texto or "", re.S)
-    if not m:
+    """Saca el objeto {"eventos":[...]} de la respuesta del modelo. Tolera cercos
+    markdown y texto de razonamiento alrededor (gpt-oss es un modelo de razonamiento y
+    suele envolver el JSON), y acepta que devuelva directamente la lista."""
+    if not texto:
         return {"eventos": []}
+    s = re.sub(r"```(?:json)?", "", texto).strip()
+    # 1) intento directo (objeto o lista pelada)
     try:
-        return json.loads(m.group(0))
-    except json.JSONDecodeError:
-        return {"eventos": []}
+        d = json.loads(s)
+        if isinstance(d, dict):
+            return d
+        if isinstance(d, list):
+            return {"eventos": d}
+    except Exception:  # noqa: BLE001
+        pass
+    # 2) el objeto que contiene "eventos"
+    m = re.search(r"\{[^{}]*\"eventos\"\s*:\s*\[.*?\]\s*\}", s, re.S)
+    if m:
+        try:
+            return json.loads(m.group(0))
+        except Exception:  # noqa: BLE001
+            pass
+    # 3) último recurso: del primer { al último }
+    m = re.search(r"\{.*\}", s, re.S)
+    if m:
+        try:
+            return json.loads(m.group(0))
+        except Exception:  # noqa: BLE001
+            pass
+    return {"eventos": []}
 
 def main(salida: Path):
     if not COLA.exists():
@@ -202,20 +225,31 @@ def main(salida: Path):
         except Exception as e:
             print(f"  {fam}: modelo no disponible ({e}); se omite")
             continue
-        for ev in extraer_json(resp).get("eventos", []):
+        crudos = extraer_json(resp).get("eventos", [])
+        desc = {"indice": 0, "id": 0, "enlace": 0}
+        suman = 0
+        for ev in crudos:
             i = ev.get("indice")
             if not isinstance(i, int) or i < 0 or i >= len(titulares):
+                desc["indice"] += 1
                 continue  # no inventado: apunta a un titular real de la lista
             cid = ev.get("corredor_id")
             if cid not in ids_validos and cid != "ninguno":
+                desc["id"] += 1
                 continue  # no inventado: el id tiene que existir (o ser "ninguno")
             t = titulares[i]
             if not bl.comprobar(t["enlace"]).get("responde"):
+                desc["enlace"] += 1
                 continue  # el enlace tiene que responder
             reg = {"familia": fam, "corredor_id": cid, "titular": t["titular"], "enlace": t["enlace"],
                    "fuente": t["fuente"], "feed": t.get("feed"), "fecha": t["fecha"],
                    "lugar": ev.get("lugar"), "que": ev.get("que")}
             (sin_corredor if cid == "ninguno" else eventos).append(reg)
+            suman += 1
+        print(f"  {fam} [{_modelo}]: {len(titulares)} titulares, modelo devolvió {len(crudos)} eventos crudos, "
+              f"{suman} válidos (descartados: índice {desc['indice']}, id {desc['id']}, enlace {desc['enlace']})")
+        if not crudos:  # para diagnosticar un parseo o un prompt que no rinde
+            print(f"    (muestra de respuesta: {str(resp)[:200]!r})", file=sys.stderr)
 
     # CORROBORACIÓN: un corredor queda "con dos fuentes" cuando lo respaldan eventos de
     # los DOS feeds independientes (Google News y GDELT). Es la señal que mira el curador;
