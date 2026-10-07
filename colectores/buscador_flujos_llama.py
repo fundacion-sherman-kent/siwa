@@ -190,7 +190,10 @@ VACIAS = set("para como desde entre sobre contra tras este esta estos estas aqui
              # sustantivos geográficos comunes: que el cruce se apoye en nombres propios, no en estos
              "puerto puertos ciudad aeropuerto region regiones provincia departamento municipio "
              "norte sur oeste frontera costa golfo valle sierra estado capital zona barrio terminal "
-             "portuaria portuario nacional internacional centro".split())
+             "portuaria portuario nacional internacional centro "
+             # rellenos que el modelo pone cuando NO sabe el lugar: no son nombre propio y no corroboran
+             "especificado especificada especifica determinado determinada indeterminado desconocido "
+             "desconocida varios varias diversos diversas multiple multiples lugar lugares".split())
 
 def tokens_lugar(lugar: str) -> list[str]:
     """Palabras de lugar de 4+ letras, sin conectores, para cruzar entre feeds."""
