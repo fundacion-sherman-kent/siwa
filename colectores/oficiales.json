@@ -65,6 +65,15 @@
    "tipo": "CKAN",
    "base": "https://catalogodatos.gub.uy",
    "verificado": "2026-08-30"
+  },
+  {
+   "iso": "ALC",
+   "organismo": "Humanitarian Data Exchange (HDX / OCHA)",
+   "tipo": "CKAN",
+   "base": "https://data.humdata.org",
+   "fq": "groups:(arg OR atg OR bhs OR blz OR bol OR bra OR brb OR chl OR col OR cri OR cub OR dma OR dom OR ecu OR grd OR gtm OR guy OR hnd OR hti OR jam OR kna OR lca OR mex OR nic OR pan OR per OR pry OR slv OR sur OR tto OR ury OR vct OR ven)",
+   "verificado": "2026-10-07",
+   "_nota": "HDX es un AGREGADOR/HOST, no un productor: re-publica datos de Banco Mundial, OMS, ACLED, IOM, HOT, etc. El `fq` acota a los 33 Estados del padron (grupos iso3 en minuscula). Cada propuesta trae su `organismo` (el productor real): SOLO sirve como segunda fuente si ese productor NO es uno que ya usamos (si no, es la misma procedencia). Juzgar la independencia es humano, como siempre en la rama propuestas-llama."
   }
  ],
  "materias": [
