@@ -185,6 +185,44 @@ def extraer_json(texto: str):
             pass
     return {"eventos": []}
 
+VACIAS = set("para como desde entre sobre contra tras este esta estos estas aqui alli pais paises "
+             "mientras cuando donde mismo misma "
+             # sustantivos geográficos comunes: que el cruce se apoye en nombres propios, no en estos
+             "puerto puertos ciudad aeropuerto region regiones provincia departamento municipio "
+             "norte sur oeste frontera costa golfo valle sierra estado capital zona barrio terminal "
+             "portuaria portuario nacional internacional centro".split())
+
+def tokens_lugar(lugar: str) -> list[str]:
+    """Palabras de lugar de 4+ letras, sin conectores, para cruzar entre feeds."""
+    toks = re.findall(r"[a-záéíóúñ]{4,}", (lugar or "").lower())
+    return [t for t in toks if t not in VACIAS]
+
+def dias_entre(a: str | None, b: str | None):
+    try:
+        return abs((dt.date.fromisoformat(a) - dt.date.fromisoformat(b)).days)
+    except Exception:
+        return None
+
+def corroborar(lugar: str, fecha: str | None, otro_feed: list[dict]) -> dict | None:
+    """Busca en el OTRO feed (titulares ya traídos, sin red extra) una nota del MISMO
+    lugar y dentro de ~2 semanas. Devuelve el titular corroborante o None. Conservador:
+    exige coincidencia de un token de lugar y, si ambos tienen fecha, cercanía temporal.
+    Es señal 'a confirmar': que dos feeds independientes hablen del mismo flujo, lugar y
+    semana es la regla de dos fuentes a nivel evento; confirmar el hecho es juicio humano."""
+    toks = tokens_lugar(lugar)
+    if not toks:
+        return None
+    for t in otro_feed:
+        tl = (t.get("titular") or "").lower()
+        if not any(tok in tl for tok in toks):
+            continue
+        d = dias_entre(fecha, t.get("fecha"))
+        if d is not None and d > 16:
+            continue
+        return {"feed": t.get("feed"), "titular": t["titular"], "enlace": t["enlace"],
+                "fuente": t.get("fuente"), "fecha": t.get("fecha")}
+    return None
+
 def main(salida: Path):
     if not COLA.exists():
         print("No hay cola (propuestas-flujos.json). Corré antes herramientas/propuestas-flujos.py.")
@@ -241,9 +279,14 @@ def main(salida: Path):
             if not bl.comprobar(t["enlace"]).get("responde"):
                 desc["enlace"] += 1
                 continue  # el enlace tiene que responder
+            # CORROBORACIÓN: se busca el MISMO hecho en el OTRO feed (ya traído, sin red
+            # extra). Si aparece, se adjunta como posible segunda fuente, 'a confirmar'.
+            otro = gd if t.get("feed") == "google" else google
+            corr = corroborar(ev.get("lugar"), t["fecha"], otro)
             reg = {"familia": fam, "corredor_id": cid, "titular": t["titular"], "enlace": t["enlace"],
                    "fuente": t["fuente"], "feed": t.get("feed"), "fecha": t["fecha"],
-                   "lugar": ev.get("lugar"), "que": ev.get("que")}
+                   "lugar": ev.get("lugar"), "que": ev.get("que"),
+                   "corroborado_a_confirmar": bool(corr), "posible_segunda_fuente": corr}
             (sin_corredor if cid == "ninguno" else eventos).append(reg)
             suman += 1
         print(f"  {fam} [{_modelo}]: {len(titulares)} titulares, modelo devolvió {len(crudos)} eventos crudos, "
@@ -251,53 +294,27 @@ def main(salida: Path):
         if not crudos:  # para diagnosticar un parseo o un prompt que no rinde
             print(f"    (muestra de respuesta: {str(resp)[:200]!r})", file=sys.stderr)
 
-    # CORROBORACIÓN POR CORREDOR CONOCIDO: un corredor queda "con dos fuentes" cuando lo
-    # respaldan eventos de los DOS feeds independientes. (Suele dar vacío: los titulares
-    # amplios rara vez nombran los dos extremos de un corredor, así que caen como candidatos.)
-    feeds_por_corredor: dict[str, set] = {}
-    for e in eventos:
-        feeds_por_corredor.setdefault(e["corredor_id"], set()).add(e.get("feed"))
-    corroborados = sorted(c for c, fs in feeds_por_corredor.items() if {"google", "gdelt"} <= fs)
-
-    # COINCIDENCIA ENTRE FEEDS: el MISMO hecho (mismo flujo, mismo lugar, misma semana)
-    # reportado por los DOS feeds independientes. Es la señal de dos fuentes a nivel EVENTO
-    # —vale también para los candidatos a corredor nuevo—. Conservador a propósito: si los
-    # lugares o las fechas no coinciden, no se declara. Es "a confirmar": el curador decide.
-    def _lugar(e):
-        return re.split(r"[,(]", str(e.get("lugar") or ""))[0].strip().lower()
-    def _semana(e):
-        try:
-            y, w, _ = dt.date.fromisoformat(e["fecha"]).isocalendar()
-            return f"{y}-S{w:02d}"
-        except Exception:
-            return None
-    cubos: dict[tuple, dict] = {}
-    for e in eventos + sin_corredor:
-        lg, sem = _lugar(e), _semana(e)
-        if not lg or not sem:
-            continue
-        c = cubos.setdefault((e["familia"], lg, sem), {"feeds": set(), "hechos": []})
-        c["feeds"].add(e.get("feed"))
-        c["hechos"].append({"feed": e.get("feed"), "titular": e["titular"], "enlace": e["enlace"],
-                            "fuente": e["fuente"], "fecha": e["fecha"], "corredor_id": e["corredor_id"]})
-    coincidencias = [{"familia": k[0], "lugar": k[1], "semana": k[2], "hechos": v["hechos"]}
-                     for k, v in cubos.items() if {"google", "gdelt"} <= v["feeds"]]
-    coincidencias.sort(key=lambda x: (x["familia"], x["semana"]))
+    # CORROBORADOS A CONFIRMAR: los eventos (mapeados o candidatos) a los que la corroboración
+    # activa les encontró el mismo hecho en el OTRO feed. Es la señal de dos fuentes a nivel
+    # evento; el curador confirma que es el mismo decomiso (dos fuentes o rótulo, décimo hombre).
+    corroborados = [e for e in (eventos + sin_corredor) if e.get("corroborado_a_confirmar")]
+    corroborados.sort(key=lambda e: (e["familia"], e.get("fecha") or ""))
 
     salida.mkdir(parents=True, exist_ok=True)
     doc = {
         "que_es": "Candidatos de eventos recientes (operativos/decomisos) de flujos ilícitos, hallados por "
                   "búsqueda amplia por familia en DOS feeds independientes (Google News RSS y GDELT) y mapeados "
                   "por Llama a los corredores conocidos. Los que no calzan con ninguno van aparte como candidatos "
-                  "a corredor NUEVO. Un corredor 'corroborado' aparece en los dos feeds. NINGUNO está incorporado "
-                  "ni calificado: dos fuentes o rótulo, décimo hombre y visto bueno antes de entrar al mapa.",
+                  "a corredor NUEVO. Cada evento se corrobora contra el OTRO feed: si el mismo hecho (mismo lugar, "
+                  "misma ventana) aparece allí, lleva 'corroborado_a_confirmar' y la 'posible_segunda_fuente'. "
+                  "NADA está incorporado ni calificado: dos fuentes o rótulo, décimo hombre y visto bueno antes "
+                  "de entrar al mapa; la corroboración es señal, no confirmación.",
         "corrida": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "resumen": {"familias_miradas": len(BROAD), "titulares_mirados": titulares_totales,
                     "titulares_por_feed": por_feed,
                     "eventos_mapeados_a_corredor": len(eventos), "candidatos_corredor_nuevo": len(sin_corredor),
-                    "corredores_corroborados_por_dos_feeds": corroborados,
-                    "coincidencias_entre_feeds_a_confirmar": len(coincidencias)},
-        "coincidencias_entre_feeds": coincidencias,
+                    "corroborados_por_dos_feeds_a_confirmar": len(corroborados)},
+        "corroborados_a_confirmar": corroborados,
         "eventos": eventos,
         "candidatos_corredor_nuevo": sin_corredor,
     }
@@ -305,7 +322,7 @@ def main(salida: Path):
         json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"flujos-{HOY}: {titulares_totales} titulares mirados "
           f"(Google {por_feed['google']} + GDELT {por_feed['gdelt']}), {len(eventos)} eventos mapeados a corredor, "
-          f"{len(sin_corredor)} candidatos a corredor nuevo, {len(coincidencias)} coincidencias entre feeds "
+          f"{len(sin_corredor)} candidatos a corredor nuevo, {len(corroborados)} corroborados por los dos feeds "
           f"(a confirmar) (en rama aparte, sin incorporar)")
 
 if __name__ == "__main__":
