@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-07T08:38:16+00:00",
-  "medidas_con_suficientes_casos": 203,
-  "pares_probados": 20503,
+  "corrida": "2026-10-07T12:44:52+00:00",
+  "medidas_con_suficientes_casos": 201,
+  "pares_probados": 20100,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3803,
-    "de_ellos_son_parentescos": 399
+    "por_que": "Con 20.100 pares y el umbral de siempre, alrededor de 1.005 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3795,
+    "de_ellos_son_parentescos": 397
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3404,
-  "anomalias_totales": 397,
+  "pistas_totales": 3398,
+  "anomalias_totales": 390,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -171,7 +171,7 @@
       "coeficiente": 0.947,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.738692944006934e-23,
+      "p": 7.036761158666696e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

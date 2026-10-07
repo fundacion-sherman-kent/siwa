@@ -1,17 +1,17 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-07T08:38:25+00:00",
+  "corrida": "2026-10-07T12:45:01+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
     "atrasado": "4 años o más"
   },
   "resumen": {
-    "indicadores_medidos": 196,
-    "mediana_antiguedad_anios": 1.0,
+    "indicadores_medidos": 193,
+    "mediana_antiguedad_anios": 1,
     "al_dia_1_anio_o_menos": 120,
-    "tibio_2_a_3_anios": 61,
-    "atrasado_4_anios_o_mas": 15,
+    "tibio_2_a_3_anios": 60,
+    "atrasado_4_anios_o_mas": 13,
     "series_detenidas_declaradas": 3,
     "archivos_leidos": 96,
     "archivos_sin_json_valido": [],
@@ -166,23 +166,6 @@
       "serie_detenida": true
     },
     {
-      "clave": "muertes_transito",
-      "rotulo": "Muertes de tránsito",
-      "eje": "Seguridad",
-      "seccion": "muertes-no-delito",
-      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
-      "unidad": "por cada 100.000 personas",
-      "colector": "oms",
-      "archivo": "oms.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "patentes_residentes",
       "rotulo": "Solicitudes de patente de residentes",
       "eje": "Defensa",
@@ -280,23 +263,6 @@
       "antiguedad_anios": 5,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "suicidio",
-      "rotulo": "Suicidio",
-      "eje": "Seguridad",
-      "seccion": "muertes-no-delito",
-      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
-      "unidad": "por cada 100.000 personas",
-      "colector": "oms",
-      "archivo": "oms.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 31,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -484,7 +450,7 @@
       "antiguedad_anios": 3,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 31,
-        "de_filas_con_iso": 33
+        "de_filas_con_iso": 31
       },
       "serie_detenida": false
     },
@@ -586,6 +552,40 @@
       "antiguedad_anios": 3,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "ocupacion_carcelaria",
+      "rotulo": "Ocupación carcelaria sobre la capacidad oficial",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de la capacidad oficial",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 20,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "seguridad_barrio",
+      "rotulo": "Personas que se sienten seguras en su barrio",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -678,23 +678,6 @@
       "serie_detenida": true
     },
     {
-      "clave": "muertes_transito",
-      "rotulo": "Muertes de tránsito",
-      "eje": "Seguridad",
-      "seccion": "muertes-no-delito",
-      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
-      "unidad": "por cada 100.000 personas",
-      "colector": "oms",
-      "archivo": "oms.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "patentes_residentes",
       "rotulo": "Solicitudes de patente de residentes",
       "eje": "Defensa",
@@ -792,23 +775,6 @@
       "antiguedad_anios": 5,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "suicidio",
-      "rotulo": "Suicidio",
-      "eje": "Seguridad",
-      "seccion": "muertes-no-delito",
-      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
-      "unidad": "por cada 100.000 personas",
-      "colector": "oms",
-      "archivo": "oms.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 31,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -996,7 +962,7 @@
       "antiguedad_anios": 3,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 31,
-        "de_filas_con_iso": 33
+        "de_filas_con_iso": 31
       },
       "serie_detenida": false
     },
@@ -1098,23 +1064,6 @@
       "antiguedad_anios": 3,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 25,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "mortalidad_materna",
-      "rotulo": "Mortalidad materna",
-      "eje": "Desarrollo",
-      "seccion": "salud",
-      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
-      "unidad": "por cada 100.000 nacidos vivos",
-      "colector": "oms",
-      "archivo": "oms.json",
-      "anio_mas_reciente": 2023,
-      "antiguedad_anios": 3,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 33,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
