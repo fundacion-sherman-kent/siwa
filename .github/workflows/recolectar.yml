@@ -226,6 +226,15 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/reliefweb.py
 
+      # ALERTAS DE DESASTRES EN TIEMPO REAL (GDACS, Comision Europea JRC + ONU).
+      # Asunto propio, NO es segunda fuente de ReliefWeb (mide alertas, no declaraciones).
+      # Gratis, sin clave. Diario: la ventana es movil de 12 meses.
+      - name: Alertas de desastres en tiempo real (GDACS)
+        id: gdacs
+        continue-on-error: true
+        if: env.COMPLETA == 'true'
+        run: python colectores/gdacs.py
+
       # LA SEGUNDA FUENTE DEL BLOQUE LABORAL. Dos de sus tres medidas ya las
       # publica otro organismo: estan para poder compararlas, no para
       # reemplazarlas. La regla de la casa pide dos fuentes por dato.

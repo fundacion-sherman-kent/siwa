@@ -232,6 +232,7 @@ CATEGORIAS = {
     "coima_policia": "soborno",
     "gasto_social_cepal": "condiciones",
     "desastres_onu": "riesgo-humanitario",
+    "desastres_gdacs": "riesgo-humanitario",   # GDACS: alertas de amenaza en tiempo real
     "corrupcion_politica": "democracia",
     "democracia_electoral": "democracia",
     "democracia_liberal": "democracia",

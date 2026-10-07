@@ -69,6 +69,12 @@ ASUNTOS = {
                                        "desconfianza_partidos", "confianza_municipio"],
     "gasto social": ["gasto_social_cepal"],
     "desastres declarados por la ONU": ["desastres_onu"],
+    # Asunto PROPIO, separado de «desastres declarados por la ONU»: GDACS cuenta
+    # ALERTAS automaticas de amenaza (naranja/roja) y ReliefWeb cuenta desastres
+    # DECLARADOS por la ONU. Miden cosas distintas; juntarlos declararia corroborado
+    # lo que no lo esta. Una sola fuente por ahora -agenda, no falla- (colector
+    # `gdacs`, 7/10/2026).
+    "alertas de desastres en tiempo real (GDACS)": ["desastres_gdacs"],
     "bosque y deforestación": ["bosque", "perdida_bosque"],
     "pobreza": ["pobreza", "pobreza_cepal", "pobreza_extrema", "vulnerabilidad"],
     "desigualdad": ["gini", "gini_cepal"],
