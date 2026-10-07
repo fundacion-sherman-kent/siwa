@@ -203,24 +203,24 @@ def dias_entre(a: str | None, b: str | None):
     except Exception:
         return None
 
-def corroborar(lugar: str, fecha: str | None, otro_feed: list[dict]) -> dict | None:
-    """Busca en el OTRO feed (titulares ya traídos, sin red extra) una nota del MISMO
-    lugar y dentro de ~2 semanas. Devuelve el titular corroborante o None. Conservador:
-    exige coincidencia de un token de lugar y, si ambos tienen fecha, cercanía temporal.
-    Es señal 'a confirmar': que dos feeds independientes hablen del mismo flujo, lugar y
-    semana es la regla de dos fuentes a nivel evento; confirmar el hecho es juicio humano."""
-    toks = tokens_lugar(lugar)
+def corroborar_evento(reg: dict, otros: list[dict]) -> dict | None:
+    """Coteja un operativo con los operativos que el OTRO feed confirmó en la MISMA familia
+    (no con titulares crudos: así el segundo respaldo es también un decomiso/operativo, no
+    una nota temática del mismo lugar). Pide tokens de lugar compartidos —nombres propios—
+    y, si ambos tienen fecha, ventana de ~2 semanas. Es señal 'a confirmar': que dos feeds
+    independientes den el mismo hecho es la regla de dos fuentes a nivel evento; confirmar
+    que es el mismo decomiso sigue siendo juicio humano (dos fuentes o rótulo, décimo hombre)."""
+    toks = set(tokens_lugar(reg.get("lugar")))
     if not toks:
         return None
-    for t in otro_feed:
-        tl = (t.get("titular") or "").lower()
-        if not any(tok in tl for tok in toks):
+    for o in otros:
+        if not (toks & set(tokens_lugar(o.get("lugar")))):
             continue
-        d = dias_entre(fecha, t.get("fecha"))
+        d = dias_entre(reg.get("fecha"), o.get("fecha"))
         if d is not None and d > 16:
             continue
-        return {"feed": t.get("feed"), "titular": t["titular"], "enlace": t["enlace"],
-                "fuente": t.get("fuente"), "fecha": t.get("fecha")}
+        return {"feed": o.get("feed"), "titular": o["titular"], "enlace": o["enlace"],
+                "fuente": o.get("fuente"), "fecha": o.get("fecha"), "corredor_id": o.get("corredor_id")}
     return None
 
 def main(salida: Path):
@@ -265,7 +265,7 @@ def main(salida: Path):
             continue
         crudos = extraer_json(resp).get("eventos", [])
         desc = {"indice": 0, "id": 0, "enlace": 0}
-        suman = 0
+        regs_fam = []
         for ev in crudos:
             i = ev.get("indice")
             if not isinstance(i, int) or i < 0 or i >= len(titulares):
@@ -279,16 +279,21 @@ def main(salida: Path):
             if not bl.comprobar(t["enlace"]).get("responde"):
                 desc["enlace"] += 1
                 continue  # el enlace tiene que responder
-            # CORROBORACIÓN: se busca el MISMO hecho en el OTRO feed (ya traído, sin red
-            # extra). Si aparece, se adjunta como posible segunda fuente, 'a confirmar'.
-            otro = gd if t.get("feed") == "google" else google
-            corr = corroborar(ev.get("lugar"), t["fecha"], otro)
-            reg = {"familia": fam, "corredor_id": cid, "titular": t["titular"], "enlace": t["enlace"],
-                   "fuente": t["fuente"], "feed": t.get("feed"), "fecha": t["fecha"],
-                   "lugar": ev.get("lugar"), "que": ev.get("que"),
-                   "corroborado_a_confirmar": bool(corr), "posible_segunda_fuente": corr}
-            (sin_corredor if cid == "ninguno" else eventos).append(reg)
-            suman += 1
+            regs_fam.append({"familia": fam, "corredor_id": cid, "titular": t["titular"], "enlace": t["enlace"],
+                             "fuente": t["fuente"], "feed": t.get("feed"), "fecha": t["fecha"],
+                             "lugar": ev.get("lugar"), "que": ev.get("que")})
+        # CORROBORACIÓN EVENTO-A-EVENTO: cada operativo se coteja con los operativos que el
+        # OTRO feed confirmó en esta familia (no con titulares crudos). Si coinciden en lugar
+        # y ventana, lleva la posible segunda fuente, 'a confirmar'.
+        ev_feed = {"google": [r for r in regs_fam if r.get("feed") == "google"],
+                   "gdelt":  [r for r in regs_fam if r.get("feed") == "gdelt"]}
+        for r in regs_fam:
+            otros = ev_feed["gdelt" if r.get("feed") == "google" else "google"]
+            corr = corroborar_evento(r, otros)
+            r["corroborado_a_confirmar"] = bool(corr)
+            r["posible_segunda_fuente"] = corr
+            (sin_corredor if r["corredor_id"] == "ninguno" else eventos).append(r)
+        suman = len(regs_fam)
         print(f"  {fam} [{_modelo}]: {len(titulares)} titulares, modelo devolvió {len(crudos)} eventos crudos, "
               f"{suman} válidos (descartados: índice {desc['indice']}, id {desc['id']}, enlace {desc['enlace']})")
         if not crudos:  # para diagnosticar un parseo o un prompt que no rinde
