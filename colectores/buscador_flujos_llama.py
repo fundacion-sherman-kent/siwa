@@ -30,20 +30,37 @@ RAIZ = AQUI.parent
 COLA = RAIZ / "datos" / "publico" / "propuestas-flujos.json"
 HOY = dt.datetime.now(dt.timezone.utc).date()
 MESES_RECIENTE = 14           # un titular es "reciente" si es de los últimos ~14 meses
-MAX_CORREDORES = 14           # tope por corrida, para no abusar del modelo gratuito
-MAX_TITULARES = 8             # titulares por corredor que se le pasan al modelo
+MAX_TITULARES_QUERY = 25      # titulares por búsqueda
+MAX_TITULARES_FAM = 30        # titulares por familia que se le pasan al modelo
+ANIO = HOY.year
+
+# BÚSQUEDAS AMPLIAS por familia: traen muchos decomisos/operativos recientes de la
+# región, y después Llama los mapea a los corredores conocidos. Es más productivo que
+# buscar por corredor (demasiado angosto: volvía con 0). En castellano, con el año.
+BROAD = {
+    "narcotrafico": ["incautación de cocaína " + str(ANIO), "decomiso de droga " + str(ANIO) + " sudamérica",
+                     "narcotráfico decomiso " + str(ANIO)],
+    "armas": ["incautación de armas de fuego " + str(ANIO), "tráfico de armas decomiso " + str(ANIO)],
+    "migracion": ["tráfico de migrantes operativo " + str(ANIO), "rescate de migrantes " + str(ANIO)],
+    "minerales": ["oro ilegal decomiso " + str(ANIO), "minería ilegal operativo " + str(ANIO)],
+    "especies": ["tráfico de especies decomiso " + str(ANIO), "incautación de fauna silvestre " + str(ANIO)],
+    "contrabando": ["contrabando decomiso " + str(ANIO), "mercadería de contrabando incautación " + str(ANIO)],
+    "trata": ["trata de personas rescate " + str(ANIO), "operativo trata de personas " + str(ANIO)],
+}
 
 SISTEMA = (
-    "Sos un analista de inteligencia de fuentes abiertas. Te paso titulares de prensa y un "
-    "corredor de un flujo ilícito (origen → destino) de América Latina y el Caribe. Decime, en "
-    "JSON, SÓLO los titulares que describan un OPERATIVO o DECOMISO REAL y reciente de ese flujo "
-    "en ese corredor o sus tramos. Formato: {\"eventos\":[{\"titular\":str,\"lugar\":str,"
-    "\"fecha\":str|null,\"que\":str,\"indice\":int}]}. `indice` es la posición del titular en la "
-    "lista (empezando en 0). Si ninguno sirve, devolvé {\"eventos\":[]}. No inventes: no agregues "
-    "titulares que no estén en la lista. Respondé sólo el JSON."
+    "Sos un analista de inteligencia de fuentes abiertas de América Latina y el Caribe. Te paso una "
+    "FAMILIA de flujo ilícito, una lista de CORREDORES conocidos (id: origen → destino) y una lista de "
+    "TITULARES de prensa recientes. Por cada titular que describa un OPERATIVO o DECOMISO REAL y "
+    "reciente de esa familia, devolvé en JSON a qué corredor corresponde (su id) o \"ninguno\" si no "
+    "calza con ninguno (sería un corredor nuevo). Formato: {\"eventos\":[{\"indice\":int,\"corredor_id\":str,"
+    "\"lugar\":str,\"fecha\":str|null,\"que\":str}]}. `indice` es la posición del titular en la lista "
+    "(desde 0). Descartá lo que NO sea un decomiso/operativo real (opinión, política, condena judicial "
+    "vieja, repetición). No inventes: no agregues titulares que no estén en la lista, ni ids que no estén "
+    "en los corredores (salvo \"ninguno\"). Respondé sólo el JSON."
 )
 
-def rss(query: str) -> list[dict]:
+def rss(query: str, limite: int = MAX_TITULARES_QUERY) -> list[dict]:
     """Titulares recientes de Google News RSS (gratis, sin clave)."""
     url = ("https://news.google.com/rss/search?q=" + urllib.parse.quote(query)
            + "&hl=es-419&gl=AR&ceid=AR:es")
@@ -74,7 +91,7 @@ def rss(query: str) -> list[dict]:
         if titulo and link and reciente:
             out.append({"titular": titulo, "enlace": link, "fuente": fuente,
                         "fecha": fecha.isoformat() if fecha else None})
-    return out[:MAX_TITULARES]
+    return out[:limite]
 
 def extraer_json(texto: str):
     m = re.search(r"\{.*\}", texto or "", re.S)
@@ -90,55 +107,62 @@ def main(salida: Path):
         print("No hay cola (propuestas-flujos.json). Corré antes herramientas/propuestas-flujos.py.")
         return
     cola = json.loads(COLA.read_text(encoding="utf-8"))
-    # aplanar a corredores, priorizando familias en alta, los más viejos primero
-    objetivos = []
-    for p in sorted(cola.get("propuestas", []), key=lambda x: x["prioridad"] != "alta"):
-        for c in p.get("corredores_a_refrescar", []):
-            objetivos.append({**c, "familia": p["familia"]})
-    objetivos = objetivos[:MAX_CORREDORES]
+    corr_por_fam = {p["familia"]: p.get("corredores_a_refrescar", []) for p in cola.get("propuestas", [])}
 
-    propuestas = []
-    for c in objetivos:
-        titulares = rss(c["terminos_de_busqueda"])
+    eventos, sin_corredor, titulares_totales = [], [], 0
+    for fam, consultas in BROAD.items():
+        # 1) MUCHOS titulares de la familia, de varias búsquedas amplias, deduplicados
+        vistos, titulares = set(), []
+        for q in consultas:
+            for t in rss(q):
+                if t["enlace"] in vistos:
+                    continue
+                vistos.add(t["enlace"]); titulares.append(t)
+        titulares = titulares[:MAX_TITULARES_FAM]
+        titulares_totales += len(titulares)
         if not titulares:
             continue
-        lista = "\n".join(f"{i}. {t['titular']} ({t['fuente']}, {t['fecha']})" for i, t in enumerate(titulares))
-        usuario = (f"Flujo: {c['familia']}. Corredor: {c['corredor']} (ruta {c['id']}, registrada en "
-                   f"{c.get('desde')}).\nTitulares:\n{lista}")
+        # 2) Llama mapea cada decomiso real al corredor conocido (o "ninguno" = corredor nuevo)
+        corrs = corr_por_fam.get(fam, [])
+        ids_validos = {c["id"] for c in corrs}
+        lista_corr = "\n".join(f"- {c['id']}: {c['corredor']}" for c in corrs) or "(sin corredores cargados)"
+        lista_tit = "\n".join(f"{i}. {t['titular']} ({t['fuente']}, {t['fecha']})" for i, t in enumerate(titulares))
+        usuario = f"Familia: {fam}.\nCorredores conocidos:\n{lista_corr}\n\nTitulares:\n{lista_tit}"
         try:
             _modelo, resp = bl.conversar(SISTEMA, usuario)
         except Exception as e:
-            print(f"  {c['id']}: modelo no disponible ({e}); se omite")
+            print(f"  {fam}: modelo no disponible ({e}); se omite")
             continue
-        eventos = extraer_json(resp).get("eventos", [])
-        confirmados = []
-        for ev in eventos:
+        for ev in extraer_json(resp).get("eventos", []):
             i = ev.get("indice")
             if not isinstance(i, int) or i < 0 or i >= len(titulares):
-                continue  # no inventado: tiene que apuntar a un titular real de la lista
+                continue  # no inventado: apunta a un titular real de la lista
+            cid = ev.get("corredor_id")
+            if cid not in ids_validos and cid != "ninguno":
+                continue  # no inventado: el id tiene que existir (o ser "ninguno")
             t = titulares[i]
             if not bl.comprobar(t["enlace"]).get("ok"):
                 continue  # el enlace tiene que responder
-            confirmados.append({"titular": t["titular"], "enlace": t["enlace"], "fuente": t["fuente"],
-                                "fecha": t["fecha"], "lugar": ev.get("lugar"), "que": ev.get("que")})
-        if confirmados:
-            propuestas.append({"ruta": c["id"], "familia": c["familia"], "corredor": c["corredor"],
-                               "registrada_en": c.get("desde"), "eventos_candidatos": confirmados})
+            reg = {"familia": fam, "corredor_id": cid, "titular": t["titular"], "enlace": t["enlace"],
+                   "fuente": t["fuente"], "fecha": t["fecha"], "lugar": ev.get("lugar"), "que": ev.get("que")}
+            (sin_corredor if cid == "ninguno" else eventos).append(reg)
 
     salida.mkdir(parents=True, exist_ok=True)
     doc = {
-        "que_es": "Candidatos de eventos recientes (operativos/decomisos) para refrescar corredores de flujos "
-                  "ilícitos atrasados. Los propone el scanner Llama desde titulares de prensa; NINGUNO está "
-                  "incorporado ni calificado. Requieren dos fuentes o rótulo, décimo hombre y visto bueno.",
+        "que_es": "Candidatos de eventos recientes (operativos/decomisos) de flujos ilícitos, hallados por "
+                  "búsqueda amplia por familia y mapeados por Llama a los corredores conocidos. Los que no calzan "
+                  "con ninguno van aparte como candidatos a corredor NUEVO. NINGUNO está incorporado ni calificado: "
+                  "dos fuentes o rótulo, décimo hombre y visto bueno antes de entrar al mapa.",
         "corrida": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
-        "resumen": {"corredores_mirados": len(objetivos), "con_candidatos": len(propuestas),
-                    "eventos": sum(len(p["eventos_candidatos"]) for p in propuestas)},
-        "propuestas": propuestas,
+        "resumen": {"familias_miradas": len(BROAD), "titulares_mirados": titulares_totales,
+                    "eventos_mapeados_a_corredor": len(eventos), "candidatos_corredor_nuevo": len(sin_corredor)},
+        "eventos": eventos,
+        "candidatos_corredor_nuevo": sin_corredor,
     }
     (salida / f"flujos-{HOY.isoformat()}.json").write_text(
         json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"flujos-{HOY}: {doc['resumen']['con_candidatos']} corredores con candidatos, "
-          f"{doc['resumen']['eventos']} eventos (en rama aparte, sin incorporar)")
+    print(f"flujos-{HOY}: {titulares_totales} titulares mirados, {len(eventos)} eventos mapeados a corredor, "
+          f"{len(sin_corredor)} candidatos a corredor nuevo (en rama aparte, sin incorporar)")
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
