@@ -149,7 +149,10 @@ def recientes(portal: dict) -> list[dict]:
     base = portal["base"].rstrip("/")
     salida = []
     if portal["tipo"] == "CKAN":
-        d = pedir_json(f"{base}/api/3/action/package_search?sort=metadata_modified%20desc&rows={POR_PORTAL}")
+        # Un portal multipaís (HDX) acota con `fq` a los Estados del padrón; los
+        # portales por-país no lo traen y la consulta queda igual que siempre.
+        extra = ("&fq=" + urllib.parse.quote(portal["fq"])) if portal.get("fq") else ""
+        d = pedir_json(f"{base}/api/3/action/package_search?sort=metadata_modified%20desc&rows={POR_PORTAL}{extra}")
         for p in (d.get("result") or {}).get("results", []):
             salida.append({
                 "id": f"{portal['iso']}:{p.get('name')}",
