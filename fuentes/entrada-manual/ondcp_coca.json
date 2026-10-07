@@ -1,0 +1,26 @@
+{
+ "que_es": "Estimaciones oficiales de EE.UU. (ONDCP, Oficina de Politica Nacional de Control de Drogas de la Casa Blanca) de cultivo de coca (hectareas) y produccion potencial de cocaina pura (toneladas metricas) para Colombia, Peru y Bolivia. Es la SEGUNDA FUENTE, independiente de UNODC: metodologia propia del gobierno de EE.UU. (CNC), distinta de la de UNODC. No comparten procedencia (a diferencia de CICAD).",
+ "como_se_actualiza": "File-drop. La ONDCP publica un comunicado anual con la serie de los tres paises. Cuando salga una edicion nueva, se agregan los anios a 'series' y la edicion a 'ediciones', y el colector coca_ondcp.py la toma. Ultima edicion publica hallada: 2022 (datos 2021). Las cifras de 2020 son las REVISADAS en la edicion 2022.",
+ "ediciones": [
+  {"publicada": 2021, "datos_hasta": 2020, "url": "https://bidenwhitehouse.archives.gov/ondcp/briefing-room/2021/07/16/ondcp-releases-data-on-coca-cultivation-and-potential-cocaine-production-in-the-andean-region"},
+  {"publicada": 2022, "datos_hasta": 2021, "url": "https://bidenwhitehouse.archives.gov/ondcp/briefing-room/2022/07/14/ondcp-releases-data-on-coca-cultivation-and-production-in-the-andean-region"}
+ ],
+ "unidades": {"ha": "hectareas de cultivo de coca", "cocaina_t": "toneladas metricas de produccion potencial de cocaina pura"},
+ "series": {
+  "COL": [
+   {"anio": 2019, "ha": 212000, "cocaina_t": 918},
+   {"anio": 2020, "ha": 245000, "cocaina_t": 994},
+   {"anio": 2021, "ha": 234000, "cocaina_t": 972}
+  ],
+  "PER": [
+   {"anio": 2019, "ha": 72000, "cocaina_t": 649},
+   {"anio": 2020, "ha": 88200, "cocaina_t": 814},
+   {"anio": 2021, "ha": 84400, "cocaina_t": 785}
+  ],
+  "BOL": [
+   {"anio": 2019, "ha": 42180, "cocaina_t": 301},
+   {"anio": 2020, "ha": 39400, "cocaina_t": 312},
+   {"anio": 2021, "ha": 39700, "cocaina_t": 317}
+  ]
+ }
+}

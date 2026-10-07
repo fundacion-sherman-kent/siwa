@@ -541,6 +541,14 @@ jobs:
         continue-on-error: true
         run: python colectores/drogas.py
 
+      # Segunda fuente del cultivo de coca: estimacion oficial de EE.UU. (ONDCP),
+      # file-drop, productor independiente de UNODC. Lleva "drogas" a dos fuentes.
+      - name: Cultivo de coca · segunda fuente (ONDCP, EE.UU.)
+        id: coca_ondcp
+        if: env.COMPLETA == 'true'
+        continue-on-error: true
+        run: python colectores/coca_ondcp.py
+
       # La segunda fuente de homicidios. Serie anual: corrida diaria.
       - name: Homicidios · segunda fuente (OMS)
         id: oms_salud

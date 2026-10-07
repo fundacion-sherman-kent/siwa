@@ -87,8 +87,14 @@ ASUNTOS = {
     # declarado corroborado un asunto que depende de una sola fuente.
     "hidrocarburos": ["produccion_petroleo", "produccion_gas", "produccion_carbon",
                       "reservas_petroleo", "produccion_petroleo_eia", "produccion_gas_eia"],
-    "minerales": ["produccion_litio", "cuota_mineral_mundial",
-                  "minerales_escala_mundial"],
+    # Produccion y reservas de cobre, niquel, cobalto y tierras raras: todas del
+    # servicio geologico de EE.UU. (USGS), el MISMO productor que el litio. Suman
+    # materias al asunto pero no una segunda fuente -es una sola mano-, asi que
+    # "minerales" sigue en la agenda de busqueda, que es lo correcto (2026-10-07).
+    "minerales": ["produccion_litio", "cuota_mineral_mundial", "minerales_escala_mundial",
+                  "produccion_cobre", "reservas_cobre", "produccion_niquel", "reservas_niquel",
+                  "produccion_cobalto", "reservas_cobalto",
+                  "produccion_tierras_raras", "reservas_tierras_raras"],
     "empleo informal": ["empleo_informal", "empleo_informal_oit"],
     "desempleo juvenil": ["desempleo_joven", "desempleo_joven_oit"],
     "desempleo total": ["desempleo_oit", "desempleo_cepal"],
@@ -119,8 +125,11 @@ ASUNTOS = {
                                    "migracion_neta", "remesas"],
     "trata de personas": ["trata_victimas", "trata_sexual", "trata_trabajo", "trata_personas",
                           "trata_nivel"],
-    "drogas": ["incautaciones_cocaina", "cultivo_coca", "droga_cocaina", "droga_heroina",
-               "droga_cannabis", "droga_sinteticas"],
+    # `cultivo_coca_ondcp` es la SEGUNDA fuente del cultivo de coca: la estimacion
+    # oficial de EE.UU. (ONDCP, colector `coca_ondcp`), productor distinto de UNODC y
+    # con metodologia propia -no comparte procedencia-. Lleva el asunto a dos fuentes.
+    "drogas": ["incautaciones_cocaina", "cultivo_coca", "cultivo_coca_ondcp",
+               "droga_cocaina", "droga_heroina", "droga_cannabis", "droga_sinteticas"],
     # Asunto propio y no dentro de «economías ilícitas»: ese renglón mide la
     # PERCEPCIÓN/índices de terceros sobre tráfico de armas (trafico_armas, en
     # V-Dem), y esto mide la ACCIÓN POLICIAL de cada Estado sobre su propio
@@ -300,6 +309,7 @@ CANONICOS = [
     ("fondo monetario internacional", "fmi"), ("fmi y banco mundial", "fmi"),
     ("comtrade", "naciones unidas comtrade"),
     ("oficina de las naciones unidas contra la droga", "unodc"), ("informe mundial sobre las drogas", "unodc"),
+    ("ondcp", "ondcp"),  # Casa Blanca (EE.UU.): segunda fuente del cultivo de coca, productor distinto de UNODC
     ("observatorio mundial de la salud", "oms"),
     ("cepalstat", "cepal"),
     ("instituto de estadística de la unesco", "unesco"),
@@ -330,7 +340,13 @@ def main() -> None:
     for c in datos:
         for k in c["claves"]:
             propio = (c.get("de_cada_uno") or {}).get(k) or c["fuente"]
-            de_quien.setdefault(k, set()).add(productor(propio))
+            p = productor(propio)
+            # UN ORIGEN SIN NOMBRE NO ES UNA FUENTE Y NO CORROBORA. Salidas de
+            # herramienta (p. ej. frescura.json) traen un array `indicadores` SIN
+            # procedencia: si se contaran, sumarian un productor fantasma "sin nombre"
+            # y declararian corroborado lo que tiene una sola fuente (2026-10-07).
+            if p and p != "sin nombre":
+                de_quien.setdefault(k, set()).add(p)
 
     # Y las que no salen de un catálogo, que el control no veía y son siete.
     a_medida = 0

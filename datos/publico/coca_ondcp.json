@@ -1,0 +1,190 @@
+{
+  "procedencia": {
+    "colector": "coca_ondcp",
+    "capa": "publico",
+    "obtenido_en": "2026-10-07T21:23:18+00:00",
+    "fuente": {
+      "nombre": "ONDCP -- Oficina de Politica Nacional de Control de Drogas de la Casa Blanca (EE.UU.), estimacion de cultivo de coca y produccion potencial de cocaina en la region andina",
+      "url": "https://bidenwhitehouse.archives.gov/ondcp/briefing-room/2022/07/14/ondcp-releases-data-on-coca-cultivation-and-production-in-the-andean-region"
+    },
+    "calificacion": {
+      "fiabilidad": "B",
+      "credibilidad": 2,
+      "corroborado": false,
+      "nota": "Estimacion oficial del gobierno de EE.UU. (ONDCP / Crime and Narcotics Center). Fiabilidad B: fuente oficial con historial. Credibilidad 2: es una estimacion por teledeteccion y modelo, metodologicamente distinta de UNODC y no verificable de forma independiente. Entra como SEGUNDA fuente del cultivo de coca: corrobora a UNODC por ser productor distinto, sin reemplazarlo."
+    },
+    "vacios_declarados": [
+      "Solo Colombia, Peru y Bolivia: es donde EE.UU. publica la estimacion de coca.",
+      "La cifra de EE.UU. NO coincide con la de UNODC -otra metodologia- y no debe mezclarse en una sola serie: son dos mediciones del mismo hecho.",
+      "No suma frescura: la ultima edicion publica de ONDCP llega a 2021, mas vieja que UNODC. Aporta independencia, no actualidad.",
+      "Las hectareas de 2020 son las REVISADAS en la edicion 2022; una estimacion de EE.UU. de un ano se corrige en la edicion siguiente."
+    ],
+    "restriccion_de_uso": null,
+    "cantidad": 3,
+    "atribucion": {
+      "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
+      "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
+      "sitio": "https://siwa.fundacionkent.org/sitio/index.html",
+      "uso": "Acceso libre y gratuito. El aporte de la Fundación —recolección, calificación de fuentes y declaración de vacíos— se publica bajo licencia Creative Commons Atribución 4.0 Internacional (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/. Se permite reproducir, redistribuir y derivar citando la fuente de este modo: «SIWA, Fundación Sherman Kent». Los datos de base pertenecen a los productores citados en cada indicador y conservan la licencia de su fuente; cuando una fuente impone condiciones adicionales, se declaran en «restriccion_de_uso».",
+      "licencia": "CC BY 4.0",
+      "licencia_url": "https://creativecommons.org/licenses/by/4.0/",
+      "no_implica": "La cita no implica aval de la Fundación sobre el uso que se haga de estos datos, ni sobre las conclusiones ajenas."
+    }
+  },
+  "registros": [
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "indicadores": {
+        "cultivo_coca_ondcp": {
+          "valor": 234000,
+          "anio": 2021,
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 212000
+            },
+            {
+              "anio": 2020,
+              "valor": 245000
+            },
+            {
+              "anio": 2021,
+              "valor": 234000
+            }
+          ],
+          "origen": "ONDCP (Casa Blanca, EE.UU.)"
+        }
+      }
+    },
+    {
+      "iso": "PER",
+      "pais": "Peru",
+      "indicadores": {
+        "cultivo_coca_ondcp": {
+          "valor": 84400,
+          "anio": 2021,
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 72000
+            },
+            {
+              "anio": 2020,
+              "valor": 88200
+            },
+            {
+              "anio": 2021,
+              "valor": 84400
+            }
+          ],
+          "origen": "ONDCP (Casa Blanca, EE.UU.)"
+        }
+      }
+    },
+    {
+      "iso": "BOL",
+      "pais": "Bolivia",
+      "indicadores": {
+        "cultivo_coca_ondcp": {
+          "valor": 39700,
+          "anio": 2021,
+          "serie": [
+            {
+              "anio": 2019,
+              "valor": 42180
+            },
+            {
+              "anio": 2020,
+              "valor": 39400
+            },
+            {
+              "anio": 2021,
+              "valor": 39700
+            }
+          ],
+          "origen": "ONDCP (Casa Blanca, EE.UU.)"
+        }
+      }
+    }
+  ],
+  "indicadores": [
+    {
+      "clave": "cultivo_coca_ondcp",
+      "nombre": "Cultivo de coca (estimacion de EE.UU., ONDCP)",
+      "unidad": "hectareas",
+      "origen": "ONDCP (Casa Blanca, EE.UU.)",
+      "rotulo": "Segunda fuente, independiente de UNODC",
+      "hasta_anio": 2021,
+      "rezago_anios": 5,
+      "seccion": "seguridad-flujos-ilicitos",
+      "seccion_rotulo": "seguridad-flujos-ilicitos"
+    }
+  ],
+  "ediciones": [
+    {
+      "publicada": 2021,
+      "datos_hasta": 2020,
+      "url": "https://bidenwhitehouse.archives.gov/ondcp/briefing-room/2021/07/16/ondcp-releases-data-on-coca-cultivation-and-potential-cocaine-production-in-the-andean-region"
+    },
+    {
+      "publicada": 2022,
+      "datos_hasta": 2021,
+      "url": "https://bidenwhitehouse.archives.gov/ondcp/briefing-room/2022/07/14/ondcp-releases-data-on-coca-cultivation-and-production-in-the-andean-region"
+    }
+  ],
+  "produccion_cocaina_t": {
+    "COL": [
+      {
+        "anio": 2019,
+        "ha": 212000,
+        "cocaina_t": 918
+      },
+      {
+        "anio": 2020,
+        "ha": 245000,
+        "cocaina_t": 994
+      },
+      {
+        "anio": 2021,
+        "ha": 234000,
+        "cocaina_t": 972
+      }
+    ],
+    "PER": [
+      {
+        "anio": 2019,
+        "ha": 72000,
+        "cocaina_t": 649
+      },
+      {
+        "anio": 2020,
+        "ha": 88200,
+        "cocaina_t": 814
+      },
+      {
+        "anio": 2021,
+        "ha": 84400,
+        "cocaina_t": 785
+      }
+    ],
+    "BOL": [
+      {
+        "anio": 2019,
+        "ha": 42180,
+        "cocaina_t": 301
+      },
+      {
+        "anio": 2020,
+        "ha": 39400,
+        "cocaina_t": 312
+      },
+      {
+        "anio": 2021,
+        "ha": 39700,
+        "cocaina_t": 317
+      }
+    ]
+  },
+  "licencia": "Obra del gobierno de EE.UU.: dominio publico. Se cita la fuente."
+}
