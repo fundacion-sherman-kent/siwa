@@ -141,7 +141,7 @@ def main(salida: Path):
             if cid not in ids_validos and cid != "ninguno":
                 continue  # no inventado: el id tiene que existir (o ser "ninguno")
             t = titulares[i]
-            if not bl.comprobar(t["enlace"]).get("ok"):
+            if not bl.comprobar(t["enlace"]).get("responde"):
                 continue  # el enlace tiene que responder
             reg = {"familia": fam, "corredor_id": cid, "titular": t["titular"], "enlace": t["enlace"],
                    "fuente": t["fuente"], "fecha": t["fecha"], "lugar": ev.get("lugar"), "que": ev.get("que")}
