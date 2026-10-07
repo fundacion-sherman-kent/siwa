@@ -221,7 +221,7 @@ def main(salida: Path):
         lista_tit = "\n".join(f"{i}. {t['titular']} ({t['fuente']}, {t['fecha']})" for i, t in enumerate(titulares))
         usuario = f"Familia: {fam}.\nCorredores conocidos:\n{lista_corr}\n\nTitulares:\n{lista_tit}"
         try:
-            _modelo, resp = bl.conversar(SISTEMA, usuario)
+            resp, _modelo = bl.conversar(SISTEMA, usuario)  # conversar devuelve (texto, etiqueta)
         except Exception as e:
             print(f"  {fam}: modelo no disponible ({e}); se omite")
             continue
@@ -251,13 +251,38 @@ def main(salida: Path):
         if not crudos:  # para diagnosticar un parseo o un prompt que no rinde
             print(f"    (muestra de respuesta: {str(resp)[:200]!r})", file=sys.stderr)
 
-    # CORROBORACIÓN: un corredor queda "con dos fuentes" cuando lo respaldan eventos de
-    # los DOS feeds independientes (Google News y GDELT). Es la señal que mira el curador;
-    # la confirmación final sigue siendo juicio humano (dos fuentes o rótulo, décimo hombre).
+    # CORROBORACIÓN POR CORREDOR CONOCIDO: un corredor queda "con dos fuentes" cuando lo
+    # respaldan eventos de los DOS feeds independientes. (Suele dar vacío: los titulares
+    # amplios rara vez nombran los dos extremos de un corredor, así que caen como candidatos.)
     feeds_por_corredor: dict[str, set] = {}
     for e in eventos:
         feeds_por_corredor.setdefault(e["corredor_id"], set()).add(e.get("feed"))
     corroborados = sorted(c for c, fs in feeds_por_corredor.items() if {"google", "gdelt"} <= fs)
+
+    # COINCIDENCIA ENTRE FEEDS: el MISMO hecho (mismo flujo, mismo lugar, misma semana)
+    # reportado por los DOS feeds independientes. Es la señal de dos fuentes a nivel EVENTO
+    # —vale también para los candidatos a corredor nuevo—. Conservador a propósito: si los
+    # lugares o las fechas no coinciden, no se declara. Es "a confirmar": el curador decide.
+    def _lugar(e):
+        return re.split(r"[,(]", str(e.get("lugar") or ""))[0].strip().lower()
+    def _semana(e):
+        try:
+            y, w, _ = dt.date.fromisoformat(e["fecha"]).isocalendar()
+            return f"{y}-S{w:02d}"
+        except Exception:
+            return None
+    cubos: dict[tuple, dict] = {}
+    for e in eventos + sin_corredor:
+        lg, sem = _lugar(e), _semana(e)
+        if not lg or not sem:
+            continue
+        c = cubos.setdefault((e["familia"], lg, sem), {"feeds": set(), "hechos": []})
+        c["feeds"].add(e.get("feed"))
+        c["hechos"].append({"feed": e.get("feed"), "titular": e["titular"], "enlace": e["enlace"],
+                            "fuente": e["fuente"], "fecha": e["fecha"], "corredor_id": e["corredor_id"]})
+    coincidencias = [{"familia": k[0], "lugar": k[1], "semana": k[2], "hechos": v["hechos"]}
+                     for k, v in cubos.items() if {"google", "gdelt"} <= v["feeds"]]
+    coincidencias.sort(key=lambda x: (x["familia"], x["semana"]))
 
     salida.mkdir(parents=True, exist_ok=True)
     doc = {
@@ -270,7 +295,9 @@ def main(salida: Path):
         "resumen": {"familias_miradas": len(BROAD), "titulares_mirados": titulares_totales,
                     "titulares_por_feed": por_feed,
                     "eventos_mapeados_a_corredor": len(eventos), "candidatos_corredor_nuevo": len(sin_corredor),
-                    "corredores_corroborados_por_dos_feeds": corroborados},
+                    "corredores_corroborados_por_dos_feeds": corroborados,
+                    "coincidencias_entre_feeds_a_confirmar": len(coincidencias)},
+        "coincidencias_entre_feeds": coincidencias,
         "eventos": eventos,
         "candidatos_corredor_nuevo": sin_corredor,
     }
@@ -278,8 +305,8 @@ def main(salida: Path):
         json.dumps(doc, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"flujos-{HOY}: {titulares_totales} titulares mirados "
           f"(Google {por_feed['google']} + GDELT {por_feed['gdelt']}), {len(eventos)} eventos mapeados a corredor, "
-          f"{len(corroborados)} corredores corroborados por los dos feeds, "
-          f"{len(sin_corredor)} candidatos a corredor nuevo (en rama aparte, sin incorporar)")
+          f"{len(sin_corredor)} candidatos a corredor nuevo, {len(coincidencias)} coincidencias entre feeds "
+          f"(a confirmar) (en rama aparte, sin incorporar)")
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
