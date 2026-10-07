@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-07T16:27:27+00:00",
-  "medidas_con_suficientes_casos": 201,
-  "pares_probados": 20100,
+  "corrida": "2026-10-07T18:42:13+00:00",
+  "medidas_con_suficientes_casos": 202,
+  "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.100 pares y el umbral de siempre, alrededor de 1.005 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3825,
-    "de_ellos_son_parentescos": 397
+    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3828,
+    "de_ellos_son_parentescos": 399
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3428,
-  "anomalias_totales": 390,
+  "pistas_totales": 3429,
+  "anomalias_totales": 392,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -242,19 +242,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.937,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.312675709547806e-21,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -276,6 +263,19 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 2.631703612429346e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.934,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.5414427304260642e-20,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -502,19 +502,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.911,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 4.790406862972229e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "migrantes",
       "b": "ransomware:grupos_distintos",
       "rotulo_a": "Población migrante que el país aloja",
@@ -523,6 +510,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 6.051875636404359e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.909,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.898526594154613e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -723,19 +723,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.897,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 8.079173076295353e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Corrupción política",
@@ -744,6 +731,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 9.621070309355055e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.895,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 1.113723084791273e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

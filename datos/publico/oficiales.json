@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-10-07T12:41:30+00:00",
+    "obtenido_en": "2026-10-07T18:38:04+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "4 consultas fallaron en esta corrida: ARG/Delito registrado: HTTPError; ARG/Contratación pública: HTTPError; ARG/Integridad: HTTPError; ARG/Presupuesto: HTTPError."
+      "2 consultas fallaron en esta corrida: ARG/Contratación pública: HTTPError; ARG/Presupuesto: HTTPError."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -64,14 +64,14 @@
               "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             },
             {
-              "titulo": "CONTRATACION CEPITA",
-              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
-              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
-            },
-            {
               "titulo": "Contratacion Alcaldía Chitaraque",
               "organismo": "Alcaldía de Chitaraque",
               "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
+            },
+            {
+              "titulo": "CONTRATACION CEPITA",
+              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
+              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
             }
           ]
         },
@@ -82,14 +82,14 @@
           "cantidad": 609,
           "ejemplos": [
             {
-              "titulo": "Presupuesto de Gastos",
-              "organismo": "INDUSTRIA MILITAR",
-              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
-            },
-            {
               "titulo": "Presupuesto de Ingresos",
               "organismo": "INDUSTRIA MILITAR",
               "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
+            },
+            {
+              "titulo": "Presupuesto de Gastos",
+              "organismo": "INDUSTRIA MILITAR",
+              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
             },
             {
               "titulo": "Presupuesto DADEP",
@@ -120,14 +120,14 @@
               "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
             },
             {
-              "titulo": "Delitos Informaticos V1",
-              "organismo": "Damicruz",
-              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
-            },
-            {
               "titulo": "Reporte  Delitos sexuales Policía Nacional",
               "organismo": "DIJIN",
               "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
+            },
+            {
+              "titulo": "Delitos Informaticos V1",
+              "organismo": "Damicruz",
+              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
             }
           ]
         },
@@ -1121,6 +1121,34 @@
       "portal": "https://datos.gob.ar",
       "materias": [
         {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 17,
+          "ejemplos": [
+            {
+              "titulo": "Codificación de delitos del Código Penal Argentino",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/codificacion-de-delitos-del-codigo-penal-argentino"
+            },
+            {
+              "titulo": "Delitos contra la propiedad. Sistema de Alerta Temprana. Estadísticas criminales",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/delitos-contra-la-propiedad-sistema-de-alerta-temprana-estadisticas-criminales"
+            },
+            {
+              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Orientaciones",
+              "organismo": "Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/lucha-contra-la-trata-de-personas-llamados-linea-145-orientaciones"
+            },
+            {
+              "titulo": "SNIC - Departamental. Estadísticas criminales en la República Argentina por departamentos",
+              "organismo": "Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/snic-departamental-estadisticas-criminales-en-la-republica-argentina-por-departamentos"
+            }
+          ]
+        },
+        {
           "materia": "Violencia organizada",
           "eje": "Seguridad",
           "consulta": "homicidio",
@@ -1170,9 +1198,16 @@
               "enlace": "https://datos.gob.ar/dataset/turismo-internacional-total-pais"
             }
           ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 0,
+          "ejemplos": []
         }
       ],
-      "conjuntos_hallados": 12
+      "conjuntos_hallados": 29
     },
     {
       "iso": "PRY",
@@ -1264,7 +1299,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4542,
+    "conjuntos_hallados": 4559,
     "materias_consultadas": 6,
     "oficinas_que_responden": 26,
     "estados_con_alguna_fuente_oficial": 28
