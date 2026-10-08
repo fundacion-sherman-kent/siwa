@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-08T16:28:43+00:00",
+  "corrida": "2026-10-08T18:38:41+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3802,
-    "de_ellos_son_parentescos": 399
+    "sobreviven": 3766,
+    "de_ellos_son_parentescos": 397
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3403,
+  "pistas_totales": 3369,
   "anomalias_totales": 396,
   "pistas": [
     {
@@ -164,6 +164,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.947,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.943005865477341e-23,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -216,19 +229,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.150968194373588e-22,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -268,19 +268,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.936,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.314980304579551e-21,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion",
       "b": "estado_derecho_wjp",
       "rotulo_a": "Control de la corrupción",
@@ -302,6 +289,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 2.163618454048824e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.932,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.615884366901629e-20,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.892,
-      "estados": 33,
+      "a": "ransomware:victimas",
+      "b": "reservas_internacionales",
+      "rotulo_a": "ransomware · victimas",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.891,
+      "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 4.390865653598152e-15,
+      "p": 9.817026672769647e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

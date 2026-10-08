@@ -1,6 +1,6 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-08T16:28:50+00:00",
+  "corrida": "2026-10-08T18:38:49+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
@@ -3126,23 +3126,6 @@
       "serie_detenida": false
     },
     {
-      "clave": "trata_nivel",
-      "rotulo": "Esfuerzo del gobierno contra la trata (EE. UU.)",
-      "eje": "Seguridad",
-      "seccion": "trata",
-      "fuente": "Departamento de Estado de los EE. UU. — Informe sobre la Trata de Personas",
-      "unidad": "nivel de 1 a 4 (1 = cumple los estándares mínimos)",
-      "colector": "trata_personas",
-      "archivo": "trata_personas.json",
-      "anio_mas_reciente": 2025,
-      "antiguedad_anios": 1,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 29,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "trata_sexual",
       "rotulo": "Trata para explotación sexual",
       "eje": "Seguridad",
@@ -3903,6 +3886,23 @@
       "antiguedad_anios": 0,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_nivel",
+      "rotulo": "Esfuerzo del gobierno contra la trata (EE. UU.)",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "Departamento de Estado de los EE. UU. — Informe sobre la Trata de Personas",
+      "unidad": "nivel de 1 a 4 (1 = cumple los estándares mínimos)",
+      "colector": "trata_personas",
+      "archivo": "trata_personas.json",
+      "anio_mas_reciente": 2026,
+      "antiguedad_anios": 0,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 28,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
