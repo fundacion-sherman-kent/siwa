@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIWA · Alertas de desastres en tiempo real</title>
+<meta name="description" content="Alertas de desastres en tiempo real de América Latina y el Caribe, según GDACS (Comisión Europea y ONU). Reporte de situación de la Fundación Sherman Kent.">
+<link rel="stylesheet" href="_comun/paleta-fusk.css"><!-- FUENTE ÚNICA de la paleta -->
+<script src="lib/echarts.min.js"></script>
+<script src="_comun/tema-echarts-fusk.js"></script><!-- identidad FUSK en los gráficos -->
+<style>
+  :root{ --marco: 1100px; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--fusk-crema,#F3EFE6); color:var(--fusk-navy,#102A3B);
+    font-family:Inter,system-ui,sans-serif; line-height:1.5; }
+  .envoltura{ max-width:var(--marco); margin:0 auto; padding:0 16px 56px; }
+  h1{ font-size:1.55rem; margin:.7em 0 .15em; letter-spacing:-.01em; color:var(--fusk-gris-titulo,#102A3B); }
+  .bajada{ color:var(--fusk-gris-azul,#5C6E7A); margin:.1em 0 1.1em; max-width:62ch; }
+  .tarjetas{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:0 0 18px; }
+  .tarjeta{ background:#fff; border:1px solid rgba(16,42,59,.12); border-radius:10px; padding:12px 14px; }
+  .tarjeta .n{ font-size:1.9rem; font-weight:700; line-height:1; color:var(--fusk-navy,#102A3B); }
+  .tarjeta .r{ color:var(--fusk-gris-azul,#5C6E7A); font-size:.78rem; margin-top:4px; }
+  .grilla{ display:grid; grid-template-columns:1.6fr 1fr; gap:18px; align-items:start; }
+  @media(max-width:820px){ .grilla{ grid-template-columns:1fr; } }
+  #mapa{ width:100%; height:520px; background:#fff; border:1px solid rgba(16,42,59,.10); border-radius:12px; }
+  .panel{ background:#fff; border:1px solid rgba(16,42,59,.12); border-radius:12px; padding:14px 16px; }
+  .panel h2{ font-size:.95rem; margin:.1em 0 .7em; text-transform:uppercase; letter-spacing:.06em; color:var(--fusk-gris-azul,#5C6E7A); }
+  .alerta{ display:flex; gap:10px; padding:10px 0; border-top:1px solid rgba(16,42,59,.10); }
+  .alerta:first-of-type{ border-top:0; }
+  .punto{ flex:0 0 auto; width:10px; height:10px; border-radius:50%; margin-top:6px; }
+  .roja{ background:#E4572E; } .naranja{ background:var(--fusk-naranja,#D66E2D); }
+  .alerta .q{ font-weight:600; } .alerta .m{ color:var(--fusk-gris-azul,#5C6E7A); font-size:.8rem; }
+  .alerta a{ color:var(--fusk-naranja,#D66E2D); font-size:.8rem; text-decoration:none; }
+  .nota-pie{ color:var(--fusk-gris-azul,#5C6E7A); font-size:.78rem; margin-top:18px; max-width:72ch; }
+  .vacio{ color:var(--fusk-gris-azul,#5C6E7A); font-size:.85rem; }
+</style>
+</head>
+<body>
+<div class="envoltura">
+  <h1>Alertas de desastres en tiempo real</h1>
+  <p class="bajada">Alertas de amenaza naranja y roja de los últimos doce meses en América Latina y el Caribe, según GDACS (Sistema Mundial de Alerta y Coordinación de Desastres, de la Comisión Europea y las Naciones Unidas). Mide <em>alertas de amenaza</em>, no desastres declarados ni damnificados: es una señal de que algo significativo ocurrió, con su nivel y su fecha.</p>
+
+  <div class="tarjetas">
+    <div class="tarjeta"><div class="n" id="t-total">—</div><div class="r">alertas en 12 meses</div></div>
+    <div class="tarjeta"><div class="n" id="t-paises">—</div><div class="r">países alcanzados</div></div>
+    <div class="tarjeta"><div class="n" id="t-vig">—</div><div class="r">vigentes ahora</div></div>
+    <div class="tarjeta"><div class="n" id="t-tipo">—</div><div class="r">tipo más frecuente</div></div>
+  </div>
+
+  <div class="grilla">
+    <div id="mapa" role="img" aria-label="Mapa de alertas de desastres en América Latina y el Caribe"></div>
+    <div class="panel">
+      <h2>Alertas vigentes</h2>
+      <div id="vigentes"><p class="vacio">Cargando…</p></div>
+      <h2 style="margin-top:18px">Más alcanzados · 12 meses</h2>
+      <div id="ranking"></div>
+    </div>
+  </div>
+
+  <p class="nota-pie">
+    Fuente: GDACS — Comisión Europea (Centro Común de Investigación) y Naciones Unidas, <a href="https://www.gdacs.org/" style="color:var(--fusk-naranja,#D66E2D)">gdacs.org</a>.
+    Calificación de la casa: fiabilidad B, credibilidad 2 (alertas automáticas por modelo de amenaza, no recuento verificado de daños).
+    Asunto propio de SIWA, distinto de «desastres declarados por la ONU» (ReliefWeb): miden cosas parecidas pero no iguales, y no se cuentan como una sola.
+    Ventana móvil de 12 meses; una alerta que toca varios países se cuenta en cada uno. Los Estados insulares más pequeños del Caribe aparecen en la lista y, si tienen alerta vigente, como punto; el mapa de base no los dibuja como superficie.
+  </p>
+</div>
+
+<script defer src="_comun/cabecera-siwa.js"></script>
+<script>
+// iso3 -> nombre del país en el geojson de base (26 que el mapa dibuja como superficie).
+const ISO2NAME={ARG:"Argentina",BHS:"Bahamas",BLZ:"Belize",BOL:"Bolivia",BRA:"Brazil",CHL:"Chile",COL:"Colombia",CRI:"Costa Rica",CUB:"Cuba",DOM:"Dominican Rep.",ECU:"Ecuador",GTM:"Guatemala",GUY:"Guyana",HND:"Honduras",HTI:"Haiti",JAM:"Jamaica",MEX:"Mexico",NIC:"Nicaragua",PAN:"Panama",PER:"Peru",PRY:"Paraguay",SLV:"El Salvador",SUR:"Suriname",TTO:"Trinidad and Tobago",URY:"Uruguay",VEN:"Venezuela"};
+const PAIS_ES={ARG:"Argentina",ATG:"Antigua y Barbuda",BHS:"Bahamas",BLZ:"Belice",BOL:"Bolivia",BRA:"Brasil",BRB:"Barbados",CHL:"Chile",COL:"Colombia",CRI:"Costa Rica",CUB:"Cuba",DMA:"Dominica",DOM:"Rep. Dominicana",ECU:"Ecuador",GRD:"Granada",GTM:"Guatemala",GUY:"Guyana",HND:"Honduras",HTI:"Haití",JAM:"Jamaica",KNA:"San Cristóbal y Nieves",LCA:"Santa Lucía",MEX:"México",NIC:"Nicaragua",PAN:"Panamá",PER:"Perú",PRY:"Paraguay",SLV:"El Salvador",SUR:"Surinam",TTO:"Trinidad y Tobago",URY:"Uruguay",VCT:"San Vicente y las Granadinas",VEN:"Venezuela"};
+const TIPO_ES={TC:"ciclón",EQ:"sismo",FL:"inundación",VO:"volcán",DR:"sequía",WF:"incendio"};
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+Promise.all([
+  fetch('../datos/publico/gdacs.json').then(r=>{ if(!r.ok) throw new Error('gdacs'); return r.json(); }),
+  fetch('flujos-world.json').then(r=>r.json())
+]).then(([d,world])=>{
+  const regs = d.registros||[];
+  const vig = d.alertas_vigentes||[];
+  const res = d.resumen||{};
+  const conAlerta = regs.filter(r=>((r.indicadores||{}).desastres_gdacs||{}).valor>0)
+                        .map(r=>({iso:r.iso, pais:r.pais||PAIS_ES[r.iso]||r.iso, valor:r.indicadores.desastres_gdacs.valor}));
+  const total = res.total_alertas ?? conAlerta.reduce((a,b)=>a+b.valor,0);
+
+  document.getElementById('t-total').textContent = total;
+  document.getElementById('t-paises').textContent = res.paises_con_alerta ?? conAlerta.length;
+  document.getElementById('t-vig').textContent = res.vigentes ?? vig.length;
+  const porTipo = res.por_tipo||{};
+  const tipoTop = Object.entries(porTipo).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('t-tipo').textContent = tipoTop ? (TIPO_ES[tipoTop[0]]||tipoTop[0]) : '—';
+
+  document.getElementById('vigentes').innerHTML = vig.length ? vig.map(v=>{
+    const pais = (v.pais_iso3||[]).map(i=>PAIS_ES[i]||i).join(', ');
+    return `<div class="alerta"><span class="punto ${v.alerta==='Red'?'roja':'naranja'}"></span><div>
+      <div class="q">${v.nombre||''}</div>
+      <div class="m">${TIPO_ES[v.tipo]||v.tipo||''} · ${pais} · alerta ${v.alerta==='Red'?'roja':'naranja'}${v.desde?(' · '+String(v.desde).slice(0,10)):''}</div>
+      ${v.severidad?`<div class="m">${v.severidad}</div>`:''}
+      ${v.enlace?`<a href="${v.enlace}" target="_blank" rel="noopener">Ver parte de GDACS →</a>`:''}
+    </div></div>`;
+  }).join('') : '<p class="vacio">Sin alertas vigentes en este momento.</p>';
+
+  document.getElementById('ranking').innerHTML = [...conAlerta].sort((a,b)=>b.valor-a.valor).slice(0,8).map(d=>
+    `<div class="alerta"><span class="punto naranja"></span><div><span class="q">${d.pais}</span> <span class="m">· ${d.valor} alerta${d.valor>1?'s':''}</span></div></div>`).join('') || '<p class="vacio">Sin alertas en los últimos 12 meses.</p>';
+
+  const coropleta = conAlerta.filter(d=>ISO2NAME[d.iso]).map(d=>({name:ISO2NAME[d.iso], value:d.valor}));
+  const maxv = Math.max(1, ...coropleta.map(d=>d.value));
+  echarts.registerMap('world', world);
+  const chart = echarts.init(document.getElementById('mapa'), 'fusk', {renderer:'canvas'});
+  chart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'item', formatter:p=> p.seriesType==='effectScatter'
+        ? `<b>${p.data.nombre}</b><br>${TIPO_ES[p.data.tipo]||p.data.tipo} · alerta ${p.data.alerta==='Red'?'roja':'naranja'}`
+        : (p.value? `<b>${p.name}</b><br>${p.value} alerta${p.value>1?'s':''} · 12 meses` : p.name) },
+    visualMap:{ min:0, max:maxv, left:14, bottom:14, text:['más','menos'], calculable:false, seriesIndex:0,
+      inRange:{ color:[tok('--fusk-rampa-0')||'#E7E0D3', tok('--fusk-rampa-2')||'#C9A86B', tok('--fusk-naranja')||'#D66E2D'] },
+      textStyle:{ color:tok('--fusk-gris-azul')||'#5C6E7A' } },
+    geo:{ map:'world', roam:true, center:[-60,-8], zoom:2.4,
+      itemStyle:{ areaColor:'rgba(16,42,59,.05)', borderColor:'rgba(16,42,59,.22)' },
+      emphasis:{ itemStyle:{ areaColor:'rgba(214,110,45,.25)' }, label:{show:false} } },
+    series:[
+      { name:'Alertas 12m', type:'map', map:'world', geoIndex:0, data:coropleta },
+      { name:'Vigentes', type:'effectScatter', coordinateSystem:'geo', zlevel:2,
+        symbolSize:18, rippleEffect:{scale:3.5,brushType:'stroke'},
+        itemStyle:{ color:'#E4572E', shadowBlur:10, shadowColor:'#E4572E' },
+        data: vig.filter(v=>v.lon!=null&&v.lat!=null).map(v=>({ name:v.nombre, value:[v.lon,v.lat], nombre:v.nombre, tipo:v.tipo, alerta:v.alerta })) }
+    ]
+  });
+  addEventListener('resize', ()=>chart.resize());
+}).catch(()=>{
+  document.getElementById('vigentes').innerHTML='<p class="vacio">No se pudo cargar la capa de alertas en este momento.</p>';
+  document.getElementById('mapa').innerHTML='<p class="vacio" style="padding:16px">No se pudo cargar el mapa.</p>';
+});
+</script>
+</body>
+</html>

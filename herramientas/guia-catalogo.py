@@ -67,6 +67,8 @@ HERRAMIENTAS = [
      "s": "subnacional provincia departamento estado municipio unidad territorio mapa por unidad"},
     {"archivo": "flujos.html", "rotulo": "Corredores de flujos",
      "s": "flujos ilicitos corredores trayectorias rutas narcotrafico cocaina marihuana opioides sinteticos precursores armas municiones migracion desplazamiento oro minerales esmeraldas coltan cobre especies vida silvestre madera contrabando cigarrillos combustible trata personas"},
+    {"archivo": "gdacs.html", "rotulo": "Alertas de desastres en tiempo real",
+     "s": "desastres alertas tiempo real amenaza ciclon huracan tormenta sismo terremoto inundacion volcan sequia incendio gdacs emergencia naranja roja"},
 ]
 
 FAQ = [

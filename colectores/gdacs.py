@@ -75,6 +75,15 @@ def main():
     isos = {p["iso"] for p in padron}
     por_pais, vigentes = contar(features, isos)
 
+    # Desglose por tipo de amenaza, contando cada evento que toca la region UNA vez.
+    por_tipo = {}
+    for f in features:
+        p = f.get("properties") or {}
+        ac = [c.get("iso3") for c in (p.get("affectedcountries") or [])] or ([p.get("iso3")] if p.get("iso3") else [])
+        if any(i in isos for i in ac):
+            t = p.get("eventtype")
+            por_tipo[t] = por_tipo.get(t, 0) + 1
+
     registros = []
     for p in padron:
         n = por_pais.get(p["iso"], 0)
@@ -122,6 +131,12 @@ def main():
         extra={
             "indicadores": indicadores,
             "alertas_vigentes": vigentes,
+            "resumen": {
+                "total_alertas": sum(por_pais.values()),
+                "paises_con_alerta": sum(1 for v in por_pais.values() if v > 0),
+                "por_tipo": por_tipo,
+                "vigentes": len(vigentes),
+            },
             "ventana": {"desde": desde.isoformat(), "hasta": hoy.isoformat()},
             "licencia": "GDACS: datos de libre acceso de la Comision Europea y la ONU. Se cita la fuente.",
         },
