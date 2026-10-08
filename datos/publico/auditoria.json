@@ -1,6 +1,6 @@
 {
   "que_es": "Auditoría automática del registro. La corre el robot en cada recolección, no una persona cuando se acuerda.",
-  "corrida": "2026-10-07T22:18:32+00:00",
+  "corrida": "2026-10-08T02:18:01+00:00",
   "conjuntos_revisados": 104,
   "estados_del_padron": 33,
   "fallas": [
@@ -8,6 +8,11 @@
       "que": "procedencia incompleta",
       "donde": "frescura-flujos.json",
       "porque": "falta colector, fuente.nombre, fuente.url, obtenido_en, calificacion: toda afirmación de este registro tiene que ser trazable"
+    },
+    {
+      "que": "Estado fuera del padrón",
+      "donde": "oficiales.json",
+      "porque": "trae ALC: este registro cubre 33 Estados y solo esos"
     },
     {
       "que": "procedencia incompleta",
@@ -25,7 +30,7 @@
       "porque": "falta colector, fuente.nombre, fuente.url, obtenido_en, calificacion: toda afirmación de este registro tiene que ser trazable"
     }
   ],
-  "cuantas_fallas": 4,
+  "cuantas_fallas": 5,
   "brechas": [
     {
       "que": "conjuntos sin ninguna serie histórica",
@@ -52,39 +57,39 @@
     "anios_para_tendencia": 5
   },
   "cobertura_por_estado": {
-    "BRB": 25,
-    "VCT": 25,
-    "BOL": 33,
-    "HND": 31,
-    "JAM": 32,
-    "ECU": 32,
-    "CHL": 32,
     "NIC": 32,
-    "PRY": 31,
-    "HTI": 27,
-    "BLZ": 27,
-    "LCA": 25,
-    "SUR": 27,
-    "CUB": 24,
-    "DOM": 32,
-    "PAN": 32,
     "VEN": 28,
-    "GTM": 32,
-    "GRD": 24,
-    "CRI": 32,
     "PER": 33,
-    "ARG": 33,
-    "GUY": 29,
-    "BRA": 32,
-    "KNA": 19,
-    "SLV": 32,
-    "BHS": 26,
     "DMA": 22,
     "COL": 35,
-    "URY": 32,
-    "ATG": 23,
+    "BLZ": 27,
+    "VCT": 25,
+    "BHS": 26,
+    "KNA": 19,
+    "PAN": 32,
+    "HTI": 27,
+    "GRD": 24,
+    "CHL": 32,
+    "MEX": 33,
+    "DOM": 32,
+    "SUR": 27,
+    "BOL": 33,
+    "HND": 31,
+    "LCA": 25,
+    "ARG": 33,
+    "PRY": 31,
+    "GUY": 29,
+    "GTM": 32,
+    "SLV": 32,
+    "JAM": 32,
+    "ECU": 32,
+    "CRI": 32,
     "TTO": 31,
-    "MEX": 33
+    "BRB": 25,
+    "URY": 32,
+    "CUB": 24,
+    "ATG": 23,
+    "BRA": 32
   },
-  "veredicto": "4 fallas"
+  "veredicto": "5 fallas"
 }

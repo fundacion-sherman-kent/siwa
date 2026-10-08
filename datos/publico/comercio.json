@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "comercio",
     "capa": "publico",
-    "obtenido_en": "2026-10-07T21:44:20+00:00",
+    "obtenido_en": "2026-10-08T01:39:29+00:00",
     "fuente": {
       "nombre": "Comtrade de Naciones Unidas — vista pública",
       "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
@@ -17,11 +17,11 @@
       "Una brecha de pocos puntos no es contrabando: es contabilidad. El exportador declara en valor FOB —la mercaderia puesta en el barco— y el importador en CIF, que además incluye flete y seguro. Solo por eso el importador registra de rutina entre 3 % y 10 % más. A eso se suman los envios que cruzan el año calendario y las diferencias de clasificación aduanera.",
       "Lo que si llama la atención es la brecha negativa: que el importador declare menos de lo que el exportador dice haberle mandado no tiene explicación contable inocente, porque el flete y el seguro empujan en el sentido contrario. Aún así es un indicio que abre una línea de averiguación, no una prueba de delito.",
       "Se comparan 37 corredores —los que comparten frontera y los de mayor volumen regional—, no los 1.056 pares posibles: la mayoría no tiene comercio significativo y solo agregaria ruido. Un corredor ausente no está limpio: no esta mirado.",
-      "LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, Empezando por los que nunca se midieron, y cada corredor declara cuando se MIDIO. Van 32 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
+      "LA MEDICIÓN ES ACUMULATIVA. La vista publica de Comtrade admite pocas consultas por ventana y rechaza el resto: en la primera prueba devolvio HTTP 429 en 34 de 37 pedidos. No se la fuerza. Cada corrida mide 5 corredores, Empezando por los que nunca se midieron, y cada corredor declara cuando se MIDIO. Van 33 de 37 medidos al menos una vez. Es preferible un dato fechado que un barrido que el servidor rechaza.",
       "El año es 2023, el último con cobertura amplia en la vista publica. NO es el año corriente y no se estima ninguno posterior.",
       "Se compara el total de comercio, no producto por producto. La subfacturación suele concentrarse en unas pocas partidas y se diluye en el total: este registro sirve para señalar el corredor, no la mercaderia.",
       "Un Estado que no reporta a Comtrade no genera brecha con nadie, y por lo tanto no aparece. La ausencia mide la calidad de su estadística aduanera, no su honestidad comercial.",
-      "Consultas que fallaron: BRA-VEN: sin fila total; COL-VEN: sin fila total; DOM-HTI: HTTP 429; VEN-GUY: sin fila total; ARG-BOL: HTTP 429"
+      "Consultas que fallaron: BRA-VEN: sin fila total; COL-VEN: sin fila total; DOM-HTI: sin fila total; VEN-GUY: sin fila total"
     ],
     "restriccion_de_uso": null,
     "cantidad": 19,
@@ -204,8 +204,8 @@
       "iso": "ARG",
       "pais": "Argentina",
       "bloque": "Cono Sur",
-      "corredores": 4,
-      "corredores_que_llaman_la_atencion": 1,
+      "corredores": 5,
+      "corredores_que_llaman_la_atencion": 2,
       "peor_brecha_pct": -9.8,
       "brecha_negativa_en": [
         "Argentina → Uruguay"
@@ -247,16 +247,16 @@
       "iso": "BOL",
       "pais": "Bolivia",
       "bloque": "Andina",
-      "corredores": 4,
-      "corredores_que_llaman_la_atencion": 1,
+      "corredores": 5,
+      "corredores_que_llaman_la_atencion": 2,
       "peor_brecha_pct": 6.4,
       "brecha_negativa_en": []
     }
   ],
   "resumen": {
-    "corredores_comparados": 32,
+    "corredores_comparados": 33,
     "corredores_pedidos": 37,
-    "corredores_que_llaman_la_atencion": 18,
+    "corredores_que_llaman_la_atencion": 19,
     "estados_con_dato": 19,
     "estados_del_padron": 33,
     "anio": 2023,
@@ -665,6 +665,19 @@
       "sentido": "el importador declara más",
       "llama_la_atencion": true,
       "medido_en": "2026-10-02T11:20:10+00:00"
+    },
+    {
+      "origen": "ARG",
+      "pais_origen": "Argentina",
+      "destino": "BOL",
+      "pais_destino": "Bolivia",
+      "exportador_declara": 472074184,
+      "importador_declara": 1085480310,
+      "brecha": 613406126,
+      "brecha_pct": 129.9,
+      "sentido": "el importador declara más",
+      "llama_la_atencion": true,
+      "medido_en": "2026-10-08T01:39:29+00:00"
     },
     {
       "origen": "HND",
