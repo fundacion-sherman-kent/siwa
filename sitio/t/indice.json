@@ -1,8 +1,23 @@
 {
   "que_es": "Una página y una imagen por tema, para que al compartir un enlace la tarjeta muestre ese tema y no siempre la misma tapa. Existen porque los robots de las redes leen el HTML crudo y no ejecutan el registro.",
-  "corrida": "2026-10-08T01:37:42+00:00",
-  "cuantas": 223,
-  "fallas": [],
+  "corrida": "2026-10-08T14:26:15+00:00",
+  "cuantas": 210,
+  "fallas": [
+    "Desplazamiento forzado: TimeoutError",
+    "Mercado de cannabis: TimeoutError",
+    "Redes criminales: TimeoutError",
+    "Actores incrustados en el Estado: TimeoutError",
+    "Actores extranjeros: TimeoutError",
+    "Gasto militar sobre el producto: TimeoutError",
+    "Gasto en investigación y desarrollo: TimeoutError",
+    "Investigadores por millón de habitantes: TimeoutError",
+    "Artículos científicos y técnicos publicados: TimeoutError",
+    "Solicitudes de patente de residentes: TimeoutError",
+    "Combustibles sobre lo que se exporta: TimeoutError",
+    "Superficie del territorio: TimeoutError",
+    "Uso de energía por habitante: TimeoutError",
+    "Población con acceso a electricidad: TimeoutError"
+  ],
   "temas": [
     {
       "clave": "situacion",
@@ -185,6 +200,12 @@
       "pagina": "sitio/t/gasto_seguridad_publico.html"
     },
     {
+      "clave": "suicidio",
+      "rotulo": "Suicidio",
+      "eje": "Seguridad",
+      "pagina": "sitio/t/suicidio.html"
+    },
+    {
       "clave": "muertes_transito",
       "rotulo": "Muertes de tránsito",
       "eje": "Seguridad",
@@ -243,12 +264,6 @@
       "rotulo": "Rehenes tomados en atentados terroristas (GTI)",
       "eje": "Seguridad",
       "pagina": "sitio/t/gti_rehenes.html"
-    },
-    {
-      "clave": "desplazamiento",
-      "rotulo": "Desplazamiento forzado",
-      "eje": "Seguridad",
-      "pagina": "sitio/t/desplazamiento.html"
     },
     {
       "clave": "homicidios_oms",
@@ -335,12 +350,6 @@
       "pagina": "sitio/t/droga_cocaina.html"
     },
     {
-      "clave": "droga_cannabis",
-      "rotulo": "Mercado de cannabis",
-      "eje": "Seguridad",
-      "pagina": "sitio/t/droga_cannabis.html"
-    },
-    {
       "clave": "droga_sinteticas",
       "rotulo": "Mercado de drogas sintéticas",
       "eje": "Seguridad",
@@ -365,58 +374,10 @@
       "pagina": "sitio/t/grupos_mafiosos.html"
     },
     {
-      "clave": "redes_criminales",
-      "rotulo": "Redes criminales",
-      "eje": "Seguridad",
-      "pagina": "sitio/t/redes_criminales.html"
-    },
-    {
-      "clave": "actores_del_estado",
-      "rotulo": "Actores incrustados en el Estado",
-      "eje": "Seguridad",
-      "pagina": "sitio/t/actores_del_estado.html"
-    },
-    {
-      "clave": "actores_extranjeros",
-      "rotulo": "Actores extranjeros",
-      "eje": "Seguridad",
-      "pagina": "sitio/t/actores_extranjeros.html"
-    },
-    {
       "clave": "actores_privados",
       "rotulo": "Actores del sector privado",
       "eje": "Seguridad",
       "pagina": "sitio/t/actores_privados.html"
-    },
-    {
-      "clave": "gasto_militar",
-      "rotulo": "Gasto militar sobre el producto",
-      "eje": "Defensa",
-      "pagina": "sitio/t/gasto_militar.html"
-    },
-    {
-      "clave": "id_producto",
-      "rotulo": "Gasto en investigación y desarrollo",
-      "eje": "Defensa",
-      "pagina": "sitio/t/id_producto.html"
-    },
-    {
-      "clave": "investigadores",
-      "rotulo": "Investigadores por millón de habitantes",
-      "eje": "Defensa",
-      "pagina": "sitio/t/investigadores.html"
-    },
-    {
-      "clave": "articulos_cientificos",
-      "rotulo": "Artículos científicos y técnicos publicados",
-      "eje": "Defensa",
-      "pagina": "sitio/t/articulos_cientificos.html"
-    },
-    {
-      "clave": "patentes_residentes",
-      "rotulo": "Solicitudes de patente de residentes",
-      "eje": "Defensa",
-      "pagina": "sitio/t/patentes_residentes.html"
     },
     {
       "clave": "agua_renovable",
@@ -449,18 +410,6 @@
       "pagina": "sitio/t/renta_minerales.html"
     },
     {
-      "clave": "exporta_combustibles",
-      "rotulo": "Combustibles sobre lo que se exporta",
-      "eje": "Defensa",
-      "pagina": "sitio/t/exporta_combustibles.html"
-    },
-    {
-      "clave": "superficie",
-      "rotulo": "Superficie del territorio",
-      "eje": "Defensa",
-      "pagina": "sitio/t/superficie.html"
-    },
-    {
       "clave": "tierra_arable",
       "rotulo": "Tierra arable",
       "eje": "Defensa",
@@ -471,18 +420,6 @@
       "rotulo": "Energía que se importa",
       "eje": "Defensa",
       "pagina": "sitio/t/energia_importada.html"
-    },
-    {
-      "clave": "uso_energia",
-      "rotulo": "Uso de energía por habitante",
-      "eje": "Defensa",
-      "pagina": "sitio/t/uso_energia.html"
-    },
-    {
-      "clave": "acceso_electricidad",
-      "rotulo": "Población con acceso a electricidad",
-      "eje": "Defensa",
-      "pagina": "sitio/t/acceso_electricidad.html"
     },
     {
       "clave": "perdidas_electricas",
