@@ -1,6 +1,6 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-08T22:05:29+00:00",
+  "corrida": "2026-10-08T23:16:50+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
@@ -9,9 +9,9 @@
   "resumen": {
     "indicadores_medidos": 198,
     "mediana_antiguedad_anios": 1.0,
-    "al_dia_1_anio_o_menos": 121,
-    "tibio_2_a_3_anios": 61,
-    "atrasado_4_anios_o_mas": 16,
+    "al_dia_1_anio_o_menos": 127,
+    "tibio_2_a_3_anios": 56,
+    "atrasado_4_anios_o_mas": 15,
     "series_detenidas_declaradas": 3,
     "archivos_leidos": 98,
     "archivos_sin_json_valido": [],
@@ -200,23 +200,6 @@
       "serie_detenida": false
     },
     {
-      "clave": "patentes_residentes",
-      "rotulo": "Solicitudes de patente de residentes",
-      "eje": "Defensa",
-      "seccion": "ciencia-tecnologia",
-      "fuente": "Organización Mundial de la Propiedad Intelectual, vía el Banco Mundial",
-      "unidad": "solicitudes por año",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 19,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "renta_gas",
       "rotulo": "Renta del gas natural",
       "eje": "Defensa",
@@ -387,23 +370,6 @@
       "serie_detenida": false
     },
     {
-      "clave": "bosque",
-      "rotulo": "Superficie forestal",
-      "eje": "Desarrollo",
-      "seccion": "ambiente",
-      "fuente": "FAO, compilado por el Banco Mundial",
-      "unidad": "% del territorio",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2023,
-      "antiguedad_anios": 3,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "coima_policia",
       "rotulo": "Personas a las que un policía pidió una coima en el último año",
       "eje": "Gobernanza",
@@ -467,23 +433,6 @@
       "antiguedad_anios": 3,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 3,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "energia_importada",
-      "rotulo": "Energía que se importa",
-      "eje": "Defensa",
-      "seccion": "recursos-estrategicos",
-      "fuente": "Agencia Internacional de Energía, compilado por el Banco Mundial",
-      "unidad": "% del uso de energía",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2023,
-      "antiguedad_anios": 3,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 9,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -586,6 +535,57 @@
       "antiguedad_anios": 3,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 24,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "homicidios",
+      "rotulo": "Homicidios intencionales",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "UNODC, compilado por el Banco Mundial",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 25,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "mortalidad_materna",
+      "rotulo": "Mortalidad materna",
+      "eje": "Desarrollo",
+      "seccion": "salud",
+      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
+      "unidad": "por cada 100.000 nacidos vivos",
+      "colector": "oms",
+      "archivo": "oms.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 33,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "ocupacion_carcelaria",
+      "rotulo": "Ocupación carcelaria sobre la capacidad oficial",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de la capacidad oficial",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 20,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -712,23 +712,6 @@
       "serie_detenida": false
     },
     {
-      "clave": "patentes_residentes",
-      "rotulo": "Solicitudes de patente de residentes",
-      "eje": "Defensa",
-      "seccion": "ciencia-tecnologia",
-      "fuente": "Organización Mundial de la Propiedad Intelectual, vía el Banco Mundial",
-      "unidad": "solicitudes por año",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 19,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "renta_gas",
       "rotulo": "Renta del gas natural",
       "eje": "Defensa",
@@ -899,23 +882,6 @@
       "serie_detenida": false
     },
     {
-      "clave": "bosque",
-      "rotulo": "Superficie forestal",
-      "eje": "Desarrollo",
-      "seccion": "ambiente",
-      "fuente": "FAO, compilado por el Banco Mundial",
-      "unidad": "% del territorio",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2023,
-      "antiguedad_anios": 3,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "coima_policia",
       "rotulo": "Personas a las que un policía pidió una coima en el último año",
       "eje": "Gobernanza",
@@ -979,23 +945,6 @@
       "antiguedad_anios": 3,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 3,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "energia_importada",
-      "rotulo": "Energía que se importa",
-      "eje": "Defensa",
-      "seccion": "recursos-estrategicos",
-      "fuente": "Agencia Internacional de Energía, compilado por el Banco Mundial",
-      "unidad": "% del uso de energía",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2023,
-      "antiguedad_anios": 3,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 9,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -1188,40 +1137,6 @@
       "serie_detenida": false
     },
     {
-      "clave": "superficie",
-      "rotulo": "Superficie del territorio",
-      "eje": "Defensa",
-      "seccion": "recursos-estrategicos",
-      "fuente": "FAO, compilado por el Banco Mundial",
-      "unidad": "kilómetros cuadrados",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2023,
-      "antiguedad_anios": 3,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "tierra_arable",
-      "rotulo": "Tierra arable",
-      "eje": "Defensa",
-      "seccion": "recursos-estrategicos",
-      "fuente": "FAO, compilado por el Banco Mundial",
-      "unidad": "% de la superficie",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2023,
-      "antiguedad_anios": 3,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "victima_delito",
       "rotulo": "Personas que fueron víctimas de un delito en el último año",
       "eje": "Seguridad",
@@ -1307,40 +1222,6 @@
       "serie_detenida": false
     },
     {
-      "clave": "armas_exportadas",
-      "rotulo": "Exportación de armamento mayor",
-      "eje": "Defensa",
-      "seccion": "material",
-      "fuente": "SIPRI, compilado por el Banco Mundial",
-      "unidad": "valor indicativo SIPRI, NO son dólares",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2024,
-      "antiguedad_anios": 2,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 1,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "armas_importadas",
-      "rotulo": "Importación de armamento mayor",
-      "eje": "Defensa",
-      "seccion": "material",
-      "fuente": "SIPRI, compilado por el Banco Mundial",
-      "unidad": "valor indicativo SIPRI, NO son dólares",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2024,
-      "antiguedad_anios": 2,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 15,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
       "clave": "banda_ancha",
       "rotulo": "Suscripciones a banda ancha fija",
       "eje": "Desarrollo",
@@ -1353,6 +1234,23 @@
       "antiguedad_anios": 2,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "bosque",
+      "rotulo": "Superficie forestal",
+      "eje": "Desarrollo",
+      "seccion": "ambiente",
+      "fuente": "FAO, compilado por el Banco Mundial",
+      "unidad": "% del territorio",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 32,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -1460,6 +1358,23 @@
       "serie_detenida": false
     },
     {
+      "clave": "energia_importada",
+      "rotulo": "Energía que se importa",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+      "unidad": "% del uso de energía",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "femicidios",
       "rotulo": "Femicidios o feminicidios",
       "eje": "Seguridad",
@@ -1506,57 +1421,6 @@
       "antiguedad_anios": 2,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 11,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "gasto_militar",
-      "rotulo": "Gasto militar sobre el producto",
-      "eje": "Defensa",
-      "seccion": "presupuesto-defensa",
-      "fuente": "SIPRI, compilado por el Banco Mundial",
-      "unidad": "% del producto",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2024,
-      "antiguedad_anios": 2,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 20,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "gasto_militar_dolares",
-      "rotulo": "Gasto militar en dólares",
-      "eje": "Defensa",
-      "seccion": "presupuesto-defensa",
-      "fuente": "SIPRI, compilado por el Banco Mundial",
-      "unidad": "dólares estadounidenses corrientes",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2024,
-      "antiguedad_anios": 2,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 23,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "gasto_militar_publico",
-      "rotulo": "Gasto militar sobre el gasto del Estado",
-      "eje": "Defensa",
-      "seccion": "presupuesto-defensa",
-      "fuente": "SIPRI, compilado por el Banco Mundial",
-      "unidad": "% del gasto público",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2024,
-      "antiguedad_anios": 2,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 20,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -1664,6 +1528,23 @@
       "serie_detenida": false
     },
     {
+      "clave": "patentes_residentes",
+      "rotulo": "Solicitudes de patente de residentes",
+      "eje": "Defensa",
+      "seccion": "ciencia-tecnologia",
+      "fuente": "Organización Mundial de la Propiedad Intelectual, vía el Banco Mundial",
+      "unidad": "solicitudes por año",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 19,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "perdida_bosque",
       "rotulo": "Bosque perdido",
       "eje": "Seguridad",
@@ -1676,23 +1557,6 @@
       "antiguedad_anios": 2,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "perdidas_electricas",
-      "rotulo": "Electricidad perdida en el traslado",
-      "eje": "Defensa",
-      "seccion": "infraestructuras-criticas",
-      "fuente": "Agencia Internacional de Energía, compilado por el Banco Mundial",
-      "unidad": "% de la producción",
-      "colector": "banco-mundial",
-      "archivo": "banco-mundial.json",
-      "anio_mas_reciente": 2024,
-      "antiguedad_anios": 2,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 6,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -1834,6 +1698,23 @@
       "serie_detenida": false
     },
     {
+      "clave": "superficie",
+      "rotulo": "Superficie del territorio",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "FAO, compilado por el Banco Mundial",
+      "unidad": "kilómetros cuadrados",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 32,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "temor_delito",
       "rotulo": "Personas que temen ser víctimas de un delito",
       "eje": "Seguridad",
@@ -1846,6 +1727,23 @@
       "antiguedad_anios": 2,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "tierra_arable",
+      "rotulo": "Tierra arable",
+      "eje": "Defensa",
+      "seccion": "recursos-estrategicos",
+      "fuente": "FAO, compilado por el Banco Mundial",
+      "unidad": "% de la superficie",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 32,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -1879,7 +1777,7 @@
       "anio_mas_reciente": 2024,
       "antiguedad_anios": 2,
       "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 6,
+        "con_dato_en_el_anio_mas_reciente": 23,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -1931,6 +1829,40 @@
       "antiguedad_anios": 1,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "armas_exportadas",
+      "rotulo": "Exportación de armamento mayor",
+      "eje": "Defensa",
+      "seccion": "material",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "valor indicativo SIPRI, NO son dólares",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "armas_importadas",
+      "rotulo": "Importación de armamento mayor",
+      "eje": "Defensa",
+      "seccion": "material",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "valor indicativo SIPRI, NO son dólares",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 13,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -2321,7 +2253,41 @@
       "anio_mas_reciente": 2025,
       "antiguedad_anios": 1,
       "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 6,
+        "con_dato_en_el_anio_mas_reciente": 18,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_militar",
+      "rotulo": "Gasto militar sobre el producto",
+      "eje": "Defensa",
+      "seccion": "presupuesto-defensa",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "% del producto",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_militar_dolares",
+      "rotulo": "Gasto militar en dólares",
+      "eje": "Defensa",
+      "seccion": "presupuesto-defensa",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "dólares estadounidenses corrientes",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -2352,6 +2318,23 @@
       "unidad": "porcentaje del PBI",
       "colector": "sipri",
       "archivo": "sipri.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 22,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "gasto_militar_publico",
+      "rotulo": "Gasto militar sobre el gasto del Estado",
+      "eje": "Defensa",
+      "seccion": "presupuesto-defensa",
+      "fuente": "SIPRI, compilado por el Banco Mundial",
+      "unidad": "% del gasto público",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
       "anio_mas_reciente": 2025,
       "antiguedad_anios": 1,
       "cobertura": {
@@ -2678,7 +2661,7 @@
       "anio_mas_reciente": 2025,
       "antiguedad_anios": 1,
       "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 6,
+        "con_dato_en_el_anio_mas_reciente": 18,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -2735,6 +2718,23 @@
       "serie_detenida": false
     },
     {
+      "clave": "perdidas_electricas",
+      "rotulo": "Electricidad perdida en el traslado",
+      "eje": "Defensa",
+      "seccion": "infraestructuras-criticas",
+      "fuente": "Agencia Internacional de Energía, compilado por el Banco Mundial",
+      "unidad": "% de la producción",
+      "colector": "banco-mundial",
+      "archivo": "banco-mundial.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 6,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "poblacion",
       "rotulo": "Población total",
       "eje": "Defensa",
@@ -2763,7 +2763,7 @@
       "anio_mas_reciente": 2025,
       "antiguedad_anios": 1,
       "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 4,
+        "con_dato_en_el_anio_mas_reciente": 8,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -3001,7 +3001,7 @@
       "anio_mas_reciente": 2025,
       "antiguedad_anios": 1,
       "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 24,
+        "con_dato_en_el_anio_mas_reciente": 27,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false

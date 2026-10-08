@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-08T22:05:24+00:00",
+  "corrida": "2026-10-08T23:16:41+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3782,
-    "de_ellos_son_parentescos": 398
+    "sobreviven": 3850,
+    "de_ellos_son_parentescos": 413
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,18 +17,18 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3384,
-  "anomalias_totales": 396,
+  "pistas_totales": 3437,
+  "anomalias_totales": 397,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
       "b": "gasto_militar_usd_const",
       "rotulo_a": "Gasto militar en dólares",
       "rotulo_b": "gasto_militar_usd_const",
-      "coeficiente": 0.991,
+      "coeficiente": 0.994,
       "estados": 22,
       "tipo": "rangos (Spearman)",
-      "p": 6.453227415987272e-32,
+      "p": 1.9715458604995377e-37,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -171,7 +171,7 @@
       "coeficiente": 0.947,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.943005865477341e-23,
+      "p": 7.036761158666696e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -185,19 +185,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.6812193451945832e-21,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "gasto_militar_gasto_pub",
-      "b": "gasto_militar_publico",
-      "rotulo_a": "gasto_militar_gasto_pub",
-      "rotulo_b": "Gasto militar sobre el gasto del Estado",
-      "coeficiente": 0.947,
-      "estados": 20,
-      "tipo": "rangos (Spearman)",
-      "p": 9.76090379436755e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -249,7 +236,7 @@
       "coeficiente": 0.937,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.092663515371557e-21,
+      "p": 6.799803466947924e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -276,6 +263,19 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 2.631703612429346e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "generacion_electrica",
+      "b": "patentes_residentes",
+      "rotulo_a": "Generación eléctrica",
+      "rotulo_b": "Solicitudes de patente de residentes",
+      "coeficiente": 0.934,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 2.1106336565157815e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -901,20 +901,6 @@
       "de": "infraestructura"
     },
     {
-      "iso": "SUR",
-      "pais": "Surinam",
-      "clave": "exporta_combustibles",
-      "rotulo": "Combustibles sobre lo que se exporta",
-      "anio": 2024,
-      "valor": 3.14,
-      "mediana_previa": 0.017,
-      "desvios": 131.67,
-      "cambio_pct": null,
-      "cambio_en_unidades": 3.123,
-      "puntos_previos": 7,
-      "de": "banco-mundial"
-    },
-    {
       "iso": "HND",
       "pais": "Honduras",
       "clave": "capacidad_solar",
@@ -1069,6 +1055,20 @@
       "de": "infraestructura"
     },
     {
+      "iso": "DOM",
+      "pais": "República Dominicana",
+      "clave": "perdidas_electricas",
+      "rotulo": "Electricidad perdida en el traslado",
+      "anio": 2024,
+      "valor": 7.862,
+      "mediana_previa": 12.877,
+      "desvios": -38.94,
+      "cambio_pct": -38.9,
+      "cambio_en_unidades": -5.014,
+      "puntos_previos": 8,
+      "de": "banco-mundial"
+    },
+    {
       "iso": "SUR",
       "pais": "Surinam",
       "clave": "capacidad_solar",
@@ -1122,6 +1122,20 @@
       "cambio_pct": 27.9,
       "cambio_en_unidades": 0.167,
       "puntos_previos": 4,
+      "de": "banco-mundial"
+    },
+    {
+      "iso": "NIC",
+      "pais": "Nicaragua",
+      "clave": "bosque",
+      "rotulo": "Superficie forestal",
+      "anio": 2023,
+      "valor": 25.823,
+      "mediana_previa": 40.83,
+      "desvios": -27.54,
+      "cambio_pct": -36.8,
+      "cambio_en_unidades": -15.007,
+      "puntos_previos": 7,
       "de": "banco-mundial"
     },
     {
@@ -1332,20 +1346,6 @@
       "cambio_pct": 45.0,
       "cambio_en_unidades": 0.962,
       "puntos_previos": 9,
-      "de": "banco-mundial"
-    },
-    {
-      "iso": "SUR",
-      "pais": "Surinam",
-      "clave": "minerales",
-      "rotulo": "Exportación de minerales y metales",
-      "anio": 2024,
-      "valor": 3.984,
-      "mediana_previa": 0.327,
-      "desvios": 16.91,
-      "cambio_pct": 1117.7,
-      "cambio_en_unidades": 3.657,
-      "puntos_previos": 8,
       "de": "banco-mundial"
     },
     {
