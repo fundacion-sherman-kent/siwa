@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "armas",
     "capa": "publico",
-    "obtenido_en": "2026-10-04T16:26:50+00:00",
+    "obtenido_en": "2026-10-08T02:00:25+00:00",
     "fuente": {
       "nombre": "Comtrade de Naciones Unidas — capítulo 93: armas, municiones y sus partes",
       "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
@@ -22,7 +22,7 @@
       "LA FILA TOTAL ES LA UNICA QUE SE SUMA. La respuesta trae una fila por modo de transporte y por regimen aduanero ademas de la total, y sumarlas MULTIPLICA el comercio: Brasil daba 768 millones de importacion cuando son 192, cuatro veces de mas. En esta corrida se descartaron 0 filas por ese motivo.",
       "Hay comercio de armas con contraparte no declarada, y se cuenta aparte. La fuente usa codigos especiales cuando el Estado no especifica el origen o el destino. No significa que sea ilegal: significa que la aduana no dijo con quien. Se publica el monto y su porcentaje porque es un dato de transparencia, no una acusacion.",
       "EL ANIO ES 2023, que es el ultimo con cobertura amplia en la vista publica y gratuita de la fuente. No es el último año calendario, y se dice.",
-      "LA FUENTE CORTO LA TANDA en esta corrida y quedaron 31 Estados SIN CONSULTAR: Trinidad y Tobago, Surinam, San Vicente y las Granadinas, Santa Lucía, San Cristóbal y Nieves, Perú, Paraguay, Panamá, Nicaragua, México, Jamaica, Honduras, Haití, Guyana, Guatemala, Granada, El Salvador, Ecuador, República Dominicana, Dominica, Cuba, Costa Rica, Colombia, Chile, Brasil, Bolivia, Belice, Barbados, Bahamas, Argentina, Antigua y Barbuda. NO figuran en cero: figuran como no consultados, que es distinto."
+      "LA FUENTE CORTO LA TANDA en esta corrida y quedaron 29 Estados SIN CONSULTAR: San Vicente y las Granadinas, Santa Lucía, San Cristóbal y Nieves, Perú, Paraguay, Panamá, Nicaragua, México, Jamaica, Honduras, Haití, Guyana, Guatemala, Granada, El Salvador, Ecuador, República Dominicana, Dominica, Cuba, Costa Rica, Colombia, Chile, Brasil, Bolivia, Belice, Barbados, Bahamas, Argentina, Antigua y Barbuda. NO figuran en cero: figuran como no consultados, que es distinto."
     ],
     "restriccion_de_uso": null,
     "cantidad": 33,
@@ -106,13 +106,125 @@
       "iso": "TTO",
       "pais": "Trinidad y Tobago",
       "bloque": "Caribe oriental",
-      "estado": "no_consultado"
+      "estado": "declarado",
+      "importa_usd": 501790,
+      "exporta_usd": 9738,
+      "socios_de_compra": 11,
+      "socios_de_venta": 4,
+      "mayores_proveedores": [
+        {
+          "socio": "USA",
+          "valor_usd": 287179
+        },
+        {
+          "socio": "Czechia",
+          "valor_usd": 120138
+        },
+        {
+          "socio": "Germany",
+          "valor_usd": 69268
+        },
+        {
+          "socio": "South Africa",
+          "valor_usd": 9479
+        },
+        {
+          "socio": "Spain",
+          "valor_usd": 5269
+        },
+        {
+          "socio": "United Kingdom",
+          "valor_usd": 4995
+        }
+      ],
+      "mayores_clientes": [
+        {
+          "socio": "Areas, nes",
+          "valor_usd": 9409
+        },
+        {
+          "socio": "Grenada",
+          "valor_usd": 252
+        },
+        {
+          "socio": "Saint Vincent and the Grenadines",
+          "valor_usd": 44
+        },
+        {
+          "socio": "Guyana",
+          "valor_usd": 33
+        }
+      ],
+      "serie": {
+        "importa": [],
+        "exporta": []
+      },
+      "importa_sin_declarar_origen_usd": 0,
+      "exporta_sin_declarar_destino_usd": 9409,
+      "pct_compra_sin_origen": 0.0,
+      "pct_venta_sin_destino": 96.6
     },
     {
       "iso": "SUR",
       "pais": "Surinam",
       "bloque": "Guayanas",
-      "estado": "no_consultado"
+      "estado": "declarado",
+      "importa_usd": 1959862,
+      "exporta_usd": 25214,
+      "socios_de_compra": 7,
+      "socios_de_venta": 4,
+      "mayores_proveedores": [
+        {
+          "socio": "USA",
+          "valor_usd": 1168759
+        },
+        {
+          "socio": "France",
+          "valor_usd": 506120
+        },
+        {
+          "socio": "Italy",
+          "valor_usd": 191414
+        },
+        {
+          "socio": "Türkiye",
+          "valor_usd": 46431
+        },
+        {
+          "socio": "Spain",
+          "valor_usd": 32335
+        },
+        {
+          "socio": "Germany",
+          "valor_usd": 12789
+        }
+      ],
+      "mayores_clientes": [
+        {
+          "socio": "USA",
+          "valor_usd": 21900
+        },
+        {
+          "socio": "Trinidad and Tobago",
+          "valor_usd": 1114
+        },
+        {
+          "socio": "France",
+          "valor_usd": 1100
+        },
+        {
+          "socio": "Areas, nes",
+          "valor_usd": 1100
+        }
+      ],
+      "serie": {
+        "importa": [],
+        "exporta": []
+      },
+      "importa_sin_declarar_origen_usd": 0,
+      "exporta_sin_declarar_destino_usd": 1100,
+      "pct_compra_sin_origen": 0.0,
+      "pct_venta_sin_destino": 4.4
     },
     {
       "iso": "VCT",
@@ -292,13 +404,13 @@
   "resumen": {
     "anio": 2023,
     "capitulo": "93",
-    "estados_con_declaracion": 1,
+    "estados_con_declaracion": 3,
     "estados_del_padron": 33,
-    "estados_sin_consultar": 31,
-    "importado_por_la_region_usd": 6545287,
-    "exportado_por_la_region_usd": 0,
+    "estados_sin_consultar": 29,
+    "importado_por_la_region_usd": 9006939,
+    "exportado_por_la_region_usd": 34952,
     "filas_descartadas_por_transporte": 0,
     "lector_probado": true,
-    "consultado": "2026-10-04T16:26:50+00:00"
+    "consultado": "2026-10-08T02:00:25+00:00"
   }
 }
