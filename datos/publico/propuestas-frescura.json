@@ -1,15 +1,15 @@
 {
   "que_es": "Clasifica cada indicador atrasado de SIWA (frescura.json) en cinco caminos posibles. PROPONE: ninguna fila de este archivo se aplicó sola. Incorporar una fuente, promover una sobre otra o tocar comparabilidad es juicio, y el juicio no se automatiza.",
-  "corrida": "2026-10-07T18:42:19+00:00",
+  "corrida": "2026-10-07T22:18:16+00:00",
   "reloj_disponible_esta_corrida": true,
   "orden_de_exhibicion_disponible_esta_corrida": true,
   "resumen": {
-    "clasificados": 75,
+    "clasificados": 76,
     "promover_hermana_fresca": 0,
     "hermana_fresca_ya_exhibida": 3,
     "re_pull_misma_fuente": 0,
     "rezago_de_fuente_ya_investigado": 13,
-    "derivar_a_buscador_externo": 59
+    "derivar_a_buscador_externo": 60
   },
   "propuestas": [
     {
@@ -104,6 +104,18 @@
       ],
       "motivo": "Se consultó a la fuente el 2026-09-03 y su dato más nuevo es 2020.",
       "que_falta": "Nada pendiente de esta herramienta: es un vacío ya declarado. Reabrir sólo si cambia la licencia o aparece una fuente nueva."
+    },
+    {
+      "clave": "cultivo_coca_ondcp",
+      "rotulo": "Segunda fuente, independiente de UNODC",
+      "eje": "Sin clasificar",
+      "fuente_actual": "ONDCP (Casa Blanca, EE.UU.)",
+      "anio_actual": 2021,
+      "antiguedad_anios": 5,
+      "aplicable_automaticamente": false,
+      "camino": "derivar_a_buscador_externo",
+      "motivo": "No hay hermana fresca en SIWA, el reloj no lo marcó esta corrida (o no corrió) y no hay investigación previa registrada.",
+      "que_falta": "Candidata para que el buscador de fuentes (Llama) o una investigación manual busquen un reemplazo o una segunda fuente. No se dispara ninguna búsqueda automáticamente desde acá."
     },
     {
       "clave": "muertes_transito",
