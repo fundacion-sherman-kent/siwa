@@ -1,6 +1,6 @@
 {
   "que_es": "Auditoría automática del registro. La corre el robot en cada recolección, no una persona cuando se acuerda.",
-  "corrida": "2026-10-08T02:20:40+00:00",
+  "corrida": "2026-10-08T08:57:37+00:00",
   "conjuntos_revisados": 104,
   "estados_del_padron": 33,
   "fallas": [
@@ -8,6 +8,11 @@
       "que": "procedencia incompleta",
       "donde": "frescura-flujos.json",
       "porque": "falta colector, fuente.nombre, fuente.url, obtenido_en, calificacion: toda afirmación de este registro tiene que ser trazable"
+    },
+    {
+      "que": "Estado fuera del padrón",
+      "donde": "oficiales.json",
+      "porque": "trae ALC: este registro cubre 33 Estados y solo esos"
     },
     {
       "que": "procedencia incompleta",
@@ -25,7 +30,7 @@
       "porque": "falta colector, fuente.nombre, fuente.url, obtenido_en, calificacion: toda afirmación de este registro tiene que ser trazable"
     }
   ],
-  "cuantas_fallas": 4,
+  "cuantas_fallas": 5,
   "brechas": [
     {
       "que": "conjuntos sin ninguna serie histórica",
@@ -53,38 +58,38 @@
   },
   "cobertura_por_estado": {
     "DMA": 22,
+    "GTM": 32,
     "GUY": 29,
-    "BOL": 33,
-    "CUB": 24,
-    "ARG": 33,
-    "SUR": 27,
-    "VEN": 28,
-    "KNA": 19,
-    "LCA": 25,
-    "JAM": 32,
-    "HTI": 27,
-    "PER": 33,
-    "BHS": 26,
-    "DOM": 32,
+    "COL": 35,
+    "PRY": 31,
     "NIC": 32,
     "BRA": 32,
-    "URY": 32,
-    "BLZ": 27,
-    "COL": 35,
+    "CRI": 32,
+    "VEN": 28,
+    "BOL": 33,
+    "LCA": 25,
     "ATG": 23,
-    "HND": 31,
-    "GTM": 32,
+    "HTI": 27,
+    "MEX": 33,
     "CHL": 32,
+    "HND": 31,
+    "PAN": 32,
+    "JAM": 32,
+    "VCT": 25,
+    "BHS": 26,
+    "KNA": 19,
+    "SUR": 27,
     "ECU": 32,
     "SLV": 32,
-    "BRB": 25,
-    "CRI": 32,
-    "PRY": 31,
-    "PAN": 32,
-    "GRD": 24,
+    "ARG": 33,
+    "CUB": 24,
     "TTO": 31,
-    "MEX": 33,
-    "VCT": 25
+    "PER": 33,
+    "GRD": 24,
+    "DOM": 32,
+    "BRB": 25,
+    "URY": 32,
+    "BLZ": 27
   },
-  "veredicto": "4 fallas"
+  "veredicto": "5 fallas"
 }
