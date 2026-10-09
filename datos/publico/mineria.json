@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-09T18:35:36+00:00",
+  "corrida": "2026-10-09T20:53:14+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3854,
+    "sobreviven": 3870,
     "de_ellos_son_parentescos": 413
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3441,
+  "pistas_totales": 3457,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -294,19 +294,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.932,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.698187083547213e-20,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -328,6 +315,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1284759852983783e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.929,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.3858420710331022e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
