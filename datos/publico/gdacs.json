@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "gdacs",
     "capa": "publico",
-    "obtenido_en": "2026-10-09T17:53:54+00:00",
+    "obtenido_en": "2026-10-09T22:07:18+00:00",
     "fuente": {
       "nombre": "GDACS -- Global Disaster Alert and Coordination System (Comision Europea JRC y Naciones Unidas)",
       "url": "https://www.gdacs.org/"
@@ -145,7 +145,7 @@
       "pais": "Panamá",
       "indicadores": {
         "desastres_gdacs": {
-          "valor": 0,
+          "valor": 1,
           "anio": 2026,
           "ventana": "2025-10-09 a 2026-10-09",
           "origen": "GDACS (Comision Europea JRC y ONU)"
@@ -449,24 +449,36 @@
       ],
       "tipo": "TC",
       "nombre": "SIMON-26",
-      "alerta": "Red",
+      "alerta": "Orange",
       "desde": "2026-10-07T15:00:00",
-      "hasta": "2026-10-09T15:00:00",
+      "hasta": "2026-10-09T21:00:00",
       "severidad": "Hurricane/Typhoon > 74 mph (maximum wind speed of 231 km/h)",
-      "enlace": "https://www.gdacs.org/report.aspx?eventid=1001335&episodeid=9&eventtype=TC"
+      "enlace": "https://www.gdacs.org/report.aspx?eventid=1001335&episodeid=10&eventtype=TC"
+    },
+    {
+      "pais_iso3": [
+        "PAN"
+      ],
+      "tipo": "EQ",
+      "nombre": "",
+      "alerta": "Orange",
+      "desde": "2026-10-09T17:56:06",
+      "hasta": "2026-10-09T17:56:06",
+      "severidad": "Magnitude 7.7M, Depth:12.647km",
+      "enlace": "https://www.gdacs.org/report.aspx?eventid=1570339&episodeid=1738684&eventtype=EQ"
     }
   ],
   "resumen": {
-    "total_alertas": 25,
-    "paises_con_alerta": 19,
+    "total_alertas": 26,
+    "paises_con_alerta": 20,
     "por_tipo": {
       "TC": 3,
+      "EQ": 5,
       "DR": 2,
-      "EQ": 4,
       "FL": 2,
       "WF": 1
     },
-    "vigentes": 1
+    "vigentes": 2
   },
   "ventana": {
     "desde": "2025-10-09",

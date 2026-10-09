@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-09T20:53:14+00:00",
-  "medidas_con_suficientes_casos": 203,
-  "pares_probados": 20503,
+  "corrida": "2026-10-09T22:28:23+00:00",
+  "medidas_con_suficientes_casos": 202,
+  "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3870,
+    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3867,
     "de_ellos_son_parentescos": 413
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3457,
-  "anomalias_totales": 397,
+  "pistas_totales": 3454,
+  "anomalias_totales": 392,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -184,7 +184,7 @@
       "coeficiente": 0.946,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 8.770533945281291e-23,
+      "p": 8.378465539028885e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -307,6 +307,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.93,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.0792570303548977e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "perdida_bosque",
       "b": "superficie",
       "rotulo_a": "Bosque perdido",
@@ -315,19 +328,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1284759852983783e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.929,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3858420710331022e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,19 +775,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.893,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.8688985696151594e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "ransomware:grupos_distintos",
       "b": "reservas_internacionales",
       "rotulo_a": "ransomware · grupos_distintos",
@@ -796,6 +783,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 7.340017665091626e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "focos:focos",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "focos · focos",
+      "coeficiente": 0.891,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.205955634537637e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

@@ -1,17 +1,17 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-09T20:53:21+00:00",
+  "corrida": "2026-10-09T22:28:32+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
     "atrasado": "4 años o más"
   },
   "resumen": {
-    "indicadores_medidos": 198,
-    "mediana_antiguedad_anios": 1.0,
+    "indicadores_medidos": 197,
+    "mediana_antiguedad_anios": 1,
     "al_dia_1_anio_o_menos": 127,
     "tibio_2_a_3_anios": 56,
-    "atrasado_4_anios_o_mas": 15,
+    "atrasado_4_anios_o_mas": 14,
     "series_detenidas_declaradas": 3,
     "archivos_leidos": 98,
     "archivos_sin_json_valido": [],
@@ -280,23 +280,6 @@
       "antiguedad_anios": 5,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "suicidio",
-      "rotulo": "Suicidio",
-      "eje": "Seguridad",
-      "seccion": "muertes-no-delito",
-      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
-      "unidad": "por cada 100.000 personas",
-      "colector": "oms",
-      "archivo": "oms.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 31,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -589,6 +572,23 @@
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
+    },
+    {
+      "clave": "seguridad_barrio",
+      "rotulo": "Personas que se sienten seguras en su barrio",
+      "eje": "Seguridad",
+      "seccion": "violencia",
+      "fuente": "CEPAL, CEPALSTAT",
+      "unidad": "% de las personas",
+      "colector": "cepal",
+      "archivo": "cepal.json",
+      "anio_mas_reciente": 2023,
+      "antiguedad_anios": 3,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 17,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
     }
   ],
   "indicadores": [
@@ -792,23 +792,6 @@
       "antiguedad_anios": 5,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 33,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "suicidio",
-      "rotulo": "Suicidio",
-      "eje": "Seguridad",
-      "seccion": "muertes-no-delito",
-      "fuente": "Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS)",
-      "unidad": "por cada 100.000 personas",
-      "colector": "oms",
-      "archivo": "oms.json",
-      "anio_mas_reciente": 2021,
-      "antiguedad_anios": 5,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 31,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
