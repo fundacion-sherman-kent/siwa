@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-09T09:01:30+00:00",
+  "corrida": "2026-10-09T12:53:01+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3834,
+    "sobreviven": 3844,
     "de_ellos_son_parentescos": 413
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3421,
+  "pistas_totales": 3431,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -164,19 +164,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.947,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.036761158666696e-23,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -185,6 +172,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.6812193451945832e-21,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.946,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 8.770533945281291e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -294,6 +294,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.932,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.698187083547213e-20,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -354,19 +367,6 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 8.030917381111556e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.926,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.908403527664119e-19,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,6 +775,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.893,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.8688985696151594e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ransomware:grupos_distintos",
       "b": "reservas_internacionales",
       "rotulo_a": "ransomware · grupos_distintos",
@@ -783,19 +796,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 7.340017665091626e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ransomware:victimas",
-      "b": "reservas_internacionales",
-      "rotulo_a": "ransomware · victimas",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.891,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 9.817026672769647e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

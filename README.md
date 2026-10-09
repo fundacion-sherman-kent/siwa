@@ -124,12 +124,12 @@ python colectores/focos.py
 |---|---|:---:|---:|---:|
 | `archivo` | Archivo público de la web — copias fechadas de los portales oficiales | `B-2` | 33 | 6 |
 | `armas` | Comtrade de Naciones Unidas — capítulo 93: armas, municiones y sus partes | `A-2` | 33 | 9 |
-| `banco-mundial` | Banco Mundial — indicadores de desarrollo y gobernanza | `A-2` | 33 | 8 |
+| `banco-mundial` | Banco Mundial — indicadores de desarrollo y gobernanza | `A-2` | 33 | 9 |
 | `bce_ecuador` | Banco Central del Ecuador (BCE) — Información Estadística Mensual (IEM-121, reservas) | `A-2` | 1 | 2 |
 | `bienes_culturales` | UNIDROIT — Convenio de 1995 sobre bienes culturales robados o exportados ilícitamente | `A-2` | 33 | 5 |
 | `brecha` | Fundación Sherman Kent — brecha entre lo registrado y lo publicado | `B-2` | 33 | 5 |
 | `bti` | Índice de Transformación Bertelsmann (BTI), edición 2026 | `B-3` | 22 | 6 |
-| `censo_subnacional` | Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas | `B-3` | 33 | 13 |
+| `censo_subnacional` | Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas | `B-3` | 33 | 12 |
 | `cepal` | CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL): Observatorio de Igualdad de Género y estadísticas de seguridad ciudadana | `A-2` | 33 | 8 |
 | `chile_ine_seguridad` | Instituto Nacional de Estadísticas de Chile (INE) — Estadísticas Policiales, cuadro de víctimas | `A-2` | 1 | 4 |
 | `ciber` | OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta | `B-2` | 33 | 6 |
@@ -170,7 +170,7 @@ python colectores/focos.py
 | `migrantes_r4v` | R4V — Plataforma de Coordinación Interagencial para Refugiados y Migrantes de Venezuela (ACNUR–OIM) | `B-2` | — | 4 |
 | `migrantes_undesa` | UN DESA, División de Población — International Migrant Stock 2024 (origen×destino) | `A-2` | — | 4 |
 | `minerales_comercio` | Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108, 7112, 2616, 8001, 2609, 2615, 8103) | `A-2` | 33 | 7 |
-| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 10 | 10 |
+| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 10 | 11 |
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 5 |
 | `oms_homicidios` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `A-2` | 33 | 6 |
