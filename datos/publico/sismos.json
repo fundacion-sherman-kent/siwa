@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-10-10T16:47:12+00:00",
+    "obtenido_en": "2026-10-10T18:35:14+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**212 de los 367 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**212 de los 371 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece sólo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -38,7 +38,7 @@
       "iso": "PAN",
       "pais": "Panamá",
       "bloque": "México y Centroamérica",
-      "sismos": 26,
+      "sismos": 30,
       "mayor_magnitud": 7.7,
       "mayor": {
         "magnitud": 7.7,
@@ -49,14 +49,38 @@
         "tsunami": false
       },
       "ultimo": {
-        "magnitud": 4.8,
-        "lugar": "12 km NE of La Tronosa, Panama",
-        "cuando": "2026-10-10T13:46:56+00:00",
-        "profundidad_km": 10.0,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1ex",
+        "magnitud": 4.7,
+        "lugar": "2 km WNW of El Cacao, Panama",
+        "cuando": "2026-10-10T16:05:42+00:00",
+        "profundidad_km": 13.518,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1fk",
         "tsunami": false
       },
       "recientes": [
+        {
+          "magnitud": 4.7,
+          "lugar": "2 km WNW of El Cacao, Panama",
+          "cuando": "2026-10-10T16:05:42+00:00",
+          "profundidad_km": 13.518,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1fk",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "5 km WNW of Guarumal, Panama",
+          "cuando": "2026-10-10T14:59:23+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1f6",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "10 km NNW of El Cortezo, Panama",
+          "cuando": "2026-10-10T14:51:45+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1f3",
+          "tsunami": false
+        },
         {
           "magnitud": 4.8,
           "lugar": "12 km NE of La Tronosa, Panama",
@@ -66,35 +90,11 @@
           "tsunami": false
         },
         {
-          "magnitud": 4.8,
-          "lugar": "4 km NE of Río Grande, Panama",
-          "cuando": "2026-10-10T10:35:11+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1e5",
-          "tsunami": false
-        },
-        {
-          "magnitud": 4.6,
-          "lugar": "6 km SSE of Llano de Piedra, Panama",
-          "cuando": "2026-10-10T07:13:30+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1dc",
-          "tsunami": false
-        },
-        {
           "magnitud": 4.5,
-          "lugar": "9 km WNW of Flores, Panama",
-          "cuando": "2026-10-10T04:33:03+00:00",
+          "lugar": "4 km NW of Los Asientos, Panama",
+          "cuando": "2026-10-10T13:22:13+00:00",
           "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1ck",
-          "tsunami": false
-        },
-        {
-          "magnitud": 6,
-          "lugar": "7 km N of La Tronosa, Panama",
-          "cuando": "2026-10-10T04:14:01+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1cf",
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1ev",
           "tsunami": false
         }
       ]
@@ -932,17 +932,17 @@
     "ventana_dias": 90,
     "desde": "2026-07-12",
     "magnitud_minima": 4.5,
-    "sismos": 367,
-    "en_tierra": 155,
+    "sismos": 371,
+    "en_tierra": 159,
     "mar_adentro": 212,
     "estados_con_sismo": 13,
     "estados_del_padron": 33,
     "por_magnitud": {
-      "4,5 a 4,9": 264,
+      "4,5 a 4,9": 268,
       "6 o mayor": 7,
       "5 a 5,9": 96
     },
-    "consultado": "2026-10-10T16:47:12+00:00"
+    "consultado": "2026-10-10T18:35:14+00:00"
   },
   "mar": {
     "cantidad": 212,
@@ -1015,8 +1015,8 @@
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2115,
-    "recuadro": 367,
+    "mundo": 2119,
+    "recuadro": 371,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
 }
