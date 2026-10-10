@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-10-09T22:13:26+00:00",
+    "obtenido_en": "2026-10-10T00:49:36+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**203 de los 343 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**203 de los 347 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece sólo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -38,7 +38,7 @@
       "iso": "PAN",
       "pais": "Panamá",
       "bloque": "México y Centroamérica",
-      "sismos": 12,
+      "sismos": 16,
       "mayor_magnitud": 7.7,
       "mayor": {
         "magnitud": 7.7,
@@ -49,14 +49,30 @@
         "tsunami": false
       },
       "ultimo": {
-        "magnitud": 4.9,
-        "lugar": "13 km W of Río Grande, Panama",
-        "cuando": "2026-10-09T21:05:25+00:00",
+        "magnitud": 5,
+        "lugar": "8 km ESE of La Tronosa, Panama",
+        "cuando": "2026-10-09T23:10:02+00:00",
         "profundidad_km": 10.0,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1a9",
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1ax",
         "tsunami": false
       },
       "recientes": [
+        {
+          "magnitud": 5,
+          "lugar": "8 km ESE of La Tronosa, Panama",
+          "cuando": "2026-10-09T23:10:02+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1ax",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.6,
+          "lugar": "4 km NNE of Río Grande, Panama",
+          "cuando": "2026-10-09T21:47:49+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1ai",
+          "tsunami": false
+        },
         {
           "magnitud": 4.9,
           "lugar": "13 km W of Río Grande, Panama",
@@ -66,35 +82,19 @@
           "tsunami": false
         },
         {
+          "magnitud": 4.9,
+          "lugar": "16 km SSW of Calidonia, Panama",
+          "cuando": "2026-10-09T20:54:56+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1a6",
+          "tsunami": false
+        },
+        {
           "magnitud": 5,
           "lugar": "13 km W of Río Grande, Panama",
           "cuando": "2026-10-09T20:42:08+00:00",
           "profundidad_km": 10.0,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1aa",
-          "tsunami": false
-        },
-        {
-          "magnitud": 6.6,
-          "lugar": "14 km W of Río Grande, Panama",
-          "cuando": "2026-10-09T20:25:39+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u19w",
-          "tsunami": true
-        },
-        {
-          "magnitud": 5,
-          "lugar": "6 km NE of La Tronosa, Panama",
-          "cuando": "2026-10-09T20:21:37+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u19t",
-          "tsunami": false
-        },
-        {
-          "magnitud": 5.2,
-          "lugar": "11 km SE of Río Grande, Panama",
-          "cuando": "2026-10-09T19:48:55+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u19h",
           "tsunami": false
         }
       ]
@@ -930,19 +930,19 @@
   ],
   "resumen": {
     "ventana_dias": 90,
-    "desde": "2026-07-11",
+    "desde": "2026-07-12",
     "magnitud_minima": 4.5,
-    "sismos": 343,
-    "en_tierra": 140,
+    "sismos": 347,
+    "en_tierra": 144,
     "mar_adentro": 203,
     "estados_con_sismo": 13,
     "estados_del_padron": 33,
     "por_magnitud": {
-      "4,5 a 4,9": 243,
-      "5 a 5,9": 94,
+      "5 a 5,9": 95,
+      "4,5 a 4,9": 246,
       "6 o mayor": 6
     },
-    "consultado": "2026-10-09T22:13:26+00:00"
+    "consultado": "2026-10-10T00:49:36+00:00"
   },
   "mar": {
     "cantidad": 203,
@@ -1015,8 +1015,8 @@
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2103,
-    "recuadro": 343,
+    "mundo": 2087,
+    "recuadro": 347,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
 }

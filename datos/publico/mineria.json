@@ -1,6 +1,6 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-09T22:28:23+00:00",
+  "corrida": "2026-10-10T00:49:45+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
@@ -307,19 +307,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.93,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.0792570303548977e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "perdida_bosque",
       "b": "superficie",
       "rotulo_a": "Bosque perdido",
@@ -411,6 +398,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.92,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.0166337137771e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "migrantes",
       "b": "ransomware:victimas_ultimos_dos_anios",
       "rotulo_a": "Población migrante que el país aloja",
@@ -497,6 +497,19 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 6.027655962382693e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.909,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 7.150999225244295e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 7.340017665091626e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "focos:focos",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "focos · focos",
-      "coeficiente": 0.891,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.205955634537637e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
