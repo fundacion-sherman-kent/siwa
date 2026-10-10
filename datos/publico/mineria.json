@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-10T18:35:27+00:00",
-  "medidas_con_suficientes_casos": 202,
-  "pares_probados": 20301,
+  "corrida": "2026-10-10T21:10:48+00:00",
+  "medidas_con_suficientes_casos": 203,
+  "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3900,
-    "de_ellos_son_parentescos": 414
+    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3889,
+    "de_ellos_son_parentescos": 413
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3486,
-  "anomalias_totales": 392,
+  "pistas_totales": 3476,
+  "anomalias_totales": 397,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -177,19 +177,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.946,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.378465539028885e-23,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -211,6 +198,19 @@
       "estados": 27,
       "tipo": "rangos (Spearman)",
       "p": 4.9726033118320344e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.94,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.818923215569148e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -359,19 +359,6 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.925,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 9.25567270417779e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "democracia_electoral",
       "b": "estado_derecho_wjp",
       "rotulo_a": "Nivel democrático — democracia electoral",
@@ -380,6 +367,19 @@
       "estados": 24,
       "tipo": "rangos (Spearman)",
       "p": 1.0444564718830348e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:victimas_ultimos_dos_anios",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
+      "coeficiente": 0.924,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.0838384762565866e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -406,19 +406,6 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 1.1912948479436594e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.92,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.541894791908458e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -516,13 +503,13 @@
     },
     {
       "a": "focos:focos",
-      "b": "perdida_bosque",
+      "b": "superficie",
       "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.908,
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.911,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.1220082505516495e-16,
+      "p": 4.301674384900419e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -549,6 +536,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.714968772957998e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.905,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.256976943203734e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
