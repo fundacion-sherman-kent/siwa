@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-10T22:31:41+00:00",
+  "corrida": "2026-10-11T01:53:27+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3891,
+    "sobreviven": 3884,
     "de_ellos_son_parentescos": 413
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3478,
+  "pistas_totales": 3471,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -502,19 +502,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.911,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.9893204137689515e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -523,19 +510,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1905778960493398e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.907,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.2473995179533598e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +770,32 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 7.340017665091626e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "subnacional_focos:cuantas",
+      "b": "superficie",
+      "rotulo_a": "subnacional_focos · cuantas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.892,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 4.125248663763424e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "corrupcion_politica",
+      "b": "percepcion_corrupcion",
+      "rotulo_a": "Corrupción política",
+      "rotulo_b": "Percepción de corrupción",
+      "coeficiente": -0.889,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 3.003697736400934e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
