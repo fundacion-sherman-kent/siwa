@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "redes",
     "capa": "publico",
-    "obtenido_en": "2026-10-12T05:53:39+00:00",
+    "obtenido_en": "2026-10-12T13:32:30+00:00",
     "fuente": {
       "nombre": "Mastodon — instancias mastodon.social, mstdn.social, masto.ai, mas.to",
       "url": "https://docs.joinmastodon.org/methods/timelines/"
@@ -14,14 +14,14 @@
       "nota": "Publicaciones de personas sin identidad verificada. Se registra la circulación, que sí se observa directamente, no el contenido, que no está verificado. Un término que circula mucho no es un hecho."
     },
     "vacios_declarados": [
-      "Se descartaron 314 publicaciones de cuentas automatizadas, que en su mayoría reenvian titulares de prensa. Contarlas como conversación social sería contar dos veces la misma noticia, que este registro ya recoge por su propio canal. La detección usa la declaración de la propia cuenta y, si no la hay, su nombre: una cuenta automatizada que no se declare puede pasar.",
+      "Se descartaron 321 publicaciones de cuentas automatizadas, que en su mayoría reenvian titulares de prensa. Contarlas como conversación social sería contar dos veces la misma noticia, que este registro ya recoge por su propio canal. La detección usa la declaración de la propia cuenta y, si no la hay, su nombre: una cuenta automatizada que no se declare puede pasar.",
       "Mastodon no es representativo de la conversación pública de la región: su base de usuarios es pequeña, mayoritariamente europea y norteamericana y de perfil técnico. Lo que se observa es una muestra sesgada y no probabilística. Ningún juicio de la Fundación puede apoyarse solo en este registro.",
       "Sin circulación en la ventana de 48 h: Antigua y Barbuda, Belice, Dominica, San Cristóbal y Nieves, Santa Lucía, San Vicente y las Granadinas. Ausencia de publicaciones no es ausencia de hechos.",
       "X (Twitter) queda fuera: la interfaz devuelve 401 sin clave y no existe nivel gratuito de búsqueda. Incorporarlo exige contratar el servicio, que es pagó y mensual: es una decisión de la Dirección, no un problema técnico.",
       "Reddit queda fuera: devuelve 403 al acceso anónimo automatizado y exige registrar una aplicación y aceptar sus condiciones de uso.",
       "Telegram queda fuera: la vista web de canal público responde, pero leerla de forma sistemática es raspado y doctrina/límites.md lo condiciona a dictamen legal previo, que no se emitió.",
       "Bluesky queda fuera: la búsqueda pública devolvió 403 sin sesión iniciada.",
-      "Consultas que fallaron: mstdn.social: HTTP 422 (33); masto.ai: HTTP 422 (33)"
+      "Consultas que fallaron: mstdn.social: HTTP 422 (33); masto.ai: HTTP 422 (33); mas.to: JSONDecodeError (1); mas.to: TimeoutError (1)"
     ],
     "restriccion_de_uso": null,
     "cantidad": 33,
@@ -41,9 +41,9 @@
       "pais": "Argentina",
       "bloque": "Cono Sur",
       "etiqueta": "#argentina",
-      "publicaciones": 17,
-      "publicaciones_automatizadas": 53,
-      "cuentas_distintas": 14,
+      "publicaciones": 18,
+      "publicaciones_automatizadas": 52,
+      "cuentas_distintas": 16,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "?",
@@ -52,26 +52,32 @@
         "fr",
         "hu",
         "ja",
+        "pt",
         "ro"
       ],
       "palabras": [
         {
-          "palabra": "papa",
+          "palabra": "millones",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "final",
+          "palabra": "solo",
           "publicaciones": 2,
           "instancias": 2
         },
         {
-          "palabra": "millones",
+          "palabra": "podria",
           "publicaciones": 2,
           "instancias": 2
         },
         {
-          "palabra": "milei",
+          "palabra": "verdad",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "gran",
           "publicaciones": 2,
           "instancias": 2
         }
@@ -94,12 +100,11 @@
       "pais": "Bahamas",
       "bloque": "Caribe oriental",
       "etiqueta": "#bahamas",
-      "publicaciones": 1,
-      "publicaciones_automatizadas": 2,
-      "cuentas_distintas": 1,
-      "instancias_que_lo_vieron": 2,
+      "publicaciones": 0,
+      "publicaciones_automatizadas": 1,
+      "cuentas_distintas": 0,
+      "instancias_que_lo_vieron": 1,
       "idiomas": [
-        "en",
         "es"
       ],
       "palabras": []
@@ -121,7 +126,7 @@
       "pais": "Bolivia",
       "bloque": "Andina",
       "etiqueta": "#bolivia",
-      "publicaciones": 29,
+      "publicaciones": 36,
       "publicaciones_automatizadas": 4,
       "cuentas_distintas": 7,
       "instancias_que_lo_vieron": 2,
@@ -138,12 +143,11 @@
       "pais": "Brasil",
       "bloque": "Cono Sur",
       "etiqueta": "#brasil",
-      "publicaciones": 42,
-      "publicaciones_automatizadas": 20,
-      "cuentas_distintas": 29,
+      "publicaciones": 41,
+      "publicaciones_automatizadas": 18,
+      "cuentas_distintas": 30,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
-        "?",
         "ca",
         "de",
         "en",
@@ -154,7 +158,7 @@
       "palabras": [
         {
           "palabra": "lula",
-          "publicaciones": 10,
+          "publicaciones": 11,
           "instancias": 2
         },
         {
@@ -164,26 +168,11 @@
         },
         {
           "palabra": "presenta",
-          "publicaciones": 5,
-          "instancias": 2
-        },
-        {
-          "palabra": "flavio",
           "publicaciones": 4,
           "instancias": 2
         },
         {
-          "palabra": "menos",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "sabado",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "jair",
+          "palabra": "flavio",
           "publicaciones": 3,
           "instancias": 2
         },
@@ -193,7 +182,32 @@
           "instancias": 2
         },
         {
+          "palabra": "fascistas",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "acao",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "politica",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "sabado",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
           "palabra": "cara",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "menos",
           "publicaciones": 2,
           "instancias": 2
         },
@@ -208,22 +222,12 @@
           "instancias": 2
         },
         {
-          "palabra": "derecha",
+          "palabra": "jair",
           "publicaciones": 2,
           "instancias": 2
         },
         {
-          "palabra": "cada",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "presidencia",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "vuelta",
+          "palabra": "diferenca",
           "publicaciones": 2,
           "instancias": 2
         }
@@ -248,13 +252,12 @@
       "pais": "Chile",
       "bloque": "Cono Sur",
       "etiqueta": "#chile",
-      "publicaciones": 29,
-      "publicaciones_automatizadas": 26,
-      "cuentas_distintas": 22,
+      "publicaciones": 27,
+      "publicaciones_automatizadas": 25,
+      "cuentas_distintas": 21,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "?",
-        "cs",
         "de",
         "en",
         "es",
@@ -263,12 +266,82 @@
       ],
       "palabras": [
         {
-          "palabra": "atacama",
-          "publicaciones": 4,
+          "palabra": "local",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "nacional",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "hora",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "universidad",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "sismo",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "sismologico",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "octubre",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "mexico",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "domingo",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "fecha",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "profundidad",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "magnitud",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "kilometros",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "centro",
+          "publicaciones": 3,
           "instancias": 2
         },
         {
           "palabra": "desert",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "atacama",
           "publicaciones": 3,
           "instancias": 2
         },
@@ -278,17 +351,12 @@
           "instancias": 2
         },
         {
-          "palabra": "region",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "poder",
+          "palabra": "first",
           "publicaciones": 2,
           "instancias": 2
         },
         {
-          "palabra": "york",
+          "palabra": "time",
           "publicaciones": 2,
           "instancias": 2
         }
@@ -299,35 +367,28 @@
       "pais": "Colombia",
       "bloque": "Andina",
       "etiqueta": "#colombia",
-      "publicaciones": 35,
-      "publicaciones_automatizadas": 14,
-      "cuentas_distintas": 24,
+      "publicaciones": 37,
+      "publicaciones_automatizadas": 13,
+      "cuentas_distintas": 26,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "?",
-        "ca",
         "en",
-        "es",
-        "it"
+        "es"
       ],
       "palabras": [
         {
           "palabra": "colombian",
-          "publicaciones": 4,
+          "publicaciones": 6,
           "instancias": 2
         },
         {
-          "palabra": "faces",
-          "publicaciones": 3,
+          "palabra": "mexico",
+          "publicaciones": 2,
           "instancias": 2
         },
         {
-          "palabra": "over",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "pulido",
+          "palabra": "america",
           "publicaciones": 2,
           "instancias": 2
         },
@@ -337,7 +398,22 @@
           "instancias": 2
         },
         {
+          "palabra": "pulido",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
           "palabra": "venezuela",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "over",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "faces",
           "publicaciones": 2,
           "instancias": 2
         }
@@ -348,9 +424,9 @@
       "pais": "Costa Rica",
       "bloque": "México y Centroamérica",
       "etiqueta": "#costarica",
-      "publicaciones": 14,
-      "publicaciones_automatizadas": 19,
-      "cuentas_distintas": 4,
+      "publicaciones": 12,
+      "publicaciones_automatizadas": 18,
+      "cuentas_distintas": 3,
       "instancias_que_lo_vieron": 1,
       "idiomas": [
         "?",
@@ -364,18 +440,18 @@
       "pais": "Cuba",
       "bloque": "Caribe hispano y Haití",
       "etiqueta": "#cuba",
-      "publicaciones": 50,
-      "publicaciones_automatizadas": 4,
+      "publicaciones": 49,
+      "publicaciones_automatizadas": 6,
       "cuentas_distintas": 25,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "?",
+        "ca",
         "en",
         "es",
         "fr",
         "it",
-        "pt",
-        "ro"
+        "pt"
       ],
       "palabras": [
         {
@@ -394,12 +470,17 @@
           "instancias": 2
         },
         {
-          "palabra": "government",
-          "publicaciones": 3,
+          "palabra": "blockade",
+          "publicaciones": 4,
           "instancias": 2
         },
         {
           "palabra": "missions",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "government",
           "publicaciones": 3,
           "instancias": 2
         },
@@ -409,32 +490,27 @@
           "instancias": 2
         },
         {
-          "palabra": "economic",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "state",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
           "palabra": "people",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "trump",
+          "palabra": "economic",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "blockade",
-          "publicaciones": 3,
+          "palabra": "jose",
+          "publicaciones": 2,
           "instancias": 2
         },
         {
           "palabra": "cubans",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "unavailable",
           "publicaciones": 2,
           "instancias": 2
         },
@@ -444,12 +520,12 @@
           "instancias": 2
         },
         {
-          "palabra": "crisis",
+          "palabra": "political",
           "publicaciones": 2,
           "instancias": 2
         },
         {
-          "palabra": "dozens",
+          "palabra": "crisis",
           "publicaciones": 2,
           "instancias": 2
         },
@@ -459,7 +535,12 @@
           "instancias": 2
         },
         {
-          "palabra": "political",
+          "palabra": "state",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "dozens",
           "publicaciones": 2,
           "instancias": 2
         },
@@ -469,37 +550,22 @@
           "instancias": 2
         },
         {
+          "palabra": "trump",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
           "palabra": "paises",
           "publicaciones": 2,
           "instancias": 2
         },
         {
+          "palabra": "including",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
           "palabra": "plan",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "life",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "like",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "based",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "donald",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "military",
           "publicaciones": 2,
           "instancias": 2
         }
@@ -537,7 +603,7 @@
       "bloque": "Andina",
       "etiqueta": "#ecuador",
       "publicaciones": 8,
-      "publicaciones_automatizadas": 7,
+      "publicaciones_automatizadas": 5,
       "cuentas_distintas": 7,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
@@ -547,7 +613,7 @@
       ],
       "palabras": [
         {
-          "palabra": "ecuadorian",
+          "palabra": "military",
           "publicaciones": 2,
           "instancias": 2
         }
@@ -558,9 +624,9 @@
       "pais": "Granada",
       "bloque": "Caribe oriental",
       "etiqueta": "#granada",
-      "publicaciones": 9,
+      "publicaciones": 12,
       "publicaciones_automatizadas": 4,
-      "cuentas_distintas": 7,
+      "cuentas_distintas": 9,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "?",
@@ -574,12 +640,11 @@
       "pais": "Guatemala",
       "bloque": "México y Centroamérica",
       "etiqueta": "#guatemala",
-      "publicaciones": 5,
+      "publicaciones": 4,
       "publicaciones_automatizadas": 0,
-      "cuentas_distintas": 5,
+      "cuentas_distintas": 4,
       "instancias_que_lo_vieron": 1,
       "idiomas": [
-        "?",
         "cs",
         "en"
       ],
@@ -604,7 +669,7 @@
       "pais": "Honduras",
       "bloque": "México y Centroamérica",
       "etiqueta": "#honduras",
-      "publicaciones": 3,
+      "publicaciones": 4,
       "publicaciones_automatizadas": 0,
       "cuentas_distintas": 2,
       "instancias_que_lo_vieron": 1,
@@ -619,15 +684,13 @@
       "pais": "Haití",
       "bloque": "Caribe hispano y Haití",
       "etiqueta": "#haiti",
-      "publicaciones": 3,
-      "publicaciones_automatizadas": 10,
-      "cuentas_distintas": 3,
-      "instancias_que_lo_vieron": 2,
+      "publicaciones": 0,
+      "publicaciones_automatizadas": 8,
+      "cuentas_distintas": 0,
+      "instancias_que_lo_vieron": 1,
       "idiomas": [
         "en",
-        "es",
-        "fr",
-        "it"
+        "es"
       ],
       "palabras": []
     },
@@ -636,9 +699,9 @@
       "pais": "Jamaica",
       "bloque": "Caribe oriental",
       "etiqueta": "#jamaica",
-      "publicaciones": 5,
-      "publicaciones_automatizadas": 67,
-      "cuentas_distintas": 5,
+      "publicaciones": 4,
+      "publicaciones_automatizadas": 74,
+      "cuentas_distintas": 4,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "en",
@@ -675,115 +738,164 @@
       "pais": "México",
       "bloque": "México y Centroamérica",
       "etiqueta": "#mexico",
-      "publicaciones": 36,
-      "publicaciones_automatizadas": 5,
+      "publicaciones": 39,
+      "publicaciones_automatizadas": 3,
       "cuentas_distintas": 6,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "en",
-        "es",
-        "ja"
+        "es"
       ],
-      "palabras": []
+      "palabras": [
+        {
+          "palabra": "enteraste",
+          "publicaciones": 23,
+          "instancias": 2
+        },
+        {
+          "palabra": "contra",
+          "publicaciones": 8,
+          "instancias": 2
+        },
+        {
+          "palabra": "sheinbaum",
+          "publicaciones": 6,
+          "instancias": 2
+        }
+      ]
     },
     {
       "iso": "NIC",
       "pais": "Nicaragua",
       "bloque": "México y Centroamérica",
       "etiqueta": "#nicaragua",
-      "publicaciones": 41,
-      "publicaciones_automatizadas": 0,
+      "publicaciones": 42,
+      "publicaciones_automatizadas": 2,
       "cuentas_distintas": 4,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "en",
-        "es",
-        "fr"
+        "es"
       ],
       "palabras": [
         {
-          "palabra": "hora",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "kilometros",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "instituto",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "magnitud",
-          "publicaciones": 39,
+          "palabra": "ineter",
+          "publicaciones": 40,
           "instancias": 2
         },
         {
           "palabra": "estudios",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "nicaraguense",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "mexico",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "profundidad",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "fecha",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "ineter",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "sismo",
-          "publicaciones": 39,
+          "publicaciones": 40,
           "instancias": 2
         },
         {
           "palabra": "octubre",
-          "publicaciones": 39,
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "mexico",
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "instituto",
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "fecha",
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "nicaraguense",
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "hora",
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "sismo",
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "kilometros",
+          "publicaciones": 40,
           "instancias": 2
         },
         {
           "palabra": "territoriales",
-          "publicaciones": 39,
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "profundidad",
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "magnitud",
+          "publicaciones": 40,
           "instancias": 2
         },
         {
           "palabra": "panama",
-          "publicaciones": 32,
+          "publicaciones": 33,
+          "instancias": 2
+        },
+        {
+          "palabra": "domingo",
+          "publicaciones": 33,
           "instancias": 2
         },
         {
           "palabra": "sabado",
-          "publicaciones": 18,
+          "publicaciones": 15,
           "instancias": 2
         },
         {
           "palabra": "tonosi",
-          "publicaciones": 13,
+          "publicaciones": 14,
+          "instancias": 2
+        },
+        {
+          "palabra": "isla",
+          "publicaciones": 12,
+          "instancias": 2
+        },
+        {
+          "palabra": "norte",
+          "publicaciones": 11,
+          "instancias": 2
+        },
+        {
+          "palabra": "coiba",
+          "publicaciones": 9,
+          "instancias": 2
+        },
+        {
+          "palabra": "noreste",
+          "publicaciones": 6,
           "instancias": 2
         },
         {
           "palabra": "noroeste",
           "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "punta",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "coca",
+          "publicaciones": 2,
           "instancias": 2
         }
       ]
@@ -795,9 +907,10 @@
       "etiqueta": "#panama",
       "publicaciones": 15,
       "publicaciones_automatizadas": 33,
-      "cuentas_distintas": 13,
+      "cuentas_distintas": 12,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
+        "?",
         "cs",
         "de",
         "en",
@@ -805,13 +918,12 @@
         "fr",
         "hu",
         "nl",
-        "sl",
-        "tr"
+        "sl"
       ],
       "palabras": [
         {
           "palabra": "terremoto",
-          "publicaciones": 4,
+          "publicaciones": 3,
           "instancias": 2
         }
       ]
@@ -821,9 +933,9 @@
       "pais": "Perú",
       "bloque": "Andina",
       "etiqueta": "#peru",
-      "publicaciones": 27,
-      "publicaciones_automatizadas": 25,
-      "cuentas_distintas": 20,
+      "publicaciones": 25,
+      "publicaciones_automatizadas": 24,
+      "cuentas_distintas": 17,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "?",
@@ -832,30 +944,28 @@
         "es",
         "fr",
         "ja",
-        "nl",
-        "no",
         "ro",
         "sl"
       ],
       "palabras": [
         {
           "palabra": "hitler",
-          "publicaciones": 9,
+          "publicaciones": 6,
           "instancias": 2
         },
         {
           "palabra": "mussolini",
-          "publicaciones": 9,
+          "publicaciones": 6,
           "instancias": 2
         },
         {
           "palabra": "local",
-          "publicaciones": 3,
+          "publicaciones": 4,
           "instancias": 2
         },
         {
           "palabra": "lima",
-          "publicaciones": 3,
+          "publicaciones": 4,
           "instancias": 2
         },
         {
@@ -879,7 +989,27 @@
           "instancias": 2
         },
         {
+          "palabra": "candidate",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
           "palabra": "sold",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "named",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "elected",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "mayor",
           "publicaciones": 2,
           "instancias": 2
         }
@@ -890,25 +1020,87 @@
       "pais": "Paraguay",
       "bloque": "Cono Sur",
       "etiqueta": "#paraguay",
-      "publicaciones": 8,
+      "publicaciones": 9,
       "publicaciones_automatizadas": 4,
-      "cuentas_distintas": 7,
+      "cuentas_distintas": 8,
       "instancias_que_lo_vieron": 2,
       "idiomas": [
         "de",
         "en",
-        "es"
+        "es",
+        "fr"
       ],
-      "palabras": []
+      "palabras": [
+        {
+          "palabra": "minister",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "monday",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "communications",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "taiwan",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "beijing",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "sanctions",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "belize",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "foreign",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "placed",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "china",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "ties",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "over",
+          "publicaciones": 2,
+          "instancias": 2
+        }
+      ]
     },
     {
       "iso": "SLV",
       "pais": "El Salvador",
       "bloque": "México y Centroamérica",
       "etiqueta": "#elsalvador",
-      "publicaciones": 4,
+      "publicaciones": 2,
       "publicaciones_automatizadas": 5,
-      "cuentas_distintas": 4,
+      "cuentas_distintas": 2,
       "instancias_que_lo_vieron": 1,
       "idiomas": [
         "en",
@@ -950,9 +1142,9 @@
       "pais": "Uruguay",
       "bloque": "Cono Sur",
       "etiqueta": "#uruguay",
-      "publicaciones": 7,
+      "publicaciones": 6,
       "publicaciones_automatizadas": 3,
-      "cuentas_distintas": 4,
+      "cuentas_distintas": 5,
       "instancias_que_lo_vieron": 1,
       "idiomas": [
         "en",
@@ -977,97 +1169,26 @@
       "pais": "Venezuela",
       "bloque": "Andina",
       "etiqueta": "#venezuela",
-      "publicaciones": 42,
-      "publicaciones_automatizadas": 7,
-      "cuentas_distintas": 13,
-      "instancias_que_lo_vieron": 2,
+      "publicaciones": 23,
+      "publicaciones_automatizadas": 17,
+      "cuentas_distintas": 15,
+      "instancias_que_lo_vieron": 1,
       "idiomas": [
         "en",
         "es",
         "fr",
         "it"
       ],
-      "palabras": [
-        {
-          "palabra": "caracas",
-          "publicaciones": 6,
-          "instancias": 2
-        },
-        {
-          "palabra": "internet",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "spacex",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "real",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "starlink",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "sociedad",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "conatel",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "price",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "dans",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "pulido",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "alvaro",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "llego",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "october",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "gana",
-          "publicaciones": 2,
-          "instancias": 2
-        }
-      ]
+      "palabras": []
     }
   ],
   "resumen": {
     "instancias_consultadas": 4,
-    "estados_con_circulacion": 26,
+    "estados_con_circulacion": 24,
     "estados_del_padron": 33,
-    "publicaciones_de_personas": 435,
-    "publicaciones_automatizadas": 314,
-    "publicaciones_unicas": 1737,
+    "publicaciones_de_personas": 418,
+    "publicaciones_automatizadas": 321,
+    "publicaciones_unicas": 1723,
     "ventana_horas": 48
   },
   "metodo": "Se consulta la línea pública de la etiqueta de cada Estado en cuatro instancias independientes. Las instancias federan entre sí, de modo que cada publicación se cuenta una sola vez por su dirección única. Un término figura en el mapa solo si aparece en dos publicaciones y en dos instancias distintas: lo que sale de una sola instancia es eco, no circulación.",
@@ -1075,7 +1196,12 @@
     "region": [
       {
         "palabra": "octubre",
-        "publicaciones": 65,
+        "publicaciones": 67,
+        "instancias": 2
+      },
+      {
+        "palabra": "fecha",
+        "publicaciones": 57,
         "instancias": 2
       },
       {
@@ -1084,17 +1210,17 @@
         "instancias": 2
       },
       {
-        "palabra": "magnitud",
-        "publicaciones": 56,
-        "instancias": 2
-      },
-      {
         "palabra": "sismo",
-        "publicaciones": 55,
+        "publicaciones": 57,
         "instancias": 2
       },
       {
         "palabra": "kilometros",
+        "publicaciones": 55,
+        "instancias": 2
+      },
+      {
+        "palabra": "magnitud",
         "publicaciones": 55,
         "instancias": 2
       },
@@ -1104,17 +1230,27 @@
         "instancias": 2
       },
       {
-        "palabra": "fecha",
-        "publicaciones": 54,
+        "palabra": "instituto",
+        "publicaciones": 45,
         "instancias": 2
       },
       {
-        "palabra": "instituto",
-        "publicaciones": 40,
+        "palabra": "domingo",
+        "publicaciones": 42,
         "instancias": 2
       },
       {
         "palabra": "estudios",
+        "publicaciones": 42,
+        "instancias": 2
+      },
+      {
+        "palabra": "ineter",
+        "publicaciones": 40,
+        "instancias": 2
+      },
+      {
+        "palabra": "nicaraguense",
         "publicaciones": 40,
         "instancias": 2
       },
@@ -1124,205 +1260,125 @@
         "instancias": 2
       },
       {
-        "palabra": "nicaraguense",
-        "publicaciones": 39,
-        "instancias": 2
-      },
-      {
-        "palabra": "ineter",
-        "publicaciones": 39,
-        "instancias": 2
-      },
-      {
         "palabra": "sabado",
-        "publicaciones": 30,
+        "publicaciones": 28,
         "instancias": 2
       },
       {
         "palabra": "nacional",
-        "publicaciones": 24,
+        "publicaciones": 27,
         "instancias": 2
       },
       {
         "palabra": "bien",
-        "publicaciones": 20,
+        "publicaciones": 26,
         "instancias": 2
       },
       {
-        "palabra": "tras",
+        "palabra": "enteraste",
+        "publicaciones": 23,
+        "instancias": 2
+      },
+      {
+        "palabra": "isla",
         "publicaciones": 18,
         "instancias": 2
       },
       {
-        "palabra": "pais",
-        "publicaciones": 13,
+        "palabra": "mayor",
+        "publicaciones": 17,
+        "instancias": 2
+      },
+      {
+        "palabra": "contra",
+        "publicaciones": 15,
+        "instancias": 2
+      },
+      {
+        "palabra": "norte",
+        "publicaciones": 15,
+        "instancias": 2
+      },
+      {
+        "palabra": "informacion",
+        "publicaciones": 14,
+        "instancias": 2
+      },
+      {
+        "palabra": "coiba",
+        "publicaciones": 14,
+        "instancias": 2
+      },
+      {
+        "palabra": "tonosi",
+        "publicaciones": 14,
         "instancias": 2
       },
       {
         "palabra": "over",
         "publicaciones": 13,
         "instancias": 2
-      },
-      {
-        "palabra": "tonosi",
-        "publicaciones": 13,
-        "instancias": 2
-      },
-      {
-        "palabra": "lula",
-        "publicaciones": 13,
-        "instancias": 2
-      },
-      {
-        "palabra": "october",
-        "publicaciones": 12,
-        "instancias": 2
-      },
-      {
-        "palabra": "mayor",
-        "publicaciones": 12,
-        "instancias": 2
-      },
-      {
-        "palabra": "todo",
-        "publicaciones": 11,
-        "instancias": 2
-      },
-      {
-        "palabra": "real",
-        "publicaciones": 11,
-        "instancias": 2
-      },
-      {
-        "palabra": "contra",
-        "publicaciones": 11,
-        "instancias": 2
       }
     ],
     "bloques": {
       "Andina": [
         {
+          "palabra": "mayor",
+          "publicaciones": 8,
+          "instancias": 2
+        },
+        {
           "palabra": "hitler",
-          "publicaciones": 9,
+          "publicaciones": 6,
           "instancias": 2
         },
         {
           "palabra": "mussolini",
-          "publicaciones": 9,
-          "instancias": 2
-        },
-        {
-          "palabra": "caracas",
-          "publicaciones": 7,
-          "instancias": 2
-        },
-        {
-          "palabra": "over",
-          "publicaciones": 7,
-          "instancias": 2
-        },
-        {
-          "palabra": "national",
           "publicaciones": 6,
-          "instancias": 2
-        },
-        {
-          "palabra": "mayor",
-          "publicaciones": 6,
-          "instancias": 2
-        },
-        {
-          "palabra": "dans",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "pulido",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "alvaro",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "october",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "faces",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "federal",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "local",
-          "publicaciones": 4,
           "instancias": 2
         },
         {
           "palabra": "colombian",
+          "publicaciones": 6,
+          "instancias": 2
+        },
+        {
+          "palabra": "over",
+          "publicaciones": 5,
+          "instancias": 2
+        },
+        {
+          "palabra": "local",
+          "publicaciones": 5,
+          "instancias": 2
+        },
+        {
+          "palabra": "best",
           "publicaciones": 4,
           "instancias": 2
         },
         {
-          "palabra": "internet",
-          "publicaciones": 3,
+          "palabra": "lima",
+          "publicaciones": 4,
           "instancias": 2
         },
         {
-          "palabra": "spacex",
-          "publicaciones": 3,
+          "palabra": "national",
+          "publicaciones": 4,
           "instancias": 2
         },
         {
-          "palabra": "real",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "starlink",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "llego",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "parque",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "after",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "gana",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "first",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "york",
-          "publicaciones": 3,
+          "palabra": "america",
+          "publicaciones": 4,
           "instancias": 2
         },
         {
           "palabra": "bank",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "years",
           "publicaciones": 3,
           "instancias": 2
         }
@@ -1344,12 +1400,17 @@
           "instancias": 2
         },
         {
-          "palabra": "government",
-          "publicaciones": 3,
+          "palabra": "blockade",
+          "publicaciones": 4,
           "instancias": 2
         },
         {
           "palabra": "missions",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "government",
           "publicaciones": 3,
           "instancias": 2
         },
@@ -1359,32 +1420,27 @@
           "instancias": 2
         },
         {
-          "palabra": "economic",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "state",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
           "palabra": "people",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "trump",
+          "palabra": "economic",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "blockade",
-          "publicaciones": 3,
+          "palabra": "jose",
+          "publicaciones": 2,
           "instancias": 2
         },
         {
           "palabra": "cubans",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "unavailable",
           "publicaciones": 2,
           "instancias": 2
         },
@@ -1394,12 +1450,12 @@
           "instancias": 2
         },
         {
-          "palabra": "crisis",
+          "palabra": "political",
           "publicaciones": 2,
           "instancias": 2
         },
         {
-          "palabra": "dozens",
+          "palabra": "crisis",
           "publicaciones": 2,
           "instancias": 2
         },
@@ -1409,7 +1465,12 @@
           "instancias": 2
         },
         {
-          "palabra": "political",
+          "palabra": "state",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
+          "palabra": "dozens",
           "publicaciones": 2,
           "instancias": 2
         },
@@ -1419,37 +1480,22 @@
           "instancias": 2
         },
         {
+          "palabra": "trump",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
           "palabra": "paises",
           "publicaciones": 2,
           "instancias": 2
         },
         {
+          "palabra": "including",
+          "publicaciones": 2,
+          "instancias": 2
+        },
+        {
           "palabra": "plan",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "life",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "like",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "based",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "donald",
-          "publicaciones": 2,
-          "instancias": 2
-        },
-        {
-          "palabra": "military",
           "publicaciones": 2,
           "instancias": 2
         }
@@ -1461,12 +1507,12 @@
           "instancias": 2
         },
         {
-          "palabra": "october",
+          "palabra": "long",
           "publicaciones": 2,
           "instancias": 2
         },
         {
-          "palabra": "long",
+          "palabra": "october",
           "publicaciones": 2,
           "instancias": 2
         },
@@ -1489,121 +1535,121 @@
         },
         {
           "palabra": "bolsonaro",
-          "publicaciones": 10,
+          "publicaciones": 9,
           "instancias": 2
         },
         {
           "palabra": "millones",
-          "publicaciones": 6,
+          "publicaciones": 5,
+          "instancias": 2
+        },
+        {
+          "palabra": "gobierno",
+          "publicaciones": 4,
+          "instancias": 2
+        },
+        {
+          "palabra": "octubre",
+          "publicaciones": 4,
+          "instancias": 2
+        },
+        {
+          "palabra": "gran",
+          "publicaciones": 4,
           "instancias": 2
         },
         {
           "palabra": "nacional",
-          "publicaciones": 5,
-          "instancias": 2
-        },
-        {
-          "palabra": "flavio",
-          "publicaciones": 5,
+          "publicaciones": 4,
           "instancias": 2
         },
         {
           "palabra": "presenta",
-          "publicaciones": 5,
-          "instancias": 2
-        },
-        {
-          "palabra": "pais",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "sabado",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "social",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "vuelta",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "bien",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "atacama",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "nada",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "menos",
           "publicaciones": 4,
           "instancias": 2
         },
         {
           "palabra": "derecha",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "contra",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "denuncia",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "region",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "papa",
-          "publicaciones": 4,
-          "instancias": 2
-        },
-        {
-          "palabra": "todo",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "quimera",
+          "palabra": "carlos",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "vivienda",
+          "palabra": "sistema",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "programa",
+          "palabra": "minister",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "fronteras",
+          "palabra": "over",
           "publicaciones": 3,
           "instancias": 2
         },
         {
-          "palabra": "tercer",
+          "palabra": "first",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "time",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "local",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "hora",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "universidad",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "sismo",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "sismologico",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "domingo",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "fecha",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "profundidad",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "magnitud",
+          "publicaciones": 3,
+          "instancias": 2
+        },
+        {
+          "palabra": "kilometros",
           "publicaciones": 3,
           "instancias": 2
         }
@@ -1612,26 +1658,16 @@
       "México y Centroamérica": [
         {
           "palabra": "octubre",
-          "publicaciones": 55,
+          "publicaciones": 57,
           "instancias": 2
         },
         {
           "palabra": "hora",
-          "publicaciones": 53,
+          "publicaciones": 52,
           "instancias": 2
         },
         {
-          "palabra": "magnitud",
-          "publicaciones": 51,
-          "instancias": 2
-        },
-        {
-          "palabra": "kilometros",
-          "publicaciones": 51,
-          "instancias": 2
-        },
-        {
-          "palabra": "profundidad",
+          "palabra": "sismo",
           "publicaciones": 50,
           "instancias": 2
         },
@@ -1641,8 +1677,38 @@
           "instancias": 2
         },
         {
-          "palabra": "sismo",
+          "palabra": "kilometros",
           "publicaciones": 50,
+          "instancias": 2
+        },
+        {
+          "palabra": "profundidad",
+          "publicaciones": 49,
+          "instancias": 2
+        },
+        {
+          "palabra": "magnitud",
+          "publicaciones": 49,
+          "instancias": 2
+        },
+        {
+          "palabra": "instituto",
+          "publicaciones": 43,
+          "instancias": 2
+        },
+        {
+          "palabra": "estudios",
+          "publicaciones": 41,
+          "instancias": 2
+        },
+        {
+          "palabra": "ineter",
+          "publicaciones": 40,
+          "instancias": 2
+        },
+        {
+          "palabra": "nicaraguense",
+          "publicaciones": 40,
           "instancias": 2
         },
         {
@@ -1651,37 +1717,57 @@
           "instancias": 2
         },
         {
-          "palabra": "instituto",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "estudios",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "nicaraguense",
-          "publicaciones": 39,
-          "instancias": 2
-        },
-        {
-          "palabra": "ineter",
-          "publicaciones": 39,
+          "palabra": "domingo",
+          "publicaciones": 38,
           "instancias": 2
         },
         {
           "palabra": "sabado",
-          "publicaciones": 26,
+          "publicaciones": 25,
+          "instancias": 2
+        },
+        {
+          "palabra": "enteraste",
+          "publicaciones": 23,
+          "instancias": 2
+        },
+        {
+          "palabra": "isla",
+          "publicaciones": 17,
+          "instancias": 2
+        },
+        {
+          "palabra": "norte",
+          "publicaciones": 15,
+          "instancias": 2
+        },
+        {
+          "palabra": "coiba",
+          "publicaciones": 14,
           "instancias": 2
         },
         {
           "palabra": "tonosi",
-          "publicaciones": 13,
+          "publicaciones": 14,
           "instancias": 2
         },
         {
-          "palabra": "terremoto",
+          "palabra": "contra",
+          "publicaciones": 8,
+          "instancias": 2
+        },
+        {
+          "palabra": "noreste",
+          "publicaciones": 7,
+          "instancias": 2
+        },
+        {
+          "palabra": "sheinbaum",
+          "publicaciones": 6,
+          "instancias": 2
+        },
+        {
+          "palabra": "afectados",
           "publicaciones": 5,
           "instancias": 2
         },
@@ -1691,33 +1777,18 @@
           "instancias": 2
         },
         {
-          "palabra": "ayuda",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "espera",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "mientras",
-          "publicaciones": 3,
-          "instancias": 2
-        },
-        {
-          "palabra": "surface",
-          "publicaciones": 2,
+          "palabra": "terremoto",
+          "publicaciones": 4,
           "instancias": 2
         }
       ]
     },
-    "publicaciones_region": 435,
+    "publicaciones_region": 418,
     "publicaciones_por_bloque": {
-      "Andina": 141,
-      "Caribe hispano y Haití": 53,
-      "Caribe oriental": 17,
-      "Cono Sur": 103,
+      "Andina": 129,
+      "Caribe hispano y Haití": 49,
+      "Caribe oriental": 18,
+      "Cono Sur": 101,
       "Guayanas": 3,
       "México y Centroamérica": 118
     }
