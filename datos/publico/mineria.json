@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-12T15:20:27+00:00",
-  "medidas_con_suficientes_casos": 202,
-  "pares_probados": 20301,
+  "corrida": "2026-10-12T21:11:16+00:00",
+  "medidas_con_suficientes_casos": 203,
+  "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3805,
-    "de_ellos_son_parentescos": 411
+    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3846,
+    "de_ellos_son_parentescos": 413
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3394,
+  "pistas_totales": 3433,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -203,19 +203,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.94,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6272587272348993e-21,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocraticos",
@@ -224,6 +211,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 4.4559050475569576e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.937,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.305481467640708e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -366,7 +366,7 @@
       "coeficiente": 0.925,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 9.25567270417779e-18,
+      "p": 1.0473219351350744e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -522,7 +522,7 @@
       "coeficiente": 0.906,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 1.5232323233853367e-15,
+      "p": 1.714968772957998e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -633,6 +633,19 @@
     },
     {
       "a": "financiero_gfi:brecha_usd_millones",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "ransomware · grupos_distintos",
+      "coeficiente": 0.9,
+      "estados": 28,
+      "tipo": "rangos (Spearman)",
+      "p": 1.961550803926828e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "financiero_gfi:brecha_usd_millones",
       "b": "ransomware:victimas",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
       "rotulo_b": "ransomware · victimas",
@@ -640,19 +653,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 2.2185165455555278e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.899,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 2.2482849986068962e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -705,6 +705,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 9.621070309355055e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.895,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.1548913235345224e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -769,20 +782,7 @@
       "coeficiente": 0.893,
       "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 6.503448384351985e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.891,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.1475478654944385e-15,
+      "p": 7.340017665091626e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
