@@ -1,16 +1,16 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-12T05:54:54+00:00",
+  "corrida": "2026-10-12T15:06:47+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
     "atrasado": "4 años o más"
   },
   "resumen": {
-    "indicadores_medidos": 194,
-    "mediana_antiguedad_anios": 1.0,
-    "al_dia_1_anio_o_menos": 124,
-    "tibio_2_a_3_anios": 55,
+    "indicadores_medidos": 197,
+    "mediana_antiguedad_anios": 1,
+    "al_dia_1_anio_o_menos": 126,
+    "tibio_2_a_3_anios": 56,
     "atrasado_4_anios_o_mas": 15,
     "series_detenidas_declaradas": 3,
     "archivos_leidos": 98,
@@ -1630,6 +1630,23 @@
       "serie_detenida": false
     },
     {
+      "clave": "registro_nacimientos",
+      "rotulo": "Nacimientos registrados",
+      "eje": "Gobernanza",
+      "seccion": "capacidad",
+      "fuente": "UNICEF, via la base global de los ODS",
+      "unidad": "% de los menores de 5 años",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2024,
+      "antiguedad_anios": 2,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "secundaria_cepal",
       "rotulo": "Jóvenes de 20 a 24 con secundaria completa · segunda fuente",
       "eje": "Desarrollo",
@@ -3109,6 +3126,57 @@
       "serie_detenida": false
     },
     {
+      "clave": "trata_sexual",
+      "rotulo": "Trata para explotación sexual",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_trabajo",
+      "rotulo": "Trata para trabajo forzoso",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_victimas",
+      "rotulo": "Víctimas detectadas de trata de personas",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "urbanizacion",
       "rotulo": "Población urbana",
       "eje": "Desarrollo",
@@ -3834,7 +3902,7 @@
       "anio_mas_reciente": 2026,
       "antiguedad_anios": 0,
       "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 28,
+        "con_dato_en_el_anio_mas_reciente": 27,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
@@ -3869,23 +3937,6 @@
       "antiguedad_anios": 0,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 19,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
-    },
-    {
-      "clave": "uso_ia_generativa",
-      "rotulo": "Uso de inteligencia artificial generativa",
-      "eje": "Desarrollo",
-      "seccion": "conectividad",
-      "fuente": "Microsoft AI Economy Institute — AI Diffusion Report",
-      "unidad": "% de las personas",
-      "colector": "ia",
-      "archivo": "ia.json",
-      "anio_mas_reciente": 2026,
-      "antiguedad_anios": 0,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 23,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false

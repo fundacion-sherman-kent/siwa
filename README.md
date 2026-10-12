@@ -159,7 +159,7 @@ python colectores/focos.py
 | `gasto_publico` | Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics | `B-2` | 22 | 8 |
 | `gdacs` | GDACS -- Global Disaster Alert and Coordination System (Comision Europea JRC y Naciones Unidas) | `B-2` | 33 | 4 |
 | `gti` | Institute for Economics & Peace (IEP) — Global Terrorism Index 2026: Measuring the Impact of Terrorism | `B-3` | 33 | 7 |
-| `ia` | Microsoft AI Economy Institute; OpenAI Signals; Anthropic Economic Index; documentación oficial de siete empresas de nube | `B-3` | 33 | 7 |
+| `ia` | Microsoft AI Economy Institute; OpenAI Signals; Anthropic Economic Index; documentación oficial de siete empresas de nube | `B-3` | 33 | 8 |
 | `ia_apps` | Apple App Store — rankings de apps gratuitas y disponibilidad por país; padrón de asistentes de IA con origen verificado por la Fundación | `B-3` | 33 | 6 |
 | `indice_opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición uno | `A-1` | 33 | 10 |
 | `inflacion` | CEPALSTAT — Índice de precios al consumidor mensual (indicador 365), Comisión Económica para América Latina y el Caribe | `A-2` | 33 | 4 |
@@ -174,7 +174,7 @@ python colectores/focos.py
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 5 |
 | `oms_homicidios` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `A-2` | 33 | 6 |
-| `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 8 |
+| `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 7 |
 | `opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición cero | `A-3` | 33 | 8 |
 | `opacidad_historia` | Fundación Sherman Kent — archivo del Índice de Opacidad | `A-2` | 33 | 1 |
 | `owd` | V-Dem y UCDP, vía Our World in Data (la Base Global de Terrorismo se retiró de esta capa el 21/9/2026: ver vacíos declarados) | `B-2` | 33 | 10 |
