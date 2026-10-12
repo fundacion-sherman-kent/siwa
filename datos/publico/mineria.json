@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-11T23:42:07+00:00",
+  "corrida": "2026-10-12T05:54:45+00:00",
   "medidas_con_suficientes_casos": 199,
   "pares_probados": 19701,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3853,
-    "de_ellos_son_parentescos": 411
+    "sobreviven": 3790,
+    "de_ellos_son_parentescos": 410
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3442,
+  "pistas_totales": 3380,
   "anomalias_totales": 390,
   "pistas": [
     {
@@ -502,19 +502,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.908,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.0018504320143723e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -796,6 +783,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 5.611982576639758e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "corrupcion_politica",
+      "b": "percepcion_corrupcion",
+      "rotulo_a": "Corrupción política",
+      "rotulo_b": "Percepción de corrupción",
+      "coeficiente": -0.889,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 3.003697736400934e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
