@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-10-07T22:06:09+00:00",
+    "obtenido_en": "2026-10-13T11:47:40+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**193 de los 318 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**221 de los 386 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece sólo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -35,34 +35,99 @@
   },
   "registros": [
     {
+      "iso": "PAN",
+      "pais": "Panamá",
+      "bloque": "México y Centroamérica",
+      "sismos": 41,
+      "mayor_magnitud": 7.7,
+      "mayor": {
+        "magnitud": 7.7,
+        "lugar": "12 km WSW of Pitaloza Arriba, Panama",
+        "cuando": "2026-10-09T17:56:06+00:00",
+        "profundidad_km": 12.647,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u18k",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.7,
+        "lugar": "14 km WNW of Río Grande, Panama",
+        "cuando": "2026-10-13T06:39:04+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1zh",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.7,
+          "lugar": "14 km WNW of Río Grande, Panama",
+          "cuando": "2026-10-13T06:39:04+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1zh",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.7,
+          "lugar": "9 km SSE of La Mesa, Panama",
+          "cuando": "2026-10-13T02:48:02+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1y4",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.6,
+          "lugar": "23 km WNW of Río Grande, Panama",
+          "cuando": "2026-10-13T00:02:01+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1x2",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.9,
+          "lugar": "17 km W of Río Grande, Panama",
+          "cuando": "2026-10-12T23:36:46+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1ww",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "5 km WSW of Calidonia, Panama",
+          "cuando": "2026-10-12T21:48:54+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1w7",
+          "tsunami": false
+        }
+      ]
+    },
+    {
       "iso": "COL",
       "pais": "Colombia",
       "bloque": "Andina",
-      "sismos": 35,
+      "sismos": 36,
       "mayor_magnitud": 7.4,
       "mayor": {
         "magnitud": 7.4,
-        "lugar": "2 km SE of San José del Palmar, Colombia",
+        "lugar": "4 km SSW of San José del Palmar, Colombia",
         "cuando": "2026-08-10T12:34:28+00:00",
-        "profundidad_km": 108.174,
+        "profundidad_km": 116.13,
         "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjl2",
         "tsunami": false
       },
       "ultimo": {
         "magnitud": 4.5,
-        "lugar": "15 km SW of San Antonio, Colombia",
-        "cuando": "2026-09-29T21:50:29+00:00",
-        "profundidad_km": 10.0,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tyfk",
+        "lugar": "6 km WSW of Filadelfia, Colombia",
+        "cuando": "2026-10-10T05:45:59+00:00",
+        "profundidad_km": 115.143,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1cx",
         "tsunami": false
       },
       "recientes": [
         {
           "magnitud": 4.5,
-          "lugar": "15 km SW of San Antonio, Colombia",
-          "cuando": "2026-09-29T21:50:29+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tyfk",
+          "lugar": "6 km WSW of Filadelfia, Colombia",
+          "cuando": "2026-10-10T05:45:59+00:00",
+          "profundidad_km": 115.143,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1cx",
           "tsunami": false
         },
         {
@@ -82,10 +147,10 @@
           "tsunami": false
         },
         {
-          "magnitud": 4.5,
-          "lugar": "39 km WSW of Sipí, Colombia",
+          "magnitud": 4.6,
+          "lugar": "34 km WSW of Sipí, Colombia",
           "cuando": "2026-09-25T00:57:07+00:00",
-          "profundidad_km": 52.219,
+          "profundidad_km": 55.883,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000txhs",
           "tsunami": false
         },
@@ -103,7 +168,7 @@
       "iso": "PER",
       "pais": "Perú",
       "bloque": "Andina",
-      "sismos": 19,
+      "sismos": 17,
       "mayor_magnitud": 6.7,
       "mayor": {
         "magnitud": 6.7,
@@ -131,16 +196,8 @@
           "tsunami": false
         },
         {
-          "magnitud": 4.5,
-          "lugar": "4 km W of Victor Raul, Peru",
-          "cuando": "2026-09-21T03:58:24+00:00",
-          "profundidad_km": 73.088,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tivb",
-          "tsunami": false
-        },
-        {
           "magnitud": 4.9,
-          "lugar": "117 km NW of Barranca, Peru",
+          "lugar": "115 km WSW of Alianza Cristiana, Peru",
           "cuando": "2026-09-19T07:12:27+00:00",
           "profundidad_km": 10.0,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tii3",
@@ -161,6 +218,14 @@
           "profundidad_km": 101.191,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tgvk",
           "tsunami": false
+        },
+        {
+          "magnitud": 4.7,
+          "lugar": "119 km WSW of Alianza Cristiana, Peru",
+          "cuando": "2026-09-10T10:39:35+00:00",
+          "profundidad_km": 16.861,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tg9q",
+          "tsunami": false
         }
       ]
     },
@@ -168,7 +233,7 @@
       "iso": "ARG",
       "pais": "Argentina",
       "bloque": "Cono Sur",
-      "sismos": 21,
+      "sismos": 19,
       "mayor_magnitud": 5.3,
       "mayor": {
         "magnitud": 5.3,
@@ -233,25 +298,41 @@
       "iso": "CHL",
       "pais": "Chile",
       "bloque": "Cono Sur",
-      "sismos": 27,
+      "sismos": 30,
       "mayor_magnitud": 5.1,
       "mayor": {
         "magnitud": 5.1,
-        "lugar": "78 km SW of San Pedro de Atacama, Chile",
-        "cuando": "2026-07-27T08:57:44+00:00",
-        "profundidad_km": 104.251,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t3m7",
+        "lugar": "72 km SSW of Colchane, Chile",
+        "cuando": "2026-10-09T10:22:14+00:00",
+        "profundidad_km": 123.835,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u153",
         "tsunami": false
       },
       "ultimo": {
-        "magnitud": 4.7,
-        "lugar": "45 km WNW of Ollagüe, Chile",
-        "cuando": "2026-10-07T15:46:14+00:00",
-        "profundidad_km": 105.86,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u0rx",
+        "magnitud": 5.1,
+        "lugar": "72 km SSW of Colchane, Chile",
+        "cuando": "2026-10-09T10:22:14+00:00",
+        "profundidad_km": 123.835,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u153",
         "tsunami": false
       },
       "recientes": [
+        {
+          "magnitud": 5.1,
+          "lugar": "72 km SSW of Colchane, Chile",
+          "cuando": "2026-10-09T10:22:14+00:00",
+          "profundidad_km": 123.835,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u153",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
+          "lugar": "39 km NE of Calama, Chile",
+          "cuando": "2026-10-08T05:35:56+00:00",
+          "profundidad_km": 121.38,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u0wh",
+          "tsunami": false
+        },
         {
           "magnitud": 4.7,
           "lugar": "45 km WNW of Ollagüe, Chile",
@@ -270,26 +351,10 @@
         },
         {
           "magnitud": 4.7,
-          "lugar": "76 km W of Ollagüe, Chile",
+          "lugar": "69 km W of Ollagüe, Chile",
           "cuando": "2026-09-21T12:17:05+00:00",
-          "profundidad_km": 121.183,
+          "profundidad_km": 115.49,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tixg",
-          "tsunami": false
-        },
-        {
-          "magnitud": 4.6,
-          "lugar": "38 km W of San Pedro de Atacama, Chile",
-          "cuando": "2026-09-20T13:55:15+00:00",
-          "profundidad_km": 110.65,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tirs",
-          "tsunami": false
-        },
-        {
-          "magnitud": 4.8,
-          "lugar": "28 km ENE of Villa Presidente Frei, Chile",
-          "cuando": "2026-09-18T16:52:07+00:00",
-          "profundidad_km": 100.054,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tid4",
           "tsunami": false
         }
       ]
@@ -437,7 +502,7 @@
       "iso": "VEN",
       "pais": "Venezuela",
       "bloque": "Andina",
-      "sismos": 6,
+      "sismos": 5,
       "mayor_magnitud": 4.8,
       "mayor": {
         "magnitud": 4.8,
@@ -548,6 +613,55 @@
       ]
     },
     {
+      "iso": "NIC",
+      "pais": "Nicaragua",
+      "bloque": "México y Centroamérica",
+      "sismos": 3,
+      "mayor_magnitud": 4.8,
+      "mayor": {
+        "magnitud": 4.8,
+        "lugar": "17 km S of Nandaime, Nicaragua",
+        "cuando": "2026-10-09T12:33:43+00:00",
+        "profundidad_km": 165.662,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u15l",
+        "tsunami": false
+      },
+      "ultimo": {
+        "magnitud": 4.8,
+        "lugar": "17 km S of Nandaime, Nicaragua",
+        "cuando": "2026-10-09T12:33:43+00:00",
+        "profundidad_km": 165.662,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u15l",
+        "tsunami": false
+      },
+      "recientes": [
+        {
+          "magnitud": 4.8,
+          "lugar": "17 km S of Nandaime, Nicaragua",
+          "cuando": "2026-10-09T12:33:43+00:00",
+          "profundidad_km": 165.662,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u15l",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.6,
+          "lugar": "18 km NNE of Posoltega, Nicaragua",
+          "cuando": "2026-10-07T20:56:51+00:00",
+          "profundidad_km": 206.277,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u0uq",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.6,
+          "lugar": "7 km NW of Belén, Nicaragua",
+          "cuando": "2026-08-02T16:09:30+00:00",
+          "profundidad_km": 135.313,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thmh",
+          "tsunami": false
+        }
+      ]
+    },
+    {
       "iso": "DOM",
       "pais": "República Dominicana",
       "bloque": "Caribe hispano y Haití",
@@ -576,80 +690,6 @@
           "cuando": "2026-09-27T21:49:47+00:00",
           "profundidad_km": 113.02,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ty0q",
-          "tsunami": false
-        }
-      ]
-    },
-    {
-      "iso": "PAN",
-      "pais": "Panamá",
-      "bloque": "México y Centroamérica",
-      "sismos": 2,
-      "mayor_magnitud": 4.7,
-      "mayor": {
-        "magnitud": 4.7,
-        "lugar": "0 km NE of Manaca Civil, Panama",
-        "cuando": "2026-09-12T01:59:50+00:00",
-        "profundidad_km": 10.0,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tgw1",
-        "tsunami": false
-      },
-      "ultimo": {
-        "magnitud": 4.7,
-        "lugar": "0 km NE of Manaca Civil, Panama",
-        "cuando": "2026-09-12T01:59:50+00:00",
-        "profundidad_km": 10.0,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tgw1",
-        "tsunami": false
-      },
-      "recientes": [
-        {
-          "magnitud": 4.7,
-          "lugar": "0 km NE of Manaca Civil, Panama",
-          "cuando": "2026-09-12T01:59:50+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tgw1",
-          "tsunami": false
-        },
-        {
-          "magnitud": 4.5,
-          "lugar": "3 km ENE of Santa Cruz, Panama",
-          "cuando": "2026-07-16T10:33:30+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t0xy",
-          "tsunami": false
-        }
-      ]
-    },
-    {
-      "iso": "NIC",
-      "pais": "Nicaragua",
-      "bloque": "México y Centroamérica",
-      "sismos": 1,
-      "mayor_magnitud": 4.6,
-      "mayor": {
-        "magnitud": 4.6,
-        "lugar": "7 km NW of Belén, Nicaragua",
-        "cuando": "2026-08-02T16:09:30+00:00",
-        "profundidad_km": 135.313,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thmh",
-        "tsunami": false
-      },
-      "ultimo": {
-        "magnitud": 4.6,
-        "lugar": "7 km NW of Belén, Nicaragua",
-        "cuando": "2026-08-02T16:09:30+00:00",
-        "profundidad_km": 135.313,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thmh",
-        "tsunami": false
-      },
-      "recientes": [
-        {
-          "magnitud": 4.6,
-          "lugar": "7 km NW of Belén, Nicaragua",
-          "cuando": "2026-08-02T16:09:30+00:00",
-          "profundidad_km": 135.313,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000thmh",
           "tsunami": false
         }
       ]
@@ -890,22 +930,22 @@
   ],
   "resumen": {
     "ventana_dias": 90,
-    "desde": "2026-07-09",
+    "desde": "2026-07-15",
     "magnitud_minima": 4.5,
-    "sismos": 318,
-    "en_tierra": 125,
-    "mar_adentro": 193,
+    "sismos": 386,
+    "en_tierra": 165,
+    "mar_adentro": 221,
     "estados_con_sismo": 13,
     "estados_del_padron": 33,
     "por_magnitud": {
-      "4,5 a 4,9": 229,
-      "5 a 5,9": 85,
-      "6 o mayor": 4
+      "4,5 a 4,9": 281,
+      "5 a 5,9": 97,
+      "6 o mayor": 8
     },
-    "consultado": "2026-10-07T22:06:09+00:00"
+    "consultado": "2026-10-13T11:47:40+00:00"
   },
   "mar": {
-    "cantidad": 193,
+    "cantidad": 221,
     "mayores": [
       {
         "magnitud": 7.3,
@@ -921,6 +961,14 @@
         "cuando": "2026-07-17T15:20:06+00:00",
         "profundidad_km": 10.0,
         "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000t1cc",
+        "tsunami": false
+      },
+      {
+        "magnitud": 6.1,
+        "lugar": "17 km W of Río Grande, Panama",
+        "cuando": "2026-10-12T23:20:36+00:00",
+        "profundidad_km": 11.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1wn",
         "tsunami": false
       },
       {
@@ -957,26 +1005,18 @@
       },
       {
         "magnitud": 5.6,
-        "lugar": "94 km SW of Tamarindo, Costa Rica",
+        "lugar": "91 km SW of Tamarindo, Costa Rica",
         "cuando": "2026-09-30T21:55:26+00:00",
         "profundidad_km": 8.0,
         "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tymj",
-        "tsunami": false
-      },
-      {
-        "magnitud": 5.6,
-        "lugar": "77 km SW of Puerto Madero, Mexico",
-        "cuando": "2026-09-02T12:28:30+00:00",
-        "profundidad_km": 11.0,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tdmp",
         "tsunami": false
       }
     ],
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2074,
-    "recuadro": 318,
+    "mundo": 2128,
+    "recuadro": 386,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
 }
