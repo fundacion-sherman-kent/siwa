@@ -118,7 +118,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**99 fuentes en servicio**, en 101 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**100 fuentes en servicio**, en 102 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -133,6 +133,7 @@ python colectores/focos.py
 | `cepal` | CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL): Observatorio de Igualdad de Género y estadísticas de seguridad ciudadana | `A-2` | 33 | 8 |
 | `chile_ine_seguridad` | Instituto Nacional de Estadísticas de Chile (INE) — Estadísticas Policiales, cuadro de víctimas | `A-2` | 1 | 4 |
 | `ciber` | OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta | `B-2` | 33 | 6 |
+| `cicad_decomisos` | CICAD — Comision Interamericana para el Control del Abuso de Drogas (OEA), Report on Drug Supply in the Americas 2022, Observatorio Interamericano sobre Drogas | `B-2` | 4 | 4 |
 | `cites` | CITES — base de datos de comercio de especies protegidas (secretaría CITES / UNEP-WCMC) | `A-3` | 33 | 8 |
 | `cobertura` | Padrón de medios de la Fundación Sherman Kent | `F-3` | — | 11 |
 | `coca_ondcp` | ONDCP -- Oficina de Politica Nacional de Control de Drogas de la Casa Blanca (EE.UU.), estimacion de cultivo de coca y produccion potencial de cocaina en la region andina | `B-2` | 3 | 4 |
@@ -150,7 +151,7 @@ python colectores/focos.py
 | `drogas` | Informe Mundial sobre las Drogas 2025, anexo estadístico — Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC) | `B-2` | 33 | 4 |
 | `eia` | Administración de Información Energética de los Estados Unidos (EIA) — estadística energética internacional | `A-2` | 33 | 3 |
 | `especies_cites` | CITES Trade Database — UNEP-WCMC para la Secretaría CITES (descarga completa, agregada a ALC) | `B-2` | — | 5 |
-| `estado_reciente` | Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Argentina, Colombia, Ecuador, México, Panamá, Perú | `A-2` | 33 | 5 |
+| `estado_reciente` | Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Argentina, Colombia, Ecuador, México, Panamá, Perú, Trinidad y Tobago | `A-2` | 33 | 4 |
 | `explorador` | Fundación Sherman Kent — exploración de puertas de datos oficiales | `A-1` | 33 | 6 |
 | `financiero_gfi` | Global Financial Integrity — Trade-Related Illicit Financial Flows in 134 Developing Countries 2009-2018 | `B-2` | 29 | 4 |
 | `fmi_mensual` | Fondo Monetario Internacional — datos estadísticos (SDMX 3.0): liquidez internacional (IL) e índice de precios al consumidor (CPI) | `A-2` | 33 | 4 |
@@ -170,7 +171,7 @@ python colectores/focos.py
 | `migrantes_r4v` | R4V — Plataforma de Coordinación Interagencial para Refugiados y Migrantes de Venezuela (ACNUR–OIM) | `B-2` | — | 4 |
 | `migrantes_undesa` | UN DESA, División de Población — International Migrant Stock 2024 (origen×destino) | `A-2` | — | 4 |
 | `minerales_comercio` | Comtrade de Naciones Unidas — oro, estaño y coltán (HS 7108, 7112, 2616, 8001, 2609, 2615, 8103) | `A-2` | 33 | 7 |
-| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 10 | 10 |
+| `oficiales` | Catálogos oficiales de datos abiertos de los Estados del padrón | `A-2` | 10 | 11 |
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 6 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 5 |
 | `oms_homicidios` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `A-2` | 33 | 6 |
@@ -216,7 +217,7 @@ python colectores/focos.py
 | `subnacional_viales` | Muertes en accidentes viales por provincia — Ministerio de Seguridad, SNIC (Argentina) | `A-2` | 1 | 4 |
 | `subnacional_vigia` | Vigía subnacional de SIWA — reintento sostenido de fuentes por unidad de primer orden | `A-2` | — | 2 |
 | `telegram` | Canales públicos de Telegram, vista sin cuenta | `F-4` | — | 8 |
-| `trata_personas` | Departamento de Estado de los Estados Unidos — Informe sobre la Trata de Personas, edición 2026 | `B-2` | 33 | 7 |
+| `trata_personas` | Departamento de Estado de los Estados Unidos — Informe sobre la Trata de Personas, edición 2026 | `B-2` | 33 | 6 |
 | `trata_unodc` | UNODC — Global Report on Trafficking in Persons (GLOTIP): víctimas detectadas por ciudadanía | `B-2` | — | 4 |
 | `ucdp` | UCDP — Programa de Datos de Conflicto de Upsala, Universidad de Upsala. Conjunto de país-año sobre violencia organizada dentro de las fronteras | `A-2` | 33 | 8 |
 | `unesco` | Instituto de Estadística de la UNESCO (UIS), interfaz abierta | `B-2` | 33 | 6 |
