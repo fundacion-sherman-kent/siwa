@@ -792,6 +792,14 @@ jobs:
         continue-on-error: true
         run: python colectores/vigia_fuentes.py
 
+      # Vigia de ediciones nuevas de CICAD/OID, POR NOTICIAS (oas.org tiene muro
+      # anti-bot: no se puede vigilar la pagina). Avisa si la prensa menciona una
+      # edicion mas nueva que la montada, para bajarla a mano. Gratis, sin clave.
+      - name: Vigia de ediciones de CICAD/OID (por noticias)
+        id: vigia_cicad
+        continue-on-error: true
+        run: python colectores/vigia_cicad.py
+
       # ARMONIZACION. Lee fuentes/armonizaciones.json y, por cada par declarado
       # (fuente fresca vs comparable), calcula el enlace por pais y escribe las
       # fichas en datos/publico/armonizacion.json, que el sitio lee para rotular.
