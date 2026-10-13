@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-13T13:59:32+00:00",
-  "medidas_con_suficientes_casos": 204,
-  "pares_probados": 20706,
+  "corrida": "2026-10-13T19:12:42+00:00",
+  "medidas_con_suficientes_casos": 203,
+  "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.706 pares y el umbral de siempre, alrededor de 1.035 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3827,
-    "de_ellos_son_parentescos": 412
+    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3813,
+    "de_ellos_son_parentescos": 413
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3415,
+  "pistas_totales": 3400,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -207,10 +207,10 @@
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.941,
+      "coeficiente": 0.942,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.1984222778288356e-21,
+      "p": 5.470934464770057e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -366,7 +366,7 @@
       "coeficiente": 0.925,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 1.0473219351350744e-17,
+      "p": 8.941379428300917e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -697,19 +697,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.896,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.7215904091453769e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Corrupción política",
@@ -757,6 +744,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 2.787409683278332e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.894,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.6897699876544948e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
