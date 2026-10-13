@@ -1,19 +1,19 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-10-13T11:47:52+00:00",
+  "corrida": "2026-10-13T13:59:41+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
     "atrasado": "4 años o más"
   },
   "resumen": {
-    "indicadores_medidos": 198,
-    "mediana_antiguedad_anios": 1.0,
+    "indicadores_medidos": 199,
+    "mediana_antiguedad_anios": 1,
     "al_dia_1_anio_o_menos": 127,
     "tibio_2_a_3_anios": 56,
-    "atrasado_4_anios_o_mas": 15,
+    "atrasado_4_anios_o_mas": 16,
     "series_detenidas_declaradas": 3,
-    "archivos_leidos": 98,
+    "archivos_leidos": 99,
     "archivos_sin_json_valido": [],
     "archivos_sin_indicadores_por_anio": [
       "archivo.json",
@@ -128,6 +128,23 @@
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 24,
         "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "incautaciones_cocaina_cicad",
+      "rotulo": "Segunda fuente parcial (4 paises), procedencia parcialmente compartida con UNODC",
+      "eje": "Sin clasificar",
+      "seccion": "seguridad-flujos-ilicitos",
+      "fuente": "CICAD (OEA)",
+      "unidad": "kilogramos",
+      "colector": "cicad_decomisos",
+      "archivo": "cicad_decomisos.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 4,
+        "de_filas_con_iso": 4
       },
       "serie_detenida": false
     },
@@ -572,23 +589,6 @@
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
-    },
-    {
-      "clave": "ocupacion_carcelaria",
-      "rotulo": "Ocupación carcelaria sobre la capacidad oficial",
-      "eje": "Seguridad",
-      "seccion": "violencia",
-      "fuente": "CEPAL, CEPALSTAT",
-      "unidad": "% de la capacidad oficial",
-      "colector": "cepal",
-      "archivo": "cepal.json",
-      "anio_mas_reciente": 2023,
-      "antiguedad_anios": 3,
-      "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 20,
-        "de_filas_con_iso": 33
-      },
-      "serie_detenida": false
     }
   ],
   "indicadores": [
@@ -640,6 +640,23 @@
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 24,
         "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "incautaciones_cocaina_cicad",
+      "rotulo": "Segunda fuente parcial (4 paises), procedencia parcialmente compartida con UNODC",
+      "eje": "Sin clasificar",
+      "seccion": "seguridad-flujos-ilicitos",
+      "fuente": "CICAD (OEA)",
+      "unidad": "kilogramos",
+      "colector": "cicad_decomisos",
+      "archivo": "cicad_decomisos.json",
+      "anio_mas_reciente": 2020,
+      "antiguedad_anios": 6,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 4,
+        "de_filas_con_iso": 4
       },
       "serie_detenida": false
     },
@@ -3902,7 +3919,7 @@
       "anio_mas_reciente": 2026,
       "antiguedad_anios": 0,
       "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 28,
+        "con_dato_en_el_anio_mas_reciente": 27,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false

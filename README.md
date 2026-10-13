@@ -118,7 +118,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**99 fuentes en servicio**, en 101 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**100 fuentes en servicio**, en 102 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -133,6 +133,7 @@ python colectores/focos.py
 | `cepal` | CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL): Observatorio de Igualdad de Género y estadísticas de seguridad ciudadana | `A-2` | 33 | 8 |
 | `chile_ine_seguridad` | Instituto Nacional de Estadísticas de Chile (INE) — Estadísticas Policiales, cuadro de víctimas | `A-2` | 1 | 4 |
 | `ciber` | OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta | `B-2` | 33 | 6 |
+| `cicad_decomisos` | CICAD — Comision Interamericana para el Control del Abuso de Drogas (OEA), Report on Drug Supply in the Americas 2022, Observatorio Interamericano sobre Drogas | `B-2` | 4 | 4 |
 | `cites` | CITES — base de datos de comercio de especies protegidas (secretaría CITES / UNEP-WCMC) | `A-3` | 33 | 8 |
 | `cobertura` | Padrón de medios de la Fundación Sherman Kent | `F-3` | — | 11 |
 | `coca_ondcp` | ONDCP -- Oficina de Politica Nacional de Control de Drogas de la Casa Blanca (EE.UU.), estimacion de cultivo de coca y produccion potencial de cocaina en la region andina | `B-2` | 3 | 4 |
