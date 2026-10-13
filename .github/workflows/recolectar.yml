@@ -558,6 +558,13 @@ jobs:
         continue-on-error: true
         run: python colectores/coca_ondcp.py
 
+      # Decomisos de cocaina · segunda fuente PARCIAL (CICAD/OEA, 4 paises), file-drop.
+      - name: Decomisos de cocaina · segunda fuente (CICAD, OEA)
+        id: cicad_decomisos
+        if: env.COMPLETA == 'true'
+        continue-on-error: true
+        run: python colectores/cicad_decomisos.py
+
       # La segunda fuente de homicidios. Serie anual: corrida diaria.
       - name: Homicidios · segunda fuente (OMS)
         id: oms_salud

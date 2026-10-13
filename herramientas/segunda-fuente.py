@@ -134,8 +134,12 @@ ASUNTOS = {
     # `cultivo_coca_ondcp` es la SEGUNDA fuente del cultivo de coca: la estimacion
     # oficial de EE.UU. (ONDCP, colector `coca_ondcp`), productor distinto de UNODC y
     # con metodologia propia -no comparte procedencia-. Lleva el asunto a dos fuentes.
-    "drogas": ["incautaciones_cocaina", "cultivo_coca", "cultivo_coca_ondcp",
-               "droga_cocaina", "droga_heroina", "droga_cannabis", "droga_sinteticas"],
+    # `incautaciones_cocaina_cicad` es una segunda fuente PARCIAL de los decomisos de
+    # cocaina (CICAD/OEA, colector `cicad_decomisos`): productor distinto de UNODC, 4
+    # paises que el reporte 2022 declara con numero. Procedencia parcialmente compartida.
+    "drogas": ["incautaciones_cocaina", "incautaciones_cocaina_cicad", "cultivo_coca",
+               "cultivo_coca_ondcp", "droga_cocaina", "droga_heroina", "droga_cannabis",
+               "droga_sinteticas"],
     # Asunto propio y no dentro de «economías ilícitas»: ese renglón mide la
     # PERCEPCIÓN/índices de terceros sobre tráfico de armas (trafico_armas, en
     # V-Dem), y esto mide la ACCIÓN POLICIAL de cada Estado sobre su propio
@@ -316,6 +320,7 @@ CANONICOS = [
     ("comtrade", "naciones unidas comtrade"),
     ("oficina de las naciones unidas contra la droga", "unodc"), ("informe mundial sobre las drogas", "unodc"),
     ("ondcp", "ondcp"),  # Casa Blanca (EE.UU.): segunda fuente del cultivo de coca, productor distinto de UNODC
+    ("cicad", "cicad"),  # CICAD (OEA): segunda fuente parcial de decomisos de cocaina, productor distinto de UNODC
     ("observatorio mundial de la salud", "oms"),
     ("cepalstat", "cepal"),
     ("instituto de estadística de la unesco", "unesco"),

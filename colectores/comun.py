@@ -167,6 +167,7 @@ CATEGORIAS = {
     "armas_incautadas": "seguridad-flujos-ilicitos",       # UNODC: tráfico de armas
     "detenidos_trafico_armas": "seguridad-flujos-ilicitos",
     "cultivo_coca_ondcp": "seguridad-flujos-ilicitos",     # ONDCP: segunda fuente del cultivo de coca
+    "incautaciones_cocaina_cicad": "seguridad-flujos-ilicitos",  # CICAD: 2da fuente parcial de decomisos
     "armas_recibidas_tiv": "material",                    # SIPRI: transferencias TIV
     "armas_enviadas_tiv": "material",
     "internet_moderno": "conectividad",
