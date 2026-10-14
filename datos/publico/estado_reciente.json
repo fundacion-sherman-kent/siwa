@@ -2,9 +2,9 @@
   "procedencia": {
     "colector": "estado_reciente",
     "capa": "publico",
-    "obtenido_en": "2026-10-14T16:14:56+00:00",
+    "obtenido_en": "2026-10-14T21:12:53+00:00",
     "fuente": {
-      "nombre": "Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Argentina, Colombia, Ecuador, México, Panamá, Perú, Trinidad y Tobago",
+      "nombre": "Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Argentina, Colombia, Ecuador, México, Panamá, Trinidad y Tobago",
       "url": "https://www.argentina.gob.ar/seguridad/estadisticascriminales/bases-de-datos"
     },
     "calificacion": {
@@ -15,9 +15,10 @@
     },
     "vacios_declarados": [
       "ESTAS CIFRAS NO SON COMPARABLES ENTRE PAÍSES Y NO SE SUMAN: cada Estado define el homicidio a su manera. Para comparar se usa la serie de la UNODC (Banco Mundial).",
-      "NO ESTÁN LOS 33: hoy hay 7 Estados cuya estadística se lee sola (Argentina, Colombia, Ecuador, México, Panamá, Perú, Trinidad y Tobago). Se comprobó el 15/9/2026, portal por portal: Chile y Ecuador rechazan al recolector en el portal donde está el dato, y el tablero chileno no abre ni con un navegador de verdad; Brasil esconde el archivo detrás de una página que no lo enseña; República Dominicana publica robos y feminicidios, pero no la serie de homicidios; Costa Rica tenía todo el dominio del Poder Judicial caído; Uruguay difunde su cifra en informe PDF y en un visualizador, y en su catálogo abierto solo hay imputados, que no son víctimas; El Salvador dejó de publicar la estadística policial en 2022. Venezuela, Cuba y Nicaragua no publican estadística de homicidios. Que un Estado no figure acá no dice nada sobre su violencia: dice que su cifra todavía no se lee sola.",
+      "NO ESTÁN LOS 33: hoy hay 6 Estados cuya estadística se lee sola (Argentina, Colombia, Ecuador, México, Panamá, Trinidad y Tobago). Se comprobó el 15/9/2026, portal por portal: Chile y Ecuador rechazan al recolector en el portal donde está el dato, y el tablero chileno no abre ni con un navegador de verdad; Brasil esconde el archivo detrás de una página que no lo enseña; República Dominicana publica robos y feminicidios, pero no la serie de homicidios; Costa Rica tenía todo el dominio del Poder Judicial caído; Uruguay difunde su cifra en informe PDF y en un visualizador, y en su catálogo abierto solo hay imputados, que no son víctimas; El Salvador dejó de publicar la estadística policial en 2022. Venezuela, Cuba y Nicaragua no publican estadística de homicidios. Que un Estado no figure acá no dice nada sobre su violencia: dice que su cifra todavía no se lee sola.",
       "LAS CIFRAS DEL AÑO EN CURSO SON PROVISIONALES: los Estados las corrigen hasta el cierre. Por eso no entran en la serie ni en la variación.",
-      "TRINIDAD Y TOBAGO NO DECLARA LICENCIA para su estadística: se publica la cifra con su fuente y enlace, como estadística oficial publicada para el público."
+      "TRINIDAD Y TOBAGO NO DECLARA LICENCIA para su estadística: se publica la cifra con su fuente y enlace, como estadística oficial publicada para el público.",
+      "No respondieron en esta corrida: Perú: RuntimeError: la página del conjunto de Perú ya no ofrece el ZIP de indicadores."
     ],
     "restriccion_de_uso": null,
     "cantidad": 33,
@@ -145,92 +146,7 @@
       "iso": "PER",
       "pais": "Perú",
       "bloque": "Andina",
-      "indicadores": {
-        "homicidios_estado": {
-          "valor": 3426,
-          "anio": 2024,
-          "tasa": 10.07,
-          "tasa_anterior": 9.27,
-          "unidad_tasa": "por cada 100.000 habitantes",
-          "quien_calcula_la_tasa": "el propio tablero del Ministerio del Interior",
-          "anio_anterior": 2023,
-          "valor_anterior": 3126,
-          "variacion_pct": 9.6,
-          "anio_inicial": 2014,
-          "valor_inicial": 2076,
-          "serie": [
-            {
-              "anio": 2014,
-              "valor": 2076,
-              "tasa": 6.74
-            },
-            {
-              "anio": 2015,
-              "valor": 2247,
-              "tasa": 7.21
-            },
-            {
-              "anio": 2016,
-              "valor": 2435,
-              "tasa": 7.73
-            },
-            {
-              "anio": 2017,
-              "valor": 2487,
-              "tasa": 7.96
-            },
-            {
-              "anio": 2018,
-              "valor": 2452,
-              "tasa": 7.77
-            },
-            {
-              "anio": 2019,
-              "valor": 2385,
-              "tasa": 7.42
-            },
-            {
-              "anio": 2020,
-              "valor": 1903,
-              "tasa": 5.83
-            },
-            {
-              "anio": 2021,
-              "valor": 2853,
-              "tasa": 8.64
-            },
-            {
-              "anio": 2022,
-              "valor": 2879,
-              "tasa": 8.62
-            },
-            {
-              "anio": 2023,
-              "valor": 3126,
-              "tasa": 9.27
-            },
-            {
-              "anio": 2024,
-              "valor": 3426,
-              "tasa": 10.07
-            }
-          ],
-          "nota": "10,07 víctimas cada 100.000 habitantes en 2024, según el propio tablero · Fuente: Ministerio del Interior — indicador 30 (CEIC) del Plan de Acción de Seguridad Ciudadana",
-          "en_curso": null
-        }
-      },
-      "fuente_nacional": {
-        "organismo": "Ministerio del Interior — indicador 30 (CEIC) del Plan de Acción de Seguridad Ciudadana",
-        "enlace": "https://www.datosabiertos.gob.pe/dataset/indicadores-de-seguridad-ciudadana-y-tendencias-territoriales-mininter",
-        "licencia": "ODC-BY",
-        "cadencia": "anual",
-        "definicion": "homicidios contados por el Comité Estadístico Interinstitucional de la Criminalidad (INEI, Ministerio Público y Policía Nacional)",
-        "actualizado_por_la_fuente": null,
-        "unidades": {
-          "nombre": "región",
-          "cuantas": 26
-        }
-      }
+      "indicadores": {}
     },
     {
       "iso": "PRY",
@@ -911,7 +827,7 @@
       "mas_es_peor": true,
       "no_comparable_entre_paises": true,
       "origen": "Estadística oficial de cada Estado (ministerios de seguridad y defensa, policías)",
-      "cautela": "NO SE COMPARA ENTRE PAÍSES NI SE SUMA. Es la cifra que publica cada Estado con su propia definición, su propio registro y su propia cadencia: Argentina cuenta víctimas de homicidio doloso (SNIC, delitos registrados por las fuerzas de seguridad); Colombia cuenta víctimas de homicidio intencional y feminicidio registradas (Policía Nacional, publicado por el Ministerio de Defensa); Ecuador cuenta homicidios intencionales registrados, según el tabulado mensual del INEC con datos de la Fiscalía General del Estado y el Ministerio del Interior; México cuenta víctimas de homicidio doloso en las carpetas de investigación abiertas por las fiscalías de los estados (fuero común); Panamá cuenta víctimas de homicidio registradas por el Ministerio Público (una fila por víctima en el informe estadístico anual); Perú cuenta homicidios contados por el Comité Estadístico Interinstitucional de la Criminalidad (INEI, Ministerio Público y Policía Nacional); Trinidad y Tobago cuenta asesinatos denunciados (murders reported), Servicio de Policía de Trinidad y Tobago. Sirve para ver la evolución de cada país y el año más reciente, antes de que llegue la serie comparable de la UNODC, que es la que se usa para comparar. El año en curso va aparte, con los meses que cubre.",
+      "cautela": "NO SE COMPARA ENTRE PAÍSES NI SE SUMA. Es la cifra que publica cada Estado con su propia definición, su propio registro y su propia cadencia: Argentina cuenta víctimas de homicidio doloso (SNIC, delitos registrados por las fuerzas de seguridad); Colombia cuenta víctimas de homicidio intencional y feminicidio registradas (Policía Nacional, publicado por el Ministerio de Defensa); Ecuador cuenta homicidios intencionales registrados, según el tabulado mensual del INEC con datos de la Fiscalía General del Estado y el Ministerio del Interior; México cuenta víctimas de homicidio doloso en las carpetas de investigación abiertas por las fiscalías de los estados (fuero común); Panamá cuenta víctimas de homicidio registradas por el Ministerio Público (una fila por víctima en el informe estadístico anual); Trinidad y Tobago cuenta asesinatos denunciados (murders reported), Servicio de Policía de Trinidad y Tobago. Sirve para ver la evolución de cada país y el año más reciente, antes de que llegue la serie comparable de la UNODC, que es la que se usa para comparar. El año en curso va aparte, con los meses que cubre.",
       "hasta_anio": 2025,
       "rezago_anios": 1,
       "seccion": "violencia",
@@ -919,7 +835,7 @@
     }
   ],
   "cobertura": {
-    "homicidios_estado": 7
+    "homicidios_estado": 6
   },
   "fuentes_nacionales": {
     "TTO": {
@@ -933,18 +849,6 @@
         "nombre": "división policial",
         "cuantas": 9,
         "coincide_con_la_unidad_censal": false
-      }
-    },
-    "PER": {
-      "organismo": "Ministerio del Interior — indicador 30 (CEIC) del Plan de Acción de Seguridad Ciudadana",
-      "enlace": "https://www.datosabiertos.gob.pe/dataset/indicadores-de-seguridad-ciudadana-y-tendencias-territoriales-mininter",
-      "licencia": "ODC-BY",
-      "cadencia": "anual",
-      "definicion": "homicidios contados por el Comité Estadístico Interinstitucional de la Criminalidad (INEI, Ministerio Público y Policía Nacional)",
-      "actualizado_por_la_fuente": null,
-      "unidades": {
-        "nombre": "región",
-        "cuantas": 26
       }
     },
     "PAN": {
@@ -1011,7 +915,7 @@
     }
   },
   "resumen": {
-    "estados": 7,
-    "consultado": "2026-10-14T16:14:56+00:00"
+    "estados": 6,
+    "consultado": "2026-10-14T21:12:53+00:00"
   }
 }

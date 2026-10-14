@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "comercio",
     "capa": "publico",
-    "obtenido_en": "2026-10-14T15:59:01+00:00",
+    "obtenido_en": "2026-10-14T20:58:24+00:00",
     "fuente": {
       "nombre": "Comtrade de Naciones Unidas — vista pública",
       "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
@@ -21,7 +21,7 @@
       "El año es 2023, el último con cobertura amplia en la vista publica. NO es el año corriente y no se estima ninguno posterior.",
       "Se compara el total de comercio, no producto por producto. La subfacturación suele concentrarse en unas pocas partidas y se diluye en el total: este registro sirve para señalar el corredor, no la mercaderia.",
       "Un Estado que no reporta a Comtrade no genera brecha con nadie, y por lo tanto no aparece. La ausencia mide la calidad de su estadística aduanera, no su honestidad comercial.",
-      "Consultas que fallaron: BRA-VEN: sin fila total; COL-VEN: sin fila total; DOM-HTI: sin fila total; VEN-GUY: sin fila total"
+      "Consultas que fallaron: BRA-VEN: sin fila total; COL-VEN: sin fila total; DOM-HTI: HTTP 429; VEN-GUY: sin fila total"
     ],
     "restriccion_de_uso": null,
     "cantidad": 19,
@@ -102,8 +102,8 @@
       "corredores_que_llaman_la_atencion": 2,
       "peor_brecha_pct": -75.7,
       "brecha_negativa_en": [
-        "Chile → Paraguay",
-        "Perú → Chile"
+        "Perú → Chile",
+        "Chile → Paraguay"
       ]
     },
     {
@@ -217,7 +217,7 @@
       "bloque": "Andina",
       "corredores": 5,
       "corredores_que_llaman_la_atencion": 3,
-      "peor_brecha_pct": -9.1,
+      "peor_brecha_pct": -7.2,
       "brecha_negativa_en": [
         "Perú → Chile",
         "Perú → Ecuador"
@@ -422,19 +422,6 @@
     {
       "origen": "PER",
       "pais_origen": "Perú",
-      "destino": "CHL",
-      "pais_destino": "Chile",
-      "exportador_declara": 1947489594,
-      "importador_declara": 1770587322,
-      "brecha": -176902273,
-      "brecha_pct": -9.1,
-      "sentido": "el importador declara menos",
-      "llama_la_atencion": true,
-      "medido_en": "2026-09-29T22:20:10+00:00"
-    },
-    {
-      "origen": "PER",
-      "pais_origen": "Perú",
       "destino": "ECU",
       "pais_destino": "Ecuador",
       "exportador_declara": 1158476576,
@@ -444,6 +431,19 @@
       "sentido": "el importador declara menos",
       "llama_la_atencion": true,
       "medido_en": "2026-10-13T23:55:01+00:00"
+    },
+    {
+      "origen": "PER",
+      "pais_origen": "Perú",
+      "destino": "CHL",
+      "pais_destino": "Chile",
+      "exportador_declara": 1899403418,
+      "importador_declara": 1770587322,
+      "brecha": -128816096,
+      "brecha_pct": -6.8,
+      "sentido": "el importador declara menos",
+      "llama_la_atencion": true,
+      "medido_en": "2026-10-14T20:58:24+00:00"
     },
     {
       "origen": "URY",

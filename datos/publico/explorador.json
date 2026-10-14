@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "explorador",
     "capa": "publico",
-    "obtenido_en": "2026-10-14T16:21:50+00:00",
+    "obtenido_en": "2026-10-14T21:19:49+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — exploración de puertas de datos oficiales",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#explorador"
@@ -68,11 +68,9 @@
       "iso": "TTO",
       "pais": "Trinidad y Tobago",
       "bloque": "Caribe oriental",
-      "estado": "cierra",
+      "estado": "sin_puerta_hallada",
       "puertas_abiertas": [],
-      "puertas_cerradas": [
-        "cso.gov.tt · HTTP 403"
-      ],
+      "puertas_cerradas": [],
       "dominios_probados": [
         "cso.gov.tt"
       ]
@@ -130,7 +128,7 @@
         {
           "dominio": "www.datosabiertos.gob.pe",
           "dialecto": "CKAN",
-          "conjuntos": 3622,
+          "conjuntos": 3620,
           "url": "https://www.datosabiertos.gob.pe/api/3/action/package_list"
         }
       ],
@@ -174,7 +172,7 @@
         {
           "dominio": "www.datosabiertos.gob.pa",
           "dialecto": "CKAN",
-          "conjuntos": 5760,
+          "conjuntos": 5761,
           "url": "https://www.datosabiertos.gob.pa/api/3/action/package_list"
         }
       ],
@@ -374,8 +372,15 @@
       "iso": "COL",
       "pais": "Colombia",
       "bloque": "Andina",
-      "estado": "sin_puerta_hallada",
-      "puertas_abiertas": [],
+      "estado": "abre",
+      "puertas_abiertas": [
+        {
+          "dominio": "www.datos.gov.co",
+          "dialecto": "Socrata",
+          "conjuntos": null,
+          "url": "https://www.datos.gov.co/api/views.json?limit=1"
+        }
+      ],
       "puertas_cerradas": [],
       "dominios_probados": [
         "www.dane.gov.co",
@@ -472,8 +477,8 @@
         {
           "dominio": "datos.gob.ar",
           "dialecto": "CKAN",
-          "conjuntos": 1294,
-          "url": "https://datos.gob.ar/api/3/action/package_search?rows=1"
+          "conjuntos": 1337,
+          "url": "https://datos.gob.ar/api/3/action/package_list"
         }
       ],
       "puertas_cerradas": [],
@@ -495,15 +500,15 @@
     }
   ],
   "resumen": {
-    "estados_que_abren": 8,
-    "estados_que_cierran": 7,
+    "estados_que_abren": 9,
+    "estados_que_cierran": 6,
     "estados_sin_puerta_hallada": 18,
     "estados_del_padron": 33,
     "dominios_probados": 50,
     "dialectos_probados": 6,
     "toques_realizados": 350,
     "explorador_probado": true,
-    "consultado": "2026-10-14T16:21:50+00:00"
+    "consultado": "2026-10-14T21:19:49+00:00"
   },
   "dialectos": [
     "ArcGIS Hub",
