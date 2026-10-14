@@ -118,7 +118,7 @@ python colectores/focos.py
 
 <!-- fuentes:calculado -->
 
-**101 fuentes en servicio**, en 103 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
+**100 fuentes en servicio**, en 102 archivos de datos: hay fuentes que dejan más de un archivo. Esta tabla no se escribe: la calcula `herramientas/sellar-portada.py` desde los archivos de datos, después de cada recolección. Un colector que no dejó dato no aparece acá.
 
 | Colector | Fuente | Calificación | Estados | Vacíos declarados |
 |---|---|:---:|---:|---:|
@@ -159,7 +159,6 @@ python colectores/focos.py
 | `fundacion` | Fundación Sherman Kent — canal institucional | `A-1` | — | 4 |
 | `gasto_publico` | Estadísticas de Finanzas Públicas del Fondo Monetario Internacional, clasificación del gasto por función (COFOG), vía DBnomics | `B-2` | 22 | 8 |
 | `gdacs` | GDACS -- Global Disaster Alert and Coordination System (Comision Europea JRC y Naciones Unidas) | `B-2` | 33 | 4 |
-| `gdelt_conflicto` | GDELT — The GDELT Project, intensidad de cobertura de prensa sobre conflicto | `C-3` | 33 | 4 |
 | `gti` | Institute for Economics & Peace (IEP) — Global Terrorism Index 2026: Measuring the Impact of Terrorism | `B-3` | 33 | 7 |
 | `ia` | Microsoft AI Economy Institute; OpenAI Signals; Anthropic Economic Index; documentación oficial de siete empresas de nube | `B-3` | 33 | 7 |
 | `ia_apps` | Apple App Store — rankings de apps gratuitas y disponibilidad por país; padrón de asistentes de IA con origen verificado por la Fundación | `B-3` | 33 | 6 |
@@ -211,7 +210,7 @@ python colectores/focos.py
 | `subnacional_colombia_secuestro` | Secuestro — Ministerio de Defensa Nacional / Policía Nacional de Colombia, vía datos.gov.co (Socrata) | `A-2` | 1 | 5 |
 | `subnacional_colombia_terrorismo` | Terrorismo / acciones subversivas — Ministerio de Defensa Nacional / Policía Nacional de Colombia, vía datos.gov.co (Socrata) | `A-2` | 1 | 5 |
 | `subnacional_datos` | Fuentes oficiales nacionales que publican por unidad de primer orden: Policía Nacional de Colombia; Sistema Nacional de Información Criminal (SNIC); Ministerio del Interior del Uruguay | `A-2` | 3 | 6 |
-| `subnacional_focos` | Focos de calor por unidad de primer orden — NASA FIRMS agregado sobre geoBoundaries ADM1 | `A-2` | 19 | 3 |
+| `subnacional_focos` | Focos de calor por unidad de primer orden — NASA FIRMS agregado sobre geoBoundaries ADM1 | `A-2` | 17 | 3 |
 | `subnacional_homicidios` | Homicidios por unidad de primer orden, de la fuente nacional de cada Estado (Argentina SNIC, Colombia MinDefensa, Ecuador INEC, Perú CEIC, México SESNSP) | `A-2` | 10 | 3 |
 | `subnacional_robos` | Robos/hurtos por unidad de primer orden, de la fuente nacional de cada Estado (Argentina SNIC, Colombia Policía Nacional, Bolivia INE, Trinidad TTPS, República Dominicana — Policía Nacional vía datos.gob.do) | `A-2` | 8 | 3 |
 | `subnacional_santafe` | Observatorio de Seguridad Pública de Santa Fe — infografía mensual de homicidios dolosos | `A-2` | 1 | 3 |
