@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-14T13:43:04+00:00",
+  "corrida": "2026-10-14T16:33:48+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3809,
+    "sobreviven": 3824,
     "de_ellos_son_parentescos": 413
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3396,
+  "pistas_totales": 3411,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -103,10 +103,10 @@
       "b": "inflacion_interanual",
       "rotulo_a": "Inflación de doce meses, según el FMI",
       "rotulo_b": "Inflación de los últimos doce meses",
-      "coeficiente": 0.957,
+      "coeficiente": 0.959,
       "estados": 30,
       "tipo": "rangos (Spearman)",
-      "p": 4.5059330315631794e-23,
+      "p": 1.1984600831750375e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
