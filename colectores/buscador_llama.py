@@ -145,21 +145,44 @@ def elegir_recursos(recursos: list[dict]) -> list[dict]:
     elegidos = datos[-3:] if datos else limpios[:3]
     return [{k: v for k, v in x.items() if k != "_datos"} for x in elegidos]
 
+# PRODUCTORES QUE SIWA YA USA. Un agregador como HDX re-publica sobre todo datos de
+# estos: proponerlos nunca suma una segunda fuente -es la misma procedencia- y encima el
+# modelo los mis-mapea (COVID como "homicidios"). Se filtran de entrada, por fragmento de
+# nombre del organismo, antes de clasificar. Solo se aplica a los portales que lo pidan
+# (`filtrar_productores_usados`), tipicamente HDX; los portales por-pais no lo traen.
+PRODUCTORES_YA_USADOS = (
+    "acled", "world bank", "banco mundial", "unodc", "drug and crime",
+    "world health organization", "geological survey", "energy institute",
+    "food and agriculture organization", "international labour", "organización internacional del trabajo",
+    "sipri", "unhcr", "refugee agency", "acnur", "organization for migration", "migration (iom",
+    "transparency international", "bertelsmann", "world justice", "wipo",
+    "reliefweb", "humanitarian affairs", "ocha", "our world in data",
+    "institute for economics", "cloudflare", "cepal", "latinobar",
+)
+
+def _ya_usado(organismo: str) -> bool:
+    o = (organismo or "").lower()
+    return any(frag in o for frag in PRODUCTORES_YA_USADOS)
+
 def recientes(portal: dict) -> list[dict]:
     base = portal["base"].rstrip("/")
     salida = []
+    filtrar = bool(portal.get("filtrar_productores_usados"))
     if portal["tipo"] == "CKAN":
         # Un portal multipaís (HDX) acota con `fq` a los Estados del padrón; los
         # portales por-país no lo traen y la consulta queda igual que siempre.
         extra = ("&fq=" + urllib.parse.quote(portal["fq"])) if portal.get("fq") else ""
         d = pedir_json(f"{base}/api/3/action/package_search?sort=metadata_modified%20desc&rows={POR_PORTAL}{extra}")
         for p in (d.get("result") or {}).get("results", []):
+            org = (p.get("organization") or {}).get("title", "")
+            if filtrar and _ya_usado(org):
+                continue  # productor que ya usamos: no es segunda fuente, se descarta de entrada
             salida.append({
                 "id": f"{portal['iso']}:{p.get('name')}",
                 "pais": portal["iso"],
                 "titulo": p.get("title") or p.get("name"),
                 "descripcion": re.sub(r"\s+", " ", (p.get("notes") or ""))[:250],
-                "organismo": (p.get("organization") or {}).get("title", ""),
+                "organismo": org,
                 "modificado": p.get("metadata_modified", ""),
                 "pagina": f"{base}/dataset/{p.get('name')}",
                 "recursos": elegir_recursos(p.get("resources")),
