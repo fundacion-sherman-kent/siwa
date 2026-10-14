@@ -127,11 +127,6 @@ ASUNTOS = {
                   "gti_score", "gti_incidentes", "gti_muertes", "gti_heridos",
                   "gti_rehenes"],
     "conflicto armado": ["conflicto_no_estatal", "intensidad_conflicto", "monopolio_fuerza"],
-    # Asunto PROPIO, separado de 'conflicto armado': mide el PULSO MEDIATICO (cuanto se
-    # habla de conflicto/protesta/represion) en tiempo real, no el recuento de hechos
-    # verificados -eso es ACLED/UCDP-. Juntarlos daria por corroborado algo que mide
-    # otra cosa. Fuente unica (GDELT), senal mediatica -agenda, no falla- (13/10/2026).
-    "pulso mediatico de conflicto (GDELT)": ["conflicto_gdelt"],
     "desplazamiento y migración": ["desplazamiento", "migrantes", "migrantes_pct",
                                    "migracion_neta", "remesas"],
     "trata de personas": ["trata_victimas", "trata_sexual", "trata_trabajo", "trata_personas",

@@ -301,7 +301,6 @@ CATEGORIAS = {
     "industria": "industrial",
     "institucion_ddhh": "capacidad",
     "intensidad_conflicto": "control-territorial",
-    "conflicto_gdelt": "control-territorial",   # GDELT: pulso mediatico de conflicto, tiempo real
     "internet": "conectividad",
     "lanzamientos_anuales": "aeroespacial",
     "libertad_asociacion": "libertades",

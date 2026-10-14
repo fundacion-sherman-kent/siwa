@@ -235,14 +235,6 @@ jobs:
         if: env.COMPLETA == 'true'
         run: python colectores/gdacs.py
 
-      # Pulso mediatico de conflicto por pais (GDELT), capa en tiempo real. Senal
-      # mediatica (cuanto se habla de conflicto), NO recuento de hechos (eso es ACLED).
-      # Gratis, sin clave. No toca el mapa: emite a datos/publico, espera visto bueno.
-      - name: Pulso mediatico de conflicto (GDELT)
-        id: gdelt_conflicto
-        continue-on-error: true
-        if: env.COMPLETA == 'true'
-        run: python colectores/gdelt_conflicto.py
 
       # LA SEGUNDA FUENTE DEL BLOQUE LABORAL. Dos de sus tres medidas ya las
       # publica otro organismo: estan para poder compararlas, no para

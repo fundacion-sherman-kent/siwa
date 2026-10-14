@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 """Pulso mediatico de conflicto por pais (GDELT): capa en tiempo real.
 
+ARCHIVADO (14/10/2026, decision de la direccion). NO corre ni se publica: la version
+por pais hacia 33 llamadas a GDELT y el limite de ritmo dejaba solo ~8 paises con dato
+(y todos en 'baja', artefacto de series ralas). La direccion decidio NO hacer esta capa
+hasta contar con mas fuentes o datos precisos. El codigo queda para revivirlo cuando se
+rediseñe (una sola consulta amplia y conteo por pais, en vez de 33 llamadas).
+
 QUE ES
 ------
 Por cada Estado del padron, mide la INTENSIDAD de la cobertura de prensa sobre
