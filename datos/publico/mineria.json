@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-16T10:47:01+00:00",
+  "corrida": "2026-10-16T14:51:46+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3830,
+    "sobreviven": 3872,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3418,
+  "pistas_totales": 3460,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -593,6 +593,19 @@
       "misma_categoria": false
     },
     {
+      "a": "subnacional_focos:cuantas",
+      "b": "superficie",
+      "rotulo_a": "subnacional_focos · cuantas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.904,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 7.853577767560384e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "gini",
       "b": "gini_cepal",
       "rotulo_a": "Desigualdad — índice de Gini",
@@ -640,6 +653,19 @@
       "estados": 26,
       "tipo": "rangos (Spearman)",
       "p": 1.2508660869411333e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.902,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 1.0796686488840719e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -770,32 +796,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ransomware:grupos_distintos",
-      "b": "reservas_internacionales",
-      "rotulo_a": "ransomware · grupos_distintos",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.893,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 7.340017665091626e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.889,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.990159952681872e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
