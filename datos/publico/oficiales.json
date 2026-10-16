@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-10-15T21:09:38+00:00",
+    "obtenido_en": "2026-10-16T10:45:24+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "5 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Delito registrado: HTTPError; ARG/Contratación pública: HTTPError; ARG/Presupuesto: HTTPError; ARG/Migración y desplazamiento: HTTPError."
+      "6 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Delito registrado: HTTPError; ARG/Contratación pública: HTTPError; ARG/Integridad: HTTPError; ARG/Presupuesto: HTTPError; ARG/Migración y desplazamiento: HTTPError."
     ],
     "restriccion_de_uso": null,
     "cantidad": 10,
@@ -64,14 +64,14 @@
               "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             },
             {
-              "titulo": "CONTRATACION CEPITA",
-              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
-              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
-            },
-            {
               "titulo": "SECOP II CONTRATACION ABIERTA",
               "organismo": "Alcaldía Mayor de Cartagena",
               "enlace": "https://www.datos.gov.co/d/432e-zwh4"
+            },
+            {
+              "titulo": "CONTRATACION CEPITA",
+              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
+              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
             }
           ]
         },
@@ -110,14 +110,14 @@
           "cantidad": 147,
           "ejemplos": [
             {
-              "titulo": "DELITOS INFORMÁTICOS",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
-            },
-            {
               "titulo": "DELITOS SEXUALES",
               "organismo": "Observatorio MDN",
               "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
+            },
+            {
+              "titulo": "DELITOS INFORMÁTICOS",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
             },
             {
               "titulo": "Reporte  Delitos sexuales Policía Nacional",
@@ -878,6 +878,11 @@
               "enlace": "https://data.humdata.org/dataset/tasa-de-homicidios-colombia"
             },
             {
+              "titulo": "SIDIH: Homicidio (mujeres)",
+              "organismo": "OCHA Colombia",
+              "enlace": "https://data.humdata.org/dataset/sidih-homicidio-mujeres"
+            },
+            {
               "titulo": "SIDIH: Homicidios (hombres)",
               "organismo": "OCHA Colombia",
               "enlace": "https://data.humdata.org/dataset/sidih-homicidios-hombres"
@@ -886,11 +891,6 @@
               "titulo": "Colombia - Tasa de Homicidios",
               "organismo": "OCHA Colombia",
               "enlace": "https://data.humdata.org/dataset/tasa-de-homicidios"
-            },
-            {
-              "titulo": "SIDIH: Homicidio (mujeres)",
-              "organismo": "OCHA Colombia",
-              "enlace": "https://data.humdata.org/dataset/sidih-homicidio-mujeres"
             }
           ]
         },
@@ -1333,15 +1333,7 @@
       "organismo": "Portal Nacional de Datos Abiertos",
       "tipo": "CKAN",
       "portal": "https://datos.gob.ar",
-      "materias": [
-        {
-          "materia": "Integridad",
-          "eje": "Gobernanza",
-          "consulta": "corrupcion",
-          "cantidad": 0,
-          "ejemplos": []
-        }
-      ],
+      "materias": [],
       "conjuntos_hallados": 0
     }
   ],
@@ -1351,7 +1343,7 @@
     "conjuntos_hallados": 4630,
     "materias_consultadas": 6,
     "oficinas_que_responden": 24,
-    "estados_con_alguna_fuente_oficial": 28
+    "estados_con_alguna_fuente_oficial": 27
   },
   "oficinas_estadistica": [
     {
@@ -1499,8 +1491,8 @@
       "sigla": "INEI",
       "organismo": "Instituto Nacional de Estadística e Informática",
       "url": "https://www.inei.gob.pe/",
-      "estado": "sin_respuesta",
-      "detalle": "URLError: <urlopen error [Errno 101] Network is unreachable>"
+      "estado": "responde",
+      "codigo": 200
     },
     {
       "iso": "URY",
@@ -1623,8 +1615,8 @@
       "sigla": "CSO",
       "organismo": "Central Statistical Office",
       "url": "https://cso.gov.tt/",
-      "estado": "responde",
-      "codigo": 202
+      "estado": "falla_el_servidor",
+      "codigo": 520
     }
   ],
   "oficinas_por_estado": {
@@ -1632,7 +1624,8 @@
     "cierra_a_maquinas": 4,
     "certificado_invalido": 2,
     "verificacion_anti_robot": 1,
-    "sin_respuesta": 2
+    "sin_respuesta": 1,
+    "falla_el_servidor": 1
   },
   "sectoriales_verificados": [
     {
