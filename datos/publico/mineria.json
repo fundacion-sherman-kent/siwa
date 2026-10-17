@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-17T19:23:28+00:00",
-  "medidas_con_suficientes_casos": 202,
-  "pares_probados": 20301,
+  "corrida": "2026-10-17T20:13:05+00:00",
+  "medidas_con_suficientes_casos": 203,
+  "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3825,
+    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3836,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3413,
+  "pistas_totales": 3424,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -177,6 +177,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.943,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.910768762474932e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -198,19 +211,6 @@
       "estados": 27,
       "tipo": "rangos (Spearman)",
       "p": 4.9726033118320344e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.512021220245455e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
