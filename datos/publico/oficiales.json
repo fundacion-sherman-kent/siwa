@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-10-18T10:23:49+00:00",
+    "obtenido_en": "2026-10-18T15:21:16+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "12 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Delito registrado: HTTPError; ARG/Contratación pública: HTTPError; ARG/Integridad: HTTPError; ARG/Presupuesto: HTTPError; ARG/Migración y desplazamiento: HTTPError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
+      "12 consultas fallaron en esta corrida: ARG/Violencia organizada: HTTPError; ARG/Delito registrado: TimeoutError; ARG/Contratación pública: HTTPError; ARG/Integridad: HTTPError; ARG/Presupuesto: HTTPError; ARG/Migración y desplazamiento: TimeoutError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
     ],
     "restriccion_de_uso": null,
     "cantidad": 10,
@@ -54,24 +54,24 @@
           "cantidad": 1061,
           "ejemplos": [
             {
-              "titulo": "Contratacion Emserchia E.S.P.",
-              "organismo": "Emserchia",
-              "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
-            },
-            {
               "titulo": "PROCESOS CONTRATACION TAURAMENA",
               "organismo": "TAURAMENA",
               "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             },
             {
-              "titulo": "CONTRATACION CEPITA",
-              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
-              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
+              "titulo": "Contratacion Emserchia E.S.P.",
+              "organismo": "Emserchia",
+              "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
             },
             {
               "titulo": "Contratacion Alcaldía Chitaraque",
               "organismo": "Alcaldía de Chitaraque",
               "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
+            },
+            {
+              "titulo": "CONTRATACION CEPITA",
+              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
+              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
             }
           ]
         },
@@ -92,14 +92,14 @@
               "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
             },
             {
-              "titulo": "PRESUPUESTO AIM-2020",
-              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
-              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
-            },
-            {
               "titulo": "Presupuesto DADEP",
               "organismo": "DEFENSORIA DEL ESPACIO PUBLICO",
               "enlace": "https://www.datos.gov.co/d/8rih-qmrc"
+            },
+            {
+              "titulo": "PRESUPUESTO AIM-2020",
+              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
+              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
             }
           ]
         },
@@ -120,14 +120,14 @@
               "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
             },
             {
-              "titulo": "Delitos Informaticos V1",
-              "organismo": "Damicruz",
-              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
-            },
-            {
               "titulo": "Reporte  Delitos sexuales Policía Nacional",
               "organismo": "DIJIN",
               "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
+            },
+            {
+              "titulo": "Delitos Informaticos V1",
+              "organismo": "Damicruz",
+              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
             }
           ]
         },
