@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-18T17:23:29+00:00",
+  "corrida": "2026-10-18T20:25:59+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3840,
+    "sobreviven": 3845,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3428,
+  "pistas_totales": 3433,
   "anomalias_totales": 397,
   "pistas": [
     {
@@ -164,6 +164,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.948,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.620637158869137e-23,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -172,19 +185,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.6812193451945832e-21,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.943,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.965873625076731e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,23 +775,23 @@
       "misma_categoria": false
     },
     {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "Percepción de corrupción",
-      "coeficiente": -0.889,
-      "estados": 25,
+      "a": "copernicus:escenas",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.891,
+      "estados": 19,
       "tipo": "rangos (Spearman)",
-      "p": 3.003697736400934e-11,
+      "p": 1.1693962286707934e-08,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
     },
     {
       "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion:puntaje",
+      "b": "percepcion_corrupcion",
       "rotulo_a": "Corrupción política",
-      "rotulo_b": "percepcion_corrupcion · puntaje",
+      "rotulo_b": "Percepción de corrupción",
       "coeficiente": -0.889,
       "estados": 25,
       "tipo": "rangos (Spearman)",
