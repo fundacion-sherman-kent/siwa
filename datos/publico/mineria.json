@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-19T19:21:45+00:00",
-  "medidas_con_suficientes_casos": 202,
-  "pares_probados": 20301,
+  "corrida": "2026-10-19T22:19:46+00:00",
+  "medidas_con_suficientes_casos": 195,
+  "pares_probados": 18915,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3868,
-    "de_ellos_son_parentescos": 412
+    "por_que": "Con 18.915 pares y el umbral de siempre, alrededor de 945 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3800,
+    "de_ellos_son_parentescos": 414
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3456,
-  "anomalias_totales": 397,
+  "pistas_totales": 3386,
+  "anomalias_totales": 388,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -29,19 +29,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 1.9715458604995377e-37,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "empleo_informal",
-      "b": "empleo_informal_oit",
-      "rotulo_a": "Empleo informal",
-      "rotulo_b": "Empleo informal según la OIT",
-      "coeficiente": 0.985,
-      "estados": 27,
-      "tipo": "rangos (Spearman)",
-      "p": 2.642602690127508e-33,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -177,6 +164,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.943,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.466674891572683e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -198,19 +198,6 @@
       "estados": 27,
       "tipo": "rangos (Spearman)",
       "p": 4.9726033118320344e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.431302002534356e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -788,14 +775,27 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
       "coeficiente": 0.891,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 5.2294136260520415e-15,
+      "p": 5.529067101265946e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "corrupcion_politica",
+      "b": "percepcion_corrupcion",
+      "rotulo_a": "Corrupción política",
+      "rotulo_b": "Percepción de corrupción",
+      "coeficiente": -0.889,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 3.003697736400934e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
