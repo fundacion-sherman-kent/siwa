@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-20T10:04:02+00:00",
-  "medidas_con_suficientes_casos": 195,
-  "pares_probados": 18915,
+  "corrida": "2026-10-20T11:03:07+00:00",
+  "medidas_con_suficientes_casos": 201,
+  "pares_probados": 20100,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 18.915 pares y el umbral de siempre, alrededor de 945 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3820,
+    "por_que": "Con 20.100 pares y el umbral de siempre, alrededor de 1.005 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3930,
     "de_ellos_son_parentescos": 414
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3406,
-  "anomalias_totales": 388,
+  "pistas_totales": 3516,
+  "anomalias_totales": 392,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -29,6 +29,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 1.9715458604995377e-37,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "empleo_informal",
+      "b": "empleo_informal_oit",
+      "rotulo_a": "Empleo informal",
+      "rotulo_b": "Empleo informal según la OIT",
+      "coeficiente": 0.985,
+      "estados": 27,
+      "tipo": "rangos (Spearman)",
+      "p": 2.642602690127508e-33,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -168,10 +181,10 @@
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.943,
+      "coeficiente": 0.944,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.466674891572683e-22,
+      "p": 2.7394640653488535e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -320,6 +333,19 @@
       "misma_categoria": false
     },
     {
+      "a": "migrantes",
+      "b": "ransomware:victimas_ultimos_dos_anios",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
+      "coeficiente": 0.928,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 3.794148276745476e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -328,19 +354,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.5199678582347144e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "migrantes",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.927,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 5.4917337244825814e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -428,10 +441,10 @@
       "b": "ransomware:victimas",
       "rotulo_a": "Población migrante que el país aloja",
       "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.915,
+      "coeficiente": 0.916,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 1.6224641700814432e-16,
+      "p": 1.1929369864994484e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -489,6 +502,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.911,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.9809921040680176e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -510,19 +536,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.714968772957998e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.905,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.3035223539530276e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -600,7 +613,7 @@
       "coeficiente": 0.903,
       "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 9.699361309197441e-14,
+      "p": 1.0523189640120254e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 7.340017665091626e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "Percepción de corrupción",
-      "coeficiente": -0.889,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.003697736400934e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
