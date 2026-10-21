@@ -1,41 +1,10 @@
 {
   "que_es": "Auditoría automática del registro. La corre el robot en cada recolección, no una persona cuando se acuerda.",
-  "corrida": "2026-10-21T04:17:24+00:00",
-  "conjuntos_revisados": 106,
+  "corrida": "2026-10-21T22:23:05+00:00",
+  "conjuntos_revisados": 102,
   "estados_del_padron": 33,
-  "fallas": [
-    {
-      "que": "procedencia incompleta",
-      "donde": "frescura-flujos.json",
-      "porque": "falta colector, fuente.nombre, fuente.url, obtenido_en, calificacion: toda afirmación de este registro tiene que ser trazable"
-    },
-    {
-      "que": "Estado fuera del padrón",
-      "donde": "oficiales.json",
-      "porque": "trae ALC: este registro cubre 33 Estados y solo esos"
-    },
-    {
-      "que": "procedencia incompleta",
-      "donde": "propuestas-flujos.json",
-      "porque": "falta colector, fuente.nombre, fuente.url, obtenido_en, calificacion: toda afirmación de este registro tiene que ser trazable"
-    },
-    {
-      "que": "dato fechado en el futuro",
-      "donde": "secop_colombia.json · COL",
-      "porque": "en «serie» hay un punto del año 2027, que todavía no pasó: no hay fuente que pueda haberlo medido"
-    },
-    {
-      "que": "procedencia incompleta",
-      "donde": "vigia-cicad.json",
-      "porque": "falta colector, fuente.nombre, fuente.url, obtenido_en, calificacion: toda afirmación de este registro tiene que ser trazable"
-    },
-    {
-      "que": "procedencia incompleta",
-      "donde": "vigia-fuentes.json",
-      "porque": "falta colector, fuente.nombre, fuente.url, obtenido_en, calificacion: toda afirmación de este registro tiene que ser trazable"
-    }
-  ],
-  "cuantas_fallas": 6,
+  "fallas": [],
+  "cuantas_fallas": 0,
   "brechas": [
     {
       "que": "conjuntos sin ninguna serie histórica",
@@ -62,39 +31,39 @@
     "anios_para_tendencia": 5
   },
   "cobertura_por_estado": {
-    "HND": 31,
-    "CHL": 32,
-    "VEN": 28,
-    "TTO": 31,
-    "SLV": 32,
-    "SUR": 27,
-    "PAN": 32,
-    "COL": 36,
-    "JAM": 32,
-    "CUB": 24,
-    "BRA": 33,
-    "HTI": 27,
-    "LCA": 25,
-    "CRI": 32,
-    "ECU": 33,
-    "VCT": 25,
-    "GUY": 29,
-    "BLZ": 27,
-    "ATG": 23,
-    "KNA": 19,
-    "DMA": 22,
-    "GRD": 24,
-    "ARG": 33,
-    "BRB": 25,
     "URY": 32,
-    "PER": 33,
-    "BHS": 26,
-    "MEX": 33,
-    "PRY": 31,
-    "BOL": 34,
+    "SUR": 27,
     "NIC": 32,
+    "ATG": 23,
+    "BRB": 25,
+    "TTO": 31,
+    "VEN": 28,
+    "KNA": 19,
+    "BRA": 34,
+    "LCA": 25,
+    "HND": 31,
+    "CUB": 24,
+    "GUY": 29,
+    "MEX": 33,
+    "COL": 36,
+    "CRI": 32,
+    "SLV": 32,
+    "ARG": 33,
+    "CHL": 32,
+    "BLZ": 27,
+    "ECU": 33,
+    "JAM": 32,
     "GTM": 32,
-    "DOM": 32
+    "GRD": 24,
+    "DMA": 22,
+    "BHS": 26,
+    "BOL": 34,
+    "PRY": 31,
+    "DOM": 32,
+    "VCT": 25,
+    "HTI": 27,
+    "PER": 33,
+    "PAN": 32
   },
-  "veredicto": "6 fallas"
+  "veredicto": "sin fallas"
 }

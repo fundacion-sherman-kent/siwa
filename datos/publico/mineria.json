@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-21T04:16:18+00:00",
+  "corrida": "2026-10-21T22:22:49+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3873,
+    "sobreviven": 3881,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3461,
-  "anomalias_totales": 397,
+  "pistas_totales": 3469,
+  "anomalias_totales": 398,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -103,10 +103,10 @@
       "b": "inflacion_interanual",
       "rotulo_a": "Inflación de doce meses, según el FMI",
       "rotulo_b": "Inflación de los últimos doce meses",
-      "coeficiente": 0.959,
+      "coeficiente": 0.958,
       "estados": 30,
       "tipo": "rangos (Spearman)",
-      "p": 1.1984600831750375e-23,
+      "p": 1.9833141290455637e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -210,7 +210,7 @@
       "coeficiente": 0.942,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 7.205545470384762e-22,
+      "p": 5.470934464770057e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -302,6 +302,19 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 1.5641091365620962e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "gasto_seguridad",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "Gasto en orden público y seguridad",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": -0.931,
+      "estados": 15,
+      "tipo": "rangos (Spearman)",
+      "p": 7.956421904990739e-09,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -632,19 +645,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.9,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.220908629873406e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -666,6 +666,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 1.961550803926828e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.897,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.5157709391562821e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -718,19 +731,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 9.621070309355055e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "gasto_seguridad",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "Gasto en orden público y seguridad",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": -0.896,
-      "estados": 15,
-      "tipo": "rangos (Spearman)",
-      "p": 4.789010644245486e-07,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
