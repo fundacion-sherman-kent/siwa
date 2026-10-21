@@ -82,6 +82,10 @@ TESTIGOS = {
     "propuestas-frescura.json": "clasificación de indicadores atrasados en caminos posibles, sin aplicar ninguno",
     "armonizacion.json": "fichas de armonización: cómo se enlaza cada par de fuentes, calculado del propio registro",
     "corredores.json": "corredores de flujos para el mapa: pares origen→destino derivados de los archivos de flujo ya calificados",
+    "frescura-flujos.json": "termómetro de frescura de los archivos de flujo, calculado del propio registro",
+    "propuestas-flujos.json": "clasificación de los flujos atrasados en caminos posibles, sin aplicar ninguno",
+    "vigia-cicad.json": "vigía de nuevas ediciones de la CICAD/OEA, estado del aviso-por-noticias",
+    "vigia-fuentes.json": "vigía de fuentes nuevas que propone el robot, sin incorporar ninguna",
 }
 
 ATRIBUCION = {
