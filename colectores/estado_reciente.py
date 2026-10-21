@@ -341,9 +341,14 @@ def panama() -> dict:
 # Público y a la Policía para contar los homicidios del país. El ámbito 0 es el
 # nacional: ahí VALORES es el recuento y VALORES_2 la tasa.
 #
-# EL NOMBRE DEL ARCHIVO CAMBIA TODOS LOS MESES («…Jul 2026.zip»). No se escribe a
+# EL NOMBRE DEL ARCHIVO CAMBIA TODOS LOS MESES («…Agosto 2026.zip»). No se escribe a
 # mano: se lee de la página del conjunto en cada corrida. Un enlace fijo se rompe
 # solo el mes que viene y el registro se quedaría mostrando lo viejo sin avisar.
+# OJO: en octubre de 2026 el MININTER renombró el archivo: pasó de
+# «DataSet_Ind_Plan_Acc_Segu_Ciud_…» (guiones bajos) a «DataSet Indicadores para
+# Planes de Acción de Seguridad Ciudadana - …» (espacios, palabras completas,
+# URL-encoded). Se aceptan AMBOS nombres, y se toma el de «Indicadores» (no el de
+# «Tendencias», que es otro ZIP sin el indicador 30).
 PERU_FICHA = ("https://www.datosabiertos.gob.pe/dataset/"
               "indicadores-de-seguridad-ciudadana-y-tendencias-territoriales-mininter")
 PERU_INDICADOR, PERU_AMBITO_NACIONAL, PERU_FUENTE = "30", "0", "CEIC"
@@ -354,7 +359,9 @@ def peru() -> dict:
     import zipfile
 
     pagina = pedir(PERU_FICHA).decode("utf-8", "replace")
-    enlaces = re.findall(r'href="([^"]*DataSet_Ind_Plan_Acc_Segu_Ciud[^"]*\.zip)"', pagina)
+    enlaces = re.findall(
+        r'href="([^"]*DataSet[^"]*(?:Ind_Plan_Acc_Segu_Ciud|Indicadores[^"]*(?:Ciudadana|Segu))[^"]*\.zip)"',
+        pagina)
     if not enlaces:
         raise RuntimeError("la página del conjunto de Perú ya no ofrece el ZIP de indicadores")
     # EL ZIP TRAE UNA FOTO POR MES y ninguna dice en el nombre cuál llega más lejos:
