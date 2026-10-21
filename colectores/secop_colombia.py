@@ -19,6 +19,7 @@ propio servidor de Socrata (una sola consulta), así que ya viene como serie.
 """
 from __future__ import annotations
 
+import datetime as dt
 import json
 import urllib.parse
 import urllib.request
@@ -40,6 +41,10 @@ def recolectar():
     with urllib.request.urlopen(pet, timeout=120) as r:
         filas = json.loads(r.read().decode("utf-8", "replace"))
 
+    # El año en curso, medido igual que la auditoría (UTC), para que el límite entre
+    # «medido» y «planificado» sea exactamente el mismo que el control usa.
+    este_anio = dt.datetime.now(dt.timezone.utc).year
+
     serie = []
     for f in filas:
         try:
@@ -50,7 +55,14 @@ def recolectar():
             continue
         planes = int(float(f.get("planes") or 0))
         presupuesto = int(float(f.get("presupuesto") or 0))
-        serie.append({"anio": anio, "planes": planes, "presupuesto_cop": presupuesto})
+        punto = {"anio": anio, "planes": planes, "presupuesto_cop": presupuesto}
+        # El Plan Anual de Adquisiciones mira a futuro: SECOP ya publica planes de
+        # años que todavía no empezaron. No es una medición fechada en el futuro
+        # —sería un error—; es un plan que existe hoy, y se marca como tal para que
+        # el control lo distinga y las figuras no lo lean como un dato cerrado.
+        if anio > este_anio:
+            punto["planificado"] = True
+        serie.append(punto)
     serie.sort(key=lambda x: x["anio"])
 
     recientes = [s for s in serie if s["anio"] >= 2023 and s["planes"] > 0]
@@ -59,7 +71,11 @@ def recolectar():
             "SECOP no devolvió ningún año reciente (>=2023) con planes. La consulta o el dataset "
             "cambiaron de forma. NO se publica.")
 
-    ultimo = serie[-1]
+    # El encabezado toma el último año EN CURSO O PASADO: un plan a futuro (p. ej.
+    # 2027, con pocas entidades cargadas todavía) no representa el estado y no debe
+    # ser la cifra de tapa. Si sólo hubiera años planificados, cae al último.
+    medidos = [s for s in serie if not s.get("planificado")]
+    ultimo = medidos[-1] if medidos else serie[-1]
     registros = [{
         "iso": "COL", "pais": "Colombia", "bloque": "Andina",
         "anio": ultimo["anio"], "planes": ultimo["planes"],

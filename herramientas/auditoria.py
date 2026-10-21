@@ -242,7 +242,14 @@ def main() -> None:
                         # se mira punto por punto, y no cuesta nada. Se admite el
                         # año en curso, que es legítimo cuando la fuente publica
                         # meses cerrados.
-                        if isinstance(anio, int) and anio > ESTE_ANIO:
+                        #
+                        # EXCEPCIÓN: los datos de PLANIFICACIÓN miran a futuro por
+                        # naturaleza. SECOP publica el Plan Anual de Adquisiciones de
+                        # años que todavía no empezaron: no es una medición fechada en
+                        # el futuro, es un plan que existe hoy. Se tolera el año futuro
+                        # SÓLO cuando el punto se declara `planificado`; sin esa marca,
+                        # un año futuro sigue siendo el error de siempre.
+                        if isinstance(anio, int) and anio > ESTE_ANIO and not pt.get("planificado"):
                             fallas.append({
                                 "que": "dato fechado en el futuro",
                                 "donde": f"{ruta.name} · {f.get('iso')}",
