@@ -711,21 +711,54 @@ def _xlsx_brasil() -> bytes:
 
 def brasil() -> dict:
     import re
+    import unicodedata
     import openpyxl
 
+    def _n(s):  # normaliza: sin acentos, en minúsculas, sin bordes
+        s = unicodedata.normalize("NFKD", str(s if s is not None else ""))
+        return "".join(c for c in s if not unicodedata.combining(c)).lower().strip()
+
     wb = openpyxl.load_workbook(io.BytesIO(_xlsx_brasil()), read_only=True, data_only=True)
-    hoja = next((wb[n] for n in wb.sheetnames if re.search(r"violenta|intencion|\bmvi\b", n, re.I)), None)
+    # Las hojas del Anuário se llaman por código (T01, T02, P01, G22…) y el título
+    # va DENTRO. La serie histórica nacional de MVI es la «Tabela 02 — Série
+    # histórica das Mortes Violentas Intencionais». Se la ubica por el Índice, que
+    # mapea cada «Tabela NN» a la hoja «TNN»; si el Índice cambia de forma, se cae
+    # a escanear el contenido de cada hoja. Así sobrevive al reordenamiento anual.
+    OBJ = ("serie historica", "mortes violentas intencionais")
+    hoja = None
+    indice = next((wb[n] for n in wb.sheetnames if _n(n) in ("indice", "índice")), None)
+    if indice is not None:
+        for row in indice.iter_rows(values_only=True):
+            celdas = [c for c in row if c is not None]
+            if len(celdas) < 2:
+                continue
+            codigo, titulo = _n(celdas[0]), _n(" ".join(str(c) for c in celdas[1:]))
+            if all(t in titulo for t in OBJ):
+                m = re.search(r"tabela\s*(\d+)", codigo)
+                if m:
+                    cod = f"T{int(m.group(1)):02d}"
+                    if cod in wb.sheetnames:
+                        hoja = wb[cod]
+                        break
+    if hoja is None:  # respaldo: la hoja cuyo encabezado menciona el objetivo
+        for nombre in wb.sheetnames:
+            h = wb[nombre]
+            texto = []
+            for i, row in enumerate(h.iter_rows(values_only=True)):
+                texto.append(" ".join(_n(c) for c in row if c is not None))
+                if i > 4:
+                    break
+            if all(t in " ".join(texto) for t in OBJ):
+                hoja = h
+                break
     if hoja is None:
-        raise RuntimeError(f"el Anuário del FBSP no trae hoja de MVI. Hojas: {wb.sheetnames[:25]}")
+        raise RuntimeError("el Anuário del FBSP no trae la serie histórica de MVI. "
+                           f"Hojas: {wb.sheetnames[:25]}")
     filas = []
     for i, fila in enumerate(hoja.iter_rows(values_only=True)):
         filas.append(list(fila))
         if i >= 90:
             break
-    # DIAGNOSTICO en el log del robot: la estructura real de la hoja, para ajustar si hace falta.
-    print(f"[brasil] hoja MVI: '{hoja.title}' · primeras filas:")
-    for r in filas[:8]:
-        print("   ", [str(c)[:16] if c is not None else "" for c in r[:14]])
 
     def es_anio(v):
         try:
@@ -737,6 +770,18 @@ def brasil() -> dict:
         return str(v).strip().lower() if v is not None else ""
 
     nac = ("brasil", "total", "total brasil", "brasil total")
+
+    def entero(v):
+        """El valor como entero, o None. El total NACIONAL de MVI está en decenas de
+        miles: un valor chico (< 1000) es la TASA por 100 mil, no el recuento. La hoja
+        del Anuário trae los dos bloques pegados —absolutos y tasa, con los mismos años
+        repetidos—; descartando lo chico nos quedamos con el recuento y la tasa no pisa."""
+        try:
+            n = int(round(float(v)))
+        except (TypeError, ValueError):
+            return None
+        return n if n >= 1000 else None
+
     serie: dict[int, int] = {}
     # Orientación A: filas = UF (una fila «Brasil»/«Total»), columnas = años.
     fila_anios = next((r for r in filas if sum(1 for c in r if es_anio(c)) >= 3), None)
@@ -745,12 +790,9 @@ def brasil() -> dict:
         fbra = next((r for r in filas if any(norm(c) in nac for c in r[:3])), None)
         if fbra:
             for j, anio in cols.items():
-                v = fbra[j] if j < len(fbra) else None
-                try:
-                    if v is not None:
-                        serie[anio] = int(round(float(v)))
-                except (TypeError, ValueError):
-                    pass
+                n = entero(fbra[j]) if j < len(fbra) else None
+                if n is not None:
+                    serie.setdefault(anio, n)  # el primer bloque (absolutos) manda
     # Orientación B: filas = años, columnas = UF (una columna «Brasil»/«Total»).
     if len(serie) < 3:
         cab = next((r for r in filas if any(norm(c) in nac for c in r)), None)
@@ -759,14 +801,19 @@ def brasil() -> dict:
             if jbra is not None:
                 for r in filas:
                     if r and es_anio(r[0]) and jbra < len(r):
-                        try:
-                            serie[int(float(r[0]))] = int(round(float(r[jbra])))
-                        except (TypeError, ValueError):
-                            pass
+                        n = entero(r[jbra])
+                        if n is not None:
+                            serie.setdefault(int(float(r[0])), n)
     if len(serie) < 3:
-        raise RuntimeError(f"no se pudo leer la serie nacional de MVI del Anuário FBSP "
-                           f"(encontrado: {serie}). Ver la estructura impresa arriba y ajustar.")
+        # Sólo acá vale el costo de volcar la estructura: la lectura falló y el log
+        # tiene que decir exactamente cómo vino la hoja para ajustar el extractor.
+        muestra = [[str(c)[:16] if c is not None else "" for c in r[:14]] for r in filas[:10]]
+        raise RuntimeError(f"no se pudo leer la serie nacional de MVI del Anuário FBSP en la hoja "
+                           f"'{hoja.title}' (encontrado: {serie}). Primeras filas: {muestra}")
     seriel = [{"anio": a, "valor": v} for a, v in sorted(serie.items())]
+    ult = f"{seriel[-1]['valor']:,}".replace(",", ".")
+    print(f"[brasil] MVI nacional (FBSP): {len(seriel)} años, {seriel[0]['anio']}–{seriel[-1]['anio']}, "
+          f"último {ult}")
     return {"serie": seriel, "en_curso": None, "nota": None,
             "definicion": "Mortes Violentas Intencionais (MVI): suma de homicidio doloso, lesión "
                           "seguida de muerte, robo seguido de muerte y muertes por intervención "
