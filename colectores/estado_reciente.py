@@ -676,8 +676,110 @@ def mexico() -> dict:
                         if entidades else None}
 
 
+# ── BRASIL ──────────────────────────────────────────────────────────────────
+#
+# El Estado brasileño (SINESP, Ministerio de Justicia) arma su tablero en el
+# navegador y no deja descargar el dato. La referencia nacional de hecho es el
+# Anuário Brasileiro de Segurança Pública del FORUM BRASILEIRO DE SEGURANÇA PÚBLICA
+# (FBSP), una ASOCIACIÓN CIVIL —no el Estado—, que publica un XLSX con las Mortes
+# Violentas Intencionais (MVI) por unidad federativa y por año. Se usa ESA, ROTULADA
+# como referencia de la sociedad civil (no estadística del propio Estado): es la
+# excepción declarada a "la cifra del propio Estado" de esta capa. Y MVI es más
+# amplio que el homicidio doloso (suma lesión seguida de muerte, robo seguido de
+# muerte y muertes por intervención policial): también se declara.
+BRASIL_PAGINA = "https://forumseguranca.org.br/publicacoes/anuario-brasileiro-de-seguranca-publica/"
+BRASIL_XLSX = "https://forumseguranca.org.br/wp-content/uploads/2026/07/anuario-2026.xlsx"
+
+
+def _xlsx_brasil() -> bytes:
+    """Baja el XLSX del Anuário. Primero lo busca en la página (robusto al cambio de
+    URL cada año); si no, usa el enlace conocido."""
+    import re
+    url = BRASIL_XLSX
+    try:
+        pagina = pedir(BRASIL_PAGINA).decode("utf-8", "replace")
+        xlsx = re.findall(r'href="([^"]+\.xlsx)"', pagina)
+        cand = [u for u in xlsx if "anuario" in u.lower()] or xlsx
+        if cand:
+            url = cand[0]
+            if url.startswith("/"):
+                url = "https://forumseguranca.org.br" + url
+    except Exception:  # noqa: BLE001
+        pass
+    return pedir(url)
+
+
+def brasil() -> dict:
+    import re
+    import openpyxl
+
+    wb = openpyxl.load_workbook(io.BytesIO(_xlsx_brasil()), read_only=True, data_only=True)
+    hoja = next((wb[n] for n in wb.sheetnames if re.search(r"violenta|intencion|\bmvi\b", n, re.I)), None)
+    if hoja is None:
+        raise RuntimeError(f"el Anuário del FBSP no trae hoja de MVI. Hojas: {wb.sheetnames[:25]}")
+    filas = []
+    for i, fila in enumerate(hoja.iter_rows(values_only=True)):
+        filas.append(list(fila))
+        if i >= 90:
+            break
+    # DIAGNOSTICO en el log del robot: la estructura real de la hoja, para ajustar si hace falta.
+    print(f"[brasil] hoja MVI: '{hoja.title}' · primeras filas:")
+    for r in filas[:8]:
+        print("   ", [str(c)[:16] if c is not None else "" for c in r[:14]])
+
+    def es_anio(v):
+        try:
+            return 2000 <= int(float(v)) <= 2100
+        except (TypeError, ValueError):
+            return False
+
+    def norm(v):
+        return str(v).strip().lower() if v is not None else ""
+
+    nac = ("brasil", "total", "total brasil", "brasil total")
+    serie: dict[int, int] = {}
+    # Orientación A: filas = UF (una fila «Brasil»/«Total»), columnas = años.
+    fila_anios = next((r for r in filas if sum(1 for c in r if es_anio(c)) >= 3), None)
+    if fila_anios:
+        cols = {j: int(float(c)) for j, c in enumerate(fila_anios) if es_anio(c)}
+        fbra = next((r for r in filas if any(norm(c) in nac for c in r[:3])), None)
+        if fbra:
+            for j, anio in cols.items():
+                v = fbra[j] if j < len(fbra) else None
+                try:
+                    if v is not None:
+                        serie[anio] = int(round(float(v)))
+                except (TypeError, ValueError):
+                    pass
+    # Orientación B: filas = años, columnas = UF (una columna «Brasil»/«Total»).
+    if len(serie) < 3:
+        cab = next((r for r in filas if any(norm(c) in nac for c in r)), None)
+        if cab:
+            jbra = next((j for j, c in enumerate(cab) if norm(c) in nac), None)
+            if jbra is not None:
+                for r in filas:
+                    if r and es_anio(r[0]) and jbra < len(r):
+                        try:
+                            serie[int(float(r[0]))] = int(round(float(r[jbra])))
+                        except (TypeError, ValueError):
+                            pass
+    if len(serie) < 3:
+        raise RuntimeError(f"no se pudo leer la serie nacional de MVI del Anuário FBSP "
+                           f"(encontrado: {serie}). Ver la estructura impresa arriba y ajustar.")
+    seriel = [{"anio": a, "valor": v} for a, v in sorted(serie.items())]
+    return {"serie": seriel, "en_curso": None, "nota": None,
+            "definicion": "Mortes Violentas Intencionais (MVI): suma de homicidio doloso, lesión "
+                          "seguida de muerte, robo seguido de muerte y muertes por intervención "
+                          "policial. Es más amplio que el homicidio doloso",
+            "organismo": "Anuário Brasileiro de Segurança Pública — Fórum Brasileiro de Segurança "
+                         "Pública (FBSP), asociación civil, NO estadística del propio Estado",
+            "enlace": BRASIL_PAGINA,
+            "licencia": "Publicación de acceso libre del FBSP; se cita la fuente",
+            "cadencia": "anual"}
+
+
 PAISES = {"ARG": argentina, "COL": colombia, "TTO": trinidad, "PAN": panama, "PER": peru,
-          "ECU": ecuador, "MEX": mexico}
+          "ECU": ecuador, "MEX": mexico, "BRA": brasil}
 
 
 def ficha(dato: dict) -> dict:
