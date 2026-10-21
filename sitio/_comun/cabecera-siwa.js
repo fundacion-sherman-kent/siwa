@@ -122,7 +122,7 @@
       var txt = (res.al_dia != null && res.comprobados != null)
         ? res.al_dia + "/" + res.comprobados + " al día" : "estado verificado";
       e.innerHTML = '<span class="siwa-dot' + (atras ? " mal" : "") + '"></span>' + txt;
-      e.title = "SIWA tiene lo último que publican " + (res.al_dia || 0) + " de " + (res.comprobados || 0) + " fuentes comprobadas.";
+      e.title = "Lo último que publican " + (res.al_dia || 0) + " de " + (res.comprobados || 0) + " fuentes comprobadas, ya cargado.";
     }).catch(function () {
       var e = document.getElementById("siwa-estado");
       if (e) e.innerHTML = '<span class="siwa-dot"></span>estado';

@@ -211,7 +211,7 @@
   }
   function mostrarHerr() {
     burbuja("gs-yo", "Herramientas");
-    var d = burbuja("gs-bot", "SIWA tiene estas vistas para explorar:");
+    var d = burbuja("gs-bot", "Estas son las vistas para explorar:");
     DATOS.herramientas.forEach(function (h) { d.innerHTML += card("Herramienta", h.rotulo, uH(h.archivo)); });
     seguir();
   }
