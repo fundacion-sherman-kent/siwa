@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-10-21T16:42:57+00:00",
+    "obtenido_en": "2026-10-21T21:25:29+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "6 consultas fallaron en esta corrida: PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
+      "13 consultas fallaron en esta corrida: COL/Contratación pública: URLError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos; URY/Violencia organizada: HTTPError; URY/Delito registrado: HTTPError; URY/Contratación pública: HTTPError; URY/Integridad: HTTPError; URY/Presupuesto: HTTPError; URY/Migración y desplazamiento: HTTPError."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -39,185 +39,6 @@
     }
   },
   "registros": [
-    {
-      "iso": "COL",
-      "pais": "Colombia",
-      "bloque": "Andina",
-      "organismo": "Datos Abiertos Colombia",
-      "tipo": "Socrata",
-      "portal": "https://www.datos.gov.co",
-      "materias": [
-        {
-          "materia": "Contratación pública",
-          "eje": "Gobernanza",
-          "consulta": "contrataciones",
-          "cantidad": 1062,
-          "ejemplos": [
-            {
-              "titulo": "PROCESOS CONTRATACION TAURAMENA",
-              "organismo": "TAURAMENA",
-              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
-            },
-            {
-              "titulo": "Contratacion Emserchia E.S.P.",
-              "organismo": "Emserchia",
-              "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
-            },
-            {
-              "titulo": "Contratacion Alcaldía Chitaraque",
-              "organismo": "Alcaldía de Chitaraque",
-              "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
-            },
-            {
-              "titulo": "CONTRATACION CEPITA",
-              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
-              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
-            }
-          ]
-        },
-        {
-          "materia": "Presupuesto",
-          "eje": "Gobernanza",
-          "consulta": "presupuesto",
-          "cantidad": 612,
-          "ejemplos": [
-            {
-              "titulo": "Presupuesto de Ingresos",
-              "organismo": "INDUSTRIA MILITAR",
-              "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
-            },
-            {
-              "titulo": "Presupuesto de Gastos",
-              "organismo": "INDUSTRIA MILITAR",
-              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
-            },
-            {
-              "titulo": "Presupuesto DADEP",
-              "organismo": "DEFENSORIA DEL ESPACIO PUBLICO",
-              "enlace": "https://www.datos.gov.co/d/8rih-qmrc"
-            },
-            {
-              "titulo": "PRESUPUESTO AIM-2020",
-              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
-              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
-            }
-          ]
-        },
-        {
-          "materia": "Delito registrado",
-          "eje": "Seguridad",
-          "consulta": "delito",
-          "cantidad": 147,
-          "ejemplos": [
-            {
-              "titulo": "DELITOS INFORMÁTICOS",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
-            },
-            {
-              "titulo": "DELITOS SEXUALES",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
-            },
-            {
-              "titulo": "Delitos Informaticos V1",
-              "organismo": "Damicruz",
-              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
-            },
-            {
-              "titulo": "Reporte  Delitos sexuales Policía Nacional",
-              "organismo": "DIJIN",
-              "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
-            }
-          ]
-        },
-        {
-          "materia": "Migración y desplazamiento",
-          "eje": "Inteligencia estratégica",
-          "consulta": "migracion",
-          "cantidad": 114,
-          "ejemplos": [
-            {
-              "titulo": "Entradas de extranjeros a Colombia",
-              "organismo": "emurillo",
-              "enlace": "https://www.datos.gov.co/d/96sh-4v8d"
-            },
-            {
-              "titulo": "Salidas de colombianos desde el territorio nacional",
-              "organismo": "emurillo",
-              "enlace": "https://www.datos.gov.co/d/efw5-jiej"
-            },
-            {
-              "titulo": "Entrada de Venezolanos a Colombia por año(2012-2019)",
-              "organismo": "Savine",
-              "enlace": "https://www.datos.gov.co/d/p7hq-8vsm"
-            },
-            {
-              "titulo": "MIGRANTES A COLOMBIA",
-              "organismo": "BERNARDO GUEVARA",
-              "enlace": "https://www.datos.gov.co/d/c4mm-qn8q"
-            }
-          ]
-        },
-        {
-          "materia": "Violencia organizada",
-          "eje": "Seguridad",
-          "consulta": "homicidio",
-          "cantidad": 78,
-          "ejemplos": [
-            {
-              "titulo": "HOMICIDIO",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/m8fd-ahd9"
-            },
-            {
-              "titulo": "Homicidio",
-              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
-              "enlace": "https://www.datos.gov.co/d/2fxs-6yhd"
-            },
-            {
-              "titulo": "Homicidios accidente de tránsito Policía Nacional",
-              "organismo": "DIJIN",
-              "enlace": "https://www.datos.gov.co/d/ha6j-pa2r"
-            },
-            {
-              "titulo": "Guadalajara de Buga : Homicidios por Accidente de Tránsito",
-              "organismo": "Alcaldía Municipal de Guadalajara de Buga",
-              "enlace": "https://www.datos.gov.co/d/8rme-4s7n"
-            }
-          ]
-        },
-        {
-          "materia": "Integridad",
-          "eje": "Gobernanza",
-          "consulta": "corrupcion",
-          "cantidad": 58,
-          "ejemplos": [
-            {
-              "titulo": "Programa Interamericano de datos abiertos para la lucha contra la corrupción PIDA",
-              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
-              "enlace": "https://www.datos.gov.co/stories/s/k5ma-yb9b"
-            },
-            {
-              "titulo": "Vista Diagnóstico Conjuntos de Datos Abiertos Programa Interamericano de Lucha Contra la Corrupción PIDA",
-              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
-              "enlace": "https://www.datos.gov.co/d/wmwy-ixwz"
-            },
-            {
-              "titulo": "Gráfico de Disponibilidad de Datos Abiertos del PIDA",
-              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
-              "enlace": "https://www.datos.gov.co/d/6m24-6wiv"
-            },
-            {
-              "titulo": "Base de Datos Riesgos Alcaldía de Cali",
-              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
-              "enlace": "https://www.datos.gov.co/d/tarm-4qgv"
-            }
-          ]
-        }
-      ],
-      "conjuntos_hallados": 2071
-    },
     {
       "iso": "PAN",
       "pais": "Panamá",
@@ -375,6 +196,157 @@
         }
       ],
       "conjuntos_hallados": 1347
+    },
+    {
+      "iso": "COL",
+      "pais": "Colombia",
+      "bloque": "Andina",
+      "organismo": "Datos Abiertos Colombia",
+      "tipo": "Socrata",
+      "portal": "https://www.datos.gov.co",
+      "materias": [
+        {
+          "materia": "Presupuesto",
+          "eje": "Gobernanza",
+          "consulta": "presupuesto",
+          "cantidad": 612,
+          "ejemplos": [
+            {
+              "titulo": "Presupuesto de Gastos",
+              "organismo": "INDUSTRIA MILITAR",
+              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
+            },
+            {
+              "titulo": "Presupuesto de Ingresos",
+              "organismo": "INDUSTRIA MILITAR",
+              "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
+            },
+            {
+              "titulo": "Presupuesto DADEP",
+              "organismo": "DEFENSORIA DEL ESPACIO PUBLICO",
+              "enlace": "https://www.datos.gov.co/d/8rih-qmrc"
+            },
+            {
+              "titulo": "PRESUPUESTO AIM-2020",
+              "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
+              "enlace": "https://www.datos.gov.co/d/efrw-bijb"
+            }
+          ]
+        },
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 147,
+          "ejemplos": [
+            {
+              "titulo": "DELITOS INFORMÁTICOS",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
+            },
+            {
+              "titulo": "DELITOS SEXUALES",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
+            },
+            {
+              "titulo": "Reporte  Delitos sexuales Policía Nacional",
+              "organismo": "DIJIN",
+              "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
+            },
+            {
+              "titulo": "Delitos Informaticos V1",
+              "organismo": "Damicruz",
+              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
+            }
+          ]
+        },
+        {
+          "materia": "Migración y desplazamiento",
+          "eje": "Inteligencia estratégica",
+          "consulta": "migracion",
+          "cantidad": 114,
+          "ejemplos": [
+            {
+              "titulo": "Salidas de colombianos desde el territorio nacional",
+              "organismo": "emurillo",
+              "enlace": "https://www.datos.gov.co/d/efw5-jiej"
+            },
+            {
+              "titulo": "Entradas de extranjeros a Colombia",
+              "organismo": "emurillo",
+              "enlace": "https://www.datos.gov.co/d/96sh-4v8d"
+            },
+            {
+              "titulo": "Entrada de Venezolanos a Colombia por año(2012-2019)",
+              "organismo": "Savine",
+              "enlace": "https://www.datos.gov.co/d/p7hq-8vsm"
+            },
+            {
+              "titulo": "MIGRANTES A COLOMBIA",
+              "organismo": "BERNARDO GUEVARA",
+              "enlace": "https://www.datos.gov.co/d/c4mm-qn8q"
+            }
+          ]
+        },
+        {
+          "materia": "Violencia organizada",
+          "eje": "Seguridad",
+          "consulta": "homicidio",
+          "cantidad": 78,
+          "ejemplos": [
+            {
+              "titulo": "HOMICIDIO",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/m8fd-ahd9"
+            },
+            {
+              "titulo": "Homicidio",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/2fxs-6yhd"
+            },
+            {
+              "titulo": "Homicidios accidente de tránsito Policía Nacional",
+              "organismo": "DIJIN",
+              "enlace": "https://www.datos.gov.co/d/ha6j-pa2r"
+            },
+            {
+              "titulo": "Guadalajara de Buga : Homicidios por Accidente de Tránsito",
+              "organismo": "Alcaldía Municipal de Guadalajara de Buga",
+              "enlace": "https://www.datos.gov.co/d/8rme-4s7n"
+            }
+          ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 59,
+          "ejemplos": [
+            {
+              "titulo": "Programa Interamericano de datos abiertos para la lucha contra la corrupción PIDA",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/stories/s/k5ma-yb9b"
+            },
+            {
+              "titulo": "Vista Diagnóstico Conjuntos de Datos Abiertos Programa Interamericano de Lucha Contra la Corrupción PIDA",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/wmwy-ixwz"
+            },
+            {
+              "titulo": "Gráfico de Disponibilidad de Datos Abiertos del PIDA",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/6m24-6wiv"
+            },
+            {
+              "titulo": "Base de Datos Riesgos Alcaldía de Cali",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/tarm-4qgv"
+            }
+          ]
+        }
+      ],
+      "conjuntos_hallados": 1010
     },
     {
       "iso": "CHL",
@@ -827,164 +799,6 @@
       "conjuntos_hallados": 104
     },
     {
-      "iso": "URY",
-      "pais": "Uruguay",
-      "bloque": "Cono Sur",
-      "organismo": "Catalogo Nacional de Datos Abiertos",
-      "tipo": "CKAN",
-      "portal": "https://catalogodatos.gub.uy",
-      "materias": [
-        {
-          "materia": "Migración y desplazamiento",
-          "eje": "Inteligencia estratégica",
-          "consulta": "migracion",
-          "cantidad": 36,
-          "ejemplos": [
-            {
-              "titulo": "Porcentaje anual de crecimiento poblacional. Países seleccionados",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6647"
-            },
-            {
-              "titulo": "Porcentaje de jóvenes que migraron dentro del país. País urbano",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-9044"
-            },
-            {
-              "titulo": "Porcentaje de personas nacidas en el exterior. Censos 2011",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-10673"
-            },
-            {
-              "titulo": "Porcentaje de jóvenes que tienen familiares en otro país. País urbano",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-9020"
-            }
-          ]
-        },
-        {
-          "materia": "Presupuesto",
-          "eje": "Gobernanza",
-          "consulta": "presupuesto",
-          "cantidad": 28,
-          "ejemplos": [
-            {
-              "titulo": "Presupuesto",
-              "organismo": "ANCAP",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ancap-presupuesto"
-            },
-            {
-              "titulo": "Presupuesto",
-              "organismo": "URSEC",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ursec-presupuesto-ejecucion-presupuestal"
-            },
-            {
-              "titulo": "Presupuesto",
-              "organismo": "INE",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ine-presupuesto_ine"
-            },
-            {
-              "titulo": "Presupuesto",
-              "organismo": "Centro Ceibal",
-              "enlace": "https://catalogodatos.gub.uy/dataset/centro-ceibal-presupuesto"
-            }
-          ]
-        },
-        {
-          "materia": "Delito registrado",
-          "eje": "Seguridad",
-          "consulta": "delito",
-          "cantidad": 18,
-          "ejemplos": [
-            {
-              "titulo": "Delitos sexuales",
-              "organismo": "Ministerio del Interior",
-              "enlace": "https://catalogodatos.gub.uy/dataset/delitos-sexuales"
-            },
-            {
-              "titulo": "Delitos denunciados en el Uruguay",
-              "organismo": "Ministerio del Interior",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-del-interior-delitos_denunciados_en_el_uruguay"
-            },
-            {
-              "titulo": "Cantidad de denuncias policiales por delitos contra las personas. Total país",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6711"
-            },
-            {
-              "titulo": "Información del Nuevo Código de Proceso Penal",
-              "organismo": "Poder Judicial",
-              "enlace": "https://catalogodatos.gub.uy/dataset/suprema-corte-de-justicia-informacion-del-nuevo-codigo-de-proceso-penal"
-            }
-          ]
-        },
-        {
-          "materia": "Contratación pública",
-          "eje": "Gobernanza",
-          "consulta": "contrataciones",
-          "cantidad": 6,
-          "ejemplos": [
-            {
-              "titulo": "Llamados publicados para adquisición y contratación de bienes y servicios",
-              "organismo": "Banco Central del Uruguay",
-              "enlace": "https://catalogodatos.gub.uy/dataset/bcu_llamados-publicados-comprasycontrataciones"
-            },
-            {
-              "titulo": "Licitaciones y compras",
-              "organismo": "ANCAP",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ancap-licitaciones-compras"
-            },
-            {
-              "titulo": "Seguimiento Ley de Promoción del Empleo",
-              "organismo": "Ministerio de Trabajo y Seguridad Social de Uruguay",
-              "enlace": "https://catalogodatos.gub.uy/dataset/ministerio-de-trabajo-y-seguridad-social-de-uruguay-ley-de-promocion-del-empleo"
-            },
-            {
-              "titulo": "Cantidad de RRHH en EEPP",
-              "organismo": "Oficina de Planeamiento y Presupuesto",
-              "enlace": "https://catalogodatos.gub.uy/dataset/opp-cantidad-de-rrhh-en-eepp"
-            }
-          ]
-        },
-        {
-          "materia": "Violencia organizada",
-          "eje": "Seguridad",
-          "consulta": "homicidio",
-          "cantidad": 5,
-          "ejemplos": [
-            {
-              "titulo": "Homicidios a mujeres",
-              "organismo": "Ministerio del Interior",
-              "enlace": "https://catalogodatos.gub.uy/dataset/homicidios-a-mujeres"
-            },
-            {
-              "titulo": "Tasa de procesamientos por homicidios. Total país",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6707"
-            },
-            {
-              "titulo": "Porcentaje de denuncia de homicidios consumados. Total país",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-6703"
-            },
-            {
-              "titulo": "Tasa de denuncia de homicidios consumados. Total país",
-              "organismo": "MIDES",
-              "enlace": "https://catalogodatos.gub.uy/dataset/mides-indicador-10505"
-            }
-          ]
-        },
-        {
-          "materia": "Integridad",
-          "eje": "Gobernanza",
-          "consulta": "corrupcion",
-          "cantidad": 0,
-          "ejemplos": []
-        }
-      ],
-      "conjuntos_hallados": 93
-    },
-    {
       "iso": "DOM",
       "pais": "República Dominicana",
       "bloque": "Caribe hispano y Haití",
@@ -1274,12 +1088,22 @@
       "portal": "https://www.datos.gov.py",
       "materias": [],
       "conjuntos_hallados": 0
+    },
+    {
+      "iso": "URY",
+      "pais": "Uruguay",
+      "bloque": "Cono Sur",
+      "organismo": "Catalogo Nacional de Datos Abiertos",
+      "tipo": "CKAN",
+      "portal": "https://catalogodatos.gub.uy",
+      "materias": [],
+      "conjuntos_hallados": 0
     }
   ],
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4648,
+    "conjuntos_hallados": 3494,
     "materias_consultadas": 6,
     "oficinas_que_responden": 24,
     "estados_con_alguna_fuente_oficial": 26
@@ -1339,9 +1163,8 @@
       "organismo": "Oficina Nacional de Estadística e Información",
       "url": "https://onei.gob.cu/",
       "nota": "Sin el prefijo «www». Con él, el servidor devuelve error 500. La diferencia entre un Estado que no publica y un prefijo de más es un carácter, y decide lo que el registro afirma.",
-      "estado": "certificado_invalido",
-      "codigo": 200,
-      "certificado": "no valida: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate ("
+      "estado": "sin_respuesta",
+      "detalle": "URLError: <urlopen error timed out>"
     },
     {
       "iso": "DOM",
@@ -1438,9 +1261,9 @@
       "sigla": "INE",
       "organismo": "Instituto Nacional de Estadística",
       "url": "https://www.ine.gub.uy/",
-      "estado": "certificado_invalido",
-      "codigo": 200,
-      "certificado": "no valida: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issue"
+      "estado": "sin_respuesta",
+      "detalle": "HTTPError: HTTP Error 503: Service Unavailable",
+      "certificado": "no valida: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate ("
     },
     {
       "iso": "VEN",
@@ -1561,9 +1384,8 @@
   "oficinas_por_estado": {
     "responde": 24,
     "cierra_a_maquinas": 4,
-    "certificado_invalido": 2,
+    "sin_respuesta": 3,
     "verificacion_anti_robot": 1,
-    "sin_respuesta": 1,
     "falla_el_servidor": 1
   },
   "sectoriales_verificados": [
