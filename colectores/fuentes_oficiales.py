@@ -281,9 +281,16 @@ def recolectar():
         })
         ficha["conjuntos_hallados"] += cantidad
 
-    registros = sorted(por_pais.values(), key=lambda r: r["conjuntos_hallados"], reverse=True)
-    for ficha in registros:
+    ordenados = sorted(por_pais.values(), key=lambda r: r["conjuntos_hallados"], reverse=True)
+    for ficha in ordenados:
         ficha["materias"].sort(key=lambda m: m["cantidad"], reverse=True)
+    # Los portales REGIONALES o agregadores (HDX/OCHA, etc.) no son de un Estado del
+    # padron: su iso no es uno de los 33. Van a una seccion propia y NO a `registros`,
+    # que por contrato cubre 33 Estados y solo esos -si entraran ahi, la auditoria los
+    # marcaria, con razon, como Estado fuera del padron-.
+    padron33 = set(nombres)
+    registros = [r for r in ordenados if r["iso"] in padron33]
+    regionales = [r for r in ordenados if r["iso"] not in padron33]
 
     oficinas, aviso_control = _oficinas(padron)
     por_estado = {}
@@ -377,6 +384,10 @@ def recolectar():
             "oficinas_por_estado": por_estado,
             "sectoriales_verificados": padron.get("sectoriales_verificados", []),
             "sin_acceso_automatizado": padron.get("_bloqueados", {}),
+            # Portales que agregan datos de varios paises (HDX/OCHA y similares). Se
+            # registran aparte: son utiles para hallar conjuntos, pero no son el catalogo
+            # de un Estado del padron y no cuentan en la cobertura de los 33.
+            "portales_regionales": regionales,
         },
     )
 
