@@ -58,14 +58,14 @@
 <main>
   <div class="filete"></div>
   <h1>Herramientas</h1>
-  <p class="bajada">Cómo se leen los datos de SIWA y con qué programas libres se trabajan.</p>
+  <p class="bajada">Cómo se leen nuestros datos y con qué programas libres se trabajan.</p>
   <p class="fecha">Fundación Sherman Kent — Oficina de Generación de Inteligencia · Publicada el 23 de septiembre de 2026.</p>
 
-  <p>Esta página no enseña a programar: dice, en una sola lectura, qué formato usa cada
+  <p>Acá no se enseña a programar: se dice qué formato usa cada
      archivo del registro, qué trae adentro y con qué herramientas libres —sin costo y sin
-     credencial— se puede abrir, cruzar o mapear. El detalle completo de los conjuntos,
-     archivo por archivo, está en <a href="https://siwa.fundacionkent.org/datos/" target="_blank" rel="noopener">la
-     interfaz de datos</a>; esta página lo resume del lado de quien quiere <b>usar</b> el dato.</p>
+     credencial— se puede abrir, cruzar o mapear. El detalle de cada conjunto
+     está en <a href="https://siwa.fundacionkent.org/datos/" target="_blank" rel="noopener">la
+     interfaz de datos</a>; acá lo resumimos para quien quiere <b>usar</b> el dato.</p>
 
   <h2>El formato: JSON, con su procedencia adentro</h2>
   <p>Todo el registro se publica en archivos <b>JSON</b> planos, en
@@ -94,10 +94,10 @@
      y el detalle subnacional (provincia, departamento o estado, según el país) en
      <code>https://siwa.fundacionkent.org/datos/geo/adm1/&lt;código ISO-3&gt;.geojson</code> —por
      ejemplo, <code>ARG.geojson</code> para Argentina—. Son las mismas capas que dibujan el
-     Mapa de opacidad y el tablero subnacional del propio registro.</p>
-  <div class="vacio">Vacío declarado: SIWA no publica sus conjuntos en un archivo <b>.csv</b>
-     nativo. Como cada conjunto es tabular, se obtiene un CSV en un paso, con las herramientas
-     de la sección siguiente —no hace falta que la Fundación lo publique aparte—.</div>
+     Mapa de opacidad y el tablero subnacional del registro.</p>
+  <div class="vacio">Vacío declarado: no publicamos los conjuntos en un archivo <b>.csv</b>
+     nativo. Como cada conjunto es tabular, se obtiene un CSV en un paso con las herramientas
+     de la sección siguiente; no hace falta publicarlo aparte.</div>
 
   <h2>Herramientas libres recomendadas</h2>
   <table class="tabla-h">
@@ -119,7 +119,7 @@
               <code>curl -s &lt;url&gt; | jq '.registros[0]'</code>.</td></tr>
       <tr><td><b>QGIS</b></td>
           <td>Software libre de mapas (SIG). Abre directo los archivos GeoJSON de arriba como
-              capas, y permite unirles los indicadores de SIWA por su código <code>iso</code>
+              capas, y permite unirles nuestros indicadores por su código <code>iso</code>
               para armar un mapa temático propio.</td></tr>
     </tbody>
   </table>
@@ -130,7 +130,7 @@
      formato de <code>sha256sum</code> (huella y nombre de archivo, uno por línea). Quien
      descarga un conjunto puede calcular su propia huella —<code>sha256sum archivo.json</code> en
      Linux o macOS, <code>Get-FileHash archivo.json -Algorithm SHA256</code> en PowerShell— y
-     compararla con la del manifiesto: si coinciden, es exactamente lo que la Fundación publicó,
+     compararla con la del manifiesto: si coinciden, es exactamente lo que publicamos,
      sin alteración en el camino.</p>
   <div class="vacio">Vacío declarado: el manifiesto cubre los archivos JSON de
      <code>datos/publico/</code>. Las capas GeoJSON de <code>datos/geo/</code> todavía no tienen

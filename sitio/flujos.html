@@ -175,7 +175,7 @@ const AVISO={
  minerales:'Oro, coltán y diamantes por OCDE, OCCRP, GI-TOC, InSight Crime y prensa. Muchas son pares origen→destino o discrepancia de comercio espejo (construcción propia). El oro del BCV venezolano a Turquía/EAU es reserva soberana bajo sanciones, NO contrabando, y va en gris aparte.',
  especies:'Vida silvestre y madera por CITES, TRAFFIC, EIA, InSight Crime, RUSI, Mongabay y agencias (actor interesado). Subtipos: fauna terrestre, marina, madera, fauna viva y aves. El centroide de destino asiático es marcador, no punto de arribo.',
  contrabando:'Contrabando de cigarrillos (Paraguay) y combustible (frontera colombo-venezolana) por UNODC, Euromonitor, InSight Crime y fiscos (actor interesado). La dirección de un flujo de frontera puede invertirse según precios.',
- trata:'Trata de personas desde Venezuela hacia el Caribe por OIM, UNODC y prensa. De los flujos más subregistrados: la ausencia de una línea NO implica ausencia de flujo, sólo de documentación pública.'
+ trata:'Trata de personas desde Venezuela hacia el Caribe por OIM, UNODC y prensa. De los flujos más subregistrados: la ausencia de una línea NO implica ausencia de flujo, solo de documentación pública.'
 };
 const OPAC={alta:.92,media:.62,baja:.42};  // la opacidad es confianza, NO volumen
 let chart, RUTAS={}, COB={}, fam='narcotrafico', sub='__todos', anioMax=2026, playing=false, timer=null;
@@ -362,12 +362,12 @@ function pintarPie(rs){
       '<div class="fuente">'+esc(r.fuente)+(urlOk(r.url)?' <a href="'+esc(r.url)+'" target="_blank" rel="noopener">fuente ↗</a>':'')+(r.nota?'<br><i>'+esc(r.nota)+'</i>':'')+'</div></div>').join('');
   document.getElementById('pie').innerHTML='SIWA — Fundación Sherman Kent · <b>Aviso:</b> '+esc(AVISO[fam])+
     ' <b>Los nodos marcan países, no puntos de salida</b> (el origen no es un lugar exacto). '+
-    'Sólo se dibujan rutas con fuente: <b>la ausencia de una línea no implica ausencia de flujo</b>. '+
+    'Solo se dibujan rutas con fuente: <b>la ausencia de una línea no implica ausencia de flujo</b>. '+
     'El año es el de registro de la ruta, no el de vigencia; lo histórico va atenuado y punteado. '+
-    '<b>El peso visual de un corredor refleja densidad de registro, no participación en el flujo; el producto no avala la narrativa de ningún Estado.</b> '+
-    'El producto pasó por el disenso del décimo hombre en dos rondas y se corrigió según sus objeciones. '+
+    '<b>El peso visual de un corredor refleja densidad de registro, no participación en el flujo; no avalamos la narrativa de ningún Estado.</b> '+
+    'Este mapa pasó por el disenso del décimo hombre en dos rondas y se corrigió según sus objeciones. '+
     'Fuente de cada ruta y método: <a href="flujos-anexo-fuentes.html">anexo de fuentes</a>. '+
-    'Geometría del mapa base: <b>Natural Earth</b> (Admin 0 – Countries, 1:110 m), de dominio público, la misma fuente de límites que el resto de SIWA. '+
+    'Geometría del mapa base: <b>Natural Earth</b> (Admin 0 – Countries, 1:110 m), de dominio público, la misma fuente de límites que el resto del registro. '+
     '<b>Islas Malvinas.</b> La Fundación tiene su sede en la Argentina y sigue la posición argentina: son territorio argentino. Este mapa no rotula los países ni atribuye el archipiélago a otro Estado; ninguna ruta lo toca.';
 }
 </script>

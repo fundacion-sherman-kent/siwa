@@ -116,7 +116,7 @@
   <div class="filete"></div>
   <h1>Tendencias y <b>reloj de actualidad</b></h1>
   <p class="bajada">Cómo se mueve cada indicador en el tiempo — con su <b>banda de incertidumbre</b> cuando
-     la fuente la publica — y cuán al día está SIWA frente a lo que las fuentes publican <b>hoy</b>.</p>
+     la fuente la publica — y cuán al día estamos frente a lo que las fuentes publican <b>hoy</b>.</p>
 
   <div class="controles">
     <label for="tema">Indicador</label>
@@ -131,8 +131,8 @@
   <p class="leyenda-banda" id="nota-banda"></p>
 
   <h2>Reloj de actualidad · en vivo</h2>
-  <p class="bajada">SIWA compara el período más nuevo que tiene con el que cada fuente publica hoy. Sin maquillar:
-     cuando una fuente nacional va más adelante que SIWA, se dice.</p>
+  <p class="bajada">Comparamos el período más nuevo que tenemos con el que cada fuente publica hoy. Sin maquillar:
+     cuando una fuente nacional va más adelante que lo que publicamos acá, lo decimos.</p>
   <div id="reloj" class="cargando">Consultando el reloj…</div>
 
   <p class="pie">SIWA — Fundación Sherman Kent · Series con fuente, fecha y banda declarada ·
@@ -300,19 +300,19 @@ function pintarReloj(d){
   html+=`<div class="chips">
     <div class="chip"><div class="n">${res.comprobados??'—'}</div><div class="r">fuentes comprobadas</div></div>
     <div class="chip"><div class="n" style="color:var(--verde)">${res.al_dia??'—'}</div><div class="r">al día</div></div>
-    <div class="chip"><div class="n" style="color:${(res.siwa_atrasado)?'var(--rojo)':'var(--tinta)'}">${res.siwa_atrasado??'—'}</div><div class="r">SIWA atrasado</div></div>
+    <div class="chip"><div class="n" style="color:${(res.siwa_atrasado)?'var(--rojo)':'var(--tinta)'}">${res.siwa_atrasado??'—'}</div><div class="r">atrasados acá</div></div>
     <div class="chip"><div class="n" style="color:var(--tenue)">${res.no_comprobado??'—'}</div><div class="r">sin comprobar</div></div></div>`;
 
   const fuera=d.fuentes_nacionales_mas_nuevas_fuera_de_siwa||[];
   if(fuera.length){
-    html+=`<div class="honesto"><b>Más nuevo fuera de SIWA.</b> Hay ${fuera.length} serie(s) nacional(es) que hoy van más adelante que SIWA:<ul style="margin:6px 0 0;padding-left:20px">`;
-    fuera.forEach(f=>{html+=`<li>${f.pais||f.iso} — ${f.materia}: la fuente (${f.organismo}) llega a <b>${f.ultimo_periodo}</b>, SIWA tiene ${f.siwa}.</li>`;});
+    html+=`<div class="honesto"><b>Más nuevo fuera del registro.</b> Hay ${fuera.length} serie(s) nacional(es) que hoy van más adelante que lo que publicamos acá:<ul style="margin:6px 0 0;padding-left:20px">`;
+    fuera.forEach(f=>{html+=`<li>${f.pais||f.iso} — ${f.materia}: la fuente (${f.organismo}) llega a <b>${f.ultimo_periodo}</b>, acá tenemos ${f.siwa}.</li>`;});
     html+=`</ul></div>`;
   }
 
   const comps=(d.comprobaciones||[]).slice().sort((a,b)=>{
     const o={atrasado:0,no_comprobado:1,al_dia:2}; return (o[a.estado]??3)-(o[b.estado]??3);});
-  html+=`<div class="tabla-scroll"><table><thead><tr><th>Indicador</th><th>Fuente</th><th class="num">SIWA</th><th class="num">Fuente hoy</th><th>Estado</th></tr></thead><tbody>`;
+  html+=`<div class="tabla-scroll"><table><thead><tr><th>Indicador</th><th>Fuente</th><th class="num">Registro</th><th class="num">Fuente hoy</th><th>Estado</th></tr></thead><tbody>`;
   comps.forEach(c=>{
     const tag=c.estado==='al_dia'?'<span class="tag ok">al día</span>':
              c.estado==='atrasado'?'<span class="tag atras">atrasado</span>':
@@ -327,7 +327,7 @@ function pintarReloj(d){
   if(cor.length){
     const hs=cor.map(c=>c.horas_desde_la_ultima_corrida).filter(x=>x!=null);
     const min=Math.min(...hs), max=Math.max(...hs);
-    html+=`<p style="color:var(--tenue);font-size:12.5px;margin-top:8px">Los ${cor.length} colectores corrieron entre hace ${min.toFixed(1)} y ${max.toFixed(1)} horas.</p>`;
+    html+=`<p style="color:var(--tenue);font-size:12.5px;margin-top:8px">Los ${cor.length} colectores corrieron hace entre ${min.toFixed(1)} y ${max.toFixed(1)} horas.</p>`;
   }
   cont.innerHTML=html;
 }
