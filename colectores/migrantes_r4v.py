@@ -121,7 +121,7 @@ def recolectar():
                 "consultado": comun.ahora(),
             },
             "licencia": ("Cifras oficiales compiladas por R4V; cita obligatoria a R4V y a la fuente "
-                         "de cada renglón. SIWA se considera uso no comercial."),
+                         "de cada renglón. Este registro se considera de uso no comercial."),
         },
     )
 

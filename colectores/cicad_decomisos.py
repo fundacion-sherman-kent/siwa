@@ -66,29 +66,29 @@ def main():
         nota=("Report on Drug Supply in the Americas 2022, CICAD (Observatorio Interamericano "
               "sobre Drogas, OEA). Fiabilidad B: organismo multilateral con historial. Credibilidad "
               "2: recuento administrativo sobre lo que informan los Estados, procedencia PARCIALMENTE "
-              "COMPARTIDA con UNODC. Entra como segunda fuente de los decomisos de cocaina, PARCIAL: "
-              "solo los 4 paises que el reporte declara con numero en el texto."),
+              "COMPARTIDA con UNODC. Entra como segunda fuente de los decomisos de cocaína, PARCIAL: "
+              "solo los 4 países que el reporte declara con número en el texto."),
     )
     vacios = [
-        "PARCIAL: solo Colombia, Ecuador, Brasil y Bolivia -los unicos que el reporte 2022 "
-        "declara con numero en el texto-. El resto de los paises va amontonado en 'Other' en los "
+        "PARCIAL: solo Colombia, Ecuador, Brasil y Bolivia —los únicos que el reporte 2022 "
+        "declara con número en el texto—. El resto de los países va amontonado en 'Other' en los "
         "graficos, sin cifra propia, y no se estima.",
-        "Procedencia parcialmente compartida con UNODC: los mismos Estados informan a los dos, asi "
-        "que corrobora, pero no son dos fuentes del todo ciegas entre si.",
-        "Solo cocaina. El reporte da las otras drogas por pais solo en graficos sin numeros.",
-        "Edicion 2022 (datos hasta 2020): no suma frescura frente a UNODC, suma independencia.",
+        "Procedencia parcialmente compartida con UNODC: los mismos Estados informan a los dos, así "
+        "que corrobora, pero no son dos fuentes del todo ciegas entre sí.",
+        "Solo cocaína. El reporte da las otras drogas por país solo en gráficos sin números.",
+        "Edición 2022 (datos hasta 2020): no suma frescura frente a UNODC, suma independencia.",
     ]
     indicadores = [{
         "clave": "incautaciones_cocaina_cicad",
-        "nombre": "Incautaciones de cocaina (CICAD, OEA) — parcial",
+        "nombre": "Incautaciones de cocaína (CICAD, OEA) — parcial",
         "unidad": "kilogramos",
         "origen": "CICAD (OEA)",
-        "rotulo": "Segunda fuente parcial (4 paises), procedencia parcialmente compartida con UNODC",
+        "rotulo": "Segunda fuente parcial (4 países), procedencia parcialmente compartida con UNODC",
     }]
     comun.escribir(
         colector="cicad_decomisos",
         capa="publico",
-        fuente=("CICAD — Comision Interamericana para el Control del Abuso de Drogas (OEA), "
+        fuente=("CICAD — Comisión Interamericana para el Control del Abuso de Drogas (OEA), "
                 "Report on Drug Supply in the Americas 2022, Observatorio Interamericano sobre Drogas"),
         url_fuente=datos.get("fuente", {}).get("url", "https://oas.org/en/sms/cicad/"),
         calificacion=calificacion,
@@ -96,7 +96,7 @@ def main():
         vacios=vacios,
         extra={
             "indicadores": indicadores,
-            "licencia": "Reproduccion permitida citando la fuente (OEA/CICAD). Sin uso comercial.",
+            "licencia": "Reproducción permitida citando la fuente (OEA/CICAD). Sin uso comercial.",
         },
     )
     print(f"[cicad_decomisos] {len(registros)} paises con decomisos de cocaina (CICAD 2022, parcial, "

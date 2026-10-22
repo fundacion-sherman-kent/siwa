@@ -152,23 +152,23 @@ def recolectar():
 
     vacios = [
         "El recuento de escenas no se compara entre Estados. Depende del tamaño del "
-        "territorio, de la latitud y de por donde pasa el satelite: Brasil tiene más "
-        "escenas que Granada por geometria, no por nada que se pueda decir de ninguno "
+        "territorio, de la latitud y de por donde pasa el satélite: Brasil tiene más "
+        "escenas que Granada por geometría, no por nada que se pueda decir de ninguno "
         "de los dos. Ordenar Estados por esa cifra sería ordenarlos por superficie. Lo "
-        "que si es comparable es la frescura: cuántos días hace de la ultima escena.",
-        "Una imagen no acredita un hecho. Prueba que habia algo el día que pasó el "
-        "satelite; no prueba que era ni de quien. Entra como material de recolección, "
-        "jamas como cifra, y ningún juicio del registro se apoya en ella.",
-        "Se cuentan escenas disponibles, no utilizables. La nube manda en el tropico: "
-        "Buena parte de América Central y de la Amazonia está cubierta buena parte del "
+        "que sí es comparable es la frescura: cuántos días hace de la última escena.",
+        "Una imagen no acredita un hecho. Prueba que había algo el día que pasó el "
+        "satélite; no prueba qué era ni de quién. Entra como material de recolección, "
+        "jamás como cifra, y ningún juicio del registro se apoya en ella.",
+        "Se cuentan escenas disponibles, no utilizables. La nube manda en el trópico: "
+        "buena parte de América Central y de la Amazonia está cubierta buena parte del "
         "año. Una escena existente puede no dejar ver nada.",
         "Se consulta por un rectángulo, no por la forma del país. El rectángulo de "
-        "Chile abarca medio oceano Pacifico y parte de la Argentina, de modo que "
+        "Chile abarca medio océano Pacífico y parte de la Argentina, de modo que "
         "escenas contadas para un Estado pueden caer fuera de él.",
-        "No se descarga ni se sirve ninguna imagen: se publica que existe, de cuando es "
-        "Y el enlace al mirador oficial, que es donde vive. Descargarla exige registro "
-        "gratuito, y ese tramite no lo hace el robot.",
-        f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver que "
+        "No se descarga ni se sirve ninguna imagen: se publica que existe, de cuándo es "
+        "y el enlace al mirador oficial, que es donde vive. Descargarla exige registro "
+        "gratuito, y ese trámite no lo hace el robot.",
+        f"LA VENTANA ES DE {DIAS} DÍAS y se mueve con cada corrida: sirve para ver qué "
         "hay ahora, no para comparar contra el mes pasado.",
     ]
 
@@ -176,11 +176,11 @@ def recolectar():
         fiabilidad="A",
         credibilidad=2,
         corroborado=False,
-        nota=("Catalogo del programa de observacion de la Tierra de la Union Europea, "
-              "Consultado por su interfaz publica y sin credencial. Fiabilidad a porque "
+        nota=("Catálogo del programa de observación de la Tierra de la Unión Europea, "
+              "consultado por su interfaz pública y sin credencial. Fiabilidad A porque "
               "publica el organismo que opera los satelites. Credibilidad 2 porque se "
-              "verificó que la escena existe y de cuando es, no su contenido: nadie "
-              "miro la imagen."),
+              "verificó que la escena existe y de cuándo es, no su contenido: nadie "
+              "miró la imagen."),
     )
 
     frescos.sort()

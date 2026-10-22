@@ -104,7 +104,7 @@ def recolectar():
         vacios=vacios,
         extra={"resumen": {"anio": ultimo["anio"], "planes_ultimo": ultimo["planes"],
                            "anios_en_serie": len(serie), "consultado": comun.ahora()},
-               "licencia": "Datos abiertos de Colombia; cita a SECOP. SIWA se considera uso no comercial."},
+               "licencia": "Datos abiertos de Colombia; cita a SECOP. Este registro se considera de uso no comercial."},
     )
 
 

@@ -147,12 +147,12 @@ def recolectar():
         "con mucha. No es una medida de volumen de compra ni de limpieza.",
         "No se distingue el publicador nacional del subnacional, porque el registro no "
         "lo declara. México tiene dieciocho publicadores y la mayoría son de un estado "
-        "O de un organismo: leer ese número como cobertura nacional sería falso. "
+        "o de un organismo: leer ese número como cobertura nacional sería falso. "
         "Clasificarlos por el título sería inventar una distinción que la fuente no trae.",
-        f"NO FIGURAR ACA NO PRUEBA QUE EL ESTADO NO PUBLIQUE. Prueba que no publica EN EL "
-        f"FORMATO QUE PERMITE COMPARARLO, que es una afirmacion mas chica y verdadera. "
+        f"NO FIGURAR ACÁ NO PRUEBA QUE EL ESTADO NO PUBLIQUE. Prueba que no publica EN EL "
+        f"FORMATO QUE PERMITE COMPARARLO, que es una afirmación más chica y verdadera. "
         f"Los {len(sinNinguno)} Estados sin publicador son: {', '.join(sinNinguno)}.",
-        "La fecha es hasta donde llega la serie publicada, no cuando se toco el archivo. "
+        "La fecha es hasta donde llega la serie publicada, no cuándo se tocó el archivo. "
         "Un publicador puede haberse leido ayer y contener contratos que terminan en "
         "2021; el registro declara las dos fechas por separado.",
         "El recuento de publicadores no se suma entre Estados ni se promedia: dieciocho "
@@ -163,11 +163,11 @@ def recolectar():
         fiabilidad="B",
         credibilidad=2,
         corroborado=False,
-        nota=("Registro de publicadores del estandar de contrataciones abiertas, "
-              "Mantenido por la organización que define ese estandar. Fiabilidad B "
+        nota=("Registro de publicadores del estándar de contrataciones abiertas, "
+              "mantenido por la organización que define ese estandar. Fiabilidad B "
               "porque es un tercero con criterio propio, no el organismo que contrata. "
               "Credibilidad 2 porque se verificó que el publicador figura y hasta "
-              "cuando llega su serie, NO el contenido de los contratos."),
+              "cuándo llega su serie, NO el contenido de los contratos."),
     )
 
     return comun.escribir(

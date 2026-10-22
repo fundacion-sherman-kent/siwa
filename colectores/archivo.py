@@ -190,7 +190,7 @@ def recolectar():
         "tenga capturas recientes no prueba que el sitio murió: prueba que el rastreador "
         "no pasó. Y que el portal no nos responda hoy no prueba que esté caído: pudo "
         "rechazar nuestra consulta o estar caído un rato. Solo se afirma retirado cuando "
-        "el archivo lo vio vivo en el pasado y hoy no responde, y aún así se publican "
+        "el archivo lo vio vivo en el pasado y hoy no responde, y aun así se publican "
         "las dos fechas por separado para que cualquiera pueda rehacer la comprobación.",
         "No se interpreta la causa. Un portal puede caerse por presupuesto, por una "
         "migración de sistema o por decisión. La caída es el hecho; el motivo es un "
@@ -203,11 +203,11 @@ def recolectar():
         "el instituto que decimos. Va declarado como afirmación nuestra, y se corrige en "
         "el padrón si resultara equivocada.",
         f"ALCANZA A {len(tareas)} SITIOS OFICIALES EN "
-        f"{len({t[0] for t in tareas})} ESTADOS, todos probados antes de entrar. Los demas "
+        f"{len({t[0] for t in tareas})} ESTADOS, todos probados antes de entrar. Los demás "
         "quedan como sin dominio probado, que no dice nada de ellos: dice que la Oficina "
         "todavía no verificó dónde publican.",
         "La cobertura del archivo es despareja. Un portal muy visitado se captura seguido "
-        "Y uno del Caribe oriental puede tener pocas capturas en años: comparar la "
+        "y uno del Caribe oriental puede tener pocas capturas en años: comparar la "
         "cantidad de capturas entre Estados no dice nada de ellos, dice cuánto los mira "
         "el rastreador.",
     ]
@@ -216,11 +216,11 @@ def recolectar():
         fiabilidad="B",
         credibilidad=2,
         corroborado=True,
-        nota=("Archivo publico de la web, consultado por su interfaz abierta. Fiabilidad "
+        nota=("Archivo público de la web, consultado por su interfaz abierta. Fiabilidad "
               "B porque es un tercero que guarda copias, no el organismo que publica. "
               "Credibilidad 2 y corroborado porque cada afirmación de retirada se apoya "
               "en dos observaciones independientes: la copia fechada del archivo y una "
-              "consulta propia al portal en el dia de la corrida."),
+              "consulta propia al portal en el día de la corrida."),
     )
 
     return comun.escribir(

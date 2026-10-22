@@ -220,13 +220,10 @@ def construir() -> Path:
         "exigiría elegir un tipo de cambio, y esa elección es una opinión metida adentro "
         "de un dato. Lo comparable es la proporción, y va en dos formas: sobre el producto "
         "y sobre el gasto total del Estado.",
-        "El gasto en seguridad incluye policía, bomberos, tribunales y cárceles: es el "
-        "aparato de seguridad y justicia entero, no solo la policía.",
         "GASTAR MÁS NO ES ESTAR MÁS SEGURO. Estas cifras miden lo que el Estado destina, "
-        "no lo que obtiene, y en la región varios de los Estados que más gastan son los "
-        "que más homicidios tienen. La relación entre gasto y resultado no se afirma acá.",
-        "SE MIDE EL PRESUPUESTO DEL GOBIERNO CENTRAL, y eso tiene un costo que conviene "
-        "saber. La fuente ofrece cuatro pedazos del Estado; el gobierno general, que "
+        "no lo que obtiene. La relación entre gasto y resultado no se afirma acá.",
+        "SE MIDE EL PRESUPUESTO DEL GOBIERNO CENTRAL. "
+        "La fuente ofrece cuatro cortes del Estado; el gobierno general, que "
         "incluiría a las provincias, solo cubre 6 de los 33 Estados, y con seis no se "
         "puede afirmar nada de la región. El presupuesto del gobierno central cubre 22. "
         "En los Estados federales —la Argentina, el Brasil, México, Venezuela— la policía "

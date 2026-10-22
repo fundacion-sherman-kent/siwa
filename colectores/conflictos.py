@@ -210,13 +210,13 @@ def recolectar():
         "de derechos ni condiciones de uso. Que un dato sea accesible no significa que "
         "sea redistribuible. Este registro es de acceso libre y gratuito y la Fundación "
         "no comercializa datos, de modo que el uso aquí es el que la licencia no "
-        "comercial admite. Aún así se publican recuentos y agregados y no los registros "
-        "individuales ni las geometrias, y pendiente queda pedir autorización escrita al "
-        "instituto: no por licencia sino por cortesia entre instituciones, y porque con "
+        "comercial admite. Aun así se publican recuentos y agregados y no los registros "
+        "individuales ni las geometrías, y queda pendiente pedir autorización escrita al "
+        "instituto: no por licencia sino por cortesía entre instituciones, y porque con "
         "permiso podría publicarse el detalle caso por caso. Un dato de licencia no "
-        "comercial no puede entrar a un informe pagó de la Fundación aunque sea gratuito "
+        "comercial no puede entrar a un informe pago de la Fundación aunque sea gratuito "
         "en este registro: la licencia mira el uso, no el sitio.",
-        "No es un censo de conflictos. Es el corpus que un equipo academico levanto y "
+        "No es un censo de conflictos. Es el corpus que un equipo académico levantó y "
         "verificó caso por caso, con el alcance y el recorte de ese proyecto. Un Estado "
         "con pocos casos puede tener pocos conflictos o poca cobertura del proyecto, y "
         "las dos cosas no se distinguen desde afuera.",
@@ -225,20 +225,20 @@ def recolectar():
         + ". Ausencia en el corpus no es ausencia de conflicto.",
         "La minería ilegal está mapeada en solo cuatro Estados y con años distintos "
         "—Bolivia y Venezuela 2017, Brasil 2018, Perú sin año declarado—: no son "
-        "comparables entre si ni con la situación actual. Y el número de poligonos no "
-        "es una medida de magnitud: depende de como se dibujo cada capa. Venezuela "
-        "figura con 1.317 poligonos y Perú con 3, y eso no significa que en Perú casi "
+        "comparables entre sí ni con la situación actual. Y el número de polígonos no "
+        "es una medida de magnitud: depende de cómo se dibujó cada capa. Venezuela "
+        "figura con 1.317 polígonos y Perú con 3, y eso no significa que en Perú casi "
         "no haya minería ilegal.",
         "La fecha registrada es la de inicio del conflicto, no la de su registro. "
-        "Muchos casos siguen abiertos y el corpus no declara cuales se cerraron.",
+        "Muchos casos siguen abiertos y el corpus no declara cuáles se cerraron.",
         f"EL AÑO {ANIO_RELLENO} SE DESCARTA: aparece 70 veces en un corpus de 443 y no "
         "hay ningún otro año anterior a 1950 salvo uno. Es un valor de relleno del "
         "origen, no una fecha. Publicarlo como «el conflicto más antiguo» de seis "
-        "Estados habria sido inventar un hecho. Esos 70 casos entran al recuento pero "
+        "Estados habría sido inventar un hecho. Esos 70 casos entran al recuento pero "
         "no al rango de años. Otros 21 registros no traen año legible.",
     ]
     if sin_atribuir:
-        vacios.append("Nombres de país que no se pudieron atribuir al padron: "
+        vacios.append("Nombres de país que no se pudieron atribuir al padrón: "
                       + ", ".join(sorted(set(sin_atribuir))[:12]))
     if caidos:
         vacios.append("Capas que fallaron en esta corrida: " + "; ".join(caidos))
@@ -247,7 +247,7 @@ def recolectar():
         fiabilidad="B",
         credibilidad=3,
         corroborado=False,
-        nota=("Corpus academico verificado caso por caso por el Instituto de Estudios "
+        nota=("Corpus académico verificado caso por caso por el Instituto de Estudios "
               "Interculturales de la Pontificia Universidad Javeriana Cali. Credibilidad "
               "3 y no mayor porque el alcance del proyecto no es exhaustivo y no puede "
               "corroborarse contra un censo independiente: no existe."),
@@ -257,7 +257,7 @@ def recolectar():
         colector="conflictos",
         capa="publico",
         fuente=("Instituto de Estudios Interculturales, Pontificia Universidad "
-                "Javeriana Cali — visor de conflictos de America Latina"),
+                "Javeriana Cali — visor de conflictos de América Latina"),
         url_fuente=VISOR,
         calificacion=calificacion,
         registros=registros,
@@ -272,7 +272,7 @@ def recolectar():
             },
             "atribución": ("Instituto de Estudios Interculturales, Pontificia "
                            "Universidad Javeriana Cali. Visor original: " + VISOR),
-            "método": ("Se consultan las capas publicas SIN pedir geometria y se "
+            "método": ("Se consultan las capas públicas SIN pedir geometría y se "
                        "publican únicamente recuentos y repartos por Estado, tipo, "
                        "categoría y actores. Los registros individuales no se "
                        "republican."),

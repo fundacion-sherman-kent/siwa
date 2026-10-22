@@ -212,7 +212,7 @@ def recolectar():
 
     if len(porIso) < MINIMO_ESTADOS:
         raise RuntimeError(
-            f"Sólo {len(porIso)} de los 33 Estados trajeron dato, y se esperaban al "
+            f"Solo {len(porIso)} de los 33 Estados trajeron dato, y se esperaban al "
             f"menos {MINIMO_ESTADOS}. Eso no describe a la región: describe una "
             "lectura fallida. No se publica.")
 
@@ -255,7 +255,7 @@ def recolectar():
         "**El umbral en dólares de paridad no es lo que cuesta vivir en cada país.** Es "
         "una vara común para poder comparar. La línea de pobreza que cada Estado usa "
         "para su política social es otra y suele ser distinta: un Estado puede tener "
-        "más pobres según su propia medición que según ésta, o al revés.",
+        "más pobres según su propia medición que según esta, o al revés.",
         "**Los tres umbrales no se suman ni se promedian.** Quien está por debajo de "
         "3,0 dólares también está por debajo de 4,1 y de 8,3: son tres cortes de la "
         "misma distribución, no tres grupos distintos.",

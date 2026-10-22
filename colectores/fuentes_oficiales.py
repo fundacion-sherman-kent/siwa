@@ -233,7 +233,7 @@ def _oficinas(padron: dict) -> tuple:
     bloque = padron.get("oficinas_estadistica") or {}
     lista = bloque.get("oficinas") or []
     if not lista:
-        return [], "el padron no trae oficinas de estadistica"
+        return [], "el padrón no trae oficinas de estadística"
     with ThreadPoolExecutor(max_workers=10) as ejecutor:
         fichas = list(ejecutor.map(_tocar_oficina, lista))
     control = next((f for f in fichas if f["iso"] == CONTROL_OFICINA), None)
@@ -242,10 +242,10 @@ def _oficinas(padron: dict) -> tuple:
         # contesta, lo que fallo es el sondeo. No se publica un mapa de silencio
         # dibujado por una falla propia.
         return fichas, (
-            f"El control ({CONTROL_OFICINA}) no respondio en esta corrida: "
-            f"{(control or {}).get('estado', 'ausente')}. El estado de las demas "
+            f"El control ({CONTROL_OFICINA}) no respondió en esta corrida: "
+            f"{(control or {}).get('estado', 'ausente')}. El estado de las demás "
             "oficinas de este sondeo NO es confiable y no debe leerse como "
-            "opacidad de ningun Estado.")
+            "opacidad de ningún Estado.")
     return fichas, None
 
 
@@ -323,7 +323,7 @@ def recolectar():
 
         "no por texto completo. Un conjunto llamado «serie 3.4.1» sobre homicidios no "
 
-        "aparece, de modo que sus cantidades salen más bajas por como se los consulta y "
+        "aparece, de modo que sus cantidades salen más bajas por cómo se los consulta y "
 
         "no por lo que publican. Se los suma igual: tenerlos mal contados es mejor que "
 
@@ -335,12 +335,12 @@ def recolectar():
         "año. Sumarlas para armar una serie regional produciría una serie falsa.",
         (
             f"Solo {len(con_portal)} de los 33 Estados tienen portal oficial con interfaz "
-            f"de consulta verificada. Sin portal verificado: {', '.join(sin_portal)}."
+            f"de consulta comprobada. Sin portal comprobado: {', '.join(sin_portal)}."
         ),
-        "Que un Estado no tenga portal NO significa que no publique. Las 33 oficinas nacionales de estadistica estan en el padron con su direccion "
-        "verificada, y en esta corrida respondieron " + str(por_estado.get("responde", 0)) + " de 33. Un Estado sin portal de datos abiertos es un Estado sin interfaz para programas, no un Estado callado.",
-        "Las fichas de oficina de estadistica NO son comparables con las de portal: de la oficina se registra que existe, donde esta y que contesto, no cuantos conjuntos publica. No hay de donde contarlos.",
-        "Cuatro respuestas distintas que no deben leerse como una sola: «cierra a maquinas» es un 401 o un 403 —el Estado publica para personas y rechaza a los programas—; «verificacion anti-robot» es una pagina de desafio devuelta con codigo 200, que finge normalidad; «falla el servidor» es un 500, que es una averia; y «no resuelve» es que el nombre de dominio no llega a ninguna maquina. Ninguna de las cuatro prueba opacidad.",
+        "Que un Estado no tenga portal NO significa que no publique. Las 33 oficinas nacionales de estadística están en el padrón con su dirección "
+        "comprobada, y en esta corrida respondieron " + str(por_estado.get("responde", 0)) + " de 33. Un Estado sin portal de datos abiertos es un Estado sin interfaz para programas, no un Estado callado.",
+        "Las fichas de oficina de estadística NO son comparables con las de portal: de la oficina se registra que existe, dónde está y qué contestó, no cuántos conjuntos publica. No hay de dónde contarlos.",
+        "Cuatro respuestas distintas que no deben leerse como una sola: «cierra a máquinas» es un 401 o un 403 —el Estado publica para personas y rechaza a los programas—; «verificación anti-robot» es una pagina de desafio devuelta con código 200, que finge normalidad; «falla el servidor» es un 500, que es una avería; y «no resuelve» es que el nombre de dominio no llega a ninguna máquina. Ninguna de las cuatro prueba opacidad.",
         "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: "
         "Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador "
         "interponen protección contra acceso automatizado, que no se esquiva por decisión "

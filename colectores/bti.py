@@ -79,13 +79,13 @@ INDICADORES = [
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Mide si el Estado controla efectivamente TODO su territorio, o si hay "
                 "zonas donde no manda. Es lo más cercano al control territorial que se "
-                "encontro gratuito y comparable: el conflicto entre grupos armados cuenta "
+                "encontró gratuito y comparable: el conflicto entre grupos armados cuenta "
                 "muertes, no territorio. Es evaluación experta, no medición de campo."},
     {"clave": "intensidad_conflicto", "rotulo_origen": "Q13.3 | Conflict intensity",
      "rotulo": "Intensidad del conflicto interno", "eje": "Seguridad",
      "unidad": "escala de 1 a 10, más alto es menos conflicto", "mas_es_peor": False,
      "cautela": "ATENCIÓN A LA ESCALA: en este indicador un valor ALTO significa MENOS "
-                "conflicto. Mide cuánto pesan las divisiones etnicas, religiosas o "
+                "conflicto. Mide cuánto pesan las divisiones étnicas, religiosas o "
                 "sociales en la vida política."},
     {"clave": "administracion_basica", "rotulo_origen": "Q1.4 | Basic administration",
      "rotulo": "Administración básica del Estado", "eje": "Gobernanza",
@@ -96,10 +96,10 @@ INDICADORES = [
     {"clave": "aprobacion_democracia", "rotulo_origen": "Q5.3 | Approval of democracy",
      "rotulo": "Aprobación social de la democracia", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
-     "cautela": "NO ES UNA ENCUESTA. Es la evaluación de un especialista sobre cuanto "
-                "respaldo social tiene el régimen democratico en ese país. Se acerca a la "
-                "percepción democrática que este registro declaraba como vacio, pero no "
-                "la reemplaza: Latinobarometro y el Barometro de las Américas preguntan a "
+     "cautela": "NO ES UNA ENCUESTA. Es la evaluación de un especialista sobre cuánto "
+                "respaldo social tiene el régimen democrático en ese país. Se acerca a la "
+                "percepción democrática que este registro declaraba como vacío, pero no "
+                "la reemplaza: Latinobarómetro y el Barómetro de las Américas preguntan a "
                 "la gente, esto no."},
     {"clave": "persecucion_abuso", "rotulo_origen": "Q3.3 | Prosecution of office abuse",
      "rotulo": "Persecución del abuso de función pública", "eje": "Gobernanza",
@@ -111,13 +111,13 @@ INDICADORES = [
      "rotulo": "Política anticorrupción", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Si existen y funcionan los mecanismos de integridad: declaraciones "
-                "patrimoniales, auditoria, contrataciones abiertas. Mide el andamiaje, no "
+                "patrimoniales, auditoría, contrataciones abiertas. Mide el andamiaje, no "
                 "el resultado."},
     {"clave": "actores_antidemocraticos", "rotulo_origen": "Q16.2 | Anti-democratic actors",
-     "rotulo": "Control sobre actores antidemocraticos", "eje": "Gobernanza",
+     "rotulo": "Control sobre actores antidemocráticos", "eje": "Gobernanza",
      "unidad": "escala de 1 a 10", "mas_es_peor": False,
      "cautela": "Capacidad del gobierno de contener a quienes buscan bloquear o revertir "
-                "el orden democratico. Un valor bajo indica actores con poder de veto "
+                "el orden democrático. Un valor bajo indica actores con poder de veto "
                 "fuera de las urnas."},
     {"clave": "indice_gobernanza", "rotulo_origen": "G | Governance Index",
      "rotulo": "Índice de gobernanza", "eje": "Gobernanza",
@@ -257,37 +257,30 @@ def recolectar():
 
     vacios = [
         "Es evaluación experta, no recuento de hechos. Dos especialistas por país —uno "
-        "del país y uno de fuera— puntuan de 1 a 10, y el resultado se armoniza en "
-        "revisión regional. Es un juicio informado y metodico, no una medición de campo.",
+        "del país y uno de fuera— puntúan de 1 a 10, y el resultado se armoniza en "
+        "revisión regional. Es un juicio informado y metódico, no una medición de campo.",
         f"ES UNA FOTO, NO UNA SERIE. El proyecto publica cada dos años; este registro "
         f"toma la edición {EDICION}. NO hay línea de tiempo y por lo tanto NO se puede "
         "proyectar sobre estos indicadores.",
         "Solo cubre Estados «en desarrollo o en transición». Los Estados chicos del "
         "Caribe y los de renta alta quedan fuera del proyecto, no del registro. Sin "
         "cobertura: " + (", ".join(sin_cubrir) if sin_cubrir else "ninguno") + ".",
-        "La aprobación de la democracia no es una encuesta. Es la evaluación de un "
-        "especialista sobre cuánto respaldo social tiene el régimen. Se acerca a la "
-        "percepción democrática que este registro declara como vacio, pero no la "
-        "reemplaza: Latinobarometro y el Barometro de las Américas preguntan a la gente; "
-        "esto no.",
-        "En «intensidad del conflicto» un valor alto significa menos conflicto, al revés "
-        "que en la intuición. La escala es la del proyecto y no se altera.",
-        "Error propio, documentado: la planilla guarda los textos en una tabla compartida "
-        "Y una cadena con formato se parte en fragmentos. Al contarlos como cadenas "
-        "distintas todos los nombres y rótulos quedaban corridos: Cuba aparecia con 8,55 "
-        "de democracia y Chile con 2,37. Se detecto porque los números eran imposibles, "
+        "Error propio, ya corregido: la planilla guarda los textos en una tabla compartida "
+        "y una cadena con formato se parte en fragmentos. Al contarlos como cadenas "
+        "distintas todos los nombres y rótulos quedaban corridos: Cuba aparecía con 8,55 "
+        "de democracia y Chile con 2,37. Se detectó porque los números eran imposibles, "
         "no porque el programa fallara. El colector ahora junta los fragmentos y ata cada "
         "indicador a su rótulo y no a la letra de columna.",
     ]
     if faltantes:
-        vacios.append("Indicadores cuyo rotulo ya no aparece en la planilla —el proyecto "
+        vacios.append("Indicadores cuyo rótulo ya no aparece en la planilla —el proyecto "
                       "pudo haberla reordenado—: " + "; ".join(faltantes))
 
     calificacion = comun.calificar(
         fiabilidad="B",
         credibilidad=3,
         corroborado=False,
-        nota=("Proyecto academico de la Fundación Bertelsmann con método publicado y "
+        nota=("Proyecto académico de la Fundación Bertelsmann con método publicado y "
               "revisión cruzada entre especialistas. Credibilidad 3 porque el dato es un "
               "juicio experto: no puede corroborarse contra una medición independiente "
               "porque no existe una."),

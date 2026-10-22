@@ -21,9 +21,9 @@ def construir():
         titulo="Incautación de insumos líquidos",
         nota="Galones de insumos líquidos para el procesamiento de estupefacientes, "
              "incautados por la Policía Nacional, por departamento del hecho. "
-             "Verificado en vivo (23/9/2026): la unidad declarada por la fuente es "
-             "galones — NO es kilogramos como los otros cuatro flujos ilícitos de "
-             "este bloque; no se compara entre sí.",
+             "Comprobado el 23/9/2026: la unidad declarada por la fuente es "
+             "galones, no kilogramos como en los otros cuatro flujos ilícitos de "
+             "este bloque; no se compara con ellos.",
         url_ficha=f"https://www.datos.gov.co/resource/{DATASET_ID}.json",
         es_entero=False,
     )

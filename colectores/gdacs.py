@@ -93,37 +93,37 @@ def main():
                 "desastres_gdacs": {
                     "valor": n, "anio": hoy.year,
                     "ventana": f"{desde.isoformat()} a {hoy.isoformat()}",
-                    "origen": "GDACS (Comision Europea JRC y ONU)",
+                    "origen": "GDACS (Comisión Europea JRC y ONU)",
                 },
             },
         })
 
     calificacion = comun.calificar(
         fiabilidad="B", credibilidad=2, corroborado=False,
-        nota=("GDACS: sistema de alerta de desastres de la Comision Europea (JRC) y la ONU. "
+        nota=("GDACS: sistema de alerta de desastres de la Comisión Europea (JRC) y la ONU. "
               "Fiabilidad B: operador institucional con historial. Credibilidad 2: son alertas "
-              "AUTOMATICAS por modelo de amenaza, no un recuento verificado de danos. Cuenta "
-              "alertas naranja y roja de los ultimos 12 meses por pais."),
+              "AUTOMÁTICAS por modelo de amenaza, no un recuento comprobado de daños. Cuenta "
+              "alertas naranja y roja de los últimos 12 meses por país."),
     )
     vacios = [
         "Cuenta ALERTAS de amenaza, no desastres declarados por la ONU ni damnificados: es "
-        "una senal de que algo significativo paso, con su nivel y fecha.",
+        "una señal de que algo significativo pasó, con su nivel y fecha.",
         "Solo naranja y roja (lo significativo); las verdes se dejan afuera por ruido.",
-        "Ventana movil de 12 meses: el numero sube y baja con la actividad reciente, no es un "
-        "acumulado historico.",
-        "Una alerta que toca varios paises se cuenta en cada uno: no es un total regional.",
+        "Ventana móvil de 12 meses: el número sube y baja con la actividad reciente, no es un "
+        "acumulado histórico.",
+        "Una alerta que toca varios países se cuenta en cada uno: no es un total regional.",
     ]
     indicadores = [{
         "clave": "desastres_gdacs",
         "nombre": "Alertas de desastres (GDACS, 12 meses)",
         "unidad": "alertas naranja/roja",
-        "origen": "GDACS (Comision Europea JRC y ONU)",
-        "rotulo": "Alertas automaticas de amenaza, en tiempo real; no es desastres_onu",
+        "origen": "GDACS (Comisión Europea JRC y ONU)",
+        "rotulo": "Alertas automáticas de amenaza, en tiempo real; no es desastres_onu",
     }]
     comun.escribir(
         colector="gdacs",
         capa="publico",
-        fuente="GDACS -- Global Disaster Alert and Coordination System (Comision Europea JRC y Naciones Unidas)",
+        fuente="GDACS -- Global Disaster Alert and Coordination System (Comisión Europea JRC y Naciones Unidas)",
         url_fuente="https://www.gdacs.org/",
         calificacion=calificacion,
         registros=registros,
@@ -138,7 +138,7 @@ def main():
                 "vigentes": len(vigentes),
             },
             "ventana": {"desde": desde.isoformat(), "hasta": hoy.isoformat()},
-            "licencia": "GDACS: datos de libre acceso de la Comision Europea y la ONU. Se cita la fuente.",
+            "licencia": "GDACS: datos de libre acceso de la Comisión Europea y la ONU. Se cita la fuente.",
         },
     )
     print(f"[gdacs] {sum(por_pais.values())} alertas naranja/roja sobre {len(por_pais)} paises de ALC "

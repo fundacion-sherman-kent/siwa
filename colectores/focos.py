@@ -178,7 +178,7 @@ def recolectar():
                 f"La prueba del instrumento falló: {CONTROL} —que tiene focos todos los "
                 f"días del año— no quedó con ninguno tras atribuir {len(filas)} "
                 f"detecciones del recuadro. Eso NO significa que no haya ardido nada: "
-                "Significa que la consulta, la clave o la atribución al padrón no "
+                "significa que la consulta, la clave o la atribución al padrón no "
                 "sirven. NO se publica un cero que no se puede sostener.")
 
     for pais in geo.padron():
@@ -204,21 +204,21 @@ def recolectar():
         })
 
     vacios = [
-        "El satelite detecta anomalias termicas, no incendios ni delitos. Un foco puede "
-        "ser una quema agricola legal, un incendio forestal, una antorcha industrial, un "
+        "El satélite detecta anomalías térmicas, no incendios ni delitos. Un foco puede "
+        "ser una quema agrícola legal, un incendio forestal, una antorcha industrial, un "
         "basural o una operación minera. La imagen no distingue la causa, y el registro "
         "no la inventa: decir «tantos focos, tanta minería ilegal» sería un salto que "
-        "esta casa no da.",
+        "no damos.",
         "No ordena Estados. El recuento depende del tamaño del país, de la estación, de "
         "la nubosidad —una semana nublada esconde todo— y de cuántas veces pasó el "
-        "satelite. Brasil tendra siempre más focos que Granada por superficie, no por "
+        "satélite. Brasil tendrá siempre más focos que Granada por superficie, no por "
         "conducta. Se publica como magnitud, al lado del dato comparable y nunca adentro.",
-        f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver que "
-        "esta ardiendo ahora, no para comparar contra el mes pasado.",
+        f"LA VENTANA ES DE {DIAS} DÍAS y se mueve con cada corrida: sirve para ver qué "
+        "está ardiendo ahora, no para comparar contra el mes pasado.",
         "La confianza la declara el sensor y se cuenta aparte: un foco de confianza baja "
         "no sostiene ninguna afirmación. El recuento total incluye todos; el de confianza "
         "alta es el único que se puede citar.",
-        "La fuente no admite consulta por país: solo por recuadro geografico. Se pide "
+        "La fuente no admite consulta por país: solo por recuadro geográfico. Se pide "
         "una vez el recuadro de América Latina y el Caribe y se atribuye cada detección "
         "a su Estado por la coordenada. Un punto que cae en el mar, en un país vecino "
         "fuera del padrón o en aguas internacionales no se cuenta, y se declara cuántos "
@@ -226,9 +226,9 @@ def recolectar():
         "Antes de creerle un cero a nadie se prueba el instrumento contra Brasil, que "
         "tiene focos todos los días del año. Si ese da cero, la corrida se detiene "
         "entera en lugar de publicar treinta y tres ceros. La primera versión de este "
-        "colector pedia por país contra una dirección que no existe, y era facil culpar "
+        "colector pedía por país contra una dirección que no existe, y era fácil culpar "
         "a la credencial: se probó con una clave deliberadamente falsa y la fuente "
-        "distinguio «clave invalida» de «dirección invalida». El instrumento habia "
+        "distinguió «clave inválida» de «dirección inválida». El instrumento había "
         "fallado antes que la fuente.",
     ]
 
@@ -236,9 +236,9 @@ def recolectar():
         fiabilidad="A",
         credibilidad=2,
         corroborado=False,
-        nota=("Sistema de deteccion de la agencia espacial estadounidense, con sensor y "
-              "método publicados. Fiabilidad a porque el productor opera el satelite. "
-              "Credibilidad 2 porque se verifica la detección —hubo una anomalia termica "
+        nota=("Sistema de detección de la agencia espacial estadounidense, con sensor y "
+              "método publicados. Fiabilidad A porque el productor opera el satélite. "
+              "Credibilidad 2 porque se verifica la detección —hubo una anomalía térmica "
               "en esa coordenada— y NO su causa, que el sensor no puede establecer."),
     )
 

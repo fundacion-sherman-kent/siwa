@@ -95,7 +95,7 @@ FUENTES = [
         "url": "https://catalogodatos.gub.uy/dataset/delitos-denunciados-en-el-uruguay",
         "materia": "homicidios",
         "que_cuenta": "víctimas de homicidio doloso consumado, recuento anual "
-                      "calculado por esta casa sobre los microdatos",
+                      "calculado por nosotros sobre los microdatos",
         "recurso": "https://catalogodatos.gub.uy/dataset/999f2edc-5ef5-4d41-bed7-"
                    "824a5635ea8d/resource/5ed98add-f127-4377-b529-aa8ad35b77e3/"
                    "download/homicidios_dolosos_consumados.csv",
@@ -316,7 +316,7 @@ def construir() -> Path:
         vacios.append(
             f"La serie nacional por provincia llega a {ultimo}. El Observatorio de Seguridad "
             "Pública de Santa Fe publica hasta agosto de 2026, en infografías que ninguna "
-            "máquina lee. Ninguno de los dos caminos entrega hoy una cifra fresca Y legible: "
+            "máquina lee. Ninguno de los dos caminos entrega hoy una cifra fresca y legible: "
             "el legible llega tarde y el que llega a tiempo no es legible. Es un hecho sobre "
             "la publicación, no sobre la violencia.")
     vacios.append(

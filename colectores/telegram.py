@@ -261,26 +261,26 @@ def recolectar():
 
     vacios = [
         "Este registro no corrobora nada de la cobertura noticiosa, y no se mezcla "
-        "con ella. Un canal de mensajeria de un medio que ya está en el padrón de "
+        "con ella. Un canal de mensajería de un medio que ya está en el padrón de "
         "prensa es el mismo medio por otra puerta, no un segundo origen. Contarlo "
-        "como corroboración independiente inflaria la verificación cruzada, que es lo "
+        "como corroboración independiente inflaría la verificación cruzada, que es lo "
         "único que separa un hecho de un rumor. Canales que se superponen con el "
-        "padron de prensa: " + (", ".join(superpuestos) if superpuestos else "ninguno") + ".",
+        "padrón de prensa: " + (", ".join(superpuestos) if superpuestos else "ninguno") + ".",
         "Solo se lee la vista pública que el propio servicio ofrece sin cuenta. No se "
         "lee ningún canal privado, ningún grupo, ninguna conversación y ningún mensaje "
         "que exija iniciar sesión. No se sortea protección alguna.",
         "Un nombre de usuario no prueba identidad: en esta plataforma los nombres se "
         "compran, se venden y se transfieren. Durante la prueba, el canal «@blu_radio» "
-        "—que por su nombre pareceria la emisora colombiana— resulto ser otro canal sin "
+        "—que por su nombre parecería la emisora colombiana— resultó ser otro canal sin "
         "relación con ella. Solo entran canales que enlazan a su propio dominio "
         "institucional o llevan el sello de verificado de la plataforma. De 43 "
         "candidatos probados entraron 20.",
         "Canales del padrón sin publicar hace más de noventa días, con la fecha de su "
         "último mensaje: "
         + ("; ".join(f"{n} ({f})" for n, f in dormidos) if dormidos else "ninguno")
-        + ". No es una falla de lectura: el canal responde y su contenido esta a la "
+        + ". No es una falla de lectura: el canal responde y su contenido está a la "
           "vista. Es que ese emisor dejó de usar esta vía, y conviene saberlo antes de "
-          "buscar ahi lo que ya no se publica.",
+          "buscar ahí lo que ya no se publica.",
         "El padrón cubre 8 jurisdicciones de las 33 del registro. La mayoría de los "
         "Estados de la región no tiene medios ni organismos con canal público "
         "verificable en esta plataforma. No es que no se hable de ellos: es que no hay "
@@ -302,9 +302,9 @@ def recolectar():
         fiabilidad="F",
         credibilidad=4,
         corroborado=False,
-        nota=("Difusión declarada por el propio emisor en su canal. Se registra QUE "
-              "se publico y con que palabras, que se observa directamente; no que lo "
-              "publicado sea cierto. La identidad del canal esta verificada; el "
+        nota=("Difusión declarada por el propio emisor en su canal. Se registra QUÉ "
+              "se publicó y con qué palabras, que se observa directamente; no que lo "
+              "publicado sea cierto. La identidad del canal está verificada; el "
               "contenido no."),
     )
 

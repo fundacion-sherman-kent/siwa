@@ -169,14 +169,6 @@ def construir() -> Path:
         "tener a todos sus chicos adentro de la escuela y enseñarles poco. La medición de "
         "aprendizajes existe y se hace con pruebas que no cubren a los 33 Estados: cuando "
         "los cubran, entran.",
-        "«Fuera de la escuela» cuenta a quienes NO ESTÁN MATRICULADOS. No cuenta a quienes "
-        "están matriculados y no van, que en varios Estados del padrón es un problema tan "
-        "grande como el primero y que nadie mide con la misma vara.",
-        "La matrícula terciaria es una razón BRUTA: cuenta a todos los matriculados contra "
-        "el grupo de edad teórico, de modo que puede pasar de 100 cuando estudia gente "
-        "mayor. Indica acceso, no calidad ni egreso.",
-        "La alfabetización adulta se releva en buena parte por AUTODECLARACIÓN en censos "
-        "—se pregunta si sabe leer, no se toma una prueba— y eso tiende a sobrestimar.",
         "Esta es la interfaz abierta de la UNESCO, no la ruta del convenio de 1970 que se "
         "le pide por carta: son dos puertas distintas y aquella sigue pendiente.",
     ]

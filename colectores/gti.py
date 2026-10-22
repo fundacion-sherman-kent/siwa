@@ -216,9 +216,8 @@ def construir():
         "score alto con cero atentados en el último año publicado, si tuvo atentados graves "
         "en los cuatro anteriores. Los cuatro recuentos anuales —atentados, muertes, heridos, "
         "rehenes— se publican aparte para que esa diferencia no quede escondida.",
-        "**«Terrorismo» es, de por sí, una definición disputada.** Varios Estados de la "
-        "región han calificado de terrorista a la protesta social; la definición que aplica "
-        "acá es la que codifica el IEP, no una de la Fundación.",
+        "**«Terrorismo» es, de por sí, una definición disputada.** La que se aplica acá "
+        "es la que codifica el IEP, no una de la Fundación.",
         "**El world rank del archivo original no se republica.** Ordena igual que "
         "«gti_score» y, sin los otros 140 países del mundo a la vista, confunde más de lo "
         "que aclara en una lista de solo 23 Estados. Quien lo necesite lo tiene en la fuente.",

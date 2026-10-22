@@ -156,9 +156,9 @@ def construir_indicador(colector: str, dataset_id: str, titulo: str, nota: str,
         "de la capa subnacional, no un vacío de la fuente colombiana.",
         f"NO SE COMPARA con ningún otro indicador de este módulo ni con otro país: {titulo} "
         "es una figura penal propia, definida y registrada solo por Colombia.",
-        "DOS FUENTES O ROTULADO (regla de la casa): no existe una segunda fuente "
-        "independiente que corrobore el dato exacto por departamento. Se publica con "
-        "credibilidad 2, no como dato corroborado.",
+        "DOS FUENTES O ROTULADO: no existe una segunda fuente independiente que "
+        "corrobore el dato exacto por departamento. Se publica con credibilidad 2, "
+        "no como dato corroborado.",
     ]
     if dato["espurios"]:
         vacios.append(f"Se descartaron {dato['espurios']} fila(s) agregada(s) con un "
@@ -177,9 +177,7 @@ def construir_indicador(colector: str, dataset_id: str, titulo: str, nota: str,
             "A", 2, False,
             "Registro administrativo oficial de la Policía Nacional de Colombia, por "
             "departamento. Credibilidad 2: es la única fuente que este registro tiene "
-            "para esta figura penal — no hay segunda fuente independiente que corrobore "
-            "el dato exacto por departamento; se publica rotulado (regla de la casa de "
-            "dos fuentes)."),
+            "para esta figura penal; se publica rotulado."),
         registros=[registro],
         vacios=vacios,
         extra={"resumen": {

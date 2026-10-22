@@ -21,9 +21,9 @@ def construir():
         titulo="Incautación de cocaína",
         nota="Kilogramos de cocaína incautados por la Policía Nacional, por departamento "
              "del hecho. La unidad de medida (kilogramos) es la que declara MinDefensa "
-             "para el resto de los flujos ilícitos de este mismo esqueleto; la consulta "
-             "en vivo del campo «unidad» de este conjunto en particular no se pudo "
-             "confirmar con certeza en esta sesión (no se toma como verificado).",
+             "para los demás flujos ilícitos de este bloque; el campo «unidad» de este "
+             "conjunto en particular no se pudo confirmar en vivo en esta sesión, de modo "
+             "que no se da por comprobado.",
         url_ficha=f"https://www.datos.gov.co/resource/{DATASET_ID}.json",
     )
 

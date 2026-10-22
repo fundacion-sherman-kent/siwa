@@ -182,8 +182,6 @@ def construir() -> Path:
         "El desempleo cuenta a quien BUSCA trabajo y no encuentra. Quien dejó de buscar no "
         "figura, y en la región eso es mucha gente: un desempleo bajo puede convivir con "
         "una masa grande fuera del mercado.",
-        "Un desempleo bajo con empleo informal alto NO es una buena noticia: significa que "
-        "la gente trabaja sin registro ni derechos. Las dos medidas se leen juntas.",
         "Se toma el total de ambos sexos y de todos los sectores. La fuente publica el "
         "detalle por sexo y por rama; este registro no lo publica a medias.",
         "Un mismo año puede venir de más de una encuesta. Se conserva la última que entrega "

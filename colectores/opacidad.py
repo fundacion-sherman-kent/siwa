@@ -149,7 +149,7 @@ def recolectar():
             detalle = {"nota": sin_hallar.get(
                 iso,
                 "Todavía no se verificó. No cuenta como opaco: significa que la "
-                "Oficina aun no reviso los cuatro pasos en este Estado.")}
+                "Oficina aún no revisó los cuatro pasos en este Estado.")}
         registros.append({
             "iso": iso, "pais": pais["pais"], "bloque": pais["bloque"],
             "estado": estado,
@@ -166,29 +166,29 @@ def recolectar():
         "ningún Estado figura como «no publica»: para afirmarlo hay que haber revisado "
         "organismo productor, portal de datos abiertos, portal de transparencia activa y "
         "memoria institucional. Mientras falte uno, dice sin verificar.",
-        "Sin verificar no es opaco. Es la Oficina diciendo que todavía no miro. Contarlo "
+        "Sin verificar no es opaco. Es la Oficina diciendo que todavía no miró. Contarlo "
         "como opacidad sería cometer, en el propio índice, el error que el índice existe "
         "para señalar.",
         f"Solo el paso 2 —portal de datos abiertos— tiene interfaz de consulta, y solo "
         f"{len(portales)} de los 33 Estados tienen portal verificado. Los pasos 1, 3 y 4 son "
-        "paginas para navegar: se comprobo que las autoridades de transparencia responden "
+        "páginas para navegar: se comprobó que las autoridades de transparencia responden "
         "pero no exponen sus estadísticas de forma automatizable. El índice es "
-        "irreduciblemente manual más allá del pasó 2.",
+        "irreduciblemente manual más allá del paso 2.",
         "El conteo del portal no es una medida y no se publica como cifra. Colombia lo topa "
         "en 10.000 y los demás cuentan coincidencias de palabra: se hallaron escuelas de "
         "«dificil acceso» entre los resultados de «acceso a la información». Va en el rastro "
         "para que la consulta se pueda repetir, nada más.",
-        "No se publica puntaje de 0 A 100. Las siete dimensiones del método —accesibilidad, "
+        "No se publica puntaje de 0 a 100. Las siete dimensiones del método —accesibilidad, "
         "actualidad, periodicidad, desagregación, formato y continuidad— exigen abrir cada "
         "conjunto y mirar sus columnas. Esta edición publica el Estado de publicación con su "
         "rastro; el puntaje es la edición siguiente.",
-        "No se verificó, Estado por Estado, que la ley nacional de acceso este vigente y "
+        "No se verificó, Estado por Estado, que la ley nacional de acceso esté vigente y "
         "exija publicar estas estadísticas. La exigencia se apoya en el ODS 16.10.2, que es "
-        "universal; la obligación legal concreta de cada Estado esta pendiente de comprobar.",
+        "universal; la obligación legal concreta de cada Estado está pendiente de comprobar.",
         "De los conjuntos hallados no se verificó el contenido de las columnas: que se "
         "publique «solicitudes de acceso» no prueba que desagregue las denegadas ni su "
         "motivo. Es la verificación de la edición siguiente.",
-        "Toda celda es refutable. Si el dato existe y la Oficina no lo encontro, la "
+        "Toda celda es refutable. Si el dato existe y la Oficina no lo encontró, la "
         "corrección se recibe, se verifica, se publica con fecha y se acredita a quien la "
         "aportó. El registro de correcciones es público y permanente.",
     ]
@@ -199,9 +199,9 @@ def recolectar():
         corroborado=False,
         nota=("Producción propia con método declarado y rastro publicado: la consulta "
               "automática la puede repetir cualquiera pegando la dirección. Credibilidad 3 "
-              "Y no 2 porque hasta ahora cada Estado se verificó por una sola vía —el portal "
+              "y no 2 porque hasta ahora cada Estado se verificó por una sola vía —el portal "
               "de datos abiertos—. Una ausencia hallada por un solo camino es un indicio, no "
-              "un hecho: con dos vias independientes que coincidan sube a 2."),
+              "un hecho: con dos vías independientes que coincidan sube a 2."),
     )
 
     return comun.escribir(

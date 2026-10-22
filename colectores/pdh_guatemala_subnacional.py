@@ -160,7 +160,7 @@ def construir() -> Path:
             "SON DENUNCIAS, NO VIOLACIONES COMPROBADAS: mide actividad de la PDH y propensión a "
             "denunciar, no solo el problema de fondo.",
             "ES ACUMULADO POR AÑO y el año en curso es PROVISIONAL (solo los meses cargados).",
-            "SUBNACIONAL Y PROTOTIPO: es un eje que SIWA no baja a la unidad; no va al mapa sin "
+            "SUBNACIONAL Y PROTOTIPO: es un eje que todavía no se baja a la unidad; no va al mapa sin "
             "aprobación de la dirección.",
             "Recuperado del panel público (CDN de Flourish) porque el sitio de la PDH bloquea el "
             "acceso automático; la serie estructurada completa de la PDH sigue siendo PDF o pedido "

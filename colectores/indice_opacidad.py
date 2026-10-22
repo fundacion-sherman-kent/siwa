@@ -228,7 +228,7 @@ def recolectar():
             registros.append({
                 "iso": iso, "pais": pais["pais"], "bloque": pais["bloque"],
                 "estado": "sin_medir", "actos_medidos": len(valores),
-                "porque": (f"Sólo {len(valores)} de {len(ACTOS)} actos tienen evidencia, y "
+                "porque": (f"Solo {len(valores)} de {len(ACTOS)} actos tienen evidencia, y "
                            f"hacen falta {MINIMO_ACTOS}. NO significa que sea opaco: "
                            "significa que no se lo pudo medir."),
                 "actos": detalle,
@@ -262,18 +262,18 @@ def recolectar():
     vacios = [
         "Cero es el más transparente y cien el más opaco. La dirección importa: este "
         "índice mide la ausencia, no la presencia. Un puntaje de apertura no se puede "
-        "refutar mostrando una dirección; una afirmación de ausencia si, y eso es lo que "
+        "refutar mostrando una dirección; una afirmación de ausencia sí, y eso es lo que "
         "la vuelve seria.",
-        "No se copia la fórmula de transparencia internacional, y no por descuido. Su "
+        "No se copia la fórmula de Transparencia Internacional, y no por descuido. Su "
         "índice de percepción de corrupción es un promedio de encuestas a expertos: mide "
         "lo que un panel cree sobre un país. Este mide actos observables que cualquiera "
         "comprueba repitiendo la consulta. Contestan preguntas distintas y no deben "
-        "compararse: ordenarian distinto con toda razón.",
-        f"NO SE CASTIGA LO QUE NO SE MIRO. Si a un Estado le falta la evidencia de un "
-        f"acto, ese acto NO PUNTUA: no suma ni resta, y el indice se calcula sobre los "
-        f"que si tienen evidencia. Con menos de {MINIMO_ACTOS} actos medidos el Estado "
+        "compararse: ordenarían distinto con toda razón.",
+        f"NO SE CASTIGA LO QUE NO SE MIRÓ. Si a un Estado le falta la evidencia de un "
+        f"acto, ese acto NO PUNTÚA: no suma ni resta, y el índice se calcula sobre los "
+        f"que sí tienen evidencia. Con menos de {MINIMO_ACTOS} actos medidos el Estado "
         "queda sin medir, que no es lo mismo que opaco.",
-        "Cuando el archivo público de la web no responde, el que fallo es el archivo y no "
+        "Cuando el archivo público de la web no responde, el que falló es el archivo y no "
         "el Estado. Ese acto se descarta en lugar de contarse en contra. Es la clase de "
         "confusión que convierte una falla propia en una acusación ajena.",
         "Los seis actos pesan lo mismo, y es una elección. Podría argumentarse que la "
@@ -281,19 +281,19 @@ def recolectar():
         "cualquier reparto de pesos es un juicio, y un juicio metido adentro de una "
         "fórmula deja de verse. Pesos iguales es la única elección que no esconde una "
         "preferencia.",
-        "«cierra» vale 60 Y no 100 A propósito. El portal existe y responde a una persona: "
-        "Publica, y lo que no hace es dejarse recolectar. Es peor que abrir y mejor que no "
+        "«cierra» vale 60 y no 100, a propósito. El portal existe y responde a una persona: "
+        "publica, y lo que no hace es dejarse recolectar. Es peor que abrir y mejor que no "
         "tener puerta, y la cifra tiene que decir eso.",
-        "El sexto acto solo puntua donde hay portal, y es a propósito. Sin el, seis "
-        "Estados empataban en cero: el índice sabia decir «cumple todo» y no sabia "
+        "El sexto acto solo puntúa donde hay portal, y es a propósito. Sin él, seis "
+        "Estados empataban en cero: el índice sabía decir «cumple todo» y no sabía "
         "distinguir entre los que cumplen. En los Estados sin portal no se anota cien: la "
         "ausencia de portal ya la mide el primer acto, y contarla dos veces sería castigar "
         "el mismo hecho dos veces.",
         "Es un índice derivado, no una medición nueva. Los seis actos los midieron otros "
-        "colectores de esta misma casa, cada uno con su fecha y su rastro. Si uno de ellos "
+        "colectores nuestros, cada uno con su fecha y su rastro. Si uno de ellos "
         "falla, este índice no se publica en lugar de calcularse con la mitad.",
-        f"ANTES DE CREERLE UN PUNTAJE A NADIE SE PRUEBA EL CALCULO contra {CONTROL}, que "
-        f"cumple los actos medibles: si diera mas de {TOPE_CONTROL}, alguna senial se estaria "
+        f"ANTES DE CREERLE UN PUNTAJE A NADIE SE PRUEBA EL CÁLCULO contra {CONTROL}, que "
+        f"cumple los actos medibles: si diera más de {TOPE_CONTROL}, alguna señal se estaría "
         "leyendo al revés y la corrida se detiene entera.",
         "No mide corrupción ni calidad de gobierno. Mide si el Estado deja ver lo que "
         "hace. Un Estado puede ser transparente y estar mal gobernado, y al revés.",
@@ -303,11 +303,11 @@ def recolectar():
         fiabilidad="A",
         credibilidad=1,
         corroborado=True,
-        nota=("Indice propio de la Oficina, derivado de cinco mediciones de esta misma "
-              "casa. Fiabilidad a porque el productor es la Fundación y el método esta "
+        nota=("Índice propio de la Oficina, derivado de cinco mediciones "
+              "nuestras. Fiabilidad A porque el productor es la Fundación y el método está "
               "escrito entero. Credibilidad 1 porque cada acto es un hecho verificable "
               "por repetición —cualquiera pega la dirección y obtiene lo mismo—: la "
-              "corroboracion es la reproducibilidad, y la formula esta publicada."),
+              "corroboración es la reproducibilidad, y la fórmula está publicada."),
     )
 
     return comun.escribir(

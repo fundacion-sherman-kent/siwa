@@ -62,7 +62,7 @@ def recolectar():
 
     if len(par) < 100:
         raise RuntimeError(
-            f"Sólo se leyeron {len(par)} pares de CITES y deberían ser miles. El archivo "
+            f"Solo se leyeron {len(par)} pares de CITES y deberían ser miles. El archivo "
             "agregado cambió de forma o vino incompleto. NO se publica.")
 
     registros = []
@@ -89,7 +89,7 @@ def recolectar():
         "no siempre declaran lo mismo: la diferencia es un indicio, no una prueba.",
         "Flora vs fauna se separa por si la fila trae clase zoológica (fauna) o no (flora); es "
         "una aproximación, no la determinación taxonómica formal.",
-        "Cubre sólo los pares donde el importador o el exportador es uno de los 33 Estados. El "
+        "Cubre solo los pares donde el importador o el exportador es uno de los 33 Estados. El "
         "resto del comercio mundial CITES existe pero no es de esta región y no se trae.",
     ]
 
@@ -117,7 +117,7 @@ def recolectar():
                 "consultado": comun.ahora(),
             },
             "licencia": ("CITES Trade Database. Cita obligatoria: «CITES Trade Database. Compiled "
-                         "by UNEP-WCMC for the CITES Secretariat». SIWA se considera uso no "
+                         "by UNEP-WCMC for the CITES Secretariat». Este registro se considera de uso no "
                          "comercial; conviene avisar a species@unep-wcmc.org por el dato derivado."),
         },
     )

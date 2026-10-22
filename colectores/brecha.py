@@ -123,7 +123,7 @@ def _pedirTestigo(usuario: str, clave: str) -> str:
     raise RuntimeError(
         "No se obtuvo testigo de la fuente. No se continúa a ciegas: seguir sin "
         "testigo daría cero en los 33 Estados, y eso se leería como «no pasa nada» "
-        "Cuando en realidad es «no pudimos mirar». Lo que contestó la fuente, "
+        "cuando en realidad es «no pudimos mirar». Lo que contestó la fuente, "
         "textual y sin credenciales: " + " | ".join(dichos))
 
 
@@ -192,15 +192,15 @@ def _conEmbargo(padron, publica, desde, restriccion):
         "entrega datos con más de un año de antigüedad. Lo declara ella misma en su "
         "respuesta, y por eso una ventana de treinta días devuelve cero con razón.",
         "Por eso la brecha no se puede calcular todavía, y no se calcula. Medir «lo que "
-        "ocurrió y el Estado no publico» exige que las dos observaciones sean del mismo "
+        "ocurrió y el Estado no publicó» exige que las dos observaciones sean del mismo "
         "momento. Cruzar sucesos de hace un año contra lo que el Estado publica hoy "
         "sería una comparación falsa, que es exactamente lo que este registro no hace.",
-        "El colector queda construido y A la espera. El día que la cuenta vea datos "
+        "El colector queda construido y a la espera. El día que la cuenta vea datos "
         "recientes, funciona sin tocar una línea. Mientras tanto los 33 Estados figuran "
         "con la fuente en embargo, que no es lo mismo que en cero.",
-        "Hay un camino, y es el tiempo. La bitacora propia empezo el 1 de septiembre de "
+        "Hay un camino, y es el tiempo. La bitácora propia empezó el 1 de septiembre de "
         "2026: dentro de un año el registro va a tener su propia memoria de qué publicó "
-        "cada Estado en las fechas que la fuente si deja ver, y entonces las dos "
+        "cada Estado en las fechas que la fuente sí deja ver, y entonces las dos "
         "observaciones vuelven a ser del mismo momento.",
         "LO QUE LA FUENTE DECLARA sobre esta cuenta, textual: " + restriccion[:300],
     ]
@@ -318,27 +318,27 @@ def recolectar():
     vacios = [
         "No se publica ni un solo número de la fuente: ni eventos, ni recuentos, ni "
         "fechas, ni actores. Sale una clasificación de tres Estados, que nadie puede "
-        "revertir para reconstruir el conjunto original. El recuento entra al calculo y "
+        "revertir para reconstruir el conjunto original. El recuento entra al cálculo y "
         "se descarta antes de escribir el archivo.",
         "Esto no mide violencia: mide transparencia. Que un Estado figure en «hay "
-        "registro y no publica» dice que un observatorio independiente anoto actividad y "
-        "el Estado no publico nada de si mismo en su propio catálogo. No dice cuánta "
+        "registro y no publica» dice que un observatorio independiente anotó actividad y "
+        "el Estado no publicó nada de sí mismo en su propio catálogo. No dice cuánta "
         "actividad hubo, ni que sea grave, ni que el Estado la oculte a propósito.",
-        "«sin registro en la ventana» no es «no pasó nada». Es que la fuente no anoto "
+        "«sin registro en la ventana» no es «no pasó nada». Es que la fuente no anotó "
         "nada, y la cobertura de cualquier observatorio es despareja: los Estados chicos "
         "del Caribe se miran menos que los grandes.",
         "La interpretación de la licencia es nuestra. La fuente permite material derivado "
         "que sea transformativo y no reconstruible; la Oficina sostiene que una "
-        "clasificación de tres estados lo es, y se lo consulto. Mientras no haya "
+        "clasificación de tres estados lo es, y se lo consultó. Mientras no haya "
         "respuesta, esta lectura queda declarada como lectura propia de un contrato "
         "ajeno, no como permiso obtenido.",
         "Antes de creerle un cero a nadie se prueba el instrumento. Se consulta un caso "
         "que tiene que dar algo —Colombia, que en cualquier ventana de treinta días tiene "
         "registros— y si ese da cero, la corrida se detiene entera. La primera versión "
         "devolvió cero en los 33 Estados porque el filtro de fecha estaba mal escrito, y "
-        "sin este control se habria publicado como «no pasa nada en la región».",
+        "sin este control se habría publicado como «no pasa nada en la región».",
         "Sin credencial no se mira, y se dice. Este es el único colector del registro que "
-        "necesita un secreto. Si no esta, los 33 Estados quedan en «sin credencial»: no "
+        "necesita un secreto. Si no está, los 33 Estados quedan en «sin credencial»: no "
         "en cero, porque no saber no es saber que no.",
     ]
 

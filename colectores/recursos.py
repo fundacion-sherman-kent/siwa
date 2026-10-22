@@ -68,7 +68,7 @@ REJILLA = "https://ourworldindata.org/grapher/{slug}.csv"
 USGS_ITEM = "https://www.sciencebase.gov/catalog/item/69837e43b66b01367d7ec7c7?format=json"
 
 ORIGEN_ENERGIA = ("Energy Institute y Servicio Geológico de los Estados Unidos, "
-                  "via Our World in Data")
+                  "vía Our World in Data")
 ORIGEN_USGS = ("Servicio Geológico de los Estados Unidos — Mineral Commodity "
                "Summaries, base mundial de producción y reservas")
 # LAS RESERVAS PROBADAS DE PETRÓLEO NO SON DEL ENERGY INSTITUTE. Our World in Data
@@ -567,13 +567,12 @@ def construir() -> Path:
         "cuánto, y qué proporción del mundo representa. Para quién y para qué eso importa "
         "es análisis, y el análisis no va en el registro.",
         "RESERVA Y PRODUCCIÓN NO SON LO MISMO, y confundirlas es el error más común con "
-        "estos datos. Bolivia figura entre los mayores tenedores de litio del mundo y no "
-        "aparece produciendo a escala mundial: tener no es extraer.",
+        "estos datos: tener no es extraer.",
         "La cuota mundial se calcula SUMANDO los países, no leyendo el renglón de total "
         "que publica la fuente: ese viene redondeado y agregado, y usarlo daría cuotas que "
         "no cierran con las partes.",
         "UN CERO EN RESERVAS ES LO QUE DICE LA FUENTE, NO LO QUE HAY BAJO TIERRA. El caso "
-        "que lo prueba está adentro de este mismo archivo: la tabla de reservas le asigna "
+        "que lo prueba está en este mismo registro: la tabla de reservas le asigna "
         "CERO a Guyana, y la de producción muestra a Guyana produciendo petróleo desde "
         "2019. No se corrige ninguna de las dos ni se elige una: la tabla de reservas no "
         "desagrega a ese Estado, y la contradicción se declara porque es un dato sobre la "

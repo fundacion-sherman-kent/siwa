@@ -68,7 +68,7 @@ SECCIONES = [
     {"rotulo": "Informes y artículos", "url": "https://fundacionkent.org/articulos/",
      "detalle": "Los productos de análisis de la Fundación: informes, artículos académicos y de opinión."},
     {"rotulo": "Cómo trabajamos", "url": "https://fundacionkent.org/nosotros/metodo-de-analisis/",
-     "detalle": "El método de análisis de la casa, del que este registro es la capa de datos."},
+     "detalle": "Nuestro método de análisis, del que este registro es la capa de datos."},
     {"rotulo": "Formación", "url": "https://fundacionkent.org/formacion/",
      "detalle": "Cursos y maestrías en análisis de inteligencia estratégica."},
     {"rotulo": "Quiénes somos", "url": "https://fundacionkent.org/nosotros/",
@@ -186,11 +186,11 @@ def recolectar():
     vacios = [
         "Este colector no copia el contenido de los informes: trae título, fecha, "
         "categoría y dirección. El análisis vive en la web de la Fundación, con su firma "
-        "Y sus autoridades; acá vive el dato.",
+        "y sus autoridades; acá vive el dato.",
         "La distinción entre informe libre y reservado la declara el propio sitio en la "
         "categoría de cada pieza. El registro la respeta y la muestra: no decide por su "
         "cuenta que se publica en abierto.",
-        f"Se traen los {TOPE} mas recientes del canal. Los anteriores están en la web de "
+        f"Se traen los {TOPE} más recientes del canal. Los anteriores están en la web de "
         "la Fundación y no se replican acá.",
         "Un informe de la Fundación es análisis, no dato: lleva juicios con confianza y "
         "probabilidad declaradas. Este registro publica hechos calificados y no emite "
@@ -202,8 +202,8 @@ def recolectar():
         credibilidad=1,
         corroborado=True,
         nota=("Publicaciones de la propia Fundación, tomadas de su canal oficial. "
-              "Credibilidad 1 porque lo que se registra es que la pieza existe y donde "
-              "esta, hecho verificable en dos lugares —el canal y la pagina—, no el "
+              "Credibilidad 1 porque lo que se registra es que la pieza existe y dónde "
+              "está, hecho verificable en dos lugares —el canal y la página—, no el "
               "contenido de su análisis."),
     )
 

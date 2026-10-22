@@ -19,7 +19,7 @@ def construir():
         colector=COLECTOR, dataset_id=DATASET_ID,
         titulo="Incautación de marihuana",
         nota="Kilogramos de marihuana incautados por la Policía Nacional, por "
-             "departamento del hecho. Verificado en vivo (23/9/2026): la unidad "
+             "departamento del hecho. Comprobado el 23/9/2026: la unidad "
              "declarada por la fuente es kilogramos.",
         url_ficha=f"https://www.datos.gov.co/resource/{DATASET_ID}.json",
     )

@@ -102,14 +102,14 @@ def recolectar():
 
     if len(registros) < 300:
         raise RuntimeError(
-            f"Sólo se leyeron {len(registros)} pares de UN DESA y deberían ser más de mil. La "
+            f"Solo se leyeron {len(registros)} pares de UN DESA y deberían ser más de mil. La "
             "planilla cambió de forma o los códigos no coinciden. NO se publica.")
 
     registros.sort(key=lambda r: -r["personas"])
     vacios = [
         "Es STOCK a mitad de año (cuánta gente de un origen vive en un destino), no el flujo del "
         "año. Un stock grande puede ser migración vieja consolidada, no movimiento reciente.",
-        "Sólo pares país→país donde el origen o el destino es uno de los 33 Estados. Los agregados "
+        "Solo pares país→país donde el origen o el destino es uno de los 33 Estados. Los agregados "
         "de la fuente (World, regiones, grupos de ingreso) se descartan: no son corredores.",
         "La edición 2024 reasignó con censo nuevo a 60 países; al resto lo extrapoló desde 2020. "
         "Los países sin censo reciente traen una estimación, no una medición fresca.",
@@ -137,7 +137,7 @@ def recolectar():
                 "anio": max(a for _, a in both),
                 "consultado": comun.ahora(),
             },
-            "licencia": "UN DESA, CC BY 3.0 IGO, con cita. SIWA se considera uso no comercial.",
+            "licencia": "UN DESA, CC BY 3.0 IGO, con cita. Este registro se considera de uso no comercial.",
         },
     )
 

@@ -279,7 +279,7 @@ def construir() -> Path:
          "eje": "Gobernanza", "unidad": "redes en los últimos cuatro trimestres",
          "unidad_singular": "red", "mas_es_peor": True, "sin_direccion": True,
          "origen": "Google — boletín trimestral de operaciones de influencia coordinada",
-         "cautela": "LA ATRIBUCIÓN ES DE GOOGLE y la Fundación no puede verificarla: la empresa no "
+         "cautela": "LA ATRIBUCIÓN ES DE GOOGLE y no podemos verificarla: la empresa no "
                     "publica la evidencia técnica. Cuenta las redes que Google vincula, con sus "
                     "palabras, a un país de fuera de América Latina y el Caribe —Rusia, China, Irán, "
                     "Canadá o cualquier otro—, sin distinguir cuál. Cada caso se publica con el "
@@ -295,7 +295,7 @@ def construir() -> Path:
              "cautela": "SEGÚN TIKTOK, no según la Fundación. Segunda fuente de las redes de "
                         "influencia, sobre otra plataforma: cuenta las redes que TikTok informa haber "
                         "desarticulado y cuyo texto nombra al país. TikTok dice desde qué país operó "
-                        "cada red; la Fundación no puede verificarlo. Un cero no prueba ausencia de "
+                        "cada red; no podemos verificarlo. Un cero no prueba ausencia de "
                         "actividad."})
     vacios = [
         "LA ATRIBUCIÓN ES DE LA PLATAFORMA, NO DE LA FUNDACIÓN. Este registro publica que Google dio "

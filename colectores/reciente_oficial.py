@@ -162,18 +162,18 @@ def recolectar():
         "su manera, lo cuenta con su método y lo publica con su cadencia. Una serie "
         "regional armada sumando estas cifras sería una serie falsa. Va al lado de la "
         "serie comparable de la UNODC, nunca adentro, y no la actualiza.",
-        "No se descargan las cifras: se publica que el conjunto existe, de cuando es y "
-        "donde esta. Siete portales tienen siete esquemas distintos, y homologarlos a mano "
+        "No se descargan las cifras: se publica que el conjunto existe, de cuándo es y "
+        "dónde está. Siete portales tienen siete esquemas distintos, y homologarlos a mano "
         "sería inventar una comparabilidad que los propios Estados no ofrecen.",
         "La fecha es la de actualización del catálogo, no la del hecho. Un conjunto puede "
-        "actualizarse hoy y contener datos del año pasado: dice cuando el Estado toco el "
-        "archivo, no hasta cuando llega la serie.",
+        "actualizarse hoy y contener datos del año pasado: dice cuándo el Estado tocó el "
+        "archivo, no hasta cuándo llega la serie.",
         "Solo alcanza a los Estados con portal de datos abiertos consultable. Los demás "
         "quedan como sin portal, que no prueba que no publiquen: puede exigir registro, "
         "interponer un obstáculo automático o publicar sin interfaz.",
         "Un conjunto entra si su título habla del hecho delictivo. Uno rotulado con otro "
         "vocabulario no aparece; y se descartan las piezas administrativas del organismo "
-        "—nominas, presupuestos, directorios— que se actualizan seguido y no dicen nada "
+        "—nóminas, presupuestos, directorios— que se actualizan seguido y no dicen nada "
         "del delito.",
     ]
 
@@ -181,16 +181,16 @@ def recolectar():
         fiabilidad="A",
         credibilidad=2,
         corroborado=False,
-        nota=("Catalogos oficiales de los propios Estados, consultados por su interfaz "
-              "publica. Fiabilidad a porque publica el organismo responsable. Credibilidad "
+        nota=("Catálogos oficiales de los propios Estados, consultados por su interfaz "
+              "pública. Fiabilidad A porque publica el organismo responsable. Credibilidad "
               "2 y no 1 porque no se verificó el contenido de cada conjunto: se verificó "
-              "que existe, de cuando es y donde esta."),
+              "que existe, de cuándo es y dónde está."),
     )
 
     return comun.escribir(
         colector="reciente_oficial",
         capa="publico",
-        fuente="Catalogos oficiales de los Estados — lo mas reciente publicado",
+        fuente="Catálogos oficiales de los Estados — lo más reciente publicado",
         url_fuente=comun.SITIO_URL,
         calificacion=calificacion,
         registros=registros,

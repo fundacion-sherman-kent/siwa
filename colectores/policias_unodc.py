@@ -142,7 +142,7 @@ def main():
         "resumen": {"paises_con_dato": con_dato, "de": len(PAIS),
                     "nota": "Tasa por 1.000 habitantes = personal policial (UNODC/UN-CTS, conteos) ÷ población "
                             "(Banco Mundial) × 1.000, del mismo año. Años heterogéneos por país (2010–2024)."},
-        "licencia": "UNODC, uso no comercial con cita. SIWA se considera uso no comercial.",
+        "licencia": "UNODC, uso no comercial con cita. Este registro se considera de uso no comercial.",
     }
     SALIDA.write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8", newline="")
     print(f"policias_unodc.json: {con_dato}/{len(PAIS)} países con dato")

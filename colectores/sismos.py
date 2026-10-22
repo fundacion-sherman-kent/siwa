@@ -190,7 +190,7 @@ def recolectar():
         "recuentos**, de modo que no se los compare con los de otra fuente sin "
         "verificar qué umbral usa.",
         "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un "
-        "sismo con epicentro en un país se siente en los vecinos y aparece sólo en la "
+        "sismo con epicentro en un país se siente en los vecinos y aparece solo en la "
         "ficha del primero.",
         "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen "
         "después: lo que se publica es la lectura del momento de la consulta, con su "

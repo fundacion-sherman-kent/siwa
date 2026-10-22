@@ -147,24 +147,24 @@ def recolectar():
     vacios = [
         "La muestra de OONI la hacen voluntarios y no es representativa. Venezuela "
         "tuvo 2.392.574 mediciones en esta ventana; un Estado del Caribe puede tener "
-        "unas pocas. Un Estado con pocas sondas muestra pocas anomalias, y eso no "
+        "unas pocas. Un Estado con pocas sondas muestra pocas anomalías, y eso no "
         "significa que tenga menos censura: significa que hay menos gente midiendo. "
-        "Por eso se publica la tasa y no el recuento, y aún así no se ordenan Estados "
+        "Por eso se publica la tasa y no el recuento, y aun así no se ordenan Estados "
         "con esta cifra.",
-        "Anomalia no es bloqueo. Una anomalia es una medición que no salió como se "
+        "Anomalía no es bloqueo. Una anomalía es una medición que no salió como se "
         "esperaba, y puede deberse a una caída del sitio, a un problema de la red o al "
         "propio método. El bloqueo confirmado se cuenta aparte y es una cifra mucho más "
         "chica: es la única que sostiene la palabra «bloqueo».",
         "Un corte de conectividad no declara su causa. Un cable cortado, una tormenta, "
-        "un apagon electrico y un apagon deliberado producen la misma curva de tráfico. "
+        "un apagón eléctrico y un apagón deliberado producen la misma curva de tráfico. "
         "La curva es el hecho; la intención es un juicio, y este registro no emite "
         "juicios.",
         "Contar equipos de respuesta premia al Estado grande. Brasil tiene muchos "
-        "porque es grande, no porque este mejor protegido. Es el mismo error por el que "
-        "costa Rica, sin ejercito desde 1949, aparecia entre las peores en Defensa. Es "
+        "porque es grande, no porque esté mejor protegido. Es el mismo error por el que "
+        "Costa Rica, sin ejército desde 1949, aparecía entre las peores en Defensa. Es "
         "un recuento de organismos, no una medida de capacidad.",
-        f"LA VENTANA ES DE {DIAS} DIAS y se mueve con cada corrida: sirve para ver el "
-        "presente, no para comparar contra el mes pasado. Una serie historica exigiria "
+        f"LA VENTANA ES DE {DIAS} DÍAS y se mueve con cada corrida: sirve para ver el "
+        "presente, no para comparar contra el mes pasado. Una serie histórica exigiría "
         "guardar cada ventana, y este colector no lo hace.",
         "Ninguna de las tres entra al compuesto. Se publican al lado del dato "
         "comparable y nunca adentro, con la misma arquitectura que Defensa.",
@@ -174,11 +174,11 @@ def recolectar():
         fiabilidad="B",
         credibilidad=2,
         corroborado=False,
-        nota=("Tres mediciones tecnicas independientes entre si: OONI mide desde sondas "
+        nota=("Tres mediciones técnicas independientes entre sí: OONI mide desde sondas "
               "de voluntarios, IODA mide tráfico agregado desde la academia y FIRST "
               "publica su propio padrón de miembros. Fiabilidad B porque ninguna es el "
               "organismo responsable del Estado medido. Credibilidad 2 porque se "
-              "verifico la cifra que cada una publica, NO el hecho que la produjo."),
+              "verificó la cifra que cada una publica, NO el hecho que la produjo."),
     )
 
     return comun.escribir(

@@ -222,29 +222,29 @@ def recolectar():
         "Son valores de aduana en dólares, no cantidades. No dice cuántas armas: dice "
         "cuánto dinero. Un lote de municiones baratas y uno de fusiles caros pueden dar la "
         "misma cifra.",
-        "Lo que a dice que vendio no es lo que B dice que compro. Cada Estado declara por "
-        "su cuenta y las cifras no cierran entre si: el exportador declara el valor puesto "
+        "Lo que A dice que vendió no es lo que B dice que compró. Cada Estado declara por "
+        "su cuenta y las cifras no cierran entre sí: el exportador declara el valor puesto "
         "en el barco y el importador ese valor más flete y seguro. La diferencia se mide "
         "aparte, en la brecha espejo.",
         "No ordena Estados y no entra al compuesto. El volumen depende del tamaño de la "
         "economía, de tener o no industria propia y del papel de cada país en la cadena. "
         "Brasil exporta más que Uruguay por industria, no por conducta. Entra como "
         "magnitud, igual que Defensa.",
-        f"LA FILA TOTAL ES LA UNICA QUE SE SUMA. La respuesta trae una fila por modo de "
-        f"transporte y por regimen aduanero ademas de la total, y sumarlas MULTIPLICA el "
-        f"comercio: Brasil daba 768 millones de importacion cuando son 192, cuatro veces "
-        f"de mas. En esta corrida se descartaron {descartadas} filas por ese motivo.",
+        f"LA FILA TOTAL ES LA ÚNICA QUE SE SUMA. La respuesta trae una fila por modo de "
+        f"transporte y por régimen aduanero además de la total, y sumarlas MULTIPLICA el "
+        f"comercio: Brasil daba 768 millones de importación cuando son 192, cuatro veces "
+        f"de más. En esta corrida se descartaron {descartadas} filas por ese motivo.",
         "Hay comercio de armas con contraparte no declarada, y se cuenta aparte. La "
-        "fuente usa codigos especiales cuando el Estado no especifica el origen o el "
-        "destino. No significa que sea ilegal: significa que la aduana no dijo con quien. "
+        "fuente usa códigos especiales cuando el Estado no especifica el origen o el "
+        "destino. No significa que sea ilegal: significa que la aduana no dijo con quién. "
         "Se publica el monto y su porcentaje porque es un dato de transparencia, no una "
-        "acusacion.",
-        f"EL ANIO ES {ANIO}, que es el ultimo con cobertura amplia en la vista publica y "
+        "acusación.",
+        f"EL AÑO ES {ANIO}, que es el último con cobertura amplia en la vista publica y "
         "gratuita de la fuente. No es el último año calendario, y se dice.",
     ]
     if sinConsultar:
         vacios.append(
-            f"LA FUENTE CORTO LA TANDA en esta corrida y quedaron {len(sinConsultar)} "
+            f"LA FUENTE CORTÓ LA TANDA en esta corrida y quedaron {len(sinConsultar)} "
             f"Estados SIN CONSULTAR: {', '.join(sinConsultar)}. NO figuran en cero: "
             "figuran como no consultados, que es distinto.")
 
@@ -262,11 +262,11 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Base de comercio de Naciones Unidas, alimentada por las aduanas de cada "
-              "Estado. Fiabilidad a porque el productor compila declaraciones oficiales "
+              "Estado. Fiabilidad A porque el productor compila declaraciones oficiales "
               "con método publicado. Credibilidad 2 porque se verifica la declaración "
               "aduanera —que consta— y no que refleje todo el comercio: lo que un Estado "
               "declara haber vendido no coincide con lo que el otro declara haber "
-              "comprado, y el trafico ilegal no aparece."),
+              "comprado, y el tráfico ilegal no aparece."),
     )
 
     return comun.escribir(

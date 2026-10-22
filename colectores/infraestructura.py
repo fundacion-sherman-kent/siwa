@@ -51,7 +51,7 @@ REJILLA = "https://ourworldindata.org/grapher/{slug}.csv"
 
 ORIGEN_CABLES = "Mapa de cables submarinos — TeleGeography, interfaz pública"
 ORIGEN_AEROPUERTOS = "OurAirports — censo abierto y colaborativo de aeródromos del mundo"
-ORIGEN_ENERGIA = "Energy Institute y Ember, via Our World in Data"
+ORIGEN_ENERGIA = "Energy Institute y Ember, vía Our World in Data"
 GCAT = "https://planet4589.org/space/gcat/tsv/cat/satcat.tsv"
 ORIGEN_GCAT = "GCAT — catálogo general de objetos espaciales de Jonathan McDowell, CC BY 4.0"
 
@@ -374,14 +374,11 @@ def construir() -> Path:
         "SE CUENTAN PUNTOS DE AMARRE, NO CABLES. Por un mismo punto pueden entrar varios "
         "cables, y un país con dos puntos y diez cables está mejor parado que uno con dos "
         "puntos y dos cables. Este recuento no distingue esa diferencia.",
-        f"Los puntos se ubican por su coordenada contra el padrón de esta casa, y los que "
+        f"Los puntos se ubican por su coordenada contra nuestro padrón, y los que "
         f"caen fuera —están sobre la línea de costa y varios quedan metros mar adentro— se "
         f"resuelven por el nombre del país que la fuente escribe en el rótulo: "
         f"{por_geo} por coordenada y {por_nom} por nombre. Sin ese segundo camino, Granada "
         "figuraba con cero teniendo sus amarres nombrados en el archivo.",
-        "EL CENSO DE AEROPUERTOS ES COLABORATIVO, no oficial. Es el más completo que existe "
-        "abierto y por eso se usa, pero un Estado con poca gente cargando datos puede "
-        "figurar con menos aeródromos de los que tiene.",
         "NI LOS CABLES NI LOS AEROPUERTOS TIENEN SERIE: la fuente publica el estado de hoy, "
         "no su historia. Se guarda como un punto del año en curso y no se dibuja tendencia, "
         "porque no la hay.",

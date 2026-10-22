@@ -101,7 +101,7 @@ INDICADORES = [
      "unidad": "% del producto", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
      "cautela": "Mide lo que el Estado destina a defensa, no su capacidad ni su empleo. "
-                "Un valor alto no indica mas seguridad ni menos."},
+                "Un valor alto no indica más seguridad ni menos."},
     # ── Desarrollo científico y tecnológico ──────────────────────────────────
     # La capacidad de un Estado de producir conocimiento propio. No mide calidad
     # ni utilidad: mide esfuerzo y producción.
@@ -231,10 +231,10 @@ INDICADORES = [
      "origen": "Banco Mundial",
      "cautela": "Efectivos declarados. Cuenta personal militar en actividad E INCLUYE "
                 "fuerzas paramilitares cuando se parecen a unidades regulares en "
-                "organizacion, equipamiento, entrenamiento o mision. Por eso Costa Rica, "
-                "que abolio su ejercito en 1949, y Panama, que lo disolvio en 1990, "
-                "figuran con efectivos: lo que se cuenta ahi es su fuerza publica. No "
-                "incluye a la policia comun, que en varios Estados del padron es el grueso "
+                "organización, equipamiento, entrenamiento o misión. Por eso Costa Rica, "
+                "que abolió su ejército en 1949, y Panamá, que lo disolvió en 1990, "
+                "figuran con efectivos: lo que se cuenta ahí es su fuerza pública. No "
+                "incluye a la policía común, que en varios Estados del padrón es el grueso "
                 "del despliegue."},
     {"clave": "voz_rendicion", "codigo": "GOV_WGI_VA.EST", "fuente_id": 3,
      "rotulo": "Voz y rendición de cuentas", "eje": "Gobernanza",
@@ -259,7 +259,7 @@ INDICADORES = [
      "rotulo": "Desempleo juvenil", "eje": "Desarrollo",
      "unidad": "% de la población de 15 a 24", "mas_es_peor": True,
      "origen": "OIT, compilado por el Banco Mundial",
-     "cautela": "Estimación modelada de la OIT donde el Estado no pública encuesta propia."},
+     "cautela": "Estimación modelada de la OIT donde el Estado no publica encuesta propia."},
     {"clave": "gini", "codigo": "SI.POV.GINI", "fuente_id": None,
      "rotulo": "Desigualdad — índice de Gini", "eje": "Desarrollo",
      "unidad": "0 igualdad, 100 desigualdad máxima", "mas_es_peor": True,
@@ -288,24 +288,24 @@ INDICADORES = [
      "rotulo": "Empresas que esperan pagar por un contrato público", "eje": "Gobernanza",
      "unidad": "% de las empresas consultadas", "mas_es_peor": True,
      "origen": "Encuestas de Empresas del Banco Mundial",
-     "cautela": "Es la materia de INTEGRIDAD DE LA CONTRATACION PUBLICA. Mide lo que la "
+     "cautela": "Es la materia de INTEGRIDAD DE LA CONTRATACIÓN PÚBLICA. Mide lo que la "
                 "empresa declara esperar, no un soborno comprobado. La encuesta no se "
                 "levanta todos los años en todos los Estados: el dato de cada país es "
-                "de la última ronda disponible y las rondas no coinciden entre si."},
+                "de la última ronda disponible y las rondas no coinciden entre sí."},
     {"clave": "servidores_seguros", "codigo": "IT.NET.SECR.P6", "fuente_id": None,
      "rotulo": "Servidores de internet cifrados", "eje": "Seguridad",
      "unidad": "por millón de habitantes", "mas_es_peor": False,
      "origen": "Netcraft, compilado por el Banco Mundial",
      "cautela": "Es el único indicador de CIBERSEGURIDAD comparable y gratuito que se "
-                "encontro para los 33. Mide infraestructura de cifrado desplegada, no "
+                "encontró para los 33. Mide infraestructura de cifrado desplegada, no "
                 "mide ataques, ni defensa estatal, ni incidentes. Un valor alto indica "
-                "una economía digital mas madura, no un Estado mas protegido."},
+                "una economía digital más madura, no un Estado más protegido."},
     {"clave": "banda_ancha", "codigo": "IT.NET.BBND.P2", "fuente_id": None,
      "rotulo": "Suscripciones a banda ancha fija", "eje": "Desarrollo",
      "unidad": "por 100 habitantes", "mas_es_peor": False,
      "origen": "UIT, compilado por el Banco Mundial",
      "cautela": "Junto con los usuarios de internet, delimita la superficie expuesta a "
-                "ataque informatico. No mide calidad ni continuidad del servicio."},
+                "ataque informático. No mide calidad ni continuidad del servicio."},
     {"clave": "migrantes", "codigo": "SM.POP.TOTL", "fuente_id": None,
      "rotulo": "Población migrante que el país aloja", "eje": "Seguridad",
      "unidad": "personas", "mas_es_peor": False,
@@ -323,22 +323,22 @@ INDICADORES = [
      "rotulo": "Migración neta", "eje": "Seguridad",
      "unidad": "personas por quinquenio", "mas_es_peor": False,
      "origen": "Naciones Unidas, compilado por el Banco Mundial",
-     "cautela": "Entradas menos salidas. NEGATIVO significa que se fue mas gente de la "
+     "cautela": "Entradas menos salidas. NEGATIVO significa que se fue más gente de la "
                 "que llegó: es el indicador de expulsión de población. Se estima por "
                 "quinquenios, de modo que no capta una crisis de un solo año."},
     {"clave": "remesas", "codigo": "BX.TRF.PWKR.DT.GD.ZS", "fuente_id": None,
      "rotulo": "Remesas recibidas", "eje": "Seguridad",
      "unidad": "% del producto", "mas_es_peor": False,
      "origen": "Banco Mundial",
-     "cautela": "Entra como medida de MIGRACIÓN, no como indicador económico: es cuanto "
+     "cautela": "Entra como medida de MIGRACIÓN, no como indicador económico: es cuánto "
                 "pesa el dinero que mandan quienes se fueron. Un valor alto señala una "
-                "diaspora grande y una economía dependiente de ella. Solo cuenta los "
-                "envios por via formal: lo que viaja por fuera del sistema no aparece."},
+                "diáspora grande y una economía dependiente de ella. Solo cuenta los "
+                "envíos por vía formal: lo que viaja por fuera del sistema no aparece."},
     {"clave": "gasto_militar_publico", "codigo": "MS.MIL.XPND.ZS", "fuente_id": None,
      "rotulo": "Gasto militar sobre el gasto del Estado", "eje": "Defensa",
      "unidad": "% del gasto público", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
-     "cautela": "Cuanto de lo que gasta el Estado va a defensa. Leido junto al gasto "
+     "cautela": "Cuanto de lo que gasta el Estado va a defensa. Leído junto al gasto "
                 "sobre el producto separa dos cosas distintas: un Estado chico que "
                 "dedica mucho de lo poco que tiene, de uno grande que dedica poco de "
                 "mucho."},
@@ -346,13 +346,13 @@ INDICADORES = [
      "rotulo": "Gasto militar en dólares", "eje": "Defensa",
      "unidad": "dólares estadounidenses corrientes", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
-     "cautela": "El tamaño absoluto del presupuesto. En dolares corrientes: la "
+     "cautela": "El tamaño absoluto del presupuesto. En dólares corrientes: la "
                 "comparación entre años distintos arrastra inflación y tipo de cambio."},
     {"clave": "militares_fuerza_laboral", "codigo": "MS.MIL.TOTL.TF.ZS", "fuente_id": None,
      "rotulo": "Efectivos sobre la fuerza laboral", "eje": "Defensa",
      "unidad": "% de la fuerza laboral", "mas_es_peor": False,
      "origen": "Banco Mundial",
-     "cautela": "Que proporción de quienes trabajan esta bajo bandera. Es la medida de "
+     "cautela": "Qué proporción de quienes trabajan está bajo bandera. Es la medida de "
                 "peso relativo del instrumento militar en la sociedad."},
     {"clave": "armas_importadas", "codigo": "MS.MIL.MPRT.KD", "fuente_id": None,
      "rotulo": "Importación de armamento mayor", "eje": "Defensa",
@@ -368,7 +368,7 @@ INDICADORES = [
      "rotulo": "Exportación de armamento mayor", "eje": "Defensa",
      "unidad": "valor indicativo SIPRI, NO son dólares", "mas_es_peor": False,
      "origen": "SIPRI, compilado por el Banco Mundial",
-     "cautela": "Muy pocos Estados de la región exportan armamento mayor: la mayoria "
+     "cautela": "Muy pocos Estados de la región exportan armamento mayor: la mayoría "
                 "figura sin dato, y eso es el dato. Misma unidad indicativa que la "
                 "importación."},
 ]
@@ -428,9 +428,9 @@ DERIVADOS = [
      "origen": "Cálculo de la Oficina sobre efectivos y superficie del Banco Mundial",
      "cautela": "Cuánta fuerza hay por territorio que cubrir. Se calcula solo con años "
                 "que las dos series comparten. NO mide despliegue: un efectivo contado "
-                "puede estar en un cuartel de la capital y no en la frontera. Y OJO CON "
-                "QUÉ SE ESTÁ CONTANDO: Costa Rica y Panamá no tienen fuerzas armadas, y "
-                "sin embargo figuran, porque la fuente cuenta también fuerzas públicas "
+                "puede estar en un cuartel de la capital y no en la frontera. Atención a "
+                "qué se cuenta: Costa Rica y Panamá no tienen fuerzas armadas y, aun "
+                "así, figuran, porque la fuente cuenta también fuerzas públicas "
                 "organizadas como militares."},
     {"clave": "efectivos_por_habitante", "codigo": None, "fuente_id": None,
      "arriba": "personal_militar", "abajo": "poblacion", "por": 100000,
@@ -588,7 +588,7 @@ def recolectar():
         if cobertura.get(i["clave"], 0):
             continue
         if not any(f.startswith(i["rotulo"] + ":") for f in fallidos):
-            fallidos.append(f"{i['rotulo']}: la fuente no dejo un solo Estado del padron")
+            fallidos.append(f"{i['rotulo']}: la fuente no dejó un solo Estado del padrón")
     fallidos.extend(heredados)
     fuera = {i["clave"] for i in INDICADORES} - {i["clave"] for i in publicables}
     for ficha in registros:

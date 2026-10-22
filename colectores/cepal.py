@@ -74,22 +74,19 @@ INDICADORES = [
      "rotulo": "Personas que fueron víctimas de un delito en el último año",
      "unidad": "% de las personas", "mas_es_peor": True,
      "cautela": ("Sale de preguntarle a la gente, no de los registros de la policía: dice lo que "
-                 "las personas DECLARAN haber vivido. No están los 33 Estados y el año de la "
-                 "encuesta no es el mismo en todos, así que dos países se comparan con cuidado. "
+                 "las personas DECLARAN haber vivido. "
                  "Suele ser más alto que la denuncia policial, porque mucho delito no se denuncia.")},
     {"id": 3259, "clave": "temor_delito",
      "rotulo": "Personas que temen ser víctimas de un delito",
      "unidad": "% de las personas", "mas_es_peor": True,
      "cautela": ("Mide MIEDO, no delito. El temor sube con la cobertura de los medios y con la "
-                 "experiencia del barrio, y puede ser alto donde el delito baja y al revés. No "
-                 "están los 33 Estados y el año de la encuesta cambia de país a país.")},
+                 "experiencia del barrio, y puede ser alto donde el delito baja y al revés.")},
     {"id": 5549, "clave": "seguridad_barrio",
      "rotulo": "Personas que se sienten seguras en su barrio",
      "unidad": "% de las personas", "mas_es_peor": False,
      "cautela": ("Es una sensación declarada en una encuesta, no una medición de lo que pasa en "
                  "la calle, y se refiere al barrio propio, no al país. La gente suele sentir su "
-                 "barrio más seguro que su ciudad. No están los 33 Estados y el año de la "
-                 "encuesta cambia de país a país.")},
+                 "barrio más seguro que su ciudad.")},
     # SEGUNDA FUENTE DE DOS COSAS QUE EL REGISTRO MEDÍA CON UNA SOLA. La
     # desigualdad la medía solo el Banco Mundial, y el desempleo total solo la
     # OIT. La CEPAL mide las dos con su propia manera de contar, y es el
@@ -103,8 +100,7 @@ INDICADORES = [
      "cautela": "SEGUNDA MEDICIÓN de algo que el registro ya publica con el Banco Mundial. "
                 "La CEPAL lo calcula sobre el ingreso per cápita de las personas, con sus "
                 "propios ajustes a las encuestas de hogares; si las dos cifras difieren, la "
-                "diferencia dice cómo se mide, no quién se equivoca. La CEPAL lo publica de "
-                "0 a 1 y acá se muestra multiplicado por 100."},
+                "diferencia dice cómo se mide, no quién se equivoca."},
     {"id": 127, "clave": "desempleo_cepal", "eje": "Desarrollo",
      "rotulo": "Desempleo · segunda fuente",
      "unidad": "% de la población activa", "mas_es_peor": True,
@@ -158,30 +154,30 @@ INDICADORES = [
     {"id": 3257, "clave": "confianza_policia", "eje": "Gobernanza",
      "rotulo": "Personas que confían en la policía",
      "unidad": "% de las personas", "mas_es_peor": False, "decimales": 1,
-     "cautela": "CUÁNTO CONFÍA LA GENTE en la policía, no cuán buena es. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+     "cautela": "Cuánto confía la gente en la policía, no cuán buena es."},
     {"id": 5528, "clave": "desconfianza_justicia", "eje": "Gobernanza",
      "rotulo": "Personas que desconfían del poder judicial",
      "unidad": "% de las personas", "mas_es_peor": True, "decimales": 1,
-     "cautela": "Es desconfianza DECLARADA en la justicia, no una medida de su independencia "
-                "—esa está en «Estado de derecho»—. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+     "cautela": "Es desconfianza declarada en la justicia, no una medida de su independencia "
+                "—esa está en «Estado de derecho»—."},
     {"id": 995, "clave": "desconfianza_partidos", "eje": "Gobernanza",
      "rotulo": "Personas que desconfían de los partidos y el congreso",
      "unidad": "% de las personas", "mas_es_peor": True, "decimales": 1,
-     "cautela": "Mide desconfianza DECLARADA en los partidos políticos y el congreso. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+     "cautela": "Mide desconfianza declarada en los partidos políticos y el congreso."},
     {"id": 5653, "clave": "confianza_municipio", "eje": "Gobernanza",
      "rotulo": "Personas que confían en su municipalidad",
      "unidad": "% de las personas", "mas_es_peor": False, "decimales": 1,
-     "cautela": "Confianza DECLARADA en el gobierno local, el más cercano. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+     "cautela": "Confianza declarada en el gobierno local, el más cercano."},
     {"id": 5548, "clave": "corrupcion_percibida_gente", "eje": "Gobernanza",
      "rotulo": "Personas que creen que la corrupción está muy generalizada",
      "unidad": "% de las personas", "mas_es_peor": True, "decimales": 1,
-     "cautela": "Es lo que la gente CREE sobre los funcionarios públicos, y suma a los índices "
-                "de expertos de Transparencia y el WGI la vivencia ciudadana. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+     "cautela": "Es lo que la gente cree sobre los funcionarios públicos, y suma a los índices "
+                "de expertos de Transparencia y el WGI la vivencia ciudadana."},
     {"id": 5655, "clave": "coima_policia", "eje": "Gobernanza",
      "rotulo": "Personas a las que un policía pidió una coima en el último año",
      "unidad": "% de las personas", "mas_es_peor": True, "decimales": 1,
-     "cautela": "Es corrupción VIVIDA, no percibida: la persona declara que un agente le pidió "
-                "una coima. Suele ser más baja que la percepción, porque no todos la sufren. Sale de la encuesta Latinobarómetro, que compila la CEPAL: dice lo que las personas DECLARAN, no un registro. Son 18 Estados de América Latina —no está el Caribe— y el año de la encuesta no es el mismo en todos, así que dos países se comparan con cuidado."},
+     "cautela": "Es corrupción vivida, no percibida: la persona declara que un agente le pidió "
+                "una coima. Suele ser más baja que la percepción, porque no todos la sufren."},
     # GASTO PÚBLICO SOCIAL (barrido de CEPALSTAT del 16/9/2026). Cuánto de su producto
     # dedica cada Estado al gasto social; comparable en % del PIB, llena un hueco de
     # desarrollo. Gobierno central (27 Estados; el general solo trae 9), función «Gasto social».
@@ -342,16 +338,20 @@ def recolectar():
         "victimización, temor y sensación de seguridad salen de encuestas de hogares: "
         "dicen lo que las personas declaran, no lo que ocurrió. Un Estado puede tener "
         "pocos homicidios y una población que no sale de noche, y al revés.",
-        "EL FEMICIDIO NO SE DEFINE IGUAL EN TODOS LOS ESTADOS. Algunos cuentan solo el "
-        "homicidio cometido por la pareja o la expareja; otros, todo asesinato de una mujer "
-        "por razones de género. La comparación entre Estados es indicativa, no exacta: una "
-        "cifra baja puede significar menos casos o una definición más estrecha.",
+        "EL AÑO DE LA ENCUESTA NO ES EL MISMO EN TODOS LOS ESTADOS, y ninguna de estas "
+        "medidas cubre los 33 (la cobertura por indicador está declarada abajo): dos "
+        "países se comparan con cuidado. Las seis de confianza y corrupción salen de la "
+        "encuesta Latinobarómetro, que compila la CEPAL, abarcan 18 Estados de América "
+        "Latina —no está el Caribe— y dicen lo que las personas declaran, no un registro.",
+        "EL FEMICIDIO NO SE DEFINE IGUAL EN TODOS LOS ESTADOS, de modo que la comparación "
+        "entre ellos es indicativa, no exacta: una cifra baja puede significar menos casos "
+        "o una definición más estrecha.",
         "Es la cifra que cada Estado informa. Donde el sistema judicial no tipifica el "
         "femicidio, o no lo registra aparte del homicidio, la cifra no existe o queda corta.",
-        "EL DESEMPLEO DE LA CEPAL ES, EN MUCHOS ESTADOS, URBANO. Es la cifra oficial "
-        "de cada país, y la propia CEPAL advierte que se refiere a las zonas urbanas —o a "
-        "algunas ciudades— salvo que se indique cobertura nacional. No se compara sin "
-        "mirar eso con la tasa nacional que estima la OIT.",
+        "EL DESEMPLEO DE LA CEPAL ES, EN MUCHOS ESTADOS, URBANO: la propia CEPAL advierte "
+        "que se refiere a las zonas urbanas —o a algunas ciudades— salvo que se indique "
+        "cobertura nacional. No se compara sin mirar eso con la tasa nacional que estima "
+        "la OIT.",
         "EL GINI SE PUBLICA DE 0 A 100. La CEPAL lo da de 0 a 1; se multiplica por 100 "
         "para que se lea en la misma escala que el del Banco Mundial.",
         "DEL GINI SE TOMA SOLO EL NACIONAL. Donde la CEPAL publica únicamente el urbano "

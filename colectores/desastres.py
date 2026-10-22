@@ -174,7 +174,7 @@ def recolectar():
     # no una region sin desastres.
     if len(porIso) < MINIMO_ESTADOS:
         raise RuntimeError(
-            f"Sólo {len(porIso)} de los 33 Estados tienen alguna emergencia en "
+            f"Solo {len(porIso)} de los 33 Estados tienen alguna emergencia en "
             f"{ANIOS} años, y se esperaban al menos {MINIMO_ESTADOS}. Eso no "
             "describe a América Latina y el Caribe: describe una lectura fallida. "
             "No se publica.")

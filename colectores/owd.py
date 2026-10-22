@@ -81,9 +81,9 @@ SERIES = [
      "columna": "electdem_vdem__estimate_best",
      "rotulo": "Nivel democrático — democracia electoral", "eje": "Gobernanza",
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
-     "cautela": "Es el NIVEL DEMOCRATICO medido por elecciones limpias, sufragio, "
-                "Libertad de expresión y asociación. Se construye con el juicio "
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
+     "cautela": "Es el NIVEL DEMOCRÁTICO medido por elecciones limpias, sufragio, "
+                "libertad de expresión y asociación. Se construye con el juicio "
                 "codificado de varios especialistas por país y año: es una medición "
                 "experta, no un recuento de hechos. V-Dem publica un intervalo de "
                 "incertidumbre propio; acá se toma la estimación central."},
@@ -91,78 +91,78 @@ SERIES = [
      "columna": "libdem_vdem__estimate_best",
      "rotulo": "Democracia liberal — límites al poder", "eje": "Gobernanza",
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
      "cautela": "Agrega a lo electoral los límites efectivos al poder ejecutivo: "
-                "Control judicial y legislativo, y protección de las libertades "
+                "control judicial y legislativo, y protección de las libertades "
                 "individuales. La brecha con el índice electoral muestra Estados que "
                 "votan pero no controlan a quien gobierna."},
     {"clave": "democracia_participativa", "slug": "participatory-democracy-index",
      "columna": "participdem_vdem__estimate_best",
      "rotulo": "Democracia participativa", "eje": "Gobernanza",
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
-     "cautela": "Mide participación mas allá del voto: sociedad civil organizada, "
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
+     "cautela": "Mide participación más allá del voto: sociedad civil organizada, "
                 "gobierno local electo y mecanismos de democracia directa."},
     {"clave": "corrupcion_politica", "slug": "political-corruption-index",
      "columna": "corruption_vdem__estimate_best",
      "rotulo": "Corrupción política", "eje": "Gobernanza",
      "unidad": "índice de 0 a 1", "mas_es_peor": True,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
      "cautela": "Abarca al ejecutivo, al legislativo, a la administración y a la "
                 "justicia. Atención: en este índice el valor alto es el peor, al revés "
-                "que en los demas índices de V-Dem."},
+                "que en los demás índices de V-Dem."},
     {"clave": "libertad_expresion", "slug": "freedom-of-expression-index",
      "columna": "freeexpr_vdem__estimate_best",
      "rotulo": "Libertad de expresión y de prensa", "eje": "Gobernanza",
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
      "cautela": "Censura estatal a los medios, represalia contra periodistas y "
-                "libertad academica. Se lee junto con la cobertura noticiosa de este "
-                "mismo registro: donde la libertad cae, la corroboración cruzada vale mas."},
+                "libertad académica. Se lee junto con la cobertura noticiosa de este "
+                "mismo registro: donde la libertad cae, la corroboración cruzada vale más."},
     {"clave": "libertad_asociacion", "slug": "freedom-of-association-index",
      "columna": "freeassoc_vdem__estimate_best",
      "rotulo": "Libertad de asociación y partidos", "eje": "Gobernanza",
      "unidad": "índice de 0 a 1", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
      "cautela": "Libertad para formar partidos y organizaciones civiles, y grado de "
-                "represión sobre ellas. Es la materia de conflicto político leida por "
+                "represión sobre ellas. Es la materia de conflicto político leída por "
                 "el lado del espacio disponible para la oposición."},
     {"clave": "uso_energia_ei", "slug": "per-capita-energy-use",
      "columna": "total_energy_supply_per_capita_kwh",
      "rotulo": "Uso de energía por habitante · segunda fuente", "eje": "Defensa",
      "unidad": "kilovatios hora por persona", "mas_es_peor": False,
-     "origen": "Energy Institute, Revisión Estadística de la Energía Mundial, via Our "
+     "origen": "Energy Institute, Revisión Estadística de la Energía Mundial, vía Our "
                "World in Data",
      "cautela": "SEGUNDA FUENTE de algo que el registro ya publica con el Banco Mundial, "
                 "y de un productor de veras distinto: aquella cifra la arma la Agencia "
-                "Internacional de Energia y esta un instituto independiente. La unidad no "
-                "es la misma —acá kilovatios hora, alla kilos equivalentes de petroleo— "
-                "asi que no se comparan los numeros: se comparan los ORDENES y las "
+                "Internacional de Energía y esta un instituto independiente. La unidad no "
+                "es la misma —acá kilovatios hora, allá kilos equivalentes de petróleo— "
+                "así que no se comparan los números: se comparan los órdenes y las "
                 "tendencias."},
     {"clave": "electricidad_renovable", "slug": "share-electricity-renewables",
      "columna": "renewable_share_of_electricity__pct",
      "rotulo": "Electricidad de fuentes renovables", "eje": "Defensa",
      "unidad": "% de la electricidad generada", "mas_es_peor": False,
-     "origen": "Energy Institute y Ember, via Our World in Data",
-     "cautela": "Que parte de la electricidad de cada Estado NO viene de quemar "
-                "combustible. En esta region la cifra es alta por razones viejas —la "
-                "hidroelectrica de los grandes rios— y no por politica reciente: un valor "
-                "alto no prueba una transicion en curso. Y la hidroelectrica depende de "
+     "origen": "Energy Institute y Ember, vía Our World in Data",
+     "cautela": "Qué parte de la electricidad de cada Estado NO viene de quemar "
+                "combustible. En esta región la cifra es alta por razones viejas —la "
+                "hidroeléctrica de los grandes ríos— y no por política reciente: un valor "
+                "alto no prueba una transición en curso. Y la hidroeléctrica depende de "
                 "que llueva: una sequia la baja sin que cambie nada de la infraestructura."},
     {"clave": "electricidad_por_habitante", "slug": "per-capita-electricity-generation",
      "columna": "per_capita_total_generation__kwh",
      "rotulo": "Electricidad generada por habitante", "eje": "Defensa",
      "unidad": "kilovatios hora por persona", "mas_es_peor": False,
-     "origen": "Energy Institute y Ember, via Our World in Data",
-     "cautela": "Cuanta electricidad produce el pais por cada habitante. Se lee junto al "
-                "acceso a la electricidad y a las perdidas de transmision: generar mucho "
+     "origen": "Energy Institute y Ember, vía Our World in Data",
+     "cautela": "Cuánta electricidad produce el país por cada habitante. Se lee junto al "
+                "acceso a la electricidad y a las pérdidas de transmisión: generar mucho "
                 "no sirve si se pierde en el camino o no llega."},
     {"clave": "perdida_bosque", "slug": "tree-cover-loss",
      "columna": "tree_cover_loss_ha__category_total",
      "rotulo": "Bosque perdido", "eje": "Seguridad",
      "unidad": "hectáreas por año", "mas_es_peor": True,
      "origen": "Laboratorio GLAD de la Universidad de Maryland y Global Forest Watch, "
-               "via Our World in Data",
+               "vía Our World in Data",
      "cautela": "Hectáreas medidas por satélite, no denuncias: entra al lado de «delitos "
                 "contra la flora», que hoy es una evaluación de especialistas de 1 a 10. "
                 "PÉRDIDA NO ES DEFORESTACIÓN: incluye tala legal, incendio, plaga y "
@@ -175,7 +175,7 @@ SERIES = [
      "columna": None,   # se resuelve sola: es la unica columna de valor
      "rotulo": "Muertes en conflicto entre grupos armados", "eje": "Seguridad",
      "unidad": "personas por año", "mas_es_peor": True,
-     "origen": "UCDP, Programa de Datos de Conflicto de Upsala, via Our World in Data",
+     "origen": "UCDP, Programa de Datos de Conflicto de Upsala, vía Our World in Data",
      "cautela": "Enfrentamientos armados ENTRE GRUPOS, sin el Estado como parte. En "
                 "esta región eso es, en buena medida, disputa entre organizaciones "
                 "criminales por territorio o por renta: es el indicador de presencia de "
@@ -188,20 +188,20 @@ SERIES = [
      "rotulo": "Objetos puestos en órbita, acumulado", "eje": "Defensa",
      "unidad": "objetos", "mas_es_peor": False,
      "origen": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, "
-               "via Our World in Data",
+               "vía Our World in Data",
      "cautela": "Es la única medida de CAPACIDAD AEROESPACIAL comparable y gratuita que "
-                "se encontro para la región. Cuenta objetos registrados ante Naciones "
-                "unidas por cada Estado: satelites propios, no necesariamente lanzados "
-                "por el. No mide capacidad de lanzamiento, ni satelites militares, ni "
+                "se encontró para la región. Cuenta objetos registrados ante Naciones "
+                "Unidas por cada Estado: satélites propios, no necesariamente lanzados "
+                "por él. No mide capacidad de lanzamiento, ni satélites militares, ni "
                 "aviación. Solo 13 de los 33 Estados registran alguno."},
     {"clave": "lanzamientos_anuales", "slug": "yearly-number-of-objects-launched-into-outer-space",
      "columna": None,
      "rotulo": "Objetos puestos en órbita por año", "eje": "Defensa",
      "unidad": "objetos por año", "mas_es_peor": False,
      "origen": "Oficina de Asuntos del Espacio Ultraterrestre de Naciones Unidas, "
-               "via Our World in Data",
-     "cautela": "El movimiento anual detras del acumulado. Un año en cero es lo normal "
-                "para casi todos los Estados del padron y no indica retroceso."},
+               "vía Our World in Data",
+     "cautela": "El movimiento anual detrás del acumulado. Un año en cero es lo normal "
+                "para casi todos los Estados del padrón y no indica retroceso."},
     # --- El entorno informativo -------------------------------------------
     #
     # Las cinco primeras se nombran «ausencia de»: en la escala de V-Dem el valor
@@ -213,50 +213,50 @@ SERIES = [
      "columna": "v2mecenefm__estimate_best",
      "rotulo": "Ausencia de censura estatal a los medios", "eje": "Gobernanza",
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
-     "cautela": "Mide el esfuerzo del gobierno por censurar a los medios: cuanto MAS "
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
+     "cautela": "Mide el esfuerzo del gobierno por censurar a los medios: cuanto más "
                 "alto, menos censura. No cuenta episodios: es evaluación experta "
                 "codificada por varios especialistas por país y año."},
     {"clave": "hostigamiento_periodistas", "slug": "key-media-freedoms",
      "columna": "v2meharjrn__estimate_best",
      "rotulo": "Ausencia de hostigamiento a periodistas", "eje": "Gobernanza",
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
-     "cautela": "Cuanto MAS ALTO, menos hostigamiento —amenazas, detenciones, "
-                "Agresiones— a periodistas por su trabajo. Mide el clima, no la "
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
+     "cautela": "Cuanto más alto, menos hostigamiento —amenazas, detenciones, "
+                "agresiones— a periodistas por su trabajo. Mide el clima, no la "
                 "cantidad de agresiones: para el recuento de hechos no hay fuente "
                 "regional que responda de forma automatizada."},
     {"clave": "autocensura", "slug": "key-media-freedoms",
      "columna": "v2meslfcen__estimate_best",
-     "rotulo": "Ausencia de autocensura periodistica", "eje": "Gobernanza",
+     "rotulo": "Ausencia de autocensura periodística", "eje": "Gobernanza",
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
-     "cautela": "Cuanto MAS ALTO, menos se callan los medios por temor. Es la medida "
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
+     "cautela": "Cuanto más alto, menos se callan los medios por temor. Es la medida "
                 "del efecto que la censura y el hostigamiento dejan cuando ya no hace "
                 "falta ejercerlos."},
     {"clave": "sesgo_medios", "slug": "key-media-freedoms",
      "columna": "v2mebias__estimate_best",
      "rotulo": "Ausencia de sesgo en la cobertura", "eje": "Gobernanza",
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
-     "cautela": "Cuanto MAS ALTO, mas parejo el trato de los medios a oficialismo y "
-                "oposición. Un valor bajo no dice quien esta favorecido: dice que la "
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
+     "cautela": "Cuanto más alto, más parejo el trato de los medios a oficialismo y "
+                "oposición. Un valor bajo no dice quién está favorecido: dice que la "
                 "cobertura no es pareja."},
     {"clave": "medios_corruptos", "slug": "media-corruption-score",
      "columna": "v2mecorrpt__estimate_best",
      "rotulo": "Ausencia de corrupción en los medios", "eje": "Gobernanza",
      "unidad": "índice de -4 a 4", "mas_es_peor": False,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
-     "cautela": "Cuanto MAS ALTO, menos frecuente que los medios reciban pagos para "
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
+     "cautela": "Cuanto más alto, menos frecuente que los medios reciban pagos para "
                 "publicar, silenciar o torcer una nota. Es la puerta de entrada de la "
                 "desinformación pagada."},
     {"clave": "polarizacion", "slug": "political-polarization-score",
      "columna": "v2cacamps__estimate_best",
      "rotulo": "Polarización política", "eje": "Gobernanza",
      "unidad": "índice de -4 a 4", "mas_es_peor": True,
-     "origen": "V-Dem, Universidad de Gotemburgo, via Our World in Data",
-     "cautela": "ATENCIÓN: en esta el valor ALTO es el PEOR, al revés que las cinco "
-                "anteriores. Mide hasta que punto la sociedad esta partida en campos "
+     "origen": "V-Dem, Universidad de Gotemburgo, vía Our World in Data",
+     "cautela": "Atención: en esta el valor alto es el peor, al revés que las cinco "
+                "anteriores. Mide hasta qué punto la sociedad está partida en campos "
                 "irreconciliables. Nicaragua 3,14 y Venezuela 2,23 contra Uruguay -1,81 "
                 "con el dato de 2025."},
 ]
@@ -271,12 +271,12 @@ SERIES_RETIRADAS_GTD = [
      "rotulo": "Muertes por atentados terroristas", "eje": "Seguridad",
      "unidad": "personas por año", "mas_es_peor": True,
      "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
-               "via Our World in Data",
-     "cautela": "LA SERIE TERMINA EN 2021: la Base Global de Terrorismo dejo de "
+               "vía Our World in Data",
+     "cautela": "LA SERIE TERMINA EN 2021: la Base Global de Terrorismo dejó de "
                 "actualizarse. No hay dato posterior y no se estima ninguno. Además, "
                 "la definición de terrorismo es disputada y varios Estados de la región "
                 "califican como terrorista a la protesta social. RETIRADA el 21/9/2026: "
-                "su EULA prohíbe la redistribución (ver docstring). REEMPLAZADA ese "
+                "su EULA prohíbe la redistribución. REEMPLAZADA ese "
                 "mismo día por el Global Terrorism Index del IEP (`colectores/gti.py`, "
                 "clave «gti_muertes»), con fuente y licencia propias."},
     {"clave": "terrorismo_atentados", "slug": "terrorist-attacks",
@@ -284,11 +284,11 @@ SERIES_RETIRADAS_GTD = [
      "rotulo": "Atentados terroristas registrados", "eje": "Seguridad",
      "unidad": "hechos por año", "mas_es_peor": True,
      "origen": "Base Global de Terrorismo, consorcio START, Universidad de Maryland, "
-               "via Our World in Data",
+               "vía Our World in Data",
      "cautela": "Misma advertencia: LA SERIE TERMINA EN 2021. Cuenta hechos "
                 "registrados, de modo que un Estado con mejor registro puede aparecer "
                 "peor que uno que no lleva la cuenta. RETIRADA el 21/9/2026: su EULA "
-                "prohíbe la redistribución (ver docstring). REEMPLAZADA ese mismo día "
+                "prohíbe la redistribución. REEMPLAZADA ese mismo día "
                 "por el Global Terrorism Index del IEP (`colectores/gti.py`, clave "
                 "«gti_incidentes»), con fuente y licencia propias."},
 ]
@@ -353,7 +353,7 @@ def recolectar():
             por_pais.setdefault(iso, []).append({"anio": anio, "valor": valor})
 
         if not por_pais:
-            caidas.append(f"{serie['rotulo']}: ningún Estado del padron tiene dato")
+            caidas.append(f"{serie['rotulo']}: ningún Estado del padrón tiene dato")
             continue
 
         # La ventana se cuenta desde el ultimo anio con dato de la propia serie:
@@ -420,22 +420,21 @@ def recolectar():
         "«Terrorismo» además es una definición disputada: varios Estados de la región "
         "califican de terrorista a la protesta social. Esa cautela vale para el Global "
         "Terrorism Index igual que valía para la serie retirada.",
-        "El conflicto entre grupos armados exige 25 muertes anuales para que UCDP lo "
-        "registre. Por debajo de ese umbral el Estado figura en cero sin estar en paz. "
-        "Y cuenta muertes en enfrentamiento, no presencia ni control territorial: no es "
-        "una medida de cuánto territorio dominan los grupos criminales.",
+        "UCDP registra un conflicto entre grupos armados desde 25 muertes anuales: "
+        "por debajo, el Estado figura en cero sin estar en paz. Y cuenta muertes en "
+        "enfrentamiento, no presencia ni control territorial.",
         "Los índices de V-Dem son medición experta codificada, no recuento de hechos. "
         "El proyecto publica un intervalo de incertidumbre por dato; acá se toma la "
         "estimación central y el intervalo no se muestra.",
-        "Percepción democrática y de las instituciones: no hay dato. Latinobarometro y "
-        "el Barometro de las Américas la miden, pero exigen registro para descargar los "
-        "microdatos. Lo que se publica acá es el nivel democratico según especialistas, "
-        "que es otra cosa: mide como funciona el sistema, no que piensa la gente de él.",
+        "Percepción democrática y de las instituciones: no hay dato. Latinobarómetro y "
+        "el Barómetro de las Américas la miden, pero exigen registro para descargar los "
+        "microdatos. Lo que se publica acá es el nivel democrático según especialistas, "
+        "que es otra cosa: mide cómo funciona el sistema, no qué piensa la gente de él.",
         "Defensa, lo que no hay: no existe fuente gratuita que publique los efectivos "
         "desagregados por arma —ejercito, armada, aviación— ni el inventario de "
         "material: vehículos blindados, aeronaves y buques por tipo. El registro de "
         "referencia es el Balance Militar del Instituto Internacional de Estudios "
-        "estrategicos, que es de pagó y no admite redifusión. Lo que se publica acá es "
+        "Estratégicos, que es de pago y no admite redifusión. Lo que se publica acá es "
         "el gasto, los efectivos totales y la adquisición de armamento mayor, que es la "
         "aproximación más cercana al material y no lo reemplaza.",
         "Conflicto urbano: no hay fuente gratuita comparable para los 33. Lo que más se "
@@ -448,7 +447,7 @@ def recolectar():
         fiabilidad="B",
         credibilidad=2,
         corroborado=False,
-        nota=("Proyectos academicos con método publicado y revisión por pares. Se "
+        nota=("Proyectos académicos con método publicado y revisión por pares. Se "
               "consultan por medio de Our World in Data, que republica con licencia "
               "abierta lo que los productores entregan en formatos no consultables. "
               "La responsabilidad por el dato es del productor original, citado en "

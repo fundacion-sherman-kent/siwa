@@ -563,7 +563,7 @@ SERIES_DETENIDAS = {
     "militares_fuerza_laboral": {
         "ultimo_en_la_fuente": 2020, "consultado": "2026-09-03",
         "detalle": "Se consultó al Banco Mundial y su dato más nuevo es de 2020, "
-                   "En 214 países. Depende de la misma fuente que los efectivos.",
+                   "en 214 países. Depende de la misma fuente que los efectivos.",
         "reemplazo": None,
     },
     "rentas_naturales": {
@@ -618,12 +618,12 @@ RESTRICCIONES = {
     # el «compartir igual» SI obliga, y a algo que no se ve: lo derivado de este
     # dato lleva la misma licencia. Se declara para que nadie lo descubra tarde.
     "no_comercial_compartir_igual":
-        "Gratuita para este registro, que es público y no se cobra. La licencia de la "
+        "Gratuita para este registro público. La licencia de la "
         "fuente es de atribución, no comercial y compartir igual (CC BY-NC-SA 3.0 IGO): "
         "este dato no puede viajar a un producto que la Fundación venda, y lo que se "
         "derive de él se publica bajo esa misma licencia.",
     "solo_registro_publico":
-        "Gratuita para este registro, que es público y no se cobra. La licencia de "
+        "Gratuita para este registro público. La licencia de "
         "la fuente es de atribución no comercial: este dato no puede viajar a un "
         "producto que la Fundación venda sin tomar antes una licencia comercial.",
     # CC BY-NC-SA 4.0 (no confundir con la 3.0 IGO de arriba: es otra version y
@@ -632,7 +632,7 @@ RESTRICCIONES = {
     # publica directa; la Direccion la gestiono y bajo el archivo a mano el
     # 21/9/2026 (ver `colectores/fijas/gti-iep-2026/LEEME.md`).
     "gti_iep_no_comercial":
-        "Gratuita para este registro, que es público y no se cobra. La licencia de "
+        "Gratuita para este registro público. La licencia de "
         "la fuente es de atribución, no comercial y compartir igual (CC BY-NC-SA "
         "4.0), con atribución obligatoria al Institute for Economics & Peace "
         "(IEP): este dato no puede viajar a un producto que la Fundación venda, y "
@@ -709,7 +709,7 @@ def escribir(
         contenido["procedencia"]["vacios_declarados"].append(
             f"SERIE DETENIDA EN {len(quietas)} INDICADOR"
             f"{'ES' if len(quietas) > 1 else ''}: {detalle}. No es dato viejo que se "
-            "vaya a poner al día: se le pregunto a la fuente y no tiene nada más "
+            "vaya a poner al día: se le preguntó a la fuente y no tiene nada más "
             "nuevo. Se declara y no se borra, porque borrarlo escondería que la "
             "región no tiene medida vigente de esas materias."
         )

@@ -141,7 +141,7 @@ CANDIDATAS = [
         "rotulo": "Cuba — oficina nacional de estadística",
         "url": "https://onei.gob.cu/",
         "porque": "Es la única vía oficial de cifras cubanas. Sin ella, Cuba queda "
-                  "descrita sólo por fuentes de terceros. Su sitio YA RESPONDE y está "
+                  "descrita solo por fuentes de terceros. Su sitio YA RESPONDE y está "
                   "en el padrón de oficinas de estadística; lo que falta es que "
                   "publique algo consultable por máquina.",
         "traba": "Responde como sitio para personas: no expone catálogo ni interfaz.",
@@ -204,11 +204,11 @@ CANDIDATAS = [
         "porque": "Los observatorios de la propia región miden con más detalle que "
                   "cualquier organismo mundial, y son la fuente que la doctrina subnacional "
                   "pide para contrastar lo que dice el Estado sobre sí mismo.",
-        "traba": "NINGUNO PUBLICA PARA MÁQUINAS. CERAC rechaza al programa con un 406, "
+        "traba": "Ninguno publica para máquinas. CERAC rechaza al programa con un 406, "
                  "Ideas para la Paz no responde, el de Guatemala tampoco, y el de Honduras "
                  "entrega páginas web. Publican informes en PDF para personas. Que un "
-                 "observatorio de transparencia no sea legible por máquina ES EN SÍ MISMO "
-                 "UN DATO sobre el acceso a la información en la región.",
+                 "observatorio de transparencia no sea legible por máquina es en sí mismo "
+                 "un dato sobre el acceso a la información en la región.",
     },
     {
         "clave": "ilostat",
@@ -238,8 +238,8 @@ CANDIDATAS = [
         "porque": "Banco regional con datos propios de América Latina y el Caribe. Su "
                   "catálogo abierto tiene 1.591 conjuntos y responde sin credencial.",
         "traba": "La dirección anterior estaba mal y por eso daba 404: la buena es "
-                 "data.iadb.org, no mydata. Lo que publica son en su mayoría MICRODATOS "
-                 "DE INVESTIGACIÓN —encuestas asociadas a papers— y no series de "
+                 "data.iadb.org, no mydata. Lo que publica son en su mayoría microdatos "
+                 "de investigación —encuestas asociadas a papers— y no series de "
                  "indicadores comparables entre países, que es lo que este registro usa. "
                  "Sirve para bajar a un tema puntual, no como segunda fuente de una "
                  "materia.",
@@ -410,11 +410,11 @@ def recolectar():
         "veces puede ser excelente y estar sobrecargada.",
         "Responder no es servir. Un 200 con cero bytes no sirve para nada, de modo que un "
         "intento cuenta como bueno solo si además devolvió contenido.",
-        "La medición es desde una sola maquina y una sola red. Una fuente puede estar viva "
+        "La medición es desde una sola máquina y una sola red. Una fuente puede estar viva "
         "para el mundo y caída para el robot: la cifra dice cuánto pudo usarla este "
         "registro, que es justamente lo que hay que saber antes de construir encima.",
-        f"SE CONSERVAN LOS ULTIMOS {MEMORIA} INTENTOS por candidata. Mas atras no se "
-        "guarda, de modo que la disponibilidad describe el periodo reciente y no toda la "
+        f"Se conservan los últimos {MEMORIA} intentos por candidata y no se guarda más "
+        "atrás, de modo que la disponibilidad describe el período reciente y no toda la "
         "historia.",
         "Una candidata que no figura acá no fue descartada: es que nadie la puso en la "
         "lista. El banco prueba lo que se le declara, no todo lo que existe.",
@@ -424,10 +424,10 @@ def recolectar():
         fiabilidad="A",
         credibilidad=1,
         corroborado=True,
-        nota=("Medicion propia del robot sobre su propia capacidad de alcanzar cada "
-              "fuente. Fiabilidad a y credibilidad 1 porque el hecho medido es la "
-              "respuesta que el registro recibio: no hay intermediario entre la "
-              "observacion y quien la publica, y cada intento queda con su fecha."),
+        nota=("Medición del robot sobre su propia capacidad de alcanzar cada "
+              "fuente. Fiabilidad A y credibilidad 1 porque el hecho medido es la "
+              "respuesta que el registro recibió: no hay intermediario entre la "
+              "observación y quien la publica, y cada intento queda con su fecha."),
     )
 
     sirven = [r for r in registros if r["veredicto"] == "sirve_siempre"]

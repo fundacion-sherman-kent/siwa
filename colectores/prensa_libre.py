@@ -129,29 +129,29 @@ def recolectar():
         "desinformación, y otro puede tener poca desinformación visible porque nadie "
         "puede publicar nada. La relación suele ser inversa a la intuición: donde la "
         "prensa está más cercada, menos desinformación se detecta, porque detectarla "
-        "tambien es publicar.",
+        "también es publicar.",
         "Es evaluación experta, no medición instrumental. El puntaje sale de una "
-        "encuesta a periodistas, academicos y defensores de derechos humanos, combinada "
+        "encuesta a periodistas, académicos y defensores de derechos humanos, combinada "
         "con un recuento de abusos. Dos personas informadas pueden puntuar distinto el "
         "mismo país, y por eso entra calificada como evaluación y no como registro.",
-        f"NO EVALUA A LOS {len(sinEvaluar)} ESTADOS MAS CHICOS DEL CARIBE: "
+        f"NO EVALÚA A LOS {len(sinEvaluar)} ESTADOS MÁS CHICOS DEL CARIBE: "
         f"{', '.join(sinEvaluar)}. Eso NO significa que tengan prensa libre ni que no la "
-        "tengan: significa que la fuente no los evalua, y el registro lo dice en lugar "
+        "tengan: significa que la fuente no los evalúa, y el registro lo dice en lugar "
         "de dejarlos en blanco.",
-        "El puesto Mundial ordena contra 180 países, no contra los 33 del padrón. Un "
+        "El puesto mundial ordena contra 180 países, no contra los 33 del padrón. Un "
         "Estado de la región puede estar bien situado en el mundo y mal en su zona, o al "
         "revés: son dos preguntas distintas y esta cifra contesta la primera.",
-        "Una edición por año. Entre ediciones la cifra no se mueve aunque el país si: "
-        "Sirve para comparar Estados en un momento, no para seguir una crisis.",
+        "Una edición por año. Entre ediciones la cifra no se mueve aunque el país sí: "
+        "sirve para comparar Estados en un momento, no para seguir una crisis.",
     ]
 
     calificacion = comun.calificar(
         fiabilidad="B",
         credibilidad=3,
         corroborado=False,
-        nota=("Organizacion internacional de defensa de la libertad de prensa, con "
-              "metodologia publicada y serie anual. Fiabilidad B porque es una "
-              "organización con posición tomada sobre la materia que mide —lo cuál no la "
+        nota=("Organización internacional de defensa de la libertad de prensa, con "
+              "metodología publicada y serie anual. Fiabilidad B porque es una "
+              "organización con posición tomada sobre la materia que mide —lo cual no la "
               "invalida, pero se declara—. Credibilidad 3 porque el puntaje es "
               "evaluación experta agregada, no un hecho verificable de forma "
               "independiente."),
@@ -195,7 +195,7 @@ def recolectar():
                           "libertad de prensa",
                 "cautela": "SEGUNDA FUENTE del bloque de prensa, que hasta hoy media solo "
                            "V-Dem: dos organizaciones distintas evaluando lo mismo "
-                           "permiten ver si coinciden. Es una EVALUACION DE ESPECIALISTAS "
+                           "permiten ver si coinciden. Es una EVALUACIÓN DE ESPECIALISTAS "
                            "combinada con un recuento de agresiones, no un recuento puro. "
                            "Cien es el mejor puntaje posible y cero el peor.",
             }],

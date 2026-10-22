@@ -117,24 +117,24 @@ def main():
     calificacion = comun.calificar(
         fiabilidad="C", credibilidad=3, corroborado=False,
         nota=("GDELT: intensidad NORMALIZADA de la cobertura de prensa sobre conflicto (protesta, "
-              "disturbios, represion, violencia politica) del pais en los ultimos 14 dias. Fiabilidad "
-              "C y credibilidad 3 a proposito: es una senal MEDIATICA en tiempo real, no un recuento "
-              "de hechos verificados -eso es ACLED-. Util como alerta temprana, no como dato duro."),
+              "disturbios, represión, violencia política) del país en los últimos 14 días. Fiabilidad "
+              "C y credibilidad 3 a propósito: es una señal MEDIÁTICA en tiempo real, no un recuento "
+              "de hechos —eso es ACLED—. Útil como alerta temprana, no como dato duro."),
     )
     vacios = [
-        "Pulso MEDIATICO, no recuento de hechos: mide cuanto se HABLA de conflicto, no cuantos hubo. "
-        "El dato verificado de eventos de violencia politica es ACLED, que SIWA ya tiene.",
-        "Ventana movil de 14 dias: sube y baja con la actualidad, no es un acumulado.",
-        "Intensidad normalizada (share de la cobertura) para comparar paises grandes y chicos; los "
-        "paises con poca prensa monitoreada dan senal ruidosa.",
-        "La busqueda usa el nombre del pais + terminos de conflicto en prensa en castellano y portugues.",
+        "Pulso MEDIÁTICO, no recuento de hechos: mide cuánto se HABLA de conflicto, no cuántos hubo. "
+        "El dato de eventos de violencia política es ACLED, que ya se publica en este registro.",
+        "Ventana móvil de 14 días: sube y baja con la actualidad, no es un acumulado.",
+        "Intensidad normalizada (proporción de la cobertura) para comparar países grandes y chicos; los "
+        "países con poca prensa monitoreada dan señal ruidosa.",
+        "La búsqueda usa el nombre del país + términos de conflicto en prensa en castellano y portugués.",
     ]
     indicadores = [{
         "clave": "conflicto_gdelt",
-        "nombre": "Pulso mediatico de conflicto (GDELT, 14 dias)",
+        "nombre": "Pulso mediático de conflicto (GDELT, 14 días)",
         "unidad": "intensidad de cobertura (x100)",
         "origen": "GDELT",
-        "rotulo": "Senal mediatica en tiempo real; NO es recuento de hechos (eso es ACLED)",
+        "rotulo": "Señal mediática en tiempo real; NO es recuento de hechos (eso es ACLED)",
     }]
     comun.escribir(
         colector="gdelt_conflicto",

@@ -262,7 +262,7 @@ def recolectar():
                 "consultado": comun.ahora(),
             },
             "licencia": ("Datos «transformados» de UN Comtrade (agregación y reordenamiento). "
-                         "SIWA se considera uso no comercial. Confirmar suscripción premium activa."),
+                         "Este registro se considera de uso no comercial. Confirmar suscripción premium activa."),
         },
     )
 

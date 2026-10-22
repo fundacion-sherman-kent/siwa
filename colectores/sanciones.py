@@ -99,17 +99,17 @@ def recolectar():
 
     vacios = [
         "Esto no ordena Estados y no es una medida de corrupción. La lista mundial la "
-        "encabeza Estados unidos con más de doscientos sesenta mil registros, y no es el "
+        "encabeza Estados Unidos con más de doscientos sesenta mil registros, y no es el "
         "país más sancionado del mundo: es el que mejor publica quienes son sus "
         "funcionarios. Aparecer mucho puede indicar transparencia, no lo contrario.",
-        "La cifra se mueve por tres cosas ajenas a la conducta del Estado medido: quien "
-        "sanciona a quien —que es un acto geopolitico de terceros—, que tan completo es "
+        "La cifra se mueve por tres cosas ajenas a la conducta del Estado medido: quién "
+        "sanciona a quién —que es un acto geopolítico de terceros—, qué tan completo es "
         "el registro público de funcionarios de ese Estado, y el tamaño del país.",
         "Persona expuesta no es persona sospechada. La categoría incluye a funcionarios "
         "en ejercicio por el solo hecho de serlo: un ministro figura por ser ministro. "
         "Leer estas cifras como recuento de delincuentes sería un error grave.",
         "Se publica el recuento, no los nombres. El registro no reproduce identidades: "
-        "Publica cuántos registros hay y manda a la fuente, que es donde cada caso tiene "
+        "publica cuántos registros hay y manda a la fuente, que es donde cada caso tiene "
         "su rastro y su fecha.",
         "Un Estado en cero no está limpio: puede no tener registro público de "
         "funcionarios que la fuente haya podido incorporar. La ausencia acá dice más "
@@ -120,8 +120,8 @@ def recolectar():
         fiabilidad="B",
         credibilidad=2,
         corroborado=False,
-        nota=("Consolidador que reune listas oficiales de sanciones y registros de "
-              "personas politicamente expuestas de multiples jurisdicciones. Fiabilidad B "
+        nota=("Consolidador que reúne listas oficiales de sanciones y registros de "
+              "personas políticamente expuestas de múltiples jurisdicciones. Fiabilidad B "
               "porque es un tercero que agrega, no el organismo que sanciona. "
               "Credibilidad 2 porque se verificó el recuento que la fuente publica, no "
               "cada registro individual."),

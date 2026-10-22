@@ -88,9 +88,9 @@ def construir() -> Path:
             "NO ES DELITO: es un accidente de tránsito. No se suma ni se compara con homicidios o "
             "robos, que son otra categoría del mismo CSV.",
             "SOLO ARGENTINA (24 provincias): el resto de la región no tiene, hoy, un archivo "
-            "equivalente ya leído por SIWA con este mismo costo de descarga cero.",
-            "UNA SOLA FUENTE: no hay segunda fuente que corrobore por provincia (regla de casa, "
-            "doctrina/fuentes.md §2 ter) — se publica igual, rotulado como oficial única.",
+            "equivalente ya leído acá con este mismo costo de descarga cero.",
+            "UNA SOLA FUENTE: no hay segunda fuente que corrobore por provincia; "
+            "se publica igual, rotulado como oficial única.",
         ],
         extra={"resumen": {"estados_con_desglose": 1,
                            "unidades_totales": len(unidades),

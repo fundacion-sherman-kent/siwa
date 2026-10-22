@@ -268,8 +268,8 @@ def construir() -> Path:
         "El porcentaje de población urbana NO es el total de habitantes: no sirve como "
         "denominador para convertir recuentos en tasas.",
         "El índice de corrupción es una ESTIMACIÓN del productor, no un recuento de hechos "
-        "comprobables. No debe leerse con la misma vara que el Índice de Opacidad de esta "
-        "casa, que mide actos observables.",
+        "comprobables. No debe leerse con la misma vara que nuestro Índice de Opacidad, "
+        "que mide actos observables.",
         "Los nombres se cotejaron a máquina, tolerando una letra de diferencia y solo una. "
         "Hizo falta porque las erratas están de los dos lados: la fuente escribe «Arbucania» "
         "por Araucanía y «Canideyu» por Canindeyú, y el padrón heredó de la CEPAL nombres "

@@ -93,7 +93,7 @@ def recolectar():
 
     if len(registros) < 10:
         raise RuntimeError(
-            f"Sólo se leyeron {len(registros)} Estados de GFI y deberían ser más de veinte. La "
+            f"Solo se leyeron {len(registros)} Estados de GFI y deberían ser más de veinte. La "
             "planilla cambió de forma o los nombres no coinciden. NO se publica.")
 
     registros.sort(key=lambda r: -r["brecha_usd_millones"])
@@ -128,7 +128,7 @@ def recolectar():
                 "brecha_total_ultimo_anio_usd_millones": sum(r["brecha_usd_millones"] for r in registros),
                 "consultado": comun.ahora(),
             },
-            "licencia": ("GFI, licencia CC BY-NC-ND. SIWA se considera uso no comercial; se cita a GFI "
+            "licencia": ("GFI, licencia CC BY-NC-ND. Este registro se considera de uso no comercial; se cita a GFI "
                          "y no se altera el dato original."),
         },
     )

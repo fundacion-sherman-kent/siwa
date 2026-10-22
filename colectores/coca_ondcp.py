@@ -65,24 +65,24 @@ def main():
 
     calificacion = comun.calificar(
         fiabilidad="B", credibilidad=2, corroborado=False,
-        nota=("Estimacion oficial del gobierno de EE.UU. (ONDCP / Crime and Narcotics "
+        nota=("Estimación oficial del gobierno de EE.UU. (ONDCP / Crime and Narcotics "
               "Center). Fiabilidad B: fuente oficial con historial. Credibilidad 2: es una "
-              "estimacion por teledeteccion y modelo, metodologicamente distinta de UNODC y "
+              "estimación por teledetección y modelo, metodológicamente distinta de UNODC y "
               "no verificable de forma independiente. Entra como SEGUNDA fuente del cultivo "
               "de coca: corrobora a UNODC por ser productor distinto, sin reemplazarlo."),
     )
     vacios = [
-        "Solo Colombia, Peru y Bolivia: es donde EE.UU. publica la estimacion de coca.",
-        "La cifra de EE.UU. NO coincide con la de UNODC -otra metodologia- y no debe "
+        "Solo Colombia, Perú y Bolivia: es donde EE.UU. publica la estimación de coca.",
+        "La cifra de EE.UU. NO coincide con la de UNODC —otra metodología— y no debe "
         "mezclarse en una sola serie: son dos mediciones del mismo hecho.",
-        f"No suma frescura: la ultima edicion publica de ONDCP llega a {ultima}, mas vieja "
+        f"No suma frescura: la última edición pública de ONDCP llega a {ultima}, más vieja "
         "que UNODC. Aporta independencia, no actualidad.",
-        "Las hectareas de 2020 son las REVISADAS en la edicion 2022; una estimacion de EE.UU. "
-        "de un ano se corrige en la edicion siguiente.",
+        "Las hectáreas de 2020 son las REVISADAS en la edición 2022; una estimación de EE.UU. "
+        "de un año se corrige en la edición siguiente.",
     ]
     indicadores = [{
         "clave": "cultivo_coca_ondcp",
-        "nombre": "Cultivo de coca (estimacion de EE.UU., ONDCP)",
+        "nombre": "Cultivo de coca (estimación de EE.UU., ONDCP)",
         "unidad": "hectareas",
         "origen": "ONDCP (Casa Blanca, EE.UU.)",
         "rotulo": "Segunda fuente, independiente de UNODC",
@@ -90,8 +90,8 @@ def main():
     comun.escribir(
         colector="coca_ondcp",
         capa="publico",
-        fuente=("ONDCP -- Oficina de Politica Nacional de Control de Drogas de la Casa Blanca "
-                "(EE.UU.), estimacion de cultivo de coca y produccion potencial de cocaina en la region andina"),
+        fuente=("ONDCP — Oficina de Política Nacional de Control de Drogas de la Casa Blanca "
+                "(EE.UU.), estimación de cultivo de coca y producción potencial de cocaína en la región andina"),
         url_fuente=(ediciones[-1]["url"] if ediciones else "https://www.whitehouse.gov/ondcp/"),
         calificacion=calificacion,
         registros=registros,
@@ -100,7 +100,7 @@ def main():
             "indicadores": indicadores,
             "ediciones": ediciones,
             "produccion_cocaina_t": {iso: series.get(iso, []) for iso in PAIS},
-            "licencia": "Obra del gobierno de EE.UU.: dominio publico. Se cita la fuente.",
+            "licencia": "Obra del gobierno de EE.UU.: dominio público. Se cita la fuente.",
         },
     )
     print(f"[coca_ondcp] {len(registros)} paises, cultivo de coca ONDCP hasta {ultima} "

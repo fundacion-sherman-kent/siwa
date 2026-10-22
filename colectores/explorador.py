@@ -215,24 +215,24 @@ def recolectar():
 
     vacios = [
         "Este colector propone, no publica. No agrega nada al registro: toca puertas, "
-        "anota cuál abrió y con que forma, y deja el hallazgo declarado para que una "
-        "persona decida. Un colector que se autoalimentara con lo que encuentra romperia "
+        "anota cuál abrió y con qué forma, y deja el hallazgo declarado para que una "
+        "persona decida. Un colector que se autoalimentara con lo que encuentra rompería "
         "la única regla que hace confiable a este registro: que todo lo que se afirma, se "
-        "probo.",
-        "«cierra» no es «no esta», y ninguno de los dos es «no publica». Un 403 o un 401 "
+        "probó.",
+        "«cierra» no es «no está», y ninguno de los dos es «no publica». Un 403 o un 401 "
         "significan que el portal existe y rechaza a los programas —publica para personas "
-        "Y no para maquinas—. Un 404 significa que no hay nada en esa dirección, que "
+        "y no para máquinas—. Un 404 significa que no hay nada en esa dirección, que "
         "puede ser porque el portal está en otra. Confundirlos fue lo que dejó a seis "
         "Estados mal descritos.",
-        "Solo se prueban dominios oficiales ya verificados, nunca direcciones deducidas "
-        "por analogia. Suponer que «si Perú usa datos.gob.pe entonces Bolivia usara "
+        "Solo se prueban dominios oficiales ya comprobados, nunca direcciones deducidas "
+        "por analogía. Suponer que «si Perú usa datos.gob.pe entonces Bolivia usará "
         "datos.gob.bo» es exactamente como se llega a una dirección inexistente y se la "
         "anota como Estado opaco.",
         "Que un Estado no abra ninguna puerta no significa que no publique datos. "
-        "Significa que no se halló un catálogo legible por maquina en los dominios "
+        "Significa que no se halló un catálogo legible por máquina en los dominios "
         "probados y en los dialectos conocidos. Puede publicar en PDF, en otra dirección "
-        "O con un dialecto que este colector todavía no conoce.",
-        f"ANTES DE CREER UN VACIO SE PRUEBA EL EXPLORADOR contra {CONTROL}, que publica "
+        "o con un dialecto que este colector todavía no conoce.",
+        f"ANTES DE CREER UN VACÍO SE PRUEBA EL EXPLORADOR contra {CONTROL}, que publica "
         "catálogo abierto. Si ese no abre, la corrida se detiene entera en lugar de "
         "publicar un mapa de puertas cerradas que en realidad son un error propio.",
         "La cantidad de conjuntos es la que declara el portal, no un recuento propio, y "
@@ -244,11 +244,11 @@ def recolectar():
         fiabilidad="A",
         credibilidad=1,
         corroborado=True,
-        nota=("Medicion propia de la Oficina: se consulta cada dominio oficial y se "
-              "registra lo que contesta. Fiabilidad a porque el productor es esta casa y "
-              "el método esta escrito. Credibilidad 1 porque el hecho registrado —que una "
-              "dirección respondio de tal modo en tal momento— se verifica por si mismo y "
-              "cualquiera puede repetir la consulta: la corroboracion es la reproducibilidad."),
+        nota=("Medición propia de la Oficina: se consulta cada dominio oficial y se "
+              "registra lo que contesta. Fiabilidad A porque el productor es la Fundación y "
+              "el método está escrito. Credibilidad 1 porque el hecho registrado —que una "
+              "dirección respondió de tal modo en tal momento— se verifica por sí mismo y "
+              "cualquiera puede repetir la consulta: la corroboración es la reproducibilidad."),
     )
 
     return comun.escribir(

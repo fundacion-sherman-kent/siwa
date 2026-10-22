@@ -185,14 +185,9 @@ def construir() -> Path:
         "es la mejor disponible y no es un conteo.",
         "NO SE PUBLICAN HOMICIDIOS POR ESTA VÍA, y no es un olvido: el registro ya los "
         "tiene de tres fuentes distintas, y una cuarta no corrobora nada nuevo.",
-        "El suicidio no aparece en ninguna estadística criminal porque no es un delito, y "
-        "en varios Estados del padrón mata más gente que el homicidio. Contar solo "
-        "homicidios describe una parte de la muerte violenta.",
-        "En los Estados chicos del Caribe, el número de casos de mortalidad materna es tan "
-        "bajo que un año cualquiera salta mucho sin que haya cambiado nada. Se lee la serie "
-        "entera, no el último punto.",
-        "La esperanza de vida llega hasta 2021 e incluye el golpe de la pandemia, que en la "
-        "región fue grande: comparar 2021 con 2019 no describe una tendencia.",
+        "Contar solo homicidios describe una parte de la muerte violenta.",
+        "En los Estados chicos del Caribe, la mortalidad materna se lee en la serie "
+        "entera, no en el último punto.",
     ]
     if sin_dato:
         vacios.append(f"{len(sin_dato)} Estados sin ninguna de estas medidas: "

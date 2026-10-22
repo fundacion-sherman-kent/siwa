@@ -315,8 +315,8 @@ def recolectar():
                 "origen": "Transparency International — Índice de Percepción de la Corrupción",
                 "cautela": "MIDE PERCEPCIÓN, no hechos: combina evaluaciones de especialistas "
                            "y encuestas a empresarios. Cien es el mejor puntaje posible. No "
-                           "se compara con el Índice de Opacidad de esta casa, que mide actos "
-                           "observables: son dos cosas distintas y confundirlas seria un error.",
+                           "se compara con nuestro Índice de Opacidad, que mide actos "
+                           "observables: son dos cosas distintas y confundirlas sería un error.",
             }],
             "cobertura": {"percepcion_corrupcion": sum(
                 1 for r in registros if (r.get("indicadores") or {}).get("percepcion_corrupcion"))},

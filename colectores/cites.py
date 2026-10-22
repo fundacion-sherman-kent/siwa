@@ -232,12 +232,12 @@ def recolectar():
 
     vacios = [
         "Lo que esta base registra es comercio legal, no tráfico. Cada asiento nace de "
-        "un permiso o de un informe anual que una Parte del tratado presento. El tráfico "
+        "un permiso o de un informe anual que una Parte del tratado presentó. El tráfico "
         "ilegal, por definición, no tiene permiso y no entra acá. Este colector no mide "
         "contrabando de fauna, y la materia de contrabando sigue sin fuente propia.",
-        "«origen en decomiso» no es «cantidad de decomisos». El codigo marca especimenes "
+        "«origen en decomiso» no es «cantidad de decomisos». El código marca especímenes "
         "cuyo origen declarado es una incautación, y el asiento aparece cuando ese "
-        "especimen se mueve después —a un centro de rescate, a un zoologico, a "
+        "espécimen se mueve después —a un centro de rescate, a un zoológico, a "
         "investigación—. Un Estado con muchos asientos de ese tipo puede tener más "
         "control, más delito, o más movimiento posterior de lo incautado: son tres "
         "explicaciones distintas y esta fuente no elige entre ellas.",
@@ -251,23 +251,23 @@ def recolectar():
         "se sabe si más es mejor o peor. Entra como magnitud, al lado del dato "
         "comparable y nunca adentro.",
         "No se puede saber quién informó. En esta consulta la base no distingue si el "
-        "asiento lo declaro el exportador o el importador. Por eso el registro dice «no "
+        "asiento lo declaró el exportador o el importador. Por eso el registro dice «no "
         "hay asientos de comercio con este Estado después de tal año» y no dice «el "
-        "Estado dejó de informar»: son dos afirmaciones distintas y solo la primera esta "
+        "Estado dejó de informar»: son dos afirmaciones distintas y solo la primera está "
         "probada.",
-        f"LA FUENTE LLEVA UN ANIO Y MEDIO DE REZAGO, y es del tratado, no de la fuente: "
-        f"los informes anuales vencen el 31 de octubre del anio siguiente. El ultimo "
-        f"anio completo es {hasta} y la ventana publicada va de {desde} a {hasta}. Esto "
-        "no sirve para seguir una crisis: sirve para ver un patron de cinco años.",
-        f"UNA PROPORCION SOBRE TRES ASIENTOS NO ES UNA PROPORCION. Los Estados con menos "
+        f"LA FUENTE LLEVA UN AÑO Y MEDIO DE REZAGO, y es del tratado, no de la fuente: "
+        f"los informes anuales vencen el 31 de octubre del año siguiente. El último "
+        f"año completo es {hasta} y la ventana publicada va de {desde} a {hasta}. Esto "
+        "no sirve para seguir una crisis: sirve para ver un patrón de cinco años.",
+        f"UNA PROPORCIÓN SOBRE TRES ASIENTOS NO ES UNA PROPORCIÓN. Los Estados con menos "
         f"de {MINIMO_PARA_PROPORCION} asientos en la ventana llevan su porcentaje MARCADO "
-        "como no comparable: sin ese minimo, Granada quedaba segunda de la región con 4 "
+        "como no comparable: sin ese mínimo, Granada quedaba segunda de la región con 4 "
         "asientos sobre 6 y Santa Lucía tercera con 1 sobre 3, por delante de Bahamas, "
         "que tiene 151 sobre 589. El número se publica igual —esconderlo sería peor—, "
         "pero no se ordena contra los demás.",
         "Antes de creer un número se prueba el instrumento y se prueba el filtro. Esta "
-        "fuente ignora en silencio los parametros que no conoce y devuelve el total sin "
-        "filtrar: un filtro renombrado rio arriba haria publicar «todo es decomiso» en "
+        "fuente ignora en silencio los parámetros que no conoce y devuelve el total sin "
+        "filtrar: un filtro renombrado río arriba haría publicar «todo es decomiso» en "
         f"los 33 Estados sin advertirlo. Se comprueba que {CONTROL} tenga comercio y que "
         "su recuento de decomiso sea estrictamente menor que su total. Si alguna de las "
         "dos falla, la corrida se detiene entera.",
@@ -277,11 +277,11 @@ def recolectar():
         fiabilidad="A",
         credibilidad=3,
         corroborado=False,
-        nota=("Registro administrativo de la secretaria de un tratado internacional, "
-              "Compilado por el centro de vigilancia de la conservación del programa "
-              "ambiental de las Naciones Unidas. Fiabilidad a porque el productor "
+        nota=("Registro administrativo de la secretaría de un tratado internacional, "
+              "compilado por el centro de vigilancia de la conservación del programa "
+              "ambiental de las Naciones Unidas. Fiabilidad A porque el productor "
               "administra el propio tratado. Credibilidad 3 porque lo que se verifica es "
-              "que una parte presento ese informe, no que el informe recoja todo el "
+              "que una parte presentó ese informe, no que el informe recoja todo el "
               "comercio: la base tiene discrepancias conocidas entre lo que declara el "
               "exportador y lo que declara el importador."),
     )

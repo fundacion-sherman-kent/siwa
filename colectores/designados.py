@@ -172,29 +172,29 @@ def recolectar():
 
     vacios = [
         "Que un Estado no tenga designados no significa que no tenga crimen organizado ni "
-        "terrorismo. Los regimenes de sanciones del Consejo son geograficos y politicos, "
-        "no un termometro de amenaza: existen para Al-Qaida, Corea del Norte, Iran, Irak, "
-        "libia, Somalia, Yemen, la República Democrática del Congo, la República "
-        "centroafricana, los talibanes y —desde 2022— Haití. No hay régimen para América "
-        "latina, y por eso la región casi no figura. Leer esta lista como un ranking de "
+        "terrorismo. Los regímenes de sanciones del Consejo son geográficos y políticos, "
+        "no un termómetro de amenaza: existen para Al-Qaida, Corea del Norte, Irán, Irak, "
+        "Libia, Somalia, Yemen, la República Democrática del Congo, la República "
+        "Centroafricana, los talibanes y —desde 2022— Haití. No hay régimen para América "
+        "Latina, y por eso la región casi no figura. Leer esta lista como un ranking de "
         "peligrosidad sería exactamente al revés.",
         "De las personas se publica el recuento, no los nombres. La lista es pública y "
         "cualquiera puede consultarla en la fuente, pero este registro no es un buscador "
-        "de personas: republicar nominas de individuos no agrega nada que la cifra no "
-        "diga. De las entidades si se publica el nombre: son organizaciones y la "
+        "de personas: republicar nóminas de individuos no agrega nada que la cifra no "
+        "diga. De las entidades sí se publica el nombre: son organizaciones y la "
         "publicación es el propósito de la lista.",
         "El vínculo con un Estado puede ser domicilio, nacionalidad o lugar de nacimiento, "
-        "Y no todos significan lo mismo. Que una persona designada haya nacido en un país "
-        "no dice que opere ahi. El registro cuenta el vínculo declarado por la fuente y no "
-        "interpreta cual es.",
-        "Una designación es una decisión política con efectos juridicos, no una condena. "
+        "y no todos significan lo mismo. Que una persona designada haya nacido en un país "
+        "no dice que opere ahí. El registro cuenta el vínculo declarado por la fuente y no "
+        "interpreta cuál es.",
+        "Una designación es una decisión política con efectos jurídicos, no una condena. "
         "El Consejo la adopta por consenso de sus miembros y existe un procedimiento de "
-        "exclusión. El registro publica que está designado y desde cuando; no afirma que "
+        "exclusión. El registro publica que está designado y desde cuándo; no afirma que "
         "sea culpable de nada.",
         "La lista cambia sin aviso: se agregan y se quitan nombres a lo largo del año. "
         "Lo que se publica es la foto del día de la consulta, con su fecha.",
-        f"ANTES DE CREERLE UN CERO A NADIE SE PRUEBA EL LECTOR contra el regimen «{CONTROL}», "
-        f"el mas numeroso del mundo: si devuelve menos de {MINIMO_CONTROL} designados, la "
+        f"ANTES DE CREERLE UN CERO A NADIE SE PRUEBA EL LECTOR contra el régimen «{CONTROL}», "
+        f"el más numeroso del mundo: si devuelve menos de {MINIMO_CONTROL} designados, la "
         "corrida se detiene entera en lugar de publicar treinta y tres ceros que en "
         "realidad significan «no supimos leer».",
     ]
@@ -204,7 +204,7 @@ def recolectar():
         credibilidad=2,
         corroborado=False,
         nota=("Lista consolidada del Consejo de Seguridad de las Naciones Unidas, "
-              "Publicada por su Secretaria. Fiabilidad a porque el productor es el organo "
+              "publicada por su Secretaría. Fiabilidad A porque el productor es el órgano "
               "que adopta la designación: no informa sobre un hecho ajeno, informa sobre "
               "su propia decisión. Credibilidad 2 porque lo que se verifica es la "
               "designación —que consta— y no los hechos que la motivaron, que el registro "

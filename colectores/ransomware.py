@@ -141,17 +141,17 @@ def recolectar():
         "una magnitud que nadie puede calcular. Un Estado con pocos casos puede tener "
         "pocos ataques, o víctimas que pagan más rápido.",
         "Es un recuento, no una tasa. Una economía grande tiene más empresas que atacar. "
-        "Que Brasil encabece la lista no significa que este peor protegido: significa "
+        "Que Brasil encabece la lista no significa que esté peor protegido: significa "
         "que tiene más objetivos. Para comparar hay que leer esto junto con el tamaño "
         "de cada economía y con los usuarios de internet, que este registro publica.",
         "La fuente es el atacante. Los grupos exageran, repiten víctimas viejas y a "
         "veces publican ataques que no ocurrieron. Lo que se observa con certeza es que "
-        "el grupo lo publico, no que el hecho sea como lo cuenta. Por eso la "
+        "el grupo lo publicó, no que el hecho sea como lo cuenta. Por eso la "
         "credibilidad es 4 y no mejor.",
         "El país es el de la sede de la víctima, no necesariamente donde ocurrió el "
         "ataque ni donde estaban los sistemas comprometidos. Una filial atacada puede "
         "figurar en el país de la casa matriz.",
-        "El sector lo clasifica la fuente, no la Fundación, y su criterio no esta "
+        "El sector lo clasifica la fuente, no la Fundación, y su criterio no está "
         "publicado en detalle.",
     ]
     if sin_caso:
@@ -167,7 +167,7 @@ def recolectar():
         credibilidad=4,
         corroborado=False,
         nota=("Recopilación de los sitios de extorsión de los propios grupos atacantes. "
-              "La recopilación es metodica y publica; el contenido lo declara el "
+              "La recopilación es metódica y publica; el contenido lo declara el "
               "delincuente y no se puede corroborar de forma independiente. Se registra "
               "que la publicación existe, no que el hecho sea como se cuenta."),
     )
@@ -198,9 +198,9 @@ def recolectar():
                                        for s, n in sectores_region.most_common(12)],
             "metodo": (
                 "Se consulta el listado de víctimas por país y se cuentan casos, grupos "
-                "Y sectores. no se republica el nombre de ninguna víctima: son empresas "
-                "Y organismos identificables, muchos de ellos damnificados, y nombrarlos "
-                "aquí repetiria la presión que el atacante buscaba. Se publican "
+                "y sectores. No se republica el nombre de ninguna víctima: son empresas "
+                "y organismos identificables, muchos de ellos damnificados, y nombrarlos "
+                "aquí repetiría la presión que el atacante buscaba. Se publican "
                 "recuentos y repartos."
             ),
         },

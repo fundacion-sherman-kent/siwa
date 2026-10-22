@@ -239,7 +239,7 @@ def recolectar():
     robots = sum(r["publicaciones_automatizadas"] for r in registros)
     vacios = [
         f"Se descartaron {robots} publicaciones de cuentas automatizadas, que en su "
-        "mayoría reenvian titulares de prensa. Contarlas como conversación social "
+        "mayoría reenvían titulares de prensa. Contarlas como conversación social "
         "sería contar dos veces la misma noticia, que este registro ya recoge por su "
         "propio canal. La detección usa la declaración de la propia cuenta y, si no la "
         "hay, su nombre: una cuenta automatizada que no se declare puede pasar.",
@@ -251,7 +251,7 @@ def recolectar():
         + (", ".join(sin_circulacion) if sin_circulacion else "ninguno")
         + ". Ausencia de publicaciones no es ausencia de hechos.",
         "X (Twitter) queda fuera: la interfaz devuelve 401 sin clave y no existe nivel "
-        "gratuito de búsqueda. Incorporarlo exige contratar el servicio, que es pagó y "
+        "gratuito de búsqueda. Incorporarlo exige contratar el servicio, que es pago y "
         "mensual: es una decisión de la Dirección, no un problema técnico.",
         "Reddit queda fuera: devuelve 403 al acceso anónimo automatizado y exige "
         "registrar una aplicación y aceptar sus condiciones de uso.",

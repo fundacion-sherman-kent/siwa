@@ -120,7 +120,7 @@ def recolectar():
 
     if len(par) < 30:
         raise RuntimeError(
-            f"Sólo se leyeron {len(par)} pares de trata y deberían ser cientos. El GLOTIP cambió "
+            f"Solo se leyeron {len(par)} pares de trata y deberían ser cientos. El GLOTIP cambió "
             "de forma o vino incompleto. NO se publica.")
 
     registros = []
@@ -140,7 +140,7 @@ def recolectar():
         "equivale a una ruta comprobada.",
         "Los valores «<5» están suprimidos por privacidad en la fuente; se cuentan como 3 (punto "
         "medio de 1 a 4). Por eso el total de un par puede estar levemente sobre o subestimado.",
-        "Se toma sólo el cruce «víctimas detectadas por ciudadanía» con Sex=Total, para no "
+        "Se toma solo el cruce «víctimas detectadas por ciudadanía» con Sex=Total, para no "
         "duplicar con las filas abiertas por sexo. «Own country nationals» y «Unknown» no forman "
         "corredor y se excluyen.",
         "Cubre los pares donde el país de detección o la ciudadanía es uno de los 33 Estados. Los "
@@ -169,7 +169,7 @@ def recolectar():
                 "victimas_totales": round(sum(r["victimas"] for r in registros)),
                 "consultado": comun.ahora(),
             },
-            "licencia": "UNODC, uso no comercial con cita. SIWA se considera uso no comercial.",
+            "licencia": "UNODC, uso no comercial con cita. Este registro se considera de uso no comercial.",
         },
     )
 

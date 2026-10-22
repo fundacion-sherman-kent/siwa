@@ -76,15 +76,15 @@ FAQ = [
      "r": "Cada cifra viene de una fuente oficial o de un organismo internacional, con su fecha y su "
           "calificación de fiabilidad a la vista. Ninguna se inventa: si no se encontró, se dice."},
     {"q": "es gratis precio pagar cuesta registro suscripcion",
-     "r": "Sí. El acceso a SIWA es libre y completo, sin registro y sin costo."},
+     "r": "Sí. El acceso es libre y completo, sin registro y sin costo."},
     {"q": "como se mide la opacidad que es la opacidad",
      "r": "El Índice de Opacidad mide actos observables —qué publica cada Estado y qué no—, no "
           "opiniones. 0 = transparente, 100 = opaco."},
     {"q": "que es siwa que es esto para que sirve",
-     "r": "SIWA es el reporte de situación de los 33 Estados de América Latina y el Caribe: los "
+     "r": "Acá se reúne el reporte de situación de los 33 Estados de América Latina y el Caribe: los "
           "mismos temas con la misma vara, cada dato con su fuente, su fecha y lo que no cubre."},
     {"q": "cada cuanto se actualiza al dia fresco",
-     "r": "Se actualiza solo, de forma continua: un robot revisa las fuentes y publica lo nuevo. "
+     "r": "Se actualiza solo y de forma continua: un robot revisa las fuentes y publica lo nuevo. "
           "Arriba de cada página, «X/X al día» dice cuántas fuentes están al día."},
 ]
 

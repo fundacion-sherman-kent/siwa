@@ -914,8 +914,6 @@ def construir() -> Path:
             "provisionales hasta el cierre."),
         registros=registros,
         vacios=[
-            "ESTAS CIFRAS NO SON COMPARABLES ENTRE PAÍSES Y NO SE SUMAN: cada Estado define el homicidio "
-            "a su manera. Para comparar se usa la serie de la UNODC (Banco Mundial).",
             f"NO ESTÁN LOS 33: hoy hay {len(detalle)} Estados cuya estadística se lee sola ({con_dato}). "
             "Se comprobó el 15/9/2026, portal por portal: Chile y Ecuador rechazan al recolector en el "
             "portal donde está el dato, y el tablero chileno no abre ni con un navegador de verdad; "

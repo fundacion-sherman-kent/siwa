@@ -367,7 +367,7 @@ def recolectar():
     if len(control) < 20:
         raise RuntimeError(
             f"La prueba del lector falló: en {CONTROL} —que tiene puntaje en las 36 "
-            f"medidas— sólo se leyeron {len(control)}. La página cambió de forma. NO se "
+            f"medidas— solo se leyeron {len(control)}. La página cambió de forma. NO se "
             "publica una lectura a ciegas.")
     # Y LA SERIE TAMBIEN SE PRUEBA: Argentina tiene tres ediciones en cada
     # medida. Si no se leyo ninguna, el que fallo es el lector.
@@ -403,25 +403,25 @@ def recolectar():
         "un panel de especialistas con evidencia documental, revisado por pares. Dos "
         "personas informadas pueden puntuar distinto el mismo país.",
         "Un puntaje alto de mercado no dice cuánto. No hay tonelaje, no hay recuento de "
-        "operaciones ni de animales: dice cuan extendido y arraigado está ese mercado "
+        "operaciones ni de animales: dice cuán extendido y arraigado está ese mercado "
         "según el panel. El registro no inventa una cantidad que la fuente no da.",
         "No es tiempo real y no pretende serlo. La edición es bienal —2019, 2021, 2023, "
-        "2025— y describe estructura, no coyuntura: sirve para saber que opera en un "
-        "Estado y con que fuerza, no que pasó anoche. Para lo reciente no hay fuente "
+        "2025— y describe estructura, no coyuntura: sirve para saber qué opera en un "
+        "Estado y con qué fuerza, no qué pasó anoche. Para lo reciente no hay fuente "
         "libre, y el registro lo dice en vez de simularlo.",
         "La resiliencia no es lo contrario de la criminalidad. Son dos medidas "
         "independientes: un Estado puede tener mucha capacidad y crimen arraigado a la "
         "vez. Restarlas o tratarlas como una sola escala sería un error de lectura.",
         "No entra al compuesto del registro. Son treinta y seis medidas nuevas sobre un "
-        "compuesto armado con cuatro ejes: sumarlas de golpe cambiaria el orden de los "
-        "Estados sin que nadie pueda explicar por que. Entran como capa propia y "
+        "compuesto armado con cuatro ejes: sumarlas de golpe cambiaría el orden de los "
+        "Estados sin que nadie pueda explicar por qué. Entran como capa propia y "
         "comparable, con su puesto mundial.",
         "El puesto ordena contra 193 países, no contra los 33 del padrón. Un Estado de la "
         "región puede estar bien situado en el mundo y mal en su zona: son dos preguntas "
         "distintas y esta cifra contesta la primera.",
-        f"ANTES DE CREER UN VACIO SE PRUEBA EL LECTOR contra {CONTROL}, que tiene puntaje "
-        "en las 36 medidas. Si la pagina cambia de forma, el patron deja de encontrar y "
-        "todos los Estados quedarian en blanco: eso no es «no hay datos», es «no supimos "
+        f"ANTES DE CREER UN VACÍO SE PRUEBA EL LECTOR contra {CONTROL}, que tiene puntaje "
+        "en las 36 medidas. Si la página cambia de forma, el patrón deja de encontrar y "
+        "todos los Estados quedarían en blanco: eso no es «no hay datos», es «no supimos "
         "leer», y la corrida se detiene entera.",
     ]
 
@@ -430,10 +430,10 @@ def recolectar():
         credibilidad=3,
         corroborado=False,
         nota=("Iniciativa global contra el crimen organizado transnacional, red de "
-              "expertos con sede en Ginebra y metodologia publicada. La Fundación es "
+              "expertos con sede en Ginebra y metodología publicada. La Fundación es "
               "miembro permanente de la organización que produce el índice. Fiabilidad B "
               "porque es una organización con posición tomada sobre la materia que mide "
-              "—lo cuál no la invalida, pero se declara—. Credibilidad 3 porque el "
+              "—lo cual no la invalida, pero se declara—. Credibilidad 3 porque el "
               "puntaje es evaluación experta agregada, no un hecho verificable de forma "
               "independiente."),
     )

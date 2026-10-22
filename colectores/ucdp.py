@@ -196,7 +196,7 @@ def recolectar():
             "No se publica.")
     if len(porIso) < MINIMO_ESTADOS:
         raise RuntimeError(
-            f"Sólo {len(porIso)} de los 33 Estados encontraron correspondencia de "
+            f"Solo {len(porIso)} de los 33 Estados encontraron correspondencia de "
             f"nombre, y se esperaban al menos {MINIMO_ESTADOS}. Los rótulos de UCDP "
             "cambiaron y publicar así dejaría Estados en cero por un problema de "
             "nombres. No se publica.")

@@ -428,7 +428,7 @@ def _corroboracion(notas: list) -> dict:
     elif not prensa:
         estado, nota = "origen_unico", (
             "Solo lo trataron centros de estudio. Es análisis, no cobertura: "
-            "No corrobora que el hecho haya ocurrido."
+            "no corrobora que el hecho haya ocurrido."
         )
     else:
         estado, nota = "origen_unico", (
@@ -604,7 +604,7 @@ def recolectar():
         "unir dos asuntos distintos que comparten palabras, y puede separar el mismo "
         "asunto contado con vocabulario diferente.",
         (
-            f"El padrón tiene {len(padron)} medios verificados en "
+            f"El padrón tiene {len(padron)} medios en "
             f"{len(paises_padron)} jurisdicciones. **{33 - len({p for p in paises_padron if len(p) == 3})} "
             "Estados del padrón no tienen medio propio en el registro**, y el Caribe "
             "angloparlante es el bloque peor cubierto."
@@ -616,7 +616,7 @@ def recolectar():
             "doctrina/siwa.md §4.1."
         ),
         f"Ventana de {HORAS} horas. {sin_fecha} notas llegaron sin fecha de publicación "
-        "Y se conservaron sin poder verificar su antigüedad.",
+        "y se conservaron sin poder verificar su antigüedad.",
         "Un grupo de una sola nota no se publica: sin cruce no hay cobertura cruzada.",
         "La atribución de un asunto a un país es por diccionario de nombres y "
         "gentilicios, no por comprensión del texto. Un asunto que nombre al país con un "
@@ -669,12 +669,12 @@ def recolectar():
                 "estados_con_alguna_senal": len({e["iso"] for t in senal.values()
                                                  for e in t["estados"]}),
                 "que_es": (
-                    "Que se esta publicando ahora sobre cada materia. No es un "
+                    "Qué se está publicando ahora sobre cada materia. No es un "
                     "indicador y no se mezcla con ninguno: las series estructurales "
-                    "cuentan hechos verificados y llegan con años de rezago; esto "
+                    "cuentan hechos registrados y llegan con años de rezago; esto "
                     "cuenta menciones de las últimas horas. Se muestra al lado del "
                     "dato estructural para decir que hay actividad que esa serie "
-                    "todavia no conto."),
+                    "todavía no contó."),
                 "que_no_es": (
                     "Más notas no significa más hechos: puede significar más "
                     "atención, o un solo hecho cubierto por muchos portales. Y menos "
@@ -683,7 +683,7 @@ def recolectar():
                     "Por mención cuando el título nombra al país —la fuerte— y por "
                     "medio cuando el título no nombra ninguno y el medio es nacional. "
                     "Un diario colombiano no escribe «en Colombia hubo un atentado»: "
-                    "Escribe «atentado en Cali». Cada Estado declara cuántas notas "
+                    "escribe «atentado en Cali». Cada Estado declara cuántas notas "
                     "tiene de cada clase."),
             },
             "fronteras": {

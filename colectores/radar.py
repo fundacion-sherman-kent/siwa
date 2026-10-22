@@ -72,7 +72,7 @@ def llave() -> str:
     if not v:
         raise RuntimeError(
             f"falta la variable {SECRETO}. Es una llave de lectura, gratuita, que se crea "
-            "en el panel de Cloudflare con permiso de sólo lectura sobre Radar, y se carga "
+            "en el panel de Cloudflare con permiso de solo lectura sobre Radar, y se carga "
             "como secreto del repositorio. Sin ella la fuente rechaza toda consulta.")
     return v
 

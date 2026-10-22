@@ -110,9 +110,9 @@ def main():
         titulares.extend(rss(q))
     candidatos = detectar(titulares, anio)
     doc = {
-        "que_es": "Vigia de ediciones nuevas de los reportes de CICAD/OID, por noticias (oas.org tiene "
-                  "muro anti-bot y no se puede vigilar la pagina). Avisa si la prensa menciona una edicion "
-                  "mas nueva que la montada en SIWA, para bajarla a mano y hacer el file-drop. No incorpora.",
+        "que_es": "Vigía de ediciones nuevas de los reportes de CICAD/OID, por noticias (oas.org tiene "
+                  "muro anti-bot y no se puede vigilar la página). Avisa si la prensa menciona una edición "
+                  "más nueva que la montada en este registro, para bajarla a mano y hacer el file-drop. No incorpora.",
         "corrida": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "edicion_montada": anio,
         "titulares_mirados": len(titulares),
