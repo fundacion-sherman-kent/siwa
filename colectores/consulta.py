@@ -122,14 +122,14 @@ MATERIAS = [
     {"materia": "Integridad", "eje": "Gobernanza", "formato": "pdf", "terminos": {
         "es": ["corrupción", "\"declaración jurada\""],
         "pt": ["corrupção", "\"declaração de bens\""],
-        "en": ["corruptión", "\"asset declaratión\""],
-        "fr": ["corruptión", "\"déclaration de patrimoine\""],
+        "en": ["corruption", "\"asset declaration\""],
+        "fr": ["corruption", "\"déclaration de patrimoine\""],
         "nl": ["corruptie", "vermogensverklaring"]}},
     {"materia": "Acceso a la información", "eje": "Gobernanza", "formato": "pdf", "terminos": {
         "es": ["\"acceso a la información\" solicitudes"],
         "pt": ["\"acesso à informação\" pedidos"],
-        "en": ["\"freedom of informatión\" requests"],
-        "fr": ["\"accès à l'informatión\" demandes"],
+        "en": ["\"freedom of information\" requests"],
+        "fr": ["\"accès à l'information\" demandes"],
         "nl": ["\"toegang tot informatie\" verzoeken"]}},
     {"materia": "Ciberseguridad", "eje": "Gobernanza", "formato": "pdf", "terminos": {
         "es": ["ciberseguridad incidentes", "CSIRT"],
@@ -140,7 +140,7 @@ MATERIAS = [
     {"materia": "Desinformación", "eje": "Gobernanza", "formato": "pdf", "terminos": {
         "es": ["desinformación", "\"alfabetización mediática\""],
         "pt": ["desinformação", "\"educação midiática\""],
-        "en": ["disinformatión", "\"media literacy\""],
+        "en": ["disinformation", "\"media literacy\""],
         "fr": ["désinformation", "\"éducation aux médias\""],
         "nl": ["desinformatie", "mediawijsheid"]}},
 ]
