@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "subnacional_robos",
     "capa": "publico",
-    "obtenido_en": "2026-10-21T12:10:51+00:00",
+    "obtenido_en": "2026-10-22T12:15:24+00:00",
     "fuente": {
       "nombre": "Robos/hurtos por unidad de primer orden, de la fuente nacional de cada Estado (Argentina SNIC, Colombia Policía Nacional, Bolivia INE, Trinidad TTPS, República Dominicana — Policía Nacional vía datos.gob.do)",
       "url": "https://www.datos.gov.co/"
@@ -16,10 +16,11 @@
     "vacios_declarados": [
       "ES RECUENTO POR UNIDAD, NO TASA: sin población por unidad no se calcula tasa.",
       "NO SE COMPARA ENTRE PAÍSES: hurto (Colombia), denuncia de robo (Bolivia) y robbery (Trinidad) no son la misma figura legal.",
-      "COBERTURA INICIAL DE TRES ESTADOS: se extiende a Argentina (SNIC), Brasil (BancoVDE), Chile (INE), Panamá y Uruguay en las próximas vueltas."
+      "COBERTURA INICIAL DE TRES ESTADOS: se extiende a Argentina (SNIC), Brasil (BancoVDE), Chile (INE), Panamá y Uruguay en las próximas vueltas.",
+      "No se pudo desagregar: República Dominicana: RuntimeError: RD: faltan columnas esperadas en el CSV de robos."
     ],
     "restriccion_de_uso": null,
-    "cantidad": 8,
+    "cantidad": 7,
     "atribucion": {
       "obra": "SIWA — Reporte de situación de América Latina y el Caribe",
       "autor": "Fundación Sherman Kent — Oficina de Generación de Inteligencia",
@@ -3982,39 +3983,39 @@
       "en_curso": {
         "anio": 2026,
         "por_unidad": {
-          "GUAVIARE": 90,
-          "RISARALDA": 2484,
-          "NORTE DE SANTANDER": 2576,
-          "CESAR": 2621,
-          "SANTANDER": 5538,
-          "CASANARE": 1066,
-          "PUTUMAYO": 215,
-          "HUILA": 4107,
-          "CHOCO": 150,
-          "VAUPES": 35,
-          "CUNDINAMARCA": 10237,
-          "CORDOBA": 1092,
-          "BOLIVAR": 4321,
-          "GUAINIA": 18,
-          "CAUCA": 3805,
-          "QUINDIO": 749,
-          "ANTIOQUIA": 23118,
-          "BOYACA": 1945,
-          "AMAZONAS": 37,
-          "CALDAS": 744,
-          "TOLIMA": 4551,
-          "NARIÑO": 5646,
-          "MAGDALENA": 1976,
-          "ARAUCA": 104,
-          "SAN ANDRES ISLAS": 199,
-          "META": 4203,
-          "VICHADA": 17,
-          "BOGOTA D.C.": 75124,
-          "LA GUAJIRA": 667,
-          "SUCRE": 554,
-          "VALLE DEL CAUCA": 12663,
-          "CAQUETA": 625,
-          "ATLANTICO": 8407
+          "GUAVIARE": 106,
+          "RISARALDA": 2736,
+          "NORTE DE SANTANDER": 3051,
+          "CESAR": 2938,
+          "SANTANDER": 6370,
+          "CASANARE": 1211,
+          "PUTUMAYO": 244,
+          "HUILA": 4623,
+          "CHOCO": 174,
+          "VAUPES": 38,
+          "CUNDINAMARCA": 11500,
+          "CORDOBA": 1240,
+          "BOLIVAR": 5279,
+          "GUAINIA": 20,
+          "CAUCA": 4275,
+          "QUINDIO": 935,
+          "ANTIOQUIA": 26445,
+          "BOYACA": 2248,
+          "AMAZONAS": 43,
+          "CALDAS": 850,
+          "TOLIMA": 5227,
+          "NARIÑO": 6187,
+          "MAGDALENA": 2300,
+          "ARAUCA": 146,
+          "SAN ANDRES ISLAS": 228,
+          "META": 4769,
+          "VICHADA": 22,
+          "BOGOTA D.C.": 86223,
+          "LA GUAJIRA": 744,
+          "SUCRE": 649,
+          "VALLE DEL CAUCA": 14748,
+          "CAQUETA": 712,
+          "ATLANTICO": 10072
         }
       },
       "unidades": [
@@ -10625,529 +10626,13 @@
           ]
         }
       ]
-    },
-    {
-      "iso": "DOM",
-      "pais": "República Dominicana",
-      "bloque": "Caribe hispano y Haití",
-      "nombre_unidad": "provincia",
-      "cuantas": 36,
-      "organismo": "Policía Nacional (PN) — República Dominicana",
-      "licencia": "Portal de Datos Abiertos de la República Dominicana",
-      "nota": "Recuento de casos de robo reportados por provincia, agregado del dato oficial por delito, provincia y mes.",
-      "en_curso": {
-        "anio": 2026,
-        "por_unidad": {
-          "Azua": 115,
-          "Bahoruco": 46,
-          "Barahona": 67,
-          "Dajabon": 22,
-          "Distrito Nacional": 4524,
-          "Duarte": 646,
-          "El Seibo": 118,
-          "Elias Piña": 7,
-          "Espaillat": 132,
-          "Hato Mayor": 55,
-          "Hermanas Mirabal": 35,
-          "Independencia": 19,
-          "La Altagracia": 1423,
-          "La Romana": 563,
-          "La Vega": 271,
-          "Maria Trinidad Sanchez": 99,
-          "Monseñor Nouel": 315,
-          "Monte Cristi": 2,
-          "Monte Plata": 166,
-          "Pedernales": 5,
-          "Peravia": 179,
-          "Puerto Plata": 215,
-          "Samana": 131,
-          "San Juan": 143,
-          "Sanchez Ramirez": 59,
-          "Santiago": 1150,
-          "Santo Domingo": 9831,
-          "Valverde": 160,
-          "San Cristobal": 1300,
-          "San Jose De Ocoa": 68,
-          "San Pedro De Macoris": 442
-        }
-      },
-      "unidades": [
-        {
-          "nombre": "Azua",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 296
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 296
-            }
-          ]
-        },
-        {
-          "nombre": "Bahoruco",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 122
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 122
-            }
-          ]
-        },
-        {
-          "nombre": "Barahona",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 255
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 255
-            }
-          ]
-        },
-        {
-          "nombre": "Dajabon",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 71
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 71
-            }
-          ]
-        },
-        {
-          "nombre": "Distrito Nacional",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 10414
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 10414
-            }
-          ]
-        },
-        {
-          "nombre": "Duarte",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 1192
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 1192
-            }
-          ]
-        },
-        {
-          "nombre": "El Seibo",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 420
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 420
-            }
-          ]
-        },
-        {
-          "nombre": "Elias Piña",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 22
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 22
-            }
-          ]
-        },
-        {
-          "nombre": "Espaillat",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 460
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 460
-            }
-          ]
-        },
-        {
-          "nombre": "Hato Mayor",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 249
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 249
-            }
-          ]
-        },
-        {
-          "nombre": "Hermanas Mirabal",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 158
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 158
-            }
-          ]
-        },
-        {
-          "nombre": "Independencia",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 39
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 39
-            }
-          ]
-        },
-        {
-          "nombre": "La Altagracia",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 2374
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 2374
-            }
-          ]
-        },
-        {
-          "nombre": "La Romana",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 1566
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 1566
-            }
-          ]
-        },
-        {
-          "nombre": "La Vega",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 431
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 431
-            }
-          ]
-        },
-        {
-          "nombre": "Maria Trinidad Sanchez",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 365
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 365
-            }
-          ]
-        },
-        {
-          "nombre": "Monseñor Nouel",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 458
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 458
-            }
-          ]
-        },
-        {
-          "nombre": "Monte Cristi",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 6
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 6
-            }
-          ]
-        },
-        {
-          "nombre": "Monte Plata",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 406
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 406
-            }
-          ]
-        },
-        {
-          "nombre": "Pedernales",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 11
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 11
-            }
-          ]
-        },
-        {
-          "nombre": "Peravia",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 553
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 553
-            }
-          ]
-        },
-        {
-          "nombre": "Puerto Plata",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 733
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 733
-            }
-          ]
-        },
-        {
-          "nombre": "Samana",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 455
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 455
-            }
-          ]
-        },
-        {
-          "nombre": "San Cristobal",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 3988
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 3988
-            }
-          ]
-        },
-        {
-          "nombre": "San Cristonal",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 322
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 322
-            }
-          ]
-        },
-        {
-          "nombre": "San Jose De Ocoa",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 205
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 205
-            }
-          ]
-        },
-        {
-          "nombre": "San Jose de Ocoa",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 37
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 37
-            }
-          ]
-        },
-        {
-          "nombre": "San Juan",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 540
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 540
-            }
-          ]
-        },
-        {
-          "nombre": "San Pedro De Macoris",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 1100
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 1100
-            }
-          ]
-        },
-        {
-          "nombre": "San Pedro de Macoris",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 91
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 91
-            }
-          ]
-        },
-        {
-          "nombre": "Sanchez Ramirez",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 230
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 230
-            }
-          ]
-        },
-        {
-          "nombre": "Santiago",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 3293
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 3293
-            }
-          ]
-        },
-        {
-          "nombre": "Santiago Rodriguez",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 1
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 1
-            }
-          ]
-        },
-        {
-          "nombre": "Santo Domingo",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 22129
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 22129
-            }
-          ]
-        },
-        {
-          "nombre": "Valverde",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 283
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 283
-            }
-          ]
-        },
-        {
-          "nombre": "samana",
-          "ultimo": {
-            "anio": 2025,
-            "valor": 1
-          },
-          "serie": [
-            {
-              "anio": 2025,
-              "valor": 1
-            }
-          ]
-        }
-      ]
     }
   ],
   "resumen": {
-    "estados_con_desglose": 8,
-    "unidades_totales": 190,
+    "estados_con_desglose": 7,
+    "unidades_totales": 154,
     "es_prototipo": true,
     "capa_subnacional": "APAGADA — alimenta el prototipo, no el mapa",
-    "consultado": "2026-10-21T12:10:51+00:00"
+    "consultado": "2026-10-22T12:15:24+00:00"
   }
 }
