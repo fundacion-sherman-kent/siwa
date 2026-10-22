@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-21T22:22:49+00:00",
+  "corrida": "2026-10-22T11:08:43+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3881,
-    "de_ellos_son_parentescos": 412
+    "sobreviven": 3893,
+    "de_ellos_son_parentescos": 413
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3469,
+  "pistas_totales": 3480,
   "anomalias_totales": 398,
   "pistas": [
     {
@@ -75,7 +75,7 @@
     {
       "a": "actores_antidemocraticos",
       "b": "voz_rendicion",
-      "rotulo_a": "Control sobre actores antidemocraticos",
+      "rotulo_a": "Control sobre actores antidemocráticos",
       "rotulo_b": "Voz y rendición de cuentas",
       "coeficiente": 0.969,
       "estados": 22,
@@ -207,10 +207,10 @@
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
+      "coeficiente": 0.941,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 5.470934464770057e-22,
+      "p": 9.854465595101914e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -218,7 +218,7 @@
     {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
-      "rotulo_a": "Control sobre actores antidemocraticos",
+      "rotulo_a": "Control sobre actores antidemocráticos",
       "rotulo_b": "Nivel democrático — democracia electoral",
       "coeficiente": 0.939,
       "estados": 22,
@@ -504,7 +504,7 @@
     {
       "a": "actores_antidemocraticos",
       "b": "estado_derecho_wjp",
-      "rotulo_a": "Control sobre actores antidemocraticos",
+      "rotulo_a": "Control sobre actores antidemocráticos",
       "rotulo_b": "Estado de derecho (WJP)",
       "coeficiente": 0.912,
       "estados": 21,
@@ -606,6 +606,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.903,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.908394263114627e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "financiero_gfi:brecha_usd_millones",
       "b": "ransomware:victimas",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
@@ -666,19 +679,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 1.961550803926828e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.897,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.5157709391562821e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
