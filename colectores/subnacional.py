@@ -164,11 +164,18 @@ def informes_de(j: dict) -> tuple:
 
 
 def construir() -> Path:
-    registros, vacios = [], []
+    registros, vacios, caidas = [], [], []
     for j in JURISDICCIONES:
-        informes, total = informes_de(j)
-        if not informes:
-            raise RuntimeError(f"{j['codigo']}: la fuente no devolvió ningún informe")
+        # TOLERA QUE UNA FUENTE NO RESPONDA. Antes, un bloqueo de la fuente a la IP del
+        # runner —o una respuesta vacía— tumbaba el censo entero. Ahora la caída se
+        # declara y el recorrido sigue; si NINGUNA responde, no se pisa el último censo.
+        try:
+            informes, total = informes_de(j)
+            if not informes:
+                raise RuntimeError("la fuente no devolvió ningún informe")
+        except Exception as error:  # noqa: BLE001 — la caída se declara, no corta la corrida
+            caidas.append(f"{j['unidad']} ({j['codigo']}): {type(error).__name__}: {str(error)[:120]}")
+            continue
 
         # Qué mide, con qué frescura y sobre qué ámbitos. Todo sale del catálogo:
         # ni una cifra se lee de una imagen.
@@ -225,6 +232,19 @@ def construir() -> Path:
             # infografía y no se transcribe a ojo.
             "cifras_leibles": False,
         })
+
+    # Ninguna fuente respondió: se conserva el último censo publicado y la corrida NO se
+    # enrojece por un bloqueo de IP transitorio. La caída queda asentada en el estado.
+    if not registros:
+        aviso = ("Ninguna fuente subnacional respondió en esta corrida (" + " | ".join(caidas)
+                 + "). Se conserva el último censo publicado.")
+        print(f"[subnacional] AVISO: {aviso} No es falla del registro.", file=sys.stderr)
+        comun.escribir_estado(COLECTOR, "correcto", aviso)
+        sys.exit(0)
+    if caidas:
+        vacios.append("No respondieron en esta corrida y quedan fuera del censo hasta la "
+                      "próxima; su ausencia es del recolector, no de la jurisdicción: "
+                      + "; ".join(caidas) + ".")
 
     vacios.append(
         "Este colector NO publica cifras de criminalidad de las jurisdicciones. Publica "
