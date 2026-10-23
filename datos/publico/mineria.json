@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-23T01:29:46+00:00",
+  "corrida": "2026-10-23T07:29:31+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3897,
+    "sobreviven": 3887,
     "de_ellos_son_parentescos": 413
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3484,
+  "pistas_totales": 3474,
   "anomalias_totales": 398,
   "pistas": [
     {
@@ -411,6 +411,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.919,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.880557700910123e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "reservas_internacionales",
       "rotulo_a": "Generación eléctrica",
@@ -432,19 +445,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.612828881614103e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.916,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1192791062576908e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
