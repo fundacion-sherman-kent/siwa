@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-23T18:20:30+00:00",
-  "medidas_con_suficientes_casos": 203,
-  "pares_probados": 20503,
+  "corrida": "2026-10-23T21:09:35+00:00",
+  "medidas_con_suficientes_casos": 202,
+  "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3912,
+    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3851,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3500,
+  "pistas_totales": 3439,
   "anomalias_totales": 398,
   "pistas": [
     {
@@ -177,19 +177,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.945,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6615959368183758e-22,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "financiero_gfi:brecha_usd_millones",
       "b": "reservas_internacionales",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
@@ -198,6 +185,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 6.947418627459578e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.943,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.799579176797691e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -333,19 +333,6 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.928,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 3.794148276745476e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -354,6 +341,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 1.5199678582347144e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:victimas_ultimos_dos_anios",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
+      "coeficiente": 0.927,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 4.2069442889677734e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -411,6 +411,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.917,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 7.531952015337943e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "reservas_internacionales",
       "rotulo_a": "Generación eléctrica",
@@ -432,19 +445,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 1.612828881614103e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.916,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.0186009892286679e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
