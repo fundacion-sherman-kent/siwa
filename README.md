@@ -151,7 +151,7 @@ python colectores/focos.py
 | `drogas` | Informe Mundial sobre las Drogas 2025, anexo estadístico — Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC) | `B-2` | 33 | 4 |
 | `eia` | Administración de Información Energética de los Estados Unidos (EIA) — estadística energética internacional | `A-2` | 33 | 3 |
 | `especies_cites` | CITES Trade Database — UNEP-WCMC para la Secretaría CITES (descarga completa, agregada a ALC) | `B-2` | — | 5 |
-| `estado_reciente` | Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Argentina, Brasil, Colombia, Ecuador, México, Panamá, Perú, Trinidad y Tobago | `A-2` | 33 | 3 |
+| `estado_reciente` | Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Brasil, Colombia, Ecuador, México, Panamá, Perú, Trinidad y Tobago | `A-2` | 33 | 4 |
 | `explorador` | Fundación Sherman Kent — exploración de puertas de datos oficiales | `A-1` | 33 | 6 |
 | `financiero_gfi` | Global Financial Integrity — Trade-Related Illicit Financial Flows in 134 Developing Countries 2009-2018 | `B-2` | 29 | 4 |
 | `fmi_mensual` | Fondo Monetario Internacional — datos estadísticos (SDMX 3.0): liquidez internacional (IL) e índice de precios al consumidor (CPI) | `A-2` | 33 | 4 |
@@ -210,9 +210,9 @@ python colectores/focos.py
 | `subnacional_colombia_secuestro` | Secuestro — Ministerio de Defensa Nacional / Policía Nacional de Colombia, vía datos.gov.co (Socrata) | `A-2` | 1 | 5 |
 | `subnacional_colombia_terrorismo` | Terrorismo / acciones subversivas — Ministerio de Defensa Nacional / Policía Nacional de Colombia, vía datos.gov.co (Socrata) | `A-2` | 1 | 5 |
 | `subnacional_datos` | Fuentes oficiales nacionales que publican por unidad de primer orden: Policía Nacional de Colombia; Sistema Nacional de Información Criminal (SNIC); Ministerio del Interior del Uruguay | `A-2` | 3 | 6 |
-| `subnacional_focos` | Focos de calor por unidad de primer orden — NASA FIRMS agregado sobre geoBoundaries ADM1 | `A-2` | 23 | 3 |
+| `subnacional_focos` | Focos de calor por unidad de primer orden — NASA FIRMS agregado sobre geoBoundaries ADM1 | `A-2` | 22 | 3 |
 | `subnacional_homicidios` | Homicidios por unidad de primer orden, de la fuente nacional de cada Estado (Argentina SNIC, Colombia MinDefensa, Ecuador INEC, Perú CEIC, México SESNSP) | `A-2` | 9 | 4 |
-| `subnacional_robos` | Robos/hurtos por unidad de primer orden, de la fuente nacional de cada Estado (Argentina SNIC, Colombia Policía Nacional, Bolivia INE, Trinidad TTPS, República Dominicana — Policía Nacional vía datos.gob.do) | `A-2` | 8 | 3 |
+| `subnacional_robos` | Robos/hurtos por unidad de primer orden, de la fuente nacional de cada Estado (Argentina SNIC, Colombia Policía Nacional, Bolivia INE, Trinidad TTPS, República Dominicana — Policía Nacional vía datos.gob.do) | `A-2` | 7 | 4 |
 | `subnacional_santafe` | Observatorio de Seguridad Pública de Santa Fe — infografía mensual de homicidios dolosos | `A-2` | 1 | 3 |
 | `subnacional_viales` | Muertes en accidentes viales por provincia — Ministerio de Seguridad, SNIC (Argentina) | `A-2` | 1 | 4 |
 | `subnacional_vigia` | Vigía subnacional de SIWA — reintento sostenido de fuentes por unidad de primer orden | `A-2` | — | 2 |
