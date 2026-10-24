@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-10-23T21:08:12+00:00",
+    "obtenido_en": "2026-10-24T10:50:43+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "6 consultas fallaron en esta corrida: PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
+      "7 consultas fallaron en esta corrida: COL/Integridad: TimeoutError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -51,17 +51,17 @@
           "materia": "Contratación pública",
           "eje": "Gobernanza",
           "consulta": "contrataciones",
-          "cantidad": 1062,
+          "cantidad": 1067,
           "ejemplos": [
-            {
-              "titulo": "PROCESOS CONTRATACION TAURAMENA",
-              "organismo": "TAURAMENA",
-              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
-            },
             {
               "titulo": "Contratacion Emserchia E.S.P.",
               "organismo": "Emserchia",
               "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
+            },
+            {
+              "titulo": "PROCESOS CONTRATACION TAURAMENA",
+              "organismo": "TAURAMENA",
+              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             },
             {
               "titulo": "CONTRATACION CEPITA",
@@ -82,14 +82,14 @@
           "cantidad": 612,
           "ejemplos": [
             {
-              "titulo": "Presupuesto de Gastos",
-              "organismo": "INDUSTRIA MILITAR",
-              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
-            },
-            {
               "titulo": "Presupuesto de Ingresos",
               "organismo": "INDUSTRIA MILITAR",
               "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
+            },
+            {
+              "titulo": "Presupuesto de Gastos",
+              "organismo": "INDUSTRIA MILITAR",
+              "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
             },
             {
               "titulo": "Presupuesto DADEP",
@@ -110,24 +110,24 @@
           "cantidad": 147,
           "ejemplos": [
             {
-              "titulo": "DELITOS SEXUALES",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
-            },
-            {
               "titulo": "DELITOS INFORMÁTICOS",
               "organismo": "Observatorio MDN",
               "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
             },
             {
-              "titulo": "Delitos Informaticos V1",
-              "organismo": "Damicruz",
-              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
+              "titulo": "DELITOS SEXUALES",
+              "organismo": "Observatorio MDN",
+              "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
             },
             {
               "titulo": "Reporte  Delitos sexuales Policía Nacional",
               "organismo": "DIJIN",
               "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
+            },
+            {
+              "titulo": "Delitos Informaticos V1",
+              "organismo": "Damicruz",
+              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
             }
           ]
         },
@@ -181,42 +181,14 @@
               "enlace": "https://www.datos.gov.co/d/ha6j-pa2r"
             },
             {
-              "titulo": "Guadalajara de Buga : Homicidios por Accidente de Tránsito",
-              "organismo": "Alcaldía Municipal de Guadalajara de Buga",
-              "enlace": "https://www.datos.gov.co/d/8rme-4s7n"
-            }
-          ]
-        },
-        {
-          "materia": "Integridad",
-          "eje": "Gobernanza",
-          "consulta": "corrupcion",
-          "cantidad": 59,
-          "ejemplos": [
-            {
-              "titulo": "Programa Interamericano de datos abiertos para la lucha contra la corrupción PIDA",
-              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
-              "enlace": "https://www.datos.gov.co/stories/s/k5ma-yb9b"
-            },
-            {
-              "titulo": "Vista Diagnóstico Conjuntos de Datos Abiertos Programa Interamericano de Lucha Contra la Corrupción PIDA",
-              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
-              "enlace": "https://www.datos.gov.co/d/wmwy-ixwz"
-            },
-            {
-              "titulo": "Gráfico de Disponibilidad de Datos Abiertos del PIDA",
-              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
-              "enlace": "https://www.datos.gov.co/d/6m24-6wiv"
-            },
-            {
-              "titulo": "Base de Datos Riesgos Alcaldía de Cali",
-              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
-              "enlace": "https://www.datos.gov.co/d/tarm-4qgv"
+              "titulo": "Homicidios en el municipio de Neiva",
+              "organismo": "Alcaldía Neiva",
+              "enlace": "https://www.datos.gov.co/d/hk7a-5ix3"
             }
           ]
         }
       ],
-      "conjuntos_hallados": 2072
+      "conjuntos_hallados": 2018
     },
     {
       "iso": "PAN",
@@ -1279,7 +1251,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4657,
+    "conjuntos_hallados": 4603,
     "materias_consultadas": 6,
     "oficinas_que_responden": 23,
     "estados_con_alguna_fuente_oficial": 25
@@ -1366,8 +1338,8 @@
       "organismo": "Oficina Nacional de Estadística y Censos",
       "url": "https://onec.bcr.gob.sv/",
       "nota": "La ONEC reemplazó a la DIGESTYC y vive dentro del Banco Central de Reserva. El dominio propio no existe: buscarlo ahí da la falsa impresión de que El Salvador no publica estadística.",
-      "estado": "sin_respuesta",
-      "detalle": "URLError: <urlopen error timed out>"
+      "estado": "responde",
+      "codigo": 200
     },
     {
       "iso": "GTM",
@@ -1529,8 +1501,8 @@
       "sigla": "DoS",
       "organismo": "Department of Statistics",
       "url": "https://www.stats.gov.kn/",
-      "estado": "responde",
-      "codigo": 200
+      "estado": "sin_respuesta",
+      "detalle": "URLError: <urlopen error timed out>"
     },
     {
       "iso": "LCA",
@@ -1561,8 +1533,8 @@
     "responde": 23,
     "cierra_a_maquinas": 4,
     "certificado_invalido": 1,
-    "sin_respuesta": 2,
     "verificacion_anti_robot": 2,
+    "sin_respuesta": 2,
     "falla_el_servidor": 1
   },
   "sectoriales_verificados": [
@@ -1760,9 +1732,9 @@
               "enlace": "https://data.humdata.org/dataset/impact-reach-crs-fronteras-en-movimiento-evaluacion-transfronteriza-de-necesidades"
             },
             {
-              "titulo": "Índice de ataques violentos a población venezolana en Colombia",
+              "titulo": "Fichas Territoriales",
               "organismo": "iMMAP Inc.",
-              "enlace": "https://data.humdata.org/dataset/indice-de-ataques-violentos-a-poblacion-venezolana-en-colombia"
+              "enlace": "https://data.humdata.org/dataset/fichas-territoriales"
             }
           ]
         },
