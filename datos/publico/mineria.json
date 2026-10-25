@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-25T20:33:45+00:00",
+  "corrida": "2026-10-25T21:46:52+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3841,
+    "sobreviven": 3852,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3429,
+  "pistas_totales": 3440,
   "anomalias_totales": 398,
   "pistas": [
     {
@@ -320,6 +320,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.929,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.457992042567772e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho_wjp",
       "b": "percepcion_corrupcion:puntaje",
       "rotulo_a": "Estado de derecho (WJP)",
@@ -380,19 +393,6 @@
       "estados": 24,
       "tipo": "rangos (Spearman)",
       "p": 1.0444564718830348e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.923,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.0814716110209113e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -476,19 +476,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.914,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.90065130213174e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "produccion_petroleo_eia",
       "b": "reservas_petroleo",
       "rotulo_a": "Producción de petróleo · segunda fuente",
@@ -528,6 +515,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.911,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.460179234787978e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -536,6 +536,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1905778960493398e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.907,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 4.198821501438006e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -666,19 +679,6 @@
       "estados": 26,
       "tipo": "rangos (Spearman)",
       "p": 1.2508660869411333e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.901,
-      "estados": 24,
-      "tipo": "rangos (Spearman)",
-      "p": 1.2349540226082505e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
