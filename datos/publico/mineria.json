@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-25T06:06:19+00:00",
+  "corrida": "2026-10-25T10:45:24+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3832,
+    "sobreviven": 3845,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3420,
+  "pistas_totales": 3433,
   "anomalias_totales": 398,
   "pistas": [
     {
@@ -103,10 +103,10 @@
       "b": "inflacion_interanual",
       "rotulo_a": "Inflación de doce meses, según el FMI",
       "rotulo_b": "Inflación de los últimos doce meses",
-      "coeficiente": 0.958,
+      "coeficiente": 0.959,
       "estados": 30,
       "tipo": "rangos (Spearman)",
-      "p": 1.9833141290455637e-23,
+      "p": 1.1984600831750375e-23,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -164,19 +164,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.947,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.179730475662605e-23,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -185,6 +172,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.6812193451945832e-21,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.945,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.6615959368183758e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -411,6 +411,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.92,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.581019283604508e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "reservas_internacionales",
       "rotulo_a": "Generación eléctrica",
@@ -463,19 +476,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.914,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.810630128414625e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "produccion_petroleo_eia",
       "b": "reservas_petroleo",
       "rotulo_a": "Producción de petróleo · segunda fuente",
@@ -484,19 +484,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 2.0733036532958168e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.913,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.536482784896847e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -523,6 +510,19 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 6.027655962382693e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.911,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.460179234787978e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
