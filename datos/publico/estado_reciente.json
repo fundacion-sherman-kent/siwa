@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "estado_reciente",
     "capa": "publico",
-    "obtenido_en": "2026-10-26T11:49:32+00:00",
+    "obtenido_en": "2026-10-26T18:01:00+00:00",
     "fuente": {
       "nombre": "Estadística oficial de homicidios de cada Estado, leída en la fuente primaria de cada país: Brasil, Colombia, Ecuador, México, Panamá, Perú, Trinidad y Tobago",
       "url": "https://www.argentina.gob.ar/seguridad/estadisticascriminales/bases-de-datos"
@@ -17,7 +17,7 @@
       "NO ESTÁN LOS 33: hoy hay 7 Estados cuya estadística se lee sola (Brasil, Colombia, Ecuador, México, Panamá, Perú, Trinidad y Tobago). Se comprobó el 15/9/2026, portal por portal: Chile y Ecuador rechazan al recolector en el portal donde está el dato, y el tablero chileno no abre ni con un navegador de verdad; Brasil esconde el archivo detrás de una página que no lo enseña; República Dominicana publica robos y feminicidios, pero no la serie de homicidios; Costa Rica tenía todo el dominio del Poder Judicial caído; Uruguay difunde su cifra en informe PDF y en un visualizador, y en su catálogo abierto solo hay imputados, que no son víctimas; El Salvador dejó de publicar la estadística policial en 2022. Venezuela, Cuba y Nicaragua no publican estadística de homicidios. Que un Estado no figure acá no dice nada sobre su violencia: dice que su cifra todavía no se lee sola.",
       "LAS CIFRAS DEL AÑO EN CURSO SON PROVISIONALES: los Estados las corrigen hasta el cierre. Por eso no entran en la serie ni en la variación.",
       "TRINIDAD Y TOBAGO NO DECLARA LICENCIA para su estadística: se publica la cifra con su fuente y enlace, como estadística oficial publicada para el público.",
-      "No respondieron en esta corrida: Argentina: KeyError: 'codigo_delito_snic_nombre'."
+      "No respondieron en esta corrida: Argentina: RuntimeError: No se pudo llegar a https://cloud-snic.minseg.gob.ar/Bases/SNIC/snic-pais.csv: HTTPError: HTTP Error 503: Service Unavailable."
     ],
     "restriccion_de_uso": null,
     "cantidad": 33,
@@ -932,6 +932,6 @@
   },
   "resumen": {
     "estados": 7,
-    "consultado": "2026-10-26T11:49:32+00:00"
+    "consultado": "2026-10-26T18:01:00+00:00"
   }
 }

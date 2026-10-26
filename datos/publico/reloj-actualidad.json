@@ -1,29 +1,25 @@
 {
   "que_es": "Compara el período más nuevo que tiene SIWA con el que publica cada fuente hoy.",
   "controlado": {
-    "utc": "2026-10-22T16:46:37+00:00",
-    "buenos_aires": "22/10/2026 13:46:37"
+    "utc": "2026-10-26T18:27:31+00:00",
+    "buenos_aires": "26/10/2026 15:27:31"
   },
   "reloj": {
     "estado": "sincronizado",
-    "desfase_mediano_segundos": 0.4,
+    "desfase_mediano_segundos": 0.7,
     "tolerancia_segundos": 120,
     "lecturas": [
       {
         "servidor": "https://api.worldbank.org",
-        "desfase_segundos": 0.5
-      },
-      {
-        "servidor": "https://ghoapi.azureedge.net",
-        "desfase_segundos": -0.2
+        "desfase_segundos": 0.7
       },
       {
         "servidor": "https://www.google.com",
-        "desfase_segundos": 0.1
+        "desfase_segundos": 0.2
       },
       {
         "servidor": "https://github.com",
-        "desfase_segundos": 10.2
+        "desfase_segundos": 7.3
       },
       {
         "servidor": "https://www.cloudflare.com",
@@ -32,10 +28,10 @@
     ]
   },
   "resumen": {
-    "comprobados": 56,
-    "al_dia": 56,
+    "comprobados": 52,
+    "al_dia": 52,
     "siwa_atrasado": 0,
-    "no_comprobado": 0
+    "no_comprobado": 4
   },
   "comprobaciones": [
     {
@@ -887,174 +883,53 @@
       "clave": "suicidio",
       "rotulo": "Suicidio",
       "fuente": "OMS",
-      "donde_se_comprobo": "https://ghoapi.azureedge.net/api/SDGSUICIDE",
-      "estado": "al_dia",
+      "donde_se_comprobo": "https://ghoapi.azureedge.net/api/SDGSUICIDE?$filter=ParentLocationCode%20eq%20%27AMR%27",
+      "estado": "no_comprobado",
       "anio_siwa": 2023,
-      "anio_fuente": 2023,
-      "paises_al_dia": 31,
+      "anio_fuente": null,
+      "paises_al_dia": 0,
       "paises_atrasados": [],
-      "paises_con_dato_en_fuente_y_no_en_siwa": []
+      "paises_con_dato_en_fuente_y_no_en_siwa": [],
+      "motivo": "respuesta None"
     },
     {
       "clave": "muertes_transito",
       "rotulo": "Muertes de tránsito",
       "fuente": "OMS",
-      "donde_se_comprobo": "https://ghoapi.azureedge.net/api/RS_198",
-      "estado": "al_dia",
+      "donde_se_comprobo": "https://ghoapi.azureedge.net/api/RS_198?$filter=ParentLocationCode%20eq%20%27AMR%27",
+      "estado": "no_comprobado",
       "anio_siwa": null,
-      "anio_fuente": 2023,
+      "anio_fuente": null,
       "paises_al_dia": 0,
       "paises_atrasados": [],
-      "paises_con_dato_en_fuente_y_no_en_siwa": [
-        {
-          "iso": "ARG",
-          "fuente": 2023
-        },
-        {
-          "iso": "ATG",
-          "fuente": 2023
-        },
-        {
-          "iso": "BHS",
-          "fuente": 2023
-        },
-        {
-          "iso": "BLZ",
-          "fuente": 2023
-        },
-        {
-          "iso": "BOL",
-          "fuente": 2023
-        },
-        {
-          "iso": "BRA",
-          "fuente": 2023
-        },
-        {
-          "iso": "BRB",
-          "fuente": 2023
-        },
-        {
-          "iso": "CHL",
-          "fuente": 2023
-        },
-        {
-          "iso": "COL",
-          "fuente": 2023
-        },
-        {
-          "iso": "CRI",
-          "fuente": 2023
-        },
-        {
-          "iso": "CUB",
-          "fuente": 2023
-        },
-        {
-          "iso": "DOM",
-          "fuente": 2023
-        },
-        {
-          "iso": "ECU",
-          "fuente": 2023
-        },
-        {
-          "iso": "GRD",
-          "fuente": 2023
-        },
-        {
-          "iso": "GTM",
-          "fuente": 2023
-        },
-        {
-          "iso": "GUY",
-          "fuente": 2023
-        },
-        {
-          "iso": "HND",
-          "fuente": 2023
-        },
-        {
-          "iso": "HTI",
-          "fuente": 2023
-        },
-        {
-          "iso": "JAM",
-          "fuente": 2023
-        },
-        {
-          "iso": "LCA",
-          "fuente": 2023
-        },
-        {
-          "iso": "MEX",
-          "fuente": 2023
-        },
-        {
-          "iso": "NIC",
-          "fuente": 2023
-        },
-        {
-          "iso": "PAN",
-          "fuente": 2023
-        },
-        {
-          "iso": "PER",
-          "fuente": 2023
-        },
-        {
-          "iso": "PRY",
-          "fuente": 2023
-        },
-        {
-          "iso": "SLV",
-          "fuente": 2023
-        },
-        {
-          "iso": "SUR",
-          "fuente": 2023
-        },
-        {
-          "iso": "TTO",
-          "fuente": 2023
-        },
-        {
-          "iso": "URY",
-          "fuente": 2023
-        },
-        {
-          "iso": "VCT",
-          "fuente": 2023
-        },
-        {
-          "iso": "VEN",
-          "fuente": 2023
-        }
-      ]
+      "paises_con_dato_en_fuente_y_no_en_siwa": [],
+      "motivo": "respuesta None"
     },
     {
       "clave": "mortalidad_materna",
       "rotulo": "Mortalidad materna",
       "fuente": "OMS",
-      "donde_se_comprobo": "https://ghoapi.azureedge.net/api/MDG_0000000026",
-      "estado": "al_dia",
+      "donde_se_comprobo": "https://ghoapi.azureedge.net/api/MDG_0000000026?$filter=ParentLocationCode%20eq%20%27AMR%27",
+      "estado": "no_comprobado",
       "anio_siwa": 2023,
-      "anio_fuente": 2023,
-      "paises_al_dia": 33,
+      "anio_fuente": null,
+      "paises_al_dia": 0,
       "paises_atrasados": [],
-      "paises_con_dato_en_fuente_y_no_en_siwa": []
+      "paises_con_dato_en_fuente_y_no_en_siwa": [],
+      "motivo": "respuesta None"
     },
     {
       "clave": "esperanza_vida",
       "rotulo": "Esperanza de vida al nacer",
       "fuente": "OMS",
-      "donde_se_comprobo": "https://ghoapi.azureedge.net/api/WHOSIS_000001",
-      "estado": "al_dia",
+      "donde_se_comprobo": "https://ghoapi.azureedge.net/api/WHOSIS_000001?$filter=ParentLocationCode%20eq%20%27AMR%27",
+      "estado": "no_comprobado",
       "anio_siwa": 2023,
-      "anio_fuente": 2023,
-      "paises_al_dia": 31,
+      "anio_fuente": null,
+      "paises_al_dia": 0,
       "paises_atrasados": [],
-      "paises_con_dato_en_fuente_y_no_en_siwa": []
+      "paises_con_dato_en_fuente_y_no_en_siwa": [],
+      "motivo": "respuesta None"
     },
     {
       "clave": "bti (6 indicadores)",
@@ -1086,16 +961,6 @@
   ],
   "fuentes_nacionales_mas_nuevas_fuera_de_siwa": [
     {
-      "iso": "ARG",
-      "materia": "homicidios dolosos",
-      "organismo": "Ministerio de Seguridad — SNIC",
-      "ultimo_periodo": 2025,
-      "valor": 3.61307361801335,
-      "unidad": "víctimas por cada 100.000 habitantes",
-      "siwa": 2023,
-      "url": "https://cloud-snic.minseg.gob.ar/Bases/SNIC/snic-pais.csv"
-    },
-    {
       "iso": "COL",
       "materia": "homicidios",
       "organismo": "Ministerio de Defensa — datos.gov.co",
@@ -1123,7 +988,7 @@
     {
       "colector": "bce_ecuador",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 863.7
+      "horas_desde_la_ultima_corrida": 961.4
     },
     {
       "colector": "bienes_culturales",
@@ -1138,22 +1003,22 @@
     {
       "colector": "bti",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "censo_subnacional",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.3
+      "horas_desde_la_ultima_corrida": 0.4
     },
     {
       "colector": "cepal",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.0
+      "horas_desde_la_ultima_corrida": 0.1
     },
     {
       "colector": "chile_ine_seguridad",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 864.0
+      "horas_desde_la_ultima_corrida": 961.7
     },
     {
       "colector": "ciber",
@@ -1168,17 +1033,17 @@
     {
       "colector": "cobertura",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "comercio",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "conflictos",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "consulta",
@@ -1193,7 +1058,7 @@
     {
       "colector": "contrataciones_abiertas",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.0
+      "horas_desde_la_ultima_corrida": 0.1
     },
     {
       "colector": "copernicus",
@@ -1218,12 +1083,12 @@
     {
       "colector": "desplazamiento",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.0
+      "horas_desde_la_ultima_corrida": 0.1
     },
     {
       "colector": "drogas",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.0
+      "horas_desde_la_ultima_corrida": 0.1
     },
     {
       "colector": "eia",
@@ -1243,7 +1108,7 @@
     {
       "colector": "explorador",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.3
+      "horas_desde_la_ultima_corrida": 0.2
     },
     {
       "colector": "financiero_gfi",
@@ -1258,17 +1123,17 @@
     {
       "colector": "focos",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.3
+      "horas_desde_la_ultima_corrida": 0.2
     },
     {
       "colector": "fundacion",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "gasto_publico",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.3
+      "horas_desde_la_ultima_corrida": 0.4
     },
     {
       "colector": "gti",
@@ -1278,12 +1143,12 @@
     {
       "colector": "ia",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.6
+      "horas_desde_la_ultima_corrida": 0.7
     },
     {
       "colector": "ia_apps",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.4
+      "horas_desde_la_ultima_corrida": 0.5
     },
     {
       "colector": "indice_opacidad",
@@ -1327,7 +1192,7 @@
     },
     {
       "colector": "minerales_comercio",
-      "estado": "correcto",
+      "estado": "error",
       "horas_desde_la_ultima_corrida": 0.3
     },
     {
@@ -1338,17 +1203,17 @@
     {
       "colector": "oit",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.3
+      "horas_desde_la_ultima_corrida": 0.4
     },
     {
       "colector": "oms",
-      "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.3
+      "estado": "error",
+      "horas_desde_la_ultima_corrida": 0.4
     },
     {
       "colector": "oms_homicidios",
-      "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.0
+      "estado": "error",
+      "horas_desde_la_ultima_corrida": 0.1
     },
     {
       "colector": "onu-ods",
@@ -1358,7 +1223,7 @@
     {
       "colector": "opacidad",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "owd",
@@ -1368,7 +1233,7 @@
     {
       "colector": "pdh_guatemala_subnacional",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "percepcion_corrupcion",
@@ -1398,12 +1263,12 @@
     {
       "colector": "ransomware",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "reciente_oficial",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "recursos",
@@ -1413,7 +1278,7 @@
     {
       "colector": "redes",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "regimen_politico",
@@ -1443,17 +1308,17 @@
     {
       "colector": "sipri",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 74.9
+      "horas_desde_la_ultima_corrida": 4.7
     },
     {
       "colector": "sipri_transferencias",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 28.2
+      "horas_desde_la_ultima_corrida": 125.9
     },
     {
       "colector": "sismos",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.3
+      "horas_desde_la_ultima_corrida": 0.2
     },
     {
       "colector": "sondeo",
@@ -1462,53 +1327,53 @@
     },
     {
       "colector": "subnacional",
-      "estado": "error",
+      "estado": "correcto",
       "horas_desde_la_ultima_corrida": 0.3
     },
     {
       "colector": "subnacional_acled",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_colombia_extorsion",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_colombia_incautacion_base_coca",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_colombia_incautacion_basuco",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_colombia_incautacion_cocaina",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_colombia_incautacion_insumos_liquidos",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_colombia_incautacion_marihuana",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_colombia_secuestro",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_colombia_terrorismo",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_datos",
@@ -1518,37 +1383,37 @@
     {
       "colector": "subnacional_focos",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_homicidios",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.6
+      "horas_desde_la_ultima_corrida": 5.0
     },
     {
       "colector": "subnacional_robos",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.5
+      "horas_desde_la_ultima_corrida": 5.0
     },
     {
       "colector": "subnacional_santafe",
       "estado": "error",
-      "horas_desde_la_ultima_corrida": 4.4
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_viales",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.8
     },
     {
       "colector": "subnacional_vigia",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 4.7
     },
     {
       "colector": "telegram",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "trata_personas",
@@ -1568,23 +1433,23 @@
     {
       "colector": "unesco",
       "estado": "error",
-      "horas_desde_la_ultima_corrida": 0.3
+      "horas_desde_la_ultima_corrida": 0.4
     },
     {
       "colector": "unidades",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 0.7
+      "horas_desde_la_ultima_corrida": 0.8
     },
     {
       "colector": "unodc_armas",
       "estado": "correcto",
-      "horas_desde_la_ultima_corrida": 52.3
+      "horas_desde_la_ultima_corrida": 150.0
     },
     {
       "colector": "wjp",
       "estado": "error",
-      "horas_desde_la_ultima_corrida": 4.3
+      "horas_desde_la_ultima_corrida": 102.0
     }
   ],
-  "duracion_segundos": 23
+  "duracion_segundos": 135
 }

@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-26T12:57:42+00:00",
+  "corrida": "2026-10-26T18:29:47+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3873,
+    "sobreviven": 3875,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3462,
+  "pistas_totales": 3464,
   "anomalias_totales": 398,
   "pistas": [
     {
@@ -346,19 +346,6 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.927,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 4.2069442889677734e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "financiero_gfi:brecha_usd_millones",
       "b": "poblacion",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
@@ -393,6 +380,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.2779862246654644e-18,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:victimas_ultimos_dos_anios",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
+      "coeficiente": 0.922,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 2.01093984526328e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -450,19 +450,6 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:victimas",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.916,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1929369864994484e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "focos:focos",
       "b": "perdida_bosque",
       "rotulo_a": "focos · focos",
@@ -471,6 +458,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.6852868388891513e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:victimas",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.915,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.9122534405915878e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -528,6 +528,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.908,
+      "estados": 24,
+      "tipo": "rangos (Spearman)",
+      "p": 3.761145138234527e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -536,19 +549,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1905778960493398e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "migrantes",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.906,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.714968772957998e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -626,20 +626,7 @@
       "coeficiente": 0.903,
       "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 1.0523189640120254e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "subnacional_focos:cuantas",
-      "b": "superficie",
-      "rotulo_a": "subnacional_focos · cuantas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.903,
-      "estados": 24,
-      "tipo": "rangos (Spearman)",
-      "p": 8.945880920221686e-12,
+      "p": 9.699361309197441e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -653,6 +640,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 8.223482471956663e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · grupos_distintos",
+      "coeficiente": 0.902,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 3.9955123813452915e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:nocturnos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · nocturnos",
-      "rotulo_b": "subnacional_focos · cuantas",
+      "a": "democracia_electoral",
+      "b": "indice_gobernanza",
+      "rotulo_a": "Nivel democrático — democracia electoral",
+      "rotulo_b": "Índice de gobernanza",
       "coeficiente": 0.895,
-      "estados": 24,
+      "estados": 22,
       "tipo": "rangos (Spearman)",
-      "p": 3.464136142313203e-11,
+      "p": 2.787409683278332e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
