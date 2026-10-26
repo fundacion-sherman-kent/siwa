@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-26T22:33:59+00:00",
+  "corrida": "2026-10-26T23:10:17+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3869,
+    "sobreviven": 3853,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3458,
+  "pistas_totales": 3442,
   "anomalias_totales": 398,
   "pistas": [
     {
@@ -476,19 +476,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.912,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.298809553588295e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "administracion_basica",
       "b": "estado_derecho",
       "rotulo_a": "Administración básica del Estado",
@@ -523,6 +510,19 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1905778960493398e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.905,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.1681583236348804e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -593,19 +593,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.903,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.5921181246365475e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "financiero_gfi:brecha_usd_millones",
       "b": "ransomware:victimas",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
@@ -658,6 +645,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.901,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.871667380761239e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -679,19 +679,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 1.961550803926828e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "subnacional_focos:cuantas",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "subnacional_focos · cuantas",
-      "coeficiente": 0.9,
-      "estados": 24,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6291333649210613e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +783,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 2.787409683278332e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "estado_derecho",
+      "b": "percepcion_corrupcion:intervalo_bajo",
+      "rotulo_a": "Estado de derecho",
+      "rotulo_b": "percepcion_corrupcion · intervalo_bajo",
+      "coeficiente": 0.894,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 2.413158697455027e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
