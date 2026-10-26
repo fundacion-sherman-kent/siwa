@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-26T06:12:03+00:00",
+  "corrida": "2026-10-26T12:15:34+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3849,
+    "sobreviven": 3869,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3438,
+  "pistas_totales": 3458,
   "anomalias_totales": 398,
   "pistas": [
     {
@@ -164,6 +164,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.947,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.943005865477341e-23,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -198,19 +211,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.941,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.787397207186116e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -412,26 +412,13 @@
     },
     {
       "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.918,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.221184235906481e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
       "b": "superficie",
       "rotulo_a": "focos · focos",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.917,
+      "coeficiente": 0.918,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 7.48951075010644e-18,
+      "p": 6.187545978453993e-18,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -471,6 +458,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.1929369864994484e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.915,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.6852868388891513e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "democracia_electoral",
-      "b": "indice_gobernanza",
-      "rotulo_a": "Nivel democrático — democracia electoral",
-      "rotulo_b": "Índice de gobernanza",
+      "a": "focos:nocturnos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · nocturnos",
+      "rotulo_b": "subnacional_focos · cuantas",
       "coeficiente": 0.895,
-      "estados": 22,
+      "estados": 24,
       "tipo": "rangos (Spearman)",
-      "p": 2.787409683278332e-10,
+      "p": 3.464136142313203e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
