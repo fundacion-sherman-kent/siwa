@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "explorador",
     "capa": "publico",
-    "obtenido_en": "2026-10-27T11:22:30+00:00",
+    "obtenido_en": "2026-10-27T21:51:53+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — exploración de puertas de datos oficiales",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#explorador"
@@ -49,15 +49,8 @@
       "iso": "URY",
       "pais": "Uruguay",
       "bloque": "Cono Sur",
-      "estado": "abre",
-      "puertas_abiertas": [
-        {
-          "dominio": "catalogodatos.gub.uy",
-          "dialecto": "CKAN",
-          "conjuntos": 2779,
-          "url": "https://catalogodatos.gub.uy/api/3/action/package_list"
-        }
-      ],
+      "estado": "sin_puerta_hallada",
+      "puertas_abiertas": [],
       "puertas_cerradas": [],
       "dominios_probados": [
         "catalogodatos.gub.uy",
@@ -128,7 +121,7 @@
         {
           "dominio": "www.datosabiertos.gob.pe",
           "dialecto": "CKAN",
-          "conjuntos": 3632,
+          "conjuntos": 3633,
           "url": "https://www.datosabiertos.gob.pe/api/3/action/package_list"
         }
       ],
@@ -159,7 +152,7 @@
         {
           "dominio": "www.datosabiertos.gob.pa",
           "dialecto": "CKAN",
-          "conjuntos": 5785,
+          "conjuntos": 5791,
           "url": "https://www.datosabiertos.gob.pa/api/3/action/package_list"
         }
       ],
@@ -189,7 +182,7 @@
         {
           "dominio": "datos.gob.mx",
           "dialecto": "CKAN",
-          "conjuntos": 1794,
+          "conjuntos": 1795,
           "url": "https://datos.gob.mx/api/3/action/package_list"
         }
       ],
@@ -363,6 +356,12 @@
       "puertas_abiertas": [
         {
           "dominio": "www.datos.gov.co",
+          "dialecto": "DCAT",
+          "conjuntos": null,
+          "url": "https://www.datos.gov.co/data.json"
+        },
+        {
+          "dominio": "www.datos.gov.co",
           "dialecto": "Socrata",
           "conjuntos": null,
           "url": "https://www.datos.gov.co/api/views.json?limit=1"
@@ -383,7 +382,7 @@
         {
           "dominio": "datos.gob.cl",
           "dialecto": "CKAN",
-          "conjuntos": 3232,
+          "conjuntos": 3185,
           "url": "https://datos.gob.cl/api/3/action/package_list"
         }
       ],
@@ -464,8 +463,8 @@
         {
           "dominio": "datos.gob.ar",
           "dialecto": "CKAN",
-          "conjuntos": 0,
-          "url": "https://datos.gob.ar/api/3/action/package_search?rows=1"
+          "conjuntos": 1340,
+          "url": "https://datos.gob.ar/api/3/action/package_list"
         }
       ],
       "puertas_cerradas": [],
@@ -487,15 +486,15 @@
     }
   ],
   "resumen": {
-    "estados_que_abren": 8,
+    "estados_que_abren": 7,
     "estados_que_cierran": 6,
-    "estados_sin_puerta_hallada": 19,
+    "estados_sin_puerta_hallada": 20,
     "estados_del_padron": 33,
     "dominios_probados": 50,
     "dialectos_probados": 6,
     "toques_realizados": 350,
     "explorador_probado": true,
-    "consultado": "2026-10-27T11:22:30+00:00"
+    "consultado": "2026-10-27T21:51:53+00:00"
   },
   "dialectos": [
     "ArcGIS Hub",
