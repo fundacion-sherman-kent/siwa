@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "explorador",
     "capa": "publico",
-    "obtenido_en": "2026-10-27T21:51:53+00:00",
+    "obtenido_en": "2026-10-28T12:08:06+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — exploración de puertas de datos oficiales",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#explorador"
@@ -49,8 +49,15 @@
       "iso": "URY",
       "pais": "Uruguay",
       "bloque": "Cono Sur",
-      "estado": "sin_puerta_hallada",
-      "puertas_abiertas": [],
+      "estado": "abre",
+      "puertas_abiertas": [
+        {
+          "dominio": "catalogodatos.gub.uy",
+          "dialecto": "CKAN",
+          "conjuntos": 2779,
+          "url": "https://catalogodatos.gub.uy/api/3/action/package_list"
+        }
+      ],
       "puertas_cerradas": [],
       "dominios_probados": [
         "catalogodatos.gub.uy",
@@ -152,7 +159,7 @@
         {
           "dominio": "www.datosabiertos.gob.pa",
           "dialecto": "CKAN",
-          "conjuntos": 5791,
+          "conjuntos": 5795,
           "url": "https://www.datosabiertos.gob.pa/api/3/action/package_list"
         }
       ],
@@ -352,21 +359,8 @@
       "iso": "COL",
       "pais": "Colombia",
       "bloque": "Andina",
-      "estado": "abre",
-      "puertas_abiertas": [
-        {
-          "dominio": "www.datos.gov.co",
-          "dialecto": "DCAT",
-          "conjuntos": null,
-          "url": "https://www.datos.gov.co/data.json"
-        },
-        {
-          "dominio": "www.datos.gov.co",
-          "dialecto": "Socrata",
-          "conjuntos": null,
-          "url": "https://www.datos.gov.co/api/views.json?limit=1"
-        }
-      ],
+      "estado": "sin_puerta_hallada",
+      "puertas_abiertas": [],
       "puertas_cerradas": [],
       "dominios_probados": [
         "www.dane.gov.co",
@@ -494,7 +488,7 @@
     "dialectos_probados": 6,
     "toques_realizados": 350,
     "explorador_probado": true,
-    "consultado": "2026-10-27T21:51:53+00:00"
+    "consultado": "2026-10-28T12:08:06+00:00"
   },
   "dialectos": [
     "ArcGIS Hub",
