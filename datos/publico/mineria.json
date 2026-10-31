@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-31T13:53:56+00:00",
+  "corrida": "2026-10-31T16:56:28+00:00",
   "medidas_con_suficientes_casos": 201,
   "pares_probados": 20100,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.100 pares y el umbral de siempre, alrededor de 1.005 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3858,
+    "sobreviven": 3867,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3446,
+  "pistas_totales": 3455,
   "anomalias_totales": 393,
   "pistas": [
     {
@@ -392,7 +392,7 @@
       "coeficiente": 0.922,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 2.01093984526328e-17,
+      "p": 2.200295160490564e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -444,7 +444,7 @@
       "coeficiente": 0.915,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 1.912253440591588e-16,
+      "p": 1.8650447611929364e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -606,19 +606,6 @@
       "misma_categoria": false
     },
     {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "ransomware:victimas",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.903,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 9.69936130919744e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "estabilidad",
       "b": "monopolio_fuerza",
       "rotulo_a": "Estabilidad política y ausencia de violencia",
@@ -632,14 +619,14 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · grupos_distintos",
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "ransomware:victimas",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "ransomware · victimas",
       "coeficiente": 0.902,
-      "estados": 31,
+      "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 3.9955123813452915e-15,
+      "p": 1.2503631676442752e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -658,6 +645,19 @@
       "misma_categoria": false
     },
     {
+      "a": "migrantes",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · grupos_distintos",
+      "coeficiente": 0.901,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 5.887152140086138e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -666,19 +666,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 6.269344376085972e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.9,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 1.961550803926828e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -718,6 +705,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 4.051241903115462e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "ransomware · grupos_distintos",
+      "coeficiente": 0.897,
+      "estados": 28,
+      "tipo": "rangos (Spearman)",
+      "p": 3.0846784632914957e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
