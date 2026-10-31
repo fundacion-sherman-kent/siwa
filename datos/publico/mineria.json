@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-10-30T22:16:17+00:00",
-  "medidas_con_suficientes_casos": 203,
-  "pares_probados": 20503,
+  "corrida": "2026-10-31T00:48:22+00:00",
+  "medidas_con_suficientes_casos": 202,
+  "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3915,
-    "de_ellos_son_parentescos": 414
+    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3851,
+    "de_ellos_son_parentescos": 411
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3501,
+  "pistas_totales": 3440,
   "anomalias_totales": 393,
   "pistas": [
     {
@@ -411,19 +411,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.92,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.554398431844998e-18,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "generacion_electrica",
       "b": "reservas_internacionales",
       "rotulo_a": "Generación eléctrica",
@@ -541,6 +528,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "perdida_bosque",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.906,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.92519033831331e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Estado de derecho",
@@ -588,6 +588,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 7.464001720959302e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.903,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.796111128198323e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,19 +684,6 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:anomalias",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.897,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3415967463022872e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -736,19 +736,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.895,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.577188643083632e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion",
       "b": "corrupcion_politica",
       "rotulo_a": "Control de la corrupción",
@@ -788,14 +775,27 @@
       "misma_categoria": false
     },
     {
-      "a": "articulos_cientificos",
-      "b": "ciber:anomalias",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "ciber · anomalias",
+      "a": "estado_derecho",
+      "b": "percepcion_corrupcion:intervalo_bajo",
+      "rotulo_a": "Estado de derecho",
+      "rotulo_b": "percepcion_corrupcion · intervalo_bajo",
       "coeficiente": 0.894,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 2.413158697455027e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:anomalias",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.893,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 2.894550287312025e-15,
+      "p": 3.2978831481685743e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

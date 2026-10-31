@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-10-30T22:04:01+00:00",
+    "obtenido_en": "2026-10-31T00:48:14+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**159 de los 343 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**158 de los 344 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece solo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -38,7 +38,7 @@
       "iso": "PAN",
       "pais": "Panamá",
       "bloque": "México y Centroamérica",
-      "sismos": 65,
+      "sismos": 66,
       "mayor_magnitud": 7.7,
       "mayor": {
         "magnitud": 7.7,
@@ -168,7 +168,7 @@
       "iso": "PER",
       "pais": "Perú",
       "bloque": "Andina",
-      "sismos": 16,
+      "sismos": 17,
       "mayor_magnitud": 6.7,
       "mayor": {
         "magnitud": 6.7,
@@ -179,14 +179,22 @@
         "tsunami": false
       },
       "ultimo": {
-        "magnitud": 4.7,
-        "lugar": "19 km NE of Atico, Peru",
-        "cuando": "2026-10-25T17:11:49+00:00",
-        "profundidad_km": 62.095,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u4v1",
+        "magnitud": 4.6,
+        "lugar": "33 km NE of Mazo Cruz, Peru",
+        "cuando": "2026-10-30T22:46:57+00:00",
+        "profundidad_km": 194.807,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tufp",
         "tsunami": false
       },
       "recientes": [
+        {
+          "magnitud": 4.6,
+          "lugar": "33 km NE of Mazo Cruz, Peru",
+          "cuando": "2026-10-30T22:46:57+00:00",
+          "profundidad_km": 194.807,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tufp",
+          "tsunami": false
+        },
         {
           "magnitud": 4.7,
           "lugar": "19 km NE of Atico, Peru",
@@ -217,14 +225,6 @@
           "cuando": "2026-09-19T07:12:27+00:00",
           "profundidad_km": 10.0,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tii3",
-          "tsunami": false
-        },
-        {
-          "magnitud": 4.8,
-          "lugar": "107 km WSW of Alianza Cristiana, Peru",
-          "cuando": "2026-09-14T19:16:49+00:00",
-          "profundidad_km": 104.887,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000thg5",
           "tsunami": false
         }
       ]
@@ -938,22 +938,22 @@
   ],
   "resumen": {
     "ventana_dias": 90,
-    "desde": "2026-08-01",
+    "desde": "2026-08-02",
     "magnitud_minima": 4.5,
-    "sismos": 343,
-    "en_tierra": 184,
-    "mar_adentro": 159,
+    "sismos": 344,
+    "en_tierra": 186,
+    "mar_adentro": 158,
     "estados_con_sismo": 13,
     "estados_del_padron": 33,
     "por_magnitud": {
-      "4,5 a 4,9": 269,
+      "4,5 a 4,9": 270,
       "5 a 5,9": 67,
       "6 o mayor": 7
     },
-    "consultado": "2026-10-30T22:04:01+00:00"
+    "consultado": "2026-10-31T00:48:14+00:00"
   },
   "mar": {
-    "cantidad": 159,
+    "cantidad": 158,
     "mayores": [
       {
         "magnitud": 6.4,
@@ -1023,8 +1023,8 @@
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2163,
-    "recuadro": 343,
+    "mundo": 2137,
+    "recuadro": 344,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
 }
