@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-01T12:51:41+00:00",
+  "corrida": "2026-11-01T16:03:16+00:00",
   "medidas_con_suficientes_casos": 197,
   "pares_probados": 19306,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.306 pares y el umbral de siempre, alrededor de 965 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3869,
+    "sobreviven": 3883,
     "de_ellos_son_parentescos": 414
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3455,
+  "pistas_totales": 3469,
   "anomalias_totales": 390,
   "pistas": [
     {
@@ -476,6 +476,19 @@
       "misma_categoria": false
     },
     {
+      "a": "focos:focos",
+      "b": "subnacional_focos:cuantas",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "subnacional_focos · cuantas",
+      "coeficiente": 0.914,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 3.6377423564970006e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "gini",
       "b": "gini_cepal",
       "rotulo_a": "Desigualdad — índice de Gini",
@@ -606,19 +619,6 @@
       "misma_categoria": false
     },
     {
-      "a": "focos:focos",
-      "b": "superficie",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.9,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.128863748199581e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -692,19 +692,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 4.051241903115462e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "focos:focos",
-      "b": "perdida_bosque",
-      "rotulo_a": "focos · focos",
-      "rotulo_b": "Bosque perdido",
-      "coeficiente": 0.896,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.7461680383218314e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +783,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "focos:focos",
+      "b": "superficie",
+      "rotulo_a": "focos · focos",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.89,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.4607132309074135e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
