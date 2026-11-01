@@ -175,7 +175,7 @@ python colectores/focos.py
 | `oit` | Organización Internacional del Trabajo — ILOSTAT, armonización de las encuestas de hogares de cada Estado | `B-2` | 33 | 5 |
 | `oms` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `B-2` | 33 | 8 |
 | `oms_homicidios` | Observatorio Mundial de la Salud — Organización Mundial de la Salud (OMS) | `A-2` | 33 | 6 |
-| `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 6 |
+| `onu-ods` | Naciones Unidas — base global de indicadores de los ODS | `A-2` | 33 | 7 |
 | `opacidad` | Fundación Sherman Kent — Índice de Opacidad, edición cero | `A-3` | 33 | 8 |
 | `opacidad_historia` | Fundación Sherman Kent — archivo del Índice de Opacidad | `A-2` | 33 | 1 |
 | `owd` | V-Dem y UCDP, vía Our World in Data (la Base Global de Terrorismo se retiró de esta capa el 21/9/2026: ver vacíos declarados) | `B-2` | 33 | 10 |
@@ -188,7 +188,7 @@ python colectores/focos.py
 | `radar` | Cloudflare Radar — mediciones sobre tráfico real de internet | `B-2` | 33 | 4 |
 | `ransomware` | ransomware.live — recopilación de sitios de extorsión informática | `D-4` | 31 | 6 |
 | `reciente_oficial` | Catálogos oficiales de los Estados — lo más reciente publicado | `A-2` | 33 | 5 |
-| `recursos` | Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas; Energy Institute y Servicio Geológico de los Estados Unidos, vía Our World in Data | `A-2` | 33 | 9 |
+| `recursos` | Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas; Energy Institute y Servicio Geológico de los Estados Unidos, vía Our World in Data | `A-2` | 33 | 10 |
 | `redes` | Mastodon — instancias mastodon.social, mstdn.social, masto.ai, mas.to | `F-4` | 33 | 8 |
 | `regimen_politico` | V-Dem, Universidad de Gotemburgo — «Regímenes del Mundo», vía Our World in Data | `B-2` | 33 | 5 |
 | `reliefweb` | ReliefWeb — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA) | `A-2` | 33 | 3 |
