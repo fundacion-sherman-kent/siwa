@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-02T07:42:12+00:00",
+  "corrida": "2026-11-02T14:27:57+00:00",
   "medidas_con_suficientes_casos": 203,
   "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3885,
+    "sobreviven": 3865,
     "de_ellos_son_parentescos": 411
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3474,
-  "anomalias_totales": 393,
+  "pistas_totales": 3454,
+  "anomalias_totales": 394,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -99,19 +99,6 @@
       "misma_categoria": false
     },
     {
-      "a": "inflacion_fmi",
-      "b": "inflacion_interanual",
-      "rotulo_a": "Inflación de doce meses, según el FMI",
-      "rotulo_b": "Inflación de los últimos doce meses",
-      "coeficiente": 0.958,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 1.4743741593592285e-23,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "renta_gas",
       "b": "reservas_petroleo",
       "rotulo_a": "Renta del gas natural",
@@ -164,6 +151,19 @@
       "misma_categoria": false
     },
     {
+      "a": "inflacion_fmi",
+      "b": "inflacion_interanual",
+      "rotulo_a": "Inflación de doce meses, según el FMI",
+      "rotulo_b": "Inflación de los últimos doce meses",
+      "coeficiente": 0.953,
+      "estados": 30,
+      "tipo": "rangos (Spearman)",
+      "p": 3.007678871814744e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -203,6 +203,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.939,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.200124077983463e-21,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "actores_antidemocraticos",
       "b": "democracia_electoral",
       "rotulo_a": "Control sobre actores antidemocráticos",
@@ -211,19 +224,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 4.455905047556957e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.938,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.8215120706260355e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,6 +775,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.893,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.3483016802085907e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ransomware:grupos_distintos",
       "b": "reservas_internacionales",
       "rotulo_a": "ransomware · grupos_distintos",
@@ -783,19 +796,6 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 4.420602247572736e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "Percepción de corrupción",
-      "coeficiente": -0.889,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.003697736400933e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
