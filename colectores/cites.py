@@ -132,13 +132,17 @@ def _contar(identificador: int, desde: int, hasta: int, origen: int | None = Non
     return int(_json(url)["total"])
 
 
-def _ultimoAnioCompleto(tabla: dict) -> int:
-    """El informe anual vence el 31 de octubre del año siguiente.
+def _ultimoAnioCompleto(tabla: dict) -> tuple[int, int | None]:
+    """El último año COMPLETO, y el año que quedó incompleto si hubo que retroceder.
 
-    No es una estimación: es el plazo del tratado. Pero se comprueba contra los
-    testigos, porque una regla correcta aplicada a una fuente que cambió sigue
-    dando un año vacío, y un año vacío publicado como completo diría que la
-    región dejó de comerciar.
+    El informe anual vence el 31 de octubre del año siguiente: es el plazo del
+    tratado. Pero se comprueba contra los testigos, porque CITES a veces se
+    atrasa más que el plazo. Si el año candidato viene casi vacío, NO se deja de
+    publicar: se CAE al año anterior —el último completo— y se declara el
+    candidato como todavía incompleto en la fuente. Sólo si el año anterior
+    TAMBIÉN viene casi vacío (dos seguidos) se concluye que la regla o la fuente
+    cambiaron de verdad, y ahí sí se aborta: publicar un tercer año viejo como si
+    fuera el último diría que la región dejó de comerciar.
     """
     hoy = datetime.now(timezone.utc)
     candidato = hoy.year - 1 if hoy.month >= 11 else hoy.year - 2
@@ -148,13 +152,14 @@ def _ultimoAnioCompleto(tabla: dict) -> int:
 
     actual, anterior = testigo(candidato), testigo(candidato - 1)
     if anterior and actual < anterior * 0.2:
-        raise RuntimeError(
-            f"El año {candidato} debería estar completo según el plazo del tratado "
-            f"—31 de octubre del año siguiente— y sin embargo los tres Estados "
-            f"testigo suman {actual} asientos contra {anterior} del año anterior. "
-            "La regla o la fuente cambiaron. No se publica un año casi vacío como "
-            "si fuera el último completo.")
-    return candidato
+        dos_atras = testigo(candidato - 2)
+        if dos_atras and anterior < dos_atras * 0.2:
+            raise RuntimeError(
+                f"Dos años seguidos casi vacíos en la fuente ({candidato}: {actual}; "
+                f"{candidato - 1}: {anterior}; {candidato - 2}: {dos_atras}). La regla o "
+                "la fuente de CITES cambiaron: no es un rezago normal. No se publica.")
+        return candidato - 1, candidato
+    return candidato, None
 
 
 def _delEstado(faena: tuple) -> tuple:
@@ -171,7 +176,7 @@ def _delEstado(faena: tuple) -> tuple:
 
 def recolectar():
     tabla = _entidades()
-    hasta = _ultimoAnioCompleto(tabla)
+    hasta, incompleto = _ultimoAnioCompleto(tabla)
     desde = hasta - VENTANA_ANIOS + 1
 
     # PRIMERA GUARDA: el instrumento. Antes de creerle un cero a nadie.
@@ -272,6 +277,11 @@ def recolectar():
         "su recuento de decomiso sea estrictamente menor que su total. Si alguna de las "
         "dos falla, la corrida se detiene entera.",
     ]
+    if incompleto:
+        vacios.insert(0, f"EL AÑO {incompleto} TODAVÍA NO ESTÁ COMPLETO EN LA FUENTE y por "
+                      f"eso no se publica: CITES aún no cerró ese año pese al plazo del "
+                      f"tratado (31 de octubre del año siguiente). Se publica hasta {hasta}, "
+                      "el último año completo comprobado contra los tres Estados testigo.")
 
     calificacion = comun.calificar(
         fiabilidad="A",
