@@ -121,6 +121,22 @@ def ficha(serie: list) -> dict:
             "serie": [{"anio": a, "valor": v} for a, v in serie]}
 
 
+# La API de UNESCO cae por momentos (vuelve vacía). Los datos de educación son anuales y
+# lentos: se conserva el último publicado y NO se enrojece la corrida mientras la caída
+# lleve poco. Pasado el tope, vuelve a rojo, para que una caída larga o una mudanza de la
+# API salga a la luz.
+TOPE_DIAS_CAIDA = 7
+
+
+def _dias_del_ultimo() -> int | None:
+    """Días desde la última recolección exitosa publicada, o None si no hay archivo legible."""
+    try:
+        d = json.loads((comun.DATOS / "publico" / f"{COLECTOR}.json").read_text(encoding="utf-8"))
+        return comun.dias_desde((d.get("procedencia") or {}).get("obtenido_en"))
+    except Exception:  # noqa: BLE001 — sin archivo previo legible, se trata como caída dura
+        return None
+
+
 def construir() -> Path:
     padron = geo.padron()
     isos = sorted(p["iso"] for p in padron)
@@ -136,7 +152,17 @@ def construir() -> Path:
             datos[m["clave"]] = {}
 
     if not any(datos.values()):
-        raise RuntimeError("ninguna medida devolvió serie. No se escribe nada.")
+        dias = _dias_del_ultimo()
+        if dias is not None and dias <= TOPE_DIAS_CAIDA:
+            msg = (f"La API de UNESCO no devolvió ninguna serie en esta corrida "
+                   f"(hace {dias} día(s) del último dato bueno; se tolera hasta "
+                   f"{TOPE_DIAS_CAIDA}). Se conserva el último dato publicado.")
+            print(f"[{COLECTOR}] AVISO: {msg} No es falla del registro.", file=sys.stderr)
+            comun.escribir_estado(COLECTOR, "correcto", msg)
+            sys.exit(0)
+        detalle = (f"hace {dias} días del último dato bueno, supera el tope de "
+                   f"{TOPE_DIAS_CAIDA}" if dias is not None else "y no hay dato previo legible")
+        raise RuntimeError(f"ninguna medida devolvió serie ({detalle}). No se escribe nada.")
 
     registros, cobertura = [], {}
     for p in padron:

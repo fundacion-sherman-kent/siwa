@@ -129,6 +129,21 @@ def _serie(codigo: int) -> dict:
     return {k: [{"anio": a, "valor_usd": v} for a, v in sorted(d.items())] for k, d in out.items()}
 
 
+# Comtrade limita los pedidos sin clave (429) y corta la consulta. El comercio de armas
+# es anual y lento: cuando la fuente no deja ningún Estado, se conserva el último dato y
+# NO se enrojece la corrida mientras la caída lleve poco. Pasado el tope, vuelve a rojo.
+TOPE_DIAS_CAIDA = 7
+
+
+def _dias_del_ultimo() -> int | None:
+    """Días desde la última recolección exitosa publicada, o None si no hay archivo legible."""
+    try:
+        d = json.loads((comun.DATOS / "publico" / "armas.json").read_text(encoding="utf-8"))
+        return comun.dias_desde((d.get("procedencia") or {}).get("obtenido_en"))
+    except Exception:  # noqa: BLE001 — sin archivo previo legible, se trata como caída dura
+        return None
+
+
 def recolectar():
     nombres = _nombresDeSocio()
     if len(nombres) < 100:
@@ -253,9 +268,19 @@ def recolectar():
     # Se corta y se declara; el paso queda en rojo (continue-on-error) y el archivo previo
     # se conserva. Así fue como una corrida con Comtrade caído dejó armas en cero.
     if conDato == 0:
+        dias = _dias_del_ultimo()
+        if dias is not None and dias <= TOPE_DIAS_CAIDA:
+            msg = (f"Comtrade no devolvió ningún Estado en esta corrida (límite/caída, sin "
+                   f"consultar: {len(sinConsultar)}; hace {dias} día(s) del último dato bueno; "
+                   f"se tolera hasta {TOPE_DIAS_CAIDA}). Se conserva el último dato publicado.")
+            print(f"[armas] AVISO: {msg} No es falla del registro.", file=sys.stderr)
+            comun.escribir_estado("armas", "correcto", msg)
+            sys.exit(0)
+        detalle = (f"hace {dias} días del último dato bueno, supera el tope de "
+                   f"{TOPE_DIAS_CAIDA}" if dias is not None else "y no hay dato previo legible")
         raise RuntimeError(
-            f"Comtrade no devolvió ningún Estado con declaración (sin consultar: {len(sinConsultar)}). "
-            "Probable límite o corte de la fuente. NO se publica para no pisar el último dato bueno.")
+            f"Comtrade no devolvió ningún Estado con declaración (sin consultar: "
+            f"{len(sinConsultar)}; {detalle}). NO se publica para no pisar el último dato bueno.")
 
     calificacion = comun.calificar(
         fiabilidad="A",
