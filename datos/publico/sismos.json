@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-11-03T19:08:00+00:00",
+    "obtenido_en": "2026-11-03T22:51:14+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**154 de los 348 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**155 de los 350 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece solo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -38,7 +38,7 @@
       "iso": "PAN",
       "pais": "Panamá",
       "bloque": "México y Centroamérica",
-      "sismos": 72,
+      "sismos": 73,
       "mayor_magnitud": 7.7,
       "mayor": {
         "magnitud": 7.7,
@@ -462,29 +462,29 @@
       "pais": "México",
       "bloque": "México y Centroamérica",
       "sismos": 5,
-      "mayor_magnitud": 4.8,
+      "mayor_magnitud": 4.8869503562808,
       "mayor": {
-        "magnitud": 4.8,
-        "lugar": "7 km WSW of Soconusco, Mexico",
-        "cuando": "2026-10-16T11:39:44+00:00",
-        "profundidad_km": 108.908,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u2ph",
+        "magnitud": 4.8869503562808,
+        "lugar": "9 km N of Delta, B.C., MX",
+        "cuando": "2026-11-03T18:27:31+00:00",
+        "profundidad_km": 15.59,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/ci41572064",
         "tsunami": false
       },
       "ultimo": {
-        "magnitud": 4.69788320837842,
-        "lugar": "10 km N of Delta, B.C., MX",
+        "magnitud": 4.8869503562808,
+        "lugar": "9 km N of Delta, B.C., MX",
         "cuando": "2026-11-03T18:27:31+00:00",
-        "profundidad_km": 15.7700004577637,
+        "profundidad_km": 15.59,
         "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/ci41572064",
         "tsunami": false
       },
       "recientes": [
         {
-          "magnitud": 4.69788320837842,
-          "lugar": "10 km N of Delta, B.C., MX",
+          "magnitud": 4.8869503562808,
+          "lugar": "9 km N of Delta, B.C., MX",
           "cuando": "2026-11-03T18:27:31+00:00",
-          "profundidad_km": 15.7700004577637,
+          "profundidad_km": 15.59,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/ci41572064",
           "tsunami": false
         },
@@ -932,20 +932,20 @@
     "ventana_dias": 90,
     "desde": "2026-08-05",
     "magnitud_minima": 4.5,
-    "sismos": 348,
-    "en_tierra": 194,
-    "mar_adentro": 154,
+    "sismos": 350,
+    "en_tierra": 195,
+    "mar_adentro": 155,
     "estados_con_sismo": 13,
     "estados_del_padron": 33,
     "por_magnitud": {
-      "4,5 a 4,9": 275,
+      "4,5 a 4,9": 277,
       "5 a 5,9": 66,
       "6 o mayor": 7
     },
-    "consultado": "2026-11-03T19:08:00+00:00"
+    "consultado": "2026-11-03T22:51:14+00:00"
   },
   "mar": {
-    "cantidad": 154,
+    "cantidad": 155,
     "mayores": [
       {
         "magnitud": 6.4,
@@ -1015,8 +1015,8 @@
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2157,
-    "recuadro": 348,
+    "mundo": 2160,
+    "recuadro": 350,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
 }
