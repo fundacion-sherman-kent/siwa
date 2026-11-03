@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-03T09:33:13+00:00",
+  "corrida": "2026-11-03T13:38:49+00:00",
   "medidas_con_suficientes_casos": 201,
   "pares_probados": 20100,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.100 pares y el umbral de siempre, alrededor de 1.005 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3844,
+    "sobreviven": 3850,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3432,
+  "pistas_totales": 3438,
   "anomalias_totales": 394,
   "pistas": [
     {
@@ -177,6 +177,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.944,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.8611181137180866e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "financiero_gfi:brecha_usd_millones",
       "b": "reservas_internacionales",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
@@ -198,19 +211,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.94,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3972307757553272e-21,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -463,19 +463,6 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:victimas",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.914,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 2.3279081966105056e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "gini",
       "b": "gini_cepal",
       "rotulo_a": "Desigualdad — índice de Gini",
@@ -484,6 +471,19 @@
       "estados": 15,
       "tipo": "rangos (Spearman)",
       "p": 7.453180194676548e-08,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "migrantes",
+      "b": "ransomware:victimas",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.913,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 2.656664194297086e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -639,7 +639,7 @@
       "coeficiente": 0.898,
       "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 2.822668442519596e-13,
+      "p": 2.467402401418595e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "articulos_cientificos",
-      "b": "ciber:anomalias",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "ciber · anomalias",
+      "a": "ciber:mediciones",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Generación eléctrica",
       "coeficiente": 0.889,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 8.603667772759896e-15,
+      "p": 8.487940930973586e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
