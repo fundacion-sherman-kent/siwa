@@ -141,7 +141,7 @@ def ficha(serie: list) -> dict:
 # último dato publicado y NO se enrojece la corrida: los datos de la OMS son anuales y
 # lentos, así que un dato de días atrás sigue siendo el mejor disponible. Pasado el tope,
 # vuelve a rojo, para que una caída larga —o una mudanza de la API— salga a la luz.
-TOPE_DIAS_CAIDA = 7
+TOPE_DIAS_CAIDA = 30  # 30 y no 7: la caída de la OMS está confirmada (503, sin migración, 11/2026) y el dato es anual; sólo una caída de un mes amerita rojo
 
 
 def _dias_del_ultimo() -> int | None:

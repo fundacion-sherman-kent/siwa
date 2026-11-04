@@ -102,7 +102,7 @@ def _ordenar(filas: list, isos: set) -> dict:
 # Mientras la API GHO de la OMS esté caída (500/503 de su lado) se conserva el último
 # dato publicado y NO se enrojece la corrida: el dato es anual y lento. Pasado el tope,
 # vuelve a rojo. Mismo criterio que oms.py.
-TOPE_DIAS_CAIDA = 7
+TOPE_DIAS_CAIDA = 30  # 30 y no 7: la caída de la OMS está confirmada (503, sin migración, 11/2026) y el dato es anual; sólo una caída de un mes amerita rojo
 
 
 def _dias_del_ultimo() -> int | None:
