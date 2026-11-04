@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-03T23:21:37+00:00",
-  "medidas_con_suficientes_casos": 202,
-  "pares_probados": 20301,
+  "corrida": "2026-11-04T06:14:59+00:00",
+  "medidas_con_suficientes_casos": 200,
+  "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3868,
-    "de_ellos_son_parentescos": 411
+    "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3734,
+    "de_ellos_son_parentescos": 410
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3457,
+  "pistas_totales": 3324,
   "anomalias_totales": 394,
   "pistas": [
     {
@@ -606,6 +606,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:anomalias",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.9,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.809039352881421e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -640,19 +653,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 2.467402401418595e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:anomalias",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.897,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.4839173595786388e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,6 +775,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:mediciones",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.89,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.4287752673702655e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ransomware:grupos_distintos",
       "b": "reservas_internacionales",
       "rotulo_a": "ransomware · grupos_distintos",
@@ -783,19 +796,6 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 4.420602247572736e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.889,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.487940930973586e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
