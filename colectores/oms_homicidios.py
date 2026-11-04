@@ -99,11 +99,40 @@ def _ordenar(filas: list, isos: set) -> dict:
             for iso, cortes in salida.items()}
 
 
+# Mientras la API GHO de la OMS esté caída (500/503 de su lado) se conserva el último
+# dato publicado y NO se enrojece la corrida: el dato es anual y lento. Pasado el tope,
+# vuelve a rojo. Mismo criterio que oms.py.
+TOPE_DIAS_CAIDA = 30  # 30 y no 7: la caída de la OMS está confirmada (503, sin migración, 11/2026) y el dato es anual; sólo una caída de un mes amerita rojo
+
+
+def _dias_del_ultimo() -> int | None:
+    """Días desde la última recolección exitosa publicada, o None si no hay archivo legible."""
+    try:
+        d = json.loads((comun.DATOS / "publico" / "oms_homicidios.json").read_text(encoding="utf-8"))
+        return comun.dias_desde((d.get("procedencia") or {}).get("obtenido_en"))
+    except Exception:  # noqa: BLE001 — sin archivo previo legible, se trata como caída dura
+        return None
+
+
 def recolectar():
     padron = geo.padron()
     isos = {p["iso"] for p in padron}
-    tasas = _ordenar(_traer(INDICADORES["tasa"]), isos)
-    numeros = _ordenar(_traer(INDICADORES["numero"]), isos)
+    # Sólo las dos bajadas van en el try: una caída de la OMS (500/503) se tolera, pero el
+    # guard de «interfaz cambió» de más abajo —cuando la API SÍ responde pero con otra
+    # forma— sigue enrojeciendo, que es lo correcto.
+    try:
+        tasas = _ordenar(_traer(INDICADORES["tasa"]), isos)
+        numeros = _ordenar(_traer(INDICADORES["numero"]), isos)
+    except Exception as error:  # noqa: BLE001 — OMS caída: se tolera un tiempo, no es nuestro bug
+        dias = _dias_del_ultimo()
+        if dias is not None and dias <= TOPE_DIAS_CAIDA:
+            msg = (f"La API GHO de la OMS no respondió en esta corrida ({error}). Hace "
+                   f"{dias} día(s) del último dato bueno; se tolera hasta {TOPE_DIAS_CAIDA}. "
+                   "Se conserva el último dato publicado.")
+            print(f"[oms_homicidios] AVISO: {msg} No es falla del registro.", file=sys.stderr)
+            comun.escribir_estado("oms_homicidios", "correcto", msg)
+            sys.exit(0)
+        raise
 
     # SE PRUEBA EL LECTOR ANTES DE CREERLE UN VACÍO A NADIE.
     for iso in CONTROL:
