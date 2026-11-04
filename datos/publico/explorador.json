@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "explorador",
     "capa": "publico",
-    "obtenido_en": "2026-11-04T19:18:03+00:00",
+    "obtenido_en": "2026-11-04T23:16:52+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — exploración de puertas de datos oficiales",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#explorador"
@@ -128,7 +128,7 @@
         {
           "dominio": "www.datosabiertos.gob.pe",
           "dialecto": "CKAN",
-          "conjuntos": 3646,
+          "conjuntos": 3645,
           "url": "https://www.datosabiertos.gob.pe/api/3/action/package_list"
         }
       ],
@@ -189,7 +189,7 @@
         {
           "dominio": "datos.gob.mx",
           "dialecto": "CKAN",
-          "conjuntos": 1818,
+          "conjuntos": 1819,
           "url": "https://datos.gob.mx/api/3/action/package_list"
         }
       ],
@@ -203,21 +203,8 @@
       "iso": "JAM",
       "pais": "Jamaica",
       "bloque": "Caribe oriental",
-      "estado": "abre",
-      "puertas_abiertas": [
-        {
-          "dominio": "data.gov.jm",
-          "dialecto": "DKAN",
-          "conjuntos": null,
-          "url": "https://data.gov.jm/api/1/metastore/schemas/dataset/items?limit=1"
-        },
-        {
-          "dominio": "data.gov.jm",
-          "dialecto": "DCAT",
-          "conjuntos": 59,
-          "url": "https://data.gov.jm/data.json"
-        }
-      ],
+      "estado": "sin_puerta_hallada",
+      "puertas_abiertas": [],
       "puertas_cerradas": [],
       "dominios_probados": [
         "data.gov.jm",
@@ -231,8 +218,7 @@
       "estado": "cierra",
       "puertas_abiertas": [],
       "puertas_cerradas": [
-        "portalunico.iaip.gob.hn · HTTP 403",
-        "www.ine.gob.hn · HTTP 403"
+        "portalunico.iaip.gob.hn · HTTP 403"
       ],
       "dominios_probados": [
         "portalunico.iaip.gob.hn",
@@ -381,6 +367,12 @@
       "puertas_abiertas": [
         {
           "dominio": "www.datos.gov.co",
+          "dialecto": "DCAT",
+          "conjuntos": null,
+          "url": "https://www.datos.gov.co/data.json"
+        },
+        {
+          "dominio": "www.datos.gov.co",
           "dialecto": "Socrata",
           "conjuntos": null,
           "url": "https://www.datos.gov.co/api/views.json?limit=1"
@@ -484,12 +476,6 @@
           "dialecto": "DCAT",
           "conjuntos": null,
           "url": "https://datos.gob.ar/data.json"
-        },
-        {
-          "dominio": "datos.gob.ar",
-          "dialecto": "CKAN",
-          "conjuntos": 1237,
-          "url": "https://datos.gob.ar/api/3/action/package_list"
         }
       ],
       "puertas_cerradas": [],
@@ -511,15 +497,15 @@
     }
   ],
   "resumen": {
-    "estados_que_abren": 10,
+    "estados_que_abren": 9,
     "estados_que_cierran": 5,
-    "estados_sin_puerta_hallada": 18,
+    "estados_sin_puerta_hallada": 19,
     "estados_del_padron": 33,
     "dominios_probados": 50,
     "dialectos_probados": 6,
     "toques_realizados": 350,
     "explorador_probado": true,
-    "consultado": "2026-11-04T19:18:03+00:00"
+    "consultado": "2026-11-04T23:16:52+00:00"
   },
   "dialectos": [
     "ArcGIS Hub",
