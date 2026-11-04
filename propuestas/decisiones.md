@@ -102,3 +102,23 @@ De 20 propuestas, **0 se incorporan como están**, 19 se descartan y 1 queda a
 decisión. El buscador cumplió su papel —traer candidatas—; el filtro humano las
 frena porque casi todas son archivos de un solo país que keyword-matchean temas que
 SIWA ya cubre con fuentes regionales mejores. Todas figuran ya en `vistos.json`.
+
+---
+
+## 2026-11-04 — Barrido del backlog 20/9–4/11 · 73 propuestas sin revisar · **DESCARTADAS EN LOTE**
+
+Desde la última decisión (19/9) el buscador propuso 73 conjuntos más que nadie había
+revisado. Barridos en lote: **todos son datos de un solo país** (padrones y trámites
+nacionales de PER, PAN, COL, DOM, PRY y ARG — permisos de migración, consumo de una
+eléctrica, contenedores de un puerto, pobreza/desigualdad/censo de un país). Ninguno es
+de una fuente regional o internacional comparable entre los 33.
+
+**Motivo, el mismo que el 19/9:** rompen la comparabilidad regional o duplican una
+fuente canónica que SIWA ya trae mejor (Banco Mundial, UNODC, CEPAL, UNESCO). El
+buscador escanea portales NACIONALES, así que estructuralmente sólo puede traer datos de
+un país: no puede reemplazar una serie regional atrasada. Sirve para descubrir temas
+nuevos o datos subnacionales de un país, no para acortar la mediana comparable.
+
+De 50 corridas (17/9–4/11): 747 conjuntos mirados, 632 auto-descartados por el propio
+buscador, 93 pasados a calificación (20 revisados el 17–24/9, 73 acá), **0 incorporados**.
+Todos quedan en `vistos.json`, así que no se vuelven a proponer.
