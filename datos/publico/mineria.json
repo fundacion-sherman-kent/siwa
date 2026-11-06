@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-05T19:36:06+00:00",
+  "corrida": "2026-11-06T00:13:10+00:00",
   "medidas_con_suficientes_casos": 200,
   "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3719,
+    "sobreviven": 3727,
     "de_ellos_son_parentescos": 410
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3309,
+  "pistas_totales": 3317,
   "anomalias_totales": 399,
   "pistas": [
     {
@@ -762,6 +762,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:mediciones",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.894,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.146776183018582e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Estado de derecho",
@@ -770,19 +783,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.893,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.910784932264728e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
