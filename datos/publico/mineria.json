@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-06T15:10:39+00:00",
-  "medidas_con_suficientes_casos": 200,
-  "pares_probados": 19900,
+  "corrida": "2026-11-06T19:09:02+00:00",
+  "medidas_con_suficientes_casos": 198,
+  "pares_probados": 19503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3715,
-    "de_ellos_son_parentescos": 411
+    "por_que": "Con 19.503 pares y el umbral de siempre, alrededor de 975 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3658,
+    "de_ellos_son_parentescos": 410
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3304,
-  "anomalias_totales": 399,
+  "pistas_totales": 3248,
+  "anomalias_totales": 394,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -29,19 +29,6 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 1.9715458604995373e-37,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "empleo_informal",
-      "b": "empleo_informal_oit",
-      "rotulo_a": "Empleo informal",
-      "rotulo_b": "Empleo informal según la OIT",
-      "coeficiente": 0.984,
-      "estados": 26,
-      "tipo": "rangos (Spearman)",
-      "p": 1.3591244490124468e-30,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -181,10 +168,10 @@
       "b": "superficie",
       "rotulo_a": "copernicus · escenas",
       "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.944,
+      "coeficiente": 0.946,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.2282330016002244e-22,
+      "p": 1.0663310304722027e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +783,19 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 4.420602247572736e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "articulos_cientificos",
+      "b": "ciber:anomalias",
+      "rotulo_a": "Artículos científicos y técnicos publicados",
+      "rotulo_b": "ciber · anomalias",
+      "coeficiente": 0.889,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 8.603667772759896e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
