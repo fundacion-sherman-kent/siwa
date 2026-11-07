@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-07T07:06:56+00:00",
-  "medidas_con_suficientes_casos": 196,
-  "pares_probados": 19110,
+  "corrida": "2026-11-07T12:34:16+00:00",
+  "medidas_con_suficientes_casos": 200,
+  "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 19.110 pares y el umbral de siempre, alrededor de 955 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3614,
-    "de_ellos_son_parentescos": 407
+    "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3715,
+    "de_ellos_son_parentescos": 410
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3207,
-  "anomalias_totales": 389,
+  "pistas_totales": 3305,
+  "anomalias_totales": 399,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -29,6 +29,19 @@
       "estados": 22,
       "tipo": "rangos (Spearman)",
       "p": 1.9715458604995373e-37,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "empleo_informal",
+      "b": "empleo_informal_oit",
+      "rotulo_a": "Empleo informal",
+      "rotulo_b": "Empleo informal según la OIT",
+      "coeficiente": 0.985,
+      "estados": 27,
+      "tipo": "rangos (Spearman)",
+      "p": 2.6426026901275083e-33,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -164,6 +177,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.945,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.661595936818376e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "financiero_gfi:brecha_usd_millones",
       "b": "reservas_internacionales",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
@@ -185,19 +211,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 5.608516153852297e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 29,
       "tipo": "rangos (Spearman)",
       "p": 4.420602247572736e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "Percepción de corrupción",
-      "coeficiente": -0.889,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.003697736400933e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

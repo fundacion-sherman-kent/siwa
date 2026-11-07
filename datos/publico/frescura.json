@@ -1,15 +1,15 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-11-07T07:07:18+00:00",
+  "corrida": "2026-11-07T12:34:23+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
     "atrasado": "4 años o más"
   },
   "resumen": {
-    "indicadores_medidos": 194,
+    "indicadores_medidos": 198,
     "mediana_antiguedad_anios": 1.0,
-    "al_dia_1_anio_o_menos": 125,
+    "al_dia_1_anio_o_menos": 129,
     "tibio_2_a_3_anios": 55,
     "atrasado_4_anios_o_mas": 14,
     "series_detenidas_declaradas": 3,
@@ -2123,6 +2123,23 @@
       "serie_detenida": false
     },
     {
+      "clave": "empleo_informal",
+      "rotulo": "Empleo informal",
+      "eje": "Desarrollo",
+      "seccion": "informalidad",
+      "fuente": "OIT, vía la base global de los ODS",
+      "unidad": "% del empleo total",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 7,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "empleo_informal_oit",
       "rotulo": "Empleo informal según la OIT",
       "eje": "Desarrollo",
@@ -3104,6 +3121,57 @@
       "antiguedad_anios": 1,
       "cobertura": {
         "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_sexual",
+      "rotulo": "Trata para explotación sexual",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 2,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_trabajo",
+      "rotulo": "Trata para trabajo forzoso",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 1,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
+      "clave": "trata_victimas",
+      "rotulo": "Víctimas detectadas de trata de personas",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
