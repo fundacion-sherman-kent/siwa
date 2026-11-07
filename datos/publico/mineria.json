@@ -1,6 +1,6 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-06T22:56:43+00:00",
+  "corrida": "2026-11-07T00:57:55+00:00",
   "medidas_con_suficientes_casos": 196,
   "pares_probados": 19110,
   "correccion": {
@@ -502,6 +502,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:anomalias",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.911,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.3945969126672654e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -523,19 +536,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 6.948046658391877e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:anomalias",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.904,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.7762344179815596e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -645,6 +645,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:mediciones",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.897,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.6127895977865914e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -749,19 +762,6 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.894,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.146776183018582e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion:intervalo_bajo",
       "rotulo_a": "Estado de derecho",
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "articulos_cientificos",
-      "b": "ciber:anomalias",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "ciber · anomalias",
-      "coeficiente": 0.889,
-      "estados": 33,
+      "a": "corrupcion_politica",
+      "b": "percepcion_corrupcion",
+      "rotulo_a": "Corrupción política",
+      "rotulo_b": "Percepción de corrupción",
+      "coeficiente": -0.889,
+      "estados": 25,
       "tipo": "rangos (Spearman)",
-      "p": 8.603667772759896e-15,
+      "p": 3.003697736400933e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
