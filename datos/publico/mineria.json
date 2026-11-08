@@ -1,6 +1,6 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-08T21:10:20+00:00",
+  "corrida": "2026-11-08T21:53:18+00:00",
   "medidas_con_suficientes_casos": 200,
   "pares_probados": 19900,
   "correccion": {
@@ -177,6 +177,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.944,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.321831590305157e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "financiero_gfi:brecha_usd_millones",
       "b": "reservas_internacionales",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
@@ -198,19 +211,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.125870425198757e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "ransomware:grupos_distintos",
-      "b": "reservas_internacionales",
-      "rotulo_a": "ransomware · grupos_distintos",
-      "rotulo_b": "Reservas internacionales",
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
       "coeficiente": 0.89,
-      "estados": 29,
+      "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.420602247572736e-13,
+      "p": 6.457693867031537e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
