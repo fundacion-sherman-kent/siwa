@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-07T22:45:50+00:00",
+  "corrida": "2026-11-08T02:27:20+00:00",
   "medidas_con_suficientes_casos": 200,
   "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3732,
+    "sobreviven": 3728,
     "de_ellos_son_parentescos": 410
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3322,
+  "pistas_totales": 3318,
   "anomalias_totales": 399,
   "pistas": [
     {
@@ -519,10 +519,10 @@
       "b": "generacion_electrica",
       "rotulo_a": "ciber · anomalias",
       "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.911,
+      "coeficiente": 0.909,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 4.3945969126672654e-17,
+      "p": 7.768557877429364e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -658,19 +658,6 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.897,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.6127895977865914e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -705,6 +692,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 4.051241903115462e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:mediciones",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · mediciones",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.896,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.7392871027554878e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

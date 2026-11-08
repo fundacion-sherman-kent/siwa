@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-11-07T22:45:46+00:00",
+    "obtenido_en": "2026-11-08T02:27:17+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**156 de los 356 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**157 de los 356 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece solo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -103,7 +103,7 @@
       "iso": "COL",
       "pais": "Colombia",
       "bloque": "Andina",
-      "sismos": 35,
+      "sismos": 36,
       "mayor_magnitud": 7.4,
       "mayor": {
         "magnitud": 7.4,
@@ -131,6 +131,14 @@
           "tsunami": false
         },
         {
+          "magnitud": 4.7,
+          "lugar": "5 km E of Bolívar, Colombia",
+          "cuando": "2026-10-24T02:47:12+00:00",
+          "profundidad_km": 166.218,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u4j7",
+          "tsunami": false
+        },
+        {
           "magnitud": 4.5,
           "lugar": "43 km ESE of Juradó, Colombia",
           "cuando": "2026-10-16T13:02:41+00:00",
@@ -153,14 +161,6 @@
           "profundidad_km": 117.812,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1cx",
           "tsunami": false
-        },
-        {
-          "magnitud": 4.6,
-          "lugar": "22 km SW of Sipí, Colombia",
-          "cuando": "2026-09-27T21:57:52+00:00",
-          "profundidad_km": 71.347,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000ty0u",
-          "tsunami": false
         }
       ]
     },
@@ -168,7 +168,7 @@
       "iso": "PER",
       "pais": "Perú",
       "bloque": "Andina",
-      "sismos": 14,
+      "sismos": 12,
       "mayor_magnitud": 6.7,
       "mayor": {
         "magnitud": 6.7,
@@ -938,11 +938,11 @@
   ],
   "resumen": {
     "ventana_dias": 90,
-    "desde": "2026-08-09",
+    "desde": "2026-08-10",
     "magnitud_minima": 4.5,
     "sismos": 356,
-    "en_tierra": 200,
-    "mar_adentro": 156,
+    "en_tierra": 199,
+    "mar_adentro": 157,
     "estados_con_sismo": 13,
     "estados_del_padron": 33,
     "por_magnitud": {
@@ -950,10 +950,10 @@
       "5 a 5,9": 63,
       "6 o mayor": 7
     },
-    "consultado": "2026-11-07T22:45:46+00:00"
+    "consultado": "2026-11-08T02:27:17+00:00"
   },
   "mar": {
-    "cantidad": 156,
+    "cantidad": 157,
     "mayores": [
       {
         "magnitud": 6.6,
@@ -977,6 +977,14 @@
         "cuando": "2026-10-12T23:20:36+00:00",
         "profundidad_km": 11.0,
         "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u1wn",
+        "tsunami": false
+      },
+      {
+        "magnitud": 5.9,
+        "lugar": "central Mid-Atlantic Ridge",
+        "cuando": "2026-11-07T23:17:06+00:00",
+        "profundidad_km": 10.0,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000twun",
         "tsunami": false
       },
       {
@@ -1010,20 +1018,12 @@
         "profundidad_km": 11.0,
         "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tdmp",
         "tsunami": false
-      },
-      {
-        "magnitud": 5.6,
-        "lugar": "east central Pacific Ocean",
-        "cuando": "2026-08-10T05:41:44+00:00",
-        "profundidad_km": 10.0,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tjjj",
-        "tsunami": false
       }
     ],
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2154,
+    "mundo": 2140,
     "recuadro": 356,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
