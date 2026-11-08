@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-11-08T12:48:08+00:00",
+    "obtenido_en": "2026-11-08T17:45:44+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "10 consultas fallaron en esta corrida: ARG/Violencia organizada: TimeoutError; ARG/Contratación pública: TimeoutError; ARG/Presupuesto: TimeoutError; ARG/Migración y desplazamiento: TimeoutError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
+      "10 consultas fallaron en esta corrida: ARG/Delito registrado: TimeoutError; ARG/Contratación pública: TimeoutError; ARG/Integridad: TimeoutError; ARG/Presupuesto: TimeoutError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -64,14 +64,14 @@
               "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
             },
             {
+              "titulo": "Contratacion Alcaldía Chitaraque",
+              "organismo": "Alcaldía de Chitaraque",
+              "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
+            },
+            {
               "titulo": "CONTRATACION CEPITA",
               "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
               "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
-            },
-            {
-              "titulo": "SECOP II CONTRATACION ABIERTA",
-              "organismo": "Alcaldía Mayor de Cartagena",
-              "enlace": "https://www.datos.gov.co/d/432e-zwh4"
             }
           ]
         },
@@ -82,14 +82,14 @@
           "cantidad": 615,
           "ejemplos": [
             {
-              "titulo": "Presupuesto de Ingresos",
-              "organismo": "INDUSTRIA MILITAR",
-              "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
-            },
-            {
               "titulo": "Presupuesto de Gastos",
               "organismo": "INDUSTRIA MILITAR",
               "enlace": "https://www.datos.gov.co/d/ff6u-8pqi"
+            },
+            {
+              "titulo": "Presupuesto de Ingresos",
+              "organismo": "INDUSTRIA MILITAR",
+              "enlace": "https://www.datos.gov.co/d/6z97-i2yt"
             },
             {
               "titulo": "Presupuesto DADEP",
@@ -148,14 +148,14 @@
               "enlace": "https://www.datos.gov.co/d/p7hq-8vsm"
             },
             {
-              "titulo": "Salidas de colombianos desde el territorio nacional",
-              "organismo": "emurillo",
-              "enlace": "https://www.datos.gov.co/d/efw5-jiej"
-            },
-            {
               "titulo": "MIGRANTES A COLOMBIA",
               "organismo": "BERNARDO GUEVARA",
               "enlace": "https://www.datos.gov.co/d/c4mm-qn8q"
+            },
+            {
+              "titulo": "Salidas de colombianos desde el territorio nacional",
+              "organismo": "emurillo",
+              "enlace": "https://www.datos.gov.co/d/efw5-jiej"
             }
           ]
         },
@@ -388,7 +388,7 @@
           "materia": "Presupuesto",
           "eje": "Gobernanza",
           "consulta": "presupuesto",
-          "cantidad": 572,
+          "cantidad": 573,
           "ejemplos": [
             {
               "titulo": "Presupuestos Historicos",
@@ -491,7 +491,7 @@
           "ejemplos": []
         }
       ],
-      "conjuntos_hallados": 602
+      "conjuntos_hallados": 603
     },
     {
       "iso": "MEX",
@@ -1121,42 +1121,58 @@
       "portal": "https://datos.gob.ar",
       "materias": [
         {
-          "materia": "Delito registrado",
+          "materia": "Violencia organizada",
           "eje": "Seguridad",
-          "consulta": "delito",
-          "cantidad": 19,
+          "consulta": "homicidio",
+          "cantidad": 8,
           "ejemplos": [
+            {
+              "titulo": "Homicidios dolosos. Sistema de Alerta Temprana. Estadísticas criminales en la República Argentina.",
+              "organismo": " Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/seguridad-homicidios-dolosos-sistema-alerta-temprana-estadisticas-criminales-republica-argentina"
+            },
+            {
+              "titulo": "Registro, sistematización y seguimiento de femicidios y homicidios agravados por el género",
+              "organismo": " Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/justicia-registro-sistematizacion-seguimiento-femicidios-homicidios-agravados-por-genero"
+            },
+            {
+              "titulo": "Estadísticas criminales en la República Argentina. Muertes violentas de mujeres",
+              "organismo": " Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/seguridad-estadisticas-criminales-republica-argentina-muertes-violentas-mujeres"
+            },
             {
               "titulo": "Codificación de delitos del Código Penal Argentino",
               "organismo": " Ministerio de Justicia",
               "enlace": "https://datos.gob.ar/dataset/justicia-codificacion-delitos-codigo-penal-argentino"
-            },
-            {
-              "titulo": "Delitos contra la propiedad. Sistema de Alerta Temprana. Estadísticas criminales",
-              "organismo": " Ministerio de Seguridad",
-              "enlace": "https://datos.gob.ar/dataset/seguridad-delitos-contra-propiedad-sistema-alerta-temprana-estadisticas-criminales"
-            },
-            {
-              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Orientaciones",
-              "organismo": " Ministerio de Justicia",
-              "enlace": "https://datos.gob.ar/dataset/justicia-lucha-contra-trata-personas---llamados-linea-145---orientaciones"
-            },
-            {
-              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Denuncias",
-              "organismo": " Ministerio de Justicia",
-              "enlace": "https://datos.gob.ar/dataset/justicia-lucha-contra-trata-personas---llamados-linea-145---denuncias"
             }
           ]
         },
         {
-          "materia": "Integridad",
-          "eje": "Gobernanza",
-          "consulta": "corrupcion",
-          "cantidad": 0,
-          "ejemplos": []
+          "materia": "Migración y desplazamiento",
+          "eje": "Inteligencia estratégica",
+          "consulta": "migracion",
+          "cantidad": 3,
+          "ejemplos": [
+            {
+              "titulo": "Ingresos y Egresos de personas al pais y Residencias Otorgadas.",
+              "organismo": "Vicejefatura de Gabinete del Interior",
+              "enlace": "https://datos.gob.ar/dataset/interior-ingresos-egresos-personas-al-pais-residencias-otorgadas"
+            },
+            {
+              "titulo": "Turismo Internacional - Total País",
+              "organismo": "Subsecretaría de Turismo",
+              "enlace": "https://datos.gob.ar/dataset/turismo-turismo-internacional---total-pais"
+            },
+            {
+              "titulo": "Crucerismo Marítimo",
+              "organismo": "Subsecretaría de Turismo",
+              "enlace": "https://datos.gob.ar/dataset/turismo-crucerismo-maritimo"
+            }
+          ]
         }
       ],
-      "conjuntos_hallados": 19
+      "conjuntos_hallados": 11
     },
     {
       "iso": "PRY",
@@ -1172,7 +1188,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4592,
+    "conjuntos_hallados": 4585,
     "materias_consultadas": 6,
     "oficinas_que_responden": 24,
     "estados_con_alguna_fuente_oficial": 26
@@ -1232,8 +1248,9 @@
       "organismo": "Oficina Nacional de Estadística e Información",
       "url": "https://onei.gob.cu/",
       "nota": "Sin el prefijo «www». Con él, el servidor devuelve error 500. La diferencia entre un Estado que no publica y un prefijo de más es un carácter, y decide lo que el registro afirma.",
-      "estado": "sin_respuesta",
-      "detalle": "URLError: <urlopen error timed out>"
+      "estado": "certificado_invalido",
+      "codigo": 200,
+      "certificado": "no valida: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate ("
     },
     {
       "iso": "DOM",
@@ -1453,9 +1470,9 @@
   "oficinas_por_estado": {
     "responde": 24,
     "cierra_a_maquinas": 4,
-    "sin_respuesta": 2,
+    "certificado_invalido": 2,
     "verificacion_anti_robot": 2,
-    "certificado_invalido": 1
+    "sin_respuesta": 1
   },
   "sectoriales_verificados": [
     {
