@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-09T07:59:34+00:00",
+  "corrida": "2026-11-09T15:05:43+00:00",
   "medidas_con_suficientes_casos": 200,
   "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3717,
+    "sobreviven": 3721,
     "de_ellos_son_parentescos": 410
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3307,
+  "pistas_totales": 3311,
   "anomalias_totales": 399,
   "pistas": [
     {
@@ -389,10 +389,10 @@
       "b": "ransomware:victimas_ultimos_dos_anios",
       "rotulo_a": "Población migrante que el país aloja",
       "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.921,
+      "coeficiente": 0.922,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 2.8082766941893044e-17,
+      "p": 2.001556981449681e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -437,6 +437,19 @@
       "misma_categoria": false
     },
     {
+      "a": "migrantes",
+      "b": "ransomware:victimas",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.915,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.6638703180067648e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "articulos_cientificos",
       "b": "generacion_electrica",
       "rotulo_a": "Artículos científicos y técnicos publicados",
@@ -471,19 +484,6 @@
       "estados": 15,
       "tipo": "rangos (Spearman)",
       "p": 7.453180194676548e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "migrantes",
-      "b": "ransomware:victimas",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.913,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 2.656664194297086e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -619,6 +619,32 @@
       "misma_categoria": false
     },
     {
+      "a": "migrantes",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · grupos_distintos",
+      "coeficiente": 0.901,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 5.887152140086138e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "ransomware:victimas",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.901,
+      "estados": 28,
+      "tipo": "rangos (Spearman)",
+      "p": 1.467163642700087e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -632,19 +658,6 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.9,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 7.178838717607172e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "ciber:mediciones",
       "b": "generacion_electrica",
       "rotulo_a": "ciber · mediciones",
@@ -653,19 +666,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.100318376587578e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "ransomware:victimas",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.898,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 2.467402401418595e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -710,6 +710,19 @@
       "misma_categoria": false
     },
     {
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "ransomware:grupos_distintos",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "ransomware · grupos_distintos",
+      "coeficiente": 0.897,
+      "estados": 28,
+      "tipo": "rangos (Spearman)",
+      "p": 3.0846784632914957e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion_politica",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Corrupción política",
@@ -718,19 +731,6 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 9.621070309355055e-12,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.895,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 4.762716569960166e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
+      "a": "ransomware:grupos_distintos",
+      "b": "reservas_internacionales",
+      "rotulo_a": "ransomware · grupos_distintos",
+      "rotulo_b": "Reservas internacionales",
       "coeficiente": 0.89,
-      "estados": 33,
+      "estados": 29,
       "tipo": "rangos (Spearman)",
-      "p": 6.457693867031537e-15,
+      "p": 4.1447989257586307e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
