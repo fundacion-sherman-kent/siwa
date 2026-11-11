@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-11T10:54:57+00:00",
-  "medidas_con_suficientes_casos": 201,
-  "pares_probados": 20100,
+  "corrida": "2026-11-11T13:38:23+00:00",
+  "medidas_con_suficientes_casos": 203,
+  "pares_probados": 20503,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.100 pares y el umbral de siempre, alrededor de 1.005 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3742,
-    "de_ellos_son_parentescos": 412
+    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3758,
+    "de_ellos_son_parentescos": 410
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3330,
-  "anomalias_totales": 397,
+  "pistas_totales": 3348,
+  "anomalias_totales": 399,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -125,6 +125,19 @@
       "misma_categoria": false
     },
     {
+      "a": "inflacion_fmi",
+      "b": "inflacion_interanual",
+      "rotulo_a": "Inflación de doce meses, según el FMI",
+      "rotulo_b": "Inflación de los últimos doce meses",
+      "coeficiente": 0.956,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.1036709324387876e-23,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "democracia_electoral",
       "b": "voz_rendicion",
       "rotulo_a": "Nivel democrático — democracia electoral",
@@ -151,19 +164,6 @@
       "misma_categoria": false
     },
     {
-      "a": "inflacion_fmi",
-      "b": "inflacion_interanual",
-      "rotulo_a": "Inflación de doce meses, según el FMI",
-      "rotulo_b": "Inflación de los últimos doce meses",
-      "coeficiente": 0.952,
-      "estados": 30,
-      "tipo": "rangos (Spearman)",
-      "p": 5.211884252255342e-22,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -172,19 +172,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.6812193451945832e-21,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.944,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 3.2282330016002244e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -211,6 +198,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.942,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.150968194373588e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -671,19 +671,6 @@
       "misma_categoria": false
     },
     {
-      "a": "riesgo_inform_amenaza",
-      "b": "unidades:casos_por_unidad",
-      "rotulo_a": "Exposición a amenazas (INFORM)",
-      "rotulo_b": "unidades · casos_por_unidad",
-      "coeficiente": 0.897,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.308745289185404e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "subnacional_acled:cuantas",
       "rotulo_a": "Población total",
@@ -775,6 +762,32 @@
       "misma_categoria": false
     },
     {
+      "a": "riesgo_inform_amenaza",
+      "b": "unidades:casos_por_unidad",
+      "rotulo_a": "Exposición a amenazas (INFORM)",
+      "rotulo_b": "unidades · casos_por_unidad",
+      "coeficiente": 0.892,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 3.687949310085253e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.89,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.924316807895368e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ciber:mediciones",
       "b": "generacion_electrica",
       "rotulo_a": "ciber · mediciones",
@@ -783,19 +796,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 6.96923860078989e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ransomware:grupos_distintos",
-      "b": "reservas_internacionales",
-      "rotulo_a": "ransomware · grupos_distintos",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.89,
-      "estados": 29,
-      "tipo": "rangos (Spearman)",
-      "p": 4.1447989257586307e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

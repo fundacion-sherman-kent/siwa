@@ -1,15 +1,15 @@
 {
   "que_es": "Termómetro de frescura de SIWA: el año más reciente que tiene cada indicador publicado, calculado de lo que el propio registro ya escribió (sin salir a ninguna fuente). No mide si el dato es correcto ni si está atrasado respecto de su fuente: eso lo hacen `reloj-actualidad.py` (en vivo) y `propuestas-frescura.py` (con esta misma medición).",
-  "corrida": "2026-11-11T10:55:05+00:00",
+  "corrida": "2026-11-11T13:38:30+00:00",
   "cortes_del_termometro": {
     "al_dia": "≤1 año",
     "tibio": "2 a 3 años",
     "atrasado": "4 años o más"
   },
   "resumen": {
-    "indicadores_medidos": 197,
-    "mediana_antiguedad_anios": 1,
-    "al_dia_1_anio_o_menos": 128,
+    "indicadores_medidos": 198,
+    "mediana_antiguedad_anios": 1.0,
+    "al_dia_1_anio_o_menos": 129,
     "tibio_2_a_3_anios": 55,
     "atrasado_4_anios_o_mas": 14,
     "series_detenidas_declaradas": 3,
@@ -3160,6 +3160,23 @@
       "serie_detenida": false
     },
     {
+      "clave": "trata_victimas",
+      "rotulo": "Víctimas detectadas de trata de personas",
+      "eje": "Seguridad",
+      "seccion": "trata",
+      "fuente": "UNODC, vía la base global de los ODS",
+      "unidad": "por cada 100.000 habitantes",
+      "colector": "onu-ods",
+      "archivo": "onu-ods.json",
+      "anio_mas_reciente": 2025,
+      "antiguedad_anios": 1,
+      "cobertura": {
+        "con_dato_en_el_anio_mas_reciente": 3,
+        "de_filas_con_iso": 33
+      },
+      "serie_detenida": false
+    },
+    {
       "clave": "urbanizacion",
       "rotulo": "Población urbana",
       "eje": "Desarrollo",
@@ -3477,7 +3494,7 @@
       "anio_mas_reciente": 2026,
       "antiguedad_anios": 0,
       "cobertura": {
-        "con_dato_en_el_anio_mas_reciente": 30,
+        "con_dato_en_el_anio_mas_reciente": 31,
         "de_filas_con_iso": 33
       },
       "serie_detenida": false
