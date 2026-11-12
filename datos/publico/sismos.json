@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-11-12T09:49:55+00:00",
+    "obtenido_en": "2026-11-12T14:33:42+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**158 de los 354 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**158 de los 355 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece solo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -38,7 +38,7 @@
       "iso": "PAN",
       "pais": "Panamá",
       "bloque": "México y Centroamérica",
-      "sismos": 79,
+      "sismos": 80,
       "mayor_magnitud": 7.7,
       "mayor": {
         "magnitud": 7.7,
@@ -75,6 +75,14 @@
         },
         {
           "magnitud": 4.5,
+          "lugar": "20 km S of Zapotillo, Panama",
+          "cuando": "2026-10-21T10:54:34+00:00",
+          "profundidad_km": 10.0,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tu1s",
+          "tsunami": false
+        },
+        {
+          "magnitud": 4.5,
           "lugar": "10 km S of La Mesa, Panama",
           "cuando": "2026-10-20T22:51:44+00:00",
           "profundidad_km": 10.0,
@@ -87,14 +95,6 @@
           "cuando": "2026-10-18T16:12:54+00:00",
           "profundidad_km": 10.0,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u36m",
-          "tsunami": false
-        },
-        {
-          "magnitud": 4.6,
-          "lugar": "7 km S of Tebario, Panama",
-          "cuando": "2026-10-16T22:41:03+00:00",
-          "profundidad_km": 10.0,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u2wn",
           "tsunami": false
         }
       ]
@@ -286,9 +286,9 @@
         },
         {
           "magnitud": 4.5,
-          "lugar": "79 km W of San Antonio de los Cobres, Argentina",
+          "lugar": "82 km W of San Antonio de los Cobres, Argentina",
           "cuando": "2026-10-19T07:33:35+00:00",
-          "profundidad_km": 170.26,
+          "profundidad_km": 176.96,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u3b9",
           "tsunami": false
         }
@@ -932,17 +932,17 @@
     "ventana_dias": 90,
     "desde": "2026-08-14",
     "magnitud_minima": 4.5,
-    "sismos": 354,
-    "en_tierra": 196,
+    "sismos": 355,
+    "en_tierra": 197,
     "mar_adentro": 158,
     "estados_con_sismo": 13,
     "estados_del_padron": 33,
     "por_magnitud": {
-      "4,5 a 4,9": 285,
+      "4,5 a 4,9": 286,
       "5 a 5,9": 63,
       "6 o mayor": 6
     },
-    "consultado": "2026-11-12T09:49:55+00:00"
+    "consultado": "2026-11-12T14:33:42+00:00"
   },
   "mar": {
     "cantidad": 158,
@@ -1015,8 +1015,8 @@
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2180,
-    "recuadro": 354,
+    "mundo": 2187,
+    "recuadro": 355,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
 }
