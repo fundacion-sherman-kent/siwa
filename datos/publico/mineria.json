@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-11T19:33:44+00:00",
-  "medidas_con_suficientes_casos": 203,
-  "pares_probados": 20503,
+  "corrida": "2026-11-12T00:21:01+00:00",
+  "medidas_con_suficientes_casos": 202,
+  "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.503 pares y el umbral de siempre, alrededor de 1.025 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3767,
-    "de_ellos_son_parentescos": 410
+    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3773,
+    "de_ellos_son_parentescos": 413
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3357,
+  "pistas_totales": 3360,
   "anomalias_totales": 399,
   "pistas": [
     {
@@ -190,6 +190,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.943,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.2446696223411935e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -198,19 +211,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.150968194373588e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -528,19 +528,6 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:anomalias",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.905,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.4016830383636136e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "estado_derecho",
       "b": "percepcion_corrupcion",
       "rotulo_a": "Estado de derecho",
@@ -640,6 +627,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 1.467163642700087e-13,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:anomalias",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.9,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 8.308740419297337e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,27 +775,27 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
+      "a": "articulos_cientificos",
+      "b": "ciber:anomalias",
+      "rotulo_a": "Artículos científicos y técnicos publicados",
+      "rotulo_b": "ciber · anomalias",
       "coeficiente": 0.89,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.924316807895368e-15,
+      "p": 6.9686038774984374e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
     },
     {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
+      "a": "ransomware:grupos_distintos",
+      "b": "reservas_internacionales",
+      "rotulo_a": "ransomware · grupos_distintos",
+      "rotulo_b": "Reservas internacionales",
       "coeficiente": 0.89,
-      "estados": 33,
+      "estados": 29,
       "tipo": "rangos (Spearman)",
-      "p": 6.96923860078989e-15,
+      "p": 4.1447989257586307e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false

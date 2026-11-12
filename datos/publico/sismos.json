@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "sismos",
     "capa": "publico",
-    "obtenido_en": "2026-11-11T19:23:53+00:00",
+    "obtenido_en": "2026-11-12T00:04:03+00:00",
     "fuente": {
       "nombre": "Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/"
@@ -15,7 +15,7 @@
     },
     "vacios_declarados": [
       "**Esto no mide riesgo ni daño: mide energía liberada.** Un sismo de magnitud 6 a diez kilómetros bajo una ciudad hace más daño que uno de 7 a doscientos kilómetros mar adentro. **Contar sismos no ordena Estados por peligro**, y esta capa no entra a ningún índice compuesto.",
-      "**158 de los 353 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
+      "**158 de los 354 sismos de la ventana ocurrieron en el mar** y no se asignan a ningún Estado. No se descartan: en esta región la fosa está mar adentro y **ahí ocurren los más grandes**, que son además los que pueden generar tsunami. Descartarlos habría borrado lo más importante.",
       "La ventana es de 90 días y el umbral, magnitud 4.5. Por debajo de ese umbral hay muchísimos más sismos, casi todos sin consecuencia; por encima, el catálogo es prácticamente completo. **Cambiar el umbral cambia todos los recuentos**, de modo que no se los compare con los de otra fuente sin verificar qué umbral usa.",
       "**La asignación a un Estado es por el epicentro**, no por dónde se sintió. Un sismo con epicentro en un país se siente en los vecinos y aparece solo en la ficha del primero.",
       "**El catálogo se revisa.** Las magnitudes de las primeras horas se corrigen después: lo que se publica es la lectura del momento de la consulta, con su fecha, y no la versión definitiva del catálogo.",
@@ -298,7 +298,7 @@
       "iso": "CHL",
       "pais": "Chile",
       "bloque": "Cono Sur",
-      "sismos": 27,
+      "sismos": 28,
       "mayor_magnitud": 5.1,
       "mayor": {
         "magnitud": 5.1,
@@ -309,14 +309,22 @@
         "tsunami": false
       },
       "ultimo": {
-        "magnitud": 5.1,
-        "lugar": "27 km WSW of Calama, Chile",
-        "cuando": "2026-11-11T11:36:51+00:00",
-        "profundidad_km": 91.309,
-        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000txis",
+        "magnitud": 4.5,
+        "lugar": "41 km SSE of Camiña, Chile",
+        "cuando": "2026-11-11T20:45:04+00:00",
+        "profundidad_km": 112.957,
+        "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000txni",
         "tsunami": false
       },
       "recientes": [
+        {
+          "magnitud": 4.5,
+          "lugar": "41 km SSE of Camiña, Chile",
+          "cuando": "2026-11-11T20:45:04+00:00",
+          "profundidad_km": 112.957,
+          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000txni",
+          "tsunami": false
+        },
         {
           "magnitud": 5.1,
           "lugar": "27 km WSW of Calama, Chile",
@@ -347,14 +355,6 @@
           "cuando": "2026-11-01T01:24:52+00:00",
           "profundidad_km": 120.437,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000tuly",
-          "tsunami": false
-        },
-        {
-          "magnitud": 4.6,
-          "lugar": "20 km NNW of La Ligua, Chile",
-          "cuando": "2026-10-26T20:52:11+00:00",
-          "profundidad_km": 47.738,
-          "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000ttc8",
           "tsunami": false
         }
       ]
@@ -399,10 +399,10 @@
           "tsunami": false
         },
         {
-          "magnitud": 4.6,
-          "lugar": "88 km SSW of Uyuni, Bolivia",
-          "cuando": "2026-10-17T16:52:45+00:00",
-          "profundidad_km": 189.462,
+          "magnitud": 4.5,
+          "lugar": "85 km SSW of Uyuni, Bolivia",
+          "cuando": "2026-10-17T16:52:44+00:00",
+          "profundidad_km": 182.118,
           "enlace": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000u30x",
           "tsunami": false
         },
@@ -930,19 +930,19 @@
   ],
   "resumen": {
     "ventana_dias": 90,
-    "desde": "2026-08-13",
+    "desde": "2026-08-14",
     "magnitud_minima": 4.5,
-    "sismos": 353,
-    "en_tierra": 195,
+    "sismos": 354,
+    "en_tierra": 196,
     "mar_adentro": 158,
     "estados_con_sismo": 13,
     "estados_del_padron": 33,
     "por_magnitud": {
+      "4,5 a 4,9": 285,
       "5 a 5,9": 63,
-      "4,5 a 4,9": 284,
       "6 o mayor": 6
     },
-    "consultado": "2026-11-11T19:23:53+00:00"
+    "consultado": "2026-11-12T00:04:03+00:00"
   },
   "mar": {
     "cantidad": 158,
@@ -1015,8 +1015,8 @@
     "dice": "Sismos cuyo epicentro cae fuera de tierra firme. No se descartan: en esta región la fosa está mar adentro y ahí ocurren los más grandes."
   },
   "recuadro_comprobado": {
-    "mundo": 2176,
-    "recuadro": 353,
+    "mundo": 2169,
+    "recuadro": 354,
     "dice": "El recuadro se comprueba en cada corrida contra el recuento mundial: tiene que recortar y tiene que dar más que cero."
   }
 }
