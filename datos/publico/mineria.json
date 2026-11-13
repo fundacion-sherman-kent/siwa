@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-12T23:43:56+00:00",
-  "medidas_con_suficientes_casos": 202,
-  "pares_probados": 20301,
+  "corrida": "2026-11-13T06:42:12+00:00",
+  "medidas_con_suficientes_casos": 200,
+  "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3741,
-    "de_ellos_son_parentescos": 411
+    "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3724,
+    "de_ellos_son_parentescos": 410
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3330,
+  "pistas_totales": 3314,
   "anomalias_totales": 399,
   "pistas": [
     {
@@ -632,19 +632,6 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:anomalias",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.9,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 8.308740419297337e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -653,6 +640,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 6.269344376085972e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:anomalias",
+      "b": "generacion_electrica",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "Generación eléctrica",
+      "coeficiente": 0.897,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.323512854650838e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -782,7 +782,7 @@
       "coeficiente": 0.89,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.9686038774984374e-15,
+      "p": 6.49797907040403e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
