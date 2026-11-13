@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "explorador",
     "capa": "publico",
-    "obtenido_en": "2026-11-12T14:33:41+00:00",
+    "obtenido_en": "2026-11-13T13:53:38+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — exploración de puertas de datos oficiales",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#explorador"
@@ -128,7 +128,7 @@
         {
           "dominio": "www.datosabiertos.gob.pe",
           "dialecto": "CKAN",
-          "conjuntos": 3662,
+          "conjuntos": 3663,
           "url": "https://www.datosabiertos.gob.pe/api/3/action/package_list"
         }
       ],
@@ -189,7 +189,7 @@
         {
           "dominio": "datos.gob.mx",
           "dialecto": "CKAN",
-          "conjuntos": 1893,
+          "conjuntos": 1902,
           "url": "https://datos.gob.mx/api/3/action/package_list"
         }
       ],
@@ -290,9 +290,11 @@
       "iso": "SLV",
       "pais": "El Salvador",
       "bloque": "México y Centroamérica",
-      "estado": "sin_puerta_hallada",
+      "estado": "cierra",
       "puertas_abiertas": [],
-      "puertas_cerradas": [],
+      "puertas_cerradas": [
+        "www.iaip.gob.sv · HTTP 403"
+      ],
       "dominios_probados": [
         "www.iaip.gob.sv",
         "www.transparencia.gob.sv"
@@ -482,9 +484,15 @@
       "puertas_abiertas": [
         {
           "dominio": "datos.gob.ar",
+          "dialecto": "DCAT",
+          "conjuntos": null,
+          "url": "https://datos.gob.ar/data.json"
+        },
+        {
+          "dominio": "datos.gob.ar",
           "dialecto": "CKAN",
           "conjuntos": 1237,
-          "url": "https://datos.gob.ar/api/3/action/package_search?rows=1"
+          "url": "https://datos.gob.ar/api/3/action/package_list"
         }
       ],
       "puertas_cerradas": [],
@@ -507,14 +515,14 @@
   ],
   "resumen": {
     "estados_que_abren": 9,
-    "estados_que_cierran": 6,
-    "estados_sin_puerta_hallada": 18,
+    "estados_que_cierran": 7,
+    "estados_sin_puerta_hallada": 17,
     "estados_del_padron": 33,
     "dominios_probados": 50,
     "dialectos_probados": 6,
     "toques_realizados": 350,
     "explorador_probado": true,
-    "consultado": "2026-11-12T14:33:41+00:00"
+    "consultado": "2026-11-13T13:53:38+00:00"
   },
   "dialectos": [
     "ArcGIS Hub",
