@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-11-13T23:38:45+00:00",
+    "obtenido_en": "2026-11-14T13:11:03+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "6 consultas fallaron en esta corrida: PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
+      "7 consultas fallaron en esta corrida: MEX/Contratación pública: URLError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -54,14 +54,14 @@
           "cantidad": 1070,
           "ejemplos": [
             {
-              "titulo": "PROCESOS CONTRATACION TAURAMENA",
-              "organismo": "TAURAMENA",
-              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
-            },
-            {
               "titulo": "Contratacion Emserchia E.S.P.",
               "organismo": "Emserchia",
               "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
+            },
+            {
+              "titulo": "SECOP II CONTRATACION ABIERTA",
+              "organismo": "Alcaldía Mayor de Cartagena",
+              "enlace": "https://www.datos.gov.co/d/432e-zwh4"
             },
             {
               "titulo": "Contratacion Alcaldía Chitaraque",
@@ -69,9 +69,9 @@
               "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
             },
             {
-              "titulo": "CONTRATACION CEPITA",
-              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
-              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
+              "titulo": "PROCESOS CONTRATACION TAURAMENA",
+              "organismo": "TAURAMENA",
+              "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             }
           ]
         },
@@ -388,7 +388,7 @@
           "materia": "Presupuesto",
           "eje": "Gobernanza",
           "consulta": "presupuesto",
-          "cantidad": 312,
+          "cantidad": 358,
           "ejemplos": [
             {
               "titulo": "Presupuestos Historicos",
@@ -486,7 +486,7 @@
           "ejemplos": []
         }
       ],
-      "conjuntos_hallados": 334
+      "conjuntos_hallados": 380
     },
     {
       "iso": "MEX",
@@ -549,34 +549,6 @@
               "titulo": "Información estadística penitenciaria nacional (junio, 2025)",
               "organismo": "Prevención y Reinserción Social (PRS)",
               "enlace": "https://datos.gob.mx/dataset/informacion_estadistica_penitenciaria_nacional_junio_2025"
-            }
-          ]
-        },
-        {
-          "materia": "Contratación pública",
-          "eje": "Gobernanza",
-          "consulta": "contrataciones",
-          "cantidad": 32,
-          "ejemplos": [
-            {
-              "titulo": "Procedimientos de contratación",
-              "organismo": "Tecnológico Nacional de México (TecNM)",
-              "enlace": "https://datos.gob.mx/dataset/procedimientos_contratacion"
-            },
-            {
-              "titulo": "Contratación de bienes y servicios",
-              "organismo": "Comisión Nacional de Acuacultura y Pesca (CONAPESCA)",
-              "enlace": "https://datos.gob.mx/dataset/contratacion_bienes_servicios"
-            },
-            {
-              "titulo": "Procedimientos de contratación de obra pública. Red Propia",
-              "organismo": "Caminos y Puentes Federales de Ingresos y Servicios Conexos (CAPUFE)",
-              "enlace": "https://datos.gob.mx/dataset/procedimientos_contratacion_obra_publica_red_propia"
-            },
-            {
-              "titulo": "Contratos de AGROASEMEX",
-              "organismo": "AGROASEMEX, S.A",
-              "enlace": "https://datos.gob.mx/dataset/contratos_agroasemex"
             }
           ]
         },
@@ -665,7 +637,7 @@
           ]
         }
       ],
-      "conjuntos_hallados": 307
+      "conjuntos_hallados": 275
     },
     {
       "iso": "ARG",
@@ -1274,7 +1246,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4415,
+    "conjuntos_hallados": 4429,
     "materias_consultadas": 6,
     "oficinas_que_responden": 25,
     "estados_con_alguna_fuente_oficial": 27
