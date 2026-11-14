@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-14T21:28:08+00:00",
-  "medidas_con_suficientes_casos": 200,
-  "pares_probados": 19900,
+  "corrida": "2026-11-14T22:54:54+00:00",
+  "medidas_con_suficientes_casos": 197,
+  "pares_probados": 19306,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3716,
-    "de_ellos_son_parentescos": 410
+    "por_que": "Con 19.306 pares y el umbral de siempre, alrededor de 965 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3517,
+    "de_ellos_son_parentescos": 404
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3306,
+  "pistas_totales": 3113,
   "anomalias_totales": 399,
   "pistas": [
     {
@@ -184,7 +184,7 @@
       "coeficiente": 0.946,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 1.1830152308350707e-22,
+      "p": 1.1360364657521122e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -411,19 +411,6 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:victimas_ultimos_dos_anios",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.92,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 4.271364279647622e-17,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "democracia_liberal",
       "b": "voz_rendicion",
       "rotulo_a": "Democracia liberal — límites al poder",
@@ -471,19 +458,6 @@
       "estados": 15,
       "tipo": "rangos (Spearman)",
       "p": 7.453180194676548e-08,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "migrantes",
-      "b": "ransomware:victimas",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.913,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 3.1032766448960067e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -619,32 +593,6 @@
       "misma_categoria": false
     },
     {
-      "a": "migrantes",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.901,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 5.887152140086138e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "ransomware:victimas",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.901,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 1.596764285725826e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -692,32 +640,6 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 4.051241903115462e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "ransomware:grupos_distintos",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "ransomware · grupos_distintos",
-      "coeficiente": 0.897,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 3.0846784632914957e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ransomware:grupos_distintos",
-      "b": "reservas_internacionales",
-      "rotulo_a": "ransomware · grupos_distintos",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.896,
-      "estados": 29,
-      "tipo": "rangos (Spearman)",
-      "p": 1.2392475807558931e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -796,6 +718,84 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "poblacion",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Población total",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.889,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 6.811009394007264e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "armas_incautadas",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Armas de fuego incautadas",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.889,
+      "estados": 26,
+      "tipo": "rangos (Spearman)",
+      "p": 1.034416467561965e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "corrupcion_politica",
+      "b": "percepcion_corrupcion",
+      "rotulo_a": "Corrupción política",
+      "rotulo_b": "Percepción de corrupción",
+      "coeficiente": -0.889,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 3.003697736400933e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "corrupcion_politica",
+      "b": "percepcion_corrupcion:puntaje",
+      "rotulo_a": "Corrupción política",
+      "rotulo_b": "percepcion_corrupcion · puntaje",
+      "coeficiente": -0.889,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 3.003697736400933e-11,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "administracion_basica",
+      "b": "democracia_electoral",
+      "rotulo_a": "Administración básica del Estado",
+      "rotulo_b": "Nivel democrático — democracia electoral",
+      "coeficiente": 0.889,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 6.409505276196099e-10,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "actores_antidemocraticos",
+      "b": "democracia_participativa",
+      "rotulo_a": "Control sobre actores antidemocráticos",
+      "rotulo_b": "Democracia participativa",
+      "coeficiente": 0.888,
+      "estados": 22,
+      "tipo": "rangos (Spearman)",
+      "p": 7.061326432405994e-10,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
