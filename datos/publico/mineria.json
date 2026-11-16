@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-16T14:51:52+00:00",
+  "corrida": "2026-11-16T20:27:47+00:00",
   "medidas_con_suficientes_casos": 200,
   "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3729,
+    "sobreviven": 3739,
     "de_ellos_son_parentescos": 410
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3319,
+  "pistas_totales": 3329,
   "anomalias_totales": 399,
   "pistas": [
     {
@@ -515,19 +515,6 @@
       "misma_categoria": false
     },
     {
-      "a": "patentes_residentes",
-      "b": "redes:publicaciones",
-      "rotulo_a": "Solicitudes de patente de residentes",
-      "rotulo_b": "redes · publicaciones",
-      "coeficiente": 0.91,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 7.77682048174012e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "desplazamiento:recepcion",
       "b": "migrantes",
       "rotulo_a": "desplazamiento · recepcion",
@@ -549,6 +536,19 @@
       "estados": 30,
       "tipo": "rangos (Spearman)",
       "p": 6.948046658391877e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "patentes_residentes",
+      "b": "redes:publicaciones",
+      "rotulo_a": "Solicitudes de patente de residentes",
+      "rotulo_b": "redes · publicaciones",
+      "coeficiente": 0.905,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 2.2043765052768274e-12,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -710,6 +710,19 @@
       "misma_categoria": false
     },
     {
+      "a": "patentes_residentes",
+      "b": "redes:cuentas_distintas",
+      "rotulo_a": "Solicitudes de patente de residentes",
+      "rotulo_b": "redes · cuentas_distintas",
+      "coeficiente": 0.897,
+      "estados": 25,
+      "tipo": "rangos (Spearman)",
+      "p": 7.704149678774324e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "ransomware:grupos_distintos",
       "b": "reservas_internacionales",
       "rotulo_a": "ransomware · grupos_distintos",
@@ -783,19 +796,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "patentes_residentes",
-      "b": "redes:cuentas_distintas",
-      "rotulo_a": "Solicitudes de patente de residentes",
-      "rotulo_b": "redes · cuentas_distintas",
-      "coeficiente": 0.892,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 2.009074293107114e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
