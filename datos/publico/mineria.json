@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-16T21:47:10+00:00",
-  "medidas_con_suficientes_casos": 199,
-  "pares_probados": 19701,
+  "corrida": "2026-11-17T01:39:15+00:00",
+  "medidas_con_suficientes_casos": 200,
+  "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3708,
-    "de_ellos_son_parentescos": 410
+    "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3763,
+    "de_ellos_son_parentescos": 412
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3298,
+  "pistas_totales": 3351,
   "anomalias_totales": 399,
   "pistas": [
     {
@@ -164,6 +164,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.948,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.083954028502247e-23,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -185,19 +198,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 3.4759574997597266e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.945,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.661595936818376e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -483,7 +483,7 @@
       "coeficiente": 0.913,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 3.1032766448960067e-16,
+      "p": 2.722499952356896e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -619,19 +619,6 @@
       "misma_categoria": false
     },
     {
-      "a": "financiero_gfi:brecha_usd_millones",
-      "b": "ransomware:victimas",
-      "rotulo_a": "financiero_gfi · brecha_usd_millones",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.901,
-      "estados": 28,
-      "tipo": "rangos (Spearman)",
-      "p": 1.596764285725826e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Población total",
@@ -645,14 +632,14 @@
       "misma_categoria": false
     },
     {
-      "a": "patentes_residentes",
-      "b": "redes:publicaciones",
-      "rotulo_a": "Solicitudes de patente de residentes",
-      "rotulo_b": "redes · publicaciones",
-      "coeficiente": 0.898,
-      "estados": 25,
+      "a": "financiero_gfi:brecha_usd_millones",
+      "b": "ransomware:victimas",
+      "rotulo_a": "financiero_gfi · brecha_usd_millones",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.9,
+      "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 7.536818398848722e-12,
+      "p": 1.8336188648512673e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -666,6 +653,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 1.1532181702939435e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "riesgo_inform_amenaza",
+      "b": "unidades:casos_por_unidad",
+      "rotulo_a": "Exposición a amenazas (INFORM)",
+      "rotulo_b": "unidades · casos_por_unidad",
+      "coeficiente": 0.897,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 1.308745289185404e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,27 +775,27 @@
       "misma_categoria": false
     },
     {
-      "a": "riesgo_inform_amenaza",
-      "b": "unidades:casos_por_unidad",
-      "rotulo_a": "Exposición a amenazas (INFORM)",
-      "rotulo_b": "unidades · casos_por_unidad",
-      "coeficiente": 0.892,
-      "estados": 31,
+      "a": "ransomware:victimas",
+      "b": "reservas_internacionales",
+      "rotulo_a": "ransomware · victimas",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.89,
+      "estados": 29,
       "tipo": "rangos (Spearman)",
-      "p": 3.687949310085253e-14,
+      "p": 4.205548214488538e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "perdida_bosque",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Bosque perdido",
+      "a": "poblacion",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Población total",
+      "rotulo_b": "Reservas internacionales",
       "coeficiente": 0.889,
-      "estados": 33,
+      "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 8.522377495407873e-15,
+      "p": 6.811009394007264e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
