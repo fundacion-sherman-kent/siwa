@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-11-17T15:34:29+00:00",
+    "obtenido_en": "2026-11-17T20:45:31+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "7 consultas fallaron en esta corrida: COL/Integridad: URLError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
+      "7 consultas fallaron en esta corrida: COL/Delito registrado: URLError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -64,14 +64,14 @@
               "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             },
             {
-              "titulo": "Contratacion Alcaldía Chitaraque",
-              "organismo": "Alcaldía de Chitaraque",
-              "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
-            },
-            {
               "titulo": "SECOP II CONTRATACION ABIERTA",
               "organismo": "Alcaldía Mayor de Cartagena",
               "enlace": "https://www.datos.gov.co/d/432e-zwh4"
+            },
+            {
+              "titulo": "Contratacion Alcaldía Chitaraque",
+              "organismo": "Alcaldía de Chitaraque",
+              "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
             }
           ]
         },
@@ -100,34 +100,6 @@
               "titulo": "PRESUPUESTO AIM-2020",
               "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
               "enlace": "https://www.datos.gov.co/d/efrw-bijb"
-            }
-          ]
-        },
-        {
-          "materia": "Delito registrado",
-          "eje": "Seguridad",
-          "consulta": "delito",
-          "cantidad": 146,
-          "ejemplos": [
-            {
-              "titulo": "DELITOS INFORMÁTICOS",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
-            },
-            {
-              "titulo": "DELITOS SEXUALES",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
-            },
-            {
-              "titulo": "Delitos Informaticos V1",
-              "organismo": "Damicruz",
-              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
-            },
-            {
-              "titulo": "Reporte  Delitos sexuales Policía Nacional",
-              "organismo": "DIJIN",
-              "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
             }
           ]
         },
@@ -186,9 +158,37 @@
               "enlace": "https://www.datos.gov.co/d/8rme-4s7n"
             }
           ]
+        },
+        {
+          "materia": "Integridad",
+          "eje": "Gobernanza",
+          "consulta": "corrupcion",
+          "cantidad": 59,
+          "ejemplos": [
+            {
+              "titulo": "Programa Interamericano de datos abiertos para la lucha contra la corrupción PIDA",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/stories/s/k5ma-yb9b"
+            },
+            {
+              "titulo": "Vista Diagnóstico Conjuntos de Datos Abiertos Programa Interamericano de Lucha Contra la Corrupción PIDA",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/wmwy-ixwz"
+            },
+            {
+              "titulo": "Gráfico de Disponibilidad de Datos Abiertos del PIDA",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/6m24-6wiv"
+            },
+            {
+              "titulo": "Base de Datos Riesgos Alcaldía de Cali",
+              "organismo": "Ministerio de Tecnologías de la Información y las Comunicaciones - Datos Abiertos",
+              "enlace": "https://www.datos.gov.co/d/tarm-4qgv"
+            }
+          ]
         }
       ],
-      "conjuntos_hallados": 2018
+      "conjuntos_hallados": 1931
     },
     {
       "iso": "PAN",
@@ -690,7 +690,7 @@
             {
               "titulo": "Sistema de Contrataciones Electrónicas",
               "organismo": "Jefatura de Gabinete de Ministros (JGM)",
-              "enlace": "https://datos.gob.ar/dataset/sistema-de-contrataciones-electronicas"
+              "enlace": "https://datos.gob.ar/dataset/sistema-de-contrataciones-electronicas1"
             },
             {
               "titulo": "Compras y Contrataciones de ACUMAR",
@@ -1080,12 +1080,17 @@
           "materia": "Violencia organizada",
           "eje": "Seguridad",
           "consulta": "homicidio",
-          "cantidad": 1,
+          "cantidad": 2,
           "ejemplos": [
             {
               "titulo": "Estadisticas de feminicidios y homicidios de mujeres, 2017 – 2022",
               "organismo": "Procuraduría General de la República (PGR)",
               "enlace": "https://datos.gob.do/dataset/estadisticas-de-feminicidios-y-homicidios-de-mujeres"
+            },
+            {
+              "titulo": "Número de Homicidios Ocurridos y Registrados por Año y Sexo, 2007-2025",
+              "organismo": "Oficina Nacional de Estadística (ONE)",
+              "enlace": "https://datos.gob.do/dataset/numero-de-homicidios-ocurridos-y-registrados-por-ano-y-sexo-2007-2025"
             }
           ]
         },
@@ -1097,7 +1102,7 @@
           "ejemplos": []
         }
       ],
-      "conjuntos_hallados": 85
+      "conjuntos_hallados": 86
     },
     {
       "iso": "PER",
@@ -1251,7 +1256,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4631,
+    "conjuntos_hallados": 4545,
     "materias_consultadas": 6,
     "oficinas_que_responden": 25,
     "estados_con_alguna_fuente_oficial": 27
