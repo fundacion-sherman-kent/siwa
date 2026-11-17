@@ -56,6 +56,17 @@ CATEGORIAS = {
                   "individuales."},
 }
 
+# OWID cambió la columna de los CÓDIGOS numéricos (0–3) a las ETIQUETAS de texto del
+# esquema «Regimes of the World» (noviembre de 2026). Son las mismas cuatro categorías,
+# en el mismo orden y con el mismo significado: se aceptan las dos representaciones, para
+# que la lectura no se rompa si la fuente vuelve a los códigos.
+CATEGORIAS.update({
+    "Closed autocracy": CATEGORIAS["0"],
+    "Electoral autocracy": CATEGORIAS["1"],
+    "Electoral democracy": CATEGORIAS["2"],
+    "Liberal democracy": CATEGORIAS["3"],
+})
+
 # V-Dem NO cubre a los Estados chicos del Caribe. Ocho del padrón quedan fuera, y
 # eso es una brecha del proyecto, no una característica de esos Estados: no
 # significa que no tengan régimen clasificable, significa que nadie los codificó.
