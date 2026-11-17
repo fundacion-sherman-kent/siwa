@@ -1,6 +1,6 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-17T13:19:51+00:00",
+  "corrida": "2026-11-17T15:36:55+00:00",
   "medidas_con_suficientes_casos": 200,
   "pares_probados": 19900,
   "correccion": {
@@ -18,7 +18,7 @@
     "maxima_repeticion_de_un_valor": 0.6
   },
   "pistas_totales": 3354,
-  "anomalias_totales": 399,
+  "anomalias_totales": 401,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -125,19 +125,6 @@
       "misma_categoria": false
     },
     {
-      "a": "inflacion_fmi",
-      "b": "inflacion_interanual",
-      "rotulo_a": "Inflación de doce meses, según el FMI",
-      "rotulo_b": "Inflación de los últimos doce meses",
-      "coeficiente": 0.956,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1036709324387876e-23,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "democracia_electoral",
       "b": "voz_rendicion",
       "rotulo_a": "Nivel democrático — democracia electoral",
@@ -159,6 +146,19 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 5.413298804259817e-23,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "inflacion_fmi",
+      "b": "inflacion_interanual",
+      "rotulo_a": "Inflación de doce meses, según el FMI",
+      "rotulo_b": "Inflación de los últimos doce meses",
+      "coeficiente": 0.949,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 4.556404295353174e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
