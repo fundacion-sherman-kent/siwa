@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-18T13:09:04+00:00",
-  "medidas_con_suficientes_casos": 199,
-  "pares_probados": 19701,
+  "corrida": "2026-11-18T15:15:49+00:00",
+  "medidas_con_suficientes_casos": 200,
+  "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3719,
-    "de_ellos_son_parentescos": 410
+    "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3762,
+    "de_ellos_son_parentescos": 411
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3309,
-  "anomalias_totales": 401,
+  "pistas_totales": 3351,
+  "anomalias_totales": 398,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -415,10 +415,10 @@
       "b": "ransomware:victimas_ultimos_dos_anios",
       "rotulo_a": "Población migrante que el país aloja",
       "rotulo_b": "ransomware · victimas_ultimos_dos_anios",
-      "coeficiente": 0.919,
+      "coeficiente": 0.92,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 6.237921474919612e-17,
+      "p": 4.271364279647622e-17,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -476,6 +476,19 @@
       "misma_categoria": false
     },
     {
+      "a": "migrantes",
+      "b": "ransomware:victimas",
+      "rotulo_a": "Población migrante que el país aloja",
+      "rotulo_b": "ransomware · victimas",
+      "coeficiente": 0.913,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 2.722499952356896e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "administracion_basica",
       "b": "estado_derecho",
       "rotulo_a": "Administración básica del Estado",
@@ -497,19 +510,6 @@
       "estados": 21,
       "tipo": "rangos (Spearman)",
       "p": 6.027655962382691e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "migrantes",
-      "b": "ransomware:victimas",
-      "rotulo_a": "Población migrante que el país aloja",
-      "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.911,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 4.3772776691286737e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -636,10 +636,10 @@
       "b": "ransomware:victimas",
       "rotulo_a": "financiero_gfi · brecha_usd_millones",
       "rotulo_b": "ransomware · victimas",
-      "coeficiente": 0.899,
+      "coeficiente": 0.9,
       "estados": 28,
       "tipo": "rangos (Spearman)",
-      "p": 2.396471358692448e-13,
+      "p": 1.8336188648512673e-13,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -795,7 +795,7 @@
       "coeficiente": 0.891,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 6.013402741401755e-15,
+      "p": 5.136246186877749e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
