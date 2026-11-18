@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-18T20:15:09+00:00",
+  "corrida": "2026-11-18T21:26:18+00:00",
   "medidas_con_suficientes_casos": 200,
   "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3766,
+    "sobreviven": 3764,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3354,
+  "pistas_totales": 3352,
   "anomalias_totales": 400,
   "pistas": [
     {
@@ -645,32 +645,6 @@
       "misma_categoria": false
     },
     {
-      "a": "articulos_cientificos",
-      "b": "redes:cuentas_distintas",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "redes · cuentas_distintas",
-      "coeficiente": 0.899,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 9.101789739522132e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "articulos_cientificos",
-      "b": "redes:publicaciones",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "redes · publicaciones",
-      "coeficiente": 0.898,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.232338298307323e-15,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "riesgo_inform_amenaza",
       "b": "unidades:homicidios_del_pais",
       "rotulo_a": "Exposición a amenazas (INFORM)",
@@ -796,6 +770,32 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 2.413158697455027e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.892,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.162818970920993e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "redes:publicaciones",
+      "b": "reservas_internacionales",
+      "rotulo_a": "redes · publicaciones",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.891,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 4.13943561696651e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
