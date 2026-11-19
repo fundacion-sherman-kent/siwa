@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-19T13:00:41+00:00",
-  "medidas_con_suficientes_casos": 201,
-  "pares_probados": 20100,
+  "corrida": "2026-11-19T15:35:28+00:00",
+  "medidas_con_suficientes_casos": 202,
+  "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.100 pares y el umbral de siempre, alrededor de 1.005 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3800,
+    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3792,
     "de_ellos_son_parentescos": 415
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3385,
+  "pistas_totales": 3377,
   "anomalias_totales": 400,
   "pistas": [
     {
@@ -164,19 +164,6 @@
       "misma_categoria": false
     },
     {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.947,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 6.318749172068177e-23,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -198,6 +185,19 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 3.4759574997597266e-19,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.943,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 5.2446696223411935e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -580,6 +580,19 @@
       "misma_categoria": false
     },
     {
+      "a": "poblacion",
+      "b": "redes:publicaciones",
+      "rotulo_a": "Población total",
+      "rotulo_b": "redes · publicaciones",
+      "coeficiente": 0.903,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 4.025519688006156e-16,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "estabilidad",
       "b": "monopolio_fuerza",
       "rotulo_a": "Estabilidad política y ausencia de violencia",
@@ -645,32 +658,6 @@
       "misma_categoria": false
     },
     {
-      "a": "riesgo_inform_amenaza",
-      "b": "unidades:homicidios_del_pais",
-      "rotulo_a": "Exposición a amenazas (INFORM)",
-      "rotulo_b": "unidades · homicidios_del_pais",
-      "coeficiente": 0.897,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.1532181702939435e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "riesgo_inform_amenaza",
-      "b": "unidades:casos_por_unidad",
-      "rotulo_a": "Exposición a amenazas (INFORM)",
-      "rotulo_b": "unidades · casos_por_unidad",
-      "coeficiente": 0.897,
-      "estados": 31,
-      "tipo": "rangos (Spearman)",
-      "p": 1.308745289185404e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
       "a": "poblacion",
       "b": "subnacional_acled:cuantas",
       "rotulo_a": "Población total",
@@ -718,6 +705,19 @@
       "estados": 25,
       "tipo": "rangos (Spearman)",
       "p": 9.621070309355055e-12,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "ciber:anomalias",
+      "b": "redes:publicaciones",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "redes · publicaciones",
+      "coeficiente": 0.895,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 2.540820856703102e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,14 +775,14 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:anomalias",
-      "b": "redes:publicaciones",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "redes · publicaciones",
-      "coeficiente": 0.893,
-      "estados": 33,
+      "a": "riesgo_inform_amenaza",
+      "b": "unidades:homicidios_del_pais",
+      "rotulo_a": "Exposición a amenazas (INFORM)",
+      "rotulo_b": "unidades · homicidios_del_pais",
+      "coeficiente": 0.892,
+      "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 3.287537308306525e-15,
+      "p": 3.387911113834888e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
