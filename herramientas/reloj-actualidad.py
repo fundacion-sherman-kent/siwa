@@ -249,14 +249,19 @@ def nacionales(publicado_bm: dict) -> list:
     salida = []
     estado, _, cuerpo = pedir("https://cloud-snic.minseg.gob.ar/Bases/SNIC/snic-pais.csv")
     if estado == 200:
-        filas = [l.split(";") for l in cuerpo.decode("utf-8", "replace").splitlines()[1:]]
+        # El SNIC pasó de ';' a ',' como separador (nov. 2026); la columna 9 sigue
+        # siendo tasa_victimas. Si la planilla vuelve a cambiar de forma y no queda
+        # ninguna fila, se OMITE esta fuente en vez de tumbar el reloj entero: el
+        # paso corre con continue-on-error y una excepción acá sería un fallo mudo.
+        filas = [l.split(",") for l in cuerpo.decode("utf-8", "replace").splitlines()[1:]]
         hom = [f for f in filas if len(f) > 9 and "Homicidios dolosos" == f[2].strip('"')]
-        ultimo = max(hom, key=lambda f: int(f[0]))
-        salida.append({"iso": "ARG", "materia": "homicidios dolosos", "organismo": "Ministerio de Seguridad — SNIC",
-                       "ultimo_periodo": int(ultimo[0]), "valor": float(ultimo[9].replace(",", ".")),
-                       "unidad": "víctimas por cada 100.000 habitantes",
-                       "siwa": publicado_bm.get("homicidios", {}).get("ARG"),
-                       "url": "https://cloud-snic.minseg.gob.ar/Bases/SNIC/snic-pais.csv"})
+        if hom:
+            ultimo = max(hom, key=lambda f: int(f[0]))
+            salida.append({"iso": "ARG", "materia": "homicidios dolosos", "organismo": "Ministerio de Seguridad — SNIC",
+                           "ultimo_periodo": int(ultimo[0]), "valor": float(ultimo[9].replace(",", ".")),
+                           "unidad": "víctimas por cada 100.000 habitantes",
+                           "siwa": publicado_bm.get("homicidios", {}).get("ARG"),
+                           "url": "https://cloud-snic.minseg.gob.ar/Bases/SNIC/snic-pais.csv"})
     estado, _, cuerpo = pedir("https://www.datos.gov.co/api/views/m8fd-ahd9.json")
     if estado == 200:
         j = json.loads(cuerpo)
