@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-19T21:31:07+00:00",
-  "medidas_con_suficientes_casos": 201,
-  "pares_probados": 20100,
+  "corrida": "2026-11-20T00:18:33+00:00",
+  "medidas_con_suficientes_casos": 199,
+  "pares_probados": 19701,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 20.100 pares y el umbral de siempre, alrededor de 1.005 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3767,
+    "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3769,
     "de_ellos_son_parentescos": 415
   },
   "minimos": {
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3352,
-  "anomalias_totales": 400,
+  "pistas_totales": 3354,
+  "anomalias_totales": 393,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -190,6 +190,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.944,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.2282330016002244e-22,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "generacion_electrica",
       "b": "personal_militar",
       "rotulo_a": "Generación eléctrica",
@@ -198,19 +211,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 9.405686241679113e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.942,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 7.205545470384761e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -489,6 +489,19 @@
       "misma_categoria": false
     },
     {
+      "a": "ciber:anomalias",
+      "b": "redes:publicaciones",
+      "rotulo_a": "ciber · anomalias",
+      "rotulo_b": "redes · publicaciones",
+      "coeficiente": 0.912,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 3.4740614693661193e-17,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "administracion_basica",
       "b": "estado_derecho",
       "rotulo_a": "Administración básica del Estado",
@@ -523,19 +536,6 @@
       "estados": 33,
       "tipo": "rangos (Spearman)",
       "p": 1.1905778960493398e-16,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "ciber:anomalias",
-      "b": "redes:publicaciones",
-      "rotulo_a": "ciber · anomalias",
-      "rotulo_b": "redes · publicaciones",
-      "coeficiente": 0.905,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 2.420504232518585e-16,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -658,6 +658,19 @@
       "misma_categoria": false
     },
     {
+      "a": "articulos_cientificos",
+      "b": "redes:publicaciones",
+      "rotulo_a": "Artículos científicos y técnicos publicados",
+      "rotulo_b": "redes · publicaciones",
+      "coeficiente": 0.897,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 1.5645730764038095e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "subnacional_acled:cuantas",
       "rotulo_a": "Población total",
@@ -679,19 +692,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 3.0846784632914957e-13,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "articulos_cientificos",
-      "b": "redes:publicaciones",
-      "rotulo_a": "Artículos científicos y técnicos publicados",
-      "rotulo_b": "redes · publicaciones",
-      "coeficiente": 0.896,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.9371378581991076e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "ciber:mediciones",
-      "b": "generacion_electrica",
-      "rotulo_a": "ciber · mediciones",
-      "rotulo_b": "Generación eléctrica",
-      "coeficiente": 0.891,
-      "estados": 33,
+      "a": "poblacion",
+      "b": "reservas_internacionales",
+      "rotulo_a": "Población total",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": 0.889,
+      "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 5.44964946258527e-15,
+      "p": 6.811009394007264e-14,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
