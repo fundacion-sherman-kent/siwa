@@ -1,14 +1,14 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-20T11:32:10+00:00",
-  "medidas_con_suficientes_casos": 199,
-  "pares_probados": 19701,
+  "corrida": "2026-11-20T14:59:51+00:00",
+  "medidas_con_suficientes_casos": 202,
+  "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
-    "por_que": "Con 19.701 pares y el umbral de siempre, alrededor de 985 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3765,
-    "de_ellos_son_parentescos": 414
+    "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
+    "sobreviven": 3799,
+    "de_ellos_son_parentescos": 415
   },
   "minimos": {
     "casos_por_par": 15,
@@ -17,8 +17,8 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3351,
-  "anomalias_totales": 393,
+  "pistas_totales": 3384,
+  "anomalias_totales": 400,
   "pistas": [
     {
       "a": "gasto_militar_dolares",
@@ -762,6 +762,19 @@
       "misma_categoria": false
     },
     {
+      "a": "indice_opacidad:opacidad",
+      "b": "reservas_internacionales",
+      "rotulo_a": "indice_opacidad · opacidad",
+      "rotulo_b": "Reservas internacionales",
+      "coeficiente": -0.891,
+      "estados": 31,
+      "tipo": "rangos (Spearman)",
+      "p": 4.342438783604232e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "reservas_internacionales",
       "rotulo_a": "Población total",
@@ -783,19 +796,6 @@
       "estados": 26,
       "tipo": "rangos (Spearman)",
       "p": 1.034416467561965e-11,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "corrupcion_politica",
-      "b": "percepcion_corrupcion",
-      "rotulo_a": "Corrupción política",
-      "rotulo_b": "Percepción de corrupción",
-      "coeficiente": -0.889,
-      "estados": 25,
-      "tipo": "rangos (Spearman)",
-      "p": 3.003697736400933e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
