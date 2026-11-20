@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-20T14:59:51+00:00",
+  "corrida": "2026-11-20T19:53:51+00:00",
   "medidas_con_suficientes_casos": 202,
   "pares_probados": 20301,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 20.301 pares y el umbral de siempre, alrededor de 1.015 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3799,
+    "sobreviven": 3790,
     "de_ellos_son_parentescos": 415
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3384,
+  "pistas_totales": 3375,
   "anomalias_totales": 400,
   "pistas": [
     {
@@ -197,7 +197,7 @@
       "coeficiente": 0.944,
       "estados": 33,
       "tipo": "rangos (Spearman)",
-      "p": 3.2282330016002244e-22,
+      "p": 2.7394640653488535e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -769,7 +769,20 @@
       "coeficiente": -0.891,
       "estados": 31,
       "tipo": "rangos (Spearman)",
-      "p": 4.342438783604232e-14,
+      "p": 4.4040448419170004e-14,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.889,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 7.954589674355898e-15,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -783,19 +796,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 6.811009394007264e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "armas_incautadas",
-      "b": "reservas_internacionales",
-      "rotulo_a": "Armas de fuego incautadas",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.889,
-      "estados": 26,
-      "tipo": "rangos (Spearman)",
-      "p": 1.034416467561965e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
