@@ -200,7 +200,7 @@ python colectores/focos.py
 | `sismos` | Servicio Geológico de los Estados Unidos (USGS) — catálogo de sismos, servicio FDSN | `A-1` | 33 | 6 |
 | `sondeo` | Fundación Sherman Kent — banco de pruebas de fuentes candidatas | `A-1` | — | 5 |
 | `subnacional` | Censo propio de fuentes subnacionales — Fundación Sherman Kent, sobre los catálogos que publica cada jurisdicción | `A-2` | — | 3 |
-| `subnacional_acled` | ACLED — Armed Conflict Location & Event Data Project: eventos de violencia política por unidad de primer orden (admin1) de cada Estado | `B-2` | 30 | 3 |
+| `subnacional_acled` | ACLED — Armed Conflict Location & Event Data Project: eventos de violencia política por unidad de primer orden (admin1) de cada Estado | `B-2` | 29 | 3 |
 | `subnacional_colombia_extorsion` | Extorsión — Ministerio de Defensa Nacional / Policía Nacional de Colombia, vía datos.gov.co (Socrata) | `A-2` | 1 | 4 |
 | `subnacional_colombia_incautacion_base_coca` | Incautación de base de coca — Ministerio de Defensa Nacional / Policía Nacional de Colombia, vía datos.gov.co (Socrata) | `A-2` | 1 | 5 |
 | `subnacional_colombia_incautacion_basuco` | Incautación de basuco — Ministerio de Defensa Nacional / Policía Nacional de Colombia, vía datos.gov.co (Socrata) | `A-2` | 1 | 4 |
