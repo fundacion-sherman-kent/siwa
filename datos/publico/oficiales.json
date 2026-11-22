@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-11-22T14:04:58+00:00",
+    "obtenido_en": "2026-11-22T19:15:12+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "12 consultas fallaron en esta corrida: ARG/Violencia organizada: TimeoutError; ARG/Delito registrado: TimeoutError; ARG/Contratación pública: TimeoutError; ARG/Integridad: TimeoutError; ARG/Presupuesto: TimeoutError; ARG/Migración y desplazamiento: TimeoutError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
+      "11 consultas fallaron en esta corrida: ARG/Violencia organizada: TimeoutError; ARG/Delito registrado: TimeoutError; ARG/Contratación pública: TimeoutError; ARG/Integridad: TimeoutError; ARG/Presupuesto: TimeoutError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -64,14 +64,14 @@
               "enlace": "https://www.datos.gov.co/d/37hf-6yc2"
             },
             {
-              "titulo": "CONTRATACION CEPITA",
-              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
-              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
-            },
-            {
               "titulo": "Contratacion Alcaldía Chitaraque",
               "organismo": "Alcaldía de Chitaraque",
               "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
+            },
+            {
+              "titulo": "SECOP II CONTRATACION ABIERTA",
+              "organismo": "Alcaldía Mayor de Cartagena",
+              "enlace": "https://www.datos.gov.co/d/432e-zwh4"
             }
           ]
         },
@@ -120,14 +120,14 @@
               "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
             },
             {
-              "titulo": "Delitos Informaticos V1",
-              "organismo": "Damicruz",
-              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
-            },
-            {
               "titulo": "Reporte  Delitos sexuales Policía Nacional",
               "organismo": "DIJIN",
               "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
+            },
+            {
+              "titulo": "Delitos Informaticos V1",
+              "organismo": "Damicruz",
+              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
             }
           ]
         },
@@ -181,9 +181,9 @@
               "enlace": "https://www.datos.gov.co/d/ha6j-pa2r"
             },
             {
-              "titulo": "Homicidios en el municipio de Neiva",
-              "organismo": "Alcaldía Neiva",
-              "enlace": "https://www.datos.gov.co/d/hk7a-5ix3"
+              "titulo": "Guadalajara de Buga : Homicidios por Accidente de Tránsito",
+              "organismo": "Alcaldía Municipal de Guadalajara de Buga",
+              "enlace": "https://www.datos.gov.co/d/8rme-4s7n"
             }
           ]
         },
@@ -1124,8 +1124,32 @@
       "organismo": "Portal Nacional de Datos Abiertos",
       "tipo": "CKAN",
       "portal": "https://datos.gob.ar",
-      "materias": [],
-      "conjuntos_hallados": 0
+      "materias": [
+        {
+          "materia": "Migración y desplazamiento",
+          "eje": "Inteligencia estratégica",
+          "consulta": "migracion",
+          "cantidad": 3,
+          "ejemplos": [
+            {
+              "titulo": "Ingresos y Egresos de personas al pais y Residencias Otorgadas.",
+              "organismo": "Vicejefatura de Gabinete del Interior",
+              "enlace": "https://datos.gob.ar/dataset/interior-ingresos-egresos-personas-al-pais-residencias-otorgadas"
+            },
+            {
+              "titulo": "Turismo Internacional - Total País",
+              "organismo": "Subsecretaría de Turismo",
+              "enlace": "https://datos.gob.ar/dataset/turismo-turismo-internacional---total-pais"
+            },
+            {
+              "titulo": "Crucerismo Marítimo",
+              "organismo": "Subsecretaría de Turismo",
+              "enlace": "https://datos.gob.ar/dataset/turismo-crucerismo-maritimo"
+            }
+          ]
+        }
+      ],
+      "conjuntos_hallados": 3
     },
     {
       "iso": "PRY",
@@ -1141,7 +1165,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4579,
+    "conjuntos_hallados": 4582,
     "materias_consultadas": 6,
     "oficinas_que_responden": 25,
     "estados_con_alguna_fuente_oficial": 27
