@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-23T20:12:14+00:00",
+  "corrida": "2026-11-23T23:27:00+00:00",
   "medidas_con_suficientes_casos": 200,
   "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3739,
+    "sobreviven": 3724,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3327,
+  "pistas_totales": 3312,
   "anomalias_totales": 400,
   "pistas": [
     {
@@ -164,6 +164,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "superficie",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Superficie del territorio",
+      "coeficiente": 0.947,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.318749172068177e-23,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "corrupcion",
       "b": "percepcion_corrupcion:intervalo_alto",
       "rotulo_a": "Control de la corrupción",
@@ -185,19 +198,6 @@
       "estados": 28,
       "tipo": "rangos (Spearman)",
       "p": 3.4759574997597266e-19,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "copernicus:escenas",
-      "b": "superficie",
-      "rotulo_a": "copernicus · escenas",
-      "rotulo_b": "Superficie del territorio",
-      "coeficiente": 0.945,
-      "estados": 33,
-      "tipo": "rangos (Spearman)",
-      "p": 1.4029440699405323e-22,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
@@ -775,6 +775,19 @@
       "misma_categoria": false
     },
     {
+      "a": "copernicus:escenas",
+      "b": "perdida_bosque",
+      "rotulo_a": "copernicus · escenas",
+      "rotulo_b": "Bosque perdido",
+      "coeficiente": 0.89,
+      "estados": 33,
+      "tipo": "rangos (Spearman)",
+      "p": 6.835193217193409e-15,
+      "casi_la_misma": false,
+      "misma_fuente": false,
+      "misma_categoria": false
+    },
+    {
       "a": "poblacion",
       "b": "reservas_internacionales",
       "rotulo_a": "Población total",
@@ -783,19 +796,6 @@
       "estados": 31,
       "tipo": "rangos (Spearman)",
       "p": 6.811009394007264e-14,
-      "casi_la_misma": false,
-      "misma_fuente": false,
-      "misma_categoria": false
-    },
-    {
-      "a": "armas_incautadas",
-      "b": "reservas_internacionales",
-      "rotulo_a": "Armas de fuego incautadas",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.889,
-      "estados": 26,
-      "tipo": "rangos (Spearman)",
-      "p": 1.034416467561965e-11,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
