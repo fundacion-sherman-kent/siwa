@@ -1,13 +1,13 @@
 {
   "que_es": "Minería sobre el propio registro: cruza todos los pares de medidas y busca Estados que se salieron de su propia historia. Deja PISTAS para que las mire una persona; no emite juicios ni afirma causas.",
-  "corrida": "2026-11-24T04:48:23+00:00",
+  "corrida": "2026-11-24T15:54:57+00:00",
   "medidas_con_suficientes_casos": 200,
   "pares_probados": 19900,
   "correccion": {
     "metodo": "Benjamini-Hochberg",
     "alfa": 0.05,
     "por_que": "Con 19.900 pares y el umbral de siempre, alrededor de 995 darían «significativo» por puro azar aunque los datos fueran ruido. Publicar esa lista sería fabricar hallazgos a escala industrial.",
-    "sobreviven": 3727,
+    "sobreviven": 3738,
     "de_ellos_son_parentescos": 412
   },
   "minimos": {
@@ -17,7 +17,7 @@
     "cambio_minimo_para_anomalia": 0.1,
     "maxima_repeticion_de_un_valor": 0.6
   },
-  "pistas_totales": 3315,
+  "pistas_totales": 3326,
   "anomalias_totales": 400,
   "pistas": [
     {
@@ -788,14 +788,14 @@
       "misma_categoria": false
     },
     {
-      "a": "poblacion",
-      "b": "reservas_internacionales",
-      "rotulo_a": "Población total",
-      "rotulo_b": "Reservas internacionales",
-      "coeficiente": 0.889,
-      "estados": 31,
+      "a": "id_producto",
+      "b": "redes:cuentas_distintas",
+      "rotulo_a": "Gasto en investigación y desarrollo",
+      "rotulo_b": "redes · cuentas_distintas",
+      "coeficiente": 0.891,
+      "estados": 16,
       "tipo": "rangos (Spearman)",
-      "p": 6.811009394007264e-14,
+      "p": 2.8011804374586036e-07,
       "casi_la_misma": false,
       "misma_fuente": false,
       "misma_categoria": false
