@@ -185,7 +185,7 @@ python colectores/focos.py
 | `pobreza` | Banco Mundial, Plataforma sobre Pobreza y Desigualdad — redistribuido por CEPALSTAT (Comisión Económica para América Latina y el Caribe) | `A-2` | 33 | 5 |
 | `policias_unodc` | UNODC — UN-CTS, «Criminal Justice Personnel»: personal policial (conteos), convertido a tasa por 1.000 con población del Banco Mundial (SP.POP.TOTL) | `B-2` | 33 | 0 |
 | `prensa_libre` | Reporteros Sin Fronteras — clasificación mundial de la libertad de prensa | `B-3` | 33 | 5 |
-| `radar` | Cloudflare Radar — mediciones sobre tráfico real de internet | `B-2` | 33 | 4 |
+| `radar` | Cloudflare Radar — mediciones sobre tráfico real de internet | `B-2` | 33 | 5 |
 | `ransomware` | ransomware.live — recopilación de sitios de extorsión informática | `D-4` | 31 | 6 |
 | `reciente_oficial` | Catálogos oficiales de los Estados — lo más reciente publicado | `A-2` | 33 | 5 |
 | `recursos` | Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas; Energy Institute y Servicio Geológico de los Estados Unidos, vía Our World in Data | `A-2` | 33 | 9 |
