@@ -129,7 +129,7 @@ python colectores/focos.py
 | `bienes_culturales` | UNIDROIT — Convenio de 1995 sobre bienes culturales robados o exportados ilícitamente | `A-2` | 33 | 5 |
 | `brecha` | Fundación Sherman Kent — brecha entre lo registrado y lo publicado | `B-2` | 33 | 5 |
 | `bti` | Índice de Transformación Bertelsmann (BTI), edición 2026 | `B-3` | 22 | 4 |
-| `censo_subnacional` | Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas | `B-3` | 33 | 14 |
+| `censo_subnacional` | Censo propio de disponibilidad subnacional — Fundación Sherman Kent, sobre la base georreferenciada de Upsala y la interfaz humanitaria de Naciones Unidas | `B-3` | 33 | 17 |
 | `cepal` | CEPALSTAT — Comisión Económica para América Latina y el Caribe (CEPAL): Observatorio de Igualdad de Género y estadísticas de seguridad ciudadana | `A-2` | 33 | 9 |
 | `chile_ine_seguridad` | Instituto Nacional de Estadísticas de Chile (INE) — Estadísticas Policiales, cuadro de víctimas | `A-2` | 1 | 4 |
 | `ciber` | OONI, IODA y FIRST — medición técnica de red y capacidad de respuesta | `B-2` | 33 | 6 |
@@ -188,7 +188,7 @@ python colectores/focos.py
 | `radar` | Cloudflare Radar — mediciones sobre tráfico real de internet | `B-2` | 33 | 4 |
 | `ransomware` | ransomware.live — recopilación de sitios de extorsión informática | `D-4` | 31 | 6 |
 | `reciente_oficial` | Catálogos oficiales de los Estados — lo más reciente publicado | `A-2` | 33 | 5 |
-| `recursos` | Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas; Energy Institute y Servicio Geológico de los Estados Unidos, vía Our World in Data | `A-2` | 33 | 9 |
+| `recursos` | Servicio Geológico de los Estados Unidos — Mineral Commodity Summaries, base mundial de producción y reservas; Energy Institute y Servicio Geológico de los Estados Unidos, vía Our World in Data | `A-2` | 33 | 10 |
 | `redes` | Mastodon — instancias mastodon.social, mstdn.social, masto.ai, mas.to | `F-4` | 33 | 8 |
 | `regimen_politico` | V-Dem, Universidad de Gotemburgo — «Regímenes del Mundo», vía Our World in Data | `B-2` | 33 | 5 |
 | `reliefweb` | ReliefWeb — Oficina de Coordinación de Asuntos Humanitarios de las Naciones Unidas (OCHA) | `A-2` | 33 | 3 |
