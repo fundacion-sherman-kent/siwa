@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "oficiales",
     "capa": "publico",
-    "obtenido_en": "2026-11-26T21:05:06+00:00",
+    "obtenido_en": "2026-11-27T01:45:54+00:00",
     "fuente": {
       "nombre": "Catálogos oficiales de datos abiertos de los Estados del padrón",
       "url": "https://siwa.fundacionkent.org/colectores/oficiales.json"
@@ -24,7 +24,7 @@
       "Que un Estado no figure no prueba que carezca de portal. De los que no figuran: Brasil exige clave gratuita con registro; Guatemala, Costa Rica, Bolivia y Ecuador interponen protección contra acceso automatizado, que no se esquiva por decisión de doctrina (límites.md) y se gestiona por vía oficial; Perú y Jamaica tienen portal cuya plataforma no se identificó. El resto no expuso dirección alguna.",
       "La búsqueda es por palabra en el título y la descripción del conjunto. Un conjunto rotulado con otro vocabulario no aparece, y uno que menciona la palabra al pasar aparece sin corresponder.",
       "El recuento es de conjuntos publicados, no de calidad ni de vigencia: un catálogo puede listar un conjunto abandonado hace años.",
-      "12 consultas fallaron en esta corrida: ARG/Violencia organizada: TimeoutError; ARG/Delito registrado: TimeoutError; ARG/Contratación pública: TimeoutError; ARG/Integridad: TimeoutError; ARG/Presupuesto: TimeoutError; ARG/Migración y desplazamiento: TimeoutError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos."
+      "18 consultas fallaron en esta corrida: ARG/Violencia organizada: TimeoutError; ARG/Contratación pública: TimeoutError; ARG/Integridad: TimeoutError; ARG/Presupuesto: TimeoutError; ARG/Migración y desplazamiento: TimeoutError; COL/Delito registrado: URLError; PRY/Violencia organizada: no se pudo leer la lista de conjuntos; PRY/Delito registrado: no se pudo leer la lista de conjuntos; PRY/Contratación pública: no se pudo leer la lista de conjuntos; PRY/Integridad: no se pudo leer la lista de conjuntos; PRY/Presupuesto: no se pudo leer la lista de conjuntos; PRY/Migración y desplazamiento: no se pudo leer la lista de conjuntos; ALC/Violencia organizada: JSONDecodeError; ALC/Delito registrado: JSONDecodeError; ALC/Contratación pública: JSONDecodeError; ALC/Integridad: JSONDecodeError; ALC/Presupuesto: JSONDecodeError; ALC/Migración y desplazamiento: JSONDecodeError."
     ],
     "restriccion_de_uso": null,
     "cantidad": 9,
@@ -64,14 +64,14 @@
               "enlace": "https://www.datos.gov.co/d/tp96-8dnw"
             },
             {
-              "titulo": "CONTRATACION CEPITA",
-              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
-              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
-            },
-            {
               "titulo": "Contratacion Alcaldía Chitaraque",
               "organismo": "Alcaldía de Chitaraque",
               "enlace": "https://www.datos.gov.co/d/sdd6-imf2"
+            },
+            {
+              "titulo": "CONTRATACION CEPITA",
+              "organismo": "ALCALDIA MUNICIPAL DE CEPITA",
+              "enlace": "https://www.datos.gov.co/d/pxqi-b2jh"
             }
           ]
         },
@@ -100,34 +100,6 @@
               "titulo": "PRESUPUESTO AIM-2020",
               "organismo": "AEROPUERTO INTERNACIONAL MATECAÑA",
               "enlace": "https://www.datos.gov.co/d/efrw-bijb"
-            }
-          ]
-        },
-        {
-          "materia": "Delito registrado",
-          "eje": "Seguridad",
-          "consulta": "delito",
-          "cantidad": 141,
-          "ejemplos": [
-            {
-              "titulo": "DELITOS SEXUALES",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/bz43-8ahq"
-            },
-            {
-              "titulo": "DELITOS INFORMÁTICOS",
-              "organismo": "Observatorio MDN",
-              "enlace": "https://www.datos.gov.co/d/4v6r-wu98"
-            },
-            {
-              "titulo": "Reporte  Delitos sexuales Policía Nacional",
-              "organismo": "DIJIN",
-              "enlace": "https://www.datos.gov.co/d/fpe5-yrmw"
-            },
-            {
-              "titulo": "Delitos Informaticos V1",
-              "organismo": "Damicruz",
-              "enlace": "https://www.datos.gov.co/d/wxd8-ucns"
             }
           ]
         },
@@ -181,9 +153,9 @@
               "enlace": "https://www.datos.gov.co/d/ha6j-pa2r"
             },
             {
-              "titulo": "Guadalajara de Buga : Homicidios por Accidente de Tránsito",
-              "organismo": "Alcaldía Municipal de Guadalajara de Buga",
-              "enlace": "https://www.datos.gov.co/d/8rme-4s7n"
+              "titulo": "Homicidios en el municipio de Neiva",
+              "organismo": "Alcaldía Neiva",
+              "enlace": "https://www.datos.gov.co/d/hk7a-5ix3"
             }
           ]
         },
@@ -216,7 +188,7 @@
           ]
         }
       ],
-      "conjuntos_hallados": 1990
+      "conjuntos_hallados": 1849
     },
     {
       "iso": "PAN",
@@ -589,7 +561,7 @@
           "materia": "Migración y desplazamiento",
           "eje": "Inteligencia estratégica",
           "consulta": "migracion",
-          "cantidad": 31,
+          "cantidad": 32,
           "ejemplos": [
             {
               "titulo": "Personas extranjeras víctimas de delito",
@@ -670,7 +642,7 @@
           ]
         }
       ],
-      "conjuntos_hallados": 314
+      "conjuntos_hallados": 315
     },
     {
       "iso": "URY",
@@ -1124,8 +1096,37 @@
       "organismo": "Portal Nacional de Datos Abiertos",
       "tipo": "CKAN",
       "portal": "https://datos.gob.ar",
-      "materias": [],
-      "conjuntos_hallados": 0
+      "materias": [
+        {
+          "materia": "Delito registrado",
+          "eje": "Seguridad",
+          "consulta": "delito",
+          "cantidad": 19,
+          "ejemplos": [
+            {
+              "titulo": "Codificación de delitos del Código Penal Argentino",
+              "organismo": " Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/justicia-codificacion-delitos-codigo-penal-argentino"
+            },
+            {
+              "titulo": "Delitos contra la propiedad. Sistema de Alerta Temprana. Estadísticas criminales",
+              "organismo": " Ministerio de Seguridad",
+              "enlace": "https://datos.gob.ar/dataset/seguridad-delitos-contra-propiedad-sistema-alerta-temprana-estadisticas-criminales"
+            },
+            {
+              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Orientaciones",
+              "organismo": " Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/justicia-lucha-contra-trata-personas---llamados-linea-145---orientaciones"
+            },
+            {
+              "titulo": "Lucha contra la trata de personas - Llamados línea 145 - Denuncias",
+              "organismo": " Ministerio de Justicia",
+              "enlace": "https://datos.gob.ar/dataset/justicia-lucha-contra-trata-personas---llamados-linea-145---denuncias"
+            }
+          ]
+        }
+      ],
+      "conjuntos_hallados": 19
     },
     {
       "iso": "PRY",
@@ -1141,7 +1142,7 @@
   "resumen": {
     "estados_con_portal": 9,
     "estados_del_padron": 33,
-    "conjuntos_hallados": 4507,
+    "conjuntos_hallados": 4386,
     "materias_consultadas": 6,
     "oficinas_que_responden": 23,
     "estados_con_alguna_fuente_oficial": 26
@@ -1202,7 +1203,8 @@
       "url": "https://onei.gob.cu/",
       "nota": "Sin el prefijo «www». Con él, el servidor devuelve error 500. La diferencia entre un Estado que no publica y un prefijo de más es un carácter, y decide lo que el registro afirma.",
       "estado": "sin_respuesta",
-      "detalle": "URLError: <urlopen error timed out>"
+      "detalle": "URLError: <urlopen error timed out>",
+      "certificado": "no valida: URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate ("
     },
     {
       "iso": "DOM",
@@ -1543,126 +1545,8 @@
       "organismo": "Humanitarian Data Exchange (HDX / OCHA)",
       "tipo": "CKAN",
       "portal": "https://data.humdata.org",
-      "materias": [
-        {
-          "materia": "Delito registrado",
-          "eje": "Seguridad",
-          "consulta": "delito",
-          "cantidad": 56,
-          "ejemplos": [
-            {
-              "titulo": "Delito Sexual y Violencia intrafamiliar en Colombia",
-              "organismo": "Observatorio Latinoamericano de Desarrollo Sostenible",
-              "enlace": "https://data.humdata.org/dataset/delito-sexual-y-violencia-intrafamiliar-en-colombia"
-            },
-            {
-              "titulo": "Base de datos de víctimas de delitos sexuales",
-              "organismo": "iMMAP Inc.",
-              "enlace": "https://data.humdata.org/dataset/base-de-datos-de-victimas-de-delitos-sexuales"
-            },
-            {
-              "titulo": "Casos de presuntos delitos sexuales en municipios afectados por desastres naturales",
-              "organismo": "iMMAP Inc.",
-              "enlace": "https://data.humdata.org/dataset/casos-de-presuntos-delitos-sexuales-en-municipios-afectados-por-desastres-naturales"
-            },
-            {
-              "titulo": "Conteo Victimas por delito en el Sistema Penal Oral Acusatorio 2021",
-              "organismo": "iMMAP Inc.",
-              "enlace": "https://data.humdata.org/dataset/conteo-victimas-delito-al-sistema-penal-oral-acusatorio-2021"
-            }
-          ]
-        },
-        {
-          "materia": "Violencia organizada",
-          "eje": "Seguridad",
-          "consulta": "homicidio",
-          "cantidad": 24,
-          "ejemplos": [
-            {
-              "titulo": "Tasa de Homicidios",
-              "organismo": "OCHA Colombia",
-              "enlace": "https://data.humdata.org/dataset/tasa-de-homicidios-colombia"
-            },
-            {
-              "titulo": "SIDIH: Homicidios (hombres)",
-              "organismo": "OCHA Colombia",
-              "enlace": "https://data.humdata.org/dataset/sidih-homicidios-hombres"
-            },
-            {
-              "titulo": "SIDIH: Homicidio (mujeres)",
-              "organismo": "OCHA Colombia",
-              "enlace": "https://data.humdata.org/dataset/sidih-homicidio-mujeres"
-            },
-            {
-              "titulo": "Colombia - Tasa de Homicidios",
-              "organismo": "OCHA Colombia",
-              "enlace": "https://data.humdata.org/dataset/tasa-de-homicidios"
-            }
-          ]
-        },
-        {
-          "materia": "Migración y desplazamiento",
-          "eje": "Inteligencia estratégica",
-          "consulta": "migracion",
-          "cantidad": 6,
-          "ejemplos": [
-            {
-              "titulo": "Base situación de migrantes venezolanos en salud",
-              "organismo": "iMMAP Inc.",
-              "enlace": "https://data.humdata.org/dataset/base-situacion-de-migrantes-venezolanos-en-salud"
-            },
-            {
-              "titulo": "Resumen GEIH por rangos de edad 2019-2020",
-              "organismo": "iMMAP Inc.",
-              "enlace": "https://data.humdata.org/dataset/resumen-geih-por-rangos-de-edad-2019-2020"
-            },
-            {
-              "titulo": "Índice de ataques violentos a población venezolana en Colombia",
-              "organismo": "iMMAP Inc.",
-              "enlace": "https://data.humdata.org/dataset/indice-de-ataques-violentos-a-poblacion-venezolana-en-colombia"
-            },
-            {
-              "titulo": "Fichas Territoriales",
-              "organismo": "iMMAP Inc.",
-              "enlace": "https://data.humdata.org/dataset/fichas-territoriales"
-            }
-          ]
-        },
-        {
-          "materia": "Contratación pública",
-          "eje": "Gobernanza",
-          "consulta": "contrataciones",
-          "cantidad": 1,
-          "ejemplos": [
-            {
-              "titulo": "Base SECOP, contrataciones públicas",
-              "organismo": "iMMAP Inc.",
-              "enlace": "https://data.humdata.org/dataset/base-secop-contrataciones-publicas"
-            }
-          ]
-        },
-        {
-          "materia": "Presupuesto",
-          "eje": "Gobernanza",
-          "consulta": "presupuesto",
-          "cantidad": 1,
-          "ejemplos": [
-            {
-              "titulo": "Guatemala Ranking de la gestión municipal y Gestión ambiental municipal 2013",
-              "organismo": "OCHA Latin America and the Caribbean (ROLAC)",
-              "enlace": "https://data.humdata.org/dataset/guatemala-ranking-de-la-gestion-municipal-y-gestion-ambiental-municipal-2013"
-            }
-          ]
-        },
-        {
-          "materia": "Integridad",
-          "eje": "Gobernanza",
-          "consulta": "corrupcion",
-          "cantidad": 0,
-          "ejemplos": []
-        }
-      ],
-      "conjuntos_hallados": 88
+      "materias": [],
+      "conjuntos_hallados": 0
     }
   ]
 }
