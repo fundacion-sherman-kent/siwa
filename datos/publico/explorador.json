@@ -2,7 +2,7 @@
   "procedencia": {
     "colector": "explorador",
     "capa": "publico",
-    "obtenido_en": "2026-11-27T16:09:00+00:00",
+    "obtenido_en": "2026-11-28T01:08:49+00:00",
     "fuente": {
       "nombre": "Fundación Sherman Kent — exploración de puertas de datos oficiales",
       "url": "https://siwa.fundacionkent.org/sitio/index.html#explorador"
@@ -49,8 +49,15 @@
       "iso": "URY",
       "pais": "Uruguay",
       "bloque": "Cono Sur",
-      "estado": "sin_puerta_hallada",
-      "puertas_abiertas": [],
+      "estado": "abre",
+      "puertas_abiertas": [
+        {
+          "dominio": "catalogodatos.gub.uy",
+          "dialecto": "CKAN",
+          "conjuntos": 2781,
+          "url": "https://catalogodatos.gub.uy/api/3/action/package_list"
+        }
+      ],
       "puertas_cerradas": [],
       "dominios_probados": [
         "catalogodatos.gub.uy",
@@ -121,7 +128,7 @@
         {
           "dominio": "www.datosabiertos.gob.pe",
           "dialecto": "CKAN",
-          "conjuntos": 3677,
+          "conjuntos": 3678,
           "url": "https://www.datosabiertos.gob.pe/api/3/action/package_list"
         }
       ],
@@ -182,7 +189,7 @@
         {
           "dominio": "datos.gob.mx",
           "dialecto": "CKAN",
-          "conjuntos": 1972,
+          "conjuntos": 1979,
           "url": "https://datos.gob.mx/api/3/action/package_list"
         }
       ],
@@ -369,21 +376,8 @@
       "iso": "COL",
       "pais": "Colombia",
       "bloque": "Andina",
-      "estado": "abre",
-      "puertas_abiertas": [
-        {
-          "dominio": "www.datos.gov.co",
-          "dialecto": "DCAT",
-          "conjuntos": null,
-          "url": "https://www.datos.gov.co/data.json"
-        },
-        {
-          "dominio": "www.datos.gov.co",
-          "dialecto": "Socrata",
-          "conjuntos": null,
-          "url": "https://www.datos.gov.co/api/views.json?limit=1"
-        }
-      ],
+      "estado": "sin_puerta_hallada",
+      "puertas_abiertas": [],
       "puertas_cerradas": [],
       "dominios_probados": [
         "www.dane.gov.co",
@@ -482,12 +476,6 @@
       "puertas_abiertas": [
         {
           "dominio": "datos.gob.ar",
-          "dialecto": "DCAT",
-          "conjuntos": null,
-          "url": "https://datos.gob.ar/data.json"
-        },
-        {
-          "dominio": "datos.gob.ar",
           "dialecto": "CKAN",
           "conjuntos": 1237,
           "url": "https://datos.gob.ar/api/3/action/package_list"
@@ -520,7 +508,7 @@
     "dialectos_probados": 6,
     "toques_realizados": 350,
     "explorador_probado": true,
-    "consultado": "2026-11-27T16:09:00+00:00"
+    "consultado": "2026-11-28T01:08:49+00:00"
   },
   "dialectos": [
     "ArcGIS Hub",
